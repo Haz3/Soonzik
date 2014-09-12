@@ -1,0 +1,15 @@
+%p#notice= notice
+
+%p
+  %b Style name:
+  = @genre.style_name
+%p
+  %b Color name:
+  = @genre.color_name
+%p
+  %b Color hexa:
+  = @genre.color_hexa
+
+= link_to 'Edit', edit_genre_path(@genre)
+\|
+= link_to 'Back', genres_path

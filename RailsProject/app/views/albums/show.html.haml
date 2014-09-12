@@ -1,0 +1,24 @@
+%p#notice= notice
+
+%p
+  %b User:
+  = @album.user_id
+%p
+  %b Title:
+  = @album.title
+%p
+  %b Style:
+  = @album.style
+%p
+  %b Price:
+  = @album.price
+%p
+  %b File:
+  = @album.file
+%p
+  %b Yearprod:
+  = @album.yearProd
+
+= link_to 'Edit', edit_album_path(@album)
+\|
+= link_to 'Back', albums_path

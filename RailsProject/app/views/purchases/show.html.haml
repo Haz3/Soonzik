@@ -1,0 +1,18 @@
+%p#notice= notice
+
+%p
+  %b User:
+  = @purchase.user_id
+%p
+  %b Typeobj:
+  = @purchase.typeObj
+%p
+  %b Obj:
+  = @purchase.obj_id
+%p
+  %b Date:
+  = @purchase.date
+
+= link_to 'Edit', edit_purchase_path(@purchase)
+\|
+= link_to 'Back', purchases_path

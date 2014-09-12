@@ -1,0 +1,18 @@
+%p#notice= notice
+
+%p
+  %b User:
+  = @cart.user_id
+%p
+  %b Typeobj:
+  = @cart.typeObj
+%p
+  %b Obj:
+  = @cart.obj_id
+%p
+  %b Gift:
+  = @cart.gift
+
+= link_to 'Edit', edit_cart_path(@cart)
+\|
+= link_to 'Back', carts_path

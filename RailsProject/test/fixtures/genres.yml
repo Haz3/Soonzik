@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  style_name: MyString
+  color_name: MyString
+  color_hexa: MyString
+
+two:
+  style_name: MyString
+  color_name: MyString
+  color_hexa: MyString

@@ -1,0 +1,15 @@
+%p#notice= notice
+
+%p
+  %b User:
+  = @album_note.user_id
+%p
+  %b Album:
+  = @album_note.album_id
+%p
+  %b Value:
+  = @album_note.value
+
+= link_to 'Edit', edit_album_note_path(@album_note)
+\|
+= link_to 'Back', album_notes_path

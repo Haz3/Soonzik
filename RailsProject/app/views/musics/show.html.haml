@@ -1,0 +1,30 @@
+%p#notice= notice
+
+%p
+  %b User:
+  = @music.user_id
+%p
+  %b Album:
+  = @music.album_id
+%p
+  %b Title:
+  = @music.title
+%p
+  %b Duration:
+  = @music.duration
+%p
+  %b Style:
+  = @music.style
+%p
+  %b Price:
+  = @music.price
+%p
+  %b File:
+  = @music.file
+%p
+  %b Limited:
+  = @music.limited
+
+= link_to 'Edit', edit_music_path(@music)
+\|
+= link_to 'Back', musics_path

@@ -1,0 +1,19 @@
+%h1 Listing influences
+
+%table
+  %tr
+    %th Name
+    %th
+    %th
+    %th
+
+  - @influences.each do |influence|
+    %tr
+      %td= influence.name
+      %td= link_to 'Show', influence
+      %td= link_to 'Edit', edit_influence_path(influence)
+      %td= link_to 'Destroy', influence, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Influence', new_influence_path

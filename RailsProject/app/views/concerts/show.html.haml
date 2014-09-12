@@ -1,0 +1,18 @@
+%p#notice= notice
+
+%p
+  %b User:
+  = @concert.user_id
+%p
+  %b Planification:
+  = @concert.planification
+%p
+  %b Address:
+  = @concert.address_id
+%p
+  %b Url:
+  = @concert.url
+
+= link_to 'Edit', edit_concert_path(@concert)
+\|
+= link_to 'Back', concerts_path

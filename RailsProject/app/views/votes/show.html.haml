@@ -1,0 +1,15 @@
+%p#notice= notice
+
+%p
+  %b User:
+  = @vote.user_id
+%p
+  %b Battle:
+  = @vote.battle_id
+%p
+  %b Artist:
+  = @vote.artist_id
+
+= link_to 'Edit', edit_vote_path(@vote)
+\|
+= link_to 'Back', votes_path

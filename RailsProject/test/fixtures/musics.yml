@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user_id: 1
+  album_id: 1
+  title: MyString
+  duration: 1
+  style: MyString
+  price: 1.5
+  file: MyString
+  limited: false
+
+two:
+  user_id: 1
+  album_id: 1
+  title: MyString
+  duration: 1
+  style: MyString
+  price: 1.5
+  file: MyString
+  limited: false

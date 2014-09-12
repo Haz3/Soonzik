@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  artist_id: 1
+  album_id: 1
+  state: 1
+  date_posted: 2014-09-07 23:19:47
+
+two:
+  artist_id: 1
+  album_id: 1
+  state: 1
+  date_posted: 2014-09-07 23:19:47

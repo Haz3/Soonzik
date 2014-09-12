@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user_id: 1
+  music_id: 1
+  when: 2014-09-07 23:18:57
+  latitude: 1.5
+  longitude: 1.5
+
+two:
+  user_id: 1
+  music_id: 1
+  when: 2014-09-07 23:18:57
+  latitude: 1.5
+  longitude: 1.5

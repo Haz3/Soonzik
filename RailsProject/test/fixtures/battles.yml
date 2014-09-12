@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  date_begin: 2014-09-07 23:17:49
+  date_end: 2014-09-07 23:17:49
+  artist_one_id: 1
+  artist_two_id: 1
+
+two:
+  date_begin: 2014-09-07 23:17:49
+  date_end: 2014-09-07 23:17:49
+  artist_one_id: 1
+  artist_two_id: 1

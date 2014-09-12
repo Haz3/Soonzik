@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  to_user: 1
+  from_user: 1
+  typeObj: MyString
+  obj_id: 1
+
+two:
+  to_user: 1
+  from_user: 1
+  typeObj: MyString
+  obj_id: 1

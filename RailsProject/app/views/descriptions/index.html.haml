@@ -1,0 +1,21 @@
+%h1 Listing descriptions
+
+%table
+  %tr
+    %th Description
+    %th Language
+    %th
+    %th
+    %th
+
+  - @descriptions.each do |description|
+    %tr
+      %td= description.description
+      %td= description.language
+      %td= link_to 'Show', description
+      %td= link_to 'Edit', edit_description_path(description)
+      %td= link_to 'Destroy', description, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Description', new_description_path

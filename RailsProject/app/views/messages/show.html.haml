@@ -1,0 +1,18 @@
+%p#notice= notice
+
+%p
+  %b Msg:
+  = @message.msg
+%p
+  %b User:
+  = @message.user_id
+%p
+  %b Dest:
+  = @message.dest_id
+%p
+  %b Session:
+  = @message.session
+
+= link_to 'Edit', edit_message_path(@message)
+\|
+= link_to 'Back', messages_path

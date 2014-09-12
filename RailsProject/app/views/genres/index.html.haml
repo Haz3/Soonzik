@@ -1,0 +1,23 @@
+%h1 Listing genres
+
+%table
+  %tr
+    %th Style name
+    %th Color name
+    %th Color hexa
+    %th
+    %th
+    %th
+
+  - @genres.each do |genre|
+    %tr
+      %td= genre.style_name
+      %td= genre.color_name
+      %td= genre.color_hexa
+      %td= link_to 'Show', genre
+      %td= link_to 'Edit', edit_genre_path(genre)
+      %td= link_to 'Destroy', genre, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Genre', new_genre_path

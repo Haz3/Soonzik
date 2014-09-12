@@ -1,0 +1,23 @@
+%h1 Listing album_notes
+
+%table
+  %tr
+    %th User
+    %th Album
+    %th Value
+    %th
+    %th
+    %th
+
+  - @album_notes.each do |album_note|
+    %tr
+      %td= album_note.user_id
+      %td= album_note.album_id
+      %td= album_note.value
+      %td= link_to 'Show', album_note
+      %td= link_to 'Edit', edit_album_note_path(album_note)
+      %td= link_to 'Destroy', album_note, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Album note', new_album_note_path
