@@ -1,0 +1,23 @@
+//
+//  Pack.h
+//  SoonZik
+//
+//  Created by Maxime Sauvage on 12/09/2014.
+//  Copyright (c) 2014 Coordina. All rights reserved.
+//
+
+#import "Element.h"
+#import "Genre.h"
+#import "Album.h"
+#import "Comment.h"
+
+@interface Pack : Element
+
+@property (nonatomic, assign) int identifier;
+@property (nonatomic, strong) NSString *title;
+@property (nonatomic, strong) Genre *genre;
+@property (nonatomic, assign) float price;
+@property (nonatomic, strong) NSArray *listOfAlbums;
+@property (nonatomic, strong) NSArray *listOfComments;
+
+@end
