@@ -11,12 +11,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140909034410) do
+ActiveRecord::Schema.define(version: 20140913180947) do
 
   create_table "accesses", force: true do |t|
-    t.integer  "group_id"
-    t.string   "controllerName"
-    t.string   "actionName"
+    t.integer  "group_id",       null: false
+    t.string   "controllerName", null: false
+    t.string   "actionName",     null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -37,12 +37,12 @@ ActiveRecord::Schema.define(version: 20140909034410) do
   add_index "active_admin_comments", ["resource_type", "resource_id"], name: "index_active_admin_comments_on_resource_type_and_resource_id"
 
   create_table "addresses", force: true do |t|
-    t.string   "numberStreet"
-    t.string   "complement",   null: false
-    t.string   "street"
-    t.string   "city"
-    t.string   "country"
-    t.string   "zipcode"
+    t.string   "numberStreet", null: false
+    t.string   "complement"
+    t.string   "street",       null: false
+    t.string   "city",         null: false
+    t.string   "country",      null: false
+    t.string   "zipcode",      null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -66,20 +66,20 @@ ActiveRecord::Schema.define(version: 20140909034410) do
   add_index "admin_users", ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true
 
   create_table "album_notes", force: true do |t|
-    t.integer  "user_id"
-    t.integer  "album_id"
-    t.integer  "value"
+    t.integer  "user_id",    null: false
+    t.integer  "album_id",   null: false
+    t.integer  "value",      null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "albums", force: true do |t|
-    t.integer  "user_id"
-    t.string   "title"
-    t.string   "style"
-    t.float    "price"
-    t.string   "file"
-    t.integer  "yearProd"
+    t.integer  "user_id",    null: false
+    t.string   "title",      null: false
+    t.string   "style",      null: false
+    t.float    "price",      null: false
+    t.string   "file",       null: false
+    t.integer  "yearProd",   null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -100,9 +100,9 @@ ActiveRecord::Schema.define(version: 20140909034410) do
   end
 
   create_table "attachments", force: true do |t|
-    t.string   "url"
-    t.integer  "file_size"
-    t.string   "content_type"
+    t.string   "url",          null: false
+    t.integer  "file_size",    null: false
+    t.string   "content_type", null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -113,27 +113,26 @@ ActiveRecord::Schema.define(version: 20140909034410) do
   end
 
   create_table "battles", force: true do |t|
-    t.datetime "date_begin"
-    t.datetime "date_end"
-    t.integer  "artist_one_id"
-    t.integer  "artist_two_id"
+    t.datetime "date_begin",    null: false
+    t.datetime "date_end",      null: false
+    t.integer  "artist_one_id", null: false
+    t.integer  "artist_two_id", null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "carts", force: true do |t|
-    t.integer  "user_id"
-    t.string   "typeObj"
-    t.integer  "obj_id"
-    t.boolean  "gift"
+    t.integer  "user_id",    null: false
+    t.string   "typeObj",    null: false
+    t.integer  "obj_id",     null: false
+    t.boolean  "gift",       null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "commentaries", force: true do |t|
-    t.integer  "author_id"
-    t.text     "content"
-    t.datetime "create_at"
+    t.integer  "author_id",  null: false
+    t.text     "content",    null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -149,17 +148,17 @@ ActiveRecord::Schema.define(version: 20140909034410) do
   end
 
   create_table "concerts", force: true do |t|
-    t.integer  "user_id"
-    t.datetime "planification"
-    t.integer  "address_id"
-    t.string   "url",           null: false
+    t.integer  "user_id",       null: false
+    t.datetime "planification", null: false
+    t.integer  "address_id",    null: false
+    t.string   "url"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "descriptions", force: true do |t|
-    t.text     "description"
-    t.string   "language"
+    t.text     "description", null: false
+    t.string   "language",    null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -180,8 +179,8 @@ ActiveRecord::Schema.define(version: 20140909034410) do
   end
 
   create_table "flacs", force: true do |t|
-    t.integer  "music_id"
-    t.string   "file"
+    t.integer  "music_id",   null: false
+    t.string   "file",       null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -197,9 +196,9 @@ ActiveRecord::Schema.define(version: 20140909034410) do
   end
 
   create_table "genres", force: true do |t|
-    t.string   "style_name"
-    t.string   "color_name"
-    t.string   "color_hexa"
+    t.string   "style_name", null: false
+    t.string   "color_name", null: false
+    t.string   "color_hexa", null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -210,16 +209,16 @@ ActiveRecord::Schema.define(version: 20140909034410) do
   end
 
   create_table "gifts", force: true do |t|
-    t.integer  "to_user"
-    t.integer  "from_user"
-    t.string   "typeObj"
-    t.integer  "obj_id"
+    t.integer  "to_user",    null: false
+    t.integer  "from_user",  null: false
+    t.string   "typeObj",    null: false
+    t.integer  "obj_id",     null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "groups", force: true do |t|
-    t.string   "name"
+    t.string   "name",       null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -230,47 +229,47 @@ ActiveRecord::Schema.define(version: 20140909034410) do
   end
 
   create_table "influences", force: true do |t|
-    t.string   "name"
+    t.string   "name",       null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "listenings", force: true do |t|
-    t.integer  "user_id"
-    t.integer  "music_id"
-    t.datetime "when"
-    t.float    "latitude"
-    t.float    "longitude"
+    t.integer  "user_id",    null: false
+    t.integer  "music_id",   null: false
+    t.datetime "when",       null: false
+    t.float    "latitude",   null: false
+    t.float    "longitude",  null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "messages", force: true do |t|
-    t.text     "msg"
-    t.integer  "user_id"
-    t.integer  "dest_id"
-    t.string   "session"
+    t.text     "msg",        null: false
+    t.integer  "user_id",    null: false
+    t.integer  "dest_id",    null: false
+    t.string   "session",    null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "music_notes", force: true do |t|
-    t.integer  "user_id"
-    t.integer  "album_id"
-    t.integer  "value"
+    t.integer  "user_id",    null: false
+    t.integer  "album_id",   null: false
+    t.integer  "value",      null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "musics", force: true do |t|
-    t.integer  "user_id"
-    t.integer  "album_id"
-    t.string   "title"
-    t.integer  "duration"
-    t.string   "style"
-    t.float    "price"
-    t.string   "file"
-    t.boolean  "limited"
+    t.integer  "user_id",    null: false
+    t.integer  "album_id",   null: false
+    t.string   "title",      null: false
+    t.integer  "duration",   null: false
+    t.string   "style",      null: false
+    t.float    "price",      null: false
+    t.string   "file",       null: false
+    t.boolean  "limited",    null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -281,105 +280,105 @@ ActiveRecord::Schema.define(version: 20140909034410) do
   end
 
   create_table "news", force: true do |t|
-    t.string   "title"
-    t.datetime "date"
-    t.integer  "author_id"
+    t.string   "title",      null: false
+    t.datetime "date",       null: false
+    t.integer  "author_id",  null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "newstexts", force: true do |t|
-    t.text     "content"
-    t.string   "title"
-    t.string   "language"
-    t.integer  "news_id"
+    t.text     "content",    null: false
+    t.string   "title",      null: false
+    t.string   "language",   null: false
+    t.integer  "news_id",    null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "notifications", force: true do |t|
-    t.integer  "user_id"
-    t.string   "link"
-    t.string   "description"
+    t.integer  "user_id",     null: false
+    t.string   "link",        null: false
+    t.string   "description", null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "packs", force: true do |t|
-    t.string   "title"
-    t.string   "style"
+    t.string   "title",      null: false
+    t.string   "style",      null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "playlists", force: true do |t|
-    t.integer  "user_id"
-    t.string   "name"
+    t.integer  "user_id",    null: false
+    t.string   "name",       null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "propositions", force: true do |t|
-    t.integer  "artist_id"
-    t.integer  "album_id"
-    t.integer  "state"
-    t.datetime "date_posted"
+    t.integer  "artist_id",   null: false
+    t.integer  "album_id",    null: false
+    t.integer  "state",       null: false
+    t.datetime "date_posted", null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "purchases", force: true do |t|
-    t.integer  "user_id"
-    t.string   "typeObj"
-    t.integer  "obj_id"
-    t.datetime "date"
+    t.integer  "user_id",    null: false
+    t.string   "typeObj",    null: false
+    t.integer  "obj_id",     null: false
+    t.datetime "date",       null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "tags", force: true do |t|
-    t.string   "tag"
-    t.integer  "news_id"
+    t.string   "tag",        null: false
+    t.integer  "news_id",    null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "tweets", force: true do |t|
-    t.text     "msg"
-    t.string   "user_id"
+    t.text     "msg",        null: false
+    t.string   "user_id",    null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "users", force: true do |t|
-    t.string   "email"
-    t.string   "password"
-    t.string   "salt"
-    t.string   "fname",       null: false
-    t.string   "lname",       null: false
-    t.string   "username"
-    t.date     "birthday"
-    t.string   "image"
-    t.text     "description", null: false
-    t.string   "phoneNumber", null: false
-    t.integer  "adress_id",   null: false
-    t.string   "facebook",    null: false
-    t.string   "twitter",     null: false
-    t.string   "googlePlus",  null: false
-    t.datetime "signin"
-    t.string   "idAPI"
-    t.string   "secureKey"
-    t.boolean  "activated"
-    t.boolean  "newsletter"
-    t.string   "language"
+    t.string   "email",       null: false
+    t.string   "password",    null: false
+    t.string   "salt",        null: false
+    t.string   "fname"
+    t.string   "lname"
+    t.string   "username",    null: false
+    t.date     "birthday",    null: false
+    t.string   "image",       null: false
+    t.text     "description"
+    t.string   "phoneNumber"
+    t.integer  "adress_id"
+    t.string   "facebook"
+    t.string   "twitter"
+    t.string   "googlePlus"
+    t.datetime "signin",      null: false
+    t.string   "idAPI",       null: false
+    t.string   "secureKey",   null: false
+    t.boolean  "activated",   null: false
+    t.boolean  "newsletter",  null: false
+    t.string   "language",    null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "votes", force: true do |t|
-    t.integer  "user_id"
-    t.integer  "battle_id"
-    t.integer  "artist_id"
+    t.integer  "user_id",    null: false
+    t.integer  "battle_id",  null: false
+    t.integer  "artist_id",  null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end

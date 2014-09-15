@@ -1,205 +1,423 @@
 <!DOCTYPE html>
+<!--
 
-<html>
+  Fivefish RDoc Generator
+  $Id$
+
+  Authors:
+  - Michael Granger <ged@FaerieMUD.org>
+
+ -->
+<html lang="en">
 <head>
-<meta charset="UTF-8">
+	<title>RDoc Documentation</title>
 
-<title>class API::AlbumsController - RDoc Documentation</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<link href="../fonts.css" rel="stylesheet">
-<link href="../rdoc.css" rel="stylesheet">
+	<!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+	<!--[if lt IE 9]>
+		<script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
 
-<script type="text/javascript">
-  var rdoc_rel_prefix = "../";
-</script>
+	<link rel="shortcut icon" href="images/favicon.ico">
+	<link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+	<link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+	<link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
 
-<script src="../js/jquery.js"></script>
-<script src="../js/navigation.js"></script>
-<script src="../js/search_index.js"></script>
-<script src="../js/search.js"></script>
-<script src="../js/searcher.js"></script>
-<script src="../js/darkfish.js"></script>
+	<link href=".." rel="prefix" />
 
+	<link href="../css/fivefish.min.css" rel="stylesheet" />
 
-<body id="top" role="document" class="class">
-<nav role="navigation">
-  <div id="project-navigation">
-    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
-  <h2>
-    <a href="../index.html" rel="home">Home</a>
-  </h2>
+	<script src="../js/jquery-1.7.1.min.js" type="text/javascript"
+		defer="defer" charset="utf-8"></script>
+	<script src="../js/bootstrap.min.js" type="text/javascript"
+		defer="defer" charset="utf-8"></script>
+	<script src="../js/searchindex.js" type="text/javascript"
+		defer="defer" charset="utf-8"></script>
+	<script src="../js/fivefish.min.js" type="text/javascript"
+		defer="defer" charset="utf-8" onload="initFivefish()"></script>
+</head>
 
-  <div id="table-of-contents-navigation">
-    <a href="../table_of_contents.html#pages">Pages</a>
-    <a href="../table_of_contents.html#classes">Classes</a>
-    <a href="../table_of_contents.html#methods">Methods</a>
-  </div>
-</div>
+<body class="class-page">
 
-    <div id="search-section" role="search" class="project-section initially-hidden">
-  <form action="#" method="get" accept-charset="utf-8">
-    <div id="search-field-wrapper">
-      <input id="search-field" role="combobox" aria-label="Search"
-             aria-autocomplete="list" aria-controls="search-results"
-             type="text" name="search" placeholder="Search" spellcheck="false"
-             title="Type to search, Up and Down to navigate, Enter to load">
-    </div>
+	<nav class="navbar navbar-fixed-top">
+		<div class="navbar-inner">
+			<div class="container">
+				<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</a>
 
-    <ul id="search-results" aria-label="Search Results"
-        aria-busy="false" aria-expanded="false"
-        aria-atomic="false" class="initially-hidden"></ul>
-  </form>
-</div>
+				<a class="brand"
+					href="../index.html">RDoc Documentation</a>
 
-  </div>
+				<div class="nav-collapse">
+					<ul class="nav">
+						<li>
+							<a href="#"
+								class="dropdown-toggle"
+								data-dropdown="#class-dropdown">
+								Classes
+								<b class="caret"></b>
+							</a>
+						</li>
+						<li>
+							<a href="#"
+								class="dropdown-toggle"
+								data-dropdown="#file-dropdown">
+								Files
+								<b class="caret"></b>
+							</a>
+						</li>
+					</ul>
+				</div><!--/.nav-collapse -->
+				<span class="pull-right">
+					<form class="navbar-search">
+						<input type="hidden" id="navbar-search-target" value="" />
+						<input type="text" class="search-query" value=""
+							placeholder="Method, Class, or Filename" />
+					</form>
+				</span>
+			</div>
+		</div>
+	</nav>
 
-  
+	<div class="container">
+		
+		<header class="hero-unit">
+			<hgroup>
+								  				<h2 class="namespace">API::</h2>
+				  												<h1 class="class"
+					rel="popover"
+					data-original-title="In files"
+					data-content="app/controllers/API/albums_controller.rb"
+					>AlbumsController</h1>
+				</p>
+							</hgroup>
+			<span class="label">class</span>
+		</header>
 
-  <div id="class-metadata">
-    
-    <div id="parent-class-section" class="nav-section">
-  <h3>Parent</h3>
+		<section class="module-relations">
+			<dl>
+								<dt>Superclass</dt>
+								<dd class="superclass">ApisecurityController</dd>
+								
+				
+							</dl>
+		</section>
 
-  
-  <p class="link">ApisecurityController
-  
-</div>
+		<section class="description">
+			
+<p>Controller which manage the transaction for the Albums objects Here is the
+list of action available :</p>
+<ul><li>
+<p>index       [get]</p>
+</li><li>
+<p>show        [get]</p>
+</li><li>
+<p>find        [get]</p>
+</li><li>
+<p>addcomment  [post]</p>
+</li></ul>
+		</section>
 
-    
-    
-    <!-- Method Quickref -->
-<div id="method-list-section" class="nav-section">
-  <h3>Methods</h3>
+				<section id="5Buntitled-5D" class="documentation-section">
+			
+		    
+			
+			
+			<!-- Methods -->
+						
+			
+			
+			
+			
+			
+									
+						<section class="public-methods instance-methods methods">
+				<header>
+					<h3>Public Instance Methods</h3>
+				</header>
 
-  <ul class="link-list" role="directory">
-    
-    <li ><a href="#method-i-addcomment">#addcomment</a>
-    
-    <li ><a href="#method-i-index">#index</a>
-    
-  </ul>
-</div>
+								<a name="method-i-addcomment">anchor</a>
+				<div id="method-i-addcomment-doc" class="method">
 
-  </div>
-</nav>
+					<header>
+											<i class="icon-generic"></i>
+						<span class="method-name">addcomment</span><span 
+							class="method-args">()</span>
+										</header>
 
-<main role="main" aria-labelledby="class-API::AlbumsController">
-  <h1 id="class-API::AlbumsController" class="class">
-    class API::AlbumsController
-  </h1>
+					<div class="method-description">
+											<p>Add a comment to a specific album. Need to be a secure transaction.</p>
 
-  <section class="description">
-    
-  </section>
-
-  
-  
-  
-  <section id="5Buntitled-5D" class="documentation-section">
-    
-
-    
-
-    
-
-    
-
-    
-     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
-       <header>
-         <h3>Public Instance Methods</h3>
-       </header>
-
-    
-      <div id="method-i-addcomment" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">addcomment</span><span
-            class="method-args">()</span>
-          
-          <span class="method-click-advice">click to toggle source</span>
-          
-        </div>
-        
-
-        <div class="method-description">
-          
-          
-          
-          
-
-          
-          <div class="method-source-code" id="addcomment-source">
-            <pre><span class="ruby-comment"># File app/controllers/API/albums_controller.rb, line 19</span>
+<h4 id="method-i-addcomment-label-Options">Options<span><a href="#method-i-addcomment-label-Options">&para;</a> <a href="#documentation">&uarr;</a></span></h4>
+<ul><li>
+<p><code>:security</code> - If it&#39;s a secure transaction, this variable
+from ApiSecurity (the parent) is true</p>
+</li><li>
+<p><code>:id</code> - The id of the album where is the comment</p>
+</li><li>
+<p><code>:content</code> - The content of the comment</p>
+</li></ul>					
+											<div class="method-source-code" id="addcomment-source">
+							<pre class="prettyprint linenums"><code 
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/albums_controller.rb, line 151</span>
   <span class="ruby-keyword">def</span> <span class="ruby-identifier">addcomment</span>
-<span class="ruby-keyword">if</span> (<span class="ruby-ivar">@security</span>)
-  <span class="ruby-ivar">@returnValue</span> = [<span class="ruby-string">&quot;lul&quot;</span>]
-<span class="ruby-keyword">end</span>
+<span class="ruby-keyword">begin</span>
+  <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@security</span>)
+    <span class="ruby-identifier">album</span> = <span class="ruby-constant">Album</span>.<span class="ruby-identifier">find_by_id</span>(<span class="ruby-ivar">@id</span>)
 
-<span class="ruby-identifier">respond_to</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
-  <span class="ruby-identifier">format</span>.<span class="ruby-identifier">json</span> { <span class="ruby-identifier">render</span> <span class="ruby-value">:json</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">JSON</span>.<span class="ruby-identifier">generate</span>(<span class="ruby-ivar">@returnValue</span>) }
-<span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">end</span></pre>
-          </div>
-          
-        </div>
-
-        
-
-        
-      </div>
-
+    <span class="ruby-keyword">if</span> (<span class="ruby-operator">!</span><span class="ruby-identifier">album</span>)
+      <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">502</span>
+      <span class="ruby-keyword">return</span>
+    <span class="ruby-keyword">end</span>
     
-      <div id="method-i-index" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">index</span><span
-            class="method-args">()</span>
-          
-          <span class="method-click-advice">click to toggle source</span>
-          
-        </div>
-        
-
-        <div class="method-description">
-          
-          <p>Retrieve all the albums</p>
-
-<h4 id="method-i-index-label-Attributes">Attributes<span><a href="#method-i-index-label-Attributes">&para;</a> <a href="#documentation">&uarr;</a></span></h4>
-
-<h4 id="method-i-index-label-Options">Options<span><a href="#method-i-index-label-Options">&para;</a> <a href="#documentation">&uarr;</a></span></h4>
-
-<h4 id="method-i-index-label-Examples">Examples<span><a href="#method-i-index-label-Examples">&para;</a> <a href="#documentation">&uarr;</a></span></h4>
-          
-          
-
-          
-          <div class="method-source-code" id="index-source">
-            <pre><span class="ruby-comment"># File app/controllers/API/albums_controller.rb, line 13</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">index</span>
-  <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
-    <span class="ruby-identifier">format</span>.<span class="ruby-identifier">json</span> { <span class="ruby-identifier">render</span> <span class="ruby-value">:json</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">JSON</span>.<span class="ruby-identifier">generate</span>([<span class="ruby-string">&quot;mdr&quot;</span>]) }
+    <span class="ruby-identifier">com</span> = <span class="ruby-constant">Commentary</span>.<span class="ruby-identifier">new</span>
+    <span class="ruby-identifier">com</span>.<span class="ruby-identifier">content</span> = <span class="ruby-ivar">@content</span>
+    <span class="ruby-identifier">com</span>.<span class="ruby-identifier">author_id</span> = <span class="ruby-ivar">@user_id</span>
+    
+    <span class="ruby-keyword">if</span> (<span class="ruby-identifier">com</span>.<span class="ruby-identifier">save</span>)
+      <span class="ruby-identifier">com</span>.<span class="ruby-identifier">albums</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">album</span>
+      <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">201</span>
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">503</span>
+    <span class="ruby-keyword">end</span>
   <span class="ruby-keyword">end</span>
-<span class="ruby-keyword">end</span></pre>
-          </div>
-          
-        </div>
+<span class="ruby-keyword">rescue</span>
+  <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">504</span>
+<span class="ruby-keyword">end</span>
+<span class="ruby-identifier">sendJson</span>
+  <span class="ruby-keyword">end</span></code></pre>
+						</div>
+										</div>
 
-        
+					
+									</div>
+								<a name="method-i-find">anchor</a>
+				<div id="method-i-find-doc" class="method">
 
-        
-      </div>
+					<header>
+											<i class="icon-generic"></i>
+						<span class="method-name">find</span><span 
+							class="method-args">()</span>
+										</header>
 
-    
-    </section>
-  
-  </section>
-</main>
+					<div class="method-description">
+											<p>Give a part of the albums depending of the filter passed into parameter</p>
 
+<h4 id="method-i-find-label-Options">Options<span><a href="#method-i-find-label-Options">&para;</a> <a href="#documentation">&uarr;</a></span></h4>
+<ul><li>
+<p>+:<a href="attribute_name">attribute</a>+ - If you want a column equal to a
+specific value</p>
+</li><li>
+<p>+:order_by_asc[]+ - If you want to order by ascending by values</p>
+</li><li>
+<p>+:order_by_desc[]+ - If you want to order by descending by values</p>
+</li><li>
+<p>+:group_by[]+ - If you want to group by field</p>
+</li><li>
+<p><code>:limit</code> - The number of row you want</p>
+</li><li>
+<p><code>:offset</code> - The offset of the array</p>
+</li></ul>
 
-<footer id="validator-badges" role="contentinfo">
-  <p><a href="http://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="http://rdoc.rubyforge.org">RDoc</a> 4.1.1.
-  <p>Based on <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
-</footer>
+<h4 id="method-i-find-label-Example">Example<span><a href="#method-i-find-label-Example">&para;</a> <a href="#documentation">&uarr;</a></span></h4>
 
+<pre>http://api.soonzik.com/albums/find?attribute[style]=rock&amp;order_by_desc[]=id&amp;group_by[]=yearProd
+Note : By default, if you precise no attribute, it will take every row</pre>					
+											<div class="method-source-code" id="find-source">
+							<pre class="prettyprint linenums"><code 
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/albums_controller.rb, line 65</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">find</span>
+  <span class="ruby-keyword">begin</span>
+    <span class="ruby-keyword">if</span> (<span class="ruby-keyword">defined?</span><span class="ruby-ivar">@attribute</span>)
+      <span class="ruby-identifier">album_object</span> = <span class="ruby-keyword">nil</span>
+      <span class="ruby-comment"># - - - - - - - -</span>
+      <span class="ruby-ivar">@attribute</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">x</span>, <span class="ruby-identifier">y</span><span class="ruby-operator">|</span>
+        <span class="ruby-identifier">condition</span> = <span class="ruby-string">&quot;&quot;</span>
+        <span class="ruby-keyword">if</span> (<span class="ruby-identifier">y</span>[<span class="ruby-value">0</span>] <span class="ruby-operator">==</span> <span class="ruby-string">&quot;%&quot;</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">y</span>[<span class="ruby-value">-1</span>] <span class="ruby-operator">==</span> <span class="ruby-string">&quot;%&quot;</span>)  <span class="ruby-comment">#LIKE</span>
+          <span class="ruby-identifier">condition</span> = [<span class="ruby-string">&quot;&#39;albums&#39;.? LIKE ?&quot;</span>, <span class="ruby-node">%Q[#{x}]</span>, <span class="ruby-node">&quot;%#{y[1...-1]}%&quot;</span>];
+        <span class="ruby-keyword">else</span>                              <span class="ruby-comment">#WHERE</span>
+          <span class="ruby-identifier">condition</span> = {<span class="ruby-identifier">x</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">y</span>};
+        <span class="ruby-keyword">end</span>
+
+        <span class="ruby-keyword">if</span> (<span class="ruby-identifier">album_object</span> <span class="ruby-operator">==</span> <span class="ruby-keyword">nil</span>)          <span class="ruby-comment">#album_object doesn&#39;t exist</span>
+          <span class="ruby-identifier">album_object</span> = <span class="ruby-constant">Album</span>.<span class="ruby-identifier">where</span>(<span class="ruby-identifier">condition</span>)
+        <span class="ruby-keyword">else</span>                              <span class="ruby-comment">#album_object exists</span>
+          <span class="ruby-identifier">album_object</span> = <span class="ruby-identifier">album_object</span>.<span class="ruby-identifier">where</span>(<span class="ruby-identifier">condition</span>)
+        <span class="ruby-keyword">end</span>
+      <span class="ruby-keyword">end</span>
+      <span class="ruby-comment"># - - - - - - - -</span>
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-identifier">album_object</span> = <span class="ruby-constant">Album</span>.<span class="ruby-identifier">all</span>            <span class="ruby-comment">#no attribute specified</span>
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-identifier">order_asc</span> = <span class="ruby-string">&quot;&quot;</span>
+    <span class="ruby-identifier">order_desc</span> = <span class="ruby-string">&quot;&quot;</span>
+    <span class="ruby-comment"># filter the order by asc to create the string</span>
+    <span class="ruby-keyword">if</span> (<span class="ruby-keyword">defined?</span><span class="ruby-ivar">@order_by_asc</span>)
+      <span class="ruby-ivar">@order_by_asc</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span>
+        <span class="ruby-identifier">order_asc</span> <span class="ruby-operator">+=</span> <span class="ruby-string">&quot;, &quot;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">order_asc</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">!=</span> <span class="ruby-value">0</span>
+        <span class="ruby-identifier">order_asc</span> <span class="ruby-operator">+=</span> (<span class="ruby-node">%Q[#{x}]</span> <span class="ruby-operator">+</span> <span class="ruby-string">&quot; ASC&quot;</span>)
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">end</span>
+    <span class="ruby-comment"># filter the order by desc to create the string</span>
+    <span class="ruby-keyword">if</span> (<span class="ruby-keyword">defined?</span><span class="ruby-ivar">@order_by_desc</span>)
+      <span class="ruby-ivar">@order_by_desc</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span>
+        <span class="ruby-identifier">order_desc</span> <span class="ruby-operator">+=</span> <span class="ruby-string">&quot;, &quot;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">order_desc</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">!=</span> <span class="ruby-value">0</span>
+        <span class="ruby-identifier">order_desc</span> <span class="ruby-operator">+=</span> (<span class="ruby-node">%Q[#{x}]</span> <span class="ruby-operator">+</span> <span class="ruby-string">&quot; DESC&quot;</span>)
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-keyword">if</span> (<span class="ruby-identifier">order_asc</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">order_desc</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span>)
+      <span class="ruby-identifier">album_object</span> = <span class="ruby-identifier">album_object</span>.<span class="ruby-identifier">order</span>(<span class="ruby-identifier">order_asc</span> <span class="ruby-operator">+</span> <span class="ruby-string">&quot;, &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">order_desc</span>)
+    <span class="ruby-keyword">elsif</span> (<span class="ruby-identifier">order_asc</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">order_desc</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span>)
+      <span class="ruby-identifier">album_object</span> = <span class="ruby-identifier">album_object</span>.<span class="ruby-identifier">order</span>(<span class="ruby-identifier">order_desc</span>)
+    <span class="ruby-keyword">elsif</span> (<span class="ruby-identifier">order_asc</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">order_desc</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>)
+      <span class="ruby-identifier">album_object</span> = <span class="ruby-identifier">album_object</span>.<span class="ruby-identifier">order</span>(<span class="ruby-identifier">order_asc</span>)
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-keyword">if</span> (<span class="ruby-keyword">defined?</span><span class="ruby-ivar">@group_by</span>)    <span class="ruby-comment">#group</span>
+      <span class="ruby-identifier">group</span> = []
+      <span class="ruby-ivar">@group_by</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span>
+        <span class="ruby-identifier">group</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">%Q[#{x}]</span>
+      <span class="ruby-keyword">end</span>
+      <span class="ruby-identifier">album_object</span> = <span class="ruby-identifier">album_object</span>.<span class="ruby-identifier">group</span>(<span class="ruby-identifier">group</span>.<span class="ruby-identifier">join</span>(<span class="ruby-string">&quot;, &quot;</span>))
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-keyword">if</span> (<span class="ruby-keyword">defined?</span><span class="ruby-ivar">@limit</span>)       <span class="ruby-comment">#limit</span>
+      <span class="ruby-identifier">album_object</span> = <span class="ruby-identifier">album_object</span>.<span class="ruby-identifier">limit</span>(<span class="ruby-ivar">@limit</span>.<span class="ruby-identifier">to_i</span>)
+    <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">if</span> (<span class="ruby-keyword">defined?</span><span class="ruby-ivar">@offset</span>)      <span class="ruby-comment">#offset</span>
+      <span class="ruby-identifier">album_object</span> = <span class="ruby-identifier">album_object</span>.<span class="ruby-identifier">offset</span>(<span class="ruby-ivar">@offset</span>.<span class="ruby-identifier">to_i</span>)
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-ivar">@returnValue</span> = { <span class="ruby-identifier">content</span><span class="ruby-operator">:</span> <span class="ruby-identifier">album_object</span>.<span class="ruby-identifier">as_json</span>(<span class="ruby-value">:include</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">:musics</span>) }
+
+    <span class="ruby-keyword">if</span> (<span class="ruby-identifier">album_object</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>)
+      <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">202</span>
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">200</span>
+    <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">rescue</span>
+    <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">504</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">sendJson</span>
+<span class="ruby-keyword">end</span></code></pre>
+						</div>
+										</div>
+
+					
+									</div>
+								<a name="method-i-index">anchor</a>
+				<div id="method-i-index-doc" class="method">
+
+					<header>
+											<i class="icon-generic"></i>
+						<span class="method-name">index</span><span 
+							class="method-args">()</span>
+										</header>
+
+					<div class="method-description">
+											<p>Retrieve all the albums</p>					
+											<div class="method-source-code" id="index-source">
+							<pre class="prettyprint linenums"><code 
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/albums_controller.rb, line 14</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">index</span>
+  <span class="ruby-keyword">begin</span>
+    <span class="ruby-ivar">@returnValue</span> = { <span class="ruby-identifier">content</span><span class="ruby-operator">:</span> <span class="ruby-constant">Album</span>.<span class="ruby-identifier">all</span>.<span class="ruby-identifier">as_json</span> }
+    <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@returnValue</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>)
+      <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">202</span>
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">200</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">rescue</span>
+    <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">504</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">sendJson</span>
+<span class="ruby-keyword">end</span></code></pre>
+						</div>
+										</div>
+
+					
+									</div>
+								<a name="method-i-show">anchor</a>
+				<div id="method-i-show-doc" class="method">
+
+					<header>
+											<i class="icon-generic"></i>
+						<span class="method-name">show</span><span 
+							class="method-args">()</span>
+										</header>
+
+					<div class="method-description">
+											<p>Give a specific object by its id</p>
+
+<h4 id="method-i-show-label-Options">Options<span><a href="#method-i-show-label-Options">&para;</a> <a href="#documentation">&uarr;</a></span></h4>
+<ul><li>
+<p><code>:id</code> - The id of the specific album</p>
+</li></ul>					
+											<div class="method-source-code" id="show-source">
+							<pre class="prettyprint linenums"><code 
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/albums_controller.rb, line 34</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">show</span>
+  <span class="ruby-keyword">begin</span>
+    <span class="ruby-identifier">album</span> = <span class="ruby-constant">Album</span>.<span class="ruby-identifier">find_by_id</span>(<span class="ruby-ivar">@id</span>)
+    <span class="ruby-keyword">if</span> (<span class="ruby-operator">!</span><span class="ruby-identifier">album</span>)
+      <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">502</span>
+      <span class="ruby-keyword">return</span>
+    <span class="ruby-keyword">end</span>
+    <span class="ruby-ivar">@returnValue</span> = { <span class="ruby-identifier">content</span><span class="ruby-operator">:</span> <span class="ruby-identifier">album</span>.<span class="ruby-identifier">as_json</span>(<span class="ruby-value">:include</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">:musics</span>) }
+    <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">200</span>
+  <span class="ruby-keyword">rescue</span>
+    <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">504</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">sendJson</span>
+<span class="ruby-keyword">end</span></code></pre>
+						</div>
+										</div>
+
+					
+									</div>
+				
+			</section>
+			
+			
+			
+			
+			
+						
+		</section>
+		
+
+		<hr>
+
+		<footer>
+			<div class="container">
+				<span id="rdoc-version">Generated by RDoc 4.1.1</span> using the
+				<a id="generator-version"
+					href="http://deveiate.org/fivefish">Fivefish RDoc 0.1.0</a> generator.
+			</div>
+		</footer>
+	</div> <!-- /container -->
+
+	<!-- Class dropdown menu -->
+	<div id="class-dropdown" class="dropdown-menu has-scroll">
+	<ul>
+			<li><a href="../API/AlbumsController.html">API::AlbumsController</a></li>
+			<li><a href="../API/ApisecurityController.html">API::ApisecurityController</a></li>
+		</ul>
+	</div>
+
+	<!-- File dropdown menu -->
+	<div id="file-dropdown" class="dropdown-menu has-scroll">
+	<ul>
+		</ul>
+	</div>
+
+</body>
+</html>

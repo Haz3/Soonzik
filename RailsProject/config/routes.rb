@@ -3,8 +3,9 @@ Rails.application.routes.draw do
   namespace :api, path: '/', constraints: { subdomain: 'api' }, :defaults => { :format => 'json' }  do
     get 'getKey/:id' => 'apisecurity#provideKey', constraints: {id: /[0-9]+/}
 
-    resources :albums, only: [:index] do
+    resources :albums, only: [:index, :show] do
       collection do
+        get 'find' => 'albums#find'
         get 'addcomment/:id' => 'albums#addcomment', constraints: {id: /[0-9]+/}
       end
     end

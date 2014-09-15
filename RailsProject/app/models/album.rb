@@ -4,5 +4,6 @@ class Album < ActiveRecord::Base
   has_and_belongs_to_many :commentaries
   has_many :album_notes
   has_many :propositions
+  has_many :musics
   belongs_to :user
 end
