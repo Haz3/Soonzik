@@ -10,6 +10,19 @@ Rails.application.routes.draw do
       end
     end
 
+    resources :musics, only: [:index, :show] do
+      collection do
+        get 'find' => 'musics#find'
+        get 'addcomment/:id' => 'musics#addcomment', constraints: {id: /[0-9]+/}
+      end
+    end
+
+    resources :packs, only: [:index, :show] do
+      collection do
+        get 'find' => 'packs#find'
+      end
+    end
+
 
 
     #get ':modelName/:actionName(/:id)' => 'apisecurity#action', :defaults => { :format => 'json' }
