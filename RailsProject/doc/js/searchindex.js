@@ -27,7 +27,7 @@ var SearchIndex =
 	{
 		"name": "API::BattlesController",
 		"link": "API/BattlesController.html",
-		"snippet": "",
+		"snippet": "<p>Controller which manage the transaction for the Battles objects Here is the\nlist of action available …\n",
 		"type": "normalclass"
 	},
 	{
@@ -39,7 +39,7 @@ var SearchIndex =
 	{
 		"name": "API::ConcertsController",
 		"link": "API/ConcertsController.html",
-		"snippet": "",
+		"snippet": "<p>Controller which manage the transaction for the Concerts objects Here is\nthe list of action available …\n",
 		"type": "normalclass"
 	},
 	{
@@ -51,7 +51,7 @@ var SearchIndex =
 	{
 		"name": "API::ListeningsController",
 		"link": "API/ListeningsController.html",
-		"snippet": "",
+		"snippet": "<p>Controller which manage the transaction for the Listenings objects Here is\nthe list of action available …\n",
 		"type": "normalclass"
 	},
 	{
@@ -69,7 +69,7 @@ var SearchIndex =
 	{
 		"name": "API::NewsController",
 		"link": "API/NewsController.html",
-		"snippet": "",
+		"snippet": "<p>Controller which manage the transaction for the News objects Here is the\nlist of action available :\n<p>index …\n",
 		"type": "normalclass"
 	},
 	{
@@ -87,7 +87,7 @@ var SearchIndex =
 	{
 		"name": "API::PlaylistsController",
 		"link": "API/PlaylistsController.html",
-		"snippet": "",
+		"snippet": "<p>Controller which manage the transaction for the Playlists objects Here is\nthe list of action available …\n",
 		"type": "normalclass"
 	},
 	{
@@ -111,13 +111,13 @@ var SearchIndex =
 	{
 		"name": "API::TweetsController",
 		"link": "API/TweetsController.html",
-		"snippet": "",
+		"snippet": "<p>Controller which manage the transaction for the Tweets objects Here is the\nlist of action available : …\n",
 		"type": "normalclass"
 	},
 	{
 		"name": "API::UsersController",
 		"link": "API/UsersController.html",
-		"snippet": "",
+		"snippet": "<p>Controller which manage the transaction for the Users objects Here is the\nlist of action available : …\n",
 		"type": "normalclass"
 	},
 	{
