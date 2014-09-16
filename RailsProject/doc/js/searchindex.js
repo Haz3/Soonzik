@@ -63,7 +63,7 @@ var SearchIndex =
 	{
 		"name": "API::MusicsController",
 		"link": "API/MusicsController.html",
-		"snippet": "",
+		"snippet": "<p>Controller which manage the transaction for the Musics objects Here is the\nlist of action available : …\n",
 		"type": "normalclass"
 	},
 	{
@@ -81,7 +81,7 @@ var SearchIndex =
 	{
 		"name": "API::PacksController",
 		"link": "API/PacksController.html",
-		"snippet": "",
+		"snippet": "<p>Controller which manage the transaction for the Packs objects Here is the\nlist of action available : …\n",
 		"type": "normalclass"
 	},
 	{
@@ -119,6 +119,12 @@ var SearchIndex =
 		"link": "API/UsersController.html",
 		"snippet": "",
 		"type": "normalclass"
+	},
+	{
+		"name": "get",
+		"link": "API.html#method-i-get",
+		"snippet": "<p>To get the mp3. It cuts the file depending the rights\n<p>NOT FINISHED, NEED TO MODIFY THE OPEN FUNCTION  … &mdash; ",
+		"type": "anymethod"
 	},
 	{
 		"name": "index",
@@ -178,6 +184,132 @@ var SearchIndex =
 		"name": "codeAnswer",
 		"link": "API/ApisecurityController.html#method-i-codeAnswer",
 		"snippet": "<p>Put information about the answer (the code and the corresponding message)\nin the return value. If a code …\n",
+		"type": "anymethod"
+	},
+	{
+		"name": "index",
+		"link": "API/BattlesController.html#method-i-index",
+		"snippet": "<p>Retrieve all the battles\n",
+		"type": "anymethod"
+	},
+	{
+		"name": "show",
+		"link": "API/BattlesController.html#method-i-show",
+		"snippet": "<p>Give a specific object by its id\n<p>Options\n<p><code>:id</code> - The id of the specific battle\n",
+		"type": "anymethod"
+	},
+	{
+		"name": "index",
+		"link": "API/ConcertsController.html#method-i-index",
+		"snippet": "<p>Retrieve all the concerts\n",
+		"type": "anymethod"
+	},
+	{
+		"name": "show",
+		"link": "API/ConcertsController.html#method-i-show",
+		"snippet": "<p>Give a specific object by its id\n<p>Options\n<p><code>:id</code> - The id of the specific concert\n",
+		"type": "anymethod"
+	},
+	{
+		"name": "index",
+		"link": "API/ListeningsController.html#method-i-index",
+		"snippet": "<p>Retrieve all the listenings\n",
+		"type": "anymethod"
+	},
+	{
+		"name": "show",
+		"link": "API/ListeningsController.html#method-i-show",
+		"snippet": "<p>Give a specific object by its id\n<p>Options\n<p><code>:id</code> - The id of the specific listening\n",
+		"type": "anymethod"
+	},
+	{
+		"name": "index",
+		"link": "API/MusicsController.html#method-i-index",
+		"snippet": "<p>Retrieve all the musics\n",
+		"type": "anymethod"
+	},
+	{
+		"name": "show",
+		"link": "API/MusicsController.html#method-i-show",
+		"snippet": "<p>Give a specific object by its id\n<p>Options\n<p><code>:id</code> - The id of the specific music\n",
+		"type": "anymethod"
+	},
+	{
+		"name": "find",
+		"link": "API/MusicsController.html#method-i-find",
+		"snippet": "<p>Give a part of the albums depending of the filter passed into parameter\n<p>Options\n<p>+:attribute+ - If you want …\n",
+		"type": "anymethod"
+	},
+	{
+		"name": "addcomment",
+		"link": "API/MusicsController.html#method-i-addcomment",
+		"snippet": "<p>Add a comment to a specific music. Need to be a secure transaction.\n<p>Options\n<p><code>:security</code> - If it&#39;s a secure …\n",
+		"type": "anymethod"
+	},
+	{
+		"name": "index",
+		"link": "API/NewsController.html#method-i-index",
+		"snippet": "<p>Retrieve all the news\n",
+		"type": "anymethod"
+	},
+	{
+		"name": "show",
+		"link": "API/NewsController.html#method-i-show",
+		"snippet": "<p>Give a specific object by its id\n<p>Options\n<p><code>:id</code> - The id of the specific news\n",
+		"type": "anymethod"
+	},
+	{
+		"name": "index",
+		"link": "API/PacksController.html#method-i-index",
+		"snippet": "<p>Retrieve all the packs\n",
+		"type": "anymethod"
+	},
+	{
+		"name": "show",
+		"link": "API/PacksController.html#method-i-show",
+		"snippet": "<p>Give a specific object by its id\n<p>Options\n<p><code>:id</code> - The id of the specific album\n",
+		"type": "anymethod"
+	},
+	{
+		"name": "find",
+		"link": "API/PacksController.html#method-i-find",
+		"snippet": "<p>Give a part of the packs depending of the filter passed into parameter\n<p>Options\n<p>+:attribute+ - If you want …\n",
+		"type": "anymethod"
+	},
+	{
+		"name": "show",
+		"link": "API/PlaylistsController.html#method-i-show",
+		"snippet": "<p>Give a specific object by its id\n<p>Options\n<p><code>:id</code> - The id of the specific playlist\n",
+		"type": "anymethod"
+	},
+	{
+		"name": "index",
+		"link": "API/TweetsController.html#method-i-index",
+		"snippet": "<p>Retrieve all the tweets\n",
+		"type": "anymethod"
+	},
+	{
+		"name": "show",
+		"link": "API/TweetsController.html#method-i-show",
+		"snippet": "<p>Give a specific object by its id\n<p>Options\n<p><code>:id</code> - The id of the specific tweets\n",
+		"type": "anymethod"
+	},
+	{
+		"name": "index",
+		"link": "API/UsersController.html#method-i-index",
+		"snippet": "<p>Retrieve all the users\n",
+		"type": "anymethod"
+	},
+	{
+		"name": "show",
+		"link": "API/UsersController.html#method-i-show",
+		"snippet": "<p>Give a specific object by its id\n<p>Options\n<p><code>:id</code> - The id of the specific user\n",
+		"type": "anymethod"
+	},
+	{
+		"name": "find",
+		"link": "API/UsersController.html#method-i-find",
+		"snippet": "<p>Give a part of the albums depending of the filter passed into parameter\n<p>Options\n<p>+:attribute+ - If you want …\n",
 		"type": "anymethod"
 	}
 ]
