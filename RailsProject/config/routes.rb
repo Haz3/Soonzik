@@ -14,6 +14,7 @@ Rails.application.routes.draw do
       collection do
         get 'find' => 'musics#find'
         get 'addcomment/:id' => 'musics#addcomment', constraints: {id: /[0-9]+/}
+        get 'get/:id' => 'musics#get', constraints: {id: /[0-9]+/}, format: 'mp3' #verifier si ça fonctionne
       end
     end
 
@@ -23,7 +24,35 @@ Rails.application.routes.draw do
       end
     end
 
+    resources :users, only: [:index, :show] do
+      collection do
+      end
+    end
 
+    resources :battles, only: [:index, :show] do
+      collection do
+      end
+    end
+
+    resources :concerts, only: [:index, :show] do
+      collection do
+      end
+    end
+
+    resources :listenings, only: [:show] do
+      collection do
+      end
+    end
+
+    resources :news, only: [:index, :show] do
+      collection do
+      end
+    end
+
+    resources :tweets, only: [:index, :show] do
+      collection do
+      end
+    end
 
     #get ':modelName/:actionName(/:id)' => 'apisecurity#action', :defaults => { :format => 'json' }
     #get ':modelName/:actionName(/:start/:length)' => 'apisecurity#action', :defaults => { :format => 'json' }, constraints: {start: /[0-9]+/, length: /[0-9]+/}

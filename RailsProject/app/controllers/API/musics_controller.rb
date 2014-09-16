@@ -6,7 +6,7 @@ module API
   # * show        [get]
   # * find        [get]
   # * addcomment  [post]
-  # * get		  [get]
+  # * get         [get]
   #
   class MusicsController < ApisecurityController
   	before_action :checkKey, only: [:addcomment, :get]
@@ -175,5 +175,44 @@ module API
       end
       sendJson
   	end
+  end
+
+  # To get the mp3. It cuts the file depending the rights
+  # [NOT FINISHED, NEED TO MODIFY THE OPEN FUNCTION AND CHECK THE STRUCTURE OF THE FILES]
+  #
+  # ==== Options
+  #
+  # * +:security+ - If it's a secure transaction, this variable from ApiSecurity (the parent) is true
+  # * +:user_id [implicit]+ - It is required by the security so we can access it
+  # * +:id+ - The id of the music where is the comment
+  #
+  def get
+    begin
+      music = nil
+      cut = true
+
+      # Find the music
+      if (defined?@id)
+        music = Music.find_by_id(@id)
+      end
+      if (music == nil)
+        codeAnswer 502
+      else
+        # If the transaction is secured, it means we maybe have buy the music
+        if (@security)
+          buy = Purchase.find_by user_id: @user_id, typeObj: "Music", obj_id: music.id
+          cut = false if buy.size > 0
+        end
+      end
+
+      file = music.file
+      file = "cut_" + file if cut
+      buffer = File.open(file).read
+    rescue
+      codeAnswer 504
+    end
+    respond_to do |format|
+      format.mp3 { render :mp3 => buffer, :content_type => 'audio/mpeg' }
+    end
   end
 end
