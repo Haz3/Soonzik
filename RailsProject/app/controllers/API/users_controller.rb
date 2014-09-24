@@ -1,7 +1,11 @@
 module API
+  # Controller which manage the transaction for the Users objects
+  # Here is the list of action available :
+  #
+  # * index       [get]
+  # * show        [get]
+  #
   class UsersController < ApisecurityController
-  	#index show save |save (update)| find
-
   	# Retrieve all the users
     def index
       begin
@@ -131,4 +135,5 @@ module API
       end
       sendJson
     end
+  end
 end

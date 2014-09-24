@@ -116,6 +116,8 @@ list of action available :</p>
 <p>index       [get]</p>
 </li><li>
 <p>show        [get]</p>
+</li><li>
+<p>find        [get]</p>
 </li></ul>
 		</section>
 
@@ -137,6 +139,127 @@ list of action available :</p>
 					<h3>Public Instance Methods</h3>
 				</header>
 
+								<a name="method-i-find">anchor</a>
+				<div id="method-i-find-doc" class="method">
+
+					<header>
+											<i class="icon-generic"></i>
+						<span class="method-name">find</span><span 
+							class="method-args">()</span>
+										</header>
+
+					<div class="method-description">
+											<p>Give a part of the battles depending of the filter passed into parameter</p>
+
+<h4 id="method-i-find-label-Options">Options<span><a href="#method-i-find-label-Options">&para;</a> <a href="#documentation">&uarr;</a></span></h4>
+<ul><li>
+<p>+:<a href="attribute_name">attribute</a>+ - If you want a column equal to a
+specific value</p>
+</li><li>
+<p>+:order_by_asc[]+ - If you want to order by ascending by values</p>
+</li><li>
+<p>+:order_by_desc[]+ - If you want to order by descending by values</p>
+</li><li>
+<p>+:group_by[]+ - If you want to group by field</p>
+</li><li>
+<p><code>:limit</code> - The number of row you want</p>
+</li><li>
+<p><code>:offset</code> - The offset of the array</p>
+</li></ul>
+
+<h4 id="method-i-find-label-Example">Example<span><a href="#method-i-find-label-Example">&para;</a> <a href="#documentation">&uarr;</a></span></h4>
+
+<pre>http://api.soonzik.com/battles/find?attribute[artist_one_id]=1&amp;order_by_desc[]=artist_two_id&amp;group_by[]=artist_one_id
+Note : By default, if you precise no attribute, it will take every row</pre>					
+											<div class="method-source-code" id="find-source">
+							<pre class="prettyprint linenums"><code 
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/battles_controller.rb, line 70</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">find</span>
+  <span class="ruby-keyword">begin</span>
+    <span class="ruby-keyword">if</span> (<span class="ruby-keyword">defined?</span><span class="ruby-ivar">@attribute</span>)
+      <span class="ruby-identifier">battle_object</span> = <span class="ruby-keyword">nil</span>
+      <span class="ruby-comment"># - - - - - - - -</span>
+      <span class="ruby-ivar">@attribute</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">x</span>, <span class="ruby-identifier">y</span><span class="ruby-operator">|</span>
+        <span class="ruby-identifier">condition</span> = <span class="ruby-string">&quot;&quot;</span>
+        <span class="ruby-keyword">if</span> (<span class="ruby-identifier">y</span>[<span class="ruby-value">0</span>] <span class="ruby-operator">==</span> <span class="ruby-string">&quot;%&quot;</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">y</span>[<span class="ruby-value">-1</span>] <span class="ruby-operator">==</span> <span class="ruby-string">&quot;%&quot;</span>)  <span class="ruby-comment">#LIKE</span>
+          <span class="ruby-identifier">condition</span> = [<span class="ruby-string">&quot;&#39;battles&#39;.? LIKE ?&quot;</span>, <span class="ruby-node">%Q[#{x}]</span>, <span class="ruby-node">&quot;%#{y[1...-1]}%&quot;</span>];
+        <span class="ruby-keyword">else</span>                              <span class="ruby-comment">#WHERE</span>
+          <span class="ruby-identifier">condition</span> = {<span class="ruby-identifier">x</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">y</span>};
+        <span class="ruby-keyword">end</span>
+
+        <span class="ruby-keyword">if</span> (<span class="ruby-identifier">battle_object</span> <span class="ruby-operator">==</span> <span class="ruby-keyword">nil</span>)          <span class="ruby-comment">#battle_object doesn&#39;t exist</span>
+          <span class="ruby-identifier">battle_object</span> = <span class="ruby-constant">Battle</span>.<span class="ruby-identifier">where</span>(<span class="ruby-identifier">condition</span>)
+        <span class="ruby-keyword">else</span>                              <span class="ruby-comment">#battle_object exists</span>
+          <span class="ruby-identifier">battle_object</span> = <span class="ruby-identifier">battle_object</span>.<span class="ruby-identifier">where</span>(<span class="ruby-identifier">condition</span>)
+        <span class="ruby-keyword">end</span>
+      <span class="ruby-keyword">end</span>
+      <span class="ruby-comment"># - - - - - - - -</span>
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-identifier">battle_object</span> = <span class="ruby-constant">Battle</span>.<span class="ruby-identifier">all</span>            <span class="ruby-comment">#no attribute specified</span>
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-identifier">order_asc</span> = <span class="ruby-string">&quot;&quot;</span>
+    <span class="ruby-identifier">order_desc</span> = <span class="ruby-string">&quot;&quot;</span>
+    <span class="ruby-comment"># filter the order by asc to create the string</span>
+    <span class="ruby-keyword">if</span> (<span class="ruby-keyword">defined?</span><span class="ruby-ivar">@order_by_asc</span>)
+      <span class="ruby-ivar">@order_by_asc</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span>
+        <span class="ruby-identifier">order_asc</span> <span class="ruby-operator">+=</span> <span class="ruby-string">&quot;, &quot;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">order_asc</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">!=</span> <span class="ruby-value">0</span>
+        <span class="ruby-identifier">order_asc</span> <span class="ruby-operator">+=</span> (<span class="ruby-node">%Q[#{x}]</span> <span class="ruby-operator">+</span> <span class="ruby-string">&quot; ASC&quot;</span>)
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">end</span>
+    <span class="ruby-comment"># filter the order by desc to create the string</span>
+    <span class="ruby-keyword">if</span> (<span class="ruby-keyword">defined?</span><span class="ruby-ivar">@order_by_desc</span>)
+      <span class="ruby-ivar">@order_by_desc</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span>
+        <span class="ruby-identifier">order_desc</span> <span class="ruby-operator">+=</span> <span class="ruby-string">&quot;, &quot;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">order_desc</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">!=</span> <span class="ruby-value">0</span>
+        <span class="ruby-identifier">order_desc</span> <span class="ruby-operator">+=</span> (<span class="ruby-node">%Q[#{x}]</span> <span class="ruby-operator">+</span> <span class="ruby-string">&quot; DESC&quot;</span>)
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-keyword">if</span> (<span class="ruby-identifier">order_asc</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">order_desc</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span>)
+      <span class="ruby-identifier">battle_object</span> = <span class="ruby-identifier">battle_object</span>.<span class="ruby-identifier">order</span>(<span class="ruby-identifier">order_asc</span> <span class="ruby-operator">+</span> <span class="ruby-string">&quot;, &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">order_desc</span>)
+    <span class="ruby-keyword">elsif</span> (<span class="ruby-identifier">order_asc</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">order_desc</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span>)
+      <span class="ruby-identifier">battle_object</span> = <span class="ruby-identifier">battle_object</span>.<span class="ruby-identifier">order</span>(<span class="ruby-identifier">order_desc</span>)
+    <span class="ruby-keyword">elsif</span> (<span class="ruby-identifier">order_asc</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">order_desc</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>)
+      <span class="ruby-identifier">battle_object</span> = <span class="ruby-identifier">battle_object</span>.<span class="ruby-identifier">order</span>(<span class="ruby-identifier">order_asc</span>)
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-keyword">if</span> (<span class="ruby-keyword">defined?</span><span class="ruby-ivar">@group_by</span>)    <span class="ruby-comment">#group</span>
+      <span class="ruby-identifier">group</span> = []
+      <span class="ruby-ivar">@group_by</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span>
+        <span class="ruby-identifier">group</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">%Q[#{x}]</span>
+      <span class="ruby-keyword">end</span>
+      <span class="ruby-identifier">battle_object</span> = <span class="ruby-identifier">battle_object</span>.<span class="ruby-identifier">group</span>(<span class="ruby-identifier">group</span>.<span class="ruby-identifier">join</span>(<span class="ruby-string">&quot;, &quot;</span>))
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-keyword">if</span> (<span class="ruby-keyword">defined?</span><span class="ruby-ivar">@limit</span>)       <span class="ruby-comment">#limit</span>
+      <span class="ruby-identifier">battle_object</span> = <span class="ruby-identifier">battle_object</span>.<span class="ruby-identifier">limit</span>(<span class="ruby-ivar">@limit</span>.<span class="ruby-identifier">to_i</span>)
+    <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">if</span> (<span class="ruby-keyword">defined?</span><span class="ruby-ivar">@offset</span>)      <span class="ruby-comment">#offset</span>
+      <span class="ruby-identifier">battle_object</span> = <span class="ruby-identifier">battle_object</span>.<span class="ruby-identifier">offset</span>(<span class="ruby-ivar">@offset</span>.<span class="ruby-identifier">to_i</span>)
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-ivar">@returnValue</span> = { <span class="ruby-identifier">content</span><span class="ruby-operator">:</span> <span class="ruby-identifier">battle_object</span>.<span class="ruby-identifier">as_json</span>(<span class="ruby-value">:include</span> =<span class="ruby-operator">&gt;</span> {
+                                <span class="ruby-value">:artist_one</span> =<span class="ruby-operator">&gt;</span> {},
+                                <span class="ruby-value">:artist_two</span> =<span class="ruby-operator">&gt;</span> {},
+                                <span class="ruby-value">:votes</span> =<span class="ruby-operator">&gt;</span> {}
+                              }) }
+
+    <span class="ruby-keyword">if</span> (<span class="ruby-identifier">battle_object</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>)
+      <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">202</span>
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">200</span>
+    <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">rescue</span>
+    <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">504</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">sendJson</span>
+<span class="ruby-keyword">end</span></code></pre>
+						</div>
+										</div>
+
+					
+									</div>
 								<a name="method-i-index">anchor</a>
 				<div id="method-i-index-doc" class="method">
 
@@ -150,7 +273,7 @@ list of action available :</p>
 											<p>Retrieve all the battles</p>					
 											<div class="method-source-code" id="index-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/battles_controller.rb, line 12</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/battles_controller.rb, line 11</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">index</span>
   <span class="ruby-keyword">begin</span>
     <span class="ruby-ivar">@returnValue</span> = { <span class="ruby-identifier">content</span><span class="ruby-operator">:</span> <span class="ruby-constant">Battle</span>.<span class="ruby-identifier">all</span>.<span class="ruby-identifier">as_json</span>(<span class="ruby-value">:include</span> =<span class="ruby-operator">&gt;</span> {
@@ -191,7 +314,7 @@ list of action available :</p>
 </li></ul>					
 											<div class="method-source-code" id="show-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/battles_controller.rb, line 36</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/battles_controller.rb, line 35</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">show</span>
   <span class="ruby-keyword">begin</span>
     <span class="ruby-identifier">battle</span> = <span class="ruby-constant">Battle</span>.<span class="ruby-identifier">find_by_id</span>(<span class="ruby-ivar">@id</span>)
@@ -245,10 +368,13 @@ list of action available :</p>
 			<li><a href="../API/BattlesController.html">API::BattlesController</a></li>
 			<li><a href="../API/ConcertsController.html">API::ConcertsController</a></li>
 			<li><a href="../API/ListeningsController.html">API::ListeningsController</a></li>
+			<li><a href="../API/MessagesController.html">API::MessagesController</a></li>
 			<li><a href="../API/MusicsController.html">API::MusicsController</a></li>
 			<li><a href="../API/NewsController.html">API::NewsController</a></li>
+			<li><a href="../API/NotificationsController.html">API::NotificationsController</a></li>
 			<li><a href="../API/PacksController.html">API::PacksController</a></li>
 			<li><a href="../API/PlaylistsController.html">API::PlaylistsController</a></li>
+			<li><a href="../API/SuggestionsController.html">API::SuggestionsController</a></li>
 			<li><a href="../API/TweetsController.html">API::TweetsController</a></li>
 			<li><a href="../API/UsersController.html">API::UsersController</a></li>
 		</ul>

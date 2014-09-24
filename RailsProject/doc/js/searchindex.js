@@ -57,7 +57,7 @@ var SearchIndex =
 	{
 		"name": "API::MessagesController",
 		"link": "API/MessagesController.html",
-		"snippet": "",
+		"snippet": "<p>Controller which manage the transaction for the Messages objects Here is\nthe list of action available …\n",
 		"type": "normalclass"
 	},
 	{
@@ -75,7 +75,7 @@ var SearchIndex =
 	{
 		"name": "API::NotificationsController",
 		"link": "API/NotificationsController.html",
-		"snippet": "",
+		"snippet": "<p>Controller which manage the transaction for the Notifications objects Here\nis the list of action available …\n",
 		"type": "normalclass"
 	},
 	{
@@ -105,7 +105,7 @@ var SearchIndex =
 	{
 		"name": "API::SuggestionsController",
 		"link": "API/SuggestionsController.html",
-		"snippet": "",
+		"snippet": "<p>Controller which manage the transaction for the Suggestions objects Here is\nthe list of action available …\n",
 		"type": "normalclass"
 	},
 	{
@@ -199,6 +199,12 @@ var SearchIndex =
 		"type": "anymethod"
 	},
 	{
+		"name": "find",
+		"link": "API/BattlesController.html#method-i-find",
+		"snippet": "<p>Give a part of the battles depending of the filter passed into parameter\n<p>Options\n<p>+:attribute+ - If you …\n",
+		"type": "anymethod"
+	},
+	{
 		"name": "index",
 		"link": "API/ConcertsController.html#method-i-index",
 		"snippet": "<p>Retrieve all the concerts\n",
@@ -211,6 +217,12 @@ var SearchIndex =
 		"type": "anymethod"
 	},
 	{
+		"name": "find",
+		"link": "API/ConcertsController.html#method-i-find",
+		"snippet": "<p>Give a part of the concerts depending of the filter passed into parameter\n<p>Options\n<p>+:attribute+ - If you …\n",
+		"type": "anymethod"
+	},
+	{
 		"name": "index",
 		"link": "API/ListeningsController.html#method-i-index",
 		"snippet": "<p>Retrieve all the listenings\n",
@@ -220,6 +232,18 @@ var SearchIndex =
 		"name": "show",
 		"link": "API/ListeningsController.html#method-i-show",
 		"snippet": "<p>Give a specific object by its id\n<p>Options\n<p><code>:id</code> - The id of the specific listening\n",
+		"type": "anymethod"
+	},
+	{
+		"name": "find",
+		"link": "API/ListeningsController.html#method-i-find",
+		"snippet": "<p>Give a part of the listening depending of the filter passed into parameter\n<p>Options\n<p>+:attribute+ - If you …\n",
+		"type": "anymethod"
+	},
+	{
+		"name": "show",
+		"link": "API/MessagesController.html#method-i-show",
+		"snippet": "<p>Give a specific object by its id\n<p>Options\n<p><code>:id</code> - The id of the specific message\n",
 		"type": "anymethod"
 	},
 	{
@@ -259,6 +283,24 @@ var SearchIndex =
 		"type": "anymethod"
 	},
 	{
+		"name": "find",
+		"link": "API/NewsController.html#method-i-find",
+		"snippet": "<p>Give a part of the news depending of the filter passed into parameter\n<p>Options\n<p>+:attribute+ - If you want …\n",
+		"type": "anymethod"
+	},
+	{
+		"name": "addcomment",
+		"link": "API/NewsController.html#method-i-addcomment",
+		"snippet": "<p>Add a comment to a specific news. Need to be a secure transaction.\n<p>Options\n<p><code>:security</code> - If it&#39;s a secure …\n",
+		"type": "anymethod"
+	},
+	{
+		"name": "show",
+		"link": "API/NotificationsController.html#method-i-show",
+		"snippet": "<p>Give a specific object by its id\n<p>Options\n<p><code>:id</code> - The id of the specific notification\n",
+		"type": "anymethod"
+	},
+	{
 		"name": "index",
 		"link": "API/PacksController.html#method-i-index",
 		"snippet": "<p>Retrieve all the packs\n",
@@ -283,6 +325,18 @@ var SearchIndex =
 		"type": "anymethod"
 	},
 	{
+		"name": "find",
+		"link": "API/PlaylistsController.html#method-i-find",
+		"snippet": "<p>Give a part of the playlist depending of the filter passed into parameter\n<p>Options\n<p>+:attribute+ - If you …\n",
+		"type": "anymethod"
+	},
+	{
+		"name": "show",
+		"link": "API/SuggestionsController.html#method-i-show",
+		"snippet": "<p>Give a specific object by its id\n<p>Options\n<p><code>:id</code> - The id of the specific suggestion\n",
+		"type": "anymethod"
+	},
+	{
 		"name": "index",
 		"link": "API/TweetsController.html#method-i-index",
 		"snippet": "<p>Retrieve all the tweets\n",
@@ -292,6 +346,12 @@ var SearchIndex =
 		"name": "show",
 		"link": "API/TweetsController.html#method-i-show",
 		"snippet": "<p>Give a specific object by its id\n<p>Options\n<p><code>:id</code> - The id of the specific tweets\n",
+		"type": "anymethod"
+	},
+	{
+		"name": "find",
+		"link": "API/TweetsController.html#method-i-find",
+		"snippet": "<p>Give a part of the tweet depending of the filter passed into parameter\n<p>Options\n<p>+:attribute+ - If you want …\n",
 		"type": "anymethod"
 	},
 	{
