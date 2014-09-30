@@ -48,16 +48,22 @@ header {
 
 .button-player {
     width: 300px;
-    margin-top: 15px;
+    margin-top: 10px;
     margin-left: 50px;
-    background-color: grey;
     height: 40px;
+}
+
+.button-player img {
+    width: 35px;
+    height:35px;
+    margin-left: 5px;
+    cursor: pointer;
 }
 
 .slider-player {
     position: absolute;
     margin-top: 35px;
-    margin-left: 450px;
+    margin-left: 380px;
     width: 600px;
     background-color: grey;
     height: 5px;
@@ -66,7 +72,7 @@ header {
 .artist-name {
     position: absolute;
     margin-top: 10px;
-    margin-left: 665px;
+    margin-left: 605px;
     color: white;
     font-size: 15px;
 }
@@ -74,7 +80,7 @@ header {
 .time-from {
     position: absolute;
     margin-top: 10px;
-    margin-left: 460px;
+    margin-left: 400px;
     color: white;
     font-size: 12px;
 }
@@ -84,10 +90,23 @@ header {
     position: absolute;
     color: white;
     font-size: 12px;
-    margin-left: 1000px;
+    margin-left: 940px;
     margin-top: 10px;
 }
 
+.notification {
+    float: right;
+    width: 220px;
+    margin-top: -40px;
+    height: 40px;
+}
+
+.notification img {
+    width: 35px;
+    height: 35px;
+    margin-left: 5px;
+    cursor: pointer;
+}
 
 #logo {
     margin-left: 20px;
