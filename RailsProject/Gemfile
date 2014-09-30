@@ -63,6 +63,9 @@ gem 'kaminari'
 gem "paperclip", "~> 4.1"
 #gem "will_paginate"
 
+#gem to have a better design for rdoc. To launch like this : rdoc --format=fivefish
+gem 'rdoc-generator-fivefish'
+
 
 # For Windows with ruby 2.0 and Rails 4.1
 gem 'tzinfo-data', platforms: [:x64_mingw,:mingw, :mswin]

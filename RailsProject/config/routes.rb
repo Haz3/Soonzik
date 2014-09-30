@@ -3,13 +3,56 @@ Rails.application.routes.draw do
   namespace :api, path: '/', constraints: { subdomain: 'api' }, :defaults => { :format => 'json' }  do
     get 'getKey/:id' => 'apisecurity#provideKey', constraints: {id: /[0-9]+/}
 
-    resources :albums, only: [:index] do
+    resources :albums, only: [:index, :show] do
       collection do
+        get 'find' => 'albums#find'
         get 'addcomment/:id' => 'albums#addcomment', constraints: {id: /[0-9]+/}
       end
     end
 
+    resources :musics, only: [:index, :show] do
+      collection do
+        get 'find' => 'musics#find'
+        get 'addcomment/:id' => 'musics#addcomment', constraints: {id: /[0-9]+/}
+        get 'get/:id' => 'musics#get', constraints: {id: /[0-9]+/}, format: 'mp3' #verifier si ça fonctionne
+      end
+    end
 
+    resources :packs, only: [:index, :show] do
+      collection do
+        get 'find' => 'packs#find'
+      end
+    end
+
+    resources :users, only: [:index, :show] do
+      collection do
+      end
+    end
+
+    resources :battles, only: [:index, :show] do
+      collection do
+      end
+    end
+
+    resources :concerts, only: [:index, :show] do
+      collection do
+      end
+    end
+
+    resources :listenings, only: [:show] do
+      collection do
+      end
+    end
+
+    resources :news, only: [:index, :show] do
+      collection do
+      end
+    end
+
+    resources :tweets, only: [:index, :show] do
+      collection do
+      end
+    end
 
     #get ':modelName/:actionName(/:id)' => 'apisecurity#action', :defaults => { :format => 'json' }
     #get ':modelName/:actionName(/:start/:length)' => 'apisecurity#action', :defaults => { :format => 'json' }, constraints: {start: /[0-9]+/, length: /[0-9]+/}

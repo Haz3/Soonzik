@@ -1,318 +1,348 @@
 <!DOCTYPE html>
+<!--
 
-<html>
+  Fivefish RDoc Generator
+  $Id$
+
+  Authors:
+  - Michael Granger <ged@FaerieMUD.org>
+
+ -->
+<html lang="en">
 <head>
-<meta charset="UTF-8">
+	<title>RDoc Documentation</title>
 
-<title>RDoc Documentation</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<link href="./fonts.css" rel="stylesheet">
-<link href="./rdoc.css" rel="stylesheet">
+	<!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+	<!--[if lt IE 9]>
+		<script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
 
-<script type="text/javascript">
-  var rdoc_rel_prefix = "./";
-</script>
+	<link rel="shortcut icon" href="images/favicon.ico">
+	<link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+	<link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+	<link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
 
-<script src="./js/jquery.js"></script>
-<script src="./js/navigation.js"></script>
-<script src="./js/search_index.js"></script>
-<script src="./js/search.js"></script>
-<script src="./js/searcher.js"></script>
-<script src="./js/darkfish.js"></script>
+	<link href="." rel="prefix" />
 
+	<link href="./css/fivefish.min.css" rel="stylesheet" />
 
-<body id="top" role="document" class="file">
-<nav role="navigation">
-  <div id="project-navigation">
-    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
-  <h2>
-    <a href="./index.html" rel="home">Home</a>
-  </h2>
+	<script src="./js/jquery-1.7.1.min.js" type="text/javascript"
+		defer="defer" charset="utf-8"></script>
+	<script src="./js/bootstrap.min.js" type="text/javascript"
+		defer="defer" charset="utf-8"></script>
+	<script src="./js/searchindex.js" type="text/javascript"
+		defer="defer" charset="utf-8"></script>
+	<script src="./js/fivefish.min.js" type="text/javascript"
+		defer="defer" charset="utf-8" onload="initFivefish()"></script>
+</head>
 
-  <div id="table-of-contents-navigation">
-    <a href="./table_of_contents.html#pages">Pages</a>
-    <a href="./table_of_contents.html#classes">Classes</a>
-    <a href="./table_of_contents.html#methods">Methods</a>
-  </div>
-</div>
+<body class="index-page">
 
+	<nav class="navbar navbar-fixed-top">
+		<div class="navbar-inner">
+			<div class="container">
+				<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</a>
 
-    <div id="search-section" role="search" class="project-section initially-hidden">
-  <form action="#" method="get" accept-charset="utf-8">
-    <div id="search-field-wrapper">
-      <input id="search-field" role="combobox" aria-label="Search"
-             aria-autocomplete="list" aria-controls="search-results"
-             type="text" name="search" placeholder="Search" spellcheck="false"
-             title="Type to search, Up and Down to navigate, Enter to load">
-    </div>
+				<a class="brand"
+					href="./index.html">RDoc Documentation</a>
 
-    <ul id="search-results" aria-label="Search Results"
-        aria-busy="false" aria-expanded="false"
-        aria-atomic="false" class="initially-hidden"></ul>
-  </form>
-</div>
+				<div class="nav-collapse">
+					<ul class="nav">
+						<li>
+							<a href="#"
+								class="dropdown-toggle"
+								data-dropdown="#class-dropdown">
+								Classes
+								<b class="caret"></b>
+							</a>
+						</li>
+						<li>
+							<a href="#"
+								class="dropdown-toggle"
+								data-dropdown="#file-dropdown">
+								Files
+								<b class="caret"></b>
+							</a>
+						</li>
+					</ul>
+				</div><!--/.nav-collapse -->
+				<span class="pull-right">
+					<form class="navbar-search">
+						<input type="hidden" id="navbar-search-target" value="" />
+						<input type="text" class="search-query" value=""
+							placeholder="Method, Class, or Filename" />
+					</form>
+				</span>
+			</div>
+		</div>
+	</nav>
 
-  </div>
+	<div class="container">
+		
+		<header class="hero-unit">
+								</header>
 
-  <div id="project-metadata">
-    <div id="fileindex-section" class="nav-section">
-  <h3>Pages</h3>
+		<!-- Indexes -->
+		<section id="indexes" class="row">
+			<div class="span4">
+				<ul id="class-index" class="nav nav-list">
+					<li class="nav-header">Classes/Modules</li>
+									<li><a href="./API/AlbumsController.html"
+						title="API::AlbumsController"><span class="ns">API</span>::AlbumsController</a></li>
+									<li><a href="./API/ApisecurityController.html"
+						title="API::ApisecurityController"><span class="ns">API</span>::ApisecurityController</a></li>
+									<li><a href="./API/BattlesController.html"
+						title="API::BattlesController"><span class="ns">API</span>::BattlesController</a></li>
+									<li><a href="./API/ConcertsController.html"
+						title="API::ConcertsController"><span class="ns">API</span>::ConcertsController</a></li>
+									<li><a href="./API/ListeningsController.html"
+						title="API::ListeningsController"><span class="ns">API</span>::ListeningsController</a></li>
+									<li><a href="./API/MessagesController.html"
+						title="API::MessagesController"><span class="ns">API</span>::MessagesController</a></li>
+									<li><a href="./API/MusicsController.html"
+						title="API::MusicsController"><span class="ns">API</span>::MusicsController</a></li>
+									<li><a href="./API/NewsController.html"
+						title="API::NewsController"><span class="ns">API</span>::NewsController</a></li>
+									<li><a href="./API/NotificationsController.html"
+						title="API::NotificationsController"><span class="ns">API</span>::NotificationsController</a></li>
+									<li><a href="./API/PacksController.html"
+						title="API::PacksController"><span class="ns">API</span>::PacksController</a></li>
+									<li><a href="./API/PlaylistsController.html"
+						title="API::PlaylistsController"><span class="ns">API</span>::PlaylistsController</a></li>
+									<li><a href="./API/SuggestionsController.html"
+						title="API::SuggestionsController"><span class="ns">API</span>::SuggestionsController</a></li>
+									<li><a href="./API/TweetsController.html"
+						title="API::TweetsController"><span class="ns">API</span>::TweetsController</a></li>
+									<li><a href="./API/UsersController.html"
+						title="API::UsersController"><span class="ns">API</span>::UsersController</a></li>
+								</ul>
+			</div>
 
-  <ul class="link-list">
-  
-    <li><a href="./app/admin/#album_rb#.html">#album.rb#</a>
-  
-    <li><a href="./app/admin/#commentary_rb#.html">#commentary.rb#</a>
-  
-  </ul>
-</div>
+			<div class="span4">
+				<ul id="method-index" class="nav nav-list">
+					<li class="nav-header">Methods</li>
+									<li class="method"><a title="API::ApisecurityController"
+						href="API/ApisecurityController.html#method-c-new">::new						<span class="method-parent">[::ApisecurityController]</span>
+						</a>
+					</li>
+									<li class="method"><a title="API::MusicsController"
+						href="API/MusicsController.html#method-i-addcomment">#addcomment						<span class="method-parent">[::MusicsController]</span>
+						</a>
+					</li>
+									<li class="method"><a title="API::AlbumsController"
+						href="API/AlbumsController.html#method-i-addcomment">#addcomment						<span class="method-parent">[::AlbumsController]</span>
+						</a>
+					</li>
+									<li class="method"><a title="API::NewsController"
+						href="API/NewsController.html#method-i-addcomment">#addcomment						<span class="method-parent">[::NewsController]</span>
+						</a>
+					</li>
+									<li class="method"><a title="API::ApisecurityController"
+						href="API/ApisecurityController.html#method-i-checkKey">#checkKey						<span class="method-parent">[::ApisecurityController]</span>
+						</a>
+					</li>
+									<li class="method"><a title="API::ApisecurityController"
+						href="API/ApisecurityController.html#method-i-codeAnswer">#codeAnswer						<span class="method-parent">[::ApisecurityController]</span>
+						</a>
+					</li>
+									<li class="method"><a title="API::UsersController"
+						href="API/UsersController.html#method-i-find">#find						<span class="method-parent">[::UsersController]</span>
+						</a>
+					</li>
+									<li class="method"><a title="API::AlbumsController"
+						href="API/AlbumsController.html#method-i-find">#find						<span class="method-parent">[::AlbumsController]</span>
+						</a>
+					</li>
+									<li class="method"><a title="API::PacksController"
+						href="API/PacksController.html#method-i-find">#find						<span class="method-parent">[::PacksController]</span>
+						</a>
+					</li>
+									<li class="method"><a title="API::NewsController"
+						href="API/NewsController.html#method-i-find">#find						<span class="method-parent">[::NewsController]</span>
+						</a>
+					</li>
+									<li class="method"><a title="API::PlaylistsController"
+						href="API/PlaylistsController.html#method-i-find">#find						<span class="method-parent">[::PlaylistsController]</span>
+						</a>
+					</li>
+									<li class="method"><a title="API::TweetsController"
+						href="API/TweetsController.html#method-i-find">#find						<span class="method-parent">[::TweetsController]</span>
+						</a>
+					</li>
+									<li class="method"><a title="API::MusicsController"
+						href="API/MusicsController.html#method-i-find">#find						<span class="method-parent">[::MusicsController]</span>
+						</a>
+					</li>
+									<li class="method"><a title="API::BattlesController"
+						href="API/BattlesController.html#method-i-find">#find						<span class="method-parent">[::BattlesController]</span>
+						</a>
+					</li>
+									<li class="method"><a title="API::ConcertsController"
+						href="API/ConcertsController.html#method-i-find">#find						<span class="method-parent">[::ConcertsController]</span>
+						</a>
+					</li>
+									<li class="method"><a title="API::ListeningsController"
+						href="API/ListeningsController.html#method-i-find">#find						<span class="method-parent">[::ListeningsController]</span>
+						</a>
+					</li>
+									<li class="method"><a title="API"
+						href="API.html#method-i-get">#get						<span class="method-parent">[API]</span>
+						</a>
+					</li>
+									<li class="method"><a title="API::ListeningsController"
+						href="API/ListeningsController.html#method-i-index">#index						<span class="method-parent">[::ListeningsController]</span>
+						</a>
+					</li>
+									<li class="method"><a title="API::UsersController"
+						href="API/UsersController.html#method-i-index">#index						<span class="method-parent">[::UsersController]</span>
+						</a>
+					</li>
+									<li class="method"><a title="API::AlbumsController"
+						href="API/AlbumsController.html#method-i-index">#index						<span class="method-parent">[::AlbumsController]</span>
+						</a>
+					</li>
+									<li class="method"><a title="API::TweetsController"
+						href="API/TweetsController.html#method-i-index">#index						<span class="method-parent">[::TweetsController]</span>
+						</a>
+					</li>
+									<li class="method"><a title="API::ConcertsController"
+						href="API/ConcertsController.html#method-i-index">#index						<span class="method-parent">[::ConcertsController]</span>
+						</a>
+					</li>
+									<li class="method"><a title="API::PacksController"
+						href="API/PacksController.html#method-i-index">#index						<span class="method-parent">[::PacksController]</span>
+						</a>
+					</li>
+									<li class="method"><a title="API::NewsController"
+						href="API/NewsController.html#method-i-index">#index						<span class="method-parent">[::NewsController]</span>
+						</a>
+					</li>
+									<li class="method"><a title="API::BattlesController"
+						href="API/BattlesController.html#method-i-index">#index						<span class="method-parent">[::BattlesController]</span>
+						</a>
+					</li>
+									<li class="method"><a title="API::MusicsController"
+						href="API/MusicsController.html#method-i-index">#index						<span class="method-parent">[::MusicsController]</span>
+						</a>
+					</li>
+									<li class="method"><a title="API::ApisecurityController"
+						href="API/ApisecurityController.html#method-i-provideKey">#provideKey						<span class="method-parent">[::ApisecurityController]</span>
+						</a>
+					</li>
+									<li class="method"><a title="API::ApisecurityController"
+						href="API/ApisecurityController.html#method-i-sendJson">#sendJson						<span class="method-parent">[::ApisecurityController]</span>
+						</a>
+					</li>
+									<li class="method"><a title="API::ApiController"
+						href="API/ApiController.html#method-i-setParamToObj">#setParamToObj						<span class="method-parent">[::ApiController]</span>
+						</a>
+					</li>
+									<li class="method"><a title="API::AlbumsController"
+						href="API/AlbumsController.html#method-i-show">#show						<span class="method-parent">[::AlbumsController]</span>
+						</a>
+					</li>
+									<li class="method"><a title="API::MusicsController"
+						href="API/MusicsController.html#method-i-show">#show						<span class="method-parent">[::MusicsController]</span>
+						</a>
+					</li>
+									<li class="method"><a title="API::PacksController"
+						href="API/PacksController.html#method-i-show">#show						<span class="method-parent">[::PacksController]</span>
+						</a>
+					</li>
+									<li class="method"><a title="API::NewsController"
+						href="API/NewsController.html#method-i-show">#show						<span class="method-parent">[::NewsController]</span>
+						</a>
+					</li>
+									<li class="method"><a title="API::PlaylistsController"
+						href="API/PlaylistsController.html#method-i-show">#show						<span class="method-parent">[::PlaylistsController]</span>
+						</a>
+					</li>
+									<li class="method"><a title="API::BattlesController"
+						href="API/BattlesController.html#method-i-show">#show						<span class="method-parent">[::BattlesController]</span>
+						</a>
+					</li>
+									<li class="method"><a title="API::SuggestionsController"
+						href="API/SuggestionsController.html#method-i-show">#show						<span class="method-parent">[::SuggestionsController]</span>
+						</a>
+					</li>
+									<li class="method"><a title="API::MessagesController"
+						href="API/MessagesController.html#method-i-show">#show						<span class="method-parent">[::MessagesController]</span>
+						</a>
+					</li>
+									<li class="method"><a title="API::TweetsController"
+						href="API/TweetsController.html#method-i-show">#show						<span class="method-parent">[::TweetsController]</span>
+						</a>
+					</li>
+									<li class="method"><a title="API::ConcertsController"
+						href="API/ConcertsController.html#method-i-show">#show						<span class="method-parent">[::ConcertsController]</span>
+						</a>
+					</li>
+									<li class="method"><a title="API::ListeningsController"
+						href="API/ListeningsController.html#method-i-show">#show						<span class="method-parent">[::ListeningsController]</span>
+						</a>
+					</li>
+									<li class="method"><a title="API::UsersController"
+						href="API/UsersController.html#method-i-show">#show						<span class="method-parent">[::UsersController]</span>
+						</a>
+					</li>
+									<li class="method"><a title="API::NotificationsController"
+						href="API/NotificationsController.html#method-i-show">#show						<span class="method-parent">[::NotificationsController]</span>
+						</a>
+					</li>
+								</ul>
+			</div>
 
-    <div id="classindex-section" class="nav-section">
-  <h3>Class and Module Index</h3>
+			<div class="span4">
+				<ul id="file-index" class="nav nav-list">
+					<li class="nav-header">Files</li>
+								</ul>
+			</div>
 
-  <ul class="link-list">
-  
-    <li><a href="./API.html">API</a>
-  
-    <li><a href="./API/AlbumsController.html">API::AlbumsController</a>
-  
-    <li><a href="./API/ApiController.html">API::ApiController</a>
-  
-    <li><a href="./API/ApisecurityController.html">API::ApisecurityController</a>
-  
-    <li><a href="./API/BattlesController.html">API::BattlesController</a>
-  
-    <li><a href="./API/CartsController.html">API::CartsController</a>
-  
-    <li><a href="./API/ConcertsController.html">API::ConcertsController</a>
-  
-    <li><a href="./API/GiftsController.html">API::GiftsController</a>
-  
-    <li><a href="./API/ListeningsController.html">API::ListeningsController</a>
-  
-    <li><a href="./API/MessagesController.html">API::MessagesController</a>
-  
-    <li><a href="./API/MusicsController.html">API::MusicsController</a>
-  
-    <li><a href="./API/NewsController.html">API::NewsController</a>
-  
-    <li><a href="./API/NotificationsController.html">API::NotificationsController</a>
-  
-    <li><a href="./API/PacksController.html">API::PacksController</a>
-  
-    <li><a href="./API/PlaylistsController.html">API::PlaylistsController</a>
-  
-    <li><a href="./API/PurchasesController.html">API::PurchasesController</a>
-  
-    <li><a href="./API/SearchsController.html">API::SearchsController</a>
-  
-    <li><a href="./API/SuggestionsController.html">API::SuggestionsController</a>
-  
-    <li><a href="./API/TweetsController.html">API::TweetsController</a>
-  
-    <li><a href="./API/UsersController.html">API::UsersController</a>
-  
-    <li><a href="./Access.html">Access</a>
-  
-    <li><a href="./AccessesController.html">AccessesController</a>
-  
-    <li><a href="./AccessesHelper.html">AccessesHelper</a>
-  
-    <li><a href="./Address.html">Address</a>
-  
-    <li><a href="./AddressesController.html">AddressesController</a>
-  
-    <li><a href="./AddressesHelper.html">AddressesHelper</a>
-  
-    <li><a href="./AdminUser.html">AdminUser</a>
-  
-    <li><a href="./Album.html">Album</a>
-  
-    <li><a href="./AlbumNote.html">AlbumNote</a>
-  
-    <li><a href="./AlbumNotesController.html">AlbumNotesController</a>
-  
-    <li><a href="./AlbumNotesHelper.html">AlbumNotesHelper</a>
-  
-    <li><a href="./AlbumsController.html">AlbumsController</a>
-  
-    <li><a href="./AlbumsHelper.html">AlbumsHelper</a>
-  
-    <li><a href="./ApplicationController.html">ApplicationController</a>
-  
-    <li><a href="./ApplicationHelper.html">ApplicationHelper</a>
-  
-    <li><a href="./Attachment.html">Attachment</a>
-  
-    <li><a href="./AttachmentsController.html">AttachmentsController</a>
-  
-    <li><a href="./AttachmentsHelper.html">AttachmentsHelper</a>
-  
-    <li><a href="./Battle.html">Battle</a>
-  
-    <li><a href="./BattlesController.html">BattlesController</a>
-  
-    <li><a href="./BattlesHelper.html">BattlesHelper</a>
-  
-    <li><a href="./Cart.html">Cart</a>
-  
-    <li><a href="./CartsController.html">CartsController</a>
-  
-    <li><a href="./CartsHelper.html">CartsHelper</a>
-  
-    <li><a href="./CommentariesController.html">CommentariesController</a>
-  
-    <li><a href="./CommentariesHelper.html">CommentariesHelper</a>
-  
-    <li><a href="./Commentary.html">Commentary</a>
-  
-    <li><a href="./Concert.html">Concert</a>
-  
-    <li><a href="./ConcertsController.html">ConcertsController</a>
-  
-    <li><a href="./ConcertsHelper.html">ConcertsHelper</a>
-  
-    <li><a href="./Description.html">Description</a>
-  
-    <li><a href="./DescriptionsController.html">DescriptionsController</a>
-  
-    <li><a href="./DescriptionsHelper.html">DescriptionsHelper</a>
-  
-    <li><a href="./Flac.html">Flac</a>
-  
-    <li><a href="./FlacsController.html">FlacsController</a>
-  
-    <li><a href="./FlacsHelper.html">FlacsHelper</a>
-  
-    <li><a href="./Genre.html">Genre</a>
-  
-    <li><a href="./GenresController.html">GenresController</a>
-  
-    <li><a href="./GenresHelper.html">GenresHelper</a>
-  
-    <li><a href="./Gift.html">Gift</a>
-  
-    <li><a href="./GiftsController.html">GiftsController</a>
-  
-    <li><a href="./GiftsHelper.html">GiftsHelper</a>
-  
-    <li><a href="./Group.html">Group</a>
-  
-    <li><a href="./GroupsController.html">GroupsController</a>
-  
-    <li><a href="./GroupsHelper.html">GroupsHelper</a>
-  
-    <li><a href="./Influence.html">Influence</a>
-  
-    <li><a href="./InfluencesController.html">InfluencesController</a>
-  
-    <li><a href="./InfluencesHelper.html">InfluencesHelper</a>
-  
-    <li><a href="./Listening.html">Listening</a>
-  
-    <li><a href="./ListeningsController.html">ListeningsController</a>
-  
-    <li><a href="./ListeningsHelper.html">ListeningsHelper</a>
-  
-    <li><a href="./Message.html">Message</a>
-  
-    <li><a href="./MessagesController.html">MessagesController</a>
-  
-    <li><a href="./MessagesHelper.html">MessagesHelper</a>
-  
-    <li><a href="./Music.html">Music</a>
-  
-    <li><a href="./MusicNote.html">MusicNote</a>
-  
-    <li><a href="./MusicNotesController.html">MusicNotesController</a>
-  
-    <li><a href="./MusicNotesHelper.html">MusicNotesHelper</a>
-  
-    <li><a href="./MusicsController.html">MusicsController</a>
-  
-    <li><a href="./MusicsHelper.html">MusicsHelper</a>
-  
-    <li><a href="./News.html">News</a>
-  
-    <li><a href="./NewsController.html">NewsController</a>
-  
-    <li><a href="./NewsHelper.html">NewsHelper</a>
-  
-    <li><a href="./Newstext.html">Newstext</a>
-  
-    <li><a href="./NewstextsController.html">NewstextsController</a>
-  
-    <li><a href="./NewstextsHelper.html">NewstextsHelper</a>
-  
-    <li><a href="./Notification.html">Notification</a>
-  
-    <li><a href="./NotificationsController.html">NotificationsController</a>
-  
-    <li><a href="./NotificationsHelper.html">NotificationsHelper</a>
-  
-    <li><a href="./Pack.html">Pack</a>
-  
-    <li><a href="./PacksController.html">PacksController</a>
-  
-    <li><a href="./PacksHelper.html">PacksHelper</a>
-  
-    <li><a href="./Playlist.html">Playlist</a>
-  
-    <li><a href="./PlaylistsController.html">PlaylistsController</a>
-  
-    <li><a href="./PlaylistsHelper.html">PlaylistsHelper</a>
-  
-    <li><a href="./Proposition.html">Proposition</a>
-  
-    <li><a href="./PropositionsController.html">PropositionsController</a>
-  
-    <li><a href="./PropositionsHelper.html">PropositionsHelper</a>
-  
-    <li><a href="./Purchase.html">Purchase</a>
-  
-    <li><a href="./PurchasesController.html">PurchasesController</a>
-  
-    <li><a href="./PurchasesHelper.html">PurchasesHelper</a>
-  
-    <li><a href="./Tag.html">Tag</a>
-  
-    <li><a href="./TagsController.html">TagsController</a>
-  
-    <li><a href="./TagsHelper.html">TagsHelper</a>
-  
-    <li><a href="./Tweet.html">Tweet</a>
-  
-    <li><a href="./TweetsController.html">TweetsController</a>
-  
-    <li><a href="./TweetsHelper.html">TweetsHelper</a>
-  
-    <li><a href="./User.html">User</a>
-  
-    <li><a href="./UsersController.html">UsersController</a>
-  
-    <li><a href="./UsersHelper.html">UsersHelper</a>
-  
-    <li><a href="./Vote.html">Vote</a>
-  
-    <li><a href="./VotesController.html">VotesController</a>
-  
-    <li><a href="./VotesHelper.html">VotesHelper</a>
-  
-  </ul>
-</div>
+		</section>
 
-  </div>
-</nav>
+		<hr>
 
-<main role="main">
-<p>This is the API documentation for RDoc Documentation.
-</main>
+		<footer>
+			<div class="container">
+				<span id="rdoc-version">Generated by RDoc 4.1.1</span> using the
+				<a id="generator-version"
+					href="http://deveiate.org/fivefish">Fivefish RDoc 0.1.0</a> generator.
+			</div>
+		</footer>
+	</div> <!-- /container -->
 
+	<!-- Class dropdown menu -->
+	<div id="class-dropdown" class="dropdown-menu has-scroll">
+	<ul>
+			<li><a href="./API/AlbumsController.html">API::AlbumsController</a></li>
+			<li><a href="./API/ApisecurityController.html">API::ApisecurityController</a></li>
+			<li><a href="./API/BattlesController.html">API::BattlesController</a></li>
+			<li><a href="./API/ConcertsController.html">API::ConcertsController</a></li>
+			<li><a href="./API/ListeningsController.html">API::ListeningsController</a></li>
+			<li><a href="./API/MessagesController.html">API::MessagesController</a></li>
+			<li><a href="./API/MusicsController.html">API::MusicsController</a></li>
+			<li><a href="./API/NewsController.html">API::NewsController</a></li>
+			<li><a href="./API/NotificationsController.html">API::NotificationsController</a></li>
+			<li><a href="./API/PacksController.html">API::PacksController</a></li>
+			<li><a href="./API/PlaylistsController.html">API::PlaylistsController</a></li>
+			<li><a href="./API/SuggestionsController.html">API::SuggestionsController</a></li>
+			<li><a href="./API/TweetsController.html">API::TweetsController</a></li>
+			<li><a href="./API/UsersController.html">API::UsersController</a></li>
+		</ul>
+	</div>
 
+	<!-- File dropdown menu -->
+	<div id="file-dropdown" class="dropdown-menu has-scroll">
+	<ul>
+		</ul>
+	</div>
 
-<footer id="validator-badges" role="contentinfo">
-  <p><a href="http://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="http://rdoc.rubyforge.org">RDoc</a> 4.1.1.
-  <p>Based on <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
-</footer>
-
+</body>
+</html>

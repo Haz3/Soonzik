@@ -1,26 +1,26 @@
 class CreateUsers < ActiveRecord::Migration
   def change
     create_table :users do |t|
-      t.string :email
-      t.string :password
-      t.string :salt
-      t.string :fname, :null => false
-      t.string :lname, :null => false
-      t.string :username
-      t.date :birthday
-      t.string :image
-      t.text :description, :null => false
-      t.string :phoneNumber, :null => false
-      t.integer :adress_id, :null => false
-      t.string :facebook, :null => false
-      t.string :twitter, :null => false
-      t.string :googlePlus, :null => false
-      t.datetime :signin
-      t.string :idAPI
-      t.string :secureKey
-      t.boolean :activated
-      t.boolean :newsletter
-      t.string :language
+      t.string :email, :null => false
+      t.string :password, :null => false
+      t.string :salt, :null => false
+      t.string :fname
+      t.string :lname
+      t.string :username, :null => false
+      t.date :birthday, :null => false
+      t.string :image, :null => false
+      t.text :description
+      t.string :phoneNumber
+      t.integer :adress_id
+      t.string :facebook
+      t.string :twitter
+      t.string :googlePlus
+      t.datetime :signin, :null => false
+      t.string :idAPI, :null => false
+      t.string :secureKey, :null => false
+      t.boolean :activated, :null => false
+      t.boolean :newsletter, :null => false
+      t.string :language, :null => false
 
       t.timestamps
     end

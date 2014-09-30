@@ -4,7 +4,6 @@
   %tr
     %th Author
     %th Content
-    %th Create at
     %th
     %th
     %th
@@ -13,7 +12,6 @@
     %tr
       %td= commentary.author_id
       %td= commentary.content
-      %td= commentary.create_at
       %td= link_to 'Show', commentary
       %td= link_to 'Edit', edit_commentary_path(commentary)
       %td= link_to 'Destroy', commentary, :method => :delete, :data => { :confirm => 'Are you sure?' }
