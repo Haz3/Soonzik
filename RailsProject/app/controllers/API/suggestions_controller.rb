@@ -2,7 +2,7 @@ module API
   # Controller which manage the transaction for the Suggestions objects
   # Here is the list of action available :
   #
-  # * show        [get]
+  # * show        [get] - SECURE
   #
   class SuggestionsController < ApisecurityController
   	# Give a specific object by its id

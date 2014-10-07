@@ -43,7 +43,7 @@ module API
       sendJson
     end
 
-    # Give a part of the tweet depending of the filter passed into parameter
+    # Give a part of the tweets depending of the filter passed into parameter
     #
     # ==== Options
     # 
@@ -56,7 +56,7 @@ module API
     # 
     # ==== Example
     #
-    #     http://api.soonzik.com/tweet/find?attribute[user_id]=1&order_by_desc[]=user_id&group_by[]=user_id
+    #     http://api.soonzik.com/tweets/find?attribute[user_id]=1&order_by_desc[]=user_id&group_by[]=user_id
     #     Note : By default, if you precise no attribute, it will take every row
     #
     def find
@@ -131,6 +131,27 @@ module API
           codeAnswer 200
         end
 
+      rescue
+        codeAnswer 504
+      end
+      sendJson
+    end
+
+    # Destroy a specific object by its id
+    #
+    # ==== Options
+    # 
+    # * +:id+ - The id of the specific tweet
+    # 
+    def destroy
+      begin
+        if (@security)
+          object = Tweet.find_by_id(@id);
+          object.destroy
+          codeAnswer 202
+        else
+          codeAnswer 500
+        end
       rescue
         codeAnswer 504
       end

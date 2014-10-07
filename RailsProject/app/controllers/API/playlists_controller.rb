@@ -126,5 +126,26 @@ module API
       end
       sendJson
     end
+
+    # Destroy a specific object by its id
+    #
+    # ==== Options
+    # 
+    # * +:id+ - The id of the specific playlist
+    # 
+    def destroy
+      begin
+        if (@security)
+          object = Playlist.find_by_id(@id);
+          object.destroy
+          codeAnswer 202
+        else
+          codeAnswer 500
+        end
+      rescue
+        codeAnswer 504
+      end
+      sendJson
+    end
   end
 end

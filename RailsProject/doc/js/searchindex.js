@@ -33,7 +33,7 @@ var SearchIndex =
 	{
 		"name": "API::CartsController",
 		"link": "API/CartsController.html",
-		"snippet": "",
+		"snippet": "<p>Controller which manage the transaction for the Carts objects Here is the\nlist of action available : …\n",
 		"type": "normalclass"
 	},
 	{
@@ -205,6 +205,18 @@ var SearchIndex =
 		"type": "anymethod"
 	},
 	{
+		"name": "destroy",
+		"link": "API/CartsController.html#method-i-destroy",
+		"snippet": "<p>Destroy a specific object by its id\n<p>Options\n<p><code>:id</code> - The id of the specific cart\n",
+		"type": "anymethod"
+	},
+	{
+		"name": "find",
+		"link": "API/CartsController.html#method-i-find",
+		"snippet": "<p>Give a part of the carts depending of the filter passed into parameter\n<p>Options\n<p>+:attribute+ - If you want …\n",
+		"type": "anymethod"
+	},
+	{
 		"name": "index",
 		"link": "API/ConcertsController.html#method-i-index",
 		"snippet": "<p>Retrieve all the concerts\n",
@@ -244,6 +256,12 @@ var SearchIndex =
 		"name": "show",
 		"link": "API/MessagesController.html#method-i-show",
 		"snippet": "<p>Give a specific object by its id\n<p>Options\n<p><code>:id</code> - The id of the specific message\n",
+		"type": "anymethod"
+	},
+	{
+		"name": "find",
+		"link": "API/MessagesController.html#method-i-find",
+		"snippet": "<p>Give a part of the messages depending of the filter passed into parameter\n<p>Options\n<p>+:attribute+ - If you …\n",
 		"type": "anymethod"
 	},
 	{
@@ -301,6 +319,18 @@ var SearchIndex =
 		"type": "anymethod"
 	},
 	{
+		"name": "find",
+		"link": "API/NotificationsController.html#method-i-find",
+		"snippet": "<p>Give a part of the notifications depending of the filter passed into\nparameter\n<p>Options\n<p>+:attribute+ -  …\n",
+		"type": "anymethod"
+	},
+	{
+		"name": "destroy",
+		"link": "API/NotificationsController.html#method-i-destroy",
+		"snippet": "<p>Destroy a specific object by its id\n<p>Options\n<p><code>:id</code> - The id of the specific notification\n",
+		"type": "anymethod"
+	},
+	{
 		"name": "index",
 		"link": "API/PacksController.html#method-i-index",
 		"snippet": "<p>Retrieve all the packs\n",
@@ -331,6 +361,12 @@ var SearchIndex =
 		"type": "anymethod"
 	},
 	{
+		"name": "destroy",
+		"link": "API/PlaylistsController.html#method-i-destroy",
+		"snippet": "<p>Destroy a specific object by its id\n<p>Options\n<p><code>:id</code> - The id of the specific playlist\n",
+		"type": "anymethod"
+	},
+	{
 		"name": "show",
 		"link": "API/SuggestionsController.html#method-i-show",
 		"snippet": "<p>Give a specific object by its id\n<p>Options\n<p><code>:id</code> - The id of the specific suggestion\n",
@@ -351,7 +387,13 @@ var SearchIndex =
 	{
 		"name": "find",
 		"link": "API/TweetsController.html#method-i-find",
-		"snippet": "<p>Give a part of the tweet depending of the filter passed into parameter\n<p>Options\n<p>+:attribute+ - If you want …\n",
+		"snippet": "<p>Give a part of the tweets depending of the filter passed into parameter\n<p>Options\n<p>+:attribute+ - If you want …\n",
+		"type": "anymethod"
+	},
+	{
+		"name": "destroy",
+		"link": "API/TweetsController.html#method-i-destroy",
+		"snippet": "<p>Destroy a specific object by its id\n<p>Options\n<p><code>:id</code> - The id of the specific tweet\n",
 		"type": "anymethod"
 	},
 	{
