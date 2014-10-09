@@ -11,6 +11,7 @@
 #import "FirstLaunchViewController.h"
 #import "ConnexionViewController.h"
 #import "HomeViewController.h"
+#import "MenuViewController.h"
 
 @implementation AppDelegate
 
@@ -29,7 +30,7 @@
     
     UIViewController *vc;
     
-    if ([self.prefs integerForKey:@"isNotTheFirstUse"] == 0) {
+   /* if ([self.prefs integerForKey:@"isNotTheFirstUse"] == 0) {
         NSLog(@"It's the first use");
         [self.prefs setInteger:1 forKey:@"isNotTheFirstUse"];
         [self.prefs setInteger:0 forKey:@"autoLogin"];
@@ -42,16 +43,19 @@
     } else {
         NSLog(@"It's not the first use");
         vc = [[ConnexionViewController alloc] initWithNibName:@"ConnexionViewController" bundle:nil];
-    }
+    } */
     
+    vc = [[HomeViewController alloc] initWithNibName:@"HomeViewController" bundle:nil];
+    //MenuViewController *mainVC = [[MenuViewController alloc] init];
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
-    [self.window setRootViewController:nav];
-    
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+
+    self.window.rootViewController = nav;
     [self.window makeKeyAndVisible];
-    
+
     return YES;
 }
-							
+
 - (void)applicationWillResignActive:(UIApplication *)application
 {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
