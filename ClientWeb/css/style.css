@@ -131,6 +131,9 @@ li .char {
     margin: 0px 0px;
 }
 
+ul li { display: block; list-style: none; }
+
+
 ul {
     padding: 0;
     margin: 0;
@@ -162,11 +165,77 @@ header * {
     vertical-align: top;
 }
 
-.breaking-news {
-    width: 700px;
-    height: 100%;
-    background-color: black;
+.main-div {
+
 }
+            
+#mainarticles { clear: both; overflow: hidden; margin-top: 100px; margin-left: 160px;}
+#mainarticles li { float: left; display: inline; width: 160px; margin-right: 16px; padding: 9px 9px 0; color: #000; background: #fff url('../images/mainarticle-corner.gif') 0 0 no-repeat; }
+#mainarticles li.last { margin-right: 0; }
+#mainarticles li .imgwrap { float: none; }
+#mainarticles li h2 { overflow: hidden; height: 60px; padding: 10px 5px; line-height: 20px; text-transform: uppercase; font-size: 90%; }
+#mainarticles li h2 a { overflow: hidden; text-decoration: none; color: #000; }
+#mainarticles li .readmore { margin: 0 -9px; padding: 0 16px 7px; font-size: 90%; background: url('../images/mainarticle-bottom.jpg') 0 100% no-repeat; }
+#mainarticles li .readmore a { /*padding-left: 16px;*/ text-decoration: none; color: #adadad; /*background: url('../images/ico-comment.gif') 0 .2em no-repeat;*/ }
+#mainarticles li .readmore a:hover, #mainarticles li .readmore a:focus, #mainarticles li .readmore a:active { text-decoration: underline; color: #000; }
+
+
+.imgPackOfTheWeek img {
+    position: relative;
+    overflow: hidden;
+    float: left;
+    width: 160px;
+    height: 160px;
+}
+    
+#mainarticles li h2 {
+    text-align: center;
+    overflow: hidden;
+    height: 65px;
+    padding: 10px 5px;
+    line-height: 15px;
+    font-size: 12px;
+    text-transform: uppercase;
+}
+
+/* LIST #8 */
+
+#list8 img {
+    width: 400px;
+    height: 400px;
+}
+
+#list8 {
+    margin-top: 80px;
+    float: left;
+    margin-left: 165px;
+    display: inline-block;
+}
+
+#list8 ul {
+    list-style:none;
+}
+
+#list8 ul li {
+    font-family:Georgia,serif,Times;
+    font-size:18px;
+}
+
+#list8 ul li a {
+    display:block;
+    width:300px;
+    height:28px;
+    background-color:#333;
+    border-left:5px solid #222;
+    border-right:5px solid #222;
+    padding-left:10px;
+    text-decoration:none;
+    color:#bfe1f1;
+}
+
+#list8 ul li a:hover {  -moz-transform:rotate(-5deg); -moz-box-shadow:10px 10px 20px #000000;
+  -webkit-transform:rotate(-5deg); -webkit-box-shadow:10px 10px 20px #000000;
+  transform:rotate(-5deg); box-shadow:10px 10px 20px #000000; }
 
 aside {
     position: fixed;
