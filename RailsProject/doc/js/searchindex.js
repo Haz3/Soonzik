@@ -121,18 +121,6 @@ var SearchIndex =
 		"type": "normalclass"
 	},
 	{
-		"name": "get",
-		"link": "API.html#method-i-get",
-		"snippet": "<p>To get the mp3. It cuts the file depending the rights\n<p>NOT FINISHED, NEED TO MODIFY THE OPEN FUNCTION  … &mdash; ",
-		"type": "anymethod"
-	},
-	{
-		"name": "addtoplaylist",
-		"link": "API.html#method-i-addtoplaylist",
-		"snippet": "<p>To add a specific music to a playlist\n<p>Options\n<p><code>:id</code> - The id of the music where is the comment\n",
-		"type": "anymethod"
-	},
-	{
 		"name": "index",
 		"link": "API/AlbumsController.html#method-i-index",
 		"snippet": "<p>Retrieve all the albums\n",
@@ -316,6 +304,18 @@ var SearchIndex =
 		"name": "addcomment",
 		"link": "API/MusicsController.html#method-i-addcomment",
 		"snippet": "<p>Add a comment to a specific music. Need to be a secure transaction.\n<p>Options\n<p><code>:security</code> - If it&#39;s a secure …\n",
+		"type": "anymethod"
+	},
+	{
+		"name": "get",
+		"link": "API/MusicsController.html#method-i-get",
+		"snippet": "<p>To get the mp3. It cuts the file depending the rights\n<p>NOT FINISHED, NEED TO MODIFY THE OPEN FUNCTION  … &mdash; ",
+		"type": "anymethod"
+	},
+	{
+		"name": "addtoplaylist",
+		"link": "API/MusicsController.html#method-i-addtoplaylist",
+		"snippet": "<p>To add a specific music to a playlist\n<p>Options\n<p><code>:id</code> - The id of the music where is the comment\n",
 		"type": "anymethod"
 	},
 	{
