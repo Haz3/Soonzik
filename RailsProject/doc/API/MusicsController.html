@@ -119,9 +119,11 @@ list of action available :</p>
 </li><li>
 <p>find        [get]</p>
 </li><li>
-<p>addcomment  [post]</p>
+<p>addcomment  [post] - SECURITY</p>
 </li><li>
 <p>get         [get]</p>
+</li><li>
+<p>addtoplaylist [post] - SECURITY</p>
 </li></ul>
 		</section>
 
@@ -166,7 +168,7 @@ from ApiSecurity (the parent) is true</p>
 </li></ul>					
 											<div class="method-source-code" id="addcomment-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/musics_controller.rb, line 152</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/musics_controller.rb, line 153</span>
   <span class="ruby-keyword">def</span> <span class="ruby-identifier">addcomment</span>
 <span class="ruby-keyword">begin</span>
   <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@security</span>)
@@ -187,6 +189,8 @@ from ApiSecurity (the parent) is true</p>
     <span class="ruby-keyword">else</span>
       <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">503</span>
     <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">500</span>
   <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">rescue</span>
   <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">504</span>
@@ -232,7 +236,7 @@ specific value</p>
 Note : By default, if you precise no attribute, it will take every row</pre>					
 											<div class="method-source-code" id="find-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/musics_controller.rb, line 66</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/musics_controller.rb, line 67</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">find</span>
   <span class="ruby-keyword">begin</span>
     <span class="ruby-keyword">if</span> (<span class="ruby-keyword">defined?</span><span class="ruby-ivar">@attribute</span>)
@@ -328,7 +332,7 @@ Note : By default, if you precise no attribute, it will take every row</pre>
 											<p>Retrieve all the musics</p>					
 											<div class="method-source-code" id="index-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/musics_controller.rb, line 15</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/musics_controller.rb, line 16</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">index</span>
   <span class="ruby-keyword">begin</span>
     <span class="ruby-ivar">@returnValue</span> = { <span class="ruby-identifier">content</span><span class="ruby-operator">:</span> <span class="ruby-constant">Music</span>.<span class="ruby-identifier">all</span>.<span class="ruby-identifier">as_json</span> }
@@ -365,7 +369,7 @@ Note : By default, if you precise no attribute, it will take every row</pre>
 </li></ul>					
 											<div class="method-source-code" id="show-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/musics_controller.rb, line 35</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/musics_controller.rb, line 36</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">show</span>
   <span class="ruby-keyword">begin</span>
     <span class="ruby-identifier">album</span> = <span class="ruby-constant">Music</span>.<span class="ruby-identifier">find_by_id</span>(<span class="ruby-ivar">@id</span>)
@@ -415,6 +419,7 @@ Note : By default, if you precise no attribute, it will take every row</pre>
 			<li><a href="../API/BattlesController.html">API::BattlesController</a></li>
 			<li><a href="../API/CartsController.html">API::CartsController</a></li>
 			<li><a href="../API/ConcertsController.html">API::ConcertsController</a></li>
+			<li><a href="../API/GiftsController.html">API::GiftsController</a></li>
 			<li><a href="../API/ListeningsController.html">API::ListeningsController</a></li>
 			<li><a href="../API/MessagesController.html">API::MessagesController</a></li>
 			<li><a href="../API/MusicsController.html">API::MusicsController</a></li>
@@ -422,6 +427,7 @@ Note : By default, if you precise no attribute, it will take every row</pre>
 			<li><a href="../API/NotificationsController.html">API::NotificationsController</a></li>
 			<li><a href="../API/PacksController.html">API::PacksController</a></li>
 			<li><a href="../API/PlaylistsController.html">API::PlaylistsController</a></li>
+			<li><a href="../API/PurchasesController.html">API::PurchasesController</a></li>
 			<li><a href="../API/SuggestionsController.html">API::SuggestionsController</a></li>
 			<li><a href="../API/TweetsController.html">API::TweetsController</a></li>
 			<li><a href="../API/UsersController.html">API::UsersController</a></li>

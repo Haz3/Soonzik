@@ -3,7 +3,7 @@ module API
   # Here is the list of action available :
   #
   # * show        [get] - SECURE
-  # * save		    [post]
+  # * save		    [post] - SECURE
   # * find        [get] - SECURE
   #
   class MessagesController < ApisecurityController
@@ -29,6 +29,36 @@ module API
 	    else
 	    	codeAnswer 500
 	    end
+      rescue
+        codeAnswer 504
+      end
+      sendJson
+    end
+
+    # Save a new object Message. For more information on the parameters, check at the model
+    # 
+    # ==== Options
+    # 
+    # * +:message[user_id]+ - Id of the user who send the message
+    # * +:message[dest_id]+ - Id of the user who read the message
+    # * +:message[msg]+ - The text of the message
+    # 
+    def save
+      begin
+        if (@security)
+          msg = Message.new(@message)
+          if (msg.save)
+            @returnValue = { content: msg.as_json(:include => {
+                                    :sender => {},
+                                    :receiver => {}
+                                  }) }
+            codeAnswer 201
+          else
+            codeAnswer 503
+          end
+        else
+          codeAnswer 500
+        end
       rescue
         codeAnswer 504
       end

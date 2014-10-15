@@ -115,11 +115,11 @@ is the list of action available :</p>
 <ul><li>
 <p>show        [get] - SECURE</p>
 </li><li>
-<p>save                  [post]</p>
+<p>save                  [post] - SECURE</p>
 </li><li>
 <p>find        [get] - SECURE</p>
 </li><li>
-<p>destroy     [get]</p>
+<p>destroy     [get] - SECURE</p>
 </li></ul>
 		</section>
 
@@ -159,7 +159,7 @@ is the list of action available :</p>
 </li></ul>					
 											<div class="method-source-code" id="destroy-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/notifications_controller.rb, line 139</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/notifications_controller.rb, line 166</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">destroy</span>
   <span class="ruby-keyword">begin</span>
     <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@security</span>)
@@ -214,7 +214,7 @@ specific value</p>
 Note : By default, if you precise no attribute, it will take every row</pre>					
 											<div class="method-source-code" id="find-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/notifications_controller.rb, line 52</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/notifications_controller.rb, line 79</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">find</span>
   <span class="ruby-keyword">begin</span>
     <span class="ruby-keyword">if</span> (<span class="ruby-operator">!</span><span class="ruby-ivar">@security</span>)
@@ -300,6 +300,56 @@ Note : By default, if you precise no attribute, it will take every row</pre>
 
 					
 									</div>
+								<a name="method-i-save">anchor</a>
+				<div id="method-i-save-doc" class="method">
+
+					<header>
+											<i class="icon-generic"></i>
+						<span class="method-name">save</span><span 
+							class="method-args">()</span>
+										</header>
+
+					<div class="method-description">
+											<p>Save a new object Notification. For more information on the parameters,
+check at the model</p>
+
+<h4 id="method-i-save-label-Options">Options<span><a href="#method-i-save-label-Options">&para;</a> <a href="#documentation">&uarr;</a></span></h4>
+<ul><li>
+<p>+:<a href="user_id">notification</a>+ - Id of the user who has the
+notification</p>
+</li><li>
+<p>+:<a href="link">notification</a>+ - The link where the notification
+redirect without the <a href="http://dns.com">dns.com</a> (to be usefull by
+the smartphone applications)</p>
+</li><li>
+<p>+:<a href="description">notification</a>+ - The text of the notification</p>
+</li></ul>					
+											<div class="method-source-code" id="save-source">
+							<pre class="prettyprint linenums"><code 
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/notifications_controller.rb, line 44</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">save</span>
+  <span class="ruby-keyword">begin</span>
+    <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@security</span>)
+      <span class="ruby-identifier">notif</span> = <span class="ruby-constant">Notification</span>.<span class="ruby-identifier">new</span>(<span class="ruby-ivar">@notification</span>)
+      <span class="ruby-keyword">if</span> (<span class="ruby-identifier">notif</span>.<span class="ruby-identifier">save</span>)
+        <span class="ruby-ivar">@returnValue</span> = { <span class="ruby-identifier">content</span><span class="ruby-operator">:</span> <span class="ruby-identifier">notif</span>.<span class="ruby-identifier">as_json</span>(<span class="ruby-value">:include</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">:user</span>) }
+        <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">201</span>
+      <span class="ruby-keyword">else</span>
+        <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">503</span>
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">500</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">rescue</span>
+    <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">504</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">sendJson</span>
+<span class="ruby-keyword">end</span></code></pre>
+						</div>
+										</div>
+
+					
+									</div>
 								<a name="method-i-show">anchor</a>
 				<div id="method-i-show-doc" class="method">
 
@@ -372,6 +422,7 @@ Note : By default, if you precise no attribute, it will take every row</pre>
 			<li><a href="../API/BattlesController.html">API::BattlesController</a></li>
 			<li><a href="../API/CartsController.html">API::CartsController</a></li>
 			<li><a href="../API/ConcertsController.html">API::ConcertsController</a></li>
+			<li><a href="../API/GiftsController.html">API::GiftsController</a></li>
 			<li><a href="../API/ListeningsController.html">API::ListeningsController</a></li>
 			<li><a href="../API/MessagesController.html">API::MessagesController</a></li>
 			<li><a href="../API/MusicsController.html">API::MusicsController</a></li>
@@ -379,6 +430,7 @@ Note : By default, if you precise no attribute, it will take every row</pre>
 			<li><a href="../API/NotificationsController.html">API::NotificationsController</a></li>
 			<li><a href="../API/PacksController.html">API::PacksController</a></li>
 			<li><a href="../API/PlaylistsController.html">API::PlaylistsController</a></li>
+			<li><a href="../API/PurchasesController.html">API::PurchasesController</a></li>
 			<li><a href="../API/SuggestionsController.html">API::SuggestionsController</a></li>
 			<li><a href="../API/TweetsController.html">API::TweetsController</a></li>
 			<li><a href="../API/UsersController.html">API::UsersController</a></li>

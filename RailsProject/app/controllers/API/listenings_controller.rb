@@ -5,6 +5,7 @@ module API
   # * index       [get]
   # * show        [get]
   # * find        [get]
+  # * save        [post] - SECURITY
   #
   class ListeningsController < ApisecurityController
   	# Retrieve all the listenings
@@ -131,6 +132,31 @@ module API
           codeAnswer 200
         end
 
+      rescue
+        codeAnswer 504
+      end
+      sendJson
+    end
+
+    # Save a new object Listening. For more information on the parameters, check at the model
+    #
+    # ==== Options
+    # 
+    # * +:listening[music_id]+ - Id of the music listen
+    # * +:listening[latitude]+ - Position where the music has been listen
+    # * +:listening[longitude]+ - Position where the music has been listen
+    # * +:listening[when]+ - When the music has been listen
+    # 
+    def save
+      begin
+        if (@security)
+          @listening[:user_id] = @user_id
+          listening = Listening.new(@listening)
+          if (listening.save)
+            @returnValue = { content: listening.as_json(:include => :user) }
+            codeAnswer 200
+          end
+        end
       rescue
         codeAnswer 504
       end

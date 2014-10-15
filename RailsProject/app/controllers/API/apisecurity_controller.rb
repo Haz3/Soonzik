@@ -19,6 +19,7 @@ module API
       @code[502] = {code: 502, message: "NotFound"}
       @code[503] = {code: 503, message: "NotCreated"}
       @code[504] = {code: 504, message: "Error"}
+      @code[505] = {code: 505, message: "UpdateError"}
     end
 
     # Provide a token relative to the user who asks
@@ -66,6 +67,8 @@ protected
           if (@secureKey == u.secureKey)
             @security = true
             u.regenerateKey
+          else
+            codeAnswer 501
           end
         rescue
         end

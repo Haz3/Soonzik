@@ -45,7 +45,7 @@ var SearchIndex =
 	{
 		"name": "API::GiftsController",
 		"link": "API/GiftsController.html",
-		"snippet": "",
+		"snippet": "<p>Controller which manage the transaction for the Gift objects Here is the\nlist of action available :\n<p>save …\n\n",
 		"type": "normalclass"
 	},
 	{
@@ -93,7 +93,7 @@ var SearchIndex =
 	{
 		"name": "API::PurchasesController",
 		"link": "API/PurchasesController.html",
-		"snippet": "",
+		"snippet": "<p>Controller which manage the transaction for the Purchase objects Here is\nthe list of action available …\n",
 		"type": "normalclass"
 	},
 	{
@@ -124,6 +124,12 @@ var SearchIndex =
 		"name": "get",
 		"link": "API.html#method-i-get",
 		"snippet": "<p>To get the mp3. It cuts the file depending the rights\n<p>NOT FINISHED, NEED TO MODIFY THE OPEN FUNCTION  … &mdash; ",
+		"type": "anymethod"
+	},
+	{
+		"name": "addtoplaylist",
+		"link": "API.html#method-i-addtoplaylist",
+		"snippet": "<p>To add a specific music to a playlist\n<p>Options\n<p><code>:id</code> - The id of the music where is the comment\n",
 		"type": "anymethod"
 	},
 	{
@@ -211,6 +217,12 @@ var SearchIndex =
 		"type": "anymethod"
 	},
 	{
+		"name": "save",
+		"link": "API/CartsController.html#method-i-save",
+		"snippet": "<p>Save a new object Cart. For more information on the parameters, check at\nthe model\n<p>Options\n<p>+:cart+ - Id …\n",
+		"type": "anymethod"
+	},
+	{
 		"name": "find",
 		"link": "API/CartsController.html#method-i-find",
 		"snippet": "<p>Give a part of the carts depending of the filter passed into parameter\n<p>Options\n<p>+:attribute+ - If you want …\n",
@@ -235,6 +247,12 @@ var SearchIndex =
 		"type": "anymethod"
 	},
 	{
+		"name": "save",
+		"link": "API/GiftsController.html#method-i-save",
+		"snippet": "<p>Save a new object Gift. For more information on the parameters, check at\nthe model\n<p>Options\n<p>+:gift+ - Id …\n",
+		"type": "anymethod"
+	},
+	{
 		"name": "index",
 		"link": "API/ListeningsController.html#method-i-index",
 		"snippet": "<p>Retrieve all the listenings\n",
@@ -253,9 +271,21 @@ var SearchIndex =
 		"type": "anymethod"
 	},
 	{
+		"name": "save",
+		"link": "API/ListeningsController.html#method-i-save",
+		"snippet": "<p>Save a new object Listening. For more information on the parameters, check\nat the model\n<p>Options\n<p>+:listening …\n",
+		"type": "anymethod"
+	},
+	{
 		"name": "show",
 		"link": "API/MessagesController.html#method-i-show",
 		"snippet": "<p>Give a specific object by its id\n<p>Options\n<p><code>:id</code> - The id of the specific message\n",
+		"type": "anymethod"
+	},
+	{
+		"name": "save",
+		"link": "API/MessagesController.html#method-i-save",
+		"snippet": "<p>Save a new object Message. For more information on the parameters, check at\nthe model\n<p>Options\n<p>+:message …\n",
 		"type": "anymethod"
 	},
 	{
@@ -319,6 +349,12 @@ var SearchIndex =
 		"type": "anymethod"
 	},
 	{
+		"name": "save",
+		"link": "API/NotificationsController.html#method-i-save",
+		"snippet": "<p>Save a new object Notification. For more information on the parameters,\ncheck at the model\n<p>Options\n<p>+:notification …\n",
+		"type": "anymethod"
+	},
+	{
 		"name": "find",
 		"link": "API/NotificationsController.html#method-i-find",
 		"snippet": "<p>Give a part of the notifications depending of the filter passed into\nparameter\n<p>Options\n<p>+:attribute+ -  …\n",
@@ -355,6 +391,18 @@ var SearchIndex =
 		"type": "anymethod"
 	},
 	{
+		"name": "save",
+		"link": "API/PlaylistsController.html#method-i-save",
+		"snippet": "<p>Save a new object Playlist. For more information on the parameters, check\nat the model\n<p>Options\n<p>+:playlist …\n",
+		"type": "anymethod"
+	},
+	{
+		"name": "update",
+		"link": "API/PlaylistsController.html#method-i-update",
+		"snippet": "<p>Save a new object Playlist. For more information on the parameters, check\nat the model\n<p>Options\n<p><code>:id</code> - Id …\n",
+		"type": "anymethod"
+	},
+	{
 		"name": "find",
 		"link": "API/PlaylistsController.html#method-i-find",
 		"snippet": "<p>Give a part of the playlist depending of the filter passed into parameter\n<p>Options\n<p>+:attribute+ - If you …\n",
@@ -364,6 +412,12 @@ var SearchIndex =
 		"name": "destroy",
 		"link": "API/PlaylistsController.html#method-i-destroy",
 		"snippet": "<p>Destroy a specific object by its id\n<p>Options\n<p><code>:id</code> - The id of the specific playlist\n",
+		"type": "anymethod"
+	},
+	{
+		"name": "save",
+		"link": "API/PurchasesController.html#method-i-save",
+		"snippet": "<p>Save a new object Purchase. For more information on the parameters, check\nat the model\n<p>Options\n<p>+:purchase …\n",
 		"type": "anymethod"
 	},
 	{
@@ -382,6 +436,12 @@ var SearchIndex =
 		"name": "show",
 		"link": "API/TweetsController.html#method-i-show",
 		"snippet": "<p>Give a specific object by its id\n<p>Options\n<p><code>:id</code> - The id of the specific tweets\n",
+		"type": "anymethod"
+	},
+	{
+		"name": "save",
+		"link": "API/TweetsController.html#method-i-save",
+		"snippet": "<p>Save a new object Tweet. For more information on the parameters, check at\nthe model\n<p>Options\n<p>+:tweet+ - …\n",
 		"type": "anymethod"
 	},
 	{
@@ -412,6 +472,24 @@ var SearchIndex =
 		"name": "find",
 		"link": "API/UsersController.html#method-i-find",
 		"snippet": "<p>Give a part of the albums depending of the filter passed into parameter\n<p>Options\n<p>+:attribute+ - If you want …\n",
+		"type": "anymethod"
+	},
+	{
+		"name": "getmusics",
+		"link": "API/UsersController.html#method-i-getmusics",
+		"snippet": "<p>To get all the musics buy by the user\n",
+		"type": "anymethod"
+	},
+	{
+		"name": "save",
+		"link": "API/UsersController.html#method-i-save",
+		"snippet": "<p>Save a new object User. For more information on the parameters, check at\nthe model\n<p>Options\n<p>+:user+ - Email …\n",
+		"type": "anymethod"
+	},
+	{
+		"name": "update",
+		"link": "API/UsersController.html#method-i-update",
+		"snippet": "<p>Update a specific object User. For more information on the parameters,\ncheck at the model. You need to …\n",
 		"type": "anymethod"
 	}
 ]

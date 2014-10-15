@@ -5,6 +5,7 @@ module API
   # * index       [get]
   # * show        [get]
   # * find        [get]
+  # * save        [post] - SECURE
   #
   class TweetsController < ApisecurityController
   	# Retrieve all the tweets
@@ -37,6 +38,32 @@ module API
         end
         @returnValue = { content: tweets.as_json(:include => :user) }
         codeAnswer 200
+      rescue
+        codeAnswer 504
+      end
+      sendJson
+    end
+
+    # Save a new object Tweet. For more information on the parameters, check at the model
+    # 
+    # ==== Options
+    # 
+    # * +:tweet[user_id]+ - Id of the user who has the tweet
+    # * +:tweet[description]+ - The text of the tweet
+    # 
+    def save
+      begin
+        if (@security)
+          tweet = Tweet.new(@tweet)
+          if (tweet.save)
+            @returnValue = { content: tweet.as_json(:include => :user) }
+            codeAnswer 201
+          else
+            codeAnswer 503
+          end
+        else
+          codeAnswer 500
+        end
       rescue
         codeAnswer 504
       end

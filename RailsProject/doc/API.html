@@ -126,6 +126,51 @@
 					<h3>Public Instance Methods</h3>
 				</header>
 
+								<a name="method-i-addtoplaylist">anchor</a>
+				<div id="method-i-addtoplaylist-doc" class="method">
+
+					<header>
+											<i class="icon-generic"></i>
+						<span class="method-name">addtoplaylist</span><span 
+							class="method-args">()</span>
+										</header>
+
+					<div class="method-description">
+											<p>To add a specific music to a playlist</p>
+
+<h4 id="method-i-addtoplaylist-label-Options">Options<span><a href="#method-i-addtoplaylist-label-Options">&para;</a> <a href="#documentation">&uarr;</a></span></h4>
+<ul><li>
+<p><code>:id</code> - The id of the music where is the comment</p>
+</li><li>
+<p><code>:playlist_id</code> - The id of the playlist where you want to add a
+music</p>
+</li></ul>					
+											<div class="method-source-code" id="addtoplaylist-source">
+							<pre class="prettyprint linenums"><code 
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/musics_controller.rb, line 229</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">addtoplaylist</span>
+  <span class="ruby-keyword">begin</span>
+    <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@security</span>)
+      <span class="ruby-identifier">playlist</span> = <span class="ruby-constant">Playlist</span>.<span class="ruby-identifier">find_by_id</span>(<span class="ruby-ivar">@playlist_id</span>)
+      <span class="ruby-identifier">music</span> = <span class="ruby-constant">Music</span>.<span class="ruby-identifier">find_by_id</span>(<span class="ruby-ivar">@id</span>)
+      <span class="ruby-keyword">if</span> (<span class="ruby-identifier">playlist</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">music</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">playlist</span>.<span class="ruby-identifier">user_id</span> <span class="ruby-operator">==</span> <span class="ruby-ivar">@user_id</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-ivar">@playlist</span>.<span class="ruby-identifier">musics</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">music</span>))
+        <span class="ruby-identifier">playlist</span>.<span class="ruby-identifier">musics</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">music</span>
+      <span class="ruby-keyword">else</span>
+        <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">502</span>
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">500</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">rescue</span>
+    <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">504</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">sendJson</span>
+<span class="ruby-keyword">end</span></code></pre>
+						</div>
+										</div>
+
+					
+									</div>
 								<a name="method-i-get">anchor</a>
 				<div id="method-i-get-doc" class="method">
 
@@ -151,7 +196,7 @@ from ApiSecurity (the parent) is true</p>
 </dd></dl>					
 											<div class="method-source-code" id="get-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/musics_controller.rb, line 189</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/musics_controller.rb, line 192</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">get</span>
   <span class="ruby-keyword">begin</span>
     <span class="ruby-identifier">music</span> = <span class="ruby-keyword">nil</span>
@@ -216,6 +261,7 @@ from ApiSecurity (the parent) is true</p>
 			<li><a href="./API/BattlesController.html">API::BattlesController</a></li>
 			<li><a href="./API/CartsController.html">API::CartsController</a></li>
 			<li><a href="./API/ConcertsController.html">API::ConcertsController</a></li>
+			<li><a href="./API/GiftsController.html">API::GiftsController</a></li>
 			<li><a href="./API/ListeningsController.html">API::ListeningsController</a></li>
 			<li><a href="./API/MessagesController.html">API::MessagesController</a></li>
 			<li><a href="./API/MusicsController.html">API::MusicsController</a></li>
@@ -223,6 +269,7 @@ from ApiSecurity (the parent) is true</p>
 			<li><a href="./API/NotificationsController.html">API::NotificationsController</a></li>
 			<li><a href="./API/PacksController.html">API::PacksController</a></li>
 			<li><a href="./API/PlaylistsController.html">API::PlaylistsController</a></li>
+			<li><a href="./API/PurchasesController.html">API::PurchasesController</a></li>
 			<li><a href="./API/SuggestionsController.html">API::SuggestionsController</a></li>
 			<li><a href="./API/TweetsController.html">API::TweetsController</a></li>
 			<li><a href="./API/UsersController.html">API::UsersController</a></li>

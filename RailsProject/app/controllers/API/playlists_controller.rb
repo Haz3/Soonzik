@@ -4,6 +4,8 @@ module API
   #
   # * show        [get]
   # * find        [get]
+  # * save        [post] - SECURITY
+  # * update      [post] - SECURITY
   #
   class PlaylistsController < ApisecurityController
   	# Give a specific object by its id
@@ -20,10 +22,76 @@ module API
           return
         end
         @returnValue = { content: playlist.as_json(:include => {
-        														:musics => {},
-        														:user => {}
+        														:musics => {}
         														}) }
         codeAnswer 200
+      rescue
+        codeAnswer 504
+      end
+      sendJson
+    end
+
+    # Save a new object Playlist. For more information on the parameters, check at the model
+    # 
+    # ==== Options
+    # 
+    # * +:playlist[user_id]+ - Id of the user who has the playlist
+    # * +:playlist[name]+ - Name of the playlist
+    # 
+    def save
+      begin
+        if (@security)
+          playlist = Playlist.new(@playlist)
+          if (playlist.save)
+            @returnValue = { content: playlist.as_json() }
+            codeAnswer 201
+          else
+            codeAnswer 503
+          end
+        else
+          codeAnswer 500
+        end
+      rescue
+        codeAnswer 504
+      end
+      sendJson
+    end
+
+    # Save a new object Playlist. For more information on the parameters, check at the model
+    # 
+    # ==== Options
+    # 
+    # * +:id+ - Id of the playlist to modify
+    # * +:playlist[name]+ - Name of the playlist
+    # * +:playlist[music][]+ - Array of the id of the music in the playlist
+    # 
+    def update
+      begin
+        if (@security)
+          playlist = Playlist.find_by_id(@id)
+          if (playlist != nil)
+            if (defined?(@playlist[:music]) && @playlist[:music].size > 0)
+              playlist.musics = []
+              @playlist[:music].each do |music_id|
+                music = Music.find_by_id(music_id)
+                playlist.musics << music if (music)
+              end
+            end
+            if (playlist.save)
+              @returnValue = { content: playlist.as_json(:include => {
+                                      :musics => {},
+                                      :user => {only: [:id, :username]}
+                                      }) }
+              codeAnswer 201
+            else
+              codeAnswer 505
+            end
+          else
+            codeAnswer 505
+          end
+        else
+          codeAnswer 500
+        end
       rescue
         codeAnswer 504
       end

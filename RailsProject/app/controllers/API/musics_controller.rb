@@ -5,8 +5,9 @@ module API
   # * index       [get]
   # * show        [get]
   # * find        [get]
-  # * addcomment  [post]
+  # * addcomment  [post] - SECURITY
   # * get         [get]
+  # * addtoplaylist [post] - SECURITY
   #
   class MusicsController < ApisecurityController
   	before_action :checkKey, only: [:addcomment, :get]
@@ -169,6 +170,8 @@ module API
           else
             codeAnswer 503
           end
+        else
+          codeAnswer 500
         end
       rescue
         codeAnswer 504
@@ -214,5 +217,31 @@ module API
     respond_to do |format|
       format.mp3 { render :mp3 => buffer, :content_type => 'audio/mpeg' }
     end
+  end
+
+  # To add a specific music to a playlist
+  #
+  # ==== Options
+  #
+  # * +:id+ - The id of the music where is the comment
+  # * +:playlist_id+ - The id of the playlist where you want to add a music
+  #
+  def addtoplaylist
+    begin
+      if (@security)
+        playlist = Playlist.find_by_id(@playlist_id)
+        music = Music.find_by_id(@id)
+        if (playlist && music && playlist.user_id == @user_id && !@playlist.musics.include?(music))
+          playlist.musics << music
+        else
+          codeAnswer 502
+        end
+      else
+        codeAnswer 500
+      end
+    rescue
+      codeAnswer 504
+    end
+    sendJson
   end
 end
