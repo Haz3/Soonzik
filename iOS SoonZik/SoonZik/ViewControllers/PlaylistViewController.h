@@ -9,8 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "TypeViewController.h"
 #import "OnLTMusicPopupView.h"
+#import "SWTableViewCell.h"
 
-@interface PlaylistViewController : TypeViewController <UITableViewDataSource, UITableViewDelegate, UIGestureRecognizerDelegate>
+@interface PlaylistViewController : TypeViewController <UITableViewDataSource, UITableViewDelegate, UIGestureRecognizerDelegate, PopUpDetailMusicDelegate>//, SWTableViewCellDelegate>
 
 @property (nonatomic, weak) IBOutlet UITableView *playlistTableView;
 

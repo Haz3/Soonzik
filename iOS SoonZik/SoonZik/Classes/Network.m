@@ -8,38 +8,76 @@
 
 #import "Network.h"
 
+#define URL @"http://api.lvh.me:3000/"
+
 @implementation Network
 
 - (NSDictionary *) getJsonWithClassName:className
 {
-    NSString *path = nil;
+    NSString *url = nil;
     
-    if ([className isEqualToString:@"user"])
-        path = @"/api/user";
+    if ([className isEqualToString:@"User"]) {
+        url = [NSString stringWithFormat:@"%@users", URL];
+    } else if ([className isEqualToString:@"Pack"]) {
+        url = [NSString stringWithFormat:@"%@packs", URL];
+    }
     
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        NSData *data = [NSData dataWithContentsOfURL:[NSURL URLWithString:path]];
-        [self performSelectorOnMainThread:@selector(fetchedData:) withObject:data waitUntilDone:YES];
-    });
+    NSLog(@"path : %@", url);
     
+    NSString *post = [NSString stringWithFormat:@""];
+    NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
+    NSString *postLength = [NSString stringWithFormat:@"%d", [postData length]];
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+    [request setURL:[NSURL URLWithString:url]];
+    [request setHTTPMethod:@"GET"];
+    [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
+    [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+    [request setHTTPBody:postData];
     
-    return self.json;
+    NSURLResponse *response;
+    NSError *error;
+    NSData *jsonData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+    NSDictionary *results = jsonData ? [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingMutableContainers|NSJSONReadingMutableLeaves error:&error] : nil;
+    
+    if (error) {
+        NSLog(@"[%@ %@] JSON error: %@", NSStringFromClass([self class]), NSStringFromSelector(_cmd), error.localizedDescription);
+    }
+    
+    return results;
 }
 
 - (NSDictionary *) getJsonWithClassName:className andIdentifier:(int)identifier
 {
-    NSString *path = nil;
+    NSString *url = nil;
     
-    if ([className isEqualToString:@"user"])
-        path = @"/api/user/identifier";
+    if ([className isEqualToString:@"User"]) {
+        url = [NSString stringWithFormat:@"%@users/%i", URL, identifier];
+    } else if ([className isEqualToString:@"Pack"]) {
+        url = [NSString stringWithFormat:@"%@packs/%i", URL, identifier];
+    }
     
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        NSData *data = [NSData dataWithContentsOfURL:[NSURL URLWithString:path]];
-        [self performSelectorOnMainThread:@selector(fetchedData:) withObject:data waitUntilDone:YES];
-    });
+    NSLog(@"path : %@", url);
     
+    NSString *post = [NSString stringWithFormat:@""];
+    NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
+    NSString *postLength = [NSString stringWithFormat:@"%d", [postData length]];
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+    [request setURL:[NSURL URLWithString:url]];
+    [request setHTTPMethod:@"GET"];
+    [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
+    [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+    [request setHTTPBody:postData];
     
-    return self.json;
+    NSURLResponse *response;
+    NSError *error;
+    NSData *jsonData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+    NSDictionary *results = jsonData ? [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingMutableContainers|NSJSONReadingMutableLeaves error:&error] : nil;
+    
+    if (error) {
+        NSLog(@"[%@ %@] JSON error: %@", NSStringFromClass([self class]), NSStringFromSelector(_cmd), error.localizedDescription);
+    }
+    
+    return results;
 }
 
 - (void)fetchedData:(NSData *)data

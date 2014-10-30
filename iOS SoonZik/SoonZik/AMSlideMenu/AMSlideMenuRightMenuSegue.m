@@ -59,12 +59,12 @@
         UINavigationController *navController = [mainVC navigationControllerForIndexPathInRightMenu:initialIndexPath];
         AMSlideMenuContentSegue *segue = [[AMSlideMenuContentSegue alloc] initWithIdentifier:@"ContentSugue" source:rightMenu destination:navController];
         [segue perform];
-    } else {
+    }/* else {
         NSString *segueIdentifier = [mainVC segueIdentifierForIndexPathInRightMenu:initialIndexPath];
-        [rightMenu performSegueWithIdentifier:segueIdentifier sender:self];
-    }
-#else
-    [rightMenu tableView:rightMenu.tableView didSelectRowAtIndexPath:initialIndexPath];
+        //[rightMenu performSegueWithIdentifier:segueIdentifier sender:self];
+    }*/
+//#else
+    //[rightMenu tableView:rightMenu.tableView didSelectRowAtIndexPath:initialIndexPath];
 #endif
 
 }

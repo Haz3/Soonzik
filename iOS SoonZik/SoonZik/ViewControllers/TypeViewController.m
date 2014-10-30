@@ -12,12 +12,12 @@
 #import "BattleViewController.h"
 #import "PlaylistViewController.h"
 #import "GeolocationViewController.h"
-#import "WeekPackViewController.h"
+#import "PackViewController.h"
 #import "ArtistViewController.h"
 #import "ExploreViewController.h"
 #import "FriendsViewController.h"
 #import "AppDelegate.h"
-#import "Song.h"
+#import "Music.h"
 
 @interface TypeViewController ()
 
@@ -50,7 +50,8 @@
     self.statusBarHeight = [[UIApplication sharedApplication] statusBarFrame].size.height;
     
     [self.navigationController setNavigationBarHidden:NO animated:YES];
-    self.navigationItem.backBarButtonItem.title = @"";
+    UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@" " style:UIBarButtonItemStylePlain target:nil action:nil];
+    self.navigationItem.backBarButtonItem = backButton;
     self.menuOpened = NO;
     self.searchOpened = NO;
 
@@ -70,13 +71,13 @@
     
     [self.playerPreviewView addGestureRecognizer:tapOnListeningPreview];
 
-    UISwipeGestureRecognizer *openMenuView = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(openTheMenuView)];
+   /* UISwipeGestureRecognizer *openMenuView = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(openTheMenuView)];
     [openMenuView setDirection:UISwipeGestureRecognizerDirectionRight];
     [self.view addGestureRecognizer:openMenuView];
     
     UISwipeGestureRecognizer *closeMenuView = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(closeTheMenuView)];
     [closeMenuView setDirection:UISwipeGestureRecognizerDirectionLeft];
-    [self.view addGestureRecognizer:closeMenuView];
+    [self.view addGestureRecognizer:closeMenuView];*/
     
     [self refreshThePlayerPreview];
 }
@@ -90,6 +91,10 @@
     NSLog(@"background settings:\n height: %f\rwidth: %f", self.screenHeight, self.screenWidth);
 }
 
+- (void)playerHasFinishedToPlay
+{
+    NSLog(@"fini");
+}
 
 - (void)titleImage
 {
@@ -220,8 +225,9 @@
     
     // initialize menu view
     self.menuView = [[UIView alloc] initWithFrame:CGRectMake(-180, appframe.origin.y, 180, appframe.size.height)];
-    [self.menuView setBackgroundColor:[UIColor colorWithRed:51/255.0f green:51/255.0f blue:51/255.0f alpha:1.0f]];
-    [self setBlurAlpha:0.75];
+    //[self.menuView setBackgroundColor:[UIColor colorWithRed:51/255.0f green:51/255.0f blue:51/255.0f alpha:1.0f]];
+    //[self setBlurAlpha:0.75];
+    [self addBlurDarkEffectOnView:self.menuView];
     
     [self.view addSubview:self.menuView];
     
@@ -252,21 +258,6 @@
     [self.searchTableView setFrame:CGRectMake(0, 0, self.searchView.frame.size.width, self.searchView.frame.size.height)];
     [self.searchView addSubview:self.searchTableView];
     
-}
-
-- (void)setBlurAlpha:(CGFloat)alphaValue
-{
-    int numComponents = CGColorGetNumberOfComponents([[self.view backgroundColor] CGColor]);
-    NSLog(@"number of components: %d", numComponents);
-    if (numComponents == 4) {
-        const CGFloat *components = CGColorGetComponents([[self.view backgroundColor] CGColor]);
-        CGFloat red = components[0];
-        CGFloat green = components[1];
-        CGFloat blue = components[2];
-        [self.menuView setBackgroundColor:[UIColor colorWithRed:red green:green blue:blue alpha:alphaValue]];
-    } else {
-        [self.menuView setBackgroundColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:alphaValue]];
-    }
 }
 
 - (void)initPlayerPreview
@@ -360,7 +351,7 @@
             break;
         case 2:
             // pack
-            vc = [[WeekPackViewController alloc] initWithNibName:@"WeekPackViewController" bundle:nil];
+            vc = [[PackViewController alloc] initWithNibName:@"PackViewController" bundle:nil];
             break;
         case 3:
             // monde musical
@@ -400,20 +391,20 @@
             [self.playerPreviewView.playButton setImage:[UIImage imageNamed:@"pause_icon.png"] forState:UIControlStateNormal];
         }
         
-        Song *s = [self.player.listeningList objectAtIndex:self.player.index];
+        Music *s = [self.player.listeningList objectAtIndex:self.player.index];
         
         if (self.player.audioPlayer != nil) {
             int current = self.player.audioPlayer.currentTime;
             int duration = self.player.audioPlayer.duration;
             self.playerPreviewView.timeLabel.text = [NSString stringWithFormat:@"%.02d:%.02d / %.02d:%.02d", current/60, current%60, duration/60, duration%60];
-            NSLog(@"current time = %i", current);
+           // NSLog(@"current time = %i", current);
         } else {
             [self.player prepareSong:s.file];
         }
 
         self.playerPreviewView.trackLabel.text = s.title;
-        self.playerPreviewView.artistLabel.text = s.artist;
-        self.playerPreviewView.imageView.image = [UIImage imageNamed:s.image];
+        self.playerPreviewView.artistLabel.text = s.artist.username;
+        self.playerPreviewView.imageView.image = [UIImage imageNamed:s.album.image];
         
     } else {
         self.playerPreviewView.imageView.image = [UIImage imageNamed:@"empty_list.png"];
@@ -431,7 +422,7 @@
     
     if (self.player.listeningList.count > 0) {
         
-        Song *s = [self.player.listeningList objectAtIndex:self.player.index];
+        Music *s = [self.player.listeningList objectAtIndex:self.player.index];
         
         if (!self.player.currentlyPlaying) {
             [self.playerPreviewView.playButton setImage:[UIImage imageNamed:@"pause_icon.png"] forState:UIControlStateNormal];
@@ -451,7 +442,7 @@
     if (self.player.listeningList.count > 0) {
         if (self.player.index > 0) {
             self.player.index--;
-            Song *s = [self.player.listeningList objectAtIndex:self.player.index];
+            Music *s = [self.player.listeningList objectAtIndex:self.player.index];
             [self.player prepareSong:s.file];
             if (self.player.currentlyPlaying) {
                 [self.player playSound];
@@ -467,7 +458,7 @@
     
     if (self.player.listeningList.count > 0) {
         if (self.player.repeatingLevel == 2) {
-            Song *s = [self.player.listeningList objectAtIndex:self.player.index];
+            Music *s = [self.player.listeningList objectAtIndex:self.player.index];
             [self.player prepareSong:s.file];
             [self.player playSound];
             self.player.songName = s.title;
@@ -477,20 +468,67 @@
             } else {
                 self.player.index++;
             }
-            Song *s = [self.player.listeningList objectAtIndex:self.player.index];
+            Music *s = [self.player.listeningList objectAtIndex:self.player.index];
             [self.player prepareSong:s.file];
             [self.player playSound];
             self.player.songName = s.title;
         } else if (self.player.repeatingLevel == 0) {
             if (self.player.index < self.player.listeningList.count - 1) {
                 self.player.index++;
-                Song *s = [self.player.listeningList objectAtIndex:self.player.index];
+                Music *s = [self.player.listeningList objectAtIndex:self.player.index];
                 [self.player prepareSong:s.file];
                 if (self.player.currentlyPlaying) {
                     [self.player playSound];
                     self.player.songName = s.title;
                 }
             }
+        }
+    }
+}
+
+- (void)addBlurEffectOnView:(UIView *)view
+{
+    UIVisualEffect *blurEffect;
+    blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
+    
+    UIVisualEffectView *visualEffectView;
+    visualEffectView = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
+    visualEffectView.frame = view.bounds;
+    visualEffectView.tag = 200;
+    [view addSubview:visualEffectView];
+    visualEffectView.alpha = 0;
+    
+    [UIView animateWithDuration:0.5 animations:^{
+        visualEffectView.alpha = 1;
+    }];
+}
+
+- (void)addBlurDarkEffectOnView:(UIView *)view
+{
+    UIVisualEffect *blurEffect;
+    blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleDark];
+    
+    UIVisualEffectView *visualEffectView;
+    visualEffectView = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
+    visualEffectView.frame = view.bounds;
+    visualEffectView.tag = 200;
+    [view addSubview:visualEffectView];
+    visualEffectView.alpha = 0;
+    
+    [UIView animateWithDuration:0.5 animations:^{
+        visualEffectView.alpha = 1;
+    }];
+}
+
+- (void)removeBlurEffect:(int)tag onView:(UIView *)v
+{
+    for (UIView *view in v.subviews) {
+        if (view.tag == tag) {
+            [UIView animateWithDuration:0.5 animations:^{
+                view.alpha = 0;
+            } completion:^(BOOL finished) {
+                [view removeFromSuperview];
+            }];
         }
     }
 }

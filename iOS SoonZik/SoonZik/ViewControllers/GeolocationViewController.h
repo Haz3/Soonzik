@@ -14,6 +14,9 @@
 @property (nonatomic, weak) IBOutlet MKMapView *mapView;
 @property (nonatomic, weak) IBOutlet UIView *detailView;
 
+@property (nonatomic, weak) IBOutlet UIButton *myPositionButton;
+@property (nonatomic, weak) IBOutlet UISlider *slider;
+
 @property (nonatomic, strong) CLLocationManager *userPosition;
 
 @end

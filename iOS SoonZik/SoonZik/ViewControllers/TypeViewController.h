@@ -13,8 +13,7 @@
 #import "SearchTabView.h"
 #import "PlayerPreviewView.h"
 #import "AudioPlayer.h"
-#import "Song.h"
-#import "AllTheIncludes.h"
+#import "Music.h"
 
 @interface TypeViewController : UIViewController <MenuTabDelegate, FinishPlayPlayer, PlayerPreviewDelegate>
 
@@ -43,5 +42,8 @@
 - (void)displaySearch;
 - (void)closeTheMenuView;
 - (UIImage *)imageWithImage:(UIImage *)image scaledToSize:(CGSize)newSize;
+
+- (void)addBlurEffectOnView:(UIView *)view;
+- (void)removeBlurEffect:(int)tag onView:(UIView *)v;
 
 @end

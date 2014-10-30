@@ -10,4 +10,6 @@
 
 @interface OtherArtistsCollectionViewCell : UICollectionViewCell
 
+- (void)initCell;
+
 @end

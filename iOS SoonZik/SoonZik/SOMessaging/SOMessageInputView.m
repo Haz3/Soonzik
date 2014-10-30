@@ -116,12 +116,12 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleKeyboardWillHideNote:) name:UIKeyboardWillHideNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleOrientationDidChandeNote:) name:UIApplicationDidChangeStatusBarOrientationNotification object:nil];
     
-    self.textView.placeholderText = NSLocalizedString(@"Type message...", nil);
-    [self.sendButton setTitle:NSLocalizedString(@"Send", nil) forState:UIControlStateNormal];
+    self.textView.placeholderText = NSLocalizedString(@"Tappez votre message ici", nil);
+    [self.sendButton setTitle:NSLocalizedString(@"Envoyer", nil) forState:UIControlStateNormal];
     self.sendButton.frame = CGRectMake(0, 0, 70, self.textInitialHeight - self.textTopMargin - self.textBottomMargin);
     
-    [self.mediaButton setImage:[UIImage imageNamed:@"attachment.png"] forState:UIControlStateNormal];
-    self.mediaButton.frame = CGRectMake(0, 0, 50, 24);
+   /* [self.mediaButton setImage:[UIImage imageNamed:@"attachment.png"] forState:UIControlStateNormal];
+    self.mediaButton.frame = CGRectMake(0, 0, 50, 24);*/
     
     [self adjustInputView];
 }

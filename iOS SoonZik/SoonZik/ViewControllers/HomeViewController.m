@@ -8,6 +8,7 @@
 
 #import "HomeViewController.h"
 #import "AppDelegate.h"
+#import "Pack.h"
 
 @interface HomeViewController ()
 
@@ -32,6 +33,12 @@
     
     [self addUpdateButtonInNavigationBar];
     
+   /* NSArray *listOfUsers = [[Factory alloc] provideListWithClassName:@"User"];
+    for (User *user in listOfUsers) {
+        NSLog(@"user.firstname : %@", user.firstname);
+    }
+    */
+    
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -48,7 +55,7 @@
 
 - (void)addUpdateButtonInNavigationBar
 {
-    UIImage *updateImage = [self imageWithImage:[UIImage imageNamed:@"share_icon.png"] scaledToSize:CGSizeMake(19, 19)];
+    UIImage *updateImage = [self imageWithImage:[UIImage imageNamed:@"update_icon.png"] scaledToSize:CGSizeMake(25,25)];
     UIBarButtonItem *updateButton = [[UIBarButtonItem alloc] initWithImage:updateImage style:UIBarButtonItemStylePlain target:self action:@selector(updateTableView)];
     
     UIImage *searchImage = [self imageWithImage:[UIImage imageNamed:@"search_icon.png"] scaledToSize:CGSizeMake(19, 19)];
@@ -76,22 +83,28 @@
 {
     self.player = ((AppDelegate *)[UIApplication sharedApplication].delegate).thePlayer;
     
-    Song *s1 = [[Song alloc] init];
+    Music *s1 = [[Music alloc] init];
     s1.title = @"song1";
-    s1.artist = @"John Newman";
-    s1.image = @"song1.jpg";
+    s1.artist = [[User alloc] init];
+    s1.artist.username = @"John Newman";
+    s1.album = [[Album alloc] init];
+    s1.album.image = @"song1.jpg";
     s1.file = @"song1";
     
-    Song *s2 = [[Song alloc] init];
+    Music *s2 = [[Music alloc] init];
     s2.title = @"song2";
-    s2.artist = @"Route 94";
-    s2.image = @"song2.jpg";
+    s2.artist = [[User alloc] init];
+    s2.artist.username = @"Route 94";
+    s2.album = [[Album alloc] init];
+    s2.album.image = @"song2.jpg";
     s2.file = @"song2";
     
-    Song *s3 = [[Song alloc] init];
+    Music *s3 = [[Music alloc] init];
     s3.title = @"song3";
-    s3.artist = @"Duke Dumont";
-    s3.image = @"song3.jpg";
+    s3.artist = [[User alloc] init];
+    s3.artist.username = @"Duke Dumont";
+    s3.album = [[Album alloc] init];
+    s3.album.image = @"song3.jpg";
     s3.file = @"song3";
     
     [self.player.listeningList addObject:s1];
@@ -101,7 +114,7 @@
     
     if (self.player.currentlyPlaying == NO) {
         self.player.index = 0;
-        Song * s = [self.player.listeningList objectAtIndex:self.player.index];
+        Music *s = [self.player.listeningList objectAtIndex:self.player.index];
         [self.player prepareSong:s.file];
     }
 

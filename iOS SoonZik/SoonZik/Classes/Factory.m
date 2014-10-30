@@ -7,6 +7,7 @@
 //
 
 #import "Factory.h"
+#import "User.h"
 
 @implementation Factory
 
@@ -17,15 +18,13 @@
     Network *net = [[Network alloc] init];
     NSDictionary *json = [net getJsonWithClassName:className andIdentifier:identifier];
     
-    Element *elem;
-    for (NSDictionary *dict in json) {
-        elem = [[cl alloc] initWithJsonObject:dict];
-    }
+    json = [json objectForKey:@"content"];
+    id elem = [[cl alloc] initWithJsonObject:json];
     
     return elem;
 }
 
-- (NSArray *) provideListWithClassName:(NSString *)className
+- (NSArray *)provideListWithClassName:(NSString *)className
 {
     NSMutableArray *list = [[NSMutableArray alloc] init];
     Class cl = NSClassFromString(className);
@@ -33,27 +32,10 @@
     Network *net = [[Network alloc] init];
     NSDictionary *json = [net getJsonWithClassName:className];
     
+    json = [json objectForKey:@"content"];
     for (NSDictionary *dict in json) {
-        Element *elem = [[cl alloc] initWithJsonObject:dict];
-        [list addObject:elem];
-    }
-    
-    //Element *elem = [[cl alloc] initWithJsonObject:nil];
-    //NSLog(@"dans methode");
-    return list;
-}
-
-- (NSArray *) provideListWithClassName:(NSString *)className andIdentifier:(int)identifier
-{
-    NSMutableArray *list = [[NSMutableArray alloc] init];
-    Class cl = NSClassFromString(className);
-    
-    Network *net = [[Network alloc] init];
-    NSDictionary *json = [net getJsonWithClassName:className andIdentifier:identifier];
-    
-    for (NSDictionary *dict in json) {
-        Element *elem = [[cl alloc] initWithJsonObject:dict];
-        [list addObject:elem];
+        id elem = [[cl alloc] initWithJsonObject:dict];
+       [list addObject:elem];
     }
     
     return list;

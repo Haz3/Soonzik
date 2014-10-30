@@ -13,8 +13,7 @@
 @interface Factory : NSObject
 
 - (id)provideObjectWithClassName:(NSString *)className andIdentifier:(int)identifier;
-- (NSArray *) provideListWithClassName:(NSString *)className;
-- (NSArray *) provideListWithClassName:(NSString *)className andIdentifier:(int)identifier;
+- (NSArray *)provideListWithClassName:(NSString *)className;
 
 - (BOOL)addElement:(id)elem;
 - (BOOL)deleteElement:(id)elem;

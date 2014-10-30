@@ -7,10 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "Song.h"
+#import "Music.h"
+#import "Playlist.h"
 
 @interface LongPressGestureRecognizer : UILongPressGestureRecognizer
 
-@property (strong, nonatomic) Song *song;
+@property (strong, nonatomic) Music *song;
+@property (strong, nonatomic) Playlist *playlist;
 
 @end
