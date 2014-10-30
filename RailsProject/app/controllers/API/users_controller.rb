@@ -6,7 +6,8 @@ module API
   # * show        [get]
   # * find        [get]
   # * save        [post]
-  # * getmusics   [get] - SECURITY
+  # * update      [post] - SECURE
+  # * getmusics   [get] - SECURE
   #
   class UsersController < ApisecurityController
   	# Retrieve all the users
@@ -35,10 +36,10 @@ module API
         user = User.find_by_id(@id)
         if (!user)
           codeAnswer 502
-          return
+        else
+          @returnValue = { content: user.as_json(:include => :address) }
+          codeAnswer 200
         end
-        @returnValue = { content: user.as_json(:include => :address) }
-        codeAnswer 200
       rescue
         codeAnswer 504
       end

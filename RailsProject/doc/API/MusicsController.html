@@ -176,18 +176,17 @@ from ApiSecurity (the parent) is true</p>
 
     <span class="ruby-keyword">if</span> (<span class="ruby-operator">!</span><span class="ruby-identifier">music</span>)
       <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">502</span>
-      <span class="ruby-keyword">return</span>
-    <span class="ruby-keyword">end</span>
-    
-    <span class="ruby-identifier">com</span> = <span class="ruby-constant">Commentary</span>.<span class="ruby-identifier">new</span>
-    <span class="ruby-identifier">com</span>.<span class="ruby-identifier">content</span> = <span class="ruby-ivar">@content</span>
-    <span class="ruby-identifier">com</span>.<span class="ruby-identifier">author_id</span> = <span class="ruby-ivar">@user_id</span>
-    
-    <span class="ruby-keyword">if</span> (<span class="ruby-identifier">com</span>.<span class="ruby-identifier">save</span>)
-      <span class="ruby-identifier">com</span>.<span class="ruby-identifier">musics</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">music</span>
-      <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">201</span>
     <span class="ruby-keyword">else</span>
-      <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">503</span>
+      <span class="ruby-identifier">com</span> = <span class="ruby-constant">Commentary</span>.<span class="ruby-identifier">new</span>
+      <span class="ruby-identifier">com</span>.<span class="ruby-identifier">content</span> = <span class="ruby-ivar">@content</span>
+      <span class="ruby-identifier">com</span>.<span class="ruby-identifier">author_id</span> = <span class="ruby-ivar">@user_id</span>
+      
+      <span class="ruby-keyword">if</span> (<span class="ruby-identifier">com</span>.<span class="ruby-identifier">save</span>)
+        <span class="ruby-identifier">com</span>.<span class="ruby-identifier">musics</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">music</span>
+        <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">201</span>
+      <span class="ruby-keyword">else</span>
+        <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">503</span>
+      <span class="ruby-keyword">end</span>
     <span class="ruby-keyword">end</span>
   <span class="ruby-keyword">else</span>
     <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">500</span>
@@ -223,7 +222,7 @@ music</p>
 </li></ul>					
 											<div class="method-source-code" id="addtoplaylist-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/musics_controller.rb, line 228</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/musics_controller.rb, line 227</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">addtoplaylist</span>
   <span class="ruby-keyword">begin</span>
     <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@security</span>)
@@ -375,8 +374,7 @@ Note : By default, if you precise no attribute, it will take every row</pre>
 
 					<div class="method-description">
 											<p>To get the mp3. It cuts the file depending the rights</p>
-<dl class="rdoc-list label-list"><dt>NOT FINISHED, NEED TO MODIFY THE OPEN FUNCTION AND CHECK THE STRUCTURE OF THE FILES
-<dd>
+
 <h4 id="method-i-get-label-Options">Options<span><a href="#method-i-get-label-Options">&para;</a> <a href="#documentation">&uarr;</a></span></h4>
 <ul><li>
 <p><code>:security</code> - If it&#39;s a secure transaction, this variable
@@ -385,12 +383,12 @@ from ApiSecurity (the parent) is true</p>
 <p>+:user_id [implicit]+ - It is required by the security so we can access it</p>
 </li><li>
 <p><code>:id</code> - The id of the music where is the comment</p>
-</li></ul>
-</dd></dl>					
+</li></ul>					
 											<div class="method-source-code" id="get-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/musics_controller.rb, line 191</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/musics_controller.rb, line 189</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">get</span>
+  <span class="ruby-identifier">buffer</span> = <span class="ruby-string">&quot;&quot;</span>
   <span class="ruby-keyword">begin</span>
     <span class="ruby-identifier">music</span> = <span class="ruby-keyword">nil</span>
     <span class="ruby-identifier">cut</span> = <span class="ruby-keyword">true</span>
@@ -407,16 +405,16 @@ from ApiSecurity (the parent) is true</p>
         <span class="ruby-identifier">buy</span> = <span class="ruby-constant">Purchase</span>.<span class="ruby-identifier">find_by</span> <span class="ruby-identifier">user_id</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@user_id</span>, <span class="ruby-identifier">typeObj</span><span class="ruby-operator">:</span> <span class="ruby-string">&quot;Music&quot;</span>, <span class="ruby-identifier">obj_id</span><span class="ruby-operator">:</span> <span class="ruby-identifier">music</span>.<span class="ruby-identifier">id</span>
         <span class="ruby-identifier">cut</span> = <span class="ruby-keyword">false</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">buy</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span>
       <span class="ruby-keyword">end</span>
-    <span class="ruby-keyword">end</span>
 
-    <span class="ruby-identifier">file</span> = <span class="ruby-identifier">music</span>.<span class="ruby-identifier">file</span>
-    <span class="ruby-identifier">file</span> = <span class="ruby-string">&quot;cut_&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">file</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">cut</span>
-    <span class="ruby-identifier">buffer</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">open</span>(<span class="ruby-identifier">file</span>).<span class="ruby-identifier">read</span>
+      <span class="ruby-identifier">file</span> = <span class="ruby-identifier">music</span>.<span class="ruby-identifier">file</span>
+      <span class="ruby-identifier">file</span> = <span class="ruby-string">&quot;cut_&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">file</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">cut</span>
+      <span class="ruby-identifier">buffer</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">open</span>(<span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span>(<span class="ruby-constant">Rails</span>.<span class="ruby-identifier">root</span>, <span class="ruby-string">&quot;app&quot;</span>, <span class="ruby-string">&quot;assets&quot;</span>, <span class="ruby-string">&quot;musics&quot;</span>, <span class="ruby-identifier">music</span>.<span class="ruby-identifier">album</span>.<span class="ruby-identifier">user</span>.<span class="ruby-identifier">username</span>.<span class="ruby-identifier">downcase</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp">/[^0-9A-Za-z]/</span>, <span class="ruby-string">&#39;&#39;</span>), <span class="ruby-node">&quot;#{file.downcase.gsub(/[^0-9A-Za-z]/, &#39;&#39;)}.mp3&quot;</span>), <span class="ruby-string">&quot;rb&quot;</span>).<span class="ruby-identifier">read</span>
+    <span class="ruby-keyword">end</span>
   <span class="ruby-keyword">rescue</span>
     <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">504</span>
   <span class="ruby-keyword">end</span>
   <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
-    <span class="ruby-identifier">format</span>.<span class="ruby-identifier">mp3</span> { <span class="ruby-identifier">render</span> <span class="ruby-value">:mp3</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">buffer</span>, <span class="ruby-value">:content_type</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;audio/mpeg&#39;</span> }
+    <span class="ruby-identifier">format</span>.<span class="ruby-identifier">mp3</span> { <span class="ruby-identifier">render</span> <span class="ruby-value">:text</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">buffer</span>, <span class="ruby-value">:content_type</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;audio/mpeg&#39;</span> }
   <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></code></pre>
 						</div>
@@ -480,10 +478,10 @@ from ApiSecurity (the parent) is true</p>
     <span class="ruby-identifier">album</span> = <span class="ruby-constant">Music</span>.<span class="ruby-identifier">find_by_id</span>(<span class="ruby-ivar">@id</span>)
     <span class="ruby-keyword">if</span> (<span class="ruby-operator">!</span><span class="ruby-identifier">album</span>)
       <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">502</span>
-      <span class="ruby-keyword">return</span>
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-ivar">@returnValue</span> = { <span class="ruby-identifier">content</span><span class="ruby-operator">:</span> <span class="ruby-identifier">album</span>.<span class="ruby-identifier">as_json</span>(<span class="ruby-value">:include</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">:album</span>) }
+      <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">200</span>
     <span class="ruby-keyword">end</span>
-    <span class="ruby-ivar">@returnValue</span> = { <span class="ruby-identifier">content</span><span class="ruby-operator">:</span> <span class="ruby-identifier">album</span>.<span class="ruby-identifier">as_json</span>(<span class="ruby-value">:include</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">:album</span>) }
-    <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">200</span>
   <span class="ruby-keyword">rescue</span>
     <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">504</span>
   <span class="ruby-keyword">end</span>
@@ -533,6 +531,7 @@ from ApiSecurity (the parent) is true</p>
 			<li><a href="../API/PacksController.html">API::PacksController</a></li>
 			<li><a href="../API/PlaylistsController.html">API::PlaylistsController</a></li>
 			<li><a href="../API/PurchasesController.html">API::PurchasesController</a></li>
+			<li><a href="../API/SearchsController.html">API::SearchsController</a></li>
 			<li><a href="../API/SuggestionsController.html">API::SuggestionsController</a></li>
 			<li><a href="../API/TweetsController.html">API::TweetsController</a></li>
 			<li><a href="../API/UsersController.html">API::UsersController</a></li>

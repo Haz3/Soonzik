@@ -20,10 +20,10 @@ module API
 	        notif = Notification.find_by_id(@id)
 	        if (!notif)
 	          codeAnswer 502
-	          return
-	        end
-	        @returnValue = { content: notif.as_json(:include => :user) }
-	        codeAnswer 200
+          else
+  	        @returnValue = { content: notif.as_json(:include => :user) }
+	          codeAnswer 200
+          end
   	    else
   	    	codeAnswer 500
   	    end

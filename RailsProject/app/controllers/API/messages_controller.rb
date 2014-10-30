@@ -19,13 +19,13 @@ module API
 	        msg = Message.find_by_id(@id)
 	        if (!msg)
 	          codeAnswer 502
-	          return
-	        end
-	        @returnValue = { content: msg.as_json(:include => {
-        														:sender => {},
-        														:receiver => {}
-        													}) }
-	        codeAnswer 200
+	        else
+  	        @returnValue = { content: msg.as_json(:include => {
+          														:sender => {},
+          														:receiver => {}
+          													}) }
+            codeAnswer 200
+          end
 	    else
 	    	codeAnswer 500
 	    end

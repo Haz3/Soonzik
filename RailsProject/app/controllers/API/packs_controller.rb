@@ -33,10 +33,10 @@ module API
         album = Pack.find_by_id(@id)
         if (!album)
           codeAnswer 502
-          return
+        else
+          @returnValue = { content: album.as_json(:include => :albums) }
+          codeAnswer 200
         end
-        @returnValue = { content: album.as_json(:include => :albums) }
-        codeAnswer 200
       rescue
         codeAnswer 504
       end

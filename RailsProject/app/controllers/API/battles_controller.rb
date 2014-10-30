@@ -37,14 +37,14 @@ module API
         battle = Battle.find_by_id(@id)
         if (!battle)
           codeAnswer 502
-          return
+        else
+          @returnValue = { content: battle.as_json(:include => {
+          														:artist_one => {},
+          														:artist_two => {},
+          														:votes => {}
+          													}) }
+          codeAnswer 200
         end
-        @returnValue = { content: battle.as_json(:include => {
-        														:artist_one => {},
-        														:artist_two => {},
-        														:votes => {}
-        													}) }
-        codeAnswer 200
       rescue
         codeAnswer 504
       end

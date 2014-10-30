@@ -1,5 +1,5 @@
 class Music < ActiveRecord::Base
-	belongs_to :album
+  belongs_to :album
   has_one :flac
   has_many :listening
   has_many :music_notes

@@ -6,6 +6,7 @@ module API
   # * find        [get]
   # * save        [post] - SECURITY
   # * update      [post] - SECURITY
+  # * destroy     [get] - SECURITY
   #
   class PlaylistsController < ApisecurityController
   	# Give a specific object by its id
@@ -19,12 +20,12 @@ module API
         playlist = Playlist.find_by_id(@id)
         if (!playlist)
           codeAnswer 502
-          return
+        else
+          @returnValue = { content: playlist.as_json(:include => {
+          														:musics => {}
+          														}) }
+          codeAnswer 200
         end
-        @returnValue = { content: playlist.as_json(:include => {
-        														:musics => {}
-        														}) }
-        codeAnswer 200
       rescue
         codeAnswer 504
       end

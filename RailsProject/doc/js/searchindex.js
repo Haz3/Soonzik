@@ -99,7 +99,7 @@ var SearchIndex =
 	{
 		"name": "API::SearchsController",
 		"link": "API/SearchsController.html",
-		"snippet": "",
+		"snippet": "<p>Controller which manage the search feature There is only one\n<p>search      [get]\n\n",
 		"type": "normalclass"
 	},
 	{
@@ -309,7 +309,7 @@ var SearchIndex =
 	{
 		"name": "get",
 		"link": "API/MusicsController.html#method-i-get",
-		"snippet": "<p>To get the mp3. It cuts the file depending the rights\n<p>NOT FINISHED, NEED TO MODIFY THE OPEN FUNCTION  … &mdash; ",
+		"snippet": "<p>To get the mp3. It cuts the file depending the rights\n<p>Options\n<p><code>:security</code> - If it&#39;s a secure transaction, …\n",
 		"type": "anymethod"
 	},
 	{
@@ -418,6 +418,12 @@ var SearchIndex =
 		"name": "save",
 		"link": "API/PurchasesController.html#method-i-save",
 		"snippet": "<p>Save a new object Purchase. For more information on the parameters, check\nat the model\n<p>Options\n<p>+:purchase …\n",
+		"type": "anymethod"
+	},
+	{
+		"name": "search",
+		"link": "API/SearchsController.html#method-i-search",
+		"snippet": "<p>Search an element in our collection of content or for a specific object\ntype\n<p>Options\n<p><code>:offset</code> - [Optionnal] …\n",
 		"type": "anymethod"
 	},
 	{

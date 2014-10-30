@@ -34,10 +34,10 @@ module API
         listening = Listening.find_by_id(@id)
         if (!listening)
           codeAnswer 502
-          return
+        else
+          @returnValue = { content: listening.as_json(:include => :user) }
+          codeAnswer 200
         end
-        @returnValue = { content: listening.as_json(:include => :user) }
-        codeAnswer 200
       rescue
         codeAnswer 504
       end

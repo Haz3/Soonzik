@@ -238,7 +238,6 @@ GEM
       unicorn
     warden (1.2.3)
       rack (>= 1.0)
-    wdm (0.1.0)
     yajl-ruby (1.2.1)
 
 PLATFORMS
@@ -276,4 +275,3 @@ DEPENDENCIES
   tzinfo-data
   uglifier (>= 1.3.0)
   unicorn-rails
-  wdm (>= 0.1.0)

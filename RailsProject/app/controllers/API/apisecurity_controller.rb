@@ -8,7 +8,7 @@ module API
     # Usually a controller has no constructor but in this case it's for the heritance.
     def initialize
       @security = false
-      @returnValue = {}
+      @returnValue = { content: [] }
       
       @code = []
       @code[200] = {code: 200, message: "Success"}
@@ -77,6 +77,7 @@ protected
 
     # Render the value to return in json
     def sendJson
+      codeAnswer(202) if defined?(@returnValue[:content]) && defined?(@returnValue[:content].size) && @returnValue[:content].size == 0
       respond_to do |format|
         format.json { render :json => JSON.generate(@returnValue) }
       end

@@ -38,10 +38,10 @@ module API
         album = Music.find_by_id(@id)
         if (!album)
           codeAnswer 502
-          return
+        else
+          @returnValue = { content: album.as_json(:include => :album) }
+          codeAnswer 200
         end
-        @returnValue = { content: album.as_json(:include => :album) }
-        codeAnswer 200
       rescue
         codeAnswer 504
       end
@@ -157,18 +157,17 @@ module API
 
           if (!music)
             codeAnswer 502
-            return
-          end
-          
-          com = Commentary.new
-          com.content = @content
-          com.author_id = @user_id
-          
-          if (com.save)
-            com.musics << music
-            codeAnswer 201
           else
-            codeAnswer 503
+            com = Commentary.new
+            com.content = @content
+            com.author_id = @user_id
+            
+            if (com.save)
+              com.musics << music
+              codeAnswer 201
+            else
+              codeAnswer 503
+            end
           end
         else
           codeAnswer 500
@@ -180,7 +179,6 @@ module API
   	end
 
     # To get the mp3. It cuts the file depending the rights
-    # [NOT FINISHED, NEED TO MODIFY THE OPEN FUNCTION AND CHECK THE STRUCTURE OF THE FILES]
     #
     # ==== Options
     #
@@ -189,6 +187,7 @@ module API
     # * +:id+ - The id of the music where is the comment
     #
     def get
+      buffer = ""
       begin
         music = nil
         cut = true
@@ -205,16 +204,16 @@ module API
             buy = Purchase.find_by user_id: @user_id, typeObj: "Music", obj_id: music.id
             cut = false if buy.size > 0
           end
-        end
 
-        file = music.file
-        file = "cut_" + file if cut
-        buffer = File.open(file).read
+          file = music.file
+          file = "cut_" + file if cut
+          buffer = File.open(File.join(Rails.root, "app", "assets", "musics", music.album.user.username.downcase.gsub(/[^0-9A-Za-z]/, ''), "#{file.downcase.gsub(/[^0-9A-Za-z]/, '')}.mp3"), "rb").read
+        end
       rescue
         codeAnswer 504
       end
       respond_to do |format|
-        format.mp3 { render :mp3 => buffer, :content_type => 'audio/mpeg' }
+        format.mp3 { render :text => buffer, :content_type => 'audio/mpeg' }
       end
     end
 

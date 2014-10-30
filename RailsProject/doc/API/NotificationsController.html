@@ -375,10 +375,10 @@ the smartphone applications)</p>
             <span class="ruby-identifier">notif</span> = <span class="ruby-constant">Notification</span>.<span class="ruby-identifier">find_by_id</span>(<span class="ruby-ivar">@id</span>)
             <span class="ruby-keyword">if</span> (<span class="ruby-operator">!</span><span class="ruby-identifier">notif</span>)
               <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">502</span>
-              <span class="ruby-keyword">return</span>
-            <span class="ruby-keyword">end</span>
+      <span class="ruby-keyword">else</span>
             <span class="ruby-ivar">@returnValue</span> = { <span class="ruby-identifier">content</span><span class="ruby-operator">:</span> <span class="ruby-identifier">notif</span>.<span class="ruby-identifier">as_json</span>(<span class="ruby-value">:include</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">:user</span>) }
-            <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">200</span>
+              <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">200</span>
+      <span class="ruby-keyword">end</span>
         <span class="ruby-keyword">else</span>
          <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">500</span>
         <span class="ruby-keyword">end</span>
@@ -431,6 +431,7 @@ the smartphone applications)</p>
 			<li><a href="../API/PacksController.html">API::PacksController</a></li>
 			<li><a href="../API/PlaylistsController.html">API::PlaylistsController</a></li>
 			<li><a href="../API/PurchasesController.html">API::PurchasesController</a></li>
+			<li><a href="../API/SearchsController.html">API::SearchsController</a></li>
 			<li><a href="../API/SuggestionsController.html">API::SuggestionsController</a></li>
 			<li><a href="../API/TweetsController.html">API::TweetsController</a></li>
 			<li><a href="../API/UsersController.html">API::UsersController</a></li>

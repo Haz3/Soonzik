@@ -6,6 +6,7 @@ module API
   # * show        [get]
   # * find        [get]
   # * save        [post] - SECURE
+  # * destroy     [get] - SECURE
   #
   class TweetsController < ApisecurityController
   	# Retrieve all the tweets
@@ -34,10 +35,10 @@ module API
         tweets = Tweet.find_by_id(@id)
         if (!tweets)
           codeAnswer 502
-          return
+        else
+          @returnValue = { content: tweets.as_json(:include => :user) }
+          codeAnswer 200
         end
-        @returnValue = { content: tweets.as_json(:include => :user) }
-        codeAnswer 200
       rescue
         codeAnswer 504
       end
