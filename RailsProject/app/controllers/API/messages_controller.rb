@@ -98,14 +98,14 @@ module API
               end
 
               if (message_object == nil)          #message_object doesn't exist
-                message_object = Message.where(condition)
+                message_object = Message.where(condition).where(user_id: @user_id)
               else                              #message_object exists
                 message_object = message_object.where(condition)
               end
             end
             # - - - - - - - -
           else
-            message_object = Message.all            #no attribute specified
+            message_object = Message.where(user_id: @user_id)            #no attribute specified
           end
 
           order_asc = ""
@@ -148,7 +148,10 @@ module API
             message_object = message_object.offset(@offset.to_i)
           end
 
-          @returnValue = { content: message_object.as_json(:include => :user) }
+          @returnValue = { content: message_object.as_json(:include => {
+                                      :sender => {},
+                                      :receiver => {}
+                                    }) }
 
           if (message_object.size == 0)
             codeAnswer 202

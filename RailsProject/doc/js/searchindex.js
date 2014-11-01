@@ -375,7 +375,7 @@ var SearchIndex =
 	{
 		"name": "show",
 		"link": "API/PacksController.html#method-i-show",
-		"snippet": "<p>Give a specific object by its id\n<p>Options\n<p><code>:id</code> - The id of the specific album\n",
+		"snippet": "<p>Give a specific object by its id\n<p>Options\n<p><code>:id</code> - The id of the specific pack\n",
 		"type": "anymethod"
 	},
 	{

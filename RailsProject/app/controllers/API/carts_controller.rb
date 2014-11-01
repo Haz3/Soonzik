@@ -91,14 +91,14 @@ module API
               end
 
               if (cart_object == nil)          #cart_object doesn't exist
-                cart_object = Cart.where(condition)
+                cart_object = Cart.where(condition).where(user_id: @user_id)
               else                              #cart_object exists
                 cart_object = cart_object.where(condition)
               end
             end
             # - - - - - - - -
           else
-            cart_object = Cart.all            #no attribute specified
+            cart_object = Cart.where(user_id: @user_id)            #no attribute specified
           end
 
           order_asc = ""

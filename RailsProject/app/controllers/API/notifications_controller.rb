@@ -93,14 +93,14 @@ module API
               end
 
               if (notification_object == nil)          #notification_object doesn't exist
-                notification_object = Notification.where(condition)
+                notification_object = Notification.where(condition).where(user_id: @user_id)
               else                              #notification_object exists
                 notification_object = notification_object.where(condition)
               end
             end
             # - - - - - - - -
           else
-            notification_object = Notification.all            #no attribute specified
+            notification_object = Notification.where(user_id: @user_id)            #no attribute specified
           end
 
           order_asc = ""

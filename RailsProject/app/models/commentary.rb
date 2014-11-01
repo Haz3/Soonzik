@@ -3,4 +3,6 @@ class Commentary < ActiveRecord::Base
   has_and_belongs_to_many :news
   has_and_belongs_to_many :musics
   has_and_belongs_to_many :albums
+
+  validates :user, :content, presence: true
 end

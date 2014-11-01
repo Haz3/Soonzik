@@ -26,15 +26,15 @@ module API
     #
     # ==== Options
     # 
-    # * +:id+ - The id of the specific album
+    # * +:id+ - The id of the specific pack
     # 
     def show
       begin
-        album = Pack.find_by_id(@id)
-        if (!album)
+        pack = Pack.find_by_id(@id)
+        if (!pack)
           codeAnswer 502
         else
-          @returnValue = { content: album.as_json(:include => :albums) }
+          @returnValue = { content: pack.as_json(:include => :albums) }
           codeAnswer 200
         end
       rescue

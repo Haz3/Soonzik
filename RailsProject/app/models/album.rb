@@ -6,4 +6,8 @@ class Album < ActiveRecord::Base
   has_many :propositions
   has_many :musics
   belongs_to :user
+
+  validates :user, :title, :style, :price, :file, :yearProd, presence: true
+  validates :file, uniqueness: true
+  validates :yearProd, numericality: { only_integer: true }
 end
