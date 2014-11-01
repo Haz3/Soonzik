@@ -19,6 +19,7 @@
 @property (nonatomic, weak) IBOutlet UIView *detailView;
 @property (nonatomic, strong) UIImageView *imageView;
 @property (nonatomic, weak) IBOutlet UILabel *nameLabel;
+@property (nonatomic, weak) IBOutlet UIButton *chatButton;
 
 @property (nonatomic, strong) CALayer *subLayer;
 @property (nonatomic, strong) CALayer *imageLayer;

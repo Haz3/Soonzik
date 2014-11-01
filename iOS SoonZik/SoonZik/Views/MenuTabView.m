@@ -8,7 +8,6 @@
 
 #import "MenuTabView.h"
 #import "MenuTableViewCell.h"
-#import "AllTheIncludes.h"
 
 @implementation MenuTabView
 
@@ -29,8 +28,6 @@
     self.backgroundColor = [UIColor clearColor];
     //[self setBackgroundColor:[UIColor colorWithRed:51/255.0f green:51/255.0f blue:51/255.0f alpha:1.0f]];
     self.separatorStyle = UITableViewCellSeparatorStyleNone;
-    self.backgroundColor = [UIColor clearColor];
-    
 }
 
 - (void)loadWithData:(NSMutableArray *)array and:(NSMutableArray *)array2

@@ -7,7 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SOMessagingViewController.h"
 
-@interface ChatViewController : UIViewController
+@interface ChatViewController : SOMessagingViewController
+
+@property (strong, nonatomic) NSMutableArray *dataSource;
+
+@property (strong, nonatomic) UIImage *myImage;
+@property (strong, nonatomic) UIImage *partnerImage;
 
 @end

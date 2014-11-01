@@ -8,6 +8,7 @@
 
 #import "Element.h"
 #import "Address.h"
+#import "Factory.h"
 
 @interface User : Element
 
@@ -18,7 +19,7 @@
 @property (nonatomic, strong) NSString *lastname;
 @property (nonatomic, strong) NSString *birthday;
 @property (nonatomic, strong) NSString *image;
-@property (nonatomic, strong) NSString *description;
+@property (nonatomic, strong) NSString *desc;
 @property (nonatomic, strong) NSString *phoneNbr;
 @property (nonatomic, strong) Address *address;
 @property (nonatomic, strong) NSString *facebook;
@@ -27,6 +28,6 @@
 @property (nonatomic, strong) NSString *idAPI;
 @property (nonatomic, strong) NSArray *follows;
 @property (nonatomic, strong) NSArray *friends;
-@property (nonatomic, assign) bool *isAnArtist;
+@property (nonatomic, assign) bool isAnArtist;
 
 @end

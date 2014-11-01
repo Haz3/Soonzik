@@ -9,8 +9,10 @@
 #import <UIKit/UIKit.h>
 #import "TypeViewController.h"
 #import "AudioPlayer.h"
-#import "Song.h"
+#import "Music.h"
 #import "News.h"
+#import "User.h"
+#import "Album.h"
 #import "NewsTypeAlbumCell.h"
 
 @interface HomeViewController : TypeViewController <UITableViewDataSource, UITableViewDelegate, NewsTypeAlbumDelegate>

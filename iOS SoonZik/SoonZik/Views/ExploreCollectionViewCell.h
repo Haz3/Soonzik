@@ -11,6 +11,7 @@
 @interface ExploreCollectionViewCell : UICollectionViewCell
 
 @property (nonatomic, weak) IBOutlet UIImageView *imgV;
+@property (nonatomic, weak) IBOutlet UIView *titleView;
 
 - (void)initCell;
 

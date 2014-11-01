@@ -8,6 +8,17 @@
 
 #import "TypeViewController.h"
 
-@interface PackViewController : TypeViewController
+@interface PackViewController : TypeViewController <UIScrollViewDelegate>
+
+@property (nonatomic, strong) NSArray *listOfPacks;
+@property (nonatomic, weak) IBOutlet UIScrollView *scrollView;
+@property (nonatomic, weak) IBOutlet UILabel *packLabel;
+@property (nonatomic, strong) UIView *contentView;
+
+@property (nonatomic, weak) IBOutlet UITableView *tableView;
+
+@property (nonatomic, strong) CALayer *subLayer;
+
+@property (nonatomic, assign) int indexOfPage;
 
 @end

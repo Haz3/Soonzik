@@ -10,4 +10,11 @@
 
 @interface PlayListsHeaderView : UIView
 
+@property (nonatomic, weak) IBOutlet UILabel *playlistLabel;
+@property (nonatomic, weak) IBOutlet UILabel *nbrOfTracks;
+@property (nonatomic, weak) IBOutlet UIImageView *album1Image;
+@property (nonatomic, weak) IBOutlet UIImageView *album2Image;
+@property (nonatomic, weak) IBOutlet UIImageView *album3Image;
+@property (nonatomic, weak) IBOutlet UIImageView *album4Image;
+
 @end

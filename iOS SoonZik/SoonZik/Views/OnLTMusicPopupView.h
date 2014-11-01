@@ -7,17 +7,36 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "Song.h"
+#import "Music.h"
+#import "Playlist.h"
+
+@protocol PopUpDetailMusicDelegate <NSObject>
+
+- (void)goToAlbumView:(Music *)music;
+- (void)goToArtistView:(Music *)music;
+- (void)addToCurrentPlaylist:(Music *)music;
+- (void)removeMusicFromPlayList:(Music *)music and:(Playlist *)playlist;
+- (void)closePopUpView;
+
+@end
 
 @interface OnLTMusicPopupView : UIView
 
 @property (nonatomic, weak) IBOutlet UIView *popupView;
 
 @property (nonatomic, weak) IBOutlet UIButton *removeFromPlaylistButton;
+@property (nonatomic, weak) IBOutlet UIButton *artistButton;
+@property (nonatomic, weak) IBOutlet UIButton *albumButton;
+@property (nonatomic, weak) IBOutlet UIButton *addToPlaylistButton;
 
 @property (nonatomic, weak) IBOutlet UIImageView *musicImage;
 @property (nonatomic, weak) IBOutlet UILabel *musicName;
 
-- (void)initPopupWithSong:(Song *)song;
+@property (nonatomic, strong) Playlist *playlist;
+@property (nonatomic, strong) Music *song;
+
+@property (nonatomic, strong) id<PopUpDetailMusicDelegate> choiceDelegate;
+
+- (void)initPopupWithSong:(Music *)song andPlaylist:(Playlist *)playlist;
 
 @end

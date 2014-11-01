@@ -8,13 +8,21 @@
 
 #import "Element.h"
 #import "User.h"
+#import "SOMessage.h"
 
-@interface Message : Element
+@interface Message : Element <SOMessage>
 
 @property (nonatomic, assign) int identifier;
 @property (nonatomic, strong) User *fromUser;
 @property (nonatomic, strong) User *toUser;
 @property (nonatomic, strong) NSDate *date;
 @property (nonatomic, strong) NSString *content;
+
+@property (nonatomic) bool fromMe;
+@property (nonatomic, strong) NSString *text;
+@property (strong, nonatomic) NSDictionary *attributes;
+@property (strong, nonatomic) NSData *media;
+@property (strong, nonatomic) UIImage *thumbnail;
+@property (nonatomic) SOMessageType type;
 
 @end

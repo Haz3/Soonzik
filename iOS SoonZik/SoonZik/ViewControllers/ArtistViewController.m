@@ -9,6 +9,7 @@
 #import "ArtistViewController.h"
 #import "Album.h"
 #import "AlbumSongCell.h"
+#import "OtherArtistsCollectionViewCell.h"
 
 @interface ArtistViewController ()
 
@@ -32,6 +33,13 @@
     
     self.songsTableView.delegate = self;
     self.songsTableView.dataSource = self;
+    
+    self.collectionView.delegate = self;
+    self.collectionView.dataSource = self;
+    self.collectionView.backgroundColor = [UIColor clearColor];
+    
+    self.navigationItem.rightBarButtonItems = nil;
+    self.navigationItem.leftBarButtonItems = nil;
     
     self.horizontalScrollView.tag = 2;
     
@@ -75,23 +83,23 @@
     self.albumsContent = [[NSMutableDictionary alloc] init];
     Album *a = [[Album alloc] init];
     a.title = @"Album1";
-    a.artist = @"Route 94";
+    a.artist.username = @"Route 94";
     a.image = @"song2.jpg";
     
     self.songsList = [[NSMutableArray alloc] init];
-    Song *s1 = [[Song alloc] init];
+    Music *s1 = [[Music alloc] init];
     s1.title = @"My Love";
     [self.songsList addObject:s1];
     
-    s1 = [[Song alloc] init];
+    s1 = [[Music alloc] init];
     s1.title = @"My Love";
     [self.songsList addObject:s1];
     
-    s1 = [[Song alloc] init];
+    s1 = [[Music alloc] init];
     s1.title = @"My Love";
     [self.songsList addObject:s1];
     
-    s1 = [[Song alloc] init];
+    s1 = [[Music alloc] init];
     s1.title = @"My Love";
     [self.songsList addObject:s1];
     
@@ -104,23 +112,23 @@
     self.albumsContent = [[NSMutableDictionary alloc] init];
     Album *a2 = [[Album alloc] init];
     a2.title = @"Album2";
-    a2.artist = @"I got U";
+    a2.artist.username = @"I got U";
     a2.image = @"song3.jpg";
     
     self.songsList = [[NSMutableArray alloc] init];
-    s1 = [[Song alloc] init];
+    s1 = [[Music alloc] init];
     s1.title = @"I got U";
     [self.songsList addObject:s1];
     
-    s1 = [[Song alloc] init];
+    s1 = [[Music alloc] init];
     s1.title = @"I got U UUU";
     [self.songsList addObject:s1];
     
-    s1 = [[Song alloc] init];
+    s1 = [[Music alloc] init];
     s1.title = @"My Love";
     [self.songsList addObject:s1];
     
-    s1 = [[Song alloc] init];
+    s1 = [[Music alloc] init];
     s1.title = @"My Love";
     [self.songsList addObject:s1];
     
@@ -133,23 +141,23 @@
     self.albumsContent = [[NSMutableDictionary alloc] init];
     Album *a3 = [[Album alloc] init];
     a3.title = @"Wesjjj";
-    a3.artist = @"prout";
+    a3.artist.username = @"prout";
     a3.image = @"song3.jpg";
     
     self.songsList = [[NSMutableArray alloc] init];
-    s1 = [[Song alloc] init];
+    s1 = [[Music alloc] init];
     s1.title = @"dqsddd";
     [self.songsList addObject:s1];
     
-    s1 = [[Song alloc] init];
+    s1 = [[Music alloc] init];
     s1.title = @"yiytre";
     [self.songsList addObject:s1];
     
-    s1 = [[Song alloc] init];
+    s1 = [[Music alloc] init];
     s1.title = @"My Love";
     [self.songsList addObject:s1];
     
-    s1 = [[Song alloc] init];
+    s1 = [[Music alloc] init];
     s1.title = @"My Love";
     [self.songsList addObject:s1];
     
@@ -276,11 +284,38 @@
     NSString *nameOfTheAlbum = [self.albumTitles objectAtIndex:indexPath.section];
     NSDictionary *album = [[NSDictionary alloc] initWithDictionary:[self.albumsList objectForKey:nameOfTheAlbum]];
     NSArray *listOfSongs = [album objectForKey:@"albumContent"];
-    Song *s = [listOfSongs objectAtIndex:indexPath.row];
+    Music *s = [listOfSongs objectAtIndex:indexPath.row];
     
     cell.songTitle.text = s.title;
     
     return cell;
+}
+
+- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
+{
+    return 1;
+}
+
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
+{
+    return 10;
+}
+
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    static NSString *cellID = @"cellID";
+    
+    [collectionView registerNib:[UINib nibWithNibName:@"OtherArtistsCollectionViewCell" bundle:nil] forCellWithReuseIdentifier:cellID];
+    OtherArtistsCollectionViewCell *cell = (OtherArtistsCollectionViewCell *)[collectionView dequeueReusableCellWithReuseIdentifier:cellID forIndexPath:indexPath];
+    
+    [cell initCell];
+    
+    return cell;
+}
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSLog(@"element: %i", indexPath.row);
 }
 
 - (void)didReceiveMemoryWarning

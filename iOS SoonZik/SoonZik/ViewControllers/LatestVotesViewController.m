@@ -27,7 +27,7 @@
 {
     self.navigationItem.leftBarButtonItems = nil;
     self.navigationItem.rightBarButtonItem = nil;
-    [self.menuView removeFromSuperview];
+   // [self.menuView removeFromSuperview];
 }
 
 - (void)viewDidLoad

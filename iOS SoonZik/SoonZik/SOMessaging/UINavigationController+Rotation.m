@@ -54,13 +54,13 @@ NSString const *kCantAutorotateKey = @"cantAutorotate.key";
     objc_setAssociatedObject(self, &kCantAutorotateKey, @(cantAutorotate), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
-- (BOOL)my_shouldAutorotate
+/*- (BOOL)my_shouldAutorotate
 {
     if ([self respondsToSelector:@selector(cantAutorotate)] && self.cantAutorotate) {
         return NO;
     }
     return [self my_shouldAutorotate];
-}
+}*/
 
 
 

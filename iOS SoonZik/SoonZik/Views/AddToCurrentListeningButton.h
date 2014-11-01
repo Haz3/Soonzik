@@ -7,10 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "Song.h"
+#import "Music.h"
 
 @interface AddToCurrentListeningButton : UIButton
 
-@property (strong, nonatomic) Song *song;
+@property (strong, nonatomic) Music *song;
 
 @end
