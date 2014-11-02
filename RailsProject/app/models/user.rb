@@ -40,5 +40,5 @@ class User < ActiveRecord::Base
   validates :salt, length: { is: 40 }
   validates :groups, :email, :password, :salt, :username, :birthday, :image, :signin, :idAPI, :secureKey, :activated, :newsletter, :language, presence: true
   validates :email, :username, uniqueness: true
-  validates :birthday, format: /(19|20)\d\d[- /.](0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01]) \d\d:\d\d:\d\d/
+  validates :birthday, format: /(\d{4})-(\d{2})-(\d{2}) (\d{2}):(\d{2}):(\d{2})/
 end

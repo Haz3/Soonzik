@@ -2,6 +2,8 @@ class Purchase < ActiveRecord::Base
   belongs_to :user
 
   validates :user, :typeObj, :obj_id, :date, presence: true
-  validates :date, format: /(19|20)\d\d[- /.](0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01]) \d\d:\d\d:\d\d/
+  validates :date, format: /(\d{4})-(\d{2})-(\d{2}) (\d{2}):(\d{2}):(\d{2})/
   validates :obj_id, numericality: true
+  validates :typeObj, if: "Object.const_defined?(typeObj)"
+  validates :obj_id, if: "u && typeObj.constantize.find_by_id(obj_id) != nil"
 end

@@ -6,5 +6,5 @@ class News < ActiveRecord::Base
   has_and_belongs_to_many :commentaries
 
   validates :user, :title, :date, presence: true
-  validates :date, format: /(19|20)\d\d[- /.](0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01]) \d\d:\d\d:\d\d/
+  validates :date, format: /(\d{4})-(\d{2})-(\d{2}) (\d{2}):(\d{2}):(\d{2})/
 end
