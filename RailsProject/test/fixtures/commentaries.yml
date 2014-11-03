@@ -1,11 +1,16 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
+commentaireNews:
   author_id: 1
-  content: MyText
+  content: Contenu du commentaire de news 1
   create_at: 2014-09-07 23:18:03
 
-two:
+commentaireMusic:
   author_id: 1
-  content: MyText
+  content: Contenu du commentaire de music 1
+  create_at: 2014-09-07 23:18:03
+
+commentaireAlbum:
+  author_id: 1
+  content: Contenu du commentaire d'album 1
   create_at: 2014-09-07 23:18:03

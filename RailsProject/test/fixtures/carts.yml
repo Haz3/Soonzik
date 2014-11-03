@@ -1,13 +1,13 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
+panierUn:
   user_id: 1
-  typeObj: MyString
+  typeObj: Album
   obj_id: 1
   gift: false
 
-two:
-  user_id: 1
-  typeObj: MyString
-  obj_id: 1
-  gift: false
+panierDeux:
+  user_id: 2
+  typeObj: Music
+  obj_id: 2
+  gift: true

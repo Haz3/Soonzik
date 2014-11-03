@@ -231,6 +231,8 @@ module API
     def update
       begin
         if (@security && @id == @user_id)
+          user = User.find_by_id(@user_id)
+          user.password = User.password_hash(@user["password"]) if user != nil && defined?@user['password']
           _save(false, {:user => @user, :address => @address })
         else
           codeAnswer 500

@@ -1,13 +1,13 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
+firstConcert:
   user_id: 1
-  planification: 2014-09-07 23:18:12
+  planification: 2015-02-01 12:15:00
   address_id: 1
-  url: MyString
+  url: concertUn
 
-two:
-  user_id: 1
-  planification: 2014-09-07 23:18:12
-  address_id: 1
-  url: MyString
+secondConcert:
+  user_id: 2
+  planification: 2015-05-07 20:05:00
+  address_id: 2
+  url: concertDeux

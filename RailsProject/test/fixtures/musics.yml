@@ -1,21 +1,22 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
+MusicOne:
   user_id: 1
   album_id: 1
-  title: MyString
-  duration: 1
-  style: MyString
-  price: 1.5
-  file: MyString
+  title: Titre musique
+  duration: 120
+  style: Rap
+  price: 7.5
+  file: music_one
   limited: false
+  commentaries: commentaireMusic
 
-two:
-  user_id: 1
-  album_id: 1
-  title: MyString
-  duration: 1
-  style: MyString
-  price: 1.5
-  file: MyString
-  limited: false
+MusicTwo:
+  user_id: 2
+  album_id: 2
+  title: Title music
+  duration: 134
+  style: Rock
+  price: 3.5
+  file: music_two
+  limited: true

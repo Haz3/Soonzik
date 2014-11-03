@@ -1,9 +1,11 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  title: MyString
-  style: MyString
+PackOne:
+  title: Pack 1
+  style: Rap
+  albums: AlbumOne
 
-two:
-  title: MyString
-  style: MyString
+PackTwo:
+  title: Pack 2
+  style: Rock
+  albums: AlbumTwo

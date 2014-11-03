@@ -1,17 +1,18 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
+AlbumOne:
   user_id: 1
-  title: MyString
-  style: MyString
+  title: Titre Album
+  style: Rap
   price: 1.5
-  file: MyString
-  yearProd: 1
+  file: TitreAlbum
+  yearProd: 2000
+  commentaries: commentaireAlbum
 
-two:
-  user_id: 1
-  title: MyString
-  style: MyString
-  price: 1.5
-  file: MyString
-  yearProd: 1
+AlbumTwo:
+  user_id: 2
+  title: Title Album
+  style: Rock
+  price: 2.5
+  file: TitleAlbum
+  yearProd: 2001
