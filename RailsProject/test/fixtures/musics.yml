@@ -20,3 +20,4 @@ MusicTwo:
   price: 3.5
   file: music_two
   limited: true
+  descriptions: DescOne
