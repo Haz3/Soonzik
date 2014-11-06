@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   #
   namespace :api, path: '/', constraints: { subdomain: 'api' }, :defaults => { :format => 'json' }  do
     get 'getKey/:id' => 'apisecurity#provideKey', constraints: {id: /[0-9]+/}
+    get 'loginFB/:token' => 'apisecurity#loginFB'
 
     resources :albums, only: [:index, :show] do #ok
       collection do
