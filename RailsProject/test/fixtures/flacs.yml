@@ -1,9 +1,9 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
+FlacOne:
   music_id: 1
-  file: MyString
+  file: music_one
 
-two:
-  music_id: 1
-  file: MyString
+FlacTwo:
+  music_id: 2
+  file: music_two

@@ -121,6 +121,192 @@ var SearchIndex =
 		"type": "normalclass"
 	},
 	{
+		"name": "Access",
+		"link": "Access.html",
+		"snippet": "",
+		"type": "normalclass"
+	},
+	{
+		"name": "Address",
+		"link": "Address.html",
+		"snippet": "",
+		"type": "normalclass"
+	},
+	{
+		"name": "AdminUser",
+		"link": "AdminUser.html",
+		"snippet": "",
+		"type": "normalclass"
+	},
+	{
+		"name": "Album",
+		"link": "Album.html",
+		"snippet": "",
+		"type": "normalclass"
+	},
+	{
+		"name": "AlbumNote",
+		"link": "AlbumNote.html",
+		"snippet": "",
+		"type": "normalclass"
+	},
+	{
+		"name": "Attachment",
+		"link": "Attachment.html",
+		"snippet": "",
+		"type": "normalclass"
+	},
+	{
+		"name": "Battle",
+		"link": "Battle.html",
+		"snippet": "",
+		"type": "normalclass"
+	},
+	{
+		"name": "Cart",
+		"link": "Cart.html",
+		"snippet": "",
+		"type": "normalclass"
+	},
+	{
+		"name": "Commentary",
+		"link": "Commentary.html",
+		"snippet": "",
+		"type": "normalclass"
+	},
+	{
+		"name": "Concert",
+		"link": "Concert.html",
+		"snippet": "",
+		"type": "normalclass"
+	},
+	{
+		"name": "Description",
+		"link": "Description.html",
+		"snippet": "",
+		"type": "normalclass"
+	},
+	{
+		"name": "Flac",
+		"link": "Flac.html",
+		"snippet": "",
+		"type": "normalclass"
+	},
+	{
+		"name": "Genre",
+		"link": "Genre.html",
+		"snippet": "",
+		"type": "normalclass"
+	},
+	{
+		"name": "Gift",
+		"link": "Gift.html",
+		"snippet": "",
+		"type": "normalclass"
+	},
+	{
+		"name": "Group",
+		"link": "Group.html",
+		"snippet": "",
+		"type": "normalclass"
+	},
+	{
+		"name": "Influence",
+		"link": "Influence.html",
+		"snippet": "",
+		"type": "normalclass"
+	},
+	{
+		"name": "Listening",
+		"link": "Listening.html",
+		"snippet": "",
+		"type": "normalclass"
+	},
+	{
+		"name": "Message",
+		"link": "Message.html",
+		"snippet": "",
+		"type": "normalclass"
+	},
+	{
+		"name": "Music",
+		"link": "Music.html",
+		"snippet": "",
+		"type": "normalclass"
+	},
+	{
+		"name": "MusicNote",
+		"link": "MusicNote.html",
+		"snippet": "",
+		"type": "normalclass"
+	},
+	{
+		"name": "News",
+		"link": "News.html",
+		"snippet": "",
+		"type": "normalclass"
+	},
+	{
+		"name": "Newstext",
+		"link": "Newstext.html",
+		"snippet": "",
+		"type": "normalclass"
+	},
+	{
+		"name": "Notification",
+		"link": "Notification.html",
+		"snippet": "",
+		"type": "normalclass"
+	},
+	{
+		"name": "Pack",
+		"link": "Pack.html",
+		"snippet": "",
+		"type": "normalclass"
+	},
+	{
+		"name": "Playlist",
+		"link": "Playlist.html",
+		"snippet": "",
+		"type": "normalclass"
+	},
+	{
+		"name": "Proposition",
+		"link": "Proposition.html",
+		"snippet": "",
+		"type": "normalclass"
+	},
+	{
+		"name": "Purchase",
+		"link": "Purchase.html",
+		"snippet": "",
+		"type": "normalclass"
+	},
+	{
+		"name": "Tag",
+		"link": "Tag.html",
+		"snippet": "",
+		"type": "normalclass"
+	},
+	{
+		"name": "Tweet",
+		"link": "Tweet.html",
+		"snippet": "",
+		"type": "normalclass"
+	},
+	{
+		"name": "User",
+		"link": "User.html",
+		"snippet": "",
+		"type": "normalclass"
+	},
+	{
+		"name": "Vote",
+		"link": "Vote.html",
+		"snippet": "",
+		"type": "normalclass"
+	},
+	{
 		"name": "index",
 		"link": "API/AlbumsController.html#method-i-index",
 		"snippet": "<p>Retrieve all the albums\n",
@@ -159,7 +345,13 @@ var SearchIndex =
 	{
 		"name": "provideKey",
 		"link": "API/ApisecurityController.html#method-i-provideKey",
-		"snippet": "<p>Provide a token relative to the user who asks\n<p>Options\n<p><code>:user_id</code> - The id of the user who makes the transaction …\n",
+		"snippet": "<p>Provide a token relative to the user who asks Format :\n<p>Options\n<p><code>:user_id</code> - The id of the user who makes …\n",
+		"type": "anymethod"
+	},
+	{
+		"name": "loginFB",
+		"link": "API/ApisecurityController.html#method-i-loginFB",
+		"snippet": "<p>Check if a facebook user is authenticate and retrive its informations\n<p>Options\n<p><code>:email</code> - GET variable -&gt; …\n",
 		"type": "anymethod"
 	},
 	{
@@ -496,6 +688,48 @@ var SearchIndex =
 		"name": "update",
 		"link": "API/UsersController.html#method-i-update",
 		"snippet": "<p>Update a specific object User. For more information on the parameters,\ncheck at the model. You need to …\n",
+		"type": "anymethod"
+	},
+	{
+		"name": "objectValidation",
+		"link": "Cart.html#method-i-objectValidation",
+		"snippet": "",
+		"type": "anymethod"
+	},
+	{
+		"name": "objectValidation",
+		"link": "Gift.html#method-i-objectValidation",
+		"snippet": "",
+		"type": "anymethod"
+	},
+	{
+		"name": "objectValidation",
+		"link": "Purchase.html#method-i-objectValidation",
+		"snippet": "",
+		"type": "anymethod"
+	},
+	{
+		"name": "regenerateKey",
+		"link": "User.html#method-i-regenerateKey",
+		"snippet": "",
+		"type": "anymethod"
+	},
+	{
+		"name": "secureKey_hash",
+		"link": "User.html#method-c-secureKey_hash",
+		"snippet": "",
+		"type": "anymethod"
+	},
+	{
+		"name": "password_hash",
+		"link": "User.html#method-c-password_hash",
+		"snippet": "",
+		"type": "anymethod"
+	},
+	{
+		"name": "salt_hash",
+		"link": "User.html#method-i-salt_hash",
+		"snippet": "",
 		"type": "anymethod"
 	}
 ]

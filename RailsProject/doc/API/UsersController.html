@@ -354,8 +354,8 @@ Note : By default, if you precise no attribute, it will take every row</pre>
 										</header>
 
 					<div class="method-description">
-											<p>Save a new object User. For more information on the parameters, check at
-the model</p>
+											<p>Save a new object <a href="../User.html">User</a>. For more information on
+the parameters, check at the model</p>
 
 <h4 id="method-i-save-label-Options">Options<span><a href="#method-i-save-label-Options">&para;</a> <a href="#documentation">&uarr;</a></span></h4>
 <ul><li>
@@ -375,7 +375,8 @@ in our language list.</p>
 </li><li>
 <p>+:<a href="lname">user</a>+ - (optionnal) Lastname of the user</p>
 </li><li>
-<p>+:<a href="description">user</a>+ - (optionnal) Description of the user</p>
+<p>+:<a href="description">user</a>+ - (optionnal) <a
+href="../Description.html">Description</a> of the user</p>
 </li><li>
 <p>+:<a href="phoneNumber">user</a>+ - (optionnal) Phone number of the user.
 Need to be with the format &#39;+code phonenumber&#39;</p>
@@ -470,11 +471,11 @@ anything in the address variable) The Zipcode</p>
 										</header>
 
 					<div class="method-description">
-											<p>Update a specific object User. For more information on the parameters,
-check at the model. You need to provide one of this following informations.
-If the user has no address, you need to provide everything (expect
-&#39;complement&#39; which is optionnal) If the user has an address, just
-provide what you want to update</p>
+											<p>Update a specific object <a href="../User.html">User</a>. For more
+information on the parameters, check at the model. You need to provide one
+of this following informations. If the user has no address, you need to
+provide everything (expect &#39;complement&#39; which is optionnal) If the
+user has an address, just provide what you want to update</p>
 
 <h4 id="method-i-update-label-Options">Options<span><a href="#method-i-update-label-Options">&para;</a> <a href="#documentation">&uarr;</a></span></h4>
 <ul><li>
@@ -497,7 +498,8 @@ in our language list.</p>
 </li><li>
 <p>+:<a href="lname">user</a>+ - Lastname of the user</p>
 </li><li>
-<p>+:<a href="description">user</a>+ - Description of the user</p>
+<p>+:<a href="description">user</a>+ - <a
+href="../Description.html">Description</a> of the user</p>
 </li><li>
 <p>+:<a href="phoneNumber">user</a>+ - Phone number of the user. Need to be
 with the format &#39;+code phonenumber&#39;</p>
@@ -532,6 +534,8 @@ profile</p>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">update</span>
   <span class="ruby-keyword">begin</span>
     <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@security</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-ivar">@id</span> <span class="ruby-operator">==</span> <span class="ruby-ivar">@user_id</span>)
+      <span class="ruby-identifier">user</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">find_by_id</span>(<span class="ruby-ivar">@user_id</span>)
+      <span class="ruby-identifier">user</span>.<span class="ruby-identifier">password</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">password_hash</span>(<span class="ruby-ivar">@user</span>[<span class="ruby-string">&quot;password&quot;</span>]) <span class="ruby-keyword">if</span> <span class="ruby-identifier">user</span> <span class="ruby-operator">!=</span> <span class="ruby-keyword">nil</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-keyword">defined?</span><span class="ruby-ivar">@user</span>[<span class="ruby-string">&#39;password&#39;</span>]
       <span class="ruby-identifier">_save</span>(<span class="ruby-keyword">false</span>, {<span class="ruby-value">:user</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@user</span>, <span class="ruby-value">:address</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@address</span> })
     <span class="ruby-keyword">else</span>
       <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">500</span>

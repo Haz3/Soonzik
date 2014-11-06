@@ -1,7 +1,7 @@
-Sat, 01 Nov 2014 15:19:34 -0400
+Wed, 05 Nov 2014 21:16:48 -0500
 app/controllers/API/albums_controller.rb	Thu, 16 Oct 2014 18:18:59 -0400
 app/controllers/API/api_controller.rb	Sat, 13 Sep 2014 14:06:29 -0400
-app/controllers/API/apisecurity_controller.rb	Wed, 29 Oct 2014 16:56:59 -0400
+app/controllers/API/apisecurity_controller.rb	Wed, 05 Nov 2014 21:15:39 -0500
 app/controllers/API/battles_controller.rb	Thu, 16 Oct 2014 18:23:49 -0400
 app/controllers/API/carts_controller.rb	Thu, 30 Oct 2014 18:48:48 -0400
 app/controllers/API/concerts_controller.rb	Thu, 16 Oct 2014 18:24:25 -0400
@@ -17,4 +17,35 @@ app/controllers/API/purchases_controller.rb	Sat, 11 Oct 2014 01:47:26 -0400
 app/controllers/API/searchs_controller.rb	Wed, 29 Oct 2014 16:56:44 -0400
 app/controllers/API/suggestions_controller.rb	Thu, 16 Oct 2014 18:33:15 -0400
 app/controllers/API/tweets_controller.rb	Wed, 29 Oct 2014 15:30:18 -0400
-app/controllers/API/users_controller.rb	Wed, 29 Oct 2014 15:31:16 -0400
+app/controllers/API/users_controller.rb	Sun, 02 Nov 2014 23:08:51 -0500
+app/models/access.rb	Fri, 31 Oct 2014 15:41:53 -0400
+app/models/address.rb	Fri, 31 Oct 2014 15:58:16 -0400
+app/models/admin_user.rb	Fri, 12 Sep 2014 19:12:46 -0400
+app/models/album.rb	Fri, 31 Oct 2014 15:49:31 -0400
+app/models/album_note.rb	Fri, 31 Oct 2014 15:54:32 -0400
+app/models/attachment.rb	Fri, 31 Oct 2014 15:51:08 -0400
+app/models/battle.rb	Sun, 02 Nov 2014 01:18:27 -0400
+app/models/cart.rb	Sun, 02 Nov 2014 21:40:06 -0500
+app/models/commentary.rb	Fri, 31 Oct 2014 15:55:13 -0400
+app/models/concert.rb	Sun, 02 Nov 2014 01:20:24 -0400
+app/models/description.rb	Fri, 31 Oct 2014 15:57:37 -0400
+app/models/flac.rb	Fri, 31 Oct 2014 15:46:28 -0400
+app/models/genre.rb	Fri, 31 Oct 2014 15:45:37 -0400
+app/models/gift.rb	Sun, 02 Nov 2014 21:40:13 -0500
+app/models/group.rb	Fri, 31 Oct 2014 15:41:38 -0400
+app/models/influence.rb	Fri, 31 Oct 2014 15:42:08 -0400
+app/models/listening.rb	Sun, 02 Nov 2014 01:20:31 -0400
+app/models/message.rb	Sat, 01 Nov 2014 15:18:50 -0400
+app/models/music.rb	Sat, 01 Nov 2014 15:17:15 -0400
+app/models/music_note.rb	Sat, 01 Nov 2014 15:15:05 -0400
+app/models/news.rb	Sun, 02 Nov 2014 01:20:38 -0400
+app/models/newstext.rb	Sat, 01 Nov 2014 15:14:01 -0400
+app/models/notification.rb	Sat, 01 Nov 2014 15:12:20 -0400
+app/models/pack.rb	Fri, 31 Oct 2014 16:06:27 -0400
+app/models/playlist.rb	Fri, 31 Oct 2014 16:06:06 -0400
+app/models/proposition.rb	Fri, 31 Oct 2014 16:05:10 -0400
+app/models/purchase.rb	Sun, 02 Nov 2014 21:40:09 -0500
+app/models/tag.rb	Fri, 31 Oct 2014 16:03:00 -0400
+app/models/tweet.rb	Fri, 31 Oct 2014 16:02:14 -0400
+app/models/user.rb	Sun, 02 Nov 2014 23:01:05 -0500
+app/models/vote.rb	Fri, 31 Oct 2014 16:01:32 -0400
