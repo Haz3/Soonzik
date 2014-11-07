@@ -1,3 +1,6 @@
+# The model of the object Tweet
+# Contain the relation and the validation
+# Can provide some features linked to this model
 class Tweet < ActiveRecord::Base
   belongs_to :user
 

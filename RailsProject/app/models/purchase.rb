@@ -1,3 +1,6 @@
+# The model of the object Purchase
+# Contain the relation and the validation
+# Can provide some features linked to this model
 class Purchase < ActiveRecord::Base
   belongs_to :user
 
@@ -6,6 +9,8 @@ class Purchase < ActiveRecord::Base
   validates :obj_id, numericality: true
   validate :objectValidation
 
+  # A validate rules to check if an object exists
+  # The typeObj and obj_id need to be present to do the check and add the error
   def objectValidation
   	if !Object.const_defined?(typeObj)
   		errors.add(:typeObj, "Invalid object type")

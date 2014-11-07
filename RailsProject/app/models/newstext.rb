@@ -1,3 +1,6 @@
+# The model of the object Newstext
+# Contain the relation and the validation
+# Can provide some features linked to this model
 class Newstext < ActiveRecord::Base
   belongs_to :news
 

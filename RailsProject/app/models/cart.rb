@@ -1,3 +1,6 @@
+# The model of the object Cart
+# Contain the relation and the validation
+# Can provide some features linked to this model
 class Cart < ActiveRecord::Base
   belongs_to :user
 
@@ -5,10 +8,12 @@ class Cart < ActiveRecord::Base
   validates :obj_id, numericality: { only_integer: true }
   validate :objectValidation
 
+  # A validate rules to check if an object exists
+  # The typeObj and obj_id need to be present to do the check and add the error
   def objectValidation
-  	if !Object.const_defined?(typeObj)
+  	if typeObj != nil && !Object.const_defined?(typeObj)
   		errors.add(:typeObj, "Invalid object type")
-  	elsif typeObj.constantize.find_by_id(obj_id) != nil
+  	elsif typeObj != nil && obj_id != nil && typeObj.constantize.find_by_id(obj_id) != nil
   		errors.add(:obj_id, "This object doesn't exist")
   	end
   end

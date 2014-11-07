@@ -108,7 +108,10 @@
 		</section>
 
 		<section class="description">
-					</section>
+			
+<p>The model of the object <a href="User.html">User</a> Contain the relation
+and the validation Can provide some features linked to this model</p>
+		</section>
 
 				<section id="5Buntitled-5D" class="documentation-section">
 			
@@ -132,10 +135,15 @@
 										</header>
 
 					<div class="method-description">
-																
+											<p>Static function to create the hash of the password</p>
+
+<h4 id="method-c-password_hash-label-Attributes">Attributes<span><a href="#method-c-password_hash-label-Attributes">&para;</a> <a href="#documentation">&uarr;</a></span></h4>
+<ul><li>
+<p><code>pass</code> - The password of the user to encode</p>
+</li></ul>					
 											<div class="method-source-code" id="password_hash-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/models/user.rb, line 71</span>
+								class="language-ruby"><span class="ruby-comment"># File app/models/user.rb, line 88</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">password_hash</span>(<span class="ruby-identifier">pass</span>)
   <span class="ruby-constant">Digest</span><span class="ruby-operator">::</span><span class="ruby-constant">MD5</span>.<span class="ruby-identifier">hexdigest</span>(<span class="ruby-constant">Digest</span><span class="ruby-operator">::</span><span class="ruby-constant">SHA1</span>.<span class="ruby-identifier">hexdigest</span>(<span class="ruby-identifier">pass</span>))
 <span class="ruby-keyword">end</span></code></pre>
@@ -154,10 +162,15 @@
 										</header>
 
 					<div class="method-description">
-																
+											<p>Static function to create the hash of the secureKey</p>
+
+<h4 id="method-c-secureKey_hash-label-Attributes">Attributes<span><a href="#method-c-secureKey_hash-label-Attributes">&para;</a> <a href="#documentation">&uarr;</a></span></h4>
+<ul><li>
+<p><code>key</code> - The generated key to encode</p>
+</li></ul>					
 											<div class="method-source-code" id="secureKey_hash-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/models/user.rb, line 67</span>
+								class="language-ruby"><span class="ruby-comment"># File app/models/user.rb, line 78</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">secureKey_hash</span>(<span class="ruby-identifier">key</span>)
   <span class="ruby-constant">Digest</span><span class="ruby-operator">::</span><span class="ruby-constant">SHA1</span>.<span class="ruby-identifier">hexdigest</span>(<span class="ruby-constant">Digest</span><span class="ruby-operator">::</span><span class="ruby-constant">MD5</span>.<span class="ruby-identifier">hexdigest</span>(<span class="ruby-identifier">key</span>))
 <span class="ruby-keyword">end</span></code></pre>
@@ -189,10 +202,11 @@
 										</header>
 
 					<div class="method-description">
-																
+											<p>Recreate an idAPI and so the secureKey associated The secureKey need to be
+unique so we check if someone already has this one</p>					
 											<div class="method-source-code" id="regenerateKey-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/models/user.rb, line 46</span>
+								class="language-ruby"><span class="ruby-comment"># File app/models/user.rb, line 60</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">regenerateKey</span>
   <span class="ruby-identifier">key</span> = <span class="ruby-keyword">nil</span>
 
@@ -219,11 +233,12 @@
 										</header>
 
 					<div class="method-description">
-																
+											<p>Static function to create the hash of the salt It uses the password, so it
+has to be set before</p>					
 											<div class="method-source-code" id="salt_hash-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/models/user.rb, line 75</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">salt_hash</span>()
+								class="language-ruby"><span class="ruby-comment"># File app/models/user.rb, line 94</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">salt_hash</span>
   <span class="ruby-constant">User</span>.<span class="ruby-identifier">secureKey_hash</span>(<span class="ruby-node">&quot;#{Digest::SHA256.hexdigest(&quot;#{Time.now.utc}--#{self.password}&quot;)}--#{Digest::SHA256.hexdigest(self.password)}&quot;</span>)
 <span class="ruby-keyword">end</span></code></pre>
 						</div>
@@ -256,7 +271,9 @@
 	<!-- Class dropdown menu -->
 	<div id="class-dropdown" class="dropdown-menu has-scroll">
 	<ul>
+			<li><a href="./API.html">API</a></li>
 			<li><a href="./API/AlbumsController.html">API::AlbumsController</a></li>
+			<li><a href="./API/ApiController.html">API::ApiController</a></li>
 			<li><a href="./API/ApisecurityController.html">API::ApisecurityController</a></li>
 			<li><a href="./API/BattlesController.html">API::BattlesController</a></li>
 			<li><a href="./API/CartsController.html">API::CartsController</a></li>
@@ -274,6 +291,37 @@
 			<li><a href="./API/SuggestionsController.html">API::SuggestionsController</a></li>
 			<li><a href="./API/TweetsController.html">API::TweetsController</a></li>
 			<li><a href="./API/UsersController.html">API::UsersController</a></li>
+			<li><a href="./Access.html">Access</a></li>
+			<li><a href="./Address.html">Address</a></li>
+			<li><a href="./AdminUser.html">AdminUser</a></li>
+			<li><a href="./Album.html">Album</a></li>
+			<li><a href="./AlbumNote.html">AlbumNote</a></li>
+			<li><a href="./Attachment.html">Attachment</a></li>
+			<li><a href="./Battle.html">Battle</a></li>
+			<li><a href="./Cart.html">Cart</a></li>
+			<li><a href="./Commentary.html">Commentary</a></li>
+			<li><a href="./Concert.html">Concert</a></li>
+			<li><a href="./Description.html">Description</a></li>
+			<li><a href="./Flac.html">Flac</a></li>
+			<li><a href="./Genre.html">Genre</a></li>
+			<li><a href="./Gift.html">Gift</a></li>
+			<li><a href="./Group.html">Group</a></li>
+			<li><a href="./Influence.html">Influence</a></li>
+			<li><a href="./Listening.html">Listening</a></li>
+			<li><a href="./Message.html">Message</a></li>
+			<li><a href="./Music.html">Music</a></li>
+			<li><a href="./MusicNote.html">MusicNote</a></li>
+			<li><a href="./News.html">News</a></li>
+			<li><a href="./Newstext.html">Newstext</a></li>
+			<li><a href="./Notification.html">Notification</a></li>
+			<li><a href="./Pack.html">Pack</a></li>
+			<li><a href="./Playlist.html">Playlist</a></li>
+			<li><a href="./Proposition.html">Proposition</a></li>
+			<li><a href="./Purchase.html">Purchase</a></li>
+			<li><a href="./Tag.html">Tag</a></li>
+			<li><a href="./Tweet.html">Tweet</a></li>
+			<li><a href="./User.html">User</a></li>
+			<li><a href="./Vote.html">Vote</a></li>
 		</ul>
 	</div>
 

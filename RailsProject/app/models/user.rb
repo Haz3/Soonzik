@@ -1,3 +1,6 @@
+# The model of the object User
+# Contain the relation and the validation
+# Can provide some features linked to this model
 class User < ActiveRecord::Base
   belongs_to :address
 
@@ -42,7 +45,18 @@ class User < ActiveRecord::Base
   validates :groups, :email, :password, :salt, :username, :birthday, :image, :signin, :idAPI, :secureKey, :activated, :newsletter, :language, presence: true
   validates :email, :username, uniqueness: true
   validates :birthday, format: /(\d{4})-(\d{2})-(\d{2}) (\d{2}):(\d{2}):(\d{2})/
+  
+  before_create do |user|
+    user.salt = self.salt_hash(user.password)
+    user.password = User.password_hash(user.password)
+    user.image = "default.png" if user.image == nil || (user.image != nil && user.image == "")
+    user.activated = false
+    user.newsletter = true if user.newsletter == nil
+    user.regenerateKey
+  end
 
+  # Recreate an idAPI and so the secureKey associated
+  # The secureKey need to be unique so we check if someone already has this one
   def regenerateKey
     key = nil
 
@@ -55,37 +69,52 @@ class User < ActiveRecord::Base
     self.save
   end
 
-  before_create do |user|
-    user.salt = self.salt_hash(user.password)
-    user.password = User.password_hash(user.password)
-    user.image = "default.png" if user.image == nil || (user.image != nil && user.image == "")
-    user.activated = false
-    user.newsletter = true if user.newsletter == nil
-    user.regenerateKey
-  end
-
+  # Static function to create the hash of the secureKey
+  #
+  # ==== Attributes
+  #
+  # * +key+ - The generated key to encode
+  #
   def self.secureKey_hash(key)
     Digest::SHA1.hexdigest(Digest::MD5.hexdigest(key))
   end
 
+  # Static function to create the hash of the password
+  #
+  # ==== Attributes
+  #
+  # * +pass+ - The password of the user to encode
+  #
   def self.password_hash(pass)
     Digest::MD5.hexdigest(Digest::SHA1.hexdigest(pass))
   end
 
-  def salt_hash()
+  # Static function to create the hash of the salt
+  # It uses the password, so it has to be set before
+  def salt_hash
     User.secureKey_hash("#{Digest::SHA256.hexdigest("#{Time.now.utc}--#{self.password}")}--#{Digest::SHA256.hexdigest(self.password)}")
   end
 
   ########
 
   private
+
+  # Private function to create a random key of 48 characters
   def createKey
     sha256 = Digest::SHA1.new
-    return sha256.hexdigest ('a'..'z').to_a.concat(('A'..'Z').to_a.concat(('0'..'9').to_a)).shuffle[0,48].join
+
+    key = ""
+    example = ('a'..'z').to_a.concat(('A'..'Z').to_a.concat(('0'..'9').to_a)).shuffle[0,48].join
+    48.times do
+      key += example[Random.rand(example.size)]
+    end
+
+    return sha256.hexdigest key
   end
 
+  # Create a hash by addition of two values considered as string
   def generateHash(value1, value2)
     sha256 = Digest::SHA1.new
-    return sha256.hexdigest(value1 + value2)
+    return sha256.hexdigest(value1.to_s + value2.to_s)
   end
 end

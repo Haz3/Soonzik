@@ -3,7 +3,7 @@ var SearchIndex =
 	{
 		"name": "API",
 		"link": "API.html",
-		"snippet": "",
+		"snippet": "<p>The module contain every class from the API It is used for the routing (for\nthe subdomain)\n",
 		"type": "normalmodule"
 	},
 	{
@@ -15,7 +15,7 @@ var SearchIndex =
 	{
 		"name": "API::ApiController",
 		"link": "API/ApiController.html",
-		"snippet": "",
+		"snippet": "<p>The class is the parent of every class because it is inherit from\n&#39;Apisecurity&#39; ApiController …\n",
 		"type": "normalclass"
 	},
 	{
@@ -123,187 +123,187 @@ var SearchIndex =
 	{
 		"name": "Access",
 		"link": "Access.html",
-		"snippet": "",
+		"snippet": "<p>The model of the object Access Contain the relation and the validation Can\nprovide some features linked …\n",
 		"type": "normalclass"
 	},
 	{
 		"name": "Address",
 		"link": "Address.html",
-		"snippet": "",
+		"snippet": "<p>The model of the object Address Contain the relation and the validation Can\nprovide some features linked …\n",
 		"type": "normalclass"
 	},
 	{
 		"name": "AdminUser",
 		"link": "AdminUser.html",
-		"snippet": "",
+		"snippet": "<p>The class generated thanks to the gem &#39;activeadmin&#39;\n",
 		"type": "normalclass"
 	},
 	{
 		"name": "Album",
 		"link": "Album.html",
-		"snippet": "",
+		"snippet": "<p>The model of the object Album Contain the relation and the validation Can\nprovide some features linked …\n",
 		"type": "normalclass"
 	},
 	{
 		"name": "AlbumNote",
 		"link": "AlbumNote.html",
-		"snippet": "",
+		"snippet": "<p>The model of the object AlbumNote Contain the relation and the validation\nCan provide some features linked …\n",
 		"type": "normalclass"
 	},
 	{
 		"name": "Attachment",
 		"link": "Attachment.html",
-		"snippet": "",
+		"snippet": "<p>The model of the object Attachment Contain the relation and the validation\nCan provide some features …\n",
 		"type": "normalclass"
 	},
 	{
 		"name": "Battle",
 		"link": "Battle.html",
-		"snippet": "",
+		"snippet": "<p>The model of the object Battle Contain the relation and the validation Can\nprovide some features linked …\n",
 		"type": "normalclass"
 	},
 	{
 		"name": "Cart",
 		"link": "Cart.html",
-		"snippet": "",
+		"snippet": "<p>The model of the object Cart Contain the relation and the validation Can\nprovide some features linked …\n",
 		"type": "normalclass"
 	},
 	{
 		"name": "Commentary",
 		"link": "Commentary.html",
-		"snippet": "",
+		"snippet": "<p>The model of the object Commentary Contain the relation and the validation\nCan provide some features …\n",
 		"type": "normalclass"
 	},
 	{
 		"name": "Concert",
 		"link": "Concert.html",
-		"snippet": "",
+		"snippet": "<p>The model of the object Concert Contain the relation and the validation Can\nprovide some features linked …\n",
 		"type": "normalclass"
 	},
 	{
 		"name": "Description",
 		"link": "Description.html",
-		"snippet": "",
+		"snippet": "<p>The model of the object Description Contain the relation and the validation\nCan provide some features …\n",
 		"type": "normalclass"
 	},
 	{
 		"name": "Flac",
 		"link": "Flac.html",
-		"snippet": "",
+		"snippet": "<p>The model of the object Flac Contain the relation and the validation Can\nprovide some features linked …\n",
 		"type": "normalclass"
 	},
 	{
 		"name": "Genre",
 		"link": "Genre.html",
-		"snippet": "",
+		"snippet": "<p>The model of the object Genre Contain the relation and the validation Can\nprovide some features linked …\n",
 		"type": "normalclass"
 	},
 	{
 		"name": "Gift",
 		"link": "Gift.html",
-		"snippet": "",
+		"snippet": "<p>The model of the object Gift Contain the relation and the validation Can\nprovide some features linked …\n",
 		"type": "normalclass"
 	},
 	{
 		"name": "Group",
 		"link": "Group.html",
-		"snippet": "",
+		"snippet": "<p>The model of the object Group Contain the relation and the validation Can\nprovide some features linked …\n",
 		"type": "normalclass"
 	},
 	{
 		"name": "Influence",
 		"link": "Influence.html",
-		"snippet": "",
+		"snippet": "<p>The model of the object Influence Contain the relation and the validation\nCan provide some features linked …\n",
 		"type": "normalclass"
 	},
 	{
 		"name": "Listening",
 		"link": "Listening.html",
-		"snippet": "",
+		"snippet": "<p>The model of the object Listening Contain the relation and the validation\nCan provide some features linked …\n",
 		"type": "normalclass"
 	},
 	{
 		"name": "Message",
 		"link": "Message.html",
-		"snippet": "",
+		"snippet": "<p>The model of the object Message Contain the relation and the validation Can\nprovide some features linked …\n",
 		"type": "normalclass"
 	},
 	{
 		"name": "Music",
 		"link": "Music.html",
-		"snippet": "",
+		"snippet": "<p>The model of the object Music Contain the relation and the validation Can\nprovide some features linked …\n",
 		"type": "normalclass"
 	},
 	{
 		"name": "MusicNote",
 		"link": "MusicNote.html",
-		"snippet": "",
+		"snippet": "<p>The model of the object MusicNote Contain the relation and the validation\nCan provide some features linked …\n",
 		"type": "normalclass"
 	},
 	{
 		"name": "News",
 		"link": "News.html",
-		"snippet": "",
+		"snippet": "<p>The model of the object News Contain the relation and the validation Can\nprovide some features linked …\n",
 		"type": "normalclass"
 	},
 	{
 		"name": "Newstext",
 		"link": "Newstext.html",
-		"snippet": "",
+		"snippet": "<p>The model of the object Newstext Contain the relation and the validation\nCan provide some features linked …\n",
 		"type": "normalclass"
 	},
 	{
 		"name": "Notification",
 		"link": "Notification.html",
-		"snippet": "",
+		"snippet": "<p>The model of the object Notification Contain the relation and the\nvalidation Can provide some features …\n",
 		"type": "normalclass"
 	},
 	{
 		"name": "Pack",
 		"link": "Pack.html",
-		"snippet": "",
+		"snippet": "<p>The model of the object Pack Contain the relation and the validation Can\nprovide some features linked …\n",
 		"type": "normalclass"
 	},
 	{
 		"name": "Playlist",
 		"link": "Playlist.html",
-		"snippet": "",
+		"snippet": "<p>The model of the object Playlist Contain the relation and the validation\nCan provide some features linked …\n",
 		"type": "normalclass"
 	},
 	{
 		"name": "Proposition",
 		"link": "Proposition.html",
-		"snippet": "",
+		"snippet": "<p>The model of the object Proposition Contain the relation and the validation\nCan provide some features …\n",
 		"type": "normalclass"
 	},
 	{
 		"name": "Purchase",
 		"link": "Purchase.html",
-		"snippet": "",
+		"snippet": "<p>The model of the object Purchase Contain the relation and the validation\nCan provide some features linked …\n",
 		"type": "normalclass"
 	},
 	{
 		"name": "Tag",
 		"link": "Tag.html",
-		"snippet": "",
+		"snippet": "<p>The model of the object Tag Contain the relation and the validation Can\nprovide some features linked …\n",
 		"type": "normalclass"
 	},
 	{
 		"name": "Tweet",
 		"link": "Tweet.html",
-		"snippet": "",
+		"snippet": "<p>The model of the object Tweet Contain the relation and the validation Can\nprovide some features linked …\n",
 		"type": "normalclass"
 	},
 	{
 		"name": "User",
 		"link": "User.html",
-		"snippet": "",
+		"snippet": "<p>The model of the object User Contain the relation and the validation Can\nprovide some features linked …\n",
 		"type": "normalclass"
 	},
 	{
 		"name": "Vote",
 		"link": "Vote.html",
-		"snippet": "",
+		"snippet": "<p>The model of the object Vote Contain the relation and the validation Can\nprovide some features linked …\n",
 		"type": "normalclass"
 	},
 	{
@@ -333,7 +333,7 @@ var SearchIndex =
 	{
 		"name": "setParamToObj",
 		"link": "API/ApiController.html#method-i-setParamToObj",
-		"snippet": "",
+		"snippet": "<p>Transform the params into attributes and create the getter to access it\n<p>Options\n<p><code>:params</code> - The GET or POST …\n",
 		"type": "anymethod"
 	},
 	{
@@ -693,43 +693,43 @@ var SearchIndex =
 	{
 		"name": "objectValidation",
 		"link": "Cart.html#method-i-objectValidation",
-		"snippet": "",
+		"snippet": "<p>A validate rules to check if an object exists The typeObj and obj_id need\nto be present to do the check …\n",
 		"type": "anymethod"
 	},
 	{
 		"name": "objectValidation",
 		"link": "Gift.html#method-i-objectValidation",
-		"snippet": "",
+		"snippet": "<p>A validate rules to check if an object exists The typeObj and obj_id need\nto be present to do the check …\n",
 		"type": "anymethod"
 	},
 	{
 		"name": "objectValidation",
 		"link": "Purchase.html#method-i-objectValidation",
-		"snippet": "",
+		"snippet": "<p>A validate rules to check if an object exists The typeObj and obj_id need\nto be present to do the check …\n",
 		"type": "anymethod"
 	},
 	{
 		"name": "regenerateKey",
 		"link": "User.html#method-i-regenerateKey",
-		"snippet": "",
+		"snippet": "<p>Recreate an idAPI and so the secureKey associated The secureKey need to be\nunique so we check if someone …\n",
 		"type": "anymethod"
 	},
 	{
 		"name": "secureKey_hash",
 		"link": "User.html#method-c-secureKey_hash",
-		"snippet": "",
+		"snippet": "<p>Static function to create the hash of the secureKey\n<p>Attributes\n<p><code>key</code> - The generated key to encode\n",
 		"type": "anymethod"
 	},
 	{
 		"name": "password_hash",
 		"link": "User.html#method-c-password_hash",
-		"snippet": "",
+		"snippet": "<p>Static function to create the hash of the password\n<p>Attributes\n<p><code>pass</code> - The password of the user to encode …\n",
 		"type": "anymethod"
 	},
 	{
 		"name": "salt_hash",
 		"link": "User.html#method-i-salt_hash",
-		"snippet": "",
+		"snippet": "<p>Static function to create the hash of the salt It uses the password, so it\nhas to be set before\n",
 		"type": "anymethod"
 	}
 ]

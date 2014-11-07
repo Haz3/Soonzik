@@ -1,3 +1,6 @@
+# The model of the object News
+# Contain the relation and the validation
+# Can provide some features linked to this model
 class News < ActiveRecord::Base
   belongs_to :user
   has_many :tags

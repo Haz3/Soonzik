@@ -1,3 +1,6 @@
+# The model of the object Listening
+# Contain the relation and the validation
+# Can provide some features linked to this model
 class Listening < ActiveRecord::Base
   belongs_to :music
   belongs_to :user

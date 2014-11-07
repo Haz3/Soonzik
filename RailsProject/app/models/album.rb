@@ -1,3 +1,6 @@
+# The model of the object Album
+# Contain the relation and the validation
+# Can provide some features linked to this model
 class Album < ActiveRecord::Base
   has_and_belongs_to_many :descriptions
   has_and_belongs_to_many :packs
