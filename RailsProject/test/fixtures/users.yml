@@ -11,19 +11,18 @@ UserOne:
   image: default.png
   description: La description de l'utilisateur numero 1
   phoneNumber: 03 20 60 40 19
-  adress_id: 1
+  address_id: 1
   facebook: user1.facebook
   twitter: user1.twitter
   googlePlus: user1.plus
-  signin: 2014-09-07 23:20:20
+  signin: "2014-09-07 23:20:20"
   idAPI: 4f009289d197fd93e8977e96c945e5324c002875
   secureKey: 0c503c3e735a7bfb5aa7244db8c2a8c80d296f16
   activated: true
   newsletter: true
   language: FR
   groups: userGroup
-  friends: UserTwo
-  followers: UserTwo
+  #friends: UserTwo
 
 UserTwo:
   email: user_two@gmail.com
@@ -36,16 +35,15 @@ UserTwo:
   image: default.png
   description: description du deuxieme utilisateur
   phoneNumber: +33 6 30 49 32 11
-  adress_id: 2
+  address_id: 2
   facebook: facedebouc
   twitter: twittos
   googlePlus: 2039430539540
-  signin: 2014-09-07 23:20:20
+  signin: "2014-09-07 23:20:20"
   idAPI: b266741d88c8d2155dc1315c8e9b7fb7ff29830e
   secureKey: ab8c1c4b8d28cbf921618755dcd5306377ce8561
   activated: false
   newsletter: false
   language: EN
   groups: vipGroup
-  friends_with: UserOne
-  follows: UserOne
+  #friends_with: UserOne

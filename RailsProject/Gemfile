@@ -60,6 +60,9 @@ gem 'better_errors'
 gem 'priscilla'
 gem "binding_of_caller"
 
+# For test
+gem 'simplecov', :require => false, :group => :test
+
 #Features
 gem "gritter"
 gem 'activeadmin', github: 'gregbell/active_admin'

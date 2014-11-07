@@ -2,6 +2,8 @@
 # Contain the relation and the validation
 # Can provide some features linked to this model
 class User < ActiveRecord::Base
+  before_create :beforeCreate
+
   belongs_to :address
 
   has_one :cart
@@ -23,10 +25,16 @@ class User < ActiveRecord::Base
   has_many :messages_receiver, class_name: 'Message', foreign_key: 'dest_id'
 
   has_and_belongs_to_many :groups
-  has_and_belongs_to_many :follows, class_name: 'User', foreign_key: 'user_id', join_table: 'follows'
-  has_and_belongs_to_many :followers, class_name: 'User', foreign_key: 'follow_id', join_table: 'follows'
-  has_and_belongs_to_many :friends, class_name: 'User', foreign_key: 'user_id', join_table: 'friends'
-  has_and_belongs_to_many :friends_with, class_name: 'User', foreign_key: 'friend_id', join_table: 'friends'
+
+  #FOLLOW TRICKS
+  has_many :relations_follow, :foreign_key => 'user_id', :class_name => 'Follow'
+  has_many :relations_follower, :foreign_key => 'follow_id', :class_name => 'Follow'
+  has_many :follows, :through => :relations_follow, :source => :user_to
+  has_many :followers, :through => :relations_follower, :source => :user
+  #has_and_belongs_to_many :follows, join_table: 'follows', class_name: 'User', foreign_key: 'user_id', association_foreign_key: "follow_id"
+  #has_and_belongs_to_many :followers, join_table: 'follows', class_name: 'User', foreign_key: 'follow_id', association_foreign_key: "user_id"
+  #has_and_belongs_to_many :friends, join_table: 'friends', class_name: 'User', foreign_key: 'user_id', association_foreign_key: "friend_id"
+  #has_and_belongs_to_many :friends_with, join_table: 'friends', class_name: 'User', foreign_key: 'friend_id', association_foreign_key: "user_id"
 
   # validation
   # message: 'the message'
@@ -42,18 +50,11 @@ class User < ActiveRecord::Base
   validates :idAPI, length: { is: 40 }
   validates :secureKey, length: { is: 40 }
   validates :salt, length: { is: 40 }
-  validates :groups, :email, :password, :salt, :username, :birthday, :image, :signin, :idAPI, :secureKey, :activated, :newsletter, :language, presence: true
+  validates :groups, :email, :password, :salt, :username, :birthday, :image, :signin, :idAPI, :secureKey, :language, presence: true
+  validates :newsletter, :activated, :inclusion => { :in => [true, false] }
   validates :email, :username, uniqueness: true
-  validates :birthday, format: /(\d{4})-(\d{2})-(\d{2}) (\d{2}):(\d{2}):(\d{2})/
-  
-  before_create do |user|
-    user.salt = self.salt_hash(user.password)
-    user.password = User.password_hash(user.password)
-    user.image = "default.png" if user.image == nil || (user.image != nil && user.image == "")
-    user.activated = false
-    user.newsletter = true if user.newsletter == nil
-    user.regenerateKey
-  end
+  validates :birthday, format: /\A(\d{4})-(\d{2})-(\d{2})\z/
+  validates :signin, format: /\A(\d{4})-(\d{2})-(\d{2}) (\d{2}):(\d{2}):(\d{2})\z/
 
   # Recreate an idAPI and so the secureKey associated
   # The secureKey need to be unique so we check if someone already has this one
@@ -61,12 +62,11 @@ class User < ActiveRecord::Base
     key = nil
 
     begin
-      key = User.secureKey_hash(self.createKey())
+      key = User.secureKey_hash(createKey())
     end while (User.find_by_idAPI(key))
 
     self.idAPI = key
     self.secureKey = generateHash(self.salt, key)
-    self.save
   end
 
   # Static function to create the hash of the secureKey
@@ -89,7 +89,7 @@ class User < ActiveRecord::Base
     Digest::MD5.hexdigest(Digest::SHA1.hexdigest(pass))
   end
 
-  # Static function to create the hash of the salt
+  # Method to create the hash of the salt
   # It uses the password, so it has to be set before
   def salt_hash
     User.secureKey_hash("#{Digest::SHA256.hexdigest("#{Time.now.utc}--#{self.password}")}--#{Digest::SHA256.hexdigest(self.password)}")
@@ -98,6 +98,17 @@ class User < ActiveRecord::Base
   ########
 
   private
+
+  # Private function to change elements before creation of a row
+  def beforeCreate
+    self.salt = self.salt_hash if defined?(self.password) && self.password != nil
+    self.password = User.password_hash(self.password) if defined?(self.password) && self.password != nil
+    self.image = "default.png" if self.image == nil || (self.image != nil && self.image == "")
+    self.activated = false
+    self.signin = Time.now.strftime "%Y-%m-%d %H:%M:%S"
+    self.newsletter = true if self.newsletter == nil
+    self.regenerateKey() if defined?(self.password) && self.password != nil
+  end
 
   # Private function to create a random key of 48 characters
   def createKey

@@ -2,10 +2,10 @@
 
 userAccess:
   group_id: 1
-  controllerName: User
+  controllerName: 'User'
   actionName: index
 
 newsAccess:
   group_id: 2
-  controllerName: News
+  controllerName: 'News'
   actionName: show
