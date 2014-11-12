@@ -14,6 +14,8 @@
 @property (strong, nonatomic) NSArray *tableData;
 @property (strong, nonatomic) NSArray *tableImageData;
 
+@property (strong, nonatomic) UIView *backgroundView;
+
 @property (strong, nonatomic) id<MenuTabDelegate> clickDelegate;
 
 - (void)loadWithData:(NSMutableArray *)array and:(NSMutableArray *)array2;

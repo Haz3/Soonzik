@@ -33,10 +33,10 @@ module API
         concert = Concert.find_by_id(@id)
         if (!concert)
           codeAnswer 502
-          return
+        else
+          @returnValue = { content: concert.as_json(:include => :address) }
+          codeAnswer 200
         end
-        @returnValue = { content: concert.as_json(:include => :address) }
-        codeAnswer 200
       rescue
         codeAnswer 504
       end

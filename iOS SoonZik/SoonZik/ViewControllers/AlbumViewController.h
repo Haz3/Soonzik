@@ -6,8 +6,10 @@
 //  Copyright (c) 2014 Coordina. All rights reserved.
 //
 
-#import "TypeViewController.h"
+#import <UIKit/UIKit.h>
 
-@interface AlbumViewController : TypeViewController
+@interface AlbumViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
+
+@property (nonatomic, weak) IBOutlet UITableView *tableview;
 
 @end

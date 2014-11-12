@@ -1,11 +1,13 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  style_name: MyString
-  color_name: MyString
-  color_hexa: MyString
+GenreOne:
+  style_name: Rap
+  color_name: blue
+  color_hexa: '#333'
+  influences: InfluenceOne
 
-two:
-  style_name: MyString
-  color_name: MyString
-  color_hexa: MyString
+GenreTwo:
+  style_name: Pop
+  color_name: green
+  color_hexa: '#999'
+  influences: InfluenceTwo

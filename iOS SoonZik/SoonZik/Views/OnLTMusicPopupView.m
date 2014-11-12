@@ -19,18 +19,12 @@
     return self;
 }
 
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect
-{
-    // Drawing code
-}
-*/
-- (void)initPopupWithSong:(Song *)song
+- (void)initPopupWithSong:(Music *)song andPlaylist:(Playlist *)playlist
 {
     self.alpha = 0;
     float yPosition = self.popupView.frame.origin.y;
+    self.song = song;
+    self.playlist = playlist;
     
     self.popupView.layer.cornerRadius = 15;
     
@@ -42,41 +36,22 @@
         [self.popupView setFrame:CGRectMake(self.popupView.frame.origin.x, yPosition, self.popupView.frame.size.width, self.popupView.frame.size.height)];
     }];
     
-    self.musicImage.image = [UIImage imageNamed:song.image];
+    self.musicImage.image = [UIImage imageNamed:song.album.image];
     self.musicName.text = song.title;
     
     [self.removeFromPlaylistButton addTarget:self action:@selector(removeFromPlayList) forControlEvents:UIControlEventTouchUpInside];
+    [self.albumButton addTarget:self action:@selector(pressAlbumButton) forControlEvents:UIControlEventTouchUpInside];
+    [self.artistButton addTarget:self action:@selector(pressArtistButton) forControlEvents:UIControlEventTouchUpInside];
+    [self.addToPlaylistButton addTarget:self action:@selector(pressAddToCurrentPlaylistButton) forControlEvents:UIControlEventTouchUpInside];
 }
 
 - (BOOL)pointInside:(CGPoint)point withEvent:(UIEvent *)event
 {
-    self.superview.userInteractionEnabled = NO;
     if ((point.x < self.popupView.frame.origin.x) || (point.x > (self.popupView.frame.origin.x + self.popupView.frame.size.width))) {
-        [UIView animateWithDuration:1 animations:^{
-            self.alpha = 0;
-        } completion:^(BOOL finished) {
-            if (finished) {
-                self.superview.userInteractionEnabled = YES;
-                [self removeFromSuperview];
-            }
-        }];
-       
-        
+       [self.choiceDelegate closePopUpView];
     } else if ((point.y < self.popupView.frame.origin.y) || (point.y > (self.popupView.frame.origin.y + self.popupView.frame.size.height))) {
-        [UIView animateWithDuration:0.5 animations:^{
-            self.alpha = 0;
-        } completion:^(BOOL finished) {
-            if (finished) {
-                self.superview.userInteractionEnabled = YES;
-                [self removeFromSuperview];
-            }
-        }];
+        [self.choiceDelegate closePopUpView];
     }
-    else {
-        self.superview.userInteractionEnabled = YES;
-    }
-    
-    NSLog(@"user enabled : %i", self.popupView.isUserInteractionEnabled);
     
     return YES;
 }
@@ -84,6 +59,22 @@
 - (void)removeFromPlayList
 {
     NSLog(@"Remove from playlist");
+    [self.choiceDelegate removeMusicFromPlayList:self.song and:self.playlist];
+}
+
+- (void)pressAlbumButton
+{
+    [self.choiceDelegate goToAlbumView:self.song];
+}
+
+- (void)pressArtistButton
+{
+    [self.choiceDelegate goToArtistView:self.song];
+}
+
+- (void)pressAddToCurrentPlaylistButton
+{
+    [self.choiceDelegate addToCurrentPlaylist:self.song];
 }
 
 @end

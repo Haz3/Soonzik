@@ -1,11 +1,11 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  url: MyString
-  file_size: 1
-  content_type: MyString
+attachmentOne:
+  url: url_one
+  file_size: 1024
+  content_type: pdf
 
-two:
-  url: MyString
-  file_size: 1
-  content_type: MyString
+attachmentTwo:
+  url: url_two
+  file_size: 2048
+  content_type: msword

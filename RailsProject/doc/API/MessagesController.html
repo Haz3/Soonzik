@@ -115,7 +115,7 @@ the list of action available :</p>
 <ul><li>
 <p>show        [get] - SECURE</p>
 </li><li>
-<p>save                  [post]</p>
+<p>save                  [post] - SECURE</p>
 </li><li>
 <p>find        [get] - SECURE</p>
 </li></ul>
@@ -173,7 +173,7 @@ specific value</p>
 Note : By default, if you precise no attribute, it will take every row</pre>					
 											<div class="method-source-code" id="find-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/messages_controller.rb, line 54</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/messages_controller.rb, line 84</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">find</span>
   <span class="ruby-keyword">begin</span>
     <span class="ruby-keyword">if</span> (<span class="ruby-operator">!</span><span class="ruby-ivar">@security</span>)
@@ -191,14 +191,14 @@ Note : By default, if you precise no attribute, it will take every row</pre>
           <span class="ruby-keyword">end</span>
 
           <span class="ruby-keyword">if</span> (<span class="ruby-identifier">message_object</span> <span class="ruby-operator">==</span> <span class="ruby-keyword">nil</span>)          <span class="ruby-comment">#message_object doesn&#39;t exist</span>
-            <span class="ruby-identifier">message_object</span> = <span class="ruby-constant">Message</span>.<span class="ruby-identifier">where</span>(<span class="ruby-identifier">condition</span>)
+            <span class="ruby-identifier">message_object</span> = <span class="ruby-constant">Message</span>.<span class="ruby-identifier">where</span>(<span class="ruby-identifier">condition</span>).<span class="ruby-identifier">where</span>(<span class="ruby-identifier">user_id</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@user_id</span>)
           <span class="ruby-keyword">else</span>                              <span class="ruby-comment">#message_object exists</span>
             <span class="ruby-identifier">message_object</span> = <span class="ruby-identifier">message_object</span>.<span class="ruby-identifier">where</span>(<span class="ruby-identifier">condition</span>)
           <span class="ruby-keyword">end</span>
         <span class="ruby-keyword">end</span>
         <span class="ruby-comment"># - - - - - - - -</span>
       <span class="ruby-keyword">else</span>
-        <span class="ruby-identifier">message_object</span> = <span class="ruby-constant">Message</span>.<span class="ruby-identifier">all</span>            <span class="ruby-comment">#no attribute specified</span>
+        <span class="ruby-identifier">message_object</span> = <span class="ruby-constant">Message</span>.<span class="ruby-identifier">where</span>(<span class="ruby-identifier">user_id</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@user_id</span>)            <span class="ruby-comment">#no attribute specified</span>
       <span class="ruby-keyword">end</span>
 
       <span class="ruby-identifier">order_asc</span> = <span class="ruby-string">&quot;&quot;</span>
@@ -241,13 +241,66 @@ Note : By default, if you precise no attribute, it will take every row</pre>
         <span class="ruby-identifier">message_object</span> = <span class="ruby-identifier">message_object</span>.<span class="ruby-identifier">offset</span>(<span class="ruby-ivar">@offset</span>.<span class="ruby-identifier">to_i</span>)
       <span class="ruby-keyword">end</span>
 
-      <span class="ruby-ivar">@returnValue</span> = { <span class="ruby-identifier">content</span><span class="ruby-operator">:</span> <span class="ruby-identifier">message_object</span>.<span class="ruby-identifier">as_json</span>(<span class="ruby-value">:include</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">:user</span>) }
+      <span class="ruby-ivar">@returnValue</span> = { <span class="ruby-identifier">content</span><span class="ruby-operator">:</span> <span class="ruby-identifier">message_object</span>.<span class="ruby-identifier">as_json</span>(<span class="ruby-value">:include</span> =<span class="ruby-operator">&gt;</span> {
+                                  <span class="ruby-value">:sender</span> =<span class="ruby-operator">&gt;</span> {},
+                                  <span class="ruby-value">:receiver</span> =<span class="ruby-operator">&gt;</span> {}
+                                }) }
 
       <span class="ruby-keyword">if</span> (<span class="ruby-identifier">message_object</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>)
         <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">202</span>
       <span class="ruby-keyword">else</span>
         <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">200</span>
       <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">rescue</span>
+    <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">504</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">sendJson</span>
+<span class="ruby-keyword">end</span></code></pre>
+						</div>
+										</div>
+
+					
+									</div>
+								<a name="method-i-save">anchor</a>
+				<div id="method-i-save-doc" class="method">
+
+					<header>
+											<i class="icon-generic"></i>
+						<span class="method-name">save</span><span 
+							class="method-args">()</span>
+										</header>
+
+					<div class="method-description">
+											<p>Save a new object Message. For more information on the parameters, check at
+the model</p>
+
+<h4 id="method-i-save-label-Options">Options<span><a href="#method-i-save-label-Options">&para;</a> <a href="#documentation">&uarr;</a></span></h4>
+<ul><li>
+<p>+:<a href="user_id">message</a>+ - Id of the user who send the message</p>
+</li><li>
+<p>+:<a href="dest_id">message</a>+ - Id of the user who read the message</p>
+</li><li>
+<p>+:<a href="msg">message</a>+ - The text of the message</p>
+</li></ul>					
+											<div class="method-source-code" id="save-source">
+							<pre class="prettyprint linenums"><code 
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/messages_controller.rb, line 46</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">save</span>
+  <span class="ruby-keyword">begin</span>
+    <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@security</span>)
+      <span class="ruby-identifier">msg</span> = <span class="ruby-constant">Message</span>.<span class="ruby-identifier">new</span>(<span class="ruby-ivar">@message</span>)
+      <span class="ruby-keyword">if</span> (<span class="ruby-identifier">msg</span>.<span class="ruby-identifier">save</span>)
+        <span class="ruby-ivar">@returnValue</span> = { <span class="ruby-identifier">content</span><span class="ruby-operator">:</span> <span class="ruby-identifier">msg</span>.<span class="ruby-identifier">as_json</span>(<span class="ruby-value">:include</span> =<span class="ruby-operator">&gt;</span> {
+                                <span class="ruby-value">:sender</span> =<span class="ruby-operator">&gt;</span> {},
+                                <span class="ruby-value">:receiver</span> =<span class="ruby-operator">&gt;</span> {}
+                              }) }
+        <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">201</span>
+      <span class="ruby-keyword">else</span>
+        <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">503</span>
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">500</span>
     <span class="ruby-keyword">end</span>
   <span class="ruby-keyword">rescue</span>
     <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">504</span>
@@ -284,13 +337,13 @@ Note : By default, if you precise no attribute, it will take every row</pre>
             <span class="ruby-identifier">msg</span> = <span class="ruby-constant">Message</span>.<span class="ruby-identifier">find_by_id</span>(<span class="ruby-ivar">@id</span>)
             <span class="ruby-keyword">if</span> (<span class="ruby-operator">!</span><span class="ruby-identifier">msg</span>)
               <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">502</span>
-              <span class="ruby-keyword">return</span>
-            <span class="ruby-keyword">end</span>
+            <span class="ruby-keyword">else</span>
             <span class="ruby-ivar">@returnValue</span> = { <span class="ruby-identifier">content</span><span class="ruby-operator">:</span> <span class="ruby-identifier">msg</span>.<span class="ruby-identifier">as_json</span>(<span class="ruby-value">:include</span> =<span class="ruby-operator">&gt;</span> {
                                                                                                                     <span class="ruby-value">:sender</span> =<span class="ruby-operator">&gt;</span> {},
                                                                                                                     <span class="ruby-value">:receiver</span> =<span class="ruby-operator">&gt;</span> {}
                                                                                                             }) }
-            <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">200</span>
+        <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">200</span>
+      <span class="ruby-keyword">end</span>
         <span class="ruby-keyword">else</span>
            <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">500</span>
         <span class="ruby-keyword">end</span>
@@ -329,11 +382,14 @@ Note : By default, if you precise no attribute, it will take every row</pre>
 	<!-- Class dropdown menu -->
 	<div id="class-dropdown" class="dropdown-menu has-scroll">
 	<ul>
+			<li><a href="../API.html">API</a></li>
 			<li><a href="../API/AlbumsController.html">API::AlbumsController</a></li>
+			<li><a href="../API/ApiController.html">API::ApiController</a></li>
 			<li><a href="../API/ApisecurityController.html">API::ApisecurityController</a></li>
 			<li><a href="../API/BattlesController.html">API::BattlesController</a></li>
 			<li><a href="../API/CartsController.html">API::CartsController</a></li>
 			<li><a href="../API/ConcertsController.html">API::ConcertsController</a></li>
+			<li><a href="../API/GiftsController.html">API::GiftsController</a></li>
 			<li><a href="../API/ListeningsController.html">API::ListeningsController</a></li>
 			<li><a href="../API/MessagesController.html">API::MessagesController</a></li>
 			<li><a href="../API/MusicsController.html">API::MusicsController</a></li>
@@ -341,6 +397,8 @@ Note : By default, if you precise no attribute, it will take every row</pre>
 			<li><a href="../API/NotificationsController.html">API::NotificationsController</a></li>
 			<li><a href="../API/PacksController.html">API::PacksController</a></li>
 			<li><a href="../API/PlaylistsController.html">API::PlaylistsController</a></li>
+			<li><a href="../API/PurchasesController.html">API::PurchasesController</a></li>
+			<li><a href="../API/SearchsController.html">API::SearchsController</a></li>
 			<li><a href="../API/SuggestionsController.html">API::SuggestionsController</a></li>
 			<li><a href="../API/TweetsController.html">API::TweetsController</a></li>
 			<li><a href="../API/UsersController.html">API::UsersController</a></li>

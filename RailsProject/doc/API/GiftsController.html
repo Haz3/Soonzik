@@ -109,7 +109,13 @@
 		</section>
 
 		<section class="description">
-					</section>
+			
+<p>Controller which manage the transaction for the Gift objects Here is the
+list of action available :</p>
+<ul><li>
+<p>save        [post] - SECURE</p>
+</li></ul>
+		</section>
 
 				<section id="5Buntitled-5D" class="documentation-section">
 			
@@ -124,6 +130,67 @@
 			
 			
 									
+						<section class="public-methods instance-methods methods">
+				<header>
+					<h3>Public Instance Methods</h3>
+				</header>
+
+								<a name="method-i-save">anchor</a>
+				<div id="method-i-save-doc" class="method">
+
+					<header>
+											<i class="icon-generic"></i>
+						<span class="method-name">save</span><span 
+							class="method-args">()</span>
+										</header>
+
+					<div class="method-description">
+											<p>Save a new object Gift. For more information on the parameters, check at
+the model</p>
+
+<h4 id="method-i-save-label-Options">Options<span><a href="#method-i-save-label-Options">&para;</a> <a href="#documentation">&uarr;</a></span></h4>
+<ul><li>
+<p>+:<a href="to_user">gift</a>+ - Id of the user who has the gift</p>
+</li><li>
+<p>+:<a href="from_user">gift</a>+ - Id of the user where the gift comes from</p>
+</li><li>
+<p>+:<a href="typeObj">gift</a>+ - Model name of the object to add to the gift</p>
+</li><li>
+<p>+:<a href="obj_id">gift</a>+ - Id of the object</p>
+</li></ul>					
+											<div class="method-source-code" id="save-source">
+							<pre class="prettyprint linenums"><code 
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/gifts_controller.rb, line 17</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">save</span>
+  <span class="ruby-keyword">begin</span>
+    <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@security</span>)
+      <span class="ruby-identifier">gift</span> = <span class="ruby-constant">Gift</span>.<span class="ruby-identifier">new</span>(<span class="ruby-ivar">@gift</span>)
+      <span class="ruby-identifier">classObj</span> = <span class="ruby-identifier">gift</span>.<span class="ruby-identifier">typeObj</span>.<span class="ruby-identifier">constantize</span>
+      <span class="ruby-comment"># check if the object exists</span>
+      <span class="ruby-keyword">if</span> (<span class="ruby-identifier">classObj</span>.<span class="ruby-identifier">find_by_id</span>(<span class="ruby-identifier">gift</span>.<span class="ruby-identifier">obj_id</span>) <span class="ruby-operator">!=</span> <span class="ruby-keyword">nil</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">gift</span>.<span class="ruby-identifier">save</span>)
+        <span class="ruby-ivar">@returnValue</span> = { <span class="ruby-identifier">content</span><span class="ruby-operator">:</span> <span class="ruby-identifier">gift</span>.<span class="ruby-identifier">as_json</span>(<span class="ruby-value">:include</span> =<span class="ruby-operator">&gt;</span> {
+                                                                <span class="ruby-value">:user_from</span> =<span class="ruby-operator">&gt;</span> {},
+                                                                <span class="ruby-value">:user_to</span> =<span class="ruby-operator">&gt;</span> {}
+                                                              }) }
+        <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">201</span>
+      <span class="ruby-keyword">else</span>
+        <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">503</span>
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">500</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">rescue</span>
+    <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">504</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">sendJson</span>
+<span class="ruby-keyword">end</span></code></pre>
+						</div>
+										</div>
+
+					
+									</div>
+				
+			</section>
 			
 			
 			
@@ -147,11 +214,14 @@
 	<!-- Class dropdown menu -->
 	<div id="class-dropdown" class="dropdown-menu has-scroll">
 	<ul>
+			<li><a href="../API.html">API</a></li>
 			<li><a href="../API/AlbumsController.html">API::AlbumsController</a></li>
+			<li><a href="../API/ApiController.html">API::ApiController</a></li>
 			<li><a href="../API/ApisecurityController.html">API::ApisecurityController</a></li>
 			<li><a href="../API/BattlesController.html">API::BattlesController</a></li>
 			<li><a href="../API/CartsController.html">API::CartsController</a></li>
 			<li><a href="../API/ConcertsController.html">API::ConcertsController</a></li>
+			<li><a href="../API/GiftsController.html">API::GiftsController</a></li>
 			<li><a href="../API/ListeningsController.html">API::ListeningsController</a></li>
 			<li><a href="../API/MessagesController.html">API::MessagesController</a></li>
 			<li><a href="../API/MusicsController.html">API::MusicsController</a></li>
@@ -159,6 +229,8 @@
 			<li><a href="../API/NotificationsController.html">API::NotificationsController</a></li>
 			<li><a href="../API/PacksController.html">API::PacksController</a></li>
 			<li><a href="../API/PlaylistsController.html">API::PlaylistsController</a></li>
+			<li><a href="../API/PurchasesController.html">API::PurchasesController</a></li>
+			<li><a href="../API/SearchsController.html">API::SearchsController</a></li>
 			<li><a href="../API/SuggestionsController.html">API::SuggestionsController</a></li>
 			<li><a href="../API/TweetsController.html">API::TweetsController</a></li>
 			<li><a href="../API/UsersController.html">API::UsersController</a></li>

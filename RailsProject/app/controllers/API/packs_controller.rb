@@ -10,7 +10,9 @@ module API
     # Retrieve all the packs
     def index
       begin
-        @returnValue = { content: Pack.all.as_json }
+        @returnValue = { content: Pack.all.as_json(include: { albums: {
+                                                                include: { musics: {}}
+                                                              }}) }
         if (@returnValue.size == 0)
           codeAnswer 202
         else
@@ -26,17 +28,19 @@ module API
     #
     # ==== Options
     # 
-    # * +:id+ - The id of the specific album
+    # * +:id+ - The id of the specific pack
     # 
     def show
       begin
-        album = Pack.find_by_id(@id)
-        if (!album)
+        pack = Pack.find_by_id(@id)
+        if (!pack)
           codeAnswer 502
-          return
+        else
+          @returnValue = { content: pack.as_json(include: { albums: {
+                                                                include: { musics: {}}
+                                                              }}) }
+          codeAnswer 200
         end
-        @returnValue = { content: album.as_json(:include => :albums) }
-        codeAnswer 200
       rescue
         codeAnswer 504
       end
@@ -123,7 +127,9 @@ module API
           pack_object = pack_object.offset(@offset.to_i)
         end
 
-        @returnValue = { content: pack_object.as_json(:include => :albums) }
+        @returnValue = { content: pack_object.as_json(include: { albums: {
+                                                                include: { musics: {}}
+                                                              }}) }
 
         if (pack_object.size == 0)
           codeAnswer 202

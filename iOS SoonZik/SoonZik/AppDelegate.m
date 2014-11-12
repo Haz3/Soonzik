@@ -11,21 +11,21 @@
 #import "FirstLaunchViewController.h"
 #import "ConnexionViewController.h"
 #import "HomeViewController.h"
-#import "MenuViewController.h"
 
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    //[UIBarButtonItem appearance].tintColor = [UIColor blackColor];
-    
     self.thePlayer = [[AudioPlayer alloc] init];
-    //self.thePlayer.audioPlayer = [[AVAudioPlayer alloc] initWithData:nil error:nil];
     self.thePlayer.index = 0;
     self.thePlayer.oldIndex = 0;
     self.thePlayer.repeatingLevel = 0;
     self.thePlayer.listeningList = [[NSMutableArray alloc] init];
-        
+    
+    [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback error:nil];
+    [[AVAudioSession sharedInstance] setActive: YES error: nil];
+    [[UIApplication sharedApplication] beginReceivingRemoteControlEvents];
+    
     self.prefs = [NSUserDefaults standardUserDefaults];
     
     UIViewController *vc;
@@ -45,6 +45,7 @@
         vc = [[ConnexionViewController alloc] initWithNibName:@"ConnexionViewController" bundle:nil];
     } */
     
+    //vc = [[ConnexionViewController alloc] initWithNibName:@"ConnexionViewController" bundle:nil];
     vc = [[HomeViewController alloc] initWithNibName:@"HomeViewController" bundle:nil];
     //MenuViewController *mainVC = [[MenuViewController alloc] init];
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
@@ -54,6 +55,38 @@
     [self.window makeKeyAndVisible];
 
     return YES;
+}
+
+- (void)remoteControlReceivedWithEvent:(UIEvent *)receivedEvent
+{
+    if (receivedEvent.type == UIEventTypeRemoteControl) {
+        NSLog(@"remove control");
+        NSLog(@"event : %i", receivedEvent.subtype);
+        switch (receivedEvent.subtype) {
+            case 101:
+            {
+                // pause / play
+                if (self.thePlayer.audioPlayer.isPlaying) {
+                    [self.thePlayer pauseSound];
+                } else {
+                    [self.thePlayer playSound];
+                }
+                
+            }
+            break;
+                
+                /*case UIEventSubtypeRemoteControlPreviousTrack:
+                 [self previousTrack: nil];
+                 break;
+                 
+                 case UIEventSubtypeRemoteControlNextTrack:
+                 [self nextTrack: nil];
+                 break;
+                 */
+            default:
+                break;
+        }
+    }
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application
@@ -66,6 +99,7 @@
 {
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later. 
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+    [application beginReceivingRemoteControlEvents];
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application

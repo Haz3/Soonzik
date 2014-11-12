@@ -34,10 +34,10 @@ module API
         news = News.find_by_id(@id)
         if (!news)
           codeAnswer 502
-          return
+        else
+          @returnValue = { content: news.as_json(:include => :newstexts) }
+          codeAnswer 200
         end
-        @returnValue = { content: news.as_json(:include => :newstexts) }
-        codeAnswer 200
       rescue
         codeAnswer 504
       end
@@ -153,18 +153,17 @@ module API
 
           if (!news)
             codeAnswer 502
-            return
-          end
-          
-          com = Commentary.new
-          com.content = @content
-          com.author_id = @user_id
-          
-          if (com.save)
-            com.news << news
-            codeAnswer 201
           else
-            codeAnswer 503
+            com = Commentary.new
+            com.content = @content
+            com.author_id = @user_id
+            
+            if (com.save)
+              com.news << news
+              codeAnswer 201
+            else
+              codeAnswer 503
+            end
           end
         end
       rescue
@@ -172,6 +171,5 @@ module API
       end
       sendJson
     end
-  end
   end
 end

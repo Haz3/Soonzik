@@ -1,3 +1,5 @@
+require 'open-uri'
+
 module API
   # The class parent of every controller of the API.
   # It provides security and some default stuff
@@ -8,7 +10,7 @@ module API
     # Usually a controller has no constructor but in this case it's for the heritance.
     def initialize
       @security = false
-      @returnValue = {}
+      @returnValue = { content: [] }
       
       @code = []
       @code[200] = {code: 200, message: "Success"}
@@ -19,9 +21,11 @@ module API
       @code[502] = {code: 502, message: "NotFound"}
       @code[503] = {code: 503, message: "NotCreated"}
       @code[504] = {code: 504, message: "Error"}
+      @code[505] = {code: 505, message: "UpdateError"}
     end
 
     # Provide a token relative to the user who asks
+    # Format : 
     #
     # ==== Options
     #
@@ -32,9 +36,53 @@ module API
         begin
           u = User.find_by_id(@user_id)
           @returnValue = {key: u.idAPI}
+          codeAnswer 200
         rescue
+          codeAnswer 504
         end
+      else
+        codeAnswer 502
       end
+      sendJson
+    end
+
+    # Check if a facebook user is authenticate and retrive its informations
+    # 
+    # ==== Options
+    # 
+    # * +:email+ - GET variable -> The email of the user who provides the token
+    # 
+    def loginFB
+      if (defined?(@email) && defined?(@token))
+        begin
+          url = "https://graph.facebook.com/oauth/access_token_info?access_token="
+          uri = URI.parse(url + @token)
+          http = Net::HTTP.new(uri.host, uri.port)
+          http.use_ssl = true
+          http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+          request = Net::HTTP::Get.new(uri.request_uri)
+          response = http.request(request)
+          hash = JSON.parse(response.body)
+          if (hash != nil && hash.has_key?("error"))
+            codeAnswer 502
+          else
+            u = User.find_by(email: @email)
+            puts u
+            if (u == nil)
+              codeAnswer 502
+            else
+              @returnValue = { content: u.as_json(:include => :address) }
+              codeAnswer 200
+            end
+          end
+        rescue
+          puts $!, $@
+          codeAnswer 504
+        end
+      else
+        codeAnswer 502
+      end
+      sendJson
     end
 
 protected
@@ -66,6 +114,8 @@ protected
           if (@secureKey == u.secureKey)
             @security = true
             u.regenerateKey
+          else
+            codeAnswer 501
           end
         rescue
         end
@@ -74,6 +124,7 @@ protected
 
     # Render the value to return in json
     def sendJson
+      codeAnswer(202) if defined?(@returnValue[:content]) && defined?(@returnValue[:content].size) && @returnValue[:content].size == 0
       respond_to do |format|
         format.json { render :json => JSON.generate(@returnValue) }
       end

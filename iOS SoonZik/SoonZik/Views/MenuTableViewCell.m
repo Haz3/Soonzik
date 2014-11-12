@@ -7,7 +7,6 @@
 //
 
 #import "MenuTableViewCell.h"
-#import "AllTheIncludes.h"
 
 @implementation MenuTableViewCell
 

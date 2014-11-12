@@ -43,21 +43,59 @@
     self.userPosition.delegate = self;
     self.userPosition.distanceFilter = kCLDistanceFilterNone;
     self.userPosition.desiredAccuracy = kCLLocationAccuracyBest;
-    [self.userPosition startUpdatingLocation];
+    [self goToUserLocation];
+    
+    self.slider.value = 400;
+    self.slider.minimumValue = 200;
+    self.slider.maximumValue = 20000;
+    [self.slider setThumbImage:[UIImage imageNamed:@"cursor.png"] forState:UIControlStateNormal];
     
     [self getAllOtherUsers];
     
     [self.detailView setFrame:CGRectMake(0, self.view.frame.size.height - self.detailView.frame.size.height, self.detailView.frame.size.width, self.detailView.frame.size.height)];
     [self.view addSubview:self.detailView];
     
+    [self.myPositionButton addTarget:self action:@selector(goToUserLocation) forControlEvents:UIControlEventTouchUpInside];
+    [self.slider addTarget:self action:@selector(sliderValueChanged:) forControlEvents:UIControlEventValueChanged];
+    
     [self.detailView setAlpha:0];
+    
+}
+
+- (void)sliderValueChanged:(UISlider *)sender
+{
+    NSLog(@"sender.value : %f", sender.value);
+    [self goToUserLocation];
+}
+
+- (MKOverlayRenderer *)mapView:(MKMapView *)mapView rendererForOverlay:(id < MKOverlay >)overlay
+{
+    MKCircleRenderer *circleR = [[MKCircleRenderer alloc] initWithCircle:(MKCircle *)overlay];
+    circleR.fillColor = [UIColor purpleColor];
+    circleR.alpha = 0.2;
+    
+    return circleR;
+}
+
+- (void)goToUserLocation
+{
+    NSArray *overlays = self.mapView.overlays;
+    for (id overlay in overlays) {
+        [self.mapView removeOverlay:overlay];
+    }
+    
+    [self.userPosition startUpdatingLocation];
+    CLLocationDistance fenceDistance = (int)self.slider.value;
+    CLLocationCoordinate2D circleMiddlePoint = self.userPosition.location.coordinate;
+    MKCircle *circle = [MKCircle circleWithCenterCoordinate:circleMiddlePoint radius:fenceDistance];
+    [self.mapView addOverlay:circle];
 }
 
 - (void)getAllOtherUsers
 {
     CLLocationCoordinate2D coord1;
-    coord1.latitude = 37.785834;
-    coord1.longitude = -122.416418;
+    coord1.latitude = 45.001245;
+    coord1.longitude = 4.001212;
     UserAnnotation *ann = [[UserAnnotation alloc] initWithCoordinate:coord1 username:@"user1" track:@"song1" artist:@"John Newman" album:@"song1.jpg"];
     
     [self.mapView addAnnotation:ann];
@@ -66,7 +104,7 @@
 - (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation
 {
     CLLocationCoordinate2D zoomLocation = newLocation.coordinate;
-    MKCoordinateRegion viewRegion = MKCoordinateRegionMakeWithDistance(zoomLocation, 1 * METERS_PER_MILE, 1 * METERS_PER_MILE);
+    MKCoordinateRegion viewRegion = MKCoordinateRegionMakeWithDistance(zoomLocation, 2 * METERS_PER_MILE, 2 * METERS_PER_MILE);
     [self.mapView setRegion:viewRegion];
     
     [self.userPosition stopUpdatingLocation];

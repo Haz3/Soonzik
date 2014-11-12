@@ -106,7 +106,10 @@
 		</section>
 
 		<section class="description">
-					</section>
+			
+<p>The module contain every class from the <a href="API.html">API</a> It is
+used for the routing (for the subdomain)</p>
+		</section>
 
 				<section id="5Buntitled-5D" class="documentation-section">
 			
@@ -121,73 +124,6 @@
 			
 			
 									
-						<section class="public-methods instance-methods methods">
-				<header>
-					<h3>Public Instance Methods</h3>
-				</header>
-
-								<a name="method-i-get">anchor</a>
-				<div id="method-i-get-doc" class="method">
-
-					<header>
-											<i class="icon-generic"></i>
-						<span class="method-name">get</span><span 
-							class="method-args">()</span>
-										</header>
-
-					<div class="method-description">
-											<p>To get the mp3. It cuts the file depending the rights</p>
-<dl class="rdoc-list label-list"><dt>NOT FINISHED, NEED TO MODIFY THE OPEN FUNCTION AND CHECK THE STRUCTURE OF THE FILES
-<dd>
-<h4 id="method-i-get-label-Options">Options<span><a href="#method-i-get-label-Options">&para;</a> <a href="#documentation">&uarr;</a></span></h4>
-<ul><li>
-<p><code>:security</code> - If it&#39;s a secure transaction, this variable
-from ApiSecurity (the parent) is true</p>
-</li><li>
-<p>+:user_id [implicit]+ - It is required by the security so we can access it</p>
-</li><li>
-<p><code>:id</code> - The id of the music where is the comment</p>
-</li></ul>
-</dd></dl>					
-											<div class="method-source-code" id="get-source">
-							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/musics_controller.rb, line 189</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">get</span>
-  <span class="ruby-keyword">begin</span>
-    <span class="ruby-identifier">music</span> = <span class="ruby-keyword">nil</span>
-    <span class="ruby-identifier">cut</span> = <span class="ruby-keyword">true</span>
-
-    <span class="ruby-comment"># Find the music</span>
-    <span class="ruby-keyword">if</span> (<span class="ruby-keyword">defined?</span><span class="ruby-ivar">@id</span>)
-      <span class="ruby-identifier">music</span> = <span class="ruby-constant">Music</span>.<span class="ruby-identifier">find_by_id</span>(<span class="ruby-ivar">@id</span>)
-    <span class="ruby-keyword">end</span>
-    <span class="ruby-keyword">if</span> (<span class="ruby-identifier">music</span> <span class="ruby-operator">==</span> <span class="ruby-keyword">nil</span>)
-      <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">502</span>
-    <span class="ruby-keyword">else</span>
-      <span class="ruby-comment"># If the transaction is secured, it means we maybe have buy the music</span>
-      <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@security</span>)
-        <span class="ruby-identifier">buy</span> = <span class="ruby-constant">Purchase</span>.<span class="ruby-identifier">find_by</span> <span class="ruby-identifier">user_id</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@user_id</span>, <span class="ruby-identifier">typeObj</span><span class="ruby-operator">:</span> <span class="ruby-string">&quot;Music&quot;</span>, <span class="ruby-identifier">obj_id</span><span class="ruby-operator">:</span> <span class="ruby-identifier">music</span>.<span class="ruby-identifier">id</span>
-        <span class="ruby-identifier">cut</span> = <span class="ruby-keyword">false</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">buy</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span>
-      <span class="ruby-keyword">end</span>
-    <span class="ruby-keyword">end</span>
-
-    <span class="ruby-identifier">file</span> = <span class="ruby-identifier">music</span>.<span class="ruby-identifier">file</span>
-    <span class="ruby-identifier">file</span> = <span class="ruby-string">&quot;cut_&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">file</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">cut</span>
-    <span class="ruby-identifier">buffer</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">open</span>(<span class="ruby-identifier">file</span>).<span class="ruby-identifier">read</span>
-  <span class="ruby-keyword">rescue</span>
-    <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">504</span>
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
-    <span class="ruby-identifier">format</span>.<span class="ruby-identifier">mp3</span> { <span class="ruby-identifier">render</span> <span class="ruby-value">:mp3</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">buffer</span>, <span class="ruby-value">:content_type</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;audio/mpeg&#39;</span> }
-  <span class="ruby-keyword">end</span>
-<span class="ruby-keyword">end</span></code></pre>
-						</div>
-										</div>
-
-					
-									</div>
-				
-			</section>
 			
 			
 			
@@ -211,11 +147,14 @@ from ApiSecurity (the parent) is true</p>
 	<!-- Class dropdown menu -->
 	<div id="class-dropdown" class="dropdown-menu has-scroll">
 	<ul>
+			<li><a href="./API.html">API</a></li>
 			<li><a href="./API/AlbumsController.html">API::AlbumsController</a></li>
+			<li><a href="./API/ApiController.html">API::ApiController</a></li>
 			<li><a href="./API/ApisecurityController.html">API::ApisecurityController</a></li>
 			<li><a href="./API/BattlesController.html">API::BattlesController</a></li>
 			<li><a href="./API/CartsController.html">API::CartsController</a></li>
 			<li><a href="./API/ConcertsController.html">API::ConcertsController</a></li>
+			<li><a href="./API/GiftsController.html">API::GiftsController</a></li>
 			<li><a href="./API/ListeningsController.html">API::ListeningsController</a></li>
 			<li><a href="./API/MessagesController.html">API::MessagesController</a></li>
 			<li><a href="./API/MusicsController.html">API::MusicsController</a></li>
@@ -223,6 +162,8 @@ from ApiSecurity (the parent) is true</p>
 			<li><a href="./API/NotificationsController.html">API::NotificationsController</a></li>
 			<li><a href="./API/PacksController.html">API::PacksController</a></li>
 			<li><a href="./API/PlaylistsController.html">API::PlaylistsController</a></li>
+			<li><a href="./API/PurchasesController.html">API::PurchasesController</a></li>
+			<li><a href="./API/SearchsController.html">API::SearchsController</a></li>
 			<li><a href="./API/SuggestionsController.html">API::SuggestionsController</a></li>
 			<li><a href="./API/TweetsController.html">API::TweetsController</a></li>
 			<li><a href="./API/UsersController.html">API::UsersController</a></li>

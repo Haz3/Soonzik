@@ -23,6 +23,10 @@
 {
     self.imgV.layer.borderWidth = 1;
     self.imgV.layer.borderColor = [UIColor whiteColor].CGColor;
+    CALayer *TopBorder = [CALayer layer];
+    TopBorder.frame = CGRectMake(0.0f, 0.0f, self.frame.size.width, 2.0f);
+    TopBorder.backgroundColor = [UIColor grayColor].CGColor;
+    [self.titleView.layer addSublayer:TopBorder];
 }
 
 /*

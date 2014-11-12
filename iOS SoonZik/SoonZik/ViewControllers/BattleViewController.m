@@ -30,7 +30,6 @@
     // Do any additional setup after loading the view from its nib.
     
     [self.contentView layoutIfNeeded];
-    //[self.contentView setBackgroundColor:[UIColor colorWithRed:222/255.0f green:222/255.0f blue:222/255.0f alpha:1.0f]];
     CGSize size = CGSizeMake(self.contentView.bounds.size.width, self.contentView.bounds.size.height + self.playerPreviewView.frame.size.height);
     self.scrollView.contentSize = size;
     [self.scrollView addSubview:self.contentView];
@@ -97,7 +96,7 @@
 
 - (void)goToLatestVotes
 {
-    [self closeTheMenuView];
+  //  [self closeTheMenuView];
     
     NSLog(@"go to the latest votes");
     LatestVotesViewController *vc = [[LatestVotesViewController alloc] initWithNibName:@"LatestVotesViewController" bundle:nil];

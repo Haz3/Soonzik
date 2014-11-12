@@ -6,8 +6,9 @@ gem 'rails', '4.1.1'
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3'
 
+gem 'json'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-gem 'jbuilder', '~> 2.0'
+gem 'jbuilder'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0',          group: :doc
 
@@ -17,8 +18,15 @@ gem 'spring',        group: :development
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
-# Use unicorn as the app server
-gem 'unicorn-rails'
+platforms :ruby do
+	# Use unicorn as the app server
+	gem 'unicorn-rails'
+end
+
+# For windows because unicorn doesn't work on it
+gem 'specific_install', platforms: [:x64_mingw,:mingw, :mswin]
+gem 'eventmachine', :git => 'https://github.com/eventmachine/eventmachine.git', platforms: [:x64_mingw,:mingw, :mswin]
+gem 'thin', platforms: [:x64_mingw,:mingw, :mswin]
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
@@ -51,6 +59,9 @@ gem 'better_errors'
 #better print
 gem 'priscilla'
 gem "binding_of_caller"
+
+# For test
+gem 'simplecov', :require => false, :group => :test
 
 #Features
 gem "gritter"

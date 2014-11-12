@@ -28,6 +28,36 @@ module API
       sendJson
     end
 
+    # Save a new object Cart. For more information on the parameters, check at the model
+    # 
+    # ==== Options
+    # 
+    # * +:cart[user_id]+ - Id of the user who has the cart
+    # * +:cart[typeObj]+ - Model name of the object to add to the cart
+    # * +:cart[obj_id]+ - Id of the object
+    # * +:cart[gift]+ - Boolean to know if it's a gift or not
+    # 
+    def save
+      begin
+        if (@security)
+          cart = Cart.new(@cart)
+          classObj = cart.typeObj.constantize
+          # check if the object exists
+          if (classObj.find_by_id(cart.obj_id) != nil && cart.save)
+            @returnValue = { content: cart.as_json(:include => :user) }
+            codeAnswer 201
+          else
+            codeAnswer 503
+          end
+        else
+          codeAnswer 500
+        end
+      rescue
+        codeAnswer 504
+      end
+      sendJson
+    end
+
     # Give a part of the carts depending of the filter passed into parameter
     #
     # ==== Options
@@ -61,14 +91,14 @@ module API
               end
 
               if (cart_object == nil)          #cart_object doesn't exist
-                cart_object = Cart.where(condition)
+                cart_object = Cart.where(condition).where(user_id: @user_id)
               else                              #cart_object exists
                 cart_object = cart_object.where(condition)
               end
             end
             # - - - - - - - -
           else
-            cart_object = Cart.all            #no attribute specified
+            cart_object = Cart.where(user_id: @user_id)            #no attribute specified
           end
 
           order_asc = ""

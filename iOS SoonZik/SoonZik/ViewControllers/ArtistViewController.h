@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "TypeViewController.h"
 
-@interface ArtistViewController : TypeViewController <UIScrollViewDelegate, UITableViewDataSource, UITableViewDelegate>
+@interface ArtistViewController : TypeViewController <UIScrollViewDelegate, UITableViewDataSource, UITableViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UIScrollView *horizontalScrollView;
 @property (weak, nonatomic) IBOutlet UIView *horizontalContentView;
@@ -29,5 +29,7 @@
 @property (strong, nonatomic) NSMutableDictionary *albumsContent;
 @property (strong, nonatomic) NSMutableArray *albumTitles;
 @property (weak, nonatomic) IBOutlet UIButton *shareButton;
+
+@property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 
 @end

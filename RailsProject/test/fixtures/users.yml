@@ -1,45 +1,49 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  email: MyString
-  password: MyString
-  salt: MyString
-  fname: MyString
-  lname: MyString
-  username: MyString
-  birthday: 2014-09-07
-  image: MyString
-  description: MyText
-  phoneNumber: MyString
-  adress_id: 1
-  facebook: MyString
-  twitter: MyString
-  googlePlus: MyString
-  signin: 2014-09-07 23:20:20
-  idAPI: MyString
-  secureKey: MyString
-  activated: false
-  newsletter: false
-  language: MyString
+UserOne:
+  email: florian.dewulf@gmail.com
+  password: 7b95dafa9ecb37dafa761f8bafc76b0a  #azerty
+  salt: 34ca36a3b2f03ce32a311bef0ebb2398d391efbd
+  fname: first name
+  lname: last name
+  username: testusername1
+  birthday: 1993-11-20
+  image: default.png
+  description: La description de l'utilisateur numero 1
+  phoneNumber: 03 20 60 40 19
+  address_id: 1
+  facebook: user1.facebook
+  twitter: user1.twitter
+  googlePlus: user1.plus
+  signin: "2014-09-07 23:20:20"
+  idAPI: 4f009289d197fd93e8977e96c945e5324c002875
+  secureKey: 0c503c3e735a7bfb5aa7244db8c2a8c80d296f16
+  activated: true
+  newsletter: true
+  language: FR
+  groups: userGroup
+  #friends: UserTwo
 
-two:
-  email: MyString
-  password: MyString
-  salt: MyString
-  fname: MyString
-  lname: MyString
-  username: MyString
-  birthday: 2014-09-07
-  image: MyString
-  description: MyText
-  phoneNumber: MyString
-  adress_id: 1
-  facebook: MyString
-  twitter: MyString
-  googlePlus: MyString
-  signin: 2014-09-07 23:20:20
-  idAPI: MyString
-  secureKey: MyString
+UserTwo:
+  email: user_two@gmail.com
+  password: 0a2ede56f6523e16b6a2794c26921580  #qwerty
+  salt: d8831de896cb4bd5ad74720437c8ccdfc9f0bd42
+  fname: frits nmae
+  lname: lsat nmae
+  username: testusername2
+  birthday: 1999-12-31
+  image: default.png
+  description: description du deuxieme utilisateur
+  phoneNumber: +33 6 30 49 32 11
+  address_id: 2
+  facebook: facedebouc
+  twitter: twittos
+  googlePlus: 2039430539540
+  signin: "2014-09-07 23:20:20"
+  idAPI: b266741d88c8d2155dc1315c8e9b7fb7ff29830e
+  secureKey: ab8c1c4b8d28cbf921618755dcd5306377ce8561
   activated: false
   newsletter: false
-  language: MyString
+  language: EN
+  groups: vipGroup
+  #friends_with: UserOne

@@ -9,7 +9,6 @@
 #import "PlayerViewController.h"
 #import "PlaylistViewCell.h"
 #import "AppDelegate.h"
-#import "AllTheIncludes.h"
 
 @interface PlayerViewController ()
 
@@ -76,10 +75,6 @@
     self.volumeSlider.value = self.player.audioPlayer.volume;
     self.lastVolumeLevel = self.player.audioPlayer.volume;
     
-    CGFloat statusBarHeight = [[UIApplication sharedApplication] statusBarFrame].size.height;
-    
-    //[self.playlistTableView setFrame:CGRectMake(self.playlistTableView.frame.origin.x, self.playerArea.frame.size.height+self.navigationController.navigationBar.frame.size.height+statusBarHeight, self.playlistTableView.frame.size.width, self.playlistTableView.frame.size.height-self.navigationController.navigationBar.frame.size.height)];
-    
     [self.playlistTableView reloadData];
     [self updateListeningCells];
 }
@@ -119,11 +114,11 @@
         
         [self.progressionSlider setValue:current];
         
-        Song *s = [self.player.listeningList objectAtIndex:self.player.index];
+        Music *s = [self.player.listeningList objectAtIndex:self.player.index];
         self.title = s.title;
         self.songTitle.text = s.title;
-        self.songArtist.text = s.artist;
-        self.songImage.image = [UIImage imageNamed:s.image];
+        self.songArtist.text = s.artist.username;
+        self.songImage.image = [UIImage imageNamed:s.album.image];
     }
     
 }
@@ -154,7 +149,7 @@
         if (!self.player.currentlyPlaying) {
             [self.playButton setImage:[UIImage imageNamed:@"pause_icon.png"] forState:UIControlStateNormal];
             [self.player playSound];
-            Song *s = [self.player.listeningList objectAtIndex:self.player.index];
+            Music *s = [self.player.listeningList objectAtIndex:self.player.index];
             self.player.songName = s.title;
             self.player.audioPlayer.volume = self.lastVolumeLevel;
             [self updateListeningCells];
@@ -171,7 +166,7 @@
     if (self.player.listeningList.count > 0) {
         if (self.player.index > 0) {
             self.player.index--;
-            Song *s = [self.player.listeningList objectAtIndex:self.player.index];
+            Music *s = [self.player.listeningList objectAtIndex:self.player.index];
             [self.player prepareSong:s.file];
             if (self.player.currentlyPlaying) {
                 [self.player playSound];
@@ -189,7 +184,7 @@
 {
         if (self.player.listeningList.count > 0) {
             if (self.player.repeatingLevel == 2) {
-                Song *s = [self.player.listeningList objectAtIndex:self.player.index];
+                Music *s = [self.player.listeningList objectAtIndex:self.player.index];
                 [self.player prepareSong:s.file];
                 [self.player playSound];
                 self.player.songName = s.title;
@@ -199,14 +194,14 @@
                 } else {
                     self.player.index++;
                 }
-                Song *s = [self.player.listeningList objectAtIndex:self.player.index];
+                Music *s = [self.player.listeningList objectAtIndex:self.player.index];
                 [self.player prepareSong:s.file];
                 [self.player playSound];
                 self.player.songName = s.title;
             } else if (self.player.repeatingLevel == 0) {
                 if (self.player.index < self.player.listeningList.count - 1) {
                     self.player.index++;
-                    Song *s = [self.player.listeningList objectAtIndex:self.player.index];
+                    Music *s = [self.player.listeningList objectAtIndex:self.player.index];
                     [self.player prepareSong:s.file];
                     if (self.player.currentlyPlaying) {
                         [self.player playSound];
@@ -325,9 +320,9 @@
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     [cell initCell];
-    Song *s = [self.player.listeningList objectAtIndex:indexPath.row];
+    Music *s = [self.player.listeningList objectAtIndex:indexPath.row];
     cell.songTitleLabel.text = s.title;
-    cell.imageAlbum.image = [UIImage imageNamed:s.image];
+    cell.imageAlbum.image = [UIImage imageNamed:s.album.image];
     
     return cell;
 }
@@ -349,7 +344,7 @@
         [self.player pauseSound];
         self.player.index = 0;
         if (self.player.listeningList.count > 0) {
-            Song *s = [self.player.listeningList objectAtIndex:self.player.index];
+            Music *s = [self.player.listeningList objectAtIndex:self.player.index];
             if (![s.title isEqualToString:self.player.songName]) {
                 NSString *data = [[NSBundle mainBundle] pathForResource:s.file ofType:@"mp3"];
                 NSURL *url = [[NSURL alloc] initFileURLWithPath:data];
@@ -386,7 +381,7 @@
     if (self.player.oldIndex != self.player.index && self.player.listeningList.count > 1) {
         self.player.oldIndex = self.player.index;
     
-        Song *s = [self.player.listeningList objectAtIndex:self.player.index];
+        Music *s = [self.player.listeningList objectAtIndex:self.player.index];
         [self.player prepareSong:s.file];
         self.player.audioPlayer.volume = self.lastVolumeLevel;
         [self.player playSound];

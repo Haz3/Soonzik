@@ -5,8 +5,9 @@ module API
   # * index       [get]
   # * show        [get]
   # * find        [get]
-  # * addcomment  [post]
+  # * addcomment  [post] - SECURITY
   # * get         [get]
+  # * addtoplaylist [post] - SECURITY
   #
   class MusicsController < ApisecurityController
   	before_action :checkKey, only: [:addcomment, :get]
@@ -37,10 +38,10 @@ module API
         album = Music.find_by_id(@id)
         if (!album)
           codeAnswer 502
-          return
+        else
+          @returnValue = { content: album.as_json(:include => :album) }
+          codeAnswer 200
         end
-        @returnValue = { content: album.as_json(:include => :album) }
-        codeAnswer 200
       rescue
         codeAnswer 504
       end
@@ -156,63 +157,90 @@ module API
 
           if (!music)
             codeAnswer 502
-            return
-          end
-          
-          com = Commentary.new
-          com.content = @content
-          com.author_id = @user_id
-          
-          if (com.save)
-            com.musics << music
-            codeAnswer 201
           else
-            codeAnswer 503
+            com = Commentary.new
+            com.content = @content
+            com.author_id = @user_id
+            
+            if (com.save)
+              com.musics << music
+              codeAnswer 201
+            else
+              codeAnswer 503
+            end
           end
+        else
+          codeAnswer 500
         end
       rescue
         codeAnswer 504
       end
       sendJson
   	end
-  end
 
-  # To get the mp3. It cuts the file depending the rights
-  # [NOT FINISHED, NEED TO MODIFY THE OPEN FUNCTION AND CHECK THE STRUCTURE OF THE FILES]
-  #
-  # ==== Options
-  #
-  # * +:security+ - If it's a secure transaction, this variable from ApiSecurity (the parent) is true
-  # * +:user_id [implicit]+ - It is required by the security so we can access it
-  # * +:id+ - The id of the music where is the comment
-  #
-  def get
-    begin
-      music = nil
-      cut = true
+    # To get the mp3. It cuts the file depending the rights
+    #
+    # ==== Options
+    #
+    # * +:security+ - If it's a secure transaction, this variable from ApiSecurity (the parent) is true
+    # * +:user_id [implicit]+ - It is required by the security so we can access it
+    # * +:id+ - The id of the music where is the comment
+    #
+    def get
+      buffer = ""
+      begin
+        music = nil
+        cut = true
 
-      # Find the music
-      if (defined?@id)
-        music = Music.find_by_id(@id)
-      end
-      if (music == nil)
-        codeAnswer 502
-      else
-        # If the transaction is secured, it means we maybe have buy the music
-        if (@security)
-          buy = Purchase.find_by user_id: @user_id, typeObj: "Music", obj_id: music.id
-          cut = false if buy.size > 0
+        # Find the music
+        if (defined?@id)
+          music = Music.find_by_id(@id)
         end
-      end
+        if (music == nil)
+          codeAnswer 502
+        else
+          # If the transaction is secured, it means we maybe have buy the music
+          if (@security)
+            buy = Purchase.find_by user_id: @user_id, typeObj: "Music", obj_id: music.id
+            cut = false if buy.size > 0
+          end
 
-      file = music.file
-      file = "cut_" + file if cut
-      buffer = File.open(file).read
-    rescue
-      codeAnswer 504
+          file = music.file
+          file = "cut_" + file if cut
+          buffer = File.open(File.join(Rails.root, "app", "assets", "musics", music.album.user.username.downcase.gsub(/[^0-9A-Za-z]/, ''), "#{file.downcase.gsub(/[^0-9A-Za-z]/, '')}.mp3"), "rb").read
+        end
+      rescue
+        codeAnswer 504
+      end
+      respond_to do |format|
+        format.mp3 { render :text => buffer, :content_type => 'audio/mpeg' }
+      end
     end
-    respond_to do |format|
-      format.mp3 { render :mp3 => buffer, :content_type => 'audio/mpeg' }
+
+    # To add a specific music to a playlist
+    #
+    # ==== Options
+    #
+    # * +:id+ - The id of the music where is the comment
+    # * +:playlist_id+ - The id of the playlist where you want to add a music
+    #
+    def addtoplaylist
+      begin
+        if (@security)
+          playlist = Playlist.find_by_id(@playlist_id)
+          music = Music.find_by_id(@id)
+          if (playlist && music && playlist.user_id == @user_id && !@playlist.musics.include?(music))
+            playlist.musics << music
+          else
+            codeAnswer 502
+          end
+        else
+          codeAnswer 500
+        end
+      rescue
+        codeAnswer 504
+      end
+      sendJson
     end
   end
 end

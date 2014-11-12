@@ -10,9 +10,17 @@
 
 @implementation Pack
 
-+ (id)initWithJsonObject:(NSDictionary *)json
+- (id)initWithJsonObject:(NSDictionary *)json
 {
-    return nil;
+    NSLog(@"PACK");
+    
+    self = [super init];
+    
+    self.identifier = [[json objectForKey:@"id"] intValue];
+    self.title = [json objectForKey:@"title"];
+    //self.genre = []
+    
+    return self;
 }
 
 @end

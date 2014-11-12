@@ -10,6 +10,6 @@
 
 @interface Element : NSObject
 
-+ (id)initWithJsonObject:(NSDictionary *)json;
+- (id)initWithJsonObject:(NSDictionary *)json;
 
 @end

@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "AudioPlayer.h"
-#import "Song.h"
+#import "Music.h"
 
 @interface PlayerViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, FinishPlayPlayer>
 

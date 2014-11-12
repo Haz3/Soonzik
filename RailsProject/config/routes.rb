@@ -1,67 +1,110 @@
 Rails.application.routes.draw do
 
+  #
+  # API ROUTES (57 / 57)
+  #
   namespace :api, path: '/', constraints: { subdomain: 'api' }, :defaults => { :format => 'json' }  do
     get 'getKey/:id' => 'apisecurity#provideKey', constraints: {id: /[0-9]+/}
+    get 'loginFB/:token' => 'apisecurity#loginFB'
 
-    resources :albums, only: [:index, :show] do
+    resources :albums, only: [:index, :show] do #ok
       collection do
         get 'find' => 'albums#find'
         get 'addcomment/:id' => 'albums#addcomment', constraints: {id: /[0-9]+/}
       end
     end
 
-    resources :battles, only: [:index, :show] do
+    resources :battles, only: [:index, :show] do #ok
       collection do
         get 'find' => 'battles#find'
       end
     end
 
-    resources :concerts, only: [:index, :show] do
+    get 'carts/find' => 'carts#find'
+    post 'carts/save' => 'carts#save'
+    get 'carts/destroy' => 'carts#destroy' #ok
+
+    resources :concerts, only: [:index, :show] do #ok
       collection do
         get 'find' => 'concerts#find'
       end
     end
 
-    resources :listenings, only: [:index, :show] do
+    post 'gifts/save' => 'gifts#save' #ok
+
+    resources :listenings, only: [:index, :show] do #ok
       collection do
         get 'find' => 'listenings#find'
+        post 'save' => 'listenings#save'
       end
     end
 
-    resources :musics, only: [:index, :show] do
+    resources :messages, only: [:show] do #ok
+      collection do
+        get 'find' => 'messages#find'
+        post 'save' => 'messagess#save'
+      end
+    end
+
+    resources :musics, only: [:index, :show] do #ok
       collection do
         get 'find' => 'musics#find'
-        get 'addcomment/:id' => 'musics#addcomment', constraints: {id: /[0-9]+/}
+        post 'addcomment/:id' => 'musics#addcomment', constraints: {id: /[0-9]+/}
         get 'get/:id' => 'musics#get', constraints: {id: /[0-9]+/}, format: 'mp3' #verifier si ça fonctionne
+        post 'addtoplaylist' => 'musics#addtoplaylist'
       end
     end
 
-    resources :news, only: [:index, :show] do
+    resources :news, only: [:index, :show] do #ok
       collection do
         get 'find' => 'news#find'
+        post 'addcomment/:id' => 'news#addcomment', constraints: {id: /[0-9]+/}
       end
     end
 
-    resources :packs, only: [:index, :show] do
+    resources :notifications, only: [:show] do #ok
+      collection do
+        post 'save' => 'notifications#save'
+        get 'find' => 'notifications#find'
+        get 'destroy' => 'notifications#destroy'
+      end
+    end
+
+    resources :packs, only: [:index, :show] do #ok
       collection do
         get 'find' => 'packs#find'
       end
     end
 
-    resources :tweets, only: [:index, :show] do
+    resources :playlists, only: [:show] do #ok
+      collection do
+        get 'find' => 'playlists#find'
+        post 'save' => 'playlists#save'
+        post 'update' => 'playlists#update'
+        get 'destroy' => 'playlists#destroy'
+      end
+    end
+
+    post 'purchases/save' => 'purchases#save' #ok
+    get 'search' => 'searchs#search' #ok
+    get 'suggest' => 'suggestions#show' #ok
+
+    resources :tweets, only: [:index, :show] do #ok
       collection do
         get 'find' => 'tweets#find'
+        post 'save' => 'tweets#save'
+        get 'destroy' => 'tweets#destroy'
       end
     end
 
-    resources :users, only: [:index, :show] do
+    resources :users, only: [:index, :show] do #ok
       collection do
         get 'find' => 'users#find'
+        post 'save' => 'users#save'
+        post 'update' => 'users#update'
+        get 'getmusics' => 'users#getmusics'
       end
     end
-
-    #get ':modelName/:actionName(/:id)' => 'apisecurity#action', :defaults => { :format => 'json' }
-    #get ':modelName/:actionName(/:start/:length)' => 'apisecurity#action', :defaults => { :format => 'json' }, constraints: {start: /[0-9]+/, length: /[0-9]+/}
   end
 
   devise_for :admin_users, ActiveAdmin::Devise.config

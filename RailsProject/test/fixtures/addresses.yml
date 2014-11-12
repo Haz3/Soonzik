@@ -1,17 +1,16 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  numberStreet: MyString
-  complement: MyString
-  street: MyString
-  city: MyString
-  country: MyString
-  zipcode: MyString
+addressOne:
+  numberStreet: 1
+  street: Rue de la pierre
+  city: RockCity
+  country: France
+  zipcode: 99999
 
-two:
-  numberStreet: MyString
-  complement: MyString
-  street: MyString
-  city: MyString
-  country: MyString
-  zipcode: MyString
+addressTwo:
+  numberStreet: 8 bis
+  complement: appartement 3B
+  street: Rue de la truite
+  city: Foreign Town
+  country: Canada
+  zipcode: G1V3A1

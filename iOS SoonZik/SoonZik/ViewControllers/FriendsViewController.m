@@ -7,6 +7,7 @@
 //
 
 #import "FriendsViewController.h"
+#import "ChatViewController.h"
 #import "User.h"
 
 #define CELL_HEIGHT 40
@@ -33,8 +34,14 @@
     
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    
+    self.nameLabel.hidden = YES;
+    self.chatButton.hidden = YES;
     
     self.nameLabel.font = SOONZIK_FONT_BODY_MEDIUM;
+    
+    [self.chatButton addTarget:self action:@selector(goToChat) forControlEvents:UIControlEventTouchUpInside];
     
     self.tableView.frame = CGRectMake(self.tableView.frame.origin.x, self.tableView.frame.origin.x + self.navigationController.navigationBar.frame.size.height + self.statusBarHeight, self.tableView.frame.size.width,self.tableView.frame.size.height-self.navigationController.navigationBar.frame.size.height-self.playerPreviewView.frame.size.height-self.statusBarHeight);
     
@@ -45,6 +52,12 @@
     [self getFriendList];
 
     self.detailViewOpen = NO;
+}
+
+- (void)goToChat
+{
+    ChatViewController *chatVC = [[ChatViewController alloc] initWithNibName:@"ChatViewController" bundle:nil];
+    [self.navigationController pushViewController:chatVC animated:YES];
 }
 
 - (void)getFriendList
@@ -211,6 +224,7 @@
     NSArray *listOfPeopleInThisSection = [self.listOfFriends valueForKeyPath:keyPath];
     User *p = [listOfPeopleInThisSection objectAtIndex:indexPath.row];
     
+    cell.textLabel.textColor = [UIColor whiteColor];
     cell.backgroundColor = [UIColor clearColor];
     cell.textLabel.font = SOONZIK_FONT_BODY_MEDIUM;
     cell.textLabel.text = p.username;
@@ -236,9 +250,11 @@
     if (!self.detailViewOpen) {
         [UIView animateWithDuration:0.5 animations:^{
             [self.tableView setFrame:CGRectMake(self.tableView.frame.origin.x, self.detailView.frame.size.height + self.navigationController.navigationBar.frame.size.height + self.statusBarHeight, self.tableView.frame.size.width, self.tableView.frame.size.height - self.detailView.frame.size.height)];
+        } completion:^(BOOL finished) {
+            self.detailViewOpen = YES;
+            self.chatButton.hidden = NO;
+            self.nameLabel.hidden = NO;
         }];
-        
-        self.detailViewOpen = YES;
     }
 }
 

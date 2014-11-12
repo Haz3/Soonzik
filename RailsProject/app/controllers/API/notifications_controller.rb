@@ -3,9 +3,9 @@ module API
   # Here is the list of action available :
   #
   # * show        [get] - SECURE
-  # * save		    [post]
+  # * save		    [post] - SECURE
   # * find        [get] - SECURE
-  # * destroy     [get]
+  # * destroy     [get] - SECURE
   #
   class NotificationsController < ApisecurityController
   	# Give a specific object by its id
@@ -20,13 +20,40 @@ module API
 	        notif = Notification.find_by_id(@id)
 	        if (!notif)
 	          codeAnswer 502
-	          return
-	        end
-	        @returnValue = { content: notif.as_json(:include => :user) }
-	        codeAnswer 200
+          else
+  	        @returnValue = { content: notif.as_json(:include => :user) }
+	          codeAnswer 200
+          end
   	    else
   	    	codeAnswer 500
   	    end
+      rescue
+        codeAnswer 504
+      end
+      sendJson
+    end
+
+    # Save a new object Notification. For more information on the parameters, check at the model
+    # 
+    # ==== Options
+    # 
+    # * +:notification[user_id]+ - Id of the user who has the notification
+    # * +:notification[link]+ - The link where the notification redirect without the http://dns.com (to be usefull by the smartphone applications)
+    # * +:notification[description]+ - The text of the notification
+    # 
+    def save
+      begin
+        if (@security)
+          notif = Notification.new(@notification)
+          if (notif.save)
+            @returnValue = { content: notif.as_json(:include => :user) }
+            codeAnswer 201
+          else
+            codeAnswer 503
+          end
+        else
+          codeAnswer 500
+        end
       rescue
         codeAnswer 504
       end
@@ -66,14 +93,14 @@ module API
               end
 
               if (notification_object == nil)          #notification_object doesn't exist
-                notification_object = Notification.where(condition)
+                notification_object = Notification.where(condition).where(user_id: @user_id)
               else                              #notification_object exists
                 notification_object = notification_object.where(condition)
               end
             end
             # - - - - - - - -
           else
-            notification_object = Notification.all            #no attribute specified
+            notification_object = Notification.where(user_id: @user_id)            #no attribute specified
           end
 
           order_asc = ""

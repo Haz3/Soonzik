@@ -7,10 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SWTableViewCell.h"
 
-@interface PlayListsCells : UITableViewCell
+@interface PlayListsCells : UITableViewCell// SWTableViewCell
 
 @property (nonatomic, weak) IBOutlet UILabel *trackTitle;
+@property (nonatomic, weak) IBOutlet UIImageView *trackImage;
 
 - (void)initCell;
 

@@ -36,10 +36,10 @@ module API
         album = Album.find_by_id(@id)
         if (!album)
           codeAnswer 502
-          return
+        else
+          @returnValue = { content: album.as_json(:include => :musics) }
+          codeAnswer 200
         end
-        @returnValue = { content: album.as_json(:include => :musics) }
-        codeAnswer 200
       rescue
         codeAnswer 504
       end
@@ -155,18 +155,17 @@ module API
 
           if (!album)
             codeAnswer 502
-            return
-          end
-          
-          com = Commentary.new
-          com.content = @content
-          com.author_id = @user_id
-          
-          if (com.save)
-            com.albums << album
-            codeAnswer 201
           else
-            codeAnswer 503
+            com = Commentary.new
+            com.content = @content
+            com.author_id = @user_id
+            
+            if (com.save)
+              com.albums << album
+              codeAnswer 201
+            else
+              codeAnswer 503
+            end
           end
         end
       rescue

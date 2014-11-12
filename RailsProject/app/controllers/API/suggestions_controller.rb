@@ -22,10 +22,10 @@ module API
 
 	        if (!suggestion)
 	          codeAnswer 502
-	          return
-	        end
-	        @returnValue = { content: suggestion.as_json }
-	        codeAnswer 200
+	        else
+  	        @returnValue = { content: suggestion.as_json }
+  	        codeAnswer 200
+          end
 	    else
 	    	codeAnswer 500
 	    end

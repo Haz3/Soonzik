@@ -1,4 +1,9 @@
+# The model of the object User
+# Contain the relation and the validation
+# Can provide some features linked to this model
 class User < ActiveRecord::Base
+  before_create :beforeCreate
+
   belongs_to :address
 
   has_one :cart
@@ -20,8 +25,107 @@ class User < ActiveRecord::Base
   has_many :messages_receiver, class_name: 'Message', foreign_key: 'dest_id'
 
   has_and_belongs_to_many :groups
-  has_and_belongs_to_many :follows, class_name: 'User', foreign_key: 'user_id', join_table: 'follows'
-  has_and_belongs_to_many :followers, class_name: 'User', foreign_key: 'follow_id', join_table: 'follows'
-  has_and_belongs_to_many :friends, class_name: 'User', foreign_key: 'user_id', join_table: 'friends'
-  has_and_belongs_to_many :friends_with, class_name: 'User', foreign_key: 'friend_id', join_table: 'friends'
+
+  #FOLLOW TRICKS
+  has_many :relations_follow, :foreign_key => 'user_id', :class_name => 'Follow'
+  has_many :relations_follower, :foreign_key => 'follow_id', :class_name => 'Follow'
+  has_many :follows, :through => :relations_follow, :source => :user_to
+  has_many :followers, :through => :relations_follower, :source => :user
+  #has_and_belongs_to_many :follows, join_table: 'follows', class_name: 'User', foreign_key: 'user_id', association_foreign_key: "follow_id"
+  #has_and_belongs_to_many :followers, join_table: 'follows', class_name: 'User', foreign_key: 'follow_id', association_foreign_key: "user_id"
+  #has_and_belongs_to_many :friends, join_table: 'friends', class_name: 'User', foreign_key: 'user_id', association_foreign_key: "friend_id"
+  #has_and_belongs_to_many :friends_with, join_table: 'friends', class_name: 'User', foreign_key: 'friend_id', association_foreign_key: "user_id"
+
+  # validation
+  # message: 'the message'
+  validates :email, confirmation: true, format: /\b[A-Z0-9._%a-z\-]+@(?:[A-Z0-9a-z\-]+\.)+[A-Za-z]{2,4}\z/  #if doesn't work : /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i
+  validates :password, confirmation: true, length: { is: 32 }
+  validates :terms_of_service, acceptance: true
+  validates :username, length: {
+    minimum: 4,
+    maximum: 20,
+    too_short: "must have at least %{count} words",
+    too_long: "must have at most %{count} words"
+  }
+  validates :idAPI, length: { is: 40 }
+  validates :secureKey, length: { is: 40 }
+  validates :salt, length: { is: 40 }
+  validates :groups, :email, :password, :salt, :username, :birthday, :image, :signin, :idAPI, :secureKey, :language, presence: true
+  validates :newsletter, :activated, :inclusion => { :in => [true, false] }
+  validates :email, :username, uniqueness: true
+  validates :birthday, format: /\A(\d{4})-(\d{2})-(\d{2})\z/
+  validates :signin, format: /\A(\d{4})-(\d{2})-(\d{2}) (\d{2}):(\d{2}):(\d{2})\z/
+
+  # Recreate an idAPI and so the secureKey associated
+  # The secureKey need to be unique so we check if someone already has this one
+  def regenerateKey
+    key = nil
+
+    begin
+      key = User.secureKey_hash(createKey())
+    end while (User.find_by_idAPI(key))
+
+    self.idAPI = key
+    self.secureKey = generateHash(self.salt, key)
+  end
+
+  # Static function to create the hash of the secureKey
+  #
+  # ==== Attributes
+  #
+  # * +key+ - The generated key to encode
+  #
+  def self.secureKey_hash(key)
+    Digest::SHA1.hexdigest(Digest::MD5.hexdigest(key))
+  end
+
+  # Static function to create the hash of the password
+  #
+  # ==== Attributes
+  #
+  # * +pass+ - The password of the user to encode
+  #
+  def self.password_hash(pass)
+    Digest::MD5.hexdigest(Digest::SHA1.hexdigest(pass))
+  end
+
+  # Method to create the hash of the salt
+  # It uses the password, so it has to be set before
+  def salt_hash
+    User.secureKey_hash("#{Digest::SHA256.hexdigest("#{Time.now.utc}--#{self.password}")}--#{Digest::SHA256.hexdigest(self.password)}")
+  end
+
+  ########
+
+  private
+
+  # Private function to change elements before creation of a row
+  def beforeCreate
+    self.salt = self.salt_hash if defined?(self.password) && self.password != nil
+    self.password = User.password_hash(self.password) if defined?(self.password) && self.password != nil
+    self.image = "default.png" if self.image == nil || (self.image != nil && self.image == "")
+    self.activated = false
+    self.signin = Time.now.strftime "%Y-%m-%d %H:%M:%S"
+    self.newsletter = true if self.newsletter == nil
+    self.regenerateKey() if defined?(self.password) && self.password != nil
+  end
+
+  # Private function to create a random key of 48 characters
+  def createKey
+    sha256 = Digest::SHA1.new
+
+    key = ""
+    example = ('a'..'z').to_a.concat(('A'..'Z').to_a.concat(('0'..'9').to_a)).shuffle[0,48].join
+    48.times do
+      key += example[Random.rand(example.size)]
+    end
+
+    return sha256.hexdigest key
+  end
+
+  # Create a hash by addition of two values considered as string
+  def generateHash(value1, value2)
+    sha256 = Digest::SHA1.new
+    return sha256.hexdigest(value1.to_s + value2.to_s)
+  end
 end

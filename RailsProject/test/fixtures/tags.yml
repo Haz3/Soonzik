@@ -1,9 +1,9 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  tag: MyString
+TagOne:
+  tag: Rock
   news_id: 1
 
-two:
-  tag: MyString
-  news_id: 1
+TagTwo:
+  tag: News
+  news_id: 2
