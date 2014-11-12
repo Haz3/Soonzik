@@ -2,22 +2,70 @@
 	<head>
 		<title>SoonZik</title>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		
+		<!-- Nested -->
+		<script src="js/jquery.nested.js"></script>
+		<script src="js/makeboxes.js"></script>
+
+
 		<script src="js/countdown.min.js"></script>
 		<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular.min.js"></script>
-		
+		<script src="js/vendor/modernizr.js"></script>
 		<script src="js/jquery-2.1.1.min.js"></script>
 
-		<link href="css/style.css" rel="stylesheet" type="text/css"/>
+	    <link rel="stylesheet" type="text/css" href="css/foundation.css" />
+		<link rel="stylesheet" type="text/css" href="css/style.css"/>
 		<link rel="stylesheet" type="text/css" href="css/demo.css" />
         <link rel="stylesheet" type="text/css" href="css/style_slider.css" />
         <link rel="stylesheet" type="text/css" href="css/custom.css" />
+		<link rel="stylesheet" type="text/css" href="css/nested.css" />
+
 		<script type="text/javascript" src="js/modernizr.custom.79639.js"></script>
 		<noscript>
 			<link rel="stylesheet" type="text/css" href="css/styleNoJS.css" />
 		</noscript>
-<!--
-		<link rel="stylesheet" href="css/flipclock.css">
--->
+
+		<!-- Test Décmpte -->
+
+		<!-- Appel de librairie jquery -->
+		<script type="text/javascript" src="js/jquery-2.1.1.min.js"></script>
+		<script type="text/javascript">
+		// Fonction qui sera appeler à la sortie du Timeout
+		function affichage() {
+		// Affichage du message dans la div affichage
+		    document.getElementById("affichage").innerHTML = "Fin du compte &agrave; rebour";
+		};
+
+		// Initialisation de la temporisation
+		
+		temp = 0;
+		
+		jQuery(function(){
+		// Boucle de décrémentation
+		// 10 représente le temps en secondes
+		    for (i = 10; i > -1; i--) {
+		    	if (i > 60) {
+			        setTimeout("jQuery('#affichage').text('Restant " + i/60 + " minute(s) " + i + " seconde(s)');", temp);
+		    	}
+			    else if (i > 3600) {
+			    	setTimeout("jQuery('#affichage').text('Restant " + (i/60)/60  + " heure(s) " + i/60 + " minute(s) " + i + "seconde(s));", temp);
+			    }
+			    else if (i > 86400) {
+			    	setTimeout("jQuery('#affichage').text('Restant " + (i/60)/60/24 + " Jour(s) " + + (i/60)/60  + " heure(s) " + i/60 + " minute(s) " + i + "seconde(s));", temp);
+			    }
+			    else {
+			        setTimeout("jQuery('#affichage').text('Restant "+i+" secondes');",temp);
+			    }
+		        temp += 1000;
+		    }
+		});
+		 
+		jQuery(document).ready(function(){
+		    setTimeout("affichage();",temp - 1000);
+		});
+		 
+		</script>
+
 	</head>
 	<body>
 		<header>
@@ -26,53 +74,43 @@
 	    		<img id="loupe" src="icons/loupe.png" />
 	    	</div>
 	   	</header>
-
-	   	        <div class="container demo-2">
-
-            <div id="slider" class="sl-slider-wrapper">
-
+		<!-- /sl-slider -->
+        <div class="container demo-2">
+        	<div id="slider" class="sl-slider-wrapper">
 				<div class="sl-slider">
-				
 					<div class="sl-slide" data-orientation="horizontal" data-slice1-rotation="-25" data-slice2-rotation="-25" data-slice1-scale="2" data-slice2-scale="2">
 						<div class="sl-slide-inner">
 							<div class="bg-img bg-img-1"></div>
 							<h2>A bene placito.</h2>
-							<blockquote><p>You have just dined, and however scrupulously the slaughterhouse is concealed in the graceful distance of miles, there is complicity.</p><cite>Ralph Waldo Emerson</cite></blockquote>
 						</div>
 					</div>
-					
 					<div class="sl-slide" data-orientation="vertical" data-slice1-rotation="10" data-slice2-rotation="-15" data-slice1-scale="1.5" data-slice2-scale="1.5">
 						<div class="sl-slide-inner">
 							<div class="bg-img bg-img-2"></div>
-							<h2>Regula aurea.</h2>
-							<blockquote><p>Until he extends the circle of his compassion to all living things, man will not himself find peace.</p><cite>Albert Schweitzer</cite></blockquote>
-						</div>
+								<h2>Regula aurea.</h2>
+							</div>
 					</div>
-					
 					<div class="sl-slide" data-orientation="horizontal" data-slice1-rotation="3" data-slice2-rotation="3" data-slice1-scale="2" data-slice2-scale="1">
 						<div class="sl-slide-inner">
 							<div class="bg-img bg-img-3"></div>
-							<h2>Dum spiro, spero.</h2>
-							<blockquote><p>Thousands of people who say they 'love' animals sit down once or twice a day to enjoy the flesh of creatures who have been utterly deprived of everything that could make their lives worth living and who endured the awful suffering and the terror of the abattoirs.</p><cite>Dame Jane Morris Goodall</cite></blockquote>
-						</div>
+								<h2>Dum spiro, spero.</h2>
+							</div>
 					</div>
 					
 					<div class="sl-slide" data-orientation="vertical" data-slice1-rotation="-5" data-slice2-rotation="25" data-slice1-scale="2" data-slice2-scale="1">
 						<div class="sl-slide-inner">
 							<div class="bg-img bg-img-4"></div>
-							<h2>Donna nobis pacem.</h2>
-							<blockquote><p>The human body has no more need for cows' milk than it does for dogs' milk, horses' milk, or giraffes' milk.</p><cite>Michael Klaper M.D.</cite></blockquote>
+								<h2>Donna nobis pacem.</h2>
 						</div>
-					</div>
-					
+					</div>					
 					<div class="sl-slide" data-orientation="horizontal" data-slice1-rotation="-5" data-slice2-rotation="10" data-slice1-scale="2" data-slice2-scale="1">
 						<div class="sl-slide-inner">
 							<div class="bg-img bg-img-5"></div>
 							<h2>Acta Non Verba.</h2>
-							<blockquote><p>I think if you want to eat more meat you should kill it yourself and eat it raw so that you are not blinded by the hypocrisy of having it processed for you.</p><cite>Margi Clarke</cite></blockquote>
 						</div>
 					</div>
-				</div><!-- /sl-slider -->
+				</div>
+				<!-- /sl-slider -->
 
 				<nav id="nav-dots" class="nav-dots">
 					<span class="nav-dot-current"></span>
@@ -163,9 +201,7 @@
 					</div>
 					<h2>
 						Shuriken - Ou Je Vis <br /> <br />
-						<script type="text/javascript">
-							countdown(new Date(2000, 0, 1) ).toString();
-						</script>
+						<div id="affichage"></div>
 						Moyenne : 401 M€ <br />
 					</h2>
 				</li>
@@ -200,69 +236,362 @@
 					</h2>
 			   	</li>
 			 </ul>
-
-	   		<div id="list8">
-	   			<img src="img/testMusique.png">
 			</div>
 
-			<div id="list8">
-			   <ul>
-			   	  <li><a href="#">Top Artiste 1</a></li>
-			      <li><a href="#">Top Artiste 2</a></li>
-			      <li><a href="#">Top Artiste 3</a></li>
-			      <li><a href="#">Top Artiste 4</a></li>
-			      <li><a href="#">Top Artiste 5</a></li>
+			<div id="random-music">
+				<div id="title-music">
+					<a> Random Music </a>
+				</div>
+			 	<div class="box size11">1</div>
+				<div class="box size21">2</div>
+				<div class="box size32">3</div>
+				<div class="box size11">4</div>
+				<div class="box size21">5</div>
+				<div class="box size12">6</div>
+				<div class="box size21">7</div>
+				<div class="box size11">8</div>
+				<div class="box size31">9</div>
+				<div class="box size22">10</div>
+				<div class="box size11">11</div>
+				<div class="box size21">12</div>
+				<div class="box size12">13</div>
+				<div class="box size21">14</div>
+				<div class="box size23">15</div>
+				<div class="box size23">16</div>
+			</div>
+
+			<script>
+				$("#random-music").nested({
+  					minWidth: 20
+				});
+			</script>
+
+			<div id="chart">
+				<div id="title-chart">
+					<a>Top Artistes</a>
+				</div>
+			   <ul class="chart">
+			   	  <li>
+			   	  	<div class="left-part">
+			   	  		<img src="img/artiste1.jpg">
+			   	  	</div>
+			   	  	<div class="right-part">
+			   	  		<div class="right-left-part">
+			   	  			<a class="artist">
+			   	  				Artiste 1
+			   	  			</a>
+			   	  		</div>
+			   	  	</div>
+			   	  	<div class="tags">
+			   	  		<a class="tag">
+			   	  			pop, rock, poprock
+			   	  		</a>		
+			   	  	</div>
+			   	  </li>
+			   	  <li>
+			   	  	<div class="left-part">
+			   	  		<img src="img/artiste2.jpg">
+			   	  	</div>
+			   	  	<div class="right-part">
+			   	  		<div class="right-left-part">
+			   	  			<a class="artist">
+			   	  				Artiste 2
+			   	  			</a>
+			   	  		</div>
+			   	  	</div>
+			   	  	<div class="tags">
+			   	  		<a class="tag">
+			   	  			pop, rock, poprock
+			   	  		</a>		
+			   	  	</div>
+			   	  </li>
+			   	  <li>
+			   	  	<div class="left-part">
+			   	  		<img src="img/artiste3.jpg">
+			   	  	</div>
+			   	  	<div class="right-part">
+			   	  		<div class="right-left-part">
+			   	  			<a class="artist">
+			   	  				Artiste 3
+			   	  			</a>
+			   	  		</div>
+			   	  	</div>
+			   	  	<div class="tags">
+			   	  		<a class="tag">
+			   	  			pop, rock, poprock
+			   	  		</a>		
+			   	  	</div>
+			   	  </li>
+			   	  <li>
+			   	  	<div class="left-part">
+			   	  		<img src="img/artiste4.jpg">
+			   	  	</div>
+			   	  	<div class="right-part">
+			   	  		<div class="right-left-part">
+			   	  			<a class="artist">
+			   	  				Artiste 4
+			   	  			</a>
+			   	  		</div>
+			   	  	</div>
+			   	  	<div class="tags">
+			   	  		<a class="tag">
+			   	  			pop, rock, poprock
+			   	  		</a>			   	  		
+			   	  	</div>
+			   	  </li>
+			   	  			   	  <li>
+			   	  	<div class="left-part">
+			   	  		<img src="img/artiste5.jpg">
+			   	  	</div>
+			   	  	<div class="right-part">
+			   	  		<div class="right-left-part">
+			   	  			<a class="artist">
+			   	  				Artiste 5
+			   	  			</a>
+			   	  		</div>
+			   	  	</div>
+			   	  	<div class="tags">
+			   	  		<a class="tag">
+			   	  			pop, rock, poprock
+			   	  		</a>
+			   	  	</div>
+			   	  </li>
 			   </ul>
 			</div>
-	   	</div>
-	   	<aside class="animated">
+			<div class="battle">
+				<div id="left-side">
+					<div id="left-side-percent">90%</div>
+					<img src="img/bernard.jpg">
+				</div>
+				<div id="middle-side">
+					<div google-chart chart="chartObject" style="{{cssStyle}}"></div>
+					<script>
+						$scope.chartObject = {
+						  "type": "PieChart",
+						  "displayed": true,
+						  "data": {
+						    "cols": [
+						      {
+						        "id": "month",
+						        "label": "Month",
+						        "type": "string",
+						        "p": {}
+						      },
+						      {
+						        "id": "laptop-id",
+						        "label": "Laptop",
+						        "type": "number",
+						        "p": {}
+						      },
+						      {
+						        "id": "desktop-id",
+						        "label": "Desktop",
+						        "type": "number",
+						        "p": {}
+						      },
+						      {
+						        "id": "server-id",
+						        "label": "Server",
+						        "type": "number",
+						        "p": {}
+						      },
+						      {
+						        "id": "cost-id",
+						        "label": "Shipping",
+						        "type": "number"
+						      },
+						      {
+						        "id": "",
+						        "role": "tooltip",
+						        "type": "string",
+						        "p": {
+						          "role": "tooltip",
+						          "html": true
+						        }
+						      }
+						    ],
+						    "rows": [
+						      {
+						        "c": [
+						          {
+						            "v": "January"
+						          },
+						          {
+						            "v": 19,
+						            "f": "42 items"
+						          },
+						          {
+						            "v": 12,
+						            "f": "Ony 12 items"
+						          },
+						          {
+						            "v": 7,
+						            "f": "7 servers"
+						          },
+						          {
+						            "v": 4
+						          },
+						          {
+						            "v": " <b>Shipping 4</b><br /><img src=\"http://icons.iconarchive.com/icons/antrepo/container-4-cargo-vans/512/Google-Shipping-Box-icon.png\" style=\"height:85px\" />"
+						          }
+						        ]
+						      },
+						      {
+						        "c": [
+						          {
+						            "v": "February"
+						          },
+						          {
+						            "v": 13
+						          },
+						          {
+						            "v": 1,
+						            "f": "1 unit (Out of stock this month)"
+						          },
+						          {
+						            "v": 12
+						          },
+						          {
+						            "v": 2
+						          },
+						          {
+						            "v": " <b>Shipping 2</b><br /><img src=\"http://icons.iconarchive.com/icons/antrepo/container-4-cargo-vans/512/Google-Shipping-Box-icon.png\" style=\"height:85px\" />"
+						          }
+						        ]
+						      },
+						      {
+						        "c": [
+						          {
+						            "v": "March"
+						          },
+						          {
+						            "v": 24
+						          },
+						          {
+						            "v": 5
+						          },
+						          {
+						            "v": 11
+						          },
+						          {
+						            "v": 6
+						          },
+						          {
+						            "v": " <b>Shipping 6</b><br /><img src=\"http://icons.iconarchive.com/icons/antrepo/container-4-cargo-vans/512/Google-Shipping-Box-icon.png\" style=\"height:85px\" />"
+						          }
+						        ]
+						      }
+						    ]
+						  },
+						  "options": {
+						    "title": "Sales per month",
+						    "isStacked": "true",
+						    "fill": 20,
+						    "displayExactValues": true,
+						    "vAxis": {
+						      "title": "Sales unit",
+						      "gridlines": {
+						        "count": 10
+						      }
+						    },
+						    "hAxis": {
+						      "title": "Date"
+						    },
+						    "tooltip": {
+						      "isHtml": true
+						    }
+						  },
+						  "formatters": {},
+						  "view": {
+						    "columns": [
+						      0,
+						      1,
+						      2,
+						      4
+						    ]
+						  }
+						}
+						</script>
+				</div>
+				<div id="right-side">
+					<div id="right-side-percent">10%</div>
+					<img src="img/jp.jpg">
+				</div>
+			</div>
+			<script>
+				$(document).ready(function(){
+  					$("#hide").click(function(){
+    					$("p").hide();
+  					});
+				  	$("#show").click(function(){
+					    $("p").show();
+					});
+				});
+			</script>
+	   		<aside class="animated">
 	   		<div class="chat">
 	   		<ul>
 				<li>
 	   				<div id="photo-robert">
 	   					<img id="profile-picture" src="img/robert.jpg" />
 	   				</div>
-	   					Robert
 	   				<div id="online"></div>
 	   			</li>
 	   			<li>
 	   				<div id="photo-gerard">
 	   					<img id="profile-picture" src="img/gerard.jpg" />
 	   				</div>
-	   					Gerard
 	   				<div id="online"></div>
 	   			</li>
 	   			<li>
 	   				<div id="photo-maurice">
 	   					<img id="profile-picture" src="img/maurice.jpg" />
 	   				</div>
-	   				Maurice
 	   				</li>
 	   			<li>
 	   				<div id="photo-bernard">
 	   					<img id="profile-picture" src="img/bernard.jpg" />
 	   				</div>
-	   				Bernard
 	   			</li>
 	   			<li>
 	   				<div id="photo-jp">
 	   					<img id="profile-picture" src="img/jp.jpg" />
 	   				</div>
-	   					Jean Paul II
 	   				<div id="online"></div>
 	   			</li>
 	   		</ul>
 	   		</div>
 	   		<div class="menu">
 	   		<ul>
-	   			<li> <a href="#">Home </a> </li>
-	   			<li> <a href="#">News</a></li>
-	   			<li><a href="#">Packs</a></li>
-	   			<li><a href="#">Your Profile </a></li>
-	   			<li><a href="#">Discotheque </a></li>
-	   			<li><a href="#">About </a></li>
-	   			<li><a href="#">Contact </a></li>
-	   			<li><a href="#">Professional Space </a></li>
+	   			<li> 
+
+	   			</li>
+	   			<li>
+	   				<img src="icons/Home.png">
+	   			</li>
+	   			<li>
+	   				<img src="icons/News.png">
+	   			</li>
+	   			<li>
+	   				<img src="icons/Pack.png">
+	   			</li>
+	   			<li>
+	   				<img src="icons/Profile.png">
+	   			</li>
+	   			<li>
+	   				<img src="icons/Discotheque.png">
+	   			<li>
+	   				<img src="icons/About.png">
+	   			</li>
+	   			<li>
+	   				<img src="icons/Contact.png">
+	   			</li>
+	   			<li>
+	   				<img src="icons/Pro.png">
+	   			</li>
+	   			<li class="hide">
+	   				<label for="hide" onclick=""><span>Show Me</span><span>Hide Me</span></label>
+	   			</li>
 	   		</ul>
 	   		</div>
 	   	</aside>
