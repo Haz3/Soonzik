@@ -256,7 +256,7 @@ ul.chart li {
     margin-bottom: 3px;
     font-size: 11px;
     background: #fff 0 0 no-repeat;
-    border-style: solid;
+    border-top-style: solid;
     border-color: #4C9CF1;
     border-width: 1px;
 }
