@@ -279,7 +279,6 @@ module API
       rescue
         codeAnswer 504
       end
-      sendJson
     end
   end
 end

@@ -42,7 +42,7 @@ Rails.application.routes.draw do
     resources :messages, only: [:show] do #ok
       collection do
         get 'find' => 'messages#find'
-        post 'save' => 'messagess#save'
+        post 'save' => 'messages#save'
       end
     end
 

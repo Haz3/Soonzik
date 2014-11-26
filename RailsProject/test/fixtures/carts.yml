@@ -1,13 +1,13 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 panierUn:
-  user_id: 1
+  user: UserOne
   typeObj: Album
   obj_id: 1
   gift: false
 
 panierDeux:
-  user_id: 2
+  user: UserTwo
   typeObj: Music
   obj_id: 2
   gift: true

@@ -1,7 +1,7 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 AlbumOne:
-  user_id: 1
+  user: UserOne
   title: Titre Album
   style: Rap
   price: 1.5
@@ -10,7 +10,7 @@ AlbumOne:
   commentaries: commentaireAlbum
 
 AlbumTwo:
-  user_id: 2
+  user: UserTwo
   title: Title Album
   style: Rock
   price: 2.5

@@ -16,6 +16,7 @@ class User < ActiveRecord::Base
   has_many :tweets
   has_many :votes
   has_many :purchases
+  has_many :commentaries, foreign_key: 'author_id'
 
   has_many :gifts_given, class_name: 'Gift', foreign_key: 'from_user'
   has_many :gifts_received, class_name: 'Gift', foreign_key: 'from_user'
@@ -48,7 +49,7 @@ class User < ActiveRecord::Base
     too_long: "must have at most %{count} words"
   }
   validates :idAPI, length: { is: 40 }
-  validates :secureKey, length: { is: 40 }
+  validates :secureKey, length: { is: 64 }
   validates :salt, length: { is: 40 }
   validates :groups, :email, :password, :salt, :username, :birthday, :image, :signin, :idAPI, :secureKey, :language, presence: true
   validates :newsletter, :activated, :inclusion => { :in => [true, false] }
@@ -125,7 +126,7 @@ class User < ActiveRecord::Base
 
   # Create a hash by addition of two values considered as string
   def generateHash(value1, value2)
-    sha256 = Digest::SHA1.new
+    sha256 = Digest::SHA256.new
     return sha256.hexdigest(value1.to_s + value2.to_s)
   end
 end

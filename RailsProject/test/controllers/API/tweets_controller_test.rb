@@ -1,0 +1,66 @@
+require 'test_helper'
+
+module API
+  class TweetsControllerTest < ActionController::TestCase
+    setup do
+      @tweet = tweets(:TweetOne)
+    end
+
+    test "should get index" do
+      get :index, format: :json
+      assert_response :success
+
+      value = JSON.parse(response.body)
+      assert_equal value["code"], 200
+    end
+
+    test "should save tweet" do
+      assert_difference('Tweet.count') do
+        post :save, { tweet: { msg: @tweet.msg, user_id: @tweet.user_id }, format: :json }
+      end
+
+      assert_redirected_to tweet_path(assigns(:tweet))
+    end
+
+    test "should show tweet" do
+      get :show, { id: @tweet, format: :json }
+      assert_response :success
+
+      value = JSON.parse(response.body)
+      assert_equal value["code"], 200
+      assert_equal value["content"]["id"], @tweet.id
+    end
+
+    test "should get find - all cases" do
+      get :find, { order_by_asc: ["id"], format: :json }
+      assert_response :success
+
+      value = JSON.parse(response.body)
+      assert_equal value["code"], 200
+      assert_equal value["content"].size, 2
+
+      get :find, { offset: 42, order_by_asc: [], order_by_desc: ["id"], format: :json }
+      assert_response :success
+
+      value = JSON.parse(response.body)
+      assert_equal value["code"], 202
+      assert_equal value["content"].size, 0
+
+
+      get :find, { limit: 1, offset: 0, attribute: { msg: "%Tweet%", user_id: "213118761" }, order_by_asc: ["msg"], order_by_desc: ["user_id"], group_by: ["id"], format: :json }
+      assert_response :success
+
+      value = JSON.parse(response.body)
+      assert_equal value["code"], 200
+      assert_equal value["content"].size, 1
+    end
+
+    test "should destroy tweet" do
+      assert_difference('Tweet.count', -1) do
+        get :destroy, { id: @tweet, format: :json }
+      end
+
+      assert_redirected_to tweets_path
+    end
+  end
+end

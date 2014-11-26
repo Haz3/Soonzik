@@ -2,7 +2,7 @@
 # Contain the relation and the validation
 # Can provide some features linked to this model
 class News < ActiveRecord::Base
-  belongs_to :user
+  belongs_to :user, class_name: 'User', foreign_key: 'author_id'
   has_many :tags
   has_many :newstexts
   has_and_belongs_to_many :attachments

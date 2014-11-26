@@ -1,10 +1,10 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 PlaylistOne:
-  user_id: 1
+  user: UserOne
   name: Trocool
   musics: MusicOne, MusicTwo
 
 PlaylistTwo:
-  user_id: 1
+  user: UserOne
   name: Trobien

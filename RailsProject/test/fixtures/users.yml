@@ -17,7 +17,7 @@ UserOne:
   googlePlus: user1.plus
   signin: "2014-09-07 23:20:20"
   idAPI: 4f009289d197fd93e8977e96c945e5324c002875
-  secureKey: 0c503c3e735a7bfb5aa7244db8c2a8c80d296f16
+  secureKey: 32898042138e9a4686b40b194d8862dd205b415ba2a4247d2f790ae2acf4e557
   activated: true
   newsletter: true
   language: FR
@@ -41,7 +41,7 @@ UserTwo:
   googlePlus: 2039430539540
   signin: "2014-09-07 23:20:20"
   idAPI: b266741d88c8d2155dc1315c8e9b7fb7ff29830e
-  secureKey: ab8c1c4b8d28cbf921618755dcd5306377ce8561
+  secureKey: 27cc5eb35022228b6a476f7b3f8c59f38fd44e592fe93cc4ccf6b28035fd52e0
   activated: false
   newsletter: false
   language: EN

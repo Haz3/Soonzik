@@ -255,7 +255,7 @@ ActiveRecord::Schema.define(version: 20141012054200) do
 
   create_table "music_notes", force: true do |t|
     t.integer  "user_id",    null: false
-    t.integer  "album_id",   null: false
+    t.integer  "music_id",   null: false
     t.integer  "value",      null: false
     t.datetime "created_at"
     t.datetime "updated_at"

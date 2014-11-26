@@ -2,12 +2,12 @@
 
 MessageOne:
   msg: Message numero 1
-  user_id: 1
-  dest_id: 2
+  sender: UserOne
+  receiver: UserTwo
   session: AAAAA
 
 MessageTwo:
   msg: Message numero 2
-  user_id: 2
-  dest_id: 1
+  sender: UserTwo
+  receiver: UserOne
   session: AAAAA

@@ -1,13 +1,13 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 cadeauUn:
-  to_user: 1
-  from_user: 2
-  typeObj: Music
+  user_to: UserOne
+  user_from: UserTwo
+  typeObj: FakeType
   obj_id: 1
 
 cadeauDeux:
-  to_user: 2
-  from_user: 1
-  typeObj: Album
+  user_to: UserTwo
+  user_from: UserOne
+  typeObj: Music
   obj_id: 2

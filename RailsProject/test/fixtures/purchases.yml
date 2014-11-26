@@ -1,13 +1,13 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 PurchaseOne:
-  user_id: 1
-  typeObj: Album
+  user: UserOne
+  typeObj: FakeObject
   obj_id: 1
   date: 2014-09-07 23:19:55
 
 PurchaseTwo:
-  user_id: 2
+  user: UserTwo
   typeObj: Music
   obj_id: 2
   date: 2014-09-07 23:19:55

@@ -1,11 +1,11 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 VoteOne:
-  user_id: 1
-  battle_id: 1
-  artist_id: 1
+  user: UserOne
+  battle: BattleOne
+  artist: UserOne
 
 VoteTwo:
-  user_id: 2
-  battle_id: 1
-  artist_id: 2
+  user: UserTwo
+  battle: BattleOne
+  artist: UserTwo

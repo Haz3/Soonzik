@@ -18,7 +18,7 @@ class UserTest < ActiveSupport::TestCase
   	assert u1.regenerateKey
   	assert u1.idAPI != oldidApi
   	assert u1.secureKey != oldKey
-  	assert u1.save
+    assert u1.save
   end
 
   test "User before create method" do

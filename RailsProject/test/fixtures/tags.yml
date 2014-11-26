@@ -2,8 +2,8 @@
 
 TagOne:
   tag: Rock
-  news_id: 1
+  news: newsOne
 
 TagTwo:
   tag: News
-  news_id: 2
+  news: newsTwo

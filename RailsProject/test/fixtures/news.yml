@@ -3,11 +3,11 @@
 newsOne:
   title: Akinator nous a rejoint sur SoonZik
   date: 2014-09-09 12:00:00
-  author_id: 1
+  user: UserOne
   commentaries: commentaireNews
   attachments: attachmentOne, attachmentTwo
 
 newsSecond:
   title: SoonZik vient d'ouvrir !
   date: 2014-09-07 23:19:17
-  author_id: 1
+  user: UserTwo

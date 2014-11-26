@@ -1,5 +1,5 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 FollowRelationOne:
-  user_id: 1
-  follow_id: 2
+  user: UserOne
+  user_to: UserTwo

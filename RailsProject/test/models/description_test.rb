@@ -1,7 +1,7 @@
 require 'test_helper'
 
 class DescriptionTest < ActiveSupport::TestCase
-  test "the truth" do
-    assert true
+  test 'not empty' do
+  	assert true
   end
 end

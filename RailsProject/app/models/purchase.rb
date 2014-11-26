@@ -6,15 +6,15 @@ class Purchase < ActiveRecord::Base
 
   validates :user, :typeObj, :obj_id, :date, presence: true
   validates :date, format: /(\d{4})-(\d{2})-(\d{2}) (\d{2}):(\d{2}):(\d{2})/
-  validates :obj_id, numericality: true
+  validates :obj_id, numericality: { only_integer: true }
   validate :objectValidation
 
   # A validate rules to check if an object exists
   # The typeObj and obj_id need to be present to do the check and add the error
   def objectValidation
-  	if !Object.const_defined?(typeObj)
+  	if typeObj != nil && !Object.const_defined?(typeObj)
   		errors.add(:typeObj, "Invalid object type")
-  	elsif typeObj.constantize.find_by_id(obj_id) != nil
+  	elsif typeObj != nil && obj_id != nil && typeObj.constantize.find_by_id(obj_id) == nil
   		errors.add(:obj_id, "This object doesn't exist")
   	end
   end
