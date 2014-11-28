@@ -8,8 +8,16 @@
 
 #import "ConnexionViewController.h"
 #import "HomeViewController.h"
-#import "FacebookConnect.h"
 #import "AppDelegate.h"
+
+#import <FacebookSDK/FacebookSDK.h>
+
+#import "GTLPlusConstants.h"
+#import "GTLQueryPlus.h"
+#import "GTMLogger.h"
+#import "GTLPlusPerson.h"
+#import "GTLServicePlus.h"
+#import "GTMOAuth2Authentication.h"
 
 @interface ConnexionViewController ()
 
@@ -46,59 +54,47 @@
 - (void)initializeButtons
 {
     [self.facebookButton addTarget:self action:@selector(loginWithFacebook) forControlEvents:UIControlEventTouchUpInside];
+    [self.googleButton addTarget:self action:@selector(loginWithGoogle) forControlEvents:UIControlEventTouchUpInside];
     [self.twitterButton addTarget:self action:@selector(loginWithTwitter) forControlEvents:UIControlEventTouchUpInside];
     [self.emailButton addTarget:self action:@selector(loginWithEmail) forControlEvents:UIControlEventTouchUpInside];
 }
 
 - (void)loginWithFacebook
 {
-    [UIView animateWithDuration:0.5f delay:0.0f options:UIViewAnimationOptionCurveEaseInOut animations:^{
-        [self.emailConnexionArea setAlpha:0.0f];
-    } completion:nil];
+    AppDelegate *delegate =(AppDelegate*)[UIApplication sharedApplication].delegate;
+    [delegate setTypeConnexion:1];
     
-    [UIView animateWithDuration:0.5f delay:0.5f options:UIViewAnimationOptionCurveEaseInOut animations:^{
-        [self.kindOfConnexionArea setFrame:CGRectMake(self.kindOfConnexionArea.frame.origin.x, self.view.frame.size.height / 2, self.kindOfConnexionArea.frame.size.width, self.kindOfConnexionArea.frame.size.height)];
-    } completion:nil];
-
-    FacebookConnect *fb = [[FacebookConnect alloc] init];
-    NSLog(@"chargement");
-
-    sleep(2);
-    NSLog(@"FacebookIsAvailable: %d", fb.isSuccess);
-    if (fb.isSuccess == kSuccess) {
-        [self launchHomePage];
-    } else if (fb.isSuccess == kNoAccount) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Erreur" message:@"Veuillez ajouter un compte Facebook dans vos paramètres iOS afin d'accèder à la connexion via Facebook" delegate:self cancelButtonTitle:@"D'accord" otherButtonTitles:nil, nil];
-        [alert show];
-    } else if (fb.isSuccess == kNoAccess) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Erreur" message:@"Veuillez accepter les conditions de partage Facebook" delegate:self cancelButtonTitle:@"D'accord" otherButtonTitles:nil, nil];
-        [alert show];
-    } else if (fb.isSuccess == kNoNetwork) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Erreur" message:@"Veuillez vous connecter à un réseau pour accéder à l'application" delegate:self cancelButtonTitle:@"D'accord" otherButtonTitles:nil, nil];
-        [alert show];
+    // If the session state is any of the two "open" states when the button is clicked
+    if (FBSession.activeSession.state == FBSessionStateOpen || FBSession.activeSession.state == FBSessionStateOpenTokenExtended) {
+        [FBSession.activeSession closeAndClearTokenInformation];
+    } else {
+        [FBSession openActiveSessionWithReadPermissions:@[@"public_profile", @"email"]
+                                           allowLoginUI:YES
+                                      completionHandler:
+         ^(FBSession *session, FBSessionState state, NSError *error) {
+             AppDelegate* appDelegate = [UIApplication sharedApplication].delegate;
+             [appDelegate sessionStateChanged:session state:state error:error];
+         }];
     }
-    [self.loadingDataIndicator startAnimating];
-    [self.loadingDataIndicator stopAnimating];
-}
-
-- (void)launchHomePage {
-    NSLog(@"Lancement de la page d'accueil");
-    
-    HomeViewController *vc = [[HomeViewController alloc] initWithNibName:@"HomeViewController" bundle:nil];
-    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)loginWithTwitter
 {
-    [UIView animateWithDuration:0.5f delay:0.0f options:UIViewAnimationOptionCurveEaseInOut animations:^{
-        [self.emailConnexionArea setAlpha:0.0f];
-    } completion:nil];
+
+}
+
+- (void)loginWithGoogle
+{
+    GPPSignIn *signIn = [GPPSignIn sharedInstance];
+    signIn.clientID = @"86194997201-a8usvamk2efjomucfg1b99i02332gsj5.apps.googleusercontent.com";
+    signIn.scopes = [NSArray arrayWithObjects:
+                     @"https://www.googleapis.com/auth/plus.login",
+                     @"https://www.googleapis.com/auth/userinfo.email",
+                     @"https://www.googleapis.com/auth/userinfo.profile", // Défini dans GTLPlusConstants.h
+                     nil];
+    signIn.delegate = self;
     
-    [UIView animateWithDuration:0.5f delay:0.5f options:UIViewAnimationOptionCurveEaseInOut animations:^{
-        [self.kindOfConnexionArea setFrame:CGRectMake(self.kindOfConnexionArea.frame.origin.x, self.view.frame.size.height / 2, self.kindOfConnexionArea.frame.size.width, self.kindOfConnexionArea.frame.size.height)];
-    } completion:nil];
-    
-    [self.loadingDataIndicator startAnimating];
+    [signIn authenticate];
 }
 
 - (void)loginWithEmail
@@ -113,12 +109,60 @@
     
 }
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (void)launchHomePage {
+    NSLog(@"Lancement de la page d'accueil");
+    
+    HomeViewController *vc = [[HomeViewController alloc] initWithNibName:@"HomeViewController" bundle:nil];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
+/**
+    GOOGLE CONNECT
+ **/
 
+- (void)finishedWithAuth: (GTMOAuth2Authentication *)auth error: (NSError *) error
+{
+    [FBSession.activeSession closeAndClearTokenInformation];
+    
+    /*self.kindOfProvider = 1;
+    NSLog(@"ID Token: %@", auth.accessToken);
+    
+    [self getJsonClient:auth.accessToken provider:@"google"];
+    self.prefs = [NSUserDefaults standardUserDefaults];
+    [self.prefs setObject:[NSKeyedArchiver archivedDataWithRootObject:self.client] forKey:@"Client"];
+    [self.prefs synchronize];
+    
+    MenuViewController *mainVC = [[MenuViewController alloc] init];
+    [self.navigationController initWithRootViewController:mainVC];*/
+}
+
+-(void)refreshInterfaceBasedOnSignIn
+{
+    if ([[GPPSignIn sharedInstance] authentication]) {
+        // L'utilisateur est connecté.
+        self.googleButton.hidden = YES;
+        // Effectuer d'autres actions ici, comme afficher un bouton de déconnexion, par exemple
+    } else {
+        self.googleButton.hidden = NO;
+        // Effectuer d'autres actions ici
+    }
+}
+
+- (void)signOut {
+    [[GPPSignIn sharedInstance] signOut];
+}
+
+- (void)disconnect {
+    [[GPPSignIn sharedInstance] disconnect];
+}
+
+- (void)didDisconnectWithError:(NSError *)error {
+    if (error) {
+        NSLog(@"Received error %@", error);
+    } else {
+        // L'utilisateur est déconnecté et l'application dissociée de Google+.
+        // Effacer les données de l'utilisateur conformément aux conditions d'utilisation de la Plate-forme Google+.
+    }
+}
 
 @end

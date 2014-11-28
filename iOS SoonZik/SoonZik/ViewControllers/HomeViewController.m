@@ -87,25 +87,19 @@
     s1.title = @"song1";
     s1.artist = [[User alloc] init];
     s1.artist.username = @"John Newman";
-    s1.album = [[Album alloc] init];
-    s1.album.image = @"song1.jpg";
-    s1.file = @"song1";
+    s1.image = @"song1.jpg";
     
     Music *s2 = [[Music alloc] init];
     s2.title = @"song2";
     s2.artist = [[User alloc] init];
     s2.artist.username = @"Route 94";
-    s2.album = [[Album alloc] init];
-    s2.album.image = @"song2.jpg";
-    s2.file = @"song2";
+    s2.image = @"song2.jpg";
     
     Music *s3 = [[Music alloc] init];
     s3.title = @"song3";
     s3.artist = [[User alloc] init];
     s3.artist.username = @"Duke Dumont";
-    s3.album = [[Album alloc] init];
-    s3.album.image = @"song3.jpg";
-    s3.file = @"song3";
+    s3.image = @"song3.jpg";
     
     [self.player.listeningList addObject:s1];
     [self.player.listeningList addObject:s2];

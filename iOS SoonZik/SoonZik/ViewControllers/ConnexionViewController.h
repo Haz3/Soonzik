@@ -9,11 +9,17 @@
 #import <UIKit/UIKit.h>
 #import <Social/Social.h>
 #import <Accounts/Accounts.h>
+#import "OAConsumer.h"
+#import "OAMutableURLRequest.h"
+#import "OADataFetcher.h"
+#import "OATokenManager.h"
+#import "GPPSignIn.h"
+#import "GPPSignInButton.h"
 
-@interface ConnexionViewController : UIViewController 
+@class GPPSignInButton;
 
-@property (strong, nonatomic) ACAccountStore *accountStore;
-@property (strong, nonatomic) ACAccount *facebookAccount;
+@interface ConnexionViewController : UIViewController <GPPSignInDelegate>
+
 @property (assign, nonatomic) bool isFacebookAvailable;
 
 @property (strong, nonatomic) NSString *fbID, *globalFBID;
@@ -26,9 +32,13 @@
 @property (weak, nonatomic) IBOutlet UIView *emailConnexionArea;
 @property (weak, nonatomic) IBOutlet UIButton *facebookButton;
 @property (weak, nonatomic) IBOutlet UIButton *twitterButton;
+@property (weak, nonatomic) IBOutlet UIButton *googleButton;
 @property (weak, nonatomic) IBOutlet UIButton *emailButton;
 @property (weak, nonatomic) IBOutlet UITextField *emailAddressTextField;
 @property (weak, nonatomic) IBOutlet UITextField *passwordTextField;
-@property (weak, nonatomic) IBOutlet UIButton *checkboxButton;
 @property (weak, nonatomic) IBOutlet UIImageView *soonzikLogo;
+
+@property (strong, nonatomic) GPPSignIn *signIn;
+
+
 @end

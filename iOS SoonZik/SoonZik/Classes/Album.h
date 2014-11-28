@@ -6,15 +6,18 @@
 //  Copyright (c) 2014 Coordina. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import "Element.h"
 #import "User.h"
+#import "Music.h"
 
-@interface Album : NSObject
+@interface Album : Element
 
 @property (nonatomic, assign) int identifier;
 @property (strong, nonatomic) NSString *title;
 @property (strong, nonatomic) User *artist;
 @property (strong, nonatomic) NSString *image;
 @property (strong, nonatomic) NSDate *date;
+@property (nonatomic, assign) float price;
+@property (nonatomic, strong) NSMutableArray *listOfMusics;
 
 @end

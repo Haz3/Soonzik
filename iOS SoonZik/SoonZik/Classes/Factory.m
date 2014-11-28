@@ -41,6 +41,23 @@
     return list;
 }
 
+- (NSArray *)provideListWithClassName:(NSString *)className andIdentifier:(int)identifier
+{
+    NSMutableArray *list = [[NSMutableArray alloc] init];
+    Class cl = NSClassFromString(className);
+    
+    Network *net = [[Network alloc] init];
+    NSDictionary *json = [net getJsonWithClassName:className andIdentifier:identifier];
+    
+    json = [json objectForKey:@"content"];
+    for (NSDictionary *dict in json) {
+        id elem = [[cl alloc] initWithJsonObject:dict];
+        [list addObject:elem];
+    }
+    
+    return list;
+}
+
 - (BOOL)addElement:(id)elem
 {
     return NO;

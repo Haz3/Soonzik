@@ -10,15 +10,26 @@
 
 @implementation Pack
 
+/* @property (nonatomic, assign) int identifier;
+ @property (nonatomic, strong) NSString *title;
+ @property (nonatomic, strong) Genre *genre;
+ @property (nonatomic, assign) float price;
+ @property (nonatomic, strong) NSArray *listOfAlbums;
+ @property (nonatomic, strong) NSArray *listOfComments;*/
+
 - (id)initWithJsonObject:(NSDictionary *)json
 {
-    NSLog(@"PACK");
-    
     self = [super init];
-    
     self.identifier = [[json objectForKey:@"id"] intValue];
     self.title = [json objectForKey:@"title"];
-    //self.genre = []
+    self.price = [[json objectForKey:@"price"] floatValue];
+    self.listOfAlbums = [[NSMutableArray alloc] init];
+    NSDictionary *albums = [json objectForKey:@"albums"];
+    for (NSDictionary *album in albums) {
+        //NSLog(@"%@", album);
+        Album *al = [[Album alloc] initWithJsonObject:album];
+        [self.listOfAlbums addObject:al];
+    }
     
     return self;
 }

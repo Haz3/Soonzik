@@ -23,6 +23,7 @@ static AudioPlayer *sharedInstance = nil;
 
 - (void)prepareSong:(NSString *)song
 {
+    NSLog(@"song : %@", song);
     NSString *data = [[NSBundle mainBundle] pathForResource:song ofType:@"mp3"];
     NSURL *url = [[NSURL alloc] initFileURLWithPath:data];
     self.audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:nil];

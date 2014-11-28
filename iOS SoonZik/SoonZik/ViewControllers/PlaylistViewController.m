@@ -57,32 +57,28 @@
     s1.title = @"song1";
     s1.artist = [[User alloc] init];
     s1.artist.username = @"John Newman";
-    s1.album = [[Album alloc] init];
-    s1.album.image = @"song1.jpg";
+    s1.image = @"song1.jpg";
     s1.file = @"song1";
     
     Music *s2 = [[Music alloc] init];
     s2.title = @"song2";
     s2.artist = [[User alloc] init];
     s2.artist.username = @"Route 94";
-    s2.album = [[Album alloc] init];
-    s2.album.image = @"song2.jpg";
+    s2.image = @"song2.jpg";
     s2.file = @"song2";
     
     Music *s3 = [[Music alloc] init];
     s3.title = @"song3";
     s3.artist = [[User alloc] init];
     s3.artist.username = @"Duke Dumont";
-    s3.album = [[Album alloc] init];
-    s3.album.image = @"song3.jpg";
+    s3.image = @"song3.jpg";
     s3.file = @"song3";
     
     Music *s4 = [[Music alloc] init];
     s4.title = @"song4";
     s4.artist = [[User alloc] init];
     s4.artist.username = @"Stromae";
-    s4.album = [[Album alloc] init];
-    s4.album.image = @"song4.jpg";
+    s4.image = @"song4.jpg";
     s4.file = @"song4";
     
     self.tracks = [[NSMutableArray alloc] initWithObjects:s2, s3, nil];
@@ -108,7 +104,6 @@
 {
     [self closePopUp];
     ArtistViewController *vc = [[ArtistViewController alloc] initWithNibName:@"ArtistViewController" bundle:nil];
-    //vc.navigationItem.hidesBackButton = NO;
     [self.navigationController pushViewController:vc animated:YES];
 }
 
@@ -172,19 +167,19 @@
     for (Music *music in playlist) {
         switch (i) {
             case 1:
-                headerView.album1Image.image = [UIImage imageNamed:music.album.image];
+                headerView.album1Image.image = [UIImage imageNamed:music.image];
                 i++;
                 break;
             case 2:
-                headerView.album2Image.image = [UIImage imageNamed:music.album.image];
+                headerView.album2Image.image = [UIImage imageNamed:music.image];
                 i++;
                 break;
             case 3:
-                headerView.album3Image.image = [UIImage imageNamed:music.album.image];
+                headerView.album3Image.image = [UIImage imageNamed:music.image];
                 i++;
                 break;
             case 4:
-                headerView.album4Image.image = [UIImage imageNamed:music.album.image];
+                headerView.album4Image.image = [UIImage imageNamed:music.image];
                 i++;
                 break;
             default:
@@ -217,7 +212,7 @@
     Music *s = [playlist objectAtIndex:indexPath.row];
     
     cell.trackTitle.text = s.title;
-    cell.trackImage.image = [UIImage imageNamed:s.album.image];
+    cell.trackImage.image = [UIImage imageNamed:s.image];
     /*
     UIButton *albumButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 40, 40)];
     [albumButton setImage:[UIImage imageNamed:s.image] forState:UIControlStateNormal];

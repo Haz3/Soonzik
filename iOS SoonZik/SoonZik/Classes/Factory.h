@@ -14,6 +14,7 @@
 
 - (id)provideObjectWithClassName:(NSString *)className andIdentifier:(int)identifier;
 - (NSArray *)provideListWithClassName:(NSString *)className;
+- (NSArray *)provideListWithClassName:(NSString *)className andIdentifier:(int)identifier;
 
 - (BOOL)addElement:(id)elem;
 - (BOOL)deleteElement:(id)elem;

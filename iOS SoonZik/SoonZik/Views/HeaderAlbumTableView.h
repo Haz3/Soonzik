@@ -10,4 +10,7 @@
 
 @interface HeaderAlbumTableView : UIView
 
+@property (nonatomic, weak) IBOutlet UIImageView *albumImage;
+@property (nonatomic, weak) IBOutlet UILabel *albumTitle;
+
 @end

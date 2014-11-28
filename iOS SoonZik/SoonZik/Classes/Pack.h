@@ -17,7 +17,7 @@
 @property (nonatomic, strong) NSString *title;
 @property (nonatomic, strong) Genre *genre;
 @property (nonatomic, assign) float price;
-@property (nonatomic, strong) NSArray *listOfAlbums;
-@property (nonatomic, strong) NSArray *listOfComments;
+@property (nonatomic, strong) NSMutableArray *listOfAlbums;
+@property (nonatomic, strong) NSMutableArray *listOfComments;
 
 @end

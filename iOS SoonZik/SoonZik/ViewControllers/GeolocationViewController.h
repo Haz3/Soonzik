@@ -19,4 +19,6 @@
 
 @property (nonatomic, strong) CLLocationManager *userPosition;
 
+@property (nonatomic, weak) IBOutlet UIView *sliderView;
+
 @end

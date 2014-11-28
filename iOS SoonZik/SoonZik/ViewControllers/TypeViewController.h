@@ -17,6 +17,8 @@
 
 @interface TypeViewController : UIViewController <MenuTabDelegate, FinishPlayPlayer, PlayerPreviewDelegate>
 
+@property (nonatomic, strong) NSUserDefaults *prefs;
+
 @property (strong, nonatomic) AudioPlayer *player;
 
 @property (strong, nonatomic) UIView *menuView;

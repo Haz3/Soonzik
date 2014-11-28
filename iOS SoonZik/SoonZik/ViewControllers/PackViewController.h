@@ -7,13 +7,15 @@
 //
 
 #import "TypeViewController.h"
+#import "HeaderPackView.h"
 
-@interface PackViewController : TypeViewController <UIScrollViewDelegate>
+@interface PackViewController : TypeViewController <UITableViewDataSource, UITableViewDelegate, SlidePacksDelegate>
 
 @property (nonatomic, strong) NSArray *listOfPacks;
-@property (nonatomic, weak) IBOutlet UIScrollView *scrollView;
+
 @property (nonatomic, weak) IBOutlet UILabel *packLabel;
 @property (nonatomic, strong) UIView *contentView;
+@property (nonatomic, weak) IBOutlet UIView *blurView;
 
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
 

@@ -11,6 +11,8 @@
 #import "FirstLaunchViewController.h"
 #import "ConnexionViewController.h"
 #import "HomeViewController.h"
+#import "SocialConnect.h"
+#import "GPPURLHandler.h"
 
 @implementation AppDelegate
 
@@ -30,23 +32,16 @@
     
     UIViewController *vc;
     
-   /* if ([self.prefs integerForKey:@"isNotTheFirstUse"] == 0) {
-        NSLog(@"It's the first use");
-        [self.prefs setInteger:1 forKey:@"isNotTheFirstUse"];
-        [self.prefs setInteger:0 forKey:@"autoLogin"];
-        [self.prefs synchronize];
-        
-        vc = [[FirstLaunchViewController alloc] initWithNibName:@"FirstLaunchViewController" bundle:nil];
-    } else if ([self.prefs integerForKey:@"autoLogin"] == 1){
-        NSLog(@"User choose auto-login method");
-        vc = [[HomeViewController alloc] initWithNibName:@"HomeViewController" bundle:nil];
-    } else {
-        NSLog(@"It's not the first use");
-        vc = [[ConnexionViewController alloc] initWithNibName:@"ConnexionViewController" bundle:nil];
-    } */
+    if (FBSession.activeSession.state == FBSessionStateCreatedTokenLoaded) {
+        [FBSession openActiveSessionWithReadPermissions:@[@"public_profile", @"email"]
+                                           allowLoginUI:NO
+                                      completionHandler:^(FBSession *session, FBSessionState state, NSError *error) {
+                                          [self sessionStateChanged:session state:state error:error];
+                                      }];
+    }
     
-    //vc = [[ConnexionViewController alloc] initWithNibName:@"ConnexionViewController" bundle:nil];
-    vc = [[HomeViewController alloc] initWithNibName:@"HomeViewController" bundle:nil];
+    vc = [[ConnexionViewController alloc] initWithNibName:@"ConnexionViewController" bundle:nil];
+    //vc = [[HomeViewController alloc] initWithNibName:@"HomeViewController" bundle:nil];
     //MenuViewController *mainVC = [[MenuViewController alloc] init];
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
@@ -57,11 +52,69 @@
     return YES;
 }
 
+
+// This method will handle ALL the session state changes in the app
+- (void)sessionStateChanged:(FBSession *)session state:(FBSessionState)state error:(NSError *)error
+{
+    if (!error && state == FBSessionStateOpen){
+        NSLog(@"Session opened");
+        [[FBRequest requestForMe] startWithCompletionHandler:^(FBRequestConnection *connection, NSDictionary<FBGraphUser> *u, NSError *error) {
+            if (!error) {
+                NSString *token = [[[FBSession activeSession] accessTokenData] accessToken];
+                User *user = [SocialConnect facebookConnect:token email:[u objectForKey:@"email"]];
+                self.prefs = [NSUserDefaults standardUserDefaults];
+                [self.prefs setObject:[NSKeyedArchiver archivedDataWithRootObject:user] forKey:@"User"];
+                [self.prefs synchronize];
+
+                HomeViewController *vc = [[HomeViewController alloc] initWithNibName:@"HomeViewController" bundle:nil];
+                UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
+                self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+                
+                self.window.rootViewController = nav;
+                [self.window makeKeyAndVisible];
+
+            }
+        }];
+        
+        return;
+    }
+    if (state == FBSessionStateClosed || state == FBSessionStateClosedLoginFailed){
+        NSLog(@"Session closed");
+    }
+    
+    if (error){
+        NSLog(@"Error");
+        NSString *alertText;
+        NSString *alertTitle;
+        if ([FBErrorUtility shouldNotifyUserForError:error] == YES){
+            alertTitle = @"Something went wrong";
+            alertText = [FBErrorUtility userMessageForError:error];
+            NSLog(@"%@ => %@", alertTitle, alertText);
+        } else {
+            if ([FBErrorUtility errorCategoryForError:error] == FBErrorCategoryUserCancelled) {
+                NSLog(@"User cancelled login");
+            } else if ([FBErrorUtility errorCategoryForError:error] == FBErrorCategoryAuthenticationReopenSession){
+                alertTitle = @"Session Error";
+                alertText = @"Your current session is no longer valid. Please log in again.";
+                NSLog(@"%@ => %@", alertTitle, alertText);
+            } else {
+                NSDictionary *errorInformation = [[[error.userInfo objectForKey:@"com.facebook.sdk:ParsedJSONResponseKey"] objectForKey:@"body"] objectForKey:@"error"];
+                alertTitle = @"Something went wrong";
+                alertText = [NSString stringWithFormat:@"Please retry. \n\n If the problem persists contact us and mention this error code: %@", [errorInformation objectForKey:@"message"]];
+                NSLog(@"%@ => %@", alertTitle, alertText);
+            }
+        }
+        [FBSession.activeSession closeAndClearTokenInformation];
+        NSLog(@"Not logged");
+    }
+}
+
+
 - (void)remoteControlReceivedWithEvent:(UIEvent *)receivedEvent
 {
     if (receivedEvent.type == UIEventTypeRemoteControl) {
         NSLog(@"remove control");
-        NSLog(@"event : %i", receivedEvent.subtype);
+        NSLog(@"event : %li", receivedEvent.subtype);
         switch (receivedEvent.subtype) {
             case 101:
             {
@@ -114,13 +167,36 @@
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
-    
-    // Handle the user leaving the app while the Facebook login dialog is being shown
-    // For example: when the user presses the iOS "home" button while the login dialog is active
-    
+    [FBAppCall handleDidBecomeActive];
 }
 
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
+{
+    NSLog(@"url = %@", url);
+    NSLog(@"source application = %@", sourceApplication);
+    NSLog(@"type : %i", self.type);
+    
+    if (self.type == 1)
+    {
+        [FBSession.activeSession setStateChangeHandler:
+         ^(FBSession *session, FBSessionState state, NSError *error) {
+             
+             // Retrieve the app delegate
+             AppDelegate* appDelegate = [UIApplication sharedApplication].delegate;
+             // Call the app delegate's sessionStateChanged:state:error method to handle session state changes
+             [appDelegate sessionStateChanged:session state:state error:error];
+         }];
+        return [FBAppCall handleOpenURL:url sourceApplication:sourceApplication];
+    }
+    
+    return [GPPURLHandler handleURL:url sourceApplication:sourceApplication annotation:annotation];
+}
 
+- (void)setTypeConnexion:(int)type
+{
+    NSLog(@"change type");
+    self.type = type;
+}
 
 
 @end

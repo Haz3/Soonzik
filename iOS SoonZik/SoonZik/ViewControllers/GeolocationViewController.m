@@ -13,6 +13,8 @@
 
 #define METERS_PER_MILE 1609.344
 
+#define DEGREES_RADIANS(angle) (angle / 180.0 * M_PI)
+
 @interface GeolocationViewController ()
 
 @end
@@ -33,6 +35,10 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
+    CGAffineTransform rotationTransform = CGAffineTransformIdentity;
+    rotationTransform = CGAffineTransformRotate(rotationTransform, DEGREES_RADIANS(90));
+    self.sliderView.transform = rotationTransform;
+    
     self.mapView.delegate = self;
     self.mapView.showsUserLocation = YES;
     
@@ -43,11 +49,17 @@
     self.userPosition.delegate = self;
     self.userPosition.distanceFilter = kCLDistanceFilterNone;
     self.userPosition.desiredAccuracy = kCLLocationAccuracyBest;
-    [self goToUserLocation];
+    if ([self.userPosition respondsToSelector:@selector(requestWhenInUseAuthorization)]) {
+        [self.userPosition requestWhenInUseAuthorization];
+    }
+    
+    [self.myPositionButton addTarget:self action:@selector(getUserLocation) forControlEvents:UIControlEventTouchUpInside];
+    
+    [self getUserLocation];
     
     self.slider.value = 400;
     self.slider.minimumValue = 200;
-    self.slider.maximumValue = 20000;
+    self.slider.maximumValue = 30000;
     [self.slider setThumbImage:[UIImage imageNamed:@"cursor.png"] forState:UIControlStateNormal];
     
     [self getAllOtherUsers];
@@ -55,17 +67,61 @@
     [self.detailView setFrame:CGRectMake(0, self.view.frame.size.height - self.detailView.frame.size.height, self.detailView.frame.size.width, self.detailView.frame.size.height)];
     [self.view addSubview:self.detailView];
     
-    [self.myPositionButton addTarget:self action:@selector(goToUserLocation) forControlEvents:UIControlEventTouchUpInside];
+    [self.myPositionButton addTarget:self action:@selector(getUserLocation) forControlEvents:UIControlEventTouchUpInside];
     [self.slider addTarget:self action:@selector(sliderValueChanged:) forControlEvents:UIControlEventValueChanged];
     
     [self.detailView setAlpha:0];
     
 }
 
+- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations
+{
+    NSLog(@"last location : %@", [locations lastObject]);
+    CLLocation *location = [locations lastObject];
+    
+    CLLocationCoordinate2D zoomLocation = location.coordinate;
+    MKCoordinateRegion viewRegion = MKCoordinateRegionMakeWithDistance(zoomLocation, 2 * METERS_PER_MILE, 2 * METERS_PER_MILE);
+    [UIView animateWithDuration:0.8 animations:^{
+        [self.mapView setRegion:viewRegion];
+    }];
+    
+   // self.longitude = location.coordinate.longitude;
+   // self.latitude = location.coordinate.latitude;
+    NSArray *overlays = self.mapView.overlays;
+    for (id overlay in overlays) {
+        [self.mapView removeOverlay:overlay];
+    }
+    
+    //[self.userPosition startUpdatingLocation];
+    CLLocationDistance fenceDistance = (int)self.slider.value;
+    CLLocationCoordinate2D circleMiddlePoint = location.coordinate;
+    MKCircle *circle = [MKCircle circleWithCenterCoordinate:circleMiddlePoint radius:fenceDistance];
+    [self.mapView addOverlay:circle];
+    
+    [self.userPosition stopUpdatingLocation];
+}
+
+- (void)getUserLocation
+{
+    NSLog(@"get location");
+    [self.userPosition startUpdatingLocation];
+}
+
+#pragma mark - CLLocationManagerDelegate
+
+- (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
+{
+    NSLog(@"didFailWithError: %@", error);
+    UIAlertView *errorAlert = [[UIAlertView alloc]
+                               initWithTitle:@"Error" message:@"Failed to Get Your Location" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    [errorAlert show];
+}
+
+
 - (void)sliderValueChanged:(UISlider *)sender
 {
     NSLog(@"sender.value : %f", sender.value);
-    [self goToUserLocation];
+    [self getUserLocation];
 }
 
 - (MKOverlayRenderer *)mapView:(MKMapView *)mapView rendererForOverlay:(id < MKOverlay >)overlay
@@ -77,6 +133,9 @@
     return circleR;
 }
 
+    
+    
+    /*
 - (void)goToUserLocation
 {
     NSArray *overlays = self.mapView.overlays;
@@ -89,7 +148,7 @@
     CLLocationCoordinate2D circleMiddlePoint = self.userPosition.location.coordinate;
     MKCircle *circle = [MKCircle circleWithCenterCoordinate:circleMiddlePoint radius:fenceDistance];
     [self.mapView addOverlay:circle];
-}
+}*/
 
 - (void)getAllOtherUsers
 {
@@ -101,6 +160,7 @@
     [self.mapView addAnnotation:ann];
 }
 
+    /*
 - (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation
 {
     CLLocationCoordinate2D zoomLocation = newLocation.coordinate;
@@ -108,7 +168,7 @@
     [self.mapView setRegion:viewRegion];
     
     [self.userPosition stopUpdatingLocation];
-}
+} */
 
 - (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation
 {

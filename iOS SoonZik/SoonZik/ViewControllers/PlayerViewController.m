@@ -118,7 +118,7 @@
         self.title = s.title;
         self.songTitle.text = s.title;
         self.songArtist.text = s.artist.username;
-        self.songImage.image = [UIImage imageNamed:s.album.image];
+        self.songImage.image = [UIImage imageNamed:s.image];
     }
     
 }
@@ -322,7 +322,7 @@
     [cell initCell];
     Music *s = [self.player.listeningList objectAtIndex:indexPath.row];
     cell.songTitleLabel.text = s.title;
-    cell.imageAlbum.image = [UIImage imageNamed:s.album.image];
+    cell.imageAlbum.image = [UIImage imageNamed:s.image];
     
     return cell;
 }

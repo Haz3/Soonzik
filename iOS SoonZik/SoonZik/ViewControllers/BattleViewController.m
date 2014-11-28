@@ -7,7 +7,6 @@
 //
 
 #import "BattleViewController.h"
-#import "LatestVotesViewController.h"
 
 @interface BattleViewController ()
 
@@ -34,9 +33,134 @@
     self.scrollView.contentSize = size;
     [self.scrollView addSubview:self.contentView];
     
-    [self.shareSection setFrame:CGRectMake(0, self.contentView.bounds.size.height*2, self.shareSection.frame.size.width, self.shareSection.frame.size.height)];
+    [self initDraggableElements];
+    
+    self.contentView2.hidden = YES;
+}
 
-    [self initElements];
+- (void)initDraggableElements
+{
+    self.firstArtistView.userInteractionEnabled = YES;
+    self.secondArtistView.userInteractionEnabled = YES;
+    
+    UIPanGestureRecognizer *recognizer1 = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePanFirst:)];
+    [self.firstArtistView addGestureRecognizer:recognizer1];
+    UIPanGestureRecognizer *recognizer2 = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePanSecond:)];
+    [self.secondArtistView addGestureRecognizer:recognizer2];
+}
+
+- (void)handlePanFirst:(UIPanGestureRecognizer *)recognizer
+{
+    if (recognizer.view.center.x - recognizer.view.frame.size.width / 2 <= self.nokView.frame.size.width) {
+        self.nokView.backgroundColor = [UIColor redColor];
+    } else {
+        self.nokView.backgroundColor = [UIColor clearColor];
+    }
+    if (recognizer.view.center.x + recognizer.view.frame.size.width / 2 >= self.view.frame.size.width - self.okView.frame.size.width) {
+        self.okView.backgroundColor = [UIColor greenColor];
+    } else {
+        self.okView.backgroundColor = [UIColor clearColor];
+    }
+    
+    CGPoint translation = [recognizer translationInView:self.contentView];
+    recognizer.view.center = CGPointMake(recognizer.view.center.x + translation.x, recognizer.view.center.y + translation.y);
+    
+    if (recognizer.state == UIGestureRecognizerStateEnded) {
+
+        if (recognizer.view.center.x - recognizer.view.frame.size.width / 2 <= self.nokView.frame.size.width) {
+            [UIView animateWithDuration:1 delay: 0 options: UIViewAnimationOptionCurveEaseOut animations:^{
+                CGPoint finalPoint = CGPointMake(-100, (self.contentView.frame.size.height-self.contentView2.frame.size.height)/2);
+                recognizer.view.center = finalPoint;
+            } completion:nil];
+            self.secondArtistView.userInteractionEnabled = NO;
+            [self setTheWinner:2];
+        } else if (recognizer.view.center.x + recognizer.view.frame.size.width / 2 >= self.view.frame.size.width - self.okView.frame.size.width) {
+            [UIView animateWithDuration:1 delay: 0 options: UIViewAnimationOptionCurveEaseOut animations:^{
+                CGPoint finalPoint = CGPointMake(self.view.frame.size.width + 100, (self.contentView.frame.size.height-self.contentView2.frame.size.height)/2);
+                recognizer.view.center = finalPoint;
+            } completion:nil];
+            self.firstArtistView.userInteractionEnabled = NO;
+            [self setTheWinner:1];
+        } else {
+            [UIView animateWithDuration:1 delay: 0 options: UIViewAnimationOptionCurveEaseOut animations:^{
+                recognizer.view.center = self.firstArtistView.center;
+            } completion:nil];
+        }
+        
+        self.okView.backgroundColor = [UIColor clearColor];
+        self.nokView.backgroundColor = [UIColor clearColor];
+    }
+    [recognizer setTranslation:CGPointMake(0, 0) inView:self.contentView];
+}
+    
+- (void)handlePanSecond:(UIPanGestureRecognizer *)recognizer
+{
+    if (recognizer.view.center.x - recognizer.view.frame.size.width / 2 <= self.nokView.frame.size.width) {
+        self.nokView.backgroundColor = [UIColor redColor];
+    } else {
+        self.nokView.backgroundColor = [UIColor clearColor];
+    }
+    if (recognizer.view.center.x + recognizer.view.frame.size.width / 2 >= self.view.frame.size.width - self.okView.frame.size.width) {
+        self.okView.backgroundColor = [UIColor greenColor];
+    } else {
+        self.okView.backgroundColor = [UIColor clearColor];
+    }
+    
+    CGPoint translation = [recognizer translationInView:self.contentView];
+    recognizer.view.center = CGPointMake(recognizer.view.center.x + translation.x, recognizer.view.center.y + translation.y);
+    
+    if (recognizer.state == UIGestureRecognizerStateEnded) {
+        
+        if (recognizer.view.center.x - recognizer.view.frame.size.width / 2 <= self.nokView.frame.size.width) {
+            [UIView animateWithDuration:1 delay: 0 options: UIViewAnimationOptionCurveEaseOut animations:^{
+                CGPoint finalPoint = CGPointMake(-100, (self.contentView.frame.size.height-self.contentView2.frame.size.height)/2);
+                recognizer.view.center = finalPoint;
+            } completion:nil];
+            self.firstArtistView.userInteractionEnabled = NO;
+            [self setTheWinner:1];
+        } else if (recognizer.view.center.x + recognizer.view.frame.size.width / 2 >= self.view.frame.size.width - self.okView.frame.size.width) {
+            [UIView animateWithDuration:1 delay: 0 options: UIViewAnimationOptionCurveEaseOut animations:^{
+                CGPoint finalPoint = CGPointMake(self.view.frame.size.width + 100, (self.contentView.frame.size.height-self.contentView2.frame.size.height)/2);
+                recognizer.view.center = finalPoint;
+            } completion:nil];
+            self.secondArtistView.userInteractionEnabled = NO;
+            [self setTheWinner:2];
+        } else {
+            [UIView animateWithDuration:1 delay: 0 options: UIViewAnimationOptionCurveEaseOut animations:^{
+                recognizer.view.center = self.secondArtistView.center;
+            } completion:nil];
+        }
+        
+        self.okView.backgroundColor = [UIColor clearColor];
+        self.nokView.backgroundColor = [UIColor clearColor];
+    }
+    [recognizer setTranslation:CGPointMake(0, 0) inView:self.contentView];
+}
+
+- (void)setTheWinner:(int)artistNbr
+{
+    self.choiceLabel.hidden = YES;
+    if (artistNbr == 1) {
+        self.firstArtistViewName.hidden = YES;
+        [UIView animateWithDuration:1 animations:^{
+            self.firstArtistView.frame = CGRectMake(self.firstArtistView.frame.origin.x, self.firstArtistView.frame.origin.y, self.view.frame.size.width * 0.75, self.view.frame.size.width * 0.75);
+            self.firstArtistView.center = CGPointMake(self.contentView.center.x, self.contentView.center.y / 1.5);
+            self.firstArtistViewImage.frame = CGRectMake(0, 0, self.firstArtistView.frame.size.width, self.firstArtistView.frame.size.height);
+            self.firstArtistViewButton.hidden = YES;
+            self.secondArtistView.alpha = 0;
+            self.artistLabel.text = self.firstArtistViewName.text;
+        } completion:nil];
+    } else if (artistNbr == 2) {
+        self.secondArtistViewName.hidden = YES;
+        [UIView animateWithDuration:1 animations:^{
+            self.secondArtistView.frame = CGRectMake(self.secondArtistView.frame.origin.x, self.secondArtistView.frame.origin.y, self.view.frame.size.width * 0.75, self.view.frame.size.width * 0.75);
+            self.secondArtistView.center = CGPointMake(self.contentView.center.x, self.contentView.center.y / 1.5);
+            self.secondArtistViewImage.frame = CGRectMake(0, 0, self.secondArtistView.frame.size.width, self.secondArtistView.frame.size.height);
+            self.secondArtistViewButton.hidden = YES;
+            self.firstArtistView.alpha = 0;
+            self.artistLabel.text = self.secondArtistViewName.text;
+        } completion:nil];
+    }
     
     [self getDataFromServer];
 }
@@ -46,100 +170,12 @@
     self.firstArtistScore = 65.0;
     self.secondArtistScore = 35.0;
     
-    self.artist1VoteLabel.text = [NSString stringWithFormat:@"%d %%", (int)self.firstArtistScore];
-    self.artist2VoteLabel.text = [NSString stringWithFormat:@"%d %%", (int)self.secondArtistScore];
-    
-    [self refreshProgression];
-}
-
-- (void)initElements
-{
-    self.voteArtist1.tag = 1;
-    self.voteArtist2.tag = 2;
-    
-    self.artist1Label.font = SOONZIK_FONT_BODY_BIG;
-    self.artist2Label.font = SOONZIK_FONT_BODY_BIG;
-    
-    self.artist1VoteLabel.font = SOONZIK_FONT_BODY_MEDIUM;
-    self.artist2VoteLabel.font = SOONZIK_FONT_BODY_MEDIUM;
-    
-    self.messageLabel.font = SOONZIK_FONT_BODY_SMALL;
-    
-    [self.voteArtist1 addTarget:self action:@selector(voteForTheArtist:) forControlEvents:UIControlEventTouchUpInside];
-    [self.voteArtist2 addTarget:self action:@selector(voteForTheArtist:) forControlEvents:UIControlEventTouchUpInside];
-    CGContextRef currentContext = UIGraphicsGetCurrentContext();
-    CGContextSaveGState(currentContext);
-    self.voteArtist1.layer.shadowColor = [UIColor blackColor].CGColor;
-    self.voteArtist1.layer.shadowOpacity = 1;
-    self.voteArtist1.layer.cornerRadius = 10;
-    self.voteArtist1.layer.shadowRadius = 10;
-    self.voteArtist1.layer.shadowOffset = CGSizeMake(-2, 7);
-    self.artist1Image.layer.borderWidth = 0.5;
-    self.artist1Image.layer.borderColor = [UIColor whiteColor].CGColor;
-    self.voteArtist2.layer.shadowColor = [UIColor blackColor].CGColor;
-    self.voteArtist2.layer.shadowOpacity = 1;
-    self.voteArtist2.layer.cornerRadius = 10;
-    self.voteArtist2.layer.shadowRadius = 10;
-    self.voteArtist2.layer.shadowOffset = CGSizeMake(-2, 7);
-    self.artist2Image.layer.borderWidth = 0.5;
-    self.artist2Image.layer.borderColor = [UIColor whiteColor].CGColor;
-    
-    self.voteArtist1.titleLabel.font = SOONZIK_FONT_BODY_SMALL;
-    self.voteArtist2.titleLabel.font = SOONZIK_FONT_BODY_SMALL;
-
-    [self.artist1Image setImage:[UIImage imageNamed:@"artist1.jpg"]];
-    [self.artist2Image setImage:[UIImage imageNamed:@"artist2.jpg"]];
-    
-    [self.latestVotes addTarget:self action:@selector(goToLatestVotes) forControlEvents:UIControlEventTouchUpInside];
-    
-}
-
-- (void)goToLatestVotes
-{
-  //  [self closeTheMenuView];
-    
-    NSLog(@"go to the latest votes");
-    LatestVotesViewController *vc = [[LatestVotesViewController alloc] initWithNibName:@"LatestVotesViewController" bundle:nil];
-    [self.navigationController pushViewController:vc animated:YES];
-}
-
-- (void)voteForTheArtist:(UIButton *)artist
-{
-    // send to the server the numero of choosen artist
-    if (artist.tag == 1) {
-        self.firstArtistScore += 1;
-        self.secondArtistScore -= 1;
-    } else {
-        self.firstArtistScore -= 1;
-        self.secondArtistScore += 1;
-    }
-    // get the result
-    // and display it
-    self.artist1VoteLabel.text = [NSString stringWithFormat:@"%d %%", (int)self.firstArtistScore];
-    self.artist2VoteLabel.text = [NSString stringWithFormat:@"%d %%", (int)self.secondArtistScore];
-    
-    self.messageLabel.text = [NSString stringWithFormat:@"Votre vote a bien été pris en compte"];
-    
-    [self.previewSection setHidden:YES];
-    [UILabel animateWithDuration:0.5f delay:0.0f options:UIViewAnimationOptionCurveEaseInOut animations:^{
-        [self.messageLabel setFrame:CGRectMake(0, self.previewSection.frame.origin.y, self.messageLabel.frame.size.width, self.messageLabel.frame.size.height)];
-    } completion:nil];
-    [UIView animateWithDuration:0.5f delay:0.0f options:UIViewAnimationOptionCurveEaseInOut animations:^{
-        [self.shareSection setFrame:CGRectMake(0, self.messageLabel.frame.origin.y + self.messageLabel.frame.size.height, self.shareSection.frame.size.width, self.shareSection.frame.size.height)];
-    } completion:nil];
-    
-    CGSize changedSize = CGSizeMake(self.contentView.bounds.size.width, self.contentView.bounds.size.height - self.shareSection.frame.size.height + self.playerPreviewView.frame.size.height);
-    self.scrollView.contentSize = changedSize;
-    
     [self refreshProgression];
 }
 
 - (void)refreshProgression
 {
-    /*float progressionWith = self.artist1VoteProgression.frame.size.width + self.artist2VoteProgression.frame.size.width;
-    
-    [self.artist1VoteProgression setFrame:CGRectMake(self.artist1VoteProgression.frame.origin.x, self.artist1VoteProgression.frame.origin.y, progressionWith * self.firstArtistScore / 100, self.artist1VoteProgression.frame.size.height)];
-    [self.artist2VoteProgression setFrame:CGRectMake(self.artist1VoteProgression.frame.origin.x + self.artist1VoteProgression.frame.size.width, self.artist2VoteProgression.frame.origin.y, progressionWith * self.secondArtistScore / 100, self.artist2VoteProgression.frame.size.height)];*/
+    self.contentView2.hidden = NO;
     
     self.csView.backgroundColor = [UIColor clearColor];
     

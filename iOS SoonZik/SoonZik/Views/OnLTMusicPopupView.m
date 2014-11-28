@@ -36,7 +36,7 @@
         [self.popupView setFrame:CGRectMake(self.popupView.frame.origin.x, yPosition, self.popupView.frame.size.width, self.popupView.frame.size.height)];
     }];
     
-    self.musicImage.image = [UIImage imageNamed:song.album.image];
+    self.musicImage.image = [UIImage imageNamed:song.image];
     self.musicName.text = song.title;
     
     [self.removeFromPlaylistButton addTarget:self action:@selector(removeFromPlayList) forControlEvents:UIControlEventTouchUpInside];

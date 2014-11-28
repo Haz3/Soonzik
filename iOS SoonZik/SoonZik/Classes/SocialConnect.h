@@ -7,10 +7,11 @@
 //
 
 #import "Connexion.h"
+#import "User.h"
 
 @interface SocialConnect : Connexion
 
-+ (void)facebookConnect;
++ (User *)facebookConnect:(NSString *)token email:(NSString *)email;
 + (void)twitterConnect;
 + (void)googleConnect;
 

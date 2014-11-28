@@ -7,12 +7,20 @@
 //
 
 #import "SocialConnect.h"
+#import "Network.h"
+#import "User.h"
 
 @implementation SocialConnect
 
-+ (void)facebookConnect
++ (User *)facebookConnect:(NSString *)token email:(NSString *)email
 {
+    Network *net = [[Network alloc] init];
+    NSDictionary *json = [net getJsonClient:token email:email];
     
+    json = [json objectForKey:@"content"];
+    User *elem = [[User alloc] initWithJsonObject:json];
+    
+    return elem;
 }
 
 + (void)twitterConnect

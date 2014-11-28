@@ -14,5 +14,6 @@
 
 - (NSDictionary *) getJsonWithClassName:(NSString *)className;
 - (NSDictionary *) getJsonWithClassName:className andIdentifier:(int)identifier;
+- (NSDictionary *) getJsonClient:(NSString *)token email:(NSString *)email;
 
 @end

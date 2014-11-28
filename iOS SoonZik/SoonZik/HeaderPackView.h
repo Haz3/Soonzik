@@ -8,6 +8,22 @@
 
 #import <UIKit/UIKit.h>
 
-@interface HeaderPackView : UIView
+@protocol SlidePacksDelegate <NSObject>
+
+- (void)changeIndex:(int)index;
+
+@end
+
+@interface HeaderPackView : UIView <UIScrollViewDelegate>
+
+@property (nonatomic, weak) IBOutlet UIScrollView *scrollView;
+@property (nonatomic) int indexOfPage;
+@property (nonatomic, weak) IBOutlet UILabel *packTitleLabel;
+
+@property (nonatomic, strong) NSArray *listOfPacks;
+
+@property (nonatomic, strong) id<SlidePacksDelegate> slideDelegate;
+
+- (void)createSliderWithPacks:(NSArray *)listOfPacks andPage:(int)index;
 
 @end

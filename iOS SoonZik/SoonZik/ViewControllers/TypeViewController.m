@@ -34,6 +34,16 @@
     return self;
 }
 
+- (void)viewWillDisappear:(BOOL)animated
+{
+    self.menuView.hidden = YES;
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    self.menuView.hidden = YES;
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -71,14 +81,6 @@
     
     [self.playerPreviewView addGestureRecognizer:tapOnListeningPreview];
 
-   /* UISwipeGestureRecognizer *openMenuView = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(openTheMenuView)];
-    [openMenuView setDirection:UISwipeGestureRecognizerDirectionRight];
-    [self.view addGestureRecognizer:openMenuView];
-    
-    UISwipeGestureRecognizer *closeMenuView = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(closeTheMenuView)];
-    [closeMenuView setDirection:UISwipeGestureRecognizerDirectionLeft];
-    [self.view addGestureRecognizer:closeMenuView];*/
-    
     [self refreshThePlayerPreview];
 }
 
@@ -128,6 +130,7 @@
 
 - (void)openTheMenuView
 {
+    self.menuView.hidden = NO;
     [UIView animateWithDuration:0.5f delay:0.0f options:UIViewAnimationOptionCurveEaseInOut animations:^{
         [self.menuView setFrame:CGRectMake(0, self.menuView.frame.origin.y, self.menuView.frame.size.width, self.menuView.frame.size.height)];
     } completion:nil];
@@ -138,7 +141,10 @@
 {
     [UIView animateWithDuration:0.5f delay:0.0f options:UIViewAnimationOptionCurveEaseInOut animations:^{
         [self.menuView setFrame:CGRectMake(-self.menuView.frame.size.width, self.menuView.frame.origin.y, self.menuView.frame.size.width, self.menuView.frame.size.height)];
-    } completion:nil];
+    } completion:^(BOOL finished) {
+        self.menuView.hidden = YES;
+    }];
+    
     self.menuOpened = NO;
 }
 
@@ -179,7 +185,6 @@
     [self.tableData addObject:@"Battle"];
     [self.tableData addObject:@"Playlists"];
     [self.tableData addObject:@"Amis"];
-    [self.tableData addObject:@"Achats"];
     [self.tableData addObject:@"Déconnexion"];
     
     self.tableImageData = [[NSMutableArray alloc] init];
@@ -191,7 +196,6 @@
     [self.tableImageData addObject:@"battle_icon.png"];
     [self.tableImageData addObject:@"playlist_icon.png"];
     [self.tableImageData addObject:@"profile_icon.png"];
-    [self.tableImageData addObject:@"dollar_icon.png"];
     [self.tableImageData addObject:@""];
 }
 
@@ -286,7 +290,7 @@
     UILabel *userNameLabel = [[UILabel alloc] initWithFrame:CGRectMake(avatarHeight * 2 + avatar.frame.size.width, 0, self.menuUserPreview.frame.size.width - (avatarHeight * 2 + avatar.frame.size.width), self.menuUserPreview.frame.size.height)];
     [userNameLabel setTextColor:[UIColor whiteColor]];
     [userNameLabel setTextAlignment:NSTextAlignmentCenter];
-    [userNameLabel setText:@"maxsvg"];
+    [userNameLabel setText:@"Invité"];
     userNameLabel.font = SOONZIK_FONT_BODY_BIG;
     [self.menuUserPreview addSubview:userNameLabel];
 }
@@ -366,14 +370,36 @@
             vc = [[PlaylistViewController alloc] initWithNibName:@"PlaylistViewController" bundle:nil];
             break;
         case 6:
-            // playlists
+            // amis
             vc = [[FriendsViewController alloc] initWithNibName:@"FriendsViewController" bundle:nil];
             break;
+        case 7:
+            [self closeTheSession];
         default:
             break;
     }
     
     [self.navigationController pushViewController:vc animated:NO];
+}
+
+- (void)closeTheSession
+{
+    self.prefs = [NSUserDefaults standardUserDefaults];
+    [self.prefs setObject:[NSKeyedArchiver archivedDataWithRootObject:nil] forKey:@"User"];
+    [self.prefs synchronize];
+    
+    [FBSession.activeSession closeAndClearTokenInformation];
+    
+    ConnexionViewController *vc = [[ConnexionViewController alloc] initWithNibName:@"ConnexionViewController" bundle:nil];
+    //UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
+    
+    
+    [UIView  beginAnimations:nil context:NULL];
+    [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
+    [UIView setAnimationDuration:0.75];
+    [self.navigationController initWithRootViewController:vc];
+    [UIView setAnimationTransition:UIViewAnimationTransitionFlipFromRight forView:self.navigationController.view cache:NO];
+    [UIView commitAnimations];
 }
 
 - (void)refreshThePlayerPreview
@@ -404,7 +430,7 @@
 
         self.playerPreviewView.trackLabel.text = s.title;
         self.playerPreviewView.artistLabel.text = s.artist.username;
-        self.playerPreviewView.imageView.image = [UIImage imageNamed:s.album.image];
+        self.playerPreviewView.imageView.image = [UIImage imageNamed:s.image];
         
     } else {
         self.playerPreviewView.imageView.image = [UIImage imageNamed:@"empty_list.png"];
