@@ -11,7 +11,7 @@ UserOne:
   image: default.png
   description: La description de l'utilisateur numero 1
   phoneNumber: 03 20 60 40 19
-  address_id: 1
+  address: addressOne
   facebook: user1.facebook
   twitter: user1.twitter
   googlePlus: user1.plus

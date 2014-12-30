@@ -6,4 +6,9 @@ class Access < ActiveRecord::Base
 
   validates :group, :controllerName, :actionName, presence: true
   validates :controllerName, :actionName, format: /([A-Za-z]+)/
+
+  # The strong parameters to save or update object
+  def self.access_params(parameters)
+    parameters.require(:access).permit(:controllerName, :actionName)
+  end
 end

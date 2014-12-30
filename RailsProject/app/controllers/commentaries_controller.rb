@@ -1,2 +1,2 @@
-class CommentariesController < InheritedResources::Base
+class CommentariesController < ApplicationController
 end

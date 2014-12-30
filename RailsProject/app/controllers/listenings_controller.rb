@@ -1,2 +1,2 @@
-class ListeningsController < InheritedResources::Base
+class ListeningsController < ApplicationController
 end

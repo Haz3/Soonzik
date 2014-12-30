@@ -2,6 +2,11 @@ require 'test_helper'
 
 module API
   class MusicsControllerTest < ActionController::TestCase
+    def giveToken
+      @user = users(:UserOne)
+      return { id: @user.id, secureKey: @user.secureKey }
+    end
+    
     setup do
       @music = musics(:MusicOne)
     end
@@ -56,7 +61,8 @@ module API
     end
 
     test "should add comment" do
-      post :addcomment, { id: @music, format: :json }
+      token = giveToken() # because of security access
+      post :addcomment, { id: @music, content: "ceci est un commentaire", user_id: token[:id], secureKey: token[:secureKey], format: :json }
       assert_response :success
     end
 
@@ -66,7 +72,9 @@ module API
     end
 
     test "should add to playlist" do
-      post :addtoplaylist, { id: @music, format: :json }
+      token = giveToken() # because of security access
+      playlist = playlists(:PlaylistOne)
+      post :addtoplaylist, { id: @music, playlist_id: playlist.id, user_id: token[:id], secureKey: token[:secureKey], format: :json }
       assert_response :success
     end
   end

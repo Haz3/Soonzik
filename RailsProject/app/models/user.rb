@@ -51,11 +51,11 @@ class User < ActiveRecord::Base
   validates :idAPI, length: { is: 40 }
   validates :secureKey, length: { is: 64 }
   validates :salt, length: { is: 40 }
-  validates :groups, :email, :password, :salt, :username, :birthday, :image, :signin, :idAPI, :secureKey, :language, presence: true
+  validates :email, :password, :salt, :username, :birthday, :image, :signin, :idAPI, :secureKey, :language, presence: true
   validates :newsletter, :activated, :inclusion => { :in => [true, false] }
   validates :email, :username, uniqueness: true
-  validates :birthday, format: /\A(\d{4})-(\d{2})-(\d{2})\z/
-  validates :signin, format: /\A(\d{4})-(\d{2})-(\d{2}) (\d{2}):(\d{2}):(\d{2})\z/
+  validates :birthday, format: /(\d{4})-(\d{2})-(\d{2})/
+  validates :signin, format: /(\d{4})-(\d{2})-(\d{2}) (\d{2}):(\d{2}):(\d{2})/
 
   # Recreate an idAPI and so the secureKey associated
   # The secureKey need to be unique so we check if someone already has this one
@@ -94,6 +94,11 @@ class User < ActiveRecord::Base
   # It uses the password, so it has to be set before
   def salt_hash
     User.secureKey_hash("#{Digest::SHA256.hexdigest("#{Time.now.utc}--#{self.password}")}--#{Digest::SHA256.hexdigest(self.password)}")
+  end
+
+  # The strong parameters to save or update object
+  def self.user_params(parameters)
+    parameters.require(:user).permit(:email, :password, :fname, :lname, :username, :birthday, :image, :description, :phoneNumber, :facebook, :twitter, :googlePlus, :newsletter, :language, :activated)
   end
 
   ########

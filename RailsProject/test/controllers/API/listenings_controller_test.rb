@@ -2,6 +2,11 @@ require 'test_helper'
 
 module API
   class ListeningsControllerTest < ActionController::TestCase
+    def giveToken
+      @user = users(:UserOne)
+      return { id: @user.id, secureKey: @user.secureKey }
+    end
+    
     setup do
       @listening = listenings(:ListeningOne)
     end
@@ -15,11 +20,15 @@ module API
     end
 
     test "should create listening" do
+      token = giveToken() # because of security access
+      music = musics(:MusicOne)
       assert_difference('Listening.count') do
-        post :save, { listening: { latitude: @listening.latitude, longitude: @listening.longitude, music_id: @listening.music_id, user_id: @listening.user_id, when: @listening.when }, format: :json }
+        post :save, { listening: { latitude: @listening.latitude, longitude: @listening.longitude, music_id: music.id, user_id: @listening.user_id, when: @listening.when }, user_id: token[:id], secureKey: token[:secureKey], format: :json }
       end
+      assert_response :success
 
-      assert_redirected_to listening_path(assigns(:listening))
+      value = JSON.parse(response.body)
+      assert_equal value["code"], 201
     end
 
     test "should show listening ok" do

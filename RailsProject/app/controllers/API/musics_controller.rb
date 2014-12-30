@@ -10,7 +10,7 @@ module API
   # * addtoplaylist [post] - SECURITY
   #
   class MusicsController < ApisecurityController
-  	before_action :checkKey, only: [:addcomment, :get]
+  	before_action :checkKey, only: [:addcomment, :get, :addtoplaylist]
 
     # Retrieve all the musics
     def index
@@ -66,8 +66,8 @@ module API
     #
     def find
       begin
+        music_object = nil
         if (defined?@attribute)
-          music_object = nil
           # - - - - - - - -
           @attribute.each do |x, y|
             condition = ""

@@ -1,2 +1,2 @@
-class TweetsController < InheritedResources::Base
+class TweetsController < ApplicationController
 end

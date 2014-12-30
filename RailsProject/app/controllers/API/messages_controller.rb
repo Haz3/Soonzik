@@ -7,6 +7,8 @@ module API
   # * find        [get] - SECURE
   #
   class MessagesController < ApisecurityController
+    before_action :checkKey, only: [:show, :save, :find]
+
   	# Give a specific object by its id
     #
     # ==== Options
@@ -46,7 +48,7 @@ module API
     def save
       begin
         if (@security)
-          msg = Message.new(@message)
+          msg = Message.new(Message.message_params params)
           if (msg.save)
             @returnValue = { content: msg.as_json(:include => {
                                     :sender => {},
@@ -54,6 +56,7 @@ module API
                                   }) }
             codeAnswer 201
           else
+            @returnValue = { content: msg.errors.to_hash.to_json }
             codeAnswer 503
           end
         else
@@ -86,8 +89,8 @@ module API
         if (!@security)
           codeAnswer 500
         else
+          message_object = nil
           if (defined?@attribute)
-            message_object = nil
             # - - - - - - - -
             @attribute.each do |x, y|
               condition = ""

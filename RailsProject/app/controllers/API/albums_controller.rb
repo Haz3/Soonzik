@@ -64,8 +64,8 @@ module API
     #
     def find
       begin
+        album_object = nil
         if (defined?@attribute)
-          album_object = nil
           # - - - - - - - -
           @attribute.each do |x, y|
             condition = ""

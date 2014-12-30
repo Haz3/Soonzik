@@ -61,8 +61,8 @@ module API
     #
     def find
       begin
+        concert_object = nil
         if (defined?@attribute)
-          concert_object = nil
           # - - - - - - - -
           @attribute.each do |x, y|
             condition = ""

@@ -6,4 +6,9 @@ class Attachment < ActiveRecord::Base
 
   validates :news, :url, :file_size, :content_type, presence: true
   validates :file_size, numericality: { only_integer: true }
+
+  # The strong parameters to save or update object
+  def self.attachment_params(parameters)
+    parameters.require(:attachment).permit(:url, :file_size, :content_type)
+  end
 end

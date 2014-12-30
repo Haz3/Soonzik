@@ -2,6 +2,11 @@ require 'test_helper'
 
 module API
   class BattlesControllerTest < ActionController::TestCase
+    def giveToken
+      @user = users(:UserOne)
+      return { id: @user.id, secureKey: @user.secureKey }
+    end
+    
     setup do
       @battle = battles(:BattleOne)
     end

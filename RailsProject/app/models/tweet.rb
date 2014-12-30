@@ -5,5 +5,10 @@ class Tweet < ActiveRecord::Base
   belongs_to :user
 
   validates :msg, :user, presence: true
-  validates :msg, length: { is: 140 }
+  validates :msg, length: { maximum: 140 }
+
+  # The strong parameters to save or update object
+  def self.tweet_params(parameters)
+    parameters.require(:tweet).permit(:msg, :user_id)
+  end
 end

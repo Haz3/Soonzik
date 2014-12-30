@@ -1,2 +1,2 @@
-class PacksController < InheritedResources::Base
+class PacksController < ApplicationController
 end

@@ -1,2 +1,2 @@
-class InfluencesController < InheritedResources::Base
+class InfluencesController < ApplicationController
 end

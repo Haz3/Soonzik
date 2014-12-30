@@ -6,4 +6,9 @@ class Group < ActiveRecord::Base
   has_and_belongs_to_many :users
 
   validates :name, presence: true, uniqueness: true, format: /([A-Za-z]+)/
+
+  # The strong parameters to save or update object
+  def self.group_params(parameters)
+    parameters.require(:group).permit(:name)
+  end
 end

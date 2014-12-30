@@ -1,2 +1,2 @@
-class PropositionsController < InheritedResources::Base
+class PropositionsController < ApplicationController
 end

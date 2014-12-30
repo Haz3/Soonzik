@@ -1,2 +1,2 @@
-class ConcertsController < InheritedResources::Base
+class ConcertsController < ApplicationController
 end

@@ -1,2 +1,2 @@
-class GenresController < InheritedResources::Base
+class GenresController < ApplicationController
 end

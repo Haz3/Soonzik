@@ -13,4 +13,9 @@ class Album < ActiveRecord::Base
   validates :user, :title, :style, :price, :file, :yearProd, presence: true
   validates :file, uniqueness: true
   validates :yearProd, numericality: { only_integer: true }
+
+  # The strong parameters to save or update object
+  def self.album_params(parameters)
+    parameters.require(:album).permit(:user_id, :title, :style, :price, :file, :yearProd)
+  end
 end

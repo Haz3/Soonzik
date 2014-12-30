@@ -1,2 +1,2 @@
-class AddressesController < InheritedResources::Base
+class AddressesController < ApplicationController
 end

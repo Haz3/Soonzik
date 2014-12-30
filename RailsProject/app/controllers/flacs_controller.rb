@@ -1,2 +1,2 @@
-class FlacsController < InheritedResources::Base
+class FlacsController < ApplicationController
 end

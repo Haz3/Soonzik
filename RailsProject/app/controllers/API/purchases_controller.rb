@@ -5,6 +5,8 @@ module API
   # * save		    [post] - SECURE
   #
   class PurchasesController < ApisecurityController
+    before_action :checkKey, only: [:save]
+    
     # Save a new object Purchase. For more information on the parameters, check at the model
     # 
     # ==== Options
@@ -16,13 +18,14 @@ module API
     def save
       begin
         if (@security)
-          purchase = Purchase.new(@purchase)
+          purchase = Purchase.new(Purchase.purchase_params params)
           classObj = purchase.typeObj.constantize
           # check if the object exists
           if (classObj.find_by_id(purchase.obj_id) != nil && purchase.save)
             @returnValue = { content: purchase.as_json(:include => :user) }
             codeAnswer 201
           else
+            @returnValue = { content: purchase.errors.to_hash.to_json }
             codeAnswer 503
           end
         else

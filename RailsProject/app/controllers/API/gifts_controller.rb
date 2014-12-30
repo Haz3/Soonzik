@@ -5,6 +5,9 @@ module API
   # * save        [post] - SECURE
   #
   class GiftsController < ApisecurityController
+    before_action :checkKey, only: [:save]
+
+
     # Save a new object Gift. For more information on the parameters, check at the model
     # 
     # ==== Options
@@ -17,7 +20,7 @@ module API
     def save
       begin
         if (@security)
-          gift = Gift.new(@gift)
+          gift = Gift.new(Gift.gift_params params)
           classObj = gift.typeObj.constantize
           # check if the object exists
           if (classObj.find_by_id(gift.obj_id) != nil && gift.save)
@@ -27,6 +30,7 @@ module API
 				                                  }) }
             codeAnswer 201
           else
+            @returnValue = { content: gift.errors.to_hash.to_json }
             codeAnswer 503
           end
         else

@@ -5,4 +5,9 @@ class Flac < ActiveRecord::Base
   belongs_to :music
 
   validates :music, :file, presence: true, uniqueness: true
+
+  # The strong parameters to save or update object
+  def self.flac_params(parameters)
+    parameters.require(:flac).permit(:music_id, :file)
+  end
 end

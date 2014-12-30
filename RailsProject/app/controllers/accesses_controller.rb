@@ -1,2 +1,2 @@
-class AccessesController < InheritedResources::Base
+class AccessesController < ApplicationController
 end

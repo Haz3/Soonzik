@@ -69,8 +69,8 @@ module API
     #
     def find
       begin
+        battle_object = nil
         if (defined?@attribute)
-          battle_object = nil
           # - - - - - - - -
           @attribute.each do |x, y|
             condition = ""

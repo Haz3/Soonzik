@@ -65,8 +65,8 @@ module API
     #
     def find
       begin
+        pack_object = nil
         if (defined?@attribute)
-          pack_object = nil
           # - - - - - - - -
           @attribute.each do |x, y|
             condition = ""

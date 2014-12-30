@@ -8,6 +8,8 @@ module API
   # * addcomment  [post]
   #
   class NewsController < ApisecurityController
+    before_action :checkKey, only: [:addcomment]
+
   	# Retrieve all the news
     def index
       begin
@@ -62,8 +64,8 @@ module API
     #
     def find
       begin
+        new_object = nil
         if (defined?@attribute)
-          new_object = nil
           # - - - - - - - -
           @attribute.each do |x, y|
             condition = ""

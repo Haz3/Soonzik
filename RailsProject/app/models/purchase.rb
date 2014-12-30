@@ -18,4 +18,9 @@ class Purchase < ActiveRecord::Base
   		errors.add(:obj_id, "This object doesn't exist")
   	end
   end
+
+  # The strong parameters to save or update object
+  def self.purchase_params(parameters)
+    parameters.require(:purchase).permit(:user_id, :typeObj, :obj_id, :date)
+  end
 end

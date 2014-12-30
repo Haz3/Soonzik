@@ -1,2 +1,2 @@
-class CartsController < InheritedResources::Base
+class CartsController < ApplicationController
 end

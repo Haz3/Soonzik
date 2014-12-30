@@ -1,2 +1,2 @@
-class NotificationsController < InheritedResources::Base
+class NotificationsController < ApplicationController
 end

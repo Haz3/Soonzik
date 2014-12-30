@@ -1,2 +1,2 @@
-class GroupsController < InheritedResources::Base
+class GroupsController < ApplicationController
 end

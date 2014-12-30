@@ -8,4 +8,9 @@ class Genre < ActiveRecord::Base
   validates :style_name, :color_name, :color_hexa, presence: true, uniqueness: true
   validates :style_name, format: /([A-Za-z]+)/
   validates :color_hexa, format: /#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})/
+
+  # The strong parameters to save or update object
+  def self.genre_params(parameters)
+    parameters.require(:genre).permit(:style_name, :color_name, :color_hexa)
+  end
 end

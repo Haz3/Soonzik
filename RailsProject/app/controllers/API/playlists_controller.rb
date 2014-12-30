@@ -9,6 +9,8 @@ module API
   # * destroy     [get] - SECURITY
   #
   class PlaylistsController < ApisecurityController
+    before_action :checkKey, only: [:destroy, :save, :update]
+
   	# Give a specific object by its id
     #
     # ==== Options
@@ -42,11 +44,12 @@ module API
     def save
       begin
         if (@security)
-          playlist = Playlist.new(@playlist)
+          playlist = Playlist.new(Playlist.playlist_params params)
           if (playlist.save)
             @returnValue = { content: playlist.as_json() }
             codeAnswer 201
           else
+            @returnValue = { content: playlist.errors.to_hash.to_json }
             codeAnswer 503
           end
         else
@@ -71,13 +74,14 @@ module API
         if (@security)
           playlist = Playlist.find_by_id(@id)
           if (playlist != nil)
-            if (defined?(@playlist[:music]) && @playlist[:music].size > 0)
+            if (defined?(@playlist) && @playlist.has_key?(:music) && @playlist[:music].size > 0)
               playlist.musics = []
               @playlist[:music].each do |music_id|
                 music = Music.find_by_id(music_id)
-                playlist.musics << music if (music)
+                playlist.musics << music if (music != nil)
               end
             end
+            playlist.name = @playlist[:name] if defined?@playlist && @playlist.has_key?(:name)
             if (playlist.save)
               @returnValue = { content: playlist.as_json(:include => {
                                       :musics => {},
@@ -117,8 +121,8 @@ module API
     #
     def find
       begin
+        playlist_object = nil
         if (defined?@attribute)
-          playlist_object = nil
           # - - - - - - - -
           @attribute.each do |x, y|
             condition = ""

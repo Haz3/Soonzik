@@ -5,6 +5,8 @@ module API
   # * show        [get] - SECURE
   #
   class SuggestionsController < ApisecurityController
+    before_action :checkKey, only: [:show]
+
   	# Give a specific object by its id
     #
     # ==== Options

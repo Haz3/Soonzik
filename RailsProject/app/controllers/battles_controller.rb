@@ -1,2 +1,2 @@
-class BattlesController < InheritedResources::Base
+class BattlesController < ApplicationController
 end

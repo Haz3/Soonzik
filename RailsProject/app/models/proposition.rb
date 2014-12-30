@@ -6,4 +6,9 @@ class Proposition < ActiveRecord::Base
   belongs_to :album
 
   validates :user, :album, :state, presence: true
+
+  # The strong parameters to save or update object
+  def self.proposition_params(parameters)
+    parameters.require(:proposition).permit(:artist_id, :album_id, :state, :date_posted)
+  end
 end

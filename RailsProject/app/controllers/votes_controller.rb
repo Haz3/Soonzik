@@ -1,2 +1,2 @@
-class VotesController < InheritedResources::Base
+class VotesController < ApplicationController
 end

@@ -10,6 +10,8 @@ module API
   # * getmusics   [get] - SECURE
   #
   class UsersController < ApisecurityController
+    before_action :checkKey, only: [:getmusics, :save, :update]
+
   	# Retrieve all the users
     def index
       begin
@@ -64,8 +66,8 @@ module API
     #
     def find
       begin
+        user_object = nil
         if (defined?@attribute)
-          user_object = nil
           # - - - - - - - -
           @attribute.each do |x, y|
             condition = ""
@@ -145,17 +147,17 @@ module API
       begin
         if (@security)
           user = User.find_by_id(@user_id)
-          list = user.purcharses
+          list = user.purchases
           contentReturn = []
 
           list.each do |x|
             classObj = x.typeObj.constantize
             obj = classObj.find_by_id(x.obj_id)
-            if (obj != nil && classObj == "Album")
+            if (obj != nil && x.typeObj == "Album")
               contentReturn << { album: obj, musics: obj.musics }
-            elsif (obj != nil && classObj == "Music")
+            elsif (obj != nil && x.typeObj == "Music")
               contentReturn << obj
-            elsif (obj != nil && classObj == "Pack")
+            elsif (obj != nil && x.typeObj == "Pack")
               value = { pack: obj, albums: [] }
               obj.albums.each do |album|
                 value[:albums] << { album: album, musics: album.musics }
@@ -164,6 +166,7 @@ module API
             end
           end
           @returnValue = { content: contentReturn }
+          codeAnswer 200
         else
           codeAnswer 500
         end
@@ -197,7 +200,7 @@ module API
     # * +:address[zipcode]+ - (optionnal if you don't provide anything in the address variable) The Zipcode
     # 
     def save
-      _save(true, {:user => @user, :address => @address })
+      _save(true, params)
       sendJson
     end
 
@@ -233,7 +236,7 @@ module API
         if (@security && @id == @user_id)
           user = User.find_by_id(@user_id)
           user.password = User.password_hash(@user["password"]) if user != nil && defined?@user['password']
-          _save(false, {:user => @user, :address => @address })
+          _save(false, params)
         else
           codeAnswer 500
         end
@@ -256,27 +259,44 @@ module API
         user = nil
         if (@security && save == false)
           user = User.find_by_id(@user_id)
-          user.update(params[:user])
+          update_user = false
+          update_address = true
+          update_user = user.update(User.user_params params)
+          update_address = user.address.update(Address.address_params params) if user.address != nil && params.has_key?(:address)
+
+          address = Address.new(Address.address_params params) if user.address == nil && params.has_key?(:address)
+          update_address = address.save if user.address == nil && params.has_key?(:address)
+          user.address = address if user.address == nil && params.has_key?(:address) && update_address
+
+          if ((update_user && update_address))
+            @returnValue = { content: user.as_json(:include => :address) }
+            codeAnswer 200
+          else
+            @returnValue = { content: user.errors.to_hash.to_json }
+            codeAnswer 505
+          end
+          return
         else
-          user = User.new(params[:user])
+          user = User.new(User.user_params params)
         end
 
-        # On update, we get the current address, else we keep address to nil
-        address = user.address
-        address = Address.new(params[:address]) if address == nil
-        address.update(params[:address]) if address != nil
-        if (address.save)
-          user.address_id = address.id
+        address = true
+        address = Address.new(Address.address_params params) if params.has_key?(:address)
+        if (address == true || address.save)
+          user.address_id = address.id if address != true
           if (user.save)
             @returnValue = { content: user.as_json(:include => :address) }
             codeAnswer 201
           else
-            codeAnswer 505
+            @returnValue = { content: user.errors.to_hash.to_json }
+            codeAnswer 503
           end
         else
+          @returnValue = { content: address.errors.to_hash.to_json }
           codeAnswer 503
         end
       rescue
+        puts $!, $@
         codeAnswer 504
       end
     end

@@ -15,4 +15,9 @@ class Music < ActiveRecord::Base
   validates :title, length: { minimum: 4, maximum: 30 }
   validates :price, :duration, numericality: true
   validates :file, uniqueness: true
+
+  # The strong parameters to save or update object
+  def self.music_params(parameters)
+    parameters.require(:music).permit(:user_id, :album_id, :title, :duration, :style, :price, :file, :limited)
+  end
 end

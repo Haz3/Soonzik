@@ -1,2 +1,2 @@
-class GiftsController < InheritedResources::Base
+class GiftsController < ApplicationController
 end

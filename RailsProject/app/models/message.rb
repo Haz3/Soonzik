@@ -8,4 +8,9 @@ class Message < ActiveRecord::Base
 
   validates :sender, :receiver, :msg, :session, presence: true
   validates :msg, length: { minimum: 1 }
+
+  # The strong parameters to save or update object
+  def self.message_params(parameters)
+    parameters.require(:message).permit(:msg, :user_id, :dest_id, :session)
+  end
 end

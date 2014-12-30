@@ -4,7 +4,6 @@ module API
   # The class parent of every controller of the API.
   # It provides security and some default stuff
   class ApisecurityController < ApiController
-    after_action :sendJson, only: [:provideKey]
 
     # We create a list of code and initialize the returnValue and the security boolean.
     # Usually a controller has no constructor but in this case it's for the heritance.
@@ -32,9 +31,9 @@ module API
     # * +:user_id+ - The id of the user who makes the transaction
     #
     def provideKey
-      if (defined?(@user_id))
+      if (defined?(@id))
         begin
-          u = User.find_by_id(@user_id)
+          u = User.find_by_id(@id)
           @returnValue = {key: u.idAPI}
           codeAnswer 200
         rescue
@@ -67,7 +66,6 @@ module API
             codeAnswer 502
           else
             u = User.find_by(email: @email)
-            puts u
             if (u == nil)
               codeAnswer 502
             else
@@ -76,7 +74,6 @@ module API
             end
           end
         rescue
-          puts $!, $@
           codeAnswer 504
         end
       else
@@ -118,6 +115,7 @@ protected
             codeAnswer 501
           end
         rescue
+          codeAnswer 504
         end
       end
     end

@@ -8,4 +8,9 @@ class Description < ActiveRecord::Base
   has_and_belongs_to_many :influences
 
   validates :description, :language, presence: true
+
+  # The strong parameters to save or update object
+  def self.description_params(parameters)
+    parameters.require(:description).permit(:description, :language)
+  end
 end

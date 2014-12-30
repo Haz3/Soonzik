@@ -5,4 +5,9 @@ class Pack < ActiveRecord::Base
   has_and_belongs_to_many :albums
 
   validates :title, :style, :albums, presence: true
+
+  # The strong parameters to save or update object
+  def self.pack_params(parameters)
+    parameters.require(:pack).permit(:title, :style)
+  end
 end

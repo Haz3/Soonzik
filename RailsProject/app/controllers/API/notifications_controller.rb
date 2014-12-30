@@ -8,6 +8,8 @@ module API
   # * destroy     [get] - SECURE
   #
   class NotificationsController < ApisecurityController
+    before_action :checkKey, only: [:show, :save, :find, :destroy]
+
   	# Give a specific object by its id
     #
     # ==== Options
@@ -44,11 +46,12 @@ module API
     def save
       begin
         if (@security)
-          notif = Notification.new(@notification)
+          notif = Notification.new(Notification.notification_params params)
           if (notif.save)
             @returnValue = { content: notif.as_json(:include => :user) }
             codeAnswer 201
           else
+            @returnValue = { content: notif.errors.to_hash.to_json }
             codeAnswer 503
           end
         else
@@ -81,8 +84,8 @@ module API
         if (!@security)
           codeAnswer 500
         else
+          notification_object = nil
           if (defined?@attribute)
-            notification_object = nil
             # - - - - - - - -
             @attribute.each do |x, y|
               condition = ""

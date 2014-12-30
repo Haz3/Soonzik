@@ -2,6 +2,11 @@ require 'test_helper'
 
 module API
   class PacksControllerTest < ActionController::TestCase
+    def giveToken
+      @user = users(:UserOne)
+      return { id: @user.id, secureKey: @user.secureKey }
+    end
+    
     setup do
       @pack = packs(:PackOne)
     end
@@ -14,13 +19,21 @@ module API
       assert_equal value["code"], 200
     end
 
-    test "should show pack" do
+    test "should show pack ok" do
       get :show, { id: @pack, format: :json }
       assert_response :success
 
       value = JSON.parse(response.body)
       assert_equal value["code"], 200
       assert_equal value["content"]["id"], @pack.id
+    end
+
+    test "should show pack ko" do
+      get :show, { id: 12345, format: :json }
+      assert_response :success
+
+      value = JSON.parse(response.body)
+      assert_equal value["code"], 502
     end
 
     test "should get find - all cases" do

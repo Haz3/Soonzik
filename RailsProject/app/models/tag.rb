@@ -6,4 +6,9 @@ class Tag < ActiveRecord::Base
 
   validates :tag, :news, presence: true
   validates :tag, length: { maximum: 20, minimum: 4 }
+
+  # The strong parameters to save or update object
+  def self.tag_params(parameters)
+    parameters.require(:tag).permit(:tag, :news_id)
+  end
 end

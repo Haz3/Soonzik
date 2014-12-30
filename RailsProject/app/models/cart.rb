@@ -17,4 +17,9 @@ class Cart < ActiveRecord::Base
       errors.add(:obj_id, "This object doesn't exist")
     end
   end
+
+  # The strong parameters to save or update object
+  def self.cart_params(parameters)
+    parameters.require(:cart).permit(:gift, :obj_id, :typeObj, :user_id)
+  end
 end

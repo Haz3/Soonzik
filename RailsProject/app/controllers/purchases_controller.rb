@@ -1,2 +1,2 @@
-class PurchasesController < InheritedResources::Base
+class PurchasesController < ApplicationController
 end

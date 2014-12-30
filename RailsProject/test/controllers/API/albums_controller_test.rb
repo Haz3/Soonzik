@@ -2,6 +2,11 @@ require 'test_helper'
 
 module API
   class AlbumsControllerTest < ActionController::TestCase
+    def giveToken
+      @user = users(:UserOne)
+      return { id: @user.id, secureKey: @user.secureKey }
+    end
+    
     setup do
       @album = albums(:AlbumOne)
     end

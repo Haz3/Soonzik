@@ -2,20 +2,29 @@ require 'test_helper'
 
 module API
   class NotificationsControllerTest < ActionController::TestCase
+    def giveToken
+      @user = users(:UserOne)
+      return { id: @user.id, secureKey: @user.secureKey }
+    end
+    
     setup do
       @notification = notifications(:NotifOne)
     end
 
     test "should save notification" do
+      token = giveToken() # because of security access
       assert_difference('Notification.count') do
-        post :save, { notification: { description: @notification.description, link: @notification.link, user_id: @notification.user_id }, format: :json }
+        post :save, { notification: { description: @notification.description, link: @notification.link, user_id: @notification.user_id }, user_id: token[:id], secureKey: token[:secureKey], format: :json }
       end
+      assert_response :success
 
-      assert_redirected_to notification_path(assigns(:notification))
+      value = JSON.parse(response.body)
+      assert_equal value["code"], 201
     end
 
     test "should show notification ok" do
-      get :show, { id: @notification, format: :json }
+      token = giveToken() # because of security access
+      get :show, { id: @notification, user_id: token[:id], secureKey: token[:secureKey], format: :json }
       assert_response :success
 
       value = JSON.parse(response.body)
@@ -24,7 +33,8 @@ module API
     end
 
     test "should show notification ko" do
-      get :show, id: 12345, format: :json
+      token = giveToken() # because of security access
+      get :show, id: 12345, user_id: token[:id], secureKey: token[:secureKey], format: :json
       assert_response :success
 
       value = JSON.parse(response.body)
@@ -32,14 +42,15 @@ module API
     end
 
     test "should get find - all cases" do
-      get :find, { order_by_asc: ["id"], format: :json }
+      token = giveToken() # because of security access
+      get :find, { order_by_asc: ["id"], user_id: token[:id], secureKey: token[:secureKey], format: :json }
       assert_response :success
 
       value = JSON.parse(response.body)
       assert_equal value["code"], 200
-      assert_equal value["content"].size, 2
+      assert_equal value["content"].size, 1
 
-      get :find, { offset: 42, order_by_asc: [], order_by_desc: ["id"], format: :json }
+      get :find, { offset: 42, order_by_asc: [], order_by_desc: ["id"], user_id: token[:id], secureKey: token[:secureKey], format: :json }
       assert_response :success
 
       value = JSON.parse(response.body)
@@ -47,7 +58,7 @@ module API
       assert_equal value["content"].size, 0
 
 
-      get :find, { limit: 1, offset: 0, attribute: { link: "%notification%", user_id: "213118761" }, order_by_asc: ["link"], order_by_desc: ["description"], group_by: ["id"], format: :json }
+      get :find, { limit: 1, offset: 0, attribute: { link: "%notification%", user_id: "213118761" }, order_by_asc: ["link"], order_by_desc: ["description"], group_by: ["id"], user_id: token[:id], secureKey: token[:secureKey], format: :json }
       assert_response :success
 
       value = JSON.parse(response.body)
@@ -56,11 +67,14 @@ module API
     end
 
     test "should destroy notification" do
+      token = giveToken() # because of security access
       assert_difference('Notification.count', -1) do
-        get :destroy, { id: @notification, format: :json }
+        get :destroy, { id: @notification, user_id: token[:id], secureKey: token[:secureKey], format: :json }
       end
+      assert_response :success
 
-      assert_redirected_to notifications_path
+      value = JSON.parse(response.body)
+      assert_equal value["code"], 202
     end
   end
 end

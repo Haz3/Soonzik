@@ -1,2 +1,2 @@
-class AlbumNotesController < InheritedResources::Base
+class AlbumNotesController < ApplicationController
 end

@@ -8,6 +8,8 @@ module API
   # * save        [post] - SECURITY
   #
   class ListeningsController < ApisecurityController
+    before_action :checkKey, only: [:save]
+
   	# Retrieve all the listenings
     def index
       begin
@@ -62,8 +64,8 @@ module API
     #
     def find
       begin
+        listening_object = nil
         if (defined?@attribute)
-          listening_object = nil
           # - - - - - - - -
           @attribute.each do |x, y|
             condition = ""
@@ -151,10 +153,13 @@ module API
       begin
         if (@security)
           @listening[:user_id] = @user_id
-          listening = Listening.new(@listening)
+          listening = Listening.new(Listening.listening_params params)
           if (listening.save)
             @returnValue = { content: listening.as_json(:include => :user) }
-            codeAnswer 200
+            codeAnswer 201
+          else
+            @returnValue = { content: listening.errors.to_hash.to_json }
+            codeAnswer 503
           end
         end
       rescue

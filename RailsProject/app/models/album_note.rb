@@ -7,4 +7,9 @@ class AlbumNote < ActiveRecord::Base
 
   validates :album, :user, :value, presence: true
   validates :value, numericality: true
+
+  # The strong parameters to save or update object
+  def self.album_note_params(parameters)
+    parameters.require(:album_note).permit(:user_id, :album_id, :value)
+  end
 end

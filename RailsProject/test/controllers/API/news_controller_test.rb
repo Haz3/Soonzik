@@ -2,6 +2,11 @@ require 'test_helper'
 
 module API
   class NewsControllerTest < ActionController::TestCase
+    def giveToken
+      @user = users(:UserOne)
+      return { id: @user.id, secureKey: @user.secureKey }
+    end
+    
     setup do
       @news = news(:newsOne)
     end
@@ -56,7 +61,8 @@ module API
     end
 
     test "should add comment" do
-      post :addcomment, { id: @news, format: :json }
+      token = giveToken() # because of security access
+      post :addcomment, { id: @news, content: "Ceci est un commentaire", user_id: token[:id], secureKey: token[:secureKey], format: :json }
       assert_response :success
     end
   end

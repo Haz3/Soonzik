@@ -1,2 +1,2 @@
-class NewsController < InheritedResources::Base
+class NewsController < ApplicationController
 end

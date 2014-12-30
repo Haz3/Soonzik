@@ -7,6 +7,8 @@ module API
   # * destroy     [get] - SECURE
   #
   class CartsController < ApisecurityController
+    before_action :checkKey, only: [:destroy, :save, :find]
+
   	# Destroy a specific object by its id
     #
     # ==== Options
@@ -40,13 +42,14 @@ module API
     def save
       begin
         if (@security)
-          cart = Cart.new(@cart)
+          cart = Cart.new(Cart.cart_params params)
           classObj = cart.typeObj.constantize
           # check if the object exists
           if (classObj.find_by_id(cart.obj_id) != nil && cart.save)
             @returnValue = { content: cart.as_json(:include => :user) }
             codeAnswer 201
           else
+            @returnValue = { content: cart.errors.to_hash.to_json }
             codeAnswer 503
           end
         else
@@ -79,13 +82,13 @@ module API
         if (!@security)
           codeAnswer 500
         else
+          cart_object = nil
           if (defined?@attribute)
-            cart_object = nil
             # - - - - - - - -
             @attribute.each do |x, y|
               condition = ""
-              if (y[0] == "%" && y[-1] == "%")  #LIKE
-                condition = ["'carts'.? LIKE ?", %Q[#{x}], "%#{y[1...-1]}%"];
+              if (y.to_s[0] == "%" && y.to_s[-1] == "%")  #LIKE
+                condition = ["'carts'.? LIKE ?", %Q[#{x}], "%#{y.to_s[1...-1]}%"];
               else                              #WHERE
                 condition = {x => y};
               end

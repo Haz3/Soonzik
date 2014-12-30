@@ -2,6 +2,11 @@ require 'test_helper'
 
 module API
   class TweetsControllerTest < ActionController::TestCase
+    def giveToken
+      @user = users(:UserOne)
+      return { id: @user.id, secureKey: @user.secureKey }
+    end
+    
     setup do
       @tweet = tweets(:TweetOne)
     end
@@ -15,11 +20,14 @@ module API
     end
 
     test "should save tweet" do
+      token = giveToken() # because of security access
       assert_difference('Tweet.count') do
-        post :save, { tweet: { msg: @tweet.msg, user_id: @tweet.user_id }, format: :json }
+        post :save, { tweet: { msg: "ceci est un tweet", user_id: token[:id] }, user_id: token[:id], secureKey: token[:secureKey], format: :json }
       end
+      assert_response :success
 
-      assert_redirected_to tweet_path(assigns(:tweet))
+      value = JSON.parse(response.body)
+      assert_equal value["code"], 201
     end
 
     test "should show tweet" do
@@ -56,11 +64,14 @@ module API
     end
 
     test "should destroy tweet" do
+      token = giveToken() # because of security access
       assert_difference('Tweet.count', -1) do
-        get :destroy, { id: @tweet, format: :json }
+        get :destroy, { id: @tweet, user_id: token[:id], secureKey: token[:secureKey], format: :json }
       end
+      assert_response :success
 
-      assert_redirected_to tweets_path
+      value = JSON.parse(response.body)
+      assert_equal value["code"], 202
     end
   end
 end

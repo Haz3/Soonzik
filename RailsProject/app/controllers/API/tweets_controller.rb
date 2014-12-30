@@ -9,6 +9,8 @@ module API
   # * destroy     [get] - SECURE
   #
   class TweetsController < ApisecurityController
+    before_action :checkKey, only: [:destroy, :save]
+
   	# Retrieve all the tweets
     def index
       begin
@@ -55,12 +57,14 @@ module API
     def save
       begin
         if (@security)
-          tweet = Tweet.new(@tweet)
+          tweet = Tweet.new(Tweet.tweet_params params)
           if (tweet.save)
             @returnValue = { content: tweet.as_json(:include => :user) }
             codeAnswer 201
           else
+            @returnValue = { content: tweet.errors.to_hash.to_json }
             codeAnswer 503
+            puts @returnValue
           end
         else
           codeAnswer 500
@@ -89,8 +93,8 @@ module API
     #
     def find
       begin
+        tweet_object = nil
         if (defined?@attribute)
-          tweet_object = nil
           # - - - - - - - -
           @attribute.each do |x, y|
             condition = ""

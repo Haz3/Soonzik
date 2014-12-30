@@ -1,2 +1,2 @@
-class AttachmentsController < InheritedResources::Base
+class AttachmentsController < ApplicationController
 end

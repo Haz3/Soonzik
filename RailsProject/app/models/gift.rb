@@ -18,4 +18,9 @@ class Gift < ActiveRecord::Base
       errors.add(:obj_id, "This object doesn't exist")
     end
   end
+
+  # The strong parameters to save or update object
+  def self.gift_params(parameters)
+    parameters.require(:gift).permit(:to_user, :from_user, :typeObj, :obj_id)
+  end
 end

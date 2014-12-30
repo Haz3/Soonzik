@@ -1,2 +1,2 @@
-class DescriptionsController < InheritedResources::Base
+class DescriptionsController < ApplicationController
 end
