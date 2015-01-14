@@ -1,0 +1,7 @@
+%div{ :id => "status" }
+%br
+%div{ :id => "fb-root" }
+%br
+%div{ :class => "fb-login-button", "data-max-rows" => "1", "data-size" => "medium", "data-show-faces" => "false", "data-auto-logout-link" => "true", :onlogin => "checkLoginState();", :id => "fb_log" }
+%br
+%fb:login-button(show-faces=true){ :scope => "public_profile,email", :onlogin => "checkLoginState();" }
