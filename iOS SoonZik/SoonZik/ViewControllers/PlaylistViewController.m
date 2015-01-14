@@ -12,13 +12,15 @@
 #import "AppDelegate.h"
 #import "Music.h"
 #import "ArtistViewController.h"
-#import "LongPressGestureRecognizer.h"
+#import "MusicOptionsButton.h"
 #import "AlbumViewController.h"
-#import "PlayListsHeaderView.h"
+#import "SVGKImage.h"
+#import "Tools.h"
 
 @interface PlaylistViewController ()
 
 @end
+
 
 @implementation PlaylistViewController
 
@@ -36,67 +38,32 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    [self getAllPlaylists];
+    //[self getAllPlaylists];
     
-   [self.playlistTableView setFrame:CGRectMake(0, 0, self.screenWidth, self.screenHeight - self.navigationController.navigationBar.frame.size.height-self.statusBarHeight-self.actionsOnPlaylistView.frame.size.height*2 - self.playerPreviewView.frame.size.height)];
+    self.navigationItem.hidesBackButton = NO;
+    self.navigationItem.leftBarButtonItem = nil;
     
-    NSLog(@"height of table view : %f", self.screenHeight - self.navigationController.navigationBar.frame.size.height-self.statusBarHeight-self.actionsOnPlaylistView.frame.size.height*2 - self.playerPreviewView.frame.size.height);
-    
-    self.myPlaylistsLabel.textColor = [UIColor whiteColor];
-    self.myPlaylistsLabel.font = SOONZIK_FONT_BODY_MEDIUM;
+    /*[self.playlistTableView setFrame:CGRectMake(0, 0, self.screenWidth, self.screenHeight - self.navigationController.navigationBar.frame.size.height-self.statusBarHeight-self.actionsOnPlaylistView.frame.size.height*2 - self.playerPreviewView.frame.size.height)];*/
     
     self.playlistTableView.dataSource = self;
     self.playlistTableView.delegate = self;
 }
 
-- (void)getAllPlaylists
+- (void)closePopup:(NSString *)country
 {
-    self.playlists = [[NSMutableDictionary alloc] init];
-    
-    Music *s1 = [[Music alloc] init];
-    s1.title = @"song1";
-    s1.artist = [[User alloc] init];
-    s1.artist.username = @"John Newman";
-    s1.image = @"song1.jpg";
-    s1.file = @"song1";
-    
-    Music *s2 = [[Music alloc] init];
-    s2.title = @"song2";
-    s2.artist = [[User alloc] init];
-    s2.artist.username = @"Route 94";
-    s2.image = @"song2.jpg";
-    s2.file = @"song2";
-    
-    Music *s3 = [[Music alloc] init];
-    s3.title = @"song3";
-    s3.artist = [[User alloc] init];
-    s3.artist.username = @"Duke Dumont";
-    s3.image = @"song3.jpg";
-    s3.file = @"song3";
-    
-    Music *s4 = [[Music alloc] init];
-    s4.title = @"song4";
-    s4.artist = [[User alloc] init];
-    s4.artist.username = @"Stromae";
-    s4.image = @"song4.jpg";
-    s4.file = @"song4";
-    
-    self.tracks = [[NSMutableArray alloc] initWithObjects:s2, s3, nil];
-    [self.playlists setValue:self.tracks forKey:@"PlayList Cool"];
-    
-    self.tracks = [[NSMutableArray alloc] initWithObjects:s1, s2, s3, s4, nil];
-    [self.playlists setValue:self.tracks forKey:@"PlayList de fou"];
-    
-    self.tracks = [[NSMutableArray alloc] initWithObjects:s2, s3, nil];
-    [self.playlists setValue:self.tracks forKey:@"PlayList Cool 2"];
-    
-    [self getPlayListTitles];
+   /* [self.prefixButton setTitle:[NSString stringWithFormat:@"+%@", country] forState:UIControlStateNormal];
+    self.client.telIndicatif = country;
+    [popoverController dismissPopoverAnimated:YES];
+    popoverController = nil;
+    */
 }
 
 - (void)goToAlbumView:(Music *)music
 {
     [self closePopUp];
     AlbumViewController *vc = [[AlbumViewController alloc] initWithNibName:@"AlbumViewController" bundle:nil];
+    vc.album = [[Album alloc] init];
+    vc.album.identifier = 1;
     [self.navigationController pushViewController:vc animated:YES];
 }
 
@@ -122,76 +89,43 @@
     NSLog(@"Vous avez cliqué sur la piste : %@", music.title);
 }
 
-- (void)getPlayListTitles
-{
-    self.playlistTitles = [[NSMutableArray alloc] init];
-    
-    for (NSString *playlist in self.playlists)
-        [self.playlistTitles addObject:playlist];
-}
-
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    NSString *nameOfThePlaylist = [self.playlistTitles objectAtIndex:section];
-    NSArray *playlistContents = [[NSArray alloc] initWithArray:[self.playlists objectForKey:nameOfThePlaylist]];
-    
-    return playlistContents.count;
+    return self.playlist.listOfMusics.count;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return self.playlists.count;
+    return 1;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
     return 40;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    PlayListsHeaderView *headerView = (PlayListsHeaderView *)[[[NSBundle mainBundle] loadNibNamed:@"PlayListsHeaderView" owner:self options:nil] firstObject];
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 44)];
+    view.backgroundColor = [UIColor grayColor];
+    UIButton *playAllButton = [[UIButton alloc] initWithFrame:CGRectMake(4, 4, 312, 36)];
+    [playAllButton setTitle:@"Lire" forState:UIControlStateNormal];
+    [playAllButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [playAllButton addTarget:self action:@selector(playAllPlaylist) forControlEvents:UIControlEventTouchUpInside];
+    [view addSubview:playAllButton];
     
-    NSString *nameOfThePlaylist = [self.playlistTitles objectAtIndex:section];
-    headerView.playlistLabel.text = nameOfThePlaylist;
-    NSArray *playlistContents = [[NSArray alloc] initWithArray:[self.playlists objectForKey:nameOfThePlaylist]];
-    headerView.nbrOfTracks.text = [NSString stringWithFormat:@"%i titres", playlistContents.count];
-    headerView = [self loadImagePreviewPlaylist:playlistContents andHeader:headerView];
+    return view;
     
-    return headerView;
 }
 
-- (PlayListsHeaderView *)loadImagePreviewPlaylist:(NSArray *)playlist andHeader:(PlayListsHeaderView *)headerView
+- (void) playAllPlaylist
 {
-    int i = 1;
-    for (Music *music in playlist) {
-        switch (i) {
-            case 1:
-                headerView.album1Image.image = [UIImage imageNamed:music.image];
-                i++;
-                break;
-            case 2:
-                headerView.album2Image.image = [UIImage imageNamed:music.image];
-                i++;
-                break;
-            case 3:
-                headerView.album3Image.image = [UIImage imageNamed:music.image];
-                i++;
-                break;
-            case 4:
-                headerView.album4Image.image = [UIImage imageNamed:music.image];
-                i++;
-                break;
-            default:
-                break;
-        }
-    }
-    return headerView;
+    NSLog(@"clic");
 }
 
-- (CGFloat) tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 100;
+    return 40;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -207,136 +141,41 @@
     [cell initCell];
     
     //get the song name
-    NSString *nameOfThePlaylist = [self.playlistTitles objectAtIndex:indexPath.section];
-    NSMutableArray *playlist = [self.playlists objectForKey:nameOfThePlaylist];
-    Music *s = [playlist objectAtIndex:indexPath.row];
     
+    Music *s = [self.playlist.listOfMusics objectAtIndex:indexPath.row];
     cell.trackTitle.text = s.title;
-    cell.trackImage.image = [UIImage imageNamed:s.image];
-    /*
-    UIButton *albumButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 40, 40)];
-    [albumButton setImage:[UIImage imageNamed:s.image] forState:UIControlStateNormal];
-    [albumButton addTarget:self action:@selector(goToArtistView) forControlEvents:UIControlEventTouchUpInside];
-    [cell addSubview:albumButton];*/
+    cell.trackArtist.text = s.artist.username;
+    [cell.optionsButton addTarget:self action:@selector(displayPopUp:) forControlEvents:UIControlEventTouchUpInside];
+    cell.optionsButton.music = s;
+    cell.optionsButton.playlist = self.playlist;
+    
+    UIImage* optionImage = [Tools imageWithImage:[SVGKImage imageNamed:@"music_options.svg"].UIImage scaledToSize:CGSizeMake(30, 30)];
+    [cell.optionsButton setImage:optionImage forState:UIControlStateNormal];
     
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-
-    LongPressGestureRecognizer *lpgr = [[LongPressGestureRecognizer alloc] initWithTarget:self action:@selector(displayPopUp:)];
-    lpgr.minimumPressDuration = 1;
-    lpgr.delegate = self;
-    lpgr.song = s;
-    //lpgr.playlist =
     
-    [cell addGestureRecognizer:lpgr];
-    
-    // Add utility buttons
-  /*  NSMutableArray *leftUtilityButtons = [NSMutableArray new];
-    NSMutableArray *rightUtilityButtons = [NSMutableArray new];
-    
-    [leftUtilityButtons sw_addUtilityButtonWithColor:
-     [UIColor colorWithRed:1.0f green:1.0f blue:0.35f alpha:0.7]
-                                                icon:[UIImage imageNamed:@"add-to-playlist_icon.png"]];
-    [leftUtilityButtons sw_addUtilityButtonWithColor:
-     [UIColor colorWithRed:1.0f green:1.0f blue:0.35f alpha:0.7]
-                                                icon:[UIImage imageNamed:@"empty_list.png"]];
-    [leftUtilityButtons sw_addUtilityButtonWithColor:
-     [UIColor colorWithRed:1.0f green:1.0f blue:0.35f alpha:0.7]
-                                                icon:[UIImage imageNamed:@""]];
-    [leftUtilityButtons sw_addUtilityButtonWithColor:
-     [UIColor colorWithRed:1.0f green:1.0f blue:0.35f alpha:0.7]
-                                                icon:[UIImage imageNamed:@"twitter.png"]];
-    
-    [rightUtilityButtons sw_addUtilityButtonWithColor:
-     [UIColor colorWithRed:0.78f green:0.78f blue:0.8f alpha:1.0]
-                                                title:@"More"];
-    [rightUtilityButtons sw_addUtilityButtonWithColor:
-     [UIColor colorWithRed:1.0f green:0.231f blue:0.188 alpha:1.0f]
-                                                title:@"Delete"];
-    
-    cell.leftUtilityButtons = leftUtilityButtons;
-    cell.rightUtilityButtons = rightUtilityButtons;
-    cell.delegate = self;*/
+    UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(0, cell.contentView.frame.size.height - 0.5, cell.contentView.frame.size.width, 0.5)];
+    lineView.backgroundColor = BACKGROUND_COLOR;
+    [cell.contentView addSubview:lineView];
     
     return cell;
 }
-/*
-- (void)swipeableTableViewCell:(SWTableViewCell *)cell didTriggerLeftUtilityButtonWithIndex:(NSInteger)index {
-    switch (index) {
-        case 0:
-        {
-            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"ajout a la liste courante" message:@"La musique a été ajouté à la liste de lecture courante" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
-            AddToCurrentListeningButton *btn = [[AddToCurrentListeningButton alloc] init];
-            btn.song = cell
-            self addToCurrentListening:(AddToCurrentListeningButton *)
-            [alertView show];
-            break;
-        }
-        case 1:
-        {
-            AlbumViewController *vc = [[AlbumViewController alloc] initWithNibName:@"AlbumViewController" bundle:nil];
-            [self.navigationController pushViewController:vc animated:YES];
-            break;
-        }
-        case 2:
-        {
-            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Facebook Sharing" message:@"Just shared the pattern image on Facebook" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
-            [alertView show];
-            break;
-        }
-        case 3:
-        {
-            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Twitter Sharing" message:@"Just shared the pattern image on Twitter" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
-            [alertView show];
-        }
-        default:
-            break;
-    }
-}
 
-- (void)swipeableTableViewCell:(SWTableViewCell *)cell didTriggerRightUtilityButtonWithIndex:(NSInteger)index {
-    switch (index) {
-        case 0:
-        {
-            // More button is pressed
-            UIActionSheet *shareActionSheet = [[UIActionSheet alloc] initWithTitle:@"Share" delegate:nil cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Share on Facebook", @"Share on Twitter", nil];
-            [shareActionSheet showInView:self.view];
-            
-            [cell hideUtilityButtonsAnimated:YES];
-            break;
-        }
-        case 1:
-        {
-            // Delete button is pressed
-            NSIndexPath *cellIndexPath = [self.playlistTableView indexPathForCell:cell];
-            //[patterns removeObjectAtIndex:cellIndexPath.row];
-            //[patternImages removeObjectAtIndex:cellIndexPath.row];
-            [self.playlistTableView deleteRowsAtIndexPaths:@[cellIndexPath] withRowAnimation:UITableViewRowAnimationLeft];
-            break;
-        }
-        default:
-            break;
-    }
-}*/
-
-- (void)displayPopUp:(LongPressGestureRecognizer *)lp
+- (void)displayPopUp:(MusicOptionsButton *)btn
 {
-    if (lp.state == UIGestureRecognizerStateBegan) {
-        [self addBlurEffectOnView:self.view];
-        NSLog(@"element: %@", lp.song);
-        OnLTMusicPopupView *popUpView = (OnLTMusicPopupView *)[[[NSBundle mainBundle] loadNibNamed:@"OnLTMusicPopupView" owner:self options:nil] objectAtIndex:0];
-        popUpView.tag = 100;
-        popUpView.choiceDelegate = self;
-        [self.view addSubview:popUpView];
-        [popUpView initPopupWithSong:lp.song andPlaylist:lp.playlist];
-    }
+    [self addBlurEffectOnView:self.view];
+    OnLTMusicPopupView *popUpView = (OnLTMusicPopupView *)[[[NSBundle mainBundle] loadNibNamed:@"OnLTMusicPopupView" owner:self options:nil] objectAtIndex:0];
+    popUpView.tag = 100;
+    popUpView.choiceDelegate = self;
+    [self.view addSubview:popUpView];
+    [popUpView initPopupWithSong:btn.music andPlaylist:btn.playlist];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
+{/*
     NSString *nameOfThePlaylist = [self.playlistTitles objectAtIndex:indexPath.section];
     NSMutableArray *playlist = [self.playlists objectForKey:nameOfThePlaylist];
     Music *s = [playlist objectAtIndex:indexPath.row];
-    NSLog(@"song: %@", s.title);
     
     self.player = ((AppDelegate *)[UIApplication sharedApplication].delegate).thePlayer;
     if ([self.player currentlyPlaying])
@@ -348,7 +187,8 @@
     [self.player prepareSong:s.file];
     [self.player playSound];
     self.player.songName = s.title;
-}
+*/
+  }
 
 - (void)closePopUp
 {

@@ -9,6 +9,8 @@
 #import "AlbumViewController.h"
 #import "HeaderAlbumTableView.h"
 #import "AppDelegate.h"
+#import "SVGKImage.h"
+#import "AlbumTableViewCell.h"
 
 @interface AlbumViewController ()
 
@@ -32,6 +34,9 @@
     
     self.tableview.delegate = self;
     self.tableview.dataSource = self;
+    self.tableview.backgroundColor = [UIColor clearColor];
+    
+    self.view.backgroundColor = BACKGROUND_COLOR;
     
     self.album = [[Factory alloc] provideObjectWithClassName:@"Album" andIdentifier:self.album.identifier];
     
@@ -56,21 +61,42 @@
     return 200.0;
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 44.0;
+}
+
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     HeaderAlbumTableView *view = (HeaderAlbumTableView *)[[[NSBundle mainBundle] loadNibNamed:@"HeaderAlbumTableView" owner:self options:nil] firstObject];
     view.albumImage.image = [UIImage imageNamed:self.album.image];
     view.albumTitle.text = self.album.title;
+    view.backgroundColor = BACKGROUND_COLOR;
+    [view initHeader];
     return view;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell  = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cellID"];
+    static NSString *cellIdentifier = @"cellID";
+    
+    AlbumTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    if (cell == nil) {
+        [tableView registerNib:[UINib nibWithNibName:@"AlbumTableViewCell" bundle:nil] forCellReuseIdentifier:cellIdentifier];
+        cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    }
+
     
     Music *music = [self.listOfMusics objectAtIndex:indexPath.row];
     
-    cell.textLabel.text = music.title;
+    [cell initCell];
+    
+    cell.musicTitle.text = music.title;
+    cell.musicLength.text = @"03:22";
+    
+    UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(0, cell.contentView.frame.size.height - 0.5, cell.contentView.frame.size.width, 0.5)];
+    lineView.backgroundColor = BACKGROUND_COLOR;
+    [cell.contentView addSubview:lineView];
     
     return cell;
 }

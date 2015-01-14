@@ -7,6 +7,7 @@
 //
 
 #import "FriendsViewController.h"
+#import "FriendsTableViewCell.h"
 #import "ChatViewController.h"
 #import "User.h"
 
@@ -31,27 +32,18 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    [self.navigationController.navigationBar setTranslucent:NO];
+    
+    self.selectedRow = -1;
+    self.selectedSection = -1;
     
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
-    self.nameLabel.hidden = YES;
-    self.chatButton.hidden = YES;
-    
-    self.nameLabel.font = SOONZIK_FONT_BODY_MEDIUM;
-    
-    [self.chatButton addTarget:self action:@selector(goToChat) forControlEvents:UIControlEventTouchUpInside];
-    
-    self.tableView.frame = CGRectMake(self.tableView.frame.origin.x, self.tableView.frame.origin.x + self.navigationController.navigationBar.frame.size.height + self.statusBarHeight, self.tableView.frame.size.width,self.tableView.frame.size.height-self.navigationController.navigationBar.frame.size.height-self.playerPreviewView.frame.size.height-self.statusBarHeight);
-    
-    NSLog(@"taille tableview: %f", self.screenHeight - self.statusBarHeight - self.navigationController.navigationBar.frame.size.height - self.playerPreviewView.frame.size.height * 2);
-    
-    self.detailView.frame = CGRectMake(self.tableView.frame.origin.x, self.tableView.frame.origin.y, self.detailView.frame.size.width, self.detailView.frame.size.height);
+    self.view.backgroundColor = BACKGROUND_COLOR;
     
     [self getFriendList];
-
-    self.detailViewOpen = NO;
 }
 
 - (void)goToChat
@@ -189,6 +181,9 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    if (indexPath.row == self.selectedRow && indexPath.section == self.selectedSection) {
+        return 100;
+    }
     return CELL_HEIGHT;
 }
 
@@ -201,7 +196,6 @@
     label.font = SOONZIK_FONT_BODY_MEDIUM;
     label.textColor = [UIColor whiteColor];
     label.text = [letter uppercaseString];
-    
     [sectionView addSubview:label];
     
     [sectionView setBackgroundColor:[UIColor colorWithRed:51/255.0f green:51/255.0f blue:51/255.0f alpha:1.0f]];
@@ -211,73 +205,73 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    NSString *keyPath = [self.listOfFirstLetter objectAtIndex:indexPath.section];
+    NSArray *listOfPeopleInThisSection = [self.listOfFriends valueForKeyPath:keyPath];
+    User *p = [listOfPeopleInThisSection objectAtIndex:indexPath.row];
+    
+    if (indexPath.row == self.selectedRow && indexPath.section == self.selectedSection) {
+        static NSString *cellIdentifier = @"cellIDOpen";
+        
+        FriendsTableViewCell *cell = (FriendsTableViewCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+        if (cell == nil) {
+            [tableView registerNib:[UINib nibWithNibName:@"FriendsTableViewCell" bundle:nil] forCellReuseIdentifier:cellIdentifier];
+            cell = (FriendsTableViewCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+
+        }
+        
+        [cell.chatButton addTarget:self action:@selector(goToChat) forControlEvents:UIControlEventTouchUpInside];
+        cell.nameLabel.textColor = [UIColor whiteColor];
+        cell.backgroundColor = [UIColor clearColor];
+        cell.nameLabel.font = SOONZIK_FONT_BODY_MEDIUM;
+        cell.nameLabel.text = p.username;
+        
+        cell = [self detailFriendImageRoundedWithImage:[UIImage imageNamed:@"artist1.jpg"] andCell:cell];
+        
+        UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(0, cell.contentView.frame.size.height - 0.5, cell.contentView.frame.size.width, 0.5)];
+        lineView.backgroundColor = [UIColor darkGrayColor];
+        [cell.contentView addSubview:lineView];
+        
+        return cell;
+    }
+    
     static NSString *cellIdentifier = @"cellID";
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     if (cell == nil) {
-        /*[tableView registerNib:[UINib nibWithNibName:@"PlayListsCells" bundle:nil] forCellReuseIdentifier:cellIdentifier];*/
-        //cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
     }
-    
-    NSString *keyPath = [self.listOfFirstLetter objectAtIndex:indexPath.section];
-    NSArray *listOfPeopleInThisSection = [self.listOfFriends valueForKeyPath:keyPath];
-    User *p = [listOfPeopleInThisSection objectAtIndex:indexPath.row];
     
     cell.textLabel.textColor = [UIColor whiteColor];
     cell.backgroundColor = [UIColor clearColor];
     cell.textLabel.font = SOONZIK_FONT_BODY_MEDIUM;
     cell.textLabel.text = p.username;
     
+    UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(0, cell.contentView.frame.size.height - 0.5, cell.contentView.frame.size.width, 0.5)];
+    lineView.backgroundColor = [UIColor darkGrayColor];
+    [cell.contentView addSubview:lineView];
+    
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [self showDetailFriendViewWithIndexPath:indexPath];
-    [tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionTop animated:YES];
+    self.selectedRow = (int)indexPath.row;
+    self.selectedSection = (int)indexPath.section;
+    [tableView reloadData];
+    NSIndexSet *indexSet = [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, self.listOfFirstLetter.count)];
+    [tableView reloadSections:indexSet withRowAnimation:UITableViewRowAnimationFade];
+    //[tableView beginUpdates];
+    //[tableView endUpdates];
 }
 
-- (void)showDetailFriendViewWithIndexPath:(NSIndexPath *)indexPath
+- (FriendsTableViewCell *) detailFriendImageRoundedWithImage:(UIImage *)image andCell:(FriendsTableViewCell *)cell
 {
-    NSString *keyPath = [self.listOfFirstLetter objectAtIndex:indexPath.section];
-    NSArray *listOfPeopleInThisSection = [self.listOfFriends valueForKeyPath:keyPath];
-    User *p = [listOfPeopleInThisSection objectAtIndex:indexPath.row];
-    self.nameLabel.text = p.username;
+    cell.imageView.layer.cornerRadius = 20;
+    cell.imageView.layer.contents = (id)image.CGImage;
+    cell.imageView.layer.masksToBounds = YES;
+    cell.imageView.image = image;
     
-    [self detailFriendImageRoundedWithImage:[UIImage imageNamed:@"artist1.jpg"]];
-    
-    if (!self.detailViewOpen) {
-        [UIView animateWithDuration:0.5 animations:^{
-            [self.tableView setFrame:CGRectMake(self.tableView.frame.origin.x, self.detailView.frame.size.height + self.navigationController.navigationBar.frame.size.height + self.statusBarHeight, self.tableView.frame.size.width, self.tableView.frame.size.height - self.detailView.frame.size.height)];
-        } completion:^(BOOL finished) {
-            self.detailViewOpen = YES;
-            self.chatButton.hidden = NO;
-            self.nameLabel.hidden = NO;
-        }];
-    }
-}
-
-- (void)detailFriendImageRoundedWithImage:(UIImage *)image
-{
-    [self.subLayer removeFromSuperlayer];
-    self.subLayer = [CALayer layer];
-    self.subLayer.backgroundColor = [UIColor blackColor].CGColor;
-    self.subLayer.shadowOffset = CGSizeMake(5, 5);
-    self.subLayer.shadowRadius = 5.0;
-    self.subLayer.shadowColor = [UIColor blackColor].CGColor;
-    self.subLayer.shadowOpacity = 0.8;
-    self.subLayer.frame = CGRectMake(self.detailView.center.x - 70, self.detailView.center.y - 140, 140, 140);
-    self.subLayer.borderColor = [UIColor whiteColor].CGColor;
-    self.subLayer.borderWidth = 2;
-    self.subLayer.cornerRadius = 70;
-    [self.detailView.layer addSublayer:self.subLayer];
-    self.imageLayer = [CALayer layer];
-    self.imageLayer.frame = self.subLayer.bounds;
-    self.imageLayer.cornerRadius = 70;
-    self.imageLayer.contents = (id)image.CGImage;
-    self.imageLayer.masksToBounds = YES;
-    [self.subLayer addSublayer:self.imageLayer];
+    return cell;
 }
 
 - (void)didReceiveMemoryWarning

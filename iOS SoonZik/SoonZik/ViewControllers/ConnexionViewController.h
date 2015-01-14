@@ -13,12 +13,12 @@
 #import "OAMutableURLRequest.h"
 #import "OADataFetcher.h"
 #import "OATokenManager.h"
-#import "GPPSignIn.h"
-#import "GPPSignInButton.h"
+//#import "GPPSignIn.h"
+//#import "GPPSignInButton.h"
 
-@class GPPSignInButton;
+//@class GPPSignInButton;
 
-@interface ConnexionViewController : UIViewController <GPPSignInDelegate>
+@interface ConnexionViewController : UIViewController //<GPPSignInDelegate>
 
 @property (assign, nonatomic) bool isFacebookAvailable;
 
@@ -38,7 +38,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *passwordTextField;
 @property (weak, nonatomic) IBOutlet UIImageView *soonzikLogo;
 
-@property (strong, nonatomic) GPPSignIn *signIn;
+//@property (strong, nonatomic) GPPSignIn *signIn;
 
 
 @end

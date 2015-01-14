@@ -14,6 +14,8 @@
 #import "PlayerPreviewView.h"
 #import "AudioPlayer.h"
 #import "Music.h"
+#import "LoadingView.h"
+#import "TitleSongPreview.h"
 
 @interface TypeViewController : UIViewController <MenuTabDelegate, FinishPlayPlayer, PlayerPreviewDelegate>
 
@@ -26,9 +28,7 @@
 @property (strong, nonatomic) MenuTabView *menuTableView;
 @property (strong, nonatomic) UIView *searchView;
 @property (strong, nonatomic) SearchTabView *searchTableView;
-
-@property (assign, nonatomic) CGFloat screenWidth;
-@property (assign, nonatomic) CGFloat screenHeight;
+@property (strong, nonatomic) LoadingView *loadingView;
 
 @property (assign, nonatomic) CGFloat statusBarHeight;
 

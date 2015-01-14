@@ -33,7 +33,7 @@
     
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
-    self.tableView.backgroundColor = [UIColor clearColor];
+    self.tableView.backgroundColor = DARK_GREY;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
     [self addBlurEffectOnView:self.blurView];
@@ -63,7 +63,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 59;
+    return 42;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
@@ -71,6 +71,7 @@
     HeaderPackView *view = (HeaderPackView *)[[[NSBundle mainBundle] loadNibNamed:@"HeaderPackView" owner:self options:nil] firstObject];
     [view createSliderWithPacks:self.listOfPacks andPage:self.indexOfPage];
     view.slideDelegate = self;
+    view.backgroundColor = BLUE_2;
     
     return view;
 }
@@ -98,6 +99,10 @@
     
     cell.artistLabel.text = @"Artist Name";
     cell.albumLabel.text = album.title;
+    
+    UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(0, cell.contentView.frame.size.height - 0.5, cell.contentView.frame.size.width, 0.5)];
+    lineView.backgroundColor = BACKGROUND_COLOR;
+    [cell.contentView addSubview:lineView];
     
     return cell;
 }

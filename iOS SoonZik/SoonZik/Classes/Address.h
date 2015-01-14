@@ -6,9 +6,9 @@
 //  Copyright (c) 2014 Coordina. All rights reserved.
 //
 
-#import "Element.h"
+#import "ObjectFactory.h"
 
-@interface Address : Element
+@interface Address : ObjectFactory
 
 @property (nonatomic, assign) int identifier;
 @property (nonatomic, strong) NSString *streetNbr;

@@ -6,13 +6,12 @@
 //  Copyright (c) 2014 Coordina. All rights reserved.
 //
 
-#import "Element.h"
+#import "ObjectFactory.h"
 #import "Genre.h"
 #import "User.h"
-//#import "Album.h"
 #import "Comment.h"
 
-@interface Music : Element
+@interface Music : ObjectFactory
 
 @property (nonatomic, assign) int identifier;
 @property (nonatomic, strong) NSString *title;

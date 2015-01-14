@@ -10,7 +10,7 @@
 #import "HomeViewController.h"
 #import "PlayerViewController.h"
 #import "BattleViewController.h"
-#import "PlaylistViewController.h"
+#import "ContentViewController.h"
 #import "GeolocationViewController.h"
 #import "PackViewController.h"
 #import "ArtistViewController.h"
@@ -18,6 +18,8 @@
 #import "FriendsViewController.h"
 #import "AppDelegate.h"
 #import "Music.h"
+#import "Tools.h"
+#import "SVGKImage.h"
 
 @interface TypeViewController ()
 
@@ -49,13 +51,16 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    [self titleImage];
+    [self.navigationController.navigationBar setTranslucent:NO];
     
-    CGRect screenSize = [[UIScreen mainScreen] bounds];
+    //[self titleImage];
+    [self initTitleView];
+    
+    /*CGRect screenSize = [[UIScreen mainScreen] bounds];
     self.screenHeight = screenSize.size.height;
-    self.screenWidth = screenSize.size.width;
+    self.screenWidth = screenSize.size.width;*/
     
-    [self loadBackgroundImage];
+    self.view.backgroundColor = BACKGROUND_COLOR;
     
     self.statusBarHeight = [[UIApplication sharedApplication] statusBarFrame].size.height;
     
@@ -72,25 +77,16 @@
     
     [self deselectAllRows];
     
-    [self initPlayerPreview];
+    //[self initPlayerPreview];
     
     [self initHeader];
     [self initMenuView];
     
-    UITapGestureRecognizer *tapOnListeningPreview = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(launchPlayerView:)];
+    //UITapGestureRecognizer *tapOnListeningPreview = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(launchPlayerView:)];
     
-    [self.playerPreviewView addGestureRecognizer:tapOnListeningPreview];
+    //[self.playerPreviewView addGestureRecognizer:tapOnListeningPreview];
 
     [self refreshThePlayerPreview];
-}
-
-- (void)loadBackgroundImage
-{
-    // detect iphone 5 screen
-    if (self.screenHeight == 568 && self.screenWidth == 320)
-        [self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"iphone5_background.jpg"]]];
-    
-    NSLog(@"background settings:\n height: %f\rwidth: %f", self.screenHeight, self.screenWidth);
 }
 
 - (void)playerHasFinishedToPlay
@@ -120,6 +116,62 @@
     self.navigationItem.titleView = centerImageView;
 }
 
+- (void)initTitleView
+{
+    TitleSongPreview *songPreview = [[[NSBundle mainBundle] loadNibNamed:@"TitleSongPreview" owner:self options:nil] firstObject];
+    self.navigationItem.titleView = songPreview;
+    
+    UITapGestureRecognizer *tapOnListeningPreview = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(launchPlayerView:)];
+    [self.navigationItem.titleView addGestureRecognizer:tapOnListeningPreview];
+}
+
+- (void)refreshThePlayerPreview
+{
+    [NSTimer scheduledTimerWithTimeInterval:0.01 target:self selector:@selector(refreshPreview) userInfo:nil repeats:YES];
+}
+
+- (void)refreshPreview
+{
+    TitleSongPreview *songPreview = (TitleSongPreview *)self.navigationItem.titleView;
+    if (self.player.listeningList.count > 0) {
+        //
+       /* if (!self.player.currentlyPlaying) {
+            [self.playerPreviewView.playButton setImage:[UIImage imageNamed:@"play_icon.png"] forState:UIControlStateNormal];
+        } else {
+            [self.playerPreviewView.playButton setImage:[UIImage imageNamed:@"pause_icon.png"] forState:UIControlStateNormal];
+        }*/
+        Music *s = [self.player.listeningList objectAtIndex:self.player.index];
+        
+        if (self.player.audioPlayer != nil) {
+            int current = self.player.audioPlayer.currentTime;
+            int duration = self.player.audioPlayer.duration;
+            //self.playerPreviewView.timeLabel.text = [NSString stringWithFormat:@"%.02d:%.02d / %.02d:%.02d", current/60, current%60, duration/60, duration%60];
+        } else {
+            [self.player prepareSong:s.file];
+        }
+        
+        /*self.playerPreviewView.trackLabel.text = s.title;
+        self.playerPreviewView.artistLabel.text = s.artist.username;
+        self.playerPreviewView.imageView.image = [UIImage imageNamed:s.image];*/
+        
+        songPreview.albumImage.image = [UIImage imageNamed:s.image];
+        songPreview.trackLabel.text = s.title;
+        songPreview.artistLabel.text = s.artist.username;
+        
+    } else {
+        /*self.playerPreviewView.imageView.image = [UIImage imageNamed:@"empty_list.png"];
+        [self.playerPreviewView.playButton setImage:[UIImage imageNamed:@"play_icon.png"] forState:UIControlStateNormal];
+        self.player.audioPlayer.currentTime = 0;
+        self.playerPreviewView.timeLabel.text = @"00:00 / 00:00";
+        self.playerPreviewView.artistLabel.text = @"";
+        self.playerPreviewView.trackLabel.text = @"";*/
+        
+        songPreview.albumImage.image = nil;
+        songPreview.trackLabel.text = nil;
+        songPreview.artistLabel.text = nil;
+    }
+}
+
 - (void)deselectAllRows
 {
     for (int i=0; i < self.tableData.count; i++) {
@@ -131,7 +183,7 @@
 - (void)openTheMenuView
 {
     self.menuView.hidden = NO;
-    [UIView animateWithDuration:0.5f delay:0.0f options:UIViewAnimationOptionCurveEaseInOut animations:^{
+    [UIView animateWithDuration:0.15f delay:0.0f options:UIViewAnimationOptionCurveEaseInOut animations:^{
         [self.menuView setFrame:CGRectMake(0, self.menuView.frame.origin.y, self.menuView.frame.size.width, self.menuView.frame.size.height)];
     } completion:nil];
     self.menuOpened = YES;
@@ -139,7 +191,7 @@
 
 - (void)closeTheMenuView
 {
-    [UIView animateWithDuration:0.5f delay:0.0f options:UIViewAnimationOptionCurveEaseInOut animations:^{
+    [UIView animateWithDuration:0.15f delay:0.0f options:UIViewAnimationOptionCurveEaseInOut animations:^{
         [self.menuView setFrame:CGRectMake(-self.menuView.frame.size.width, self.menuView.frame.origin.y, self.menuView.frame.size.width, self.menuView.frame.size.height)];
     } completion:^(BOOL finished) {
         self.menuView.hidden = YES;
@@ -165,7 +217,13 @@
     
     if (self.player.listeningList.count > 0) {
         PlayerViewController *vc = [[PlayerViewController alloc] initWithNibName:@"PlayerViewController" bundle:nil];
-        [self.navigationController pushViewController:vc animated:YES];
+        //[self.navigationController pushViewController:vc animated:YES];
+        CATransition *transition = [CATransition animation];
+        transition.duration = 0.3f;
+        transition.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+        transition.type = kCATransitionFromTop;
+        [self.navigationController.view.layer addAnimation:transition forKey:@"openPlayer"];
+        [self.navigationController pushViewController:vc animated:NO];
     } else {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:@"La liste de lecture est vide" delegate:self cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
         [alert show];
@@ -183,7 +241,7 @@
     [self.tableData addObject:@"Packs"];
     [self.tableData addObject:@"Monde musical"];
     [self.tableData addObject:@"Battle"];
-    [self.tableData addObject:@"Playlists"];
+    [self.tableData addObject:@"Mon contenu"];
     [self.tableData addObject:@"Amis"];
     [self.tableData addObject:@"Déconnexion"];
     
@@ -201,10 +259,10 @@
 
 - (void)initHeader
 {
-    UIImage *menuImage = [self imageWithImage:[UIImage imageNamed:@"menu_icon.png"] scaledToSize:CGSizeMake(19, 19)];
+    UIImage *menuImage = [Tools imageWithImage:[SVGKImage imageNamed:@"menu"].UIImage scaledToSize:CGSizeMake(30, 30)];
     UIBarButtonItem *menuButton = [[UIBarButtonItem alloc] initWithImage:menuImage style:UIBarButtonItemStylePlain target:self action:@selector(displayMenu)];
     
-    UIImage *searchImage = [self imageWithImage:[UIImage imageNamed:@"search_icon.png"] scaledToSize:CGSizeMake(19, 19)];
+    UIImage *searchImage = [Tools imageWithImage:[SVGKImage imageNamed:@"search"].UIImage scaledToSize:CGSizeMake(30, 30)];
     UIBarButtonItem *searchButton = [[UIBarButtonItem alloc] initWithImage:searchImage style:UIBarButtonItemStylePlain target:self action:@selector(displaySearch)];
     
     self.navigationItem.leftBarButtonItems = @[menuButton];
@@ -228,7 +286,7 @@
     appframe.size.height -= self.navigationController.navigationBar.frame.size.height + self.playerPreviewView.frame.size.height;
     
     // initialize menu view
-    self.menuView = [[UIView alloc] initWithFrame:CGRectMake(-180, appframe.origin.y, 180, appframe.size.height)];
+    self.menuView = [[UIView alloc] initWithFrame:CGRectMake(-180, 0, 180, appframe.size.height)];
     //[self.menuView setBackgroundColor:[UIColor colorWithRed:51/255.0f green:51/255.0f blue:51/255.0f alpha:1.0f]];
     //[self setBlurAlpha:0.75];
     [self addBlurDarkEffectOnView:self.menuView];
@@ -252,7 +310,7 @@
     [self.menuView addSubview:self.menuTableView];
     
     // initialize search view
-    self.searchView = [[UIView alloc] initWithFrame:CGRectMake(320, appframe.origin.y, 320, appframe.size.height)];
+    self.searchView = [[UIView alloc] initWithFrame:CGRectMake(320, 0, 320, appframe.size.height)];
     [self.view addSubview:self.searchView];
     
     // initialize search tableview
@@ -264,9 +322,9 @@
     
 }
 
-- (void)initPlayerPreview
+/*- (void)initPlayerPreview
 {
-    self.playerPreviewView = [[PlayerPreviewView alloc] initWithFrame:CGRectMake(0, self.screenHeight-PREVIEW_HEIGHT, self.screenWidth, PREVIEW_HEIGHT)];
+    self.playerPreviewView = [[PlayerPreviewView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height-PREVIEW_HEIGHT, self.view.frame.size.width, PREVIEW_HEIGHT)];
     [self.view addSubview:self.playerPreviewView];
     
     self.playerPreviewView.actionDelegate = self;
@@ -277,7 +335,7 @@
     self.playerPreviewView.layer.shadowOpacity = 1;
     self.playerPreviewView.layer.shadowRadius = 10;
     self.playerPreviewView.layer.shadowOffset = CGSizeMake(0, -2);
-}
+}*/
 
 - (void)createUserPreview
 {
@@ -342,44 +400,56 @@
 
 - (void)launchView
 {
-    UIViewController *vc = nil;
-
-    switch (self.selectedMenuIndex) {
-        case 0:
-            // fil d'actualité
-            vc = [[HomeViewController alloc] initWithNibName:@"HomeViewController" bundle:nil];
-            break;
-        case 1:
-            // explorer
-            vc = [[ExploreViewController alloc] initWithNibName:@"ExploreViewController" bundle:nil];
-            break;
-        case 2:
-            // pack
-            vc = [[PackViewController alloc] initWithNibName:@"PackViewController" bundle:nil];
-            break;
-        case 3:
-            // monde musical
-            vc = [[GeolocationViewController alloc] initWithNibName:@"GeolocationViewController" bundle:nil];
-            break;
-        case 4:
-            // battles
-            vc = [[BattleViewController alloc] initWithNibName:@"BattleViewController" bundle:nil];
-            break;
-        case 5:
-            // playlists
-            vc = [[PlaylistViewController alloc] initWithNibName:@"PlaylistViewController" bundle:nil];
-            break;
-        case 6:
-            // amis
-            vc = [[FriendsViewController alloc] initWithNibName:@"FriendsViewController" bundle:nil];
-            break;
-        case 7:
-            [self closeTheSession];
-        default:
-            break;
-    }
+    self.loadingView = [LoadingView loadingViewInView:self.view];
     
-    [self.navigationController pushViewController:vc animated:NO];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        UIViewController *vc = nil;
+        
+        switch (self.selectedMenuIndex) {
+            case 0:
+                // fil d'actualité
+                vc = [[HomeViewController alloc] initWithNibName:@"HomeViewController" bundle:nil];
+                break;
+            case 1:
+                // explorer
+                vc = [[ExploreViewController alloc] initWithNibName:@"ExploreViewController" bundle:nil];
+                break;
+            case 2:
+                // pack
+                vc = [[PackViewController alloc] initWithNibName:@"PackViewController" bundle:nil];
+                break;
+            case 3:
+                // monde musical
+                vc = [[GeolocationViewController alloc] initWithNibName:@"GeolocationViewController" bundle:nil];
+                break;
+            case 4:
+                // battles
+                vc = [[BattleViewController alloc] initWithNibName:@"BattleViewController" bundle:nil];
+                break;
+            case 5:
+                // playlists
+                vc = [[ContentViewController alloc] initWithNibName:@"ContentViewController" bundle:nil];
+                break;
+            case 6:
+                // amis
+                vc = [[FriendsViewController alloc] initWithNibName:@"FriendsViewController" bundle:nil];
+                break;
+            case 7:
+                [self closeTheSession];
+            default:
+                break;
+        }
+        
+        CATransition *transition = [CATransition animation];
+        transition.duration = 0.3f;
+        transition.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+        transition.type = kCATransitionFade;
+        [self.navigationController.view.layer addAnimation:transition forKey:nil];
+        [self.navigationController pushViewController:vc animated:NO];
+        
+        [self.loadingView removeFromSuperview];
+    });
+    
 }
 
 - (void)closeTheSession
@@ -391,7 +461,6 @@
     [FBSession.activeSession closeAndClearTokenInformation];
     
     ConnexionViewController *vc = [[ConnexionViewController alloc] initWithNibName:@"ConnexionViewController" bundle:nil];
-    //UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
     
     
     [UIView  beginAnimations:nil context:NULL];
@@ -400,46 +469,6 @@
     [self.navigationController initWithRootViewController:vc];
     [UIView setAnimationTransition:UIViewAnimationTransitionFlipFromRight forView:self.navigationController.view cache:NO];
     [UIView commitAnimations];
-}
-
-- (void)refreshThePlayerPreview
-{
-    [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(refreshPreview) userInfo:nil repeats:YES];
-}
-
-- (void)refreshPreview
-{
-    if (self.player.listeningList.count > 0) {
-        //
-        if (!self.player.currentlyPlaying) {
-            [self.playerPreviewView.playButton setImage:[UIImage imageNamed:@"play_icon.png"] forState:UIControlStateNormal];
-        } else {
-            [self.playerPreviewView.playButton setImage:[UIImage imageNamed:@"pause_icon.png"] forState:UIControlStateNormal];
-        }
-        
-        Music *s = [self.player.listeningList objectAtIndex:self.player.index];
-        
-        if (self.player.audioPlayer != nil) {
-            int current = self.player.audioPlayer.currentTime;
-            int duration = self.player.audioPlayer.duration;
-            self.playerPreviewView.timeLabel.text = [NSString stringWithFormat:@"%.02d:%.02d / %.02d:%.02d", current/60, current%60, duration/60, duration%60];
-           // NSLog(@"current time = %i", current);
-        } else {
-            [self.player prepareSong:s.file];
-        }
-
-        self.playerPreviewView.trackLabel.text = s.title;
-        self.playerPreviewView.artistLabel.text = s.artist.username;
-        self.playerPreviewView.imageView.image = [UIImage imageNamed:s.image];
-        
-    } else {
-        self.playerPreviewView.imageView.image = [UIImage imageNamed:@"empty_list.png"];
-        [self.playerPreviewView.playButton setImage:[UIImage imageNamed:@"play_icon.png"] forState:UIControlStateNormal];
-        self.player.audioPlayer.currentTime = 0;
-        self.playerPreviewView.timeLabel.text = @"00:00 / 00:00";
-        self.playerPreviewView.artistLabel.text = @"";
-        self.playerPreviewView.trackLabel.text = @"";
-    }
 }
 
 - (void)play

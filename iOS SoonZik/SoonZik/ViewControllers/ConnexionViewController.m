@@ -12,12 +12,12 @@
 
 #import <FacebookSDK/FacebookSDK.h>
 
-#import "GTLPlusConstants.h"
+/*#import "GTLPlusConstants.h"
 #import "GTLQueryPlus.h"
 #import "GTMLogger.h"
 #import "GTLPlusPerson.h"
 #import "GTLServicePlus.h"
-#import "GTMOAuth2Authentication.h"
+#import "GTMOAuth2Authentication.h"*/
 
 @interface ConnexionViewController ()
 
@@ -83,7 +83,7 @@
 
 }
 
-- (void)loginWithGoogle
+/*- (void)loginWithGoogle
 {
     GPPSignIn *signIn = [GPPSignIn sharedInstance];
     signIn.clientID = @"86194997201-a8usvamk2efjomucfg1b99i02332gsj5.apps.googleusercontent.com";
@@ -95,7 +95,7 @@
     signIn.delegate = self;
     
     [signIn authenticate];
-}
+}*/
 
 - (void)loginWithEmail
 {
@@ -120,6 +120,7 @@
     GOOGLE CONNECT
  **/
 
+/*
 - (void)finishedWithAuth: (GTMOAuth2Authentication *)auth error: (NSError *) error
 {
     [FBSession.activeSession closeAndClearTokenInformation];
@@ -134,7 +135,7 @@
     
     MenuViewController *mainVC = [[MenuViewController alloc] init];
     [self.navigationController initWithRootViewController:mainVC];*/
-}
+/*}
 
 -(void)refreshInterfaceBasedOnSignIn
 {
@@ -163,6 +164,6 @@
         // L'utilisateur est déconnecté et l'application dissociée de Google+.
         // Effacer les données de l'utilisateur conformément aux conditions d'utilisation de la Plate-forme Google+.
     }
-}
+}*/
 
 @end

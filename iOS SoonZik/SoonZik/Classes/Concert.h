@@ -6,10 +6,10 @@
 //  Copyright (c) 2014 Coordina. All rights reserved.
 //
 
-#import "Element.h"
+#import "ObjectFactory.h"
 #import "Address.h"
 
-@interface Concert : Element
+@interface Concert : ObjectFactory
 
 @property (nonatomic, assign) int identifier;
 @property (nonatomic, strong) NSDate *date;

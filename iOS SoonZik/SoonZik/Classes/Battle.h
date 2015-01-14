@@ -6,10 +6,10 @@
 //  Copyright (c) 2014 Coordina. All rights reserved.
 //
 
-#import "Element.h"
+#import "ObjectFactory.h"
 #import "User.h"
 
-@interface Battle : Element
+@interface Battle : ObjectFactory
 
 @property (nonatomic, assign) int identifier;
 @property (nonatomic, strong) User *artistOne;

@@ -7,6 +7,7 @@
 //
 
 #import "AudioPlayer.h"
+#import "Music.h"
 
 @implementation AudioPlayer
 
@@ -23,7 +24,7 @@ static AudioPlayer *sharedInstance = nil;
 
 - (void)prepareSong:(NSString *)song
 {
-    NSLog(@"song : %@", song);
+    //NSLog(@"song : %@", song);
     NSString *data = [[NSBundle mainBundle] pathForResource:song ofType:@"mp3"];
     NSURL *url = [[NSURL alloc] initFileURLWithPath:data];
     self.audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:nil];
@@ -32,9 +33,23 @@ static AudioPlayer *sharedInstance = nil;
 
 - (void)playSound
 {
-    [self.audioPlayer play];
+    if (self.listeningList.count > 0) {
+        if (!self.currentlyPlaying) {
+            //[self.playButton setImage:[UIImage imageNamed:@"pause_icon.png"] forState:UIControlStateNormal];
+            //[self.player playSound];
+            [self.audioPlayer play];
+            self.currentlyPlaying = YES;
+            Music *s = [self.listeningList objectAtIndex:self.index];
+            self.songName = s.title;
+            
+        } else {
+            //[self.playButton setImage:[UIImage imageNamed:@"play_icon.png"] forState:UIControlStateNormal];
+            [self pauseSound];
+        }
+    }
+    /*[self.audioPlayer play];
     
-    self.currentlyPlaying = YES;
+    self.currentlyPlaying = YES;*/
 }
 
 - (void)playSoundAtPeriod:(float)period
@@ -54,6 +69,53 @@ static AudioPlayer *sharedInstance = nil;
     [self.audioPlayer stop];
     
     self.currentlyPlaying = NO;
+}
+
+- (void)previous
+{
+    if (self.listeningList.count > 0) {
+        if (self.index > 0) {
+            self.index--;
+            Music *s = [self.listeningList objectAtIndex:self.index];
+            [self prepareSong:s.file];
+            if (self.currentlyPlaying) {
+                [self playSound];
+                self.songName = s.title;
+            }
+        };
+    }
+}
+
+- (void)next
+{
+    if (self.listeningList.count > 0) {
+        if (self.repeatingLevel == 2) {
+            Music *s = [self.listeningList objectAtIndex:self.index];
+            [self prepareSong:s.file];
+            [self playSound];
+            self.songName = s.title;
+        } else if (self.repeatingLevel == 1) {
+            if (self.index == self.listeningList.count - 1) {
+                self.index = 0;
+            } else {
+                self.index++;
+            }
+            Music *s = [self.listeningList objectAtIndex:self.index];
+            [self prepareSong:s.file];
+            [self playSound];
+            self.songName = s.title;
+        } else if (self.repeatingLevel == 0) {
+            if (self.index < self.listeningList.count - 1) {
+                self.index++;
+                Music *s = [self.listeningList objectAtIndex:self.index];
+                [self prepareSong:s.file];
+                if (self.currentlyPlaying) {
+                    [self playSound];
+                    self.songName = s.title;
+                }
+            }
+        }
+    }
 }
 
 - (void)repeat
@@ -79,14 +141,29 @@ static AudioPlayer *sharedInstance = nil;
         default:
             break;
     }
- 
 }
+
+/*
+
+- (IBAction)mute:(id)sender
+{
+    if (!self.isMute) {
+        self.lastVolumeLevel = self.player.audioPlayer.volume;
+        self.volumeSlider.value = 0;
+        self.player.audioPlayer.volume = 0;
+    } else {
+        self.volumeSlider.value = self.lastVolumeLevel;
+        self.player.audioPlayer.volume = self.lastVolumeLevel;
+    }
+}
+
+*/
+
 
 - (void)audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)flag
 {
     self.currentlyPlaying = NO;
     [self.finishDelegate playerHasFinishedToPlay];
-    
 }
 
 @end

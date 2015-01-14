@@ -6,11 +6,11 @@
 //  Copyright (c) 2014 Coordina. All rights reserved.
 //
 
-#import "Element.h"
+#import "ObjectFactory.h"
 #import "User.h"
 #import "SOMessage.h"
 
-@interface Message : Element <SOMessage>
+@interface Message : ObjectFactory <SOMessage>
 
 @property (nonatomic, assign) int identifier;
 @property (nonatomic, strong) User *fromUser;

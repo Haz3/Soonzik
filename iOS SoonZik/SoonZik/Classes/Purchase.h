@@ -6,12 +6,12 @@
 //  Copyright (c) 2014 Coordina. All rights reserved.
 //
 
-#import "Element.h"
+#import "ObjectFactory.h"
 #import "Album.h"
 #import "Pack.h"
 #import "Music.h"
 
-@interface Purchase : Element
+@interface Purchase : ObjectFactory
 
 @property (nonatomic, assign) int identifier;
 @property (nonatomic, strong) Album *album;

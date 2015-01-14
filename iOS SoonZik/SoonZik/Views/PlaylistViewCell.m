@@ -17,17 +17,15 @@
 
 - (void)initCell
 {
-    [self.layerListening setHidden:YES];
+    
 }
 
 - (void)setSelected:(BOOL)selected
 {
     if (selected == YES) {
-        [self.layerListening setHidden:NO];
-        [self setBackgroundColor:[UIColor grayColor]];
+        
     } else {
-        [self.layerListening setHidden:YES];
-        [self setBackgroundColor:[UIColor whiteColor]];
+       
     }
     
 }

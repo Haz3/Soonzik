@@ -6,9 +6,9 @@
 //  Copyright (c) 2014 Coordina. All rights reserved.
 //
 
-#import "TypeViewController.h"
+#import <UIKit/UIKit.h>
 
-@interface FriendsViewController : TypeViewController <UITableViewDataSource, UITableViewDelegate>
+@interface FriendsViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *listOfFriendsTitle;
@@ -16,14 +16,10 @@
 @property (nonatomic, strong) NSMutableArray *listOfFirstLetter;
 @property (nonatomic, strong) NSMutableDictionary *listOfFriends;
 
-@property (nonatomic, weak) IBOutlet UIView *detailView;
-@property (nonatomic, strong) UIImageView *imageView;
-@property (nonatomic, weak) IBOutlet UILabel *nameLabel;
-@property (nonatomic, weak) IBOutlet UIButton *chatButton;
+@property (nonatomic, assign) int selectedRow;
+@property (nonatomic, assign) int selectedSection;
 
 @property (nonatomic, strong) CALayer *subLayer;
 @property (nonatomic, strong) CALayer *imageLayer;
-
-@property (nonatomic, assign) bool detailViewOpen;
 
 @end

@@ -10,8 +10,9 @@
 #import "User.h"
 #import "Attachment.h"
 #import "Comment.h"
+#import "ObjectFactory.h"
 
-@interface News : NSObject
+@interface News : ObjectFactory
 
 @property (nonatomic, assign) int identifier;
 @property (nonatomic, strong) NSString *title;

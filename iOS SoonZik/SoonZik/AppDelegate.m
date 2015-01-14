@@ -12,7 +12,7 @@
 #import "ConnexionViewController.h"
 #import "HomeViewController.h"
 #import "SocialConnect.h"
-#import "GPPURLHandler.h"
+//#import "GPPURLHandler.h"
 
 @implementation AppDelegate
 
@@ -23,6 +23,8 @@
     self.thePlayer.oldIndex = 0;
     self.thePlayer.repeatingLevel = 0;
     self.thePlayer.listeningList = [[NSMutableArray alloc] init];
+    
+    [[UINavigationBar appearance] setTintColor:BLUE_2];
     
     [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback error:nil];
     [[AVAudioSession sharedInstance] setActive: YES error: nil];
@@ -40,8 +42,8 @@
                                       }];
     }
     
-    vc = [[ConnexionViewController alloc] initWithNibName:@"ConnexionViewController" bundle:nil];
-    //vc = [[HomeViewController alloc] initWithNibName:@"HomeViewController" bundle:nil];
+    //vc = [[ConnexionViewController alloc] initWithNibName:@"ConnexionViewController" bundle:nil];
+    vc = [[HomeViewController alloc] initWithNibName:@"HomeViewController" bundle:nil];
     //MenuViewController *mainVC = [[MenuViewController alloc] init];
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
@@ -189,7 +191,8 @@
         return [FBAppCall handleOpenURL:url sourceApplication:sourceApplication];
     }
     
-    return [GPPURLHandler handleURL:url sourceApplication:sourceApplication annotation:annotation];
+    //return [GPPURLHandler handleURL:url sourceApplication:sourceApplication annotation:annotation];
+    return [FBAppCall handleOpenURL:url sourceApplication:sourceApplication];
 }
 
 - (void)setTypeConnexion:(int)type

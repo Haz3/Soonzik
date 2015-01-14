@@ -9,6 +9,8 @@
 #import "HomeViewController.h"
 #import "AppDelegate.h"
 #import "Pack.h"
+#import "Tools.h"
+#import "SVGKImage.h"
 
 @interface HomeViewController ()
 
@@ -55,10 +57,10 @@
 
 - (void)addUpdateButtonInNavigationBar
 {
-    UIImage *updateImage = [self imageWithImage:[UIImage imageNamed:@"update_icon.png"] scaledToSize:CGSizeMake(25,25)];
+    UIImage *updateImage = [Tools imageWithImage:[SVGKImage imageNamed:@"update"].UIImage scaledToSize:CGSizeMake(30, 30)];
     UIBarButtonItem *updateButton = [[UIBarButtonItem alloc] initWithImage:updateImage style:UIBarButtonItemStylePlain target:self action:@selector(updateTableView)];
     
-    UIImage *searchImage = [self imageWithImage:[UIImage imageNamed:@"search_icon.png"] scaledToSize:CGSizeMake(19, 19)];
+    UIImage *searchImage = [Tools imageWithImage:[SVGKImage imageNamed:@"search"].UIImage scaledToSize:CGSizeMake(30, 30)];
     UIBarButtonItem *searchButton = [[UIBarButtonItem alloc] initWithImage:searchImage style:UIBarButtonItemStylePlain target:self action:@selector(displaySearch)];
     
     self.navigationItem.rightBarButtonItems = @[searchButton, updateButton];
@@ -77,41 +79,6 @@
 - (void)updateTableView
 {
     [self.tableView reloadData];
-}
-
-- (IBAction)loadPlaylist:(id)sender
-{
-    self.player = ((AppDelegate *)[UIApplication sharedApplication].delegate).thePlayer;
-    
-    Music *s1 = [[Music alloc] init];
-    s1.title = @"song1";
-    s1.artist = [[User alloc] init];
-    s1.artist.username = @"John Newman";
-    s1.image = @"song1.jpg";
-    
-    Music *s2 = [[Music alloc] init];
-    s2.title = @"song2";
-    s2.artist = [[User alloc] init];
-    s2.artist.username = @"Route 94";
-    s2.image = @"song2.jpg";
-    
-    Music *s3 = [[Music alloc] init];
-    s3.title = @"song3";
-    s3.artist = [[User alloc] init];
-    s3.artist.username = @"Duke Dumont";
-    s3.image = @"song3.jpg";
-    
-    [self.player.listeningList addObject:s1];
-    [self.player.listeningList addObject:s2];
-    [self.player.listeningList addObject:s3];
-    
-    
-    if (self.player.currentlyPlaying == NO) {
-        self.player.index = 0;
-        Music *s = [self.player.listeningList objectAtIndex:self.player.index];
-        [self.player prepareSong:s.file];
-    }
-
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section

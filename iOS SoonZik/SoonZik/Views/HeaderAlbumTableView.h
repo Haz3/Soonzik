@@ -12,5 +12,13 @@
 
 @property (nonatomic, weak) IBOutlet UIImageView *albumImage;
 @property (nonatomic, weak) IBOutlet UILabel *albumTitle;
+@property (nonatomic, weak) IBOutlet UILabel *lengthLabel;
+@property (nonatomic, weak) IBOutlet UILabel *releaseDateLabel;
+
+@property (nonatomic, weak) IBOutlet UIButton *shareButton;
+@property (nonatomic, weak) IBOutlet UIButton *loveButton;
+@property (nonatomic, weak) IBOutlet UIButton *artistButton;
+
+- (void)initHeader;
 
 @end

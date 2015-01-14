@@ -34,6 +34,8 @@
     //--------------------------------------------------
     
     [self loadMessages];
+    
+    self.view.backgroundColor = BACKGROUND_COLOR;
 }
 
 - (void)loadMessages

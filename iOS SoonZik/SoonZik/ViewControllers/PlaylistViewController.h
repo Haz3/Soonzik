@@ -11,18 +11,14 @@
 #import "OnLTMusicPopupView.h"
 #import "SWTableViewCell.h"
 
-@interface PlaylistViewController : TypeViewController <UITableViewDataSource, UITableViewDelegate, UIGestureRecognizerDelegate, PopUpDetailMusicDelegate>//, SWTableViewCellDelegate>
+@interface PlaylistViewController : TypeViewController <UITableViewDataSource, UITableViewDelegate, UIGestureRecognizerDelegate, PopUpDetailMusicDelegate>
 
 @property (nonatomic, weak) IBOutlet UITableView *playlistTableView;
 
-@property (nonatomic, weak) IBOutlet UIView *actionsOnPlaylistView;
-
-@property (nonatomic, strong) NSMutableDictionary *playlists;
 @property (nonatomic, strong) NSMutableArray *tracks;
 
-@property (nonatomic, strong) NSMutableArray *playlistTitles;
-@property (nonatomic, weak) IBOutlet UILabel *myPlaylistsLabel;
-
 @property (nonatomic, strong) UIAlertView *popUp;
+
+@property (nonatomic, strong) Playlist *playlist;
 
 @end

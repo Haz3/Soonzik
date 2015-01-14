@@ -13,7 +13,6 @@
 - (void)awakeFromNib
 {
     // Initialization code
-    
 }
 
 - (void)initCell

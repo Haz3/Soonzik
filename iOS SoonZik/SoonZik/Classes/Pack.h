@@ -11,7 +11,7 @@
 #import "Album.h"
 #import "Comment.h"
 
-@interface Pack : Element
+@interface Pack : ObjectFactory
 
 @property (nonatomic, assign) int identifier;
 @property (nonatomic, strong) NSString *title;

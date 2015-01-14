@@ -37,6 +37,8 @@
 - (void)playSoundAtPeriod:(float)period;
 - (void)pauseSound;
 
+- (void)previous;
+- (void)next;
 - (void)repeat;
 
 @end

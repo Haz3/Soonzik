@@ -9,6 +9,8 @@
 #import "PlayerViewController.h"
 #import "PlaylistViewCell.h"
 #import "AppDelegate.h"
+#import "Tools.h"
+#import "SVGKImage.h"
 
 @interface PlayerViewController ()
 
@@ -27,11 +29,12 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    [self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"iphone5_background.jpg"]]];
+    self.view.backgroundColor = BACKGROUND_COLOR;
     
-    CGRect screenSize = [[UIScreen mainScreen] bounds];
-    self.screenHeight = screenSize.size.height;
-    self.screenWidth = screenSize.size.width;
+    self.navigationItem.hidesBackButton = YES;
+    UIImage *closeImage = [Tools imageWithImage:[SVGKImage imageNamed:@"close"].UIImage scaledToSize:CGSizeMake(30, 30)];
+    UIBarButtonItem *closeButton = [[UIBarButtonItem alloc] initWithImage:closeImage style:UIBarButtonItemStylePlain target:self action:@selector(closePlayerViewController)];
+    self.navigationItem.leftBarButtonItem = closeButton;
     
     CGContextRef currentContext = UIGraphicsGetCurrentContext();
     CGContextSaveGState(currentContext);
@@ -49,6 +52,16 @@
     self.finishTimeLabel.font = SOONZIK_FONT_BODY_VERY_SMALL;
 }
 
+- (void)closePlayerViewController
+{
+    CATransition *transition = [CATransition animation];
+    transition.duration = 0.3f;
+    transition.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+    transition.type = kCATransitionFromBottom;
+    [self.navigationController.view.layer addAnimation:transition forKey:nil];
+    [self.navigationController popViewControllerAnimated:NO];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -60,13 +73,16 @@
     self.playlistTableView.delegate = self;
     self.playlistTableView.dataSource = self;
     
+    self.playlistTableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+    self.playlistTableView.backgroundColor = [UIColor darkGrayColor];
+    
     self.isMute = NO;
     
     self.player = ((AppDelegate *)[UIApplication sharedApplication].delegate).thePlayer;
     self.player.finishDelegate = self;
     
-    if (self.player.listeningList.count == 0) {
-        NSLog(@"self.player.listeningList vide");
+    if (self.player.listeningList.count == 0)
+    {
         [self.player prepareSong:0];
     }
     
@@ -120,7 +136,6 @@
         self.songArtist.text = s.artist.username;
         self.songImage.image = [UIImage imageNamed:s.image];
     }
-    
 }
 
 - (IBAction)goToThisPeriod:(id)sender
@@ -133,7 +148,6 @@
     } else {
        [self.player playSoundAtPeriod:slider.value]; 
     }
-    
 }
 
 - (IBAction)changeVolume:(id)sender
@@ -145,80 +159,30 @@
 
 - (IBAction)play:(id)sender
 {
-    if (self.player.listeningList.count > 0) {
-        if (!self.player.currentlyPlaying) {
-            [self.playButton setImage:[UIImage imageNamed:@"pause_icon.png"] forState:UIControlStateNormal];
-            [self.player playSound];
-            Music *s = [self.player.listeningList objectAtIndex:self.player.index];
-            self.player.songName = s.title;
-            self.player.audioPlayer.volume = self.lastVolumeLevel;
-            [self updateListeningCells];
-        } else {
-            [self.playButton setImage:[UIImage imageNamed:@"play_icon.png"] forState:UIControlStateNormal];
-            [self.player pauseSound];
-        }
-    }
+    [self.player playSound];
+    self.player.audioPlayer.volume = self.lastVolumeLevel;
     
+    [self updateListeningCells];
 }
 
 - (IBAction)previous:(id)sender
 {
-    if (self.player.listeningList.count > 0) {
-        if (self.player.index > 0) {
-            self.player.index--;
-            Music *s = [self.player.listeningList objectAtIndex:self.player.index];
-            [self.player prepareSong:s.file];
-            if (self.player.currentlyPlaying) {
-                [self.player playSound];
-                self.player.songName = s.title;
-            }
-        };
-        self.player.audioPlayer.volume = self.lastVolumeLevel;
+    [self.player previous];
+    self.player.audioPlayer.volume = self.lastVolumeLevel;
         
-        [self updateListeningCells];
-    }
-    
+    [self updateListeningCells];
 }
 
 - (IBAction)next:(id)sender
 {
-        if (self.player.listeningList.count > 0) {
-            if (self.player.repeatingLevel == 2) {
-                Music *s = [self.player.listeningList objectAtIndex:self.player.index];
-                [self.player prepareSong:s.file];
-                [self.player playSound];
-                self.player.songName = s.title;
-            } else if (self.player.repeatingLevel == 1) {
-                if (self.player.index == self.player.listeningList.count - 1) {
-                    self.player.index = 0;
-                } else {
-                    self.player.index++;
-                }
-                Music *s = [self.player.listeningList objectAtIndex:self.player.index];
-                [self.player prepareSong:s.file];
-                [self.player playSound];
-                self.player.songName = s.title;
-            } else if (self.player.repeatingLevel == 0) {
-                if (self.player.index < self.player.listeningList.count - 1) {
-                    self.player.index++;
-                    Music *s = [self.player.listeningList objectAtIndex:self.player.index];
-                    [self.player prepareSong:s.file];
-                    if (self.player.currentlyPlaying) {
-                        [self.player playSound];
-                        self.player.songName = s.title;
-                    }
-                }
-            }
-            
-            self.player.audioPlayer.volume = self.lastVolumeLevel;
-            
-            [self updateListeningCells];
-        }
+    [self.player next];
+    self.player.audioPlayer.volume = self.lastVolumeLevel;
+        
+    [self updateListeningCells];
 }
 
 - (void)playerHasFinishedToPlay
 {
-    NSLog(@"LECTURE TERMINEE");
     [self next:nil];
 }
 
@@ -241,43 +205,38 @@
 
 - (IBAction)repeat:(id)sender
 {
-    [self.player repeat];
     switch (self.player.repeatingLevel) {
         case 0:
             // repeat the list when it's finished
             NSLog(@"Repeating all");
             [self.repeatButton setImage:[UIImage imageNamed:@"repeat-1_icon.png"] forState:UIControlStateNormal];
-            self.player.repeatingLevel = 1;
             break;
         case 1:
             // just repeat this one indefinely only
             NSLog(@"Repeating one");
             [self.repeatButton setImage:[UIImage imageNamed:@"repeat-2_icon.png"] forState:UIControlStateNormal];
-            self.player.repeatingLevel = 2;
-            [self.player.audioPlayer setNumberOfLoops:-1];
             break;
         case 2:
             // stop the repeating action
             NSLog(@"NO Repeating");
             [self.repeatButton setImage:[UIImage imageNamed:@"repeat-0_icon.png"] forState:UIControlStateNormal];
-            self.player.repeatingLevel = 0;
-            [self.player.audioPlayer setNumberOfLoops:0];
             break;
         default:
             break;
     }
+    [self.player repeat];
 }
 
 - (void)updateListeningCells
 {
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:self.player.index inSection:0];
+    /*NSIndexPath *indexPath = [NSIndexPath indexPathForRow:self.player.index inSection:0];
     [self.playlistTableView.delegate tableView:self.playlistTableView didSelectRowAtIndexPath:indexPath];
     
     for (int i=0; i < self.player.listeningList.count; i++) {
         NSIndexPath *indexPath2 = [NSIndexPath indexPathForRow:i inSection:0];
         if (i != self.player.index)
             [self.playlistTableView.delegate tableView:self.playlistTableView didDeselectRowAtIndexPath:indexPath2];
-    }
+    }*/
 }
 
 /*
@@ -296,7 +255,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 72;
+    return 50;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -309,28 +268,44 @@
         cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     }
     
-    UIImage *deleteImage = [UIImage imageNamed:@"delete_icon.png"];
-    UIButton *deleteButton = [[UIButton alloc] initWithFrame:CGRectMake(cell.frame.size.width-30, 10, 15, 15)];
-    deleteButton.tag = indexPath.row;
-    [deleteButton setImage:deleteImage forState:UIControlStateNormal];
-    [cell addSubview:deleteButton];
-    
-    [deleteButton addTarget:self action:@selector(removeElementFromPlaylist:) forControlEvents:UIControlEventTouchUpInside];
-    
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    cell.backgroundColor = [UIColor clearColor];
     
     [cell initCell];
     Music *s = [self.player.listeningList objectAtIndex:indexPath.row];
     cell.songTitleLabel.text = s.title;
-    cell.imageAlbum.image = [UIImage imageNamed:s.image];
+    
+    NSMutableArray *rightUtilityButtons = [NSMutableArray new];
+    [rightUtilityButtons sw_addUtilityButtonWithColor:BLUE_2 icon:[Tools imageWithImage:[SVGKImage imageNamed:@"delete"].UIImage scaledToSize:CGSizeMake(30, 30)]];
+
+    cell.rightUtilityButtons = rightUtilityButtons;
+    cell.delegate = self;
+    
+    UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(0, cell.contentView.frame.size.height - 0.5, cell.contentView.frame.size.width, 0.5)];
+    lineView.backgroundColor = BACKGROUND_COLOR;
+    [cell.contentView addSubview:lineView];
     
     return cell;
 }
 
-- (void)removeElementFromPlaylist:(UIButton *)btn
+- (void)swipeableTableViewCell:(SWTableViewCell *)cell didTriggerRightUtilityButtonWithIndex:(NSInteger)index
+{
+    switch (index) {
+        case 0:
+        {
+            [self removeElementFromPlaylist:index];
+            break;
+        }
+        default:
+            break;
+    }
+}
+
+
+- (void)removeElementFromPlaylist:(int)index
 {
     NSMutableArray *tmpSongList = self.player.listeningList;
-    NSString *element = [tmpSongList objectAtIndex:btn.tag];
+    NSString *element = [tmpSongList objectAtIndex:index];
     [tmpSongList removeObject:element];
     self.listeningList = [[NSMutableArray alloc] init];
     for (NSString *element in tmpSongList)
@@ -338,9 +313,7 @@
     self.player.audioPlayer.volume = self.lastVolumeLevel;
     self.player.listeningList = [[NSMutableArray alloc] initWithArray:self.listeningList];
     
-    NSLog(@"taille tab: %i", self.player.listeningList.count);
-    
-    if (self.player.index == btn.tag) {
+    if (self.player.index == index) {
         [self.player pauseSound];
         self.player.index = 0;
         if (self.player.listeningList.count > 0) {
@@ -351,9 +324,7 @@
                 self.player.audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:nil];
                 self.player.audioPlayer.currentTime = 0.0;
             }
-            
         }
-        
     } else if (self.player.listeningList.count == 1) {
         self.player.index = 0;
         
@@ -367,20 +338,20 @@
         self.player.currentlyPlaying = NO;
     }
     
-    NSLog(@"self.player.index: %i", self.player.index);
-    
     [self.playlistTableView reloadData];
     [self updateListeningCells];
-    
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     self.player.index = indexPath.row;
     
+    NSLog(@"oldIndex : %i", self.player.oldIndex);
+    NSLog(@"newIndex : %i", self.player.index);
+    
     if (self.player.oldIndex != self.player.index && self.player.listeningList.count > 1) {
         self.player.oldIndex = self.player.index;
-    
+        //NSLog(@"ok");
         Music *s = [self.player.listeningList objectAtIndex:self.player.index];
         [self.player prepareSong:s.file];
         self.player.audioPlayer.volume = self.lastVolumeLevel;
@@ -390,15 +361,13 @@
     }
     
     [self refresh];
-    
     [[tableView cellForRowAtIndexPath:indexPath] setSelected:YES];
-    
     [self.playButton setImage:[UIImage imageNamed:@"pause_icon.png"] forState:UIControlStateNormal];
 }
 
 - (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [[tableView cellForRowAtIndexPath:indexPath] setSelected:NO];
+   // [[tableView cellForRowAtIndexPath:indexPath] setSelected:NO];
 }
 
 - (void)didReceiveMemoryWarning

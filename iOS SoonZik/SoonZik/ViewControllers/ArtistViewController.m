@@ -31,6 +31,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
+    self.view.backgroundColor = BACKGROUND_COLOR;
+    
     self.songsTableView.delegate = self;
     self.songsTableView.dataSource = self;
     
@@ -172,47 +174,47 @@
 - (void)goToSection1
 {
     self.index = 0;
-    [self.horizontalScrollView setContentOffset:CGPointMake(self.index * self.screenWidth, 0) animated:YES];
+    [self.horizontalScrollView setContentOffset:CGPointMake(self.index * self.view.frame.size.width, 0) animated:YES];
     [UIView animateWithDuration:0.5 animations:^{
-        [self.movingView setFrame:CGRectMake(self.screenWidth / 4 * self.index, self.movingView.frame.origin.y, self.movingView.frame.size.width, self.movingView.frame.size.height)];
+        [self.movingView setFrame:CGRectMake(self.view.frame.size.width / 4 * self.index, self.movingView.frame.origin.y, self.movingView.frame.size.width, self.movingView.frame.size.height)];
     }];
 }
 
 - (void)goToSection2
 {
     self.index = 1;
-    [self.horizontalScrollView setContentOffset:CGPointMake(self.index * self.screenWidth, 0) animated:YES];
+    [self.horizontalScrollView setContentOffset:CGPointMake(self.index * self.view.frame.size.width, 0) animated:YES];
     [UIView animateWithDuration:0.5 animations:^{
-        [self.movingView setFrame:CGRectMake(self.screenWidth / 4 * self.index, self.movingView.frame.origin.y, self.movingView.frame.size.width, self.movingView.frame.size.height)];
+        [self.movingView setFrame:CGRectMake(self.view.frame.size.width / 4 * self.index, self.movingView.frame.origin.y, self.movingView.frame.size.width, self.movingView.frame.size.height)];
     }];
 }
 
 - (void)goToSection3
 {
     self.index = 2;
-    [self.horizontalScrollView setContentOffset:CGPointMake(self.index * self.screenWidth, 0) animated:YES];
+    [self.horizontalScrollView setContentOffset:CGPointMake(self.index * self.view.frame.size.width, 0) animated:YES];
     [UIView animateWithDuration:0.5 animations:^{
-        [self.movingView setFrame:CGRectMake(self.screenWidth / 4 * self.index, self.movingView.frame.origin.y, self.movingView.frame.size.width, self.movingView.frame.size.height)];
+        [self.movingView setFrame:CGRectMake(self.view.frame.size.width / 4 * self.index, self.movingView.frame.origin.y, self.movingView.frame.size.width, self.movingView.frame.size.height)];
     }];
 }
 
 - (void)goToSection4
 {
     self.index = 3;
-    [self.horizontalScrollView setContentOffset:CGPointMake(self.index * self.screenWidth, 0) animated:YES];
+    [self.horizontalScrollView setContentOffset:CGPointMake(self.index * self.view.frame.size.width, 0) animated:YES];
     [UIView animateWithDuration:0.5 animations:^{
-        [self.movingView setFrame:CGRectMake(self.screenWidth / 4 * self.index, self.movingView.frame.origin.y, self.movingView.frame.size.width, self.movingView.frame.size.height)];
+        [self.movingView setFrame:CGRectMake(self.view.frame.size.width / 4 * self.index, self.movingView.frame.origin.y, self.movingView.frame.size.width, self.movingView.frame.size.height)];
     }];
 }
 
 - (void)scrollViewWillEndDragging:(UIScrollView *)scrollView withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset
 {
     if (scrollView.tag == 2) {
-        self.index = (int)targetContentOffset->x / self.screenWidth;
+        self.index = (int)targetContentOffset->x / self.view.frame.size.width;
         //[self.pageControl setCurrentPage:self.index];
         
         [UIView animateWithDuration:0.5 animations:^{
-            [self.movingView setFrame:CGRectMake(self.screenWidth / 4 * self.index, self.movingView.frame.origin.y, self.movingView.frame.size.width, self.movingView.frame.size.height)];
+            [self.movingView setFrame:CGRectMake(self.view.frame.size.width / 4 * self.index, self.movingView.frame.origin.y, self.movingView.frame.size.width, self.movingView.frame.size.height)];
         }];
     }
 }

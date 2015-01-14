@@ -8,14 +8,13 @@
 
 #import <UIKit/UIKit.h>
 #import "SWTableViewCell.h"
+#import "MusicOptionsButton.h"
 
-@interface PlaylistViewCell : UITableViewCell
+@interface PlaylistViewCell : SWTableViewCell
 
-@property (nonatomic, weak) IBOutlet UIImageView *imageAlbum;
 @property (nonatomic, weak) IBOutlet UILabel *songTitleLabel;
 @property (nonatomic, weak) IBOutlet UILabel *artistNameLabel;
-
-@property (nonatomic, weak) IBOutlet UIView *layerListening;
+@property (nonatomic, weak) IBOutlet MusicOptionsButton *optionsButton;
 
 - (void)initCell;
 

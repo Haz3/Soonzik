@@ -9,8 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "AudioPlayer.h"
 #import "Music.h"
+#import "SWTableViewCell.h"
 
-@interface PlayerViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, FinishPlayPlayer>
+@interface PlayerViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, FinishPlayPlayer, SWTableViewCellDelegate>
 
 @property (nonatomic, retain) AudioPlayer *player;
 
