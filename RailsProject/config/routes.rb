@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  root 'others#index'
+
   #
   # API ROUTES (57 / 57)
   #
@@ -109,65 +111,42 @@ Rails.application.routes.draw do
 
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
-  resources :users
 
-  resources :votes
-
-  resources :tweets
-
-  resources :tags
-
-  resources :purchases
-
-  resources :propositions
-
-  resources :playlists
-
-  resources :packs
-
-  resources :notifications
-
-  resources :newstexts
-
-  resources :news
-
-  resources :music_notes
-
-  resources :musics
-
-  resources :messages
-
-  resources :listenings
-
-  resources :influences
-
-  resources :groups
-
-  resources :gifts
-
-  resources :flacs
-
-  resources :genres
-
-  resources :descriptions
-
-  resources :concerts
-
-  resources :commentaries
-
-  resources :carts
-
-  resources :battles
-
-  resources :attachments
-
-  resources :album_notes
-
-  resources :albums
-
-  resources :addresses
+  get 'signin' => 'others#signin'
+  get 'facebook/signin' => 'others#facebook'
+  get 'oauth/callback' => 'others#callback_oauth'
+  get 'activate' => 'others#activate_account', as: :activate
 
   resources :accesses
+  resources :addresses
+  resources :albums
+  resources :album_notes
+  resources :attachments
+  resources :battles
+  resources :carts
+  resources :commentaries
+  resources :concerts
+  resources :descriptions
+  resources :flacs
+  resources :genres
+  resources :gifts
+  resources :groups
+  resources :influences
+  resources :listenings
+  resources :messages
+  resources :musics
+  resources :music_notes
+  resources :news
+  resources :newstexts
+  resources :notifications
+  resources :packs
+  resources :playlists
+  resources :propositions
+  resources :purchases
+  resources :tags
+  resources :tweets
+  resources :users
+  resources :votes
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

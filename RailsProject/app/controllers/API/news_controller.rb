@@ -13,7 +13,7 @@ module API
   	# Retrieve all the news
     def index
       begin
-        @returnValue = { content: News.all.as_json(:include => :newstexts) }
+        @returnValue = { content: News.all.as_json(:include => { :newstexts => {}, :attachments => {}}) }
         if (@returnValue.size == 0)
           codeAnswer 202
         else
@@ -37,7 +37,7 @@ module API
         if (!news)
           codeAnswer 502
         else
-          @returnValue = { content: news.as_json(:include => :newstexts) }
+          @returnValue = { content: news.as_json(:include => { :newstexts => {}, :attachments => {}}) }
           codeAnswer 200
         end
       rescue
@@ -126,7 +126,7 @@ module API
           new_object = new_object.offset(@offset.to_i)
         end
 
-        @returnValue = { content: new_object.as_json(:include => :newstexts) }
+        @returnValue = { content: new_object.as_json(:include => { :newstexts => {}, :attachments => {}}) }
 
         if (new_object.size == 0)
           codeAnswer 202
