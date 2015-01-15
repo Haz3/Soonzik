@@ -49,6 +49,7 @@ module API
     # 
     # ==== Options
     # 
+    # * +:token+ - Token Facebook
     # * +:email+ - GET variable -> The email of the user who provides the token
     # 
     def loginFB

@@ -1,0 +1,7 @@
+%h1= "SoonZik le site trop bien"
+%p= session[:u]
+%p
+  %span= "Actuellement "
+  %span= (session.has_key?(:u) && session[:u] != nil) ? "Connecté (#{session[:u]['username']})" : "Déconnecté"
+%br
+%div= @params
