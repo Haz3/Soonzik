@@ -1,19 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
+using Windows.Phone;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
 // Pour en savoir plus sur le modèle d'élément Page vierge, consultez la page http://go.microsoft.com/fwlink/?LinkId=391641
+using SoonZik.Controls;
 
 namespace SoonZik
 {
@@ -22,13 +16,27 @@ namespace SoonZik
     /// </summary>
     public sealed partial class MainPage : Page
     {
+        #region Attributes
+
+        public bool Menu = false;
+        public bool Player = false;
+        public int SelectedPivot = 8;
+        #endregion
+
+
+        #region Ctor
+
         public MainPage()
         {
             this.InitializeComponent();
-
+            DataContext = this;
             this.NavigationCacheMode = NavigationCacheMode.Required;
+
         }
 
+        #endregion
+
+        #region Method
         /// <summary>
         /// Invoqué lorsque cette page est sur le point d'être affichée dans un frame.
         /// </summary>
@@ -44,5 +52,7 @@ namespace SoonZik
             // Si vous utilisez le NavigationHelper fourni par certains modèles,
             // cet événement est géré automatiquement.
         }
+
+       #endregion
     }
 }

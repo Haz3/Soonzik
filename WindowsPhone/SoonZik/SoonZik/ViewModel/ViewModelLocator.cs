@@ -12,6 +12,7 @@
   See http://www.galasoft.ch/mvvm
 */
 
+using System.Linq.Expressions;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Ioc;
 using Microsoft.Practices.ServiceLocation;
@@ -37,6 +38,12 @@ namespace SoonZik.ViewModel
             SimpleIoc.Default.Register<NewsViewModel>();
             SimpleIoc.Default.Register<PackViewModel>();
             SimpleIoc.Default.Register<ProfilViewModel>();
+            SimpleIoc.Default.Register<MenuViewModel>();
+            SimpleIoc.Default.Register<ViewModel>();
+            SimpleIoc.Default.Register<BattleViewModel>();
+            SimpleIoc.Default.Register<GeolocViewModel>();
+            SimpleIoc.Default.Register<FriendViewModel>();
+            SimpleIoc.Default.Register<ConversationViewModel>();
         }
 
         public MainViewModel Main
@@ -68,6 +75,36 @@ namespace SoonZik.ViewModel
         public ProfilViewModel Profil
         {
             get { return ServiceLocator.Current.GetInstance<ProfilViewModel>(); }
+        }
+
+        public MenuViewModel Menu
+        {
+            get { return ServiceLocator.Current.GetInstance<MenuViewModel>(); }
+        }
+
+        public ViewModel View
+        {
+            get { return ServiceLocator.Current.GetInstance<ViewModel>(); }
+        }
+
+        public BattleViewModel Battle
+        {
+            get { return ServiceLocator.Current.GetInstance<BattleViewModel>(); }
+        }
+
+        public GeolocViewModel Geoloc
+        {
+            get { return ServiceLocator.Current.GetInstance<GeolocViewModel>(); }
+        }
+
+        public FriendViewModel Friend
+        {
+            get { return ServiceLocator.Current.GetInstance<FriendViewModel>(); }
+        }
+
+        public ConversationViewModel Conversation
+        {
+            get { return ServiceLocator.Current.GetInstance<ConversationViewModel>(); }
         }
 
         public static void Cleanup()

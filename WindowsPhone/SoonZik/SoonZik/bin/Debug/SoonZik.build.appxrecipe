@@ -28,6 +28,9 @@
     <AppxPackagedFile Include="C:\Users\Géry\documents\visual studio 2013\Projects\SoonZik\packages\MvvmLightLibs.4.4.32.7\lib\wpa81\GalaSoft.MvvmLight.Platform.dll">
       <PackagePath>GalaSoft.MvvmLight.Platform.dll</PackagePath>
     </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Géry\documents\visual studio 2013\Projects\SoonZik\LightStone\bin\Debug\LightStone.dll">
+      <PackagePath>LightStone.dll</PackagePath>
+    </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Géry\documents\visual studio 2013\Projects\SoonZik\packages\CommonServiceLocator.1.3\lib\portable-net4+sl5+netcore45+wpa81+wp8\Microsoft.Practices.ServiceLocation.dll">
       <PackagePath>Microsoft.Practices.ServiceLocation.dll</PackagePath>
     </AppxPackagedFile>
@@ -41,7 +44,6 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Géry\documents\visual studio 2013\Projects\SoonZik\SoonZik\Assets\SplashScreen.scale-240.png">
       <PackagePath>Assets\SplashScreen.scale-240.png</PackagePath>
-      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Géry\documents\visual studio 2013\Projects\SoonZik\SoonZik\Assets\Square71x71Logo.scale-240.png">
       <PackagePath>Assets\Square71x71Logo.scale-240.png</PackagePath>
@@ -55,11 +57,186 @@
       <PackagePath>Assets\WideLogo.scale-240.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
     </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Géry\documents\visual studio 2013\Projects\SoonZik\SoonZik\Resources\audio-off_icon.png">
+      <PackagePath>Resources\audio-off_icon.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Géry\documents\visual studio 2013\Projects\SoonZik\SoonZik\Resources\audio-on_icon.png">
+      <PackagePath>Resources\audio-on_icon.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Géry\documents\visual studio 2013\Projects\SoonZik\SoonZik\Resources\disc.png">
+      <PackagePath>Resources\disc.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Géry\documents\visual studio 2013\Projects\SoonZik\SoonZik\Resources\empty_list.png">
+      <PackagePath>Resources\empty_list.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Géry\documents\visual studio 2013\Projects\SoonZik\SoonZik\Resources\forward.png">
+      <PackagePath>Resources\forward.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Géry\documents\visual studio 2013\Projects\SoonZik\SoonZik\Resources\logo.scale-240.png">
+      <PackagePath>Resources\logo.scale-240.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Géry\documents\visual studio 2013\Projects\SoonZik\SoonZik\Resources\menu.png">
+      <PackagePath>Resources\menu.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Géry\documents\visual studio 2013\Projects\SoonZik\SoonZik\Resources\MenuAchat.png">
+      <PackagePath>Resources\MenuAchat.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Géry\documents\visual studio 2013\Projects\SoonZik\SoonZik\Resources\MenuBattle.png">
+      <PackagePath>Resources\MenuBattle.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Géry\documents\visual studio 2013\Projects\SoonZik\SoonZik\Resources\MenuDeco.png">
+      <PackagePath>Resources\MenuDeco.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Géry\documents\visual studio 2013\Projects\SoonZik\SoonZik\Resources\MenuExplorer.png">
+      <PackagePath>Resources\MenuExplorer.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Géry\documents\visual studio 2013\Projects\SoonZik\SoonZik\Resources\MenuFriend.png">
+      <PackagePath>Resources\MenuFriend.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Géry\documents\visual studio 2013\Projects\SoonZik\SoonZik\Resources\MenuMondeMusical.png">
+      <PackagePath>Resources\MenuMondeMusical.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Géry\documents\visual studio 2013\Projects\SoonZik\SoonZik\Resources\MenuNews.png">
+      <PackagePath>Resources\MenuNews.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Géry\documents\visual studio 2013\Projects\SoonZik\SoonZik\Resources\MenuPack.png">
+      <PackagePath>Resources\MenuPack.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Géry\documents\visual studio 2013\Projects\SoonZik\SoonZik\Resources\MenuPlaylist.png">
+      <PackagePath>Resources\MenuPlaylist.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Géry\documents\visual studio 2013\Projects\SoonZik\SoonZik\Resources\next_icon.png">
+      <PackagePath>Resources\next_icon.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Géry\documents\visual studio 2013\Projects\SoonZik\SoonZik\Resources\pause.png">
+      <PackagePath>Resources\pause.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Géry\documents\visual studio 2013\Projects\SoonZik\SoonZik\Resources\pause_icon.png">
+      <PackagePath>Resources\pause_icon.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Géry\documents\visual studio 2013\Projects\SoonZik\SoonZik\Resources\play.png">
+      <PackagePath>Resources\play.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Géry\documents\visual studio 2013\Projects\SoonZik\SoonZik\Resources\play_icon.png">
+      <PackagePath>Resources\play_icon.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Géry\documents\visual studio 2013\Projects\SoonZik\SoonZik\Resources\previous_icon.png">
+      <PackagePath>Resources\previous_icon.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Géry\documents\visual studio 2013\Projects\SoonZik\SoonZik\Resources\refresh.png">
+      <PackagePath>Resources\refresh.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Géry\documents\visual studio 2013\Projects\SoonZik\SoonZik\Resources\repeat.png">
+      <PackagePath>Resources\repeat.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Géry\documents\visual studio 2013\Projects\SoonZik\SoonZik\Resources\rewind.png">
+      <PackagePath>Resources\rewind.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Géry\documents\visual studio 2013\Projects\SoonZik\SoonZik\Resources\search.png">
+      <PackagePath>Resources\search.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Géry\documents\visual studio 2013\Projects\SoonZik\SoonZik\Resources\share.png">
+      <PackagePath>Resources\share.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Géry\documents\visual studio 2013\Projects\SoonZik\SoonZik\Resources\shuffle-0_icon.png">
+      <PackagePath>Resources\shuffle-0_icon.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Géry\documents\visual studio 2013\Projects\SoonZik\SoonZik\Resources\shuffle.png">
+      <PackagePath>Resources\shuffle.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Géry\documents\visual studio 2013\Projects\SoonZik\SoonZik\Resources\guetta.jpg">
+      <PackagePath>Resources\guetta.jpg</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Géry\documents\visual studio 2013\Projects\SoonZik\SoonZik\Resources\iphone5_background.jpg">
+      <PackagePath>Resources\iphone5_background.jpg</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Géry\documents\visual studio 2013\Projects\SoonZik\SoonZik\Resources\pic01.jpg">
+      <PackagePath>Resources\pic01.jpg</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Géry\documents\visual studio 2013\Projects\SoonZik\SoonZik\Resources\pic02.jpg">
+      <PackagePath>Resources\pic02.jpg</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Géry\documents\visual studio 2013\Projects\SoonZik\SoonZik\Resources\pic03.jpg">
+      <PackagePath>Resources\pic03.jpg</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Géry\documents\visual studio 2013\Projects\SoonZik\SoonZik\Resources\pic04.jpg">
+      <PackagePath>Resources\pic04.jpg</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Géry\documents\visual studio 2013\Projects\SoonZik\SoonZik\Resources\pic05.jpg">
+      <PackagePath>Resources\pic05.jpg</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Géry\documents\visual studio 2013\Projects\SoonZik\SoonZik\Resources\pic06.jpg">
+      <PackagePath>Resources\pic06.jpg</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Géry\documents\visual studio 2013\Projects\SoonZik\SoonZik\Resources\profil.jpg">
+      <PackagePath>Resources\profil.jpg</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Géry\documents\visual studio 2013\Projects\SoonZik\SoonZik\Resources\stromae.jpg">
+      <PackagePath>Resources\stromae.jpg</PackagePath>
+    </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Géry\documents\visual studio 2013\Projects\SoonZik\SoonZik\bin\Debug\App.xbf">
       <PackagePath>App.xbf</PackagePath>
     </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Géry\documents\visual studio 2013\Projects\SoonZik\SoonZik\bin\Debug\Controls\Acceuil.xbf">
+      <PackagePath>Controls\Acceuil.xbf</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Géry\documents\visual studio 2013\Projects\SoonZik\SoonZik\bin\Debug\Controls\Genre.xbf">
+      <PackagePath>Controls\Genre.xbf</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Géry\documents\visual studio 2013\Projects\SoonZik\SoonZik\bin\Debug\Controls\MenuControl.xbf">
+      <PackagePath>Controls\MenuControl.xbf</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Géry\documents\visual studio 2013\Projects\SoonZik\SoonZik\bin\Debug\Controls\NewsControl.xbf">
+      <PackagePath>Controls\NewsControl.xbf</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Géry\documents\visual studio 2013\Projects\SoonZik\SoonZik\bin\Debug\Controls\Player.xbf">
+      <PackagePath>Controls\Player.xbf</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Géry\documents\visual studio 2013\Projects\SoonZik\SoonZik\bin\Debug\Controls\PopUp.xbf">
+      <PackagePath>Controls\PopUp.xbf</PackagePath>
+    </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Géry\documents\visual studio 2013\Projects\SoonZik\SoonZik\bin\Debug\MainPage.xbf">
       <PackagePath>MainPage.xbf</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Géry\documents\visual studio 2013\Projects\SoonZik\SoonZik\bin\Debug\Views\Accueil.xbf">
+      <PackagePath>Views\Accueil.xbf</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Géry\documents\visual studio 2013\Projects\SoonZik\SoonZik\bin\Debug\Views\Battle.xbf">
+      <PackagePath>Views\Battle.xbf</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Géry\documents\visual studio 2013\Projects\SoonZik\SoonZik\bin\Debug\Views\Connexion.xbf">
+      <PackagePath>Views\Connexion.xbf</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Géry\documents\visual studio 2013\Projects\SoonZik\SoonZik\bin\Debug\Views\Conversation.xbf">
+      <PackagePath>Views\Conversation.xbf</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Géry\documents\visual studio 2013\Projects\SoonZik\SoonZik\bin\Debug\Views\CustomSplashScreen.xbf">
+      <PackagePath>Views\CustomSplashScreen.xbf</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Géry\documents\visual studio 2013\Projects\SoonZik\SoonZik\bin\Debug\Views\Friends.xbf">
+      <PackagePath>Views\Friends.xbf</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Géry\documents\visual studio 2013\Projects\SoonZik\SoonZik\bin\Debug\Views\Geoloc.xbf">
+      <PackagePath>Views\Geoloc.xbf</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Géry\documents\visual studio 2013\Projects\SoonZik\SoonZik\bin\Debug\Views\MainView.xbf">
+      <PackagePath>Views\MainView.xbf</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Géry\documents\visual studio 2013\Projects\SoonZik\SoonZik\bin\Debug\Views\News.xbf">
+      <PackagePath>Views\News.xbf</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Géry\documents\visual studio 2013\Projects\SoonZik\SoonZik\bin\Debug\Views\Packs.xbf">
+      <PackagePath>Views\Packs.xbf</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Géry\documents\visual studio 2013\Projects\SoonZik\SoonZik\bin\Debug\Views\Playlist.xbf">
+      <PackagePath>Views\Playlist.xbf</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Géry\documents\visual studio 2013\Projects\SoonZik\SoonZik\bin\Debug\Views\Profil.xbf">
+      <PackagePath>Views\Profil.xbf</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Géry\documents\visual studio 2013\Projects\SoonZik\SoonZik\bin\Debug\Views\Search.xbf">
+      <PackagePath>Views\Search.xbf</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Géry\documents\visual studio 2013\Projects\SoonZik\SoonZik\bin\Debug\SoonZik.xr.xml">
       <PackagePath>SoonZik.xr.xml</PackagePath>

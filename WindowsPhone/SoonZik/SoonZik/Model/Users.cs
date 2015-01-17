@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -12,9 +13,9 @@ namespace SoonZik.Model
         #region Attribute
 
         private int _id;
-        private string _email;
-        private string _fristName;
-        private string _lastName;
+        public string Email { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
         private DateTime _birthday;
         private string _pathImage;
         private string _description;
@@ -27,13 +28,18 @@ namespace SoonZik.Model
         private string _signin;
         private bool _activated;
 
+        public string MyLastName;
+
         #endregion
 
         #region Ctor
 
-        public Users()
+        public Users(string firstName, string lastName, string email)
         {
-            
+            FirstName = firstName;
+            LastName = lastName;
+            Email = email;
+            MyLastName = LastName;
         }
         #endregion
     }

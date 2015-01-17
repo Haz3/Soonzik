@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Threading.Tasks;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.Foundation;
@@ -17,6 +18,7 @@ using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Navigation;
 
 // Pour plus d'informations sur le modèle Application vide, consultez la page http://go.microsoft.com/fwlink/?LinkId=391641
+using SoonZik.Views;
 
 namespace SoonZik
 {
@@ -69,8 +71,18 @@ namespace SoonZik
                     // TODO: chargez l'état de l'application précédemment suspendue
                 }
 
+                if (e.PreviousExecutionState != ApplicationExecutionState.Running)
+                {
+                    var loadStage = (e.PreviousExecutionState == ApplicationExecutionState.Terminated);
+                    var splash = new CustomSplashScreen(e.SplashScreen, loadStage);
+                    Window.Current.Content = splash;
+                }
+
+                Window.Current.Activate();
+                RemoveExtendedSplash(rootFrame);
+
                 // Placez le frame dans la fenêtre active
-                Window.Current.Content = rootFrame;
+                //Window.Current.Content = rootFrame;
             }
 
             if (rootFrame.Content == null)
@@ -99,6 +111,12 @@ namespace SoonZik
 
             // Vérifiez que la fenêtre actuelle est active
             Window.Current.Activate();
+        }
+
+        private async void RemoveExtendedSplash(Frame rootFrame)
+        {
+            await Task.Delay(TimeSpan.FromSeconds(5));
+            Window.Current.Content = rootFrame;
         }
 
         /// <summary>

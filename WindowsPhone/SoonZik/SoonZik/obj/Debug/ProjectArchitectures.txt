@@ -1,1 +1,2 @@
+C:\Users\Géry\documents\visual studio 2013\Projects\SoonZik\LightStone\LightStone.csproj;neutral
 C:\Users\Géry\documents\visual studio 2013\Projects\SoonZik\SoonZik\SoonZik.csproj;neutral
