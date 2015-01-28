@@ -6,6 +6,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
+    x:Name="TestNegga"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid x:Name="GlobalGrid" Style="{StaticResource LayoutGridStyle}">
@@ -16,24 +17,32 @@
 
         <Grid Grid.Row="0" Background="Transparent">
             <Image Source="../Resources/logo.png" HorizontalAlignment="Left" Height="100" Width="150" Grid.Row="0" VerticalAlignment="Center"/>
-            <Image Source="../Resources/search.png" Height="40" HorizontalAlignment="Right" Margin="0,15,20,15" />
+            <Image Source="../Resources/Icones/search.png" Height="40" HorizontalAlignment="Right" Margin="0,15,20,15" />
         </Grid>
         <Pivot Grid.Row="1" x:Name="PivotGlobal" HeaderTemplate="{StaticResource SizeHeaderGlobalPivot}" Foreground="#FF534B4B">
             <PivotItem Header="Menu" x:Name="MenuItem">
                 <ScrollViewer>
                     <StackPanel>
-                        <Button x:ConnectionId='1' Style="{StaticResource ButtonStyle1}" Width="300" HorizontalAlignment="Center" Content="Mon Profil"                           />
-                        <Button Style="{StaticResource ButtonStyle1}" Width="300" HorizontalAlignment="Center" Content="News"/>
-                        <Button Style="{StaticResource ButtonStyle1}" Width="300" HorizontalAlignment="Center" Content="Explorer"/>
-                        <Button Style="{StaticResource ButtonStyle1}" Width="300" HorizontalAlignment="Center" Content="Packs"/>
-                        <Button Style="{StaticResource ButtonStyle1}" Width="300" HorizontalAlignment="Center" Content="Monde Musical"/>
-                        <Button Style="{StaticResource ButtonStyle1}" Width="300" HorizontalAlignment="Center" Content="Battle"/>
-                        <Button Style="{StaticResource ButtonStyle1}" Width="300" HorizontalAlignment="Center" Content="Playlists"/>
-                        <Button Style="{StaticResource ButtonStyle1}" Width="300" HorizontalAlignment="Center" Content="Amis"/>
-                        <Button Style="{StaticResource ButtonStyle1}" Width="300" HorizontalAlignment="Center" Content="Achats"/>
-                        <Button Style="{StaticResource ButtonStyle1}" Width="300" HorizontalAlignment="Center" Content="Deconnexion"/>
+                        <Button Style="{StaticResource ButtonStyle1}" Width="304" HorizontalAlignment="Center" Command="{Binding ProfilCommand}" MinHeight="58">
+                            <Image Source="../Resources/Icones/AchatMenuImage.png"/>
+                        </Button>
+                        <Button Style="{StaticResource ButtonStyle1}" Width="300" HorizontalAlignment="Center" Content="News" Command="{Binding NewsCommand}" MinHeight="58"/>
+                        <Button Style="{StaticResource ButtonStyle1}" Width="300" HorizontalAlignment="Center" Content="Explorer" Command="{Binding ExplorerCommand}" MinHeight="58"/>
+                        <Button Style="{StaticResource ButtonStyle1}" Width="300" HorizontalAlignment="Center" Content="Packs" Command="{Binding PacksCommand}" MinHeight="58"/>
+                        <Button Style="{StaticResource ButtonStyle1}" Width="300" HorizontalAlignment="Center" Content="Monde Musical" Command="{Binding MondeMusicalCommand}" MinHeight="58"/>
+                        <Button Style="{StaticResource ButtonStyle1}" Width="300" HorizontalAlignment="Center" Content="Battle" Command="{Binding BattleCommand}" MinHeight="58"/>
+                        <Button Style="{StaticResource ButtonStyle1}" Width="300" HorizontalAlignment="Center" Content="Playlists" Command="{Binding PlaylistCommand}" MinHeight="58"/>
+                        <Button Style="{StaticResource ButtonStyle1}" Width="300" HorizontalAlignment="Center" Content="Amis" Command="{Binding AmisCommand}" MinHeight="58"/>
+                        <Button Style="{StaticResource ButtonStyle1}" Width="300" HorizontalAlignment="Center" Command="{Binding AchatCommand}" MinHeight="58">
+                            <Image Source="../Resources/Icones/AchatMenuImage.png"/>
+                        </Button>
+                        <Button Style="{StaticResource ButtonStyle1}" Width="300" HorizontalAlignment="Center" Content="{Binding ConnexionString}" Command="{Binding ConnexionCommand}" MinHeight="58"/>
                     </StackPanel>
                 </ScrollViewer>
+            </PivotItem>
+
+            <PivotItem Header="Profil" x:Name="ProfilItem">
+                <local:Profil />
             </PivotItem>
 
             <PivotItem Header="News" x:Name="NewsItem">
@@ -68,9 +77,6 @@
 
             </PivotItem>
 
-            <PivotItem Header="Profil" x:Name="ProfilItem">
-                <local:Profil />
-            </PivotItem>
         </Pivot>
     </Grid>
 </Page>

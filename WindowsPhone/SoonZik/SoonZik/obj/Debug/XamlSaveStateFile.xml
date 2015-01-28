@@ -1,6 +1,8 @@
 <XamlCompilerSaveState>
   <ReferenceAssemblyList>
-    <LocalAssembly PathName="c:\users\géry\documents\visual studio 2013\projects\soonzik\soonzik\obj\debug\intermediatexaml\soonzik.exe" HashGuid="4366925f-b1fa-9051-2f77-6229d0a28d66" />
+    <LocalAssembly PathName="c:\users\géry\documents\visual studio 2013\projects\soonzik\soonzik\obj\debug\intermediatexaml\soonzik.exe" HashGuid="4db6f79e-10dc-ae3c-8ff6-7008c4776cd7" />
+    <ReferenceAssembly PathName="c:\users\géry\documents\visual studio 2013\projects\soonzik\packages\facebook.client.0.9.1-alpha\lib\portable-win81+wpa81\facebook.client.dll" HashGuid="aeda242f-e768-3f5a-2625-7b5fdf37a42e" />
+    <ReferenceAssembly PathName="c:\users\géry\documents\visual studio 2013\projects\soonzik\packages\facebook.6.8.0\lib\portable-win81+wpa81\facebook.dll" HashGuid="bedf50c2-16f9-eaae-1bc4-d838270a0113" />
     <ReferenceAssembly PathName="c:\users\géry\documents\visual studio 2013\projects\soonzik\packages\mvvmlightlibs.4.4.32.7\lib\wpa81\galasoft.mvvmlight.dll" HashGuid="77fb4b2e-8ec5-88d5-d8e7-768d248c7bbc" />
     <ReferenceAssembly PathName="c:\users\géry\documents\visual studio 2013\projects\soonzik\packages\mvvmlightlibs.4.4.32.7\lib\wpa81\galasoft.mvvmlight.extras.dll" HashGuid="28bb2089-c7a4-73bb-7a72-1ea8b02698b0" />
     <ReferenceAssembly PathName="c:\users\géry\documents\visual studio 2013\projects\soonzik\packages\mvvmlightlibs.4.4.32.7\lib\wpa81\galasoft.mvvmlight.platform.dll" HashGuid="c769c228-b45f-ca29-24b7-7495dae962ed" />

@@ -14,6 +14,9 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
 // Pour en savoir plus sur le modèle d’élément Page vierge, consultez la page http://go.microsoft.com/fwlink/?LinkID=390556
+using GalaSoft.MvvmLight.Ioc;
+using Microsoft.Practices.ServiceLocation;
+using SoonZik.ViewModel;
 
 namespace SoonZik.Views
 {
@@ -24,7 +27,18 @@ namespace SoonZik.Views
     {
         public MainView()
         {
+            DataContext = new MainViewModel();
             this.InitializeComponent();
+            this.Loaded += OnLoaded;
+        }
+
+        private void OnLoaded(object sender, RoutedEventArgs routedEventArgs)
+        {
+            this.PivotGlobal.Loaded += delegate(object o, RoutedEventArgs args)
+            {
+                var vm = DataContext as MainViewModel;
+                if (vm != null) vm.GetPivotExecute.Execute(this.PivotGlobal);
+            };
         }
 
         /// <summary>
@@ -34,11 +48,6 @@ namespace SoonZik.Views
         /// Ce paramètre est généralement utilisé pour configurer la page.</param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-        }
-
-        private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
-        {
-            PivotGlobal.SelectedItem = ProfilItem;
         }
     }
 }

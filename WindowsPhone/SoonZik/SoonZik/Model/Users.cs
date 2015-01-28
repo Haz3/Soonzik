@@ -16,17 +16,17 @@ namespace SoonZik.Model
         public string Email { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        private DateTime _birthday;
-        private string _pathImage;
-        private string _description;
-        private string _phoneNumber;
-        private Address _addre;
-        private string _facebook;
-        private string _twitter;
-        private string _gplus;
-        private string _idApi;
-        private string _signin;
-        private bool _activated;
+        public DateTime Birthday { get; set; }
+        public string PathImage { get; set; }
+        public string Description { get; set; }
+        public string PhoneNumber { get; set; }
+        public Address Addre { get; set; }
+        public string Facebook { get; set; }
+        public string Twitter { get; set; }
+        public string Gplus { get; set; }
+        public string IdApi { get; set; }
+        public string Signin { get; set; }
+        public bool Activated { get; set; }
 
         public string MyLastName;
 

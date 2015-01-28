@@ -11,8 +11,20 @@
     <RootPropertyPathName Name="Group" />
     <RootPropertyPathName Name="ItemSource" />
     <RootPropertyPathName Name="CollectionGroups" />
+    <RootPropertyPathName Name="ConnexionString" />
+    <RootPropertyPathName Name="ConnexionCommand" />
+    <RootPropertyPathName Name="AchatCommand" />
+    <RootPropertyPathName Name="AmisCommand" />
+    <RootPropertyPathName Name="PlaylistCommand" />
+    <RootPropertyPathName Name="BattleCommand" />
+    <RootPropertyPathName Name="MondeMusicalCommand" />
+    <RootPropertyPathName Name="PacksCommand" />
+    <RootPropertyPathName Name="ExplorerCommand" />
+    <RootPropertyPathName Name="NewsCommand" />
+    <RootPropertyPathName Name="ProfilCommand" />
     <RootPropertyPathName Name="BitmapImage" />
     <RootPropertyPathName Name="Datas" />
+    <RootPropertyPathName Name="Title" />
   </Roots.PropertyPathNames>
   <Roots.RootTypes>
     <RootType FullName="Windows.UI.Xaml.Application">
@@ -46,9 +58,11 @@
       <RootProperty Name="FontSize" />
       <RootProperty Name="BorderBrush" />
       <RootProperty Name="Background" />
+      <RootProperty Name="Foreground" />
       <RootProperty Name="Margin" />
       <RootProperty Name="Style" />
-      <RootEvent Name="Click" />
+      <RootProperty Name="Command" />
+      <RootProperty Name="MinHeight" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.Control">
       <RootProperty Name="Background" />
@@ -135,11 +149,11 @@
       <RootProperty Name="TextAlignment" />
       <RootProperty Name="FontWeight" />
       <RootProperty Name="Padding" />
+      <RootProperty Name="DataContext" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Data.Binding">
       <RootProperty Name="Converter" />
       <RootProperty Name="Source" />
-      <RootProperty Name="Path" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.UserControl">
       <RootProperty Name="Content" />
@@ -199,6 +213,13 @@
       <RootProperty Name="Margin" />
       <RootProperty Name="Height" />
       <RootProperty Name="Text" />
+    </RootType>
+    <RootType FullName="Facebook.Client.Controls.LoginButton">
+      <RootProperty Name="Margin" />
+      <RootProperty Name="HorizontalAlignment" />
+      <RootProperty Name="VerticalAlignment" />
+      <RootProperty Name="ApplicationId" />
+      <RootEvent Name="SessionStateChanged" />
     </RootType>
     <RootType FullName="SoonZik.Views.Connexion" />
     <RootType FullName="Windows.UI.Xaml.Controls.StackPanel">
@@ -265,10 +286,10 @@
       <RootProperty Name="Header" />
       <RootProperty Name="Content" />
     </RootType>
-    <RootType FullName="SoonZik.Views.Profil" />
     <RootType FullName="SoonZik.Views.Playlist" />
     <RootType FullName="SoonZik.Views.Packs" />
     <RootType FullName="SoonZik.Views.News" />
+    <RootType FullName="SoonZik.Views.Profil" />
     <RootType FullName="Windows.UI.Xaml.Controls.ScrollViewer">
       <RootProperty Name="Content" />
     </RootType>

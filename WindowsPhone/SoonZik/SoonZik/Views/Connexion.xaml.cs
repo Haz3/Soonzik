@@ -14,6 +14,7 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
 // Pour en savoir plus sur le modèle d’élément Page vierge, consultez la page http://go.microsoft.com/fwlink/?LinkID=390556
+using Facebook.Client.Controls;
 
 namespace SoonZik.Views
 {
@@ -34,6 +35,12 @@ namespace SoonZik.Views
         /// Ce paramètre est généralement utilisé pour configurer la page.</param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
+        }
+
+        private void LoginButton_OnSessionStateChanged(object sender, SessionStateChangedEventArgs e)
+        {
+            this.GlobalGrid.Visibility = (e.SessionState == FacebookSessionState.Opened) ?
+                                   Visibility.Visible : Visibility.Collapsed;
         }
     }
 }

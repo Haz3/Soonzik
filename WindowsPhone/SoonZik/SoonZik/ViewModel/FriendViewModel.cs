@@ -1,14 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.Globalization;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
-using Windows.UI.Xaml.Data;
 using ConvertedListViewApp;
+using GalaSoft.MvvmLight.Command;
 using SoonZik.Model;
 using  GalaSoft.MvvmLight;
 
@@ -16,6 +11,7 @@ namespace SoonZik.ViewModel
 {
     public class FriendViewModel : ViewModelBase
     {
+        #region Attribute
         public ObservableCollection<Users> Sources { get; set; }
         private List<AlphaKeyGroups<Users>> _itemSource;
         public List<AlphaKeyGroups<Users>> ItemSource
@@ -27,8 +23,18 @@ namespace SoonZik.ViewModel
                 RaisePropertyChanged("ItemSource");
             }
         }
+
+        public RelayCommand TappedCommand
+        {
+            get; private set; 
+        }
+
+        #endregion
+
+        #region Ctor
         public FriendViewModel()
         {
+            TappedCommand = new RelayCommand(ExecuteTappedCommand, CanExecute);
             Sources = new ObservableCollection<Users>()
             {
                 new Users("Gery", "Baudry", "gery@budry.com"),
@@ -44,5 +50,20 @@ namespace SoonZik.ViewModel
 
             ItemSource = AlphaKeyGroups<Users>.CreateGroups(Sources, CultureInfo.CurrentUICulture, s => s.MyLastName, true);
         }
+
+        #endregion
+
+        #region Method
+        private bool CanExecute()
+        {
+            throw new NotImplementedException();
+        }
+
+        private void ExecuteTappedCommand()
+        {
+            //Allez sur le profil de l'element
+        }
+
+        #endregion
     }
 }

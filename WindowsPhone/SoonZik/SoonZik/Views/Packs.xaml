@@ -41,7 +41,7 @@
         </Grid>
         <Grid Background="Transparent" VerticalAlignment="Bottom" Height="252" RenderTransformOrigin="0.5,0.5">
                 <ScrollViewer>
-                    <TextBlock Text="Info du Pack" HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="Black" FontSize="20"></TextBlock>
+                    <TextBlock DataContext="{Binding Datas}" Text="{Binding Title}"  HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="Red" FontSize="20"></TextBlock>
                 </ScrollViewer>
         </Grid>
     </Grid>
