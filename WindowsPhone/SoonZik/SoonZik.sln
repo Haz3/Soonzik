@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.30501.0
+VisualStudioVersion = 12.0.30723.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SoonZik", "SoonZik\SoonZik.csproj", "{0B3D3F97-A973-44B0-8507-4AA47BE9B684}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LightStone", "LightStone\LightStone.csproj", "{FCC63A57-33DE-4607-A0A5-9CEDBDE34A50}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,14 @@ Global
 		{0B3D3F97-A973-44B0-8507-4AA47BE9B684}.Release|x86.ActiveCfg = Release|x86
 		{0B3D3F97-A973-44B0-8507-4AA47BE9B684}.Release|x86.Build.0 = Release|x86
 		{0B3D3F97-A973-44B0-8507-4AA47BE9B684}.Release|x86.Deploy.0 = Release|x86
+		{FCC63A57-33DE-4607-A0A5-9CEDBDE34A50}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FCC63A57-33DE-4607-A0A5-9CEDBDE34A50}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FCC63A57-33DE-4607-A0A5-9CEDBDE34A50}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{FCC63A57-33DE-4607-A0A5-9CEDBDE34A50}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{FCC63A57-33DE-4607-A0A5-9CEDBDE34A50}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FCC63A57-33DE-4607-A0A5-9CEDBDE34A50}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FCC63A57-33DE-4607-A0A5-9CEDBDE34A50}.Release|ARM.ActiveCfg = Release|Any CPU
+		{FCC63A57-33DE-4607-A0A5-9CEDBDE34A50}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

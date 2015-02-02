@@ -82,6 +82,24 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\Acceuil.xaml.cs">
+      <DependentUpon>Acceuil.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Genre.xaml.cs">
+      <DependentUpon>Genre.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\MenuControl.xaml.cs">
+      <DependentUpon>MenuControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\NewsControl.xaml.cs">
+      <DependentUpon>NewsControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Player.xaml.cs">
+      <DependentUpon>Player.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\PopUp.xaml.cs">
+      <DependentUpon>PopUp.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
@@ -105,22 +123,43 @@
     <Compile Include="Model\Tweet.cs" />
     <Compile Include="Model\Users.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utils\AlphaKeyGroups.cs" />
     <Compile Include="ViewModel\AccueilViewModel.cs" />
+    <Compile Include="ViewModel\BattleViewModel.cs" />
     <Compile Include="ViewModel\ConnexionViewModel.cs" />
+    <Compile Include="ViewModel\ConversationViewModel.cs" />
+    <Compile Include="ViewModel\FriendViewModel.cs" />
     <Compile Include="ViewModel\GeolocViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
+    <Compile Include="ViewModel\MenuViewModel.cs" />
     <Compile Include="ViewModel\NewsViewModel.cs" />
     <Compile Include="ViewModel\PackViewModel.cs" />
     <Compile Include="ViewModel\ProfilViewModel.cs" />
+    <Compile Include="ViewModel\ViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Compile Include="Views\Accueil.xaml.cs">
       <DependentUpon>Accueil.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Battle.xaml.cs">
+      <DependentUpon>Battle.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Connexion.xaml.cs">
       <DependentUpon>Connexion.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Conversation.xaml.cs">
+      <DependentUpon>Conversation.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\CustomSplashScreen.xaml.cs">
+      <DependentUpon>CustomSplashScreen.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Friends.xaml.cs">
+      <DependentUpon>Friends.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Geoloc.xaml.cs">
       <DependentUpon>Geoloc.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MainView.xaml.cs">
+      <DependentUpon>MainView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\News.xaml.cs">
       <DependentUpon>News.xaml</DependentUpon>
@@ -128,8 +167,14 @@
     <Compile Include="Views\Packs.xaml.cs">
       <DependentUpon>Packs.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Playlist.xaml.cs">
+      <DependentUpon>Playlist.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Profil.xaml.cs">
       <DependentUpon>Profil.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Search.xaml.cs">
+      <DependentUpon>Search.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -144,19 +189,75 @@
     <Content Include="Assets\Square71x71Logo.scale-240.png" />
     <Content Include="Assets\StoreLogo.scale-240.png" />
     <Content Include="Assets\WideLogo.scale-240.png" />
+    <Content Include="Resources\audio-off_icon.png" />
+    <Content Include="Resources\audio-on_icon.png" />
+    <Content Include="Resources\disc.png" />
+    <Content Include="Resources\empty_list.png" />
     <Content Include="Resources\forward.png" />
-    <Content Include="Resources\logo.png" />
+    <Content Include="Resources\guetta.jpg" />
+    <Content Include="Resources\iphone5_background.jpg" />
+    <Content Include="Resources\logo.scale-240.png" />
+    <Content Include="Resources\menu.png" />
+    <Content Include="Resources\MenuAchat.png" />
+    <Content Include="Resources\MenuBattle.png" />
+    <Content Include="Resources\MenuDeco.png" />
+    <Content Include="Resources\MenuExplorer.png" />
+    <Content Include="Resources\MenuFriend.png" />
+    <Content Include="Resources\MenuMondeMusical.png" />
+    <Content Include="Resources\MenuNews.png" />
+    <Content Include="Resources\MenuPack.png" />
+    <Content Include="Resources\MenuPlaylist.png" />
+    <Content Include="Resources\next_icon.png" />
     <Content Include="Resources\pause.png" />
+    <Content Include="Resources\pause_icon.png" />
+    <Content Include="Resources\pic01.jpg" />
+    <Content Include="Resources\pic02.jpg" />
+    <Content Include="Resources\pic03.jpg" />
+    <Content Include="Resources\pic04.jpg" />
+    <Content Include="Resources\pic05.jpg" />
+    <Content Include="Resources\pic06.jpg" />
     <Content Include="Resources\play.png" />
+    <Content Include="Resources\play_icon.png" />
+    <Content Include="Resources\previous_icon.png" />
+    <Content Include="Resources\profil.jpg" />
+    <Content Include="Resources\refresh.png" />
     <Content Include="Resources\repeat.png" />
     <Content Include="Resources\rewind.png" />
+    <Content Include="Resources\search.png" />
+    <Content Include="Resources\share.png" />
+    <Content Include="Resources\shuffle-0_icon.png" />
     <Content Include="Resources\shuffle.png" />
+    <Content Include="Resources\stromae.jpg" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Controls\Acceuil.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\Genre.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\MenuControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\NewsControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\Player.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\PopUp.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -165,11 +266,31 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\Battle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Connexion.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\Conversation.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\CustomSplashScreen.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Friends.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Geoloc.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\MainView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -181,14 +302,20 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\Playlist.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Profil.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\Search.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Utils\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Reference Include="GalaSoft.MvvmLight">
       <HintPath>..\packages\MvvmLightLibs.4.4.32.7\lib\wpa81\GalaSoft.MvvmLight.dll</HintPath>
@@ -205,6 +332,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\LightStone\LightStone.csproj">
+      <Project>{fcc63a57-33de-4607-a0a5-9cedbde34a50}</Project>
+      <Name>LightStone</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '12.0' ">
     <VisualStudioVersion>12.0</VisualStudioVersion>

@@ -8,19 +8,10 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
+    
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="70"/>
-            <RowDefinition Height="500"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-
-
-        <!-- Row 1 -->
-        <TextBlock x:Name="TitleBlock" Text="Geolocalisation" FontSize="50" Grid.Row="0"/>
-
         <!-- Row 2 -->
-
+        
         <!-- Row 3 -->
     </Grid>
 </Page>

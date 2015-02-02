@@ -1,0 +1,76 @@
+﻿<Page
+    x:Class="SoonZik.Views.MainView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:SoonZik.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid x:Name="GlobalGrid" Style="{StaticResource LayoutGridStyle}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="70"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0" Background="Transparent">
+            <Image Source="../Resources/logo.png" HorizontalAlignment="Left" Height="100" Width="150" Grid.Row="0" VerticalAlignment="Center"/>
+            <Image Source="../Resources/search.png" Height="40" HorizontalAlignment="Right" Margin="0,15,20,15" />
+        </Grid>
+        <Pivot Grid.Row="1" x:Name="PivotGlobal" HeaderTemplate="{StaticResource SizeHeaderGlobalPivot}" Foreground="#FF534B4B">
+            <PivotItem Header="Menu" x:Name="MenuItem">
+                <ScrollViewer>
+                    <StackPanel>
+                        <Button Style="{StaticResource ButtonStyle1}" Width="300" HorizontalAlignment="Center" Content="Mon Profil" Click="ButtonBase_OnClick"/>
+                        <Button Style="{StaticResource ButtonStyle1}" Width="300" HorizontalAlignment="Center" Content="News"/>
+                        <Button Style="{StaticResource ButtonStyle1}" Width="300" HorizontalAlignment="Center" Content="Explorer"/>
+                        <Button Style="{StaticResource ButtonStyle1}" Width="300" HorizontalAlignment="Center" Content="Packs"/>
+                        <Button Style="{StaticResource ButtonStyle1}" Width="300" HorizontalAlignment="Center" Content="Monde Musical"/>
+                        <Button Style="{StaticResource ButtonStyle1}" Width="300" HorizontalAlignment="Center" Content="Battle"/>
+                        <Button Style="{StaticResource ButtonStyle1}" Width="300" HorizontalAlignment="Center" Content="Playlists"/>
+                        <Button Style="{StaticResource ButtonStyle1}" Width="300" HorizontalAlignment="Center" Content="Amis"/>
+                        <Button Style="{StaticResource ButtonStyle1}" Width="300" HorizontalAlignment="Center" Content="Achats"/>
+                        <Button Style="{StaticResource ButtonStyle1}" Width="300" HorizontalAlignment="Center" Content="Deconnexion"/>
+                    </StackPanel>
+                </ScrollViewer>
+            </PivotItem>
+
+            <PivotItem Header="News" x:Name="NewsItem">
+                <local:News />
+            </PivotItem>
+
+            <PivotItem Header="Explorer" x:Name="ExplorerItem">
+
+            </PivotItem>
+
+            <PivotItem Header="Packs" x:Name="PacksItem">
+                <local:Packs/>
+            </PivotItem>
+
+            <PivotItem Header="Monde Musical" x:Name="MondeMusicalItem">
+
+            </PivotItem>
+
+            <PivotItem Header="Battle" x:Name="BattleItem">
+                <local:Battle />
+            </PivotItem>
+
+            <PivotItem Header="Playlists" x:Name="PlaylistItem">
+                <local:Playlist />
+            </PivotItem>
+
+            <PivotItem Header="Amis" x:Name="AmisItem">
+                <local:Friends/>
+            </PivotItem>
+
+            <PivotItem Header="Achats" x:Name="AchatItem">
+
+            </PivotItem>
+
+            <PivotItem Header="Profil" x:Name="ProfilItem">
+                <local:Profil />
+            </PivotItem>
+        </Pivot>
+    </Grid>
+</Page>

@@ -1,0 +1,28 @@
+﻿<Page
+    x:Class="SoonZik.Views.CustomSplashScreen"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:SoonZik.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <!-- Page de gestion du SplashScreen avec ProgressRing de chargement -->
+
+    <Grid Background="#d3d7da">
+        <Grid x:Name="LogoGrid">
+            <TextBlock Text="Chargement" Foreground="#40a8e2" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="50" Margin="64,210,65,370"></TextBlock> 
+        </Grid>
+        <Grid Background="#d3d7da" x:Name="ProgressRingGrid" Height="80" VerticalAlignment="Center" Width="80" Margin="160,380,160,180">
+            <ProgressRing
+                IsActive="True"
+                MaxHeight="70"
+                MaxWidth="70"
+                Height="70"
+                Width="70"
+                Foreground="#40a8e2"
+                Background="Transparent"/>
+        </Grid>
+    </Grid>
+</Page>
