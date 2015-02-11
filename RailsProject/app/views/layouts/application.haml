@@ -1,7 +1,7 @@
 !!! 5
 %html
   %head
-    %title= "SoonZik"
+    %title= "SoonZik | Welcome"
     %meta{ :name => "viewport", :content => "width=device-width, initial-scale=1.0" }
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
     = stylesheet_link_tag    @controller, media: 'all', 'data-turbolinks-track' => true if @controller != ""
@@ -10,6 +10,31 @@
     = javascript_include_tag "vendor/modernizr"
     = csrf_meta_tags
   %body
+  %header
+    %nav.top-bar{"data-topbar" => "", :role => "navigation"}
+      %ul.title-area
+        %li.name
+          %a
+            %img#logo-soonzik{:href => "#", :src => "logo-soonzik.png"}
+            // Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone
+            %li.toggle-topbar.menu-icon
+              %a{:href => "#"}
+                %span
+          %section.top-bar-section
+          // Left Nav Section
+          %ul.left
+            %li.has-form
+              .row.collapse
+                .large-12.small-9.columns
+                  %img.loupe{:src => "loupe.png"}
+                  %input{:placeholder => "Recherchez des Shtroumpfs, musiques, personnes", :type => "text"}
+          // Right Nav Section
+          %ul.right
+            %img.photo-profile{:src => "stefan-bodzin.jpg"}
+            .profile
+              %p Stefan Bodzin
+              %a Modifier le profil
+            %img.menu{:src => "menu.png"}
     %p
       %p= @session
       - if user_signed_in?
