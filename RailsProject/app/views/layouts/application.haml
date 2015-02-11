@@ -9,32 +9,31 @@
     = javascript_include_tag @controller, 'data-turbolinks-track' => true if @controller != ""
     = javascript_include_tag "vendor/modernizr"
     = csrf_meta_tags
-  %body
-  %header
+
+  %header.contain-to-grid
     %nav.top-bar{"data-topbar" => "", :role => "navigation"}
       %ul.title-area
         %li.name
           %a
-            %img#logo-soonzik{:href => "#", :src => "logo-soonzik.png"}
-            // Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone
-            %li.toggle-topbar.menu-icon
-              %a{:href => "#"}
-                %span
-          %section.top-bar-section
-          // Left Nav Section
+            =image_tag  "logo-soonzik.png", :class => "soonzik-logo"
+          %li.toggle-topbar.menu-icon
+            %a{:href => "#"}
+              %span Menu
+        %section.top-bar-section
           %ul.left
             %li.has-form
               .row.collapse
                 .large-12.small-9.columns
-                  %img.loupe{:src => "loupe.png"}
+                  =image_tag "loupe.png", :class => "loupe"
                   %input{:placeholder => "Recherchez des Shtroumpfs, musiques, personnes", :type => "text"}
           // Right Nav Section
           %ul.right
-            %img.photo-profile{:src => "stefan-bodzin.jpg"}
+            =image_tag "stefan-bodzin.jpg", :class => "photo-profile"
             .profile
               %p Stefan Bodzin
               %a Modifier le profil
-            %img.menu{:src => "menu.png"}
+            =image_tag "menu.png", :class => "menu"
+  %body
     %p
       %p= @session
       - if user_signed_in?

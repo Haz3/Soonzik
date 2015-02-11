@@ -18,3 +18,24 @@
 
 @import "foundation_and_overrides";
 /* Add imports of custom sass/scss files here */
+
+.soonzik-logo {
+    margin-left: 20px;
+    float: left;
+    width: 200px;
+    height: 60px;
+    display: block;
+}
+
+.loupe {
+	width: 20px;
+	position: absolute;
+	margin-top: 20px;
+}
+
+.photo-profile {
+	border-radius: 100%;
+	width: 50px;
+	margin-top: 5px;
+	margin-right: 235px;
+}
