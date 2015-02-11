@@ -39,7 +39,7 @@ gem 'thin', platforms: [:x64_mingw,:mingw, :mswin]
 gem 'haml', '~> 4.0.5'
 gem "haml-rails"
 # Use SCSS for stylesheets
-gem 'sass-rails', '~> 4.0.3'
+gem 'sass-rails'#, '~> 4.0.3'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .js.coffee assets and views
@@ -63,13 +63,14 @@ gem "binding_of_caller"
 # For test
 gem 'simplecov', :require => false, :group => :test
 
-#Features
-gem "gritter"
-gem 'activeadmin', github: 'gregbell/active_admin'
-
 #needed by activeadmin
 gem "devise"
 gem 'kaminari'
+
+#Features
+gem "gritter"
+gem 'activeadmin', github: 'activeadmin'
+#gem 'meta_search'
 
 gem "paperclip", "~> 4.1"
 #gem "will_paginate"
@@ -83,3 +84,10 @@ gem 'tzinfo-data', platforms: [:x64_mingw,:mingw, :mswin]
 
 require 'rbconfig'
 gem 'wdm', '>= 0.1.0' if RbConfig::CONFIG['target_os'] =~ /mswin|mingw|cygwin/i
+
+# OAuth gems
+gem 'omniauth'
+gem 'omniauth-oauth2', '~> 1.1'
+gem 'omniauth-twitter'
+gem 'omniauth-facebook', '~> 2.0.0.pre1'
+gem 'omniauth-google-oauth2', '~> 0.2.6'
