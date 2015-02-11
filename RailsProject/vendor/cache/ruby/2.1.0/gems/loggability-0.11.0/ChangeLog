@@ -1,0 +1,372 @@
+2013-10-07  Michael Granger  <ged@FaerieMUD.org>
+
+	* .hgtags:
+	Added tag v0.8.0 for changeset 9e8338f511bf
+	[d9e93e136b47] [tip]
+
+	* .hgsigs:
+	Added signature for changeset a4c6b86b7cbc
+	[9e8338f511bf] [v0.8.0]
+
+	* History.rdoc, lib/loggability.rb:
+	Bump minor version, update history.
+	[a4c6b86b7cbc]
+
+2013-10-06  Michael Granger  <ged@FaerieMUD.org>
+
+	* .hgignore, Gemfile.lock:
+	Remove generated file.
+	[377006201c40] [github/master]
+
+	* loggability.gemspec:
+	Remove generated file.
+	[d18c5ee6d94a]
+
+	* Manifest.txt, lib/loggability.rb, lib/loggability/override.rb,
+	spec/loggability/override_spec.rb, spec/loggability_spec.rb:
+	Fix some bugs in aggregated overrides.
+
+	- Make cloning an override additive
+	- Add missing ::with_level and ::formatted_with module methods to
+	Loggability.
+	- Clear overridden settings in dups of Override objects.
+	- Update the manifest.
+	[44b025b728e6]
+
+	* README.rdoc, lib/loggability.rb, lib/loggability/logger.rb,
+	lib/loggability/override.rb, spec/loggability/logger_spec.rb,
+	spec/loggability/override_spec.rb, spec/loggability_spec.rb:
+	Add mechanism for temporary aggregated overrides
+	[a7d4b92e17f3]
+
+2013-10-04  Michael Granger  <ged@FaerieMUD.org>
+
+	* Gemfile, Gemfile.lock, Rakefile, lib/loggability.rb,
+	lib/loggability/logclient.rb, lib/loggability/loghost.rb,
+	loggability.gemspec, spec/helpers.rb, spec/lib/helpers.rb,
+	spec/loggability/formatter/color_spec.rb,
+	spec/loggability/formatter/html_spec.rb,
+	spec/loggability/formatter_spec.rb, spec/loggability/logger_spec.rb,
+	spec/loggability_spec.rb:
+	Update specs to use new RSpec syntax.
+
+	- Split out LogHost and LogClient mixins into their own files
+	- Added generated gemspec and Gemfile
+	- Dropped support for Ruby < 1.9.3.
+	[c67cab6ae3be]
+
+2013-08-23  Michael Granger  <ged@FaerieMUD.org>
+
+	* .hgtags:
+	Added tag v0.7.0 for changeset d0325195530a
+	[6237423fc190]
+
+	* .hgsigs:
+	Added signature for changeset 7e7b1c51eb3e
+	[d0325195530a] [v0.7.0]
+
+	* History.rdoc, lib/loggability.rb:
+	Bump minor version, update history.
+	[7e7b1c51eb3e]
+
+	* .rvm.gems, Rakefile, lib/loggability/logger.rb,
+	spec/loggability/logger_spec.rb:
+	Override Logger#<< to always append with formatting and level.
+	[5404625dc822]
+
+2013-06-07  Mahlon E. Smith  <mahlon@martini.nu>
+
+	* .hgtags:
+	Added tag v0.6.1 for changeset f61e00b53f9d
+	[26c3fbf32d31]
+
+	* .hgsigs:
+	Added signature for changeset 693e882b2e43
+	[f61e00b53f9d] [v0.6.1]
+
+	* History.rdoc:
+	Update History file.
+	[693e882b2e43]
+
+	* Rakefile, lib/loggability.rb, spec/lib/helpers.rb,
+	spec/loggability_spec.rb:
+	Remove explicit loading of Configurability to avoid load order
+	dependency issues.
+	[27cc08ff66dc]
+
+2013-03-15  Michael Granger  <ged@FaerieMUD.org>
+
+	* .hgtags:
+	Added tag v0.6.0 for changeset 1d155d8069b5
+	[4b93e1654b2c]
+
+	* .hgsigs:
+	Added signature for changeset 5475fac60ffb
+	[1d155d8069b5] [v0.6.0]
+
+	* History.rdoc, lib/loggability.rb:
+	Bump minor version, update history.
+	[5475fac60ffb]
+
+2013-03-14  Michael Granger  <ged@FaerieMUD.org>
+
+	* bin/loggability:
+	Remove stub bin/loggability binary
+	[a74dbf110927]
+
+	* .rvm.gems, .tm_properties, lib/loggability.rb,
+	spec/loggability_spec.rb:
+	Give instances of loghost classes logclient instance methods.
+
+	- Reorganized the specs to separate loghost and logclient APIs
+	- Rearranged the class/method declarations in loggability.rb.
+	- Updated development dependencies.
+	[a0ed85844756]
+
+2013-02-25  Michael Granger  <ged@FaerieMUD.org>
+
+	* .rvmrc:
+	Test under Ruby 2.0.0 by default.
+	[8a951356ffb6]
+
+2012-10-01  Michael Granger  <ged@FaerieMUD.org>
+
+	* Manifest.txt:
+	Removing the bin/loggability stub binary.
+	[f293013c3061]
+
+2012-08-03  Michael Granger  <ged@FaerieMUD.org>
+
+	* .hgtags:
+	Added tag v0.5.0 for changeset 7c52f83d7992
+	[1fb0190d24b0]
+
+	* .hgsigs:
+	Added signature for changeset 0db162246900
+	[7c52f83d7992] [v0.5.0]
+
+	* History.rdoc, lib/loggability.rb:
+	Bump minor version, update history.
+	[0db162246900]
+
+	* .rvm.gems, Rakefile, lib/loggability/formatter.rb,
+	spec/loggability/formatter_spec.rb, spec/loggability_spec.rb:
+	Remove dependency on PluginFactory/Pluggability to avoid circular
+	dependency.
+	[476b2ae85657]
+
+2012-06-06  Michael Granger  <ged@FaerieMUD.org>
+
+	* .hgtags:
+	Added tag v0.4.0 for changeset b5e9220fe7a9
+	[740a4e834be2]
+
+	* .hgsigs:
+	Added signature for changeset 2615ed217d34
+	[b5e9220fe7a9] [v0.4.0]
+
+	* History.rdoc, lib/loggability.rb:
+	Bump the minor version, update history.
+	[2615ed217d34]
+
+	* lib/loggability.rb, lib/loggability/logger.rb,
+	spec/loggability/logger_spec.rb, spec/loggability_spec.rb:
+	Add some conversion-convenience code.
+
+	Auto-convert Logger instances into Loggability::Logger instances
+	with the same device if assigned directly, etc.
+	[943e0a67d246]
+
+2012-05-26  Michael Granger  <ged@FaerieMUD.org>
+
+	* .hgtags:
+	Added tag v0.3.0 for changeset 6c526d42bafb
+	[581580843d12]
+
+	* .hgsigs:
+	Added signature for changeset 7b6ef57de872
+	[6c526d42bafb] [v0.3.0]
+
+	* History.rdoc, lib/loggability.rb:
+	Bump the minor version, update history.
+	[7b6ef57de872]
+
+	* Manifest.txt, lib/loggability/spechelpers.rb, spec/lib/helpers.rb:
+	Add Loggability::SpecHelpers for setting up logging in tests.
+	[e9edf26e0c6a]
+
+2012-05-22  Michael Granger  <ged@FaerieMUD.org>
+
+	* lib/loggability/formatter.rb, spec/loggability/formatter_spec.rb,
+	spec/loggability/logger_spec.rb:
+	Downcase the severity before outputting.
+	[040bb1a5dc84]
+
+2012-05-18  Michael Granger  <ged@FaerieMUD.org>
+
+	* .hgtags:
+	Added tag v0.2.3 for changeset d221ee6a4c81
+	[cc5441ff4666]
+
+	* .hgsigs:
+	Added signature for changeset 57511ffc4e23
+	[d221ee6a4c81] [v0.2.3]
+
+	* History.rdoc, lib/loggability.rb:
+	Bumped patch version and updated history.
+	[57511ffc4e23]
+
+	* lib/loggability.rb, spec/loggability_spec.rb:
+	Fix logging from subclasses of log clients.
+
+	Thanks to Mahlon for spotting this and helping to track it down.
+	[8b10cb643375]
+
+2012-05-11  Michael Granger  <ged@FaerieMUD.org>
+
+	* .hgtags:
+	Added tag v0.2.2 for changeset 7237a700fafc
+	[a35c4d3abb52]
+
+	* .hgsigs:
+	Added signature for changeset e41140479376
+	[7237a700fafc] [v0.2.2]
+
+	* History.rdoc, lib/loggability.rb:
+	Bump the patch version, update History.
+	[e41140479376]
+
+	* .tm_properties, lib/loggability.rb, lib/loggability/logger.rb:
+	Log proxied Modules like Class objects, don't log config specs at
+	errror.
+	[72aefd428e62]
+
+2012-05-10  Michael Granger  <ged@FaerieMUD.org>
+
+	* .hgtags:
+	Added tag v0.2.1 for changeset cd911ef44cf0
+	[9b09c935a496]
+
+	* .hgsigs:
+	Added signature for changeset 3d9dced14889
+	[cd911ef44cf0] [v0.2.1]
+
+	* History.rdoc, lib/loggability.rb:
+	Bumped patch version, updated History.
+	[3d9dced14889]
+
+	* lib/loggability.rb, spec/loggability_spec.rb:
+	Fix for configuration via Configurability::Config.
+	[7eb1903dafa8]
+
+	* .hgtags:
+	Added tag v0.2.0 for changeset aa672f2fa207
+	[6b09a660a076]
+
+	* .hgsigs:
+	Added signature for changeset 4c9840dcb9fd
+	[aa672f2fa207] [v0.2.0]
+
+	* History.rdoc, lib/loggability.rb:
+	Fix 1.8 support.
+	[4c9840dcb9fd]
+
+	* .rvm.gems, README.rdoc, Rakefile, lib/loggability.rb,
+	spec/lib/helpers.rb, spec/loggability/logger_spec.rb,
+	spec/loggability_spec.rb:
+	Add Configurability support.
+	[555511f82876]
+
+	* lib/loggability/logger.rb:
+	Make Logger#inspect output a bit more terse
+	[fbddf3595a38]
+
+2012-05-08  Michael Granger  <ged@FaerieMUD.org>
+
+	* .hgtags:
+	Added tag v0.1.0 for changeset 929216c0ffee
+	[65953fe69af2]
+
+	* .hgsigs:
+	Added signature for changeset ea1633c450be
+	[929216c0ffee] [v0.1.0]
+
+	* History.rdoc, lib/loggability.rb:
+	Bump minor version, update history.
+	[ea1633c450be]
+
+	* .hgignore, Rakefile, lib/loggability.rb,
+	lib/loggability/constants.rb, lib/loggability/formatter/color.rb,
+	lib/loggability/logger.rb, spec/loggability/formatter/html_spec.rb,
+	spec/loggability/formatter_spec.rb, spec/loggability/logger_spec.rb:
+	Remove all 1.9isms so it works under 1.8.x.
+
+	I've been trying to do everything in 1.9 first, but it turns out
+	there's still some 1.8 stuff that I need to support that I'd like to
+	use this with.
+	[e702bbec7c9d]
+
+	* lib/loggability/formatter/color.rb:
+	Fix the docs for the color formatter
+	[4191fb2e0d14]
+
+2012-05-07  Michael Granger  <ged@FaerieMUD.org>
+
+	* .hgtags:
+	Added tag v0.0.2 for changeset 9a502152869e
+	[984798ba8ace]
+
+	* .hgsigs:
+	Added signature for changeset 1099204b229f
+	[9a502152869e] [v0.0.2]
+
+	* History.rdoc, lib/loggability.rb:
+	Bumped the patch version, updated History.
+	[1099204b229f]
+
+	* lib/loggability/formatter/html.rb, spec/lib/helpers.rb,
+	spec/loggability/formatter/html_spec.rb:
+	Fix escaping of the 'progname' in the HTML log formatter.
+	[748e600c8037]
+
+2012-05-06  Michael Granger  <ged@FaerieMUD.org>
+
+	* README.rdoc:
+	Add some stuff to the README.
+	[711c4dff84cf]
+
+	* .hgtags:
+	Added tag v0.0.1 for changeset 6dc36a56ff79
+	[16d1a85c491d]
+
+	* .hgsigs:
+	Added signature for changeset 7eb43f3b1e1e
+	[6dc36a56ff79] [v0.0.1]
+
+	* History.rdoc, Manifest.txt, lib/loggability/formatter/html.rb,
+	spec/lib/helpers.rb, spec/loggability/formatter/color_spec.rb,
+	spec/loggability/formatter/html_spec.rb,
+	spec/loggability/formatter_spec.rb, spec/loggability_spec.rb:
+	Improve coverage.
+	[7eb43f3b1e1e]
+
+2012-05-05  Michael Granger  <ged@FaerieMUD.org>
+
+	* README.rdoc:
+	Add some more stuff to the README
+	[90cec90bbfe3]
+
+	* .hgignore:
+	Ignore the rubinius cache
+	[f3207f533df4]
+
+	* .hgignore, .pryrc, .rvm.gems, .rvmrc, History.rdoc, Manifest.txt,
+	README.rdoc, Rakefile, bin/loggability, lib/loggability.rb,
+	lib/loggability/constants.rb, lib/loggability/formatter.rb,
+	lib/loggability/formatter/color.rb,
+	lib/loggability/formatter/default.rb,
+	lib/loggability/formatter/html.rb, lib/loggability/logger.rb,
+	spec/lib/helpers.rb, spec/loggability/logger_spec.rb,
+	spec/loggability_spec.rb:
+	Initial commit
+	[7b3fcf97718a]

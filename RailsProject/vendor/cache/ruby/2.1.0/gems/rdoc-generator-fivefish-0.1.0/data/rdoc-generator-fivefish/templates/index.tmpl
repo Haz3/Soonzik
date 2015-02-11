@@ -1,0 +1,47 @@
+<?import rel_prefix, modsort, methods, files ?>
+
+		<header class="hero-unit">
+			<?attr synopsis ?>
+			<?if mainpage ?>
+			<p><a class="btn btn-primary btn-large" 
+				href="[?call mainpage.path ?]">Learn more &raquo;</a></p>
+			<?end if ?>
+		</header>
+
+		<!-- Indexes -->
+		<section id="indexes" class="row">
+			<div class="span4">
+				<ul id="class-index" class="nav nav-list">
+					<li class="nav-header">Classes/Modules</li>
+				<?for index_class in modsort.select( &:documented? ).uniq {|c| c.path } ?>
+					<li><a href="[?attr rel_prefix ?]/[?call index_class.path ?]"
+						title="[?call index_class.full_name ?]"><?call 
+						index_class.full_name.gsub(/(.+?)(?=::)/, '<span class="ns">\\1</span>') ?></a></li>
+				<?end for ?>
+				</ul>
+			</div>
+
+			<div class="span4">
+				<ul id="method-index" class="nav nav-list">
+					<li class="nav-header">Methods</li>
+				<?for method in methods.uniq {|m| m.path } ?>
+					<li class="method"><a title="[?call method.parent.full_name ?]"
+						href="[?call method.path ?]"><?call method.pretty_name ?>
+						<span class="method-parent">[<?call 
+							method.parent.full_name.sub(/.*(::)/, '\\1') ?>]</span>
+						</a>
+					</li>
+				<?end for ?>
+				</ul>
+			</div>
+
+			<div class="span4">
+				<ul id="file-index" class="nav nav-list">
+					<li class="nav-header">Files</li>
+				<?for file in files.select {|f| f.text? }.sort ?>
+					<li class="file"><a href="[?call file.path ?]"><?escape file.page_name ?></a></li>
+				<?end for ?>
+				</ul>
+			</div>
+
+		</section>

@@ -2,7 +2,7 @@
 
 UserOne:
   email: florian.dewulf@gmail.com
-  password: 7b95dafa9ecb37dafa761f8bafc76b0a  #azerty
+  encrypted_password: 7b95dafa9ecb37dafa76
   salt: 34ca36a3b2f03ce32a311bef0ebb2398d391efbd
   fname: first name
   lname: last name
@@ -15,10 +15,8 @@ UserOne:
   facebook: user1.facebook
   twitter: user1.twitter
   googlePlus: user1.plus
-  signin: "2014-09-07 23:20:20"
   idAPI: 4f009289d197fd93e8977e96c945e5324c002875
   secureKey: 32898042138e9a4686b40b194d8862dd205b415ba2a4247d2f790ae2acf4e557
-  activated: true
   newsletter: true
   language: FR
   groups: userGroup
@@ -26,7 +24,7 @@ UserOne:
 
 UserTwo:
   email: user_two@gmail.com
-  password: 0a2ede56f6523e16b6a2794c26921580  #qwerty
+  encrypted_password: 0a2ede56f6523e16b6a2
   salt: d8831de896cb4bd5ad74720437c8ccdfc9f0bd42
   fname: frits nmae
   lname: lsat nmae
@@ -39,10 +37,8 @@ UserTwo:
   facebook: facedebouc
   twitter: twittos
   googlePlus: 2039430539540
-  signin: "2014-09-07 23:20:20"
   idAPI: b266741d88c8d2155dc1315c8e9b7fb7ff29830e
   secureKey: 27cc5eb35022228b6a476f7b3f8c59f38fd44e592fe93cc4ccf6b28035fd52e0
-  activated: false
   newsletter: false
   language: EN
   groups: vipGroup

@@ -1,0 +1,36 @@
+%h2 Sign up
+= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
+  = devise_error_messages!
+  .field
+    = f.label :username
+    = f.text_field :username
+  .field
+    = f.label :email
+    %br/
+    = f.email_field :email, autofocus: true
+  .field
+    = f.label :password
+    - if @validatable
+      %em
+        (#{@minimum_password_length} characters minimum)
+    %br/
+    = f.password_field :password, autocomplete: "off"
+  .field
+    = f.label :password_confirmation
+    %br/
+    = f.password_field :password_confirmation, autocomplete: "off"
+  .field
+    = f.label :fname
+    = f.text_field :fname
+  .field
+    = f.label :lname
+    = f.text_field :lname
+  .field
+    = f.label :birthday
+    = f.date_select :birthday, :start_year => 1950, :end_year => 2005, order: [:day, :month, :year], default: { day: 1, month: 1, year: 1990}
+  .field
+    = f.label :newsletter
+    = f.check_box :newsletter
+  .actions
+    = f.submit "Sign up"
+= render "devise/shared/links"

@@ -4,7 +4,7 @@ Devise.setup do |config|
   # The secret key used by Devise. Devise uses this key to generate
   # random tokens. Changing this key will render invalid all existing
   # confirmation, reset password and unlock tokens in the database.
-  # config.secret_key = 'c50597bc6429f1a0eefe2a78cb0c6bf12098647b1616af070c9b1b6e4f758b7fb49440ef648b50d21f5835ce732f17b4e70db5d1d95a5ad16bfb66fbd6ecb761'
+  # config.secret_key = '42db4a92f4b8f281ea899e67a2085dc8184310857410d43aeb944abfa541b32e7df54e1306477fb5f7274465270ba0347dee45b5d967425bc91164c32b7dcabb'
 
   # ==> Mailer Configuration
   # Configure the e-mail address which will be shown in Devise::Mailer,
@@ -61,7 +61,7 @@ Devise.setup do |config|
   # :database      = Support basic authentication with authentication key + password
   # config.http_authenticatable = false
 
-  # If http headers should be returned for AJAX requests. True by default.
+  # If 401 status code should be returned for AJAX requests. True by default.
   # config.http_authenticatable_on_xhr = true
 
   # The realm used in Http Basic Authentication. 'Application' by default.
@@ -97,7 +97,7 @@ Devise.setup do |config|
   config.stretches = Rails.env.test? ? 1 : 10
 
   # Setup a pepper to generate the encrypted password.
-  # config.pepper = '1aba8f0ef53d72691b9f10a5946f82e43eda186c0c0c4686b585c988652ef999a82a93c9087b8cfae1c62434f3f09da7cd1b96d3eea339c94632848b4d4bfce7'
+  # config.pepper = '2e5e14990336ccaebc6eaf57d9e8f2a644557fee6aca2922d07b514530d6f8ce233f4feb9dc6f57f8bdd0071211795b7d66211c09750104583f21655588c4e56'
 
   # ==> Configuration for :confirmable
   # A period that the user is allowed to access the website even without
@@ -127,6 +127,9 @@ Devise.setup do |config|
   # ==> Configuration for :rememberable
   # The time the user will be remembered without asking for credentials again.
   # config.remember_for = 2.weeks
+
+  # Invalidates all the remember me tokens when the user signs out.
+  config.expire_all_remember_me_on_sign_out = true
 
   # If true, extends the user's remember period when remembered via cookie.
   # config.extend_remember_period = false
@@ -176,7 +179,7 @@ Devise.setup do |config|
   # config.unlock_in = 1.hour
 
   # Warn on the last attempt before the account is locked.
-  # config.last_attempt_warning = false
+  # config.last_attempt_warning = true
 
   # ==> Configuration for :recoverable
   #
@@ -202,7 +205,7 @@ Devise.setup do |config|
   # Turn scoped views on. Before rendering "sessions/new", it will first check for
   # "users/sessions/new". It's turned off by default because it's slower if you
   # are using only default views.
-  # config.scoped_views = false
+   config.scoped_views = true
 
   # Configure the default scope given to Warden. By default it's the first
   # devise role declared in your routes (usually :user).
@@ -253,4 +256,9 @@ Devise.setup do |config|
   # When using omniauth, Devise cannot automatically set Omniauth path,
   # so you need to do it manually. For the users scope, it would be:
   # config.omniauth_path_prefix = '/my_engine/users/auth'
+
+  config.omniauth :facebook, "327968824079391", "18f49db176886a0d7535489df7913ec7"
+  config.omniauth :twitter, "ooWEcrlhooUKVOxSgsVNDJ1RK", "BtLpq9ZlFzXrFklC2f1CXqy8EsSzgRRVPZrKVh0imI2TOrZAan"
+  config.omniauth :google_oauth2, "793685873206-mtbd8bm2gvskccm5rnnnkod5n6q7dqpv.apps.googleusercontent.com", "binV4DSqwrZim2gdEpWVP_ZV", { }
+
 end

@@ -1,0 +1,466 @@
+2012-12-10  Michael Granger  <ged@FaerieMUD.org>
+
+	* .rvm.gems, Rakefile, lib/fivefish.rb, lib/rdoc/discover.rb,
+	lib/rdoc/generator/fivefish.rb:
+	Update for RDoc 4
+	[06e965cb1905] [tip]
+
+2012-09-12  Michael Granger  <ged@FaerieMUD.org>
+
+	* .hgtags:
+	Added tag v0.0.1 for changeset dc96dffc23e0
+	[b33f8d965c61] [github/master]
+
+	* .hgsigs:
+	Added signature for changeset e900e8771607
+	[dc96dffc23e0] [v0.0.1]
+
+	* History.rdoc:
+	Update the history doc
+	[e900e8771607]
+
+	* tasks/bootstrap.rb:
+	Clone instead of qcloning the bootstrap repo
+	[ef81a5b81b7f]
+
+	* tasks/bootstrap.rb:
+	Use my bitbucket clone of bootstrap.
+	[fd83414d9340]
+
+	* README.rdoc:
+	Updated the README.
+	[6bef1f941287]
+
+2012-07-27  Michael Granger  <ged@FaerieMUD.org>
+
+	* assets/css/fivefish.css:
+	Adding line-height to description Ps
+	[4eebebca05bc]
+
+2012-07-16  Michael Granger  <ged@FaerieMUD.org>
+
+	* assets/js/fivefish.js:
+	Guard against empty search terms when assigning the window location.
+	[b445ec11168d]
+
+2012-07-03  Michael Granger  <ged@FaerieMUD.org>
+
+	* data/rdoc-generator-fivefish/templates/layout.tmpl:
+	Fix mismatched closing tag
+	[d915921801c2]
+
+2012-06-20  Michael Granger  <ged@FaerieMUD.org>
+
+	* data/rdoc-generator-fivefish/templates/layout.tmpl:
+	Uniquify the class list in the dropdown menu.
+	[b8526150b584]
+
+	* .rvm.gems, Rakefile:
+	Update dependencies.
+	[39bc51d339d9]
+
+	* assets/css/fivefish.css:
+	Make default H3s less significant than default H2s. (fixes #1)
+	[d55012b4d9f3]
+
+2012-06-06  Michael Granger  <ged@FaerieMUD.org>
+
+	* Merged with 57:b9337d344ae5
+	[4ada6b47ee94]
+
+	* .rvm.gems:
+	Include hoe-deveiate in the RVMRC gemset
+	[80edef24f833]
+
+2012-05-30  Michael Granger  <ged@FaerieMUD.org>
+
+	* assets/css/fivefish.css:
+	Try another CSS strategy for the offset anchor targets.
+	[b9337d344ae5] [github/master@default]
+
+2012-05-21  Michael Granger  <ged@FaerieMUD.org>
+
+	* README.rdoc, assets/js/fivefish.js, assets/js/jquery.hotkeys.js:
+	Add search hotkey shortcut
+	[8331c3a93b42]
+
+	* assets/css/fivefish.css:
+	Make section H3s stand out
+	[e969a0f6925c]
+
+	* assets/css/fivefish.css:
+	Fixed bottom margin for method aliases in class view
+	[f5dc93c8a5cc]
+
+2012-05-10  Michael Granger  <ged@FaerieMUD.org>
+
+	* .rvm.gems, Manifest.txt, Rakefile:
+	Bump Inversion dependency to 0.10.
+	[070425e539a0]
+
+2012-05-07  Michael Granger  <ged@FaerieMUD.org>
+
+	* data/rdoc-generator-fivefish/templates/class.tmpl, data/rdoc-
+	generator-fivefish/templates/index.tmpl,
+	lib/rdoc/generator/fivefish.rb:
+	Uniqueify classes and methods in the index lists.
+	[b1409e3dd6d0]
+
+2012-05-06  Michael Granger  <ged@FaerieMUD.org>
+
+	* assets/css/fivefish.css:
+	Color section headers
+	[58ecea31b86f]
+
+2012-05-05  Michael Granger  <ged@FaerieMUD.org>
+
+	* data/rdoc-generator-fivefish/templates/class.tmpl:
+	Fix call-seq section for methods
+	[c7f2f2e526de]
+
+2012-05-03  Michael Granger  <ged@FaerieMUD.org>
+
+	* data/rdoc-generator-fivefish/templates/class.tmpl:
+	Allow in-files to wrap in the popover
+	[767883a35bae]
+
+	* assets/css/fivefish.css:
+	Clean up the :target style a bit, give the footer some space
+	[4f880994fae9]
+
+2012-05-02  Michael Granger  <ged@FaerieMUD.org>
+
+	* data/rdoc-generator-fivefish/templates/class.tmpl:
+	Add a section for documenting superclass/includes/extensions
+	[8d4d26d415eb]
+
+	* assets/css/fivefish.css, assets/js/fivefish.js,
+	assets/js/jquery.hotkeys.js, assets/js/stringscore.js, data/rdoc-
+	generator-fivefish/templates/class.tmpl, data/rdoc-generator-
+	fivefish/templates/layout.tmpl, tasks/bootstrap.rb,
+	tasks/fivefish.rb:
+	Replace experimental modal search with simpler search dropdown
+	[2dd1e47301af]
+
+	* lib/rdoc/generator/fivefish.rb:
+	Remove leftover debugging dependency
+	[c4b371b24a8b]
+
+	* tasks/bootstrap.rb:
+	Corrected name of the boostrap repo
+	[8a2816ae7829]
+
+2012-04-19  Michael Granger  <ged@FaerieMUD.org>
+
+	* data/rdoc-generator-fivefish/templates/index.tmpl,
+	lib/rdoc/generator/fivefish.rb:
+	Handle the lack of a main page
+	[ee0ddf2fabcf]
+
+	* lib/rdoc/generator/fivefish.rb:
+	Read templates as UTF-8
+	[1e5485f81d96]
+
+2012-04-12  Michael Granger  <ged@FaerieMUD.org>
+
+	* data/rdoc-generator-fivefish/templates/layout.tmpl:
+	Link to the fivefish page on deveiate
+	[9867f57bb826]
+
+2012-04-08  Michael Granger  <ged@FaerieMUD.org>
+
+	* assets/css/fivefish.css:
+	Make CODE tags the same color as PREs
+	[134a5fca4f1a]
+
+2012-04-07  Michael Granger  <ged@FaerieMUD.org>
+
+	* assets/js/fivefish.js, data/rdoc-generator-
+	fivefish/templates/layout.tmpl:
+	Read link prefixes from the page, highlight index search matches
+	[d68749340ff4]
+
+	* assets/css/fivefish.css:
+	Switch code highlighting to light theme based on Solarized, populate
+	empty index search areas
+	[ec892c1f462d]
+
+	* tasks/fivefish.rb:
+	Don't compress fivefish.css, as Less fscks up the ordering
+	[27f0ddeb23b0]
+
+2012-04-06  Michael Granger  <ged@FaerieMUD.org>
+
+	* assets/js/fivefish.js, lib/rdoc/generator/fivefish.rb:
+	Checkpoint of work on the searchbox
+	[70ae433154db]
+
+	* assets/css/fivefish.css, assets/js/fivefish.js, data/rdoc-generator-
+	fivefish/templates/layout.tmpl, lib/rdoc/generator/fivefish.rb:
+	Start converting search to a Bootstrap modal component
+	[ca55b579db09]
+
+2012-04-04  Michael Granger  <ged@FaerieMUD.org>
+
+	* assets/css/fivefish.css, assets/js/fivefish.js, data/rdoc-generator-
+	fivefish/templates/layout.tmpl, lib/rdoc/generator/fivefish.rb,
+	tasks/bootstrap.rb, tasks/fonts.rb:
+	Start reworking search a bit
+	[d30a98a6c599]
+
+	* .hgignore:
+	Merged with e198a1b8b529
+	[9af3e880bc46]
+
+2012-04-03  Michael Granger  <ged@FaerieMUD.org>
+
+	* .hgignore, assets/img/glyphicons-halflings-white.png, assets/img
+	/glyphicons-halflings.png, assets/js/bootstrap.js, data/rdoc-
+	generator-fivefish/css/fivefish.min.css, data/rdoc-generator-
+	fivefish/js/fivefish.min.js:
+	Remove generated sources
+	[e198a1b8b529]
+
+2012-04-04  Michael Granger  <ged@FaerieMUD.org>
+
+	* Manifest.txt, data/rdoc-generator-fivefish/css/fivefish.min.css:
+	Add minified bootstrap.js to the manifest
+	[cfaa6a9fe04c]
+
+	* .hgignore, assets/js/bootstrap.js, assets/js/fivefish.js, data/rdoc-
+	generator-fivefish/js/fivefish.min.js, data/rdoc-generator-
+	fivefish/templates/layout.tmpl, tasks/bootstrap.rb,
+	tasks/fivefish.rb:
+	Checkpoint
+	[86c7949ee51c]
+
+2012-04-03  Michael Granger  <ged@FaerieMUD.org>
+
+	* .hoerc, .rvm.gems, Manifest.txt, README.rdoc, Rakefile,
+	assets/css/fivefish.css, assets/fonts/OFL.txt, assets/img
+	/glyphicons-halflings-white.png, assets/img/glyphicons-
+	halflings.png, assets/js/bootstrap.js, assets/js/fivefish.js,
+	assets/js/jquery.dropdown.js, assets/js/jquery.hotkeys.js, data
+	/rdoc-generator-fivefish/css/bootstrap-responsive.min.css, data
+	/rdoc-generator-fivefish/css/bootstrap.min.css, data/rdoc-generator-
+	fivefish/css/fivefish.css, data/rdoc-generator-
+	fivefish/css/fivefish.min.css, data/rdoc-generator-
+	fivefish/fonts/OFL.txt, data/rdoc-generator-fivefish/img/glyphicons-
+	halflings-white.png, data/rdoc-generator-fivefish/img/glyphicons-
+	halflings.png, data/rdoc-generator-fivefish/js/bootstrap.min.js,
+	data/rdoc-generator-fivefish/js/fivefish.js, data/rdoc-generator-
+	fivefish/js/fivefish.min.js, data/rdoc-generator-
+	fivefish/js/jquery.dropdown.js, data/rdoc-generator-
+	fivefish/js/jquery.hotkeys.js, data/rdoc-generator-fivefish
+	/prototype-classpage.html, data/rdoc-generator-
+	fivefish/prototype.html, data/rdoc-generator-fivefish/templates
+	/devel-layout.tmpl, data/rdoc-generator-
+	fivefish/templates/layout.tmpl, lib/rdoc/generator/fivefish.rb,
+	tasks/bootstrap.rb, tasks/fivefish.rb, tasks/fonts.rb:
+	Checkpoint of generated assets change
+	[aba63c3b26ac]
+
+	* Manifest.txt:
+	Trim the manifest down to what it should be ideally
+	[9133db708798]
+
+	* tasks/bootstrap.rb:
+	Add a Rake task lib for bootstrap stuff
+	[be8de627625b]
+
+	* Rakefile, assets/fonts/IstokWeb-Bold.ttf, assets/fonts/IstokWeb-
+	BoldItalic.ttf, assets/fonts/IstokWeb-Italic.ttf, assets/fonts
+	/IstokWeb-Regular.ttf, data/rdoc-generator-fivefish/fonts/IstokWeb-
+	Bold.ttf, data/rdoc-generator-fivefish/fonts/IstokWeb-
+	BoldItalic.ttf, data/rdoc-generator-fivefish/fonts/IstokWeb-
+	Italic.ttf, data/rdoc-generator-fivefish/fonts/IstokWeb-Regular.ttf,
+	data/rdoc-generator-fivefish/js/fivefish.js, data/rdoc-generator-
+	fivefish/templates/devel-layout.tmpl, data/rdoc-generator-
+	fivefish/templates/layout.tmpl, lib/rdoc/generator/fivefish.rb:
+	Checkpoint
+	[6f47213e31e5]
+
+2012-04-02  Michael Granger  <ged@FaerieMUD.org>
+
+	* .rvm.gems, Rakefile, data/rdoc-generator-fivefish/js/fivefish.js,
+	data/rdoc-generator-fivefish/templates/file.tmpl,
+	lib/rdoc/generator/fivefish.rb:
+	First whack at the quicksearch
+	[2aedd78b8195]
+
+	* data/rdoc-generator-fivefish/css/fivefish.css, data/rdoc-generator-
+	fivefish/js/fivefish.js, data/rdoc-generator-
+	fivefish/templates/index.tmpl, lib/rdoc/generator/fivefish.rb:
+	Work on the source-toggle, index view
+	[dfce59e01bf2]
+
+2012-04-01  Michael Granger  <ged@FaerieMUD.org>
+
+	* .rvm.gems, Rakefile:
+	Updating to Inversion 0.8
+	[0974c250f677]
+
+2012-03-31  Michael Granger  <ged@FaerieMUD.org>
+
+	* .rvm.gems, Rakefile, data/rdoc-generator-
+	fivefish/css/bootstrap.min.css, data/rdoc-generator-
+	fivefish/css/fivefish.css, data/rdoc-generator-
+	fivefish/js/bootstrap.min.js, data/rdoc-generator-
+	fivefish/js/fivefish.js, data/rdoc-generator-
+	fivefish/js/jquery.dropdown.js, data/rdoc-generator-
+	fivefish/js/jquery.hotkeys.js, data/rdoc-generator-
+	fivefish/templates/class.tmpl, data/rdoc-generator-
+	fivefish/templates/index.tmpl, data/rdoc-generator-
+	fivefish/templates/layout.tmpl, lib/rdoc/generator/fivefish.rb:
+	Checkpoint commit
+	[bd533dd5f839]
+
+2012-03-21  Michael Granger  <ged@FaerieMUD.org>
+
+	* data/rdoc-generator-fivefish/css/fivefish.css, data/rdoc-generator-
+	fivefish/templates/class.tmpl, lib/rdoc/generator/fivefish.rb:
+	Visual tweaks, make the classes of method-sections more useful
+	[71f937daec29]
+
+2012-03-19  Michael Granger  <ged@FaerieMUD.org>
+
+	* data/rdoc-generator-fivefish/templates/class.tmpl:
+	Fix the "in files" and namespace sections of the class template
+	[c8cc6f0c1dfb]
+
+2012-03-16  Michael Granger  <ged@FaerieMUD.org>
+
+	* data/rdoc-generator-fivefish/css/fivefish.css:
+	Fix source code display (rehide for now)
+	[3108e8019c61]
+
+	* .rvm.gems, Rakefile:
+	Depend on Inversion 0.6.1
+	[9c8c63ade57f]
+
+	* data/rdoc-generator-fivefish/css/fivefish.css:
+	Switch to Google fonts for the time being
+	[cd7480256f36]
+
+	* .hgignore, .hoerc, Manifest.txt, Rakefile:
+	Update build system
+	[c68ddcf860f7]
+
+	* Manifest.txt, Rakefile, data/rdoc-generator-
+	fivefish/css/fivefish.css, data/rdoc-generator-fivefish/fonts
+	/IstokWeb-Bold.ttf, data/rdoc-generator-fivefish/fonts/IstokWeb-
+	BoldItalic.ttf, data/rdoc-generator-fivefish/fonts/IstokWeb-
+	Italic.ttf, data/rdoc-generator-fivefish/fonts/IstokWeb-Regular.ttf,
+	data/rdoc-generator-fivefish/fonts/OFL.txt:
+	Checkpoint commit
+	[6cc238d570fa]
+
+2012-03-14  Michael Granger  <ged@FaerieMUD.org>
+
+	* data/rdoc-generator-fivefish/css/fivefish.css:
+	Code section/description cleanup
+	[8759afdf52cc]
+
+	* data/rdoc-generator-fivefish/css/fivefish.css, data/rdoc-generator-
+	fivefish/templates/class.tmpl, lib/rdoc/generator/fivefish.rb:
+	Presentation cleanup, some namespace fixes for the templates,
+	DATADIR from ENV support
+	[562065ecec19]
+
+	* lib/rdoc/generator/fivefish.rb:
+	Fix the dev datadir path
+	[661f51b70efb]
+
+	* Manifest.txt:
+	Fix the manifest
+	[c26379b81450]
+
+	* data/fivefish/css/bootstrap-responsive.min.css,
+	data/fivefish/css/bootstrap.min.css, data/fivefish/css/fivefish.css,
+	data/fivefish/img/glyphicons-halflings-white.png, data/fivefish/img
+	/glyphicons-halflings.png, data/fivefish/js/bootstrap.min.js,
+	data/fivefish/js/fivefish.js, data/fivefish/js/jquery-1.7.1.min.js,
+	data/fivefish/prototype-classpage.html,
+	data/fivefish/prototype.html, data/fivefish/templates/class.tmpl,
+	data/fivefish/templates/file.tmpl,
+	data/fivefish/templates/index.tmpl,
+	data/fivefish/templates/layout.tmpl, data/rdoc-generator-
+	fivefish/css/bootstrap-responsive.min.css, data/rdoc-generator-
+	fivefish/css/bootstrap.min.css, data/rdoc-generator-
+	fivefish/css/fivefish.css, data/rdoc-generator-fivefish/img
+	/glyphicons-halflings-white.png, data/rdoc-generator-fivefish/img
+	/glyphicons-halflings.png, data/rdoc-generator-
+	fivefish/js/bootstrap.min.js, data/rdoc-generator-
+	fivefish/js/fivefish.js, data/rdoc-generator-
+	fivefish/js/jquery-1.7.1.min.js, data/rdoc-generator-fivefish
+	/prototype-classpage.html, data/rdoc-generator-
+	fivefish/prototype.html, data/rdoc-generator-
+	fivefish/templates/class.tmpl, data/rdoc-generator-
+	fivefish/templates/file.tmpl, data/rdoc-generator-
+	fivefish/templates/index.tmpl, data/rdoc-generator-
+	fivefish/templates/layout.tmpl:
+	Fix the name of the data directory
+	[6bc0c6a72134]
+
+	* lib/rdoc/generator/fivefish.rb:
+	Fix the data-directory finder
+	[8899160997ea]
+
+	* Manifest.txt:
+	Update the manifest
+	[25da78cfaa06]
+
+	* .hoerc:
+	Fix the project .hoerc
+	[0359ef915e3d]
+
+	* .hoerc, Manifest.txt, Rakefile, data/fivefish/css/bootstrap-
+	responsive.css, data/fivefish/css/bootstrap.css,
+	data/fivefish/css/fivefish.css, data/fivefish/js/bootstrap.js,
+	data/fivefish/js/fivefish.js, data/fivefish/js/jquery-1.7.1.js,
+	data/fivefish/js/jquery-1.7.1.min.js,
+	data/fivefish/templates/class.tmpl,
+	data/fivefish/templates/layout.tmpl:
+	Checkpoint commit
+	[ab2cefa70174]
+
+2012-03-13  Michael Granger  <ged@FaerieMUD.org>
+
+	* .rvm.gems, data/fivefish/templates/class.tmpl,
+	data/fivefish/templates/layout.tmpl, lib/rdoc/generator/fivefish.rb:
+	Checkpoint commit; got class views rendering, but not styled
+	[021779066b77]
+
+2012-03-12  Michael Granger  <ged@FaerieMUD.org>
+
+	* .hgignore, .rvm.gems, History.rdoc, README.rdoc, Rakefile,
+	data/fivefish/css/bootstrap-responsive.css, data/fivefish/css
+	/bootstrap-responsive.min.css, data/fivefish/css/bootstrap.css,
+	data/fivefish/css/bootstrap.min.css, data/fivefish/css/fivefish.css,
+	data/fivefish/img/glyphicons-halflings-white.png, data/fivefish/img
+	/glyphicons-halflings.png, data/fivefish/js/bootstrap.js,
+	data/fivefish/js/bootstrap.min.js, data/fivefish/js/fivefish.js,
+	data/fivefish/js/jquery-1.7.1.js, data/fivefish/prototype-
+	classpage.html, data/fivefish/prototype.html,
+	data/fivefish/templates/class.tmpl,
+	data/fivefish/templates/file.tmpl,
+	data/fivefish/templates/index.tmpl,
+	data/fivefish/templates/layout.tmpl, lib/fivefish.rb,
+	lib/rdoc/discover.rb, lib/rdoc/generator/fivefish.rb:
+	Checkpoint commit
+	[083bb9b1a6de]
+
+2012-03-11  Michael Granger  <ged@FaerieMUD.org>
+
+	* lib/fivefish.rb, lib/rdoc/generator/fivefish.rb:
+	Move fivefish.rb into the right subdirectory
+	[0c3cc13f6b4b]
+
+	* bin/fivefish:
+	Remove bin/ directory
+	[789988325927]
+
+	* .autotest, .rvmrc, Manifest.txt, Rakefile, bin/fivefish,
+	lib/fivefish.rb:
+	Initial hoe project template
+	[c443aac1fa2d]

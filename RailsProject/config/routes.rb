@@ -2,6 +2,9 @@ Rails.application.routes.draw do
 
   root 'others#index'
 
+  devise_for :users, :controllers => { omniauth_callbacks: 'omniauth_callbacks' }
+  match '/users/:id/finish_signup' => 'users#finish_signup', via: [:get, :patch], :as => :finish_signup
+
   #
   # API ROUTES (57 / 57)
   #
@@ -114,6 +117,7 @@ Rails.application.routes.draw do
 
   get 'signin' => 'others#signin'
   get 'facebook/signin' => 'others#facebook'
+  get 'twitter/signin' => 'others#twitter'
   get 'oauth/callback' => 'others#callback_oauth'
   get 'activate' => 'others#activate_account', as: :activate
 

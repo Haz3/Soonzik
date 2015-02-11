@@ -24,7 +24,8 @@ class OthersController < ApplicationController
   end
 
   def twitter
-
+    arg = { oauth_callback: DatasHelper.website_url + "oauth/callback", oauth_nonce: "f38cd015447cce24e35e8107068e3204", oauth_signature: "kNhghGwwocqgPMnBktVaIY7jEMM%3D", oauth_signature_method: "HMAC-SHA1", oauth_token: "1951971955-TJuWAfR6awbG9ds1lEh9quuHzqtnx1xlRtORZD2", oauth_version: "1.0", oauth_timestamp: "1421350902" }
+    redirect_to "https://api.twitter.com/oauth/request_token" + format_get_params(arg)
   end
 
   def google

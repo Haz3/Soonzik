@@ -21,7 +21,7 @@ module API
 
     test "should save user" do
       token = giveToken() # because of security access
-      post :save, { user: { activated: true, address_id: @user.address.id, birthday: @user.birthday, description: "nouvelle description", email: "test@mail.ru", facebook: @user.facebook, fname: @user.fname, googlePlus: @user.googlePlus, image: @user.image, language: @user.language, lname: @user.lname, newsletter: true, password: @user.password, phoneNumber: @user.phoneNumber, signin: @user.signin, twitter: @user.twitter, username: "new test username" }, user_id: token[:id], secureKey: token[:secureKey], format: :json }
+      post :save, { user: { address_id: @user.address.id, birthday: @user.birthday, description: "nouvelle description", email: "test@mail.ru", facebook: @user.facebook, fname: @user.fname, googlePlus: @user.googlePlus, image: @user.image, language: @user.language, lname: @user.lname, newsletter: true, encrypted_password: @user.encrypted_password, phoneNumber: @user.phoneNumber, twitter: @user.twitter, username: "new test username" }, user_id: token[:id], secureKey: token[:secureKey], format: :json }
       assert_response :success
 
       value = JSON.parse(response.body)
@@ -74,7 +74,7 @@ module API
 
     test "should update user" do
       token = giveToken() # because of security access
-      post :update, { id: @user.id, address: { numberStreet: 2 }, user: { activated: @user.activated, address_id: @user.address_id, birthday: @user.birthday, description: "deuxieme description", email: @user.email, facebook: @user.facebook, fname: @user.fname, googlePlus: @user.googlePlus, idAPI: @user.idAPI, image: @user.image, language: @user.language, lname: @user.lname, newsletter: @user.newsletter, password: @user.password, phoneNumber: @user.phoneNumber, salt: @user.salt, secureKey: @user.secureKey, signin: @user.signin, twitter: @user.twitter, username: @user.username }, user_id: token[:id], secureKey: token[:secureKey], format: :json }
+      post :update, { id: @user.id, address: { numberStreet: 2 }, user: { address_id: @user.address_id, birthday: @user.birthday, description: "deuxieme description", email: @user.email, facebook: @user.facebook, fname: @user.fname, googlePlus: @user.googlePlus, idAPI: @user.idAPI, image: @user.image, language: @user.language, lname: @user.lname, newsletter: @user.newsletter, encrypted_password: @user.encrypted_password, phoneNumber: @user.phoneNumber, salt: @user.salt, secureKey: @user.secureKey, twitter: @user.twitter, username: @user.username }, user_id: token[:id], secureKey: token[:secureKey], format: :json }
 
       assert_response :success
 

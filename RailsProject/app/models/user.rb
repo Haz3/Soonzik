@@ -2,13 +2,22 @@
 # Contain the relation and the validation
 # Can provide some features linked to this model
 class User < ActiveRecord::Base
-  before_create :beforeCreate
+  before_validation :beforeCreate, on: :create
+
+  TEMP_EMAIL_PREFIX = 'change@me'
+  TEMP_EMAIL_REGEX = /\Achange@me/
+
+  # Include default devise modules. Others available are:
+  # :lockable, :timeoutable
+  devise :database_authenticatable, :registerable, :confirmable,
+    :recoverable, :rememberable, :trackable, :validatable, :omniauthable
 
   belongs_to :address
 
   has_one :cart
 
   has_many :albums
+  has_many :identities
   has_many :listening
   has_many :notifications
   has_many :news
@@ -41,10 +50,10 @@ class User < ActiveRecord::Base
   # validation
   # message: 'the message'
   validates :email, confirmation: true, format: /\b[A-Z0-9._%a-z\-]+@(?:[A-Z0-9a-z\-]+\.)+[A-Za-z]{2,4}\z/  #if doesn't work : /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i
-  validates :password, confirmation: true, length: { is: 32 }
-  validates :terms_of_service, acceptance: true
+  #validates :encrypted_password, confirmation: true, length: { is: 20 }
+#  validates :terms_of_service, acceptance: true
   validates :username, length: {
-    minimum: 4,
+    minimum: 3,
     maximum: 20,
     too_short: "must have at least %{count} words",
     too_long: "must have at most %{count} words"
@@ -52,11 +61,62 @@ class User < ActiveRecord::Base
   validates :idAPI, length: { is: 40 }
   validates :secureKey, length: { is: 64 }
   validates :salt, length: { is: 40 }
-  validates :email, :password, :salt, :username, :birthday, :image, :signin, :idAPI, :secureKey, :language, presence: true
-  validates :newsletter, :activated, :inclusion => { :in => [true, false] }
+  validates :email, :salt, :username, :birthday, :image, :idAPI, :secureKey, :language, presence: true
+  validates :newsletter, :inclusion => { :in => [true, false] }
   validates :email, :username, uniqueness: true
   validates :birthday, format: /(\d{4})-(\d{2})-(\d{2})/
-  validates :signin, format: /(\d{4})-(\d{2})-(\d{2}) (\d{2}):(\d{2}):(\d{2})/
+  validates :password, presence: true, on: :created
+
+  validates_format_of :email, :without => TEMP_EMAIL_REGEX, on: :update
+
+
+  # for OAuth interpretation
+  def self.find_for_oauth(auth, signed_in_resource = nil)
+
+    # Get the identity and user if they exist
+    identity = Identity.find_for_oauth(auth)
+
+    # If a signed_in_resource is provided it always overrides the existing user
+    # to prevent the identity being locked with accidentally created accounts.
+    # Note that this may leave zombie accounts (with no associated identity) which
+    # can be cleaned up at a later date.
+    user = signed_in_resource ? signed_in_resource : identity.user
+
+    # Create the user if needed
+    if user.nil?
+
+      # Get the existing user by email if the provider gives us a verified email.
+      # If no verified email was provided we assign a temporary email and ask the
+      # user to verify it on the next step via UsersController.finish_signup
+      email_is_verified = auth.info.email && (auth.info.verified || auth.info.verified_email)
+      email = auth.info.email if email_is_verified
+      user = User.where(:email => email).first if email
+
+      # Create the user if it's a new registration
+      if user.nil?
+        user = User.new(
+          username: auth.extra.raw_info.name,
+          #username: auth.info.nickname || auth.uid,
+          email: email ? email : "#{TEMP_EMAIL_PREFIX}-#{auth.uid}-#{auth.provider}.com",
+          password: Devise.friendly_token
+        )
+        user.skip_confirmation!
+        user.save!
+      end
+    end
+
+    # Associate the identity with the user if needed
+    if identity.user != user
+      identity.user = user
+      identity.save!
+    end
+    user
+  end
+
+  # Is there the default email address or not ?
+  def email_verified?
+    self.email && self.email !~ TEMP_EMAIL_REGEX
+  end
 
   # Recreate an idAPI and so the secureKey associated
   # The secureKey need to be unique so we check if someone already has this one
@@ -81,16 +141,6 @@ class User < ActiveRecord::Base
     Digest::SHA1.hexdigest(Digest::MD5.hexdigest(key))
   end
 
-  # Static function to create the hash of the password
-  #
-  # ==== Attributes
-  #
-  # * +pass+ - The password of the user to encode
-  #
-  def self.password_hash(pass)
-    Digest::MD5.hexdigest(Digest::SHA1.hexdigest(pass))
-  end
-
   # Method to create the hash of the salt
   # It uses the password, so it has to be set before
   def salt_hash
@@ -109,12 +159,11 @@ class User < ActiveRecord::Base
   # Private function to change elements before creation of a row
   def beforeCreate
     self.salt = self.salt_hash if defined?(self.password) && self.password != nil
-    self.password = User.password_hash(self.password) if defined?(self.password) && self.password != nil
     self.image = "default.png" if self.image == nil || (self.image != nil && self.image == "")
-    self.activated = false
-    self.signin = Time.now.strftime "%Y-%m-%d %H:%M:%S"
     self.newsletter = true if self.newsletter == nil
     self.regenerateKey() if defined?(self.password) && self.password != nil
+    self.birthday = Time.new(1900,1,1).to_s(:db) if (self.birthday == nil)
+    self.language = "EN" if (self.language == nil)
   end
 
   # Private function to create a random key of 48 characters

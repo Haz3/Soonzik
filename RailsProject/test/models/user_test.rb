@@ -24,7 +24,7 @@ class UserTest < ActiveSupport::TestCase
   test "User before create method" do
   	u = User.new
   	u.email = "don't_work_mail"
-  	u.password = nil
+  	u.encrypted_password = nil
   	u.image = nil
   	u.newsletter = nil
   	u.username = "Bob"
@@ -33,7 +33,6 @@ class UserTest < ActiveSupport::TestCase
   	u.groups << groups(:userGroup)
 
   	u.send(:beforeCreate)
-  	assert_not u.activated
   	assert_equal u.image, "default.png"
   	assert u.newsletter
   	assert_not u.valid?
@@ -45,6 +44,9 @@ class UserTest < ActiveSupport::TestCase
   	u.email = "lol@mdr.fr"
   	u.username = "Lund"
   	u.send(:beforeCreate)
-  	assert u.save
+  	toto = u.save
+    puts u.errors.full_messages
+    puts u.encrypted_password
+    assert toto
   end
 end
