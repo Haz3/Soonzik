@@ -39,3 +39,122 @@
 	margin-top: 5px;
 	margin-right: 235px;
 }
+
+.profile {
+	float: right;
+}
+
+.menu-logo {
+	width: 30px;
+}
+
+.name {
+
+}
+
+.modify {
+
+}
+
+#player {
+	position: fixed;
+	bottom: 0;
+	width: 100%;
+	height: 60px;
+	background: none repeat scroll 0% 0% #25292B;
+	font-family: Roboto;
+}
+
+.picture {
+	width: 60px;
+	height: 100%;
+	float: left;
+}
+
+.player .picture img {
+	float: left;
+	width: 60px;
+	height: 60px;
+	margin-right: 5px;
+}
+
+#button-player-left {
+	width: auto;
+	height: 100%;
+	margin-top: 0px;
+	margin-left: 20px;
+	float: left;
+}
+
+.sound {
+	width: 25px !important;
+}
+
+#button-player-right {
+	height: 100%;
+	width: auto;
+	margin-right: 15px;
+	float: right;
+}
+
+#player #button-player-right img {
+	width: 30px;
+	margin-top: 15px;
+	margin-left: 15px;
+}
+
+#play { 
+	width: 30px !important;
+}
+
+#player #button-player-left img {
+	width: 30px;
+	margin-top: 15px;
+	margin-left: 5px;
+}
+
+#title {
+	width: 250px;
+	color: #FFF;
+	float: left;
+	margin-top: -53px;
+	margin-left: 75px;
+	font-family: Roboto;
+}
+
+.player-time-begin {
+	margin-left: 50px;
+	margin-top: 30px;
+	color: #C0C0C0;
+	position: relative;
+	float: left;
+	font-size: 12px;
+}
+
+.player-artist-name {
+	margin-top: 5px;
+	text-align: center;
+	color: #C0C0C0;
+	width: auto;
+	float: left;
+}
+
+.player-time-left {
+	color: #C0C0C0;
+	width: auto;
+	margin-top: 30px;
+	font-size: 12px;
+	margin-left: 30px;
+	float: left;
+}
+
+.slider-player {
+	margin-left: 25px;
+	width: 700px;
+	background-color: #808080;
+	height: 5px;
+	display: inline-block;
+	margin-top: 35px;
+	float: left;
+	position: relative;
+}
