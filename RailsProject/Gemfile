@@ -5,6 +5,7 @@ source 'https://rubygems.org'
 gem 'rails', '4.1.1'
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3'
+gem 'mysql2'
 
 gem 'json'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
@@ -25,8 +26,8 @@ end
 
 # For windows because unicorn doesn't work on it
 gem 'specific_install', platforms: [:x64_mingw,:mingw, :mswin]
-gem 'eventmachine', :git => 'https://github.com/eventmachine/eventmachine.git', platforms: [:x64_mingw,:mingw, :mswin]
 gem 'thin', platforms: [:x64_mingw,:mingw, :mswin]
+gem 'eventmachine', :git => 'https://github.com/eventmachine/eventmachine.git', platforms: [:x64_mingw,:mingw, :mswin]
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
