@@ -2,7 +2,7 @@
 fb11a41671b5bc1b15372d319280cecf086c9104		branch 'exit_status' of https://github.com/eventmachine/eventmachine
 6c68dbcf313168db4a77673807a0f26d141579d4		branch 'gh-pages' of https://github.com/eventmachine/eventmachine
 9b15eb6973dd30fb2287ee3fa44cb0a7ec6c6428		branch 'hooks' of https://github.com/eventmachine/eventmachine
-a076684f2c0325e58cc3af95b8c6e72d5b70d3e3		branch 'master' of https://github.com/eventmachine/eventmachine
+6dbdb97bada05d33a1f0d469a49d8c46ac2e77d0		branch 'master' of https://github.com/eventmachine/eventmachine
 2b05a1230075a69fc0d54487617c15ca562cefe7		branch 'mri' of https://github.com/eventmachine/eventmachine
 a9077a01316e1260e97450b3be4f5f1c988580b0		branch 'no_string_bindings' of https://github.com/eventmachine/eventmachine
 43f7fecbd037f88f700df3138e8477aa788a53dc		branch 'tags/eventmachine' of https://github.com/eventmachine/eventmachine
@@ -28,3 +28,4 @@ a5d3d53e43b1a107472792d1b558cfa0c2dd4553	not-for-merge	tag 'v1.0.0.rc.2' of http
 4de7d0e00fe87819840ba7c7c91e7ed09b85467c	not-for-merge	tag 'v1.0.4' of https://github.com/eventmachine/eventmachine
 5cfc7ea39dd8b2df8763834ed469648f5ca78e8a	not-for-merge	tag 'v1.0.5' of https://github.com/eventmachine/eventmachine
 0e0ee654189f3cb7798c415eae0a66267201f1f8	not-for-merge	tag 'v1.0.6' of https://github.com/eventmachine/eventmachine
+6dbdb97bada05d33a1f0d469a49d8c46ac2e77d0	not-for-merge	tag 'v1.0.7' of https://github.com/eventmachine/eventmachine
