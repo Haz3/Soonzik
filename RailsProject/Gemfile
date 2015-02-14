@@ -53,13 +53,15 @@ gem 'turbolinks'
 # Provide Foundation for the rails app
 gem 'foundation-rails'
 
-# Debug gems
-#For debug
-gem 'annotate'
-gem 'better_errors'
-#better print
-gem 'priscilla'
-gem "binding_of_caller"
+platforms :ruby do #We doesn't dev' on Windows so we avoid errors thanks to this
+	# Debug gems
+	#For debug
+	gem 'annotate'
+	gem 'better_errors'
+	#better print
+	gem 'priscilla'
+	gem "binding_of_caller"
+end
 
 # For test
 gem 'simplecov', :require => false, :group => :test
