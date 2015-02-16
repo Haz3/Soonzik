@@ -1,4 +1,4 @@
-/Users/floriandewulf/.rvm/rubies/ruby-2.1.3/bin/ruby -r ./siteconf20150207-57935-sn5j3o.rb extconf.rb 
+/Users/floriandewulf/.rvm/rubies/ruby-2.1.3/bin/ruby -r ./siteconf20150214-1863-1evfiuc.rb extconf.rb 
 checking for CLOCK_MONOTONIC in time.h... no
 checking for CLOCK_MONOTONIC() in time.h... no
 checking for clockid_t in time.h... no
@@ -58,5 +58,5 @@ linking shared-object kgio_ext.bundle
 ld: warning: directory not found for option '-L/Users/mpapis/.sm/pkg/active/lib'
 
 make "DESTDIR=" install
-/usr/bin/install -m 0755 kgio_ext.bundle ./.gem.20150207-57935-15u9c0b
+/usr/bin/install -m 0755 kgio_ext.bundle ./.gem.20150214-1863-1hx4xl1
 installing default kgio_ext libraries

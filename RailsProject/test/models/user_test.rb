@@ -18,6 +18,7 @@ class UserTest < ActiveSupport::TestCase
   	assert u1.regenerateKey
   	assert u1.idAPI != oldidApi
   	assert u1.secureKey != oldKey
+    u1.skip_confirmation!
     assert u1.save
   end
 
@@ -44,9 +45,8 @@ class UserTest < ActiveSupport::TestCase
   	u.email = "lol@mdr.fr"
   	u.username = "Lund"
   	u.send(:beforeCreate)
+    u.skip_confirmation!
   	toto = u.save
-    puts u.errors.full_messages
-    puts u.encrypted_password
     assert toto
   end
 end
