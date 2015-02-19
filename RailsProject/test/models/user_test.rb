@@ -5,11 +5,10 @@ class UserTest < ActiveSupport::TestCase
   	u1 = users(:UserOne)
 
   	secureKey = User.secureKey_hash("test")
-  	password = User.password_hash("test")
+  	u1.password = Devise.friendly_token
   	salt = u1.salt_hash
 
   	assert secureKey.is_a?(String) && secureKey.size == 40
-  	assert password.is_a?(String) && password.size == 32
   	assert salt.is_a?(String) && salt.size == 40
 
   	oldidApi = u1.idAPI
@@ -25,7 +24,7 @@ class UserTest < ActiveSupport::TestCase
   test "User before create method" do
   	u = User.new
   	u.email = "don't_work_mail"
-  	u.encrypted_password = nil
+  	u.password = nil
   	u.image = nil
   	u.newsletter = nil
   	u.username = "Bob"

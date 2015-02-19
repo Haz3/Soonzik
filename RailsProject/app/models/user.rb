@@ -144,7 +144,9 @@ class User < ActiveRecord::Base
   # Method to create the hash of the salt
   # It uses the password, so it has to be set before
   def salt_hash
-    User.secureKey_hash("#{Digest::SHA256.hexdigest("#{Time.now.utc}--#{self.password}")}--#{Digest::SHA256.hexdigest(self.password)}")
+    first_piece = Digest::SHA256.hexdigest("#{Time.now.utc}--#{self.password}")
+    second_piece = Digest::SHA256.hexdigest(self.password)
+    User.secureKey_hash("#{first_piece}--#{second_piece}")
   end
 
   # The strong parameters to save or update object

@@ -235,8 +235,12 @@ module API
       begin
         if (@security && @id == @user_id)
           user = User.find_by_id(@user_id)
-          user.password = User.password_hash(@user["password"]) if user != nil && defined?@user['password']
-          _save(false, params)
+          if user == nil
+            codeAnswer 502
+            return
+          else
+            _save(false, params)
+          end
         else
           codeAnswer 500
         end
@@ -262,11 +266,11 @@ module API
           update_user = false
           update_address = true
           update_user = user.update(User.user_params params)
-          update_address = user.address.update(Address.address_params params) if user.address != nil && params.has_key?(:address)
 
-          address = Address.new(Address.address_params params) if user.address == nil && params.has_key?(:address)
-          update_address = address.save if user.address == nil && params.has_key?(:address)
-          user.address = address if user.address == nil && params.has_key?(:address) && update_address
+          update_address = user.address.update(Address.address_params params)   if user.address != nil && params.has_key?(:address)
+          address = Address.new(Address.address_params params)                  if user.address == nil && params.has_key?(:address)
+          update_address = address.save                                         if user.address == nil && params.has_key?(:address)
+          user.address = address                                                if user.address == nil && params.has_key?(:address) && update_address
 
           if ((update_user && update_address))
             @returnValue = { content: user.as_json(:include => :address) }
@@ -284,7 +288,8 @@ module API
         address = Address.new(Address.address_params params) if params.has_key?(:address)
         if (address == true || address.save)
           user.address_id = address.id if address != true
-          if (user.save)
+          user.skip_confirmation!
+          if (user.save!)
             @returnValue = { content: user.as_json(:include => :address) }
             codeAnswer 201
           else
