@@ -9,15 +9,12 @@
 #import <UIKit/UIKit.h>
 #import <QuartzCore/QuartzCore.h>
 #import "MenuTabDelegate.h"
-#import "MenuTabView.h"
-#import "SearchTabView.h"
-#import "PlayerPreviewView.h"
 #import "AudioPlayer.h"
 #import "Music.h"
 #import "LoadingView.h"
 #import "TitleSongPreview.h"
 
-@interface TypeViewController : UIViewController <MenuTabDelegate, FinishPlayPlayer, PlayerPreviewDelegate>
+@interface TypeViewController : UIViewController <MenuTabDelegate, FinishPlayPlayer>
 
 @property (nonatomic, strong) NSUserDefaults *prefs;
 
@@ -25,9 +22,7 @@
 
 @property (strong, nonatomic) UIView *menuView;
 @property (strong, nonatomic) UIView *menuUserPreview;
-@property (strong, nonatomic) MenuTabView *menuTableView;
 @property (strong, nonatomic) UIView *searchView;
-@property (strong, nonatomic) SearchTabView *searchTableView;
 @property (strong, nonatomic) LoadingView *loadingView;
 
 @property (assign, nonatomic) CGFloat statusBarHeight;
@@ -39,13 +34,13 @@
 
 @property (assign, nonatomic) int selectedMenuIndex;
 
-@property (strong, nonatomic) PlayerPreviewView *playerPreviewView;
-
-- (void)displaySearch;
 - (void)closeTheMenuView;
 - (UIImage *)imageWithImage:(UIImage *)image scaledToSize:(CGSize)newSize;
 
 - (void)addBlurEffectOnView:(UIView *)view;
 - (void)removeBlurEffect:(int)tag onView:(UIView *)v;
+
+- (void)showErrorDuringLoading;
+- (void)hideErrorDuringLoading;
 
 @end

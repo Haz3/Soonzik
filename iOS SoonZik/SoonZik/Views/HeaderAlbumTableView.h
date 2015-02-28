@@ -19,6 +19,8 @@
 @property (nonatomic, weak) IBOutlet UIButton *loveButton;
 @property (nonatomic, weak) IBOutlet UIButton *artistButton;
 
+@property (nonatomic, weak) IBOutlet UIButton *playAllButton;
+
 - (void)initHeader;
 
 @end

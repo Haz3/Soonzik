@@ -14,11 +14,7 @@
 @interface PlaylistViewController : TypeViewController <UITableViewDataSource, UITableViewDelegate, UIGestureRecognizerDelegate, PopUpDetailMusicDelegate>
 
 @property (nonatomic, weak) IBOutlet UITableView *playlistTableView;
-
 @property (nonatomic, strong) NSMutableArray *tracks;
-
-@property (nonatomic, strong) UIAlertView *popUp;
-
 @property (nonatomic, strong) Playlist *playlist;
 
 @end

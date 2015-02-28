@@ -9,8 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "Album.h"
 #import "AudioPlayer.h"
+#import "OnLTMusicPopupView.h"
 
-@interface AlbumViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
+@interface AlbumViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, PopUpDetailMusicDelegate>
 
 @property (nonatomic, weak) IBOutlet UITableView *tableview;
 
