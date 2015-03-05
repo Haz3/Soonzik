@@ -23,7 +23,7 @@ module API
 	        if (!notif)
 	          codeAnswer 502
           else
-  	        @returnValue = { content: notif.as_json(:include => :user) }
+  	        @returnValue = { content: notif.as_json(:include => { :user => {:only => User.miniKey } }) }
 	          codeAnswer 200
           end
   	    else
@@ -48,7 +48,7 @@ module API
         if (@security)
           notif = Notification.new(Notification.notification_params params)
           if (notif.save)
-            @returnValue = { content: notif.as_json(:include => :user) }
+            @returnValue = { content: notif.as_json(:include => { :user => {:only => User.miniKey } }) }
             codeAnswer 201
           else
             @returnValue = { content: notif.errors.to_hash.to_json }
@@ -146,7 +146,7 @@ module API
             notification_object = notification_object.offset(@offset.to_i)
           end
 
-          @returnValue = { content: notification_object.as_json(:include => :user) }
+          @returnValue = { content: notification_object.as_json(:include => { :user => {:only => User.miniKey } }) }
 
           if (notification_object.size == 0)
             codeAnswer 202
@@ -169,7 +169,7 @@ module API
     def destroy
       begin
         if (@security)
-          object = Notification.find_by_id(@id);
+          object = Notification.find_by_id(@id)
           object.destroy
           codeAnswer 202
         else

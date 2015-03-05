@@ -46,7 +46,7 @@ module API
           classObj = cart.typeObj.constantize
           # check if the object exists
           if (classObj.find_by_id(cart.obj_id) != nil && cart.save)
-            @returnValue = { content: cart.as_json(:include => :user) }
+            @returnValue = { content: cart.as_json(:include => { :user => {:only => User.miniKey } }) }
             codeAnswer 201
           else
             @returnValue = { content: cart.errors.to_hash.to_json }
@@ -144,7 +144,7 @@ module API
             cart_object = cart_object.offset(@offset.to_i)
           end
 
-          @returnValue = { content: cart_object.as_json(:include => :user) }
+          @returnValue = { content: cart_object.as_json(:include => { :user => {:only => User.miniKey } }) }
 
           if (cart_object.size == 0)
             codeAnswer 202

@@ -22,7 +22,7 @@ module API
           classObj = purchase.typeObj.constantize
           # check if the object exists
           if (classObj.find_by_id(purchase.obj_id) != nil && purchase.save)
-            @returnValue = { content: purchase.as_json(:include => :user) }
+            @returnValue = { content: purchase.as_json(:include => { :user => {:only => User.miniKey } }) }
             codeAnswer 201
           else
             @returnValue = { content: purchase.errors.to_hash.to_json }

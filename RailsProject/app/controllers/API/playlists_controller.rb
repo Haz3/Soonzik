@@ -24,7 +24,7 @@ module API
           codeAnswer 502
         else
           @returnValue = { content: playlist.as_json(:include => {
-          														:musics => {}
+          														:musics => { :only => Music.miniKey }
           														}) }
           codeAnswer 200
         end
@@ -84,8 +84,8 @@ module API
             playlist.name = @playlist[:name] if defined?@playlist && @playlist.has_key?(:name)
             if (playlist.save)
               @returnValue = { content: playlist.as_json(:include => {
-                                      :musics => {},
-                                      :user => {only: [:id, :username]}
+                                      :musics => {:only => Music.miniKey},
+                                      :user => {:only => User.miniKey}
                                       }) }
               codeAnswer 201
             else
@@ -184,8 +184,8 @@ module API
         end
 
         @returnValue = { content: playlist_object.as_json(:include => {
-                                    :musics => {},
-                                    :user => {}
+                                      :musics => {:only => Music.miniKey},
+                                      :user => {:only => User.miniKey}
                                     }) }
 
         if (playlist_object.size == 0)

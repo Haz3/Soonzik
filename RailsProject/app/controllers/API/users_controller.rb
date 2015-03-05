@@ -301,7 +301,6 @@ module API
           codeAnswer 503
         end
       rescue
-        puts $!, $@
         codeAnswer 504
       end
     end

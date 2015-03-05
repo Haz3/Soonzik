@@ -151,7 +151,12 @@ class User < ActiveRecord::Base
 
   # The strong parameters to save or update object
   def self.user_params(parameters)
-    parameters.require(:user).permit(:email, :password, :fname, :lname, :username, :birthday, :image, :description, :phoneNumber, :facebook, :twitter, :googlePlus, :newsletter, :language, :activated)
+    parameters.require(:user).permit(:email, :password, :fname, :lname, :username, :birthday, :image, :description, :phoneNumber, :facebook, :twitter, :googlePlus, :newsletter, :language)
+  end
+
+  # Filter of information for the API
+  def self.miniKey
+    [:id, :email, :username, :image, :description, :language]
   end
 
   ########

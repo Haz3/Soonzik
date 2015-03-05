@@ -10,8 +10,9 @@ module API
     # Retrieve all the packs
     def index
       begin
-        @returnValue = { content: Pack.all.as_json(include: { albums: {
-                                                                include: { musics: {}}
+        @returnValue = { content: Pack.all.as_json(:include => { albums: {
+                                                                :include => { musics: { :only => Music.miniKey }},
+                                                                :only => Album.miniKey
                                                               }}) }
         if (@returnValue.size == 0)
           codeAnswer 202
@@ -36,8 +37,9 @@ module API
         if (!pack)
           codeAnswer 502
         else
-          @returnValue = { content: pack.as_json(include: { albums: {
-                                                                include: { musics: {}}
+          @returnValue = { content: pack.as_json(:include => { albums: {
+                                                                :include => { musics: { :only => Music.miniKey }},
+                                                                :only => Album.miniKey
                                                               }}) }
           codeAnswer 200
         end
@@ -127,8 +129,9 @@ module API
           pack_object = pack_object.offset(@offset.to_i)
         end
 
-        @returnValue = { content: pack_object.as_json(include: { albums: {
-                                                                include: { musics: {}}
+        @returnValue = { content: pack_object.as_json(:include => { albums: {
+                                                                :include => { musics: { :only => Music.miniKey }},
+                                                                :only => Album.miniKey
                                                               }}) }
 
         if (pack_object.size == 0)

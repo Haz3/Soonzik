@@ -35,7 +35,13 @@ Rails.application.routes.draw do
       end
     end
 
+    resources :genres, only: [:index] do #ok
+    end
+
     post 'gifts/save' => 'gifts#save' #ok
+
+    resources :influences, only: [:index] do #ok
+    end
 
     resources :listenings, only: [:index, :show] do #ok
       collection do

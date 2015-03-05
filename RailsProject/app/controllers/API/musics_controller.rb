@@ -15,7 +15,7 @@ module API
     # Retrieve all the musics
     def index
       begin
-        @returnValue = { content: Music.all.as_json }
+        @returnValue = { content: Music.all.as_json(:only => Music.miniKey) }
         if (@returnValue.size == 0)
           codeAnswer 202
         else
@@ -35,11 +35,14 @@ module API
     # 
     def show
       begin
-        album = Music.find_by_id(@id)
-        if (!album)
+        music = Music.find_by_id(@id)
+        if (!music)
           codeAnswer 502
         else
-          @returnValue = { content: album.as_json(:include => :album) }
+          @returnValue = { content: music.as_json(:include => {
+                                      :album => {},
+                                      :genres => {}
+                                      }) }
           codeAnswer 200
         end
       rescue
@@ -128,7 +131,10 @@ module API
           music_object = music_object.offset(@offset.to_i)
         end
 
-        @returnValue = { content: music_object.as_json(:include => :album) }
+        @returnValue = { content: music_object.as_json(:include => {
+                                      :album => {},
+                                      :genres => {}
+                                      }) }
 
         if (music_object.size == 0)
           codeAnswer 202

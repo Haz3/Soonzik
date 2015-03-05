@@ -25,8 +25,8 @@ module API
           # check if the object exists
           if (classObj.find_by_id(gift.obj_id) != nil && gift.save)
             @returnValue = { content: gift.as_json(:include => {
-				                                    :user_from => {},
-				                                    :user_to => {}
+				                                    :user_from => { :only => User.miniKey },
+				                                    :user_to => { :only => User.miniKey }
 				                                  }) }
             codeAnswer 201
           else

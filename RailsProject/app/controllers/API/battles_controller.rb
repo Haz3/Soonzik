@@ -11,8 +11,8 @@ module API
     def index
       begin
         @returnValue = { content: Battle.all.as_json(:include => {
-        														:artist_one => {},
-        														:artist_two => {},
+        														:artist_one => { :only => User.miniKey },
+        														:artist_two => { :only => User.miniKey },
         														:votes => {}
         													}) }
         if (@returnValue.size == 0)
@@ -39,8 +39,8 @@ module API
           codeAnswer 502
         else
           @returnValue = { content: battle.as_json(:include => {
-          														:artist_one => {},
-          														:artist_two => {},
+          														:artist_one => { :only => User.miniKey },
+          														:artist_two => { :only => User.miniKey },
           														:votes => {}
           													}) }
           codeAnswer 200
@@ -132,8 +132,8 @@ module API
         end
 
         @returnValue = { content: battle_object.as_json(:include => {
-                                    :artist_one => {},
-                                    :artist_two => {},
+                                    :artist_one => { :only => User.miniKey },
+                                    :artist_two => { :only => User.miniKey },
                                     :votes => {}
                                   }) }
 

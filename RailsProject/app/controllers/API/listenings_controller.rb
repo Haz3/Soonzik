@@ -13,7 +13,7 @@ module API
   	# Retrieve all the listenings
     def index
       begin
-        @returnValue = { content: Listening.all.as_json(:include => :user) }
+        @returnValue = { content: Listening.all.as_json(:include => { :user => { :only => User.miniKey } }) }
         if (@returnValue.size == 0)
           codeAnswer 202
         else
@@ -37,7 +37,7 @@ module API
         if (!listening)
           codeAnswer 502
         else
-          @returnValue = { content: listening.as_json(:include => :user) }
+          @returnValue = { content: listening.as_json(:include => { :user => { :only => User.miniKey } }) }
           codeAnswer 200
         end
       rescue
@@ -126,7 +126,7 @@ module API
           listening_object = listening_object.offset(@offset.to_i)
         end
 
-        @returnValue = { content: listening_object.as_json(:include => :user) }
+        @returnValue = { content: listening_object.as_json(:include => { :user => { :only => User.miniKey } }) }
 
         if (listening_object.size == 0)
           codeAnswer 202
@@ -155,7 +155,7 @@ module API
           @listening[:user_id] = @user_id
           listening = Listening.new(Listening.listening_params params)
           if (listening.save)
-            @returnValue = { content: listening.as_json(:include => :user) }
+            @returnValue = { content: listening.as_json(:include => { :user => { :only => User.miniKey } }) }
             codeAnswer 201
           else
             @returnValue = { content: listening.errors.to_hash.to_json }

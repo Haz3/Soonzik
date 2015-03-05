@@ -13,7 +13,7 @@ module API
     # Retrieve all the albums
     def index
       begin
-        @returnValue = { content: Album.all.as_json }
+        @returnValue = { content: Album.all.as_json(:only => Album.miniKey ) }
         if (@returnValue.size == 0)
           codeAnswer 202
         else
@@ -37,7 +37,9 @@ module API
         if (!album)
           codeAnswer 502
         else
-          @returnValue = { content: album.as_json(:include => :musics) }
+          @returnValue = { content: album.as_json(:include => {
+                                                              :musics => { :only => Music.miniKey}
+                                                              }) }
           codeAnswer 200
         end
       rescue
@@ -126,7 +128,7 @@ module API
           album_object = album_object.offset(@offset.to_i)
         end
 
-        @returnValue = { content: album_object.as_json(:include => :musics) }
+        @returnValue = { content: album_object.as_json(:include => { :musics => {:only => Music.miniKey } }) }
 
         if (album_object.size == 0)
           codeAnswer 202

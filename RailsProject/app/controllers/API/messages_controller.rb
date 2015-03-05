@@ -23,8 +23,8 @@ module API
 	          codeAnswer 502
 	        else
   	        @returnValue = { content: msg.as_json(:include => {
-          														:sender => {},
-          														:receiver => {}
+          														:sender => { :only => User.miniKey },
+          														:receiver => { :only => User.miniKey }
           													}) }
             codeAnswer 200
           end
@@ -51,8 +51,8 @@ module API
           msg = Message.new(Message.message_params params)
           if (msg.save)
             @returnValue = { content: msg.as_json(:include => {
-                                    :sender => {},
-                                    :receiver => {}
+                                    :sender => { :only => User.miniKey },
+                                    :receiver => { :only => User.miniKey }
                                   }) }
             codeAnswer 201
           else
@@ -152,8 +152,8 @@ module API
           end
 
           @returnValue = { content: message_object.as_json(:include => {
-                                      :sender => {},
-                                      :receiver => {}
+                                      :sender => { :only => User.miniKey },
+                                      :receiver => { :only => User.miniKey }
                                     }) }
 
           if (message_object.size == 0)
