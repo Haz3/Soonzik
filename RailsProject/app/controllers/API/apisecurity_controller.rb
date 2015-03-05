@@ -45,6 +45,21 @@ module API
       sendJson
     end
 
+    def login
+      if (defined?(@email) && defined?(@password))
+        begin
+          user = User.find_by_email(@email)
+          if (user && user.valid_password?(@password))
+            @returnValue = { content: user.as_json(:include => :address) }
+          end
+        rescue
+          codeAnswer 504
+        end
+      else
+        codeAnswer 502
+      end
+    end
+
     # Check if a facebook user is authenticate and retrive its informations
     # 
     # ==== Options
