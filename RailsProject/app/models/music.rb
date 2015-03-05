@@ -25,6 +25,6 @@ class Music < ActiveRecord::Base
 
   # Filter of information for the API
   def self.miniKey
-    [:id, :title, :duration, :price]
+    [:id, :title, :duration, :price, :file]
   end
 end
