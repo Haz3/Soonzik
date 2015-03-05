@@ -22,15 +22,18 @@ module API
 	        notif = Notification.find_by_id(@id)
 	        if (!notif)
 	          codeAnswer 502
+            defineHttp :not_found
           else
   	        @returnValue = { content: notif.as_json(:include => { :user => {:only => User.miniKey } }) }
 	          codeAnswer 200
           end
   	    else
   	    	codeAnswer 500
+          defineHttp :forbidden
   	    end
       rescue
         codeAnswer 504
+        defineHttp :service_unavailable
       end
       sendJson
     end
@@ -50,15 +53,19 @@ module API
           if (notif.save)
             @returnValue = { content: notif.as_json(:include => { :user => {:only => User.miniKey } }) }
             codeAnswer 201
+            defineHttp :created
           else
             @returnValue = { content: notif.errors.to_hash.to_json }
             codeAnswer 503
+            defineHttp :service_unavailable
           end
         else
           codeAnswer 500
+          defineHttp :forbidden
         end
       rescue
         codeAnswer 504
+        defineHttp :service_unavailable
       end
       sendJson
     end
@@ -150,12 +157,14 @@ module API
 
           if (notification_object.size == 0)
             codeAnswer 202
+            defineHttp :no_content
           else
             codeAnswer 200
           end
         end
       rescue
         codeAnswer 504
+        defineHttp :service_unavailable
       end
       sendJson
     end
@@ -174,9 +183,11 @@ module API
           codeAnswer 202
         else
           codeAnswer 500
+          defineHttp :forbidden
         end
       rescue
         codeAnswer 504
+        defineHttp :service_unavailable
       end
       sendJson
     end

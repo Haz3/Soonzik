@@ -11,11 +11,13 @@ module API
         @returnValue = { content: Genre.all.as_json(:include => :influences) }
         if (@returnValue.size == 0)
           codeAnswer 202
+          defineHttp :no_content
         else
           codeAnswer 200
         end
       rescue
         codeAnswer 504
+        defineHttp :service_unavailable
       end
       sendJson
     end
@@ -26,6 +28,7 @@ module API
         genre = Genre.find_by_id(@id)
         if (!genre)
           codeAnswer 502
+          defineHttp :not_found
         else
           @returnValue = { content: genre.as_json(:include => {
                                       :influences => {},
@@ -35,6 +38,7 @@ module API
         end
       rescue
         codeAnswer 504
+        defineHttp :service_unavailable
       end
       sendJson
     end

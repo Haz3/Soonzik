@@ -23,9 +23,11 @@ module API
       	  codeAnswer 202
       	else
       	  codeAnswer 500
+          defineHttp :forbidden
       	end
       rescue
       	codeAnswer 504
+        defineHttp :service_unavailable
       end
       sendJson
     end
@@ -48,15 +50,19 @@ module API
           if (classObj.find_by_id(cart.obj_id) != nil && cart.save)
             @returnValue = { content: cart.as_json(:include => { :user => {:only => User.miniKey } }) }
             codeAnswer 201
+            defineHttp :created
           else
             @returnValue = { content: cart.errors.to_hash.to_json }
             codeAnswer 503
+            defineHttp :service_unavailable
           end
         else
           codeAnswer 500
+          defineHttp :forbidden
         end
       rescue
         codeAnswer 504
+        defineHttp :service_unavailable
       end
       sendJson
     end
@@ -148,12 +154,14 @@ module API
 
           if (cart_object.size == 0)
             codeAnswer 202
+            defineHttp :not_created
           else
             codeAnswer 200
           end
         end
       rescue
         codeAnswer 504
+        defineHttp :service_unavailable
       end
       sendJson
     end

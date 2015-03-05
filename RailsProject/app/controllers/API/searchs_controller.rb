@@ -48,6 +48,7 @@ module API
 				  if (artist_result.size == 0 && user_result.size == 0 && music_result.size == 0 && album_result.size == 0 && pack_result.size == 0)
 				  	content = []
 				  	codeAnswer 202
+				  	defineHttp :no_content
 				  else
 				    content = { artist: artist_result.to_json(:only => User.miniKey ), user: user_result.to_json(:only => User.miniKey ), music: music_result.to_json(:only => Music.miniKey ), album: album_result.to_json(:only => Album.miniKey ), pack: pack_result.to_json(:only => Pack.miniKey ) }
 				  end
@@ -56,6 +57,7 @@ module API
         codeAnswer 200
 	  	rescue
 	    	codeAnswer 504
+	    	defineHttp :service_unavailable
 	  	end
 	  	sendJson
     end

@@ -21,6 +21,7 @@ module API
 	        msg = Message.find_by_id(@id)
 	        if (!msg)
 	          codeAnswer 502
+            defineHttp :not_found
 	        else
   	        @returnValue = { content: msg.as_json(:include => {
           														:sender => { :only => User.miniKey },
@@ -30,9 +31,11 @@ module API
           end
 	    else
 	    	codeAnswer 500
+        defineHttp :forbidden
 	    end
       rescue
         codeAnswer 504
+        defineHttp :service_unavailable
       end
       sendJson
     end
@@ -55,15 +58,19 @@ module API
                                     :receiver => { :only => User.miniKey }
                                   }) }
             codeAnswer 201
+            defineHttp :created
           else
             @returnValue = { content: msg.errors.to_hash.to_json }
             codeAnswer 503
+            defineHttp :service_unavailable
           end
         else
           codeAnswer 500
+          defineHttp :forbidden
         end
       rescue
         codeAnswer 504
+        defineHttp :service_unavailable
       end
       sendJson
     end
@@ -158,12 +165,14 @@ module API
 
           if (message_object.size == 0)
             codeAnswer 202
+            defineHttp :no_content
           else
             codeAnswer 200
           end
         end
       rescue
         codeAnswer 504
+        defineHttp :service_unavailable
       end
       sendJson
     end

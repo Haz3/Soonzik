@@ -24,15 +24,19 @@ module API
           if (classObj.find_by_id(purchase.obj_id) != nil && purchase.save)
             @returnValue = { content: purchase.as_json(:include => { :user => {:only => User.miniKey } }) }
             codeAnswer 201
+            defineHttp :created
           else
             @returnValue = { content: purchase.errors.to_hash.to_json }
             codeAnswer 503
+            defineHttp :service_unavailable
           end
         else
           codeAnswer 500
+          defineHttp :forbidden
         end
       rescue
         codeAnswer 504
+        defineHttp :service_unavailable
       end
       sendJson
     end

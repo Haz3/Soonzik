@@ -159,6 +159,11 @@ class User < ActiveRecord::Base
     [:id, :email, :username, :image, :description, :language]
   end
 
+  # Filter of information for the API
+  def self.bigKey
+    [:id, :email, :username, :fname, :lname, :birthday, :image, :description, :language, :facebook, :twitter, :googlePlus]
+  end
+
   ########
 
   private

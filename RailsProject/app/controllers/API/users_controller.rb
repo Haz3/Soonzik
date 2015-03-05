@@ -15,14 +15,16 @@ module API
   	# Retrieve all the users
     def index
       begin
-        @returnValue = { content: User.all.as_json(:include => :address) }
+        @returnValue = { content: User.all.as_json(:include => :address, :only => User.miniKey) }
         if (@returnValue.size == 0)
           codeAnswer 202
+          defineHttp :no_content
         else
           codeAnswer 200
         end
       rescue
         codeAnswer 504
+        defineHttp :service_unavailable
       end
       sendJson
     end
@@ -38,12 +40,14 @@ module API
         user = User.find_by_id(@id)
         if (!user)
           codeAnswer 502
+          defineHttp :not_found
         else
-          @returnValue = { content: user.as_json(:include => :address) }
+          @returnValue = { content: user.as_json(:include => :address, :only => User.bigKey) }
           codeAnswer 200
         end
       rescue
         codeAnswer 504
+        defineHttp :service_unavailable
       end
       sendJson
     end
@@ -132,12 +136,14 @@ module API
 
         if (user_object.size == 0)
           codeAnswer 202
+          defineHttp :no_content
         else
           codeAnswer 200
         end
 
       rescue
         codeAnswer 504
+        defineHttp :service_unavailable
       end
       sendJson
     end
@@ -169,9 +175,11 @@ module API
           codeAnswer 200
         else
           codeAnswer 500
+          defineHttp :forbidden
         end
       rescue
         codeAnswer 504
+        defineHttp :service_unavailable
       end
       sendJson
     end
@@ -237,15 +245,18 @@ module API
           user = User.find_by_id(@user_id)
           if user == nil
             codeAnswer 502
+            defineHttp :not_found
             return
           else
             _save(false, params)
           end
         else
           codeAnswer 500
+          defineHttp :forbidden
         end
       rescue
         codeAnswer 504
+        defineHttp :service_unavailable
       end
       sendJson
     end
@@ -274,10 +285,12 @@ module API
 
           if ((update_user && update_address))
             @returnValue = { content: user.as_json(:include => :address) }
-            codeAnswer 200
+            codeAnswer 201
+            defineHttp :created
           else
             @returnValue = { content: user.errors.to_hash.to_json }
             codeAnswer 505
+            defineHttp :service_unavailable
           end
           return
         else
@@ -292,16 +305,20 @@ module API
           if (user.save!)
             @returnValue = { content: user.as_json(:include => :address) }
             codeAnswer 201
+            defineHttp :created
           else
             @returnValue = { content: user.errors.to_hash.to_json }
             codeAnswer 503
+            defineHttp :service_unavailable
           end
         else
           @returnValue = { content: address.errors.to_hash.to_json }
           codeAnswer 503
+          defineHttp :service_unavailable
         end
       rescue
         codeAnswer 504
+        defineHttp :service_unavailable
       end
     end
   end

@@ -11,11 +11,13 @@ module API
         @returnValue = { content: Influences.all.as_json(:include => :genres) }
         if (@returnValue.size == 0)
           codeAnswer 202
+          defineHttp :no_content
         else
           codeAnswer 200
         end
       rescue
         codeAnswer 504
+        defineHttp :service_unavailable
       end
       sendJson
     end

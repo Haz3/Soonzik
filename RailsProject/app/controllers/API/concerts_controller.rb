@@ -13,11 +13,13 @@ module API
         @returnValue = { content: Concert.all.as_json(:include => :address) }
         if (@returnValue.size == 0)
           codeAnswer 202
+          defineHttp :no_content
         else
           codeAnswer 200
         end
       rescue
         codeAnswer 504
+        defineHttp :service_unavailable
       end
       sendJson
     end
@@ -33,12 +35,14 @@ module API
         concert = Concert.find_by_id(@id)
         if (!concert)
           codeAnswer 502
+          defineHttp :not_found
         else
           @returnValue = { content: concert.as_json(:include => :address) }
           codeAnswer 200
         end
       rescue
         codeAnswer 504
+        defineHttp :service_unavailable
       end
       sendJson
     end
@@ -127,12 +131,14 @@ module API
 
         if (concert_object.size == 0)
           codeAnswer 202
+          defineHttp :no_content
         else
           codeAnswer 200
         end
 
       rescue
         codeAnswer 504
+        defineHttp :service_unavailable
       end
       sendJson
     end

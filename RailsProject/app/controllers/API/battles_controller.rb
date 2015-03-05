@@ -17,11 +17,13 @@ module API
         													}) }
         if (@returnValue.size == 0)
           codeAnswer 202
+          defineHttp :no_content
         else
           codeAnswer 200
         end
       rescue
         codeAnswer 504
+        defineHttp :service_unavailable
       end
       sendJson
     end
@@ -37,6 +39,7 @@ module API
         battle = Battle.find_by_id(@id)
         if (!battle)
           codeAnswer 502
+          defineHttp :not_found
         else
           @returnValue = { content: battle.as_json(:include => {
           														:artist_one => { :only => User.miniKey },
@@ -47,6 +50,7 @@ module API
         end
       rescue
         codeAnswer 504
+        defineHttp :service_unavailable
       end
       sendJson
     end
@@ -139,12 +143,14 @@ module API
 
         if (battle_object.size == 0)
           codeAnswer 202
+          defineHttp :no_content
         else
           codeAnswer 200
         end
 
       rescue
         codeAnswer 504
+        defineHttp :service_unavailable
       end
       sendJson
     end

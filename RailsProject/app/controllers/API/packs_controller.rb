@@ -16,11 +16,13 @@ module API
                                                               }}) }
         if (@returnValue.size == 0)
           codeAnswer 202
+          defineHttp :no_content
         else
           codeAnswer 200
         end
       rescue
         codeAnswer 504
+        defineHttp :service_unavailable
       end
       sendJson
     end
@@ -36,6 +38,7 @@ module API
         pack = Pack.find_by_id(@id)
         if (!pack)
           codeAnswer 502
+          defineHttp :not_found
         else
           @returnValue = { content: pack.as_json(:include => { albums: {
                                                                 :include => { musics: { :only => Music.miniKey }},
@@ -45,6 +48,7 @@ module API
         end
       rescue
         codeAnswer 504
+        defineHttp :service_unavailable
       end
       sendJson
     end
@@ -136,12 +140,14 @@ module API
 
         if (pack_object.size == 0)
           codeAnswer 202
+          defineHttp :no_content
         else
           codeAnswer 200
         end
 
       rescue
         codeAnswer 504
+        defineHttp :service_unavailable
       end
       sendJson
     end

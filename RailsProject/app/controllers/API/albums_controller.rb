@@ -16,11 +16,13 @@ module API
         @returnValue = { content: Album.all.as_json(:only => Album.miniKey ) }
         if (@returnValue.size == 0)
           codeAnswer 202
+          defineHttp :no_content
         else
           codeAnswer 200
         end
       rescue
         codeAnswer 504
+        defineHttp :service_unavailable
       end
       sendJson
     end
@@ -36,6 +38,7 @@ module API
         album = Album.find_by_id(@id)
         if (!album)
           codeAnswer 502
+          defineHttp :not_found
         else
           @returnValue = { content: album.as_json(:include => {
                                                               :musics => { :only => Music.miniKey}
@@ -44,6 +47,7 @@ module API
         end
       rescue
         codeAnswer 504
+        defineHttp :service_unavailable
       end
       sendJson
     end
@@ -132,12 +136,14 @@ module API
 
         if (album_object.size == 0)
           codeAnswer 202
+          defineHttp :no_content
         else
           codeAnswer 200
         end
 
       rescue
         codeAnswer 504
+        defineHttp :service_unavailable
       end
       sendJson
     end
@@ -157,6 +163,7 @@ module API
 
           if (!album)
             codeAnswer 502
+            defineHttp :not_found
           else
             com = Commentary.new
             com.content = @content
@@ -165,13 +172,18 @@ module API
             if (com.save)
               com.albums << album
               codeAnswer 201
+              defineHttp :created
             else
               codeAnswer 503
+              defineHttp :service_unavailable
             end
           end
+        else
+          defineHttp :forbidden
         end
       rescue
         codeAnswer 504
+        defineHttp :service_unavailable
       end
       sendJson
   	end

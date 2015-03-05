@@ -17,11 +17,13 @@ module API
         @returnValue = { content: Tweet.all.as_json(:include => :user) }
         if (@returnValue.size == 0)
           codeAnswer 202
+          defineHttp :no_content
         else
           codeAnswer 200
         end
       rescue
         codeAnswer 504
+        defineHttp :service_unavailable
       end
       sendJson
     end
@@ -37,12 +39,14 @@ module API
         tweets = Tweet.find_by_id(@id)
         if (!tweets)
           codeAnswer 502
+          defineHttp :not_found
         else
           @returnValue = { content: tweets.as_json(:include => :user) }
           codeAnswer 200
         end
       rescue
         codeAnswer 504
+        defineHttp :service_unavailable
       end
       sendJson
     end
@@ -61,16 +65,19 @@ module API
           if (tweet.save)
             @returnValue = { content: tweet.as_json(:include => :user) }
             codeAnswer 201
+            defineHttp :created
           else
             @returnValue = { content: tweet.errors.to_hash.to_json }
             codeAnswer 503
-            puts @returnValue
+            defineHttp :service_unavailable
           end
         else
           codeAnswer 500
+          defineHttp :forbidden
         end
       rescue
         codeAnswer 504
+        defineHttp :service_unavailable
       end
       sendJson
     end
@@ -159,12 +166,14 @@ module API
 
         if (tweet_object.size == 0)
           codeAnswer 202
+          defineHttp :no_content
         else
           codeAnswer 200
         end
 
       rescue
         codeAnswer 504
+        defineHttp :service_unavailable
       end
       sendJson
     end
@@ -183,9 +192,11 @@ module API
           codeAnswer 202
         else
           codeAnswer 500
+          defineHttp :forbidden
         end
       rescue
         codeAnswer 504
+        defineHttp :service_unavailable
       end
       sendJson
     end

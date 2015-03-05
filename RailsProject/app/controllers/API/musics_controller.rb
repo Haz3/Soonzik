@@ -18,11 +18,13 @@ module API
         @returnValue = { content: Music.all.as_json(:only => Music.miniKey) }
         if (@returnValue.size == 0)
           codeAnswer 202
+          defineHttp :no_content
         else
           codeAnswer 200
         end
       rescue
         codeAnswer 504
+        defineHttp :service_unavailable
       end
       sendJson
     end
@@ -38,6 +40,7 @@ module API
         music = Music.find_by_id(@id)
         if (!music)
           codeAnswer 502
+          defineHttp :not_found
         else
           @returnValue = { content: music.as_json(:include => {
                                       :album => {},
@@ -47,6 +50,7 @@ module API
         end
       rescue
         codeAnswer 504
+        defineHttp :service_unavailable
       end
       sendJson
     end
@@ -138,12 +142,14 @@ module API
 
         if (music_object.size == 0)
           codeAnswer 202
+          defineHttp :no_content
         else
           codeAnswer 200
         end
 
       rescue
         codeAnswer 504
+        defineHttp :service_unavailable
       end
       sendJson
     end
@@ -163,6 +169,7 @@ module API
 
           if (!music)
             codeAnswer 502
+            defineHttp :not_found
           else
             com = Commentary.new
             com.content = @content
@@ -171,15 +178,19 @@ module API
             if (com.save)
               com.musics << music
               codeAnswer 201
+              defineHttp :created
             else
               codeAnswer 503
+              defineHttp :service_unavailable
             end
           end
         else
           codeAnswer 500
+          defineHttp :forbidden
         end
       rescue
         codeAnswer 504
+        defineHttp :service_unavailable
       end
       sendJson
   	end
@@ -204,6 +215,7 @@ module API
         end
         if (music == nil)
           codeAnswer 502
+          defineHttp :not_found
         else
           # If the transaction is secured, it means we maybe have buy the music
           if (@security)
@@ -217,6 +229,7 @@ module API
         end
       rescue
         codeAnswer 504
+        defineHttp :service_unavailable
       end
       respond_to do |format|
         format.mp3 { render :text => buffer, :content_type => 'audio/mpeg' }
@@ -237,14 +250,18 @@ module API
           music = Music.find_by_id(@id)
           if (playlist && music && playlist.user_id == @user_id && !@playlist.musics.include?(music))
             playlist.musics << music
+            defineHttp :created
           else
             codeAnswer 502
+            defineHttp :not_found
           end
         else
           codeAnswer 500
+          defineHttp :forbidden
         end
       rescue
         codeAnswer 504
+        defineHttp :service_unavailable
       end
       sendJson
     end

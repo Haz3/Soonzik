@@ -29,15 +29,19 @@ module API
 				                                    :user_to => { :only => User.miniKey }
 				                                  }) }
             codeAnswer 201
+            defineHttp :created
           else
             @returnValue = { content: gift.errors.to_hash.to_json }
             codeAnswer 503
+            defineHttp :service_unavailable
           end
         else
           codeAnswer 500
+          defineHttp :forbidden
         end
       rescue
         codeAnswer 504
+        defineHttp :service_unavailable
       end
       sendJson
     end

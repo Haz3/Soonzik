@@ -22,6 +22,7 @@ module API
           define_method("get#{x.to_s.capitalize}") { params[x] }
         end
       end
+      @httpCode = nil
     end
   end
 end

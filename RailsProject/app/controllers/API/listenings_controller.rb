@@ -16,11 +16,13 @@ module API
         @returnValue = { content: Listening.all.as_json(:include => { :user => { :only => User.miniKey } }) }
         if (@returnValue.size == 0)
           codeAnswer 202
+          defineHttp :no_content
         else
           codeAnswer 200
         end
       rescue
         codeAnswer 504
+        defineHttp :service_unavailable
       end
       sendJson
     end
@@ -36,12 +38,14 @@ module API
         listening = Listening.find_by_id(@id)
         if (!listening)
           codeAnswer 502
+          defineHttp :not_found
         else
           @returnValue = { content: listening.as_json(:include => { :user => { :only => User.miniKey } }) }
           codeAnswer 200
         end
       rescue
         codeAnswer 504
+        defineHttp :service_unavailable
       end
       sendJson
     end
@@ -130,12 +134,14 @@ module API
 
         if (listening_object.size == 0)
           codeAnswer 202
+          defineHttp :no_content
         else
           codeAnswer 200
         end
 
       rescue
         codeAnswer 504
+        defineHttp :service_unavailable
       end
       sendJson
     end
@@ -157,13 +163,16 @@ module API
           if (listening.save)
             @returnValue = { content: listening.as_json(:include => { :user => { :only => User.miniKey } }) }
             codeAnswer 201
+            defineHttp :created
           else
             @returnValue = { content: listening.errors.to_hash.to_json }
             codeAnswer 503
+            defineHttp :service_unavailable
           end
         end
       rescue
         codeAnswer 504
+        defineHttp :service_unavailable
       end
       sendJson
     end

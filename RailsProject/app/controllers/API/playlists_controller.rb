@@ -22,6 +22,7 @@ module API
         playlist = Playlist.find_by_id(@id)
         if (!playlist)
           codeAnswer 502
+          defineHttp :not_found
         else
           @returnValue = { content: playlist.as_json(:include => {
           														:musics => { :only => Music.miniKey }
@@ -30,6 +31,7 @@ module API
         end
       rescue
         codeAnswer 504
+        defineHttp :service_unavailable
       end
       sendJson
     end
@@ -48,15 +50,19 @@ module API
           if (playlist.save)
             @returnValue = { content: playlist.as_json() }
             codeAnswer 201
+            defineHttp :created
           else
             @returnValue = { content: playlist.errors.to_hash.to_json }
             codeAnswer 503
+            defineHttp :service_unavailable
           end
         else
           codeAnswer 500
+          defineHttp :forbidden
         end
       rescue
         codeAnswer 504
+        defineHttp :service_unavailable
       end
       sendJson
     end
@@ -88,17 +94,22 @@ module API
                                       :user => {:only => User.miniKey}
                                       }) }
               codeAnswer 201
+              defineHttp :created
             else
               codeAnswer 505
+              defineHttp :service_unavailable
             end
           else
             codeAnswer 505
+            defineHttp :service_unavailable
           end
         else
           codeAnswer 500
+          defineHttp :forbidden
         end
       rescue
         codeAnswer 504
+        defineHttp :service_unavailable
       end
       sendJson
     end
@@ -190,12 +201,14 @@ module API
 
         if (playlist_object.size == 0)
           codeAnswer 202
+          defineHttp :no_content
         else
           codeAnswer 200
         end
 
       rescue
         codeAnswer 504
+        defineHttp :service_unavailable
       end
       sendJson
     end
@@ -214,9 +227,11 @@ module API
           codeAnswer 202
         else
           codeAnswer 500
+          defineHttp :forbidden
         end
       rescue
         codeAnswer 504
+        defineHttp :service_unavailable
       end
       sendJson
     end

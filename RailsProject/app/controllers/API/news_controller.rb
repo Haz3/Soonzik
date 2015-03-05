@@ -16,11 +16,13 @@ module API
         @returnValue = { content: News.all.as_json(:include => { :user => { :only => User.miniKey }, :newstexts => {}, :attachments => {}, :tags => {}}) }
         if (@returnValue.size == 0)
           codeAnswer 202
+          defineHttp :no_content
         else
           codeAnswer 200
         end
       rescue
         codeAnswer 504
+        defineHttp :service_unavailable
       end
       sendJson
     end
@@ -36,12 +38,14 @@ module API
         news = News.find_by_id(@id)
         if (!news)
           codeAnswer 502
+          defineHttp :not_found
         else
           @returnValue = { content: news.as_json(:include => { :user => { :only => User.miniKey }, :newstexts => {}, :attachments => {}, :tags => {}}) }
           codeAnswer 200
         end
       rescue
         codeAnswer 504
+        defineHttp :service_unavailable
       end
       sendJson
     end
@@ -130,12 +134,14 @@ module API
 
         if (new_object.size == 0)
           codeAnswer 202
+          defineHttp :no_content
         else
           codeAnswer 200
         end
 
       rescue
         codeAnswer 504
+        defineHttp :service_unavailable
       end
       sendJson
     end
@@ -155,6 +161,7 @@ module API
 
           if (!news)
             codeAnswer 502
+            defineHttp :not_found
           else
             com = Commentary.new
             com.content = @content
@@ -163,13 +170,16 @@ module API
             if (com.save)
               com.news << news
               codeAnswer 201
+              defineHttp :created
             else
               codeAnswer 503
+              defineHttp :service_unavailable
             end
           end
         end
       rescue
         codeAnswer 504
+        defineHttp :service_unavailable
       end
       sendJson
     end
