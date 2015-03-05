@@ -13,7 +13,10 @@ module API
     # Retrieve all the albums
     def index
       begin
-        @returnValue = { content: Album.all.as_json(:only => Album.miniKey, :include => {:user => {:only => User.miniKey}} ) }
+        @returnValue = { content: Album.all.as_json(:only => Album.miniKey, :include => {
+                                                                                :user => { :only => User.miniKey },
+                                                                                :musics => { :only => Music.miniKey }
+                                                                                } ) }
         if (@returnValue.size == 0)
           codeAnswer 202
           defineHttp :no_content
