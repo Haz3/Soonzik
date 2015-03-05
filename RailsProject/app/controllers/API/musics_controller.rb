@@ -15,7 +15,7 @@ module API
     # Retrieve all the musics
     def index
       begin
-        @returnValue = { content: Music.all.as_json(:only => Music.miniKey) }
+        @returnValue = { content: Music.all.as_json(:only => Music.miniKey, :include => {:user => {:only => User.miniKey}}) }
         if (@returnValue.size == 0)
           codeAnswer 202
           defineHttp :no_content
@@ -44,7 +44,8 @@ module API
         else
           @returnValue = { content: music.as_json(:include => {
                                       :album => {},
-                                      :genres => {}
+                                      :genres => {},
+                                      :user => {:only => User.miniKey}
                                       }) }
           codeAnswer 200
         end
@@ -137,7 +138,8 @@ module API
 
         @returnValue = { content: music_object.as_json(:include => {
                                       :album => {},
-                                      :genres => {}
+                                      :genres => {},
+                                      :user => {:only => User.miniKey}
                                       }) }
 
         if (music_object.size == 0)
