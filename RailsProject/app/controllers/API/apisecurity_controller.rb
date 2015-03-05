@@ -58,6 +58,7 @@ module API
       else
         codeAnswer 502
       end
+      sendJson
     end
 
     # Check if a facebook user is authenticate and retrive its informations
