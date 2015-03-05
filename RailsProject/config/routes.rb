@@ -6,10 +6,11 @@ Rails.application.routes.draw do
   match '/users/:id/finish_signup' => 'users#finish_signup', via: [:get, :patch], :as => :finish_signup
 
   #
-  # API ROUTES (57 / 57)
+  # API ROUTES
   #
   namespace :api, path: '/', constraints: { subdomain: 'api' }, :defaults => { :format => 'json' }  do
     get 'getKey/:id' => 'apisecurity#provideKey', constraints: {id: /[0-9]+/}
+    get 'login/:email/:password' => 'apisecurity#login'
     get 'loginFB/:token' => 'apisecurity#loginFB'
 
     resources :albums, only: [:index, :show] do #ok
@@ -35,7 +36,7 @@ Rails.application.routes.draw do
       end
     end
 
-    resources :genres, only: [:index] do #ok
+    resources :genres, only: [:index, :show] do #ok
     end
 
     post 'gifts/save' => 'gifts#save' #ok
@@ -120,12 +121,6 @@ Rails.application.routes.draw do
 
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
-
-  get 'signin' => 'others#signin'
-  get 'facebook/signin' => 'others#facebook'
-  get 'twitter/signin' => 'others#twitter'
-  get 'oauth/callback' => 'others#callback_oauth'
-  get 'activate' => 'others#activate_account', as: :activate
 
   resources :accesses
   resources :addresses
