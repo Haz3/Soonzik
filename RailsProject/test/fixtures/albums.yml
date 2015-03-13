@@ -3,7 +3,6 @@
 AlbumOne:
   user: UserOne
   title: Titre Album
-  style: Rap
   price: 1.5
   file: TitreAlbum
   yearProd: 2000
@@ -12,7 +11,6 @@ AlbumOne:
 AlbumTwo:
   user: UserTwo
   title: Title Album
-  style: Rock
   price: 2.5
   file: TitleAlbum
   yearProd: 2001

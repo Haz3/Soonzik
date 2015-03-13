@@ -6,7 +6,6 @@ MusicOne:
   album: AlbumOne
   title: Titre musique
   duration: 120
-  style: Rap
   price: 7.5
   file: music_one
   limited: false
@@ -18,7 +17,6 @@ MusicTwo:
   album: AlbumTwo
   title: Title music
   duration: 134
-  style: Rock
   price: 3.5
   file: music_two
   limited: true
