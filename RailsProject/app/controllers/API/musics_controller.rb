@@ -16,7 +16,7 @@ module API
     def index
       begin
         @returnValue = { content: Music.all.as_json(:only => Music.miniKey, :include => {:user => {:only => User.miniKey}}) }
-        if (@returnValue.size == 0)
+        if (@returnValue[:content].size == 0)
           codeAnswer 202
           defineHttp :no_content
         else
