@@ -6,6 +6,7 @@ module API
   # Thanks to this, every class has the param into an attribute (params[:xxxx] => @xxx)
   class ApiController < ActionController::Base
     protect_from_forgery with: :null_session
+    skip_before_filter  :verify_authenticity_token
     before_action :setParamToObj
 
     # Transform the params into attributes and create the getter to access it
