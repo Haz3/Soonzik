@@ -2,10 +2,8 @@
 
 PackOne:
   title: Pack 1
-  style: Rap
   albums: AlbumOne
 
 PackTwo:
   title: Pack 2
-  style: Rock
   albums: AlbumTwo

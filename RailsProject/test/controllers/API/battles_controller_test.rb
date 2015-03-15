@@ -3,11 +3,11 @@ require 'test_helper'
 module API
   class BattlesControllerTest < ActionController::TestCase
     def giveToken
-      @user = users(:UserOne)
       return { id: @user.id, secureKey: @user.secureKey }
     end
     
     setup do
+      @user = users(:UserOne)
       @battle = battles(:BattleOne)
     end
 
@@ -30,7 +30,7 @@ module API
 
     test "should show battle ko" do
       get :show, id: 12345, format: :json
-      assert_response :success
+      assert_response :not_found
 
       value = JSON.parse(response.body)
       assert_equal value["code"], 502
@@ -45,7 +45,7 @@ module API
       assert_equal value["content"].size, 2
 
       get :find, { offset: 42, order_by_asc: [], order_by_desc: ["date_begin"], format: :json }
-      assert_response :success
+      assert_response :no_content
 
       value = JSON.parse(response.body)
       assert_equal value["code"], 202

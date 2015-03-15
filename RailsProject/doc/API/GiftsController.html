@@ -110,8 +110,8 @@
 
 		<section class="description">
 			
-<p>Controller which manage the transaction for the Gift objects Here is the
-list of action available :</p>
+<p>Controller which manage the transaction for the <a
+href="../Gift.html">Gift</a> objects Here is the list of action available :</p>
 <ul><li>
 <p>save        [post] - SECURE</p>
 </li></ul>
@@ -145,10 +145,10 @@ list of action available :</p>
 										</header>
 
 					<div class="method-description">
-											<p>Save a new object Gift. For more information on the parameters, check at
-the model</p>
+											<p>Save a new object <a href="../Gift.html">Gift</a>. For more information on
+the parameters, check at the model</p>
 
-<h4 id="method-i-save-label-Options">Options<span><a href="#method-i-save-label-Options">&para;</a> <a href="#documentation">&uarr;</a></span></h4>
+<h4 id="method-i-save-label-Options">Options<span><a href="#method-i-save-label-Options">&para;</a> <a href="#top">&uarr;</a></span></h4>
 <ul><li>
 <p>+:<a href="to_user">gift</a>+ - Id of the user who has the gift</p>
 </li><li>
@@ -160,27 +160,52 @@ the model</p>
 </li></ul>					
 											<div class="method-source-code" id="save-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/gifts_controller.rb, line 17</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/gifts_controller.rb, line 20</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">save</span>
   <span class="ruby-keyword">begin</span>
     <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@security</span>)
-      <span class="ruby-identifier">gift</span> = <span class="ruby-constant">Gift</span>.<span class="ruby-identifier">new</span>(<span class="ruby-ivar">@gift</span>)
-      <span class="ruby-identifier">classObj</span> = <span class="ruby-identifier">gift</span>.<span class="ruby-identifier">typeObj</span>.<span class="ruby-identifier">constantize</span>
+      <span class="ruby-identifier">gift</span> = <span class="ruby-constant">Gift</span>.<span class="ruby-identifier">new</span>
+      <span class="ruby-identifier">gift</span>.<span class="ruby-identifier">to_user</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:to_user</span>]
+      <span class="ruby-identifier">gift</span>.<span class="ruby-identifier">from_user</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:from_user</span>]
+      <span class="ruby-identifier">classObj</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:typeObj</span>].<span class="ruby-identifier">constantize</span>
+      <span class="ruby-identifier">obj</span> = <span class="ruby-identifier">classObj</span>.<span class="ruby-identifier">find_by_id</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:obj_id</span>])
       <span class="ruby-comment"># check if the object exists</span>
-      <span class="ruby-keyword">if</span> (<span class="ruby-identifier">classObj</span>.<span class="ruby-identifier">find_by_id</span>(<span class="ruby-identifier">gift</span>.<span class="ruby-identifier">obj_id</span>) <span class="ruby-operator">!=</span> <span class="ruby-keyword">nil</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">gift</span>.<span class="ruby-identifier">save</span>)
-        <span class="ruby-ivar">@returnValue</span> = { <span class="ruby-identifier">content</span><span class="ruby-operator">:</span> <span class="ruby-identifier">gift</span>.<span class="ruby-identifier">as_json</span>(<span class="ruby-value">:include</span> =<span class="ruby-operator">&gt;</span> {
-                                                                <span class="ruby-value">:user_from</span> =<span class="ruby-operator">&gt;</span> {},
-                                                                <span class="ruby-value">:user_to</span> =<span class="ruby-operator">&gt;</span> {}
+      <span class="ruby-keyword">if</span> (<span class="ruby-identifier">obj</span> <span class="ruby-operator">!=</span> <span class="ruby-keyword">nil</span>)
+        <span class="ruby-keyword">case</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:typeObj</span>]
+          <span class="ruby-keyword">when</span> <span class="ruby-string">&quot;Music&quot;</span>
+            <span class="ruby-identifier">gift</span>.<span class="ruby-identifier">musics</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">obj</span>;
+          <span class="ruby-keyword">when</span> <span class="ruby-string">&quot;Album&quot;</span>
+            <span class="ruby-identifier">gift</span>.<span class="ruby-identifier">albums</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">obj</span>;
+          <span class="ruby-keyword">when</span> <span class="ruby-string">&quot;Pack&quot;</span>
+            <span class="ruby-identifier">gift</span>.<span class="ruby-identifier">packs</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">obj</span>;
+        <span class="ruby-keyword">end</span>
+
+        <span class="ruby-keyword">if</span> (<span class="ruby-identifier">gift</span>.<span class="ruby-identifier">save</span>)
+          <span class="ruby-ivar">@returnValue</span> = { <span class="ruby-identifier">content</span><span class="ruby-operator">:</span> <span class="ruby-identifier">gift</span>.<span class="ruby-identifier">as_json</span>(<span class="ruby-value">:include</span> =<span class="ruby-operator">&gt;</span> {
+                                                                <span class="ruby-value">:user_from</span> =<span class="ruby-operator">&gt;</span> { <span class="ruby-value">:only</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">User</span>.<span class="ruby-identifier">miniKey</span> },
+                                                                <span class="ruby-value">:user_to</span> =<span class="ruby-operator">&gt;</span> { <span class="ruby-value">:only</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">User</span>.<span class="ruby-identifier">miniKey</span> },
+                                          <span class="ruby-value">:musics</span> =<span class="ruby-operator">&gt;</span> { <span class="ruby-value">:only</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">Music</span>.<span class="ruby-identifier">miniKey</span>},
+                                          <span class="ruby-value">:albums</span> =<span class="ruby-operator">&gt;</span> { <span class="ruby-value">:only</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">Album</span>.<span class="ruby-identifier">miniKey</span> },
+                                          <span class="ruby-value">:packs</span> =<span class="ruby-operator">&gt;</span> { <span class="ruby-value">:only</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">Pack</span>.<span class="ruby-identifier">miniKey</span> }
                                                               }) }
-        <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">201</span>
+          <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">201</span>
+          <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:created</span>
+        <span class="ruby-keyword">else</span>
+          <span class="ruby-ivar">@returnValue</span> = { <span class="ruby-identifier">content</span><span class="ruby-operator">:</span> <span class="ruby-identifier">gift</span>.<span class="ruby-identifier">errors</span>.<span class="ruby-identifier">to_hash</span>.<span class="ruby-identifier">to_json</span> }
+          <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">503</span>
+          <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:service_unavailable</span>
+        <span class="ruby-keyword">end</span>
       <span class="ruby-keyword">else</span>
         <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">503</span>
+        <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:service_unavailable</span>
       <span class="ruby-keyword">end</span>
     <span class="ruby-keyword">else</span>
       <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">500</span>
+      <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:forbidden</span>
     <span class="ruby-keyword">end</span>
   <span class="ruby-keyword">rescue</span>
     <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">504</span>
+    <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:service_unavailable</span>
   <span class="ruby-keyword">end</span>
   <span class="ruby-identifier">sendJson</span>
 <span class="ruby-keyword">end</span></code></pre>
@@ -204,7 +229,7 @@ the model</p>
 
 		<footer>
 			<div class="container">
-				<span id="rdoc-version">Generated by RDoc 4.1.2</span> using the
+				<span id="rdoc-version">Generated by RDoc 4.2.0</span> using the
 				<a id="generator-version"
 					href="http://deveiate.org/fivefish">Fivefish RDoc 0.1.0</a> generator.
 			</div>
@@ -221,7 +246,9 @@ the model</p>
 			<li><a href="../API/BattlesController.html">API::BattlesController</a></li>
 			<li><a href="../API/CartsController.html">API::CartsController</a></li>
 			<li><a href="../API/ConcertsController.html">API::ConcertsController</a></li>
+			<li><a href="../API/GenresController.html">API::GenresController</a></li>
 			<li><a href="../API/GiftsController.html">API::GiftsController</a></li>
+			<li><a href="../API/InfluencesController.html">API::InfluencesController</a></li>
 			<li><a href="../API/ListeningsController.html">API::ListeningsController</a></li>
 			<li><a href="../API/MessagesController.html">API::MessagesController</a></li>
 			<li><a href="../API/MusicsController.html">API::MusicsController</a></li>
@@ -234,6 +261,37 @@ the model</p>
 			<li><a href="../API/SuggestionsController.html">API::SuggestionsController</a></li>
 			<li><a href="../API/TweetsController.html">API::TweetsController</a></li>
 			<li><a href="../API/UsersController.html">API::UsersController</a></li>
+			<li><a href="../Access.html">Access</a></li>
+			<li><a href="../Address.html">Address</a></li>
+			<li><a href="../AdminUser.html">AdminUser</a></li>
+			<li><a href="../Album.html">Album</a></li>
+			<li><a href="../AlbumNote.html">AlbumNote</a></li>
+			<li><a href="../Attachment.html">Attachment</a></li>
+			<li><a href="../Battle.html">Battle</a></li>
+			<li><a href="../Cart.html">Cart</a></li>
+			<li><a href="../Commentary.html">Commentary</a></li>
+			<li><a href="../Concert.html">Concert</a></li>
+			<li><a href="../Description.html">Description</a></li>
+			<li><a href="../Flac.html">Flac</a></li>
+			<li><a href="../Genre.html">Genre</a></li>
+			<li><a href="../Gift.html">Gift</a></li>
+			<li><a href="../Group.html">Group</a></li>
+			<li><a href="../Influence.html">Influence</a></li>
+			<li><a href="../Listening.html">Listening</a></li>
+			<li><a href="../Message.html">Message</a></li>
+			<li><a href="../Music.html">Music</a></li>
+			<li><a href="../MusicNote.html">MusicNote</a></li>
+			<li><a href="../News.html">News</a></li>
+			<li><a href="../Newstext.html">Newstext</a></li>
+			<li><a href="../Notification.html">Notification</a></li>
+			<li><a href="../Pack.html">Pack</a></li>
+			<li><a href="../Playlist.html">Playlist</a></li>
+			<li><a href="../Proposition.html">Proposition</a></li>
+			<li><a href="../Purchase.html">Purchase</a></li>
+			<li><a href="../Tag.html">Tag</a></li>
+			<li><a href="../Tweet.html">Tweet</a></li>
+			<li><a href="../User.html">User</a></li>
+			<li><a href="../Vote.html">Vote</a></li>
 		</ul>
 	</div>
 

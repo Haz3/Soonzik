@@ -40,8 +40,8 @@ module API
     # 
     # ==== Options
     # 
-    # * +:playlist[user_id]+ - Id of the user who has the playlist
-    # * +:playlist[name]+ - Name of the playlist
+    # * +:playlist [user_id]+ - Id of the user who has the playlist
+    # * +:playlist [name]+ - Name of the playlist
     # 
     def save
       begin
@@ -72,8 +72,8 @@ module API
     # ==== Options
     # 
     # * +:id+ - Id of the playlist to modify
-    # * +:playlist[name]+ - Name of the playlist
-    # * +:playlist[music][]+ - Array of the id of the music in the playlist
+    # * +:playlist [name]+ - Name of the playlist
+    # * +:playlist [music][]+ - Array of the id of the music in the playlist
     # 
     def update
       begin
@@ -118,7 +118,7 @@ module API
     #
     # ==== Options
     # 
-    # * +:attribute[attribute_name]+ - If you want a column equal to a specific value
+    # * +:attribute [attribute_name]+ - If you want a column equal to a specific value
     # * +:order_by_asc[]+ - If you want to order by ascending by values
     # * +:order_by_desc[]+ - If you want to order by descending by values
     # * +:group_by[]+ - If you want to group by field
@@ -225,6 +225,7 @@ module API
           object = Playlist.find_by_id(@id);
           object.destroy
           codeAnswer 202
+          defineHttp :no_content
         else
           codeAnswer 500
           defineHttp :forbidden

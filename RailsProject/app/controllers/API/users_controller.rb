@@ -16,7 +16,7 @@ module API
     def index
       begin
         @returnValue = { content: User.all.as_json(:include => :address, :only => User.miniKey) }
-        if (@returnValue.size == 0)
+        if (@returnValue[:content].size == 0)
           codeAnswer 202
           defineHttp :no_content
         else
@@ -56,7 +56,7 @@ module API
     #
     # ==== Options
     # 
-    # * +:attribute[attribute_name]+ - If you want a column equal to a specific value
+    # * +:attribute [attribute_name]+ - If you want a column equal to a specific value
     # * +:order_by_asc[]+ - If you want to order by ascending by values
     # * +:order_by_desc[]+ - If you want to order by descending by values
     # * +:group_by[]+ - If you want to group by field
@@ -154,21 +154,19 @@ module API
         if (@security)
           user = User.find_by_id(@user_id)
           list = user.purchases
-          contentReturn = []
+          contentReturn = { musics: [], albums: [], packs: []}
 
           list.each do |x|
-            classObj = x.typeObj.constantize
-            obj = classObj.find_by_id(x.obj_id)
-            if (obj != nil && x.typeObj == "Album")
-              contentReturn << { album: obj, musics: obj.musics }
-            elsif (obj != nil && x.typeObj == "Music")
-              contentReturn << obj
-            elsif (obj != nil && x.typeObj == "Pack")
-              value = { pack: obj, albums: [] }
-              obj.albums.each do |album|
+            if (x.musics != nil)
+              contentReturn[:musics] = contentReturn[:musics] | [x.musics]
+            elsif (x.albums != nil)
+              contentReturn[:albums] = contentReturn[:albums] | [{ album: x.albums, musics: x.albums.musics }]
+            elsif (x.packs != nil)
+              value = { pack: x.packs, albums: [] }
+              x.packs.albums.each do |album|
                 value[:albums] << { album: album, musics: album.musics }
               end
-              contentReturn << value
+              contentReturn[:packs] = contentReturn[:packs] | [value]
             end
           end
           @returnValue = { content: contentReturn }
@@ -188,24 +186,24 @@ module API
     # 
     # ==== Options
     # 
-    # * +:user[email]+ - Email of the user
-    # * +:user[password]+ - Password of the user, not hashed
-    # * +:user[username]+ - Unique username of the user
-    # * +:user[birthday]+ - Birthday day with the format : "YYYY-MM-JJ HH:II:SS" you can add '+HH:II' for the GTM
-    # * +:user[language]+ - Tiny string for the language. Need to be in our language list.
-    # * +:user[fname]+ - (optionnal) Firstname of the user
-    # * +:user[lname]+ - (optionnal) Lastname of the user
-    # * +:user[description]+ - (optionnal) Description of the user
-    # * +:user[phoneNumber]+ - (optionnal) Phone number of the user. Need to be with the format '+code phonenumber'
-    # * +:user[facebook]+ - (optionnal) The facebook name after "https://www.facebook.com/" when you are in your profile
-    # * +:user[twitter]+ - (optionnal) The twitter name after "https://www.twitter.com/" when you are in your profile
-    # * +:user[googlePlus]+ - (optionnal) The G+ name after "https://plus.google.com/" when you are in your profile
-    # * +:address[numberStreet]+ - (optionnal if you don't provide anything in the address variable) Number of the street
-    # * +:address[complement]+ - (optionnal) Other informations if needed
-    # * +:address[street]+ - (optionnal if you don't provide anything in the address variable) The street name
-    # * +:address[city]+ - (optionnal if you don't provide anything in the address variable) The city name
-    # * +:address[country]+ - (optionnal if you don't provide anything in the address variable) The country name
-    # * +:address[zipcode]+ - (optionnal if you don't provide anything in the address variable) The Zipcode
+    # * +:user [email]+ - Email of the user
+    # * +:user [password]+ - Password of the user, not hashed
+    # * +:user [username]+ - Unique username of the user
+    # * +:user [birthday]+ - Birthday day with the format : "YYYY-MM-JJ HH:II:SS" you can add '+HH:II' for the GTM
+    # * +:user [language]+ - Tiny string for the language. Need to be in our language list.
+    # * +:user [fname]+ - (optionnal) Firstname of the user
+    # * +:user [lname]+ - (optionnal) Lastname of the user
+    # * +:user [description]+ - (optionnal) Description of the user
+    # * +:user [phoneNumber]+ - (optionnal) Phone number of the user. Need to be with the format '+code phonenumber'
+    # * +:user [facebook]+ - (optionnal) The facebook name after "https://www.facebook.com/" when you are in your profile
+    # * +:user [twitter]+ - (optionnal) The twitter name after "https://www.twitter.com/" when you are in your profile
+    # * +:user [googlePlus]+ - (optionnal) The G+ name after "https://plus.google.com/" when you are in your profile
+    # * +:address [numberStreet]+ - (optionnal if you don't provide anything in the address variable) Number of the street
+    # * +:address [complement]+ - (optionnal) Other informations if needed
+    # * +:address [street]+ - (optionnal if you don't provide anything in the address variable) The street name
+    # * +:address [city]+ - (optionnal if you don't provide anything in the address variable) The city name
+    # * +:address [country]+ - (optionnal if you don't provide anything in the address variable) The country name
+    # * +:address [zipcode]+ - (optionnal if you don't provide anything in the address variable) The Zipcode
     # 
     def save
       _save(true, params)
@@ -220,24 +218,24 @@ module API
     # ==== Options
     # 
     # * +:id+ - Same as user_id used for the authentication (get from the url)
-    # * +:user[email]+ - Email of the user
-    # * +:user[password]+ - Password of the user, not hashed
-    # * +:user[username]+ - Unique username of the user
-    # * +:user[birthday]+ - Birthday day with the format : "YYYY-MM-JJ HH:II:SS" you can add '+HH:II' for the GTM
-    # * +:user[language]+ - Tiny string for the language. Need to be in our language list.
-    # * +:user[fname]+ - Firstname of the user
-    # * +:user[lname]+ - Lastname of the user
-    # * +:user[description]+ - Description of the user
-    # * +:user[phoneNumber]+ - Phone number of the user. Need to be with the format '+code phonenumber'
-    # * +:user[facebook]+ - The facebook name after "https://www.facebook.com/" when you are in your profile
-    # * +:user[twitter]+ - The twitter name after "https://www.twitter.com/" when you are in your profile
-    # * +:user[googlePlus]+ - The G+ name after "https://plus.google.com/" when you are in your profile
-    # * +:address[numberStreet]+ - Number of the street
-    # * +:address[complement]+ - Other informations if needed
-    # * +:address[street]+ - The street name
-    # * +:address[city]+ - The city name
-    # * +:address[country]+ - The country name
-    # * +:address[zipcode]+ - The Zipcode
+    # * +:user [email]+ - Email of the user
+    # * +:user [password]+ - Password of the user, not hashed
+    # * +:user [username]+ - Unique username of the user
+    # * +:user [birthday]+ - Birthday day with the format : "YYYY-MM-JJ HH:II:SS" you can add '+HH:II' for the GTM
+    # * +:user [language]+ - Tiny string for the language. Need to be in our language list.
+    # * +:user [fname]+ - Firstname of the user
+    # * +:user [lname]+ - Lastname of the user
+    # * +:user [description]+ - Description of the user
+    # * +:user [phoneNumber]+ - Phone number of the user. Need to be with the format '+code phonenumber'
+    # * +:user [facebook]+ - The facebook name after "https://www.facebook.com/" when you are in your profile
+    # * +:user [twitter]+ - The twitter name after "https://www.twitter.com/" when you are in your profile
+    # * +:user [googlePlus]+ - The G+ name after "https://plus.google.com/" when you are in your profile
+    # * +:address [numberStreet]+ - Number of the street
+    # * +:address [complement]+ - Other informations if needed
+    # * +:address [street]+ - The street name
+    # * +:address [city]+ - The city name
+    # * +:address [country]+ - The country name
+    # * +:address [zipcode]+ - The Zipcode
     # 
     def update
       begin
@@ -284,7 +282,7 @@ module API
           user.address = address                                                if user.address == nil && params.has_key?(:address) && update_address
 
           if ((update_user && update_address))
-            @returnValue = { content: user.as_json(:include => :address) }
+            @returnValue = { content: user.as_json(:include => :address, :only => User.miniKey) }
             codeAnswer 201
             defineHttp :created
           else
@@ -303,7 +301,7 @@ module API
           user.address_id = address.id if address != true
           user.skip_confirmation!
           if (user.save!)
-            @returnValue = { content: user.as_json(:include => :address) }
+            @returnValue = { content: user.as_json(:include => :address, :only => User.miniKey) }
             codeAnswer 201
             defineHttp :created
           else

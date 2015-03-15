@@ -138,6 +138,7 @@ protected
           if (@secureKey == u.secureKey)
             @security = true
             u.regenerateKey
+            u.save
           else
             codeAnswer 501
             @httpCode = :unauthorized

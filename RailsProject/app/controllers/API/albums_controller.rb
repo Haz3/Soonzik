@@ -17,7 +17,7 @@ module API
                                                                                 :user => { :only => User.miniKey },
                                                                                 :musics => { :only => Music.miniKey }
                                                                                 } ) }
-        if (@returnValue.size == 0)
+        if (@returnValue[:content].size == 0)
           codeAnswer 202
           defineHttp :no_content
         else
@@ -60,7 +60,7 @@ module API
     #
     # ==== Options
     # 
-    # * +:attribute[attribute_name]+ - If you want a column equal to a specific value
+    # * +:attribute [attribute_name]+ - If you want a column equal to a specific value
     # * +:order_by_asc[]+ - If you want to order by ascending by values
     # * +:order_by_desc[]+ - If you want to order by descending by values
     # * +:group_by[]+ - If you want to group by field
@@ -136,7 +136,10 @@ module API
           album_object = album_object.offset(@offset.to_i)
         end
 
-        @returnValue = { content: album_object.as_json(:include => { :musics => {:only => Music.miniKey }, :user => {:only => User.miniKey} }) }
+        @returnValue = { content: album_object.as_json(:include => {
+                                                                      :musics => {:only => Music.miniKey },
+                                                                      :user => {:only => User.miniKey}
+                                                                    }) }
 
         if (album_object.size == 0)
           codeAnswer 202

@@ -3,11 +3,11 @@ require 'test_helper'
 module API
   class NewsControllerTest < ActionController::TestCase
     def giveToken
-      @user = users(:UserOne)
       return { id: @user.id, secureKey: @user.secureKey }
     end
     
     setup do
+      @user = users(:UserOne)
       @news = news(:newsOne)
     end
 
@@ -30,7 +30,7 @@ module API
 
     test "should show news ko" do
       get :show, id: 12345, format: :json
-      assert_response :success
+      assert_response :not_found
 
       value = JSON.parse(response.body)
       assert_equal value["code"], 502
@@ -45,7 +45,7 @@ module API
       assert_equal value["content"].size, 2
 
       get :find, { offset: 42, order_by_asc: [], order_by_desc: ["id"], format: :json }
-      assert_response :success
+      assert_response :no_content
 
       value = JSON.parse(response.body)
       assert_equal value["code"], 202
@@ -63,7 +63,7 @@ module API
     test "should add comment" do
       token = giveToken() # because of security access
       post :addcomment, { id: @news, content: "Ceci est un commentaire", user_id: token[:id], secureKey: token[:secureKey], format: :json }
-      assert_response :success
+      assert_response :created
     end
   end
 end

@@ -21,6 +21,7 @@ module API
       	  object = Cart.find_by_id(@id);
       	  object.destroy
       	  codeAnswer 202
+          defineHttp :no_content
       	else
       	  codeAnswer 500
           defineHttp :forbidden
@@ -36,23 +37,50 @@ module API
     # 
     # ==== Options
     # 
-    # * +:cart[user_id]+ - Id of the user who has the cart
-    # * +:cart[typeObj]+ - Model name of the object to add to the cart
-    # * +:cart[obj_id]+ - Id of the object
-    # * +:cart[gift]+ - Boolean to know if it's a gift or not
+    # * +:cart [user_id]+ - Id of the user who has the cart
+    # * +:cart [typeObj]+ - Model name of the object to add to the cart -> "Music" | "Album" | "Pack"
+    # * +:cart [obj_id]+ - Id of the object
+    # * +:cart [gift]+ - Boolean to know if it's a gift or not
     # 
     def save
       begin
         if (@security)
-          cart = Cart.new(Cart.cart_params params)
-          classObj = cart.typeObj.constantize
+          raise ArgumentError, 'user_id missing' if (!defined?@cart[:user_id])
+          raise ArgumentError, 'gift missing' if (!defined?@cart[:gift])
+          raise ArgumentError, 'typeObj missing' if (!defined?@cart[:typeObj])
+          raise ArgumentError, 'obj_id missing' if (!defined?@cart[:obj_id])
+
+          cart = Cart.new
+          cart.user_id = @cart[:user_id]
+          cart.gift = @cart[:gift]
+          classObj = @cart[:typeObj].constantize
+          obj = classObj.find_by_id(@cart[:obj_id])
           # check if the object exists
-          if (classObj.find_by_id(cart.obj_id) != nil && cart.save)
-            @returnValue = { content: cart.as_json(:include => { :user => {:only => User.miniKey } }) }
-            codeAnswer 201
-            defineHttp :created
+          if (obj != nil)
+            case @cart[:typeObj]
+              when "Music"
+                cart.musics << obj;
+              when "Album"
+                cart.albums << obj;
+              when "Pack"
+                cart.packs << obj;
+            end
+
+            if (cart.save)
+              @returnValue = { content: cart.as_json(:include => {
+                                                                    :user => {:only => User.miniKey() },
+                                                                    :musics => { :only => Music.miniKey() },
+                                                                    :albums => { :only => Album.miniKey() },
+                                                                    :packs => { :only => Pack.miniKey() }
+                                                                  }) }
+              codeAnswer 201
+              defineHttp :created
+            else
+              @returnValue = { content: cart.errors.to_hash.to_json }
+              codeAnswer 503
+              defineHttp :service_unavailable
+            end
           else
-            @returnValue = { content: cart.errors.to_hash.to_json }
             codeAnswer 503
             defineHttp :service_unavailable
           end
@@ -71,7 +99,7 @@ module API
     #
     # ==== Options
     # 
-    # * +:attribute[attribute_name]+ - If you want a column equal to a specific value
+    # * +:attribute [attribute_name]+ - If you want a column equal to a specific value
     # * +:order_by_asc[]+ - If you want to order by ascending by values
     # * +:order_by_desc[]+ - If you want to order by descending by values
     # * +:group_by[]+ - If you want to group by field
@@ -150,11 +178,16 @@ module API
             cart_object = cart_object.offset(@offset.to_i)
           end
 
-          @returnValue = { content: cart_object.as_json(:include => { :user => {:only => User.miniKey } }) }
+          @returnValue = { content: cart_object.as_json(:include => {
+                                                                    :user => {:only => User.miniKey() },
+                                                                    :musics => { :only => Music.miniKey() },
+                                                                    :albums => { :only => Album.miniKey() },
+                                                                    :packs => { :only => Pack.miniKey() }
+                                                                  }) }
 
           if (cart_object.size == 0)
             codeAnswer 202
-            defineHttp :not_created
+            defineHttp :no_content
           else
             codeAnswer 200
           end

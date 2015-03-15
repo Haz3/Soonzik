@@ -44,9 +44,9 @@ module API
     # 
     # ==== Options
     # 
-    # * +:message[user_id]+ - Id of the user who send the message
-    # * +:message[dest_id]+ - Id of the user who read the message
-    # * +:message[msg]+ - The text of the message
+    # * +:message [user_id]+ - Id of the user who send the message
+    # * +:message [dest_id]+ - Id of the user who read the message
+    # * +:message [msg]+ - The text of the message
     # 
     def save
       begin
@@ -79,7 +79,7 @@ module API
     #
     # ==== Options
     # 
-    # * +:attribute[attribute_name]+ - If you want a column equal to a specific value
+    # * +:attribute [attribute_name]+ - If you want a column equal to a specific value
     # * +:order_by_asc[]+ - If you want to order by ascending by values
     # * +:order_by_desc[]+ - If you want to order by descending by values
     # * +:group_by[]+ - If you want to group by field

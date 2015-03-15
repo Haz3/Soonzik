@@ -3,11 +3,16 @@
 # Can provide some features linked to this model
 class Pack < ActiveRecord::Base
   has_and_belongs_to_many :albums
+  has_and_belongs_to_many :genres
 
-  validates :title, :style, :albums, presence: true
+  validates :title, :albums, presence: true
 
   # The strong parameters to save or update object
   def self.pack_params(parameters)
-    parameters.require(:pack).permit(:title, :style)
+    parameters.require(:pack).permit(:title)
+  end
+
+  def self.miniKey
+  	[:title]
   end
 end

@@ -3,12 +3,12 @@ require 'test_helper'
 module API
   class AlbumsControllerTest < ActionController::TestCase
     def giveToken
-      @user = users(:UserOne)
       return { id: @user.id, secureKey: @user.secureKey }
     end
     
     setup do
       @album = albums(:AlbumOne)
+      @user = users(:UserOne)
     end
 
     test "should get index" do
@@ -30,7 +30,7 @@ module API
 
     test "should show album ko" do
       get :show, id: 12345, format: :json
-      assert_response :success
+      assert_response :not_found
 
       value = JSON.parse(response.body)
       assert_equal value["code"], 502
@@ -45,7 +45,7 @@ module API
       assert_equal value["content"].size, 2
 
       get :find, { offset: 42, order_by_asc: [], order_by_desc: ["price"], format: :json }
-      assert_response :success
+      assert_response :no_content
 
       value = JSON.parse(response.body)
       assert_equal value["code"], 202
@@ -63,7 +63,7 @@ module API
     test "should add comment" do
       user = users(:UserOne)
       post :addcomment, { id: @album, content: "lol", user_id: user.id, secureKey: Digest::SHA256.hexdigest(user.salt + user.idAPI), format: :json }
-      assert_response :success
+      assert_response :created
       value = JSON.parse(response.body)
       assert_equal value["code"], 201
     end
@@ -71,7 +71,7 @@ module API
     test "should fail add comment - not available album" do
       user = users(:UserOne)
       post :addcomment, { id: 42, content: "lol", user_id: user.id, secureKey: Digest::SHA256.hexdigest(user.salt + user.idAPI), format: :json }
-      assert_response :success
+      assert_response :not_found
       value = JSON.parse(response.body)
       assert_equal value["code"], 502
     end
@@ -79,7 +79,7 @@ module API
     test "should fail add comment - too short" do
       user = users(:UserOne)
       post :addcomment, { id: @album, content: "a", user_id: user.id, secureKey: Digest::SHA256.hexdigest(user.salt + user.idAPI), format: :json }
-      assert_response :success
+      assert_response :service_unavailable
       value = JSON.parse(response.body)
       assert_equal value["code"], 503
     end

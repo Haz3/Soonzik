@@ -120,12 +120,117 @@ and the validation Can provide some features linked to this model</p>
 			
 			<!-- Methods -->
 						
+						<section class="public-methods class-methods methods">
+				<header>
+					<h3>Public Class Methods</h3>
+				</header>
+
+								<a name="method-c-miniKey">anchor</a>
+				<div id="method-c-miniKey-doc" class="method">
+
+					<header>
+											<i class="icon-generic"></i>
+						<span class="method-name">miniKey</span><span 
+							class="method-args">()</span>
+										</header>
+
+					<div class="method-description">
+											<p>Filter of information for the <a href="API.html">API</a></p>					
+											<div class="method-source-code" id="miniKey-source">
+							<pre class="prettyprint linenums"><code 
+								class="language-ruby"><span class="ruby-comment"># File app/models/music.rb, line 27</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">miniKey</span>
+  [<span class="ruby-value">:id</span>, <span class="ruby-value">:title</span>, <span class="ruby-value">:duration</span>, <span class="ruby-value">:price</span>, <span class="ruby-value">:file</span>]
+<span class="ruby-keyword">end</span></code></pre>
+						</div>
+										</div>
+
+					
+									</div>
+								<a name="method-c-music_params">anchor</a>
+				<div id="method-c-music_params-doc" class="method">
+
+					<header>
+											<i class="icon-generic"></i>
+						<span class="method-name">music_params</span><span 
+							class="method-args">(parameters)</span>
+										</header>
+
+					<div class="method-description">
+											<p>The strong parameters to save or update object</p>					
+											<div class="method-source-code" id="music_params-source">
+							<pre class="prettyprint linenums"><code 
+								class="language-ruby"><span class="ruby-comment"># File app/models/music.rb, line 22</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">music_params</span>(<span class="ruby-identifier">parameters</span>)
+  <span class="ruby-identifier">parameters</span>.<span class="ruby-identifier">require</span>(<span class="ruby-value">:music</span>).<span class="ruby-identifier">permit</span>(<span class="ruby-value">:user_id</span>, <span class="ruby-value">:album_id</span>, <span class="ruby-value">:title</span>, <span class="ruby-value">:duration</span>, <span class="ruby-value">:price</span>, <span class="ruby-value">:file</span>, <span class="ruby-value">:limited</span>)
+<span class="ruby-keyword">end</span></code></pre>
+						</div>
+										</div>
+
+					
+									</div>
+				
+			</section>
 			
 			
 			
 			
 			
 									
+						<section class="public-methods instance-methods methods">
+				<header>
+					<h3>Public Instance Methods</h3>
+				</header>
+
+								<a name="method-i-suggest">anchor</a>
+				<div id="method-i-suggest-doc" class="method">
+
+					<header>
+											<i class="icon-generic"></i>
+						<span class="method-name">suggest</span><span 
+							class="method-args">(userList)</span>
+										</header>
+
+					<div class="method-description">
+											<p>Suggestion logic</p>
+
+<h4 id="method-i-suggest-label-Attributes">Attributes<span><a href="#method-i-suggest-label-Attributes">&para;</a> <a href="#top">&uarr;</a></span></h4>
+<ul><li>
+<p><code>userList</code> - Users with same musics</p>
+</li></ul>					
+											<div class="method-source-code" id="suggest-source">
+							<pre class="prettyprint linenums"><code 
+								class="language-ruby"><span class="ruby-comment"># File app/models/music.rb, line 37</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">suggest</span>(<span class="ruby-identifier">userList</span>)
+
+
+
+
+
+
+  <span class="ruby-identifier">genresPonderation</span> = {}
+  <span class="ruby-identifier">genresPonderation</span> = {}
+
+  <span class="ruby-identifier">musicList</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">music</span><span class="ruby-operator">|</span>
+    <span class="ruby-keyword">if</span> (<span class="ruby-identifier">music</span>.<span class="ruby-identifier">genres</span> <span class="ruby-operator">!=</span> <span class="ruby-keyword">nil</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">music</span>.<span class="ruby-identifier">genres</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">!=</span> <span class="ruby-value">0</span>)
+      <span class="ruby-comment"># For each genre, we change ponderation</span>
+      <span class="ruby-identifier">music</span>.<span class="ruby-identifier">genres</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">g</span><span class="ruby-operator">|</span>
+        <span class="ruby-keyword">if</span> (<span class="ruby-identifier">genres</span>.<span class="ruby-identifier">has_key?</span>(<span class="ruby-identifier">g</span>.<span class="ruby-identifier">id</span>))
+          <span class="ruby-identifier">genres</span>[<span class="ruby-identifier">g</span>.<span class="ruby-identifier">id</span>] <span class="ruby-operator">+=</span> <span class="ruby-value">1</span>
+        <span class="ruby-keyword">else</span>
+          <span class="ruby-identifier">genres</span>[<span class="ruby-identifier">g</span>.<span class="ruby-identifier">id</span>] = <span class="ruby-value">0</span>
+        <span class="ruby-keyword">end</span>
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></code></pre>
+						</div>
+										</div>
+
+					
+									</div>
+				
+			</section>
 			
 			
 			
@@ -139,7 +244,7 @@ and the validation Can provide some features linked to this model</p>
 
 		<footer>
 			<div class="container">
-				<span id="rdoc-version">Generated by RDoc 4.1.2</span> using the
+				<span id="rdoc-version">Generated by RDoc 4.2.0</span> using the
 				<a id="generator-version"
 					href="http://deveiate.org/fivefish">Fivefish RDoc 0.1.0</a> generator.
 			</div>
@@ -156,7 +261,9 @@ and the validation Can provide some features linked to this model</p>
 			<li><a href="./API/BattlesController.html">API::BattlesController</a></li>
 			<li><a href="./API/CartsController.html">API::CartsController</a></li>
 			<li><a href="./API/ConcertsController.html">API::ConcertsController</a></li>
+			<li><a href="./API/GenresController.html">API::GenresController</a></li>
 			<li><a href="./API/GiftsController.html">API::GiftsController</a></li>
+			<li><a href="./API/InfluencesController.html">API::InfluencesController</a></li>
 			<li><a href="./API/ListeningsController.html">API::ListeningsController</a></li>
 			<li><a href="./API/MessagesController.html">API::MessagesController</a></li>
 			<li><a href="./API/MusicsController.html">API::MusicsController</a></li>

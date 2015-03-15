@@ -27,4 +27,35 @@ class Music < ActiveRecord::Base
   def self.miniKey
     [:id, :title, :duration, :price, :file]
   end
+
+  # Suggestion logic
+  #
+  # ==== Attributes
+  #
+  # * +userList+ - Users with same musics
+  #
+  def suggest(userList)
+
+
+
+
+
+
+    genresPonderation = {}
+    genresPonderation = {}
+
+    musicList.each do |music|
+      if (music.genres != nil && music.genres.size != 0)
+        # For each genre, we change ponderation
+        music.genres.each do |g|
+          if (genres.has_key?(g.id))
+            genres[g.id] += 1
+          else
+            genres[g.id] = 0
+          end
+        end
+      end
+    end
+  end
+
 end

@@ -9,7 +9,7 @@ module API
     def index
     	begin
         @returnValue = { content: Influences.all.as_json(:include => :genres) }
-        if (@returnValue.size == 0)
+        if (@returnValue[:content].size == 0)
           codeAnswer 202
           defineHttp :no_content
         else

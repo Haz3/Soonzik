@@ -95,3 +95,5 @@ gem 'omniauth-oauth2', '~> 1.1'
 gem 'omniauth-twitter'
 gem 'omniauth-facebook', '~> 2.0.0.pre1'
 gem 'omniauth-google-oauth2', '~> 0.2.6'
+
+gem 'foreigner', '~> 1.7.2'

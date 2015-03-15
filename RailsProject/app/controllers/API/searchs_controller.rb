@@ -11,6 +11,7 @@ module API
    	# 
    	# * +:offset+ - [Optionnal] Number where to begin the results (only with filter)
     # * +:limit+ - [Optionnal] Number of result you want (only with filter)
+    # * +:query+ - [Optionnal] What the user type
     # * +:type+ - [Optionnal] 
     # 
     def search
@@ -20,7 +21,6 @@ module API
 		    limit = nil
 	    	offset = @offset if defined?@offset && @offset > 0
 	    	limit = @limit if defined?@limit && @limit > 0
-	    	puts defined?@type
 	    	if defined?@type
 	    	  case @type
 	    	    when "artist"

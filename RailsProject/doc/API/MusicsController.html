@@ -157,7 +157,7 @@ list of action available :</p>
 					<div class="method-description">
 											<p>Add a comment to a specific music. Need to be a secure transaction.</p>
 
-<h4 id="method-i-addcomment-label-Options">Options<span><a href="#method-i-addcomment-label-Options">&para;</a> <a href="#documentation">&uarr;</a></span></h4>
+<h4 id="method-i-addcomment-label-Options">Options<span><a href="#method-i-addcomment-label-Options">&para;</a> <a href="#top">&uarr;</a></span></h4>
 <ul><li>
 <p><code>:security</code> - If it&#39;s a secure transaction, this variable
 from ApiSecurity (the parent) is true</p>
@@ -168,7 +168,7 @@ from ApiSecurity (the parent) is true</p>
 </li></ul>					
 											<div class="method-source-code" id="addcomment-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/musics_controller.rb, line 153</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/musics_controller.rb, line 167</span>
   <span class="ruby-keyword">def</span> <span class="ruby-identifier">addcomment</span>
 <span class="ruby-keyword">begin</span>
   <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@security</span>)
@@ -176,6 +176,7 @@ from ApiSecurity (the parent) is true</p>
 
     <span class="ruby-keyword">if</span> (<span class="ruby-operator">!</span><span class="ruby-identifier">music</span>)
       <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">502</span>
+      <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:not_found</span>
     <span class="ruby-keyword">else</span>
       <span class="ruby-identifier">com</span> = <span class="ruby-constant">Commentary</span>.<span class="ruby-identifier">new</span>
       <span class="ruby-identifier">com</span>.<span class="ruby-identifier">content</span> = <span class="ruby-ivar">@content</span>
@@ -184,15 +185,19 @@ from ApiSecurity (the parent) is true</p>
       <span class="ruby-keyword">if</span> (<span class="ruby-identifier">com</span>.<span class="ruby-identifier">save</span>)
         <span class="ruby-identifier">com</span>.<span class="ruby-identifier">musics</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">music</span>
         <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">201</span>
+        <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:created</span>
       <span class="ruby-keyword">else</span>
         <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">503</span>
+        <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:service_unavailable</span>
       <span class="ruby-keyword">end</span>
     <span class="ruby-keyword">end</span>
   <span class="ruby-keyword">else</span>
     <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">500</span>
+    <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:forbidden</span>
   <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">rescue</span>
   <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">504</span>
+  <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:service_unavailable</span>
 <span class="ruby-keyword">end</span>
 <span class="ruby-identifier">sendJson</span>
   <span class="ruby-keyword">end</span></code></pre>
@@ -213,7 +218,7 @@ from ApiSecurity (the parent) is true</p>
 					<div class="method-description">
 											<p>To add a specific music to a playlist</p>
 
-<h4 id="method-i-addtoplaylist-label-Options">Options<span><a href="#method-i-addtoplaylist-label-Options">&para;</a> <a href="#documentation">&uarr;</a></span></h4>
+<h4 id="method-i-addtoplaylist-label-Options">Options<span><a href="#method-i-addtoplaylist-label-Options">&para;</a> <a href="#top">&uarr;</a></span></h4>
 <ul><li>
 <p><code>:id</code> - The id of the music where is the comment</p>
 </li><li>
@@ -222,7 +227,7 @@ music</p>
 </li></ul>					
 											<div class="method-source-code" id="addtoplaylist-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/musics_controller.rb, line 227</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/musics_controller.rb, line 248</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">addtoplaylist</span>
   <span class="ruby-keyword">begin</span>
     <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@security</span>)
@@ -230,14 +235,18 @@ music</p>
       <span class="ruby-identifier">music</span> = <span class="ruby-constant">Music</span>.<span class="ruby-identifier">find_by_id</span>(<span class="ruby-ivar">@id</span>)
       <span class="ruby-keyword">if</span> (<span class="ruby-identifier">playlist</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">music</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">playlist</span>.<span class="ruby-identifier">user_id</span> <span class="ruby-operator">==</span> <span class="ruby-ivar">@user_id</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-ivar">@playlist</span>.<span class="ruby-identifier">musics</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">music</span>))
         <span class="ruby-identifier">playlist</span>.<span class="ruby-identifier">musics</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">music</span>
+        <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:created</span>
       <span class="ruby-keyword">else</span>
         <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">502</span>
+        <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:not_found</span>
       <span class="ruby-keyword">end</span>
     <span class="ruby-keyword">else</span>
       <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">500</span>
+      <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:forbidden</span>
     <span class="ruby-keyword">end</span>
   <span class="ruby-keyword">rescue</span>
     <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">504</span>
+    <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:service_unavailable</span>
   <span class="ruby-keyword">end</span>
   <span class="ruby-identifier">sendJson</span>
 <span class="ruby-keyword">end</span></code></pre>
@@ -258,7 +267,7 @@ music</p>
 					<div class="method-description">
 											<p>Give a part of the albums depending of the filter passed into parameter</p>
 
-<h4 id="method-i-find-label-Options">Options<span><a href="#method-i-find-label-Options">&para;</a> <a href="#documentation">&uarr;</a></span></h4>
+<h4 id="method-i-find-label-Options">Options<span><a href="#method-i-find-label-Options">&para;</a> <a href="#top">&uarr;</a></span></h4>
 <ul><li>
 <p>+:<a href="attribute_name">attribute</a>+ - If you want a column equal to a
 specific value</p>
@@ -274,17 +283,17 @@ specific value</p>
 <p><code>:offset</code> - The offset of the array</p>
 </li></ul>
 
-<h4 id="method-i-find-label-Example">Example<span><a href="#method-i-find-label-Example">&para;</a> <a href="#documentation">&uarr;</a></span></h4>
+<h4 id="method-i-find-label-Example">Example<span><a href="#method-i-find-label-Example">&para;</a> <a href="#top">&uarr;</a></span></h4>
 
 <pre>http://api.soonzik.com/musics/find?attribute[album_id]=1&amp;order_by_desc[]=id&amp;group_by[]=title
 Note : By default, if you precise no attribute, it will take every row</pre>					
 											<div class="method-source-code" id="find-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/musics_controller.rb, line 67</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/musics_controller.rb, line 75</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">find</span>
   <span class="ruby-keyword">begin</span>
+    <span class="ruby-identifier">music_object</span> = <span class="ruby-keyword">nil</span>
     <span class="ruby-keyword">if</span> (<span class="ruby-keyword">defined?</span><span class="ruby-ivar">@attribute</span>)
-      <span class="ruby-identifier">music_object</span> = <span class="ruby-keyword">nil</span>
       <span class="ruby-comment"># - - - - - - - -</span>
       <span class="ruby-ivar">@attribute</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">x</span>, <span class="ruby-identifier">y</span><span class="ruby-operator">|</span>
         <span class="ruby-identifier">condition</span> = <span class="ruby-string">&quot;&quot;</span>
@@ -345,16 +354,22 @@ Note : By default, if you precise no attribute, it will take every row</pre>
       <span class="ruby-identifier">music_object</span> = <span class="ruby-identifier">music_object</span>.<span class="ruby-identifier">offset</span>(<span class="ruby-ivar">@offset</span>.<span class="ruby-identifier">to_i</span>)
     <span class="ruby-keyword">end</span>
 
-    <span class="ruby-ivar">@returnValue</span> = { <span class="ruby-identifier">content</span><span class="ruby-operator">:</span> <span class="ruby-identifier">music_object</span>.<span class="ruby-identifier">as_json</span>(<span class="ruby-value">:include</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">:album</span>) }
+    <span class="ruby-ivar">@returnValue</span> = { <span class="ruby-identifier">content</span><span class="ruby-operator">:</span> <span class="ruby-identifier">music_object</span>.<span class="ruby-identifier">as_json</span>(<span class="ruby-value">:include</span> =<span class="ruby-operator">&gt;</span> {
+                                  <span class="ruby-value">:album</span> =<span class="ruby-operator">&gt;</span> {},
+                                  <span class="ruby-value">:genres</span> =<span class="ruby-operator">&gt;</span> {},
+                                  <span class="ruby-value">:user</span> =<span class="ruby-operator">&gt;</span> {<span class="ruby-value">:only</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">User</span>.<span class="ruby-identifier">miniKey</span>}
+                                  }) }
 
     <span class="ruby-keyword">if</span> (<span class="ruby-identifier">music_object</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>)
       <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">202</span>
+      <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:no_content</span>
     <span class="ruby-keyword">else</span>
       <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">200</span>
     <span class="ruby-keyword">end</span>
 
   <span class="ruby-keyword">rescue</span>
     <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">504</span>
+    <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:service_unavailable</span>
   <span class="ruby-keyword">end</span>
   <span class="ruby-identifier">sendJson</span>
 <span class="ruby-keyword">end</span></code></pre>
@@ -375,7 +390,7 @@ Note : By default, if you precise no attribute, it will take every row</pre>
 					<div class="method-description">
 											<p>To get the mp3. It cuts the file depending the rights</p>
 
-<h4 id="method-i-get-label-Options">Options<span><a href="#method-i-get-label-Options">&para;</a> <a href="#documentation">&uarr;</a></span></h4>
+<h4 id="method-i-get-label-Options">Options<span><a href="#method-i-get-label-Options">&para;</a> <a href="#top">&uarr;</a></span></h4>
 <ul><li>
 <p><code>:security</code> - If it&#39;s a secure transaction, this variable
 from ApiSecurity (the parent) is true</p>
@@ -386,7 +401,7 @@ from ApiSecurity (the parent) is true</p>
 </li></ul>					
 											<div class="method-source-code" id="get-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/musics_controller.rb, line 189</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/musics_controller.rb, line 208</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">get</span>
   <span class="ruby-identifier">buffer</span> = <span class="ruby-string">&quot;&quot;</span>
   <span class="ruby-keyword">begin</span>
@@ -399,6 +414,7 @@ from ApiSecurity (the parent) is true</p>
     <span class="ruby-keyword">end</span>
     <span class="ruby-keyword">if</span> (<span class="ruby-identifier">music</span> <span class="ruby-operator">==</span> <span class="ruby-keyword">nil</span>)
       <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">502</span>
+      <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:not_found</span>
     <span class="ruby-keyword">else</span>
       <span class="ruby-comment"># If the transaction is secured, it means we maybe have buy the music</span>
       <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@security</span>)
@@ -412,6 +428,7 @@ from ApiSecurity (the parent) is true</p>
     <span class="ruby-keyword">end</span>
   <span class="ruby-keyword">rescue</span>
     <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">504</span>
+    <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:service_unavailable</span>
   <span class="ruby-keyword">end</span>
   <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
     <span class="ruby-identifier">format</span>.<span class="ruby-identifier">mp3</span> { <span class="ruby-identifier">render</span> <span class="ruby-value">:text</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">buffer</span>, <span class="ruby-value">:content_type</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;audio/mpeg&#39;</span> }
@@ -438,14 +455,16 @@ from ApiSecurity (the parent) is true</p>
 								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/musics_controller.rb, line 16</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">index</span>
   <span class="ruby-keyword">begin</span>
-    <span class="ruby-ivar">@returnValue</span> = { <span class="ruby-identifier">content</span><span class="ruby-operator">:</span> <span class="ruby-constant">Music</span>.<span class="ruby-identifier">all</span>.<span class="ruby-identifier">as_json</span> }
-    <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@returnValue</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>)
+    <span class="ruby-ivar">@returnValue</span> = { <span class="ruby-identifier">content</span><span class="ruby-operator">:</span> <span class="ruby-constant">Music</span>.<span class="ruby-identifier">all</span>.<span class="ruby-identifier">as_json</span>(<span class="ruby-value">:only</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">Music</span>.<span class="ruby-identifier">miniKey</span>, <span class="ruby-value">:include</span> =<span class="ruby-operator">&gt;</span> {<span class="ruby-value">:user</span> =<span class="ruby-operator">&gt;</span> {<span class="ruby-value">:only</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">User</span>.<span class="ruby-identifier">miniKey</span>}}) }
+    <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@returnValue</span>[<span class="ruby-value">:content</span>].<span class="ruby-identifier">size</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>)
       <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">202</span>
+      <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:no_content</span>
     <span class="ruby-keyword">else</span>
       <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">200</span>
     <span class="ruby-keyword">end</span>
   <span class="ruby-keyword">rescue</span>
     <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">504</span>
+    <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:service_unavailable</span>
   <span class="ruby-keyword">end</span>
   <span class="ruby-identifier">sendJson</span>
 <span class="ruby-keyword">end</span></code></pre>
@@ -466,24 +485,30 @@ from ApiSecurity (the parent) is true</p>
 					<div class="method-description">
 											<p>Give a specific object by its id</p>
 
-<h4 id="method-i-show-label-Options">Options<span><a href="#method-i-show-label-Options">&para;</a> <a href="#documentation">&uarr;</a></span></h4>
+<h4 id="method-i-show-label-Options">Options<span><a href="#method-i-show-label-Options">&para;</a> <a href="#top">&uarr;</a></span></h4>
 <ul><li>
 <p><code>:id</code> - The id of the specific music</p>
 </li></ul>					
 											<div class="method-source-code" id="show-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/musics_controller.rb, line 36</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/musics_controller.rb, line 38</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">show</span>
   <span class="ruby-keyword">begin</span>
-    <span class="ruby-identifier">album</span> = <span class="ruby-constant">Music</span>.<span class="ruby-identifier">find_by_id</span>(<span class="ruby-ivar">@id</span>)
-    <span class="ruby-keyword">if</span> (<span class="ruby-operator">!</span><span class="ruby-identifier">album</span>)
+    <span class="ruby-identifier">music</span> = <span class="ruby-constant">Music</span>.<span class="ruby-identifier">find_by_id</span>(<span class="ruby-ivar">@id</span>)
+    <span class="ruby-keyword">if</span> (<span class="ruby-operator">!</span><span class="ruby-identifier">music</span>)
       <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">502</span>
+      <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:not_found</span>
     <span class="ruby-keyword">else</span>
-      <span class="ruby-ivar">@returnValue</span> = { <span class="ruby-identifier">content</span><span class="ruby-operator">:</span> <span class="ruby-identifier">album</span>.<span class="ruby-identifier">as_json</span>(<span class="ruby-value">:include</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">:album</span>) }
+      <span class="ruby-ivar">@returnValue</span> = { <span class="ruby-identifier">content</span><span class="ruby-operator">:</span> <span class="ruby-identifier">music</span>.<span class="ruby-identifier">as_json</span>(<span class="ruby-value">:include</span> =<span class="ruby-operator">&gt;</span> {
+                                  <span class="ruby-value">:album</span> =<span class="ruby-operator">&gt;</span> {},
+                                  <span class="ruby-value">:genres</span> =<span class="ruby-operator">&gt;</span> {},
+                                  <span class="ruby-value">:user</span> =<span class="ruby-operator">&gt;</span> {<span class="ruby-value">:only</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">User</span>.<span class="ruby-identifier">miniKey</span>}
+                                  }) }
       <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">200</span>
     <span class="ruby-keyword">end</span>
   <span class="ruby-keyword">rescue</span>
     <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">504</span>
+    <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:service_unavailable</span>
   <span class="ruby-keyword">end</span>
   <span class="ruby-identifier">sendJson</span>
 <span class="ruby-keyword">end</span></code></pre>
@@ -507,7 +532,7 @@ from ApiSecurity (the parent) is true</p>
 
 		<footer>
 			<div class="container">
-				<span id="rdoc-version">Generated by RDoc 4.1.2</span> using the
+				<span id="rdoc-version">Generated by RDoc 4.2.0</span> using the
 				<a id="generator-version"
 					href="http://deveiate.org/fivefish">Fivefish RDoc 0.1.0</a> generator.
 			</div>
@@ -524,7 +549,9 @@ from ApiSecurity (the parent) is true</p>
 			<li><a href="../API/BattlesController.html">API::BattlesController</a></li>
 			<li><a href="../API/CartsController.html">API::CartsController</a></li>
 			<li><a href="../API/ConcertsController.html">API::ConcertsController</a></li>
+			<li><a href="../API/GenresController.html">API::GenresController</a></li>
 			<li><a href="../API/GiftsController.html">API::GiftsController</a></li>
+			<li><a href="../API/InfluencesController.html">API::InfluencesController</a></li>
 			<li><a href="../API/ListeningsController.html">API::ListeningsController</a></li>
 			<li><a href="../API/MessagesController.html">API::MessagesController</a></li>
 			<li><a href="../API/MusicsController.html">API::MusicsController</a></li>
@@ -537,6 +564,37 @@ from ApiSecurity (the parent) is true</p>
 			<li><a href="../API/SuggestionsController.html">API::SuggestionsController</a></li>
 			<li><a href="../API/TweetsController.html">API::TweetsController</a></li>
 			<li><a href="../API/UsersController.html">API::UsersController</a></li>
+			<li><a href="../Access.html">Access</a></li>
+			<li><a href="../Address.html">Address</a></li>
+			<li><a href="../AdminUser.html">AdminUser</a></li>
+			<li><a href="../Album.html">Album</a></li>
+			<li><a href="../AlbumNote.html">AlbumNote</a></li>
+			<li><a href="../Attachment.html">Attachment</a></li>
+			<li><a href="../Battle.html">Battle</a></li>
+			<li><a href="../Cart.html">Cart</a></li>
+			<li><a href="../Commentary.html">Commentary</a></li>
+			<li><a href="../Concert.html">Concert</a></li>
+			<li><a href="../Description.html">Description</a></li>
+			<li><a href="../Flac.html">Flac</a></li>
+			<li><a href="../Genre.html">Genre</a></li>
+			<li><a href="../Gift.html">Gift</a></li>
+			<li><a href="../Group.html">Group</a></li>
+			<li><a href="../Influence.html">Influence</a></li>
+			<li><a href="../Listening.html">Listening</a></li>
+			<li><a href="../Message.html">Message</a></li>
+			<li><a href="../Music.html">Music</a></li>
+			<li><a href="../MusicNote.html">MusicNote</a></li>
+			<li><a href="../News.html">News</a></li>
+			<li><a href="../Newstext.html">Newstext</a></li>
+			<li><a href="../Notification.html">Notification</a></li>
+			<li><a href="../Pack.html">Pack</a></li>
+			<li><a href="../Playlist.html">Playlist</a></li>
+			<li><a href="../Proposition.html">Proposition</a></li>
+			<li><a href="../Purchase.html">Purchase</a></li>
+			<li><a href="../Tag.html">Tag</a></li>
+			<li><a href="../Tweet.html">Tweet</a></li>
+			<li><a href="../User.html">User</a></li>
+			<li><a href="../Vote.html">Vote</a></li>
 		</ul>
 	</div>
 

@@ -13,8 +13,13 @@ module API
   	# Retrieve all the news
     def index
       begin
-        @returnValue = { content: News.all.as_json(:include => { :user => { :only => User.miniKey }, :newstexts => {}, :attachments => {}, :tags => {}}) }
-        if (@returnValue.size == 0)
+        @returnValue = { content: News.all.as_json(:include => {
+                                                                  :user => { :only => User.miniKey },
+                                                                  :newstexts => {},
+                                                                  :attachments => {},
+                                                                  :tags => {}
+                                                                }) }
+        if (@returnValue[:content].size == 0)
           codeAnswer 202
           defineHttp :no_content
         else
@@ -40,7 +45,12 @@ module API
           codeAnswer 502
           defineHttp :not_found
         else
-          @returnValue = { content: news.as_json(:include => { :user => { :only => User.miniKey }, :newstexts => {}, :attachments => {}, :tags => {}}) }
+          @returnValue = { content: news.as_json(:include => {
+                                                                :user => { :only => User.miniKey },
+                                                                :newstexts => {},
+                                                                :attachments => {},
+                                                                :tags => {}
+                                                              }) }
           codeAnswer 200
         end
       rescue
@@ -54,7 +64,7 @@ module API
     #
     # ==== Options
     # 
-    # * +:attribute[attribute_name]+ - If you want a column equal to a specific value
+    # * +:attribute [attribute_name]+ - If you want a column equal to a specific value
     # * +:order_by_asc[]+ - If you want to order by ascending by values
     # * +:order_by_desc[]+ - If you want to order by descending by values
     # * +:group_by[]+ - If you want to group by field
@@ -130,7 +140,12 @@ module API
           new_object = new_object.offset(@offset.to_i)
         end
 
-        @returnValue = { content: new_object.as_json(:include => { :user => { :only => User.miniKey }, :newstexts => {}, :attachments => {}, :tags => {}}) }
+        @returnValue = { content: new_object.as_json(:include => {
+                                                                    :user => { :only => User.miniKey },
+                                                                    :newstexts => {},
+                                                                    :attachments => {},
+                                                                    :tags => {}
+                                                                  }) }
 
         if (new_object.size == 0)
           codeAnswer 202
@@ -151,6 +166,7 @@ module API
     # ==== Options
     #
     # * +:security+ - If it's a secure transaction, this variable from ApiSecurity (the parent) is true
+    # * +:user_id [implicit]+ - It is required for the security so we can access it
     # * +:id+ - The id of the news where is the comment
     # * +:content+ - The content of the comment
     #

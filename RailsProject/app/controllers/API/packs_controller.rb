@@ -11,10 +11,14 @@ module API
     def index
       begin
         @returnValue = { content: Pack.all.as_json(:include => { albums: {
-                                                                :include => { musics: { :only => Music.miniKey }},
-                                                                :only => Album.miniKey
-                                                              }}) }
-        if (@returnValue.size == 0)
+                                                                              :include => {
+                                                                                            :user => { :only => User.miniKey },
+                                                                                            :musics => { :only => Music.miniKey }
+                                                                                          },
+                                                                              :only => Album.miniKey
+                                                                            }
+                                                                  }) }
+        if (@returnValue[:content].size == 0)
           codeAnswer 202
           defineHttp :no_content
         else
@@ -41,9 +45,13 @@ module API
           defineHttp :not_found
         else
           @returnValue = { content: pack.as_json(:include => { albums: {
-                                                                :include => { musics: { :only => Music.miniKey }},
-                                                                :only => Album.miniKey
-                                                              }}) }
+                                                                              :include => {
+                                                                                            :user => { :only => User.miniKey },
+                                                                                            :musics => { :only => Music.miniKey }
+                                                                                          },
+                                                                              :only => Album.miniKey
+                                                                            }
+                                                                  }) }
           codeAnswer 200
         end
       rescue
@@ -57,7 +65,7 @@ module API
     #
     # ==== Options
     # 
-    # * +:attribute[attribute_name]+ - If you want a column equal to a specific value
+    # * +:attribute [attribute_name]+ - If you want a column equal to a specific value
     # * +:order_by_asc[]+ - If you want to order by ascending by values
     # * +:order_by_desc[]+ - If you want to order by descending by values
     # * +:group_by[]+ - If you want to group by field
@@ -134,9 +142,13 @@ module API
         end
 
         @returnValue = { content: pack_object.as_json(:include => { albums: {
-                                                                :include => { musics: { :only => Music.miniKey }},
-                                                                :only => Album.miniKey
-                                                              }}) }
+                                                                              :include => {
+                                                                                            :user => { :only => User.miniKey },
+                                                                                            :musics => { :only => Music.miniKey }
+                                                                                          },
+                                                                              :only => Album.miniKey
+                                                                            }
+                                                                  }) }
 
         if (pack_object.size == 0)
           codeAnswer 202

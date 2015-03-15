@@ -15,7 +15,9 @@ module API
     # Retrieve all the musics
     def index
       begin
-        @returnValue = { content: Music.all.as_json(:only => Music.miniKey, :include => {:user => {:only => User.miniKey}}) }
+        @returnValue = { content: Music.all.as_json(:only => Music.miniKey, :include => {
+                                                                                          :user => {:only => User.miniKey}
+                                                                                        }) }
         if (@returnValue[:content].size == 0)
           codeAnswer 202
           defineHttp :no_content
@@ -42,7 +44,7 @@ module API
           codeAnswer 502
           defineHttp :not_found
         else
-          @returnValue = { content: music.as_json(:include => {
+          @returnValue = { content: music.as_json(:only => Music.miniKey, :include => {
                                       :album => {},
                                       :genres => {},
                                       :user => {:only => User.miniKey}
@@ -60,7 +62,7 @@ module API
     #
     # ==== Options
     # 
-    # * +:attribute[attribute_name]+ - If you want a column equal to a specific value
+    # * +:attribute [attribute_name]+ - If you want a column equal to a specific value
     # * +:order_by_asc[]+ - If you want to order by ascending by values
     # * +:order_by_desc[]+ - If you want to order by descending by values
     # * +:group_by[]+ - If you want to group by field
@@ -136,7 +138,7 @@ module API
           music_object = music_object.offset(@offset.to_i)
         end
 
-        @returnValue = { content: music_object.as_json(:include => {
+        @returnValue = { content: music_object.as_json(:only => Music.miniKey, :include => {
                                       :album => {},
                                       :genres => {},
                                       :user => {:only => User.miniKey}
@@ -161,6 +163,7 @@ module API
     # ==== Options
     #
     # * +:security+ - If it's a secure transaction, this variable from ApiSecurity (the parent) is true
+    # * +:user_id [implicit]+ - It is required by the security so we can access it
     # * +:id+ - The id of the music where is the comment
     # * +:content+ - The content of the comment
     #
@@ -250,7 +253,7 @@ module API
         if (@security)
           playlist = Playlist.find_by_id(@playlist_id)
           music = Music.find_by_id(@id)
-          if (playlist && music && playlist.user_id == @user_id && !@playlist.musics.include?(music))
+          if (playlist && music && playlist.user_id == @user_id && !playlist.musics.include?(music))
             playlist.musics << music
             defineHttp :created
           else
