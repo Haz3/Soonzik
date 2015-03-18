@@ -19,6 +19,12 @@
     <AppxPackagedFile Include="C:\Users\Géry\documents\visual studio 2013\Projects\SoonZik\SoonZik\bin\Debug\SoonZik.exe">
       <PackagePath>SoonZik.exe</PackagePath>
     </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Program Files %28x86%29\Microsoft SDKs\WindowsPhoneApp\v8.1\ExtensionSDKs\BehaviorsXamlSDKManaged\12.0\References\CommonConfiguration\Neutral\Microsoft.Xaml.Interactions.dll">
+      <PackagePath>Microsoft.Xaml.Interactions.dll</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Program Files %28x86%29\Microsoft SDKs\WindowsPhoneApp\v8.1\ExtensionSDKs\BehaviorsXamlSDKManaged\12.0\References\CommonConfiguration\Neutral\Microsoft.Xaml.Interactivity.dll">
+      <PackagePath>Microsoft.Xaml.Interactivity.dll</PackagePath>
+    </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Géry\documents\visual studio 2013\Projects\SoonZik\packages\Facebook.Client.0.9.1-alpha\lib\portable-win81+wpa81\Facebook.Client.dll">
       <PackagePath>Facebook.Client.dll</PackagePath>
     </AppxPackagedFile>
@@ -187,11 +193,14 @@
     <AppxPackagedFile Include="C:\Users\Géry\documents\visual studio 2013\Projects\SoonZik\SoonZik\Resources\stromae.jpg">
       <PackagePath>Resources\stromae.jpg</PackagePath>
     </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Géry\documents\visual studio 2013\Projects\SoonZik\SoonZik\Assets\Fonts\RobotoCondensed-Regular.ttf">
+      <PackagePath>Assets\Fonts\RobotoCondensed-Regular.ttf</PackagePath>
+    </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Géry\documents\visual studio 2013\Projects\SoonZik\SoonZik\bin\Debug\App.xbf">
       <PackagePath>App.xbf</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\Géry\documents\visual studio 2013\Projects\SoonZik\SoonZik\bin\Debug\Controls\Acceuil.xbf">
-      <PackagePath>Controls\Acceuil.xbf</PackagePath>
+    <AppxPackagedFile Include="C:\Users\Géry\documents\visual studio 2013\Projects\SoonZik\SoonZik\bin\Debug\Controls\BoutonMenuControl.xbf">
+      <PackagePath>Controls\BoutonMenuControl.xbf</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Géry\documents\visual studio 2013\Projects\SoonZik\SoonZik\bin\Debug\Controls\Genre.xbf">
       <PackagePath>Controls\Genre.xbf</PackagePath>
@@ -210,9 +219,6 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Géry\documents\visual studio 2013\Projects\SoonZik\SoonZik\bin\Debug\MainPage.xbf">
       <PackagePath>MainPage.xbf</PackagePath>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\Géry\documents\visual studio 2013\Projects\SoonZik\SoonZik\bin\Debug\Views\Accueil.xbf">
-      <PackagePath>Views\Accueil.xbf</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Géry\documents\visual studio 2013\Projects\SoonZik\SoonZik\bin\Debug\Views\Battle.xbf">
       <PackagePath>Views\Battle.xbf</PackagePath>

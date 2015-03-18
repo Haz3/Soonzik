@@ -71,12 +71,12 @@ namespace SoonZik
                     // TODO: chargez l'état de l'application précédemment suspendue
                 }
 
-                if (e.PreviousExecutionState != ApplicationExecutionState.Running)
-                {
-                    var loadStage = (e.PreviousExecutionState == ApplicationExecutionState.Terminated);
-                    var splash = new CustomSplashScreen(e.SplashScreen, loadStage);
-                    Window.Current.Content = splash;
-                }
+                //if (e.PreviousExecutionState != ApplicationExecutionState.Running)
+                //{
+                //    var loadStage = (e.PreviousExecutionState == ApplicationExecutionState.Terminated);
+                //    var splash = new CustomSplashScreen(e.SplashScreen, loadStage);
+                //    Window.Current.Content = splash;
+                //}
 
                 Window.Current.Activate();
                 RemoveExtendedSplash(rootFrame);

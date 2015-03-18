@@ -44,6 +44,7 @@ namespace SoonZik.ViewModel
             SimpleIoc.Default.Register<GeolocViewModel>();
             SimpleIoc.Default.Register<FriendViewModel>();
             SimpleIoc.Default.Register<ConversationViewModel>();
+            SimpleIoc.Default.Register<MainPageViewModel>();
         }
 
         public MainViewModel Main
@@ -105,6 +106,11 @@ namespace SoonZik.ViewModel
         public ConversationViewModel Conversation
         {
             get { return ServiceLocator.Current.GetInstance<ConversationViewModel>(); }
+        }
+
+        public MainPageViewModel MainPage
+        {
+            get { return ServiceLocator.Current.GetInstance<MainPageViewModel>(); }
         }
 
         public static void Cleanup()

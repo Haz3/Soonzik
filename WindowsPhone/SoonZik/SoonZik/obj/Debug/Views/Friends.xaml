@@ -21,7 +21,7 @@
         		<Border Background="{Binding Converter={StaticResource BackgroundConverter}}" 
         			Width="82" Height="82" HorizontalAlignment="Left">
         			<TextBlock Text="{Binding Group.Key}" 
-        				Foreground="#424242" 
+        				Foreground="White" 
         				FontSize="48" Padding="6" 
         				HorizontalAlignment="Left" VerticalAlignment="Center"/>
         		</Border>
@@ -43,7 +43,7 @@
         	<Border Background="Transparent" Padding="5">
         		<Border Background="{StaticResource PhoneAccentBrush}" BorderBrush="{StaticResource PhoneAccentBrush}" BorderThickness="2" Width="62" 
         			Height="62" Margin="0,0,18,0" HorizontalAlignment="Left">
-        			<TextBlock Text="{Binding Key}" Foreground="#424242"  FontSize="48" Padding="6" 
+        			<TextBlock Text="{Binding Key}" Foreground="White"  FontSize="48" Padding="6" 
         				FontFamily="{StaticResource PhoneFontFamilySemiLight}" HorizontalAlignment="Left" VerticalAlignment="Center"/>
         		</Border>
         	</Border>

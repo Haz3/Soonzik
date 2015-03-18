@@ -18,6 +18,7 @@ C:\Users\Géry\Downloads\LightStone-master\LightStone-master\LightStone\obj\Debu
 C:\Users\Géry\documents\visual studio 2013\Projects\SoonZik\LightStone\bin\Debug\LightStone.dll
 C:\Users\Géry\documents\visual studio 2013\Projects\SoonZik\LightStone\bin\Debug\LightStone.pdb
 C:\Users\Géry\documents\visual studio 2013\Projects\SoonZik\LightStone\bin\Debug\LightStone.pri
+C:\Users\Géry\documents\visual studio 2013\Projects\SoonZik\LightStone\obj\Debug\LightStone.csprojResolveAssemblyReference.cache
 C:\Users\Géry\documents\visual studio 2013\Projects\SoonZik\LightStone\obj\Debug\LightStone.dll
 C:\Users\Géry\documents\visual studio 2013\Projects\SoonZik\LightStone\obj\Debug\LightStone.pdb
 C:\Users\Géry\documents\visual studio 2013\Projects\SoonZik\LightStone\obj\Debug\priconfig.xml

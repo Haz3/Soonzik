@@ -6,13 +6,19 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:local="using:SoonZik.ViewModel"
     xmlns:view="using:SoonZik.Views"
+    xmlns:utils="using:SoonZik.Utils"
     mc:Ignorable="d"
     xmlns:controls="using:SoonZik.Controls"
-    Background="Transparent">
+    DataContext="{StaticResource MainPageViewModel}"
+    Background="#D3D3C3">
 	
+    <Page.Resources>
+        <utils:BoolToVisibilityConverter x:Key="BoolToVis"/>
+    </Page.Resources>
+    
     <Grid>
-        <view:MainView />
-        <!--<view:Connexion/>-->
+        <view:MainView Visibility="{Binding PivotVisibility, Converter={StaticResource BoolToVis}}" />
+        <view:Connexion Visibility="{Binding ConnexionVisibility, Converter={StaticResource BoolToVis}, FallbackValue=Collapsed}"/>
     </Grid>
 		
 </Page>

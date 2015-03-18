@@ -27,7 +27,6 @@ namespace SoonZik.Views
     {
         public MainView()
         {
-            DataContext = new MainViewModel();
             this.InitializeComponent();
             this.Loaded += OnLoaded;
         }
@@ -37,7 +36,12 @@ namespace SoonZik.Views
             this.PivotGlobal.Loaded += delegate(object o, RoutedEventArgs args)
             {
                 var vm = DataContext as MainViewModel;
-                if (vm != null) vm.GetPivotExecute.Execute(this.PivotGlobal);
+                if (vm != null)
+                {
+                    vm.GetPivotExecute.Execute(this.PivotGlobal);
+                    vm.GetStoryBoardExecute.Execute(this.MenuStoryBoardBack);
+                    vm.GetToggleButton.Execute(this.ToggleButtonMenu);
+                }
             };
         }
 
@@ -48,6 +52,18 @@ namespace SoonZik.Views
         /// Ce paramètre est généralement utilisé pour configurer la page.</param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
+        }
+
+        private void MenuAloneClose_OnCompleted(object sender, object e)
+        {
+            ToggleButtonMenu.IsChecked = false;
+            MenuStoryBoardBack.Pause();
+        }
+
+        private void SearchAloneBack_OnCompleted(object sender, object e)
+        {
+            ToggleButtonSearch.IsChecked = false;
+            SearchStoryBoardBack.Pause();
         }
     }
 }

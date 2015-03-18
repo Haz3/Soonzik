@@ -1,3 +1,4 @@
+Assets\Fonts\RobotoCondensed-Regular.ttf
 Assets\Logo.scale-240.png
 Assets\SmallLogo.scale-240.png
 Assets\SplashScreen.scale-240.png
@@ -5,7 +6,7 @@ Assets\Square71x71Logo.scale-240.png
 Assets\StoreLogo.scale-240.png
 Assets\WideLogo.scale-240.png
 App.xbf
-Controls\Acceuil.xbf
+Controls\BoutonMenuControl.xbf
 Controls\Genre.xbf
 Controls\MenuControl.xbf
 Controls\NewsControl.xbf
@@ -13,7 +14,6 @@ Controls\Player.xbf
 Controls\PopUp.xbf
 MainPage.xbf
 SoonZik.xr.xml
-Views\Accueil.xbf
 Views\Battle.xbf
 Views\Connexion.xbf
 Views\Conversation.xbf

@@ -22,7 +22,7 @@
 
 
             <Grid Grid.Row="0">
-                <Image Source="../Resources/disc.png" Height="70" Width="70" HorizontalAlignment="Left" Margin="20,0,0,0"/>
+                <Image Source="../Resources/Icones/disc.png" Height="70" Width="70" HorizontalAlignment="Left" Margin="20,0,0,0"/>
                 <TextBlock Text="Song 3" VerticalAlignment="Center" Margin="100, 0, 0, 0"></TextBlock>
             </Grid>
             <Button Grid.Row="1" Width="180" HorizontalAlignment="Center" Content="Fiche Artiste" FontSize="10" BorderBrush="Transparent" Background="DarkGray"/>

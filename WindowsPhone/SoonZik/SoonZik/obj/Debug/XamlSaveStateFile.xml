@@ -1,6 +1,8 @@
 <XamlCompilerSaveState>
   <ReferenceAssemblyList>
-    <LocalAssembly PathName="c:\users\géry\documents\visual studio 2013\projects\soonzik\soonzik\obj\debug\intermediatexaml\soonzik.exe" HashGuid="4db6f79e-10dc-ae3c-8ff6-7008c4776cd7" />
+    <LocalAssembly PathName="c:\users\géry\documents\visual studio 2013\projects\soonzik\soonzik\obj\debug\intermediatexaml\soonzik.exe" HashGuid="63dd72c2-7456-b9be-101c-35e3fc83434d" />
+    <ReferenceAssembly PathName="c:\program files (x86)\microsoft sdks\windowsphoneapp\v8.1\extensionsdks\behaviorsxamlsdkmanaged\12.0\references\commonconfiguration\neutral\microsoft.xaml.interactions.dll" HashGuid="95a94f94-3917-d473-4f7c-18c4bd437046" />
+    <ReferenceAssembly PathName="c:\program files (x86)\microsoft sdks\windowsphoneapp\v8.1\extensionsdks\behaviorsxamlsdkmanaged\12.0\references\commonconfiguration\neutral\microsoft.xaml.interactivity.dll" HashGuid="d25f59e6-dd81-900a-0dfc-55b39f6898ef" />
     <ReferenceAssembly PathName="c:\users\géry\documents\visual studio 2013\projects\soonzik\packages\facebook.client.0.9.1-alpha\lib\portable-win81+wpa81\facebook.client.dll" HashGuid="aeda242f-e768-3f5a-2625-7b5fdf37a42e" />
     <ReferenceAssembly PathName="c:\users\géry\documents\visual studio 2013\projects\soonzik\packages\facebook.6.8.0\lib\portable-win81+wpa81\facebook.dll" HashGuid="bedf50c2-16f9-eaae-1bc4-d838270a0113" />
     <ReferenceAssembly PathName="c:\users\géry\documents\visual studio 2013\projects\soonzik\packages\mvvmlightlibs.4.4.32.7\lib\wpa81\galasoft.mvvmlight.dll" HashGuid="77fb4b2e-8ec5-88d5-d8e7-768d248c7bbc" />

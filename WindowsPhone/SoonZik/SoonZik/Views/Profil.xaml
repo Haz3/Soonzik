@@ -21,7 +21,7 @@
         </Grid>-->
         <!-- Row 2 -->
         <Grid Grid.Row="0" Background="Transparent">
-            <Image Source="../Resources/disc.png" Height="160" Width="160" HorizontalAlignment="Left" Margin="20,0,0,0"/>
+            <Image Source="../Resources/Icones/disc.png" Height="160" Width="160" HorizontalAlignment="Left" Margin="20,0,0,0"/>
             <TextBlock Text="Artist Name" FontFamily="Calibri" FontSize="30" HorizontalAlignment="Right" Margin="0,38,49,42"/>
         </Grid>
         <!-- Row 3 -->
