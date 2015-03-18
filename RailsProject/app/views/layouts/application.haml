@@ -30,7 +30,7 @@
                     %a.name Stefan Bodzin
                   %p
                     %a.modify Modifier le profil
-                %li.has-dropdown{"is_hover" => "true"}
+                %li.has-dropdown{"is_hover" => "true", "data-options" => "align:right"}
                   =image_tag "menu.png", :class => "menu-logo"
                   %ul.dropdown
                     %li
@@ -39,14 +39,23 @@
                       %a Test 3
                       = link_to('Logout', destroy_user_session_path, :method => :delete)
               - else
+                .profile
+                  %p
+                    %a.name Sign Up
                 %li.has-dropdown{"is_hover" => "true"}
                   =image_tag "menu.png", :class => "menu-logo"
                   %ul.dropdown
                     %li
-                      = link_to('Login', new_user_session_path)
-                      %a Test 1
-                      %a TesT 2
-                      %a Test 3
+                      /= link_to('Login', new_user_session_path)
+                      %a Mon Profil
+                      %a News
+                      %a Explorer
+                      %a Packs
+                      %a Monde Musical
+                      %a Battle
+                      %a Playlist
+                      %a Amis
+                      %a Déconnexion
 
           %ul.left
             %li.has-form

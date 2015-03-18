@@ -1,0 +1,16 @@
+%h2
+.row
+  .small-6.small-centered.columns
+    = form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f|
+      = devise_error_messages!
+      .panel.login
+        .text-center.black
+          %h7 Vous n'avez pas reçu la confirmation ?
+        .divider
+        .field
+          = f.email_field :email, autofocus: true, :placeholder => "Courrier Electronique", :class => "radius"
+        .actions
+          = f.submit "Envoyer", :class => "button expand radius"
+        .divider
+        .links
+          = render "devise/shared/links"

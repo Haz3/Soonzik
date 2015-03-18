@@ -97,27 +97,28 @@ $include-html-global-classes: $include-html-classes;
  $font-weight-normal: normal;
  $font-weight-bold: bold;
 
- $white       : #FFFFFF;
- $ghost       : #FAFAFA;
- $snow        : #F9F9F9;
- $vapor       : #F6F6F6;
- $white-smoke : #F5F5F5;
- $silver      : #EFEFEF;
- $smoke       : #EEEEEE;
- $gainsboro   : #DDDDDD;
- $iron        : #CCCCCC;
- $base        : #AAAAAA;
- $aluminum    : #999999;
- $jumbo       : #888888;
- $monsoon     : #777777;
- $steel       : #666666;
- $charcoal    : #555555;
- $tuatara     : #444444;
- $oil         : #333333;
- $jet         : #222222;
- $black       : #000000;
+ $white       	: #FFFFFF;
+ $ghost     	: #FAFAFA;
+ $snow        	: #F9F9F9;
+ $vapor       	: #F6F6F6;
+ $white-smoke 	: #F5F5F5;
+ $silver      	: #EFEFEF;
+ $smoke       	: #EEEEEE;
+ $gainsboro   	: #DDDDDD;
+ $iron        	: #CCCCCC;
+ $base        	: #AAAAAA;
+ $aluminum    	: #999999;
+ $jumbo       	: #888888;
+ $monsoon     	: #777777;
+ $steel       	: #666666;
+ $charcoal    	: #555555;
+ $tuatara     	: #444444;
+ $oil         	: #333333;
+ $jet         	: #222222;
+ $black       	: #000000;
  $greyscale		: #ECEDEF;
  $color-header	: #C0C0C0;
+ $color-player	: #424242;
 
 // We use these as default colors throughout
  $primary-color: #008CBA;
@@ -529,7 +530,7 @@ $include-html-global-classes: $include-html-classes;
  $f-dropdown-margin-top: 2px;
 
 // Used for right position
- $f-dropdown-margin-left: $f-dropdown-margin-top;
+ $f-dropdown-margin-left: 0;
 
 // Used for left position
 // $f-dropdown-margin-right: $f-dropdown-margin-top;
@@ -556,7 +557,7 @@ $include-html-global-classes: $include-html-classes;
  $f-dropdown-font-size: rem-calc(14);
  $f-dropdown-list-padding: rem-calc(5, 10);
  $f-dropdown-line-height: rem-calc(18);
- $f-dropdown-list-hover-bg: $smoke;
+ $f-dropdown-list-hover-bg: $color-player;
  $dropdown-mobile-default-float: 0;
 
 // We use this to control the styles for when the dropdown has custom content.
