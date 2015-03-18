@@ -8,21 +8,19 @@
 
 #import <UIKit/UIKit.h>
 #import "News.h"
-
-@protocol NewsTypeAlbumDelegate <NSObject>
-
-- (void)launchShareViewWithNews:(News *)news;
-
-@end
+#import "ShareNewsDelegate.h"
 
 @interface NewsTypeAlbumCell : UITableViewCell
 
 @property (weak, nonatomic) IBOutlet UIView *cellContent;
 @property (weak, nonatomic) IBOutlet UIButton *shareButton;
+@property (weak, nonatomic) IBOutlet UILabel *titleLabel;
+@property (weak, nonatomic) IBOutlet UILabel *subtitleLabel;
+@property (weak, nonatomic) IBOutlet UILabel *dateLabel;
 
 @property (strong, nonatomic) News *news;
 
-@property (nonatomic, strong) id<NewsTypeAlbumDelegate>shareDelegate;
+@property (nonatomic, strong) id<ShareNewsDelegate>shareDelegate;
 
 - (void)initCellWithNews:(News *)news;
 

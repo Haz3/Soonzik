@@ -34,7 +34,7 @@
     // Do any additional setup after loading the view from its nib.
     
     [self.contentView layoutIfNeeded];
-    CGSize size = CGSizeMake(self.contentView.bounds.size.width, self.contentView.bounds.size.height + self.playerPreviewView.frame.size.height);
+    CGSize size = CGSizeMake(self.contentView.bounds.size.width, self.contentView.bounds.size.height);
     self.scrollView.contentSize = size;
     [self.scrollView addSubview:self.contentView];
     
@@ -52,6 +52,11 @@
     [self.firstArtistView addGestureRecognizer:recognizer1];
     UIPanGestureRecognizer *recognizer2 = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePanSecond:)];
     [self.secondArtistView addGestureRecognizer:recognizer2];
+    
+    self.firstArtistView.layer.cornerRadius = 80;
+    self.firstArtistView.clipsToBounds = YES;
+    self.secondArtistView.layer.cornerRadius = 80;
+    self.secondArtistView.clipsToBounds = YES;
 }
 
 - (void)handlePanFirst:(UIPanGestureRecognizer *)recognizer

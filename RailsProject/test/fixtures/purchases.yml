@@ -2,12 +2,8 @@
 
 PurchaseOne:
   user: UserTwo
-  typeObj: FakeObject
-  obj_id: 1
-  date: 2014-09-07 23:19:55
+  albums: AlbumOne
 
 PurchaseTwo:
   user: UserOne
-  typeObj: Music
-  obj_id: 2
-  date: 2014-09-07 23:19:55
+  packs: PackOne

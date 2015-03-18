@@ -2,12 +2,10 @@
 
 panierUn:
   user: UserOne
-  typeObj: Album
-  obj_id: 1
+  albums: AlbumOne
   gift: false
 
 panierDeux:
   user: UserTwo
-  typeObj: Music
-  obj_id: 2
+  musics: MusicOne
   gift: true

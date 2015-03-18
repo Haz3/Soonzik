@@ -22,14 +22,16 @@ module API
         playlist = Playlist.find_by_id(@id)
         if (!playlist)
           codeAnswer 502
+          defineHttp :not_found
         else
           @returnValue = { content: playlist.as_json(:include => {
-          														:musics => {}
+          														:musics => { :only => Music.miniKey }
           														}) }
           codeAnswer 200
         end
       rescue
         codeAnswer 504
+        defineHttp :service_unavailable
       end
       sendJson
     end
@@ -38,8 +40,8 @@ module API
     # 
     # ==== Options
     # 
-    # * +:playlist[user_id]+ - Id of the user who has the playlist
-    # * +:playlist[name]+ - Name of the playlist
+    # * +:playlist [user_id]+ - Id of the user who has the playlist
+    # * +:playlist [name]+ - Name of the playlist
     # 
     def save
       begin
@@ -48,15 +50,19 @@ module API
           if (playlist.save)
             @returnValue = { content: playlist.as_json() }
             codeAnswer 201
+            defineHttp :created
           else
             @returnValue = { content: playlist.errors.to_hash.to_json }
             codeAnswer 503
+            defineHttp :service_unavailable
           end
         else
           codeAnswer 500
+          defineHttp :forbidden
         end
       rescue
         codeAnswer 504
+        defineHttp :service_unavailable
       end
       sendJson
     end
@@ -66,8 +72,8 @@ module API
     # ==== Options
     # 
     # * +:id+ - Id of the playlist to modify
-    # * +:playlist[name]+ - Name of the playlist
-    # * +:playlist[music][]+ - Array of the id of the music in the playlist
+    # * +:playlist [name]+ - Name of the playlist
+    # * +:playlist [music][]+ - Array of the id of the music in the playlist
     # 
     def update
       begin
@@ -84,21 +90,26 @@ module API
             playlist.name = @playlist[:name] if defined?@playlist && @playlist.has_key?(:name)
             if (playlist.save)
               @returnValue = { content: playlist.as_json(:include => {
-                                      :musics => {},
-                                      :user => {only: [:id, :username]}
+                                      :musics => {:only => Music.miniKey},
+                                      :user => {:only => User.miniKey}
                                       }) }
               codeAnswer 201
+              defineHttp :created
             else
               codeAnswer 505
+              defineHttp :service_unavailable
             end
           else
             codeAnswer 505
+            defineHttp :service_unavailable
           end
         else
           codeAnswer 500
+          defineHttp :forbidden
         end
       rescue
         codeAnswer 504
+        defineHttp :service_unavailable
       end
       sendJson
     end
@@ -107,7 +118,7 @@ module API
     #
     # ==== Options
     # 
-    # * +:attribute[attribute_name]+ - If you want a column equal to a specific value
+    # * +:attribute [attribute_name]+ - If you want a column equal to a specific value
     # * +:order_by_asc[]+ - If you want to order by ascending by values
     # * +:order_by_desc[]+ - If you want to order by descending by values
     # * +:group_by[]+ - If you want to group by field
@@ -184,18 +195,20 @@ module API
         end
 
         @returnValue = { content: playlist_object.as_json(:include => {
-                                    :musics => {},
-                                    :user => {}
+                                      :musics => {:only => Music.miniKey},
+                                      :user => {:only => User.miniKey}
                                     }) }
 
         if (playlist_object.size == 0)
           codeAnswer 202
+          defineHttp :no_content
         else
           codeAnswer 200
         end
 
       rescue
         codeAnswer 504
+        defineHttp :service_unavailable
       end
       sendJson
     end
@@ -212,11 +225,14 @@ module API
           object = Playlist.find_by_id(@id);
           object.destroy
           codeAnswer 202
+          defineHttp :no_content
         else
           codeAnswer 500
+          defineHttp :forbidden
         end
       rescue
         codeAnswer 504
+        defineHttp :service_unavailable
       end
       sendJson
     end

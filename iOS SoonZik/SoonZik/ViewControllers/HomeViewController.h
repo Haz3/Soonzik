@@ -14,12 +14,14 @@
 #import "User.h"
 #import "Album.h"
 #import "NewsTypeAlbumCell.h"
+#import "AAShareBubbles.h"
 
-@interface HomeViewController : TypeViewController <UITableViewDataSource, UITableViewDelegate, NewsTypeAlbumDelegate>
+@interface HomeViewController : TypeViewController <UITableViewDataSource, UITableViewDelegate, ShareNewsDelegate, AAShareBubblesDelegate>
 
 @property (nonatomic, retain) AudioPlayer *player;
 
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
+@property (nonatomic, strong) NSMutableArray *listOfNews;
 
 - (IBAction)loadPlaylist:(id)sender;
 

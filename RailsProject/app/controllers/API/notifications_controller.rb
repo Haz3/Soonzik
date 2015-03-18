@@ -22,15 +22,20 @@ module API
 	        notif = Notification.find_by_id(@id)
 	        if (!notif)
 	          codeAnswer 502
+            defineHttp :not_found
           else
-  	        @returnValue = { content: notif.as_json(:include => :user) }
+  	        @returnValue = { content: notif.as_json(:include => {
+                                                                  :user => {:only => User.miniKey }
+                                                                }) }
 	          codeAnswer 200
           end
   	    else
   	    	codeAnswer 500
+          defineHttp :forbidden
   	    end
       rescue
         codeAnswer 504
+        defineHttp :service_unavailable
       end
       sendJson
     end
@@ -39,26 +44,32 @@ module API
     # 
     # ==== Options
     # 
-    # * +:notification[user_id]+ - Id of the user who has the notification
-    # * +:notification[link]+ - The link where the notification redirect without the http://dns.com (to be usefull by the smartphone applications)
-    # * +:notification[description]+ - The text of the notification
+    # * +:notification [user_id]+ - Id of the user who has the notification
+    # * +:notification [link]+ - The link where the notification redirect without the http://dns.com (to be usefull by the smartphone applications)
+    # * +:notification [description]+ - The text of the notification
     # 
     def save
       begin
         if (@security)
           notif = Notification.new(Notification.notification_params params)
           if (notif.save)
-            @returnValue = { content: notif.as_json(:include => :user) }
+            @returnValue = { content: notif.as_json(:include => {
+                                                                  :user => {:only => User.miniKey }
+                                                                }) }
             codeAnswer 201
+            defineHttp :created
           else
             @returnValue = { content: notif.errors.to_hash.to_json }
             codeAnswer 503
+            defineHttp :service_unavailable
           end
         else
           codeAnswer 500
+          defineHttp :forbidden
         end
       rescue
         codeAnswer 504
+        defineHttp :service_unavailable
       end
       sendJson
     end
@@ -67,7 +78,7 @@ module API
     #
     # ==== Options
     # 
-    # * +:attribute[attribute_name]+ - If you want a column equal to a specific value
+    # * +:attribute [attribute_name]+ - If you want a column equal to a specific value
     # * +:order_by_asc[]+ - If you want to order by ascending by values
     # * +:order_by_desc[]+ - If you want to order by descending by values
     # * +:group_by[]+ - If you want to group by field
@@ -146,16 +157,20 @@ module API
             notification_object = notification_object.offset(@offset.to_i)
           end
 
-          @returnValue = { content: notification_object.as_json(:include => :user) }
+          @returnValue = { content: notification_object.as_json(:include => {
+                                                                              :user => {:only => User.miniKey }
+                                                                            }) }
 
           if (notification_object.size == 0)
             codeAnswer 202
+            defineHttp :no_content
           else
             codeAnswer 200
           end
         end
       rescue
         codeAnswer 504
+        defineHttp :service_unavailable
       end
       sendJson
     end
@@ -169,14 +184,17 @@ module API
     def destroy
       begin
         if (@security)
-          object = Notification.find_by_id(@id);
+          object = Notification.find_by_id(@id)
           object.destroy
           codeAnswer 202
+          defineHttp :no_content
         else
           codeAnswer 500
+          defineHttp :forbidden
         end
       rescue
         codeAnswer 504
+        defineHttp :service_unavailable
       end
       sendJson
     end

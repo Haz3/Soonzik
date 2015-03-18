@@ -21,18 +21,21 @@ module API
 	        msg = Message.find_by_id(@id)
 	        if (!msg)
 	          codeAnswer 502
+            defineHttp :not_found
 	        else
   	        @returnValue = { content: msg.as_json(:include => {
-          														:sender => {},
-          														:receiver => {}
+          														:sender => { :only => User.miniKey },
+          														:receiver => { :only => User.miniKey }
           													}) }
             codeAnswer 200
           end
 	    else
 	    	codeAnswer 500
+        defineHttp :forbidden
 	    end
       rescue
         codeAnswer 504
+        defineHttp :service_unavailable
       end
       sendJson
     end
@@ -41,9 +44,9 @@ module API
     # 
     # ==== Options
     # 
-    # * +:message[user_id]+ - Id of the user who send the message
-    # * +:message[dest_id]+ - Id of the user who read the message
-    # * +:message[msg]+ - The text of the message
+    # * +:message [user_id]+ - Id of the user who send the message
+    # * +:message [dest_id]+ - Id of the user who read the message
+    # * +:message [msg]+ - The text of the message
     # 
     def save
       begin
@@ -51,19 +54,23 @@ module API
           msg = Message.new(Message.message_params params)
           if (msg.save)
             @returnValue = { content: msg.as_json(:include => {
-                                    :sender => {},
-                                    :receiver => {}
+                                    :sender => { :only => User.miniKey },
+                                    :receiver => { :only => User.miniKey }
                                   }) }
             codeAnswer 201
+            defineHttp :created
           else
             @returnValue = { content: msg.errors.to_hash.to_json }
             codeAnswer 503
+            defineHttp :service_unavailable
           end
         else
           codeAnswer 500
+          defineHttp :forbidden
         end
       rescue
         codeAnswer 504
+        defineHttp :service_unavailable
       end
       sendJson
     end
@@ -72,7 +79,7 @@ module API
     #
     # ==== Options
     # 
-    # * +:attribute[attribute_name]+ - If you want a column equal to a specific value
+    # * +:attribute [attribute_name]+ - If you want a column equal to a specific value
     # * +:order_by_asc[]+ - If you want to order by ascending by values
     # * +:order_by_desc[]+ - If you want to order by descending by values
     # * +:group_by[]+ - If you want to group by field
@@ -152,18 +159,20 @@ module API
           end
 
           @returnValue = { content: message_object.as_json(:include => {
-                                      :sender => {},
-                                      :receiver => {}
+                                      :sender => { :only => User.miniKey },
+                                      :receiver => { :only => User.miniKey }
                                     }) }
 
           if (message_object.size == 0)
             codeAnswer 202
+            defineHttp :no_content
           else
             codeAnswer 200
           end
         end
       rescue
         codeAnswer 504
+        defineHttp :service_unavailable
       end
       sendJson
     end

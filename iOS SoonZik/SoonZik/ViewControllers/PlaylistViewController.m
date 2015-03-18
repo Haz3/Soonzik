@@ -8,7 +8,6 @@
 
 #import "PlaylistViewController.h"
 #import "PlayListsCells.h"
-#import "AddToCurrentListeningButton.h"
 #import "AppDelegate.h"
 #import "Music.h"
 #import "ArtistViewController.h"
@@ -36,26 +35,12 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
-    
-    //[self getAllPlaylists];
     
     self.navigationItem.hidesBackButton = NO;
     self.navigationItem.leftBarButtonItem = nil;
     
-    /*[self.playlistTableView setFrame:CGRectMake(0, 0, self.screenWidth, self.screenHeight - self.navigationController.navigationBar.frame.size.height-self.statusBarHeight-self.actionsOnPlaylistView.frame.size.height*2 - self.playerPreviewView.frame.size.height)];*/
-    
     self.playlistTableView.dataSource = self;
     self.playlistTableView.delegate = self;
-}
-
-- (void)closePopup:(NSString *)country
-{
-   /* [self.prefixButton setTitle:[NSString stringWithFormat:@"+%@", country] forState:UIControlStateNormal];
-    self.client.telIndicatif = country;
-    [popoverController dismissPopoverAnimated:YES];
-    popoverController = nil;
-    */
 }
 
 - (void)goToAlbumView:(Music *)music
@@ -80,9 +65,9 @@
     self.player = ((AppDelegate *)[UIApplication sharedApplication].delegate).thePlayer;
     [self.player.listeningList addObject:music];
     
-    self.popUp = [[UIAlertView alloc] initWithTitle:@"" message:[NSString stringWithFormat:@"Vous avez ajouté: %@ à la liste de lecture actuelle", music.title] delegate:self cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
+    UIAlertView *popUp = [[UIAlertView alloc] initWithTitle:@"" message:[NSString stringWithFormat:@"Vous avez ajouté: %@ à la liste de lecture actuelle", music.title] delegate:self cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
     
-    [self.popUp show];
+    [popUp show];
     
     [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(closePopUp) userInfo:nil repeats:NO];
     
@@ -121,6 +106,18 @@
 - (void) playAllPlaylist
 {
     NSLog(@"clic");
+    self.player = ((AppDelegate *)[UIApplication sharedApplication].delegate).thePlayer;
+    self.player.listeningList = [[NSMutableArray alloc] init];
+    [self.player.audioPlayer stop];
+    self.player.index = 0;
+    self.player.oldIndex = 0;
+    
+    for (Music *music in self.playlist.listOfMusics) {
+        [self.player.listeningList addObject:music];
+        NSLog(@"add music to listening list");
+    }
+    
+    [self.player playSound];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -143,6 +140,7 @@
     //get the song name
     
     Music *s = [self.playlist.listOfMusics objectAtIndex:indexPath.row];
+    NSLog(@"music.file : %@", s.file);
     cell.trackTitle.text = s.title;
     cell.trackArtist.text = s.artist.username;
     [cell.optionsButton addTarget:self action:@selector(displayPopUp:) forControlEvents:UIControlEventTouchUpInside];
@@ -172,10 +170,8 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{/*
-    NSString *nameOfThePlaylist = [self.playlistTitles objectAtIndex:indexPath.section];
-    NSMutableArray *playlist = [self.playlists objectForKey:nameOfThePlaylist];
-    Music *s = [playlist objectAtIndex:indexPath.row];
+{
+    Music *s = [self.playlist.listOfMusics objectAtIndex:indexPath.row];
     
     self.player = ((AppDelegate *)[UIApplication sharedApplication].delegate).thePlayer;
     if ([self.player currentlyPlaying])
@@ -187,8 +183,7 @@
     [self.player prepareSong:s.file];
     [self.player playSound];
     self.player.songName = s.title;
-*/
-  }
+}
 
 - (void)closePopUp
 {

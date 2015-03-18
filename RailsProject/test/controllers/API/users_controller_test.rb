@@ -3,7 +3,6 @@ require 'test_helper'
 module API
   class UsersControllerTest < ActionController::TestCase
     def giveToken
-      @user = users(:UserOne)
       return { id: @user.id, secureKey: @user.secureKey }
     end
     
@@ -21,14 +20,11 @@ module API
 
     test "should save user" do
       token = giveToken() # because of security access
-      post :save, { user: { activated: true, address_id: @user.address.id, birthday: @user.birthday, description: "nouvelle description", email: "test@mail.ru", facebook: @user.facebook, fname: @user.fname, googlePlus: @user.googlePlus, image: @user.image, language: @user.language, lname: @user.lname, newsletter: true, password: @user.password, phoneNumber: @user.phoneNumber, signin: @user.signin, twitter: @user.twitter, username: "new test username" }, user_id: token[:id], secureKey: token[:secureKey], format: :json }
-      assert_response :success
+      post :save, { user: { address_id: @user.address.id, birthday: @user.birthday, description: "nouvelle description", email: "test@mail.ru", facebook: @user.facebook, fname: @user.fname, googlePlus: @user.googlePlus, image: @user.image, language: @user.language, lname: @user.lname, newsletter: true, password: @user.encrypted_password, phoneNumber: @user.phoneNumber, twitter: @user.twitter, username: "new test username" }, user_id: token[:id], secureKey: token[:secureKey], format: :json }
+      assert_response :created
 
       value = JSON.parse(response.body)
-      assert_equal value["code"], 503 #before of the "before create" not executed
-      [:idAPI, :secureKey, :salt, :signin].any? {|x|
-        assert JSON.parse(value["content"]).has_key?(x.to_s)
-      }
+      assert_equal value["code"], 201
     end
 
     test "should show user ok" do
@@ -42,7 +38,7 @@ module API
 
     test "should show user ko" do
       get :show, { id: 12345, format: :json }
-      assert_response :success
+      assert_response :not_found
 
       value = JSON.parse(response.body)
       assert_equal value["code"], 502
@@ -57,7 +53,7 @@ module API
       assert_equal value["content"].size, 2
 
       get :find, { offset: 42, order_by_asc: [], order_by_desc: ["id"], format: :json }
-      assert_response :success
+      assert_response :no_content
 
       value = JSON.parse(response.body)
       assert_equal value["code"], 202
@@ -74,12 +70,12 @@ module API
 
     test "should update user" do
       token = giveToken() # because of security access
-      post :update, { id: @user.id, address: { numberStreet: 2 }, user: { activated: @user.activated, address_id: @user.address_id, birthday: @user.birthday, description: "deuxieme description", email: @user.email, facebook: @user.facebook, fname: @user.fname, googlePlus: @user.googlePlus, idAPI: @user.idAPI, image: @user.image, language: @user.language, lname: @user.lname, newsletter: @user.newsletter, password: @user.password, phoneNumber: @user.phoneNumber, salt: @user.salt, secureKey: @user.secureKey, signin: @user.signin, twitter: @user.twitter, username: @user.username }, user_id: token[:id], secureKey: token[:secureKey], format: :json }
+      post :update, { id: @user.id, address: { numberStreet: 2 }, user: { address_id: @user.address_id, birthday: @user.birthday, description: "deuxieme description", email: @user.email, facebook: @user.facebook, fname: @user.fname, googlePlus: @user.googlePlus, idAPI: @user.idAPI, image: @user.image, language: @user.language, lname: @user.lname, newsletter: @user.newsletter, password: @user.encrypted_password, phoneNumber: @user.phoneNumber, salt: @user.salt, secureKey: @user.secureKey, twitter: @user.twitter, username: @user.username }, user_id: token[:id], secureKey: token[:secureKey], format: :json }
 
       assert_response :success
 
       value = JSON.parse(response.body)
-      assert_equal value["code"], 200
+      assert_equal value["code"], 201
     end
 
     test "should get musics of user" do
@@ -89,23 +85,19 @@ module API
       pack = packs(:PackOne)
 
       purchase = purchases(:PurchaseTwo)
-      purchase.obj_id = music.id
+      purchase.musics << music
       purchase.save
 
       #---
       purchase_album = Purchase.new
-      purchase_album.typeObj = "Album"
-      purchase_album.obj_id = album.id
+      purchase_album.albums << album
       purchase_album.user_id = @user.id
-      purchase_album.date = "2014-09-07 23:19:55"
       purchase_album.save
 
       #--
       purchase_pack = Purchase.new
-      purchase_pack.typeObj = "Pack"
-      purchase_pack.obj_id = pack.id
+      purchase_pack.packs << pack
       purchase_pack.user_id = @user.id
-      purchase_pack.date = "2014-09-07 23:19:55"
       purchase_pack.save
 
 

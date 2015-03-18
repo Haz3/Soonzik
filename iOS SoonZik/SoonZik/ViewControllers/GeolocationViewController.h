@@ -6,10 +6,10 @@
 //  Copyright (c) 2014 Coordina. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "TypeViewController.h"
 #import <MapKit/MapKit.h>
 
-@interface GeolocationViewController : UIViewController <CLLocationManagerDelegate, MKMapViewDelegate>
+@interface GeolocationViewController : TypeViewController <CLLocationManagerDelegate, MKMapViewDelegate>
 
 @property (nonatomic, weak) IBOutlet MKMapView *mapView;
 @property (nonatomic, weak) IBOutlet UIView *detailView;

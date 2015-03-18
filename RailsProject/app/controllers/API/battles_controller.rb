@@ -11,17 +11,19 @@ module API
     def index
       begin
         @returnValue = { content: Battle.all.as_json(:include => {
-        														:artist_one => {},
-        														:artist_two => {},
+        														:artist_one => { :only => User.miniKey },
+        														:artist_two => { :only => User.miniKey },
         														:votes => {}
         													}) }
-        if (@returnValue.size == 0)
+        if (@returnValue[:content].size == 0)
           codeAnswer 202
+          defineHttp :no_content
         else
           codeAnswer 200
         end
       rescue
         codeAnswer 504
+        defineHttp :service_unavailable
       end
       sendJson
     end
@@ -37,16 +39,18 @@ module API
         battle = Battle.find_by_id(@id)
         if (!battle)
           codeAnswer 502
+          defineHttp :not_found
         else
           @returnValue = { content: battle.as_json(:include => {
-          														:artist_one => {},
-          														:artist_two => {},
+          														:artist_one => { :only => User.miniKey },
+          														:artist_two => { :only => User.miniKey },
           														:votes => {}
           													}) }
           codeAnswer 200
         end
       rescue
         codeAnswer 504
+        defineHttp :service_unavailable
       end
       sendJson
     end
@@ -55,7 +59,7 @@ module API
     #
     # ==== Options
     # 
-    # * +:attribute[attribute_name]+ - If you want a column equal to a specific value
+    # * +:attribute [attribute_name]+ - If you want a column equal to a specific value
     # * +:order_by_asc[]+ - If you want to order by ascending by values
     # * +:order_by_desc[]+ - If you want to order by descending by values
     # * +:group_by[]+ - If you want to group by field
@@ -132,19 +136,21 @@ module API
         end
 
         @returnValue = { content: battle_object.as_json(:include => {
-                                    :artist_one => {},
-                                    :artist_two => {},
+                                    :artist_one => { :only => User.miniKey },
+                                    :artist_two => { :only => User.miniKey },
                                     :votes => {}
                                   }) }
 
         if (battle_object.size == 0)
           codeAnswer 202
+          defineHttp :no_content
         else
           codeAnswer 200
         end
 
       rescue
         codeAnswer 504
+        defineHttp :service_unavailable
       end
       sendJson
     end

@@ -1,10 +1,11 @@
-source 'https://rubygems.org'
+source 'http://rubygems.org'
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.1'
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3'
+gem 'mysql2'
 
 gem 'json'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
@@ -25,8 +26,8 @@ end
 
 # For windows because unicorn doesn't work on it
 gem 'specific_install', platforms: [:x64_mingw,:mingw, :mswin]
-gem 'eventmachine', :git => 'https://github.com/eventmachine/eventmachine.git', platforms: [:x64_mingw,:mingw, :mswin]
 gem 'thin', platforms: [:x64_mingw,:mingw, :mswin]
+gem 'eventmachine', :git => 'https://github.com/eventmachine/eventmachine.git', platforms: [:x64_mingw,:mingw, :mswin]
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
@@ -39,37 +40,41 @@ gem 'thin', platforms: [:x64_mingw,:mingw, :mswin]
 gem 'haml', '~> 4.0.5'
 gem "haml-rails"
 # Use SCSS for stylesheets
-gem 'sass-rails', '~> 4.0.3'
+gem 'sass-rails'#, '~> 4.0.3'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .js.coffee assets and views
-gem 'coffee-rails', '~> 4.0.0'
+# gem 'coffee-rails', '~> 4.0.0'
 # Use jquery and angularjs as the JavaScript library
 gem 'jquery-rails', "~> 2.3.0"
 gem 'angularjs-rails'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks'
+gem 'coffee-script-source', '1.8.0' # needed by turbolink & v1.8 for windows
 # Provide Foundation for the rails app
 gem 'foundation-rails'
 
-# Debug gems
-#For debug
-gem 'annotate'
-gem 'better_errors'
-#better print
-gem 'priscilla'
-gem "binding_of_caller"
+platforms :ruby do #We doesn't dev' on Windows so we avoid errors thanks to this
+	# Debug gems
+	#For debug
+	gem 'annotate'
+	gem 'better_errors'
+	#better print
+	gem 'priscilla'
+	gem "binding_of_caller"
+end
 
 # For test
 gem 'simplecov', :require => false, :group => :test
 
-#Features
-gem "gritter"
-gem 'activeadmin', github: 'gregbell/active_admin'
-
 #needed by activeadmin
 gem "devise"
 gem 'kaminari'
+
+#Features
+gem "gritter"
+gem 'activeadmin', github: 'activeadmin'
+#gem 'meta_search'
 
 gem "paperclip", "~> 4.1"
 #gem "will_paginate"
@@ -83,3 +88,12 @@ gem 'tzinfo-data', platforms: [:x64_mingw,:mingw, :mswin]
 
 require 'rbconfig'
 gem 'wdm', '>= 0.1.0' if RbConfig::CONFIG['target_os'] =~ /mswin|mingw|cygwin/i
+
+# OAuth gems
+gem 'omniauth'
+gem 'omniauth-oauth2', '~> 1.1'
+gem 'omniauth-twitter'
+gem 'omniauth-facebook', '~> 2.0.0.pre1'
+gem 'omniauth-google-oauth2', '~> 0.2.6'
+
+gem 'foreigner', '~> 1.7.2'

@@ -147,7 +147,7 @@
 											<p>Search an element in our collection of content or for a specific object
 type</p>
 
-<h4 id="method-i-search-label-Options">Options<span><a href="#method-i-search-label-Options">&para;</a> <a href="#documentation">&uarr;</a></span></h4>
+<h4 id="method-i-search-label-Options">Options<span><a href="#method-i-search-label-Options">&para;</a> <a href="#top">&uarr;</a></span></h4>
 <ul><li>
 <p><code>:offset</code> - [Optionnal] Number where to begin the results (only
 with filter)</p>
@@ -155,56 +155,59 @@ with filter)</p>
 <p><code>:limit</code> - [Optionnal] Number of result you want (only with
 filter)</p>
 </li><li>
+<p><code>:query</code> - [Optionnal] What the user type</p>
+</li><li>
 <p><code>:type</code> - [Optionnal]</p>
 </li></ul>					
 											<div class="method-source-code" id="search-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/searchs_controller.rb, line 16</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/searchs_controller.rb, line 17</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">search</span>
-      <span class="ruby-keyword">begin</span>
-          <span class="ruby-identifier">content</span> = []
-        <span class="ruby-identifier">offset</span> = <span class="ruby-value">0</span>
-        <span class="ruby-identifier">limit</span> = <span class="ruby-keyword">nil</span>
-    <span class="ruby-identifier">offset</span> = <span class="ruby-ivar">@offset</span> <span class="ruby-keyword">if</span> <span class="ruby-keyword">defined?</span><span class="ruby-ivar">@offset</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-ivar">@offset</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span>
-    <span class="ruby-identifier">limit</span> = <span class="ruby-ivar">@limit</span> <span class="ruby-keyword">if</span> <span class="ruby-keyword">defined?</span><span class="ruby-ivar">@limit</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-ivar">@limit</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span>
-    <span class="ruby-identifier">puts</span> <span class="ruby-keyword">defined?</span><span class="ruby-ivar">@type</span>
-    <span class="ruby-keyword">if</span> <span class="ruby-keyword">defined?</span><span class="ruby-ivar">@type</span>
-      <span class="ruby-keyword">case</span> <span class="ruby-ivar">@type</span>
-        <span class="ruby-keyword">when</span> <span class="ruby-string">&quot;artist&quot;</span>
-                      <span class="ruby-identifier">content</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">joins</span>(<span class="ruby-value">:groups</span>).<span class="ruby-identifier">merge</span>(<span class="ruby-constant">Group</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">:name</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;artist&quot;</span>)).<span class="ruby-identifier">where</span>([<span class="ruby-string">&quot;&#39;users&#39;.&#39;username&#39; LIKE ?&quot;</span>, <span class="ruby-node">&quot;#{@query}&quot;</span>]).<span class="ruby-identifier">select</span>(<span class="ruby-string">&quot;id, username, image, description, facebook, twitter, googlePlus&quot;</span>)
-                <span class="ruby-keyword">when</span> <span class="ruby-string">&quot;user&quot;</span>
-                      <span class="ruby-identifier">content</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">joins</span>(<span class="ruby-value">:groups</span>).<span class="ruby-identifier">merge</span>(<span class="ruby-constant">Group</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">:name</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;user&quot;</span>)).<span class="ruby-identifier">where</span>([<span class="ruby-string">&quot;&#39;users&#39;.&#39;username&#39; LIKE ?&quot;</span>, <span class="ruby-node">&quot;#{@query}&quot;</span>]).<span class="ruby-identifier">select</span>(<span class="ruby-string">&quot;id, username, image, description, facebook, twitter, googlePlus&quot;</span>)
-                <span class="ruby-keyword">when</span> <span class="ruby-string">&quot;music&quot;</span>
-                      <span class="ruby-identifier">content</span> = <span class="ruby-constant">Music</span>.<span class="ruby-identifier">where</span>([<span class="ruby-string">&quot;&#39;musics&#39;.&#39;title&#39; LIKE ?&quot;</span>, <span class="ruby-node">&quot;#{@query}&quot;</span>])
-                <span class="ruby-keyword">when</span> <span class="ruby-string">&quot;album&quot;</span>
-                      <span class="ruby-identifier">content</span> = <span class="ruby-constant">Album</span>.<span class="ruby-identifier">where</span>([<span class="ruby-string">&quot;&#39;albums&#39;.&#39;title&#39; LIKE ?&quot;</span>, <span class="ruby-node">&quot;#{@query}&quot;</span>])
-                <span class="ruby-keyword">when</span> <span class="ruby-string">&quot;pack&quot;</span>
-                      <span class="ruby-identifier">content</span> = <span class="ruby-constant">Pack</span>.<span class="ruby-identifier">where</span>([<span class="ruby-string">&quot;&#39;packs&#39;.&#39;title&#39; LIKE ?&quot;</span>, <span class="ruby-node">&quot;#{@query}&quot;</span>])
-              <span class="ruby-keyword">end</span>
-              <span class="ruby-identifier">content</span> = <span class="ruby-identifier">content</span>.<span class="ruby-identifier">offset</span>(<span class="ruby-identifier">offset</span>)
-              <span class="ruby-keyword">if</span> (<span class="ruby-identifier">limit</span> <span class="ruby-operator">!=</span> <span class="ruby-keyword">nil</span>)
-                  <span class="ruby-identifier">content</span> = <span class="ruby-identifier">content</span>.<span class="ruby-identifier">limit</span>(<span class="ruby-identifier">limit</span>)
-              <span class="ruby-keyword">end</span>
-              <span class="ruby-identifier">content</span> = <span class="ruby-identifier">content</span>.<span class="ruby-identifier">to_json</span>
-            <span class="ruby-keyword">else</span>
-              <span class="ruby-identifier">artist_result</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">joins</span>(<span class="ruby-value">:groups</span>).<span class="ruby-identifier">merge</span>(<span class="ruby-constant">Group</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">:name</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;artist&quot;</span>)).<span class="ruby-identifier">where</span>([<span class="ruby-string">&quot;&#39;users&#39;.&#39;username&#39; LIKE ?&quot;</span>, <span class="ruby-node">&quot;#{@query}&quot;</span>])
-              <span class="ruby-identifier">user_result</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">joins</span>(<span class="ruby-value">:groups</span>).<span class="ruby-identifier">merge</span>(<span class="ruby-constant">Group</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">:name</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;user&quot;</span>)).<span class="ruby-identifier">where</span>([<span class="ruby-string">&quot;&#39;users&#39;.&#39;username&#39; LIKE ?&quot;</span>, <span class="ruby-node">&quot;#{@query}&quot;</span>])
-              <span class="ruby-identifier">music_result</span> = <span class="ruby-constant">Music</span>.<span class="ruby-identifier">where</span>([<span class="ruby-string">&quot;&#39;musics&#39;.&#39;title&#39; LIKE ?&quot;</span>, <span class="ruby-node">&quot;#{@query}&quot;</span>])
-              <span class="ruby-identifier">album_result</span> = <span class="ruby-constant">Album</span>.<span class="ruby-identifier">where</span>([<span class="ruby-string">&quot;&#39;albums&#39;.&#39;title&#39; LIKE ?&quot;</span>, <span class="ruby-node">&quot;#{@query}&quot;</span>])
-              <span class="ruby-identifier">pack_result</span> = <span class="ruby-constant">Pack</span>.<span class="ruby-identifier">where</span>([<span class="ruby-string">&quot;&#39;packs&#39;.&#39;title&#39; LIKE ?&quot;</span>, <span class="ruby-node">&quot;#{@query}&quot;</span>])
-              <span class="ruby-keyword">if</span> (<span class="ruby-identifier">artist_result</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">user_result</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">music_result</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">album_result</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">pack_result</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>)
-                  <span class="ruby-identifier">content</span> = []
-                  <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">202</span>
-              <span class="ruby-keyword">else</span>
-                <span class="ruby-identifier">content</span> = { <span class="ruby-identifier">artist</span><span class="ruby-operator">:</span> <span class="ruby-identifier">artist_result</span>.<span class="ruby-identifier">to_json</span>, <span class="ruby-identifier">user</span><span class="ruby-operator">:</span> <span class="ruby-identifier">user_result</span>.<span class="ruby-identifier">to_json</span>, <span class="ruby-identifier">music</span><span class="ruby-operator">:</span> <span class="ruby-identifier">music_result</span>.<span class="ruby-identifier">to_json</span>, <span class="ruby-identifier">album</span><span class="ruby-operator">:</span> <span class="ruby-identifier">album_result</span>.<span class="ruby-identifier">to_json</span>, <span class="ruby-identifier">pack</span><span class="ruby-operator">:</span> <span class="ruby-identifier">pack_result</span>.<span class="ruby-identifier">to_json</span> }
-              <span class="ruby-keyword">end</span>
-    <span class="ruby-keyword">end</span>
-    <span class="ruby-ivar">@returnValue</span>[<span class="ruby-value">:content</span>] = <span class="ruby-identifier">content</span>
+          <span class="ruby-keyword">begin</span>
+                <span class="ruby-identifier">content</span> = []
+                <span class="ruby-identifier">offset</span> = <span class="ruby-value">0</span>
+                <span class="ruby-identifier">limit</span> = <span class="ruby-keyword">nil</span>
+           <span class="ruby-identifier">offset</span> = <span class="ruby-ivar">@offset</span> <span class="ruby-keyword">if</span> <span class="ruby-keyword">defined?</span><span class="ruby-ivar">@offset</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-ivar">@offset</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span>
+           <span class="ruby-identifier">limit</span> = <span class="ruby-ivar">@limit</span> <span class="ruby-keyword">if</span> <span class="ruby-keyword">defined?</span><span class="ruby-ivar">@limit</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-ivar">@limit</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span>
+           <span class="ruby-keyword">if</span> <span class="ruby-keyword">defined?</span><span class="ruby-ivar">@type</span>
+             <span class="ruby-keyword">case</span> <span class="ruby-ivar">@type</span>
+               <span class="ruby-keyword">when</span> <span class="ruby-string">&quot;artist&quot;</span>
+                                      <span class="ruby-identifier">content</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">joins</span>(<span class="ruby-value">:groups</span>).<span class="ruby-identifier">merge</span>(<span class="ruby-constant">Group</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">:name</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;artist&quot;</span>)).<span class="ruby-identifier">where</span>([<span class="ruby-string">&quot;&#39;users&#39;.&#39;username&#39; LIKE ?&quot;</span>, <span class="ruby-node">&quot;#{@query}&quot;</span>]).<span class="ruby-identifier">select</span>(<span class="ruby-string">&quot;id, username, image, description, facebook, twitter, googlePlus&quot;</span>)
+                                <span class="ruby-keyword">when</span> <span class="ruby-string">&quot;user&quot;</span>
+                                      <span class="ruby-identifier">content</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">joins</span>(<span class="ruby-value">:groups</span>).<span class="ruby-identifier">merge</span>(<span class="ruby-constant">Group</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">:name</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;user&quot;</span>)).<span class="ruby-identifier">where</span>([<span class="ruby-string">&quot;&#39;users&#39;.&#39;username&#39; LIKE ?&quot;</span>, <span class="ruby-node">&quot;#{@query}&quot;</span>]).<span class="ruby-identifier">select</span>(<span class="ruby-string">&quot;id, username, image, description, facebook, twitter, googlePlus&quot;</span>)
+                                <span class="ruby-keyword">when</span> <span class="ruby-string">&quot;music&quot;</span>
+                                      <span class="ruby-identifier">content</span> = <span class="ruby-constant">Music</span>.<span class="ruby-identifier">where</span>([<span class="ruby-string">&quot;&#39;musics&#39;.&#39;title&#39; LIKE ?&quot;</span>, <span class="ruby-node">&quot;#{@query}&quot;</span>])
+                                <span class="ruby-keyword">when</span> <span class="ruby-string">&quot;album&quot;</span>
+                                      <span class="ruby-identifier">content</span> = <span class="ruby-constant">Album</span>.<span class="ruby-identifier">where</span>([<span class="ruby-string">&quot;&#39;albums&#39;.&#39;title&#39; LIKE ?&quot;</span>, <span class="ruby-node">&quot;#{@query}&quot;</span>])
+                                <span class="ruby-keyword">when</span> <span class="ruby-string">&quot;pack&quot;</span>
+                                      <span class="ruby-identifier">content</span> = <span class="ruby-constant">Pack</span>.<span class="ruby-identifier">where</span>([<span class="ruby-string">&quot;&#39;packs&#39;.&#39;title&#39; LIKE ?&quot;</span>, <span class="ruby-node">&quot;#{@query}&quot;</span>])
+                              <span class="ruby-keyword">end</span>
+                              <span class="ruby-identifier">content</span> = <span class="ruby-identifier">content</span>.<span class="ruby-identifier">offset</span>(<span class="ruby-identifier">offset</span>)
+                              <span class="ruby-keyword">if</span> (<span class="ruby-identifier">limit</span> <span class="ruby-operator">!=</span> <span class="ruby-keyword">nil</span>)
+                                <span class="ruby-identifier">content</span> = <span class="ruby-identifier">content</span>.<span class="ruby-identifier">limit</span>(<span class="ruby-identifier">limit</span>)
+                              <span class="ruby-keyword">end</span>
+                              <span class="ruby-identifier">content</span> = <span class="ruby-identifier">content</span>.<span class="ruby-identifier">to_json</span>
+                            <span class="ruby-keyword">else</span>
+                              <span class="ruby-identifier">artist_result</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">joins</span>(<span class="ruby-value">:groups</span>).<span class="ruby-identifier">merge</span>(<span class="ruby-constant">Group</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">:name</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;artist&quot;</span>)).<span class="ruby-identifier">where</span>([<span class="ruby-string">&quot;&#39;users&#39;.&#39;username&#39; LIKE ?&quot;</span>, <span class="ruby-node">&quot;#{@query}&quot;</span>])
+                              <span class="ruby-identifier">user_result</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">joins</span>(<span class="ruby-value">:groups</span>).<span class="ruby-identifier">merge</span>(<span class="ruby-constant">Group</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">:name</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;user&quot;</span>)).<span class="ruby-identifier">where</span>([<span class="ruby-string">&quot;&#39;users&#39;.&#39;username&#39; LIKE ?&quot;</span>, <span class="ruby-node">&quot;#{@query}&quot;</span>])
+                              <span class="ruby-identifier">music_result</span> = <span class="ruby-constant">Music</span>.<span class="ruby-identifier">where</span>([<span class="ruby-string">&quot;&#39;musics&#39;.&#39;title&#39; LIKE ?&quot;</span>, <span class="ruby-node">&quot;#{@query}&quot;</span>])
+                              <span class="ruby-identifier">album_result</span> = <span class="ruby-constant">Album</span>.<span class="ruby-identifier">where</span>([<span class="ruby-string">&quot;&#39;albums&#39;.&#39;title&#39; LIKE ?&quot;</span>, <span class="ruby-node">&quot;#{@query}&quot;</span>])
+                              <span class="ruby-identifier">pack_result</span> = <span class="ruby-constant">Pack</span>.<span class="ruby-identifier">where</span>([<span class="ruby-string">&quot;&#39;packs&#39;.&#39;title&#39; LIKE ?&quot;</span>, <span class="ruby-node">&quot;#{@query}&quot;</span>])
+                              <span class="ruby-keyword">if</span> (<span class="ruby-identifier">artist_result</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">user_result</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">music_result</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">album_result</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">pack_result</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>)
+                                <span class="ruby-identifier">content</span> = []
+                                <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">202</span>
+                                <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:no_content</span>
+                              <span class="ruby-keyword">else</span>
+                                <span class="ruby-identifier">content</span> = { <span class="ruby-identifier">artist</span><span class="ruby-operator">:</span> <span class="ruby-identifier">artist_result</span>.<span class="ruby-identifier">to_json</span>(<span class="ruby-value">:only</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">User</span>.<span class="ruby-identifier">miniKey</span> ), <span class="ruby-identifier">user</span><span class="ruby-operator">:</span> <span class="ruby-identifier">user_result</span>.<span class="ruby-identifier">to_json</span>(<span class="ruby-value">:only</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">User</span>.<span class="ruby-identifier">miniKey</span> ), <span class="ruby-identifier">music</span><span class="ruby-operator">:</span> <span class="ruby-identifier">music_result</span>.<span class="ruby-identifier">to_json</span>(<span class="ruby-value">:only</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">Music</span>.<span class="ruby-identifier">miniKey</span> ), <span class="ruby-identifier">album</span><span class="ruby-operator">:</span> <span class="ruby-identifier">album_result</span>.<span class="ruby-identifier">to_json</span>(<span class="ruby-value">:only</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">Album</span>.<span class="ruby-identifier">miniKey</span> ), <span class="ruby-identifier">pack</span><span class="ruby-operator">:</span> <span class="ruby-identifier">pack_result</span>.<span class="ruby-identifier">to_json</span>(<span class="ruby-value">:only</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">Pack</span>.<span class="ruby-identifier">miniKey</span> ) }
+                              <span class="ruby-keyword">end</span>
+           <span class="ruby-keyword">end</span>
+            <span class="ruby-ivar">@returnValue</span>[<span class="ruby-value">:content</span>] = <span class="ruby-identifier">content</span>
     <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">200</span>
-      <span class="ruby-keyword">rescue</span>
-        <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">504</span>
-      <span class="ruby-keyword">end</span>
-      <span class="ruby-identifier">sendJson</span>
+           <span class="ruby-keyword">rescue</span>
+           <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">504</span>
+           <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:service_unavailable</span>
+           <span class="ruby-keyword">end</span>
+           <span class="ruby-identifier">sendJson</span>
 <span class="ruby-keyword">end</span></code></pre>
 						</div>
 										</div>
@@ -226,7 +229,7 @@ filter)</p>
 
 		<footer>
 			<div class="container">
-				<span id="rdoc-version">Generated by RDoc 4.1.2</span> using the
+				<span id="rdoc-version">Generated by RDoc 4.2.0</span> using the
 				<a id="generator-version"
 					href="http://deveiate.org/fivefish">Fivefish RDoc 0.1.0</a> generator.
 			</div>
@@ -243,7 +246,9 @@ filter)</p>
 			<li><a href="../API/BattlesController.html">API::BattlesController</a></li>
 			<li><a href="../API/CartsController.html">API::CartsController</a></li>
 			<li><a href="../API/ConcertsController.html">API::ConcertsController</a></li>
+			<li><a href="../API/GenresController.html">API::GenresController</a></li>
 			<li><a href="../API/GiftsController.html">API::GiftsController</a></li>
+			<li><a href="../API/InfluencesController.html">API::InfluencesController</a></li>
 			<li><a href="../API/ListeningsController.html">API::ListeningsController</a></li>
 			<li><a href="../API/MessagesController.html">API::MessagesController</a></li>
 			<li><a href="../API/MusicsController.html">API::MusicsController</a></li>
@@ -256,6 +261,37 @@ filter)</p>
 			<li><a href="../API/SuggestionsController.html">API::SuggestionsController</a></li>
 			<li><a href="../API/TweetsController.html">API::TweetsController</a></li>
 			<li><a href="../API/UsersController.html">API::UsersController</a></li>
+			<li><a href="../Access.html">Access</a></li>
+			<li><a href="../Address.html">Address</a></li>
+			<li><a href="../AdminUser.html">AdminUser</a></li>
+			<li><a href="../Album.html">Album</a></li>
+			<li><a href="../AlbumNote.html">AlbumNote</a></li>
+			<li><a href="../Attachment.html">Attachment</a></li>
+			<li><a href="../Battle.html">Battle</a></li>
+			<li><a href="../Cart.html">Cart</a></li>
+			<li><a href="../Commentary.html">Commentary</a></li>
+			<li><a href="../Concert.html">Concert</a></li>
+			<li><a href="../Description.html">Description</a></li>
+			<li><a href="../Flac.html">Flac</a></li>
+			<li><a href="../Genre.html">Genre</a></li>
+			<li><a href="../Gift.html">Gift</a></li>
+			<li><a href="../Group.html">Group</a></li>
+			<li><a href="../Influence.html">Influence</a></li>
+			<li><a href="../Listening.html">Listening</a></li>
+			<li><a href="../Message.html">Message</a></li>
+			<li><a href="../Music.html">Music</a></li>
+			<li><a href="../MusicNote.html">MusicNote</a></li>
+			<li><a href="../News.html">News</a></li>
+			<li><a href="../Newstext.html">Newstext</a></li>
+			<li><a href="../Notification.html">Notification</a></li>
+			<li><a href="../Pack.html">Pack</a></li>
+			<li><a href="../Playlist.html">Playlist</a></li>
+			<li><a href="../Proposition.html">Proposition</a></li>
+			<li><a href="../Purchase.html">Purchase</a></li>
+			<li><a href="../Tag.html">Tag</a></li>
+			<li><a href="../Tweet.html">Tweet</a></li>
+			<li><a href="../User.html">User</a></li>
+			<li><a href="../Vote.html">Vote</a></li>
 		</ul>
 	</div>
 

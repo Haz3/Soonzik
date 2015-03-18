@@ -1,0 +1,31 @@
+2741ee179d07e0a95003ba1fbb734e33ae804ae7		branch 'crank' of https://github.com/eventmachine/eventmachine
+fb11a41671b5bc1b15372d319280cecf086c9104		branch 'exit_status' of https://github.com/eventmachine/eventmachine
+6c68dbcf313168db4a77673807a0f26d141579d4		branch 'gh-pages' of https://github.com/eventmachine/eventmachine
+9b15eb6973dd30fb2287ee3fa44cb0a7ec6c6428		branch 'hooks' of https://github.com/eventmachine/eventmachine
+6dbdb97bada05d33a1f0d469a49d8c46ac2e77d0		branch 'master' of https://github.com/eventmachine/eventmachine
+2b05a1230075a69fc0d54487617c15ca562cefe7		branch 'mri' of https://github.com/eventmachine/eventmachine
+a9077a01316e1260e97450b3be4f5f1c988580b0		branch 'no_string_bindings' of https://github.com/eventmachine/eventmachine
+43f7fecbd037f88f700df3138e8477aa788a53dc		branch 'tags/eventmachine' of https://github.com/eventmachine/eventmachine
+0556252ee0276835316b7006e2965a4541ab0756		branch 'tags/v0.12.2' of https://github.com/eventmachine/eventmachine
+f4489268eed5db746e569898828ce347f39e9c58		branch 'tags/v0_12_0' of https://github.com/eventmachine/eventmachine
+5cb0794af9592b625a1832af8189e6eaf45defcf		branch 'thread_blocking_region' of https://github.com/eventmachine/eventmachine
+4f5db645146594679ec362e5d066b19d3628547f		branch 'writev' of https://github.com/eventmachine/eventmachine
+7a71d5e82f3936fcf08edb63a8953419c03937a1	not-for-merge	tag 'v0.12.10' of https://github.com/eventmachine/eventmachine
+1860d3f8939df6de43de5013e8d4520f233fa45f	not-for-merge	tag 'v0.12.4' of https://github.com/eventmachine/eventmachine
+35f1970b40f5634ed6e28df331b103db0c6e2358	not-for-merge	tag 'v0.12.6' of https://github.com/eventmachine/eventmachine
+b55e18c891d43dcfd91e10bdcf5558efd83b5e25	not-for-merge	tag 'v0.12.8' of https://github.com/eventmachine/eventmachine
+c0ccd91cc19d01a76ea0169ecac2337879658030	not-for-merge	tag 'v1.0.0' of https://github.com/eventmachine/eventmachine
+b9a636072b27be457c98b7a5d1f67e247e6083e9	not-for-merge	tag 'v1.0.0.beta.1' of https://github.com/eventmachine/eventmachine
+effda1893a2081aef7309e4120ebdef5b3ad3437	not-for-merge	tag 'v1.0.0.beta.2' of https://github.com/eventmachine/eventmachine
+6484fdcd3a06fee9d7b707357c8fc7da38c4ec97	not-for-merge	tag 'v1.0.0.beta.3' of https://github.com/eventmachine/eventmachine
+5c66eeabc37d727873da22690734c41e82339334	not-for-merge	tag 'v1.0.0.rc.1' of https://github.com/eventmachine/eventmachine
+a5d3d53e43b1a107472792d1b558cfa0c2dd4553	not-for-merge	tag 'v1.0.0.rc.2' of https://github.com/eventmachine/eventmachine
+60cd13d62dfc1fb5ca3d2eddccfbc8718834ebc4	not-for-merge	tag 'v1.0.0.rc.3' of https://github.com/eventmachine/eventmachine
+08f27a6b08bc5ffb73d7fbdf6685232ec415276d	not-for-merge	tag 'v1.0.0.rc.4' of https://github.com/eventmachine/eventmachine
+936cdb235d5b31947084c658bf8c350b607d6ea3	not-for-merge	tag 'v1.0.1' of https://github.com/eventmachine/eventmachine
+2c9dcf5a8c6e3e65cc988a9e868120af5fb8bc8f	not-for-merge	tag 'v1.0.2' of https://github.com/eventmachine/eventmachine
+926b8d59458277e8596b6c7eae16f637cced9d4d	not-for-merge	tag 'v1.0.3' of https://github.com/eventmachine/eventmachine
+4de7d0e00fe87819840ba7c7c91e7ed09b85467c	not-for-merge	tag 'v1.0.4' of https://github.com/eventmachine/eventmachine
+5cfc7ea39dd8b2df8763834ed469648f5ca78e8a	not-for-merge	tag 'v1.0.5' of https://github.com/eventmachine/eventmachine
+0e0ee654189f3cb7798c415eae0a66267201f1f8	not-for-merge	tag 'v1.0.6' of https://github.com/eventmachine/eventmachine
+6dbdb97bada05d33a1f0d469a49d8c46ac2e77d0	not-for-merge	tag 'v1.0.7' of https://github.com/eventmachine/eventmachine

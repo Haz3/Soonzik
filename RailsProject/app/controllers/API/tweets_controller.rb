@@ -14,14 +14,16 @@ module API
   	# Retrieve all the tweets
     def index
       begin
-        @returnValue = { content: Tweet.all.as_json(:include => :user) }
-        if (@returnValue.size == 0)
+        @returnValue = { content: Tweet.all.as_json(:include => { :user => { only: User.miniKey } }) }
+        if (@returnValue[:content].size == 0)
           codeAnswer 202
+          defineHttp :no_content
         else
           codeAnswer 200
         end
       rescue
         codeAnswer 504
+        defineHttp :service_unavailable
       end
       sendJson
     end
@@ -37,12 +39,14 @@ module API
         tweets = Tweet.find_by_id(@id)
         if (!tweets)
           codeAnswer 502
+          defineHttp :not_found
         else
-          @returnValue = { content: tweets.as_json(:include => :user) }
+          @returnValue = { content: tweets.as_json(:include => { :user => { only: User.miniKey } }) }
           codeAnswer 200
         end
       rescue
         codeAnswer 504
+        defineHttp :service_unavailable
       end
       sendJson
     end
@@ -51,26 +55,31 @@ module API
     # 
     # ==== Options
     # 
-    # * +:tweet[user_id]+ - Id of the user who has the tweet
-    # * +:tweet[description]+ - The text of the tweet
+    # * +:tweet [user_id]+ - Id of the user who has the tweet
+    # * +:tweet [description]+ - The text of the tweet
     # 
     def save
       begin
         if (@security)
           tweet = Tweet.new(Tweet.tweet_params params)
           if (tweet.save)
-            @returnValue = { content: tweet.as_json(:include => :user) }
+            @returnValue = { content: tweet.as_json(:include => {
+                                                                  :user => { only: User.miniKey }
+                                                                }) }
             codeAnswer 201
+            defineHttp :created
           else
             @returnValue = { content: tweet.errors.to_hash.to_json }
             codeAnswer 503
-            puts @returnValue
+            defineHttp :service_unavailable
           end
         else
           codeAnswer 500
+          defineHttp :forbidden
         end
       rescue
         codeAnswer 504
+        defineHttp :service_unavailable
       end
       sendJson
     end
@@ -79,7 +88,7 @@ module API
     #
     # ==== Options
     # 
-    # * +:attribute[attribute_name]+ - If you want a column equal to a specific value
+    # * +:attribute [attribute_name]+ - If you want a column equal to a specific value
     # * +:order_by_asc[]+ - If you want to order by ascending by values
     # * +:order_by_desc[]+ - If you want to order by descending by values
     # * +:group_by[]+ - If you want to group by field
@@ -155,16 +164,20 @@ module API
           tweet_object = tweet_object.offset(@offset.to_i)
         end
 
-        @returnValue = { content: tweet_object.as_json(:include => :user) }
+        @returnValue = { content: tweet_object.as_json(:include => {
+                                                                    :user => { only: User.miniKey }
+                                                                  }) }
 
         if (tweet_object.size == 0)
           codeAnswer 202
+          defineHttp :no_content
         else
           codeAnswer 200
         end
 
       rescue
         codeAnswer 504
+        defineHttp :service_unavailable
       end
       sendJson
     end
@@ -181,11 +194,14 @@ module API
           object = Tweet.find_by_id(@id);
           object.destroy
           codeAnswer 202
+          defineHttp :no_content
         else
           codeAnswer 500
+          defineHttp :forbidden
         end
       rescue
         codeAnswer 504
+        defineHttp :service_unavailable
       end
       sendJson
     end

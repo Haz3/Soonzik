@@ -70,11 +70,11 @@
     self.navigationItem.hidesBackButton = NO;
     self.navigationItem.backBarButtonItem.title = @"";
     
-    self.playlistTableView.delegate = self;
+    /*self.playlistTableView.delegate = self;
     self.playlistTableView.dataSource = self;
     
     self.playlistTableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
-    self.playlistTableView.backgroundColor = [UIColor darkGrayColor];
+    self.playlistTableView.backgroundColor = [UIColor darkGrayColor];*/
     
     self.isMute = NO;
     
@@ -91,8 +91,8 @@
     self.volumeSlider.value = self.player.audioPlayer.volume;
     self.lastVolumeLevel = self.player.audioPlayer.volume;
     
-    [self.playlistTableView reloadData];
-    [self updateListeningCells];
+    //[self.playlistTableView reloadData];
+    //[self updateListeningCells];
 }
 
 - (void)refresh
@@ -162,7 +162,7 @@
     [self.player playSound];
     self.player.audioPlayer.volume = self.lastVolumeLevel;
     
-    [self updateListeningCells];
+    //[self updateListeningCells];
 }
 
 - (IBAction)previous:(id)sender
@@ -170,7 +170,7 @@
     [self.player previous];
     self.player.audioPlayer.volume = self.lastVolumeLevel;
         
-    [self updateListeningCells];
+   // [self updateListeningCells];
 }
 
 - (IBAction)next:(id)sender
@@ -178,7 +178,7 @@
     [self.player next];
     self.player.audioPlayer.volume = self.lastVolumeLevel;
         
-    [self updateListeningCells];
+   // [self updateListeningCells];
 }
 
 - (void)playerHasFinishedToPlay
@@ -243,7 +243,7 @@
  *  TableView
  */
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+/*- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     return 1;
 }
@@ -300,7 +300,6 @@
             break;
     }
 }
-
 
 - (void)removeElementFromPlaylist:(int)index
 {
@@ -369,7 +368,7 @@
 {
    // [[tableView cellForRowAtIndexPath:indexPath] setSelected:NO];
 }
-
+*/
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];

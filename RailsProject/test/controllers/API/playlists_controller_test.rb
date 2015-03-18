@@ -3,11 +3,11 @@ require 'test_helper'
 module API
   class PlaylistsControllerTest < ActionController::TestCase
     def giveToken
-      @user = users(:UserOne)
       return { id: @user.id, secureKey: @user.secureKey }
     end
     
     setup do
+      @user = users(:UserOne)
       @playlist = playlists(:PlaylistOne)
     end
 
@@ -16,7 +16,7 @@ module API
       assert_difference('Playlist.count') do
         post :save, { playlist: { name: @playlist.name, user_id: @playlist.user_id }, user_id: token[:id], secureKey: token[:secureKey], format: :json }
       end
-      assert_response :success
+      assert_response :created
 
       value = JSON.parse(response.body)
       assert_equal value["code"], 201
@@ -40,7 +40,7 @@ module API
       assert_equal value["content"].size, 2
 
       get :find, { offset: 42, order_by_asc: [], order_by_desc: ["name"], format: :json }
-      assert_response :success
+      assert_response :no_content
 
       value = JSON.parse(response.body)
       assert_equal value["code"], 202
@@ -60,7 +60,7 @@ module API
       musicToAdd = musics(:MusicOne)
       post :update, { id: @playlist, playlist: { name: @playlist.name, user_id: @playlist.user_id, music: [musicToAdd.id] }, user_id: token[:id], secureKey: token[:secureKey], format: :json }
 
-      assert_response :success
+      assert_response :created
 
       value = JSON.parse(response.body)
       assert_equal value["code"], 201
@@ -71,7 +71,7 @@ module API
       assert_difference('Playlist.count', -1) do
         get :destroy, { id: @playlist, user_id: token[:id], secureKey: token[:secureKey], format: :json }
       end
-      assert_response :success
+      assert_response :no_content
 
       value = JSON.parse(response.body)
       assert_equal value["code"], 202

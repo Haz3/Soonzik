@@ -38,13 +38,22 @@
     
     [self addBlurEffectOnView:self.blurView];
     
-    self.listOfPacks = [[Factory alloc] provideListWithClassName:@"Pack"];
+    
     /*for (Pack *pack in self.listOfPacks) {
         NSLog(@"pack.title : %@", pack.title);
         for (Album *album in pack.listOfAlbums) {
             NSLog(@"%@", album.title);
         }
     }*/
+    
+    self.listOfPacks = [[Factory alloc] provideListWithClassName:@"Pack"];
+    if (self.listOfPacks.count > 0) {
+        NSLog(@"No Error during loading");
+        [self hideErrorDuringLoading];
+    } else {
+        NSLog(@"Error during loading");
+        [self showErrorDuringLoading];
+    }
     
     self.indexOfPage = 0;
 }
@@ -56,9 +65,13 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    Pack *pack = [self.listOfPacks objectAtIndex:self.indexOfPage];
+    if (self.listOfPacks.count > 0) {
+        Pack *pack = [self.listOfPacks objectAtIndex:self.indexOfPage];
+        return pack.listOfAlbums.count;
+    }
     
-    return pack.listOfAlbums.count;
+    return 0;
+    
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -69,9 +82,12 @@
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     HeaderPackView *view = (HeaderPackView *)[[[NSBundle mainBundle] loadNibNamed:@"HeaderPackView" owner:self options:nil] firstObject];
-    [view createSliderWithPacks:self.listOfPacks andPage:self.indexOfPage];
-    view.slideDelegate = self;
-    view.backgroundColor = BLUE_2;
+    
+    if (self.listOfPacks.count > 0) {
+        [view createSliderWithPacks:self.listOfPacks andPage:self.indexOfPage];
+        view.slideDelegate = self;
+        view.backgroundColor = BLUE_2;
+    }
     
     return view;
 }

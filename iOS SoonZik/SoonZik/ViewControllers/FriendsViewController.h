@@ -6,9 +6,9 @@
 //  Copyright (c) 2014 Coordina. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "TypeViewController.h"
 
-@interface FriendsViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
+@interface FriendsViewController : TypeViewController <UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *listOfFriendsTitle;

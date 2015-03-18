@@ -32,11 +32,15 @@
     self.cellContent.layer.borderWidth = borderWidth;
     
     [self.shareButton addTarget:self action:@selector(launchShareView) forControlEvents:UIControlEventTouchUpInside];
+    
+    [self.titleLabel setText:news.type];
+    [self.subtitleLabel setText:news.title];
+    [self.dateLabel setText:news.date];
 }
 
 - (void)launchShareView
 {
-    [self.shareDelegate launchShareViewWithNews:self.news];
+    [self.shareDelegate launchShareViewWithNews:self.news andCell:self];
 }
 
 @end

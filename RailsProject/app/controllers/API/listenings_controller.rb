@@ -13,14 +13,18 @@ module API
   	# Retrieve all the listenings
     def index
       begin
-        @returnValue = { content: Listening.all.as_json(:include => :user) }
-        if (@returnValue.size == 0)
+        @returnValue = { content: Listening.all.as_json(:include => {
+                                                                      :user => { :only => User.miniKey }
+                                                                    }) }
+        if (@returnValue[:content].size == 0)
           codeAnswer 202
+          defineHttp :no_content
         else
           codeAnswer 200
         end
       rescue
         codeAnswer 504
+        defineHttp :service_unavailable
       end
       sendJson
     end
@@ -36,12 +40,16 @@ module API
         listening = Listening.find_by_id(@id)
         if (!listening)
           codeAnswer 502
+          defineHttp :not_found
         else
-          @returnValue = { content: listening.as_json(:include => :user) }
+          @returnValue = { content: listening.as_json(:include => {
+                                                                    :user => { :only => User.miniKey }
+                                                                  }) }
           codeAnswer 200
         end
       rescue
         codeAnswer 504
+        defineHttp :service_unavailable
       end
       sendJson
     end
@@ -50,7 +58,7 @@ module API
     #
     # ==== Options
     # 
-    # * +:attribute[attribute_name]+ - If you want a column equal to a specific value
+    # * +:attribute [attribute_name]+ - If you want a column equal to a specific value
     # * +:order_by_asc[]+ - If you want to order by ascending by values
     # * +:order_by_desc[]+ - If you want to order by descending by values
     # * +:group_by[]+ - If you want to group by field
@@ -126,16 +134,20 @@ module API
           listening_object = listening_object.offset(@offset.to_i)
         end
 
-        @returnValue = { content: listening_object.as_json(:include => :user) }
+        @returnValue = { content: listening_object.as_json(:include => {
+                                                                          :user => { :only => User.miniKey }
+                                                                        }) }
 
         if (listening_object.size == 0)
           codeAnswer 202
+          defineHttp :no_content
         else
           codeAnswer 200
         end
 
       rescue
         codeAnswer 504
+        defineHttp :service_unavailable
       end
       sendJson
     end
@@ -144,10 +156,10 @@ module API
     #
     # ==== Options
     # 
-    # * +:listening[music_id]+ - Id of the music listen
-    # * +:listening[latitude]+ - Position where the music has been listen
-    # * +:listening[longitude]+ - Position where the music has been listen
-    # * +:listening[when]+ - When the music has been listen
+    # * +:listening [music_id]+ - Id of the music listen
+    # * +:listening [latitude]+ - Position where the music has been listen
+    # * +:listening [longitude]+ - Position where the music has been listen
+    # * +:listening [when]+ - When the music has been listen
     # 
     def save
       begin
@@ -155,15 +167,20 @@ module API
           @listening[:user_id] = @user_id
           listening = Listening.new(Listening.listening_params params)
           if (listening.save)
-            @returnValue = { content: listening.as_json(:include => :user) }
+            @returnValue = { content: listening.as_json(:include => {
+                                                                      :user => { :only => User.miniKey }
+                                                                    }) }
             codeAnswer 201
+            defineHttp :created
           else
             @returnValue = { content: listening.errors.to_hash.to_json }
             codeAnswer 503
+            defineHttp :service_unavailable
           end
         end
       rescue
         codeAnswer 504
+        defineHttp :service_unavailable
       end
       sendJson
     end

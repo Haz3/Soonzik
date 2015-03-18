@@ -23,3 +23,22 @@ test:
 production:
   <<: *default
   database: db/production.sqlite3
+
+####### For multi DB - SQL 
+#development:
+#  adapter: mysql2
+#  encoding: utf8
+#  database: EIP_SoonZik
+#  pool: 5
+#  username: root
+#  password:
+#  socket: /tmp/mysql.sock
+
+#development:
+#  adapter: mysql2
+#  encoding: utf8
+#  database: EIP_SoonZik
+#  pool: 5
+#  username: root
+#  password:
+#  socket: /tmp/mysql.sock

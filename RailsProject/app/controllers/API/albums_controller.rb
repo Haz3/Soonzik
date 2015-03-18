@@ -13,14 +13,19 @@ module API
     # Retrieve all the albums
     def index
       begin
-        @returnValue = { content: Album.all.as_json }
-        if (@returnValue.size == 0)
+        @returnValue = { content: Album.all.as_json(:only => Album.miniKey, :include => {
+                                                                                :user => { :only => User.miniKey },
+                                                                                :musics => { :only => Music.miniKey }
+                                                                                } ) }
+        if (@returnValue[:content].size == 0)
           codeAnswer 202
+          defineHttp :no_content
         else
           codeAnswer 200
         end
       rescue
         codeAnswer 504
+        defineHttp :service_unavailable
       end
       sendJson
     end
@@ -36,12 +41,17 @@ module API
         album = Album.find_by_id(@id)
         if (!album)
           codeAnswer 502
+          defineHttp :not_found
         else
-          @returnValue = { content: album.as_json(:include => :musics) }
+          @returnValue = { content: album.as_json(:include => {
+                                                              :musics => { :only => Music.miniKey},
+                                                              :user => {:only => User.miniKey}
+                                                              }) }
           codeAnswer 200
         end
       rescue
         codeAnswer 504
+        defineHttp :service_unavailable
       end
       sendJson
     end
@@ -50,7 +60,7 @@ module API
     #
     # ==== Options
     # 
-    # * +:attribute[attribute_name]+ - If you want a column equal to a specific value
+    # * +:attribute [attribute_name]+ - If you want a column equal to a specific value
     # * +:order_by_asc[]+ - If you want to order by ascending by values
     # * +:order_by_desc[]+ - If you want to order by descending by values
     # * +:group_by[]+ - If you want to group by field
@@ -126,16 +136,21 @@ module API
           album_object = album_object.offset(@offset.to_i)
         end
 
-        @returnValue = { content: album_object.as_json(:include => :musics) }
+        @returnValue = { content: album_object.as_json(:include => {
+                                                                      :musics => {:only => Music.miniKey },
+                                                                      :user => {:only => User.miniKey}
+                                                                    }) }
 
         if (album_object.size == 0)
           codeAnswer 202
+          defineHttp :no_content
         else
           codeAnswer 200
         end
 
       rescue
         codeAnswer 504
+        defineHttp :service_unavailable
       end
       sendJson
     end
@@ -155,6 +170,7 @@ module API
 
           if (!album)
             codeAnswer 502
+            defineHttp :not_found
           else
             com = Commentary.new
             com.content = @content
@@ -163,13 +179,18 @@ module API
             if (com.save)
               com.albums << album
               codeAnswer 201
+              defineHttp :created
             else
               codeAnswer 503
+              defineHttp :service_unavailable
             end
           end
+        else
+          defineHttp :forbidden
         end
       rescue
         codeAnswer 504
+        defineHttp :service_unavailable
       end
       sendJson
   	end

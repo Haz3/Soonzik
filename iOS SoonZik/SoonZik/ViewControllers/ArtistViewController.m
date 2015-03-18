@@ -49,7 +49,7 @@
     
     self.index = 0;
 
-    CGSize size = CGSizeMake(self.horizontalContentView.frame.size.width, self.horizontalContentView.frame.size.height + self.playerPreviewView.frame.size.height);
+    CGSize size = CGSizeMake(self.horizontalContentView.frame.size.width, self.horizontalContentView.frame.size.height);
     self.horizontalScrollView.contentSize = size;
     [self.horizontalScrollView addSubview:self.horizontalContentView];
     

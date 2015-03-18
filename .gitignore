@@ -5,11 +5,11 @@
 #   git config --global core.excludesfile '~/.gitignore_global'
 
 # Ignore bundler config.
-/.bundle
+RailsProject/.bundle/
 
 # Ignore the default SQLite database.
-*/db/*.sqlite3
-*/db/*.sqlite3-journal
+RailsProject/db/*.sqlite3
+RailsProject/db/*.sqlite3-journal
 
 # Ignore all logfiles and tempfiles.
 */log/*.log
@@ -21,3 +21,5 @@
 *#*#
 RailsProject/Gemfile.lock
 */log
+RailsProject/vendor/cache/
+RailsProject/db/schema.rb

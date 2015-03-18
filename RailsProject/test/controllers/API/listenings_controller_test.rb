@@ -3,11 +3,11 @@ require 'test_helper'
 module API
   class ListeningsControllerTest < ActionController::TestCase
     def giveToken
-      @user = users(:UserOne)
       return { id: @user.id, secureKey: @user.secureKey }
     end
     
     setup do
+      @user = users(:UserOne)
       @listening = listenings(:ListeningOne)
     end
 
@@ -25,7 +25,7 @@ module API
       assert_difference('Listening.count') do
         post :save, { listening: { latitude: @listening.latitude, longitude: @listening.longitude, music_id: music.id, user_id: @listening.user_id, when: @listening.when }, user_id: token[:id], secureKey: token[:secureKey], format: :json }
       end
-      assert_response :success
+      assert_response :created
 
       value = JSON.parse(response.body)
       assert_equal value["code"], 201
@@ -42,7 +42,7 @@ module API
 
     test "should show listening ko" do
       get :show, id: 12345, format: :json
-      assert_response :success
+      assert_response :not_found
 
       value = JSON.parse(response.body)
       assert_equal value["code"], 502
@@ -57,7 +57,7 @@ module API
       assert_equal value["content"].size, 2
 
       get :find, { offset: 42, order_by_asc: [], order_by_desc: ["id"], format: :json }
-      assert_response :success
+      assert_response :no_content
 
       value = JSON.parse(response.body)
       assert_equal value["code"], 202

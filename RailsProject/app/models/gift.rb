@@ -4,23 +4,14 @@
 class Gift < ActiveRecord::Base
   belongs_to :user_from, class_name: 'User', foreign_key: 'to_user'
   belongs_to :user_to, class_name: 'User', foreign_key: 'from_user'
+  has_and_belongs_to_many :albums
+  has_and_belongs_to_many :musics
+  has_and_belongs_to_many :packs
 
-  validates :user_from, :user_to, :typeObj, :obj_id, presence: true
-  validates :obj_id, numericality: { only_integer: true }
-  validate :objectValidation
-
-  # A validate rules to check if an object exists
-  # The typeObj and obj_id need to be present to do the check and add the error
-  def objectValidation
-    if typeObj != nil && !Object.const_defined?(typeObj)
-      errors.add(:typeObj, "Invalid object type")
-    elsif typeObj != nil && obj_id != nil && typeObj.constantize.find_by_id(obj_id) == nil
-      errors.add(:obj_id, "This object doesn't exist")
-    end
-  end
+  validates :user_from, :user_to, presence: true
 
   # The strong parameters to save or update object
   def self.gift_params(parameters)
-    parameters.require(:gift).permit(:to_user, :from_user, :typeObj, :obj_id)
+    parameters.require(:gift).permit(:to_user, :from_user)
   end
 end

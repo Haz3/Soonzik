@@ -1,0 +1,14 @@
+<?import rel_prefix, modsort, files ?>
+
+		<header class="hero-unit">
+		<?if header =~ /<h\d/ ?>
+			<?attr header ?>
+		<?else?>
+			<h1><?attr header ?></h1>
+		<?end if ?>
+		</header>
+
+		<section class="description">
+			<?attr description ?>
+		</section>
+

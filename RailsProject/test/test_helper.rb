@@ -12,5 +12,10 @@ class ActiveSupport::TestCase
   # -- they do not yet inherit this setting
   fixtures :all
 
+
+  SimpleCov.start 'rails' do
+  	add_filter 'vendor'
+  end
+
   # Add more helper methods to be used by all tests here...
 end

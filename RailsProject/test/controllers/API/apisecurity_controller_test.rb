@@ -16,7 +16,7 @@ module API
 
     test "login FB" do
       get :loginFB, email: "toto@email.fr", token: "azerty", format: :json
-      assert_response :success
+      assert_response :not_found
 
       value = JSON.parse(response.body)
       assert_equal value["code"], 502

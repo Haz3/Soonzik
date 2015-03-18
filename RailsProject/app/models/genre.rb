@@ -4,6 +4,8 @@
 class Genre < ActiveRecord::Base
   has_and_belongs_to_many :influences
   has_and_belongs_to_many :descriptions
+  has_and_belongs_to_many :musics
+  has_and_belongs_to_many :packs
 
   validates :style_name, :color_name, :color_hexa, presence: true, uniqueness: true
   validates :style_name, format: /([A-Za-z]+)/

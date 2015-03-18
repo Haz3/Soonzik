@@ -116,6 +116,18 @@ and the validation Can provide some features linked to this model</p>
 				<section id="5Buntitled-5D" class="documentation-section">
 			
 		    
+						<!-- Constants -->
+			<section class="constants-list">
+				<header>
+					<h3>Constants</h3>
+				</header>
+				<dl>
+									<dt id="TEMP_EMAIL_PREFIX"><i class="icon-generic"></i>TEMP_EMAIL_PREFIX</dt>
+										<dd class="description"></dd>
+														<dt id="TEMP_EMAIL_REGEX"><i class="icon-generic"></i>TEMP_EMAIL_REGEX</dt>
+										<dd class="description"></dd>
+													</dl>
+			</section>
 			
 			
 			<!-- Methods -->
@@ -125,27 +137,104 @@ and the validation Can provide some features linked to this model</p>
 					<h3>Public Class Methods</h3>
 				</header>
 
-								<a name="method-c-password_hash">anchor</a>
-				<div id="method-c-password_hash-doc" class="method">
+								<a name="method-c-bigKey">anchor</a>
+				<div id="method-c-bigKey-doc" class="method">
 
 					<header>
 											<i class="icon-generic"></i>
-						<span class="method-name">password_hash</span><span 
-							class="method-args">(pass)</span>
+						<span class="method-name">bigKey</span><span 
+							class="method-args">()</span>
 										</header>
 
 					<div class="method-description">
-											<p>Static function to create the hash of the password</p>
-
-<h4 id="method-c-password_hash-label-Attributes">Attributes<span><a href="#method-c-password_hash-label-Attributes">&para;</a> <a href="#documentation">&uarr;</a></span></h4>
-<ul><li>
-<p><code>pass</code> - The password of the user to encode</p>
-</li></ul>					
-											<div class="method-source-code" id="password_hash-source">
+											<p>Filter of information for the <a href="API.html">API</a></p>					
+											<div class="method-source-code" id="bigKey-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/models/user.rb, line 88</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">password_hash</span>(<span class="ruby-identifier">pass</span>)
-  <span class="ruby-constant">Digest</span><span class="ruby-operator">::</span><span class="ruby-constant">MD5</span>.<span class="ruby-identifier">hexdigest</span>(<span class="ruby-constant">Digest</span><span class="ruby-operator">::</span><span class="ruby-constant">SHA1</span>.<span class="ruby-identifier">hexdigest</span>(<span class="ruby-identifier">pass</span>))
+								class="language-ruby"><span class="ruby-comment"># File app/models/user.rb, line 163</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">bigKey</span>
+  [<span class="ruby-value">:id</span>, <span class="ruby-value">:email</span>, <span class="ruby-value">:username</span>, <span class="ruby-value">:fname</span>, <span class="ruby-value">:lname</span>, <span class="ruby-value">:birthday</span>, <span class="ruby-value">:image</span>, <span class="ruby-value">:description</span>, <span class="ruby-value">:language</span>, <span class="ruby-value">:facebook</span>, <span class="ruby-value">:twitter</span>, <span class="ruby-value">:googlePlus</span>]
+<span class="ruby-keyword">end</span></code></pre>
+						</div>
+										</div>
+
+					
+									</div>
+								<a name="method-c-find_for_oauth">anchor</a>
+				<div id="method-c-find_for_oauth-doc" class="method">
+
+					<header>
+											<i class="icon-generic"></i>
+						<span class="method-name">find_for_oauth</span><span 
+							class="method-args">(auth, signed_in_resource = nil)</span>
+										</header>
+
+					<div class="method-description">
+											<p>for OAuth interpretation</p>					
+											<div class="method-source-code" id="find_for_oauth-source">
+							<pre class="prettyprint linenums"><code 
+								class="language-ruby"><span class="ruby-comment"># File app/models/user.rb, line 74</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">find_for_oauth</span>(<span class="ruby-identifier">auth</span>, <span class="ruby-identifier">signed_in_resource</span> = <span class="ruby-keyword">nil</span>)
+
+  <span class="ruby-comment"># Get the identity and user if they exist</span>
+  <span class="ruby-identifier">identity</span> = <span class="ruby-constant">Identity</span>.<span class="ruby-identifier">find_for_oauth</span>(<span class="ruby-identifier">auth</span>)
+
+  <span class="ruby-comment"># If a signed_in_resource is provided it always overrides the existing user</span>
+  <span class="ruby-comment"># to prevent the identity being locked with accidentally created accounts.</span>
+  <span class="ruby-comment"># Note that this may leave zombie accounts (with no associated identity) which</span>
+  <span class="ruby-comment"># can be cleaned up at a later date.</span>
+  <span class="ruby-identifier">user</span> = <span class="ruby-identifier">signed_in_resource</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">signed_in_resource</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">identity</span>.<span class="ruby-identifier">user</span>
+
+  <span class="ruby-comment"># Create the user if needed</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">user</span>.<span class="ruby-identifier">nil?</span>
+
+    <span class="ruby-comment"># Get the existing user by email if the provider gives us a verified email.</span>
+    <span class="ruby-comment"># If no verified email was provided we assign a temporary email and ask the</span>
+    <span class="ruby-comment"># user to verify it on the next step via UsersController.finish_signup</span>
+    <span class="ruby-identifier">email_is_verified</span> = <span class="ruby-identifier">auth</span>.<span class="ruby-identifier">info</span>.<span class="ruby-identifier">email</span> <span class="ruby-operator">&amp;&amp;</span> (<span class="ruby-identifier">auth</span>.<span class="ruby-identifier">info</span>.<span class="ruby-identifier">verified</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">auth</span>.<span class="ruby-identifier">info</span>.<span class="ruby-identifier">verified_email</span>)
+    <span class="ruby-identifier">email</span> = <span class="ruby-identifier">auth</span>.<span class="ruby-identifier">info</span>.<span class="ruby-identifier">email</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">email_is_verified</span>
+    <span class="ruby-identifier">user</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">:email</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">email</span>).<span class="ruby-identifier">first</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">email</span>
+
+    <span class="ruby-comment"># Create the user if it&#39;s a new registration</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">user</span>.<span class="ruby-identifier">nil?</span>
+      <span class="ruby-identifier">user</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">new</span>(
+        <span class="ruby-identifier">username</span><span class="ruby-operator">:</span> <span class="ruby-identifier">auth</span>.<span class="ruby-identifier">extra</span>.<span class="ruby-identifier">raw_info</span>.<span class="ruby-identifier">name</span>,
+        <span class="ruby-comment">#username: auth.info.nickname || auth.uid,</span>
+        <span class="ruby-identifier">email</span><span class="ruby-operator">:</span> <span class="ruby-identifier">email</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">email</span> <span class="ruby-operator">:</span> <span class="ruby-node">&quot;#{TEMP_EMAIL_PREFIX}-#{auth.uid}-#{auth.provider}.com&quot;</span>,
+        <span class="ruby-identifier">password</span><span class="ruby-operator">:</span> <span class="ruby-constant">Devise</span>.<span class="ruby-identifier">friendly_token</span>
+      )
+      <span class="ruby-identifier">user</span>.<span class="ruby-identifier">skip_confirmation!</span>
+      <span class="ruby-identifier">user</span>.<span class="ruby-identifier">save!</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-comment"># Associate the identity with the user if needed</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">identity</span>.<span class="ruby-identifier">user</span> <span class="ruby-operator">!=</span> <span class="ruby-identifier">user</span>
+    <span class="ruby-identifier">identity</span>.<span class="ruby-identifier">user</span> = <span class="ruby-identifier">user</span>
+    <span class="ruby-identifier">identity</span>.<span class="ruby-identifier">save!</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">user</span>
+<span class="ruby-keyword">end</span></code></pre>
+						</div>
+										</div>
+
+					
+									</div>
+								<a name="method-c-miniKey">anchor</a>
+				<div id="method-c-miniKey-doc" class="method">
+
+					<header>
+											<i class="icon-generic"></i>
+						<span class="method-name">miniKey</span><span 
+							class="method-args">()</span>
+										</header>
+
+					<div class="method-description">
+											<p>Filter of information for the <a href="API.html">API</a></p>					
+											<div class="method-source-code" id="miniKey-source">
+							<pre class="prettyprint linenums"><code 
+								class="language-ruby"><span class="ruby-comment"># File app/models/user.rb, line 158</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">miniKey</span>
+  [<span class="ruby-value">:id</span>, <span class="ruby-value">:email</span>, <span class="ruby-value">:username</span>, <span class="ruby-value">:image</span>, <span class="ruby-value">:description</span>, <span class="ruby-value">:language</span>]
 <span class="ruby-keyword">end</span></code></pre>
 						</div>
 										</div>
@@ -164,15 +253,37 @@ and the validation Can provide some features linked to this model</p>
 					<div class="method-description">
 											<p>Static function to create the hash of the secureKey</p>
 
-<h4 id="method-c-secureKey_hash-label-Attributes">Attributes<span><a href="#method-c-secureKey_hash-label-Attributes">&para;</a> <a href="#documentation">&uarr;</a></span></h4>
+<h4 id="method-c-secureKey_hash-label-Attributes">Attributes<span><a href="#method-c-secureKey_hash-label-Attributes">&para;</a> <a href="#top">&uarr;</a></span></h4>
 <ul><li>
 <p><code>key</code> - The generated key to encode</p>
 </li></ul>					
 											<div class="method-source-code" id="secureKey_hash-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/models/user.rb, line 78</span>
+								class="language-ruby"><span class="ruby-comment"># File app/models/user.rb, line 140</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">secureKey_hash</span>(<span class="ruby-identifier">key</span>)
   <span class="ruby-constant">Digest</span><span class="ruby-operator">::</span><span class="ruby-constant">SHA1</span>.<span class="ruby-identifier">hexdigest</span>(<span class="ruby-constant">Digest</span><span class="ruby-operator">::</span><span class="ruby-constant">MD5</span>.<span class="ruby-identifier">hexdigest</span>(<span class="ruby-identifier">key</span>))
+<span class="ruby-keyword">end</span></code></pre>
+						</div>
+										</div>
+
+					
+									</div>
+								<a name="method-c-user_params">anchor</a>
+				<div id="method-c-user_params-doc" class="method">
+
+					<header>
+											<i class="icon-generic"></i>
+						<span class="method-name">user_params</span><span 
+							class="method-args">(parameters)</span>
+										</header>
+
+					<div class="method-description">
+											<p>The strong parameters to save or update object</p>					
+											<div class="method-source-code" id="user_params-source">
+							<pre class="prettyprint linenums"><code 
+								class="language-ruby"><span class="ruby-comment"># File app/models/user.rb, line 153</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">user_params</span>(<span class="ruby-identifier">parameters</span>)
+  <span class="ruby-identifier">parameters</span>.<span class="ruby-identifier">require</span>(<span class="ruby-value">:user</span>).<span class="ruby-identifier">permit</span>(<span class="ruby-value">:email</span>, <span class="ruby-value">:password</span>, <span class="ruby-value">:fname</span>, <span class="ruby-value">:lname</span>, <span class="ruby-value">:username</span>, <span class="ruby-value">:birthday</span>, <span class="ruby-value">:image</span>, <span class="ruby-value">:description</span>, <span class="ruby-value">:phoneNumber</span>, <span class="ruby-value">:facebook</span>, <span class="ruby-value">:twitter</span>, <span class="ruby-value">:googlePlus</span>, <span class="ruby-value">:newsletter</span>, <span class="ruby-value">:language</span>)
 <span class="ruby-keyword">end</span></code></pre>
 						</div>
 										</div>
@@ -192,6 +303,96 @@ and the validation Can provide some features linked to this model</p>
 					<h3>Public Instance Methods</h3>
 				</header>
 
+								<a name="method-i-email_verified-3F">anchor</a>
+				<div id="method-i-email_verified-3F-doc" class="method">
+
+					<header>
+											<i class="icon-generic"></i>
+						<span class="method-name">email_verified?</span><span 
+							class="method-args">()</span>
+										</header>
+
+					<div class="method-description">
+											<p>Is there the default email address or not ?</p>					
+											<div class="method-source-code" id="email_verified-3F-source">
+							<pre class="prettyprint linenums"><code 
+								class="language-ruby"><span class="ruby-comment"># File app/models/user.rb, line 117</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">email_verified?</span>
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">email</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">email</span> <span class="ruby-operator">!~</span> <span class="ruby-constant">TEMP_EMAIL_REGEX</span>
+<span class="ruby-keyword">end</span></code></pre>
+						</div>
+										</div>
+
+					
+									</div>
+								<a name="method-i-findPeopleLikeMe">anchor</a>
+				<div id="method-i-findPeopleLikeMe-doc" class="method">
+
+					<header>
+											<i class="icon-generic"></i>
+						<span class="method-name">findPeopleLikeMe</span><span 
+							class="method-args">()</span>
+										</header>
+
+					<div class="method-description">
+											<p>Returns user with the same musics (with ponderation)</p>					
+											<div class="method-source-code" id="findPeopleLikeMe-source">
+							<pre class="prettyprint linenums"><code 
+								class="language-ruby"><span class="ruby-comment"># File app/models/user.rb, line 194</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">findPeopleLikeMe</span>
+  <span class="ruby-identifier">purchasedMusics</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">getPurchasedMusics</span>()
+  <span class="ruby-identifier">music_table_attributes</span> = <span class="ruby-constant">Music</span>.<span class="ruby-identifier">arel_table</span>   <span class="ruby-comment">#Account.where(accounts[:id].eq(1).or(accounts[:id].eq(2)))</span>
+
+  
+<span class="ruby-keyword">end</span></code></pre>
+						</div>
+										</div>
+
+					
+									</div>
+								<a name="method-i-getPurchasedMusics">anchor</a>
+				<div id="method-i-getPurchasedMusics-doc" class="method">
+
+					<header>
+											<i class="icon-generic"></i>
+						<span class="method-name">getPurchasedMusics</span><span 
+							class="method-args">()</span>
+										</header>
+
+					<div class="method-description">
+											<p>Get the purchased musics by the user</p>					
+											<div class="method-source-code" id="getPurchasedMusics-source">
+							<pre class="prettyprint linenums"><code 
+								class="language-ruby"><span class="ruby-comment"># File app/models/user.rb, line 168</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">getPurchasedMusics</span>
+  <span class="ruby-identifier">purchasedMusics</span> = []
+
+  <span class="ruby-keyword">if</span> (<span class="ruby-keyword">self</span>.<span class="ruby-identifier">purchases</span> <span class="ruby-operator">!=</span> <span class="ruby-keyword">nil</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">purchases</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">!=</span> <span class="ruby-value">0</span>)
+    <span class="ruby-identifier">listPurchasedMusic</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">purchases</span>
+    <span class="ruby-identifier">listPurchasedMusic</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">purchasedItem</span><span class="ruby-operator">|</span>
+      <span class="ruby-comment"># To convert the name to a class to find it</span>
+      <span class="ruby-identifier">classObj</span> = <span class="ruby-identifier">purchasedItem</span>.<span class="ruby-identifier">typeObj</span>.<span class="ruby-identifier">constantize</span>
+      <span class="ruby-identifier">obj</span> = <span class="ruby-identifier">classObj</span>.<span class="ruby-identifier">find_by_id</span>(<span class="ruby-identifier">purchasedItem</span>.<span class="ruby-identifier">obj_id</span>)
+
+      <span class="ruby-comment"># Merge the list of musics with the new item</span>
+      <span class="ruby-keyword">if</span> (<span class="ruby-identifier">obj</span> <span class="ruby-operator">!=</span> <span class="ruby-keyword">nil</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">purchasedItem</span>.<span class="ruby-identifier">typeObj</span> <span class="ruby-operator">==</span> <span class="ruby-string">&quot;Album&quot;</span>)
+        <span class="ruby-identifier">purchasedMusics</span> = <span class="ruby-identifier">purchasedMusics</span> <span class="ruby-operator">|</span> <span class="ruby-identifier">obj</span>.<span class="ruby-identifier">musics</span>.<span class="ruby-identifier">to_a</span>
+      <span class="ruby-keyword">elsif</span> (<span class="ruby-identifier">obj</span> <span class="ruby-operator">!=</span> <span class="ruby-keyword">nil</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">purchasedItem</span>.<span class="ruby-identifier">typeObj</span> <span class="ruby-operator">==</span> <span class="ruby-string">&quot;Music&quot;</span>)
+        <span class="ruby-identifier">purchasedMusics</span> = <span class="ruby-identifier">purchasedMusics</span> <span class="ruby-operator">|</span> [<span class="ruby-identifier">obj</span>]
+      <span class="ruby-keyword">elsif</span> (<span class="ruby-identifier">obj</span> <span class="ruby-operator">!=</span> <span class="ruby-keyword">nil</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">purchasedItem</span>.<span class="ruby-identifier">typeObj</span> <span class="ruby-operator">==</span> <span class="ruby-string">&quot;Pack&quot;</span>)
+        <span class="ruby-identifier">obj</span>.<span class="ruby-identifier">albums</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">album</span><span class="ruby-operator">|</span>
+          <span class="ruby-identifier">purchasedMusics</span> = <span class="ruby-identifier">purchasedMusics</span> <span class="ruby-operator">|</span> <span class="ruby-identifier">album</span>.<span class="ruby-identifier">musics</span>.<span class="ruby-identifier">to_a</span>
+        <span class="ruby-keyword">end</span>
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">purchasedMusics</span>
+<span class="ruby-keyword">end</span></code></pre>
+						</div>
+										</div>
+
+					
+									</div>
 								<a name="method-i-regenerateKey">anchor</a>
 				<div id="method-i-regenerateKey-doc" class="method">
 
@@ -206,17 +407,16 @@ and the validation Can provide some features linked to this model</p>
 unique so we check if someone already has this one</p>					
 											<div class="method-source-code" id="regenerateKey-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/models/user.rb, line 60</span>
+								class="language-ruby"><span class="ruby-comment"># File app/models/user.rb, line 123</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">regenerateKey</span>
   <span class="ruby-identifier">key</span> = <span class="ruby-keyword">nil</span>
 
   <span class="ruby-keyword">begin</span>
-    <span class="ruby-identifier">key</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">secureKey_hash</span>(<span class="ruby-keyword">self</span>.<span class="ruby-identifier">createKey</span>())
+    <span class="ruby-identifier">key</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">secureKey_hash</span>(<span class="ruby-identifier">createKey</span>())
   <span class="ruby-keyword">end</span> <span class="ruby-keyword">while</span> (<span class="ruby-constant">User</span>.<span class="ruby-identifier">find_by_idAPI</span>(<span class="ruby-identifier">key</span>))
 
   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">idAPI</span> = <span class="ruby-identifier">key</span>
   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">secureKey</span> = <span class="ruby-identifier">generateHash</span>(<span class="ruby-keyword">self</span>.<span class="ruby-identifier">salt</span>, <span class="ruby-identifier">key</span>)
-  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">save</span>
 <span class="ruby-keyword">end</span></code></pre>
 						</div>
 										</div>
@@ -233,13 +433,15 @@ unique so we check if someone already has this one</p>
 										</header>
 
 					<div class="method-description">
-											<p>Static function to create the hash of the salt It uses the password, so it
-has to be set before</p>					
+											<p>Method to create the hash of the salt It uses the password, so it has to be
+set before</p>					
 											<div class="method-source-code" id="salt_hash-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/models/user.rb, line 94</span>
+								class="language-ruby"><span class="ruby-comment"># File app/models/user.rb, line 146</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">salt_hash</span>
-  <span class="ruby-constant">User</span>.<span class="ruby-identifier">secureKey_hash</span>(<span class="ruby-node">&quot;#{Digest::SHA256.hexdigest(&quot;#{Time.now.utc}--#{self.password}&quot;)}--#{Digest::SHA256.hexdigest(self.password)}&quot;</span>)
+  <span class="ruby-identifier">first_piece</span> = <span class="ruby-constant">Digest</span><span class="ruby-operator">::</span><span class="ruby-constant">SHA256</span>.<span class="ruby-identifier">hexdigest</span>(<span class="ruby-node">&quot;#{Time.now.utc}--#{self.password}&quot;</span>)
+  <span class="ruby-identifier">second_piece</span> = <span class="ruby-constant">Digest</span><span class="ruby-operator">::</span><span class="ruby-constant">SHA256</span>.<span class="ruby-identifier">hexdigest</span>(<span class="ruby-keyword">self</span>.<span class="ruby-identifier">password</span>)
+  <span class="ruby-constant">User</span>.<span class="ruby-identifier">secureKey_hash</span>(<span class="ruby-node">&quot;#{first_piece}--#{second_piece}&quot;</span>)
 <span class="ruby-keyword">end</span></code></pre>
 						</div>
 										</div>
@@ -261,7 +463,7 @@ has to be set before</p>
 
 		<footer>
 			<div class="container">
-				<span id="rdoc-version">Generated by RDoc 4.1.2</span> using the
+				<span id="rdoc-version">Generated by RDoc 4.2.0</span> using the
 				<a id="generator-version"
 					href="http://deveiate.org/fivefish">Fivefish RDoc 0.1.0</a> generator.
 			</div>
@@ -278,7 +480,9 @@ has to be set before</p>
 			<li><a href="./API/BattlesController.html">API::BattlesController</a></li>
 			<li><a href="./API/CartsController.html">API::CartsController</a></li>
 			<li><a href="./API/ConcertsController.html">API::ConcertsController</a></li>
+			<li><a href="./API/GenresController.html">API::GenresController</a></li>
 			<li><a href="./API/GiftsController.html">API::GiftsController</a></li>
+			<li><a href="./API/InfluencesController.html">API::InfluencesController</a></li>
 			<li><a href="./API/ListeningsController.html">API::ListeningsController</a></li>
 			<li><a href="./API/MessagesController.html">API::MessagesController</a></li>
 			<li><a href="./API/MusicsController.html">API::MusicsController</a></li>

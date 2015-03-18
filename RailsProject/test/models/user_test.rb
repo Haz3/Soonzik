@@ -5,11 +5,10 @@ class UserTest < ActiveSupport::TestCase
   	u1 = users(:UserOne)
 
   	secureKey = User.secureKey_hash("test")
-  	password = User.password_hash("test")
+  	u1.password = Devise.friendly_token
   	salt = u1.salt_hash
 
   	assert secureKey.is_a?(String) && secureKey.size == 40
-  	assert password.is_a?(String) && password.size == 32
   	assert salt.is_a?(String) && salt.size == 40
 
   	oldidApi = u1.idAPI
@@ -18,6 +17,7 @@ class UserTest < ActiveSupport::TestCase
   	assert u1.regenerateKey
   	assert u1.idAPI != oldidApi
   	assert u1.secureKey != oldKey
+    u1.skip_confirmation!
     assert u1.save
   end
 
@@ -33,7 +33,6 @@ class UserTest < ActiveSupport::TestCase
   	u.groups << groups(:userGroup)
 
   	u.send(:beforeCreate)
-  	assert_not u.activated
   	assert_equal u.image, "default.png"
   	assert u.newsletter
   	assert_not u.valid?
@@ -45,6 +44,8 @@ class UserTest < ActiveSupport::TestCase
   	u.email = "lol@mdr.fr"
   	u.username = "Lund"
   	u.send(:beforeCreate)
-  	assert u.save
+    u.skip_confirmation!
+  	toto = u.save
+    assert toto
   end
 end

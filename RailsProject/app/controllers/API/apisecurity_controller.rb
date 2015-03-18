@@ -38,9 +38,31 @@ module API
           codeAnswer 200
         rescue
           codeAnswer 504
+          @httpCode = :service_unavailable
         end
       else
         codeAnswer 502
+        @httpCode = :not_found
+      end
+      sendJson
+    end
+
+    def login
+      if (defined?(@email) && defined?(@password))
+        begin
+          user = User.find_by_email(@email)
+          if (user && user.valid_password?(@password))
+            @returnValue = { content: user.as_json(:include => :address) }
+          else
+            codeAnswer 502
+            @httpCode = :not_found
+          end
+        rescue
+          codeAnswer 504
+        end
+      else
+        codeAnswer 502
+        @httpCode = :not_found
       end
       sendJson
     end
@@ -65,10 +87,12 @@ module API
           hash = JSON.parse(response.body)
           if (hash != nil && hash.has_key?("error"))
             codeAnswer 502
+            @httpCode = :not_found
           else
             u = User.find_by(email: @email)
             if (u == nil)
               codeAnswer 502
+              @httpCode = :not_found
             else
               @returnValue = { content: u.as_json(:include => :address) }
               codeAnswer 200
@@ -76,9 +100,11 @@ module API
           end
         rescue
           codeAnswer 504
+          @httpCode = :service_unavailable
         end
       else
         codeAnswer 502
+        @httpCode = :not_found
       end
       sendJson
     end
@@ -112,11 +138,14 @@ protected
           if (@secureKey == u.secureKey)
             @security = true
             u.regenerateKey
+            u.save
           else
             codeAnswer 501
+            @httpCode = :unauthorized
           end
         rescue
           codeAnswer 504
+          @httpCode = :service_unavailable
         end
       end
     end
@@ -124,8 +153,9 @@ protected
     # Render the value to return in json
     def sendJson
       codeAnswer(202) if defined?(@returnValue[:content]) && defined?(@returnValue[:content].size) && @returnValue[:content].size == 0
+      defineHttp :ok if @httpCode == nil
       respond_to do |format|
-        format.json { render :json => JSON.generate(@returnValue) }
+        format.json { render :json => JSON.generate(@returnValue), :status => @httpCode }
       end
     end
 
@@ -147,6 +177,19 @@ protected
       else
         @returnValue[:code] = 999
         @returnValue[:message] = "Unknow"
+      end
+    end
+
+    # Set the HTTP status
+    # If a code has already been assigned, we don't modify it.
+    #
+    # ==== Attributes
+    #
+    # * +sym+ - The symbol of the http code
+    #
+    def defineHttp(sym)
+      if (@httpCode == nil)
+        @httpCode = sym
       end
     end
   end

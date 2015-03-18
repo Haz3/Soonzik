@@ -3,11 +3,9 @@
 cadeauUn:
   user_to: UserOne
   user_from: UserTwo
-  typeObj: FakeType
-  obj_id: 1
+  musics: MusicOne
 
 cadeauDeux:
   user_to: UserTwo
   user_from: UserOne
-  typeObj: Music
-  obj_id: 2
+  albums: AlbumOne

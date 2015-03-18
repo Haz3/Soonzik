@@ -1,0 +1,1833 @@
+2014-11-05  Michael Granger  <ged@FaerieMUD.org>
+
+	* .hgtags:
+	Added tag v0.13.0 for changeset 7488d214dc2c
+	[3d71dc3094c3] [tip]
+
+	* Tags.rdoc, lib/inversion/renderstate.rb, lib/inversion/template.rb,
+	lib/inversion/template/fragmenttag.rb,
+	spec/inversion/renderstate_spec.rb,
+	spec/inversion/template/fragmenttag_spec.rb,
+	spec/inversion/template_spec.rb:
+	Add the fragment tag
+	[064577093464]
+
+2014-11-05  Mahlon E. Smith  <mahlon@martini.nu>
+
+	* Tags.rdoc:
+	Add docs for the 'fragment' tag. Coming soon.
+	[fbfb2e0eaa4e]
+
+2014-11-03  Mahlon E. Smith  <mahlon@martini.nu>
+
+	* .pryrc, Tags.rdoc, lib/inversion/template/rescuetag.rb,
+	manual/layouts/default.erb, manual/lib/api-filter.rb, manual/lib
+	/editorial-filter.rb, manual/lib/examples-filter.rb, manual/lib
+	/links-filter.rb, manual/resources/css/manual.css,
+	manual/resources/css/reset.css,
+	manual/resources/fonts/Inconsolata.otf, manual/resources/fonts/Muli-
+	Light.ttf, manual/resources/fonts/Muli-Regular.ttf,
+	manual/resources/images/arrow_225_small.png,
+	manual/resources/images/arrow_315_small.png,
+	manual/resources/images/arrow_skip.png, manual/resources/images/cc-
+	by.png, manual/resources/images/dialog-error.png,
+	manual/resources/images/dialog-information.png,
+	manual/resources/images/dialog-warning.png, manual/resources/images
+	/emblem-important.png, manual/resources/images/help.png,
+	manual/resources/images/information.png,
+	manual/resources/images/magnifier.png,
+	manual/resources/images/magnifier_left.png,
+	manual/resources/images/page_white_code.png,
+	manual/resources/images/page_white_copy.png,
+	manual/resources/images/printer.png,
+	manual/resources/images/question.png,
+	manual/resources/images/scripts_code.png,
+	manual/resources/images/wrap.png,
+	manual/resources/images/wrapping.png,
+	manual/resources/js/jquery-1.4.4.min.js,
+	manual/resources/js/manual.js, manual/resources/js/sh.js,
+	manual/resources/swf/clipboard.swf:
+	Remove old manual doc artifacts. Add documentation for the
+	'begin/rescue' and 'default' tags.
+	[35971a883112]
+
+2014-04-23  Michael Granger  <ged@FaerieMUD.org>
+
+	* History.rdoc, lib/inversion.rb, lib/inversion/template/attrtag.rb:
+	Bump the minor version, update history.
+	[7488d214dc2c] [v0.13.0]
+
+	* .rvm.gems, Gemfile, Rakefile, spec/helpers.rb,
+	spec/inversion/mixins_spec.rb, spec/inversion/monkeypatches_spec.rb,
+	spec/inversion/parser_spec.rb, spec/inversion/renderstate_spec.rb,
+	spec/inversion/sinatra_spec.rb,
+	spec/inversion/template/attrtag_spec.rb,
+	spec/inversion/template/begintag_spec.rb,
+	spec/inversion/template/calltag_spec.rb,
+	spec/inversion/template/codetag_spec.rb,
+	spec/inversion/template/commenttag_spec.rb,
+	spec/inversion/template/configtag_spec.rb,
+	spec/inversion/template/containertag_spec.rb,
+	spec/inversion/template/defaulttag_spec.rb,
+	spec/inversion/template/elsetag_spec.rb,
+	spec/inversion/template/elsiftag_spec.rb,
+	spec/inversion/template/endtag_spec.rb,
+	spec/inversion/template/escapetag_spec.rb,
+	spec/inversion/template/fortag_spec.rb,
+	spec/inversion/template/iftag_spec.rb,
+	spec/inversion/template/importtag_spec.rb,
+	spec/inversion/template/includetag_spec.rb,
+	spec/inversion/template/node_spec.rb,
+	spec/inversion/template/pptag_spec.rb,
+	spec/inversion/template/publishtag_spec.rb,
+	spec/inversion/template/rescuetag_spec.rb,
+	spec/inversion/template/subscribetag_spec.rb,
+	spec/inversion/template/tag_spec.rb,
+	spec/inversion/template/textnode_spec.rb,
+	spec/inversion/template/timedeltatag_spec.rb,
+	spec/inversion/template/unlesstag_spec.rb,
+	spec/inversion/template/uriencodetag_spec.rb,
+	spec/inversion/template/yieldtag_spec.rb,
+	spec/inversion/template_spec.rb, spec/inversion/tilt_spec.rb,
+	spec/inversion_spec.rb, spec/lib/constants.rb, spec/lib/helpers.rb:
+	Update specs for RSpec 3
+	[1b7cfd831cf3]
+
+2013-10-10  Mahlon E. Smith  <mahlon@martini.nu>
+
+	* lib/inversion/template.rb, spec/inversion/parser_spec.rb,
+	spec/inversion/template/attrtag_spec.rb,
+	spec/inversion/template/endtag_spec.rb,
+	spec/inversion/template/escapetag_spec.rb,
+	spec/inversion/template/pptag_spec.rb,
+	spec/inversion/template/uriencodetag_spec.rb,
+	spec/inversion/template_spec.rb:
+	Carry global configuration into instantiated template options. Minor
+	rspec update/cleanup.
+	[52c37c725e5e]
+
+2013-10-06  Michael Granger  <ged@FaerieMUD.org>
+
+	* Examples.rdoc, Gemfile, GettingStarted.rdoc, Guide.rdoc,
+	Manifest.txt, README.rdoc, Rakefile, Tags.rdoc,
+	lib/inversion/template.rb, lib/inversion/template/begintag.rb,
+	manual/src/examples.page, manual/src/gettingstarted.page,
+	manual/src/index.page, manual/src/tags.page,
+	manual/src/templates.page:
+	Update documentation.
+	[646ed1f389fb] [github/master]
+
+2013-09-20  Michael Granger  <ged@FaerieMUD.org>
+
+	* .hgtags:
+	Added tag v0.12.3 for changeset e9f7dfbae060
+	[604c1a0022e7]
+
+	* .hgsigs:
+	Added signature for changeset 100ed23eb2ba
+	[e9f7dfbae060] [v0.12.3]
+
+	* History.rdoc, lib/inversion.rb:
+	Bump patch version, update history.
+	[100ed23eb2ba]
+
+	* .tm_properties, Gemfile, lib/inversion/mixins.rb,
+	spec/inversion/mixins_spec.rb:
+	Don't deep_copy IOs or Tempfiles (bugfix).
+	[70c1f8274d3d]
+
+2013-08-15  Michael Granger  <ged@FaerieMUD.org>
+
+	* .hgignore, .rvm.gems, Gemfile, Rakefile:
+	Update dependencies, remove 'fivefish' formatter from the spec.
+	[60d2a8f8203d]
+
+	* Rakefile, spec/inversion/tilt_spec.rb:
+	Fix specs for Tilt 1.4.
+	[a2a37501012e]
+
+	* Gemfile:
+	Update Gemfile
+	[50bd4a8bb8a0]
+
+	* Rakefile:
+	Update to hoe-deveiate 0.2
+	[67fe0be277b2]
+
+	* .rvm.gems, Gemfile, Rakefile:
+	Add hoe-bundler, Gemfile for tool compatibility
+	[1f9944f95ca2]
+
+	* experiments/erb_scope_bleed.rb:
+	Add example output to erb scope bleed example
+	[e50c583bdffa]
+
+2013-06-19  Michael Granger  <ged@FaerieMUD.org>
+
+	* .hgtags:
+	Added tag v0.12.2 for changeset 4c4c929c5911
+	[2d11a25bd1d5]
+
+	* .hgsigs:
+	Added signature for changeset 0444a00c5e64
+	[4c4c929c5911] [v0.12.2]
+
+	* History.rdoc, lib/inversion.rb:
+	Bump patch version, update history.
+	[0444a00c5e64]
+
+	* Manifest.txt:
+	Update manifest
+	[6fa0b4ea14a1]
+
+	* lib/inversion/template.rb, spec/data/unknown-tag.tmpl,
+	spec/inversion/template/configtag_spec.rb:
+	Fix propagation of config tags into subtemplates (fixes #1)
+	[1b4030ae65f3]
+
+2013-05-22  Michael Granger  <ged@FaerieMUD.org>
+
+	* lib/inversion/renderstate.rb, spec/inversion/renderstate_spec.rb:
+	Use replacement in transcoding instead of raising encoding errors
+	[d0b82083bb00]
+
+	* lib/inversion/monkeypatches.rb, lib/inversion/parser.rb,
+	lib/inversion/renderstate.rb, lib/inversion/template/codetag.rb,
+	lib/inversion/template/commenttag.rb,
+	lib/inversion/template/containertag.rb,
+	lib/inversion/template/elsetag.rb,
+	lib/inversion/template/elsiftag.rb,
+	lib/inversion/template/fortag.rb, lib/inversion/template/node.rb,
+	lib/inversion/template/tag.rb,
+	lib/inversion/template/uriencodetag.rb,
+	lib/inversion/template/yieldtag.rb,
+	spec/inversion/renderstate_spec.rb,
+	spec/inversion/template/begintag_spec.rb,
+	spec/inversion/template/textnode_spec.rb:
+	Whitespace and API documentation fixes.
+	[f39531d869cd]
+
+	* spec/lib/helpers.rb:
+	Use Loggability's spec helpers
+	[03a2e9da4c3c]
+
+	* .rvmrc:
+	Test using Ruby 2.0
+	[694a37e19d3d]
+
+	* .tm_properties:
+	Update project settings
+	[d657f5164f22]
+
+2013-03-20  Michael Granger  <ged@FaerieMUD.org>
+
+	* .hgtags:
+	Added tag v0.12.1 for changeset 95133ea7528c
+	[650fd85bf639]
+
+	* .hgsigs:
+	Added signature for changeset 4bc01301cf22
+	[95133ea7528c] [v0.12.1]
+
+	* History.rdoc, lib/inversion.rb:
+	Bump the patch version, update history
+	[4bc01301cf22]
+
+2013-03-05  Michael Granger  <ged@FaerieMUD.org>
+
+	* lib/inversion/parser.rb:
+	Comment out some more debugging in the parser
+	[c34f0af1e643]
+
+	* lib/inversion/parser.rb:
+	Comment out a bunch of debugging in the parser
+	[ee78d82eee2e]
+
+2013-03-01  Michael Granger  <ged@FaerieMUD.org>
+
+	* .hgtags:
+	Added tag v0.12.0 for changeset 33062cada220
+	[2d507672656a]
+
+	* .hgsigs:
+	Added signature for changeset 9005ff6f9ec4
+	[33062cada220] [v0.12.0]
+
+	* History.rdoc, lib/inversion.rb:
+	Bump the minor version, update history.
+	[9005ff6f9ec4]
+
+	* .rvm.gems, lib/inversion/renderstate.rb,
+	spec/inversion/renderstate_spec.rb:
+	Make exceptions rendered as comments include the backtrace if
+	debugging comments are enabled.
+	[83cb6ec4c5d7]
+
+2012-09-17  Michael Granger  <ged@FaerieMUD.org>
+
+	* .hgtags:
+	Added tag v0.11.2 for changeset f3b151a19816
+	[d5c44e803947]
+
+	* .hgsigs:
+	Added signature for changeset b4d374fa78a0
+	[f3b151a19816] [v0.11.2]
+
+	* History.rdoc, lib/inversion.rb:
+	Bump patch version, update history.
+	[b4d374fa78a0]
+
+	* lib/inversion/template/fortag.rb,
+	spec/inversion/template/fortag_spec.rb:
+	Fixing a problem with non-array values in the for tag
+	[24563edc2162]
+
+	* .hgtags:
+	Added tag v0.11.1 for changeset 352405b90f49
+	[03ef35e110e0]
+
+	* .hgsigs:
+	Added signature for changeset b74d0f41b140
+	[352405b90f49] [v0.11.1]
+
+	* History.rdoc:
+	Bump the patch version, update history.
+	[b74d0f41b140]
+
+	* lib/inversion.rb, lib/inversion/renderstate.rb,
+	lib/inversion/template/publishtag.rb,
+	spec/inversion/template/publishtag_spec.rb,
+	spec/inversion/template/subscribetag_spec.rb:
+	Make subscriptions get nodes that were already published
+	[cca3daa4a649]
+
+2012-07-06  Michael Granger  <ged@FaerieMUD.org>
+
+	* .hgtags:
+	Added tag v0.11.0 for changeset 8e7ee4f29874
+	[71c2a12d9df0]
+
+	* .hgsigs:
+	Added signature for changeset 92d48ef3085e
+	[8e7ee4f29874] [v0.11.0]
+
+	* History.rdoc, lib/inversion.rb:
+	Bump the minor version, update history.
+	[92d48ef3085e]
+
+	* lib/inversion/renderstate.rb, lib/inversion/template.rb,
+	spec/inversion/renderstate_spec.rb:
+	Transcode output according to the :encoding option if set on a
+	template
+	[2202c6ed520b]
+
+	* lib/inversion/mixins.rb:
+	Don't try to deep copy Encoding objects, either
+	[424709b51350]
+
+2012-06-27  Michael Granger  <ged@FaerieMUD.org>
+
+	* .hgtags:
+	Added tag v0.10.2 for changeset 043b32a2d9a6
+	[5b926937058b]
+
+	* .hgsigs:
+	Added signature for changeset 7236fd2ac3fb
+	[043b32a2d9a6] [v0.10.2]
+
+	* History.rdoc, lib/inversion.rb:
+	Bump the patch version, update history.
+	[7236fd2ac3fb]
+
+2012-06-27  Mahlon E. Smith  <mahlon@martini.nu>
+
+	* lib/inversion/mixins.rb, lib/inversion/template.rb,
+	spec/inversion/mixins_spec.rb:
+	Add Modules/Classes to the immediate object list when deep copying.
+	Don't needlessly deep_copy the node tree on template duplication.
+	[fb0ab0db2042]
+
+2012-06-22  Michael Granger  <ged@FaerieMUD.org>
+
+	* .rvm.gems, Rakefile:
+	Update dependencies.
+	[bf49edf3b889]
+
+	* .hgtags:
+	Added tag v0.10.1 for changeset 16d06faa003e
+	[f45915b72d58]
+
+	* .hgsigs:
+	Added signature for changeset 432abb56d593
+	[16d06faa003e] [v0.10.1]
+
+	* History.rdoc, lib/inversion.rb:
+	Bump patch version, update history.
+	[432abb56d593]
+
+	* lib/inversion/mixins.rb, lib/inversion/renderstate.rb,
+	lib/inversion/template.rb, spec/inversion/template_spec.rb:
+	Fix attribute changes being shared between duplicated templates.
+
+	- Pull up deep_copy function into a mixin
+	- Use deep_copy in a copy constructor on Inversion::Template to make
+	internal datastructures distinct, including @attributes.
+	- Also clean up some old cruft with the way the Parser is used.
+	[8350fbf49ef2]
+
+2012-05-18  Michael Granger  <ged@FaerieMUD.org>
+
+	* .rvm.gems:
+	Bumping Loggability dependency for inheritance bugfix
+	[b65ce51ca6ee]
+
+2012-05-10  Michael Granger  <ged@FaerieMUD.org>
+
+	* .rvm.gems, Rakefile:
+	Bump Loggability dependency to 0.2.
+	[7e3c047cbfba]
+
+2012-05-07  Michael Granger  <ged@FaerieMUD.org>
+
+	* .hgtags:
+	Added tag v0.10.0 for changeset 64cf302354aa
+	[79bc44fab294]
+
+	* .hgsigs:
+	Added signature for changeset 9d9c49d532be
+	[64cf302354aa] [v0.10.0]
+
+	* .rvm.gems, History.rdoc, Manifest.txt, Rakefile, bin/inversion,
+	experiments/benchmark-parser.rb, experiments/demo.rb,
+	experiments/dumptemplate.rb, lib/inversion.rb,
+	lib/inversion/logging.rb, lib/inversion/mixins.rb,
+	lib/inversion/parser.rb, lib/inversion/renderstate.rb,
+	lib/inversion/template.rb, lib/inversion/template/begintag.rb,
+	lib/inversion/template/codetag.rb,
+	lib/inversion/template/commenttag.rb,
+	lib/inversion/template/configtag.rb,
+	lib/inversion/template/elsetag.rb,
+	lib/inversion/template/elsiftag.rb,
+	lib/inversion/template/endtag.rb, lib/inversion/template/fortag.rb,
+	lib/inversion/template/iftag.rb,
+	lib/inversion/template/includetag.rb,
+	lib/inversion/template/node.rb, lib/inversion/template/rescuetag.rb,
+	lib/inversion/template/tag.rb, lib/inversion/template/textnode.rb,
+	lib/inversion/template/unlesstag.rb,
+	lib/inversion/template/yieldtag.rb, spec/inversion/logging_spec.rb,
+	spec/inversion/mixins_spec.rb, spec/inversion_spec.rb,
+	spec/lib/helpers.rb:
+	Convert to Loggability for logging.
+	[9d9c49d532be]
+
+2012-04-24  Michael Granger  <ged@FaerieMUD.org>
+
+	* .hgtags:
+	Added tag v0.9.0 for changeset 27f082ef7985
+	[dd18f3255985]
+
+	* .hgsigs:
+	Added signature for changeset b208fa9154b1
+	[27f082ef7985] [v0.9.0]
+
+	* History.rdoc, lib/inversion.rb:
+	Bump the minor version, update history.
+	[b208fa9154b1]
+
+	* lib/inversion/template.rb, spec/inversion/template_spec.rb:
+	Split the template path out from the config into a class instance
+	variable.
+	[34e2c59df5c7]
+
+2012-04-13  Mahlon E. Smith  <mahlon@martini.nu>
+
+	* manual/src/tags.page:
+	Fix the include tag example in the manual.
+	[b5fcbae36ff2]
+
+2012-04-02  Michael Granger  <ged@FaerieMUD.org>
+
+	* README.rdoc:
+	Update the README to Hoe 3 style.
+	[c13d2db3e0ce]
+
+	* lib/inversion/renderstate.rb:
+	Remove an old FIXME comment.
+	[21eecc7eafca]
+
+2012-04-01  Michael Granger  <ged@FaerieMUD.org>
+
+	* .hgtags:
+	Added tag v0.8.0 for changeset 5d07557a543c
+	[57381a550306]
+
+	* .hgsigs:
+	Added signature for changeset d461a2bf079d
+	[5d07557a543c] [v0.8.0]
+
+	* Manifest.txt, Rakefile:
+	Update the manifest.
+	[d461a2bf079d]
+
+	* History.rdoc, lib/inversion.rb:
+	Bump the minor version, update history.
+	[2b5542ae6bf6]
+
+	* lib/inversion.rb, lib/inversion/logging.rb, lib/inversion/mixins.rb,
+	lib/inversion/utils.rb, spec/inversion/logging_spec.rb,
+	spec/lib/helpers.rb:
+	Move logging code out into a separate file.
+	[0c88a54d2811]
+
+	* lib/inversion/mixins.rb, lib/inversion/template/tag.rb:
+	Add MethodUtilities mixin for declaring singleton attrs
+	[3d40570d7aaf]
+
+2012-03-30  Michael Granger  <ged@FaerieMUD.org>
+
+	* README.rdoc, lib/inversion/renderstate.rb,
+	lib/inversion/template.rb, lib/inversion/template/fortag.rb:
+	Comment out a bunch of slow debugging, update copyright date.
+	[0422221385f6]
+
+	* lib/inversion/renderstate.rb:
+	Handle RenderState::Scope#merge a little more gracefully.
+
+	Instead of trying to merge locals and then rescuing if the merged
+	object doesn't respond to __locals__, implement #to_hash so they're
+	able to be merged directly with a Hash.
+	[a9d68f668e05]
+
+2012-03-29  Michael Granger  <ged@FaerieMUD.org>
+
+	* .hgtags:
+	Added tag v0.7.0 for changeset 33027d3d78c5
+	[46549d0c2f86]
+
+	* .hgsigs:
+	Added signature for changeset a202a2c01b18
+	[33027d3d78c5] [v0.7.0]
+
+	* .rvm.gems:
+	Updated the rvm gemset.
+	[a202a2c01b18]
+
+	* History.rdoc, lib/inversion.rb:
+	Bump the minor version, update history.
+	[92c2961cf986]
+
+	* Rakefile, experiments/renderstate-scope.rb,
+	lib/inversion/renderstate.rb, lib/inversion/template/attrtag.rb,
+	spec/inversion/renderstate_spec.rb,
+	spec/inversion/template/attrtag_spec.rb:
+	Switch to a looser eval strategy for rendering tag bodies.
+
+	The previous method relied on a stack of attributes Hashes in the
+	RenderState; the new method in effect wraps a Binding with a
+	method_missing for translating identifiers that look like locals
+	back into template attributes. This not only allows for template
+	attributes to be used as arguments to the methods called on other
+	attributes, but avoids sharing the Binding of the RenderState with
+	the tags rendered inside it.
+
+	Backwards-compatibility is also maintained via a few aliases and
+	shim methods.
+	[5340e6ffaac3]
+
+2012-03-16  Michael Granger  <ged@FaerieMUD.org>
+
+	* .hgtags:
+	Added tag v0.6.1 for changeset e839621aac29
+	[63e1a917c7ad]
+
+	* .hgsigs:
+	Added signature for changeset 1947a577fae1
+	[e839621aac29] [v0.6.1]
+
+	* History.rdoc, lib/inversion.rb:
+	Bump the patch version and update History.
+	[1947a577fae1]
+
+2012-03-15  Michael Granger  <ged@FaerieMUD.org>
+
+	* experiments/fivefish-profile1.graffle, experiments/fivefish-
+	profile2.graffle, experiments/fivefish-profile3.graffle, experiments
+	/fivefish-profile4.graffle, lib/inversion/renderstate.rb,
+	lib/inversion/template/attrtag.rb,
+	lib/inversion/template/importtag.rb:
+	Comment out some of the slowest debugging and add profile graphs.
+	[c0c5f6da6144]
+
+2012-03-13  Michael Granger  <ged@FaerieMUD.org>
+
+	* .hgtags:
+	Added tag v0.6.0 for changeset c07de9868874
+	[fe598279830a]
+
+	* .hgsigs:
+	Added signature for changeset 2397134edcb3
+	[c07de9868874] [v0.6.0]
+
+	* History.rdoc, lib/inversion.rb:
+	Bump the minor version, update History.
+	[2397134edcb3]
+
+	* lib/inversion/template/fortag.rb, manual/src/tags.page,
+	spec/inversion/template/fortag_spec.rb:
+	Fix a bug with "for" tag iteration over complex data structures
+	[6aa4c3301803]
+
+2012-03-12  Michael Granger  <ged@FaerieMUD.org>
+
+	* .rvm.gems, .rvmrc:
+	Update .rvm files
+	[6fb2d6971357]
+
+2012-03-05  Mahlon E. Smith  <mahlon@martini.nu>
+
+	* lib/inversion/template.rb, spec/inversion/template_spec.rb:
+	Err, no. Lets try that again. 10,000 monkeys pounding away at
+	keyboards are responsible. Or maybe just one.
+	[7c42e6b20c11]
+
+	* lib/inversion/template.rb, manual/src/templates.page,
+	spec/inversion/template_spec.rb:
+	Add a configurable delay for stat() on file-based templates, if your
+	application is auto reloading changes and you're worried about the
+	I/O piling up. "template.reload if template.changed?" -- zesty.
+	[51e63e419025]
+
+2012-02-17  Mahlon E. Smith  <mahlon@martini.nu>
+
+	* .rvmrc, lib/inversion/template.rb, spec/inversion/template_spec.rb:
+	Carry options that are set in the global configuration across to the
+	parser.
+	[3dd947d8e4d9]
+
+2012-02-10  Mahlon E. Smith  <mahlon@martini.nu>
+
+	* .rvm.gems, Rakefile, lib/inversion/template.rb:
+	Guard against nil for Inversion::Template config when merging. Bump
+	rspec version, add rdoc/rspec to the RVM gemlist file.
+	[e9ef24491f97]
+
+2012-01-05  Michael Granger  <ged@FaerieMUD.org>
+
+	* .hgtags:
+	Added tag v0.5.0 for changeset 0f4e4aa78d9c
+	[cc3f12489745]
+
+	* .hgsigs:
+	Added signature for changeset 11fb6ed08994
+	[0f4e4aa78d9c] [v0.5.0]
+
+	* History.rdoc, lib/inversion.rb:
+	Bump the minor version, update history.
+	[11fb6ed08994]
+
+	* lib/inversion/template.rb, spec/inversion/template_spec.rb:
+	Add an option to Inversion::Template.load for setting the encoding
+	of the template source.
+	[f5a4907d65db]
+
+	* .rvm.gems, .rvmrc, .tm_properties, Rakefile:
+	Use RVM to manage development environment
+	[87bccbf27c84]
+
+2011-10-05  Michael Granger  <ged@FaerieMUD.org>
+
+	* README.rdoc:
+	Rewrapped README to 80 columns
+	[dd170965e7d2]
+
+	* .hgtags:
+	Added tag v0.4.0 for changeset 2aa4351a4080
+	[4f33cfcc83e3]
+
+	* .hgsigs:
+	Added signature for changeset 5b1e645db600
+	[2aa4351a4080] [v0.4.0]
+
+	* History.rdoc, Rakefile, lib/inversion.rb:
+	Bumped the minor version, updated the History file.
+	[5b1e645db600]
+
+	* lib/inversion/renderstate.rb, lib/inversion/template.rb,
+	lib/inversion/template/elsetag.rb,
+	lib/inversion/template/elsiftag.rb, lib/inversion/template/iftag.rb:
+	Reworked render toggling so the before/after rendering hooks are
+	called immediately before and after the node *would* have been
+	rendered. This further cleans up the conditional logic, and causes
+	the if/elsif/else tags to behave like you'd expect: the nodes they
+	demark aren't even touched if rendering is disabled.
+
+	Adjusted the other tags to account for the change.
+	[f9fcf011955e]
+
+	* .hgtags:
+	Added tag v0.3.0 for changeset 656f0e2bceea
+	[b1a9d8ac9401]
+
+	* .hgsigs:
+	Added signature for changeset cde501e6764c
+	[656f0e2bceea] [v0.3.0]
+
+	* History.rdoc, lib/inversion.rb:
+	Bump minor version and update History
+	[cde501e6764c]
+
+	* lib/inversion/template/elsiftag.rb, lib/inversion/template/iftag.rb:
+	Fix require loop in if/elsif tags
+	[707d9dc985c9]
+
+	* lib/inversion/mixins.rb:
+	Fixing a problem with HTML escaping of objects other than Strings
+	[434fba9c2f16]
+
+	* lib/inversion/renderstate.rb, lib/inversion/template.rb,
+	spec/inversion/renderstate_spec.rb:
+	Added render timing (Inversion::RenderState#time_elapsed)
+	[ed0bc421632e]
+
+2011-09-27  Michael Granger  <ged@FaerieMUD.org>
+
+	* .hgtags:
+	Added tag v0.2.0 for changeset f570e1eff279
+	[d51e6c51ad60]
+
+	* .hgsigs:
+	Added signature for changeset 9a7cec92550e
+	[f570e1eff279] [v0.2.0]
+
+	* Rakefile:
+	Check history before releases.
+	[9a7cec92550e]
+
+	* Manifest.txt, Rakefile:
+	Fix the Manifest.
+	[ace3bdf0dcd9]
+
+	* .hgtags:
+	Removed tag v0.2.0
+	[fe100c0ff417]
+
+	* .hgtags:
+	Added tag v0.2.0 for changeset 9b57bc8611b2
+	[8f0b8b864b1a]
+
+	* .hgsigs:
+	Added signature for changeset 896d23953a0a
+	[9b57bc8611b2]
+
+	* History.rdoc, lib/inversion.rb:
+	Bumped minor version, updated History for release.
+	[896d23953a0a]
+
+	* lib/inversion/renderstate.rb, lib/inversion/template/begintag.rb,
+	lib/inversion/template/elsetag.rb,
+	lib/inversion/template/elsiftag.rb,
+	lib/inversion/template/escapetag.rb,
+	lib/inversion/template/fortag.rb, lib/inversion/template/iftag.rb,
+	lib/inversion/template/importtag.rb,
+	lib/inversion/template/includetag.rb,
+	lib/inversion/template/textnode.rb,
+	lib/inversion/template/unlesstag.rb,
+	lib/inversion/template/yieldtag.rb,
+	spec/inversion/renderstate_spec.rb,
+	spec/inversion/template/begintag_spec.rb,
+	spec/inversion/template/yieldtag_spec.rb:
+	Refactoring, renaming 'RenderState#tag_state' to '#tag_data'.
+	- Made tags that inherit from containertag super to its #render where
+	possible.
+	- Move YieldTag's render state into RenderState#tag_data
+	- Comment fixes, spec naming consistency fixes
+	[5ec9728367d2]
+
+	* lib/inversion/exceptions.rb, lib/inversion/parser.rb,
+	lib/inversion/template.rb, lib/inversion/template/node.rb,
+	lib/inversion/template/parser.rb, spec/inversion/parser_spec.rb,
+	spec/inversion/template/elsetag_spec.rb,
+	spec/inversion/template/elsiftag_spec.rb,
+	spec/inversion/template/endtag_spec.rb,
+	spec/inversion/template/parser_spec.rb,
+	spec/inversion/template/rescuetag_spec.rb:
+	Rename Inversion::Template::Parser to Inversion::Parser.
+	[d0daee0bf3c6]
+
+2011-09-26  Michael Granger  <ged@FaerieMUD.org>
+
+	* Manifest.txt, lib/inversion/renderstate.rb,
+	lib/inversion/template.rb, lib/inversion/template/attrtag.rb,
+	lib/inversion/template/begintag.rb,
+	lib/inversion/template/conditionaltag.rb,
+	lib/inversion/template/containertag.rb,
+	lib/inversion/template/elsetag.rb,
+	lib/inversion/template/elsiftag.rb,
+	lib/inversion/template/fortag.rb, lib/inversion/template/iftag.rb,
+	lib/inversion/template/tag.rb, lib/inversion/template/unlesstag.rb,
+	spec/inversion/renderstate_spec.rb,
+	spec/inversion/template/attrtag_spec.rb,
+	spec/inversion/template/elsiftag_spec.rb,
+	spec/inversion/template/fortag_spec.rb,
+	spec/inversion/template/iftag_spec.rb,
+	spec/inversion/template/unlesstag_spec.rb:
+	Fixed conditional rendering inside of 'for' tags (fixes #2):
+	- Make the 'for' tag use the append operator of the RenderState
+	instead of accumulating rendered output itself
+	- Added a tag state to the RenderState that tags can use to keep per-
+	render state and pass messages to other tags.
+	- Added a render toggle for conditional render output
+	- Removed the ConditionalTag mixin, which is no longer necessary
+	- Move else/elsif tag logic into the tags themselves
+	[8a4bfb043423]
+
+	* spec/inversion/renderstate_spec.rb:
+	Organized renderstate specs by feature
+	[beb6e6ea06f4]
+
+	* lib/inversion/template/tag.rb, spec/inversion/template/tag_spec.rb:
+	Added a partial fix for the plugin loader so it won't load old
+	plugins. It's only partial because it will load renamed or removed
+	tags from older versions, but it won't ever result in clobbering or
+	redefining legitimate tags. (fixes #1)
+	[0eebd4b78d1a]
+
+2011-09-24  Michael Granger  <ged@FaerieMUD.org>
+
+	* experiments/if-in-for-mintest.rb:
+	Added a minimial test case for the if+for issue (refs #2)
+	[3e8a6b3cae2b]
+
+	* lib/inversion/template/configtag.rb,
+	spec/inversion/template/configtag_spec.rb:
+	Bugfix: Make the config tag set options while rendering, too.
+	[9636249a559e]
+
+2011-09-23  Michael Granger  <ged@FaerieMUD.org>
+
+	* .hgtags:
+	Added tag v0.1.1 for changeset 3aed7786335c
+	[936ad3e2b5b7]
+
+	* .hgsigs:
+	Added signature for changeset d700486aff8c
+	[3aed7786335c] [v0.1.1]
+
+	* History.rdoc, lib/inversion.rb:
+	Bump patch version for release.
+	[d700486aff8c]
+
+	* lib/inversion/renderstate.rb,
+	lib/inversion/template/subscribetag.rb,
+	spec/inversion/template/subscribetag_spec.rb:
+	Work around a bug in the 'subscribe' tag that caused templates to
+	accumulate published nodes.
+	[e745f77580bb]
+
+	* README.rdoc:
+	Move the tag list from the README to the wiki
+	[ddf55e389f5e]
+
+	* .hgtags:
+	Added tag v0.1.0 for changeset a1eb55ebf68a
+	[3c6b8c616671]
+
+	* .hgsigs:
+	Added signature for changeset 5bb3f4fad426
+	[a1eb55ebf68a] [v0.1.0]
+
+	* History.rdoc:
+	Updated the history file.
+	[5bb3f4fad426]
+
+	* lib/inversion.rb:
+	Bump minor version for new release.
+	[dbc96c7b052a]
+
+	* lib/inversion/template.rb, lib/inversion/template/tag.rb,
+	lib/inversion/template/timedeltatag.rb,
+	spec/inversion/template_spec.rb:
+	Added template reloading via Inversion::Template#changed? and
+	#reload.
+	[2abf3629e1dc]
+
+	* lib/inversion/exceptions.rb:
+	Added Inversion::Error and made all exception classes inherit from
+	it.
+	[9827d30cceeb]
+
+2011-09-21  Michael Granger  <ged@FaerieMUD.org>
+
+	* manual/resources/css/manual.css, manual/resources/css/reset.css:
+	Fixing CSS font-face declarations; adding missing reset.css
+	[45f04400b244]
+
+	* .hgtags:
+	Added tag v0.0.4 for changeset 7a412b7ed72b
+	[46bf35f77d74]
+
+	* .hgsigs:
+	Added signature for changeset 3e614ef5c021
+	[7a412b7ed72b] [v0.0.4]
+
+	* .hgtags:
+	Removed tag v0.0.4
+	[3e614ef5c021]
+
+	* Manifest.txt:
+	More manifest updates
+	[906f9d232d80]
+
+	* Manifest.txt:
+	Fixed History path in the Manifest
+	[6d9d4fb86261]
+
+	* .hgtags:
+	Added tag v0.0.4 for changeset 59d9ec43bfda
+	[fd4d1ea02cbc]
+
+	* .hgsigs:
+	Added signature for changeset 27f893edf42a
+	[59d9ec43bfda]
+
+	* History.md, History.rdoc, Rakefile, lib/inversion.rb:
+	Updated History; fixed History name in the Rakefile; Bumped patch
+	version for release.
+	[27f893edf42a]
+
+	* Merged with 1d255d7d60a5
+	[4597a6f63059]
+
+	* lib/inversion/template.rb:
+	Avoid Pathname#expand_path in Inversion::Template.load [profiled]
+	[91cbb0c90b85]
+
+	* Rakefile:
+	Disable the .gemtest task that hoe defines without asking
+	[cf76def7d9cf]
+
+2011-09-16  Michael Granger  <ged@FaerieMUD.org>
+
+	* lib/inversion/template/elsiftag.rb:
+	Fix circular require in inversion/template/elsiftag.rb.
+	[1d255d7d60a5]
+
+	* lib/inversion/template/begintag.rb:
+	Fix shadowed variable in BeginTag#handle_exception.
+	[8424ac44da4a]
+
+2011-08-17  Michael Granger  <ged@FaerieMUD.org>
+
+	* manual/resources/css/manual.css:
+	Fixed font path
+	[986a5c14ec18]
+
+	* manual/resources/css/manual.css,
+	manual/resources/fonts/GraublauWeb.otf,
+	manual/resources/fonts/GraublauWebBold.otf, manual/resources/fonts
+	/Muli-Light.ttf, manual/resources/fonts/Muli-Regular.ttf:
+	Manual CSS tweaks
+	[cae91ab725fa]
+
+2011-08-15  Michael Granger  <ged@FaerieMUD.org>
+
+	* manual/lib/api-filter.rb, manual/src/examples.page,
+	manual/src/gettingstarted.page, manual/src/index.page,
+	manual/src/tags.page, manual/src/templates.page:
+	Merged with e0193bdb57db
+	[2e8da6e2f400]
+
+2011-07-30  Michael Granger  <ged@FaerieMUD.org>
+
+	* .hgignore, Manual Diagrams.graffle, README.rdoc,
+	manual/layouts/default.erb, manual/lib/api-filter.rb, manual/lib
+	/editorial-filter.rb, manual/lib/examples-filter.rb, manual/lib
+	/links-filter.rb, manual/resources/css/manual.css,
+	manual/resources/fonts/GraublauWeb.otf,
+	manual/resources/fonts/GraublauWebBold.otf,
+	manual/resources/fonts/Inconsolata.otf,
+	manual/resources/images/arrow_225_small.png,
+	manual/resources/images/arrow_315_small.png,
+	manual/resources/images/arrow_skip.png, manual/resources/images/cc-
+	by.png, manual/resources/images/dialog-error.png,
+	manual/resources/images/dialog-information.png,
+	manual/resources/images/dialog-warning.png, manual/resources/images
+	/emblem-important.png, manual/resources/images/help.png,
+	manual/resources/images/information.png,
+	manual/resources/images/magnifier.png,
+	manual/resources/images/magnifier_left.png,
+	manual/resources/images/page_white_code.png,
+	manual/resources/images/page_white_copy.png,
+	manual/resources/images/printer.png,
+	manual/resources/images/question.png,
+	manual/resources/images/scripts_code.png,
+	manual/resources/images/wrap.png,
+	manual/resources/images/wrapping.png,
+	manual/resources/js/jquery-1.4.4.min.js,
+	manual/resources/js/manual.js, manual/resources/js/sh.js,
+	manual/resources/swf/clipboard.swf, manual/src/examples.page,
+	manual/src/gettingstarted.page, manual/src/index.page,
+	manual/src/tags.page, manual/src/templates.page:
+	Adding a manual
+	[e0193bdb57db]
+
+2011-08-15  Michael Granger  <ged@FaerieMUD.org>
+
+	* .hgtags:
+	Added tag v0.0.3 for changeset 30fbb9cccd00
+	[e8da683c90ba]
+
+	* .hgsigs:
+	Added signature for changeset f70888949c8c
+	[30fbb9cccd00] [v0.0.3]
+
+	* Rakefile, lib/inversion.rb:
+	Fixed dependency version requirement; bumped patch version.
+	[f70888949c8c]
+
+	* .hgtags:
+	Added tag v0.0.2 for changeset 5477976fd550
+	[1a5c6f90bfaa]
+
+	* .hgsigs:
+	Added signature for changeset 08e77b056c67
+	[5477976fd550] [v0.0.2]
+
+	* lib/inversion.rb:
+	Bump patch version for package-fix release.
+	[08e77b056c67]
+
+	* Manifest.txt:
+	Updated manifest to include all released files.
+	[d62150159d96]
+
+	* .hgtags:
+	Added tag v0.0.1 for changeset 42184d34d45d
+	[e9e43e8d1060]
+
+	* .hgsigs:
+	Added signature for changeset 0bca14d50d50
+	[42184d34d45d] [v0.0.1]
+
+	* Rakefile, manual/lib/api-filter.rb, manual/src/templates.page:
+	Update to hoe-manualgen 0.2.0.
+	[0bca14d50d50]
+
+	* manual/src/examples.page:
+	Stripping expanded Id tag
+	[9613e2c60530]
+
+2011-08-15  Mahlon E. Smith  <mahlon@martini.nu>
+
+	* Branch merge with d3ed941ec7ef
+	[07cde3b1ffba]
+
+	* .hgignore, Manual Diagrams.graffle, README.rdoc, Rakefile,
+	experiments/demo.rb, experiments/templates/demo-content.tmpl,
+	lib/inversion/template/subscribetag.rb, manual/layouts/default.erb,
+	manual/lib/api-filter.rb, manual/lib/editorial-filter.rb, manual/lib
+	/examples-filter.rb, manual/lib/links-filter.rb,
+	manual/resources/css/manual.css,
+	manual/resources/fonts/GraublauWeb.otf,
+	manual/resources/fonts/GraublauWebBold.otf,
+	manual/resources/fonts/Inconsolata.otf,
+	manual/resources/images/arrow_225_small.png,
+	manual/resources/images/arrow_315_small.png,
+	manual/resources/images/arrow_skip.png, manual/resources/images/cc-
+	by.png, manual/resources/images/dialog-error.png,
+	manual/resources/images/dialog-information.png,
+	manual/resources/images/dialog-warning.png, manual/resources/images
+	/emblem-important.png, manual/resources/images/help.png,
+	manual/resources/images/information.png,
+	manual/resources/images/magnifier.png,
+	manual/resources/images/magnifier_left.png,
+	manual/resources/images/page_white_code.png,
+	manual/resources/images/page_white_copy.png,
+	manual/resources/images/printer.png,
+	manual/resources/images/question.png,
+	manual/resources/images/scripts_code.png,
+	manual/resources/images/wrap.png,
+	manual/resources/images/wrapping.png,
+	manual/resources/js/jquery-1.4.4.min.js,
+	manual/resources/js/manual.js, manual/resources/js/sh.js,
+	manual/resources/swf/clipboard.swf, manual/src/examples.page,
+	manual/src/gettingstarted.page, manual/src/index.page,
+	manual/src/tags.page, manual/src/templates.page:
+	Adding a manual.
+	[8d85088f0601]
+
+2011-08-02  Michael Granger  <ged@FaerieMUD.org>
+
+	* lib/inversion/tilt.rb, spec/inversion/template/configtag_spec.rb,
+	spec/inversion/tilt_spec.rb:
+	Fixes for Ruby 1.9.3-preview1.
+	[d3ed941ec7ef]
+
+	* lib/inversion.rb:
+	Add a warning for older versions of Ruby
+	[73c3d8215868]
+
+	* .irbrc:
+	Guard against load errors in .irbrc
+	[663ff80c4a69]
+
+2011-07-30  Michael Granger  <ged@FaerieMUD.org>
+
+	* lib/inversion/tilt.rb:
+	Adding more workaround code for Sinatra
+	[dd6eb02835f4]
+
+	* lib/inversion/template/tag.rb:
+	Commented out some of the spammier debugging in the tag-loading
+	code.
+	[277a65ffa0bf]
+
+2011-07-27  Michael Granger  <ged@FaerieMUD.org>
+
+	* Rakefile, lib/inversion/template/timedeltatag.rb,
+	spec/inversion/mixins_spec.rb,
+	spec/inversion/template/timedeltatag_spec.rb,
+	spec/inversion_spec.rb:
+	Added some specs to improve coverage
+	[5fb307e8605a]
+
+	* Manifest.txt, README.md, README.rdoc, Rakefile, bin/inversion,
+	lib/inversion.rb, lib/inversion/exceptions.rb,
+	lib/inversion/mixins.rb, lib/inversion/monkeypatches.rb,
+	lib/inversion/renderstate.rb, lib/inversion/sinatra.rb,
+	lib/inversion/template.rb, lib/inversion/template/attrtag.rb,
+	lib/inversion/template/codetag.rb,
+	lib/inversion/template/commenttag.rb,
+	lib/inversion/template/conditionaltag.rb,
+	lib/inversion/template/configtag.rb,
+	lib/inversion/template/containertag.rb,
+	lib/inversion/template/defaulttag.rb,
+	lib/inversion/template/elsetag.rb,
+	lib/inversion/template/elsiftag.rb,
+	lib/inversion/template/endtag.rb,
+	lib/inversion/template/escapetag.rb,
+	lib/inversion/template/fortag.rb,
+	lib/inversion/template/importtag.rb,
+	lib/inversion/template/includetag.rb,
+	lib/inversion/template/node.rb, lib/inversion/template/parser.rb,
+	lib/inversion/template/publishtag.rb,
+	lib/inversion/template/rescuetag.rb, lib/inversion/template/tag.rb,
+	lib/inversion/template/textnode.rb,
+	lib/inversion/template/timedeltatag.rb,
+	lib/inversion/template/uriencodetag.rb, lib/inversion/tilt.rb,
+	lib/inversion/utils.rb,
+	spec/inversion/template/timedeltatag_spec.rb:
+	Documentation cleanup, remove some leftover YARD crap
+	[4876bcc91507]
+
+	* spec/inversion/renderstate_spec.rb, spec/inversion/template_spec.rb:
+	Fixed a few things caused by changes for the begin/rescue tag.
+	[1a698b24bc45]
+
+	* README.md, experiments/templates/demo-content.tmpl,
+	lib/inversion/renderstate.rb, lib/inversion/template/begintag.rb,
+	lib/inversion/template/defaulttag.rb,
+	lib/inversion/template/elsetag.rb,
+	lib/inversion/template/rescuetag.rb,
+	spec/inversion/renderstate_spec.rb,
+	spec/inversion/template/begintag_spec.rb,
+	spec/inversion/template/rescuetag_spec.rb:
+	Add the begin/rescue tags.
+	[44db647d7a1a]
+
+2011-07-20  Michael Granger  <ged@FaerieMUD.org>
+
+	* lib/inversion/mixins.rb, lib/inversion/utils.rb:
+	Merging ANSIColor methods into the ColorLogFormatter, which was the
+	only place the code was used.
+	[fb8c209aaa28]
+
+2011-07-20  Mahlon E. Smith  <mahlon@martini.nu>
+
+	* experiments/demo.rb, experiments/templates/demo-content.tmpl,
+	experiments/templates/demo-layout.tmpl,
+	lib/inversion/renderstate.rb, lib/inversion/template/attrtag.rb,
+	lib/inversion/template/defaulttag.rb,
+	spec/inversion/template/defaulttag_spec.rb:
+	Adding the 'default' tag
+	[f95e6a8167c6]
+
+2011-07-18  Michael Granger  <ged@FaerieMUD.org>
+
+	* Manifest.txt, README.md, lib/inversion/renderstate.rb,
+	lib/inversion/template.rb, lib/inversion/template/yieldtag.rb,
+	spec/inversion/renderstate_spec.rb,
+	spec/inversion/template/yieldtag_spec.rb,
+	spec/inversion/template_spec.rb:
+	Adding a 'yield' tag
+	[3f7a7fb440b8]
+
+2011-07-13  Michael Granger  <ged@FaerieMUD.org>
+
+	* lib/inversion/template/timedeltatag.rb,
+	spec/inversion/template/timedeltatag_spec.rb:
+	Fixed the timedelta specs for machines without modern timezones (I
+	think). This should fix the FreeBSD build.
+	[5c2b595a1e35]
+
+	* experiments/demo.rb, experiments/templates/demo-content.tmpl,
+	experiments/templates/demo-layout.tmpl, experiments/templates/demo-
+	menu.tmpl:
+	Adding a demo to experiments/
+	[b1b3b7895982]
+
+	* README.md:
+	Updating the README
+	[50ff925706ee]
+
+	* lib/inversion/template/iftag.rb:
+	Fixed in bug in the 'if' tag that caused conditional nodes to be
+	double-appended, the second time as a stringified array
+	[6485006e82d9]
+
+	* lib/inversion/renderstate.rb:
+	Squelched some spammy debugging
+	[0f134e004f34]
+
+	* lib/inversion/template/timedeltatag.rb,
+	spec/inversion/template/timedeltatag_spec.rb:
+	Added the 'timedelta' tag.
+	[ab8e5eb37b44]
+
+2011-07-12  Michael Granger  <ged@FaerieMUD.org>
+
+	* lib/inversion/template/iftag.rb,
+	spec/inversion/template/iftag_spec.rb:
+	Fixing a bug in the 'if' tag that caused renderstate to recursively
+	try to stringify itself.
+	[106d0d6bd2e1]
+
+	* lib/inversion/renderstate.rb:
+	Adding Inversion::RenderState#inspect and fixing a debug log message
+	[b58a659fc93b]
+
+2011-07-11  Michael Granger  <ged@FaerieMUD.org>
+
+	* .hgignore:
+	Add the package directory to the ignorefile
+	[50b33db61aad]
+
+	* Manifest.txt, bin/inversion:
+	Adding a command-line template-API tool
+	[b2dbb3f0f286]
+
+	* Manifest.txt:
+	Remove accidentally-committed manifest changes from pending patches.
+	[e387d6954154]
+
+2011-07-11  Mahlon E. Smith  <mahlon@martini.nu>
+
+	* lib/inversion/template.rb, lib/inversion/template/textnode.rb,
+	spec/inversion/template/textnode_spec.rb,
+	spec/inversion/template_spec.rb:
+	Adding code to strip extra blank lines from output
+	[2ad072cd87ab]
+
+2011-07-11  Michael Granger  <ged@FaerieMUD.org>
+
+	* lib/inversion/template/attrtag.rb,
+	lib/inversion/template/escapetag.rb, lib/inversion/template/node.rb,
+	lib/inversion/template/pptag.rb,
+	lib/inversion/template/uriencodetag.rb,
+	spec/inversion/template/configtag_spec.rb:
+	Make Inversion::Template::Node#render consistently take a
+	RenderState argument across all tags.
+	[15857a26de10]
+
+	* lib/inversion/template/uriencodetag.rb,
+	spec/inversion/template/uriencodetag_spec.rb:
+	Fixed a bug in the uriencode tag for non-string attributes.
+	[fe52500a302b]
+
+2011-07-11  Mahlon E. Smith  <mahlon@martini.nu>
+
+	* lib/inversion/template/parser.rb,
+	spec/inversion/template/parser_spec.rb:
+	Converted parser to use String#scan instead of StringScanner to make
+	dealing with encoding issues easier
+	[f16cd5fc4255]
+
+2011-07-11  Michael Granger  <ged@FaerieMUD.org>
+
+	* lib/inversion/template/tag.rb:
+	Bugfix for Inversion::Template::Tag#as_comment_body for tags with
+	null bodies.
+	[5579ca88f7ac]
+
+	* Manifest.txt:
+	Updating the Manifest
+	[f2b67bf8db76]
+
+2011-07-08  Michael Granger  <ged@FaerieMUD.org>
+
+	* experiments/benchmark-parser.rb:
+	Adding a little parser-benchmarking utility. Just point it at a
+	directory full of *.tmpl template files.
+	[06af47a12ed6]
+
+	* .hgignore, Rakefile, spec/lib/helpers.rb:
+	Rakefile cleanup/separate coverage from specs
+	- Remove all the release stuff from the Rakefile that's already in
+	hoe-deveiate.
+	- Add a 'coverage' task to enable coverage generation so it doesn't
+	get run by default.
+	[cc53d24b4c56]
+
+2011-07-07  Michael Granger  <ged@FaerieMUD.org>
+
+	* lib/inversion/template/attrtag.rb,
+	spec/inversion/template/attrtag_spec.rb:
+	Adding format syntax to attr with a methodchain
+	[739dfd64abba]
+
+	* lib/inversion/template/parser.rb:
+	Cleaned up parser logging
+	[1799cab39156]
+
+2011-07-07  Mahlon E. Smith  <mahlon@martini.nu>
+
+	* spec/lib/helpers.rb:
+	Add SimpleCov to the Rakefile.
+	[9d871bbfa95d]
+
+2011-07-07  Michael Granger  <ged@FaerieMUD.org>
+
+	* lib/inversion/template/elsetag.rb,
+	spec/inversion/template/elsetag_spec.rb:
+	Fix the ElseTag constructor so it handles creation from the parser.
+	[3d53a4f4a2b4]
+
+	* lib/inversion/template/tag.rb, spec/inversion/template/tag_spec.rb:
+	Fixing a bug in Inversion::Template::Tag.create when given an
+	illegal tagname.
+	[75b323c6bc84]
+
+2011-07-06  Michael Granger  <ged@FaerieMUD.org>
+
+	* Merged with b822cc9b6ff2
+	[f46b1ff133cd]
+
+	* .hgignore, README.md, Rakefile, lib/inversion.rb,
+	lib/inversion/monkeypatches.rb, lib/inversion/renderstate.rb,
+	lib/inversion/template.rb, lib/inversion/template/attrtag.rb,
+	lib/inversion/template/codetag.rb,
+	lib/inversion/template/conditionaltag.rb,
+	lib/inversion/template/configtag.rb,
+	lib/inversion/template/containertag.rb,
+	lib/inversion/template/elsetag.rb,
+	lib/inversion/template/elsiftag.rb,
+	lib/inversion/template/endtag.rb, lib/inversion/template/iftag.rb,
+	lib/inversion/template/importtag.rb,
+	lib/inversion/template/includetag.rb,
+	lib/inversion/template/node.rb, lib/inversion/template/parser.rb,
+	lib/inversion/template/publishtag.rb,
+	lib/inversion/template/subscribetag.rb,
+	lib/inversion/template/tag.rb, lib/inversion/template/unlesstag.rb,
+	spec/inversion/renderstate_spec.rb,
+	spec/inversion/template/attrtag_spec.rb,
+	spec/inversion/template/endtag_spec.rb,
+	spec/inversion/template/iftag_spec.rb,
+	spec/inversion/template/includetag_spec.rb,
+	spec/inversion/template/node_spec.rb,
+	spec/inversion/template/parser_spec.rb,
+	spec/inversion/template/publishtag_spec.rb,
+	spec/inversion/template/subscribetag_spec.rb,
+	spec/inversion/template/tag_spec.rb,
+	spec/inversion/template/unlesstag_spec.rb,
+	spec/inversion/template_spec.rb, spec/lib/helpers.rb:
+	Adding publish/subscribe.
+	- Replaces import/export.
+	- De-Yarded.
+	- Load monkeypatches from the top level.
+	- Inversion::RenderState
+	  * Made it heirarchical to provide access to enclosing template state
+	from tags during rendering.
+	  * Added pub/sub support via #publish and #subscribe methods.
+	  * Pulled a bunch of rendering logic out of Template.
+	  * Deferred stringification until the last possible moment for nodes
+	that need to hang around until the very end of rendering.
+	  * Allow the render destination to be overridden for a block.
+	  * Pulled subtemplate (or any delegated) rendering up out of AttrTag
+	- Made the logic in Inversion::Template::ContainerTag/Inversion::Templ
+	ate::ConditionalTag more consistent.
+	- Extract non-general rendering logic from ConditionalTag into
+	IfTag/UnlessTag.
+	- Changed #before_append/#after_append to *_appending to be more
+	consistent with #before_/#after_rendering
+	- Added a yield to ContainerTag's #initialize for prettier node-tree
+	building.
+	- Pulled subtemplate loading from IncludeTag up into
+	Inversion::Parser::State so it can be used by other tags.
+	- Pulled container-closing up into EndTag.
+	- Inversion::Template::Tag's constructor now strips the body.
+	- Add SimpleCov coverage ()
+	[4d7a94c4cf02]
+
+2011-07-05  Mahlon E. Smith  <mahlon@martini.nu>
+
+	* lib/inversion/template/pptag.rb, spec/inversion/mixins_spec.rb,
+	spec/inversion/template/pptag_spec.rb:
+	Heh, added the pp tag and mixin spec files back from changeset
+	5d244064e631. Whoops.
+	[b822cc9b6ff2]
+
+2011-07-05  Michael Granger  <ged@FaerieMUD.org>
+
+	* Rakefile, lib/inversion/sinatra.rb, lib/inversion/tilt.rb,
+	spec/data/sinatra/hello.inversion, spec/inversion/sinatra_spec.rb,
+	spec/inversion/tilt_spec.rb:
+	Adding support for Sinatra.
+	[a4d57edad888]
+
+	* lib/inversion/template.rb, lib/inversion/template/tag.rb:
+	Fixed some shadowed variable warnings.
+	[5c326f09c56e]
+
+	* Rakefile, experiments/tilt-test.tmpl, lib/inversion/tilt.rb,
+	spec/inversion/tilt_spec.rb:
+	Adding Tilt (https://github.com/rtomayko/tilt) support
+	[e414459913e5]
+
+2011-06-29  Michael Granger  <ged@FaerieMUD.org>
+
+	* spec/inversion/template_spec.rb:
+	Fix omitted spec from the import tag commit
+	[5c8fe7fdc063]
+
+	* lib/inversion/template/importtag.rb:
+	Downgrade accidentally-committed error-level debugging messages
+	[6c0a7d914dc2]
+
+	* lib/inversion/template.rb, lib/inversion/template/importtag.rb,
+	spec/inversion/template/importtag_spec.rb,
+	spec/inversion/template_spec.rb:
+	Added the 'import' tag
+	[1ff17b49fb92]
+
+2011-06-27  Michael Granger  <ged@FaerieMUD.org>
+
+	* lib/inversion/template.rb, spec/inversion/template_spec.rb:
+	Aliased Inversion::Template#render to #to_s
+	[0fdad3807675]
+
+2011-06-27  Mahlon E. Smith  <mahlon@martini.nu>
+
+	* lib/inversion/template/attrtag.rb,
+	spec/inversion/template/attrtag_spec.rb:
+	Added before_rendering/after_rendering hooks to the attr tag
+	[25cef559d995]
+
+2011-06-24  Michael Granger  <ged@FaerieMUD.org>
+
+	* README.md, lib/inversion/template/conditionaltag.rb,
+	lib/inversion/template/elsetag.rb,
+	lib/inversion/template/elsiftag.rb, lib/inversion/template/iftag.rb,
+	lib/inversion/template/parser.rb,
+	lib/inversion/template/unlesstag.rb,
+	spec/inversion/renderstate_spec.rb,
+	spec/inversion/template/elsetag_spec.rb,
+	spec/inversion/template/elsiftag_spec.rb,
+	spec/inversion/template/iftag_spec.rb,
+	spec/inversion/template/parser_spec.rb,
+	spec/inversion/template/unlesstag_spec.rb:
+	Added conditional flow-control tags: if, elsif, else, unless.
+	[75f89b3b112e]
+
+2011-06-24  Mahlon E. Smith  <mahlon@martini.nu>
+
+	* lib/inversion/template/attrtag.rb,
+	spec/inversion/template/attrtag_spec.rb:
+	Make attr tags not stringify their rendered values so overridding
+	implementations of #render can decide for themselves what to do
+	[f8bf76e02432]
+
+2011-06-24  Michael Granger  <ged@FaerieMUD.org>
+
+	* lib/inversion/template/attrtag.rb, lib/inversion/template/fortag.rb,
+	spec/inversion/template/attrtag_spec.rb:
+	Consistency fixes for debugging comment output
+	[5345b7293d41]
+
+2011-06-24  Mahlon E. Smith  <mahlon@martini.nu>
+
+	* lib/inversion/template/endtag.rb,
+	spec/inversion/template/endtag_spec.rb:
+	Made end tag less special-case-ey, and added rendering as a comment
+	so container tags have opening and closing debugging comments
+	[74eef2dfaf25]
+
+2011-06-24  Michael Granger  <ged@FaerieMUD.org>
+
+	* lib/inversion/template/attrtag.rb,
+	spec/inversion/template/attrtag_spec.rb:
+	Rendered values of false are now returned as false instead of the
+	string 'false'
+	[7496f1b5840d]
+
+	* lib/inversion/renderstate.rb, spec/inversion/renderstate_spec.rb:
+	Changed the RenderState's attribute-accessor proxy method to be more
+	flexible
+	[a413d2252282]
+
+	* lib/inversion/template/fortag.rb,
+	spec/inversion/template/fortag_spec.rb:
+	Fixed 'for' in the case where the enumerated attribute isn't set
+	[da438e56caef]
+
+	* spec/inversion/template/calltag_spec.rb.orig:
+	Remove accidentally-committed .orig file
+	[039d8134bd10]
+
+	* lib/inversion/template/fortag.rb,
+	spec/inversion/template/fortag_spec.rb:
+	Fix bug in the 'for' tag
+	[fa20b04ea505]
+
+2011-06-24  Mahlon E. Smith  <mahlon@martini.nu>
+
+	* lib/inversion/template.rb, lib/inversion/template/attrtag.rb,
+	lib/inversion/template/calltag.rb,
+	lib/inversion/template/escapetag.rb,
+	lib/inversion/template/iftag.rb, lib/inversion/template/node.rb,
+	lib/inversion/template/uriencodetag.rb,
+	spec/inversion/renderstate_spec.rb,
+	spec/inversion/template/attrtag_spec.rb,
+	spec/inversion/template/calltag_spec.rb,
+	spec/inversion/template/configtag_spec.rb,
+	spec/inversion/template/iftag_spec.rb:
+	Adding 'if' tag.
+	- Combined 'code' and 'attr' tags; code is now just an alias for
+	'attr'.
+	- Changed the API of Inversion::Template::Node#render to defer
+	stringification of the tag's value to Inversion::Template#render
+	instead of doing it itself. This makes #render easier to super to
+	for purposes other than rendered output (e.g., logical tags,
+	introspection).
+	- Added Inversion::Template::IfTag and spec.
+	[282f18320a55]
+
+2011-06-24  Michael Granger  <ged@FaerieMUD.org>
+
+	* README.md:
+	Added/updated tags
+	[6b7ea4c5c4d8]
+
+2011-06-22  Michael Granger  <ged@faerieMUD.org>
+
+	* README.md, lib/inversion/mixins.rb,
+	lib/inversion/template/escapetag.rb:
+	Added the pp tag; factored out escaping as a mixin so it can be
+	applied to multiple tags.
+	[5d244064e631]
+
+2011-06-22  Mahlon E. Smith  <mahlon@martini.nu>
+
+	* lib/inversion/template/uriencodetag.rb,
+	spec/inversion/template/uriencodetag_spec.rb:
+	Add the <?uriencode ... ?> tag.
+	[a149dfdf20d4]
+
+2011-06-20  Mahlon E. Smith  <mahlon@martini.nu>
+
+	* README.md, lib/inversion/template.rb,
+	lib/inversion/template/escapetag.rb,
+	spec/inversion/template/escapetag_spec.rb:
+	Added the <?escape ... ?> tag, currently just supporting HTML
+	escaping.
+	[0c06f24416bc]
+
+2011-06-20  Michael Granger  <ged@FaerieMUD.org>
+
+	* spec/inversion/template/includetag_spec.rb:
+	Rearranged include tag specs
+	[3bfb053c8dcb]
+
+2011-06-20  Mahlon E. Smith  <mahlon@martini.nu>
+
+	* lib/inversion/template/codetag.rb:
+	Changed tag-pattern methods to support runtime inheritance
+	[a1e3fc29efae]
+
+2011-06-20  Michael Granger  <ged@FaerieMUD.org>
+
+	* README.md:
+	Updated README
+	[d44d7db1901a]
+
+2011-06-20  Mahlon E. Smith  <mahlon@martini.nu>
+
+	* Rakefile, spec/lib/helpers.rb:
+	Updated the deprecated "Rspec" constant to "RSpec".
+	[3bb4dbe2439a]
+
+	* lib/inversion/exceptions.rb, lib/inversion/template.rb,
+	lib/inversion/template/configtag.rb,
+	lib/inversion/template/includetag.rb,
+	lib/inversion/template/node.rb, lib/inversion/template/parser.rb,
+	lib/inversion/template/tag.rb,
+	spec/inversion/template/includetag_spec.rb,
+	spec/inversion/template/node_spec.rb,
+	spec/inversion/template/parser_spec.rb,
+	spec/inversion/template_spec.rb:
+	Added the <?include ...?> tag.
+	[bb7a010fc3c9]
+
+2011-06-17  Mahlon E. Smith  <mahlon@martini.nu>
+
+	* lib/inversion/template.rb, lib/inversion/template/configtag.rb,
+	spec/inversion/template_spec.rb:
+	Untaint template contents if read from a file.
+	[daab04896e58]
+
+	* lib/inversion/template/configtag.rb,
+	spec/inversion/template/configtag_spec.rb:
+	Forgot to add the config files to the repo! :)
+	[390eb0a3a6e4]
+
+	* README.md, lib/inversion/mixins.rb, lib/inversion/renderstate.rb,
+	lib/inversion/template.rb, lib/inversion/template/node.rb,
+	lib/inversion/template/parser.rb,
+	spec/inversion/renderstate_spec.rb,
+	spec/inversion/template/node_spec.rb,
+	spec/inversion/template/parser_spec.rb,
+	spec/inversion/template_spec.rb:
+	- Added the <?config ?> tag.
+	- Changed the config variable 'raise_on_unknown' to
+	'ignore_unknown_tags'.
+	- Added options to the renderstate and parserstate, so the config tag
+	can override.
+	- Added #on_append to the Node class, so nodes have an opportunity to
+	modify the parse state as they are being parsed.
+	[cacdac743e2f]
+
+2011-06-15  Michael Granger  <ged@FaerieMUD.org>
+
+	* lib/inversion/exceptions.rb, lib/inversion/template.rb,
+	spec/inversion/template_spec.rb:
+	Adding configurable exception-handling to the render phase
+	[f336e4928b34]
+
+	* lib/inversion/template/parser.rb:
+	Fixing bug in construction of trailing text node in
+	Inversion::Template::Parser
+	[1eba061a9a82]
+
+	* lib/inversion/renderstate.rb, spec/inversion/renderstate_spec.rb:
+	Use Object#clone instead of #dup to preserve frozen-ness and
+	singleton methods on attribute objects
+	[9020a2fc1db5]
+
+	* lib/inversion/template/commenttag.rb,
+	spec/inversion/template/commenttag_spec.rb:
+	Adding a comment tag
+	[9259443da186]
+
+	* lib/inversion/template/node.rb:
+	Added linnum and colnum readers to Inversion::Template::Node
+	[e35d429943ca]
+
+	* spec/inversion/template/fortag_spec.rb:
+	Aesthetic naming fix
+	[0b6afb5de2bf]
+
+	* lib/inversion/renderstate.rb, lib/inversion/template.rb,
+	lib/inversion/template/attrtag.rb,
+	lib/inversion/template/calltag.rb, lib/inversion/template/fortag.rb,
+	lib/inversion/template/node.rb, spec/inversion/renderstate_spec.rb,
+	spec/inversion/template/calltag_spec.rb.orig,
+	spec/inversion/template/fortag_spec.rb,
+	spec/inversion/template_spec.rb:
+	Adding state to nodes, for attribute overlay
+	[d5a4256b2252]
+
+2011-06-08  Mahlon E. Smith  <mahlon@martini.nu>
+
+	* .hgignore, lib/inversion/template.rb,
+	lib/inversion/template/attrtag.rb,
+	lib/inversion/template/calltag.rb,
+	lib/inversion/template/codetag.rb, lib/inversion/template/fortag.rb,
+	lib/inversion/template/node.rb, lib/inversion/template/parser.rb,
+	lib/inversion/template/tag.rb, lib/inversion/template/textnode.rb,
+	spec/inversion/template/node_spec.rb,
+	spec/inversion/template/parser_spec.rb,
+	spec/inversion/template/tag_spec.rb,
+	spec/inversion/template_spec.rb:
+	Add parse state information to tag objects for improved error
+	reporting. (Line numbers, column number, file name.)
+	[6cb1f242e538]
+
+2011-06-03  Mahlon E. Smith  <mahlon@martini.nu>
+
+	* README.md, lib/inversion/mixins.rb, lib/inversion/template.rb,
+	lib/inversion/template/containertag.rb,
+	lib/inversion/template/endtag.rb, lib/inversion/template/fortag.rb,
+	lib/inversion/template/node.rb, lib/inversion/template/parser.rb,
+	lib/inversion/template/tag.rb,
+	spec/inversion/template/containertag_spec.rb,
+	spec/inversion/template/node_spec.rb,
+	spec/inversion/template/parser_spec.rb:
+	Add scoping to the template parser.
+	[eca7f0156079]
+
+2011-06-01  Mahlon E. Smith  <mahlon@martini.nu>
+
+	* lib/inversion/template/fortag.rb,
+	spec/inversion/template/fortag_spec.rb:
+	Adding initial implementation of the "for" tag
+	[618d9df5f550]
+
+2011-05-27  Mahlon E. Smith  <mahlon@martini.nu>
+
+	* lib/inversion/monkeypatches.rb, lib/inversion/template/codetag.rb,
+	spec/inversion/monkeypatches_spec.rb:
+	Splitting out monkeypatches into a separate file
+	[6ac7016be589]
+
+	* Rakefile, lib/inversion/template/calltag.rb,
+	lib/inversion/template/codetag.rb,
+	spec/inversion/template/calltag_spec.rb:
+	Adding 'call' tag parsing and evaluation
+	[9d22efa61e28]
+
+2011-05-11  Michael Granger  <ged@FaerieMUD.org>
+
+	* .rvmrc, README.md, lib/inversion.rb, lib/inversion/template.rb,
+	lib/inversion/template/attrtag.rb,
+	lib/inversion/template/codetag.rb, lib/inversion/template/node.rb,
+	lib/inversion/template/parser.rb, lib/inversion/template/tag.rb,
+	lib/inversion/template/textnode.rb,
+	spec/inversion/template/attrtag_spec.rb,
+	spec/inversion/template/node_spec.rb,
+	spec/inversion/template/tag_spec.rb,
+	spec/inversion/template/textnode_spec.rb,
+	spec/inversion/template_spec.rb:
+	More work:
+	* Reworked the README to introduce what Inversion *is* first, rather
+	than starting off by explaining what it's *not*. Also: funny
+	examples.
+	* Added Configurability support.
+	* Added output-comment debugging.
+	[e82a185289d3]
+
+2011-04-27  Michael Granger  <ged@FaerieMUD.org>
+
+	* lib/inversion/template/attrtag.rb,
+	spec/inversion/template/attrtag_spec.rb:
+	Got attribute rendering working.
+	[94ec90e08413]
+
+	* README.md:
+	Adding some tentative tag ideas to the README
+	[ee74ef4f58f0]
+
+2011-04-15  Michael Granger  <ged@FaerieMUD.org>
+
+	* README.md, Rakefile, experiments/dumptemplate.rb,
+	lib/inversion/template.rb, lib/inversion/template/parser.rb,
+	lib/inversion/template/textnode.rb,
+	spec/inversion/template/parser_spec.rb,
+	spec/inversion/template_spec.rb:
+	New features:
+	* Inversion::Template:
+	  - Added a ::load method for loading template by path.
+	* Inversion::Template::Parser:
+	  - Added options
+	  - Added option for raising an exception on an unknown tag
+	* Renamed TextNode#source to #body for consistency
+	* Added the beginnings of a command-line utility for dumping the node
+	tree of a template
+	[3ced66ae330d]
+
+2011-04-13  Michael Granger  <ged@FaerieMUD.org>
+
+	* experiments/custom_enumerator.rb, experiments/pi_to_methods.rb,
+	lib/inversion/template.rb, lib/inversion/template/attrtag.rb,
+	lib/inversion/template/calltag.rb,
+	lib/inversion/template/codetag.rb, lib/inversion/template/node.rb,
+	lib/inversion/template/textnode.rb, spec/inversion/template_spec.rb:
+	Added rendering, template attributes, attribute accessors
+	[1ad1e0c91065]
+
+2011-04-12  Michael Granger  <ged@FaerieMUD.org>
+
+	* README.md:
+	Adding Mahlon to the copyright statement in the README
+	[7753d3c9b470]
+
+	* README.md, Rakefile:
+	Merged with dc16cc877dfc, updated README
+	[0fdf3122bf7c]
+
+	* README.md, experiments/erb_scope_bleed.rb:
+	Fleshing out the README, adding scope-bleedover example
+	[f44b597af8bd]
+
+	* lib/inversion.rb:
+	Removing checked-in revision value
+	[773feca505b8]
+
+2011-04-06  Michael Granger  <ged@FaerieMUD.org>
+
+	* .irbrc, Rakefile, experiments/ripper_spike.rb, lib/inversion.rb,
+	lib/inversion/exceptions.rb, lib/inversion/mixins.rb,
+	lib/inversion/template.rb, lib/inversion/template/attr_tag.rb,
+	lib/inversion/template/attrtag.rb,
+	lib/inversion/template/calltag.rb,
+	lib/inversion/template/codetag.rb, lib/inversion/template/node.rb,
+	lib/inversion/template/parser.rb, lib/inversion/template/tag.rb,
+	lib/inversion/template/textnode.rb, lib/inversion/utils.rb,
+	spec/inversion/template/attr_tag_spec.rb,
+	spec/inversion/template/attrtag_spec.rb,
+	spec/inversion/template/calltag_spec.rb,
+	spec/inversion/template/codetag_spec.rb,
+	spec/inversion/template/node_spec.rb,
+	spec/inversion/template/parser_spec.rb,
+	spec/inversion/template/tag_spec.rb,
+	spec/inversion/template/textnode_spec.rb,
+	spec/inversion/template_spec.rb, spec/inversion_spec.rb,
+	spec/lib/constants.rb, spec/lib/helpers.rb:
+	Adding parsed tag bodies.
+	[dc16cc877dfc]
+
+2011-03-18  Michael Granger  <ged@FaerieMUD.org>
+
+	* Merging with b50fef00621b
+	[861b21a30656]
+
+	* lib/inversion.rb:
+	Clearing Revision tag
+	[cdacb5f98f93]
+
+2011-02-07  Mahlon E. Smith  <mahlon@martini.nu>
+
+	* lib/inversion/template.rb, lib/inversion/template/attr_tag.rb,
+	lib/inversion/template/tag.rb,
+	spec/inversion/template/attr_tag_spec.rb,
+	spec/inversion/template/tag_spec.rb,
+	spec/inversion/template_spec.rb:
+	Checkpoint, fleshing out Tags.
+	[4a4fc3f1dc14]
+
+	* lib/inversion.rb, lib/inversion/template.rb,
+	spec/inversion/template_spec.rb, spec/inversion_spec.rb:
+	Totally awesome templating system DONE. Now: profit!
+	[b50fef00621b]
+
+2011-02-04  Mahlon E. Smith  <mahlon@martini.nu>
+
+	* experiments/pi_to_methods.rb, experiments/ripper_spike.rb,
+	lib/inversion.rb:
+	Added experiments
+	[77d6892cd988]
+
+2011-02-02  Mahlon E. Smith  <mahlon@martini.nu>
+
+	* .hgignore, .rvmrc, History.md, Manifest.txt, README.md, Rakefile,
+	lib/inversion.rb, spec/inversion_spec.rb:
+	Project setup.
+	[1020dbbfb52c]
