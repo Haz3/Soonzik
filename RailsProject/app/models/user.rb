@@ -44,8 +44,8 @@ class User < ActiveRecord::Base
   
   has_many :relations_friend, :foreign_key => 'user_id', :class_name => 'Friend'
   has_many :relations_friendly, :foreign_key => 'friend_id', :class_name => 'Friend'
-  has_many :follows, :through => :relations_friend, :source => :user_to
-  has_many :followers, :through => :relations_friendly, :source => :user
+  has_many :friends, :through => :relations_friend, :source => :user_to
+  has_many :frienders, :through => :relations_friendly, :source => :user
   
   # validation
   # message: 'the message'

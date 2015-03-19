@@ -15,7 +15,12 @@ module API
   	# Retrieve all the users
     def index
       begin
-        @returnValue = { content: User.all.as_json(:include => :address, :only => User.miniKey) }
+        @returnValue = { content: User.all.as_json(:include => {
+                                                                  :address => {},
+                                                                  :friends => {},
+                                                                  :follows => {}
+                                                                },
+                                                    :only => User.miniKey) }
         if (@returnValue[:content].size == 0)
           codeAnswer 202
           defineHttp :no_content
@@ -23,6 +28,7 @@ module API
           codeAnswer 200
         end
       rescue
+        puts $!, $@
         codeAnswer 504
         defineHttp :service_unavailable
       end
@@ -42,7 +48,12 @@ module API
           codeAnswer 502
           defineHttp :not_found
         else
-          @returnValue = { content: user.as_json(:include => :address, :only => User.bigKey) }
+          @returnValue = { content: user.as_json(:include => {
+                                                                  :address => {},
+                                                                  :friends => {},
+                                                                  :follows => {}
+                                                                },
+                                                    :only => User.bigKey) }
           codeAnswer 200
         end
       rescue
@@ -132,7 +143,12 @@ module API
           user_object = user_object.offset(@offset.to_i)
         end
 
-        @returnValue = { content: user_object.as_json(:include => :address) }
+        @returnValue = { content: user_object.as_json(:include => {
+                                                                  :address => {},
+                                                                  :friends => {},
+                                                                  :follows => {}
+                                                                },
+                                                    :only => User.miniKey) }
 
         if (user_object.size == 0)
           codeAnswer 202
@@ -282,7 +298,12 @@ module API
           user.address = address                                                if user.address == nil && params.has_key?(:address) && update_address
 
           if ((update_user && update_address))
-            @returnValue = { content: user.as_json(:include => :address, :only => User.miniKey) }
+            @returnValue = { content: user.as_json(:include => {
+                                                                  :address => {},
+                                                                  :friends => {},
+                                                                  :follows => {}
+                                                                },
+                                                    :only => User.miniKey) }
             codeAnswer 201
             defineHttp :created
           else
@@ -301,7 +322,12 @@ module API
           user.address_id = address.id if address != true
           user.skip_confirmation!
           if (user.save!)
-            @returnValue = { content: user.as_json(:include => :address, :only => User.miniKey) }
+            @returnValue = { content: user.as_json(:include => {
+                                                                  :address => {},
+                                                                  :friends => {},
+                                                                  :follows => {}
+                                                                },
+                                                    :only => User.miniKey) }
             codeAnswer 201
             defineHttp :created
           else
