@@ -1,5 +1,5 @@
 #add-email.container
-  %h1 Add Email
+  %h1 Finalisation de l'inscription
   = form_for(current_user, :as => 'user', :url => finish_signup_path(current_user), :html => { role: 'form'}) do |f|
     - if @show_errors && current_user.errors.any?
       #error_explanation
@@ -7,9 +7,21 @@
           = msg
           %br/
     .form-group
-      = f.label :email
       .controls
-        = f.text_field :email, :autofocus => true, :value => '', class: 'form-control input-lg', placeholder: 'Example: email@me.com'
-        %p.help-block Please confirm your email address. No spam.
+        .field
+          = f.label :email
+          = f.text_field :email, :autofocus => true, :value => current_user.email, class: 'form-control input-lg', placeholder: 'Example: email@me.com', disabled: ((current_user.email) ? true : false)
+        .field
+          = f.label :username
+          = f.text_field :username, :autofocus => true, :value => current_user.username, class: 'form-control input-lg'
+        .field
+          = f.label :fname
+          = f.text_field :fname, :autofocus => true, :value => current_user.fname, class: 'form-control input-lg'
+        .field
+          = f.label :lname
+          = f.text_field :lname, :autofocus => true, :value => current_user.lname, class: 'form-control input-lg'
+        .field
+          = f.label :birthday
+          = f.date_select :birthday, :autofocus => true, :value => current_user.birthday, class: 'form-control input-lg'
     .actions
       = f.submit 'Continue', :class => 'btn btn-primary'

@@ -35,23 +35,16 @@ class Music < ActiveRecord::Base
   # * +userList+ - Users with same musics
   #
   def suggest(userList)
-
-
-
-
-
-
-    genresPonderation = {}
     genresPonderation = {}
 
     musicList.each do |music|
       if (music.genres != nil && music.genres.size != 0)
         # For each genre, we change ponderation
         music.genres.each do |g|
-          if (genres.has_key?(g.id))
-            genres[g.id] += 1
+          if (genresPonderation.has_key?(g.id))
+            genresPonderation[g.id] += 1
           else
-            genres[g.id] = 0
+            genresPonderation[g.id] = 0
           end
         end
       end

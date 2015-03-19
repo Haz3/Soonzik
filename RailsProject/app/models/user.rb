@@ -88,18 +88,25 @@ class User < ActiveRecord::Base
       # Get the existing user by email if the provider gives us a verified email.
       # If no verified email was provided we assign a temporary email and ask the
       # user to verify it on the next step via UsersController.finish_signup
-      email_is_verified = auth.info.email && (auth.info.verified || auth.info.verified_email)
+      email_is_verified = auth.info.email && (auth.info.verified || auth.info.verified_email || auth.extra.raw_info.email_verified)
       email = auth.info.email if email_is_verified
       user = User.where(:email => email).first if email
+
+      puts auth
+      #return
 
       # Create the user if it's a new registration
       if user.nil?
         user = User.new(
           username: auth.extra.raw_info.name,
+          fname: (auth.extra.raw_info.first_name) ? auth.extra.raw_info.first_name : nil,
+          lname: (auth.extra.raw_info.last_name) ? auth.extra.raw_info.last_name : nil,
+          image: (auth.info.image) ? auth.info.image : nil,
           #username: auth.info.nickname || auth.uid,
           email: email ? email : "#{TEMP_EMAIL_PREFIX}-#{auth.uid}-#{auth.provider}.com",
           password: Devise.friendly_token
         )
+        puts user
         user.skip_confirmation!
         user.save!
       end
@@ -195,7 +202,6 @@ class User < ActiveRecord::Base
     purchasedMusics = self.getPurchasedMusics()
     music_table_attributes = Music.arel_table   #Account.where(accounts[:id].eq(1).or(accounts[:id].eq(2)))
 
-    
   end
 
   ########
