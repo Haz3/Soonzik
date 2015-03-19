@@ -36,6 +36,14 @@ end
       super resource
     else
 =end
+
+    if (resource.flash != nil)
+      resource.flash.each { |key, value|
+        flash[key] = value
+      }
+      resource.flash = nil
+    end
+
       finish_signup_path(resource)
 =begin
     end

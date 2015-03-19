@@ -10,10 +10,10 @@
       .controls
         .field
           = f.label :email
-          = f.text_field :email, :autofocus => true, :value => current_user.email, class: 'form-control input-lg', placeholder: 'Example: email@me.com', disabled: ((current_user.email) ? true : false)
+          = f.text_field :email, :autofocus => true, :value => UsersHelper.validate_email_for_oauth(current_user), class: 'form-control input-lg', placeholder: 'Example: email@me.com', disabled: ((UsersHelper.validate_email_for_oauth(current_user) != "") ? true : false)
         .field
           = f.label :username
-          = f.text_field :username, :autofocus => true, :value => current_user.username, class: 'form-control input-lg'
+          = f.text_field :username, :autofocus => true, :value => UsersHelper.validate_username_for_oauth(current_user), class: 'form-control input-lg'
         .field
           = f.label :fname
           = f.text_field :fname, :autofocus => true, :value => current_user.fname, class: 'form-control input-lg'

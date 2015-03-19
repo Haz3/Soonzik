@@ -4,8 +4,12 @@
 class User < ActiveRecord::Base
   before_validation :beforeCreate, on: :create
 
+  attr_accessor :flash
+
   TEMP_EMAIL_PREFIX = 'change@me'
   TEMP_EMAIL_REGEX = /\Achange@me/
+  TEMP_USERNAME_PREFIX = 'change-me'
+  TEMP_USERNAME_REGEX = /\Achange-me/
 
   # Include default devise modules. Others available are:
   # :lockable, :timeoutable
@@ -54,9 +58,9 @@ class User < ActiveRecord::Base
 #  validates :terms_of_service, acceptance: true
   validates :username, length: {
     minimum: 3,
-    maximum: 20,
-    too_short: "must have at least %{count} words",
-    too_long: "must have at most %{count} words"
+    maximum: 40,
+    too_short: "must have at least %{count} letters",
+    too_long: "must have at most %{count} letters"
   }
   validates :idAPI, length: { is: 40 }
   validates :secureKey, length: { is: 64 }
@@ -68,6 +72,7 @@ class User < ActiveRecord::Base
   validates :password, presence: true, on: :created
 
   validates_format_of :email, :without => TEMP_EMAIL_REGEX, on: :update
+  validates_format_of :username, :without => TEMP_USERNAME_REGEX, on: :update
 
 
   # for OAuth interpretation
@@ -92,9 +97,6 @@ class User < ActiveRecord::Base
       email = auth.info.email if email_is_verified
       user = User.where(:email => email).first if email
 
-      puts auth
-      #return
-
       # Create the user if it's a new registration
       if user.nil?
         user = User.new(
@@ -106,10 +108,18 @@ class User < ActiveRecord::Base
           email: email ? email : "#{TEMP_EMAIL_PREFIX}-#{auth.uid}-#{auth.provider}.com",
           password: Devise.friendly_token
         )
-        puts user
         user.skip_confirmation!
-        user.save!
+        if (!user.save)
+          user.email = "#{TEMP_EMAIL_PREFIX}-#{auth.uid}-#{auth.provider}.com" if user.errors[:email].any?
+          user.username = "#{TEMP_USERNAME_PREFIX}-#{user.username}" if user.errors[:username].any?
+          if (!user.save)
+            user.errors.messages.each { |errorSym, errorValue|
+              @flash[errorSym] = errorValue
+            }
+          end
+        end
       end
+      signed_in_resource = user
     end
 
     # Associate the identity with the user if needed
@@ -123,6 +133,11 @@ class User < ActiveRecord::Base
   # Is there the default email address or not ?
   def email_verified?
     self.email && self.email !~ TEMP_EMAIL_REGEX
+  end
+
+  # Is there the default username or not ?
+  def username_verified?
+    self.username && self.username !~ TEMP_USERNAME_REGEX
   end
 
   # Recreate an idAPI and so the secureKey associated
