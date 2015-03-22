@@ -4,6 +4,12 @@ class UsersController < ApplicationController
   # GET /users/:id.:format
   def show
     # authorize! :read, @user
+    @viewArtist = false
+    if (@user.isArtist?)
+      @viewArtist = true
+      @topFive = @user.giveTopFive
+      @packsImplicated = @user.givePack
+    end
   end
 
   # GET /users/:id/edit

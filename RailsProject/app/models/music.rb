@@ -28,6 +28,11 @@ class Music < ActiveRecord::Base
     [:id, :title, :duration, :price, :file]
   end
 
+  # Get the average of notes
+  def getAverageNote
+    return MusicNote.where(music_id: self.id).average(:value).to_f
+  end
+
   # Suggestion logic
   #
   # ==== Attributes

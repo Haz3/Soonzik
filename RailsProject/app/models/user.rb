@@ -224,6 +224,35 @@ class User < ActiveRecord::Base
 
   end
 
+  # Check is the user is an artist
+  def isArtist?
+    self.groups.each { |group|
+      if (group.name == "Artist")
+        return true
+      end
+    }
+    return false
+  end
+
+  # Give the 5 most popular track of an artist
+  def giveTopFive
+    allMusics = []
+
+    self.albums.each { |album|
+      album.musics.each { |music|
+        allMusics << { note: music.getAverageNote, object: music }
+      }
+    }
+
+    allMusics.sort! { |a,b| a.note <=> b.note }
+    return allMusics[0..5]
+  end
+
+  # Give the pack where the user has its albums
+  def givePack
+    return Pack.joins(albums: [:user]).where(users: {id: self.id})
+  end
+
   ########
 
   private
