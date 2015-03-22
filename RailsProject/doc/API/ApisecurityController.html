@@ -109,7 +109,10 @@
 		</section>
 
 		<section class="description">
-					</section>
+			
+<p>The class parent of every controller of the <a href="../API.html">API</a>.
+It provides security and some default stuff</p>
+		</section>
 
 				<section id="5Buntitled-5D" class="documentation-section">
 			
@@ -133,7 +136,9 @@
 										</header>
 
 					<div class="method-description">
-																
+											<p>We create a list of code and initialize the returnValue and the security
+boolean. Usually a controller has no constructor but in this case it&#39;s
+for the heritance.</p>					
 											<div class="method-source-code" id="new-source">
 							<pre class="prettyprint linenums"><code 
 								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/apisecurity_controller.rb, line 12</span>
@@ -180,7 +185,25 @@
 										</header>
 
 					<div class="method-description">
-																
+											<p>To signin and get the information you need for the authentication Route :
+/login/:email/:password</p>
+
+<h4 id="method-i-login-label-Options">Options<span><a href="#method-i-login-label-Options">&para;</a> <a href="#top">&uarr;</a></span></h4>
+<ul><li>
+<p><code>email</code> - The email of the user</p>
+</li><li>
+<p><code>password</code> - The password encrypted by the bcrypt algorithm</p>
+</li></ul>
+
+<h5 id="method-i-login-label-HTTP+VALUE">HTTP VALUE<span><a href="#method-i-login-label-HTTP+VALUE">&para;</a> <a href="#top">&uarr;</a></span></h5>
+<ul><li>
+<p><code>200</code> - In case of success, return the user with ALL the field</p>
+</li><li>
+<p><code>404</code> - Can&#39;t get an user with the email given or the
+combinaison is false</p>
+</li><li>
+<p><code>503</code> - Error from server</p>
+</li></ul>					
 											<div class="method-source-code" id="login-source">
 							<pre class="prettyprint linenums"><code 
 								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/apisecurity_controller.rb, line 74</span>
@@ -226,7 +249,23 @@
 										</header>
 
 					<div class="method-description">
-																
+											<p>Check if a facebook user is authenticate and retrive its informations</p>
+
+<p>DEPRECATED FOR THE MOMENT</p>
+
+<p>Route : /loginFB/:token</p>
+
+<h4 id="method-i-loginFB-label-Options">Options<span><a href="#method-i-loginFB-label-Options">&para;</a> <a href="#top">&uarr;</a></span></h4>
+<ul><li>
+<p><code>token</code> - Token Facebook</p>
+</li><li>
+<p><code>email</code> - GET variable -&gt; The email of the user who provides
+the token</p>
+</li></ul>
+
+<h5 id="method-i-loginFB-label-HTTP+VALUE">HTTP VALUE<span><a href="#method-i-loginFB-label-HTTP+VALUE">&para;</a> <a href="#top">&uarr;</a></span></h5>
+
+<p>We don&#39;t care, it&#39;s deprecated</p>					
 											<div class="method-source-code" id="loginFB-source">
 							<pre class="prettyprint linenums"><code 
 								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/apisecurity_controller.rb, line 118</span>
@@ -279,14 +318,28 @@
 										</header>
 
 					<div class="method-description">
-																
+											<p>Provide a token relative to the user who asks Route : /getKey/:user_id</p>
+
+<h4 id="method-i-provideKey-label-Options">Options<span><a href="#method-i-provideKey-label-Options">&para;</a> <a href="#top">&uarr;</a></span></h4>
+<ul><li>
+<p><code>id</code> - The id of the user who makes the transaction</p>
+</li></ul>
+
+<h5 id="method-i-provideKey-label-HTTP+VALUE">HTTP VALUE<span><a href="#method-i-provideKey-label-HTTP+VALUE">&para;</a> <a href="#top">&uarr;</a></span></h5>
+<ul><li>
+<p><code>200</code> - In case of success, return { key: token_user }</p>
+</li><li>
+<p><code>404</code> - Can&#39;t get an user with the id given</p>
+</li><li>
+<p><code>503</code> - Error from server</p>
+</li></ul>					
 											<div class="method-source-code" id="provideKey-source">
 							<pre class="prettyprint linenums"><code 
 								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/apisecurity_controller.rb, line 42</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">provideKey</span>
-  <span class="ruby-keyword">if</span> (<span class="ruby-keyword">defined?</span>(<span class="ruby-ivar">@user_id</span>))
+  <span class="ruby-keyword">if</span> (<span class="ruby-keyword">defined?</span>(<span class="ruby-ivar">@id</span>))
     <span class="ruby-keyword">begin</span>
-      <span class="ruby-identifier">u</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">find_by_id</span>(<span class="ruby-ivar">@user_id</span>)
+      <span class="ruby-identifier">u</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">find_by_id</span>(<span class="ruby-ivar">@id</span>)
       <span class="ruby-ivar">@returnValue</span> = {<span class="ruby-identifier">key</span><span class="ruby-operator">:</span> <span class="ruby-identifier">u</span>.<span class="ruby-identifier">idAPI</span>}
       <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">200</span>
     <span class="ruby-keyword">rescue</span>
@@ -323,7 +376,39 @@
 										</header>
 
 					<div class="method-description">
-																
+											<p>Check if the secure key corresponds to the key of the selected user. This
+key is the hash between the token and the salt user.</p>
+
+<h4 id="method-i-checkKey-label-Options">Options<span><a href="#method-i-checkKey-label-Options">&para;</a> <a href="#top">&uarr;</a></span></h4>
+<ul><li>
+<p><code>user_id</code> - The id of the user who makes the transaction</p>
+</li><li>
+<p><code>secureKey</code> - The key provided to etablish a secure transaction</p>
+</li></ul>
+
+<h4 id="method-i-checkKey-label-Example">Example<span><a href="#method-i-checkKey-label-Example">&para;</a> <a href="#top">&uarr;</a></span></h4>
+
+<pre># Assuming we have in database a user like this :
+#&lt;User&gt; -&gt; id = 9
+        -&gt; idAPI = &quot;6789&quot;
+        -&gt; salt = &quot;12345&quot;
+        -&gt; securekey = SHA256(salt + idAPI)
+So if I provide :
+        -&gt; user_id = 9
+        -&gt; secureKey = SHA256(&quot;123456789&quot;)
+The access is granted and secure.
+If the hash is not good, the access is not granted.</pre>
+
+<h5 id="method-i-checkKey-label-HTTP+VALUE">HTTP VALUE<span><a href="#method-i-checkKey-label-HTTP+VALUE">&para;</a> <a href="#top">&uarr;</a></span></h5>
+
+<p>It is not a route so you can&#39;t query it, but if an issue happend, it
+can set the http code</p>
+<ul><li>
+<p><code>401</code> - The combination user_id / secureKey doesn&#39;t match,
+the access is not granted</p>
+</li><li>
+<p><code>503</code> - Error from server</p>
+</li></ul>					
 											<div class="method-source-code" id="checkKey-source">
 							<pre class="prettyprint linenums"><code 
 								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/apisecurity_controller.rb, line 182</span>
@@ -360,7 +445,14 @@
 										</header>
 
 					<div class="method-description">
-																
+											<p>Put information about the answer (the code and the corresponding message)
+in the return value. If a code has already been assigned, we don&#39;t
+modify it.</p>
+
+<h4 id="method-i-codeAnswer-label-Attributes">Attributes<span><a href="#method-i-codeAnswer-label-Attributes">&para;</a> <a href="#top">&uarr;</a></span></h4>
+<ul><li>
+<p><code>index</code> - The index of the answer information</p>
+</li></ul>					
 											<div class="method-source-code" id="codeAnswer-source">
 							<pre class="prettyprint linenums"><code 
 								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/apisecurity_controller.rb, line 219</span>
@@ -392,7 +484,13 @@
 										</header>
 
 					<div class="method-description">
-																
+											<p>Set the HTTP status If a code has already been assigned, we don&#39;t
+modify it.</p>
+
+<h4 id="method-i-defineHttp-label-Attributes">Attributes<span><a href="#method-i-defineHttp-label-Attributes">&para;</a> <a href="#top">&uarr;</a></span></h4>
+<ul><li>
+<p><code>sym</code> - The symbol of the http code</p>
+</li></ul>					
 											<div class="method-source-code" id="defineHttp-source">
 							<pre class="prettyprint linenums"><code 
 								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/apisecurity_controller.rb, line 241</span>
@@ -416,7 +514,7 @@
 										</header>
 
 					<div class="method-description">
-																
+											<p>Render the value to return in json</p>					
 											<div class="method-source-code" id="sendJson-source">
 							<pre class="prettyprint linenums"><code 
 								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/apisecurity_controller.rb, line 203</span>
@@ -458,6 +556,7 @@
 			<li><a href="../API.html">API</a></li>
 			<li><a href="../API/AlbumsController.html">API::AlbumsController</a></li>
 			<li><a href="../API/ApiController.html">API::ApiController</a></li>
+			<li><a href="../API/ApisecurityController.html">API::ApisecurityController</a></li>
 			<li><a href="../API/BattlesController.html">API::BattlesController</a></li>
 			<li><a href="../API/CartsController.html">API::CartsController</a></li>
 			<li><a href="../API/ConcertsController.html">API::ConcertsController</a></li>

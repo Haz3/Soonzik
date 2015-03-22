@@ -1,12 +1,12 @@
 require 'open-uri'
 
 module API
-  #---
+  #
   # The class parent of every controller of the API.
   # It provides security and some default stuff
   class ApisecurityController < ApiController
 
-    #---
+    #
     # We create a list of code and initialize the returnValue and the security boolean.
     # Usually a controller has no constructor but in this case it's for the heritance.
     def initialize
@@ -25,7 +25,7 @@ module API
       @code[505] = {code: 505, message: "UpdateError"}
     end
 
-    #---
+    #
     # Provide a token relative to the user who asks
     # Route : /getKey/:user_id
     #
@@ -56,7 +56,7 @@ module API
       sendJson
     end
 
-    #---
+    #
     # To signin and get the information you need for the authentication
     # Route : /login/:email/:password
     # 
@@ -99,7 +99,7 @@ module API
       sendJson
     end
 
-    #---
+    #
     # Check if a facebook user is authenticate and retrive its informations
     # 
     # DEPRECATED FOR THE MOMENT
@@ -151,7 +151,7 @@ module API
     end
 
 protected
-    #---
+    #
     # Check if the secure key corresponds to the key of the selected user.
     # This key is the hash between the token and the salt user.
     #
@@ -198,7 +198,7 @@ protected
       end
     end
 
-    #---
+    #
     # Render the value to return in json
     def sendJson
       codeAnswer(202) if defined?(@returnValue[:content]) && defined?(@returnValue[:content].size) && @returnValue[:content].size == 0
@@ -208,7 +208,7 @@ protected
       end
     end
 
-    #---
+    #
     # Put information about the answer (the code and the corresponding message) in the return value.
     # If a code has already been assigned, we don't modify it.
     #
@@ -230,7 +230,7 @@ protected
       end
     end
 
-    #---
+    #
     # Set the HTTP status
     # If a code has already been assigned, we don't modify it.
     #

@@ -613,11 +613,15 @@ profile</p>
 <p><code>201</code> - In case of success, return the new user including its
 address, friends and follow.</p>
 </li><li>
+<p><code>401</code> - It is not a secured transaction</p>
+</li><li>
+<p><code>404</code> - Can&#39;t find the user, the id is probably wrong</p>
+</li><li>
 <p><code>503</code> - Error from server</p>
 </li></ul>					
 											<div class="method-source-code" id="update-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/users_controller.rb, line 301</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/users_controller.rb, line 303</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">update</span>
   <span class="ruby-keyword">begin</span>
     <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@security</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-ivar">@id</span> <span class="ruby-operator">==</span> <span class="ruby-ivar">@user_id</span>)
@@ -672,6 +676,7 @@ address, friends and follow.</p>
 			<li><a href="../API.html">API</a></li>
 			<li><a href="../API/AlbumsController.html">API::AlbumsController</a></li>
 			<li><a href="../API/ApiController.html">API::ApiController</a></li>
+			<li><a href="../API/ApisecurityController.html">API::ApisecurityController</a></li>
 			<li><a href="../API/BattlesController.html">API::BattlesController</a></li>
 			<li><a href="../API/CartsController.html">API::CartsController</a></li>
 			<li><a href="../API/ConcertsController.html">API::ConcertsController</a></li>

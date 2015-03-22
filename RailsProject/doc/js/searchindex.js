@@ -21,7 +21,7 @@ var SearchIndex =
 	{
 		"name": "API::ApisecurityController",
 		"link": "API/ApisecurityController.html",
-		"snippet": "",
+		"snippet": "<p>The class parent of every controller of the API. It provides security and\nsome default stuff\n",
 		"type": "normalclass"
 	},
 	{
@@ -735,7 +735,7 @@ var SearchIndex =
 	{
 		"name": "index",
 		"link": "API/AlbumsController.html#method-i-index",
-		"snippet": "",
+		"snippet": "<p>Retrieve all the albums\n<p>Route : /albums\n<p>HTTP VALUE\n",
 		"type": "anymethod"
 	},
 	{
@@ -759,55 +759,55 @@ var SearchIndex =
 	{
 		"name": "setParamToObj",
 		"link": "API/ApiController.html#method-i-setParamToObj",
-		"snippet": "",
+		"snippet": "<p>Transform the params into attributes and create the getter to access it\n<p>Options\n<p><code>params</code> - The GET or POST …\n",
 		"type": "anymethod"
 	},
 	{
 		"name": "new",
 		"link": "API/ApisecurityController.html#method-c-new",
-		"snippet": "",
+		"snippet": "<p>We create a list of code and initialize the returnValue and the security\nboolean. Usually a controller …\n",
 		"type": "anymethod"
 	},
 	{
 		"name": "provideKey",
 		"link": "API/ApisecurityController.html#method-i-provideKey",
-		"snippet": "",
+		"snippet": "<p>Provide a token relative to the user who asks Route : /getKey/:user_id\n<p>Options\n<p><code>id</code> - The id of the user …\n",
 		"type": "anymethod"
 	},
 	{
 		"name": "login",
 		"link": "API/ApisecurityController.html#method-i-login",
-		"snippet": "",
+		"snippet": "<p>To signin and get the information you need for the authentication Route :\n/login/:email/:password\n<p>Options …\n",
 		"type": "anymethod"
 	},
 	{
 		"name": "loginFB",
 		"link": "API/ApisecurityController.html#method-i-loginFB",
-		"snippet": "",
+		"snippet": "<p>Check if a facebook user is authenticate and retrive its informations\n<p>DEPRECATED FOR THE MOMENT\n<p>Route : …\n",
 		"type": "anymethod"
 	},
 	{
 		"name": "checkKey",
 		"link": "API/ApisecurityController.html#method-i-checkKey",
-		"snippet": "",
+		"snippet": "<p>Check if the secure key corresponds to the key of the selected user. This\nkey is the hash between the …\n",
 		"type": "anymethod"
 	},
 	{
 		"name": "sendJson",
 		"link": "API/ApisecurityController.html#method-i-sendJson",
-		"snippet": "",
+		"snippet": "<p>Render the value to return in json\n",
 		"type": "anymethod"
 	},
 	{
 		"name": "codeAnswer",
 		"link": "API/ApisecurityController.html#method-i-codeAnswer",
-		"snippet": "",
+		"snippet": "<p>Put information about the answer (the code and the corresponding message)\nin the return value. If a code …\n",
 		"type": "anymethod"
 	},
 	{
 		"name": "defineHttp",
 		"link": "API/ApisecurityController.html#method-i-defineHttp",
-		"snippet": "",
+		"snippet": "<p>Set the HTTP status If a code has already been assigned, we don&#39;t\nmodify it.\n<p>Attributes\n<p><code>sym</code> - The symbol …\n",
 		"type": "anymethod"
 	},
 	{

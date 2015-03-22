@@ -10,7 +10,6 @@ module API
   class AlbumsController < ApisecurityController
   	before_action :checkKey, only: [:addcomment]
 
-    #---
     #
     # Retrieve all the albums
     #
