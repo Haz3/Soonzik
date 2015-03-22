@@ -12,9 +12,17 @@ module API
 
   	# Give a specific object by its id
     #
+    # Route : /notifications/:id
+    #
     # ==== Options
     # 
-    # * +:id+ - The id of the specific notification
+    # * +id+ - The id of the specific notification
+    # 
+    # ===== HTTP VALUE
+    # 
+    # - +200+ - In case of success, return a notification including its user
+    # - +404+ - Can't find the notification, the id is probably wrong
+    # - +503+ - Error from server
     # 
     def show
       begin
@@ -42,11 +50,19 @@ module API
 
     # Save a new object Notification. For more information on the parameters, check at the model
     # 
+    # Route : /notifications/save
+    #
     # ==== Options
     # 
     # * +:notification [user_id]+ - Id of the user who has the notification
     # * +:notification [link]+ - The link where the notification redirect without the http://dns.com (to be usefull by the smartphone applications)
     # * +:notification [description]+ - The text of the notification
+    # 
+    # ===== HTTP VALUE
+    # 
+    # - +201+ - In case of success, return a notification including its user
+    # - +401+ - It is not a secured transaction
+    # - +503+ - Error from server
     # 
     def save
       begin
@@ -76,20 +92,28 @@ module API
 
     # Give a part of the notifications depending of the filter passed into parameter
     #
+    # Route : /notifications/find
+    #
     # ==== Options
     # 
-    # * +:attribute [attribute_name]+ - If you want a column equal to a specific value
-    # * +:order_by_asc[]+ - If you want to order by ascending by values
-    # * +:order_by_desc[]+ - If you want to order by descending by values
-    # * +:group_by[]+ - If you want to group by field
-    # * +:limit+ - The number of row you want
-    # * +:offset+ - The offset of the array
+    # * +attribute [attribute_name]+ - If you want a column equal to a specific value
+    # * +order_by_asc []+ - If you want to order by ascending by values
+    # * +order_by_desc []+ - If you want to order by descending by values
+    # * +group_by []+ - If you want to group by field
+    # * +limit+ - The number of row you want
+    # * +offset+ - The offset of the array
     # 
     # ==== Example
     #
     #     http://api.soonzik.com/notifications/find?attribute[user_id]=1&order_by_desc[]=user_id&group_by[]=user_id
     #     Note : By default, if you precise no attribute, it will take every row
     #
+    # ===== HTTP VALUE
+    # 
+    # - +200+ - In case of success, return a list of notifications including its user
+    # - +204+ - The list is empty, there is probably too much filter
+    # - +503+ - Error from server
+    # 
     def find
       begin
         if (!@security)
@@ -179,7 +203,13 @@ module API
     #
     # ==== Options
     # 
-    # * +:id+ - The id of the specific notification
+    # * +id+ - The id of the specific notification
+    # 
+    # ===== HTTP VALUE
+    # 
+    # - +204+ - In case of success, return nothing
+    # - +401+ - It is not a secured transaction
+    # - +503+ - Error from server
     # 
     def destroy
       begin

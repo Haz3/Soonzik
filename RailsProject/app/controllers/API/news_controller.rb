@@ -11,6 +11,15 @@ module API
     before_action :checkKey, only: [:addcomment]
 
   	# Retrieve all the news
+    #
+    # Route : /news
+    #
+    # ===== HTTP VALUE
+    # 
+    # - +200+ - In case of success, return a list of news including its user (the author), the newstexts, the attachments and the tags
+    # - +204+ - The list is empty
+    # - +503+ - Error from server
+    # 
     def index
       begin
         @returnValue = { content: News.all.as_json(:include => {
@@ -34,9 +43,17 @@ module API
 
   	# Give a specific object by its id
     #
+    # Route : /news/:id
+    #
     # ==== Options
     # 
-    # * +:id+ - The id of the specific news
+    # * +id+ - The id of the specific news
+    # 
+    # ===== HTTP VALUE
+    # 
+    # - +200+ - In case of success, return a news including its user (the author), the newstacts, the attachments
+    # - +404+ - Can't find the news, the id is probably wrong
+    # - +503+ - Error from server
     # 
     def show
       begin
@@ -62,20 +79,28 @@ module API
 
     # Give a part of the news depending of the filter passed into parameter
     #
+    # Route : /news/find
+    #
     # ==== Options
     # 
-    # * +:attribute [attribute_name]+ - If you want a column equal to a specific value
-    # * +:order_by_asc[]+ - If you want to order by ascending by values
-    # * +:order_by_desc[]+ - If you want to order by descending by values
-    # * +:group_by[]+ - If you want to group by field
-    # * +:limit+ - The number of row you want
-    # * +:offset+ - The offset of the array
+    # * +attribute [attribute_name]+ - If you want a column equal to a specific value
+    # * +order_by_asc []+ - If you want to order by ascending by values
+    # * +order_by_desc []+ - If you want to order by descending by values
+    # * +group_by []+ - If you want to group by field
+    # * +limit+ - The number of row you want
+    # * +offset+ - The offset of the array
     # 
     # ==== Example
     #
     #     http://api.soonzik.com/news/find?attribute[type]=1&order_by_desc[]=date&group_by[]=date
     #     Note : By default, if you precise no attribute, it will take every row
     #
+    # ===== HTTP VALUE
+    # 
+    # - +200+ - In case of success, return a list of news including its user (the author), the newstacts, the attachments
+    # - +204+ - The list is empty, there is probably too much filter
+    # - +503+ - Error from server
+    # 
     def find
       begin
         new_object = nil
@@ -163,13 +188,19 @@ module API
 
     # Add a comment to a specific news. Need to be a secure transaction.
     #
+    # Route : /news/addcomment/:id
+    #
     # ==== Options
     #
-    # * +:security+ - If it's a secure transaction, this variable from ApiSecurity (the parent) is true
-    # * +:user_id [implicit]+ - It is required for the security so we can access it
     # * +:id+ - The id of the news where is the comment
     # * +:content+ - The content of the comment
     #
+    # ===== HTTP VALUE
+    # 
+    # - +201+ - In case of success, return nothing
+    # - +404+ - Can't find the news, the id is probably wrong
+    # - +503+ - Error from server
+    # 
     def addcomment
       begin
         if (@security)

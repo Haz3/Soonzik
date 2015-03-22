@@ -11,10 +11,20 @@ module API
     before_action :checkKey, only: [:save]
 
   	# Retrieve all the listenings
+    #
+    # Route : /listenings
+    #
+    # ===== HTTP VALUE
+    # 
+    # - +200+ - In case of success, return a list of listening object including its user and music
+    # - +204+ - The list is empty
+    # - +503+ - Error from server
+    # 
     def index
       begin
         @returnValue = { content: Listening.all.as_json(:include => {
-                                                                      :user => { :only => User.miniKey }
+                                                                      :user => { :only => User.miniKey },
+                                                                      :music => { :only => Music.miniKey }
                                                                     }) }
         if (@returnValue[:content].size == 0)
           codeAnswer 202
@@ -31,9 +41,17 @@ module API
 
   	# Give a specific object by its id
     #
+    # Route : /listenings/:id
+    #
     # ==== Options
     # 
-    # * +:id+ - The id of the specific listening
+    # * +id+ - The id of the specific listening
+    # 
+    # ===== HTTP VALUE
+    # 
+    # - +200+ - In case of success, return a listening object including its user and music
+    # - +404+ - Can't get the listening object, the is is probably wrong
+    # - +503+ - Error from server
     # 
     def show
       begin
@@ -43,7 +61,8 @@ module API
           defineHttp :not_found
         else
           @returnValue = { content: listening.as_json(:include => {
-                                                                    :user => { :only => User.miniKey }
+                                                                    :user => { :only => User.miniKey },
+                                                                    :music => { :only => Music.miniKey }
                                                                   }) }
           codeAnswer 200
         end
@@ -56,20 +75,28 @@ module API
 
     # Give a part of the listening depending of the filter passed into parameter
     #
+    # Route : /listenings/find
+    #
     # ==== Options
     # 
-    # * +:attribute [attribute_name]+ - If you want a column equal to a specific value
-    # * +:order_by_asc[]+ - If you want to order by ascending by values
-    # * +:order_by_desc[]+ - If you want to order by descending by values
-    # * +:group_by[]+ - If you want to group by field
-    # * +:limit+ - The number of row you want
-    # * +:offset+ - The offset of the array
+    # * +attribute [attribute_name]+ - If you want a column equal to a specific value
+    # * +order_by_asc []+ - If you want to order by ascending by values
+    # * +order_by_desc []+ - If you want to order by descending by values
+    # * +group_by []+ - If you want to group by field
+    # * +limit+ - The number of row you want
+    # * +offset+ - The offset of the array
     # 
     # ==== Example
     #
     #     http://api.soonzik.com/listenings/find?attribute[latitude]=1&order_by_desc[]=longitude&group_by[]=longitude
     #     Note : By default, if you precise no attribute, it will take every row
     #
+    # ===== HTTP VALUE
+    # 
+    # - +200+ - In case of success, return a list of listening object including its user and music
+    # - +204+ - The list is empty, probably too much filter
+    # - +503+ - Error from server
+    # 
     def find
       begin
         listening_object = nil
@@ -135,7 +162,8 @@ module API
         end
 
         @returnValue = { content: listening_object.as_json(:include => {
-                                                                          :user => { :only => User.miniKey }
+                                                                          :user => { :only => User.miniKey },
+                                                                          :music => { :only => Music.miniKey }
                                                                         }) }
 
         if (listening_object.size == 0)
@@ -154,12 +182,19 @@ module API
 
     # Save a new object Listening. For more information on the parameters, check at the model
     #
+    # Route : /listenings/save
+    #
     # ==== Options
     # 
-    # * +:listening [music_id]+ - Id of the music listen
-    # * +:listening [latitude]+ - Position where the music has been listen
-    # * +:listening [longitude]+ - Position where the music has been listen
-    # * +:listening [when]+ - When the music has been listen
+    # * +listening [music_id]+ - Id of the music listen
+    # * +listening [latitude]+ - Position where the music has been listen
+    # * +listening [longitude]+ - Position where the music has been listen
+    # * +listening [when]+ - When the music has been listen
+    # 
+    # ===== HTTP VALUE
+    # 
+    # - +201+ - In case of success, return the new object
+    # - +503+ - Error from server
     # 
     def save
       begin
@@ -168,7 +203,8 @@ module API
           listening = Listening.new(Listening.listening_params params)
           if (listening.save)
             @returnValue = { content: listening.as_json(:include => {
-                                                                      :user => { :only => User.miniKey }
+                                                                      :user => { :only => User.miniKey },
+                                                                      :music => { :only => Music.miniKey }
                                                                     }) }
             codeAnswer 201
             defineHttp :created

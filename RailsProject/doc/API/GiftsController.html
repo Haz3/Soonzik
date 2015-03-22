@@ -148,30 +148,48 @@ href="../Gift.html">Gift</a> objects Here is the list of action available :</p>
 											<p>Save a new object <a href="../Gift.html">Gift</a>. For more information on
 the parameters, check at the model</p>
 
+<p>Route : /gifts/save</p>
+
 <h4 id="method-i-save-label-Options">Options<span><a href="#method-i-save-label-Options">&para;</a> <a href="#top">&uarr;</a></span></h4>
 <ul><li>
-<p>+:<a href="to_user">gift</a>+ - Id of the user who has the gift</p>
+<p>+gift [to_user]+ - Id of the user who has the gift</p>
 </li><li>
-<p>+:<a href="from_user">gift</a>+ - Id of the user where the gift comes from</p>
+<p>+gift [from_user]+ - Id of the user where the gift comes from</p>
 </li><li>
-<p>+:<a href="typeObj">gift</a>+ - Model name of the object to add to the gift</p>
+<p>+gift [typeObj]+ - Model name of the object to add to the gift -&gt;
+“Music” | “Album” | “Pack”</p>
 </li><li>
-<p>+:<a href="obj_id">gift</a>+ - Id of the object</p>
+<p>+gift [obj_id]+ - Id of the object</p>
+</li></ul>
+
+<h5 id="method-i-save-label-HTTP+VALUE">HTTP VALUE<span><a href="#method-i-save-label-HTTP+VALUE">&para;</a> <a href="#top">&uarr;</a></span></h5>
+<ul><li>
+<p><code>200</code> - In case of success, return the gift saved including its
+informations</p>
+</li><li>
+<p><code>301</code> - It is not a secure transaction</p>
+</li><li>
+<p><code>503</code> - Error from server</p>
 </li></ul>					
 											<div class="method-source-code" id="save-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/gifts_controller.rb, line 20</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/gifts_controller.rb, line 28</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">save</span>
   <span class="ruby-keyword">begin</span>
     <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@security</span>)
+      <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>, <span class="ruby-string">&#39;to_user missing&#39;</span> <span class="ruby-keyword">if</span> (<span class="ruby-operator">!</span><span class="ruby-keyword">defined?</span><span class="ruby-ivar">@gift</span>[<span class="ruby-value">:to_user</span>])
+      <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>, <span class="ruby-string">&#39;from_user missing&#39;</span> <span class="ruby-keyword">if</span> (<span class="ruby-operator">!</span><span class="ruby-keyword">defined?</span><span class="ruby-ivar">@gift</span>[<span class="ruby-value">:from_user</span>])
+      <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>, <span class="ruby-string">&#39;typeObj missing&#39;</span> <span class="ruby-keyword">if</span> (<span class="ruby-operator">!</span><span class="ruby-keyword">defined?</span><span class="ruby-ivar">@gift</span>[<span class="ruby-value">:typeObj</span>])
+      <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>, <span class="ruby-string">&#39;obj_id missing&#39;</span> <span class="ruby-keyword">if</span> (<span class="ruby-operator">!</span><span class="ruby-keyword">defined?</span><span class="ruby-ivar">@gift</span>[<span class="ruby-value">:obj_id</span>])
+
       <span class="ruby-identifier">gift</span> = <span class="ruby-constant">Gift</span>.<span class="ruby-identifier">new</span>
-      <span class="ruby-identifier">gift</span>.<span class="ruby-identifier">to_user</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:to_user</span>]
-      <span class="ruby-identifier">gift</span>.<span class="ruby-identifier">from_user</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:from_user</span>]
-      <span class="ruby-identifier">classObj</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:typeObj</span>].<span class="ruby-identifier">constantize</span>
-      <span class="ruby-identifier">obj</span> = <span class="ruby-identifier">classObj</span>.<span class="ruby-identifier">find_by_id</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:obj_id</span>])
+      <span class="ruby-identifier">gift</span>.<span class="ruby-identifier">to_user</span> = <span class="ruby-ivar">@gift</span>[<span class="ruby-value">:to_user</span>]
+      <span class="ruby-identifier">gift</span>.<span class="ruby-identifier">from_user</span> = <span class="ruby-ivar">@gift</span>[<span class="ruby-value">:from_user</span>]
+      <span class="ruby-identifier">classObj</span> = <span class="ruby-ivar">@gift</span>[<span class="ruby-value">:typeObj</span>].<span class="ruby-identifier">constantize</span>
+      <span class="ruby-identifier">obj</span> = <span class="ruby-identifier">classObj</span>.<span class="ruby-identifier">find_by_id</span>(<span class="ruby-ivar">@gift</span>[<span class="ruby-value">:obj_id</span>])
       <span class="ruby-comment"># check if the object exists</span>
       <span class="ruby-keyword">if</span> (<span class="ruby-identifier">obj</span> <span class="ruby-operator">!=</span> <span class="ruby-keyword">nil</span>)
-        <span class="ruby-keyword">case</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:typeObj</span>]
+        <span class="ruby-keyword">case</span> <span class="ruby-ivar">@gift</span>[<span class="ruby-value">:typeObj</span>]
           <span class="ruby-keyword">when</span> <span class="ruby-string">&quot;Music&quot;</span>
             <span class="ruby-identifier">gift</span>.<span class="ruby-identifier">musics</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">obj</span>;
           <span class="ruby-keyword">when</span> <span class="ruby-string">&quot;Album&quot;</span>
@@ -242,7 +260,6 @@ the parameters, check at the model</p>
 			<li><a href="../API.html">API</a></li>
 			<li><a href="../API/AlbumsController.html">API::AlbumsController</a></li>
 			<li><a href="../API/ApiController.html">API::ApiController</a></li>
-			<li><a href="../API/ApisecurityController.html">API::ApisecurityController</a></li>
 			<li><a href="../API/BattlesController.html">API::BattlesController</a></li>
 			<li><a href="../API/CartsController.html">API::CartsController</a></li>
 			<li><a href="../API/ConcertsController.html">API::ConcertsController</a></li>

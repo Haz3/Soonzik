@@ -157,29 +157,41 @@ list of action available :</p>
 					<div class="method-description">
 											<p>Give a part of the albums depending of the filter passed into parameter</p>
 
+<p>Route : /users/find</p>
+
 <h4 id="method-i-find-label-Options">Options<span><a href="#method-i-find-label-Options">&para;</a> <a href="#top">&uarr;</a></span></h4>
 <ul><li>
-<p>+:attribute [attribute_name]+ - If you want a column equal to a specific
+<p>+attribute [attribute_name]+ - If you want a column equal to a specific
 value</p>
 </li><li>
-<p>+:order_by_asc[]+ - If you want to order by ascending by values</p>
+<p>+order_by_asc []+ - If you want to order by ascending by values</p>
 </li><li>
-<p>+:order_by_desc[]+ - If you want to order by descending by values</p>
+<p>+order_by_desc []+ - If you want to order by descending by values</p>
 </li><li>
-<p>+:group_by[]+ - If you want to group by field</p>
+<p>+group_by []+ - If you want to group by field</p>
 </li><li>
-<p><code>:limit</code> - The number of row you want</p>
+<p><code>limit</code> - The number of row you want</p>
 </li><li>
-<p><code>:offset</code> - The offset of the array</p>
+<p><code>offset</code> - The offset of the array</p>
 </li></ul>
 
 <h4 id="method-i-find-label-Example">Example<span><a href="#method-i-find-label-Example">&para;</a> <a href="#top">&uarr;</a></span></h4>
 
 <pre>http://api.soonzik.com/users/find?attribute[address_id]=1&amp;order_by_desc[]=id&amp;group_by[]=username
-Note : By default, if you precise no attribute, it will take every row</pre>					
+Note : By default, if you precise no attribute, it will take every row</pre>
+
+<h5 id="method-i-find-label-HTTP+VALUE">HTTP VALUE<span><a href="#method-i-find-label-HTTP+VALUE">&para;</a> <a href="#top">&uarr;</a></span></h5>
+<ul><li>
+<p><code>200</code> - In case of success, return a list of users including its
+address, friends and follows</p>
+</li><li>
+<p><code>204</code> - The list is empty, there is probably too much filter</p>
+</li><li>
+<p><code>503</code> - Error from server</p>
+</li></ul>					
 											<div class="method-source-code" id="find-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/users_controller.rb, line 71</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/users_controller.rb, line 106</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">find</span>
   <span class="ruby-keyword">begin</span>
     <span class="ruby-identifier">user_object</span> = <span class="ruby-keyword">nil</span>
@@ -244,7 +256,12 @@ Note : By default, if you precise no attribute, it will take every row</pre>
       <span class="ruby-identifier">user_object</span> = <span class="ruby-identifier">user_object</span>.<span class="ruby-identifier">offset</span>(<span class="ruby-ivar">@offset</span>.<span class="ruby-identifier">to_i</span>)
     <span class="ruby-keyword">end</span>
 
-    <span class="ruby-ivar">@returnValue</span> = { <span class="ruby-identifier">content</span><span class="ruby-operator">:</span> <span class="ruby-identifier">user_object</span>.<span class="ruby-identifier">as_json</span>(<span class="ruby-value">:include</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">:address</span>) }
+    <span class="ruby-ivar">@returnValue</span> = { <span class="ruby-identifier">content</span><span class="ruby-operator">:</span> <span class="ruby-identifier">user_object</span>.<span class="ruby-identifier">as_json</span>(<span class="ruby-value">:include</span> =<span class="ruby-operator">&gt;</span> {
+                                                              <span class="ruby-value">:address</span> =<span class="ruby-operator">&gt;</span> {},
+                                                              <span class="ruby-value">:friends</span> =<span class="ruby-operator">&gt;</span> {},
+                                                              <span class="ruby-value">:follows</span> =<span class="ruby-operator">&gt;</span> {}
+                                                            },
+                                                <span class="ruby-value">:only</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">User</span>.<span class="ruby-identifier">miniKey</span>) }
 
     <span class="ruby-keyword">if</span> (<span class="ruby-identifier">user_object</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>)
       <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">202</span>
@@ -274,10 +291,22 @@ Note : By default, if you precise no attribute, it will take every row</pre>
 										</header>
 
 					<div class="method-description">
-											<p>To get all the musics buy by the user</p>					
+											<p>To get all the musics buy by the user</p>
+
+<p>Route : /users/getmusics</p>
+
+<h5 id="method-i-getmusics-label-HTTP+VALUE">HTTP VALUE<span><a href="#method-i-getmusics-label-HTTP+VALUE">&para;</a> <a href="#top">&uarr;</a></span></h5>
+<ul><li>
+<p><code>200</code> - In case of success, return an hash like this : { musics:
+[], albums: [], packs: [] }</p>
+</li><li>
+<p><code>401</code> - It is not a secured transaction</p>
+</li><li>
+<p><code>503</code> - Error from server</p>
+</li></ul>					
 											<div class="method-source-code" id="getmusics-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/users_controller.rb, line 152</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/users_controller.rb, line 201</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">getmusics</span>
   <span class="ruby-keyword">begin</span>
     <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@security</span>)
@@ -325,13 +354,30 @@ Note : By default, if you precise no attribute, it will take every row</pre>
 										</header>
 
 					<div class="method-description">
-											<p>Retrieve all the users</p>					
+											<p>Retrieve all the users</p>
+
+<p>Route : /users</p>
+
+<h5 id="method-i-index-label-HTTP+VALUE">HTTP VALUE<span><a href="#method-i-index-label-HTTP+VALUE">&para;</a> <a href="#top">&uarr;</a></span></h5>
+<ul><li>
+<p><code>200</code> - In case of success, return a list of users including its
+address, friends and follow</p>
+</li><li>
+<p><code>204</code> - The list is empty</p>
+</li><li>
+<p><code>503</code> - Error from server</p>
+</li></ul>					
 											<div class="method-source-code" id="index-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/users_controller.rb, line 16</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/users_controller.rb, line 25</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">index</span>
   <span class="ruby-keyword">begin</span>
-    <span class="ruby-ivar">@returnValue</span> = { <span class="ruby-identifier">content</span><span class="ruby-operator">:</span> <span class="ruby-constant">User</span>.<span class="ruby-identifier">all</span>.<span class="ruby-identifier">as_json</span>(<span class="ruby-value">:include</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">:address</span>, <span class="ruby-value">:only</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">User</span>.<span class="ruby-identifier">miniKey</span>) }
+    <span class="ruby-ivar">@returnValue</span> = { <span class="ruby-identifier">content</span><span class="ruby-operator">:</span> <span class="ruby-constant">User</span>.<span class="ruby-identifier">all</span>.<span class="ruby-identifier">as_json</span>(<span class="ruby-value">:include</span> =<span class="ruby-operator">&gt;</span> {
+                                                              <span class="ruby-value">:address</span> =<span class="ruby-operator">&gt;</span> {},
+                                                              <span class="ruby-value">:friends</span> =<span class="ruby-operator">&gt;</span> {},
+                                                              <span class="ruby-value">:follows</span> =<span class="ruby-operator">&gt;</span> {}
+                                                            },
+                                                <span class="ruby-value">:only</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">User</span>.<span class="ruby-identifier">miniKey</span>) }
     <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@returnValue</span>[<span class="ruby-value">:content</span>].<span class="ruby-identifier">size</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>)
       <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">202</span>
       <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:no_content</span>
@@ -362,62 +408,72 @@ Note : By default, if you precise no attribute, it will take every row</pre>
 											<p>Save a new object <a href="../User.html">User</a>. For more information on
 the parameters, check at the model</p>
 
+<p>Route : /users/save</p>
+
 <h4 id="method-i-save-label-Options">Options<span><a href="#method-i-save-label-Options">&para;</a> <a href="#top">&uarr;</a></span></h4>
 <ul><li>
-<p>+:user [email]+ - Email of the user</p>
+<p>+user [email]+ - Email of the user</p>
 </li><li>
-<p>+:user [password]+ - Password of the user, not hashed</p>
+<p>+user [password]+ - Password of the user, not hashed</p>
 </li><li>
-<p>+:user [username]+ - Unique username of the user</p>
+<p>+user [username]+ - Unique username of the user</p>
 </li><li>
-<p>+:user [birthday]+ - Birthday day with the format : “YYYY-MM-JJ HH:II:SS”
+<p>+user [birthday]+ - Birthday day with the format : “YYYY-MM-JJ HH:II:SS”
 you can add &#39;+HH:II&#39; for the GTM</p>
 </li><li>
-<p>+:user [language]+ - Tiny string for the language. Need to be in our
+<p>+user [language]+ - Tiny string for the language. Need to be in our
 language list.</p>
 </li><li>
-<p>+:user [fname]+ - (optionnal) Firstname of the user</p>
+<p>+user [fname]+ - (optionnal) Firstname of the user</p>
 </li><li>
-<p>+:user [lname]+ - (optionnal) Lastname of the user</p>
+<p>+user [lname]+ - (optionnal) Lastname of the user</p>
 </li><li>
-<p>+:user [description]+ - (optionnal) <a
+<p>+user [description]+ - (optionnal) <a
 href="../Description.html">Description</a> of the user</p>
 </li><li>
-<p>+:user [phoneNumber]+ - (optionnal) Phone number of the user. Need to be
+<p>+user [phoneNumber]+ - (optionnal) Phone number of the user. Need to be
 with the format &#39;+code phonenumber&#39;</p>
 </li><li>
-<p>+:user [facebook]+ - (optionnal) The facebook name after “<a
+<p>+user [facebook]+ - (optionnal) The facebook name after “<a
 href="https://www.facebook.com">www.facebook.com</a>/” when you are in your
 profile</p>
 </li><li>
-<p>+:user [twitter]+ - (optionnal) The twitter name after “<a
+<p>+user [twitter]+ - (optionnal) The twitter name after “<a
 href="https://www.twitter.com">www.twitter.com</a>/” when you are in your
 profile</p>
 </li><li>
-<p>+:user [googlePlus]+ - (optionnal) The G+ name after “<a
+<p>+user [googlePlus]+ - (optionnal) The G+ name after “<a
 href="https://plus.google.com">plus.google.com</a>/” when you are in your
 profile</p>
 </li><li>
-<p>+:address [numberStreet]+ - (optionnal if you don&#39;t provide anything in
+<p>+address [numberStreet]+ - (optionnal if you don&#39;t provide anything in
 the address variable) Number of the street</p>
 </li><li>
-<p>+:address [complement]+ - (optionnal) Other informations if needed</p>
+<p>+address [complement]+ - (optionnal) Other informations if needed</p>
 </li><li>
-<p>+:address [street]+ - (optionnal if you don&#39;t provide anything in the
+<p>+address [street]+ - (optionnal if you don&#39;t provide anything in the
 address variable) The street name</p>
 </li><li>
-<p>+:address [city]+ - (optionnal if you don&#39;t provide anything in the
+<p>+address [city]+ - (optionnal if you don&#39;t provide anything in the
 address variable) The city name</p>
 </li><li>
-<p>+:address [country]+ - (optionnal if you don&#39;t provide anything in the
+<p>+address [country]+ - (optionnal if you don&#39;t provide anything in the
 address variable) The country name</p>
 </li><li>
-<p>+:address [zipcode]+ - (optionnal if you don&#39;t provide anything in the
+<p>+address [zipcode]+ - (optionnal if you don&#39;t provide anything in the
 address variable) The Zipcode</p>
+</li></ul>
+
+<h5 id="method-i-save-label-HTTP+VALUE">HTTP VALUE<span><a href="#method-i-save-label-HTTP+VALUE">&para;</a> <a href="#top">&uarr;</a></span></h5>
+<ul><li>
+<p><code>201</code> - In case of success, return the new user including its
+address, friends and follow.</p>
+</li><li>
+<p><code>503</code> - Error from server</p>
 </li></ul>					
 											<div class="method-source-code" id="save-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/users_controller.rb, line 208</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/users_controller.rb, line 264</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">save</span>
   <span class="ruby-identifier">_save</span>(<span class="ruby-keyword">true</span>, <span class="ruby-identifier">params</span>)
   <span class="ruby-identifier">sendJson</span>
@@ -439,13 +495,25 @@ address variable) The Zipcode</p>
 					<div class="method-description">
 											<p>Give a specific object by its id</p>
 
+<p>Route : /users/:id</p>
+
 <h4 id="method-i-show-label-Options">Options<span><a href="#method-i-show-label-Options">&para;</a> <a href="#top">&uarr;</a></span></h4>
 <ul><li>
-<p><code>:id</code> - The id of the specific user</p>
+<p><code>id</code> - The id of the specific user</p>
+</li></ul>
+
+<h5 id="method-i-show-label-HTTP+VALUE">HTTP VALUE<span><a href="#method-i-show-label-HTTP+VALUE">&para;</a> <a href="#top">&uarr;</a></span></h5>
+<ul><li>
+<p><code>200</code> - In case of success, return an user including its
+address, friends and follows</p>
+</li><li>
+<p><code>404</code> - Can&#39;t find the user, the id is probably wrong</p>
+</li><li>
+<p><code>503</code> - Error from server</p>
 </li></ul>					
 											<div class="method-source-code" id="show-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/users_controller.rb, line 38</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/users_controller.rb, line 60</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">show</span>
   <span class="ruby-keyword">begin</span>
     <span class="ruby-identifier">user</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">find_by_id</span>(<span class="ruby-ivar">@id</span>)
@@ -453,7 +521,12 @@ address variable) The Zipcode</p>
       <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">502</span>
       <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:not_found</span>
     <span class="ruby-keyword">else</span>
-      <span class="ruby-ivar">@returnValue</span> = { <span class="ruby-identifier">content</span><span class="ruby-operator">:</span> <span class="ruby-identifier">user</span>.<span class="ruby-identifier">as_json</span>(<span class="ruby-value">:include</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">:address</span>, <span class="ruby-value">:only</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">User</span>.<span class="ruby-identifier">bigKey</span>) }
+      <span class="ruby-ivar">@returnValue</span> = { <span class="ruby-identifier">content</span><span class="ruby-operator">:</span> <span class="ruby-identifier">user</span>.<span class="ruby-identifier">as_json</span>(<span class="ruby-value">:include</span> =<span class="ruby-operator">&gt;</span> {
+                                                              <span class="ruby-value">:address</span> =<span class="ruby-operator">&gt;</span> {},
+                                                              <span class="ruby-value">:friends</span> =<span class="ruby-operator">&gt;</span> {},
+                                                              <span class="ruby-value">:follows</span> =<span class="ruby-operator">&gt;</span> {}
+                                                            },
+                                                <span class="ruby-value">:only</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">User</span>.<span class="ruby-identifier">bigKey</span>) }
       <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">200</span>
     <span class="ruby-keyword">end</span>
   <span class="ruby-keyword">rescue</span>
@@ -485,58 +558,66 @@ user has an address, just provide what you want to update</p>
 
 <h4 id="method-i-update-label-Options">Options<span><a href="#method-i-update-label-Options">&para;</a> <a href="#top">&uarr;</a></span></h4>
 <ul><li>
-<p><code>:id</code> - Same as user_id used for the authentication (get from
-the url)</p>
+<p><code>id</code> - Same as user_id used for the authentication (get from the
+url)</p>
 </li><li>
-<p>+:user [email]+ - Email of the user</p>
+<p>+user [email]+ - Email of the user</p>
 </li><li>
-<p>+:user [password]+ - Password of the user, not hashed</p>
+<p>+user [password]+ - Password of the user, not hashed</p>
 </li><li>
-<p>+:user [username]+ - Unique username of the user</p>
+<p>+user [username]+ - Unique username of the user</p>
 </li><li>
-<p>+:user [birthday]+ - Birthday day with the format : “YYYY-MM-JJ HH:II:SS”
+<p>+user [birthday]+ - Birthday day with the format : “YYYY-MM-JJ HH:II:SS”
 you can add &#39;+HH:II&#39; for the GTM</p>
 </li><li>
-<p>+:user [language]+ - Tiny string for the language. Need to be in our
+<p>+user [language]+ - Tiny string for the language. Need to be in our
 language list.</p>
 </li><li>
-<p>+:user [fname]+ - Firstname of the user</p>
+<p>+user [fname]+ - Firstname of the user</p>
 </li><li>
-<p>+:user [lname]+ - Lastname of the user</p>
+<p>+user [lname]+ - Lastname of the user</p>
 </li><li>
-<p>+:user [description]+ - <a href="../Description.html">Description</a> of
-the user</p>
+<p>+user [description]+ - <a href="../Description.html">Description</a> of the
+user</p>
 </li><li>
-<p>+:user [phoneNumber]+ - Phone number of the user. Need to be with the
-format &#39;+code phonenumber&#39;</p>
+<p>+user [phoneNumber]+ - Phone number of the user. Need to be with the format
+&#39;+code phonenumber&#39;</p>
 </li><li>
-<p>+:user [facebook]+ - The facebook name after “<a
+<p>+user [facebook]+ - The facebook name after “<a
 href="https://www.facebook.com">www.facebook.com</a>/” when you are in your
 profile</p>
 </li><li>
-<p>+:user [twitter]+ - The twitter name after “<a
+<p>+user [twitter]+ - The twitter name after “<a
 href="https://www.twitter.com">www.twitter.com</a>/” when you are in your
 profile</p>
 </li><li>
-<p>+:user [googlePlus]+ - The G+ name after “<a
+<p>+user [googlePlus]+ - The G+ name after “<a
 href="https://plus.google.com">plus.google.com</a>/” when you are in your
 profile</p>
 </li><li>
-<p>+:address [numberStreet]+ - Number of the street</p>
+<p>+address [numberStreet]+ - Number of the street</p>
 </li><li>
-<p>+:address [complement]+ - Other informations if needed</p>
+<p>+address [complement]+ - Other informations if needed</p>
 </li><li>
-<p>+:address [street]+ - The street name</p>
+<p>+address [street]+ - The street name</p>
 </li><li>
-<p>+:address [city]+ - The city name</p>
+<p>+address [city]+ - The city name</p>
 </li><li>
-<p>+:address [country]+ - The country name</p>
+<p>+address [country]+ - The country name</p>
 </li><li>
-<p>+:address [zipcode]+ - The Zipcode</p>
+<p>+address [zipcode]+ - The Zipcode</p>
+</li></ul>
+
+<h5 id="method-i-update-label-HTTP+VALUE">HTTP VALUE<span><a href="#method-i-update-label-HTTP+VALUE">&para;</a> <a href="#top">&uarr;</a></span></h5>
+<ul><li>
+<p><code>201</code> - In case of success, return the new user including its
+address, friends and follow.</p>
+</li><li>
+<p><code>503</code> - Error from server</p>
 </li></ul>					
 											<div class="method-source-code" id="update-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/users_controller.rb, line 240</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/users_controller.rb, line 301</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">update</span>
   <span class="ruby-keyword">begin</span>
     <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@security</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-ivar">@id</span> <span class="ruby-operator">==</span> <span class="ruby-ivar">@user_id</span>)
@@ -591,7 +672,6 @@ profile</p>
 			<li><a href="../API.html">API</a></li>
 			<li><a href="../API/AlbumsController.html">API::AlbumsController</a></li>
 			<li><a href="../API/ApiController.html">API::ApiController</a></li>
-			<li><a href="../API/ApisecurityController.html">API::ApisecurityController</a></li>
 			<li><a href="../API/BattlesController.html">API::BattlesController</a></li>
 			<li><a href="../API/CartsController.html">API::CartsController</a></li>
 			<li><a href="../API/ConcertsController.html">API::ConcertsController</a></li>

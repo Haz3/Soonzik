@@ -6,6 +6,15 @@ module API
   class InfluencesController < ApisecurityController
 
     # Retrieve all the influences
+    #
+    # Route : /influences
+    #
+    # ===== HTTP VALUE
+    # 
+    # - +200+ - In case of success, return a list of influences including its genres
+    # - +204+ - The list is empty
+    # - +503+ - Error from server
+    # 
     def index
     	begin
         @returnValue = { content: Influences.all.as_json(:include => :genres) }

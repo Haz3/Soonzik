@@ -21,7 +21,7 @@ var SearchIndex =
 	{
 		"name": "API::ApisecurityController",
 		"link": "API/ApisecurityController.html",
-		"snippet": "<p>The class parent of every controller of the API. It provides security and\nsome default stuff\n",
+		"snippet": "",
 		"type": "normalclass"
 	},
 	{
@@ -735,43 +735,43 @@ var SearchIndex =
 	{
 		"name": "index",
 		"link": "API/AlbumsController.html#method-i-index",
-		"snippet": "<p>Retrieve all the albums\n",
+		"snippet": "",
 		"type": "anymethod"
 	},
 	{
 		"name": "show",
 		"link": "API/AlbumsController.html#method-i-show",
-		"snippet": "<p>Give a specific object by its id\n<p>Options\n<p><code>:id</code> - The id of the specific album\n",
+		"snippet": "<p>Give a specific object by its id\n<p>Route : /albums/:id\n<p>Options\n",
 		"type": "anymethod"
 	},
 	{
 		"name": "find",
 		"link": "API/AlbumsController.html#method-i-find",
-		"snippet": "<p>Give a part of the albums depending of the filter passed into parameter\n<p>Options\n<p>+:attribute+ - If you want …\n",
+		"snippet": "<p>Give a part of the albums depending of the filter passed into parameter\n<p>Route : /albums/find\n<p>Options\n",
 		"type": "anymethod"
 	},
 	{
 		"name": "addcomment",
 		"link": "API/AlbumsController.html#method-i-addcomment",
-		"snippet": "<p>Add a comment to a specific album. Need to be a secure transaction.\n<p>Options\n<p><code>:security</code> - If it&#39;s a secure …\n",
+		"snippet": "<p>Add a comment to a specific album. Need to be a secure transaction.\n<p>Route : /albums/addcomment/:id\n<p>Options …\n",
 		"type": "anymethod"
 	},
 	{
 		"name": "setParamToObj",
 		"link": "API/ApiController.html#method-i-setParamToObj",
-		"snippet": "<p>Transform the params into attributes and create the getter to access it\n<p>Options\n<p><code>:params</code> - The GET or POST …\n",
+		"snippet": "",
 		"type": "anymethod"
 	},
 	{
 		"name": "new",
 		"link": "API/ApisecurityController.html#method-c-new",
-		"snippet": "<p>We create a list of code and initialize the returnValue and the security\nboolean. Usually a controller …\n",
+		"snippet": "",
 		"type": "anymethod"
 	},
 	{
 		"name": "provideKey",
 		"link": "API/ApisecurityController.html#method-i-provideKey",
-		"snippet": "<p>Provide a token relative to the user who asks Format :\n<p>Options\n<p><code>:user_id</code> - The id of the user who makes …\n",
+		"snippet": "",
 		"type": "anymethod"
 	},
 	{
@@ -783,361 +783,361 @@ var SearchIndex =
 	{
 		"name": "loginFB",
 		"link": "API/ApisecurityController.html#method-i-loginFB",
-		"snippet": "<p>Check if a facebook user is authenticate and retrive its informations\n<p>Options\n<p><code>:token</code> - Token Facebook\n",
+		"snippet": "",
 		"type": "anymethod"
 	},
 	{
 		"name": "checkKey",
 		"link": "API/ApisecurityController.html#method-i-checkKey",
-		"snippet": "<p>Check if the secure key corresponds to the key of the selected user. This\nkey is the hash between the …\n",
+		"snippet": "",
 		"type": "anymethod"
 	},
 	{
 		"name": "sendJson",
 		"link": "API/ApisecurityController.html#method-i-sendJson",
-		"snippet": "<p>Render the value to return in json\n",
+		"snippet": "",
 		"type": "anymethod"
 	},
 	{
 		"name": "codeAnswer",
 		"link": "API/ApisecurityController.html#method-i-codeAnswer",
-		"snippet": "<p>Put information about the answer (the code and the corresponding message)\nin the return value. If a code …\n",
+		"snippet": "",
 		"type": "anymethod"
 	},
 	{
 		"name": "defineHttp",
 		"link": "API/ApisecurityController.html#method-i-defineHttp",
-		"snippet": "<p>Set the HTTP status If a code has already been assigned, we don&#39;t\nmodify it.\n<p>Attributes\n<p><code>sym</code> - The symbol …\n",
+		"snippet": "",
 		"type": "anymethod"
 	},
 	{
 		"name": "index",
 		"link": "API/BattlesController.html#method-i-index",
-		"snippet": "<p>Retrieve all the battles\n",
+		"snippet": "<p>Retrieve all the battles\n<p>Route : /battles\n<p>HTTP VALUE\n",
 		"type": "anymethod"
 	},
 	{
 		"name": "show",
 		"link": "API/BattlesController.html#method-i-show",
-		"snippet": "<p>Give a specific object by its id\n<p>Options\n<p><code>:id</code> - The id of the specific battle\n",
+		"snippet": "<p>Give a specific object by its id\n<p>Route : /albums/:id\n<p>Options\n",
 		"type": "anymethod"
 	},
 	{
 		"name": "find",
 		"link": "API/BattlesController.html#method-i-find",
-		"snippet": "<p>Give a part of the battles depending of the filter passed into parameter\n<p>Options\n<p>+:attribute+ - If you …\n",
+		"snippet": "<p>Give a part of the battles depending of the filter passed into parameter\n<p>Route : /battles/find\n<p>Options …\n",
 		"type": "anymethod"
 	},
 	{
 		"name": "destroy",
 		"link": "API/CartsController.html#method-i-destroy",
-		"snippet": "<p>Destroy a specific object by its id\n<p>Options\n<p><code>:id</code> - The id of the specific cart\n",
+		"snippet": "<p>Destroy a specific object by its id\n<p>Route : /carts/destroy\n<p>Options\n",
 		"type": "anymethod"
 	},
 	{
 		"name": "save",
 		"link": "API/CartsController.html#method-i-save",
-		"snippet": "<p>Save a new object Cart. For more information on the parameters, check at\nthe model\n<p>Options\n<p>+:cart+ - Id …\n",
+		"snippet": "<p>Save a new object Cart. For more information on the parameters, check at\nthe model\n<p>Route : /carts/save …\n",
 		"type": "anymethod"
 	},
 	{
 		"name": "find",
 		"link": "API/CartsController.html#method-i-find",
-		"snippet": "<p>Give a part of the carts depending of the filter passed into parameter\n<p>Options\n<p>+:attribute+ - If you want …\n",
+		"snippet": "<p>Give a part of the carts depending of the filter passed into parameter\n<p>Route : /carts/find\n<p>Options\n",
 		"type": "anymethod"
 	},
 	{
 		"name": "index",
 		"link": "API/ConcertsController.html#method-i-index",
-		"snippet": "<p>Retrieve all the concerts\n",
+		"snippet": "<p>Retrieve all the concerts\n<p>Route : /concerts\n<p>HTTP VALUE\n",
 		"type": "anymethod"
 	},
 	{
 		"name": "show",
 		"link": "API/ConcertsController.html#method-i-show",
-		"snippet": "<p>Give a specific object by its id\n<p>Options\n<p><code>:id</code> - The id of the specific concert\n",
+		"snippet": "<p>Give a specific object by its id\n<p>Route : concerts/:id\n<p>Options\n",
 		"type": "anymethod"
 	},
 	{
 		"name": "find",
 		"link": "API/ConcertsController.html#method-i-find",
-		"snippet": "<p>Give a part of the concerts depending of the filter passed into parameter\n<p>Options\n<p>+:attribute+ - If you …\n",
+		"snippet": "<p>Give a part of the concerts depending of the filter passed into parameter\n<p>Route : /concerts/find\n<p>Options …\n",
 		"type": "anymethod"
 	},
 	{
 		"name": "index",
 		"link": "API/GenresController.html#method-i-index",
-		"snippet": "<p>Retrieve all the genres\n",
+		"snippet": "<p>Retrieve all the genres\n<p>Route : /genres\n<p>HTTP VALUE\n",
 		"type": "anymethod"
 	},
 	{
 		"name": "show",
 		"link": "API/GenresController.html#method-i-show",
-		"snippet": "<p>Retrieve a specific genre\n",
+		"snippet": "<p>Retrieve a specific genre\n<p>Route : /genres/:id\n<p>Options\n",
 		"type": "anymethod"
 	},
 	{
 		"name": "save",
 		"link": "API/GiftsController.html#method-i-save",
-		"snippet": "<p>Save a new object Gift. For more information on the parameters, check at\nthe model\n<p>Options\n<p>+:gift+ - Id …\n",
+		"snippet": "<p>Save a new object Gift. For more information on the parameters, check at\nthe model\n<p>Route : /gifts/save …\n",
 		"type": "anymethod"
 	},
 	{
 		"name": "index",
 		"link": "API/InfluencesController.html#method-i-index",
-		"snippet": "<p>Retrieve all the influences\n",
+		"snippet": "<p>Retrieve all the influences\n<p>Route : /influences\n<p>HTTP VALUE\n",
 		"type": "anymethod"
 	},
 	{
 		"name": "index",
 		"link": "API/ListeningsController.html#method-i-index",
-		"snippet": "<p>Retrieve all the listenings\n",
+		"snippet": "<p>Retrieve all the listenings\n<p>Route : /listenings\n<p>HTTP VALUE\n",
 		"type": "anymethod"
 	},
 	{
 		"name": "show",
 		"link": "API/ListeningsController.html#method-i-show",
-		"snippet": "<p>Give a specific object by its id\n<p>Options\n<p><code>:id</code> - The id of the specific listening\n",
+		"snippet": "<p>Give a specific object by its id\n<p>Route : /listenings/:id\n<p>Options\n",
 		"type": "anymethod"
 	},
 	{
 		"name": "find",
 		"link": "API/ListeningsController.html#method-i-find",
-		"snippet": "<p>Give a part of the listening depending of the filter passed into parameter\n<p>Options\n<p>+:attribute+ - If you …\n",
+		"snippet": "<p>Give a part of the listening depending of the filter passed into parameter\n<p>Route : /listenings/find\n<p>Options …\n",
 		"type": "anymethod"
 	},
 	{
 		"name": "save",
 		"link": "API/ListeningsController.html#method-i-save",
-		"snippet": "<p>Save a new object Listening. For more information on the parameters, check\nat the model\n<p>Options\n<p>+:listening …\n",
+		"snippet": "<p>Save a new object Listening. For more information on the parameters, check\nat the model\n<p>Route : /listenings/save …\n",
 		"type": "anymethod"
 	},
 	{
 		"name": "show",
 		"link": "API/MessagesController.html#method-i-show",
-		"snippet": "<p>Give a specific object by its id\n<p>Options\n<p><code>:id</code> - The id of the specific message\n",
+		"snippet": "<p>Give a specific object by its id\n<p>Route : /messages/:id\n<p>Options\n",
 		"type": "anymethod"
 	},
 	{
 		"name": "save",
 		"link": "API/MessagesController.html#method-i-save",
-		"snippet": "<p>Save a new object Message. For more information on the parameters, check at\nthe model\n<p>Options\n<p>+:message …\n",
+		"snippet": "<p>Save a new object Message. For more information on the parameters, check at\nthe model\n<p>Route : /messages/save …\n",
 		"type": "anymethod"
 	},
 	{
 		"name": "find",
 		"link": "API/MessagesController.html#method-i-find",
-		"snippet": "<p>Give a part of the messages depending of the filter passed into parameter\n<p>Options\n<p>+:attribute+ - If you …\n",
+		"snippet": "<p>Give a part of the messages depending of the filter passed into parameter\n<p>Options\n<p>+attribute [attribute_name]+ …\n",
 		"type": "anymethod"
 	},
 	{
 		"name": "index",
 		"link": "API/MusicsController.html#method-i-index",
-		"snippet": "<p>Retrieve all the musics\n",
+		"snippet": "<p>Retrieve all the musics\n<p>Route : /musics\n<p>HTTP VALUE\n",
 		"type": "anymethod"
 	},
 	{
 		"name": "show",
 		"link": "API/MusicsController.html#method-i-show",
-		"snippet": "<p>Give a specific object by its id\n<p>Options\n<p><code>:id</code> - The id of the specific music\n",
+		"snippet": "<p>Give a specific object by its id\n<p>Options\n<p><code>id</code> - The id of the specific music\n",
 		"type": "anymethod"
 	},
 	{
 		"name": "find",
 		"link": "API/MusicsController.html#method-i-find",
-		"snippet": "<p>Give a part of the albums depending of the filter passed into parameter\n<p>Options\n<p>+:attribute+ - If you want …\n",
+		"snippet": "<p>Give a part of the albums depending of the filter passed into parameter\n<p>Route : /musics/find\n<p>Options\n",
 		"type": "anymethod"
 	},
 	{
 		"name": "addcomment",
 		"link": "API/MusicsController.html#method-i-addcomment",
-		"snippet": "<p>Add a comment to a specific music. Need to be a secure transaction.\n<p>Options\n<p><code>:security</code> - If it&#39;s a secure …\n",
+		"snippet": "<p>Add a comment to a specific music. Need to be a secure transaction.\n<p>Route : /musics/addcomment/:id\n<p>Options …\n",
 		"type": "anymethod"
 	},
 	{
 		"name": "get",
 		"link": "API/MusicsController.html#method-i-get",
-		"snippet": "<p>To get the mp3. It cuts the file depending the rights\n<p>Options\n<p><code>:security</code> - If it&#39;s a secure transaction, …\n",
+		"snippet": "<p>To get the mp3. It cuts the file depending the rights\n<p>Route : /musics/get/:id\n<p>DEPRECATED FOR THE MOMENT …\n",
 		"type": "anymethod"
 	},
 	{
 		"name": "addtoplaylist",
 		"link": "API/MusicsController.html#method-i-addtoplaylist",
-		"snippet": "<p>To add a specific music to a playlist\n<p>Options\n<p><code>:id</code> - The id of the music where is the comment\n",
+		"snippet": "<p>To add a specific music to a playlist\n<p>Route : /musics/addtoplaylist\n<p>Options\n",
 		"type": "anymethod"
 	},
 	{
 		"name": "index",
 		"link": "API/NewsController.html#method-i-index",
-		"snippet": "<p>Retrieve all the news\n",
+		"snippet": "<p>Retrieve all the news\n<p>Route : /news\n<p>HTTP VALUE\n",
 		"type": "anymethod"
 	},
 	{
 		"name": "show",
 		"link": "API/NewsController.html#method-i-show",
-		"snippet": "<p>Give a specific object by its id\n<p>Options\n<p><code>:id</code> - The id of the specific news\n",
+		"snippet": "<p>Give a specific object by its id\n<p>Route : /news/:id\n<p>Options\n",
 		"type": "anymethod"
 	},
 	{
 		"name": "find",
 		"link": "API/NewsController.html#method-i-find",
-		"snippet": "<p>Give a part of the news depending of the filter passed into parameter\n<p>Options\n<p>+:attribute+ - If you want …\n",
+		"snippet": "<p>Give a part of the news depending of the filter passed into parameter\n<p>Route : /news/find\n<p>Options\n",
 		"type": "anymethod"
 	},
 	{
 		"name": "addcomment",
 		"link": "API/NewsController.html#method-i-addcomment",
-		"snippet": "<p>Add a comment to a specific news. Need to be a secure transaction.\n<p>Options\n<p><code>:security</code> - If it&#39;s a secure …\n",
+		"snippet": "<p>Add a comment to a specific news. Need to be a secure transaction.\n<p>Route : /news/addcomment/:id\n<p>Options …\n",
 		"type": "anymethod"
 	},
 	{
 		"name": "show",
 		"link": "API/NotificationsController.html#method-i-show",
-		"snippet": "<p>Give a specific object by its id\n<p>Options\n<p><code>:id</code> - The id of the specific notification\n",
+		"snippet": "<p>Give a specific object by its id\n<p>Route : /notifications/:id\n<p>Options\n",
 		"type": "anymethod"
 	},
 	{
 		"name": "save",
 		"link": "API/NotificationsController.html#method-i-save",
-		"snippet": "<p>Save a new object Notification. For more information on the parameters,\ncheck at the model\n<p>Options\n<p>+:notification …\n",
+		"snippet": "<p>Save a new object Notification. For more information on the parameters,\ncheck at the model\n<p>Route : /notifications/save …\n",
 		"type": "anymethod"
 	},
 	{
 		"name": "find",
 		"link": "API/NotificationsController.html#method-i-find",
-		"snippet": "<p>Give a part of the notifications depending of the filter passed into\nparameter\n<p>Options\n<p>+:attribute+ -  …\n",
+		"snippet": "<p>Give a part of the notifications depending of the filter passed into\nparameter\n<p>Route : /notifications/find …\n",
 		"type": "anymethod"
 	},
 	{
 		"name": "destroy",
 		"link": "API/NotificationsController.html#method-i-destroy",
-		"snippet": "<p>Destroy a specific object by its id\n<p>Options\n<p><code>:id</code> - The id of the specific notification\n",
+		"snippet": "<p>Destroy a specific object by its id\n<p>Options\n<p><code>id</code> - The id of the specific notification\n",
 		"type": "anymethod"
 	},
 	{
 		"name": "index",
 		"link": "API/PacksController.html#method-i-index",
-		"snippet": "<p>Retrieve all the packs\n",
+		"snippet": "<p>Retrieve all the packs\n<p>Route : /packs\n<p>HTTP VALUE\n",
 		"type": "anymethod"
 	},
 	{
 		"name": "show",
 		"link": "API/PacksController.html#method-i-show",
-		"snippet": "<p>Give a specific object by its id\n<p>Options\n<p><code>:id</code> - The id of the specific pack\n",
+		"snippet": "<p>Give a specific object by its id\n<p>Route : /packs/:id\n<p>Options\n",
 		"type": "anymethod"
 	},
 	{
 		"name": "find",
 		"link": "API/PacksController.html#method-i-find",
-		"snippet": "<p>Give a part of the packs depending of the filter passed into parameter\n<p>Options\n<p>+:attribute+ - If you want …\n",
+		"snippet": "<p>Give a part of the packs depending of the filter passed into parameter\n<p>Route : /packs/find\n<p>Options\n",
 		"type": "anymethod"
 	},
 	{
 		"name": "show",
 		"link": "API/PlaylistsController.html#method-i-show",
-		"snippet": "<p>Give a specific object by its id\n<p>Options\n<p><code>:id</code> - The id of the specific playlist\n",
+		"snippet": "<p>Give a specific object by its id\n<p>Route : /playlists/:id\n<p>Options\n",
 		"type": "anymethod"
 	},
 	{
 		"name": "save",
 		"link": "API/PlaylistsController.html#method-i-save",
-		"snippet": "<p>Save a new object Playlist. For more information on the parameters, check\nat the model\n<p>Options\n<p>+:playlist …\n",
+		"snippet": "<p>Save a new object Playlist. For more information on the parameters, check\nat the model\n<p>Route : /playlists/save …\n",
 		"type": "anymethod"
 	},
 	{
 		"name": "update",
 		"link": "API/PlaylistsController.html#method-i-update",
-		"snippet": "<p>Save a new object Playlist. For more information on the parameters, check\nat the model\n<p>Options\n<p><code>:id</code> - Id …\n",
+		"snippet": "<p>Save a new object Playlist. For more information on the parameters, check\nat the model\n<p>Route : /playlists/update …\n",
 		"type": "anymethod"
 	},
 	{
 		"name": "find",
 		"link": "API/PlaylistsController.html#method-i-find",
-		"snippet": "<p>Give a part of the playlist depending of the filter passed into parameter\n<p>Options\n<p>+:attribute+ - If you …\n",
+		"snippet": "<p>Give a part of the playlist depending of the filter passed into parameter\n<p>Route : /playlists/find\n<p>Options …\n",
 		"type": "anymethod"
 	},
 	{
 		"name": "destroy",
 		"link": "API/PlaylistsController.html#method-i-destroy",
-		"snippet": "<p>Destroy a specific object by its id\n<p>Options\n<p><code>:id</code> - The id of the specific playlist\n",
+		"snippet": "<p>Destroy a specific object by its id\n<p>Route : /playlists/destroy\n<p>Options\n",
 		"type": "anymethod"
 	},
 	{
 		"name": "save",
 		"link": "API/PurchasesController.html#method-i-save",
-		"snippet": "<p>Save a new object Purchase. For more information on the parameters, check\nat the model\n<p>Options\n<p>+:purchase …\n",
+		"snippet": "<p>Save a new object Purchase. For more information on the parameters, check\nat the model\n<p>Route : /purchases/save …\n",
 		"type": "anymethod"
 	},
 	{
 		"name": "search",
 		"link": "API/SearchsController.html#method-i-search",
-		"snippet": "<p>Search an element in our collection of content or for a specific object\ntype\n<p>Options\n<p><code>:offset</code> - [Optionnal] …\n",
+		"snippet": "<p>Search an element in our collection of content or for a specific object\ntype\n<p>Route : /search\n<p>Options\n",
 		"type": "anymethod"
 	},
 	{
 		"name": "show",
 		"link": "API/SuggestionsController.html#method-i-show",
-		"snippet": "<p>Give a specific object by its id\n<p>Options\n<p><code>:id</code> - The id of the specific suggestion\n",
+		"snippet": "<p>Give a specific object by its id\n<p>Not implemented\n<p>Options\n",
 		"type": "anymethod"
 	},
 	{
 		"name": "index",
 		"link": "API/TweetsController.html#method-i-index",
-		"snippet": "<p>Retrieve all the tweets\n",
+		"snippet": "<p>Retrieve all the tweets\n<p>Route : /tweets\n<p>HTTP VALUE\n",
 		"type": "anymethod"
 	},
 	{
 		"name": "show",
 		"link": "API/TweetsController.html#method-i-show",
-		"snippet": "<p>Give a specific object by its id\n<p>Options\n<p><code>:id</code> - The id of the specific tweets\n",
+		"snippet": "<p>Give a specific object by its id\n<p>Route : /tweets/:id\n<p>Options\n",
 		"type": "anymethod"
 	},
 	{
 		"name": "save",
 		"link": "API/TweetsController.html#method-i-save",
-		"snippet": "<p>Save a new object Tweet. For more information on the parameters, check at\nthe model\n<p>Options\n<p>+:tweet+ - …\n",
+		"snippet": "<p>Save a new object Tweet. For more information on the parameters, check at\nthe model\n<p>Route : /tweets/save …\n",
 		"type": "anymethod"
 	},
 	{
 		"name": "find",
 		"link": "API/TweetsController.html#method-i-find",
-		"snippet": "<p>Give a part of the tweets depending of the filter passed into parameter\n<p>Options\n<p>+:attribute+ - If you want …\n",
+		"snippet": "<p>Give a part of the tweets depending of the filter passed into parameter\n<p>Route : /tweets/find\n<p>Options\n",
 		"type": "anymethod"
 	},
 	{
 		"name": "destroy",
 		"link": "API/TweetsController.html#method-i-destroy",
-		"snippet": "<p>Destroy a specific object by its id\n<p>Options\n<p><code>:id</code> - The id of the specific tweet\n",
+		"snippet": "<p>Destroy a specific object by its id\n<p>Route : /tweets/destroy\n<p>Options\n",
 		"type": "anymethod"
 	},
 	{
 		"name": "index",
 		"link": "API/UsersController.html#method-i-index",
-		"snippet": "<p>Retrieve all the users\n",
+		"snippet": "<p>Retrieve all the users\n<p>Route : /users\n<p>HTTP VALUE\n",
 		"type": "anymethod"
 	},
 	{
 		"name": "show",
 		"link": "API/UsersController.html#method-i-show",
-		"snippet": "<p>Give a specific object by its id\n<p>Options\n<p><code>:id</code> - The id of the specific user\n",
+		"snippet": "<p>Give a specific object by its id\n<p>Route : /users/:id\n<p>Options\n",
 		"type": "anymethod"
 	},
 	{
 		"name": "find",
 		"link": "API/UsersController.html#method-i-find",
-		"snippet": "<p>Give a part of the albums depending of the filter passed into parameter\n<p>Options\n<p>+:attribute [attribute_name]+ …\n",
+		"snippet": "<p>Give a part of the albums depending of the filter passed into parameter\n<p>Route : /users/find\n<p>Options\n",
 		"type": "anymethod"
 	},
 	{
 		"name": "getmusics",
 		"link": "API/UsersController.html#method-i-getmusics",
-		"snippet": "<p>To get all the musics buy by the user\n",
+		"snippet": "<p>To get all the musics buy by the user\n<p>Route : /users/getmusics\n<p>HTTP VALUE\n",
 		"type": "anymethod"
 	},
 	{
 		"name": "save",
 		"link": "API/UsersController.html#method-i-save",
-		"snippet": "<p>Save a new object User. For more information on the parameters, check at\nthe model\n<p>Options\n<p>+:user [email]+ …\n",
+		"snippet": "<p>Save a new object User. For more information on the parameters, check at\nthe model\n<p>Route : /users/save …\n",
 		"type": "anymethod"
 	},
 	{
@@ -1387,6 +1387,12 @@ var SearchIndex =
 		"type": "anymethod"
 	},
 	{
+		"name": "miniKey",
+		"link": "Pack.html#method-c-miniKey",
+		"snippet": "",
+		"type": "anymethod"
+	},
+	{
 		"name": "playlist_params",
 		"link": "Playlist.html#method-c-playlist_params",
 		"snippet": "<p>The strong parameters to save or update object\n",
@@ -1429,6 +1435,12 @@ var SearchIndex =
 		"type": "anymethod"
 	},
 	{
+		"name": "username_verified?",
+		"link": "User.html#method-i-username_verified-3F",
+		"snippet": "<p>Is there the default username or not ?\n",
+		"type": "anymethod"
+	},
+	{
 		"name": "regenerateKey",
 		"link": "User.html#method-i-regenerateKey",
 		"snippet": "<p>Recreate an idAPI and so the secureKey associated The secureKey need to be\nunique so we check if someone …\n",
@@ -1455,13 +1467,19 @@ var SearchIndex =
 	{
 		"name": "miniKey",
 		"link": "User.html#method-c-miniKey",
-		"snippet": "<p>Filter of information for the API\n",
+		"snippet": "<p>Filter of information for the API - Restricted\n",
 		"type": "anymethod"
 	},
 	{
 		"name": "bigKey",
 		"link": "User.html#method-c-bigKey",
-		"snippet": "<p>Filter of information for the API\n",
+		"snippet": "<p>Filter of information for the API - Less Restricted\n",
+		"type": "anymethod"
+	},
+	{
+		"name": "notRestrictedKey",
+		"link": "User.html#method-c-notRestrictedKey",
+		"snippet": "<p>Filter of information for the API - No Restriction\n",
 		"type": "anymethod"
 	},
 	{
@@ -1504,6 +1522,18 @@ var SearchIndex =
 		"name": "destroy",
 		"link": "UsersController.html#method-i-destroy",
 		"snippet": "<p>DELETE /users/:id.:format\n",
+		"type": "anymethod"
+	},
+	{
+		"name": "validate_email_for_oauth",
+		"link": "UsersHelper.html#method-c-validate_email_for_oauth",
+		"snippet": "<p>Helper function to get an empty string for email and not the regex tmp\n",
+		"type": "anymethod"
+	},
+	{
+		"name": "validate_username_for_oauth",
+		"link": "UsersHelper.html#method-c-validate_username_for_oauth",
+		"snippet": "<p>Helper function to get an empty string for username and not the regex tmp\n",
 		"type": "anymethod"
 	},
 	{

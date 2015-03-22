@@ -10,7 +10,18 @@ module API
   class AlbumsController < ApisecurityController
   	before_action :checkKey, only: [:addcomment]
 
+    #---
+    #
     # Retrieve all the albums
+    #
+    # Route : /albums
+    #
+    # ===== HTTP VALUE
+    # 
+    # - +200+ - In case of success, return a list of albums including its music and the artist
+    # - +204+ - There is nothing in the album list
+    # - +503+ - Error from server
+    # 
     def index
       begin
         @returnValue = { content: Album.all.as_json(:only => Album.miniKey, :include => {
@@ -32,9 +43,17 @@ module API
 
     # Give a specific object by its id
     #
+    # Route : /albums/:id
+    #
     # ==== Options
     # 
     # * +:id+ - The id of the specific album
+    # 
+    # ===== HTTP VALUE
+    # 
+    # - +200+ - In case of success, return the album including its music and the artist
+    # - +404+ - Can't get the album, the id is probably wrong
+    # - +503+ - Error from server
     # 
     def show
       begin
@@ -58,6 +77,8 @@ module API
 
     # Give a part of the albums depending of the filter passed into parameter
     #
+    # Route : /albums/find
+    #
     # ==== Options
     # 
     # * +:attribute [attribute_name]+ - If you want a column equal to a specific value
@@ -72,6 +93,12 @@ module API
     #     http://api.soonzik.com/albums/find?attribute[style]=rock&order_by_desc[]=id&group_by[]=yearProd
     #     Note : By default, if you precise no attribute, it will take every row
     #
+    # ===== HTTP VALUE
+    # 
+    # - +200+ - In case of success, return a list of albums including its music and the artist
+    # - +204+ - The list is empty, probably too much filter
+    # - +503+ - Error from server
+    # 
     def find
       begin
         album_object = nil
@@ -157,12 +184,21 @@ module API
 
     # Add a comment to a specific album. Need to be a secure transaction.
     #
+    # Route : /albums/addcomment/:id 
+    #
     # ==== Options
     #
     # * +:security+ - If it's a secure transaction, this variable from ApiSecurity (the parent) is true
     # * +:id+ - The id of the album where is the comment
     # * +:content+ - The content of the comment
     #
+    # ===== HTTP VALUE
+    # 
+    # - +201+ - In case of success, return nothing
+    # - +403+ - It is not a secured transaction
+    # - +404+ - Can't get the album, the id is probably wrong
+    # - +503+ - Error from server
+    # 
   	def addcomment
       begin
         if (@security)

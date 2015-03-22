@@ -11,9 +11,17 @@ module API
 
   	# Destroy a specific object by its id
     #
+    # Route : /carts/destroy
+    #
     # ==== Options
     # 
-    # * +:id+ - The id of the specific cart
+    # * +id+ - The id of the specific cart
+    # 
+    # ===== HTTP VALUE
+    # 
+    # - +204+ - In case of success, there is nothing to return
+    # - +403+ - It is not a secured transaction
+    # - +503+ - Error from server
     # 
     def destroy
       begin
@@ -35,12 +43,20 @@ module API
 
     # Save a new object Cart. For more information on the parameters, check at the model
     # 
+    # Route : /carts/save
+    #
     # ==== Options
     # 
-    # * +:cart [user_id]+ - Id of the user who has the cart
-    # * +:cart [typeObj]+ - Model name of the object to add to the cart -> "Music" | "Album" | "Pack"
-    # * +:cart [obj_id]+ - Id of the object
-    # * +:cart [gift]+ - Boolean to know if it's a gift or not
+    # * +cart [user_id]+ - Id of the user who has the cart
+    # * +cart [typeObj]+ - Model name of the object to add to the cart -> "Music" | "Album" | "Pack"
+    # * +cart [obj_id]+ - Id of the object
+    # * +cart [gift]+ - Boolean to know if it's a gift or not
+    # 
+    # ===== HTTP VALUE
+    # 
+    # - +201+ - In case of success, return the new item
+    # - +403+ - It is not a secured transaction
+    # - +503+ - Error from server
     # 
     def save
       begin
@@ -97,20 +113,28 @@ module API
 
     # Give a part of the carts depending of the filter passed into parameter
     #
+    # Route : /carts/find
+    #
     # ==== Options
     # 
-    # * +:attribute [attribute_name]+ - If you want a column equal to a specific value
-    # * +:order_by_asc[]+ - If you want to order by ascending by values
-    # * +:order_by_desc[]+ - If you want to order by descending by values
-    # * +:group_by[]+ - If you want to group by field
-    # * +:limit+ - The number of row you want
-    # * +:offset+ - The offset of the array
+    # * +attribute [attribute_name]+ - If you want a column equal to a specific value
+    # * +order_by_asc []+ - If you want to order by ascending by values
+    # * +order_by_desc []+ - If you want to order by descending by values
+    # * +group_by []+ - If you want to group by field
+    # * +limit+ - The number of row you want
+    # * +offset+ - The offset of the array
     # 
     # ==== Example
     #
     #     http://api.soonzik.com/carts/find?attribute[user_id]=1&order_by_desc[]=user_id&group_by[]=user_id
     #     Note : By default, if you precise no attribute, it will take every row
     #
+    # ===== HTTP VALUE
+    # 
+    # - +200+ - In case of success, return a list of cart items
+    # - +204+ - The list is empty, probably too much filter
+    # - +503+ - Error from server
+    # 
     def find
       begin
         if (!@security)

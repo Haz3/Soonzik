@@ -7,12 +7,20 @@ module API
   class SearchsController < ApisecurityController
     # Search an element in our collection of content or for a specific object type
   	# 
+  	# Route : /search
+  	#
    	# ==== Options
    	# 
-   	# * +:offset+ - [Optionnal] Number where to begin the results (only with filter)
-    # * +:limit+ - [Optionnal] Number of result you want (only with filter)
-    # * +:query+ - [Optionnal] What the user type
-    # * +:type+ - [Optionnal] 
+   	# * +offset+ - [Optionnal] Number where to begin the results (only with filter)
+    # * +limit+ - [Optionnal] Number of result you want (only with filter)
+    # * +query+ - [Optionnal] What the user type
+    # * +type+ - [Optionnal] 
+    # 
+    # ===== HTTP VALUE
+    # 
+    # - +200+ - In case of success, return an hash like this : { artist: array_of_artist, user: array_of_user, music: array_of_musics, album: array_of_albums, packs: array_of_packs }
+    # - +204+ - The list is empty
+    # - +503+ - Error from server
     # 
     def search
  	  	begin

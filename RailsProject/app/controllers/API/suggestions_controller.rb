@@ -9,9 +9,11 @@ module API
 
   	# Give a specific object by its id
     #
+    # Not implemented
+    #
     # ==== Options
     # 
-    # * +:id+ - The id of the specific suggestion
+    # * +id+ - The id of the specific suggestion
     # 
     def show
       begin

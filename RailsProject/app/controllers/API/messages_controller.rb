@@ -11,9 +11,18 @@ module API
 
   	# Give a specific object by its id
     #
+    # Route : /messages/:id
+    #
     # ==== Options
     # 
-    # * +:id+ - The id of the specific message
+    # * +id+ - The id of the specific message
+    # 
+    # ===== HTTP VALUE
+    # 
+    # - +200+ - In case of success, return a message including its sender and receiver
+    # - +401+ - It is not a secured transaction
+    # - +404+ - Can't find the message, the id is probably wrong
+    # - +503+ - Error from server
     # 
     def show
       begin
@@ -42,11 +51,19 @@ module API
 
     # Save a new object Message. For more information on the parameters, check at the model
     # 
+    # Route : /messages/save
+    #
     # ==== Options
     # 
-    # * +:message [user_id]+ - Id of the user who send the message
-    # * +:message [dest_id]+ - Id of the user who read the message
-    # * +:message [msg]+ - The text of the message
+    # * +message [user_id]+ - Id of the user who send the message
+    # * +message [dest_id]+ - Id of the user who read the message
+    # * +message [msg]+ - The text of the message
+    # 
+    # ===== HTTP VALUE
+    # 
+    # - +201+ - In case of success, return the new message
+    # - +401+ - It is not a secured transaction
+    # - +503+ - Error from server
     # 
     def save
       begin
@@ -79,18 +96,24 @@ module API
     #
     # ==== Options
     # 
-    # * +:attribute [attribute_name]+ - If you want a column equal to a specific value
-    # * +:order_by_asc[]+ - If you want to order by ascending by values
-    # * +:order_by_desc[]+ - If you want to order by descending by values
-    # * +:group_by[]+ - If you want to group by field
-    # * +:limit+ - The number of row you want
-    # * +:offset+ - The offset of the array
+    # * +attribute [attribute_name]+ - If you want a column equal to a specific value
+    # * +order_by_asc []+ - If you want to order by ascending by values
+    # * +order_by_desc []+ - If you want to order by descending by values
+    # * +group_by []+ - If you want to group by field
+    # * +limit+ - The number of row you want
+    # * +offset+ - The offset of the array
     # 
     # ==== Example
     #
     #     http://api.soonzik.com/messages/find?attribute[user_id]=1&order_by_desc[]=user_id&group_by[]=user_id
     #     Note : By default, if you precise no attribute, it will take every row
     #
+    # ===== HTTP VALUE
+    # 
+    # - +200+ - In case of success, return a list of messages including its sender and receiver
+    # - +204+ - The list is empty, probably too much filter
+    # - +503+ - Error from server
+    # 
     def find
       begin
         if (!@security)

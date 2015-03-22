@@ -155,17 +155,27 @@ is the list of action available :</p>
 
 <h4 id="method-i-destroy-label-Options">Options<span><a href="#method-i-destroy-label-Options">&para;</a> <a href="#top">&uarr;</a></span></h4>
 <ul><li>
-<p><code>:id</code> - The id of the specific notification</p>
+<p><code>id</code> - The id of the specific notification</p>
+</li></ul>
+
+<h5 id="method-i-destroy-label-HTTP+VALUE">HTTP VALUE<span><a href="#method-i-destroy-label-HTTP+VALUE">&para;</a> <a href="#top">&uarr;</a></span></h5>
+<ul><li>
+<p><code>204</code> - In case of success, return nothing</p>
+</li><li>
+<p><code>401</code> - It is not a secured transaction</p>
+</li><li>
+<p><code>503</code> - Error from server</p>
 </li></ul>					
 											<div class="method-source-code" id="destroy-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/notifications_controller.rb, line 178</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/notifications_controller.rb, line 214</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">destroy</span>
   <span class="ruby-keyword">begin</span>
     <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@security</span>)
       <span class="ruby-identifier">object</span> = <span class="ruby-constant">Notification</span>.<span class="ruby-identifier">find_by_id</span>(<span class="ruby-ivar">@id</span>)
       <span class="ruby-identifier">object</span>.<span class="ruby-identifier">destroy</span>
       <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">202</span>
+      <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:no_content</span>
     <span class="ruby-keyword">else</span>
       <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">500</span>
       <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:forbidden</span>
@@ -194,29 +204,41 @@ is the list of action available :</p>
 											<p>Give a part of the notifications depending of the filter passed into
 parameter</p>
 
+<p>Route : /notifications/find</p>
+
 <h4 id="method-i-find-label-Options">Options<span><a href="#method-i-find-label-Options">&para;</a> <a href="#top">&uarr;</a></span></h4>
 <ul><li>
-<p>+:<a href="attribute_name">attribute</a>+ - If you want a column equal to a
-specific value</p>
+<p>+attribute [attribute_name]+ - If you want a column equal to a specific
+value</p>
 </li><li>
-<p>+:order_by_asc[]+ - If you want to order by ascending by values</p>
+<p>+order_by_asc []+ - If you want to order by ascending by values</p>
 </li><li>
-<p>+:order_by_desc[]+ - If you want to order by descending by values</p>
+<p>+order_by_desc []+ - If you want to order by descending by values</p>
 </li><li>
-<p>+:group_by[]+ - If you want to group by field</p>
+<p>+group_by []+ - If you want to group by field</p>
 </li><li>
-<p><code>:limit</code> - The number of row you want</p>
+<p><code>limit</code> - The number of row you want</p>
 </li><li>
-<p><code>:offset</code> - The offset of the array</p>
+<p><code>offset</code> - The offset of the array</p>
 </li></ul>
 
 <h4 id="method-i-find-label-Example">Example<span><a href="#method-i-find-label-Example">&para;</a> <a href="#top">&uarr;</a></span></h4>
 
 <pre>http://api.soonzik.com/notifications/find?attribute[user_id]=1&amp;order_by_desc[]=user_id&amp;group_by[]=user_id
-Note : By default, if you precise no attribute, it will take every row</pre>					
+Note : By default, if you precise no attribute, it will take every row</pre>
+
+<h5 id="method-i-find-label-HTTP+VALUE">HTTP VALUE<span><a href="#method-i-find-label-HTTP+VALUE">&para;</a> <a href="#top">&uarr;</a></span></h5>
+<ul><li>
+<p><code>200</code> - In case of success, return a list of notifications
+including its user</p>
+</li><li>
+<p><code>204</code> - The list is empty, there is probably too much filter</p>
+</li><li>
+<p><code>503</code> - Error from server</p>
+</li></ul>					
 											<div class="method-source-code" id="find-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/notifications_controller.rb, line 89</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/notifications_controller.rb, line 117</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">find</span>
   <span class="ruby-keyword">begin</span>
     <span class="ruby-keyword">if</span> (<span class="ruby-operator">!</span><span class="ruby-ivar">@security</span>)
@@ -284,7 +306,9 @@ Note : By default, if you precise no attribute, it will take every row</pre>
         <span class="ruby-identifier">notification_object</span> = <span class="ruby-identifier">notification_object</span>.<span class="ruby-identifier">offset</span>(<span class="ruby-ivar">@offset</span>.<span class="ruby-identifier">to_i</span>)
       <span class="ruby-keyword">end</span>
 
-      <span class="ruby-ivar">@returnValue</span> = { <span class="ruby-identifier">content</span><span class="ruby-operator">:</span> <span class="ruby-identifier">notification_object</span>.<span class="ruby-identifier">as_json</span>(<span class="ruby-value">:include</span> =<span class="ruby-operator">&gt;</span> { <span class="ruby-value">:user</span> =<span class="ruby-operator">&gt;</span> {<span class="ruby-value">:only</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">User</span>.<span class="ruby-identifier">miniKey</span> }<span class="ruby-identifier"> </span>}) }
+      <span class="ruby-ivar">@returnValue</span> = { <span class="ruby-identifier">content</span><span class="ruby-operator">:</span> <span class="ruby-identifier">notification_object</span>.<span class="ruby-identifier">as_json</span>(<span class="ruby-value">:include</span> =<span class="ruby-operator">&gt;</span> {
+                                                                          <span class="ruby-value">:user</span> =<span class="ruby-operator">&gt;</span> {<span class="ruby-value">:only</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">User</span>.<span class="ruby-identifier">miniKey</span> }
+                                                                        }) }
 
       <span class="ruby-keyword">if</span> (<span class="ruby-identifier">notification_object</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>)
         <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">202</span>
@@ -317,26 +341,39 @@ Note : By default, if you precise no attribute, it will take every row</pre>
 											<p>Save a new object <a href="../Notification.html">Notification</a>. For more
 information on the parameters, check at the model</p>
 
+<p>Route : /notifications/save</p>
+
 <h4 id="method-i-save-label-Options">Options<span><a href="#method-i-save-label-Options">&para;</a> <a href="#top">&uarr;</a></span></h4>
 <ul><li>
-<p>+:<a href="user_id">notification</a>+ - Id of the user who has the
-notification</p>
+<p>+:notification [user_id]+ - Id of the user who has the notification</p>
 </li><li>
-<p>+:<a href="link">notification</a>+ - The link where the notification
-redirect without the <a href="http://dns.com">dns.com</a> (to be usefull by
-the smartphone applications)</p>
+<p>+:notification [link]+ - The link where the notification redirect without
+the <a href="http://dns.com">dns.com</a> (to be usefull by the smartphone
+applications)</p>
 </li><li>
-<p>+:<a href="description">notification</a>+ - The text of the notification</p>
+<p>+:notification [description]+ - The text of the notification</p>
+</li></ul>
+
+<h5 id="method-i-save-label-HTTP+VALUE">HTTP VALUE<span><a href="#method-i-save-label-HTTP+VALUE">&para;</a> <a href="#top">&uarr;</a></span></h5>
+<ul><li>
+<p><code>201</code> - In case of success, return a notification including its
+user</p>
+</li><li>
+<p><code>401</code> - It is not a secured transaction</p>
+</li><li>
+<p><code>503</code> - Error from server</p>
 </li></ul>					
 											<div class="method-source-code" id="save-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/notifications_controller.rb, line 49</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/notifications_controller.rb, line 67</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">save</span>
   <span class="ruby-keyword">begin</span>
     <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@security</span>)
       <span class="ruby-identifier">notif</span> = <span class="ruby-constant">Notification</span>.<span class="ruby-identifier">new</span>(<span class="ruby-constant">Notification</span>.<span class="ruby-identifier">notification_params</span> <span class="ruby-identifier">params</span>)
       <span class="ruby-keyword">if</span> (<span class="ruby-identifier">notif</span>.<span class="ruby-identifier">save</span>)
-        <span class="ruby-ivar">@returnValue</span> = { <span class="ruby-identifier">content</span><span class="ruby-operator">:</span> <span class="ruby-identifier">notif</span>.<span class="ruby-identifier">as_json</span>(<span class="ruby-value">:include</span> =<span class="ruby-operator">&gt;</span> { <span class="ruby-value">:user</span> =<span class="ruby-operator">&gt;</span> {<span class="ruby-value">:only</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">User</span>.<span class="ruby-identifier">miniKey</span> }<span class="ruby-identifier"> </span>}) }
+        <span class="ruby-ivar">@returnValue</span> = { <span class="ruby-identifier">content</span><span class="ruby-operator">:</span> <span class="ruby-identifier">notif</span>.<span class="ruby-identifier">as_json</span>(<span class="ruby-value">:include</span> =<span class="ruby-operator">&gt;</span> {
+                                                              <span class="ruby-value">:user</span> =<span class="ruby-operator">&gt;</span> {<span class="ruby-value">:only</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">User</span>.<span class="ruby-identifier">miniKey</span> }
+                                                            }) }
         <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">201</span>
         <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:created</span>
       <span class="ruby-keyword">else</span>
@@ -371,13 +408,26 @@ the smartphone applications)</p>
 					<div class="method-description">
 											<p>Give a specific object by its id</p>
 
+<p>Route : /notifications/:id</p>
+
 <h4 id="method-i-show-label-Options">Options<span><a href="#method-i-show-label-Options">&para;</a> <a href="#top">&uarr;</a></span></h4>
 <ul><li>
-<p><code>:id</code> - The id of the specific notification</p>
+<p><code>id</code> - The id of the specific notification</p>
+</li></ul>
+
+<h5 id="method-i-show-label-HTTP+VALUE">HTTP VALUE<span><a href="#method-i-show-label-HTTP+VALUE">&para;</a> <a href="#top">&uarr;</a></span></h5>
+<ul><li>
+<p><code>200</code> - In case of success, return a notification including its
+user</p>
+</li><li>
+<p><code>404</code> - Can&#39;t find the notification, the id is probably
+wrong</p>
+</li><li>
+<p><code>503</code> - Error from server</p>
 </li></ul>					
 											<div class="method-source-code" id="show-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/notifications_controller.rb, line 19</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/notifications_controller.rb, line 27</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">show</span>
   <span class="ruby-keyword">begin</span>
     <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@security</span>)
@@ -386,7 +436,9 @@ the smartphone applications)</p>
               <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">502</span>
         <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:not_found</span>
       <span class="ruby-keyword">else</span>
-            <span class="ruby-ivar">@returnValue</span> = { <span class="ruby-identifier">content</span><span class="ruby-operator">:</span> <span class="ruby-identifier">notif</span>.<span class="ruby-identifier">as_json</span>(<span class="ruby-value">:include</span> =<span class="ruby-operator">&gt;</span> { <span class="ruby-value">:user</span> =<span class="ruby-operator">&gt;</span> {<span class="ruby-value">:only</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">User</span>.<span class="ruby-identifier">miniKey</span> }<span class="ruby-identifier"> </span>}) }
+            <span class="ruby-ivar">@returnValue</span> = { <span class="ruby-identifier">content</span><span class="ruby-operator">:</span> <span class="ruby-identifier">notif</span>.<span class="ruby-identifier">as_json</span>(<span class="ruby-value">:include</span> =<span class="ruby-operator">&gt;</span> {
+                                                              <span class="ruby-value">:user</span> =<span class="ruby-operator">&gt;</span> {<span class="ruby-value">:only</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">User</span>.<span class="ruby-identifier">miniKey</span> }
+                                                            }) }
               <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">200</span>
       <span class="ruby-keyword">end</span>
         <span class="ruby-keyword">else</span>
@@ -432,7 +484,6 @@ the smartphone applications)</p>
 			<li><a href="../API.html">API</a></li>
 			<li><a href="../API/AlbumsController.html">API::AlbumsController</a></li>
 			<li><a href="../API/ApiController.html">API::ApiController</a></li>
-			<li><a href="../API/ApisecurityController.html">API::ApisecurityController</a></li>
 			<li><a href="../API/BattlesController.html">API::BattlesController</a></li>
 			<li><a href="../API/CartsController.html">API::CartsController</a></li>
 			<li><a href="../API/ConcertsController.html">API::ConcertsController</a></li>

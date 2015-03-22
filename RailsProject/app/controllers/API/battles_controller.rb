@@ -8,6 +8,15 @@ module API
   #
   class BattlesController < ApisecurityController
   	# Retrieve all the battles
+    #
+    # Route : /battles
+    #
+    # ===== HTTP VALUE
+    # 
+    # - +200+ - In case of success, return a list of battles including the artists and the vote
+    # - +204+ - The list is empty
+    # - +503+ - Error from server
+    # 
     def index
       begin
         @returnValue = { content: Battle.all.as_json(:include => {
@@ -30,9 +39,17 @@ module API
 
   	# Give a specific object by its id
     #
+    # Route : /albums/:id
+    #
     # ==== Options
     # 
-    # * +:id+ - The id of the specific battle
+    # * +id+ - The id of the specific battle
+    # 
+    # ===== HTTP VALUE
+    # 
+    # - +200+ - In case of success, return the specific battle
+    # - +404+ - Can't get the battle, the id is probably wrong
+    # - +503+ - Error from server
     # 
     def show
       begin
@@ -57,20 +74,28 @@ module API
 
     # Give a part of the battles depending of the filter passed into parameter
     #
+    # Route : /battles/find
+    #
     # ==== Options
     # 
-    # * +:attribute [attribute_name]+ - If you want a column equal to a specific value
-    # * +:order_by_asc[]+ - If you want to order by ascending by values
-    # * +:order_by_desc[]+ - If you want to order by descending by values
-    # * +:group_by[]+ - If you want to group by field
-    # * +:limit+ - The number of row you want
-    # * +:offset+ - The offset of the array
+    # * +attribute [attribute_name]+ - If you want a column equal to a specific value
+    # * +order_by_asc []+ - If you want to order by ascending by values
+    # * +order_by_desc []+ - If you want to order by descending by values
+    # * +group_by []+ - If you want to group by field
+    # * +limit+ - The number of row you want
+    # * +offset+ - The offset of the array
     # 
     # ==== Example
     #
     #     http://api.soonzik.com/battles/find?attribute[artist_one_id]=1&order_by_desc[]=artist_two_id&group_by[]=artist_one_id
     #     Note : By default, if you precise no attribute, it will take every row
     #
+    # ===== HTTP VALUE
+    # 
+    # - +200+ - In case of success, return a list of battles including its artists and the votes
+    # - +204+ - The list is empty, probably too much filter
+    # - +503+ - Error from server
+    # 
     def find
       begin
         battle_object = nil

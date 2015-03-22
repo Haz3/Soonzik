@@ -145,10 +145,22 @@ list of action available :</p>
 										</header>
 
 					<div class="method-description">
-											<p>Retrieve all the genres</p>					
+											<p>Retrieve all the genres</p>
+
+<p>Route : /genres</p>
+
+<h5 id="method-i-index-label-HTTP+VALUE">HTTP VALUE<span><a href="#method-i-index-label-HTTP+VALUE">&para;</a> <a href="#top">&uarr;</a></span></h5>
+<ul><li>
+<p><code>200</code> - In case of success, return a list of genres including
+its influences</p>
+</li><li>
+<p><code>204</code> - The list is empty</p>
+</li><li>
+<p><code>503</code> - Error from server</p>
+</li></ul>					
 											<div class="method-source-code" id="index-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/genres_controller.rb, line 9</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/genres_controller.rb, line 18</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">index</span>
     <span class="ruby-keyword">begin</span>
     <span class="ruby-ivar">@returnValue</span> = { <span class="ruby-identifier">content</span><span class="ruby-operator">:</span> <span class="ruby-constant">Genre</span>.<span class="ruby-identifier">all</span>.<span class="ruby-identifier">as_json</span>(<span class="ruby-value">:include</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">:influences</span>) }
@@ -179,10 +191,27 @@ list of action available :</p>
 										</header>
 
 					<div class="method-description">
-											<p>Retrieve a specific genre</p>					
+											<p>Retrieve a specific genre</p>
+
+<p>Route : /genres/:id</p>
+
+<h4 id="method-i-show-label-Options">Options<span><a href="#method-i-show-label-Options">&para;</a> <a href="#top">&uarr;</a></span></h4>
+<ul><li>
+<p><code>id</code> - The id of the genre selected</p>
+</li></ul>
+
+<h5 id="method-i-show-label-HTTP+VALUE">HTTP VALUE<span><a href="#method-i-show-label-HTTP+VALUE">&para;</a> <a href="#top">&uarr;</a></span></h5>
+<ul><li>
+<p><code>200</code> - In case of success, return a genre including its
+influences and musics</p>
+</li><li>
+<p><code>404</code> - Can&#39;t get the genre, the id is probably wrong</p>
+</li><li>
+<p><code>503</code> - Error from server</p>
+</li></ul>					
 											<div class="method-source-code" id="show-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/genres_controller.rb, line 26</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/genres_controller.rb, line 48</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">show</span>
     <span class="ruby-keyword">begin</span>
     <span class="ruby-identifier">genre</span> = <span class="ruby-constant">Genre</span>.<span class="ruby-identifier">find_by_id</span>(<span class="ruby-ivar">@id</span>)
@@ -235,7 +264,6 @@ list of action available :</p>
 			<li><a href="../API.html">API</a></li>
 			<li><a href="../API/AlbumsController.html">API::AlbumsController</a></li>
 			<li><a href="../API/ApiController.html">API::ApiController</a></li>
-			<li><a href="../API/ApisecurityController.html">API::ApisecurityController</a></li>
 			<li><a href="../API/BattlesController.html">API::BattlesController</a></li>
 			<li><a href="../API/CartsController.html">API::CartsController</a></li>
 			<li><a href="../API/ConcertsController.html">API::ConcertsController</a></li>

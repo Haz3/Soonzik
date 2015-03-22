@@ -10,12 +10,20 @@ module API
 
     # Save a new object Gift. For more information on the parameters, check at the model
     # 
+    # Route : /gifts/save
+    #
     # ==== Options
     # 
-    # * +:gift [to_user]+ - Id of the user who has the gift
-    # * +:gift [from_user]+ - Id of the user where the gift comes from
-    # * +:gift [typeObj]+ - Model name of the object to add to the gift -> "Music" | "Album" | "Pack"
-    # * +:gift [obj_id]+ - Id of the object
+    # * +gift [to_user]+ - Id of the user who has the gift
+    # * +gift [from_user]+ - Id of the user where the gift comes from
+    # * +gift [typeObj]+ - Model name of the object to add to the gift -> "Music" | "Album" | "Pack"
+    # * +gift [obj_id]+ - Id of the object
+    # 
+    # ===== HTTP VALUE
+    # 
+    # - +200+ - In case of success, return the gift saved including its informations
+    # - +301+ - It is not a secure transaction
+    # - +503+ - Error from server
     # 
     def save
       begin

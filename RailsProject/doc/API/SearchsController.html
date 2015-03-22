@@ -147,21 +147,34 @@
 											<p>Search an element in our collection of content or for a specific object
 type</p>
 
+<p>Route : /search</p>
+
 <h4 id="method-i-search-label-Options">Options<span><a href="#method-i-search-label-Options">&para;</a> <a href="#top">&uarr;</a></span></h4>
 <ul><li>
-<p><code>:offset</code> - [Optionnal] Number where to begin the results (only
+<p><code>offset</code> - [Optionnal] Number where to begin the results (only
 with filter)</p>
 </li><li>
-<p><code>:limit</code> - [Optionnal] Number of result you want (only with
+<p><code>limit</code> - [Optionnal] Number of result you want (only with
 filter)</p>
 </li><li>
-<p><code>:query</code> - [Optionnal] What the user type</p>
+<p><code>query</code> - [Optionnal] What the user type</p>
 </li><li>
-<p><code>:type</code> - [Optionnal]</p>
+<p><code>type</code> - [Optionnal]</p>
+</li></ul>
+
+<h5 id="method-i-search-label-HTTP+VALUE">HTTP VALUE<span><a href="#method-i-search-label-HTTP+VALUE">&para;</a> <a href="#top">&uarr;</a></span></h5>
+<ul><li>
+<p><code>200</code> - In case of success, return an hash like this : { artist:
+array_of_artist, user: array_of_user, music: array_of_musics, album:
+array_of_albums, packs: array_of_packs }</p>
+</li><li>
+<p><code>204</code> - The list is empty</p>
+</li><li>
+<p><code>503</code> - Error from server</p>
 </li></ul>					
 											<div class="method-source-code" id="search-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/searchs_controller.rb, line 17</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/searchs_controller.rb, line 25</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">search</span>
           <span class="ruby-keyword">begin</span>
                 <span class="ruby-identifier">content</span> = []
@@ -242,7 +255,6 @@ filter)</p>
 			<li><a href="../API.html">API</a></li>
 			<li><a href="../API/AlbumsController.html">API::AlbumsController</a></li>
 			<li><a href="../API/ApiController.html">API::ApiController</a></li>
-			<li><a href="../API/ApisecurityController.html">API::ApisecurityController</a></li>
 			<li><a href="../API/BattlesController.html">API::BattlesController</a></li>
 			<li><a href="../API/CartsController.html">API::CartsController</a></li>
 			<li><a href="../API/ConcertsController.html">API::ConcertsController</a></li>

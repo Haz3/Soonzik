@@ -8,6 +8,15 @@ module API
   #
   class PacksController < ApisecurityController
     # Retrieve all the packs
+    #
+    # Route : /packs
+    #
+    # ===== HTTP VALUE
+    # 
+    # - +200+ - In case of success, return a list of pack including its albums which includes its musics and the user (artist)
+    # - +204+ - The list empty
+    # - +503+ - Error from server
+    # 
     def index
       begin
         @returnValue = { content: Pack.all.as_json(:include => { albums: {
@@ -33,9 +42,17 @@ module API
 
     # Give a specific object by its id
     #
+    # Route : /packs/:id
+    #
     # ==== Options
     # 
-    # * +:id+ - The id of the specific pack
+    # * +id+ - The id of the specific pack
+    # 
+    # ===== HTTP VALUE
+    # 
+    # - +200+ - In case of success, return a pack including its albums which includes its musics and the user (artist)
+    # - +404+ - Can't find the packs, the id is probably wrong
+    # - +503+ - Error from server
     # 
     def show
       begin
@@ -63,20 +80,28 @@ module API
 
     # Give a part of the packs depending of the filter passed into parameter
     #
+    # Route : /packs/find
+    #
     # ==== Options
     # 
-    # * +:attribute [attribute_name]+ - If you want a column equal to a specific value
-    # * +:order_by_asc[]+ - If you want to order by ascending by values
-    # * +:order_by_desc[]+ - If you want to order by descending by values
-    # * +:group_by[]+ - If you want to group by field
-    # * +:limit+ - The number of row you want
-    # * +:offset+ - The offset of the array
+    # * +attribute [attribute_name]+ - If you want a column equal to a specific value
+    # * +order_by_asc []+ - If you want to order by ascending by values
+    # * +order_by_desc []+ - If you want to order by descending by values
+    # * +group_by []+ - If you want to group by field
+    # * +limit+ - The number of row you want
+    # * +offset+ - The offset of the array
     # 
     # ==== Example
     #
     #     http://api.soonzik.com/packs/find?attribute[style]=rock&order_by_desc[]=id&group_by[]=title
     #     Note : By default, if you precise no attribute, it will take every row
     #
+    # ===== HTTP VALUE
+    # 
+    # - +200+ - In case of success, return a list of packs including its albums which includes its musics and user (artist)
+    # - +204+ - The list is empty, there is probably too much filter
+    # - +503+ - Error from server
+    # 
     def find
       begin
         pack_object = nil

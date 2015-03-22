@@ -202,23 +202,16 @@ and the validation Can provide some features linked to this model</p>
 							<pre class="prettyprint linenums"><code 
 								class="language-ruby"><span class="ruby-comment"># File app/models/music.rb, line 37</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">suggest</span>(<span class="ruby-identifier">userList</span>)
-
-
-
-
-
-
-  <span class="ruby-identifier">genresPonderation</span> = {}
   <span class="ruby-identifier">genresPonderation</span> = {}
 
   <span class="ruby-identifier">musicList</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">music</span><span class="ruby-operator">|</span>
     <span class="ruby-keyword">if</span> (<span class="ruby-identifier">music</span>.<span class="ruby-identifier">genres</span> <span class="ruby-operator">!=</span> <span class="ruby-keyword">nil</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">music</span>.<span class="ruby-identifier">genres</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">!=</span> <span class="ruby-value">0</span>)
       <span class="ruby-comment"># For each genre, we change ponderation</span>
       <span class="ruby-identifier">music</span>.<span class="ruby-identifier">genres</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">g</span><span class="ruby-operator">|</span>
-        <span class="ruby-keyword">if</span> (<span class="ruby-identifier">genres</span>.<span class="ruby-identifier">has_key?</span>(<span class="ruby-identifier">g</span>.<span class="ruby-identifier">id</span>))
-          <span class="ruby-identifier">genres</span>[<span class="ruby-identifier">g</span>.<span class="ruby-identifier">id</span>] <span class="ruby-operator">+=</span> <span class="ruby-value">1</span>
+        <span class="ruby-keyword">if</span> (<span class="ruby-identifier">genresPonderation</span>.<span class="ruby-identifier">has_key?</span>(<span class="ruby-identifier">g</span>.<span class="ruby-identifier">id</span>))
+          <span class="ruby-identifier">genresPonderation</span>[<span class="ruby-identifier">g</span>.<span class="ruby-identifier">id</span>] <span class="ruby-operator">+=</span> <span class="ruby-value">1</span>
         <span class="ruby-keyword">else</span>
-          <span class="ruby-identifier">genres</span>[<span class="ruby-identifier">g</span>.<span class="ruby-identifier">id</span>] = <span class="ruby-value">0</span>
+          <span class="ruby-identifier">genresPonderation</span>[<span class="ruby-identifier">g</span>.<span class="ruby-identifier">id</span>] = <span class="ruby-value">0</span>
         <span class="ruby-keyword">end</span>
       <span class="ruby-keyword">end</span>
     <span class="ruby-keyword">end</span>
@@ -257,7 +250,6 @@ and the validation Can provide some features linked to this model</p>
 			<li><a href="./API.html">API</a></li>
 			<li><a href="./API/AlbumsController.html">API::AlbumsController</a></li>
 			<li><a href="./API/ApiController.html">API::ApiController</a></li>
-			<li><a href="./API/ApisecurityController.html">API::ApisecurityController</a></li>
 			<li><a href="./API/BattlesController.html">API::BattlesController</a></li>
 			<li><a href="./API/CartsController.html">API::CartsController</a></li>
 			<li><a href="./API/ConcertsController.html">API::ConcertsController</a></li>

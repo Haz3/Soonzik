@@ -125,6 +125,28 @@ and the validation Can provide some features linked to this model</p>
 					<h3>Public Class Methods</h3>
 				</header>
 
+								<a name="method-c-miniKey">anchor</a>
+				<div id="method-c-miniKey-doc" class="method">
+
+					<header>
+											<i class="icon-generic"></i>
+						<span class="method-name">miniKey</span><span 
+							class="method-args">()</span>
+										</header>
+
+					<div class="method-description">
+																
+											<div class="method-source-code" id="miniKey-source">
+							<pre class="prettyprint linenums"><code 
+								class="language-ruby"><span class="ruby-comment"># File app/models/pack.rb, line 15</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">miniKey</span>
+      [<span class="ruby-value">:title</span>]
+<span class="ruby-keyword">end</span></code></pre>
+						</div>
+										</div>
+
+					
+									</div>
 								<a name="method-c-pack_params">anchor</a>
 				<div id="method-c-pack_params-doc" class="method">
 
@@ -140,7 +162,7 @@ and the validation Can provide some features linked to this model</p>
 							<pre class="prettyprint linenums"><code 
 								class="language-ruby"><span class="ruby-comment"># File app/models/pack.rb, line 11</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">pack_params</span>(<span class="ruby-identifier">parameters</span>)
-  <span class="ruby-identifier">parameters</span>.<span class="ruby-identifier">require</span>(<span class="ruby-value">:pack</span>).<span class="ruby-identifier">permit</span>(<span class="ruby-value">:title</span>, <span class="ruby-value">:style</span>)
+  <span class="ruby-identifier">parameters</span>.<span class="ruby-identifier">require</span>(<span class="ruby-value">:pack</span>).<span class="ruby-identifier">permit</span>(<span class="ruby-value">:title</span>)
 <span class="ruby-keyword">end</span></code></pre>
 						</div>
 										</div>
@@ -181,7 +203,6 @@ and the validation Can provide some features linked to this model</p>
 			<li><a href="./API.html">API</a></li>
 			<li><a href="./API/AlbumsController.html">API::AlbumsController</a></li>
 			<li><a href="./API/ApiController.html">API::ApiController</a></li>
-			<li><a href="./API/ApisecurityController.html">API::ApisecurityController</a></li>
 			<li><a href="./API/BattlesController.html">API::BattlesController</a></li>
 			<li><a href="./API/CartsController.html">API::CartsController</a></li>
 			<li><a href="./API/ConcertsController.html">API::ConcertsController</a></li>

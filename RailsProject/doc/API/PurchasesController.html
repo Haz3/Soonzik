@@ -149,28 +149,43 @@ available :</p>
 											<p>Save a new object <a href="../Purchase.html">Purchase</a>. For more
 information on the parameters, check at the model</p>
 
+<p>Route : /purchases/save</p>
+
 <h4 id="method-i-save-label-Options">Options<span><a href="#method-i-save-label-Options">&para;</a> <a href="#top">&uarr;</a></span></h4>
 <ul><li>
-<p>+:<a href="user_id">purchase</a>+ - Id of the user who has the purchase</p>
+<p>+purchase [user_id]+ - Id of the user who has the purchase</p>
 </li><li>
-<p>+:<a href="typeObj">purchase</a>+ - Model name of the object to add to the
-purchase</p>
+<p>+purchase [typeObj]+ - Model name of the object to add to the purchase
+-&gt; “Music” | “Album” | “Pack”</p>
 </li><li>
-<p>+:<a href="obj_id">purchase</a>+ - Id of the object</p>
+<p>+purchase [obj_id]+ - Id of the object</p>
+</li></ul>
+
+<h5 id="method-i-save-label-HTTP+VALUE">HTTP VALUE<span><a href="#method-i-save-label-HTTP+VALUE">&para;</a> <a href="#top">&uarr;</a></span></h5>
+<ul><li>
+<p><code>201</code> - In case of success, return the purchase created</p>
+</li><li>
+<p><code>401</code> - It is not a secured transaction</p>
+</li><li>
+<p><code>503</code> - Error from server</p>
 </li></ul>					
 											<div class="method-source-code" id="save-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/purchases_controller.rb, line 18</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/purchases_controller.rb, line 26</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">save</span>
   <span class="ruby-keyword">begin</span>
     <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@security</span>)
+      <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>, <span class="ruby-string">&#39;user_id missing&#39;</span> <span class="ruby-keyword">if</span> (<span class="ruby-operator">!</span><span class="ruby-keyword">defined?</span><span class="ruby-ivar">@purchase</span>[<span class="ruby-value">:user_id</span>])
+      <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>, <span class="ruby-string">&#39;typeObj missing&#39;</span> <span class="ruby-keyword">if</span> (<span class="ruby-operator">!</span><span class="ruby-keyword">defined?</span><span class="ruby-ivar">@purchase</span>[<span class="ruby-value">:typeObj</span>])
+      <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>, <span class="ruby-string">&#39;obj_id missing&#39;</span> <span class="ruby-keyword">if</span> (<span class="ruby-operator">!</span><span class="ruby-keyword">defined?</span><span class="ruby-ivar">@purchase</span>[<span class="ruby-value">:obj_id</span>])
+
       <span class="ruby-identifier">purchase</span> = <span class="ruby-constant">Purchase</span>.<span class="ruby-identifier">new</span>
-      <span class="ruby-identifier">purchase</span>.<span class="ruby-identifier">user_id</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:user_id</span>]
-      <span class="ruby-identifier">classObj</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:typeObj</span>].<span class="ruby-identifier">constantize</span>
-      <span class="ruby-identifier">obj</span> = <span class="ruby-identifier">classObj</span>.<span class="ruby-identifier">find_by_id</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:obj_id</span>])
+      <span class="ruby-identifier">purchase</span>.<span class="ruby-identifier">user_id</span> = <span class="ruby-ivar">@purchase</span>[<span class="ruby-value">:user_id</span>]
+      <span class="ruby-identifier">classObj</span> = <span class="ruby-ivar">@purchase</span>[<span class="ruby-value">:typeObj</span>].<span class="ruby-identifier">constantize</span>
+      <span class="ruby-identifier">obj</span> = <span class="ruby-identifier">classObj</span>.<span class="ruby-identifier">find_by_id</span>(<span class="ruby-ivar">@purchase</span>[<span class="ruby-value">:obj_id</span>])
       <span class="ruby-comment"># check if the object exists</span>
       <span class="ruby-keyword">if</span> (<span class="ruby-identifier">obj</span> <span class="ruby-operator">!=</span> <span class="ruby-keyword">nil</span>)
-        <span class="ruby-keyword">case</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:typeObj</span>]
+        <span class="ruby-keyword">case</span> <span class="ruby-ivar">@purchase</span>[<span class="ruby-value">:typeObj</span>]
           <span class="ruby-keyword">when</span> <span class="ruby-string">&quot;Music&quot;</span>
             <span class="ruby-identifier">purchase</span>.<span class="ruby-identifier">musics</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">obj</span>;
           <span class="ruby-keyword">when</span> <span class="ruby-string">&quot;Album&quot;</span>
@@ -240,7 +255,6 @@ purchase</p>
 			<li><a href="../API.html">API</a></li>
 			<li><a href="../API/AlbumsController.html">API::AlbumsController</a></li>
 			<li><a href="../API/ApiController.html">API::ApiController</a></li>
-			<li><a href="../API/ApisecurityController.html">API::ApisecurityController</a></li>
 			<li><a href="../API/BattlesController.html">API::BattlesController</a></li>
 			<li><a href="../API/CartsController.html">API::CartsController</a></li>
 			<li><a href="../API/ConcertsController.html">API::ConcertsController</a></li>

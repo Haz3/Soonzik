@@ -12,6 +12,15 @@ module API
     before_action :checkKey, only: [:destroy, :save]
 
   	# Retrieve all the tweets
+    #
+    # Route : /tweets
+    #
+    # ===== HTTP VALUE
+    # 
+    # - +200+ - In case of success, return a list of tweets including its user
+    # - +204+ - The list is empty
+    # - +503+ - Error from server
+    # 
     def index
       begin
         @returnValue = { content: Tweet.all.as_json(:include => { :user => { only: User.miniKey } }) }
@@ -30,9 +39,17 @@ module API
 
   	# Give a specific object by its id
     #
+    # Route : /tweets/:id
+    #
     # ==== Options
     # 
-    # * +:id+ - The id of the specific tweets
+    # * +id+ - The id of the specific tweets
+    # 
+    # ===== HTTP VALUE
+    # 
+    # - +200+ - In case of success, return a tweet including its user
+    # - +404+ - Can't find the tweet, the id is probably wrong
+    # - +503+ - Error from server
     # 
     def show
       begin
@@ -53,10 +70,18 @@ module API
 
     # Save a new object Tweet. For more information on the parameters, check at the model
     # 
+    # Route : /tweets/save
+    #
     # ==== Options
     # 
     # * +:tweet [user_id]+ - Id of the user who has the tweet
     # * +:tweet [description]+ - The text of the tweet
+    # 
+    # ===== HTTP VALUE
+    # 
+    # - +201+ - In case of success, return the tweet saved
+    # - +401+ - It is not a secured transaction
+    # - +503+ - Error from server
     # 
     def save
       begin
@@ -86,20 +111,28 @@ module API
 
     # Give a part of the tweets depending of the filter passed into parameter
     #
+    # Route : /tweets/find
+    #
     # ==== Options
     # 
-    # * +:attribute [attribute_name]+ - If you want a column equal to a specific value
-    # * +:order_by_asc[]+ - If you want to order by ascending by values
-    # * +:order_by_desc[]+ - If you want to order by descending by values
-    # * +:group_by[]+ - If you want to group by field
-    # * +:limit+ - The number of row you want
-    # * +:offset+ - The offset of the array
+    # * +attribute [attribute_name]+ - If you want a column equal to a specific value
+    # * +order_by_asc []+ - If you want to order by ascending by values
+    # * +order_by_desc []+ - If you want to order by descending by values
+    # * +group_by []+ - If you want to group by field
+    # * +limit+ - The number of row you want
+    # * +offset+ - The offset of the array
     # 
     # ==== Example
     #
     #     http://api.soonzik.com/tweets/find?attribute[user_id]=1&order_by_desc[]=user_id&group_by[]=user_id
     #     Note : By default, if you precise no attribute, it will take every row
     #
+    # ===== HTTP VALUE
+    # 
+    # - +200+ - In case of success, return a list of tweets including its user
+    # - +204+ - The list is empty, there is probably too much filter
+    # - +503+ - Error from server
+    # 
     def find
       begin
         tweet_object = nil
@@ -184,9 +217,17 @@ module API
 
     # Destroy a specific object by its id
     #
+    # Route : /tweets/destroy
+    #
     # ==== Options
     # 
-    # * +:id+ - The id of the specific tweet
+    # * +id+ - The id of the specific tweet
+    # 
+    # ===== HTTP VALUE
+    # 
+    # - +204+ - In case of success, return nothing
+    # - +401+ - It is not a secured transaction
+    # - +503+ - Error from server
     # 
     def destroy
       begin

@@ -6,6 +6,15 @@ module API
   class GenresController < ApisecurityController
 
     # Retrieve all the genres
+    #
+    # Route : /genres
+    #
+    # ===== HTTP VALUE
+    # 
+    # - +200+ - In case of success, return a list of genres including its influences
+    # - +204+ - The list is empty
+    # - +503+ - Error from server
+    # 
     def index
     	begin
         @returnValue = { content: Genre.all.as_json(:include => :influences) }
@@ -23,6 +32,19 @@ module API
     end
 
     # Retrieve a specific genre
+    #
+    # Route : /genres/:id
+    #
+    # ==== Options
+    # 
+    # * +id+ - The id of the genre selected
+    #
+    # ===== HTTP VALUE
+    # 
+    # - +200+ - In case of success, return a genre including its influences and musics
+    # - +404+ - Can't get the genre, the id is probably wrong
+    # - +503+ - Error from server
+    # 
     def show
     	begin
         genre = Genre.find_by_id(@id)

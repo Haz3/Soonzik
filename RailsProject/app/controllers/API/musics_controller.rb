@@ -13,9 +13,20 @@ module API
   	before_action :checkKey, only: [:addcomment, :get, :addtoplaylist]
 
     # Retrieve all the musics
+    #
+    # Route : /musics
+    #
+    # ===== HTTP VALUE
+    # 
+    # - +200+ - In case of success, return a list of musics including its user and music
+    # - +204+ - The list is empty
+    # - +503+ - Error from server
+    # 
     def index
       begin
         @returnValue = { content: Music.all.as_json(:only => Music.miniKey, :include => {
+                                                                                          :album => {},
+                                                                                          :genres => {},
                                                                                           :user => {:only => User.miniKey}
                                                                                         }) }
         if (@returnValue[:content].size == 0)
@@ -35,7 +46,13 @@ module API
     #
     # ==== Options
     # 
-    # * +:id+ - The id of the specific music
+    # * +id+ - The id of the specific music
+    # 
+    # ===== HTTP VALUE
+    # 
+    # - +200+ - In case of success, return a music including its album, genres and user (artist)
+    # - +404+ - Can't find the music, the id is probably wrong
+    # - +503+ - Error from server
     # 
     def show
       begin
@@ -60,6 +77,8 @@ module API
 
     # Give a part of the albums depending of the filter passed into parameter
     #
+    # Route : /musics/find
+    #
     # ==== Options
     # 
     # * +:attribute [attribute_name]+ - If you want a column equal to a specific value
@@ -74,6 +93,12 @@ module API
     #     http://api.soonzik.com/musics/find?attribute[album_id]=1&order_by_desc[]=id&group_by[]=title
     #     Note : By default, if you precise no attribute, it will take every row
     #
+    # ===== HTTP VALUE
+    # 
+    # - +200+ - In case of success, return a list of musics including its album, genres and user (artist)
+    # - +204+ - The list is empty, probably too much filter
+    # - +503+ - Error from server
+    # 
     def find
       begin
         music_object = nil
@@ -160,13 +185,19 @@ module API
 
     # Add a comment to a specific music. Need to be a secure transaction.
     #
+    # Route : /musics/addcomment/:id
+    #
     # ==== Options
     #
-    # * +:security+ - If it's a secure transaction, this variable from ApiSecurity (the parent) is true
-    # * +:user_id [implicit]+ - It is required by the security so we can access it
-    # * +:id+ - The id of the music where is the comment
-    # * +:content+ - The content of the comment
+    # * +id+ - The id of the music where is the comment
+    # * +content+ - The content of the comment
     #
+    # ===== HTTP VALUE
+    # 
+    # - +201+ - In case of success, return nothing
+    # - +404+ - Can't find the music, the id is probably wrong
+    # - +503+ - Error from server
+    # 
   	def addcomment
       begin
         if (@security)
@@ -202,12 +233,20 @@ module API
 
     # To get the mp3. It cuts the file depending the rights
     #
+    # Route : /musics/get/:id
+    #
+    # DEPRECATED FOR THE MOMENT
+    #
     # ==== Options
     #
-    # * +:security+ - If it's a secure transaction, this variable from ApiSecurity (the parent) is true
-    # * +:user_id [implicit]+ - It is required by the security so we can access it
-    # * +:id+ - The id of the music where is the comment
+    # * +id+ - The id of the music where is the comment
     #
+    # ===== HTTP VALUE
+    # 
+    # - +200+ - In case of success, return the content of the mp3 file as raw format
+    # - +404+ - Can't find the music, the id is probably wrong
+    # - +503+ - Error from server
+    # 
     def get
       buffer = ""
       begin
@@ -243,11 +282,20 @@ module API
 
     # To add a specific music to a playlist
     #
+    # Route : /musics/addtoplaylist
+    #
     # ==== Options
     #
-    # * +:id+ - The id of the music where is the comment
-    # * +:playlist_id+ - The id of the playlist where you want to add a music
+    # * +id+ - The id of the music where is the comment
+    # * +playlist_id+ - The id of the playlist where you want to add a music
     #
+    # ===== HTTP VALUE
+    # 
+    # - +200+ - In case of success, return nothing
+    # - +401+ - It is not a secured transaction
+    # - +404+ - Can't find the music or the playlist, the id is probably wrong
+    # - +503+ - Error from server
+    # 
     def addtoplaylist
       begin
         if (@security)

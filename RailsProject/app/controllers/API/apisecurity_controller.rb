@@ -1,10 +1,12 @@
 require 'open-uri'
 
 module API
+  #---
   # The class parent of every controller of the API.
   # It provides security and some default stuff
   class ApisecurityController < ApiController
 
+    #---
     # We create a list of code and initialize the returnValue and the security boolean.
     # Usually a controller has no constructor but in this case it's for the heritance.
     def initialize
@@ -23,13 +25,20 @@ module API
       @code[505] = {code: 505, message: "UpdateError"}
     end
 
+    #---
     # Provide a token relative to the user who asks
-    # Format : 
+    # Route : /getKey/:user_id
     #
     # ==== Options
     #
-    # * +:user_id+ - The id of the user who makes the transaction
+    # * +id+ - The id of the user who makes the transaction
     #
+    # ===== HTTP VALUE
+    # 
+    # - +200+ - In case of success, return { key: token_user }
+    # - +404+ - Can't get an user with the id given
+    # - +503+ - Error from server
+    # 
     def provideKey
       if (defined?(@id))
         begin
@@ -47,18 +56,41 @@ module API
       sendJson
     end
 
+    #---
+    # To signin and get the information you need for the authentication
+    # Route : /login/:email/:password
+    # 
+    # ==== Options
+    # 
+    # * +email+ - The email of the user
+    # * +password+ - The password encrypted by the bcrypt algorithm
+    #
+    # ===== HTTP VALUE
+    # 
+    # - +200+ - In case of success, return the user with ALL the field
+    # - +404+ - Can't get an user with the email given or the combinaison is false
+    # - +503+ - Error from server
+    # 
     def login
       if (defined?(@email) && defined?(@password))
         begin
           user = User.find_by_email(@email)
           if (user && user.valid_password?(@password))
-            @returnValue = { content: user.as_json(:include => :address) }
+            codeAnswer 200
+            @returnValue = { content: user.as_json(:include => {
+                                                                  :address => {},
+                                                                  :friends => {},
+                                                                  :follows => {}
+                                                                },
+                                                    :only => User.notRestrictedKey
+                                                  ) }
           else
             codeAnswer 502
             @httpCode = :not_found
           end
         rescue
           codeAnswer 504
+          @httpCode = :service_unavailable
         end
       else
         codeAnswer 502
@@ -67,12 +99,21 @@ module API
       sendJson
     end
 
+    #---
     # Check if a facebook user is authenticate and retrive its informations
     # 
+    # DEPRECATED FOR THE MOMENT
+    #
+    # Route : /loginFB/:token
+    #
     # ==== Options
     # 
-    # * +:token+ - Token Facebook
-    # * +:email+ - GET variable -> The email of the user who provides the token
+    # * +token+ - Token Facebook
+    # * +email+ - GET variable -> The email of the user who provides the token
+    # 
+    # ===== HTTP VALUE
+    # 
+    # We don't care, it's deprecated
     # 
     def loginFB
       if (defined?(@email) && defined?(@token))
@@ -110,27 +151,34 @@ module API
     end
 
 protected
+    #---
     # Check if the secure key corresponds to the key of the selected user.
     # This key is the hash between the token and the salt user.
     #
     # ==== Options
     #
-    # * +:user_id+ - The id of the user who makes the transaction
-    # * +:secureKey+ - The key provided to etablish a secure transaction
+    # * +user_id+ - The id of the user who makes the transaction
+    # * +secureKey+ - The key provided to etablish a secure transaction
     #
     # ==== Example
     #
     #     # Assuming we have in database a user like this :
     #     #<User> -> id = 9
-    #             -> idAPI = "12345"
-    #             -> salt = "6789"
-    #             -> securekey = hash(idAPI + salt)
+    #             -> idAPI = "6789"
+    #             -> salt = "12345"
+    #             -> securekey = SHA256(salt + idAPI)
     #     So if I provide :
     #             -> user_id = 9
-    #             -> secureKey = hash("123456789")
+    #             -> secureKey = SHA256("123456789")
     #     The access is granted and secure.
     #     If the hash is not good, the access is not granted.
     #
+    # ===== HTTP VALUE
+    # 
+    # It is not a route so you can't query it, but if an issue happend, it can set the http code
+    # - +401+ - The combination user_id / secureKey doesn't match, the access is not granted
+    # - +503+ - Error from server
+    # 
     def checkKey
       if (defined?(@user_id) && defined?(@secureKey))
         begin
@@ -150,6 +198,7 @@ protected
       end
     end
 
+    #---
     # Render the value to return in json
     def sendJson
       codeAnswer(202) if defined?(@returnValue[:content]) && defined?(@returnValue[:content].size) && @returnValue[:content].size == 0
@@ -159,6 +208,7 @@ protected
       end
     end
 
+    #---
     # Put information about the answer (the code and the corresponding message) in the return value.
     # If a code has already been assigned, we don't modify it.
     #
@@ -180,6 +230,7 @@ protected
       end
     end
 
+    #---
     # Set the HTTP status
     # If a code has already been assigned, we don't modify it.
     #

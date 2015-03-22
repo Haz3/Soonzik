@@ -8,6 +8,15 @@ module API
   #
   class ConcertsController < ApisecurityController
   	# Retrieve all the concerts
+    #
+    # Route : /concerts
+    #
+    # ===== HTTP VALUE
+    # 
+    # - +200+ - In case of success, return a list of concerts including its address
+    # - +204+ - The list is empty, probably too much filter
+    # - +503+ - Error from server
+    # 
     def index
       begin
         @returnValue = { content: Concert.all.as_json(:include => :address) }
@@ -26,9 +35,17 @@ module API
 
   	# Give a specific object by its id
     #
+    # Route : concerts/:id
+    #
     # ==== Options
     # 
-    # * +:id+ - The id of the specific concert
+    # * +id+ - The id of the specific concert
+    # 
+    # ===== HTTP VALUE
+    # 
+    # - +200+ - In case of success, return a battle including its artists and the votes
+    # - +404+ - Can't get the album, the id is probably wrong
+    # - +503+ - Error from server
     # 
     def show
       begin
@@ -49,12 +66,14 @@ module API
 
     # Give a part of the concerts depending of the filter passed into parameter
     #
+    # Route : /concerts/find
+    #
     # ==== Options
     # 
     # * +:attribute [attribute_name]+ - If you want a column equal to a specific value
-    # * +:order_by_asc[]+ - If you want to order by ascending by values
-    # * +:order_by_desc[]+ - If you want to order by descending by values
-    # * +:group_by[]+ - If you want to group by field
+    # * +:order_by_asc []+ - If you want to order by ascending by values
+    # * +:order_by_desc []+ - If you want to order by descending by values
+    # * +:group_by []+ - If you want to group by field
     # * +:limit+ - The number of row you want
     # * +:offset+ - The offset of the array
     # 
@@ -63,6 +82,12 @@ module API
     #     http://api.soonzik.com/concerts/find?attribute[address_id]=1&order_by_desc[]=url&group_by[]=url
     #     Note : By default, if you precise no attribute, it will take every row
     #
+    # ===== HTTP VALUE
+    # 
+    # - +200+ - In case of success, return a list of battles including its artists and the votes
+    # - +204+ - The list is empty, probably too much filter
+    # - +503+ - Error from server
+    # 
     def find
       begin
         concert_object = nil

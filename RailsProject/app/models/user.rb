@@ -176,14 +176,19 @@ class User < ActiveRecord::Base
     parameters.require(:user).permit(:email, :password, :fname, :lname, :username, :birthday, :image, :description, :phoneNumber, :facebook, :twitter, :googlePlus, :newsletter, :language)
   end
 
-  # Filter of information for the API
+  # Filter of information for the API - Restricted
   def self.miniKey
     [:id, :email, :username, :image, :description, :language]
   end
 
-  # Filter of information for the API
+  # Filter of information for the API - Less Restricted
   def self.bigKey
     [:id, :email, :username, :fname, :lname, :birthday, :image, :description, :language, :facebook, :twitter, :googlePlus]
+  end
+
+  # Filter of information for the API - No Restriction
+  def self.notRestrictedKey
+    [:id, :email, :username, :fname, :lname, :birthday, :image, :description, :language, :facebook, :twitter, :googlePlus, :salt, :phoneNumber, :newsletter, :language, :created_at]
   end
 
   # Get the purchased musics by the user

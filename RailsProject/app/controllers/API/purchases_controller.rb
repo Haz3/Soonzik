@@ -9,11 +9,19 @@ module API
     
     # Save a new object Purchase. For more information on the parameters, check at the model
     # 
+    # Route : /purchases/save
+    #
     # ==== Options
     # 
-    # * +:purchase [user_id]+ - Id of the user who has the purchase
-    # * +:purchase [typeObj]+ - Model name of the object to add to the purchase -> "Music" | "Album" | "Pack"
-    # * +:purchase [obj_id]+ - Id of the object
+    # * +purchase [user_id]+ - Id of the user who has the purchase
+    # * +purchase [typeObj]+ - Model name of the object to add to the purchase -> "Music" | "Album" | "Pack"
+    # * +purchase [obj_id]+ - Id of the object
+    # 
+    # ===== HTTP VALUE
+    # 
+    # - +201+ - In case of success, return the purchase created
+    # - +401+ - It is not a secured transaction
+    # - +503+ - Error from server
     # 
     def save
       begin

@@ -13,9 +13,17 @@ module API
 
   	# Give a specific object by its id
     #
+    # Route : /playlists/:id
+    #
     # ==== Options
     # 
-    # * +:id+ - The id of the specific playlist
+    # * +id+ - The id of the specific playlist
+    # 
+    # ===== HTTP VALUE
+    # 
+    # - +200+ - In case of success, return a playlist including its musics
+    # - +404+ - Can't find the playlist, the id is probably wrong
+    # - +503+ - Error from server
     # 
     def show
       begin
@@ -38,10 +46,18 @@ module API
 
     # Save a new object Playlist. For more information on the parameters, check at the model
     # 
+    # Route : /playlists/save
+    #
     # ==== Options
     # 
     # * +:playlist [user_id]+ - Id of the user who has the playlist
     # * +:playlist [name]+ - Name of the playlist
+    # 
+    # ===== HTTP VALUE
+    # 
+    # - +201+ - In case of success, return the saved object
+    # - +401+ - It is not a secured transaction
+    # - +503+ - Error from server
     # 
     def save
       begin
@@ -69,11 +85,19 @@ module API
 
     # Save a new object Playlist. For more information on the parameters, check at the model
     # 
+    # Route : /playlists/update
+    #
     # ==== Options
     # 
-    # * +:id+ - Id of the playlist to modify
-    # * +:playlist [name]+ - Name of the playlist
-    # * +:playlist [music][]+ - Array of the id of the music in the playlist
+    # * +id+ - Id of the playlist to modify
+    # * +playlist [name]+ - Name of the playlist
+    # * +playlist [music][]+ - Array of the id of the music in the playlist
+    # 
+    # ===== HTTP VALUE
+    # 
+    # - +201+ - In case of success, return the playlist created
+    # - +401+ - It is not a secured transaction
+    # - +503+ - Error from server
     # 
     def update
       begin
@@ -116,20 +140,28 @@ module API
 
     # Give a part of the playlist depending of the filter passed into parameter
     #
+    # Route : /playlists/find
+    #
     # ==== Options
     # 
-    # * +:attribute [attribute_name]+ - If you want a column equal to a specific value
-    # * +:order_by_asc[]+ - If you want to order by ascending by values
-    # * +:order_by_desc[]+ - If you want to order by descending by values
-    # * +:group_by[]+ - If you want to group by field
-    # * +:limit+ - The number of row you want
-    # * +:offset+ - The offset of the array
+    # * +attribute [attribute_name]+ - If you want a column equal to a specific value
+    # * +order_by_asc []+ - If you want to order by ascending by values
+    # * +order_by_desc []+ - If you want to order by descending by values
+    # * +group_by []+ - If you want to group by field
+    # * +limit+ - The number of row you want
+    # * +offset+ - The offset of the array
     # 
     # ==== Example
     #
     #     http://api.soonzik.com/playlists/find?attribute[user_id]=1&order_by_desc[]=user_id&group_by[]=user_id
     #     Note : By default, if you precise no attribute, it will take every row
     #
+    # ===== HTTP VALUE
+    # 
+    # - +200+ - In case of success, return a list of playlist including its musics and user
+    # - +204+ - The list is empty, there is probably too much filter
+    # - +503+ - Error from server
+    # 
     def find
       begin
         playlist_object = nil
@@ -215,9 +247,17 @@ module API
 
     # Destroy a specific object by its id
     #
+    # Route : /playlists/destroy
+    #
     # ==== Options
     # 
-    # * +:id+ - The id of the specific playlist
+    # * +id+ - The id of the specific playlist
+    # 
+    # ===== HTTP VALUE
+    # 
+    # - +204+ - In case of success, return nothing
+    # - +401+ - It is not a secured transaction
+    # - +503+ - Error from server
     # 
     def destroy
       begin

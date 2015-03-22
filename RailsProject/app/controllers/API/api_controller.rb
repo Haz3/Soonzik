@@ -9,11 +9,12 @@ module API
     skip_before_filter  :verify_authenticity_token
     before_action :setParamToObj
 
+    #---
     # Transform the params into attributes and create the getter to access it
     # 
     # ==== Options
     # 
-    # * +:params+ - The GET or POST params, it is provided by rails as a global value.
+    # * +params+ - The GET or POST params, it is provided by rails as a global value.
     def setParamToObj
       keys = params.keys
 
