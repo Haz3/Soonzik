@@ -302,7 +302,7 @@ module API
     # 
     def update
       begin
-        if (@security && @id == @user_id)
+        if (@security)
           user = User.find_by_id(@user_id)
           if user == nil
             codeAnswer 502
