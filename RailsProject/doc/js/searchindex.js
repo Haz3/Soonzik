@@ -771,13 +771,13 @@ var SearchIndex =
 	{
 		"name": "provideKey",
 		"link": "API/ApisecurityController.html#method-i-provideKey",
-		"snippet": "<p>Provide a token relative to the user who asks Route : /getKey/:user_id\n<p>Options\n<p><code>id</code> - The id of the user …\n",
+		"snippet": "<p>Provide a token relative to the user who asks Route : /getKey/:user_id\n[GET]\n<p>Options\n<p><code>id</code> - The id of the …\n",
 		"type": "anymethod"
 	},
 	{
 		"name": "login",
 		"link": "API/ApisecurityController.html#method-i-login",
-		"snippet": "<p>To signin and get the information you need for the authentication Route :\n/login/:email/:password\n<p>Options …\n",
+		"snippet": "<p>To signin and get the information you need for the authentication Route :\n/login [POST]\n<p>Options\n<p><code>email</code> - …\n",
 		"type": "anymethod"
 	},
 	{
@@ -1333,6 +1333,12 @@ var SearchIndex =
 		"type": "anymethod"
 	},
 	{
+		"name": "getAverageNote",
+		"link": "Music.html#method-i-getAverageNote",
+		"snippet": "<p>Get the average of notes\n",
+		"type": "anymethod"
+	},
+	{
 		"name": "suggest",
 		"link": "Music.html#method-i-suggest",
 		"snippet": "<p>Suggestion logic\n<p>Attributes\n<p><code>userList</code> - Users with same musics\n",
@@ -1492,6 +1498,24 @@ var SearchIndex =
 		"name": "findPeopleLikeMe",
 		"link": "User.html#method-i-findPeopleLikeMe",
 		"snippet": "<p>Returns user with the same musics (with ponderation)\n",
+		"type": "anymethod"
+	},
+	{
+		"name": "isArtist?",
+		"link": "User.html#method-i-isArtist-3F",
+		"snippet": "<p>Check is the user is an artist\n",
+		"type": "anymethod"
+	},
+	{
+		"name": "giveTopFive",
+		"link": "User.html#method-i-giveTopFive",
+		"snippet": "<p>Give the 5 most popular track of an artist\n",
+		"type": "anymethod"
+	},
+	{
+		"name": "givePack",
+		"link": "User.html#method-i-givePack",
+		"snippet": "<p>Give the pack where the user has its albums\n",
 		"type": "anymethod"
 	},
 	{

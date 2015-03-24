@@ -182,6 +182,28 @@ and the validation Can provide some features linked to this model</p>
 					<h3>Public Instance Methods</h3>
 				</header>
 
+								<a name="method-i-getAverageNote">anchor</a>
+				<div id="method-i-getAverageNote-doc" class="method">
+
+					<header>
+											<i class="icon-generic"></i>
+						<span class="method-name">getAverageNote</span><span 
+							class="method-args">()</span>
+										</header>
+
+					<div class="method-description">
+											<p>Get the average of notes</p>					
+											<div class="method-source-code" id="getAverageNote-source">
+							<pre class="prettyprint linenums"><code 
+								class="language-ruby"><span class="ruby-comment"># File app/models/music.rb, line 32</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">getAverageNote</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-constant">MusicNote</span>.<span class="ruby-identifier">where</span>(<span class="ruby-identifier">music_id</span><span class="ruby-operator">:</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">id</span>).<span class="ruby-identifier">average</span>(<span class="ruby-value">:value</span>).<span class="ruby-identifier">to_f</span>
+<span class="ruby-keyword">end</span></code></pre>
+						</div>
+										</div>
+
+					
+									</div>
 								<a name="method-i-suggest">anchor</a>
 				<div id="method-i-suggest-doc" class="method">
 
@@ -200,7 +222,7 @@ and the validation Can provide some features linked to this model</p>
 </li></ul>					
 											<div class="method-source-code" id="suggest-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/models/music.rb, line 37</span>
+								class="language-ruby"><span class="ruby-comment"># File app/models/music.rb, line 42</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">suggest</span>(<span class="ruby-identifier">userList</span>)
   <span class="ruby-identifier">genresPonderation</span> = {}
 

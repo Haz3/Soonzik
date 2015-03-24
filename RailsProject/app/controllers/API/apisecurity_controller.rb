@@ -27,7 +27,7 @@ module API
 
     #
     # Provide a token relative to the user who asks
-    # Route : /getKey/:user_id
+    # Route : /getKey/:user_id [GET]
     #
     # ==== Options
     #
@@ -58,7 +58,7 @@ module API
 
     #
     # To signin and get the information you need for the authentication
-    # Route : /login/:email/:password
+    # Route : /login [POST]
     # 
     # ==== Options
     # 
@@ -104,7 +104,7 @@ module API
     # 
     # DEPRECATED FOR THE MOMENT
     #
-    # Route : /loginFB/:token
+    # Route : /loginFB/:token [POST]
     #
     # ==== Options
     # 
