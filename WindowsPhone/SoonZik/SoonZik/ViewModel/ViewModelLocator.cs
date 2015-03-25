@@ -15,7 +15,9 @@
 using System.Linq.Expressions;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Ioc;
+using GalaSoft.MvvmLight.Views;
 using Microsoft.Practices.ServiceLocation;
+using SoonZik.Views;
 
 namespace SoonZik.ViewModel
 {
@@ -31,6 +33,7 @@ namespace SoonZik.ViewModel
         public ViewModelLocator()
         {
             ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
+            SimpleIoc.Default.Register<INavigationService>(() => new NavigationService());
 
             SimpleIoc.Default.Register<MainViewModel>();
             SimpleIoc.Default.Register<ConnexionViewModel>();

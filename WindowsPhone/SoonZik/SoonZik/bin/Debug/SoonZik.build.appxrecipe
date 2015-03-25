@@ -31,13 +31,13 @@
     <AppxPackagedFile Include="C:\Users\Géry\documents\visual studio 2013\Projects\SoonZik\packages\Facebook.6.8.0\lib\portable-win81+wpa81\Facebook.dll">
       <PackagePath>Facebook.dll</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\Géry\documents\visual studio 2013\Projects\SoonZik\packages\MvvmLightLibs.4.4.32.7\lib\wpa81\GalaSoft.MvvmLight.dll">
+    <AppxPackagedFile Include="C:\Users\Géry\documents\visual studio 2013\Projects\SoonZik\packages\MvvmLightLibs.5.1.1.0\lib\wpa81\GalaSoft.MvvmLight.dll">
       <PackagePath>GalaSoft.MvvmLight.dll</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\Géry\documents\visual studio 2013\Projects\SoonZik\packages\MvvmLightLibs.4.4.32.7\lib\wpa81\GalaSoft.MvvmLight.Extras.dll">
+    <AppxPackagedFile Include="C:\Users\Géry\documents\visual studio 2013\Projects\SoonZik\packages\MvvmLightLibs.5.1.1.0\lib\wpa81\GalaSoft.MvvmLight.Extras.dll">
       <PackagePath>GalaSoft.MvvmLight.Extras.dll</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\Géry\documents\visual studio 2013\Projects\SoonZik\packages\MvvmLightLibs.4.4.32.7\lib\wpa81\GalaSoft.MvvmLight.Platform.dll">
+    <AppxPackagedFile Include="C:\Users\Géry\documents\visual studio 2013\Projects\SoonZik\packages\MvvmLightLibs.5.1.1.0\lib\wpa81\GalaSoft.MvvmLight.Platform.dll">
       <PackagePath>GalaSoft.MvvmLight.Platform.dll</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Géry\documents\visual studio 2013\Projects\SoonZik\LightStone\bin\Debug\LightStone.dll">

@@ -18,7 +18,7 @@
     
     <Grid>
         <view:MainView Visibility="{Binding PivotVisibility, Converter={StaticResource BoolToVis}}" />
-        <view:Connexion Visibility="{Binding ConnexionVisibility, Converter={StaticResource BoolToVis}, FallbackValue=Collapsed}"/>
+        <!--<view:Connexion Visibility="{Binding ConnexionVisibility, Converter={StaticResource BoolToVis}, FallbackValue=Collapsed}"/>-->
     </Grid>
 		
 </Page>

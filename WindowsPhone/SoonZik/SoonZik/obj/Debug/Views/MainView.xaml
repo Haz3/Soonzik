@@ -8,8 +8,10 @@
     xmlns:Interactivity="using:Microsoft.Xaml.Interactivity" 
     xmlns:Core="using:Microsoft.Xaml.Interactions.Core" 
     xmlns:Media="using:Microsoft.Xaml.Interactions.Media"
+    xmlns:viewModel="using:SoonZik.ViewModel"
     x:Class="SoonZik.Views.MainView"
     mc:Ignorable="d"
+    DataContext="{StaticResource MainViewModel}"
     Background="#424242">
     
     <!-- Animation for the menu part and Search Part -->
@@ -40,9 +42,6 @@
     </Page.Resources>
 
     <!-- Set DataContext -->
-	<Page.DataContext>
-		<StaticResource ResourceKey="MainViewModel"/>
-	</Page.DataContext>
 
 	<Grid x:Name="GlobalGrid" Background="Transparent">
 		<Grid.RowDefinitions>

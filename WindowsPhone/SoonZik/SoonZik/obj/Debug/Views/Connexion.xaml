@@ -23,13 +23,12 @@
 
         <!-- Row 2 -->
         <Image Grid.Row="1" Source="../Resources/logo.png" Width="300" Height="150" VerticalAlignment="Top"/>
-        <TextBox x:Name="UserTextBox" PlaceholderText="Username" Text="{Binding Username, Mode=TwoWay}" Grid.Row="1" Background="LightGray" Margin="50,321,50,0"/>
-        <PasswordBox x:Name="PasswordTextBox" PlaceholderText="Password" Password="{Binding Password, Mode=TwoWay}" Grid.Row="1" Background="LightGray" Margin="50,384,50,0"/>
+        <TextBox x:Name="UserTextBox" PlaceholderText="Username" Text="{Binding Username, Mode=TwoWay}" Grid.Row="1" Background="LightGray" Margin="50,318,50,0"/>
+        <PasswordBox x:Name="PasswordTextBox" PlaceholderText="Password" Password="{Binding Password, Mode=TwoWay}" Grid.Row="1" Background="LightGray" Margin="50,381,50,0"/>
 
-        <Button Grid.Row="1" Content="Connexion" BorderThickness="0" Foreground="Black" Margin="250,418,0,25" Command="{Binding ConnexionCommand}"/>
+        <Button Grid.Row="1" Content="Connexion" BorderThickness="0" Foreground="Black" Margin="250,415,0,28" Command="{Binding ConnexionCommand}"/>
 
         <!-- login control -->
-        <controls:LoginButton x:ConnectionId='1' x:Name="loginButton" Grid.Row="1" Margin="5" HorizontalAlignment="Right" VerticalAlignment="Bottom" ApplicationId="1501598246776281"                                                        />
 
         <!-- Row 3 -->
         <Button Grid.Row="2" Content="Inscription" Foreground="Black" BorderThickness="0" Margin="18,7,0,6"/>

@@ -6,7 +6,6 @@
   <Roots.PropertyPathNames>
     <RootPropertyPathName Name="Title" />
     <RootPropertyPathName Name="Image" />
-    <RootPropertyPathName Name="ConnexionVisibility" />
     <RootPropertyPathName Name="PivotVisibility" />
     <RootPropertyPathName Name="ConnexionCommand" />
     <RootPropertyPathName Name="Password" />
@@ -168,9 +167,7 @@
       <RootProperty Name="KeyTime" />
       <RootProperty Name="Value" />
     </RootType>
-    <RootType FullName="Microsoft.Xaml.Tools.DirectUI.ProxyTypes.StaticResourceExtension">
-      <RootProperty Name="ResourceKey" />
-    </RootType>
+    <RootType FullName="Microsoft.Xaml.Tools.DirectUI.ProxyTypes.StaticResourceExtension" />
     <RootType FullName="Microsoft.Xaml.Tools.DirectUI.ProxyTypes.NullExtension" />
     <RootType FullName="Windows.UI.Xaml.Controls.ContentControl">
       <RootProperty Name="ContentTemplate" />
@@ -203,7 +200,6 @@
     <RootType FullName="Windows.UI.Xaml.Data.Binding">
       <RootProperty Name="RelativeSource" />
       <RootProperty Name="Converter" />
-      <RootProperty Name="FallbackValue" />
       <RootProperty Name="Mode" />
       <RootProperty Name="Source" />
     </RootType>
@@ -251,9 +247,6 @@
     <RootType FullName="SoonZik.Views.MainView">
       <RootProperty Name="Visibility" />
     </RootType>
-    <RootType FullName="SoonZik.Views.Connexion">
-      <RootProperty Name="Visibility" />
-    </RootType>
     <RootType FullName="SoonZik.MainPage" />
     <RootType FullName="Microsoft.Xaml.Tools.DirectUI.ProxyTypes.ThemeResourceExtension" />
     <RootType FullName="SoonZik.ViewModel.BattleViewModel" />
@@ -279,13 +272,7 @@
       <RootProperty Name="Background" />
       <RootProperty Name="Margin" />
     </RootType>
-    <RootType FullName="Facebook.Client.Controls.LoginButton">
-      <RootProperty Name="Margin" />
-      <RootProperty Name="HorizontalAlignment" />
-      <RootProperty Name="VerticalAlignment" />
-      <RootProperty Name="ApplicationId" />
-      <RootEvent Name="SessionStateChanged" />
-    </RootType>
+    <RootType FullName="SoonZik.Views.Connexion" />
     <RootType FullName="Windows.UI.Xaml.Controls.StackPanel">
       <RootProperty Name="Children" />
       <RootProperty Name="Background" />

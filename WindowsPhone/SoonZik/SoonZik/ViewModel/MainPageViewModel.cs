@@ -53,7 +53,6 @@ namespace SoonZik.ViewModel
         {
             _connexionVisibility = false;
             _pivotVisibility = true;
-            ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
         }
         #endregion
 

@@ -148,7 +148,7 @@ namespace SoonZik.SoonZik_XamlTypeInfo
 
         private void InitTypeTables()
         {
-            _typeNameTable = new string[71];
+            _typeNameTable = new string[64];
             _typeNameTable[0] = "SoonZik.ViewModel.MainPageViewModel";
             _typeNameTable[1] = "GalaSoft.MvvmLight.ViewModelBase";
             _typeNameTable[2] = "GalaSoft.MvvmLight.ObservableObject";
@@ -185,43 +185,36 @@ namespace SoonZik.SoonZik_XamlTypeInfo
             _typeNameTable[33] = "SoonZik.Utils.BoolToVisibilityConverter";
             _typeNameTable[34] = "SoonZik.Views.MainView";
             _typeNameTable[35] = "Windows.UI.Xaml.Controls.Page";
-            _typeNameTable[36] = "SoonZik.Views.Connexion";
-            _typeNameTable[37] = "SoonZik.MainPage";
-            _typeNameTable[38] = "SoonZik.Views.Battle";
-            _typeNameTable[39] = "Facebook.Client.Controls.LoginButton";
-            _typeNameTable[40] = "Windows.UI.Xaml.Controls.Control";
-            _typeNameTable[41] = "Facebook.Client.Controls.Audience";
-            _typeNameTable[42] = "System.Enum";
-            _typeNameTable[43] = "System.ValueType";
-            _typeNameTable[44] = "Facebook.Client.FacebookSession";
-            _typeNameTable[45] = "Facebook.Client.GraphUser";
-            _typeNameTable[46] = "Facebook.Client.GraphObject";
-            _typeNameTable[47] = "Windows.UI.Xaml.CornerRadius";
-            _typeNameTable[48] = "SoonZik.Views.Conversation";
-            _typeNameTable[49] = "SoonZik.Views.CustomSplashScreen";
-            _typeNameTable[50] = "SoonZik.Views.Friends";
-            _typeNameTable[51] = "SoonZik.Views.Geoloc";
-            _typeNameTable[52] = "Microsoft.Xaml.Interactivity.Interaction";
-            _typeNameTable[53] = "Microsoft.Xaml.Interactivity.BehaviorCollection";
-            _typeNameTable[54] = "Windows.UI.Xaml.DependencyObjectCollection";
-            _typeNameTable[55] = "Windows.UI.Xaml.DependencyObject";
-            _typeNameTable[56] = "Microsoft.Xaml.Interactions.Core.EventTriggerBehavior";
-            _typeNameTable[57] = "Microsoft.Xaml.Interactivity.ActionCollection";
-            _typeNameTable[58] = "Microsoft.Xaml.Interactions.Media.ControlStoryboardAction";
-            _typeNameTable[59] = "Windows.UI.Xaml.Media.Animation.Storyboard";
-            _typeNameTable[60] = "Microsoft.Xaml.Interactions.Media.ControlStoryboardOption";
-            _typeNameTable[61] = "SoonZik.Views.Playlist";
-            _typeNameTable[62] = "SoonZik.Views.Packs";
-            _typeNameTable[63] = "SoonZik.Views.Profil";
-            _typeNameTable[64] = "SoonZik.Views.News";
-            _typeNameTable[65] = "LightStone.Controls.LightStone";
-            _typeNameTable[66] = "Int32";
-            _typeNameTable[67] = "Windows.UI.Xaml.DataTemplate";
-            _typeNameTable[68] = "Double";
-            _typeNameTable[69] = "Windows.UI.Xaml.Media.Animation.EasingFunctionBase";
-            _typeNameTable[70] = "SoonZik.Views.Search";
+            _typeNameTable[36] = "SoonZik.MainPage";
+            _typeNameTable[37] = "SoonZik.Views.Battle";
+            _typeNameTable[38] = "SoonZik.Views.Connexion";
+            _typeNameTable[39] = "SoonZik.Views.Conversation";
+            _typeNameTable[40] = "SoonZik.Views.CustomSplashScreen";
+            _typeNameTable[41] = "SoonZik.Views.Friends";
+            _typeNameTable[42] = "SoonZik.Views.Geoloc";
+            _typeNameTable[43] = "Microsoft.Xaml.Interactivity.Interaction";
+            _typeNameTable[44] = "Microsoft.Xaml.Interactivity.BehaviorCollection";
+            _typeNameTable[45] = "Windows.UI.Xaml.DependencyObjectCollection";
+            _typeNameTable[46] = "Windows.UI.Xaml.DependencyObject";
+            _typeNameTable[47] = "Microsoft.Xaml.Interactions.Core.EventTriggerBehavior";
+            _typeNameTable[48] = "Microsoft.Xaml.Interactivity.ActionCollection";
+            _typeNameTable[49] = "Microsoft.Xaml.Interactions.Media.ControlStoryboardAction";
+            _typeNameTable[50] = "Windows.UI.Xaml.Media.Animation.Storyboard";
+            _typeNameTable[51] = "Microsoft.Xaml.Interactions.Media.ControlStoryboardOption";
+            _typeNameTable[52] = "System.Enum";
+            _typeNameTable[53] = "System.ValueType";
+            _typeNameTable[54] = "SoonZik.Views.Playlist";
+            _typeNameTable[55] = "SoonZik.Views.Packs";
+            _typeNameTable[56] = "SoonZik.Views.Profil";
+            _typeNameTable[57] = "SoonZik.Views.News";
+            _typeNameTable[58] = "LightStone.Controls.LightStone";
+            _typeNameTable[59] = "Int32";
+            _typeNameTable[60] = "Windows.UI.Xaml.DataTemplate";
+            _typeNameTable[61] = "Double";
+            _typeNameTable[62] = "Windows.UI.Xaml.Media.Animation.EasingFunctionBase";
+            _typeNameTable[63] = "SoonZik.Views.Search";
 
-            _typeTable = new global::System.Type[71];
+            _typeTable = new global::System.Type[64];
             _typeTable[0] = typeof(global::SoonZik.ViewModel.MainPageViewModel);
             _typeTable[1] = typeof(global::GalaSoft.MvvmLight.ViewModelBase);
             _typeTable[2] = typeof(global::GalaSoft.MvvmLight.ObservableObject);
@@ -258,41 +251,34 @@ namespace SoonZik.SoonZik_XamlTypeInfo
             _typeTable[33] = typeof(global::SoonZik.Utils.BoolToVisibilityConverter);
             _typeTable[34] = typeof(global::SoonZik.Views.MainView);
             _typeTable[35] = typeof(global::Windows.UI.Xaml.Controls.Page);
-            _typeTable[36] = typeof(global::SoonZik.Views.Connexion);
-            _typeTable[37] = typeof(global::SoonZik.MainPage);
-            _typeTable[38] = typeof(global::SoonZik.Views.Battle);
-            _typeTable[39] = typeof(global::Facebook.Client.Controls.LoginButton);
-            _typeTable[40] = typeof(global::Windows.UI.Xaml.Controls.Control);
-            _typeTable[41] = typeof(global::Facebook.Client.Controls.Audience);
-            _typeTable[42] = typeof(global::System.Enum);
-            _typeTable[43] = typeof(global::System.ValueType);
-            _typeTable[44] = typeof(global::Facebook.Client.FacebookSession);
-            _typeTable[45] = typeof(global::Facebook.Client.GraphUser);
-            _typeTable[46] = typeof(global::Facebook.Client.GraphObject);
-            _typeTable[47] = typeof(global::Windows.UI.Xaml.CornerRadius);
-            _typeTable[48] = typeof(global::SoonZik.Views.Conversation);
-            _typeTable[49] = typeof(global::SoonZik.Views.CustomSplashScreen);
-            _typeTable[50] = typeof(global::SoonZik.Views.Friends);
-            _typeTable[51] = typeof(global::SoonZik.Views.Geoloc);
-            _typeTable[52] = typeof(global::Microsoft.Xaml.Interactivity.Interaction);
-            _typeTable[53] = typeof(global::Microsoft.Xaml.Interactivity.BehaviorCollection);
-            _typeTable[54] = typeof(global::Windows.UI.Xaml.DependencyObjectCollection);
-            _typeTable[55] = typeof(global::Windows.UI.Xaml.DependencyObject);
-            _typeTable[56] = typeof(global::Microsoft.Xaml.Interactions.Core.EventTriggerBehavior);
-            _typeTable[57] = typeof(global::Microsoft.Xaml.Interactivity.ActionCollection);
-            _typeTable[58] = typeof(global::Microsoft.Xaml.Interactions.Media.ControlStoryboardAction);
-            _typeTable[59] = typeof(global::Windows.UI.Xaml.Media.Animation.Storyboard);
-            _typeTable[60] = typeof(global::Microsoft.Xaml.Interactions.Media.ControlStoryboardOption);
-            _typeTable[61] = typeof(global::SoonZik.Views.Playlist);
-            _typeTable[62] = typeof(global::SoonZik.Views.Packs);
-            _typeTable[63] = typeof(global::SoonZik.Views.Profil);
-            _typeTable[64] = typeof(global::SoonZik.Views.News);
-            _typeTable[65] = typeof(global::LightStone.Controls.LightStone);
-            _typeTable[66] = typeof(global::System.Int32);
-            _typeTable[67] = typeof(global::Windows.UI.Xaml.DataTemplate);
-            _typeTable[68] = typeof(global::System.Double);
-            _typeTable[69] = typeof(global::Windows.UI.Xaml.Media.Animation.EasingFunctionBase);
-            _typeTable[70] = typeof(global::SoonZik.Views.Search);
+            _typeTable[36] = typeof(global::SoonZik.MainPage);
+            _typeTable[37] = typeof(global::SoonZik.Views.Battle);
+            _typeTable[38] = typeof(global::SoonZik.Views.Connexion);
+            _typeTable[39] = typeof(global::SoonZik.Views.Conversation);
+            _typeTable[40] = typeof(global::SoonZik.Views.CustomSplashScreen);
+            _typeTable[41] = typeof(global::SoonZik.Views.Friends);
+            _typeTable[42] = typeof(global::SoonZik.Views.Geoloc);
+            _typeTable[43] = typeof(global::Microsoft.Xaml.Interactivity.Interaction);
+            _typeTable[44] = typeof(global::Microsoft.Xaml.Interactivity.BehaviorCollection);
+            _typeTable[45] = typeof(global::Windows.UI.Xaml.DependencyObjectCollection);
+            _typeTable[46] = typeof(global::Windows.UI.Xaml.DependencyObject);
+            _typeTable[47] = typeof(global::Microsoft.Xaml.Interactions.Core.EventTriggerBehavior);
+            _typeTable[48] = typeof(global::Microsoft.Xaml.Interactivity.ActionCollection);
+            _typeTable[49] = typeof(global::Microsoft.Xaml.Interactions.Media.ControlStoryboardAction);
+            _typeTable[50] = typeof(global::Windows.UI.Xaml.Media.Animation.Storyboard);
+            _typeTable[51] = typeof(global::Microsoft.Xaml.Interactions.Media.ControlStoryboardOption);
+            _typeTable[52] = typeof(global::System.Enum);
+            _typeTable[53] = typeof(global::System.ValueType);
+            _typeTable[54] = typeof(global::SoonZik.Views.Playlist);
+            _typeTable[55] = typeof(global::SoonZik.Views.Packs);
+            _typeTable[56] = typeof(global::SoonZik.Views.Profil);
+            _typeTable[57] = typeof(global::SoonZik.Views.News);
+            _typeTable[58] = typeof(global::LightStone.Controls.LightStone);
+            _typeTable[59] = typeof(global::System.Int32);
+            _typeTable[60] = typeof(global::Windows.UI.Xaml.DataTemplate);
+            _typeTable[61] = typeof(global::System.Double);
+            _typeTable[62] = typeof(global::Windows.UI.Xaml.Media.Animation.EasingFunctionBase);
+            _typeTable[63] = typeof(global::SoonZik.Views.Search);
         }
 
         private int LookupTypeIndexByName(string typeName)
@@ -350,33 +336,29 @@ namespace SoonZik.SoonZik_XamlTypeInfo
         private object Activate_32_PopUp() { return new global::SoonZik.Controls.PopUp(); }
         private object Activate_33_BoolToVisibilityConverter() { return new global::SoonZik.Utils.BoolToVisibilityConverter(); }
         private object Activate_34_MainView() { return new global::SoonZik.Views.MainView(); }
-        private object Activate_36_Connexion() { return new global::SoonZik.Views.Connexion(); }
-        private object Activate_37_MainPage() { return new global::SoonZik.MainPage(); }
-        private object Activate_38_Battle() { return new global::SoonZik.Views.Battle(); }
-        private object Activate_39_LoginButton() { return new global::Facebook.Client.Controls.LoginButton(); }
-        private object Activate_44_FacebookSession() { return new global::Facebook.Client.FacebookSession(); }
-        private object Activate_45_GraphUser() { return new global::Facebook.Client.GraphUser(); }
-        private object Activate_46_GraphObject() { return new global::Facebook.Client.GraphObject(); }
-        private object Activate_48_Conversation() { return new global::SoonZik.Views.Conversation(); }
-        private object Activate_50_Friends() { return new global::SoonZik.Views.Friends(); }
-        private object Activate_51_Geoloc() { return new global::SoonZik.Views.Geoloc(); }
-        private object Activate_53_BehaviorCollection() { return new global::Microsoft.Xaml.Interactivity.BehaviorCollection(); }
-        private object Activate_56_EventTriggerBehavior() { return new global::Microsoft.Xaml.Interactions.Core.EventTriggerBehavior(); }
-        private object Activate_57_ActionCollection() { return new global::Microsoft.Xaml.Interactivity.ActionCollection(); }
-        private object Activate_58_ControlStoryboardAction() { return new global::Microsoft.Xaml.Interactions.Media.ControlStoryboardAction(); }
-        private object Activate_61_Playlist() { return new global::SoonZik.Views.Playlist(); }
-        private object Activate_62_Packs() { return new global::SoonZik.Views.Packs(); }
-        private object Activate_63_Profil() { return new global::SoonZik.Views.Profil(); }
-        private object Activate_64_News() { return new global::SoonZik.Views.News(); }
-        private object Activate_65_LightStone() { return new global::LightStone.Controls.LightStone(); }
-        private object Activate_70_Search() { return new global::SoonZik.Views.Search(); }
-        private void VectorAdd_53_BehaviorCollection(object instance, object item)
+        private object Activate_36_MainPage() { return new global::SoonZik.MainPage(); }
+        private object Activate_37_Battle() { return new global::SoonZik.Views.Battle(); }
+        private object Activate_38_Connexion() { return new global::SoonZik.Views.Connexion(); }
+        private object Activate_39_Conversation() { return new global::SoonZik.Views.Conversation(); }
+        private object Activate_41_Friends() { return new global::SoonZik.Views.Friends(); }
+        private object Activate_42_Geoloc() { return new global::SoonZik.Views.Geoloc(); }
+        private object Activate_44_BehaviorCollection() { return new global::Microsoft.Xaml.Interactivity.BehaviorCollection(); }
+        private object Activate_47_EventTriggerBehavior() { return new global::Microsoft.Xaml.Interactions.Core.EventTriggerBehavior(); }
+        private object Activate_48_ActionCollection() { return new global::Microsoft.Xaml.Interactivity.ActionCollection(); }
+        private object Activate_49_ControlStoryboardAction() { return new global::Microsoft.Xaml.Interactions.Media.ControlStoryboardAction(); }
+        private object Activate_54_Playlist() { return new global::SoonZik.Views.Playlist(); }
+        private object Activate_55_Packs() { return new global::SoonZik.Views.Packs(); }
+        private object Activate_56_Profil() { return new global::SoonZik.Views.Profil(); }
+        private object Activate_57_News() { return new global::SoonZik.Views.News(); }
+        private object Activate_58_LightStone() { return new global::LightStone.Controls.LightStone(); }
+        private object Activate_63_Search() { return new global::SoonZik.Views.Search(); }
+        private void VectorAdd_44_BehaviorCollection(object instance, object item)
         {
             var collection = (global::System.Collections.Generic.ICollection<global::Windows.UI.Xaml.DependencyObject>)instance;
             var newItem = (global::Windows.UI.Xaml.DependencyObject)item;
             collection.Add(newItem);
         }
-        private void VectorAdd_57_ActionCollection(object instance, object item)
+        private void VectorAdd_48_ActionCollection(object instance, object item)
         {
             var collection = (global::System.Collections.Generic.ICollection<global::Windows.UI.Xaml.DependencyObject>)instance;
             var newItem = (global::Windows.UI.Xaml.DependencyObject)item;
@@ -653,136 +635,78 @@ namespace SoonZik.SoonZik_XamlTypeInfo
                 xamlType = new global::SoonZik.SoonZik_XamlTypeInfo.XamlSystemBaseType(typeName, type);
                 break;
 
-            case 36:   //  SoonZik.Views.Connexion
+            case 36:   //  SoonZik.MainPage
                 userType = new global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Page"));
-                userType.Activator = Activate_36_Connexion;
+                userType.Activator = Activate_36_MainPage;
                 userType.SetIsLocalType();
                 xamlType = userType;
                 break;
 
-            case 37:   //  SoonZik.MainPage
+            case 37:   //  SoonZik.Views.Battle
                 userType = new global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Page"));
-                userType.Activator = Activate_37_MainPage;
+                userType.Activator = Activate_37_Battle;
                 userType.SetIsLocalType();
                 xamlType = userType;
                 break;
 
-            case 38:   //  SoonZik.Views.Battle
+            case 38:   //  SoonZik.Views.Connexion
                 userType = new global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Page"));
-                userType.Activator = Activate_38_Battle;
+                userType.Activator = Activate_38_Connexion;
                 userType.SetIsLocalType();
                 xamlType = userType;
                 break;
 
-            case 39:   //  Facebook.Client.Controls.LoginButton
-                userType = new global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Control"));
-                userType.Activator = Activate_39_LoginButton;
-                userType.AddMemberName("ApplicationId");
-                userType.AddMemberName("DefaultAudience");
-                userType.AddMemberName("Permissions");
-                userType.AddMemberName("FetchUserInfo");
-                userType.AddMemberName("CurrentSession");
-                userType.AddMemberName("CurrentUser");
-                userType.AddMemberName("CornerRadius");
-                xamlType = userType;
-                break;
-
-            case 40:   //  Windows.UI.Xaml.Controls.Control
-                xamlType = new global::SoonZik.SoonZik_XamlTypeInfo.XamlSystemBaseType(typeName, type);
-                break;
-
-            case 41:   //  Facebook.Client.Controls.Audience
-                userType = new global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("System.Enum"));
-                userType.AddEnumValue("None", global::Facebook.Client.Controls.Audience.None);
-                userType.AddEnumValue("OnlyMe", global::Facebook.Client.Controls.Audience.OnlyMe);
-                userType.AddEnumValue("Friends", global::Facebook.Client.Controls.Audience.Friends);
-                userType.AddEnumValue("Everyone", global::Facebook.Client.Controls.Audience.Everyone);
-                xamlType = userType;
-                break;
-
-            case 42:   //  System.Enum
-                userType = new global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("System.ValueType"));
-                xamlType = userType;
-                break;
-
-            case 43:   //  System.ValueType
-                userType = new global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Object"));
-                xamlType = userType;
-                break;
-
-            case 44:   //  Facebook.Client.FacebookSession
-                userType = new global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Object"));
-                userType.SetIsReturnTypeStub();
-                xamlType = userType;
-                break;
-
-            case 45:   //  Facebook.Client.GraphUser
-                userType = new global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Facebook.Client.GraphObject"));
-                userType.SetIsReturnTypeStub();
-                xamlType = userType;
-                break;
-
-            case 46:   //  Facebook.Client.GraphObject
-                userType = new global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Object"));
-                userType.Activator = Activate_46_GraphObject;
-                xamlType = userType;
-                break;
-
-            case 47:   //  Windows.UI.Xaml.CornerRadius
-                xamlType = new global::SoonZik.SoonZik_XamlTypeInfo.XamlSystemBaseType(typeName, type);
-                break;
-
-            case 48:   //  SoonZik.Views.Conversation
+            case 39:   //  SoonZik.Views.Conversation
                 userType = new global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Page"));
-                userType.Activator = Activate_48_Conversation;
+                userType.Activator = Activate_39_Conversation;
                 userType.SetIsLocalType();
                 xamlType = userType;
                 break;
 
-            case 49:   //  SoonZik.Views.CustomSplashScreen
+            case 40:   //  SoonZik.Views.CustomSplashScreen
                 userType = new global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Page"));
                 userType.SetIsLocalType();
                 xamlType = userType;
                 break;
 
-            case 50:   //  SoonZik.Views.Friends
+            case 41:   //  SoonZik.Views.Friends
                 userType = new global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Page"));
-                userType.Activator = Activate_50_Friends;
+                userType.Activator = Activate_41_Friends;
                 userType.SetIsLocalType();
                 xamlType = userType;
                 break;
 
-            case 51:   //  SoonZik.Views.Geoloc
+            case 42:   //  SoonZik.Views.Geoloc
                 userType = new global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Page"));
-                userType.Activator = Activate_51_Geoloc;
+                userType.Activator = Activate_42_Geoloc;
                 userType.SetIsLocalType();
                 xamlType = userType;
                 break;
 
-            case 52:   //  Microsoft.Xaml.Interactivity.Interaction
+            case 43:   //  Microsoft.Xaml.Interactivity.Interaction
                 userType = new global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Object"));
                 userType.AddMemberName("Behaviors");
                 xamlType = userType;
                 break;
 
-            case 53:   //  Microsoft.Xaml.Interactivity.BehaviorCollection
+            case 44:   //  Microsoft.Xaml.Interactivity.BehaviorCollection
                 userType = new global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.DependencyObjectCollection"));
-                userType.CollectionAdd = VectorAdd_53_BehaviorCollection;
+                userType.CollectionAdd = VectorAdd_44_BehaviorCollection;
                 userType.SetIsReturnTypeStub();
                 xamlType = userType;
                 break;
 
-            case 54:   //  Windows.UI.Xaml.DependencyObjectCollection
+            case 45:   //  Windows.UI.Xaml.DependencyObjectCollection
                 xamlType = new global::SoonZik.SoonZik_XamlTypeInfo.XamlSystemBaseType(typeName, type);
                 break;
 
-            case 55:   //  Windows.UI.Xaml.DependencyObject
+            case 46:   //  Windows.UI.Xaml.DependencyObject
                 xamlType = new global::SoonZik.SoonZik_XamlTypeInfo.XamlSystemBaseType(typeName, type);
                 break;
 
-            case 56:   //  Microsoft.Xaml.Interactions.Core.EventTriggerBehavior
+            case 47:   //  Microsoft.Xaml.Interactions.Core.EventTriggerBehavior
                 userType = new global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.DependencyObject"));
-                userType.Activator = Activate_56_EventTriggerBehavior;
+                userType.Activator = Activate_47_EventTriggerBehavior;
                 userType.SetContentPropertyName("Microsoft.Xaml.Interactions.Core.EventTriggerBehavior.Actions");
                 userType.AddMemberName("Actions");
                 userType.AddMemberName("EventName");
@@ -791,26 +715,26 @@ namespace SoonZik.SoonZik_XamlTypeInfo
                 xamlType = userType;
                 break;
 
-            case 57:   //  Microsoft.Xaml.Interactivity.ActionCollection
+            case 48:   //  Microsoft.Xaml.Interactivity.ActionCollection
                 userType = new global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.DependencyObjectCollection"));
-                userType.CollectionAdd = VectorAdd_57_ActionCollection;
+                userType.CollectionAdd = VectorAdd_48_ActionCollection;
                 userType.SetIsReturnTypeStub();
                 xamlType = userType;
                 break;
 
-            case 58:   //  Microsoft.Xaml.Interactions.Media.ControlStoryboardAction
+            case 49:   //  Microsoft.Xaml.Interactions.Media.ControlStoryboardAction
                 userType = new global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.DependencyObject"));
-                userType.Activator = Activate_58_ControlStoryboardAction;
+                userType.Activator = Activate_49_ControlStoryboardAction;
                 userType.AddMemberName("Storyboard");
                 userType.AddMemberName("ControlStoryboardOption");
                 xamlType = userType;
                 break;
 
-            case 59:   //  Windows.UI.Xaml.Media.Animation.Storyboard
+            case 50:   //  Windows.UI.Xaml.Media.Animation.Storyboard
                 xamlType = new global::SoonZik.SoonZik_XamlTypeInfo.XamlSystemBaseType(typeName, type);
                 break;
 
-            case 60:   //  Microsoft.Xaml.Interactions.Media.ControlStoryboardOption
+            case 51:   //  Microsoft.Xaml.Interactions.Media.ControlStoryboardOption
                 userType = new global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("System.Enum"));
                 userType.AddEnumValue("Play", global::Microsoft.Xaml.Interactions.Media.ControlStoryboardOption.Play);
                 userType.AddEnumValue("Stop", global::Microsoft.Xaml.Interactions.Media.ControlStoryboardOption.Stop);
@@ -821,37 +745,47 @@ namespace SoonZik.SoonZik_XamlTypeInfo
                 xamlType = userType;
                 break;
 
-            case 61:   //  SoonZik.Views.Playlist
+            case 52:   //  System.Enum
+                userType = new global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("System.ValueType"));
+                xamlType = userType;
+                break;
+
+            case 53:   //  System.ValueType
+                userType = new global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Object"));
+                xamlType = userType;
+                break;
+
+            case 54:   //  SoonZik.Views.Playlist
                 userType = new global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Page"));
-                userType.Activator = Activate_61_Playlist;
+                userType.Activator = Activate_54_Playlist;
                 userType.SetIsLocalType();
                 xamlType = userType;
                 break;
 
-            case 62:   //  SoonZik.Views.Packs
+            case 55:   //  SoonZik.Views.Packs
                 userType = new global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Page"));
-                userType.Activator = Activate_62_Packs;
+                userType.Activator = Activate_55_Packs;
                 userType.SetIsLocalType();
                 xamlType = userType;
                 break;
 
-            case 63:   //  SoonZik.Views.Profil
+            case 56:   //  SoonZik.Views.Profil
                 userType = new global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Page"));
-                userType.Activator = Activate_63_Profil;
+                userType.Activator = Activate_56_Profil;
                 userType.SetIsLocalType();
                 xamlType = userType;
                 break;
 
-            case 64:   //  SoonZik.Views.News
+            case 57:   //  SoonZik.Views.News
                 userType = new global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Page"));
-                userType.Activator = Activate_64_News;
+                userType.Activator = Activate_57_News;
                 userType.SetIsLocalType();
                 xamlType = userType;
                 break;
 
-            case 65:   //  LightStone.Controls.LightStone
+            case 58:   //  LightStone.Controls.LightStone
                 userType = new global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Canvas"));
-                userType.Activator = Activate_65_LightStone;
+                userType.Activator = Activate_58_LightStone;
                 userType.AddMemberName("ItemsSource");
                 userType.AddMemberName("SelectedIndex");
                 userType.AddMemberName("ItemTemplate");
@@ -865,25 +799,25 @@ namespace SoonZik.SoonZik_XamlTypeInfo
                 xamlType = userType;
                 break;
 
-            case 66:   //  Int32
+            case 59:   //  Int32
                 xamlType = new global::SoonZik.SoonZik_XamlTypeInfo.XamlSystemBaseType(typeName, type);
                 break;
 
-            case 67:   //  Windows.UI.Xaml.DataTemplate
+            case 60:   //  Windows.UI.Xaml.DataTemplate
                 xamlType = new global::SoonZik.SoonZik_XamlTypeInfo.XamlSystemBaseType(typeName, type);
                 break;
 
-            case 68:   //  Double
+            case 61:   //  Double
                 xamlType = new global::SoonZik.SoonZik_XamlTypeInfo.XamlSystemBaseType(typeName, type);
                 break;
 
-            case 69:   //  Windows.UI.Xaml.Media.Animation.EasingFunctionBase
+            case 62:   //  Windows.UI.Xaml.Media.Animation.EasingFunctionBase
                 xamlType = new global::SoonZik.SoonZik_XamlTypeInfo.XamlSystemBaseType(typeName, type);
                 break;
 
-            case 70:   //  SoonZik.Views.Search
+            case 63:   //  SoonZik.Views.Search
                 userType = new global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Page"));
-                userType.Activator = Activate_70_Search;
+                userType.Activator = Activate_63_Search;
                 userType.SetIsLocalType();
                 xamlType = userType;
                 break;
@@ -1185,220 +1119,160 @@ namespace SoonZik.SoonZik_XamlTypeInfo
             var that = (global::SoonZik.Controls.BoutonMenuControl)instance;
             that.Title = (global::System.String)Value;
         }
-        private object get_37_LoginButton_ApplicationId(object instance)
-        {
-            var that = (global::Facebook.Client.Controls.LoginButton)instance;
-            return that.ApplicationId;
-        }
-        private void set_37_LoginButton_ApplicationId(object instance, object Value)
-        {
-            var that = (global::Facebook.Client.Controls.LoginButton)instance;
-            that.ApplicationId = (global::System.String)Value;
-        }
-        private object get_38_LoginButton_DefaultAudience(object instance)
-        {
-            var that = (global::Facebook.Client.Controls.LoginButton)instance;
-            return that.DefaultAudience;
-        }
-        private void set_38_LoginButton_DefaultAudience(object instance, object Value)
-        {
-            var that = (global::Facebook.Client.Controls.LoginButton)instance;
-            that.DefaultAudience = (global::Facebook.Client.Controls.Audience)Value;
-        }
-        private object get_39_LoginButton_Permissions(object instance)
-        {
-            var that = (global::Facebook.Client.Controls.LoginButton)instance;
-            return that.Permissions;
-        }
-        private void set_39_LoginButton_Permissions(object instance, object Value)
-        {
-            var that = (global::Facebook.Client.Controls.LoginButton)instance;
-            that.Permissions = (global::System.String)Value;
-        }
-        private object get_40_LoginButton_FetchUserInfo(object instance)
-        {
-            var that = (global::Facebook.Client.Controls.LoginButton)instance;
-            return that.FetchUserInfo;
-        }
-        private void set_40_LoginButton_FetchUserInfo(object instance, object Value)
-        {
-            var that = (global::Facebook.Client.Controls.LoginButton)instance;
-            that.FetchUserInfo = (global::System.Boolean)Value;
-        }
-        private object get_41_LoginButton_CurrentSession(object instance)
-        {
-            var that = (global::Facebook.Client.Controls.LoginButton)instance;
-            return that.CurrentSession;
-        }
-        private object get_42_LoginButton_CurrentUser(object instance)
-        {
-            var that = (global::Facebook.Client.Controls.LoginButton)instance;
-            return that.CurrentUser;
-        }
-        private object get_43_LoginButton_CornerRadius(object instance)
-        {
-            var that = (global::Facebook.Client.Controls.LoginButton)instance;
-            return that.CornerRadius;
-        }
-        private void set_43_LoginButton_CornerRadius(object instance, object Value)
-        {
-            var that = (global::Facebook.Client.Controls.LoginButton)instance;
-            that.CornerRadius = (global::Windows.UI.Xaml.CornerRadius)Value;
-        }
-        private object get_44_Interaction_Behaviors(object instance)
+        private object get_37_Interaction_Behaviors(object instance)
         {
             return global::Microsoft.Xaml.Interactivity.Interaction.GetBehaviors((global::Windows.UI.Xaml.DependencyObject)instance);
         }
-        private void set_44_Interaction_Behaviors(object instance, object Value)
+        private void set_37_Interaction_Behaviors(object instance, object Value)
         {
             global::Microsoft.Xaml.Interactivity.Interaction.SetBehaviors((global::Windows.UI.Xaml.DependencyObject)instance, (global::Microsoft.Xaml.Interactivity.BehaviorCollection)Value);
         }
-        private object get_45_EventTriggerBehavior_Actions(object instance)
+        private object get_38_EventTriggerBehavior_Actions(object instance)
         {
             var that = (global::Microsoft.Xaml.Interactions.Core.EventTriggerBehavior)instance;
             return that.Actions;
         }
-        private object get_46_EventTriggerBehavior_EventName(object instance)
+        private object get_39_EventTriggerBehavior_EventName(object instance)
         {
             var that = (global::Microsoft.Xaml.Interactions.Core.EventTriggerBehavior)instance;
             return that.EventName;
         }
-        private void set_46_EventTriggerBehavior_EventName(object instance, object Value)
+        private void set_39_EventTriggerBehavior_EventName(object instance, object Value)
         {
             var that = (global::Microsoft.Xaml.Interactions.Core.EventTriggerBehavior)instance;
             that.EventName = (global::System.String)Value;
         }
-        private object get_47_EventTriggerBehavior_SourceObject(object instance)
+        private object get_40_EventTriggerBehavior_SourceObject(object instance)
         {
             var that = (global::Microsoft.Xaml.Interactions.Core.EventTriggerBehavior)instance;
             return that.SourceObject;
         }
-        private void set_47_EventTriggerBehavior_SourceObject(object instance, object Value)
+        private void set_40_EventTriggerBehavior_SourceObject(object instance, object Value)
         {
             var that = (global::Microsoft.Xaml.Interactions.Core.EventTriggerBehavior)instance;
             that.SourceObject = (global::System.Object)Value;
         }
-        private object get_48_EventTriggerBehavior_AssociatedObject(object instance)
+        private object get_41_EventTriggerBehavior_AssociatedObject(object instance)
         {
             var that = (global::Microsoft.Xaml.Interactions.Core.EventTriggerBehavior)instance;
             return that.AssociatedObject;
         }
-        private object get_49_ControlStoryboardAction_Storyboard(object instance)
+        private object get_42_ControlStoryboardAction_Storyboard(object instance)
         {
             var that = (global::Microsoft.Xaml.Interactions.Media.ControlStoryboardAction)instance;
             return that.Storyboard;
         }
-        private void set_49_ControlStoryboardAction_Storyboard(object instance, object Value)
+        private void set_42_ControlStoryboardAction_Storyboard(object instance, object Value)
         {
             var that = (global::Microsoft.Xaml.Interactions.Media.ControlStoryboardAction)instance;
             that.Storyboard = (global::Windows.UI.Xaml.Media.Animation.Storyboard)Value;
         }
-        private object get_50_ControlStoryboardAction_ControlStoryboardOption(object instance)
+        private object get_43_ControlStoryboardAction_ControlStoryboardOption(object instance)
         {
             var that = (global::Microsoft.Xaml.Interactions.Media.ControlStoryboardAction)instance;
             return that.ControlStoryboardOption;
         }
-        private void set_50_ControlStoryboardAction_ControlStoryboardOption(object instance, object Value)
+        private void set_43_ControlStoryboardAction_ControlStoryboardOption(object instance, object Value)
         {
             var that = (global::Microsoft.Xaml.Interactions.Media.ControlStoryboardAction)instance;
             that.ControlStoryboardOption = (global::Microsoft.Xaml.Interactions.Media.ControlStoryboardOption)Value;
         }
-        private object get_51_LightStone_ItemsSource(object instance)
+        private object get_44_LightStone_ItemsSource(object instance)
         {
             var that = (global::LightStone.Controls.LightStone)instance;
             return that.ItemsSource;
         }
-        private void set_51_LightStone_ItemsSource(object instance, object Value)
+        private void set_44_LightStone_ItemsSource(object instance, object Value)
         {
             var that = (global::LightStone.Controls.LightStone)instance;
             that.ItemsSource = (global::System.Object)Value;
         }
-        private object get_52_LightStone_SelectedIndex(object instance)
+        private object get_45_LightStone_SelectedIndex(object instance)
         {
             var that = (global::LightStone.Controls.LightStone)instance;
             return that.SelectedIndex;
         }
-        private void set_52_LightStone_SelectedIndex(object instance, object Value)
+        private void set_45_LightStone_SelectedIndex(object instance, object Value)
         {
             var that = (global::LightStone.Controls.LightStone)instance;
             that.SelectedIndex = (global::System.Int32)Value;
         }
-        private object get_53_LightStone_ItemTemplate(object instance)
+        private object get_46_LightStone_ItemTemplate(object instance)
         {
             var that = (global::LightStone.Controls.LightStone)instance;
             return that.ItemTemplate;
         }
-        private void set_53_LightStone_ItemTemplate(object instance, object Value)
+        private void set_46_LightStone_ItemTemplate(object instance, object Value)
         {
             var that = (global::LightStone.Controls.LightStone)instance;
             that.ItemTemplate = (global::Windows.UI.Xaml.DataTemplate)Value;
         }
-        private object get_54_LightStone_TransitionDuration(object instance)
+        private object get_47_LightStone_TransitionDuration(object instance)
         {
             var that = (global::LightStone.Controls.LightStone)instance;
             return that.TransitionDuration;
         }
-        private void set_54_LightStone_TransitionDuration(object instance, object Value)
+        private void set_47_LightStone_TransitionDuration(object instance, object Value)
         {
             var that = (global::LightStone.Controls.LightStone)instance;
             that.TransitionDuration = (global::System.Int32)Value;
         }
-        private object get_55_LightStone_Depth(object instance)
+        private object get_48_LightStone_Depth(object instance)
         {
             var that = (global::LightStone.Controls.LightStone)instance;
             return that.Depth;
         }
-        private void set_55_LightStone_Depth(object instance, object Value)
+        private void set_48_LightStone_Depth(object instance, object Value)
         {
             var that = (global::LightStone.Controls.LightStone)instance;
             that.Depth = (global::System.Double)Value;
         }
-        private object get_56_LightStone_MaxVisibleItems(object instance)
+        private object get_49_LightStone_MaxVisibleItems(object instance)
         {
             var that = (global::LightStone.Controls.LightStone)instance;
             return that.MaxVisibleItems;
         }
-        private void set_56_LightStone_MaxVisibleItems(object instance, object Value)
+        private void set_49_LightStone_MaxVisibleItems(object instance, object Value)
         {
             var that = (global::LightStone.Controls.LightStone)instance;
             that.MaxVisibleItems = (global::System.Int32)Value;
         }
-        private object get_57_LightStone_Rotation(object instance)
+        private object get_50_LightStone_Rotation(object instance)
         {
             var that = (global::LightStone.Controls.LightStone)instance;
             return that.Rotation;
         }
-        private void set_57_LightStone_Rotation(object instance, object Value)
+        private void set_50_LightStone_Rotation(object instance, object Value)
         {
             var that = (global::LightStone.Controls.LightStone)instance;
             that.Rotation = (global::System.Double)Value;
         }
-        private object get_58_LightStone_TranslateY(object instance)
+        private object get_51_LightStone_TranslateY(object instance)
         {
             var that = (global::LightStone.Controls.LightStone)instance;
             return that.TranslateY;
         }
-        private void set_58_LightStone_TranslateY(object instance, object Value)
+        private void set_51_LightStone_TranslateY(object instance, object Value)
         {
             var that = (global::LightStone.Controls.LightStone)instance;
             that.TranslateY = (global::System.Int32)Value;
         }
-        private object get_59_LightStone_TranslateX(object instance)
+        private object get_52_LightStone_TranslateX(object instance)
         {
             var that = (global::LightStone.Controls.LightStone)instance;
             return that.TranslateX;
         }
-        private void set_59_LightStone_TranslateX(object instance, object Value)
+        private void set_52_LightStone_TranslateX(object instance, object Value)
         {
             var that = (global::LightStone.Controls.LightStone)instance;
             that.TranslateX = (global::System.Int32)Value;
         }
-        private object get_60_LightStone_EasingFunction(object instance)
+        private object get_53_LightStone_EasingFunction(object instance)
         {
             var that = (global::LightStone.Controls.LightStone)instance;
             return that.EasingFunction;
         }
-        private void set_60_LightStone_EasingFunction(object instance, object Value)
+        private void set_53_LightStone_EasingFunction(object instance, object Value)
         {
             var that = (global::LightStone.Controls.LightStone)instance;
             that.EasingFunction = (global::Windows.UI.Xaml.Media.Animation.EasingFunctionBase)Value;
@@ -1633,172 +1507,123 @@ namespace SoonZik.SoonZik_XamlTypeInfo
                 xamlMember.Getter = get_36_BoutonMenuControl_Title;
                 xamlMember.Setter = set_36_BoutonMenuControl_Title;
                 break;
-            case "Facebook.Client.Controls.LoginButton.ApplicationId":
-                userType = (global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType)GetXamlTypeByName("Facebook.Client.Controls.LoginButton");
-                xamlMember = new global::SoonZik.SoonZik_XamlTypeInfo.XamlMember(this, "ApplicationId", "String");
-                xamlMember.SetIsDependencyProperty();
-                xamlMember.Getter = get_37_LoginButton_ApplicationId;
-                xamlMember.Setter = set_37_LoginButton_ApplicationId;
-                break;
-            case "Facebook.Client.Controls.LoginButton.DefaultAudience":
-                userType = (global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType)GetXamlTypeByName("Facebook.Client.Controls.LoginButton");
-                xamlMember = new global::SoonZik.SoonZik_XamlTypeInfo.XamlMember(this, "DefaultAudience", "Facebook.Client.Controls.Audience");
-                xamlMember.SetIsDependencyProperty();
-                xamlMember.Getter = get_38_LoginButton_DefaultAudience;
-                xamlMember.Setter = set_38_LoginButton_DefaultAudience;
-                break;
-            case "Facebook.Client.Controls.LoginButton.Permissions":
-                userType = (global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType)GetXamlTypeByName("Facebook.Client.Controls.LoginButton");
-                xamlMember = new global::SoonZik.SoonZik_XamlTypeInfo.XamlMember(this, "Permissions", "String");
-                xamlMember.SetIsDependencyProperty();
-                xamlMember.Getter = get_39_LoginButton_Permissions;
-                xamlMember.Setter = set_39_LoginButton_Permissions;
-                break;
-            case "Facebook.Client.Controls.LoginButton.FetchUserInfo":
-                userType = (global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType)GetXamlTypeByName("Facebook.Client.Controls.LoginButton");
-                xamlMember = new global::SoonZik.SoonZik_XamlTypeInfo.XamlMember(this, "FetchUserInfo", "Boolean");
-                xamlMember.SetIsDependencyProperty();
-                xamlMember.Getter = get_40_LoginButton_FetchUserInfo;
-                xamlMember.Setter = set_40_LoginButton_FetchUserInfo;
-                break;
-            case "Facebook.Client.Controls.LoginButton.CurrentSession":
-                userType = (global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType)GetXamlTypeByName("Facebook.Client.Controls.LoginButton");
-                xamlMember = new global::SoonZik.SoonZik_XamlTypeInfo.XamlMember(this, "CurrentSession", "Facebook.Client.FacebookSession");
-                xamlMember.SetIsDependencyProperty();
-                xamlMember.Getter = get_41_LoginButton_CurrentSession;
-                xamlMember.SetIsReadOnly();
-                break;
-            case "Facebook.Client.Controls.LoginButton.CurrentUser":
-                userType = (global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType)GetXamlTypeByName("Facebook.Client.Controls.LoginButton");
-                xamlMember = new global::SoonZik.SoonZik_XamlTypeInfo.XamlMember(this, "CurrentUser", "Facebook.Client.GraphUser");
-                xamlMember.SetIsDependencyProperty();
-                xamlMember.Getter = get_42_LoginButton_CurrentUser;
-                xamlMember.SetIsReadOnly();
-                break;
-            case "Facebook.Client.Controls.LoginButton.CornerRadius":
-                userType = (global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType)GetXamlTypeByName("Facebook.Client.Controls.LoginButton");
-                xamlMember = new global::SoonZik.SoonZik_XamlTypeInfo.XamlMember(this, "CornerRadius", "Windows.UI.Xaml.CornerRadius");
-                xamlMember.SetIsDependencyProperty();
-                xamlMember.Getter = get_43_LoginButton_CornerRadius;
-                xamlMember.Setter = set_43_LoginButton_CornerRadius;
-                break;
             case "Microsoft.Xaml.Interactivity.Interaction.Behaviors":
                 userType = (global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType)GetXamlTypeByName("Microsoft.Xaml.Interactivity.Interaction");
                 xamlMember = new global::SoonZik.SoonZik_XamlTypeInfo.XamlMember(this, "Behaviors", "Microsoft.Xaml.Interactivity.BehaviorCollection");
                 xamlMember.SetTargetTypeName("Windows.UI.Xaml.DependencyObject");
                 xamlMember.SetIsAttachable();
-                xamlMember.Getter = get_44_Interaction_Behaviors;
-                xamlMember.Setter = set_44_Interaction_Behaviors;
+                xamlMember.Getter = get_37_Interaction_Behaviors;
+                xamlMember.Setter = set_37_Interaction_Behaviors;
                 break;
             case "Microsoft.Xaml.Interactions.Core.EventTriggerBehavior.Actions":
                 userType = (global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType)GetXamlTypeByName("Microsoft.Xaml.Interactions.Core.EventTriggerBehavior");
                 xamlMember = new global::SoonZik.SoonZik_XamlTypeInfo.XamlMember(this, "Actions", "Microsoft.Xaml.Interactivity.ActionCollection");
                 xamlMember.SetIsDependencyProperty();
-                xamlMember.Getter = get_45_EventTriggerBehavior_Actions;
+                xamlMember.Getter = get_38_EventTriggerBehavior_Actions;
                 xamlMember.SetIsReadOnly();
                 break;
             case "Microsoft.Xaml.Interactions.Core.EventTriggerBehavior.EventName":
                 userType = (global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType)GetXamlTypeByName("Microsoft.Xaml.Interactions.Core.EventTriggerBehavior");
                 xamlMember = new global::SoonZik.SoonZik_XamlTypeInfo.XamlMember(this, "EventName", "String");
                 xamlMember.SetIsDependencyProperty();
-                xamlMember.Getter = get_46_EventTriggerBehavior_EventName;
-                xamlMember.Setter = set_46_EventTriggerBehavior_EventName;
+                xamlMember.Getter = get_39_EventTriggerBehavior_EventName;
+                xamlMember.Setter = set_39_EventTriggerBehavior_EventName;
                 break;
             case "Microsoft.Xaml.Interactions.Core.EventTriggerBehavior.SourceObject":
                 userType = (global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType)GetXamlTypeByName("Microsoft.Xaml.Interactions.Core.EventTriggerBehavior");
                 xamlMember = new global::SoonZik.SoonZik_XamlTypeInfo.XamlMember(this, "SourceObject", "Object");
                 xamlMember.SetIsDependencyProperty();
-                xamlMember.Getter = get_47_EventTriggerBehavior_SourceObject;
-                xamlMember.Setter = set_47_EventTriggerBehavior_SourceObject;
+                xamlMember.Getter = get_40_EventTriggerBehavior_SourceObject;
+                xamlMember.Setter = set_40_EventTriggerBehavior_SourceObject;
                 break;
             case "Microsoft.Xaml.Interactions.Core.EventTriggerBehavior.AssociatedObject":
                 userType = (global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType)GetXamlTypeByName("Microsoft.Xaml.Interactions.Core.EventTriggerBehavior");
                 xamlMember = new global::SoonZik.SoonZik_XamlTypeInfo.XamlMember(this, "AssociatedObject", "Windows.UI.Xaml.DependencyObject");
-                xamlMember.Getter = get_48_EventTriggerBehavior_AssociatedObject;
+                xamlMember.Getter = get_41_EventTriggerBehavior_AssociatedObject;
                 xamlMember.SetIsReadOnly();
                 break;
             case "Microsoft.Xaml.Interactions.Media.ControlStoryboardAction.Storyboard":
                 userType = (global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType)GetXamlTypeByName("Microsoft.Xaml.Interactions.Media.ControlStoryboardAction");
                 xamlMember = new global::SoonZik.SoonZik_XamlTypeInfo.XamlMember(this, "Storyboard", "Windows.UI.Xaml.Media.Animation.Storyboard");
                 xamlMember.SetIsDependencyProperty();
-                xamlMember.Getter = get_49_ControlStoryboardAction_Storyboard;
-                xamlMember.Setter = set_49_ControlStoryboardAction_Storyboard;
+                xamlMember.Getter = get_42_ControlStoryboardAction_Storyboard;
+                xamlMember.Setter = set_42_ControlStoryboardAction_Storyboard;
                 break;
             case "Microsoft.Xaml.Interactions.Media.ControlStoryboardAction.ControlStoryboardOption":
                 userType = (global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType)GetXamlTypeByName("Microsoft.Xaml.Interactions.Media.ControlStoryboardAction");
                 xamlMember = new global::SoonZik.SoonZik_XamlTypeInfo.XamlMember(this, "ControlStoryboardOption", "Microsoft.Xaml.Interactions.Media.ControlStoryboardOption");
                 xamlMember.SetIsDependencyProperty();
-                xamlMember.Getter = get_50_ControlStoryboardAction_ControlStoryboardOption;
-                xamlMember.Setter = set_50_ControlStoryboardAction_ControlStoryboardOption;
+                xamlMember.Getter = get_43_ControlStoryboardAction_ControlStoryboardOption;
+                xamlMember.Setter = set_43_ControlStoryboardAction_ControlStoryboardOption;
                 break;
             case "LightStone.Controls.LightStone.ItemsSource":
                 userType = (global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType)GetXamlTypeByName("LightStone.Controls.LightStone");
                 xamlMember = new global::SoonZik.SoonZik_XamlTypeInfo.XamlMember(this, "ItemsSource", "Object");
                 xamlMember.SetIsDependencyProperty();
-                xamlMember.Getter = get_51_LightStone_ItemsSource;
-                xamlMember.Setter = set_51_LightStone_ItemsSource;
+                xamlMember.Getter = get_44_LightStone_ItemsSource;
+                xamlMember.Setter = set_44_LightStone_ItemsSource;
                 break;
             case "LightStone.Controls.LightStone.SelectedIndex":
                 userType = (global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType)GetXamlTypeByName("LightStone.Controls.LightStone");
                 xamlMember = new global::SoonZik.SoonZik_XamlTypeInfo.XamlMember(this, "SelectedIndex", "Int32");
                 xamlMember.SetIsDependencyProperty();
-                xamlMember.Getter = get_52_LightStone_SelectedIndex;
-                xamlMember.Setter = set_52_LightStone_SelectedIndex;
+                xamlMember.Getter = get_45_LightStone_SelectedIndex;
+                xamlMember.Setter = set_45_LightStone_SelectedIndex;
                 break;
             case "LightStone.Controls.LightStone.ItemTemplate":
                 userType = (global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType)GetXamlTypeByName("LightStone.Controls.LightStone");
                 xamlMember = new global::SoonZik.SoonZik_XamlTypeInfo.XamlMember(this, "ItemTemplate", "Windows.UI.Xaml.DataTemplate");
-                xamlMember.Getter = get_53_LightStone_ItemTemplate;
-                xamlMember.Setter = set_53_LightStone_ItemTemplate;
+                xamlMember.Getter = get_46_LightStone_ItemTemplate;
+                xamlMember.Setter = set_46_LightStone_ItemTemplate;
                 break;
             case "LightStone.Controls.LightStone.TransitionDuration":
                 userType = (global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType)GetXamlTypeByName("LightStone.Controls.LightStone");
                 xamlMember = new global::SoonZik.SoonZik_XamlTypeInfo.XamlMember(this, "TransitionDuration", "Int32");
                 xamlMember.SetIsDependencyProperty();
-                xamlMember.Getter = get_54_LightStone_TransitionDuration;
-                xamlMember.Setter = set_54_LightStone_TransitionDuration;
+                xamlMember.Getter = get_47_LightStone_TransitionDuration;
+                xamlMember.Setter = set_47_LightStone_TransitionDuration;
                 break;
             case "LightStone.Controls.LightStone.Depth":
                 userType = (global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType)GetXamlTypeByName("LightStone.Controls.LightStone");
                 xamlMember = new global::SoonZik.SoonZik_XamlTypeInfo.XamlMember(this, "Depth", "Double");
                 xamlMember.SetIsDependencyProperty();
-                xamlMember.Getter = get_55_LightStone_Depth;
-                xamlMember.Setter = set_55_LightStone_Depth;
+                xamlMember.Getter = get_48_LightStone_Depth;
+                xamlMember.Setter = set_48_LightStone_Depth;
                 break;
             case "LightStone.Controls.LightStone.MaxVisibleItems":
                 userType = (global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType)GetXamlTypeByName("LightStone.Controls.LightStone");
                 xamlMember = new global::SoonZik.SoonZik_XamlTypeInfo.XamlMember(this, "MaxVisibleItems", "Int32");
                 xamlMember.SetIsDependencyProperty();
-                xamlMember.Getter = get_56_LightStone_MaxVisibleItems;
-                xamlMember.Setter = set_56_LightStone_MaxVisibleItems;
+                xamlMember.Getter = get_49_LightStone_MaxVisibleItems;
+                xamlMember.Setter = set_49_LightStone_MaxVisibleItems;
                 break;
             case "LightStone.Controls.LightStone.Rotation":
                 userType = (global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType)GetXamlTypeByName("LightStone.Controls.LightStone");
                 xamlMember = new global::SoonZik.SoonZik_XamlTypeInfo.XamlMember(this, "Rotation", "Double");
                 xamlMember.SetIsDependencyProperty();
-                xamlMember.Getter = get_57_LightStone_Rotation;
-                xamlMember.Setter = set_57_LightStone_Rotation;
+                xamlMember.Getter = get_50_LightStone_Rotation;
+                xamlMember.Setter = set_50_LightStone_Rotation;
                 break;
             case "LightStone.Controls.LightStone.TranslateY":
                 userType = (global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType)GetXamlTypeByName("LightStone.Controls.LightStone");
                 xamlMember = new global::SoonZik.SoonZik_XamlTypeInfo.XamlMember(this, "TranslateY", "Int32");
                 xamlMember.SetIsDependencyProperty();
-                xamlMember.Getter = get_58_LightStone_TranslateY;
-                xamlMember.Setter = set_58_LightStone_TranslateY;
+                xamlMember.Getter = get_51_LightStone_TranslateY;
+                xamlMember.Setter = set_51_LightStone_TranslateY;
                 break;
             case "LightStone.Controls.LightStone.TranslateX":
                 userType = (global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType)GetXamlTypeByName("LightStone.Controls.LightStone");
                 xamlMember = new global::SoonZik.SoonZik_XamlTypeInfo.XamlMember(this, "TranslateX", "Int32");
                 xamlMember.SetIsDependencyProperty();
-                xamlMember.Getter = get_59_LightStone_TranslateX;
-                xamlMember.Setter = set_59_LightStone_TranslateX;
+                xamlMember.Getter = get_52_LightStone_TranslateX;
+                xamlMember.Setter = set_52_LightStone_TranslateX;
                 break;
             case "LightStone.Controls.LightStone.EasingFunction":
                 userType = (global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType)GetXamlTypeByName("LightStone.Controls.LightStone");
                 xamlMember = new global::SoonZik.SoonZik_XamlTypeInfo.XamlMember(this, "EasingFunction", "Windows.UI.Xaml.Media.Animation.EasingFunctionBase");
                 xamlMember.SetIsDependencyProperty();
-                xamlMember.Getter = get_60_LightStone_EasingFunction;
-                xamlMember.Setter = set_60_LightStone_EasingFunction;
+                xamlMember.Getter = get_53_LightStone_EasingFunction;
+                xamlMember.Setter = set_53_LightStone_EasingFunction;
                 break;
             }
             return xamlMember;

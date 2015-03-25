@@ -1,0 +1,16 @@
+C:\Users\Géry\documents\visual studio 2013\Projects\SoonZik\SoonZik.HttpRequest\bin\Debug\SoonZik.HttpRequest.dll
+C:\Users\Géry\documents\visual studio 2013\Projects\SoonZik\SoonZik.HttpRequest\bin\Debug\SoonZik.HttpRequest.pdb
+C:\Users\Géry\documents\visual studio 2013\Projects\SoonZik\SoonZik.HttpRequest\bin\Debug\SoonZik.HttpRequest.pri
+C:\Users\Géry\documents\visual studio 2013\Projects\SoonZik\SoonZik.HttpRequest\obj\Debug\SoonZik.HttpRequest.dll
+C:\Users\Géry\documents\visual studio 2013\Projects\SoonZik\SoonZik.HttpRequest\obj\Debug\SoonZik.HttpRequest.pdb
+C:\Users\Géry\documents\visual studio 2013\Projects\SoonZik\SoonZik.HttpRequest\obj\Debug\priconfig.xml
+C:\Users\Géry\documents\visual studio 2013\Projects\SoonZik\SoonZik.HttpRequest\obj\Debug\priconfig.xml.intermediate
+C:\Users\Géry\documents\visual studio 2013\Projects\SoonZik\SoonZik.HttpRequest\obj\Debug\layout.resfiles
+C:\Users\Géry\documents\visual studio 2013\Projects\SoonZik\SoonZik.HttpRequest\obj\Debug\layout.resfiles.intermediate
+C:\Users\Géry\documents\visual studio 2013\Projects\SoonZik\SoonZik.HttpRequest\obj\Debug\resources.resfiles
+C:\Users\Géry\documents\visual studio 2013\Projects\SoonZik\SoonZik.HttpRequest\obj\Debug\resources.resfiles.intermediate
+C:\Users\Géry\documents\visual studio 2013\Projects\SoonZik\SoonZik.HttpRequest\obj\Debug\pri.resfiles
+C:\Users\Géry\documents\visual studio 2013\Projects\SoonZik\SoonZik.HttpRequest\obj\Debug\pri.resfiles.intermediate
+C:\Users\Géry\documents\visual studio 2013\Projects\SoonZik\SoonZik.HttpRequest\obj\Debug\qualifiers.txt
+C:\Users\Géry\documents\visual studio 2013\Projects\SoonZik\SoonZik.HttpRequest\obj\Debug\qualifiers.txt.intermediate
+C:\Users\Géry\documents\visual studio 2013\Projects\SoonZik\SoonZik.HttpRequest\obj\Debug\MultipleQualifiersPerDimensionFound.txt

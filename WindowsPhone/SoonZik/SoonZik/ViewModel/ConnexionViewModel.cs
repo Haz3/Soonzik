@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using Windows.UI.Popups;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using SoonZik.Utils;
+using SoonZik.Views;
 
 namespace SoonZik.ViewModel
 {
@@ -43,11 +45,14 @@ namespace SoonZik.ViewModel
             get { return _connexionCommand; }
         }
 
+        public Utils.INavigationService Navigation;
+
         #endregion
         
         #region Ctor
         public ConnexionViewModel()
         {
+            Navigation = new NavigationService();
             _connexionCommand = new RelayCommand(MakeConnexion);
         }
         #endregion
@@ -57,6 +62,7 @@ namespace SoonZik.ViewModel
         {
             var test = new MessageDialog("user = " + Username + " pass = " + Password);
             test.ShowAsync();
+            Navigation.Navigate(typeof(MainView));
         }
         #endregion
     }

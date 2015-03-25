@@ -6,8 +6,12 @@ using Windows.UI.Xaml.Media.Animation;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Ioc;
+using GalaSoft.MvvmLight.Views;
 using Microsoft.Practices.ServiceLocation;
 using SoonZik.Model;
+using SoonZik.Utils;
+using SoonZik.Views;
+using NavigationService = SoonZik.Utils.NavigationService;
 
 namespace SoonZik.ViewModel
 {
@@ -115,6 +119,8 @@ namespace SoonZik.ViewModel
 
         private string _searchText;
 
+        private Utils.INavigationService navigationService;
+
         public string SearchText
         {
             get { return _searchText; }
@@ -130,13 +136,13 @@ namespace SoonZik.ViewModel
         /// Initializes a new instance of the MainViewModel class.
         /// </summary>
 
-
-
-
         #region Ctor
         public MainViewModel()
         {
             _connexionString = "Connexion";
+
+            this.navigationService = new NavigationService();
+
             GetPivotExecute = new RelayCommand<Pivot>(GetPivot);
             GetStoryBoardExecute = new RelayCommand<Storyboard>(GetStory);
             GetToggleButton = new RelayCommand<ToggleButton>(GetToggle);
@@ -152,7 +158,6 @@ namespace SoonZik.ViewModel
             _connexionCommand = new RelayCommand(GoToConnexionPage);
             _menuCommand = new RelayCommand(GoToMenu);
         }
-
 
         #endregion
 
@@ -238,10 +243,8 @@ namespace SoonZik.ViewModel
 
         private void GoToConnexionPage()
         {
-            SimpleIoc.Default.Register<MainPageViewModel>();
-            ServiceLocator.Current.GetInstance<MainPageViewModel>().ConnexionVisibility = true;
-            ServiceLocator.Current.GetInstance<MainPageViewModel>().PivotVisibility = false;
-            _connexionString = "Deconnexion";
+            navigationService.Navigate(typeof(Connexion));
+           _connexionString = "Deconnexion";
         }
 
         private void GoToMenu()
