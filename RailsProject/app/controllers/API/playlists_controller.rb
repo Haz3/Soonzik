@@ -159,7 +159,6 @@ module API
     # ===== HTTP VALUE
     # 
     # - +200+ - In case of success, return a list of playlist including its musics and user
-    # - +204+ - The list is empty, there is probably too much filter
     # - +503+ - Error from server
     # 
     def find
@@ -233,7 +232,6 @@ module API
 
         if (playlist_object.size == 0)
           codeAnswer 202
-          defineHttp :no_content
         else
           codeAnswer 200
         end
@@ -255,7 +253,7 @@ module API
     # 
     # ===== HTTP VALUE
     # 
-    # - +204+ - In case of success, return nothing
+    # - +200+ - In case of success, return nothing
     # - +401+ - It is not a secured transaction
     # - +503+ - Error from server
     # 
@@ -265,7 +263,6 @@ module API
           object = Playlist.find_by_id(@id);
           object.destroy
           codeAnswer 202
-          defineHttp :no_content
         else
           codeAnswer 500
           defineHttp :forbidden

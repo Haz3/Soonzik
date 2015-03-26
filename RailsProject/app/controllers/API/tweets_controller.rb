@@ -18,7 +18,6 @@ module API
     # ===== HTTP VALUE
     # 
     # - +200+ - In case of success, return a list of tweets including its user
-    # - +204+ - The list is empty
     # - +503+ - Error from server
     # 
     def index
@@ -26,7 +25,6 @@ module API
         @returnValue = { content: Tweet.all.as_json(:include => { :user => { only: User.miniKey } }) }
         if (@returnValue[:content].size == 0)
           codeAnswer 202
-          defineHttp :no_content
         else
           codeAnswer 200
         end
@@ -130,7 +128,6 @@ module API
     # ===== HTTP VALUE
     # 
     # - +200+ - In case of success, return a list of tweets including its user
-    # - +204+ - The list is empty, there is probably too much filter
     # - +503+ - Error from server
     # 
     def find
@@ -203,7 +200,6 @@ module API
 
         if (tweet_object.size == 0)
           codeAnswer 202
-          defineHttp :no_content
         else
           codeAnswer 200
         end
@@ -225,7 +221,7 @@ module API
     # 
     # ===== HTTP VALUE
     # 
-    # - +204+ - In case of success, return nothing
+    # - +200+ - In case of success, return nothing
     # - +401+ - It is not a secured transaction
     # - +503+ - Error from server
     # 
@@ -235,7 +231,6 @@ module API
           object = Tweet.find_by_id(@id);
           object.destroy
           codeAnswer 202
-          defineHttp :no_content
         else
           codeAnswer 500
           defineHttp :forbidden

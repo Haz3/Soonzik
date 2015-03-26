@@ -48,7 +48,9 @@ module API
       assert_equal value["content"].size, 2
 
       get :find, { offset: 42, order_by_asc: [], order_by_desc: ["id"], format: :json }
-      assert_response :no_content
+      assert_response :ok
+      value = JSON.parse(response.body)
+      assert_equal value["code"], 202
 
       value = JSON.parse(response.body)
       assert_equal value["code"], 202
@@ -68,7 +70,9 @@ module API
       assert_difference('Tweet.count', -1) do
         get :destroy, { id: @tweet, user_id: token[:id], secureKey: token[:secureKey], format: :json }
       end
-      assert_response :no_content
+      assert_response :ok
+      value = JSON.parse(response.body)
+      assert_equal value["code"], 202
 
       value = JSON.parse(response.body)
       assert_equal value["code"], 202

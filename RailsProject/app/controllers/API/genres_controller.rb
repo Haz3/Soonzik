@@ -12,7 +12,6 @@ module API
     # ===== HTTP VALUE
     # 
     # - +200+ - In case of success, return a list of genres including its influences
-    # - +204+ - The list is empty
     # - +503+ - Error from server
     # 
     def index
@@ -20,7 +19,6 @@ module API
         @returnValue = { content: Genre.all.as_json(:include => :influences) }
         if (@returnValue[:content].size == 0)
           codeAnswer 202
-          defineHttp :no_content
         else
           codeAnswer 200
         end

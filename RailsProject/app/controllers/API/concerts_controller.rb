@@ -14,7 +14,6 @@ module API
     # ===== HTTP VALUE
     # 
     # - +200+ - In case of success, return a list of concerts including its address
-    # - +204+ - The list is empty, probably too much filter
     # - +503+ - Error from server
     # 
     def index
@@ -22,7 +21,6 @@ module API
         @returnValue = { content: Concert.all.as_json(:include => :address) }
         if (@returnValue[:content].size == 0)
           codeAnswer 202
-          defineHttp :no_content
         else
           codeAnswer 200
         end
@@ -85,7 +83,6 @@ module API
     # ===== HTTP VALUE
     # 
     # - +200+ - In case of success, return a list of battles including its artists and the votes
-    # - +204+ - The list is empty, probably too much filter
     # - +503+ - Error from server
     # 
     def find
@@ -156,7 +153,6 @@ module API
 
         if (concert_object.size == 0)
           codeAnswer 202
-          defineHttp :no_content
         else
           codeAnswer 200
         end

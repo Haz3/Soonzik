@@ -19,7 +19,6 @@ module API
     # ===== HTTP VALUE
     # 
     # - +200+ - In case of success, return a list of musics including its user and music
-    # - +204+ - The list is empty
     # - +503+ - Error from server
     # 
     def index
@@ -31,7 +30,6 @@ module API
                                                                                         }) }
         if (@returnValue[:content].size == 0)
           codeAnswer 202
-          defineHttp :no_content
         else
           codeAnswer 200
         end
@@ -96,7 +94,6 @@ module API
     # ===== HTTP VALUE
     # 
     # - +200+ - In case of success, return a list of musics including its album, genres and user (artist)
-    # - +204+ - The list is empty, probably too much filter
     # - +503+ - Error from server
     # 
     def find
@@ -171,7 +168,6 @@ module API
 
         if (music_object.size == 0)
           codeAnswer 202
-          defineHttp :no_content
         else
           codeAnswer 200
         end

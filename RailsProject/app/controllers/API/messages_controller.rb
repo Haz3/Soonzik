@@ -111,7 +111,6 @@ module API
     # ===== HTTP VALUE
     # 
     # - +200+ - In case of success, return a list of messages including its sender and receiver
-    # - +204+ - The list is empty, probably too much filter
     # - +503+ - Error from server
     # 
     def find
@@ -188,7 +187,6 @@ module API
 
           if (message_object.size == 0)
             codeAnswer 202
-            defineHttp :no_content
           else
             codeAnswer 200
           end

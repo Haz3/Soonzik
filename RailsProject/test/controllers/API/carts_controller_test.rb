@@ -25,7 +25,9 @@ module API
       @user = users(:UserTwo)
       token = giveToken()
       get :find, { offset: 42, user_id: token[:id], secureKey: token[:secureKey], format: :json }
-      assert_response :no_content
+      assert_response :ok
+      value = JSON.parse(response.body)
+      assert_equal value["code"], 202
 
       value = JSON.parse(response.body)
       assert_equal value["code"], 202
@@ -49,7 +51,9 @@ module API
       assert_difference('Cart.count', -1) do
         get :destroy, { id: @cart, user_id: token[:id], secureKey: token[:secureKey], format: :json}
       end
-      assert_response :no_content
+      assert_response :ok
+      value = JSON.parse(response.body)
+      assert_equal value["code"], 202
 
       value = JSON.parse(response.body)
       assert_equal value["code"], 202

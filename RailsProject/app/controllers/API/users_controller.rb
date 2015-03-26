@@ -19,7 +19,6 @@ module API
     # ===== HTTP VALUE
     # 
     # - +200+ - In case of success, return a list of users including its address, friends and follow
-    # - +204+ - The list is empty
     # - +503+ - Error from server
     # 
     def index
@@ -32,7 +31,6 @@ module API
                                                     :only => User.miniKey) }
         if (@returnValue[:content].size == 0)
           codeAnswer 202
-          defineHttp :no_content
         else
           codeAnswer 200
         end
@@ -100,7 +98,6 @@ module API
     # ===== HTTP VALUE
     # 
     # - +200+ - In case of success, return a list of users including its address, friends and follows
-    # - +204+ - The list is empty, there is probably too much filter
     # - +503+ - Error from server
     # 
     def find
@@ -176,7 +173,6 @@ module API
 
         if (user_object.size == 0)
           codeAnswer 202
-          defineHttp :no_content
         else
           codeAnswer 200
         end

@@ -19,7 +19,7 @@ module API
     # 
     # ===== HTTP VALUE
     # 
-    # - +204+ - In case of success, there is nothing to return
+    # - +200+ - In case of success, there is nothing to return
     # - +403+ - It is not a secured transaction
     # - +503+ - Error from server
     # 
@@ -29,7 +29,6 @@ module API
       	  object = Cart.find_by_id(@id);
       	  object.destroy
       	  codeAnswer 202
-          defineHttp :no_content
       	else
       	  codeAnswer 500
           defineHttp :forbidden
@@ -132,7 +131,6 @@ module API
     # ===== HTTP VALUE
     # 
     # - +200+ - In case of success, return a list of cart items
-    # - +204+ - The list is empty, probably too much filter
     # - +503+ - Error from server
     # 
     def find
@@ -211,7 +209,6 @@ module API
 
           if (cart_object.size == 0)
             codeAnswer 202
-            defineHttp :no_content
           else
             codeAnswer 200
           end
