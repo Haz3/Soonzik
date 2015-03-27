@@ -1,6 +1,6 @@
 'use strict';
 
-$(document).ready(function() {
+//$(document).ready(function() {
     WaveSurfer.Drawer = {
         init: function (container, params) {
             this.container = container;
@@ -192,4 +192,4 @@ $(document).ready(function() {
         updateProgress: function (position) {}
     };
     WaveSurfer.util.extend(WaveSurfer.Drawer, WaveSurfer.Observer);
-});
+//});

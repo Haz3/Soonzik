@@ -14,7 +14,9 @@
 //= require jquery_ujs
 //= require foundation
 //= require turbolinks
-//= require_tree .
+//= require ./player/wavesurfer.min.js
+//= require ./player/main.js
+// require_tree .
 
 
 
