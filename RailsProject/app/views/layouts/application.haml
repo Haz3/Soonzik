@@ -20,6 +20,11 @@
             %a{:href => "#"}
               %span Menu
         %section.top-bar-section
+          %ul.left
+            %li.has-form
+              .large-5.small-5.columns
+                =image_tag "loupe.png", :class => "loupe"
+                %input{:placeholder => "Recherchez des Shtroumpfs, musiques, personnes", :type => "text"}
           %ul.right
             %p
               =@session
@@ -46,39 +51,39 @@
                   =image_tag "menu.png", :class => "menu-logo"
                   %ul.dropdown
                     %li
-                      /= link_to('Login', new_user_session_path)
-                      %a Mon Profil
-                      %a News
-                      %a Explorer
-                      %a Packs
-                      %a Monde Musical
-                      %a Battle
-                      %a Playlist
-                      %a Amis
-                      %a Déconnexion
-
-          %ul.left
-            %li.has-form
-              .large-5.small-5.columns
-                =image_tag "loupe.png", :class => "loupe"
-                %input{:placeholder => "Recherchez des Shtroumpfs, musiques, personnes", :type => "text"}
+                      - if user_signed_in?
+                        = link_to('Test', user_path(@user))
+                        %a News
+                        %a Explorer
+                        %a Packs
+                        %a Monde Musical
+                        %a Battle
+                        %a Playlist
+                        %a Amis
+                        %a Déconnexion
+                      - else
+                        = link_to('Login', new_user_session_path)
   %body
-    =yield
+    //=yield
 
   %footer
-    #player.large-12.small-9
-      =image_tag "stefan-bodzin.jpg", :class => "picture"
-      #button-player-left.large-12.small-9
-        =image_tag "rewind.png"
-        =image_tag "play.png", :class => "play"
-        =image_tag "forward.png"
-        =image_tag "sound.png", :class => "sound"
-        =image_tag "shuffle.png"
-      .player-time-begin
-        0:34
-      .slider-player
-      .player-time-left
-        2:50
+    .container
+      #demo
+        #player.large-12.small-9
+          =image_tag "stefan-bodzin.jpg", :class => "picture"
+          #button-player-left.large-12.small-9
+            .controls
+              =image_tag "rewind.png"
+              =image_tag "play.png",{"role" => "button", "class" => "btn btn-primary", "data-action" => "play"}
+              =image_tag "forward.png"
+              =image_tag "sound.png", :class => "sound"
+              =image_tag "shuffle.png"
+
+
+          #waveform  
+            .progress.progress-striped.active#progress-bar
+              .progress-bar.progress-bar-info
+
       #button-player-right.large-12.small-9
         =image_tag "playlist.png"
         =image_tag "social.png"

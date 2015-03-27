@@ -112,8 +112,9 @@
 	margin-left: 15px;
 }
 
-#play { 
+.play { 
 	width: 30px !important;
+  	cursor:  pointer;
 }
 
 #player #button-player-left img {
@@ -157,15 +158,23 @@
 	float: left;
 }
 
-.slider-player {
-	margin-left: 25px;
-	width: 700px;
-	background-color: #808080;
-	height: 5px;
-	display: inline-block;
-	margin-top: 35px;
-	float: left;
-	position: relative;
+#waveform {
+}
+
+#progress-bar {
+    position: absolute;
+    z-index: 10;
+    top: 50%;
+    margin-top: -10px;
+	left: 23%;
+	width: 65%;
+}
+
+/* Customize container */
+@media (min-width: 1024px) {
+    .container {
+        max-width: 900px;
+    }
 }
 
 .links {
