@@ -25,8 +25,8 @@ module API
       begin
         @returnValue = { content: User.all.as_json(:include => {
                                                                   :address => {},
-                                                                  :friends => {},
-                                                                  :follows => {}
+                                                                  :friends => { only: User.miniKey },
+                                                                  :follows => { only: User.miniKey }
                                                                 },
                                                     :only => User.miniKey) }
         if (@returnValue[:content].size == 0)
