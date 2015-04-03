@@ -5,66 +5,62 @@
       %ul
         - @user.errors.full_messages.each do |msg|
           %li= msg
-
-  .field
-    = f.label :email
-    = f.text_field :email
-  .field
-    = f.label :password
-    = f.text_field :password
-  .field
-    = f.label :salt
-    = f.text_field :salt
-  .field
-    = f.label :fname
-    = f.text_field :fname
-  .field
-    = f.label :lname
-    = f.text_field :lname
-  .field
-    = f.label :username
-    = f.text_field :username
-  .field
-    = f.label :birthday
-    = f.date_select :birthday
-  .field
-    = f.label :image
-    = f.text_field :image
-  .field
-    = f.label :description
-    = f.text_area :description
-  .field
-    = f.label :phoneNumber
-    = f.text_field :phoneNumber
-  .field
-    = f.label :adress_id
-    = f.number_field :adress_id
-  .field
-    = f.label :facebook
-    = f.text_field :facebook
-  .field
-    = f.label :twitter
-    = f.text_field :twitter
-  .field
-    = f.label :googlePlus
-    = f.text_field :googlePlus
-  .field
-    = f.label :signin
-    = f.datetime_select :signin
-  .field
-    = f.label :idAPI
-    = f.text_field :idAPI
-  .field
-    = f.label :secureKey
-    = f.text_field :secureKey
-  .field
-    = f.label :activated
-    = f.check_box :activated
-  .field
-    = f.label :newsletter
-    = f.check_box :newsletter
-  .field
-    = f.label :language
-    = f.text_field :language
-  .actions
-    = f.submit 'Save'
+  .row
+    .small-6.small-centered.columns.left
+      .field
+        = f.label :email
+        = f.text_field :email
+      .field
+        = f.label :password
+        = f.text_field :password
+      .field
+        = f.label :salt
+        = f.text_field :salt
+      .field
+        = f.label :fname
+        = f.text_field :fname
+      .field
+        = f.label :lname
+        = f.text_field :lname
+      .field
+        = f.label :username
+        = f.text_field :username
+      .field
+        = f.label :birthday
+        = f.date_select :birthday
+      .field
+        = f.label :image
+        = f.text_field :image
+      .field
+        = f.label :description
+        = f.text_area :description
+    .small-6.small-centered.columns.right
+      .field
+        = f.label :phoneNumber
+        = f.text_field :phoneNumber
+      .field
+        = f.label :address_id
+        = f.number_field :address_id
+      .field
+        = f.label :facebook
+        = f.text_field :facebook
+      .field
+        = f.label :twitter
+        = f.text_field :twitter
+      .field
+        = f.label :googlePlus
+        = f.text_field :googlePlus
+      .field
+        = f.label :idAPI
+        = f.text_field :idAPI
+      .field
+        = f.label :secureKey
+        = f.text_field :secureKey
+      .field
+        = f.label :newsletter
+        = f.check_box :newsletter
+      .field
+        = f.label :language
+        = f.text_field :language
+      .actions
+        = f.submit 'Save'

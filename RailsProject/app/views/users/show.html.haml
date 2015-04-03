@@ -1,66 +1,59 @@
-%p#notice= notice
+.row
+  /#notice= notice
+  .small-6.small-centered.columns.left
+    %p
+      %b Email:
+      = @user.email
+    %p
+      %b Password:
+      = @user.password
+    %p
+      %b Salt:
+      = @user.salt
+    %p
+      %b Fname:
+      = @user.fname
+    %p
+      %b Lname:
+      = @user.lname
+    %p
+      %b Username:
+      = @user.username
+    %p
+      %b Birthday:
+      = @user.birthday
+    %p
+      %b Image:
+      =image_tag(@user.image, :class => "photo-profile")
+  .small-6.small-centered.columns.right
+    %p
+      %b Description:
+      = @user.description
+    %p
+      %b Phonenumber:
+      = @user.phoneNumber
+    %p
+      %b Facebook:
+      = @user.facebook
+    %p
+      %b Twitter:
+      = @user.twitter
+    %p
+      %b Googleplus:
+      = @user.googlePlus
+    %p
+      %b Idapi:
+      = @user.idAPI
+    %p
+      %b Securekey:
+      = @user.secureKey
+    %p
+      %b Newsletter:
+      = @user.newsletter
+    %p
+      %b Language:
+      = @user.language
 
-%p
-  %b Email:
-  = @user.email
-%p
-  %b Password:
-  = @user.password
-%p
-  %b Salt:
-  = @user.salt
-%p
-  %b Fname:
-  = @user.fname
-%p
-  %b Lname:
-  = @user.lname
-%p
-  %b Username:
-  = @user.username
-%p
-  %b Birthday:
-  = @user.birthday
-%p
-  %b Image:
-  = @user.image
-%p
-  %b Description:
-  = @user.description
-%p
-  %b Phonenumber:
-  = @user.phoneNumber
-%p
-  %b Adress:
-  = @user.adress_id
-%p
-  %b Facebook:
-  = @user.facebook
-%p
-  %b Twitter:
-  = @user.twitter
-%p
-  %b Googleplus:
-  = @user.googlePlus
-%p
-  %b Signin:
-  = @user.signin
-%p
-  %b Idapi:
-  = @user.idAPI
-%p
-  %b Securekey:
-  = @user.secureKey
-%p
-  %b Activated:
-  = @user.activated
-%p
-  %b Newsletter:
-  = @user.newsletter
-%p
-  %b Language:
-  = @user.language
-
-= link_to 'Edit', edit_user_path(@user)
-\|
-= link_to 'Back', users_path
+  = link_to 'Edit', edit_user_path(@user)
+  \|
+  = link_to 'Back', users_path

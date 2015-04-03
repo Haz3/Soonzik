@@ -26,65 +26,54 @@
                 =image_tag "loupe.png", :class => "loupe"
                 %input{:placeholder => "Recherchez des Shtroumpfs, musiques, personnes", :type => "text"}
           %ul.right
-            %p
-              =@session
-              - if user_signed_in?
-                =image_tag "stefan-bodzin.jpg", :class => "photo-profile"
-                .profile
-                  %p
-                    %a.name Stefan Bodzin
-                  %p
-                    %a.modify Modifier le profil
-                %li.has-dropdown{"is_hover" => "true", "data-options" => "align:right"}
-                  =image_tag "menu.png", :class => "menu-logo"
-                  %ul.dropdown
-                    %li
-                      %a Test 1
-                      %a TesT 2
-                      %a Test 3
-                      = link_to('Logout', destroy_user_session_path, :method => :delete)
-              - else
-                .profile
-                  %p
-                    %a.name Sign Up
-                %li.has-dropdown{"is_hover" => "true"}
-                  =image_tag "menu.png", :class => "menu-logo"
-                  %ul.dropdown
-                    %li
-                      - if user_signed_in?
-                        = link_to('Test', user_path(@user))
-                        %a News
-                        %a Explorer
-                        %a Packs
-                        %a Monde Musical
-                        %a Battle
-                        %a Playlist
-                        %a Amis
-                        %a Déconnexion
-                      - else
-                        = link_to('Login', new_user_session_path)
+            =@session
+            - if user_signed_in?
+              %li.has-dropdown{"is_hover" => "true", "data-options" => "align:right"}
+                =image_tag "menu.png", :class => "menu-logo"
+                %ul.dropdown
+                  %li
+                    = link_to('Modifier le profil', edit_user_path(current_user))
+                    %a News
+                    %a Explorer
+                    %a Packs
+                    %a Monde Musical
+                    %a Battle
+                    %a Playlist
+                    %a Amis
+                    = link_to('Logout', destroy_user_session_path, :method => :delete)
+              =image_tag current_user.image, :class => "photo-profile"              
+              .profile
+                %p
+                  = link_to(current_user.username, edit_user_path(current_user), :class => "profile")
+            - else
+              %li.has-dropdown{"is_hover" => "true"}
+                =image_tag "menu.png", :class => "menu-logo"
+                %ul.dropdown
+                  %li
+                    = link_to('Login', new_user_session_path)
   %body
-    //=yield
+    =yield
 
-  %footer
-    .container
-      #demo
-        #player.large-12.small-9
-          =image_tag "stefan-bodzin.jpg", :class => "picture"
-          #button-player-left.large-12.small-9
-            .controls
-              =image_tag "rewind.png"
-              =image_tag "play.png",{"role" => "button", "class" => "btn btn-primary", "data-action" => "play"}
-              =image_tag "forward.png"
-              =image_tag "sound.png", :class => "sound"
-              =image_tag "shuffle.png"
+    %footer
+      .container
+        #demo
+          #player.large-12.small-9
+            =image_tag "stefan-bodzin.jpg", :class => "picture"
+            #button-player-left.large-12.small-9
+              .controls
+                =image_tag "rewind.png"
+                =image_tag "play.png",{"role" => "button", "id" => "play", "class" => "btn btn-primary", "data-action" => "play"}
+                =image_tag "forward.png"
+                =image_tag "sound.png", :class => "sound"
+                =image_tag "shuffle.png"
 
 
-          #waveform  
-            .progress.progress-striped.active#progress-bar
-              .progress-bar.progress-bar-info
+            #waveform-container
+              #waveform
+                .progress.progress-striped.active#progress-bar
+                  .progress-bar.progress-bar-info
 
-      #button-player-right.large-12.small-9
-        =image_tag "playlist.png"
-        =image_tag "social.png"
+            #button-player-right.large-12.small-9
+              =image_tag "playlist.png"
+              =image_tag "social.png"
       

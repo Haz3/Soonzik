@@ -35,6 +35,7 @@
 
 .top-bar input {
 	min-width: 350px;
+	
 }
 
 .top-bar-section .right li .dropdown {
@@ -42,19 +43,29 @@
 	float: right !important;
 }
 
-.photo-profile {
-	border-radius: 100%;
-	width: 50px;
-	margin-top: 5px;
-	margin-right: 235px;
-}
-
-.profile {
+.top-bar-section .has-dropdown {
 	float: right;
 }
 
+.photo-profile {
+	border-radius: 100%;
+	width: 50px;
+	height: 50px;
+	margin-top: 5px;
+	margin-right: 15px;
+}
+
+.profile {
+    float: right;
+    font-size: 17px;
+    margin-right: 55px;
+    margin-top: 5px;
+}
+
 .menu-logo {
-	width: 30px;
+	width: 50px;
+    margin-top: 7px;
+
 }
 
 .name {
@@ -63,6 +74,15 @@
 
 .modify {
 
+}
+
+.top-bar-section .dropdown li {
+	min-width: 265px !important;
+	left: -75px;
+}
+
+.top-bar-section .right li .dropdown {
+    right: auto !important;
 }
 
 #player {
@@ -112,7 +132,7 @@
 	margin-left: 15px;
 }
 
-.play { 
+#play { 
 	width: 30px !important;
   	cursor:  pointer;
 }
@@ -158,7 +178,17 @@
 	float: left;
 }
 
+#waveform-container {
+	position: absolute;
+	z-index: 10;
+	top: 50%;
+	margin-top: 0;
+	left: 23%;
+	width: 65%;
+}
+
 #waveform {
+	position: realative;
 }
 
 #progress-bar {
