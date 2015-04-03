@@ -1,14 +1,14 @@
 //
-//  FriendsTableViewCell.m
+//  BuyPackTableViewCell.m
 //  SoonZik
 //
-//  Created by Maxime Sauvage on 09/01/2015.
+//  Created by Maxime Sauvage on 22/03/15.
 //  Copyright (c) 2015 Coordina. All rights reserved.
 //
 
-#import "FriendsTableViewCell.h"
+#import "BuyPackTableViewCell.h"
 
-@implementation FriendsTableViewCell
+@implementation BuyPackTableViewCell
 
 - (void)awakeFromNib {
     // Initialization code
