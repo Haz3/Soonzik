@@ -19,6 +19,17 @@
 @import "foundation_and_overrides";
 /* Add imports of custom sass/scss files here */
 
+@font-face {
+  font-family: "foundation-icons";
+  background-image: url(image-url("icons/foundation-icons.eot"));
+  background-image: url(image-url("icons/foundation-icons.eot?#iefix")) format("embedded-opentype"),
+       url(image-url("icons/foundation-icons.woff")) format("woff"),
+       url(image-url("icons/foundation-icons.ttf")) format("truetype"),
+       url(image-url("icons/foundation-icons.svg#fontcustom")) format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+
 .soonzik-logo {
     margin-left: 20px;
     float: left;
@@ -140,7 +151,7 @@
 #player #button-player-left img {
 	width: 30px;
 	margin-top: 15px;
-	margin-left: 5px;
+	margin-left: 0px;
 }
 
 #title {
