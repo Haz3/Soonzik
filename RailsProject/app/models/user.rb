@@ -191,39 +191,6 @@ class User < ActiveRecord::Base
     [:id, :email, :username, :fname, :lname, :birthday, :image, :description, :language, :facebook, :twitter, :googlePlus, :salt, :phoneNumber, :newsletter, :language, :created_at]
   end
 
-  # Get the purchased musics by the user
-  def getPurchasedMusics
-    purchasedMusics = []
-
-    if (self.purchases != nil && self.purchases.size != 0)
-      listPurchasedMusic = self.purchases
-      listPurchasedMusic.each do |purchasedItem|
-        # To convert the name to a class to find it
-        classObj = purchasedItem.typeObj.constantize
-        obj = classObj.find_by_id(purchasedItem.obj_id)
-
-        # Merge the list of musics with the new item
-        if (obj != nil && purchasedItem.typeObj == "Album")
-          purchasedMusics = purchasedMusics | obj.musics.to_a
-        elsif (obj != nil && purchasedItem.typeObj == "Music")
-          purchasedMusics = purchasedMusics | [obj]
-        elsif (obj != nil && purchasedItem.typeObj == "Pack")
-          obj.albums.each do |album|
-            purchasedMusics = purchasedMusics | album.musics.to_a
-          end
-        end
-      end
-    end
-    return purchasedMusics
-  end
-
-  # Returns user with the same musics (with ponderation)
-  def findPeopleLikeMe
-    purchasedMusics = self.getPurchasedMusics()
-    music_table_attributes = Music.arel_table   #Account.where(accounts[:id].eq(1).or(accounts[:id].eq(2)))
-
-  end
-
   # Check is the user is an artist
   def isArtist?
     self.groups.each { |group|

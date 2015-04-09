@@ -87,20 +87,20 @@ module API
       pack = packs(:PackOne)
 
       purchase = purchases(:PurchaseTwo)
-      purchase.musics << music
+      purchase.addPurchasedMusicFromObject(music)
       purchase.save
 
       #---
       purchase_album = Purchase.new
-      purchase_album.albums << album
       purchase_album.user_id = @user.id
       purchase_album.save
+      purchase_album.addPurchasedAlbumFromObject(album)
 
       #--
       purchase_pack = Purchase.new
-      purchase_pack.packs << pack
       purchase_pack.user_id = @user.id
       purchase_pack.save
+      purchase_pack.addPurchasedPackFromObject(pack, true)
 
 
       token = giveToken() # because of security access

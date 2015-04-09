@@ -5,6 +5,8 @@ class Pack < ActiveRecord::Base
   has_and_belongs_to_many :albums
   has_and_belongs_to_many :genres
 
+  has_many :purchased_packs
+
   validates :title, :albums, presence: true
 
   # The strong parameters to save or update object

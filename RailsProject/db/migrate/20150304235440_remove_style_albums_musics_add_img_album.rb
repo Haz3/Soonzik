@@ -6,5 +6,6 @@ class RemoveStyleAlbumsMusicsAddImgAlbum < ActiveRecord::Migration
     end
 		rename_column :albums, :style, :image
     remove_column :musics, :style
+    remove_column :packs, :style
   end
 end

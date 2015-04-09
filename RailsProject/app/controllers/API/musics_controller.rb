@@ -297,7 +297,7 @@ module API
         if (@security)
           playlist = Playlist.find_by_id(@playlist_id)
           music = Music.find_by_id(@id)
-          if (playlist && music && playlist.user_id == @user_id && !playlist.musics.include?(music))
+          if (playlist && music && playlist.user_id == @user_id && playlist.musics.include?(music))
             playlist.musics << music
             defineHttp :created
           else

@@ -76,7 +76,7 @@ module API
     test "should add to playlist" do
       token = giveToken() # because of security access
       playlist = playlists(:PlaylistOne)
-      post :addtoplaylist, { id: @music, playlist_id: playlist.id, user_id: token[:id], secureKey: token[:secureKey], format: :json }
+      post :addtoplaylist, { id: @music.id, playlist_id: playlist.id, user_id: token[:id], secureKey: token[:secureKey], format: :json }
       assert_response :created
     end
   end

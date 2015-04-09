@@ -16,10 +16,11 @@ module API
     # * +purchase [user_id]+ - Id of the user who has the purchase
     # * +purchase [typeObj]+ - Model name of the object to add to the purchase -> "Music" | "Album" | "Pack"
     # * +purchase [obj_id]+ - Id of the object
+    # * +purchase [partial]+ - Boolean IN CASE OF A PACK to know if the user has the entire pack or not
     # 
     # ===== HTTP VALUE
     # 
-    # - +201+ - In case of success, return the purchase created
+    # - +201+ - In case of success, return the purchase created in this format : { user: {}, purchased_musics: { music: {}, purchased_album: { album : {}, purchased_pack: { partial: value, pack: {} } } } }
     # - +401+ - It is not a secured transaction
     # - +503+ - Error from server
     # 
@@ -35,31 +36,44 @@ module API
           classObj = @purchase[:typeObj].constantize
           obj = classObj.find_by_id(@purchase[:obj_id])
           # check if the object exists
-          if (obj != nil)
-            case @purchase[:typeObj]
-              when "Music"
-                purchase.musics << obj;
-              when "Album"
-                purchase.albums << obj;
-              when "Pack"
-                purchase.packs << obj;
-            end
+          if (purchase.save && obj != nil)
+            begin
+              case @purchase[:typeObj]
+                when "Music"
+                  purchase.addPurchasedMusicFromObject(obj);
+                when "Album"
+                  purchase.addPurchasedAlbumFromObject(obj);
+                when "Pack"
+                  purchase.addPurchasedPackFromObject(obj, @purchase[:partial]);
+              end
 
-            if (purchase.save)
               @returnValue = { content: purchase.as_json(:include => {
                                                                         :user => {:only => User.miniKey },
-                                                                        :musics => { :only => Music.miniKey},
-                                                                        :albums => { :only => Album.miniKey },
-                                                                        :packs => { :only => Pack.miniKey }
+                                                                        :purchased_musics => {
+                                                                          :include => {
+                                                                            :music => { :only => Music.miniKey},
+                                                                            :purchased_album => {
+                                                                              :include => {
+                                                                                :album => { :only => Album.miniKey },
+                                                                                :purchased_pack => {
+                                                                                  :include => {
+                                                                                    :pack => { :only => Pack.miniKey }
+                                                                                  }
+                                                                                }
+                                                                              }
+                                                                            }
+                                                                          }
+                                                                        }
                                                                      })}
               codeAnswer 201
               defineHttp :created
-            else
-              @returnValue = { content: purchase.errors.to_hash.to_json }
+            rescue
+              purchase.destroy
               codeAnswer 503
               defineHttp :service_unavailable
             end
           else
+            @returnValue = { content: purchase.errors.to_hash.to_json }
             codeAnswer 503
             defineHttp :service_unavailable
           end

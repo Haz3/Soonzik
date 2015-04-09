@@ -12,6 +12,7 @@ class Music < ActiveRecord::Base
   has_and_belongs_to_many :playlists
   has_and_belongs_to_many :genres
 
+  has_many :purchased_musics
 
   validates :album, :user, :title, :duration, :price, :file, :limited, presence: true
   validates :title, length: { minimum: 4, maximum: 30 }
@@ -34,26 +35,61 @@ class Music < ActiveRecord::Base
   end
 
   # Suggestion logic
-  #
-  # ==== Attributes
-  #
-  # * +userList+ - Users with same musics
-  #
-  def suggest(userList)
-    genresPonderation = {}
+  def self.suggest(user)
+    index =           0
+    gPond =           {}
+    musicList =       []
+    suggestionList =  []
 
-    musicList.each do |music|
-      if (music.genres != nil && music.genres.size != 0)
-        # For each genre, we change ponderation
-        music.genres.each do |g|
-          if (genresPonderation.has_key?(g.id))
-            genresPonderation[g.id] += 1
-          else
-            genresPonderation[g.id] = 0
-          end
-        end
-      end
+    user.purchases.each { |purchase|        # => For each purchase
+      purchase.musics.each { | music |      # => For each musics purchased
+        music.genres.each { | genre_obj |   # => For each genre
+          # If the genre is not in the hash, we init it, else we increment it 
+          gPond[genre_obj] = (gPond.has_key?(genre_obj)) ? gPond[genre_obj] + 1 : 1
+        }
+        puts music.id
+        # The music is already purchased so we don't have to suggest it
+        musicList << music 
+      }
+    }
+
+    # if our list is too small, we add a random genre to fill the suggestion list
+    if (gPond.size < Genre.count)
+      randomGenre = Genre.all
+      gPond.each { |key, value|
+        randomGenre = randomGenre.where.not(id: key)
+      }
+      randomGenre = randomGenre.offset(rand(randomGenre.size)).first
+      gPond[randomGenre] = 0 if randomGenre != nil
     end
+
+    # We sort by ponderation and transform it as an array [ [key, value], [key, value], ...]
+    gPond = gPond.sort_by{|k,v| v}
+
+    # While the list of suggestion is not filled or our list of genre is not finished
+    while index < gPond.size && suggestionList.size < 10
+      # We get the genre Object and its musics
+      genreObject = gPond[index][0]
+      listTmp = genreObject.musics.to_a
+
+      # We sort it by notes
+      listTmp.sort! { |music1, music2| music2.getAverageNote <=> music1.getAverageNote }
+      
+      # We remove the musics already purchased
+      musicList.each { |musicToRemove|
+        listTmp.delete(musicToRemove)
+      }
+      if (listTmp.size + suggestionList.size <= 10)
+        suggestionList = suggestionList | listTmp
+        musicList = musicList | listTmp
+      else
+        # To fill the suggestionList, we get random element of our new list
+        suggestionList = suggestionList | listTmp[0..30].shuffle[0..(10 - suggestionList.size)]
+      end
+      index += 1
+    end
+
+    return suggestionList
   end
 
 end
