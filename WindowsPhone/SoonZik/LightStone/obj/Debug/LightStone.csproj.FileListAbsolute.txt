@@ -31,3 +31,4 @@ C:\Users\Géry\documents\visual studio 2013\Projects\SoonZik\LightStone\obj\Debu
 C:\Users\Géry\documents\visual studio 2013\Projects\SoonZik\LightStone\obj\Debug\qualifiers.txt
 C:\Users\Géry\documents\visual studio 2013\Projects\SoonZik\LightStone\obj\Debug\qualifiers.txt.intermediate
 C:\Users\Géry\documents\visual studio 2013\Projects\SoonZik\LightStone\obj\Debug\MultipleQualifiersPerDimensionFound.txt
+C:\Users\Géry\documents\visual studio 2013\Projects\SoonZik\LightStone\obj\Debug\LightStone.csprojResolveAssemblyReference.cache

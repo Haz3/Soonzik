@@ -39,6 +39,8 @@
             <DoubleAnimation Duration="0:0:0.25" To="0" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)" Storyboard.TargetName="SearchGrid" d:IsOptimized="True"/>
         </Storyboard>
         <FontFamily x:Key="RobotoMenu">Assets/Fonts/RobotoCondensed-Regular.ttf#Roboto Condensed</FontFamily>
+        <Thickness x:Key="PivotPortraitThemePadding">19,38,0,0</Thickness>
+        <Thickness x:Key="PivotLandscapeThemePadding">19,25,0,0</Thickness>
     </Page.Resources>
 
     <!-- Set DataContext -->
@@ -49,7 +51,7 @@
 			<RowDefinition Height="*"/>
 		</Grid.RowDefinitions>
     
-		<Pivot Grid.Row="1" x:Name="PivotGlobal" HeaderTemplate="{StaticResource SizeHeaderGlobalPivot}" Foreground="Transparent" Margin="0,-3,0,0" RenderTransformOrigin="0.5,0.5" >
+		<Pivot Grid.Row="1" x:Name="PivotGlobal" HeaderTemplate="{StaticResource SizeHeaderGlobalPivot}" Foreground="Transparent" Margin="0,39,0,-12" RenderTransformOrigin="0.5,0.5" Style="{StaticResource PivotStyle1}" >
 			<Pivot.RenderTransform>
 				<CompositeTransform/>
 			</Pivot.RenderTransform>
@@ -86,8 +88,8 @@
 
         </Pivot>
     
-		<Grid x:Name="HeaderGrid" Grid.Row="0" Background="Transparent" Height="40">
-            <ToggleButton x:Name="ToggleButtonMenu" Content="ToggleButton" HorizontalAlignment="Left" Height="20" Margin="10,8,0,12" Style="{StaticResource ToggleButtonStyle1}" VerticalAlignment="Center" Width="20" MinHeight="20" MinWidth="20" IsChecked="False" MaxHeight="20" MaxWidth="20">
+		<Grid x:Name="HeaderGrid" Grid.Row="0" Background="Transparent" Height="50">
+            <ToggleButton x:Name="ToggleButtonMenu" Content="ToggleButton" HorizontalAlignment="Left" Height="30" Margin="10,8,0,12" Style="{StaticResource MenuToggleStyle}" VerticalAlignment="Center" Width="30" MinHeight="20" MinWidth="30" IsChecked="False" MaxHeight="30" MaxWidth="30">
             	<Interactivity:Interaction.Behaviors>
             		<Core:EventTriggerBehavior EventName="Checked">
                         <Media:ControlStoryboardAction Storyboard="{StaticResource MenuStoryBoard}"/>
@@ -99,7 +101,7 @@
                     </Core:EventTriggerBehavior>
                 </Interactivity:Interaction.Behaviors>
             </ToggleButton>
-            <ToggleButton x:Name="ToggleButtonSearch" Content="ToggleButton" HorizontalAlignment="Right" Height="20" Margin="0,8,10,0" Style="{StaticResource SearchButtonStyle}" VerticalAlignment="Top" Width="20" MinWidth="20" MinHeight="20" MaxWidth="20" MaxHeight="25" IsChecked="False">
+            <ToggleButton x:Name="ToggleButtonSearch" Content="ToggleButton" HorizontalAlignment="Right" Height="30" Margin="0,8,10,0" Style="{StaticResource SearchButtonStyle}" VerticalAlignment="Top" Width="30" MinWidth="30" MinHeight="30" MaxWidth="30" MaxHeight="30" IsChecked="False">
                 <Interactivity:Interaction.Behaviors>
                     <Core:EventTriggerBehavior EventName="Checked">
                         <Media:ControlStoryboardAction Storyboard="{StaticResource SearchStoryBoard}"/>

@@ -48,6 +48,7 @@ namespace SoonZik.ViewModel
             SimpleIoc.Default.Register<FriendViewModel>();
             SimpleIoc.Default.Register<ConversationViewModel>();
             SimpleIoc.Default.Register<MainPageViewModel>();
+            SimpleIoc.Default.Register<PlayerViewModel>();
         }
 
         public MainViewModel Main
@@ -114,6 +115,11 @@ namespace SoonZik.ViewModel
         public MainPageViewModel MainPage
         {
             get { return ServiceLocator.Current.GetInstance<MainPageViewModel>(); }
+        }
+
+        public PlayerViewModel Player
+        {
+            get { return ServiceLocator.Current.GetInstance<PlayerViewModel>(); }
         }
 
         public static void Cleanup()
