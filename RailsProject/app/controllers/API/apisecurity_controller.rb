@@ -137,6 +137,52 @@ module API
     end
 
     #
+    # To authenticate to a social network
+    # Route : /social-login [POST]
+    #
+    # ==== Options
+    #
+    # * +uid+ - The user id from the social network
+    # * +provider+ - The name of the provider between : "facebook", "twitter" and "google"
+    # * +encrypted_key+ - The encrypted key following this : SHA256(uid + token that you get earlier + salt)
+    # * +token+ - the token from the social network (to test its validity)
+    #
+    # Hint : the salt is stored in your application. It must be : "3uNi@rCK$L$om40dNnhX)#jV2$40wwbr_bAK99%E"
+    #
+    # ===== HTTP VALUE
+    #
+    #
+    def socialLogin
+      if (defined?(@uid) && defined?(@provider) && defined?(@encrypted_key) && defined?(@token))
+        begin
+          identity = Identity.where(provider: @provider).find_by_uid(@uid)
+          if (identity != nil && Digest::SHA256.hexdigest(@uid.to_s + identity.token + Identity.salt) != @encrypted_key && isValidToken?(@token, @provider))
+            codeAnswer 200
+            @returnValue = { content: identity.user.as_json(:include => {
+                                                                  :address => {},
+                                                                  :friends => {},
+                                                                  :follows => {}
+                                                                },
+                                                    :only => User.notRestrictedKey
+                                                  ) }
+            identity.newToken
+            identity.save!
+          else
+            codeAnswer 502
+            @httpCode = :not_found
+          end
+        rescue
+          codeAnswer 504
+          @httpCode = :service_unavailable
+        end
+      else
+        codeAnswer 502
+        @httpCode = :not_found
+      end
+      sendJson
+    end
+
+    #
     # Check if a facebook user is authenticate and retrive its informations
     # 
     # DEPRECATED FOR THE MOMENT
@@ -279,6 +325,43 @@ protected
       if (@httpCode == nil)
         @httpCode = sym
       end
+    end
+
+    private
+    #
+    # Check if the token of social network is still valid
+    #
+    def isValidToken?(token, provider)
+      errorKeyName = "error"
+      if (provider.downcase == "facebook" || provider.downcase == "twitter" || provider.downcase == "google")
+        # - - - - - - - -
+        # Facebook test |
+        # - - - - - - - -
+        if (provider.downcase == "facebook")
+          url = "https://graph.facebook.com/oauth/access_token_info?client_id=#{Devise.omniauth_configs[:facebook].strategy.client_id}&access_token=" + token
+        # - - - - - - - -
+        #  Twitter test |
+        # - - - - - - - -
+        elsif (provider.downcase == "twitter")
+          url = "https://api.twitter.com/1/account/verify_credentials.json?oauth_access_token=" + token
+          errorKeyName = "errors"
+        elsif (provider.downcase == "google")
+          url = "https://www.googleapis.com/oauth2/v1/tokeninfo?access_token=" + token
+        end
+        uri = URI.parse(url)
+        http = Net::HTTP.new(uri.host, uri.port)
+        http.use_ssl = true
+        http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+        request = Net::HTTP::Get.new(uri.request_uri)
+        response = http.request(request)
+        hash = JSON.parse(response.body)
+        if (hase == nil || (hash != nil && hash.has_key?(errorKeyName)))
+          return false
+        else
+          return true
+        end
+      end
+      return false
     end
   end
 end

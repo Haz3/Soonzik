@@ -805,6 +805,12 @@ var SearchIndex =
 		"type": "anymethod"
 	},
 	{
+		"name": "socialLogin",
+		"link": "API/ApisecurityController.html#method-i-socialLogin",
+		"snippet": "<p>To authenticate to a social network Route : /social-login [POST]\n<p>Options\n<p><code>uid</code> - The user id from the social …\n",
+		"type": "anymethod"
+	},
+	{
 		"name": "loginFB",
 		"link": "API/ApisecurityController.html#method-i-loginFB",
 		"snippet": "<p>Check if a facebook user is authenticate and retrive its informations\n<p>DEPRECATED FOR THE MOMENT\n<p>Route : …\n",
@@ -1329,19 +1335,19 @@ var SearchIndex =
 	{
 		"name": "find_for_oauth",
 		"link": "Identity.html#method-c-find_for_oauth",
-		"snippet": "",
+		"snippet": "<p>Find or create an user by the oauth value\n",
 		"type": "anymethod"
 	},
 	{
 		"name": "newToken",
 		"link": "Identity.html#method-i-newToken",
-		"snippet": "",
+		"snippet": "<p>Create a new token\n",
 		"type": "anymethod"
 	},
 	{
 		"name": "tokenGenerator",
 		"link": "Identity.html#method-c-tokenGenerator",
-		"snippet": "",
+		"snippet": "<p>Return a new random token\n",
 		"type": "anymethod"
 	},
 	{

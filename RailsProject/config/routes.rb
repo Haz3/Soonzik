@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   namespace :api, path: '/', constraints: { subdomain: 'api' }, :defaults => { :format => 'json' }  do
     get 'getKey/:id' => 'apisecurity#provideKey', constraints: {id: /[0-9]+/}
     get 'getSocialToken/:uid/:provider' => 'apisecurity#getSocialToken'
+    post 'social-login' => 'apisecurity#/socialLogin'
     post 'login' => 'apisecurity#login'
     post 'loginFB/:token' => 'apisecurity#loginFB'
 

@@ -5,10 +5,14 @@ class Identity < ActiveRecord::Base
   validates_presence_of :uid, :provider, :token
   validates_uniqueness_of :uid, :scope => :provider
 
+  @@salt = "3uNi@rCK$L$om40dNnhX)#jV2$40wwbr_bAK99%E"
+
+  # Find or create an user by the oauth value
   def self.find_for_oauth(auth)
     find_or_create_by(uid: auth.uid, provider: auth.provider)
   end
 
+  # Create a new token
   def newToken
   	key = nil
   	begin
@@ -17,6 +21,7 @@ class Identity < ActiveRecord::Base
     self.token = key
   end
 
+  # Return a new random token
   def self.tokenGenerator
 		sha256 = Digest::SHA1.new
 

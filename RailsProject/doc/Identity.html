@@ -132,10 +132,10 @@
 										</header>
 
 					<div class="method-description">
-																
+											<p>Find or create an user by the oauth value</p>					
 											<div class="method-source-code" id="find_for_oauth-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/models/identity.rb, line 8</span>
+								class="language-ruby"><span class="ruby-comment"># File app/models/identity.rb, line 11</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">find_for_oauth</span>(<span class="ruby-identifier">auth</span>)
   <span class="ruby-identifier">find_or_create_by</span>(<span class="ruby-identifier">uid</span><span class="ruby-operator">:</span> <span class="ruby-identifier">auth</span>.<span class="ruby-identifier">uid</span>, <span class="ruby-identifier">provider</span><span class="ruby-operator">:</span> <span class="ruby-identifier">auth</span>.<span class="ruby-identifier">provider</span>)
 <span class="ruby-keyword">end</span></code></pre>
@@ -154,10 +154,10 @@
 										</header>
 
 					<div class="method-description">
-																
+											<p>Return a new random token</p>					
 											<div class="method-source-code" id="tokenGenerator-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/models/identity.rb, line 20</span>
+								class="language-ruby"><span class="ruby-comment"># File app/models/identity.rb, line 25</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">tokenGenerator</span>
               <span class="ruby-identifier">sha256</span> = <span class="ruby-constant">Digest</span><span class="ruby-operator">::</span><span class="ruby-constant">SHA1</span>.<span class="ruby-identifier">new</span>
 
@@ -197,10 +197,10 @@
 										</header>
 
 					<div class="method-description">
-																
+											<p>Create a new token</p>					
 											<div class="method-source-code" id="newToken-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/models/identity.rb, line 12</span>
+								class="language-ruby"><span class="ruby-comment"># File app/models/identity.rb, line 16</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">newToken</span>
       <span class="ruby-identifier">key</span> = <span class="ruby-keyword">nil</span>
       <span class="ruby-keyword">begin</span>
