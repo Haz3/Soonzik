@@ -53,6 +53,8 @@ gem 'turbolinks'
 gem 'coffee-script-source', '1.8.0' # needed by turbolink & v1.8 for windows
 # Provide Foundation for the rails app
 gem 'foundation-rails'
+# Icons from foundation
+gem 'foundation-icons-sass-rails'
 
 platforms :ruby do #We doesn't dev' on Windows so we avoid errors thanks to this
 	# Debug gems

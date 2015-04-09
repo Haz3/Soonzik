@@ -5,7 +5,7 @@
       .social-button
         - if devise_mapping.omniauthable?
           - resource_class.omniauth_providers.each do |provider|
-            = link_to (image_tag(asset_path(socialImgConnect("#{provider.to_s.titleize}"))), omniauth_authorize_path(resource_name, provider))
+            = link_to socialIconConnect(provider.to_s.downcase).html_safe, omniauth_authorize_path(resource_name, provider)
       .divider
       = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
         .field
