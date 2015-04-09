@@ -100,9 +100,9 @@ class User < ActiveRecord::Base
       # Create the user if it's a new registration
       if user.nil?
         user = User.new(
-          username: auth.extra.raw_info.name,
-          fname: (auth.extra.raw_info.first_name) ? auth.extra.raw_info.first_name : nil,
-          lname: (auth.extra.raw_info.last_name) ? auth.extra.raw_info.last_name : nil,
+          username: "#{TEMP_USERNAME_PREFIX}-#{auth.extra.raw_info.name}",
+          fname: (auth.extra.raw_info.first_name) ? auth.extra.raw_info.first_name : ((auth.extra.raw_info.given_name) ? auth.extra.raw_info.given_name : nil),
+          lname: (auth.extra.raw_info.last_name) ? auth.extra.raw_info.last_name : ((auth.extra.raw_info.family_name) ? auth.extra.raw_info.family_name : nil),
           image: (auth.info.image) ? auth.info.image : nil,
           #username: auth.info.nickname || auth.uid,
           email: email ? email : "#{TEMP_EMAIL_PREFIX}-#{auth.uid}-#{auth.provider}.com",
@@ -120,6 +120,11 @@ class User < ActiveRecord::Base
         end
       end
       signed_in_resource = user
+    end
+
+    if signed_in_resource == nil && identity.user == user
+      identity.newToken
+      identity.save!
     end
 
     # Associate the identity with the user if needed

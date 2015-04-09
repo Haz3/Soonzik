@@ -160,7 +160,7 @@ list of action available :</p>
 
 <h5 id="method-i-destroy-label-HTTP+VALUE">HTTP VALUE<span><a href="#method-i-destroy-label-HTTP+VALUE">&para;</a> <a href="#top">&uarr;</a></span></h5>
 <ul><li>
-<p><code>204</code> - In case of success, there is nothing to return</p>
+<p><code>200</code> - In case of success, there is nothing to return</p>
 </li><li>
 <p><code>403</code> - It is not a secured transaction</p>
 </li><li>
@@ -175,7 +175,6 @@ list of action available :</p>
       <span class="ruby-identifier">object</span> = <span class="ruby-constant">Cart</span>.<span class="ruby-identifier">find_by_id</span>(<span class="ruby-ivar">@id</span>);
       <span class="ruby-identifier">object</span>.<span class="ruby-identifier">destroy</span>
       <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">202</span>
-      <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:no_content</span>
     <span class="ruby-keyword">else</span>
       <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">500</span>
       <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:forbidden</span>
@@ -230,13 +229,11 @@ Note : By default, if you precise no attribute, it will take every row</pre>
 <ul><li>
 <p><code>200</code> - In case of success, return a list of cart items</p>
 </li><li>
-<p><code>204</code> - The list is empty, probably too much filter</p>
-</li><li>
 <p><code>503</code> - Error from server</p>
 </li></ul>					
 											<div class="method-source-code" id="find-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/carts_controller.rb, line 138</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/carts_controller.rb, line 136</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">find</span>
   <span class="ruby-keyword">begin</span>
     <span class="ruby-keyword">if</span> (<span class="ruby-operator">!</span><span class="ruby-ivar">@security</span>)
@@ -313,7 +310,6 @@ Note : By default, if you precise no attribute, it will take every row</pre>
 
       <span class="ruby-keyword">if</span> (<span class="ruby-identifier">cart_object</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>)
         <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">202</span>
-        <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:no_content</span>
       <span class="ruby-keyword">else</span>
         <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">200</span>
       <span class="ruby-keyword">end</span>
@@ -366,7 +362,7 @@ the parameters, check at the model</p>
 </li></ul>					
 											<div class="method-source-code" id="save-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/carts_controller.rb, line 61</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/carts_controller.rb, line 60</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">save</span>
   <span class="ruby-keyword">begin</span>
     <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@security</span>)
@@ -498,6 +494,9 @@ the parameters, check at the model</p>
 			<li><a href="../Playlist.html">Playlist</a></li>
 			<li><a href="../Proposition.html">Proposition</a></li>
 			<li><a href="../Purchase.html">Purchase</a></li>
+			<li><a href="../PurchasedAlbum.html">PurchasedAlbum</a></li>
+			<li><a href="../PurchasedMusic.html">PurchasedMusic</a></li>
+			<li><a href="../PurchasedPack.html">PurchasedPack</a></li>
 			<li><a href="../Tag.html">Tag</a></li>
 			<li><a href="../Tweet.html">Tweet</a></li>
 			<li><a href="../User.html">User</a></li>

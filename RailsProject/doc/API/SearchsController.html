@@ -168,13 +168,11 @@ filter)</p>
 array_of_artist, user: array_of_user, music: array_of_musics, album:
 array_of_albums, packs: array_of_packs }</p>
 </li><li>
-<p><code>204</code> - The list is empty</p>
-</li><li>
 <p><code>503</code> - Error from server</p>
 </li></ul>					
 											<div class="method-source-code" id="search-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/searchs_controller.rb, line 25</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/searchs_controller.rb, line 24</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">search</span>
           <span class="ruby-keyword">begin</span>
                 <span class="ruby-identifier">content</span> = []
@@ -209,7 +207,6 @@ array_of_albums, packs: array_of_packs }</p>
                               <span class="ruby-keyword">if</span> (<span class="ruby-identifier">artist_result</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">user_result</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">music_result</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">album_result</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">pack_result</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>)
                                 <span class="ruby-identifier">content</span> = []
                                 <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">202</span>
-                                <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:no_content</span>
                               <span class="ruby-keyword">else</span>
                                 <span class="ruby-identifier">content</span> = { <span class="ruby-identifier">artist</span><span class="ruby-operator">:</span> <span class="ruby-identifier">artist_result</span>.<span class="ruby-identifier">to_json</span>(<span class="ruby-value">:only</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">User</span>.<span class="ruby-identifier">miniKey</span> ), <span class="ruby-identifier">user</span><span class="ruby-operator">:</span> <span class="ruby-identifier">user_result</span>.<span class="ruby-identifier">to_json</span>(<span class="ruby-value">:only</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">User</span>.<span class="ruby-identifier">miniKey</span> ), <span class="ruby-identifier">music</span><span class="ruby-operator">:</span> <span class="ruby-identifier">music_result</span>.<span class="ruby-identifier">to_json</span>(<span class="ruby-value">:only</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">Music</span>.<span class="ruby-identifier">miniKey</span> ), <span class="ruby-identifier">album</span><span class="ruby-operator">:</span> <span class="ruby-identifier">album_result</span>.<span class="ruby-identifier">to_json</span>(<span class="ruby-value">:only</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">Album</span>.<span class="ruby-identifier">miniKey</span> ), <span class="ruby-identifier">pack</span><span class="ruby-operator">:</span> <span class="ruby-identifier">pack_result</span>.<span class="ruby-identifier">to_json</span>(<span class="ruby-value">:only</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">Pack</span>.<span class="ruby-identifier">miniKey</span> ) }
                               <span class="ruby-keyword">end</span>
@@ -301,6 +298,9 @@ array_of_albums, packs: array_of_packs }</p>
 			<li><a href="../Playlist.html">Playlist</a></li>
 			<li><a href="../Proposition.html">Proposition</a></li>
 			<li><a href="../Purchase.html">Purchase</a></li>
+			<li><a href="../PurchasedAlbum.html">PurchasedAlbum</a></li>
+			<li><a href="../PurchasedMusic.html">PurchasedMusic</a></li>
+			<li><a href="../PurchasedPack.html">PurchasedPack</a></li>
 			<li><a href="../Tag.html">Tag</a></li>
 			<li><a href="../Tweet.html">Tweet</a></li>
 			<li><a href="../User.html">User</a></li>

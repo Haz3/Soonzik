@@ -138,7 +138,7 @@ and the validation Can provide some features linked to this model</p>
 											<p>Filter of information for the <a href="API.html">API</a></p>					
 											<div class="method-source-code" id="miniKey-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/models/music.rb, line 27</span>
+								class="language-ruby"><span class="ruby-comment"># File app/models/music.rb, line 28</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">miniKey</span>
   [<span class="ruby-value">:id</span>, <span class="ruby-value">:title</span>, <span class="ruby-value">:duration</span>, <span class="ruby-value">:price</span>, <span class="ruby-value">:file</span>]
 <span class="ruby-keyword">end</span></code></pre>
@@ -160,9 +160,84 @@ and the validation Can provide some features linked to this model</p>
 											<p>The strong parameters to save or update object</p>					
 											<div class="method-source-code" id="music_params-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/models/music.rb, line 22</span>
+								class="language-ruby"><span class="ruby-comment"># File app/models/music.rb, line 23</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">music_params</span>(<span class="ruby-identifier">parameters</span>)
   <span class="ruby-identifier">parameters</span>.<span class="ruby-identifier">require</span>(<span class="ruby-value">:music</span>).<span class="ruby-identifier">permit</span>(<span class="ruby-value">:user_id</span>, <span class="ruby-value">:album_id</span>, <span class="ruby-value">:title</span>, <span class="ruby-value">:duration</span>, <span class="ruby-value">:price</span>, <span class="ruby-value">:file</span>, <span class="ruby-value">:limited</span>)
+<span class="ruby-keyword">end</span></code></pre>
+						</div>
+										</div>
+
+					
+									</div>
+								<a name="method-c-suggest">anchor</a>
+				<div id="method-c-suggest-doc" class="method">
+
+					<header>
+											<i class="icon-generic"></i>
+						<span class="method-name">suggest</span><span 
+							class="method-args">(user)</span>
+										</header>
+
+					<div class="method-description">
+											<p>Suggestion logic</p>					
+											<div class="method-source-code" id="suggest-source">
+							<pre class="prettyprint linenums"><code 
+								class="language-ruby"><span class="ruby-comment"># File app/models/music.rb, line 38</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">suggest</span>(<span class="ruby-identifier">user</span>)
+  <span class="ruby-identifier">index</span> =           <span class="ruby-value">0</span>
+  <span class="ruby-identifier">gPond</span> =           {}
+  <span class="ruby-identifier">musicList</span> =       []
+  <span class="ruby-identifier">suggestionList</span> =  []
+
+  <span class="ruby-identifier">user</span>.<span class="ruby-identifier">purchases</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">purchase</span><span class="ruby-operator">|</span>        <span class="ruby-comment"># =&gt; For each purchase</span>
+    <span class="ruby-identifier">purchase</span>.<span class="ruby-identifier">musics</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span> <span class="ruby-identifier">music</span> <span class="ruby-operator">|</span>      <span class="ruby-comment"># =&gt; For each musics purchased</span>
+      <span class="ruby-identifier">music</span>.<span class="ruby-identifier">genres</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span> <span class="ruby-identifier">genre_obj</span> <span class="ruby-operator">|</span>   <span class="ruby-comment"># =&gt; For each genre</span>
+        <span class="ruby-comment"># If the genre is not in the hash, we init it, else we increment it </span>
+        <span class="ruby-identifier">gPond</span>[<span class="ruby-identifier">genre_obj</span>] = (<span class="ruby-identifier">gPond</span>.<span class="ruby-identifier">has_key?</span>(<span class="ruby-identifier">genre_obj</span>)) <span class="ruby-operator">?</span> <span class="ruby-identifier">gPond</span>[<span class="ruby-identifier">genre_obj</span>] <span class="ruby-operator">+</span> <span class="ruby-value">1</span> <span class="ruby-operator">:</span> <span class="ruby-value">1</span>
+      }
+      <span class="ruby-identifier">puts</span> <span class="ruby-identifier">music</span>.<span class="ruby-identifier">id</span>
+      <span class="ruby-comment"># The music is already purchased so we don&#39;t have to suggest it</span>
+      <span class="ruby-identifier">musicList</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">music</span> 
+    }
+  }
+
+  <span class="ruby-comment"># if our list is too small, we add a random genre to fill the suggestion list</span>
+  <span class="ruby-keyword">if</span> (<span class="ruby-identifier">gPond</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">Genre</span>.<span class="ruby-identifier">count</span>)
+    <span class="ruby-identifier">randomGenre</span> = <span class="ruby-constant">Genre</span>.<span class="ruby-identifier">all</span>
+    <span class="ruby-identifier">gPond</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">key</span>, <span class="ruby-identifier">value</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">randomGenre</span> = <span class="ruby-identifier">randomGenre</span>.<span class="ruby-identifier">where</span>.<span class="ruby-identifier">not</span>(<span class="ruby-identifier">id</span><span class="ruby-operator">:</span> <span class="ruby-identifier">key</span>)
+    }
+    <span class="ruby-identifier">randomGenre</span> = <span class="ruby-identifier">randomGenre</span>.<span class="ruby-identifier">offset</span>(<span class="ruby-identifier">rand</span>(<span class="ruby-identifier">randomGenre</span>.<span class="ruby-identifier">size</span>)).<span class="ruby-identifier">first</span>
+    <span class="ruby-identifier">gPond</span>[<span class="ruby-identifier">randomGenre</span>] = <span class="ruby-value">0</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">randomGenre</span> <span class="ruby-operator">!=</span> <span class="ruby-keyword">nil</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-comment"># We sort by ponderation and transform it as an array [ [key, value], [key, value], ...]</span>
+  <span class="ruby-identifier">gPond</span> = <span class="ruby-identifier">gPond</span>.<span class="ruby-identifier">sort_by</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">k</span>,<span class="ruby-identifier">v</span><span class="ruby-operator">|</span> <span class="ruby-identifier">v</span>}
+
+  <span class="ruby-comment"># While the list of suggestion is not filled or our list of genre is not finished</span>
+  <span class="ruby-keyword">while</span> <span class="ruby-identifier">index</span> <span class="ruby-operator">&lt;</span> <span class="ruby-identifier">gPond</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">suggestionList</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">&lt;</span> <span class="ruby-value">10</span>
+    <span class="ruby-comment"># We get the genre Object and its musics</span>
+    <span class="ruby-identifier">genreObject</span> = <span class="ruby-identifier">gPond</span>[<span class="ruby-identifier">index</span>][<span class="ruby-value">0</span>]
+    <span class="ruby-identifier">listTmp</span> = <span class="ruby-identifier">genreObject</span>.<span class="ruby-identifier">musics</span>.<span class="ruby-identifier">to_a</span>
+
+    <span class="ruby-comment"># We sort it by notes</span>
+    <span class="ruby-identifier">listTmp</span>.<span class="ruby-identifier">sort!</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">music1</span>, <span class="ruby-identifier">music2</span><span class="ruby-operator">|</span> <span class="ruby-identifier">music2</span>.<span class="ruby-identifier">getAverageNote</span> <span class="ruby-operator">&lt;=&gt;</span> <span class="ruby-identifier">music1</span>.<span class="ruby-identifier">getAverageNote</span> }
+    
+    <span class="ruby-comment"># We remove the musics already purchased</span>
+    <span class="ruby-identifier">musicList</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">musicToRemove</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">listTmp</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-identifier">musicToRemove</span>)
+    }
+    <span class="ruby-keyword">if</span> (<span class="ruby-identifier">listTmp</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">suggestionList</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">&lt;=</span> <span class="ruby-value">10</span>)
+      <span class="ruby-identifier">suggestionList</span> = <span class="ruby-identifier">suggestionList</span> <span class="ruby-operator">|</span> <span class="ruby-identifier">listTmp</span>
+      <span class="ruby-identifier">musicList</span> = <span class="ruby-identifier">musicList</span> <span class="ruby-operator">|</span> <span class="ruby-identifier">listTmp</span>
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-comment"># To fill the suggestionList, we get random element of our new list</span>
+      <span class="ruby-identifier">suggestionList</span> = <span class="ruby-identifier">suggestionList</span> <span class="ruby-operator">|</span> <span class="ruby-identifier">listTmp</span>[<span class="ruby-value">0</span><span class="ruby-operator">..</span><span class="ruby-value">30</span>].<span class="ruby-identifier">shuffle</span>[<span class="ruby-value">0</span><span class="ruby-operator">..</span>(<span class="ruby-value">10</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">suggestionList</span>.<span class="ruby-identifier">size</span>)]
+    <span class="ruby-keyword">end</span>
+    <span class="ruby-identifier">index</span> <span class="ruby-operator">+=</span> <span class="ruby-value">1</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">suggestionList</span>
 <span class="ruby-keyword">end</span></code></pre>
 						</div>
 										</div>
@@ -195,49 +270,9 @@ and the validation Can provide some features linked to this model</p>
 											<p>Get the average of notes</p>					
 											<div class="method-source-code" id="getAverageNote-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/models/music.rb, line 32</span>
+								class="language-ruby"><span class="ruby-comment"># File app/models/music.rb, line 33</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">getAverageNote</span>
   <span class="ruby-keyword">return</span> <span class="ruby-constant">MusicNote</span>.<span class="ruby-identifier">where</span>(<span class="ruby-identifier">music_id</span><span class="ruby-operator">:</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">id</span>).<span class="ruby-identifier">average</span>(<span class="ruby-value">:value</span>).<span class="ruby-identifier">to_f</span>
-<span class="ruby-keyword">end</span></code></pre>
-						</div>
-										</div>
-
-					
-									</div>
-								<a name="method-i-suggest">anchor</a>
-				<div id="method-i-suggest-doc" class="method">
-
-					<header>
-											<i class="icon-generic"></i>
-						<span class="method-name">suggest</span><span 
-							class="method-args">(userList)</span>
-										</header>
-
-					<div class="method-description">
-											<p>Suggestion logic</p>
-
-<h4 id="method-i-suggest-label-Attributes">Attributes<span><a href="#method-i-suggest-label-Attributes">&para;</a> <a href="#top">&uarr;</a></span></h4>
-<ul><li>
-<p><code>userList</code> - Users with same musics</p>
-</li></ul>					
-											<div class="method-source-code" id="suggest-source">
-							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/models/music.rb, line 42</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">suggest</span>(<span class="ruby-identifier">userList</span>)
-  <span class="ruby-identifier">genresPonderation</span> = {}
-
-  <span class="ruby-identifier">musicList</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">music</span><span class="ruby-operator">|</span>
-    <span class="ruby-keyword">if</span> (<span class="ruby-identifier">music</span>.<span class="ruby-identifier">genres</span> <span class="ruby-operator">!=</span> <span class="ruby-keyword">nil</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">music</span>.<span class="ruby-identifier">genres</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">!=</span> <span class="ruby-value">0</span>)
-      <span class="ruby-comment"># For each genre, we change ponderation</span>
-      <span class="ruby-identifier">music</span>.<span class="ruby-identifier">genres</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">g</span><span class="ruby-operator">|</span>
-        <span class="ruby-keyword">if</span> (<span class="ruby-identifier">genresPonderation</span>.<span class="ruby-identifier">has_key?</span>(<span class="ruby-identifier">g</span>.<span class="ruby-identifier">id</span>))
-          <span class="ruby-identifier">genresPonderation</span>[<span class="ruby-identifier">g</span>.<span class="ruby-identifier">id</span>] <span class="ruby-operator">+=</span> <span class="ruby-value">1</span>
-        <span class="ruby-keyword">else</span>
-          <span class="ruby-identifier">genresPonderation</span>[<span class="ruby-identifier">g</span>.<span class="ruby-identifier">id</span>] = <span class="ruby-value">0</span>
-        <span class="ruby-keyword">end</span>
-      <span class="ruby-keyword">end</span>
-    <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></code></pre>
 						</div>
 										</div>
@@ -318,6 +353,9 @@ and the validation Can provide some features linked to this model</p>
 			<li><a href="./Playlist.html">Playlist</a></li>
 			<li><a href="./Proposition.html">Proposition</a></li>
 			<li><a href="./Purchase.html">Purchase</a></li>
+			<li><a href="./PurchasedAlbum.html">PurchasedAlbum</a></li>
+			<li><a href="./PurchasedMusic.html">PurchasedMusic</a></li>
+			<li><a href="./PurchasedPack.html">PurchasedPack</a></li>
 			<li><a href="./Tag.html">Tag</a></li>
 			<li><a href="./Tweet.html">Tweet</a></li>
 			<li><a href="./User.html">User</a></li>

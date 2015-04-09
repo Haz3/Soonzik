@@ -135,10 +135,40 @@
 																
 											<div class="method-source-code" id="find_for_oauth-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/models/identity.rb, line 6</span>
+								class="language-ruby"><span class="ruby-comment"># File app/models/identity.rb, line 8</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">find_for_oauth</span>(<span class="ruby-identifier">auth</span>)
   <span class="ruby-identifier">find_or_create_by</span>(<span class="ruby-identifier">uid</span><span class="ruby-operator">:</span> <span class="ruby-identifier">auth</span>.<span class="ruby-identifier">uid</span>, <span class="ruby-identifier">provider</span><span class="ruby-operator">:</span> <span class="ruby-identifier">auth</span>.<span class="ruby-identifier">provider</span>)
 <span class="ruby-keyword">end</span></code></pre>
+						</div>
+										</div>
+
+					
+									</div>
+								<a name="method-c-tokenGenerator">anchor</a>
+				<div id="method-c-tokenGenerator-doc" class="method">
+
+					<header>
+											<i class="icon-generic"></i>
+						<span class="method-name">tokenGenerator</span><span 
+							class="method-args">()</span>
+										</header>
+
+					<div class="method-description">
+																
+											<div class="method-source-code" id="tokenGenerator-source">
+							<pre class="prettyprint linenums"><code 
+								class="language-ruby"><span class="ruby-comment"># File app/models/identity.rb, line 20</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">tokenGenerator</span>
+              <span class="ruby-identifier">sha256</span> = <span class="ruby-constant">Digest</span><span class="ruby-operator">::</span><span class="ruby-constant">SHA1</span>.<span class="ruby-identifier">new</span>
+
+  <span class="ruby-identifier">key</span> = <span class="ruby-string">&quot;&quot;</span>
+  <span class="ruby-identifier">example</span> = (<span class="ruby-string">&#39;a&#39;</span><span class="ruby-operator">..</span><span class="ruby-string">&#39;z&#39;</span>).<span class="ruby-identifier">to_a</span>.<span class="ruby-identifier">concat</span>((<span class="ruby-string">&#39;A&#39;</span><span class="ruby-operator">..</span><span class="ruby-string">&#39;Z&#39;</span>).<span class="ruby-identifier">to_a</span>.<span class="ruby-identifier">concat</span>((<span class="ruby-string">&#39;0&#39;</span><span class="ruby-operator">..</span><span class="ruby-string">&#39;9&#39;</span>).<span class="ruby-identifier">to_a</span>)).<span class="ruby-identifier">shuffle</span>[<span class="ruby-value">0</span>,<span class="ruby-value">48</span>].<span class="ruby-identifier">join</span>
+  <span class="ruby-value">48</span>.<span class="ruby-identifier">times</span> <span class="ruby-keyword">do</span>
+    <span class="ruby-identifier">key</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">example</span>[<span class="ruby-constant">Random</span>.<span class="ruby-identifier">rand</span>(<span class="ruby-identifier">example</span>.<span class="ruby-identifier">size</span>)]
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">sha256</span>.<span class="ruby-identifier">hexdigest</span> <span class="ruby-identifier">key</span>
+      <span class="ruby-keyword">end</span></code></pre>
 						</div>
 										</div>
 
@@ -152,6 +182,39 @@
 			
 			
 									
+						<section class="public-methods instance-methods methods">
+				<header>
+					<h3>Public Instance Methods</h3>
+				</header>
+
+								<a name="method-i-newToken">anchor</a>
+				<div id="method-i-newToken-doc" class="method">
+
+					<header>
+											<i class="icon-generic"></i>
+						<span class="method-name">newToken</span><span 
+							class="method-args">()</span>
+										</header>
+
+					<div class="method-description">
+																
+											<div class="method-source-code" id="newToken-source">
+							<pre class="prettyprint linenums"><code 
+								class="language-ruby"><span class="ruby-comment"># File app/models/identity.rb, line 12</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">newToken</span>
+      <span class="ruby-identifier">key</span> = <span class="ruby-keyword">nil</span>
+      <span class="ruby-keyword">begin</span>
+    <span class="ruby-identifier">key</span> = <span class="ruby-constant">Identity</span>.<span class="ruby-identifier">tokenGenerator</span>
+  <span class="ruby-keyword">end</span> <span class="ruby-keyword">while</span> (<span class="ruby-constant">Identity</span>.<span class="ruby-identifier">find_by_token</span>(<span class="ruby-identifier">key</span>))
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">token</span> = <span class="ruby-identifier">key</span>
+<span class="ruby-keyword">end</span></code></pre>
+						</div>
+										</div>
+
+					
+									</div>
+				
+			</section>
 			
 			
 			
@@ -224,6 +287,9 @@
 			<li><a href="./Playlist.html">Playlist</a></li>
 			<li><a href="./Proposition.html">Proposition</a></li>
 			<li><a href="./Purchase.html">Purchase</a></li>
+			<li><a href="./PurchasedAlbum.html">PurchasedAlbum</a></li>
+			<li><a href="./PurchasedMusic.html">PurchasedMusic</a></li>
+			<li><a href="./PurchasedPack.html">PurchasedPack</a></li>
 			<li><a href="./Tag.html">Tag</a></li>
 			<li><a href="./Tweet.html">Tweet</a></li>
 			<li><a href="./User.html">User</a></li>

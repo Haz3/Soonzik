@@ -649,6 +649,24 @@ var SearchIndex =
 		"type": "normalclass"
 	},
 	{
+		"name": "PurchasedAlbum",
+		"link": "PurchasedAlbum.html",
+		"snippet": "<p>The model of the object PurchasedAlbums Contain the relation and the\nvalidation Can provide some features …\n",
+		"type": "normalclass"
+	},
+	{
+		"name": "PurchasedMusic",
+		"link": "PurchasedMusic.html",
+		"snippet": "<p>The model of the object PurchasedMusics Contain the relation and the\nvalidation Can provide some features …\n",
+		"type": "normalclass"
+	},
+	{
+		"name": "PurchasedPack",
+		"link": "PurchasedPack.html",
+		"snippet": "<p>The model of the object PurchasedPacks Contain the relation and the\nvalidation Can provide some features …\n",
+		"type": "normalclass"
+	},
+	{
 		"name": "PurchasesController",
 		"link": "PurchasesController.html",
 		"snippet": "",
@@ -778,6 +796,12 @@ var SearchIndex =
 		"name": "login",
 		"link": "API/ApisecurityController.html#method-i-login",
 		"snippet": "<p>To signin and get the information you need for the authentication Route :\n/login [POST]\n<p>Options\n<p><code>email</code> - …\n",
+		"type": "anymethod"
+	},
+	{
+		"name": "getSocialToken",
+		"link": "API/ApisecurityController.html#method-i-getSocialToken",
+		"snippet": "<p>To get the token for social authentication Route :\n/getSocialToken/:uid/:provider [GET]\n<p>Options\n<p><code>uid</code> -  …\n",
 		"type": "anymethod"
 	},
 	{
@@ -1179,7 +1203,7 @@ var SearchIndex =
 	{
 		"name": "ensure_signup_complete",
 		"link": "ApplicationController.html#method-i-ensure_signup_complete",
-		"snippet": "<p>def authentication\n\n<pre>    begin\n  if session.has_key?(:u) &amp;&amp; !session[:u].is_a?(Hash)\n    session.delete(:u) ...</pre>\n",
+		"snippet": "",
 		"type": "anymethod"
 	},
 	{
@@ -1191,6 +1215,12 @@ var SearchIndex =
 	{
 		"name": "configure_permitted_parameters",
 		"link": "ApplicationController.html#method-i-configure_permitted_parameters",
+		"snippet": "",
+		"type": "anymethod"
+	},
+	{
+		"name": "socialIconConnect",
+		"link": "ApplicationHelper.html#method-i-socialIconConnect",
 		"snippet": "",
 		"type": "anymethod"
 	},
@@ -1303,6 +1333,18 @@ var SearchIndex =
 		"type": "anymethod"
 	},
 	{
+		"name": "newToken",
+		"link": "Identity.html#method-i-newToken",
+		"snippet": "",
+		"type": "anymethod"
+	},
+	{
+		"name": "tokenGenerator",
+		"link": "Identity.html#method-c-tokenGenerator",
+		"snippet": "",
+		"type": "anymethod"
+	},
+	{
 		"name": "influence_params",
 		"link": "Influence.html#method-c-influence_params",
 		"snippet": "<p>The strong parameters to save or update object\n",
@@ -1340,8 +1382,8 @@ var SearchIndex =
 	},
 	{
 		"name": "suggest",
-		"link": "Music.html#method-i-suggest",
-		"snippet": "<p>Suggestion logic\n<p>Attributes\n<p><code>userList</code> - Users with same musics\n",
+		"link": "Music.html#method-c-suggest",
+		"snippet": "<p>Suggestion logic\n",
 		"type": "anymethod"
 	},
 	{
@@ -1354,6 +1396,18 @@ var SearchIndex =
 		"name": "news_params",
 		"link": "News.html#method-c-news_params",
 		"snippet": "<p>The strong parameters to save or update object\n",
+		"type": "anymethod"
+	},
+	{
+		"name": "index",
+		"link": "NewsController.html#method-i-index",
+		"snippet": "<p>GET /news/:id.:format\n",
+		"type": "anymethod"
+	},
+	{
+		"name": "show",
+		"link": "NewsController.html#method-i-show",
+		"snippet": "<p>GET /news/.:format\n",
 		"type": "anymethod"
 	},
 	{
@@ -1414,6 +1468,24 @@ var SearchIndex =
 		"name": "purchase_params",
 		"link": "Purchase.html#method-c-purchase_params",
 		"snippet": "<p>The strong parameters to save or update object\n",
+		"type": "anymethod"
+	},
+	{
+		"name": "addPurchasedMusicFromObject",
+		"link": "Purchase.html#method-i-addPurchasedMusicFromObject",
+		"snippet": "",
+		"type": "anymethod"
+	},
+	{
+		"name": "addPurchasedAlbumFromObject",
+		"link": "Purchase.html#method-i-addPurchasedAlbumFromObject",
+		"snippet": "",
+		"type": "anymethod"
+	},
+	{
+		"name": "addPurchasedPackFromObject",
+		"link": "Purchase.html#method-i-addPurchasedPackFromObject",
+		"snippet": "",
 		"type": "anymethod"
 	},
 	{
@@ -1486,18 +1558,6 @@ var SearchIndex =
 		"name": "notRestrictedKey",
 		"link": "User.html#method-c-notRestrictedKey",
 		"snippet": "<p>Filter of information for the API - No Restriction\n",
-		"type": "anymethod"
-	},
-	{
-		"name": "getPurchasedMusics",
-		"link": "User.html#method-i-getPurchasedMusics",
-		"snippet": "<p>Get the purchased musics by the user\n",
-		"type": "anymethod"
-	},
-	{
-		"name": "findPeopleLikeMe",
-		"link": "User.html#method-i-findPeopleLikeMe",
-		"snippet": "<p>Returns user with the same musics (with ponderation)\n",
 		"type": "anymethod"
 	},
 	{

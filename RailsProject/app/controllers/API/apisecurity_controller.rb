@@ -100,6 +100,43 @@ module API
     end
 
     #
+    # To get the token for social authentication
+    # Route : /getSocialToken/:uid/:provider [GET]
+    # 
+    # ==== Options
+    # 
+    # * +uid+ - The user id from the social network
+    # * +provider+ - The name of the provider between : "facebook", "twitter" and "google"
+    #
+    # ===== HTTP VALUE
+    # 
+    # - +200+ - In case of success, return the specific token
+    # - +404+ - Can't get an user with the uid and the provider given or the combinaison is false
+    # - +503+ - Error from server
+    # 
+    def getSocialToken
+      if (defined?(@uid) && defined?(@provider))
+        begin
+          identity = Identity.where(provider: @provider).find_by_uid(@uid)
+          if (identity != nil)
+            codeAnswer 200
+            @returnValue = { key: identity.token }
+          else
+            codeAnswer 502
+            @httpCode = :not_found
+          end
+        rescue
+          codeAnswer 504
+          @httpCode = :service_unavailable
+        end
+      else
+        codeAnswer 502
+        @httpCode = :not_found
+      end
+      sendJson
+    end
+
+    #
     # Check if a facebook user is authenticate and retrive its informations
     # 
     # DEPRECATED FOR THE MOMENT
