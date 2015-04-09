@@ -14,3 +14,6 @@ C:\Users\Géry\documents\visual studio 2013\Projects\SoonZik\SoonZik.HttpRequest
 C:\Users\Géry\documents\visual studio 2013\Projects\SoonZik\SoonZik.HttpRequest\obj\Debug\qualifiers.txt
 C:\Users\Géry\documents\visual studio 2013\Projects\SoonZik\SoonZik.HttpRequest\obj\Debug\qualifiers.txt.intermediate
 C:\Users\Géry\documents\visual studio 2013\Projects\SoonZik\SoonZik.HttpRequest\obj\Debug\MultipleQualifiersPerDimensionFound.txt
+C:\Users\Géry\documents\visual studio 2013\Projects\SoonZik\SoonZik.HttpRequest\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Géry\documents\visual studio 2013\Projects\SoonZik\SoonZik.HttpRequest\bin\Debug\Newtonsoft.Json.xml
+C:\Users\Géry\documents\visual studio 2013\Projects\SoonZik\SoonZik.HttpRequest\obj\Debug\SoonZik.HttpRequest.csprojResolveAssemblyReference.cache

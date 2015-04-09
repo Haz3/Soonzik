@@ -150,6 +150,16 @@ C:\Users\Géry\documents\visual studio 2013\Projects\SoonZik\SoonZik\obj\Debug\M
 C:\Users\Géry\documents\visual studio 2013\Projects\SoonZik\SoonZik\obj\Debug\Facebook.Client.pri.xml
 C:\Users\Géry\documents\visual studio 2013\Projects\SoonZik\SoonZik\obj\Debug\GalaSoft.MvvmLight.Platform.pri.xml
 C:\Users\Géry\documents\visual studio 2013\Projects\SoonZik\SoonZik\obj\Debug\ProjectArchitectures.txt
+C:\Users\Géry\documents\visual studio 2013\Projects\SoonZik\SoonZik\bin\Debug\SoonZik.HttpRequest.dll
+C:\Users\Géry\documents\visual studio 2013\Projects\SoonZik\SoonZik\bin\Debug\SoonZik.HttpRequest.pdb
+C:\Users\Géry\documents\visual studio 2013\Projects\SoonZik\SoonZik\bin\Debug\SoonZik.HttpRequest.pri
+C:\Users\Géry\documents\visual studio 2013\Projects\SoonZik\SoonZik\bin\Debug\Views\Player.xbf
+C:\Users\Géry\documents\visual studio 2013\Projects\SoonZik\SoonZik\obj\Debug\Views\Player.g.i.cs
+C:\Users\Géry\documents\visual studio 2013\Projects\SoonZik\SoonZik\obj\Debug\Views\Player.g.cs
+C:\Users\Géry\documents\visual studio 2013\Projects\SoonZik\SoonZik\obj\Debug\Views\Player.xaml
+C:\Users\Géry\documents\visual studio 2013\Projects\SoonZik\SoonZik\obj\Debug\Views\Player.xbf
+C:\Users\Géry\documents\visual studio 2013\Projects\SoonZik\SoonZik\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Géry\documents\visual studio 2013\Projects\SoonZik\SoonZik\bin\Debug\Newtonsoft.Json.xml
 C:\Users\Géry\documents\visual studio 2013\Projects\SoonZik\SoonZik\obj\Debug\Microsoft.Practices.ServiceLocation\layout.resfiles
 C:\Users\Géry\documents\visual studio 2013\Projects\SoonZik\SoonZik\obj\Debug\Microsoft.Practices.ServiceLocation\layout.resfiles.intermediate
 C:\Users\Géry\documents\visual studio 2013\Projects\SoonZik\SoonZik\obj\Debug\Microsoft.Practices.ServiceLocation\Resources.resfiles

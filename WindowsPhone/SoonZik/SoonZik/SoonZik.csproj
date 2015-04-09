@@ -140,6 +140,7 @@
     <Compile Include="ViewModel\MenuViewModel.cs" />
     <Compile Include="ViewModel\NewsViewModel.cs" />
     <Compile Include="ViewModel\PackViewModel.cs" />
+    <Compile Include="ViewModel\PlayerViewModel.cs" />
     <Compile Include="ViewModel\ProfilViewModel.cs" />
     <Compile Include="ViewModel\ViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
@@ -169,6 +170,9 @@
     </Compile>
     <Compile Include="Views\Packs.xaml.cs">
       <DependentUpon>Packs.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Player.xaml.cs">
+      <DependentUpon>Player.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Playlist.xaml.cs">
       <DependentUpon>Playlist.xaml</DependentUpon>
@@ -303,6 +307,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\Player.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Playlist.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -347,6 +355,10 @@
     <ProjectReference Include="..\LightStone\LightStone.csproj">
       <Project>{fcc63a57-33de-4607-a0a5-9cedbde34a50}</Project>
       <Name>LightStone</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SoonZik.HttpRequest\SoonZik.HttpRequest.csproj">
+      <Project>{9db6a4a8-c6b5-4c81-8991-8aa40da71a52}</Project>
+      <Name>SoonZik.HttpRequest</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

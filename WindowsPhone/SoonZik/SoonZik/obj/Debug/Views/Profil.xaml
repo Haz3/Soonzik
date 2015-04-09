@@ -26,7 +26,7 @@
         </Grid>
         <!-- Row 3 -->
         <Grid Grid.Row="1" Background="Transparent">
-            <Pivot x:Name="PivotProfil" HeaderTemplate="{StaticResource SizePivotHeader}">
+            <Pivot x:Name="PivotProfil" HeaderTemplate="{StaticResource SizeHeaderGlobalPivot}" Style="{StaticResource PivotStyle1}">
                 <PivotItem Header="Bio">
                     <ScrollViewer>
                         <StackPanel>

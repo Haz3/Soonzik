@@ -9,6 +9,7 @@
     <vm:MainPageViewModel x:Key="MainPageViewModel" />
     <vm:ConnexionViewModel x:Key="ConnexionViewModel" />
     <vm:MainViewModel x:Key="MainViewModel" />
+    <vm:PlayerViewModel x:Key="PlayerViewModel"/>
     <vm:ViewModelLocator x:Key="Locator"/>
       
     <DataTemplate x:Key="SizePivotHeader">
@@ -81,11 +82,11 @@
         </Setter.Value>
       </Setter>
     </Style>
-    <Style x:Key="ToggleButtonStyle1" TargetType="ToggleButton">
+    <Style x:Key="MenuToggleStyle" TargetType="ToggleButton">
       <Setter Property="Template">
         <Setter.Value>
           <ControlTemplate TargetType="ToggleButton">
-            <Grid MaxHeight="20" MaxWidth="20" MinHeight="20" MinWidth="20" HorizontalAlignment="Left">
+            <Grid MaxHeight="30" MaxWidth="30" MinHeight="30" MinWidth="30" HorizontalAlignment="Left">
               <Image Source="../Resources/Icones/menu.png" />
             </Grid>
           </ControlTemplate>
@@ -216,7 +217,7 @@
       <Setter Property="Template">
         <Setter.Value>
           <ControlTemplate TargetType="ToggleButton">
-            <Grid Height="20" MaxHeight="20" MaxWidth="20" MinHeight="20" MinWidth="20" Margin="0,0,0,0" Width="20">
+            <Grid Height="30" MaxHeight="30" MaxWidth="30" MinHeight="30" MinWidth="30" Margin="0,0,0,0" Width="30">
               <Image RenderTransformOrigin="0.417,-0.542" Source="../Resources/Icones/search.png" />
             </Grid>
           </ControlTemplate>
@@ -227,6 +228,68 @@
       <Border Background="White" BorderThickness="0" CornerRadius="10" />
     </ControlTemplate>
     <FontFamily x:Key="Roboto">Assets/Fonts/RobotoCondensed-Regular.ttf#Roboto Condensed</FontFamily>
-  </Application.Resources>
+
+
+    <Style x:Key="PivotStyle1" TargetType="Pivot">
+            <Setter Property="Margin" Value="0"/>
+            <Setter Property="Padding" Value="0"/>
+            <Setter Property="Foreground" Value="{ThemeResource PhoneForegroundBrush}"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="ItemsPanel">
+                <Setter.Value>
+                    <ItemsPanelTemplate>
+                        <Grid/>
+                    </ItemsPanelTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Pivot">
+                        <Grid x:Name="RootElement" Background="{TemplateBinding Background}" HorizontalAlignment="{TemplateBinding HorizontalAlignment}" VerticalAlignment="{TemplateBinding VerticalAlignment}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="Orientation">
+                                    <VisualState x:Name="Portrait">
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Margin" Storyboard.TargetName="TitleContentControl">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource PivotPortraitThemePadding}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="Landscape">
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Margin" Storyboard.TargetName="TitleContentControl">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource PivotLandscapeThemePadding}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                            <ContentControl x:Name="TitleContentControl" ContentTemplate="{TemplateBinding TitleTemplate}" Content="{TemplateBinding Title}" Style="{StaticResource PivotTitleContentControlStyle}"/>
+                            <ScrollViewer x:Name="ScrollViewer" HorizontalSnapPointsAlignment="Center" HorizontalSnapPointsType="MandatorySingle" HorizontalScrollBarVisibility="Hidden" Margin="{TemplateBinding Padding}" Grid.Row="1" Template="{StaticResource ScrollViewerScrollBarlessTemplate}" VerticalSnapPointsType="None" VerticalScrollBarVisibility="Disabled" VerticalScrollMode="Disabled" VerticalContentAlignment="Stretch" ZoomMode="Disabled">
+                                <PivotPanel x:Name="Panel" VerticalAlignment="Stretch">
+                                    <PivotHeaderPanel x:Name="Header" VerticalAlignment="Top" Margin="0,13,0,0">
+                                        <PivotHeaderPanel.RenderTransform>
+                                            <CompositeTransform x:Name="HeaderTranslateTransform" TranslateX="0"/>
+                                        </PivotHeaderPanel.RenderTransform>
+                                    </PivotHeaderPanel>
+                                    <ItemsPresenter x:Name="PivotItemPresenter">
+                                        <ItemsPresenter.RenderTransform>
+                                            <TranslateTransform x:Name="ItemsPresenterTranslateTransform" X="0"/>
+                                        </ItemsPresenter.RenderTransform>
+                                    </ItemsPresenter>
+                                </PivotPanel>
+                            </ScrollViewer>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+      
+    
+    </Application.Resources>
 </Application>
 
