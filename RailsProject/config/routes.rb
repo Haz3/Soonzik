@@ -141,7 +141,7 @@ Rails.application.routes.draw do
   resources :groups
   resources :influences
   resources :listenings
-  resources :messages
+  #resources :messages
   resources :musics
   resources :music_notes
   resources :news
@@ -155,6 +155,9 @@ Rails.application.routes.draw do
   resources :tweets
   resources :users
   resources :votes
+
+  get 'messages' => 'chats#index'
+
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

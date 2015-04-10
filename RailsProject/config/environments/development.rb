@@ -54,4 +54,6 @@ Rails.application.configure do
     user_name: "no-reply",
     password: "qwerty123"
   }
+
+  config.middleware.delete Rack::Lock
 end

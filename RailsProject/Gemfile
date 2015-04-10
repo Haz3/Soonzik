@@ -19,14 +19,15 @@ gem 'spring',        group: :development
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
-platforms :ruby do
+#platforms :ruby do
 	# Use unicorn as the app server
-	gem 'unicorn-rails'
-end
+	#gem 'unicorn-rails'
+	#gem 'puma'
+#end
 
 # For windows because unicorn doesn't work on it
 gem 'specific_install', platforms: [:x64_mingw,:mingw, :mswin]
-gem 'thin', platforms: [:x64_mingw,:mingw, :mswin]
+gem 'thin'#, platforms: [:x64_mingw,:mingw, :mswin]
 gem 'eventmachine', :git => 'https://github.com/eventmachine/eventmachine.git', platforms: [:x64_mingw,:mingw, :mswin]
 
 # Use Capistrano for deployment
@@ -98,4 +99,5 @@ gem 'omniauth-twitter'
 gem 'omniauth-facebook', '~> 2.0.0.pre1'
 gem 'omniauth-google-oauth2', '~> 0.2.6'
 
-gem 'foreigner', '~> 1.7.2'
+# Websocket support
+gem 'websocket-rails'

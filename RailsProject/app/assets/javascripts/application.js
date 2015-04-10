@@ -16,9 +16,8 @@
 //= require turbolinks
 //= require ./player/wavesurfer.min.js
 //= require ./player/main.js
+//= require websocket_rails/main
 // require_tree .
 
-
-
-
 $(function(){ $(document).foundation(); });
+
