@@ -64,8 +64,8 @@ module API
         else
           @returnValue = { content: user.as_json(:include => {
                                                                   :address => {},
-                                                                  :friends => {},
-                                                                  :follows => {}
+                                                                  :friends => { only: User.miniKey },
+                                                                  :follows => { only: User.miniKey }
                                                                 },
                                                     :only => User.bigKey) }
           codeAnswer 200
@@ -166,8 +166,8 @@ module API
 
         @returnValue = { content: user_object.as_json(:include => {
                                                                   :address => {},
-                                                                  :friends => {},
-                                                                  :follows => {}
+                                                                  :friends => { only: User.miniKey },
+                                                                  :follows => { only: User.miniKey }
                                                                 },
                                                     :only => User.miniKey) }
 
@@ -343,8 +343,8 @@ module API
           if ((update_user && update_address))
             @returnValue = { content: user.as_json(:include => {
                                                                   :address => {},
-                                                                  :friends => {},
-                                                                  :follows => {}
+                                                                  :friends => { only: User.miniKey },
+                                                                  :follows => { only: User.miniKey }
                                                                 },
                                                     :only => User.miniKey) }
             codeAnswer 201
@@ -367,8 +367,8 @@ module API
           if (user.save!)
             @returnValue = { content: user.as_json(:include => {
                                                                   :address => {},
-                                                                  :friends => {},
-                                                                  :follows => {}
+                                                                  :friends => { only: User.miniKey },
+                                                                  :follows => { only: User.miniKey }
                                                                 },
                                                     :only => User.miniKey) }
             codeAnswer 201
