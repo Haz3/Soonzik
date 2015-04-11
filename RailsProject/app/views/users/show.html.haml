@@ -1,5 +1,20 @@
 .row
   /#notice= notice
+  .background-profil
+    .photo-profil-user.text-center
+      =image_tag(@user.image, "class" => "photo-profil-user")
+    .username.text-center
+      = @user.username
+    .nb-followers.text-center
+      = @user.followers.size
+      %b followers
+    .social-network.text-center
+      %b Facebook:
+      = @user.facebook
+      %b Twitter:
+      = @user.twitter
+      %b Googleplus:
+      = @user.googlePlus
   .small-6.small-centered.columns.left
     %p
       %b Email:
@@ -24,7 +39,6 @@
       = @user.birthday
     %p
       %b Image:
-      =image_tag(@user.image, :class => "photo-profile")
   .small-6.small-centered.columns.right
     %p
       %b Description:
@@ -32,15 +46,6 @@
     %p
       %b Phonenumber:
       = @user.phoneNumber
-    %p
-      %b Facebook:
-      = @user.facebook
-    %p
-      %b Twitter:
-      = @user.twitter
-    %p
-      %b Googleplus:
-      = @user.googlePlus
     %p
       %b Idapi:
       = @user.idAPI
