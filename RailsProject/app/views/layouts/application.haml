@@ -44,7 +44,7 @@
               =image_tag current_user.image, :class => "photo-profile"              
               .profile
                 %p
-                  = link_to(current_user.username, edit_user_path(current_user), :class => "profile")
+                  = link_to(current_user.username, user_path(current_user), :class => "profile")
             - else
               %li.has-dropdown{"is_hover" => "true"}
                 =image_tag "menu.png", :class => "menu-logo"
