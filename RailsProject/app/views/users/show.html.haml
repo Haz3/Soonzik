@@ -4,61 +4,41 @@
     .photo-profil-user.text-center
       =image_tag(@user.image, "class" => "photo-profil-user")
     .username.text-center
-      = @user.username
+      %b
+        = @user.username
     .nb-followers.text-center
       = @user.followers.size
-      %b followers
+      Followers
     .social-network.text-center
-      %b Facebook:
-      = @user.facebook
-      %b Twitter:
-      = @user.twitter
-      %b Googleplus:
-      = @user.googlePlus
-  .small-6.small-centered.columns.left
-    %p
-      %b Email:
-      = @user.email
-    %p
-      %b Password:
-      = @user.password
-    %p
-      %b Salt:
-      = @user.salt
-    %p
-      %b Fname:
-      = @user.fname
-    %p
-      %b Lname:
-      = @user.lname
-    %p
-      %b Username:
-      = @user.username
-    %p
-      %b Birthday:
-      = @user.birthday
-    %p
-      %b Image:
-  .small-6.small-centered.columns.right
-    %p
-      %b Description:
-      = @user.description
-    %p
-      %b Phonenumber:
-      = @user.phoneNumber
-    %p
-      %b Idapi:
-      = @user.idAPI
-    %p
-      %b Securekey:
-      = @user.secureKey
-    %p
-      %b Newsletter:
-      = @user.newsletter
-    %p
-      %b Language:
-      = @user.language
-
+      %a{:href => @user.facebook}
+        %i.step.fi-social-facebook.size-42
+      %a{:href => @user.twitter}
+        %i.step.fi-social-twitter.size-42
+      %a{:href => @user.googlePlus}
+        %i.step.fi-social-google-plus.size-42
+  .large-12.large-centered.columns
+    .top-songs
+      .h1.subheader
+        Top Songs
+      %table
+        %tbody.radius
+          - cnt = 00 
+          - @topFive.each_with_index do |song, index|
+            - cnt += 01
+            %tr
+              %td{:width => "50"}
+                = cnt
+              %td{:width => "1200"}
+                = song[:object].title
+              %td{:width => "150"}
+                = song[:object].duration
+                = song[:object].price
+              %td{:width => "50"} +
+    .albums
+      Albums
+    .packsImplicated
+      Packs dans lequel est présent l'artiste
+    
   = link_to 'Edit', edit_user_path(@user)
   \|
   = link_to 'Back', users_path
