@@ -216,7 +216,7 @@ class User < ActiveRecord::Base
       }
     }
 
-    allMusics.sort! { |a,b| a.note <=> b.note }
+    allMusics.sort! { |a,b| a[:note] <=> b[:note] }
     return allMusics[0..5]
   end
 
