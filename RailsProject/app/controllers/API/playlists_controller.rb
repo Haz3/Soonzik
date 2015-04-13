@@ -33,8 +33,16 @@ module API
           defineHttp :not_found
         else
           @returnValue = { content: playlist.as_json(:include => {
-          														:musics => { :only => Music.miniKey }
-          														}) }
+          														  :musics => {
+                                          :only => Music.miniKey,
+                                          :include => {
+                                            :user => { :only => User.miniKey },
+                                            :album => { :only => Album.miniKey }
+                                          }
+                                        },
+                                        :user => { :only => User.miniKey }
+          														},
+                                      :only => Playlist.miniKey) }
           codeAnswer 200
         end
       rescue
@@ -64,7 +72,17 @@ module API
         if (@security)
           playlist = Playlist.new(Playlist.playlist_params params)
           if (playlist.save)
-            @returnValue = { content: playlist.as_json() }
+            @returnValue = { content: playlist.as_json(:include => {
+                                        :musics => {
+                                          :only => Music.miniKey,
+                                          :include => {
+                                            :user => { :only => User.miniKey },
+                                            :album => { :only => Album.miniKey }
+                                          }
+                                        },
+                                        :user => { :only => User.miniKey }
+                                      },
+                                      :only => Playlist.miniKey) }
             codeAnswer 201
             defineHttp :created
           else
@@ -114,9 +132,16 @@ module API
             playlist.name = @playlist[:name] if defined?@playlist && @playlist.has_key?(:name)
             if (playlist.save)
               @returnValue = { content: playlist.as_json(:include => {
-                                      :musics => {:only => Music.miniKey},
-                                      :user => {:only => User.miniKey}
-                                      }) }
+                                        :musics => {
+                                          :only => Music.miniKey,
+                                          :include => {
+                                            :user => { :only => User.miniKey },
+                                            :album => { :only => Album.miniKey }
+                                          }
+                                        },
+                                        :user => { :only => User.miniKey }
+                                      },
+                                      :only => Playlist.miniKey) }
               codeAnswer 201
               defineHttp :created
             else
@@ -225,10 +250,17 @@ module API
           playlist_object = playlist_object.offset(@offset.to_i)
         end
 
-        @returnValue = { content: playlist_object.as_json(:include => {
-                                      :musics => {:only => Music.miniKey},
-                                      :user => {:only => User.miniKey}
-                                    }) }
+        @returnValue = { content: playlist.as_json(:include => {
+                                        :musics => {
+                                          :only => Music.miniKey,
+                                          :include => {
+                                            :user => { :only => User.miniKey },
+                                            :album => { :only => Album.miniKey }
+                                          }
+                                        },
+                                        :user => { :only => User.miniKey }
+                                      },
+                                      :only => Playlist.miniKey) }
 
         if (playlist_object.size == 0)
           codeAnswer 202
