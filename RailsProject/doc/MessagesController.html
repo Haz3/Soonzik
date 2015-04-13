@@ -101,7 +101,7 @@
 		<section class="module-relations">
 			<dl>
 								<dt>Superclass</dt>
-								<dd class="superclass"><a href="./ApplicationController.html">ApplicationController</a></dd>
+								<dd class="superclass">WebsocketRails::BaseController</dd>
 								
 				
 							</dl>
@@ -123,6 +123,116 @@
 			
 			
 									
+						<section class="public-methods instance-methods methods">
+				<header>
+					<h3>Public Instance Methods</h3>
+				</header>
+
+								<a name="method-i-client_connected">anchor</a>
+				<div id="method-i-client_connected-doc" class="method">
+
+					<header>
+											<i class="icon-generic"></i>
+						<span class="method-name">client_connected</span><span 
+							class="method-args">()</span>
+										</header>
+
+					<div class="method-description">
+																
+											<div class="method-source-code" id="client_connected-source">
+							<pre class="prettyprint linenums"><code 
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/messages_controller.rb, line 7</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">client_connected</span>
+      <span class="ruby-keyword">if</span> (<span class="ruby-identifier">current_user</span> <span class="ruby-operator">!=</span> <span class="ruby-keyword">nil</span>)
+              <span class="ruby-identifier">controller_store</span>[<span class="ruby-value">:users_id</span>] <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">current_user</span>.<span class="ruby-identifier">id</span>
+              <span class="ruby-identifier">broadcast_message</span> <span class="ruby-value">:connexion</span>, { <span class="ruby-identifier">message</span><span class="ruby-operator">:</span> <span class="ruby-string">&quot;Nouvelle connexion de : &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">current_user</span>.<span class="ruby-identifier">username</span> }
+      <span class="ruby-keyword">else</span>
+                      <span class="ruby-identifier">broadcast_message</span> <span class="ruby-value">:connexion</span>, { <span class="ruby-identifier">message</span><span class="ruby-operator">:</span> <span class="ruby-string">&quot;Nouvelle connexion d&#39;un inconnu&quot;</span> }
+      <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></code></pre>
+						</div>
+										</div>
+
+					
+									</div>
+								<a name="method-i-delete_user">anchor</a>
+				<div id="method-i-delete_user-doc" class="method">
+
+					<header>
+											<i class="icon-generic"></i>
+						<span class="method-name">delete_user</span><span 
+							class="method-args">()</span>
+										</header>
+
+					<div class="method-description">
+																
+											<div class="method-source-code" id="delete_user-source">
+							<pre class="prettyprint linenums"><code 
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/messages_controller.rb, line 16</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">delete_user</span>
+      <span class="ruby-keyword">if</span> (<span class="ruby-identifier">current_user</span> <span class="ruby-operator">!=</span> <span class="ruby-keyword">nil</span>)
+              <span class="ruby-identifier">controller_store</span>[<span class="ruby-value">:users_id</span>] <span class="ruby-operator">-</span> [<span class="ruby-identifier">current_user</span>.<span class="ruby-identifier">id</span>]
+              <span class="ruby-identifier">broadcast_message</span> <span class="ruby-value">:connexion</span>, { <span class="ruby-identifier">message</span><span class="ruby-operator">:</span> <span class="ruby-string">&quot;Déconnexion de : &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">current_user</span>.<span class="ruby-identifier">username</span> }
+      <span class="ruby-keyword">else</span>
+                      <span class="ruby-identifier">broadcast_message</span> <span class="ruby-value">:connexion</span>, { <span class="ruby-identifier">message</span><span class="ruby-operator">:</span> <span class="ruby-string">&quot;Déconnexion d&#39;un inconnu&quot;</span> }
+      <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></code></pre>
+						</div>
+										</div>
+
+					
+									</div>
+								<a name="method-i-initialize_session">anchor</a>
+				<div id="method-i-initialize_session-doc" class="method">
+
+					<header>
+											<i class="icon-generic"></i>
+						<span class="method-name">initialize_session</span><span 
+							class="method-args">()</span>
+										</header>
+
+					<div class="method-description">
+																
+											<div class="method-source-code" id="initialize_session-source">
+							<pre class="prettyprint linenums"><code 
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/messages_controller.rb, line 2</span>
+      <span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize_session</span>
+  <span class="ruby-comment"># perform application setup here</span>
+  <span class="ruby-identifier">controller_store</span>[<span class="ruby-value">:users_id</span>] = []
+<span class="ruby-keyword">end</span></code></pre>
+						</div>
+										</div>
+
+					
+									</div>
+								<a name="method-i-sendMsg">anchor</a>
+				<div id="method-i-sendMsg-doc" class="method">
+
+					<header>
+											<i class="icon-generic"></i>
+						<span class="method-name">sendMsg</span><span 
+							class="method-args">()</span>
+										</header>
+
+					<div class="method-description">
+																
+											<div class="method-source-code" id="sendMsg-source">
+							<pre class="prettyprint linenums"><code 
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/messages_controller.rb, line 25</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">sendMsg</span>
+      <span class="ruby-keyword">if</span> (<span class="ruby-identifier">current_user</span> <span class="ruby-operator">!=</span> <span class="ruby-keyword">nil</span>)
+              <span class="ruby-identifier">broadcast_message</span> <span class="ruby-value">:new_message</span>, { <span class="ruby-identifier">message</span><span class="ruby-operator">:</span> <span class="ruby-identifier">message</span>, <span class="ruby-identifier">from</span><span class="ruby-operator">:</span> <span class="ruby-identifier">current_user</span>.<span class="ruby-identifier">username</span> }
+      <span class="ruby-keyword">else</span>
+                      <span class="ruby-identifier">broadcast_message</span> <span class="ruby-value">:new_message</span>, { <span class="ruby-identifier">message</span><span class="ruby-operator">:</span> <span class="ruby-identifier">message</span>, <span class="ruby-identifier">from</span><span class="ruby-operator">:</span> <span class="ruby-string">&quot;Inconnu&quot;</span> }
+      <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></code></pre>
+						</div>
+										</div>
+
+					
+									</div>
+				
+			</section>
 			
 			
 			

@@ -256,8 +256,8 @@ address, friends and follows</p>
 
     <span class="ruby-ivar">@returnValue</span> = { <span class="ruby-identifier">content</span><span class="ruby-operator">:</span> <span class="ruby-identifier">user_object</span>.<span class="ruby-identifier">as_json</span>(<span class="ruby-value">:include</span> =<span class="ruby-operator">&gt;</span> {
                                                               <span class="ruby-value">:address</span> =<span class="ruby-operator">&gt;</span> {},
-                                                              <span class="ruby-value">:friends</span> =<span class="ruby-operator">&gt;</span> {},
-                                                              <span class="ruby-value">:follows</span> =<span class="ruby-operator">&gt;</span> {}
+                                                              <span class="ruby-value">:friends</span> =<span class="ruby-operator">&gt;</span> { <span class="ruby-identifier">only</span><span class="ruby-operator">:</span> <span class="ruby-constant">User</span>.<span class="ruby-identifier">miniKey</span> },
+                                                              <span class="ruby-value">:follows</span> =<span class="ruby-operator">&gt;</span> { <span class="ruby-identifier">only</span><span class="ruby-operator">:</span> <span class="ruby-constant">User</span>.<span class="ruby-identifier">miniKey</span> }
                                                             },
                                                 <span class="ruby-value">:only</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">User</span>.<span class="ruby-identifier">miniKey</span>) }
 
@@ -517,8 +517,8 @@ address, friends and follows</p>
     <span class="ruby-keyword">else</span>
       <span class="ruby-ivar">@returnValue</span> = { <span class="ruby-identifier">content</span><span class="ruby-operator">:</span> <span class="ruby-identifier">user</span>.<span class="ruby-identifier">as_json</span>(<span class="ruby-value">:include</span> =<span class="ruby-operator">&gt;</span> {
                                                               <span class="ruby-value">:address</span> =<span class="ruby-operator">&gt;</span> {},
-                                                              <span class="ruby-value">:friends</span> =<span class="ruby-operator">&gt;</span> {},
-                                                              <span class="ruby-value">:follows</span> =<span class="ruby-operator">&gt;</span> {}
+                                                              <span class="ruby-value">:friends</span> =<span class="ruby-operator">&gt;</span> { <span class="ruby-identifier">only</span><span class="ruby-operator">:</span> <span class="ruby-constant">User</span>.<span class="ruby-identifier">miniKey</span> },
+                                                              <span class="ruby-value">:follows</span> =<span class="ruby-operator">&gt;</span> { <span class="ruby-identifier">only</span><span class="ruby-operator">:</span> <span class="ruby-constant">User</span>.<span class="ruby-identifier">miniKey</span> }
                                                             },
                                                 <span class="ruby-value">:only</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">User</span>.<span class="ruby-identifier">bigKey</span>) }
       <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">200</span>

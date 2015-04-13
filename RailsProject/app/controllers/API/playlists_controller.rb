@@ -21,7 +21,7 @@ module API
     # 
     # ===== HTTP VALUE
     # 
-    # - +200+ - In case of success, return a playlist including its musics
+    # - +200+ - In case of success, return a playlist including its musics (which includes its albums and artist) and user
     # - +404+ - Can't find the playlist, the id is probably wrong
     # - +503+ - Error from server
     # 
@@ -63,7 +63,7 @@ module API
     # 
     # ===== HTTP VALUE
     # 
-    # - +201+ - In case of success, return the saved object
+    # - +201+ - In case of success, return the saved object including its musics (which includes its albums and artist) and user
     # - +401+ - It is not a secured transaction
     # - +503+ - Error from server
     # 
@@ -113,7 +113,7 @@ module API
     # 
     # ===== HTTP VALUE
     # 
-    # - +201+ - In case of success, return the playlist created
+    # - +201+ - In case of success, return the playlist created including its musics (which includes its albums and artist) and user
     # - +401+ - It is not a secured transaction
     # - +503+ - Error from server
     # 
@@ -183,7 +183,7 @@ module API
     #
     # ===== HTTP VALUE
     # 
-    # - +200+ - In case of success, return a list of playlist including its musics and user
+    # - +200+ - In case of success, return a list of playlist including its musics (which includes its albums and artist) and user
     # - +503+ - Error from server
     # 
     def find

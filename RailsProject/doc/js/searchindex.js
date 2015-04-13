@@ -277,6 +277,12 @@ var SearchIndex =
 		"type": "normalmodule"
 	},
 	{
+		"name": "ChatsController",
+		"link": "ChatsController.html",
+		"snippet": "",
+		"type": "normalclass"
+	},
+	{
 		"name": "CommentariesController",
 		"link": "CommentariesController.html",
 		"snippet": "",
@@ -1249,6 +1255,12 @@ var SearchIndex =
 		"type": "anymethod"
 	},
 	{
+		"name": "index",
+		"link": "ChatsController.html#method-i-index",
+		"snippet": "",
+		"type": "anymethod"
+	},
+	{
 		"name": "commentary_params",
 		"link": "Commentary.html#method-c-commentary_params",
 		"snippet": "<p>The strong parameters to save or update object\n",
@@ -1369,6 +1381,30 @@ var SearchIndex =
 		"type": "anymethod"
 	},
 	{
+		"name": "initialize_session",
+		"link": "MessagesController.html#method-i-initialize_session",
+		"snippet": "",
+		"type": "anymethod"
+	},
+	{
+		"name": "client_connected",
+		"link": "MessagesController.html#method-i-client_connected",
+		"snippet": "",
+		"type": "anymethod"
+	},
+	{
+		"name": "delete_user",
+		"link": "MessagesController.html#method-i-delete_user",
+		"snippet": "",
+		"type": "anymethod"
+	},
+	{
+		"name": "sendMsg",
+		"link": "MessagesController.html#method-i-sendMsg",
+		"snippet": "",
+		"type": "anymethod"
+	},
+	{
 		"name": "music_params",
 		"link": "Music.html#method-c-music_params",
 		"snippet": "<p>The strong parameters to save or update object\n",
@@ -1429,6 +1465,12 @@ var SearchIndex =
 		"type": "anymethod"
 	},
 	{
+		"name": "initialize_session",
+		"link": "NotificationsController.html#method-i-initialize_session",
+		"snippet": "",
+		"type": "anymethod"
+	},
+	{
 		"name": "provides_callback_for",
 		"link": "OmniauthCallbacksController.html#method-c-provides_callback_for",
 		"snippet": "",
@@ -1462,6 +1504,12 @@ var SearchIndex =
 		"name": "playlist_params",
 		"link": "Playlist.html#method-c-playlist_params",
 		"snippet": "<p>The strong parameters to save or update object\n",
+		"type": "anymethod"
+	},
+	{
+		"name": "miniKey",
+		"link": "Playlist.html#method-c-miniKey",
+		"snippet": "",
 		"type": "anymethod"
 	},
 	{

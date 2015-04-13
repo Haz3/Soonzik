@@ -12,4 +12,8 @@ class Playlist < ActiveRecord::Base
   def self.playlist_params(parameters)
     parameters.require(:playlist).permit(:user_id, :name)
   end
+
+  def self.miniKey
+  	[:name]
+  end
 end
