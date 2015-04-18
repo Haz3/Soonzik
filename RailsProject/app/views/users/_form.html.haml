@@ -1,57 +1,79 @@
 = form_for @user do |f|
   - if @user.errors.any?
-    #error_explanation
+    #error_explanation.hide
       %h2= "#{pluralize(@user.errors.count, "error")} prohibited this user from being saved:"
-      %ul
+      %ul.hide
         - @user.errors.full_messages.each do |msg|
-          %li= msg
+          %li.hide
+            = msg
   .row
-    .small-6.small-centered.columns.left
-      .field
-        = f.label :email
-        = f.text_field :email
-      .field
-        = f.label :password
-        = f.text_field :password
-      .field
-        = f.label :fname
-        = f.text_field :fname
-      .field
-        = f.label :lname
-        = f.text_field :lname
-      .field
-        = f.label :username
-        = f.text_field :username
-      .field
-        = f.label :birthday
-        = f.date_select :birthday
-      .field
-        = f.label :image
-        = f.text_field :image
-      .field
-        = f.label :description
-        = f.text_area :description
-    .small-6.small-centered.columns.right
-      .field
-        = f.label :phoneNumber
-        = f.text_field :phoneNumber
-      .field
-        = f.label :address_id
-        = f.number_field :address_id
-      .field
-        = f.label :facebook
-        = f.text_field :facebook
-      .field
-        = f.label :twitter
-        = f.text_field :twitter
-      .field
-        = f.label :googlePlus
-        = f.text_field :googlePlus
-      .field
-        = f.label :newsletter
-        = f.check_box :newsletter
-      .field
-        = f.label :language
-        = f.text_field :language
-      .actions
-        = f.submit 'Save'
+    .contain-to-grid
+      .large-12.small-8.columns
+        .panel
+          %h3.subheader
+            Informations Public
+          .row
+            .large-3.small-3.columns.inline
+              = f.label :username
+            .small-9.columns
+              = f.text_field :username
+            .large-3.small-3.columns.inline
+              = f.label :description
+            .small-9.columns
+              = f.text_area :description
+            .large-3.small-3.columns
+              = f.label :birthday
+            .small-9.columns
+              = f.date_select :birthday, :class => "medium-3 columns"
+            .large-3.small-3.columns
+              = f.label :image
+            .small-9.columns
+              = f.text_field :image
+            .large-3.small-3.columns
+              = f.label :background
+            .small-9.columns
+              = f.text_field :background
+            .large-3.small-3.columns
+              = f.label :facebook
+            .small-9.columns
+              = f.text_field :facebook
+            .large-3.small-3.columns
+              = f.label :twitter
+            .small-9.columns
+              = f.text_field :twitter
+            .large-3.small-3.columns
+              = f.label :googlePlus
+            .small-9.columns
+              = f.text_field :googlePlus
+          %h3.subheader
+            Informations Personnel
+          .row
+            .large-3.small-3.columns.inline
+              = f.label :prénom
+            .small-9.columns
+              = f.text_field :fname
+            .large-3.small-3.columns.inline
+              = f.label :nom
+            .small-9.columns
+              = f.text_field :lname
+            .large-3.small-3.columns.inline
+              = f.label :password
+            .small-9.columns
+              = f.text_field :password, :type => "password"
+              %small.error
+                Password Can't be blank
+            .large-3.small-3.columns.inline
+              = f.label :téléphone
+            .small-9.columns
+              = f.text_field :phoneNumber
+            .large-3.small-3.columns.inline
+              = f.label :newsletter
+            .small-9.columns
+              = f.check_box :newsletter
+            .large-3.small-3.columns.inline
+              = f.label :language
+            .small-9.columns
+              = f.text_field :language
+          .actions
+            .large-4.columns.large-centered
+              = f.submit 'Save', :class => "button radius expand success"

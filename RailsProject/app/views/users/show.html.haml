@@ -1,14 +1,16 @@
 .row
   /#notice= notice
   .background-profil
+    /=image_tag(@user.background)
     .photo-profil-user.text-center
-      =image_tag(@user.image, "class" => "photo-profil-user")
+      =image_tag(@user.image, :class => "photo-profil-user")
     .username.text-center
       %b
         = @user.username
     .nb-followers.text-center
       = @user.followers.size
       Followers
+    .divider.large-centered.columns
     .social-network.text-center
       %a{:href => @user.facebook}
         %i.step.fi-social-facebook.size-42
@@ -17,28 +19,61 @@
       %a{:href => @user.googlePlus}
         %i.step.fi-social-google-plus.size-42
   .large-12.large-centered.columns
-    .top-songs
-      .h1.subheader
-        Top Songs
-      %table
-        %tbody.radius
-          - cnt = 00 
-          - @topFive.each_with_index do |song, index|
-            - cnt += 01
-            %tr
-              %td{:width => "50"}
-                = cnt
-              %td{:width => "1200"}
-                = song[:object].title
-              %td{:width => "150"}
-                = song[:object].duration
-                = song[:object].price
-              %td{:width => "50"} +
-    .albums
-      Albums
-    .packsImplicated
-      Packs dans lequel est présent l'artiste
-    
+    - if @user.isArtist?
+      .top-songs
+        .h1.subheader
+          Top Songs
+        %table
+          %tbody.radius
+            - cnt = 00 
+            - @topFive.each_with_index do |song, index|
+              - cnt += 01
+              %tr
+                %td{:width => "50"}
+                  = cnt
+                %td{:width => "1200"}
+                  = song[:object].title
+                %td{:width => "150"}
+                  = song[:object].duration
+                %td{:width => "50"}
+                  = song[:object].price
+                %td{:width => "50"} +
+      .albums
+        .h1.subheader
+          Albums
+        - @user.albums.each do |album|
+          .small-6-columns
+            .panel.left
+              = image_tag album.image 
+              %table.right
+                %tbody
+                  - cnt = 00
+                  %th
+                    = album.title
+                  - @topFive.each_with_index do |song, index|
+                    - cnt += 01
+                    %tr
+                      %td{:width => "50"}
+                        = cnt
+                      %td{:width => "350"}
+                        = song[:object].title
+                      %td{:width => "100"}
+                        = song[:object].duration
+                      %td{:width => "50"}
+                        = song[:object].price
+                      %td{:width => "50"} +
+              .divider
+                Année 2014
+                %br
+                = @user.username
+      .packsImplicated
+        .h1.subheader
+          Packs
+        .panel
+          Packs dans lequel est présent l'artiste
+    - else
+      Coucou je vais afficher des playlists
+
   = link_to 'Edit', edit_user_path(@user)
   \|
   = link_to 'Back', users_path
