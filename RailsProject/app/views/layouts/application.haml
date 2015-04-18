@@ -56,64 +56,6 @@
                   %a.button.secondary.expand.radius{:href => new_user_session_path, :class => "log-in info"} Log In
   %body
     %main
-      .row
-        %br
-        %h3.subheader
-          Last News
-        .large-12.large-centered.columns
-          %ul.example-orbit{"data-orbit" => ""}
-            %li
-              =image_tag "satelite-orbit.jpg"
-              .orbit-caption
-                Caption One.
-            %li.active
-              =image_tag "andromeda-orbit.jpg"
-              .orbit-caption
-                Caption Two.
-            %li
-              =image_tag "launch-orbit.jpg"
-              .orbit-caption
-                Caption Three.
-        .divider
-        %h3.subheader
-          Packs du moment
-        .ul.large-block-grid-4
-          %li
-            .panel
-              %h5.subheader.text-center
-                Pack n°1
-              =image_tag "pack1.jpg"
-              .divider
-              Temps Restant:
-              %br
-              Moyenne : 
-          %li
-            .panel
-              %h5.subheader.text-center
-                Pack n°2
-              =image_tag "pack2.jpg"
-              .divider
-              Temps Restant:
-              %br
-              Moyenne : 
-          %li
-            .panel
-              %h5.subheader.text-center
-                Pack n°3
-              =image_tag "pack3.jpg"
-              .divider
-              Temps Restant:
-              %br
-              Moyenne : 
-          %li
-            .panel
-              %h5.subheader.text-center
-                Pack n°4
-              =image_tag "pack4.jpg"
-              .divider
-              Temps Restant:
-              %br
-              Moyenne : 
       =yield
 
     %footer
