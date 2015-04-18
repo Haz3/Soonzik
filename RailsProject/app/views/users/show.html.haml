@@ -2,15 +2,18 @@
   /#notice= notice
   .background-profil
     /=image_tag(@user.background)
-    .photo-profil-user.text-center
-      =image_tag(@user.image, :class => "photo-profil-user")
+    .large-2.small-12.columns.large-centered
+      .photo-profil-user.large-centered
+        =image_tag(@user.image, :class => "photo-profil-user")
     .username.text-center
       %b
         = @user.username
-    .nb-followers.text-center
-      = @user.followers.size
-      Followers
-    .divider.large-centered.columns
+    .small-2.columns.large-centered.inline
+      .nb-followers.text-center
+        = @user.followers.size
+        Followers
+        .button.tiny.expand.info.radius
+          Follow
     .social-network.text-center
       %a{:href => @user.facebook}
         %i.step.fi-social-facebook.size-42
@@ -23,7 +26,7 @@
       .top-songs
         .h1.subheader
           Top Songs
-        %table
+        %table.radius
           %tbody.radius
             - cnt = 00 
             - @topFive.each_with_index do |song, index|
