@@ -35,14 +35,14 @@
                 =image_tag "menu.png", :class => "menu-logo"
                 %ul.dropdown
                   %li
-                    = link_to('Modifier le profil', edit_user_path(current_user))
-                    %a News
+                    = link_to('Modifier le profil (DONE)', edit_user_path(current_user))
+                    = link_to('News (IN PROGRESS)', news_index_path)
                     %a Explorer
-                    %a Packs
+                    = link_to('Pakcs (IN PROGRESS)', packs_path)
                     %a Monde Musical
-                    %a Battle
-                    %a Playlist
-                    %a Amis
+                    = link_to('Battle (IN PROGRESS)', battles_path)
+                    = link_to('Playlist (IN PROGRESS)', playlists_path)
+                    %a Amis (IN PROGRESS)
                     = link_to('Logout', destroy_user_session_path, :method => :delete)
               =image_tag current_user.image, :class => "photo-profile"              
               .profile

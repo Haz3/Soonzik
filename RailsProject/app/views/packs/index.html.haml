@@ -1,20 +1,27 @@
-%h1 Listing packs
 
-%table
-  %tr
-    %th Title
-    %th Style
-    %th
-    %th
-    %th
+.row
+  %h1
+    Listing packs
 
-  - @packs.each do |pack|
-    %tr
-      %td= pack.title
-      %td= pack.style
-      %td= link_to 'Show', pack
-      %td= link_to 'Edit', edit_pack_path(pack)
-      %td= link_to 'Destroy', pack, :method => :delete, :data => { :confirm => 'Are you sure?' }
+  - if @packs.nil? && defined?@packs
+    %table
+      %tr
+        %th Title
+        %th Style
+        %th
+        %th
+        %th
+
+      - @packs.each do |pack|
+        %tr
+          %td= pack.title
+          %td= pack.style
+          %td= link_to 'Show', pack
+          %td= link_to 'Edit', edit_pack_path(pack)
+          %td= link_to 'Destroy', pack, :method => :delete, :data => { :confirm => 'Are you sure?' }
+  - else
+    %h3.subheader
+      Il n'y a pas de packs disponible pour le moment.
 
 %br
 
