@@ -250,7 +250,7 @@ module API
           playlist_object = playlist_object.offset(@offset.to_i)
         end
 
-        @returnValue = { content: playlist.as_json(:include => {
+        @returnValue = { content: playlist_object.as_json(:include => {
                                         :musics => {
                                           :only => Music.miniKey,
                                           :include => {
@@ -269,6 +269,7 @@ module API
         end
 
       rescue
+        puts $!, $@
         codeAnswer 504
         defineHttp :service_unavailable
       end
