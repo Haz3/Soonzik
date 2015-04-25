@@ -15,6 +15,6 @@ class Pack < ActiveRecord::Base
   end
 
   def self.miniKey
-  	[:title]
+  	[:id, :title]
   end
 end

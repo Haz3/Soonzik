@@ -14,6 +14,6 @@ class Playlist < ActiveRecord::Base
   end
 
   def self.miniKey
-  	[:name]
+  	[:id, :name]
   end
 end
