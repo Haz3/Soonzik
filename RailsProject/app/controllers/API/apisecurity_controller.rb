@@ -172,6 +172,7 @@ module API
             @httpCode = :not_found
           end
         rescue
+          puts $!, $@
           codeAnswer 504
           @httpCode = :service_unavailable
         end
