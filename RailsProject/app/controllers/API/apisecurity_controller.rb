@@ -356,7 +356,7 @@ protected
         request = Net::HTTP::Get.new(uri.request_uri)
         response = http.request(request)
         hash = JSON.parse(response.body)
-        if (hase == nil || (hash != nil && hash.has_key?(errorKeyName)))
+        if (hash == nil || (hash != nil && hash.has_key?(errorKeyName)))
           return false
         else
           return true
