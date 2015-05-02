@@ -156,7 +156,7 @@ module API
       if (defined?(@uid) && defined?(@provider) && defined?(@encrypted_key) && defined?(@token))
         begin
           identity = Identity.where(provider: @provider).find_by_uid(@uid)
-          if (identity != nil && Digest::SHA256.hexdigest(@uid.to_s + identity.token + Identity::SALT) != @encrypted_key && isValidToken?(@token, @provider))
+          if (identity != nil && Digest::SHA256.hexdigest(@uid.to_s + identity.token + Identity::SALT) == @encrypted_key && isValidToken?(@token, @provider))
             codeAnswer 200
             @returnValue = { content: identity.user.as_json(:include => {
                                                                   :address => {},
@@ -172,7 +172,6 @@ module API
             @httpCode = :not_found
           end
         rescue
-          puts $!, $@
           codeAnswer 504
           @httpCode = :service_unavailable
         end
