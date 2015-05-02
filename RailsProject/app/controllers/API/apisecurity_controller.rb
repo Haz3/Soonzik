@@ -79,8 +79,8 @@ module API
             codeAnswer 200
             @returnValue = { content: user.as_json(:include => {
                                                                   :address => {},
-                                                                  :friends => {},
-                                                                  :follows => {}
+                                                                  :friends => { only: User.miniKey },
+                                                                  :follows => { only: User.miniKey }
                                                                 },
                                                     :only => User.notRestrictedKey
                                                   ) }
@@ -160,8 +160,8 @@ module API
             codeAnswer 200
             @returnValue = { content: identity.user.as_json(:include => {
                                                                   :address => {},
-                                                                  :friends => {},
-                                                                  :follows => {}
+                                                                  :friends => { only: User.miniKey },
+                                                                  :follows => { only: User.miniKey }
                                                                 },
                                                     :only => User.notRestrictedKey
                                                   ) }
