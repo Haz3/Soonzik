@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   before_action :ensure_signup_complete#:authentication
   before_action :setControllerName
+  before_action :cookieMe
 
   before_filter :configure_permitted_parameters, if: :devise_controller?
 
@@ -23,6 +24,15 @@ class ApplicationController < ActionController::Base
     @controller = params[:controller] if params.has_key?(:controller)
   end
 
+  def cookieMe
+    if user_signed_in?
+      cookies[:user_id] = current_user.id
+      cookies[:user_token] = current_user.salt
+      cookies[:user_username] = current_user.username
+    elsif !user_signed_in?() && cookies.has_key?(:user)
+      cookies.delete :user
+    end
+  end
 
   protected
     def configure_permitted_parameters
