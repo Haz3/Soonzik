@@ -206,6 +206,16 @@ class User < ActiveRecord::Base
     return false
   end
 
+  # Check if the user is a friend or not
+  def hasFriend?(user)
+    self.friends.each { |friend|
+      if (friend.id == user.id)
+        return true
+      end
+    }
+    return false
+  end
+
   # Give the 5 most popular track of an artist
   def giveTopFive
     allMusics = []

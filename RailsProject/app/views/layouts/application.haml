@@ -2,61 +2,75 @@
 %html
   %head
     %title= "SoonZik | Welcome"
+    %base{href: "/"}
     %meta{ :name => "viewport", :content => "width=device-width, initial-scale=1.0" }
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
-    = stylesheet_link_tag    @controller, media: 'all', 'data-turbolinks-track' => true if @controller != ""
+    = stylesheet_link_tag    "chats", media: 'all', 'data-turbolinks-track' => true if user_signed_in?
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
     = javascript_include_tag @controller, 'data-turbolinks-track' => true if @controller != ""
+    = javascript_include_tag "chats", 'data-turbolinks-track' => true if user_signed_in?
     = javascript_include_tag "vendor/modernizr"
     = csrf_meta_tags
 
-  %header.contain-to-grid
-    %nav.top-bar{"data-topbar" => "", :role => "navigation"}
-      %ul.title-area
-        %li.name
-          %a
-            =link_to image_tag("logo-soonzik.png", :class => "soonzik-logo"), "http://lvh.me:3000"
-          %li.toggle-topbar.menu-icon
-            %a{:href => "#"}
-              %span Menu
-        %section.top-bar-section
-          %ul.left
-            %li.has-form
-              .row.collapse
-                .large-5.small-5.columns
-                  =image_tag "loupe.png", :class => "loupe"
-                  %input.radius{:placeholder => "Recherchez des Shtroumpfs, musiques", :type => "text"}
-                .large-4.small-3.columns
-                  %a.alert.button.expand.radius{:href => "#"} Search
-          %ul.right
-            =@session
-            - if user_signed_in?
-              %li.has-dropdown{"is_hover" => "true", "data-options" => "align:right"}
-                =image_tag "menu.png", :class => "menu-logo"
-                %ul.dropdown
+  %body{ "ng-app" => "SoonzikApp" }
+    %header.contain-to-grid
+      %nav.top-bar{"data-topbar" => "", :role => "navigation"}
+        %ul.title-area
+          %li.name
+            %a
+              =link_to image_tag("logo-soonzik.png", :class => "soonzik-logo"), "http://lvh.me:3000"
+            %li.toggle-topbar.menu-icon
+              %a{:href => "#"}
+                %span Menu
+          %section.top-bar-section
+            %ul.left
+              %li.has-form
+                .row.collapse
+                  .large-5.small-5.columns
+                    =image_tag "loupe.png", :class => "loupe"
+                    %input.radius{:placeholder => "Recherchez des Shtroumpfs, musiques", :type => "text"}
+                  .large-4.small-3.columns
+                    %a.alert.button.expand.radius{:href => "#"} Search
+            %ul.right
+              - if user_signed_in?
+                %li.has-dropdown{"is_hover" => "true", "data-options" => "align:right"}
+                  =image_tag "menu.png", :class => "menu-logo"
+                  %ul.dropdown
+                    %li
+                      = link_to('Modifier le profil (DONE)', edit_user_path(current_user))
+                      = link_to('News (IN PROGRESS)', news_index_path)
+                      %a Explorer
+                      = link_to('Packs (IN PROGRESS)', packs_path)
+                      %a Monde Musical
+                      = link_to('Battle (IN PROGRESS)', battles_path)
+                      = link_to('Playlist (IN PROGRESS)', playlists_path)
+                      %a Amis (IN PROGRESS)
+                      = link_to('Logout', destroy_user_session_path, :method => :delete)
+                =image_tag current_user.image, :class => "photo-profile"              
+                .profile
+                  %p
+                    = link_to(UsersHelper.validate_username_for_oauth(current_user), user_path(current_user), :class => "profile")
+              - else
+                .large-12.small-10.columns
                   %li
-                    = link_to('Modifier le profil (DONE)', edit_user_path(current_user))
-                    = link_to('News (IN PROGRESS)', news_index_path)
-                    %a Explorer
-                    = link_to('Pakcs (IN PROGRESS)', packs_path)
-                    %a Monde Musical
-                    = link_to('Battle (IN PROGRESS)', battles_path)
-                    = link_to('Playlist (IN PROGRESS)', playlists_path)
-                    %a Amis (IN PROGRESS)
-                    = link_to('Logout', destroy_user_session_path, :method => :delete)
-              =image_tag current_user.image, :class => "photo-profile"              
-              .profile
-                %p
-                  = link_to(current_user.username, user_path(current_user), :class => "profile")
-            - else
-              .large-12.small-10.columns
-                %li
-                  %a.button.expand.radius{:href => "#", :class => "sign-up"} Sign Up
-                %li
-                  %a.button.secondary.expand.radius{:href => new_user_session_path, :class => "log-in info"} Log In
-  %body
+                    %a.button.expand.radius{:href => "#", :class => "sign-up"} Sign Up
+                  %li
+                    %a.button.secondary.expand.radius{:href => new_user_session_path, :class => "log-in info"} Log In
     %main
-      =yield
+      .large-12{"ng-view" => true}
+      /=yield
+      - if user_signed_in?
+        #chat{ "ng-controller" => "ChatCtrl" }
+          %p="Connected friends"
+          %ul
+            %li{ "ng-repeat" => "friend in friends", "data-id" => "{{ friend.id }}" }
+              %span{ "ng-click" => "open_chat(friend)" }= "{{ friend.username }}"
+          %hr
+          %p="Other friends"
+          %ul
+            %li{ "ng-repeat" => "friend in friends", "data-id" => "{{ friend.id }}" }
+              %span{ "ng-click" => "open_chat(friend)" }= "{{ friend.username }}"
+          %input{:type => 'text', :placeholder => 'Search a friend'}
 
     %footer
       .container
@@ -80,4 +94,4 @@
             #button-player-right.large-12.small-9
               =image_tag "playlist.png"
               =image_tag "social.png"
-      
+    = stylesheet_link_tag    "chats", media: 'all', 'data-turbolinks-track' => true if user_signed_in?

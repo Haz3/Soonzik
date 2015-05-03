@@ -1,3 +1,56 @@
 // Place all the styles related to the Messages controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+#chat {
+	position: fixed;
+	bottom: 60px;
+	right: 0;
+
+	padding-left: 5px;
+	
+	border-left: 1px solid #E4E4E4;
+	border-top: 1px solid #E4E4E4;
+	
+	font-size: 12px;
+	font-family: helvetica, arial, 'lucida grande', sans-serif;
+
+	* {
+		margin: 0;
+	}
+
+	p {
+		padding: 0;
+
+		color: #818793;
+		
+		font-weight: bold;
+		font-size: 11px;
+	}
+
+	ul {
+		list-style-type: none;
+		padding: 0;
+
+		li {
+			height: 32x;
+			line-height: 32px;
+			width: 200px;
+			padding-left: 10px;
+
+			background: #ECEDEF;
+			border: 1px solid #EFEFEF;
+
+			overflow: hidden;
+		  -o-text-overflow: ellipsis; /* pour Opera 9 */
+		  text-overflow: ellipsis;
+		  white-space: nowrap;
+
+		  cursor: pointer;
+		}
+
+		li:hover {
+			background: #E4E4E4;
+		}
+	}
+}

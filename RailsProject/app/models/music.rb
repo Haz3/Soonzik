@@ -47,7 +47,6 @@ class Music < ActiveRecord::Base
           # If the genre is not in the hash, we init it, else we increment it 
           gPond[genre_obj] = (gPond.has_key?(genre_obj)) ? gPond[genre_obj] + 1 : 1
         }
-        puts music.id
         # The music is already purchased so we don't have to suggest it
         musicList << music 
       }
