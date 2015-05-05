@@ -1,0 +1,72 @@
+%div{ "ng-init" => "showInit()" }
+  %loading{ "ng-if" => "loading == true" }
+  .row{ "ng-if" => "loading == false" }
+    /#notice= notice
+    .background-profil
+      /=image_tag(@show.user.background)
+      .large-2.small-12.columns.large-centered
+        .photo-profil-show.user.large-centered
+          %img.photo-profil-user{ "ng-src" => '{{ show.user.image }}' }
+      .username.text-center
+        %b
+          {{ show.user.username }}
+      .small-2.columns.large-centered.inline
+        .nb-followers.text-center
+          {{ show.user.followers.length }}
+          Followers
+          .button.tiny.expand.info.radius
+            Follow
+      .social-network.text-center
+        %a{:href => '{{show.user.facebook}}'}
+          %i.step.fi-social-facebook.size-42
+        %a{:href => '{{show.user.twitter}}'}
+          %i.step.fi-social-twitter.size-42
+        %a{:href => '{{show.user.googlePlus}}'}
+          %i.step.fi-social-google-plus.size-42
+    .large-12.large-centered.columns{ 'ng-if' => 'show.user.isArtist' }
+      .top-songs
+        .h1.subheader
+          Top Songs
+        %table.radius
+          %tbody.radius
+            %tr{ 'ng-repeat' => 'song in show.user.topFive track by $index' }
+              %td{:width => '50'}
+                {{ $index + 1 }} 
+              %td{:width => '1200'}
+                {{song.title}}
+              %td{:width => '150'}
+                {{song.duration}}
+              %td{:width => '50'}
+                {{song.price}}
+              %td{:width => '50'} +
+      .albums
+        .h1.subheader
+          Albums
+          .small-6-columns{ 'ng-repeat' => 'album in show.user.albums track by $index' }
+            .panel.left
+              %img{ "ng-src" => '{{album.image}}' }
+              %table.right
+                %tbody
+                  %th
+                    {{album.title}}
+                    %tr{ 'ng-repeat' => 'song in topFive track by $index' }
+                      %td{:width => '50'}
+                        {{$index + 1 }}
+                      %td{:width => '350'}
+                        {{song.title}}
+                      %td{:width => '100'}
+                        {{song.duration}}
+                      %td{:width => '50'}
+                        {{song.price}}
+                      %td{:width => '50'} +
+              .divider
+                Année 2014
+                %br
+                  {{ show.user.username }}
+      .packsImplicated
+        .h1.subheader
+          Packs
+        .panel
+          Packs dans lequel est présent l'artiste
+    .playlist{ 'ng-if' => '!show.user.isArtist' }
+      Coucou je vais afficher des playlists

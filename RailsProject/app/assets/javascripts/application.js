@@ -16,8 +16,18 @@
 //= require turbolinks
 //= require ./player/wavesurfer.min.js
 //= require ./player/main.js
+//= require ./tools/sha256.js
 //= require websocket_rails/main
+//= require angular
+//= require angular-cookies
+//= require angular-route
+//= require angular-resource
+//= require ./AngularJS/app.js.erb
+//= require ./AngularJS/controllers/ChatController.js
+//= require ./AngularJS/controllers/UsersController.js
+//= require ./AngularJS/directives/loading.js
+//= require ./AngularJS/services/SecureAuth.js
+//= require ./AngularJS/services/HTTPService.js
 // require_tree .
 
 $(function(){ $(document).foundation(); });
-
