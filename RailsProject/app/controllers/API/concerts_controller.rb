@@ -18,7 +18,9 @@ module API
     # 
     def index
       begin
-        @returnValue = { content: Concert.all.as_json(:include => :address) }
+        @returnValue = { content: Concert.all.as_json(:include => {
+                                                            :address => { :only => Address.miniKey  }
+                                                            }, :only => Concert.miniKey ) }
         if (@returnValue[:content].size == 0)
           codeAnswer 202
         else
@@ -52,7 +54,9 @@ module API
           codeAnswer 502
           defineHttp :not_found
         else
-          @returnValue = { content: concert.as_json(:include => :address) }
+          @returnValue = { content: concert.as_json(:include => {
+                                                            :address => { :only => Address.miniKey  }
+                                                            }, :only => Concert.miniKey ) }
           codeAnswer 200
         end
       rescue
@@ -149,7 +153,9 @@ module API
           concert_object = concert_object.offset(@offset.to_i)
         end
 
-        @returnValue = { content: concert_object.as_json(:include => :address) }
+        @returnValue = { content: concert_object.as_json(:include => {
+                                                            :address => { :only => Address.miniKey  }
+                                                            }, :only => Concert.miniKey ) }
 
         if (concert_object.size == 0)
           codeAnswer 202

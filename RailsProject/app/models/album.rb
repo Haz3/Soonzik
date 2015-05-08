@@ -24,6 +24,6 @@ class Album < ActiveRecord::Base
 
   # Filter of information for the API
   def self.miniKey
-    [:id, :title, :price, :image, :file]
+    [:id, :title, :price, :image, :file, :yearProd]
   end
 end

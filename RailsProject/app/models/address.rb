@@ -7,6 +7,11 @@ class Address < ActiveRecord::Base
 
   validates :numberStreet, :street, :city, :country, :zipcode, presence: true
 
+  # Filter of information for the API
+  def self.miniKey
+  	[:id, :numberStreet, :street, :city, :country, :zipcode]
+  end
+
   # The strong parameters to save or update object
   def self.address_params(parameters)
     parameters.require(:address).permit(:numberStreet, :street, :city, :country, :zipcode)

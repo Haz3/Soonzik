@@ -7,6 +7,11 @@ class Tag < ActiveRecord::Base
   validates :tag, :news, presence: true
   validates :tag, length: { maximum: 20, minimum: 4 }
 
+  # Filter of information for the API
+  def self.miniKey
+  	[:id, :tag]
+  end
+  
   # The strong parameters to save or update object
   def self.tag_params(parameters)
     parameters.require(:tag).permit(:tag, :news_id)

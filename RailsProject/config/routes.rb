@@ -117,6 +117,16 @@ Rails.application.routes.draw do
         post 'save' => 'users#save'
         post 'update' => 'users#update'
         get 'getmusics' => 'users#getmusics'
+        get ':id/isartist' => 'users#isArtist'
+
+        post 'follow' => 'users#follow'
+        post 'unfollow' => 'users#unfollow'
+        post 'addfriend' => 'users#addfriend'
+        post 'delfriend' => 'users#delfriend'
+
+        get ':id/friends' => 'users#getFriends'
+        get ':id/follows' => 'users#getFollows'
+        get ':id/followers' => 'users#getFollowers'
       end
     end
   end

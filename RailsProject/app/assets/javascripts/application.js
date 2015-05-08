@@ -17,6 +17,8 @@
 //= require ./player/wavesurfer.min.js
 //= require ./player/main.js
 //= require ./tools/sha256.js
+//= require ./tools/messenger.min.js
+//= require ./tools/messenger-theme-future.js
 //= require websocket_rails/main
 //= require angular
 //= require angular-cookies
@@ -25,9 +27,12 @@
 //= require ./AngularJS/app.js.erb
 //= require ./AngularJS/controllers/ChatController.js
 //= require ./AngularJS/controllers/UsersController.js
+//= require ./AngularJS/directives/clickOutside.js
 //= require ./AngularJS/directives/loading.js
+//= require ./AngularJS/directives/submitInput.js
 //= require ./AngularJS/services/SecureAuth.js
 //= require ./AngularJS/services/HTTPService.js
+//= require ./AngularJS/services/NotificationService.js
 // require_tree .
 
 $(function(){ $(document).foundation(); });

@@ -16,7 +16,9 @@ module API
     # 
     def index
     	begin
-        @returnValue = { content: Influences.all.as_json(:include => :genres) }
+        @returnValue = { content: Influences.all.as_json(:include => {
+                                                            :genres => { :only => Genre.miniKey }
+                                                          }, :only => Influence.miniKey) }
         if (@returnValue[:content].size == 0)
           codeAnswer 202
         else

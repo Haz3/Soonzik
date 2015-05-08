@@ -78,7 +78,7 @@ module API
           if (user && user.valid_password?(@password))
             codeAnswer 200
             @returnValue = { content: user.as_json(:include => {
-                                                                  :address => {},
+                                                                  :address => { only: Address.miniKey },
                                                                   :friends => { only: User.miniKey },
                                                                   :follows => { only: User.miniKey }
                                                                 },
@@ -159,7 +159,7 @@ module API
           if (identity != nil && Digest::SHA256.hexdigest(@uid.to_s + identity.token + Identity::SALT) == @encrypted_key && isValidToken?(@token, @provider))
             codeAnswer 200
             @returnValue = { content: identity.user.as_json(:include => {
-                                                                  :address => {},
+                                                                  :address => { only: Address.miniKey },
                                                                   :friends => { only: User.miniKey },
                                                                   :follows => { only: User.miniKey }
                                                                 },
@@ -170,57 +170,6 @@ module API
           else
             codeAnswer 502
             @httpCode = :not_found
-          end
-        rescue
-          codeAnswer 504
-          @httpCode = :service_unavailable
-        end
-      else
-        codeAnswer 502
-        @httpCode = :not_found
-      end
-      sendJson
-    end
-
-    #
-    # Check if a facebook user is authenticate and retrive its informations
-    # 
-    # DEPRECATED FOR THE MOMENT
-    #
-    # Route : /loginFB/:token [POST]
-    #
-    # ==== Options
-    # 
-    # * +token+ - Token Facebook
-    # * +email+ - GET variable -> The email of the user who provides the token
-    # 
-    # ===== HTTP VALUE
-    # 
-    # We don't care, it's deprecated
-    # 
-    def loginFB
-      if (defined?(@email) && defined?(@token))
-        begin
-          url = "https://graph.facebook.com/oauth/access_token_info?access_token="
-          uri = URI.parse(url + @token)
-          http = Net::HTTP.new(uri.host, uri.port)
-          http.use_ssl = true
-          http.verify_mode = OpenSSL::SSL::VERIFY_NONE
-          request = Net::HTTP::Get.new(uri.request_uri)
-          response = http.request(request)
-          hash = JSON.parse(response.body)
-          if (hash != nil && hash.has_key?("error"))
-            codeAnswer 502
-            @httpCode = :not_found
-          else
-            u = User.find_by(email: @email)
-            if (u == nil)
-              codeAnswer 502
-              @httpCode = :not_found
-            else
-              @returnValue = { content: u.as_json(:include => :address) }
-              codeAnswer 200
-            end
           end
         rescue
           codeAnswer 504

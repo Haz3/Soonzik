@@ -22,7 +22,7 @@ module API
         														:artist_one => { :only => User.miniKey },
         														:artist_two => { :only => User.miniKey },
         														:votes => {}
-        													}) }
+        													}, :only => Battle.miniKey ) }
         if (@returnValue[:content].size == 0)
           codeAnswer 202
         else
@@ -60,7 +60,7 @@ module API
           														:artist_one => { :only => User.miniKey },
           														:artist_two => { :only => User.miniKey },
           														:votes => {}
-          													}) }
+          													}, :only => Battle.miniKey) }
           codeAnswer 200
         end
       rescue
@@ -161,7 +161,7 @@ module API
                                     :artist_one => { :only => User.miniKey },
                                     :artist_two => { :only => User.miniKey },
                                     :votes => {}
-                                  }) }
+                                  }, :only => Battle.miniKey) }
 
         if (battle_object.size == 0)
           codeAnswer 202

@@ -7,6 +7,11 @@ class Newstext < ActiveRecord::Base
   validates :news, :content, :title, :language, presence: true
   validates :title, length: { minimum: 4, maximum: 30 }
 
+  # Filter of information for the API
+  def self.miniKey
+  	[:id, :title, :content, :language]
+  end
+  
   # The strong parameters to save or update object
   def self.newstext_params(parameters)
     parameters.require(:newstext).permit(:content, :title, :language, :news_id)

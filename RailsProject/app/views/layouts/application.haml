@@ -5,10 +5,8 @@
     %base{href: "/"}
     %meta{ :name => "viewport", :content => "width=device-width, initial-scale=1.0" }
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
-    = stylesheet_link_tag    "chats", media: 'all', 'data-turbolinks-track' => true if user_signed_in?
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
     = javascript_include_tag @controller, 'data-turbolinks-track' => true if @controller != ""
-    = javascript_include_tag "chats", 'data-turbolinks-track' => true if user_signed_in?
     = javascript_include_tag "vendor/modernizr"
     = csrf_meta_tags
 
@@ -56,21 +54,17 @@
                     %a.button.expand.radius{:href => "#", :class => "sign-up"} Sign Up
                   %li
                     %a.button.secondary.expand.radius{:href => new_user_session_path, :class => "log-in info"} Log In
-    %main
+    %main.row
       .large-12{"ng-view" => true}
-      /=yield
+      %hr
+      %h1 
+        Ce qui est ci dessus est d'angular.
+        %br
+        En dessous la vue "normale" (à migrer)
+      %hr
+      =yield
       - if user_signed_in?
-        #chat{ "ng-controller" => "ChatCtrl" }
-          %p="Connected friends"
-          %ul
-            %li{ "ng-repeat" => "friend in friends", "data-id" => "{{ friend.id }}" }
-              %span{ "ng-click" => "open_chat(friend)" }= "{{ friend.username }}"
-          %hr
-          %p="Other friends"
-          %ul
-            %li{ "ng-repeat" => "friend in friends", "data-id" => "{{ friend.id }}" }
-              %span{ "ng-click" => "open_chat(friend)" }= "{{ friend.username }}"
-          %input{:type => 'text', :placeholder => 'Search a friend'}
+        #chat{ "ng-include" => "'#{asset_path('AngularJS/views/chat.html.haml')}'" }
 
     %footer
       .container
@@ -94,4 +88,3 @@
             #button-player-right.large-12.small-9
               =image_tag "playlist.png"
               =image_tag "social.png"
-    = stylesheet_link_tag    "chats", media: 'all', 'data-turbolinks-track' => true if user_signed_in?

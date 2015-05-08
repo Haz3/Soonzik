@@ -20,9 +20,7 @@ module API
       	if (@security)
 	        u = User.find_by_id(@id)
 
-	        # algo de création de la suggestion
-
-	        suggestion = {}
+	        suggestion = Music.suggest(u)
 
 	        if (!suggestion)
 	          codeAnswer 502

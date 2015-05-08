@@ -18,14 +18,14 @@ module API
     #
     # ===== HTTP VALUE
     # 
-    # - +200+ - In case of success, return a list of musics including its user and music
+    # - +200+ - In case of success, return a list of musics including its user, album and genre
     # - +503+ - Error from server
     # 
     def index
       begin
         @returnValue = { content: Music.all.as_json(:only => Music.miniKey, :include => {
-                                                                                          :album => {},
-                                                                                          :genres => {},
+                                                                                          :album => { :only => Album.miniKey },
+                                                                                          :genres => { :only => Genre.miniKey },
                                                                                           :user => {:only => User.miniKey}
                                                                                         }) }
         if (@returnValue[:content].size == 0)
@@ -60,8 +60,8 @@ module API
           defineHttp :not_found
         else
           @returnValue = { content: music.as_json(:only => Music.miniKey, :include => {
-                                      :album => {},
-                                      :genres => {},
+                                      :album => { :only => Album.miniKey },
+                                      :genres => { :only => Genre.miniKey },
                                       :user => {:only => User.miniKey}
                                       }) }
           codeAnswer 200
@@ -161,8 +161,8 @@ module API
         end
 
         @returnValue = { content: music_object.as_json(:only => Music.miniKey, :include => {
-                                      :album => {},
-                                      :genres => {},
+                                      :album => { :only => Album.miniKey },
+                                      :genres => { :only => Genre.miniKey },
                                       :user => {:only => User.miniKey}
                                       }) }
 

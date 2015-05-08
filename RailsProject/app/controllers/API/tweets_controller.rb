@@ -22,7 +22,8 @@ module API
     # 
     def index
       begin
-        @returnValue = { content: Tweet.all.as_json(:include => { :user => { only: User.miniKey } }) }
+        @returnValue = { content: Tweet.all.as_json(:include => { :user => { only: User.miniKey } }
+                                                    :only => Tweet.miniKey) }
         if (@returnValue[:content].size == 0)
           codeAnswer 202
         else
@@ -56,7 +57,8 @@ module API
           codeAnswer 502
           defineHttp :not_found
         else
-          @returnValue = { content: tweets.as_json(:include => { :user => { only: User.miniKey } }) }
+          @returnValue = { content: tweets.as_json(:include => { :user => { only: User.miniKey } }
+                                                    :only => Tweet.miniKey) }
           codeAnswer 200
         end
       rescue
@@ -86,9 +88,8 @@ module API
         if (@security)
           tweet = Tweet.new(Tweet.tweet_params params)
           if (tweet.save)
-            @returnValue = { content: tweet.as_json(:include => {
-                                                                  :user => { only: User.miniKey }
-                                                                }) }
+            @returnValue = { content: tweet.as_json(:include => { :user => { only: User.miniKey } }
+                                                    :only => Tweet.miniKey) }
             codeAnswer 201
             defineHttp :created
           else
@@ -194,9 +195,8 @@ module API
           tweet_object = tweet_object.offset(@offset.to_i)
         end
 
-        @returnValue = { content: tweet_object.as_json(:include => {
-                                                                    :user => { only: User.miniKey }
-                                                                  }) }
+        @returnValue = { content: tweet_object.as_json(:include => { :user => { only: User.miniKey } }
+                                                    :only => Tweet.miniKey) }
 
         if (tweet_object.size == 0)
           codeAnswer 202

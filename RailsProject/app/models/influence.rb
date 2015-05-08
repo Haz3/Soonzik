@@ -7,6 +7,11 @@ class Influence < ActiveRecord::Base
 
   validates :name, presence: true, format: /([A-Za-z]+)/, uniqueness: true
 
+  # Filter of information for the API
+  def self.miniKey
+  	[:id, :name]
+  end
+
   # The strong parameters to save or update object
   def self.influence_params(parameters)
     parameters.require(:influence).permit(:name)

@@ -25,7 +25,7 @@ module API
                                                                                           },
                                                                               :only => Album.miniKey
                                                                             }
-                                                                  }) }
+                                                                  }, :only => Pack.miniKey) }
         if (@returnValue[:content].size == 0)
           codeAnswer 202
         else
@@ -66,7 +66,7 @@ module API
                                                                                           },
                                                                               :only => Album.miniKey
                                                                             }
-                                                                  }) }
+                                                                  }, :only => Pack.miniKey) }
           codeAnswer 200
         end
       rescue
@@ -170,7 +170,7 @@ module API
                                                                                           },
                                                                               :only => Album.miniKey
                                                                             }
-                                                                  }) }
+                                                                  }, :only => Pack.miniKey) }
 
         if (pack_object.size == 0)
           codeAnswer 202

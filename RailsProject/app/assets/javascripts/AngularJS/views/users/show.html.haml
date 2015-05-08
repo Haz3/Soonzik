@@ -25,46 +25,46 @@
           %i.step.fi-social-google-plus.size-42
     .large-12.large-centered.columns{ 'ng-if' => 'show.user.isArtist' }
       .top-songs
-        .h1.subheader
+        %h1.subheader
           Top Songs
         %table.radius
           %tbody.radius
             %tr{ 'ng-repeat' => 'song in show.user.topFive track by $index' }
               %td{:width => '50'}
                 {{ $index + 1 }} 
-              %td{:width => '1200'}
-                {{song.title}}
+              %td{:width => '1000'}
+                {{song.music.title}}
               %td{:width => '150'}
-                {{song.duration}}
+                {{song.music.duration}}
               %td{:width => '50'}
-                {{song.price}}
+                {{song.music.price}}
+              %td{:width => '200'}
+                %i.fi-star{ "ng-repeat" => "n in range(song.note)" }
               %td{:width => '50'} +
       .albums
-        .h1.subheader
+        %h1.subheader
           Albums
-          .small-6-columns{ 'ng-repeat' => 'album in show.user.albums track by $index' }
-            .panel.left
+          .row{ 'ng-repeat' => 'album in show.user.albums track by $index' }
+            .panel.clearfix
               %img{ "ng-src" => '{{album.image}}' }
               %table.right
+                %thead
+                  %th{ colspan: '5' } {{album.title}}
                 %tbody
-                  %th
-                    {{album.title}}
-                    %tr{ 'ng-repeat' => 'song in topFive track by $index' }
-                      %td{:width => '50'}
-                        {{$index + 1 }}
-                      %td{:width => '350'}
-                        {{song.title}}
-                      %td{:width => '100'}
-                        {{song.duration}}
-                      %td{:width => '50'}
-                        {{song.price}}
-                      %td{:width => '50'} +
-              .divider
-                Année 2014
-                %br
-                  {{ show.user.username }}
+                  %tr{ 'ng-repeat' => 'song in album.musics track by $index' }
+                    %td{:width => '50'}
+                      {{$index + 1 }}
+                    %td{:width => '350'}
+                      {{song.title}}
+                    %td{:width => '100'}
+                      {{song.duration}}
+                    %td{:width => '50'}
+                      {{song.price}}
+                    %td{:width => '50'} +
+              %hr
+              %p {{ album.yearProd }} - {{ show.user.username }}
       .packsImplicated
-        .h1.subheader
+        %h1.subheader
           Packs
         .panel
           Packs dans lequel est présent l'artiste

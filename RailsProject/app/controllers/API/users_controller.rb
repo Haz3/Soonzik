@@ -8,9 +8,17 @@ module API
   # * save        [post]
   # * update      [post] - SECURE
   # * getmusics   [get] - SECURE
+  # * isartist    [get]
+  # * follow      [post] - SECURE
+  # * unfollow    [post] - SECURE
+  # * addfriend   [post] - SECURE
+  # * delfriend   [post] - SECURE
+  # * getFriends  [get]
+  # * getFollows  [get]
+  # * getFollowers[get]
   #
   class UsersController < ApisecurityController
-    before_action :checkKey, only: [:getmusics, :save, :update]
+    before_action :checkKey, only: [:getmusics, :save, :update, :follow, :unfollow, :addfriend, :delfriend]
 
   	# Retrieve all the users
     #
@@ -18,17 +26,12 @@ module API
     #
     # ===== HTTP VALUE
     # 
-    # - +200+ - In case of success, return a list of users including its address, friends and follow
+    # - +200+ - In case of success, return a list of users
     # - +503+ - Error from server
     # 
     def index
       begin
-        @returnValue = { content: User.all.as_json(:include => {
-                                                                  :address => {},
-                                                                  :friends => { only: User.miniKey },
-                                                                  :follows => { only: User.miniKey }
-                                                                },
-                                                    :only => User.miniKey) }
+        @returnValue = { content: User.all.as_json(:only => User.miniKey) }
         if (@returnValue[:content].size == 0)
           codeAnswer 202
         else
@@ -51,7 +54,7 @@ module API
     # 
     # ===== HTTP VALUE
     # 
-    # - +200+ - In case of success, return an user including its address, friends and follows
+    # - +200+ - In case of success, return an user
     # - +404+ - Can't find the user, the id is probably wrong
     # - +503+ - Error from server
     # 
@@ -62,12 +65,8 @@ module API
           codeAnswer 502
           defineHttp :not_found
         else
-          @returnValue = { content: user.as_json(:include => {
-                                                                  :address => {},
-                                                                  :friends => { only: User.miniKey },
-                                                                  :follows => { only: User.miniKey }
-                                                                },
-                                                    :only => User.bigKey) }
+          @returnValue = { content: user.as_json(:only => User.bigKey, :include => { :friends => { :only => User.miniKey }
+            }) }
           codeAnswer 200
         end
       rescue
@@ -97,7 +96,7 @@ module API
     #
     # ===== HTTP VALUE
     # 
-    # - +200+ - In case of success, return a list of users including its address, friends and follows
+    # - +200+ - In case of success, return a list of users
     # - +503+ - Error from server
     # 
     def find
@@ -164,12 +163,7 @@ module API
           user_object = user_object.offset(@offset.to_i)
         end
 
-        @returnValue = { content: user_object.as_json(:include => {
-                                                                  :address => {},
-                                                                  :friends => { only: User.miniKey },
-                                                                  :follows => { only: User.miniKey }
-                                                                },
-                                                    :only => User.miniKey) }
+        @returnValue = { content: user_object.as_json(:only => User.miniKey) }
 
         if (user_object.size == 0)
           codeAnswer 202
@@ -318,6 +312,361 @@ module API
       sendJson
     end
 
+    # To get all the musics buy by the user
+    #
+    # Route : /users/:id/isartist
+    #
+    # ===== HTTP VALUE
+    # 
+    # - +200+ - In case of success, return an hash with the key "artist" to know if it is one or not, and if yes, the list of albums & musics of him
+    # - +404+ - The user doesn't exist
+    # - +503+ - Error from server
+    # 
+    def isArtist
+      begin
+        u = User.find_by_id(@id)
+
+        if (!u)
+          codeAnswer 502
+          defineHttp :not_found
+        else
+          hash = { artist: u.isArtist? }
+          if hash[:artist]
+            hash[:albums] = JSON.parse(u.albums.to_json(:only => Album.miniKey, :include => {
+                                                musics: { only: Music.miniKey }
+                                              } ))
+            topFive = u.giveTopFive
+            hash[:topFive] = []
+            topFive.each { |music|
+              hash[:topFive] << { note: music[:note], music: JSON.parse(music[:object].to_json(only: Music.miniKey, :include => {
+                  album: { only: Album.miniKey }
+                })) }
+            }
+          end
+          @returnValue = { content: hash }
+          codeAnswer 200
+        end
+      rescue
+        codeAnswer 504
+        defineHttp :service_unavailable
+      end
+      sendJson
+    end
+
+    # To follow someone
+    #
+    # Route : /users/follow
+    #
+    # ==== Options
+    # 
+    # * +follow_id+ - id of the user you want to follow
+    #
+    # ===== HTTP VALUE
+    # 
+    # - +200+ - In case of success
+    # - +401+ - It is not a secured transaction
+    # - +404+ - The user doesn't exist
+    # - +405+ - You already follow this user
+    # - +503+ - Error from server
+    # 
+    def follow
+      begin
+        if (@security)
+          u = User.find_by_id(@user_id)
+          toFollow = User.find_by_id(@follow_id)
+
+          if (!u || !toFollow)
+            codeAnswer 502
+            defineHttp :not_found
+          else
+            code = 201
+            http = :created
+            u.follows.each { |follow|
+              if follow == toFollow
+                code = 405
+                http = :method_not_allowed
+              end
+            }
+            if code == 201
+              u.follows << toFollow
+              codeAnswer 201
+            else
+              codeAnswer 503
+            end
+            codeAnswer code
+            defineHttp http
+          end
+        else
+          codeAnswer 500
+          defineHttp :forbidden
+        end
+      rescue
+        codeAnswer 504
+        defineHttp :service_unavailable
+      end
+      sendJson
+    end
+
+    # To unfollow someone
+    #
+    # Route : /users/unfollow
+    #
+    # ==== Options
+    # 
+    # * +follow_id+ - id of the user you want to follow
+    #
+    # ===== HTTP VALUE
+    # 
+    # - +200+ - In case of success
+    # - +401+ - It is not a secured transaction
+    # - +404+ - The user doesn't exist
+    # - +405+ - You don't follow this user
+    # - +503+ - Error from server
+    # 
+    def unfollow
+      begin
+        if (@security)
+          u = User.find_by_id(@user_id)
+          toFollow = User.find_by_id(@follow_id)
+
+          if (!u || !toFollow)
+            codeAnswer 502
+            defineHttp :not_found
+          else
+            code = 405
+            http = :method_not_allowed
+            u.follows.each { |follow|
+              if follow == toFollow
+                code = 200
+                http = :ok
+              end
+            }
+            if code == 200
+              u.follows.delete(toFollow)
+              codeAnswer 200
+            else
+              codeAnswer 502
+            end
+            codeAnswer code
+            defineHttp http
+          end
+        else
+          codeAnswer 500
+          defineHttp :forbidden
+        end
+      rescue
+        codeAnswer 504
+        defineHttp :service_unavailable
+      end
+      sendJson
+    end
+
+    # To add a friend
+    #
+    # Route : /users/addfriend
+    #
+    # ==== Options
+    # 
+    # * +friend_id+ - id of the user you want to add to your friendlist
+    #
+    # ===== HTTP VALUE
+    # 
+    # - +200+ - In case of success
+    # - +401+ - It is not a secured transaction
+    # - +404+ - The user doesn't exist
+    # - +405+ - You already have this user in your friendlist
+    # - +503+ - Error from server
+    # 
+    def addfriend
+      begin
+        if (@security)
+          u = User.find_by_id(@user_id)
+          friend = User.find_by_id(@friend_id)
+
+          if (!u || !friend)
+            codeAnswer 502
+            defineHttp :not_found
+          else
+            code = 201
+            http = :created
+            u.friends.each { |friendInList|
+              if friendInList == friend
+                code = 405
+                http = :method_not_allowed
+              end
+            }
+            if code == 201
+              u.friends << friend
+              friend.friends << u
+              codeAnswer 201
+            else
+              codeAnswer 502
+            end
+            codeAnswer code
+            defineHttp http
+          end
+        else
+          codeAnswer 500
+          defineHttp :forbidden
+        end
+      rescue
+        codeAnswer 504
+        defineHttp :service_unavailable
+      end
+      sendJson
+    end
+
+    # To delete a friend
+    #
+    # Route : /users/delfriend
+    #
+    # ==== Options
+    # 
+    # * +friend_id+ - id of the user you want to delete of your friendlist
+    #
+    # ===== HTTP VALUE
+    # 
+    # - +200+ - In case of success
+    # - +401+ - It is not a secured transaction
+    # - +404+ - The user doesn't exist
+    # - +405+ - You don't have this user in your friendlist
+    # - +503+ - Error from server
+    # 
+    def delfriend
+      begin
+        if (@security)
+          u = User.find_by_id(@user_id)
+          friend = User.find_by_id(@friend_id)
+
+          if (!u || !friend)
+            codeAnswer 502
+            defineHttp :not_found
+          else
+            code = 405
+            http = :method_not_allowed
+            u.friends.each { |friendInList|
+              if friendInList == friend
+                code = 200
+                http = :ok
+              end
+            }
+            if code == 200
+              u.friends.delete(friend)
+              friend.friends.delete(u)
+              codeAnswer 200
+            else
+              codeAnswer 502
+            end
+            codeAnswer code
+            defineHttp http
+          end
+        else
+          codeAnswer 500
+          defineHttp :forbidden
+        end
+      rescue
+        codeAnswer 504
+        defineHttp :service_unavailable
+      end
+      sendJson
+    end
+
+    # To get the friends of an user
+    #
+    # Route : /users/:id/friends
+    #
+    # ==== Options
+    # 
+    # * +id+ - id of the user you want to get the friendlist
+    #
+    # ===== HTTP VALUE
+    # 
+    # - +200+ - In case of success, return an array of users
+    # - +404+ - The user doesn't exist
+    # - +503+ - Error from server
+    # 
+    def getFriends
+      begin
+        u = User.find_by_id(@id)
+
+        if (!u)
+          codeAnswer 502
+          defineHttp :not_found
+        else
+          @returnValue = { content: u.friends.as_json(:only => User.miniKey) }
+          codeAnswer 200
+        end
+      rescue
+        codeAnswer 504
+        defineHttp :service_unavailable
+      end
+      sendJson
+    end
+
+    # To get the follows of an user
+    #
+    # Route : /users/:id/follows
+    #
+    # ==== Options
+    # 
+    # * +id+ - id of the user you want to get the follows
+    #
+    # ===== HTTP VALUE
+    # 
+    # - +200+ - In case of success, return an array of users
+    # - +404+ - The user doesn't exist
+    # - +503+ - Error from server
+    # 
+    def getFollows
+      begin
+        u = User.find_by_id(@id)
+
+        if (!u)
+          codeAnswer 502
+          defineHttp :not_found
+        else
+          @returnValue = { content: u.follows.as_json(:only => User.miniKey) }
+          codeAnswer 200
+        end
+      rescue
+        codeAnswer 504
+        defineHttp :service_unavailable
+      end
+      sendJson
+    end
+
+    # To get the followers of an user
+    #
+    # Route : /users/:id/followers
+    #
+    # ==== Options
+    # 
+    # * +id+ - id of the user you want to get the followers
+    #
+    # ===== HTTP VALUE
+    # 
+    # - +200+ - In case of success, return an array of users
+    # - +404+ - The user doesn't exist
+    # - +503+ - Error from server
+    # 
+    def getFollowers
+      begin
+        u = User.find_by_id(@id)
+
+        if (!u)
+          codeAnswer 502
+          defineHttp :not_found
+        else
+          @returnValue = { content: u.followers.as_json(:only => User.miniKey) }
+          codeAnswer 200
+        end
+      rescue
+        codeAnswer 504
+        defineHttp :service_unavailable
+      end
+      sendJson
+    end
+
     private
     # Common code for save/update (private method)
     # 
@@ -342,9 +691,7 @@ module API
 
           if ((update_user && update_address))
             @returnValue = { content: user.as_json(:include => {
-                                                                  :address => {},
-                                                                  :friends => { only: User.miniKey },
-                                                                  :follows => { only: User.miniKey }
+                                                                  :address => { :only => Address.miniKey }
                                                                 },
                                                     :only => User.miniKey) }
             codeAnswer 201
@@ -366,9 +713,7 @@ module API
           user.skip_confirmation!
           if (user.save!)
             @returnValue = { content: user.as_json(:include => {
-                                                                  :address => {},
-                                                                  :friends => { only: User.miniKey },
-                                                                  :follows => { only: User.miniKey }
+                                                                  :address => { :only => Address.miniKey }
                                                                 },
                                                     :only => User.miniKey) }
             codeAnswer 201

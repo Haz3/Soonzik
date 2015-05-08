@@ -34,8 +34,10 @@ class UsersController < ApplicationController
 
   # GET/PATCH /users/:id/finish_signup
   def finish_signup
+    if current_user && ( current_user.email_verified?() && current_user.username_verified?())
+      redirect_to root_path
     # authorize! :update, @user 
-    if request.patch? && params[:user] #&& params[:user][:email]
+    elsif request.patch? && params[:user] #&& params[:user][:email]
       @user.skip_reconfirmation!
       if @user.update(User.user_params params)
         @user.skip_reconfirmation!

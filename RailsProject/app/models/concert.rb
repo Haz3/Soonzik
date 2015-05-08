@@ -8,6 +8,11 @@ class Concert < ActiveRecord::Base
   validates :user, :address, :planification, presence: true
   validates :planification, format: /(\d{4})-(\d{2})-(\d{2}) (\d{2}):(\d{2}):(\d{2})/
 
+  # Filter of information for the API
+  def self.miniKey
+  	[:id, :planification, :url]
+  end
+
   # The strong parameters to save or update object
   def self.concert_params(parameters)
     parameters.require(:concert).permit(:user_id, :planification, :address_id, :url)

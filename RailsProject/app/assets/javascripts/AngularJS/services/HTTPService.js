@@ -4,7 +4,16 @@ SoonzikApp.factory('HTTPService', ['$http', '$location', function ($http, $locat
 
   return {
       getProfile: function (user_id) {
-          return $http.get("http://api." + url + '/users/' + user_id);
+        return $http.get("http://api." + url + '/users/' + user_id);
+      },
+      getFriends: function (user_id) {
+      	return $http.get("http://api." + url + '/users/' + user_id + '/friends')
+      },
+      getFollowers: function (user_id) {
+      	return $http.get("http://api." + url + '/users/' + user_id + '/followers')
+      },
+      isArtist: function (user_id) {
+      	return $http.get("http://api." + url + '/users/' + user_id + '/isartist')
       }
   }
 }]);

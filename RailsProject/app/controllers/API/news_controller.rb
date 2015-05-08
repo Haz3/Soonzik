@@ -22,11 +22,11 @@ module API
     def index
       begin
         @returnValue = { content: News.all.as_json(:include => {
-                                                                  :user => { :only => User.miniKey },
-                                                                  :newstexts => {},
-                                                                  :attachments => {},
-                                                                  :tags => {}
-                                                                }) }
+                                                      :user => { :only => User.miniKey },
+                                                      :newstexts => { :only => Newstext.miniKey },
+                                                      :attachments => { :only => Attachment.miniKey },
+                                                      :tags => { :only => Tag.miniKey }
+                                                    }, :only => News.miniKey) }
         if (@returnValue[:content].size == 0)
           codeAnswer 202
         else
@@ -61,11 +61,11 @@ module API
           defineHttp :not_found
         else
           @returnValue = { content: news.as_json(:include => {
-                                                                :user => { :only => User.miniKey },
-                                                                :newstexts => {},
-                                                                :attachments => {},
-                                                                :tags => {}
-                                                              }) }
+                                                  :user => { :only => User.miniKey },
+                                                  :newstexts => { :only => Newstext.miniKey },
+                                                  :attachments => { :only => Attachment.miniKey },
+                                                  :tags => { :only => Tag.miniKey }
+                                                }, :only => News.miniKey) }
           codeAnswer 200
         end
       rescue
@@ -163,11 +163,11 @@ module API
         end
 
         @returnValue = { content: new_object.as_json(:include => {
-                                                                    :user => { :only => User.miniKey },
-                                                                    :newstexts => {},
-                                                                    :attachments => {},
-                                                                    :tags => {}
-                                                                  }) }
+                                                      :user => { :only => User.miniKey },
+                                                      :newstexts => { :only => Newstext.miniKey },
+                                                      :attachments => { :only => Attachment.miniKey },
+                                                      :tags => { :only => Tag.miniKey }
+                                                    }, :only => News.miniKey) }
 
         if (new_object.size == 0)
           codeAnswer 202

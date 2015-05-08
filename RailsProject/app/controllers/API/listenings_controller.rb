@@ -24,7 +24,7 @@ module API
         @returnValue = { content: Listening.all.as_json(:include => {
                                                                       :user => { :only => User.miniKey },
                                                                       :music => { :only => Music.miniKey }
-                                                                    }) }
+                                                                    }, :only => Listening.miniKey) }
         if (@returnValue[:content].size == 0)
           codeAnswer 202
         else
@@ -61,7 +61,7 @@ module API
           @returnValue = { content: listening.as_json(:include => {
                                                                     :user => { :only => User.miniKey },
                                                                     :music => { :only => Music.miniKey }
-                                                                  }) }
+                                                                  }, :only => Listening.miniKey) }
           codeAnswer 200
         end
       rescue
@@ -161,7 +161,7 @@ module API
         @returnValue = { content: listening_object.as_json(:include => {
                                                                           :user => { :only => User.miniKey },
                                                                           :music => { :only => Music.miniKey }
-                                                                        }) }
+                                                                        }, :only => Listening.miniKey) }
 
         if (listening_object.size == 0)
           codeAnswer 202
@@ -201,7 +201,7 @@ module API
             @returnValue = { content: listening.as_json(:include => {
                                                                       :user => { :only => User.miniKey },
                                                                       :music => { :only => Music.miniKey }
-                                                                    }) }
+                                                                    }, :only => Listening.miniKey) }
             codeAnswer 201
             defineHttp :created
           else

@@ -3,11 +3,15 @@ SoonzikApp = angular.module('SoonzikApp', ['ngRoute', 'ngCookies', 'ngResource']
 
 SoonzikApp.config(['$routeProvider', '$locationProvider',
   function($routeProvider, $locationProvider) {
-  	$locationProvider.html5Mode(true);
-    $routeProvider.
-      when('/users/:id', {
-          templateUrl: '<%= asset_path("AngularJS/views/users/show.html.haml") %>',
-          controller: 'UsersCtrl'
-      });
+  	var url = document.location.pathname;
+
+  	if (!/\/users\/[0-9]+\/finish_signup/.test(url)) {
+	  	$locationProvider.html5Mode(true);
+	    $routeProvider.when('/users/:id', {
+	      templateUrl: '<%= asset_path("AngularJS/views/users/show.html.haml") %>',
+	      controller: 'UsersCtrl'
+	    });
+	  }
+	  
   }
 ]);

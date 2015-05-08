@@ -16,7 +16,9 @@ module API
     # 
     def index
     	begin
-        @returnValue = { content: Genre.all.as_json(:include => :influences) }
+        @returnValue = { content: Genre.all.as_json(:include => {
+                                                        :influences => { :only => Influence.miniKey }
+                                                    }, :only => Genre.miniKey) }
         if (@returnValue[:content].size == 0)
           codeAnswer 202
         else
@@ -51,9 +53,9 @@ module API
           defineHttp :not_found
         else
           @returnValue = { content: genre.as_json(:include => {
-                                      :influences => {},
+                                      :influences => { :only => Influence.miniKey },
                                       :musics => { only: Music.miniKey}
-                                      }) }
+                                      }, :only => Genre.miniKey) }
           codeAnswer 200
         end
       rescue

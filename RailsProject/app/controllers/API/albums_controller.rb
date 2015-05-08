@@ -59,7 +59,7 @@ module API
           codeAnswer 502
           defineHttp :not_found
         else
-          @returnValue = { content: album.as_json(:include => {
+          @returnValue = { content: album.as_json(:only => Album.miniKey, :include => {
                                                               :musics => { :only => Music.miniKey},
                                                               :user => {:only => User.miniKey}
                                                               }) }
@@ -159,7 +159,7 @@ module API
           album_object = album_object.offset(@offset.to_i)
         end
 
-        @returnValue = { content: album_object.as_json(:include => {
+        @returnValue = { content: album_object.as_json(:only => Album.miniKey, :include => {
                                                                       :musics => {:only => Music.miniKey },
                                                                       :user => {:only => User.miniKey}
                                                                     }) }
