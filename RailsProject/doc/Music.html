@@ -195,7 +195,6 @@ and the validation Can provide some features linked to this model</p>
         <span class="ruby-comment"># If the genre is not in the hash, we init it, else we increment it </span>
         <span class="ruby-identifier">gPond</span>[<span class="ruby-identifier">genre_obj</span>] = (<span class="ruby-identifier">gPond</span>.<span class="ruby-identifier">has_key?</span>(<span class="ruby-identifier">genre_obj</span>)) <span class="ruby-operator">?</span> <span class="ruby-identifier">gPond</span>[<span class="ruby-identifier">genre_obj</span>] <span class="ruby-operator">+</span> <span class="ruby-value">1</span> <span class="ruby-operator">:</span> <span class="ruby-value">1</span>
       }
-      <span class="ruby-identifier">puts</span> <span class="ruby-identifier">music</span>.<span class="ruby-identifier">id</span>
       <span class="ruby-comment"># The music is already purchased so we don&#39;t have to suggest it</span>
       <span class="ruby-identifier">musicList</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">music</span> 
     }

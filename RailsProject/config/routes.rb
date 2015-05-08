@@ -13,7 +13,6 @@ Rails.application.routes.draw do
     get 'getSocialToken/:uid/:provider' => 'apisecurity#getSocialToken'
     post 'social-login' => 'apisecurity#socialLogin'
     post 'login' => 'apisecurity#login'
-    post 'loginFB/:token' => 'apisecurity#loginFB'
 
     resources :albums, only: [:index, :show] do #ok
       collection do

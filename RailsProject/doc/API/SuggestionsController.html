@@ -161,9 +161,7 @@ the list of action available :</p>
     <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@security</span>)
             <span class="ruby-identifier">u</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">find_by_id</span>(<span class="ruby-ivar">@id</span>)
 
-            <span class="ruby-comment"># algo de création de la suggestion</span>
-
-            <span class="ruby-identifier">suggestion</span> = {}
+            <span class="ruby-identifier">suggestion</span> = <span class="ruby-constant">Music</span>.<span class="ruby-identifier">suggest</span>(<span class="ruby-identifier">u</span>)
 
             <span class="ruby-keyword">if</span> (<span class="ruby-operator">!</span><span class="ruby-identifier">suggestion</span>)
               <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">502</span>

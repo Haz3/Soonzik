@@ -124,6 +124,22 @@ list of action available :</p>
 <p>update      [post] - SECURE</p>
 </li><li>
 <p>getmusics   [get] - SECURE</p>
+</li><li>
+<p>isartist    [get]</p>
+</li><li>
+<p>follow      [post] - SECURE</p>
+</li><li>
+<p>unfollow    [post] - SECURE</p>
+</li><li>
+<p>addfriend   [post] - SECURE</p>
+</li><li>
+<p>delfriend   [post] - SECURE</p>
+</li><li>
+<p>getFriends  [get]</p>
+</li><li>
+<p>getFollows  [get]</p>
+</li><li>
+<p><a href="get">getFollowers</a></p>
 </li></ul>
 		</section>
 
@@ -145,6 +161,161 @@ list of action available :</p>
 					<h3>Public Instance Methods</h3>
 				</header>
 
+								<a name="method-i-addfriend">anchor</a>
+				<div id="method-i-addfriend-doc" class="method">
+
+					<header>
+											<i class="icon-generic"></i>
+						<span class="method-name">addfriend</span><span 
+							class="method-args">()</span>
+										</header>
+
+					<div class="method-description">
+											<p>To add a friend</p>
+
+<p>Route : /users/addfriend</p>
+
+<h4 id="method-i-addfriend-label-Options">Options<span><a href="#method-i-addfriend-label-Options">&para;</a> <a href="#top">&uarr;</a></span></h4>
+<ul><li>
+<p><code>friend_id</code> - id of the user you want to add to your friendlist</p>
+</li></ul>
+
+<h5 id="method-i-addfriend-label-HTTP+VALUE">HTTP VALUE<span><a href="#method-i-addfriend-label-HTTP+VALUE">&para;</a> <a href="#top">&uarr;</a></span></h5>
+<ul><li>
+<p><code>200</code> - In case of success</p>
+</li><li>
+<p><code>401</code> - It is not a secured transaction</p>
+</li><li>
+<p><code>404</code> - The user doesn&#39;t exist</p>
+</li><li>
+<p><code>405</code> - You already have this user in your friendlist</p>
+</li><li>
+<p><code>503</code> - Error from server</p>
+</li></ul>					
+											<div class="method-source-code" id="addfriend-source">
+							<pre class="prettyprint linenums"><code 
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/users_controller.rb, line 480</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">addfriend</span>
+  <span class="ruby-keyword">begin</span>
+    <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@security</span>)
+      <span class="ruby-identifier">u</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">find_by_id</span>(<span class="ruby-ivar">@user_id</span>)
+      <span class="ruby-identifier">friend</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">find_by_id</span>(<span class="ruby-ivar">@friend_id</span>)
+
+      <span class="ruby-keyword">if</span> (<span class="ruby-operator">!</span><span class="ruby-identifier">u</span> <span class="ruby-operator">||</span> <span class="ruby-operator">!</span><span class="ruby-identifier">friend</span>)
+        <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">502</span>
+        <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:not_found</span>
+      <span class="ruby-keyword">else</span>
+        <span class="ruby-identifier">code</span> = <span class="ruby-value">201</span>
+        <span class="ruby-identifier">http</span> = <span class="ruby-value">:created</span>
+        <span class="ruby-identifier">u</span>.<span class="ruby-identifier">friends</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">friendInList</span><span class="ruby-operator">|</span>
+          <span class="ruby-keyword">if</span> <span class="ruby-identifier">friendInList</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">friend</span>
+            <span class="ruby-identifier">code</span> = <span class="ruby-value">405</span>
+            <span class="ruby-identifier">http</span> = <span class="ruby-value">:method_not_allowed</span>
+          <span class="ruby-keyword">end</span>
+        }
+        <span class="ruby-keyword">if</span> <span class="ruby-identifier">code</span> <span class="ruby-operator">==</span> <span class="ruby-value">201</span>
+          <span class="ruby-identifier">u</span>.<span class="ruby-identifier">friends</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">friend</span>
+          <span class="ruby-identifier">friend</span>.<span class="ruby-identifier">friends</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">u</span>
+          <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">201</span>
+        <span class="ruby-keyword">else</span>
+          <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">502</span>
+        <span class="ruby-keyword">end</span>
+        <span class="ruby-identifier">codeAnswer</span> <span class="ruby-identifier">code</span>
+        <span class="ruby-identifier">defineHttp</span> <span class="ruby-identifier">http</span>
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">500</span>
+      <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:forbidden</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">rescue</span>
+    <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">504</span>
+    <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:service_unavailable</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">sendJson</span>
+<span class="ruby-keyword">end</span></code></pre>
+						</div>
+										</div>
+
+					
+									</div>
+								<a name="method-i-delfriend">anchor</a>
+				<div id="method-i-delfriend-doc" class="method">
+
+					<header>
+											<i class="icon-generic"></i>
+						<span class="method-name">delfriend</span><span 
+							class="method-args">()</span>
+										</header>
+
+					<div class="method-description">
+											<p>To delete a friend</p>
+
+<p>Route : /users/delfriend</p>
+
+<h4 id="method-i-delfriend-label-Options">Options<span><a href="#method-i-delfriend-label-Options">&para;</a> <a href="#top">&uarr;</a></span></h4>
+<ul><li>
+<p><code>friend_id</code> - id of the user you want to delete of your
+friendlist</p>
+</li></ul>
+
+<h5 id="method-i-delfriend-label-HTTP+VALUE">HTTP VALUE<span><a href="#method-i-delfriend-label-HTTP+VALUE">&para;</a> <a href="#top">&uarr;</a></span></h5>
+<ul><li>
+<p><code>200</code> - In case of success</p>
+</li><li>
+<p><code>401</code> - It is not a secured transaction</p>
+</li><li>
+<p><code>404</code> - The user doesn&#39;t exist</p>
+</li><li>
+<p><code>405</code> - You don&#39;t have this user in your friendlist</p>
+</li><li>
+<p><code>503</code> - Error from server</p>
+</li></ul>					
+											<div class="method-source-code" id="delfriend-source">
+							<pre class="prettyprint linenums"><code 
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/users_controller.rb, line 535</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">delfriend</span>
+  <span class="ruby-keyword">begin</span>
+    <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@security</span>)
+      <span class="ruby-identifier">u</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">find_by_id</span>(<span class="ruby-ivar">@user_id</span>)
+      <span class="ruby-identifier">friend</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">find_by_id</span>(<span class="ruby-ivar">@friend_id</span>)
+
+      <span class="ruby-keyword">if</span> (<span class="ruby-operator">!</span><span class="ruby-identifier">u</span> <span class="ruby-operator">||</span> <span class="ruby-operator">!</span><span class="ruby-identifier">friend</span>)
+        <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">502</span>
+        <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:not_found</span>
+      <span class="ruby-keyword">else</span>
+        <span class="ruby-identifier">code</span> = <span class="ruby-value">405</span>
+        <span class="ruby-identifier">http</span> = <span class="ruby-value">:method_not_allowed</span>
+        <span class="ruby-identifier">u</span>.<span class="ruby-identifier">friends</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">friendInList</span><span class="ruby-operator">|</span>
+          <span class="ruby-keyword">if</span> <span class="ruby-identifier">friendInList</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">friend</span>
+            <span class="ruby-identifier">code</span> = <span class="ruby-value">200</span>
+            <span class="ruby-identifier">http</span> = <span class="ruby-value">:ok</span>
+          <span class="ruby-keyword">end</span>
+        }
+        <span class="ruby-keyword">if</span> <span class="ruby-identifier">code</span> <span class="ruby-operator">==</span> <span class="ruby-value">200</span>
+          <span class="ruby-identifier">u</span>.<span class="ruby-identifier">friends</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-identifier">friend</span>)
+          <span class="ruby-identifier">friend</span>.<span class="ruby-identifier">friends</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-identifier">u</span>)
+          <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">200</span>
+        <span class="ruby-keyword">else</span>
+          <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">502</span>
+        <span class="ruby-keyword">end</span>
+        <span class="ruby-identifier">codeAnswer</span> <span class="ruby-identifier">code</span>
+        <span class="ruby-identifier">defineHttp</span> <span class="ruby-identifier">http</span>
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">500</span>
+      <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:forbidden</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">rescue</span>
+    <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">504</span>
+    <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:service_unavailable</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">sendJson</span>
+<span class="ruby-keyword">end</span></code></pre>
+						</div>
+										</div>
+
+					
+									</div>
 								<a name="method-i-find">anchor</a>
 				<div id="method-i-find-doc" class="method">
 
@@ -182,14 +353,13 @@ Note : By default, if you precise no attribute, it will take every row</pre>
 
 <h5 id="method-i-find-label-HTTP+VALUE">HTTP VALUE<span><a href="#method-i-find-label-HTTP+VALUE">&para;</a> <a href="#top">&uarr;</a></span></h5>
 <ul><li>
-<p><code>200</code> - In case of success, return a list of users including its
-address, friends and follows</p>
+<p><code>200</code> - In case of success, return a list of users</p>
 </li><li>
 <p><code>503</code> - Error from server</p>
 </li></ul>					
 											<div class="method-source-code" id="find-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/users_controller.rb, line 103</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/users_controller.rb, line 102</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">find</span>
   <span class="ruby-keyword">begin</span>
     <span class="ruby-identifier">user_object</span> = <span class="ruby-keyword">nil</span>
@@ -254,12 +424,7 @@ address, friends and follows</p>
       <span class="ruby-identifier">user_object</span> = <span class="ruby-identifier">user_object</span>.<span class="ruby-identifier">offset</span>(<span class="ruby-ivar">@offset</span>.<span class="ruby-identifier">to_i</span>)
     <span class="ruby-keyword">end</span>
 
-    <span class="ruby-ivar">@returnValue</span> = { <span class="ruby-identifier">content</span><span class="ruby-operator">:</span> <span class="ruby-identifier">user_object</span>.<span class="ruby-identifier">as_json</span>(<span class="ruby-value">:include</span> =<span class="ruby-operator">&gt;</span> {
-                                                              <span class="ruby-value">:address</span> =<span class="ruby-operator">&gt;</span> {},
-                                                              <span class="ruby-value">:friends</span> =<span class="ruby-operator">&gt;</span> { <span class="ruby-identifier">only</span><span class="ruby-operator">:</span> <span class="ruby-constant">User</span>.<span class="ruby-identifier">miniKey</span> },
-                                                              <span class="ruby-value">:follows</span> =<span class="ruby-operator">&gt;</span> { <span class="ruby-identifier">only</span><span class="ruby-operator">:</span> <span class="ruby-constant">User</span>.<span class="ruby-identifier">miniKey</span> }
-                                                            },
-                                                <span class="ruby-value">:only</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">User</span>.<span class="ruby-identifier">miniKey</span>) }
+    <span class="ruby-ivar">@returnValue</span> = { <span class="ruby-identifier">content</span><span class="ruby-operator">:</span> <span class="ruby-identifier">user_object</span>.<span class="ruby-identifier">as_json</span>(<span class="ruby-value">:only</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">User</span>.<span class="ruby-identifier">miniKey</span>) }
 
     <span class="ruby-keyword">if</span> (<span class="ruby-identifier">user_object</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>)
       <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">202</span>
@@ -267,6 +432,238 @@ address, friends and follows</p>
       <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">200</span>
     <span class="ruby-keyword">end</span>
 
+  <span class="ruby-keyword">rescue</span>
+    <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">504</span>
+    <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:service_unavailable</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">sendJson</span>
+<span class="ruby-keyword">end</span></code></pre>
+						</div>
+										</div>
+
+					
+									</div>
+								<a name="method-i-follow">anchor</a>
+				<div id="method-i-follow-doc" class="method">
+
+					<header>
+											<i class="icon-generic"></i>
+						<span class="method-name">follow</span><span 
+							class="method-args">()</span>
+										</header>
+
+					<div class="method-description">
+											<p>To follow someone</p>
+
+<p>Route : /users/follow</p>
+
+<h4 id="method-i-follow-label-Options">Options<span><a href="#method-i-follow-label-Options">&para;</a> <a href="#top">&uarr;</a></span></h4>
+<ul><li>
+<p><code>follow_id</code> - id of the user you want to follow</p>
+</li></ul>
+
+<h5 id="method-i-follow-label-HTTP+VALUE">HTTP VALUE<span><a href="#method-i-follow-label-HTTP+VALUE">&para;</a> <a href="#top">&uarr;</a></span></h5>
+<ul><li>
+<p><code>200</code> - In case of success</p>
+</li><li>
+<p><code>401</code> - It is not a secured transaction</p>
+</li><li>
+<p><code>404</code> - The user doesn&#39;t exist</p>
+</li><li>
+<p><code>405</code> - You already follow this user</p>
+</li><li>
+<p><code>503</code> - Error from server</p>
+</li></ul>					
+											<div class="method-source-code" id="follow-source">
+							<pre class="prettyprint linenums"><code 
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/users_controller.rb, line 372</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">follow</span>
+  <span class="ruby-keyword">begin</span>
+    <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@security</span>)
+      <span class="ruby-identifier">u</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">find_by_id</span>(<span class="ruby-ivar">@user_id</span>)
+      <span class="ruby-identifier">toFollow</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">find_by_id</span>(<span class="ruby-ivar">@follow_id</span>)
+
+      <span class="ruby-keyword">if</span> (<span class="ruby-operator">!</span><span class="ruby-identifier">u</span> <span class="ruby-operator">||</span> <span class="ruby-operator">!</span><span class="ruby-identifier">toFollow</span>)
+        <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">502</span>
+        <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:not_found</span>
+      <span class="ruby-keyword">else</span>
+        <span class="ruby-identifier">code</span> = <span class="ruby-value">201</span>
+        <span class="ruby-identifier">http</span> = <span class="ruby-value">:created</span>
+        <span class="ruby-identifier">u</span>.<span class="ruby-identifier">follows</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">follow</span><span class="ruby-operator">|</span>
+          <span class="ruby-keyword">if</span> <span class="ruby-identifier">follow</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">toFollow</span>
+            <span class="ruby-identifier">code</span> = <span class="ruby-value">405</span>
+            <span class="ruby-identifier">http</span> = <span class="ruby-value">:method_not_allowed</span>
+          <span class="ruby-keyword">end</span>
+        }
+        <span class="ruby-keyword">if</span> <span class="ruby-identifier">code</span> <span class="ruby-operator">==</span> <span class="ruby-value">201</span>
+          <span class="ruby-identifier">u</span>.<span class="ruby-identifier">follows</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">toFollow</span>
+          <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">201</span>
+        <span class="ruby-keyword">else</span>
+          <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">503</span>
+        <span class="ruby-keyword">end</span>
+        <span class="ruby-identifier">codeAnswer</span> <span class="ruby-identifier">code</span>
+        <span class="ruby-identifier">defineHttp</span> <span class="ruby-identifier">http</span>
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">500</span>
+      <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:forbidden</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">rescue</span>
+    <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">504</span>
+    <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:service_unavailable</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">sendJson</span>
+<span class="ruby-keyword">end</span></code></pre>
+						</div>
+										</div>
+
+					
+									</div>
+								<a name="method-i-getFollowers">anchor</a>
+				<div id="method-i-getFollowers-doc" class="method">
+
+					<header>
+											<i class="icon-generic"></i>
+						<span class="method-name">getFollowers</span><span 
+							class="method-args">()</span>
+										</header>
+
+					<div class="method-description">
+											<p>To get the followers of an user</p>
+
+<p>Route : /users/:id/followers</p>
+
+<h4 id="method-i-getFollowers-label-Options">Options<span><a href="#method-i-getFollowers-label-Options">&para;</a> <a href="#top">&uarr;</a></span></h4>
+<ul><li>
+<p><code>id</code> - id of the user you want to get the followers</p>
+</li></ul>
+
+<h5 id="method-i-getFollowers-label-HTTP+VALUE">HTTP VALUE<span><a href="#method-i-getFollowers-label-HTTP+VALUE">&para;</a> <a href="#top">&uarr;</a></span></h5>
+<ul><li>
+<p><code>200</code> - In case of success, return an array of users</p>
+</li><li>
+<p><code>404</code> - The user doesn&#39;t exist</p>
+</li><li>
+<p><code>503</code> - Error from server</p>
+</li></ul>					
+											<div class="method-source-code" id="getFollowers-source">
+							<pre class="prettyprint linenums"><code 
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/users_controller.rb, line 652</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">getFollowers</span>
+  <span class="ruby-keyword">begin</span>
+    <span class="ruby-identifier">u</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">find_by_id</span>(<span class="ruby-ivar">@id</span>)
+
+    <span class="ruby-keyword">if</span> (<span class="ruby-operator">!</span><span class="ruby-identifier">u</span>)
+      <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">502</span>
+      <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:not_found</span>
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-ivar">@returnValue</span> = { <span class="ruby-identifier">content</span><span class="ruby-operator">:</span> <span class="ruby-identifier">u</span>.<span class="ruby-identifier">followers</span>.<span class="ruby-identifier">as_json</span>(<span class="ruby-value">:only</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">User</span>.<span class="ruby-identifier">miniKey</span>) }
+      <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">200</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">rescue</span>
+    <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">504</span>
+    <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:service_unavailable</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">sendJson</span>
+<span class="ruby-keyword">end</span></code></pre>
+						</div>
+										</div>
+
+					
+									</div>
+								<a name="method-i-getFollows">anchor</a>
+				<div id="method-i-getFollows-doc" class="method">
+
+					<header>
+											<i class="icon-generic"></i>
+						<span class="method-name">getFollows</span><span 
+							class="method-args">()</span>
+										</header>
+
+					<div class="method-description">
+											<p>To get the follows of an user</p>
+
+<p>Route : /users/:id/follows</p>
+
+<h4 id="method-i-getFollows-label-Options">Options<span><a href="#method-i-getFollows-label-Options">&para;</a> <a href="#top">&uarr;</a></span></h4>
+<ul><li>
+<p><code>id</code> - id of the user you want to get the follows</p>
+</li></ul>
+
+<h5 id="method-i-getFollows-label-HTTP+VALUE">HTTP VALUE<span><a href="#method-i-getFollows-label-HTTP+VALUE">&para;</a> <a href="#top">&uarr;</a></span></h5>
+<ul><li>
+<p><code>200</code> - In case of success, return an array of users</p>
+</li><li>
+<p><code>404</code> - The user doesn&#39;t exist</p>
+</li><li>
+<p><code>503</code> - Error from server</p>
+</li></ul>					
+											<div class="method-source-code" id="getFollows-source">
+							<pre class="prettyprint linenums"><code 
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/users_controller.rb, line 620</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">getFollows</span>
+  <span class="ruby-keyword">begin</span>
+    <span class="ruby-identifier">u</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">find_by_id</span>(<span class="ruby-ivar">@id</span>)
+
+    <span class="ruby-keyword">if</span> (<span class="ruby-operator">!</span><span class="ruby-identifier">u</span>)
+      <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">502</span>
+      <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:not_found</span>
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-ivar">@returnValue</span> = { <span class="ruby-identifier">content</span><span class="ruby-operator">:</span> <span class="ruby-identifier">u</span>.<span class="ruby-identifier">follows</span>.<span class="ruby-identifier">as_json</span>(<span class="ruby-value">:only</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">User</span>.<span class="ruby-identifier">miniKey</span>) }
+      <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">200</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">rescue</span>
+    <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">504</span>
+    <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:service_unavailable</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">sendJson</span>
+<span class="ruby-keyword">end</span></code></pre>
+						</div>
+										</div>
+
+					
+									</div>
+								<a name="method-i-getFriends">anchor</a>
+				<div id="method-i-getFriends-doc" class="method">
+
+					<header>
+											<i class="icon-generic"></i>
+						<span class="method-name">getFriends</span><span 
+							class="method-args">()</span>
+										</header>
+
+					<div class="method-description">
+											<p>To get the friends of an user</p>
+
+<p>Route : /users/:id/friends</p>
+
+<h4 id="method-i-getFriends-label-Options">Options<span><a href="#method-i-getFriends-label-Options">&para;</a> <a href="#top">&uarr;</a></span></h4>
+<ul><li>
+<p><code>id</code> - id of the user you want to get the friendlist</p>
+</li></ul>
+
+<h5 id="method-i-getFriends-label-HTTP+VALUE">HTTP VALUE<span><a href="#method-i-getFriends-label-HTTP+VALUE">&para;</a> <a href="#top">&uarr;</a></span></h5>
+<ul><li>
+<p><code>200</code> - In case of success, return an array of users</p>
+</li><li>
+<p><code>404</code> - The user doesn&#39;t exist</p>
+</li><li>
+<p><code>503</code> - Error from server</p>
+</li></ul>					
+											<div class="method-source-code" id="getFriends-source">
+							<pre class="prettyprint linenums"><code 
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/users_controller.rb, line 588</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">getFriends</span>
+  <span class="ruby-keyword">begin</span>
+    <span class="ruby-identifier">u</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">find_by_id</span>(<span class="ruby-ivar">@id</span>)
+
+    <span class="ruby-keyword">if</span> (<span class="ruby-operator">!</span><span class="ruby-identifier">u</span>)
+      <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">502</span>
+      <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:not_found</span>
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-ivar">@returnValue</span> = { <span class="ruby-identifier">content</span><span class="ruby-operator">:</span> <span class="ruby-identifier">u</span>.<span class="ruby-identifier">friends</span>.<span class="ruby-identifier">as_json</span>(<span class="ruby-value">:only</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">User</span>.<span class="ruby-identifier">miniKey</span>) }
+      <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">200</span>
+    <span class="ruby-keyword">end</span>
   <span class="ruby-keyword">rescue</span>
     <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">504</span>
     <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:service_unavailable</span>
@@ -303,7 +700,7 @@ address, friends and follows</p>
 </li></ul>					
 											<div class="method-source-code" id="getmusics-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/users_controller.rb, line 197</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/users_controller.rb, line 191</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">getmusics</span>
   <span class="ruby-keyword">begin</span>
     <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@security</span>)
@@ -357,25 +754,81 @@ address, friends and follows</p>
 
 <h5 id="method-i-index-label-HTTP+VALUE">HTTP VALUE<span><a href="#method-i-index-label-HTTP+VALUE">&para;</a> <a href="#top">&uarr;</a></span></h5>
 <ul><li>
-<p><code>200</code> - In case of success, return a list of users including its
-address, friends and follow</p>
+<p><code>200</code> - In case of success, return a list of users</p>
 </li><li>
 <p><code>503</code> - Error from server</p>
 </li></ul>					
 											<div class="method-source-code" id="index-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/users_controller.rb, line 24</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/users_controller.rb, line 32</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">index</span>
   <span class="ruby-keyword">begin</span>
-    <span class="ruby-ivar">@returnValue</span> = { <span class="ruby-identifier">content</span><span class="ruby-operator">:</span> <span class="ruby-constant">User</span>.<span class="ruby-identifier">all</span>.<span class="ruby-identifier">as_json</span>(<span class="ruby-value">:include</span> =<span class="ruby-operator">&gt;</span> {
-                                                              <span class="ruby-value">:address</span> =<span class="ruby-operator">&gt;</span> {},
-                                                              <span class="ruby-value">:friends</span> =<span class="ruby-operator">&gt;</span> { <span class="ruby-identifier">only</span><span class="ruby-operator">:</span> <span class="ruby-constant">User</span>.<span class="ruby-identifier">miniKey</span> },
-                                                              <span class="ruby-value">:follows</span> =<span class="ruby-operator">&gt;</span> { <span class="ruby-identifier">only</span><span class="ruby-operator">:</span> <span class="ruby-constant">User</span>.<span class="ruby-identifier">miniKey</span> }
-                                                            },
-                                                <span class="ruby-value">:only</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">User</span>.<span class="ruby-identifier">miniKey</span>) }
+    <span class="ruby-ivar">@returnValue</span> = { <span class="ruby-identifier">content</span><span class="ruby-operator">:</span> <span class="ruby-constant">User</span>.<span class="ruby-identifier">all</span>.<span class="ruby-identifier">as_json</span>(<span class="ruby-value">:only</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">User</span>.<span class="ruby-identifier">miniKey</span>) }
     <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@returnValue</span>[<span class="ruby-value">:content</span>].<span class="ruby-identifier">size</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>)
       <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">202</span>
     <span class="ruby-keyword">else</span>
+      <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">200</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">rescue</span>
+    <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">504</span>
+    <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:service_unavailable</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">sendJson</span>
+<span class="ruby-keyword">end</span></code></pre>
+						</div>
+										</div>
+
+					
+									</div>
+								<a name="method-i-isArtist">anchor</a>
+				<div id="method-i-isArtist-doc" class="method">
+
+					<header>
+											<i class="icon-generic"></i>
+						<span class="method-name">isArtist</span><span 
+							class="method-args">()</span>
+										</header>
+
+					<div class="method-description">
+											<p>To get all the musics buy by the user</p>
+
+<p>Route : /users/:id/isartist</p>
+
+<h5 id="method-i-isArtist-label-HTTP+VALUE">HTTP VALUE<span><a href="#method-i-isArtist-label-HTTP+VALUE">&para;</a> <a href="#top">&uarr;</a></span></h5>
+<ul><li>
+<p><code>200</code> - In case of success, return an hash with the key “artist”
+to know if it is one or not, and if yes, the list of albums &amp; musics of
+him</p>
+</li><li>
+<p><code>404</code> - The user doesn&#39;t exist</p>
+</li><li>
+<p><code>503</code> - Error from server</p>
+</li></ul>					
+											<div class="method-source-code" id="isArtist-source">
+							<pre class="prettyprint linenums"><code 
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/users_controller.rb, line 325</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">isArtist</span>
+  <span class="ruby-keyword">begin</span>
+    <span class="ruby-identifier">u</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">find_by_id</span>(<span class="ruby-ivar">@id</span>)
+
+    <span class="ruby-keyword">if</span> (<span class="ruby-operator">!</span><span class="ruby-identifier">u</span>)
+      <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">502</span>
+      <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:not_found</span>
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-identifier">hash</span> = { <span class="ruby-identifier">artist</span><span class="ruby-operator">:</span> <span class="ruby-identifier">u</span>.<span class="ruby-identifier">isArtist?</span> }
+      <span class="ruby-keyword">if</span> <span class="ruby-identifier">hash</span>[<span class="ruby-value">:artist</span>]
+        <span class="ruby-identifier">hash</span>[<span class="ruby-value">:albums</span>] = <span class="ruby-constant">JSON</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">u</span>.<span class="ruby-identifier">albums</span>.<span class="ruby-identifier">to_json</span>(<span class="ruby-value">:only</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">Album</span>.<span class="ruby-identifier">miniKey</span>, <span class="ruby-value">:include</span> =<span class="ruby-operator">&gt;</span> {
+                                            <span class="ruby-identifier">musics</span><span class="ruby-operator">:</span> { <span class="ruby-identifier">only</span><span class="ruby-operator">:</span> <span class="ruby-constant">Music</span>.<span class="ruby-identifier">miniKey</span> }
+                                          } ))
+        <span class="ruby-identifier">topFive</span> = <span class="ruby-identifier">u</span>.<span class="ruby-identifier">giveTopFive</span>
+        <span class="ruby-identifier">hash</span>[<span class="ruby-value">:topFive</span>] = []
+        <span class="ruby-identifier">topFive</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">music</span><span class="ruby-operator">|</span>
+          <span class="ruby-identifier">hash</span>[<span class="ruby-value">:topFive</span>] <span class="ruby-operator">&lt;&lt;</span> { <span class="ruby-identifier">note</span><span class="ruby-operator">:</span> <span class="ruby-identifier">music</span>[<span class="ruby-value">:note</span>], <span class="ruby-identifier">music</span><span class="ruby-operator">:</span> <span class="ruby-constant">JSON</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">music</span>[<span class="ruby-value">:object</span>].<span class="ruby-identifier">to_json</span>(<span class="ruby-identifier">only</span><span class="ruby-operator">:</span> <span class="ruby-constant">Music</span>.<span class="ruby-identifier">miniKey</span>, <span class="ruby-value">:include</span> =<span class="ruby-operator">&gt;</span> {
+              <span class="ruby-identifier">album</span><span class="ruby-operator">:</span> { <span class="ruby-identifier">only</span><span class="ruby-operator">:</span> <span class="ruby-constant">Album</span>.<span class="ruby-identifier">miniKey</span> }
+            })) }
+        }
+      <span class="ruby-keyword">end</span>
+      <span class="ruby-ivar">@returnValue</span> = { <span class="ruby-identifier">content</span><span class="ruby-operator">:</span> <span class="ruby-identifier">hash</span> }
       <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">200</span>
     <span class="ruby-keyword">end</span>
   <span class="ruby-keyword">rescue</span>
@@ -467,7 +920,7 @@ address, friends and follow.</p>
 </li></ul>					
 											<div class="method-source-code" id="save-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/users_controller.rb, line 260</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/users_controller.rb, line 254</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">save</span>
   <span class="ruby-identifier">_save</span>(<span class="ruby-keyword">true</span>, <span class="ruby-identifier">params</span>)
   <span class="ruby-identifier">sendJson</span>
@@ -498,8 +951,7 @@ address, friends and follow.</p>
 
 <h5 id="method-i-show-label-HTTP+VALUE">HTTP VALUE<span><a href="#method-i-show-label-HTTP+VALUE">&para;</a> <a href="#top">&uarr;</a></span></h5>
 <ul><li>
-<p><code>200</code> - In case of success, return an user including its
-address, friends and follows</p>
+<p><code>200</code> - In case of success, return an user</p>
 </li><li>
 <p><code>404</code> - Can&#39;t find the user, the id is probably wrong</p>
 </li><li>
@@ -507,7 +959,7 @@ address, friends and follows</p>
 </li></ul>					
 											<div class="method-source-code" id="show-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/users_controller.rb, line 58</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/users_controller.rb, line 61</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">show</span>
   <span class="ruby-keyword">begin</span>
     <span class="ruby-identifier">user</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">find_by_id</span>(<span class="ruby-ivar">@id</span>)
@@ -515,13 +967,85 @@ address, friends and follows</p>
       <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">502</span>
       <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:not_found</span>
     <span class="ruby-keyword">else</span>
-      <span class="ruby-ivar">@returnValue</span> = { <span class="ruby-identifier">content</span><span class="ruby-operator">:</span> <span class="ruby-identifier">user</span>.<span class="ruby-identifier">as_json</span>(<span class="ruby-value">:include</span> =<span class="ruby-operator">&gt;</span> {
-                                                              <span class="ruby-value">:address</span> =<span class="ruby-operator">&gt;</span> {},
-                                                              <span class="ruby-value">:friends</span> =<span class="ruby-operator">&gt;</span> { <span class="ruby-identifier">only</span><span class="ruby-operator">:</span> <span class="ruby-constant">User</span>.<span class="ruby-identifier">miniKey</span> },
-                                                              <span class="ruby-value">:follows</span> =<span class="ruby-operator">&gt;</span> { <span class="ruby-identifier">only</span><span class="ruby-operator">:</span> <span class="ruby-constant">User</span>.<span class="ruby-identifier">miniKey</span> }
-                                                            },
-                                                <span class="ruby-value">:only</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">User</span>.<span class="ruby-identifier">bigKey</span>) }
+      <span class="ruby-ivar">@returnValue</span> = { <span class="ruby-identifier">content</span><span class="ruby-operator">:</span> <span class="ruby-identifier">user</span>.<span class="ruby-identifier">as_json</span>(<span class="ruby-value">:only</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">User</span>.<span class="ruby-identifier">bigKey</span>, <span class="ruby-value">:include</span> =<span class="ruby-operator">&gt;</span> { <span class="ruby-value">:friends</span> =<span class="ruby-operator">&gt;</span> { <span class="ruby-value">:only</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">User</span>.<span class="ruby-identifier">miniKey</span> }
+        }) }
       <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">200</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">rescue</span>
+    <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">504</span>
+    <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:service_unavailable</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">sendJson</span>
+<span class="ruby-keyword">end</span></code></pre>
+						</div>
+										</div>
+
+					
+									</div>
+								<a name="method-i-unfollow">anchor</a>
+				<div id="method-i-unfollow-doc" class="method">
+
+					<header>
+											<i class="icon-generic"></i>
+						<span class="method-name">unfollow</span><span 
+							class="method-args">()</span>
+										</header>
+
+					<div class="method-description">
+											<p>To unfollow someone</p>
+
+<p>Route : /users/unfollow</p>
+
+<h4 id="method-i-unfollow-label-Options">Options<span><a href="#method-i-unfollow-label-Options">&para;</a> <a href="#top">&uarr;</a></span></h4>
+<ul><li>
+<p><code>follow_id</code> - id of the user you want to follow</p>
+</li></ul>
+
+<h5 id="method-i-unfollow-label-HTTP+VALUE">HTTP VALUE<span><a href="#method-i-unfollow-label-HTTP+VALUE">&para;</a> <a href="#top">&uarr;</a></span></h5>
+<ul><li>
+<p><code>200</code> - In case of success</p>
+</li><li>
+<p><code>401</code> - It is not a secured transaction</p>
+</li><li>
+<p><code>404</code> - The user doesn&#39;t exist</p>
+</li><li>
+<p><code>405</code> - You don&#39;t follow this user</p>
+</li><li>
+<p><code>503</code> - Error from server</p>
+</li></ul>					
+											<div class="method-source-code" id="unfollow-source">
+							<pre class="prettyprint linenums"><code 
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/users_controller.rb, line 426</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">unfollow</span>
+  <span class="ruby-keyword">begin</span>
+    <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@security</span>)
+      <span class="ruby-identifier">u</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">find_by_id</span>(<span class="ruby-ivar">@user_id</span>)
+      <span class="ruby-identifier">toFollow</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">find_by_id</span>(<span class="ruby-ivar">@follow_id</span>)
+
+      <span class="ruby-keyword">if</span> (<span class="ruby-operator">!</span><span class="ruby-identifier">u</span> <span class="ruby-operator">||</span> <span class="ruby-operator">!</span><span class="ruby-identifier">toFollow</span>)
+        <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">502</span>
+        <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:not_found</span>
+      <span class="ruby-keyword">else</span>
+        <span class="ruby-identifier">code</span> = <span class="ruby-value">405</span>
+        <span class="ruby-identifier">http</span> = <span class="ruby-value">:method_not_allowed</span>
+        <span class="ruby-identifier">u</span>.<span class="ruby-identifier">follows</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">follow</span><span class="ruby-operator">|</span>
+          <span class="ruby-keyword">if</span> <span class="ruby-identifier">follow</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">toFollow</span>
+            <span class="ruby-identifier">code</span> = <span class="ruby-value">200</span>
+            <span class="ruby-identifier">http</span> = <span class="ruby-value">:ok</span>
+          <span class="ruby-keyword">end</span>
+        }
+        <span class="ruby-keyword">if</span> <span class="ruby-identifier">code</span> <span class="ruby-operator">==</span> <span class="ruby-value">200</span>
+          <span class="ruby-identifier">u</span>.<span class="ruby-identifier">follows</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-identifier">toFollow</span>)
+          <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">200</span>
+        <span class="ruby-keyword">else</span>
+          <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">502</span>
+        <span class="ruby-keyword">end</span>
+        <span class="ruby-identifier">codeAnswer</span> <span class="ruby-identifier">code</span>
+        <span class="ruby-identifier">defineHttp</span> <span class="ruby-identifier">http</span>
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">500</span>
+      <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:forbidden</span>
     <span class="ruby-keyword">end</span>
   <span class="ruby-keyword">rescue</span>
     <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">504</span>
@@ -615,7 +1139,7 @@ address, friends and follow.</p>
 </li></ul>					
 											<div class="method-source-code" id="update-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/users_controller.rb, line 299</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/users_controller.rb, line 293</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">update</span>
   <span class="ruby-keyword">begin</span>
     <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@security</span>)

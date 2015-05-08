@@ -139,34 +139,10 @@ var SearchIndex =
 		"type": "normalclass"
 	},
 	{
-		"name": "AccessesController",
-		"link": "AccessesController.html",
-		"snippet": "",
-		"type": "normalclass"
-	},
-	{
-		"name": "AccessesHelper",
-		"link": "AccessesHelper.html",
-		"snippet": "",
-		"type": "normalmodule"
-	},
-	{
 		"name": "Address",
 		"link": "Address.html",
 		"snippet": "<p>The model of the object Address Contain the relation and the validation Can\nprovide some features linked …\n",
 		"type": "normalclass"
-	},
-	{
-		"name": "AddressesController",
-		"link": "AddressesController.html",
-		"snippet": "",
-		"type": "normalclass"
-	},
-	{
-		"name": "AddressesHelper",
-		"link": "AddressesHelper.html",
-		"snippet": "",
-		"type": "normalmodule"
 	},
 	{
 		"name": "AdminUser",
@@ -187,58 +163,10 @@ var SearchIndex =
 		"type": "normalclass"
 	},
 	{
-		"name": "AlbumNotesController",
-		"link": "AlbumNotesController.html",
-		"snippet": "",
-		"type": "normalclass"
-	},
-	{
-		"name": "AlbumNotesHelper",
-		"link": "AlbumNotesHelper.html",
-		"snippet": "",
-		"type": "normalmodule"
-	},
-	{
-		"name": "AlbumsController",
-		"link": "AlbumsController.html",
-		"snippet": "",
-		"type": "normalclass"
-	},
-	{
-		"name": "AlbumsHelper",
-		"link": "AlbumsHelper.html",
-		"snippet": "",
-		"type": "normalmodule"
-	},
-	{
-		"name": "ApplicationController",
-		"link": "ApplicationController.html",
-		"snippet": "",
-		"type": "normalclass"
-	},
-	{
-		"name": "ApplicationHelper",
-		"link": "ApplicationHelper.html",
-		"snippet": "",
-		"type": "normalmodule"
-	},
-	{
 		"name": "Attachment",
 		"link": "Attachment.html",
 		"snippet": "<p>The model of the object Attachment Contain the relation and the validation\nCan provide some features …\n",
 		"type": "normalclass"
-	},
-	{
-		"name": "AttachmentsController",
-		"link": "AttachmentsController.html",
-		"snippet": "",
-		"type": "normalclass"
-	},
-	{
-		"name": "AttachmentsHelper",
-		"link": "AttachmentsHelper.html",
-		"snippet": "",
-		"type": "normalmodule"
 	},
 	{
 		"name": "Battle",
@@ -247,52 +175,10 @@ var SearchIndex =
 		"type": "normalclass"
 	},
 	{
-		"name": "BattlesController",
-		"link": "BattlesController.html",
-		"snippet": "",
-		"type": "normalclass"
-	},
-	{
-		"name": "BattlesHelper",
-		"link": "BattlesHelper.html",
-		"snippet": "",
-		"type": "normalmodule"
-	},
-	{
 		"name": "Cart",
 		"link": "Cart.html",
 		"snippet": "<p>The model of the object Cart Contain the relation and the validation Can\nprovide some features linked …\n",
 		"type": "normalclass"
-	},
-	{
-		"name": "CartsController",
-		"link": "CartsController.html",
-		"snippet": "",
-		"type": "normalclass"
-	},
-	{
-		"name": "CartsHelper",
-		"link": "CartsHelper.html",
-		"snippet": "",
-		"type": "normalmodule"
-	},
-	{
-		"name": "ChatsController",
-		"link": "ChatsController.html",
-		"snippet": "",
-		"type": "normalclass"
-	},
-	{
-		"name": "CommentariesController",
-		"link": "CommentariesController.html",
-		"snippet": "",
-		"type": "normalclass"
-	},
-	{
-		"name": "CommentariesHelper",
-		"link": "CommentariesHelper.html",
-		"snippet": "",
-		"type": "normalmodule"
 	},
 	{
 		"name": "Commentary",
@@ -307,40 +193,10 @@ var SearchIndex =
 		"type": "normalclass"
 	},
 	{
-		"name": "ConcertsController",
-		"link": "ConcertsController.html",
-		"snippet": "",
-		"type": "normalclass"
-	},
-	{
-		"name": "ConcertsHelper",
-		"link": "ConcertsHelper.html",
-		"snippet": "",
-		"type": "normalmodule"
-	},
-	{
-		"name": "DatasHelper",
-		"link": "DatasHelper.html",
-		"snippet": "",
-		"type": "normalmodule"
-	},
-	{
 		"name": "Description",
 		"link": "Description.html",
 		"snippet": "<p>The model of the object Description Contain the relation and the validation\nCan provide some features …\n",
 		"type": "normalclass"
-	},
-	{
-		"name": "DescriptionsController",
-		"link": "DescriptionsController.html",
-		"snippet": "",
-		"type": "normalclass"
-	},
-	{
-		"name": "DescriptionsHelper",
-		"link": "DescriptionsHelper.html",
-		"snippet": "",
-		"type": "normalmodule"
 	},
 	{
 		"name": "Flac",
@@ -349,28 +205,10 @@ var SearchIndex =
 		"type": "normalclass"
 	},
 	{
-		"name": "FlacsController",
-		"link": "FlacsController.html",
-		"snippet": "",
-		"type": "normalclass"
-	},
-	{
-		"name": "FlacsHelper",
-		"link": "FlacsHelper.html",
-		"snippet": "",
-		"type": "normalmodule"
-	},
-	{
 		"name": "Follow",
 		"link": "Follow.html",
 		"snippet": "",
 		"type": "normalclass"
-	},
-	{
-		"name": "FormatsHelper",
-		"link": "FormatsHelper.html",
-		"snippet": "",
-		"type": "normalmodule"
 	},
 	{
 		"name": "Friend",
@@ -385,52 +223,16 @@ var SearchIndex =
 		"type": "normalclass"
 	},
 	{
-		"name": "GenresController",
-		"link": "GenresController.html",
-		"snippet": "",
-		"type": "normalclass"
-	},
-	{
-		"name": "GenresHelper",
-		"link": "GenresHelper.html",
-		"snippet": "",
-		"type": "normalmodule"
-	},
-	{
 		"name": "Gift",
 		"link": "Gift.html",
 		"snippet": "<p>The model of the object Gift Contain the relation and the validation Can\nprovide some features linked …\n",
 		"type": "normalclass"
 	},
 	{
-		"name": "GiftsController",
-		"link": "GiftsController.html",
-		"snippet": "",
-		"type": "normalclass"
-	},
-	{
-		"name": "GiftsHelper",
-		"link": "GiftsHelper.html",
-		"snippet": "",
-		"type": "normalmodule"
-	},
-	{
 		"name": "Group",
 		"link": "Group.html",
 		"snippet": "<p>The model of the object Group Contain the relation and the validation Can\nprovide some features linked …\n",
 		"type": "normalclass"
-	},
-	{
-		"name": "GroupsController",
-		"link": "GroupsController.html",
-		"snippet": "",
-		"type": "normalclass"
-	},
-	{
-		"name": "GroupsHelper",
-		"link": "GroupsHelper.html",
-		"snippet": "",
-		"type": "normalmodule"
 	},
 	{
 		"name": "Identity",
@@ -445,52 +247,16 @@ var SearchIndex =
 		"type": "normalclass"
 	},
 	{
-		"name": "InfluencesController",
-		"link": "InfluencesController.html",
-		"snippet": "",
-		"type": "normalclass"
-	},
-	{
-		"name": "InfluencesHelper",
-		"link": "InfluencesHelper.html",
-		"snippet": "",
-		"type": "normalmodule"
-	},
-	{
 		"name": "Listening",
 		"link": "Listening.html",
 		"snippet": "<p>The model of the object Listening Contain the relation and the validation\nCan provide some features linked …\n",
 		"type": "normalclass"
 	},
 	{
-		"name": "ListeningsController",
-		"link": "ListeningsController.html",
-		"snippet": "",
-		"type": "normalclass"
-	},
-	{
-		"name": "ListeningsHelper",
-		"link": "ListeningsHelper.html",
-		"snippet": "",
-		"type": "normalmodule"
-	},
-	{
 		"name": "Message",
 		"link": "Message.html",
 		"snippet": "<p>The model of the object Message Contain the relation and the validation Can\nprovide some features linked …\n",
 		"type": "normalclass"
-	},
-	{
-		"name": "MessagesController",
-		"link": "MessagesController.html",
-		"snippet": "",
-		"type": "normalclass"
-	},
-	{
-		"name": "MessagesHelper",
-		"link": "MessagesHelper.html",
-		"snippet": "",
-		"type": "normalmodule"
 	},
 	{
 		"name": "Music",
@@ -505,46 +271,10 @@ var SearchIndex =
 		"type": "normalclass"
 	},
 	{
-		"name": "MusicNotesController",
-		"link": "MusicNotesController.html",
-		"snippet": "",
-		"type": "normalclass"
-	},
-	{
-		"name": "MusicNotesHelper",
-		"link": "MusicNotesHelper.html",
-		"snippet": "",
-		"type": "normalmodule"
-	},
-	{
-		"name": "MusicsController",
-		"link": "MusicsController.html",
-		"snippet": "",
-		"type": "normalclass"
-	},
-	{
-		"name": "MusicsHelper",
-		"link": "MusicsHelper.html",
-		"snippet": "",
-		"type": "normalmodule"
-	},
-	{
 		"name": "News",
 		"link": "News.html",
 		"snippet": "<p>The model of the object News Contain the relation and the validation Can\nprovide some features linked …\n",
 		"type": "normalclass"
-	},
-	{
-		"name": "NewsController",
-		"link": "NewsController.html",
-		"snippet": "",
-		"type": "normalclass"
-	},
-	{
-		"name": "NewsHelper",
-		"link": "NewsHelper.html",
-		"snippet": "",
-		"type": "normalmodule"
 	},
 	{
 		"name": "Newstext",
@@ -553,45 +283,9 @@ var SearchIndex =
 		"type": "normalclass"
 	},
 	{
-		"name": "NewstextsController",
-		"link": "NewstextsController.html",
-		"snippet": "",
-		"type": "normalclass"
-	},
-	{
-		"name": "NewstextsHelper",
-		"link": "NewstextsHelper.html",
-		"snippet": "",
-		"type": "normalmodule"
-	},
-	{
 		"name": "Notification",
 		"link": "Notification.html",
 		"snippet": "<p>The model of the object Notification Contain the relation and the\nvalidation Can provide some features …\n",
-		"type": "normalclass"
-	},
-	{
-		"name": "NotificationsController",
-		"link": "NotificationsController.html",
-		"snippet": "",
-		"type": "normalclass"
-	},
-	{
-		"name": "NotificationsHelper",
-		"link": "NotificationsHelper.html",
-		"snippet": "",
-		"type": "normalmodule"
-	},
-	{
-		"name": "OmniauthCallbacksController",
-		"link": "OmniauthCallbacksController.html",
-		"snippet": "",
-		"type": "normalclass"
-	},
-	{
-		"name": "OthersController",
-		"link": "OthersController.html",
-		"snippet": "",
 		"type": "normalclass"
 	},
 	{
@@ -601,52 +295,16 @@ var SearchIndex =
 		"type": "normalclass"
 	},
 	{
-		"name": "PacksController",
-		"link": "PacksController.html",
-		"snippet": "",
-		"type": "normalclass"
-	},
-	{
-		"name": "PacksHelper",
-		"link": "PacksHelper.html",
-		"snippet": "",
-		"type": "normalmodule"
-	},
-	{
 		"name": "Playlist",
 		"link": "Playlist.html",
 		"snippet": "<p>The model of the object Playlist Contain the relation and the validation\nCan provide some features linked …\n",
 		"type": "normalclass"
 	},
 	{
-		"name": "PlaylistsController",
-		"link": "PlaylistsController.html",
-		"snippet": "",
-		"type": "normalclass"
-	},
-	{
-		"name": "PlaylistsHelper",
-		"link": "PlaylistsHelper.html",
-		"snippet": "",
-		"type": "normalmodule"
-	},
-	{
 		"name": "Proposition",
 		"link": "Proposition.html",
 		"snippet": "<p>The model of the object Proposition Contain the relation and the validation\nCan provide some features …\n",
 		"type": "normalclass"
-	},
-	{
-		"name": "PropositionsController",
-		"link": "PropositionsController.html",
-		"snippet": "",
-		"type": "normalclass"
-	},
-	{
-		"name": "PropositionsHelper",
-		"link": "PropositionsHelper.html",
-		"snippet": "",
-		"type": "normalmodule"
 	},
 	{
 		"name": "Purchase",
@@ -673,34 +331,10 @@ var SearchIndex =
 		"type": "normalclass"
 	},
 	{
-		"name": "PurchasesController",
-		"link": "PurchasesController.html",
-		"snippet": "",
-		"type": "normalclass"
-	},
-	{
-		"name": "PurchasesHelper",
-		"link": "PurchasesHelper.html",
-		"snippet": "",
-		"type": "normalmodule"
-	},
-	{
 		"name": "Tag",
 		"link": "Tag.html",
 		"snippet": "<p>The model of the object Tag Contain the relation and the validation Can\nprovide some features linked …\n",
 		"type": "normalclass"
-	},
-	{
-		"name": "TagsController",
-		"link": "TagsController.html",
-		"snippet": "",
-		"type": "normalclass"
-	},
-	{
-		"name": "TagsHelper",
-		"link": "TagsHelper.html",
-		"snippet": "",
-		"type": "normalmodule"
 	},
 	{
 		"name": "Tweet",
@@ -709,52 +343,16 @@ var SearchIndex =
 		"type": "normalclass"
 	},
 	{
-		"name": "TweetsController",
-		"link": "TweetsController.html",
-		"snippet": "",
-		"type": "normalclass"
-	},
-	{
-		"name": "TweetsHelper",
-		"link": "TweetsHelper.html",
-		"snippet": "",
-		"type": "normalmodule"
-	},
-	{
 		"name": "User",
 		"link": "User.html",
 		"snippet": "<p>The model of the object User Contain the relation and the validation Can\nprovide some features linked …\n",
 		"type": "normalclass"
 	},
 	{
-		"name": "UsersController",
-		"link": "UsersController.html",
-		"snippet": "",
-		"type": "normalclass"
-	},
-	{
-		"name": "UsersHelper",
-		"link": "UsersHelper.html",
-		"snippet": "",
-		"type": "normalmodule"
-	},
-	{
 		"name": "Vote",
 		"link": "Vote.html",
 		"snippet": "<p>The model of the object Vote Contain the relation and the validation Can\nprovide some features linked …\n",
 		"type": "normalclass"
-	},
-	{
-		"name": "VotesController",
-		"link": "VotesController.html",
-		"snippet": "",
-		"type": "normalclass"
-	},
-	{
-		"name": "VotesHelper",
-		"link": "VotesHelper.html",
-		"snippet": "",
-		"type": "normalmodule"
 	},
 	{
 		"name": "index",
@@ -778,6 +376,12 @@ var SearchIndex =
 		"name": "addcomment",
 		"link": "API/AlbumsController.html#method-i-addcomment",
 		"snippet": "<p>Add a comment to a specific album. Need to be a secure transaction.\n<p>Route : /albums/addcomment/:id\n<p>Options …\n",
+		"type": "anymethod"
+	},
+	{
+		"name": "cors_set_access_control_headers",
+		"link": "API/ApiController.html#method-i-cors_set_access_control_headers",
+		"snippet": "<p>For all responses in this controller, return the CORS access control\nheaders.\n",
 		"type": "anymethod"
 	},
 	{
@@ -814,12 +418,6 @@ var SearchIndex =
 		"name": "socialLogin",
 		"link": "API/ApisecurityController.html#method-i-socialLogin",
 		"snippet": "<p>To authenticate to a social network Route : /social-login [POST]\n<p>Options\n<p><code>uid</code> - The user id from the social …\n",
-		"type": "anymethod"
-	},
-	{
-		"name": "loginFB",
-		"link": "API/ApisecurityController.html#method-i-loginFB",
-		"snippet": "<p>Check if a facebook user is authenticate and retrive its informations\n<p>DEPRECATED FOR THE MOMENT\n<p>Route : …\n",
 		"type": "anymethod"
 	},
 	{
@@ -1183,9 +781,63 @@ var SearchIndex =
 		"type": "anymethod"
 	},
 	{
+		"name": "isArtist",
+		"link": "API/UsersController.html#method-i-isArtist",
+		"snippet": "<p>To get all the musics buy by the user\n<p>Route : /users/:id/isartist\n<p>HTTP VALUE\n",
+		"type": "anymethod"
+	},
+	{
+		"name": "follow",
+		"link": "API/UsersController.html#method-i-follow",
+		"snippet": "<p>To follow someone\n<p>Route : /users/follow\n<p>Options\n",
+		"type": "anymethod"
+	},
+	{
+		"name": "unfollow",
+		"link": "API/UsersController.html#method-i-unfollow",
+		"snippet": "<p>To unfollow someone\n<p>Route : /users/unfollow\n<p>Options\n",
+		"type": "anymethod"
+	},
+	{
+		"name": "addfriend",
+		"link": "API/UsersController.html#method-i-addfriend",
+		"snippet": "<p>To add a friend\n<p>Route : /users/addfriend\n<p>Options\n",
+		"type": "anymethod"
+	},
+	{
+		"name": "delfriend",
+		"link": "API/UsersController.html#method-i-delfriend",
+		"snippet": "<p>To delete a friend\n<p>Route : /users/delfriend\n<p>Options\n",
+		"type": "anymethod"
+	},
+	{
+		"name": "getFriends",
+		"link": "API/UsersController.html#method-i-getFriends",
+		"snippet": "<p>To get the friends of an user\n<p>Route : /users/:id/friends\n<p>Options\n",
+		"type": "anymethod"
+	},
+	{
+		"name": "getFollows",
+		"link": "API/UsersController.html#method-i-getFollows",
+		"snippet": "<p>To get the follows of an user\n<p>Route : /users/:id/follows\n<p>Options\n",
+		"type": "anymethod"
+	},
+	{
+		"name": "getFollowers",
+		"link": "API/UsersController.html#method-i-getFollowers",
+		"snippet": "<p>To get the followers of an user\n<p>Route : /users/:id/followers\n<p>Options\n",
+		"type": "anymethod"
+	},
+	{
 		"name": "access_params",
 		"link": "Access.html#method-c-access_params",
 		"snippet": "<p>The strong parameters to save or update object\n",
+		"type": "anymethod"
+	},
+	{
+		"name": "miniKey",
+		"link": "Address.html#method-c-miniKey",
+		"snippet": "<p>Filter of information for the API\n",
 		"type": "anymethod"
 	},
 	{
@@ -1213,33 +865,21 @@ var SearchIndex =
 		"type": "anymethod"
 	},
 	{
-		"name": "ensure_signup_complete",
-		"link": "ApplicationController.html#method-i-ensure_signup_complete",
-		"snippet": "",
-		"type": "anymethod"
-	},
-	{
-		"name": "setControllerName",
-		"link": "ApplicationController.html#method-i-setControllerName",
-		"snippet": "",
-		"type": "anymethod"
-	},
-	{
-		"name": "configure_permitted_parameters",
-		"link": "ApplicationController.html#method-i-configure_permitted_parameters",
-		"snippet": "",
-		"type": "anymethod"
-	},
-	{
-		"name": "socialIconConnect",
-		"link": "ApplicationHelper.html#method-i-socialIconConnect",
-		"snippet": "",
+		"name": "miniKey",
+		"link": "Attachment.html#method-c-miniKey",
+		"snippet": "<p>Filter of information for the API\n",
 		"type": "anymethod"
 	},
 	{
 		"name": "attachment_params",
 		"link": "Attachment.html#method-c-attachment_params",
 		"snippet": "<p>The strong parameters to save or update object\n",
+		"type": "anymethod"
+	},
+	{
+		"name": "miniKey",
+		"link": "Battle.html#method-c-miniKey",
+		"snippet": "<p>Filter of information for the API\n",
 		"type": "anymethod"
 	},
 	{
@@ -1255,57 +895,21 @@ var SearchIndex =
 		"type": "anymethod"
 	},
 	{
-		"name": "index",
-		"link": "ChatsController.html#method-i-index",
-		"snippet": "",
-		"type": "anymethod"
-	},
-	{
 		"name": "commentary_params",
 		"link": "Commentary.html#method-c-commentary_params",
 		"snippet": "<p>The strong parameters to save or update object\n",
 		"type": "anymethod"
 	},
 	{
+		"name": "miniKey",
+		"link": "Concert.html#method-c-miniKey",
+		"snippet": "<p>Filter of information for the API\n",
+		"type": "anymethod"
+	},
+	{
 		"name": "concert_params",
 		"link": "Concert.html#method-c-concert_params",
 		"snippet": "<p>The strong parameters to save or update object\n",
-		"type": "anymethod"
-	},
-	{
-		"name": "facebook_app",
-		"link": "DatasHelper.html#method-c-facebook_app",
-		"snippet": "",
-		"type": "anymethod"
-	},
-	{
-		"name": "twitter_consumerKey",
-		"link": "DatasHelper.html#method-c-twitter_consumerKey",
-		"snippet": "",
-		"type": "anymethod"
-	},
-	{
-		"name": "twitter_consumerSecret",
-		"link": "DatasHelper.html#method-c-twitter_consumerSecret",
-		"snippet": "",
-		"type": "anymethod"
-	},
-	{
-		"name": "twitter_token",
-		"link": "DatasHelper.html#method-c-twitter_token",
-		"snippet": "",
-		"type": "anymethod"
-	},
-	{
-		"name": "website_url",
-		"link": "DatasHelper.html#method-c-website_url",
-		"snippet": "",
-		"type": "anymethod"
-	},
-	{
-		"name": "facebook_app_secret",
-		"link": "DatasHelper.html#method-c-facebook_app_secret",
-		"snippet": "",
 		"type": "anymethod"
 	},
 	{
@@ -1321,9 +925,9 @@ var SearchIndex =
 		"type": "anymethod"
 	},
 	{
-		"name": "format_get_params",
-		"link": "FormatsHelper.html#method-i-format_get_params",
-		"snippet": "",
+		"name": "miniKey",
+		"link": "Genre.html#method-c-miniKey",
+		"snippet": "<p>Filter of information for the API\n",
 		"type": "anymethod"
 	},
 	{
@@ -1363,9 +967,21 @@ var SearchIndex =
 		"type": "anymethod"
 	},
 	{
+		"name": "miniKey",
+		"link": "Influence.html#method-c-miniKey",
+		"snippet": "<p>Filter of information for the API\n",
+		"type": "anymethod"
+	},
+	{
 		"name": "influence_params",
 		"link": "Influence.html#method-c-influence_params",
 		"snippet": "<p>The strong parameters to save or update object\n",
+		"type": "anymethod"
+	},
+	{
+		"name": "miniKey",
+		"link": "Listening.html#method-c-miniKey",
+		"snippet": "<p>Filter of information for the API - Restricted\n",
 		"type": "anymethod"
 	},
 	{
@@ -1378,30 +994,6 @@ var SearchIndex =
 		"name": "message_params",
 		"link": "Message.html#method-c-message_params",
 		"snippet": "<p>The strong parameters to save or update object\n",
-		"type": "anymethod"
-	},
-	{
-		"name": "initialize_session",
-		"link": "MessagesController.html#method-i-initialize_session",
-		"snippet": "",
-		"type": "anymethod"
-	},
-	{
-		"name": "client_connected",
-		"link": "MessagesController.html#method-i-client_connected",
-		"snippet": "",
-		"type": "anymethod"
-	},
-	{
-		"name": "delete_user",
-		"link": "MessagesController.html#method-i-delete_user",
-		"snippet": "",
-		"type": "anymethod"
-	},
-	{
-		"name": "sendMsg",
-		"link": "MessagesController.html#method-i-sendMsg",
-		"snippet": "",
 		"type": "anymethod"
 	},
 	{
@@ -1435,21 +1027,21 @@ var SearchIndex =
 		"type": "anymethod"
 	},
 	{
+		"name": "miniKey",
+		"link": "News.html#method-c-miniKey",
+		"snippet": "<p>Filter of information for the API\n",
+		"type": "anymethod"
+	},
+	{
 		"name": "news_params",
 		"link": "News.html#method-c-news_params",
 		"snippet": "<p>The strong parameters to save or update object\n",
 		"type": "anymethod"
 	},
 	{
-		"name": "index",
-		"link": "NewsController.html#method-i-index",
-		"snippet": "<p>GET /news/:id.:format\n",
-		"type": "anymethod"
-	},
-	{
-		"name": "show",
-		"link": "NewsController.html#method-i-show",
-		"snippet": "<p>GET /news/.:format\n",
+		"name": "miniKey",
+		"link": "Newstext.html#method-c-miniKey",
+		"snippet": "<p>Filter of information for the API\n",
 		"type": "anymethod"
 	},
 	{
@@ -1462,30 +1054,6 @@ var SearchIndex =
 		"name": "notification_params",
 		"link": "Notification.html#method-c-notification_params",
 		"snippet": "<p>The strong parameters to save or update object\n",
-		"type": "anymethod"
-	},
-	{
-		"name": "initialize_session",
-		"link": "NotificationsController.html#method-i-initialize_session",
-		"snippet": "",
-		"type": "anymethod"
-	},
-	{
-		"name": "provides_callback_for",
-		"link": "OmniauthCallbacksController.html#method-c-provides_callback_for",
-		"snippet": "",
-		"type": "anymethod"
-	},
-	{
-		"name": "after_sign_in_path_for",
-		"link": "OmniauthCallbacksController.html#method-i-after_sign_in_path_for",
-		"snippet": "",
-		"type": "anymethod"
-	},
-	{
-		"name": "index",
-		"link": "OthersController.html#method-i-index",
-		"snippet": "",
 		"type": "anymethod"
 	},
 	{
@@ -1543,9 +1111,21 @@ var SearchIndex =
 		"type": "anymethod"
 	},
 	{
+		"name": "miniKey",
+		"link": "Tag.html#method-c-miniKey",
+		"snippet": "<p>Filter of information for the API\n",
+		"type": "anymethod"
+	},
+	{
 		"name": "tag_params",
 		"link": "Tag.html#method-c-tag_params",
 		"snippet": "<p>The strong parameters to save or update object\n",
+		"type": "anymethod"
+	},
+	{
+		"name": "miniKey",
+		"link": "Tweet.html#method-c-miniKey",
+		"snippet": "<p>Filter of information for the API\n",
 		"type": "anymethod"
 	},
 	{
@@ -1621,6 +1201,12 @@ var SearchIndex =
 		"type": "anymethod"
 	},
 	{
+		"name": "hasFriend?",
+		"link": "User.html#method-i-hasFriend-3F",
+		"snippet": "<p>Check if the user is a friend or not\n",
+		"type": "anymethod"
+	},
+	{
 		"name": "giveTopFive",
 		"link": "User.html#method-i-giveTopFive",
 		"snippet": "<p>Give the 5 most popular track of an artist\n",
@@ -1630,48 +1216,6 @@ var SearchIndex =
 		"name": "givePack",
 		"link": "User.html#method-i-givePack",
 		"snippet": "<p>Give the pack where the user has its albums\n",
-		"type": "anymethod"
-	},
-	{
-		"name": "show",
-		"link": "UsersController.html#method-i-show",
-		"snippet": "<p>GET /users/:id.:format\n",
-		"type": "anymethod"
-	},
-	{
-		"name": "edit",
-		"link": "UsersController.html#method-i-edit",
-		"snippet": "<p>GET /users/:id/edit\n",
-		"type": "anymethod"
-	},
-	{
-		"name": "update",
-		"link": "UsersController.html#method-i-update",
-		"snippet": "<p>PATCH/PUT /users/:id.:format\n",
-		"type": "anymethod"
-	},
-	{
-		"name": "finish_signup",
-		"link": "UsersController.html#method-i-finish_signup",
-		"snippet": "<p>GET/PATCH /users/:id/finish_signup\n",
-		"type": "anymethod"
-	},
-	{
-		"name": "destroy",
-		"link": "UsersController.html#method-i-destroy",
-		"snippet": "<p>DELETE /users/:id.:format\n",
-		"type": "anymethod"
-	},
-	{
-		"name": "validate_email_for_oauth",
-		"link": "UsersHelper.html#method-c-validate_email_for_oauth",
-		"snippet": "<p>Helper function to get an empty string for email and not the regex tmp\n",
-		"type": "anymethod"
-	},
-	{
-		"name": "validate_username_for_oauth",
-		"link": "UsersHelper.html#method-c-validate_username_for_oauth",
-		"snippet": "<p>Helper function to get an empty string for username and not the regex tmp\n",
 		"type": "anymethod"
 	},
 	{

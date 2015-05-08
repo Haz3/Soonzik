@@ -135,6 +135,31 @@ the param into an attribute (<a href=":xxxx">params</a> =&gt; @xxx)</p>
 					<h3>Public Instance Methods</h3>
 				</header>
 
+								<a name="method-i-cors_set_access_control_headers">anchor</a>
+				<div id="method-i-cors_set_access_control_headers-doc" class="method">
+
+					<header>
+											<i class="icon-generic"></i>
+						<span class="method-name">cors_set_access_control_headers</span><span 
+							class="method-args">()</span>
+										</header>
+
+					<div class="method-description">
+											<p>For all responses in this controller, return the CORS access control
+headers.</p>					
+											<div class="method-source-code" id="cors_set_access_control_headers-source">
+							<pre class="prettyprint linenums"><code 
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/api_controller.rb, line 14</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">cors_set_access_control_headers</span>
+  <span class="ruby-identifier">headers</span>[<span class="ruby-string">&#39;Access-Control-Allow-Origin&#39;</span>] = <span class="ruby-string">&#39;*&#39;</span>
+  <span class="ruby-identifier">headers</span>[<span class="ruby-string">&#39;Access-Control-Allow-Methods&#39;</span>] = <span class="ruby-string">&#39;POST, GET, OPTIONS&#39;</span>
+  <span class="ruby-identifier">headers</span>[<span class="ruby-string">&#39;Access-Control-Max-Age&#39;</span>] = <span class="ruby-string">&quot;1728000&quot;</span>
+<span class="ruby-keyword">end</span></code></pre>
+						</div>
+										</div>
+
+					
+									</div>
 								<a name="method-i-setParamToObj">anchor</a>
 				<div id="method-i-setParamToObj-doc" class="method">
 
@@ -154,7 +179,7 @@ global value.</p>
 </li></ul>					
 											<div class="method-source-code" id="setParamToObj-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/api_controller.rb, line 18</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/api_controller.rb, line 26</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">setParamToObj</span>
   <span class="ruby-identifier">keys</span> = <span class="ruby-identifier">params</span>.<span class="ruby-identifier">keys</span>
 
