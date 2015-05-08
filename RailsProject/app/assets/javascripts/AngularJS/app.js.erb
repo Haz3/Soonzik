@@ -10,8 +10,11 @@ SoonzikApp.config(['$routeProvider', '$locationProvider',
 	    $routeProvider.when('/users/:id', {
 	      templateUrl: '<%= asset_path("AngularJS/views/users/show.html.haml") %>',
 	      controller: 'UsersCtrl'
+	    }).when('/users/:id/edit', {
+	      templateUrl: '<%= asset_path("AngularJS/views/users/edit.html.haml") %>',
+	      controller: 'UsersCtrl'
 	    });
 	  }
-	  
+
   }
 ]);

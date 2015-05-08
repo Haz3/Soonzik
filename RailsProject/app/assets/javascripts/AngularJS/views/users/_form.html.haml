@@ -1,74 +1,74 @@
 .row
-  .contain-to-grid
-    .large-12.small-8.columns
-      .panel
-        %h3.subheader
-          Informations Public
-        .row
-          .large-3.small-3.columns.inline
-            %label Username
-          .small-9.columns
-            %input.radius{ type: "text", "ng-model" => "form.user.username" }
-          .large-3.small-3.columns.inline
-            %label Description
-          .small-9.columns
-            %textarea.radius {{ form.user.description }}
-          .large-3.small-3.columns
-            %label Birthday
-          .small-9.columns
-          	%select.medium-3.columns.radius.inline{ "ng-model" => form.user.birthday.year }
-          		%option{ "ng-repeat" => "year in range(80) track by $index", "ng-value" => "currentYear - 80 + $index" } {{ currentYear - 80 + $index }}
-          	%select.medium-3.columns.radius.inline{ "ng-model" => form.user.birthday.month }
-          		%option{ "ng-repeat" => "month in months track by $index", "ng-value" => "$index + 1" } {{ month }}
-          	%select.medium-3.columns.radius.inline{ "ng-model" => form.user.birthday.day }
-          		%option{ "ng-repeat" => "day in days", "ng-value" => "day" } {{ day }}
-          .large-3.small-3.columns
-            %label Image
-          .small-9.columns
-            %input.radius{ type: "text", "ng-model" => "form.user.image" }
-          .large-3.small-3.columns
-            %label Background
-          .small-9.columns
-            %input.radius{ type: "text", "ng-model" => "form.user.background" }
-          .large-3.small-3.columns
-            %label Facebook
-          .small-9.columns
-            %input.radius{ type: "text", "ng-model" => "form.user.facebook" }
-          .large-3.small-3.columns
-            %label Twitter
-          .small-9.columns
-            %input.radius{ type: "text", "ng-model" => "form.user.twitter" }
-          .large-3.small-3.columns
-            %label GooglePlus
-          .small-9.columns
-            %input.radius{ type: "text", "ng-model" => "form.user.googlePlus" }
-        %h3.subheader
-          Informations Personnel
-        .row
-          .large-3.small-3.columns.inline
-            %label Firstname
-          .small-9.columns
-            %input.radius{ type: "text", "ng-model" => "form.user.fname" }
-          .large-3.small-3.columns.inline
-            %label Lastname
-          .small-9.columns
-            %input.radius{ type: "text", "ng-model" => "form.user.lname" }
-          .large-3.small-3.columns.inline
-            %label Password
-          .small-9.columns
-            %input.radius{ type: "password", "ng-model" => "form.user.password" }
-          .large-3.small-3.columns.inline
-            %label Phone
-          .small-9.columns
-            %input.radius{ type: "text", "ng-model" => "form.user.phoneNumber" }
-          .large-3.small-3.columns.inline
-            %label Newsletter
-          .small-9.columns
-            %input.radius{ type: "checkbox", "ng-model" => "form.user.newsletter" }
-          .large-3.small-3.columns.inline
-            %label Language
-          .small-9.columns
-            %input.radius{ type: "text", "ng-model" => "form.user.language" }
-        .actions
-          .large-4.columns.large-centered
-            %input.button.radius.expand.success{ type: "button" } Save
+	.contain-to-grid
+		.large-12.small-8.columns
+			.panel
+				%h3.subheader
+					Informations Public
+				.row
+					.large-3.small-3.columns.inline
+						%label Username
+					.small-9.columns
+						%input.radius{ type: "text", "ng-model" => "form.user.username" }
+					.large-3.small-3.columns.inline
+						%label Description
+					.small-9.columns
+						%textarea.radius {{ form.user.description }}
+					.large-3.small-3.columns
+						%label Birthday
+					.small-9.columns
+						%select.medium-4.columns.radius.inline{ "ng-model" => "form.user.birthday.year" }
+							%option{ "ng-repeat" => "year in range(80) track by $index", "ng-value" => "currentYear - 80 + $index" } {{ currentYear - $index }}
+						%select.medium-4.columns.radius.inline{ "ng-model" => "form.user.birthday.month" }
+							%option{ "ng-repeat" => "month in months track by $index", "value" => "{{ $index + 1 }}" } {{ month }}
+						%select.medium-4.columns.radius.inline{ "ng-model" => "form.user.birthday.day" }
+							%option{ "ng-repeat" => "day in days", "value" => "{{ day }}" } {{ day }}
+					.large-3.small-3.columns
+						%label Image
+					.small-9.columns
+						%input.radius{ type: "text", "ng-model" => "form.user.image" }
+					.large-3.small-3.columns
+						%label Background
+					.small-9.columns
+						%input.radius{ type: "text", "ng-model" => "form.user.background" }
+					.large-3.small-3.columns
+						%label Facebook
+					.small-9.columns
+						%input.radius{ type: "text", "ng-model" => "form.user.facebook" }
+					.large-3.small-3.columns
+						%label Twitter
+					.small-9.columns
+						%input.radius{ type: "text", "ng-model" => "form.user.twitter" }
+					.large-3.small-3.columns
+						%label GooglePlus
+					.small-9.columns
+						%input.radius{ type: "text", "ng-model" => "form.user.googlePlus" }
+				%h3.subheader
+					Informations Personnel
+				.row
+					.large-3.small-3.columns.inline
+						%label Firstname
+					.small-9.columns
+						%input.radius{ type: "text", "ng-model" => "form.user.fname" }
+					.large-3.small-3.columns.inline
+						%label Lastname
+					.small-9.columns
+						%input.radius{ type: "text", "ng-model" => "form.user.lname" }
+					.large-3.small-3.columns.inline
+						%label Password
+					.small-9.columns
+						%input.radius{ type: "password", "ng-model" => "form.user.password" }
+					.large-3.small-3.columns.inline
+						%label Phone
+					.small-9.columns
+						%input.radius{ type: "text", "ng-model" => "form.user.phoneNumber" }
+					.large-3.small-3.columns.inline
+						%label Newsletter
+					.small-9.columns
+						%input.radius{ type: "checkbox", "ng-model" => "form.user.newsletter" }
+					.large-3.small-3.columns.inline
+						%label Language
+					.small-9.columns
+						%input.radius{ type: "text", "ng-model" => "form.user.language" }
+				.actions
+					.large-4.columns.large-centered
+						%input.button.radius.expand.success{ type: "button", value: "Save" }

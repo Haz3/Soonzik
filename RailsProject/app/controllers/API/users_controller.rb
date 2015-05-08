@@ -65,8 +65,7 @@ module API
           codeAnswer 502
           defineHttp :not_found
         else
-          @returnValue = { content: user.as_json(:only => User.bigKey, :include => { :friends => { :only => User.miniKey }
-            }) }
+          @returnValue = { content: user.as_json(:only => User.bigKey) }
           codeAnswer 200
         end
       rescue

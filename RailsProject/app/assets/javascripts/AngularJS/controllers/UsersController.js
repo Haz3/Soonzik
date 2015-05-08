@@ -2,6 +2,7 @@ SoonzikApp.controller('UsersCtrl', ['$scope', "$routeParams", 'SecureAuth', 'HTT
 	$scope.loading = true;
 
 	$scope.show = {};
+	$scope.form = { user: {} };
 
 
 	// For the select of date
@@ -72,6 +73,35 @@ SoonzikApp.controller('UsersCtrl', ['$scope', "$routeParams", 'SecureAuth', 'HTT
 		else
 			return value;
 	}
+
+	// ----
+
+	$scope.editInit = function() {
+		var id = $routeParams.id;
+
+		HTTPService.getProfile(id).then(function(profile) {
+			// Need a new route with security to get a profile with all informations
+			var dataProfile = profile.data.content;
+			console.log(dataProfile);
+
+			// Initialisation of the user profile
+			$scope.form.user = dataProfile;
+			birthday = dataProfile.birthday.split('-');
+			$scope.form.user.birthday = { year: 2000, month: 1, day: 1 };
+			$scope.form.user.birthday.year = parseInt(birthday[0]);
+			$scope.form.user.birthday.month = parseInt(birthday[1]);
+			$scope.form.user.birthday.day = parseInt(birthday[2]);
+
+			// In the _form, Image & background need to be replaced by file uploader
+			$scope.loading = false;
+		}, function (error) {
+			// error management to do
+			NotificationService.error("An error occured while loading this profile");
+		});
+	}
+
+
+	/* Utils function */
 
 	$scope.range = function(n) {
   	return new Array(n);
