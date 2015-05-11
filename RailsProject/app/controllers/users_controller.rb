@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :edit, :update, :destroy, :finish_signup]
+  before_action :set_user, only: [:show, :update, :destroy, :finish_signup]
 
   # GET /users/:id.:format
   def show
@@ -15,9 +15,23 @@ class UsersController < ApplicationController
   # GET /users/:id/edit
   def edit
     # authorize! :update, @user
+    respond_to do |format|
+      if (!(user_signed_in? && params[:id].to_i == current_user.id))
+        format.html { redirect_to root_path }
+        format.json { render :json => {}, status: :forbidden }
+      else
+        set_user
+        format.html
+        format.json { render :json => @user.as_json(except: [:salt, :password, :idAPI, :secureKey, :created_at, :updated_at, :address_id], :include => {
+            :address => { :only => Address.miniKey }
+          }) }
+      end
+    end
   end
 
   # PATCH/PUT /users/:id.:format
+  # Won't be call
+  # Can be delete ?
   def update
     # authorize! :update, @user
     respond_to do |format|
@@ -50,6 +64,8 @@ class UsersController < ApplicationController
   end
 
   # DELETE /users/:id.:format
+  # Won't be call
+  # Can be delete ?
   def destroy
     # authorize! :delete, @user
     @user.destroy

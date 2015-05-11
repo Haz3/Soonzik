@@ -11,8 +11,8 @@ Rails.application.routes.draw do
   namespace :api, path: '/', constraints: { subdomain: 'api' }, :defaults => { :format => 'json' }  do
     get 'getKey/:id' => 'apisecurity#provideKey', constraints: {id: /[0-9]+/}
     get 'getSocialToken/:uid/:provider' => 'apisecurity#getSocialToken'
-    post 'social-login' => 'apisecurity#socialLogin'
-    post 'login' => 'apisecurity#login'
+    match 'social-login' => 'apisecurity#socialLogin', via: [:post, :options]
+    match 'login' => 'apisecurity#login', via: [:post, :options]
 
     resources :albums, only: [:index, :show] do #ok
       collection do
@@ -28,7 +28,7 @@ Rails.application.routes.draw do
     end
 
     get 'carts/find' => 'carts#find'
-    post 'carts/save' => 'carts#save'
+    match 'carts/save' => 'carts#save', via: [:post, :options]
     get 'carts/destroy' => 'carts#destroy' #ok
 
     resources :concerts, only: [:index, :show] do #ok
@@ -40,7 +40,7 @@ Rails.application.routes.draw do
     resources :genres, only: [:index, :show] do #ok
     end
 
-    post 'gifts/save' => 'gifts#save' #ok
+    match 'gifts/save' => 'gifts#save', via: [:post, :options] #ok
 
     resources :influences, only: [:index] do #ok
     end
@@ -48,36 +48,36 @@ Rails.application.routes.draw do
     resources :listenings, only: [:index, :show] do #ok
       collection do
         get 'find' => 'listenings#find'
-        post 'save' => 'listenings#save'
+        match 'save' => 'listenings#save', via: [:post, :options]
       end
     end
 
     resources :messages, only: [:show] do #ok
       collection do
         get 'find' => 'messages#find'
-        post 'save' => 'messages#save'
+        match 'save' => 'messages#save', via: [:post, :options]
       end
     end
 
     resources :musics, only: [:index, :show] do #ok
       collection do
         get 'find' => 'musics#find'
-        post 'addcomment/:id' => 'musics#addcomment', constraints: {id: /[0-9]+/}
+        match 'addcomment/:id' => 'musics#addcomment', constraints: {id: /[0-9]+/}, via: [:post, :options]
         get 'get/:id' => 'musics#get', constraints: {id: /[0-9]+/}, format: 'mp3' #verifier si ça fonctionne
-        post 'addtoplaylist' => 'musics#addtoplaylist'
+        match 'addtoplaylist' => 'musics#addtoplaylist', via: [:post, :options]
       end
     end
 
     resources :news, only: [:index, :show] do #ok
       collection do
         get 'find' => 'news#find'
-        post 'addcomment/:id' => 'news#addcomment', constraints: {id: /[0-9]+/}
+        match 'addcomment/:id' => 'news#addcomment', constraints: {id: /[0-9]+/}, via: [:post, :options]
       end
     end
 
     resources :notifications, only: [:show] do #ok
       collection do
-        post 'save' => 'notifications#save'
+        match 'save' => 'notifications#save', via: [:post, :options]
         get 'find' => 'notifications#find'
         get 'destroy' => 'notifications#destroy'
       end
@@ -92,20 +92,20 @@ Rails.application.routes.draw do
     resources :playlists, only: [:show] do #ok
       collection do
         get 'find' => 'playlists#find'
-        post 'save' => 'playlists#save'
-        post 'update' => 'playlists#update'
+        match 'save' => 'playlists#save', via: [:post, :options]
+        match 'update' => 'playlists#update', via: [:post, :options]
         get 'destroy' => 'playlists#destroy'
       end
     end
 
-    post 'purchases/save' => 'purchases#save' #ok
+    match 'purchases/save' => 'purchases#save', via: [:post, :options] #ok
     get 'search' => 'searchs#search' #ok
     get 'suggest' => 'suggestions#show' #ok
 
     resources :tweets, only: [:index, :show] do #ok
       collection do
         get 'find' => 'tweets#find'
-        post 'save' => 'tweets#save'
+        match 'save' => 'tweets#save', via: [:post, :options]
         get 'destroy' => 'tweets#destroy'
       end
     end
@@ -113,15 +113,15 @@ Rails.application.routes.draw do
     resources :users, only: [:index, :show] do #ok
       collection do
         get 'find' => 'users#find'
-        post 'save' => 'users#save'
-        post 'update' => 'users#update'
+        match 'save' => 'users#save', via: [:post, :options]
+        match 'update' => 'users#update', via: [:post, :options]
         get 'getmusics' => 'users#getmusics'
         get ':id/isartist' => 'users#isArtist'
 
-        post 'follow' => 'users#follow'
-        post 'unfollow' => 'users#unfollow'
-        post 'addfriend' => 'users#addfriend'
-        post 'delfriend' => 'users#delfriend'
+        match 'follow' => 'users#follow', via: [:post, :options]
+        match 'unfollow' => 'users#unfollow', via: [:post, :options]
+        match 'addfriend' => 'users#addfriend', via: [:post, :options]
+        match 'delfriend' => 'users#delfriend', via: [:post, :options]
 
         get ':id/friends' => 'users#getFriends'
         get ':id/follows' => 'users#getFollows'

@@ -1,4 +1,4 @@
-SoonzikApp.controller('UsersCtrl', ['$scope', "$routeParams", 'SecureAuth', 'HTTPService', 'NotificationService', function ($scope, $routeParams, SecureAuth, HTTPService, NotificationService) {
+SoonzikApp.controller('UsersCtrl', ['$scope', "$routeParams", 'SecureAuth', 'HTTPService', 'NotificationService', '$timeout', function ($scope, $routeParams, SecureAuth, HTTPService, NotificationService, $timeout) {
 	$scope.loading = true;
 
 	$scope.show = {};
@@ -78,25 +78,60 @@ SoonzikApp.controller('UsersCtrl', ['$scope', "$routeParams", 'SecureAuth', 'HTT
 
 	$scope.editInit = function() {
 		var id = $routeParams.id;
+		var current_user = SecureAuth.getCurrentUser();
 
-		HTTPService.getProfile(id).then(function(profile) {
-			// Need a new route with security to get a profile with all informations
-			var dataProfile = profile.data.content;
-			console.log(dataProfile);
+		$scope.function_submit = HTTPService.updateUser;
 
-			// Initialisation of the user profile
-			$scope.form.user = dataProfile;
-			birthday = dataProfile.birthday.split('-');
-			$scope.form.user.birthday = { year: 2000, month: 1, day: 1 };
-			$scope.form.user.birthday.year = parseInt(birthday[0]);
-			$scope.form.user.birthday.month = parseInt(birthday[1]);
-			$scope.form.user.birthday.day = parseInt(birthday[2]);
+		if (current_user.id != id) {
+			NotificationService.error("You can't edit this profile : it is not yours");
+			$timeout(function() {
+				document.location.pathname = "/";
+			}, 1000);
+		} else {
+			HTTPService.getFullProfile(id).then(function(profile) {
+				// Need a new route with security to get a profile with all informations
+				var dataProfile = profile.data;
 
-			// In the _form, Image & background need to be replaced by file uploader
-			$scope.loading = false;
-		}, function (error) {
-			// error management to do
-			NotificationService.error("An error occured while loading this profile");
+				// Initialisation of the user profile
+				$scope.form.user = dataProfile;
+				birthday = dataProfile.birthday.split('-');
+				$scope.form.user.birthday = { year: 2000, month: 1, day: 1 };
+				$scope.form.user.birthday.year = parseInt(birthday[0]);
+				$scope.form.user.birthday.month = parseInt(birthday[1]);
+				$scope.form.user.birthday.day = parseInt(birthday[2]);
+				$scope.form.user.password = "";
+
+				if (typeof $scope.form.user.address !== "undefined") {
+					$scope.form.address = $scope.form.user.address;
+					delete $scope.form.user.address;
+				}
+
+				// In the _form, Image & background need to be replaced by file uploader
+				$scope.loading = false;
+			}, function (error) {
+				// error management to do
+				NotificationService.error("An error occured while loading this profile");
+			});
+		}
+	}
+
+	$scope.submitForm = function() {
+		SecureAuth.securedTransaction(function (key, user_id) {
+			var parameters = { secureKey: key, user_id: user_id, user: jQuery.extend(true, {}, $scope.form.user) };
+			delete parameters.user.username;
+			if (typeof $scope.form.address !== "undefined") {
+				parameters.address = $scope.form.address;
+			}
+			if (parameters.user.password.length == 0) {
+				delete parameters.user.password;
+			}
+			$scope.function_submit(parameters).then(function(response) {
+				console.log(response);
+			}, function () {
+				NotificationService.error("An error occured");
+			});
+		}, function () {
+			NotificationService.error("An error occured");
 		});
 	}
 

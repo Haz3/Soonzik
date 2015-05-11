@@ -36,8 +36,9 @@ class MessagesController < WebsocketRails::BaseController
       if (target != nil)
         newMsg = Message.new
         newMsg.msg = message[:messageValue]
-        newMsg.user_id = current_user
+        newMsg.user_id = current_user.id
         newMsg.dest_id = target.id
+        newMsg.session = "web"
         newMsg.save!
         WebsocketRails.users[target.id].send_message('newMsg', { message: message[:messageValue], from: current_user.username })
       end

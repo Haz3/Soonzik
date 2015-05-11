@@ -1,3 +1,3 @@
 .editPanel{ "ng-init" => "editInit()" }
-	%loading
-	%div{ "ng-include" => "'/assets/AngularJS/views/users/_form.html.haml'" }
+	%loading{ "ng-if" => "loading == true" }
+	%div{ "ng-if" => "loading == false", "ng-include" => "'/assets/AngularJS/views/users/_form.html.haml'" }

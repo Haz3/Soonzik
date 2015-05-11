@@ -6,13 +6,13 @@
 					Informations Public
 				.row
 					.large-3.small-3.columns.inline
-						%label Username
+						%label{ for: "username" } Username
 					.small-9.columns
-						%input.radius{ type: "text", "ng-model" => "form.user.username" }
+						%input.radius{ id: "username", type: "text", "ng-model" => "form.user.username", disabled: true }
 					.large-3.small-3.columns.inline
-						%label Description
+						%label{ for: "description" } Description
 					.small-9.columns
-						%textarea.radius {{ form.user.description }}
+						%textarea.radius{ id: "description" } {{ form.user.description }}
 					.large-3.small-3.columns
 						%label Birthday
 					.small-9.columns
@@ -23,52 +23,52 @@
 						%select.medium-4.columns.radius.inline{ "ng-model" => "form.user.birthday.day" }
 							%option{ "ng-repeat" => "day in days", "value" => "{{ day }}" } {{ day }}
 					.large-3.small-3.columns
-						%label Image
+						%label{ for: "image" } Image
 					.small-9.columns
-						%input.radius{ type: "text", "ng-model" => "form.user.image" }
+						%input.radius{ id: "image", type: "text", "ng-model" => "form.user.image" }
 					.large-3.small-3.columns
-						%label Background
+						%label{ for: "background" } Background
 					.small-9.columns
-						%input.radius{ type: "text", "ng-model" => "form.user.background" }
+						%input.radius{ id: "background", type: "text", "ng-model" => "form.user.background" }
 					.large-3.small-3.columns
-						%label Facebook
+						%label{ for: "facebook" } Facebook
 					.small-9.columns
-						%input.radius{ type: "text", "ng-model" => "form.user.facebook" }
+						%input.radius{ id: "facebook", type: "text", "ng-model" => "form.user.facebook" }
 					.large-3.small-3.columns
-						%label Twitter
+						%label{ for: "twitter" } Twitter
 					.small-9.columns
-						%input.radius{ type: "text", "ng-model" => "form.user.twitter" }
+						%input.radius{ id: "twitter", type: "text", "ng-model" => "form.user.twitter" }
 					.large-3.small-3.columns
-						%label GooglePlus
+						%label{ for: "googleplus" } GooglePlus
 					.small-9.columns
-						%input.radius{ type: "text", "ng-model" => "form.user.googlePlus" }
+						%input.radius{ id: "googleplus", type: "text", "ng-model" => "form.user.googlePlus" }
 				%h3.subheader
 					Informations Personnel
 				.row
 					.large-3.small-3.columns.inline
-						%label Firstname
+						%label{ for: "firstname" } Firstname
 					.small-9.columns
-						%input.radius{ type: "text", "ng-model" => "form.user.fname" }
+						%input.radius{ id: "firstname", type: "text", "ng-model" => "form.user.fname" }
 					.large-3.small-3.columns.inline
-						%label Lastname
+						%label{ for: "lastname" } Lastname
 					.small-9.columns
-						%input.radius{ type: "text", "ng-model" => "form.user.lname" }
+						%input.radius{ id: "lastname", type: "text", "ng-model" => "form.user.lname" }
 					.large-3.small-3.columns.inline
-						%label Password
+						%label{ for: "password" } Password
 					.small-9.columns
-						%input.radius{ type: "password", "ng-model" => "form.user.password" }
+						%input.radius{ id: "password", type: "password", "ng-model" => "form.user.password" }
 					.large-3.small-3.columns.inline
-						%label Phone
+						%label{ for: "phone" } Phone
 					.small-9.columns
-						%input.radius{ type: "text", "ng-model" => "form.user.phoneNumber" }
+						%input.radius{ id: "phone", type: "text", "ng-model" => "form.user.phoneNumber" }
 					.large-3.small-3.columns.inline
-						%label Newsletter
+						%label{ for: "newsletter" } Newsletter
 					.small-9.columns
-						%input.radius{ type: "checkbox", "ng-model" => "form.user.newsletter" }
+						%input.radius{ id: "newsletter", type: "checkbox", "ng-model" => "form.user.newsletter" }
 					.large-3.small-3.columns.inline
-						%label Language
+						%label{ for: "language" } Language
 					.small-9.columns
-						%input.radius{ type: "text", "ng-model" => "form.user.language" }
+						%input.radius{ id: "language", type: "text", "ng-model" => "form.user.language" }
 				.actions
 					.large-4.columns.large-centered
-						%input.button.radius.expand.success{ type: "button", value: "Save" }
+						%input.button.radius.expand.success{ id: "", type: "button", value: "Save", "ng-click" => "submitForm()" }

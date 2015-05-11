@@ -6,7 +6,6 @@
     %meta{ :name => "viewport", :content => "width=device-width, initial-scale=1.0" }
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
-    = javascript_include_tag @controller, 'data-turbolinks-track' => true if @controller != ""
     = javascript_include_tag "vendor/modernizr"
     = csrf_meta_tags
 
@@ -51,9 +50,9 @@
               - else
                 .large-12.small-10.columns
                   %li
-                    %a.button.expand.radius{:href => "#", :class => "sign-up"} Sign Up
+                    %a.button.expand.radius{:href => new_user_registration_path, :class => "sign-up", :target => "_self" } Sign Up
                   %li
-                    %a.button.secondary.expand.radius{:href => new_user_session_path, :class => "log-in info"} Log In
+                    %a.button.secondary.expand.radius{:href => new_user_session_path, :class => "log-in info", :target => "_self" } Log In
     %main.row
       .large-12{"ng-view" => true}
       %hr

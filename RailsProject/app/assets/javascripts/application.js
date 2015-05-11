@@ -13,7 +13,6 @@
 //= require jquery
 //= require jquery_ujs
 //= require foundation
-//= require turbolinks
 //= require ./player/wavesurfer.min.js
 //= require ./player/main.js
 //= require ./tools/sha256.js

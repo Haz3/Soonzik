@@ -1,20 +1,35 @@
 SoonzikApp = angular.module('SoonzikApp', ['ngRoute', 'ngCookies', 'ngResource']);
 
 
-SoonzikApp.config(['$routeProvider', '$locationProvider',
-  function($routeProvider, $locationProvider) {
-  	var url = document.location.pathname;
+SoonzikApp.config(['$routeProvider', '$locationProvider', '$httpProvider', function($routeProvider, $locationProvider, $httpProvider) {
+	var url = document.location.pathname;
 
-  	if (!/\/users\/[0-9]+\/finish_signup/.test(url)) {
-	  	$locationProvider.html5Mode(true);
-	    $routeProvider.when('/users/:id', {
-	      templateUrl: '<%= asset_path("AngularJS/views/users/show.html.haml") %>',
-	      controller: 'UsersCtrl'
-	    }).when('/users/:id/edit', {
-	      templateUrl: '<%= asset_path("AngularJS/views/users/edit.html.haml") %>',
-	      controller: 'UsersCtrl'
-	    });
-	  }
+	var whitelist = [
+		/\/users\/[0-9]+\/finish_signup/,
+		/\/users\/sign_in/,
+		/\/users\/sign_up/,
+		/\/users\/password\/new/
+	];
 
+	var dynamicPage = true;
+	for (var index in whitelist) {
+		if (whitelist[index].test(url) == true) {
+			dynamicPage = false;
+			break;
+		}
+	}
+
+	if (dynamicPage) {
+  	$locationProvider.html5Mode(true);
+    $routeProvider.when('/users/:id', {
+      templateUrl: '<%= asset_path("AngularJS/views/users/show.html.haml") %>',
+      controller: 'UsersCtrl'
+    }).when('/users/:id/edit', {
+      templateUrl: '<%= asset_path("AngularJS/views/users/edit.html.haml") %>',
+      controller: 'UsersCtrl'
+    });
   }
-]);
+
+  $httpProvider.defaults.useXDomain = true;
+	delete $httpProvider.defaults.headers.common["X-Requested-With"];  
+}]);

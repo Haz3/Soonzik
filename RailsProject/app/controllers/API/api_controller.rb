@@ -8,12 +8,16 @@ module API
     protect_from_forgery with: :null_session
     skip_before_filter  :verify_authenticity_token
     before_action :setParamToObj
-    after_filter :cors_set_access_control_headers
+    before_action :cors_set_access_control_headers
+    before_action :checkOptions
 
     # For all responses in this controller, return the CORS access control headers.
     def cors_set_access_control_headers
       headers['Access-Control-Allow-Origin'] = '*'
+      headers['Access-Control-Expose-Headers'] = 'ETag'
       headers['Access-Control-Allow-Methods'] = 'POST, GET, OPTIONS'
+      headers['Access-Control-Allow-Headers'] = '*,x-requested-with,Content-Type,If-Modified-Since,If-None-Match,Auth-User-Token'
+      headers['Access-Control-Allow-Credentials'] = 'true'
       headers['Access-Control-Max-Age'] = "1728000"
     end
 
@@ -33,6 +37,13 @@ module API
         end
       end
       @httpCode = nil
+    end
+
+    # To render nothing in case of an option request (for Ajax)
+    def checkOptions
+      if request.options?
+        render nothing: true and return
+      end
     end
   end
 end
