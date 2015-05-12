@@ -53,7 +53,7 @@ class User < ActiveRecord::Base
   
   # validation
   # message: 'the message'
-  validates :email, confirmation: true, format: /\b[A-Z0-9._%a-z\-]+@(?:[A-Z0-9a-z\-]+\.)+[A-Za-z]{2,4}\z/  #if doesn't work : /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i
+  #validates :email, confirmation: true, format: /\b[A-Z0-9._%a-z\-]+@(?:[A-Z0-9a-z\-]+\.)+[A-Za-z]{2,4}\z/  #if doesn't work : /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i
   #validates :encrypted_password, confirmation: true, length: { is: 20 }
 #  validates :terms_of_service, acceptance: true
   validates :username, length: {
@@ -65,7 +65,7 @@ class User < ActiveRecord::Base
   validates :idAPI, length: { is: 40 }
   validates :secureKey, length: { is: 64 }
   validates :salt, length: { is: 40 }
-  validates :email, :salt, :username, :birthday, :image, :idAPI, :secureKey, :language, presence: true
+  validates :email, :salt, :username, :fname, :lname, :birthday, :image, :idAPI, :secureKey, :language, presence: true
   validates :newsletter, :inclusion => { :in => [true, false] }
   validates :email, :username, uniqueness: true
   validates :birthday, format: /(\d{4})-(\d{2})-(\d{2})/

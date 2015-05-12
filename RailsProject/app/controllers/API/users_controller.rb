@@ -692,11 +692,12 @@ module API
             @returnValue = { content: user.as_json(:include => {
                                                                   :address => { :only => Address.miniKey }
                                                                 },
-                                                    :only => User.miniKey) }
+                                                    :only => User.bigKey) }
             codeAnswer 201
             defineHttp :created
           else
-            @returnValue = { content: user.errors.to_hash.to_json }
+            @returnValue = { content: { user: JSON.parse(user.errors.to_hash.to_json), address: JSON.parse(user.address.errors.to_hash.to_json) } } if user.address != nil
+            @returnValue = { content: { user: JSON.parse(user.errors.to_hash.to_json), address: {} } } if user.address == nil
             codeAnswer 505
             defineHttp :service_unavailable
           end
@@ -714,20 +715,21 @@ module API
             @returnValue = { content: user.as_json(:include => {
                                                                   :address => { :only => Address.miniKey }
                                                                 },
-                                                    :only => User.miniKey) }
+                                                    :only => User.bigKey) }
             codeAnswer 201
             defineHttp :created
           else
-            @returnValue = { content: user.errors.to_hash.to_json }
+            @returnValue = { content: JSON.parse(user.errors.to_hash.to_json) }
             codeAnswer 503
             defineHttp :service_unavailable
           end
         else
-          @returnValue = { content: address.errors.to_hash.to_json }
+          @returnValue = { content: JSON.parse(address.errors.to_hash.to_json) }
           codeAnswer 503
           defineHttp :service_unavailable
         end
       rescue
+        puts $!, $@
         codeAnswer 504
         defineHttp :service_unavailable
       end

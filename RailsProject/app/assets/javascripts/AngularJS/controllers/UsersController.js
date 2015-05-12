@@ -3,6 +3,32 @@ SoonzikApp.controller('UsersCtrl', ['$scope', "$routeParams", 'SecureAuth', 'HTT
 
 	$scope.show = {};
 	$scope.form = { user: {} };
+	$scope.formError = {
+		user: {
+			email: false,
+			fname: false,
+			lname: false,
+			image: false,
+			description: false,
+			birthday: false,
+			phoneNumber: false,
+			facebook: false,
+			twitter: false,
+			googlePlus: false,
+			newsletter: false,
+			language: false,
+			background: false,
+			password: false
+		},
+		address: {
+			numberStreet: false,
+			complement: false,
+			street: false,
+			city: false,
+			country: false,
+			zipcode: false
+		}
+	};
 
 
 	// For the select of date
@@ -95,10 +121,9 @@ SoonzikApp.controller('UsersCtrl', ['$scope', "$routeParams", 'SecureAuth', 'HTT
 				// Initialisation of the user profile
 				$scope.form.user = dataProfile;
 				birthday = dataProfile.birthday.split('-');
-				$scope.form.user.birthday = { year: 2000, month: 1, day: 1 };
-				$scope.form.user.birthday.year = parseInt(birthday[0]);
-				$scope.form.user.birthday.month = parseInt(birthday[1]);
-				$scope.form.user.birthday.day = parseInt(birthday[2]);
+				$scope.form.user["birthday(1i)"] = birthday[0];
+				$scope.form.user["birthday(2i)"] = birthday[1];
+				$scope.form.user["birthday(3i)"] = birthday[2];
 				$scope.form.user.password = "";
 
 				if (typeof $scope.form.user.address !== "undefined") {
@@ -117,24 +142,90 @@ SoonzikApp.controller('UsersCtrl', ['$scope', "$routeParams", 'SecureAuth', 'HTT
 
 	$scope.submitForm = function() {
 		SecureAuth.securedTransaction(function (key, user_id) {
-			var parameters = { secureKey: key, user_id: user_id, user: jQuery.extend(true, {}, $scope.form.user) };
-			delete parameters.user.username;
+			// We send this function to be executed after getting the secure key
+			var parameters = { secureKey: key, user_id: user_id, user: jQuery.extend(true, {}, $scope.form.user) };//deep copy of the user object
+			delete parameters.user.username; // it can't be modified
 			if (typeof $scope.form.address !== "undefined") {
 				parameters.address = $scope.form.address;
 			}
-			if (parameters.user.password.length == 0) {
+			if (parameters.user.password.length == 0) {// we won't forced the user to put its password everytime
 				delete parameters.user.password;
 			}
 			$scope.function_submit(parameters).then(function(response) {
-				console.log(response);
-			}, function () {
+				NotificationService.success("Profile updated successfully");
+			}, function (responseError) {
+				//if the update fail
+				console.log(responseError);
+
+				if (typeof responseError.data.content.user !== "undefined") {
+					// Iterate on error
+					for (var key in $scope.formError.user) {
+						if (typeof responseError.data.content.user[key] !== "undefined") {
+							$scope.formError.user[key] = responseError.data.content.user[key];
+						} else {
+							$scope.formError.user[key] = false;
+						}
+					}
+				}
+				if (typeof responseError.data.content.address !== "undefined") {
+					// Iterate on error
+					for (var key in $scope.formError.address) {
+						if (typeof responseError.data.content.address[key] !== "undefined") {
+							$scope.formError.address[key] = responseError.data.content.address[key];
+						} else {
+							$scope.formError.address[key] = false;
+						}
+					}
+				}
 				NotificationService.error("An error occured");
 			});
-		}, function () {
+		}, function (responseForbidden) {
+			console.log(responseForbidden);
 			NotificationService.error("An error occured");
 		});
 	}
 
+	$scope.uploadAvatar = function($file) {
+		console.log($file);
+		if (files && files.length) {
+			for (var i = 0; i < files.length; i++) {
+				var file = files[i];
+				// need to define a route to upload image
+
+				/*Upload.upload({
+					url: 'upload/url',
+					fields: {'username': $scope.username},
+					file: file
+				}).progress(function (evt) {
+				var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+					console.log('progress: ' + progressPercentage + '% ' + evt.config.file.name);
+				}).success(function (data, status, headers, config) {
+					console.log('file ' + config.file.name + 'uploaded. Response: ' + data);
+				});*/
+			}
+    }
+	}
+
+	$scope.uploadBackground = function($file) {
+		console.log($file);
+		if (files && files.length) {
+			for (var i = 0; i < files.length; i++) {
+				var file = files[i];
+				// need to define a route to upload background
+
+				/*Upload.upload({
+					url: 'upload/url',
+					fields: {'username': $scope.username},
+					file: file
+				}).progress(function (evt) {
+				var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+					console.log('progress: ' + progressPercentage + '% ' + evt.config.file.name);
+				}).success(function (data, status, headers, config) {
+					console.log('file ' + config.file.name + 'uploaded. Response: ' + data);
+				});*/
+			}
+    }
+	}
 
 	/* Utils function */
 
