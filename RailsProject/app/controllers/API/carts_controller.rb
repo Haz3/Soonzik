@@ -26,7 +26,12 @@ module API
     def destroy
       begin
       	if (@security)
-      	  object = Cart.find_by_id(@id);
+      	  object = Cart.find_by_id(@id)
+          if (object.user_id != @user_id)
+            codeAnswer 500
+            defineHttp :forbidden
+            sendJson and return
+          end
       	  object.destroy
       	  codeAnswer 202
       	else
@@ -59,7 +64,7 @@ module API
     # 
     def save
       begin
-        if (@security)
+        if (@security && @cart[:user_id] == @user_id)
           raise ArgumentError, 'user_id missing' if (!defined?@cart[:user_id])
           raise ArgumentError, 'gift missing' if (!defined?@cart[:gift])
           raise ArgumentError, 'typeObj missing' if (!defined?@cart[:typeObj])
@@ -138,7 +143,7 @@ module API
         if (!@security)
           codeAnswer 500
         else
-          cart_object = nil
+          cart_object = Cart.where(user_id: @user_id)
           if (defined?@attribute)
             # - - - - - - - -
             @attribute.each do |x, y|
@@ -155,9 +160,6 @@ module API
                 cart_object = cart_object.where(condition)
               end
             end
-            # - - - - - - - -
-          else
-            cart_object = Cart.where(user_id: @user_id)            #no attribute specified
           end
 
           order_asc = ""

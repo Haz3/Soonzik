@@ -168,11 +168,16 @@ is the list of action available :</p>
 </li></ul>					
 											<div class="method-source-code" id="destroy-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/notifications_controller.rb, line 212</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/notifications_controller.rb, line 209</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">destroy</span>
   <span class="ruby-keyword">begin</span>
     <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@security</span>)
       <span class="ruby-identifier">object</span> = <span class="ruby-constant">Notification</span>.<span class="ruby-identifier">find_by_id</span>(<span class="ruby-ivar">@id</span>)
+      <span class="ruby-keyword">if</span> (<span class="ruby-identifier">object</span>.<span class="ruby-identifier">user_id</span> <span class="ruby-operator">!=</span> <span class="ruby-ivar">@user_id</span>)
+        <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">500</span>
+        <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:forbidden</span>
+        <span class="ruby-identifier">sendJson</span> <span class="ruby-keyword">and</span> <span class="ruby-keyword">return</span>
+      <span class="ruby-keyword">end</span>
       <span class="ruby-identifier">object</span>.<span class="ruby-identifier">destroy</span>
       <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">202</span>
     <span class="ruby-keyword">else</span>
@@ -241,7 +246,7 @@ including its user</p>
     <span class="ruby-keyword">if</span> (<span class="ruby-operator">!</span><span class="ruby-ivar">@security</span>)
       <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">500</span>
     <span class="ruby-keyword">else</span>
-      <span class="ruby-identifier">notification_object</span> = <span class="ruby-keyword">nil</span>
+      <span class="ruby-identifier">notification_object</span> = <span class="ruby-constant">Notification</span>.<span class="ruby-identifier">where</span>(<span class="ruby-identifier">user_id</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@user_id</span>)
       <span class="ruby-keyword">if</span> (<span class="ruby-keyword">defined?</span><span class="ruby-ivar">@attribute</span>)
         <span class="ruby-comment"># - - - - - - - -</span>
         <span class="ruby-ivar">@attribute</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">x</span>, <span class="ruby-identifier">y</span><span class="ruby-operator">|</span>
@@ -258,9 +263,6 @@ including its user</p>
             <span class="ruby-identifier">notification_object</span> = <span class="ruby-identifier">notification_object</span>.<span class="ruby-identifier">where</span>(<span class="ruby-identifier">condition</span>)
           <span class="ruby-keyword">end</span>
         <span class="ruby-keyword">end</span>
-        <span class="ruby-comment"># - - - - - - - -</span>
-      <span class="ruby-keyword">else</span>
-        <span class="ruby-identifier">notification_object</span> = <span class="ruby-constant">Notification</span>.<span class="ruby-identifier">where</span>(<span class="ruby-identifier">user_id</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@user_id</span>)            <span class="ruby-comment">#no attribute specified</span>
       <span class="ruby-keyword">end</span>
 
       <span class="ruby-identifier">order_asc</span> = <span class="ruby-string">&quot;&quot;</span>
@@ -364,7 +366,7 @@ user</p>
 								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/notifications_controller.rb, line 67</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">save</span>
   <span class="ruby-keyword">begin</span>
-    <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@security</span>)
+    <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@security</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-ivar">@notification</span>[<span class="ruby-value">:user_id</span>] <span class="ruby-operator">==</span> <span class="ruby-ivar">@user_id</span>)
       <span class="ruby-identifier">notif</span> = <span class="ruby-constant">Notification</span>.<span class="ruby-identifier">new</span>(<span class="ruby-constant">Notification</span>.<span class="ruby-identifier">notification_params</span> <span class="ruby-identifier">params</span>)
       <span class="ruby-keyword">if</span> (<span class="ruby-identifier">notif</span>.<span class="ruby-identifier">save</span>)
         <span class="ruby-ivar">@returnValue</span> = { <span class="ruby-identifier">content</span><span class="ruby-operator">:</span> <span class="ruby-identifier">notif</span>.<span class="ruby-identifier">as_json</span>(<span class="ruby-value">:include</span> =<span class="ruby-operator">&gt;</span> {
@@ -428,7 +430,7 @@ wrong</p>
   <span class="ruby-keyword">begin</span>
     <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@security</span>)
             <span class="ruby-identifier">notif</span> = <span class="ruby-constant">Notification</span>.<span class="ruby-identifier">find_by_id</span>(<span class="ruby-ivar">@id</span>)
-            <span class="ruby-keyword">if</span> (<span class="ruby-operator">!</span><span class="ruby-identifier">notif</span>)
+            <span class="ruby-keyword">if</span> (<span class="ruby-operator">!</span><span class="ruby-identifier">notif</span> <span class="ruby-operator">||</span> (<span class="ruby-identifier">notif</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">notif</span>.<span class="ruby-identifier">user_id</span> <span class="ruby-operator">!=</span> <span class="ruby-ivar">@user_id</span>))
               <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">502</span>
         <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:not_found</span>
       <span class="ruby-keyword">else</span>

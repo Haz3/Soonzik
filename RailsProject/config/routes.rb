@@ -56,6 +56,7 @@ Rails.application.routes.draw do
       collection do
         get 'find' => 'messages#find'
         match 'save' => 'messages#save', via: [:post, :options]
+        get 'conversation/:id' => 'messages#conversation'
       end
     end
 

@@ -26,7 +26,7 @@ module API
     # 
     def save
       begin
-        if (@security)
+        if (@security && @purchase[:user_id] == @user_id)
           raise ArgumentError, 'user_id missing' if (!defined?@purchase[:user_id])
           raise ArgumentError, 'typeObj missing' if (!defined?@purchase[:typeObj])
           raise ArgumentError, 'obj_id missing' if (!defined?@purchase[:obj_id])

@@ -194,7 +194,7 @@ list of action available :</p>
 </li></ul>					
 											<div class="method-source-code" id="addfriend-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/users_controller.rb, line 480</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/users_controller.rb, line 479</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">addfriend</span>
   <span class="ruby-keyword">begin</span>
     <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@security</span>)
@@ -272,7 +272,7 @@ friendlist</p>
 </li></ul>					
 											<div class="method-source-code" id="delfriend-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/users_controller.rb, line 535</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/users_controller.rb, line 534</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">delfriend</span>
   <span class="ruby-keyword">begin</span>
     <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@security</span>)
@@ -359,7 +359,7 @@ Note : By default, if you precise no attribute, it will take every row</pre>
 </li></ul>					
 											<div class="method-source-code" id="find-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/users_controller.rb, line 102</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/users_controller.rb, line 101</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">find</span>
   <span class="ruby-keyword">begin</span>
     <span class="ruby-identifier">user_object</span> = <span class="ruby-keyword">nil</span>
@@ -476,7 +476,7 @@ Note : By default, if you precise no attribute, it will take every row</pre>
 </li></ul>					
 											<div class="method-source-code" id="follow-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/users_controller.rb, line 372</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/users_controller.rb, line 371</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">follow</span>
   <span class="ruby-keyword">begin</span>
     <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@security</span>)
@@ -548,7 +548,7 @@ Note : By default, if you precise no attribute, it will take every row</pre>
 </li></ul>					
 											<div class="method-source-code" id="getFollowers-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/users_controller.rb, line 652</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/users_controller.rb, line 651</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">getFollowers</span>
   <span class="ruby-keyword">begin</span>
     <span class="ruby-identifier">u</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">find_by_id</span>(<span class="ruby-ivar">@id</span>)
@@ -600,7 +600,7 @@ Note : By default, if you precise no attribute, it will take every row</pre>
 </li></ul>					
 											<div class="method-source-code" id="getFollows-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/users_controller.rb, line 620</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/users_controller.rb, line 619</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">getFollows</span>
   <span class="ruby-keyword">begin</span>
     <span class="ruby-identifier">u</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">find_by_id</span>(<span class="ruby-ivar">@id</span>)
@@ -652,7 +652,7 @@ Note : By default, if you precise no attribute, it will take every row</pre>
 </li></ul>					
 											<div class="method-source-code" id="getFriends-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/users_controller.rb, line 588</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/users_controller.rb, line 587</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">getFriends</span>
   <span class="ruby-keyword">begin</span>
     <span class="ruby-identifier">u</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">find_by_id</span>(<span class="ruby-ivar">@id</span>)
@@ -700,7 +700,7 @@ Note : By default, if you precise no attribute, it will take every row</pre>
 </li></ul>					
 											<div class="method-source-code" id="getmusics-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/users_controller.rb, line 191</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/users_controller.rb, line 190</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">getmusics</span>
   <span class="ruby-keyword">begin</span>
     <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@security</span>)
@@ -806,7 +806,7 @@ him</p>
 </li></ul>					
 											<div class="method-source-code" id="isArtist-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/users_controller.rb, line 325</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/users_controller.rb, line 324</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">isArtist</span>
   <span class="ruby-keyword">begin</span>
     <span class="ruby-identifier">u</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">find_by_id</span>(<span class="ruby-ivar">@id</span>)
@@ -920,7 +920,7 @@ address, friends and follow.</p>
 </li></ul>					
 											<div class="method-source-code" id="save-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/users_controller.rb, line 254</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/users_controller.rb, line 253</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">save</span>
   <span class="ruby-identifier">_save</span>(<span class="ruby-keyword">true</span>, <span class="ruby-identifier">params</span>)
   <span class="ruby-identifier">sendJson</span>
@@ -967,8 +967,7 @@ address, friends and follow.</p>
       <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">502</span>
       <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:not_found</span>
     <span class="ruby-keyword">else</span>
-      <span class="ruby-ivar">@returnValue</span> = { <span class="ruby-identifier">content</span><span class="ruby-operator">:</span> <span class="ruby-identifier">user</span>.<span class="ruby-identifier">as_json</span>(<span class="ruby-value">:only</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">User</span>.<span class="ruby-identifier">bigKey</span>, <span class="ruby-value">:include</span> =<span class="ruby-operator">&gt;</span> { <span class="ruby-value">:friends</span> =<span class="ruby-operator">&gt;</span> { <span class="ruby-value">:only</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">User</span>.<span class="ruby-identifier">miniKey</span> }
-        }) }
+      <span class="ruby-ivar">@returnValue</span> = { <span class="ruby-identifier">content</span><span class="ruby-operator">:</span> <span class="ruby-identifier">user</span>.<span class="ruby-identifier">as_json</span>(<span class="ruby-value">:only</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">User</span>.<span class="ruby-identifier">bigKey</span>) }
       <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">200</span>
     <span class="ruby-keyword">end</span>
   <span class="ruby-keyword">rescue</span>
@@ -1015,7 +1014,7 @@ address, friends and follow.</p>
 </li></ul>					
 											<div class="method-source-code" id="unfollow-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/users_controller.rb, line 426</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/users_controller.rb, line 425</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">unfollow</span>
   <span class="ruby-keyword">begin</span>
     <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@security</span>)
@@ -1139,7 +1138,7 @@ address, friends and follow.</p>
 </li></ul>					
 											<div class="method-source-code" id="update-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/users_controller.rb, line 293</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/users_controller.rb, line 292</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">update</span>
   <span class="ruby-keyword">begin</span>
     <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@security</span>)

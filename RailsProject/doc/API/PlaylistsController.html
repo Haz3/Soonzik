@@ -176,7 +176,12 @@ the list of action available :</p>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">destroy</span>
   <span class="ruby-keyword">begin</span>
     <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@security</span>)
-      <span class="ruby-identifier">object</span> = <span class="ruby-constant">Playlist</span>.<span class="ruby-identifier">find_by_id</span>(<span class="ruby-ivar">@id</span>);
+      <span class="ruby-identifier">object</span> = <span class="ruby-constant">Playlist</span>.<span class="ruby-identifier">find_by_id</span>(<span class="ruby-ivar">@id</span>)
+      <span class="ruby-keyword">if</span> (<span class="ruby-identifier">object</span>.<span class="ruby-identifier">user_id</span> <span class="ruby-operator">!=</span> <span class="ruby-ivar">@user_id</span>)
+        <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">500</span>
+        <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:forbidden</span>
+        <span class="ruby-identifier">sendJson</span> <span class="ruby-keyword">and</span> <span class="ruby-keyword">return</span>
+      <span class="ruby-keyword">end</span>
       <span class="ruby-identifier">object</span>.<span class="ruby-identifier">destroy</span>
       <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">202</span>
     <span class="ruby-keyword">else</span>
@@ -368,7 +373,7 @@ its musics (which includes its albums and artist) and user</p>
 								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/playlists_controller.rb, line 70</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">save</span>
   <span class="ruby-keyword">begin</span>
-    <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@security</span>)
+    <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@security</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-ivar">@playlist</span>[<span class="ruby-value">:user_id</span>] <span class="ruby-operator">==</span> <span class="ruby-ivar">@user_id</span>)
       <span class="ruby-identifier">playlist</span> = <span class="ruby-constant">Playlist</span>.<span class="ruby-identifier">new</span>(<span class="ruby-constant">Playlist</span>.<span class="ruby-identifier">playlist_params</span> <span class="ruby-identifier">params</span>)
       <span class="ruby-keyword">if</span> (<span class="ruby-identifier">playlist</span>.<span class="ruby-identifier">save</span>)
         <span class="ruby-ivar">@returnValue</span> = { <span class="ruby-identifier">content</span><span class="ruby-operator">:</span> <span class="ruby-identifier">playlist</span>.<span class="ruby-identifier">as_json</span>(<span class="ruby-value">:include</span> =<span class="ruby-operator">&gt;</span> {
@@ -506,7 +511,7 @@ including its musics (which includes its albums and artist) and user</p>
   <span class="ruby-keyword">begin</span>
     <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@security</span>)
       <span class="ruby-identifier">playlist</span> = <span class="ruby-constant">Playlist</span>.<span class="ruby-identifier">find_by_id</span>(<span class="ruby-ivar">@id</span>)
-      <span class="ruby-keyword">if</span> (<span class="ruby-identifier">playlist</span> <span class="ruby-operator">!=</span> <span class="ruby-keyword">nil</span>)
+      <span class="ruby-keyword">if</span> (<span class="ruby-identifier">playlist</span> <span class="ruby-operator">!=</span> <span class="ruby-keyword">nil</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">playlist</span>.<span class="ruby-identifier">user_id</span> <span class="ruby-operator">==</span> <span class="ruby-ivar">@user_id</span>)
         <span class="ruby-keyword">if</span> (<span class="ruby-keyword">defined?</span>(<span class="ruby-ivar">@playlist</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-ivar">@playlist</span>.<span class="ruby-identifier">has_key?</span>(<span class="ruby-value">:music</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-ivar">@playlist</span>[<span class="ruby-value">:music</span>].<span class="ruby-identifier">size</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span>)
           <span class="ruby-identifier">playlist</span>.<span class="ruby-identifier">musics</span> = []
           <span class="ruby-ivar">@playlist</span>[<span class="ruby-value">:music</span>].<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">music_id</span><span class="ruby-operator">|</span>

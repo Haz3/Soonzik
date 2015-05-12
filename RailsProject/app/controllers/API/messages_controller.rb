@@ -5,9 +5,10 @@ module API
   # * show        [get] - SECURE
   # * save		    [post] - SECURE
   # * find        [get] - SECURE
+  # * conversation[get] - SECURE
   #
   class MessagesController < ApisecurityController
-    before_action :checkKey, only: [:show, :save, :find]
+    before_action :checkKey, only: [:show, :save, :find, :conversation]
 
   	# Give a specific object by its id
     #
@@ -28,14 +29,14 @@ module API
       begin
       	if (@security)
 	        msg = Message.find_by_id(@id)
-	        if (!msg)
+	        if (!msg || (msg && (msg.user_id == @user_id || msg.dest_id == @user_id)))
 	          codeAnswer 502
             defineHttp :not_found
 	        else
   	        @returnValue = { content: msg.as_json(:include => {
           														:sender => { :only => User.miniKey },
           														:receiver => { :only => User.miniKey }
-          													}) }
+          													}, :only => Message.miniKey) }
             codeAnswer 200
           end
 	    else
@@ -67,13 +68,13 @@ module API
     # 
     def save
       begin
-        if (@security)
+        if (@security && (@message[:user_id] == @user_id || @message[:dest_id] == @user_id))
           msg = Message.new(Message.message_params params)
           if (msg.save)
             @returnValue = { content: msg.as_json(:include => {
                                     :sender => { :only => User.miniKey },
                                     :receiver => { :only => User.miniKey }
-                                  }) }
+                                  }, :only => Message.miniKey) }
             codeAnswer 201
             defineHttp :created
           else
@@ -118,7 +119,7 @@ module API
         if (!@security)
           codeAnswer 500
         else
-          message_object = nil
+          message_object = Message.where("user_id = ? OR dest_id = ?", @user_id, @user_id)
           if (defined?@attribute)
             # - - - - - - - -
             @attribute.each do |x, y|
@@ -137,7 +138,7 @@ module API
             end
             # - - - - - - - -
           else
-            message_object = Message.where(user_id: @user_id)            #no attribute specified
+            message_object = Message.where("user_id = ? OR dest_id = ?", @user_id, @user_id)            #no attribute specified
           end
 
           order_asc = ""
@@ -183,7 +184,7 @@ module API
           @returnValue = { content: message_object.as_json(:include => {
                                       :sender => { :only => User.miniKey },
                                       :receiver => { :only => User.miniKey }
-                                    }) }
+                                    }, :only => Message.miniKey) }
 
           if (message_object.size == 0)
             codeAnswer 202
@@ -192,6 +193,53 @@ module API
           end
         end
       rescue
+        codeAnswer 504
+        defineHttp :service_unavailable
+      end
+      sendJson
+    end
+
+    # To get 20 messages between 2 people
+    #
+    # Route : /messages/conversation/:id
+    #
+    # ==== Options
+    # 
+    # * +:id+ - Id of the person with who you speak
+    # * +:offset+ - (optionnal) offset to get the message from a specific offset (by default : 0)
+    # * +:lastMsg+ - (optionnal) The if of the oldest message you have in your historic to get the 20 messages before it (can't be used with offset). It is less optimized than the offset (need to browse the array of messages). If the id is not found, it is like if the parameter was not set
+    # 
+    # ===== HTTP VALUE
+    # 
+    # - +200+ - In case of success, return a list of messages (index 0 = the oldest message)
+    # - +503+ - Error from server
+    # 
+    def conversation
+      begin
+        if (@security)
+          messages = []
+          if (defined?@offset)
+            messages = Message.where(user_id: [@user_id, @id]).where(dest_id: [@user_id, @id]).order(created_at: :desc).offset(@offset).limit(20).reverse.as_json(:only => Message.miniKey)
+          elsif (defined?@lastMsg)
+            tmp = Message.where(user_id: [@user_id, @id]).where(dest_id: [@user_id, @id]).order(created_at: :desc).as_json(:only => Message.miniKey)
+            index = 0
+            tmp.each_with_index { |message, i|
+              if (message[:id] == @lastMsg)
+                index = i
+                break
+              end
+            }
+            messages = tmp[index..(index + 20)].reverse
+          else
+            messages = Message.where(user_id: [@user_id, @id]).where(dest_id: [@user_id, @id]).order(created_at: :desc).limit(20).reverse.as_json(:only => Message.miniKey)
+          end
+          @returnValue = { content: messages }
+        else
+          codeAnswer 500
+          defineHttp :forbidden
+        end
+      rescue
+        puts $!, $@
         codeAnswer 504
         defineHttp :service_unavailable
       end

@@ -69,7 +69,7 @@ module API
     # 
     def save
       begin
-        if (@security)
+        if (@security && @playlist[:user_id] == @user_id)
           playlist = Playlist.new(Playlist.playlist_params params)
           if (playlist.save)
             @returnValue = { content: playlist.as_json(:include => {
@@ -121,7 +121,7 @@ module API
       begin
         if (@security)
           playlist = Playlist.find_by_id(@id)
-          if (playlist != nil)
+          if (playlist != nil && playlist.user_id == @user_id)
             if (defined?(@playlist) && @playlist.has_key?(:music) && @playlist[:music].size > 0)
               playlist.musics = []
               @playlist[:music].each do |music_id|
@@ -292,7 +292,12 @@ module API
     def destroy
       begin
         if (@security)
-          object = Playlist.find_by_id(@id);
+          object = Playlist.find_by_id(@id)
+          if (object.user_id != @user_id)
+            codeAnswer 500
+            defineHttp :forbidden
+            sendJson and return
+          end
           object.destroy
           codeAnswer 202
         else

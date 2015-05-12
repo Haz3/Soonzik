@@ -77,7 +77,7 @@ SoonzikApp.controller('ChatCtrl', ['$scope', 'SecureAuth', 'HTTPService', '$time
 
 	var canItBeBig = function (arrayWindows) {
 		var width = $(window).width() - 320;	// 320 = 210 (size of friend list) + margin left of the screen
-		var numberMaxWindowOpened = ~~(width / sizeChatWindow);
+		var numberMaxWindowOpened = ~~(width / sizeChatWindow); //to get an int and not a float
 		var currentlyOpened = 0;
 
 		for (var index in arrayWindows) {
@@ -121,10 +121,47 @@ SoonzikApp.controller('ChatCtrl', ['$scope', 'SecureAuth', 'HTTPService', '$time
 					}
 				}
 			}
+			if ($scope.friends.length > 0)
+				r_secureLoop(0)
 		} else {
 			timeSynchronizationCall += 150;
 			$timeout(timeoutSynchronization, timeSynchronizationCall);
 		}
+	}
+
+	var r_secureLoop = function(index) {
+		SecureAuth.securedTransaction(function (key, user_id) {
+			waiting = false;
+			var parameters = [{
+				key: "secureKey", value: key
+			}, {
+				key: "user_id", value: user_id
+			}];
+			HTTPService.getLastMessages($scope.friends[index].id, parameters).then(function(messages) {
+				if (typeof $scope.message[$scope.friends[index].username] === "undefined")
+					$scope.message[$scope.friends[index].username] = { value: "", messagesText: [] };
+
+				for (var i in messages.data.content) {
+					$scope.message[$scope.friends[index].username].messagesText.push({ extern: (messages.data.content[i].user_id == $scope.current_user.id) ? false : true, value: messages.data.content[i].msg });
+				}
+				
+				console.log($scope.message);
+
+				if (index + 1 < $scope.friends.length)
+					r_secureLoop(index + 1);
+				else
+					return;
+			}, function(error) {
+				if (index + 1 < $scope.friends.length)
+					r_secureLoop(index + 1);
+				else
+					return;
+				$scope.message[$scope.friends[index].username] = "An error occured during the loading";
+			});
+		}, function(error) {
+			console.log(error);
+			$scope.message[$scope.friends[index].username] = "An error occured during the loading";
+		});
 	}
 
 	var isOpen = function(username) {
@@ -179,7 +216,8 @@ SoonzikApp.controller('ChatCtrl', ['$scope', 'SecureAuth', 'HTTPService', '$time
 				opened: true
 			};
 			$scope.onWindows.push(selectedObject);
-			$scope.message[friend.username] = { value: "", messagesText: [] };
+			if (typeof $scope.message[friend.username] === "undefined")
+				$scope.message[friend.username] = { value: "", messagesText: [] };
 		} else {
 			selectedObject.opened = true;
 			selectedObject.maximized = true;

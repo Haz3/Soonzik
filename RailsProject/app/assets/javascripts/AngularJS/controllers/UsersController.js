@@ -155,7 +155,6 @@ SoonzikApp.controller('UsersCtrl', ['$scope', "$routeParams", 'SecureAuth', 'HTT
 				NotificationService.success("Profile updated successfully");
 			}, function (responseError) {
 				//if the update fail
-				console.log(responseError);
 
 				if (typeof responseError.data.content.user !== "undefined") {
 					// Iterate on error

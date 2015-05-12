@@ -87,7 +87,7 @@ module API
     # 
     def save
       begin
-        if (@security)
+        if (@security && @tweet[:user_id] == @user_id)
           tweet = Tweet.new(Tweet.tweet_params params)
           if (tweet.save)
             @returnValue = { content: tweet.as_json(:include => {
@@ -232,7 +232,12 @@ module API
     def destroy
       begin
         if (@security)
-          object = Tweet.find_by_id(@id);
+          object = Tweet.find_by_id(@id)
+          if (object.user_id != @user_id)
+            codeAnswer 500
+            defineHttp :forbidden
+            sendJson and return
+          end
           object.destroy
           codeAnswer 202
         else

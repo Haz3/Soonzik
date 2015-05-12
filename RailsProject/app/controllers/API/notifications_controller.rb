@@ -28,7 +28,7 @@ module API
       begin
       	if (@security)
 	        notif = Notification.find_by_id(@id)
-	        if (!notif)
+	        if (!notif || (notif && notif.user_id != @user_id))
 	          codeAnswer 502
             defineHttp :not_found
           else
@@ -66,7 +66,7 @@ module API
     # 
     def save
       begin
-        if (@security)
+        if (@security && @notification[:user_id] == @user_id)
           notif = Notification.new(Notification.notification_params params)
           if (notif.save)
             @returnValue = { content: notif.as_json(:include => {
@@ -118,7 +118,7 @@ module API
         if (!@security)
           codeAnswer 500
         else
-          notification_object = nil
+          notification_object = Notification.where(user_id: @user_id)
           if (defined?@attribute)
             # - - - - - - - -
             @attribute.each do |x, y|
@@ -135,9 +135,6 @@ module API
                 notification_object = notification_object.where(condition)
               end
             end
-            # - - - - - - - -
-          else
-            notification_object = Notification.where(user_id: @user_id)            #no attribute specified
           end
 
           order_asc = ""
@@ -213,6 +210,11 @@ module API
       begin
         if (@security)
           object = Notification.find_by_id(@id)
+          if (object.user_id != @user_id)
+            codeAnswer 500
+            defineHttp :forbidden
+            sendJson and return
+          end
           object.destroy
           codeAnswer 202
         else

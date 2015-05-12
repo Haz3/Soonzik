@@ -172,7 +172,12 @@ list of action available :</p>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">destroy</span>
   <span class="ruby-keyword">begin</span>
     <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@security</span>)
-      <span class="ruby-identifier">object</span> = <span class="ruby-constant">Cart</span>.<span class="ruby-identifier">find_by_id</span>(<span class="ruby-ivar">@id</span>);
+      <span class="ruby-identifier">object</span> = <span class="ruby-constant">Cart</span>.<span class="ruby-identifier">find_by_id</span>(<span class="ruby-ivar">@id</span>)
+      <span class="ruby-keyword">if</span> (<span class="ruby-identifier">object</span>.<span class="ruby-identifier">user_id</span> <span class="ruby-operator">!=</span> <span class="ruby-ivar">@user_id</span>)
+        <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">500</span>
+        <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:forbidden</span>
+        <span class="ruby-identifier">sendJson</span> <span class="ruby-keyword">and</span> <span class="ruby-keyword">return</span>
+      <span class="ruby-keyword">end</span>
       <span class="ruby-identifier">object</span>.<span class="ruby-identifier">destroy</span>
       <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">202</span>
     <span class="ruby-keyword">else</span>
@@ -233,13 +238,13 @@ Note : By default, if you precise no attribute, it will take every row</pre>
 </li></ul>					
 											<div class="method-source-code" id="find-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/carts_controller.rb, line 136</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/carts_controller.rb, line 141</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">find</span>
   <span class="ruby-keyword">begin</span>
     <span class="ruby-keyword">if</span> (<span class="ruby-operator">!</span><span class="ruby-ivar">@security</span>)
       <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">500</span>
     <span class="ruby-keyword">else</span>
-      <span class="ruby-identifier">cart_object</span> = <span class="ruby-keyword">nil</span>
+      <span class="ruby-identifier">cart_object</span> = <span class="ruby-constant">Cart</span>.<span class="ruby-identifier">where</span>(<span class="ruby-identifier">user_id</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@user_id</span>)
       <span class="ruby-keyword">if</span> (<span class="ruby-keyword">defined?</span><span class="ruby-ivar">@attribute</span>)
         <span class="ruby-comment"># - - - - - - - -</span>
         <span class="ruby-ivar">@attribute</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">x</span>, <span class="ruby-identifier">y</span><span class="ruby-operator">|</span>
@@ -256,9 +261,6 @@ Note : By default, if you precise no attribute, it will take every row</pre>
             <span class="ruby-identifier">cart_object</span> = <span class="ruby-identifier">cart_object</span>.<span class="ruby-identifier">where</span>(<span class="ruby-identifier">condition</span>)
           <span class="ruby-keyword">end</span>
         <span class="ruby-keyword">end</span>
-        <span class="ruby-comment"># - - - - - - - -</span>
-      <span class="ruby-keyword">else</span>
-        <span class="ruby-identifier">cart_object</span> = <span class="ruby-constant">Cart</span>.<span class="ruby-identifier">where</span>(<span class="ruby-identifier">user_id</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@user_id</span>)            <span class="ruby-comment">#no attribute specified</span>
       <span class="ruby-keyword">end</span>
 
       <span class="ruby-identifier">order_asc</span> = <span class="ruby-string">&quot;&quot;</span>
@@ -362,10 +364,10 @@ the parameters, check at the model</p>
 </li></ul>					
 											<div class="method-source-code" id="save-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/carts_controller.rb, line 60</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/carts_controller.rb, line 65</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">save</span>
   <span class="ruby-keyword">begin</span>
-    <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@security</span>)
+    <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@security</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-ivar">@cart</span>[<span class="ruby-value">:user_id</span>] <span class="ruby-operator">==</span> <span class="ruby-ivar">@user_id</span>)
       <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>, <span class="ruby-string">&#39;user_id missing&#39;</span> <span class="ruby-keyword">if</span> (<span class="ruby-operator">!</span><span class="ruby-keyword">defined?</span><span class="ruby-ivar">@cart</span>[<span class="ruby-value">:user_id</span>])
       <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>, <span class="ruby-string">&#39;gift missing&#39;</span> <span class="ruby-keyword">if</span> (<span class="ruby-operator">!</span><span class="ruby-keyword">defined?</span><span class="ruby-ivar">@cart</span>[<span class="ruby-value">:gift</span>])
       <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>, <span class="ruby-string">&#39;typeObj missing&#39;</span> <span class="ruby-keyword">if</span> (<span class="ruby-operator">!</span><span class="ruby-keyword">defined?</span><span class="ruby-ivar">@cart</span>[<span class="ruby-value">:typeObj</span>])

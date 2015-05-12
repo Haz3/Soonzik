@@ -391,6 +391,12 @@ var SearchIndex =
 		"type": "anymethod"
 	},
 	{
+		"name": "checkOptions",
+		"link": "API/ApiController.html#method-i-checkOptions",
+		"snippet": "<p>To render nothing in case of an option request (for Ajax)\n",
+		"type": "anymethod"
+	},
+	{
 		"name": "new",
 		"link": "API/ApisecurityController.html#method-c-new",
 		"snippet": "<p>We create a list of code and initialize the returnValue and the security\nboolean. Usually a controller …\n",
@@ -562,6 +568,12 @@ var SearchIndex =
 		"name": "find",
 		"link": "API/MessagesController.html#method-i-find",
 		"snippet": "<p>Give a part of the messages depending of the filter passed into parameter\n<p>Options\n<p>+attribute [attribute_name]+ …\n",
+		"type": "anymethod"
+	},
+	{
+		"name": "conversation",
+		"link": "API/MessagesController.html#method-i-conversation",
+		"snippet": "<p>To get 20 messages between 2 people\n<p>Route : /messages/conversation/:id\n<p>Options\n",
 		"type": "anymethod"
 	},
 	{
@@ -994,6 +1006,12 @@ var SearchIndex =
 		"name": "message_params",
 		"link": "Message.html#method-c-message_params",
 		"snippet": "<p>The strong parameters to save or update object\n",
+		"type": "anymethod"
+	},
+	{
+		"name": "miniKey",
+		"link": "Message.html#method-c-miniKey",
+		"snippet": "<p>Filter of information for API\n",
 		"type": "anymethod"
 	},
 	{

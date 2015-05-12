@@ -13,4 +13,9 @@ class Message < ActiveRecord::Base
   def self.message_params(parameters)
     parameters.require(:message).permit(:msg, :user_id, :dest_id, :session)
   end
+
+  # Filter of information for API
+  def self.miniKey
+  	[:id, :msg, :user_id, :dest_id]
+  end
 end

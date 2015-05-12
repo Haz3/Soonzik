@@ -179,7 +179,7 @@ album : {}, purchased_pack: { partial: value, pack: {} } } } }</p>
 								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/purchases_controller.rb, line 27</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">save</span>
   <span class="ruby-keyword">begin</span>
-    <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@security</span>)
+    <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@security</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-ivar">@purchase</span>[<span class="ruby-value">:user_id</span>] <span class="ruby-operator">==</span> <span class="ruby-ivar">@user_id</span>)
       <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>, <span class="ruby-string">&#39;user_id missing&#39;</span> <span class="ruby-keyword">if</span> (<span class="ruby-operator">!</span><span class="ruby-keyword">defined?</span><span class="ruby-ivar">@purchase</span>[<span class="ruby-value">:user_id</span>])
       <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>, <span class="ruby-string">&#39;typeObj missing&#39;</span> <span class="ruby-keyword">if</span> (<span class="ruby-operator">!</span><span class="ruby-keyword">defined?</span><span class="ruby-ivar">@purchase</span>[<span class="ruby-value">:typeObj</span>])
       <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>, <span class="ruby-string">&#39;obj_id missing&#39;</span> <span class="ruby-keyword">if</span> (<span class="ruby-operator">!</span><span class="ruby-keyword">defined?</span><span class="ruby-ivar">@purchase</span>[<span class="ruby-value">:obj_id</span>])

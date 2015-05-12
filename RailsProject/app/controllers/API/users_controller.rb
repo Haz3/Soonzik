@@ -729,7 +729,6 @@ module API
           defineHttp :service_unavailable
         end
       rescue
-        puts $!, $@
         codeAnswer 504
         defineHttp :service_unavailable
       end
