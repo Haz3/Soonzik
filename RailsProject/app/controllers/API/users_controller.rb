@@ -16,9 +16,10 @@ module API
   # * getFriends  [get]
   # * getFollows  [get]
   # * getFollowers [get]
+  # * uploadImg   [post] - SECURE
   #
   class UsersController < ApisecurityController
-    before_action :checkKey, only: [:getmusics, :save, :update, :follow, :unfollow, :addfriend, :delfriend]
+    before_action :checkKey, only: [:getmusics, :save, :update, :follow, :unfollow, :addfriend, :delfriend, :uploadImg]
 
   	# Retrieve all the users
     #
@@ -658,6 +659,66 @@ module API
         else
           @returnValue = { content: u.followers.as_json(:only => User.miniKey) }
           codeAnswer 200
+        end
+      rescue
+        codeAnswer 504
+        defineHttp :service_unavailable
+      end
+      sendJson
+    end
+
+    # To upload an image or a background
+    #
+    # Route : /users/upload
+    #
+    # ==== Options
+    #
+    # * +type+ - The type of image you upload : The avatar ('image') or a cover ('backgorund'). It is optionnal, the defulat value is 'image'
+    # * +file [content_type]+ - The content type of the file. Authorized content type : "image/gif", "image/jpeg", "image/pjpeg", "image/png", "image/x-png"
+    # * +file [original_filename]+ - The name of the file
+    # * +file [tempfile]+ - The data of the file
+    #
+    # ==== HTTP VALUE
+    #
+    # - +200+ - In case of success (content is empty)
+    # - +400+ - If the content type is not good (only jpeg, gif and png are authorized)
+    # - +401+ - It is not a secured transaction
+    # - +503+ - Error from server
+    #
+    def uploadImg
+      begin
+        if (@security)
+          acceptedContentType = [
+            "image/gif",
+            "image/jpeg",
+            "image/pjpeg",
+            "image/png",
+            "image/x-png"
+          ]
+          if acceptedContentType.include? @file[:content_type]
+            randomNumber = rand(1000..10000)
+            timestamp = Time.now.to_i
+            folder = ActionController::Base.helpers.asset_path("usersImage/avatars") if (@type != "background")
+            folder = ActionController::Base.helpers.asset_path("usersImage/backgrounds") if (@type == "background")
+            
+            newFilename = Digest::SHA256.hexdigest("#{timestamp}--#{@file[:original_filename]}#{randomNumber}") + "-" + @file[:original_filename].gsub(/[^0-9A-Za-z\.-]/, '')
+
+            File.open(Rails.root.join('app', 'assets', 'images', 'usersImage', 'avatars', newFilename), 'wb') do |f|
+              f.write(@file[:tempfile].read)
+            end
+
+            u = User.find_by_id(@user_id)
+            u.image = newFilename if (@type != "background")
+            u.background = newFilename if (@type == "background")
+            u.save!
+            codeAnswer 201
+          else
+            codeAnswer 505
+            defineHttp :bad_request
+          end
+        else
+          codeAnswer 500
+          defineHttp :forbidden
         end
       rescue
         codeAnswer 504

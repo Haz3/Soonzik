@@ -119,7 +119,7 @@ the list of action available :</p>
 </li><li>
 <p>find        [get] - SECURE</p>
 </li><li>
-<p><a href="get">conversation</a> - SECURE</p>
+<p>conversation [get] - SECURE</p>
 </li></ul>
 		</section>
 
@@ -203,7 +203,6 @@ the oldest message)</p>
       <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:forbidden</span>
     <span class="ruby-keyword">end</span>
   <span class="ruby-keyword">rescue</span>
-    <span class="ruby-identifier">puts</span> <span class="ruby-identifier">$!</span>, <span class="ruby-identifier">$@</span>
     <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">504</span>
     <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:service_unavailable</span>
   <span class="ruby-keyword">end</span>

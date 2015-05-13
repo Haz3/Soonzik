@@ -1,4 +1,4 @@
-SoonzikApp.controller('UsersCtrl', ['$scope', "$routeParams", 'SecureAuth', 'HTTPService', 'NotificationService', '$timeout', function ($scope, $routeParams, SecureAuth, HTTPService, NotificationService, $timeout) {
+SoonzikApp.controller('UsersCtrl', ['$scope', "$routeParams", 'SecureAuth', 'HTTPService', 'NotificationService', '$timeout', 'Upload', function ($scope, $routeParams, SecureAuth, HTTPService, NotificationService, $timeout, Upload) {
 	$scope.loading = true;
 
 	$scope.show = {};
@@ -185,43 +185,47 @@ SoonzikApp.controller('UsersCtrl', ['$scope', "$routeParams", 'SecureAuth', 'HTT
 	}
 
 	$scope.uploadAvatar = function($file) {
-		console.log($file);
-		if (files && files.length) {
-			for (var i = 0; i < files.length; i++) {
-				var file = files[i];
+		if ($file && $file.length) {
+			for (var i = 0; i < $file.length; i++) {
+				var file = $file[i];
 				// need to define a route to upload image
 
-				/*Upload.upload({
-					url: 'upload/url',
-					fields: {'username': $scope.username},
-					file: file
-				}).progress(function (evt) {
-				var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
-					console.log('progress: ' + progressPercentage + '% ' + evt.config.file.name);
-				}).success(function (data, status, headers, config) {
-					console.log('file ' + config.file.name + 'uploaded. Response: ' + data);
-				});*/
+				SecureAuth.securedTransaction(function (key, user_id) {
+					HTTPService.uploadProfileImage(file, { secureKey: key, user_id: user_id }, function (evt) {
+						var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+						console.log('progress: ' + progressPercentage + '% ' + evt.config.file.name);
+					}, function (data, status, headers, config) {
+						console.log('file ' + config.file.name + 'uploaded. Response: ' + data);
+					}, function (error) {
+						console.log(error);
+						$scope.formError.user.image = error;
+					});
+				}, function (error) {
+					NotificationService.error("An error occured.");
+				});
 			}
     }
 	}
 
 	$scope.uploadBackground = function($file) {
-		console.log($file);
-		if (files && files.length) {
-			for (var i = 0; i < files.length; i++) {
-				var file = files[i];
-				// need to define a route to upload background
+		if ($file && $file.length) {
+			for (var i = 0; i < $file.length; i++) {
+				var file = $file[i];
+				// need to define a route to upload image
 
-				/*Upload.upload({
-					url: 'upload/url',
-					fields: {'username': $scope.username},
-					file: file
-				}).progress(function (evt) {
-				var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
-					console.log('progress: ' + progressPercentage + '% ' + evt.config.file.name);
-				}).success(function (data, status, headers, config) {
-					console.log('file ' + config.file.name + 'uploaded. Response: ' + data);
-				});*/
+				SecureAuth.securedTransaction(function (key, user_id) {
+					HTTPService.uploadBackgroundImage(file, { secureKey: key, user_id: user_id }, function (evt) {
+						var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+						console.log('progress: ' + progressPercentage + '% ' + evt.config.file.name);
+					}, function (data, status, headers, config) {
+						console.log('file ' + config.file.name + 'uploaded. Response: ' + data);
+					}, function (error) {
+						console.log(error);
+						$scope.formError.user.image = error;
+					});
+				}, function (error) {
+					NotificationService.error("An error occured.");
+				});
 			}
     }
 	}

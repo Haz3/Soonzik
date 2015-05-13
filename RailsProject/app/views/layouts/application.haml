@@ -25,7 +25,7 @@
                 .row.collapse
                   .large-5.small-5.columns
                     =image_tag "loupe.png", :class => "loupe"
-                    %input.radius{:placeholder => "Recherchez des Shtroumpfs, musiques", :type => "text"}
+                    %input.radius{:placeholder => "Search users, musics, albums...", :type => "text"}
                   .large-4.small-3.columns
                     %a.alert.button.expand.radius{:href => "#"} Search
             %ul.right
@@ -43,7 +43,7 @@
                       = link_to('Playlist (IN PROGRESS)', playlists_path)
                       %a Amis (IN PROGRESS)
                       = link_to('Logout', destroy_user_session_path, :method => :delete)
-                =image_tag current_user.image, :class => "photo-profile"              
+                =image_tag ("usersImage/avatars/" + current_user.image), :class => "photo-profile"              
                 .profile
                   %p
                     = link_to(UsersHelper.validate_username_for_oauth(current_user), user_path(current_user), :class => "profile")

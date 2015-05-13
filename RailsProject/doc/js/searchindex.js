@@ -841,6 +841,12 @@ var SearchIndex =
 		"type": "anymethod"
 	},
 	{
+		"name": "uploadImg",
+		"link": "API/UsersController.html#method-i-uploadImg",
+		"snippet": "<p>To upload an image or a background\n<p>Route : /users/upload\n<p>Options\n",
+		"type": "anymethod"
+	},
+	{
 		"name": "access_params",
 		"link": "Access.html#method-c-access_params",
 		"snippet": "<p>The strong parameters to save or update object\n",

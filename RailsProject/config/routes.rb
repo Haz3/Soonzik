@@ -127,6 +127,8 @@ Rails.application.routes.draw do
         get ':id/friends' => 'users#getFriends'
         get ':id/follows' => 'users#getFollows'
         get ':id/followers' => 'users#getFollowers'
+
+        match 'upload' => 'users#uploadImg', via: [:post, :options]
       end
     end
   end

@@ -2,8 +2,8 @@
 
 Rails.application.config.assets.precompile << Proc.new do |path|
   if path =~ /\.(css|js|scss)\z/
-    full_path = Rails.application.assets.resolve(path).to_path
-    app_assets_path = Rails.root.join('app', 'assets').to_path
+    full_path = Rails.application.assets.resolve(path).to_s
+    app_assets_path = Rails.root.join('app', 'assets').to_s
     if full_path.starts_with? app_assets_path
       Rails.logger.info "including asset: " + full_path
       true
