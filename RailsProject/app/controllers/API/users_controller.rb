@@ -15,7 +15,7 @@ module API
   # * delfriend   [post] - SECURE
   # * getFriends  [get]
   # * getFollows  [get]
-  # * getFollowers[get]
+  # * getFollowers [get]
   #
   class UsersController < ApisecurityController
     before_action :checkKey, only: [:getmusics, :save, :update, :follow, :unfollow, :addfriend, :delfriend]

@@ -11,18 +11,19 @@
 							{{ miniWindow.friend.username }}
 							.closeBtn{ "ng-click" => "closeChat(miniWindow)" }
 								x
-		.conversationWindow{ "ng-repeat" => "friendWindow in onWindows", "ng-if" => "friendWindow.opened == true && friendWindow.maximized == true" }
+		.conversationWindow{ "ng-repeat" => "friendWindow in onWindows", "ng-if" => "friendWindow.opened == true && friendWindow.maximized == true", "id" => "{{ 'userchat-' + friendWindow.friend.id }}" }
 			.header
 				.closeBtn{ "ng-click" => "closeChat(friendWindow)" }
 					x
 				%span.conversationUsername
 					{{friendWindow.friend.username}}
-			.content
-				.clearfix{ "ng-repeat" => "mess in message[friendWindow.friend.username].messagesText" }
+			.content{ "on-scroll" => "loadMoreMessages(friendWindow)", "scroll-position" => "'top'" }
+				%loading{ "loading-type" => "'square'", "ng-show" => 'friendWindow.loading == true' }
+				.clearfix{ "ng-repeat" => "mess in message[friendWindow.friend.username].messagesText", "auto-scroll-bottom" => true }
 					%p{ "class" => "{{ mess.extern == true ? 'externMessage' : 'myMessage' }}" }
 						%span
 							{{ mess.value }}
-			%input{ "submit-input" => "sendMsg(friendWindow.friend)", "ng-model" => "message[friendWindow.friend.username].value" }
+			%input{ "submit-input" => "sendMsg(friendWindow.friend)", "ng-model" => "message[friendWindow.friend.username].value", "auto-focus" => true }
 	%p="Connected friends"
 	%ul
 		%li{ "ng-repeat" => "friend in friends | filter:search:strict", "data-id" => "{{ friend.id }}", "ng-if" => "friend.online == true", "ng-click" => "open_chat(friend)" }

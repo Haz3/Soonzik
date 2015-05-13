@@ -5,7 +5,7 @@ module API
   # * show        [get] - SECURE
   # * save		    [post] - SECURE
   # * find        [get] - SECURE
-  # * conversation[get] - SECURE
+  # * conversation [get] - SECURE
   #
   class MessagesController < ApisecurityController
     before_action :checkKey, only: [:show, :save, :find, :conversation]
@@ -239,7 +239,6 @@ module API
           defineHttp :forbidden
         end
       rescue
-        puts $!, $@
         codeAnswer 504
         defineHttp :service_unavailable
       end

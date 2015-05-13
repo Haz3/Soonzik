@@ -27,7 +27,7 @@ SoonzikApp.directive('clickOutside', ["$document", function($document) {
                     }
                 }
 
-                $scope.$apply($scope.clickOutside);
+                $scope.clickOutside();
             });
         }
     };

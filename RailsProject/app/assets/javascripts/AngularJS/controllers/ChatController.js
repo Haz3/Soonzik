@@ -120,8 +120,14 @@ SoonzikApp.controller('ChatCtrl', ['$scope', 'SecureAuth', 'HTTPService', '$time
 						$scope.friends[index].online = true;
 					}
 				}
+				$scope.onWindows.push({
+					friend: $scope.friends[index],
+					maximized: false,
+					opened: false,
+					loading: false
+				});
 			}
-			if ($scope.friends.length > 0)
+			if ($scope.onWindows.length > 0)
 				r_secureLoop(0)
 		} else {
 			timeSynchronizationCall += 150;
@@ -130,6 +136,7 @@ SoonzikApp.controller('ChatCtrl', ['$scope', 'SecureAuth', 'HTTPService', '$time
 	}
 
 	var r_secureLoop = function(index) {
+		$scope.onWindows[index].loading = true;
 		SecureAuth.securedTransaction(function (key, user_id) {
 			waiting = false;
 			var parameters = [{
@@ -137,30 +144,30 @@ SoonzikApp.controller('ChatCtrl', ['$scope', 'SecureAuth', 'HTTPService', '$time
 			}, {
 				key: "user_id", value: user_id
 			}];
-			HTTPService.getLastMessages($scope.friends[index].id, parameters).then(function(messages) {
-				if (typeof $scope.message[$scope.friends[index].username] === "undefined")
-					$scope.message[$scope.friends[index].username] = { value: "", messagesText: [] };
+			HTTPService.getLastMessages($scope.onWindows[index].friend.id, parameters).then(function(messages) {
+				if (typeof $scope.message[$scope.onWindows[index].friend.username] === "undefined")
+					$scope.message[$scope.onWindows[index].friend.username] = { value: "", messagesText: [] };
 
 				for (var i in messages.data.content) {
-					$scope.message[$scope.friends[index].username].messagesText.push({ extern: (messages.data.content[i].user_id == $scope.current_user.id) ? false : true, value: messages.data.content[i].msg });
+					$scope.message[$scope.onWindows[index].friend.username].messagesText.push({ extern: (messages.data.content[i].user_id == $scope.current_user.id) ? false : true, value: messages.data.content[i].msg });
 				}
-				
-				console.log($scope.message);
+				$scope.onWindows[index].loading = false;
 
-				if (index + 1 < $scope.friends.length)
+				if (index + 1 < $scope.onWindows.length)
 					r_secureLoop(index + 1);
 				else
 					return;
 			}, function(error) {
-				if (index + 1 < $scope.friends.length)
+				$scope.onWindows[index].loading = false;
+				if (index + 1 < $scope.onWindows.length)
 					r_secureLoop(index + 1);
 				else
 					return;
-				$scope.message[$scope.friends[index].username] = "An error occured during the loading";
+				$scope.message[$scope.onWindows[index].friend.username] = "An error occured during the loading";
 			});
 		}, function(error) {
-			console.log(error);
-			$scope.message[$scope.friends[index].username] = "An error occured during the loading";
+			$scope.onWindows[index].loading = false;
+			$scope.message[$scope.onWindows[index].friend.username] = "An error occured during the loading";
 		});
 	}
 
@@ -186,7 +193,7 @@ SoonzikApp.controller('ChatCtrl', ['$scope', 'SecureAuth', 'HTTPService', '$time
 			}
 			listFriendsCall = true;
 		}, function(error) {
-			console.log(error);
+			// TODO
 		});
 	}
 
@@ -213,7 +220,8 @@ SoonzikApp.controller('ChatCtrl', ['$scope', 'SecureAuth', 'HTTPService', '$time
 			selectedObject = {
 				friend: friend,
 				maximized: true,
-				opened: true
+				opened: true,
+				loading: false
 			};
 			$scope.onWindows.push(selectedObject);
 			if (typeof $scope.message[friend.username] === "undefined")
@@ -246,6 +254,8 @@ SoonzikApp.controller('ChatCtrl', ['$scope', 'SecureAuth', 'HTTPService', '$time
 			dispatcher.trigger('messages.send', sendMsg)
 		}
 		$scope.message[friend.username].value = "";
+		var contentFriend = $("#userchat-" + friend.id + " .content");
+		contentFriend.scrollTop(contentFriend.prop("scrollHeight"));
 		$scope.$digest();
 	}
 
@@ -273,7 +283,6 @@ SoonzikApp.controller('ChatCtrl', ['$scope', 'SecureAuth', 'HTTPService', '$time
 			}
 		}
 
-
 		calcWidth($scope.onWindows);
 	}
 
@@ -296,6 +305,37 @@ SoonzikApp.controller('ChatCtrl', ['$scope', 'SecureAuth', 'HTTPService', '$time
 			}
 		}
 		return list;
+	}
+
+	// onScroll call
+	$scope.loadMoreMessages = function(friendWindow) {
+		var friend = friendWindow.friend;
+		SecureAuth.securedTransaction(function (key, user_id) {
+			friendWindow.loading = true;
+			var parameters = [{
+				key: "secureKey", value: key
+			}, {
+				key: "user_id", value: user_id
+			}, {
+				key: "offset", value: $scope.message[friend.username].messagesText.length
+			}];
+			HTTPService.getLastMessages(friend.id, parameters).then(function(messages) {
+				var newArray = [];
+				for (var i in messages.data.content) {
+					newArray.push({ extern: (messages.data.content[i].user_id == $scope.current_user.id) ? false : true, value: messages.data.content[i].msg });
+				}
+				$timeout(function(){
+					friendWindow.loading = false;
+					$scope.message[friend.username].messagesText = newArray.concat($scope.message[friend.username].messagesText);
+				}, 1000);
+			}, function(error) {
+				$scope.message[friend.username].messagesText.push({extern: true, value: "An error occured during the loading"});
+				friendWindow.loading = false;
+			});
+		}, function(error) {
+			$scope.message[friend.username].messagesText.push({extern: true, value: "An error occured during the loading"});
+			friendWindow.loading = false;
+		});
 	}
 
 	/*-- END/ Angular callback --*/
