@@ -59,6 +59,9 @@ SoonzikApp.factory('HTTPService', ['$http', '$location', 'Upload', function ($ht
       }).progress(progressFunction)
       .success(successFunction)
       .error(errorFunction);
+    },
+    findPacks: function (parameters) {
+      return $http.get("http://api." + url + '/packs/find' + urlParametersFormat(parameters));
     }
   }
 }]);

@@ -62,7 +62,7 @@
         En dessous la vue "normale" (à migrer)
       %hr
       =yield
-      - if user_signed_in?
+      - if user_signed_in?  
         #chat{ "ng-include" => "'#{asset_path('AngularJS/views/chat.html.haml')}'" }
 
     %footer

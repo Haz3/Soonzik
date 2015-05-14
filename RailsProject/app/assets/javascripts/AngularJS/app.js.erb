@@ -21,7 +21,10 @@ SoonzikApp.config(['$routeProvider', '$locationProvider', '$httpProvider', funct
 
 	if (dynamicPage) {
   	$locationProvider.html5Mode(true);
-    $routeProvider.when('/users/:id', {
+    $routeProvider.when('/', {
+      templateUrl: '<%= asset_path("AngularJS/views/others/index.html.haml") %>',
+      controller: 'IndexCtrl'
+    }).when('/users/:id', {
       templateUrl: '<%= asset_path("AngularJS/views/users/show.html.haml") %>',
       controller: 'UsersCtrl'
     }).when('/users/:id/edit', {

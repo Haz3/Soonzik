@@ -77,6 +77,10 @@ gem "gritter"
 gem 'activeadmin', github: 'activeadmin'
 #gem 'meta_search'
 
+#gem sprocket
+gem "sprockets", "~> 2.12.3"
+gem "sprockets-rails", "~> 2.2.4"
+
 gem "paperclip", "~> 4.1"
 #gem "will_paginate"
 

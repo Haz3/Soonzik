@@ -1,0 +1,33 @@
+%div{ "ng-init" => "showInit()" }
+  %loading{ "ng-if" => "loading == true" }
+  .row{ "ng-if" => "loading == false" }
+    %br
+    %h3.subheader
+      Last News
+    .large-12.large-centered.columns
+      %ul.example-orbit{"data-orbit" => ""}
+        %li
+          =image_tag "satelite-orbit.jpg"
+          .orbit-caption
+            Caption One.
+        %li.active
+          =image_tag "andromeda-orbit.jpg"
+          .orbit-caption
+            Caption Two.
+        %li
+          =image_tag "launch-orbit.jpg"
+          .orbit-caption
+            Caption Three.
+    .divider
+    %h3.subheader
+      Packs du moment
+    .ul.large-block-grid-4
+      %li{ "ng-repeat" => "pack in packs" }
+        .panel
+          %h5.subheader.text-center
+            {{ pack.title }}
+          =image_tag "pack1.jpg"
+          .divider
+          Temps Restant:
+          %br
+          Moyenne : 

@@ -27,6 +27,7 @@
 //= require ./AngularJS/app.js.erb
 //= require ./AngularJS/controllers/ChatController.js
 //= require ./AngularJS/controllers/UsersController.js
+//= require ./AngularJS/controllers/IndexController.js
 //= require ./AngularJS/directives/autofocus.js
 //= require ./AngularJS/directives/autoscrollbottom.js
 //= require ./AngularJS/directives/clickOutside.js
