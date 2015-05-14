@@ -162,18 +162,25 @@ list of action available :</p>
 <ul><li>
 <p><code>200</code> - In case of success, there is nothing to return</p>
 </li><li>
-<p><code>403</code> - It is not a secured transaction</p>
+<p><code>401</code> - It is not a secured transaction</p>
+</li><li>
+<p><code>404</code> - The cart was not found</p>
 </li><li>
 <p><code>503</code> - Error from server</p>
 </li></ul>					
 											<div class="method-source-code" id="destroy-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/carts_controller.rb, line 26</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/carts_controller.rb, line 27</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">destroy</span>
   <span class="ruby-keyword">begin</span>
     <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@security</span>)
       <span class="ruby-identifier">object</span> = <span class="ruby-constant">Cart</span>.<span class="ruby-identifier">find_by_id</span>(<span class="ruby-ivar">@id</span>)
-      <span class="ruby-keyword">if</span> (<span class="ruby-identifier">object</span>.<span class="ruby-identifier">user_id</span> <span class="ruby-operator">!=</span> <span class="ruby-ivar">@user_id</span>)
+      <span class="ruby-keyword">if</span> (<span class="ruby-operator">!</span><span class="ruby-identifier">object</span>)
+        <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">502</span>
+        <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:not_found</span>
+        <span class="ruby-identifier">sendJson</span> <span class="ruby-keyword">and</span> <span class="ruby-keyword">return</span>
+      <span class="ruby-keyword">end</span>
+      <span class="ruby-keyword">if</span> (<span class="ruby-identifier">object</span>.<span class="ruby-identifier">user_id</span> <span class="ruby-operator">!=</span> <span class="ruby-ivar">@user_id</span>.<span class="ruby-identifier">to_i</span>)
         <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">500</span>
         <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:forbidden</span>
         <span class="ruby-identifier">sendJson</span> <span class="ruby-keyword">and</span> <span class="ruby-keyword">return</span>
@@ -238,7 +245,7 @@ Note : By default, if you precise no attribute, it will take every row</pre>
 </li></ul>					
 											<div class="method-source-code" id="find-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/carts_controller.rb, line 141</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/carts_controller.rb, line 147</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">find</span>
   <span class="ruby-keyword">begin</span>
     <span class="ruby-keyword">if</span> (<span class="ruby-operator">!</span><span class="ruby-ivar">@security</span>)
@@ -364,7 +371,7 @@ the parameters, check at the model</p>
 </li></ul>					
 											<div class="method-source-code" id="save-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/carts_controller.rb, line 65</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/carts_controller.rb, line 71</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">save</span>
   <span class="ruby-keyword">begin</span>
     <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@security</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-ivar">@cart</span>[<span class="ruby-value">:user_id</span>] <span class="ruby-operator">==</span> <span class="ruby-ivar">@user_id</span>)

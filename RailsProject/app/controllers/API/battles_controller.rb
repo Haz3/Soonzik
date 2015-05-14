@@ -5,8 +5,11 @@ module API
   # * index       [get]
   # * show        [get]
   # * find        [get]
+  # * vote        [post] - SECURE
   #
   class BattlesController < ApisecurityController
+    before_action :checkKey, only: [:vote]
+
   	# Retrieve all the battles
     #
     # Route : /battles
@@ -169,6 +172,63 @@ module API
           codeAnswer 200
         end
 
+      rescue
+        codeAnswer 504
+        defineHttp :service_unavailable
+      end
+      sendJson
+    end
+
+    # To vote for a specific battle
+    #
+    # Route : /battles/:id/vote
+    #
+    # ==== Options
+    # 
+    # * +id+ - The id of the specific battle
+    # * +artist_id+ - The id of the artist you want to vote for
+    # 
+    # ===== HTTP VALUE
+    # 
+    # - +200+ - In case of success, return the specific battle
+    # - +404+ - Can't get the battle, the id is probably wrong
+    # - +503+ - Error from server
+    # 
+    def vote
+      begin
+        if (@security)
+          battle = Battle.find_by_id(@id)
+          if (!battle || (battle &&
+                          @artist_id != battle.artist_one_id &&
+                          @artist_id != battle.artist_two_id))
+            codeAnswer 502
+            defineHttp :not_found
+          else
+            oldVote = Vote.where(battle_id: @id).find_by_user_id(@user_id)
+            if (oldVote)
+              oldVote.artist_id = @artist_id
+              oldVote.save!
+              codeAnswer 200
+              defineHttp :ok
+            else
+              # I use oldVote to keep the scope variable and to easily return it
+              oldVote = Vote.new
+              oldVote.user_id = @user_id
+              oldVote.battle_id = @id
+              oldVote.artist_id = @artist_id
+              oldVote.save!
+              codeAnswer 201
+              defineHttp :created
+            end
+            @returnValue = { content: oldVote.as_json(only: [:id], :include => {
+                battle: { only: Battle.miniKey },
+                artist: { only: User.miniKey }
+              }) }
+          end
+        else
+          codeAnswer 500
+          defineHttp :forbidden
+        end
       rescue
         codeAnswer 504
         defineHttp :service_unavailable

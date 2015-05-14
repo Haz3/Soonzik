@@ -118,6 +118,8 @@ list of action available :</p>
 <p>show        [get]</p>
 </li><li>
 <p>find        [get]</p>
+</li><li>
+<p>vote        [post] - SECURE</p>
 </li></ul>
 		</section>
 
@@ -183,7 +185,7 @@ its artists and the votes</p>
 </li></ul>					
 											<div class="method-source-code" id="find-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/battles_controller.rb, line 96</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/battles_controller.rb, line 99</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">find</span>
   <span class="ruby-keyword">begin</span>
     <span class="ruby-identifier">battle_object</span> = <span class="ruby-keyword">nil</span>
@@ -294,7 +296,7 @@ the artists and the vote</p>
 </li></ul>					
 											<div class="method-source-code" id="index-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/battles_controller.rb, line 19</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/battles_controller.rb, line 22</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">index</span>
   <span class="ruby-keyword">begin</span>
     <span class="ruby-ivar">@returnValue</span> = { <span class="ruby-identifier">content</span><span class="ruby-operator">:</span> <span class="ruby-constant">Battle</span>.<span class="ruby-identifier">all</span>.<span class="ruby-identifier">as_json</span>(<span class="ruby-value">:include</span> =<span class="ruby-operator">&gt;</span> {
@@ -347,7 +349,7 @@ the artists and the vote</p>
 </li></ul>					
 											<div class="method-source-code" id="show-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/battles_controller.rb, line 52</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/battles_controller.rb, line 55</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">show</span>
   <span class="ruby-keyword">begin</span>
     <span class="ruby-identifier">battle</span> = <span class="ruby-constant">Battle</span>.<span class="ruby-identifier">find_by_id</span>(<span class="ruby-ivar">@id</span>)
@@ -361,6 +363,84 @@ the artists and the vote</p>
                                                                                                                     <span class="ruby-value">:votes</span> =<span class="ruby-operator">&gt;</span> {}
                                                                                                             }, <span class="ruby-value">:only</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">Battle</span>.<span class="ruby-identifier">miniKey</span>) }
       <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">200</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">rescue</span>
+    <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">504</span>
+    <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:service_unavailable</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">sendJson</span>
+<span class="ruby-keyword">end</span></code></pre>
+						</div>
+										</div>
+
+					
+									</div>
+								<a name="method-i-vote">anchor</a>
+				<div id="method-i-vote-doc" class="method">
+
+					<header>
+											<i class="icon-generic"></i>
+						<span class="method-name">vote</span><span 
+							class="method-args">()</span>
+										</header>
+
+					<div class="method-description">
+											<p>To vote for a specific battle</p>
+
+<p>Route : /battles/:id/vote</p>
+
+<h4 id="method-i-vote-label-Options">Options<span><a href="#method-i-vote-label-Options">&para;</a> <a href="#top">&uarr;</a></span></h4>
+<ul><li>
+<p><code>id</code> - The id of the specific battle</p>
+</li><li>
+<p><code>artist_id</code> - The id of the artist you want to vote for</p>
+</li></ul>
+
+<h5 id="method-i-vote-label-HTTP+VALUE">HTTP VALUE<span><a href="#method-i-vote-label-HTTP+VALUE">&para;</a> <a href="#top">&uarr;</a></span></h5>
+<ul><li>
+<p><code>200</code> - In case of success, return the specific battle</p>
+</li><li>
+<p><code>404</code> - Can&#39;t get the battle, the id is probably wrong</p>
+</li><li>
+<p><code>503</code> - Error from server</p>
+</li></ul>					
+											<div class="method-source-code" id="vote-source">
+							<pre class="prettyprint linenums"><code 
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/battles_controller.rb, line 197</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">vote</span>
+  <span class="ruby-keyword">begin</span>
+    <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@security</span>)
+      <span class="ruby-identifier">battle</span> = <span class="ruby-constant">Battle</span>.<span class="ruby-identifier">find_by_id</span>(<span class="ruby-ivar">@id</span>)
+      <span class="ruby-keyword">if</span> (<span class="ruby-operator">!</span><span class="ruby-identifier">battle</span> <span class="ruby-operator">||</span> (<span class="ruby-identifier">battle</span> <span class="ruby-operator">&amp;&amp;</span>
+                      <span class="ruby-ivar">@artist_id</span> <span class="ruby-operator">!=</span> <span class="ruby-identifier">battle</span>.<span class="ruby-identifier">artist_one_id</span> <span class="ruby-operator">&amp;&amp;</span>
+                      <span class="ruby-ivar">@artist_id</span> <span class="ruby-operator">!=</span> <span class="ruby-identifier">battle</span>.<span class="ruby-identifier">artist_two_id</span>))
+        <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">502</span>
+        <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:not_found</span>
+      <span class="ruby-keyword">else</span>
+        <span class="ruby-identifier">oldVote</span> = <span class="ruby-constant">Vote</span>.<span class="ruby-identifier">where</span>(<span class="ruby-identifier">battle_id</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@id</span>).<span class="ruby-identifier">find_by_user_id</span>(<span class="ruby-ivar">@user_id</span>)
+        <span class="ruby-keyword">if</span> (<span class="ruby-identifier">oldVote</span>)
+          <span class="ruby-identifier">oldVote</span>.<span class="ruby-identifier">artist_id</span> = <span class="ruby-ivar">@artist_id</span>
+          <span class="ruby-identifier">oldVote</span>.<span class="ruby-identifier">save!</span>
+          <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">200</span>
+          <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:ok</span>
+        <span class="ruby-keyword">else</span>
+          <span class="ruby-comment"># I use oldVote to keep the scope variable and to easily return it</span>
+          <span class="ruby-identifier">oldVote</span> = <span class="ruby-constant">Vote</span>.<span class="ruby-identifier">new</span>
+          <span class="ruby-identifier">oldVote</span>.<span class="ruby-identifier">user_id</span> = <span class="ruby-ivar">@user_id</span>
+          <span class="ruby-identifier">oldVote</span>.<span class="ruby-identifier">battle_id</span> = <span class="ruby-ivar">@id</span>
+          <span class="ruby-identifier">oldVote</span>.<span class="ruby-identifier">artist_id</span> = <span class="ruby-ivar">@artist_id</span>
+          <span class="ruby-identifier">oldVote</span>.<span class="ruby-identifier">save!</span>
+          <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">201</span>
+          <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:created</span>
+        <span class="ruby-keyword">end</span>
+        <span class="ruby-ivar">@returnValue</span> = { <span class="ruby-identifier">content</span><span class="ruby-operator">:</span> <span class="ruby-identifier">oldVote</span>.<span class="ruby-identifier">as_json</span>(<span class="ruby-identifier">only</span><span class="ruby-operator">:</span> [<span class="ruby-value">:id</span>], <span class="ruby-value">:include</span> =<span class="ruby-operator">&gt;</span> {
+            <span class="ruby-identifier">battle</span><span class="ruby-operator">:</span> { <span class="ruby-identifier">only</span><span class="ruby-operator">:</span> <span class="ruby-constant">Battle</span>.<span class="ruby-identifier">miniKey</span> },
+            <span class="ruby-identifier">artist</span><span class="ruby-operator">:</span> { <span class="ruby-identifier">only</span><span class="ruby-operator">:</span> <span class="ruby-constant">User</span>.<span class="ruby-identifier">miniKey</span> }
+          }) }
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">500</span>
+      <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:forbidden</span>
     <span class="ruby-keyword">end</span>
   <span class="ruby-keyword">rescue</span>
     <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">504</span>

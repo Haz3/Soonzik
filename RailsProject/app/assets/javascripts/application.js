@@ -26,6 +26,7 @@
 //= require angular-resource
 //= require ./AngularJS/app.js.erb
 //= require ./AngularJS/controllers/ChatController.js
+//= require ./AngularJS/controllers/BattlesController.js
 //= require ./AngularJS/controllers/UsersController.js
 //= require ./AngularJS/controllers/IndexController.js
 //= require ./AngularJS/directives/autofocus.js

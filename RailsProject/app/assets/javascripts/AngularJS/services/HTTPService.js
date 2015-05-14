@@ -62,6 +62,9 @@ SoonzikApp.factory('HTTPService', ['$http', '$location', 'Upload', function ($ht
     },
     findPacks: function (parameters) {
       return $http.get("http://api." + url + '/packs/find' + urlParametersFormat(parameters));
+    },
+    findBattles: function (parameters) {
+      return $http.get("http://api." + url + '/battles/find' + urlParametersFormat(parameters));
     }
   }
 }]);

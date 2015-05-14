@@ -168,16 +168,23 @@ list of action available :</p>
 </li><li>
 <p><code>401</code> - It is not a secured transaction</p>
 </li><li>
+<p><code>404</code> - The <a href="../Tweet.html">Tweet</a> was not found</p>
+</li><li>
 <p><code>503</code> - Error from server</p>
 </li></ul>					
 											<div class="method-source-code" id="destroy-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/tweets_controller.rb, line 232</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/tweets_controller.rb, line 233</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">destroy</span>
   <span class="ruby-keyword">begin</span>
     <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@security</span>)
       <span class="ruby-identifier">object</span> = <span class="ruby-constant">Tweet</span>.<span class="ruby-identifier">find_by_id</span>(<span class="ruby-ivar">@id</span>)
-      <span class="ruby-keyword">if</span> (<span class="ruby-identifier">object</span>.<span class="ruby-identifier">user_id</span> <span class="ruby-operator">!=</span> <span class="ruby-ivar">@user_id</span>)
+      <span class="ruby-keyword">if</span> (<span class="ruby-operator">!</span><span class="ruby-identifier">object</span>)
+        <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">502</span>
+        <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:not_found</span>
+        <span class="ruby-identifier">sendJson</span> <span class="ruby-keyword">and</span> <span class="ruby-keyword">return</span>
+      <span class="ruby-keyword">end</span>
+      <span class="ruby-keyword">if</span> (<span class="ruby-identifier">object</span>.<span class="ruby-identifier">user_id</span> <span class="ruby-operator">!=</span> <span class="ruby-ivar">@user_id</span>.<span class="ruby-identifier">to_i</span>)
         <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">500</span>
         <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:forbidden</span>
         <span class="ruby-identifier">sendJson</span> <span class="ruby-keyword">and</span> <span class="ruby-keyword">return</span>

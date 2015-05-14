@@ -469,6 +469,12 @@ var SearchIndex =
 		"type": "anymethod"
 	},
 	{
+		"name": "vote",
+		"link": "API/BattlesController.html#method-i-vote",
+		"snippet": "<p>To vote for a specific battle\n<p>Route : /battles/:id/vote\n<p>Options\n",
+		"type": "anymethod"
+	},
+	{
 		"name": "destroy",
 		"link": "API/CartsController.html#method-i-destroy",
 		"snippet": "<p>Destroy a specific object by its id\n<p>Route : /carts/destroy\n<p>Options\n",

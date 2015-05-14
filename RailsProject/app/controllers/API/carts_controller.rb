@@ -20,14 +20,20 @@ module API
     # ===== HTTP VALUE
     # 
     # - +200+ - In case of success, there is nothing to return
-    # - +403+ - It is not a secured transaction
+    # - +401+ - It is not a secured transaction
+    # - +404+ - The cart was not found
     # - +503+ - Error from server
     # 
     def destroy
       begin
       	if (@security)
       	  object = Cart.find_by_id(@id)
-          if (object.user_id != @user_id)
+          if (!object)
+            codeAnswer 502
+            defineHttp :not_found
+            sendJson and return
+          end
+          if (object.user_id != @user_id.to_i)
             codeAnswer 500
             defineHttp :forbidden
             sendJson and return

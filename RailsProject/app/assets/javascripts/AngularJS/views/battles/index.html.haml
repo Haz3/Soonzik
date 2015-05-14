@@ -1,0 +1,13 @@
+%div{ "ng-init" => "indexInit()" }
+	%loading{ "ng-if" => "loading == true" }
+	.row{ "ng-if" => "loading == false" }
+		%div{ "ng-repeat" => "battle in index.battles" }
+			{{ battle }}
+		.pagination-centered
+			%ul.pagination
+				%li{ "class" => "arrow {{ (index.currentPage == 1) ? 'unavailable' : '' }}" }
+					%a{ href: ""} &laquo;
+				%li{ "ng-repeat" => "num in range(min(index.currentPage, 5) + 5) track by $index", "class" => "{{ $index + 1 == min(index.currentPage, 5) ? 'current' : '' }}" }
+					%a{ href: ""} {{ index.currentPage - min(index.currentPage, 5) + $index + 1 }}
+				%li.arrow
+					%a{ href: ""} &raquo;
