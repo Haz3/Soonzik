@@ -25,6 +25,10 @@ module API
     #
     # Route : /users
     #
+    # ==== Options
+    # 
+    # * +count+ - (optionnal) Get the number of object and not the object themselve. Useful for pagination
+    #
     # ===== HTTP VALUE
     # 
     # - +200+ - In case of success, return a list of users
@@ -32,7 +36,11 @@ module API
     # 
     def index
       begin
-        @returnValue = { content: User.all.as_json(:only => User.miniKey) }
+        if (defined? @count && @count == "true")
+          @returnValue = { content: User.count }
+        else
+          @returnValue = { content: User.all.as_json(:only => User.miniKey) }
+        end
         if (@returnValue[:content].size == 0)
           codeAnswer 202
         else

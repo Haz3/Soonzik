@@ -15,6 +15,10 @@ module API
     #
     # Route : /tweets
     #
+    # ==== Options
+    # 
+    # * +count+ - (optionnal) Get the number of object and not the object themselve. Useful for pagination
+    #
     # ===== HTTP VALUE
     # 
     # - +200+ - In case of success, return a list of tweets including its user
@@ -22,9 +26,13 @@ module API
     # 
     def index
       begin
-        @returnValue = { content: Tweet.all.as_json(:include => {
+        if (defined? @count && @count == "true")
+          @returnValue = { content: Tweet.count }
+        else
+          @returnValue = { content: Tweet.all.as_json(:include => {
                                                       :user => { only: User.miniKey }
                                                     }, :only => Tweet.miniKey) }
+        end
         if (@returnValue[:content].size == 0)
           codeAnswer 202
         else

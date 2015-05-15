@@ -14,6 +14,10 @@ module API
     #
     # Route : /news
     #
+    # ==== Options
+    # 
+    # * +count+ - (optionnal) Get the number of object and not the object themselve. Useful for pagination
+    #
     # ===== HTTP VALUE
     # 
     # - +200+ - In case of success, return a list of news including its user (the author), the newstexts, the attachments and the tags
@@ -21,12 +25,16 @@ module API
     # 
     def index
       begin
-        @returnValue = { content: News.all.as_json(:include => {
+        if (defined? @count && @count == "true")
+          @returnValue = { content: News.count }
+        else
+          @returnValue = { content: News.all.as_json(:include => {
                                                       :user => { :only => User.miniKey },
                                                       :newstexts => { :only => Newstext.miniKey },
                                                       :attachments => { :only => Attachment.miniKey },
                                                       :tags => { :only => Tag.miniKey }
                                                     }, :only => News.miniKey) }
+        end
         if (@returnValue[:content].size == 0)
           codeAnswer 202
         else

@@ -149,6 +149,12 @@ list of action available :</p>
 
 <p>Route : /genres</p>
 
+<h4 id="method-i-index-label-Options">Options<span><a href="#method-i-index-label-Options">&para;</a> <a href="#top">&uarr;</a></span></h4>
+<ul><li>
+<p><code>count</code> - (optionnal) Get the number of object and not the
+object themselve. Useful for pagination</p>
+</li></ul>
+
 <h5 id="method-i-index-label-HTTP+VALUE">HTTP VALUE<span><a href="#method-i-index-label-HTTP+VALUE">&para;</a> <a href="#top">&uarr;</a></span></h5>
 <ul><li>
 <p><code>200</code> - In case of success, return a list of genres including
@@ -158,12 +164,16 @@ its influences</p>
 </li></ul>					
 											<div class="method-source-code" id="index-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/genres_controller.rb, line 17</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/genres_controller.rb, line 21</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">index</span>
     <span class="ruby-keyword">begin</span>
-    <span class="ruby-ivar">@returnValue</span> = { <span class="ruby-identifier">content</span><span class="ruby-operator">:</span> <span class="ruby-constant">Genre</span>.<span class="ruby-identifier">all</span>.<span class="ruby-identifier">as_json</span>(<span class="ruby-value">:include</span> =<span class="ruby-operator">&gt;</span> {
+    <span class="ruby-keyword">if</span> (<span class="ruby-keyword">defined?</span> <span class="ruby-ivar">@count</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-ivar">@count</span> <span class="ruby-operator">==</span> <span class="ruby-string">&quot;true&quot;</span>)
+      <span class="ruby-ivar">@returnValue</span> = { <span class="ruby-identifier">content</span><span class="ruby-operator">:</span> <span class="ruby-constant">Genre</span>.<span class="ruby-identifier">count</span> }
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-ivar">@returnValue</span> = { <span class="ruby-identifier">content</span><span class="ruby-operator">:</span> <span class="ruby-constant">Genre</span>.<span class="ruby-identifier">all</span>.<span class="ruby-identifier">as_json</span>(<span class="ruby-value">:include</span> =<span class="ruby-operator">&gt;</span> {
                                                     <span class="ruby-value">:influences</span> =<span class="ruby-operator">&gt;</span> { <span class="ruby-value">:only</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">Influence</span>.<span class="ruby-identifier">miniKey</span> }
                                                 }, <span class="ruby-value">:only</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">Genre</span>.<span class="ruby-identifier">miniKey</span>) }
+    <span class="ruby-keyword">end</span>
     <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@returnValue</span>[<span class="ruby-value">:content</span>].<span class="ruby-identifier">size</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>)
       <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">202</span>
     <span class="ruby-keyword">else</span>
@@ -210,7 +220,7 @@ influences and musics</p>
 </li></ul>					
 											<div class="method-source-code" id="show-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/genres_controller.rb, line 48</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/genres_controller.rb, line 56</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">show</span>
     <span class="ruby-keyword">begin</span>
     <span class="ruby-identifier">genre</span> = <span class="ruby-constant">Genre</span>.<span class="ruby-identifier">find_by_id</span>(<span class="ruby-ivar">@id</span>)

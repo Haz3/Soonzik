@@ -174,7 +174,7 @@ list of action available :</p>
 </li></ul>					
 											<div class="method-source-code" id="destroy-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/tweets_controller.rb, line 233</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/tweets_controller.rb, line 241</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">destroy</span>
   <span class="ruby-keyword">begin</span>
     <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@security</span>)
@@ -250,7 +250,7 @@ its user</p>
 </li></ul>					
 											<div class="method-source-code" id="find-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/tweets_controller.rb, line 137</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/tweets_controller.rb, line 145</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">find</span>
   <span class="ruby-keyword">begin</span>
     <span class="ruby-identifier">tweet_object</span> = <span class="ruby-keyword">nil</span>
@@ -350,6 +350,12 @@ its user</p>
 
 <p>Route : /tweets</p>
 
+<h4 id="method-i-index-label-Options">Options<span><a href="#method-i-index-label-Options">&para;</a> <a href="#top">&uarr;</a></span></h4>
+<ul><li>
+<p><code>count</code> - (optionnal) Get the number of object and not the
+object themselve. Useful for pagination</p>
+</li></ul>
+
 <h5 id="method-i-index-label-HTTP+VALUE">HTTP VALUE<span><a href="#method-i-index-label-HTTP+VALUE">&para;</a> <a href="#top">&uarr;</a></span></h5>
 <ul><li>
 <p><code>200</code> - In case of success, return a list of tweets including
@@ -359,12 +365,16 @@ its user</p>
 </li></ul>					
 											<div class="method-source-code" id="index-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/tweets_controller.rb, line 23</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/tweets_controller.rb, line 27</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">index</span>
   <span class="ruby-keyword">begin</span>
-    <span class="ruby-ivar">@returnValue</span> = { <span class="ruby-identifier">content</span><span class="ruby-operator">:</span> <span class="ruby-constant">Tweet</span>.<span class="ruby-identifier">all</span>.<span class="ruby-identifier">as_json</span>(<span class="ruby-value">:include</span> =<span class="ruby-operator">&gt;</span> {
+    <span class="ruby-keyword">if</span> (<span class="ruby-keyword">defined?</span> <span class="ruby-ivar">@count</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-ivar">@count</span> <span class="ruby-operator">==</span> <span class="ruby-string">&quot;true&quot;</span>)
+      <span class="ruby-ivar">@returnValue</span> = { <span class="ruby-identifier">content</span><span class="ruby-operator">:</span> <span class="ruby-constant">Tweet</span>.<span class="ruby-identifier">count</span> }
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-ivar">@returnValue</span> = { <span class="ruby-identifier">content</span><span class="ruby-operator">:</span> <span class="ruby-constant">Tweet</span>.<span class="ruby-identifier">all</span>.<span class="ruby-identifier">as_json</span>(<span class="ruby-value">:include</span> =<span class="ruby-operator">&gt;</span> {
                                                   <span class="ruby-value">:user</span> =<span class="ruby-operator">&gt;</span> { <span class="ruby-identifier">only</span><span class="ruby-operator">:</span> <span class="ruby-constant">User</span>.<span class="ruby-identifier">miniKey</span> }
                                                 }, <span class="ruby-value">:only</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">Tweet</span>.<span class="ruby-identifier">miniKey</span>) }
+    <span class="ruby-keyword">end</span>
     <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@returnValue</span>[<span class="ruby-value">:content</span>].<span class="ruby-identifier">size</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>)
       <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">202</span>
     <span class="ruby-keyword">else</span>
@@ -413,7 +423,7 @@ on the parameters, check at the model</p>
 </li></ul>					
 											<div class="method-source-code" id="save-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/tweets_controller.rb, line 88</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/tweets_controller.rb, line 96</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">save</span>
   <span class="ruby-keyword">begin</span>
     <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@security</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-ivar">@tweet</span>[<span class="ruby-value">:user_id</span>] <span class="ruby-operator">==</span> <span class="ruby-ivar">@user_id</span>)
@@ -473,7 +483,7 @@ on the parameters, check at the model</p>
 </li></ul>					
 											<div class="method-source-code" id="show-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/tweets_controller.rb, line 54</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/tweets_controller.rb, line 62</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">show</span>
   <span class="ruby-keyword">begin</span>
     <span class="ruby-identifier">tweets</span> = <span class="ruby-constant">Tweet</span>.<span class="ruby-identifier">find_by_id</span>(<span class="ruby-ivar">@id</span>)

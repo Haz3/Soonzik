@@ -357,7 +357,7 @@ var SearchIndex =
 	{
 		"name": "index",
 		"link": "API/AlbumsController.html#method-i-index",
-		"snippet": "<p>Retrieve all the albums\n<p>Route : /albums\n<p>HTTP VALUE\n",
+		"snippet": "<p>Retrieve all the albums\n<p>Route : /albums\n<p>Options\n",
 		"type": "anymethod"
 	},
 	{
@@ -453,7 +453,7 @@ var SearchIndex =
 	{
 		"name": "index",
 		"link": "API/BattlesController.html#method-i-index",
-		"snippet": "<p>Retrieve all the battles\n<p>Route : /battles\n<p>HTTP VALUE\n",
+		"snippet": "<p>Retrieve all the battles\n<p>Route : /battles\n<p>Options\n",
 		"type": "anymethod"
 	},
 	{
@@ -495,7 +495,7 @@ var SearchIndex =
 	{
 		"name": "index",
 		"link": "API/ConcertsController.html#method-i-index",
-		"snippet": "<p>Retrieve all the concerts\n<p>Route : /concerts\n<p>HTTP VALUE\n",
+		"snippet": "<p>Retrieve all the concerts\n<p>Route : /concerts\n<p>Options\n",
 		"type": "anymethod"
 	},
 	{
@@ -513,7 +513,7 @@ var SearchIndex =
 	{
 		"name": "index",
 		"link": "API/GenresController.html#method-i-index",
-		"snippet": "<p>Retrieve all the genres\n<p>Route : /genres\n<p>HTTP VALUE\n",
+		"snippet": "<p>Retrieve all the genres\n<p>Route : /genres\n<p>Options\n",
 		"type": "anymethod"
 	},
 	{
@@ -531,13 +531,13 @@ var SearchIndex =
 	{
 		"name": "index",
 		"link": "API/InfluencesController.html#method-i-index",
-		"snippet": "<p>Retrieve all the influences\n<p>Route : /influences\n<p>HTTP VALUE\n",
+		"snippet": "<p>Retrieve all the influences\n<p>Route : /influences\n<p>Options\n",
 		"type": "anymethod"
 	},
 	{
 		"name": "index",
 		"link": "API/ListeningsController.html#method-i-index",
-		"snippet": "<p>Retrieve all the listenings\n<p>Route : /listenings\n<p>HTTP VALUE\n",
+		"snippet": "<p>Retrieve all the listenings\n<p>Route : /listenings\n<p>Options\n",
 		"type": "anymethod"
 	},
 	{
@@ -585,7 +585,7 @@ var SearchIndex =
 	{
 		"name": "index",
 		"link": "API/MusicsController.html#method-i-index",
-		"snippet": "<p>Retrieve all the musics\n<p>Route : /musics\n<p>HTTP VALUE\n",
+		"snippet": "<p>Retrieve all the musics\n<p>Route : /musics\n<p>Options\n",
 		"type": "anymethod"
 	},
 	{
@@ -621,7 +621,7 @@ var SearchIndex =
 	{
 		"name": "index",
 		"link": "API/NewsController.html#method-i-index",
-		"snippet": "<p>Retrieve all the news\n<p>Route : /news\n<p>HTTP VALUE\n",
+		"snippet": "<p>Retrieve all the news\n<p>Route : /news\n<p>Options\n",
 		"type": "anymethod"
 	},
 	{
@@ -669,7 +669,7 @@ var SearchIndex =
 	{
 		"name": "index",
 		"link": "API/PacksController.html#method-i-index",
-		"snippet": "<p>Retrieve all the packs\n<p>Route : /packs\n<p>HTTP VALUE\n",
+		"snippet": "<p>Retrieve all the packs\n<p>Route : /packs\n<p>Options\n",
 		"type": "anymethod"
 	},
 	{
@@ -735,7 +735,7 @@ var SearchIndex =
 	{
 		"name": "index",
 		"link": "API/TweetsController.html#method-i-index",
-		"snippet": "<p>Retrieve all the tweets\n<p>Route : /tweets\n<p>HTTP VALUE\n",
+		"snippet": "<p>Retrieve all the tweets\n<p>Route : /tweets\n<p>Options\n",
 		"type": "anymethod"
 	},
 	{
@@ -765,7 +765,7 @@ var SearchIndex =
 	{
 		"name": "index",
 		"link": "API/UsersController.html#method-i-index",
-		"snippet": "<p>Retrieve all the users\n<p>Route : /users\n<p>HTTP VALUE\n",
+		"snippet": "<p>Retrieve all the users\n<p>Route : /users\n<p>Options\n",
 		"type": "anymethod"
 	},
 	{

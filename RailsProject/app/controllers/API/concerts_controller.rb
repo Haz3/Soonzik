@@ -11,6 +11,10 @@ module API
     #
     # Route : /concerts
     #
+    # ==== Options
+    # 
+    # * +count+ - (optionnal) Get the number of object and not the object themselve. Useful for pagination
+    #
     # ===== HTTP VALUE
     # 
     # - +200+ - In case of success, return a list of concerts including its address
@@ -18,9 +22,13 @@ module API
     # 
     def index
       begin
-        @returnValue = { content: Concert.all.as_json(:include => {
+        if (defined? @count && @count == "true")
+          @returnValue = { content: Concert.count }
+        else
+          @returnValue = { content: Concert.all.as_json(:include => {
                                                             :address => { :only => Address.miniKey  }
                                                             }, :only => Concert.miniKey ) }
+        end
         if (@returnValue[:content].size == 0)
           codeAnswer 202
         else

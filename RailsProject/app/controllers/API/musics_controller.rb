@@ -16,6 +16,10 @@ module API
     #
     # Route : /musics
     #
+    # ==== Options
+    # 
+    # * +count+ - (optionnal) Get the number of object and not the object themselve. Useful for pagination
+    #
     # ===== HTTP VALUE
     # 
     # - +200+ - In case of success, return a list of musics including its user, album and genre
@@ -23,11 +27,15 @@ module API
     # 
     def index
       begin
-        @returnValue = { content: Music.all.as_json(:only => Music.miniKey, :include => {
+        if (defined? @count && @count == "true")
+          @returnValue = { content: Music.count }
+        else
+          @returnValue = { content: Music.all.as_json(:only => Music.miniKey, :include => {
                                                                                           :album => { :only => Album.miniKey },
                                                                                           :genres => { :only => Genre.miniKey },
                                                                                           :user => {:only => User.miniKey}
                                                                                         }) }
+        end
         if (@returnValue[:content].size == 0)
           codeAnswer 202
         else

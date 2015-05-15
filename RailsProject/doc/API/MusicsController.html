@@ -176,7 +176,7 @@ list of action available :</p>
 </li></ul>					
 											<div class="method-source-code" id="addcomment-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/musics_controller.rb, line 197</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/musics_controller.rb, line 205</span>
   <span class="ruby-keyword">def</span> <span class="ruby-identifier">addcomment</span>
 <span class="ruby-keyword">begin</span>
   <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@security</span>)
@@ -249,7 +249,7 @@ probably wrong</p>
 </li></ul>					
 											<div class="method-source-code" id="addtoplaylist-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/musics_controller.rb, line 295</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/musics_controller.rb, line 303</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">addtoplaylist</span>
   <span class="ruby-keyword">begin</span>
     <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@security</span>)
@@ -321,7 +321,7 @@ its album, genres and user (artist)</p>
 </li></ul>					
 											<div class="method-source-code" id="find-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/musics_controller.rb, line 99</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/musics_controller.rb, line 107</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">find</span>
   <span class="ruby-keyword">begin</span>
     <span class="ruby-identifier">music_object</span> = <span class="ruby-keyword">nil</span>
@@ -441,7 +441,7 @@ as raw format</p>
 </li></ul>					
 											<div class="method-source-code" id="get-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/musics_controller.rb, line 246</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/musics_controller.rb, line 254</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">get</span>
   <span class="ruby-identifier">buffer</span> = <span class="ruby-string">&quot;&quot;</span>
   <span class="ruby-keyword">begin</span>
@@ -493,6 +493,12 @@ as raw format</p>
 
 <p>Route : /musics</p>
 
+<h4 id="method-i-index-label-Options">Options<span><a href="#method-i-index-label-Options">&para;</a> <a href="#top">&uarr;</a></span></h4>
+<ul><li>
+<p><code>count</code> - (optionnal) Get the number of object and not the
+object themselve. Useful for pagination</p>
+</li></ul>
+
 <h5 id="method-i-index-label-HTTP+VALUE">HTTP VALUE<span><a href="#method-i-index-label-HTTP+VALUE">&para;</a> <a href="#top">&uarr;</a></span></h5>
 <ul><li>
 <p><code>200</code> - In case of success, return a list of musics including
@@ -502,14 +508,18 @@ its user, album and genre</p>
 </li></ul>					
 											<div class="method-source-code" id="index-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/musics_controller.rb, line 24</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/musics_controller.rb, line 28</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">index</span>
   <span class="ruby-keyword">begin</span>
-    <span class="ruby-ivar">@returnValue</span> = { <span class="ruby-identifier">content</span><span class="ruby-operator">:</span> <span class="ruby-constant">Music</span>.<span class="ruby-identifier">all</span>.<span class="ruby-identifier">as_json</span>(<span class="ruby-value">:only</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">Music</span>.<span class="ruby-identifier">miniKey</span>, <span class="ruby-value">:include</span> =<span class="ruby-operator">&gt;</span> {
+    <span class="ruby-keyword">if</span> (<span class="ruby-keyword">defined?</span> <span class="ruby-ivar">@count</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-ivar">@count</span> <span class="ruby-operator">==</span> <span class="ruby-string">&quot;true&quot;</span>)
+      <span class="ruby-ivar">@returnValue</span> = { <span class="ruby-identifier">content</span><span class="ruby-operator">:</span> <span class="ruby-constant">Music</span>.<span class="ruby-identifier">count</span> }
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-ivar">@returnValue</span> = { <span class="ruby-identifier">content</span><span class="ruby-operator">:</span> <span class="ruby-constant">Music</span>.<span class="ruby-identifier">all</span>.<span class="ruby-identifier">as_json</span>(<span class="ruby-value">:only</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">Music</span>.<span class="ruby-identifier">miniKey</span>, <span class="ruby-value">:include</span> =<span class="ruby-operator">&gt;</span> {
                                                                                       <span class="ruby-value">:album</span> =<span class="ruby-operator">&gt;</span> { <span class="ruby-value">:only</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">Album</span>.<span class="ruby-identifier">miniKey</span> },
                                                                                       <span class="ruby-value">:genres</span> =<span class="ruby-operator">&gt;</span> { <span class="ruby-value">:only</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">Genre</span>.<span class="ruby-identifier">miniKey</span> },
                                                                                       <span class="ruby-value">:user</span> =<span class="ruby-operator">&gt;</span> {<span class="ruby-value">:only</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">User</span>.<span class="ruby-identifier">miniKey</span>}
                                                                                     }) }
+    <span class="ruby-keyword">end</span>
     <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@returnValue</span>[<span class="ruby-value">:content</span>].<span class="ruby-identifier">size</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>)
       <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">202</span>
     <span class="ruby-keyword">else</span>
@@ -554,7 +564,7 @@ genres and user (artist)</p>
 </li></ul>					
 											<div class="method-source-code" id="show-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/musics_controller.rb, line 55</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/musics_controller.rb, line 63</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">show</span>
   <span class="ruby-keyword">begin</span>
     <span class="ruby-identifier">music</span> = <span class="ruby-constant">Music</span>.<span class="ruby-identifier">find_by_id</span>(<span class="ruby-ivar">@id</span>)

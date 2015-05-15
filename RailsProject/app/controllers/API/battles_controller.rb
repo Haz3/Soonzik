@@ -14,6 +14,10 @@ module API
     #
     # Route : /battles
     #
+    # ==== Options
+    # 
+    # * +count+ - (optionnal) Get the number of object and not the object themselve. Useful for pagination
+    #
     # ===== HTTP VALUE
     # 
     # - +200+ - In case of success, return a list of battles including the artists and the vote
@@ -21,11 +25,15 @@ module API
     # 
     def index
       begin
-        @returnValue = { content: Battle.all.as_json(:include => {
+        if (defined? @count && @count == "true")
+          @returnValue = { content: Battle.count }
+        else
+          @returnValue = { content: Battle.all.as_json(:include => {
         														:artist_one => { :only => User.miniKey },
         														:artist_two => { :only => User.miniKey },
         														:votes => {}
         													}, :only => Battle.miniKey ) }
+        end
         if (@returnValue[:content].size == 0)
           codeAnswer 202
         else

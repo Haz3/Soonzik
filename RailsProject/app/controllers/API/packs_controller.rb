@@ -11,6 +11,10 @@ module API
     #
     # Route : /packs
     #
+    # ==== Options
+    # 
+    # * +count+ - (optionnal) Get the number of object and not the object themselve. Useful for pagination
+    #
     # ===== HTTP VALUE
     # 
     # - +200+ - In case of success, return a list of pack including its albums which includes its musics and the user (artist)
@@ -18,7 +22,10 @@ module API
     # 
     def index
       begin
-        @returnValue = { content: Pack.all.as_json(:include => { albums: {
+        if (defined? @count && @count == "true")
+          @returnValue = { content: Pack.count }
+        else
+          @returnValue = { content: Pack.all.as_json(:include => { albums: {
                                                                               :include => {
                                                                                             :user => { :only => User.miniKey },
                                                                                             :musics => { :only => Music.miniKey }
@@ -26,6 +33,7 @@ module API
                                                                               :only => Album.miniKey
                                                                             }
                                                                   }, :only => Pack.miniKey) }
+        end
         if (@returnValue[:content].size == 0)
           codeAnswer 202
         else

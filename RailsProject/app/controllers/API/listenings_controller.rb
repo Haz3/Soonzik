@@ -14,6 +14,10 @@ module API
     #
     # Route : /listenings
     #
+    # ==== Options
+    # 
+    # * +count+ - (optionnal) Get the number of object and not the object themselve. Useful for pagination
+    #
     # ===== HTTP VALUE
     # 
     # - +200+ - In case of success, return a list of listening object including its user and music
@@ -21,10 +25,14 @@ module API
     # 
     def index
       begin
-        @returnValue = { content: Listening.all.as_json(:include => {
+        if (defined? @count && @count == "true")
+          @returnValue = { content: Listening.count }
+        else
+          @returnValue = { content: Listening.all.as_json(:include => {
                                                                       :user => { :only => User.miniKey },
                                                                       :music => { :only => Music.miniKey }
                                                                     }, :only => Listening.miniKey) }
+        end
         if (@returnValue[:content].size == 0)
           codeAnswer 202
         else

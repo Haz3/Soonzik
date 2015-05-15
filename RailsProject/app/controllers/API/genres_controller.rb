@@ -9,6 +9,10 @@ module API
     #
     # Route : /genres
     #
+    # ==== Options
+    # 
+    # * +count+ - (optionnal) Get the number of object and not the object themselve. Useful for pagination
+    #
     # ===== HTTP VALUE
     # 
     # - +200+ - In case of success, return a list of genres including its influences
@@ -16,9 +20,13 @@ module API
     # 
     def index
     	begin
-        @returnValue = { content: Genre.all.as_json(:include => {
+        if (defined? @count && @count == "true")
+          @returnValue = { content: Genre.count }
+        else
+          @returnValue = { content: Genre.all.as_json(:include => {
                                                         :influences => { :only => Influence.miniKey }
                                                     }, :only => Genre.miniKey) }
+        end
         if (@returnValue[:content].size == 0)
           codeAnswer 202
         else
