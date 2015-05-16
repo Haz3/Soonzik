@@ -31,7 +31,7 @@ module API
           @returnValue = { content: Battle.all.as_json(:include => {
         														:artist_one => { :only => User.miniKey },
         														:artist_two => { :only => User.miniKey },
-        														:votes => {}
+        														:votes      => { :only => Vote.miniKey }
         													}, :only => Battle.miniKey ) }
         end
         if (@returnValue[:content].size == 0)
@@ -70,7 +70,7 @@ module API
           @returnValue = { content: battle.as_json(:include => {
           														:artist_one => { :only => User.miniKey },
           														:artist_two => { :only => User.miniKey },
-          														:votes => {}
+          														:votes => { :only => Vote.miniKey }
           													}, :only => Battle.miniKey) }
           codeAnswer 200
         end
@@ -171,7 +171,7 @@ module API
         @returnValue = { content: battle_object.as_json(:include => {
                                     :artist_one => { :only => User.miniKey },
                                     :artist_two => { :only => User.miniKey },
-                                    :votes => {}
+                                    :votes => { :only => Vote.miniKey }
                                   }, :only => Battle.miniKey) }
 
         if (battle_object.size == 0)

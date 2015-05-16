@@ -1,13 +1,23 @@
-%div{ "ng-init" => "indexInit()" }
+.battle{ "ng-init" => "indexInit()" }
 	%loading{ "ng-if" => "loading == true" }
 	.row{ "ng-if" => "loading == false" }
-		%div{ "ng-repeat" => "battle in index.battles" }
-			{{ battle }}
+		%h1.subheader List of battles
+		.clearfix.battleLine{ "ng-repeat" => "battle in index.battles" }
+			%hr
+			.medium-4.columns
+				%p {{ battle.artist_one.username }}
+				%img{ "ng-src" => "{{ '/assets/usersImage/avatars/' + battle.artist_one.image}}" }
+			.medium-4.columns
+				%battle{ style: "height:175px;display: block", "battle-values" => "index.votes[battle.id]" }
+				%a.button.radius{ href: "/battles/{{ battle.id }}" } Page of the battle
+			.medium-4.columns.end
+				%p {{ battle.artist_two.username }}
+				%img{ "ng-src" => "{{ '/assets/usersImage/avatars/' + battle.artist_two.image}}" }
 		.pagination-centered
 			%ul.pagination
 				%li{ "class" => "arrow {{ (index.currentPage == 1) ? 'unavailable' : '' }}" }
 					%a{ href: ""} &laquo;
-				%li{ "ng-repeat" => "num in range(min(index.currentPage, 5) + 5) track by $index", "class" => "{{ $index + 1 == min(index.currentPage, 5) ? 'current' : '' }}" }
+				%li{ "ng-repeat" => "num in range(min(index.currentPage, 5) + min(index.numberPages - 1, 5)) track by $index", "class" => "{{ $index + 1 == min(index.currentPage, 5) ? 'current' : '' }}" }
 					%a{ href: ""} {{ index.currentPage - min(index.currentPage, 5) + $index + 1 }}
-				%li.arrow
+				%li{ "class" => "arrow {{ (index.numberPages == index.currentPage) ? 'unavailable' : '' }}" }
 					%a{ href: ""} &raquo;

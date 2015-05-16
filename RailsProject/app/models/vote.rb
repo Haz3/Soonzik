@@ -12,4 +12,9 @@ class Vote < ActiveRecord::Base
   def self.vote_params(parameters)
     parameters.require(:vote).permit(:user_id, :battle_id, :artist_id)
   end
+
+  # Filter of information for the API
+  def self.miniKey
+  	[:id, :user_id, :artist_id]
+  end
 end

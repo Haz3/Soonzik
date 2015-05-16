@@ -18,6 +18,8 @@
 //= require ./tools/sha256.js
 //= require ./tools/messenger.min.js
 //= require ./tools/messenger-theme-future.js
+//= require ./tools/raphael-min.js
+//= require ./tools/morris.min.js
 //= require websocket_rails/main
 //= require angular
 //= require angular-animate
@@ -31,6 +33,7 @@
 //= require ./AngularJS/controllers/IndexController.js
 //= require ./AngularJS/directives/autofocus.js
 //= require ./AngularJS/directives/autoscrollbottom.js
+//= require ./AngularJS/directives/battle.js
 //= require ./AngularJS/directives/clickOutside.js
 //= require ./AngularJS/directives/loading.js
 //= require ./AngularJS/directives/onScroll.js
