@@ -22,7 +22,7 @@ module API
     # 
     def index
       begin
-        if (defined? @count && @count == "true")
+        if (@count.present? && @count == "true")
           @returnValue = { content: Concert.count }
         else
           @returnValue = { content: Concert.all.as_json(:include => {

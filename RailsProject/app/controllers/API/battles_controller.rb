@@ -25,7 +25,7 @@ module API
     # 
     def index
       begin
-        if (defined? @count && @count == "true")
+        if (@count.present? && @count == "true")
           @returnValue = { content: Battle.count }
         else
           @returnValue = { content: Battle.all.as_json(:include => {

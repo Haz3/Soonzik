@@ -20,7 +20,7 @@ module API
     # 
     def index
     	begin
-        if (defined? @count && @count == "true")
+        if (@count.present? && @count == "true")
           @returnValue = { content: Influence.count }
         else
           @returnValue = { content: Influence.all.as_json(:include => {

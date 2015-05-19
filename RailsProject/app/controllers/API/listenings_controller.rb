@@ -25,7 +25,7 @@ module API
     # 
     def index
       begin
-        if (defined? @count && @count == "true")
+        if (@count.present? && @count == "true")
           @returnValue = { content: Listening.count }
         else
           @returnValue = { content: Listening.all.as_json(:include => {

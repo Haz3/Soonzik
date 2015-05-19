@@ -25,7 +25,7 @@ module API
     # 
     def index
       begin
-        if (defined? @count && @count == "true")
+        if (@count.present? && @count == "true")
           @returnValue = { content: News.count }
         else
           @returnValue = { content: News.all.as_json(:include => {

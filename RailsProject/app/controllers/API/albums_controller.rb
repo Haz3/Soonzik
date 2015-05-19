@@ -26,7 +26,7 @@ module API
     # 
     def index
       begin
-        if (defined? @count && @count == "true")
+        if (@count.present? && @count == "true")
           @returnValue = { content: Album.count }
         else
           @returnValue = { content: Album.all.as_json(:only => Album.miniKey, :include => {

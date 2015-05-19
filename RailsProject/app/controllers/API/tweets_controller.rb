@@ -26,7 +26,7 @@ module API
     # 
     def index
       begin
-        if (defined? @count && @count == "true")
+        if (@count.present? && @count == "true")
           @returnValue = { content: Tweet.count }
         else
           @returnValue = { content: Tweet.all.as_json(:include => {

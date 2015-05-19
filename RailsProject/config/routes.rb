@@ -24,7 +24,7 @@ Rails.application.routes.draw do
     resources :battles, only: [:index, :show] do #ok
       collection do
         get 'find' => 'battles#find'
-        match 'vote' => 'battles#vote', via: [:post, :options]
+        match ':id/vote' => 'battles#vote', via: [:post, :options]
       end
     end
 

@@ -36,7 +36,7 @@ module API
     # 
     def index
       begin
-        if (defined? @count && @count == "true")
+        if (@count.present? && @count == "true")
           @returnValue = { content: User.count }
         else
           @returnValue = { content: User.all.as_json(:only => User.miniKey) }

@@ -20,7 +20,7 @@ module API
     # 
     def index
     	begin
-        if (defined? @count && @count == "true")
+        if (@count.present? && @count == "true")
           @returnValue = { content: Genre.count }
         else
           @returnValue = { content: Genre.all.as_json(:include => {

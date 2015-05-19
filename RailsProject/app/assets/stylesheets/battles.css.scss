@@ -21,4 +21,13 @@
 			line-height: 200px;
 		}
 	}
+
+	hr {
+		border: double #8E8E7E;
+		border-width: 3px 0 0;
+	}
+
+	span.label.alert, span.label.primary {
+		cursor: pointer;
+	}
 }
