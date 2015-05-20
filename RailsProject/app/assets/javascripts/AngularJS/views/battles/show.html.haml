@@ -8,33 +8,51 @@
 				%img{ "ng-src" => "{{ '/assets/usersImage/avatars/' + show.battle.artist_one.image}}" }
 				%p{ "ng-if" => "currentUser != false" }
 					%span{ "ng-click" => "showVoteFor(show.battle, show.battle.artist_one)", "class" => "label radius {{ voteClass(show.voteCurrentUser, show.battle.artist_one.id) }}" } {{ voteText(show.voteCurrentUser, show.battle.artist_one.id) }}
-				.topFive
-					%table
-						%tr{ "ng-repeat" => "i in []" }
+				.topFive.text-center{ "ng-if" => "show.artistOne.topFive.length != 0" }
+					%h5
+						Top music of 
+						%a{ href: "/users/{{ show.battle.artist_one.id }}" } {{ show.battle.artist_one.username }}
+					%table.small-12
+						%tr{ "ng-repeat" => "topFiveOne in show.artistOne.topFive" }
 							%td
-								Play button
+								%i.fi-play
 							%td
-								name
+								{{ topFiveOne.music.title }}
 							%td
-								duration
+								{{ topFiveOne.music.duration }}
 							%td
-								Price
+								{{ topFiveOne.music.price }} $
+				%h5{ "ng-if" => "show.artistOne.topFive.length == 0" }
+					No music yet !
 			.medium-4.columns
 				%battle{ "battle-values" => "show.votes" }
+				.peopleVote{ "ng-if" => "show.votes.length > 0" }
+					%h5
+						They voted for an artist...
+					%ul.small-block-grid-3.medium-block-grid-2.large-block-grid-3
+						%li{ "ng-repeat" => "people in show.randomVote" }
+							%a{ href: "/users/{{ people.id }}" }
+								%img{ "ng-src" => "{{ '/assets/usersImage/avatars/' + people.image }}" }
+
 			.medium-4.columns
 				%h4
 					%a{ href: "/users/{{ show.battle.artist_two.id }}" } {{ show.battle.artist_two.username }}
 				%img{ "ng-src" => "{{ '/assets/usersImage/avatars/' + show.battle.artist_two.image}}" }
 				%p{ "ng-if" => "currentUser != false" }
 					%span{ "ng-click" => "showVoteFor(show.battle, show.battle.artist_two)", "class" => "label radius {{ voteClass(show.voteCurrentUser, show.battle.artist_two.id) }}" } {{ voteText(show.voteCurrentUser, show.battle.artist_two.id) }}
-				.topFive
-					%table
-						%tr{ "ng-repeat" => "i in []" }
+				.topFive.text-center{ "ng-if" => "show.artistTwo.topFive.length != 0" }
+					%h5
+						Top music of 
+						%a{ href: "/users/{{ show.battle.artist_two.id }}" } {{ show.battle.artist_two.username }}
+					%table.small-12
+						%tr{ "ng-repeat" => "topFiveTwo in show.artistTwo.topFive" }
 							%td
-								Play button
+								%i.fi-play
 							%td
-								name
+								{{ topFiveTwo.music.title }}
 							%td
-								duration
+								{{ topFiveTwo.music.duration }}
 							%td
-								Price
+								{{ topFiveTwo.music.price }} $
+				%h5{ "ng-if" => "show.artistTwo.topFive.length == 0" }
+					No music yet !

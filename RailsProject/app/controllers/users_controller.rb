@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :update, :destroy, :finish_signup]
-  before_action :no_content, only: [:index, :show, :edit, :finish_signup]
+  before_action :no_content, only: [:index, :show, :finish_signup]
 
   def no_content
     render :text => "", :layout => true
@@ -26,27 +26,10 @@ class UsersController < ApplicationController
         format.json { render :json => {}, status: :forbidden }
       else
         set_user
-        format.html
+        format.html { render :text => "", :layout => true }
         format.json { render :json => @user.as_json(except: [:salt, :password, :idAPI, :secureKey, :created_at, :updated_at, :address_id], :include => {
             :address => { :only => Address.miniKey }
           }) }
-      end
-    end
-  end
-
-  # PATCH/PUT /users/:id.:format
-  # Won't be call
-  # Can be delete ?
-  def update
-    # authorize! :update, @user
-    respond_to do |format|
-      if @user.update(User.user_params params)
-        sign_in(@user == current_user ? @user : current_user, :bypass => true)
-        format.html { redirect_to @user, notice: 'Your profile was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: 'edit' }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -65,18 +48,6 @@ class UsersController < ApplicationController
       else
         @show_errors = true
       end
-    end
-  end
-
-  # DELETE /users/:id.:format
-  # Won't be call
-  # Can be delete ?
-  def destroy
-    # authorize! :delete, @user
-    @user.destroy
-    respond_to do |format|
-      format.html { redirect_to root_url }
-      format.json { head :no_content }
     end
   end
   

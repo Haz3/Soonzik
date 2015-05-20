@@ -1,7 +1,7 @@
 SoonzikApp.controller('BattlesCtrl', ['$scope', "$routeParams", 'SecureAuth', 'HTTPService', 'NotificationService', function ($scope, $routeParams, SecureAuth, HTTPService, NotificationService) {
 	$scope.loading = true;
 	$scope.index = { battles: [], votes: [], voteCurrentUser: [] };
-	$scope.show = {};
+	$scope.show = { battle: null, artistOne: {}, artistTwo: {}, voteCurrentUser: false, randomVote: [] };
 	$scope.currentUser = false;
 
 	var BattlePerPage = 10;
@@ -104,9 +104,42 @@ SoonzikApp.controller('BattlesCtrl', ['$scope', "$routeParams", 'SecureAuth', 'H
 			} else {
 				$scope.show.votes = false;
 			}
-			$scope.loading = false;
-		}, function(error) {
-			NotificationService.error("An error occured while loading the page")
+
+			// Get top 5 of artists
+			HTTPService.isArtist($scope.show.battle.artist_one.id).then(function(artistInformation) {
+				/*- Begin isArtist - artist 1 -*/
+
+				// Initialisation of the artist profile [if is one]
+				var isArtist = artistInformation.data.content.artist;
+				console.log(artistInformation);
+				if (isArtist == true) {
+					$scope.show.artistOne.topFive = artistInformation.data.content.topFive;
+					$scope.show.artistOne.albums = artistInformation.data.content.albums;
+				}
+
+				HTTPService.isArtist($scope.show.battle.artist_two.id).then(function(artistInformation) {
+					/*- Begin isArtist - artist 2 -*/
+
+					// Initialisation of the artist profile [if is one]
+					var isArtist = artistInformation.data.content.artist;
+					if (isArtist == true) {
+						$scope.show.artistTwo.topFive = artistInformation.data.content.topFive;
+						$scope.show.artistTwo.albums = artistInformation.data.content.albums;
+					}
+					console.log("loading false");
+					$scope.loading = false;
+				}, function(error) {	// error management of the second isArtist
+					NotificationService.error("Error while loading the profile of the second artist.")
+				});
+			}, function(error) {	// error management of the first isArtist
+				NotificationService.error("Error while loading the profile of the first artist.");
+			});
+
+			console.log("random now :");
+			randomPeople();
+
+		}, function(error) {	// error management of the showBattle call
+			NotificationService.error("An error occured while loading the page.")
 		});
 	}
 
@@ -270,4 +303,49 @@ SoonzikApp.controller('BattlesCtrl', ['$scope', "$routeParams", 'SecureAuth', 'H
 			return 'Cancel your old vote and vote for this artist !';
 		}
 	}
+
+	var randomPeople = function() {
+		var votes = $scope.show.battle.votes;
+		var count = 0;
+		var id_array = [];
+
+		console.log("ça bloque pas");
+		if (votes.length <= 6) {
+			for (var indexVote in votes) {
+				console.log(votes[indexVote]);
+				console.log(id_array);
+				id_array.push(votes[indexVote].user_id);
+			}
+			console.log("leave first loop");
+		} else {
+			while (count < 6) {
+				console.log("count :" + count);
+				var randomNumber = ~~(Math.random() * votes.length);
+				console.log(randomNumber);
+				if ($.inArray(randomNumber, id_array)) {
+					console.log("in array - count :" + count);
+					continue;
+				} else {
+					console.log("not in array - count :" + count);
+					id_array.push(randomNumber);
+					count++;
+				}
+			}
+		}
+		console.log(id_array);
+		fillArray_rec($scope.show.randomVote, 0, id_array, (votes.length <= 6) ? votes.length : 6);
+	}
+
+	var fillArray_rec = function(array, index, id_array, limit) {
+		console.log("fill avec l'index : " + index);
+		HTTPService.getProfile(id_array[index]).then(function(profile) {
+			array[index] = profile.data.content;
+			if (index + 1 < limit) {
+				fillArray_rec(array, index + 1, id_array, limit);
+			}
+		}, function(error) {
+			array[index] = null;
+		});
+	}
+
 }]);
