@@ -6,7 +6,7 @@
       /=image_tag(@show.user.background)
       .large-2.small-12.columns.large-centered
         .photo-profil-show.user.large-centered
-          %img.photo-profil-user{ "ng-src" => '{{ show.user.image }}' }
+          %img.photo-profil-user{ "ng-src" => '{{ "/assets/usersImage/avatars/" + show.user.image }}' }
       .username.text-center
         %b
           {{ show.user.username }}

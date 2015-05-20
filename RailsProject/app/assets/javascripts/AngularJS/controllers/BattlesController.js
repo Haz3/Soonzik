@@ -76,9 +76,43 @@ SoonzikApp.controller('BattlesCtrl', ['$scope', "$routeParams", 'SecureAuth', 'H
 		});		
 	}
 
+	$scope.showInit = function() {
+		var id = $routeParams.id;
+		var current_user = SecureAuth.getCurrentUser();
+		if (current_user.id != null && current_user.token != null && current_user.username != null) {
+			$scope.currentUser = current_user;
+		}
+		$scope.show.voteCurrentUser = false;
+		HTTPService.showBattles(id).then(function(response) {
+			console.log(response.data.content);
+			$scope.show.battle = response.data.content;
+			if ($scope.show.battle.votes.length > 0) {
+				$scope.show.votes = [
+					{ value: 0, label: $scope.show.battle.artist_one.username },
+					{ value: 0, label: $scope.show.battle.artist_two.username }
+				];
+				for (var voteIndex in $scope.show.battle.votes) {
+					if ($scope.show.battle.votes[voteIndex].artist_id == $scope.show.battle.artist_one.id) {
+						$scope.show.votes[0].value++;
+					} else {
+						$scope.show.votes[1].value++;
+					}
+					if ($scope.show.battle.votes[voteIndex].user_id == $scope.currentUser.id) {
+						$scope.show.voteCurrentUser = $scope.show.battle.votes[voteIndex].artist_id;
+					}
+				}
+			} else {
+				$scope.show.votes = false;
+			}
+			$scope.loading = false;
+		}, function(error) {
+			NotificationService.error("An error occured while loading the page")
+		});
+	}
+
 	// callback vote
 
-	$scope.voteFor = function(battle, artist) {
+	$scope.indexVoteFor = function(battle, artist) {
 		if ($scope.currentUser == false) {
 			NotificationService.error("You need to be authenticated");
 			return;
@@ -91,6 +125,16 @@ SoonzikApp.controller('BattlesCtrl', ['$scope', "$routeParams", 'SecureAuth', 'H
 					artist_id: artist.id
 				};
 				HTTPService.voteBattle(battle.id, parameters).then(function(response) {
+					// is there a previous vote ?
+					var oldVote = true;
+					// init the array of values
+					if ($scope.index.votes[battle.id].length == 0) {
+						$scope.index.votes[battle.id] = [
+							{ value: 0, label: battle.artist_one.username },
+							{ value: 0, label: battle.artist_two.username }
+						];
+						oldVote = false;
+					}
 					$scope.index.voteCurrentUser[battle.id] = artist.id;
 
 					// iterate on votes
@@ -102,7 +146,74 @@ SoonzikApp.controller('BattlesCtrl', ['$scope', "$routeParams", 'SecureAuth', 'H
 								// We modify the vote value
 								if ($scope.index.battles[battleIndex].votes[voteIndex].user_id == $scope.currentUser.id) {
 									$scope.index.battles[battleIndex].votes[voteIndex].artist_id = artist.id;
+									
+									// if you vote for the first
+									if (artist.id == $scope.index.battles[battleIndex].artist_one.id) {
+										$scope.index.votes[$scope.index.battles[battleIndex].id][0].value++;
+										// if there is a previous vote, reduce the value for the other artist
+										if (oldVote) {	$scope.index.votes[$scope.index.battles[battleIndex].id][1].value--;	}
+									}
+									else {		// if you vote for the second
+										$scope.index.votes[$scope.index.battles[battleIndex].id][1].value++;
+										// if there is a previous vote, reduce the value for the other artist
+										if (oldVote) {	$scope.index.votes[$scope.index.battles[battleIndex].id][0].value--;	}
+									}
 								}
+							}
+						}
+					}
+				}, function(error) {
+					NotificationService.error("An error occured while voting. Try again later.");
+				});
+			}, function(error) {
+				NotificationService.error("An error occured while voting. Try again later.");
+			});
+		} else {
+			NotificationService.info("This action is impossible : You already vote for this artist");
+		}
+	}
+
+	$scope.showVoteFor = function(battle, artist) {
+		if ($scope.currentUser == false) {
+			NotificationService.error("You need to be authenticated");
+			return;
+		}
+		if ($scope.show.voteCurrentUser == false || $scope.show.voteCurrentUser != artist.id) {
+			SecureAuth.securedTransaction(function(key, id) {
+				var parameters = {
+					secureKey: key,
+					user_id: id,
+					artist_id: artist.id
+				};
+				HTTPService.voteBattle(battle.id, parameters).then(function(response) {
+					// is there a previous vote ?
+					var oldVote = true;
+					// init the array of values
+					if ($scope.show.votes.length == 0) {
+						$scope.show.votes = [
+							{ value: 0, label: $scope.show.battle.artist_one.username },
+							{ value: 0, label: $scope.show.battle.artist_two.username }
+						];
+						oldVote = false;
+					}
+					$scope.show.voteCurrentUser = artist.id;
+
+					// Iterate on the votes
+					for (var voteIndex in $scope.show.battle.votes) {
+						// We modify the vote value
+						if ($scope.show.battle.votes[voteIndex].user_id == $scope.currentUser.id) {
+							$scope.show.battle.votes[voteIndex].artist_id = artist.id;
+							
+							// if you vote for the first
+							if (artist.id == $scope.show.battle.artist_one.id) {
+								$scope.show.votes[0].value++;
+								// if there is a previous vote, reduce the value for the other artist
+								if (oldVote) {	$scope.show.votes[1].value--;	}
+							}
+							else {		// if you vote for the second
+								$scope.show.votes[1].value++;
+								// if there is a previous vote, reduce the value for the other artist
+								if (oldVote) {	$scope.show.votes[0].value--;	}
 							}
 						}
 					}

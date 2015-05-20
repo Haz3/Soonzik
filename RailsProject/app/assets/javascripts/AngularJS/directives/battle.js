@@ -38,6 +38,11 @@ SoonzikApp.directive('battle', [function() {
       	drawMyDonut(elem, $scope.battleValues);
     	});
 
+    	$scope.$watch('battleValues', function(newValue, oldValue) {
+				elem.html("");
+    		drawMyDonut(elem, newValue);
+      }, true);
+
      	drawMyDonut(elem, $scope.battleValues);
 		}
 	};

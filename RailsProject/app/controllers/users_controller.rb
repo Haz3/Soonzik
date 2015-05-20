@@ -1,5 +1,10 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :update, :destroy, :finish_signup]
+  before_action :no_content, only: [:index, :show, :edit, :finish_signup]
+
+  def no_content
+    render :text => "", :layout => true
+  end
 
   # GET /users/:id.:format
   def show

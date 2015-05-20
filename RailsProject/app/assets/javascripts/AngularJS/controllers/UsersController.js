@@ -46,7 +46,7 @@ SoonzikApp.controller('UsersCtrl', ['$scope', "$routeParams", 'SecureAuth', 'HTT
 			// Initialisation of the user profile
 			$scope.show.user = {
 				username: dataProfile.username,
-				image: "/assets/" + dataProfile.image,
+				image: dataProfile.image,
 				facebook: linkToNothing(dataProfile.facebook),
 				twitter: linkToNothing(dataProfile.twitter),
 				googlePlus: linkToNothing(dataProfile.googlePlus)
@@ -72,7 +72,6 @@ SoonzikApp.controller('UsersCtrl', ['$scope', "$routeParams", 'SecureAuth', 'HTT
 
 					// remove loading animation
 					$scope.loading = false;
-					NotificationService.success("The profile loaded perfectly");
 
 					/*- End getFollowers -*/
 				}, function(error) {

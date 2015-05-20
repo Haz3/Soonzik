@@ -1,0 +1,40 @@
+.battle{ "ng-init" => "showInit()" }
+	%loading{ "ng-if" => "loading == true" }
+	.row{ "ng-if" => "loading == false" }
+		.clearfix.battleLine
+			.medium-4.columns
+				%h4
+					%a{ href: "/users/{{ show.battle.artist_one.id }}" } {{ show.battle.artist_one.username }}
+				%img{ "ng-src" => "{{ '/assets/usersImage/avatars/' + show.battle.artist_one.image}}" }
+				%p{ "ng-if" => "currentUser != false" }
+					%span{ "ng-click" => "showVoteFor(show.battle, show.battle.artist_one)", "class" => "label radius {{ voteClass(show.voteCurrentUser, show.battle.artist_one.id) }}" } {{ voteText(show.voteCurrentUser, show.battle.artist_one.id) }}
+				.topFive
+					%table
+						%tr{ "ng-repeat" => "i in []" }
+							%td
+								Play button
+							%td
+								name
+							%td
+								duration
+							%td
+								Price
+			.medium-4.columns
+				%battle{ "battle-values" => "show.votes" }
+			.medium-4.columns
+				%h4
+					%a{ href: "/users/{{ show.battle.artist_two.id }}" } {{ show.battle.artist_two.username }}
+				%img{ "ng-src" => "{{ '/assets/usersImage/avatars/' + show.battle.artist_two.image}}" }
+				%p{ "ng-if" => "currentUser != false" }
+					%span{ "ng-click" => "showVoteFor(show.battle, show.battle.artist_two)", "class" => "label radius {{ voteClass(show.voteCurrentUser, show.battle.artist_two.id) }}" } {{ voteText(show.voteCurrentUser, show.battle.artist_two.id) }}
+				.topFive
+					%table
+						%tr{ "ng-repeat" => "i in []" }
+							%td
+								Play button
+							%td
+								name
+							%td
+								duration
+							%td
+								Price

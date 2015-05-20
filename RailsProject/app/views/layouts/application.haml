@@ -55,12 +55,6 @@
                     %a.button.secondary.expand.radius{:href => new_user_session_path, :class => "log-in info", :target => "_self" } Log In
     %main.row
       .large-12{"ng-view" => true}
-      %hr
-      %h1 
-        Ce qui est ci dessus est d'angular.
-        %br
-        En dessous la vue "normale" (à migrer)
-      %hr
       =yield
       - if user_signed_in?  
         #chat{ "ng-include" => "'#{asset_path('AngularJS/views/chat.html.haml')}'" }
