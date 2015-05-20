@@ -39,10 +39,10 @@ module API
           													}, :only => Message.miniKey) }
             codeAnswer 200
           end
-	    else
-	    	codeAnswer 500
-        defineHttp :forbidden
-	    end
+  	    else
+  	    	codeAnswer 500
+          defineHttp :forbidden
+  	    end
       rescue
         codeAnswer 504
         defineHttp :service_unavailable

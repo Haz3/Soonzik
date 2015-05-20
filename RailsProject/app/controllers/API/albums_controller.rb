@@ -226,6 +226,7 @@ module API
             end
           end
         else
+          codeAnswer 500
           defineHttp :forbidden
         end
       rescue

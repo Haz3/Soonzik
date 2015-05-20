@@ -228,6 +228,9 @@ module API
               defineHttp :service_unavailable
             end
           end
+        else
+          codeAnswer 500
+          defineHttp :forbidden
         end
       rescue
         codeAnswer 504
