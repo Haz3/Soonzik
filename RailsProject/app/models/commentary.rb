@@ -14,4 +14,9 @@ class Commentary < ActiveRecord::Base
   def self.commentary_params(parameters)
     parameters.require(:commentary).permit(:author_id, :content)
   end
+
+  # Filter of information for the API
+  def self.miniKey
+    [:id, :author_id, :content, :created_at]
+  end
 end

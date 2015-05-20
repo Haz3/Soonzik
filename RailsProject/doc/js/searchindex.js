@@ -379,6 +379,12 @@ var SearchIndex =
 		"type": "anymethod"
 	},
 	{
+		"name": "getcomments",
+		"link": "API/AlbumsController.html#method-i-getcomments",
+		"snippet": "<p>Get comments of a specific albums.\n<p>Route : /albums/:id/comments\n<p>Options\n",
+		"type": "anymethod"
+	},
+	{
 		"name": "cors_set_access_control_headers",
 		"link": "API/ApiController.html#method-i-cors_set_access_control_headers",
 		"snippet": "<p>For all responses in this controller, return the CORS access control\nheaders.\n",
@@ -619,6 +625,12 @@ var SearchIndex =
 		"type": "anymethod"
 	},
 	{
+		"name": "getcomments",
+		"link": "API/MusicsController.html#method-i-getcomments",
+		"snippet": "<p>Get comments of a specific musics.\n<p>Route : /musics/:id/comments\n<p>Options\n",
+		"type": "anymethod"
+	},
+	{
 		"name": "index",
 		"link": "API/NewsController.html#method-i-index",
 		"snippet": "<p>Retrieve all the news\n<p>Route : /news\n<p>Options\n",
@@ -640,6 +652,12 @@ var SearchIndex =
 		"name": "addcomment",
 		"link": "API/NewsController.html#method-i-addcomment",
 		"snippet": "<p>Add a comment to a specific news. Need to be a secure transaction.\n<p>Route : /news/addcomment/:id\n<p>Options …\n",
+		"type": "anymethod"
+	},
+	{
+		"name": "getcomments",
+		"link": "API/NewsController.html#method-i-getcomments",
+		"snippet": "<p>Get comments of a specific news.\n<p>Route : /news/:id/comments\n<p>Options\n",
 		"type": "anymethod"
 	},
 	{
@@ -922,6 +940,12 @@ var SearchIndex =
 		"name": "commentary_params",
 		"link": "Commentary.html#method-c-commentary_params",
 		"snippet": "<p>The strong parameters to save or update object\n",
+		"type": "anymethod"
+	},
+	{
+		"name": "miniKey",
+		"link": "Commentary.html#method-c-miniKey",
+		"snippet": "<p>Filter of information for the API\n",
 		"type": "anymethod"
 	},
 	{
@@ -1252,6 +1276,12 @@ var SearchIndex =
 		"name": "vote_params",
 		"link": "Vote.html#method-c-vote_params",
 		"snippet": "<p>The strong parameters to save or update object\n",
+		"type": "anymethod"
+	},
+	{
+		"name": "miniKey",
+		"link": "Vote.html#method-c-miniKey",
+		"snippet": "<p>Filter of information for the API\n",
 		"type": "anymethod"
 	}
 ]

@@ -8,6 +8,7 @@ module API
   # * addcomment  [post] - SECURITY
   # * get         [get]
   # * addtoplaylist [post] - SECURITY
+  # * getcomments [get]
   #
   class MusicsController < ApisecurityController
   	before_action :checkKey, only: [:addcomment, :get, :addtoplaylist]
@@ -315,6 +316,45 @@ module API
         else
           codeAnswer 500
           defineHttp :forbidden
+        end
+      rescue
+        codeAnswer 504
+        defineHttp :service_unavailable
+      end
+      sendJson
+    end
+
+    # Get comments of a specific musics.
+    #
+    # Route : /musics/:id/comments
+    #
+    # ==== Options
+    #
+    # * +:id+ - The id of the musics where is the comment
+    # * +:offset+ - The offset of the comment array (default : 0)
+    # * +:limit+ - The max size of the array (default : 20)
+    #
+    # ===== HTTP VALUE
+    # 
+    # - +200+ - In case of success, return the array of comment
+    # - +404+ - Can't find the news, the id is probably wrong
+    # - +503+ - Error from server
+    # 
+    def getcomments
+      begin
+        musics = Music.find_by_id(@id)
+        @offset = 0 if !@offset.present?
+        @limit = 20 if !@limit.present?
+        if (!musics)
+          codeAnswer 502
+          defineHttp :not_found
+        else
+          comments = musics.commentaries[(@offset.to_i)..(@offset.to_i + @limit.to_i)] || []
+          refine_comments = []
+          comments.each { |comment|
+            refine_comments << comment.as_json(:only => Commentary.miniKey)
+          }
+          @returnValue = { content: refine_comments }
         end
       rescue
         codeAnswer 504

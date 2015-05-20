@@ -119,7 +119,9 @@ href="../News.html">News</a> objects Here is the list of action available :</p>
 </li><li>
 <p>find        [get]</p>
 </li><li>
-<p>addcomment  [post]</p>
+<p>addcomment  [post] - SECURITY</p>
+</li><li>
+<p>getcomments [get]</p>
 </li></ul>
 		</section>
 
@@ -172,7 +174,7 @@ href="../News.html">News</a> objects Here is the list of action available :</p>
 </li></ul>					
 											<div class="method-source-code" id="addcomment-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/news_controller.rb, line 208</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/news_controller.rb, line 209</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">addcomment</span>
   <span class="ruby-keyword">begin</span>
     <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@security</span>)
@@ -251,7 +253,7 @@ user (the author), the newstacts, the attachments</p>
 </li></ul>					
 											<div class="method-source-code" id="find-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/news_controller.rb, line 109</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/news_controller.rb, line 110</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">find</span>
   <span class="ruby-keyword">begin</span>
     <span class="ruby-identifier">new_object</span> = <span class="ruby-keyword">nil</span>
@@ -340,6 +342,67 @@ user (the author), the newstacts, the attachments</p>
 
 					
 									</div>
+								<a name="method-i-getcomments">anchor</a>
+				<div id="method-i-getcomments-doc" class="method">
+
+					<header>
+											<i class="icon-generic"></i>
+						<span class="method-name">getcomments</span><span 
+							class="method-args">()</span>
+										</header>
+
+					<div class="method-description">
+											<p>Get comments of a specific news.</p>
+
+<p>Route : /news/:id/comments</p>
+
+<h4 id="method-i-getcomments-label-Options">Options<span><a href="#method-i-getcomments-label-Options">&para;</a> <a href="#top">&uarr;</a></span></h4>
+<ul><li>
+<p><code>:id</code> - The id of the news where is the comment</p>
+</li><li>
+<p><code>:offset</code> - The offset of the comment array (default : 0)</p>
+</li><li>
+<p><code>:limit</code> - The max size of the array (default : 20)</p>
+</li></ul>
+
+<h5 id="method-i-getcomments-label-HTTP+VALUE">HTTP VALUE<span><a href="#method-i-getcomments-label-HTTP+VALUE">&para;</a> <a href="#top">&uarr;</a></span></h5>
+<ul><li>
+<p><code>200</code> - In case of success, return the array of comment</p>
+</li><li>
+<p><code>404</code> - Can&#39;t find the news, the id is probably wrong</p>
+</li><li>
+<p><code>503</code> - Error from server</p>
+</li></ul>					
+											<div class="method-source-code" id="getcomments-source">
+							<pre class="prettyprint linenums"><code 
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/news_controller.rb, line 255</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">getcomments</span>
+  <span class="ruby-keyword">begin</span>
+    <span class="ruby-identifier">news</span> = <span class="ruby-constant">News</span>.<span class="ruby-identifier">find_by_id</span>(<span class="ruby-ivar">@id</span>)
+    <span class="ruby-ivar">@offset</span> = <span class="ruby-value">0</span> <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-ivar">@offset</span>.<span class="ruby-identifier">present?</span>
+    <span class="ruby-ivar">@limit</span> = <span class="ruby-value">20</span> <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-ivar">@limit</span>.<span class="ruby-identifier">present?</span>
+    <span class="ruby-keyword">if</span> (<span class="ruby-operator">!</span><span class="ruby-identifier">news</span>)
+      <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">502</span>
+      <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:not_found</span>
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-identifier">comments</span> = <span class="ruby-identifier">news</span>.<span class="ruby-identifier">commentaries</span>[(<span class="ruby-ivar">@offset</span>.<span class="ruby-identifier">to_i</span>)<span class="ruby-operator">..</span>(<span class="ruby-ivar">@offset</span>.<span class="ruby-identifier">to_i</span> <span class="ruby-operator">+</span> <span class="ruby-ivar">@limit</span>.<span class="ruby-identifier">to_i</span>)] <span class="ruby-operator">||</span> []
+      <span class="ruby-identifier">refine_comments</span> = []
+      <span class="ruby-identifier">comments</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">comment</span><span class="ruby-operator">|</span>
+        <span class="ruby-identifier">refine_comments</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">comment</span>.<span class="ruby-identifier">as_json</span>(<span class="ruby-value">:only</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">Commentary</span>.<span class="ruby-identifier">miniKey</span>)
+      }
+      <span class="ruby-ivar">@returnValue</span> = { <span class="ruby-identifier">content</span><span class="ruby-operator">:</span> <span class="ruby-identifier">refine_comments</span> }
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">rescue</span>
+    <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">504</span>
+    <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:service_unavailable</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">sendJson</span>
+<span class="ruby-keyword">end</span></code></pre>
+						</div>
+										</div>
+
+					
+									</div>
 								<a name="method-i-index">anchor</a>
 				<div id="method-i-index-doc" class="method">
 
@@ -369,10 +432,10 @@ user (the author), the newstexts, the attachments and the tags</p>
 </li></ul>					
 											<div class="method-source-code" id="index-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/news_controller.rb, line 26</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/news_controller.rb, line 27</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">index</span>
   <span class="ruby-keyword">begin</span>
-    <span class="ruby-keyword">if</span> (<span class="ruby-keyword">defined?</span> <span class="ruby-ivar">@count</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-ivar">@count</span> <span class="ruby-operator">==</span> <span class="ruby-string">&quot;true&quot;</span>)
+    <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@count</span>.<span class="ruby-identifier">present?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-ivar">@count</span> <span class="ruby-operator">==</span> <span class="ruby-string">&quot;true&quot;</span>)
       <span class="ruby-ivar">@returnValue</span> = { <span class="ruby-identifier">content</span><span class="ruby-operator">:</span> <span class="ruby-constant">News</span>.<span class="ruby-identifier">count</span> }
     <span class="ruby-keyword">else</span>
       <span class="ruby-ivar">@returnValue</span> = { <span class="ruby-identifier">content</span><span class="ruby-operator">:</span> <span class="ruby-constant">News</span>.<span class="ruby-identifier">all</span>.<span class="ruby-identifier">as_json</span>(<span class="ruby-value">:include</span> =<span class="ruby-operator">&gt;</span> {
@@ -428,7 +491,7 @@ user (the author), the newstexts, the attachments and the tags</p>
 </li></ul>					
 											<div class="method-source-code" id="show-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/news_controller.rb, line 64</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/news_controller.rb, line 65</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">show</span>
   <span class="ruby-keyword">begin</span>
     <span class="ruby-identifier">news</span> = <span class="ruby-constant">News</span>.<span class="ruby-identifier">find_by_id</span>(<span class="ruby-ivar">@id</span>)

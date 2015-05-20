@@ -18,6 +18,7 @@ Rails.application.routes.draw do
       collection do
         get 'find' => 'albums#find'
         get 'addcomment/:id' => 'albums#addcomment', constraints: {id: /[0-9]+/}
+        get ':id/comments' => 'albums#getcomments'
       end
     end
 
@@ -67,6 +68,7 @@ Rails.application.routes.draw do
         match 'addcomment/:id' => 'musics#addcomment', constraints: {id: /[0-9]+/}, via: [:post, :options]
         get 'get/:id' => 'musics#get', constraints: {id: /[0-9]+/}, format: 'mp3' #verifier si ça fonctionne
         match 'addtoplaylist' => 'musics#addtoplaylist', via: [:post, :options]
+        get ':id/comments' => 'musics#getcomments'
       end
     end
 
@@ -74,6 +76,7 @@ Rails.application.routes.draw do
       collection do
         get 'find' => 'news#find'
         match 'addcomment/:id' => 'news#addcomment', constraints: {id: /[0-9]+/}, via: [:post, :options]
+        get ':id/comments' => 'news#getcomments'
       end
     end
 
