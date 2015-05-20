@@ -1,17 +1,7 @@
 class NewsController < ApplicationController
-	before_action :set_news, only: [:show]
+  before_action :no_content
 
-  # GET /news/:id.:format
-  def index
-  	@news = News.all
+  def no_content
+    render :text => "", :layout => true
   end
-
-  # GET /news/.:format
-  def show
-  end
-
-  private
-    def set_user
-      @news = News.find(params[:id])
-    end
 end
