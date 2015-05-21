@@ -291,7 +291,7 @@ module API
     #
     # ==== Options
     #
-    # * +id+ - The id of the music where is the comment
+    # * +id+ - The id of the music you want to add
     # * +playlist_id+ - The id of the playlist where you want to add a music
     #
     # ===== HTTP VALUE
@@ -306,9 +306,10 @@ module API
         if (@security)
           playlist = Playlist.find_by_id(@playlist_id)
           music = Music.find_by_id(@id)
-          if (playlist && music && playlist.user_id == @user_id && !playlist.musics.include?(music))
+          if (playlist && music && playlist.user_id == @user_id.to_i && !playlist.musics.include?(music))
             playlist.musics << music
             defineHttp :created
+            codeAnswer 201
           else
             codeAnswer 502
             defineHttp :not_found
