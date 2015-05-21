@@ -27,11 +27,5 @@ namespace SoonZik.Views
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
         }
-
-        private void LoginButton_OnSessionStateChanged(object sender, SessionStateChangedEventArgs e)
-        {
-            this.GlobalGrid.Visibility = (e.SessionState == FacebookSessionState.Opened) ?
-                                   Visibility.Visible : Visibility.Collapsed;
-        }
     }
 }

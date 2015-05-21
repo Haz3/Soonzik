@@ -12,16 +12,10 @@
     DataContext="{StaticResource MainPageViewModel}"
     Background="#424242">
 	
-    <Page.Resources>
-        <utils:BoolToVisibilityConverter x:Key="BoolToVis"/>
-    </Page.Resources>
-    
+   
     <Grid>
-        <view:MainView Visibility="{Binding PivotVisibility, Converter={StaticResource BoolToVis}}" />
-        <!--<view:Player Visibility="{Binding PivotVisibility, Converter={StaticResource BoolToVis}}" />-->
-
-        <!--<view:Connexion Visibility="{Binding ConnexionVisibility, Converter={StaticResource BoolToVis}, FallbackValue=Collapsed}"/>-->
-    </Grid>
+        <view:MainView/>
+     </Grid>
 		
 </Page>
 

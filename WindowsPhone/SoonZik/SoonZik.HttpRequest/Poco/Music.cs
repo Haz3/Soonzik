@@ -8,13 +8,13 @@ namespace SoonZik.HttpRequest.Poco
 {
     public class Music
     {
-        public int Id { get; set; }
-        public string Title { get; set; }
-        public int Duration { get; set; }
-        public double Price { get; set; }
-        public string File { get; set; }
-        public Album Album { get; set; }
-        public List<object> Genres { get; set; }
-        public User User { get; set; }
+        public int id { get; set; }
+        public string title { get; set; }
+        public int duration { get; set; }
+        public double price { get; set; }
+        public string file { get; set; }
+        public Album album { get; set; }
+        public List<Genre> genres { get; set; }
+        public User user { get; set; }
     }
 }

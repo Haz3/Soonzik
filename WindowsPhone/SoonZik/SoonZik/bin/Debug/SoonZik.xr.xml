@@ -4,20 +4,8 @@
     <RootInterface FullName="Windows.UI.Xaml.Data.IValueConverter" />
   </Roots.Interfaces>
   <Roots.PropertyPathNames>
-    <RootPropertyPathName Name="Title" />
-    <RootPropertyPathName Name="Image" />
-    <RootPropertyPathName Name="PivotVisibility" />
-    <RootPropertyPathName Name="ConnexionCommand" />
-    <RootPropertyPathName Name="Password" />
-    <RootPropertyPathName Name="Username" />
-    <RootPropertyPathName Name="Key" />
-    <RootPropertyPathName Name="Email" />
-    <RootPropertyPathName Name="LastName" />
-    <RootPropertyPathName Name="FirstName" />
-    <RootPropertyPathName Name="Group" />
-    <RootPropertyPathName Name="ItemSource" />
-    <RootPropertyPathName Name="CollectionGroups" />
     <RootPropertyPathName Name="SearchText" />
+    <RootPropertyPathName Name="ConnexionCommand" />
     <RootPropertyPathName Name="AchatCommand" />
     <RootPropertyPathName Name="AmisCommand" />
     <RootPropertyPathName Name="PlaylistCommand" />
@@ -27,18 +15,40 @@
     <RootPropertyPathName Name="ExplorerCommand" />
     <RootPropertyPathName Name="NewsCommand" />
     <RootPropertyPathName Name="ProfilCommand" />
+    <RootPropertyPathName Name="Password" />
+    <RootPropertyPathName Name="Username" />
+    <RootPropertyPathName Name="FacebookTapped" />
+    <RootPropertyPathName Name="style_name" />
+    <RootPropertyPathName Name="ListGenres" />
+    <RootPropertyPathName Name="Key" />
+    <RootPropertyPathName Name="Image" />
+    <RootPropertyPathName Name="Group" />
+    <RootPropertyPathName Name="ItemSource" />
+    <RootPropertyPathName Name="TappedCommand" />
+    <RootPropertyPathName Name="CollectionGroups" />
+    <RootPropertyPathName Name="Date" />
+    <RootPropertyPathName Name="Title" />
+    <RootPropertyPathName Name="ListNews" />
     <RootPropertyPathName Name="BitmapImage" />
     <RootPropertyPathName Name="Datas" />
+    <RootPropertyPathName Name="CurrentUser" />
+    <RootPropertyPathName Name="Follows" />
+    <RootPropertyPathName Name="SelectUser" />
+    <RootPropertyPathName Name="SelectionCommand" />
   </Roots.PropertyPathNames>
   <Roots.RootTypes>
     <RootType FullName="Windows.UI.Xaml.Application">
       <RootProperty Name="Resources" />
     </RootType>
+    <RootType FullName="SoonZik.ViewModel.ViewModelLocator" />
     <RootType FullName="SoonZik.ViewModel.MainPageViewModel" />
     <RootType FullName="SoonZik.ViewModel.ConnexionViewModel" />
     <RootType FullName="SoonZik.ViewModel.MainViewModel" />
     <RootType FullName="SoonZik.ViewModel.PlayerViewModel" />
-    <RootType FullName="SoonZik.ViewModel.ViewModelLocator" />
+    <RootType FullName="SoonZik.ViewModel.NewsViewModel" />
+    <RootType FullName="SoonZik.ViewModel.ExplorerViewModel" />
+    <RootType FullName="SoonZik.ViewModel.ProfilUserViewModel" />
+    <RootType FullName="SoonZik.ViewModel.FriendViewModel" />
     <RootType FullName="Windows.UI.Xaml.DataTemplate">
       <RootProperty Name="Template" />
     </RootType>
@@ -58,7 +68,6 @@
       <RootProperty Name="Opacity" />
       <RootProperty Name="RenderTransformOrigin" />
       <RootProperty Name="RenderTransform" />
-      <RootEvent Name="Tapped" />
       <RootMethod Name="GetRow" />
       <RootMethod Name="SetRow" />
     </RootType>
@@ -66,20 +75,18 @@
       <RootProperty Name="Background" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.Button">
-      <RootProperty Name="Width" />
-      <RootProperty Name="HorizontalAlignment" />
       <RootProperty Name="Content" />
-      <RootProperty Name="FontSize" />
-      <RootProperty Name="BorderBrush" />
-      <RootProperty Name="Background" />
+      <RootProperty Name="HorizontalAlignment" />
+      <RootProperty Name="VerticalAlignment" />
       <RootProperty Name="BorderThickness" />
-      <RootProperty Name="Foreground" />
-      <RootProperty Name="Margin" />
-      <RootProperty Name="Command" />
       <RootProperty Name="Style" />
+      <RootProperty Name="Command" />
       <RootProperty Name="MinHeight" />
       <RootProperty Name="MinWidth" />
       <RootProperty Name="FontFamily" />
+      <RootProperty Name="Foreground" />
+      <RootProperty Name="Margin" />
+      <RootEvent Name="Click" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.Control">
       <RootProperty Name="Background" />
@@ -114,11 +121,11 @@
     <RootType FullName="Windows.UI.Xaml.Controls.Pivot">
       <RootProperty Name="HeaderTemplate" />
       <RootProperty Name="Foreground" />
-      <RootProperty Name="Margin" />
       <RootProperty Name="RenderTransformOrigin" />
       <RootProperty Name="Style" />
       <RootProperty Name="RenderTransform" />
       <RootProperty Name="Items" />
+      <RootProperty Name="Margin" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.FrameworkElement">
       <RootProperty Name="Margin" />
@@ -250,78 +257,91 @@
       <RootProperty Name="TextWrapping" />
       <RootProperty Name="TextAlignment" />
       <RootProperty Name="FontWeight" />
+      <RootProperty Name="Style" />
       <RootProperty Name="Padding" />
       <RootProperty Name="DataContext" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Data.Binding">
-      <RootProperty Name="RelativeSource" />
-      <RootProperty Name="Converter" />
       <RootProperty Name="Mode" />
+      <RootProperty Name="Path" />
+      <RootProperty Name="Converter" />
       <RootProperty Name="Source" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.UserControl">
-      <RootProperty Name="DataContext" />
       <RootProperty Name="Content" />
-      <RootProperty Name="RenderTransform" />
-    </RootType>
-    <RootType FullName="Windows.UI.Xaml.Data.RelativeSource" />
-    <RootType FullName="Windows.UI.Xaml.Controls.Canvas">
-      <RootProperty Name="Width" />
-      <RootProperty Name="Height" />
-      <RootProperty Name="Children" />
-      <RootProperty Name="RenderTransformOrigin" />
-      <RootProperty Name="Background" />
-      <RootProperty Name="Opacity" />
-      <RootProperty Name="RenderTransform" />
-      <RootMethod Name="GetTop" />
-      <RootMethod Name="SetTop" />
-      <RootMethod Name="GetLeft" />
-      <RootMethod Name="SetLeft" />
-    </RootType>
-    <RootType FullName="SoonZik.Controls.BoutonMenuControl" />
-    <RootType FullName="SoonZik.Controls.Genre" />
-    <RootType FullName="SoonZik.Controls.MenuControl" />
-    <RootType FullName="SoonZik.Controls.NewsControl">
-      <RootProperty Name="Width" />
-      <RootProperty Name="Height" />
-      <RootProperty Name="VerticalAlignment" />
-      <RootProperty Name="Margin" />
-    </RootType>
-    <RootType FullName="SoonZik.Controls.Player" />
-    <RootType FullName="SoonZik.Controls.PopUp" />
-    <RootType FullName="Windows.UI.Xaml.Controls.Page">
-      <RootProperty Name="DataContext" />
-      <RootProperty Name="Background" />
       <RootProperty Name="Resources" />
-      <RootProperty Name="Content" />
     </RootType>
-    <RootType FullName="SoonZik.Utils.BoolToVisibilityConverter" />
-    <RootType FullName="SoonZik.Views.MainView">
-      <RootProperty Name="Visibility" />
+    <RootType FullName="SoonZik.Controls.ButtonFriendPopUp" />
+    <RootType FullName="SoonZik.Controls.Genre" />
+    <RootType FullName="Windows.UI.Xaml.Thickness" />
+    <RootType FullName="Windows.UI.Xaml.Media.Animation.DoubleAnimation">
+      <RootProperty Name="Duration" />
+      <RootProperty Name="To" />
     </RootType>
-    <RootType FullName="SoonZik.MainPage" />
-    <RootType FullName="SoonZik.ViewModel.BattleViewModel" />
-    <RootType FullName="SoonZik.Views.Battle" />
+    <RootType FullName="SoonZik.Controls.PivotControl" />
     <RootType FullName="Windows.UI.Xaml.Controls.TextBox">
-      <RootProperty Name="PlaceholderText" />
-      <RootProperty Name="Text" />
-      <RootProperty Name="Background" />
-      <RootProperty Name="Margin" />
-      <RootProperty Name="Height" />
       <RootProperty Name="Width" />
       <RootProperty Name="BorderThickness" />
       <RootProperty Name="AcceptsReturn" />
+      <RootProperty Name="Height" />
+      <RootProperty Name="Margin" />
       <RootProperty Name="TextAlignment" />
       <RootProperty Name="VerticalContentAlignment" />
       <RootProperty Name="Foreground" />
+      <RootProperty Name="Background" />
       <RootProperty Name="FontSize" />
+      <RootProperty Name="PlaceholderText" />
+      <RootProperty Name="Text" />
       <RootProperty Name="FontFamily" />
     </RootType>
+    <RootType FullName="Windows.UI.Xaml.Controls.ListView">
+      <RootProperty Name="IsHoldingEnabled" />
+      <RootProperty Name="ItemsSource" />
+      <RootProperty Name="ItemTemplate" />
+      <RootProperty Name="GroupStyle" />
+    </RootType>
+    <RootType FullName="Microsoft.Xaml.Interactivity.Interaction">
+      <RootMethod Name="GetBehaviors" />
+      <RootMethod Name="SetBehaviors" />
+    </RootType>
+    <RootType FullName="Microsoft.Xaml.Interactions.Core.EventTriggerBehavior">
+      <RootProperty Name="EventName" />
+      <RootProperty Name="Actions" />
+    </RootType>
+    <RootType FullName="Microsoft.Xaml.Interactions.Media.ControlStoryboardAction">
+      <RootProperty Name="Storyboard" />
+    </RootType>
+    <RootType FullName="SoonZik.Controls.GlobalMenuControl" />
+    <RootType FullName="SoonZik.Controls.NewsControl" />
+    <RootType FullName="Windows.UI.Xaml.Controls.PivotItem">
+      <RootProperty Name="Header" />
+      <RootProperty Name="Content" />
+    </RootType>
+    <RootType FullName="SoonZik.Views.Friends" />
+    <RootType FullName="SoonZik.Views.Playlist" />
+    <RootType FullName="SoonZik.Views.Battle" />
+    <RootType FullName="SoonZik.Views.Geoloc" />
+    <RootType FullName="SoonZik.Views.Packs" />
+    <RootType FullName="SoonZik.Views.Explorer" />
+    <RootType FullName="SoonZik.Views.News" />
+    <RootType FullName="Windows.UI.Xaml.Controls.Page">
+      <RootProperty Name="DataContext" />
+      <RootProperty Name="Background" />
+      <RootProperty Name="Content" />
+      <RootProperty Name="Resources" />
+    </RootType>
+    <RootType FullName="SoonZik.Views.MainView" />
+    <RootType FullName="SoonZik.MainPage" />
+    <RootType FullName="SoonZik.ViewModel.BattleViewModel" />
     <RootType FullName="Windows.UI.Xaml.Controls.PasswordBox">
       <RootProperty Name="PlaceholderText" />
       <RootProperty Name="Password" />
       <RootProperty Name="Background" />
       <RootProperty Name="Margin" />
+      <RootProperty Name="BorderThickness" />
+    </RootType>
+    <RootType FullName="Microsoft.Xaml.Interactions.Core.InvokeCommandAction">
+      <RootProperty Name="Command" />
     </RootType>
     <RootType FullName="SoonZik.Views.Connexion" />
     <RootType FullName="Windows.UI.Xaml.Controls.StackPanel">
@@ -348,6 +368,12 @@
       <RootProperty Name="Background" />
     </RootType>
     <RootType FullName="SoonZik.Views.CustomSplashScreen" />
+    <RootType FullName="Windows.UI.Xaml.Controls.ListBox">
+      <RootProperty Name="Background" />
+      <RootProperty Name="ItemsSource" />
+      <RootProperty Name="ItemTemplate" />
+      <RootProperty Name="SelectedItem" />
+    </RootType>
     <RootType FullName="Windows.UI.Xaml.Data.CollectionViewSource">
       <RootProperty Name="Source" />
       <RootProperty Name="IsSourceGrouped" />
@@ -357,12 +383,6 @@
     <RootType FullName="Windows.UI.Xaml.Controls.SemanticZoom">
       <RootProperty Name="ZoomedInView" />
       <RootProperty Name="ZoomedOutView" />
-    </RootType>
-    <RootType FullName="Windows.UI.Xaml.Controls.ListView">
-      <RootProperty Name="IsHoldingEnabled" />
-      <RootProperty Name="ItemsSource" />
-      <RootProperty Name="ItemTemplate" />
-      <RootProperty Name="GroupStyle" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Media.Animation.ContinuumNavigationTransitionInfo">
       <RootMethod Name="GetExitElementContainer" />
@@ -377,32 +397,6 @@
       <RootProperty Name="ItemsSource" />
       <RootProperty Name="ItemTemplate" />
     </RootType>
-    <RootType FullName="SoonZik.Views.Friends" />
-    <RootType FullName="SoonZik.Views.Geoloc" />
-    <RootType FullName="Windows.UI.Xaml.Thickness" />
-    <RootType FullName="Windows.UI.Xaml.Media.Animation.DoubleAnimation">
-      <RootProperty Name="Duration" />
-      <RootProperty Name="To" />
-    </RootType>
-    <RootType FullName="Microsoft.Xaml.Interactivity.Interaction">
-      <RootMethod Name="GetBehaviors" />
-      <RootMethod Name="SetBehaviors" />
-    </RootType>
-    <RootType FullName="Microsoft.Xaml.Interactions.Core.EventTriggerBehavior">
-      <RootProperty Name="EventName" />
-      <RootProperty Name="Actions" />
-    </RootType>
-    <RootType FullName="Microsoft.Xaml.Interactions.Media.ControlStoryboardAction">
-      <RootProperty Name="Storyboard" />
-    </RootType>
-    <RootType FullName="Windows.UI.Xaml.Controls.PivotItem">
-      <RootProperty Name="Header" />
-      <RootProperty Name="Content" />
-    </RootType>
-    <RootType FullName="SoonZik.Views.Playlist" />
-    <RootType FullName="SoonZik.Views.Packs" />
-    <RootType FullName="SoonZik.Views.Profil" />
-    <RootType FullName="SoonZik.Views.News" />
     <RootType FullName="Windows.UI.Xaml.Shapes.Rectangle">
       <RootProperty Name="Fill" />
       <RootProperty Name="Margin" />
@@ -428,6 +422,7 @@
       <RootProperty Name="HorizontalAlignment" />
     </RootType>
     <RootType FullName="SoonZik.Views.Player" />
-    <RootType FullName="SoonZik.Views.Search" />
+    <RootType FullName="SoonZik.Views.ProfilArtiste" />
+    <RootType FullName="SoonZik.Views.ProfilUser" />
   </Roots.RootTypes>
 </Roots>

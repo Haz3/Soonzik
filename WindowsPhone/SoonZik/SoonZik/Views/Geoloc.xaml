@@ -8,10 +8,8 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    
+    <!--BingMapKey   AvnaXUW0ZvxlfqXW-TiUIMC-Lil9x8kf-0G5l3-YVUxKI7gEqho8fRGYkst4GUP7-->
+
     <Grid>
-        <!-- Row 2 -->
-        
-        <!-- Row 3 -->
     </Grid>
 </Page>

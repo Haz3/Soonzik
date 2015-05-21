@@ -1,0 +1,129 @@
+﻿<UserControl
+    x:Class="SoonZik.Controls.GlobalMenuControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:SoonZik.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
+    xmlns:core="using:Microsoft.Xaml.Interactions.Core"
+    xmlns:media="using:Microsoft.Xaml.Interactions.Media"
+    xmlns:views="using:SoonZik.Views"
+    mc:Ignorable="d">
+
+    <UserControl.Resources>
+        <Storyboard x:Name="MenuStoryBoard" >
+            <DoubleAnimation Duration="0:0:0.25" To="300" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)" Storyboard.TargetName="MenuGrid" d:IsOptimized="True"/>
+            <DoubleAnimation Duration="0:0:0.25" To="300" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)" Storyboard.TargetName="PivotGlobal" d:IsOptimized="True"/>
+        </Storyboard>
+        <Storyboard x:Name="MenuStoryBoardBack" >
+            <DoubleAnimation Duration="0:0:0.25" To="0" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)" Storyboard.TargetName="MenuGrid" d:IsOptimized="True"/>
+            <DoubleAnimation Duration="0:0:0.25" To="0" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)" Storyboard.TargetName="PivotGlobal" d:IsOptimized="True"/>
+        </Storyboard>
+        <Storyboard x:Name="SearchStoryBoard">
+            <DoubleAnimation Duration="0:0:0.25" To="-300" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)" Storyboard.TargetName="SearchGrid" d:IsOptimized="True"/>
+            <DoubleAnimation Duration="0:0:0.25" To="-300" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)" Storyboard.TargetName="PivotGlobal" d:IsOptimized="True"/>
+        </Storyboard>
+        <Storyboard x:Name="SearchStoryBoardBack">
+            <DoubleAnimation Duration="0:0:0.25" To="0" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)" Storyboard.TargetName="SearchGrid" d:IsOptimized="True"/>
+            <DoubleAnimation Duration="0:0:0.25" To="0" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)" Storyboard.TargetName="PivotGlobal" d:IsOptimized="True"/>
+        </Storyboard>
+        <Storyboard x:ConnectionId='1' x:Name="MenuAloneClose"                                       >
+            <DoubleAnimation Duration="0:0:0.25" To="0" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)" Storyboard.TargetName="MenuGrid" d:IsOptimized="True"/>
+        </Storyboard>
+        <Storyboard x:ConnectionId='2' x:Name="SearchAloneBack"                                        >
+            <DoubleAnimation Duration="0:0:0.25" To="0" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)" Storyboard.TargetName="SearchGrid" d:IsOptimized="True"/>
+        </Storyboard>
+        <FontFamily x:Key="RobotoMenu">Assets/Fonts/RobotoCondensed-Regular.ttf#Roboto Condensed</FontFamily>
+        <Thickness x:Key="PivotPortraitThemePadding">19,38,0,0</Thickness>
+        <Thickness x:Key="PivotLandscapeThemePadding">19,25,0,0</Thickness>
+    </UserControl.Resources>
+
+    <Grid x:Name="GlobalGrid" Background="Transparent">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid x:Name="HeaderGrid" Grid.Row="0" Background="Transparent" Height="50">
+            <ToggleButton x:Name="ToggleButtonMenu" Content="ToggleButton" HorizontalAlignment="Left" Height="30" Margin="10,8,0,12" Style="{StaticResource MenuToggleStyle}" VerticalAlignment="Center" Width="30" MinHeight="20" MinWidth="30" IsChecked="False" MaxHeight="30" MaxWidth="30">
+                <interactivity:Interaction.Behaviors>
+                    <core:EventTriggerBehavior EventName="Checked">
+                        <media:ControlStoryboardAction Storyboard="{StaticResource MenuStoryBoard}"/>
+                        <media:ControlStoryboardAction Storyboard="{StaticResource SearchAloneBack}"/>
+
+                    </core:EventTriggerBehavior>
+                    <core:EventTriggerBehavior EventName="Unchecked">
+                        <media:ControlStoryboardAction Storyboard="{StaticResource MenuStoryBoardBack}"/>
+                    </core:EventTriggerBehavior>
+                </interactivity:Interaction.Behaviors>
+            </ToggleButton>
+            <ToggleButton x:Name="ToggleButtonSearch" Content="ToggleButton" HorizontalAlignment="Right" Height="30" Margin="0,8,10,0" Style="{StaticResource SearchButtonStyle}" VerticalAlignment="Top" Width="30" MinWidth="30" MinHeight="30" MaxWidth="30" MaxHeight="30" IsChecked="False">
+                <interactivity:Interaction.Behaviors>
+                    <core:EventTriggerBehavior EventName="Checked">
+                        <media:ControlStoryboardAction Storyboard="{StaticResource SearchStoryBoard}"/>
+                        <media:ControlStoryboardAction Storyboard="{StaticResource MenuAloneClose}"/>
+                    </core:EventTriggerBehavior>
+                    <core:EventTriggerBehavior EventName="Unchecked">
+                        <media:ControlStoryboardAction Storyboard="{StaticResource SearchStoryBoardBack}"/>
+                    </core:EventTriggerBehavior>
+                </interactivity:Interaction.Behaviors>
+            </ToggleButton>
+        </Grid>
+
+        <Grid x:Name="MenuGrid" Grid.Row="1" HorizontalAlignment="Left" Margin="-300,0,0,0" Width="300" Background="Black" Opacity="0.7" RenderTransformOrigin="0.5,0.5">
+            <Grid.RenderTransform>
+                <CompositeTransform/>
+            </Grid.RenderTransform>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Button Grid.Row="1" Style="{StaticResource ProfilButtonStyle}" Content="TEST" Command="{Binding ProfilCommand}" MinHeight="50" MinWidth="200" FontFamily="{StaticResource RobotoMenu}"/>
+            <Button Grid.Row="2" Style="{StaticResource NewsButtonStyle}" Command="{Binding NewsCommand}" MinHeight="50" MinWidth="200"/>
+            <Button Grid.Row="3" Style="{StaticResource ExplorerButtonStyle}" Command="{Binding ExplorerCommand}" MinHeight="50" MinWidth="200"/>
+            <Button Grid.Row="4" Style="{StaticResource PackButtonStyle}" Command="{Binding PacksCommand}" MinHeight="50" MinWidth="200"/>
+            <Button Grid.Row="5" Style="{StaticResource MondeMusicalButtonStyle}" Command="{Binding MondeMusicalCommand}" MinHeight="50" MinWidth="200"/>
+            <Button Grid.Row="6" Style="{StaticResource BattleButtonStyle}" Command="{Binding BattleCommand}" MinHeight="50" MinWidth="200"/>
+            <Button Grid.Row="7" Style="{StaticResource PlaylistButtonStyle}" Command="{Binding PlaylistCommand}" MinHeight="50" MinWidth="200"/>
+            <Button Grid.Row="8" Style="{StaticResource FriendButtonStyle}" Command="{Binding AmisCommand}" MinHeight="50" MinWidth="200"/>
+            <Button Grid.Row="9" Style="{StaticResource AchatButtonStyle}" Command="{Binding AchatCommand}" MinHeight="50" MinWidth="200"/>
+            <Button Grid.Row="10" Style="{StaticResource DecoButtonStyle}" Command="{Binding ConnexionCommand}" MinHeight="50" MinWidth="200"/>
+        </Grid>
+
+        <Grid x:Name="SearchGrid" Grid.Row="1" Width="300" Background="Black" Opacity="0.7" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Right" Margin="0,0,-300,0">
+            <Grid.RenderTransform>
+                <CompositeTransform/>
+            </Grid.RenderTransform>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <TextBox x:Name="SearchTextBlock" Grid.Row="0" Width="200" BorderThickness="0" AcceptsReturn="True"
+                     Height="13" Margin="50,3,50,0" TextAlignment="Center" VerticalContentAlignment="Center"
+                     Foreground="Black" Background="Gray" FontSize="18" PlaceholderText="Recherche" Text="{Binding SearchText}" FontFamily="{StaticResource Roboto}"/>
+
+            <ListView Grid.Row="1" x:Name="ResultListView"/>
+        </Grid>
+
+        <Grid Grid.Row="1" x:Name="PivotGlobal" RenderTransformOrigin="0.5,0.5" Margin="0, 15, 0, 0" >
+            <Grid.RenderTransform>
+                <CompositeTransform/>
+            </Grid.RenderTransform>
+            <local:PivotControl />
+        </Grid>
+        
+    </Grid>
+</UserControl>
+

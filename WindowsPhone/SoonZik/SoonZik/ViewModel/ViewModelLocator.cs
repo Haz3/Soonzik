@@ -12,12 +12,9 @@
   See http://www.galasoft.ch/mvvm
 */
 
-using System.Linq.Expressions;
-using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Ioc;
 using GalaSoft.MvvmLight.Views;
 using Microsoft.Practices.ServiceLocation;
-using SoonZik.Views;
 
 namespace SoonZik.ViewModel
 {
@@ -40,7 +37,8 @@ namespace SoonZik.ViewModel
             SimpleIoc.Default.Register<AccueilViewModel>();
             SimpleIoc.Default.Register<NewsViewModel>();
             SimpleIoc.Default.Register<PackViewModel>();
-            SimpleIoc.Default.Register<ProfilViewModel>();
+            SimpleIoc.Default.Register<ProfilUserViewModel>();
+            SimpleIoc.Default.Register<ProfilArtisteViewModel>();
             SimpleIoc.Default.Register<MenuViewModel>();
             SimpleIoc.Default.Register<ViewModel>();
             SimpleIoc.Default.Register<BattleViewModel>();
@@ -49,6 +47,7 @@ namespace SoonZik.ViewModel
             SimpleIoc.Default.Register<ConversationViewModel>();
             SimpleIoc.Default.Register<MainPageViewModel>();
             SimpleIoc.Default.Register<PlayerViewModel>();
+            SimpleIoc.Default.Register<ExplorerViewModel>();
         }
 
         public MainViewModel Main
@@ -77,9 +76,14 @@ namespace SoonZik.ViewModel
             get { return ServiceLocator.Current.GetInstance<PackViewModel>(); }
         }
 
-        public ProfilViewModel Profil
+        public ProfilUserViewModel ProfilUser
         {
-            get { return ServiceLocator.Current.GetInstance<ProfilViewModel>(); }
+            get { return ServiceLocator.Current.GetInstance<ProfilUserViewModel>(); }
+        }
+        
+        public ProfilArtisteViewModel ProfilArtiste
+        {
+            get { return ServiceLocator.Current.GetInstance<ProfilArtisteViewModel>(); }
         }
 
         public MenuViewModel Menu
@@ -122,6 +126,11 @@ namespace SoonZik.ViewModel
             get { return ServiceLocator.Current.GetInstance<PlayerViewModel>(); }
         }
 
+        public ExplorerViewModel Explorer
+        {
+            get { return ServiceLocator.Current.GetInstance<ExplorerViewModel>(); }
+        }
+       
         public static void Cleanup()
         {
             // TODO Clear the ViewModels

@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace SoonZik.HttpRequest.Poco
 {
@@ -16,8 +13,8 @@ namespace SoonZik.HttpRequest.Poco
         public string Description { get; set; }
         public string Language { get; set; }
         public Address Address { get; set; }
-        public List<object> Friends { get; set; }
-        public List<object> Follows { get; set; }
+        public ObservableCollection<User> Friends { get; set; }
+        public List<User> Follows { get; set; }
         #endregion
     }
 }
