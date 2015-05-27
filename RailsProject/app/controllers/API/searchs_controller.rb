@@ -56,6 +56,18 @@ module API
 				  	content = []
 				  	codeAnswer 202
 				  else
+			  		artist_result = artist_result.offset(offset)
+			  		user_result = user_result.offset(offset)
+			  		music_result = music_result.offset(offset)
+			  		album_result = album_result.offset(offset)
+			  		pack_result = pack_result.offset(offset)
+				  	if limit != nil
+				  		artist_result = artist_result.limit(limit)
+				  		user_result = user_result.limit(limit)
+				  		music_result = music_result.limit(limit)
+				  		album_result = album_result.limit(limit)
+				  		pack_result = pack_result.limit(limit)
+				  	end
 				    content = {
 				    	artist: JSON.parse(artist_result.to_json(:only => User.miniKey )),
 				    	user: JSON.parse(user_result.to_json(:only => User.miniKey )),
@@ -68,7 +80,6 @@ module API
     		@returnValue[:content] = content
         codeAnswer 200
 	  	rescue
-	  		puts $!, $@
 	    	codeAnswer 504
 	    	defineHttp :service_unavailable
 	  	end
