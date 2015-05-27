@@ -18,7 +18,7 @@ module API
     # 
     # ===== HTTP VALUE
     # 
-    # - +200+ - In case of success, return an hash like this : { artist: array_of_artist, user: array_of_user, music: array_of_musics, album: array_of_albums, packs: array_of_packs }
+    # - +200+ - In case of success, return an hash like this : { artist: array_of_artist, user: array_of_user, music: array_of_musics, album: array_of_albums, pack: array_of_packs }
     # - +503+ - Error from server
     # 
     def search
@@ -31,9 +31,9 @@ module API
 	    	if defined?@type
 	    	  case @type
 	    	    when "artist"
-					  	content = User.joins(:groups).merge(Group.where(:name => "Artist")).where(["'users'.'username' LIKE ?", "%#{@query}%"]).select("id, username, image, description, facebook, twitter, googlePlus")
+					  	content = User.joins(:groups).merge(Group.where(:name => "Artist")).where(["'users'.'username' LIKE ?", "%#{@query}%"]).select("'users'.'id', 'users'.'username', 'users'.'image', 'users'.'description', 'users'.'facebook', 'users'.'twitter', 'users'.'googlePlus'")
 				    when "user"
-					  	content = User.joins(:groups).merge(Group.where(:name => "User")).where(["'users'.'username' LIKE ?", "%#{@query}%"]).select("id, username, image, description, facebook, twitter, googlePlus")
+					  	content = User.joins(:groups).merge(Group.where(:name => "User")).where(["'users'.'username' LIKE ?", "%#{@query}%"]).select("'users'.'id', 'users'.'username', 'users'.'image', 'users'.'description', 'users'.'facebook', 'users'.'twitter', 'users'.'googlePlus'")
 				    when "music"
 					  	content = Music.where(["'musics'.'title' LIKE ?", "%#{@query}%"]).select(Music.miniKey)
 				    when "album"
@@ -45,7 +45,7 @@ module API
 				  if (limit != nil)
 				  	content = content.limit(limit)
 				  end
-				  content = content.to_json
+				  content = JSON.parse(content.to_json)
 				else
 				  artist_result = User.joins(:groups).merge(Group.where(:name => "Artist")).where(["'users'.'username' LIKE ?", "%#{@query}%"])
 				  user_result = User.joins(:groups).merge(Group.where(:name => "User")).where(["'users'.'username' LIKE ?", "%#{@query}%"])
@@ -68,6 +68,7 @@ module API
     		@returnValue[:content] = content
         codeAnswer 200
 	  	rescue
+	  		puts $!, $@
 	    	codeAnswer 504
 	    	defineHttp :service_unavailable
 	  	end
