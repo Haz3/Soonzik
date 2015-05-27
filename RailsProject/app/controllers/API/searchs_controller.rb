@@ -46,6 +46,18 @@ module API
 				  	content = content.limit(limit)
 				  end
 				  content = JSON.parse(content.to_json)
+				  case @type
+	    	    when "artist"
+					  	content = { artist: content }
+				    when "user"
+					  	content = { user: content }
+				    when "music"
+					  	content = { music: content }
+				    when "album"
+					  	content = { album: content }
+				    when "pack"
+					  	content = { pack: content }
+				  end
 				else
 				  artist_result = User.joins(:groups).merge(Group.where(:name => "Artist")).where(["'users'.'username' LIKE ?", "%#{@query}%"])
 				  user_result = User.joins(:groups).merge(Group.where(:name => "User")).where(["'users'.'username' LIKE ?", "%#{@query}%"])
