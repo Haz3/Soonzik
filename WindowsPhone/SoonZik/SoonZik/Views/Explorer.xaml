@@ -1,0 +1,25 @@
+﻿<Page
+    x:Class="SoonZik.Views.Explorer"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:SoonZik.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    DataContext="{StaticResource ExplorerViewModel}"
+    Background="#424242">
+
+    <Page.Resources>
+        <DataTemplate x:Key="GenreTemplate">
+            <StackPanel Margin="0,0,0,30">
+                <TextBlock Text="{Binding Path=style_name}" Style="{StaticResource TitleTextBlockStyle}"/>
+            </StackPanel>
+        </DataTemplate>
+    </Page.Resources>
+
+    <Grid>
+        <ListBox Background="Transparent" x:Name="ListBoxGenre" ItemsSource="{Binding ListGenres}" ItemTemplate="{StaticResource GenreTemplate}">
+            
+        </ListBox>
+    </Grid>
+</Page>

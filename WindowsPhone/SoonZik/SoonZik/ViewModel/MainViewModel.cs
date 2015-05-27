@@ -1,14 +1,15 @@
-using Windows.UI.Popups;
-using Windows.UI.Xaml;
+using System;
+using System.Diagnostics;
+using System.Net;
+using System.Threading.Tasks;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Media.Animation;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
-using GalaSoft.MvvmLight.Ioc;
-using GalaSoft.MvvmLight.Views;
-using Microsoft.Practices.ServiceLocation;
-using SoonZik.Model;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using SoonZik.HttpRequest.Poco;
 using SoonZik.Utils;
 using SoonZik.Views;
 using NavigationService = SoonZik.Utils.NavigationService;
@@ -31,7 +32,9 @@ namespace SoonZik.ViewModel
     {
         #region Attribute
 
-       private string _connexionString;
+        readonly Windows.Storage.ApplicationDataContainer _localSettings = Windows.Storage.ApplicationData.Current.LocalSettings;
+        
+        private string _connexionString;
         public string ConnexionString
         {
             get { return _connexionString; }
@@ -102,12 +105,6 @@ namespace SoonZik.ViewModel
             get { return _achatCommand; }
         }
         
-        private RelayCommand _menuCommand;
-        public RelayCommand MenuCommand
-        {
-            get { return _menuCommand; }
-        }
-
         private Pivot _myPivot;
         public RelayCommand<Pivot> GetPivotExecute { get; set; }
 
@@ -119,7 +116,7 @@ namespace SoonZik.ViewModel
 
         private string _searchText;
 
-        private Utils.INavigationService navigationService;
+        private readonly INavigationService _navigationService;
 
         public string SearchText
         {
@@ -130,6 +127,7 @@ namespace SoonZik.ViewModel
                 RaisePropertyChanged("SearchText");
             }
         }
+
         #endregion
 
         /// <summary>
@@ -139,10 +137,26 @@ namespace SoonZik.ViewModel
         #region Ctor
         public MainViewModel()
         {
+            Debug.WriteLine("----------------------" + (string)_localSettings.Values["SoonZikAlreadyConnect"]);
+
             _connexionString = "Connexion";
 
-            this.navigationService = new NavigationService();
+            this._navigationService = new NavigationService();
 
+            InitCommand();
+            if (_localSettings != null && (string)_localSettings.Values["SoonZikAlreadyConnect"] == "yes")
+            {
+                Task task = Task.Run(async () => await DirectConnect());
+                task.Wait();
+            }
+        }
+        
+        #endregion
+
+        #region Method
+
+        private void InitCommand()
+        {
             GetPivotExecute = new RelayCommand<Pivot>(GetPivot);
             GetStoryBoardExecute = new RelayCommand<Storyboard>(GetStory);
             GetToggleButton = new RelayCommand<ToggleButton>(GetToggle);
@@ -156,12 +170,32 @@ namespace SoonZik.ViewModel
             _amisCommand = new RelayCommand(GoToAmis);
             _achatCommand = new RelayCommand(GoToAchat);
             _connexionCommand = new RelayCommand(GoToConnexionPage);
-            _menuCommand = new RelayCommand(GoToMenu);
         }
 
-        #endregion
+        private async Task<User> DirectConnect()
+        {
+            var connec = new HttpRequest.Connexion();
+            var request = (HttpWebRequest)WebRequest.Create("http://soonzikapi.herokuapp.com/login");
+            var postData = "email=" + _localSettings.Values["SoonZikUserName"] + "&password=" + _localSettings.Values["SoonZikPassWord"];
 
-        #region Method
+            await connec.GetHttpPostResponse(request, postData);
+            var res = connec.received;
+            if (res != null)
+            {
+                try
+                {
+                    var stringJson = JObject.Parse(res).SelectToken("content").ToString();
+                    var resultat = JsonConvert.DeserializeObject(stringJson, typeof(User)) as User;
+                    Singleton.Instance().CurrentUser = resultat;
+                    return resultat;
+                }
+                catch (Exception e)
+                {
+                }
+                //ServiceLocator.Current.GetInstance<FriendViewModel>().Sources = Singleton.Instance().CurrentUser.Friends;
+            }
+            return null;
+        }
 
         public void CloseMenu()
         {
@@ -189,7 +223,7 @@ namespace SoonZik.ViewModel
 
         private void GoToProfil()
         {
-            _myPivot.SelectedIndex = 1;
+            _navigationService.Navigate(typeof(ProfilUser));
             CloseMenu();
         }
 
@@ -201,57 +235,53 @@ namespace SoonZik.ViewModel
 
         private void GoToExplorer()
         {
-            _myPivot.SelectedIndex = 2;
+            _myPivot.SelectedIndex = 1;
             CloseMenu();
         }
 
         private void GoToPacks()
         {
-            _myPivot.SelectedIndex = 3;
+            _myPivot.SelectedIndex = 2;
             CloseMenu();
         }
 
         private void GoToMondeMusical()
         {
-            _myPivot.SelectedIndex = 4;
+            _myPivot.SelectedIndex = 3;
             CloseMenu();
         }
 
         private void GoToBattle()
         {
-            _myPivot.SelectedIndex = 5;
+            _myPivot.SelectedIndex = 4;
             CloseMenu();
         }
 
         private void GoToPlaylist()
         {
-            _myPivot.SelectedIndex = 6;
+            _myPivot.SelectedIndex = 5;
             CloseMenu();
         }
 
         private void GoToAmis()
         {
-            _myPivot.SelectedIndex = 7;
+            //_navigationService.Navigate(typeof(Friends));
+            _myPivot.SelectedIndex = 6;
             CloseMenu();
         }
 
         private void GoToAchat()
         {
-            _myPivot.SelectedIndex = 8;
+            _myPivot.SelectedIndex = 7;
             CloseMenu();
         }
 
         private void GoToConnexionPage()
         {
-            navigationService.Navigate(typeof(Connexion));
+            _navigationService.Navigate(typeof(Connexion));
            _connexionString = "Deconnexion";
         }
 
-        private void GoToMenu()
-        {
-            _myPivot.SelectedIndex = 9;
-            CloseMenu();
-        }
         #endregion
     }
 }

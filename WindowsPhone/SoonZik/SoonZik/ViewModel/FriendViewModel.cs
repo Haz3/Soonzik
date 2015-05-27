@@ -2,19 +2,35 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Globalization;
-using ConvertedListViewApp;
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
+using Coding4Fun.Toolkit.Controls;
 using GalaSoft.MvvmLight.Command;
-using SoonZik.Model;
+using SoonZik.Controls;
+using SoonZik.HttpRequest.Poco;
 using  GalaSoft.MvvmLight;
+using SoonZik.Utils;
 
 namespace SoonZik.ViewModel
 {
     public class FriendViewModel : ViewModelBase
     {
         #region Attribute
-        public ObservableCollection<Users> Sources { get; set; }
-        private List<AlphaKeyGroups<Users>> _itemSource;
-        public List<AlphaKeyGroups<Users>> ItemSource
+        readonly Windows.Storage.ApplicationDataContainer _localSettings = Windows.Storage.ApplicationData.Current.LocalSettings;
+        
+        private ObservableCollection<User> _sources; 
+        public ObservableCollection<User> Sources
+        {
+            get { return _sources; }
+            set
+            {
+                _sources = value;
+                RaisePropertyChanged("Sources");
+            } 
+            
+        }
+        private List<AlphaKeyGroups<User>> _itemSource;
+        public List<AlphaKeyGroups<User>> ItemSource
         {
             get { return _itemSource; }
             set
@@ -28,40 +44,36 @@ namespace SoonZik.ViewModel
         {
             get; private set; 
         }
-
+        
         #endregion
 
         #region Ctor
         public FriendViewModel()
         {
-            TappedCommand = new RelayCommand(ExecuteTappedCommand, CanExecute);
-            Sources = new ObservableCollection<Users>()
-            {
-                new Users("Gery", "Baudry", "gery@budry.com"),
-                new Users("Guillaume", "Boufflers", "gui@llaume.com"),
-                new Users("John", "Kaudry", "johny@kaudry.com"),
-                new Users("Maxime", "Sauvry", "max@xime.com"),
-                new Users("MAurice", "Maud", "Mau@MAu.com"),
-                new Users("Joe", "chat", "gery@char.com"),
-                new Users("mickale", "fly", "gery@fly.com"),
-                new Users("nounou", "Vola", "gery@vola.com"),
-                new Users("Henry", "Thierry", "gery@thiery.com")
-            };
+            Sources = new ObservableCollection<User>();
 
-            ItemSource = AlphaKeyGroups<Users>.CreateGroups(Sources, CultureInfo.CurrentUICulture, s => s.MyLastName, true);
+            if (_localSettings != null && (string) _localSettings.Values["SoonZikAlreadyConnect"] == "yes")
+            {
+                Sources = Singleton.Instance().CurrentUser.Friends;
+                ItemSource = AlphaKeyGroups<User>.CreateGroups(Sources, CultureInfo.CurrentUICulture, s => s.Username, true);
+            }
+            TappedCommand = new RelayCommand(Execute);
         }
 
         #endregion
 
         #region Method
-        private bool CanExecute()
+        private void Execute()
         {
-            throw new NotImplementedException();
-        }
-
-        private void ExecuteTappedCommand()
-        {
-            //Allez sur le profil de l'element
+            var messagePrompt = new MessagePrompt
+            {
+                Title = "Que voulez vous faire ?",
+                IsAppBarVisible = true,
+                VerticalAlignment = VerticalAlignment.Center,
+                Body = new ButtonFriendPopUp(),
+                Opacity = 0.6
+            };
+            messagePrompt.Show();
         }
 
         #endregion

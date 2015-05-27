@@ -1,16 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
-using Windows.Phone;
-using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Input;
+﻿using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 
 // Pour en savoir plus sur le modèle d'élément Page vierge, consultez la page http://go.microsoft.com/fwlink/?LinkId=391641
-using GalaSoft.MvvmLight;
-using SoonZik.Annotations;
 using SoonZik.ViewModel;
 
 namespace SoonZik
@@ -29,6 +20,7 @@ namespace SoonZik
 
         public MainPage()
         {
+            new ViewModelLocator();
             this.InitializeComponent();
             this.NavigationCacheMode = NavigationCacheMode.Required;
         }

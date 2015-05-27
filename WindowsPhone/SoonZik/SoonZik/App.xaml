@@ -5,12 +5,16 @@
              xmlns:local="using:SoonZik" 
              xmlns:library="using:LightStone.Controls">
   <Application.Resources>
-      
+
+    <vm:ViewModelLocator x:Key="Locator"/>
     <vm:MainPageViewModel x:Key="MainPageViewModel" />
     <vm:ConnexionViewModel x:Key="ConnexionViewModel" />
     <vm:MainViewModel x:Key="MainViewModel" />
     <vm:PlayerViewModel x:Key="PlayerViewModel"/>
-    <vm:ViewModelLocator x:Key="Locator"/>
+    <vm:NewsViewModel x:Key="NewsViewModel"/>
+    <vm:ExplorerViewModel x:Key="ExplorerViewModel"/>
+    <vm:ProfilUserViewModel x:Key="ProfilUserViewModel"/>
+    <vm:FriendViewModel x:Key="FriendViewModel"/>
       
     <DataTemplate x:Key="SizePivotHeader">
       <ContentPresenter>
@@ -195,7 +199,7 @@
           <ControlTemplate TargetType="Button">
             <Grid Width="198" MaxHeight="50" MinHeight="50" MaxWidth="200" MinWidth="200">
               <Image Source="../Resources/Icones/MenuDeco.png" Height="40" HorizontalAlignment="Left" Width="40" />
-              <ContentPresenter Margin="70,0,0,0" HorizontalAlignment="Left" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Content="Deconnexion" />
+              <ContentPresenter Margin="70,0,0,0" HorizontalAlignment="Left" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Content="Connexion" />
             </Grid>
           </ControlTemplate>
         </Setter.Value>

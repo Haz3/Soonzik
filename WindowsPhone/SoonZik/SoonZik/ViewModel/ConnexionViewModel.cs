@@ -1,16 +1,20 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
+using System.Diagnostics;
+using System.Globalization;
+using System.Net;
 using System.Text;
-using System.Threading.Tasks;
 using Windows.ApplicationModel.Core;
 using Windows.UI.Popups;
+using Windows.UI.Xaml.Controls;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
-using SoonZik.HttpRequest;
+using Microsoft.Practices.ServiceLocation;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using SoonZik.HttpRequest.Poco;
 using SoonZik.Utils;
 using SoonZik.Views;
+using Connexion = SoonZik.HttpRequest.Connexion;
 
 namespace SoonZik.ViewModel
 {
@@ -18,6 +22,8 @@ namespace SoonZik.ViewModel
     {
         #region Attribute
 
+        readonly Windows.Storage.ApplicationDataContainer _localSettings = Windows.Storage.ApplicationData.Current.LocalSettings;
+      
         private string _username;
 
         public string Username
@@ -48,6 +54,11 @@ namespace SoonZik.ViewModel
             get { return _connexionCommand; }
         }
 
+        private RelayCommand _facebookTapped;
+        public RelayCommand FacebookTapped
+        {
+            get { return _facebookTapped; }
+        }
         public Utils.INavigationService Navigation;
 
         #endregion
@@ -57,20 +68,52 @@ namespace SoonZik.ViewModel
         {
             Navigation = new NavigationService();
             _connexionCommand = new RelayCommand(MakeConnexion);
+            _facebookTapped = new RelayCommand(MakeFacebookConnection);
         }
         #endregion
 
         #region Method
+
         private async void MakeConnexion()
         {
-            var test = new MessageDialog("user = " + Username + " pass = " + Password);
-            test.ShowAsync();
             var dispatcher = CoreApplication.MainView.CoreWindow.Dispatcher;
 
-            await dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () => {
-                                                                                               var http = new HttpReq();
+            await dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, async () =>
+            {
+                var connec = new Connexion();
+                var request = (HttpWebRequest) WebRequest.Create("http://soonzikapi.herokuapp.com/login");
+                var postData = "email=" + _username + "&password=" + _password;
+
+                await connec.GetHttpPostResponse(request, postData);
+                var res = connec.received;
+                if (res != null)
+                {
+                    try
+                    {
+                        var stringJson = JObject.Parse(res).SelectToken("content").ToString();
+                        Singleton.Instance().CurrentUser = JsonConvert.DeserializeObject(stringJson, typeof (User)) as User;
+                        ServiceLocator.Current.GetInstance<FriendViewModel>().Sources = Singleton.Instance().CurrentUser.Friends;
+                        ServiceLocator.Current.GetInstance<FriendViewModel>().ItemSource = AlphaKeyGroups<User>.CreateGroups(Singleton.Instance().CurrentUser.Friends, CultureInfo.CurrentUICulture, s => s.Username, true);
+                    }
+                    catch (Exception e)
+                    {
+                    }
+                }
             });
-            Navigation.Navigate(typeof(MainView));
+            WriteInformation();
+            Navigation.Navigate(typeof (MainView));
+        }
+
+        private void WriteInformation()
+        {
+            _localSettings.Values["SoonZikUserName"] = _username;
+            _localSettings.Values["SoonZikPassWord"] = _password;
+            _localSettings.Values["SoonZikAlreadyConnect"] = "yes";
+        }
+
+        private async void MakeFacebookConnection()
+        {
+            var test = "aheh";
         }
         #endregion
     }

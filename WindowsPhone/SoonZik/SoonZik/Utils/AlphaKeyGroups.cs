@@ -2,7 +2,7 @@
 using System.Globalization;
 using Windows.Globalization.Collation;
 
-namespace ConvertedListViewApp
+namespace SoonZik.Utils
 {
     public class AlphaKeyGroups<T> : List<T>
     {
