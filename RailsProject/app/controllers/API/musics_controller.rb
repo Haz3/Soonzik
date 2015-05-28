@@ -7,11 +7,12 @@ module API
   # * find        [get]
   # * addcomment  [post] - SECURITY
   # * get         [get]
-  # * addtoplaylist [post] - SECURITY
+  # * addtoplaylist   [post] - SECURITY
+  # * delfromplaylist [get] - SECURITY
   # * getcomments [get]
   #
   class MusicsController < ApisecurityController
-  	before_action :checkKey, only: [:addcomment, :get, :addtoplaylist]
+  	before_action :checkKey, only: [:addcomment, :get, :addtoplaylist, :delfromplaylist]
 
     # Retrieve all the musics
     #
@@ -292,11 +293,11 @@ module API
     # ==== Options
     #
     # * +id+ - The id of the music you want to add
-    # * +playlist_id+ - The id of the playlist where you want to add a music
+    # * +playlist_id+ - The id of the playlist where you want to add a music 
     #
     # ===== HTTP VALUE
     # 
-    # - +200+ - In case of success, return nothing
+    # - +201+ - In case of success, return nothing
     # - +401+ - It is not a secured transaction
     # - +404+ - Can't find the music or the playlist, the id is probably wrong
     # - +503+ - Error from server
@@ -307,9 +308,51 @@ module API
           playlist = Playlist.find_by_id(@playlist_id)
           music = Music.find_by_id(@id)
           if (playlist && music && playlist.user_id == @user_id.to_i && !playlist.musics.include?(music))
-            playlist.musics << music
+            playlist_obj = PlaylistObject.create(music_id: music.id, playlist_id: playlist.id, row_order: :last)
+            playlist_obj.musics << music
             defineHttp :created
             codeAnswer 201
+          else
+            codeAnswer 502
+            defineHttp :not_found
+          end
+        else
+          codeAnswer 500
+          defineHttp :forbidden
+        end
+      rescue
+        codeAnswer 504
+        defineHttp :service_unavailable
+      end
+      sendJson
+    end
+
+    # To add a specific music to a playlist
+    #
+    # Route : /musics/delfromplaylist
+    #
+    # ==== Options
+    #
+    # * +id+ - The id of the music you want to add
+    # * +playlist_id+ - The id of the playlist where you want to add a music 
+    #
+    # ===== HTTP VALUE
+    # 
+    # - +200+ - In case of success, return nothing
+    # - +401+ - It is not a secured transaction
+    # - +404+ - Can't find the music or the playlist, the id is probably wrong
+    # - +503+ - Error from server
+    # 
+    def delfromplaylist
+      begin
+        if (@security)
+          playlist = Playlist.find_by_id(@playlist_id)
+          music = Music.find_by_id(@id)
+          if (playlist && music && playlist.user_id == @user_id.to_i && playlist.musics.include?(music))
+            playlist_obj = PlaylistObject.where(playlist_id: @playlist_id).find_by_music_id(@id)
+            playlist_obj.musics.delete(music)
+            playlist_obj.destroy
+            codeAnswer 200
           else
             codeAnswer 502
             defineHttp :not_found

@@ -9,7 +9,7 @@ class Music < ActiveRecord::Base
   has_many :music_notes
   has_and_belongs_to_many :commentaries
   has_and_belongs_to_many :descriptions
-  has_and_belongs_to_many :playlists
+  has_and_belongs_to_many :playlist_objects
   has_and_belongs_to_many :genres
 
   has_many :purchased_musics

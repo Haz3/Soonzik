@@ -103,3 +103,6 @@ gem 'omniauth-google-oauth2', '~> 0.2.6'
 
 # Websocket support
 gem 'websocket-rails', platforms: :ruby
+
+# For playlist
+gem 'ranked-model'

@@ -207,7 +207,7 @@ module API
     # 
     # * +:id+ - Id of the person with who you speak
     # * +:offset+ - (optionnal) offset to get the message from a specific offset (by default : 0)
-    # * +:lastMsg+ - (optionnal) The if of the oldest message you have in your historic to get the 20 messages before it (can't be used with offset). It is less optimized than the offset (need to browse the array of messages). If the id is not found, it is like if the parameter was not set
+    # * +:lastMsg+ - (optionnal) The id of the oldest message you have in your historic to get the 20 messages before it (can't be used with offset). It is less optimized than the offset (need to browse the array of messages). If the id is not found, it is like if the parameter was not set
     # 
     # ===== HTTP VALUE
     # 

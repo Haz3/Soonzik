@@ -3,7 +3,9 @@
 # Can provide some features linked to this model
 class Playlist < ActiveRecord::Base
   belongs_to :user
-  has_and_belongs_to_many :musics
+
+  has_many :playlist_objects, -> { rank(:row_order) }
+  has_many :musics, through: :playlist_objects
 
   validates :user, :name, presence: true
   validates :name, length: { minimum: 4, maximum: 20 }
