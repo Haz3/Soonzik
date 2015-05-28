@@ -123,7 +123,9 @@ list of action available :</p>
 </li><li>
 <p>get         [get]</p>
 </li><li>
-<p>addtoplaylist [post] - SECURITY</p>
+<p>addtoplaylist   [post] - SECURITY</p>
+</li><li>
+<p>delfromplaylist [get] - SECURITY</p>
 </li><li>
 <p>getcomments [get]</p>
 </li></ul>
@@ -178,7 +180,7 @@ list of action available :</p>
 </li></ul>					
 											<div class="method-source-code" id="addcomment-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/musics_controller.rb, line 206</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/musics_controller.rb, line 207</span>
   <span class="ruby-keyword">def</span> <span class="ruby-identifier">addcomment</span>
 <span class="ruby-keyword">begin</span>
   <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@security</span>)
@@ -232,7 +234,7 @@ list of action available :</p>
 
 <h4 id="method-i-addtoplaylist-label-Options">Options<span><a href="#method-i-addtoplaylist-label-Options">&para;</a> <a href="#top">&uarr;</a></span></h4>
 <ul><li>
-<p><code>id</code> - The id of the music where is the comment</p>
+<p><code>id</code> - The id of the music you want to add</p>
 </li><li>
 <p><code>playlist_id</code> - The id of the playlist where you want to add a
 music</p>
@@ -240,7 +242,7 @@ music</p>
 
 <h5 id="method-i-addtoplaylist-label-HTTP+VALUE">HTTP VALUE<span><a href="#method-i-addtoplaylist-label-HTTP+VALUE">&para;</a> <a href="#top">&uarr;</a></span></h5>
 <ul><li>
-<p><code>200</code> - In case of success, return nothing</p>
+<p><code>201</code> - In case of success, return nothing</p>
 </li><li>
 <p><code>401</code> - It is not a secured transaction</p>
 </li><li>
@@ -251,15 +253,82 @@ probably wrong</p>
 </li></ul>					
 											<div class="method-source-code" id="addtoplaylist-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/musics_controller.rb, line 304</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/musics_controller.rb, line 305</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">addtoplaylist</span>
   <span class="ruby-keyword">begin</span>
     <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@security</span>)
       <span class="ruby-identifier">playlist</span> = <span class="ruby-constant">Playlist</span>.<span class="ruby-identifier">find_by_id</span>(<span class="ruby-ivar">@playlist_id</span>)
       <span class="ruby-identifier">music</span> = <span class="ruby-constant">Music</span>.<span class="ruby-identifier">find_by_id</span>(<span class="ruby-ivar">@id</span>)
-      <span class="ruby-keyword">if</span> (<span class="ruby-identifier">playlist</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">music</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">playlist</span>.<span class="ruby-identifier">user_id</span> <span class="ruby-operator">==</span> <span class="ruby-ivar">@user_id</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">playlist</span>.<span class="ruby-identifier">musics</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">music</span>))
-        <span class="ruby-identifier">playlist</span>.<span class="ruby-identifier">musics</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">music</span>
+      <span class="ruby-keyword">if</span> (<span class="ruby-identifier">playlist</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">music</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">playlist</span>.<span class="ruby-identifier">user_id</span> <span class="ruby-operator">==</span> <span class="ruby-ivar">@user_id</span>.<span class="ruby-identifier">to_i</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-identifier">playlist</span>.<span class="ruby-identifier">musics</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">music</span>))
+        <span class="ruby-identifier">playlist_obj</span> = <span class="ruby-constant">PlaylistObject</span>.<span class="ruby-identifier">create</span>(<span class="ruby-identifier">music_id</span><span class="ruby-operator">:</span> <span class="ruby-identifier">music</span>.<span class="ruby-identifier">id</span>, <span class="ruby-identifier">playlist_id</span><span class="ruby-operator">:</span> <span class="ruby-identifier">playlist</span>.<span class="ruby-identifier">id</span>, <span class="ruby-identifier">row_order</span><span class="ruby-operator">:</span> <span class="ruby-value">:last</span>)
+        <span class="ruby-identifier">playlist_obj</span>.<span class="ruby-identifier">musics</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">music</span>
         <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:created</span>
+        <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">201</span>
+      <span class="ruby-keyword">else</span>
+        <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">502</span>
+        <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:not_found</span>
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">500</span>
+      <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:forbidden</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">rescue</span>
+    <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">504</span>
+    <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:service_unavailable</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">sendJson</span>
+<span class="ruby-keyword">end</span></code></pre>
+						</div>
+										</div>
+
+					
+									</div>
+								<a name="method-i-delfromplaylist">anchor</a>
+				<div id="method-i-delfromplaylist-doc" class="method">
+
+					<header>
+											<i class="icon-generic"></i>
+						<span class="method-name">delfromplaylist</span><span 
+							class="method-args">()</span>
+										</header>
+
+					<div class="method-description">
+											<p>To add a specific music to a playlist</p>
+
+<p>Route : /musics/delfromplaylist</p>
+
+<h4 id="method-i-delfromplaylist-label-Options">Options<span><a href="#method-i-delfromplaylist-label-Options">&para;</a> <a href="#top">&uarr;</a></span></h4>
+<ul><li>
+<p><code>id</code> - The id of the music you want to add</p>
+</li><li>
+<p><code>playlist_id</code> - The id of the playlist where you want to add a
+music</p>
+</li></ul>
+
+<h5 id="method-i-delfromplaylist-label-HTTP+VALUE">HTTP VALUE<span><a href="#method-i-delfromplaylist-label-HTTP+VALUE">&para;</a> <a href="#top">&uarr;</a></span></h5>
+<ul><li>
+<p><code>200</code> - In case of success, return nothing</p>
+</li><li>
+<p><code>401</code> - It is not a secured transaction</p>
+</li><li>
+<p><code>404</code> - Can&#39;t find the music or the playlist, the id is
+probably wrong</p>
+</li><li>
+<p><code>503</code> - Error from server</p>
+</li></ul>					
+											<div class="method-source-code" id="delfromplaylist-source">
+							<pre class="prettyprint linenums"><code 
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/musics_controller.rb, line 346</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">delfromplaylist</span>
+  <span class="ruby-keyword">begin</span>
+    <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@security</span>)
+      <span class="ruby-identifier">playlist</span> = <span class="ruby-constant">Playlist</span>.<span class="ruby-identifier">find_by_id</span>(<span class="ruby-ivar">@playlist_id</span>)
+      <span class="ruby-identifier">music</span> = <span class="ruby-constant">Music</span>.<span class="ruby-identifier">find_by_id</span>(<span class="ruby-ivar">@id</span>)
+      <span class="ruby-keyword">if</span> (<span class="ruby-identifier">playlist</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">music</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">playlist</span>.<span class="ruby-identifier">user_id</span> <span class="ruby-operator">==</span> <span class="ruby-ivar">@user_id</span>.<span class="ruby-identifier">to_i</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">playlist</span>.<span class="ruby-identifier">musics</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">music</span>))
+        <span class="ruby-identifier">playlist_obj</span> = <span class="ruby-constant">PlaylistObject</span>.<span class="ruby-identifier">where</span>(<span class="ruby-identifier">playlist_id</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@playlist_id</span>).<span class="ruby-identifier">find_by_music_id</span>(<span class="ruby-ivar">@id</span>)
+        <span class="ruby-identifier">playlist_obj</span>.<span class="ruby-identifier">musics</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-identifier">music</span>)
+        <span class="ruby-identifier">playlist_obj</span>.<span class="ruby-identifier">destroy</span>
+        <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">200</span>
       <span class="ruby-keyword">else</span>
         <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">502</span>
         <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:not_found</span>
@@ -323,7 +392,7 @@ its album, genres and user (artist)</p>
 </li></ul>					
 											<div class="method-source-code" id="find-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/musics_controller.rb, line 108</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/musics_controller.rb, line 109</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">find</span>
   <span class="ruby-keyword">begin</span>
     <span class="ruby-identifier">music_object</span> = <span class="ruby-keyword">nil</span>
@@ -443,7 +512,7 @@ as raw format</p>
 </li></ul>					
 											<div class="method-source-code" id="get-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/musics_controller.rb, line 255</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/musics_controller.rb, line 256</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">get</span>
   <span class="ruby-identifier">buffer</span> = <span class="ruby-string">&quot;&quot;</span>
   <span class="ruby-keyword">begin</span>
@@ -514,7 +583,7 @@ as raw format</p>
 </li></ul>					
 											<div class="method-source-code" id="getcomments-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/musics_controller.rb, line 343</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/musics_controller.rb, line 387</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">getcomments</span>
   <span class="ruby-keyword">begin</span>
     <span class="ruby-identifier">musics</span> = <span class="ruby-constant">Music</span>.<span class="ruby-identifier">find_by_id</span>(<span class="ruby-ivar">@id</span>)
@@ -571,7 +640,7 @@ its user, album and genre</p>
 </li></ul>					
 											<div class="method-source-code" id="index-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/musics_controller.rb, line 29</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/musics_controller.rb, line 30</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">index</span>
   <span class="ruby-keyword">begin</span>
     <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@count</span>.<span class="ruby-identifier">present?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-ivar">@count</span> <span class="ruby-operator">==</span> <span class="ruby-string">&quot;true&quot;</span>)
@@ -627,7 +696,7 @@ genres and user (artist)</p>
 </li></ul>					
 											<div class="method-source-code" id="show-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/musics_controller.rb, line 64</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/musics_controller.rb, line 65</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">show</span>
   <span class="ruby-keyword">begin</span>
     <span class="ruby-identifier">music</span> = <span class="ruby-constant">Music</span>.<span class="ruby-identifier">find_by_id</span>(<span class="ruby-ivar">@id</span>)
@@ -725,6 +794,7 @@ genres and user (artist)</p>
 			<li><a href="../Notification.html">Notification</a></li>
 			<li><a href="../Pack.html">Pack</a></li>
 			<li><a href="../Playlist.html">Playlist</a></li>
+			<li><a href="../PlaylistObject.html">PlaylistObject</a></li>
 			<li><a href="../Proposition.html">Proposition</a></li>
 			<li><a href="../Purchase.html">Purchase</a></li>
 			<li><a href="../PurchasedAlbum.html">PurchasedAlbum</a></li>

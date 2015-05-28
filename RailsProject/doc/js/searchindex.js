@@ -301,6 +301,12 @@ var SearchIndex =
 		"type": "normalclass"
 	},
 	{
+		"name": "PlaylistObject",
+		"link": "PlaylistObject.html",
+		"snippet": "<p>The model of the object PlaylistMusic Contain the relation and the\nvalidation Can provide some features …\n",
+		"type": "normalclass"
+	},
+	{
 		"name": "Proposition",
 		"link": "Proposition.html",
 		"snippet": "<p>The model of the object Proposition Contain the relation and the validation\nCan provide some features …\n",
@@ -622,6 +628,12 @@ var SearchIndex =
 		"name": "addtoplaylist",
 		"link": "API/MusicsController.html#method-i-addtoplaylist",
 		"snippet": "<p>To add a specific music to a playlist\n<p>Route : /musics/addtoplaylist\n<p>Options\n",
+		"type": "anymethod"
+	},
+	{
+		"name": "delfromplaylist",
+		"link": "API/MusicsController.html#method-i-delfromplaylist",
+		"snippet": "<p>To add a specific music to a playlist\n<p>Route : /musics/delfromplaylist\n<p>Options\n",
 		"type": "anymethod"
 	},
 	{
@@ -1132,6 +1144,12 @@ var SearchIndex =
 		"name": "miniKey",
 		"link": "Playlist.html#method-c-miniKey",
 		"snippet": "",
+		"type": "anymethod"
+	},
+	{
+		"name": "playlist_params",
+		"link": "PlaylistObject.html#method-c-playlist_params",
+		"snippet": "<p>The strong parameters to save or update object\n",
 		"type": "anymethod"
 	},
 	{

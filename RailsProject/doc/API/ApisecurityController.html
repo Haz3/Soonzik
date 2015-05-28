@@ -577,7 +577,7 @@ modify it.</p>
 							<pre class="prettyprint linenums"><code 
 								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/apisecurity_controller.rb, line 235</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">sendJson</span>
-  <span class="ruby-identifier">codeAnswer</span>(<span class="ruby-value">202</span>) <span class="ruby-keyword">if</span> <span class="ruby-keyword">defined?</span>(<span class="ruby-ivar">@returnValue</span>[<span class="ruby-value">:content</span>]) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-keyword">defined?</span>(<span class="ruby-ivar">@returnValue</span>[<span class="ruby-value">:content</span>].<span class="ruby-identifier">size</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-ivar">@returnValue</span>[<span class="ruby-value">:content</span>].<span class="ruby-identifier">size</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>
+  <span class="ruby-identifier">codeAnswer</span>(<span class="ruby-value">202</span>) <span class="ruby-keyword">if</span> <span class="ruby-keyword">defined?</span>(<span class="ruby-ivar">@returnValue</span>[<span class="ruby-value">:content</span>]) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-keyword">defined?</span>(<span class="ruby-ivar">@returnValue</span>[<span class="ruby-value">:content</span>].<span class="ruby-identifier">size</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-ivar">@returnValue</span>[<span class="ruby-value">:content</span>].<span class="ruby-identifier">size</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-keyword">defined?</span><span class="ruby-ivar">@returnValue</span>[<span class="ruby-value">:code</span>]
   <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:ok</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@httpCode</span> <span class="ruby-operator">==</span> <span class="ruby-keyword">nil</span>
   <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
     <span class="ruby-identifier">format</span>.<span class="ruby-identifier">json</span> { <span class="ruby-identifier">render</span> <span class="ruby-value">:json</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">JSON</span>.<span class="ruby-identifier">generate</span>(<span class="ruby-ivar">@returnValue</span>), <span class="ruby-value">:status</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@httpCode</span> }
@@ -658,6 +658,7 @@ modify it.</p>
 			<li><a href="../Notification.html">Notification</a></li>
 			<li><a href="../Pack.html">Pack</a></li>
 			<li><a href="../Playlist.html">Playlist</a></li>
+			<li><a href="../PlaylistObject.html">PlaylistObject</a></li>
 			<li><a href="../Proposition.html">Proposition</a></li>
 			<li><a href="../Purchase.html">Purchase</a></li>
 			<li><a href="../PurchasedAlbum.html">PurchasedAlbum</a></li>

@@ -197,6 +197,9 @@ href="../News.html">News</a> objects Here is the list of action available :</p>
           <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:service_unavailable</span>
         <span class="ruby-keyword">end</span>
       <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">500</span>
+      <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:forbidden</span>
     <span class="ruby-keyword">end</span>
   <span class="ruby-keyword">rescue</span>
     <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">504</span>
@@ -375,7 +378,7 @@ user (the author), the newstacts, the attachments</p>
 </li></ul>					
 											<div class="method-source-code" id="getcomments-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/news_controller.rb, line 255</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/news_controller.rb, line 258</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">getcomments</span>
   <span class="ruby-keyword">begin</span>
     <span class="ruby-identifier">news</span> = <span class="ruby-constant">News</span>.<span class="ruby-identifier">find_by_id</span>(<span class="ruby-ivar">@id</span>)
@@ -590,6 +593,7 @@ user (the author), the newstexts, the attachments and the tags</p>
 			<li><a href="../Notification.html">Notification</a></li>
 			<li><a href="../Pack.html">Pack</a></li>
 			<li><a href="../Playlist.html">Playlist</a></li>
+			<li><a href="../PlaylistObject.html">PlaylistObject</a></li>
 			<li><a href="../Proposition.html">Proposition</a></li>
 			<li><a href="../Purchase.html">Purchase</a></li>
 			<li><a href="../PurchasedAlbum.html">PurchasedAlbum</a></li>

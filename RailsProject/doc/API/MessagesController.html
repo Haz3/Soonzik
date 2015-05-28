@@ -162,7 +162,7 @@ the list of action available :</p>
 <p><code>:offset</code> - (optionnal) offset to get the message from a
 specific offset (by default : 0)</p>
 </li><li>
-<p><code>:lastMsg</code> - (optionnal) The if of the oldest message you have
+<p><code>:lastMsg</code> - (optionnal) The id of the oldest message you have
 in your historic to get the 20 messages before it (can&#39;t be used with
 offset). It is less optimized than the offset (need to browse the array of
 messages). If the id is not found, it is like if the parameter was not set</p>
@@ -459,8 +459,8 @@ sender and receiver</p>
         <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">200</span>
       <span class="ruby-keyword">end</span>
         <span class="ruby-keyword">else</span>
-           <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">500</span>
-    <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:forbidden</span>
+         <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">500</span>
+      <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:forbidden</span>
         <span class="ruby-keyword">end</span>
   <span class="ruby-keyword">rescue</span>
     <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">504</span>
@@ -545,6 +545,7 @@ sender and receiver</p>
 			<li><a href="../Notification.html">Notification</a></li>
 			<li><a href="../Pack.html">Pack</a></li>
 			<li><a href="../Playlist.html">Playlist</a></li>
+			<li><a href="../PlaylistObject.html">PlaylistObject</a></li>
 			<li><a href="../Proposition.html">Proposition</a></li>
 			<li><a href="../Purchase.html">Purchase</a></li>
 			<li><a href="../PurchasedAlbum.html">PurchasedAlbum</a></li>
