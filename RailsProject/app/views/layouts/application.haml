@@ -61,23 +61,4 @@
 
     %footer
       .container
-        #demo
-          #player.large-12.small-9
-            =image_tag "stefan-bodzin.jpg", :class => "picture"
-            #button-player-left.large-12.small-9
-              .controls
-                =image_tag "rewind.png"
-                =image_tag "play.png",{"role" => "button", "id" => "play", "class" => "btn btn-primary", "data-action" => "play"}
-                =image_tag "forward.png"
-                =image_tag "sound.png", :class => "sound"
-                =image_tag "shuffle.png"
-
-
-            #waveform-container
-              #waveform
-                .progress.progress-striped.active#progress-bar
-                  .progress-bar.progress-bar-info
-
-            #button-player-right.large-12.small-9
-              =image_tag "playlist.png"
-              =image_tag "social.png"
+        #player{ "ng-include" => "'#{asset_path('AngularJS/views/others/player.html.haml')}'" }

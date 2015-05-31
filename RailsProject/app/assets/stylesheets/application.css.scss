@@ -92,14 +92,6 @@ main.row {
 
 }
 
-.name {
-
-}
-
-.modify {
-
-}
-
 .top-bar-section .dropdown li {
 	min-width: 265px !important;
 	left: -75px;
@@ -116,90 +108,94 @@ main.row {
 	height: 60px;
 	background: none repeat scroll 0% 0% #25292B;
 	font-family: Roboto;
-}
+	
+	.controls a {
+	  font-size: 30px;
+	  line-height: 60px;
+	}
 
-.picture {
-	width: 60px;
-	height: 100%;
-	float: left;
-}
+	.timer {
+		color: white;
 
-.player .picture img {
-	float: left;
-	width: 60px;
-	height: 60px;
-	margin-right: 5px;
-}
+		i {
+			position: absolute;
+			right: 10px;
+			top: 10px;
+		  font-size: 30px;
+		}
+	}
 
-#button-player-left {
-	width: auto;
-	height: 100%;
-	margin-top: 0px;
-	margin-left: 20px;
-	float: left;
-}
+	.volumeBlock {
+		position: relative;
+		display: inline;
 
-.sound {
-	width: 25px !important;
-}
+		.volumeSelection {
+			position: absolute;
+			display: none;
+			bottom: 30px;
+			width: 25px;
+			height: 160px;
+			background: black;
+			left: 0;
 
-#button-player-right {
-	height: 100%;
-	width: auto;
-	margin-right: 15px;
-	float: right;
-}
+			.volumeBackground {
+				background: #25292B;
+				height: 130px;
+				width: 19px;
+				position: absolute;
+				left: 3px;
+				top: 15px;
+			}
 
-#player #button-player-right img {
-	width: 30px;
-	margin-top: 15px;
-	margin-left: 15px;
-}
+			#sliderVolume {
+				height: 120px;
+				margin-top: 25px;
+				width: 19px;
+				margin-left: 3px;
+				position: relative;
 
-#play { 
-	width: 30px !important;
-  	cursor:  pointer;
-}
+				div {
+					background: #008CBA;
+					position: absolute;
+				  z-index: 1;
+				  display: block;
+				  border: 0;
+				  background-position: 0 0;
+				  left: 0;
+				  bottom: 0;
+					width: 19px;
+				}
 
-#player #button-player-left img {
-	width: 30px;
-	margin-top: 15px;
-	margin-left: 0px;
-}
+				span {
+					background: #CFCFCF;
+					position: absolute;
+				  z-index: 2;
+				  width: 20px;
+				  height: 10px;
+				  cursor: default;
+				  -ms-touch-action: none;
+				  touch-action: none;
+				}
+			}
+		}
 
-#title {
-	width: 250px;
-	color: #FFF;
-	float: left;
-	margin-top: -53px;
-	margin-left: 75px;
-	font-family: Roboto;
-}
+		&:hover .volumeSelection {
+			display: block;
+		}
+	}
 
-.player-time-begin {
-	margin-left: 50px;
-	margin-top: 30px;
-	color: #C0C0C0;
-	position: relative;
-	float: left;
-	font-size: 12px;
-}
+	p {
+		color: white;
+		margin-bottom: 0px;
+		font-size: 13px;
+		height: 20px;
+		line-height: 20px;
+	}
 
-.player-artist-name {
-	margin-top: 5px;
-	text-align: center;
-	color: #C0C0C0;
-	width: auto;
-	float: left;
-}
-
-.player-time-left {
-	color: #C0C0C0;
-	width: auto;
-	margin-top: 30px;
-	font-size: 12px;
-	margin-left: 30px;
-	float: left;
+	wavesurfer {
+		padding-left: 0;
+		padding-right: 0;
+	}
 }
 
 #waveform-container {
@@ -207,19 +203,6 @@ main.row {
 	z-index: 10;
 	top: 50%;
 	margin-top: 0;
-	left: 23%;
-	width: 65%;
-}
-
-#waveform {
-	position: realative;
-}
-
-#progress-bar {
-    position: absolute;
-    z-index: 10;
-    top: 50%;
-    margin-top: -10px;
 	left: 23%;
 	width: 65%;
 }
@@ -256,4 +239,8 @@ main.row {
 
 .size-42 {
 	font-size: 42px;
+}
+
+music {
+	cursor: pointer;
 }

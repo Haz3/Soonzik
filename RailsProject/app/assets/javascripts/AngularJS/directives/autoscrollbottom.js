@@ -1,8 +1,8 @@
 SoonzikApp.directive('autoScrollBottom', [function() {
 
-	return function ($scope, elem, attr) {
+	return function ($scope, $element, attr) {
 		if ($scope.$last){
-    	elem.parent().scrollTop(elem.parent().prop("scrollHeight"));
+    	$element.parent().scrollTop($element.parent().prop("scrollHeight"));
   	}
 	}
 }]);

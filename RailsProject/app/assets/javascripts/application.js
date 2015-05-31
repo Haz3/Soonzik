@@ -12,6 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require jquery-ui
 //= require foundation
 //= require ./player/wavesurfer.min.js
 //= require ./player/main.js
@@ -31,13 +32,16 @@
 //= require ./AngularJS/controllers/BattlesController.js
 //= require ./AngularJS/controllers/UsersController.js
 //= require ./AngularJS/controllers/IndexController.js
+//= require ./AngularJS/controllers/PlayerController.js
 //= require ./AngularJS/directives/autofocus.js
 //= require ./AngularJS/directives/autoscrollbottom.js
 //= require ./AngularJS/directives/battle.js
 //= require ./AngularJS/directives/clickOutside.js
 //= require ./AngularJS/directives/loading.js
+//= require ./AngularJS/directives/music.js
 //= require ./AngularJS/directives/onScroll.js
 //= require ./AngularJS/directives/submitInput.js
+//= require ./AngularJS/directives/wavesurfer.js
 //= require ./AngularJS/services/SecureAuth.js
 //= require ./AngularJS/services/HTTPService.js
 //= require ./AngularJS/services/NotificationService.js

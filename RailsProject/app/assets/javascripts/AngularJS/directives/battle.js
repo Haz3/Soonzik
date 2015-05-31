@@ -1,14 +1,14 @@
 SoonzikApp.directive('battle', [function() {
 
-	var drawMyDonut = function(elem, values) {
+	var drawMyDonut = function($element, values) {
 		if (values.length == 0) {
-			elem.html("Currently no votes");
+			$element.html("Currently no votes");
 			return;
     }
 
-		var w = elem.parent().width();
+		var w = $element.parent().width();
 
-		elem.width(w - 10 + "px");
+		$element.width(w - 10 + "px");
 
 		var total = 0;
 		for (var index in values) {
@@ -16,7 +16,7 @@ SoonzikApp.directive('battle', [function() {
 		}
 
 		Morris.Donut({
-		  element: elem,
+		  element: $element,
 		  data: values,
 		  formatter: function (x) { return (Math.round((x / total * 100) * 100) / 100) + "%"}
 		});
@@ -27,23 +27,23 @@ SoonzikApp.directive('battle', [function() {
 		scope: {
 			'battleValues': '='
 		},
-		link: function ($scope, elem, attr) {
+		link: function ($scope, $element, attr) {
 			var values = [
 			    {value: 700, label: 'foo'},
 			    {value: 500, label: 'A really really long label'}
 			  ];
 
 			$(window).resize(function() {
-				elem.html("");
-      	drawMyDonut(elem, $scope.battleValues);
+				$element.html("");
+      	drawMyDonut($element, $scope.battleValues);
     	});
 
     	$scope.$watch('battleValues', function(newValue, oldValue) {
-				elem.html("");
-    		drawMyDonut(elem, newValue);
+				$element.html("");
+    		drawMyDonut($element, newValue);
       }, true);
 
-     	drawMyDonut(elem, $scope.battleValues);
+     	drawMyDonut($element, $scope.battleValues);
 		}
 	};
 }]);

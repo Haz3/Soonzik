@@ -5,13 +5,13 @@ SoonzikApp.directive('onScroll', [function() {
     	'onScroll': '&',
     	'scrollPosition': '='
     },
-		link: function ($scope, elem, attr) {
+		link: function ($scope, $element, attr) {
 			if ($scope.scrollPosition != "top" && $scope.scrollPosition != "bottom") {
 				$scope.scrollPosition = "bottom";
 			}
-			elem.on("scroll", function(event) {
-				if (($scope.scrollPosition == "bottom" && elem.scrollTop() == scrollHeight) ||
-						($scope.scrollPosition == "top" && elem.scrollTop() == 0)) {
+			$element.on("scroll", function(event) {
+				if (($scope.scrollPosition == "bottom" && $element.scrollTop() == scrollHeight) ||
+						($scope.scrollPosition == "top" && $element.scrollTop() == 0)) {
 					$scope.onScroll();
 				}
 			});

@@ -8,12 +8,12 @@ SoonzikApp.directive('loading', function() {
   	scope: {
     	'loadingType': '='
     },
-  	link: function (scope, element, attrs) {
+  	link: function (scope, $element, attrs) {
   		tmpl = scope.loadingType;
   		if (typeof tmpl === "undefined")
   			tmpl = 'circular';
 
-  		element.html((tmpl == 'circular') ? templateCircular : templateSquare);
+  		$element.html((tmpl == 'circular') ? templateCircular : templateSquare);
 		}
   };
 });

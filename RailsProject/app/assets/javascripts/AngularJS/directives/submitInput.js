@@ -4,8 +4,8 @@ SoonzikApp.directive('submitInput', ["$parse", function($parse) {
   	scope: {
   		'submitInput': '&'
   	},
-  	link: function (scope, element, attrs) {
-  		element.keydown(function (t) {
+  	link: function (scope, $element, attrs) {
+  		$element.keydown(function (t) {
   			if (event.keyCode == 13) {
   				scope.submitInput();
   			}

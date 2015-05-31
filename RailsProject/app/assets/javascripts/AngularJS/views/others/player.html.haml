@@ -1,0 +1,23 @@
+.player-container{ "ng-controller" => "PlayerCtrl", "ng-init" => "initPlayer()" }
+	#player.small-12
+		.small-2.columns
+			.controls
+				%a
+					%i.fi-previous
+				%a{ "ng-click" => "loaded && wavesurfer.playPause()" }
+					%i{ "ng-class" => "(paused) ? 'fi-play' : 'fi-pause'" }
+				%a
+					%i.fi-next
+				.volumeBlock
+					%a
+						%i{ "ng-class" => "(isVolumeOn()) ? 'fi-volume' : 'fi-volume-strike'" }
+						.volumeSelection
+							.volumeBackground
+							#sliderVolume
+				%a{ "ng-click" => "shuffle = !shuffle" }
+					%i.fi-shuffle{ "ng-style" => "(shuffle) ? {} : { color: 'gray' }" }
+		.small-9.columns
+			%p.text-center Title - {{ timeFormated }}
+			%wavesurfer{ url: "", "wave-color" => "#337ab7", "progress-color" => "#FF6600", height: "80", normalize: "true" }
+		.small-1.columns.timer
+			%i.fi-list-bullet

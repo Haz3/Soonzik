@@ -4,7 +4,7 @@ SoonzikApp.directive('clickOutside', ["$document", function($document) {
         scope: {
             'clickOutside': '&'
         },
-        link: function ($scope, elem, attr) {
+        link: function ($scope, $element, attr) {
             var classList = (attr.outsideIfNot !== undefined) ? attr.outsideIfNot.replace(', ', ',').split(',') : [];
             if (attr.id !== undefined) classList.push(attr.id);
 

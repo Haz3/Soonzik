@@ -28,18 +28,27 @@
         %h1.subheader
           Top Songs
         %table.radius
+          %thead.radius
+            %tr
+              %th Title
+              %th Duration
+              %th Price
+              %th Rate
+              %th 
+              %th 
           %tbody.radius
             %tr{ 'ng-repeat' => 'song in show.user.topFive track by $index' }
-              %td{:width => '50'}
-                {{ $index + 1 }} 
               %td{:width => '1000'}
                 {{song.music.title}}
-              %td{:width => '150'}
-                {{song.music.duration}}
+              %td{:width => '100'}
+                {{ formatTime(song.music.duration) }}
               %td{:width => '50'}
-                {{song.music.price}}
+                {{song.music.price}} $
               %td{:width => '200'}
                 %i.fi-star{ "ng-repeat" => "n in range(song.note)" }
+              %td{:width => '50'}
+                %music{ "music-object" => "song.music", artist: "show.user.username" }
+                  %i.fi-play
               %td{:width => '50'} +
       .albums
         %h1.subheader
@@ -49,17 +58,21 @@
               %img{ "ng-src" => '{{album.image}}' }
               %table.right
                 %thead
-                  %th{ colspan: '5' } {{album.title}}
+                  %tr
+                    %th{ colspan: '5' } {{album.title}}
                 %tbody
                   %tr{ 'ng-repeat' => 'song in album.musics track by $index' }
                     %td{:width => '50'}
                       {{$index + 1 }}
-                    %td{:width => '350'}
+                    %td{:width => '300'}
                       {{song.title}}
                     %td{:width => '100'}
                       {{song.duration}}
                     %td{:width => '50'}
                       {{song.price}}
+                    %td{:width => '50'}
+                      %music{ "music-object" => "song.music", artist: "show.user.username" }
+                        %i.fi-play
                     %td{:width => '50'} +
               %hr
               %p {{ album.yearProd }} - {{ show.user.username }}
