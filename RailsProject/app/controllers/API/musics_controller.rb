@@ -241,8 +241,6 @@ module API
     #
     # Route : /musics/get/:id
     #
-    # DEPRECATED FOR THE MOMENT
-    #
     # ==== Options
     #
     # * +id+ - The id of the music where is the comment
@@ -268,14 +266,14 @@ module API
           defineHttp :not_found
         else
           # If the transaction is secured, it means we maybe have buy the music
-          if (@security)
-            buy = Purchase.find_by user_id: @user_id, typeObj: "Music", obj_id: music.id
-            cut = false if buy.size > 0
+          if (@security || music.limited == false)
+            u = User.find_by_id(@user_id)
+            cut = false if (music.limited == false || (u != nil && u.purchased_musics.include?(music)))
           end
 
-          file = music.file
+          file = music.file.downcase.gsub(/[^0-9A-Za-z]/, '')
           file = "cut_" + file if cut
-          buffer = File.open(File.join(Rails.root, "app", "assets", "musics", music.album.user.username.downcase.gsub(/[^0-9A-Za-z]/, ''), "#{file.downcase.gsub(/[^0-9A-Za-z]/, '')}.mp3"), "rb").read
+          buffer = File.open(File.join(Rails.root, "app", "assets", "musics", music.album.user.id.to_s, "#{file}.mp3"), "rb").read
         end
       rescue
         codeAnswer 504

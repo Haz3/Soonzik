@@ -165,7 +165,7 @@ and the validation Can provide some features linked to this model</p>
 											<p>Filter of information for the <a href="API.html">API</a> - Less Restricted</p>					
 											<div class="method-source-code" id="bigKey-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/models/user.rb, line 190</span>
+								class="language-ruby"><span class="ruby-comment"># File app/models/user.rb, line 191</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">bigKey</span>
   [<span class="ruby-value">:id</span>, <span class="ruby-value">:email</span>, <span class="ruby-value">:username</span>, <span class="ruby-value">:fname</span>, <span class="ruby-value">:lname</span>, <span class="ruby-value">:birthday</span>, <span class="ruby-value">:image</span>, <span class="ruby-value">:description</span>, <span class="ruby-value">:language</span>, <span class="ruby-value">:facebook</span>, <span class="ruby-value">:twitter</span>, <span class="ruby-value">:googlePlus</span>]
 <span class="ruby-keyword">end</span></code></pre>
@@ -187,7 +187,7 @@ and the validation Can provide some features linked to this model</p>
 											<p>for OAuth interpretation</p>					
 											<div class="method-source-code" id="find_for_oauth-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/models/user.rb, line 79</span>
+								class="language-ruby"><span class="ruby-comment"># File app/models/user.rb, line 80</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">find_for_oauth</span>(<span class="ruby-identifier">auth</span>, <span class="ruby-identifier">signed_in_resource</span> = <span class="ruby-keyword">nil</span>)
 
   <span class="ruby-comment"># Get the identity and user if they exist</span>
@@ -264,7 +264,7 @@ and the validation Can provide some features linked to this model</p>
 											<p>Filter of information for the <a href="API.html">API</a> - Restricted</p>					
 											<div class="method-source-code" id="miniKey-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/models/user.rb, line 185</span>
+								class="language-ruby"><span class="ruby-comment"># File app/models/user.rb, line 186</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">miniKey</span>
   [<span class="ruby-value">:id</span>, <span class="ruby-value">:email</span>, <span class="ruby-value">:username</span>, <span class="ruby-value">:image</span>, <span class="ruby-value">:description</span>, <span class="ruby-value">:language</span>]
 <span class="ruby-keyword">end</span></code></pre>
@@ -286,7 +286,7 @@ and the validation Can provide some features linked to this model</p>
 											<p>Filter of information for the <a href="API.html">API</a> - No Restriction</p>					
 											<div class="method-source-code" id="notRestrictedKey-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/models/user.rb, line 195</span>
+								class="language-ruby"><span class="ruby-comment"># File app/models/user.rb, line 196</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">notRestrictedKey</span>
   [<span class="ruby-value">:id</span>, <span class="ruby-value">:email</span>, <span class="ruby-value">:username</span>, <span class="ruby-value">:fname</span>, <span class="ruby-value">:lname</span>, <span class="ruby-value">:birthday</span>, <span class="ruby-value">:image</span>, <span class="ruby-value">:description</span>, <span class="ruby-value">:language</span>, <span class="ruby-value">:facebook</span>, <span class="ruby-value">:twitter</span>, <span class="ruby-value">:googlePlus</span>, <span class="ruby-value">:salt</span>, <span class="ruby-value">:phoneNumber</span>, <span class="ruby-value">:newsletter</span>, <span class="ruby-value">:language</span>, <span class="ruby-value">:created_at</span>]
 <span class="ruby-keyword">end</span></code></pre>
@@ -313,7 +313,7 @@ and the validation Can provide some features linked to this model</p>
 </li></ul>					
 											<div class="method-source-code" id="secureKey_hash-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/models/user.rb, line 167</span>
+								class="language-ruby"><span class="ruby-comment"># File app/models/user.rb, line 168</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">secureKey_hash</span>(<span class="ruby-identifier">key</span>)
   <span class="ruby-constant">Digest</span><span class="ruby-operator">::</span><span class="ruby-constant">SHA1</span>.<span class="ruby-identifier">hexdigest</span>(<span class="ruby-constant">Digest</span><span class="ruby-operator">::</span><span class="ruby-constant">MD5</span>.<span class="ruby-identifier">hexdigest</span>(<span class="ruby-identifier">key</span>))
 <span class="ruby-keyword">end</span></code></pre>
@@ -335,7 +335,7 @@ and the validation Can provide some features linked to this model</p>
 											<p>The strong parameters to save or update object</p>					
 											<div class="method-source-code" id="user_params-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/models/user.rb, line 180</span>
+								class="language-ruby"><span class="ruby-comment"># File app/models/user.rb, line 181</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">user_params</span>(<span class="ruby-identifier">parameters</span>)
   <span class="ruby-identifier">parameters</span>.<span class="ruby-identifier">require</span>(<span class="ruby-value">:user</span>).<span class="ruby-identifier">permit</span>(<span class="ruby-value">:email</span>, <span class="ruby-value">:password</span>, <span class="ruby-value">:fname</span>, <span class="ruby-value">:lname</span>, <span class="ruby-value">:username</span>, <span class="ruby-value">:birthday</span>, <span class="ruby-value">:image</span>, <span class="ruby-value">:description</span>, <span class="ruby-value">:phoneNumber</span>, <span class="ruby-value">:facebook</span>, <span class="ruby-value">:twitter</span>, <span class="ruby-value">:googlePlus</span>, <span class="ruby-value">:newsletter</span>, <span class="ruby-value">:language</span>)
 <span class="ruby-keyword">end</span></code></pre>
@@ -370,7 +370,7 @@ and the validation Can provide some features linked to this model</p>
 											<p>Is there the default email address or not ?</p>					
 											<div class="method-source-code" id="email_verified-3F-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/models/user.rb, line 139</span>
+								class="language-ruby"><span class="ruby-comment"># File app/models/user.rb, line 140</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">email_verified?</span>
   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">email</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">email</span> <span class="ruby-operator">!~</span> <span class="ruby-constant">TEMP_EMAIL_REGEX</span>
 <span class="ruby-keyword">end</span></code></pre>
@@ -392,7 +392,7 @@ and the validation Can provide some features linked to this model</p>
 											<p>Give the pack where the user has its albums</p>					
 											<div class="method-source-code" id="givePack-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/models/user.rb, line 234</span>
+								class="language-ruby"><span class="ruby-comment"># File app/models/user.rb, line 235</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">givePack</span>
   <span class="ruby-keyword">return</span> <span class="ruby-constant">Pack</span>.<span class="ruby-identifier">joins</span>(<span class="ruby-identifier">albums</span><span class="ruby-operator">:</span> [<span class="ruby-value">:user</span>]).<span class="ruby-identifier">where</span>(<span class="ruby-identifier">users</span><span class="ruby-operator">:</span> {<span class="ruby-identifier">id</span><span class="ruby-operator">:</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">id</span>})
 <span class="ruby-keyword">end</span></code></pre>
@@ -414,7 +414,7 @@ and the validation Can provide some features linked to this model</p>
 											<p>Give the 5 most popular track of an artist</p>					
 											<div class="method-source-code" id="giveTopFive-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/models/user.rb, line 220</span>
+								class="language-ruby"><span class="ruby-comment"># File app/models/user.rb, line 221</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">giveTopFive</span>
   <span class="ruby-identifier">allMusics</span> = []
 
@@ -445,7 +445,7 @@ and the validation Can provide some features linked to this model</p>
 											<p>Check if the user is a friend or not</p>					
 											<div class="method-source-code" id="hasFriend-3F-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/models/user.rb, line 210</span>
+								class="language-ruby"><span class="ruby-comment"># File app/models/user.rb, line 211</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">hasFriend?</span>(<span class="ruby-identifier">user</span>)
   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">friends</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">friend</span><span class="ruby-operator">|</span>
     <span class="ruby-keyword">if</span> (<span class="ruby-identifier">friend</span>.<span class="ruby-identifier">id</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">user</span>.<span class="ruby-identifier">id</span>)
@@ -472,7 +472,7 @@ and the validation Can provide some features linked to this model</p>
 											<p>Check is the user is an artist</p>					
 											<div class="method-source-code" id="isArtist-3F-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/models/user.rb, line 200</span>
+								class="language-ruby"><span class="ruby-comment"># File app/models/user.rb, line 201</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">isArtist?</span>
   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">groups</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">group</span><span class="ruby-operator">|</span>
     <span class="ruby-keyword">if</span> (<span class="ruby-identifier">group</span>.<span class="ruby-identifier">name</span> <span class="ruby-operator">==</span> <span class="ruby-string">&quot;Artist&quot;</span>)
@@ -500,7 +500,7 @@ and the validation Can provide some features linked to this model</p>
 unique so we check if someone already has this one</p>					
 											<div class="method-source-code" id="regenerateKey-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/models/user.rb, line 150</span>
+								class="language-ruby"><span class="ruby-comment"># File app/models/user.rb, line 151</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">regenerateKey</span>
   <span class="ruby-identifier">key</span> = <span class="ruby-keyword">nil</span>
 
@@ -530,7 +530,7 @@ unique so we check if someone already has this one</p>
 set before</p>					
 											<div class="method-source-code" id="salt_hash-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/models/user.rb, line 173</span>
+								class="language-ruby"><span class="ruby-comment"># File app/models/user.rb, line 174</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">salt_hash</span>
   <span class="ruby-identifier">first_piece</span> = <span class="ruby-constant">Digest</span><span class="ruby-operator">::</span><span class="ruby-constant">SHA256</span>.<span class="ruby-identifier">hexdigest</span>(<span class="ruby-node">&quot;#{Time.now.utc}--#{self.password}&quot;</span>)
   <span class="ruby-identifier">second_piece</span> = <span class="ruby-constant">Digest</span><span class="ruby-operator">::</span><span class="ruby-constant">SHA256</span>.<span class="ruby-identifier">hexdigest</span>(<span class="ruby-keyword">self</span>.<span class="ruby-identifier">password</span>)
@@ -554,7 +554,7 @@ set before</p>
 											<p>Is there the default username or not ?</p>					
 											<div class="method-source-code" id="username_verified-3F-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/models/user.rb, line 144</span>
+								class="language-ruby"><span class="ruby-comment"># File app/models/user.rb, line 145</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">username_verified?</span>
   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">username</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">username</span> <span class="ruby-operator">!~</span> <span class="ruby-constant">TEMP_USERNAME_REGEX</span>
 <span class="ruby-keyword">end</span></code></pre>

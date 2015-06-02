@@ -23,7 +23,6 @@ SoonzikApp.directive('wavesurfer', function () {
             $(waves[waveIndex]).height("100%");
           }
           $("wave > wave").width((wavesurfer.getCurrentTime() / wavesurfer.getDuration()) * $element.width());
-          console.log(wavesurfer);
           wavesurfer.drawer.width = $element.width();
         }
       });

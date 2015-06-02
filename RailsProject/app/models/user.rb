@@ -29,6 +29,7 @@ class User < ActiveRecord::Base
   has_many :tweets
   has_many :votes
   has_many :purchases
+  has_many :purchased_musics, through: :purchases, source: :musics
   has_many :commentaries, foreign_key: 'author_id'
 
   has_many :gifts_given, class_name: 'Gift', foreign_key: 'from_user'

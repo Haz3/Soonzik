@@ -1,7 +1,9 @@
-.player-container{ "ng-controller" => "PlayerCtrl", "ng-init" => "initPlayer()" }
+.player-content{ "ng-controller" => "PlayerCtrl", "ng-init" => "initPlayer()" }
 	#player.small-12
 		.small-2.columns
 			.controls
+				%a.hide-for-medium-up.toHide
+					%i.fi-eject
 				%a
 					%i.fi-previous
 				%a{ "ng-click" => "loaded && wavesurfer.playPause()" }
@@ -17,7 +19,15 @@
 				%a{ "ng-click" => "shuffle = !shuffle" }
 					%i.fi-shuffle{ "ng-style" => "(shuffle) ? {} : { color: 'gray' }" }
 		.small-9.columns
-			%p.text-center Title - {{ timeFormated }}
+			%p.text-center {{ playlist[indexPlaylist].title }} {{ (playlist[indexPlaylist] != undefined) ? "-" : "" }} {{ timeFormated }}
 			%wavesurfer{ url: "", "wave-color" => "#337ab7", "progress-color" => "#FF6600", height: "80", normalize: "true" }
 		.small-1.columns.timer
-			%i.fi-list-bullet
+			%i.fi-list-bullet{ "ng-click" => "displayPlaylist()" }
+	#currentPlaylist.text-center
+		.currentList.columns{ "ng-class" => "user == false ? 'small-12' : 'medium-6'" }
+			%h2 Current Playlist
+			%div
+		.myPlaylist.medium-6.columns{ "ng-if" => "user != false" }
+			%h2 Your playlists
+			%loading{ "ng-if" => "loading" }
+			%div{ "ng-if" => "!loading" }

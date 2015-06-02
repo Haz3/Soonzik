@@ -1,8 +1,10 @@
-SoonzikApp.controller("PlayerCtrl", ["$scope", "$rootScope", function ($scope, $rootScope) {
+SoonzikApp.controller("PlayerCtrl", ["$scope", "$rootScope", "HTTPService", "NotificationService", "SecureAuth", function ($scope, $rootScope, HTTPService, NotificationService, SecureAuth) {
 
   var activeUrl = null;
+  $scope.user = false;
 
   $scope.loaded = false;
+  $scope.loading = true;
 
   $scope.paused = true;
   $scope.shuffle = false;
@@ -14,6 +16,8 @@ SoonzikApp.controller("PlayerCtrl", ["$scope", "$rootScope", function ($scope, $
 
   $scope.playlist = [];
   $scope.indexPlaylist = 0;
+
+  $scope.myPlaylists = [];
 
   function n(n){
     return n > 9 ? "" + n: "0" + n;
@@ -36,6 +40,11 @@ SoonzikApp.controller("PlayerCtrl", ["$scope", "$rootScope", function ($scope, $
   }
 
   $scope.initPlayer = function() {
+  	var current_user = SecureAuth.getCurrentUser();
+		if (current_user.id != null && current_user.token != null && current_user.username != null) {
+			$scope.user = current_user;
+		}
+
   	$("#sliderVolume").slider({
       orientation: "vertical",
       range: "min",
@@ -48,18 +57,43 @@ SoonzikApp.controller("PlayerCtrl", ["$scope", "$rootScope", function ($scope, $
         $scope.$apply();
       }
     });
+
+    $(window).resize(resizeHiddenPlaylist);
+    resizeHiddenPlaylist();
+
+    if ($scope.user != false) {
+	    HTTPService.findPlaylist([{ key: "user_id", value: $scope.user.id }]).then(function(response) {
+	    	$scope.myPlaylists = response.data.content;
+	    }, function(error) {
+	    	NotificationService.error("Error : Can't get your playlist");
+	    });
+  	}
   }
 
   $scope.$on('player:play', function(event, data) {
+    var dataObject = { title: data.song.title, id: data.song.id };
     $scope.loaded = false;
-    data = "/assets/" + data.artist + "/" + data.song.file + ".mp3";
-    if ($.inArray(data, $scope.playlist) > -1) {
-    	$scope.indexPlaylist = $.inArray(data, $scope.playlist);
+    
+    var inArray = isInPlaylist(dataObject);
+    console.log(inArray);
+
+    if (inArray != false) {
+    	$scope.indexPlaylist = inArray;
     } else {
-    	$scope.playlist.push(data);
+    	$scope.playlist.push(dataObject);
     	$scope.indexPlaylist = $scope.playlist.length - 1;
     }
-    $scope.play(data);
+    
+    if (user != false) {
+    	SecureAuth.securedTransaction(function(key, user_id) {
+    		$scope.play(HTTPService.getMP3musicURL(dataObject.id, [{ key: "user_id", value: user_id}, { key: "secureKey", value: key }]));
+    	}, function(error) {
+    		NotificationService.error("Error while loading the music : " + dataObject.title);
+    	});
+    } else {
+    	$scope.play(HTTPService.getMP3musicURL(dataObject.id, null));
+    }
+    console.log($scope.playlist);
   });
 
   $scope.$on('wavesurferInit', function (e, wavesurfer) {
@@ -79,6 +113,7 @@ SoonzikApp.controller("PlayerCtrl", ["$scope", "$rootScope", function ($scope, $
 	  		($scope.shuffle == true && $scope.playlist.length <= 1)) {
 	      $scope.paused = true;
 	      $scope.wavesurfer.seekTo(0);
+	      $scope.timeFormated = "";
 	  	} else {
 	  		if ($scope.shuffle == true) {
 		  		var nextTrack = 0;
@@ -121,6 +156,34 @@ SoonzikApp.controller("PlayerCtrl", ["$scope", "$rootScope", function ($scope, $
   	if (parseInt(value) == 0)
   		return false;
   	return true;
+  }
+
+  $scope.displayPlaylist = function() {
+  	if ($("#currentPlaylist").css("right") != "0px") {
+	  	$("#currentPlaylist").css("right", 0);
+  	} else {
+	  	$("#currentPlaylist").css("right", -$("#currentPlaylist").width() - 100);
+  	}
+  }
+
+  var isInPlaylist = function(compareObject) {
+  	for (var i = 0 ; i < $scope.playlist.length ; i++) {
+  		if (compareObject.id == $scope.playlist[i].id)
+  			return i;
+  	}
+  	return false;
+  }
+
+  var resizeHiddenPlaylist = function() {
+  	var height = $(window).height();
+  	var width = $(window).width();
+
+  	$("#currentPlaylist").width(width);
+  	$("#currentPlaylist").height(height - 60);
+
+  	if ($("#currentPlaylist").css("right") != "0px") {
+	  	$("#currentPlaylist").css("right", -$("#currentPlaylist").width() - 100);
+  	}
   }
 
 }]);

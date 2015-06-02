@@ -621,7 +621,7 @@ var SearchIndex =
 	{
 		"name": "get",
 		"link": "API/MusicsController.html#method-i-get",
-		"snippet": "<p>To get the mp3. It cuts the file depending the rights\n<p>Route : /musics/get/:id\n<p>DEPRECATED FOR THE MOMENT …\n",
+		"snippet": "<p>To get the mp3. It cuts the file depending the rights\n<p>Route : /musics/get/:id\n<p>Options\n",
 		"type": "anymethod"
 	},
 	{

@@ -20,7 +20,8 @@ module SoonZik
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
 
-    config.assets.paths << "#{Rails.root}/app/assets/musics"
+    # Commented because it show the musics publicly
+    # config.assets.paths << "#{Rails.root}/app/assets/musics"
     config.assets.paths << "#{Rails.root}/app/assets/packs"
   end
 end

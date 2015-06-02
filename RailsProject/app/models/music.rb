@@ -26,7 +26,7 @@ class Music < ActiveRecord::Base
 
   # Filter of information for the API
   def self.miniKey
-    [:id, :title, :duration, :price, :file]
+    [:id, :title, :duration, :price]
   end
 
   # Get the average of notes
