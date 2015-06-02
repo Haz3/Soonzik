@@ -5,20 +5,20 @@ SoonzikApp.factory('SecureAuth', ['$http', '$routeParams', '$location', '$cookie
   return {
       getCurrentUser: function () {
       	var user = { id: null, token: null, username: null }
-      	if (typeof $cookies.user_id !== "undefined")
-      		user.id = $cookies.user_id;
-      	if (typeof $cookies.user_token !== "undefined")
-      		user.token = $cookies.user_token;
-      	if (typeof $cookies.user_username !== "undefined")
-      		user.username = $cookies.user_username;
+      	if (typeof $cookies.get("user_id") !== "undefined")
+      		user.id = $cookies.get("user_id");
+      	if (typeof $cookies.get("user_token") !== "undefined")
+      		user.token = $cookies.get("user_token");
+      	if (typeof $cookies.get("user_username") !== "undefined")
+      		user.username = $cookies.get("user_username");
       	return user;
       },
       securedTransaction: function(securedFunctionSuccess, securedFunctionError) {
       	var user = { id: null, token: null }
-      	if (typeof $cookies.user_id !== "undefined" &&
-      			typeof $cookies.user_token !== "undefined") {
-	        user.id = $cookies.user_id;
-	      	user.token = $cookies.user_token;
+      	if (typeof $cookies.get("user_id") !== "undefined" &&
+      			typeof $cookies.get("user_token") !== "undefined") {
+	        user.id = $cookies.get("user_id");
+	      	user.token = $cookies.get("user_token");
         }
 		    $http.get("http://api." + url + '/getKey/' + user.id).then(function (json) {
 		    	var key_obj = new jsSHA(user.token + json.data.key, "TEXT");

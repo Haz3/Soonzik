@@ -6,7 +6,7 @@
 					%i.fi-eject
 				%a
 					%i.fi-previous
-				%a{ "ng-click" => "loaded && wavesurfer.playPause()" }
+				%a{ "ng-click" => "pausePlayer()" }
 					%i{ "ng-class" => "(paused) ? 'fi-play' : 'fi-pause'" }
 				%a
 					%i.fi-next
@@ -27,7 +27,50 @@
 		.currentList.columns{ "ng-class" => "user == false ? 'small-12' : 'medium-6'" }
 			%h2 Current Playlist
 			%div
+				%span.button.small.secondary{ "ng-click" => "cleanPlaylist()" }
+					%i.fi-trash
+					Clean  
+				%span.button.small.secondary
+					%i.fi-widget
+					More...
+			.clearfix.small-12.musicInformations{ "ng-show" => "infomusic != false" }
+				%i.fi-x.right{ "ng-click" => "moreInformation(false)" }
+				%ul.square.left.text-left
+					%li
+						%span Title :
+						%span {{ infomusic.title }}
+					%li
+						%span Price :
+						%span {{ infomusic.price }}
+					%li
+						%span Duration :
+						%span {{ formatedDuration(infomusic.duration) }}
+					%li
+						%span Album :
+						%span {{ infomusic.album.title }}
+					%li
+						%a{ href: "/albums/{{ infomusic.id }}" } Link to the album page
+			%hr
+			%div{ "ng-repeat" => "music in playlist track by $index" }
+				.clearfix
+					.left.songName{ "ng-class" => "($index == indexPlaylist) ? 'currentPlaying' : ''", "ng-click" => "playFromPlaylist($index)" }
+						%i.fi-music
+						{{ music.title }} - {{ formatedDuration(music.obj.duration) }}
+					.right
+						%i.fi-info{ "ng-click" => "moreInformation(music.obj)" }
+						%i.fi-x{ "ng-click" => "removeMusicFromPlaylist($index)" }
 		.myPlaylist.medium-6.columns{ "ng-if" => "user != false" }
 			%h2 Your playlists
 			%loading{ "ng-if" => "loading" }
-			%div{ "ng-if" => "!loading" }
+			%div.text-left{ "ng-if" => "!loading" }
+				%hr
+				%div{ "ng-repeat" => "myplaylist in myPlaylists" }
+					.clearfix
+						.left
+							%i.fi-music
+							{{ myplaylist.name }}
+						.right
+							%i.fi-info
+							%i.fi-plus
+							%i.fi-x
+					%hr

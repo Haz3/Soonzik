@@ -79,7 +79,7 @@ SoonzikApp.factory('HTTPService', ['$http', '$location', 'Upload', function ($ht
       return "http://api." + url + '/musics/get/' + id + urlParametersFormat(parameters);
     },
     findPlaylist: function(parameters) {
-      return "http://api." + url + '/playlists/find' + urlParametersFormat(parameters);
+      return $http.get("http://api." + url + '/playlists/find' + urlParametersFormat(parameters));
     }
   }
 }]);

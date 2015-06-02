@@ -173,14 +173,40 @@
 	height: 100%;
 	color: #B0B0B0;
 	max-width: 800px;
+  z-index: 50;
 
 	h2 {
 		padding-top: 20px;
 		color: #B0B0B0;
 	}
 
+	& > div {
+		height: 100%;
+	}
+
 	.currentList {
 		overflow: auto;
+		padding-bottom: 10px;
+
+		.musicInformations {
+			border: 1px solid #DDD;
+			padding: 5px;
+			margin-top: 5px;
+		}
+
+		.songName:hover {
+			color: #D07E00;
+			cursor: pointer;
+		}
+	}
+
+	.currentPlaying {
+		color: #008CBA;
+		text-indent:15px;
+	}
+
+	i {
+		cursor: pointer;
 	}
 
 	-webkit-transition: right 1.5s ease;

@@ -759,7 +759,7 @@ var SearchIndex =
 	{
 		"name": "show",
 		"link": "API/SuggestionsController.html#method-i-show",
-		"snippet": "<p>Give a specific object by its id\n<p>Not implemented\n<p>Options\n",
+		"snippet": "<p>Give a list of music based on the purchases\n<p>Route : /suggest\n<p>HTTP VALUE\n",
 		"type": "anymethod"
 	},
 	{

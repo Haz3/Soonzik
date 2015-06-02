@@ -19,6 +19,8 @@ SoonzikApp.controller("PlayerCtrl", ["$scope", "$rootScope", "HTTPService", "Not
 
   $scope.myPlaylists = [];
 
+  $scope.infomusic = false;
+
   function n(n){
     return n > 9 ? "" + n: "0" + n;
   }
@@ -28,11 +30,7 @@ SoonzikApp.controller("PlayerCtrl", ["$scope", "$rootScope", "HTTPService", "Not
     if (val != $scope.time) {
       $scope.time = val;
       var duration = Math.round($scope.wavesurfer.getDuration(), 0);
-      var currentMinutes = Math.floor(val / 60);
-      var currentSeconds = val - currentMinutes * 60;
-      var totalMinutes = Math.floor(duration / 60);
-      var totalSeconds = duration - totalMinutes * 60;
-      $scope.timeFormated = n(currentMinutes) + ":" + n(currentSeconds) + "/" + n(totalMinutes) + ":" + n(totalSeconds);
+      $scope.timeFormated = $scope.formatedDuration(val) + "/" + $scope.formatedDuration(duration);
       if ($scope.$root.$$phase != '$apply' && $scope.$root.$$phase != '$digest') {
         $scope.$apply();
       }
@@ -64,6 +62,7 @@ SoonzikApp.controller("PlayerCtrl", ["$scope", "$rootScope", "HTTPService", "Not
     if ($scope.user != false) {
 	    HTTPService.findPlaylist([{ key: "user_id", value: $scope.user.id }]).then(function(response) {
 	    	$scope.myPlaylists = response.data.content;
+  			$scope.loading = false;
 	    }, function(error) {
 	    	NotificationService.error("Error : Can't get your playlist");
 	    });
@@ -71,20 +70,19 @@ SoonzikApp.controller("PlayerCtrl", ["$scope", "$rootScope", "HTTPService", "Not
   }
 
   $scope.$on('player:play', function(event, data) {
-    var dataObject = { title: data.song.title, id: data.song.id };
+    var dataObject = { title: data.song.title, id: data.song.id, obj: data.song };
     $scope.loaded = false;
     
     var inArray = isInPlaylist(dataObject);
-    console.log(inArray);
 
-    if (inArray != false) {
+    if (inArray !== false) {
     	$scope.indexPlaylist = inArray;
     } else {
     	$scope.playlist.push(dataObject);
     	$scope.indexPlaylist = $scope.playlist.length - 1;
     }
     
-    if (user != false) {
+    if ($scope.user != false) {
     	SecureAuth.securedTransaction(function(key, user_id) {
     		$scope.play(HTTPService.getMP3musicURL(dataObject.id, [{ key: "user_id", value: user_id}, { key: "secureKey", value: key }]));
     	}, function(error) {
@@ -93,7 +91,6 @@ SoonzikApp.controller("PlayerCtrl", ["$scope", "$rootScope", "HTTPService", "Not
     } else {
     	$scope.play(HTTPService.getMP3musicURL(dataObject.id, null));
     }
-    console.log($scope.playlist);
   });
 
   $scope.$on('wavesurferInit', function (e, wavesurfer) {
@@ -122,7 +119,16 @@ SoonzikApp.controller("PlayerCtrl", ["$scope", "$rootScope", "HTTPService", "Not
 		  		while (nextTrack != $scope.indexPlaylist - 1);
 		  		$scope.indexPlaylist = nextTrack;
 	  		}
-		    $scope.play($scope.playlist[$scope.indexPlaylist]);
+
+		    if ($scope.user != false) {
+		    	SecureAuth.securedTransaction(function(key, user_id) {
+		    		$scope.play(HTTPService.getMP3musicURL($scope.playlist[$scope.indexPlaylist].id, [{ key: "user_id", value: user_id}, { key: "secureKey", value: key }]));
+		    	}, function(error) {
+		    		NotificationService.error("Error while loading the music : " + $scope.playlist[$scope.indexPlaylist].title);
+		    	});
+		    } else {
+		    	$scope.play(HTTPService.getMP3musicURL($scope.playlist[$scope.indexPlaylist].id, null));
+		    }
 	  	}
       $scope.$apply();
 	  });
@@ -166,6 +172,40 @@ SoonzikApp.controller("PlayerCtrl", ["$scope", "$rootScope", "HTTPService", "Not
   	}
   }
 
+  $scope.cleanPlaylist = function() {
+	  $scope.playlist = [];
+  	$scope.indexPlaylist = 0;
+  }
+
+  $scope.removeMusicFromPlaylist = function(index) {
+	  $scope.playlist.splice(index, 1);
+	  if (($scope.indexPlaylist == $scope.playlist.length && $scope.shuffle == false) ||
+  		($scope.shuffle == true && $scope.playlist.length <= 1)) {
+      $scope.paused = true;
+      $scope.wavesurfer.seekTo(0);
+      $scope.timeFormated = "";
+      $scope.pausePlayer();
+  	} else {
+  		if ($scope.shuffle == true) {
+	  		var nextTrack = 0;
+	  		do
+	  			nextTrack = Math.abs(Math.random() * ($scope.playlist.length - 1))
+	  		while (nextTrack != $scope.indexPlaylist - 1);
+	  		$scope.indexPlaylist = nextTrack;
+  		}
+
+	    if ($scope.user != false) {
+	    	SecureAuth.securedTransaction(function(key, user_id) {
+	    		$scope.play(HTTPService.getMP3musicURL($scope.playlist[$scope.indexPlaylist].id, [{ key: "user_id", value: user_id}, { key: "secureKey", value: key }]));
+	    	}, function(error) {
+	    		NotificationService.error("Error while loading the music : " + $scope.playlist[$scope.indexPlaylist].title);
+	    	});
+	    } else {
+	    	$scope.play(HTTPService.getMP3musicURL($scope.playlist[$scope.indexPlaylist].id, null));
+	    }
+  	}
+  }
+
   var isInPlaylist = function(compareObject) {
   	for (var i = 0 ; i < $scope.playlist.length ; i++) {
   		if (compareObject.id == $scope.playlist[i].id)
@@ -184,6 +224,35 @@ SoonzikApp.controller("PlayerCtrl", ["$scope", "$rootScope", "HTTPService", "Not
   	if ($("#currentPlaylist").css("right") != "0px") {
 	  	$("#currentPlaylist").css("right", -$("#currentPlaylist").width() - 100);
   	}
+  }
+
+  $scope.pausePlayer = function() {
+  	if ($scope.loaded && $scope.wavesurfer) {
+  		$scope.wavesurfer.playPause();
+  	}
+  }
+
+  $scope.playFromPlaylist = function(index) {
+  	$scope.indexPlaylist = index;
+  	if ($scope.user != false) {
+    	SecureAuth.securedTransaction(function(key, user_id) {
+    		$scope.play(HTTPService.getMP3musicURL($scope.playlist[$scope.indexPlaylist].id, [{ key: "user_id", value: user_id}, { key: "secureKey", value: key }]));
+    	}, function(error) {
+    		NotificationService.error("Error while loading the music : " + $scope.playlist[$scope.indexPlaylist].title);
+    	});
+    } else {
+    	$scope.play(HTTPService.getMP3musicURL($scope.playlist[$scope.indexPlaylist].id, null));
+    }
+  }
+
+  $scope.formatedDuration = function(duration) {
+    var minutes = Math.floor(duration / 60);
+    var seconds = duration - minutes * 60;
+    return n(minutes) + ":" + n(seconds);
+  }
+
+  $scope.moreInformation = function(music) {
+  	$scope.infomusic = music;
   }
 
 }]);
