@@ -69,8 +69,13 @@
 						.left
 							%i.fi-music
 							{{ myplaylist.name }}
-						.right
+						.right.relative
 							%i.fi-info
 							%i.fi-plus
-							%i.fi-x
+							%i.fi-x{ "ng-click" => "toDelete = myplaylist" }
+							.pophover{ "ng-show" => "myplaylist == toDelete" }
+								%ul.no-bullet.clearfix
+									%li.small-12.columns Are you sure to delete this playlist ?
+									%li.choice.small-6.columns{ "ng-click" => "removePlaylist(myplaylist)" } Yes
+									%li.choice.small-6.columns{ "ng-click" => "toDelete = false" } No
 					%hr

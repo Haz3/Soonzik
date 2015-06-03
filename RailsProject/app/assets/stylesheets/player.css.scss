@@ -174,6 +174,7 @@
 	color: #B0B0B0;
 	max-width: 800px;
   z-index: 50;
+  overflow: auto;
 
 	h2 {
 		padding-top: 20px;
@@ -207,6 +208,38 @@
 
 	i {
 		cursor: pointer;
+		position: relative;
+	}
+
+	.relative {
+		position: relative;
+	}
+
+	.pophover {
+		position: absolute;
+	  top: 10px;
+	  cursor: pointer;
+	  background: #1C1E1F;
+	  right: 20px;
+	  width: 300px;
+	  border: 1px solid #8D8D8D;
+	  z-index: 9;
+	  text-align: center;
+	  padding: 5px 0 5px 0;
+
+	  ul {
+	  	margin-bottom: 0;
+	  	padding: 0;
+	  }
+
+		ul li.choice {
+			cursor: pointer;
+
+			&:hover {
+				background: #008CBA;
+				color: #1C1E1F;
+			}
+		}
 	}
 
 	-webkit-transition: right 1.5s ease;
@@ -214,4 +247,10 @@
 	-ms-transition: right 1.5s ease;
 	-o-transition: right 1.5s ease;
 	transition: right 1.5s ease;
+}
+
+@media (max-width: 640px) {
+	#currentPlaylist > div {
+		height: auto;
+	}
 }

@@ -20,6 +20,7 @@ SoonzikApp.controller("PlayerCtrl", ["$scope", "$rootScope", "HTTPService", "Not
   $scope.myPlaylists = [];
 
   $scope.infomusic = false;
+  $scope.toDelete = false;
 
   function n(n){
     return n > 9 ? "" + n: "0" + n;
@@ -60,7 +61,7 @@ SoonzikApp.controller("PlayerCtrl", ["$scope", "$rootScope", "HTTPService", "Not
     resizeHiddenPlaylist();
 
     if ($scope.user != false) {
-	    HTTPService.findPlaylist([{ key: "user_id", value: $scope.user.id }]).then(function(response) {
+	    HTTPService.findPlaylist([{ key: "attribute[user_id]", value: $scope.user.id }]).then(function(response) {
 	    	$scope.myPlaylists = response.data.content;
   			$scope.loading = false;
 	    }, function(error) {
@@ -253,6 +254,30 @@ SoonzikApp.controller("PlayerCtrl", ["$scope", "$rootScope", "HTTPService", "Not
 
   $scope.moreInformation = function(music) {
   	$scope.infomusic = music;
+  }
+
+  $scope.removePlaylist = function(playlist) {
+  	console.log($scope.myPlaylists);
+  	SecureAuth.securedTransaction(function(key, user_id) {
+  		var params = [
+  			{ key: "id", value: playlist.id},
+  			{ key: "user_id", value: user_id},
+  			{ key: "secureKey", value: key }
+  		];
+  		HTTPService.destroyPlaylist(params).then(function() {
+  			for (var indexOfMyPlaylist in $scope.myPlaylists) {
+  				if ($scope.myPlaylists[indexOfMyPlaylist].id == playlist.id) {
+  					$scope.myPlaylists.splice(indexOfMyPlaylist, 1);
+  					break;
+  				}
+  			}
+  			console.log($scope.myPlaylists);
+  		}, function(error) {
+  			NotificationService.error("Error while deleting the playlist : " + playlist.name);
+  		});
+  	}, function(error) {
+  		NotificationService.error("Error while deleting the playlist : " + playlist.name);
+  	});
   }
 
 }]);

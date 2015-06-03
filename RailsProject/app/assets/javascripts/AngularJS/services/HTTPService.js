@@ -80,6 +80,9 @@ SoonzikApp.factory('HTTPService', ['$http', '$location', 'Upload', function ($ht
     },
     findPlaylist: function(parameters) {
       return $http.get("http://api." + url + '/playlists/find' + urlParametersFormat(parameters));
+    },
+    destroyPlaylist: function(parameters) {
+      return $http.get("http://api." + url + "/playlists/destroy" + urlParametersFormat(parameters))
     }
   }
 }]);
