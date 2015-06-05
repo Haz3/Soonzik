@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="nav_names">
+        <item>News</item>
+        <item>Profile</item>
+        <item>Explorer</item>
+        <item>Packs</item>
+        <item>AroundMe</item>
+        <item>Battle</item>
+        <item>Playlists</item>
+        <item>Friends</item>
+        <item>Cart</item>
+        <item>Log In</item>
+    </string-array>
+
+    <string-array name="nav_classes">
+        <item>com.soonzik.testsupermodel.NewsListFragment</item>
+        <item>com.soonzik.testsupermodel.UserProfileFragment</item>
+        <item>com.soonzik.testsupermodel.ExplorerFragment</item>
+        <item>com.soonzik.testsupermodel.PacksListFragment</item>
+        <item>com.soonzik.testsupermodel.AroundMeFragment</item>
+        <item>com.soonzik.testsupermodel.BattlesListFragment</item>
+        <item>com.soonzik.testsupermodel.PlaylistsListFragment</item>
+        <item>com.soonzik.testsupermodel.FriendsListFragment</item>
+        <item>com.soonzik.testsupermodel.CartFragment</item>
+        <item>com.soonzik.testsupermodel.LoginFragment</item>
+    </string-array>
+    
+</resources>
