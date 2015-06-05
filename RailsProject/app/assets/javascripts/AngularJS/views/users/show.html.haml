@@ -25,7 +25,7 @@
           %i.step.fi-social-google-plus.size-42
     .large-12.large-centered.columns{ 'ng-if' => 'show.user.isArtist' }
       .top-songs
-        %h1.subheader
+        %h1.subheader.lato
           Top Songs
         %table.radius
           %thead.radius
@@ -51,31 +51,31 @@
                   %i.fi-play
               %td{:width => '50'} +
       .albums
-        %h1.subheader
+        %h1.subheader.lato
           Albums
-          .row{ 'ng-repeat' => 'album in show.user.albums track by $index' }
-            .panel.clearfix
-              %img{ "ng-src" => '{{album.image}}' }
-              %table.right
-                %thead
-                  %tr
-                    %th{ colspan: '5' } {{album.title}}
-                %tbody
-                  %tr{ 'ng-repeat' => 'song in album.musics track by $index' }
-                    %td{:width => '50'}
-                      {{$index + 1 }}
-                    %td{:width => '300'}
-                      {{song.title}}
-                    %td{:width => '100'}
-                      {{song.duration}}
-                    %td{:width => '50'}
-                      {{song.price}}
-                    %td{:width => '50'}
-                      %music{ "music-object" => "song", artist: "show.user.username" }
-                        %i.fi-play
-                    %td{:width => '50'} +
-              %hr
-              %p {{ album.yearProd }} - {{ show.user.username }}
+        .row{ 'ng-repeat' => 'album in show.user.albums track by $index' }
+          .panel.clearfix
+            %img{ "ng-src" => "{{'/assets/albums/' + album.image}}" }
+            %table.right
+              %thead
+                %tr
+                  %th{ colspan: '5' } {{album.title}}
+              %tbody
+                %tr{ 'ng-repeat' => 'song in album.musics track by $index' }
+                  %td{:width => '50'}
+                    {{$index + 1 }}
+                  %td{:width => '300'}
+                    {{song.title}}
+                  %td{:width => '100'}
+                    {{song.duration}}
+                  %td{:width => '50'}
+                    {{song.price}}
+                  %td{:width => '50'}
+                    %music{ "music-object" => "song", artist: "show.user.username" }
+                      %i.fi-play
+                  %td{:width => '50'} +
+            %hr
+            %p {{ album.yearProd }} - {{ show.user.username }}
       .packsImplicated
         %h1.subheader
           Packs

@@ -76,13 +76,17 @@ SoonzikApp.factory('HTTPService', ['$http', '$location', 'Upload', function ($ht
       return $http.post("http://api." + url + '/battles/' + battleId + '/vote', parameters);
     },
     getMP3musicURL: function(id, parameters) {
+      console.log(id, parameters);
       return "http://api." + url + '/musics/get/' + id + urlParametersFormat(parameters);
     },
     findPlaylist: function(parameters) {
       return $http.get("http://api." + url + '/playlists/find' + urlParametersFormat(parameters));
     },
     destroyPlaylist: function(parameters) {
-      return $http.get("http://api." + url + "/playlists/destroy" + urlParametersFormat(parameters))
+      return $http.get("http://api." + url + "/playlists/destroy" + urlParametersFormat(parameters));
+    },
+    deleteFromPlaylist: function(parameters) {
+      return $http.get("http://api." + url + "/musics/delfromplaylist" + urlParametersFormat(parameters));
     }
   }
 }]);

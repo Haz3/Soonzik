@@ -19,8 +19,9 @@ SoonzikApp.controller("PlayerCtrl", ["$scope", "$rootScope", "HTTPService", "Not
 
   $scope.myPlaylists = [];
 
-  $scope.infomusic = false;
+  $scope.infomusic = { current: false, playlist: false };
   $scope.toDelete = false;
+  $scope.toRead = false;
 
   function n(n){
     return n > 9 ? "" + n: "0" + n;
@@ -63,6 +64,19 @@ SoonzikApp.controller("PlayerCtrl", ["$scope", "$rootScope", "HTTPService", "Not
     if ($scope.user != false) {
 	    HTTPService.findPlaylist([{ key: "attribute[user_id]", value: $scope.user.id }]).then(function(response) {
 	    	$scope.myPlaylists = response.data.content;
+	    	for (var i in $scope.myPlaylists) {
+	    		$scope.myPlaylists[i].extend = false;
+	    		$scope.myPlaylists[i].share = false;
+	    		$scope.myPlaylists[i].url = 'http://lvh.me:3000/playlists/' + $scope.myPlaylists[i].id;
+
+	    		var duration = 0;
+	    		for (var j = 0 ; j < $scope.myPlaylists[i].musics.length ; j++) {
+	    			duration += $scope.myPlaylists[i].musics[j].duration;
+	    		}
+
+	    		$scope.myPlaylists[i].duration = duration;
+
+	    	}
   			$scope.loading = false;
 	    }, function(error) {
 	    	NotificationService.error("Error : Can't get your playlist");
@@ -170,6 +184,8 @@ SoonzikApp.controller("PlayerCtrl", ["$scope", "$rootScope", "HTTPService", "Not
 	  	$("#currentPlaylist").css("right", 0);
   	} else {
 	  	$("#currentPlaylist").css("right", -$("#currentPlaylist").width() - 100);
+	  	$scope.toRead = false;
+	  	unshareEverything();
   	}
   }
 
@@ -229,7 +245,11 @@ SoonzikApp.controller("PlayerCtrl", ["$scope", "$rootScope", "HTTPService", "Not
 
   $scope.pausePlayer = function() {
   	if ($scope.loaded && $scope.wavesurfer) {
-  		$scope.wavesurfer.playPause();
+  		if ($scope.paused == true && $scope.wavesurfer.getCurrentTime() == 0) {
+  			$scope.playFromPlaylist($scope.indexPlaylist);
+  		} else {
+  			$scope.wavesurfer.playPause();
+  		}
   	}
   }
 
@@ -252,12 +272,7 @@ SoonzikApp.controller("PlayerCtrl", ["$scope", "$rootScope", "HTTPService", "Not
     return n(minutes) + ":" + n(seconds);
   }
 
-  $scope.moreInformation = function(music) {
-  	$scope.infomusic = music;
-  }
-
   $scope.removePlaylist = function(playlist) {
-  	console.log($scope.myPlaylists);
   	SecureAuth.securedTransaction(function(key, user_id) {
   		var params = [
   			{ key: "id", value: playlist.id},
@@ -271,7 +286,6 @@ SoonzikApp.controller("PlayerCtrl", ["$scope", "$rootScope", "HTTPService", "Not
   					break;
   				}
   			}
-  			console.log($scope.myPlaylists);
   		}, function(error) {
   			NotificationService.error("Error while deleting the playlist : " + playlist.name);
   		});
@@ -280,4 +294,78 @@ SoonzikApp.controller("PlayerCtrl", ["$scope", "$rootScope", "HTTPService", "Not
   	});
   }
 
+  $scope.infoForMusic = function(music, panel) {
+  	if (panel == "current") {
+  		$scope.infomusic.current = music;
+  	} else {
+  		$scope.infomusic.playlist = music;
+  	}
+  }
+
+  $scope.addToCurrentPlaylist = function(playlist) {
+  	for (var i = 0 ; i < playlist.length ; i++) {
+  		var isIn = false;
+  		for (var j = 0 ; j < $scope.playlist.length ; j++) {
+  			if ($scope.playlist[j].obj.id == playlist[i].id) { isIn = true; }
+  		}
+  		if (!isIn) {
+  			$scope.playlist.push({ title: playlist[i].title, id: playlist[i].id, obj: playlist[i] });
+  		}
+  	}
+  	return false;
+  }
+
+  $scope.replaceToCurrentPlaylist = function(playlist) {
+  	var paused = $scope.paused;
+  	$scope.wavesurfer.stop();
+	  $scope.wavesurfer.seekTo(0);
+  	$scope.wavesurfer.load("");
+  	$scope.wavesurfer.empty();
+  	$scope.playlist = [];
+  	for (var i = 0 ; i < playlist.length ; i++) {
+  		$scope.playlist.push({ title: playlist[i].title, id: playlist[i].id, obj: playlist[i] });
+  	}
+  	$scope.indexPlaylist = 0;
+  	if (paused == false) {
+  		$scope.playFromPlaylist(0);
+  	}
+  	return false;
+  }
+
+  $scope.removeFromPlaylist = function(music, playlist) {
+  	SecureAuth.securedTransaction(function(key, user_id) {
+  		var parameters = [
+  			{ key: "id", value: music.id},
+  			{ key: "playlist_id", value: playlist.id},
+  			{ key: "user_id", value: user_id},
+  			{ key: "secureKey", value: key }
+  		];
+  		HTTPService.deleteFromPlaylist(parameters).then(function() {
+  			for (var i = 0 ; i < playlist.musics.length ; i++) {
+  				if (playlist.musics[i].id == music.id) {
+  					playlist.musics.splice(i, 1);
+  					break;
+  				}
+  			}
+  		}, function(error) {
+  			NotificationService.error("Error while deleting the music from the playlist");
+  		});
+  	}, function(error) {
+  		NotificationService.error("Error while deleting the music from the playlist");
+  	})
+  }
+
+  $scope.unshare = function(myplaylist) {
+  	myplaylist.share = false;
+  }
+
+  $scope.readInfo = function(value) {
+  	$scope.toRead = value;
+  }
+
+  var unshareEverything = function() {
+  	for (var i = 0 ; i < $scope.myPlaylists.length ; i++) {
+  		$scope.unshare($scope.myPlaylists[i]);
+  	}
+  }
 }]);

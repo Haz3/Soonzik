@@ -40,6 +40,7 @@
 //= require ./AngularJS/directives/loading.js
 //= require ./AngularJS/directives/music.js
 //= require ./AngularJS/directives/onScroll.js
+//= require ./AngularJS/directives/selectOnClick.js
 //= require ./AngularJS/directives/submitInput.js
 //= require ./AngularJS/directives/wavesurfer.js
 //= require ./AngularJS/services/SecureAuth.js

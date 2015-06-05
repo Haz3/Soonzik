@@ -11,6 +11,8 @@
  * file per style scope.
  *
  *= require_tree .
+ *= require ./fonts/Drakolomb.css
+ *= require ./fonts/Lato-Regular.css
  *= stub active_admin
  *= require_self
  * require foundation_and_overrides
