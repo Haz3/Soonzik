@@ -32,7 +32,10 @@ SoonzikApp.factory('HTTPService', ['$http', '$location', 'Upload', function ($ht
     	return $http.get("http://api." + url + '/users/' + user_id + '/friends')
     },
     getFollowers: function (user_id) {
-    	return $http.get("http://api." + url + '/users/' + user_id + '/followers')
+      return $http.get("http://api." + url + '/users/' + user_id + '/followers')
+    },
+    getFollows: function (user_id) {
+      return $http.get("http://api." + url + '/users/' + user_id + '/follows')
     },
     isArtist: function (user_id) {
     	return $http.get("http://api." + url + '/users/' + user_id + '/isartist')
@@ -87,6 +90,12 @@ SoonzikApp.factory('HTTPService', ['$http', '$location', 'Upload', function ($ht
     },
     deleteFromPlaylist: function(parameters) {
       return $http.get("http://api." + url + "/musics/delfromplaylist" + urlParametersFormat(parameters));
+    },
+    follow: function(parameters) {
+      return $http.post("http://api." + url + "/users/follow", parameters);
+    },
+    unfollow: function(parameters) {
+      return $http.post("http://api." + url + "/users/unfollow", parameters);
     }
   }
 }]);

@@ -21,7 +21,6 @@
 //= require ./tools/messenger-theme-future.js
 //= require ./tools/raphael-min.js
 //= require ./tools/morris.min.js
-//= require websocket_rails/main
 //= require angular
 //= require angular-animate
 //= require angular-cookies

@@ -16,6 +16,8 @@ Rails.application.config.assets.precompile << Proc.new do |path|
   end
 end
 
+Rails.application.config.assets.precompile += %w(websocket_rails/main.js)
+
 =begin
 #JS
 Rails.application.config.assets.precompile += %w(accesses.js)

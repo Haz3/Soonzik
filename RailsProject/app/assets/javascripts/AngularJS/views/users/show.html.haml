@@ -1,4 +1,4 @@
-%div{ "ng-init" => "showInit()" }
+.userProfile{ "ng-init" => "showInit()" }
   %loading{ "ng-if" => "loading == true" }
   .row{ "ng-if" => "loading == false" }
     /#notice= notice
@@ -14,8 +14,8 @@
         .nb-followers.text-center
           {{ show.user.followers.length }}
           Followers
-          .button.tiny.expand.info.radius
-            Follow
+          .button.tiny.expand.radius{ "ng-if" => "user != false && user.id != show.user.id", "ng-class" => "isaFollower() ? 'success follow' : 'info notfollow'", "ng-click" => "isaFollower() ? unfollow() : follow()" }
+            {{ isaFollower() ? 'Following' : 'Follow' }}
       .social-network.text-center
         %a{:href => '{{show.user.facebook}}'}
           %i.step.fi-social-facebook.size-42
@@ -81,5 +81,10 @@
           Packs
         .panel
           Packs dans lequel est présent l'artiste
-    .playlist{ 'ng-if' => '!show.user.isArtist' }
-      Coucou je vais afficher des playlists
+    .playlist
+      %ul.pricing-table.small-12.medium-4.large-3.columns{ "ng-repeat" => "playlist in show.playlists", "ng-class" => "$last ? 'end' : ''" }
+        %li.title {{ playlist.name }}
+        %li.price {{ playlist.musics.length }} musics
+        %li.description Duration (total) {{ formatTime(playlist.duration) }}
+        %li.cta-button
+          %a.button{ href: "#" } More...

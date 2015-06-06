@@ -1,4 +1,4 @@
-%div{ "ng-controller" => "ChatCtrl", "ng-init" => "chatInit()" }
+%div{ "ng-controller" => "ChatCtrl", "ng-show" => "available", "ng-init" => "chatInit()" }
 	.conversation.clearfix{ "ng-style" => "conversationStyle"}
 		.miniConversationWindow{ "ng-if" => "miniChat().length > 0" }
 			.appendMiniConversationWindow

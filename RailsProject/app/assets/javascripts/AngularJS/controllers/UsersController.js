@@ -1,6 +1,7 @@
 SoonzikApp.controller('UsersCtrl', ['$scope', "$routeParams", 'SecureAuth', 'HTTPService', 'NotificationService', '$timeout', 'Upload', function ($scope, $routeParams, SecureAuth, HTTPService, NotificationService, $timeout, Upload) {
 	$scope.loading = true;
 
+	$scope.user = false;
 	$scope.show = {};
 	$scope.form = { user: {} };
 	$scope.formError = {
@@ -37,6 +38,11 @@ SoonzikApp.controller('UsersCtrl', ['$scope', "$routeParams", 'SecureAuth', 'HTT
 	$scope.days = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31];
 
 	$scope.showInit = function () {
+		var current_user = SecureAuth.getCurrentUser();
+		if (current_user.id != null && current_user.token != null && current_user.username != null) {
+			$scope.user = current_user;
+			$scope.user.followers = [];
+		}
 		var id = $routeParams.id;
 
 		HTTPService.getProfile(id).then(function(profile) {
@@ -45,6 +51,7 @@ SoonzikApp.controller('UsersCtrl', ['$scope', "$routeParams", 'SecureAuth', 'HTT
 			var dataProfile = profile.data.content;
 			// Initialisation of the user profile
 			$scope.show.user = {
+				id: id,
 				username: dataProfile.username,
 				image: dataProfile.image,
 				facebook: linkToNothing(dataProfile.facebook),
@@ -77,6 +84,37 @@ SoonzikApp.controller('UsersCtrl', ['$scope', "$routeParams", 'SecureAuth', 'HTT
 				}, function(error) {
 					// error management to do
 					NotificationService.error("An error occured while loading the followers of this profile");
+				});
+
+				/* get our follows (for the follow button) */
+				if ($scope.user != false) {
+					HTTPService.getFollows($scope.user.id).then(function(followersInformation) {
+						// Load the followers of the user
+						$scope.user.followers = followersInformation.data.content;
+					}, function(error) {
+						NotificationService.error("An error occured while loading the followers of your profile");
+					});
+				}
+
+				HTTPService.findPlaylist([{ key: "attribute[user_id]", value: $scope.show.user.id }]).then(function(followersInformation) {
+					$scope.show.playlists = followersInformation.data.content;
+
+					for (var i = 0 ; i < $scope.show.playlists.length ; i++) {
+						var duration = 0;
+
+						console.log(i);
+						console.log($scope.show.playlists[i].musics);
+						console.log($scope.show.playlists[i].musics);
+						for (var j = 0 ; j < $scope.show.playlists[i].musics.length ; j++) {
+							duration += $scope.show.playlists[i].musics[j].duration;
+						}
+
+						console.log(duration);
+						$scope.show.playlists[i].duration = duration;
+					}
+				}, function(error) {
+					// error management to do
+					NotificationService.error("An error occured while loading the playlists of this profile");
 				});
 
 				/*- End isArtist -*/
@@ -229,6 +267,51 @@ SoonzikApp.controller('UsersCtrl', ['$scope', "$routeParams", 'SecureAuth', 'HTT
     }
 	}
 
+	$scope.follow = function() {
+		if ($scope.user != false) {
+			SecureAuth.securedTransaction(function (key, user_id) {
+				var parameters = {
+					secureKey: key,
+					user_id: user_id,
+					follow_id: $scope.show.user.id
+				};
+				HTTPService.follow(parameters).then(function(followResponse) {
+					$scope.user.followers.push($scope.show.user);
+					console.log(followResponse);
+				}, function(error) {
+					NotificationService.error("An error occured while following an user");
+				});
+			}, function(error) {
+				NotificationService.error("An error occured while following an user");
+			});
+		}
+	}
+
+	$scope.unfollow = function() {
+		if ($scope.user != false) {
+			SecureAuth.securedTransaction(function (key, user_id) {
+				var parameters = {
+					secureKey: key,
+					user_id: user_id,
+					follow_id: $scope.show.user.id
+				};
+				HTTPService.unfollow(parameters).then(function(followResponse) {
+					for (var i = 0; i < $scope.user.followers.length ; i++) {
+			  		if ($scope.user.followers[i].id == $scope.show.user.id) {
+			  			$scope.user.followers.splice(i, 1);
+			  			break;
+			  		}
+			  	}
+					console.log(followResponse);
+				}, function(error) {
+					NotificationService.error("An error occured while following an user");
+				});
+			}, function(error) {
+				NotificationService.error("An error occured while following an user");
+			});
+		}
+	}
+
 	/* Utils function */
 
 	$scope.range = function(n) {
@@ -246,4 +329,13 @@ SoonzikApp.controller('UsersCtrl', ['$scope', "$routeParams", 'SecureAuth', 'HTT
   	return min + ":" + sec;
   }
 
+  $scope.isaFollower = function() {
+  	if ($scope.user != false) {
+	  	for (var i = 0; i < $scope.user.followers.length ; i++) {
+	  		if ($scope.user.followers[i].id == $scope.show.user.id)
+	  			return true;
+	  	}
+  	}
+  	return false;
+  }
 }]);
