@@ -15,24 +15,47 @@
  *= require ./fonts/Lato-Regular.css
  *= stub active_admin
  *= require_self
- * require foundation_and_overrides
+ *
 
  */
 
-@import "foundation_and_overrides";
 /* Add imports of custom sass/scss files here */
 
 @import "foundation-icons";
 
+html {
+	height: 100vh;
+}
+
+body {
+	min-height: 100%;
+}
+
 html, body {
-	height: 100%;
 	margin: 0;
 	padding: 0;
 }
 
+header {
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+
 main.row {
-	margin-bottom: 80px;
-	padding-bottom: 30px;
+	min-height: 100%;
+  background: whitesmoke;
+  padding-top: 65px;
+  padding-left: 20px;
+  padding-right: 20px;
+
+  & > small.error {
+  	margin-top: 0;
+  }
+
+  & > .large-12 > div {
+	  padding-bottom: 60px;
+  }
 }
 
 .soonzik-logo {
@@ -139,4 +162,72 @@ main.row {
 
 music {
 	cursor: pointer;
+}
+
+.pricing-table li.title {
+	background: #6B6B6B;
+}
+
+.pricing-table li.price {
+	color: #6B6B6B;
+}
+
+.relative {
+	position: relative;
+}
+
+.mytooltip {
+	background: rgba(0, 0, 0, 0.7);
+	position: absolute;
+	top: 35px;
+	cursor: pointer;
+	color: white;
+	left: 0;
+	right: 0;
+	width: 300px;
+	z-index: 2;
+	text-align: center;
+	padding: 5px;
+  margin-bottom: 60px;
+
+	&.toolleft {
+		left: 20px;
+		right: initial;
+
+		&:before {
+		  right: initial;
+		}
+	}
+
+	&.toolright {
+		right: 20px;
+		left: initial;
+
+		&:before {
+		  left: initial;
+		}
+	}
+
+	&:before {
+		top: -20px;
+	  bottom: auto;
+	  content: "";
+	  left: 0;
+	  right: 0;
+	  position: absolute;
+	  border-width: 10px;
+	  border-style: solid;
+	  border-color: transparent transparent rgba(0, 0, 0, 0.7) transparent;
+	  display: block;
+	  width: 0;
+	}
+
+	.choice {
+		cursor: pointer;
+
+		&:hover {
+			background: black;
+			color: #008CBA;
+		}
+	}
 }

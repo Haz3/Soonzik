@@ -79,8 +79,10 @@ SoonzikApp.factory('HTTPService', ['$http', '$location', 'Upload', function ($ht
       return $http.post("http://api." + url + '/battles/' + battleId + '/vote', parameters);
     },
     getMP3musicURL: function(id, parameters) {
-      console.log(id, parameters);
       return "http://api." + url + '/musics/get/' + id + urlParametersFormat(parameters);
+    },
+    getPlaylist: function(id) {
+      return $http.get("http://api." + url + '/playlists/' + id);
     },
     findPlaylist: function(parameters) {
       return $http.get("http://api." + url + '/playlists/find' + urlParametersFormat(parameters));
@@ -96,6 +98,15 @@ SoonzikApp.factory('HTTPService', ['$http', '$location', 'Upload', function ($ht
     },
     unfollow: function(parameters) {
       return $http.post("http://api." + url + "/users/unfollow", parameters);
+    },
+    getMusic: function(id) {
+      return $http.get("http://api." + url + "/musics/" + id);
+    },
+    savePlaylist: function(parameters) {
+      return $http.post("http://api." + url + "/playlists/save", parameters);
+    },
+    addToPlaylist: function(parameters) {
+      return $http.post("http://api." + url + "/musics/addtoplaylist", parameters);
     }
   }
 }]);

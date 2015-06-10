@@ -9,6 +9,7 @@
 	height: 60px;
 	background: #121314;
 	font-family: Roboto;
+	z-index: 4;
 
 	div {
 		height: 60px;
@@ -205,6 +206,30 @@
 	.currentList {
 		overflow: auto;
 		padding-bottom: 10px;
+
+		.moreless {
+			.pophover {
+				
+			}
+
+			span {
+				padding: 5px;
+				margin-left: 5px;
+				margin-right: 5px;
+				cursor: pointer;
+
+				&.divider {
+					padding: 0;
+					margin: 0;
+					border-left: 1px solid whitesmoke;
+					border-right: 1px solid whitesmoke;
+				}
+
+				&:hover {
+					background: rgb(69, 69, 69);
+				}
+			}
+		}
 
 		.musicInformations {
 			border: 1px solid #DDD;

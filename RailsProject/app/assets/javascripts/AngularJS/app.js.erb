@@ -7,7 +7,8 @@ SoonzikApp.config(['$routeProvider', '$locationProvider', '$httpProvider', funct
 	var whitelist = [
 		/\/users\/[0-9]+\/finish_signup/,
 		/\/users\/sign_in/,
-		/\/users\/sign_up/,
+    /\/users\/sign_up/,
+		/\/users\/sign_out/,
 		/\/users\/password\/new/
 	];
 
@@ -36,6 +37,9 @@ SoonzikApp.config(['$routeProvider', '$locationProvider', '$httpProvider', funct
     }).when('/battles/:id', {
       templateUrl: '<%= asset_path("AngularJS/views/battles/show.html.haml") %>',
       controller: 'BattlesCtrl'
+    }).when('/playlists/:id', {
+      templateUrl: '<%= asset_path("AngularJS/views/playlists/show.html.haml") %>',
+      controller: 'PlaylistsCtrl'
     });
   }
 

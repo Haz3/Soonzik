@@ -55,6 +55,10 @@
                   %li
                     %a.button.secondary.expand.radius{:href => new_user_session_path, :class => "log-in info", :target => "_self" } Log In
     %main.row
+      - if notice
+        %small.error= notice
+      -if alert
+        %small.error= alert
       .large-12{"ng-view" => true}
       =yield
       - if user_signed_in?  

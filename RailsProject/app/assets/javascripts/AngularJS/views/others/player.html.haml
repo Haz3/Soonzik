@@ -4,11 +4,11 @@
 			.controls
 				%a.hide-for-medium-up.toHide
 					%i.fi-eject
-				%a
+				%a{ "ng-click" => "previous()" }
 					%i.fi-previous
 				%a{ "ng-click" => "pausePlayer()" }
 					%i{ "ng-class" => "(paused) ? 'fi-play' : 'fi-pause'" }
-				%a
+				%a{ "ng-click" => "next()" }
 					%i.fi-next
 				.volumeBlock
 					%a
@@ -29,10 +29,33 @@
 			%div
 				%span.button.small.alert{ "ng-click" => "cleanPlaylist()" }
 					%i.fi-trash
-					Clean  
-				%span.button.small.info
+					Clean
+				%span.button.small.info{ "ng-click" => "moreClick()" }
 					%i.fi-widget
-					More...
+					{{ (more.btn == false) ? "More..." : "Less..." }}
+				.small-12.moreless{ "ng-show" => "more.btn == true" }
+					.left.relative
+						.pophover.popleft{ "ng-show" => "more.pop == 'share'" }
+							%ul.no-bullet
+								%li Share !
+								%li
+									%input{ type: "text", "ng-value" => "tmpPlaylistLink()", readonly: "readonly", "select-on-click" => true }
+								%li.choice{ "ng-click" => "setMorePop(false)" } Close
+					%span{ "ng-click" => "setMorePop('share')" }
+						%i.fi-share.blue
+						Share
+					%span.divider
+					%span{ "ng-click" => "setMorePop('save')" }
+						%i.fi-save.blue
+						Save as new Playlist
+					.right.relative
+						.pophover.popright{ "ng-show" => "more.pop == 'save'" }
+							%ul.no-bullet
+								%li Save the playlist as :
+								%li
+									%input{ type: "text", "ng-model" => "newPlaylistFromCurrent.name" }
+								%li.choice{ "ng-click" => "savePlaylistFromCurrent()" } Save
+								%li.choice{ "ng-click" => "setMorePop(false)" } Close
 			.clearfix.small-12.musicInformations{ "ng-show" => "infomusic.current != false" }
 				%i.fi-x.right.red{ "ng-click" => "infoForMusic(false, 'current')" }
 				%ul.square.left.text-left
@@ -62,6 +85,14 @@
 		.myPlaylist.medium-6.columns{ "ng-if" => "user != false" }
 			%h2.drakolomb Your playlists
 			%loading{ "ng-if" => "loading" }
+			.row.collapse
+				.small-4.columns
+					%span.prefix
+						%label.inline{ "for" => "playlistName" } Name :
+				.small-6.columns
+					%input{ id: "playlistName", type: "text", placeholder: "New Playlist", "ng-model" => "newItem.name" }
+				.small-2.columns
+					.button.postfix{ "ng-click" => "createPlaylist()" } Save
 			.clearfix.small-12.musicInformations{ "ng-show" => "infomusic.playlist != false" }
 				%i.fi-x.right.red{ "ng-click" => "infoForMusic(false, 'playlist')" }
 				%ul.square.left.text-left
@@ -88,7 +119,7 @@
 							{{ myplaylist.name }} - Durée : {{ formatedDuration(myplaylist.duration) }}
 						.pophover.popleft.radius-10{ "ng-if" => "toRead == myplaylist" }
 							%ul.no-bullet.clearfix
-								%li.small-12.choice{ "ng-click" => "toRead = replaceToCurrentPlaylist(myplaylist.musics)" }
+								%li.small-12.choice{ "ng-click" => "replaceToCurrentPlaylist(myplaylist.musics)" }
 									Replace the current playlist
 								%li.small-12.choice{ "ng-click" => "toRead = addToCurrentPlaylist(myplaylist.musics)" }
 									Add to the current playlist
@@ -105,7 +136,7 @@
 									%li.small-12.choice{ "ng-click" => "unshare(myplaylist)" } Close
 							%i{ "ng-class" => "myplaylist.extend == false ? 'fi-plus green' : 'fi-minus red'", "ng-click" => "myplaylist.extend = !myplaylist.extend" }
 							%i.fi-x.red{ "ng-click" => "toDelete = myplaylist" }
-							.pophover.radius-10{ "ng-show" => "myplaylist == toDelete" }
+							.pophover.popright.radius-10{ "ng-show" => "myplaylist == toDelete" }
 								%ul.no-bullet.clearfix
 									%li.small-12.columns Are you sure to delete this playlist ?
 									%li.choice.small-6.columns{ "ng-click" => "removePlaylist(myplaylist)" } Yes

@@ -22,6 +22,9 @@ SoonzikApp.controller("PlayerCtrl", ["$scope", "$rootScope", "HTTPService", "Not
   $scope.infomusic = { current: false, playlist: false };
   $scope.toDelete = false;
   $scope.toRead = false;
+  $scope.newItem = { name: "" }
+  $scope.newPlaylistFromCurrent = { name: "" }
+  $scope.more = { btn: false, pop: false };
 
   function n(n){
     return n > 9 ? "" + n: "0" + n;
@@ -97,15 +100,7 @@ SoonzikApp.controller("PlayerCtrl", ["$scope", "$rootScope", "HTTPService", "Not
     	$scope.indexPlaylist = $scope.playlist.length - 1;
     }
     
-    if ($scope.user != false) {
-    	SecureAuth.securedTransaction(function(key, user_id) {
-    		$scope.play(HTTPService.getMP3musicURL(dataObject.id, [{ key: "user_id", value: user_id}, { key: "secureKey", value: key }]));
-    	}, function(error) {
-    		NotificationService.error("Error while loading the music : " + dataObject.title);
-    	});
-    } else {
-    	$scope.play(HTTPService.getMP3musicURL(dataObject.id, null));
-    }
+    securePlay(dataObject);
   });
 
   $scope.$on('wavesurferInit', function (e, wavesurfer) {
@@ -124,8 +119,10 @@ SoonzikApp.controller("PlayerCtrl", ["$scope", "$rootScope", "HTTPService", "Not
 	  	if (($scope.indexPlaylist == $scope.playlist.length && $scope.shuffle == false) ||
 	  		($scope.shuffle == true && $scope.playlist.length <= 1)) {
 	      $scope.paused = true;
-	      $scope.wavesurfer.seekTo(0);
+	      $scope.wavesurfer.stop(0);
 	      $scope.timeFormated = "";
+        $scope.indexPlaylist = 0;
+        $scope.wavesurfer.empty();
 	  	} else {
 	  		if ($scope.shuffle == true) {
 		  		var nextTrack = 0;
@@ -135,15 +132,7 @@ SoonzikApp.controller("PlayerCtrl", ["$scope", "$rootScope", "HTTPService", "Not
 		  		$scope.indexPlaylist = nextTrack;
 	  		}
 
-		    if ($scope.user != false) {
-		    	SecureAuth.securedTransaction(function(key, user_id) {
-		    		$scope.play(HTTPService.getMP3musicURL($scope.playlist[$scope.indexPlaylist].id, [{ key: "user_id", value: user_id}, { key: "secureKey", value: key }]));
-		    	}, function(error) {
-		    		NotificationService.error("Error while loading the music : " + $scope.playlist[$scope.indexPlaylist].title);
-		    	});
-		    } else {
-		    	$scope.play(HTTPService.getMP3musicURL($scope.playlist[$scope.indexPlaylist].id, null));
-		    }
+        securePlay($scope.playlist[$scope.indexPlaylist]);
 	  	}
       $scope.$apply();
 	  });
@@ -155,8 +144,37 @@ SoonzikApp.controller("PlayerCtrl", ["$scope", "$rootScope", "HTTPService", "Not
       updateTime();
       $scope.wavesurfer.play();
 	  });
-
   });
+
+  $scope.$on('player:addPlaylist', function(event, data) {
+    var musicArray = data.list;
+
+    for (var i = 0 ; i < musicArray.length ; i++) {
+      if (isInPlaylist(musicArray[i]) == false)
+        $scope.playlist.push({ title: musicArray[i].title, id: musicArray[i].id, obj: musicArray[i] });
+    }
+
+    if ($scope.paused == true && $scope.playlist.length > 0 && $scope.indexPlaylist == 0) {
+      securePlay($scope.playlist[$scope.indexPlaylist]);
+    }
+  });
+
+  $scope.$on("player:newPlaylist", function(event, data) {
+    data.extend = false;
+    data.share = false;
+    data.url = 'http://lvh.me:3000/playlists/' + data.id;
+    $scope.myPlaylists.push(data);
+  });
+
+  $scope.$on("player:addToPlaylist", function(event, data) {
+    for (var i = 0 ; i < $scope.myPlaylists.length ; i++) {
+      if ($scope.myPlaylists[i].id == data.playlist.id) {
+        $scope.myPlaylists[i].musics.push(data.music);
+        $scope.myPlaylists[i].duration += data.music.duration;
+        return;
+      }
+    }
+  })
 
   $scope.play = function (url) {
     if (!$scope.wavesurfer) {
@@ -210,16 +228,8 @@ SoonzikApp.controller("PlayerCtrl", ["$scope", "$rootScope", "HTTPService", "Not
 	  		while (nextTrack != $scope.indexPlaylist - 1);
 	  		$scope.indexPlaylist = nextTrack;
   		}
-
-	    if ($scope.user != false) {
-	    	SecureAuth.securedTransaction(function(key, user_id) {
-	    		$scope.play(HTTPService.getMP3musicURL($scope.playlist[$scope.indexPlaylist].id, [{ key: "user_id", value: user_id}, { key: "secureKey", value: key }]));
-	    	}, function(error) {
-	    		NotificationService.error("Error while loading the music : " + $scope.playlist[$scope.indexPlaylist].title);
-	    	});
-	    } else {
-	    	$scope.play(HTTPService.getMP3musicURL($scope.playlist[$scope.indexPlaylist].id, null));
-	    }
+	    
+      securePlay($scope.playlist[$scope.indexPlaylist]);
   	}
   }
 
@@ -243,6 +253,18 @@ SoonzikApp.controller("PlayerCtrl", ["$scope", "$rootScope", "HTTPService", "Not
   	}
   }
 
+  $scope.previous = function() {
+    if ($scope.indexPlaylist == 0) {
+      if ($scope.playlist.length > 1) {
+        $scope.indexPlaylist = $scope.playlist.length - 1;
+        securePlay($scope.playlist[$scope.indexPlaylist]);
+      }
+    } else {
+      $scope.indexPlaylist--;
+      securePlay($scope.playlist[$scope.indexPlaylist]);
+    }
+  }
+
   $scope.pausePlayer = function() {
   	if ($scope.loaded && $scope.wavesurfer) {
   		if ($scope.paused == true && $scope.wavesurfer.getCurrentTime() == 0) {
@@ -253,17 +275,20 @@ SoonzikApp.controller("PlayerCtrl", ["$scope", "$rootScope", "HTTPService", "Not
   	}
   }
 
+  $scope.next = function() {
+    if ($scope.indexPlaylist < $scope.playlist.length - 1) {
+      $scope.indexPlaylist++;
+      securePlay($scope.playlist[$scope.indexPlaylist]);
+    } else {
+      $scope.indexPlaylist = 0;
+      $scope.wavesurfer.stop();
+      $scope.wavesurfer.empty();
+    }
+  }
+
   $scope.playFromPlaylist = function(index) {
   	$scope.indexPlaylist = index;
-  	if ($scope.user != false) {
-    	SecureAuth.securedTransaction(function(key, user_id) {
-    		$scope.play(HTTPService.getMP3musicURL($scope.playlist[$scope.indexPlaylist].id, [{ key: "user_id", value: user_id}, { key: "secureKey", value: key }]));
-    	}, function(error) {
-    		NotificationService.error("Error while loading the music : " + $scope.playlist[$scope.indexPlaylist].title);
-    	});
-    } else {
-    	$scope.play(HTTPService.getMP3musicURL($scope.playlist[$scope.indexPlaylist].id, null));
-    }
+  	securePlay($scope.playlist[$scope.indexPlaylist]);
   }
 
   $scope.formatedDuration = function(duration) {
@@ -280,6 +305,7 @@ SoonzikApp.controller("PlayerCtrl", ["$scope", "$rootScope", "HTTPService", "Not
   			{ key: "secureKey", value: key }
   		];
   		HTTPService.destroyPlaylist(params).then(function() {
+        $rootScope.$broadcast("deletePlaylist", playlist);
   			for (var indexOfMyPlaylist in $scope.myPlaylists) {
   				if ($scope.myPlaylists[indexOfMyPlaylist].id == playlist.id) {
   					$scope.myPlaylists.splice(indexOfMyPlaylist, 1);
@@ -312,7 +338,7 @@ SoonzikApp.controller("PlayerCtrl", ["$scope", "$rootScope", "HTTPService", "Not
   			$scope.playlist.push({ title: playlist[i].title, id: playlist[i].id, obj: playlist[i] });
   		}
   	}
-  	return false;
+    $scope.toRead = false;
   }
 
   $scope.replaceToCurrentPlaylist = function(playlist) {
@@ -329,7 +355,7 @@ SoonzikApp.controller("PlayerCtrl", ["$scope", "$rootScope", "HTTPService", "Not
   	if (paused == false) {
   		$scope.playFromPlaylist(0);
   	}
-  	return false;
+  	$scope.toRead = false;
   }
 
   $scope.removeFromPlaylist = function(music, playlist) {
@@ -363,9 +389,127 @@ SoonzikApp.controller("PlayerCtrl", ["$scope", "$rootScope", "HTTPService", "Not
   	$scope.toRead = value;
   }
 
+  $scope.createPlaylist = function() {
+    if ($scope.newItem.name.length > 0 && $scope.user != false) {
+      SecureAuth.securedTransaction(function(key, user_id) {
+        var parameters = {
+          secureKey: key,
+          user_id: user_id,
+          playlist: {
+            name: $scope.newItem.name,
+            user_id: user_id
+          }
+        };
+        $scope.newItem.name = "";
+        HTTPService.savePlaylist(parameters).then(function(response) {
+          var playlist = response.data.content;
+
+          $rootScope.$broadcast("newPlaylist", playlist);
+          playlist.extend = false;
+          playlist.share = false;
+          playlist.url = 'http://lvh.me:3000/playlists/' + playlist.id;
+          playlist.duration = 0;
+          $scope.myPlaylists.push(playlist);
+        }, function(error) {
+          NotificationService.error("Error while saving a new music in the playlist");
+        });
+      }, function(error) {
+        NotificationService.error("Error while saving a new music in the playlist");
+      });
+    }
+  }
+
   var unshareEverything = function() {
   	for (var i = 0 ; i < $scope.myPlaylists.length ; i++) {
   		$scope.unshare($scope.myPlaylists[i]);
   	}
+  }
+
+  var securePlay = function(music) {
+    if ($scope.user != false) {
+      SecureAuth.securedTransaction(function(key, user_id) {
+        $scope.play(HTTPService.getMP3musicURL(music.id, [{ key: "user_id", value: user_id}, { key: "secureKey", value: key }]));
+      }, function(error) {
+        NotificationService.error("Error while loading the music : " + $scope.playlist[$scope.indexPlaylist].title);
+      });
+    } else {
+      $scope.play(HTTPService.getMP3musicURL(music.id, null));
+    }
+  }
+
+  $scope.moreClick = function() {
+    $scope.more.btn = !$scope.more.btn;
+    if ($scope.more.btn == false) {
+      $scope.more.pop = false;
+    }
+  }
+
+  $scope.setMorePop = function(value) {
+    $scope.more.pop = value;
+  }
+
+  $scope.tmpPlaylistLink = function() {
+    var url = "http://lvh.me:3000/playlists/tmp:";
+    var pls = "";
+
+    for (var i = 0 ; i < $scope.playlist.length ; i++) {
+      url += $scope.playlist[i].id + ";";
+    }
+
+    return url + pls;
+  }
+
+  $scope.savePlaylistFromCurrent = function() {
+    if ($scope.user != false && $scope.newPlaylistFromCurrent.name.length > 0) {
+      SecureAuth.securedTransaction(function(key, user_id) {
+        var parameters = {
+          secureKey: key,
+          user_id: user_id,
+          playlist: {
+            name: $scope.newPlaylistFromCurrent.name,
+            user_id: user_id
+          }
+        };
+        $scope.newPlaylistFromCurrent.name = "";
+        HTTPService.savePlaylist(parameters).then(function(response) {
+          var playlist = response.data.content;
+
+          $rootScope.$broadcast("newPlaylist", playlist);
+          playlist.extend = false;
+          playlist.share = false;
+          playlist.url = 'http://lvh.me:3000/playlists/' + playlist.id;
+          playlist.duration = 0;
+          $scope.myPlaylists.push(playlist);
+
+          for (var i = 0 ; i < $scope.playlist.length ; i++) {
+            playlist.musics.push($scope.playlist[i]);
+            saveMusicInPlaylist(playlist, $scope.playlist[i]);
+          }
+        }, function(error) {
+          NotificationService.error("Error while saving a new music in the playlist");
+        });
+      }, function(error) {
+        NotificationService.error("Error while saving a new music in the playlist");
+      });
+      $scope.more.pop = false;
+    }
+  }
+
+  var saveMusicInPlaylist = function(playlist, music) {
+    SecureAuth.securedTransaction(function(key, user_id) {
+      var parameters = {
+        secureKey: key,
+        user_id: user_id,
+        id: music.id,
+        playlist_id: playlist.id
+      };
+      HTTPService.addToPlaylist(parameters).then(function(response) {
+        playlist.duration += music.obj.duration;
+      }, function(error) {
+        NotificationService.error("Error while saving a new music in the playlist");
+      });
+    }, function(error) {
+      NotificationService.error("Error while saving a new music in the playlist");
+    });
   }
 }]);

@@ -47,7 +47,7 @@
               %td{:width => '200'}
                 %i.fi-star{ "ng-repeat" => "n in range(song.note)" }
               %td{:width => '50'}
-                %music{ "music-object" => "song.music", artist: "show.user.username" }
+                %music{ "music-object" => "song.music" }
                   %i.fi-play
               %td{:width => '50'} +
       .albums
@@ -71,7 +71,7 @@
                   %td{:width => '50'}
                     {{song.price}}
                   %td{:width => '50'}
-                    %music{ "music-object" => "song", artist: "show.user.username" }
+                    %music{ "music-object" => "song" }
                       %i.fi-play
                   %td{:width => '50'} +
             %hr
@@ -87,4 +87,4 @@
         %li.price {{ playlist.musics.length }} musics
         %li.description Duration (total) {{ formatTime(playlist.duration) }}
         %li.cta-button
-          %a.button{ href: "#" } More...
+          %a.button{ href: "/playlists/{{playlist.id}}" } More...

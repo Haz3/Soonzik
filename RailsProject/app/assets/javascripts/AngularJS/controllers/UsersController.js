@@ -102,14 +102,10 @@ SoonzikApp.controller('UsersCtrl', ['$scope', "$routeParams", 'SecureAuth', 'HTT
 					for (var i = 0 ; i < $scope.show.playlists.length ; i++) {
 						var duration = 0;
 
-						console.log(i);
-						console.log($scope.show.playlists[i].musics);
-						console.log($scope.show.playlists[i].musics);
 						for (var j = 0 ; j < $scope.show.playlists[i].musics.length ; j++) {
 							duration += $scope.show.playlists[i].musics[j].duration;
 						}
 
-						console.log(duration);
 						$scope.show.playlists[i].duration = duration;
 					}
 				}, function(error) {
@@ -216,7 +212,6 @@ SoonzikApp.controller('UsersCtrl', ['$scope', "$routeParams", 'SecureAuth', 'HTT
 				NotificationService.error("An error occured");
 			});
 		}, function (responseForbidden) {
-			console.log(responseForbidden);
 			NotificationService.error("An error occured");
 		});
 	}
@@ -225,7 +220,6 @@ SoonzikApp.controller('UsersCtrl', ['$scope', "$routeParams", 'SecureAuth', 'HTT
 		if ($file && $file.length) {
 			for (var i = 0; i < $file.length; i++) {
 				var file = $file[i];
-				// need to define a route to upload image
 
 				SecureAuth.securedTransaction(function (key, user_id) {
 					HTTPService.uploadProfileImage(file, { secureKey: key, user_id: user_id }, function (evt) {
@@ -277,7 +271,6 @@ SoonzikApp.controller('UsersCtrl', ['$scope', "$routeParams", 'SecureAuth', 'HTT
 				};
 				HTTPService.follow(parameters).then(function(followResponse) {
 					$scope.user.followers.push($scope.show.user);
-					console.log(followResponse);
 				}, function(error) {
 					NotificationService.error("An error occured while following an user");
 				});
@@ -302,7 +295,6 @@ SoonzikApp.controller('UsersCtrl', ['$scope', "$routeParams", 'SecureAuth', 'HTT
 			  			break;
 			  		}
 			  	}
-					console.log(followResponse);
 				}, function(error) {
 					NotificationService.error("An error occured while following an user");
 				});

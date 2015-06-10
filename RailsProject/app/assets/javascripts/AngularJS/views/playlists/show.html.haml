@@ -1,0 +1,76 @@
+.playlist{ "ng-init" => "showInit()" }
+	%loading{ "ng-if" => "loading" }
+	.playlistContainer{ "ng-if" => "!loading" }
+		%h3{ "ng-if" => "playlist.musics.length == 0" } This playlist is empty
+		.playlistHeader.clearfix{ "ng-if" => "playlist.musics.length != 0" }
+			.previewPlaylist.small-12.medium-3.columns
+				%img{ "ng-src" => "{{ '/assets/albums/' + playlist.musics[0].album.image }}" }
+			.small-12.medium-9.columns.columns
+				%h3{ "ng-if" => "playlist.name != null" } {{ playlist.name }}
+				%p
+					%span{ "ng-if" => "playlist.user != null" } From
+					%a{ "ng-if" => "playlist.user != null", href: "/users/{{ playlist.user.id }}" } {{ playlist.user.username }}
+					%span{ "ng-if" => "playlist.user != null" } - 
+					%span {{ playlist.musics.length }} musics
+				%ul.button-group
+					%li.relative
+						%span.button{ "ng-click" => "listenPlaylist()" }
+							%i.fi-music
+							Listen
+					%li.relative
+						%span.button{ "ng-click" => "toolTipShare()" }
+							%i.fi-share
+							Share
+						.mytooltip{ "ng-show" => "tooltip.type == 'share'" }
+							%ul.no-bullet.clearfix
+								%li.text-center.small-12 Share !
+								%li.small-11.small-centered.columns
+									%input.radius{ type: "text", value: "{{tooltip.value}}", "select-on-click" => true }
+								%li.small-12
+									.button.tiny{ "ng-click" => "toolTipShare()" } Close
+					%li.relative{ "ng-if" => "user != false" }
+						%span.button{ "ng-click" => "saveTooltip()" }
+							%i.fi-save
+							Save as new playlist
+						.mytooltip{ "ng-show" => "tooltip.type == 'save'" }
+							%ul.no-bullet.clearfix
+								%li.small-5.columns Save as : 
+								%li.small-7.columns
+									%input.radius{ type: "text", "ng-model" => "newItem.name" }
+								%li.small-6.columns
+									.button.tiny{ "ng-click" => "savePlaylist()", "ng-class" => "newItem.name.length == 0 ? 'secondary' : 'primary'" } Save
+								%li.small-6.columns
+									.button.tiny{ "ng-click" => "saveTooltip()" } Close
+		.playlistContent{ "ng-if" => "playlist.musics.length != 0" }
+			.playlistMusic{ "ng-repeat" => "music in playlist.musics track by $index"}
+				%hr
+				.clearfix.item
+					.small-1.medium-1.large-1.columns
+						%p
+							{{ $index + 1}}
+					.small-3.medium-2.large-1.columns
+						%music{ "music-object" => "music" }
+							%img{ "ng-src" => "{{ '/assets/albums/' + music.album.image }}" }
+					.small-5.medium-7.large-8.columns
+						%music{ "music-object" => "music" } {{ music.title }}
+					.small-3.medium-2.large-2.columns
+						.left {{ formatTime(music.duration) }}
+						%p.text-right.relative
+							%i.fi-plus{ "ng-click" => "setTooltip(tooltip == false ? music : false)" }
+							.mytooltip.toolright{ "ng-show" => "tooltip == music" }
+								%ul.no-bullet
+									%li.choice{ "ng-if" => "user != false", "ng-click" => "selectMusic(music)" } Add to playlist
+									%li.playlistBlock{ "ng-if" => "selectedMusic == music" }
+										%hr
+										%ul.text-left.small-12.playlistList
+											%li.choice.small-12.playlistChoice{ "ng-repeat" => "myplaylist in myPlaylists" }
+												%input{ "ng-model" => "myplaylist.check", name: "playlistChoice", type: "radio", id: "playlist-{{myplaylist.id}}", "ng-value" => "true" }
+												%label{ "for" => "playlist-{{myplaylist.id}}" } {{ myplaylist.name }}
+											%li.small-12.text-center
+												.button.tiny{ "ng-click" => "addToPlaylist()" } Add
+										%hr
+									%li.choice
+										%music.small-12{ "music-object" => "music", "ng-click" => "setTooltip(false)" } Listen
+									%li
+										.button.tiny{ "ng-click" => "setTooltip(false)" } Close
+			%hr
