@@ -1,0 +1,19 @@
+﻿<Page
+    x:Class="SoonZik.Community"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:SoonZik"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+	<Grid Background="#FFDEDEDE">
+    	<TextBlock x:Name="community_txt" x:Uid="community_txt" HorizontalAlignment="Left" Margin="100,10,0,0" TextWrapping="Wrap" Text="Community" VerticalAlignment="Top" Height="55" Width="361" FontSize="53.333" Foreground="Black"/>
+        <Button x:ConnectionId='1' x:Name="back_btn" Content="Button" HorizontalAlignment="Left" Margin="30,20,0,0" VerticalAlignment="Top" Style="{StaticResource NavigationBackButtonNormalStyle}" RequestedTheme="Light"                     />
+        <Button x:ConnectionId='2' x:Name="concert_btn" x:Uid="concert_btn" Content="Concert" HorizontalAlignment="Left" Margin="41,80,0,0" VerticalAlignment="Top" Width="139" Foreground="Black" BorderBrush="{x:Null}" FontSize="26.667" Height="49" BorderThickness="0" FontFamily="Berlin Sans FB Demi"                          />
+        <Button x:ConnectionId='3' x:Name="battle_btn" x:Uid="battle_btn" Content="Battle" HorizontalAlignment="Left" Margin="181,80,0,0" VerticalAlignment="Top" Width="139" Foreground="Black" BorderBrush="{x:Null}" FontSize="26.667" Height="49" BorderThickness="0" FontFamily="Berlin Sans FB Demi"                         />
+        <Button x:ConnectionId='4' x:Name="follow_btn" x:Uid="follow_btn" Content="Follow" HorizontalAlignment="Left" Margin="322,80,0,0" VerticalAlignment="Top" Width="139" Foreground="Black" BorderBrush="{x:Null}" FontSize="26.667" Height="49" BorderThickness="0" FontFamily="Berlin Sans FB Demi"                         />
+
+	</Grid>
+</Page>
+

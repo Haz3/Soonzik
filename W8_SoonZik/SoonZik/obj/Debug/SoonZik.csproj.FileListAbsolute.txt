@@ -1,0 +1,612 @@
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik\SoonZik\bin\Debug\App.xbf
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik\SoonZik\bin\Debug\SoonZik.xr.xml
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik\SoonZik\bin\Debug\SoonZik.exe
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik\SoonZik\bin\Debug\SoonZik.pdb
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik\SoonZik\bin\Debug\resources.pri
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik\SoonZik\bin\Debug\AppxManifest.xml
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik\SoonZik\bin\Debug\SoonZik.build.appxrecipe
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik\SoonZik\obj\Debug\App.g.i.cs
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik\SoonZik\obj\Debug\App.g.cs
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik\SoonZik\obj\Debug\XamlTypeInfo.g.cs
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik\SoonZik\obj\Debug\App.xaml
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik\SoonZik\obj\Debug\App.xbf
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik\SoonZik\obj\Debug\XamlSaveStateFile.xml
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik\SoonZik\obj\Debug\SoonZik.exe
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik\SoonZik\obj\Debug\SoonZik.pdb
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik\SoonZik\obj\Debug\priconfig.xml
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik\SoonZik\obj\Debug\priconfig.xml.intermediate
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik\SoonZik\obj\Debug\layout.resfiles
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik\SoonZik\obj\Debug\layout.resfiles.intermediate
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik\SoonZik\obj\Debug\resources.resfiles
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik\SoonZik\obj\Debug\resources.resfiles.intermediate
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik\SoonZik\obj\Debug\pri.resfiles
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik\SoonZik\obj\Debug\pri.resfiles.intermediate
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik\SoonZik\obj\Debug\qualifiers.txt
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik\SoonZik\obj\Debug\qualifiers.txt.intermediate
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik\SoonZik\obj\Debug\MultipleQualifiersPerDimensionFound.txt
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik\SoonZik\obj\Debug\ProjectArchitectures.txt
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik\SoonZik\bin\Debug\Assets\SoonZik_splashscreen.png
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik\SoonZik\bin\Debug\Views\News.xbf
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik\SoonZik\obj\Debug\Views\News.g.i.cs
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik\SoonZik\obj\Debug\Views\News.g.cs
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik\SoonZik\obj\Debug\Views\News.xaml
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik\SoonZik\obj\Debug\Views\News.xbf
+C:\Users\Julien\documents\visual studio 2013\Projects\SoonZik\SoonZik\obj\Debug\Views\Battle.g.i.cs
+C:\Users\Julien\documents\visual studio 2013\Projects\SoonZik\SoonZik\obj\Debug\Views\Battle.g.cs
+C:\Users\Julien\documents\visual studio 2013\Projects\SoonZik\SoonZik\obj\Debug\Views\Community.g.i.cs
+C:\Users\Julien\documents\visual studio 2013\Projects\SoonZik\SoonZik\obj\Debug\Views\Community.g.cs
+C:\Users\Julien\documents\visual studio 2013\Projects\SoonZik\SoonZik\obj\Debug\Views\Concert.g.i.cs
+C:\Users\Julien\documents\visual studio 2013\Projects\SoonZik\SoonZik\obj\Debug\Views\Concert.g.cs
+C:\Users\Julien\documents\visual studio 2013\Projects\SoonZik\SoonZik\obj\Debug\Views\Follow.g.i.cs
+C:\Users\Julien\documents\visual studio 2013\Projects\SoonZik\SoonZik\obj\Debug\Views\Follow.g.cs
+C:\Users\Julien\documents\visual studio 2013\Projects\SoonZik\SoonZik\obj\Debug\Views\Home.g.i.cs
+C:\Users\Julien\documents\visual studio 2013\Projects\SoonZik\SoonZik\obj\Debug\Views\Home.g.cs
+C:\Users\Julien\documents\visual studio 2013\Projects\SoonZik\SoonZik\obj\Debug\Views\Shop.g.i.cs
+C:\Users\Julien\documents\visual studio 2013\Projects\SoonZik\SoonZik\obj\Debug\Views\Shop.g.cs
+C:\Users\Julien\documents\visual studio 2013\Projects\SoonZik\SoonZik\obj\Debug\Views\Battle.xaml
+C:\Users\Julien\documents\visual studio 2013\Projects\SoonZik\SoonZik\obj\Debug\Views\Concert.xaml
+C:\Users\Julien\documents\visual studio 2013\Projects\SoonZik\SoonZik\obj\Debug\Views\Follow.xaml
+C:\Users\Julien\documents\visual studio 2013\Projects\SoonZik\SoonZik\obj\Debug\Views\Shop.xaml
+C:\Users\Julien\documents\visual studio 2013\Projects\SoonZik\SoonZik\obj\Debug\Views\Battle.xbf
+C:\Users\Julien\documents\visual studio 2013\Projects\SoonZik\SoonZik\obj\Debug\Views\Concert.xbf
+C:\Users\Julien\documents\visual studio 2013\Projects\SoonZik\SoonZik\obj\Debug\Views\Follow.xbf
+C:\Users\Julien\documents\visual studio 2013\Projects\SoonZik\SoonZik\obj\Debug\Views\Shop.xbf
+C:\Users\Julien\documents\visual studio 2013\Projects\SoonZik\SoonZik\obj\Debug\Views\Community.xaml
+C:\Users\Julien\documents\visual studio 2013\Projects\SoonZik\SoonZik\obj\Debug\Views\Home.xaml
+C:\Users\Julien\documents\visual studio 2013\Projects\SoonZik\SoonZik\obj\Debug\Views\Community.xbf
+C:\Users\Julien\documents\visual studio 2013\Projects\SoonZik\SoonZik\obj\Debug\Views\Home.xbf
+C:\Users\Julien\documents\visual studio 2013\Projects\SoonZik\SoonZik\bin\Debug\Views\Battle.xbf
+C:\Users\Julien\documents\visual studio 2013\Projects\SoonZik\SoonZik\bin\Debug\Views\Community.xbf
+C:\Users\Julien\documents\visual studio 2013\Projects\SoonZik\SoonZik\bin\Debug\Views\Concert.xbf
+C:\Users\Julien\documents\visual studio 2013\Projects\SoonZik\SoonZik\bin\Debug\Views\Follow.xbf
+C:\Users\Julien\documents\visual studio 2013\Projects\SoonZik\SoonZik\bin\Debug\Views\Home.xbf
+C:\Users\Julien\documents\visual studio 2013\Projects\SoonZik\SoonZik\bin\Debug\Views\Shop.xbf
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik\SoonZik\obj\Debug\Views\Music_player.g.i.cs
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik\SoonZik\obj\Debug\Views\Music_player.g.cs
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik\SoonZik\obj\Debug\Views\Music_player.xaml
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik\SoonZik\obj\Debug\Views\Music_player.xbf
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik\SoonZik\bin\Debug\Views\Music_player.xbf
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik\SoonZik\obj\Debug\Views\Connection.g.i.cs
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik\SoonZik\obj\Debug\Views\Connection.g.cs
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik\SoonZik\bin\Debug\Views\Connection.xbf
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik\SoonZik\obj\Debug\Views\Connection.xaml
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik\SoonZik\obj\Debug\Views\Connection.xbf
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik\SoonZik\obj\Debug\SoonZik.csprojResolveAssemblyReference.cache
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik\SoonZik\bin\Debug\Facebook.Client.dll
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik\SoonZik\bin\Debug\Facebook.dll
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik\SoonZik\bin\Debug\Facebook.xml
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik\SoonZik\bin\Debug\Facebook.Client.pdb
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik\SoonZik\bin\Debug\Facebook.Client.xml
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik\SoonZik\bin\Debug\Facebook.Client.pri
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik\SoonZik\obj\Debug\SoonZik.csproj.GenerateResource.Cache
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik\SoonZik\obj\Debug\Facebook.Client.pri.xml
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\obj\Debug\App.g.i.cs
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\obj\Debug\App.g.cs
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\obj\Debug\Views\Music_player.g.i.cs
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\obj\Debug\Views\Music_player.g.cs
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\obj\Debug\Views\Battle.g.i.cs
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\obj\Debug\Views\Battle.g.cs
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\obj\Debug\Views\Community.g.i.cs
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\obj\Debug\Views\Community.g.cs
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\obj\Debug\Views\Concert.g.i.cs
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\obj\Debug\Views\Concert.g.cs
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\obj\Debug\Views\Connection.g.i.cs
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\obj\Debug\Views\Connection.g.cs
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\obj\Debug\Views\Follow.g.i.cs
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\obj\Debug\Views\Follow.g.cs
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\obj\Debug\Views\Home.g.i.cs
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\obj\Debug\Views\Home.g.cs
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\obj\Debug\Views\News.g.i.cs
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\obj\Debug\Views\News.g.cs
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\obj\Debug\Views\Shop.g.i.cs
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\obj\Debug\Views\Shop.g.cs
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\obj\Debug\XamlTypeInfo.g.cs
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\obj\Debug\App.xaml
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\obj\Debug\Views\Music_player.xaml
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\obj\Debug\Views\Battle.xaml
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\obj\Debug\Views\Community.xaml
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\obj\Debug\Views\Concert.xaml
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\obj\Debug\Views\Connection.xaml
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\obj\Debug\Views\Follow.xaml
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\obj\Debug\Views\Home.xaml
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\obj\Debug\Views\Shop.xaml
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\obj\Debug\App.xbf
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\obj\Debug\Views\Music_player.xbf
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\obj\Debug\Views\Battle.xbf
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\obj\Debug\Views\Community.xbf
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\obj\Debug\Views\Concert.xbf
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\obj\Debug\Views\Connection.xbf
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\obj\Debug\Views\Follow.xbf
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\obj\Debug\Views\Home.xbf
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\obj\Debug\Views\Shop.xbf
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\obj\Debug\XamlSaveStateFile.xml
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\obj\Debug\SoonZik.exe
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\obj\Debug\SoonZik.pdb
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\bin\Debug\Assets\SoonZik_splashscreen.png
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\bin\Debug\App.xbf
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\bin\Debug\Views\Music_player.xbf
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\bin\Debug\Views\Battle.xbf
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\bin\Debug\Views\Community.xbf
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\bin\Debug\Views\Concert.xbf
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\bin\Debug\Views\Connection.xbf
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\bin\Debug\Views\Follow.xbf
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\bin\Debug\Views\Home.xbf
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\bin\Debug\Views\News.xbf
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\bin\Debug\Views\Shop.xbf
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\bin\Debug\SoonZik.xr.xml
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\bin\Debug\SoonZik.exe
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\bin\Debug\SoonZik.pdb
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\bin\Debug\resources.pri
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\bin\Debug\AppxManifest.xml
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\bin\Debug\SoonZik.build.appxrecipe
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\bin\Debug\Facebook.Client.dll
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\bin\Debug\Facebook.dll
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\bin\Debug\Facebook.xml
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\bin\Debug\Facebook.Client.pdb
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\bin\Debug\Facebook.Client.xml
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\bin\Debug\Facebook.Client.pri
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\obj\Debug\Views\News.xaml
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\obj\Debug\Views\News.xbf
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\obj\Debug\SoonZik.csproj.GenerateResource.Cache
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\obj\Debug\priconfig.xml
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\obj\Debug\priconfig.xml.intermediate
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\obj\Debug\layout.resfiles
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\obj\Debug\layout.resfiles.intermediate
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\obj\Debug\resources.resfiles
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\obj\Debug\resources.resfiles.intermediate
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\obj\Debug\pri.resfiles
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\obj\Debug\pri.resfiles.intermediate
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\obj\Debug\qualifiers.txt
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\obj\Debug\qualifiers.txt.intermediate
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\obj\Debug\MultipleQualifiersPerDimensionFound.txt
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\obj\Debug\Facebook.Client.pri.xml
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\obj\Debug\ProjectArchitectures.txt
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\obj\Debug\SampleData\SampleDataSource1\SampleDataSource1.g.i.cs
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\obj\Debug\SampleData\SampleDataSource1\SampleDataSource1.g.cs
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\bin\Debug\SampleData\SampleDataSource1\SampleDataSource1_Files\image01.png
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\bin\Debug\SampleData\SampleDataSource1\SampleDataSource1_Files\image02.png
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\bin\Debug\SampleData\SampleDataSource1\SampleDataSource1_Files\image03.png
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\bin\Debug\SampleData\SampleDataSource1\SampleDataSource1_Files\image04.png
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\bin\Debug\SampleData\SampleDataSource1\SampleDataSource1_Files\image05.png
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\bin\Debug\SampleData\SampleDataSource1\SampleDataSource1.xbf
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\obj\Debug\SampleData\SampleDataSource1\SampleDataSource1.xaml
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\obj\Debug\SampleData\SampleDataSource1\SampleDataSource1.xbf
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\bin\Debug\SampleData\SampleDataSource2\SampleDataSource2_Files\image01.png
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\bin\Debug\SampleData\SampleDataSource2\SampleDataSource2_Files\image02.png
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\bin\Debug\SampleData\SampleDataSource2\SampleDataSource2_Files\image03.png
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\bin\Debug\SampleData\SampleDataSource2\SampleDataSource2_Files\image04.png
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\bin\Debug\SampleData\SampleDataSource2\SampleDataSource2_Files\image05.png
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\bin\Debug\SampleData\SampleDataSource3\SampleDataSource3_Files\image01.png
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\bin\Debug\SampleData\SampleDataSource3\SampleDataSource3_Files\image02.png
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\bin\Debug\SampleData\SampleDataSource3\SampleDataSource3_Files\image03.png
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\bin\Debug\SampleData\SampleDataSource3\SampleDataSource3_Files\image04.png
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\bin\Debug\SampleData\SampleDataSource3\SampleDataSource3_Files\image05.png
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\bin\Debug\SampleData\SampleDataSource2\SampleDataSource2.xbf
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\bin\Debug\SampleData\SampleDataSource3\SampleDataSource3.xbf
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\obj\Debug\SampleData\SampleDataSource2\SampleDataSource2.g.i.cs
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\obj\Debug\SampleData\SampleDataSource2\SampleDataSource2.g.cs
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\obj\Debug\SampleData\SampleDataSource3\SampleDataSource3.g.i.cs
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\obj\Debug\SampleData\SampleDataSource3\SampleDataSource3.g.cs
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\obj\Debug\SampleData\SampleDataSource2\SampleDataSource2.xaml
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\obj\Debug\SampleData\SampleDataSource3\SampleDataSource3.xaml
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\obj\Debug\SampleData\SampleDataSource2\SampleDataSource2.xbf
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\obj\Debug\SampleData\SampleDataSource3\SampleDataSource3.xbf
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\bin\Debug\Assets\googleplus_signin.png
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\bin\Debug\Assets\music_player_icons\Mute.png
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\bin\Debug\Assets\music_player_icons\Play.png
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\bin\Debug\Assets\music_player_icons\Volume.png
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\bin\Debug\Assets\twitter_signin.png
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\bin\Debug\Google.Apis.Auth.dll
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\bin\Debug\Google.Apis.Auth.PlatformServices.dll
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\bin\Debug\Google.Apis.Core.dll
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\bin\Debug\Google.Apis.dll
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\bin\Debug\Google.Apis.Drive.v2.dll
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\bin\Debug\Google.Apis.PlatformServices.dll
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\bin\Debug\Microsoft.Threading.Tasks.dll
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\bin\Debug\Microsoft.Threading.Tasks.Extensions.dll
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\bin\Debug\System.Net.Http.Extensions.dll
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\bin\Debug\System.Net.Http.Primitives.dll
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\bin\Debug\Zlib.Portable.dll
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\bin\Debug\Google.Apis.pdb
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\bin\Debug\Google.Apis.xml
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\bin\Debug\Google.Apis.Auth.pdb
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\bin\Debug\Google.Apis.Auth.xml
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\bin\Debug\Google.Apis.Auth.PlatformServices.pdb
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\bin\Debug\Google.Apis.Auth.PlatformServices.xml
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\bin\Debug\Google.Apis.Core.pdb
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\bin\Debug\Google.Apis.Core.xml
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\bin\Debug\Google.Apis.Drive.v2.pdb
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\bin\Debug\Google.Apis.Drive.v2.xml
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\bin\Debug\Google.Apis.PlatformServices.pdb
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\bin\Debug\Google.Apis.PlatformServices.xml
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\bin\Debug\Microsoft.Threading.Tasks.xml
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\bin\Debug\Microsoft.Threading.Tasks.Extensions.xml
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\bin\Debug\Newtonsoft.Json.xml
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\bin\Debug\System.Net.Http.Extensions.xml
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\bin\Debug\System.Net.Http.Primitives.xml
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\bin\Debug\Zlib.Portable.xml
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\obj\Debug\SampleData\ListNews\ListNews.g.i.cs
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\obj\Debug\SampleData\ListNews\ListNews.g.cs
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\bin\Debug\SampleData\ListNews\ListNews_Files\image01.png
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\bin\Debug\SampleData\ListNews\ListNews_Files\image02.png
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\bin\Debug\SampleData\ListNews\ListNews_Files\image03.png
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\bin\Debug\SampleData\ListNews\ListNews_Files\image04.png
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\bin\Debug\SampleData\ListNews\ListNews_Files\image05.png
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\bin\Debug\SampleData\ListNews\ListNews.xbf
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\obj\Debug\SampleData\ListNews\ListNews.xaml
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\obj\Debug\SampleData\ListNews\ListNews.xbf
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\bin\Debug\Assets\music_player_icons\Next.png
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\bin\Debug\Assets\music_player_icons\Pause.png
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\bin\Debug\Assets\music_player_icons\Previous.png
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\bin\Debug\Assets\music_player_icons\Stop.png
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\bin\Debug\Assets\DarkGray.png
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\bin\Debug\SampleData\SampleDataSource\SampleDataSource_Files\image01.png
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\bin\Debug\SampleData\SampleDataSource\SampleDataSource_Files\image02.png
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\bin\Debug\SampleData\SampleDataSource\SampleDataSource_Files\image03.png
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\bin\Debug\SampleData\SampleDataSource\SampleDataSource_Files\image04.png
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\bin\Debug\SampleData\SampleDataSource\SampleDataSource_Files\image05.png
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\bin\Debug\SampleData\SampleDataSource\SampleDataSource.xbf
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\obj\Debug\SampleData\SampleDataSource\SampleDataSource.g.i.cs
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\obj\Debug\SampleData\SampleDataSource\SampleDataSource.g.cs
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\obj\Debug\SampleData\SampleDataSource\SampleDataSource.xaml
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\obj\Debug\SampleData\SampleDataSource\SampleDataSource.xbf
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\bin\Debug\SampleData\SampleDataSource\SampleDataSource_Files\10647245_10205863378374029_5882196109741652508_n.jpg
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\bin\Debug\SampleData\SampleDataSource\SampleDataSource_Files\1421447903154.png
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\bin\Debug\SampleData\SampleDataSource\SampleDataSource_Files\aKgrMn6_700b.jpg
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\bin\Debug\SampleData\SampleDataSource\SampleDataSource_Files\aNoNVL4_460s_v1.jpg
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\bin\Debug\SampleData\SampleDataSource\SampleDataSource_Files\B0-DRpcCQAAsCtX.jpg
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\bin\Debug\SampleData\SampleDataSource\SampleDataSource_Files\B5dx1dwCIAA_aro.png
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\bin\Debug\SampleData\SampleDataSource\SampleDataSource_Files\ByXNokqIYAAz09N.png
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\bin\Debug\SampleData\SampleDataSource\SampleDataSource_Files\define.png
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\bin\Debug\SampleData\SampleDataSource\SampleDataSource_Files\Ijgzwsk.png
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\bin\Debug\SampleData\SampleDataSource\SampleDataSource_Files\JACK VETTRIANO.png
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\bin\Debug\Assets\test\JACK VETTRIANO.png
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\bin\Debug\SampleData\SampleDataSource4\SampleDataSource4_Files\image01.png
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\bin\Debug\SampleData\SampleDataSource4\SampleDataSource4_Files\image02.png
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\bin\Debug\SampleData\SampleDataSource4\SampleDataSource4_Files\image03.png
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\bin\Debug\SampleData\SampleDataSource4\SampleDataSource4_Files\image04.png
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\bin\Debug\SampleData\SampleDataSource4\SampleDataSource4_Files\image05.png
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\bin\Debug\SampleData\SampleDataSource4\SampleDataSource4.xbf
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\obj\Debug\SampleData\SampleDataSource4\SampleDataSource4.g.i.cs
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\obj\Debug\SampleData\SampleDataSource4\SampleDataSource4.g.cs
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\obj\Debug\SampleData\SampleDataSource4\SampleDataSource4.xaml
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\obj\Debug\SampleData\SampleDataSource4\SampleDataSource4.xbf
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\bin\Debug\Assets\test_community\baudry_g.jpg
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\bin\Debug\Assets\test_community\dewulf_f.jpg
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\bin\Debug\Assets\test_community\lansel_k.jpg
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\bin\Debug\Assets\test_community\rodrig_h.jpg
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\bin\Debug\Assets\test_community\sauvag_m.jpg
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\bin\Debug\Assets\test_community\wojcia_m.jpg
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\bin\Debug\SampleData\SampleDataSource7\SampleDataSource7_Files\baudry_g.jpg
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\bin\Debug\SampleData\SampleDataSource7\SampleDataSource7_Files\dewulf_f.jpg
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\bin\Debug\SampleData\SampleDataSource7\SampleDataSource7_Files\image01.png
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\bin\Debug\SampleData\SampleDataSource7\SampleDataSource7_Files\image02.png
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\bin\Debug\SampleData\SampleDataSource7\SampleDataSource7_Files\image03.png
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\bin\Debug\SampleData\SampleDataSource7\SampleDataSource7_Files\image04.png
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\bin\Debug\SampleData\SampleDataSource7\SampleDataSource7_Files\image05.png
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\bin\Debug\SampleData\SampleDataSource7\SampleDataSource7_Files\lansel_k.jpg
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\bin\Debug\SampleData\SampleDataSource7\SampleDataSource7_Files\rodrig_h.jpg
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\bin\Debug\SampleData\SampleDataSource7\SampleDataSource7_Files\sauvag_m.jpg
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\bin\Debug\SampleData\SampleDataSource7\SampleDataSource7_Files\wojcia_m.jpg
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\bin\Debug\SampleData\SampleDataSource7\SampleDataSource7.xbf
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\obj\Debug\SampleData\SampleDataSource7\SampleDataSource7.g.i.cs
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\obj\Debug\SampleData\SampleDataSource7\SampleDataSource7.g.cs
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\obj\Debug\SampleData\SampleDataSource7\SampleDataSource7.xaml
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\obj\Debug\SampleData\SampleDataSource7\SampleDataSource7.xbf
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\bin\Debug\SampleData\SampleDataSource5\SampleDataSource5_Files\image01.png
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\bin\Debug\SampleData\SampleDataSource5\SampleDataSource5_Files\image02.png
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\bin\Debug\SampleData\SampleDataSource5\SampleDataSource5_Files\image03.png
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\bin\Debug\SampleData\SampleDataSource5\SampleDataSource5_Files\image04.png
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\bin\Debug\SampleData\SampleDataSource5\SampleDataSource5_Files\image05.png
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\bin\Debug\SampleData\SampleDataSource6\SampleDataSource6_Files\image01.png
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\bin\Debug\SampleData\SampleDataSource6\SampleDataSource6_Files\image02.png
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\bin\Debug\SampleData\SampleDataSource6\SampleDataSource6_Files\image03.png
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\bin\Debug\SampleData\SampleDataSource6\SampleDataSource6_Files\image04.png
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\bin\Debug\SampleData\SampleDataSource6\SampleDataSource6_Files\image05.png
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\bin\Debug\SampleData\SampleDataSource6\SampleDataSource6_Files\JACK VETTRIANO.png
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\bin\Debug\SampleData\SampleDataSource8\SampleDataSource8_Files\baudry_g.jpg
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\bin\Debug\SampleData\SampleDataSource8\SampleDataSource8_Files\dewulf_f.jpg
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\bin\Debug\SampleData\SampleDataSource8\SampleDataSource8_Files\image01.png
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\bin\Debug\SampleData\SampleDataSource8\SampleDataSource8_Files\image02.png
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\bin\Debug\SampleData\SampleDataSource8\SampleDataSource8_Files\image03.png
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\bin\Debug\SampleData\SampleDataSource8\SampleDataSource8_Files\image04.png
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\bin\Debug\SampleData\SampleDataSource8\SampleDataSource8_Files\image05.png
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\bin\Debug\SampleData\SampleDataSource8\SampleDataSource8_Files\lansel_k.jpg
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\bin\Debug\SampleData\SampleDataSource8\SampleDataSource8_Files\rodrig_h.jpg
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\bin\Debug\SampleData\SampleDataSource8\SampleDataSource8_Files\sauvag_m.jpg
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\bin\Debug\SampleData\SampleDataSource8\SampleDataSource8_Files\wojcia_m.jpg
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\bin\Debug\SampleData\SampleDataSource5\SampleDataSource5.xbf
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\bin\Debug\SampleData\SampleDataSource6\SampleDataSource6.xbf
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\bin\Debug\SampleData\SampleDataSource8\SampleDataSource8.xbf
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\obj\Debug\SampleData\SampleDataSource5\SampleDataSource5.g.i.cs
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\obj\Debug\SampleData\SampleDataSource5\SampleDataSource5.g.cs
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\obj\Debug\SampleData\SampleDataSource6\SampleDataSource6.g.i.cs
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\obj\Debug\SampleData\SampleDataSource6\SampleDataSource6.g.cs
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\obj\Debug\SampleData\SampleDataSource8\SampleDataSource8.g.i.cs
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\obj\Debug\SampleData\SampleDataSource8\SampleDataSource8.g.cs
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\obj\Debug\SampleData\SampleDataSource5\SampleDataSource5.xaml
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\obj\Debug\SampleData\SampleDataSource6\SampleDataSource6.xaml
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\obj\Debug\SampleData\SampleDataSource8\SampleDataSource8.xaml
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\obj\Debug\SampleData\SampleDataSource5\SampleDataSource5.xbf
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\obj\Debug\SampleData\SampleDataSource6\SampleDataSource6.xbf
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\obj\Debug\SampleData\SampleDataSource8\SampleDataSource8.xbf
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\bin\Debug\SampleData\SampleDataSource9\SampleDataSource9_Files\image01.png
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\bin\Debug\SampleData\SampleDataSource9\SampleDataSource9_Files\image02.png
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\bin\Debug\SampleData\SampleDataSource9\SampleDataSource9_Files\image03.png
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\bin\Debug\SampleData\SampleDataSource9\SampleDataSource9_Files\image04.png
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\bin\Debug\SampleData\SampleDataSource9\SampleDataSource9_Files\image05.png
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\bin\Debug\SampleData\SampleDataSource9\SampleDataSource9.xbf
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\obj\Debug\SampleData\SampleDataSource9\SampleDataSource9.g.i.cs
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\obj\Debug\SampleData\SampleDataSource9\SampleDataSource9.g.cs
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\obj\Debug\SampleData\SampleDataSource9\SampleDataSource9.xaml
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\obj\Debug\SampleData\SampleDataSource9\SampleDataSource9.xbf
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\bin\Debug\Assets\connexion_fb.png.png
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\bin\Debug\Assets\connexion_gplus.png
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\bin\Debug\Assets\connexion_twitter.png
+C:\Users\Julien\Documents\Visual Studio 2013\Projects\SoonZik - Copie\SoonZik\obj\Debug\SoonZik.csprojResolveAssemblyReference.cache
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\bin\Debug\Assets\connexion_fb.png.png
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\bin\Debug\Assets\connexion_gplus.png
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\bin\Debug\Assets\connexion_twitter.png
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\bin\Debug\Assets\DarkGray.png
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\bin\Debug\Assets\googleplus_signin.png
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\bin\Debug\Assets\music_player_icons\Mute.png
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\bin\Debug\Assets\music_player_icons\Next.png
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\bin\Debug\Assets\music_player_icons\Pause.png
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\bin\Debug\Assets\music_player_icons\Play.png
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\bin\Debug\Assets\music_player_icons\Previous.png
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\bin\Debug\Assets\music_player_icons\Stop.png
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\bin\Debug\Assets\music_player_icons\Volume.png
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\bin\Debug\Assets\SoonZik_splashscreen.png
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\bin\Debug\Assets\test\JACK VETTRIANO.png
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\bin\Debug\Assets\test_community\baudry_g.jpg
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\bin\Debug\Assets\test_community\dewulf_f.jpg
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\bin\Debug\Assets\test_community\lansel_k.jpg
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\bin\Debug\Assets\test_community\rodrig_h.jpg
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\bin\Debug\Assets\test_community\sauvag_m.jpg
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\bin\Debug\Assets\test_community\wojcia_m.jpg
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\bin\Debug\Assets\twitter_signin.png
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\bin\Debug\SampleData\ListNews\ListNews_Files\image01.png
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\bin\Debug\SampleData\ListNews\ListNews_Files\image02.png
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\bin\Debug\SampleData\ListNews\ListNews_Files\image03.png
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\bin\Debug\SampleData\ListNews\ListNews_Files\image04.png
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\bin\Debug\SampleData\ListNews\ListNews_Files\image05.png
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\bin\Debug\SampleData\SampleDataSource1\SampleDataSource1_Files\image01.png
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\bin\Debug\SampleData\SampleDataSource1\SampleDataSource1_Files\image02.png
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\bin\Debug\SampleData\SampleDataSource1\SampleDataSource1_Files\image03.png
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\bin\Debug\SampleData\SampleDataSource1\SampleDataSource1_Files\image04.png
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\bin\Debug\SampleData\SampleDataSource1\SampleDataSource1_Files\image05.png
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\bin\Debug\SampleData\SampleDataSource2\SampleDataSource2_Files\image01.png
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\bin\Debug\SampleData\SampleDataSource2\SampleDataSource2_Files\image02.png
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\bin\Debug\SampleData\SampleDataSource2\SampleDataSource2_Files\image03.png
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\bin\Debug\SampleData\SampleDataSource2\SampleDataSource2_Files\image04.png
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\bin\Debug\SampleData\SampleDataSource2\SampleDataSource2_Files\image05.png
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\bin\Debug\SampleData\SampleDataSource3\SampleDataSource3_Files\image01.png
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\bin\Debug\SampleData\SampleDataSource3\SampleDataSource3_Files\image02.png
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\bin\Debug\SampleData\SampleDataSource3\SampleDataSource3_Files\image03.png
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\bin\Debug\SampleData\SampleDataSource3\SampleDataSource3_Files\image04.png
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\bin\Debug\SampleData\SampleDataSource3\SampleDataSource3_Files\image05.png
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\bin\Debug\SampleData\SampleDataSource4\SampleDataSource4_Files\image01.png
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\bin\Debug\SampleData\SampleDataSource4\SampleDataSource4_Files\image02.png
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\bin\Debug\SampleData\SampleDataSource4\SampleDataSource4_Files\image03.png
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\bin\Debug\SampleData\SampleDataSource4\SampleDataSource4_Files\image04.png
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\bin\Debug\SampleData\SampleDataSource4\SampleDataSource4_Files\image05.png
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\bin\Debug\SampleData\SampleDataSource5\SampleDataSource5_Files\image01.png
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\bin\Debug\SampleData\SampleDataSource5\SampleDataSource5_Files\image02.png
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\bin\Debug\SampleData\SampleDataSource5\SampleDataSource5_Files\image03.png
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\bin\Debug\SampleData\SampleDataSource5\SampleDataSource5_Files\image04.png
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\bin\Debug\SampleData\SampleDataSource5\SampleDataSource5_Files\image05.png
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\bin\Debug\SampleData\SampleDataSource6\SampleDataSource6_Files\image01.png
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\bin\Debug\SampleData\SampleDataSource6\SampleDataSource6_Files\image02.png
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\bin\Debug\SampleData\SampleDataSource6\SampleDataSource6_Files\image03.png
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\bin\Debug\SampleData\SampleDataSource6\SampleDataSource6_Files\image04.png
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\bin\Debug\SampleData\SampleDataSource6\SampleDataSource6_Files\image05.png
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\bin\Debug\SampleData\SampleDataSource6\SampleDataSource6_Files\JACK VETTRIANO.png
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\bin\Debug\SampleData\SampleDataSource7\SampleDataSource7_Files\baudry_g.jpg
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\bin\Debug\SampleData\SampleDataSource7\SampleDataSource7_Files\dewulf_f.jpg
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\bin\Debug\SampleData\SampleDataSource7\SampleDataSource7_Files\image01.png
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\bin\Debug\SampleData\SampleDataSource7\SampleDataSource7_Files\image02.png
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\bin\Debug\SampleData\SampleDataSource7\SampleDataSource7_Files\image03.png
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\bin\Debug\SampleData\SampleDataSource7\SampleDataSource7_Files\image04.png
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\bin\Debug\SampleData\SampleDataSource7\SampleDataSource7_Files\image05.png
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\bin\Debug\SampleData\SampleDataSource7\SampleDataSource7_Files\lansel_k.jpg
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\bin\Debug\SampleData\SampleDataSource7\SampleDataSource7_Files\rodrig_h.jpg
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\bin\Debug\SampleData\SampleDataSource7\SampleDataSource7_Files\sauvag_m.jpg
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\bin\Debug\SampleData\SampleDataSource7\SampleDataSource7_Files\wojcia_m.jpg
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\bin\Debug\SampleData\SampleDataSource8\SampleDataSource8_Files\baudry_g.jpg
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\bin\Debug\SampleData\SampleDataSource8\SampleDataSource8_Files\dewulf_f.jpg
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\bin\Debug\SampleData\SampleDataSource8\SampleDataSource8_Files\image01.png
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\bin\Debug\SampleData\SampleDataSource8\SampleDataSource8_Files\image02.png
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\bin\Debug\SampleData\SampleDataSource8\SampleDataSource8_Files\image03.png
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\bin\Debug\SampleData\SampleDataSource8\SampleDataSource8_Files\image04.png
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\bin\Debug\SampleData\SampleDataSource8\SampleDataSource8_Files\image05.png
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\bin\Debug\SampleData\SampleDataSource8\SampleDataSource8_Files\lansel_k.jpg
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\bin\Debug\SampleData\SampleDataSource8\SampleDataSource8_Files\rodrig_h.jpg
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\bin\Debug\SampleData\SampleDataSource8\SampleDataSource8_Files\sauvag_m.jpg
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\bin\Debug\SampleData\SampleDataSource8\SampleDataSource8_Files\wojcia_m.jpg
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\bin\Debug\SampleData\SampleDataSource9\SampleDataSource9_Files\image01.png
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\bin\Debug\SampleData\SampleDataSource9\SampleDataSource9_Files\image02.png
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\bin\Debug\SampleData\SampleDataSource9\SampleDataSource9_Files\image03.png
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\bin\Debug\SampleData\SampleDataSource9\SampleDataSource9_Files\image04.png
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\bin\Debug\SampleData\SampleDataSource9\SampleDataSource9_Files\image05.png
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\bin\Debug\SampleData\SampleDataSource\SampleDataSource_Files\10647245_10205863378374029_5882196109741652508_n.jpg
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\bin\Debug\SampleData\SampleDataSource\SampleDataSource_Files\1421447903154.png
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\bin\Debug\SampleData\SampleDataSource\SampleDataSource_Files\aKgrMn6_700b.jpg
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\bin\Debug\SampleData\SampleDataSource\SampleDataSource_Files\aNoNVL4_460s_v1.jpg
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\bin\Debug\SampleData\SampleDataSource\SampleDataSource_Files\B0-DRpcCQAAsCtX.jpg
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\bin\Debug\SampleData\SampleDataSource\SampleDataSource_Files\B5dx1dwCIAA_aro.png
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\bin\Debug\SampleData\SampleDataSource\SampleDataSource_Files\ByXNokqIYAAz09N.png
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\bin\Debug\SampleData\SampleDataSource\SampleDataSource_Files\define.png
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\bin\Debug\SampleData\SampleDataSource\SampleDataSource_Files\Ijgzwsk.png
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\bin\Debug\SampleData\SampleDataSource\SampleDataSource_Files\image01.png
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\bin\Debug\SampleData\SampleDataSource\SampleDataSource_Files\image02.png
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\bin\Debug\SampleData\SampleDataSource\SampleDataSource_Files\image03.png
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\bin\Debug\SampleData\SampleDataSource\SampleDataSource_Files\image04.png
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\bin\Debug\SampleData\SampleDataSource\SampleDataSource_Files\image05.png
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\bin\Debug\SampleData\SampleDataSource\SampleDataSource_Files\JACK VETTRIANO.png
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\bin\Debug\App.xbf
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\bin\Debug\SampleData\ListNews\ListNews.xbf
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\bin\Debug\SampleData\SampleDataSource1\SampleDataSource1.xbf
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\bin\Debug\SampleData\SampleDataSource2\SampleDataSource2.xbf
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\bin\Debug\SampleData\SampleDataSource3\SampleDataSource3.xbf
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\bin\Debug\SampleData\SampleDataSource4\SampleDataSource4.xbf
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\bin\Debug\SampleData\SampleDataSource5\SampleDataSource5.xbf
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\bin\Debug\SampleData\SampleDataSource6\SampleDataSource6.xbf
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\bin\Debug\SampleData\SampleDataSource7\SampleDataSource7.xbf
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\bin\Debug\SampleData\SampleDataSource8\SampleDataSource8.xbf
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\bin\Debug\SampleData\SampleDataSource9\SampleDataSource9.xbf
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\bin\Debug\SampleData\SampleDataSource\SampleDataSource.xbf
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\bin\Debug\Views\Music_player.xbf
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\bin\Debug\Views\Battle.xbf
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\bin\Debug\Views\Community.xbf
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\bin\Debug\Views\Concert.xbf
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\bin\Debug\Views\Connection.xbf
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\bin\Debug\Views\Follow.xbf
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\bin\Debug\Views\Home.xbf
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\bin\Debug\Views\News.xbf
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\bin\Debug\Views\Shop.xbf
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\bin\Debug\SoonZik.xr.xml
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\bin\Debug\SoonZik.exe
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\bin\Debug\SoonZik.pdb
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\bin\Debug\resources.pri
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\bin\Debug\AppxManifest.xml
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\bin\Debug\SoonZik.build.appxrecipe
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\bin\Debug\Facebook.Client.dll
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\bin\Debug\Facebook.dll
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\bin\Debug\Google.Apis.Auth.dll
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\bin\Debug\Google.Apis.Auth.PlatformServices.dll
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\bin\Debug\Google.Apis.Core.dll
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\bin\Debug\Google.Apis.dll
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\bin\Debug\Google.Apis.Drive.v2.dll
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\bin\Debug\Google.Apis.PlatformServices.dll
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\bin\Debug\Microsoft.Threading.Tasks.dll
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\bin\Debug\Microsoft.Threading.Tasks.Extensions.dll
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\bin\Debug\System.Net.Http.Extensions.dll
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\bin\Debug\System.Net.Http.Primitives.dll
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\bin\Debug\Zlib.Portable.dll
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\bin\Debug\Facebook.xml
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\bin\Debug\Facebook.Client.pdb
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\bin\Debug\Facebook.Client.xml
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\bin\Debug\Facebook.Client.pri
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\bin\Debug\Google.Apis.pdb
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\bin\Debug\Google.Apis.xml
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\bin\Debug\Google.Apis.Auth.pdb
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\bin\Debug\Google.Apis.Auth.xml
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\bin\Debug\Google.Apis.Auth.PlatformServices.pdb
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\bin\Debug\Google.Apis.Auth.PlatformServices.xml
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\bin\Debug\Google.Apis.Core.pdb
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\bin\Debug\Google.Apis.Core.xml
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\bin\Debug\Google.Apis.Drive.v2.pdb
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\bin\Debug\Google.Apis.Drive.v2.xml
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\bin\Debug\Google.Apis.PlatformServices.pdb
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\bin\Debug\Google.Apis.PlatformServices.xml
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\bin\Debug\Microsoft.Threading.Tasks.xml
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\bin\Debug\Microsoft.Threading.Tasks.Extensions.xml
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\bin\Debug\Newtonsoft.Json.xml
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\bin\Debug\System.Net.Http.Extensions.xml
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\bin\Debug\System.Net.Http.Primitives.xml
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\bin\Debug\Zlib.Portable.xml
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\obj\Debug\SoonZik.csprojResolveAssemblyReference.cache
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\obj\Debug\App.g.i.cs
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\obj\Debug\App.g.cs
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\obj\Debug\SampleData\ListNews\ListNews.g.i.cs
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\obj\Debug\SampleData\ListNews\ListNews.g.cs
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\obj\Debug\SampleData\SampleDataSource1\SampleDataSource1.g.i.cs
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\obj\Debug\SampleData\SampleDataSource1\SampleDataSource1.g.cs
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\obj\Debug\SampleData\SampleDataSource2\SampleDataSource2.g.i.cs
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\obj\Debug\SampleData\SampleDataSource2\SampleDataSource2.g.cs
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\obj\Debug\SampleData\SampleDataSource3\SampleDataSource3.g.i.cs
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\obj\Debug\SampleData\SampleDataSource3\SampleDataSource3.g.cs
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\obj\Debug\SampleData\SampleDataSource4\SampleDataSource4.g.i.cs
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\obj\Debug\SampleData\SampleDataSource4\SampleDataSource4.g.cs
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\obj\Debug\SampleData\SampleDataSource5\SampleDataSource5.g.i.cs
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\obj\Debug\SampleData\SampleDataSource5\SampleDataSource5.g.cs
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\obj\Debug\SampleData\SampleDataSource6\SampleDataSource6.g.i.cs
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\obj\Debug\SampleData\SampleDataSource6\SampleDataSource6.g.cs
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\obj\Debug\SampleData\SampleDataSource7\SampleDataSource7.g.i.cs
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\obj\Debug\SampleData\SampleDataSource7\SampleDataSource7.g.cs
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\obj\Debug\SampleData\SampleDataSource8\SampleDataSource8.g.i.cs
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\obj\Debug\SampleData\SampleDataSource8\SampleDataSource8.g.cs
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\obj\Debug\SampleData\SampleDataSource9\SampleDataSource9.g.i.cs
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\obj\Debug\SampleData\SampleDataSource9\SampleDataSource9.g.cs
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\obj\Debug\SampleData\SampleDataSource\SampleDataSource.g.i.cs
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\obj\Debug\SampleData\SampleDataSource\SampleDataSource.g.cs
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\obj\Debug\Views\Music_player.g.i.cs
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\obj\Debug\Views\Music_player.g.cs
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\obj\Debug\Views\Battle.g.i.cs
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\obj\Debug\Views\Battle.g.cs
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\obj\Debug\Views\Community.g.i.cs
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\obj\Debug\Views\Community.g.cs
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\obj\Debug\Views\Concert.g.i.cs
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\obj\Debug\Views\Concert.g.cs
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\obj\Debug\Views\Connection.g.i.cs
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\obj\Debug\Views\Connection.g.cs
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\obj\Debug\Views\Follow.g.i.cs
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\obj\Debug\Views\Follow.g.cs
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\obj\Debug\Views\Home.g.i.cs
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\obj\Debug\Views\Home.g.cs
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\obj\Debug\Views\News.g.i.cs
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\obj\Debug\Views\News.g.cs
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\obj\Debug\Views\Shop.g.i.cs
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\obj\Debug\Views\Shop.g.cs
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\obj\Debug\XamlTypeInfo.g.cs
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\obj\Debug\App.xaml
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\obj\Debug\SampleData\ListNews\ListNews.xaml
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\obj\Debug\SampleData\SampleDataSource1\SampleDataSource1.xaml
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\obj\Debug\SampleData\SampleDataSource2\SampleDataSource2.xaml
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\obj\Debug\SampleData\SampleDataSource3\SampleDataSource3.xaml
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\obj\Debug\SampleData\SampleDataSource4\SampleDataSource4.xaml
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\obj\Debug\SampleData\SampleDataSource5\SampleDataSource5.xaml
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\obj\Debug\SampleData\SampleDataSource6\SampleDataSource6.xaml
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\obj\Debug\SampleData\SampleDataSource7\SampleDataSource7.xaml
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\obj\Debug\SampleData\SampleDataSource8\SampleDataSource8.xaml
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\obj\Debug\SampleData\SampleDataSource9\SampleDataSource9.xaml
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\obj\Debug\SampleData\SampleDataSource\SampleDataSource.xaml
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\obj\Debug\Views\Music_player.xaml
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\obj\Debug\Views\Battle.xaml
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\obj\Debug\Views\Community.xaml
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\obj\Debug\Views\Concert.xaml
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\obj\Debug\Views\Connection.xaml
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\obj\Debug\Views\Follow.xaml
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\obj\Debug\Views\Home.xaml
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\obj\Debug\Views\News.xaml
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\obj\Debug\Views\Shop.xaml
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\obj\Debug\App.xbf
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\obj\Debug\SampleData\ListNews\ListNews.xbf
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\obj\Debug\SampleData\SampleDataSource1\SampleDataSource1.xbf
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\obj\Debug\SampleData\SampleDataSource2\SampleDataSource2.xbf
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\obj\Debug\SampleData\SampleDataSource3\SampleDataSource3.xbf
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\obj\Debug\SampleData\SampleDataSource4\SampleDataSource4.xbf
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\obj\Debug\SampleData\SampleDataSource5\SampleDataSource5.xbf
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\obj\Debug\SampleData\SampleDataSource6\SampleDataSource6.xbf
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\obj\Debug\SampleData\SampleDataSource7\SampleDataSource7.xbf
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\obj\Debug\SampleData\SampleDataSource8\SampleDataSource8.xbf
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\obj\Debug\SampleData\SampleDataSource9\SampleDataSource9.xbf
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\obj\Debug\SampleData\SampleDataSource\SampleDataSource.xbf
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\obj\Debug\Views\Music_player.xbf
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\obj\Debug\Views\Battle.xbf
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\obj\Debug\Views\Community.xbf
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\obj\Debug\Views\Concert.xbf
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\obj\Debug\Views\Connection.xbf
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\obj\Debug\Views\Follow.xbf
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\obj\Debug\Views\Home.xbf
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\obj\Debug\Views\News.xbf
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\obj\Debug\Views\Shop.xbf
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\obj\Debug\XamlSaveStateFile.xml
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\obj\Debug\SoonZik.exe
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\obj\Debug\SoonZik.pdb
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\obj\Debug\SoonZik.csproj.GenerateResource.Cache
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\obj\Debug\priconfig.xml
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\obj\Debug\priconfig.xml.intermediate
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\obj\Debug\layout.resfiles
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\obj\Debug\layout.resfiles.intermediate
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\obj\Debug\resources.resfiles
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\obj\Debug\resources.resfiles.intermediate
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\obj\Debug\pri.resfiles
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\obj\Debug\pri.resfiles.intermediate
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\obj\Debug\qualifiers.txt
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\obj\Debug\qualifiers.txt.intermediate
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\obj\Debug\MultipleQualifiersPerDimensionFound.txt
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\obj\Debug\Facebook.Client.pri.xml
+C:\Users\Julien\Desktop\SoonZik_test\W8\SoonZik\SoonZik\obj\Debug\ProjectArchitectures.txt

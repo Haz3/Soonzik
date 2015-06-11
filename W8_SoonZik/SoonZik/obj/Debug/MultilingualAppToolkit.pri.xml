@@ -1,0 +1,332 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<PriInfo>
+  <PriHeader>
+    <WindowsEnvironment checksum="0" version="1.0" />
+    <AutoMerge>false</AutoMerge>
+  </PriHeader>
+  <QualifierInfo>
+    <Qualifiers>
+      <Qualifier index="1" scoreAsDefault="0.0" priority="900" value="QPS-PLOC" name="Language" />
+      <Qualifier index="2" scoreAsDefault="0.0" priority="900" value="EN" name="Language" />
+    </Qualifiers>
+    <QualifierSets>
+      <QualifierSet index="1">
+        <Qualifier index="1" scoreAsDefault="0.0" priority="900" value="QPS-PLOC" name="Language" />
+      </QualifierSet>
+      <QualifierSet index="2">
+        <Qualifier index="2" scoreAsDefault="0.0" priority="900" value="EN" name="Language" />
+      </QualifierSet>
+    </QualifierSets>
+    <Decisions>
+      <Decision index="1">
+        <QualifierSet index="2">
+          <Qualifier index="2" scoreAsDefault="0.0" priority="900" value="EN" name="Language" />
+        </QualifierSet>
+      </Decision>
+    </Decisions>
+  </QualifierInfo>
+  <ResourceMap name="SoonZik" primary="true">
+    <VersionInfo version="1.0" />
+    <ResourceMapSubtree index="1" name="Resources">
+      <NamedResource index="1" name="year_txt\Text" uri="ms-resource://SoonZik/Resources/year_txt\Text">
+        <Decision index="1">
+          <QualifierSet index="2">
+            <Qualifier index="2" scoreAsDefault="0.0" priority="900" value="EN" name="Language" />
+          </QualifierSet>
+        </Decision>
+        <Candidate type="String">
+          <QualifierSet index="2">
+            <Qualifier index="2" scoreAsDefault="0.0" priority="900" value="EN" name="Language" />
+          </QualifierSet>
+          <Value>Year:</Value>
+        </Candidate>
+      </NamedResource>
+      <NamedResource index="1" name="signup_txt\Text" uri="ms-resource://SoonZik/Resources/signup_txt\Text">
+        <Decision index="1">
+          <QualifierSet index="2">
+            <Qualifier index="2" scoreAsDefault="0.0" priority="900" value="EN" name="Language" />
+          </QualifierSet>
+        </Decision>
+        <Candidate type="String">
+          <QualifierSet index="2">
+            <Qualifier index="2" scoreAsDefault="0.0" priority="900" value="EN" name="Language" />
+          </QualifierSet>
+          <Value>Sign up</Value>
+        </Candidate>
+      </NamedResource>
+      <NamedResource index="1" name="shop_txt\Text" uri="ms-resource://SoonZik/Resources/shop_txt\Text">
+        <Decision index="1">
+          <QualifierSet index="2">
+            <Qualifier index="2" scoreAsDefault="0.0" priority="900" value="EN" name="Language" />
+          </QualifierSet>
+        </Decision>
+        <Candidate type="String">
+          <QualifierSet index="2">
+            <Qualifier index="2" scoreAsDefault="0.0" priority="900" value="EN" name="Language" />
+          </QualifierSet>
+          <Value>Store</Value>
+        </Candidate>
+      </NamedResource>
+      <NamedResource index="1" name="music_txt\Text" uri="ms-resource://SoonZik/Resources/music_txt\Text">
+        <Decision index="1">
+          <QualifierSet index="2">
+            <Qualifier index="2" scoreAsDefault="0.0" priority="900" value="EN" name="Language" />
+          </QualifierSet>
+        </Decision>
+        <Candidate type="String">
+          <QualifierSet index="2">
+            <Qualifier index="2" scoreAsDefault="0.0" priority="900" value="EN" name="Language" />
+          </QualifierSet>
+          <Value>Music</Value>
+        </Candidate>
+      </NamedResource>
+      <NamedResource index="1" name="music_player_txt\Text" uri="ms-resource://SoonZik/Resources/music_player_txt\Text">
+        <Decision index="1">
+          <QualifierSet index="2">
+            <Qualifier index="2" scoreAsDefault="0.0" priority="900" value="EN" name="Language" />
+          </QualifierSet>
+        </Decision>
+        <Candidate type="String">
+          <QualifierSet index="2">
+            <Qualifier index="2" scoreAsDefault="0.0" priority="900" value="EN" name="Language" />
+          </QualifierSet>
+          <Value>Audio Player</Value>
+        </Candidate>
+      </NamedResource>
+      <NamedResource index="1" name="news_btn\Content" uri="ms-resource://SoonZik/Resources/news_btn\Content">
+        <Decision index="1">
+          <QualifierSet index="2">
+            <Qualifier index="2" scoreAsDefault="0.0" priority="900" value="EN" name="Language" />
+          </QualifierSet>
+        </Decision>
+        <Candidate type="String">
+          <QualifierSet index="2">
+            <Qualifier index="2" scoreAsDefault="0.0" priority="900" value="EN" name="Language" />
+          </QualifierSet>
+          <Value>News</Value>
+        </Candidate>
+      </NamedResource>
+      <NamedResource index="1" name="news_txt\Text" uri="ms-resource://SoonZik/Resources/news_txt\Text">
+        <Decision index="1">
+          <QualifierSet index="2">
+            <Qualifier index="2" scoreAsDefault="0.0" priority="900" value="EN" name="Language" />
+          </QualifierSet>
+        </Decision>
+        <Candidate type="String">
+          <QualifierSet index="2">
+            <Qualifier index="2" scoreAsDefault="0.0" priority="900" value="EN" name="Language" />
+          </QualifierSet>
+          <Value>Last news</Value>
+        </Candidate>
+      </NamedResource>
+      <NamedResource index="1" name="shop_btn\Content" uri="ms-resource://SoonZik/Resources/shop_btn\Content">
+        <Decision index="1">
+          <QualifierSet index="2">
+            <Qualifier index="2" scoreAsDefault="0.0" priority="900" value="EN" name="Language" />
+          </QualifierSet>
+        </Decision>
+        <Candidate type="String">
+          <QualifierSet index="2">
+            <Qualifier index="2" scoreAsDefault="0.0" priority="900" value="EN" name="Language" />
+          </QualifierSet>
+          <Value>Store</Value>
+        </Candidate>
+      </NamedResource>
+      <NamedResource index="1" name="new_playlist_btn\Content" uri="ms-resource://SoonZik/Resources/new_playlist_btn\Content">
+        <Decision index="1">
+          <QualifierSet index="2">
+            <Qualifier index="2" scoreAsDefault="0.0" priority="900" value="EN" name="Language" />
+          </QualifierSet>
+        </Decision>
+        <Candidate type="String">
+          <QualifierSet index="2">
+            <Qualifier index="2" scoreAsDefault="0.0" priority="900" value="EN" name="Language" />
+          </QualifierSet>
+          <Value>Create</Value>
+        </Candidate>
+      </NamedResource>
+      <NamedResource index="1" name="playlist_txt\Text" uri="ms-resource://SoonZik/Resources/playlist_txt\Text">
+        <Decision index="1">
+          <QualifierSet index="2">
+            <Qualifier index="2" scoreAsDefault="0.0" priority="900" value="EN" name="Language" />
+          </QualifierSet>
+        </Decision>
+        <Candidate type="String">
+          <QualifierSet index="2">
+            <Qualifier index="2" scoreAsDefault="0.0" priority="900" value="EN" name="Language" />
+          </QualifierSet>
+          <Value>Playlist</Value>
+        </Candidate>
+      </NamedResource>
+      <NamedResource index="1" name="remove_playlist_btn\Content" uri="ms-resource://SoonZik/Resources/remove_playlist_btn\Content">
+        <Decision index="1">
+          <QualifierSet index="2">
+            <Qualifier index="2" scoreAsDefault="0.0" priority="900" value="EN" name="Language" />
+          </QualifierSet>
+        </Decision>
+        <Candidate type="String">
+          <QualifierSet index="2">
+            <Qualifier index="2" scoreAsDefault="0.0" priority="900" value="EN" name="Language" />
+          </QualifierSet>
+          <Value>Delete</Value>
+        </Candidate>
+      </NamedResource>
+      <NamedResource index="1" name="forgot_password_txt\Text" uri="ms-resource://SoonZik/Resources/forgot_password_txt\Text">
+        <Decision index="1">
+          <QualifierSet index="2">
+            <Qualifier index="2" scoreAsDefault="0.0" priority="900" value="EN" name="Language" />
+          </QualifierSet>
+        </Decision>
+        <Candidate type="String">
+          <QualifierSet index="2">
+            <Qualifier index="2" scoreAsDefault="0.0" priority="900" value="EN" name="Language" />
+          </QualifierSet>
+          <Value>Password recovery</Value>
+        </Candidate>
+      </NamedResource>
+      <NamedResource index="1" name="follow_btn\Content" uri="ms-resource://SoonZik/Resources/follow_btn\Content">
+        <Decision index="1">
+          <QualifierSet index="2">
+            <Qualifier index="2" scoreAsDefault="0.0" priority="900" value="EN" name="Language" />
+          </QualifierSet>
+        </Decision>
+        <Candidate type="String">
+          <QualifierSet index="2">
+            <Qualifier index="2" scoreAsDefault="0.0" priority="900" value="EN" name="Language" />
+          </QualifierSet>
+          <Value>Follow</Value>
+        </Candidate>
+      </NamedResource>
+      <NamedResource index="1" name="connect_btn\Content" uri="ms-resource://SoonZik/Resources/connect_btn\Content">
+        <Decision index="1">
+          <QualifierSet index="2">
+            <Qualifier index="2" scoreAsDefault="0.0" priority="900" value="EN" name="Language" />
+          </QualifierSet>
+        </Decision>
+        <Candidate type="String">
+          <QualifierSet index="2">
+            <Qualifier index="2" scoreAsDefault="0.0" priority="900" value="EN" name="Language" />
+          </QualifierSet>
+          <Value>Connection</Value>
+        </Candidate>
+      </NamedResource>
+      <NamedResource index="1" name="audio_player_btn\Content" uri="ms-resource://SoonZik/Resources/audio_player_btn\Content">
+        <Decision index="1">
+          <QualifierSet index="2">
+            <Qualifier index="2" scoreAsDefault="0.0" priority="900" value="EN" name="Language" />
+          </QualifierSet>
+        </Decision>
+        <Candidate type="String">
+          <QualifierSet index="2">
+            <Qualifier index="2" scoreAsDefault="0.0" priority="900" value="EN" name="Language" />
+          </QualifierSet>
+          <Value>Audio Player</Value>
+        </Candidate>
+      </NamedResource>
+      <NamedResource index="1" name="add_playlist_btn\Content" uri="ms-resource://SoonZik/Resources/add_playlist_btn\Content">
+        <Decision index="1">
+          <QualifierSet index="2">
+            <Qualifier index="2" scoreAsDefault="0.0" priority="900" value="EN" name="Language" />
+          </QualifierSet>
+        </Decision>
+        <Candidate type="String">
+          <QualifierSet index="2">
+            <Qualifier index="2" scoreAsDefault="0.0" priority="900" value="EN" name="Language" />
+          </QualifierSet>
+          <Value>Edit</Value>
+        </Candidate>
+      </NamedResource>
+      <NamedResource index="1" name="album_txt\Text" uri="ms-resource://SoonZik/Resources/album_txt\Text">
+        <Decision index="1">
+          <QualifierSet index="2">
+            <Qualifier index="2" scoreAsDefault="0.0" priority="900" value="EN" name="Language" />
+          </QualifierSet>
+        </Decision>
+        <Candidate type="String">
+          <QualifierSet index="2">
+            <Qualifier index="2" scoreAsDefault="0.0" priority="900" value="EN" name="Language" />
+          </QualifierSet>
+          <Value>Album:</Value>
+        </Candidate>
+      </NamedResource>
+      <NamedResource index="1" name="artist_txt\Text" uri="ms-resource://SoonZik/Resources/artist_txt\Text">
+        <Decision index="1">
+          <QualifierSet index="2">
+            <Qualifier index="2" scoreAsDefault="0.0" priority="900" value="EN" name="Language" />
+          </QualifierSet>
+        </Decision>
+        <Candidate type="String">
+          <QualifierSet index="2">
+            <Qualifier index="2" scoreAsDefault="0.0" priority="900" value="EN" name="Language" />
+          </QualifierSet>
+          <Value>Artist:</Value>
+        </Candidate>
+      </NamedResource>
+      <NamedResource index="1" name="community_btn\Content" uri="ms-resource://SoonZik/Resources/community_btn\Content">
+        <Decision index="1">
+          <QualifierSet index="2">
+            <Qualifier index="2" scoreAsDefault="0.0" priority="900" value="EN" name="Language" />
+          </QualifierSet>
+        </Decision>
+        <Candidate type="String">
+          <QualifierSet index="2">
+            <Qualifier index="2" scoreAsDefault="0.0" priority="900" value="EN" name="Language" />
+          </QualifierSet>
+          <Value>Community</Value>
+        </Candidate>
+      </NamedResource>
+      <NamedResource index="1" name="battle_btn\Content" uri="ms-resource://SoonZik/Resources/battle_btn\Content">
+        <Decision index="1">
+          <QualifierSet index="2">
+            <Qualifier index="2" scoreAsDefault="0.0" priority="900" value="EN" name="Language" />
+          </QualifierSet>
+        </Decision>
+        <Candidate type="String">
+          <QualifierSet index="2">
+            <Qualifier index="2" scoreAsDefault="0.0" priority="900" value="EN" name="Language" />
+          </QualifierSet>
+          <Value>Battle</Value>
+        </Candidate>
+      </NamedResource>
+      <NamedResource index="1" name="community_txt\Text" uri="ms-resource://SoonZik/Resources/community_txt\Text">
+        <Decision index="1">
+          <QualifierSet index="2">
+            <Qualifier index="2" scoreAsDefault="0.0" priority="900" value="EN" name="Language" />
+          </QualifierSet>
+        </Decision>
+        <Candidate type="String">
+          <QualifierSet index="2">
+            <Qualifier index="2" scoreAsDefault="0.0" priority="900" value="EN" name="Language" />
+          </QualifierSet>
+          <Value>Community</Value>
+        </Candidate>
+      </NamedResource>
+      <NamedResource index="1" name="connection_txt\Text" uri="ms-resource://SoonZik/Resources/connection_txt\Text">
+        <Decision index="1">
+          <QualifierSet index="2">
+            <Qualifier index="2" scoreAsDefault="0.0" priority="900" value="EN" name="Language" />
+          </QualifierSet>
+        </Decision>
+        <Candidate type="String">
+          <QualifierSet index="2">
+            <Qualifier index="2" scoreAsDefault="0.0" priority="900" value="EN" name="Language" />
+          </QualifierSet>
+          <Value>Connection</Value>
+        </Candidate>
+      </NamedResource>
+      <NamedResource index="1" name="concert_btn\Content" uri="ms-resource://SoonZik/Resources/concert_btn\Content">
+        <Decision index="1">
+          <QualifierSet index="2">
+            <Qualifier index="2" scoreAsDefault="0.0" priority="900" value="EN" name="Language" />
+          </QualifierSet>
+        </Decision>
+        <Candidate type="String">
+          <QualifierSet index="2">
+            <Qualifier index="2" scoreAsDefault="0.0" priority="900" value="EN" name="Language" />
+          </QualifierSet>
+          <Value>Concert</Value>
+        </Candidate>
+      </NamedResource>
+    </ResourceMapSubtree>
+  </ResourceMap>
+</PriInfo>
