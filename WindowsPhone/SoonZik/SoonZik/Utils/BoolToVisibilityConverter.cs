@@ -12,15 +12,19 @@ namespace SoonZik.Utils
     {
         public object Convert(object value, Type targetType, object parameter, string language)
         {
-            var bValue = (bool)value;
-            return bValue ? Visibility.Visible : Visibility.Collapsed;
+            if (value == null)
+                return Visibility.Collapsed;
+
+            var isVisible = (bool)value;
+
+            return isVisible ? Visibility.Visible : Visibility.Collapsed;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, string language)
         {
-            var visibility = (Visibility)value;
+            var visiblity = (Visibility)value;
 
-            return visibility == Visibility.Visible;
+            return visiblity == Visibility.Visible;
         }
     }
 }

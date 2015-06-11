@@ -9,12 +9,17 @@
     xmlns:utils="using:SoonZik.Utils"
     mc:Ignorable="d"
     xmlns:controls="using:SoonZik.Controls"
+    xmlns:converters="using:Coding4Fun.Toolkit.Controls.Converters"
     DataContext="{StaticResource MainPageViewModel}"
-    Background="#424242">
+    Background="#D3D3D3">
 	
    
-    <Grid>
-        <view:MainView/>
-     </Grid>
+    <Grid x:Name="MainPageGrid">
+        <Grid.Resources>
+            <utils:BoolToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+        </Grid.Resources>
+
+       <view:Connexion/>
+    </Grid>
 		
 </Page>

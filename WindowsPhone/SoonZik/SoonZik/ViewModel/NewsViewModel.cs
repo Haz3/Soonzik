@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
@@ -31,14 +32,15 @@ namespace SoonZik.ViewModel
 
         public NewsViewModel()
         {
-            Charge();
+            var task = Task.Run(async () => await Charge());
+            task.Wait();
         }
 
         #endregion
 
         #region Method
 
-        public async void Charge()
+        public async Task Charge()
         {
             var request = new HttpRequestGet();
             try

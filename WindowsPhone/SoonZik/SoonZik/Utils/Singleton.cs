@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using SoonZik.HttpRequest.Poco;
+﻿using SoonZik.HttpRequest.Poco;
+using News = SoonZik.Views.News;
 
 namespace SoonZik.Utils
 {
@@ -21,6 +17,8 @@ namespace SoonZik.Utils
         }
 
         public User CurrentUser { get; set; }
+
+        public News NewsPage { get; set; }
 
         #endregion
 
