@@ -1,4 +1,5 @@
-﻿using Windows.UI.Xaml.Controls;
+﻿using System.Threading.Tasks;
+using Windows.UI.Xaml.Controls;
 using GalaSoft.MvvmLight.Command;
 using SoonZik.Utils;
 using SoonZik.Views;
@@ -61,7 +62,9 @@ namespace SoonZik.Controls
         private void GoToProfil()
         {
             GlobalGrid.Children.Clear();
-            GlobalGrid.Children.Add(new ProfilUser());
+            Singleton.Instance().ItsMe = true;
+            Singleton.Instance().ProfilPage = new ProfilUser();
+            GlobalGrid.Children.Add(Singleton.Instance().ProfilPage);
             CloseMenu();
         }
 

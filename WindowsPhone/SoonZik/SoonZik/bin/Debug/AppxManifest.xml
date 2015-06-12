@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Package xmlns="http://schemas.microsoft.com/appx/2010/manifest" xmlns:m2="http://schemas.microsoft.com/appx/2013/manifest" xmlns:m3="http://schemas.microsoft.com/appx/2014/manifest" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest" xmlns:build="http://schemas.microsoft.com/developer/appx/2012/build" IgnorableNamespaces="build">
+  <!--
+    LE FICHIER MANIFESTE DE CE PACKAGE A ÉTÉ GÉNÉRÉ PAR LE PROCESSUS DE GÉNÉRATION.
+
+    Les modifications apportées à ce fichier seront perdues lors de la régénération. Pour corriger les erreurs  présentes dans ce fichier, modifiez le fichier source .appxmanifest.
+
+    Pour plus d'informations sur les fichiers manifeste, consultez http://go.microsoft.com/fwlink/?LinkID=241727
+  -->
+  <Identity Name="f4c33f8a-2f62-4958-8789-fdfbac6e41fd" Publisher="CN=Géry" Version="1.0.0.0" ProcessorArchitecture="neutral" />
+  <mp:PhoneIdentity PhoneProductId="f4c33f8a-2f62-4958-8789-fdfbac6e41fd" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
+  <Properties>
+    <DisplayName>SoonZik</DisplayName>
+    <PublisherDisplayName>Géry</PublisherDisplayName>
+    <Logo>Assets\StoreLogo.png</Logo>
+  </Properties>
+  <Prerequisites>
+    <OSMinVersion>6.3.1</OSMinVersion>
+    <OSMaxVersionTested>6.3.1</OSMaxVersionTested>
+  </Prerequisites>
+  <Resources>
+    <Resource Language="FR-FR" />
+  </Resources>
+  <Applications>
+    <Application Id="App" Executable="SoonZik.exe" EntryPoint="SoonZik.App">
+      <m3:VisualElements DisplayName="SoonZik" Square150x150Logo="Assets\Logo.png" Square44x44Logo="Assets\SmallLogo.png" Description="SoonZik" ForegroundText="light" BackgroundColor="transparent">
+        <m3:DefaultTile Wide310x150Logo="Assets\WideLogo.png" Square71x71Logo="Assets\Square71x71Logo.png"></m3:DefaultTile>
+        <m3:SplashScreen Image="Resources\logo.png" BackgroundColor="#d3d7da" />
+      </m3:VisualElements>
+    </Application>
+  </Applications>
+  <Capabilities>
+    <Capability Name="internetClientServer" />
+    <DeviceCapability Name="location" />
+  </Capabilities>
+  <build:Metadata>
+    <build:Item Name="TargetFrameworkMoniker" Value="WindowsPhoneApp,Version=v8.1" />
+    <build:Item Name="VisualStudio" Version="12.0" />
+    <build:Item Name="VisualStudioEdition" Value="Microsoft Visual Studio Professional 2013" />
+    <build:Item Name="OperatingSystem" Version="6.3.9600.16384 (winblue_rtm.130821-1623)" />
+    <build:Item Name="Microsoft.Build.AppxPackage.dll" Version="12.0.31101.0" />
+    <build:Item Name="ProjectGUID" Value="{0B3D3F97-A973-44B0-8507-4AA47BE9B684}" />
+    <build:Item Name="Microsoft.Windows.UI.Xaml.Build.Tasks.dll" Version="12.0.30501.0" />
+    <build:Item Name="BehaviorsXamlSDKManaged" Version="12.0" />
+    <build:Item Name="MakePri.exe" Version="6.3.9600.17298 (winblue.141024-1500)" />
+  </build:Metadata>
+</Package>

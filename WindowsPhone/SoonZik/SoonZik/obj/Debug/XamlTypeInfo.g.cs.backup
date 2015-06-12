@@ -148,7 +148,7 @@ namespace SoonZik.SoonZik_XamlTypeInfo
 
         private void InitTypeTables()
         {
-            _typeNameTable = new string[92];
+            _typeNameTable = new string[91];
             _typeNameTable[0] = "SoonZik.ViewModel.ViewModelLocator";
             _typeNameTable[1] = "Object";
             _typeNameTable[2] = "SoonZik.ViewModel.MainViewModel";
@@ -191,16 +191,16 @@ namespace SoonZik.SoonZik_XamlTypeInfo
             _typeNameTable[39] = "Double";
             _typeNameTable[40] = "SoonZik.HttpRequest.Poco.Album";
             _typeNameTable[41] = "System.Collections.Generic.List`1<SoonZik.HttpRequest.Poco.Genre>";
-            _typeNameTable[42] = "System.Collections.ObjectModel.ObservableCollection`1<SoonZik.HttpRequest.Poco.User>";
-            _typeNameTable[43] = "System.Collections.ObjectModel.Collection`1<SoonZik.HttpRequest.Poco.User>";
-            _typeNameTable[44] = "SoonZik.HttpRequest.Poco.Address";
-            _typeNameTable[45] = "System.Collections.Generic.List`1<SoonZik.HttpRequest.Poco.User>";
-            _typeNameTable[46] = "System.Collections.Generic.List`1<SoonZik.Utils.AlphaKeyGroups`1<SoonZik.HttpRequest.Poco.User>>";
-            _typeNameTable[47] = "SoonZik.Utils.AlphaKeyGroups`1<SoonZik.HttpRequest.Poco.User>";
-            _typeNameTable[48] = "SoonZik.Controls.ButtonFriendPopUp";
-            _typeNameTable[49] = "Windows.UI.Xaml.Controls.UserControl";
-            _typeNameTable[50] = "SoonZik.Controls.Genre";
-            _typeNameTable[51] = "SoonZik.Controls.PivotControl";
+            _typeNameTable[42] = "System.Windows.Input.ICommand";
+            _typeNameTable[43] = "System.Collections.ObjectModel.ObservableCollection`1<SoonZik.HttpRequest.Poco.User>";
+            _typeNameTable[44] = "System.Collections.ObjectModel.Collection`1<SoonZik.HttpRequest.Poco.User>";
+            _typeNameTable[45] = "SoonZik.HttpRequest.Poco.Address";
+            _typeNameTable[46] = "System.Collections.Generic.List`1<SoonZik.HttpRequest.Poco.User>";
+            _typeNameTable[47] = "System.Collections.Generic.List`1<SoonZik.Utils.AlphaKeyGroups`1<SoonZik.HttpRequest.Poco.User>>";
+            _typeNameTable[48] = "SoonZik.Utils.AlphaKeyGroups`1<SoonZik.HttpRequest.Poco.User>";
+            _typeNameTable[49] = "SoonZik.Controls.ButtonFriendPopUp";
+            _typeNameTable[50] = "Windows.UI.Xaml.Controls.UserControl";
+            _typeNameTable[51] = "SoonZik.Controls.Genre";
             _typeNameTable[52] = "Microsoft.Xaml.Interactivity.Interaction";
             _typeNameTable[53] = "Microsoft.Xaml.Interactivity.BehaviorCollection";
             _typeNameTable[54] = "Windows.UI.Xaml.DependencyObjectCollection";
@@ -222,27 +222,26 @@ namespace SoonZik.SoonZik_XamlTypeInfo
             _typeNameTable[70] = "SoonZik.Views.Packs";
             _typeNameTable[71] = "SoonZik.Views.Explorer";
             _typeNameTable[72] = "SoonZik.Views.News";
-            _typeNameTable[73] = "SoonZik.Utils.BoolToVisibilityConverter";
-            _typeNameTable[74] = "SoonZik.Views.Connexion";
-            _typeNameTable[75] = "SoonZik.MainPage";
-            _typeNameTable[76] = "Microsoft.Xaml.Interactions.Core.InvokeCommandAction";
-            _typeNameTable[77] = "System.Windows.Input.ICommand";
-            _typeNameTable[78] = "Windows.UI.Xaml.Data.IValueConverter";
-            _typeNameTable[79] = "SoonZik.Views.Conversation";
-            _typeNameTable[80] = "SoonZik.Views.CustomSplashScreen";
-            _typeNameTable[81] = "Coding4Fun.Toolkit.Controls.Converters.BooleanToVisibilityConverter";
-            _typeNameTable[82] = "Coding4Fun.Toolkit.Controls.Converters.ValueConverter";
-            _typeNameTable[83] = "SoonZik.Views.MainView";
-            _typeNameTable[84] = "LightStone.Controls.LightStone";
-            _typeNameTable[85] = "Windows.UI.Xaml.Controls.Canvas";
-            _typeNameTable[86] = "Windows.UI.Xaml.Controls.Panel";
-            _typeNameTable[87] = "Windows.UI.Xaml.DataTemplate";
-            _typeNameTable[88] = "Windows.UI.Xaml.Media.Animation.EasingFunctionBase";
-            _typeNameTable[89] = "SoonZik.Views.Player";
-            _typeNameTable[90] = "SoonZik.Views.ProfilArtiste";
-            _typeNameTable[91] = "SoonZik.Views.ProfilUser";
+            _typeNameTable[73] = "SoonZik.Controls.PivotControl";
+            _typeNameTable[74] = "SoonZik.Controls.ProgressRingControl";
+            _typeNameTable[75] = "SoonZik.Utils.BoolToVisibilityConverter";
+            _typeNameTable[76] = "SoonZik.Views.Connexion";
+            _typeNameTable[77] = "SoonZik.MainPage";
+            _typeNameTable[78] = "Microsoft.Xaml.Interactions.Core.InvokeCommandAction";
+            _typeNameTable[79] = "Windows.UI.Xaml.Data.IValueConverter";
+            _typeNameTable[80] = "SoonZik.Views.Conversation";
+            _typeNameTable[81] = "SoonZik.Views.CustomSplashScreen";
+            _typeNameTable[82] = "SoonZik.Views.MainView";
+            _typeNameTable[83] = "LightStone.Controls.LightStone";
+            _typeNameTable[84] = "Windows.UI.Xaml.Controls.Canvas";
+            _typeNameTable[85] = "Windows.UI.Xaml.Controls.Panel";
+            _typeNameTable[86] = "Windows.UI.Xaml.DataTemplate";
+            _typeNameTable[87] = "Windows.UI.Xaml.Media.Animation.EasingFunctionBase";
+            _typeNameTable[88] = "SoonZik.Views.Player";
+            _typeNameTable[89] = "SoonZik.Views.ProfilArtiste";
+            _typeNameTable[90] = "SoonZik.Views.ProfilUser";
 
-            _typeTable = new global::System.Type[92];
+            _typeTable = new global::System.Type[91];
             _typeTable[0] = typeof(global::SoonZik.ViewModel.ViewModelLocator);
             _typeTable[1] = typeof(global::System.Object);
             _typeTable[2] = typeof(global::SoonZik.ViewModel.MainViewModel);
@@ -285,16 +284,16 @@ namespace SoonZik.SoonZik_XamlTypeInfo
             _typeTable[39] = typeof(global::System.Double);
             _typeTable[40] = typeof(global::SoonZik.HttpRequest.Poco.Album);
             _typeTable[41] = typeof(global::System.Collections.Generic.List<global::SoonZik.HttpRequest.Poco.Genre>);
-            _typeTable[42] = typeof(global::System.Collections.ObjectModel.ObservableCollection<global::SoonZik.HttpRequest.Poco.User>);
-            _typeTable[43] = typeof(global::System.Collections.ObjectModel.Collection<global::SoonZik.HttpRequest.Poco.User>);
-            _typeTable[44] = typeof(global::SoonZik.HttpRequest.Poco.Address);
-            _typeTable[45] = typeof(global::System.Collections.Generic.List<global::SoonZik.HttpRequest.Poco.User>);
-            _typeTable[46] = typeof(global::System.Collections.Generic.List<SoonZik.Utils.AlphaKeyGroups<global::SoonZik.HttpRequest.Poco.User>>);
-            _typeTable[47] = typeof(global::SoonZik.Utils.AlphaKeyGroups<global::SoonZik.HttpRequest.Poco.User>);
-            _typeTable[48] = typeof(global::SoonZik.Controls.ButtonFriendPopUp);
-            _typeTable[49] = typeof(global::Windows.UI.Xaml.Controls.UserControl);
-            _typeTable[50] = typeof(global::SoonZik.Controls.Genre);
-            _typeTable[51] = typeof(global::SoonZik.Controls.PivotControl);
+            _typeTable[42] = typeof(global::System.Windows.Input.ICommand);
+            _typeTable[43] = typeof(global::System.Collections.ObjectModel.ObservableCollection<global::SoonZik.HttpRequest.Poco.User>);
+            _typeTable[44] = typeof(global::System.Collections.ObjectModel.Collection<global::SoonZik.HttpRequest.Poco.User>);
+            _typeTable[45] = typeof(global::SoonZik.HttpRequest.Poco.Address);
+            _typeTable[46] = typeof(global::System.Collections.Generic.List<global::SoonZik.HttpRequest.Poco.User>);
+            _typeTable[47] = typeof(global::System.Collections.Generic.List<SoonZik.Utils.AlphaKeyGroups<global::SoonZik.HttpRequest.Poco.User>>);
+            _typeTable[48] = typeof(global::SoonZik.Utils.AlphaKeyGroups<global::SoonZik.HttpRequest.Poco.User>);
+            _typeTable[49] = typeof(global::SoonZik.Controls.ButtonFriendPopUp);
+            _typeTable[50] = typeof(global::Windows.UI.Xaml.Controls.UserControl);
+            _typeTable[51] = typeof(global::SoonZik.Controls.Genre);
             _typeTable[52] = typeof(global::Microsoft.Xaml.Interactivity.Interaction);
             _typeTable[53] = typeof(global::Microsoft.Xaml.Interactivity.BehaviorCollection);
             _typeTable[54] = typeof(global::Windows.UI.Xaml.DependencyObjectCollection);
@@ -316,25 +315,24 @@ namespace SoonZik.SoonZik_XamlTypeInfo
             _typeTable[70] = typeof(global::SoonZik.Views.Packs);
             _typeTable[71] = typeof(global::SoonZik.Views.Explorer);
             _typeTable[72] = typeof(global::SoonZik.Views.News);
-            _typeTable[73] = typeof(global::SoonZik.Utils.BoolToVisibilityConverter);
-            _typeTable[74] = typeof(global::SoonZik.Views.Connexion);
-            _typeTable[75] = typeof(global::SoonZik.MainPage);
-            _typeTable[76] = typeof(global::Microsoft.Xaml.Interactions.Core.InvokeCommandAction);
-            _typeTable[77] = typeof(global::System.Windows.Input.ICommand);
-            _typeTable[78] = typeof(global::Windows.UI.Xaml.Data.IValueConverter);
-            _typeTable[79] = typeof(global::SoonZik.Views.Conversation);
-            _typeTable[80] = typeof(global::SoonZik.Views.CustomSplashScreen);
-            _typeTable[81] = typeof(global::Coding4Fun.Toolkit.Controls.Converters.BooleanToVisibilityConverter);
-            _typeTable[82] = typeof(global::Coding4Fun.Toolkit.Controls.Converters.ValueConverter);
-            _typeTable[83] = typeof(global::SoonZik.Views.MainView);
-            _typeTable[84] = typeof(global::LightStone.Controls.LightStone);
-            _typeTable[85] = typeof(global::Windows.UI.Xaml.Controls.Canvas);
-            _typeTable[86] = typeof(global::Windows.UI.Xaml.Controls.Panel);
-            _typeTable[87] = typeof(global::Windows.UI.Xaml.DataTemplate);
-            _typeTable[88] = typeof(global::Windows.UI.Xaml.Media.Animation.EasingFunctionBase);
-            _typeTable[89] = typeof(global::SoonZik.Views.Player);
-            _typeTable[90] = typeof(global::SoonZik.Views.ProfilArtiste);
-            _typeTable[91] = typeof(global::SoonZik.Views.ProfilUser);
+            _typeTable[73] = typeof(global::SoonZik.Controls.PivotControl);
+            _typeTable[74] = typeof(global::SoonZik.Controls.ProgressRingControl);
+            _typeTable[75] = typeof(global::SoonZik.Utils.BoolToVisibilityConverter);
+            _typeTable[76] = typeof(global::SoonZik.Views.Connexion);
+            _typeTable[77] = typeof(global::SoonZik.MainPage);
+            _typeTable[78] = typeof(global::Microsoft.Xaml.Interactions.Core.InvokeCommandAction);
+            _typeTable[79] = typeof(global::Windows.UI.Xaml.Data.IValueConverter);
+            _typeTable[80] = typeof(global::SoonZik.Views.Conversation);
+            _typeTable[81] = typeof(global::SoonZik.Views.CustomSplashScreen);
+            _typeTable[82] = typeof(global::SoonZik.Views.MainView);
+            _typeTable[83] = typeof(global::LightStone.Controls.LightStone);
+            _typeTable[84] = typeof(global::Windows.UI.Xaml.Controls.Canvas);
+            _typeTable[85] = typeof(global::Windows.UI.Xaml.Controls.Panel);
+            _typeTable[86] = typeof(global::Windows.UI.Xaml.DataTemplate);
+            _typeTable[87] = typeof(global::Windows.UI.Xaml.Media.Animation.EasingFunctionBase);
+            _typeTable[88] = typeof(global::SoonZik.Views.Player);
+            _typeTable[89] = typeof(global::SoonZik.Views.ProfilArtiste);
+            _typeTable[90] = typeof(global::SoonZik.Views.ProfilUser);
         }
 
         private int LookupTypeIndexByName(string typeName)
@@ -401,14 +399,12 @@ namespace SoonZik.SoonZik_XamlTypeInfo
         private object Activate_38_Music() { return new global::SoonZik.HttpRequest.Poco.Music(); }
         private object Activate_40_Album() { return new global::SoonZik.HttpRequest.Poco.Album(); }
         private object Activate_41_List() { return new global::System.Collections.Generic.List<global::SoonZik.HttpRequest.Poco.Genre>(); }
-        private object Activate_42_ObservableCollection() { return new global::System.Collections.ObjectModel.ObservableCollection<global::SoonZik.HttpRequest.Poco.User>(); }
-        private object Activate_43_Collection() { return new global::System.Collections.ObjectModel.Collection<global::SoonZik.HttpRequest.Poco.User>(); }
-        private object Activate_44_Address() { return new global::SoonZik.HttpRequest.Poco.Address(); }
-        private object Activate_45_List() { return new global::System.Collections.Generic.List<global::SoonZik.HttpRequest.Poco.User>(); }
-        private object Activate_46_List() { return new global::System.Collections.Generic.List<SoonZik.Utils.AlphaKeyGroups<global::SoonZik.HttpRequest.Poco.User>>(); }
-        private object Activate_48_ButtonFriendPopUp() { return new global::SoonZik.Controls.ButtonFriendPopUp(); }
-        private object Activate_50_Genre() { return new global::SoonZik.Controls.Genre(); }
-        private object Activate_51_PivotControl() { return new global::SoonZik.Controls.PivotControl(); }
+        private object Activate_43_ObservableCollection() { return new global::System.Collections.ObjectModel.ObservableCollection<global::SoonZik.HttpRequest.Poco.User>(); }
+        private object Activate_44_Collection() { return new global::System.Collections.ObjectModel.Collection<global::SoonZik.HttpRequest.Poco.User>(); }
+        private object Activate_45_Address() { return new global::SoonZik.HttpRequest.Poco.Address(); }
+        private object Activate_46_List() { return new global::System.Collections.Generic.List<global::SoonZik.HttpRequest.Poco.User>(); }
+        private object Activate_47_List() { return new global::System.Collections.Generic.List<SoonZik.Utils.AlphaKeyGroups<global::SoonZik.HttpRequest.Poco.User>>(); }
+        private object Activate_51_Genre() { return new global::SoonZik.Controls.Genre(); }
         private object Activate_53_BehaviorCollection() { return new global::Microsoft.Xaml.Interactivity.BehaviorCollection(); }
         private object Activate_56_EventTriggerBehavior() { return new global::Microsoft.Xaml.Interactions.Core.EventTriggerBehavior(); }
         private object Activate_57_ActionCollection() { return new global::Microsoft.Xaml.Interactivity.ActionCollection(); }
@@ -422,17 +418,18 @@ namespace SoonZik.SoonZik_XamlTypeInfo
         private object Activate_70_Packs() { return new global::SoonZik.Views.Packs(); }
         private object Activate_71_Explorer() { return new global::SoonZik.Views.Explorer(); }
         private object Activate_72_News() { return new global::SoonZik.Views.News(); }
-        private object Activate_73_BoolToVisibilityConverter() { return new global::SoonZik.Utils.BoolToVisibilityConverter(); }
-        private object Activate_74_Connexion() { return new global::SoonZik.Views.Connexion(); }
-        private object Activate_75_MainPage() { return new global::SoonZik.MainPage(); }
-        private object Activate_76_InvokeCommandAction() { return new global::Microsoft.Xaml.Interactions.Core.InvokeCommandAction(); }
-        private object Activate_79_Conversation() { return new global::SoonZik.Views.Conversation(); }
-        private object Activate_81_BooleanToVisibilityConverter() { return new global::Coding4Fun.Toolkit.Controls.Converters.BooleanToVisibilityConverter(); }
-        private object Activate_83_MainView() { return new global::SoonZik.Views.MainView(); }
-        private object Activate_84_LightStone() { return new global::LightStone.Controls.LightStone(); }
-        private object Activate_89_Player() { return new global::SoonZik.Views.Player(); }
-        private object Activate_90_ProfilArtiste() { return new global::SoonZik.Views.ProfilArtiste(); }
-        private object Activate_91_ProfilUser() { return new global::SoonZik.Views.ProfilUser(); }
+        private object Activate_73_PivotControl() { return new global::SoonZik.Controls.PivotControl(); }
+        private object Activate_74_ProgressRingControl() { return new global::SoonZik.Controls.ProgressRingControl(); }
+        private object Activate_75_BoolToVisibilityConverter() { return new global::SoonZik.Utils.BoolToVisibilityConverter(); }
+        private object Activate_76_Connexion() { return new global::SoonZik.Views.Connexion(); }
+        private object Activate_77_MainPage() { return new global::SoonZik.MainPage(); }
+        private object Activate_78_InvokeCommandAction() { return new global::Microsoft.Xaml.Interactions.Core.InvokeCommandAction(); }
+        private object Activate_80_Conversation() { return new global::SoonZik.Views.Conversation(); }
+        private object Activate_82_MainView() { return new global::SoonZik.Views.MainView(); }
+        private object Activate_83_LightStone() { return new global::LightStone.Controls.LightStone(); }
+        private object Activate_88_Player() { return new global::SoonZik.Views.Player(); }
+        private object Activate_89_ProfilArtiste() { return new global::SoonZik.Views.ProfilArtiste(); }
+        private object Activate_90_ProfilUser() { return new global::SoonZik.Views.ProfilUser(); }
         private void VectorAdd_26_ObservableCollection(object instance, object item)
         {
             var collection = (global::System.Collections.Generic.ICollection<global::SoonZik.HttpRequest.Poco.News>)instance;
@@ -481,19 +478,13 @@ namespace SoonZik.SoonZik_XamlTypeInfo
             var newItem = (global::SoonZik.HttpRequest.Poco.Genre)item;
             collection.Add(newItem);
         }
-        private void VectorAdd_42_ObservableCollection(object instance, object item)
+        private void VectorAdd_43_ObservableCollection(object instance, object item)
         {
             var collection = (global::System.Collections.Generic.ICollection<global::SoonZik.HttpRequest.Poco.User>)instance;
             var newItem = (global::SoonZik.HttpRequest.Poco.User)item;
             collection.Add(newItem);
         }
-        private void VectorAdd_43_Collection(object instance, object item)
-        {
-            var collection = (global::System.Collections.Generic.ICollection<global::SoonZik.HttpRequest.Poco.User>)instance;
-            var newItem = (global::SoonZik.HttpRequest.Poco.User)item;
-            collection.Add(newItem);
-        }
-        private void VectorAdd_45_List(object instance, object item)
+        private void VectorAdd_44_Collection(object instance, object item)
         {
             var collection = (global::System.Collections.Generic.ICollection<global::SoonZik.HttpRequest.Poco.User>)instance;
             var newItem = (global::SoonZik.HttpRequest.Poco.User)item;
@@ -501,11 +492,17 @@ namespace SoonZik.SoonZik_XamlTypeInfo
         }
         private void VectorAdd_46_List(object instance, object item)
         {
+            var collection = (global::System.Collections.Generic.ICollection<global::SoonZik.HttpRequest.Poco.User>)instance;
+            var newItem = (global::SoonZik.HttpRequest.Poco.User)item;
+            collection.Add(newItem);
+        }
+        private void VectorAdd_47_List(object instance, object item)
+        {
             var collection = (global::System.Collections.Generic.ICollection<global::SoonZik.Utils.AlphaKeyGroups<global::SoonZik.HttpRequest.Poco.User>>)instance;
             var newItem = (global::SoonZik.Utils.AlphaKeyGroups<global::SoonZik.HttpRequest.Poco.User>)item;
             collection.Add(newItem);
         }
-        private void VectorAdd_47_AlphaKeyGroups(object instance, object item)
+        private void VectorAdd_48_AlphaKeyGroups(object instance, object item)
         {
             var collection = (global::System.Collections.Generic.ICollection<global::SoonZik.HttpRequest.Poco.User>)instance;
             var newItem = (global::SoonZik.HttpRequest.Poco.User)item;
@@ -564,16 +561,6 @@ namespace SoonZik.SoonZik_XamlTypeInfo
             case 2:   //  SoonZik.ViewModel.MainViewModel
                 userType = new global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("GalaSoft.MvvmLight.ViewModelBase"));
                 userType.Activator = Activate_2_MainViewModel;
-                userType.AddMemberName("ConnexionCommand");
-                userType.AddMemberName("ProfilCommand");
-                userType.AddMemberName("NewsCommand");
-                userType.AddMemberName("ExplorerCommand");
-                userType.AddMemberName("PacksCommand");
-                userType.AddMemberName("MondeMusicalCommand");
-                userType.AddMemberName("BattleCommand");
-                userType.AddMemberName("PlaylistCommand");
-                userType.AddMemberName("AmisCommand");
-                userType.AddMemberName("AchatCommand");
                 userType.AddMemberName("ConnexionString");
                 userType.AddMemberName("GetGridExecute");
                 userType.AddMemberName("GetStoryBoardExecute");
@@ -599,6 +586,7 @@ namespace SoonZik.SoonZik_XamlTypeInfo
             case 5:   //  SoonZik.ViewModel.ConnexionViewModel
                 userType = new global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("GalaSoft.MvvmLight.ViewModelBase"));
                 userType.Activator = Activate_5_ConnexionViewModel;
+                userType.AddMemberName("ProgressOn");
                 userType.AddMemberName("Username");
                 userType.AddMemberName("Password");
                 userType.AddMemberName("ConnexionCommand");
@@ -680,6 +668,7 @@ namespace SoonZik.SoonZik_XamlTypeInfo
                 userType.AddMemberName("Sources");
                 userType.AddMemberName("ItemSource");
                 userType.AddMemberName("TappedCommand");
+                userType.AddMemberName("SelectedUser");
                 userType.SetIsLocalType();
                 xamlType = userType;
                 break;
@@ -885,71 +874,69 @@ namespace SoonZik.SoonZik_XamlTypeInfo
                 xamlType = userType;
                 break;
 
-            case 42:   //  System.Collections.ObjectModel.ObservableCollection`1<SoonZik.HttpRequest.Poco.User>
+            case 42:   //  System.Windows.Input.ICommand
+                userType = new global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType(this, typeName, type, null);
+                userType.SetIsReturnTypeStub();
+                xamlType = userType;
+                break;
+
+            case 43:   //  System.Collections.ObjectModel.ObservableCollection`1<SoonZik.HttpRequest.Poco.User>
                 userType = new global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("System.Collections.ObjectModel.Collection`1<SoonZik.HttpRequest.Poco.User>"));
-                userType.CollectionAdd = VectorAdd_42_ObservableCollection;
+                userType.CollectionAdd = VectorAdd_43_ObservableCollection;
                 userType.SetIsReturnTypeStub();
                 xamlType = userType;
                 break;
 
-            case 43:   //  System.Collections.ObjectModel.Collection`1<SoonZik.HttpRequest.Poco.User>
+            case 44:   //  System.Collections.ObjectModel.Collection`1<SoonZik.HttpRequest.Poco.User>
                 userType = new global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Object"));
-                userType.Activator = Activate_43_Collection;
-                userType.CollectionAdd = VectorAdd_43_Collection;
+                userType.Activator = Activate_44_Collection;
+                userType.CollectionAdd = VectorAdd_44_Collection;
                 xamlType = userType;
                 break;
 
-            case 44:   //  SoonZik.HttpRequest.Poco.Address
+            case 45:   //  SoonZik.HttpRequest.Poco.Address
                 userType = new global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Object"));
                 userType.SetIsReturnTypeStub();
                 xamlType = userType;
                 break;
 
-            case 45:   //  System.Collections.Generic.List`1<SoonZik.HttpRequest.Poco.User>
+            case 46:   //  System.Collections.Generic.List`1<SoonZik.HttpRequest.Poco.User>
                 userType = new global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Object"));
-                userType.Activator = Activate_45_List;
-                userType.CollectionAdd = VectorAdd_45_List;
+                userType.Activator = Activate_46_List;
+                userType.CollectionAdd = VectorAdd_46_List;
                 userType.AddMemberName("Capacity");
                 userType.AddMemberName("Count");
                 xamlType = userType;
                 break;
 
-            case 46:   //  System.Collections.Generic.List`1<SoonZik.Utils.AlphaKeyGroups`1<SoonZik.HttpRequest.Poco.User>>
+            case 47:   //  System.Collections.Generic.List`1<SoonZik.Utils.AlphaKeyGroups`1<SoonZik.HttpRequest.Poco.User>>
                 userType = new global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Object"));
-                userType.CollectionAdd = VectorAdd_46_List;
+                userType.CollectionAdd = VectorAdd_47_List;
                 userType.SetIsReturnTypeStub();
                 xamlType = userType;
                 break;
 
-            case 47:   //  SoonZik.Utils.AlphaKeyGroups`1<SoonZik.HttpRequest.Poco.User>
+            case 48:   //  SoonZik.Utils.AlphaKeyGroups`1<SoonZik.HttpRequest.Poco.User>
                 userType = new global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("System.Collections.Generic.List`1<SoonZik.HttpRequest.Poco.User>"));
-                userType.CollectionAdd = VectorAdd_47_AlphaKeyGroups;
+                userType.CollectionAdd = VectorAdd_48_AlphaKeyGroups;
                 userType.AddMemberName("Key");
                 userType.SetIsLocalType();
                 xamlType = userType;
                 break;
 
-            case 48:   //  SoonZik.Controls.ButtonFriendPopUp
+            case 49:   //  SoonZik.Controls.ButtonFriendPopUp
                 userType = new global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.UserControl"));
-                userType.Activator = Activate_48_ButtonFriendPopUp;
                 userType.SetIsLocalType();
                 xamlType = userType;
                 break;
 
-            case 49:   //  Windows.UI.Xaml.Controls.UserControl
+            case 50:   //  Windows.UI.Xaml.Controls.UserControl
                 xamlType = new global::SoonZik.SoonZik_XamlTypeInfo.XamlSystemBaseType(typeName, type);
                 break;
 
-            case 50:   //  SoonZik.Controls.Genre
+            case 51:   //  SoonZik.Controls.Genre
                 userType = new global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.UserControl"));
-                userType.Activator = Activate_50_Genre;
-                userType.SetIsLocalType();
-                xamlType = userType;
-                break;
-
-            case 51:   //  SoonZik.Controls.PivotControl
-                userType = new global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.UserControl"));
-                userType.Activator = Activate_51_PivotControl;
+                userType.Activator = Activate_51_Genre;
                 userType.SetIsLocalType();
                 xamlType = userType;
                 break;
@@ -1029,17 +1016,6 @@ namespace SoonZik.SoonZik_XamlTypeInfo
             case 63:   //  SoonZik.Controls.GlobalMenuControl
                 userType = new global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.UserControl"));
                 userType.Activator = Activate_63_GlobalMenuControl;
-                userType.AddMemberName("ConnexionCommand");
-                userType.AddMemberName("ProfilCommand");
-                userType.AddMemberName("NewsCommand");
-                userType.AddMemberName("ExplorerCommand");
-                userType.AddMemberName("PacksCommand");
-                userType.AddMemberName("MondeMusicalCommand");
-                userType.AddMemberName("BattleCommand");
-                userType.AddMemberName("PlaylistCommand");
-                userType.AddMemberName("AmisCommand");
-                userType.AddMemberName("AchatCommand");
-                userType.AddMemberName("MenuCommand");
                 userType.SetIsLocalType();
                 xamlType = userType;
                 break;
@@ -1104,30 +1080,45 @@ namespace SoonZik.SoonZik_XamlTypeInfo
                 xamlType = userType;
                 break;
 
-            case 73:   //  SoonZik.Utils.BoolToVisibilityConverter
+            case 73:   //  SoonZik.Controls.PivotControl
+                userType = new global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.UserControl"));
+                userType.Activator = Activate_73_PivotControl;
+                userType.SetIsLocalType();
+                xamlType = userType;
+                break;
+
+            case 74:   //  SoonZik.Controls.ProgressRingControl
+                userType = new global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.UserControl"));
+                userType.Activator = Activate_74_ProgressRingControl;
+                userType.AddMemberName("isActive");
+                userType.SetIsLocalType();
+                xamlType = userType;
+                break;
+
+            case 75:   //  SoonZik.Utils.BoolToVisibilityConverter
                 userType = new global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Object"));
-                userType.Activator = Activate_73_BoolToVisibilityConverter;
+                userType.Activator = Activate_75_BoolToVisibilityConverter;
                 userType.SetIsLocalType();
                 xamlType = userType;
                 break;
 
-            case 74:   //  SoonZik.Views.Connexion
+            case 76:   //  SoonZik.Views.Connexion
                 userType = new global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Page"));
-                userType.Activator = Activate_74_Connexion;
+                userType.Activator = Activate_76_Connexion;
                 userType.SetIsLocalType();
                 xamlType = userType;
                 break;
 
-            case 75:   //  SoonZik.MainPage
+            case 77:   //  SoonZik.MainPage
                 userType = new global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Page"));
-                userType.Activator = Activate_75_MainPage;
+                userType.Activator = Activate_77_MainPage;
                 userType.SetIsLocalType();
                 xamlType = userType;
                 break;
 
-            case 76:   //  Microsoft.Xaml.Interactions.Core.InvokeCommandAction
+            case 78:   //  Microsoft.Xaml.Interactions.Core.InvokeCommandAction
                 userType = new global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.DependencyObject"));
-                userType.Activator = Activate_76_InvokeCommandAction;
+                userType.Activator = Activate_78_InvokeCommandAction;
                 userType.AddMemberName("Command");
                 userType.AddMemberName("CommandParameter");
                 userType.AddMemberName("InputConverter");
@@ -1136,50 +1127,33 @@ namespace SoonZik.SoonZik_XamlTypeInfo
                 xamlType = userType;
                 break;
 
-            case 77:   //  System.Windows.Input.ICommand
-                userType = new global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType(this, typeName, type, null);
-                userType.SetIsReturnTypeStub();
-                xamlType = userType;
-                break;
-
-            case 78:   //  Windows.UI.Xaml.Data.IValueConverter
+            case 79:   //  Windows.UI.Xaml.Data.IValueConverter
                 xamlType = new global::SoonZik.SoonZik_XamlTypeInfo.XamlSystemBaseType(typeName, type);
                 break;
 
-            case 79:   //  SoonZik.Views.Conversation
+            case 80:   //  SoonZik.Views.Conversation
                 userType = new global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Page"));
-                userType.Activator = Activate_79_Conversation;
+                userType.Activator = Activate_80_Conversation;
                 userType.SetIsLocalType();
                 xamlType = userType;
                 break;
 
-            case 80:   //  SoonZik.Views.CustomSplashScreen
+            case 81:   //  SoonZik.Views.CustomSplashScreen
                 userType = new global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Page"));
                 userType.SetIsLocalType();
                 xamlType = userType;
                 break;
 
-            case 81:   //  Coding4Fun.Toolkit.Controls.Converters.BooleanToVisibilityConverter
-                userType = new global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Coding4Fun.Toolkit.Controls.Converters.ValueConverter"));
-                userType.Activator = Activate_81_BooleanToVisibilityConverter;
-                xamlType = userType;
-                break;
-
-            case 82:   //  Coding4Fun.Toolkit.Controls.Converters.ValueConverter
-                userType = new global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Object"));
-                xamlType = userType;
-                break;
-
-            case 83:   //  SoonZik.Views.MainView
+            case 82:   //  SoonZik.Views.MainView
                 userType = new global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Page"));
-                userType.Activator = Activate_83_MainView;
+                userType.Activator = Activate_82_MainView;
                 userType.SetIsLocalType();
                 xamlType = userType;
                 break;
 
-            case 84:   //  LightStone.Controls.LightStone
+            case 83:   //  LightStone.Controls.LightStone
                 userType = new global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Canvas"));
-                userType.Activator = Activate_84_LightStone;
+                userType.Activator = Activate_83_LightStone;
                 userType.AddMemberName("ItemsSource");
                 userType.AddMemberName("SelectedIndex");
                 userType.AddMemberName("ItemTemplate");
@@ -1193,39 +1167,39 @@ namespace SoonZik.SoonZik_XamlTypeInfo
                 xamlType = userType;
                 break;
 
-            case 85:   //  Windows.UI.Xaml.Controls.Canvas
+            case 84:   //  Windows.UI.Xaml.Controls.Canvas
                 xamlType = new global::SoonZik.SoonZik_XamlTypeInfo.XamlSystemBaseType(typeName, type);
                 break;
 
-            case 86:   //  Windows.UI.Xaml.Controls.Panel
+            case 85:   //  Windows.UI.Xaml.Controls.Panel
                 xamlType = new global::SoonZik.SoonZik_XamlTypeInfo.XamlSystemBaseType(typeName, type);
                 break;
 
-            case 87:   //  Windows.UI.Xaml.DataTemplate
+            case 86:   //  Windows.UI.Xaml.DataTemplate
                 xamlType = new global::SoonZik.SoonZik_XamlTypeInfo.XamlSystemBaseType(typeName, type);
                 break;
 
-            case 88:   //  Windows.UI.Xaml.Media.Animation.EasingFunctionBase
+            case 87:   //  Windows.UI.Xaml.Media.Animation.EasingFunctionBase
                 xamlType = new global::SoonZik.SoonZik_XamlTypeInfo.XamlSystemBaseType(typeName, type);
                 break;
 
-            case 89:   //  SoonZik.Views.Player
+            case 88:   //  SoonZik.Views.Player
                 userType = new global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Page"));
-                userType.Activator = Activate_89_Player;
+                userType.Activator = Activate_88_Player;
                 userType.SetIsLocalType();
                 xamlType = userType;
                 break;
 
-            case 90:   //  SoonZik.Views.ProfilArtiste
+            case 89:   //  SoonZik.Views.ProfilArtiste
                 userType = new global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Page"));
-                userType.Activator = Activate_90_ProfilArtiste;
+                userType.Activator = Activate_89_ProfilArtiste;
                 userType.SetIsLocalType();
                 xamlType = userType;
                 break;
 
-            case 91:   //  SoonZik.Views.ProfilUser
+            case 90:   //  SoonZik.Views.ProfilUser
                 userType = new global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Page"));
-                userType.Activator = Activate_91_ProfilUser;
+                userType.Activator = Activate_90_ProfilUser;
                 userType.SetIsLocalType();
                 xamlType = userType;
                 break;
@@ -1374,895 +1348,820 @@ namespace SoonZik.SoonZik_XamlTypeInfo
             var that = (global::GalaSoft.MvvmLight.ViewModelBase)instance;
             return that.IsInDesignMode;
         }
-        private object get_17_ConnexionViewModel_Username(object instance)
+        private object get_17_ConnexionViewModel_ProgressOn(object instance)
+        {
+            var that = (global::SoonZik.ViewModel.ConnexionViewModel)instance;
+            return that.ProgressOn;
+        }
+        private void set_17_ConnexionViewModel_ProgressOn(object instance, object Value)
+        {
+            var that = (global::SoonZik.ViewModel.ConnexionViewModel)instance;
+            that.ProgressOn = (global::System.Boolean)Value;
+        }
+        private object get_18_ConnexionViewModel_Username(object instance)
         {
             var that = (global::SoonZik.ViewModel.ConnexionViewModel)instance;
             return that.Username;
         }
-        private void set_17_ConnexionViewModel_Username(object instance, object Value)
+        private void set_18_ConnexionViewModel_Username(object instance, object Value)
         {
             var that = (global::SoonZik.ViewModel.ConnexionViewModel)instance;
             that.Username = (global::System.String)Value;
         }
-        private object get_18_ConnexionViewModel_Password(object instance)
+        private object get_19_ConnexionViewModel_Password(object instance)
         {
             var that = (global::SoonZik.ViewModel.ConnexionViewModel)instance;
             return that.Password;
         }
-        private void set_18_ConnexionViewModel_Password(object instance, object Value)
+        private void set_19_ConnexionViewModel_Password(object instance, object Value)
         {
             var that = (global::SoonZik.ViewModel.ConnexionViewModel)instance;
             that.Password = (global::System.String)Value;
         }
-        private object get_19_ConnexionViewModel_ConnexionCommand(object instance)
+        private object get_20_ConnexionViewModel_ConnexionCommand(object instance)
         {
             var that = (global::SoonZik.ViewModel.ConnexionViewModel)instance;
             return that.ConnexionCommand;
         }
-        private object get_20_ConnexionViewModel_FacebookTapped(object instance)
+        private object get_21_ConnexionViewModel_FacebookTapped(object instance)
         {
             var that = (global::SoonZik.ViewModel.ConnexionViewModel)instance;
             return that.FacebookTapped;
         }
-        private object get_21_MainViewModel_ConnexionCommand(object instance)
-        {
-            var that = (global::SoonZik.ViewModel.MainViewModel)instance;
-            return that.ConnexionCommand;
-        }
-        private object get_22_MainViewModel_ProfilCommand(object instance)
-        {
-            var that = (global::SoonZik.ViewModel.MainViewModel)instance;
-            return that.ProfilCommand;
-        }
-        private object get_23_MainViewModel_NewsCommand(object instance)
-        {
-            var that = (global::SoonZik.ViewModel.MainViewModel)instance;
-            return that.NewsCommand;
-        }
-        private object get_24_MainViewModel_ExplorerCommand(object instance)
-        {
-            var that = (global::SoonZik.ViewModel.MainViewModel)instance;
-            return that.ExplorerCommand;
-        }
-        private object get_25_MainViewModel_PacksCommand(object instance)
-        {
-            var that = (global::SoonZik.ViewModel.MainViewModel)instance;
-            return that.PacksCommand;
-        }
-        private object get_26_MainViewModel_MondeMusicalCommand(object instance)
-        {
-            var that = (global::SoonZik.ViewModel.MainViewModel)instance;
-            return that.MondeMusicalCommand;
-        }
-        private object get_27_MainViewModel_BattleCommand(object instance)
-        {
-            var that = (global::SoonZik.ViewModel.MainViewModel)instance;
-            return that.BattleCommand;
-        }
-        private object get_28_MainViewModel_PlaylistCommand(object instance)
-        {
-            var that = (global::SoonZik.ViewModel.MainViewModel)instance;
-            return that.PlaylistCommand;
-        }
-        private object get_29_MainViewModel_AmisCommand(object instance)
-        {
-            var that = (global::SoonZik.ViewModel.MainViewModel)instance;
-            return that.AmisCommand;
-        }
-        private object get_30_MainViewModel_AchatCommand(object instance)
-        {
-            var that = (global::SoonZik.ViewModel.MainViewModel)instance;
-            return that.AchatCommand;
-        }
-        private object get_31_MainViewModel_ConnexionString(object instance)
+        private object get_22_MainViewModel_ConnexionString(object instance)
         {
             var that = (global::SoonZik.ViewModel.MainViewModel)instance;
             return that.ConnexionString;
         }
-        private void set_31_MainViewModel_ConnexionString(object instance, object Value)
+        private void set_22_MainViewModel_ConnexionString(object instance, object Value)
         {
             var that = (global::SoonZik.ViewModel.MainViewModel)instance;
             that.ConnexionString = (global::System.String)Value;
         }
-        private object get_32_MainViewModel_GetGridExecute(object instance)
+        private object get_23_MainViewModel_GetGridExecute(object instance)
         {
             var that = (global::SoonZik.ViewModel.MainViewModel)instance;
             return that.GetGridExecute;
         }
-        private void set_32_MainViewModel_GetGridExecute(object instance, object Value)
+        private void set_23_MainViewModel_GetGridExecute(object instance, object Value)
         {
             var that = (global::SoonZik.ViewModel.MainViewModel)instance;
             that.GetGridExecute = (global::GalaSoft.MvvmLight.Command.RelayCommand<global::Windows.UI.Xaml.Controls.Grid>)Value;
         }
-        private object get_33_MainViewModel_GetStoryBoardExecute(object instance)
+        private object get_24_MainViewModel_GetStoryBoardExecute(object instance)
         {
             var that = (global::SoonZik.ViewModel.MainViewModel)instance;
             return that.GetStoryBoardExecute;
         }
-        private void set_33_MainViewModel_GetStoryBoardExecute(object instance, object Value)
+        private void set_24_MainViewModel_GetStoryBoardExecute(object instance, object Value)
         {
             var that = (global::SoonZik.ViewModel.MainViewModel)instance;
             that.GetStoryBoardExecute = (global::GalaSoft.MvvmLight.Command.RelayCommand<global::Windows.UI.Xaml.Media.Animation.Storyboard>)Value;
         }
-        private object get_34_MainViewModel_GetToggleButton(object instance)
+        private object get_25_MainViewModel_GetToggleButton(object instance)
         {
             var that = (global::SoonZik.ViewModel.MainViewModel)instance;
             return that.GetToggleButton;
         }
-        private void set_34_MainViewModel_GetToggleButton(object instance, object Value)
+        private void set_25_MainViewModel_GetToggleButton(object instance, object Value)
         {
             var that = (global::SoonZik.ViewModel.MainViewModel)instance;
             that.GetToggleButton = (global::GalaSoft.MvvmLight.Command.RelayCommand<global::Windows.UI.Xaml.Controls.Primitives.ToggleButton>)Value;
         }
-        private object get_35_MainViewModel_SearchText(object instance)
+        private object get_26_MainViewModel_SearchText(object instance)
         {
             var that = (global::SoonZik.ViewModel.MainViewModel)instance;
             return that.SearchText;
         }
-        private void set_35_MainViewModel_SearchText(object instance, object Value)
+        private void set_26_MainViewModel_SearchText(object instance, object Value)
         {
             var that = (global::SoonZik.ViewModel.MainViewModel)instance;
             that.SearchText = (global::System.String)Value;
         }
-        private object get_36_MainViewModel_ConnexionVisibility(object instance)
+        private object get_27_MainViewModel_ConnexionVisibility(object instance)
         {
             var that = (global::SoonZik.ViewModel.MainViewModel)instance;
             return that.ConnexionVisibility;
         }
-        private void set_36_MainViewModel_ConnexionVisibility(object instance, object Value)
+        private void set_27_MainViewModel_ConnexionVisibility(object instance, object Value)
         {
             var that = (global::SoonZik.ViewModel.MainViewModel)instance;
             that.ConnexionVisibility = (global::System.Boolean)Value;
         }
-        private object get_37_NewsViewModel_ListNews(object instance)
+        private object get_28_NewsViewModel_ListNews(object instance)
         {
             var that = (global::SoonZik.ViewModel.NewsViewModel)instance;
             return that.ListNews;
         }
-        private void set_37_NewsViewModel_ListNews(object instance, object Value)
+        private void set_28_NewsViewModel_ListNews(object instance, object Value)
         {
             var that = (global::SoonZik.ViewModel.NewsViewModel)instance;
             that.ListNews = (global::System.Collections.ObjectModel.ObservableCollection<global::SoonZik.HttpRequest.Poco.News>)Value;
         }
-        private object get_38_News_Id(object instance)
+        private object get_29_News_Id(object instance)
         {
             var that = (global::SoonZik.HttpRequest.Poco.News)instance;
             return that.Id;
         }
-        private void set_38_News_Id(object instance, object Value)
+        private void set_29_News_Id(object instance, object Value)
         {
             var that = (global::SoonZik.HttpRequest.Poco.News)instance;
             that.Id = (global::System.Int32)Value;
         }
-        private object get_39_News_Title(object instance)
+        private object get_30_News_Title(object instance)
         {
             var that = (global::SoonZik.HttpRequest.Poco.News)instance;
             return that.Title;
         }
-        private void set_39_News_Title(object instance, object Value)
+        private void set_30_News_Title(object instance, object Value)
         {
             var that = (global::SoonZik.HttpRequest.Poco.News)instance;
             that.Title = (global::System.String)Value;
         }
-        private object get_40_News_Date(object instance)
+        private object get_31_News_Date(object instance)
         {
             var that = (global::SoonZik.HttpRequest.Poco.News)instance;
             return that.Date;
         }
-        private void set_40_News_Date(object instance, object Value)
+        private void set_31_News_Date(object instance, object Value)
         {
             var that = (global::SoonZik.HttpRequest.Poco.News)instance;
             that.Date = (global::System.String)Value;
         }
-        private object get_41_News_AuthorId(object instance)
+        private object get_32_News_AuthorId(object instance)
         {
             var that = (global::SoonZik.HttpRequest.Poco.News)instance;
             return that.AuthorId;
         }
-        private void set_41_News_AuthorId(object instance, object Value)
+        private void set_32_News_AuthorId(object instance, object Value)
         {
             var that = (global::SoonZik.HttpRequest.Poco.News)instance;
             that.AuthorId = (global::System.Int32)Value;
         }
-        private object get_42_News_CreatedAt(object instance)
+        private object get_33_News_CreatedAt(object instance)
         {
             var that = (global::SoonZik.HttpRequest.Poco.News)instance;
             return that.CreatedAt;
         }
-        private void set_42_News_CreatedAt(object instance, object Value)
+        private void set_33_News_CreatedAt(object instance, object Value)
         {
             var that = (global::SoonZik.HttpRequest.Poco.News)instance;
             that.CreatedAt = (global::System.String)Value;
         }
-        private object get_43_News_UpdatedAt(object instance)
+        private object get_34_News_UpdatedAt(object instance)
         {
             var that = (global::SoonZik.HttpRequest.Poco.News)instance;
             return that.UpdatedAt;
         }
-        private void set_43_News_UpdatedAt(object instance, object Value)
+        private void set_34_News_UpdatedAt(object instance, object Value)
         {
             var that = (global::SoonZik.HttpRequest.Poco.News)instance;
             that.UpdatedAt = (global::System.String)Value;
         }
-        private object get_44_News_NewsType(object instance)
+        private object get_35_News_NewsType(object instance)
         {
             var that = (global::SoonZik.HttpRequest.Poco.News)instance;
             return that.NewsType;
         }
-        private void set_44_News_NewsType(object instance, object Value)
+        private void set_35_News_NewsType(object instance, object Value)
         {
             var that = (global::SoonZik.HttpRequest.Poco.News)instance;
             that.NewsType = (global::System.String)Value;
         }
-        private object get_45_News_User(object instance)
+        private object get_36_News_User(object instance)
         {
             var that = (global::SoonZik.HttpRequest.Poco.News)instance;
             return that.User;
         }
-        private void set_45_News_User(object instance, object Value)
+        private void set_36_News_User(object instance, object Value)
         {
             var that = (global::SoonZik.HttpRequest.Poco.News)instance;
             that.User = (global::SoonZik.HttpRequest.Poco.User)Value;
         }
-        private object get_46_News_Newstexts(object instance)
+        private object get_37_News_Newstexts(object instance)
         {
             var that = (global::SoonZik.HttpRequest.Poco.News)instance;
             return that.Newstexts;
         }
-        private void set_46_News_Newstexts(object instance, object Value)
+        private void set_37_News_Newstexts(object instance, object Value)
         {
             var that = (global::SoonZik.HttpRequest.Poco.News)instance;
             that.Newstexts = (global::System.Collections.Generic.List<global::System.Object>)Value;
         }
-        private object get_47_News_Attachments(object instance)
+        private object get_38_News_Attachments(object instance)
         {
             var that = (global::SoonZik.HttpRequest.Poco.News)instance;
             return that.Attachments;
         }
-        private void set_47_News_Attachments(object instance, object Value)
+        private void set_38_News_Attachments(object instance, object Value)
         {
             var that = (global::SoonZik.HttpRequest.Poco.News)instance;
             that.Attachments = (global::System.Collections.Generic.List<global::System.Object>)Value;
         }
-        private object get_48_News_Tags(object instance)
+        private object get_39_News_Tags(object instance)
         {
             var that = (global::SoonZik.HttpRequest.Poco.News)instance;
             return that.Tags;
         }
-        private void set_48_News_Tags(object instance, object Value)
+        private void set_39_News_Tags(object instance, object Value)
         {
             var that = (global::SoonZik.HttpRequest.Poco.News)instance;
             that.Tags = (global::System.Collections.Generic.List<global::System.Object>)Value;
         }
-        private object get_49_ExplorerViewModel_ListGenres(object instance)
+        private object get_40_ExplorerViewModel_ListGenres(object instance)
         {
             var that = (global::SoonZik.ViewModel.ExplorerViewModel)instance;
             return that.ListGenres;
         }
-        private void set_49_ExplorerViewModel_ListGenres(object instance, object Value)
+        private void set_40_ExplorerViewModel_ListGenres(object instance, object Value)
         {
             var that = (global::SoonZik.ViewModel.ExplorerViewModel)instance;
             that.ListGenres = (global::System.Collections.ObjectModel.ObservableCollection<global::SoonZik.HttpRequest.Poco.Genre>)Value;
         }
-        private object get_50_Genre_id(object instance)
+        private object get_41_Genre_id(object instance)
         {
             var that = (global::SoonZik.HttpRequest.Poco.Genre)instance;
             return that.id;
         }
-        private void set_50_Genre_id(object instance, object Value)
+        private void set_41_Genre_id(object instance, object Value)
         {
             var that = (global::SoonZik.HttpRequest.Poco.Genre)instance;
             that.id = (global::System.Int32)Value;
         }
-        private object get_51_Genre_style_name(object instance)
+        private object get_42_Genre_style_name(object instance)
         {
             var that = (global::SoonZik.HttpRequest.Poco.Genre)instance;
             return that.style_name;
         }
-        private void set_51_Genre_style_name(object instance, object Value)
+        private void set_42_Genre_style_name(object instance, object Value)
         {
             var that = (global::SoonZik.HttpRequest.Poco.Genre)instance;
             that.style_name = (global::System.String)Value;
         }
-        private object get_52_Genre_color_name(object instance)
+        private object get_43_Genre_color_name(object instance)
         {
             var that = (global::SoonZik.HttpRequest.Poco.Genre)instance;
             return that.color_name;
         }
-        private void set_52_Genre_color_name(object instance, object Value)
+        private void set_43_Genre_color_name(object instance, object Value)
         {
             var that = (global::SoonZik.HttpRequest.Poco.Genre)instance;
             that.color_name = (global::System.String)Value;
         }
-        private object get_53_Genre_color_hexa(object instance)
+        private object get_44_Genre_color_hexa(object instance)
         {
             var that = (global::SoonZik.HttpRequest.Poco.Genre)instance;
             return that.color_hexa;
         }
-        private void set_53_Genre_color_hexa(object instance, object Value)
+        private void set_44_Genre_color_hexa(object instance, object Value)
         {
             var that = (global::SoonZik.HttpRequest.Poco.Genre)instance;
             that.color_hexa = (global::System.String)Value;
         }
-        private object get_54_Genre_created_at(object instance)
+        private object get_45_Genre_created_at(object instance)
         {
             var that = (global::SoonZik.HttpRequest.Poco.Genre)instance;
             return that.created_at;
         }
-        private void set_54_Genre_created_at(object instance, object Value)
+        private void set_45_Genre_created_at(object instance, object Value)
         {
             var that = (global::SoonZik.HttpRequest.Poco.Genre)instance;
             that.created_at = (global::System.String)Value;
         }
-        private object get_55_Genre_updated_at(object instance)
+        private object get_46_Genre_updated_at(object instance)
         {
             var that = (global::SoonZik.HttpRequest.Poco.Genre)instance;
             return that.updated_at;
         }
-        private void set_55_Genre_updated_at(object instance, object Value)
+        private void set_46_Genre_updated_at(object instance, object Value)
         {
             var that = (global::SoonZik.HttpRequest.Poco.Genre)instance;
             that.updated_at = (global::System.String)Value;
         }
-        private object get_56_Genre_influences(object instance)
+        private object get_47_Genre_influences(object instance)
         {
             var that = (global::SoonZik.HttpRequest.Poco.Genre)instance;
             return that.influences;
         }
-        private void set_56_Genre_influences(object instance, object Value)
+        private void set_47_Genre_influences(object instance, object Value)
         {
             var that = (global::SoonZik.HttpRequest.Poco.Genre)instance;
             that.influences = (global::System.Collections.Generic.List<global::SoonZik.HttpRequest.Poco.Influence>)Value;
         }
-        private object get_57_Influence_id(object instance)
+        private object get_48_Influence_id(object instance)
         {
             var that = (global::SoonZik.HttpRequest.Poco.Influence)instance;
             return that.id;
         }
-        private void set_57_Influence_id(object instance, object Value)
+        private void set_48_Influence_id(object instance, object Value)
         {
             var that = (global::SoonZik.HttpRequest.Poco.Influence)instance;
             that.id = (global::System.Int32)Value;
         }
-        private object get_58_Influence_name(object instance)
+        private object get_49_Influence_name(object instance)
         {
             var that = (global::SoonZik.HttpRequest.Poco.Influence)instance;
             return that.name;
         }
-        private void set_58_Influence_name(object instance, object Value)
+        private void set_49_Influence_name(object instance, object Value)
         {
             var that = (global::SoonZik.HttpRequest.Poco.Influence)instance;
             that.name = (global::System.String)Value;
         }
-        private object get_59_Influence_created_at(object instance)
+        private object get_50_Influence_created_at(object instance)
         {
             var that = (global::SoonZik.HttpRequest.Poco.Influence)instance;
             return that.created_at;
         }
-        private void set_59_Influence_created_at(object instance, object Value)
+        private void set_50_Influence_created_at(object instance, object Value)
         {
             var that = (global::SoonZik.HttpRequest.Poco.Influence)instance;
             that.created_at = (global::System.String)Value;
         }
-        private object get_60_Influence_updated_at(object instance)
+        private object get_51_Influence_updated_at(object instance)
         {
             var that = (global::SoonZik.HttpRequest.Poco.Influence)instance;
             return that.updated_at;
         }
-        private void set_60_Influence_updated_at(object instance, object Value)
+        private void set_51_Influence_updated_at(object instance, object Value)
         {
             var that = (global::SoonZik.HttpRequest.Poco.Influence)instance;
             that.updated_at = (global::System.String)Value;
         }
-        private object get_61_Genre_musics(object instance)
+        private object get_52_Genre_musics(object instance)
         {
             var that = (global::SoonZik.HttpRequest.Poco.Genre)instance;
             return that.musics;
         }
-        private void set_61_Genre_musics(object instance, object Value)
+        private void set_52_Genre_musics(object instance, object Value)
         {
             var that = (global::SoonZik.HttpRequest.Poco.Genre)instance;
             that.musics = (global::System.Collections.Generic.List<global::SoonZik.HttpRequest.Poco.Music>)Value;
         }
-        private object get_62_Music_id(object instance)
+        private object get_53_Music_id(object instance)
         {
             var that = (global::SoonZik.HttpRequest.Poco.Music)instance;
             return that.id;
         }
-        private void set_62_Music_id(object instance, object Value)
+        private void set_53_Music_id(object instance, object Value)
         {
             var that = (global::SoonZik.HttpRequest.Poco.Music)instance;
             that.id = (global::System.Int32)Value;
         }
-        private object get_63_Music_title(object instance)
+        private object get_54_Music_title(object instance)
         {
             var that = (global::SoonZik.HttpRequest.Poco.Music)instance;
             return that.title;
         }
-        private void set_63_Music_title(object instance, object Value)
+        private void set_54_Music_title(object instance, object Value)
         {
             var that = (global::SoonZik.HttpRequest.Poco.Music)instance;
             that.title = (global::System.String)Value;
         }
-        private object get_64_Music_duration(object instance)
+        private object get_55_Music_duration(object instance)
         {
             var that = (global::SoonZik.HttpRequest.Poco.Music)instance;
             return that.duration;
         }
-        private void set_64_Music_duration(object instance, object Value)
+        private void set_55_Music_duration(object instance, object Value)
         {
             var that = (global::SoonZik.HttpRequest.Poco.Music)instance;
             that.duration = (global::System.Int32)Value;
         }
-        private object get_65_Music_price(object instance)
+        private object get_56_Music_price(object instance)
         {
             var that = (global::SoonZik.HttpRequest.Poco.Music)instance;
             return that.price;
         }
-        private void set_65_Music_price(object instance, object Value)
+        private void set_56_Music_price(object instance, object Value)
         {
             var that = (global::SoonZik.HttpRequest.Poco.Music)instance;
             that.price = (global::System.Double)Value;
         }
-        private object get_66_Music_file(object instance)
+        private object get_57_Music_file(object instance)
         {
             var that = (global::SoonZik.HttpRequest.Poco.Music)instance;
             return that.file;
         }
-        private void set_66_Music_file(object instance, object Value)
+        private void set_57_Music_file(object instance, object Value)
         {
             var that = (global::SoonZik.HttpRequest.Poco.Music)instance;
             that.file = (global::System.String)Value;
         }
-        private object get_67_Music_album(object instance)
+        private object get_58_Music_album(object instance)
         {
             var that = (global::SoonZik.HttpRequest.Poco.Music)instance;
             return that.album;
         }
-        private void set_67_Music_album(object instance, object Value)
+        private void set_58_Music_album(object instance, object Value)
         {
             var that = (global::SoonZik.HttpRequest.Poco.Music)instance;
             that.album = (global::SoonZik.HttpRequest.Poco.Album)Value;
         }
-        private object get_68_Music_genres(object instance)
+        private object get_59_Music_genres(object instance)
         {
             var that = (global::SoonZik.HttpRequest.Poco.Music)instance;
             return that.genres;
         }
-        private void set_68_Music_genres(object instance, object Value)
+        private void set_59_Music_genres(object instance, object Value)
         {
             var that = (global::SoonZik.HttpRequest.Poco.Music)instance;
             that.genres = (global::System.Collections.Generic.List<global::SoonZik.HttpRequest.Poco.Genre>)Value;
         }
-        private object get_69_Music_user(object instance)
+        private object get_60_Music_user(object instance)
         {
             var that = (global::SoonZik.HttpRequest.Poco.Music)instance;
             return that.user;
         }
-        private void set_69_Music_user(object instance, object Value)
+        private void set_60_Music_user(object instance, object Value)
         {
             var that = (global::SoonZik.HttpRequest.Poco.Music)instance;
             that.user = (global::SoonZik.HttpRequest.Poco.User)Value;
         }
-        private object get_70_ProfilUserViewModel_CurrentUser(object instance)
+        private object get_61_ProfilUserViewModel_CurrentUser(object instance)
         {
             var that = (global::SoonZik.ViewModel.ProfilUserViewModel)instance;
             return that.CurrentUser;
         }
-        private void set_70_ProfilUserViewModel_CurrentUser(object instance, object Value)
+        private void set_61_ProfilUserViewModel_CurrentUser(object instance, object Value)
         {
             var that = (global::SoonZik.ViewModel.ProfilUserViewModel)instance;
             that.CurrentUser = (global::SoonZik.HttpRequest.Poco.User)Value;
         }
-        private object get_71_ProfilUserViewModel_SelectUser(object instance)
+        private object get_62_ProfilUserViewModel_SelectUser(object instance)
         {
             var that = (global::SoonZik.ViewModel.ProfilUserViewModel)instance;
             return that.SelectUser;
         }
-        private void set_71_ProfilUserViewModel_SelectUser(object instance, object Value)
+        private void set_62_ProfilUserViewModel_SelectUser(object instance, object Value)
         {
             var that = (global::SoonZik.ViewModel.ProfilUserViewModel)instance;
             that.SelectUser = (global::SoonZik.HttpRequest.Poco.User)Value;
         }
-        private object get_72_ProfilUserViewModel_SelectionCommand(object instance)
+        private object get_63_ProfilUserViewModel_SelectionCommand(object instance)
         {
             var that = (global::SoonZik.ViewModel.ProfilUserViewModel)instance;
             return that.SelectionCommand;
         }
-        private object get_73_FriendViewModel_Sources(object instance)
+        private object get_64_FriendViewModel_Sources(object instance)
         {
             var that = (global::SoonZik.ViewModel.FriendViewModel)instance;
             return that.Sources;
         }
-        private void set_73_FriendViewModel_Sources(object instance, object Value)
+        private void set_64_FriendViewModel_Sources(object instance, object Value)
         {
             var that = (global::SoonZik.ViewModel.FriendViewModel)instance;
             that.Sources = (global::System.Collections.ObjectModel.ObservableCollection<global::SoonZik.HttpRequest.Poco.User>)Value;
         }
-        private object get_74_User_Id(object instance)
+        private object get_65_User_Id(object instance)
         {
             var that = (global::SoonZik.HttpRequest.Poco.User)instance;
             return that.Id;
         }
-        private void set_74_User_Id(object instance, object Value)
+        private void set_65_User_Id(object instance, object Value)
         {
             var that = (global::SoonZik.HttpRequest.Poco.User)instance;
             that.Id = (global::System.Int32)Value;
         }
-        private object get_75_User_Email(object instance)
+        private object get_66_User_Email(object instance)
         {
             var that = (global::SoonZik.HttpRequest.Poco.User)instance;
             return that.Email;
         }
-        private void set_75_User_Email(object instance, object Value)
+        private void set_66_User_Email(object instance, object Value)
         {
             var that = (global::SoonZik.HttpRequest.Poco.User)instance;
             that.Email = (global::System.String)Value;
         }
-        private object get_76_User_Username(object instance)
+        private object get_67_User_Username(object instance)
         {
             var that = (global::SoonZik.HttpRequest.Poco.User)instance;
             return that.Username;
         }
-        private void set_76_User_Username(object instance, object Value)
+        private void set_67_User_Username(object instance, object Value)
         {
             var that = (global::SoonZik.HttpRequest.Poco.User)instance;
             that.Username = (global::System.String)Value;
         }
-        private object get_77_User_Image(object instance)
+        private object get_68_User_Image(object instance)
         {
             var that = (global::SoonZik.HttpRequest.Poco.User)instance;
             return that.Image;
         }
-        private void set_77_User_Image(object instance, object Value)
+        private void set_68_User_Image(object instance, object Value)
         {
             var that = (global::SoonZik.HttpRequest.Poco.User)instance;
             that.Image = (global::System.String)Value;
         }
-        private object get_78_User_Description(object instance)
+        private object get_69_User_Description(object instance)
         {
             var that = (global::SoonZik.HttpRequest.Poco.User)instance;
             return that.Description;
         }
-        private void set_78_User_Description(object instance, object Value)
+        private void set_69_User_Description(object instance, object Value)
         {
             var that = (global::SoonZik.HttpRequest.Poco.User)instance;
             that.Description = (global::System.String)Value;
         }
-        private object get_79_User_Language(object instance)
+        private object get_70_User_Language(object instance)
         {
             var that = (global::SoonZik.HttpRequest.Poco.User)instance;
             return that.Language;
         }
-        private void set_79_User_Language(object instance, object Value)
+        private void set_70_User_Language(object instance, object Value)
         {
             var that = (global::SoonZik.HttpRequest.Poco.User)instance;
             that.Language = (global::System.String)Value;
         }
-        private object get_80_User_Address(object instance)
+        private object get_71_User_Address(object instance)
         {
             var that = (global::SoonZik.HttpRequest.Poco.User)instance;
             return that.Address;
         }
-        private void set_80_User_Address(object instance, object Value)
+        private void set_71_User_Address(object instance, object Value)
         {
             var that = (global::SoonZik.HttpRequest.Poco.User)instance;
             that.Address = (global::SoonZik.HttpRequest.Poco.Address)Value;
         }
-        private object get_81_User_Friends(object instance)
+        private object get_72_User_Friends(object instance)
         {
             var that = (global::SoonZik.HttpRequest.Poco.User)instance;
             return that.Friends;
         }
-        private void set_81_User_Friends(object instance, object Value)
+        private void set_72_User_Friends(object instance, object Value)
         {
             var that = (global::SoonZik.HttpRequest.Poco.User)instance;
             that.Friends = (global::System.Collections.ObjectModel.ObservableCollection<global::SoonZik.HttpRequest.Poco.User>)Value;
         }
-        private object get_82_User_Follows(object instance)
+        private object get_73_User_Follows(object instance)
         {
             var that = (global::SoonZik.HttpRequest.Poco.User)instance;
             return that.Follows;
         }
-        private void set_82_User_Follows(object instance, object Value)
+        private void set_73_User_Follows(object instance, object Value)
         {
             var that = (global::SoonZik.HttpRequest.Poco.User)instance;
             that.Follows = (global::System.Collections.Generic.List<global::SoonZik.HttpRequest.Poco.User>)Value;
         }
-        private object get_83_FriendViewModel_ItemSource(object instance)
+        private object get_74_FriendViewModel_ItemSource(object instance)
         {
             var that = (global::SoonZik.ViewModel.FriendViewModel)instance;
             return that.ItemSource;
         }
-        private void set_83_FriendViewModel_ItemSource(object instance, object Value)
+        private void set_74_FriendViewModel_ItemSource(object instance, object Value)
         {
             var that = (global::SoonZik.ViewModel.FriendViewModel)instance;
             that.ItemSource = (global::System.Collections.Generic.List<SoonZik.Utils.AlphaKeyGroups<global::SoonZik.HttpRequest.Poco.User>>)Value;
         }
-        private object get_84_AlphaKeyGroups_Key(object instance)
+        private object get_75_AlphaKeyGroups_Key(object instance)
         {
             var that = (global::SoonZik.Utils.AlphaKeyGroups<global::SoonZik.HttpRequest.Poco.User>)instance;
             return that.Key;
         }
-        private object get_85_List_Capacity(object instance)
+        private object get_76_List_Capacity(object instance)
         {
             var that = (global::System.Collections.Generic.List<global::SoonZik.HttpRequest.Poco.User>)instance;
             return that.Capacity;
         }
-        private void set_85_List_Capacity(object instance, object Value)
+        private void set_76_List_Capacity(object instance, object Value)
         {
             var that = (global::System.Collections.Generic.List<global::SoonZik.HttpRequest.Poco.User>)instance;
             that.Capacity = (global::System.Int32)Value;
         }
-        private object get_86_List_Count(object instance)
+        private object get_77_List_Count(object instance)
         {
             var that = (global::System.Collections.Generic.List<global::SoonZik.HttpRequest.Poco.User>)instance;
             return that.Count;
         }
-        private object get_87_FriendViewModel_TappedCommand(object instance)
+        private object get_78_FriendViewModel_TappedCommand(object instance)
         {
             var that = (global::SoonZik.ViewModel.FriendViewModel)instance;
             return that.TappedCommand;
         }
-        private object get_88_Interaction_Behaviors(object instance)
+        private object get_79_FriendViewModel_SelectedUser(object instance)
+        {
+            var that = (global::SoonZik.ViewModel.FriendViewModel)instance;
+            return that.SelectedUser;
+        }
+        private void set_79_FriendViewModel_SelectedUser(object instance, object Value)
+        {
+            var that = (global::SoonZik.ViewModel.FriendViewModel)instance;
+            that.SelectedUser = (global::SoonZik.HttpRequest.Poco.User)Value;
+        }
+        private object get_80_Interaction_Behaviors(object instance)
         {
             return global::Microsoft.Xaml.Interactivity.Interaction.GetBehaviors((global::Windows.UI.Xaml.DependencyObject)instance);
         }
-        private void set_88_Interaction_Behaviors(object instance, object Value)
+        private void set_80_Interaction_Behaviors(object instance, object Value)
         {
             global::Microsoft.Xaml.Interactivity.Interaction.SetBehaviors((global::Windows.UI.Xaml.DependencyObject)instance, (global::Microsoft.Xaml.Interactivity.BehaviorCollection)Value);
         }
-        private object get_89_EventTriggerBehavior_Actions(object instance)
+        private object get_81_EventTriggerBehavior_Actions(object instance)
         {
             var that = (global::Microsoft.Xaml.Interactions.Core.EventTriggerBehavior)instance;
             return that.Actions;
         }
-        private object get_90_EventTriggerBehavior_EventName(object instance)
+        private object get_82_EventTriggerBehavior_EventName(object instance)
         {
             var that = (global::Microsoft.Xaml.Interactions.Core.EventTriggerBehavior)instance;
             return that.EventName;
         }
-        private void set_90_EventTriggerBehavior_EventName(object instance, object Value)
+        private void set_82_EventTriggerBehavior_EventName(object instance, object Value)
         {
             var that = (global::Microsoft.Xaml.Interactions.Core.EventTriggerBehavior)instance;
             that.EventName = (global::System.String)Value;
         }
-        private object get_91_EventTriggerBehavior_SourceObject(object instance)
+        private object get_83_EventTriggerBehavior_SourceObject(object instance)
         {
             var that = (global::Microsoft.Xaml.Interactions.Core.EventTriggerBehavior)instance;
             return that.SourceObject;
         }
-        private void set_91_EventTriggerBehavior_SourceObject(object instance, object Value)
+        private void set_83_EventTriggerBehavior_SourceObject(object instance, object Value)
         {
             var that = (global::Microsoft.Xaml.Interactions.Core.EventTriggerBehavior)instance;
             that.SourceObject = (global::System.Object)Value;
         }
-        private object get_92_EventTriggerBehavior_AssociatedObject(object instance)
+        private object get_84_EventTriggerBehavior_AssociatedObject(object instance)
         {
             var that = (global::Microsoft.Xaml.Interactions.Core.EventTriggerBehavior)instance;
             return that.AssociatedObject;
         }
-        private object get_93_ControlStoryboardAction_Storyboard(object instance)
+        private object get_85_ControlStoryboardAction_Storyboard(object instance)
         {
             var that = (global::Microsoft.Xaml.Interactions.Media.ControlStoryboardAction)instance;
             return that.Storyboard;
         }
-        private void set_93_ControlStoryboardAction_Storyboard(object instance, object Value)
+        private void set_85_ControlStoryboardAction_Storyboard(object instance, object Value)
         {
             var that = (global::Microsoft.Xaml.Interactions.Media.ControlStoryboardAction)instance;
             that.Storyboard = (global::Windows.UI.Xaml.Media.Animation.Storyboard)Value;
         }
-        private object get_94_ControlStoryboardAction_ControlStoryboardOption(object instance)
+        private object get_86_ControlStoryboardAction_ControlStoryboardOption(object instance)
         {
             var that = (global::Microsoft.Xaml.Interactions.Media.ControlStoryboardAction)instance;
             return that.ControlStoryboardOption;
         }
-        private void set_94_ControlStoryboardAction_ControlStoryboardOption(object instance, object Value)
+        private void set_86_ControlStoryboardAction_ControlStoryboardOption(object instance, object Value)
         {
             var that = (global::Microsoft.Xaml.Interactions.Media.ControlStoryboardAction)instance;
             that.ControlStoryboardOption = (global::Microsoft.Xaml.Interactions.Media.ControlStoryboardOption)Value;
         }
-        private object get_95_GlobalMenuControl_ConnexionCommand(object instance)
+        private object get_87_ProgressRingControl_isActive(object instance)
         {
-            var that = (global::SoonZik.Controls.GlobalMenuControl)instance;
-            return that.ConnexionCommand;
+            var that = (global::SoonZik.Controls.ProgressRingControl)instance;
+            return that.isActive;
         }
-        private object get_96_GlobalMenuControl_ProfilCommand(object instance)
+        private void set_87_ProgressRingControl_isActive(object instance, object Value)
         {
-            var that = (global::SoonZik.Controls.GlobalMenuControl)instance;
-            return that.ProfilCommand;
+            var that = (global::SoonZik.Controls.ProgressRingControl)instance;
+            that.isActive = (global::System.Boolean)Value;
         }
-        private object get_97_GlobalMenuControl_NewsCommand(object instance)
-        {
-            var that = (global::SoonZik.Controls.GlobalMenuControl)instance;
-            return that.NewsCommand;
-        }
-        private object get_98_GlobalMenuControl_ExplorerCommand(object instance)
-        {
-            var that = (global::SoonZik.Controls.GlobalMenuControl)instance;
-            return that.ExplorerCommand;
-        }
-        private object get_99_GlobalMenuControl_PacksCommand(object instance)
-        {
-            var that = (global::SoonZik.Controls.GlobalMenuControl)instance;
-            return that.PacksCommand;
-        }
-        private object get_100_GlobalMenuControl_MondeMusicalCommand(object instance)
-        {
-            var that = (global::SoonZik.Controls.GlobalMenuControl)instance;
-            return that.MondeMusicalCommand;
-        }
-        private object get_101_GlobalMenuControl_BattleCommand(object instance)
-        {
-            var that = (global::SoonZik.Controls.GlobalMenuControl)instance;
-            return that.BattleCommand;
-        }
-        private object get_102_GlobalMenuControl_PlaylistCommand(object instance)
-        {
-            var that = (global::SoonZik.Controls.GlobalMenuControl)instance;
-            return that.PlaylistCommand;
-        }
-        private object get_103_GlobalMenuControl_AmisCommand(object instance)
-        {
-            var that = (global::SoonZik.Controls.GlobalMenuControl)instance;
-            return that.AmisCommand;
-        }
-        private object get_104_GlobalMenuControl_AchatCommand(object instance)
-        {
-            var that = (global::SoonZik.Controls.GlobalMenuControl)instance;
-            return that.AchatCommand;
-        }
-        private object get_105_GlobalMenuControl_MenuCommand(object instance)
-        {
-            var that = (global::SoonZik.Controls.GlobalMenuControl)instance;
-            return that.MenuCommand;
-        }
-        private object get_106_InvokeCommandAction_Command(object instance)
+        private object get_88_InvokeCommandAction_Command(object instance)
         {
             var that = (global::Microsoft.Xaml.Interactions.Core.InvokeCommandAction)instance;
             return that.Command;
         }
-        private void set_106_InvokeCommandAction_Command(object instance, object Value)
+        private void set_88_InvokeCommandAction_Command(object instance, object Value)
         {
             var that = (global::Microsoft.Xaml.Interactions.Core.InvokeCommandAction)instance;
             that.Command = (global::System.Windows.Input.ICommand)Value;
         }
-        private object get_107_InvokeCommandAction_CommandParameter(object instance)
+        private object get_89_InvokeCommandAction_CommandParameter(object instance)
         {
             var that = (global::Microsoft.Xaml.Interactions.Core.InvokeCommandAction)instance;
             return that.CommandParameter;
         }
-        private void set_107_InvokeCommandAction_CommandParameter(object instance, object Value)
+        private void set_89_InvokeCommandAction_CommandParameter(object instance, object Value)
         {
             var that = (global::Microsoft.Xaml.Interactions.Core.InvokeCommandAction)instance;
             that.CommandParameter = (global::System.Object)Value;
         }
-        private object get_108_InvokeCommandAction_InputConverter(object instance)
+        private object get_90_InvokeCommandAction_InputConverter(object instance)
         {
             var that = (global::Microsoft.Xaml.Interactions.Core.InvokeCommandAction)instance;
             return that.InputConverter;
         }
-        private void set_108_InvokeCommandAction_InputConverter(object instance, object Value)
+        private void set_90_InvokeCommandAction_InputConverter(object instance, object Value)
         {
             var that = (global::Microsoft.Xaml.Interactions.Core.InvokeCommandAction)instance;
             that.InputConverter = (global::Windows.UI.Xaml.Data.IValueConverter)Value;
         }
-        private object get_109_InvokeCommandAction_InputConverterParameter(object instance)
+        private object get_91_InvokeCommandAction_InputConverterParameter(object instance)
         {
             var that = (global::Microsoft.Xaml.Interactions.Core.InvokeCommandAction)instance;
             return that.InputConverterParameter;
         }
-        private void set_109_InvokeCommandAction_InputConverterParameter(object instance, object Value)
+        private void set_91_InvokeCommandAction_InputConverterParameter(object instance, object Value)
         {
             var that = (global::Microsoft.Xaml.Interactions.Core.InvokeCommandAction)instance;
             that.InputConverterParameter = (global::System.Object)Value;
         }
-        private object get_110_InvokeCommandAction_InputConverterLanguage(object instance)
+        private object get_92_InvokeCommandAction_InputConverterLanguage(object instance)
         {
             var that = (global::Microsoft.Xaml.Interactions.Core.InvokeCommandAction)instance;
             return that.InputConverterLanguage;
         }
-        private void set_110_InvokeCommandAction_InputConverterLanguage(object instance, object Value)
+        private void set_92_InvokeCommandAction_InputConverterLanguage(object instance, object Value)
         {
             var that = (global::Microsoft.Xaml.Interactions.Core.InvokeCommandAction)instance;
             that.InputConverterLanguage = (global::System.String)Value;
         }
-        private object get_111_LightStone_ItemsSource(object instance)
+        private object get_93_LightStone_ItemsSource(object instance)
         {
             var that = (global::LightStone.Controls.LightStone)instance;
             return that.ItemsSource;
         }
-        private void set_111_LightStone_ItemsSource(object instance, object Value)
+        private void set_93_LightStone_ItemsSource(object instance, object Value)
         {
             var that = (global::LightStone.Controls.LightStone)instance;
             that.ItemsSource = (global::System.Object)Value;
         }
-        private object get_112_LightStone_SelectedIndex(object instance)
+        private object get_94_LightStone_SelectedIndex(object instance)
         {
             var that = (global::LightStone.Controls.LightStone)instance;
             return that.SelectedIndex;
         }
-        private void set_112_LightStone_SelectedIndex(object instance, object Value)
+        private void set_94_LightStone_SelectedIndex(object instance, object Value)
         {
             var that = (global::LightStone.Controls.LightStone)instance;
             that.SelectedIndex = (global::System.Int32)Value;
         }
-        private object get_113_LightStone_ItemTemplate(object instance)
+        private object get_95_LightStone_ItemTemplate(object instance)
         {
             var that = (global::LightStone.Controls.LightStone)instance;
             return that.ItemTemplate;
         }
-        private void set_113_LightStone_ItemTemplate(object instance, object Value)
+        private void set_95_LightStone_ItemTemplate(object instance, object Value)
         {
             var that = (global::LightStone.Controls.LightStone)instance;
             that.ItemTemplate = (global::Windows.UI.Xaml.DataTemplate)Value;
         }
-        private object get_114_LightStone_TransitionDuration(object instance)
+        private object get_96_LightStone_TransitionDuration(object instance)
         {
             var that = (global::LightStone.Controls.LightStone)instance;
             return that.TransitionDuration;
         }
-        private void set_114_LightStone_TransitionDuration(object instance, object Value)
+        private void set_96_LightStone_TransitionDuration(object instance, object Value)
         {
             var that = (global::LightStone.Controls.LightStone)instance;
             that.TransitionDuration = (global::System.Int32)Value;
         }
-        private object get_115_LightStone_Depth(object instance)
+        private object get_97_LightStone_Depth(object instance)
         {
             var that = (global::LightStone.Controls.LightStone)instance;
             return that.Depth;
         }
-        private void set_115_LightStone_Depth(object instance, object Value)
+        private void set_97_LightStone_Depth(object instance, object Value)
         {
             var that = (global::LightStone.Controls.LightStone)instance;
             that.Depth = (global::System.Double)Value;
         }
-        private object get_116_LightStone_MaxVisibleItems(object instance)
+        private object get_98_LightStone_MaxVisibleItems(object instance)
         {
             var that = (global::LightStone.Controls.LightStone)instance;
             return that.MaxVisibleItems;
         }
-        private void set_116_LightStone_MaxVisibleItems(object instance, object Value)
+        private void set_98_LightStone_MaxVisibleItems(object instance, object Value)
         {
             var that = (global::LightStone.Controls.LightStone)instance;
             that.MaxVisibleItems = (global::System.Int32)Value;
         }
-        private object get_117_LightStone_Rotation(object instance)
+        private object get_99_LightStone_Rotation(object instance)
         {
             var that = (global::LightStone.Controls.LightStone)instance;
             return that.Rotation;
         }
-        private void set_117_LightStone_Rotation(object instance, object Value)
+        private void set_99_LightStone_Rotation(object instance, object Value)
         {
             var that = (global::LightStone.Controls.LightStone)instance;
             that.Rotation = (global::System.Double)Value;
         }
-        private object get_118_LightStone_TranslateY(object instance)
+        private object get_100_LightStone_TranslateY(object instance)
         {
             var that = (global::LightStone.Controls.LightStone)instance;
             return that.TranslateY;
         }
-        private void set_118_LightStone_TranslateY(object instance, object Value)
+        private void set_100_LightStone_TranslateY(object instance, object Value)
         {
             var that = (global::LightStone.Controls.LightStone)instance;
             that.TranslateY = (global::System.Int32)Value;
         }
-        private object get_119_LightStone_TranslateX(object instance)
+        private object get_101_LightStone_TranslateX(object instance)
         {
             var that = (global::LightStone.Controls.LightStone)instance;
             return that.TranslateX;
         }
-        private void set_119_LightStone_TranslateX(object instance, object Value)
+        private void set_101_LightStone_TranslateX(object instance, object Value)
         {
             var that = (global::LightStone.Controls.LightStone)instance;
             that.TranslateX = (global::System.Int32)Value;
         }
-        private object get_120_LightStone_EasingFunction(object instance)
+        private object get_102_LightStone_EasingFunction(object instance)
         {
             var that = (global::LightStone.Controls.LightStone)instance;
             return that.EasingFunction;
         }
-        private void set_120_LightStone_EasingFunction(object instance, object Value)
+        private void set_102_LightStone_EasingFunction(object instance, object Value)
         {
             var that = (global::LightStone.Controls.LightStone)instance;
             that.EasingFunction = (global::Windows.UI.Xaml.Media.Animation.EasingFunctionBase)Value;
@@ -2377,650 +2276,542 @@ namespace SoonZik.SoonZik_XamlTypeInfo
                 xamlMember.Getter = get_16_ViewModelBase_IsInDesignMode;
                 xamlMember.SetIsReadOnly();
                 break;
+            case "SoonZik.ViewModel.ConnexionViewModel.ProgressOn":
+                userType = (global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType)GetXamlTypeByName("SoonZik.ViewModel.ConnexionViewModel");
+                xamlMember = new global::SoonZik.SoonZik_XamlTypeInfo.XamlMember(this, "ProgressOn", "Boolean");
+                xamlMember.Getter = get_17_ConnexionViewModel_ProgressOn;
+                xamlMember.Setter = set_17_ConnexionViewModel_ProgressOn;
+                break;
             case "SoonZik.ViewModel.ConnexionViewModel.Username":
                 userType = (global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType)GetXamlTypeByName("SoonZik.ViewModel.ConnexionViewModel");
                 xamlMember = new global::SoonZik.SoonZik_XamlTypeInfo.XamlMember(this, "Username", "String");
-                xamlMember.Getter = get_17_ConnexionViewModel_Username;
-                xamlMember.Setter = set_17_ConnexionViewModel_Username;
+                xamlMember.Getter = get_18_ConnexionViewModel_Username;
+                xamlMember.Setter = set_18_ConnexionViewModel_Username;
                 break;
             case "SoonZik.ViewModel.ConnexionViewModel.Password":
                 userType = (global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType)GetXamlTypeByName("SoonZik.ViewModel.ConnexionViewModel");
                 xamlMember = new global::SoonZik.SoonZik_XamlTypeInfo.XamlMember(this, "Password", "String");
-                xamlMember.Getter = get_18_ConnexionViewModel_Password;
-                xamlMember.Setter = set_18_ConnexionViewModel_Password;
+                xamlMember.Getter = get_19_ConnexionViewModel_Password;
+                xamlMember.Setter = set_19_ConnexionViewModel_Password;
                 break;
             case "SoonZik.ViewModel.ConnexionViewModel.ConnexionCommand":
                 userType = (global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType)GetXamlTypeByName("SoonZik.ViewModel.ConnexionViewModel");
                 xamlMember = new global::SoonZik.SoonZik_XamlTypeInfo.XamlMember(this, "ConnexionCommand", "GalaSoft.MvvmLight.Command.RelayCommand");
-                xamlMember.Getter = get_19_ConnexionViewModel_ConnexionCommand;
+                xamlMember.Getter = get_20_ConnexionViewModel_ConnexionCommand;
                 xamlMember.SetIsReadOnly();
                 break;
             case "SoonZik.ViewModel.ConnexionViewModel.FacebookTapped":
                 userType = (global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType)GetXamlTypeByName("SoonZik.ViewModel.ConnexionViewModel");
                 xamlMember = new global::SoonZik.SoonZik_XamlTypeInfo.XamlMember(this, "FacebookTapped", "GalaSoft.MvvmLight.Command.RelayCommand");
-                xamlMember.Getter = get_20_ConnexionViewModel_FacebookTapped;
-                xamlMember.SetIsReadOnly();
-                break;
-            case "SoonZik.ViewModel.MainViewModel.ConnexionCommand":
-                userType = (global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType)GetXamlTypeByName("SoonZik.ViewModel.MainViewModel");
-                xamlMember = new global::SoonZik.SoonZik_XamlTypeInfo.XamlMember(this, "ConnexionCommand", "GalaSoft.MvvmLight.Command.RelayCommand");
-                xamlMember.Getter = get_21_MainViewModel_ConnexionCommand;
-                xamlMember.SetIsReadOnly();
-                break;
-            case "SoonZik.ViewModel.MainViewModel.ProfilCommand":
-                userType = (global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType)GetXamlTypeByName("SoonZik.ViewModel.MainViewModel");
-                xamlMember = new global::SoonZik.SoonZik_XamlTypeInfo.XamlMember(this, "ProfilCommand", "GalaSoft.MvvmLight.Command.RelayCommand");
-                xamlMember.Getter = get_22_MainViewModel_ProfilCommand;
-                xamlMember.SetIsReadOnly();
-                break;
-            case "SoonZik.ViewModel.MainViewModel.NewsCommand":
-                userType = (global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType)GetXamlTypeByName("SoonZik.ViewModel.MainViewModel");
-                xamlMember = new global::SoonZik.SoonZik_XamlTypeInfo.XamlMember(this, "NewsCommand", "GalaSoft.MvvmLight.Command.RelayCommand");
-                xamlMember.Getter = get_23_MainViewModel_NewsCommand;
-                xamlMember.SetIsReadOnly();
-                break;
-            case "SoonZik.ViewModel.MainViewModel.ExplorerCommand":
-                userType = (global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType)GetXamlTypeByName("SoonZik.ViewModel.MainViewModel");
-                xamlMember = new global::SoonZik.SoonZik_XamlTypeInfo.XamlMember(this, "ExplorerCommand", "GalaSoft.MvvmLight.Command.RelayCommand");
-                xamlMember.Getter = get_24_MainViewModel_ExplorerCommand;
-                xamlMember.SetIsReadOnly();
-                break;
-            case "SoonZik.ViewModel.MainViewModel.PacksCommand":
-                userType = (global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType)GetXamlTypeByName("SoonZik.ViewModel.MainViewModel");
-                xamlMember = new global::SoonZik.SoonZik_XamlTypeInfo.XamlMember(this, "PacksCommand", "GalaSoft.MvvmLight.Command.RelayCommand");
-                xamlMember.Getter = get_25_MainViewModel_PacksCommand;
-                xamlMember.SetIsReadOnly();
-                break;
-            case "SoonZik.ViewModel.MainViewModel.MondeMusicalCommand":
-                userType = (global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType)GetXamlTypeByName("SoonZik.ViewModel.MainViewModel");
-                xamlMember = new global::SoonZik.SoonZik_XamlTypeInfo.XamlMember(this, "MondeMusicalCommand", "GalaSoft.MvvmLight.Command.RelayCommand");
-                xamlMember.Getter = get_26_MainViewModel_MondeMusicalCommand;
-                xamlMember.SetIsReadOnly();
-                break;
-            case "SoonZik.ViewModel.MainViewModel.BattleCommand":
-                userType = (global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType)GetXamlTypeByName("SoonZik.ViewModel.MainViewModel");
-                xamlMember = new global::SoonZik.SoonZik_XamlTypeInfo.XamlMember(this, "BattleCommand", "GalaSoft.MvvmLight.Command.RelayCommand");
-                xamlMember.Getter = get_27_MainViewModel_BattleCommand;
-                xamlMember.SetIsReadOnly();
-                break;
-            case "SoonZik.ViewModel.MainViewModel.PlaylistCommand":
-                userType = (global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType)GetXamlTypeByName("SoonZik.ViewModel.MainViewModel");
-                xamlMember = new global::SoonZik.SoonZik_XamlTypeInfo.XamlMember(this, "PlaylistCommand", "GalaSoft.MvvmLight.Command.RelayCommand");
-                xamlMember.Getter = get_28_MainViewModel_PlaylistCommand;
-                xamlMember.SetIsReadOnly();
-                break;
-            case "SoonZik.ViewModel.MainViewModel.AmisCommand":
-                userType = (global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType)GetXamlTypeByName("SoonZik.ViewModel.MainViewModel");
-                xamlMember = new global::SoonZik.SoonZik_XamlTypeInfo.XamlMember(this, "AmisCommand", "GalaSoft.MvvmLight.Command.RelayCommand");
-                xamlMember.Getter = get_29_MainViewModel_AmisCommand;
-                xamlMember.SetIsReadOnly();
-                break;
-            case "SoonZik.ViewModel.MainViewModel.AchatCommand":
-                userType = (global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType)GetXamlTypeByName("SoonZik.ViewModel.MainViewModel");
-                xamlMember = new global::SoonZik.SoonZik_XamlTypeInfo.XamlMember(this, "AchatCommand", "GalaSoft.MvvmLight.Command.RelayCommand");
-                xamlMember.Getter = get_30_MainViewModel_AchatCommand;
+                xamlMember.Getter = get_21_ConnexionViewModel_FacebookTapped;
                 xamlMember.SetIsReadOnly();
                 break;
             case "SoonZik.ViewModel.MainViewModel.ConnexionString":
                 userType = (global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType)GetXamlTypeByName("SoonZik.ViewModel.MainViewModel");
                 xamlMember = new global::SoonZik.SoonZik_XamlTypeInfo.XamlMember(this, "ConnexionString", "String");
-                xamlMember.Getter = get_31_MainViewModel_ConnexionString;
-                xamlMember.Setter = set_31_MainViewModel_ConnexionString;
+                xamlMember.Getter = get_22_MainViewModel_ConnexionString;
+                xamlMember.Setter = set_22_MainViewModel_ConnexionString;
                 break;
             case "SoonZik.ViewModel.MainViewModel.GetGridExecute":
                 userType = (global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType)GetXamlTypeByName("SoonZik.ViewModel.MainViewModel");
                 xamlMember = new global::SoonZik.SoonZik_XamlTypeInfo.XamlMember(this, "GetGridExecute", "GalaSoft.MvvmLight.Command.RelayCommand`1<Windows.UI.Xaml.Controls.Grid>");
-                xamlMember.Getter = get_32_MainViewModel_GetGridExecute;
-                xamlMember.Setter = set_32_MainViewModel_GetGridExecute;
+                xamlMember.Getter = get_23_MainViewModel_GetGridExecute;
+                xamlMember.Setter = set_23_MainViewModel_GetGridExecute;
                 break;
             case "SoonZik.ViewModel.MainViewModel.GetStoryBoardExecute":
                 userType = (global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType)GetXamlTypeByName("SoonZik.ViewModel.MainViewModel");
                 xamlMember = new global::SoonZik.SoonZik_XamlTypeInfo.XamlMember(this, "GetStoryBoardExecute", "GalaSoft.MvvmLight.Command.RelayCommand`1<Windows.UI.Xaml.Media.Animation.Storyboard>");
-                xamlMember.Getter = get_33_MainViewModel_GetStoryBoardExecute;
-                xamlMember.Setter = set_33_MainViewModel_GetStoryBoardExecute;
+                xamlMember.Getter = get_24_MainViewModel_GetStoryBoardExecute;
+                xamlMember.Setter = set_24_MainViewModel_GetStoryBoardExecute;
                 break;
             case "SoonZik.ViewModel.MainViewModel.GetToggleButton":
                 userType = (global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType)GetXamlTypeByName("SoonZik.ViewModel.MainViewModel");
                 xamlMember = new global::SoonZik.SoonZik_XamlTypeInfo.XamlMember(this, "GetToggleButton", "GalaSoft.MvvmLight.Command.RelayCommand`1<Windows.UI.Xaml.Controls.Primitives.ToggleButton>");
-                xamlMember.Getter = get_34_MainViewModel_GetToggleButton;
-                xamlMember.Setter = set_34_MainViewModel_GetToggleButton;
+                xamlMember.Getter = get_25_MainViewModel_GetToggleButton;
+                xamlMember.Setter = set_25_MainViewModel_GetToggleButton;
                 break;
             case "SoonZik.ViewModel.MainViewModel.SearchText":
                 userType = (global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType)GetXamlTypeByName("SoonZik.ViewModel.MainViewModel");
                 xamlMember = new global::SoonZik.SoonZik_XamlTypeInfo.XamlMember(this, "SearchText", "String");
-                xamlMember.Getter = get_35_MainViewModel_SearchText;
-                xamlMember.Setter = set_35_MainViewModel_SearchText;
+                xamlMember.Getter = get_26_MainViewModel_SearchText;
+                xamlMember.Setter = set_26_MainViewModel_SearchText;
                 break;
             case "SoonZik.ViewModel.MainViewModel.ConnexionVisibility":
                 userType = (global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType)GetXamlTypeByName("SoonZik.ViewModel.MainViewModel");
                 xamlMember = new global::SoonZik.SoonZik_XamlTypeInfo.XamlMember(this, "ConnexionVisibility", "Boolean");
-                xamlMember.Getter = get_36_MainViewModel_ConnexionVisibility;
-                xamlMember.Setter = set_36_MainViewModel_ConnexionVisibility;
+                xamlMember.Getter = get_27_MainViewModel_ConnexionVisibility;
+                xamlMember.Setter = set_27_MainViewModel_ConnexionVisibility;
                 break;
             case "SoonZik.ViewModel.NewsViewModel.ListNews":
                 userType = (global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType)GetXamlTypeByName("SoonZik.ViewModel.NewsViewModel");
                 xamlMember = new global::SoonZik.SoonZik_XamlTypeInfo.XamlMember(this, "ListNews", "System.Collections.ObjectModel.ObservableCollection`1<SoonZik.HttpRequest.Poco.News>");
-                xamlMember.Getter = get_37_NewsViewModel_ListNews;
-                xamlMember.Setter = set_37_NewsViewModel_ListNews;
+                xamlMember.Getter = get_28_NewsViewModel_ListNews;
+                xamlMember.Setter = set_28_NewsViewModel_ListNews;
                 break;
             case "SoonZik.HttpRequest.Poco.News.Id":
                 userType = (global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType)GetXamlTypeByName("SoonZik.HttpRequest.Poco.News");
                 xamlMember = new global::SoonZik.SoonZik_XamlTypeInfo.XamlMember(this, "Id", "Int32");
-                xamlMember.Getter = get_38_News_Id;
-                xamlMember.Setter = set_38_News_Id;
+                xamlMember.Getter = get_29_News_Id;
+                xamlMember.Setter = set_29_News_Id;
                 break;
             case "SoonZik.HttpRequest.Poco.News.Title":
                 userType = (global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType)GetXamlTypeByName("SoonZik.HttpRequest.Poco.News");
                 xamlMember = new global::SoonZik.SoonZik_XamlTypeInfo.XamlMember(this, "Title", "String");
-                xamlMember.Getter = get_39_News_Title;
-                xamlMember.Setter = set_39_News_Title;
+                xamlMember.Getter = get_30_News_Title;
+                xamlMember.Setter = set_30_News_Title;
                 break;
             case "SoonZik.HttpRequest.Poco.News.Date":
                 userType = (global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType)GetXamlTypeByName("SoonZik.HttpRequest.Poco.News");
                 xamlMember = new global::SoonZik.SoonZik_XamlTypeInfo.XamlMember(this, "Date", "String");
-                xamlMember.Getter = get_40_News_Date;
-                xamlMember.Setter = set_40_News_Date;
+                xamlMember.Getter = get_31_News_Date;
+                xamlMember.Setter = set_31_News_Date;
                 break;
             case "SoonZik.HttpRequest.Poco.News.AuthorId":
                 userType = (global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType)GetXamlTypeByName("SoonZik.HttpRequest.Poco.News");
                 xamlMember = new global::SoonZik.SoonZik_XamlTypeInfo.XamlMember(this, "AuthorId", "Int32");
-                xamlMember.Getter = get_41_News_AuthorId;
-                xamlMember.Setter = set_41_News_AuthorId;
+                xamlMember.Getter = get_32_News_AuthorId;
+                xamlMember.Setter = set_32_News_AuthorId;
                 break;
             case "SoonZik.HttpRequest.Poco.News.CreatedAt":
                 userType = (global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType)GetXamlTypeByName("SoonZik.HttpRequest.Poco.News");
                 xamlMember = new global::SoonZik.SoonZik_XamlTypeInfo.XamlMember(this, "CreatedAt", "String");
-                xamlMember.Getter = get_42_News_CreatedAt;
-                xamlMember.Setter = set_42_News_CreatedAt;
+                xamlMember.Getter = get_33_News_CreatedAt;
+                xamlMember.Setter = set_33_News_CreatedAt;
                 break;
             case "SoonZik.HttpRequest.Poco.News.UpdatedAt":
                 userType = (global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType)GetXamlTypeByName("SoonZik.HttpRequest.Poco.News");
                 xamlMember = new global::SoonZik.SoonZik_XamlTypeInfo.XamlMember(this, "UpdatedAt", "String");
-                xamlMember.Getter = get_43_News_UpdatedAt;
-                xamlMember.Setter = set_43_News_UpdatedAt;
+                xamlMember.Getter = get_34_News_UpdatedAt;
+                xamlMember.Setter = set_34_News_UpdatedAt;
                 break;
             case "SoonZik.HttpRequest.Poco.News.NewsType":
                 userType = (global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType)GetXamlTypeByName("SoonZik.HttpRequest.Poco.News");
                 xamlMember = new global::SoonZik.SoonZik_XamlTypeInfo.XamlMember(this, "NewsType", "String");
-                xamlMember.Getter = get_44_News_NewsType;
-                xamlMember.Setter = set_44_News_NewsType;
+                xamlMember.Getter = get_35_News_NewsType;
+                xamlMember.Setter = set_35_News_NewsType;
                 break;
             case "SoonZik.HttpRequest.Poco.News.User":
                 userType = (global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType)GetXamlTypeByName("SoonZik.HttpRequest.Poco.News");
                 xamlMember = new global::SoonZik.SoonZik_XamlTypeInfo.XamlMember(this, "User", "SoonZik.HttpRequest.Poco.User");
-                xamlMember.Getter = get_45_News_User;
-                xamlMember.Setter = set_45_News_User;
+                xamlMember.Getter = get_36_News_User;
+                xamlMember.Setter = set_36_News_User;
                 break;
             case "SoonZik.HttpRequest.Poco.News.Newstexts":
                 userType = (global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType)GetXamlTypeByName("SoonZik.HttpRequest.Poco.News");
                 xamlMember = new global::SoonZik.SoonZik_XamlTypeInfo.XamlMember(this, "Newstexts", "System.Collections.Generic.List`1<Object>");
-                xamlMember.Getter = get_46_News_Newstexts;
-                xamlMember.Setter = set_46_News_Newstexts;
+                xamlMember.Getter = get_37_News_Newstexts;
+                xamlMember.Setter = set_37_News_Newstexts;
                 break;
             case "SoonZik.HttpRequest.Poco.News.Attachments":
                 userType = (global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType)GetXamlTypeByName("SoonZik.HttpRequest.Poco.News");
                 xamlMember = new global::SoonZik.SoonZik_XamlTypeInfo.XamlMember(this, "Attachments", "System.Collections.Generic.List`1<Object>");
-                xamlMember.Getter = get_47_News_Attachments;
-                xamlMember.Setter = set_47_News_Attachments;
+                xamlMember.Getter = get_38_News_Attachments;
+                xamlMember.Setter = set_38_News_Attachments;
                 break;
             case "SoonZik.HttpRequest.Poco.News.Tags":
                 userType = (global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType)GetXamlTypeByName("SoonZik.HttpRequest.Poco.News");
                 xamlMember = new global::SoonZik.SoonZik_XamlTypeInfo.XamlMember(this, "Tags", "System.Collections.Generic.List`1<Object>");
-                xamlMember.Getter = get_48_News_Tags;
-                xamlMember.Setter = set_48_News_Tags;
+                xamlMember.Getter = get_39_News_Tags;
+                xamlMember.Setter = set_39_News_Tags;
                 break;
             case "SoonZik.ViewModel.ExplorerViewModel.ListGenres":
                 userType = (global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType)GetXamlTypeByName("SoonZik.ViewModel.ExplorerViewModel");
                 xamlMember = new global::SoonZik.SoonZik_XamlTypeInfo.XamlMember(this, "ListGenres", "System.Collections.ObjectModel.ObservableCollection`1<SoonZik.HttpRequest.Poco.Genre>");
-                xamlMember.Getter = get_49_ExplorerViewModel_ListGenres;
-                xamlMember.Setter = set_49_ExplorerViewModel_ListGenres;
+                xamlMember.Getter = get_40_ExplorerViewModel_ListGenres;
+                xamlMember.Setter = set_40_ExplorerViewModel_ListGenres;
                 break;
             case "SoonZik.HttpRequest.Poco.Genre.id":
                 userType = (global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType)GetXamlTypeByName("SoonZik.HttpRequest.Poco.Genre");
                 xamlMember = new global::SoonZik.SoonZik_XamlTypeInfo.XamlMember(this, "id", "Int32");
-                xamlMember.Getter = get_50_Genre_id;
-                xamlMember.Setter = set_50_Genre_id;
+                xamlMember.Getter = get_41_Genre_id;
+                xamlMember.Setter = set_41_Genre_id;
                 break;
             case "SoonZik.HttpRequest.Poco.Genre.style_name":
                 userType = (global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType)GetXamlTypeByName("SoonZik.HttpRequest.Poco.Genre");
                 xamlMember = new global::SoonZik.SoonZik_XamlTypeInfo.XamlMember(this, "style_name", "String");
-                xamlMember.Getter = get_51_Genre_style_name;
-                xamlMember.Setter = set_51_Genre_style_name;
+                xamlMember.Getter = get_42_Genre_style_name;
+                xamlMember.Setter = set_42_Genre_style_name;
                 break;
             case "SoonZik.HttpRequest.Poco.Genre.color_name":
                 userType = (global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType)GetXamlTypeByName("SoonZik.HttpRequest.Poco.Genre");
                 xamlMember = new global::SoonZik.SoonZik_XamlTypeInfo.XamlMember(this, "color_name", "String");
-                xamlMember.Getter = get_52_Genre_color_name;
-                xamlMember.Setter = set_52_Genre_color_name;
+                xamlMember.Getter = get_43_Genre_color_name;
+                xamlMember.Setter = set_43_Genre_color_name;
                 break;
             case "SoonZik.HttpRequest.Poco.Genre.color_hexa":
                 userType = (global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType)GetXamlTypeByName("SoonZik.HttpRequest.Poco.Genre");
                 xamlMember = new global::SoonZik.SoonZik_XamlTypeInfo.XamlMember(this, "color_hexa", "String");
-                xamlMember.Getter = get_53_Genre_color_hexa;
-                xamlMember.Setter = set_53_Genre_color_hexa;
+                xamlMember.Getter = get_44_Genre_color_hexa;
+                xamlMember.Setter = set_44_Genre_color_hexa;
                 break;
             case "SoonZik.HttpRequest.Poco.Genre.created_at":
                 userType = (global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType)GetXamlTypeByName("SoonZik.HttpRequest.Poco.Genre");
                 xamlMember = new global::SoonZik.SoonZik_XamlTypeInfo.XamlMember(this, "created_at", "String");
-                xamlMember.Getter = get_54_Genre_created_at;
-                xamlMember.Setter = set_54_Genre_created_at;
+                xamlMember.Getter = get_45_Genre_created_at;
+                xamlMember.Setter = set_45_Genre_created_at;
                 break;
             case "SoonZik.HttpRequest.Poco.Genre.updated_at":
                 userType = (global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType)GetXamlTypeByName("SoonZik.HttpRequest.Poco.Genre");
                 xamlMember = new global::SoonZik.SoonZik_XamlTypeInfo.XamlMember(this, "updated_at", "String");
-                xamlMember.Getter = get_55_Genre_updated_at;
-                xamlMember.Setter = set_55_Genre_updated_at;
+                xamlMember.Getter = get_46_Genre_updated_at;
+                xamlMember.Setter = set_46_Genre_updated_at;
                 break;
             case "SoonZik.HttpRequest.Poco.Genre.influences":
                 userType = (global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType)GetXamlTypeByName("SoonZik.HttpRequest.Poco.Genre");
                 xamlMember = new global::SoonZik.SoonZik_XamlTypeInfo.XamlMember(this, "influences", "System.Collections.Generic.List`1<SoonZik.HttpRequest.Poco.Influence>");
-                xamlMember.Getter = get_56_Genre_influences;
-                xamlMember.Setter = set_56_Genre_influences;
+                xamlMember.Getter = get_47_Genre_influences;
+                xamlMember.Setter = set_47_Genre_influences;
                 break;
             case "SoonZik.HttpRequest.Poco.Influence.id":
                 userType = (global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType)GetXamlTypeByName("SoonZik.HttpRequest.Poco.Influence");
                 xamlMember = new global::SoonZik.SoonZik_XamlTypeInfo.XamlMember(this, "id", "Int32");
-                xamlMember.Getter = get_57_Influence_id;
-                xamlMember.Setter = set_57_Influence_id;
+                xamlMember.Getter = get_48_Influence_id;
+                xamlMember.Setter = set_48_Influence_id;
                 break;
             case "SoonZik.HttpRequest.Poco.Influence.name":
                 userType = (global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType)GetXamlTypeByName("SoonZik.HttpRequest.Poco.Influence");
                 xamlMember = new global::SoonZik.SoonZik_XamlTypeInfo.XamlMember(this, "name", "String");
-                xamlMember.Getter = get_58_Influence_name;
-                xamlMember.Setter = set_58_Influence_name;
+                xamlMember.Getter = get_49_Influence_name;
+                xamlMember.Setter = set_49_Influence_name;
                 break;
             case "SoonZik.HttpRequest.Poco.Influence.created_at":
                 userType = (global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType)GetXamlTypeByName("SoonZik.HttpRequest.Poco.Influence");
                 xamlMember = new global::SoonZik.SoonZik_XamlTypeInfo.XamlMember(this, "created_at", "String");
-                xamlMember.Getter = get_59_Influence_created_at;
-                xamlMember.Setter = set_59_Influence_created_at;
+                xamlMember.Getter = get_50_Influence_created_at;
+                xamlMember.Setter = set_50_Influence_created_at;
                 break;
             case "SoonZik.HttpRequest.Poco.Influence.updated_at":
                 userType = (global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType)GetXamlTypeByName("SoonZik.HttpRequest.Poco.Influence");
                 xamlMember = new global::SoonZik.SoonZik_XamlTypeInfo.XamlMember(this, "updated_at", "String");
-                xamlMember.Getter = get_60_Influence_updated_at;
-                xamlMember.Setter = set_60_Influence_updated_at;
+                xamlMember.Getter = get_51_Influence_updated_at;
+                xamlMember.Setter = set_51_Influence_updated_at;
                 break;
             case "SoonZik.HttpRequest.Poco.Genre.musics":
                 userType = (global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType)GetXamlTypeByName("SoonZik.HttpRequest.Poco.Genre");
                 xamlMember = new global::SoonZik.SoonZik_XamlTypeInfo.XamlMember(this, "musics", "System.Collections.Generic.List`1<SoonZik.HttpRequest.Poco.Music>");
-                xamlMember.Getter = get_61_Genre_musics;
-                xamlMember.Setter = set_61_Genre_musics;
+                xamlMember.Getter = get_52_Genre_musics;
+                xamlMember.Setter = set_52_Genre_musics;
                 break;
             case "SoonZik.HttpRequest.Poco.Music.id":
                 userType = (global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType)GetXamlTypeByName("SoonZik.HttpRequest.Poco.Music");
                 xamlMember = new global::SoonZik.SoonZik_XamlTypeInfo.XamlMember(this, "id", "Int32");
-                xamlMember.Getter = get_62_Music_id;
-                xamlMember.Setter = set_62_Music_id;
+                xamlMember.Getter = get_53_Music_id;
+                xamlMember.Setter = set_53_Music_id;
                 break;
             case "SoonZik.HttpRequest.Poco.Music.title":
                 userType = (global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType)GetXamlTypeByName("SoonZik.HttpRequest.Poco.Music");
                 xamlMember = new global::SoonZik.SoonZik_XamlTypeInfo.XamlMember(this, "title", "String");
-                xamlMember.Getter = get_63_Music_title;
-                xamlMember.Setter = set_63_Music_title;
+                xamlMember.Getter = get_54_Music_title;
+                xamlMember.Setter = set_54_Music_title;
                 break;
             case "SoonZik.HttpRequest.Poco.Music.duration":
                 userType = (global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType)GetXamlTypeByName("SoonZik.HttpRequest.Poco.Music");
                 xamlMember = new global::SoonZik.SoonZik_XamlTypeInfo.XamlMember(this, "duration", "Int32");
-                xamlMember.Getter = get_64_Music_duration;
-                xamlMember.Setter = set_64_Music_duration;
+                xamlMember.Getter = get_55_Music_duration;
+                xamlMember.Setter = set_55_Music_duration;
                 break;
             case "SoonZik.HttpRequest.Poco.Music.price":
                 userType = (global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType)GetXamlTypeByName("SoonZik.HttpRequest.Poco.Music");
                 xamlMember = new global::SoonZik.SoonZik_XamlTypeInfo.XamlMember(this, "price", "Double");
-                xamlMember.Getter = get_65_Music_price;
-                xamlMember.Setter = set_65_Music_price;
+                xamlMember.Getter = get_56_Music_price;
+                xamlMember.Setter = set_56_Music_price;
                 break;
             case "SoonZik.HttpRequest.Poco.Music.file":
                 userType = (global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType)GetXamlTypeByName("SoonZik.HttpRequest.Poco.Music");
                 xamlMember = new global::SoonZik.SoonZik_XamlTypeInfo.XamlMember(this, "file", "String");
-                xamlMember.Getter = get_66_Music_file;
-                xamlMember.Setter = set_66_Music_file;
+                xamlMember.Getter = get_57_Music_file;
+                xamlMember.Setter = set_57_Music_file;
                 break;
             case "SoonZik.HttpRequest.Poco.Music.album":
                 userType = (global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType)GetXamlTypeByName("SoonZik.HttpRequest.Poco.Music");
                 xamlMember = new global::SoonZik.SoonZik_XamlTypeInfo.XamlMember(this, "album", "SoonZik.HttpRequest.Poco.Album");
-                xamlMember.Getter = get_67_Music_album;
-                xamlMember.Setter = set_67_Music_album;
+                xamlMember.Getter = get_58_Music_album;
+                xamlMember.Setter = set_58_Music_album;
                 break;
             case "SoonZik.HttpRequest.Poco.Music.genres":
                 userType = (global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType)GetXamlTypeByName("SoonZik.HttpRequest.Poco.Music");
                 xamlMember = new global::SoonZik.SoonZik_XamlTypeInfo.XamlMember(this, "genres", "System.Collections.Generic.List`1<SoonZik.HttpRequest.Poco.Genre>");
-                xamlMember.Getter = get_68_Music_genres;
-                xamlMember.Setter = set_68_Music_genres;
+                xamlMember.Getter = get_59_Music_genres;
+                xamlMember.Setter = set_59_Music_genres;
                 break;
             case "SoonZik.HttpRequest.Poco.Music.user":
                 userType = (global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType)GetXamlTypeByName("SoonZik.HttpRequest.Poco.Music");
                 xamlMember = new global::SoonZik.SoonZik_XamlTypeInfo.XamlMember(this, "user", "SoonZik.HttpRequest.Poco.User");
-                xamlMember.Getter = get_69_Music_user;
-                xamlMember.Setter = set_69_Music_user;
+                xamlMember.Getter = get_60_Music_user;
+                xamlMember.Setter = set_60_Music_user;
                 break;
             case "SoonZik.ViewModel.ProfilUserViewModel.CurrentUser":
                 userType = (global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType)GetXamlTypeByName("SoonZik.ViewModel.ProfilUserViewModel");
                 xamlMember = new global::SoonZik.SoonZik_XamlTypeInfo.XamlMember(this, "CurrentUser", "SoonZik.HttpRequest.Poco.User");
-                xamlMember.Getter = get_70_ProfilUserViewModel_CurrentUser;
-                xamlMember.Setter = set_70_ProfilUserViewModel_CurrentUser;
+                xamlMember.Getter = get_61_ProfilUserViewModel_CurrentUser;
+                xamlMember.Setter = set_61_ProfilUserViewModel_CurrentUser;
                 break;
             case "SoonZik.ViewModel.ProfilUserViewModel.SelectUser":
                 userType = (global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType)GetXamlTypeByName("SoonZik.ViewModel.ProfilUserViewModel");
                 xamlMember = new global::SoonZik.SoonZik_XamlTypeInfo.XamlMember(this, "SelectUser", "SoonZik.HttpRequest.Poco.User");
-                xamlMember.Getter = get_71_ProfilUserViewModel_SelectUser;
-                xamlMember.Setter = set_71_ProfilUserViewModel_SelectUser;
+                xamlMember.Getter = get_62_ProfilUserViewModel_SelectUser;
+                xamlMember.Setter = set_62_ProfilUserViewModel_SelectUser;
                 break;
             case "SoonZik.ViewModel.ProfilUserViewModel.SelectionCommand":
                 userType = (global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType)GetXamlTypeByName("SoonZik.ViewModel.ProfilUserViewModel");
-                xamlMember = new global::SoonZik.SoonZik_XamlTypeInfo.XamlMember(this, "SelectionCommand", "GalaSoft.MvvmLight.Command.RelayCommand");
-                xamlMember.Getter = get_72_ProfilUserViewModel_SelectionCommand;
+                xamlMember = new global::SoonZik.SoonZik_XamlTypeInfo.XamlMember(this, "SelectionCommand", "System.Windows.Input.ICommand");
+                xamlMember.Getter = get_63_ProfilUserViewModel_SelectionCommand;
                 xamlMember.SetIsReadOnly();
                 break;
             case "SoonZik.ViewModel.FriendViewModel.Sources":
                 userType = (global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType)GetXamlTypeByName("SoonZik.ViewModel.FriendViewModel");
                 xamlMember = new global::SoonZik.SoonZik_XamlTypeInfo.XamlMember(this, "Sources", "System.Collections.ObjectModel.ObservableCollection`1<SoonZik.HttpRequest.Poco.User>");
-                xamlMember.Getter = get_73_FriendViewModel_Sources;
-                xamlMember.Setter = set_73_FriendViewModel_Sources;
+                xamlMember.Getter = get_64_FriendViewModel_Sources;
+                xamlMember.Setter = set_64_FriendViewModel_Sources;
                 break;
             case "SoonZik.HttpRequest.Poco.User.Id":
                 userType = (global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType)GetXamlTypeByName("SoonZik.HttpRequest.Poco.User");
                 xamlMember = new global::SoonZik.SoonZik_XamlTypeInfo.XamlMember(this, "Id", "Int32");
-                xamlMember.Getter = get_74_User_Id;
-                xamlMember.Setter = set_74_User_Id;
+                xamlMember.Getter = get_65_User_Id;
+                xamlMember.Setter = set_65_User_Id;
                 break;
             case "SoonZik.HttpRequest.Poco.User.Email":
                 userType = (global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType)GetXamlTypeByName("SoonZik.HttpRequest.Poco.User");
                 xamlMember = new global::SoonZik.SoonZik_XamlTypeInfo.XamlMember(this, "Email", "String");
-                xamlMember.Getter = get_75_User_Email;
-                xamlMember.Setter = set_75_User_Email;
+                xamlMember.Getter = get_66_User_Email;
+                xamlMember.Setter = set_66_User_Email;
                 break;
             case "SoonZik.HttpRequest.Poco.User.Username":
                 userType = (global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType)GetXamlTypeByName("SoonZik.HttpRequest.Poco.User");
                 xamlMember = new global::SoonZik.SoonZik_XamlTypeInfo.XamlMember(this, "Username", "String");
-                xamlMember.Getter = get_76_User_Username;
-                xamlMember.Setter = set_76_User_Username;
+                xamlMember.Getter = get_67_User_Username;
+                xamlMember.Setter = set_67_User_Username;
                 break;
             case "SoonZik.HttpRequest.Poco.User.Image":
                 userType = (global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType)GetXamlTypeByName("SoonZik.HttpRequest.Poco.User");
                 xamlMember = new global::SoonZik.SoonZik_XamlTypeInfo.XamlMember(this, "Image", "String");
-                xamlMember.Getter = get_77_User_Image;
-                xamlMember.Setter = set_77_User_Image;
+                xamlMember.Getter = get_68_User_Image;
+                xamlMember.Setter = set_68_User_Image;
                 break;
             case "SoonZik.HttpRequest.Poco.User.Description":
                 userType = (global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType)GetXamlTypeByName("SoonZik.HttpRequest.Poco.User");
                 xamlMember = new global::SoonZik.SoonZik_XamlTypeInfo.XamlMember(this, "Description", "String");
-                xamlMember.Getter = get_78_User_Description;
-                xamlMember.Setter = set_78_User_Description;
+                xamlMember.Getter = get_69_User_Description;
+                xamlMember.Setter = set_69_User_Description;
                 break;
             case "SoonZik.HttpRequest.Poco.User.Language":
                 userType = (global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType)GetXamlTypeByName("SoonZik.HttpRequest.Poco.User");
                 xamlMember = new global::SoonZik.SoonZik_XamlTypeInfo.XamlMember(this, "Language", "String");
-                xamlMember.Getter = get_79_User_Language;
-                xamlMember.Setter = set_79_User_Language;
+                xamlMember.Getter = get_70_User_Language;
+                xamlMember.Setter = set_70_User_Language;
                 break;
             case "SoonZik.HttpRequest.Poco.User.Address":
                 userType = (global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType)GetXamlTypeByName("SoonZik.HttpRequest.Poco.User");
                 xamlMember = new global::SoonZik.SoonZik_XamlTypeInfo.XamlMember(this, "Address", "SoonZik.HttpRequest.Poco.Address");
-                xamlMember.Getter = get_80_User_Address;
-                xamlMember.Setter = set_80_User_Address;
+                xamlMember.Getter = get_71_User_Address;
+                xamlMember.Setter = set_71_User_Address;
                 break;
             case "SoonZik.HttpRequest.Poco.User.Friends":
                 userType = (global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType)GetXamlTypeByName("SoonZik.HttpRequest.Poco.User");
                 xamlMember = new global::SoonZik.SoonZik_XamlTypeInfo.XamlMember(this, "Friends", "System.Collections.ObjectModel.ObservableCollection`1<SoonZik.HttpRequest.Poco.User>");
-                xamlMember.Getter = get_81_User_Friends;
-                xamlMember.Setter = set_81_User_Friends;
+                xamlMember.Getter = get_72_User_Friends;
+                xamlMember.Setter = set_72_User_Friends;
                 break;
             case "SoonZik.HttpRequest.Poco.User.Follows":
                 userType = (global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType)GetXamlTypeByName("SoonZik.HttpRequest.Poco.User");
                 xamlMember = new global::SoonZik.SoonZik_XamlTypeInfo.XamlMember(this, "Follows", "System.Collections.Generic.List`1<SoonZik.HttpRequest.Poco.User>");
-                xamlMember.Getter = get_82_User_Follows;
-                xamlMember.Setter = set_82_User_Follows;
+                xamlMember.Getter = get_73_User_Follows;
+                xamlMember.Setter = set_73_User_Follows;
                 break;
             case "SoonZik.ViewModel.FriendViewModel.ItemSource":
                 userType = (global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType)GetXamlTypeByName("SoonZik.ViewModel.FriendViewModel");
                 xamlMember = new global::SoonZik.SoonZik_XamlTypeInfo.XamlMember(this, "ItemSource", "System.Collections.Generic.List`1<SoonZik.Utils.AlphaKeyGroups`1<SoonZik.HttpRequest.Poco.User>>");
-                xamlMember.Getter = get_83_FriendViewModel_ItemSource;
-                xamlMember.Setter = set_83_FriendViewModel_ItemSource;
+                xamlMember.Getter = get_74_FriendViewModel_ItemSource;
+                xamlMember.Setter = set_74_FriendViewModel_ItemSource;
                 break;
             case "SoonZik.Utils.AlphaKeyGroups`1<SoonZik.HttpRequest.Poco.User>.Key":
                 userType = (global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType)GetXamlTypeByName("SoonZik.Utils.AlphaKeyGroups`1<SoonZik.HttpRequest.Poco.User>");
                 xamlMember = new global::SoonZik.SoonZik_XamlTypeInfo.XamlMember(this, "Key", "String");
-                xamlMember.Getter = get_84_AlphaKeyGroups_Key;
+                xamlMember.Getter = get_75_AlphaKeyGroups_Key;
                 xamlMember.SetIsReadOnly();
                 break;
             case "System.Collections.Generic.List`1<SoonZik.HttpRequest.Poco.User>.Capacity":
                 userType = (global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType)GetXamlTypeByName("System.Collections.Generic.List`1<SoonZik.HttpRequest.Poco.User>");
                 xamlMember = new global::SoonZik.SoonZik_XamlTypeInfo.XamlMember(this, "Capacity", "Int32");
-                xamlMember.Getter = get_85_List_Capacity;
-                xamlMember.Setter = set_85_List_Capacity;
+                xamlMember.Getter = get_76_List_Capacity;
+                xamlMember.Setter = set_76_List_Capacity;
                 break;
             case "System.Collections.Generic.List`1<SoonZik.HttpRequest.Poco.User>.Count":
                 userType = (global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType)GetXamlTypeByName("System.Collections.Generic.List`1<SoonZik.HttpRequest.Poco.User>");
                 xamlMember = new global::SoonZik.SoonZik_XamlTypeInfo.XamlMember(this, "Count", "Int32");
-                xamlMember.Getter = get_86_List_Count;
+                xamlMember.Getter = get_77_List_Count;
                 xamlMember.SetIsReadOnly();
                 break;
             case "SoonZik.ViewModel.FriendViewModel.TappedCommand":
                 userType = (global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType)GetXamlTypeByName("SoonZik.ViewModel.FriendViewModel");
                 xamlMember = new global::SoonZik.SoonZik_XamlTypeInfo.XamlMember(this, "TappedCommand", "GalaSoft.MvvmLight.Command.RelayCommand");
-                xamlMember.Getter = get_87_FriendViewModel_TappedCommand;
+                xamlMember.Getter = get_78_FriendViewModel_TappedCommand;
                 xamlMember.SetIsReadOnly();
+                break;
+            case "SoonZik.ViewModel.FriendViewModel.SelectedUser":
+                userType = (global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType)GetXamlTypeByName("SoonZik.ViewModel.FriendViewModel");
+                xamlMember = new global::SoonZik.SoonZik_XamlTypeInfo.XamlMember(this, "SelectedUser", "SoonZik.HttpRequest.Poco.User");
+                xamlMember.Getter = get_79_FriendViewModel_SelectedUser;
+                xamlMember.Setter = set_79_FriendViewModel_SelectedUser;
                 break;
             case "Microsoft.Xaml.Interactivity.Interaction.Behaviors":
                 userType = (global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType)GetXamlTypeByName("Microsoft.Xaml.Interactivity.Interaction");
                 xamlMember = new global::SoonZik.SoonZik_XamlTypeInfo.XamlMember(this, "Behaviors", "Microsoft.Xaml.Interactivity.BehaviorCollection");
                 xamlMember.SetTargetTypeName("Windows.UI.Xaml.DependencyObject");
                 xamlMember.SetIsAttachable();
-                xamlMember.Getter = get_88_Interaction_Behaviors;
-                xamlMember.Setter = set_88_Interaction_Behaviors;
+                xamlMember.Getter = get_80_Interaction_Behaviors;
+                xamlMember.Setter = set_80_Interaction_Behaviors;
                 break;
             case "Microsoft.Xaml.Interactions.Core.EventTriggerBehavior.Actions":
                 userType = (global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType)GetXamlTypeByName("Microsoft.Xaml.Interactions.Core.EventTriggerBehavior");
                 xamlMember = new global::SoonZik.SoonZik_XamlTypeInfo.XamlMember(this, "Actions", "Microsoft.Xaml.Interactivity.ActionCollection");
                 xamlMember.SetIsDependencyProperty();
-                xamlMember.Getter = get_89_EventTriggerBehavior_Actions;
+                xamlMember.Getter = get_81_EventTriggerBehavior_Actions;
                 xamlMember.SetIsReadOnly();
                 break;
             case "Microsoft.Xaml.Interactions.Core.EventTriggerBehavior.EventName":
                 userType = (global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType)GetXamlTypeByName("Microsoft.Xaml.Interactions.Core.EventTriggerBehavior");
                 xamlMember = new global::SoonZik.SoonZik_XamlTypeInfo.XamlMember(this, "EventName", "String");
                 xamlMember.SetIsDependencyProperty();
-                xamlMember.Getter = get_90_EventTriggerBehavior_EventName;
-                xamlMember.Setter = set_90_EventTriggerBehavior_EventName;
+                xamlMember.Getter = get_82_EventTriggerBehavior_EventName;
+                xamlMember.Setter = set_82_EventTriggerBehavior_EventName;
                 break;
             case "Microsoft.Xaml.Interactions.Core.EventTriggerBehavior.SourceObject":
                 userType = (global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType)GetXamlTypeByName("Microsoft.Xaml.Interactions.Core.EventTriggerBehavior");
                 xamlMember = new global::SoonZik.SoonZik_XamlTypeInfo.XamlMember(this, "SourceObject", "Object");
                 xamlMember.SetIsDependencyProperty();
-                xamlMember.Getter = get_91_EventTriggerBehavior_SourceObject;
-                xamlMember.Setter = set_91_EventTriggerBehavior_SourceObject;
+                xamlMember.Getter = get_83_EventTriggerBehavior_SourceObject;
+                xamlMember.Setter = set_83_EventTriggerBehavior_SourceObject;
                 break;
             case "Microsoft.Xaml.Interactions.Core.EventTriggerBehavior.AssociatedObject":
                 userType = (global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType)GetXamlTypeByName("Microsoft.Xaml.Interactions.Core.EventTriggerBehavior");
                 xamlMember = new global::SoonZik.SoonZik_XamlTypeInfo.XamlMember(this, "AssociatedObject", "Windows.UI.Xaml.DependencyObject");
-                xamlMember.Getter = get_92_EventTriggerBehavior_AssociatedObject;
+                xamlMember.Getter = get_84_EventTriggerBehavior_AssociatedObject;
                 xamlMember.SetIsReadOnly();
                 break;
             case "Microsoft.Xaml.Interactions.Media.ControlStoryboardAction.Storyboard":
                 userType = (global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType)GetXamlTypeByName("Microsoft.Xaml.Interactions.Media.ControlStoryboardAction");
                 xamlMember = new global::SoonZik.SoonZik_XamlTypeInfo.XamlMember(this, "Storyboard", "Windows.UI.Xaml.Media.Animation.Storyboard");
                 xamlMember.SetIsDependencyProperty();
-                xamlMember.Getter = get_93_ControlStoryboardAction_Storyboard;
-                xamlMember.Setter = set_93_ControlStoryboardAction_Storyboard;
+                xamlMember.Getter = get_85_ControlStoryboardAction_Storyboard;
+                xamlMember.Setter = set_85_ControlStoryboardAction_Storyboard;
                 break;
             case "Microsoft.Xaml.Interactions.Media.ControlStoryboardAction.ControlStoryboardOption":
                 userType = (global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType)GetXamlTypeByName("Microsoft.Xaml.Interactions.Media.ControlStoryboardAction");
                 xamlMember = new global::SoonZik.SoonZik_XamlTypeInfo.XamlMember(this, "ControlStoryboardOption", "Microsoft.Xaml.Interactions.Media.ControlStoryboardOption");
                 xamlMember.SetIsDependencyProperty();
-                xamlMember.Getter = get_94_ControlStoryboardAction_ControlStoryboardOption;
-                xamlMember.Setter = set_94_ControlStoryboardAction_ControlStoryboardOption;
+                xamlMember.Getter = get_86_ControlStoryboardAction_ControlStoryboardOption;
+                xamlMember.Setter = set_86_ControlStoryboardAction_ControlStoryboardOption;
                 break;
-            case "SoonZik.Controls.GlobalMenuControl.ConnexionCommand":
-                userType = (global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType)GetXamlTypeByName("SoonZik.Controls.GlobalMenuControl");
-                xamlMember = new global::SoonZik.SoonZik_XamlTypeInfo.XamlMember(this, "ConnexionCommand", "GalaSoft.MvvmLight.Command.RelayCommand");
-                xamlMember.Getter = get_95_GlobalMenuControl_ConnexionCommand;
-                xamlMember.SetIsReadOnly();
-                break;
-            case "SoonZik.Controls.GlobalMenuControl.ProfilCommand":
-                userType = (global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType)GetXamlTypeByName("SoonZik.Controls.GlobalMenuControl");
-                xamlMember = new global::SoonZik.SoonZik_XamlTypeInfo.XamlMember(this, "ProfilCommand", "GalaSoft.MvvmLight.Command.RelayCommand");
-                xamlMember.Getter = get_96_GlobalMenuControl_ProfilCommand;
-                xamlMember.SetIsReadOnly();
-                break;
-            case "SoonZik.Controls.GlobalMenuControl.NewsCommand":
-                userType = (global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType)GetXamlTypeByName("SoonZik.Controls.GlobalMenuControl");
-                xamlMember = new global::SoonZik.SoonZik_XamlTypeInfo.XamlMember(this, "NewsCommand", "GalaSoft.MvvmLight.Command.RelayCommand");
-                xamlMember.Getter = get_97_GlobalMenuControl_NewsCommand;
-                xamlMember.SetIsReadOnly();
-                break;
-            case "SoonZik.Controls.GlobalMenuControl.ExplorerCommand":
-                userType = (global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType)GetXamlTypeByName("SoonZik.Controls.GlobalMenuControl");
-                xamlMember = new global::SoonZik.SoonZik_XamlTypeInfo.XamlMember(this, "ExplorerCommand", "GalaSoft.MvvmLight.Command.RelayCommand");
-                xamlMember.Getter = get_98_GlobalMenuControl_ExplorerCommand;
-                xamlMember.SetIsReadOnly();
-                break;
-            case "SoonZik.Controls.GlobalMenuControl.PacksCommand":
-                userType = (global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType)GetXamlTypeByName("SoonZik.Controls.GlobalMenuControl");
-                xamlMember = new global::SoonZik.SoonZik_XamlTypeInfo.XamlMember(this, "PacksCommand", "GalaSoft.MvvmLight.Command.RelayCommand");
-                xamlMember.Getter = get_99_GlobalMenuControl_PacksCommand;
-                xamlMember.SetIsReadOnly();
-                break;
-            case "SoonZik.Controls.GlobalMenuControl.MondeMusicalCommand":
-                userType = (global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType)GetXamlTypeByName("SoonZik.Controls.GlobalMenuControl");
-                xamlMember = new global::SoonZik.SoonZik_XamlTypeInfo.XamlMember(this, "MondeMusicalCommand", "GalaSoft.MvvmLight.Command.RelayCommand");
-                xamlMember.Getter = get_100_GlobalMenuControl_MondeMusicalCommand;
-                xamlMember.SetIsReadOnly();
-                break;
-            case "SoonZik.Controls.GlobalMenuControl.BattleCommand":
-                userType = (global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType)GetXamlTypeByName("SoonZik.Controls.GlobalMenuControl");
-                xamlMember = new global::SoonZik.SoonZik_XamlTypeInfo.XamlMember(this, "BattleCommand", "GalaSoft.MvvmLight.Command.RelayCommand");
-                xamlMember.Getter = get_101_GlobalMenuControl_BattleCommand;
-                xamlMember.SetIsReadOnly();
-                break;
-            case "SoonZik.Controls.GlobalMenuControl.PlaylistCommand":
-                userType = (global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType)GetXamlTypeByName("SoonZik.Controls.GlobalMenuControl");
-                xamlMember = new global::SoonZik.SoonZik_XamlTypeInfo.XamlMember(this, "PlaylistCommand", "GalaSoft.MvvmLight.Command.RelayCommand");
-                xamlMember.Getter = get_102_GlobalMenuControl_PlaylistCommand;
-                xamlMember.SetIsReadOnly();
-                break;
-            case "SoonZik.Controls.GlobalMenuControl.AmisCommand":
-                userType = (global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType)GetXamlTypeByName("SoonZik.Controls.GlobalMenuControl");
-                xamlMember = new global::SoonZik.SoonZik_XamlTypeInfo.XamlMember(this, "AmisCommand", "GalaSoft.MvvmLight.Command.RelayCommand");
-                xamlMember.Getter = get_103_GlobalMenuControl_AmisCommand;
-                xamlMember.SetIsReadOnly();
-                break;
-            case "SoonZik.Controls.GlobalMenuControl.AchatCommand":
-                userType = (global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType)GetXamlTypeByName("SoonZik.Controls.GlobalMenuControl");
-                xamlMember = new global::SoonZik.SoonZik_XamlTypeInfo.XamlMember(this, "AchatCommand", "GalaSoft.MvvmLight.Command.RelayCommand");
-                xamlMember.Getter = get_104_GlobalMenuControl_AchatCommand;
-                xamlMember.SetIsReadOnly();
-                break;
-            case "SoonZik.Controls.GlobalMenuControl.MenuCommand":
-                userType = (global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType)GetXamlTypeByName("SoonZik.Controls.GlobalMenuControl");
-                xamlMember = new global::SoonZik.SoonZik_XamlTypeInfo.XamlMember(this, "MenuCommand", "GalaSoft.MvvmLight.Command.RelayCommand");
-                xamlMember.Getter = get_105_GlobalMenuControl_MenuCommand;
-                xamlMember.SetIsReadOnly();
+            case "SoonZik.Controls.ProgressRingControl.isActive":
+                userType = (global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType)GetXamlTypeByName("SoonZik.Controls.ProgressRingControl");
+                xamlMember = new global::SoonZik.SoonZik_XamlTypeInfo.XamlMember(this, "isActive", "Boolean");
+                xamlMember.Getter = get_87_ProgressRingControl_isActive;
+                xamlMember.Setter = set_87_ProgressRingControl_isActive;
                 break;
             case "Microsoft.Xaml.Interactions.Core.InvokeCommandAction.Command":
                 userType = (global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType)GetXamlTypeByName("Microsoft.Xaml.Interactions.Core.InvokeCommandAction");
                 xamlMember = new global::SoonZik.SoonZik_XamlTypeInfo.XamlMember(this, "Command", "System.Windows.Input.ICommand");
                 xamlMember.SetIsDependencyProperty();
-                xamlMember.Getter = get_106_InvokeCommandAction_Command;
-                xamlMember.Setter = set_106_InvokeCommandAction_Command;
+                xamlMember.Getter = get_88_InvokeCommandAction_Command;
+                xamlMember.Setter = set_88_InvokeCommandAction_Command;
                 break;
             case "Microsoft.Xaml.Interactions.Core.InvokeCommandAction.CommandParameter":
                 userType = (global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType)GetXamlTypeByName("Microsoft.Xaml.Interactions.Core.InvokeCommandAction");
                 xamlMember = new global::SoonZik.SoonZik_XamlTypeInfo.XamlMember(this, "CommandParameter", "Object");
                 xamlMember.SetIsDependencyProperty();
-                xamlMember.Getter = get_107_InvokeCommandAction_CommandParameter;
-                xamlMember.Setter = set_107_InvokeCommandAction_CommandParameter;
+                xamlMember.Getter = get_89_InvokeCommandAction_CommandParameter;
+                xamlMember.Setter = set_89_InvokeCommandAction_CommandParameter;
                 break;
             case "Microsoft.Xaml.Interactions.Core.InvokeCommandAction.InputConverter":
                 userType = (global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType)GetXamlTypeByName("Microsoft.Xaml.Interactions.Core.InvokeCommandAction");
                 xamlMember = new global::SoonZik.SoonZik_XamlTypeInfo.XamlMember(this, "InputConverter", "Windows.UI.Xaml.Data.IValueConverter");
                 xamlMember.SetIsDependencyProperty();
-                xamlMember.Getter = get_108_InvokeCommandAction_InputConverter;
-                xamlMember.Setter = set_108_InvokeCommandAction_InputConverter;
+                xamlMember.Getter = get_90_InvokeCommandAction_InputConverter;
+                xamlMember.Setter = set_90_InvokeCommandAction_InputConverter;
                 break;
             case "Microsoft.Xaml.Interactions.Core.InvokeCommandAction.InputConverterParameter":
                 userType = (global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType)GetXamlTypeByName("Microsoft.Xaml.Interactions.Core.InvokeCommandAction");
                 xamlMember = new global::SoonZik.SoonZik_XamlTypeInfo.XamlMember(this, "InputConverterParameter", "Object");
                 xamlMember.SetIsDependencyProperty();
-                xamlMember.Getter = get_109_InvokeCommandAction_InputConverterParameter;
-                xamlMember.Setter = set_109_InvokeCommandAction_InputConverterParameter;
+                xamlMember.Getter = get_91_InvokeCommandAction_InputConverterParameter;
+                xamlMember.Setter = set_91_InvokeCommandAction_InputConverterParameter;
                 break;
             case "Microsoft.Xaml.Interactions.Core.InvokeCommandAction.InputConverterLanguage":
                 userType = (global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType)GetXamlTypeByName("Microsoft.Xaml.Interactions.Core.InvokeCommandAction");
                 xamlMember = new global::SoonZik.SoonZik_XamlTypeInfo.XamlMember(this, "InputConverterLanguage", "String");
                 xamlMember.SetIsDependencyProperty();
-                xamlMember.Getter = get_110_InvokeCommandAction_InputConverterLanguage;
-                xamlMember.Setter = set_110_InvokeCommandAction_InputConverterLanguage;
+                xamlMember.Getter = get_92_InvokeCommandAction_InputConverterLanguage;
+                xamlMember.Setter = set_92_InvokeCommandAction_InputConverterLanguage;
                 break;
             case "LightStone.Controls.LightStone.ItemsSource":
                 userType = (global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType)GetXamlTypeByName("LightStone.Controls.LightStone");
                 xamlMember = new global::SoonZik.SoonZik_XamlTypeInfo.XamlMember(this, "ItemsSource", "Object");
                 xamlMember.SetIsDependencyProperty();
-                xamlMember.Getter = get_111_LightStone_ItemsSource;
-                xamlMember.Setter = set_111_LightStone_ItemsSource;
+                xamlMember.Getter = get_93_LightStone_ItemsSource;
+                xamlMember.Setter = set_93_LightStone_ItemsSource;
                 break;
             case "LightStone.Controls.LightStone.SelectedIndex":
                 userType = (global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType)GetXamlTypeByName("LightStone.Controls.LightStone");
                 xamlMember = new global::SoonZik.SoonZik_XamlTypeInfo.XamlMember(this, "SelectedIndex", "Int32");
                 xamlMember.SetIsDependencyProperty();
-                xamlMember.Getter = get_112_LightStone_SelectedIndex;
-                xamlMember.Setter = set_112_LightStone_SelectedIndex;
+                xamlMember.Getter = get_94_LightStone_SelectedIndex;
+                xamlMember.Setter = set_94_LightStone_SelectedIndex;
                 break;
             case "LightStone.Controls.LightStone.ItemTemplate":
                 userType = (global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType)GetXamlTypeByName("LightStone.Controls.LightStone");
                 xamlMember = new global::SoonZik.SoonZik_XamlTypeInfo.XamlMember(this, "ItemTemplate", "Windows.UI.Xaml.DataTemplate");
-                xamlMember.Getter = get_113_LightStone_ItemTemplate;
-                xamlMember.Setter = set_113_LightStone_ItemTemplate;
+                xamlMember.Getter = get_95_LightStone_ItemTemplate;
+                xamlMember.Setter = set_95_LightStone_ItemTemplate;
                 break;
             case "LightStone.Controls.LightStone.TransitionDuration":
                 userType = (global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType)GetXamlTypeByName("LightStone.Controls.LightStone");
                 xamlMember = new global::SoonZik.SoonZik_XamlTypeInfo.XamlMember(this, "TransitionDuration", "Int32");
                 xamlMember.SetIsDependencyProperty();
-                xamlMember.Getter = get_114_LightStone_TransitionDuration;
-                xamlMember.Setter = set_114_LightStone_TransitionDuration;
+                xamlMember.Getter = get_96_LightStone_TransitionDuration;
+                xamlMember.Setter = set_96_LightStone_TransitionDuration;
                 break;
             case "LightStone.Controls.LightStone.Depth":
                 userType = (global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType)GetXamlTypeByName("LightStone.Controls.LightStone");
                 xamlMember = new global::SoonZik.SoonZik_XamlTypeInfo.XamlMember(this, "Depth", "Double");
                 xamlMember.SetIsDependencyProperty();
-                xamlMember.Getter = get_115_LightStone_Depth;
-                xamlMember.Setter = set_115_LightStone_Depth;
+                xamlMember.Getter = get_97_LightStone_Depth;
+                xamlMember.Setter = set_97_LightStone_Depth;
                 break;
             case "LightStone.Controls.LightStone.MaxVisibleItems":
                 userType = (global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType)GetXamlTypeByName("LightStone.Controls.LightStone");
                 xamlMember = new global::SoonZik.SoonZik_XamlTypeInfo.XamlMember(this, "MaxVisibleItems", "Int32");
                 xamlMember.SetIsDependencyProperty();
-                xamlMember.Getter = get_116_LightStone_MaxVisibleItems;
-                xamlMember.Setter = set_116_LightStone_MaxVisibleItems;
+                xamlMember.Getter = get_98_LightStone_MaxVisibleItems;
+                xamlMember.Setter = set_98_LightStone_MaxVisibleItems;
                 break;
             case "LightStone.Controls.LightStone.Rotation":
                 userType = (global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType)GetXamlTypeByName("LightStone.Controls.LightStone");
                 xamlMember = new global::SoonZik.SoonZik_XamlTypeInfo.XamlMember(this, "Rotation", "Double");
                 xamlMember.SetIsDependencyProperty();
-                xamlMember.Getter = get_117_LightStone_Rotation;
-                xamlMember.Setter = set_117_LightStone_Rotation;
+                xamlMember.Getter = get_99_LightStone_Rotation;
+                xamlMember.Setter = set_99_LightStone_Rotation;
                 break;
             case "LightStone.Controls.LightStone.TranslateY":
                 userType = (global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType)GetXamlTypeByName("LightStone.Controls.LightStone");
                 xamlMember = new global::SoonZik.SoonZik_XamlTypeInfo.XamlMember(this, "TranslateY", "Int32");
                 xamlMember.SetIsDependencyProperty();
-                xamlMember.Getter = get_118_LightStone_TranslateY;
-                xamlMember.Setter = set_118_LightStone_TranslateY;
+                xamlMember.Getter = get_100_LightStone_TranslateY;
+                xamlMember.Setter = set_100_LightStone_TranslateY;
                 break;
             case "LightStone.Controls.LightStone.TranslateX":
                 userType = (global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType)GetXamlTypeByName("LightStone.Controls.LightStone");
                 xamlMember = new global::SoonZik.SoonZik_XamlTypeInfo.XamlMember(this, "TranslateX", "Int32");
                 xamlMember.SetIsDependencyProperty();
-                xamlMember.Getter = get_119_LightStone_TranslateX;
-                xamlMember.Setter = set_119_LightStone_TranslateX;
+                xamlMember.Getter = get_101_LightStone_TranslateX;
+                xamlMember.Setter = set_101_LightStone_TranslateX;
                 break;
             case "LightStone.Controls.LightStone.EasingFunction":
                 userType = (global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType)GetXamlTypeByName("LightStone.Controls.LightStone");
                 xamlMember = new global::SoonZik.SoonZik_XamlTypeInfo.XamlMember(this, "EasingFunction", "Windows.UI.Xaml.Media.Animation.EasingFunctionBase");
                 xamlMember.SetIsDependencyProperty();
-                xamlMember.Getter = get_120_LightStone_EasingFunction;
-                xamlMember.Setter = set_120_LightStone_EasingFunction;
+                xamlMember.Getter = get_102_LightStone_EasingFunction;
+                xamlMember.Setter = set_102_LightStone_EasingFunction;
                 break;
             }
             return xamlMember;

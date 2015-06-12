@@ -1,14 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Globalization;
+using Windows.Storage;
 using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
 using Coding4Fun.Toolkit.Controls;
+using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using SoonZik.Controls;
 using SoonZik.HttpRequest.Poco;
-using  GalaSoft.MvvmLight;
 using SoonZik.Utils;
 
 namespace SoonZik.ViewModel
@@ -16,7 +15,7 @@ namespace SoonZik.ViewModel
     public class FriendViewModel : ViewModelBase
     {
         #region Attribute
-        readonly Windows.Storage.ApplicationDataContainer _localSettings = Windows.Storage.ApplicationData.Current.LocalSettings;
+        readonly ApplicationDataContainer _localSettings = ApplicationData.Current.LocalSettings;
         
         private ObservableCollection<User> _sources; 
         public ObservableCollection<User> Sources
@@ -44,7 +43,22 @@ namespace SoonZik.ViewModel
         {
             get; private set; 
         }
-        
+
+        private User _selectedUser;
+
+        public User SelectedUser
+        {
+            get
+            {
+                return _selectedUser;
+            }
+            set
+            {
+                _selectedUser = value;
+                RaisePropertyChanged("SelectedUser");
+            }
+        }
+
         #endregion
 
         #region Ctor
@@ -65,12 +79,13 @@ namespace SoonZik.ViewModel
         #region Method
         private void Execute()
         {
+
             var messagePrompt = new MessagePrompt
             {
                 Title = "Que voulez vous faire ?",
                 IsAppBarVisible = true,
                 VerticalAlignment = VerticalAlignment.Center,
-                Body = new ButtonFriendPopUp(),
+                Body = new ButtonFriendPopUp(SelectedUser.Id),
                 Opacity = 0.6
             };
             messagePrompt.Show();

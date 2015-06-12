@@ -10,6 +10,12 @@
     mc:Ignorable="d"
     Background="#424242"
     DataContext="{StaticResource ProfilUserViewModel}">
+            
+    <interactivity:Interaction.Behaviors>
+            <core:EventTriggerBehavior EventName="Loaded">
+                <core:InvokeCommandAction Command="{Binding SelectionCommand}"/>
+            </core:EventTriggerBehavior>
+    </interactivity:Interaction.Behaviors>
     
     <Page.Resources>
         <DataTemplate x:Key="UserTemplate">
@@ -17,6 +23,8 @@
                 <TextBlock Text="{Binding Path=Username}" Style="{StaticResource TitleTextBlockStyle}"/>
             </StackPanel>
         </DataTemplate>
+
+
     </Page.Resources>
     
 

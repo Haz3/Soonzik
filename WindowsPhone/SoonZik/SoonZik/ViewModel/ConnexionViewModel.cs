@@ -1,12 +1,10 @@
 ﻿using System;
-using System.Diagnostics;
 using System.Globalization;
 using System.Net;
-using System.Text;
-using System.Threading.Tasks;
 using Windows.ApplicationModel.Core;
+using Windows.Storage;
+using Windows.UI.Core;
 using Windows.UI.Popups;
-using Windows.UI.Xaml.Controls;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using Microsoft.Practices.ServiceLocation;
@@ -16,6 +14,7 @@ using SoonZik.HttpRequest.Poco;
 using SoonZik.Utils;
 using SoonZik.Views;
 using Connexion = SoonZik.HttpRequest.Connexion;
+using News = SoonZik.Views.News;
 
 namespace SoonZik.ViewModel
 {
@@ -23,7 +22,20 @@ namespace SoonZik.ViewModel
     {
         #region Attribute
 
-        readonly Windows.Storage.ApplicationDataContainer _localSettings = Windows.Storage.ApplicationData.Current.LocalSettings;
+        private bool _progressOn;
+        public bool ProgressOn
+        {
+            get { return _progressOn; }
+            set
+            {
+                _progressOn = value;
+                RaisePropertyChanged("ProgressOn");
+            }
+        }
+
+      
+
+        readonly ApplicationDataContainer _localSettings = ApplicationData.Current.LocalSettings;
       
         private string _username;
 
@@ -60,13 +72,14 @@ namespace SoonZik.ViewModel
         {
             get { return _facebookTapped; }
         }
-        public Utils.INavigationService Navigation;
+        public INavigationService Navigation;
 
         #endregion
         
         #region Ctor
         public ConnexionViewModel()
         {
+            ProgressOn = false;
             Navigation = new NavigationService();
             _connexionCommand = new RelayCommand(MakeConnexion);
             _facebookTapped = new RelayCommand(MakeFacebookConnection);
@@ -83,9 +96,10 @@ namespace SoonZik.ViewModel
 
         private async void MakeConnexion()
         {
+            ProgressOn = true;
             var dispatcher = CoreApplication.MainView.CoreWindow.Dispatcher;
 
-            await dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, async () =>
+            await dispatcher.RunAsync(CoreDispatcherPriority.Normal, async () =>
             {
                 if (_username != null && _password != null)
                 {
@@ -109,8 +123,9 @@ namespace SoonZik.ViewModel
                             new MessageDialog("Erreur de connexion").ShowAsync();
                         }
                         WriteInformation();
-                        Singleton.Instance().NewsPage = new Views.News();
+                        Singleton.Instance().NewsPage = new News();
                         Navigation.Navigate(typeof(MainView));
+                        ProgressOn = false;
                     }
                     else
                     {

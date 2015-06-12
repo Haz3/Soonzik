@@ -1,7 +1,8 @@
-﻿using System;
+﻿using System.Windows.Input;
 using Windows.Phone.UI.Input;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using GalaSoft.MvvmLight.Ioc;
 using SoonZik.HttpRequest.Poco;
 using SoonZik.Utils;
 
@@ -10,7 +11,19 @@ namespace SoonZik.ViewModel
     public class ProfilUserViewModel : ViewModelBase
     {
         #region Attribute
-        public User CurrentUser { get; set; }
+
+        private User _currentUser;
+
+        public User CurrentUser
+        {
+            get { return _currentUser; }
+            set
+            {
+                _currentUser = value;
+                RaisePropertyChanged("CurrentUser");
+            } 
+            
+        }
         public INavigationService Navigation;
 
         public User SelectUser
@@ -22,27 +35,27 @@ namespace SoonZik.ViewModel
                 RaisePropertyChanged("SelectUser");
             }
         }
-
         private User _selectUser;
-
-
-        private RelayCommand _selectionCommand;
-        public RelayCommand SelectionCommand
+        
+        private ICommand _selectionCommand;
+        public ICommand SelectionCommand
         {
             get { return _selectionCommand; }
         }
         #endregion
 
         #region Ctor
-
+        [PreferredConstructor]
         public ProfilUserViewModel()
         {
             Navigation = new NavigationService();
-            CurrentUser = Singleton.Instance().CurrentUser;
+            //CurrentUser = Singleton.Instance().CurrentUser;
             HardwareButtons.BackPressed += HardwareButtonsOnBackPressed;
             _selectionCommand = new RelayCommand(SelectionExecute);
+
             //Navigation.GoBack();
         }
+
 
         private void HardwareButtonsOnBackPressed(object sender, BackPressedEventArgs backPressedEventArgs)
         {
@@ -55,7 +68,10 @@ namespace SoonZik.ViewModel
         #region Method
         private void SelectionExecute()
         {
-            var test = _selectUser;
+            if (Singleton.Instance().ItsMe)
+                CurrentUser = Singleton.Instance().CurrentUser;
+            else if (!Singleton.Instance().ItsMe)
+                CurrentUser = Singleton.Instance().SelectedUser;
         }
         
         #endregion

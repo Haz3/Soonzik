@@ -15,11 +15,7 @@
 	
    
     <Grid x:Name="MainPageGrid">
-        <Grid.Resources>
-            <utils:BoolToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
-        </Grid.Resources>
-
-       <view:Connexion/>
+        <view:Connexion/>
     </Grid>
 		
 </Page>

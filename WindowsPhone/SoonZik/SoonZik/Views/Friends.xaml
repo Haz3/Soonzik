@@ -46,15 +46,15 @@
     <Grid x:Name="ContentRoot">
             <SemanticZoom>
                 <SemanticZoom.ZoomedInView>
-                    <ListView IsHoldingEnabled="True" ItemsSource="{Binding Source={StaticResource AddressGroups}}"
-						ItemTemplate="{StaticResource AddrBookItemTemplate}"
-						ContinuumNavigationTransitionInfo.ExitElementContainer="True">
+                    <ListView x:Name="ListView" IsHoldingEnabled="True" ItemsSource="{Binding Source={StaticResource AddressGroups}}" ItemTemplate="{StaticResource AddrBookItemTemplate}"
+						ContinuumNavigationTransitionInfo.ExitElementContainer="True" SelectedItem="{Binding SelectedUser, Mode=TwoWay}">
                     <interactivity:Interaction.Behaviors>
                         <core:EventTriggerBehavior EventName="Tapped">
-                            <core:InvokeCommandAction Command="{Binding TappedCommand}"  ></core:InvokeCommandAction>
+                            <core:InvokeCommandAction Command="{Binding TappedCommand}"/>
                         </core:EventTriggerBehavior>
                     </interactivity:Interaction.Behaviors>
-                    <ListView.GroupStyle>
+                    
+                        <ListView.GroupStyle>
                             <GroupStyle HidesIfEmpty="True" HeaderTemplate="{StaticResource AddrBookGroupHeaderTemplate}"/>
                     </ListView.GroupStyle>
 

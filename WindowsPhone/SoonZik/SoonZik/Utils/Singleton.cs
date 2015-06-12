@@ -1,4 +1,8 @@
-﻿using SoonZik.HttpRequest.Poco;
+﻿using System;
+using System.Threading.Tasks;
+using SoonZik.HttpRequest;
+using SoonZik.HttpRequest.Poco;
+using SoonZik.Views;
 using News = SoonZik.Views.News;
 
 namespace SoonZik.Utils
@@ -17,8 +21,16 @@ namespace SoonZik.Utils
         }
 
         public User CurrentUser { get; set; }
+        
+        public User SelectedUser { get; set; }
+
+        public bool ItsMe { get; set; }
 
         public News NewsPage { get; set; }
+
+        public ProfilUser ProfilPage { get; set; }
+
+        public int NewProfilUser { get; set; }
 
         #endregion
 
@@ -26,6 +38,21 @@ namespace SoonZik.Utils
         protected internal Singleton()
         {
 
+        }
+        #endregion
+
+        #region Method
+        public async Task Charge()
+        {
+            var request = new HttpRequestGet();
+            try
+            {
+                SelectedUser = (User)await request.GetObject(new User(), "users", Singleton.Instance().NewProfilUser.ToString());
+            }
+            catch (Exception e)
+            {
+
+            }
         }
         #endregion
     }
