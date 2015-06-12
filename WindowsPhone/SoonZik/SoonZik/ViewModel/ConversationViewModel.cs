@@ -1,13 +1,33 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Windows.Phone.UI.Input;
 using GalaSoft.MvvmLight;
+using SoonZik.Utils;
 
 namespace SoonZik.ViewModel
 {
     public class ConversationViewModel : ViewModelBase
     {
+        #region Attribute
+
+        public INavigationService Navigation;
+
+        #endregion
+
+        #region Ctor
+
+        public ConversationViewModel()
+        {
+            HardwareButtons.BackPressed += HardwareButtonsOnBackPressed;
+        }
+        #endregion
+
+        #region Method
+
+        private void HardwareButtonsOnBackPressed(object sender, BackPressedEventArgs backPressedEventArgs)
+        {
+            backPressedEventArgs.Handled = true;
+            Navigation.GoBack();
+        }
+        #endregion
+
     }
 }

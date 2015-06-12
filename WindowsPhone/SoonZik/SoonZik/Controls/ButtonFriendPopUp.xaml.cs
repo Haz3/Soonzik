@@ -1,9 +1,7 @@
 ﻿using System.Threading.Tasks;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using GalaSoft.MvvmLight.Command;
 using SoonZik.Utils;
-using SoonZik.ViewModel;
 using SoonZik.Views;
 
 // Pour en savoir plus sur le modèle d'élément Contrôle utilisateur, consultez la page http://go.microsoft.com/fwlink/?LinkId=234236
@@ -32,6 +30,7 @@ namespace SoonZik.Controls
         private void SendMessage(object sender, RoutedEventArgs e)
         {
 
+            Navigation.Navigate(typeof(Conversation));
         }
 
         private void GoToProfil(object sender, RoutedEventArgs e)

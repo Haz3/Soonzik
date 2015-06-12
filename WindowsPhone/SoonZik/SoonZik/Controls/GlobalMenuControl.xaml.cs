@@ -1,8 +1,8 @@
-﻿using System.Threading.Tasks;
-using Windows.UI.Xaml.Controls;
+﻿using Windows.UI.Xaml.Controls;
 using GalaSoft.MvvmLight.Command;
 using SoonZik.Utils;
 using SoonZik.Views;
+
 // Pour en savoir plus sur le modèle d'élément Contrôle utilisateur, consultez la page http://go.microsoft.com/fwlink/?LinkId=234236
 
 namespace SoonZik.Controls
@@ -77,11 +77,9 @@ namespace SoonZik.Controls
 
         private void GoToExplorer()
         {
-            ProgressRing.IsActive = true;
             GlobalGrid.Children.Clear();
             GlobalGrid.Children.Add(new Explorer());
             CloseMenu();
-            ProgressRing.IsActive = false;
         }
 
         private void GoToPacks()

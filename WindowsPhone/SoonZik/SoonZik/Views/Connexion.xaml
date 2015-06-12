@@ -28,7 +28,7 @@
         <TextBlock x:Name="TitleBlock" Text="Bienvenue" FontFamily="{StaticResource Roboto}" FontSize="50" Foreground="Black" Grid.Row="0"/>
 
         <!-- Row 2 -->
-        <Image Grid.Row="1" Source="../Resources/logo.png" Width="300" Height="150" VerticalAlignment="Top"/>
+        <Image Grid.Row="1" Source="../Resources/logo.scale-240.png" Width="300" Height="150" VerticalAlignment="Top"/>
 
         <Image Grid.Row="1" Source="../Resources/Icones/facebook.png" Width="50" Height="50" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="60,225,0,225">
             <interactivity:Interaction.Behaviors>

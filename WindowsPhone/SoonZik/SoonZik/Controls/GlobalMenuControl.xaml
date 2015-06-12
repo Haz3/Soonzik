@@ -44,6 +44,10 @@
         </Grid.RowDefinitions>
 
         <Grid x:Name="HeaderGrid" Grid.Row="0" Background="Transparent" Height="50">
+            <!--<ProgressBar x:Name="ProgressBar" Visibility="Visible" Width="200" IsIndeterminate="True" VerticalAlignment="Center" Height="10" HorizontalAlignment="Center" Foreground="Aqua"></ProgressBar>-->
+
+            <ProgressRing x:Name="ProgressTest" Height="15" Width="15" Foreground="Aqua" />
+            
             <ToggleButton x:Name="ToggleButtonMenu" Content="ToggleButton" HorizontalAlignment="Left" Height="30" Margin="10,8,0,12" Style="{StaticResource MenuToggleStyle}" VerticalAlignment="Center" Width="30" MinHeight="20" MinWidth="30" IsChecked="False" MaxHeight="30" MaxWidth="30">
                 <interactivity:Interaction.Behaviors>
                     <core:EventTriggerBehavior EventName="Checked">
@@ -120,6 +124,5 @@
                 <CompositeTransform/>
             </Grid.RenderTransform>
         </Grid>
-        <ProgressRing x:Name="ProgressRing" Grid.Row="1" Background="Black" Foreground="Aqua" Opacity="0.5"/>
     </Grid>
 </UserControl>

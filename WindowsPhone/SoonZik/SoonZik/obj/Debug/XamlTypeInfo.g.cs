@@ -645,6 +645,9 @@ namespace SoonZik.SoonZik_XamlTypeInfo
                 userType.AddMemberName("CurrentUser");
                 userType.AddMemberName("SelectUser");
                 userType.AddMemberName("SelectionCommand");
+                userType.AddMemberName("EditClickCommand");
+                userType.AddMemberName("CanUpdate");
+                userType.AddMemberName("ButtonContent");
                 userType.SetIsLocalType();
                 xamlType = userType;
                 break;
@@ -1964,305 +1967,330 @@ namespace SoonZik.SoonZik_XamlTypeInfo
             var that = (global::SoonZik.ViewModel.ProfilUserViewModel)instance;
             return that.SelectionCommand;
         }
-        private object get_75_FriendViewModel_Sources(object instance)
+        private object get_75_ProfilUserViewModel_EditClickCommand(object instance)
+        {
+            var that = (global::SoonZik.ViewModel.ProfilUserViewModel)instance;
+            return that.EditClickCommand;
+        }
+        private object get_76_ProfilUserViewModel_CanUpdate(object instance)
+        {
+            var that = (global::SoonZik.ViewModel.ProfilUserViewModel)instance;
+            return that.CanUpdate;
+        }
+        private void set_76_ProfilUserViewModel_CanUpdate(object instance, object Value)
+        {
+            var that = (global::SoonZik.ViewModel.ProfilUserViewModel)instance;
+            that.CanUpdate = (global::System.Boolean)Value;
+        }
+        private object get_77_ProfilUserViewModel_ButtonContent(object instance)
+        {
+            var that = (global::SoonZik.ViewModel.ProfilUserViewModel)instance;
+            return that.ButtonContent;
+        }
+        private void set_77_ProfilUserViewModel_ButtonContent(object instance, object Value)
+        {
+            var that = (global::SoonZik.ViewModel.ProfilUserViewModel)instance;
+            that.ButtonContent = (global::System.String)Value;
+        }
+        private object get_78_FriendViewModel_Sources(object instance)
         {
             var that = (global::SoonZik.ViewModel.FriendViewModel)instance;
             return that.Sources;
         }
-        private void set_75_FriendViewModel_Sources(object instance, object Value)
+        private void set_78_FriendViewModel_Sources(object instance, object Value)
         {
             var that = (global::SoonZik.ViewModel.FriendViewModel)instance;
             that.Sources = (global::System.Collections.ObjectModel.ObservableCollection<global::SoonZik.HttpRequest.Poco.User>)Value;
         }
-        private object get_76_FriendViewModel_ItemSource(object instance)
+        private object get_79_FriendViewModel_ItemSource(object instance)
         {
             var that = (global::SoonZik.ViewModel.FriendViewModel)instance;
             return that.ItemSource;
         }
-        private void set_76_FriendViewModel_ItemSource(object instance, object Value)
+        private void set_79_FriendViewModel_ItemSource(object instance, object Value)
         {
             var that = (global::SoonZik.ViewModel.FriendViewModel)instance;
             that.ItemSource = (global::System.Collections.Generic.List<SoonZik.Utils.AlphaKeyGroups<global::SoonZik.HttpRequest.Poco.User>>)Value;
         }
-        private object get_77_AlphaKeyGroups_Key(object instance)
+        private object get_80_AlphaKeyGroups_Key(object instance)
         {
             var that = (global::SoonZik.Utils.AlphaKeyGroups<global::SoonZik.HttpRequest.Poco.User>)instance;
             return that.Key;
         }
-        private object get_78_List_Capacity(object instance)
+        private object get_81_List_Capacity(object instance)
         {
             var that = (global::System.Collections.Generic.List<global::SoonZik.HttpRequest.Poco.User>)instance;
             return that.Capacity;
         }
-        private void set_78_List_Capacity(object instance, object Value)
+        private void set_81_List_Capacity(object instance, object Value)
         {
             var that = (global::System.Collections.Generic.List<global::SoonZik.HttpRequest.Poco.User>)instance;
             that.Capacity = (global::System.Int32)Value;
         }
-        private object get_79_List_Count(object instance)
+        private object get_82_List_Count(object instance)
         {
             var that = (global::System.Collections.Generic.List<global::SoonZik.HttpRequest.Poco.User>)instance;
             return that.Count;
         }
-        private object get_80_FriendViewModel_TappedCommand(object instance)
+        private object get_83_FriendViewModel_TappedCommand(object instance)
         {
             var that = (global::SoonZik.ViewModel.FriendViewModel)instance;
             return that.TappedCommand;
         }
-        private object get_81_FriendViewModel_SelectedUser(object instance)
+        private object get_84_FriendViewModel_SelectedUser(object instance)
         {
             var that = (global::SoonZik.ViewModel.FriendViewModel)instance;
             return that.SelectedUser;
         }
-        private void set_81_FriendViewModel_SelectedUser(object instance, object Value)
+        private void set_84_FriendViewModel_SelectedUser(object instance, object Value)
         {
             var that = (global::SoonZik.ViewModel.FriendViewModel)instance;
             that.SelectedUser = (global::SoonZik.HttpRequest.Poco.User)Value;
         }
-        private object get_82_Interaction_Behaviors(object instance)
+        private object get_85_Interaction_Behaviors(object instance)
         {
             return global::Microsoft.Xaml.Interactivity.Interaction.GetBehaviors((global::Windows.UI.Xaml.DependencyObject)instance);
         }
-        private void set_82_Interaction_Behaviors(object instance, object Value)
+        private void set_85_Interaction_Behaviors(object instance, object Value)
         {
             global::Microsoft.Xaml.Interactivity.Interaction.SetBehaviors((global::Windows.UI.Xaml.DependencyObject)instance, (global::Microsoft.Xaml.Interactivity.BehaviorCollection)Value);
         }
-        private object get_83_EventTriggerBehavior_Actions(object instance)
+        private object get_86_EventTriggerBehavior_Actions(object instance)
         {
             var that = (global::Microsoft.Xaml.Interactions.Core.EventTriggerBehavior)instance;
             return that.Actions;
         }
-        private object get_84_EventTriggerBehavior_EventName(object instance)
+        private object get_87_EventTriggerBehavior_EventName(object instance)
         {
             var that = (global::Microsoft.Xaml.Interactions.Core.EventTriggerBehavior)instance;
             return that.EventName;
         }
-        private void set_84_EventTriggerBehavior_EventName(object instance, object Value)
+        private void set_87_EventTriggerBehavior_EventName(object instance, object Value)
         {
             var that = (global::Microsoft.Xaml.Interactions.Core.EventTriggerBehavior)instance;
             that.EventName = (global::System.String)Value;
         }
-        private object get_85_EventTriggerBehavior_SourceObject(object instance)
+        private object get_88_EventTriggerBehavior_SourceObject(object instance)
         {
             var that = (global::Microsoft.Xaml.Interactions.Core.EventTriggerBehavior)instance;
             return that.SourceObject;
         }
-        private void set_85_EventTriggerBehavior_SourceObject(object instance, object Value)
+        private void set_88_EventTriggerBehavior_SourceObject(object instance, object Value)
         {
             var that = (global::Microsoft.Xaml.Interactions.Core.EventTriggerBehavior)instance;
             that.SourceObject = (global::System.Object)Value;
         }
-        private object get_86_EventTriggerBehavior_AssociatedObject(object instance)
+        private object get_89_EventTriggerBehavior_AssociatedObject(object instance)
         {
             var that = (global::Microsoft.Xaml.Interactions.Core.EventTriggerBehavior)instance;
             return that.AssociatedObject;
         }
-        private object get_87_ControlStoryboardAction_Storyboard(object instance)
+        private object get_90_ControlStoryboardAction_Storyboard(object instance)
         {
             var that = (global::Microsoft.Xaml.Interactions.Media.ControlStoryboardAction)instance;
             return that.Storyboard;
         }
-        private void set_87_ControlStoryboardAction_Storyboard(object instance, object Value)
+        private void set_90_ControlStoryboardAction_Storyboard(object instance, object Value)
         {
             var that = (global::Microsoft.Xaml.Interactions.Media.ControlStoryboardAction)instance;
             that.Storyboard = (global::Windows.UI.Xaml.Media.Animation.Storyboard)Value;
         }
-        private object get_88_ControlStoryboardAction_ControlStoryboardOption(object instance)
+        private object get_91_ControlStoryboardAction_ControlStoryboardOption(object instance)
         {
             var that = (global::Microsoft.Xaml.Interactions.Media.ControlStoryboardAction)instance;
             return that.ControlStoryboardOption;
         }
-        private void set_88_ControlStoryboardAction_ControlStoryboardOption(object instance, object Value)
+        private void set_91_ControlStoryboardAction_ControlStoryboardOption(object instance, object Value)
         {
             var that = (global::Microsoft.Xaml.Interactions.Media.ControlStoryboardAction)instance;
             that.ControlStoryboardOption = (global::Microsoft.Xaml.Interactions.Media.ControlStoryboardOption)Value;
         }
-        private object get_89_ProgressRingControl_GridVisibility(object instance)
+        private object get_92_ProgressRingControl_GridVisibility(object instance)
         {
             var that = (global::SoonZik.Controls.ProgressRingControl)instance;
             return that.GridVisibility;
         }
-        private void set_89_ProgressRingControl_GridVisibility(object instance, object Value)
+        private void set_92_ProgressRingControl_GridVisibility(object instance, object Value)
         {
             var that = (global::SoonZik.Controls.ProgressRingControl)instance;
             that.GridVisibility = (global::Windows.UI.Xaml.Visibility)Value;
         }
-        private object get_90_ProgressRingControl_isActive(object instance)
+        private object get_93_ProgressRingControl_isActive(object instance)
         {
             var that = (global::SoonZik.Controls.ProgressRingControl)instance;
             return that.isActive;
         }
-        private void set_90_ProgressRingControl_isActive(object instance, object Value)
+        private void set_93_ProgressRingControl_isActive(object instance, object Value)
         {
             var that = (global::SoonZik.Controls.ProgressRingControl)instance;
             that.isActive = (global::System.Boolean)Value;
         }
-        private object get_91_BooleanConverter_True(object instance)
+        private object get_94_BooleanConverter_True(object instance)
         {
             var that = (global::SoonZik.Utils.BooleanConverter<global::Windows.UI.Xaml.Visibility>)instance;
             return that.True;
         }
-        private void set_91_BooleanConverter_True(object instance, object Value)
+        private void set_94_BooleanConverter_True(object instance, object Value)
         {
             var that = (global::SoonZik.Utils.BooleanConverter<global::Windows.UI.Xaml.Visibility>)instance;
             that.True = (global::Windows.UI.Xaml.Visibility)Value;
         }
-        private object get_92_BooleanConverter_False(object instance)
+        private object get_95_BooleanConverter_False(object instance)
         {
             var that = (global::SoonZik.Utils.BooleanConverter<global::Windows.UI.Xaml.Visibility>)instance;
             return that.False;
         }
-        private void set_92_BooleanConverter_False(object instance, object Value)
+        private void set_95_BooleanConverter_False(object instance, object Value)
         {
             var that = (global::SoonZik.Utils.BooleanConverter<global::Windows.UI.Xaml.Visibility>)instance;
             that.False = (global::Windows.UI.Xaml.Visibility)Value;
         }
-        private object get_93_InvokeCommandAction_Command(object instance)
+        private object get_96_InvokeCommandAction_Command(object instance)
         {
             var that = (global::Microsoft.Xaml.Interactions.Core.InvokeCommandAction)instance;
             return that.Command;
         }
-        private void set_93_InvokeCommandAction_Command(object instance, object Value)
+        private void set_96_InvokeCommandAction_Command(object instance, object Value)
         {
             var that = (global::Microsoft.Xaml.Interactions.Core.InvokeCommandAction)instance;
             that.Command = (global::System.Windows.Input.ICommand)Value;
         }
-        private object get_94_InvokeCommandAction_CommandParameter(object instance)
+        private object get_97_InvokeCommandAction_CommandParameter(object instance)
         {
             var that = (global::Microsoft.Xaml.Interactions.Core.InvokeCommandAction)instance;
             return that.CommandParameter;
         }
-        private void set_94_InvokeCommandAction_CommandParameter(object instance, object Value)
+        private void set_97_InvokeCommandAction_CommandParameter(object instance, object Value)
         {
             var that = (global::Microsoft.Xaml.Interactions.Core.InvokeCommandAction)instance;
             that.CommandParameter = (global::System.Object)Value;
         }
-        private object get_95_InvokeCommandAction_InputConverter(object instance)
+        private object get_98_InvokeCommandAction_InputConverter(object instance)
         {
             var that = (global::Microsoft.Xaml.Interactions.Core.InvokeCommandAction)instance;
             return that.InputConverter;
         }
-        private void set_95_InvokeCommandAction_InputConverter(object instance, object Value)
+        private void set_98_InvokeCommandAction_InputConverter(object instance, object Value)
         {
             var that = (global::Microsoft.Xaml.Interactions.Core.InvokeCommandAction)instance;
             that.InputConverter = (global::Windows.UI.Xaml.Data.IValueConverter)Value;
         }
-        private object get_96_InvokeCommandAction_InputConverterParameter(object instance)
+        private object get_99_InvokeCommandAction_InputConverterParameter(object instance)
         {
             var that = (global::Microsoft.Xaml.Interactions.Core.InvokeCommandAction)instance;
             return that.InputConverterParameter;
         }
-        private void set_96_InvokeCommandAction_InputConverterParameter(object instance, object Value)
+        private void set_99_InvokeCommandAction_InputConverterParameter(object instance, object Value)
         {
             var that = (global::Microsoft.Xaml.Interactions.Core.InvokeCommandAction)instance;
             that.InputConverterParameter = (global::System.Object)Value;
         }
-        private object get_97_InvokeCommandAction_InputConverterLanguage(object instance)
+        private object get_100_InvokeCommandAction_InputConverterLanguage(object instance)
         {
             var that = (global::Microsoft.Xaml.Interactions.Core.InvokeCommandAction)instance;
             return that.InputConverterLanguage;
         }
-        private void set_97_InvokeCommandAction_InputConverterLanguage(object instance, object Value)
+        private void set_100_InvokeCommandAction_InputConverterLanguage(object instance, object Value)
         {
             var that = (global::Microsoft.Xaml.Interactions.Core.InvokeCommandAction)instance;
             that.InputConverterLanguage = (global::System.String)Value;
         }
-        private object get_98_LightStone_ItemsSource(object instance)
+        private object get_101_LightStone_ItemsSource(object instance)
         {
             var that = (global::LightStone.Controls.LightStone)instance;
             return that.ItemsSource;
         }
-        private void set_98_LightStone_ItemsSource(object instance, object Value)
+        private void set_101_LightStone_ItemsSource(object instance, object Value)
         {
             var that = (global::LightStone.Controls.LightStone)instance;
             that.ItemsSource = (global::System.Object)Value;
         }
-        private object get_99_LightStone_SelectedIndex(object instance)
+        private object get_102_LightStone_SelectedIndex(object instance)
         {
             var that = (global::LightStone.Controls.LightStone)instance;
             return that.SelectedIndex;
         }
-        private void set_99_LightStone_SelectedIndex(object instance, object Value)
+        private void set_102_LightStone_SelectedIndex(object instance, object Value)
         {
             var that = (global::LightStone.Controls.LightStone)instance;
             that.SelectedIndex = (global::System.Int32)Value;
         }
-        private object get_100_LightStone_ItemTemplate(object instance)
+        private object get_103_LightStone_ItemTemplate(object instance)
         {
             var that = (global::LightStone.Controls.LightStone)instance;
             return that.ItemTemplate;
         }
-        private void set_100_LightStone_ItemTemplate(object instance, object Value)
+        private void set_103_LightStone_ItemTemplate(object instance, object Value)
         {
             var that = (global::LightStone.Controls.LightStone)instance;
             that.ItemTemplate = (global::Windows.UI.Xaml.DataTemplate)Value;
         }
-        private object get_101_LightStone_TransitionDuration(object instance)
+        private object get_104_LightStone_TransitionDuration(object instance)
         {
             var that = (global::LightStone.Controls.LightStone)instance;
             return that.TransitionDuration;
         }
-        private void set_101_LightStone_TransitionDuration(object instance, object Value)
+        private void set_104_LightStone_TransitionDuration(object instance, object Value)
         {
             var that = (global::LightStone.Controls.LightStone)instance;
             that.TransitionDuration = (global::System.Int32)Value;
         }
-        private object get_102_LightStone_Depth(object instance)
+        private object get_105_LightStone_Depth(object instance)
         {
             var that = (global::LightStone.Controls.LightStone)instance;
             return that.Depth;
         }
-        private void set_102_LightStone_Depth(object instance, object Value)
+        private void set_105_LightStone_Depth(object instance, object Value)
         {
             var that = (global::LightStone.Controls.LightStone)instance;
             that.Depth = (global::System.Double)Value;
         }
-        private object get_103_LightStone_MaxVisibleItems(object instance)
+        private object get_106_LightStone_MaxVisibleItems(object instance)
         {
             var that = (global::LightStone.Controls.LightStone)instance;
             return that.MaxVisibleItems;
         }
-        private void set_103_LightStone_MaxVisibleItems(object instance, object Value)
+        private void set_106_LightStone_MaxVisibleItems(object instance, object Value)
         {
             var that = (global::LightStone.Controls.LightStone)instance;
             that.MaxVisibleItems = (global::System.Int32)Value;
         }
-        private object get_104_LightStone_Rotation(object instance)
+        private object get_107_LightStone_Rotation(object instance)
         {
             var that = (global::LightStone.Controls.LightStone)instance;
             return that.Rotation;
         }
-        private void set_104_LightStone_Rotation(object instance, object Value)
+        private void set_107_LightStone_Rotation(object instance, object Value)
         {
             var that = (global::LightStone.Controls.LightStone)instance;
             that.Rotation = (global::System.Double)Value;
         }
-        private object get_105_LightStone_TranslateY(object instance)
+        private object get_108_LightStone_TranslateY(object instance)
         {
             var that = (global::LightStone.Controls.LightStone)instance;
             return that.TranslateY;
         }
-        private void set_105_LightStone_TranslateY(object instance, object Value)
+        private void set_108_LightStone_TranslateY(object instance, object Value)
         {
             var that = (global::LightStone.Controls.LightStone)instance;
             that.TranslateY = (global::System.Int32)Value;
         }
-        private object get_106_LightStone_TranslateX(object instance)
+        private object get_109_LightStone_TranslateX(object instance)
         {
             var that = (global::LightStone.Controls.LightStone)instance;
             return that.TranslateX;
         }
-        private void set_106_LightStone_TranslateX(object instance, object Value)
+        private void set_109_LightStone_TranslateX(object instance, object Value)
         {
             var that = (global::LightStone.Controls.LightStone)instance;
             that.TranslateX = (global::System.Int32)Value;
         }
-        private object get_107_LightStone_EasingFunction(object instance)
+        private object get_110_LightStone_EasingFunction(object instance)
         {
             var that = (global::LightStone.Controls.LightStone)instance;
             return that.EasingFunction;
         }
-        private void set_107_LightStone_EasingFunction(object instance, object Value)
+        private void set_110_LightStone_EasingFunction(object instance, object Value)
         {
             var that = (global::LightStone.Controls.LightStone)instance;
             that.EasingFunction = (global::Windows.UI.Xaml.Media.Animation.EasingFunctionBase)Value;
@@ -2725,226 +2753,244 @@ namespace SoonZik.SoonZik_XamlTypeInfo
                 xamlMember.Getter = get_74_ProfilUserViewModel_SelectionCommand;
                 xamlMember.SetIsReadOnly();
                 break;
+            case "SoonZik.ViewModel.ProfilUserViewModel.EditClickCommand":
+                userType = (global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType)GetXamlTypeByName("SoonZik.ViewModel.ProfilUserViewModel");
+                xamlMember = new global::SoonZik.SoonZik_XamlTypeInfo.XamlMember(this, "EditClickCommand", "System.Windows.Input.ICommand");
+                xamlMember.Getter = get_75_ProfilUserViewModel_EditClickCommand;
+                xamlMember.SetIsReadOnly();
+                break;
+            case "SoonZik.ViewModel.ProfilUserViewModel.CanUpdate":
+                userType = (global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType)GetXamlTypeByName("SoonZik.ViewModel.ProfilUserViewModel");
+                xamlMember = new global::SoonZik.SoonZik_XamlTypeInfo.XamlMember(this, "CanUpdate", "Boolean");
+                xamlMember.Getter = get_76_ProfilUserViewModel_CanUpdate;
+                xamlMember.Setter = set_76_ProfilUserViewModel_CanUpdate;
+                break;
+            case "SoonZik.ViewModel.ProfilUserViewModel.ButtonContent":
+                userType = (global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType)GetXamlTypeByName("SoonZik.ViewModel.ProfilUserViewModel");
+                xamlMember = new global::SoonZik.SoonZik_XamlTypeInfo.XamlMember(this, "ButtonContent", "String");
+                xamlMember.Getter = get_77_ProfilUserViewModel_ButtonContent;
+                xamlMember.Setter = set_77_ProfilUserViewModel_ButtonContent;
+                break;
             case "SoonZik.ViewModel.FriendViewModel.Sources":
                 userType = (global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType)GetXamlTypeByName("SoonZik.ViewModel.FriendViewModel");
                 xamlMember = new global::SoonZik.SoonZik_XamlTypeInfo.XamlMember(this, "Sources", "System.Collections.ObjectModel.ObservableCollection`1<SoonZik.HttpRequest.Poco.User>");
-                xamlMember.Getter = get_75_FriendViewModel_Sources;
-                xamlMember.Setter = set_75_FriendViewModel_Sources;
+                xamlMember.Getter = get_78_FriendViewModel_Sources;
+                xamlMember.Setter = set_78_FriendViewModel_Sources;
                 break;
             case "SoonZik.ViewModel.FriendViewModel.ItemSource":
                 userType = (global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType)GetXamlTypeByName("SoonZik.ViewModel.FriendViewModel");
                 xamlMember = new global::SoonZik.SoonZik_XamlTypeInfo.XamlMember(this, "ItemSource", "System.Collections.Generic.List`1<SoonZik.Utils.AlphaKeyGroups`1<SoonZik.HttpRequest.Poco.User>>");
-                xamlMember.Getter = get_76_FriendViewModel_ItemSource;
-                xamlMember.Setter = set_76_FriendViewModel_ItemSource;
+                xamlMember.Getter = get_79_FriendViewModel_ItemSource;
+                xamlMember.Setter = set_79_FriendViewModel_ItemSource;
                 break;
             case "SoonZik.Utils.AlphaKeyGroups`1<SoonZik.HttpRequest.Poco.User>.Key":
                 userType = (global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType)GetXamlTypeByName("SoonZik.Utils.AlphaKeyGroups`1<SoonZik.HttpRequest.Poco.User>");
                 xamlMember = new global::SoonZik.SoonZik_XamlTypeInfo.XamlMember(this, "Key", "String");
-                xamlMember.Getter = get_77_AlphaKeyGroups_Key;
+                xamlMember.Getter = get_80_AlphaKeyGroups_Key;
                 xamlMember.SetIsReadOnly();
                 break;
             case "System.Collections.Generic.List`1<SoonZik.HttpRequest.Poco.User>.Capacity":
                 userType = (global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType)GetXamlTypeByName("System.Collections.Generic.List`1<SoonZik.HttpRequest.Poco.User>");
                 xamlMember = new global::SoonZik.SoonZik_XamlTypeInfo.XamlMember(this, "Capacity", "Int32");
-                xamlMember.Getter = get_78_List_Capacity;
-                xamlMember.Setter = set_78_List_Capacity;
+                xamlMember.Getter = get_81_List_Capacity;
+                xamlMember.Setter = set_81_List_Capacity;
                 break;
             case "System.Collections.Generic.List`1<SoonZik.HttpRequest.Poco.User>.Count":
                 userType = (global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType)GetXamlTypeByName("System.Collections.Generic.List`1<SoonZik.HttpRequest.Poco.User>");
                 xamlMember = new global::SoonZik.SoonZik_XamlTypeInfo.XamlMember(this, "Count", "Int32");
-                xamlMember.Getter = get_79_List_Count;
+                xamlMember.Getter = get_82_List_Count;
                 xamlMember.SetIsReadOnly();
                 break;
             case "SoonZik.ViewModel.FriendViewModel.TappedCommand":
                 userType = (global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType)GetXamlTypeByName("SoonZik.ViewModel.FriendViewModel");
                 xamlMember = new global::SoonZik.SoonZik_XamlTypeInfo.XamlMember(this, "TappedCommand", "GalaSoft.MvvmLight.Command.RelayCommand");
-                xamlMember.Getter = get_80_FriendViewModel_TappedCommand;
+                xamlMember.Getter = get_83_FriendViewModel_TappedCommand;
                 xamlMember.SetIsReadOnly();
                 break;
             case "SoonZik.ViewModel.FriendViewModel.SelectedUser":
                 userType = (global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType)GetXamlTypeByName("SoonZik.ViewModel.FriendViewModel");
                 xamlMember = new global::SoonZik.SoonZik_XamlTypeInfo.XamlMember(this, "SelectedUser", "SoonZik.HttpRequest.Poco.User");
-                xamlMember.Getter = get_81_FriendViewModel_SelectedUser;
-                xamlMember.Setter = set_81_FriendViewModel_SelectedUser;
+                xamlMember.Getter = get_84_FriendViewModel_SelectedUser;
+                xamlMember.Setter = set_84_FriendViewModel_SelectedUser;
                 break;
             case "Microsoft.Xaml.Interactivity.Interaction.Behaviors":
                 userType = (global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType)GetXamlTypeByName("Microsoft.Xaml.Interactivity.Interaction");
                 xamlMember = new global::SoonZik.SoonZik_XamlTypeInfo.XamlMember(this, "Behaviors", "Microsoft.Xaml.Interactivity.BehaviorCollection");
                 xamlMember.SetTargetTypeName("Windows.UI.Xaml.DependencyObject");
                 xamlMember.SetIsAttachable();
-                xamlMember.Getter = get_82_Interaction_Behaviors;
-                xamlMember.Setter = set_82_Interaction_Behaviors;
+                xamlMember.Getter = get_85_Interaction_Behaviors;
+                xamlMember.Setter = set_85_Interaction_Behaviors;
                 break;
             case "Microsoft.Xaml.Interactions.Core.EventTriggerBehavior.Actions":
                 userType = (global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType)GetXamlTypeByName("Microsoft.Xaml.Interactions.Core.EventTriggerBehavior");
                 xamlMember = new global::SoonZik.SoonZik_XamlTypeInfo.XamlMember(this, "Actions", "Microsoft.Xaml.Interactivity.ActionCollection");
                 xamlMember.SetIsDependencyProperty();
-                xamlMember.Getter = get_83_EventTriggerBehavior_Actions;
+                xamlMember.Getter = get_86_EventTriggerBehavior_Actions;
                 xamlMember.SetIsReadOnly();
                 break;
             case "Microsoft.Xaml.Interactions.Core.EventTriggerBehavior.EventName":
                 userType = (global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType)GetXamlTypeByName("Microsoft.Xaml.Interactions.Core.EventTriggerBehavior");
                 xamlMember = new global::SoonZik.SoonZik_XamlTypeInfo.XamlMember(this, "EventName", "String");
                 xamlMember.SetIsDependencyProperty();
-                xamlMember.Getter = get_84_EventTriggerBehavior_EventName;
-                xamlMember.Setter = set_84_EventTriggerBehavior_EventName;
+                xamlMember.Getter = get_87_EventTriggerBehavior_EventName;
+                xamlMember.Setter = set_87_EventTriggerBehavior_EventName;
                 break;
             case "Microsoft.Xaml.Interactions.Core.EventTriggerBehavior.SourceObject":
                 userType = (global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType)GetXamlTypeByName("Microsoft.Xaml.Interactions.Core.EventTriggerBehavior");
                 xamlMember = new global::SoonZik.SoonZik_XamlTypeInfo.XamlMember(this, "SourceObject", "Object");
                 xamlMember.SetIsDependencyProperty();
-                xamlMember.Getter = get_85_EventTriggerBehavior_SourceObject;
-                xamlMember.Setter = set_85_EventTriggerBehavior_SourceObject;
+                xamlMember.Getter = get_88_EventTriggerBehavior_SourceObject;
+                xamlMember.Setter = set_88_EventTriggerBehavior_SourceObject;
                 break;
             case "Microsoft.Xaml.Interactions.Core.EventTriggerBehavior.AssociatedObject":
                 userType = (global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType)GetXamlTypeByName("Microsoft.Xaml.Interactions.Core.EventTriggerBehavior");
                 xamlMember = new global::SoonZik.SoonZik_XamlTypeInfo.XamlMember(this, "AssociatedObject", "Windows.UI.Xaml.DependencyObject");
-                xamlMember.Getter = get_86_EventTriggerBehavior_AssociatedObject;
+                xamlMember.Getter = get_89_EventTriggerBehavior_AssociatedObject;
                 xamlMember.SetIsReadOnly();
                 break;
             case "Microsoft.Xaml.Interactions.Media.ControlStoryboardAction.Storyboard":
                 userType = (global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType)GetXamlTypeByName("Microsoft.Xaml.Interactions.Media.ControlStoryboardAction");
                 xamlMember = new global::SoonZik.SoonZik_XamlTypeInfo.XamlMember(this, "Storyboard", "Windows.UI.Xaml.Media.Animation.Storyboard");
                 xamlMember.SetIsDependencyProperty();
-                xamlMember.Getter = get_87_ControlStoryboardAction_Storyboard;
-                xamlMember.Setter = set_87_ControlStoryboardAction_Storyboard;
+                xamlMember.Getter = get_90_ControlStoryboardAction_Storyboard;
+                xamlMember.Setter = set_90_ControlStoryboardAction_Storyboard;
                 break;
             case "Microsoft.Xaml.Interactions.Media.ControlStoryboardAction.ControlStoryboardOption":
                 userType = (global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType)GetXamlTypeByName("Microsoft.Xaml.Interactions.Media.ControlStoryboardAction");
                 xamlMember = new global::SoonZik.SoonZik_XamlTypeInfo.XamlMember(this, "ControlStoryboardOption", "Microsoft.Xaml.Interactions.Media.ControlStoryboardOption");
                 xamlMember.SetIsDependencyProperty();
-                xamlMember.Getter = get_88_ControlStoryboardAction_ControlStoryboardOption;
-                xamlMember.Setter = set_88_ControlStoryboardAction_ControlStoryboardOption;
+                xamlMember.Getter = get_91_ControlStoryboardAction_ControlStoryboardOption;
+                xamlMember.Setter = set_91_ControlStoryboardAction_ControlStoryboardOption;
                 break;
             case "SoonZik.Controls.ProgressRingControl.GridVisibility":
                 userType = (global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType)GetXamlTypeByName("SoonZik.Controls.ProgressRingControl");
                 xamlMember = new global::SoonZik.SoonZik_XamlTypeInfo.XamlMember(this, "GridVisibility", "Windows.UI.Xaml.Visibility");
                 xamlMember.SetIsDependencyProperty();
-                xamlMember.Getter = get_89_ProgressRingControl_GridVisibility;
-                xamlMember.Setter = set_89_ProgressRingControl_GridVisibility;
+                xamlMember.Getter = get_92_ProgressRingControl_GridVisibility;
+                xamlMember.Setter = set_92_ProgressRingControl_GridVisibility;
                 break;
             case "SoonZik.Controls.ProgressRingControl.isActive":
                 userType = (global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType)GetXamlTypeByName("SoonZik.Controls.ProgressRingControl");
                 xamlMember = new global::SoonZik.SoonZik_XamlTypeInfo.XamlMember(this, "isActive", "Boolean");
                 xamlMember.SetIsDependencyProperty();
-                xamlMember.Getter = get_90_ProgressRingControl_isActive;
-                xamlMember.Setter = set_90_ProgressRingControl_isActive;
+                xamlMember.Getter = get_93_ProgressRingControl_isActive;
+                xamlMember.Setter = set_93_ProgressRingControl_isActive;
                 break;
             case "SoonZik.Utils.BooleanConverter`1<Windows.UI.Xaml.Visibility>.True":
                 userType = (global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType)GetXamlTypeByName("SoonZik.Utils.BooleanConverter`1<Windows.UI.Xaml.Visibility>");
                 xamlMember = new global::SoonZik.SoonZik_XamlTypeInfo.XamlMember(this, "True", "Windows.UI.Xaml.Visibility");
-                xamlMember.Getter = get_91_BooleanConverter_True;
-                xamlMember.Setter = set_91_BooleanConverter_True;
+                xamlMember.Getter = get_94_BooleanConverter_True;
+                xamlMember.Setter = set_94_BooleanConverter_True;
                 break;
             case "SoonZik.Utils.BooleanConverter`1<Windows.UI.Xaml.Visibility>.False":
                 userType = (global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType)GetXamlTypeByName("SoonZik.Utils.BooleanConverter`1<Windows.UI.Xaml.Visibility>");
                 xamlMember = new global::SoonZik.SoonZik_XamlTypeInfo.XamlMember(this, "False", "Windows.UI.Xaml.Visibility");
-                xamlMember.Getter = get_92_BooleanConverter_False;
-                xamlMember.Setter = set_92_BooleanConverter_False;
+                xamlMember.Getter = get_95_BooleanConverter_False;
+                xamlMember.Setter = set_95_BooleanConverter_False;
                 break;
             case "Microsoft.Xaml.Interactions.Core.InvokeCommandAction.Command":
                 userType = (global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType)GetXamlTypeByName("Microsoft.Xaml.Interactions.Core.InvokeCommandAction");
                 xamlMember = new global::SoonZik.SoonZik_XamlTypeInfo.XamlMember(this, "Command", "System.Windows.Input.ICommand");
                 xamlMember.SetIsDependencyProperty();
-                xamlMember.Getter = get_93_InvokeCommandAction_Command;
-                xamlMember.Setter = set_93_InvokeCommandAction_Command;
+                xamlMember.Getter = get_96_InvokeCommandAction_Command;
+                xamlMember.Setter = set_96_InvokeCommandAction_Command;
                 break;
             case "Microsoft.Xaml.Interactions.Core.InvokeCommandAction.CommandParameter":
                 userType = (global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType)GetXamlTypeByName("Microsoft.Xaml.Interactions.Core.InvokeCommandAction");
                 xamlMember = new global::SoonZik.SoonZik_XamlTypeInfo.XamlMember(this, "CommandParameter", "Object");
                 xamlMember.SetIsDependencyProperty();
-                xamlMember.Getter = get_94_InvokeCommandAction_CommandParameter;
-                xamlMember.Setter = set_94_InvokeCommandAction_CommandParameter;
+                xamlMember.Getter = get_97_InvokeCommandAction_CommandParameter;
+                xamlMember.Setter = set_97_InvokeCommandAction_CommandParameter;
                 break;
             case "Microsoft.Xaml.Interactions.Core.InvokeCommandAction.InputConverter":
                 userType = (global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType)GetXamlTypeByName("Microsoft.Xaml.Interactions.Core.InvokeCommandAction");
                 xamlMember = new global::SoonZik.SoonZik_XamlTypeInfo.XamlMember(this, "InputConverter", "Windows.UI.Xaml.Data.IValueConverter");
                 xamlMember.SetIsDependencyProperty();
-                xamlMember.Getter = get_95_InvokeCommandAction_InputConverter;
-                xamlMember.Setter = set_95_InvokeCommandAction_InputConverter;
+                xamlMember.Getter = get_98_InvokeCommandAction_InputConverter;
+                xamlMember.Setter = set_98_InvokeCommandAction_InputConverter;
                 break;
             case "Microsoft.Xaml.Interactions.Core.InvokeCommandAction.InputConverterParameter":
                 userType = (global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType)GetXamlTypeByName("Microsoft.Xaml.Interactions.Core.InvokeCommandAction");
                 xamlMember = new global::SoonZik.SoonZik_XamlTypeInfo.XamlMember(this, "InputConverterParameter", "Object");
                 xamlMember.SetIsDependencyProperty();
-                xamlMember.Getter = get_96_InvokeCommandAction_InputConverterParameter;
-                xamlMember.Setter = set_96_InvokeCommandAction_InputConverterParameter;
+                xamlMember.Getter = get_99_InvokeCommandAction_InputConverterParameter;
+                xamlMember.Setter = set_99_InvokeCommandAction_InputConverterParameter;
                 break;
             case "Microsoft.Xaml.Interactions.Core.InvokeCommandAction.InputConverterLanguage":
                 userType = (global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType)GetXamlTypeByName("Microsoft.Xaml.Interactions.Core.InvokeCommandAction");
                 xamlMember = new global::SoonZik.SoonZik_XamlTypeInfo.XamlMember(this, "InputConverterLanguage", "String");
                 xamlMember.SetIsDependencyProperty();
-                xamlMember.Getter = get_97_InvokeCommandAction_InputConverterLanguage;
-                xamlMember.Setter = set_97_InvokeCommandAction_InputConverterLanguage;
+                xamlMember.Getter = get_100_InvokeCommandAction_InputConverterLanguage;
+                xamlMember.Setter = set_100_InvokeCommandAction_InputConverterLanguage;
                 break;
             case "LightStone.Controls.LightStone.ItemsSource":
                 userType = (global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType)GetXamlTypeByName("LightStone.Controls.LightStone");
                 xamlMember = new global::SoonZik.SoonZik_XamlTypeInfo.XamlMember(this, "ItemsSource", "Object");
                 xamlMember.SetIsDependencyProperty();
-                xamlMember.Getter = get_98_LightStone_ItemsSource;
-                xamlMember.Setter = set_98_LightStone_ItemsSource;
+                xamlMember.Getter = get_101_LightStone_ItemsSource;
+                xamlMember.Setter = set_101_LightStone_ItemsSource;
                 break;
             case "LightStone.Controls.LightStone.SelectedIndex":
                 userType = (global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType)GetXamlTypeByName("LightStone.Controls.LightStone");
                 xamlMember = new global::SoonZik.SoonZik_XamlTypeInfo.XamlMember(this, "SelectedIndex", "Int32");
                 xamlMember.SetIsDependencyProperty();
-                xamlMember.Getter = get_99_LightStone_SelectedIndex;
-                xamlMember.Setter = set_99_LightStone_SelectedIndex;
+                xamlMember.Getter = get_102_LightStone_SelectedIndex;
+                xamlMember.Setter = set_102_LightStone_SelectedIndex;
                 break;
             case "LightStone.Controls.LightStone.ItemTemplate":
                 userType = (global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType)GetXamlTypeByName("LightStone.Controls.LightStone");
                 xamlMember = new global::SoonZik.SoonZik_XamlTypeInfo.XamlMember(this, "ItemTemplate", "Windows.UI.Xaml.DataTemplate");
-                xamlMember.Getter = get_100_LightStone_ItemTemplate;
-                xamlMember.Setter = set_100_LightStone_ItemTemplate;
+                xamlMember.Getter = get_103_LightStone_ItemTemplate;
+                xamlMember.Setter = set_103_LightStone_ItemTemplate;
                 break;
             case "LightStone.Controls.LightStone.TransitionDuration":
                 userType = (global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType)GetXamlTypeByName("LightStone.Controls.LightStone");
                 xamlMember = new global::SoonZik.SoonZik_XamlTypeInfo.XamlMember(this, "TransitionDuration", "Int32");
                 xamlMember.SetIsDependencyProperty();
-                xamlMember.Getter = get_101_LightStone_TransitionDuration;
-                xamlMember.Setter = set_101_LightStone_TransitionDuration;
+                xamlMember.Getter = get_104_LightStone_TransitionDuration;
+                xamlMember.Setter = set_104_LightStone_TransitionDuration;
                 break;
             case "LightStone.Controls.LightStone.Depth":
                 userType = (global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType)GetXamlTypeByName("LightStone.Controls.LightStone");
                 xamlMember = new global::SoonZik.SoonZik_XamlTypeInfo.XamlMember(this, "Depth", "Double");
                 xamlMember.SetIsDependencyProperty();
-                xamlMember.Getter = get_102_LightStone_Depth;
-                xamlMember.Setter = set_102_LightStone_Depth;
+                xamlMember.Getter = get_105_LightStone_Depth;
+                xamlMember.Setter = set_105_LightStone_Depth;
                 break;
             case "LightStone.Controls.LightStone.MaxVisibleItems":
                 userType = (global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType)GetXamlTypeByName("LightStone.Controls.LightStone");
                 xamlMember = new global::SoonZik.SoonZik_XamlTypeInfo.XamlMember(this, "MaxVisibleItems", "Int32");
                 xamlMember.SetIsDependencyProperty();
-                xamlMember.Getter = get_103_LightStone_MaxVisibleItems;
-                xamlMember.Setter = set_103_LightStone_MaxVisibleItems;
+                xamlMember.Getter = get_106_LightStone_MaxVisibleItems;
+                xamlMember.Setter = set_106_LightStone_MaxVisibleItems;
                 break;
             case "LightStone.Controls.LightStone.Rotation":
                 userType = (global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType)GetXamlTypeByName("LightStone.Controls.LightStone");
                 xamlMember = new global::SoonZik.SoonZik_XamlTypeInfo.XamlMember(this, "Rotation", "Double");
                 xamlMember.SetIsDependencyProperty();
-                xamlMember.Getter = get_104_LightStone_Rotation;
-                xamlMember.Setter = set_104_LightStone_Rotation;
+                xamlMember.Getter = get_107_LightStone_Rotation;
+                xamlMember.Setter = set_107_LightStone_Rotation;
                 break;
             case "LightStone.Controls.LightStone.TranslateY":
                 userType = (global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType)GetXamlTypeByName("LightStone.Controls.LightStone");
                 xamlMember = new global::SoonZik.SoonZik_XamlTypeInfo.XamlMember(this, "TranslateY", "Int32");
                 xamlMember.SetIsDependencyProperty();
-                xamlMember.Getter = get_105_LightStone_TranslateY;
-                xamlMember.Setter = set_105_LightStone_TranslateY;
+                xamlMember.Getter = get_108_LightStone_TranslateY;
+                xamlMember.Setter = set_108_LightStone_TranslateY;
                 break;
             case "LightStone.Controls.LightStone.TranslateX":
                 userType = (global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType)GetXamlTypeByName("LightStone.Controls.LightStone");
                 xamlMember = new global::SoonZik.SoonZik_XamlTypeInfo.XamlMember(this, "TranslateX", "Int32");
                 xamlMember.SetIsDependencyProperty();
-                xamlMember.Getter = get_106_LightStone_TranslateX;
-                xamlMember.Setter = set_106_LightStone_TranslateX;
+                xamlMember.Getter = get_109_LightStone_TranslateX;
+                xamlMember.Setter = set_109_LightStone_TranslateX;
                 break;
             case "LightStone.Controls.LightStone.EasingFunction":
                 userType = (global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType)GetXamlTypeByName("LightStone.Controls.LightStone");
                 xamlMember = new global::SoonZik.SoonZik_XamlTypeInfo.XamlMember(this, "EasingFunction", "Windows.UI.Xaml.Media.Animation.EasingFunctionBase");
                 xamlMember.SetIsDependencyProperty();
-                xamlMember.Getter = get_107_LightStone_EasingFunction;
-                xamlMember.Setter = set_107_LightStone_EasingFunction;
+                xamlMember.Getter = get_110_LightStone_EasingFunction;
+                xamlMember.Setter = set_110_LightStone_EasingFunction;
                 break;
             }
             return xamlMember;
