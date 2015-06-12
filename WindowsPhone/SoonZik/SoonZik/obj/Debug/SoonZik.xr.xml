@@ -12,7 +12,12 @@
     <RootPropertyPathName Name="Password" />
     <RootPropertyPathName Name="Username" />
     <RootPropertyPathName Name="FacebookTapped" />
+    <RootPropertyPathName Name="title" />
+    <RootPropertyPathName Name="duration" />
+    <RootPropertyPathName Name="user" />
     <RootPropertyPathName Name="style_name" />
+    <RootPropertyPathName Name="ListArtiste" />
+    <RootPropertyPathName Name="ListMusique" />
     <RootPropertyPathName Name="ListGenres" />
     <RootPropertyPathName Name="Key" />
     <RootPropertyPathName Name="Image" />
@@ -64,8 +69,11 @@
       <RootProperty Name="RenderTransformOrigin" />
       <RootProperty Name="RenderTransform" />
       <RootProperty Name="Visibility" />
+      <RootProperty Name="ColumnDefinitions" />
       <RootMethod Name="GetRow" />
       <RootMethod Name="SetRow" />
+      <RootMethod Name="GetColumn" />
+      <RootMethod Name="SetColumn" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.Panel">
       <RootProperty Name="Background" />
@@ -273,6 +281,17 @@
       <RootProperty Name="Duration" />
       <RootProperty Name="To" />
     </RootType>
+    <RootType FullName="Windows.UI.Xaml.Controls.ProgressRing">
+      <RootProperty Name="Background" />
+      <RootProperty Name="Foreground" />
+      <RootProperty Name="Opacity" />
+      <RootProperty Name="IsActive" />
+      <RootProperty Name="Margin" />
+      <RootProperty Name="MaxHeight" />
+      <RootProperty Name="MaxWidth" />
+      <RootProperty Name="Height" />
+      <RootProperty Name="Width" />
+    </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.TextBox">
       <RootProperty Name="Width" />
       <RootProperty Name="BorderThickness" />
@@ -320,17 +339,6 @@
     <RootType FullName="SoonZik.Views.Explorer" />
     <RootType FullName="SoonZik.Views.News" />
     <RootType FullName="SoonZik.Controls.PivotControl" />
-    <RootType FullName="Windows.UI.Xaml.Controls.ProgressRing">
-      <RootProperty Name="IsActive" />
-      <RootProperty Name="Foreground" />
-      <RootProperty Name="Background" />
-      <RootProperty Name="Opacity" />
-      <RootProperty Name="Margin" />
-      <RootProperty Name="MaxHeight" />
-      <RootProperty Name="MaxWidth" />
-      <RootProperty Name="Height" />
-      <RootProperty Name="Width" />
-    </RootType>
     <RootType FullName="SoonZik.Controls.ProgressRingControl" />
     <RootType FullName="Windows.UI.Xaml.Controls.Page">
       <RootProperty Name="DataContext" />
@@ -370,6 +378,9 @@
     </RootType>
     <RootType FullName="SoonZik.Views.Conversation" />
     <RootType FullName="SoonZik.Views.CustomSplashScreen" />
+    <RootType FullName="Windows.UI.Xaml.Controls.ColumnDefinition">
+      <RootProperty Name="Width" />
+    </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.ListBox">
       <RootProperty Name="Background" />
       <RootProperty Name="ItemsSource" />

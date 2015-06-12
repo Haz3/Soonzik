@@ -120,6 +120,6 @@
                 <CompositeTransform/>
             </Grid.RenderTransform>
         </Grid>
-        
+        <ProgressRing x:Name="ProgressRing" Grid.Row="1" Background="Black" Foreground="Aqua" Opacity="0.5"/>
     </Grid>
 </UserControl>

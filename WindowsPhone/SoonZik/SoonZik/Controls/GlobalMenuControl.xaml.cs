@@ -77,9 +77,11 @@ namespace SoonZik.Controls
 
         private void GoToExplorer()
         {
+            ProgressRing.IsActive = true;
             GlobalGrid.Children.Clear();
             GlobalGrid.Children.Add(new Explorer());
             CloseMenu();
+            ProgressRing.IsActive = false;
         }
 
         private void GoToPacks()
