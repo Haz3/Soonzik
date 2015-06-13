@@ -1,0 +1,26 @@
+%div{ "ng-init" => "showNews()" }
+  %loading{ "ng-if" => "loading == true" }
+  .row{ "ng-if" => "loading == false", "ng-init" => "initFoundation()"}
+    %h3.subheader
+      Listing news
+    .ul.small-11.small-centered.columns{"ng-show" => "showNews"}
+      %li{ "ng-repeat" => "new in news.newstexts"}
+        .panel.radius.news
+          %h5.subheader.text-center
+            {{ new.title }}
+          %blockquote{"ng-repeat" => "newstext in news.newstexts"}
+            {{ newstext.content }}
+      .pagination-centerd
+        %ul.pagination
+          %li.arrow.unavailable
+            %a{:href => ""} «
+          %li.current
+            %a{:href => ""} 1
+          %li
+            %a{:href => ""} 2
+          %li.unavailable
+            %a{:href => ""} ...
+          %li
+            %a{:href => ""} 3
+          %li.arrow
+            %a{:href => ""} »

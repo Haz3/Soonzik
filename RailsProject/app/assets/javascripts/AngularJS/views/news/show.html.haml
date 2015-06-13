@@ -1,0 +1,9 @@
+%div{ "ng-init" => "showNews()" }
+  %loading{ "ng-if" => "loading == true" }
+  .row{ "ng-if" => "loading == false", "ng-init" => "initFoundation()"}
+    %h3.subheader
+      Listing news
+     .ul.large-block-grid-4{"ng-show" => "showNews"}
+        %p{{ news.title }}
+        %p
+          Coucou
