@@ -235,6 +235,9 @@
     <AppxPackagedFile Include="C:\Users\Juan-Pablo Bastardos\Documents\GitHub\SoonZik\Soonzik\WindowsPhone\SoonZik\SoonZik\bin\Debug\Controls\NewsControl.xbf">
       <PackagePath>Controls\NewsControl.xbf</PackagePath>
     </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Juan-Pablo Bastardos\Documents\GitHub\SoonZik\Soonzik\WindowsPhone\SoonZik\SoonZik\bin\Debug\Controls\NewsSharePopup.xbf">
+      <PackagePath>Controls\NewsSharePopup.xbf</PackagePath>
+    </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Juan-Pablo Bastardos\Documents\GitHub\SoonZik\Soonzik\WindowsPhone\SoonZik\SoonZik\bin\Debug\Controls\PivotControl.xbf">
       <PackagePath>Controls\PivotControl.xbf</PackagePath>
     </AppxPackagedFile>

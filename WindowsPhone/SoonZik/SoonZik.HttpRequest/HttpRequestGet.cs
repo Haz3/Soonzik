@@ -15,75 +15,35 @@ namespace SoonZik.HttpRequest
         public async Task<object> GetListObject(object myObject, string element)
         {
             HttpWebRequest request = (HttpWebRequest) WebRequest.Create("http://soonzikapi.herokuapp.com/" + element);
-            request.Method = HttpMethods.Get;
-            request.Accept = "application/json;odata=verbose";
-            try
-            {
-                var response = (HttpWebResponse) await request.GetResponseAsync();
-                Stream streamResponse = response.GetResponseStream();
-                string data;
-                using (var reader = new StreamReader(streamResponse))
-                    data = reader.ReadToEnd();
-                var stringJson = JObject.Parse(data).SelectToken("content").ToString();
-                var listNews = JsonConvert.DeserializeObject(stringJson, myObject.GetType());
-                return listNews;
-            }
-            catch (Exception ex)
-            {
-                var we = ex.InnerException as WebException;
-                if (we != null)
-                {
-                    var resp = we.Response as HttpWebResponse;
-                    var code = resp.StatusCode;
-                    new MessageDialog("RespCallback Exception raised! Message:{0}" + we.Message).ShowAsync();
-                    Debug.WriteLine("Status:{0}", we.Status);
-                }
-                else
-                    throw;
-            }
-            return null;
+            return await DoRequest(myObject, request);
         }
 
         public async Task<object> GetObject(object myObject, string element, string id)
         {
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create("http://soonzikapi.herokuapp.com/" + element + "/" + id);
-            request.Method = HttpMethods.Get;
-            request.Accept = "application/json;odata=verbose";
-            try
-            {
-                var response = (HttpWebResponse)await request.GetResponseAsync();
-                Stream streamResponse = response.GetResponseStream();
-                string data;
-                using (var reader = new StreamReader(streamResponse))
-                    data = reader.ReadToEnd();
-                var stringJson = JObject.Parse(data).SelectToken("content").ToString();
-                var news = JsonConvert.DeserializeObject(stringJson, myObject.GetType());
-                return news;
-            }
-            catch (Exception ex)
-            {
-                var we = ex.InnerException as WebException;
-                if (we != null)
-                {
-                    var resp = we.Response as HttpWebResponse;
-                    var code = resp.StatusCode;
-                    new MessageDialog("RespCallback Exception raised! Message:{0}" + we.Message).ShowAsync();
-                    Debug.WriteLine("Status:{0}", we.Status);
-                }
-                else
-                    throw;
-            }
-            return null;
+            return await DoRequest(myObject, request);
         }
+
 
         public async Task<object> GetArtist(object myObject, string element, string id)
         {
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create("http://soonzikapi.herokuapp.com/" + element + "/" + id + "/" + "isartist");
+            return await DoRequest(myObject, request);
+        }
+
+        public async Task<object> Search(object myObject, string element)
+        {
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create("http://soonzikapi.herokuapp.com/" + "search?query=" + element);
+            return await DoRequest(myObject, request);
+        }
+
+        private static async Task<object> DoRequest(object myObject, HttpWebRequest request)
+        {
             request.Method = HttpMethods.Get;
             request.Accept = "application/json;odata=verbose";
             try
             {
-                var response = (HttpWebResponse)await request.GetResponseAsync();
+                var response = (HttpWebResponse) await request.GetResponseAsync();
                 Stream streamResponse = response.GetResponseStream();
                 string data;
                 using (var reader = new StreamReader(streamResponse))

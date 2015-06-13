@@ -4,7 +4,9 @@
     <RootInterface FullName="Windows.UI.Xaml.Data.IValueConverter" />
   </Roots.Interfaces>
   <Roots.PropertyPathNames>
-    <RootPropertyPathName Name="SearchText" />
+    <RootPropertyPathName Name="Title" />
+    <RootPropertyPathName Name="DateNews" />
+    <RootPropertyPathName Name="NewsTitle" />
     <RootPropertyPathName Name="GridVisibility" />
     <RootPropertyPathName Name="isActive" />
     <RootPropertyPathName Name="ProgressOn" />
@@ -27,8 +29,8 @@
     <RootPropertyPathName Name="TappedCommand" />
     <RootPropertyPathName Name="CollectionGroups" />
     <RootPropertyPathName Name="Date" />
-    <RootPropertyPathName Name="Title" />
     <RootPropertyPathName Name="ListNews" />
+    <RootPropertyPathName Name="SelectedNews" />
     <RootPropertyPathName Name="BitmapImage" />
     <RootPropertyPathName Name="Datas" />
     <RootPropertyPathName Name="SelectionCommand" />
@@ -244,6 +246,7 @@
       <RootProperty Name="VerticalAlignment" />
       <RootProperty Name="Margin" />
       <RootProperty Name="Stretch" />
+      <RootEvent Name="Tapped" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.ContentPresenter">
       <RootProperty Name="FontFamily" />
@@ -267,16 +270,16 @@
       <RootProperty Name="Height" />
       <RootProperty Name="Width" />
       <RootProperty Name="Margin" />
+      <RootProperty Name="Style" />
       <RootProperty Name="TextWrapping" />
       <RootProperty Name="TextAlignment" />
       <RootProperty Name="FontWeight" />
-      <RootProperty Name="Style" />
       <RootProperty Name="Padding" />
       <RootProperty Name="DataContext" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Data.Binding">
-      <RootProperty Name="Mode" />
       <RootProperty Name="Path" />
+      <RootProperty Name="Mode" />
       <RootProperty Name="Converter" />
       <RootProperty Name="Source" />
     </RootType>
@@ -287,6 +290,12 @@
     <RootType FullName="SoonZik.Controls.ButtonFriendPopUp" />
     <RootType FullName="SoonZik.Controls.Genre" />
     <RootType FullName="Windows.UI.Xaml.Thickness" />
+    <RootType FullName="Windows.UI.Xaml.Controls.StackPanel">
+      <RootProperty Name="Margin" />
+      <RootProperty Name="Children" />
+      <RootProperty Name="Background" />
+      <RootProperty Name="VerticalAlignment" />
+    </RootType>
     <RootType FullName="Windows.UI.Xaml.Media.Animation.DoubleAnimation">
       <RootProperty Name="Duration" />
       <RootProperty Name="To" />
@@ -303,16 +312,19 @@
       <RootProperty Name="Background" />
       <RootProperty Name="FontSize" />
       <RootProperty Name="PlaceholderText" />
-      <RootProperty Name="Text" />
       <RootProperty Name="FontFamily" />
+      <RootProperty Name="Text" />
       <RootProperty Name="IsEnabled" />
+      <RootEvent Name="TextChanged" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.ListView">
+      <RootProperty Name="HeaderTemplate" />
+      <RootProperty Name="ItemTemplate" />
       <RootProperty Name="IsHoldingEnabled" />
       <RootProperty Name="ItemsSource" />
-      <RootProperty Name="ItemTemplate" />
       <RootProperty Name="SelectedItem" />
       <RootProperty Name="GroupStyle" />
+      <RootProperty Name="Background" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.ProgressRing">
       <RootProperty Name="Height" />
@@ -338,6 +350,7 @@
     </RootType>
     <RootType FullName="SoonZik.Controls.GlobalMenuControl" />
     <RootType FullName="SoonZik.Controls.NewsControl" />
+    <RootType FullName="SoonZik.Controls.NewsSharePopup" />
     <RootType FullName="Windows.UI.Xaml.Controls.PivotItem">
       <RootProperty Name="Header" />
       <RootProperty Name="Content" />
@@ -373,12 +386,6 @@
     </RootType>
     <RootType FullName="Microsoft.Xaml.Interactions.Core.InvokeCommandAction">
       <RootProperty Name="Command" />
-    </RootType>
-    <RootType FullName="Windows.UI.Xaml.Controls.StackPanel">
-      <RootProperty Name="Children" />
-      <RootProperty Name="Background" />
-      <RootProperty Name="Margin" />
-      <RootProperty Name="VerticalAlignment" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Shapes.Path">
       <RootProperty Name="Data" />

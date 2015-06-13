@@ -1,17 +1,29 @@
-﻿using Windows.UI.Xaml.Controls;
+﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Threading.Tasks;
+using Windows.UI.Xaml.Controls;
 using GalaSoft.MvvmLight.Command;
+using SoonZik.Annotations;
+using SoonZik.HttpRequest;
 using SoonZik.Utils;
 using SoonZik.Views;
+using Connexion = SoonZik.Views.Connexion;
+using News = SoonZik.HttpRequest.Poco.News;
 
 // Pour en savoir plus sur le modèle d'élément Contrôle utilisateur, consultez la page http://go.microsoft.com/fwlink/?LinkId=234236
 
 namespace SoonZik.Controls
 {
-    public sealed partial class GlobalMenuControl : UserControl
+    public sealed partial class GlobalMenuControl : UserControl, INotifyPropertyChanged
     {
         #region Attribute
 
+        public ObservableCollection<object> ListObject; 
 
+        public event PropertyChangedEventHandler PropertyChanged;
+        public string SearchText { get; set; }
         private readonly INavigationService _navigationService;
 
         #endregion
@@ -126,6 +138,40 @@ namespace SoonZik.Controls
         private void GoToConnexionPage()
         {
             _navigationService.Navigate(typeof(Connexion));
+        }
+
+        private void SearchTextBlock_OnTextChanged(object sender, TextChangedEventArgs e)
+        {
+            SearchText = SearchTextBlock.Text;
+            var task = Task.Run(async () => await MakeTheSearch());
+            task.Wait();
+
+            int a = ListObject.Count;
+        }
+
+        private async Task MakeTheSearch()
+        {
+            var request = new HttpRequestGet();
+            try
+            {
+                var list = (List<object>)await request.Search(new List<object>(), SearchText);
+                ListObject = new ObservableCollection<object>();
+                foreach (var item in list)
+                {
+                    ListObject.Add(item);
+                }
+            }
+            catch (Exception e)
+            {
+
+            }
+        }
+
+        [NotifyPropertyChangedInvocator]
+        private void RaisePropertyChange(string propertyName)
+        {
+            var handler = PropertyChanged;
+            if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

@@ -79,7 +79,6 @@ namespace SoonZik.ViewModel
         #region Method
         private void Execute()
         {
-
             var messagePrompt = new MessagePrompt
             {
                 Title = "Que voulez vous faire ?",
