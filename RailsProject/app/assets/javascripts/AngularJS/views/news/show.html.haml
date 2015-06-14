@@ -1,0 +1,5 @@
+%div{ "ng-init" => "showNews()" }
+  %loading{ "ng-if" => "loading == true" }
+  .row{ "ng-if" => "loading == false", "ng-init" => "initFoundation()"}
+    %h3.subheader
+      Listing news

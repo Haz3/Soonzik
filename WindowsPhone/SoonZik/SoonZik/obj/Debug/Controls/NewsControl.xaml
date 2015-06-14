@@ -15,14 +15,12 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="30"/>
         </Grid.RowDefinitions>
-        <Image Grid.Row="0" Source="../Resources/Icones/share.png" Height="15" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,3,5,0"/>
+        <Image Grid.Row="0" Source="../Resources/Icones/share.png" Height="20" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,15,0"/>
         <Grid Background="White" Grid.Row="1">
             <Image Source="../Resources/Icones/disc.png" Height="70" HorizontalAlignment="Left" Margin="20,15,0,15"/>
-            <TextBlock Text="News Title" FontSize="15" Foreground="#424242" FontFamily="Calibri" Height="25" Width="90" Margin="111,15,49,60"/>
-            <TextBlock Text="Le nouvel album de :" FontSize="10" Foreground="#424242" FontFamily="Calibri" Width="100" Height="15" Margin="111,59,39,26"/>
-            <TextBlock Text="Artist Name" FontSize="10" Foreground="#424242" FontFamily="Calibri" Width="100" Height="15" Margin="111,74,39,11"/>
+            <TextBlock Text="{Binding NewsTitle, Mode=TwoWay}" FontSize="15" Foreground="#424242" FontFamily="Calibri" Height="25" Width="90" Margin="111,15,49,60"/>
         </Grid>
-        <TextBlock Grid.Row="2" Text="Il y a 4 jours" VerticalAlignment="Bottom" Foreground="#424242" FontSize="10" FontFamily="Calibri" HorizontalAlignment="Right" FontStyle="Italic" Margin="0,0,10,5"/>
+        <TextBlock Grid.Row="2" Text="{Binding DateNews}" VerticalAlignment="Center" Foreground="#424242" FontSize="10" FontFamily="Calibri" HorizontalAlignment="Right" FontStyle="Italic" Margin="0,0,100,0"/>
     </Grid>
 </UserControl>
 

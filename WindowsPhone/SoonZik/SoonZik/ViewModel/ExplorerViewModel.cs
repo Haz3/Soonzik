@@ -49,47 +49,32 @@ namespace SoonZik.ViewModel
 
         public ExplorerViewModel()
         {
-            var task = Task.Run(async () => await ChargeGenre());
+            var task = Task.Run(async () => await LoadContent());
             task.Wait();
-
-            var task2 = Task.Run(async () => await ChargeArtiste());
-            task.Wait();
-            
-            var task3 = Task.Run(async () => await ChargeMusic());
-            task3.Wait();
         }
         #endregion
 
         #region Method
-        public async Task ChargeGenre()
+        public async Task LoadContent()
         {
-            var test = new HttpRequestGet();
-            var listGenre = (List<Genre>)await test.GetListObject(new List<HttpRequest.Poco.Genre>(), "genres");
+            var request = new HttpRequestGet();
+            var listGenre = (List<Genre>)await request.GetListObject(new List<HttpRequest.Poco.Genre>(), "genres");
+            var listUser = (List<User>)await request.GetListObject(new List<HttpRequest.Poco.User>(), "users");
+            var listMusic = (List<Music>)await request.GetListObject(new List<HttpRequest.Poco.Music>(), "musics");
+            _listMusique = new ObservableCollection<Music>();
+            _listArtiste = new ObservableCollection<User>();
             _listGenres = new ObservableCollection<Genre>();
 
             foreach (var item in listGenre)
                 _listGenres.Add(item);
-        }
-
-        public async Task ChargeArtiste()
-        {
-            var test = new HttpRequestGet();
-            var listUser = (List<User>)await test.GetListObject(new List<HttpRequest.Poco.User>(), "users");
-            _listArtiste = new ObservableCollection<User>();
 
             foreach (var item in listUser)
             {
-                var res = (Artist) await test.GetArtist(new Artist(), "users", item.Id.ToString());
+                var res = (Artist)await request.GetArtist(new Artist(), "users", item.Id.ToString());
                 if (res.artist)
                     _listArtiste.Add(item);
             }
-        }
 
-        public async Task ChargeMusic()
-        {
-            var test = new HttpRequestGet();
-            var listMusic = (List<Music>)await test.GetListObject(new List<HttpRequest.Poco.Music>(), "musics");
-            _listMusique = new ObservableCollection<Music>();
 
             foreach (var item in listMusic)
                 _listMusique.Add(item);

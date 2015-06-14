@@ -32,6 +32,8 @@
 //= require ./AngularJS/controllers/UsersController.js
 //= require ./AngularJS/controllers/IndexController.js
 //= require ./AngularJS/controllers/PlayerController.js
+//= require ./AngularJS/controllers/NewsController.js
+//= require ./AngularJS/controllers/PackController.js
 //= require ./AngularJS/controllers/PlaylistsController.js
 //= require ./AngularJS/directives/autofocus.js
 //= require ./AngularJS/directives/autoscrollbottom.js

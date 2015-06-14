@@ -95,6 +95,9 @@
     <Compile Include="Controls\NewsControl.xaml.cs">
       <DependentUpon>NewsControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\NewsSharePopup.xaml.cs">
+      <DependentUpon>NewsSharePopup.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\PivotControl.xaml.cs">
       <DependentUpon>PivotControl.xaml</DependentUpon>
     </Compile>
@@ -247,6 +250,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\NewsControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\NewsSharePopup.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -1,7 +1,6 @@
 ﻿using System.Threading.Tasks;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using GalaSoft.MvvmLight.Command;
 using SoonZik.Utils;
 using SoonZik.ViewModel;
 using SoonZik.Views;
@@ -32,6 +31,7 @@ namespace SoonZik.Controls
         private void SendMessage(object sender, RoutedEventArgs e)
         {
 
+            Navigation.Navigate(typeof(Conversation));
         }
 
         private void GoToProfil(object sender, RoutedEventArgs e)
@@ -40,7 +40,10 @@ namespace SoonZik.Controls
             Singleton.Instance().ItsMe = false;
             var task = Task.Run(async () => await Singleton.Instance().Charge());
             task.Wait();
-            Navigation.Navigate(typeof(ProfilUser));
+            GlobalMenuControl.myGrid.Children.Clear();
+            GlobalMenuControl.myGrid.Children.Add(new ProfilUser());
+            FriendViewModel.MeaagePrompt.Hide();
+            //Navigation.Navigate(typeof(ProfilUser));
         }
 
         private void DeleteContact(object sender, RoutedEventArgs e)

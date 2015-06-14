@@ -63,8 +63,20 @@ SoonzikApp.factory('HTTPService', ['$http', '$location', 'Upload', function ($ht
       .success(successFunction)
       .error(errorFunction);
     },
+    indexPacks: function(parameters) {
+      return $http.get("http://api." + url + '/packs' + urlParametersFormat(parameters));
+    },
     findPacks: function (parameters) {
       return $http.get("http://api." + url + '/packs/find' + urlParametersFormat(parameters));
+    },
+    showPack: function(id) {
+      return $http.get("http://api." + url + '/packs/' + id)
+    },
+    indexNews: function(parameters) {
+      return $http.get("http://api." + url + '/news' + urlParametersFormat(parameters));
+    },
+    findNews: function(parameters) {
+      return $http.get("http://api." + url + '/news/find' + urlParametersFormat(parameters));
     },
     findBattles: function (parameters) {
       return $http.get("http://api." + url + '/battles/find' + urlParametersFormat(parameters));
