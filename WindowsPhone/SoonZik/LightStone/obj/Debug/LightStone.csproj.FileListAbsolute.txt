@@ -48,3 +48,4 @@ C:\Users\Juan-Pablo Bastardos\Documents\GitHub\SoonZik\Soonzik\WindowsPhone\Soon
 C:\Users\Juan-Pablo Bastardos\Documents\GitHub\SoonZik\Soonzik\WindowsPhone\SoonZik\LightStone\obj\Debug\qualifiers.txt
 C:\Users\Juan-Pablo Bastardos\Documents\GitHub\SoonZik\Soonzik\WindowsPhone\SoonZik\LightStone\obj\Debug\qualifiers.txt.intermediate
 C:\Users\Juan-Pablo Bastardos\Documents\GitHub\SoonZik\Soonzik\WindowsPhone\SoonZik\LightStone\obj\Debug\MultipleQualifiersPerDimensionFound.txt
+C:\Users\Juan-Pablo Bastardos\Documents\GitHub\SoonZik\Soonzik\WindowsPhone\SoonZik\LightStone\obj\Debug\LightStone.csprojResolveAssemblyReference.cache
