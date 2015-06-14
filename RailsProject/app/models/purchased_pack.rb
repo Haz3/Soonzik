@@ -4,4 +4,6 @@
 class PurchasedPack < ActiveRecord::Base
 	has_many :purchased_albums
 	belongs_to :pack
+
+	has_many :purchased_musics, through: :purchased_albums
 end

@@ -2,7 +2,6 @@ SoonzikApp = angular.module('SoonzikApp', ['ngRoute', 'ngCookies', 'ngResource',
 
 SoonzikApp.config(['$routeProvider', '$locationProvider', '$httpProvider', function($routeProvider, $locationProvider, $httpProvider) {
 	var url = document.location.pathname;
-  console.log("url", url);
 
 	var whitelist = [
 		/\/users\/[0-9]+\/finish_signup/,

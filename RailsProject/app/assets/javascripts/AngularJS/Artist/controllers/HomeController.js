@@ -14,7 +14,7 @@ SoonzikArtistApp.controller('HomeCtrl', ['$scope', 'SecureAuth', 'HTTPService', 
 			],
 			xkey: "music_title",
 			ykeys: ["total_sell", "lastweek"],
-			labels: ["Sell (total) ", "Sell number last week (total) "]
+			labels: ["Sell (total) ", "Sell of last week (total) "]
 		},
 		album: {
 			data: [
@@ -22,18 +22,15 @@ SoonzikArtistApp.controller('HomeCtrl', ['$scope', 'SecureAuth', 'HTTPService', 
 			],
 			xkey: "album_title",
 			ykeys: ["total_sell", "lastweek"],
-			labels: ["Sell (total) ", "Sell number last week (total) "]
+			labels: ["Sell (total) ", "Sell of last week (total) "]
 		},
 		pack: {
 			data: [
-				{ x: "Pack 1", week: 55, lastweek: 30 },
-				{ x: "Pack 2", week: 45, lastweek: 40 },
-				{ x: "Pack 3", week: 65, lastweek: 50 },
-				{ x: "Pack 4", week: 42, lastweek: 0 }
+				{ pack_title: "undefined", total_sell: 0, total_sell_partial: 0, lastweek: 0, lastweek_partial: 0 }
 			],
-			xkey: "x",
-			ykeys: ["week", "lastweek"],
-			labels: ["Sell (total) ", "Sell number last week (total) "]
+			xkey: "pack_title",
+			ykeys: ["total_sell", "total_sell_partial", "lastweek", "lastweek_partial"],
+			labels: ["Sell (total) ", "Sell partial bundle (total) ", "Sell of last week (total) ", "Sell of partial bundle last week (total) "]
 		}
 	}
 
@@ -42,6 +39,7 @@ SoonzikArtistApp.controller('HomeCtrl', ['$scope', 'SecureAuth', 'HTTPService', 
 			HTTPService.getStats().then(function(response) {
 				$scope.values.music.data = response.data.music;
 				$scope.values.album.data = response.data.album;
+				$scope.values.pack.data = response.data.pack;
 				$scope.loading.music = false;
 				$scope.loading.album = false;
 			}, function(error) {
