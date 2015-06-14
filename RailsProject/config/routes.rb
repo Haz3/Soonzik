@@ -1,7 +1,5 @@
 Rails.application.routes.draw do
 
-  root 'others#index'
-
   devise_for :users, :controllers => { omniauth_callbacks: 'omniauth_callbacks' }
   match '/users/:id/finish_signup' => 'users#finish_signup', via: [:get, :patch], :as => :finish_signup
 
@@ -138,8 +136,13 @@ Rails.application.routes.draw do
     end
   end
 
+  namespace :artist, path: '/', constraints: { subdomain: 'artist' } do
+    root 'mains#home'
+    get '/stats' => 'mains#stats'
+  end
+
   devise_for :admin_users, ActiveAdmin::Devise.config
-  
+
   ActiveAdmin.routes(self)
 
   resources :accesses
@@ -147,7 +150,7 @@ Rails.application.routes.draw do
   resources :albums
   resources :album_notes
   resources :attachments
-  resources :battles
+  resources :battles, only: [:index, :show]
   resources :carts
   resources :commentaries
   resources :concerts
@@ -158,14 +161,13 @@ Rails.application.routes.draw do
   resources :groups
   resources :influences
   resources :listenings
-  #resources :messages
   resources :musics
   resources :music_notes
   resources :news
   resources :newstexts
   resources :notifications
   resources :packs
-  resources :playlists
+  resources :playlists, only: [:show]
   resources :propositions
   resources :purchases
   resources :tags
@@ -174,6 +176,7 @@ Rails.application.routes.draw do
   resources :votes
 
   get 'messages' => 'chats#index'
+  root 'others#index'
 
 
   # The priority is based upon order of creation: first created -> highest priority.

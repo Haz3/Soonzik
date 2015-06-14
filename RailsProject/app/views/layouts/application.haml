@@ -15,8 +15,7 @@
       %nav.top-bar{"data-topbar" => "", :role => "navigation"}
         %ul.title-area
           %li.name
-            %a
-              =link_to image_tag("logo-soonzik.png", :class => "soonzik-logo"), "http://lvh.me:3000"
+            =link_to image_tag("logo-soonzik.png", :class => "soonzik-logo"), "http://lvh.me:3000"
             %li.toggle-topbar.menu-icon
               %a{:href => "#"}
                 %span Menu
@@ -41,7 +40,6 @@
                       = link_to('Packs (IN PROGRESS)', packs_path)
                       %a Monde Musical
                       = link_to('Battle (IN PROGRESS)', battles_path)
-                      = link_to('Playlist (IN PROGRESS)', playlists_path)
                       %a Amis (IN PROGRESS)
                       = link_to('Logout', destroy_user_session_path, :method => :delete)
                 =image_tag ("usersImage/avatars/" + current_user.image), :class => "photo-profile"              

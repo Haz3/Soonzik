@@ -24,6 +24,7 @@ class User < ActiveRecord::Base
   has_many :identities
   has_many :listening
   has_many :notifications
+  has_many :musics
   has_many :news
   has_many :propositions
   has_many :tweets
@@ -46,12 +47,12 @@ class User < ActiveRecord::Base
   has_many :relations_follower, :foreign_key => 'follow_id', :class_name => 'Follow'
   has_many :follows, :through => :relations_follow, :source => :user_to
   has_many :followers, :through => :relations_follower, :source => :user
-  
+
   has_many :relations_friend, :foreign_key => 'user_id', :class_name => 'Friend'
   has_many :relations_friendly, :foreign_key => 'friend_id', :class_name => 'Friend'
   has_many :friends, :through => :relations_friend, :source => :user_to
   has_many :frienders, :through => :relations_friendly, :source => :user
-  
+
   # validation
   # message: 'the message'
   #validates :email, confirmation: true, format: /\b[A-Z0-9._%a-z\-]+@(?:[A-Z0-9a-z\-]+\.)+[A-Za-z]{2,4}\z/  #if doesn't work : /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i

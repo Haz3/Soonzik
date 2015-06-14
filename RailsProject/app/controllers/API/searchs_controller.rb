@@ -59,11 +59,11 @@ module API
 					  	content = { pack: content }
 				  end
 				else
-				  artist_result = User.joins(:groups).merge(Group.where(:name => "Artist")).where(["'users'.'username' LIKE ?", "%#{@query}%"])
-				  user_result = User.joins(:groups).merge(Group.where(:name => "User")).where(["'users'.'username' LIKE ?", "%#{@query}%"])
-				  music_result = Music.where(["'musics'.'title' LIKE ?", "%#{@query}%"])
-				  album_result = Album.where(["'albums'.'title' LIKE ?", "%#{@query}%"])
-				  pack_result = Pack.where(["'packs'.'title' LIKE ?", "%#{@query}%"])
+				  artist_result = User.joins(:groups).merge(Group.where(:name => "Artist")).where(["users.username LIKE ?", "%#{@query}%"])
+				  user_result = User.joins(:groups).merge(Group.where(:name => "User")).where(["users.username LIKE ?", "%#{@query}%"])
+				  music_result = Music.where(["musics.title LIKE ?", "%#{@query}%"])
+				  album_result = Album.where(["albums.title LIKE ?", "%#{@query}%"])
+				  pack_result = Pack.where(["packs.title LIKE ?", "%#{@query}%"])
 				  if (artist_result.size == 0 && user_result.size == 0 && music_result.size == 0 && album_result.size == 0 && pack_result.size == 0)
 				  	content = []
 				  	codeAnswer 202

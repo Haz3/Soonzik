@@ -601,7 +601,7 @@ module API
           codeAnswer 502
           defineHttp :not_found
         else
-          @returnValue = { content: u.friends.as_json(:only => User.miniKey) }
+          @returnValue = { content: u.friends.reverse_order.as_json(:only => User.miniKey) }
           codeAnswer 200
         end
       rescue
@@ -633,7 +633,7 @@ module API
           codeAnswer 502
           defineHttp :not_found
         else
-          @returnValue = { content: u.follows.as_json(:only => User.miniKey) }
+          @returnValue = { content: u.follows.reverse_order.as_json(:only => User.miniKey) }
           codeAnswer 200
         end
       rescue
@@ -665,7 +665,7 @@ module API
           codeAnswer 502
           defineHttp :not_found
         else
-          @returnValue = { content: u.followers.as_json(:only => User.miniKey) }
+          @returnValue = { content: u.followers.reverse_order.as_json(:only => User.miniKey) }
           codeAnswer 200
         end
       rescue
