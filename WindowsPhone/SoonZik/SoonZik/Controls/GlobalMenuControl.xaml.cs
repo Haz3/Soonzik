@@ -2,13 +2,18 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Threading.Tasks;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Input;
 using GalaSoft.MvvmLight.Command;
 using SoonZik.Annotations;
 using SoonZik.HttpRequest;
+using SoonZik.HttpRequest.Poco;
 using SoonZik.Utils;
 using SoonZik.Views;
+using Battle = SoonZik.Views.Battle;
 using Connexion = SoonZik.Views.Connexion;
 using News = SoonZik.HttpRequest.Poco.News;
 
@@ -20,7 +25,30 @@ namespace SoonZik.Controls
     {
         #region Attribute
 
-        public ObservableCollection<object> ListObject; 
+        public static readonly DependencyProperty ResultProperty = DependencyProperty.Register(
+            "Result", typeof (SearchResult), typeof (GlobalMenuControl), new PropertyMetadata(default(SearchResult)));
+
+        public SearchResult Result
+        {
+            get { return (SearchResult) GetValue(ResultProperty); }
+            set { SetValue(ResultProperty, value); }
+        }
+
+        public static Grid myGrid { get; set; }
+
+        private SearchResult _myResult;
+
+        public SearchResult MyResult
+        {
+            get { return _myResult; }
+            set
+            {
+                _myResult = value;
+                RaisePropertyChange("MyResult");
+            }
+        }
+
+        public ObservableCollection<SearchResult> ListObject; 
 
         public event PropertyChangedEventHandler PropertyChanged;
         public string SearchText { get; set; }
@@ -32,9 +60,10 @@ namespace SoonZik.Controls
         public GlobalMenuControl()
         {
             this.InitializeComponent();
-
+            this.DataContext = this;
+            myGrid = GlobalGrid;
             GlobalGrid.Children.Add(Singleton.Instance().NewsPage);
-
+            
             this._navigationService = new NavigationService();
             ProfilButton.Command = new RelayCommand(GoToProfil);
             NewsButton.Command = new RelayCommand(GoToNews);
@@ -71,67 +100,59 @@ namespace SoonZik.Controls
 
         #endregion
 
+        #region Method Bouttons
         private void GoToProfil()
         {
-            GlobalGrid.Children.Clear();
             Singleton.Instance().ItsMe = true;
             Singleton.Instance().ProfilPage = new ProfilUser();
-            GlobalGrid.Children.Add(Singleton.Instance().ProfilPage);
-            CloseMenu();
+            SetChildren(Singleton.Instance().ProfilPage);
         }
 
         private void GoToNews()
         {
-            GlobalGrid.Children.Clear();
-            GlobalGrid.Children.Add(Singleton.Instance().NewsPage);
-            CloseMenu();
+            SetChildren(Singleton.Instance().NewsPage);
         }
 
         private void GoToExplorer()
         {
-            GlobalGrid.Children.Clear();
-            GlobalGrid.Children.Add(new Explorer());
-            CloseMenu();
+            SetChildren(new Explorer());
         }
 
         private void GoToPacks()
         {
-            GlobalGrid.Children.Clear();
-            GlobalGrid.Children.Add(new Packs());
-            CloseMenu();
+            SetChildren(new Packs());
         }
 
         private void GoToMondeMusical()
         {
-            GlobalGrid.Children.Clear();
-            GlobalGrid.Children.Add(new Geoloc());
-            CloseMenu();
+           SetChildren(new Geoloc());
         }
 
         private void GoToBattle()
         {
-            GlobalGrid.Children.Clear();
-            GlobalGrid.Children.Add(new Battle());
-            CloseMenu();
+            SetChildren(new Battle());
         }
 
         private void GoToPlaylist()
         {
-            GlobalGrid.Children.Clear();
-            GlobalGrid.Children.Add(new Playlist());
-            CloseMenu();
+           SetChildren(new Playlist());
         }
 
         private void GoToAmis()
         {
-            GlobalGrid.Children.Clear();
-            GlobalGrid.Children.Add(new Friends());
+            SetChildren(new Friends());
+        }
+
+        private void SetChildren(UIElement myObj)
+        {
+            myGrid.Children.Clear();
+            myGrid.Children.Add(myObj);
             CloseMenu();
         }
 
         private void GoToAchat()
         {
-            GlobalGrid.Children.Clear();
+            myGrid.Children.Clear();
             CloseMenu();
         }
 
@@ -140,38 +161,65 @@ namespace SoonZik.Controls
             _navigationService.Navigate(typeof(Connexion));
         }
 
+        #endregion
+
+        #region Methods
         private void SearchTextBlock_OnTextChanged(object sender, TextChangedEventArgs e)
         {
             SearchText = SearchTextBlock.Text;
-            var task = Task.Run(async () => await MakeTheSearch());
-            task.Wait();
-
-            int a = ListObject.Count;
+            //var task = Task.Run(async () => await MakeTheSearch());
+            //task.Wait();
+            if (SearchText != String.Empty)
+                MakeTheSearch();
+            else
+                CleanResultList();
         }
 
-        private async Task MakeTheSearch()
+        private async void MakeTheSearch()
         {
             var request = new HttpRequestGet();
             try
             {
-                var list = (List<object>)await request.Search(new List<object>(), SearchText);
-                ListObject = new ObservableCollection<object>();
-                foreach (var item in list)
+                var list = (SearchResult)await request.Search(new SearchResult(), SearchText);
+                if (list != null)
                 {
-                    ListObject.Add(item);
+                    MyResult = list;
+                    ResultArtisteListView.ItemsSource = MyResult.artist;
+                    ResultUserListView.ItemsSource = MyResult.user;
+                    ResultAlbumListView.ItemsSource = MyResult.album;
+                    ResultMusicListView.ItemsSource = MyResult.music;
+                    ResultPackListView.ItemsSource = MyResult.pack;
                 }
             }
             catch (Exception e)
             {
-
+                Debug.WriteLine(e.Message);
             }
         }
 
+        private void CleanResultList()
+        {
+            ResultArtisteListView.ItemsSource = null;
+            ResultUserListView.ItemsSource = null;
+            ResultAlbumListView.ItemsSource = null;
+            ResultMusicListView.ItemsSource = null;
+            ResultPackListView.ItemsSource = null;
+        }
+
+        private void GlobalGrid_OnTapped(object sender, TappedRoutedEventArgs e)
+        {
+            CloseMenu();
+        }
+
+        #endregion
+
+        #region NotifyPropertyCahnge
         [NotifyPropertyChangedInvocator]
         private void RaisePropertyChange(string propertyName)
         {
             var handler = PropertyChanged;
             if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
         }
+        #endregion
     }
 }

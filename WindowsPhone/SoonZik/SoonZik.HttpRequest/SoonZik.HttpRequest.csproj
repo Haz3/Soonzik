@@ -94,6 +94,7 @@
     <Compile Include="Poco\News.cs" />
     <Compile Include="Poco\NewsText.cs" />
     <Compile Include="Poco\Pack.cs" />
+    <Compile Include="Poco\SearchResult.cs" />
     <Compile Include="Poco\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

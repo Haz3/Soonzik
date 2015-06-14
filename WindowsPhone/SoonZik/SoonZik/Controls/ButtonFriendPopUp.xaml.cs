@@ -2,6 +2,7 @@
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using SoonZik.Utils;
+using SoonZik.ViewModel;
 using SoonZik.Views;
 
 // Pour en savoir plus sur le modèle d'élément Contrôle utilisateur, consultez la page http://go.microsoft.com/fwlink/?LinkId=234236
@@ -39,7 +40,10 @@ namespace SoonZik.Controls
             Singleton.Instance().ItsMe = false;
             var task = Task.Run(async () => await Singleton.Instance().Charge());
             task.Wait();
-            Navigation.Navigate(typeof(ProfilUser));
+            GlobalMenuControl.myGrid.Children.Clear();
+            GlobalMenuControl.myGrid.Children.Add(new ProfilUser());
+            FriendViewModel.MeaagePrompt.Hide();
+            //Navigation.Navigate(typeof(ProfilUser));
         }
 
         private void DeleteContact(object sender, RoutedEventArgs e)
