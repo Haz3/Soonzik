@@ -38,16 +38,34 @@
         
         <DataTemplate x:Key="SearchHeaderTemplate">
             <StackPanel Margin="0,0,0,30">
-                <TextBlock Text="{Binding Path=Title}" Style="{StaticResource TitleTextBlockStyle}"/>
+                <TextBlock Text="{Binding MyResult}" Style="{StaticResource TitleTextBlockStyle}"/>
             </StackPanel>
         </DataTemplate>
 
         <DataTemplate x:Key="SearchItemTemplate">
             <StackPanel Margin="0,0,0,30">
+                <TextBlock Text="{Binding Path=Username}"/>
+            </StackPanel>
+        </DataTemplate>
+
+        <DataTemplate x:Key="MusicItemTemplate">
+            <StackPanel Margin="0,0,0,30">
+                <TextBlock Text="{Binding Path=title}"/>
+            </StackPanel>
+        </DataTemplate>
+
+        <DataTemplate x:Key="AlbumItemTemplate">
+            <StackPanel Margin="0,0,0,30">
+                <TextBlock Text="{Binding Path=title}"/>
+            </StackPanel>
+        </DataTemplate>
+
+        <DataTemplate x:Key="PackItemTemplate">
+            <StackPanel Margin="0,0,0,30">
                 <TextBlock Text="{Binding Path=Title}"/>
             </StackPanel>
         </DataTemplate>
-        
+
     </UserControl.Resources>
 
     <Grid x:Name="GeneralGrid" Background="Transparent">
@@ -125,17 +143,28 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
-            <TextBox x:ConnectionId='3' x:Name="SearchTextBlock" Grid.Row="0" Width="200" BorderThickness="0" AcceptsReturn="True"
+            <TextBox x:ConnectionId='4' x:Name="SearchTextBlock" Grid.Row="0" Width="200" BorderThickness="0" AcceptsReturn="True"
                      Height="13" Margin="50,3,50,0" TextAlignment="Center" VerticalContentAlignment="Center"
                      Foreground="Black" Background="Gray" FontSize="18" PlaceholderText="Recherche"
                      FontFamily="{StaticResource Roboto}"                                            />
+            <Grid Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
 
-            <ListView Grid.Row="1" x:Name="ResultListView" HeaderTemplate="{StaticResource SearchHeaderTemplate}" ItemTemplate="{StaticResource SearchItemTemplate}">
-            
-            </ListView>
+                <ListView Grid.Row="0" x:Name="ResultArtisteListView" Header="Artiste" ItemTemplate="{StaticResource SearchItemTemplate}"/>
+                <ListView Grid.Row="1" x:Name="ResultUserListView" Header="Utilisateur" ItemTemplate="{StaticResource SearchItemTemplate}"/>
+                <ListView Grid.Row="2" x:Name="ResultMusicListView" Header="Musiques" ItemTemplate="{StaticResource MusicItemTemplate}"/>
+                <ListView Grid.Row="3" x:Name="ResultAlbumListView" Header="Albums" ItemTemplate="{StaticResource AlbumItemTemplate}"/>
+                <ListView Grid.Row="4" x:Name="ResultPackListView" Header="Packs" ItemTemplate="{StaticResource PackItemTemplate}"/>
+            </Grid>
         </Grid>
 
-        <Grid Grid.Row="1" x:Name="GlobalGrid" RenderTransformOrigin="0.5,0.5" Margin="0, 15, 0, 0" >
+        <Grid x:ConnectionId='3' Grid.Row="1" x:Name="GlobalGrid" RenderTransformOrigin="0.5,0.5" Margin="0, 15, 0, 0"                             >
             <Grid.RenderTransform>
                 <CompositeTransform/>
             </Grid.RenderTransform>

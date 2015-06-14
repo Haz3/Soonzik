@@ -3,14 +3,16 @@
   .row{ "ng-if" => "loading == false", "ng-init" => "initFoundation()"}
     %h3.subheader
       Listing news
-    .ul.small-11.small-centered.columns{"ng-show" => "showNews"}
-      %li{ "ng-repeat" => "new in news.newstexts"}
+    .ul.small-11.small-centered.columns{"ng-show" => "News"}
+      %li{ "ng-repeat" => "new in news"}
         .panel.radius.news
           %h5.subheader.text-center
             {{ new.title }}
-          %blockquote{"ng-repeat" => "newstext in news.newstexts"}
-            {{ newstext.content }}
-      .pagination-centerd
+          %h6{"ng-repeat" => "text in new.newstexts"}
+            {{ text.content }}
+          .divider
+            
+      .pagination-centerd.small-4.small-centered.columns
         %ul.pagination
           %li.arrow.unavailable
             %a{:href => ""} «

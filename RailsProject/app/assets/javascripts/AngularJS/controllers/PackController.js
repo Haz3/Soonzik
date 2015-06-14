@@ -1,4 +1,4 @@
-SoonzikApp.controller('PacksCtrl', ['$scope', 'SecureAuth', 'HTTPService', function ($scope, SecureAuth, HTTPService) {
+SoonzikApp.controller('PacksCtrl', ['$scope', '$routeParams', 'SecureAuth', 'HTTPService', function ($scope, $routeParams, SecureAuth, HTTPService) {
 
 	$scope.loading = true;
 
@@ -15,27 +15,32 @@ SoonzikApp.controller('PacksCtrl', ['$scope', 'SecureAuth', 'HTTPService', funct
 		HTTPService.findPacks(parameters).then(function(packs) {
 			
 			$scope.pack = packs.data.content;
-			console.log($scope.packs);
+			console.log($scope.pack);
 
 		}, function (error) {
 			console.log("No Packs Available");
 		});
 
-		$scope.showPack = true;
+		$scope.Pack = true;
 	
 	}
 
 	$scope.showPacksById = function() {
-		var parameters = [
-			{key: "id", value: 1}
-		];
+		var id = $routeParams.id;
 
-		HTTPService.showPacks(parameters).then(function(packId) {
-			$scope.thisPack = packId.data.content;
+		HTTPService.showPack(id).then(function(response) {
+			$scope.thisPack = response.data.content;
+			
 			console.log($scope.thisPack);
 
 		}, function (error) {
 			console.log("This pack doesn't exist");
 		});
+
+		$scope.thisPackId = true;
+	
 	}
+
+	$scope.loading = false;
+
 }]);

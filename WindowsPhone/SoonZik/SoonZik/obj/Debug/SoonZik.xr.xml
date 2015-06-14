@@ -5,6 +5,9 @@
   </Roots.Interfaces>
   <Roots.PropertyPathNames>
     <RootPropertyPathName Name="Title" />
+    <RootPropertyPathName Name="title" />
+    <RootPropertyPathName Name="Username" />
+    <RootPropertyPathName Name="MyResult" />
     <RootPropertyPathName Name="DateNews" />
     <RootPropertyPathName Name="NewsTitle" />
     <RootPropertyPathName Name="GridVisibility" />
@@ -12,9 +15,7 @@
     <RootPropertyPathName Name="ProgressOn" />
     <RootPropertyPathName Name="ConnexionCommand" />
     <RootPropertyPathName Name="Password" />
-    <RootPropertyPathName Name="Username" />
     <RootPropertyPathName Name="FacebookTapped" />
-    <RootPropertyPathName Name="title" />
     <RootPropertyPathName Name="duration" />
     <RootPropertyPathName Name="user" />
     <RootPropertyPathName Name="style_name" />
@@ -82,6 +83,7 @@
       <RootProperty Name="RenderTransform" />
       <RootProperty Name="Visibility" />
       <RootProperty Name="ColumnDefinitions" />
+      <RootEvent Name="Tapped" />
       <RootMethod Name="GetRow" />
       <RootMethod Name="SetRow" />
       <RootMethod Name="GetColumn" />
@@ -318,7 +320,7 @@
       <RootEvent Name="TextChanged" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.ListView">
-      <RootProperty Name="HeaderTemplate" />
+      <RootProperty Name="Header" />
       <RootProperty Name="ItemTemplate" />
       <RootProperty Name="IsHoldingEnabled" />
       <RootProperty Name="ItemsSource" />

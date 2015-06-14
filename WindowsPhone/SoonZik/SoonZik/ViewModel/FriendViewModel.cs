@@ -16,7 +16,9 @@ namespace SoonZik.ViewModel
     {
         #region Attribute
         readonly ApplicationDataContainer _localSettings = ApplicationData.Current.LocalSettings;
-        
+
+        public static MessagePrompt MeaagePrompt { get; set; }
+
         private ObservableCollection<User> _sources; 
         public ObservableCollection<User> Sources
         {
@@ -79,7 +81,7 @@ namespace SoonZik.ViewModel
         #region Method
         private void Execute()
         {
-            var messagePrompt = new MessagePrompt
+            MeaagePrompt = new MessagePrompt
             {
                 Title = "Que voulez vous faire ?",
                 IsAppBarVisible = true,
@@ -87,7 +89,7 @@ namespace SoonZik.ViewModel
                 Body = new ButtonFriendPopUp(SelectedUser.Id),
                 Opacity = 0.6
             };
-            messagePrompt.Show();
+            MeaagePrompt.Show();
         }
 
         #endregion

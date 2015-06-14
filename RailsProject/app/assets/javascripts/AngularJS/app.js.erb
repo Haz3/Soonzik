@@ -27,6 +27,15 @@ SoonzikApp.config(['$routeProvider', '$locationProvider', '$httpProvider', funct
     }).when('/news/', {
       templateUrl: '<%= asset_path("AngularJS/views/news/index.html.haml") %>',
       controller: 'NewsCtrl'
+    }).when('/news/:id', {
+      templateUrl: '<%= asset_path("AngularJS/views/news/show.html.haml") %>',
+      controller: 'NewsCtrl'
+    }).when('/packs', {
+      templateUrl: '<%= asset_path("AngularJS/views/packs/index.html.haml") %>',
+      controller: 'PacksCtrl'
+    }).when('/packs/:id', {
+      templateUrl: '<%= asset_path("AngularJS/views/packs/show.html.haml") %>',
+      controller: 'PacksCtrl'
     }).when('/users/:id', {
       templateUrl: '<%= asset_path("AngularJS/views/users/show.html.haml") %>',
       controller: 'UsersCtrl'
