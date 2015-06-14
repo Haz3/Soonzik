@@ -1,11 +1,10 @@
 ﻿using System;
-using System.Diagnostics;
 using System.Globalization;
 using System.Net;
-using System.Text;
 using Windows.ApplicationModel.Core;
+using Windows.Storage;
+using Windows.UI.Core;
 using Windows.UI.Popups;
-using Windows.UI.Xaml.Controls;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using Microsoft.Practices.ServiceLocation;
@@ -15,6 +14,7 @@ using SoonZik.HttpRequest.Poco;
 using SoonZik.Utils;
 using SoonZik.Views;
 using Connexion = SoonZik.HttpRequest.Connexion;
+using News = SoonZik.Views.News;
 
 namespace SoonZik.ViewModel
 {
@@ -22,7 +22,20 @@ namespace SoonZik.ViewModel
     {
         #region Attribute
 
-        readonly Windows.Storage.ApplicationDataContainer _localSettings = Windows.Storage.ApplicationData.Current.LocalSettings;
+        private bool _progressOn;
+        public bool ProgressOn
+        {
+            get { return _progressOn; }
+            set
+            {
+                _progressOn = value;
+                RaisePropertyChanged("ProgressOn");
+            }
+        }
+
+      
+
+        readonly ApplicationDataContainer _localSettings = ApplicationData.Current.LocalSettings;
       
         private string _username;
 
@@ -59,16 +72,23 @@ namespace SoonZik.ViewModel
         {
             get { return _facebookTapped; }
         }
-        public Utils.INavigationService Navigation;
+        public INavigationService Navigation;
 
         #endregion
         
         #region Ctor
         public ConnexionViewModel()
         {
+            ProgressOn = false;
             Navigation = new NavigationService();
             _connexionCommand = new RelayCommand(MakeConnexion);
             _facebookTapped = new RelayCommand(MakeFacebookConnection);
+
+            if (_localSettings != null && (string)_localSettings.Values["SoonZikAlreadyConnect"] == "yes")
+            {
+                _password = _localSettings.Values["SoonZikPassWord"].ToString();
+                _username = _localSettings.Values["SoonZikUserName"].ToString();
+            }
         }
         #endregion
 
@@ -76,32 +96,47 @@ namespace SoonZik.ViewModel
 
         private async void MakeConnexion()
         {
+            ProgressOn = true;
             var dispatcher = CoreApplication.MainView.CoreWindow.Dispatcher;
 
-            await dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, async () =>
+            await dispatcher.RunAsync(CoreDispatcherPriority.Normal, async () =>
             {
-                var connec = new Connexion();
-                var request = (HttpWebRequest) WebRequest.Create("http://soonzikapi.herokuapp.com/login");
-                var postData = "email=" + _username + "&password=" + _password;
-
-                await connec.GetHttpPostResponse(request, postData);
-                var res = connec.received;
-                if (res != null)
+                if (_username != null && _password != null)
                 {
-                    try
+                    var connec = new Connexion();
+                    var request = (HttpWebRequest) WebRequest.Create("http://soonzikapi.herokuapp.com/login");
+                    var postData = "email=" + _username + "&password=" + _password;
+
+                    await connec.GetHttpPostResponse(request, postData);
+                    var res = connec.received;
+                    if (res != null)
                     {
-                        var stringJson = JObject.Parse(res).SelectToken("content").ToString();
-                        Singleton.Instance().CurrentUser = JsonConvert.DeserializeObject(stringJson, typeof (User)) as User;
-                        ServiceLocator.Current.GetInstance<FriendViewModel>().Sources = Singleton.Instance().CurrentUser.Friends;
-                        ServiceLocator.Current.GetInstance<FriendViewModel>().ItemSource = AlphaKeyGroups<User>.CreateGroups(Singleton.Instance().CurrentUser.Friends, CultureInfo.CurrentUICulture, s => s.Username, true);
+                        try
+                        {
+                            var stringJson = JObject.Parse(res).SelectToken("content").ToString();
+                            Singleton.Instance().CurrentUser = JsonConvert.DeserializeObject(stringJson, typeof (User)) as User;
+                            ServiceLocator.Current.GetInstance<FriendViewModel>().Sources = Singleton.Instance().CurrentUser.Friends;
+                            ServiceLocator.Current.GetInstance<FriendViewModel>().ItemSource = AlphaKeyGroups<User>.CreateGroups(Singleton.Instance().CurrentUser.Friends, CultureInfo.CurrentUICulture, s => s.Username, true);
+                        }
+                        catch (Exception e)
+                        {
+                            new MessageDialog("Erreur de connexion").ShowAsync();
+                        }
+                        WriteInformation();
+                        Singleton.Instance().NewsPage = new News();
+                        Navigation.Navigate(typeof(MainView));
+                        ProgressOn = false;
                     }
-                    catch (Exception e)
+                    else
                     {
+                        new MessageDialog("Erreur de connexion Code 502").ShowAsync();
                     }
                 }
+                else
+                {
+                    new MessageDialog("Veuillez entrer vos informations de connexion").ShowAsync();
+                }
             });
-            WriteInformation();
-            Navigation.Navigate(typeof (MainView));
         }
 
         private void WriteInformation()

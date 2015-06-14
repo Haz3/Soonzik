@@ -1,0 +1,15 @@
+%div{ "ng-init" => "showPacks()" }
+  %loading{ "ng-if" => "loading == true" }
+  .row{ "ng-if" => "loading == false", "ng-init" => "initFoundation()"}
+    %h3.subheader
+      Packs du moment
+    .ul.large-block-grid-4{"ng-show" => "showPack"}
+      %li{ "ng-repeat" => "pack in packs track by $index"}
+        .panel
+          %h5.subheader.text-center
+            {{ pack.title }}
+          %img{"src" => "/assets/pack1.jpg"}
+          .divider
+          Temps Restant:
+          %br
+          Moyenne : 

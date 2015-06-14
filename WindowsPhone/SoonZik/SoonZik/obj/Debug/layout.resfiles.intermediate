@@ -10,7 +10,9 @@ Controls\ButtonFriendPopUp.xbf
 Controls\Genre.xbf
 Controls\GlobalMenuControl.xbf
 Controls\NewsControl.xbf
+Controls\NewsSharePopup.xbf
 Controls\PivotControl.xbf
+Controls\ProgressRingControl.xbf
 MainPage.xbf
 SoonZik.xr.xml
 Views\Battle.xbf

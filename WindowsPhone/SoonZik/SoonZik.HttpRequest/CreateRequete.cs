@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Net;
+using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
@@ -32,11 +33,12 @@ namespace SoonZik.HttpRequest
 
         #region Method
 
-        public async void DoRequest()
+        public async Task<object> DoRequest()
         {
             var request = (HttpWebRequest)HttpWebRequest.Create(Uri);
-
             request.BeginGetResponse(Callback, request);
+
+            return MyObject;
         }
 
         private async void Callback(IAsyncResult ar)

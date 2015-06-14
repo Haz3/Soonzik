@@ -1,17 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
-using Windows.UI.Xaml;
+﻿using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Navigation;
 
 // Pour en savoir plus sur le modèle d'élément Contrôle utilisateur, consultez la page http://go.microsoft.com/fwlink/?LinkId=234236
 
@@ -19,6 +7,33 @@ namespace SoonZik.Controls
 {
     public sealed partial class NewsControl : UserControl
     {
+        public static readonly DependencyProperty NewsTitleProperty = DependencyProperty.Register(
+            "NewsTitle", typeof (string), typeof (NewsControl), new PropertyMetadata(default(string)));
+
+        public string NewsTitle
+        {
+            get { return (string) GetValue(NewsTitleProperty); }
+            set { SetValue(NewsTitleProperty, value); }
+        }
+
+        public static readonly DependencyProperty DateNewsProperty = DependencyProperty.Register(
+            "DateNews", typeof (string), typeof (NewsControl), new PropertyMetadata(default(string)));
+
+        public string DateNews
+        {
+            get { return (string) GetValue(DateNewsProperty); }
+            set { SetValue(DateNewsProperty, value); }
+        }
+
+        public static readonly DependencyProperty ImageNewsProperty = DependencyProperty.Register(
+            "ImageNews", typeof (string), typeof (NewsControl), new PropertyMetadata(default(string)));
+
+        public string ImageNews
+        {
+            get { return (string) GetValue(ImageNewsProperty); }
+            set { SetValue(ImageNewsProperty, value); }
+        }
+
         public NewsControl()
         {
             this.InitializeComponent();

@@ -4,9 +4,9 @@
              xmlns:vm="using:SoonZik.ViewModel" 
              xmlns:local="using:SoonZik" 
              xmlns:library="using:LightStone.Controls">
-  <Application.Resources>
-
-    <vm:ViewModelLocator x:Key="Locator"/>
+    <Application.Resources>
+        
+        <vm:ViewModelLocator x:Key="Locator"/>
     <vm:MainPageViewModel x:Key="MainPageViewModel" />
     <vm:ConnexionViewModel x:Key="ConnexionViewModel" />
     <vm:MainViewModel x:Key="MainViewModel" />

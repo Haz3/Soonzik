@@ -1,0 +1,104 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:oasis:names:tc:xliff:document:1.2 xliff-core-1.2-transitional.xsd">
+  <file datatype="xml" source-language="fr-FR" target-language="en" original="SoonZik_Multilingual.prilog.xml" tool-id="MultilingualAppToolkit" product-name="SoonZik" product-version="1.0.0.0" build-num="0">
+    <header>
+      <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="3.1.1250.0" tool-company="Microsoft" />
+    </header>
+    <body>
+      <group id="Resources">
+        <trans-unit id="Resources\year_txt\Text" translate="yes" xml:space="preserve">
+          <source>Année:</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">Year:</target>
+        </trans-unit>
+        <trans-unit id="Resources\signup_txt\Text" translate="yes" xml:space="preserve">
+          <source>Inscription</source>
+          <target state="signed-off">Sign up</target>
+        </trans-unit>
+        <trans-unit id="Resources\shop_txt\Text" translate="yes" xml:space="preserve">
+          <source>Magasin</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">Store</target>
+        </trans-unit>
+        <trans-unit id="Resources\music_txt\Text" translate="yes" xml:space="preserve">
+          <source>Musique</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">Music</target>
+        </trans-unit>
+        <trans-unit id="Resources\music_player_txt\Text" translate="yes" xml:space="preserve">
+          <source>Lecteur Audio</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">Audio Player</target>
+        </trans-unit>
+        <trans-unit id="Resources\news_btn\Content" translate="yes" xml:space="preserve">
+          <source>News</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">News</target>
+        </trans-unit>
+        <trans-unit id="Resources\news_txt\Text" translate="yes" xml:space="preserve">
+          <source>Dernières news</source>
+          <target state="signed-off">Last news</target>
+        </trans-unit>
+        <trans-unit id="Resources\shop_btn\Content" translate="yes" xml:space="preserve">
+          <source>Magasin</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">Store</target>
+        </trans-unit>
+        <trans-unit id="Resources\new_playlist_btn\Content" translate="yes" xml:space="preserve">
+          <source>Créer</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">Create</target>
+        </trans-unit>
+        <trans-unit id="Resources\playlist_txt\Text" translate="yes" xml:space="preserve">
+          <source>Playlist</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">Playlist</target>
+        </trans-unit>
+        <trans-unit id="Resources\remove_playlist_btn\Content" translate="yes" xml:space="preserve">
+          <source>Supprimer</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">Delete</target>
+        </trans-unit>
+        <trans-unit id="Resources\forgot_password_txt\Text" translate="yes" xml:space="preserve">
+          <source>Récuperation du mot de passe</source>
+          <target state="signed-off">Password recovery</target>
+        </trans-unit>
+        <trans-unit id="Resources\follow_btn\Content" translate="yes" xml:space="preserve">
+          <source>Follow</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">Follow</target>
+        </trans-unit>
+        <trans-unit id="Resources\connect_btn\Content" translate="yes" xml:space="preserve">
+          <source>Connexion</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">Connection</target>
+        </trans-unit>
+        <trans-unit id="Resources\audio_player_btn\Content" translate="yes" xml:space="preserve">
+          <source>Lecteur Audio</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">Audio Player</target>
+        </trans-unit>
+        <trans-unit id="Resources\add_playlist_btn\Content" translate="yes" xml:space="preserve">
+          <source>Modifier</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">Edit</target>
+        </trans-unit>
+        <trans-unit id="Resources\album_txt\Text" translate="yes" xml:space="preserve">
+          <source>Album:</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">Album:</target>
+        </trans-unit>
+        <trans-unit id="Resources\artist_txt\Text" translate="yes" xml:space="preserve">
+          <source>Artiste:</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">Artist:</target>
+        </trans-unit>
+        <trans-unit id="Resources\community_btn\Content" translate="yes" xml:space="preserve">
+          <source>Communauté</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">Community</target>
+        </trans-unit>
+        <trans-unit id="Resources\battle_btn\Content" translate="yes" xml:space="preserve">
+          <source>Battle</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">Battle</target>
+        </trans-unit>
+        <trans-unit id="Resources\community_txt\Text" translate="yes" xml:space="preserve">
+          <source>Communauté</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">Community</target>
+        </trans-unit>
+        <trans-unit id="Resources\connection_txt\Text" translate="yes" xml:space="preserve">
+          <source>Connexion</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">Connection</target>
+        </trans-unit>
+        <trans-unit id="Resources\concert_btn\Content" translate="yes" xml:space="preserve">
+          <source>Concert</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">Concert</target>
+        </trans-unit>
+      </group>
+    </body>
+  </file>
+</xliff>

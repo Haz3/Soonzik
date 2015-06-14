@@ -5,17 +5,60 @@
     xmlns:control="using:SoonZik.Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:Interactivity="using:Microsoft.Xaml.Interactivity" 
-    xmlns:Core="using:Microsoft.Xaml.Interactions.Core" 
-    xmlns:Media="using:Microsoft.Xaml.Interactions.Media"
     x:Class="SoonZik.Views.MainView"
     mc:Ignorable="d"
     DataContext="{StaticResource MainViewModel}"
     Background="#424242">
     
-    <!-- Animation for the menu part and Search Part -->
-	<Page.Resources>
-		<Storyboard x:Name="MenuStoryBoard" >
+    <control:GlobalMenuControl />
+</Page>
+
+
+
+
+
+<!--<Pivot Grid.Row="1" x:Name="PivotGlobal" HeaderTemplate="{StaticResource SizeHeaderGlobalPivot}" Foreground="Transparent" Margin="0, 30, 0, 0" RenderTransformOrigin="0.5,0.5" Style="{StaticResource PivotStyle1}" >
+            <Pivot.RenderTransform>
+                <CompositeTransform/>
+            </Pivot.RenderTransform>
+
+            <PivotItem Header="News" x:Name="NewsItem">
+                <local:News />
+            </PivotItem>
+
+            <PivotItem Header="Explorer" x:Name="ExplorerItem">
+                <local:Explorer/>
+            </PivotItem>
+
+            <PivotItem Header="Packs" x:Name="PacksItem">
+                <local:Packs/>
+            </PivotItem>
+
+            <PivotItem Header="Monde Musical" x:Name="MondeMusicalItem">
+                <local:Geoloc />
+            </PivotItem>
+
+            <PivotItem Header="Battle" x:Name="BattleItem">
+                <local:Battle />
+            </PivotItem>
+
+            <PivotItem Header="Playlists" x:Name="PlaylistItem">
+                <local:Playlist />
+            </PivotItem>
+
+            <PivotItem Header="Amis" x:Name="AmisItem">
+                <local:Friends />
+            </PivotItem>
+
+            <PivotItem Header="Achats" x:Name="AchatItem"/>
+
+        </Pivot>-->
+
+<!-- Animation for the menu part and Search Part -->
+<!--<Page.Resources>
+        <converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+
+        <Storyboard x:Name="MenuStoryBoard" >
             <DoubleAnimation Duration="0:0:0.25" To="300" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)" Storyboard.TargetName="MenuGrid" d:IsOptimized="True"/>
             <DoubleAnimation Duration="0:0:0.25" To="300" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)" Storyboard.TargetName="PivotGlobal" d:IsOptimized="True"/>
         </Storyboard>
@@ -120,42 +163,11 @@
             <ListView Grid.Row="1" x:Name="ResultListView"/>
          </Grid>
 
-        <!--<control:GlobalMenuControl />-->
         
-        <Pivot Grid.Row="1" x:Name="PivotGlobal" HeaderTemplate="{StaticResource SizeHeaderGlobalPivot}" Foreground="Transparent" Margin="0, 30, 0, 0" RenderTransformOrigin="0.5,0.5" Style="{StaticResource PivotStyle1}" >
-            <Pivot.RenderTransform>
+        <Grid Grid.Row="1" x:Name="PivotGlobal" RenderTransformOrigin="0.5,0.5">
+            <Grid.RenderTransform>
                 <CompositeTransform/>
-            </Pivot.RenderTransform>
-
-            <PivotItem Header="News" x:Name="NewsItem">
-                <local:News />
-            </PivotItem>
-
-            <PivotItem Header="Explorer" x:Name="ExplorerItem">
-                <local:Explorer/>
-            </PivotItem>
-
-            <PivotItem Header="Packs" x:Name="PacksItem">
-                <local:Packs/>
-            </PivotItem>
-
-            <PivotItem Header="Monde Musical" x:Name="MondeMusicalItem">
-                <local:Geoloc />
-            </PivotItem>
-
-            <PivotItem Header="Battle" x:Name="BattleItem">
-                <local:Battle />
-            </PivotItem>
-
-            <PivotItem Header="Playlists" x:Name="PlaylistItem">
-                <local:Playlist />
-            </PivotItem>
-
-            <PivotItem Header="Amis" x:Name="AmisItem">
-                <local:Friends />
-            </PivotItem>
-
-            <PivotItem Header="Achats" x:Name="AchatItem"/>
-
-        </Pivot></Grid>
-</Page>
+            </Grid.RenderTransform>
+           
+        </Grid>
+    </Grid>-->

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace SoonZik.HttpRequest.Poco
 {
@@ -17,7 +13,7 @@ namespace SoonZik.HttpRequest.Poco
         public string UpdatedAt { get; set; }
         public string NewsType { get; set; }
         public User User { get; set; }
-        public List<object> Newstexts { get; set; }
+        public List<Newstext> Newstexts { get; set; }
         public List<object> Attachments { get; set; }
         public List<object> Tags { get; set; }
         #endregion

@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+      *********    NE PAS MODIFIER CE FICHIER     *********
+      Ce fichier est régénéré par un outil de création.Modifier
+ .     ce fichier peut provoquer des erreurs.
+-->
+<xs:schema xmlns:blend="http://schemas.microsoft.com/expression/blend/2008" xmlns:tns="Blend.SampleData.SampleDataSource3" targetNamespace="Blend.SampleData.SampleDataSource3" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="SampleDataSource3" type="tns:SampleDataSource3" />
+  <xs:complexType name="SampleDataSource3">
+    <xs:sequence>
+      <xs:element name="Groups" type="tns:GroupCollection" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="GroupCollection">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" name="Group" type="tns:Group" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Group">
+    <xs:attribute name="Property1" type="xs:string" />
+    <xs:attribute blend:FormatParameters="50,12" name="Property2" type="xs:string" />
+  </xs:complexType>
+</xs:schema>

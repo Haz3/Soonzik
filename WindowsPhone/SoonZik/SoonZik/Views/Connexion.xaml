@@ -7,21 +7,28 @@
     mc:Ignorable="d"
     xmlns:core="using:Microsoft.Xaml.Interactions.Core"
     xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
+    xmlns:controls="using:SoonZik.Controls"
+    xmlns:utils="using:SoonZik.Utils"
     DataContext="{StaticResource ConnexionViewModel}"
     Background="#D3D3D3">
 
+    <Page.Resources>
+        <utils:BooleanToVisibilityConverter x:Key="BoolToVisibilityConverter" True="Visible" False="Collapsed"/>
+    </Page.Resources>
+    
     <Grid x:Name="GlobalGrid">
+        
         <Grid.RowDefinitions>
             <RowDefinition Height="70"/>
             <RowDefinition Height="500"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-
+       
         <!-- Row 1 -->
         <TextBlock x:Name="TitleBlock" Text="Bienvenue" FontFamily="{StaticResource Roboto}" FontSize="50" Foreground="Black" Grid.Row="0"/>
 
         <!-- Row 2 -->
-        <Image Grid.Row="1" Source="../Resources/logo.png" Width="300" Height="150" VerticalAlignment="Top"/>
+        <Image Grid.Row="1" Source="../Resources/logo.scale-240.png" Width="300" Height="150" VerticalAlignment="Top"/>
 
         <Image Grid.Row="1" Source="../Resources/Icones/facebook.png" Width="50" Height="50" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="60,225,0,225">
             <interactivity:Interaction.Behaviors>
@@ -45,5 +52,9 @@
         <!-- Row 3 -->
         <Button Grid.Row="2" Content="Inscription" Foreground="Black" BorderThickness="0" Margin="18,7,0,6"/>
         <Button Grid.Row="2" Content="Forgot Password" Foreground="Black" BorderThickness="0" Margin="229,7,0,6"/>
+        
+        <ProgressRing Grid.Row="1" IsActive="{Binding ProgressOn, Mode=TwoWay}" Background="Black" Foreground="Aqua" Opacity="0.5" Margin="0,-98,0,-69"/>
+        <!--<controls:ProgressRingControl Grid.Row="1" isActive="{Binding ProgressOn, Mode=TwoWay}" GridVisibility="{Binding ProgressVisibility, Mode=TwoWay}"/>-->
+
     </Grid>
 </Page>

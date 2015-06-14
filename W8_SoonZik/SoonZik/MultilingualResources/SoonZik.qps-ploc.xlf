@@ -1,0 +1,104 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:oasis:names:tc:xliff:document:1.2 xliff-core-1.2-transitional.xsd">
+  <file datatype="xml" source-language="fr-FR" target-language="qps-ploc" original="SoonZik_Multilingual.prilog.xml" tool-id="MultilingualAppToolkit" product-name="SoonZik" product-version="1.0.0.0" build-num="0">
+    <header>
+      <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="3.1.1250.0" tool-company="Microsoft" />
+    </header>
+    <body>
+      <group id="Resources">
+        <trans-unit id="Resources\year_txt\Text" translate="yes" xml:space="preserve">
+          <source>Année:</source>
+          <target state="new">Année:</target>
+        </trans-unit>
+        <trans-unit id="Resources\signup_txt\Text" translate="yes" xml:space="preserve">
+          <source>Inscription</source>
+          <target state="new">Inscription</target>
+        </trans-unit>
+        <trans-unit id="Resources\shop_txt\Text" translate="yes" xml:space="preserve">
+          <source>Magasin</source>
+          <target state="new">Magasin</target>
+        </trans-unit>
+        <trans-unit id="Resources\music_txt\Text" translate="yes" xml:space="preserve">
+          <source>Musique</source>
+          <target state="new">Musique</target>
+        </trans-unit>
+        <trans-unit id="Resources\music_player_txt\Text" translate="yes" xml:space="preserve">
+          <source>Lecteur Audio</source>
+          <target state="new">Lecteur Audio</target>
+        </trans-unit>
+        <trans-unit id="Resources\news_btn\Content" translate="yes" xml:space="preserve">
+          <source>News</source>
+          <target state="new">News</target>
+        </trans-unit>
+        <trans-unit id="Resources\news_txt\Text" translate="yes" xml:space="preserve">
+          <source>Dernières news</source>
+          <target state="new">Dernières news</target>
+        </trans-unit>
+        <trans-unit id="Resources\shop_btn\Content" translate="yes" xml:space="preserve">
+          <source>Magasin</source>
+          <target state="new">Magasin</target>
+        </trans-unit>
+        <trans-unit id="Resources\new_playlist_btn\Content" translate="yes" xml:space="preserve">
+          <source>Créer</source>
+          <target state="new">Créer</target>
+        </trans-unit>
+        <trans-unit id="Resources\playlist_txt\Text" translate="yes" xml:space="preserve">
+          <source>Playlist</source>
+          <target state="new">Playlist</target>
+        </trans-unit>
+        <trans-unit id="Resources\remove_playlist_btn\Content" translate="yes" xml:space="preserve">
+          <source>Supprimer</source>
+          <target state="new">Supprimer</target>
+        </trans-unit>
+        <trans-unit id="Resources\forgot_password_txt\Text" translate="yes" xml:space="preserve">
+          <source>Récuperation du mot de passe</source>
+          <target state="new">Récuperation du mot de passe</target>
+        </trans-unit>
+        <trans-unit id="Resources\follow_btn\Content" translate="yes" xml:space="preserve">
+          <source>Follow</source>
+          <target state="new">Follow</target>
+        </trans-unit>
+        <trans-unit id="Resources\connect_btn\Content" translate="yes" xml:space="preserve">
+          <source>Connexion</source>
+          <target state="new">Connexion</target>
+        </trans-unit>
+        <trans-unit id="Resources\audio_player_btn\Content" translate="yes" xml:space="preserve">
+          <source>Lecteur Audio</source>
+          <target state="new">Lecteur Audio</target>
+        </trans-unit>
+        <trans-unit id="Resources\add_playlist_btn\Content" translate="yes" xml:space="preserve">
+          <source>Modifier</source>
+          <target state="new">Modifier</target>
+        </trans-unit>
+        <trans-unit id="Resources\album_txt\Text" translate="yes" xml:space="preserve">
+          <source>Album:</source>
+          <target state="new">Album:</target>
+        </trans-unit>
+        <trans-unit id="Resources\artist_txt\Text" translate="yes" xml:space="preserve">
+          <source>Artiste:</source>
+          <target state="new">Artiste:</target>
+        </trans-unit>
+        <trans-unit id="Resources\community_btn\Content" translate="yes" xml:space="preserve">
+          <source>Communauté</source>
+          <target state="new">Communauté</target>
+        </trans-unit>
+        <trans-unit id="Resources\battle_btn\Content" translate="yes" xml:space="preserve">
+          <source>Battle</source>
+          <target state="new">Battle</target>
+        </trans-unit>
+        <trans-unit id="Resources\community_txt\Text" translate="yes" xml:space="preserve">
+          <source>Communauté</source>
+          <target state="new">Communauté</target>
+        </trans-unit>
+        <trans-unit id="Resources\connection_txt\Text" translate="yes" xml:space="preserve">
+          <source>Connexion</source>
+          <target state="new">Connexion</target>
+        </trans-unit>
+        <trans-unit id="Resources\concert_btn\Content" translate="yes" xml:space="preserve">
+          <source>Concert</source>
+          <target state="new">Concert</target>
+        </trans-unit>
+      </group>
+    </body>
+  </file>
+</xliff>

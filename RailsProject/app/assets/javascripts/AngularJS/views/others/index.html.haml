@@ -1,33 +1,60 @@
-%div{ "ng-init" => "showInit()" }
+%div{ "ng-init" => "showIndex()" }
   %loading{ "ng-if" => "loading == true" }
-  .row{ "ng-if" => "loading == false" }
+  .row{ "ng-if" => "loading == false", "ng-init" => "initFoundation()"}
     %br
     %h3.subheader
       Last News
     .large-12.large-centered.columns
       %ul.example-orbit{"data-orbit" => ""}
         %li
-          =image_tag "satelite-orbit.jpg"
+          %img{"src" => "/assets/slider/satelite-orbit.jpg"}
           .orbit-caption
             Caption One.
         %li.active
-          =image_tag "andromeda-orbit.jpg"
+          %img{"src" => "/assets/slider/andromeda-orbit.jpg"}
           .orbit-caption
             Caption Two.
         %li
-          =image_tag "launch-orbit.jpg"
+          %img{"src" => "/assets/slider/launch-orbit.jpg"}
           .orbit-caption
             Caption Three.
     .divider
-    %h3.subheader
+    %h3.subheader.left
       Packs du moment
-    .ul.large-block-grid-4
-      %li{ "ng-repeat" => "pack in packs" }
+    %h3.subheader.right
+      %a{:href => "http://lvh.me:3000/packs/"} Voir tout
+    .ul.large-block-grid-4{"ng-show" => "showPack"}
+      %li{ "ng-repeat" => "pack in packs track by $index"}
         .panel
           %h5.subheader.text-center
             {{ pack.title }}
-          =image_tag "pack1.jpg"
+          %img{"src" => "/assets/pack1.jpg"}
           .divider
           Temps Restant:
           %br
           Moyenne : 
+    .divider
+    %h3.subheader.left
+      Battle en Cours
+    %h3.subheader.right
+      %a{:href => "http://lvh.me:3000/battle"} Voir Tout
+    .large-block-grid-4{"ng-show" => "showBattle"}
+      %hr
+      .medium-4.columns
+        %p
+          {{ battle.artist_one.username }}
+        %img{"ng-src" => "{{ '/assets/usersImage/avatars/' + battle.artist_one.image}}" }
+        %p{ "ng-if" => "currentUser != false" }
+          %span{ "ng-click" => "voteFor(battle, battle.artist_one)", "class" => "label radius {{ voteClass(index.voteCurrentUser[battle.id], battle.artist_one.id) }}" } 
+            {{ voteText(index.voteCurrentUser[battle.id], battle.artist_one.id) }}
+      .medium-4.columns
+        %battle{ style: "height:175px;display: block", "battle-values" => "index.votes[battle.id]" }
+        %a.button.radius{ href: "/battles/{{ battle.id }}" }
+          Page of the battle
+      .medium-4.columns.end
+        %p
+          {{ battle.artist_two.username }}
+        %img{ "ng-src" => "{{ '/assets/usersImage/avatars/' + battle.artist_two.image}}" }
+        %p{ "ng-if" => "currentUser != false" }
+          %span{ "ng-click" => "voteFor(battle, battle.artist_two)", "class" => "label radius {{ voteClass(index.voteCurrentUser[battle.id], battle.artist_two.id) }}" }
+            {{ voteText(index.voteCurrentUser[battle.id], battle.artist_two.id) }}

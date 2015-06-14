@@ -95,8 +95,14 @@
     <Compile Include="Controls\NewsControl.xaml.cs">
       <DependentUpon>NewsControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\NewsSharePopup.xaml.cs">
+      <DependentUpon>NewsSharePopup.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\PivotControl.xaml.cs">
       <DependentUpon>PivotControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ProgressRingControl.xaml.cs">
+      <DependentUpon>ProgressRingControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
@@ -104,7 +110,7 @@
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utils\AlphaKeyGroups.cs" />
-    <Compile Include="Utils\BoolToVisibilityConverter.cs" />
+    <Compile Include="Utils\BooleanToVisibilityConverter.cs" />
     <Compile Include="Utils\INavigationService.cs" />
     <Compile Include="Utils\NavigationService.cs" />
     <Compile Include="Utils\Singleton.cs" />
@@ -247,7 +253,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Controls\NewsSharePopup.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\PivotControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\ProgressRingControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

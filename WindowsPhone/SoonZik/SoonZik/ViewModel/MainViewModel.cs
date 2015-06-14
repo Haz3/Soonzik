@@ -1,18 +1,12 @@
 using System;
-using System.Diagnostics;
-using System.Net;
-using System.Threading.Tasks;
+using Windows.Storage;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Media.Animation;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using SoonZik.HttpRequest.Poco;
 using SoonZik.Utils;
 using SoonZik.Views;
-using NavigationService = SoonZik.Utils.NavigationService;
 
 namespace SoonZik.ViewModel
 {
@@ -32,7 +26,69 @@ namespace SoonZik.ViewModel
     {
         #region Attribute
 
-        readonly Windows.Storage.ApplicationDataContainer _localSettings = Windows.Storage.ApplicationData.Current.LocalSettings;
+        #region Attribute Command
+        //private RelayCommand _connexionCommand;
+        //public RelayCommand ConnexionCommand
+        //{
+        //    get { return _connexionCommand; }
+        //}
+
+        //private RelayCommand _profilCommand;
+        //public RelayCommand ProfilCommand
+        //{
+        //    get { return _profilCommand; }
+        //}
+
+        //private RelayCommand _newsCommand;
+        //public RelayCommand NewsCommand
+        //{
+        //    get { return _newsCommand; }
+        //}
+
+        //private RelayCommand _explorerCommand;
+        //public RelayCommand ExplorerCommand
+        //{
+        //    get { return _explorerCommand; }
+        //}
+        
+        //private RelayCommand _packsCommand;
+        //public RelayCommand PacksCommand
+        //{
+        //    get { return _packsCommand; }
+        //}
+
+        //private RelayCommand _mondemusicalCommand;
+        //public RelayCommand MondeMusicalCommand
+        //{
+        //    get { return _mondemusicalCommand; }
+        //}
+
+        //private RelayCommand _battleCommand;
+        //public RelayCommand BattleCommand
+        //{
+        //    get { return _battleCommand; }
+        //}
+
+        //private RelayCommand _playlistCommand;
+        //public RelayCommand PlaylistCommand
+        //{
+        //    get { return _playlistCommand; }
+        //}
+
+        //private RelayCommand _amisCommand;
+        //public RelayCommand AmisCommand
+        //{
+        //    get { return _amisCommand; }
+        //}
+
+        //private RelayCommand _achatCommand;
+        //public RelayCommand AchatCommand
+        //{
+        //    get { return _achatCommand; }
+        //}
+        #endregion
+
+        readonly ApplicationDataContainer _localSettings = ApplicationData.Current.LocalSettings;
         
         private string _connexionString;
         public string ConnexionString
@@ -45,68 +101,8 @@ namespace SoonZik.ViewModel
             }
         }
 
-        private RelayCommand _connexionCommand;
-        public RelayCommand ConnexionCommand
-        {
-            get { return _connexionCommand; }
-        }
-
-        private RelayCommand _profilCommand;
-        public RelayCommand ProfilCommand
-        {
-            get { return _profilCommand; }
-        }
-
-        private RelayCommand _newsCommand;
-        public RelayCommand NewsCommand
-        {
-            get { return _newsCommand; }
-        }
-
-        private RelayCommand _explorerCommand;
-        public RelayCommand ExplorerCommand
-        {
-            get { return _explorerCommand; }
-        }
-        
-        private RelayCommand _packsCommand;
-        public RelayCommand PacksCommand
-        {
-            get { return _packsCommand; }
-        }
-
-        private RelayCommand _mondemusicalCommand;
-        public RelayCommand MondeMusicalCommand
-        {
-            get { return _mondemusicalCommand; }
-        }
-
-        private RelayCommand _battleCommand;
-        public RelayCommand BattleCommand
-        {
-            get { return _battleCommand; }
-        }
-
-        private RelayCommand _playlistCommand;
-        public RelayCommand PlaylistCommand
-        {
-            get { return _playlistCommand; }
-        }
-
-        private RelayCommand _amisCommand;
-        public RelayCommand AmisCommand
-        {
-            get { return _amisCommand; }
-        }
-
-        private RelayCommand _achatCommand;
-        public RelayCommand AchatCommand
-        {
-            get { return _achatCommand; }
-        }
-        
-        private Pivot _myPivot;
-        public RelayCommand<Pivot> GetPivotExecute { get; set; }
+        private Grid _myGlobalGrid;
+        public RelayCommand<Grid> GetGridExecute { get; set; }
 
         private Storyboard _story;
         public RelayCommand<Storyboard> GetStoryBoardExecute { get; set; }
@@ -128,6 +124,18 @@ namespace SoonZik.ViewModel
             }
         }
 
+        private Boolean _connexionVisibility;
+
+        public Boolean ConnexionVisibility
+        {
+            get { return _connexionVisibility; }
+            set
+            {
+                _connexionVisibility = value;
+                RaisePropertyChanged("ConnexionVisibility");
+            }
+        }
+
         #endregion
 
         /// <summary>
@@ -137,18 +145,9 @@ namespace SoonZik.ViewModel
         #region Ctor
         public MainViewModel()
         {
-            Debug.WriteLine("----------------------" + (string)_localSettings.Values["SoonZikAlreadyConnect"]);
-
-            _connexionString = "Connexion";
-
-            this._navigationService = new NavigationService();
-
-            InitCommand();
-            if (_localSettings != null && (string)_localSettings.Values["SoonZikAlreadyConnect"] == "yes")
-            {
-                Task task = Task.Run(async () => await DirectConnect());
-                task.Wait();
-            }
+            //_connexionString = "Connexion";
+            //this._navigationService = new NavigationService();
+            //InitCommand();
         }
         
         #endregion
@@ -157,44 +156,19 @@ namespace SoonZik.ViewModel
 
         private void InitCommand()
         {
-            GetPivotExecute = new RelayCommand<Pivot>(GetPivot);
-            GetStoryBoardExecute = new RelayCommand<Storyboard>(GetStory);
-            GetToggleButton = new RelayCommand<ToggleButton>(GetToggle);
-            _profilCommand = new RelayCommand(GoToProfil);
-            _newsCommand = new RelayCommand(GoToNews);
-            _explorerCommand = new RelayCommand(GoToExplorer);
-            _packsCommand = new RelayCommand(GoToPacks);
-            _mondemusicalCommand = new RelayCommand(GoToMondeMusical);
-            _battleCommand = new RelayCommand(GoToBattle);
-            _playlistCommand = new RelayCommand(GoToPlaylist);
-            _amisCommand = new RelayCommand(GoToAmis);
-            _achatCommand = new RelayCommand(GoToAchat);
-            _connexionCommand = new RelayCommand(GoToConnexionPage);
-        }
-
-        private async Task<User> DirectConnect()
-        {
-            var connec = new HttpRequest.Connexion();
-            var request = (HttpWebRequest)WebRequest.Create("http://soonzikapi.herokuapp.com/login");
-            var postData = "email=" + _localSettings.Values["SoonZikUserName"] + "&password=" + _localSettings.Values["SoonZikPassWord"];
-
-            await connec.GetHttpPostResponse(request, postData);
-            var res = connec.received;
-            if (res != null)
-            {
-                try
-                {
-                    var stringJson = JObject.Parse(res).SelectToken("content").ToString();
-                    var resultat = JsonConvert.DeserializeObject(stringJson, typeof(User)) as User;
-                    Singleton.Instance().CurrentUser = resultat;
-                    return resultat;
-                }
-                catch (Exception e)
-                {
-                }
-                //ServiceLocator.Current.GetInstance<FriendViewModel>().Sources = Singleton.Instance().CurrentUser.Friends;
-            }
-            return null;
+            //GetGridExecute = new RelayCommand<Grid>(GetGrid);
+            //GetStoryBoardExecute = new RelayCommand<Storyboard>(GetStory);
+            //GetToggleButton = new RelayCommand<ToggleButton>(GetToggle);
+            //_profilCommand = new RelayCommand(GoToProfil);
+            //_newsCommand = new RelayCommand(GoToNews);
+            //_explorerCommand = new RelayCommand(GoToExplorer);
+            //_packsCommand = new RelayCommand(GoToPacks);
+            //_mondemusicalCommand = new RelayCommand(GoToMondeMusical);
+            //_battleCommand = new RelayCommand(GoToBattle);
+            //_playlistCommand = new RelayCommand(GoToPlaylist);
+            //_amisCommand = new RelayCommand(GoToAmis);
+            //_achatCommand = new RelayCommand(GoToAchat);
+            //_connexionCommand = new RelayCommand(GoToConnexionPage);
         }
 
         public void CloseMenu()
@@ -215,64 +189,58 @@ namespace SoonZik.ViewModel
                 _story = obj;
         }
 
-        private void GetPivot(Pivot obj)
+        private void GetGrid(Grid obj)
         {
             if (obj != null)
-                _myPivot = obj;
+                _myGlobalGrid = obj;
         }
 
         private void GoToProfil()
         {
-            _navigationService.Navigate(typeof(ProfilUser));
+            _myGlobalGrid.Children.Clear();
+            _myGlobalGrid.Children.Add(new ProfilUser());
             CloseMenu();
         }
 
         private void GoToNews()
         {
-            _myPivot.SelectedIndex = 0;
+            _myGlobalGrid.Children.Clear();
+            _myGlobalGrid.Children.Add(Singleton.Instance().NewsPage);
             CloseMenu();
         }
 
         private void GoToExplorer()
         {
-            _myPivot.SelectedIndex = 1;
             CloseMenu();
         }
 
         private void GoToPacks()
         {
-            _myPivot.SelectedIndex = 2;
             CloseMenu();
         }
 
         private void GoToMondeMusical()
         {
-            _myPivot.SelectedIndex = 3;
             CloseMenu();
         }
 
         private void GoToBattle()
         {
-            _myPivot.SelectedIndex = 4;
             CloseMenu();
         }
 
         private void GoToPlaylist()
         {
-            _myPivot.SelectedIndex = 5;
             CloseMenu();
         }
 
         private void GoToAmis()
         {
-            //_navigationService.Navigate(typeof(Friends));
-            _myPivot.SelectedIndex = 6;
             CloseMenu();
         }
 
         private void GoToAchat()
         {
-            _myPivot.SelectedIndex = 7;
             CloseMenu();
         }
 

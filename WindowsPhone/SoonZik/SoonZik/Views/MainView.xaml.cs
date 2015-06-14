@@ -20,16 +20,16 @@ namespace SoonZik.Views
 
         private void OnLoaded(object sender, RoutedEventArgs routedEventArgs)
         {
-            this.PivotGlobal.Loaded += delegate(object o, RoutedEventArgs args)
-            {
-                var vm = DataContext as MainViewModel;
-                if (vm != null)
-                {
-                    vm.GetPivotExecute.Execute(this.PivotGlobal);
-                    vm.GetStoryBoardExecute.Execute(this.MenuStoryBoardBack);
-                    vm.GetToggleButton.Execute(this.ToggleButtonMenu);
-                }
-            };
+            //this.PivotGlobal.Loaded += delegate(object o, RoutedEventArgs args)
+            //{
+            //    var vm = DataContext as MainViewModel;
+            //    if (vm != null)
+            //    {
+            //        vm.GetGridExecute.Execute(this.PivotGlobal);
+            //        vm.GetStoryBoardExecute.Execute(this.MenuStoryBoardBack);
+            //        vm.GetToggleButton.Execute(this.ToggleButtonMenu);
+            //    }
+            //};
         }
 
         /// <summary>
@@ -43,14 +43,14 @@ namespace SoonZik.Views
 
         private void MenuAloneClose_OnCompleted(object sender, object e)
         {
-            ToggleButtonMenu.IsChecked = false;
-            MenuStoryBoardBack.Pause();
+            //ToggleButtonMenu.IsChecked = false;
+            //MenuStoryBoardBack.Pause();
         }
 
         private void SearchAloneBack_OnCompleted(object sender, object e)
         {
-            ToggleButtonSearch.IsChecked = false;
-            SearchStoryBoardBack.Pause();
+            //ToggleButtonSearch.IsChecked = false;
+            //SearchStoryBoardBack.Pause();
         }
     }
 }

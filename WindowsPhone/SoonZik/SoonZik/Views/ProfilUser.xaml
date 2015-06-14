@@ -10,31 +10,59 @@
     mc:Ignorable="d"
     Background="#424242"
     DataContext="{StaticResource ProfilUserViewModel}">
+            
+    <interactivity:Interaction.Behaviors>
+            <core:EventTriggerBehavior EventName="Loaded">
+                <core:InvokeCommandAction Command="{Binding SelectionCommand}"/>
+            </core:EventTriggerBehavior>
+    </interactivity:Interaction.Behaviors>
     
     <Page.Resources>
         <DataTemplate x:Key="UserTemplate">
-            <StackPanel Margin="0,0,0,30">
-                <TextBlock Text="{Binding Path=Username}" Style="{StaticResource TitleTextBlockStyle}"/>
+            <StackPanel Margin="0,0,0,10">
+                <TextBlock Text="{Binding Path=Username}" Foreground="White" FontSize="15"/>
             </StackPanel>
         </DataTemplate>
+
+
     </Page.Resources>
     
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="200"/>
-            <RowDefinition Height="300"/>
+            <RowDefinition Height="100"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="40"/>
         </Grid.RowDefinitions>
         
         <!-- Grid 0 -->
-        <Image x:Name="UserImage" Grid.Row="0" Height="150" Width="150" HorizontalAlignment="Left" Margin="20,0,0,0" Source="{Binding CurrentUser.Image}"/>
-        <TextBlock x:Name="FirstNameUser" Grid.Row="0" Height="50" Foreground="Turquoise" 
-                   HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0, 20, 20, 0"
+        <Image x:Name="UserImage" Grid.Row="0" Height="100" Width="100" HorizontalAlignment="Left" Margin="20,0,0,0" Source="{Binding CurrentUser.Image}"/>
+        <TextBlock x:Name="FirstNameUser" Grid.Row="0" Height="50" Foreground="White" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0, 20, 20, 0"
                    Text="{Binding CurrentUser.Username}" FontSize="23"/>
 
         <!-- Grid 1 -->
-        <ListBox Grid.Row="1" x:Name="FollowListBox" ItemsSource="{Binding CurrentUser.Follows}" ItemTemplate="{StaticResource UserTemplate}" SelectedItem="{Binding SelectUser, Mode=TwoWay}" >
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="40"/>
+            </Grid.RowDefinitions>
+            <TextBox Grid.Row="0" IsEnabled="{Binding CanUpdate}" Text="{Binding CurrentUser.Email, Mode=TwoWay}" Background="Transparent" Foreground="Red" BorderThickness="0,0,0,1" Margin="0,0,0,10"/>
+            <TextBox Grid.Row="1" IsEnabled="{Binding CanUpdate}" Text="{Binding CurrentUser.Description, Mode=TwoWay}" Background="Transparent" Foreground="Red" BorderThickness="0,0,0,1" Margin="0,0,0,10"/>
+            <TextBox Grid.Row="2" IsEnabled="{Binding CanUpdate}" Text="{Binding CurrentUser.Address.NumberStreet, Mode=TwoWay}" Background="Transparent" Foreground="Red" BorderThickness="0,0,0,1" Margin="0,0,0,10"/>
+            <TextBox Grid.Row="3" IsEnabled="{Binding CanUpdate}" Text="{Binding CurrentUser.Address.Street, Mode=TwoWay}" Background="Transparent" Foreground="Red" BorderThickness="0,0,0,1" Margin="0,0,0,10"/>
+            <TextBox Grid.Row="4" IsEnabled="{Binding CanUpdate}" Text="{Binding CurrentUser.Address.Zipcode, Mode=TwoWay}" Background="Transparent" Foreground="Red" BorderThickness="0,0,0,1" Margin="0,0,0,10"/>
+            <TextBox Grid.Row="5" IsEnabled="{Binding CanUpdate}" Text="{Binding CurrentUser.Address.Country, Mode=TwoWay}" Background="Transparent" Foreground="Red" BorderThickness="0,0,0,1" Margin="0,0,0,10"/>
+        </Grid>
+
+
+        <!-- Grid 2 -->        
+        <ListBox Grid.Row="2" Background="Transparent" x:Name="FollowListBox" ItemsSource="{Binding CurrentUser.Follows}" ItemTemplate="{StaticResource UserTemplate}" SelectedItem="{Binding SelectUser, Mode=TwoWay}" >
             <interactivity:Interaction.Behaviors>
                 <core:EventTriggerBehavior EventName="SelectionChanged">
                     <core:InvokeCommandAction Command="{Binding SelectionCommand}"/>
@@ -43,6 +71,13 @@
         </ListBox>
 
 
-        <!-- Grid 2 -->
+        <!-- Grid 3 -->
+        <Button Content="{Binding ButtonContent}" Grid.Row="3" HorizontalAlignment="Center" BorderThickness="0,0,0,0">
+            <interactivity:Interaction.Behaviors>
+                <core:EventTriggerBehavior EventName="Click">
+                    <core:InvokeCommandAction Command="{Binding EditClickCommand}"/>
+                </core:EventTriggerBehavior>
+            </interactivity:Interaction.Behaviors>
+        </Button>
     </Grid>
 </Page>

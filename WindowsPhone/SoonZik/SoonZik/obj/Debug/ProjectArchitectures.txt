@@ -1,3 +1,3 @@
-C:\Users\Géry\documents\visual studio 2013\Projects\SoonZik\LightStone\LightStone.csproj;neutral
-C:\Users\Géry\documents\visual studio 2013\Projects\SoonZik\SoonZik.HttpRequest\SoonZik.HttpRequest.csproj;neutral
-C:\Users\Géry\documents\visual studio 2013\Projects\SoonZik\SoonZik\SoonZik.csproj;neutral
+C:\Users\Juan-Pablo Bastardos\Documents\GitHub\SoonZik\Soonzik\WindowsPhone\SoonZik\LightStone\LightStone.csproj;neutral
+C:\Users\Juan-Pablo Bastardos\Documents\GitHub\SoonZik\Soonzik\WindowsPhone\SoonZik\SoonZik.HttpRequest\SoonZik.HttpRequest.csproj;neutral
+C:\Users\Juan-Pablo Bastardos\Documents\GitHub\SoonZik\Soonzik\WindowsPhone\SoonZik\SoonZik\SoonZik.csproj;neutral
