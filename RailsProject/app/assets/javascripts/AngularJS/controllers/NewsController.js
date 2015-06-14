@@ -1,4 +1,4 @@
-SoonzikApp.controller('NewsCtrl', ['$scope', 'SecureAuth', 'HTTPService', function ($scope, SecureAuth, HTTPService) {
+SoonzikApp.controller('NewsCtrl', ['$scope', '$routeParams', 'SecureAuth', 'HTTPService', function ($scope, $routeParams, SecureAuth, HTTPService) {
 
 	$scope.loading = true;
 
@@ -11,7 +11,7 @@ SoonzikApp.controller('NewsCtrl', ['$scope', 'SecureAuth', 'HTTPService', functi
 			{ key: "order_by_desc[]", value: "date" }
 		];
 
-		$scope.showNews = true;
+		$scope.News = true;
 
 		HTTPService.findNews(parameters).then(function(news) {
 			
