@@ -27,4 +27,20 @@
 		font-style: italic;
 		font-size: 12px;
 	}
+
+	.vignette {
+		display: block;
+		width: 50%;
+		height: 50%;
+		margin: 15px auto; 
+	}
+
+	.content {
+		display: inline-block;
+	}
+
+	li {
+		list-style-type: none;
+	}
+
 }

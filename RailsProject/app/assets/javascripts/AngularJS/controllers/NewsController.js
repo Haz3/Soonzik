@@ -8,7 +8,7 @@ SoonzikApp.controller('NewsCtrl', ['$scope', '$routeParams', 'SecureAuth', 'HTTP
 
 	$scope.showNews = function() {
 		var parameters = [
-			{ key: "order_by_desc[]", value: "date" }
+			{ key: "order_by_asc[]", value: "date" }
 		];
 
 		$scope.News = true;
@@ -17,6 +17,7 @@ SoonzikApp.controller('NewsCtrl', ['$scope', '$routeParams', 'SecureAuth', 'HTTP
 			
 			$scope.news = news.data.content;
 			console.log($scope.news);
+
 
 		}, function (error) {
 			console.log("No News Available");
