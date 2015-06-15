@@ -1,15 +1,24 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
+using Windows.Foundation.Collections;
 using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Command;
+using SoonZik.Controls;
 using SoonZik.HttpRequest;
 using SoonZik.HttpRequest.Poco;
+using SoonZik.Utils;
+using SoonZik.Views;
+using Genre = SoonZik.HttpRequest.Poco.Genre;
 
 namespace SoonZik.ViewModel
 {
     public class ExplorerViewModel : ViewModelBase
     {
         #region Attribute
+
+        public INavigationService Navigation;
+
         private ObservableCollection<Genre> _listGenres;
         public ObservableCollection<Genre> ListGenres
         {
@@ -43,15 +52,21 @@ namespace SoonZik.ViewModel
             }
         }
 
+        public Music SelectedMusic { get; set; }
+        public static Music PlayerSelectedMusic { get; set; }
+        public RelayCommand MusiCommand { get; set; } 
         #endregion
 
         #region Ctor
 
         public ExplorerViewModel()
         {
+            Navigation = new NavigationService();
             var task = Task.Run(async () => await LoadContent());
             task.Wait();
+            MusiCommand = new RelayCommand(MusiCommandExecute);
         }
+
         #endregion
 
         #region Method
@@ -78,6 +93,13 @@ namespace SoonZik.ViewModel
 
             foreach (var item in listMusic)
                 _listMusique.Add(item);
+        }
+
+
+        private void MusiCommandExecute()
+        {
+            Singleton.Instance().SelectedMusicSingleton = SelectedMusic;
+            Navigation.Navigate(new PlayerControl().GetType());
         }
         #endregion
     }

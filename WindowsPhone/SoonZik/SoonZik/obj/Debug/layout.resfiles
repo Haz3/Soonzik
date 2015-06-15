@@ -12,6 +12,7 @@ Controls\GlobalMenuControl.xbf
 Controls\NewsControl.xbf
 Controls\NewsSharePopup.xbf
 Controls\PivotControl.xbf
+Controls\PlayerControl.xbf
 Controls\ProgressRingControl.xbf
 MainPage.xbf
 SoonZik.xr.xml
@@ -24,8 +25,8 @@ Views\Friends.xbf
 Views\Geoloc.xbf
 Views\MainView.xbf
 Views\News.xbf
+Views\NewsDetail.xbf
 Views\Packs.xbf
-Views\Player.xbf
 Views\Playlist.xbf
 Views\ProfilArtiste.xbf
 Views\ProfilUser.xbf
@@ -67,6 +68,7 @@ Resources\Icones\shuffle-0_icon.png
 Resources\Icones\twitter.png
 Resources\iphone5_background.jpg
 Resources\logo.scale-240.png
+Resources\MusicTest.mp3
 Resources\pic01.jpg
 Resources\pic02.jpg
 Resources\pic03.jpg

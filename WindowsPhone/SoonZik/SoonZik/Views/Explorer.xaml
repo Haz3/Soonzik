@@ -17,7 +17,7 @@
         </DataTemplate>
 
         <DataTemplate x:Key="MusicTemplate">
-            <Grid Width="350">
+            <Grid Width="350" Tapped="UIElement_OnTapped">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="80"/>
                     <ColumnDefinition Width="*"/>
@@ -50,7 +50,7 @@
             </PivotItem>
 
             <PivotItem Header="Musiques">
-                <ListBox Background="Transparent" x:Name="ListBoxMusics" ItemsSource="{Binding ListMusique}" ItemTemplate="{StaticResource MusicTemplate}">
+                <ListBox Background="Transparent" x:Name="ListBoxMusics" ItemsSource="{Binding ListMusique}" ItemTemplate="{StaticResource MusicTemplate}" SelectedItem="{Binding SelectedMusic, Mode=TwoWay}">
 
                 </ListBox>
 

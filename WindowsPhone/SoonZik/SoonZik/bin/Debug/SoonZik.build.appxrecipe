@@ -58,6 +58,9 @@
     <AppxPackagedFile Include="C:\Users\Juan-Pablo Bastardos\Documents\GitHub\SoonZik\Soonzik\WindowsPhone\SoonZik\SoonZik.HttpRequest\bin\Debug\SoonZik.HttpRequest.dll">
       <PackagePath>SoonZik.HttpRequest.dll</PackagePath>
     </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Juan-Pablo Bastardos\Documents\GitHub\SoonZik\Soonzik\WindowsPhone\SoonZik\packages\WriteableBitmapEx.1.5.0.0\lib\wpa81\WriteableBitmapEx.WinRT.dll">
+      <PackagePath>WriteableBitmapEx.WinRT.dll</PackagePath>
+    </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Juan-Pablo Bastardos\Documents\GitHub\SoonZik\Soonzik\WindowsPhone\SoonZik\SoonZik\Assets\Logo.scale-240.png">
       <PackagePath>Assets\Logo.scale-240.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
@@ -217,6 +220,9 @@
     <AppxPackagedFile Include="C:\Users\Juan-Pablo Bastardos\Documents\GitHub\SoonZik\Soonzik\WindowsPhone\SoonZik\SoonZik\Resources\stromae.jpg">
       <PackagePath>Resources\stromae.jpg</PackagePath>
     </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Juan-Pablo Bastardos\Documents\GitHub\SoonZik\Soonzik\WindowsPhone\SoonZik\SoonZik\Resources\MusicTest.mp3">
+      <PackagePath>Resources\MusicTest.mp3</PackagePath>
+    </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Juan-Pablo Bastardos\Documents\GitHub\SoonZik\Soonzik\WindowsPhone\SoonZik\SoonZik\Assets\Fonts\RobotoCondensed-Regular.ttf">
       <PackagePath>Assets\Fonts\RobotoCondensed-Regular.ttf</PackagePath>
     </AppxPackagedFile>
@@ -240,6 +246,9 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Juan-Pablo Bastardos\Documents\GitHub\SoonZik\Soonzik\WindowsPhone\SoonZik\SoonZik\bin\Debug\Controls\PivotControl.xbf">
       <PackagePath>Controls\PivotControl.xbf</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Juan-Pablo Bastardos\Documents\GitHub\SoonZik\Soonzik\WindowsPhone\SoonZik\SoonZik\bin\Debug\Controls\PlayerControl.xbf">
+      <PackagePath>Controls\PlayerControl.xbf</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Juan-Pablo Bastardos\Documents\GitHub\SoonZik\Soonzik\WindowsPhone\SoonZik\SoonZik\bin\Debug\Controls\ProgressRingControl.xbf">
       <PackagePath>Controls\ProgressRingControl.xbf</PackagePath>
@@ -274,11 +283,11 @@
     <AppxPackagedFile Include="C:\Users\Juan-Pablo Bastardos\Documents\GitHub\SoonZik\Soonzik\WindowsPhone\SoonZik\SoonZik\bin\Debug\Views\News.xbf">
       <PackagePath>Views\News.xbf</PackagePath>
     </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Juan-Pablo Bastardos\Documents\GitHub\SoonZik\Soonzik\WindowsPhone\SoonZik\SoonZik\bin\Debug\Views\NewsDetail.xbf">
+      <PackagePath>Views\NewsDetail.xbf</PackagePath>
+    </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Juan-Pablo Bastardos\Documents\GitHub\SoonZik\Soonzik\WindowsPhone\SoonZik\SoonZik\bin\Debug\Views\Packs.xbf">
       <PackagePath>Views\Packs.xbf</PackagePath>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\Juan-Pablo Bastardos\Documents\GitHub\SoonZik\Soonzik\WindowsPhone\SoonZik\SoonZik\bin\Debug\Views\Player.xbf">
-      <PackagePath>Views\Player.xbf</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Juan-Pablo Bastardos\Documents\GitHub\SoonZik\Soonzik\WindowsPhone\SoonZik\SoonZik\bin\Debug\Views\Playlist.xbf">
       <PackagePath>Views\Playlist.xbf</PackagePath>
