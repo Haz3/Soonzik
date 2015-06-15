@@ -1,8 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Linq;
 using System.Threading.Tasks;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -15,7 +15,6 @@ using SoonZik.Utils;
 using SoonZik.Views;
 using Battle = SoonZik.Views.Battle;
 using Connexion = SoonZik.Views.Connexion;
-using News = SoonZik.HttpRequest.Poco.News;
 
 // Pour en savoir plus sur le modèle d'élément Contrôle utilisateur, consultez la page http://go.microsoft.com/fwlink/?LinkId=234236
 
@@ -25,16 +24,7 @@ namespace SoonZik.Controls
     {
         #region Attribute
 
-        public static readonly DependencyProperty ResultProperty = DependencyProperty.Register(
-            "Result", typeof (SearchResult), typeof (GlobalMenuControl), new PropertyMetadata(default(SearchResult)));
-
-        public SearchResult Result
-        {
-            get { return (SearchResult) GetValue(ResultProperty); }
-            set { SetValue(ResultProperty, value); }
-        }
-
-        public static Grid myGrid { get; set; }
+        public static Grid MyGrid { get; set; }
 
         private SearchResult _myResult;
 
@@ -54,6 +44,67 @@ namespace SoonZik.Controls
         public string SearchText { get; set; }
         private readonly INavigationService _navigationService;
 
+        private User _selectedUser;
+
+        public User SelectedUser
+        {
+            get
+            {
+                return _selectedUser;
+            }
+            set
+            {
+                _selectedUser = value;
+                RaisePropertyChange("SelectedUser");
+            }
+        }
+
+        private Music _selectedMusic;
+
+        public Music SelectedMusic
+        {
+            get
+            {
+                return _selectedMusic;
+            }
+            set
+            {
+                _selectedMusic = value;
+                RaisePropertyChange("SelectedMusic");
+            }
+        }
+
+        private Album _selectedAlbum;
+
+        public Album SelectedAlbum
+        {
+            get
+            {
+                return _selectedAlbum;
+            }
+            set
+            {
+                _selectedAlbum = value;
+                RaisePropertyChange("SelectedAlbum");
+            }
+        }
+
+        private Pack _selectedPack;
+
+        public Pack SelectedPack
+        {
+            get
+            {
+                return _selectedPack;
+            }
+            set
+            {
+                _selectedPack = value;
+                RaisePropertyChange("SelectedPack");
+            }
+        }
+
+
         #endregion
 
         #region Ctor
@@ -61,7 +112,7 @@ namespace SoonZik.Controls
         {
             this.InitializeComponent();
             this.DataContext = this;
-            myGrid = GlobalGrid;
+            MyGrid = GlobalGrid;
             GlobalGrid.Children.Add(Singleton.Instance().NewsPage);
             
             this._navigationService = new NavigationService();
@@ -145,14 +196,15 @@ namespace SoonZik.Controls
 
         private void SetChildren(UIElement myObj)
         {
-            myGrid.Children.Clear();
-            myGrid.Children.Add(myObj);
+            Singleton.Instance().LastElement = MyGrid.Children.First();
+            MyGrid.Children.Clear();
+            MyGrid.Children.Add(myObj);
             CloseMenu();
         }
 
         private void GoToAchat()
         {
-            myGrid.Children.Clear();
+            MyGrid.Children.Clear();
             CloseMenu();
         }
 
@@ -167,8 +219,6 @@ namespace SoonZik.Controls
         private void SearchTextBlock_OnTextChanged(object sender, TextChangedEventArgs e)
         {
             SearchText = SearchTextBlock.Text;
-            //var task = Task.Run(async () => await MakeTheSearch());
-            //task.Wait();
             if (SearchText != String.Empty)
                 MakeTheSearch();
             else
@@ -221,5 +271,23 @@ namespace SoonZik.Controls
             if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
         }
         #endregion
+
+        private void UsersStackPanel_OnTapped(object sender, TappedRoutedEventArgs e)
+        {
+            Singleton.Instance().NewProfilUser = SelectedUser.Id;
+            Singleton.Instance().ItsMe = false;
+            var task = Task.Run(async () => await Singleton.Instance().Charge());
+            task.Wait();
+            MyGrid.Children.Clear();
+            MyGrid.Children.Add(new ProfilUser());
+            CloseMenu();
+        }
+
+        private void MusicStackPanel_OnTapped(object sender, TappedRoutedEventArgs e)
+        {
+            Singleton.Instance().SelectedMusicSingleton = SelectedMusic;
+            _navigationService.Navigate(new PlayerControl().GetType());
+            CloseMenu();
+        }
     }
 }

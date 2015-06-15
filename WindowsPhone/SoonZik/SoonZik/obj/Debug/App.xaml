@@ -7,14 +7,14 @@
     <Application.Resources>
         
         <vm:ViewModelLocator x:Key="Locator"/>
-    <vm:MainPageViewModel x:Key="MainPageViewModel" />
-    <vm:ConnexionViewModel x:Key="ConnexionViewModel" />
-    <vm:MainViewModel x:Key="MainViewModel" />
-    <vm:PlayerViewModel x:Key="PlayerViewModel"/>
-    <vm:NewsViewModel x:Key="NewsViewModel"/>
-    <vm:ExplorerViewModel x:Key="ExplorerViewModel"/>
-    <vm:ProfilUserViewModel x:Key="ProfilUserViewModel"/>
-    <vm:FriendViewModel x:Key="FriendViewModel"/>
+        <vm:MainPageViewModel x:Key="MainPageViewModel" />
+        <vm:ConnexionViewModel x:Key="ConnexionViewModel" />
+        <vm:MainViewModel x:Key="MainViewModel" />
+        <vm:NewsViewModel x:Key="NewsViewModel"/>
+        <vm:ExplorerViewModel x:Key="ExplorerViewModel"/>
+        <vm:ProfilUserViewModel x:Key="ProfilUserViewModel"/>
+        <vm:NewsDetailViewModel x:Key="NewsDetailViewModel"/>
+        <vm:FriendViewModel x:Key="FriendViewModel"/>
       
     <DataTemplate x:Key="SizePivotHeader">
       <ContentPresenter>
@@ -96,8 +96,52 @@
           </ControlTemplate>
         </Setter.Value>
       </Setter>
-    </Style>
-    <Style x:Key="NewsButtonStyle" TargetType="Button">
+        </Style>
+        <Style x:Key="PlayButtonStyle" TargetType="ToggleButton">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ToggleButton">
+                        <Grid MaxHeight="40" MaxWidth="40" MinHeight="40" MinWidth="40" >
+                            <Image Source="ms-appx:///Resources/Icones/play.png" />
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="PauseButtonStyle" TargetType="ToggleButton">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ToggleButton">
+                        <Grid MaxHeight="40" MaxWidth="40" MinHeight="40" MinWidth="40" >
+                            <Image Source="ms-appx:///Resources/Icones/pause.png" />
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="ShuffleButtonStyle" TargetType="ToggleButton">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ToggleButton">
+                        <Grid MaxHeight="40" MaxWidth="40" MinHeight="40" MinWidth="40" >
+                            <Image Source="ms-appx:///Resources/Icones/shuffle.png" />
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="RepeatButtonStyle" TargetType="ToggleButton">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ToggleButton">
+                        <Grid MaxHeight="40" MaxWidth="40" MinHeight="40" MinWidth="40" >
+                            <Image Source="ms-appx:///Resources/Icones/repeat.png" />
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="NewsButtonStyle" TargetType="Button">
       <Setter Property="Template">
         <Setter.Value>
           <ControlTemplate TargetType="Button">

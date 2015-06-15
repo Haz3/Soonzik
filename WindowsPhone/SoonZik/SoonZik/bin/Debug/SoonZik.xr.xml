@@ -8,16 +8,24 @@
     <RootPropertyPathName Name="title" />
     <RootPropertyPathName Name="Username" />
     <RootPropertyPathName Name="MyResult" />
+    <RootPropertyPathName Name="SelectedPack" />
+    <RootPropertyPathName Name="SelectedAlbum" />
+    <RootPropertyPathName Name="SelectedMusic" />
+    <RootPropertyPathName Name="SelectedUser" />
     <RootPropertyPathName Name="DateNews" />
     <RootPropertyPathName Name="NewsTitle" />
+    <RootPropertyPathName Name="PlayerLoaded" />
+    <RootPropertyPathName Name="MediaElementObject" />
+    <RootPropertyPathName Name="NaturalDuration" />
+    <RootPropertyPathName Name="PlayedMusic" />
+    <RootPropertyPathName Name="duration" />
+    <RootPropertyPathName Name="user" />
     <RootPropertyPathName Name="GridVisibility" />
     <RootPropertyPathName Name="isActive" />
     <RootPropertyPathName Name="ProgressOn" />
     <RootPropertyPathName Name="ConnexionCommand" />
     <RootPropertyPathName Name="Password" />
     <RootPropertyPathName Name="FacebookTapped" />
-    <RootPropertyPathName Name="duration" />
-    <RootPropertyPathName Name="user" />
     <RootPropertyPathName Name="style_name" />
     <RootPropertyPathName Name="ListArtiste" />
     <RootPropertyPathName Name="ListMusique" />
@@ -26,12 +34,13 @@
     <RootPropertyPathName Name="Image" />
     <RootPropertyPathName Name="Group" />
     <RootPropertyPathName Name="ItemSource" />
-    <RootPropertyPathName Name="SelectedUser" />
     <RootPropertyPathName Name="TappedCommand" />
     <RootPropertyPathName Name="CollectionGroups" />
     <RootPropertyPathName Name="Date" />
     <RootPropertyPathName Name="ListNews" />
     <RootPropertyPathName Name="SelectedNews" />
+    <RootPropertyPathName Name="SelectNews" />
+    <RootPropertyPathName Name="User" />
     <RootPropertyPathName Name="BitmapImage" />
     <RootPropertyPathName Name="Datas" />
     <RootPropertyPathName Name="SelectionCommand" />
@@ -57,10 +66,10 @@
     <RootType FullName="SoonZik.ViewModel.MainPageViewModel" />
     <RootType FullName="SoonZik.ViewModel.ConnexionViewModel" />
     <RootType FullName="SoonZik.ViewModel.MainViewModel" />
-    <RootType FullName="SoonZik.ViewModel.PlayerViewModel" />
     <RootType FullName="SoonZik.ViewModel.NewsViewModel" />
     <RootType FullName="SoonZik.ViewModel.ExplorerViewModel" />
     <RootType FullName="SoonZik.ViewModel.ProfilUserViewModel" />
+    <RootType FullName="SoonZik.ViewModel.NewsDetailViewModel" />
     <RootType FullName="SoonZik.ViewModel.FriendViewModel" />
     <RootType FullName="Windows.UI.Xaml.DataTemplate">
       <RootProperty Name="Template" />
@@ -130,6 +139,8 @@
       <RootProperty Name="IsChecked" />
       <RootProperty Name="MaxHeight" />
       <RootProperty Name="MaxWidth" />
+      <RootEvent Name="Checked" />
+      <RootEvent Name="Unchecked" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.ControlTemplate">
       <RootProperty Name="TargetType" />
@@ -297,6 +308,7 @@
       <RootProperty Name="Children" />
       <RootProperty Name="Background" />
       <RootProperty Name="VerticalAlignment" />
+      <RootEvent Name="Tapped" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Media.Animation.DoubleAnimation">
       <RootProperty Name="Duration" />
@@ -322,9 +334,9 @@
     <RootType FullName="Windows.UI.Xaml.Controls.ListView">
       <RootProperty Name="Header" />
       <RootProperty Name="ItemTemplate" />
+      <RootProperty Name="SelectedItem" />
       <RootProperty Name="IsHoldingEnabled" />
       <RootProperty Name="ItemsSource" />
-      <RootProperty Name="SelectedItem" />
       <RootProperty Name="GroupStyle" />
       <RootProperty Name="Background" />
     </RootType>
@@ -365,13 +377,26 @@
     <RootType FullName="SoonZik.Views.Explorer" />
     <RootType FullName="SoonZik.Views.News" />
     <RootType FullName="SoonZik.Controls.PivotControl" />
-    <RootType FullName="SoonZik.Controls.ProgressRingControl" />
     <RootType FullName="Windows.UI.Xaml.Controls.Page">
-      <RootProperty Name="DataContext" />
       <RootProperty Name="Background" />
       <RootProperty Name="Content" />
+      <RootProperty Name="DataContext" />
       <RootProperty Name="Resources" />
     </RootType>
+    <RootType FullName="Microsoft.Xaml.Interactions.Core.InvokeCommandAction">
+      <RootProperty Name="Command" />
+    </RootType>
+    <RootType FullName="Windows.UI.Xaml.Controls.MediaElement">
+      <RootEvent Name="MediaOpened" />
+    </RootType>
+    <RootType FullName="Windows.UI.Xaml.Controls.Slider">
+      <RootProperty Name="Maximum" />
+      <RootProperty Name="Width" />
+      <RootProperty Name="VerticalAlignment" />
+      <RootProperty Name="HorizontalAlignment" />
+    </RootType>
+    <RootType FullName="SoonZik.Controls.PlayerControl" />
+    <RootType FullName="SoonZik.Controls.ProgressRingControl" />
     <RootType FullName="SoonZik.Views.Connexion" />
     <RootType FullName="SoonZik.MainPage" />
     <RootType FullName="SoonZik.ViewModel.BattleViewModel" />
@@ -385,9 +410,6 @@
       <RootProperty Name="Background" />
       <RootProperty Name="Margin" />
       <RootProperty Name="BorderThickness" />
-    </RootType>
-    <RootType FullName="Microsoft.Xaml.Interactions.Core.InvokeCommandAction">
-      <RootProperty Name="Command" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Shapes.Path">
       <RootProperty Name="Data" />
@@ -431,6 +453,7 @@
       <RootProperty Name="ItemTemplate" />
     </RootType>
     <RootType FullName="SoonZik.Views.MainView" />
+    <RootType FullName="SoonZik.Views.NewsDetail" />
     <RootType FullName="Windows.UI.Xaml.Shapes.Rectangle">
       <RootProperty Name="Fill" />
       <RootProperty Name="Margin" />
@@ -450,12 +473,6 @@
     <RootType FullName="Windows.UI.Xaml.Media.Animation.CubicEase">
       <RootProperty Name="EasingMode" />
     </RootType>
-    <RootType FullName="Windows.UI.Xaml.Controls.Slider">
-      <RootProperty Name="Width" />
-      <RootProperty Name="VerticalAlignment" />
-      <RootProperty Name="HorizontalAlignment" />
-    </RootType>
-    <RootType FullName="SoonZik.Views.Player" />
     <RootType FullName="SoonZik.Views.ProfilArtiste" />
     <RootType FullName="SoonZik.Views.ProfilUser" />
   </Roots.RootTypes>

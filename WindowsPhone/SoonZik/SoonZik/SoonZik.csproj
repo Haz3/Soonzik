@@ -101,6 +101,9 @@
     <Compile Include="Controls\PivotControl.xaml.cs">
       <DependentUpon>PivotControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\PlayerControl.xaml.cs">
+      <DependentUpon>PlayerControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\ProgressRingControl.xaml.cs">
       <DependentUpon>ProgressRingControl.xaml</DependentUpon>
     </Compile>
@@ -124,9 +127,9 @@
     <Compile Include="ViewModel\MainPageViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\MenuViewModel.cs" />
+    <Compile Include="ViewModel\NewsDetailViewModel.cs" />
     <Compile Include="ViewModel\NewsViewModel.cs" />
     <Compile Include="ViewModel\PackViewModel.cs" />
-    <Compile Include="ViewModel\PlayerViewModel.cs" />
     <Compile Include="ViewModel\ProfilArtisteViewModel.cs" />
     <Compile Include="ViewModel\ProfilUserViewModel.cs" />
     <Compile Include="ViewModel\ViewModel.cs" />
@@ -158,11 +161,11 @@
     <Compile Include="Views\News.xaml.cs">
       <DependentUpon>News.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\NewsDetail.xaml.cs">
+      <DependentUpon>NewsDetail.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Packs.xaml.cs">
       <DependentUpon>Packs.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Player.xaml.cs">
-      <DependentUpon>Player.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Playlist.xaml.cs">
       <DependentUpon>Playlist.xaml</DependentUpon>
@@ -224,6 +227,7 @@
     <Content Include="Resources\Icones\twitter.png" />
     <Content Include="Resources\iphone5_background.jpg" />
     <Content Include="Resources\logo.scale-240.png" />
+    <Content Include="Resources\MusicTest.mp3" />
     <Content Include="Resources\pic01.jpg" />
     <Content Include="Resources\pic02.jpg" />
     <Content Include="Resources\pic03.jpg" />
@@ -258,6 +262,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\PivotControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\PlayerControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -305,11 +313,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Packs.xaml">
+    <Page Include="Views\NewsDetail.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Player.xaml">
+    <Page Include="Views\Packs.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -357,6 +365,9 @@
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Newtonsoft.Json.6.0.8\lib\portable-net40+sl5+wp80+win8+wpa81\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="WriteableBitmapEx.WinRT">
+      <HintPath>..\packages\WriteableBitmapEx.1.5.0.0\lib\wpa81\WriteableBitmapEx.WinRT.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

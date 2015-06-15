@@ -2,13 +2,15 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
+using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Coding4Fun.Toolkit.Controls;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using SoonZik.Controls;
 using SoonZik.HttpRequest;
-using SoonZik.HttpRequest.Poco;
+using SoonZik.Views;
+using News = SoonZik.HttpRequest.Poco.News;
 
 namespace SoonZik.ViewModel
 {
@@ -35,6 +37,8 @@ namespace SoonZik.ViewModel
 
         private News _selectedNews;
 
+        public static News DetailSelectedNews { get; set; }
+
         public News SelectedNews
         {
             get
@@ -48,6 +52,17 @@ namespace SoonZik.ViewModel
             }
         }
 
+        private RelayCommand _itemClickCommand;
+        public RelayCommand ItemClickCommand
+        {
+            get { return _itemClickCommand; }
+            set
+            {
+                _itemClickCommand = value; 
+                RaisePropertyChanged("ItemClickCommand");
+            }
+        }
+
         #endregion
 
         #region Ctor
@@ -57,11 +72,20 @@ namespace SoonZik.ViewModel
             var task = Task.Run(async () => await Charge());
             task.Wait();
             ShareTapped = new RelayCommand(ShareTappedExecute);
+            ItemClickCommand = new RelayCommand(ItemClickExecute);
         }
+
+
 
         #endregion
 
         #region Method
+        private void ItemClickExecute()
+        {
+            DetailSelectedNews = SelectedNews;
+            GlobalMenuControl.MyGrid.Children.Clear();
+            GlobalMenuControl.MyGrid.Children.Add(new NewsDetail());
+        }
 
         private void ShareTappedExecute()
         {
