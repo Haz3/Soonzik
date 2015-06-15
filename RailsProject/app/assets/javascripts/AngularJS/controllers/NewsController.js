@@ -23,6 +23,26 @@ SoonzikApp.controller('NewsCtrl', ['$scope', '$routeParams', 'SecureAuth', 'HTTP
 		})
 	}
 
+	$scope.showNewsById = function() {
+		var id = $routeParams.id;
+
+		HTTPService.showNews(id).then(function(response) {
+
+			$scope.thisNews = response.data.content;
+			$scope.attachments = $scope.thisNews.attachments;
+			$scope.author = $scope.thisNews.user;
+
+			console.log($scope.author);
+
+
+		}, function (error) {
+			console.log("This news doesn't exist");
+		});
+
+		$scope.thisNewsId = true;
+	
+	}
+
 	$scope.comment = function() {
 
  		var current_user = SecureAuth.getCurrentUser();

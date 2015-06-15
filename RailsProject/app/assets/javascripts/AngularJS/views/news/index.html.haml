@@ -1,4 +1,4 @@
-%div{ "ng-init" => "showNews()" }
+.news{ "ng-init" => "showNews()" }
   %loading{ "ng-if" => "loading == true" }
   .row{ "ng-if" => "loading == false", "ng-init" => "initFoundation()"}
     %h3.subheader
@@ -11,7 +11,7 @@
           %h6{"ng-repeat" => "text in new.newstexts"}
             {{ text.content }}
           .divider
-            
+
       .pagination-centerd.small-4.small-centered.columns
         %ul.pagination
           %li.arrow.unavailable

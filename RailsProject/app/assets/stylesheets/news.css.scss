@@ -4,6 +4,27 @@
 
 
 .news {
-	width: 100%;
-	margin-bottom: 20px;
+
+	padding-top: 20px;
+
+	ul {
+		margin-left: 30px;
+	}
+
+	.author {
+		font-style: italic;
+		font-size: 12px;
+	}
+
+	.title {
+		color: black;
+		text-transform: uppercase;
+		font-weight: bold;
+	}
+
+	.date {
+		margin-top: -25px;
+		font-style: italic;
+		font-size: 12px;
+	}
 }

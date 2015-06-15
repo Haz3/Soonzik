@@ -1,5 +1,18 @@
-%div{ "ng-init" => "showNews()" }
+.news{ "ng-init" => "showNewsById()" }
   %loading{ "ng-if" => "loading == true" }
   .row{ "ng-if" => "loading == false", "ng-init" => "initFoundation()"}
-    %h3.subheader
-      Listing news
+    .clearfix
+      .ul.small-11.small-centered.columns{"ng-show" => "thisNewsId"}
+        .panel
+          %h3.subheader
+            %ul.inline-list
+              %li.left.small-3.columns.author
+                {{ author.username }}
+              %li.small-3.small-centered.columns.title
+                {{ thisNews.title }}
+              %li.right.small-3.columns.date
+                {{ thisNews.date | date:"MM/dd/yyyy 'at' h:mma"}}
+          %p{"ng-repeat" => "url in attachments" }
+            %img{"ng-src" => "{{ url.url }}"}
+          %p{"ng-repeat" => "text in thisNews.newstexts"}
+            {{ text.content }}
