@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using SoonZik.Controls;
 using SoonZik.HttpRequest;
 using SoonZik.HttpRequest.Poco;
+using SoonZik.Views;
 
 namespace SoonZik.ViewModel
 {
@@ -42,6 +45,29 @@ namespace SoonZik.ViewModel
             get { return _selectionCommand; }
         }
 
+        private RelayCommand _itemClickCommand;
+        public RelayCommand ItemClickCommand
+        {
+            get { return _itemClickCommand; }
+            set
+            {
+                _itemClickCommand = value;
+                RaisePropertyChanged("ItemClickCommand");
+            }
+        }
+
+        private Album _theAlbum;
+
+        public Album TheAlbum
+        {
+            get { return _theAlbum; }
+            set
+            {
+                _theAlbum = value;
+                RaisePropertyChanged("TheAlbum");
+            }
+        }
+
         #endregion
 
         #region ctor
@@ -51,7 +77,15 @@ namespace SoonZik.ViewModel
             if (TheUser != null)
             {
                 _selectionCommand = new RelayCommand(SelectionExecute);
+                ItemClickCommand = new RelayCommand(ItemClickCommandExecute);
             }
+        }
+
+        private void ItemClickCommandExecute()
+        {
+            AlbumViewModel.MyAlbum = TheAlbum;
+            GlobalMenuControl.MyGrid.Children.Clear();
+            GlobalMenuControl.MyGrid.Children.Add(new AlbumView());
         }
 
         private void SelectionExecute()
@@ -74,7 +108,7 @@ namespace SoonZik.ViewModel
             }
             catch (Exception e)
             {
-
+                Debug.WriteLine(e.ToString());
             }
         }
         #endregion

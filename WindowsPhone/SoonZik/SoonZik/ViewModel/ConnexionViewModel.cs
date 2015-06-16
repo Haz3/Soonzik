@@ -120,7 +120,7 @@ namespace SoonZik.ViewModel
                         }
                         catch (Exception e)
                         {
-                            new MessageDialog("Erreur de connexion").ShowAsync();
+                            new MessageDialog("Erreur de connexion" + e.ToString()).ShowAsync();
                         }
                         WriteInformation();
                         Singleton.Instance().NewsPage = new News();

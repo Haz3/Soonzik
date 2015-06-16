@@ -177,7 +177,7 @@ namespace SoonZik.Controls
 
         private void GoToMondeMusical()
         {
-           SetChildren(new Geoloc());
+           //SetChildren();
         }
 
         private void GoToBattle()
@@ -300,6 +300,12 @@ namespace SoonZik.Controls
         {
             ProfilArtisteViewModel.TheUser = SelectedUser;
             SetChildren(new ProfilArtiste());
+        }
+
+        private void PackStackPanel_OnTapped(object sender, TappedRoutedEventArgs e)
+        {
+            PackViewModel.ThePack = SelectedPack;
+            SetChildren(new Packs());
         }
     }
 }

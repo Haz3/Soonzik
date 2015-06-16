@@ -13,7 +13,6 @@
     <Page.Resources>
         <DataTemplate x:Key="NewsTemplate">
             <Grid x:ConnectionId='1' Margin="0,0,0,0" Height="200" Width="380" HorizontalAlignment="Center" Background="#d3d7da"                       >
-
                 <Grid.RowDefinitions>
                     <RowDefinition Height="40"/>
                     <RowDefinition Height="*"/>

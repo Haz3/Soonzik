@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Threading.Tasks;
 using Windows.UI.Popups;
 using Windows.UI.Xaml;
@@ -117,7 +118,7 @@ namespace SoonZik.ViewModel
             }
             catch (Exception e)
             {
-                
+                Debug.WriteLine(e.ToString());
             }
         }
         #endregion

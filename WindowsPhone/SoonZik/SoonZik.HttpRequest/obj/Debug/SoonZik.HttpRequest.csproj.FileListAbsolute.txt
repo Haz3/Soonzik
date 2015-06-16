@@ -35,4 +35,3 @@ C:\Users\Juan-Pablo Bastardos\Documents\GitHub\SoonZik\Soonzik\WindowsPhone\Soon
 C:\Users\Juan-Pablo Bastardos\Documents\GitHub\SoonZik\Soonzik\WindowsPhone\SoonZik\SoonZik.HttpRequest\obj\Debug\qualifiers.txt
 C:\Users\Juan-Pablo Bastardos\Documents\GitHub\SoonZik\Soonzik\WindowsPhone\SoonZik\SoonZik.HttpRequest\obj\Debug\qualifiers.txt.intermediate
 C:\Users\Juan-Pablo Bastardos\Documents\GitHub\SoonZik\Soonzik\WindowsPhone\SoonZik\SoonZik.HttpRequest\obj\Debug\MultipleQualifiersPerDimensionFound.txt
-C:\Users\Juan-Pablo Bastardos\Documents\GitHub\SoonZik\Soonzik\WindowsPhone\SoonZik\SoonZik.HttpRequest\obj\Debug\SoonZik.HttpRequest.csprojResolveAssemblyReference.cache

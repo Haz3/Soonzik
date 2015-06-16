@@ -1,15 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Threading.Tasks;
 using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Command;
+using SoonZik.Controls;
 using SoonZik.HttpRequest;
 using SoonZik.HttpRequest.Poco;
+using SoonZik.Utils;
 
 namespace SoonZik.ViewModel
 {
     public class AlbumViewModel : ViewModelBase
     {
         #region Attribute
+
+        private INavigationService _navigationService;
 
         private string _imageAlbum;
         public string ImageAlbum
@@ -45,6 +51,17 @@ namespace SoonZik.ViewModel
         }
 
         public static Album MyAlbum { get; set; }
+
+        private RelayCommand _itemClickCommand;
+        public RelayCommand ItemClickCommand
+        {
+            get { return _itemClickCommand; }
+            set
+            {
+                _itemClickCommand = value;
+                RaisePropertyChanged("ItemClickCommand");
+            }
+        }
         #endregion
 
         #region ctor
@@ -53,7 +70,9 @@ namespace SoonZik.ViewModel
         {
             if (MyAlbum != null)
             {
-                TheAlbum = MyAlbum;            
+                TheAlbum = MyAlbum;
+                _navigationService = new NavigationService();
+                ItemClickCommand = new RelayCommand(ItemClickCommandExecute); 
                 var task = Task.Run(async () => await Charge());
                 task.Wait();
             }
@@ -63,6 +82,12 @@ namespace SoonZik.ViewModel
         #endregion
 
         #region Method
+        private void ItemClickCommandExecute()
+        {
+            //PlayerControl. = TheAlbum;
+            _navigationService.Navigate(new PlayerControl().GetType());
+        }
+
         public async Task Charge()
         {
             var request = new HttpRequestGet();
@@ -73,7 +98,7 @@ namespace SoonZik.ViewModel
             }
             catch (Exception e)
             {
-
+                Debug.WriteLine(e.ToString());
             }
         }
         #endregion
