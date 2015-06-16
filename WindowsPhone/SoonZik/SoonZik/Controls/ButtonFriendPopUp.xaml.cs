@@ -41,7 +41,7 @@ namespace SoonZik.Controls
             var task = Task.Run(async () => await Singleton.Instance().Charge());
             task.Wait();
             GlobalMenuControl.MyGrid.Children.Clear();
-            GlobalMenuControl.MyGrid.Children.Add(new ProfilUser());
+            GlobalMenuControl.MyGrid.Children.Add(new ProfilFriendView());
             FriendViewModel.MeaagePrompt.Hide();
             //Navigation.Navigate(typeof(ProfilUser));
         }

@@ -13,8 +13,11 @@
         <vm:NewsViewModel x:Key="NewsViewModel"/>
         <vm:ExplorerViewModel x:Key="ExplorerViewModel"/>
         <vm:ProfilUserViewModel x:Key="ProfilUserViewModel"/>
+        <vm:ProfilFriendViewModel x:Key="ProfilFriendViewModel"/>
         <vm:NewsDetailViewModel x:Key="NewsDetailViewModel"/>
         <vm:FriendViewModel x:Key="FriendViewModel"/>
+        <vm:AlbumViewModel x:Key="AlbumViewModel" />
+        <vm:ProfilArtisteViewModel x:Key="ProfilArtisteViewModel" />
       
     <DataTemplate x:Key="SizePivotHeader">
       <ContentPresenter>

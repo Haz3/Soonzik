@@ -58,9 +58,6 @@
     <AppxPackagedFile Include="C:\Users\Juan-Pablo Bastardos\Documents\GitHub\SoonZik\Soonzik\WindowsPhone\SoonZik\SoonZik.HttpRequest\bin\Debug\SoonZik.HttpRequest.dll">
       <PackagePath>SoonZik.HttpRequest.dll</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\Juan-Pablo Bastardos\Documents\GitHub\SoonZik\Soonzik\WindowsPhone\SoonZik\packages\WriteableBitmapEx.1.5.0.0\lib\wpa81\WriteableBitmapEx.WinRT.dll">
-      <PackagePath>WriteableBitmapEx.WinRT.dll</PackagePath>
-    </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Juan-Pablo Bastardos\Documents\GitHub\SoonZik\Soonzik\WindowsPhone\SoonZik\SoonZik\Assets\Logo.scale-240.png">
       <PackagePath>Assets\Logo.scale-240.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
@@ -238,14 +235,8 @@
     <AppxPackagedFile Include="C:\Users\Juan-Pablo Bastardos\Documents\GitHub\SoonZik\Soonzik\WindowsPhone\SoonZik\SoonZik\bin\Debug\Controls\GlobalMenuControl.xbf">
       <PackagePath>Controls\GlobalMenuControl.xbf</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\Juan-Pablo Bastardos\Documents\GitHub\SoonZik\Soonzik\WindowsPhone\SoonZik\SoonZik\bin\Debug\Controls\NewsControl.xbf">
-      <PackagePath>Controls\NewsControl.xbf</PackagePath>
-    </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Juan-Pablo Bastardos\Documents\GitHub\SoonZik\Soonzik\WindowsPhone\SoonZik\SoonZik\bin\Debug\Controls\NewsSharePopup.xbf">
       <PackagePath>Controls\NewsSharePopup.xbf</PackagePath>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\Juan-Pablo Bastardos\Documents\GitHub\SoonZik\Soonzik\WindowsPhone\SoonZik\SoonZik\bin\Debug\Controls\PivotControl.xbf">
-      <PackagePath>Controls\PivotControl.xbf</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Juan-Pablo Bastardos\Documents\GitHub\SoonZik\Soonzik\WindowsPhone\SoonZik\SoonZik\bin\Debug\Controls\PlayerControl.xbf">
       <PackagePath>Controls\PlayerControl.xbf</PackagePath>
@@ -255,6 +246,12 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Juan-Pablo Bastardos\Documents\GitHub\SoonZik\Soonzik\WindowsPhone\SoonZik\SoonZik\bin\Debug\MainPage.xbf">
       <PackagePath>MainPage.xbf</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Juan-Pablo Bastardos\Documents\GitHub\SoonZik\Soonzik\WindowsPhone\SoonZik\SoonZik\bin\Debug\Views\AlbumView.xbf">
+      <PackagePath>Views\AlbumView.xbf</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Juan-Pablo Bastardos\Documents\GitHub\SoonZik\Soonzik\WindowsPhone\SoonZik\SoonZik\bin\Debug\Views\ProfilFriendView.xbf">
+      <PackagePath>Views\ProfilFriendView.xbf</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Juan-Pablo Bastardos\Documents\GitHub\SoonZik\Soonzik\WindowsPhone\SoonZik\SoonZik\bin\Debug\Views\Battle.xbf">
       <PackagePath>Views\Battle.xbf</PackagePath>

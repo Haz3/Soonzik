@@ -9,6 +9,7 @@ using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using SoonZik.Controls;
 using SoonZik.HttpRequest;
+using SoonZik.HttpRequest.Poco;
 using SoonZik.Views;
 using News = SoonZik.HttpRequest.Poco.News;
 

@@ -12,6 +12,7 @@ using SoonZik.Annotations;
 using SoonZik.HttpRequest;
 using SoonZik.HttpRequest.Poco;
 using SoonZik.Utils;
+using SoonZik.ViewModel;
 using SoonZik.Views;
 using Battle = SoonZik.Views.Battle;
 using Connexion = SoonZik.Views.Connexion;
@@ -219,7 +220,7 @@ namespace SoonZik.Controls
         private void SearchTextBlock_OnTextChanged(object sender, TextChangedEventArgs e)
         {
             SearchText = SearchTextBlock.Text;
-            if (SearchText != String.Empty)
+            if (SearchText != string.Empty)
                 MakeTheSearch();
             else
                 CleanResultList();
@@ -261,6 +262,23 @@ namespace SoonZik.Controls
             CloseMenu();
         }
 
+        private void UsersStackPanel_OnTapped(object sender, TappedRoutedEventArgs e)
+        {
+            Singleton.Instance().NewProfilUser = SelectedUser.Id;
+            Singleton.Instance().ItsMe = false;
+            var task = Task.Run(async () => await Singleton.Instance().Charge());
+            task.Wait();
+            MyGrid.Children.Clear();
+            MyGrid.Children.Add(new ProfilFriendView());
+            CloseMenu();
+        }
+
+        private void MusicStackPanel_OnTapped(object sender, TappedRoutedEventArgs e)
+        {
+            Singleton.Instance().SelectedMusicSingleton = SelectedMusic;
+            _navigationService.Navigate(new PlayerControl().GetType());
+            CloseMenu();
+        }
         #endregion
 
         #region NotifyPropertyCahnge
@@ -272,22 +290,16 @@ namespace SoonZik.Controls
         }
         #endregion
 
-        private void UsersStackPanel_OnTapped(object sender, TappedRoutedEventArgs e)
+        private void AlbumStackPanel_OnTapped(object sender, TappedRoutedEventArgs e)
         {
-            Singleton.Instance().NewProfilUser = SelectedUser.Id;
-            Singleton.Instance().ItsMe = false;
-            var task = Task.Run(async () => await Singleton.Instance().Charge());
-            task.Wait();
-            MyGrid.Children.Clear();
-            MyGrid.Children.Add(new ProfilUser());
-            CloseMenu();
+            AlbumViewModel.MyAlbum = SelectedAlbum;
+            SetChildren(new AlbumView());
         }
 
-        private void MusicStackPanel_OnTapped(object sender, TappedRoutedEventArgs e)
+        private void ArtistStackPanel_OnTapped(object sender, TappedRoutedEventArgs e)
         {
-            Singleton.Instance().SelectedMusicSingleton = SelectedMusic;
-            _navigationService.Navigate(new PlayerControl().GetType());
-            CloseMenu();
+            ProfilArtisteViewModel.TheUser = SelectedUser;
+            SetChildren(new ProfilArtiste());
         }
     }
 }

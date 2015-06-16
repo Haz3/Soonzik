@@ -1,15 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using Windows.Media;
+using Windows.Media.Playback;
 using Windows.Phone.UI.Input;
+using Windows.Storage;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
+using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using SoonZik.Annotations;
 using SoonZik.HttpRequest.Poco;
 using SoonZik.Utils;
-using SoonZik.ViewModel;
 
 namespace SoonZik.Controls
 {
@@ -17,12 +20,11 @@ namespace SoonZik.Controls
     {
         #region Attribute
 
-        private readonly INavigationService _navigationService;
-        private DispatcherTimer _myDispatcherTimer { get; set; }
-        private TimeSpan _myTimeSpan { get; set; }
+        private INavigationService _navigationService;
+        private DispatcherTimer MyDispatcherTimer { get; set; }
+        private TimeSpan MyTimeSpan { get; set; }
 
         private List<Music> _listOfMusics;
-
         public List<Music> ListOfMusics
         {
             get { return _listOfMusics; }
@@ -43,16 +45,26 @@ namespace SoonZik.Controls
                 RaisePropertyChanged("PlayedMusic");
             }
         }
-        
+
+        public int CurrentMusicIndex;
         #endregion
 
-        #region ctor
+        #region ctor and Initializer
 
         public PlayerControl()
         {
             this.InitializeComponent();
             DataContext = this;
+            Initialize();
+        }
+
+        private void Initialize()
+        {
             HardwareButtons.BackPressed += HardwareButtonsOnBackPressed;
+            MyMediaElement.MediaEnded += MyMediaElement_MediaEnded;
+
+
+            _navigationService = new NavigationService();
             ListOfMusics = new List<Music>();
             ListOfMusics.Add(Singleton.Instance().SelectedMusicSingleton);
         }
@@ -60,7 +72,10 @@ namespace SoonZik.Controls
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             PlayedMusic = ListOfMusics[0];
+            CurrentMusicIndex = 0;
             MyMediaElement.Source = new Uri("ms-appx:///Resources/MusicTest.mp3", UriKind.Absolute);
+            StartTimer();
+            //BackgroundMediaPlayer.Current.SetUriSource(new Uri("ms-appx:///Resources/MusicTest.mp3", UriKind.Absolute));
         }
 
         #endregion
@@ -68,29 +83,50 @@ namespace SoonZik.Controls
         #region PlayerButton
         private void RewindImage_OnTapped(object sender, TappedRoutedEventArgs e)
         {
-
+            if (CurrentMusicIndex == 0)
+                CurrentMusicIndex = ListOfMusics.Count;
+            else if (CurrentMusicIndex != 0)
+                CurrentMusicIndex -= 1;
+            MyMediaElement.Source = new Uri(ListOfMusics[CurrentMusicIndex].file, UriKind.Absolute);
+            PlayMedia();
         }
 
         private void ForwardImage_OnTapped(object sender, TappedRoutedEventArgs e)
         {
-
+            if (CurrentMusicIndex == ListOfMusics.Count)
+                CurrentMusicIndex = 0;
+            else if (CurrentMusicIndex != ListOfMusics.Count)
+                CurrentMusicIndex += 1;
+            MyMediaElement.Source = new Uri(ListOfMusics[CurrentMusicIndex].file, UriKind.Absolute);
+            PlayMedia();
         }
 
         private void ToggleButtonMenu_OnChecked(object sender, RoutedEventArgs e)
         {
             PlayButtonToggle.Style = Application.Current.Resources["PauseButtonStyle"] as Style;
-
-            MyMediaElement.Play();
-            _myDispatcherTimer.Start();
+            PlayMedia();
+            MyDispatcherTimer.Start();
         }
 
         private void ToggleButtonMenu_OnUnchecked(object sender, RoutedEventArgs e)
         {
             StartTimer();
             PlayButtonToggle.Style = Application.Current.Resources["PlayButtonStyle"] as Style;
-            MyMediaElement.Pause();
+            PauseMedia();
         }
 
+        void MyMediaElement_MediaEnded(object sender, RoutedEventArgs e)
+        {
+            if (CurrentMusicIndex == ListOfMusics.Count)
+                CurrentMusicIndex = 0;
+            else if (CurrentMusicIndex != ListOfMusics.Count)
+                CurrentMusicIndex += 1;
+            MyMediaElement.Source = new Uri(ListOfMusics[CurrentMusicIndex].file, UriKind.Absolute);
+            PlayMedia();
+        }
+        #endregion
+
+        #region Shuffle and Repeat Method
         private void ShuffleButtonToggle_OnChecked(object sender, RoutedEventArgs e)
         {
 
@@ -112,12 +148,31 @@ namespace SoonZik.Controls
         }
         #endregion
 
+        #region BackgroundPlayer
+
+        async void PlayMedia()
+        {
+            await Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>
+            {
+                MyMediaElement.Play();
+            });
+        }
+
+        async void PauseMedia()
+        {
+            await Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>
+            {
+                MyMediaElement.Pause();
+            });
+        }
+        #endregion
+
         #region Method
         private void TimerOnTick(object sender, object o)
         {
             if (MyMediaElement.NaturalDuration.TimeSpan.Seconds > 0)
             {
-                if (_myTimeSpan.TotalSeconds > 0)
+                if (MyTimeSpan.TotalSeconds > 0)
                 {
                     TimeSlider.Value = MyMediaElement.Position.Seconds;
                 }
@@ -126,10 +181,10 @@ namespace SoonZik.Controls
 
         private void StartTimer()
         {
-            _myTimeSpan = new TimeSpan(MyMediaElement.NaturalDuration.TimeSpan.Seconds);
-            _myDispatcherTimer = new DispatcherTimer { Interval = _myTimeSpan };
-            _myDispatcherTimer.Tick += TimerOnTick;
-            _myDispatcherTimer.Stop();
+            MyTimeSpan = new TimeSpan(MyMediaElement.NaturalDuration.TimeSpan.Seconds);
+            MyDispatcherTimer = new DispatcherTimer { Interval = MyTimeSpan };
+            MyDispatcherTimer.Tick += TimerOnTick;
+            MyDispatcherTimer.Stop();
         }
 
         private void MyMediaElement_OnMediaOpened(object sender, RoutedEventArgs e)
@@ -155,6 +210,5 @@ namespace SoonZik.Controls
             if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
         }
         #endregion
-
     }
 }

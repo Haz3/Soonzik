@@ -9,13 +9,12 @@ App.xbf
 Controls\ButtonFriendPopUp.xbf
 Controls\Genre.xbf
 Controls\GlobalMenuControl.xbf
-Controls\NewsControl.xbf
 Controls\NewsSharePopup.xbf
-Controls\PivotControl.xbf
 Controls\PlayerControl.xbf
 Controls\ProgressRingControl.xbf
 MainPage.xbf
 SoonZik.xr.xml
+Views\AlbumView.xbf
 Views\Battle.xbf
 Views\Connexion.xbf
 Views\Conversation.xbf
@@ -29,6 +28,7 @@ Views\NewsDetail.xbf
 Views\Packs.xbf
 Views\Playlist.xbf
 Views\ProfilArtiste.xbf
+Views\ProfilFriendView.xbf
 Views\ProfilUser.xbf
 ReadMe.Coding4Fun.Toolkit.txt
 Resources\guetta.jpg

@@ -8,7 +8,7 @@
     xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
     xmlns:core="using:Microsoft.Xaml.Interactions.Core"
     mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    Background="#424242">
     <interactivity:Interaction.Behaviors>
         <core:EventTriggerBehavior EventName="Loaded">
             <core:InvokeCommandAction Command="{Binding PlayerLoaded}"/>
@@ -24,7 +24,7 @@
             <RowDefinition Height="100"/>
         </Grid.RowDefinitions>
 
-        <MediaElement x:ConnectionId='1' x:Name="MyMediaElement"                                           ></MediaElement>
+        <MediaElement x:ConnectionId='1' x:Name="MyMediaElement" AutoPlay="False"                                           ></MediaElement>
 
         <Grid Grid.Row="0" x:Name="CoverArtist">
             <Image Source="../Resources/stromae.jpg" Height="250" Width="250"/>
