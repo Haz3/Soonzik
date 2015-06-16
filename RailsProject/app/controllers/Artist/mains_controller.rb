@@ -70,7 +70,7 @@ module Artist
 	        	}]
 	        end
 
-        	# Calculate the musics sell
+        	# Calculate the packs sell
         	memory_pack = {}
 
         	begin
@@ -126,7 +126,7 @@ module Artist
         	}
 	        begin
 	        	# Calculate the note statistics
-	        	current_user.albums { |album|
+	        	current_user.albums.each { |album|
 
 	        		# init
 	        		album_to_insert = {
@@ -150,14 +150,18 @@ module Artist
 		        	}
 
 		        	album_to_insert[:average] = notesTotal / notes if notes > 0
-		        	memory_notes << album_to_insert
+		        	memory_notes[:album] << album_to_insert if notes > 0
 		        }
 
-	        	note = 0
-	        	memory_notes.album.each { |album|
-	        		note += album[:average]
+	        	notes = 0
+	        	notesTotal = 0
+	        	memory_notes[:album].each { |album|
+	        		if album[:musics].size > 0
+		        		notes += 1
+		        		notesTotal += album[:average]
+		        	end
 	        	}
-	        	memory_notes[:average] = note / memory_notes[:album].size if memory_notes[:album].size > 0
+	        	memory_notes[:average] = notesTotal / notes if notes > 0
 	        rescue
 	        end
 	        response[:notes] = memory_notes

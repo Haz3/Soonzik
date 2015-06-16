@@ -25,23 +25,17 @@
 				%charts{ "ng-if" => "loading.note == false", "type-chart" => "'bar'", "values" => "values.note_albums.data", "xkey" => "values.note_albums.xkey", "ykeys" => "values.note_albums.ykeys", "labels" => "values.note_albums.labels" }
 		.battle
 			.currentBattle.clearfix
-				.small-12.medium-6.large-4.columns
-					Battle
-				.small-12.medium-6.large-4.columns
-					Battle
-				.small-12.medium-6.large-4.columns
-					Battle
-				.small-12.medium-6.large-4.columns.end
-					Battle
+				%h5 Current battles
+				.small-12.medium-6.large-4.columns{ "ng-repeat" => "battle in battles.current", "ng-class" => "$last ? 'end' : ''" }
+					%charts{ "ng-if" => "loading.battle == false", "type-chart" => "'donut'", "values" => "battle.votesValue" }
+				%p{ "ng-if" => "battles.current.length == 0" }
+					No battle currently available
 			.lastBattle.clearfix
-				.small-12.medium-6.large-4.columns
-					Battle
-				.small-12.medium-6.large-4.columns
-					Battle
-				.small-12.medium-6.large-4.columns
-					Battle
-				.small-12.medium-6.large-4.columns.end
-					Battle
+				%h5 Past battles
+				.small-12.medium-6.large-4.columns{ "ng-repeat" => "battle in battles.past", "ng-class" => "$last ? 'end' : ''" }
+					%charts{ "ng-if" => "loading.battle == false", "type-chart" => "'donut'", "values" => "battle.votesValue" }
+				%p{ "ng-if" => "battles.past.length == 0" }
+					No battle currently available
 	.text-container.clearfix
 		.commentaries.small-12.medium-6.columns
 			.title

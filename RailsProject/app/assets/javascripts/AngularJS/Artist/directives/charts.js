@@ -27,6 +27,7 @@ SoonzikArtistApp.directive('charts', function() {
           ykeys: $scope.ykeys,
           labels: $scope.labels
         });
+        $element.height("400px");
       } else if ($scope.typeChart == "line") {
         Morris.Line({
           element: $element,
@@ -35,13 +36,13 @@ SoonzikArtistApp.directive('charts', function() {
           ykeys: $scope.ykeys,
           labels: $scope.labels
         });
+        $element.height("400px");
       } else {
         Morris.Donut({
           element: $element,
           data: $scope.values
         });
       }
-      $element.height("400px");
 		}
   };
 });

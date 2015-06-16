@@ -267,7 +267,7 @@ module API
           comments = news.commentaries[(@offset.to_i)..(@offset.to_i + @limit.to_i)] || []
           refine_comments = []
           comments.each { |comment|
-            refine_comments << comment.as_json(:only => Commentary.miniKey)
+            refine_comments << comment.as_json(:only => Commentary.miniKey, :include => { user: { only: User.miniKey } })
           }
           @returnValue = { content: refine_comments }
         end
