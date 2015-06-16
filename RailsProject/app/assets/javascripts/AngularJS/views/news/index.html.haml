@@ -1,17 +1,21 @@
-%div{ "ng-init" => "showNews()" }
+.news{ "ng-init" => "showNews()" }
   %loading{ "ng-if" => "loading == true" }
   .row{ "ng-if" => "loading == false", "ng-init" => "initFoundation()"}
     %h3.subheader
       Listing news
     .ul.small-11.small-centered.columns{"ng-show" => "News"}
       %li{ "ng-repeat" => "new in news"}
-        .panel.radius.news
-          %h5.subheader.text-center
-            {{ new.title }}
-          %h6{"ng-repeat" => "text in new.newstexts"}
-            {{ text.content }}
-          .divider
-            
+        .panel.radius
+          .title
+            %h5.subheader.text-center
+              {{ new.title }}
+          .small-12.small-centered.columns.vignette{"ng-repeat" => "url in new.attachments" }
+            %a{:href=>"http://lvh.me:3000/news/" + "{{new.id}}" }
+              %img{"ng-src" => "{{ url.url }}"}
+          .content
+            %h6{"ng-repeat" => "text in new.newstexts"}
+              {{ text.content }}
+
       .pagination-centerd.small-4.small-centered.columns
         %ul.pagination
           %li.arrow.unavailable

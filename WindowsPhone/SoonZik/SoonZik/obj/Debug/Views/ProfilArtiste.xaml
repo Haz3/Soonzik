@@ -5,27 +5,72 @@
     xmlns:local="using:SoonZik.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
+    xmlns:core="using:Microsoft.Xaml.Interactions.Core"
     mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    DataContext="{StaticResource ProfilArtisteViewModel}"
+    Background="#424242">
 
-    <Grid Background="Transparent">
+    <interactivity:Interaction.Behaviors>
+        <core:EventTriggerBehavior EventName="Loaded">
+            <core:InvokeCommandAction Command="{Binding SelectionCommand}"/>
+        </core:EventTriggerBehavior>
+    </interactivity:Interaction.Behaviors>
+
+
+    <Grid x:Name="GlobalGrid">
         <Grid.RowDefinitions>
-            <!--<RowDefinition Height="70"/>-->
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="250"/>
+        </Grid.RowDefinitions>
+        <Grid.Resources>
+            <DataTemplate x:Key="AlbumTemplate">
+                <Grid Height="70" Margin="20,0,0,0">
+                    <Border BorderThickness="0,0,0,1" Width="350" BorderBrush="White"></Border>
+                    <Image x:Name="AlbumImage" Source="../Resources/Icones/MenuExplorer.png" Height="50" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10,0,0,0"/>
+                    <TextBlock x:Name="MusicTitle" Text="{Binding Path=title}" FontSize="25" HorizontalAlignment="Center"/>
+                    <Image x:Name="MoreOption" Source="../Resources/Icones/menu.png" Height="30" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,20,0"/>
+                </Grid>
+            </DataTemplate>
+        </Grid.Resources>
+
+        <Grid Grid.Row="0">
+            <Image Name="ImageArtiste" Source="ms-appx:///Resources/Icones/ProfilMenu.png" Width="200" Height="200" HorizontalAlignment="Center" VerticalAlignment="Top" 
+                   Margin="0,30,0,0">
+            </Image>
+
+            <TextBlock x:Name="AlbumTitle" Text="{Binding TheArtiste.Username}" FontSize="30" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,120,0,0">
+
+            </TextBlock>
+
+            <TextBlock x:Name="ArtistName" Text="{Binding TheArtiste.Follows.Count}" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,250,0,0">
+
+            </TextBlock>
+        </Grid>
+        <ListView Grid.Row="1" x:Name="MusicListView" ItemsSource="{Binding ListAlbums}" ItemTemplate="{StaticResource AlbumTemplate}">
+
+        </ListView>
+    </Grid>
+
+
+</Page>
+<!--<Grid Background="Transparent">
+        <Grid.RowDefinitions>
             <RowDefinition Height="18*"/>
             <RowDefinition Height="30*"/>
         </Grid.RowDefinitions>
 
-        <!-- Row 1 -->
+        --><!-- Row 1 -->
         <!--<Grid Grid.Row="0" Background="#d3d7da">
             <Image Source="../Resources/logo.png" Height="100" Width="150" Grid.Row="0" VerticalAlignment="Center"/>
         </Grid>-->
-        <!-- Row 2 -->
+        <!-- Row 2 --><!--
         <Grid Grid.Row="0" Background="Transparent">
             <Image Source="../Resources/Icones/disc.png" Height="160" Width="160" HorizontalAlignment="Left" Margin="20,0,0,0"/>
             <TextBlock Text="Artist Name" FontFamily="Calibri" FontSize="30" HorizontalAlignment="Right" Margin="0,38,49,42"/>
         </Grid>
-        <!-- Row 3 -->
-        <Grid Grid.Row="1" Background="Transparent">
+        --><!-- Row 3 -->
+        <!--<Grid Grid.Row="1" Background="Transparent">
             <Pivot x:Name="PivotProfil" HeaderTemplate="{StaticResource SizeHeaderGlobalPivot}" Style="{StaticResource PivotStyle1}">
                 <PivotItem Header="Bio">
                     <ScrollViewer>
@@ -80,8 +125,7 @@
                     </ScrollViewer>
                 </PivotItem>
             </Pivot>
-        </Grid>
-        <!-- Row 4 -->
-    </Grid>
-</Page>
+        </Grid>-->
+        <!-- Row 4 --><!--
+    </Grid>-->
 

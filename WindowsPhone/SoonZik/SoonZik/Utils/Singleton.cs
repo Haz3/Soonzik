@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using Windows.UI.Xaml;
 using SoonZik.HttpRequest;
 using SoonZik.HttpRequest.Poco;
 using SoonZik.Views;
@@ -32,6 +33,9 @@ namespace SoonZik.Utils
 
         public int NewProfilUser { get; set; }
 
+        public UIElement LastElement { get; set; }
+
+        public Music SelectedMusicSingleton { get; set; }
         #endregion
 
         #region Ctor

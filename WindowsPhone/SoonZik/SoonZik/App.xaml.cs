@@ -40,7 +40,8 @@ namespace SoonZik
         }
 
         /// <summary>
-        /// Invoqué lorsque l'application est lancée normalement par l'utilisateur final.  D'autres points d'entrée
+        /// Invoqué lorsque l'application est lancée normalement par l'utilisa
+        /// teur final.  D'autres points d'entrée
         /// sont utilisés lorsque l'application est lancée pour ouvrir un fichier spécifique, pour afficher
         /// des résultats de recherche, etc.
         /// </summary>

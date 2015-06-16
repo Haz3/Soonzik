@@ -21,6 +21,13 @@
         </m3:DefaultTile>
         <m3:SplashScreen Image="Resources\logo.png" BackgroundColor="#d3d7da" />
       </m3:VisualElements>
+      <Extensions>
+        <Extension Category="windows.backgroundTasks" EntryPoint="SoonZik.App">
+          <BackgroundTasks>
+            <Task Type="audio" />
+          </BackgroundTasks>
+        </Extension>
+      </Extensions>
     </Application>
   </Applications>
   <Capabilities>

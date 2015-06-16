@@ -8,7 +8,7 @@ SoonzikApp.controller('NewsCtrl', ['$scope', '$routeParams', 'SecureAuth', 'HTTP
 
 	$scope.showNews = function() {
 		var parameters = [
-			{ key: "order_by_desc[]", value: "date" }
+			{ key: "order_by_asc[]", value: "date" }
 		];
 
 		$scope.News = true;
@@ -18,9 +18,30 @@ SoonzikApp.controller('NewsCtrl', ['$scope', '$routeParams', 'SecureAuth', 'HTTP
 			$scope.news = news.data.content;
 			console.log($scope.news);
 
+
 		}, function (error) {
 			console.log("No News Available");
 		})
+	}
+
+	$scope.showNewsById = function() {
+		var id = $routeParams.id;
+
+		HTTPService.showNews(id).then(function(response) {
+
+			$scope.thisNews = response.data.content;
+			$scope.attachments = $scope.thisNews.attachments;
+			$scope.author = $scope.thisNews.user;
+
+			console.log($scope.author);
+
+
+		}, function (error) {
+			console.log("This news doesn't exist");
+		});
+
+		$scope.thisNewsId = true;
+	
 	}
 
 	$scope.comment = function() {

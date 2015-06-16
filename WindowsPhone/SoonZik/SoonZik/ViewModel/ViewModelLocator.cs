@@ -46,8 +46,11 @@ namespace SoonZik.ViewModel
             SimpleIoc.Default.Register<FriendViewModel>();
             SimpleIoc.Default.Register<ConversationViewModel>();
             SimpleIoc.Default.Register<MainPageViewModel>();
-            SimpleIoc.Default.Register<PlayerViewModel>();
             SimpleIoc.Default.Register<ExplorerViewModel>();
+            SimpleIoc.Default.Register<NewsDetailViewModel>();
+            SimpleIoc.Default.Register<ProfilFriendViewModel>();
+            SimpleIoc.Default.Register<AlbumViewModel>();
+
         }
 
         public MainViewModel Main
@@ -121,14 +124,24 @@ namespace SoonZik.ViewModel
             get { return ServiceLocator.Current.GetInstance<MainPageViewModel>(); }
         }
 
-        public PlayerViewModel Player
-        {
-            get { return ServiceLocator.Current.GetInstance<PlayerViewModel>(); }
-        }
-
         public ExplorerViewModel Explorer
         {
             get { return ServiceLocator.Current.GetInstance<ExplorerViewModel>(); }
+        }
+
+        public NewsDetailViewModel NewsDetail
+        {
+            get { return ServiceLocator.Current.GetInstance<NewsDetailViewModel>(); }
+        }
+
+        public ProfilFriendViewModel ProfilFriend
+        {
+            get { return ServiceLocator.Current.GetInstance<ProfilFriendViewModel>(); }
+        }
+
+        public AlbumViewModel AlbumView
+        {
+            get { return ServiceLocator.Current.GetInstance<AlbumViewModel>(); }
         }
        
         public static void Cleanup()

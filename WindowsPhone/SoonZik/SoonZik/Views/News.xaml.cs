@@ -1,17 +1,8 @@
-﻿using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
-using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
+﻿using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Navigation;
-
-// Pour en savoir plus sur le modèle d’élément Page vierge, consultez la page http://go.microsoft.com/fwlink/?LinkID=390556
-using GalaSoft.MvvmLight;
-using SoonZik.Annotations;
-using SoonZik.HttpRequest;
 using SoonZik.ViewModel;
+// Pour en savoir plus sur le modèle d’élément Page vierge, consultez la page http://go.microsoft.com/fwlink/?LinkID=390556
 
 namespace SoonZik.Views
 {
@@ -39,6 +30,12 @@ namespace SoonZik.Views
         {
             var vm = DataContext as NewsViewModel;
             if (vm != null) vm.ShareTapped.Execute(null);
+        }
+
+        private void Grid_OnTapped(object sender, TappedRoutedEventArgs e)
+        {
+            var vm = DataContext as NewsViewModel;
+            if (vm != null) vm.ItemClickCommand.Execute(null);
         }
     }
 }
