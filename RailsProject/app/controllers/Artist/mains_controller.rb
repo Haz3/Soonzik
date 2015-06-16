@@ -2,9 +2,11 @@ module Artist
   # Controller which manage main page of the artist panel
   #
   class MainsController < ArtistsController
+  	# Root of the panel
   	def home
   	end
 
+  	# Ajax route to get the statistics (with .json at the end of the url) or it redirects to the root (if no .json)
   	def stats
   		respond_to do |format|
   			format.html { redirect_to artist_root_path }
@@ -12,83 +14,153 @@ module Artist
         	response = {
         		music: [],
         		album: [],
-        		pack: []
+        		pack: [],
+        		notes: {}
         	}
 
-        	# Calculate the musics sell
-        	current_user.musics.each { |music|
-        		purchasedItems = {
-        			music_title: music.title,
+        	begin
+	        	# Calculate the musics sell
+	        	current_user.musics.each { |music|
+	        		purchasedItems = {
+	        			music_title: music.title,
+	        			total_sell: 0,
+	        			lastweek: 0
+	        		}
+	        		music.purchased_musics.each { |purchased_music|
+	        			if purchased_music.purchased_album == nil
+		        			purchasedItems[:total_sell] += 1
+		        			if ((Time.now.to_date - purchased_music.purchase.created_at.to_date).to_i > 7)
+		        				purchasedItems[:lastweek] += 1
+		        			end
+	        			end
+	        		}
+	        		response[:music] << purchasedItems
+	        	}
+	        rescue
+	        	response[:music] = [{
+        			music_title: "A problem occured",
         			total_sell: 0,
         			lastweek: 0
-        		}
-        		music.purchased_musics.each { |purchased_music|
-        			if purchased_music.purchased_album == nil
-	        			purchasedItems[:total_sell] += 1
-	        			if ((Time.now.to_date - purchased_music.purchase.created_at.to_date).to_i > 7)
-	        				purchasedItems[:lastweek] += 1
-	        			end
-        			end
-        		}
-        		response[:music] << purchasedItems
-        	}
+	        	}]
+	        end
 
-        	# Calculate the albums sell
-        	current_user.albums.each { |album|
-        		purchasedItems = {
-        			album_title: album.title,
+        	begin
+	        	# Calculate the albums sell
+	        	current_user.albums.each { |album|
+	        		purchasedItems = {
+	        			album_title: album.title,
+	        			total_sell: 0,
+	        			lastweek: 0
+	        		}
+	        		album.purchased_albums.each { |purchased_album|
+	        			if purchased_album.purchased_pack == nil
+		        			purchasedItems[:total_sell] += 1
+		        			if ((Time.now.to_date - purchased_album.purchased_musics[0].purchase.created_at.to_date).to_i > 7)
+		        				purchasedItems[:lastweek] += 1
+		        			end
+		        		end
+	        		}
+	        		response[:album] << purchasedItems
+	        	}
+	        rescue
+	        	response[:album] = [{
+        			album_title: "A problem occured",
         			total_sell: 0,
         			lastweek: 0
-        		}
-        		album.purchased_albums.each { |purchased_album|
-        			if purchased_album.purchased_pack == nil
-	        			purchasedItems[:total_sell] += 1
-	        			if ((Time.now.to_date - purchased_album.purchased_musics[0].purchase.created_at.to_date).to_i > 7)
-	        				purchasedItems[:lastweek] += 1
-	        			end
-	        		end
-        		}
-        		response[:album] << purchasedItems
-        	}
+	        	}]
+	        end
 
         	# Calculate the musics sell
         	memory_pack = {}
 
-        	current_user.albums.each { |album|
-        		album.packs.each { |pack|
-        			pack.purchased_packs.each { |purchased_pack|
+        	begin
+	        	current_user.albums.each { |album|
+	        		album.packs.each { |pack|
+	        			pack.purchased_packs.each { |purchased_pack|
 
-	        			# if there is a pack and it was not defined before
-	        			if !memory_pack.has_key?(pack.id) && purchased_pack.purchased_musics.size > 0
-	        				memory_pack[pack.id] = {
-			        			pack_title: pack.title,
-			        			total_sell: 0,
-			        			total_sell_partial: 0,
-			        			lastweek: 0,
-			        			lastweek_partial: 0,
-			        			users: []
-			        		}
-		        		end
+		        			# if there is a pack and it was not defined before
+		        			if !memory_pack.has_key?(pack.id) && purchased_pack.purchased_musics.size > 0
+		        				memory_pack[pack.id] = {
+				        			pack_title: pack.title,
+				        			total_sell: 0,
+				        			total_sell_partial: 0,
+				        			lastweek: 0,
+				        			lastweek_partial: 0,
+				        			users: []
+				        		}
+			        		end
 
-		        		# if the pack exist already and the user never buy it before
-		        		if (!memory_pack[pack.id][:users].include?(current_user.id)) && purchased_pack.purchased_musics.size > 0
-		        			memory_pack[pack.id][:total_sell] += 1
-	        				memory_pack[pack.id][:total_sell_partial] += 1 if purchased_pack.partial
-		        			if ((Time.now.to_date - purchased_pack.purchased_musics[0].purchase.created_at.to_date).to_i > 7)
-		        				memory_pack[pack.id][:lastweek] += 1
-		        				memory_pack[pack.id][:lastweek_partial] += 1 if purchased_pack.partial
+			        		# if the pack exist already and the user never buy it before
+			        		if (!memory_pack[pack.id][:users].include?(current_user.id)) && purchased_pack.purchased_musics.size > 0
+			        			memory_pack[pack.id][:total_sell] += 1
+		        				memory_pack[pack.id][:total_sell_partial] += 1 if purchased_pack.partial
+			        			if ((Time.now.to_date - purchased_pack.purchased_musics[0].purchase.created_at.to_date).to_i > 7)
+			        				memory_pack[pack.id][:lastweek] += 1
+			        				memory_pack[pack.id][:lastweek_partial] += 1 if purchased_pack.partial
+			        			end
+			        			memory_pack[pack.id][:users] << purchased_pack.purchased_musics[0].purchase.user.id	        			
 		        			end
-		        			memory_pack[pack.id][:users] << purchased_pack.purchased_musics[0].purchase.user.id	        			
-	        			end
 
-        			}
-        		}
-        	}
+	        			}
+	        		}
+	        	}
 
-        	memory_pack.each { |key, value|
-        		value.delete(:users)
-        		response[:pack] << value
+	        	memory_pack.each { |key, value|
+	        		value.delete(:users)
+	        		response[:pack] << value
+	        	}
+	        rescue
+	        	response[:pack] = [{
+	        		pack_title: "An error occured",
+        			total_sell: 0,
+        			total_sell_partial: 0,
+        			lastweek: 0,
+        			lastweek_partial: 0
+	        	}]
+	        end
+
+
+					memory_notes = {
+        		album: [],
+        		average: 0
         	}
+	        begin
+	        	# Calculate the note statistics
+	        	current_user.albums { |album|
+
+	        		# init
+	        		album_to_insert = {
+	        			musics: [],
+	        			name: album.title,
+	        			average: 0
+	        		}
+	        		notes = 0
+	        		notesTotal = 0
+
+		        	album.musics.each { |music|
+		        		# to ignore music without notes
+		        		if music.music_notes.size != 0
+		        			album_to_insert[:musics] << { id: music.id,
+		        				name: music.title,
+		        				note: music.getAverageNote
+		        			}
+		        			notes += 1
+		        			notesTotal += music.getAverageNote
+		        		end
+		        	}
+
+		        	album_to_insert[:average] = notesTotal / notes if notes > 0
+		        	memory_notes << album_to_insert
+		        }
+
+	        	note = 0
+	        	memory_notes.album.each { |album|
+	        		note += album[:average]
+	        	}
+	        	memory_notes[:average] = note / memory_notes[:album].size if memory_notes[:album].size > 0
+	        rescue
+	        end
+	        response[:notes] = memory_notes
 
         	render :json => response
         }

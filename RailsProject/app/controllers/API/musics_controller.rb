@@ -35,7 +35,8 @@ module API
           @returnValue = { content: Music.all.as_json(:only => Music.miniKey, :include => {
                                                                                           :album => { :only => Album.miniKey },
                                                                                           :genres => { :only => Genre.miniKey },
-                                                                                          :user => {:only => User.miniKey}
+                                                                                          :user => {:only => User.miniKey},
+                                                                                          descriptions: {  :only => Description.miniKey }
                                                                                         }) }
         end
         if (@returnValue[:content].size == 0)
@@ -72,7 +73,8 @@ module API
           @returnValue = { content: music.as_json(:only => Music.miniKey, :include => {
                                       :album => { :only => Album.miniKey },
                                       :genres => { :only => Genre.miniKey },
-                                      :user => {:only => User.miniKey}
+                                      :user => {:only => User.miniKey},
+                                      descriptions: {  :only => Description.miniKey }
                                       }) }
           codeAnswer 200
         end
@@ -173,7 +175,8 @@ module API
         @returnValue = { content: music_object.as_json(:only => Music.miniKey, :include => {
                                       :album => { :only => Album.miniKey },
                                       :genres => { :only => Genre.miniKey },
-                                      :user => {:only => User.miniKey}
+                                      :user => {:only => User.miniKey},
+                                      descriptions: {  :only => Description.miniKey }
                                       }) }
 
         if (music_object.size == 0)

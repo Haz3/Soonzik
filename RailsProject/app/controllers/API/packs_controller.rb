@@ -26,13 +26,19 @@ module API
           @returnValue = { content: Pack.count }
         else
           @returnValue = { content: Pack.all.as_json(:include => { albums: {
-                                                                              :include => {
-                                                                                            :user => { :only => User.miniKey },
-                                                                                            :musics => { :only => Music.miniKey }
-                                                                                          },
-                                                                              :only => Album.miniKey
-                                                                            }
-                                                                  }, :only => Pack.miniKey) }
+                                                                    :include => {
+                                                                      :user => { :only => User.miniKey },
+                                                                      :musics => { :only => Music.miniKey }
+                                                                    },
+                                                                    :only => Album.miniKey
+                                                                  },
+                                                                  user: {
+                                                                    :only => User.miniKey
+                                                                  },
+                                                                  descriptions: {
+                                                                    :only => Description.miniKey
+                                                                  }
+                                                                }, :only => Pack.miniKey) }
         end
         if (@returnValue[:content].size == 0)
           codeAnswer 202
@@ -68,13 +74,19 @@ module API
           defineHttp :not_found
         else
           @returnValue = { content: pack.as_json(:include => { albums: {
-                                                                              :include => {
-                                                                                            :user => { :only => User.miniKey },
-                                                                                            :musics => { :only => Music.miniKey }
-                                                                                          },
-                                                                              :only => Album.miniKey
-                                                                            }
-                                                                  }, :only => Pack.miniKey) }
+                                                                  :include => {
+                                                                    :user => { :only => User.miniKey },
+                                                                    :musics => { :only => Music.miniKey }
+                                                                  },
+                                                                  :only => Album.miniKey
+                                                                },
+                                                                user: {
+                                                                  :only => User.miniKey
+                                                                },
+                                                                descriptions: {
+                                                                  :only => Description.miniKey
+                                                                }
+                                                              }, :only => Pack.miniKey) }
           codeAnswer 200
         end
       rescue
@@ -177,7 +189,13 @@ module API
                                                                                             :musics => { :only => Music.miniKey }
                                                                                           },
                                                                               :only => Album.miniKey
-                                                                            }
+                                                                            },
+                                                                  user: {
+                                                                    :only => User.miniKey
+                                                                  },
+                                                                  descriptions: {
+                                                                    :only => Description.miniKey
+                                                                  }
                                                                   }, :only => Pack.miniKey) }
 
         if (pack_object.size == 0)

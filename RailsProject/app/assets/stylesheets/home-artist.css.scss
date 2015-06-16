@@ -6,11 +6,15 @@
 	}
 
 	.stat-container {
-		.musics, .albums, .packs, .notes {
+		.musics, .albums, .packs, .notes_music, .notes_album {
 			overflow-x: auto;
 		  overflow-y: hidden;
 		  height: 350px;
-		  border: 1px solid #E3E3E3;
+		  border: 1px solid #E8E8E8;
+		}
+
+		h5 {
+			color: #00AABB;
 		}
 
 		charts {

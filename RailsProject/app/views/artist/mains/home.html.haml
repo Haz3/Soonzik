@@ -4,18 +4,25 @@
 			%h3 Your statistics
 		.sell.small-12.clearfix
 			.musics.small-12.medium-12.large-6.columns
+				%h5 Sell statistics for musics
 				%loading{ "ng-if" => "loading.music == true" }
 				%charts{ "ng-if" => "loading.music == false", "type-chart" => "'bar'", "values" => "values.music.data", "xkey" => "values.music.xkey", "ykeys" => "values.music.ykeys", "labels" => "values.music.labels" }
 			.albums.small-12.medium-12.large-6.columns
+				%h5 Sell statistics for albums
 				%loading{ "ng-if" => "loading.album == true" }
 				%charts{ "ng-if" => "loading.album == false", "type-chart" => "'bar'", "values" => "values.album.data", "xkey" => "values.album.xkey", "ykeys" => "values.album.ykeys", "labels" => "values.album.labels" }
-			.packs.small-12.medium-12.large-6.columns.end
+			.packs.small-12.medium-12.large-6.columns
+				%h5 Sell statistics for packs
 				%loading{ "ng-if" => "loading.pack == true" }
 				%charts{ "ng-if" => "loading.pack == false", "type-chart" => "'bar'", "values" => "values.pack.data", "xkey" => "values.pack.xkey", "ykeys" => "values.pack.ykeys", "labels" => "values.pack.labels" }
-			.notes.small-12.medium-12.large-6.columns.end
+			.notes_music.small-12.medium-12.large-6.columns
+				%h5 The statistics about music notes
 				%loading{ "ng-if" => "loading.note == true" }
-				.charts{ "ng-if" => "loading.note == false" }
-					Contenu
+				%charts{ "ng-if" => "loading.note == false", "type-chart" => "'line'", "values" => "values.note_musics.data", "xkey" => "values.note_musics.xkey", "ykeys" => "values.note_musics.ykeys", "labels" => "values.note_musics.labels" }
+			.notes_album.small-12.medium-12.large-6.columns.end
+				%h5 The statistics about album notes (based on music notes)
+				%loading{ "ng-if" => "loading.note == true" }
+				%charts{ "ng-if" => "loading.note == false", "type-chart" => "'bar'", "values" => "values.note_albums.data", "xkey" => "values.note_albums.xkey", "ykeys" => "values.note_albums.ykeys", "labels" => "values.note_albums.labels" }
 		.battle
 			.currentBattle.clearfix
 				.small-12.medium-6.large-4.columns

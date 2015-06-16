@@ -24,7 +24,8 @@ module API
           @returnValue = { content: Genre.count }
         else
           @returnValue = { content: Genre.all.as_json(:include => {
-                                                        :influences => { :only => Influence.miniKey }
+                                                        :influences => { :only => Influence.miniKey },
+                                                        descriptions: {  :only => Description.miniKey }
                                                     }, :only => Genre.miniKey) }
         end
         if (@returnValue[:content].size == 0)
@@ -62,7 +63,8 @@ module API
         else
           @returnValue = { content: genre.as_json(:include => {
                                       :influences => { :only => Influence.miniKey },
-                                      :musics => { only: Music.miniKey}
+                                      :musics => { only: Music.miniKey},
+                                      descriptions: {  :only => Description.miniKey }
                                       }, :only => Genre.miniKey) }
           codeAnswer 200
         end

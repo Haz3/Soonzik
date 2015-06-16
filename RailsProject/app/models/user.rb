@@ -26,6 +26,7 @@ class User < ActiveRecord::Base
   has_many :notifications
   has_many :musics
   has_many :news
+  has_many :packs
   has_many :propositions
   has_many :tweets
   has_many :votes

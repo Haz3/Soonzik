@@ -5,6 +5,7 @@ class Description < ActiveRecord::Base
   has_and_belongs_to_many :albums
   has_and_belongs_to_many :musics
   has_and_belongs_to_many :genres
+  has_and_belongs_to_many :packs
   has_and_belongs_to_many :influences
 
   validates :description, :language, presence: true
@@ -12,5 +13,10 @@ class Description < ActiveRecord::Base
   # The strong parameters to save or update object
   def self.description_params(parameters)
     parameters.require(:description).permit(:description, :language)
+  end
+
+  # The information filtered for the API
+  def self.miniKey
+  	[:id, :description, :language]
   end
 end

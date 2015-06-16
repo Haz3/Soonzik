@@ -4,6 +4,8 @@
 class Pack < ActiveRecord::Base
   has_and_belongs_to_many :albums
   has_and_belongs_to_many :genres
+  has_and_belongs_to_many :descriptions
+  belongs_to :user, foreign_key: 'association_id'
 
   has_many :purchased_packs
 

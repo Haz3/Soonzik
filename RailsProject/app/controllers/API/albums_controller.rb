@@ -32,7 +32,8 @@ module API
         else
           @returnValue = { content: Album.all.as_json(:only => Album.miniKey, :include => {
                                                                                 :user => { :only => User.miniKey },
-                                                                                :musics => { :only => Music.miniKey }
+                                                                                :musics => { :only => Music.miniKey },
+                                                                                descriptions: {  :only => Description.miniKey }
                                                                                 } ) }
         end
         if (@returnValue[:content].size == 0)
@@ -70,7 +71,8 @@ module API
         else
           @returnValue = { content: album.as_json(:only => Album.miniKey, :include => {
                                                               :musics => { :only => Music.miniKey},
-                                                              :user => {:only => User.miniKey}
+                                                              :user => {:only => User.miniKey},
+                                                              descriptions: {  :only => Description.miniKey }
                                                               }) }
           codeAnswer 200
         end
@@ -170,7 +172,8 @@ module API
 
         @returnValue = { content: album_object.as_json(:only => Album.miniKey, :include => {
                                                                       :musics => {:only => Music.miniKey },
-                                                                      :user => {:only => User.miniKey}
+                                                                      :user => {:only => User.miniKey},
+                                                                      descriptions: {  :only => Description.miniKey }
                                                                     }) }
 
         if (album_object.size == 0)
