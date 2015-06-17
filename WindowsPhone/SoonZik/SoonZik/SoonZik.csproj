@@ -128,13 +128,16 @@
     <Compile Include="Views\AlbumView.xaml.cs">
       <DependentUpon>AlbumView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\GeolocalisationView.xaml.cs">
+      <DependentUpon>GeolocalisationView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\ProfilFriendView.xaml.cs">
       <DependentUpon>ProfilFriendView.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\ProfilUserViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
-    <Compile Include="Views\Battle.xaml.cs">
-      <DependentUpon>Battle.xaml</DependentUpon>
+    <Compile Include="Views\BattleView.xaml.cs">
+      <DependentUpon>BattleView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Connexion.xaml.cs">
       <DependentUpon>Connexion.xaml</DependentUpon>
@@ -266,11 +269,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\GeolocalisationView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\ProfilFriendView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Battle.xaml">
+    <Page Include="Views\BattleView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

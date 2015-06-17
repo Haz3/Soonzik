@@ -182,7 +182,7 @@ namespace SoonZik.Controls
 
         private void GoToBattle()
         {
-            SetChildren(new Battle());
+            SetChildren(new BattleView());
         }
 
         private void GoToPlaylist()
