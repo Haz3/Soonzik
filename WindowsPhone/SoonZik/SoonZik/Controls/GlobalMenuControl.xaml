@@ -61,7 +61,7 @@
         </DataTemplate>
 
         <DataTemplate x:Key="PackItemTemplate">
-            <StackPanel Margin="0,0,0,30" x:Name="PackStackPanel">
+            <StackPanel Margin="0,0,0,30" x:Name="PackStackPanel" Tapped="PackStackPanel_OnTapped">
                 <TextBlock Text="{Binding Path=Title}"/>
             </StackPanel>
         </DataTemplate>

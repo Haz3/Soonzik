@@ -14,16 +14,15 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
 // Pour en savoir plus sur le modèle d’élément Page vierge, consultez la page http://go.microsoft.com/fwlink/?LinkID=390556
-using SoonZik.ViewModel;
 
 namespace SoonZik.Views
 {
     /// <summary>
     /// Une page vide peut être utilisée seule ou constituer une page de destination au sein d'un frame.
     /// </summary>
-    public sealed partial class Battle : Page
+    public sealed partial class GeolocalisationView : Page
     {
-        public Battle()
+        public GeolocalisationView()
         {
             this.InitializeComponent();
         }

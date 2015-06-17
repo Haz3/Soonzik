@@ -80,7 +80,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Connexion.cs" />
-    <Compile Include="CreateRequete.cs" />
     <Compile Include="HttpExtensions\HttpExtensions.cs" />
     <Compile Include="HttpExtensions\HttpMethods.cs" />
     <Compile Include="HttpRequestGet.cs" />

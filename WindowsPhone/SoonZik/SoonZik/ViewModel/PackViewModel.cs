@@ -1,16 +1,68 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
+using System.Threading.Tasks;
+using System.Windows.Input;
 using Windows.UI.Xaml.Media.Imaging;
+using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Command;
+using SoonZik.HttpRequest;
+using SoonZik.HttpRequest.Poco;
 
 namespace SoonZik.ViewModel
 {
-    public class PackViewModel
+    public class PackViewModel : ViewModelBase
     {
-        public ObservableCollection<Object> Datas { get; set; }
+        public ObservableCollection<Data> Datas { get; set; }
+
+        public static Pack ThePack { get; set; }
+
+        private Data _selectedData;
+
+        public Data SelectedData
+        {
+            get { return _selectedData;}
+            set
+            {
+                _selectedData = value; 
+                RaisePropertyChanged("SelectedData");
+            }
+        }
+
+        private Album _selectedAlbum;
+
+        public Album SelectedAlbum
+        {
+            get { return _selectedAlbum; }
+            set
+            {
+                _selectedAlbum = value;
+                RaisePropertyChanged("SelectedAlbum");
+            }
+        }
+
+        private List<Album> _listAlbums;
+
+        public List<Album> ListAlbums
+        {
+            get { return _listAlbums;}
+            set
+            {
+                _listAlbums = value;
+                RaisePropertyChanged("ListAlbums");
+            }
+        }
+
+        private ICommand _selectionCommand;
+        public ICommand SelectionCommand
+        {
+            get { return _selectionCommand; }
+        }
 
         public PackViewModel()
         {
-            var datas = new ObservableCollection<Object>
+            var datas = new ObservableCollection<Data>
             {
                 new Data
                 {
@@ -43,9 +95,34 @@ namespace SoonZik.ViewModel
                     Title = "06"
                 }
             };
-
+            
             this.Datas = datas;
 
+            if (ThePack != null)
+            {
+                _selectionCommand = new RelayCommand(SelectionExecute);
+            }
+
+        }
+
+        private void SelectionExecute()
+        {
+            var task = Task.Run(async () => await Charge());
+            task.Wait(); 
+            ListAlbums = ThePack.Albums;
+        }
+
+        public async Task Charge()
+        {
+            var request = new HttpRequestGet();
+            try
+            {
+                ThePack = (Pack)await request.GetObject(new Pack(), "packs", ThePack.Id.ToString());
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine(e.ToString());
+            }
         }
     }
 

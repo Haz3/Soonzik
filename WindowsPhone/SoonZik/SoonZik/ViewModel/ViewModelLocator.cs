@@ -34,15 +34,11 @@ namespace SoonZik.ViewModel
 
             SimpleIoc.Default.Register<MainViewModel>();
             SimpleIoc.Default.Register<ConnexionViewModel>();
-            SimpleIoc.Default.Register<AccueilViewModel>();
             SimpleIoc.Default.Register<NewsViewModel>();
             SimpleIoc.Default.Register<PackViewModel>();
             SimpleIoc.Default.Register<ProfilUserViewModel>();
             SimpleIoc.Default.Register<ProfilArtisteViewModel>();
-            SimpleIoc.Default.Register<MenuViewModel>();
-            SimpleIoc.Default.Register<ViewModel>();
             SimpleIoc.Default.Register<BattleViewModel>();
-            SimpleIoc.Default.Register<GeolocViewModel>();
             SimpleIoc.Default.Register<FriendViewModel>();
             SimpleIoc.Default.Register<ConversationViewModel>();
             SimpleIoc.Default.Register<MainPageViewModel>();
@@ -64,11 +60,6 @@ namespace SoonZik.ViewModel
             get { return ServiceLocator.Current.GetInstance<ConnexionViewModel>(); }
         }
 
-        public AccueilViewModel Accueil
-        {
-            get { return ServiceLocator.Current.GetInstance<AccueilViewModel>(); }
-        }
-
         public NewsViewModel News
         {
             get { return ServiceLocator.Current.GetInstance<NewsViewModel>(); }
@@ -83,30 +74,15 @@ namespace SoonZik.ViewModel
         {
             get { return ServiceLocator.Current.GetInstance<ProfilUserViewModel>(); }
         }
-        
+
         public ProfilArtisteViewModel ProfilArtiste
         {
             get { return ServiceLocator.Current.GetInstance<ProfilArtisteViewModel>(); }
         }
 
-        public MenuViewModel Menu
-        {
-            get { return ServiceLocator.Current.GetInstance<MenuViewModel>(); }
-        }
-
-        public ViewModel View
-        {
-            get { return ServiceLocator.Current.GetInstance<ViewModel>(); }
-        }
-
         public BattleViewModel Battle
         {
             get { return ServiceLocator.Current.GetInstance<BattleViewModel>(); }
-        }
-
-        public GeolocViewModel Geoloc
-        {
-            get { return ServiceLocator.Current.GetInstance<GeolocViewModel>(); }
         }
 
         public FriendViewModel Friend

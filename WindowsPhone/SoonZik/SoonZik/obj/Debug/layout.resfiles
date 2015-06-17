@@ -18,10 +18,8 @@ Views\AlbumView.xbf
 Views\Battle.xbf
 Views\Connexion.xbf
 Views\Conversation.xbf
-Views\CustomSplashScreen.xbf
 Views\Explorer.xbf
 Views\Friends.xbf
-Views\Geoloc.xbf
 Views\MainView.xbf
 Views\News.xbf
 Views\NewsDetail.xbf

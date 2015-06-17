@@ -25,7 +25,7 @@
         </Grid.RowDefinitions>
         <Grid.Resources>
             <DataTemplate x:Key="AlbumTemplate">
-                <Grid Height="70" Margin="20,0,0,0">
+                <Grid Height="70" Margin="20,0,0,0" Tapped="UIElement_OnTapped">
                     <Border BorderThickness="0,0,0,1" Width="350" BorderBrush="White"></Border>
                     <Image x:Name="AlbumImage" Source="../Resources/Icones/MenuExplorer.png" Height="50" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10,0,0,0"/>
                     <TextBlock x:Name="MusicTitle" Text="{Binding Path=title}" FontSize="25" HorizontalAlignment="Center"/>
@@ -47,7 +47,7 @@
 
             </TextBlock>
         </Grid>
-        <ListView Grid.Row="1" x:Name="MusicListView" ItemsSource="{Binding ListAlbums}" ItemTemplate="{StaticResource AlbumTemplate}">
+        <ListView Grid.Row="1" x:Name="MusicListView" ItemsSource="{Binding ListAlbums}" ItemTemplate="{StaticResource AlbumTemplate}" SelectedItem="{Binding TheAlbum, Mode=TwoWay}">
 
         </ListView>
     </Grid>

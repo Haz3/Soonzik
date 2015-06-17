@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Threading.Tasks;
 using Windows.UI.Xaml;
 using SoonZik.HttpRequest;
@@ -55,7 +56,7 @@ namespace SoonZik.Utils
             }
             catch (Exception e)
             {
-
+                Debug.WriteLine(e.ToString());
             }
         }
         #endregion
