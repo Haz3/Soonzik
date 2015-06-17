@@ -7,6 +7,7 @@ module Artist
 
     before_action :cors_set_access_control_headers
     before_filter :authenticate_user!
+    before_action :cookieMe
 
     # For all responses in this controller, return the CORS access control headers.
     def cors_set_access_control_headers
@@ -20,6 +21,17 @@ module Artist
       headers['Access-Control-Allow-Headers'] = '*,x-requested-with,Content-Type,If-Modified-Since,If-None-Match,Auth-User-Token'
       headers['Access-Control-Allow-Credentials'] = 'true'
       headers['Access-Control-Max-Age'] = "1728000"
+    end
+
+    # If the user is logged, we put some information into the cookies to allow Ajax call
+    def cookieMe
+      if user_signed_in?
+        cookies[:user_id] = current_user.id
+        cookies[:user_token] = current_user.salt
+        cookies[:user_username] = current_user.username
+      elsif !user_signed_in?() && cookies.has_key?(:user)
+        cookies.delete :user
+      end
     end
   end
 end

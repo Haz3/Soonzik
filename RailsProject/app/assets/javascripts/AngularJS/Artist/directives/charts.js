@@ -20,6 +20,11 @@ SoonzikArtistApp.directive('charts', function() {
       $element.width(((w1 > w2) ? w1 : w2) + "px");
 
       if ($scope.typeChart == "bar") {
+        for (var i = 0 ; i < $scope.values.length ; i++) {
+          for (var yindex in $scope.ykeys) {
+            $scope.values[i][$scope.ykeys[yindex] ] = ~~($scope.values[i][$scope.ykeys[yindex] ] * 100) / 100;
+          }
+        }
         Morris.Bar({
           element: $element,
           data: $scope.values,
@@ -38,9 +43,14 @@ SoonzikArtistApp.directive('charts', function() {
         });
         $element.height("400px");
       } else {
+        var total = 0;
+        for (var i in $scope.values) {
+          total += $scope.values[i].value;
+        }
         Morris.Donut({
           element: $element,
-          data: $scope.values
+          data: $scope.values,
+          formatter: function (x) { return (Math.round((x / total * 100) * 100) / 100) + "%"}
         });
       }
 		}

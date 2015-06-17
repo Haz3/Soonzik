@@ -170,5 +170,71 @@ module Artist
         }
   		end
   	end
+
+  	# Function to get the last comments about albums or musics
+  	#
+  	# ==== Options
+  	#
+  	# +:offset+ - The offset from where you want values
+  	# +:limit+ - The number limit of values you want
+  	#
+  	def getLastComments
+  		respond_to do |format|
+  			format.html { redirect_to artist_root_path }
+        format.json {
+        	offset = 0
+        	limit = 5
+		  		commentsTmp = []
+		  		comments = []
+
+		  		current_user.albums.each { |album|
+		  			commentsTmp += album.commentaries
+		  		}
+		  		current_user.musics.each { |music|
+		  			commentsTmp += music.commentaries
+		  		}
+
+		  		commentsTmp.sort! { |x, y| y.created_at.to_date <=> x.created_at.to_date }
+
+		  		offset = params[:offset].to_i if params.has_key?(:offset)
+		  		limit = params[:limit].to_i if params.has_key?(:limit)
+
+		  		commentsTmp = commentsTmp[offset..(offset+limit)]
+		  		commentsTmp.each { |comment|
+		  			comments << comment.as_json(:include => {
+		  				:albums => { only: Album.miniKey },
+		  				:musics => { only: Music.miniKey },
+		  				:user => { only: User.miniKey }
+		  			}, only: Commentary.miniKey)
+		  		}
+
+        	render :json => comments
+  			}
+  		end
+  	end
+
+  	# Function to get the last comments about albums or musics
+  	#
+  	# ==== Options
+  	#
+  	# +:offset+ - The offset from where you want values
+  	# +:limit+ - The number limit of values you want
+  	#
+  	def getLastTweets
+  		respond_to do |format|
+  			format.html { redirect_to artist_root_path }
+        format.json {
+        	offset = 0
+        	limit = 5
+		  		
+		  		offset = params[:offset].to_i if params.has_key?(:offset)
+		  		limit = params[:limit].to_i if params.has_key?(:limit)
+
+		  		tweets = Tweet.where("msg LIKE ?", "%@#{current_user.username} %").offset(offset).limit(limit).as_json(:include => { :user => { only: User.miniKey } }, only: Tweet.miniKey + [:created_at])
+
+        	render :json => tweets
+  			}
+  		end
+  	end
   end
 end

@@ -139,6 +139,8 @@ Rails.application.routes.draw do
   namespace :artist, path: '/', constraints: { subdomain: 'artist' } do
     root 'mains#home'
     get '/stats' => 'mains#stats'
+    get '/comments' => 'mains#getLastComments'
+    get '/tweets' => 'mains#getLastTweets'
   end
 
   devise_for :admin_users, ActiveAdmin::Devise.config

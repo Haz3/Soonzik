@@ -37,6 +37,15 @@
 	}
 
 	.text-container {
+		.commentaries {
+			blockquote cite a {
+				color: #00AABB;
+			}
 
+			blockquote cite a:hover {
+				color: #22CCDD
+			}
+		}
 	}
+
 }

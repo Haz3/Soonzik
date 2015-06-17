@@ -18,7 +18,7 @@
 			.notes_music.small-12.medium-12.large-6.columns
 				%h5 The statistics about music notes
 				%loading{ "ng-if" => "loading.note == true" }
-				%charts{ "ng-if" => "loading.note == false", "type-chart" => "'line'", "values" => "values.note_musics.data", "xkey" => "values.note_musics.xkey", "ykeys" => "values.note_musics.ykeys", "labels" => "values.note_musics.labels" }
+				%charts{ "ng-if" => "loading.note == false", "type-chart" => "'bar'", "values" => "values.note_musics.data", "xkey" => "values.note_musics.xkey", "ykeys" => "values.note_musics.ykeys", "labels" => "values.note_musics.labels" }
 			.notes_album.small-12.medium-12.large-6.columns.end
 				%h5 The statistics about album notes (based on music notes)
 				%loading{ "ng-if" => "loading.note == true" }
@@ -40,18 +40,24 @@
 		.commentaries.small-12.medium-6.columns
 			.title
 				%h3 Last commentaries
-			%ul
-				%li Com 1
-				%li Com 2
-				%li Com 3
-				%li Com 4
-				%li Com 5
+			%loading{ "ng-if" => "loading.commentaries == true", "loading-type" => "'square'" }
+			%ul.no-bullet
+				%li{ "ng-if" => "loading.commentaries == false", "ng-repeat" => "commentary in commentaries" }
+					%blockquote
+						{{ commentary.content }}
+						%cite
+							%a{ href: "http://lvh.me:3000/users/{{ commentary.user.id }}" }
+								{{ commentary.user.username }}
+							{{ " - " + commentary.created_at.format("default") }}
 		.commentaries.small-12.medium-6.columns.end
 			.title
 				%h3 Tweets
-			%ul
-				%li Tweets 1
-				%li Tweets 2
-				%li Tweets 3
-				%li Tweets 4
-				%li Tweets 5
+			%loading{ "ng-if" => "loading.tweets == true", "loading-type" => "'square'" }
+			%ul.no-bullet
+				%li{ "ng-if" => "loading.tweets == false", "ng-repeat" => "tweet in tweets" }
+					%blockquote
+						{{ tweet.msg }}
+						%cite
+							%a{ href: "http://lvh.me:3000/users/{{ tweet.user.id }}" }
+								{{ tweet.user.username }}
+							{{ " - " + tweet.created_at.format("default") }}

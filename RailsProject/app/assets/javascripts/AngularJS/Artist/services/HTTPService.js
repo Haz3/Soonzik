@@ -92,6 +92,12 @@ SoonzikArtistApp.factory('HTTPService', ['$http', '$location', 'Upload', functio
     },
     getStats: function() {
       return $http.get("http://artist." + url + "/stats.json");
+    },
+    getLastComments: function() {
+      return $http.get("http://artist." + url + "/comments.json")
+    },
+    getLastTweets: function() {
+      return $http.get("http://artist." + url + "/tweets.json")
     }
   }
 }]);
