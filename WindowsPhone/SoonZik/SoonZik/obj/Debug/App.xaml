@@ -18,6 +18,7 @@
         <vm:FriendViewModel x:Key="FriendViewModel"/>
         <vm:AlbumViewModel x:Key="AlbumViewModel" />
         <vm:ProfilArtisteViewModel x:Key="ProfilArtisteViewModel" />
+        <vm:GeolocalisationViewModel x:Key="GeolocalisationViewModel" />
       
     <DataTemplate x:Key="SizePivotHeader">
       <ContentPresenter>

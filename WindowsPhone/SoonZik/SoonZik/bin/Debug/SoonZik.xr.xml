@@ -21,6 +21,7 @@
     <RootPropertyPathName Name="isActive" />
     <RootPropertyPathName Name="ListMusics" />
     <RootPropertyPathName Name="TheAlbum" />
+    <RootPropertyPathName Name="UserLocation" />
     <RootPropertyPathName Name="SelectionCommand" />
     <RootPropertyPathName Name="CurrentUser" />
     <RootPropertyPathName Name="Follows" />
@@ -79,6 +80,7 @@
     <RootType FullName="SoonZik.ViewModel.FriendViewModel" />
     <RootType FullName="SoonZik.ViewModel.AlbumViewModel" />
     <RootType FullName="SoonZik.ViewModel.ProfilArtisteViewModel" />
+    <RootType FullName="SoonZik.ViewModel.GeolocalisationViewModel" />
     <RootType FullName="Windows.UI.Xaml.DataTemplate">
       <RootProperty Name="Template" />
     </RootType>
@@ -400,6 +402,10 @@
     <RootType FullName="SoonZik.Views.Connexion" />
     <RootType FullName="SoonZik.MainPage" />
     <RootType FullName="SoonZik.Views.AlbumView" />
+    <RootType FullName="Windows.UI.Xaml.Controls.Maps.MapControl">
+      <RootProperty Name="Center" />
+    </RootType>
+    <RootType FullName="SoonZik.Views.GeolocalisationView" />
     <RootType FullName="Windows.UI.Xaml.Controls.ListBox">
       <RootProperty Name="Background" />
       <RootProperty Name="ItemsSource" />
@@ -409,7 +415,7 @@
     </RootType>
     <RootType FullName="SoonZik.ViewModel.ProfilFriendView" />
     <RootType FullName="SoonZik.ViewModel.BattleViewModel" />
-    <RootType FullName="SoonZik.Views.Battle" />
+    <RootType FullName="SoonZik.Views.BattleView" />
     <RootType FullName="SoonZik.Utils.BooleanToVisibilityConverter">
       <RootProperty Name="True" />
       <RootProperty Name="False" />

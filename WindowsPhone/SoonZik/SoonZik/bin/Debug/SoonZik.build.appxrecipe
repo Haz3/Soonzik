@@ -247,11 +247,14 @@
     <AppxPackagedFile Include="C:\Users\Juan-Pablo Bastardos\Documents\GitHub\SoonZik\Soonzik\WindowsPhone\SoonZik\SoonZik\bin\Debug\Views\AlbumView.xbf">
       <PackagePath>Views\AlbumView.xbf</PackagePath>
     </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Juan-Pablo Bastardos\Documents\GitHub\SoonZik\Soonzik\WindowsPhone\SoonZik\SoonZik\bin\Debug\Views\GeolocalisationView.xbf">
+      <PackagePath>Views\GeolocalisationView.xbf</PackagePath>
+    </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Juan-Pablo Bastardos\Documents\GitHub\SoonZik\Soonzik\WindowsPhone\SoonZik\SoonZik\bin\Debug\Views\ProfilFriendView.xbf">
       <PackagePath>Views\ProfilFriendView.xbf</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\Juan-Pablo Bastardos\Documents\GitHub\SoonZik\Soonzik\WindowsPhone\SoonZik\SoonZik\bin\Debug\Views\Battle.xbf">
-      <PackagePath>Views\Battle.xbf</PackagePath>
+    <AppxPackagedFile Include="C:\Users\Juan-Pablo Bastardos\Documents\GitHub\SoonZik\Soonzik\WindowsPhone\SoonZik\SoonZik\bin\Debug\Views\BattleView.xbf">
+      <PackagePath>Views\BattleView.xbf</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Juan-Pablo Bastardos\Documents\GitHub\SoonZik\Soonzik\WindowsPhone\SoonZik\SoonZik\bin\Debug\Views\Connexion.xbf">
       <PackagePath>Views\Connexion.xbf</PackagePath>

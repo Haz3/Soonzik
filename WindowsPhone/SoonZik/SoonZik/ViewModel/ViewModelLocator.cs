@@ -15,6 +15,7 @@
 using GalaSoft.MvvmLight.Ioc;
 using GalaSoft.MvvmLight.Views;
 using Microsoft.Practices.ServiceLocation;
+using SoonZik.Views;
 
 namespace SoonZik.ViewModel
 {
@@ -46,6 +47,7 @@ namespace SoonZik.ViewModel
             SimpleIoc.Default.Register<NewsDetailViewModel>();
             SimpleIoc.Default.Register<ProfilFriendViewModel>();
             SimpleIoc.Default.Register<AlbumViewModel>();
+            SimpleIoc.Default.Register<GeolocalisationView>();
 
         }
 
@@ -118,6 +120,11 @@ namespace SoonZik.ViewModel
         public AlbumViewModel AlbumView
         {
             get { return ServiceLocator.Current.GetInstance<AlbumViewModel>(); }
+        }
+        
+        public GeolocalisationView GeolocView
+        {
+            get { return ServiceLocator.Current.GetInstance<GeolocalisationView>(); }
         }
        
         public static void Cleanup()

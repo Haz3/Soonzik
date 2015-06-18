@@ -4,6 +4,8 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using Windows.Devices.Geolocation;
+using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
@@ -14,7 +16,7 @@ using SoonZik.HttpRequest.Poco;
 using SoonZik.Utils;
 using SoonZik.ViewModel;
 using SoonZik.Views;
-using Battle = SoonZik.Views.Battle;
+using Battle = SoonZik.Views.BattleView;
 using Connexion = SoonZik.Views.Connexion;
 
 // Pour en savoir plus sur le modèle d'élément Contrôle utilisateur, consultez la page http://go.microsoft.com/fwlink/?LinkId=234236
@@ -177,7 +179,15 @@ namespace SoonZik.Controls
 
         private void GoToMondeMusical()
         {
-           //SetChildren();
+            Geolocator locator = new Geolocator();
+            if (locator.LocationStatus == PositionStatus.Disabled)
+            {
+                new MessageDialog("Veuillez activer votre Location").ShowAsync();
+            }
+            else
+            {
+                SetChildren(new GeolocalisationView());
+            }
         }
 
         private void GoToBattle()

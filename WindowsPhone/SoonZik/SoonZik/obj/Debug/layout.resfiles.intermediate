@@ -15,11 +15,12 @@ Controls\ProgressRingControl.xbf
 MainPage.xbf
 SoonZik.xr.xml
 Views\AlbumView.xbf
-Views\Battle.xbf
+Views\BattleView.xbf
 Views\Connexion.xbf
 Views\Conversation.xbf
 Views\Explorer.xbf
 Views\Friends.xbf
+Views\GeolocalisationView.xbf
 Views\MainView.xbf
 Views\News.xbf
 Views\NewsDetail.xbf
