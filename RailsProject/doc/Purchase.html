@@ -111,6 +111,36 @@
 			
 <p>The model of the object <a href="Purchase.html">Purchase</a> Contain the
 relation and the validation Can provide some features linked to this model</p>
+
+<h4 id="class-Purchase-label-Attributes">Attributes<span><a href="#class-Purchase-label-Attributes">&para;</a> <a href="#top">&uarr;</a></span></h4>
+<ul><li>
+<p><code>id</code> - (integer) - The ID of the object</p>
+</li><li>
+<p><code>user_id</code> - (integer) - The ID of the user</p>
+</li></ul>
+
+<h4 id="class-Purchase-label-Associations">Associations<span><a href="#class-Purchase-label-Associations">&para;</a> <a href="#top">&uarr;</a></span></h4>
+
+<p>####### # First degree of relation</p>
+
+<p>belongs_to :user has_many :purchased_musics</p>
+
+<p>####### # Second degree of relation</p>
+
+<pre class="ruby"><span class="ruby-identifier">has_many</span> :<span class="ruby-identifier">musics</span>, <span class="ruby-identifier">through</span><span class="ruby-operator">:</span> :<span class="ruby-identifier">purchased_musics</span>
+<span class="ruby-identifier">has_many</span> :<span class="ruby-identifier">purchased_albums</span>, <span class="ruby-identifier">through</span><span class="ruby-operator">:</span> :<span class="ruby-identifier">purchased_musics</span>
+</pre>
+
+<p>####### # Third degree of relation</p>
+
+<pre class="ruby"><span class="ruby-identifier">has_many</span> :<span class="ruby-identifier">albums</span>, <span class="ruby-identifier">through</span><span class="ruby-operator">:</span> :<span class="ruby-identifier">purchased_albums</span>
+<span class="ruby-identifier">has_many</span> :<span class="ruby-identifier">purchased_packs</span>, <span class="ruby-identifier">through</span><span class="ruby-operator">:</span> :<span class="ruby-identifier">purchased_albums</span>
+</pre>
+
+<p>####### # Fourth degree of relation</p>
+
+<pre class="ruby"><span class="ruby-identifier">has_many</span> :<span class="ruby-identifier">packs</span>, <span class="ruby-identifier">through</span><span class="ruby-operator">:</span> :<span class="ruby-identifier">purchased_packs</span>
+</pre>
 		</section>
 
 				<section id="5Buntitled-5D" class="documentation-section">
@@ -138,7 +168,7 @@ relation and the validation Can provide some features linked to this model</p>
 											<p>The strong parameters to save or update object</p>					
 											<div class="method-source-code" id="purchase_params-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/models/purchase.rb, line 27</span>
+								class="language-ruby"><span class="ruby-comment"># File app/models/purchase.rb, line 58</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">purchase_params</span>(<span class="ruby-identifier">parameters</span>)
   <span class="ruby-identifier">parameters</span>.<span class="ruby-identifier">require</span>(<span class="ruby-value">:purchase</span>).<span class="ruby-identifier">permit</span>(<span class="ruby-value">:user_id</span>)
 <span class="ruby-keyword">end</span></code></pre>
@@ -173,7 +203,7 @@ relation and the validation Can provide some features linked to this model</p>
 																
 											<div class="method-source-code" id="addPurchasedAlbumFromObject-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/models/purchase.rb, line 39</span>
+								class="language-ruby"><span class="ruby-comment"># File app/models/purchase.rb, line 70</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">addPurchasedAlbumFromObject</span>(<span class="ruby-identifier">albumObject</span>)
       <span class="ruby-identifier">listSavedMusics</span> = []
 
@@ -211,7 +241,7 @@ relation and the validation Can provide some features linked to this model</p>
 																
 											<div class="method-source-code" id="addPurchasedMusicFromObject-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/models/purchase.rb, line 31</span>
+								class="language-ruby"><span class="ruby-comment"># File app/models/purchase.rb, line 62</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">addPurchasedMusicFromObject</span>(<span class="ruby-identifier">musicObject</span>)
       <span class="ruby-identifier">pMusic</span> = <span class="ruby-constant">PurchasedMusic</span>.<span class="ruby-identifier">new</span>
       <span class="ruby-identifier">pMusic</span>.<span class="ruby-identifier">music_id</span> = <span class="ruby-identifier">musicObject</span>.<span class="ruby-identifier">id</span>
@@ -237,7 +267,7 @@ relation and the validation Can provide some features linked to this model</p>
 																
 											<div class="method-source-code" id="addPurchasedPackFromObject-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/models/purchase.rb, line 59</span>
+								class="language-ruby"><span class="ruby-comment"># File app/models/purchase.rb, line 90</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">addPurchasedPackFromObject</span>(<span class="ruby-identifier">packObject</span>, <span class="ruby-identifier">partial</span>)
       <span class="ruby-identifier">listSavedAlbums</span> = []
 
@@ -330,9 +360,12 @@ relation and the validation Can provide some features linked to this model</p>
 			<li><a href="./Concert.html">Concert</a></li>
 			<li><a href="./Description.html">Description</a></li>
 			<li><a href="./Flac.html">Flac</a></li>
+			<li><a href="./Follow.html">Follow</a></li>
+			<li><a href="./Friend.html">Friend</a></li>
 			<li><a href="./Genre.html">Genre</a></li>
 			<li><a href="./Gift.html">Gift</a></li>
 			<li><a href="./Group.html">Group</a></li>
+			<li><a href="./Identity.html">Identity</a></li>
 			<li><a href="./Influence.html">Influence</a></li>
 			<li><a href="./Listening.html">Listening</a></li>
 			<li><a href="./Message.html">Message</a></li>
@@ -359,6 +392,8 @@ relation and the validation Can provide some features linked to this model</p>
 	<!-- File dropdown menu -->
 	<div id="file-dropdown" class="dropdown-menu has-scroll">
 	<ul>
+			<li><a href="./app/models/script.html">script</a></li>
+			<li><a href="./app/models/tag_new.html">tag.new</a></li>
 		</ul>
 	</div>
 

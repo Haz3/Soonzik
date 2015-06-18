@@ -141,6 +141,7 @@ Rails.application.routes.draw do
     get '/stats' => 'mains#stats'
     get '/comments' => 'mains#getLastComments'
     get '/tweets' => 'mains#getLastTweets'
+    get '/tour' => 'tours#index'
   end
 
   devise_for :admin_users, ActiveAdmin::Devise.config

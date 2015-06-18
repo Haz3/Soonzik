@@ -112,6 +112,23 @@
 <p>The model of the object <a href="Notification.html">Notification</a>
 Contain the relation and the validation Can provide some features linked to
 this model</p>
+
+<h4 id="class-Notification-label-Attributes">Attributes<span><a href="#class-Notification-label-Attributes">&para;</a> <a href="#top">&uarr;</a></span></h4>
+<ul><li>
+<p><code>id</code> - (integer) - The ID of the object</p>
+</li><li>
+<p><code>user_id</code> - (integer) - The ID of the user</p>
+</li><li>
+<p><code>link</code> - (string) - The link to see what about the notification
+is</p>
+</li><li>
+<p><code>description</code> - (string) - The text inside the notification</p>
+</li></ul>
+
+<h4 id="class-Notification-label-Associations">Associations<span><a href="#class-Notification-label-Associations">&para;</a> <a href="#top">&uarr;</a></span></h4>
+<ul><li>
+<p><code>belongs_to</code> - :user</p>
+</li></ul>
 		</section>
 
 				<section id="5Buntitled-5D" class="documentation-section">
@@ -139,7 +156,7 @@ this model</p>
 											<p>The strong parameters to save or update object</p>					
 											<div class="method-source-code" id="notification_params-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/models/notification.rb, line 10</span>
+								class="language-ruby"><span class="ruby-comment"># File app/models/notification.rb, line 22</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">notification_params</span>(<span class="ruby-identifier">parameters</span>)
   <span class="ruby-identifier">parameters</span>.<span class="ruby-identifier">require</span>(<span class="ruby-value">:notification</span>).<span class="ruby-identifier">permit</span>(<span class="ruby-value">:user_id</span>, <span class="ruby-value">:link</span>, <span class="ruby-value">:description</span>)
 <span class="ruby-keyword">end</span></code></pre>
@@ -213,9 +230,12 @@ this model</p>
 			<li><a href="./Concert.html">Concert</a></li>
 			<li><a href="./Description.html">Description</a></li>
 			<li><a href="./Flac.html">Flac</a></li>
+			<li><a href="./Follow.html">Follow</a></li>
+			<li><a href="./Friend.html">Friend</a></li>
 			<li><a href="./Genre.html">Genre</a></li>
 			<li><a href="./Gift.html">Gift</a></li>
 			<li><a href="./Group.html">Group</a></li>
+			<li><a href="./Identity.html">Identity</a></li>
 			<li><a href="./Influence.html">Influence</a></li>
 			<li><a href="./Listening.html">Listening</a></li>
 			<li><a href="./Message.html">Message</a></li>
@@ -242,6 +262,8 @@ this model</p>
 	<!-- File dropdown menu -->
 	<div id="file-dropdown" class="dropdown-menu has-scroll">
 	<ul>
+			<li><a href="./app/models/script.html">script</a></li>
+			<li><a href="./app/models/tag_new.html">tag.new</a></li>
 		</ul>
 	</div>
 

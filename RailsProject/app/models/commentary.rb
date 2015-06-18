@@ -1,6 +1,20 @@
 # The model of the object Commentary
 # Contain the relation and the validation
 # Can provide some features linked to this model
+#
+# ==== Attributes
+#
+# - +id+ - (integer) - The ID of the object
+# - +author_id+ - (integer) - The ID of the author
+# - +content+ - (string) - The commentary
+#
+# ==== Associations
+#
+# - +belongs_to+ - :user
+# - +has_and_belongs_to_many+ - :albums
+# - +has_and_belongs_to_many+ - :musics
+# - +has_and_belongs_to_many+ - :news
+#
 class Commentary < ActiveRecord::Base
   belongs_to :user, class_name: 'User', foreign_key: 'author_id'
   has_and_belongs_to_many :news
@@ -16,6 +30,8 @@ class Commentary < ActiveRecord::Base
   end
 
   # Filter of information for the API
+  #
+  # Fields returned : [:id, :author_id, :content, :created_at]
   def self.miniKey
     [:id, :author_id, :content, :created_at]
   end

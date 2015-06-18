@@ -1,3 +1,21 @@
+# The model of the object Identity
+# Contain the relation and the validation
+# Can provide some features linked to this model
+#
+# This model is used for social network connection.
+# The salt that the smartphone application need to use for the login thanks to social network is :
+# "3uNi@rCK$L$om40dNnhX)#jV2$40wwbr_bAK99%E"
+#
+# ==== Attributes
+#
+# - +id+ - (integer) - The ID of the object
+# - +name+ - (string) - The name of the group
+#
+# ==== Associations
+#
+# - +has_many+ - :accesses (Not sure if we will keep it)
+# - +has_and_belongs_to_many+ - :users
+#
 class Identity < ActiveRecord::Base
 	before_validation :newToken, on: :create
 

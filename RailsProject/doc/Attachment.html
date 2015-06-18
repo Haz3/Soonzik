@@ -112,6 +112,25 @@
 <p>The model of the object <a href="Attachment.html">Attachment</a> Contain
 the relation and the validation Can provide some features linked to this
 model</p>
+
+<h4 id="class-Attachment-label-Attributes">Attributes<span><a href="#class-Attachment-label-Attributes">&para;</a> <a href="#top">&uarr;</a></span></h4>
+<ul><li>
+<p><code>id</code> - (integer) - The ID of the object</p>
+</li><li>
+<p><code>news_id</code> - (integer) - The ID of the news</p>
+</li><li>
+<p><code>url</code> - (string) - The url of the resource</p>
+</li><li>
+<p><code>file_size</code> - (integer) - The size of the file (in octets)</p>
+</li><li>
+<p><code>content_type</code> - (string) - The MIME code to know which type of
+file it is</p>
+</li></ul>
+
+<h4 id="class-Attachment-label-Associations">Associations<span><a href="#class-Attachment-label-Associations">&para;</a> <a href="#top">&uarr;</a></span></h4>
+<ul><li>
+<p><code>has_and_belongs_to_many</code> - :news</p>
+</li></ul>
 		</section>
 
 				<section id="5Buntitled-5D" class="documentation-section">
@@ -139,7 +158,7 @@ model</p>
 											<p>The strong parameters to save or update object</p>					
 											<div class="method-source-code" id="attachment_params-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/models/attachment.rb, line 16</span>
+								class="language-ruby"><span class="ruby-comment"># File app/models/attachment.rb, line 31</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">attachment_params</span>(<span class="ruby-identifier">parameters</span>)
   <span class="ruby-identifier">parameters</span>.<span class="ruby-identifier">require</span>(<span class="ruby-value">:attachment</span>).<span class="ruby-identifier">permit</span>(<span class="ruby-value">:url</span>, <span class="ruby-value">:file_size</span>, <span class="ruby-value">:content_type</span>)
 <span class="ruby-keyword">end</span></code></pre>
@@ -158,10 +177,12 @@ model</p>
 										</header>
 
 					<div class="method-description">
-											<p>Filter of information for the <a href="API.html">API</a></p>					
+											<p>Filter of information for the <a href="API.html">API</a></p>
+
+<p>Fields returned : [:id, :url, :file_size, :content_type]</p>					
 											<div class="method-source-code" id="miniKey-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/models/attachment.rb, line 11</span>
+								class="language-ruby"><span class="ruby-comment"># File app/models/attachment.rb, line 26</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">miniKey</span>
       [<span class="ruby-value">:id</span>, <span class="ruby-value">:url</span>, <span class="ruby-value">:file_size</span>, <span class="ruby-value">:content_type</span>]
 <span class="ruby-keyword">end</span></code></pre>
@@ -235,9 +256,12 @@ model</p>
 			<li><a href="./Concert.html">Concert</a></li>
 			<li><a href="./Description.html">Description</a></li>
 			<li><a href="./Flac.html">Flac</a></li>
+			<li><a href="./Follow.html">Follow</a></li>
+			<li><a href="./Friend.html">Friend</a></li>
 			<li><a href="./Genre.html">Genre</a></li>
 			<li><a href="./Gift.html">Gift</a></li>
 			<li><a href="./Group.html">Group</a></li>
+			<li><a href="./Identity.html">Identity</a></li>
 			<li><a href="./Influence.html">Influence</a></li>
 			<li><a href="./Listening.html">Listening</a></li>
 			<li><a href="./Message.html">Message</a></li>
@@ -264,6 +288,8 @@ model</p>
 	<!-- File dropdown menu -->
 	<div id="file-dropdown" class="dropdown-menu has-scroll">
 	<ul>
+			<li><a href="./app/models/script.html">script</a></li>
+			<li><a href="./app/models/tag_new.html">tag.new</a></li>
 		</ul>
 	</div>
 

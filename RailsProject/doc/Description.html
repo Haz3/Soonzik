@@ -112,6 +112,28 @@
 <p>The model of the object <a href="Description.html">Description</a> Contain
 the relation and the validation Can provide some features linked to this
 model</p>
+
+<h4 id="class-Description-label-Attributes">Attributes<span><a href="#class-Description-label-Attributes">&para;</a> <a href="#top">&uarr;</a></span></h4>
+<ul><li>
+<p><code>id</code> - (integer) - The ID of the object</p>
+</li><li>
+<p><code>description</code> - (string) - The description</p>
+</li><li>
+<p><code>language</code> - (string) - The language of the description</p>
+</li></ul>
+
+<h4 id="class-Description-label-Associations">Associations<span><a href="#class-Description-label-Associations">&para;</a> <a href="#top">&uarr;</a></span></h4>
+<ul><li>
+<p><code>has_and_belongs_to_many</code> - :albums</p>
+</li><li>
+<p><code>has_and_belongs_to_many</code> - :musics</p>
+</li><li>
+<p><code>has_and_belongs_to_many</code> - :packs</p>
+</li><li>
+<p><code>has_and_belongs_to_many</code> - :genres</p>
+</li><li>
+<p><code>has_and_belongs_to_many</code> - :influences</p>
+</li></ul>
 		</section>
 
 				<section id="5Buntitled-5D" class="documentation-section">
@@ -139,9 +161,33 @@ model</p>
 											<p>The strong parameters to save or update object</p>					
 											<div class="method-source-code" id="description_params-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/models/description.rb, line 13</span>
+								class="language-ruby"><span class="ruby-comment"># File app/models/description.rb, line 29</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">description_params</span>(<span class="ruby-identifier">parameters</span>)
   <span class="ruby-identifier">parameters</span>.<span class="ruby-identifier">require</span>(<span class="ruby-value">:description</span>).<span class="ruby-identifier">permit</span>(<span class="ruby-value">:description</span>, <span class="ruby-value">:language</span>)
+<span class="ruby-keyword">end</span></code></pre>
+						</div>
+										</div>
+
+					
+									</div>
+								<a name="method-c-miniKey">anchor</a>
+				<div id="method-c-miniKey-doc" class="method">
+
+					<header>
+											<i class="icon-generic"></i>
+						<span class="method-name">miniKey</span><span 
+							class="method-args">()</span>
+										</header>
+
+					<div class="method-description">
+											<p>The information filtered for the <a href="API.html">API</a></p>
+
+<p>Fields returned : [:id, :description, :language]</p>					
+											<div class="method-source-code" id="miniKey-source">
+							<pre class="prettyprint linenums"><code 
+								class="language-ruby"><span class="ruby-comment"># File app/models/description.rb, line 36</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">miniKey</span>
+      [<span class="ruby-value">:id</span>, <span class="ruby-value">:description</span>, <span class="ruby-value">:language</span>]
 <span class="ruby-keyword">end</span></code></pre>
 						</div>
 										</div>
@@ -213,9 +259,12 @@ model</p>
 			<li><a href="./Concert.html">Concert</a></li>
 			<li><a href="./Description.html">Description</a></li>
 			<li><a href="./Flac.html">Flac</a></li>
+			<li><a href="./Follow.html">Follow</a></li>
+			<li><a href="./Friend.html">Friend</a></li>
 			<li><a href="./Genre.html">Genre</a></li>
 			<li><a href="./Gift.html">Gift</a></li>
 			<li><a href="./Group.html">Group</a></li>
+			<li><a href="./Identity.html">Identity</a></li>
 			<li><a href="./Influence.html">Influence</a></li>
 			<li><a href="./Listening.html">Listening</a></li>
 			<li><a href="./Message.html">Message</a></li>
@@ -242,6 +291,8 @@ model</p>
 	<!-- File dropdown menu -->
 	<div id="file-dropdown" class="dropdown-menu has-scroll">
 	<ul>
+			<li><a href="./app/models/script.html">script</a></li>
+			<li><a href="./app/models/tag_new.html">tag.new</a></li>
 		</ul>
 	</div>
 

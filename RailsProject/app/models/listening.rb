@@ -1,6 +1,21 @@
 # The model of the object Listening
 # Contain the relation and the validation
 # Can provide some features linked to this model
+#
+# ==== Attributes
+#
+# - +id+ - (integer) - The ID of the object
+# - +when+ - (date) - The name of the group
+# - +latitude+ - (float) - The latitude of the position
+# - +longitude+ - (float) - The longitude of the position
+# - +music_id+ - (integer) - The ID of the music listened
+# - +user_id+ - (integer) - The ID of the user who listen music
+#
+# ==== Associations
+#
+# - +belongs_to+ - :music
+# - +belongs_to+ - :user
+#
 class Listening < ActiveRecord::Base
   belongs_to :music
   belongs_to :user
@@ -10,6 +25,8 @@ class Listening < ActiveRecord::Base
   validates :latitude, :longitude, numericality: true
 
   # Filter of information for the API - Restricted
+  #
+  # Fields returned : [:id, :when, :latitude, :longitude]
   def self.miniKey
     [:id, :when, :latitude, :longitude]
   end

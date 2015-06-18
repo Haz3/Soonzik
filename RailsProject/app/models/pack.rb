@@ -1,6 +1,20 @@
 # The model of the object Pack
 # Contain the relation and the validation
 # Can provide some features linked to this model
+#
+# ==== Attributes
+#
+# - +id+ - (integer) - The ID of the object
+# - +association_id+ - (integer) - The ID of the association linked with this pack
+# - +title+ - (string) - The name of the pack
+#
+# ==== Associations
+#
+# - +belongs_to+ - :user
+# - +has_and_belongs_to_many+ - :albums
+# - +has_and_belongs_to_many+ - :genres
+# - +has_and_belongs_to_many+ - :descriptions
+#
 class Pack < ActiveRecord::Base
   has_and_belongs_to_many :albums
   has_and_belongs_to_many :genres
@@ -16,6 +30,9 @@ class Pack < ActiveRecord::Base
     parameters.require(:pack).permit(:title)
   end
 
+  # Filter of information for the API
+  #
+  # Fields returned : [:id, :title]
   def self.miniKey
   	[:id, :title]
   end

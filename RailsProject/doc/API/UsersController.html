@@ -559,7 +559,7 @@ Note : By default, if you precise no attribute, it will take every row</pre>
       <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">502</span>
       <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:not_found</span>
     <span class="ruby-keyword">else</span>
-      <span class="ruby-ivar">@returnValue</span> = { <span class="ruby-identifier">content</span><span class="ruby-operator">:</span> <span class="ruby-identifier">u</span>.<span class="ruby-identifier">followers</span>.<span class="ruby-identifier">as_json</span>(<span class="ruby-value">:only</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">User</span>.<span class="ruby-identifier">miniKey</span>) }
+      <span class="ruby-ivar">@returnValue</span> = { <span class="ruby-identifier">content</span><span class="ruby-operator">:</span> <span class="ruby-identifier">u</span>.<span class="ruby-identifier">followers</span>.<span class="ruby-identifier">reverse_order</span>.<span class="ruby-identifier">as_json</span>(<span class="ruby-value">:only</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">User</span>.<span class="ruby-identifier">miniKey</span>) }
       <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">200</span>
     <span class="ruby-keyword">end</span>
   <span class="ruby-keyword">rescue</span>
@@ -611,7 +611,7 @@ Note : By default, if you precise no attribute, it will take every row</pre>
       <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">502</span>
       <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:not_found</span>
     <span class="ruby-keyword">else</span>
-      <span class="ruby-ivar">@returnValue</span> = { <span class="ruby-identifier">content</span><span class="ruby-operator">:</span> <span class="ruby-identifier">u</span>.<span class="ruby-identifier">follows</span>.<span class="ruby-identifier">as_json</span>(<span class="ruby-value">:only</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">User</span>.<span class="ruby-identifier">miniKey</span>) }
+      <span class="ruby-ivar">@returnValue</span> = { <span class="ruby-identifier">content</span><span class="ruby-operator">:</span> <span class="ruby-identifier">u</span>.<span class="ruby-identifier">follows</span>.<span class="ruby-identifier">reverse_order</span>.<span class="ruby-identifier">as_json</span>(<span class="ruby-value">:only</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">User</span>.<span class="ruby-identifier">miniKey</span>) }
       <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">200</span>
     <span class="ruby-keyword">end</span>
   <span class="ruby-keyword">rescue</span>
@@ -663,7 +663,7 @@ Note : By default, if you precise no attribute, it will take every row</pre>
       <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">502</span>
       <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:not_found</span>
     <span class="ruby-keyword">else</span>
-      <span class="ruby-ivar">@returnValue</span> = { <span class="ruby-identifier">content</span><span class="ruby-operator">:</span> <span class="ruby-identifier">u</span>.<span class="ruby-identifier">friends</span>.<span class="ruby-identifier">as_json</span>(<span class="ruby-value">:only</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">User</span>.<span class="ruby-identifier">miniKey</span>) }
+      <span class="ruby-ivar">@returnValue</span> = { <span class="ruby-identifier">content</span><span class="ruby-operator">:</span> <span class="ruby-identifier">u</span>.<span class="ruby-identifier">friends</span>.<span class="ruby-identifier">reverse_order</span>.<span class="ruby-identifier">as_json</span>(<span class="ruby-value">:only</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">User</span>.<span class="ruby-identifier">miniKey</span>) }
       <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">200</span>
     <span class="ruby-keyword">end</span>
   <span class="ruby-keyword">rescue</span>
@@ -1324,9 +1324,12 @@ are authorized)</p>
 			<li><a href="../Concert.html">Concert</a></li>
 			<li><a href="../Description.html">Description</a></li>
 			<li><a href="../Flac.html">Flac</a></li>
+			<li><a href="../Follow.html">Follow</a></li>
+			<li><a href="../Friend.html">Friend</a></li>
 			<li><a href="../Genre.html">Genre</a></li>
 			<li><a href="../Gift.html">Gift</a></li>
 			<li><a href="../Group.html">Group</a></li>
+			<li><a href="../Identity.html">Identity</a></li>
 			<li><a href="../Influence.html">Influence</a></li>
 			<li><a href="../Listening.html">Listening</a></li>
 			<li><a href="../Message.html">Message</a></li>
@@ -1353,6 +1356,8 @@ are authorized)</p>
 	<!-- File dropdown menu -->
 	<div id="file-dropdown" class="dropdown-menu has-scroll">
 	<ul>
+			<li><a href="../app/models/script.html">script</a></li>
+			<li><a href="../app/models/tag_new.html">tag.new</a></li>
 		</ul>
 	</div>
 

@@ -207,13 +207,13 @@ var SearchIndex =
 	{
 		"name": "Follow",
 		"link": "Follow.html",
-		"snippet": "",
+		"snippet": "<p>The model of the object Follow Contain the relations It is only here for\nlinked user to user, never an …\n",
 		"type": "normalclass"
 	},
 	{
 		"name": "Friend",
 		"link": "Friend.html",
-		"snippet": "",
+		"snippet": "<p>The model of the object Follow Contain the relations It is only here for\nlinked user to user, never an …\n",
 		"type": "normalclass"
 	},
 	{
@@ -237,7 +237,7 @@ var SearchIndex =
 	{
 		"name": "Identity",
 		"link": "Identity.html",
-		"snippet": "",
+		"snippet": "<p>The model of the object Identity Contain the relation and the validation\nCan provide some features linked …\n",
 		"type": "normalclass"
 	},
 	{
@@ -891,7 +891,7 @@ var SearchIndex =
 	{
 		"name": "miniKey",
 		"link": "Address.html#method-c-miniKey",
-		"snippet": "<p>Filter of information for the API\n",
+		"snippet": "<p>Filter of information for the API\n<p>Fields returned : [:id, :numberStreet, :street, :city, :country, :zipcode]\n…\n",
 		"type": "anymethod"
 	},
 	{
@@ -909,7 +909,7 @@ var SearchIndex =
 	{
 		"name": "miniKey",
 		"link": "Album.html#method-c-miniKey",
-		"snippet": "<p>Filter of information for the API\n",
+		"snippet": "<p>Filter of information for the API\n<p>Fields returned : [:id, :title, :price, :image, :yearProd]\n",
 		"type": "anymethod"
 	},
 	{
@@ -921,7 +921,7 @@ var SearchIndex =
 	{
 		"name": "miniKey",
 		"link": "Attachment.html#method-c-miniKey",
-		"snippet": "<p>Filter of information for the API\n",
+		"snippet": "<p>Filter of information for the API\n<p>Fields returned : [:id, :url, :file_size, :content_type]\n",
 		"type": "anymethod"
 	},
 	{
@@ -933,7 +933,7 @@ var SearchIndex =
 	{
 		"name": "miniKey",
 		"link": "Battle.html#method-c-miniKey",
-		"snippet": "<p>Filter of information for the API\n",
+		"snippet": "<p>Filter of information for the API\n<p>Fields returned : [:id, :date_begin, :date_end]\n",
 		"type": "anymethod"
 	},
 	{
@@ -957,13 +957,13 @@ var SearchIndex =
 	{
 		"name": "miniKey",
 		"link": "Commentary.html#method-c-miniKey",
-		"snippet": "<p>Filter of information for the API\n",
+		"snippet": "<p>Filter of information for the API\n<p>Fields returned : [:id, :author_id, :content, :created_at]\n",
 		"type": "anymethod"
 	},
 	{
 		"name": "miniKey",
 		"link": "Concert.html#method-c-miniKey",
-		"snippet": "<p>Filter of information for the API\n",
+		"snippet": "<p>Filter of information for the API\n<p>Fields returned : [:id, :planification, :url]\n",
 		"type": "anymethod"
 	},
 	{
@@ -979,6 +979,12 @@ var SearchIndex =
 		"type": "anymethod"
 	},
 	{
+		"name": "miniKey",
+		"link": "Description.html#method-c-miniKey",
+		"snippet": "<p>The information filtered for the API\n<p>Fields returned : [:id, :description, :language]\n",
+		"type": "anymethod"
+	},
+	{
 		"name": "flac_params",
 		"link": "Flac.html#method-c-flac_params",
 		"snippet": "<p>The strong parameters to save or update object\n",
@@ -987,7 +993,7 @@ var SearchIndex =
 	{
 		"name": "miniKey",
 		"link": "Genre.html#method-c-miniKey",
-		"snippet": "<p>Filter of information for the API\n",
+		"snippet": "<p>Filter of information for the API\n<p>Fields returned : [:id, :style_name, :color_name, :color_hexa]\n",
 		"type": "anymethod"
 	},
 	{
@@ -1029,7 +1035,7 @@ var SearchIndex =
 	{
 		"name": "miniKey",
 		"link": "Influence.html#method-c-miniKey",
-		"snippet": "<p>Filter of information for the API\n",
+		"snippet": "<p>Filter of information for the API\n<p>Fields returned : [:id, :name]\n",
 		"type": "anymethod"
 	},
 	{
@@ -1041,7 +1047,7 @@ var SearchIndex =
 	{
 		"name": "miniKey",
 		"link": "Listening.html#method-c-miniKey",
-		"snippet": "<p>Filter of information for the API - Restricted\n",
+		"snippet": "<p>Filter of information for the API - Restricted\n<p>Fields returned : [:id, :when, :latitude, :longitude]\n",
 		"type": "anymethod"
 	},
 	{
@@ -1059,7 +1065,7 @@ var SearchIndex =
 	{
 		"name": "miniKey",
 		"link": "Message.html#method-c-miniKey",
-		"snippet": "<p>Filter of information for API\n",
+		"snippet": "<p>Filter of information for API\n<p>Fields returned : [:id, :msg, :user_id, :dest_id]\n",
 		"type": "anymethod"
 	},
 	{
@@ -1071,7 +1077,7 @@ var SearchIndex =
 	{
 		"name": "miniKey",
 		"link": "Music.html#method-c-miniKey",
-		"snippet": "<p>Filter of information for the API\n",
+		"snippet": "<p>Filter of information for the API\n<p>Fields returned : [:id, :title, :duration, :price]\n",
 		"type": "anymethod"
 	},
 	{
@@ -1095,7 +1101,7 @@ var SearchIndex =
 	{
 		"name": "miniKey",
 		"link": "News.html#method-c-miniKey",
-		"snippet": "<p>Filter of information for the API\n",
+		"snippet": "<p>Filter of information for the API\n<p>Fields returned : [:id, :title, :date]\n",
 		"type": "anymethod"
 	},
 	{
@@ -1107,7 +1113,7 @@ var SearchIndex =
 	{
 		"name": "miniKey",
 		"link": "Newstext.html#method-c-miniKey",
-		"snippet": "<p>Filter of information for the API\n",
+		"snippet": "<p>Filter of information for the API\n<p>Fields returned : [:id, :title, :content, :language]\n",
 		"type": "anymethod"
 	},
 	{
@@ -1131,7 +1137,7 @@ var SearchIndex =
 	{
 		"name": "miniKey",
 		"link": "Pack.html#method-c-miniKey",
-		"snippet": "",
+		"snippet": "<p>Filter of information for the API\n<p>Fields returned : [:id, :title]\n",
 		"type": "anymethod"
 	},
 	{
@@ -1143,7 +1149,7 @@ var SearchIndex =
 	{
 		"name": "miniKey",
 		"link": "Playlist.html#method-c-miniKey",
-		"snippet": "",
+		"snippet": "<p>Filter of information for the API\n<p>Fields returned : [:id, :name]\n",
 		"type": "anymethod"
 	},
 	{
@@ -1185,7 +1191,7 @@ var SearchIndex =
 	{
 		"name": "miniKey",
 		"link": "Tag.html#method-c-miniKey",
-		"snippet": "<p>Filter of information for the API\n",
+		"snippet": "<p>Filter of information for the API\n<p>Fields returned : [:id, :tag]\n",
 		"type": "anymethod"
 	},
 	{
@@ -1197,7 +1203,7 @@ var SearchIndex =
 	{
 		"name": "miniKey",
 		"link": "Tweet.html#method-c-miniKey",
-		"snippet": "<p>Filter of information for the API\n",
+		"snippet": "<p>Filter of information for the API\n<p>Fields returned : [:id, :msg]\n",
 		"type": "anymethod"
 	},
 	{
@@ -1299,8 +1305,20 @@ var SearchIndex =
 	{
 		"name": "miniKey",
 		"link": "Vote.html#method-c-miniKey",
-		"snippet": "<p>Filter of information for the API\n",
+		"snippet": "<p>Filter of information for the API\n<p>Fields returned : [:id, :user_id, :artist_id]\n",
 		"type": "anymethod"
+	},
+	{
+		"name": "script",
+		"link": "app/models/script.html",
+		"snippet": "<p>Dir.entries(“.”).each { |dir| if dir.include?(“.rb”) &amp;&amp;\n!dir.include?(“.new”) …\n",
+		"type": "toplevel"
+	},
+	{
+		"name": "tag.new",
+		"link": "app/models/tag_new.html",
+		"snippet": "",
+		"type": "toplevel"
 	}
 ]
 ;

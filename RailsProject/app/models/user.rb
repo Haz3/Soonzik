@@ -1,6 +1,85 @@
 # The model of the object User
 # Contain the relation and the validation
 # Can provide some features linked to this model
+#
+# ==== Attributes
+#
+# - +id+ - (integer) - The ID of the object
+# - +email+ - (string) - The email of the user
+# - +salt+ - (string) - The salt of the account which is unique
+# - +fname+ - (string) - The firstname of the user
+# - +lname+ - (string) - The lastname of the user
+# - +username+ - (string) - The username of the user (need to delete space and accept only specific characters)
+# - +birthday+ - (date) - The birthday date of the user
+# - +image+ - (string) - The name of the image used as avatar
+# - +description+ - (string) - The description of the user
+# - +phoneNumber+ - (string) - The phone number of the user
+# - +address_id+ - (integer) - The address id of the user if he set it
+# - +facebook+ - (string) - The facebook name of the user
+# - +twitter+ - (string) - The twitter name of the user
+# - +googlePlus+ - (string) - The G+ name of the user
+# - +idAPI+ - (string) - The token used for request
+# - +secureKey+ - (string) - The secureKey which is the result of a hash between the idAPI and the salt
+# - +newsletter+ - (boolean) - Boolean to know if the user subscribed to the newsletter
+# - +language+ - (string) - The language choosen by the user
+# - +background+ - (string) - The name of the background of the user
+#
+# Devise attributes :
+#
+# - +unconfirmed_email+ - (string) - ///
+# - +encrypted_password+ - (string) - ///
+# - +reset_password_token+ - (string) - ///
+# - +reset_password_sent_at+ - (date) - ///
+# - +remember_created_at+ - (date) - ///
+# - +sign_in_count+ - (integer) - ///
+# - +current_sign_in_at+ - (date) - ///
+# - +last_sign_in_at+ - (date) - ///
+# - +current_sign_in_ip+ - (string) - ///
+# - +last_sign_in_ip+ - (string) - ///
+# - +confirmation_token+ - (string) - ///
+# - +confirmed_at+ - (date) - ///
+# - +confirmation_sent_at+ - (date) - ///
+#
+# ==== Associations
+#
+# - +belongs_to+ -  :address
+#
+# - +has_one+ - :cart
+#
+# - +has_many+ -  :albums
+# - +has_many+ -  :identities
+# - +has_many+ -  :listening
+# - +has_many+ -  :notifications
+# - +has_many+ -  :musics
+# - +has_many+ -  :news
+# - +has_many+ -  :packs
+# - +has_many+ -  :propositions
+# - +has_many+ -  :tweets
+# - +has_many+ -  :votes
+# - +has_many+ -  :purchases
+# - +has_many+ -  :purchased_musics, through: :purchases, source: :musics
+# - +has_many+ -  :commentaries
+# - +has_many+ -  :gifts_given
+# - +has_many+ -  :gifts_received
+# - +has_many+ -  :battles_one
+# - +has_many+ -  :battles_two
+# - +has_many+ -  :messages_sender
+# - +has_many+ -  :messages_receiver
+#
+# - +has_and_belongs_to_many+ -  :groups
+#
+#
+# Trick for the relation between users with model between the two relations
+#
+# - +has_many+ -  :relations_follow, :foreign_key => 'user_id', :class_name => 'Follow'
+# - +has_many+ -  :relations_follower, :foreign_key => 'follow_id', :class_name => 'Follow'
+# - +has_many+ -  :follows, :through => :relations_follow, :source => :user_to
+# - +has_many+ -  :followers, :through => :relations_follower, :source => :user
+# - +has_many+ -  :relations_friend, :foreign_key => 'user_id', :class_name => 'Friend'
+# - +has_many+ -  :relations_friendly, :foreign_key => 'friend_id', :class_name => 'Friend'
+# - +has_many+ -  :friends, :through => :relations_friend, :source => :user_to
+# - +has_many+ -  :frienders, :through => :relations_friendly, :source => :user
+#
 class User < ActiveRecord::Base
   before_validation :beforeCreate, on: :create
 
@@ -35,7 +114,7 @@ class User < ActiveRecord::Base
   has_many :commentaries, foreign_key: 'author_id'
 
   has_many :gifts_given, class_name: 'Gift', foreign_key: 'from_user'
-  has_many :gifts_received, class_name: 'Gift', foreign_key: 'from_user'
+  has_many :gifts_received, class_name: 'Gift', foreign_key: 'to_user'
   has_many :battles_one, class_name: 'Battle', foreign_key: 'artist_one_id'
   has_many :battles_two, class_name: 'Battle', foreign_key: 'artist_two_id'
   has_many :messages_sender, class_name: 'Message', foreign_key: 'user_id'
@@ -54,11 +133,6 @@ class User < ActiveRecord::Base
   has_many :friends, :through => :relations_friend, :source => :user_to
   has_many :frienders, :through => :relations_friendly, :source => :user
 
-  # validation
-  # message: 'the message'
-  #validates :email, confirmation: true, format: /\b[A-Z0-9._%a-z\-]+@(?:[A-Z0-9a-z\-]+\.)+[A-Za-z]{2,4}\z/  #if doesn't work : /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i
-  #validates :encrypted_password, confirmation: true, length: { is: 20 }
-#  validates :terms_of_service, acceptance: true
   validates :username, length: {
     minimum: 3,
     maximum: 40,

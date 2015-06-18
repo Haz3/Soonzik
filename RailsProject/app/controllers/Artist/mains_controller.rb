@@ -6,6 +6,10 @@ module Artist
   	def home
   	end
 
+  	###############
+  	# AJAX ROUTES #
+  	###############
+
   	# Ajax route to get the statistics (with .json at the end of the url) or it redirects to the root (if no .json)
   	def stats
   		respond_to do |format|

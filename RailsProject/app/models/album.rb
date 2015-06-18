@@ -1,6 +1,29 @@
 # The model of the object Album
 # Contain the relation and the validation
 # Can provide some features linked to this model
+#
+# ==== Attributes
+#
+# - +id+ - (integer) - The ID of the object
+# - +user_id+ - (integer) - The ID of the artist who own the album
+# - +title+ - (string) - The title of the album
+# - +image+ - (string) - The image of the album (the name of the image, not the filename !)
+# - +price+ - (float) - The price of the album
+# - +file+ - (string) - The name of the file to find it
+# - +yearProd+ - (integer) - The year of production when the album was released
+#
+# ==== Associations
+#
+# - +has_and_belongs_to_many+ - :descriptions
+# - +has_and_belongs_to_many+ - :genres
+# - +has_and_belongs_to_many+ - :packs
+# - +has_and_belongs_to_many+ - :commentaries
+# - +has_many+ - :album_notes
+# - +has_many+ - :propositions
+# - +has_many+ - :musics
+# - +has_many+ - :purchased_albums
+# - +belongs_to+ - :user
+#
 class Album < ActiveRecord::Base
   has_and_belongs_to_many :descriptions
   has_and_belongs_to_many :genres
@@ -23,6 +46,8 @@ class Album < ActiveRecord::Base
   end
 
   # Filter of information for the API
+  #
+  # Fields returned : [:id, :title, :price, :image, :yearProd]
   def self.miniKey
     [:id, :title, :price, :image, :yearProd]
   end

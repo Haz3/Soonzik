@@ -1,6 +1,31 @@
 # The model of the object Music
 # Contain the relation and the validation
 # Can provide some features linked to this model
+#
+# ==== Attributes
+#
+# - +id+ - (integer) - The ID of the object
+# - +title+ - (string) - The name of the music
+# - +user_id+ - (integer) - The ID of the artist
+# - +album_id+ - (integer) - The ID of the album
+# - +duration+ - (integer) - The duration in seconds
+# - +price+ - (float) - The price of the music alone
+# - +file+ - (string) - The name of the file
+# - +limited+ - (boolean) - To know if the music is full for listening even if we don't buy it
+#
+# ==== Associations
+#
+# - +belongs_to+ - :album
+# - +belongs_to+ - :user
+# - +has_one+ - :flac
+# - +has_many+ - :listening
+# - +has_many+ - :music_notes
+# - +has_and_belongs_to_many+ - :commentaries
+# - +has_and_belongs_to_many+ - :descriptions
+# - +has_and_belongs_to_many+ - :playlist_objects
+# - +has_and_belongs_to_many+ - :genres
+# - +has_many+ - :purchased_musics
+#
 class Music < ActiveRecord::Base
   belongs_to :album
   belongs_to :user
@@ -25,6 +50,8 @@ class Music < ActiveRecord::Base
   end
 
   # Filter of information for the API
+  #
+  # Fields returned : [:id, :title, :duration, :price]
   def self.miniKey
     [:id, :title, :duration, :price]
   end

@@ -1,6 +1,37 @@
 # The model of the object Purchase
 # Contain the relation and the validation
 # Can provide some features linked to this model
+#
+# ==== Attributes
+#
+# - +id+ - (integer) - The ID of the object
+# - +user_id+ - (integer) - The ID of the user
+#
+# ==== Associations
+#
+# #######
+# # First degree of relation
+#
+# belongs_to :user
+# has_many :purchased_musics
+#
+# #######
+# # Second degree of relation
+#
+#	has_many :musics, through: :purchased_musics
+#	has_many :purchased_albums, through: :purchased_musics
+#
+# #######
+# # Third degree of relation
+#
+#	has_many :albums, through: :purchased_albums
+#	has_many :purchased_packs, through: :purchased_albums
+#
+# #######
+# # Fourth degree of relation
+#
+#	has_many :packs, through: :purchased_packs
+#
 class Purchase < ActiveRecord::Base
   # First degree of relation
 	  belongs_to :user

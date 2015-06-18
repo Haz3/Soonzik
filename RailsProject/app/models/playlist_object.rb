@@ -1,6 +1,8 @@
 # The model of the object PlaylistMusic
 # Contain the relation and the validation
 # Can provide some features linked to this model
+#
+# This object will never be used for something else than relation and the "row_order" field (to sort playlist)
 class PlaylistObject < ActiveRecord::Base
   include RankedModel
 

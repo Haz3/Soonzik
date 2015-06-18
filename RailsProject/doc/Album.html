@@ -111,6 +111,46 @@
 			
 <p>The model of the object <a href="Album.html">Album</a> Contain the relation
 and the validation Can provide some features linked to this model</p>
+
+<h4 id="class-Album-label-Attributes">Attributes<span><a href="#class-Album-label-Attributes">&para;</a> <a href="#top">&uarr;</a></span></h4>
+<ul><li>
+<p><code>id</code> - (integer) - The ID of the object</p>
+</li><li>
+<p><code>user_id</code> - (integer) - The ID of the artist who own the album</p>
+</li><li>
+<p><code>title</code> - (string) - The title of the album</p>
+</li><li>
+<p><code>image</code> - (string) - The image of the album (the name of the
+image, not the filename !)</p>
+</li><li>
+<p><code>price</code> - (float) - The price of the album</p>
+</li><li>
+<p><code>file</code> - (string) - The name of the file to find it</p>
+</li><li>
+<p><code>yearProd</code> - (integer) - The year of production when the album
+was released</p>
+</li></ul>
+
+<h4 id="class-Album-label-Associations">Associations<span><a href="#class-Album-label-Associations">&para;</a> <a href="#top">&uarr;</a></span></h4>
+<ul><li>
+<p><code>has_and_belongs_to_many</code> - :descriptions</p>
+</li><li>
+<p><code>has_and_belongs_to_many</code> - :genres</p>
+</li><li>
+<p><code>has_and_belongs_to_many</code> - :packs</p>
+</li><li>
+<p><code>has_and_belongs_to_many</code> - :commentaries</p>
+</li><li>
+<p><code>has_many</code> - :album_notes</p>
+</li><li>
+<p><code>has_many</code> - :propositions</p>
+</li><li>
+<p><code>has_many</code> - :musics</p>
+</li><li>
+<p><code>has_many</code> - :purchased_albums</p>
+</li><li>
+<p><code>belongs_to</code> - :user</p>
+</li></ul>
 		</section>
 
 				<section id="5Buntitled-5D" class="documentation-section">
@@ -138,7 +178,7 @@ and the validation Can provide some features linked to this model</p>
 											<p>The strong parameters to save or update object</p>					
 											<div class="method-source-code" id="album_params-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/models/album.rb, line 21</span>
+								class="language-ruby"><span class="ruby-comment"># File app/models/album.rb, line 44</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">album_params</span>(<span class="ruby-identifier">parameters</span>)
   <span class="ruby-identifier">parameters</span>.<span class="ruby-identifier">require</span>(<span class="ruby-value">:album</span>).<span class="ruby-identifier">permit</span>(<span class="ruby-value">:user_id</span>, <span class="ruby-value">:title</span>, <span class="ruby-value">:price</span>, <span class="ruby-value">:file</span>, <span class="ruby-value">:yearProd</span>, <span class="ruby-value">:image</span>)
 <span class="ruby-keyword">end</span></code></pre>
@@ -157,10 +197,12 @@ and the validation Can provide some features linked to this model</p>
 										</header>
 
 					<div class="method-description">
-											<p>Filter of information for the <a href="API.html">API</a></p>					
+											<p>Filter of information for the <a href="API.html">API</a></p>
+
+<p>Fields returned : [:id, :title, :price, :image, :yearProd]</p>					
 											<div class="method-source-code" id="miniKey-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/models/album.rb, line 26</span>
+								class="language-ruby"><span class="ruby-comment"># File app/models/album.rb, line 51</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">miniKey</span>
   [<span class="ruby-value">:id</span>, <span class="ruby-value">:title</span>, <span class="ruby-value">:price</span>, <span class="ruby-value">:image</span>, <span class="ruby-value">:yearProd</span>]
 <span class="ruby-keyword">end</span></code></pre>
@@ -234,9 +276,12 @@ and the validation Can provide some features linked to this model</p>
 			<li><a href="./Concert.html">Concert</a></li>
 			<li><a href="./Description.html">Description</a></li>
 			<li><a href="./Flac.html">Flac</a></li>
+			<li><a href="./Follow.html">Follow</a></li>
+			<li><a href="./Friend.html">Friend</a></li>
 			<li><a href="./Genre.html">Genre</a></li>
 			<li><a href="./Gift.html">Gift</a></li>
 			<li><a href="./Group.html">Group</a></li>
+			<li><a href="./Identity.html">Identity</a></li>
 			<li><a href="./Influence.html">Influence</a></li>
 			<li><a href="./Listening.html">Listening</a></li>
 			<li><a href="./Message.html">Message</a></li>
@@ -263,6 +308,8 @@ and the validation Can provide some features linked to this model</p>
 	<!-- File dropdown menu -->
 	<div id="file-dropdown" class="dropdown-menu has-scroll">
 	<ul>
+			<li><a href="./app/models/script.html">script</a></li>
+			<li><a href="./app/models/tag_new.html">tag.new</a></li>
 		</ul>
 	</div>
 

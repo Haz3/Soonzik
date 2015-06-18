@@ -1,6 +1,20 @@
 # The model of the object Message
 # Contain the relation and the validation
 # Can provide some features linked to this model
+#
+# ==== Attributes
+#
+# - +id+ - (integer) - The ID of the object
+# - +msg+ - (string) - The name of the group
+# - +user_id+ - (integer) - The latitude of the position
+# - +dest_id+ - (integer) - The longitude of the position
+# - +session+ - (string) - Useless, need to be delete
+#
+# ==== Associations
+#
+# - +belongs_to+ - :sender [user object]
+# - +belongs_to+ - :receiver [user object]
+#
 class Message < ActiveRecord::Base
   belongs_to :sender, class_name: 'User', foreign_key: 'user_id'
   belongs_to :receiver, class_name: 'User', foreign_key: 'dest_id'
@@ -15,6 +29,8 @@ class Message < ActiveRecord::Base
   end
 
   # Filter of information for API
+  #
+  # Fields returned : [:id, :msg, :user_id, :dest_id]
   def self.miniKey
   	[:id, :msg, :user_id, :dest_id]
   end

@@ -24,7 +24,7 @@
 					%li.current_page_item
 						%a{:href => "#"} Homepage
 					%li
-						%a{:href => "#"} Tour
+						=link_to "Tour", artist_tour_path
 					%li
 						%a{:href => "#"} Streaming
 					%li
@@ -34,11 +34,7 @@
 		%main
 			.small-12.medium-8.large-9.columns
 				.row
-					.title
-						%h2 Home Page
-						%span.byline You can find all your statistics here
-					.mypage
-						=yield
+					=yield
 			.small-12.medium-4.large-3.columns
 				%div{"ng-include" => "'#{asset_path("AngularJS/Artist/views/followers.html.haml")}'"}
 		.portfolio-wrapper

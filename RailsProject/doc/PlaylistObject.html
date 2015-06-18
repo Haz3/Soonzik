@@ -113,6 +113,9 @@
 			
 <p>The model of the object PlaylistMusic Contain the relation and the
 validation Can provide some features linked to this model</p>
+
+<p>This object will never be used for something else than relation and the
+“row_order” field (to sort playlist)</p>
 		</section>
 
 				<section id="5Buntitled-5D" class="documentation-section">
@@ -140,7 +143,7 @@ validation Can provide some features linked to this model</p>
 											<p>The strong parameters to save or update object</p>					
 											<div class="method-source-code" id="playlist_params-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/models/playlist_object.rb, line 15</span>
+								class="language-ruby"><span class="ruby-comment"># File app/models/playlist_object.rb, line 17</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">playlist_params</span>(<span class="ruby-identifier">parameters</span>)
   <span class="ruby-identifier">parameters</span>.<span class="ruby-identifier">require</span>(<span class="ruby-value">:playlist_object</span>).<span class="ruby-identifier">permit</span>(<span class="ruby-value">:playlist_id</span>, <span class="ruby-value">:music_id</span>, <span class="ruby-value">:row_order</span>)
 <span class="ruby-keyword">end</span></code></pre>
@@ -214,9 +217,12 @@ validation Can provide some features linked to this model</p>
 			<li><a href="./Concert.html">Concert</a></li>
 			<li><a href="./Description.html">Description</a></li>
 			<li><a href="./Flac.html">Flac</a></li>
+			<li><a href="./Follow.html">Follow</a></li>
+			<li><a href="./Friend.html">Friend</a></li>
 			<li><a href="./Genre.html">Genre</a></li>
 			<li><a href="./Gift.html">Gift</a></li>
 			<li><a href="./Group.html">Group</a></li>
+			<li><a href="./Identity.html">Identity</a></li>
 			<li><a href="./Influence.html">Influence</a></li>
 			<li><a href="./Listening.html">Listening</a></li>
 			<li><a href="./Message.html">Message</a></li>
@@ -243,6 +249,8 @@ validation Can provide some features linked to this model</p>
 	<!-- File dropdown menu -->
 	<div id="file-dropdown" class="dropdown-menu has-scroll">
 	<ul>
+			<li><a href="./app/models/script.html">script</a></li>
+			<li><a href="./app/models/tag_new.html">tag.new</a></li>
 		</ul>
 	</div>
 

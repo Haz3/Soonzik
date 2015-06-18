@@ -111,6 +111,28 @@
 			
 <p>The model of the object <a href="Listening.html">Listening</a> Contain the
 relation and the validation Can provide some features linked to this model</p>
+
+<h4 id="class-Listening-label-Attributes">Attributes<span><a href="#class-Listening-label-Attributes">&para;</a> <a href="#top">&uarr;</a></span></h4>
+<ul><li>
+<p><code>id</code> - (integer) - The ID of the object</p>
+</li><li>
+<p><code>when</code> - (date) - The name of the group</p>
+</li><li>
+<p><code>latitude</code> - (float) - The latitude of the position</p>
+</li><li>
+<p><code>longitude</code> - (float) - The longitude of the position</p>
+</li><li>
+<p><code>music_id</code> - (integer) - The ID of the music listened</p>
+</li><li>
+<p><code>user_id</code> - (integer) - The ID of the user who listen music</p>
+</li></ul>
+
+<h4 id="class-Listening-label-Associations">Associations<span><a href="#class-Listening-label-Associations">&para;</a> <a href="#top">&uarr;</a></span></h4>
+<ul><li>
+<p><code>belongs_to</code> - :music</p>
+</li><li>
+<p><code>belongs_to</code> - :user</p>
+</li></ul>
 		</section>
 
 				<section id="5Buntitled-5D" class="documentation-section">
@@ -138,7 +160,7 @@ relation and the validation Can provide some features linked to this model</p>
 											<p>The strong parameters to save or update object</p>					
 											<div class="method-source-code" id="listening_params-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/models/listening.rb, line 18</span>
+								class="language-ruby"><span class="ruby-comment"># File app/models/listening.rb, line 35</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">listening_params</span>(<span class="ruby-identifier">parameters</span>)
   <span class="ruby-identifier">parameters</span>.<span class="ruby-identifier">require</span>(<span class="ruby-value">:listening</span>).<span class="ruby-identifier">permit</span>(<span class="ruby-value">:user_id</span>, <span class="ruby-value">:music_id</span>, <span class="ruby-value">:when</span>, <span class="ruby-value">:latitude</span>, <span class="ruby-value">:longitude</span>)
 <span class="ruby-keyword">end</span></code></pre>
@@ -157,10 +179,12 @@ relation and the validation Can provide some features linked to this model</p>
 										</header>
 
 					<div class="method-description">
-											<p>Filter of information for the <a href="API.html">API</a> - Restricted</p>					
+											<p>Filter of information for the <a href="API.html">API</a> - Restricted</p>
+
+<p>Fields returned : [:id, :when, :latitude, :longitude]</p>					
 											<div class="method-source-code" id="miniKey-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/models/listening.rb, line 13</span>
+								class="language-ruby"><span class="ruby-comment"># File app/models/listening.rb, line 30</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">miniKey</span>
   [<span class="ruby-value">:id</span>, <span class="ruby-value">:when</span>, <span class="ruby-value">:latitude</span>, <span class="ruby-value">:longitude</span>]
 <span class="ruby-keyword">end</span></code></pre>
@@ -234,9 +258,12 @@ relation and the validation Can provide some features linked to this model</p>
 			<li><a href="./Concert.html">Concert</a></li>
 			<li><a href="./Description.html">Description</a></li>
 			<li><a href="./Flac.html">Flac</a></li>
+			<li><a href="./Follow.html">Follow</a></li>
+			<li><a href="./Friend.html">Friend</a></li>
 			<li><a href="./Genre.html">Genre</a></li>
 			<li><a href="./Gift.html">Gift</a></li>
 			<li><a href="./Group.html">Group</a></li>
+			<li><a href="./Identity.html">Identity</a></li>
 			<li><a href="./Influence.html">Influence</a></li>
 			<li><a href="./Listening.html">Listening</a></li>
 			<li><a href="./Message.html">Message</a></li>
@@ -263,6 +290,8 @@ relation and the validation Can provide some features linked to this model</p>
 	<!-- File dropdown menu -->
 	<div id="file-dropdown" class="dropdown-menu has-scroll">
 	<ul>
+			<li><a href="./app/models/script.html">script</a></li>
+			<li><a href="./app/models/tag_new.html">tag.new</a></li>
 		</ul>
 	</div>
 
