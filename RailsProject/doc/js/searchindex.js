@@ -1307,18 +1307,6 @@ var SearchIndex =
 		"link": "Vote.html#method-c-miniKey",
 		"snippet": "<p>Filter of information for the API\n<p>Fields returned : [:id, :user_id, :artist_id]\n",
 		"type": "anymethod"
-	},
-	{
-		"name": "script",
-		"link": "app/models/script.html",
-		"snippet": "<p>Dir.entries(“.”).each { |dir| if dir.include?(“.rb”) &amp;&amp;\n!dir.include?(“.new”) …\n",
-		"type": "toplevel"
-	},
-	{
-		"name": "tag.new",
-		"link": "app/models/tag_new.html",
-		"snippet": "",
-		"type": "toplevel"
 	}
 ]
 ;

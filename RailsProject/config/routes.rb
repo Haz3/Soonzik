@@ -142,6 +142,7 @@ Rails.application.routes.draw do
     get '/comments' => 'mains#getLastComments'
     get '/tweets' => 'mains#getLastTweets'
     get '/tour' => 'tours#index'
+    match '/tour/addconcert' => 'tours#create_concert', via: [:post, :options]
   end
 
   devise_for :admin_users, ActiveAdmin::Devise.config

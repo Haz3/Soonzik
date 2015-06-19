@@ -94,10 +94,13 @@ SoonzikArtistApp.factory('HTTPService', ['$http', '$location', 'Upload', functio
       return $http.get("http://artist." + url + "/stats.json");
     },
     getLastComments: function() {
-      return $http.get("http://artist." + url + "/comments.json")
+      return $http.get("http://artist." + url + "/comments.json");
     },
     getLastTweets: function() {
-      return $http.get("http://artist." + url + "/tweets.json")
+      return $http.get("http://artist." + url + "/tweets.json");
+    },
+    addConcert: function(parameters) {
+      return $http.post("http://artist." + url + "/tour/addconcert.json", parameters);
     }
   }
 }]);

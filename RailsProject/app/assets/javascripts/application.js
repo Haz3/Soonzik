@@ -50,6 +50,7 @@
 //= require ./AngularJS/services/HTTPService.js
 //= require ./AngularJS/services/NotificationService.js
 //= require ./tools/ng-file-upload-bower-4.2.0/ng-file-upload-all.min.js
+//= require ./tools/loading-bar.min.js
 // require_tree .
 
 $(function(){ $(document).foundation(); });

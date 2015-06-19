@@ -21,15 +21,15 @@
 		.menu-wrapper.small-12
 			.menu
 				%ul.no-bullet
-					%li.current_page_item
+					%li{ class: "#{'current_page_item' if (defined?(@menu) && @menu == 'home') || !defined?(@menu)}" }
 						%a{:href => "#"} Homepage
-					%li
+					%li{ class: "#{'current_page_item' if (defined?(@menu) && @menu == 'tour')}" }
 						=link_to "Tour", artist_tour_path
-					%li
+					%li{ class: "#{'current_page_item' if (defined?(@menu) && @menu == 'streaming')}" }
 						%a{:href => "#"} Streaming
-					%li
+					%li{ class: "#{'current_page_item' if (defined?(@menu) && @menu == 'meet')}" }
 						%a{:href => "#"} Meet artists
-					%li
+					%li{ class: "#{'current_page_item' if (defined?(@menu) && @menu == 'contact')}" }
 						%a{:href => "#"} Contact
 		%main
 			.small-12.medium-8.large-9.columns
