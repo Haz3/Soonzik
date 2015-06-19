@@ -88,6 +88,7 @@ namespace SoonZik.ViewModel
             {
                 _password = _localSettings.Values["SoonZikPassWord"].ToString();
                 _username = _localSettings.Values["SoonZikUserName"].ToString();
+                MakeConnexion();
             }
         }
         #endregion

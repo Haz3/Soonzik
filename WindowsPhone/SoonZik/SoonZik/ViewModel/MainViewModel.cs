@@ -1,12 +1,4 @@
-using System;
-using Windows.Storage;
-using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Media.Animation;
 using GalaSoft.MvvmLight;
-using GalaSoft.MvvmLight.Command;
-using SoonZik.Utils;
-using SoonZik.Views;
 
 namespace SoonZik.ViewModel
 {
