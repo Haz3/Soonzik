@@ -83,7 +83,6 @@ SoonzikArtistApp.controller('HomeCtrl', ['$scope', 'SecureAuth', 'HTTPService', 
 				}
 			}
 			$scope.values.note_musics.data = data_music_notes;
-			console.log(data_music_notes);
 
 			// To format informations for the line chart
 			data_album_notes = [];

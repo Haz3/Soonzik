@@ -248,6 +248,7 @@ module API
     # * +:id+ - The id of the news where is the comment
     # * +:offset+ - The offset of the comment array (default : 0)
     # * +:limit+ - The max size of the array (default : 20)
+    # * +:order_reverse+ - If "true", you get the old first, the new last (default : false)
     #
     # ===== HTTP VALUE
     # 
@@ -256,15 +257,18 @@ module API
     # - +503+ - Error from server
     # 
     def getcomments
+      order = "false"
       begin
         news = News.find_by_id(@id)
         @offset = 0 if !@offset.present?
         @limit = 20 if !@limit.present?
+        order = @order_reverse if @order_reverse.present?() && (@order_reverse == "true" || @order_reverse == "false")
         if (!news)
           codeAnswer 502
           defineHttp :not_found
         else
-          comments = news.commentaries[(@offset.to_i)..(@offset.to_i + @limit.to_i)] || []
+          comments = news.commentaries[(@offset.to_i)...(@offset.to_i + @limit.to_i)] || []
+          comments.reverse! if order == "true"
           refine_comments = []
           comments.each { |comment|
             refine_comments << comment.as_json(:only => Commentary.miniKey, :include => { user: { only: User.miniKey } })

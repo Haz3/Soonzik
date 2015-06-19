@@ -370,6 +370,9 @@ its music and the artist</p>
 <p><code>:offset</code> - The offset of the comment array (default : 0)</p>
 </li><li>
 <p><code>:limit</code> - The max size of the array (default : 20)</p>
+</li><li>
+<p><code>:order_reverse</code> - If “true”, you get the old first, the new
+last (default : false)</p>
 </li></ul>
 
 <h5 id="method-i-getcomments-label-HTTP+VALUE">HTTP VALUE<span><a href="#method-i-getcomments-label-HTTP+VALUE">&para;</a> <a href="#top">&uarr;</a></span></h5>
@@ -382,20 +385,26 @@ its music and the artist</p>
 </li></ul>					
 											<div class="method-source-code" id="getcomments-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/albums_controller.rb, line 258</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/albums_controller.rb, line 259</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">getcomments</span>
+  <span class="ruby-identifier">order</span> = <span class="ruby-string">&quot;false&quot;</span>
+
   <span class="ruby-keyword">begin</span>
     <span class="ruby-identifier">albums</span> = <span class="ruby-constant">Album</span>.<span class="ruby-identifier">find_by_id</span>(<span class="ruby-ivar">@id</span>)
-    <span class="ruby-ivar">@offset</span> = <span class="ruby-value">0</span> <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-ivar">@offset</span>.<span class="ruby-identifier">present?</span>
-    <span class="ruby-ivar">@limit</span> = <span class="ruby-value">20</span> <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-ivar">@limit</span>.<span class="ruby-identifier">present?</span>
+    <span class="ruby-ivar">@offset</span> = <span class="ruby-value">0</span> <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-ivar">@offset</span>.<span class="ruby-identifier">present?</span>()
+    <span class="ruby-ivar">@limit</span> = <span class="ruby-value">20</span> <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-ivar">@limit</span>.<span class="ruby-identifier">present?</span>()
+    <span class="ruby-identifier">order</span> = <span class="ruby-ivar">@order_reverse</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@order_reverse</span>.<span class="ruby-identifier">present?</span>() <span class="ruby-operator">&amp;&amp;</span> (<span class="ruby-ivar">@order_reverse</span> <span class="ruby-operator">==</span> <span class="ruby-string">&quot;true&quot;</span> <span class="ruby-operator">||</span> <span class="ruby-ivar">@order_reverse</span> <span class="ruby-operator">==</span> <span class="ruby-string">&quot;false&quot;</span>)
     <span class="ruby-keyword">if</span> (<span class="ruby-operator">!</span><span class="ruby-identifier">albums</span>)
       <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">502</span>
       <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:not_found</span>
     <span class="ruby-keyword">else</span>
-      <span class="ruby-identifier">comments</span> = <span class="ruby-identifier">albums</span>.<span class="ruby-identifier">commentaries</span>[(<span class="ruby-ivar">@offset</span>.<span class="ruby-identifier">to_i</span>)<span class="ruby-operator">..</span>(<span class="ruby-ivar">@offset</span>.<span class="ruby-identifier">to_i</span> <span class="ruby-operator">+</span> <span class="ruby-ivar">@limit</span>.<span class="ruby-identifier">to_i</span>)] <span class="ruby-operator">||</span> []
+      <span class="ruby-identifier">comments</span> = <span class="ruby-identifier">albums</span>.<span class="ruby-identifier">commentaries</span>[(<span class="ruby-ivar">@offset</span>.<span class="ruby-identifier">to_i</span>)<span class="ruby-operator">...</span>(<span class="ruby-ivar">@offset</span>.<span class="ruby-identifier">to_i</span> <span class="ruby-operator">+</span> <span class="ruby-ivar">@limit</span>.<span class="ruby-identifier">to_i</span>)] <span class="ruby-operator">||</span> []
+      <span class="ruby-identifier">comments</span>.<span class="ruby-identifier">reverse!</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">order</span> <span class="ruby-operator">==</span> <span class="ruby-string">&quot;true&quot;</span>
       <span class="ruby-identifier">refine_comments</span> = []
       <span class="ruby-identifier">comments</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">comment</span><span class="ruby-operator">|</span>
-        <span class="ruby-identifier">refine_comments</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">comment</span>.<span class="ruby-identifier">as_json</span>(<span class="ruby-value">:only</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">Commentary</span>.<span class="ruby-identifier">miniKey</span>, <span class="ruby-value">:include</span> =<span class="ruby-operator">&gt;</span> { <span class="ruby-identifier">user</span><span class="ruby-operator">:</span> { <span class="ruby-identifier">only</span><span class="ruby-operator">:</span> <span class="ruby-constant">User</span>.<span class="ruby-identifier">miniKey</span> } )
+        <span class="ruby-identifier">refine_comments</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">comment</span>.<span class="ruby-identifier">as_json</span>(<span class="ruby-value">:only</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">Commentary</span>.<span class="ruby-identifier">miniKey</span>, <span class="ruby-value">:include</span> =<span class="ruby-operator">&gt;</span> {
+          <span class="ruby-identifier">user</span><span class="ruby-operator">:</span> { <span class="ruby-identifier">only</span><span class="ruby-operator">:</span> <span class="ruby-constant">User</span>.<span class="ruby-identifier">miniKey</span> }
+        })
       }
       <span class="ruby-ivar">@returnValue</span> = { <span class="ruby-identifier">content</span><span class="ruby-operator">:</span> <span class="ruby-identifier">refine_comments</span> }
     <span class="ruby-keyword">end</span>
@@ -614,8 +623,6 @@ and the artist</p>
 	<!-- File dropdown menu -->
 	<div id="file-dropdown" class="dropdown-menu has-scroll">
 	<ul>
-			<li><a href="../app/models/script.html">script</a></li>
-			<li><a href="../app/models/tag_new.html">tag.new</a></li>
 		</ul>
 	</div>
 

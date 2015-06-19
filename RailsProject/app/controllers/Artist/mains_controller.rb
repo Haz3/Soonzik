@@ -4,6 +4,7 @@ module Artist
   class MainsController < ArtistsController
   	# Root of the panel
   	def home
+  		@menu = 'home'
   	end
 
   	###############

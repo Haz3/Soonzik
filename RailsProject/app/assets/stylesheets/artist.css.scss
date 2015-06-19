@@ -45,13 +45,18 @@ body.artist {
 		margin: 0 0 2em 0;
 	}
 
-	hr {
-		display: none;
-	}
-
 	ul li {
 		padding: 0.80em 0;
 	  border-top: solid 1px #E5E5E5;
+	}
+
+	ul.inline-list {
+		padding-top: 20px;
+	}
+
+	ul.inline-list > li {
+		border-top: 0px;
+		padding-top: 0;
 	}
 
 	ul li:first-child, .menu ul li, .contact li {
