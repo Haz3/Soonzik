@@ -1,12 +1,19 @@
-﻿using System.Text;
+﻿using System;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Input;
+using Windows.Networking.Connectivity;
 using Windows.Phone.UI.Input;
+using Windows.Security.Cryptography.Core;
+using Windows.Storage.Streams;
 using Windows.UI.Popups;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Ioc;
+using SoonZik.HttpRequest;
 using SoonZik.HttpRequest.Poco;
 using SoonZik.Utils;
+using Buffer = System.Buffer;
 
 namespace SoonZik.ViewModel
 {
@@ -116,19 +123,25 @@ namespace SoonZik.ViewModel
             else if (NeedUpdate)
             {
                 CanUpdate = false;
-                new MessageDialog("Vos informations son mise a jour" + CurrentUser.Email).ShowAsync();
+                var task = Task.Run(async () => await UpdateData());
+                task.Wait();
+                new MessageDialog("Vos informations son mise a jour" + CurrentUser.email).ShowAsync();
                 ButtonContent = "Editer mes informations";
                 NeedUpdate = false;
             }
         }
 
-
-        private void HardwareButtonsOnBackPressed(object sender, BackPressedEventArgs backPressedEventArgs)
+        private async Task UpdateData()
         {
-            backPressedEventArgs.Handled = true;
-            Navigation.GoBack();
+            var getRequest = new HttpRequestGet();
+            var userKey = await getRequest.GetUserKey(new Key(), CurrentUser.id.ToString()) as Key;
+            if (userKey != null)
+            {
+                HashAlgorithmProvider hash = HashAlgorithmProvider.OpenAlgorithm(HashAlgorithmNames.Sha256);
+                CryptographicHash ch = hash.CreateHash();
+            }
         }
-        
+
         #endregion
     }
 }

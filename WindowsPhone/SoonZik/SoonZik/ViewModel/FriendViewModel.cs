@@ -70,8 +70,8 @@ namespace SoonZik.ViewModel
 
             if (_localSettings != null && (string) _localSettings.Values["SoonZikAlreadyConnect"] == "yes")
             {
-                Sources = Singleton.Instance().CurrentUser.Friends;
-                ItemSource = AlphaKeyGroups<User>.CreateGroups(Sources, CultureInfo.CurrentUICulture, s => s.Username, true);
+                Sources = Singleton.Instance().CurrentUser.friends;
+                ItemSource = AlphaKeyGroups<User>.CreateGroups(Sources, CultureInfo.CurrentUICulture, s => s.username, true);
             }
             TappedCommand = new RelayCommand(Execute);
         }
@@ -86,7 +86,7 @@ namespace SoonZik.ViewModel
                 Title = "Que voulez vous faire ?",
                 IsAppBarVisible = true,
                 VerticalAlignment = VerticalAlignment.Center,
-                Body = new ButtonFriendPopUp(SelectedUser.Id),
+                Body = new ButtonFriendPopUp(SelectedUser.id),
                 Opacity = 0.6
             };
             MeaagePrompt.Show();

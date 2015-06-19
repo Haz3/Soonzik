@@ -29,8 +29,8 @@
         </DataTemplate>
         <DataTemplate x:Key="AddrBookItemTemplate">
            <StackPanel VerticalAlignment="Top">
-               <Image Source="{Binding Path=Image}" Height="30" Width="30"></Image>
-                <TextBlock FontWeight="Bold"  Text="{Binding Path=Username}" Foreground="White" Margin="60,0,0,0" FontSize="25"/>
+               <Image Source="{Binding Path=image}" Height="30" Width="30"></Image>
+                <TextBlock FontWeight="Bold"  Text="{Binding Path=username}" Foreground="White" Margin="60,0,0,0" FontSize="25"/>
             </StackPanel>
         </DataTemplate>
         <DataTemplate x:Key="AddrBookGroupHeaderTemplate">

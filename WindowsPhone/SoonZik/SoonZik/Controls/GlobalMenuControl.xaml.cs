@@ -151,7 +151,7 @@ namespace SoonZik.Controls
                 new BouttonMenu()
                 {
                     ImageBoutton = new BitmapImage(new Uri("ms-appx:///Resources/Icones/ProfilMenu.png", UriKind.Absolute)),
-                    Title = Singleton.Instance().CurrentUser.Username,
+                    Title = Singleton.Instance().CurrentUser.username,
                     PageBoutton = typeof(ProfilUser)
                 },
                 new BouttonMenu()
@@ -380,7 +380,7 @@ namespace SoonZik.Controls
 
         private void UsersStackPanel_OnTapped(object sender, TappedRoutedEventArgs e)
         {
-            Singleton.Instance().NewProfilUser = SelectedUser.Id;
+            Singleton.Instance().NewProfilUser = SelectedUser.id;
             Singleton.Instance().ItsMe = false;
             var task = Task.Run(async () => await Singleton.Instance().Charge());
             task.Wait();

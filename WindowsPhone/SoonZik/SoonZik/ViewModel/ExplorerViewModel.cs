@@ -85,7 +85,7 @@ namespace SoonZik.ViewModel
 
             foreach (var item in listUser)
             {
-                var res = (Artist)await request.GetArtist(new Artist(), "users", item.Id.ToString());
+                var res = (Artist)await request.GetArtist(new Artist(), "users", item.id.ToString());
                 if (res.artist)
                     _listArtiste.Add(item);
             }

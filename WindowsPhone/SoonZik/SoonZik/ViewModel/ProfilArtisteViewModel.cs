@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using Windows.UI.Xaml;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using SoonZik.Controls;
@@ -103,7 +102,7 @@ namespace SoonZik.ViewModel
             var request = new HttpRequestGet();
             try
             {
-                var artist = (Artist)await request.GetArtist(new Artist(), "users", TheArtiste.Id.ToString());
+                var artist = (Artist)await request.GetArtist(new Artist(), "users", TheArtiste.id.ToString());
                 ListAlbums = artist.albums;
             }
             catch (Exception e)

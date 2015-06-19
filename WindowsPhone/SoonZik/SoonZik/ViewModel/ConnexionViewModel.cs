@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Globalization;
-using System.Net;
 using System.Windows.Input;
 using Windows.ApplicationModel.Core;
 using Windows.Storage;
@@ -11,10 +10,10 @@ using GalaSoft.MvvmLight.Command;
 using Microsoft.Practices.ServiceLocation;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using SoonZik.HttpRequest;
 using SoonZik.HttpRequest.Poco;
 using SoonZik.Utils;
 using SoonZik.Views;
-using Connexion = SoonZik.HttpRequest.Connexion;
 using News = SoonZik.Views.News;
 
 namespace SoonZik.ViewModel
@@ -90,13 +89,11 @@ namespace SoonZik.ViewModel
             Navigation = new NavigationService();
             _connexionCommand = new RelayCommand(MakeConnexion);
             _facebookTapped = new RelayCommand(MakeFacebookConnection);
-
             _selectionCommand = new RelayCommand(SelectionExecute); 
             if (_localSettings != null && (string)_localSettings.Values["SoonZikAlreadyConnect"] == "yes")
             {
                 _password = _localSettings.Values["SoonZikPassWord"].ToString();
                 _username = _localSettings.Values["SoonZikUserName"].ToString();
-                //MakeConnexion();
             }
         }
         #endregion
@@ -119,22 +116,19 @@ namespace SoonZik.ViewModel
 
             await dispatcher.RunAsync(CoreDispatcherPriority.Normal, async () =>
             {
-                if (_username != null && _password != null)
+                if (_username != string.Empty && _password != string.Empty)
                 {
-                    var connec = new Connexion();
-                    var request = (HttpWebRequest) WebRequest.Create("http://soonzikapi.herokuapp.com/login");
-                    var postData = "email=" + _username + "&password=" + _password;
-
-                    await connec.GetHttpPostResponse(request, postData);
-                    var res = connec.received;
+                    var connec = new HttpRequestPost();
+                    await connec.ConnexionSimple(_username, _password);
+                    var res = connec.Received;
                     if (res != null)
                     {
                         try
                         {
                             var stringJson = JObject.Parse(res).SelectToken("content").ToString();
                             Singleton.Instance().CurrentUser = JsonConvert.DeserializeObject(stringJson, typeof (User)) as User;
-                            ServiceLocator.Current.GetInstance<FriendViewModel>().Sources = Singleton.Instance().CurrentUser.Friends;
-                            ServiceLocator.Current.GetInstance<FriendViewModel>().ItemSource = AlphaKeyGroups<User>.CreateGroups(Singleton.Instance().CurrentUser.Friends, CultureInfo.CurrentUICulture, s => s.Username, true);
+                            ServiceLocator.Current.GetInstance<FriendViewModel>().Sources = Singleton.Instance().CurrentUser.friends;
+                            ServiceLocator.Current.GetInstance<FriendViewModel>().ItemSource = AlphaKeyGroups<User>.CreateGroups(Singleton.Instance().CurrentUser.friends, CultureInfo.CurrentUICulture, s => s.username, true);
                         }
                         catch (Exception e)
                         {

@@ -83,6 +83,7 @@
     <Compile Include="HttpExtensions\HttpExtensions.cs" />
     <Compile Include="HttpExtensions\HttpMethods.cs" />
     <Compile Include="HttpRequestGet.cs" />
+    <Compile Include="HttpRequestPost.cs" />
     <Compile Include="Poco\Address.cs" />
     <Compile Include="Poco\Album.cs" />
     <Compile Include="Poco\Artist.cs" />

@@ -24,7 +24,6 @@ namespace SoonZik.HttpRequest
             return await DoRequest(myObject, request);
         }
 
-
         public async Task<object> GetArtist(object myObject, string element, string id)
         {
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create("http://soonzikapi.herokuapp.com/" + element + "/" + id + "/" + "isartist");
@@ -34,6 +33,12 @@ namespace SoonZik.HttpRequest
         public async Task<object> Search(object myObject, string element)
         {
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create("http://soonzikapi.herokuapp.com/" + "search?query=" + element);
+            return await DoRequest(myObject, request);
+        }
+
+        public async Task<object> GetUserKey(object myObject, string id)
+        {
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create("http://soonzikapi.herokuapp.com/" + "getKey" + id);
             return await DoRequest(myObject, request);
         }
 
@@ -47,18 +52,16 @@ namespace SoonZik.HttpRequest
                 Stream streamResponse = response.GetResponseStream();
                 string data;
                 using (var reader = new StreamReader(streamResponse))
-                    data = reader.ReadToEnd();
+                data = reader.ReadToEnd();
                 var stringJson = JObject.Parse(data).SelectToken("content").ToString();
-                var news = JsonConvert.DeserializeObject(stringJson, myObject.GetType());
-                return news;
+                var obj = JsonConvert.DeserializeObject(stringJson, myObject.GetType());
+                return obj;
             }
             catch (Exception ex)
             {
                 var we = ex.InnerException as WebException;
                 if (we != null)
                 {
-                    var resp = we.Response as HttpWebResponse;
-                    var code = resp.StatusCode;
                     new MessageDialog("RespCallback Exception raised! Message:{0}" + we.Message).ShowAsync();
                     Debug.WriteLine("Status:{0}", we.Status);
                 }

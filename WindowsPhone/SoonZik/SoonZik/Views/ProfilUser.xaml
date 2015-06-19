@@ -20,7 +20,7 @@
     <Page.Resources>
         <DataTemplate x:Key="UserTemplate">
             <StackPanel Margin="0,0,0,10">
-                <TextBlock Text="{Binding Path=Username}" Foreground="White" FontSize="15"/>
+                <TextBlock Text="{Binding Path=username}" Foreground="White" FontSize="15"/>
             </StackPanel>
         </DataTemplate>
 
@@ -37,9 +37,9 @@
         </Grid.RowDefinitions>
         
         <!-- Grid 0 -->
-        <Image x:Name="UserImage" Grid.Row="0" Height="100" Width="100" HorizontalAlignment="Left" Margin="20,0,0,0" Source="{Binding CurrentUser.Image}"/>
+        <Image x:Name="UserImage" Grid.Row="0" Height="100" Width="100" HorizontalAlignment="Left" Margin="20,0,0,0" Source="{Binding CurrentUser.image}"/>
         <TextBlock x:Name="FirstNameUser" Grid.Row="0" Height="50" Foreground="White" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0, 20, 20, 0"
-                   Text="{Binding CurrentUser.Username}" FontSize="23"/>
+                   Text="{Binding CurrentUser.username}" FontSize="23"/>
 
         <!-- Grid 1 -->
         <Grid Grid.Row="1">
@@ -52,17 +52,17 @@
                 <RowDefinition Height="40"/>
                 <RowDefinition Height="40"/>
             </Grid.RowDefinitions>
-            <TextBox Grid.Row="0" IsEnabled="{Binding CanUpdate}" Text="{Binding CurrentUser.Email, Mode=TwoWay}" Background="Transparent" Foreground="Red" BorderThickness="0,0,0,1" Margin="0,0,0,10"/>
-            <TextBox Grid.Row="1" IsEnabled="{Binding CanUpdate}" Text="{Binding CurrentUser.Description, Mode=TwoWay}" Background="Transparent" Foreground="Red" BorderThickness="0,0,0,1" Margin="0,0,0,10"/>
-            <TextBox Grid.Row="2" IsEnabled="{Binding CanUpdate}" Text="{Binding CurrentUser.Address.NumberStreet, Mode=TwoWay}" Background="Transparent" Foreground="Red" BorderThickness="0,0,0,1" Margin="0,0,0,10"/>
-            <TextBox Grid.Row="3" IsEnabled="{Binding CanUpdate}" Text="{Binding CurrentUser.Address.Street, Mode=TwoWay}" Background="Transparent" Foreground="Red" BorderThickness="0,0,0,1" Margin="0,0,0,10"/>
-            <TextBox Grid.Row="4" IsEnabled="{Binding CanUpdate}" Text="{Binding CurrentUser.Address.Zipcode, Mode=TwoWay}" Background="Transparent" Foreground="Red" BorderThickness="0,0,0,1" Margin="0,0,0,10"/>
-            <TextBox Grid.Row="5" IsEnabled="{Binding CanUpdate}" Text="{Binding CurrentUser.Address.Country, Mode=TwoWay}" Background="Transparent" Foreground="Red" BorderThickness="0,0,0,1" Margin="0,0,0,10"/>
+            <TextBox Grid.Row="0" IsEnabled="{Binding CanUpdate}" Text="{Binding CurrentUser.email, Mode=TwoWay}" Background="Transparent" Foreground="Red" BorderThickness="0,0,0,1" Margin="0,0,0,10"/>
+            <TextBox Grid.Row="1" IsEnabled="{Binding CanUpdate}" Text="{Binding CurrentUser.description, Mode=TwoWay}" Background="Transparent" Foreground="Red" BorderThickness="0,0,0,1" Margin="0,0,0,10"/>
+            <TextBox Grid.Row="2" IsEnabled="{Binding CanUpdate}" Text="{Binding CurrentUser.address.NumberStreet, Mode=TwoWay}" Background="Transparent" Foreground="Red" BorderThickness="0,0,0,1" Margin="0,0,0,10"/>
+            <TextBox Grid.Row="3" IsEnabled="{Binding CanUpdate}" Text="{Binding CurrentUser.address.Street, Mode=TwoWay}" Background="Transparent" Foreground="Red" BorderThickness="0,0,0,1" Margin="0,0,0,10"/>
+            <TextBox Grid.Row="4" IsEnabled="{Binding CanUpdate}" Text="{Binding CurrentUser.address.Zipcode, Mode=TwoWay}" Background="Transparent" Foreground="Red" BorderThickness="0,0,0,1" Margin="0,0,0,10"/>
+            <TextBox Grid.Row="5" IsEnabled="{Binding CanUpdate}" Text="{Binding CurrentUser.address.Country, Mode=TwoWay}" Background="Transparent" Foreground="Red" BorderThickness="0,0,0,1" Margin="0,0,0,10"/>
         </Grid>
 
 
         <!-- Grid 2 -->        
-        <ListBox Grid.Row="2" Background="Transparent" x:Name="FollowListBox" ItemsSource="{Binding CurrentUser.Follows}" ItemTemplate="{StaticResource UserTemplate}" SelectedItem="{Binding SelectUser, Mode=TwoWay}" >
+        <ListBox Grid.Row="2" Background="Transparent" x:Name="FollowListBox" ItemsSource="{Binding CurrentUser.follows}" ItemTemplate="{StaticResource UserTemplate}" SelectedItem="{Binding SelectUser, Mode=TwoWay}" >
             <interactivity:Interaction.Behaviors>
                 <core:EventTriggerBehavior EventName="SelectionChanged">
                     <core:InvokeCommandAction Command="{Binding SelectionCommand}"/>
