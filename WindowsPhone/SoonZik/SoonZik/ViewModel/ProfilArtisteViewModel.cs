@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Windows.UI.Xaml;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using SoonZik.Controls;
@@ -39,6 +40,7 @@ namespace SoonZik.ViewModel
         }
 
         public static User TheUser { get; set; }
+        
         private ICommand _selectionCommand;
         public ICommand SelectionCommand
         {
@@ -57,7 +59,6 @@ namespace SoonZik.ViewModel
         }
 
         private Album _theAlbum;
-
         public Album TheAlbum
         {
             get { return _theAlbum; }
@@ -67,7 +68,6 @@ namespace SoonZik.ViewModel
                 RaisePropertyChanged("TheAlbum");
             }
         }
-
         #endregion
 
         #region ctor

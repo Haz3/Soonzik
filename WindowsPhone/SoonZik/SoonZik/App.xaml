@@ -19,6 +19,7 @@
         <vm:AlbumViewModel x:Key="AlbumViewModel" />
         <vm:ProfilArtisteViewModel x:Key="ProfilArtisteViewModel" />
         <vm:GeolocalisationViewModel x:Key="GeolocalisationViewModel" />
+        <vm:PlaylistViewModel x:Key="PlaylistViewModel" />
       
     <DataTemplate x:Key="SizePivotHeader">
       <ContentPresenter>
@@ -247,7 +248,7 @@
           <ControlTemplate TargetType="Button">
             <Grid Width="198" MaxHeight="50" MinHeight="50" MaxWidth="200" MinWidth="200">
               <Image Source="../Resources/Icones/MenuDeco.png" Height="40" HorizontalAlignment="Left" Width="40" />
-              <ContentPresenter Margin="70,0,0,0" HorizontalAlignment="Left" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Content="Connexion" />
+              <ContentPresenter Margin="70,0,0,0" HorizontalAlignment="Left" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Content="Deconnexion" />
             </Grid>
           </ControlTemplate>
         </Setter.Value>

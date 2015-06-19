@@ -12,6 +12,13 @@
     DataContext="{StaticResource ConnexionViewModel}"
     Background="#D3D3D3">
 
+    <interactivity:Interaction.Behaviors>
+        <core:EventTriggerBehavior EventName="Loaded">
+            <core:InvokeCommandAction Command="{Binding SelectionCommand}"/>
+        </core:EventTriggerBehavior>
+    </interactivity:Interaction.Behaviors>
+
+
     <Page.Resources>
         <utils:BooleanToVisibilityConverter x:Key="BoolToVisibilityConverter" True="Visible" False="Collapsed"/>
     </Page.Resources>

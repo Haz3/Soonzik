@@ -1,14 +1,17 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Windows.Devices.Geolocation;
+using Windows.Phone.UI.Input;
 using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
+using Windows.UI.Xaml.Media.Imaging;
 using GalaSoft.MvvmLight.Command;
 using SoonZik.Annotations;
 using SoonZik.HttpRequest;
@@ -18,6 +21,7 @@ using SoonZik.ViewModel;
 using SoonZik.Views;
 using Battle = SoonZik.Views.BattleView;
 using Connexion = SoonZik.Views.Connexion;
+using News = SoonZik.Views.News;
 
 // Pour en savoir plus sur le modèle d'élément Contrôle utilisateur, consultez la page http://go.microsoft.com/fwlink/?LinkId=234236
 
@@ -41,84 +45,83 @@ namespace SoonZik.Controls
             }
         }
 
-        public ObservableCollection<SearchResult> ListObject; 
+        public ObservableCollection<SearchResult> ListObject;
 
         public event PropertyChangedEventHandler PropertyChanged;
         public string SearchText { get; set; }
         private readonly INavigationService _navigationService;
 
-        private User _selectedUser;
+        private UIElement _lastElement;
 
+        private User _selectedUser;
         public User SelectedUser
         {
-            get
-            {
-                return _selectedUser;
-            }
+            get { return _selectedUser; }
             set
             {
                 _selectedUser = value;
                 RaisePropertyChange("SelectedUser");
             }
         }
-
         private Music _selectedMusic;
-
         public Music SelectedMusic
         {
-            get
-            {
-                return _selectedMusic;
-            }
+            get { return _selectedMusic; }
             set
             {
                 _selectedMusic = value;
                 RaisePropertyChange("SelectedMusic");
             }
         }
-
         private Album _selectedAlbum;
-
         public Album SelectedAlbum
         {
-            get
-            {
-                return _selectedAlbum;
-            }
+            get { return _selectedAlbum; }
             set
             {
                 _selectedAlbum = value;
                 RaisePropertyChange("SelectedAlbum");
             }
         }
-
         private Pack _selectedPack;
-
         public Pack SelectedPack
         {
-            get
-            {
-                return _selectedPack;
-            }
+            get { return _selectedPack; }
             set
             {
                 _selectedPack = value;
                 RaisePropertyChange("SelectedPack");
             }
         }
-
-
+        private BouttonMenu _selectedBouttonMenu;
+        public BouttonMenu SelectedBouttonMenu
+        {
+            get { return _selectedBouttonMenu; }
+            set
+            {
+                _selectedBouttonMenu = value;
+                RaisePropertyChange("SelectedBouttonMenu");
+            }
+        }
+        public List<BouttonMenu> ListBouttonMenus { get; set; }
         #endregion
 
         #region Ctor
+
         public GlobalMenuControl()
         {
             this.InitializeComponent();
             this.DataContext = this;
             MyGrid = GlobalGrid;
             GlobalGrid.Children.Add(Singleton.Instance().NewsPage);
-            
+
             this._navigationService = new NavigationService();
+
+            HardwareButtons.BackPressed += HardwareButtonsOnBackPressed;
+
+            //InitList();
+            //MenuListView.ItemsSource = ListBouttonMenus;
+
             ProfilButton.Command = new RelayCommand(GoToProfil);
             NewsButton.Command = new RelayCommand(GoToNews);
             ExplorerButton.Command = new RelayCommand(GoToExplorer);
@@ -130,9 +133,111 @@ namespace SoonZik.Controls
             AchatButton.Command = new RelayCommand(GoToAchat);
             ConnexionButton.Command = new RelayCommand(GoToConnexionPage);
         }
-        #endregion 
-        
+
+        private void HardwareButtonsOnBackPressed(object sender, BackPressedEventArgs e)
+        {
+            e.Handled = true;
+            SetChildren(_lastElement);
+        }
+
+        #endregion
+
         #region Method Menu
+
+        private void InitList()
+        {
+            ListBouttonMenus = new List<BouttonMenu>
+            {
+                new BouttonMenu()
+                {
+                    ImageBoutton = new BitmapImage(new Uri("ms-appx:///Resources/Icones/ProfilMenu.png", UriKind.Absolute)),
+                    Title = Singleton.Instance().CurrentUser.Username,
+                    PageBoutton = typeof(ProfilUser)
+                },
+                new BouttonMenu()
+                {
+                    ImageBoutton = new BitmapImage(new Uri("ms-appx:///Resources/Icones/MenuNews.png", UriKind.Absolute)),
+                    Title = "News",
+                    PageBoutton = typeof(ProfilUser)
+                },
+                new BouttonMenu()
+                {
+                    ImageBoutton = new BitmapImage(new Uri("ms-appx:///Resources/Icones/MenuExplorer.png", UriKind.Absolute)),
+                    Title = "Explorer",
+                    PageBoutton = typeof(ProfilUser)
+                },
+                new BouttonMenu()
+                {
+                    ImageBoutton = new BitmapImage(new Uri("ms-appx:///Resources/Icones/MenuPack.png", UriKind.Absolute)),
+                    Title = "Packs",
+                    PageBoutton = typeof(ProfilUser)
+                },
+                new BouttonMenu()
+                {
+                    ImageBoutton = new BitmapImage(new Uri("ms-appx:///Resources/Icones/MenuMondeMusical.png", UriKind.Absolute)),
+                    Title = "Monde Musical",
+                    PageBoutton = typeof(ProfilUser)
+                },
+                new BouttonMenu()
+                {
+                    ImageBoutton = new BitmapImage(new Uri("ms-appx:///Resources/Icones/MenuBattle.png", UriKind.Absolute)),
+                    Title = "Battle",
+                    PageBoutton = typeof(ProfilUser)
+                },
+                new BouttonMenu()
+                {
+                    ImageBoutton = new BitmapImage(new Uri("ms-appx:///Resources/Icones/MenuPlaylist.png", UriKind.Absolute)),
+                    Title = "Playlist",
+                    PageBoutton = typeof(ProfilUser)
+                },
+                new BouttonMenu()
+                {
+                    ImageBoutton = new BitmapImage(new Uri("ms-appx:///Resources/Icones/MenuFriend.png", UriKind.Absolute)),
+                    Title = "Amis",
+                    PageBoutton = typeof(ProfilUser)
+                },
+                new BouttonMenu()
+                {
+                    ImageBoutton = new BitmapImage(new Uri("ms-appx:///Resources/Icones/MenuAchat.png", UriKind.Absolute)),
+                    Title = "Achat",
+                    PageBoutton = null
+                },
+                new BouttonMenu()
+                {
+                    ImageBoutton = new BitmapImage(new Uri("ms-appx:///Resources/Icones/MenuDeco.png", UriKind.Absolute)),
+                    Title = "Connexion",
+                    PageBoutton = typeof(ProfilUser)
+                },
+            };
+        }
+
+        private void GridItemMenu_OnTapped(object sender, TappedRoutedEventArgs e)
+        {
+            if (SelectedBouttonMenu.PageBoutton.Equals(new ProfilUser()))
+            {
+                Singleton.Instance().ItsMe = true;
+                Singleton.Instance().ProfilPage = new ProfilUser();
+                SetChildren(Singleton.Instance().ProfilPage);
+            }
+            else if (SelectedBouttonMenu.PageBoutton.Equals(new News()))
+                SetChildren(Singleton.Instance().NewsPage);
+            else if (SelectedBouttonMenu.PageBoutton.Equals(new GeolocalisationView()))
+            {
+                var locator = new Geolocator();
+                if (locator.LocationStatus == PositionStatus.Disabled)
+                    new MessageDialog("Veuillez activer votre Location").ShowAsync();
+                else
+                    SetChildren(new GeolocalisationView());
+            }
+            else if (SelectedBouttonMenu.PageBoutton.Equals(new Connexion()))
+                _navigationService.Navigate(typeof (Connexion));
+            else
+            {
+                var obj = SelectedBouttonMenu.PageBoutton as UIElement;
+                
+                SetChildren(obj);
+            }
+        }
 
         private void MenuAloneClose_OnCompleted(object sender, object e)
         {
@@ -208,6 +313,7 @@ namespace SoonZik.Controls
         private void SetChildren(UIElement myObj)
         {
             Singleton.Instance().LastElement = MyGrid.Children.First();
+            _lastElement = MyGrid.Children.FirstOrDefault();
             MyGrid.Children.Clear();
             MyGrid.Children.Add(myObj);
             CloseMenu();

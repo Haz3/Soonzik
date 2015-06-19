@@ -57,7 +57,7 @@ namespace SoonZik.ViewModel
         {
             Navigation = new NavigationService();
             //CurrentUser = Singleton.Instance().CurrentUser;
-            HardwareButtons.BackPressed += HardwareButtonsOnBackPressed;
+            //HardwareButtons.BackPressed += HardwareButtonsOnBackPressed;
             _selectionCommand = new RelayCommand(SelectionExecute);
 
             //Navigation.GoBack();

@@ -6,9 +6,14 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    DataContext="{StaticResource PlaylistViewModel}"
+    Background="#424242">
 
     <Grid x:Name="GlobalGrid">
-    	  
+    	  <GridView x:Name="PlaylistGridView">
+              
+          </GridView>
+        
+        <TextBlock Text="En cours de Realisation" FontSize="35" HorizontalAlignment="Center"></TextBlock>
     </Grid>
 </Page>

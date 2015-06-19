@@ -36,6 +36,19 @@
         <Thickness x:Key="PivotPortraitThemePadding">19,38,0,0</Thickness>
         <Thickness x:Key="PivotLandscapeThemePadding">19,25,0,0</Thickness>
         
+        
+        
+        <DataTemplate x:Key="MenuListItemTemplate">
+            <Grid x:Name="GridItemMenu" Height="50" Tapped="GridItemMenu_OnTapped">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="55"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Image Grid.Column="0" Source="{Binding ImageBoutton}" Height="40" HorizontalAlignment="Left" Margin="15,0,0,0" Width="40" />
+                <TextBlock Margin="15,0,0,0" Grid.Column="1" HorizontalAlignment="Center" Text="{Binding Title}" VerticalAlignment="Center" FontSize="20"/>
+            </Grid>
+        </DataTemplate>
+        
         <DataTemplate x:Key="UserItemTemplate">
             <StackPanel Margin="0,0,0,30" x:Name="UsersStackPanel" Tapped="UsersStackPanel_OnTapped">
                 <TextBlock Text="{Binding Path=Username}"/>
@@ -122,7 +135,7 @@
                 <RowDefinition Height="50"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-            <Button x:Name="ProfilButton" Grid.Row="1" Style="{StaticResource ProfilButtonStyle}" MinHeight="50" MinWidth="200" FontFamily="{StaticResource RobotoMenu}"/>
+            <Button x:Name="ProfilButton" Grid.Row="1" Style="{StaticResource ProfilButtonStyle}" MinHeight="50" MinWidth="200"/>
             <Button x:Name="NewsButton" Grid.Row="2" Style="{StaticResource NewsButtonStyle}" MinHeight="50" MinWidth="200"/>
             <Button x:Name="ExplorerButton" Grid.Row="3" Style="{StaticResource ExplorerButtonStyle}" MinHeight="50" MinWidth="200"/>
             <Button x:Name="PacksButton" Grid.Row="4" Style="{StaticResource PackButtonStyle}" MinHeight="50" MinWidth="200"/>
@@ -132,6 +145,11 @@
             <Button x:Name="AmisButton" Grid.Row="8" Style="{StaticResource FriendButtonStyle}" MinHeight="50" MinWidth="200"/>
             <Button x:Name="AchatButton" Grid.Row="9" Style="{StaticResource AchatButtonStyle}" MinHeight="50" MinWidth="200"/>
             <Button x:Name="ConnexionButton" Grid.Row="10" Style="{StaticResource DecoButtonStyle}" MinHeight="50" MinWidth="200"/>
+            
+            <!--<ListView x:Name="MenuListView" ItemTemplate="{StaticResource MenuListItemTemplate}" SelectedItem="{Binding SelectedBouttonMenu, Mode=TwoWay}">
+                
+            </ListView>-->
+
         </Grid>
 
         <Grid x:Name="SearchGrid" Grid.Row="1" Width="300" Background="Black" Opacity="0.7" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Right" Margin="0,0,-300,0">

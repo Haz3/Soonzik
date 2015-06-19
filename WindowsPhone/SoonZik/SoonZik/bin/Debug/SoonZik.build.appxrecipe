@@ -78,8 +78,53 @@
       <PackagePath>Assets\WideLogo.scale-240.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\Juan-Pablo Bastardos\Documents\GitHub\SoonZik\Soonzik\WindowsPhone\SoonZik\SoonZik\Resources\Icones\AchatMenuImage.png">
-      <PackagePath>Resources\Icones\AchatMenuImage.png</PackagePath>
+    <AppxPackagedFile Include="C:\Users\Juan-Pablo Bastardos\Documents\GitHub\SoonZik\Soonzik\WindowsPhone\SoonZik\SoonZik\Resources\AppIcon\appicon%402x.png">
+      <PackagePath>Resources\AppIcon\appicon%402x.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Juan-Pablo Bastardos\Documents\GitHub\SoonZik\Soonzik\WindowsPhone\SoonZik\SoonZik\Resources\AppIcon\appicon-60%402x.png">
+      <PackagePath>Resources\AppIcon\appicon-60%402x.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Juan-Pablo Bastardos\Documents\GitHub\SoonZik\Soonzik\WindowsPhone\SoonZik\SoonZik\Resources\AppIcon\appicon-60%403x.png">
+      <PackagePath>Resources\AppIcon\appicon-60%403x.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Juan-Pablo Bastardos\Documents\GitHub\SoonZik\Soonzik\WindowsPhone\SoonZik\SoonZik\Resources\AppIcon\appicon-60.png">
+      <PackagePath>Resources\AppIcon\appicon-60.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Juan-Pablo Bastardos\Documents\GitHub\SoonZik\Soonzik\WindowsPhone\SoonZik\SoonZik\Resources\AppIcon\appicon-72%402x.png">
+      <PackagePath>Resources\AppIcon\appicon-72%402x.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Juan-Pablo Bastardos\Documents\GitHub\SoonZik\Soonzik\WindowsPhone\SoonZik\SoonZik\Resources\AppIcon\appicon-72.png">
+      <PackagePath>Resources\AppIcon\appicon-72.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Juan-Pablo Bastardos\Documents\GitHub\SoonZik\Soonzik\WindowsPhone\SoonZik\SoonZik\Resources\AppIcon\appicon-76%402x.png">
+      <PackagePath>Resources\AppIcon\appicon-76%402x.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Juan-Pablo Bastardos\Documents\GitHub\SoonZik\Soonzik\WindowsPhone\SoonZik\SoonZik\Resources\AppIcon\appicon-76.png">
+      <PackagePath>Resources\AppIcon\appicon-76.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Juan-Pablo Bastardos\Documents\GitHub\SoonZik\Soonzik\WindowsPhone\SoonZik\SoonZik\Resources\AppIcon\appicon-Small%402x.png">
+      <PackagePath>Resources\AppIcon\appicon-Small%402x.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Juan-Pablo Bastardos\Documents\GitHub\SoonZik\Soonzik\WindowsPhone\SoonZik\SoonZik\Resources\AppIcon\appicon-Small%403x.png">
+      <PackagePath>Resources\AppIcon\appicon-Small%403x.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Juan-Pablo Bastardos\Documents\GitHub\SoonZik\Soonzik\WindowsPhone\SoonZik\SoonZik\Resources\AppIcon\appicon-Small-40%402x.png">
+      <PackagePath>Resources\AppIcon\appicon-Small-40%402x.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Juan-Pablo Bastardos\Documents\GitHub\SoonZik\Soonzik\WindowsPhone\SoonZik\SoonZik\Resources\AppIcon\appicon-Small-40.png">
+      <PackagePath>Resources\AppIcon\appicon-Small-40.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Juan-Pablo Bastardos\Documents\GitHub\SoonZik\Soonzik\WindowsPhone\SoonZik\SoonZik\Resources\AppIcon\appicon-Small-50%402x.png">
+      <PackagePath>Resources\AppIcon\appicon-Small-50%402x.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Juan-Pablo Bastardos\Documents\GitHub\SoonZik\Soonzik\WindowsPhone\SoonZik\SoonZik\Resources\AppIcon\appicon-Small-50.png">
+      <PackagePath>Resources\AppIcon\appicon-Small-50.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Juan-Pablo Bastardos\Documents\GitHub\SoonZik\Soonzik\WindowsPhone\SoonZik\SoonZik\Resources\AppIcon\appicon-Small.png">
+      <PackagePath>Resources\AppIcon\appicon-Small.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Juan-Pablo Bastardos\Documents\GitHub\SoonZik\Soonzik\WindowsPhone\SoonZik\SoonZik\Resources\AppIcon\appicon.png">
+      <PackagePath>Resources\AppIcon\appicon.png</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Juan-Pablo Bastardos\Documents\GitHub\SoonZik\Soonzik\WindowsPhone\SoonZik\SoonZik\Resources\Icones\audio-off_icon.png">
       <PackagePath>Resources\Icones\audio-off_icon.png</PackagePath>

@@ -86,7 +86,7 @@ namespace SoonZik.ViewModel
             NeedUpdate = false;
             CanUpdate = false;
             ButtonContent = "Editer mes informations";
-            HardwareButtons.BackPressed += HardwareButtonsOnBackPressed;
+            //HardwareButtons.BackPressed += HardwareButtonsOnBackPressed;
             _selectionCommand = new RelayCommand(SelectionExecute);
             _editClickCommand = new RelayCommand(EditInformationExecute);
 

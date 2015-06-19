@@ -7,6 +7,7 @@
     <RootPropertyPathName Name="Title" />
     <RootPropertyPathName Name="title" />
     <RootPropertyPathName Name="Username" />
+    <RootPropertyPathName Name="ImageBoutton" />
     <RootPropertyPathName Name="SelectedPack" />
     <RootPropertyPathName Name="SelectedAlbum" />
     <RootPropertyPathName Name="SelectedMusic" />
@@ -22,6 +23,7 @@
     <RootPropertyPathName Name="ListMusics" />
     <RootPropertyPathName Name="TheAlbum" />
     <RootPropertyPathName Name="UserLocation" />
+    <RootPropertyPathName Name="Latitude" />
     <RootPropertyPathName Name="SelectionCommand" />
     <RootPropertyPathName Name="CurrentUser" />
     <RootPropertyPathName Name="Follows" />
@@ -81,6 +83,7 @@
     <RootType FullName="SoonZik.ViewModel.AlbumViewModel" />
     <RootType FullName="SoonZik.ViewModel.ProfilArtisteViewModel" />
     <RootType FullName="SoonZik.ViewModel.GeolocalisationViewModel" />
+    <RootType FullName="SoonZik.ViewModel.PlaylistViewModel" />
     <RootType FullName="Windows.UI.Xaml.DataTemplate">
       <RootProperty Name="Template" />
     </RootType>
@@ -97,12 +100,12 @@
       <RootProperty Name="MinWidth" />
       <RootProperty Name="Margin" />
       <RootProperty Name="Width" />
+      <RootProperty Name="ColumnDefinitions" />
       <RootProperty Name="Opacity" />
       <RootProperty Name="RenderTransformOrigin" />
       <RootProperty Name="RenderTransform" />
       <RootProperty Name="Visibility" />
       <RootProperty Name="Resources" />
-      <RootProperty Name="ColumnDefinitions" />
       <RootEvent Name="Tapped" />
       <RootMethod Name="GetRow" />
       <RootMethod Name="SetRow" />
@@ -120,7 +123,6 @@
       <RootProperty Name="Style" />
       <RootProperty Name="MinHeight" />
       <RootProperty Name="MinWidth" />
-      <RootProperty Name="FontFamily" />
       <RootProperty Name="Foreground" />
       <RootProperty Name="Margin" />
       <RootProperty Name="Command" />
@@ -271,8 +273,8 @@
       <RootProperty Name="Height" />
       <RootProperty Name="HorizontalAlignment" />
       <RootProperty Name="Width" />
-      <RootProperty Name="VerticalAlignment" />
       <RootProperty Name="Margin" />
+      <RootProperty Name="VerticalAlignment" />
       <RootProperty Name="Stretch" />
       <RootProperty Name="Name" />
       <RootEvent Name="Tapped" />
@@ -324,6 +326,9 @@
       <RootProperty Name="Background" />
       <RootProperty Name="VerticalAlignment" />
       <RootEvent Name="Tapped" />
+    </RootType>
+    <RootType FullName="Windows.UI.Xaml.Controls.ColumnDefinition">
+      <RootProperty Name="Width" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Media.Animation.DoubleAnimation">
       <RootProperty Name="Duration" />
@@ -435,9 +440,6 @@
       <RootProperty Name="UseLayoutRounding" />
     </RootType>
     <RootType FullName="SoonZik.Views.Conversation" />
-    <RootType FullName="Windows.UI.Xaml.Controls.ColumnDefinition">
-      <RootProperty Name="Width" />
-    </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.PivotItem">
       <RootProperty Name="Header" />
       <RootProperty Name="Content" />

@@ -48,6 +48,7 @@ namespace SoonZik.ViewModel
             SimpleIoc.Default.Register<ProfilFriendViewModel>();
             SimpleIoc.Default.Register<AlbumViewModel>();
             SimpleIoc.Default.Register<GeolocalisationView>();
+            SimpleIoc.Default.Register<PlaylistViewModel>();
 
         }
 
@@ -126,7 +127,11 @@ namespace SoonZik.ViewModel
         {
             get { return ServiceLocator.Current.GetInstance<GeolocalisationView>(); }
         }
-       
+
+        public PlaylistViewModel PlaylistView
+        {
+            get { return ServiceLocator.Current.GetInstance<PlaylistViewModel>(); }
+        }
         public static void Cleanup()
         {
             // TODO Clear the ViewModels

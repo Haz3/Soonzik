@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Globalization;
 using System.Net;
+using System.Windows.Input;
 using Windows.ApplicationModel.Core;
 using Windows.Storage;
 using Windows.UI.Core;
@@ -21,6 +22,12 @@ namespace SoonZik.ViewModel
     public class ConnexionViewModel : ViewModelBase
     {
         #region Attribute
+
+        private ICommand _selectionCommand;
+        public ICommand SelectionCommand
+        {
+            get { return _selectionCommand; }
+        }
 
         private bool _progressOn;
         public bool ProgressOn
@@ -84,6 +91,19 @@ namespace SoonZik.ViewModel
             _connexionCommand = new RelayCommand(MakeConnexion);
             _facebookTapped = new RelayCommand(MakeFacebookConnection);
 
+            _selectionCommand = new RelayCommand(SelectionExecute); 
+            if (_localSettings != null && (string)_localSettings.Values["SoonZikAlreadyConnect"] == "yes")
+            {
+                _password = _localSettings.Values["SoonZikPassWord"].ToString();
+                _username = _localSettings.Values["SoonZikUserName"].ToString();
+                //MakeConnexion();
+            }
+        }
+        #endregion
+
+        #region Method
+        private void SelectionExecute()
+        {
             if (_localSettings != null && (string)_localSettings.Values["SoonZikAlreadyConnect"] == "yes")
             {
                 _password = _localSettings.Values["SoonZikPassWord"].ToString();
@@ -91,9 +111,6 @@ namespace SoonZik.ViewModel
                 MakeConnexion();
             }
         }
-        #endregion
-
-        #region Method
 
         private async void MakeConnexion()
         {
