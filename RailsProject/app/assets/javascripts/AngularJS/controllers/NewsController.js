@@ -1,6 +1,7 @@
 SoonzikApp.controller('NewsCtrl', ['$scope', '$routeParams', 'SecureAuth', 'HTTPService', function ($scope, $routeParams, SecureAuth, HTTPService) {
 
 	$scope.loading = true;
+	$scope.commentary = { content: "" }
 
 	$scope.initFoundation = function () {
 		$(document).foundation();
@@ -16,8 +17,6 @@ SoonzikApp.controller('NewsCtrl', ['$scope', '$routeParams', 'SecureAuth', 'HTTP
 		HTTPService.findNews(parameters).then(function(news) {
 			
 			$scope.news = news.data.content;
-			console.log($scope.news);
-
 
 		}, function (error) {
 			console.log("No News Available");
@@ -25,37 +24,50 @@ SoonzikApp.controller('NewsCtrl', ['$scope', '$routeParams', 'SecureAuth', 'HTTP
 	}
 
 	$scope.showNewsById = function() {
-		var id = $routeParams.id;
+		var parameters = [
+			{ order_reverse: false }
+		];
 
-		HTTPService.showNews(id).then(function(response) {
+		var newsId = $routeParams.id;
+
+		HTTPService.showNews(newsId).then(function(response) {
 
 			$scope.thisNews = response.data.content;
 			$scope.attachments = $scope.thisNews.attachments;
 			$scope.author = $scope.thisNews.user;
 
-			console.log($scope.author);
-
-
 		}, function (error) {
 			console.log("This news doesn't exist");
 		});
 
+		HTTPService.showComment(newsId, parameters).then(function(response) {
+			$scope.comments = response.data.content;
+			console.log(parameters);
+
+			console.log($scope.comments);
+		}, function (error) {
+			console.log("This news doesn't exist");
+		});
+
+
+		SecureAuth.securedTransaction(function(key, id) {
+			var parameters =
+		  		{	secureKey: key,
+			  		user_id: id,
+			  		content: "NULL" };
+			
+			HTTPService.addComment($routeParams.id, parameters).then(function(data) {
+				parameters.content = $scope.commentary;
+
+			}, function(error) {
+				console.log("erreur HTTPService");
+			});
+		}, function(error) {
+			console.log("erreur securedTransaction");
+		});
+
 		$scope.thisNewsId = true;
-	
-	}
 
-	$scope.comment = function() {
-
- 		var current_user = SecureAuth.getCurrentUser();
-		var parameters = [
-			{key: "id", value: "1"},
-			{key: "content", value: "commentaire n°1"}		
-		];
-
-	}
-
-	$scope.showComment = function() {
-		
 	}
 
 	$scope.loading = false;

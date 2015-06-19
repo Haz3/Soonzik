@@ -3,7 +3,7 @@
   .row{ "ng-if" => "loading == false", "ng-init" => "initFoundation()"}
     .clearfix
       .ul.small-11.small-centered.columns{"ng-show" => "thisNewsId"}
-        .panel
+        .panel.radius
           %h3.subheader
             %ul.inline-list
               %li.left.small-3.columns.author
@@ -16,3 +16,20 @@
             %img{"ng-src" => "{{ url.url }}"}
           %p{"ng-repeat" => "text in thisNews.newstexts"}
             {{ text.content }}
+        .large-12
+          %textarea.radius{"placeholder" => "Ecrire un commentaire", "ng-model" => "commentary.content"}
+          .action
+            %i.step.fi-social-facebook.size-36
+            %i.step.fi-social-twitter.size-36
+            %i.step.fi-social-google-plus.size-36
+            .button.success.radius{:type => "submit", "ng-click" => "addComment"} Envoyé
+          .panel.content-comment{"ng-repeat" => "comment in comments"}
+            .info-user
+              .photo
+                %img{"ng-src" => "{{ comment.user.image }}"}
+              .info
+                %cite
+                  {{ comment.user.username }} | {{ comment.created_at }}
+            .divider
+            .comment
+              {{ comment.content }}
