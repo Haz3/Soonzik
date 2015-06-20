@@ -42,9 +42,7 @@ SoonzikApp.controller('NewsCtrl', ['$scope', '$routeParams', 'SecureAuth', 'HTTP
 
 		HTTPService.showComment(newsId, parameters).then(function(response) {
 			$scope.comments = response.data.content;
-			console.log(parameters);
 
-			console.log($scope.comments);
 		}, function (error) {
 			console.log("This news doesn't exist");
 		});
@@ -54,10 +52,11 @@ SoonzikApp.controller('NewsCtrl', ['$scope', '$routeParams', 'SecureAuth', 'HTTP
 			var parameters =
 		  		{	secureKey: key,
 			  		user_id: id,
-			  		content: "NULL" };
-			
+			  		content: $scope.commentary.content };
+
 			HTTPService.addComment($routeParams.id, parameters).then(function(data) {
-				parameters.content = $scope.commentary;
+				parameters.content = $scope.commentary.content;
+				console.log(parameters);
 
 			}, function(error) {
 				console.log("erreur HTTPService");

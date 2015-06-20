@@ -18,6 +18,8 @@
             {{ text.content }}
         .large-12
           %textarea.radius{"placeholder" => "Ecrire un commentaire", "ng-model" => "commentary.content"}
+          .panel
+            {{ commentary.content }}
           .action
             %i.step.fi-social-facebook.size-36
             %i.step.fi-social-twitter.size-36
