@@ -81,6 +81,12 @@ SoonzikApp.factory('HTTPService', ['$http', '$location', 'Upload', function ($ht
     showNews: function(id) {
       return $http.get("http://api." + url + '/news/' + id)
     },
+    showComment: function(newsId, parameters) {
+      return $http.get("http://api." + url + '/news/' + newsId + '/comments', urlParametersFormat(parameters));
+    },
+    addComment: function(id, parameters) {
+      return $http.post("http://api." + url + '/news/addcomment/' + id, parameters);
+    },
     findBattles: function (parameters) {
       return $http.get("http://api." + url + '/battles/find' + urlParametersFormat(parameters));
     },
