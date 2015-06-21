@@ -12,35 +12,45 @@ namespace SoonZik.HttpRequest
 {
     public class HttpRequestGet
     {
+        private const string ApiUrl = "http://soonzikapi.herokuapp.com/";
+
         public async Task<object> GetListObject(object myObject, string element)
         {
-            HttpWebRequest request = (HttpWebRequest) WebRequest.Create("http://soonzikapi.herokuapp.com/" + element);
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(ApiUrl + element);
             return await DoRequest(myObject, request);
         }
 
         public async Task<object> GetObject(object myObject, string element, string id)
         {
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create("http://soonzikapi.herokuapp.com/" + element + "/" + id);
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(ApiUrl + element + "/" + id);
             return await DoRequest(myObject, request);
         }
 
         public async Task<object> GetArtist(object myObject, string element, string id)
         {
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create("http://soonzikapi.herokuapp.com/" + element + "/" + id + "/" + "isartist");
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(ApiUrl + element + "/" + id + "/" + "isartist");
             return await DoRequest(myObject, request);
         }
 
         public async Task<object> Search(object myObject, string element)
         {
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create("http://soonzikapi.herokuapp.com/" + "search?query=" + element);
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(ApiUrl + "search?query=" + element);
             return await DoRequest(myObject, request);
         }
 
         public async Task<object> GetUserKey(object myObject, string id)
         {
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create("http://soonzikapi.herokuapp.com/" + "getKey" + id);
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(ApiUrl + "getKey" + id);
             return await DoRequest(myObject, request);
         }
+
+        public async Task<object> GetSocialToken(object myObject, string id, string socialNetwork)
+        {
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(ApiUrl + "getSocialToken/" + id + "/" + socialNetwork);
+            return await DoRequest(myObject, request);
+        }
+
+
 
         private static async Task<object> DoRequest(object myObject, HttpWebRequest request)
         {

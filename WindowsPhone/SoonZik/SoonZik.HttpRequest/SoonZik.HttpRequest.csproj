@@ -90,11 +90,13 @@
     <Compile Include="Poco\Battle.cs" />
     <Compile Include="Poco\Genre.cs" />
     <Compile Include="Poco\Influence.cs" />
+    <Compile Include="Poco\Key.cs" />
     <Compile Include="Poco\Music.cs" />
     <Compile Include="Poco\News.cs" />
     <Compile Include="Poco\NewsText.cs" />
     <Compile Include="Poco\Pack.cs" />
     <Compile Include="Poco\SearchResult.cs" />
+    <Compile Include="Poco\SocialKey.cs" />
     <Compile Include="Poco\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

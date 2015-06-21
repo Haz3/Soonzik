@@ -397,14 +397,6 @@ namespace SoonZik.Controls
         }
         #endregion
 
-        #region NotifyPropertyCahnge
-        [NotifyPropertyChangedInvocator]
-        private void RaisePropertyChange(string propertyName)
-        {
-            var handler = PropertyChanged;
-            if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
-        }
-        #endregion
 
         private void AlbumStackPanel_OnTapped(object sender, TappedRoutedEventArgs e)
         {
@@ -423,5 +415,14 @@ namespace SoonZik.Controls
             PackViewModel.ThePack = SelectedPack;
             SetChildren(new Packs());
         }
+
+        #region NotifyPropertyCahnge
+        [NotifyPropertyChangedInvocator]
+        private void RaisePropertyChange(string propertyName)
+        {
+            var handler = PropertyChanged;
+            if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
+        }
+        #endregion
     }
 }

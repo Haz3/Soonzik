@@ -16,6 +16,7 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Navigation;
+using SoonZik.Helpers;
 
 // Pour plus d'informations sur le modèle Application vide, consultez la page http://go.microsoft.com/fwlink/?LinkId=391641
 using SoonZik.Views;
@@ -28,6 +29,7 @@ namespace SoonZik
     public sealed partial class App : Application
     {
         private TransitionCollection transitions;
+        private ContinuationManager _continuator = new ContinuationManager();
 
         /// <summary>
         /// Initialise l'objet d'application de singleton.  Il s'agit de la première ligne du code créé
@@ -139,12 +141,43 @@ namespace SoonZik
         /// </summary>
         /// <param name="sender">Source de la requête de suspension.</param>
         /// <param name="e">Détails de la requête de suspension.</param>
-        private void OnSuspending(object sender, SuspendingEventArgs e)
+        private async void OnSuspending(object sender, SuspendingEventArgs e)
         {
             var deferral = e.SuspendingOperation.GetDeferral();
 
+            await SuspensionManager.SaveAsync();  
             // TODO: enregistrez l'état de l'application et arrêtez toute activité en arrière-plan
             deferral.Complete();
         }
+
+        protected async override void OnActivated(IActivatedEventArgs args)
+        {
+            CreateRootFrame();
+
+            if (args.PreviousExecutionState == ApplicationExecutionState.Terminated)
+            {
+                try
+                {
+                    await SuspensionManager.RestoreAsync();
+                }
+                catch { }
+            }
+
+            if (args is IContinuationActivatedEventArgs)
+                _continuator.ContinueWith(args);
+
+            Window.Current.Activate();
+        }
+
+        private void CreateRootFrame()
+        {
+            Frame rootFrame = Window.Current.Content as Frame;
+            if (rootFrame == null)
+            {
+                rootFrame = new Frame();
+                SuspensionManager.RegisterFrame(rootFrame, "AppFrame");
+                Window.Current.Content = rootFrame;
+            }
+        }  
     }
 }
