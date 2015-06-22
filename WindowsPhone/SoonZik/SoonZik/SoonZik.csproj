@@ -124,6 +124,7 @@
     <Compile Include="ViewModel\ExplorerViewModel.cs" />
     <Compile Include="ViewModel\FriendViewModel.cs" />
     <Compile Include="ViewModel\GeolocalisationViewModel.cs" />
+    <Compile Include="ViewModel\InscriptionViewModel.cs" />
     <Compile Include="ViewModel\MainPageViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\NewsDetailViewModel.cs" />
@@ -137,6 +138,9 @@
     </Compile>
     <Compile Include="Views\GeolocalisationView.xaml.cs">
       <DependentUpon>GeolocalisationView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\InscriptionView.xaml.cs">
+      <DependentUpon>InscriptionView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ProfilFriendView.xaml.cs">
       <DependentUpon>ProfilFriendView.xaml</DependentUpon>
@@ -292,6 +296,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\GeolocalisationView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\InscriptionView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

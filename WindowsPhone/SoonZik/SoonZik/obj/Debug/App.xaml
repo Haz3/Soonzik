@@ -18,6 +18,7 @@
         <vm:FriendViewModel x:Key="FriendViewModel"/>
         <vm:AlbumViewModel x:Key="AlbumViewModel" />
         <vm:ProfilArtisteViewModel x:Key="ProfilArtisteViewModel" />
+        <vm:InscriptionViewModel x:Key="InscriptionViewModel" />
         <vm:GeolocalisationViewModel x:Key="GeolocalisationViewModel" />
         <vm:PlaylistViewModel x:Key="PlaylistViewModel" />
       

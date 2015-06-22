@@ -21,9 +21,9 @@
 
     <Page.Resources>
         <DataTemplate x:Key="PackItemTemplate">
-            <StackPanel>
-                <Image Source="{Binding Path=BitmapImage}" Height="300" Width="300" Margin="0,0,10,0"/>
-            </StackPanel>
+            <Grid>
+                <Image Source="{Binding Path=BitmapImage}" Height="200" Width="200"/>
+            </Grid>
         </DataTemplate>
 
         <DataTemplate x:Key="AlbumTemplate">
@@ -43,19 +43,24 @@
         </Grid.RowDefinitions>
 
         <ListView Grid.Row="0" ItemsSource="{Binding Datas}" ItemTemplate="{StaticResource PackItemTemplate}" SelectedItem="{Binding SelectedData, Mode=TwoWay}"
-                   ScrollViewer.HorizontalScrollBarVisibility="Visible" ScrollViewer.HorizontalScrollMode="Enabled">
+                    ScrollViewer.HorizontalScrollBarVisibility="Auto"
+                    ScrollViewer.VerticalScrollBarVisibility="Disabled"
+                    ScrollViewer.HorizontalScrollMode="Enabled"
+                    ScrollViewer.VerticalScrollMode="Disabled"
+                    ScrollViewer.ZoomMode="Disabled" VerticalContentAlignment="Center"
+                    >
             <ListView.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <VirtualizingStackPanel Orientation="Horizontal" VerticalAlignment="Center" Height="300" Width="300"></VirtualizingStackPanel>
+                    <StackPanel Orientation="Horizontal"/>
                 </ItemsPanelTemplate>
             </ListView.ItemsPanel>
         </ListView>
 
-        <Grid Grid.Row="1">
+            <Grid Grid.Row="1">
             <Pivot x:Name="PivotGlobal" HeaderTemplate="{StaticResource SizeHeaderGlobalPivot}" Foreground="Transparent" RenderTransformOrigin="0.5,0.5" Style="{StaticResource PivotStyle1}" Margin="0,20,0,0" >
                 <PivotItem Header="Album">
                     <ListBox Background="Transparent" x:Name="ListBoxAlbum" ItemsSource="{Binding ListAlbums}" ItemTemplate="{StaticResource AlbumTemplate}" SelectedItem="{Binding SelectedAlbum, Mode=TwoWay}">
-                        <TextBlock Text="{Binding ThePack.Title}" FontSize="30"></TextBlock>
+                        <TextBlock Text="{Binding ThePack.Title, Mode=TwoWay}" FontSize="30"></TextBlock>
 
                     </ListBox>
                 </PivotItem>

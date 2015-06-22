@@ -12,7 +12,7 @@ namespace SoonZik.Helpers
         readonly Uri _callbackUri = WebAuthenticationBroker.GetCurrentApplicationCallbackUri();
         readonly Uri _loginUrl;
         private const string FacebookAppId = "383777021829578";//Enter your FaceBook App ID here  
-        private const string FacebookPermissions = "user_about_me,read_stream";
+        private const string FacebookPermissions = "user_about_me,read_stream,publish_actions";
         public string AccessToken
         {
             get { return _fb.AccessToken; }

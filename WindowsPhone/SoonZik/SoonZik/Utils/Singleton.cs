@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.Threading.Tasks;
 using Windows.UI.Xaml;
+using Facebook;
 using SoonZik.HttpRequest;
 using SoonZik.HttpRequest.Poco;
 using SoonZik.Views;
@@ -37,6 +38,8 @@ namespace SoonZik.Utils
         public UIElement LastElement { get; set; }
 
         public Music SelectedMusicSingleton { get; set; }
+
+        public FacebookClient MyFacebookClient { get; set; }
         #endregion
 
         #region Ctor

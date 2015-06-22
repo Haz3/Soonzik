@@ -1,0 +1,68 @@
+﻿<Page
+    x:Class="SoonZik.Views.InscriptionView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:SoonZik.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    DataContext="{StaticResource InscriptionViewModel}"
+    Background="#424242">
+
+    <Page.Resources>
+    </Page.Resources>
+
+    <Grid x:Name="GridGeneral">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="40"/>
+        </Grid.RowDefinitions>
+
+        <Grid Row="0">
+            <TextBlock Text="Inscription" FontSize="40"></TextBlock>
+        </Grid>
+
+        <ScrollViewer Grid.Row="1">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="60"/>
+                    <RowDefinition Height="60"/>
+                    <RowDefinition Height="60"/>
+                    <RowDefinition Height="60"/>
+                    <RowDefinition Height="60"/>
+                    <RowDefinition Height="60"/>
+                    <RowDefinition Height="60"/>
+                    <RowDefinition Height="60"/>
+                    <RowDefinition Height="60"/>
+                    <RowDefinition Height="60"/>
+                    <RowDefinition Height="60"/>
+                    <RowDefinition Height="60"/>
+                    <RowDefinition Height="60"/>
+                    <RowDefinition Height="60"/>
+                </Grid.RowDefinitions>
+                <TextBox Grid.Row="0" InputScope="5" Text="{Binding NewUser.email, Mode=TwoWay}" Height="40" Background="Transparent" BorderThickness="0,0,0,0" Foreground="Aqua" PlaceholderText="Email"/>
+                <PasswordBox Grid.Row="1" Password="{Binding Password, Mode=TwoWay}" Height="40" Background="Transparent" BorderThickness="0,0,0,0" Foreground="Aqua" PlaceholderText="Password"/>
+                <TextBox Grid.Row="2" Text="{Binding NewUser.fname, Mode=TwoWay}" Height="40" Background="Transparent" BorderThickness="0,0,0,0" Foreground="Aqua" PlaceholderText="Prenom"/>
+                <TextBox Grid.Row="3" Text="{Binding NewUser.lname, Mode=TwoWay}" Height="40" Background="Transparent" BorderThickness="0,0,0,0" Foreground="Aqua" PlaceholderText="Nom"/>
+                <DatePicker Grid.Row="4" Date="{Binding Birthday, Mode=TwoWay}" BorderBrush="Transparent" Height="60" Background="Transparent" VerticalAlignment="Center" Foreground="Aqua"/>
+                <TextBox Grid.Row="5" Text="{Binding NewUser.username, Mode=TwoWay}" Background="Transparent" BorderThickness="0,0,0,0" Foreground="Aqua" PlaceholderText="Pseudo"/>
+                <TextBox Grid.Row="6" InputScope="39" Text="{Binding NewUser.address.NumberStreet, Mode=TwoWay}" Height="40" Background="Transparent" BorderThickness="0,0,0,0" Foreground="Aqua" PlaceholderText="Nunero de Rue"/>
+                <TextBox Grid.Row="7" Text="{Binding NewUser.address.Street, Mode=TwoWay}" Height="40" Background="Transparent" BorderThickness="0,0,0,0" Foreground="Aqua" PlaceholderText="Nom de rue"/>
+                <TextBox Grid.Row="8" Text="{Binding NewUser.address.Complement, Mode=TwoWay}" Height="40" Background="Transparent" BorderThickness="0,0,0,0" Foreground="Aqua" PlaceholderText="Complement d'adresse"/>
+                <TextBox Grid.Row="9" Text="{Binding NewUser.address.City, Mode=TwoWay}" Height="40" Background="Transparent" BorderThickness="0,0,0,0" Foreground="Aqua" PlaceholderText="Ville"/>
+                <TextBox Grid.Row="10" Text="{Binding NewUser.address.Country, Mode=TwoWay}"  Height="40" Background="Transparent" BorderThickness="0,0,0,0" Foreground="Aqua" PlaceholderText="Pays"/>
+                <TextBox Grid.Row="11" InputScope="39" Text="{Binding NewUser.address.Zipcode, Mode=TwoWay}" Height="40" Background="Transparent" BorderThickness="0,0,0,0" Foreground="Aqua" PlaceholderText="Code Postal"/>
+                <TextBox Grid.Row="12" InputScope="32" Text="{Binding NewUser.phoneNumber, Mode=TwoWay}" Height="40" Background="Transparent" BorderThickness="0,0,0,0" Foreground="Aqua" PlaceholderText="Telephone"/>
+                <TextBox Grid.Row="13" Text="{Binding NewUser.image, Mode=TwoWay}" Height="40" Background="Transparent" BorderThickness="0,0,0,0" Foreground="Aqua" PlaceholderText="Photo"/>
+            </Grid>
+
+        </ScrollViewer>
+
+        <Grid Row="2">
+            <Button Command="{Binding ValidateCommand}" Content="Valider" HorizontalAlignment="Center" VerticalAlignment="Center">
+            </Button>
+        </Grid>
+    </Grid>
+</Page>
+

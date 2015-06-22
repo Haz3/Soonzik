@@ -14,7 +14,7 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="60" />
         </Grid.RowDefinitions>
-        <TextBox Grid.Row="0" Width="200" Height="160" Background="Transparent"
+        <TextBox Grid.Row="0" Width="200" x:Name="TextBoxShare" Height="160" Background="Transparent"
                  BorderThickness="0,0,0,0" Foreground="Aqua"/>
         
         <Image x:Name="FacebookShare" Grid.Row="1" VerticalAlignment="Center" Source="../Resources/Icones/facebook.png"

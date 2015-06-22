@@ -295,6 +295,9 @@
     <AppxPackagedFile Include="C:\Users\Juan-Pablo Bastardos\Documents\GitHub\SoonZik\Soonzik\WindowsPhone\SoonZik\SoonZik\bin\Debug\Views\GeolocalisationView.xbf">
       <PackagePath>Views\GeolocalisationView.xbf</PackagePath>
     </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Juan-Pablo Bastardos\Documents\GitHub\SoonZik\Soonzik\WindowsPhone\SoonZik\SoonZik\bin\Debug\Views\InscriptionView.xbf">
+      <PackagePath>Views\InscriptionView.xbf</PackagePath>
+    </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Juan-Pablo Bastardos\Documents\GitHub\SoonZik\Soonzik\WindowsPhone\SoonZik\SoonZik\bin\Debug\Views\ProfilFriendView.xbf">
       <PackagePath>Views\ProfilFriendView.xbf</PackagePath>
     </AppxPackagedFile>
