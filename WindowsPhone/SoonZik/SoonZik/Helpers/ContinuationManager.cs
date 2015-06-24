@@ -23,8 +23,7 @@ namespace SoonZik.Helpers
                     break;
                 case ActivationKind.WebAuthenticationBrokerContinuation:
                     var continuator = new ConnexionViewModel();
-                    if (continuator != null)
-                        continuator.ContinueWithWebAuthenticationBroker((WebAuthenticationBrokerContinuationEventArgs)args);
+                    continuator.ContinueWithWebAuthenticationBroker((WebAuthenticationBrokerContinuationEventArgs)args);
                     break;
                 default:
                     break;

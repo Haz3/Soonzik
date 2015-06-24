@@ -71,7 +71,6 @@
     <RootPropertyPathName Name="SelectedData" />
     <RootPropertyPathName Name="TheArtiste" />
     <RootPropertyPathName Name="Count" />
-    <RootPropertyPathName Name="ButtonContent" />
     <RootPropertyPathName Name="EditClickCommand" />
     <RootPropertyPathName Name="CanUpdate" />
   </Roots.PropertyPathNames>
@@ -297,11 +296,11 @@
       <RootEvent Name="Tapped" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.ContentPresenter">
+      <RootProperty Name="Content" />
       <RootProperty Name="FontFamily" />
       <RootProperty Name="Margin" />
       <RootProperty Name="HorizontalAlignment" />
       <RootProperty Name="VerticalAlignment" />
-      <RootProperty Name="Content" />
     </RootType>
     <RootType FullName="Microsoft.Xaml.Tools.DirectUI.ProxyTypes.NullExtension" />
     <RootType FullName="Windows.UI.Xaml.Media.SolidColorBrush">
@@ -336,13 +335,11 @@
     </RootType>
     <RootType FullName="SoonZik.Controls.ButtonFriendPopUp" />
     <RootType FullName="SoonZik.Controls.Genre" />
-    <RootType FullName="Windows.UI.Xaml.Thickness" />
     <RootType FullName="Windows.UI.Xaml.Controls.StackPanel">
       <RootProperty Name="Margin" />
       <RootProperty Name="Children" />
       <RootProperty Name="Background" />
       <RootProperty Name="VerticalAlignment" />
-      <RootProperty Name="Orientation" />
       <RootEvent Name="Tapped" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.ColumnDefinition">
@@ -364,7 +361,9 @@
       <RootProperty Name="Background" />
       <RootProperty Name="FontSize" />
       <RootProperty Name="PlaceholderText" />
-      <RootProperty Name="FontFamily" />
+      <RootProperty Name="Opacity" />
+      <RootProperty Name="HorizontalAlignment" />
+      <RootProperty Name="VerticalAlignment" />
       <RootProperty Name="InputScope" />
       <RootProperty Name="Text" />
       <RootProperty Name="IsEnabled" />
@@ -503,6 +502,9 @@
     <RootType FullName="SoonZik.Views.MainView" />
     <RootType FullName="SoonZik.Views.News" />
     <RootType FullName="SoonZik.Views.NewsDetail" />
+    <RootType FullName="Windows.UI.Xaml.Controls.VirtualizingStackPanel">
+      <RootProperty Name="Orientation" />
+    </RootType>
     <RootType FullName="SoonZik.Views.Packs" />
     <RootType FullName="SoonZik.Views.Playlist" />
     <RootType FullName="SoonZik.Views.ProfilArtiste" />

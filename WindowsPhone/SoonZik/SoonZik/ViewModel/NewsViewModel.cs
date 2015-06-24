@@ -76,9 +76,6 @@ namespace SoonZik.ViewModel
             ShareTapped = new RelayCommand(ShareTappedExecute);
             ItemClickCommand = new RelayCommand(ItemClickExecute);
         }
-
-
-
         #endregion
 
         #region Method
@@ -94,7 +91,6 @@ namespace SoonZik.ViewModel
             var newsBody = new NewsSharePopup(SelectedNews);
             MessagePrompt = new MessagePrompt
             {
-                Title = "Partager",
                 IsAppBarVisible = false,
                 VerticalAlignment = VerticalAlignment.Center,
                 Body = newsBody,

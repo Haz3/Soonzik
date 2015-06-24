@@ -198,10 +198,10 @@ namespace SoonZik.ViewModel
 
         public async void ContinueWithWebAuthenticationBroker(WebAuthenticationBrokerContinuationEventArgs args)
         {
+            ProgressOn = true;
             ObjFBHelper.ContinueAuthentication(args);
             if (ObjFBHelper.AccessToken != null)
             {
-                ProgressOn = true;
                 fbclient = new FacebookClient(ObjFBHelper.AccessToken);
                 Singleton.Instance().MyFacebookClient = new FacebookClient(ObjFBHelper.AccessToken);
 

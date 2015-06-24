@@ -83,7 +83,6 @@ namespace SoonZik.ViewModel
         {
             MeaagePrompt = new MessagePrompt
             {
-                Title = "Que voulez vous faire ?",
                 IsAppBarVisible = true,
                 VerticalAlignment = VerticalAlignment.Center,
                 Body = new ButtonFriendPopUp(SelectedUser.id),

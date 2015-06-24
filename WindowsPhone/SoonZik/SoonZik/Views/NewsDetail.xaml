@@ -19,7 +19,7 @@
             <TextBlock Foreground="White" Text="{Binding SelectNews.Title}" VerticalAlignment="Top" HorizontalAlignment="Center" FontSize="30"/>
         </Grid>
         <Grid Grid.Row="1">
-                <TextBlock Foreground="White" VerticalAlignment="Bottom" HorizontalAlignment="Left" FontSize="15" Text="{Binding SelectNews.User.Username}"/>
+                <TextBlock Foreground="White" VerticalAlignment="Bottom" HorizontalAlignment="Left" FontSize="15" Text="{Binding SelectNews.User.username}"/>
                 <TextBlock Foreground="White" VerticalAlignment="Bottom" HorizontalAlignment="Right" FontSize="15" Text="{Binding SelectNews.Date}"/>
         </Grid>
     </Grid>

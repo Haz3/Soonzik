@@ -12,6 +12,8 @@ namespace SoonZik.Helpers
 {
     internal sealed class SuspensionManager
     {
+
+        #region attributes
         private static Dictionary<string, object> _sessionState = new Dictionary<string, object>();
         private static List<Type> _knownTypes = new List<Type>();
         private const string sessionStateFilename = "_sessionState.xml";
@@ -37,7 +39,15 @@ namespace SoonZik.Helpers
         {
             get { return _knownTypes; }
         }
+        
+        private static DependencyProperty _frameSessionStateKeyProperty = DependencyProperty.RegisterAttached("_FrameSessionStateKey", typeof(String), typeof(SuspensionManager), null);
+        private static DependencyProperty _frameSessionBaseKeyProperty = DependencyProperty.RegisterAttached("_FrameSessionBaseKeyParams", typeof(String), typeof(SuspensionManager), null);
+        private static DependencyProperty _frameSessionStateProperty = DependencyProperty.RegisterAttached("_FrameSessionState", typeof(Dictionary<String, Object>), typeof(SuspensionManager), null);
+        private static List<WeakReference<Frame>> _registeredFrames = new List<WeakReference<Frame>>();
 
+        #endregion
+
+        #region Method
         /// <summary> 
         /// Save the current <see cref="SessionState"/>.  Any <see cref="Frame"/> instances 
         /// registered with <see cref="RegisterFrame"/> will also preserve their current 
@@ -109,9 +119,9 @@ namespace SoonZik.Helpers
                 foreach (var weakFrameReference in _registeredFrames)
                 {
                     Frame frame;
-                    if (weakFrameReference.TryGetTarget(out frame) && (string)frame.GetValue(FrameSessionBaseKeyProperty) == sessionBaseKey)
+                    if (weakFrameReference.TryGetTarget(out frame) && (string)frame.GetValue(_frameSessionBaseKeyProperty) == sessionBaseKey)
                     {
-                        frame.ClearValue(FrameSessionStateProperty);
+                        frame.ClearValue(_frameSessionStateProperty);
                         RestoreFrameNavigationState(frame);
                     }
                 }
@@ -121,15 +131,6 @@ namespace SoonZik.Helpers
                 throw new SuspensionManagerException(e);
             }
         }
-
-        private static DependencyProperty FrameSessionStateKeyProperty =
-            DependencyProperty.RegisterAttached("_FrameSessionStateKey", typeof(String), typeof(SuspensionManager), null);
-        private static DependencyProperty FrameSessionBaseKeyProperty =
-            DependencyProperty.RegisterAttached("_FrameSessionBaseKeyParams", typeof(String), typeof(SuspensionManager), null);
-        private static DependencyProperty FrameSessionStateProperty =
-            DependencyProperty.RegisterAttached("_FrameSessionState", typeof(Dictionary<String, Object>), typeof(SuspensionManager), null);
-        private static List<WeakReference<Frame>> _registeredFrames = new List<WeakReference<Frame>>();
-
         /// <summary> 
         /// Registers a <see cref="Frame"/> instance to allow its navigation history to be saved to 
         /// and restored from <see cref="SessionState"/>.  Frames should be registered once 
@@ -146,25 +147,25 @@ namespace SoonZik.Helpers
         /// This can be used to distinguish between multiple application launch scenarios.</param> 
         public static void RegisterFrame(Frame frame, String sessionStateKey, String sessionBaseKey = null)
         {
-            if (frame.GetValue(FrameSessionStateKeyProperty) != null)
+            if (frame.GetValue(_frameSessionStateKeyProperty) != null)
             {
                 throw new InvalidOperationException("Frames can only be registered to one session state key");
             }
 
-            if (frame.GetValue(FrameSessionStateProperty) != null)
+            if (frame.GetValue(_frameSessionStateProperty) != null)
             {
                 throw new InvalidOperationException("Frames must be either be registered before accessing frame session state, or not registered at all");
             }
 
             if (!string.IsNullOrEmpty(sessionBaseKey))
             {
-                frame.SetValue(FrameSessionBaseKeyProperty, sessionBaseKey);
+                frame.SetValue(_frameSessionBaseKeyProperty, sessionBaseKey);
                 sessionStateKey = sessionBaseKey + "_" + sessionStateKey;
             }
 
             // Use a dependency property to associate the session key with a frame, and keep a list of frames whose 
             // navigation state should be managed 
-            frame.SetValue(FrameSessionStateKeyProperty, sessionStateKey);
+            frame.SetValue(_frameSessionStateKeyProperty, sessionStateKey);
             _registeredFrames.Add(new WeakReference<Frame>(frame));
 
             // Check to see if navigation state can be restored 
@@ -182,7 +183,7 @@ namespace SoonZik.Helpers
         {
             // Remove session state and remove the frame from the list of frames whose navigation 
             // state will be saved (along with any weak references that are no longer reachable) 
-            SessionState.Remove((String)frame.GetValue(FrameSessionStateKeyProperty));
+            SessionState.Remove((String)frame.GetValue(_frameSessionStateKeyProperty));
             _registeredFrames.RemoveAll((weakFrameReference) =>
             {
                 Frame testFrame;
@@ -205,11 +206,11 @@ namespace SoonZik.Helpers
         /// <see cref="SessionState"/>.</returns> 
         public static Dictionary<String, Object> SessionStateForFrame(Frame frame)
         {
-            var frameState = (Dictionary<String, Object>)frame.GetValue(FrameSessionStateProperty);
+            var frameState = (Dictionary<String, Object>)frame.GetValue(_frameSessionStateProperty);
 
             if (frameState == null)
             {
-                var frameSessionKey = (String)frame.GetValue(FrameSessionStateKeyProperty);
+                var frameSessionKey = (String)frame.GetValue(_frameSessionStateKeyProperty);
                 if (frameSessionKey != null)
                 {
                     // Registered frames reflect the corresponding session state 
@@ -224,7 +225,7 @@ namespace SoonZik.Helpers
                     // Frames that aren't registered have transient state 
                     frameState = new Dictionary<String, Object>();
                 }
-                frame.SetValue(FrameSessionStateProperty, frameState);
+                frame.SetValue(_frameSessionStateProperty, frameState);
             }
             return frameState;
         }
@@ -243,7 +244,9 @@ namespace SoonZik.Helpers
             var frameState = SessionStateForFrame(frame);
             frameState["Navigation"] = frame.GetNavigationState();
         }
+        #endregion
     }
+
     public class SuspensionManagerException : Exception
     {
         public SuspensionManagerException()
