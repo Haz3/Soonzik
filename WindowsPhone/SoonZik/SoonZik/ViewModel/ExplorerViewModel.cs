@@ -1,7 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
+using Windows.ApplicationModel.Core;
 using Windows.Foundation.Collections;
+using Windows.UI.Core;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using SoonZik.Controls;
@@ -54,7 +57,7 @@ namespace SoonZik.ViewModel
 
         public Music SelectedMusic { get; set; }
         public static Music PlayerSelectedMusic { get; set; }
-        public RelayCommand MusiCommand { get; set; } 
+        public RelayCommand MusiCommand { get; set; }
         #endregion
 
         #region Ctor
@@ -62,37 +65,73 @@ namespace SoonZik.ViewModel
         public ExplorerViewModel()
         {
             Navigation = new NavigationService();
-            var task = Task.Run(async () => await LoadContent());
-            task.Wait();
             MusiCommand = new RelayCommand(MusiCommandExecute);
+            ListGenres = new ObservableCollection<Genre>();
+            ListArtiste = new ObservableCollection<User>();
+            ListMusique = new ObservableCollection<Music>();
+            this.LoadContent();
         }
 
         #endregion
 
         #region Method
-        public async Task LoadContent()
+        public void LoadContent()
         {
             var request = new HttpRequestGet();
-            var listGenre = (List<Genre>)await request.GetListObject(new List<HttpRequest.Poco.Genre>(), "genres");
-            var listUser = (List<User>)await request.GetListObject(new List<HttpRequest.Poco.User>(), "users");
-            var listMusic = (List<Music>)await request.GetListObject(new List<HttpRequest.Poco.Music>(), "musics");
-            _listMusique = new ObservableCollection<Music>();
-            _listArtiste = new ObservableCollection<User>();
-            _listGenres = new ObservableCollection<Genre>();
-
-            foreach (var item in listGenre)
-                _listGenres.Add(item);
-
-            foreach (var item in listUser)
+            var listGenre = request.GetListObject(new List<Genre>(), "genres");
+            listGenre.ContinueWith(delegate(Task<object> tmp)
             {
-                var res = (Artist)await request.GetArtist(new Artist(), "users", item.id.ToString());
-                if (res.artist)
-                    _listArtiste.Add(item);
-            }
+                var test = tmp.Result as List<Genre>;
+                if (test != null)
+                {
+                    foreach (var item in test)
+                    {
+                        CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+                        {
+                            ListGenres.Add(item);
+                        });
+                    }
 
+                }
+            });
+            var listUser = request.GetListObject(new List<User>(), "users");
+            listUser.ContinueWith(delegate(Task<object> tmp)
+            {
+                var test = tmp.Result as List<User>;
+                if (test != null)
+                {
+                    foreach (var item in test)
+                    {
+                        var res = request.GetArtist(new Artist(), "users", item.id.ToString());
+                        res.ContinueWith(delegate(Task<object> obj)
+                            {
+                                CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+                                {
+                                    var art = obj.Result as Artist;
+                                    if (art != null && art.artist)
+                                        ListArtiste.Add(item);
+                                });
+                                
+                            });
+                    }
+                }
+            });
+            var listZik = request.GetListObject(new List<Music>(), "musics");
+            listZik.ContinueWith(delegate(Task<object> tmp)
+            {
+                var test = tmp.Result as List<Music>;
+                if (test != null)
+                {
+                    foreach (var item in test)
+                    {
+                        CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+                        {
+                            ListMusique.Add(item);
+                        });
+                    }
 
-            foreach (var item in listMusic)
-                _listMusique.Add(item);
+                }
+            });
         }
 
 
