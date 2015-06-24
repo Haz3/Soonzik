@@ -10,7 +10,7 @@ using Windows.UI.Xaml.Controls;
 
 namespace SoonZik.Helpers
 {
-    internal sealed class SuspensionManager
+    public sealed class SuspensionManager
     {
 
         #region attributes
