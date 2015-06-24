@@ -461,8 +461,7 @@ namespace SoonZik.Controls
         {
             Singleton.Instance().NewProfilUser = SelectedUser.id;
             Singleton.Instance().ItsMe = false;
-            var task = Task.Run(async () => await Singleton.Instance().Charge());
-            task.Wait();
+            Singleton.Instance().Charge();
             MyGrid.Children.Clear();
             MyGrid.Children.Add(new ProfilFriendView());
             CloseMenu();

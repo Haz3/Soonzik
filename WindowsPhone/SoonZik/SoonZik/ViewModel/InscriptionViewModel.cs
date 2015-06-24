@@ -5,9 +5,11 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Windows.UI.Popups;
 using Windows.UI.Xaml.Controls;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using SoonZik.Helpers;
 using SoonZik.HttpRequest;
 using SoonZik.HttpRequest.Poco;
 
@@ -72,15 +74,22 @@ namespace SoonZik.ViewModel
 
         private void ValidateExecute()
         {
-            NewUser.birthday = Birthday.Year + "/" + Birthday.Month + "/" + Birthday.Day + "%20" + Birthday.Hour + ":" + Birthday.Minute + ":" + Birthday.Second;
-            PostUser();
+            if (EmailHelper.IsValidEmail(NewUser.email))
+            {
+                NewUser.birthday = Birthday.Year + "/" + Birthday.Month + "/" + Birthday.Day + "%20" + Birthday.Hour +
+                                   ":" + Birthday.Minute + ":" + Birthday.Second;
+                PostUser();
+            }
+            else
+            {
+                new MessageDialog("").ShowAsync();
+            }
         }
 
         private async void PostUser()
         {
             var postRequest = new HttpRequestPost();
             var res = await postRequest.Save(NewUser, "", _password);
-
         }
 
         #endregion

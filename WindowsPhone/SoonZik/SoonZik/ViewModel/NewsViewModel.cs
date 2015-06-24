@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Threading.Tasks;
+using Windows.ApplicationModel.Core;
+using Windows.UI.Core;
 using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Coding4Fun.Toolkit.Controls;
@@ -12,6 +14,7 @@ using SoonZik.Controls;
 using SoonZik.HttpRequest;
 using SoonZik.HttpRequest.Poco;
 using SoonZik.Views;
+using Genre = SoonZik.HttpRequest.Poco.Genre;
 using News = SoonZik.HttpRequest.Poco.News;
 
 namespace SoonZik.ViewModel
@@ -71,8 +74,8 @@ namespace SoonZik.ViewModel
 
         public NewsViewModel()
         {
-            var task = Task.Run(async () => await Charge());
-            task.Wait();
+            _listNews = new ObservableCollection<News>();
+            Charge();
             ShareTapped = new RelayCommand(ShareTappedExecute);
             ItemClickCommand = new RelayCommand(ItemClickExecute);
         }
@@ -100,22 +103,39 @@ namespace SoonZik.ViewModel
             MessagePrompt.Show();
         }
 
-        public async Task Charge()
+        public void Charge()
         {
             var request = new HttpRequestGet();
-            try
+            //try
+            //{
+            //    var list = (List<News>) await request.GetListObject(new List<News>(), "news");
+            //    _listNews = new ObservableCollection<News>();
+            //    foreach (var item in list)
+            //    {
+            //        _listNews.Add(item);
+            //    }
+            //}
+            //catch (Exception e)
+            //{
+            //    Debug.WriteLine(e.ToString());
+            //}
+
+            var listNews = request.GetListObject(new List<News>(), "news");
+            listNews.ContinueWith(delegate(Task<object> tmp)
             {
-                var list = (List<News>) await request.GetListObject(new List<News>(), "news");
-                _listNews = new ObservableCollection<News>();
-                foreach (var item in list)
+                var test = tmp.Result as List<News>;
+                if (test != null)
                 {
-                    _listNews.Add(item);
+                    foreach (var item in test)
+                    {
+                        CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+                        {
+                            ListNews.Add(item);
+                        });
+                    }
+
                 }
-            }
-            catch (Exception e)
-            {
-                Debug.WriteLine(e.ToString());
-            }
+            });
         }
         #endregion
     }

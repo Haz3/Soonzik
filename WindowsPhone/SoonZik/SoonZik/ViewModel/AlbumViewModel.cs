@@ -1,7 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using Windows.ApplicationModel.Core;
+using Windows.UI.Core;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using SoonZik.Controls;
@@ -72,9 +72,8 @@ namespace SoonZik.ViewModel
             {
                 TheAlbum = MyAlbum;
                 _navigationService = new NavigationService();
-                ItemClickCommand = new RelayCommand(ItemClickCommandExecute); 
-                var task = Task.Run(async () => await Charge());
-                task.Wait();
+                ItemClickCommand = new RelayCommand(ItemClickCommandExecute);
+                Charge();
             }
             //ImageAlbum = TheAlbum.image == String.Empty ? new Uri("ms-appx:///Resources/Icones/disc.png", UriKind.Absolute).ToString() : TheAlbum.image;
 
@@ -88,18 +87,32 @@ namespace SoonZik.ViewModel
             _navigationService.Navigate(new PlayerControl().GetType());
         }
 
-        public async Task Charge()
+        public void Charge()
         {
             var request = new HttpRequestGet();
-            try
+            //try
+            //{
+            //    TheAlbum = (Album)await request.GetObject(new Album(), "albums", MyAlbum.id.ToString());
+            //    ListMusics = TheAlbum.musics;
+            //}
+            //catch (Exception e)
+            //{
+            //    Debug.WriteLine(e.ToString());
+            //}
+
+            var album = request.GetObject(new Album(), "albums", MyAlbum.id.ToString());
+            album.ContinueWith(delegate(Task<object> tmp)
             {
-                TheAlbum = (Album)await request.GetObject(new Album(), "albums", MyAlbum.id.ToString());
-                ListMusics = TheAlbum.musics;
-            }
-            catch (Exception e)
-            {
-                Debug.WriteLine(e.ToString());
-            }
+                var test = tmp.Result as Album;
+                if (test != null)
+                {
+                        CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+                        {
+                            TheAlbum = test;
+                            ListMusics = TheAlbum.musics;
+                        });
+                    }
+            });
         }
         #endregion
 

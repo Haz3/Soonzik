@@ -101,7 +101,9 @@
     <Compile Include="Controls\ProgressRingControl.xaml.cs">
       <DependentUpon>ProgressRingControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\Constants.cs" />
     <Compile Include="Helpers\ContinuationManager.cs" />
+    <Compile Include="Helpers\EmailHelper.cs" />
     <Compile Include="Helpers\EncriptSha256.cs" />
     <Compile Include="Helpers\FacebookHelper.cs" />
     <Compile Include="Helpers\SuspensionManager.cs" />

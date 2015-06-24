@@ -1,6 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading.Tasks;
+using Windows.ApplicationModel.Core;
+using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Facebook;
 using SoonZik.HttpRequest;
@@ -50,17 +53,30 @@ namespace SoonZik.Utils
         #endregion
 
         #region Method
-        public async Task Charge()
+        public void Charge()
         {
             var request = new HttpRequestGet();
-            try
+            //try
+            //{
+            //    SelectedUser = (User)await request.GetObject(new User(), "users", Singleton.Instance().NewProfilUser.ToString());
+            //}
+            //catch (Exception e)
+            //{
+            //    Debug.WriteLine(e.ToString());
+            //}
+
+            var test = request.GetObject(new User(), "users", Singleton.Instance().NewProfilUser.ToString());
+            test.ContinueWith(delegate(Task<object> tmp)
             {
-                SelectedUser = (User)await request.GetObject(new User(), "users", Singleton.Instance().NewProfilUser.ToString());
-            }
-            catch (Exception e)
-            {
-                Debug.WriteLine(e.ToString());
-            }
+                var res = tmp.Result as User;
+                if (res != null)
+                {
+                        CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+                        {
+                            SelectedUser = res;
+                        });
+                    }
+            });
         }
         #endregion
     }
