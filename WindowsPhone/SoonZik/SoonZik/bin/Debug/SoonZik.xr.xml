@@ -25,21 +25,30 @@
     <RootPropertyPathName Name="TheAlbum" />
     <RootPropertyPathName Name="UserLocation" />
     <RootPropertyPathName Name="Latitude" />
+    <RootPropertyPathName Name="ValidateCommand" />
+    <RootPropertyPathName Name="NewUser" />
+    <RootPropertyPathName Name="image" />
+    <RootPropertyPathName Name="phoneNumber" />
+    <RootPropertyPathName Name="address" />
+    <RootPropertyPathName Name="Zipcode" />
+    <RootPropertyPathName Name="Country" />
+    <RootPropertyPathName Name="City" />
+    <RootPropertyPathName Name="Complement" />
+    <RootPropertyPathName Name="Street" />
+    <RootPropertyPathName Name="NumberStreet" />
+    <RootPropertyPathName Name="Birthday" />
+    <RootPropertyPathName Name="lname" />
+    <RootPropertyPathName Name="fname" />
+    <RootPropertyPathName Name="Password" />
+    <RootPropertyPathName Name="email" />
     <RootPropertyPathName Name="SelectionCommand" />
     <RootPropertyPathName Name="CurrentUser" />
     <RootPropertyPathName Name="follows" />
     <RootPropertyPathName Name="SelectUser" />
-    <RootPropertyPathName Name="address" />
-    <RootPropertyPathName Name="Country" />
-    <RootPropertyPathName Name="Zipcode" />
-    <RootPropertyPathName Name="Street" />
-    <RootPropertyPathName Name="NumberStreet" />
     <RootPropertyPathName Name="description" />
-    <RootPropertyPathName Name="email" />
-    <RootPropertyPathName Name="image" />
     <RootPropertyPathName Name="ProgressOn" />
+    <RootPropertyPathName Name="InscritpiomCommand" />
     <RootPropertyPathName Name="ConnexionCommand" />
-    <RootPropertyPathName Name="Password" />
     <RootPropertyPathName Name="FacebookTapped" />
     <RootPropertyPathName Name="style_name" />
     <RootPropertyPathName Name="ListArtiste" />
@@ -62,7 +71,6 @@
     <RootPropertyPathName Name="SelectedData" />
     <RootPropertyPathName Name="TheArtiste" />
     <RootPropertyPathName Name="Count" />
-    <RootPropertyPathName Name="ButtonContent" />
     <RootPropertyPathName Name="EditClickCommand" />
     <RootPropertyPathName Name="CanUpdate" />
   </Roots.PropertyPathNames>
@@ -83,6 +91,7 @@
     <RootType FullName="SoonZik.ViewModel.FriendViewModel" />
     <RootType FullName="SoonZik.ViewModel.AlbumViewModel" />
     <RootType FullName="SoonZik.ViewModel.ProfilArtisteViewModel" />
+    <RootType FullName="SoonZik.ViewModel.InscriptionViewModel" />
     <RootType FullName="SoonZik.ViewModel.GeolocalisationViewModel" />
     <RootType FullName="SoonZik.ViewModel.PlaylistViewModel" />
     <RootType FullName="Windows.UI.Xaml.DataTemplate">
@@ -124,9 +133,9 @@
       <RootProperty Name="Style" />
       <RootProperty Name="MinHeight" />
       <RootProperty Name="MinWidth" />
+      <RootProperty Name="Command" />
       <RootProperty Name="Foreground" />
       <RootProperty Name="Margin" />
-      <RootProperty Name="Command" />
       <RootEvent Name="Click" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.Control">
@@ -231,8 +240,14 @@
       <RootProperty Name="Content" />
       <RootMethod Name="GetHorizontalScrollBarVisibility" />
       <RootMethod Name="SetHorizontalScrollBarVisibility" />
+      <RootMethod Name="GetVerticalScrollBarVisibility" />
+      <RootMethod Name="SetVerticalScrollBarVisibility" />
       <RootMethod Name="GetHorizontalScrollMode" />
       <RootMethod Name="SetHorizontalScrollMode" />
+      <RootMethod Name="GetVerticalScrollMode" />
+      <RootMethod Name="SetVerticalScrollMode" />
+      <RootMethod Name="GetZoomMode" />
+      <RootMethod Name="SetZoomMode" />
     </RootType>
     <RootType FullName="Microsoft.Xaml.Tools.DirectUI.ProxyTypes.StaticResourceExtension" />
     <RootType FullName="Windows.UI.Xaml.Controls.Primitives.PivotPanel">
@@ -281,11 +296,11 @@
       <RootEvent Name="Tapped" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.ContentPresenter">
+      <RootProperty Name="Content" />
       <RootProperty Name="FontFamily" />
       <RootProperty Name="Margin" />
       <RootProperty Name="HorizontalAlignment" />
       <RootProperty Name="VerticalAlignment" />
-      <RootProperty Name="Content" />
     </RootType>
     <RootType FullName="Microsoft.Xaml.Tools.DirectUI.ProxyTypes.NullExtension" />
     <RootType FullName="Windows.UI.Xaml.Media.SolidColorBrush">
@@ -320,7 +335,6 @@
     </RootType>
     <RootType FullName="SoonZik.Controls.ButtonFriendPopUp" />
     <RootType FullName="SoonZik.Controls.Genre" />
-    <RootType FullName="Windows.UI.Xaml.Thickness" />
     <RootType FullName="Windows.UI.Xaml.Controls.StackPanel">
       <RootProperty Name="Margin" />
       <RootProperty Name="Children" />
@@ -347,9 +361,12 @@
       <RootProperty Name="Background" />
       <RootProperty Name="FontSize" />
       <RootProperty Name="PlaceholderText" />
-      <RootProperty Name="FontFamily" />
-      <RootProperty Name="IsEnabled" />
+      <RootProperty Name="Opacity" />
+      <RootProperty Name="HorizontalAlignment" />
+      <RootProperty Name="VerticalAlignment" />
+      <RootProperty Name="InputScope" />
       <RootProperty Name="Text" />
+      <RootProperty Name="IsEnabled" />
       <RootEvent Name="TextChanged" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.ListView">
@@ -360,6 +377,7 @@
       <RootProperty Name="IsHoldingEnabled" />
       <RootProperty Name="GroupStyle" />
       <RootProperty Name="Background" />
+      <RootProperty Name="VerticalContentAlignment" />
       <RootProperty Name="ItemsPanel" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.ProgressRing">
@@ -412,6 +430,24 @@
       <RootProperty Name="Center" />
     </RootType>
     <RootType FullName="SoonZik.Views.GeolocalisationView" />
+    <RootType FullName="Windows.UI.Xaml.Controls.PasswordBox">
+      <RootProperty Name="Password" />
+      <RootProperty Name="Height" />
+      <RootProperty Name="Background" />
+      <RootProperty Name="BorderThickness" />
+      <RootProperty Name="Foreground" />
+      <RootProperty Name="PlaceholderText" />
+      <RootProperty Name="Margin" />
+    </RootType>
+    <RootType FullName="Windows.UI.Xaml.Controls.DatePicker">
+      <RootProperty Name="Date" />
+      <RootProperty Name="BorderBrush" />
+      <RootProperty Name="Height" />
+      <RootProperty Name="Background" />
+      <RootProperty Name="VerticalAlignment" />
+      <RootProperty Name="Foreground" />
+    </RootType>
+    <RootType FullName="SoonZik.Views.InscriptionView" />
     <RootType FullName="Windows.UI.Xaml.Controls.ListBox">
       <RootProperty Name="Background" />
       <RootProperty Name="ItemsSource" />
@@ -425,13 +461,6 @@
     <RootType FullName="SoonZik.Utils.BooleanToVisibilityConverter">
       <RootProperty Name="True" />
       <RootProperty Name="False" />
-    </RootType>
-    <RootType FullName="Windows.UI.Xaml.Controls.PasswordBox">
-      <RootProperty Name="PlaceholderText" />
-      <RootProperty Name="Password" />
-      <RootProperty Name="Background" />
-      <RootProperty Name="Margin" />
-      <RootProperty Name="BorderThickness" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Shapes.Path">
       <RootProperty Name="Data" />
@@ -475,9 +504,6 @@
     <RootType FullName="SoonZik.Views.NewsDetail" />
     <RootType FullName="Windows.UI.Xaml.Controls.VirtualizingStackPanel">
       <RootProperty Name="Orientation" />
-      <RootProperty Name="VerticalAlignment" />
-      <RootProperty Name="Height" />
-      <RootProperty Name="Width" />
     </RootType>
     <RootType FullName="SoonZik.Views.Packs" />
     <RootType FullName="SoonZik.Views.Playlist" />

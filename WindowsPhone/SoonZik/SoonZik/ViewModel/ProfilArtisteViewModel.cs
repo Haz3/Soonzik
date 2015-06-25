@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Windows.ApplicationModel.Core;
+using Windows.UI.Core;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using SoonZik.Controls;
@@ -90,25 +93,46 @@ namespace SoonZik.ViewModel
         private void SelectionExecute()
         {
             TheArtiste = TheUser;
-            var task = Task.Run(async () => await Charge());
-            task.Wait();
+            Charge();
         }
 
         #endregion
 
         #region Method
-        public async Task Charge()
+        public void Charge()
         {
             var request = new HttpRequestGet();
-            try
+            //try
+            //{
+            //    var artist = (Artist)await request.GetArtist(new Artist(), "users", TheArtiste.id.ToString());
+            //    ListAlbums = artist.albums;
+            //}
+            //catch (Exception e)
+            //{
+            //    Debug.WriteLine(e.ToString());
+            //}
+
+            var listUser = request.GetListObject(new List<User>(), "users");
+            listUser.ContinueWith(delegate(Task<object> tmp)
             {
-                var artist = (Artist)await request.GetArtist(new Artist(), "users", TheArtiste.id.ToString());
-                ListAlbums = artist.albums;
-            }
-            catch (Exception e)
-            {
-                Debug.WriteLine(e.ToString());
-            }
+                var test = tmp.Result as List<User>;
+                if (test != null)
+                {
+                    foreach (var res in test.Select(item => request.GetArtist(new Artist(), "users", item.id.ToString())))
+                    {
+                        res.ContinueWith(delegate(Task<object> obj)
+                        {
+                            CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+                            {
+                                var art = obj.Result as Artist;
+                                if (art != null && art.artist)
+                                    ListAlbums = art.albums;
+                            });
+
+                        });
+                    }
+                }
+            });
         }
         #endregion
     }

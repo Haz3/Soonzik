@@ -34,7 +34,7 @@
                 
             </TextBlock>
 
-            <TextBlock x:Name="ArtistName" Text="{Binding TheAlbum.user.Username}" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,250,0,0">
+            <TextBlock x:Name="ArtistName" Text="{Binding TheAlbum.user.username}" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,250,0,0">
 
             </TextBlock>
         </Grid>
