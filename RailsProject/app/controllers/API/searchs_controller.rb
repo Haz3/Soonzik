@@ -61,7 +61,7 @@ module API
 				else
 				  artist_result = User.joins(:groups).merge(Group.where(:name => "Artist")).where(["users.username LIKE ?", "%#{@query}%"])
 				  user_result = User.joins(:groups).merge(Group.where(:name => "User")).where(["users.username LIKE ?", "%#{@query}%"])
-				  music_result = Music.where(["musics.title LIKE ?", "%#{@query}%"])
+				  music_result = Music.where(["musics.title LIKE ?", "%#{@query}%"]).where.not(album_id: nil)
 				  album_result = Album.where(["albums.title LIKE ?", "%#{@query}%"])
 				  pack_result = Pack.where(["packs.title LIKE ?", "%#{@query}%"])
 				  if (artist_result.size == 0 && user_result.size == 0 && music_result.size == 0 && album_result.size == 0 && pack_result.size == 0)
@@ -83,9 +83,9 @@ module API
 				    content = {
 				    	artist: JSON.parse(artist_result.to_json(:only => User.miniKey )),
 				    	user: JSON.parse(user_result.to_json(:only => User.miniKey )),
-				    	music: JSON.parse(music_result.to_json(:only => Music.miniKey )),
-				    	album: JSON.parse(album_result.to_json(:only => Album.miniKey )),
-				    	pack: JSON.parse(pack_result.to_json(:only => Pack.miniKey ))
+				    	music: JSON.parse(music_result.to_json(:only => Music.miniKey, :include => { album: { only: Album.miniKey } } )),
+				    	album: JSON.parse(album_result.to_json(:only => Album.miniKey, :include => { user: { only: User.miniKey } } ) )),
+				    	pack: JSON.parse(pack_result.to_json(:only => Pack.miniKey, :include => { albums: { only: Album.miniKey } } ) ))
 				    }
 				  end
 	    	end
