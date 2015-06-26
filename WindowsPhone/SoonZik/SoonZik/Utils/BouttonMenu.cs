@@ -1,5 +1,4 @@
-﻿using Windows.UI.Xaml;
-using Windows.UI.Xaml.Media.Imaging;
+﻿using Windows.UI.Xaml.Media.Imaging;
 
 namespace SoonZik.Utils
 {

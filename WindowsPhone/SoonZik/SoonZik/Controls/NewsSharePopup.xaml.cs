@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
-using Windows.ApplicationModel.Core;
-using Windows.UI.Core;
 using Windows.UI.Popups;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
@@ -20,7 +17,7 @@ namespace SoonZik.Controls
 
         public NewsSharePopup(News theNews)
         {
-            this.InitializeComponent();
+            InitializeComponent();
             _selectedNews = theNews;
         }
 
@@ -49,7 +46,7 @@ namespace SoonZik.Controls
             }
             catch (Exception ex)
             {
-                //MessageDialog ErrMsg = new MessageDialog("Error Ocuured!");  
+                MessageDialog ErrMsg = new MessageDialog("Error Ocuured!" + ex);  
             }
 
         }

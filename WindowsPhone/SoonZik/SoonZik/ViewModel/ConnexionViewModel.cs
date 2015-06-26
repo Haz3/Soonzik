@@ -47,8 +47,6 @@ namespace SoonZik.ViewModel
             }
         }
 
-
-
         private readonly ApplicationDataContainer _localSettings = ApplicationData.Current.LocalSettings;
 
         private string _username;
@@ -58,7 +56,7 @@ namespace SoonZik.ViewModel
             get { return _username; }
             set
             {
-                this._username = value;
+                _username = value;
                 RaisePropertyChanged("Username");
             }
         }
@@ -165,13 +163,14 @@ namespace SoonZik.ViewModel
                 {
                     var stringJson = JObject.Parse(res).SelectToken("content").ToString();
                     Singleton.Instance().CurrentUser = JsonConvert.DeserializeObject(stringJson, typeof (User)) as User;
+                    Singleton.Instance().CurrentUser.image = "http://soonzikapi.herokuapp.com/assets/usersImage/avatars/" + Singleton.Instance().CurrentUser.image;
                     ServiceLocator.Current.GetInstance<FriendViewModel>().Sources = Singleton.Instance().CurrentUser.friends;
                     ServiceLocator.Current.GetInstance<FriendViewModel>().ItemSource = AlphaKeyGroups<User>.CreateGroups(Singleton.Instance().CurrentUser.friends, CultureInfo.CurrentUICulture,
                             s => s.username, true);
                 }
                 catch (Exception e)
                 {
-                    new MessageDialog("Erreur de connexion" + e.ToString()).ShowAsync();
+                    new MessageDialog("Erreur de connexion" + e).ShowAsync();
                 }
                 WriteInformation();
                 Singleton.Instance().NewsPage = new News();

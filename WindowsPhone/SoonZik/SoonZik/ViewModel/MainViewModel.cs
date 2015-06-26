@@ -20,18 +20,6 @@ namespace SoonZik.ViewModel
 
       #endregion
 
-        /// <summary>
-        /// Initializes a new instance of the MainViewModel class.
-        /// </summary>
-
-        #region Ctor
-        public MainViewModel()
-        {
-          
-        }
-        
-        #endregion
-
         #region Method
 
         #endregion

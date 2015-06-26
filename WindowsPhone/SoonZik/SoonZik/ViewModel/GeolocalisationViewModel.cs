@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Windows.Devices.Geolocation;
-using Windows.UI.Popups;
 using GalaSoft.MvvmLight;
 
 namespace SoonZik.ViewModel

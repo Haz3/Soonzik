@@ -50,7 +50,7 @@ namespace SoonZik.Controls
 
         public PlayerControl()
         {
-            this.InitializeComponent();
+            InitializeComponent();
             DataContext = this;
             Initialize();
         }
@@ -59,10 +59,11 @@ namespace SoonZik.Controls
         {
             HardwareButtons.BackPressed += HardwareButtonsOnBackPressed;
             MyMediaElement.MediaEnded += MyMediaElement_MediaEnded;
-
-
+            
             _navigationService = new NavigationService();
             ListOfMusics = new List<Music>();
+            Singleton.Instance().SelectedMusicSingleton.file = "http://soonzikapi.herokuapp.com/musics/get/" +
+                                                               Singleton.Instance().SelectedMusicSingleton.id;
             ListOfMusics.Add(Singleton.Instance().SelectedMusicSingleton);
         }
 
@@ -70,7 +71,7 @@ namespace SoonZik.Controls
         {
             PlayedMusic = ListOfMusics[0];
             CurrentMusicIndex = 0;
-            MyMediaElement.Source = new Uri("ms-appx:///Resources/MusicTest.mp3", UriKind.Absolute);
+            MyMediaElement.Source = new Uri(Singleton.Instance().SelectedMusicSingleton.file, UriKind.Absolute);
             StartTimer();
             //BackgroundMediaPlayer.Current.SetUriSource(new Uri("ms-appx:///Resources/MusicTest.mp3", UriKind.Absolute));
         }

@@ -1,5 +1,6 @@
 ﻿using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
+
 // Pour en savoir plus sur le modèle d’élément Page vierge, consultez la page http://go.microsoft.com/fwlink/?LinkID=390556
 
 namespace SoonZik.Views
@@ -11,7 +12,7 @@ namespace SoonZik.Views
     {
         public BattleView()
         {
-            this.InitializeComponent();
+            InitializeComponent();
         }
 
         /// <summary>

@@ -1,5 +1,4 @@
-﻿using System.Threading.Tasks;
-using Windows.UI.Xaml;
+﻿using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using SoonZik.Utils;
 using SoonZik.ViewModel;
@@ -21,7 +20,7 @@ namespace SoonZik.Controls
         #region ctor
         public ButtonFriendPopUp(int Id)
         {
-            this.InitializeComponent();
+            InitializeComponent();
             Navigation = new NavigationService();
             Friend = Id;
         }

@@ -3,7 +3,6 @@ using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 
 // Pour en savoir plus sur le modèle d’élément Page vierge, consultez la page http://go.microsoft.com/fwlink/?LinkID=390556
-using SoonZik.ViewModel;
 
 namespace SoonZik.Views
 {
@@ -14,8 +13,8 @@ namespace SoonZik.Views
     {
         public MainView()
         {
-            this.InitializeComponent();
-            this.Loaded += OnLoaded;
+            InitializeComponent();
+            Loaded += OnLoaded;
         }
 
         private void OnLoaded(object sender, RoutedEventArgs routedEventArgs)

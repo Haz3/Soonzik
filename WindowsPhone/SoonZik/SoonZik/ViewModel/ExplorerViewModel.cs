@@ -66,7 +66,7 @@ namespace SoonZik.ViewModel
             ListGenres = new ObservableCollection<Genre>();
             ListArtiste = new ObservableCollection<User>();
             ListMusique = new ObservableCollection<Music>();
-            this.LoadContent();
+            LoadContent();
         }
 
         #endregion

@@ -1,20 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
 using System.Threading.Tasks;
 using Windows.ApplicationModel.Core;
 using Windows.UI.Core;
-using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Coding4Fun.Toolkit.Controls;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using SoonZik.Controls;
 using SoonZik.HttpRequest;
-using SoonZik.HttpRequest.Poco;
 using SoonZik.Views;
-using Genre = SoonZik.HttpRequest.Poco.Genre;
 using News = SoonZik.HttpRequest.Poco.News;
 
 namespace SoonZik.ViewModel

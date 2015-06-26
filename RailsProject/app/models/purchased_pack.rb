@@ -7,5 +7,7 @@ class PurchasedPack < ActiveRecord::Base
 	has_many :purchased_albums
 	belongs_to :pack
 
+	validates_inclusion_of :partial, :in => [true, false]
+
 	has_many :purchased_musics, through: :purchased_albums
 end

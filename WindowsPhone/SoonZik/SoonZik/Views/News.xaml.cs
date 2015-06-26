@@ -2,6 +2,7 @@
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Navigation;
 using SoonZik.ViewModel;
+
 // Pour en savoir plus sur le modèle d’élément Page vierge, consultez la page http://go.microsoft.com/fwlink/?LinkID=390556
 
 namespace SoonZik.Views
@@ -13,7 +14,7 @@ namespace SoonZik.Views
     {
         public News()
         {
-            this.InitializeComponent();
+            InitializeComponent();
         }
 
 

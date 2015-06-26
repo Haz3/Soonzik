@@ -38,16 +38,34 @@ namespace SoonZik.HttpRequest
             return await DoRequestForObject(myObject, request);
         }
 
-        public async Task<object> GetUserKey(object myObject, string id)
+        public async Task<object> GetUserKey(string id)
         {
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(ApiUrl + "getKey" + id);
-            return await DoRequestForObject(myObject, request);
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(ApiUrl + "getKey/" + id);
+            return await DoRequest(request);
         }
 
         public async Task<object> GetSocialToken(string id, string socialNetwork)
         {
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(ApiUrl + "getSocialToken/" + id + "/" + socialNetwork);
             return await DoRequest(request);
+        }
+
+        public async Task<object> Find(object myObject, string type, string id)
+        {
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(ApiUrl + type + "/find?attribute[user_id]=" + id);
+            return await DoRequestForObject(myObject, request);
+        }
+
+        public async Task<object> GetMusic(string id)
+        {
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(ApiUrl + "musics/get/" + id);
+            return await DoRequest(request);
+        }
+
+        public async Task<object> GetAllMusicForUser(object MyObj, string key, string id)
+        {
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(ApiUrl + "users/getmusics?secureKey=" + key + "&user_id=" + id);
+            return await DoRequestForObject(MyObj, request);
         }
 
         private static async Task<string> DoRequest(HttpWebRequest request)
