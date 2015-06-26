@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :update, :destroy, :finish_signup]
-  before_action :no_content, only: [:index, :show, :finish_signup]
+  before_action :no_content, only: [:index, :show, :friendlist]
 
   def no_content
     render :text => "", :layout => true
@@ -49,6 +49,9 @@ class UsersController < ApplicationController
         @show_errors = true
       end
     end
+  end
+
+  def friendlist
   end
   
   private

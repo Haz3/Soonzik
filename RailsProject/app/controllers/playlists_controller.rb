@@ -4,4 +4,7 @@ class PlaylistsController < ApplicationController
   def no_content
     render :text => "", :layout => true
   end
+
+  def show
+  end
 end

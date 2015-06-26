@@ -1,0 +1,29 @@
+.title
+	%h2 Music Page
+	%span.byline You can find all your musics here
+.musicContainer{ "ng-controller" => "MusicCtrl", "ng-init" => "musicInit()" }
+	%loading{ "ng-if" => "loading == true" }
+	.musicCollection{ "ng-if" => "loading == false" }
+		.newMusic
+			.button{ "ng-click" => "open()" }
+				Add new music
+		%hr
+		%h3
+			Your musics
+		%h6.subtitle
+			You can sort it by drag and drop
+		%ul.clearfix.no-bullet.inline-list
+			%li.small-12.medium-6.large-4.columns.left{ "ng-repeat" => "album in albums" }
+				%h4
+					{{ album.title }}
+				%div
+					.small-9.small-centered.columns
+						%img{ "ng-src" => '{{ "/assets/albums/" + album.image }}' }
+				%ul.musicList
+					%li.text-center{ "ng-repeat" => "music in album.musics" }
+						%p.label.small-6 {{ music.title }}
+		%div
+			%h4 Without album associated
+			%ul.musicList.no-bullet.small-12.medium-6.large-4
+				%li.text-center{ "ng-repeat" => "noLinkMusic in noLinkMusics" }
+					%p.label.small-6 {{ noLinkMusic.title }}

@@ -1,6 +1,6 @@
 .title
 	%h2 Tour Page
-	%span.byline You can find all your tour here
+	%span.byline You can find all your tours here
 .tourIndex.row{ "ng-controller" => "TourCtrl", "ng-init" => "tourInit()" }
 	.button.tiny{ "ng-click" => "openCloseForm(true)" }
 		Create new concert
@@ -62,7 +62,7 @@
 						%li.fn= concert.planification
 						%li.street-address= "#{concert.address.numberStreet} #{concert.address.street} #{concert.address.complement if concert.address.complement != nil}"
 						%li.locality= "#{concert.address.city} #{concert.address.zipcode} #{concert.address.country}"
-						- if concert.url != nil
+						- if concert.url != nil && concert.url.size > 0
 							%li
 								%a{ href: concert.url }= concert.url
 						- else
@@ -70,10 +70,10 @@
 								No link for this event
 						%li.text-center
 							.buttonFrom
-								.button
-									Update
+								%a.button{ href: "/tour/edit/#{ concert.id }" }
+									Edit
 							.buttonFrom
-								.button
+								%a.button{ href: "/tour/delete/#{ concert.id }" }
 									Delete
 			%li{ "ng-repeat" => "concert in concerts" }
 				%ul.square.vcard
@@ -87,8 +87,8 @@
 						%span{ "ng-if" => "concert.url == null || concert.url == ''" } No link for this event
 					%li.text-center
 						.buttonFrom
-							.button
-								Update
+							%a.button{ href: "/tour/edit/{{concert.id}}" }
+								Edit
 						.buttonFrom
-							.button
+							%a.button{ href: "/tour/delete/{{concert.id}}" }
 								Delete

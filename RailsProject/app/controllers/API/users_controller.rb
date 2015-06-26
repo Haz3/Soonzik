@@ -205,13 +205,13 @@ module API
 
           list.each do |x|
             if (x.musics != nil)
-              contentReturn[:musics] = contentReturn[:musics] | [x.musics]
+              contentReturn[:musics] = contentReturn[:musics] | [x.musics.as_json(only: Music.miniKey)]
             elsif (x.albums != nil)
-              contentReturn[:albums] = contentReturn[:albums] | [{ album: x.albums, musics: x.albums.musics }]
+              contentReturn[:albums] = contentReturn[:albums] | [{ album: x.albums.as_json(only: Album.miniKey), musics: x.albums.musics.as_json(only: Music.miniKey) }]
             elsif (x.packs != nil)
-              value = { pack: x.packs, albums: [] }
+              value = { pack: x.packs.as_json(only: Pack.miniKey), albums: [] }
               x.packs.albums.each do |album|
-                value[:albums] << { album: album, musics: album.musics }
+                value[:albums] << { album: album.as_json(only: Album.miniKey), musics: album.musics.as_json(only: Music.miniKey) }
               end
               contentReturn[:packs] = contentReturn[:packs] | [value]
             end

@@ -51,6 +51,8 @@
 //= require ./AngularJS/services/NotificationService.js
 //= require ./tools/ng-file-upload-bower-4.2.0/ng-file-upload-all.min.js
 //= require ./tools/loading-bar.min.js
+//= require ./tools/mm-foundation-tpls-0.6.0.min.js
+//= require ./tools/checklist-model.js
 // require_tree .
 
 $(function(){ $(document).foundation(); });

@@ -22,15 +22,19 @@
 			.menu
 				%ul.no-bullet
 					%li{ class: "#{'current_page_item' if (defined?(@menu) && @menu == 'home') || !defined?(@menu)}" }
-						%a{:href => "#"} Homepage
+						=link_to "Home", artist_root_path
+					%li{ class: "#{'current_page_item' if (defined?(@menu) && @menu == 'music')}" }
+						=link_to "My Music", artist_musics_path
 					%li{ class: "#{'current_page_item' if (defined?(@menu) && @menu == 'tour')}" }
 						=link_to "Tour", artist_tour_path
 					%li{ class: "#{'current_page_item' if (defined?(@menu) && @menu == 'streaming')}" }
 						%a{:href => "#"} Streaming
 					%li{ class: "#{'current_page_item' if (defined?(@menu) && @menu == 'meet')}" }
 						%a{:href => "#"} Meet artists
-					%li{ class: "#{'current_page_item' if (defined?(@menu) && @menu == 'contact')}" }
-						%a{:href => "#"} Contact
+		- if notice
+			%small.error= notice
+		-if alert
+			%small.error= alert
 		%main
 			.small-12.medium-8.large-9.columns
 				.row
@@ -75,7 +79,7 @@
 				.small-12.medium-6.large-3.columns
 					.title
 						%h2.text-center Tour management
-					%a.image.image-full{:href => "#"}
+					%a.image.image-full{:href => "/tour"}
 						=image_tag("Artist/concert.png")
 					%p.text-justify
 						You will be in many places soon and you want to inform your fans ? In a pub, in a concert hall or in the street, you can manage your tour and say where / when we can find you and share it.

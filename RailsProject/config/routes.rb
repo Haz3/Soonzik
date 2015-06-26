@@ -137,12 +137,22 @@ Rails.application.routes.draw do
   end
 
   namespace :artist, path: '/', constraints: { subdomain: 'artist' } do
+    # Main
     root 'mains#home'
     get '/stats' => 'mains#stats'
     get '/comments' => 'mains#getLastComments'
     get '/tweets' => 'mains#getLastTweets'
+
+    # Tour
     get '/tour' => 'tours#index'
+    get '/tour/edit/:id' => 'tours#edit', as: "tour_edit"
+    patch '/tour/update/:id' => 'tours#update', as: "tour_update"
+    get '/tour/delete/:id' => 'tours#delete', as: "tour_delete"
     match '/tour/addconcert' => 'tours#create_concert', via: [:post, :options]
+
+    # Music
+    get '/musics' => 'musics#index'
+    post '/musics/upload' => 'musics#uploadMusic'
   end
 
   devise_for :admin_users, ActiveAdmin::Devise.config
@@ -176,7 +186,13 @@ Rails.application.routes.draw do
   resources :purchases
   resources :tags
   resources :tweets
-  resources :users
+  
+  resources :users do
+    collection do
+      get ":id/friendlist" => 'users#friendlist'
+    end
+  end
+  
   resources :votes
 
   get 'messages' => 'chats#index'

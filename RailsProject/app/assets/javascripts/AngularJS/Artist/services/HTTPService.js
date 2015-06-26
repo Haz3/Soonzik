@@ -101,6 +101,24 @@ SoonzikArtistApp.factory('HTTPService', ['$http', '$location', 'Upload', functio
     },
     addConcert: function(parameters) {
       return $http.post("http://artist." + url + "/tour/addconcert.json", parameters);
+    },
+    findMusics: function(parameters) {
+      return $http.get("http://api." + url + "/musics/find" + urlParametersFormat(parameters));
+    },
+    findAlbums: function(parameters) {
+      return $http.get("http://api." + url + "/albums/find" + urlParametersFormat(parameters));
+    },
+    uploadMusic: function (file, parameters, progressFunction, successFunction, errorFunction) {
+      Upload.upload({
+        url: "http://artist." + url + '/musics/upload.json',
+        fields: parameters,
+        file: file
+      }).progress(progressFunction)
+      .success(successFunction)
+      .error(errorFunction);
+    },
+    indexGenre: function() {
+      return $http.get("http://api." + url + "/genres");
     }
   }
 }]);

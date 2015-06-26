@@ -57,6 +57,7 @@ body.artist {
 	ul.inline-list > li {
 		border-top: 0px;
 		padding-top: 0;
+		margin-left: inherit;
 	}
 
 	ul li:first-child, .menu ul li, .contact li {
@@ -364,6 +365,14 @@ body.artist {
 	}
 }
 
+ul.vcard li a {
+	color: #00AABB;
+}
+
+.red {
+	color: #CC3333 !important;
+}
+
 @font-face {
 	font-family: 'FontAwesome';
 	src: url('./fonts/fontawesome-webfont.eot?v=3.0.1');
@@ -417,3 +426,18 @@ body.artist {
 .icon-facebook:before             { content: "\f09a"; }
 .icon-google-plus-sign:before     { content: "\f0d4"; }
 .icon-google-plus:before          { content: "\f0d5"; }
+
+/***/
+
+div.musicCollection ul li {
+	padding-top: 2px;
+	padding-bottom: 2px;
+	border: 0px;
+}
+
+.musicList {
+	margin-top: 4px;
+	margin-left: 0px;
+	background: aliceblue;
+  border: 1px solid rgb(1, 1, 8);
+}
