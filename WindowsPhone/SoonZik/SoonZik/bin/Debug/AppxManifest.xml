@@ -19,6 +19,7 @@
     <OSMaxVersionTested>6.3.1</OSMaxVersionTested>
   </Prerequisites>
   <Resources>
+    <Resource Language="EN-US" />
     <Resource Language="FR-FR" />
   </Resources>
   <Applications>

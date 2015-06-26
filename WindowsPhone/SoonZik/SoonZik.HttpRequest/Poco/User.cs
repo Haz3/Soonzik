@@ -14,8 +14,8 @@ namespace SoonZik.HttpRequest.Poco
         public string username { get; set; }
         public string birthday { get; set; }
         public string image { get; set; }
-        public object description { get; set; }
-        public object phoneNumber { get; set; }
+        public string description { get; set; }
+        public string phoneNumber { get; set; }
         public object facebook { get; set; }
         public object twitter { get; set; }
         public object googlePlus { get; set; }

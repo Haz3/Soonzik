@@ -21,6 +21,7 @@ Views\Conversation.xbf
 Views\Explorer.xbf
 Views\Friends.xbf
 Views\GeolocalisationView.xbf
+Views\InscriptionView.xbf
 Views\MainView.xbf
 Views\News.xbf
 Views\NewsDetail.xbf

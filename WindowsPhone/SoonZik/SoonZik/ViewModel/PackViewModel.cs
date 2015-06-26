@@ -4,6 +4,8 @@ using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Windows.ApplicationModel.Core;
+using Windows.UI.Core;
 using Windows.UI.Xaml.Media.Imaging;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
@@ -107,22 +109,34 @@ namespace SoonZik.ViewModel
 
         private void SelectionExecute()
         {
-            var task = Task.Run(async () => await Charge());
-            task.Wait(); 
+            Charge();
             ListAlbums = ThePack.Albums;
         }
 
-        public async Task Charge()
+        public void Charge()
         {
             var request = new HttpRequestGet();
-            try
+            //try
+            //{
+            //    ThePack = (Pack)await request.GetObject(new Pack(), "packs", ThePack.Id.ToString());
+            //}
+            //catch (Exception e)
+            //{
+            //    Debug.WriteLine(e.ToString());
+            //}
+
+            var pack = request.GetObject(new Pack(), "packs", ThePack.Id.ToString());
+            pack.ContinueWith(delegate(Task<object> tmp)
             {
-                ThePack = (Pack)await request.GetObject(new Pack(), "packs", ThePack.Id.ToString());
-            }
-            catch (Exception e)
-            {
-                Debug.WriteLine(e.ToString());
-            }
+                var test = tmp.Result as Pack;
+                if (test != null)
+                {
+                    CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+                    {
+                        ThePack = test;
+                    });
+                }
+            });
         }
     }
 

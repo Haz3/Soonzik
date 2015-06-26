@@ -43,20 +43,20 @@
     
     <Grid>
         <Pivot x:Name="PivotGlobal" HeaderTemplate="{StaticResource SizeHeaderGlobalPivot}" Foreground="Transparent" RenderTransformOrigin="0.5,0.5" Style="{StaticResource PivotStyle1}" >
-            <PivotItem Header="Genres">
+            <PivotItem x:Uid="GenrePivot" Header="">
                 <ListBox Background="Transparent" x:Name="ListBoxGenre" ItemsSource="{Binding ListGenres}" ItemTemplate="{StaticResource GenreTemplate}">
 
                 </ListBox>
             </PivotItem>
 
-            <PivotItem Header="Musiques">
+            <PivotItem x:Uid="MusicPivot" Header="">
                 <ListBox Background="Transparent" x:Name="ListBoxMusics" ItemsSource="{Binding ListMusique}" ItemTemplate="{StaticResource MusicTemplate}" SelectedItem="{Binding SelectedMusic, Mode=TwoWay}">
 
                 </ListBox>
 
             </PivotItem>
 
-            <PivotItem Header="Artistes">
+            <PivotItem x:Uid="ArtistPivot" Header="">
                 <ListBox Background="Transparent" x:Name="ListBoxArtiste" ItemsSource="{Binding ListArtiste}" ItemTemplate="{StaticResource ArtisteTemplate}">
 
                 </ListBox>

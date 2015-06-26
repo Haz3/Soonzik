@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>SoonZik</RootNamespace>
     <AssemblyName>SoonZik</AssemblyName>
-    <DefaultLanguage>fr-FR</DefaultLanguage>
+    <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformVersion>8.1</TargetPlatformVersion>
     <MinimumVisualStudioVersion>12</MinimumVisualStudioVersion>
     <FileAlignment>512</FileAlignment>
@@ -110,6 +110,7 @@
     <Compile Include="Utils\ApplicationSettingsHelper.cs" />
     <Compile Include="Utils\BooleanToVisibilityConverter.cs" />
     <Compile Include="Utils\BouttonMenu.cs" />
+    <Compile Include="Utils\ContinuationManager.cs" />
     <Compile Include="Utils\INavigationService.cs" />
     <Compile Include="Utils\NavigationService.cs" />
     <Compile Include="Utils\Singleton.cs" />
@@ -120,6 +121,7 @@
     <Compile Include="ViewModel\ExplorerViewModel.cs" />
     <Compile Include="ViewModel\FriendViewModel.cs" />
     <Compile Include="ViewModel\GeolocalisationViewModel.cs" />
+    <Compile Include="ViewModel\InscriptionViewModel.cs" />
     <Compile Include="ViewModel\MainPageViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\NewsDetailViewModel.cs" />
@@ -133,6 +135,9 @@
     </Compile>
     <Compile Include="Views\GeolocalisationView.xaml.cs">
       <DependentUpon>GeolocalisationView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\InscriptionView.xaml.cs">
+      <DependentUpon>InscriptionView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ProfilFriendView.xaml.cs">
       <DependentUpon>ProfilFriendView.xaml</DependentUpon>
@@ -291,6 +296,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\InscriptionView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\ProfilFriendView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -380,8 +389,14 @@
   <ItemGroup>
     <Content Include="Assets\Fonts\RobotoCondensed-Regular.ttf" />
     <None Include="packages.config" />
+    <PRIResource Include="Strings\fr-FR\Resources.resw" />
+    <PRIResource Include="Strings\en-US\Resources.resw" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\SoonZik.Helpers\SoonZik.Helpers.csproj">
+      <Project>{88596864-9b34-4163-8424-091c5df907ce}</Project>
+      <Name>SoonZik.Helpers</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SoonZik.HttpRequest\SoonZik.HttpRequest.csproj">
       <Project>{9db6a4a8-c6b5-4c81-8991-8aa40da71a52}</Project>
       <Name>SoonZik.HttpRequest</Name>
@@ -392,6 +407,7 @@
       <Name>Behaviors SDK %28XAML%29</Name>
     </SDKReference>
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '12.0' ">
     <VisualStudioVersion>12.0</VisualStudioVersion>
   </PropertyGroup>

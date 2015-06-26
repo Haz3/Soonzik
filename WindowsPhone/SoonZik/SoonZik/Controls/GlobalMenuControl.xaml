@@ -31,12 +31,7 @@
         </Storyboard>
         <Storyboard x:Name="SearchAloneBack" Completed="SearchAloneBack_OnCompleted">
             <DoubleAnimation Duration="0:0:0.25" To="0" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)" Storyboard.TargetName="SearchGrid" d:IsOptimized="True"/>
-        </Storyboard>
-        <FontFamily x:Key="RobotoMenu">Assets/Fonts/RobotoCondensed-Regular.ttf#Roboto Condensed</FontFamily>
-        <Thickness x:Key="PivotPortraitThemePadding">19,38,0,0</Thickness>
-        <Thickness x:Key="PivotLandscapeThemePadding">19,25,0,0</Thickness>
-        
-        
+        </Storyboard> 
         
         <DataTemplate x:Key="MenuListItemTemplate">
             <Grid x:Name="GridItemMenu" Height="50" Tapped="GridItemMenu_OnTapped">
@@ -163,8 +158,7 @@
 
             <TextBox x:Name="SearchTextBlock" Grid.Row="0" Width="200" BorderThickness="0" AcceptsReturn="True"
                      Height="13" Margin="50,3,50,0" TextAlignment="Center" VerticalContentAlignment="Center"
-                     Foreground="Black" Background="Gray" FontSize="18" PlaceholderText="Recherche"
-                     FontFamily="{StaticResource Roboto}" TextChanged="SearchTextBlock_OnTextChanged"/>
+                     Foreground="Black" Background="Gray" FontSize="18" x:Uid="Search" PlaceholderText="" TextChanged="SearchTextBlock_OnTextChanged"/>
             <Grid Grid.Row="1">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>

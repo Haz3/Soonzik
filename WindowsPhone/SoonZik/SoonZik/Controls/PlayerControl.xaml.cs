@@ -1,17 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using Windows.Media;
-using Windows.Media.Playback;
 using Windows.Phone.UI.Input;
-using Windows.Storage;
+using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
-using SoonZik.Annotations;
 using SoonZik.HttpRequest.Poco;
+using SoonZik.Properties;
 using SoonZik.Utils;
 
 namespace SoonZik.Controls
@@ -152,7 +149,7 @@ namespace SoonZik.Controls
 
         async void PlayMedia()
         {
-            await Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>
+            await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
             {
                 MyMediaElement.Play();
             });
@@ -160,7 +157,7 @@ namespace SoonZik.Controls
 
         async void PauseMedia()
         {
-            await Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>
+            await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
             {
                 MyMediaElement.Pause();
             });

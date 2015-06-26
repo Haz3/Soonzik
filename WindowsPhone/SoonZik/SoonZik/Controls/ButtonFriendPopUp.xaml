@@ -15,8 +15,8 @@
             <RowDefinition Height="50" />
             <RowDefinition Height="50" />
         </Grid.RowDefinitions>
-        <Button Grid.Row="0" Content="Ecrire en message" HorizontalAlignment="Center" VerticalAlignment="Center" Click="SendMessage" BorderThickness="0,0,0,0" />
-        <Button Grid.Row="1" Content="Voir le profil" HorizontalAlignment="Center" VerticalAlignment="Center" Click="GoToProfil" BorderThickness="0,0,0,0"/>
-        <Button Grid.Row="2" Content="Supprimer le contact" HorizontalAlignment="Center" VerticalAlignment="Center" Click="DeleteContact" BorderThickness="0,0,0,0"/>
+        <Button Grid.Row="0" x:Uid="SendMessage" Content="" HorizontalAlignment="Center" VerticalAlignment="Center" Click="SendMessage" BorderThickness="0,0,0,0" />
+        <Button Grid.Row="1" x:Uid="CheckProfile" Content="" HorizontalAlignment="Center" VerticalAlignment="Center" Click="GoToProfil" BorderThickness="0,0,0,0"/>
+        <Button Grid.Row="2" x:Uid="Delete" Content="" HorizontalAlignment="Center" VerticalAlignment="Center" Click="DeleteContact" BorderThickness="0,0,0,0"/>
     </Grid>
 </UserControl>

@@ -49,6 +49,7 @@ namespace SoonZik.ViewModel
             SimpleIoc.Default.Register<AlbumViewModel>();
             SimpleIoc.Default.Register<GeolocalisationView>();
             SimpleIoc.Default.Register<PlaylistViewModel>();
+            SimpleIoc.Default.Register<InscriptionViewModel>();
 
         }
 
@@ -131,6 +132,11 @@ namespace SoonZik.ViewModel
         public PlaylistViewModel PlaylistView
         {
             get { return ServiceLocator.Current.GetInstance<PlaylistViewModel>(); }
+        }
+
+        public InscriptionViewModel InscriptionView
+        {
+            get { return ServiceLocator.Current.GetInstance<InscriptionViewModel>(); }
         }
         public static void Cleanup()
         {
