@@ -10,9 +10,7 @@ namespace SoonZik.ViewModel
 
 
         #region Ctor
-        public MainPageViewModel()
-        {
-        }
+
         #endregion
 
         #region Method

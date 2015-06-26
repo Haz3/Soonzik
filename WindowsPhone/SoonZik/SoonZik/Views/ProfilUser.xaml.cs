@@ -12,7 +12,7 @@ namespace SoonZik.Views
     {
         public ProfilUser()
         {
-            this.InitializeComponent();
+            InitializeComponent();
         }
 
         /// <summary>

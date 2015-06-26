@@ -4,14 +4,12 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
-using System.Threading.Tasks;
 using Windows.Devices.Geolocation;
 using Windows.Phone.UI.Input;
 using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media.Imaging;
 using GalaSoft.MvvmLight.Command;
 using SoonZik.HttpRequest;
 using SoonZik.HttpRequest.Poco;
@@ -20,8 +18,8 @@ using SoonZik.Utils;
 using SoonZik.ViewModel;
 using SoonZik.Views;
 using Battle = SoonZik.Views.BattleView;
-using Connexion = SoonZik.Views.Connexion;
 using News = SoonZik.Views.News;
+using Playlist = SoonZik.Views.Playlist;
 
 // Pour en savoir plus sur le modèle d'élément Contrôle utilisateur, consultez la page http://go.microsoft.com/fwlink/?LinkId=234236
 
@@ -156,12 +154,12 @@ namespace SoonZik.Controls
 
         public GlobalMenuControl()
         {
-            this.InitializeComponent();
-            this.DataContext = this;
+            InitializeComponent();
+            DataContext = this;
             MyGrid = GlobalGrid;
             GlobalGrid.Children.Add(Singleton.Instance().NewsPage);
 
-            this._navigationService = new NavigationService();
+            _navigationService = new NavigationService();
 
             HardwareButtons.BackPressed += HardwareButtonsOnBackPressed;
 
@@ -189,74 +187,7 @@ namespace SoonZik.Controls
 
         #region Method Menu
 
-        private void InitList()
-        {
-            ListBouttonMenus = new List<BouttonMenu>
-            {
-                new BouttonMenu()
-                {
-                    ImageBoutton = new BitmapImage(new Uri("ms-appx:///Resources/Icones/ProfilMenu.png", UriKind.Absolute)),
-                    Title = Singleton.Instance().CurrentUser.username,
-                    PageBoutton = typeof(ProfilUser)
-                },
-                new BouttonMenu()
-                {
-                    ImageBoutton = new BitmapImage(new Uri("ms-appx:///Resources/Icones/MenuNews.png", UriKind.Absolute)),
-                    Title = "News",
-                    PageBoutton = typeof(ProfilUser)
-                },
-                new BouttonMenu()
-                {
-                    ImageBoutton = new BitmapImage(new Uri("ms-appx:///Resources/Icones/MenuExplorer.png", UriKind.Absolute)),
-                    Title = "Explorer",
-                    PageBoutton = typeof(ProfilUser)
-                },
-                new BouttonMenu()
-                {
-                    ImageBoutton = new BitmapImage(new Uri("ms-appx:///Resources/Icones/MenuPack.png", UriKind.Absolute)),
-                    Title = "Packs",
-                    PageBoutton = typeof(ProfilUser)
-                },
-                new BouttonMenu()
-                {
-                    ImageBoutton = new BitmapImage(new Uri("ms-appx:///Resources/Icones/MenuMondeMusical.png", UriKind.Absolute)),
-                    Title = "Monde Musical",
-                    PageBoutton = typeof(ProfilUser)
-                },
-                new BouttonMenu()
-                {
-                    ImageBoutton = new BitmapImage(new Uri("ms-appx:///Resources/Icones/MenuBattle.png", UriKind.Absolute)),
-                    Title = "Battle",
-                    PageBoutton = typeof(ProfilUser)
-                },
-                new BouttonMenu()
-                {
-                    ImageBoutton = new BitmapImage(new Uri("ms-appx:///Resources/Icones/MenuPlaylist.png", UriKind.Absolute)),
-                    Title = "Playlist",
-                    PageBoutton = typeof(ProfilUser)
-                },
-                new BouttonMenu()
-                {
-                    ImageBoutton = new BitmapImage(new Uri("ms-appx:///Resources/Icones/MenuFriend.png", UriKind.Absolute)),
-                    Title = "Amis",
-                    PageBoutton = typeof(ProfilUser)
-                },
-                new BouttonMenu()
-                {
-                    ImageBoutton = new BitmapImage(new Uri("ms-appx:///Resources/Icones/MenuAchat.png", UriKind.Absolute)),
-                    Title = "Achat",
-                    PageBoutton = null
-                },
-                new BouttonMenu()
-                {
-                    ImageBoutton = new BitmapImage(new Uri("ms-appx:///Resources/Icones/MenuDeco.png", UriKind.Absolute)),
-                    Title = "Connexion",
-                    PageBoutton = typeof(ProfilUser)
-                },
-            };
-        }
-
-        private void GridItemMenu_OnTapped(object sender, TappedRoutedEventArgs e)
+       private void GridItemMenu_OnTapped(object sender, TappedRoutedEventArgs e)
         {
             if (SelectedBouttonMenu.PageBoutton.Equals(new ProfilUser()))
             {
@@ -347,6 +278,7 @@ namespace SoonZik.Controls
 
         private void GoToPlaylist()
         {
+           //PlaylistAdd.Visibility = Visibility.Visible;
            SetChildren(new Playlist());
         }
 
@@ -357,6 +289,8 @@ namespace SoonZik.Controls
 
         private void SetChildren(UIElement myObj)
         {
+            //if (myObj.GetType() != typeof(Playlist))
+               // PlaylistAdd.Visibility = Visibility.Collapsed;
             Singleton.Instance().LastElement = MyGrid.Children.First();
             _lastElement = MyGrid.Children.FirstOrDefault();
             MyGrid.Children.Clear();
@@ -375,9 +309,13 @@ namespace SoonZik.Controls
             _navigationService.Navigate(typeof(Connexion));
         }
 
+        private void PlaylistAdd_OnTapped(object sender, TappedRoutedEventArgs e)
+        {
+
+        }
         #endregion
 
-        #region Methods
+        #region Methods Search
         private void SearchTextBlock_OnTextChanged(object sender, TextChangedEventArgs e)
         {
             SearchText = SearchTextBlock.Text;
@@ -492,8 +430,7 @@ namespace SoonZik.Controls
             SetChildren(new Packs());
         }
         #endregion
-
-
+        
         #region NotifyPropertyCahnge
         [NotifyPropertyChangedInvocator]
         private void RaisePropertyChange(string propertyName)

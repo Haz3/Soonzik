@@ -1,11 +1,6 @@
-﻿using System;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using System.Windows.Input;
-using Windows.Networking.Connectivity;
-using Windows.Phone.UI.Input;
 using Windows.Security.Cryptography.Core;
-using Windows.Storage.Streams;
 using Windows.UI.Popups;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
@@ -13,7 +8,6 @@ using GalaSoft.MvvmLight.Ioc;
 using SoonZik.HttpRequest;
 using SoonZik.HttpRequest.Poco;
 using SoonZik.Utils;
-using Buffer = System.Buffer;
 
 namespace SoonZik.ViewModel
 {
@@ -134,7 +128,7 @@ namespace SoonZik.ViewModel
         private async Task UpdateData()
         {
             var getRequest = new HttpRequestGet();
-            var userKey = await getRequest.GetUserKey(new Key(), CurrentUser.id.ToString()) as Key;
+            var userKey = await getRequest.GetUserKey(CurrentUser.id.ToString()) as string;
             if (userKey != null)
             {
                 HashAlgorithmProvider hash = HashAlgorithmProvider.OpenAlgorithm(HashAlgorithmNames.Sha256);

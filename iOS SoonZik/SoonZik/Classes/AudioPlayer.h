@@ -32,10 +32,11 @@
 
 @property (strong, nonatomic) NSString *songName;
 
-- (void)prepareSong:(NSString *)song;
+- (void)prepareSong:(int)identifier;
 - (void)playSound;
 - (void)playSoundAtPeriod:(float)period;
 - (void)pauseSound;
+- (void)stopSound;
 
 - (void)previous;
 - (void)next;

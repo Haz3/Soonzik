@@ -22,12 +22,19 @@ static AudioPlayer *sharedInstance = nil;
     return self;
 }
 
-- (void)prepareSong:(NSString *)song
+- (void)prepareSong:(int)identifier
 {
-    //NSLog(@"song : %@", song);
-    NSString *data = [[NSBundle mainBundle] pathForResource:song ofType:@"mp3"];
-    NSURL *url = [[NSURL alloc] initFileURLWithPath:data];
-    self.audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:nil];
+    NSData *data = [[NSUserDefaults standardUserDefaults] objectForKey:@"User"];
+    User *user = (User *)[NSKeyedUnarchiver unarchiveObjectWithData:data];
+    NSString *key = [Crypto getKey:user.identifier];
+    NSString *conca = [NSString stringWithFormat:@"%@%@", user.salt, key];
+    NSString *secureKey = [Crypto sha256HashFor:conca];
+    NSString *url = [NSString stringWithFormat:@"%@musics/get/%i?user_id=%i&secureKey=%@", API_URL, identifier, user.identifier, secureKey];
+    
+    NSLog(@"url of the music : %@", url);
+    NSURL *nurl = [NSURL URLWithString:url];
+    NSData *ndata = [NSData dataWithContentsOfURL:nurl];
+    self.audioPlayer = [[AVAudioPlayer alloc] initWithData:ndata error:nil];
     self.audioPlayer.delegate = self;
 }
 
@@ -35,21 +42,16 @@ static AudioPlayer *sharedInstance = nil;
 {
     if (self.listeningList.count > 0) {
         if (!self.currentlyPlaying) {
-            //[self.playButton setImage:[UIImage imageNamed:@"pause_icon.png"] forState:UIControlStateNormal];
-            //[self.player playSound];
+            Music *s = [self.listeningList objectAtIndex:self.index];
             [self.audioPlayer play];
             self.currentlyPlaying = YES;
-            Music *s = [self.listeningList objectAtIndex:self.index];
             self.songName = s.title;
             
         } else {
-            //[self.playButton setImage:[UIImage imageNamed:@"play_icon.png"] forState:UIControlStateNormal];
             [self pauseSound];
+            self.currentlyPlaying = NO;
         }
     }
-    /*[self.audioPlayer play];
-    
-    self.currentlyPlaying = YES;*/
 }
 
 - (void)playSoundAtPeriod:(float)period
@@ -66,7 +68,8 @@ static AudioPlayer *sharedInstance = nil;
 
 - (void)stopSound
 {
-    [self.audioPlayer stop];
+    [self.audioPlayer pause];
+    self.audioPlayer.currentTime = 0.0;
     
     self.currentlyPlaying = NO;
 }
@@ -77,9 +80,10 @@ static AudioPlayer *sharedInstance = nil;
         if (self.index > 0) {
             self.index--;
             Music *s = [self.listeningList objectAtIndex:self.index];
-            [self prepareSong:s.file];
+            [self prepareSong:s.identifier];
             if (self.currentlyPlaying) {
-                [self playSound];
+                [self.audioPlayer play];
+                self.currentlyPlaying = YES;
                 self.songName = s.title;
             }
         };
@@ -91,7 +95,7 @@ static AudioPlayer *sharedInstance = nil;
     if (self.listeningList.count > 0) {
         if (self.repeatingLevel == 2) {
             Music *s = [self.listeningList objectAtIndex:self.index];
-            [self prepareSong:s.file];
+            [self prepareSong:s.identifier];
             [self playSound];
             self.songName = s.title;
         } else if (self.repeatingLevel == 1) {
@@ -101,16 +105,17 @@ static AudioPlayer *sharedInstance = nil;
                 self.index++;
             }
             Music *s = [self.listeningList objectAtIndex:self.index];
-            [self prepareSong:s.file];
+            [self prepareSong:s.identifier];
             [self playSound];
             self.songName = s.title;
         } else if (self.repeatingLevel == 0) {
             if (self.index < self.listeningList.count - 1) {
                 self.index++;
                 Music *s = [self.listeningList objectAtIndex:self.index];
-                [self prepareSong:s.file];
+                [self prepareSong:s.identifier];
                 if (self.currentlyPlaying) {
-                    [self playSound];
+                    [self.audioPlayer play];
+                    self.currentlyPlaying = YES;
                     self.songName = s.title;
                 }
             }
@@ -122,19 +127,16 @@ static AudioPlayer *sharedInstance = nil;
 {
     switch (self.repeatingLevel) {
         case 0:
-            // repeat the list when it's finished
-            NSLog(@"Repeating all");
+            // repeat on all the playlist
             self.repeatingLevel = 1;
             break;
         case 1:
-            // just repeat this one indefinely only
-            NSLog(@"Repeating one");
+            // repeat only on a music
             self.repeatingLevel = 2;
             [self.audioPlayer setNumberOfLoops:-1];
             break;
         case 2:
-            // stop the repeating action
-            NSLog(@"NO Repeating");
+            // no repeat
             self.repeatingLevel = 0;
             [self.audioPlayer setNumberOfLoops:0];
             break;
@@ -142,23 +144,6 @@ static AudioPlayer *sharedInstance = nil;
             break;
     }
 }
-
-/*
-
-- (IBAction)mute:(id)sender
-{
-    if (!self.isMute) {
-        self.lastVolumeLevel = self.player.audioPlayer.volume;
-        self.volumeSlider.value = 0;
-        self.player.audioPlayer.volume = 0;
-    } else {
-        self.volumeSlider.value = self.lastVolumeLevel;
-        self.player.audioPlayer.volume = self.lastVolumeLevel;
-    }
-}
-
-*/
-
 
 - (void)audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)flag
 {

@@ -20,11 +20,11 @@ namespace SoonZik.ViewModel
         private string _imageAlbum;
         public string ImageAlbum
         {
-            get { return _imageAlbum;}
+            get { return _imageAlbum; }
             set
             {
-               _imageAlbum = value;
-               RaisePropertyChanged("ImageAlbum"); 
+                _imageAlbum = value;
+                RaisePropertyChanged("ImageAlbum");
             }
         }
 
@@ -42,7 +42,7 @@ namespace SoonZik.ViewModel
         private Album _theAlbum;
         public Album TheAlbum
         {
-            get { return _theAlbum;}
+            get { return _theAlbum; }
             set
             {
                 _theAlbum = value;
@@ -106,16 +106,14 @@ namespace SoonZik.ViewModel
                 var test = tmp.Result as Album;
                 if (test != null)
                 {
-                        CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
-                        {
-                            TheAlbum = test;
-                            ListMusics = TheAlbum.musics;
-                        });
-                    }
+                    CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+                    {
+                        TheAlbum = test;
+                        ListMusics = TheAlbum.musics;
+                    });
+                }
             });
         }
         #endregion
-
-
     }
 }

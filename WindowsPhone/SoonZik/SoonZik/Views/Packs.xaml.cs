@@ -1,8 +1,8 @@
 ﻿using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
+using SoonZik.ViewModel;
 
 // Pour en savoir plus sur le modèle d’élément Page vierge, consultez la page http://go.microsoft.com/fwlink/?LinkID=390556
-using SoonZik.ViewModel;
 
 namespace SoonZik.Views
 {
@@ -13,9 +13,9 @@ namespace SoonZik.Views
     {
         public Packs()
         {
-            this.DataContext = new PackViewModel();
+            DataContext = new PackViewModel();
 
-            this.InitializeComponent();
+            InitializeComponent();
 
         }
 

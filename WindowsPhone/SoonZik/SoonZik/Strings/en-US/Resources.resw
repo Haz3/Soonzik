@@ -214,7 +214,7 @@
     <value>Playlist</value>
   </data>
   <data name="PlaylistBoutton.Content" xml:space="preserve">
-    <value>Playlist</value>
+    <value>My musics</value>
   </data>
   <data name="Profile.Content" xml:space="preserve">
     <value>Profile</value>
@@ -246,7 +246,7 @@
   <data name="UserName.PlaceholderText" xml:space="preserve">
     <value>Username</value>
   </data>
-  <data name="Valider.Content" xml:space="preserve">
+  <data name="Validate.Content" xml:space="preserve">
     <value>Validate</value>
   </data>
   <data name="Welcome.Text" xml:space="preserve">
@@ -254,5 +254,8 @@
   </data>
   <data name="ZipCode.PlaceholderText" xml:space="preserve">
     <value>Zip Code</value>
+  </data>
+  <data name="PlaylistPivot.Header" xml:space="preserve">
+    <value>Playlist(s)</value>
   </data>
 </root>

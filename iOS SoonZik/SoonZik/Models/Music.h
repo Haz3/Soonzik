@@ -1,0 +1,33 @@
+//
+//  Music.h
+//  SoonZik
+//
+//  Created by Maxime Sauvage on 12/09/2014.
+//  Copyright (c) 2014 Coordina. All rights reserved.
+//
+
+#import "ObjectFactory.h"
+#import "Genre.h"
+#import "User.h"
+#import "Comment.h"
+#import "Album.h"
+#import "Playlist.h"
+#import "Request.h"
+
+@interface Music : ObjectFactory
+
+@property (nonatomic, assign) int identifier;
+@property (nonatomic, strong) NSString *title;
+@property (nonatomic, assign) int duration;
+@property (nonatomic, strong) Genre *genre;
+@property (nonatomic, assign) float price;
+@property (nonatomic, strong) NSString *file;
+@property (nonatomic, strong) User *artist;
+@property (nonatomic, strong) NSString *image;
+@property (nonatomic, strong) NSMutableArray *album;
+@property (nonatomic, assign) int isLimited;
+
++ (BOOL)addToPlaylist:(Playlist *)playlist :(Music *)music;
++ (BOOL)removeFromPlaylist:(Playlist *)playlist :(Music *)music;
+
+@end

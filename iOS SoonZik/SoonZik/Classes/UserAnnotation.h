@@ -8,19 +8,20 @@
 
 #import <Foundation/Foundation.h>
 #import <MapKit/MapKit.h>
+#import "User.h"
+#import "Music.h"
 
 @interface UserAnnotation : NSObject <MKAnnotation>
 
 //@property (nonatomic, copy) NSString *title;
 //@property (nonatomic, copy) NSString *subtitle;
 
-@property (nonatomic, strong) NSString *album;
-@property (nonatomic, strong) NSString *artist;
-@property (nonatomic, strong) NSString *song;
-@property (nonatomic, strong) NSString *username;
+@property (nonatomic, strong) User *user;
+@property (nonatomic, strong) User *artist;
+@property (nonatomic, strong) Music *music;
 
 @property (nonatomic, assign) CLLocationCoordinate2D coordinate;
 
-- (id)initWithCoordinate:(CLLocationCoordinate2D)coord username:(NSString *)username track:(NSString *)track artist:(NSString *)artist album:(NSString *)album;
+- (id)initWithCoordinate:(CLLocationCoordinate2D)coord user:(User *)user music:(Music *)music artist:(User *)artist;
 
 @end

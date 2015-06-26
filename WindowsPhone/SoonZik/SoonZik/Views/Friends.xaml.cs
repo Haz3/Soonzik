@@ -2,7 +2,6 @@
 using Windows.UI.Xaml.Navigation;
 
 // Pour en savoir plus sur le modèle d’élément Page vierge, consultez la page http://go.microsoft.com/fwlink/?LinkID=390556
-using SoonZik.ViewModel;
 
 namespace SoonZik.Views
 {
@@ -13,7 +12,7 @@ namespace SoonZik.Views
     {
         public Friends()
         {
-            this.InitializeComponent();
+            InitializeComponent();
         }
 
         /// <summary>

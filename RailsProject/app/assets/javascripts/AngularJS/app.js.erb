@@ -42,6 +42,9 @@ SoonzikApp.config(['$routeProvider', '$locationProvider', '$httpProvider', funct
     }).when('/users/:id/edit', {
       templateUrl: '<%= asset_path("AngularJS/views/users/edit.html.haml") %>',
       controller: 'UsersCtrl'
+    }).when('/users/:id/friendlist', {
+      templateUrl: '<%= asset_path("AngularJS/views/friend/index.html.haml") %>',
+      controller: 'FriendCtrl'
     }).when('/battles', {
       templateUrl: '<%= asset_path("AngularJS/views/battles/index.html.haml") %>',
       controller: 'BattlesCtrl'

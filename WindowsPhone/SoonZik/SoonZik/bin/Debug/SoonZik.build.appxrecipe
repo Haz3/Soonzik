@@ -129,12 +129,6 @@
     <AppxPackagedFile Include="C:\Users\Juan-Pablo Bastardos\Documents\GitHub\SoonZik\Soonzik\WindowsPhone\SoonZik\SoonZik\Resources\AppIcon\appicon.png">
       <PackagePath>Resources\AppIcon\appicon.png</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\Juan-Pablo Bastardos\Documents\GitHub\SoonZik\Soonzik\WindowsPhone\SoonZik\SoonZik\Resources\Icones\audio-off_icon.png">
-      <PackagePath>Resources\Icones\audio-off_icon.png</PackagePath>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\Juan-Pablo Bastardos\Documents\GitHub\SoonZik\Soonzik\WindowsPhone\SoonZik\SoonZik\Resources\Icones\audio-on_icon.png">
-      <PackagePath>Resources\Icones\audio-on_icon.png</PackagePath>
-    </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Juan-Pablo Bastardos\Documents\GitHub\SoonZik\Soonzik\WindowsPhone\SoonZik\SoonZik\Resources\Icones\disc.png">
       <PackagePath>Resources\Icones\disc.png</PackagePath>
     </AppxPackagedFile>
@@ -186,17 +180,11 @@
     <AppxPackagedFile Include="C:\Users\Juan-Pablo Bastardos\Documents\GitHub\SoonZik\Soonzik\WindowsPhone\SoonZik\SoonZik\Resources\Icones\pause.png">
       <PackagePath>Resources\Icones\pause.png</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\Juan-Pablo Bastardos\Documents\GitHub\SoonZik\Soonzik\WindowsPhone\SoonZik\SoonZik\Resources\Icones\pause_icon.png">
-      <PackagePath>Resources\Icones\pause_icon.png</PackagePath>
-    </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Juan-Pablo Bastardos\Documents\GitHub\SoonZik\Soonzik\WindowsPhone\SoonZik\SoonZik\Resources\Icones\play.png">
       <PackagePath>Resources\Icones\play.png</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\Juan-Pablo Bastardos\Documents\GitHub\SoonZik\Soonzik\WindowsPhone\SoonZik\SoonZik\Resources\Icones\play_icon.png">
-      <PackagePath>Resources\Icones\play_icon.png</PackagePath>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\Juan-Pablo Bastardos\Documents\GitHub\SoonZik\Soonzik\WindowsPhone\SoonZik\SoonZik\Resources\Icones\previous_icon.png">
-      <PackagePath>Resources\Icones\previous_icon.png</PackagePath>
+    <AppxPackagedFile Include="C:\Users\Juan-Pablo Bastardos\Documents\GitHub\SoonZik\Soonzik\WindowsPhone\SoonZik\SoonZik\Resources\Icones\plus.png">
+      <PackagePath>Resources\Icones\plus.png</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Juan-Pablo Bastardos\Documents\GitHub\SoonZik\Soonzik\WindowsPhone\SoonZik\SoonZik\Resources\Icones\ProfilMenu.png">
       <PackagePath>Resources\Icones\ProfilMenu.png</PackagePath>
@@ -228,6 +216,15 @@
     <AppxPackagedFile Include="C:\Users\Juan-Pablo Bastardos\Documents\GitHub\SoonZik\Soonzik\WindowsPhone\SoonZik\SoonZik\Resources\logo.scale-240.png">
       <PackagePath>Resources\logo.scale-240.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Juan-Pablo Bastardos\Documents\GitHub\SoonZik\Soonzik\WindowsPhone\SoonZik\SoonZik\Assets\Media\Ring01.wma">
+      <PackagePath>Assets\Media\Ring01.wma</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Juan-Pablo Bastardos\Documents\GitHub\SoonZik\Soonzik\WindowsPhone\SoonZik\SoonZik\Assets\Media\Ring02.wma">
+      <PackagePath>Assets\Media\Ring02.wma</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Juan-Pablo Bastardos\Documents\GitHub\SoonZik\Soonzik\WindowsPhone\SoonZik\SoonZik\Assets\Media\Ring03.wma">
+      <PackagePath>Assets\Media\Ring03.wma</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Juan-Pablo Bastardos\Documents\GitHub\SoonZik\Soonzik\WindowsPhone\SoonZik\SoonZik\ReadMe.Coding4Fun.Toolkit.txt">
       <PackagePath>ReadMe.Coding4Fun.Toolkit.txt</PackagePath>

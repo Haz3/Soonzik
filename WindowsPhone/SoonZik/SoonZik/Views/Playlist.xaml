@@ -9,11 +9,63 @@
     DataContext="{StaticResource PlaylistViewModel}"
     Background="#424242">
 
+
+    <Page.Resources>
+        <DataTemplate x:Key="PlaylistTemplate">
+            <Grid Height="150" Width="150">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="50" />
+                </Grid.RowDefinitions>
+            </Grid>
+        </DataTemplate>
+
+        <DataTemplate x:Key="MusiqueTemplate">
+            <Grid Width="350">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="80"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Image Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left" Source="../Resources/Icones/profil.jpg" Height="80" Width="80" />
+                <TextBlock Grid.Column="1"  Text="{Binding Path=user.username}" Margin="15,0,0,0" FontSize="15"/>
+                <TextBlock Grid.Column="1"  Text="{Binding Path=duration}" HorizontalAlignment="Right" Margin="0,0,15,0" FontSize="15"/>
+                <TextBlock Grid.Column="1" VerticalAlignment="Bottom"  Text="{Binding Path=title}" Margin="20,0,0,0" FontSize="30"/>
+            </Grid>
+        </DataTemplate>
+
+        <DataTemplate x:Key="AlbumTemplate">
+            <Grid Width="350">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="80"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Image Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left" Source="../Resources/Icones/profil.jpg" Height="80" Width="80" />
+                <TextBlock Grid.Column="1"  Text="{Binding Path=username}" Margin="15,0,0,0" FontSize="25"/>
+            </Grid>
+        </DataTemplate>
+    </Page.Resources>
+
     <Grid x:Name="GlobalGrid">
-    	  <GridView x:Name="PlaylistGridView">
-              
-          </GridView>
-        
-        <TextBlock Text="En cours de Realisation" FontSize="35" HorizontalAlignment="Center"></TextBlock>
+        <ProgressRing IsActive="{Binding ProgressOn, Mode=TwoWay}" Background="Black" Foreground="Aqua" Opacity="0.5"/>
+        <Pivot x:Name="PivotGlobal" HeaderTemplate="{StaticResource SizeHeaderGlobalPivot}" Foreground="Transparent" RenderTransformOrigin="0.5,0.5" Style="{StaticResource PivotStyle1}" >
+            <PivotItem x:Uid="MusicPivot" Header="">
+                <ListBox Background="Transparent" x:Name="ListBoxMusic" ItemsSource="{Binding ListMusique}" ItemTemplate="{StaticResource MusiqueTemplate}" SelectedItem="{Binding SelectedMusic, Mode=TwoWay}">
+
+                </ListBox>
+            </PivotItem>
+
+            <PivotItem x:Uid="AlbumPivot" Header="">
+                <ListBox Background="Transparent" x:Name="ListBoxMusics" ItemsSource="{Binding ListAlbum}" ItemTemplate="{StaticResource AlbumTemplate}" SelectedItem="{Binding SelectedAlbum, Mode=TwoWay}">
+
+                </ListBox>
+
+            </PivotItem>
+
+            <PivotItem x:Uid="PlaylistPivot" Header="">
+                <GridView Background="Transparent" x:Name="ListBoxPlaylist" ItemsSource="{Binding ListPlaylist}" SelectedItem="{Binding SelectedPlaylist, Mode=TwoWay}">
+
+                </GridView>
+            </PivotItem>
+        </Pivot>
     </Grid>
 </Page>
