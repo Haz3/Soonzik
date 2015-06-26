@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Windows.ApplicationModel.Core;
@@ -98,7 +97,7 @@ namespace SoonZik.ViewModel
                 }
             };
             
-            this.Datas = datas;
+            Datas = datas;
 
             if (ThePack != null)
             {

@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Windows.ApplicationModel.Core;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
@@ -65,7 +62,7 @@ namespace SoonZik.Utils
             //    Debug.WriteLine(e.ToString());
             //}
 
-            var test = request.GetObject(new User(), "users", Singleton.Instance().NewProfilUser.ToString());
+            var test = request.GetObject(new User(), "users", Instance().NewProfilUser.ToString());
             test.ContinueWith(delegate(Task<object> tmp)
             {
                 var res = tmp.Result as User;

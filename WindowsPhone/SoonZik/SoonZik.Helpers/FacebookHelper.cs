@@ -34,14 +34,11 @@ namespace SoonZik.Helpers
         {
             if (result.ResponseStatus == WebAuthenticationStatus.Success)
             {
-                var responseUri = new Uri(result.ResponseData.ToString());
+                var responseUri = new Uri(result.ResponseData);
                 var facebookOAuthResult = _fb.ParseOAuthCallbackUrl(responseUri);
 
                 if (string.IsNullOrWhiteSpace(facebookOAuthResult.Error))
                     _fb.AccessToken = facebookOAuthResult.AccessToken;
-                else
-                {//error de acceso denegado por cancelación en página  
-                }
             }
             else if (result.ResponseStatus == WebAuthenticationStatus.ErrorHttp)
             {// error de http  

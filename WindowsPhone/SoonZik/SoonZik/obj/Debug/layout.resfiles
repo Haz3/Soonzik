@@ -1,5 +1,8 @@
 Assets\Fonts\RobotoCondensed-Regular.ttf
 Assets\Logo.scale-240.png
+Assets\Media\Ring01.wma
+Assets\Media\Ring02.wma
+Assets\Media\Ring03.wma
 Assets\SmallLogo.scale-240.png
 Assets\SplashScreen.scale-240.png
 Assets\Square71x71Logo.scale-240.png
@@ -48,8 +51,6 @@ Resources\AppIcon\appicon-Small-40@2x.png
 Resources\AppIcon\appicon-Small-50.png
 Resources\AppIcon\appicon-Small-50@2x.png
 Resources\guetta.jpg
-Resources\Icones\audio-off_icon.png
-Resources\Icones\audio-on_icon.png
 Resources\Icones\disc.png
 Resources\Icones\empty_list.png
 Resources\Icones\facebook.png
@@ -67,10 +68,8 @@ Resources\Icones\MenuPack.png
 Resources\Icones\MenuPlaylist.png
 Resources\Icones\next_icon.png
 Resources\Icones\pause.png
-Resources\Icones\pause_icon.png
 Resources\Icones\play.png
-Resources\Icones\play_icon.png
-Resources\Icones\previous_icon.png
+Resources\Icones\plus.png
 Resources\Icones\profil.jpg
 Resources\Icones\ProfilMenu.png
 Resources\Icones\refresh.png

@@ -1,9 +1,8 @@
-﻿using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
+﻿using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
+using SoonZik.ViewModel;
 
 // Pour en savoir plus sur le modèle d'élément Page vierge, consultez la page http://go.microsoft.com/fwlink/?LinkId=391641
-using SoonZik.ViewModel;
 
 namespace SoonZik
 {
@@ -22,8 +21,8 @@ namespace SoonZik
         public MainPage()
         {
             new ViewModelLocator();
-            this.InitializeComponent();
-            this.NavigationCacheMode = NavigationCacheMode.Required;
+            InitializeComponent();
+            NavigationCacheMode = NavigationCacheMode.Required;
         }
 
         #endregion

@@ -14,7 +14,7 @@ namespace SoonZik.Views
     {
         public Explorer()
         {
-            this.InitializeComponent();
+            InitializeComponent();
         }
 
         /// <summary>

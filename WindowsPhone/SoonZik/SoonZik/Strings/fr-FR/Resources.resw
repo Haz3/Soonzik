@@ -132,7 +132,7 @@
   <data name="Battle.Content" xml:space="preserve">
     <value>Battle</value>
   </data>
-  <data name="Check_profile.Content" xml:space="preserve">
+  <data name="CheckProfile.Content" xml:space="preserve">
     <value>Voir le profil</value>
   </data>
   <data name="City.PlaceholderText" xml:space="preserve">
@@ -159,7 +159,7 @@
   <data name="FirstName.PlaceholderText" xml:space="preserve">
     <value>Prenom</value>
   </data>
-  <data name="Forgot_Password.Content" xml:space="preserve">
+  <data name="ForgotPassword.Content" xml:space="preserve">
     <value>Mot de passe oublier</value>
   </data>
   <data name="Friends.Content" xml:space="preserve">
@@ -214,7 +214,7 @@
     <value>Playlist</value>
   </data>
   <data name="PlaylistBoutton.Content" xml:space="preserve">
-    <value>Playlist</value>
+    <value>Ma musique</value>
   </data>
   <data name="Profile.Content" xml:space="preserve">
     <value>Profil</value>
@@ -225,7 +225,7 @@
   <data name="Search.PlaceholderText" xml:space="preserve">
     <value>Rechercher</value>
   </data>
-  <data name="Send_message.Content" xml:space="preserve">
+  <data name="SendMessage.Content" xml:space="preserve">
     <value>Envoyer un message</value>
   </data>
   <data name="Share.Text" xml:space="preserve">
@@ -254,5 +254,8 @@
   </data>
   <data name="ZipCode.PlaceholderText" xml:space="preserve">
     <value>Code postale</value>
+  </data>
+  <data name="PlaylistPivot.Header" xml:space="preserve">
+    <value>Playlist(s)</value>
   </data>
 </root>

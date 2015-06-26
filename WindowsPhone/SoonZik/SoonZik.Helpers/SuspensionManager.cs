@@ -184,7 +184,7 @@ namespace SoonZik.Helpers
             // Remove session state and remove the frame from the list of frames whose navigation 
             // state will be saved (along with any weak references that are no longer reachable) 
             SessionState.Remove((String)frame.GetValue(_frameSessionStateKeyProperty));
-            _registeredFrames.RemoveAll((weakFrameReference) =>
+            _registeredFrames.RemoveAll(weakFrameReference =>
             {
                 Frame testFrame;
                 return !weakFrameReference.TryGetTarget(out testFrame) || testFrame == frame;

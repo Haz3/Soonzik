@@ -12,7 +12,7 @@ namespace SoonZik.Views
     {
         public NewsDetail()
         {
-            this.InitializeComponent();
+            InitializeComponent();
         }
 
         /// <summary>

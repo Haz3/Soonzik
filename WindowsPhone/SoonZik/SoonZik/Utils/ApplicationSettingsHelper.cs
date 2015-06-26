@@ -16,13 +16,10 @@ namespace SoonZik.Utils
                 Debug.WriteLine("null returned");
                 return null;
             }
-            else
-            {
-                var value = ApplicationData.Current.LocalSettings.Values[key];
-                ApplicationData.Current.LocalSettings.Values.Remove(key);
-                Debug.WriteLine("value found " + value.ToString());
-                return value;
-            }
+            var value = ApplicationData.Current.LocalSettings.Values[key];
+            ApplicationData.Current.LocalSettings.Values.Remove(key);
+            Debug.WriteLine("value found " + value);
+            return value;
         }
 
         /// <summary>
@@ -30,7 +27,7 @@ namespace SoonZik.Utils
         /// </summary>
         public static void SaveSettingsValue(string key, object value)
         {
-            Debug.WriteLine(key + ":" + value.ToString());
+            Debug.WriteLine(key + ":" + value);
             if (!ApplicationData.Current.LocalSettings.Values.ContainsKey(key))
             {
                 ApplicationData.Current.LocalSettings.Values.Add(key, value);

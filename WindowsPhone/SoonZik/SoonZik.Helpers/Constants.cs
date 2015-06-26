@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace SoonZik.Helpers
+﻿namespace SoonZik.Helpers
 {
-    class Constants
+    public class Constants
     {
         public const string CurrentTrack = "trackname";
         public const string BackgroundTaskStarted = "BackgroundTaskStarted";

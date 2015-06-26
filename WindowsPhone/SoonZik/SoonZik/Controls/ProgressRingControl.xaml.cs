@@ -1,5 +1,4 @@
-﻿using System.ComponentModel;
-using Windows.UI.Xaml;
+﻿using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
 // Pour en savoir plus sur le modèle d'élément Contrôle utilisateur, consultez la page http://go.microsoft.com/fwlink/?LinkId=234236
@@ -28,7 +27,7 @@ namespace SoonZik.Controls
         
         public ProgressRingControl()
         {
-            this.InitializeComponent();
+            InitializeComponent();
             DataContext = this;
         }
     }
