@@ -1,4 +1,4 @@
-SoonzikApp.controller('FriendCtrl', ['$scope', "$routeParams", 'SecureAuth', 'HTTPService', 'NotificationService', function ($scope, $routeParams, SecureAuth, HTTPService, NotificationService) {
+SoonzikApp.controller('FriendCtrl', ['$scope', 'SecureAuth', 'HTTPService', 'NotificationService', function ($scope, SecureAuth, HTTPService, NotificationService) {
 
 $scope.loading = true;
 
