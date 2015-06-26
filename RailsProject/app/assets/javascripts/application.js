@@ -36,6 +36,7 @@
 //= require ./AngularJS/controllers/NewsController.js
 //= require ./AngularJS/controllers/PackController.js
 //= require ./AngularJS/controllers/PlaylistsController.js
+//= require ./AngularJS/controllers/FriendController.js
 //= require ./AngularJS/directives/autofocus.js
 //= require ./AngularJS/directives/autoscrollbottom.js
 //= require ./AngularJS/directives/battle.js
@@ -46,6 +47,7 @@
 //= require ./AngularJS/directives/selectOnClick.js
 //= require ./AngularJS/directives/submitInput.js
 //= require ./AngularJS/directives/wavesurfer.js
+//= require ./AngularJS/directives/orbit.js
 //= require ./AngularJS/services/SecureAuth.js
 //= require ./AngularJS/services/HTTPService.js
 //= require ./AngularJS/services/NotificationService.js
