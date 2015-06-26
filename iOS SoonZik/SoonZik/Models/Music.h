@@ -10,6 +10,9 @@
 #import "Genre.h"
 #import "User.h"
 #import "Comment.h"
+#import "Album.h"
+#import "Playlist.h"
+#import "Request.h"
 
 @interface Music : ObjectFactory
 
@@ -21,8 +24,10 @@
 @property (nonatomic, strong) NSString *file;
 @property (nonatomic, strong) User *artist;
 @property (nonatomic, strong) NSString *image;
-//@property (nonatomic, strong) Album *album;
-@property (nonatomic, strong) NSArray *listOfComments;
+@property (nonatomic, strong) NSMutableArray *album;
 @property (nonatomic, assign) int isLimited;
+
++ (BOOL)addToPlaylist:(Playlist *)playlist :(Music *)music;
++ (BOOL)removeFromPlaylist:(Playlist *)playlist :(Music *)music;
 
 @end

@@ -10,4 +10,10 @@
 
 @interface Translate : NSObject
 
+@property (nonatomic, strong) NSDictionary *dict;
+
+- (id)initWithPath:(NSString *)path;
+
++ (id)sharedInstance;
+
 @end

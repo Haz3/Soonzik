@@ -16,11 +16,12 @@
 
 @property (nonatomic, assign) int identifier;
 @property (nonatomic, strong) NSString *title;
-@property (nonatomic, strong) NSString *content;
+@property (nonatomic, strong) NSMutableArray *listOfContents;
 @property (nonatomic, strong) User *author;
 @property (nonatomic, strong) NSString *type;
-@property (nonatomic, strong) NSDate *date;
-@property (nonatomic, strong) NSArray *listOfAttachments;
-@property (nonatomic, strong) NSArray *listOfComments;
+@property (nonatomic, strong) NSString *date;
+@property (nonatomic, strong) NSMutableArray *listOfAttachments;
+@property (nonatomic, strong) NSMutableArray *listOfComments;
+@property (nonatomic, strong) NSMutableArray *listOfNewsTexts;
 
 @end

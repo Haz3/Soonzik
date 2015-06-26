@@ -7,8 +7,8 @@
 //
 
 #import "Network.h"
-
-#define URL @"http://api.lvh.me:3000/"
+#import "Playlist.h"
+#import "User.h"
 
 @implementation Network
 
@@ -17,37 +17,24 @@
     NSString *url = nil;
     
     if ([className isEqualToString:@"User"]) {
-        url = [NSString stringWithFormat:@"%@users", URL];
+        url = [NSString stringWithFormat:@"%@users", API_URL];
     } else if ([className isEqualToString:@"Pack"]) {
-        url = [NSString stringWithFormat:@"%@packs", URL];
+        url = [NSString stringWithFormat:@"%@packs", API_URL];
     } else if ([className isEqualToString:@"Music"]) {
-        url = [NSString stringWithFormat:@"%@musics", URL];
+        url = [NSString stringWithFormat:@"%@musics", API_URL];
     } else if ([className isEqualToString:@"Album"]) {
-        url = [NSString stringWithFormat:@"%@albums", URL];
+        url = [NSString stringWithFormat:@"%@albums", API_URL];
+    } else if ([className isEqualToString:@"News"]) {
+        url = [NSString stringWithFormat:@"%@news", API_URL];
+    } else if ([className isEqualToString:@"UserListen"]) {
+        url = [NSString stringWithFormat:@"%@listenings", API_URL];
+    } else if ([className isEqualToString:@"Genre"]) {
+        url = [NSString stringWithFormat:@"%@genres", API_URL];
+    } else if ([className isEqualToString:@"Influence"]) {
+        url = [NSString stringWithFormat:@"%@influences", API_URL];
     }
     
-    NSLog(@"path : %@", url);
-    
-    NSString *post = [NSString stringWithFormat:@""];
-    NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
-    NSString *postLength = [NSString stringWithFormat:@"%d", [postData length]];
-    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
-    [request setURL:[NSURL URLWithString:url]];
-    [request setHTTPMethod:@"GET"];
-    [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
-    [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
-    [request setHTTPBody:postData];
-    
-    NSURLResponse *response;
-    NSError *error;
-    NSData *jsonData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
-    NSDictionary *results = jsonData ? [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingMutableContainers|NSJSONReadingMutableLeaves error:&error] : nil;
-    
-    if (error) {
-        NSLog(@"[%@ %@] JSON error: %@", NSStringFromClass([self class]), NSStringFromSelector(_cmd), error.localizedDescription);
-    }
-    
-    return results;
+    return [Request getRequest:url];
 }
 
 - (NSDictionary *) getJsonWithClassName:className andIdentifier:(int)identifier
@@ -55,70 +42,148 @@
     NSString *url = nil;
     
     if ([className isEqualToString:@"User"]) {
-        url = [NSString stringWithFormat:@"%@users/%i", URL, identifier];
+        url = [NSString stringWithFormat:@"%@users/%i", API_URL, identifier];
     } else if ([className isEqualToString:@"Pack"]) {
-        url = [NSString stringWithFormat:@"%@packs/%i", URL, identifier];
+        url = [NSString stringWithFormat:@"%@packs/%i", API_URL, identifier];
     } else if ([className isEqualToString:@"Music"]) {
-        url = [NSString stringWithFormat:@"%@musics/%i", URL, identifier];
+        url = [NSString stringWithFormat:@"%@musics/%i", API_URL, identifier];
     } else if ([className isEqualToString:@"Album"]) {
-        url = [NSString stringWithFormat:@"%@albums/%i", URL, identifier];
-    }
-
-    
-    NSLog(@"path : %@", url);
-    
-    NSString *post = [NSString stringWithFormat:@""];
-    NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
-    NSString *postLength = [NSString stringWithFormat:@"%d", [postData length]];
-    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
-    [request setURL:[NSURL URLWithString:url]];
-    [request setHTTPMethod:@"GET"];
-    [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
-    [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
-    [request setHTTPBody:postData];
-    
-    NSURLResponse *response;
-    NSError *error;
-    NSData *jsonData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
-    NSDictionary *results = jsonData ? [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingMutableContainers|NSJSONReadingMutableLeaves error:&error] : nil;
-    
-    if (error) {
-        NSLog(@"[%@ %@] JSON error: %@", NSStringFromClass([self class]), NSStringFromSelector(_cmd), error.localizedDescription);
+        url = [NSString stringWithFormat:@"%@albums/%i", API_URL, identifier];
+    } else if ([className isEqualToString:@"News"]) {
+        url = [NSString stringWithFormat:@"%@news/%i", API_URL, identifier];
+    } else if ([className isEqualToString:@"UserListen"]) {
+        url = [NSString stringWithFormat:@"%@listenings/%i", API_URL, identifier];
+    } else if ([className isEqualToString:@"Genre"]) {
+        url = [NSString stringWithFormat:@"%@genres/%i", API_URL, identifier];
     }
     
-    return results;
+    return [Request getRequest:url];
 }
 
-- (NSDictionary *)getJsonClient:(NSString *)token email:(NSString *)email
+- (NSDictionary *) findJsonElementWithClassName:className andValues:(NSString *)values
 {
-    NSString *encodedString = [email stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-    NSString *url = [NSString stringWithFormat:@"http://api.lvh.me:3000/loginFB/%@?email=%@", token, encodedString];
+    NSString *url = nil;
     
-    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
-    [request setURL:[NSURL URLWithString:url]];
-    [request setHTTPMethod:@"GET"];
-    [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
-    
-    NSURLResponse *response;
-    NSError *error;
-    
-    NSData *jsonData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
-    
-    NSDictionary *results = jsonData ? [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingMutableContainers|NSJSONReadingMutableLeaves error:&error] : nil;
-    
-    if (error) {
-        NSLog(@"[%@ %@] JSON error: %@", NSStringFromClass([self class]), NSStringFromSelector(_cmd), error.localizedDescription);
-        
-        if (error.code == -1009) {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Erreur" message:@"Pas de connexion réseau disponible" delegate:self cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
-            [alert show];
-        }
+    if ([className isEqualToString:@"Playlist"]) {
+        url = [NSString stringWithFormat:@"%@playlists/find?%@", API_URL, values];
+    } else if ([className isEqualToString:@"User"]) {
+        url = [NSString stringWithFormat:@"%@users/find?%@", API_URL, values];
+    } else if ([className isEqualToString:@"Album"]) {
+        url = [NSString stringWithFormat:@"%@albums/find?%@", API_URL, values];
+    } else if ([className isEqualToString:@"Music"]) {
+        url = [NSString stringWithFormat:@"%@musics/find?%@", API_URL, values];
+    } else if ([className isEqualToString:@"Battle"]) {
+        url = [NSString stringWithFormat:@"%@battles/find?%@", API_URL, values];
     }
     
-    NSLog(@"results : %@", results);
-    
-    return results;
+    return [Request getRequest:url];
 }
 
+- (NSDictionary *)getJsonClient:(NSString *)token email:(NSString *)email uid:(NSString *)uid type:(int)type
+{
+    NSString *tok;
+    if (type == 0)
+        tok = [self getSocialToken:uid andType:@"facebook"];
+    if (type == 1)
+        tok = [self getSocialToken:uid andType:@"twitter"];
+    if (type == 2)
+        tok = [self getSocialToken:uid andType:@"google"];
+    
+    NSString *url;
+    NSString *post;
+    NSString *conca;
+    NSString *secureKey;
+    
+    url = [NSString stringWithFormat:@"%@social-login", API_URL];
+    conca = [NSString stringWithFormat:@"%@%@%@", uid, tok, FIX_SALT];
+    secureKey = [Crypto sha256HashFor:conca];
+    if (type == 0)
+        post = [NSString stringWithFormat:@"uid=%@&provider=%@&encrypted_key=%@&token=%@", uid, @"facebook", secureKey, token];
+    if (type == 1)
+        post = [NSString stringWithFormat:@"uid=%@&provider=%@&encrypted_key=%@&token=%@", uid, @"twitter", secureKey, token];
+    if (type == 2)
+        post = [NSString stringWithFormat:@"uid=%@&provider=%@&encrypted_key=%@&token=%@", uid, @"google", secureKey, token];
+
+    return [Request postRequest:post url:url];
+}
+
+- (NSString *)getSocialToken:(NSString *)uid andType:(NSString *)type {
+    NSString *url = [NSString stringWithFormat:@"%@getSocialToken/%@/%@", API_URL, uid, type];
+    
+    NSDictionary *results = [Request getRequest:url];
+    return (NSString *)[results objectForKey:@"key"];
+}
+
+- (NSDictionary *)getJsonClient:(NSString *)email andPassword:(NSString *)password
+{
+    NSString *url = [NSString stringWithFormat:@"%@login/", API_URL];NSLog(@"URL : %@", url);
+    NSString *post = [NSString stringWithFormat:@"email=%@&password=%@", email, password];NSLog(@"post : %@", post);
+    return [Request postRequest:post url:url];
+}
+
+- (NSDictionary *)create:(id)elem
+{
+    NSString *url;
+    NSString *post;
+    NSString *key;
+    NSString *conca;
+    NSString *secureKey;
+    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+    NSData *data = [prefs objectForKey:@"User"];
+    User *user = (User *)[NSKeyedUnarchiver unarchiveObjectWithData:data];
+    
+    if ([elem isKindOfClass:[Playlist class]]) {
+        url = [NSString stringWithFormat:@"%@playlists/save", API_URL];
+        Playlist *playlist = (Playlist *)elem;
+        key = [Crypto getKey:user.identifier];
+        conca = [NSString stringWithFormat:@"%@%@", user.salt, key];
+        secureKey = [Crypto sha256HashFor:conca];
+        post = [NSString stringWithFormat:@"user_id=%i&secureKey=%@&playlist[user_id]=%i&playlist[name]=%@", user.identifier, secureKey, user.identifier, playlist.title];
+    }
+    
+    return [Request postRequest:post url:url];
+}
+
+- (NSDictionary *)update:(id)elem
+{
+    NSString *url;
+    NSString *post;
+    NSString *key;
+    NSString *conca;
+    NSString *secureKey;
+    
+    if ([elem isKindOfClass:[User class]]) {
+        User *user = (User *)elem;
+        key = [Crypto getKey:user.identifier];
+        conca = [NSString stringWithFormat:@"%@%@", user.salt, key];
+        secureKey = [Crypto sha256HashFor:conca];
+        NSString *userParams = [user toParameters];
+        url = [NSString stringWithFormat:@"%@users/update/", API_URL];
+        post = [NSString stringWithFormat:@"user_id=%i&secureKey=%@&%@", user.identifier, secureKey, userParams];
+    }
+    
+    return [Request postRequest:post url:url];
+}
+
+- (NSDictionary *)destroy:(id)elem
+{
+    NSString *url;
+    NSString *key;
+    NSString *conca;
+    NSString *secureKey;
+    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+    NSData *data = [prefs objectForKey:@"User"];
+    User *user = (User *)[NSKeyedUnarchiver unarchiveObjectWithData:data];
+    
+    if ([elem isKindOfClass:[Playlist class]]) {
+        Playlist *playlist = (Playlist *)elem;
+        key = [Crypto getKey:user.identifier];  
+        conca = [NSString stringWithFormat:@"%@%@", user.salt, key];
+        secureKey = [Crypto sha256HashFor:conca];
+        url = [NSString stringWithFormat:@"%@playlists/destroy?user_id=%i&secureKey=%@&id=%i", API_URL, user.identifier, secureKey, playlist.identifier];
+    }
+    
+    return [Request getRequest:url];
+}
 
 @end

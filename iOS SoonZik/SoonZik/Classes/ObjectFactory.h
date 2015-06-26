@@ -7,9 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "Network.h"
 
 @interface ObjectFactory : NSObject
 
 - (id)initWithJsonObject:(NSDictionary *)json;
+- (NSString *)toParameters;
+
 
 @end

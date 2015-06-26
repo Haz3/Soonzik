@@ -10,30 +10,34 @@
 
 @implementation Album
 
-/*
- @property (nonatomic, assign) int identifier;
- @property (strong, nonatomic) NSString *title;
- @property (strong, nonatomic) User *artist;
- @property (strong, nonatomic) NSString *image;
- @property (strong, nonatomic) NSDate *date;
- */
-
 - (id)initWithJsonObject:(NSDictionary *)json
 {
     self = [super init];
     self.identifier = [[json objectForKey:@"id"] intValue];
-    self.image = [json objectForKey:@"file"];
+    self.image = [json objectForKey:@"image"];
     self.price = [[json objectForKey:@"price"] floatValue];
     self.title = [json objectForKey:@"title"];
+    if ([json objectForKey:@"user"]) {
+        self.artist = [[User alloc] initWithJsonObject:[json objectForKey:@"user"]];
+    }
     self.listOfMusics = [[NSMutableArray alloc] init];
     NSDictionary *musics = [json objectForKey:@"musics"];
-    NSLog(@"m : %@", musics);
+    
     if (musics != nil) {
+        int i = 0;
         for (NSDictionary *music in musics) {
-            //NSLog(@"%@", album);
             Music *m = [[Music alloc] initWithJsonObject:music];
             m.image = self.image;
+            Album *album = [[Album alloc] init];
+            album.identifier = self.identifier;
+            album.image = self.image;
+            album.price = self.price;
+            album.title = self.title;
+            album.artist = self.artist;
+            m.album = [[NSMutableArray alloc] init];
+            [m.album addObject:album];
             [self.listOfMusics addObject:m];
+            i++;
         }
     }
     

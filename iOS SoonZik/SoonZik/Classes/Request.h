@@ -10,4 +10,7 @@
 
 @interface Request : NSObject
 
++ (NSDictionary *)getRequest:(NSString *)url;
++ (NSDictionary *)postRequest:(NSString *)post url:(NSString *)url;
+
 @end

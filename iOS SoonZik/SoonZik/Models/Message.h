@@ -18,7 +18,7 @@
 @property (nonatomic, strong) NSDate *date;
 @property (nonatomic, strong) NSString *content;
 
-@property (nonatomic) bool fromMe;
+@property (nonatomic, assign) BOOL fromMe;
 @property (nonatomic, strong) NSString *text;
 @property (strong, nonatomic) NSDictionary *attributes;
 @property (strong, nonatomic) NSData *media;

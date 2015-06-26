@@ -20,14 +20,21 @@
 @property (nonatomic, strong) NSString *birthday;
 @property (nonatomic, strong) NSString *image;
 @property (nonatomic, strong) NSString *desc;
-@property (nonatomic, strong) NSString *phoneNbr;
 @property (nonatomic, strong) Address *address;
 @property (nonatomic, strong) NSString *facebook;
 @property (nonatomic, strong) NSString *twitter;
 @property (nonatomic, strong) NSString *google;
-@property (nonatomic, strong) NSString *idAPI;
+@property (nonatomic, strong) NSString *salt;
 @property (nonatomic, strong) NSArray *follows;
-@property (nonatomic, strong) NSArray *friends;
+@property (nonatomic, strong) NSMutableArray *friends;
+@property (nonatomic, assign) bool newsletter;
 @property (nonatomic, assign) bool isAnArtist;
+
++ (BOOL)follow:(int)artistId;
++ (BOOL)unfollow:(int)artistId;
++ (NSMutableArray *)getFollows;
++ (NSMutableArray *)getFollowers;
++ (BOOL)uploadImage:(NSDictionary *)info;
++ (NSMutableArray *)getFriends;
 
 @end

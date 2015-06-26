@@ -7,7 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
+#include <CommonCrypto/CommonDigest.h>
+#import "Request.h"
 
 @interface Crypto : NSObject
+
++ (NSString *)getKey:(int)userID;
++ (NSString*)sha256HashFor:(NSString*)input;
 
 @end

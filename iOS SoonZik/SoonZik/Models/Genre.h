@@ -12,5 +12,6 @@
 
 @property (nonatomic, assign) int identifier;
 @property (nonatomic, strong) NSString *name;
+@property (nonatomic, strong) NSString *color;
 
 @end

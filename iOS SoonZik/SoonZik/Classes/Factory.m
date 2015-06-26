@@ -8,10 +8,11 @@
 
 #import "Factory.h"
 #import "User.h"
+#import "Playlist.h"
 
 @implementation Factory
 
-- (id)provideObjectWithClassName:(NSString *)className andIdentifier:(int)identifier
++ (id)provideObjectWithClassName:(NSString *)className andIdentifier:(int)identifier
 {
     Class cl = NSClassFromString(className);
     
@@ -24,14 +25,13 @@
     return elem;
 }
 
-- (NSArray *)provideListWithClassName:(NSString *)className
++ (NSArray *)provideListWithClassName:(NSString *)className
 {
     NSMutableArray *list = [[NSMutableArray alloc] init];
     Class cl = NSClassFromString(className);
     
     Network *net = [[Network alloc] init];
     NSDictionary *json = [net getJsonWithClassName:className];
-    
     json = [json objectForKey:@"content"];
     for (NSDictionary *dict in json) {
         id elem = [[cl alloc] initWithJsonObject:dict];
@@ -41,7 +41,7 @@
     return list;
 }
 
-- (NSArray *)provideListWithClassName:(NSString *)className andIdentifier:(int)identifier
++ (NSArray *)provideListWithClassName:(NSString *)className andIdentifier:(int)identifier
 {
     NSMutableArray *list = [[NSMutableArray alloc] init];
     Class cl = NSClassFromString(className);
@@ -58,18 +58,46 @@
     return list;
 }
 
-- (BOOL)addElement:(id)elem
++ (NSMutableArray *)findElementWithClassName:(NSString *)className andValues:(NSString *)values
 {
-    return NO;
+    NSMutableArray *list = [[NSMutableArray alloc] init];
+    Class cl = NSClassFromString(className);
+    
+    Network *net = [[Network alloc] init];
+    NSDictionary *json = [net findJsonElementWithClassName:className andValues:values];
+    
+    json = [json objectForKey:@"content"];
+    
+    for (NSDictionary *dict in json) {
+        id elem = [[cl alloc] initWithJsonObject:dict];
+        [list addObject:elem];
+    }
+    
+    return list;
 }
 
-- (BOOL)deleteElement:(id)elem
++ (id)update:(id)elem
 {
-    return NO;
+    Network *net = [[Network alloc] init];
+    NSDictionary *json = [net update:elem];
+    
+    if ([elem isKindOfClass:[User class]]) {
+        User *u = [[User alloc] initWithJsonObject:[json objectForKey:@"content"]];
+        return u;
+    }
+    
+    return nil;
 }
 
-- (BOOL)saveElement:(id)elem
++ (BOOL)destroy:(id)elem
 {
+    Network *net = [[Network alloc] init];
+    NSDictionary *json = [net destroy:elem];
+    
+    if ([[json objectForKey:@"code"] intValue] == 202) {
+        return YES;
+    }
+    
     return NO;
 }
 

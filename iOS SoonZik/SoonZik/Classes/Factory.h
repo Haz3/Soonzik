@@ -12,12 +12,12 @@
 
 @interface Factory : NSObject
 
-- (id)provideObjectWithClassName:(NSString *)className andIdentifier:(int)identifier;
-- (NSArray *)provideListWithClassName:(NSString *)className;
-- (NSArray *)provideListWithClassName:(NSString *)className andIdentifier:(int)identifier;
++ (id)provideObjectWithClassName:(NSString *)className andIdentifier:(int)identifier;
++ (NSArray *)provideListWithClassName:(NSString *)className;
++ (NSArray *)provideListWithClassName:(NSString *)className andIdentifier:(int)identifier;
++ (NSMutableArray *)findElementWithClassName:(NSString *)className andValues:(NSString *)values;
 
-- (BOOL)addElement:(id)elem;
-- (BOOL)deleteElement:(id)elem;
-- (BOOL)saveElement:(id)elem;
++ (id)update:(id)elem;
++ (BOOL)destroy:(id)elem;
 
 @end

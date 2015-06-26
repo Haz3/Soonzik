@@ -7,12 +7,13 @@
 //
 
 #import "Connexion.h"
+#import "User.h"
 
 @interface EmailConnect : Connexion
 
 @property (strong, nonatomic) NSString *email;
 @property (strong, nonatomic) NSString *password;
 
-+ (void)emailConnect;
+- (User *)emailConnect:(NSString *)email andPassword:(NSString *)password;
 
 @end
