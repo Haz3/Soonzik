@@ -6,12 +6,9 @@
   <Roots.PropertyPathNames>
     <RootPropertyPathName Name="Title" />
     <RootPropertyPathName Name="title" />
+    <RootPropertyPathName Name="music" />
     <RootPropertyPathName Name="username" />
     <RootPropertyPathName Name="ImageBoutton" />
-    <RootPropertyPathName Name="SelectedPack" />
-    <RootPropertyPathName Name="SelectedAlbum" />
-    <RootPropertyPathName Name="SelectedMusic" />
-    <RootPropertyPathName Name="SelectedUser" />
     <RootPropertyPathName Name="PlayerLoaded" />
     <RootPropertyPathName Name="MediaElementObject" />
     <RootPropertyPathName Name="NaturalDuration" />
@@ -53,10 +50,12 @@
     <RootPropertyPathName Name="style_name" />
     <RootPropertyPathName Name="ListArtiste" />
     <RootPropertyPathName Name="ListMusique" />
+    <RootPropertyPathName Name="SelectedMusic" />
     <RootPropertyPathName Name="ListGenres" />
     <RootPropertyPathName Name="Key" />
     <RootPropertyPathName Name="Group" />
     <RootPropertyPathName Name="ItemSource" />
+    <RootPropertyPathName Name="SelectedUser" />
     <RootPropertyPathName Name="TappedCommand" />
     <RootPropertyPathName Name="CollectionGroups" />
     <RootPropertyPathName Name="Date" />
@@ -66,6 +65,7 @@
     <RootPropertyPathName Name="User" />
     <RootPropertyPathName Name="BitmapImage" />
     <RootPropertyPathName Name="ListAlbums" />
+    <RootPropertyPathName Name="SelectedAlbum" />
     <RootPropertyPathName Name="ThePack" />
     <RootPropertyPathName Name="Datas" />
     <RootPropertyPathName Name="SelectedData" />
@@ -373,11 +373,10 @@
       <RootEvent Name="TextChanged" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.ListView">
-      <RootProperty Name="Header" />
       <RootProperty Name="ItemTemplate" />
-      <RootProperty Name="SelectedItem" />
       <RootProperty Name="ItemsSource" />
       <RootProperty Name="IsHoldingEnabled" />
+      <RootProperty Name="SelectedItem" />
       <RootProperty Name="GroupStyle" />
       <RootProperty Name="Background" />
       <RootProperty Name="VerticalContentAlignment" />
