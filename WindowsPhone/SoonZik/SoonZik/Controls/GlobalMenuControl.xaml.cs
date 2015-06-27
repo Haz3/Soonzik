@@ -10,7 +10,9 @@ using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
+using Windows.UI.Xaml.Media;
 using GalaSoft.MvvmLight.Command;
+using GalaSoft.MvvmLight.Helpers;
 using SoonZik.HttpRequest;
 using SoonZik.HttpRequest.Poco;
 using SoonZik.Properties;
@@ -28,8 +30,11 @@ namespace SoonZik.Controls
     public sealed partial class GlobalMenuControl : UserControl, INotifyPropertyChanged
     {
         #region Attribute
+
         #region Attribute Headers
+
         private string _headerArtiste;
+
         public string HeaderArtiste
         {
             get { return _headerArtiste; }
@@ -39,7 +44,9 @@ namespace SoonZik.Controls
                 RaisePropertyChange("HeaderArtiste");
             }
         }
+
         private string _headerMusique;
+
         public string HeaderMusique
         {
             get { return _headerMusique; }
@@ -49,7 +56,9 @@ namespace SoonZik.Controls
                 RaisePropertyChange("HeaderMusique");
             }
         }
+
         private string _headerUser;
+
         public string HeaderUser
         {
             get { return _headerUser; }
@@ -59,7 +68,9 @@ namespace SoonZik.Controls
                 RaisePropertyChange("Header");
             }
         }
+
         private string _headerPack;
+
         public string HeaderPack
         {
             get { return _headerPack; }
@@ -69,7 +80,9 @@ namespace SoonZik.Controls
                 RaisePropertyChange("HeaderPack");
             }
         }
+
         private string _headerAlbum;
+
         public string HeaderAlbum
         {
             get { return _headerAlbum; }
@@ -79,9 +92,12 @@ namespace SoonZik.Controls
                 RaisePropertyChange("HeaderAlbum");
             }
         }
+
         #endregion
+
         public static Grid MyGrid { get; set; }
-        private SearchResult _myResult;
+        private ObservableCollection<SearchResult> _myResult;
+
         public SearchResult MyResult
         {
             get { return _myResult; }
@@ -91,12 +107,14 @@ namespace SoonZik.Controls
                 RaisePropertyChange("MyResult");
             }
         }
+
         public ObservableCollection<SearchResult> ListObject;
         public event PropertyChangedEventHandler PropertyChanged;
         public string SearchText { get; set; }
         private readonly INavigationService _navigationService;
         private UIElement _lastElement;
         private User _selectedUser;
+
         public User SelectedUser
         {
             get { return _selectedUser; }
@@ -106,7 +124,9 @@ namespace SoonZik.Controls
                 RaisePropertyChange("SelectedUser");
             }
         }
+
         private Music _selectedMusic;
+
         public Music SelectedMusic
         {
             get { return _selectedMusic; }
@@ -116,7 +136,9 @@ namespace SoonZik.Controls
                 RaisePropertyChange("SelectedMusic");
             }
         }
+
         private Album _selectedAlbum;
+
         public Album SelectedAlbum
         {
             get { return _selectedAlbum; }
@@ -126,7 +148,9 @@ namespace SoonZik.Controls
                 RaisePropertyChange("SelectedAlbum");
             }
         }
+
         private Pack _selectedPack;
+
         public Pack SelectedPack
         {
             get { return _selectedPack; }
@@ -136,7 +160,9 @@ namespace SoonZik.Controls
                 RaisePropertyChange("SelectedPack");
             }
         }
+
         private BouttonMenu _selectedBouttonMenu;
+
         public BouttonMenu SelectedBouttonMenu
         {
             get { return _selectedBouttonMenu; }
@@ -146,6 +172,7 @@ namespace SoonZik.Controls
                 RaisePropertyChange("SelectedBouttonMenu");
             }
         }
+
         public List<BouttonMenu> ListBouttonMenus { get; set; }
 
         #endregion
@@ -160,7 +187,7 @@ namespace SoonZik.Controls
             GlobalGrid.Children.Add(Singleton.Instance().NewsPage);
 
             _navigationService = new NavigationService();
-
+            MyResult = new ObservableCollection<SearchResult>();
             HardwareButtons.BackPressed += HardwareButtonsOnBackPressed;
 
             ProfilButton.Command = new RelayCommand(GoToProfil);
@@ -187,7 +214,7 @@ namespace SoonZik.Controls
 
         #region Method Menu
 
-       private void GridItemMenu_OnTapped(object sender, TappedRoutedEventArgs e)
+        private void GridItemMenu_OnTapped(object sender, TappedRoutedEventArgs e)
         {
             if (SelectedBouttonMenu.PageBoutton.Equals(new ProfilUser()))
             {
@@ -206,11 +233,11 @@ namespace SoonZik.Controls
                     SetChildren(new GeolocalisationView());
             }
             else if (SelectedBouttonMenu.PageBoutton.Equals(new Connexion()))
-                _navigationService.Navigate(typeof (Connexion));
+                _navigationService.Navigate(typeof(Connexion));
             else
             {
                 var obj = SelectedBouttonMenu.PageBoutton as UIElement;
-                
+
                 SetChildren(obj);
             }
         }
@@ -236,6 +263,7 @@ namespace SoonZik.Controls
         #endregion
 
         #region Method Bouttons
+
         private void GoToProfil()
         {
             Singleton.Instance().ItsMe = true;
@@ -278,8 +306,8 @@ namespace SoonZik.Controls
 
         private void GoToPlaylist()
         {
-           //PlaylistAdd.Visibility = Visibility.Visible;
-           SetChildren(new Playlist());
+            //PlaylistAdd.Visibility = Visibility.Visible;
+            SetChildren(new Playlist());
         }
 
         private void GoToAmis()
@@ -290,7 +318,7 @@ namespace SoonZik.Controls
         private void SetChildren(UIElement myObj)
         {
             //if (myObj.GetType() != typeof(Playlist))
-               // PlaylistAdd.Visibility = Visibility.Collapsed;
+            // PlaylistAdd.Visibility = Visibility.Collapsed;
             Singleton.Instance().LastElement = MyGrid.Children.First();
             _lastElement = MyGrid.Children.FirstOrDefault();
             MyGrid.Children.Clear();
@@ -313,9 +341,11 @@ namespace SoonZik.Controls
         {
 
         }
+
         #endregion
 
         #region Methods Search
+
         private void SearchTextBlock_OnTextChanged(object sender, TextChangedEventArgs e)
         {
             SearchText = SearchTextBlock.Text;
@@ -337,6 +367,7 @@ namespace SoonZik.Controls
                     DisplayResult();
                 }
             }
+
             catch (Exception e)
             {
                 Debug.WriteLine(e.Message);
@@ -345,11 +376,11 @@ namespace SoonZik.Controls
 
         private void CollapsedListOfResul()
         {
-            ResultArtisteListView.Visibility = Visibility.Collapsed;
-            ResultAlbumListView.Visibility = Visibility.Collapsed;
-            ResultMusicListView.Visibility = Visibility.Collapsed;
-            ResultPackListView.Visibility = Visibility.Collapsed;
-            ResultUserListView.Visibility = Visibility.Collapsed;
+            //ResultArtisteListView.Visibility = Visibility.Collapsed;
+            //ResultAlbumListView.Visibility = Visibility.Collapsed;
+            //ResultMusicListView.Visibility = Visibility.Collapsed;
+            //ResultPackListView.Visibility = Visibility.Collapsed;
+            //ResultUserListView.Visibility = Visibility.Collapsed;
         }
 
         private void DisplayResult()
@@ -383,11 +414,11 @@ namespace SoonZik.Controls
 
         private void CleanResultList()
         {
-            ResultArtisteListView.ItemsSource = null;
-            ResultUserListView.ItemsSource = null;
-            ResultAlbumListView.ItemsSource = null;
-            ResultMusicListView.ItemsSource = null;
-            ResultPackListView.ItemsSource = null;
+            //ResultArtisteListView.ItemsSource = null;
+            //ResultUserListView.ItemsSource = null;
+            //ResultAlbumListView.ItemsSource = null;
+            //ResultMusicListView.ItemsSource = null;
+            //ResultPackListView.ItemsSource = null;
         }
 
         private void GlobalGrid_OnTapped(object sender, TappedRoutedEventArgs e)
@@ -411,7 +442,7 @@ namespace SoonZik.Controls
             _navigationService.Navigate(new PlayerControl().GetType());
             CloseMenu();
         }
-     
+
         private void AlbumStackPanel_OnTapped(object sender, TappedRoutedEventArgs e)
         {
             AlbumViewModel.MyAlbum = SelectedAlbum;
@@ -429,15 +460,21 @@ namespace SoonZik.Controls
             PackViewModel.ThePack = SelectedPack;
             SetChildren(new Packs());
         }
+
         #endregion
-        
+
         #region NotifyPropertyCahnge
+
         [NotifyPropertyChangedInvocator]
         private void RaisePropertyChange(string propertyName)
         {
             var handler = PropertyChanged;
             if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
         }
+
         #endregion
+
+
+
     }
 }

@@ -20,7 +20,7 @@ xmlns:vm="using:SoonZik.ViewModel">
         <vm:InscriptionViewModel x:Key="InscriptionViewModel" />
         <vm:GeolocalisationViewModel x:Key="GeolocalisationViewModel" />
         <vm:PlaylistViewModel x:Key="PlaylistViewModel" />
-
+        
         <DataTemplate x:Key="SizePivotHeader">
             <ContentPresenter>
                 <TextBlock Text="{Binding}" FontFamily="Roboto" FontSize="100" />

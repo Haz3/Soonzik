@@ -7,6 +7,7 @@
     xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
     xmlns:core="using:Microsoft.Xaml.Interactions.Core"
     xmlns:media="using:Microsoft.Xaml.Interactions.Media"
+    xmlns:controls="using:SoonZik.Controls"
     mc:Ignorable="d">
 
     <UserControl.Resources>
@@ -31,8 +32,8 @@
         </Storyboard>
         <Storyboard x:ConnectionId='2' x:Name="SearchAloneBack"                                        >
             <DoubleAnimation Duration="0:0:0.25" To="0" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)" Storyboard.TargetName="SearchGrid" d:IsOptimized="True"/>
-        </Storyboard> 
-        
+        </Storyboard>
+
         <DataTemplate x:Key="MenuListItemTemplate">
             <Grid x:ConnectionId='8' x:Name="GridItemMenu" Height="50"                               >
                 <Grid.ColumnDefinitions>
@@ -43,32 +44,32 @@
                 <TextBlock Margin="15,0,0,0" Grid.Column="1" HorizontalAlignment="Center" Text="{Binding Title}" VerticalAlignment="Center" FontSize="20"/>
             </Grid>
         </DataTemplate>
-        
-        <DataTemplate x:Key="UserItemTemplate">
+
+        <DataTemplate x:Key="UserItemTemplate" x:Name="UserDataTemplate">
             <StackPanel x:ConnectionId='7' Margin="0,0,0,30" x:Name="UsersStackPanel"                                  >
                 <TextBlock Text="{Binding Path=username}"/>
             </StackPanel>
         </DataTemplate>
 
-        <DataTemplate x:Key="ArtistItemTemplate">
+        <DataTemplate x:Key="ArtistItemTemplate" x:Name="ArtisteDataTemplate">
             <StackPanel x:ConnectionId='6' Margin="0,0,0,30" x:Name="ArtistStackPanel"                                   >
                 <TextBlock Text="{Binding Path=username}"/>
             </StackPanel>
         </DataTemplate>
 
-        <DataTemplate x:Key="MusicItemTemplate">
+        <DataTemplate x:Key="MusicItemTemplate" x:Name="MusicDataTemplate">
             <StackPanel x:ConnectionId='5' Margin="0,0,0,30" x:Name="MusicStackPanel"                                  >
-                <TextBlock Text="{Binding Path=title}"/>
+                <TextBlock Text="{Binding Path=music.title}"/>
             </StackPanel>
         </DataTemplate>
 
-        <DataTemplate x:Key="AlbumItemTemplate">
+        <DataTemplate x:Key="AlbumItemTemplate" x:Name="AlbumDataTemplate">
             <StackPanel x:ConnectionId='4' Margin="0,0,0,30" x:Name="AlbumStackPanel"                                  >
                 <TextBlock Text="{Binding Path=title}"/>
             </StackPanel>
         </DataTemplate>
 
-        <DataTemplate x:Key="PackItemTemplate">
+        <DataTemplate x:Key="PackItemTemplate" x:Name="PackDataTemplate">
             <StackPanel x:ConnectionId='3' Margin="0,0,0,30" x:Name="PackStackPanel"                                 >
                 <TextBlock Text="{Binding Path=Title}"/>
             </StackPanel>
@@ -86,7 +87,7 @@
             <!--<ProgressBar x:Name="ProgressBar" Visibility="Visible" Width="200" IsIndeterminate="True" VerticalAlignment="Center" Height="10" HorizontalAlignment="Center" Foreground="Aqua"></ProgressBar>-->
 
             <ProgressRing x:Name="ProgressTest" Height="15" Width="15" Foreground="Aqua" />
-            
+
             <ToggleButton x:Name="ToggleButtonMenu" Content="ToggleButton" HorizontalAlignment="Left" Height="30" Margin="10,8,0,12" Style="{StaticResource MenuToggleStyle}" VerticalAlignment="Center" Width="30" MinHeight="20" MinWidth="30" IsChecked="False" MaxHeight="30" MaxWidth="30">
                 <interactivity:Interaction.Behaviors>
                     <core:EventTriggerBehavior EventName="Checked">
@@ -141,7 +142,7 @@
             <Button x:Name="AmisButton" Grid.Row="8" Style="{StaticResource FriendButtonStyle}" MinHeight="50" MinWidth="200"/>
             <Button x:Name="AchatButton" Grid.Row="9" Style="{StaticResource AchatButtonStyle}" MinHeight="50" MinWidth="200"/>
             <Button x:Name="ConnexionButton" Grid.Row="10" Style="{StaticResource DecoButtonStyle}" MinHeight="50" MinWidth="200"/>
-            
+
             <!--<ListView x:Name="MenuListView" ItemTemplate="{StaticResource MenuListItemTemplate}" SelectedItem="{Binding SelectedBouttonMenu, Mode=TwoWay}">
                 
             </ListView>-->
@@ -160,7 +161,7 @@
             <TextBox x:ConnectionId='10' x:Name="SearchTextBlock" Grid.Row="0" Width="200" BorderThickness="0" AcceptsReturn="True"
                      Height="13" Margin="50,3,50,0" TextAlignment="Center" VerticalContentAlignment="Center"
                      Foreground="Black" Background="Gray" FontSize="18" x:Uid="Search" PlaceholderText=""                                            />
-            <Grid Grid.Row="1">
+            <!--<Grid Grid.Row="1">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
@@ -174,6 +175,12 @@
                 <ListView Grid.Row="2" x:Name="ResultMusicListView" Header="Musiques" ItemTemplate="{StaticResource MusicItemTemplate}" SelectedItem="{Binding SelectedMusic, Mode=TwoWay}"/>
                 <ListView Grid.Row="3" x:Name="ResultAlbumListView" Header="Albums" ItemTemplate="{StaticResource AlbumItemTemplate}" SelectedItem="{Binding SelectedAlbum, Mode=TwoWay}"/>
                 <ListView Grid.Row="4" x:Name="ResultPackListView" Header="Packs" ItemTemplate="{StaticResource PackItemTemplate}" SelectedItem="{Binding SelectedPack, Mode=TwoWay}"/>
+            </Grid>-->
+
+            <Grid Grid.Row="1">
+                <ListView x:Name="ResultListView" ItemTemplate="{StaticResource MusicItemTemplate}">
+                    
+                </ListView>
             </Grid>
         </Grid>
 
