@@ -207,8 +207,8 @@ module API
         if (@security)
           battle = Battle.find_by_id(@id)
           if (!battle || (battle &&
-                          @artist_id != battle.artist_one_id &&
-                          @artist_id != battle.artist_two_id))
+                          @artist_id.to_i != battle.artist_one_id &&
+                          @artist_id.to_i != battle.artist_two_id))
             codeAnswer 502
             defineHttp :not_found
           else
@@ -228,10 +228,10 @@ module API
               codeAnswer 201
               defineHttp :created
             end
-            @returnValue = { content: oldVote.as_json(only: [:id], :include => {
+            @returnValue[:content] = oldVote.as_json(only: [:id], :include => {
                 battle: { only: Battle.miniKey },
                 artist: { only: User.miniKey }
-              }) }
+              })
           end
         else
           codeAnswer 500

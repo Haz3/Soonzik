@@ -77,13 +77,13 @@ module API
           user = User.find_by_email(@email)
           if (user && user.valid_password?(@password))
             codeAnswer 200
-            @returnValue = { content: user.as_json(:include => {
+            @returnValue[:content] = user.as_json(:include => {
                                                                   :address => { only: Address.miniKey },
                                                                   :friends => { only: User.miniKey },
                                                                   :follows => { only: User.miniKey }
                                                                 },
                                                     :only => User.notRestrictedKey
-                                                  ) }
+                                                  )
           else
             codeAnswer 502
             @httpCode = :not_found
