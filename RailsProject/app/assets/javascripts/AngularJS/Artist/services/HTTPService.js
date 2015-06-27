@@ -117,8 +117,11 @@ SoonzikArtistApp.factory('HTTPService', ['$http', '$location', 'Upload', functio
       .success(successFunction)
       .error(errorFunction);
     },
-    indexGenre: function() {
-      return $http.get("http://api." + url + "/genres");
+    indexInfluences: function() {
+      return $http.get("http://api." + url + "/influences");
+    },
+    updateMusic: function(parameters) {
+      return $http.post("http://artist." + url + "/musics/updateMusic.json", parameters);
     }
   }
 }]);

@@ -153,6 +153,7 @@ Rails.application.routes.draw do
     # Music
     get '/musics' => 'musics#index'
     post '/musics/upload' => 'musics#uploadMusic'
+    post '/musics/updateMusic' => 'musics#updateMusic'
   end
 
   devise_for :admin_users, ActiveAdmin::Devise.config

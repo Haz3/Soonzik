@@ -31,7 +31,7 @@ SoonzikArtistApp.controller('FollowersCtrl', ['$scope', 'SecureAuth', 'HTTPServi
 			}
 			$scope.loading = false;
 
-			$timeout(function() { reload(user_id); }, 10000);
+			$timeout(function() { reload(user_id); }, 50000);
 		}, function(error) {
 			NotificationService.error("An error occured while loading you last followers");
 		});

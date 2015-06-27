@@ -4,7 +4,11 @@ SoonzikArtistApp.controller('MusicCtrl', ['$scope', 'SecureAuth', 'HTTPService',
 	$scope.albums = [];
 	$scope.noLinkMusics = [];
 	$scope.user = false;
-	$scope.genres = [];
+	$scope.influences = [];
+
+	var music_drop = null;
+	var container_drop = null;
+	var album_drop = null;
 
 	$scope.musicInit = function() {
 		var current_user = SecureAuth.getCurrentUser();
@@ -30,8 +34,8 @@ SoonzikArtistApp.controller('MusicCtrl', ['$scope', 'SecureAuth', 'HTTPService',
 					}
 				}
 
-				HTTPService.indexGenre().then(function(response) {
-					$scope.genres = response.data.content;
+				HTTPService.indexInfluences().then(function(response) {
+					$scope.influences = response.data.content;
 					$scope.loading = false;
 				}, function(error) {
 					NotificationService.error("An error occured while loading");
@@ -53,45 +57,77 @@ SoonzikArtistApp.controller('MusicCtrl', ['$scope', 'SecureAuth', 'HTTPService',
 		return false;
 	}
 
+	$scope.musicDrop = function(list, music, album_id) {
+		music_drop = music;
+		container_drop = list;
+		album_drop = album_id;
+		return music;
+	}
+
+	$scope.musicMoved = function(listFrom, index) {
+		elem = listFrom.splice(index, 1);
+		var parameters = {
+			id: music_drop.id,
+			music: {
+				album_id: album_drop
+			}
+		};
+		HTTPService.updateMusic(parameters).then(function(response) {
+			music_drop = null;
+			container_drop = null;
+			album_drop = null;
+			console.log(response);
+		}, function(error) {
+			console.log(error);
+			listFrom.push(elem);
+		});
+
+		return true;
+	}
+
 	// For the modal
 	$scope.open = function () {
     var modalInstance = $modal.open({
       templateUrl: '/assets/AngularJS/Artist/views/modalMusic.html.haml',
       controller: 'ModalInstanceCtrl',
       resolve: {
-      	genres: function() {
-      		return $scope.genres;
+      	influences: function() {
+      		return $scope.influences;
       	}
       }
     });
 
     modalInstance.result.then(function (music) {
-    	$scope.noLinkMusics(music);
+    	$scope.noLinkMusics.push(music);
     }, function () {
       console.log('Modal dismissed at: ' + new Date());
     });
   };
 }]);
 
-SoonzikArtistApp.controller('ModalInstanceCtrl', ["$scope", "$modalInstance", "Upload", "HTTPService", "genres", function ($scope, $modalInstance, Upload, HTTPService, genres) {
+SoonzikArtistApp.controller('ModalInstanceCtrl', ["$scope", "$modalInstance", "Upload", "HTTPService", "influences", function ($scope, $modalInstance, Upload, HTTPService, influences) {
 	$scope.music = null;
+	$scope.loading = false;
 	$scope.file = null;
 	$scope.form = {
 		title: "",
 		price: 0,
 		limited: "true"
 	};
-	$scope.genres = genres;
+	$scope.influences = influences;
 	$scope.selected = {
 		selectedGenres: []
 	}
 
   $scope.ok = function () {
-  	HTTPService.uploadMusic($scope.file, { music: $scope.form }, function (evt) {
-			var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+  	var parameters = { music: $scope.form, genres: $scope.selected.selectedGenres };
+  	HTTPService.uploadMusic($scope.file, parameters, function (evt) {
+			$scope.loading = true;
 		}, function (data, status, headers, config) {
+			$scope.loading = false;
 			$modalInstance.close(data.music);
 		}, function (error) {
+			$scope.loading = false;
 			console.log(error);
 		});
   };

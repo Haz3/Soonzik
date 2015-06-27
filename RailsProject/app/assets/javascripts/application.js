@@ -55,6 +55,7 @@
 //= require ./tools/loading-bar.min.js
 //= require ./tools/mm-foundation-tpls-0.6.0.min.js
 //= require ./tools/checklist-model.js
+//= require ./tools/angular-drag-and-drop-lists.min.js
 // require_tree .
 
 $(function(){ $(document).foundation(); });

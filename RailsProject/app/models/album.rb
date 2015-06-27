@@ -51,4 +51,9 @@ class Album < ActiveRecord::Base
   def self.miniKey
     [:id, :title, :price, :image, :yearProd]
   end
+
+  # Get the average of notes
+  def getAverageNote
+    return AlbumNote.where(album_id: self.id).average(:value).to_f
+  end
 end

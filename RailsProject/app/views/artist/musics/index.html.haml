@@ -19,11 +19,11 @@
 				%div
 					.small-9.small-centered.columns
 						%img{ "ng-src" => '{{ "/assets/albums/" + album.image }}' }
-				%ul.musicList
-					%li.text-center{ "ng-repeat" => "music in album.musics" }
+				%ul.musicList{ "dnd-list" => "album.musics", "dnd-drop" => "musicDrop(album.musics, item, album.id)" }
+					%li.text-center{ "ng-repeat" => "music in album.musics", "dnd-draggable" => "music", "dnd-effect-allowed" => "move", "dnd-moved" => "musicMoved(album.musics, $index)" }
 						%p.label.small-6 {{ music.title }}
 		%div
 			%h4 Without album associated
-			%ul.musicList.no-bullet.small-12.medium-6.large-4
-				%li.text-center{ "ng-repeat" => "noLinkMusic in noLinkMusics" }
+			%ul.musicList.no-bullet.small-12.medium-6.large-4{ "dnd-list" => "noLinkMusics", "dnd-drop" => "musicDrop(noLinkMusics, item, null)" }
+				%li.text-center{ "ng-repeat" => "noLinkMusic in noLinkMusics", "dnd-draggable" => "noLinkMusic", "dnd-moved" => "musicMoved(noLinkMusics, $index)", "dnd-effect-allowed" => "move" }
 					%p.label.small-6 {{ noLinkMusic.title }}

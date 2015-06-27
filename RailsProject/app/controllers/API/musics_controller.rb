@@ -33,11 +33,12 @@ module API
           @returnValue = { content: Music.count }
         else
           @returnValue = { content: Music.all.as_json(:only => Music.miniKey, :include => {
-                                                                                          :album => { :only => Album.miniKey },
-                                                                                          :genres => { :only => Genre.miniKey },
-                                                                                          :user => {:only => User.miniKey},
-                                                                                          descriptions: {  :only => Description.miniKey }
-                                                                                        }) }
+                                                        :album => { :only => Album.miniKey },
+                                                        :genres => { :only => Genre.miniKey },
+                                                        :user => {:only => User.miniKey},
+                                                        descriptions: {  :only => Description.miniKey }
+                                                      },
+                                                      methods: :getAverageNote)}
         end
         if (@returnValue[:content].size == 0)
           codeAnswer 202
@@ -71,11 +72,12 @@ module API
           defineHttp :not_found
         else
           @returnValue = { content: music.as_json(:only => Music.miniKey, :include => {
-                                      :album => { :only => Album.miniKey },
-                                      :genres => { :only => Genre.miniKey },
-                                      :user => {:only => User.miniKey},
-                                      descriptions: {  :only => Description.miniKey }
-                                      }) }
+                                                    :album => { :only => Album.miniKey },
+                                                    :genres => { :only => Genre.miniKey },
+                                                    :user => {:only => User.miniKey},
+                                                    descriptions: {  :only => Description.miniKey }
+                                                  },
+                                                  methods: :getAverageNote) }
           codeAnswer 200
         end
       rescue
@@ -173,11 +175,12 @@ module API
         end
 
         @returnValue = { content: music_object.as_json(:only => Music.miniKey, :include => {
-                                      :album => { :only => Album.miniKey },
-                                      :genres => { :only => Genre.miniKey },
-                                      :user => {:only => User.miniKey},
-                                      descriptions: {  :only => Description.miniKey }
-                                      }) }
+                                                        :album => { :only => Album.miniKey },
+                                                        :genres => { :only => Genre.miniKey },
+                                                        :user => {:only => User.miniKey},
+                                                        descriptions: {  :only => Description.miniKey }
+                                                      },
+                                                      methods: :getAverageNote) }
 
         if (music_object.size == 0)
           codeAnswer 202
