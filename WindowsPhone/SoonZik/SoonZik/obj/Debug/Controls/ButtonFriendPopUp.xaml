@@ -8,16 +8,19 @@
     mc:Ignorable="d"
     d:DesignHeight="150"
     d:DesignWidth="200">
-    
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="50" />
             <RowDefinition Height="50" />
             <RowDefinition Height="50" />
         </Grid.RowDefinitions>
-        <Button x:ConnectionId='1' Grid.Row="0" x:Uid="SendMessage" Content="" HorizontalAlignment="Center" VerticalAlignment="Center"                     BorderThickness="0,0,0,0" />
-        <Button x:ConnectionId='2' Grid.Row="1" x:Uid="CheckProfile" Content="" HorizontalAlignment="Center" VerticalAlignment="Center"                    BorderThickness="0,0,0,0"/>
-        <Button x:ConnectionId='3' Grid.Row="2" x:Uid="Delete" Content="" HorizontalAlignment="Center" VerticalAlignment="Center"                       BorderThickness="0,0,0,0"/>
+        <Button x:ConnectionId='1' Grid.Row="0" x:Uid="SendMessage" Content="" HorizontalAlignment="Center" VerticalAlignment="Center"
+                                    BorderThickness="0,0,0,0" />
+        <Button x:ConnectionId='2' Grid.Row="1" x:Uid="CheckProfile" Content="" HorizontalAlignment="Center" VerticalAlignment="Center"
+                                   BorderThickness="0,0,0,0" />
+        <Button x:ConnectionId='3' Grid.Row="2" x:Uid="Delete" Content="" HorizontalAlignment="Center" VerticalAlignment="Center"
+                                      BorderThickness="0,0,0,0" />
     </Grid>
 </UserControl>
 

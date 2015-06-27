@@ -11,15 +11,19 @@
 
     <Grid Background="#d3d7da" Margin="0,0,0,0">
         <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="20"/>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="20" />
         </Grid.RowDefinitions>
         <Grid Background="White" Grid.Row="0">
-            <Image Source="../Resources/Icones/disc.png" Height="70" HorizontalAlignment="Center"/>
-            <TextBlock Text="News Title" FontSize="15" Foreground="#424242" FontFamily="Calibri" Height="25" Width="90" Margin="111,15,49,60"/>
-            <TextBlock Text="Le nouvel album de :" FontSize="10" Foreground="#424242" FontFamily="Calibri" Width="100" Height="15" Margin="111,59,39,26"/>
-            <TextBlock Text="Artist Name" FontSize="10" Foreground="#424242" FontFamily="Calibri" Width="100" Height="15" Margin="111,74,39,11"/>
+            <Image Source="../Resources/Icones/disc.png" Height="70" HorizontalAlignment="Center" />
+            <TextBlock Text="News Title" FontSize="15" Foreground="#424242" FontFamily="Calibri" Height="25" Width="90"
+                       Margin="111,15,49,60" />
+            <TextBlock Text="Le nouvel album de :" FontSize="10" Foreground="#424242" FontFamily="Calibri" Width="100"
+                       Height="15" Margin="111,59,39,26" />
+            <TextBlock Text="Artist Name" FontSize="10" Foreground="#424242" FontFamily="Calibri" Width="100"
+                       Height="15" Margin="111,74,39,11" />
         </Grid>
-        <TextBlock Grid.Row="2" Text="Electronic" VerticalAlignment="Center" Foreground="#424242" FontSize="10" FontFamily="Calibri" HorizontalAlignment="Center"/>
+        <TextBlock Grid.Row="2" Text="Electronic" VerticalAlignment="Center" Foreground="#424242" FontSize="10"
+                   FontFamily="Calibri" HorizontalAlignment="Center" />
     </Grid>
 </UserControl>

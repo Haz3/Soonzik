@@ -59,17 +59,17 @@ namespace SoonZik.HttpRequest
             return await GetHttpPostResponse(request, postData);
         }
 
-        public async Task<String> AddFriend(string sha256, string friendId)
+        public async Task<String> AddFriend(string sha256, string friendId, string userId)
         {
-            HttpWebRequest request = (HttpWebRequest) WebRequest.Create(ApiUrl + "users/addfriend/");
-            var postData = "";
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(ApiUrl + "users/addfriend");
+            var postData = "friend_id=" + friendId + "&secureKey=" + sha256 + "&user_id=" + userId;
             return await GetHttpPostResponse(request, postData);
         }
 
-        public async Task<String> DelFriend(string sha256, string friendId)
+        public async Task<String> DelFriend(string sha256, string friendId, string userId)
         {
-            HttpWebRequest request = (HttpWebRequest) WebRequest.Create(ApiUrl + "users/delfriend/");
-            var postData = "";
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(ApiUrl + "users/delfriend");
+            var postData = "friend_id=" + friendId + "&secureKey=" + sha256 + "&user_id=" + userId;
             return await GetHttpPostResponse(request, postData);
         }
 

@@ -11,16 +11,19 @@
 
     <Grid x:Name="GridDetailNews" Background="Transparent">
         <Grid.RowDefinitions>
-            <RowDefinition Height="150"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="150" />
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        
+
         <Grid Grid.Row="0">
-            <TextBlock Foreground="White" Text="{Binding SelectNews.Title}" VerticalAlignment="Top" HorizontalAlignment="Center" FontSize="30"/>
+            <TextBlock Foreground="White" Text="{Binding SelectNews.Title}" VerticalAlignment="Top"
+                       HorizontalAlignment="Center" FontSize="30" />
         </Grid>
         <Grid Grid.Row="1">
-                <TextBlock Foreground="White" VerticalAlignment="Bottom" HorizontalAlignment="Left" FontSize="15" Text="{Binding SelectNews.User.username}"/>
-                <TextBlock Foreground="White" VerticalAlignment="Bottom" HorizontalAlignment="Right" FontSize="15" Text="{Binding SelectNews.Date}"/>
+            <TextBlock Foreground="White" VerticalAlignment="Bottom" HorizontalAlignment="Left" FontSize="15"
+                       Text="{Binding SelectNews.User.username}" />
+            <TextBlock Foreground="White" VerticalAlignment="Bottom" HorizontalAlignment="Right" FontSize="15"
+                       Text="{Binding SelectNews.Date}" />
         </Grid>
     </Grid>
 </Page>

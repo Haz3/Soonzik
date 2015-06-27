@@ -11,10 +11,9 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
 
-
     <interactivity:Interaction.Behaviors>
         <core:EventTriggerBehavior EventName="Loaded">
-            <core:InvokeCommandAction Command="{Binding SelectionCommand}"/>
+            <core:InvokeCommandAction Command="{Binding SelectionCommand}" />
         </core:EventTriggerBehavior>
     </interactivity:Interaction.Behaviors>
 
@@ -22,56 +21,60 @@
         <DataTemplate x:Key="PackItemTemplate">
             <Grid>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="110"/>
-                    <ColumnDefinition Width="20*"/>
-                    <ColumnDefinition Width="100"/>
+                    <ColumnDefinition Width="110" />
+                    <ColumnDefinition Width="20*" />
+                    <ColumnDefinition Width="100" />
                 </Grid.ColumnDefinitions>
-                <Image Grid.Column="1" Source="{Binding Path=BitmapImage}" Height="200" Width="200"/>
+                <Image Grid.Column="1" Source="{Binding Path=BitmapImage}" Height="200" Width="200" />
             </Grid>
         </DataTemplate>
 
         <DataTemplate x:Key="AlbumTemplate">
             <Grid Height="70" Margin="20,0,0,0">
-                <Border BorderThickness="0,0,0,0.5" Width="350" BorderBrush="White"></Border>
-                <Image x:Name="AlbumImage" Source="../Resources/Icones/MenuExplorer.png" Height="40" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10,0,0,0"/>
-                <TextBlock x:Name="MusicTitle" Text="{Binding title}" FontSize="25" HorizontalAlignment="Center"/>
-                <Image x:Name="MoreOption" Source="../Resources/Icones/menu.png" Height="30" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,10,0"/>
+                <Border BorderThickness="0,0,0,0.5" Width="350" BorderBrush="White" />
+                <Image x:Name="AlbumImage" Source="../Resources/Icones/MenuExplorer.png" Height="40"
+                       VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10,0,0,0" />
+                <TextBlock x:Name="MusicTitle" Text="{Binding title}" FontSize="25" HorizontalAlignment="Center" />
+                <Image x:Name="MoreOption" Source="../Resources/Icones/menu.png" Height="30" VerticalAlignment="Center"
+                       HorizontalAlignment="Right" Margin="0,0,10,0" />
             </Grid>
         </DataTemplate>
     </Page.Resources>
 
     <Grid x:Name="GlobalGrid">
         <Grid.RowDefinitions>
-            <RowDefinition Height="250"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="250" />
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <ListView Grid.Row="0" ItemsSource="{Binding Datas}" ItemTemplate="{StaticResource PackItemTemplate}" SelectedItem="{Binding SelectedData, Mode=TwoWay}"
-                    ScrollViewer.HorizontalScrollBarVisibility="Auto"
-                    ScrollViewer.VerticalScrollBarVisibility="Disabled"
-                    ScrollViewer.HorizontalScrollMode="Enabled"
-                    ScrollViewer.VerticalScrollMode="Disabled"
-                    ScrollViewer.ZoomMode="Disabled" VerticalContentAlignment="Center"
-                    >
+        <ListView Grid.Row="0" ItemsSource="{Binding Datas}" ItemTemplate="{StaticResource PackItemTemplate}"
+                  SelectedItem="{Binding SelectedData, Mode=TwoWay}"
+                  ScrollViewer.HorizontalScrollBarVisibility="Auto"
+                  ScrollViewer.VerticalScrollBarVisibility="Disabled"
+                  ScrollViewer.HorizontalScrollMode="Enabled"
+                  ScrollViewer.VerticalScrollMode="Disabled"
+                  ScrollViewer.ZoomMode="Disabled" VerticalContentAlignment="Center">
             <ListView.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <VirtualizingStackPanel Orientation="Horizontal"/>
+                    <VirtualizingStackPanel Orientation="Horizontal" />
                 </ItemsPanelTemplate>
             </ListView.ItemsPanel>
         </ListView>
 
         <Grid Grid.Row="1">
-            <Pivot x:Name="PivotGlobal" HeaderTemplate="{StaticResource SizeHeaderGlobalPivot}" Foreground="Transparent" RenderTransformOrigin="0.5,0.5" Style="{StaticResource PivotStyle1}" Margin="0,20,0,0" >
+            <Pivot x:Name="PivotGlobal" HeaderTemplate="{StaticResource SizeHeaderGlobalPivot}"
+                   Foreground="Transparent" RenderTransformOrigin="0.5,0.5" Style="{StaticResource PivotStyle1}"
+                   Margin="0,20,0,0">
                 <PivotItem x:Uid="AlbumPivot" Header="">
-                    <ListBox Background="Transparent" x:Name="ListBoxAlbum" ItemsSource="{Binding ListAlbums}" ItemTemplate="{StaticResource AlbumTemplate}" SelectedItem="{Binding SelectedAlbum, Mode=TwoWay}">
-                        <TextBlock Text="{Binding ThePack.Title, Mode=TwoWay}" FontSize="30"></TextBlock>
+                    <ListBox Background="Transparent" x:Name="ListBoxAlbum" ItemsSource="{Binding ListAlbums}"
+                             ItemTemplate="{StaticResource AlbumTemplate}"
+                             SelectedItem="{Binding SelectedAlbum, Mode=TwoWay}">
+                        <TextBlock Text="{Binding ThePack.Title, Mode=TwoWay}" FontSize="30" />
 
                     </ListBox>
                 </PivotItem>
                 <PivotItem x:Uid="ArtistPivot" Header="">
-                    <ListBox Background="Transparent" x:Name="ListBoxArtiste">
-
-                    </ListBox>
+                    <ListBox Background="Transparent" x:Name="ListBoxArtiste" />
                 </PivotItem>
             </Pivot>
         </Grid>

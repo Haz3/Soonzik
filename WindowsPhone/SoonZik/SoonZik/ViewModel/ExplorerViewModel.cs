@@ -15,48 +15,6 @@ namespace SoonZik.ViewModel
 {
     public class ExplorerViewModel : ViewModelBase
     {
-        #region Attribute
-
-        public INavigationService Navigation;
-
-        private ObservableCollection<Genre> _listGenres;
-        public ObservableCollection<Genre> ListGenres
-        {
-            get { return _listGenres; }
-            set
-            {
-                _listGenres = value;
-                RaisePropertyChanged("ListGenres");
-            }
-        }
-
-        private ObservableCollection<Music> _listMusique;
-        public ObservableCollection<Music> ListMusique
-        {
-            get { return _listMusique; }
-            set
-            {
-                _listMusique = value;
-                RaisePropertyChanged("ListMusique");
-            }
-        }
-
-        private ObservableCollection<User> _listArtiste;
-        public ObservableCollection<User> ListArtiste
-        {
-            get { return _listArtiste; }
-            set
-            {
-                _listArtiste = value;
-                RaisePropertyChanged("ListArtiste");
-            }
-        }
-
-        public Music SelectedMusic { get; set; }
-        public static Music PlayerSelectedMusic { get; set; }
-        public RelayCommand MusiCommand { get; set; }
-        #endregion
-
         #region Ctor
 
         public ExplorerViewModel()
@@ -71,7 +29,54 @@ namespace SoonZik.ViewModel
 
         #endregion
 
+        #region Attribute
+
+        public INavigationService Navigation;
+
+        private ObservableCollection<Genre> _listGenres;
+
+        public ObservableCollection<Genre> ListGenres
+        {
+            get { return _listGenres; }
+            set
+            {
+                _listGenres = value;
+                RaisePropertyChanged("ListGenres");
+            }
+        }
+
+        private ObservableCollection<Music> _listMusique;
+
+        public ObservableCollection<Music> ListMusique
+        {
+            get { return _listMusique; }
+            set
+            {
+                _listMusique = value;
+                RaisePropertyChanged("ListMusique");
+            }
+        }
+
+        private ObservableCollection<User> _listArtiste;
+
+        public ObservableCollection<User> ListArtiste
+        {
+            get { return _listArtiste; }
+            set
+            {
+                _listArtiste = value;
+                RaisePropertyChanged("ListArtiste");
+            }
+        }
+
+        public Music SelectedMusic { get; set; }
+        public static Music PlayerSelectedMusic { get; set; }
+        public RelayCommand MusiCommand { get; set; }
+
+        #endregion
+
         #region Method
+
         public void LoadContent()
         {
             var request = new HttpRequestGet();
@@ -83,12 +88,9 @@ namespace SoonZik.ViewModel
                 {
                     foreach (var item in test)
                     {
-                        CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
-                        {
-                            ListGenres.Add(item);
-                        });
+                        CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
+                            () => { ListGenres.Add(item); });
                     }
-
                 }
             });
             var listUser = request.GetListObject(new List<User>(), "users");
@@ -101,15 +103,14 @@ namespace SoonZik.ViewModel
                     {
                         var res = request.GetArtist(new Artist(), "users", item.id.ToString());
                         res.ContinueWith(delegate(Task<object> obj)
+                        {
+                            CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
                             {
-                                CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
-                                {
-                                    var art = obj.Result as Artist;
-                                    if (art != null && art.artist)
-                                        ListArtiste.Add(item);
-                                });
-                                
+                                var art = obj.Result as Artist;
+                                if (art != null && art.artist)
+                                    ListArtiste.Add(item);
                             });
+                        });
                     }
                 }
             });
@@ -121,12 +122,9 @@ namespace SoonZik.ViewModel
                 {
                     foreach (var item in test)
                     {
-                        CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
-                        {
-                            ListMusique.Add(item);
-                        });
+                        CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
+                            () => { ListMusique.Add(item); });
                     }
-
                 }
             });
         }
@@ -137,6 +135,7 @@ namespace SoonZik.ViewModel
             Singleton.Instance().SelectedMusicSingleton = SelectedMusic;
             Navigation.Navigate(new PlayerControl().GetType());
         }
+
         #endregion
     }
 }

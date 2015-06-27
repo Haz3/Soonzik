@@ -11,21 +11,21 @@
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="50"/>
+            <RowDefinition Height="50" />
             <RowDefinition Height="*" />
             <RowDefinition Height="60" />
         </Grid.RowDefinitions>
 
-        <TextBlock x:Uid="Share" Text="" VerticalAlignment="Center" HorizontalAlignment="Center" 
-                   FontSize="30" Foreground="White" FontFamily="{StaticResource Roboto}"/>
-        
-        <TextBox Grid.Row="1" Width="200" x:Name="TextBoxShare" Height="160" 
+        <TextBlock x:Uid="Share" Text="" VerticalAlignment="Center" HorizontalAlignment="Center"
+                   FontSize="30" Foreground="White" FontFamily="{StaticResource Roboto}" />
+
+        <TextBox Grid.Row="1" Width="200" x:Name="TextBoxShare" Height="160"
                  Background="White" Opacity="0.2" BorderThickness="0,0,0,0" Foreground="White"
-                 HorizontalAlignment="Center" VerticalAlignment="Center"/>
-        
+                 HorizontalAlignment="Center" VerticalAlignment="Center" />
+
         <Image x:Name="FacebookShare" Grid.Row="2" VerticalAlignment="Center" Source="../Resources/Icones/facebook.png"
-               Width="50" HorizontalAlignment="Right" Margin="0,0,10,0" Tapped="FacebookShare_OnTapped"/>
+               Width="50" HorizontalAlignment="Right" Margin="0,0,10,0" Tapped="FacebookShare_OnTapped" />
         <Image x:Name="TwitterShare" Grid.Row="2" VerticalAlignment="Center" Source="../Resources/Icones/twitter.png"
-               Width="50" HorizontalAlignment="Right" Margin="0,0,70,0" Tapped="TwitterShare_OnTapped"/>
+               Width="50" HorizontalAlignment="Right" Margin="0,0,70,0" Tapped="TwitterShare_OnTapped" />
     </Grid>
 </UserControl>

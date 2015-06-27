@@ -74,6 +74,12 @@ namespace SoonZik.HttpRequest
             return await DoRequestForObject(myObject, request);
         }
 
+        public async Task<object> GetFriends(object myObject, string element, string id)
+        {
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(ApiUrl + element + "/" + id + "/friends");
+            return await DoRequestForObject(myObject, request);
+        }
+
         private static async Task<string> DoRequest(HttpWebRequest request)
         {
             request.Method = HttpMethods.Get;

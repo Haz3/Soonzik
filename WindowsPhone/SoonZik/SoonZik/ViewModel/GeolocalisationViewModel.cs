@@ -7,6 +7,30 @@ namespace SoonZik.ViewModel
 {
     public class GeolocalisationViewModel : ViewModelBase
     {
+        #region Ctor
+
+        public GeolocalisationViewModel()
+        {
+            var task = Task.Run(async () => await InitVariable());
+            task.Wait();
+        }
+
+        #endregion
+
+        #region Method
+
+        private async Task InitVariable()
+        {
+            _myGeolocator = new Geolocator();
+            var Geoposition = _myGeolocator.GetGeopositionAsync();
+
+            _myGeolocator = new Geolocator();
+            var myGeoposition = await _myGeolocator.GetGeopositionAsync();
+            UserLocation = myGeoposition.Coordinate;
+        }
+
+        #endregion
+
         #region Attrivute
 
         private Geolocator _myGeolocator;
@@ -22,28 +46,7 @@ namespace SoonZik.ViewModel
                 RaisePropertyChanged("UserLocation");
             }
         }
-        #endregion
 
-        #region Ctor
-
-        public GeolocalisationViewModel()
-        {
-            var task = Task.Run(async () => await InitVariable());
-            task.Wait();
-        }
-        #endregion
-
-        #region Method
-
-        private async Task InitVariable()
-        {
-            _myGeolocator = new Geolocator();
-            var Geoposition = _myGeolocator.GetGeopositionAsync();
-
-            _myGeolocator = new Geolocator();
-            Geoposition myGeoposition = await _myGeolocator.GetGeopositionAsync();
-            UserLocation = myGeoposition.Coordinate;
-        }
         #endregion
     }
 }

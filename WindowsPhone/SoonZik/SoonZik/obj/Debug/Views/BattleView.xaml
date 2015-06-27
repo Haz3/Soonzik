@@ -8,9 +8,9 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-    
+
     <Page.DataContext>
-        <data:BattleViewModel/>
+        <data:BattleViewModel />
     </Page.DataContext>
 
     <Grid x:Name="GlobalGrid">
@@ -30,12 +30,12 @@
 
         <!-- Row 2 -->
         <Grid Background="Transparent">
-            <Image Source="../Resources/stromae.jpg" Height="150" Margin="-87,60,87,290">
-                
-            </Image>
-            
-            <Image Source="../Resources/guetta.jpg" Height="150" Margin="81,215,-81,135"/>
-            <TextBlock VerticalAlignment="Bottom" FontSize="25" Text="Glissez l'image de l'artiste à gauche ou à droite pour faire votre choix" TextWrapping="Wrap" TextAlignment="Center" Margin="0,0,0, 40"></TextBlock>
+            <Image Source="../Resources/stromae.jpg" Height="150" Margin="-87,60,87,290" />
+
+            <Image Source="../Resources/guetta.jpg" Height="150" Margin="81,215,-81,135" />
+            <TextBlock VerticalAlignment="Bottom" FontSize="25"
+                       Text="Glissez l'image de l'artiste à gauche ou à droite pour faire votre choix"
+                       TextWrapping="Wrap" TextAlignment="Center" Margin="0,0,0, 40" />
         </Grid>
 
         <!-- Row 3 --><!--

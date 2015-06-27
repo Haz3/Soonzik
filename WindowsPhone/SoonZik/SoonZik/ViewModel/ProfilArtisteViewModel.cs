@@ -1,10 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Windows.ApplicationModel.Core;
-using Windows.Foundation.Collections;
 using Windows.UI.Core;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
@@ -19,15 +17,30 @@ namespace SoonZik.ViewModel
 {
     public class ProfilArtisteViewModel : ViewModelBase
     {
+        #region ctor
+
+        public ProfilArtisteViewModel()
+        {
+            if (TheUser != null)
+            {
+                SelectionCommand = new RelayCommand(SelectionExecute);
+                FollowCommand = new RelayCommand(FollowCommandExecute);
+                ItemClickCommand = new RelayCommand(ItemClickCommandExecute);
+                ListAlbums = new ObservableCollection<Album>();
+                AddCommand = new RelayCommand(AddFriendExecute);
+            }
+        }
+
+        #endregion
+
         #region Attribute
 
+        public ICommand AddCommand { get; private set; }
+
         private bool _follow;
-        private ICommand _followCommand;
-        public ICommand FollowCommand
-        {
-            get { return _followCommand; }
-        }
+        public ICommand FollowCommand { get; private set; }
         private User _theArtiste;
+
         public User TheArtiste
         {
             get { return _theArtiste; }
@@ -51,6 +64,7 @@ namespace SoonZik.ViewModel
         }
 
         private ObservableCollection<Album> _listAlbums;
+
         public ObservableCollection<Album> ListAlbums
         {
             get { return _listAlbums; }
@@ -63,13 +77,10 @@ namespace SoonZik.ViewModel
 
         public static User TheUser { get; set; }
 
-        private ICommand _selectionCommand;
-        public ICommand SelectionCommand
-        {
-            get { return _selectionCommand; }
-        }
+        public ICommand SelectionCommand { get; private set; }
 
         private RelayCommand _itemClickCommand;
+
         public RelayCommand ItemClickCommand
         {
             get { return _itemClickCommand; }
@@ -81,6 +92,7 @@ namespace SoonZik.ViewModel
         }
 
         private Album _theAlbum;
+
         public Album TheAlbum
         {
             get { return _theAlbum; }
@@ -90,24 +102,11 @@ namespace SoonZik.ViewModel
                 RaisePropertyChanged("TheAlbum");
             }
         }
-        #endregion
-
-        #region ctor
-
-        public ProfilArtisteViewModel()
-        {
-            if (TheUser != null)
-            {
-                _selectionCommand = new RelayCommand(SelectionExecute);
-                _followCommand = new RelayCommand(FollowCommandExecute);
-                ItemClickCommand = new RelayCommand(ItemClickCommandExecute);
-                ListAlbums = new ObservableCollection<Album>();
-            }
-        }
 
         #endregion
 
         #region Method
+
         public void Charge()
         {
             var request = new HttpRequestGet();
@@ -128,7 +127,6 @@ namespace SoonZik.ViewModel
                         }
                     }
                 });
-
             });
         }
 
@@ -141,29 +139,32 @@ namespace SoonZik.ViewModel
             }
             FollowText = _follow ? "Unfollow" : "Follow";
         }
-        
+
         private void Follow(HttpRequestPost post, string cryptographic, HttpRequestGet get)
         {
-            var resPost = post.Follow(cryptographic, TheArtiste.id.ToString(), Singleton.Instance().CurrentUser.id.ToString());
+            var resPost = post.Follow(cryptographic, TheArtiste.id.ToString(),
+                Singleton.Instance().CurrentUser.id.ToString());
             resPost.ContinueWith(delegate(Task<string> tmp)
             {
-                var test = tmp.Result as string;
+                var test = tmp.Result;
                 if (test != null)
                 {
                     CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
                     {
-                        var followers = get.GetFollows(new List<User>(), "users", Singleton.Instance().CurrentUser.id.ToString());
+                        var followers = get.GetFollows(new List<User>(), "users",
+                            Singleton.Instance().CurrentUser.id.ToString());
                         followers.ContinueWith(delegate(Task<object> task1)
                         {
                             var res = task1.Result as List<User>;
                             if (res != null)
                             {
-                                CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
-                                {
-                                    Singleton.Instance().CurrentUser.follows = res;
-                                    var a = TheArtiste;
-                                    SetFollowText();
-                                });
+                                CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
+                                    () =>
+                                    {
+                                        Singleton.Instance().CurrentUser.follows = res;
+                                        var a = TheArtiste;
+                                        SetFollowText();
+                                    });
                             }
                         });
                     });
@@ -173,33 +174,37 @@ namespace SoonZik.ViewModel
 
         private void Unfollow(HttpRequestPost post, string cryptographic, HttpRequestGet get)
         {
-            var resPost = post.Unfollow(cryptographic, TheArtiste.id.ToString(), Singleton.Instance().CurrentUser.id.ToString());
+            var resPost = post.Unfollow(cryptographic, TheArtiste.id.ToString(),
+                Singleton.Instance().CurrentUser.id.ToString());
             resPost.ContinueWith(delegate(Task<string> tmp)
             {
-                var test = tmp.Result as string;
+                var test = tmp.Result;
                 if (test != null)
                 {
                     CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
                     {
-                        var followers = get.GetFollows(new List<User>(), "users", Singleton.Instance().CurrentUser.id.ToString());
+                        var followers = get.GetFollows(new List<User>(), "users",
+                            Singleton.Instance().CurrentUser.id.ToString());
                         followers.ContinueWith(delegate(Task<object> task1)
                         {
                             var res = task1.Result as List<User>;
                             if (res != null)
                             {
-                                CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
-                                {
-                                    Singleton.Instance().CurrentUser.follows = res;
-                                    var a = TheArtiste;
-                                    _follow = false;
-                                    SetFollowText();
-                                });
+                                CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
+                                    () =>
+                                    {
+                                        Singleton.Instance().CurrentUser.follows = res;
+                                        var a = TheArtiste;
+                                        _follow = false;
+                                        SetFollowText();
+                                    });
                             }
                         });
                     });
                 }
             });
         }
+
         #endregion
 
         #region Method Command
@@ -230,15 +235,21 @@ namespace SoonZik.ViewModel
                 if (key != null)
                 {
                     var stringEncrypt = KeyHelpers.GetUserKeyFromResponse(key);
-                    var cryptographic = EncriptSha256.EncriptStringToSha256(Singleton.Instance().CurrentUser.salt + stringEncrypt);
+                    var cryptographic =
+                        EncriptSha256.EncriptStringToSha256(Singleton.Instance().CurrentUser.salt + stringEncrypt);
                     if (_follow)
                         Unfollow(post, cryptographic, get);
                     else if (!_follow)
                         Follow(post, cryptographic, get);
                 }
             });
-
         }
+
+        private void AddFriendExecute()
+        {
+            AddDelFriendHelpers.GetUserKeyForFriend(TheArtiste.id.ToString());
+        }
+
         #endregion
     }
 }

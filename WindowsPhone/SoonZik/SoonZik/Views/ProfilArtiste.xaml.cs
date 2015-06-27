@@ -8,7 +8,7 @@ using SoonZik.ViewModel;
 namespace SoonZik.Views
 {
     /// <summary>
-    /// Une page vide peut être utilisée seule ou constituer une page de destination au sein d'un frame.
+    ///     Une page vide peut être utilisée seule ou constituer une page de destination au sein d'un frame.
     /// </summary>
     public sealed partial class ProfilArtiste : Page
     {
@@ -18,10 +18,12 @@ namespace SoonZik.Views
         }
 
         /// <summary>
-        /// Invoqué lorsque cette page est sur le point d'être affichée dans un frame.
+        ///     Invoqué lorsque cette page est sur le point d'être affichée dans un frame.
         /// </summary>
-        /// <param name="e">Données d'événement décrivant la manière dont l'utilisateur a accédé à cette page.
-        /// Ce paramètre est généralement utilisé pour configurer la page.</param>
+        /// <param name="e">
+        ///     Données d'événement décrivant la manière dont l'utilisateur a accédé à cette page.
+        ///     Ce paramètre est généralement utilisé pour configurer la page.
+        /// </param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
         }

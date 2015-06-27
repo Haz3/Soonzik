@@ -18,6 +18,7 @@ namespace SoonZik.ViewModel
         {
             HardwareButtons.BackPressed += HardwareButtonsOnBackPressed;
         }
+
         #endregion
 
         #region Method
@@ -27,7 +28,7 @@ namespace SoonZik.ViewModel
             backPressedEventArgs.Handled = true;
             Navigation.GoBack();
         }
-        #endregion
 
+        #endregion
     }
 }

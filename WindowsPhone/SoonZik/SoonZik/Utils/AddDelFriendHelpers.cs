@@ -3,58 +3,17 @@ using System.Threading.Tasks;
 using Windows.ApplicationModel.Core;
 using Windows.UI.Core;
 using Windows.UI.Popups;
-using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
 using Microsoft.Practices.ServiceLocation;
 using SoonZik.Helpers;
 using SoonZik.HttpRequest;
 using SoonZik.HttpRequest.Poco;
-using SoonZik.Utils;
 using SoonZik.ViewModel;
-using SoonZik.Views;
 
-// Pour en savoir plus sur le modèle d'élément Contrôle utilisateur, consultez la page http://go.microsoft.com/fwlink/?LinkId=234236
-
-namespace SoonZik.Controls
+namespace SoonZik.Utils
 {
-    public sealed partial class ButtonFriendPopUp : UserControl
+    public class AddDelFriendHelpers
     {
-        #region ctor
-
-        public ButtonFriendPopUp(int Id)
-        {
-            InitializeComponent();
-            Navigation = new NavigationService();
-            Friend = Id;
-        }
-
-        #endregion
-
-        #region Attribute
-
-        public int Friend;
-        public INavigationService Navigation;
-
-        #endregion
-
-        #region Method
-
-        private void SendMessage(object sender, RoutedEventArgs e)
-        {
-            Navigation.Navigate(typeof (Conversation));
-        }
-
-        private void GoToProfil(object sender, RoutedEventArgs e)
-        {
-            Singleton.Instance().NewProfilUser = Friend;
-            Singleton.Instance().ItsMe = false;
-            Singleton.Instance().Charge();
-            GlobalMenuControl.MyGrid.Children.Clear();
-            GlobalMenuControl.MyGrid.Children.Add(new ProfilFriendView());
-            FriendViewModel.MeaagePrompt.Hide();
-        }
-
-        private void DeleteContact(object sender, RoutedEventArgs e)
+        public static void GetUserKeyForFriend(string id)
         {
             var post = new HttpRequestPost();
             var get = new HttpRequestGet();
@@ -68,16 +27,14 @@ namespace SoonZik.Controls
                     var stringEncrypt = KeyHelpers.GetUserKeyFromResponse(key);
                     var cryptographic =
                         EncriptSha256.EncriptStringToSha256(Singleton.Instance().CurrentUser.salt + stringEncrypt);
-                    DelFriend(post, cryptographic, get);
+                    AddFriend(post, cryptographic, get, id);
                 }
             });
         }
 
-
-        private void DelFriend(HttpRequestPost post, string cryptographic, HttpRequestGet get)
+        private static void AddFriend(HttpRequestPost post, string cryptographic, HttpRequestGet get, string id)
         {
-            var resPost = post.DelFriend(cryptographic, Friend.ToString(),
-                Singleton.Instance().CurrentUser.id.ToString());
+            var resPost = post.AddFriend(cryptographic, id, Singleton.Instance().CurrentUser.id.ToString());
             resPost.ContinueWith(delegate(Task<string> tmp)
             {
                 var test = tmp.Result;
@@ -101,7 +58,7 @@ namespace SoonZik.Controls
                                             Singleton.Instance().CurrentUser.friends.Add(user);
                                         }
                                         ServiceLocator.Current.GetInstance<FriendViewModel>().UpdateFriend();
-                                        new MessageDialog("Suppression OK").ShowAsync();
+                                        new MessageDialog("Demande effectue").ShowAsync();
                                     });
                             }
                         });
@@ -109,7 +66,5 @@ namespace SoonZik.Controls
                 }
             });
         }
-
-        #endregion
     }
 }

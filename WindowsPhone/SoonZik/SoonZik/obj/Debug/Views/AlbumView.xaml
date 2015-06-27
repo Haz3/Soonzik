@@ -11,36 +11,35 @@
 
     <Grid x:Name="GlobalGrid">
         <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="250"/>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="250" />
         </Grid.RowDefinitions>
         <Grid.Resources>
             <DataTemplate x:Key="MusicTemplate">
                 <Grid x:ConnectionId='1' Height="70" Margin="20,0,0,0"                            >
-                    <Border BorderThickness="0,0,0,1" Width="350" BorderBrush="White"></Border>
-                    <TextBlock x:Name="MusicTitle" Text="{Binding Path=title}" FontSize="25" Margin="20,0,0,0"/>
-                    <TextBlock x:Name="ArtistNameList" Text="{Binding Path=user.Username}" FontSize="15" VerticalAlignment="Bottom" Margin="20,0,0,10"/>
-                    <Image x:Name="MoreOption" Source="../Resources/Icones/menu.png" Height="30" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,20,0"/>
+                    <Border BorderThickness="0,0,0,1" Width="350" BorderBrush="White" />
+                    <TextBlock x:Name="MusicTitle" Text="{Binding Path=title}" FontSize="25" Margin="20,0,0,0" />
+                    <TextBlock x:Name="ArtistNameList" Text="{Binding Path=user.Username}" FontSize="15"
+                               VerticalAlignment="Bottom" Margin="20,0,0,10" />
+                    <Image x:Name="MoreOption" Source="../Resources/Icones/menu.png" Height="30"
+                           VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,20,0" />
                 </Grid>
             </DataTemplate>
         </Grid.Resources>
-        
+
         <Grid Grid.Row="0">
-            <Image Name="AlbumImage" Source="ms-appx:///Resources/Icones/MenuExplorer.png" Width="150" Height="150" HorizontalAlignment="Center" VerticalAlignment="Top" 
-                   Margin="0,30,0,0">
-            </Image>
-            
-            <TextBlock x:Name="AlbumTitle" Text="{Binding TheAlbum.title}" FontSize="30" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,120,0,0">
-                
-            </TextBlock>
+            <Image Name="AlbumImage" Source="ms-appx:///Resources/Icones/MenuExplorer.png" Width="150" Height="150"
+                   HorizontalAlignment="Center" VerticalAlignment="Top"
+                   Margin="0,30,0,0" />
 
-            <TextBlock x:Name="ArtistName" Text="{Binding TheAlbum.user.username}" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,250,0,0">
+            <TextBlock x:Name="AlbumTitle" Text="{Binding TheAlbum.title}" FontSize="30" VerticalAlignment="Center"
+                       HorizontalAlignment="Center" Margin="0,120,0,0" />
 
-            </TextBlock>
+            <TextBlock x:Name="ArtistName" Text="{Binding TheAlbum.user.username}" FontSize="20"
+                       VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,250,0,0" />
         </Grid>
-        <ListView Grid.Row="1" x:Name="MusicListView" ItemsSource="{Binding ListMusics}" ItemTemplate="{StaticResource MusicTemplate}">
-            
-        </ListView>
+        <ListView Grid.Row="1" x:Name="MusicListView" ItemsSource="{Binding ListMusics}"
+                  ItemTemplate="{StaticResource MusicTemplate}" />
 
     </Grid>
 </Page>

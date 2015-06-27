@@ -12,11 +12,11 @@
     xmlns:converters="using:Coding4Fun.Toolkit.Controls.Converters"
     DataContext="{StaticResource MainPageViewModel}"
     Background="#D3D3D3">
-	
-   
+
+
     <Grid x:Name="MainPageGrid">
-        <view:Connexion/>
+        <view:Connexion />
     </Grid>
-		
+
 </Page>
 

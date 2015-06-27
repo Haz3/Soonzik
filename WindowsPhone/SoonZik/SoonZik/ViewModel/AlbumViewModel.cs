@@ -13,11 +13,28 @@ namespace SoonZik.ViewModel
 {
     public class AlbumViewModel : ViewModelBase
     {
+        #region ctor
+
+        public AlbumViewModel()
+        {
+            if (MyAlbum != null)
+            {
+                TheAlbum = MyAlbum;
+                _navigationService = new NavigationService();
+                ItemClickCommand = new RelayCommand(ItemClickCommandExecute);
+                Charge();
+            }
+            //ImageAlbum = TheAlbum.image == String.Empty ? new Uri("ms-appx:///Resources/Icones/disc.png", UriKind.Absolute).ToString() : TheAlbum.image;
+        }
+
+        #endregion
+
         #region Attribute
 
-        private INavigationService _navigationService;
+        private readonly INavigationService _navigationService;
 
         private string _imageAlbum;
+
         public string ImageAlbum
         {
             get { return _imageAlbum; }
@@ -29,6 +46,7 @@ namespace SoonZik.ViewModel
         }
 
         private List<Music> _listMusics;
+
         public List<Music> ListMusics
         {
             get { return _listMusics; }
@@ -40,6 +58,7 @@ namespace SoonZik.ViewModel
         }
 
         private Album _theAlbum;
+
         public Album TheAlbum
         {
             get { return _theAlbum; }
@@ -53,6 +72,7 @@ namespace SoonZik.ViewModel
         public static Album MyAlbum { get; set; }
 
         private RelayCommand _itemClickCommand;
+
         public RelayCommand ItemClickCommand
         {
             get { return _itemClickCommand; }
@@ -62,25 +82,11 @@ namespace SoonZik.ViewModel
                 RaisePropertyChanged("ItemClickCommand");
             }
         }
-        #endregion
 
-        #region ctor
-
-        public AlbumViewModel()
-        {
-            if (MyAlbum != null)
-            {
-                TheAlbum = MyAlbum;
-                _navigationService = new NavigationService();
-                ItemClickCommand = new RelayCommand(ItemClickCommandExecute);
-                Charge();
-            }
-            //ImageAlbum = TheAlbum.image == String.Empty ? new Uri("ms-appx:///Resources/Icones/disc.png", UriKind.Absolute).ToString() : TheAlbum.image;
-
-        }
         #endregion
 
         #region Method
+
         private void ItemClickCommandExecute()
         {
             //PlayerControl. = TheAlbum;
@@ -114,6 +120,7 @@ namespace SoonZik.ViewModel
                 }
             });
         }
+
         #endregion
     }
 }

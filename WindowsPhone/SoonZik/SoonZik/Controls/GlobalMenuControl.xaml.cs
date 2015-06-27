@@ -11,11 +11,8 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Animation;
-using Coding4Fun.Toolkit.Controls.Converters;
 using GalaSoft.MvvmLight.Command;
-using GalaSoft.MvvmLight.Helpers;
 using SoonZik.HttpRequest;
 using SoonZik.HttpRequest.Poco;
 using SoonZik.Properties;
@@ -32,6 +29,17 @@ namespace SoonZik.Controls
 {
     public sealed partial class GlobalMenuControl : UserControl, INotifyPropertyChanged
     {
+        #region NotifyPropertyCahnge
+
+        [NotifyPropertyChangedInvocator]
+        private void RaisePropertyChange(string propertyName)
+        {
+            var handler = PropertyChanged;
+            if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        #endregion
+
         #region Attribute
 
         #region Attribute Headers
@@ -240,7 +248,7 @@ namespace SoonZik.Controls
                     SetChildren(new GeolocalisationView());
             }
             else if (SelectedBouttonMenu.PageBoutton.Equals(new Connexion()))
-                _navigationService.Navigate(typeof(Connexion));
+                _navigationService.Navigate(typeof (Connexion));
             else
             {
                 var obj = SelectedBouttonMenu.PageBoutton as UIElement;
@@ -295,7 +303,7 @@ namespace SoonZik.Controls
 
         private void GoToMondeMusical()
         {
-            Geolocator locator = new Geolocator();
+            var locator = new Geolocator();
             if (locator.LocationStatus == PositionStatus.Disabled)
             {
                 new MessageDialog("Veuillez activer votre Location").ShowAsync();
@@ -341,12 +349,11 @@ namespace SoonZik.Controls
 
         private void GoToConnexionPage()
         {
-            _navigationService.Navigate(typeof(Connexion));
+            _navigationService.Navigate(typeof (Connexion));
         }
 
         private void PlaylistAdd_OnTapped(object sender, TappedRoutedEventArgs e)
         {
-
         }
 
         #endregion
@@ -367,7 +374,7 @@ namespace SoonZik.Controls
             var request = new HttpRequestGet();
             try
             {
-                var list = (SearchResult)await request.Search(new SearchResult(), SearchText);
+                var list = (SearchResult) await request.Search(new SearchResult(), SearchText);
                 if (list != null)
                 {
                     MyResult = list;
@@ -396,23 +403,23 @@ namespace SoonZik.Controls
             {
                 ResultArtisteListView.Visibility = Visibility.Visible;
                 ResultArtisteListView.ItemsSource = MyResult.artist;
-
-            } if (MyResult.user != null)
+            }
+            if (MyResult.user != null)
             {
                 ResultUserListView.Visibility = Visibility.Visible;
                 ResultUserListView.ItemsSource = MyResult.user;
-
-            } if (MyResult.album != null)
+            }
+            if (MyResult.album != null)
             {
                 ResultAlbumListView.Visibility = Visibility.Visible;
                 ResultAlbumListView.ItemsSource = MyResult.album;
-
-            } if (MyResult.pack != null)
+            }
+            if (MyResult.pack != null)
             {
                 ResultPackListView.Visibility = Visibility.Visible;
                 ResultPackListView.ItemsSource = MyResult.pack;
-
-            } if (MyResult.music != null)
+            }
+            if (MyResult.music != null)
             {
                 ResultMusicListView.Visibility = Visibility.Visible;
                 ResultMusicListView.ItemsSource = MyResult.music;
@@ -469,19 +476,5 @@ namespace SoonZik.Controls
         }
 
         #endregion
-
-        #region NotifyPropertyCahnge
-
-        [NotifyPropertyChangedInvocator]
-        private void RaisePropertyChange(string propertyName)
-        {
-            var handler = PropertyChanged;
-            if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
-        }
-
-        #endregion
-
-
-
     }
 }

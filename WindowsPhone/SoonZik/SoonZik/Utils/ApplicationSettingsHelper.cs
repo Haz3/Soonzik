@@ -6,7 +6,7 @@ namespace SoonZik.Utils
     internal static class ApplicationSettingsHelper
     {
         /// <summary>
-        /// Function to read a setting value and clear it after reading it
+        ///     Function to read a setting value and clear it after reading it
         /// </summary>
         public static object ReadResetSettingsValue(string key)
         {
@@ -23,7 +23,7 @@ namespace SoonZik.Utils
         }
 
         /// <summary>
-        /// Save a key value pair in settings. Create if it doesn't exist
+        ///     Save a key value pair in settings. Create if it doesn't exist
         /// </summary>
         public static void SaveSettingsValue(string key, object value)
         {
@@ -37,6 +37,5 @@ namespace SoonZik.Utils
                 ApplicationData.Current.LocalSettings.Values[key] = value;
             }
         }
-
     }
 }

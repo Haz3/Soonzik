@@ -8,7 +8,6 @@ namespace SoonZik.ViewModel
 
         #endregion
 
-
         #region Ctor
 
         #endregion
@@ -16,7 +15,5 @@ namespace SoonZik.ViewModel
         #region Method
 
         #endregion
-
-
     }
 }

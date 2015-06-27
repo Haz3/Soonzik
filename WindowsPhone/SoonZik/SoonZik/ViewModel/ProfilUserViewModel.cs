@@ -26,9 +26,9 @@ namespace SoonZik.ViewModel
             {
                 _currentUser = value;
                 RaisePropertyChanged("CurrentUser");
-            } 
-            
+            }
         }
+
         public INavigationService Navigation;
 
         public User SelectUser
@@ -40,23 +40,12 @@ namespace SoonZik.ViewModel
                 RaisePropertyChanged("SelectUser");
             }
         }
+
         private User _selectUser;
 
-        private ICommand _followerCommand;
-        public ICommand FollowerCommand
-        {
-            get { return _followerCommand; }
-        }
-        private ICommand _selectionCommand;
-        public ICommand SelectionCommand
-        {
-            get { return _selectionCommand; }
-        }
-         private ICommand _editClickCommand;
-        public ICommand EditClickCommand
-        {
-            get { return _editClickCommand; }
-        }
+        public ICommand FollowerCommand { get; private set; }
+        public ICommand SelectionCommand { get; private set; }
+        public ICommand EditClickCommand { get; private set; }
 
         public bool NeedUpdate;
 
@@ -83,9 +72,11 @@ namespace SoonZik.ViewModel
                 RaisePropertyChanged("ButtonContent");
             }
         }
+
         #endregion
 
         #region Ctor
+
         [PreferredConstructor]
         public ProfilUserViewModel()
         {
@@ -95,9 +86,9 @@ namespace SoonZik.ViewModel
             CanUpdate = false;
             ButtonContent = "Editer mes informations";
             //HardwareButtons.BackPressed += HardwareButtonsOnBackPressed;
-            _selectionCommand = new RelayCommand(SelectionExecute);
-            _editClickCommand = new RelayCommand(EditInformationExecute);
-            _followerCommand = new RelayCommand(FollowerCommandExecute);
+            SelectionCommand = new RelayCommand(SelectionExecute);
+            EditClickCommand = new RelayCommand(EditInformationExecute);
+            FollowerCommand = new RelayCommand(FollowerCommandExecute);
 
             //Navigation.GoBack();
         }
@@ -111,6 +102,7 @@ namespace SoonZik.ViewModel
         #endregion
 
         #region Method
+
         private void SelectionExecute()
         {
             if (Singleton.Instance().ItsMe)
@@ -145,8 +137,8 @@ namespace SoonZik.ViewModel
             var userKey = await getRequest.GetUserKey(CurrentUser.id.ToString()) as string;
             if (userKey != null)
             {
-                HashAlgorithmProvider hash = HashAlgorithmProvider.OpenAlgorithm(HashAlgorithmNames.Sha256);
-                CryptographicHash ch = hash.CreateHash();
+                var hash = HashAlgorithmProvider.OpenAlgorithm(HashAlgorithmNames.Sha256);
+                var ch = hash.CreateHash();
             }
         }
 
