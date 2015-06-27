@@ -45,17 +45,17 @@ namespace SoonZik.HttpRequest
             return await GetHttpPostResponse(request, postData);
         }
 
-        public async Task<String> Unfollow(string sha256, string unfollowId)
+        public async Task<String> Unfollow(string sha256, string unfollowId, string userId)
         {
-            HttpWebRequest request = (HttpWebRequest) WebRequest.Create(ApiUrl + "users/unfollow/");
-            var postData = "";
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(ApiUrl + "users/unfollow");
+            var postData = "follow_id=" + unfollowId +"&secureKey=" + sha256 + "&user_id=" + userId;
             return await GetHttpPostResponse(request, postData);
         }
 
-        public async Task<String> Follow(string sha256, string followId)
+        public async Task<String> Follow(string sha256, string followId, string userId)
         {
-            HttpWebRequest request = (HttpWebRequest) WebRequest.Create(ApiUrl + "users/follow/");
-            var postData = "";
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(ApiUrl + "users/follow");
+            var postData = "follow_id=" + followId + "&secureKey=" + sha256 + "&user_id=" + userId;
             return await GetHttpPostResponse(request, postData);
         }
 

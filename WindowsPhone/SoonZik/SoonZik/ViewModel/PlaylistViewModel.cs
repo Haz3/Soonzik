@@ -76,10 +76,7 @@ namespace SoonZik.ViewModel
                 _key = task.Result as string; 
                 if (_key != null)
                 {
-                    char[] delimiter = { ' ', '"', '{', '}' };
-                    string[] word = _key.Split(delimiter);
-
-                    var stringEncrypt = (word[4]);
+                    var stringEncrypt = KeyHelpers.GetUserKeyFromResponse(_key);
                     _cryptographic = EncriptSha256.EncriptStringToSha256(Singleton.Instance().CurrentUser.salt + stringEncrypt);
 
                     var listAlbumTmp = request.GetAllMusicForUser(new UserMusic(), _cryptographic, Singleton.Instance().CurrentUser.id.ToString());

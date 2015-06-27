@@ -5,9 +5,11 @@ using Windows.UI.Popups;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Ioc;
+using SoonZik.Controls;
 using SoonZik.HttpRequest;
 using SoonZik.HttpRequest.Poco;
 using SoonZik.Utils;
+using SoonZik.Views;
 
 namespace SoonZik.ViewModel
 {
@@ -39,7 +41,12 @@ namespace SoonZik.ViewModel
             }
         }
         private User _selectUser;
-        
+
+        private ICommand _followerCommand;
+        public ICommand FollowerCommand
+        {
+            get { return _followerCommand; }
+        }
         private ICommand _selectionCommand;
         public ICommand SelectionCommand
         {
@@ -90,8 +97,15 @@ namespace SoonZik.ViewModel
             //HardwareButtons.BackPressed += HardwareButtonsOnBackPressed;
             _selectionCommand = new RelayCommand(SelectionExecute);
             _editClickCommand = new RelayCommand(EditInformationExecute);
+            _followerCommand = new RelayCommand(FollowerCommandExecute);
 
             //Navigation.GoBack();
+        }
+
+        private void FollowerCommandExecute()
+        {
+            ProfilArtisteViewModel.TheUser = SelectUser;
+            GlobalMenuControl.SetChildren(new ProfilArtiste());
         }
 
         #endregion

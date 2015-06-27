@@ -47,31 +47,31 @@
 
         <DataTemplate x:Key="UserItemTemplate" x:Name="UserDataTemplate">
             <StackPanel Margin="0,0,0,30" x:Name="UsersStackPanel" Tapped="UsersStackPanel_OnTapped">
-                <TextBlock Text="{Binding Path=username}"/>
+                <TextBlock Text="{Binding Path=username}" FontSize="20"/>
             </StackPanel>
         </DataTemplate>
 
         <DataTemplate x:Key="ArtistItemTemplate" x:Name="ArtisteDataTemplate">
             <StackPanel Margin="0,0,0,30" x:Name="ArtistStackPanel" Tapped="ArtistStackPanel_OnTapped">
-                <TextBlock Text="{Binding Path=username}"/>
+                <TextBlock Text="{Binding Path=username}" FontSize="20"/>
             </StackPanel>
         </DataTemplate>
 
         <DataTemplate x:Key="MusicItemTemplate" x:Name="MusicDataTemplate">
             <StackPanel Margin="0,0,0,30" x:Name="MusicStackPanel" Tapped="MusicStackPanel_OnTapped">
-                <TextBlock Text="{Binding Path=music.title}"/>
+                <TextBlock Text="{Binding Path=title}" FontSize="20"/>
             </StackPanel>
         </DataTemplate>
 
         <DataTemplate x:Key="AlbumItemTemplate" x:Name="AlbumDataTemplate">
             <StackPanel Margin="0,0,0,30" x:Name="AlbumStackPanel" Tapped="AlbumStackPanel_OnTapped">
-                <TextBlock Text="{Binding Path=title}"/>
+                <TextBlock Text="{Binding Path=title}" FontSize="20"/>
             </StackPanel>
         </DataTemplate>
 
         <DataTemplate x:Key="PackItemTemplate" x:Name="PackDataTemplate">
             <StackPanel Margin="0,0,0,30" x:Name="PackStackPanel" Tapped="PackStackPanel_OnTapped">
-                <TextBlock Text="{Binding Path=Title}"/>
+                <TextBlock Text="{Binding Path=Title}" FontSize="20"/>
             </StackPanel>
         </DataTemplate>
 

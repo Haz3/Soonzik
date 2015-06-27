@@ -63,7 +63,7 @@
         <ListBox Grid.Row="2" Background="Transparent" x:Name="FollowListBox" ItemsSource="{Binding CurrentUser.follows}" ItemTemplate="{StaticResource UserTemplate}" SelectedItem="{Binding SelectUser, Mode=TwoWay}" >
             <interactivity:Interaction.Behaviors>
                 <core:EventTriggerBehavior EventName="SelectionChanged">
-                    <core:InvokeCommandAction Command="{Binding SelectionCommand}"/>
+                    <core:InvokeCommandAction Command="{Binding FollowerCommand}"/>
                 </core:EventTriggerBehavior>
             </interactivity:Interaction.Behaviors>
         </ListBox>

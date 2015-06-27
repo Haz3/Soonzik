@@ -1,14 +1,18 @@
 ﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Windows.ApplicationModel.Core;
+using Windows.Foundation.Collections;
 using Windows.UI.Core;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using SoonZik.Controls;
+using SoonZik.Helpers;
 using SoonZik.HttpRequest;
 using SoonZik.HttpRequest.Poco;
+using SoonZik.Utils;
 using SoonZik.Views;
 
 namespace SoonZik.ViewModel
@@ -17,6 +21,12 @@ namespace SoonZik.ViewModel
     {
         #region Attribute
 
+        private bool _follow;
+        private ICommand _followCommand;
+        public ICommand FollowCommand
+        {
+            get { return _followCommand; }
+        }
         private User _theArtiste;
         public User TheArtiste
         {
@@ -28,8 +38,20 @@ namespace SoonZik.ViewModel
             }
         }
 
-        private List<Album> _listAlbums;
-        public List<Album> ListAlbums
+        private string _followText;
+
+        public string FollowText
+        {
+            get { return _followText; }
+            set
+            {
+                _followText = value;
+                RaisePropertyChanged("FollowText");
+            }
+        }
+
+        private ObservableCollection<Album> _listAlbums;
+        public ObservableCollection<Album> ListAlbums
         {
             get { return _listAlbums; }
             set
@@ -40,7 +62,7 @@ namespace SoonZik.ViewModel
         }
 
         public static User TheUser { get; set; }
-        
+
         private ICommand _selectionCommand;
         public ICommand SelectionCommand
         {
@@ -77,9 +99,110 @@ namespace SoonZik.ViewModel
             if (TheUser != null)
             {
                 _selectionCommand = new RelayCommand(SelectionExecute);
+                _followCommand = new RelayCommand(FollowCommandExecute);
                 ItemClickCommand = new RelayCommand(ItemClickCommandExecute);
+                ListAlbums = new ObservableCollection<Album>();
             }
         }
+
+        #endregion
+
+        #region Method
+        public void Charge()
+        {
+            var request = new HttpRequestGet();
+
+            var res = request.GetArtist(new Artist(), "users", TheUser.id.ToString());
+            res.ContinueWith(delegate(Task<object> obj)
+            {
+                CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+                {
+                    if (ListAlbums.Count != 0)
+                        ListAlbums.Clear();
+                    var art = obj.Result as Artist;
+                    if (art != null && art.artist)
+                    {
+                        foreach (var album in art.albums)
+                        {
+                            ListAlbums.Add(album);
+                        }
+                    }
+                });
+
+            });
+        }
+
+        private void SetFollowText()
+        {
+            foreach (var follow in Singleton.Instance().CurrentUser.follows)
+            {
+                if (follow.id == TheArtiste.id)
+                    _follow = true;
+            }
+            FollowText = _follow ? "Unfollow" : "Follow";
+        }
+        
+        private void Follow(HttpRequestPost post, string cryptographic, HttpRequestGet get)
+        {
+            var resPost = post.Follow(cryptographic, TheArtiste.id.ToString(), Singleton.Instance().CurrentUser.id.ToString());
+            resPost.ContinueWith(delegate(Task<string> tmp)
+            {
+                var test = tmp.Result as string;
+                if (test != null)
+                {
+                    CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+                    {
+                        var followers = get.GetFollows(new List<User>(), "users", Singleton.Instance().CurrentUser.id.ToString());
+                        followers.ContinueWith(delegate(Task<object> task1)
+                        {
+                            var res = task1.Result as List<User>;
+                            if (res != null)
+                            {
+                                CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+                                {
+                                    Singleton.Instance().CurrentUser.follows = res;
+                                    var a = TheArtiste;
+                                    SetFollowText();
+                                });
+                            }
+                        });
+                    });
+                }
+            });
+        }
+
+        private void Unfollow(HttpRequestPost post, string cryptographic, HttpRequestGet get)
+        {
+            var resPost = post.Unfollow(cryptographic, TheArtiste.id.ToString(), Singleton.Instance().CurrentUser.id.ToString());
+            resPost.ContinueWith(delegate(Task<string> tmp)
+            {
+                var test = tmp.Result as string;
+                if (test != null)
+                {
+                    CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+                    {
+                        var followers = get.GetFollows(new List<User>(), "users", Singleton.Instance().CurrentUser.id.ToString());
+                        followers.ContinueWith(delegate(Task<object> task1)
+                        {
+                            var res = task1.Result as List<User>;
+                            if (res != null)
+                            {
+                                CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+                                {
+                                    Singleton.Instance().CurrentUser.follows = res;
+                                    var a = TheArtiste;
+                                    _follow = false;
+                                    SetFollowText();
+                                });
+                            }
+                        });
+                    });
+                }
+            });
+        }
+        #endregion
+
+        #region Method Command
 
         private void ItemClickCommandExecute()
         {
@@ -91,46 +214,30 @@ namespace SoonZik.ViewModel
         private void SelectionExecute()
         {
             TheArtiste = TheUser;
+            SetFollowText();
             Charge();
         }
 
-        #endregion
-
-        #region Method
-        public void Charge()
+        private void FollowCommandExecute()
         {
-            var request = new HttpRequestGet();
-            //try
-            //{
-            //    var artist = (Artist)await request.GetArtist(new Artist(), "users", TheArtiste.id.ToString());
-            //    ListAlbums = artist.albums;
-            //}
-            //catch (Exception e)
-            //{
-            //    Debug.WriteLine(e.ToString());
-            //}
+            var post = new HttpRequestPost();
+            var get = new HttpRequestGet();
 
-            var listUser = request.GetListObject(new List<User>(), "users");
-            listUser.ContinueWith(delegate(Task<object> tmp)
+            var userKey = get.GetUserKey(Singleton.Instance().CurrentUser.id.ToString());
+            userKey.ContinueWith(delegate(Task<object> task)
             {
-                var test = tmp.Result as List<User>;
-                if (test != null)
+                var key = task.Result as string;
+                if (key != null)
                 {
-                    foreach (var res in test.Select(item => request.GetArtist(new Artist(), "users", item.id.ToString())))
-                    {
-                        res.ContinueWith(delegate(Task<object> obj)
-                        {
-                            CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
-                            {
-                                var art = obj.Result as Artist;
-                                if (art != null && art.artist)
-                                    ListAlbums = art.albums;
-                            });
-
-                        });
-                    }
+                    var stringEncrypt = KeyHelpers.GetUserKeyFromResponse(key);
+                    var cryptographic = EncriptSha256.EncriptStringToSha256(Singleton.Instance().CurrentUser.salt + stringEncrypt);
+                    if (_follow)
+                        Unfollow(post, cryptographic, get);
+                    else if (!_follow)
+                        Follow(post, cryptographic, get);
                 }
             });
+
         }
         #endregion
     }

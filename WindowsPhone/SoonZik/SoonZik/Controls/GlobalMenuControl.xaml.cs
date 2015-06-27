@@ -9,8 +9,11 @@ using Windows.Phone.UI.Input;
 using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Media.Animation;
+using Coding4Fun.Toolkit.Controls.Converters;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Helpers;
 using SoonZik.HttpRequest;
@@ -96,7 +99,7 @@ namespace SoonZik.Controls
         #endregion
 
         public static Grid MyGrid { get; set; }
-        private ObservableCollection<SearchResult> _myResult;
+        private SearchResult _myResult;
 
         public SearchResult MyResult
         {
@@ -112,7 +115,7 @@ namespace SoonZik.Controls
         public event PropertyChangedEventHandler PropertyChanged;
         public string SearchText { get; set; }
         private readonly INavigationService _navigationService;
-        private UIElement _lastElement;
+        private static UIElement _lastElement;
         private User _selectedUser;
 
         public User SelectedUser
@@ -174,6 +177,8 @@ namespace SoonZik.Controls
         }
 
         public List<BouttonMenu> ListBouttonMenus { get; set; }
+        private static Storyboard story { get; set; }
+        private static ToggleButton toggle { get; set; }
 
         #endregion
 
@@ -187,8 +192,10 @@ namespace SoonZik.Controls
             GlobalGrid.Children.Add(Singleton.Instance().NewsPage);
 
             _navigationService = new NavigationService();
-            MyResult = new ObservableCollection<SearchResult>();
+            //MyResult = new ObservableCollection<SearchResult>();
             HardwareButtons.BackPressed += HardwareButtonsOnBackPressed;
+            story = MenuStoryBoardBack;
+            toggle = ToggleButtonSearch;
 
             ProfilButton.Command = new RelayCommand(GoToProfil);
             NewsButton.Command = new RelayCommand(GoToNews);
@@ -254,10 +261,10 @@ namespace SoonZik.Controls
             SearchStoryBoardBack.Pause();
         }
 
-        public void CloseMenu()
+        public static void CloseMenu()
         {
-            MenuStoryBoardBack.Begin();
-            ToggleButtonSearch.IsChecked = false;
+            story.Begin();
+            toggle.IsChecked = false;
         }
 
         #endregion
@@ -315,7 +322,7 @@ namespace SoonZik.Controls
             SetChildren(new Friends());
         }
 
-        private void SetChildren(UIElement myObj)
+        public static void SetChildren(UIElement myObj)
         {
             //if (myObj.GetType() != typeof(Playlist))
             // PlaylistAdd.Visibility = Visibility.Collapsed;
@@ -438,8 +445,8 @@ namespace SoonZik.Controls
 
         private void MusicStackPanel_OnTapped(object sender, TappedRoutedEventArgs e)
         {
-            Singleton.Instance().SelectedMusicSingleton = SelectedMusic;
-            _navigationService.Navigate(new PlayerControl().GetType());
+            AlbumViewModel.MyAlbum = SelectedMusic.album;
+            SetChildren(new AlbumView());
             CloseMenu();
         }
 

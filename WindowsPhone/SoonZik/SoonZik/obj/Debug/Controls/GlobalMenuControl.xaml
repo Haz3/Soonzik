@@ -47,31 +47,31 @@
 
         <DataTemplate x:Key="UserItemTemplate" x:Name="UserDataTemplate">
             <StackPanel x:ConnectionId='7' Margin="0,0,0,30" x:Name="UsersStackPanel"                                  >
-                <TextBlock Text="{Binding Path=username}"/>
+                <TextBlock Text="{Binding Path=username}" FontSize="20"/>
             </StackPanel>
         </DataTemplate>
 
         <DataTemplate x:Key="ArtistItemTemplate" x:Name="ArtisteDataTemplate">
             <StackPanel x:ConnectionId='6' Margin="0,0,0,30" x:Name="ArtistStackPanel"                                   >
-                <TextBlock Text="{Binding Path=username}"/>
+                <TextBlock Text="{Binding Path=username}" FontSize="20"/>
             </StackPanel>
         </DataTemplate>
 
         <DataTemplate x:Key="MusicItemTemplate" x:Name="MusicDataTemplate">
             <StackPanel x:ConnectionId='5' Margin="0,0,0,30" x:Name="MusicStackPanel"                                  >
-                <TextBlock Text="{Binding Path=music.title}"/>
+                <TextBlock Text="{Binding Path=title}" FontSize="20"/>
             </StackPanel>
         </DataTemplate>
 
         <DataTemplate x:Key="AlbumItemTemplate" x:Name="AlbumDataTemplate">
             <StackPanel x:ConnectionId='4' Margin="0,0,0,30" x:Name="AlbumStackPanel"                                  >
-                <TextBlock Text="{Binding Path=title}"/>
+                <TextBlock Text="{Binding Path=title}" FontSize="20"/>
             </StackPanel>
         </DataTemplate>
 
         <DataTemplate x:Key="PackItemTemplate" x:Name="PackDataTemplate">
             <StackPanel x:ConnectionId='3' Margin="0,0,0,30" x:Name="PackStackPanel"                                 >
-                <TextBlock Text="{Binding Path=Title}"/>
+                <TextBlock Text="{Binding Path=Title}" FontSize="20"/>
             </StackPanel>
         </DataTemplate>
 
@@ -161,7 +161,7 @@
             <TextBox x:ConnectionId='10' x:Name="SearchTextBlock" Grid.Row="0" Width="200" BorderThickness="0" AcceptsReturn="True"
                      Height="13" Margin="50,3,50,0" TextAlignment="Center" VerticalContentAlignment="Center"
                      Foreground="Black" Background="Gray" FontSize="18" x:Uid="Search" PlaceholderText=""                                            />
-            <!--<Grid Grid.Row="1">
+            <Grid Grid.Row="1">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
@@ -175,12 +175,6 @@
                 <ListView Grid.Row="2" x:Name="ResultMusicListView" Header="Musiques" ItemTemplate="{StaticResource MusicItemTemplate}" SelectedItem="{Binding SelectedMusic, Mode=TwoWay}"/>
                 <ListView Grid.Row="3" x:Name="ResultAlbumListView" Header="Albums" ItemTemplate="{StaticResource AlbumItemTemplate}" SelectedItem="{Binding SelectedAlbum, Mode=TwoWay}"/>
                 <ListView Grid.Row="4" x:Name="ResultPackListView" Header="Packs" ItemTemplate="{StaticResource PackItemTemplate}" SelectedItem="{Binding SelectedPack, Mode=TwoWay}"/>
-            </Grid>-->
-
-            <Grid Grid.Row="1">
-                <ListView x:Name="ResultListView" ItemTemplate="{StaticResource MusicItemTemplate}">
-                    
-                </ListView>
             </Grid>
         </Grid>
 

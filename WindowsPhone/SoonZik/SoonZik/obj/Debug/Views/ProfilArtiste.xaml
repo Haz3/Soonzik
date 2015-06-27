@@ -46,6 +46,7 @@
             <TextBlock x:Name="ArtistName" Text="{Binding TheArtiste.follows.Count}" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,250,0,0">
 
             </TextBlock>
+            <Button VerticalAlignment="Bottom" HorizontalAlignment="Center" Content="{Binding FollowText}" Command="{Binding FollowCommand}"></Button>
         </Grid>
         <ListView Grid.Row="1" x:Name="MusicListView" ItemsSource="{Binding ListAlbums}" ItemTemplate="{StaticResource AlbumTemplate}" SelectedItem="{Binding TheAlbum, Mode=TwoWay}">
 
