@@ -116,6 +116,7 @@
     <Compile Include="Utils\NavigationService.cs" />
     <Compile Include="Utils\Singleton.cs" />
     <Compile Include="ViewModel\AlbumViewModel.cs" />
+    <Compile Include="ViewModel\BattleDetailViewModel.cs" />
     <Compile Include="ViewModel\BattleViewModel.cs" />
     <Compile Include="ViewModel\ConnexionViewModel.cs" />
     <Compile Include="ViewModel\ConversationViewModel.cs" />
@@ -133,6 +134,9 @@
     <Compile Include="ViewModel\ProfilFriendViewModel.cs" />
     <Compile Include="Views\AlbumView.xaml.cs">
       <DependentUpon>AlbumView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\BattleDetailView.xaml.cs">
+      <DependentUpon>BattleDetailView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\GeolocalisationView.xaml.cs">
       <DependentUpon>GeolocalisationView.xaml</DependentUpon>
@@ -292,6 +296,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\BattleDetailView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\GeolocalisationView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -359,6 +367,9 @@
     </Reference>
     <Reference Include="Coding4Fun.Toolkit.Controls">
       <HintPath>..\packages\Coding4Fun.Toolkit.Controls.2.1.0\lib\wpa81\Coding4Fun.Toolkit.Controls.dll</HintPath>
+    </Reference>
+    <Reference Include="Coding4Fun.Toolkit.Storage">
+      <HintPath>..\packages\Coding4Fun.Toolkit.Storage.2.0.8\lib\wpa81\Coding4Fun.Toolkit.Storage.dll</HintPath>
     </Reference>
     <Reference Include="Facebook">
       <HintPath>..\packages\Facebook.6.8.0\lib\portable-win81+wpa81\Facebook.dll</HintPath>

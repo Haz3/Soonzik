@@ -23,11 +23,25 @@
     <RootPropertyPathName Name="isActive" />
     <RootPropertyPathName Name="ListMusics" />
     <RootPropertyPathName Name="TheAlbum" />
+    <RootPropertyPathName Name="ArtistTwo" />
+    <RootPropertyPathName Name="ArtistOne" />
+    <RootPropertyPathName Name="SecondesRestantes" />
+    <RootPropertyPathName Name="MinutesRestantes" />
+    <RootPropertyPathName Name="HeuresRestantes" />
+    <RootPropertyPathName Name="JoursRestants" />
+    <RootPropertyPathName Name="PourcentageVote2" />
+    <RootPropertyPathName Name="PourcentageVote1" />
+    <RootPropertyPathName Name="CanVote" />
+    <RootPropertyPathName Name="VoteArtisteTwoCommand" />
+    <RootPropertyPathName Name="VoteArtisteOneCommand" />
+    <RootPropertyPathName Name="CurrentBattle" />
+    <RootPropertyPathName Name="artist_two" />
+    <RootPropertyPathName Name="image" />
+    <RootPropertyPathName Name="artist_one" />
     <RootPropertyPathName Name="UserLocation" />
     <RootPropertyPathName Name="Latitude" />
     <RootPropertyPathName Name="ValidateCommand" />
     <RootPropertyPathName Name="NewUser" />
-    <RootPropertyPathName Name="image" />
     <RootPropertyPathName Name="phoneNumber" />
     <RootPropertyPathName Name="address" />
     <RootPropertyPathName Name="Zipcode" />
@@ -47,6 +61,8 @@
     <RootPropertyPathName Name="SelectUser" />
     <RootPropertyPathName Name="description" />
     <RootPropertyPathName Name="AddCommand" />
+    <RootPropertyPathName Name="ListBattles" />
+    <RootPropertyPathName Name="SelectedBattle" />
     <RootPropertyPathName Name="ProgressOn" />
     <RootPropertyPathName Name="InscritpiomCommand" />
     <RootPropertyPathName Name="ConnexionCommand" />
@@ -101,7 +117,9 @@
     <RootType FullName="SoonZik.ViewModel.ProfilArtisteViewModel" />
     <RootType FullName="SoonZik.ViewModel.InscriptionViewModel" />
     <RootType FullName="SoonZik.ViewModel.GeolocalisationViewModel" />
+    <RootType FullName="SoonZik.ViewModel.BattleViewModel" />
     <RootType FullName="SoonZik.ViewModel.PlaylistViewModel" />
+    <RootType FullName="SoonZik.ViewModel.BattleDetailViewModel" />
     <RootType FullName="Windows.UI.Xaml.DataTemplate">
       <RootProperty Name="Template" />
     </RootType>
@@ -141,9 +159,12 @@
       <RootProperty Name="Style" />
       <RootProperty Name="MinHeight" />
       <RootProperty Name="MinWidth" />
-      <RootProperty Name="Command" />
+      <RootProperty Name="Height" />
+      <RootProperty Name="IsEnabled" />
       <RootProperty Name="Foreground" />
+      <RootProperty Name="Opacity" />
       <RootProperty Name="Margin" />
+      <RootProperty Name="Command" />
       <RootEvent Name="Click" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.Control">
@@ -326,7 +347,6 @@
       <RootProperty Name="Width" />
       <RootProperty Name="Margin" />
       <RootProperty Name="TextWrapping" />
-      <RootProperty Name="TextAlignment" />
       <RootProperty Name="FontWeight" />
       <RootProperty Name="Style" />
       <RootProperty Name="Padding" />
@@ -382,9 +402,9 @@
       <RootProperty Name="ItemTemplate" />
       <RootProperty Name="SelectedItem" />
       <RootProperty Name="ItemsSource" />
+      <RootProperty Name="Background" />
       <RootProperty Name="IsHoldingEnabled" />
       <RootProperty Name="GroupStyle" />
-      <RootProperty Name="Background" />
       <RootProperty Name="VerticalContentAlignment" />
       <RootProperty Name="ItemsPanel" />
     </RootType>
@@ -434,6 +454,7 @@
     <RootType FullName="SoonZik.Views.Connexion" />
     <RootType FullName="SoonZik.MainPage" />
     <RootType FullName="SoonZik.Views.AlbumView" />
+    <RootType FullName="SoonZik.Views.BattleDetailView" />
     <RootType FullName="Windows.UI.Xaml.Controls.Maps.MapControl">
       <RootProperty Name="Center" />
     </RootType>
@@ -464,7 +485,6 @@
       <RootProperty Name="Items" />
     </RootType>
     <RootType FullName="SoonZik.ViewModel.ProfilFriendView" />
-    <RootType FullName="SoonZik.ViewModel.BattleViewModel" />
     <RootType FullName="SoonZik.Views.BattleView" />
     <RootType FullName="SoonZik.Utils.BooleanToVisibilityConverter">
       <RootProperty Name="True" />

@@ -19,7 +19,9 @@
         <vm:ProfilArtisteViewModel x:Key="ProfilArtisteViewModel" />
         <vm:InscriptionViewModel x:Key="InscriptionViewModel" />
         <vm:GeolocalisationViewModel x:Key="GeolocalisationViewModel" />
+        <vm:BattleViewModel x:Key="BattleViewModel" />
         <vm:PlaylistViewModel x:Key="PlaylistViewModel" />
+        <vm:BattleDetailViewModel x:Key="BattleDetailViewModel" />
 
         <DataTemplate x:Key="SizePivotHeader">
             <ContentPresenter>

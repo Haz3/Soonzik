@@ -73,6 +73,13 @@ namespace SoonZik.HttpRequest
             return await GetHttpPostResponse(request, postData);
         }
 
+        public async Task<String> Vote(string sha256, string battleId, string artistId, string userId)
+        {
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(ApiUrl + "/battles/" + battleId + "/vote");
+            var postData = "artist_id=" + artistId + "&secureKey=" + sha256 + "&user_id=" + userId;
+            return await GetHttpPostResponse(request, postData);
+        }
+
         public async Task<String> GetHttpPostResponse(HttpWebRequest request, string postData)
         {
             Received = null;

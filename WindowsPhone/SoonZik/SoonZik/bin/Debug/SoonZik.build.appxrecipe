@@ -31,6 +31,9 @@
     <AppxPackagedFile Include="C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\packages\Coding4Fun.Toolkit.Controls.2.1.0\lib\wpa81\Coding4Fun.Toolkit.dll">
       <PackagePath>Coding4Fun.Toolkit.dll</PackagePath>
     </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\packages\Coding4Fun.Toolkit.Storage.2.0.8\lib\wpa81\Coding4Fun.Toolkit.Storage.dll">
+      <PackagePath>Coding4Fun.Toolkit.Storage.dll</PackagePath>
+    </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\packages\Facebook.Client.0.9.1-alpha\lib\portable-win81+wpa81\Facebook.Client.dll">
       <PackagePath>Facebook.Client.dll</PackagePath>
     </AppxPackagedFile>
@@ -291,6 +294,9 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\bin\Debug\Views\AlbumView.xbf">
       <PackagePath>Views\AlbumView.xbf</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\bin\Debug\Views\BattleDetailView.xbf">
+      <PackagePath>Views\BattleDetailView.xbf</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\bin\Debug\Views\GeolocalisationView.xbf">
       <PackagePath>Views\GeolocalisationView.xbf</PackagePath>

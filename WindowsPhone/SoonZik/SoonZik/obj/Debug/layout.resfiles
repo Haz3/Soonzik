@@ -18,6 +18,7 @@ Controls\ProgressRingControl.xbf
 MainPage.xbf
 SoonZik.xr.xml
 Views\AlbumView.xbf
+Views\BattleDetailView.xbf
 Views\BattleView.xbf
 Views\Connexion.xbf
 Views\Conversation.xbf

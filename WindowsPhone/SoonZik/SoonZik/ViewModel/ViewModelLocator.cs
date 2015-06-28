@@ -50,6 +50,7 @@ namespace SoonZik.ViewModel
             SimpleIoc.Default.Register<GeolocalisationView>();
             SimpleIoc.Default.Register<PlaylistViewModel>();
             SimpleIoc.Default.Register<InscriptionViewModel>();
+            SimpleIoc.Default.Register<BattleDetailViewModel>();
         }
 
         public MainViewModel Main
@@ -137,6 +138,10 @@ namespace SoonZik.ViewModel
             get { return ServiceLocator.Current.GetInstance<InscriptionViewModel>(); }
         }
 
+        public BattleDetailViewModel BattleDetail
+        {
+            get { return ServiceLocator.Current.GetInstance<BattleDetailViewModel>(); }
+        }
         public static void Cleanup()
         {
             // TODO Clear the ViewModels

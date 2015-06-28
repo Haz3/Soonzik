@@ -34,3 +34,4 @@ C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik.Helpers\obj\
 C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik.Helpers\obj\Debug\qualifiers.txt
 C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik.Helpers\obj\Debug\qualifiers.txt.intermediate
 C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik.Helpers\obj\Debug\MultipleQualifiersPerDimensionFound.txt
+C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik.Helpers\obj\Debug\SoonZik.Helpers.csprojResolveAssemblyReference.cache
