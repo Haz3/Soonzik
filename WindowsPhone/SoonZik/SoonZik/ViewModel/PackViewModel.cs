@@ -107,15 +107,6 @@ namespace SoonZik.ViewModel
         public void Charge()
         {
             var request = new HttpRequestGet();
-            //try
-            //{
-            //    ThePack = (Pack)await request.GetObject(new Pack(), "packs", ThePack.Id.ToString());
-            //}
-            //catch (Exception e)
-            //{
-            //    Debug.WriteLine(e.ToString());
-            //}
-
             var pack = request.GetObject(new Pack(), "packs", ThePack.Id.ToString());
             pack.ContinueWith(delegate(Task<object> tmp)
             {

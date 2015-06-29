@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using Windows.UI.Xaml.Media.Imaging;
 
 namespace SoonZik.HttpRequest.Poco
 {
@@ -25,6 +26,9 @@ namespace SoonZik.HttpRequest.Poco
         public Address address { get; set; }
         public ObservableCollection<User> friends { get; set; }
         public List<User> follows { get; set; }
+
+        public BitmapImage profilImage { get; set; }
+
         #endregion
     }
 }

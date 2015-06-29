@@ -101,19 +101,6 @@ namespace SoonZik.ViewModel
         public void Charge()
         {
             var request = new HttpRequestGet();
-            //try
-            //{
-            //    var list = (List<News>) await request.GetListObject(new List<News>(), "news");
-            //    _listNews = new ObservableCollection<News>();
-            //    foreach (var item in list)
-            //    {
-            //        _listNews.Add(item);
-            //    }
-            //}
-            //catch (Exception e)
-            //{
-            //    Debug.WriteLine(e.ToString());
-            //}
 
             var listNews = request.GetListObject(new List<News>(), "news");
             listNews.ContinueWith(delegate(Task<object> tmp)

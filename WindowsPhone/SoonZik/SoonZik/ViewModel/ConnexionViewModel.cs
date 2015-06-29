@@ -5,6 +5,7 @@ using Windows.ApplicationModel.Core;
 using Windows.Storage;
 using Windows.UI.Core;
 using Windows.UI.Popups;
+using Windows.UI.Xaml.Media.Imaging;
 using Facebook;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
@@ -142,9 +143,8 @@ namespace SoonZik.ViewModel
                 {
                     var stringJson = JObject.Parse(res).SelectToken("content").ToString();
                     Singleton.Instance().CurrentUser = JsonConvert.DeserializeObject(stringJson, typeof (User)) as User;
-                    Singleton.Instance().CurrentUser.image =
-                        "http://soonzikapi.herokuapp.com/assets/usersImage/avatars/" +
-                        Singleton.Instance().CurrentUser.image;
+                    Singleton.Instance().CurrentUser.profilImage = new BitmapImage(new Uri("http://soonzikapi.herokuapp.com/assets/usersImage/avatars/" + Singleton.Instance().CurrentUser.image, UriKind.RelativeOrAbsolute));
+                        
                     ServiceLocator.Current.GetInstance<FriendViewModel>().UpdateFriend();
                 }
                 catch (Exception e)

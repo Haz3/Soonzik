@@ -94,9 +94,11 @@
     <RootPropertyPathName Name="FollowCommand" />
     <RootPropertyPathName Name="TheArtiste" />
     <RootPropertyPathName Name="Count" />
+    <RootPropertyPathName Name="ButtonContent" />
     <RootPropertyPathName Name="EditClickCommand" />
     <RootPropertyPathName Name="FollowerCommand" />
     <RootPropertyPathName Name="CanUpdate" />
+    <RootPropertyPathName Name="profilImage" />
   </Roots.PropertyPathNames>
   <Roots.RootTypes>
     <RootType FullName="Windows.UI.Xaml.Application">

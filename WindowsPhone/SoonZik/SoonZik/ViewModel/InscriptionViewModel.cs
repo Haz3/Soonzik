@@ -62,7 +62,10 @@ namespace SoonZik.ViewModel
             NewUser = new User();
             NewUser.address = new Address();
         }
+        
+        #endregion
 
+        #region Method
         private void ValidateExecute()
         {
             if (EmailHelper.IsValidEmail(NewUser.email))
@@ -82,11 +85,6 @@ namespace SoonZik.ViewModel
             var postRequest = new HttpRequestPost();
             var res = await postRequest.Save(NewUser, "", _password);
         }
-
-        #endregion
-
-        #region Method
-
         #endregion
     }
 }

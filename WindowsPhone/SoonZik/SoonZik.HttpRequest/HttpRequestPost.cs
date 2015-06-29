@@ -4,6 +4,7 @@ using System.IO;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.UI.Xaml.Media.Imaging;
 using SoonZik.HttpRequest.Poco;
 
 namespace SoonZik.HttpRequest
@@ -79,6 +80,14 @@ namespace SoonZik.HttpRequest
             var postData = "artist_id=" + artistId + "&secureKey=" + sha256 + "&user_id=" + userId;
             return await GetHttpPostResponse(request, postData);
         }
+
+        public async Task<String> UploadImage(BitmapImage image, string sha256, string userId, string contentType, string name)
+        {
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(ApiUrl + "users/upload");
+            var postData = "file[content_type]=" + contentType + "&file[original_filename]" + name + "&file[tempfile]" + image + "&secureKey=" + sha256 + "&user_id=" + userId;
+            return await GetHttpPostResponse(request, postData);
+        }
+
 
         public async Task<String> GetHttpPostResponse(HttpWebRequest request, string postData)
         {
