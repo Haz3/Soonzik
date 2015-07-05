@@ -38,15 +38,15 @@ class Purchase < ActiveRecord::Base
 	  has_many :purchased_musics
 
 	# Second degree of relation
-		has_many :musics, through: :purchased_musics
+		has_many :musics, -> { uniq }, through: :purchased_musics
 		has_many :purchased_albums, -> { uniq }, through: :purchased_musics
 
 	# Third degree of relation
-		has_many :albums, through: :purchased_albums
+		has_many :albums, -> { uniq }, through: :purchased_albums
 		has_many :purchased_packs, -> { uniq }, through: :purchased_albums
 
 	# Fourth degree of relation
-		has_many :packs, through: :purchased_packs
+		has_many :packs, -> { uniq }, through: :purchased_packs
 
   #has_and_belongs_to_many :albums
   #has_and_belongs_to_many :musics
