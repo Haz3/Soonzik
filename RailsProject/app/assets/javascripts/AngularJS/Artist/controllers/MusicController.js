@@ -86,10 +86,10 @@ SoonzikArtistApp.controller('MusicCtrl', ['$scope', 'SecureAuth', 'HTTPService',
 	}
 
 	// For the modal
-	$scope.open = function () {
+	$scope.openMusic = function () {
     var modalInstance = $modal.open({
       templateUrl: '/assets/AngularJS/Artist/views/modalMusic.html.haml',
-      controller: 'ModalInstanceCtrl',
+      controller: 'ModalInstanceMusicCtrl',
       resolve: {
       	influences: function() {
       		return $scope.influences;
@@ -103,10 +103,32 @@ SoonzikArtistApp.controller('MusicCtrl', ['$scope', 'SecureAuth', 'HTTPService',
       console.log('Modal dismissed at: ' + new Date());
     });
   };
+
+	// For the modal
+	$scope.openAlbum = function () {
+    var modalInstance = $modal.open({
+      templateUrl: '/assets/AngularJS/Artist/views/modalAlbum.html.haml',
+      controller: 'ModalInstanceAlbumCtrl',
+      resolve: {
+      	influences: function() {
+      		return $scope.influences;
+      	}
+      }
+    });
+
+    modalInstance.result.then(function (album) {
+    	$scope.albums.push(album);
+    }, function () {
+      console.log('Modal dismissed at: ' + new Date());
+    });
+  };
 }]);
 
-SoonzikArtistApp.controller('ModalInstanceCtrl', ["$scope", "$modalInstance", "Upload", "HTTPService", "influences", function ($scope, $modalInstance, Upload, HTTPService, influences) {
-	$scope.music = null;
+/*
+	The modal to upload a music
+*/
+
+SoonzikArtistApp.controller('ModalInstanceMusicCtrl', ["$scope", "$modalInstance", "Upload", "HTTPService", "influences", function ($scope, $modalInstance, Upload, HTTPService, influences) {
 	$scope.loading = false;
 	$scope.file = null;
 	$scope.form = {
@@ -125,7 +147,10 @@ SoonzikArtistApp.controller('ModalInstanceCtrl', ["$scope", "$modalInstance", "U
 			$scope.loading = true;
 		}, function (data, status, headers, config) {
 			$scope.loading = false;
-			$modalInstance.close(data.music);
+			if (data.error == true)
+				alert("Nein nein nein !");
+			else
+				$modalInstance.close(data.music);
 		}, function (error) {
 			$scope.loading = false;
 			console.log(error);
@@ -137,6 +162,57 @@ SoonzikArtistApp.controller('ModalInstanceCtrl', ["$scope", "$modalInstance", "U
   };
 
   $scope.uploadMusic = function($file) {
+  	if ($file && $file.length) {
+			for (var i = 0; i < $file.length; i++) {
+				var file = $file[i];
+
+				$scope.file = file;
+			}
+    }
+	}
+}]);
+
+/*
+	The modal to create an album
+*/
+
+SoonzikArtistApp.controller('ModalInstanceAlbumCtrl', ["$scope", "$modalInstance", "Upload", "HTTPService", "influences", function ($scope, $modalInstance, Upload, HTTPService, influences) {
+	$scope.loading = false;
+	$scope.file = null;
+	$scope.form = {
+		title: "",
+		price: 0,
+		yearProd: 2000
+	};
+	$scope.descriptions = []
+	$scope.influences = influences;
+	$scope.selected = {
+		selectedGenres: []
+	}
+
+  $scope.ok = function () {
+  	var parameters = {
+  		album: $scope.form,
+  		descriptions: $scope.descriptions,
+  		genres: $scope.selected.selectedGenres
+  	};
+
+  	HTTPService.addAlbum($scope.file, parameters, function (evt) {
+			$scope.loading = true;
+		}, function (data, status, headers, config) {
+			$scope.loading = false;
+			$modalInstance.close(data.album);
+		}, function (error) {
+			$scope.loading = false;
+			console.log(error);
+		});
+  };
+
+  $scope.cancel = function () {
+    $modalInstance.dismiss('cancel');
+  };
+
+  $scope.uploadImage = function($file) {
   	if ($file && $file.length) {
 			for (var i = 0; i < $file.length; i++) {
 				var file = $file[i];

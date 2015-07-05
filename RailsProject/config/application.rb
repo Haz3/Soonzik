@@ -23,5 +23,8 @@ module SoonZik
     # Commented because it show the musics publicly
     # config.assets.paths << "#{Rails.root}/app/assets/musics"
     config.assets.paths << "#{Rails.root}/app/assets/packs"
+    config.assets.paths << Rails.root.join("lib", "assets", "exe")
+
+    config.autoload_paths << Rails.root.join('lib')
   end
 end

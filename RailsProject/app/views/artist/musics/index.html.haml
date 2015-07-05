@@ -5,8 +5,11 @@
 	%loading{ "ng-if" => "loading == true" }
 	.musicCollection{ "ng-if" => "loading == false" }
 		.newMusic
-			.button{ "ng-click" => "open()" }
+			.button{ "ng-click" => "openMusic()" }
 				Add new music
+		.newAlbum
+			.button{ "ng-click" => "openAlbum()" }
+				Create an album
 		%hr
 		%h3
 			Your musics

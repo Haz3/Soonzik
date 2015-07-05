@@ -204,16 +204,26 @@ module API
           contentReturn = { musics: [], albums: [], packs: []}
 
           list.each do |x|
-            if (x.musics != nil)
-              contentReturn[:musics] = contentReturn[:musics] | [x.musics.as_json(only: Music.miniKey)]
-            elsif (x.albums != nil)
-              contentReturn[:albums] = contentReturn[:albums] | [{ album: x.albums.as_json(only: Album.miniKey), musics: x.albums.musics.as_json(only: Music.miniKey) }]
-            elsif (x.packs != nil)
-              value = { pack: x.packs.as_json(only: Pack.miniKey), albums: [] }
-              x.packs.albums.each do |album|
-                value[:albums] << { album: album.as_json(only: Album.miniKey), musics: album.musics.as_json(only: Music.miniKey) }
+            x.purchased_musics.each do |pm|
+              if (pm.purchased_album_id == nil)
+                contentReturn[:musics] = contentReturn[:musics] | [pm.music.as_json(only: Music.miniKey, include: { album: { only: Album.miniKey } })]
+              else
+
+                if (pm.purchased_album.purchased_pack_id == nil)
+                  a = pm.purchased_album.album.as_json(only: Album.miniKey)
+                  a[:musics] = pm.purchased_album.album.musics.as_json(only: Music.miniKey)
+                  contentReturn[:albums] = contentReturn[:albums] | [{ album: a }]
+                else
+                  pack = pm.purchased_album.purchased_pack.pack
+                  value = { pack: pack.as_json(only: Pack.miniKey) }
+                  value[:pack][:albums] = []
+                  pack.albums.each do |album|
+                    value[:pack][:albums] << album.as_json(only: Album.miniKey, include: { musics: { only: Music.miniKey } } )
+                  end
+                  contentReturn[:packs] = contentReturn[:packs] | [value]
+                end
+
               end
-              contentReturn[:packs] = contentReturn[:packs] | [value]
             end
           end
           @returnValue = { content: contentReturn }
