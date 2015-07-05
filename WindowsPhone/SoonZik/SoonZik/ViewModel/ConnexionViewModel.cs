@@ -1,11 +1,11 @@
 ﻿using System;
-using System.Globalization;
 using System.Windows.Input;
 using Windows.ApplicationModel.Activation;
 using Windows.ApplicationModel.Core;
 using Windows.Storage;
 using Windows.UI.Core;
 using Windows.UI.Popups;
+using Windows.UI.Xaml.Media.Imaging;
 using Facebook;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
@@ -25,15 +25,10 @@ namespace SoonZik.ViewModel
     {
         #region Attribute
 
-        private FaceBookHelper ObjFBHelper = new FaceBookHelper();
+        private readonly FaceBookHelper ObjFBHelper = new FaceBookHelper();
         private FacebookClient fbclient = new FacebookClient();
 
-        private ICommand _selectionCommand;
-
-        public ICommand SelectionCommand
-        {
-            get { return _selectionCommand; }
-        }
+        public ICommand SelectionCommand { get; private set; }
 
         private bool _progressOn;
 
@@ -73,26 +68,11 @@ namespace SoonZik.ViewModel
             }
         }
 
-        private RelayCommand _connexionCommand;
+        public RelayCommand ConnexionCommand { get; private set; }
 
-        public RelayCommand ConnexionCommand
-        {
-            get { return _connexionCommand; }
-        }
+        public RelayCommand InscritpiomCommand { get; private set; }
 
-        private RelayCommand _inscriptionCommand;
-
-        public RelayCommand InscritpiomCommand
-        {
-            get { return _inscriptionCommand; }
-        }
-
-        private RelayCommand _facebookTapped;
-
-        public RelayCommand FacebookTapped
-        {
-            get { return _facebookTapped; }
-        }
+        public RelayCommand FacebookTapped { get; private set; }
 
         public INavigationService Navigation;
 
@@ -104,10 +84,10 @@ namespace SoonZik.ViewModel
         {
             ProgressOn = false;
             Navigation = new NavigationService();
-            _connexionCommand = new RelayCommand(MakeConnexion);
-            _facebookTapped = new RelayCommand(MakeFacebookConnection);
-            _selectionCommand = new RelayCommand(SelectionExecute);
-            _inscriptionCommand = new RelayCommand(ExecuteInscription);
+            ConnexionCommand = new RelayCommand(MakeConnexion);
+            FacebookTapped = new RelayCommand(MakeFacebookConnection);
+            SelectionCommand = new RelayCommand(SelectionExecute);
+            InscritpiomCommand = new RelayCommand(ExecuteInscription);
             if (_localSettings != null && (string) _localSettings.Values["SoonZikAlreadyConnect"] == "yes")
             {
                 _password = _localSettings.Values["SoonZikPassWord"].ToString();
@@ -163,10 +143,9 @@ namespace SoonZik.ViewModel
                 {
                     var stringJson = JObject.Parse(res).SelectToken("content").ToString();
                     Singleton.Instance().CurrentUser = JsonConvert.DeserializeObject(stringJson, typeof (User)) as User;
-                    Singleton.Instance().CurrentUser.image = "http://soonzikapi.herokuapp.com/assets/usersImage/avatars/" + Singleton.Instance().CurrentUser.image;
-                    ServiceLocator.Current.GetInstance<FriendViewModel>().Sources = Singleton.Instance().CurrentUser.friends;
-                    ServiceLocator.Current.GetInstance<FriendViewModel>().ItemSource = AlphaKeyGroups<User>.CreateGroups(Singleton.Instance().CurrentUser.friends, CultureInfo.CurrentUICulture,
-                            s => s.username, true);
+                    Singleton.Instance().CurrentUser.profilImage = new BitmapImage(new Uri("http://soonzikapi.herokuapp.com/assets/usersImage/avatars/" + Singleton.Instance().CurrentUser.image, UriKind.RelativeOrAbsolute));
+                        
+                    ServiceLocator.Current.GetInstance<FriendViewModel>().UpdateFriend();
                 }
                 catch (Exception e)
                 {
@@ -210,9 +189,9 @@ namespace SoonZik.ViewModel
                 var connecionSocial = new HttpRequestPost();
                 var getKey = new HttpRequestGet();
 
-                string key = await getKey.GetSocialToken(id, "facebook") as string;
+                var key = await getKey.GetSocialToken(id, "facebook") as string;
                 char[] delimiter = {' ', '"', '{', '}'};
-                string[] word = key.Split(delimiter);
+                var word = key.Split(delimiter);
                 var stringEncrypt = (id + word[4] + "3uNi@rCK$L$om40dNnhX)#jV2$40wwbr_bAK99%E");
                 var sha256 = EncriptSha256.EncriptStringToSha256(stringEncrypt);
 

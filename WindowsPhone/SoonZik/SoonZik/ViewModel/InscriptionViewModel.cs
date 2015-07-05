@@ -26,6 +26,7 @@ namespace SoonZik.ViewModel
         }
 
         private DateTimeOffset _birthday;
+
         public DateTimeOffset Birthday
         {
             get { return _birthday; }
@@ -36,18 +37,14 @@ namespace SoonZik.ViewModel
             }
         }
 
-        private ICommand _validateCommand;
-        public ICommand ValidateCommand
-        {
-            get { return _validateCommand; }
-        }
+        public ICommand ValidateCommand { get; private set; }
 
 
         private User _newUser;
 
         public User NewUser
         {
-            get { return _newUser;}
+            get { return _newUser; }
             set
             {
                 _newUser = value;
@@ -61,11 +58,14 @@ namespace SoonZik.ViewModel
 
         public InscriptionViewModel()
         {
-            _validateCommand = new RelayCommand(ValidateExecute);
+            ValidateCommand = new RelayCommand(ValidateExecute);
             NewUser = new User();
             NewUser.address = new Address();
         }
+        
+        #endregion
 
+        #region Method
         private void ValidateExecute()
         {
             if (EmailHelper.IsValidEmail(NewUser.email))
@@ -85,12 +85,6 @@ namespace SoonZik.ViewModel
             var postRequest = new HttpRequestPost();
             var res = await postRequest.Save(NewUser, "", _password);
         }
-
         #endregion
-
-        #region Method
-
-        #endregion
-
     }
 }

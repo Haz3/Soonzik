@@ -22,6 +22,7 @@ namespace SoonZik.Controls
         private TimeSpan MyTimeSpan { get; set; }
 
         private List<Music> _listOfMusics;
+
         public List<Music> ListOfMusics
         {
             get { return _listOfMusics; }
@@ -33,6 +34,7 @@ namespace SoonZik.Controls
         }
 
         private Music _playedMusic;
+
         public Music PlayedMusic
         {
             get { return _playedMusic; }
@@ -44,6 +46,7 @@ namespace SoonZik.Controls
         }
 
         public int CurrentMusicIndex;
+
         #endregion
 
         #region ctor and Initializer
@@ -59,7 +62,7 @@ namespace SoonZik.Controls
         {
             HardwareButtons.BackPressed += HardwareButtonsOnBackPressed;
             MyMediaElement.MediaEnded += MyMediaElement_MediaEnded;
-            
+
             _navigationService = new NavigationService();
             ListOfMusics = new List<Music>();
             Singleton.Instance().SelectedMusicSingleton.file = "http://soonzikapi.herokuapp.com/musics/get/" +
@@ -79,6 +82,7 @@ namespace SoonZik.Controls
         #endregion
 
         #region PlayerButton
+
         private void RewindImage_OnTapped(object sender, TappedRoutedEventArgs e)
         {
             if (CurrentMusicIndex == 0)
@@ -113,7 +117,7 @@ namespace SoonZik.Controls
             PauseMedia();
         }
 
-        void MyMediaElement_MediaEnded(object sender, RoutedEventArgs e)
+        private void MyMediaElement_MediaEnded(object sender, RoutedEventArgs e)
         {
             if (CurrentMusicIndex == ListOfMusics.Count)
                 CurrentMusicIndex = 0;
@@ -122,50 +126,45 @@ namespace SoonZik.Controls
             MyMediaElement.Source = new Uri(ListOfMusics[CurrentMusicIndex].file, UriKind.Absolute);
             PlayMedia();
         }
+
         #endregion
 
         #region Shuffle and Repeat Method
+
         private void ShuffleButtonToggle_OnChecked(object sender, RoutedEventArgs e)
         {
-
         }
 
         private void ShuffleButtonToggle_OnUnchecked(object sender, RoutedEventArgs e)
         {
-
         }
 
         private void RepeatButtonToggle_OnChecked(object sender, RoutedEventArgs e)
         {
-
         }
 
         private void RepeatButtonToggle_OnUnchecked(object sender, RoutedEventArgs e)
         {
-
         }
+
         #endregion
 
         #region BackgroundPlayer
 
-        async void PlayMedia()
+        private async void PlayMedia()
         {
-            await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
-            {
-                MyMediaElement.Play();
-            });
+            await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () => { MyMediaElement.Play(); });
         }
 
-        async void PauseMedia()
+        private async void PauseMedia()
         {
-            await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
-            {
-                MyMediaElement.Pause();
-            });
+            await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () => { MyMediaElement.Pause(); });
         }
+
         #endregion
 
         #region Method
+
         private void TimerOnTick(object sender, object o)
         {
             if (MyMediaElement.NaturalDuration.TimeSpan.Seconds > 0)
@@ -180,7 +179,7 @@ namespace SoonZik.Controls
         private void StartTimer()
         {
             MyTimeSpan = new TimeSpan(MyMediaElement.NaturalDuration.TimeSpan.Seconds);
-            MyDispatcherTimer = new DispatcherTimer { Interval = MyTimeSpan };
+            MyDispatcherTimer = new DispatcherTimer {Interval = MyTimeSpan};
             MyDispatcherTimer.Tick += TimerOnTick;
             MyDispatcherTimer.Stop();
         }
@@ -189,16 +188,17 @@ namespace SoonZik.Controls
         {
             StartTimer();
         }
-        
+
         private void HardwareButtonsOnBackPressed(object sender, BackPressedEventArgs backPressedEventArgs)
         {
             backPressedEventArgs.Handled = true;
             _navigationService.GoBack();
         }
-        
+
         #endregion
 
         #region NotifyPropertyCahnge
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         [NotifyPropertyChangedInvocator]
@@ -207,6 +207,7 @@ namespace SoonZik.Controls
             var handler = PropertyChanged;
             if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
         }
+
         #endregion
     }
 }

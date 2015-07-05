@@ -9,10 +9,10 @@ using Windows.Phone.UI.Input;
 using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Media.Animation;
 using GalaSoft.MvvmLight.Command;
-using GalaSoft.MvvmLight.Helpers;
 using SoonZik.HttpRequest;
 using SoonZik.HttpRequest.Poco;
 using SoonZik.Properties;
@@ -29,6 +29,17 @@ namespace SoonZik.Controls
 {
     public sealed partial class GlobalMenuControl : UserControl, INotifyPropertyChanged
     {
+        #region NotifyPropertyCahnge
+
+        [NotifyPropertyChangedInvocator]
+        private void RaisePropertyChange(string propertyName)
+        {
+            var handler = PropertyChanged;
+            if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        #endregion
+
         #region Attribute
 
         #region Attribute Headers
@@ -96,7 +107,7 @@ namespace SoonZik.Controls
         #endregion
 
         public static Grid MyGrid { get; set; }
-        private ObservableCollection<SearchResult> _myResult;
+        private SearchResult _myResult;
 
         public SearchResult MyResult
         {
@@ -112,7 +123,7 @@ namespace SoonZik.Controls
         public event PropertyChangedEventHandler PropertyChanged;
         public string SearchText { get; set; }
         private readonly INavigationService _navigationService;
-        private UIElement _lastElement;
+        private static UIElement _lastElement;
         private User _selectedUser;
 
         public User SelectedUser
@@ -174,6 +185,8 @@ namespace SoonZik.Controls
         }
 
         public List<BouttonMenu> ListBouttonMenus { get; set; }
+        private static Storyboard story { get; set; }
+        private static ToggleButton toggle { get; set; }
 
         #endregion
 
@@ -187,8 +200,10 @@ namespace SoonZik.Controls
             GlobalGrid.Children.Add(Singleton.Instance().NewsPage);
 
             _navigationService = new NavigationService();
-            MyResult = new ObservableCollection<SearchResult>();
+            //MyResult = new ObservableCollection<SearchResult>();
             HardwareButtons.BackPressed += HardwareButtonsOnBackPressed;
+            story = MenuStoryBoardBack;
+            toggle = ToggleButtonSearch;
 
             ProfilButton.Command = new RelayCommand(GoToProfil);
             NewsButton.Command = new RelayCommand(GoToNews);
@@ -233,7 +248,7 @@ namespace SoonZik.Controls
                     SetChildren(new GeolocalisationView());
             }
             else if (SelectedBouttonMenu.PageBoutton.Equals(new Connexion()))
-                _navigationService.Navigate(typeof(Connexion));
+                _navigationService.Navigate(typeof (Connexion));
             else
             {
                 var obj = SelectedBouttonMenu.PageBoutton as UIElement;
@@ -254,10 +269,10 @@ namespace SoonZik.Controls
             SearchStoryBoardBack.Pause();
         }
 
-        public void CloseMenu()
+        public static void CloseMenu()
         {
-            MenuStoryBoardBack.Begin();
-            ToggleButtonSearch.IsChecked = false;
+            story.Begin();
+            toggle.IsChecked = false;
         }
 
         #endregion
@@ -288,7 +303,7 @@ namespace SoonZik.Controls
 
         private void GoToMondeMusical()
         {
-            Geolocator locator = new Geolocator();
+            var locator = new Geolocator();
             if (locator.LocationStatus == PositionStatus.Disabled)
             {
                 new MessageDialog("Veuillez activer votre Location").ShowAsync();
@@ -315,7 +330,7 @@ namespace SoonZik.Controls
             SetChildren(new Friends());
         }
 
-        private void SetChildren(UIElement myObj)
+        public static void SetChildren(UIElement myObj)
         {
             //if (myObj.GetType() != typeof(Playlist))
             // PlaylistAdd.Visibility = Visibility.Collapsed;
@@ -334,12 +349,11 @@ namespace SoonZik.Controls
 
         private void GoToConnexionPage()
         {
-            _navigationService.Navigate(typeof(Connexion));
+            _navigationService.Navigate(typeof (Connexion));
         }
 
         private void PlaylistAdd_OnTapped(object sender, TappedRoutedEventArgs e)
         {
-
         }
 
         #endregion
@@ -360,7 +374,7 @@ namespace SoonZik.Controls
             var request = new HttpRequestGet();
             try
             {
-                var list = (SearchResult)await request.Search(new SearchResult(), SearchText);
+                var list = (SearchResult) await request.Search(new SearchResult(), SearchText);
                 if (list != null)
                 {
                     MyResult = list;
@@ -389,23 +403,23 @@ namespace SoonZik.Controls
             {
                 ResultArtisteListView.Visibility = Visibility.Visible;
                 ResultArtisteListView.ItemsSource = MyResult.artist;
-
-            } if (MyResult.user != null)
+            }
+            if (MyResult.user != null)
             {
                 ResultUserListView.Visibility = Visibility.Visible;
                 ResultUserListView.ItemsSource = MyResult.user;
-
-            } if (MyResult.album != null)
+            }
+            if (MyResult.album != null)
             {
                 ResultAlbumListView.Visibility = Visibility.Visible;
                 ResultAlbumListView.ItemsSource = MyResult.album;
-
-            } if (MyResult.pack != null)
+            }
+            if (MyResult.pack != null)
             {
                 ResultPackListView.Visibility = Visibility.Visible;
                 ResultPackListView.ItemsSource = MyResult.pack;
-
-            } if (MyResult.music != null)
+            }
+            if (MyResult.music != null)
             {
                 ResultMusicListView.Visibility = Visibility.Visible;
                 ResultMusicListView.ItemsSource = MyResult.music;
@@ -438,8 +452,8 @@ namespace SoonZik.Controls
 
         private void MusicStackPanel_OnTapped(object sender, TappedRoutedEventArgs e)
         {
-            Singleton.Instance().SelectedMusicSingleton = SelectedMusic;
-            _navigationService.Navigate(new PlayerControl().GetType());
+            AlbumViewModel.MyAlbum = SelectedMusic.album;
+            SetChildren(new AlbumView());
             CloseMenu();
         }
 
@@ -462,19 +476,5 @@ namespace SoonZik.Controls
         }
 
         #endregion
-
-        #region NotifyPropertyCahnge
-
-        [NotifyPropertyChangedInvocator]
-        private void RaisePropertyChange(string propertyName)
-        {
-            var handler = PropertyChanged;
-            if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
-        }
-
-        #endregion
-
-
-
     }
 }

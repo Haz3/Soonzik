@@ -68,6 +68,18 @@ namespace SoonZik.HttpRequest
             return await DoRequestForObject(MyObj, request);
         }
 
+        public async Task<object> GetFollows(object myObject, string element, string id)
+        {
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(ApiUrl + element + "/" + id + "/follows");
+            return await DoRequestForObject(myObject, request);
+        }
+
+        public async Task<object> GetFriends(object myObject, string element, string id)
+        {
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(ApiUrl + element + "/" + id + "/friends");
+            return await DoRequestForObject(myObject, request);
+        }
+
         private static async Task<string> DoRequest(HttpWebRequest request)
         {
             request.Method = HttpMethods.Get;
@@ -94,8 +106,7 @@ namespace SoonZik.HttpRequest
             }
             return null;
         }
-
-
+        
         private static async Task<object> DoRequestForObject(object myObject, HttpWebRequest request)
         {
             request.Method = HttpMethods.Get;

@@ -15,51 +15,9 @@ namespace SoonZik.ViewModel
 {
     public class PackViewModel : ViewModelBase
     {
-        public ObservableCollection<Data> Datas { get; set; }
-
-        public static Pack ThePack { get; set; }
-
-        private Data _selectedData;
-
-        public Data SelectedData
-        {
-            get { return _selectedData;}
-            set
-            {
-                _selectedData = value; 
-                RaisePropertyChanged("SelectedData");
-            }
-        }
-
-        private Album _selectedAlbum;
-
-        public Album SelectedAlbum
-        {
-            get { return _selectedAlbum; }
-            set
-            {
-                _selectedAlbum = value;
-                RaisePropertyChanged("SelectedAlbum");
-            }
-        }
-
         private List<Album> _listAlbums;
-
-        public List<Album> ListAlbums
-        {
-            get { return _listAlbums;}
-            set
-            {
-                _listAlbums = value;
-                RaisePropertyChanged("ListAlbums");
-            }
-        }
-
-        private ICommand _selectionCommand;
-        public ICommand SelectionCommand
-        {
-            get { return _selectionCommand; }
-        }
+        private Album _selectedAlbum;
+        private Data _selectedData;
 
         public PackViewModel()
         {
@@ -96,15 +54,49 @@ namespace SoonZik.ViewModel
                     Title = "06"
                 }
             };
-            
+
             Datas = datas;
 
             if (ThePack != null)
             {
-                _selectionCommand = new RelayCommand(SelectionExecute);
+                SelectionCommand = new RelayCommand(SelectionExecute);
             }
-
         }
+
+        public ObservableCollection<Data> Datas { get; set; }
+        public static Pack ThePack { get; set; }
+
+        public Data SelectedData
+        {
+            get { return _selectedData; }
+            set
+            {
+                _selectedData = value;
+                RaisePropertyChanged("SelectedData");
+            }
+        }
+
+        public Album SelectedAlbum
+        {
+            get { return _selectedAlbum; }
+            set
+            {
+                _selectedAlbum = value;
+                RaisePropertyChanged("SelectedAlbum");
+            }
+        }
+
+        public List<Album> ListAlbums
+        {
+            get { return _listAlbums; }
+            set
+            {
+                _listAlbums = value;
+                RaisePropertyChanged("ListAlbums");
+            }
+        }
+
+        public ICommand SelectionCommand { get; private set; }
 
         private void SelectionExecute()
         {
@@ -115,25 +107,14 @@ namespace SoonZik.ViewModel
         public void Charge()
         {
             var request = new HttpRequestGet();
-            //try
-            //{
-            //    ThePack = (Pack)await request.GetObject(new Pack(), "packs", ThePack.Id.ToString());
-            //}
-            //catch (Exception e)
-            //{
-            //    Debug.WriteLine(e.ToString());
-            //}
-
             var pack = request.GetObject(new Pack(), "packs", ThePack.Id.ToString());
             pack.ContinueWith(delegate(Task<object> tmp)
             {
                 var test = tmp.Result as Pack;
                 if (test != null)
                 {
-                    CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
-                    {
-                        ThePack = test;
-                    });
+                    CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
+                        () => { ThePack = test; });
                 }
             });
         }

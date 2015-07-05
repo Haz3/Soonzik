@@ -14,81 +14,96 @@
 
     <Grid x:Name="GridGeneral">
         <Grid.RowDefinitions>
-            <RowDefinition Height="50"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="40"/>
+            <RowDefinition Height="50" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="40" />
         </Grid.RowDefinitions>
 
         <Grid Row="0">
-            <TextBlock x:Uid="SignInText" Text="" FontSize="40"></TextBlock>
+            <TextBlock x:Uid="SignInText" Text="" FontSize="40" />
         </Grid>
 
         <ScrollViewer Grid.Row="1">
             <Grid>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="60"/>
-                    <RowDefinition Height="60"/>
-                    <RowDefinition Height="60"/>
-                    <RowDefinition Height="60"/>
-                    <RowDefinition Height="60"/>
-                    <RowDefinition Height="60"/>
-                    <RowDefinition Height="60"/>
-                    <RowDefinition Height="60"/>
-                    <RowDefinition Height="60"/>
-                    <RowDefinition Height="60"/>
-                    <RowDefinition Height="60"/>
-                    <RowDefinition Height="60"/>
-                    <RowDefinition Height="60"/>
-                    <RowDefinition Height="60"/>
+                    <RowDefinition Height="60" />
+                    <RowDefinition Height="60" />
+                    <RowDefinition Height="60" />
+                    <RowDefinition Height="60" />
+                    <RowDefinition Height="60" />
+                    <RowDefinition Height="60" />
+                    <RowDefinition Height="60" />
+                    <RowDefinition Height="60" />
+                    <RowDefinition Height="60" />
+                    <RowDefinition Height="60" />
+                    <RowDefinition Height="60" />
+                    <RowDefinition Height="60" />
+                    <RowDefinition Height="60" />
+                    <RowDefinition Height="60" />
                 </Grid.RowDefinitions>
-                <TextBox Grid.Row="0" InputScope="5" Text="{Binding NewUser.email, Mode=TwoWay}" Height="40" 
-                         Background="Transparent" BorderThickness="0,0,0,0" Foreground="Aqua" x:Uid="Email" PlaceholderText=""/>
+                <TextBox Grid.Row="0" InputScope="5" Text="{Binding NewUser.email, Mode=TwoWay}" Height="40"
+                         Background="Transparent" BorderThickness="0,0,0,0" Foreground="Aqua" x:Uid="Email"
+                         PlaceholderText="" />
 
-                <PasswordBox Grid.Row="1" Password="{Binding Password, Mode=TwoWay}" Height="40" 
-                             Background="Transparent" BorderThickness="0,0,0,0" Foreground="Aqua" x:Uid="Password" PlaceholderText=""/>
+                <PasswordBox Grid.Row="1" Password="{Binding Password, Mode=TwoWay}" Height="40"
+                             Background="Transparent" BorderThickness="0,0,0,0" Foreground="Aqua" x:Uid="Password"
+                             PlaceholderText="" />
 
-                <TextBox Grid.Row="2" Text="{Binding NewUser.fname, Mode=TwoWay}" Height="40" 
-                         Background="Transparent" BorderThickness="0,0,0,0" Foreground="Aqua" x:Uid="FirstName" PlaceholderText=""/>
+                <TextBox Grid.Row="2" Text="{Binding NewUser.fname, Mode=TwoWay}" Height="40"
+                         Background="Transparent" BorderThickness="0,0,0,0" Foreground="Aqua" x:Uid="FirstName"
+                         PlaceholderText="" />
 
-                <TextBox Grid.Row="3" Text="{Binding NewUser.lname, Mode=TwoWay}" Height="40" 
-                         Background="Transparent" BorderThickness="0,0,0,0" Foreground="Aqua" x:Uid="LastName" PlaceholderText=""/>
+                <TextBox Grid.Row="3" Text="{Binding NewUser.lname, Mode=TwoWay}" Height="40"
+                         Background="Transparent" BorderThickness="0,0,0,0" Foreground="Aqua" x:Uid="LastName"
+                         PlaceholderText="" />
 
-                <DatePicker Grid.Row="4" Date="{Binding Birthday, Mode=TwoWay}" BorderBrush="Transparent" Height="60" 
-                            Background="Transparent" VerticalAlignment="Center" Foreground="Aqua"/>
+                <DatePicker Grid.Row="4" Date="{Binding Birthday, Mode=TwoWay}" BorderBrush="Transparent" Height="60"
+                            Background="Transparent" VerticalAlignment="Center" Foreground="Aqua" />
 
-                <TextBox Grid.Row="5" Text="{Binding NewUser.username, Mode=TwoWay}" 
-                         Background="Transparent" BorderThickness="0,0,0,0" Foreground="Aqua" x:Uid="UserName" PlaceholderText=""/>
+                <TextBox Grid.Row="5" Text="{Binding NewUser.username, Mode=TwoWay}"
+                         Background="Transparent" BorderThickness="0,0,0,0" Foreground="Aqua" x:Uid="UserName"
+                         PlaceholderText="" />
 
-                <TextBox Grid.Row="6" InputScope="39" Text="{Binding NewUser.address.NumberStreet, Mode=TwoWay}" Height="40"
-                         Background="Transparent" BorderThickness="0,0,0,0" Foreground="Aqua" x:Uid="NumberStreet" PlaceholderText=""/>
+                <TextBox Grid.Row="6" InputScope="39" Text="{Binding NewUser.address.NumberStreet, Mode=TwoWay}"
+                         Height="40"
+                         Background="Transparent" BorderThickness="0,0,0,0" Foreground="Aqua" x:Uid="NumberStreet"
+                         PlaceholderText="" />
 
                 <TextBox Grid.Row="7" Text="{Binding NewUser.address.Street, Mode=TwoWay}" Height="40"
-                         Background="Transparent" BorderThickness="0,0,0,0" Foreground="Aqua" x:Uid="Street" PlaceholderText=""/>
+                         Background="Transparent" BorderThickness="0,0,0,0" Foreground="Aqua" x:Uid="Street"
+                         PlaceholderText="" />
 
-                <TextBox Grid.Row="8" Text="{Binding NewUser.address.Complement, Mode=TwoWay}" Height="40" 
-                         Background="Transparent" BorderThickness="0,0,0,0" Foreground="Aqua" x:Uid="Complement" PlaceholderText=""/>
+                <TextBox Grid.Row="8" Text="{Binding NewUser.address.Complement, Mode=TwoWay}" Height="40"
+                         Background="Transparent" BorderThickness="0,0,0,0" Foreground="Aqua" x:Uid="Complement"
+                         PlaceholderText="" />
 
                 <TextBox Grid.Row="9" Text="{Binding NewUser.address.City, Mode=TwoWay}" Height="40"
-                         Background="Transparent" BorderThickness="0,0,0,0" Foreground="Aqua" x:Uid="City" PlaceholderText=""/>
+                         Background="Transparent" BorderThickness="0,0,0,0" Foreground="Aqua" x:Uid="City"
+                         PlaceholderText="" />
 
-                <TextBox Grid.Row="10" Text="{Binding NewUser.address.Country, Mode=TwoWay}"  Height="40" 
-                         Background="Transparent" BorderThickness="0,0,0,0" Foreground="Aqua" x:Uid="Country" PlaceholderText=""/>
+                <TextBox Grid.Row="10" Text="{Binding NewUser.address.Country, Mode=TwoWay}" Height="40"
+                         Background="Transparent" BorderThickness="0,0,0,0" Foreground="Aqua" x:Uid="Country"
+                         PlaceholderText="" />
 
-                <TextBox Grid.Row="11" InputScope="39" Text="{Binding NewUser.address.Zipcode, Mode=TwoWay}" Height="40"
-                         Background="Transparent" BorderThickness="0,0,0,0" Foreground="Aqua" x:Uid="ZipCode" PlaceholderText=""/>
+                <TextBox Grid.Row="11" InputScope="39" Text="{Binding NewUser.address.Zipcode, Mode=TwoWay}"
+                         Height="40"
+                         Background="Transparent" BorderThickness="0,0,0,0" Foreground="Aqua" x:Uid="ZipCode"
+                         PlaceholderText="" />
 
                 <TextBox Grid.Row="12" InputScope="32" Text="{Binding NewUser.phoneNumber, Mode=TwoWay}" Height="40"
-                         Background="Transparent" BorderThickness="0,0,0,0" Foreground="Aqua" x:Uid="Phone" PlaceholderText=""/>
+                         Background="Transparent" BorderThickness="0,0,0,0" Foreground="Aqua" x:Uid="Phone"
+                         PlaceholderText="" />
 
-                <TextBox Grid.Row="13" Text="{Binding NewUser.image, Mode=TwoWay}" Height="40" 
-                         Background="Transparent" BorderThickness="0,0,0,0" Foreground="Aqua" x:Uid="Picture" PlaceholderText=""/>
+                <TextBox Grid.Row="13" Text="{Binding NewUser.image, Mode=TwoWay}" Height="40"
+                         Background="Transparent" BorderThickness="0,0,0,0" Foreground="Aqua" x:Uid="Picture"
+                         PlaceholderText="" />
             </Grid>
 
         </ScrollViewer>
 
         <Grid Row="2">
-            <Button Command="{Binding ValidateCommand}" x:Uid="Validate" Content="" HorizontalAlignment="Center" VerticalAlignment="Center">
-            </Button>
+            <Button Command="{Binding ValidateCommand}" x:Uid="Validate" Content="" HorizontalAlignment="Center"
+                    VerticalAlignment="Center" />
         </Grid>
     </Grid>
 </Page>

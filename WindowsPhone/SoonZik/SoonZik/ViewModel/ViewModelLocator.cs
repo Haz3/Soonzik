@@ -20,13 +20,13 @@ using SoonZik.Views;
 namespace SoonZik.ViewModel
 {
     /// <summary>
-    /// This class contains static references to all the view models in the
-    /// application and provides an entry point for the bindings.
+    ///     This class contains static references to all the view models in the
+    ///     application and provides an entry point for the bindings.
     /// </summary>
     public class ViewModelLocator
     {
         /// <summary>
-        /// Initializes a new instance of the ViewModelLocator class.
+        ///     Initializes a new instance of the ViewModelLocator class.
         /// </summary>
         public ViewModelLocator()
         {
@@ -50,13 +50,12 @@ namespace SoonZik.ViewModel
             SimpleIoc.Default.Register<GeolocalisationView>();
             SimpleIoc.Default.Register<PlaylistViewModel>();
             SimpleIoc.Default.Register<InscriptionViewModel>();
-
+            SimpleIoc.Default.Register<BattleDetailViewModel>();
         }
 
         public MainViewModel Main
         {
-            get
-            { return ServiceLocator.Current.GetInstance<MainViewModel>(); }
+            get { return ServiceLocator.Current.GetInstance<MainViewModel>(); }
         }
 
         public ConnexionViewModel Connexion
@@ -68,7 +67,7 @@ namespace SoonZik.ViewModel
         {
             get { return ServiceLocator.Current.GetInstance<NewsViewModel>(); }
         }
-        
+
         public PackViewModel Pack
         {
             get { return ServiceLocator.Current.GetInstance<PackViewModel>(); }
@@ -123,7 +122,7 @@ namespace SoonZik.ViewModel
         {
             get { return ServiceLocator.Current.GetInstance<AlbumViewModel>(); }
         }
-        
+
         public GeolocalisationView GeolocView
         {
             get { return ServiceLocator.Current.GetInstance<GeolocalisationView>(); }
@@ -137,6 +136,11 @@ namespace SoonZik.ViewModel
         public InscriptionViewModel InscriptionView
         {
             get { return ServiceLocator.Current.GetInstance<InscriptionViewModel>(); }
+        }
+
+        public BattleDetailViewModel BattleDetail
+        {
+            get { return ServiceLocator.Current.GetInstance<BattleDetailViewModel>(); }
         }
         public static void Cleanup()
         {

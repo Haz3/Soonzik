@@ -147,8 +147,8 @@
   <data name="Delete.Content" xml:space="preserve">
     <value>Effacer le contact</value>
   </data>
-  <data name="Edit.Content" xml:space="preserve">
-    <value>Editer</value>
+  <data name="Edit" xml:space="preserve">
+    <value>Editer mes informations</value>
   </data>
   <data name="Email.PlaceholderText" xml:space="preserve">
     <value>Email</value>
@@ -257,5 +257,11 @@
   </data>
   <data name="PlaylistPivot.Header" xml:space="preserve">
     <value>Playlist(s)</value>
+  </data>
+  <data name="PostEdit" xml:space="preserve">
+    <value>Mettre a jour mes informations</value>
+  </data>
+  <data name="UpdateInformation" xml:space="preserve">
+    <value>Vos informations sont mise a jour</value>
   </data>
 </root>

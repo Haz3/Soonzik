@@ -23,7 +23,7 @@ namespace SoonZik.Controls
 
         public void FacebookShare_OnTapped(object sender, TappedRoutedEventArgs e)
         {
-                // TODO Share on Facebook
+            // TODO Share on Facebook
 
             var postParams = new
             {
@@ -38,17 +38,17 @@ namespace SoonZik.Controls
         {
             try
             {
-                dynamic fbPostTaskResult = await Singleton.Instance().MyFacebookClient.PostTaskAsync("/me/feed", postParams);
+                dynamic fbPostTaskResult =
+                    await Singleton.Instance().MyFacebookClient.PostTaskAsync("/me/feed", postParams);
                 var responseresult = (IDictionary<string, object>) fbPostTaskResult;
-                MessageDialog SuccessMsg = new MessageDialog("Message posted sucessfully on facebook wall");
+                var SuccessMsg = new MessageDialog("Message posted sucessfully on facebook wall");
                 await SuccessMsg.ShowAsync();
                 NewsViewModel.MessagePrompt.Hide();
             }
             catch (Exception ex)
             {
-                MessageDialog ErrMsg = new MessageDialog("Error Ocuured!" + ex);  
+                var ErrMsg = new MessageDialog("Error Ocuured!" + ex);
             }
-
         }
 
         public void TwitterShare_OnTapped(object sender, TappedRoutedEventArgs e)

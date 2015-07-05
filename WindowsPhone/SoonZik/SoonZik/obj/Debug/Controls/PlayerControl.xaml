@@ -11,47 +11,58 @@
     Background="#424242">
     <interactivity:Interaction.Behaviors>
         <core:EventTriggerBehavior EventName="Loaded">
-            <core:InvokeCommandAction Command="{Binding PlayerLoaded}"/>
+            <core:InvokeCommandAction Command="{Binding PlayerLoaded}" />
         </core:EventTriggerBehavior>
     </interactivity:Interaction.Behaviors>
 
 
     <Grid x:Name="GlobalPlayerGrid">
         <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="60"/>
-            <RowDefinition Height="60"/>
-            <RowDefinition Height="100"/>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="60" />
+            <RowDefinition Height="60" />
+            <RowDefinition Height="100" />
         </Grid.RowDefinitions>
 
-        <MediaElement x:ConnectionId='1' x:Name="MyMediaElement" AutoPlay="False"                                           ></MediaElement>
+        <MediaElement x:ConnectionId='1' x:Name="MyMediaElement" AutoPlay="False"                                            />
 
         <Grid Grid.Row="0" x:Name="CoverArtist">
-            <Image Source="../Resources/stromae.jpg" Height="250" Width="250"/>
+            <Image Source="../Resources/stromae.jpg" Height="250" Width="250" />
         </Grid>
 
         <Grid Grid.Row="1" x:Name="TitlePanel">
-            <TextBlock Text="{Binding PlayedMusic.title, Mode=TwoWay}" HorizontalAlignment="Center" FontSize="20" FontFamily="Roboto" Height="25" VerticalAlignment="Top"/>
-            <TextBlock Text="{Binding PlayedMusic.user.Username, Mode=TwoWay}" HorizontalAlignment="Center" FontSize="15" FontFamily="Roboto" Height="25" VerticalAlignment="Bottom"/>
+            <TextBlock Text="{Binding PlayedMusic.title, Mode=TwoWay}" HorizontalAlignment="Center" FontSize="20"
+                       FontFamily="Roboto" Height="25" VerticalAlignment="Top" />
+            <TextBlock Text="{Binding PlayedMusic.user.Username, Mode=TwoWay}" HorizontalAlignment="Center"
+                       FontSize="15" FontFamily="Roboto" Height="25" VerticalAlignment="Bottom" />
         </Grid>
 
         <Grid Grid.Row="2" x:Name="SliderPanel">
-            <TextBlock Text="tps" HorizontalAlignment="Left" FontSize="15" FontFamily="Roboto" Height="25" VerticalAlignment="Center" Margin="10,0,0,0"/>
-            <TextBlock Text="{Binding PlayedMusic.duration}" HorizontalAlignment="Right" FontSize="15" FontFamily="Roboto" Height="25" VerticalAlignment="Center" Margin="0,0,10,0"/>
-            <Slider x:Name="TimeSlider" Maximum="{Binding MediaElementObject.NaturalDuration}" Width="300" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            <TextBlock Text="tps" HorizontalAlignment="Left" FontSize="15" FontFamily="Roboto" Height="25"
+                       VerticalAlignment="Center" Margin="10,0,0,0" />
+            <TextBlock Text="{Binding PlayedMusic.duration}" HorizontalAlignment="Right" FontSize="15"
+                       FontFamily="Roboto" Height="25" VerticalAlignment="Center" Margin="0,0,10,0" />
+            <Slider x:Name="TimeSlider" Maximum="{Binding MediaElementObject.NaturalDuration}" Width="300"
+                    VerticalAlignment="Center" HorizontalAlignment="Center" />
         </Grid>
 
         <Grid Grid.Row="3" x:Name="ButtonPanel">
-            <ToggleButton x:ConnectionId='2' x:Name="PlayButtonToggle" Content="ToggleButton" HorizontalAlignment="Center" Height="40" Style="{StaticResource PauseButtonStyle}" VerticalAlignment="Center" Width="40"                                                                              />
-            <ToggleButton x:ConnectionId='3' x:Name="ShuffleButtonToggle" Content="ToggleButton" HorizontalAlignment="Left" Height="40" Style="{StaticResource ShuffleButtonStyle}" VerticalAlignment="Center" Width="40"                                                                                    />
-            <ToggleButton x:ConnectionId='4' x:Name="RepeatButtonToggle" Content="ToggleButton" HorizontalAlignment="Right" Height="40" Style="{StaticResource RepeatButtonStyle}" VerticalAlignment="Center" Width="40"                                                                                  />
+            <ToggleButton x:ConnectionId='2' x:Name="PlayButtonToggle" Content="ToggleButton" HorizontalAlignment="Center" Height="40"
+                          Style="{StaticResource PauseButtonStyle}" VerticalAlignment="Center" Width="40"
+                                                                                                        />
+            <ToggleButton x:ConnectionId='3' x:Name="ShuffleButtonToggle" Content="ToggleButton" HorizontalAlignment="Left" Height="40"
+                          Style="{StaticResource ShuffleButtonStyle}" VerticalAlignment="Center" Width="40"
+                                                                                                              />
+            <ToggleButton x:ConnectionId='4' x:Name="RepeatButtonToggle" Content="ToggleButton" HorizontalAlignment="Right" Height="40"
+                          Style="{StaticResource RepeatButtonStyle}" VerticalAlignment="Center" Width="40"
+                                                                                                            />
 
-            <Image x:ConnectionId='5' x:Name="RewindImage"                                HorizontalAlignment="Left" VerticalAlignment="Center" Width="30" Height="30"  Source="ms-appx:///Resources/Icones/rewind.png" Margin="130,0,0,0"  Stretch="Fill">
-
-            </Image>
-            <Image x:ConnectionId='6' x:Name="ForwardImage"                                HorizontalAlignment="Right" VerticalAlignment="Center" Width="30" Height="30"  Source="ms-appx:///Resources/Icones/forward.png" Margin="0,0,130,0" Stretch="Fill">
-
-            </Image>
+            <Image x:ConnectionId='5' x:Name="RewindImage"                               HorizontalAlignment="Left"
+                   VerticalAlignment="Center" Width="30" Height="30" Source="ms-appx:///Resources/Icones/rewind.png"
+                   Margin="130,0,0,0" Stretch="Fill" />
+            <Image x:ConnectionId='6' x:Name="ForwardImage"                                HorizontalAlignment="Right"
+                   VerticalAlignment="Center" Width="30" Height="30" Source="ms-appx:///Resources/Icones/forward.png"
+                   Margin="0,0,130,0" Stretch="Fill" />
         </Grid>
     </Grid>
 </Page>

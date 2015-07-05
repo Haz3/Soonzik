@@ -4,6 +4,7 @@ using System.IO;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.UI.Xaml.Media.Imaging;
 using SoonZik.HttpRequest.Poco;
 
 namespace SoonZik.HttpRequest
@@ -45,33 +46,48 @@ namespace SoonZik.HttpRequest
             return await GetHttpPostResponse(request, postData);
         }
 
-        public async Task<String> Unfollow(string sha256, string unfollowId)
+        public async Task<String> Unfollow(string sha256, string unfollowId, string userId)
         {
-            HttpWebRequest request = (HttpWebRequest) WebRequest.Create(ApiUrl + "users/unfollow/");
-            var postData = "";
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(ApiUrl + "users/unfollow");
+            var postData = "follow_id=" + unfollowId +"&secureKey=" + sha256 + "&user_id=" + userId;
             return await GetHttpPostResponse(request, postData);
         }
 
-        public async Task<String> Follow(string sha256, string followId)
+        public async Task<String> Follow(string sha256, string followId, string userId)
         {
-            HttpWebRequest request = (HttpWebRequest) WebRequest.Create(ApiUrl + "users/follow/");
-            var postData = "";
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(ApiUrl + "users/follow");
+            var postData = "follow_id=" + followId + "&secureKey=" + sha256 + "&user_id=" + userId;
             return await GetHttpPostResponse(request, postData);
         }
 
-        public async Task<String> AddFriend(string sha256, string friendId)
+        public async Task<String> AddFriend(string sha256, string friendId, string userId)
         {
-            HttpWebRequest request = (HttpWebRequest) WebRequest.Create(ApiUrl + "users/addfriend/");
-            var postData = "";
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(ApiUrl + "users/addfriend");
+            var postData = "friend_id=" + friendId + "&secureKey=" + sha256 + "&user_id=" + userId;
             return await GetHttpPostResponse(request, postData);
         }
 
-        public async Task<String> DelFriend(string sha256, string friendId)
+        public async Task<String> DelFriend(string sha256, string friendId, string userId)
         {
-            HttpWebRequest request = (HttpWebRequest) WebRequest.Create(ApiUrl + "users/delfriend/");
-            var postData = "";
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(ApiUrl + "users/delfriend");
+            var postData = "friend_id=" + friendId + "&secureKey=" + sha256 + "&user_id=" + userId;
             return await GetHttpPostResponse(request, postData);
         }
+
+        public async Task<String> Vote(string sha256, string battleId, string artistId, string userId)
+        {
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(ApiUrl + "/battles/" + battleId + "/vote");
+            var postData = "artist_id=" + artistId + "&secureKey=" + sha256 + "&user_id=" + userId;
+            return await GetHttpPostResponse(request, postData);
+        }
+
+        public async Task<String> UploadImage(BitmapImage image, string sha256, string userId, string contentType, string name)
+        {
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(ApiUrl + "users/upload");
+            var postData = "file[content_type]=" + contentType + "&file[original_filename]" + name + "&file[tempfile]" + image + "&secureKey=" + sha256 + "&user_id=" + userId;
+            return await GetHttpPostResponse(request, postData);
+        }
+
 
         public async Task<String> GetHttpPostResponse(HttpWebRequest request, string postData)
         {

@@ -10,7 +10,29 @@ namespace SoonZik.ViewModel
 {
     public class ProfilFriendViewModel : ViewModelBase
     {
-         #region Attribute
+        #region Ctor
+
+        [PreferredConstructor]
+        public ProfilFriendViewModel()
+        {
+            Navigation = new NavigationService();
+            //CurrentUser = Singleton.Instance().CurrentUser;
+            //HardwareButtons.BackPressed += HardwareButtonsOnBackPressed;
+            SelectionCommand = new RelayCommand(SelectionExecute);
+            AddCommand = new RelayCommand(AddFriendExecute);
+            //Navigation.GoBack();
+        }
+
+        #endregion
+
+        private void AddFriendExecute()
+        {
+            AddDelFriendHelpers.GetUserKeyForFriend(CurrentUser.id.ToString());
+        }
+
+        #region Attribute
+
+        public ICommand AddCommand { get; private set; }
 
         private User _currentUser;
 
@@ -21,9 +43,9 @@ namespace SoonZik.ViewModel
             {
                 _currentUser = value;
                 RaisePropertyChanged("CurrentUser");
-            } 
-            
+            }
         }
+
         public INavigationService Navigation;
 
         public User SelectUser
@@ -35,31 +57,15 @@ namespace SoonZik.ViewModel
                 RaisePropertyChanged("SelectUser");
             }
         }
+
         private User _selectUser;
-        
-        private ICommand _selectionCommand;
-        public ICommand SelectionCommand
-        {
-            get { return _selectionCommand; }
-        }
 
-        #endregion
-
-        #region Ctor
-        [PreferredConstructor]
-        public ProfilFriendViewModel()
-        {
-            Navigation = new NavigationService();
-            //CurrentUser = Singleton.Instance().CurrentUser;
-            //HardwareButtons.BackPressed += HardwareButtonsOnBackPressed;
-            _selectionCommand = new RelayCommand(SelectionExecute);
-
-            //Navigation.GoBack();
-        }
+        public ICommand SelectionCommand { get; private set; }
 
         #endregion
 
         #region Method
+
         private void SelectionExecute()
         {
             if (Singleton.Instance().ItsMe)
@@ -73,7 +79,7 @@ namespace SoonZik.ViewModel
             backPressedEventArgs.Handled = true;
             Navigation.GoBack();
         }
-        
+
         #endregion
     }
 }

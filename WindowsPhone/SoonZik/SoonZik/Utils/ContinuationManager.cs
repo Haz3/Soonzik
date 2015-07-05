@@ -9,7 +9,7 @@ namespace SoonZik.Helpers
     {
         public void ContinueWith(IActivatedEventArgs args)
         {
-            var frame = (Frame)Window.Current.Content;
+            var frame = (Frame) Window.Current.Content;
             if (frame == null)
                 return;
 
@@ -23,15 +23,16 @@ namespace SoonZik.Helpers
                     break;
                 case ActivationKind.WebAuthenticationBrokerContinuation:
                     var continuator = new ConnexionViewModel();
-                    continuator.ContinueWithWebAuthenticationBroker((WebAuthenticationBrokerContinuationEventArgs)args);
+                    continuator.ContinueWithWebAuthenticationBroker((WebAuthenticationBrokerContinuationEventArgs) args);
                     break;
                 default:
                     break;
             }
         }
     }
-    interface IWebAuthenticationBrokerContinuable
+
+    internal interface IWebAuthenticationBrokerContinuable
     {
         void ContinueWithWebAuthenticationBroker(WebAuthenticationBrokerContinuationEventArgs args);
-    }  
+    }
 }

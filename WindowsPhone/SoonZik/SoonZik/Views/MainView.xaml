@@ -8,6 +8,6 @@
     mc:Ignorable="d"
     DataContext="{StaticResource MainViewModel}"
     Background="#424242">
-    
+
     <control:GlobalMenuControl />
 </Page>

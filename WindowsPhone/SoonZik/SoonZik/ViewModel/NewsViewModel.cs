@@ -16,6 +16,18 @@ namespace SoonZik.ViewModel
 {
     public class NewsViewModel : ViewModelBase
     {
+        #region Ctor
+
+        public NewsViewModel()
+        {
+            _listNews = new ObservableCollection<News>();
+            Charge();
+            ShareTapped = new RelayCommand(ShareTappedExecute);
+            ItemClickCommand = new RelayCommand(ItemClickExecute);
+        }
+
+        #endregion
+
         #region Attribute
 
         public static MessagePrompt MessagePrompt { get; set; }
@@ -41,10 +53,7 @@ namespace SoonZik.ViewModel
 
         public News SelectedNews
         {
-            get
-            {
-                return _selectedNews;
-            }
+            get { return _selectedNews; }
             set
             {
                 _selectedNews = value;
@@ -53,30 +62,21 @@ namespace SoonZik.ViewModel
         }
 
         private RelayCommand _itemClickCommand;
+
         public RelayCommand ItemClickCommand
         {
             get { return _itemClickCommand; }
             set
             {
-                _itemClickCommand = value; 
+                _itemClickCommand = value;
                 RaisePropertyChanged("ItemClickCommand");
             }
         }
 
         #endregion
 
-        #region Ctor
-
-        public NewsViewModel()
-        {
-            _listNews = new ObservableCollection<News>();
-            Charge();
-            ShareTapped = new RelayCommand(ShareTappedExecute);
-            ItemClickCommand = new RelayCommand(ItemClickExecute);
-        }
-        #endregion
-
         #region Method
+
         private void ItemClickExecute()
         {
             DetailSelectedNews = SelectedNews;
@@ -101,19 +101,6 @@ namespace SoonZik.ViewModel
         public void Charge()
         {
             var request = new HttpRequestGet();
-            //try
-            //{
-            //    var list = (List<News>) await request.GetListObject(new List<News>(), "news");
-            //    _listNews = new ObservableCollection<News>();
-            //    foreach (var item in list)
-            //    {
-            //        _listNews.Add(item);
-            //    }
-            //}
-            //catch (Exception e)
-            //{
-            //    Debug.WriteLine(e.ToString());
-            //}
 
             var listNews = request.GetListObject(new List<News>(), "news");
             listNews.ContinueWith(delegate(Task<object> tmp)
@@ -123,15 +110,13 @@ namespace SoonZik.ViewModel
                 {
                     foreach (var item in test)
                     {
-                        CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
-                        {
-                            ListNews.Add(item);
-                        });
+                        CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
+                            () => { ListNews.Add(item); });
                     }
-
                 }
             });
         }
+
         #endregion
     }
 }

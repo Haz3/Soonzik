@@ -12,48 +12,6 @@ namespace SoonZik.ViewModel
 {
     public class PlaylistViewModel : ViewModelBase
     {
-        #region Attribute
-
-        private string _key { get; set; }
-        private string _cryptographic { get; set; }
-        private ObservableCollection<Album> _listAlbum;
-        public ObservableCollection<Album> ListAlbum
-        {
-            get { return _listAlbum; }
-            set
-            {
-                _listAlbum = value;
-                RaisePropertyChanged("ListAlbum");
-            }
-        }
-
-        private ObservableCollection<Music> _listMusique;
-        public ObservableCollection<Music> ListMusique
-        {
-            get { return _listMusique; }
-            set
-            {
-                _listMusique = value;
-                RaisePropertyChanged("ListMusique");
-            }
-        }
-
-        private ObservableCollection<Playlist> _listPlaylist;
-        public ObservableCollection<Playlist> ListPlaylist
-        {
-            get { return _listPlaylist; }
-            set
-            {
-                _listPlaylist = value;
-                RaisePropertyChanged("ListPlaylist");
-            }
-        }
-
-        public Music SelectedMusic { get; set; }
-        public Album SelectedAlbum { get; set; }
-        public Playlist SelectedPlaylist { get; set; }
-        #endregion
-
         #region Ctor
 
         public PlaylistViewModel()
@@ -63,6 +21,7 @@ namespace SoonZik.ViewModel
             ListPlaylist = new ObservableCollection<Playlist>();
             LoadContent();
         }
+
         #endregion
 
         #region Method
@@ -73,16 +32,15 @@ namespace SoonZik.ViewModel
             var userKey = request.GetUserKey(Singleton.Instance().CurrentUser.id.ToString());
             userKey.ContinueWith(delegate(Task<object> task)
             {
-                _key = task.Result as string; 
+                _key = task.Result as string;
                 if (_key != null)
                 {
-                    char[] delimiter = { ' ', '"', '{', '}' };
-                    string[] word = _key.Split(delimiter);
+                    var stringEncrypt = KeyHelpers.GetUserKeyFromResponse(_key);
+                    _cryptographic =
+                        EncriptSha256.EncriptStringToSha256(Singleton.Instance().CurrentUser.salt + stringEncrypt);
 
-                    var stringEncrypt = (word[4]);
-                    _cryptographic = EncriptSha256.EncriptStringToSha256(Singleton.Instance().CurrentUser.salt + stringEncrypt);
-
-                    var listAlbumTmp = request.GetAllMusicForUser(new UserMusic(), _cryptographic, Singleton.Instance().CurrentUser.id.ToString());
+                    var listAlbumTmp = request.GetAllMusicForUser(new UserMusic(), _cryptographic,
+                        Singleton.Instance().CurrentUser.id.ToString());
 
                     listAlbumTmp.ContinueWith(delegate(Task<object> tmp)
                     {
@@ -99,11 +57,57 @@ namespace SoonZik.ViewModel
                                     ListPlaylist.Add(playlist);
                             });
                         }
-
                     });
                 }
             });
         }
+
+        #endregion
+
+        #region Attribute
+
+        private string _key { get; set; }
+        private string _cryptographic { get; set; }
+        private ObservableCollection<Album> _listAlbum;
+
+        public ObservableCollection<Album> ListAlbum
+        {
+            get { return _listAlbum; }
+            set
+            {
+                _listAlbum = value;
+                RaisePropertyChanged("ListAlbum");
+            }
+        }
+
+        private ObservableCollection<Music> _listMusique;
+
+        public ObservableCollection<Music> ListMusique
+        {
+            get { return _listMusique; }
+            set
+            {
+                _listMusique = value;
+                RaisePropertyChanged("ListMusique");
+            }
+        }
+
+        private ObservableCollection<Playlist> _listPlaylist;
+
+        public ObservableCollection<Playlist> ListPlaylist
+        {
+            get { return _listPlaylist; }
+            set
+            {
+                _listPlaylist = value;
+                RaisePropertyChanged("ListPlaylist");
+            }
+        }
+
+        public Music SelectedMusic { get; set; }
+        public Album SelectedAlbum { get; set; }
+        public Playlist SelectedPlaylist { get; set; }
+
         #endregion
     }
 }

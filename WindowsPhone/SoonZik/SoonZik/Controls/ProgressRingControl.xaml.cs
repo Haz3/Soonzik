@@ -8,7 +8,17 @@ namespace SoonZik.Controls
     public sealed partial class ProgressRingControl : UserControl
     {
         public static readonly DependencyProperty GridVisibilityProperty = DependencyProperty.Register(
-            "GridVisibility", typeof (Visibility), typeof (ProgressRingControl), new PropertyMetadata(default(Visibility)));
+            "GridVisibility", typeof (Visibility), typeof (ProgressRingControl),
+            new PropertyMetadata(default(Visibility)));
+
+        public static readonly DependencyProperty isActiveProperty = DependencyProperty.Register(
+            "isActive", typeof (bool), typeof (ProgressRingControl), new PropertyMetadata(default(bool)));
+
+        public ProgressRingControl()
+        {
+            InitializeComponent();
+            DataContext = this;
+        }
 
         public Visibility GridVisibility
         {
@@ -16,19 +26,10 @@ namespace SoonZik.Controls
             set { SetValue(GridVisibilityProperty, value); }
         }
 
-        public static readonly DependencyProperty isActiveProperty = DependencyProperty.Register(
-            "isActive", typeof (bool), typeof (ProgressRingControl), new PropertyMetadata(default(bool)));
-
         public bool isActive
         {
             get { return (bool) GetValue(isActiveProperty); }
             set { SetValue(isActiveProperty, value); }
-        }
-        
-        public ProgressRingControl()
-        {
-            InitializeComponent();
-            DataContext = this;
         }
     }
 }

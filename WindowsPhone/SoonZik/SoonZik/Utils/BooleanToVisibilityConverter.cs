@@ -18,18 +18,20 @@ namespace SoonZik.Utils
 
         public object Convert(object value, Type targetType, object parameter, string language)
         {
-            return value is bool && ((bool)value) ? True : False;
+            return value is bool && ((bool) value) ? True : False;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, string language)
         {
-            return value is T && EqualityComparer<T>.Default.Equals((T)value, True);
+            return value is T && EqualityComparer<T>.Default.Equals((T) value, True);
         }
     }
 
     public sealed class BooleanToVisibilityConverter : BooleanConverter<Visibility>
     {
         public BooleanToVisibilityConverter() :
-            base(Visibility.Visible, Visibility.Collapsed) { }
+            base(Visibility.Visible, Visibility.Collapsed)
+        {
+        }
     }
 }
