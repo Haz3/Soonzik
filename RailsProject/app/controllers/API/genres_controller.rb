@@ -47,6 +47,9 @@ module API
     # ==== Options
     # 
     # * +id+ - The id of the genre selected
+    # * +count+ - (optionnal) Get the number of musics and not the object itself. Useful for pagination
+    # * +limit+ - (optionnal) Offset of the musics array. Default : 30
+    # * +offset+ - (optionnal) Limit of the musics array. Default : 0
     #
     # ===== HTTP VALUE
     # 
@@ -61,11 +64,26 @@ module API
           codeAnswer 502
           defineHttp :not_found
         else
-          @returnValue = { content: genre.as_json(:include => {
-                                      :influences => { :only => Influence.miniKey },
-                                      :musics => { only: Music.miniKey},
-                                      descriptions: {  :only => Description.miniKey }
-                                      }, :only => Genre.miniKey) }
+          if (@count.present? && @count == "true")
+            @returnValue = { content: genre.musics.count }
+          else
+            limit = (@limit.present? && @limit > 0) ? @limit.to_i : 30
+            offset = (@offset.present? && @offset >= 0) ? @offset.to_i : 0
+
+            json = genre.as_json(:include => {
+                                  :influences => { :only => Influence.miniKey },
+                                  :musics => { only: Music.miniKey,
+                                    :include {
+                                      album: { only: Album.miniKey }
+                                    }
+                                  },
+                                  descriptions: {  :only => Description.miniKey }
+                                  }, :only => Genre.miniKey)
+
+            json["musics"] = json["musics"][offset..(offset + limit - 1)] if json["musics"]
+
+            @returnValue = { content: json }
+          end
           codeAnswer 200
         end
       rescue

@@ -272,13 +272,13 @@ combinaison is false</p>
       <span class="ruby-identifier">user</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">find_by_email</span>(<span class="ruby-ivar">@email</span>)
       <span class="ruby-keyword">if</span> (<span class="ruby-identifier">user</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">user</span>.<span class="ruby-identifier">valid_password?</span>(<span class="ruby-ivar">@password</span>))
         <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">200</span>
-        <span class="ruby-ivar">@returnValue</span> = { <span class="ruby-identifier">content</span><span class="ruby-operator">:</span> <span class="ruby-identifier">user</span>.<span class="ruby-identifier">as_json</span>(<span class="ruby-value">:include</span> =<span class="ruby-operator">&gt;</span> {
+        <span class="ruby-ivar">@returnValue</span>[<span class="ruby-value">:content</span>] = <span class="ruby-identifier">user</span>.<span class="ruby-identifier">as_json</span>(<span class="ruby-value">:include</span> =<span class="ruby-operator">&gt;</span> {
                                                               <span class="ruby-value">:address</span> =<span class="ruby-operator">&gt;</span> { <span class="ruby-identifier">only</span><span class="ruby-operator">:</span> <span class="ruby-constant">Address</span>.<span class="ruby-identifier">miniKey</span> },
                                                               <span class="ruby-value">:friends</span> =<span class="ruby-operator">&gt;</span> { <span class="ruby-identifier">only</span><span class="ruby-operator">:</span> <span class="ruby-constant">User</span>.<span class="ruby-identifier">miniKey</span> },
                                                               <span class="ruby-value">:follows</span> =<span class="ruby-operator">&gt;</span> { <span class="ruby-identifier">only</span><span class="ruby-operator">:</span> <span class="ruby-constant">User</span>.<span class="ruby-identifier">miniKey</span> }
                                                             },
                                                 <span class="ruby-value">:only</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">User</span>.<span class="ruby-identifier">notRestrictedKey</span>
-                                              ) }
+                                              )
       <span class="ruby-keyword">else</span>
         <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">502</span>
         <span class="ruby-ivar">@httpCode</span> = <span class="ruby-value">:not_found</span>

@@ -913,6 +913,12 @@ var SearchIndex =
 		"type": "anymethod"
 	},
 	{
+		"name": "getAverageNote",
+		"link": "Album.html#method-i-getAverageNote",
+		"snippet": "<p>Get the average of notes\n",
+		"type": "anymethod"
+	},
+	{
 		"name": "album_note_params",
 		"link": "AlbumNote.html#method-c-album_note_params",
 		"snippet": "<p>The strong parameters to save or update object\n",

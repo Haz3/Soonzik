@@ -219,6 +219,35 @@ was released</p>
 			
 			
 									
+						<section class="public-methods instance-methods methods">
+				<header>
+					<h3>Public Instance Methods</h3>
+				</header>
+
+								<a name="method-i-getAverageNote">anchor</a>
+				<div id="method-i-getAverageNote-doc" class="method">
+
+					<header>
+											<i class="icon-generic"></i>
+						<span class="method-name">getAverageNote</span><span 
+							class="method-args">()</span>
+										</header>
+
+					<div class="method-description">
+											<p>Get the average of notes</p>					
+											<div class="method-source-code" id="getAverageNote-source">
+							<pre class="prettyprint linenums"><code 
+								class="language-ruby"><span class="ruby-comment"># File app/models/album.rb, line 56</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">getAverageNote</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-constant">AlbumNote</span>.<span class="ruby-identifier">where</span>(<span class="ruby-identifier">album_id</span><span class="ruby-operator">:</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">id</span>).<span class="ruby-identifier">average</span>(<span class="ruby-value">:value</span>).<span class="ruby-identifier">to_f</span>
+<span class="ruby-keyword">end</span></code></pre>
+						</div>
+										</div>
+
+					
+									</div>
+				
+			</section>
 			
 			
 			
