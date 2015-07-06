@@ -73,7 +73,7 @@ module API
             json = genre.as_json(:include => {
                                   :influences => { :only => Influence.miniKey },
                                   :musics => { only: Music.miniKey,
-                                    :include {
+                                    :include => {
                                       album: { only: Album.miniKey }
                                     }
                                   },
