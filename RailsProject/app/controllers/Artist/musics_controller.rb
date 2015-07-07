@@ -101,7 +101,7 @@ module Artist
 		  	http = :bad_request
 		  end
 
-  		render :json => { error: error, music: m.as_json() }, :status => http
+  		render :json => { error: error, music: m.as_json(:include => { genres: {} }) }, :status => http
   	end
 
   	# Route to update a music. Usefull to change album too
@@ -112,12 +112,27 @@ module Artist
   		begin
 	  		if (params.has_key?(:id) && params.has_key?(:music))
 	  			m = Music.find_by_id(params[:id])
-
-	  			u = false
-	  			u = m.update(Music.music_params params) if m.user_id == current_user.id
-	  			if (u == false)
+	  			if (m.user_id != current_user.id)
 	  				http = :bad_request
-	  			end
+	  			else
+		  			u = false
+		  			u = m.update(Music.music_params params) if m.user_id == current_user.id
+		  			if (u == false)
+		  				http = :bad_request
+		  			elsif (params.has_key?(:genres))
+		  				m.genres = []
+		  				params[:genres].each { |genre|
+								begin
+									g = Genre.find_by_id(genre)
+									if g != nil
+										g.musics << m
+									end
+								rescue
+								end
+							}
+							m.reload
+		  			end
+		  		end
 	  		else
 	  			http = :bad_request
 	  		end
@@ -125,7 +140,7 @@ module Artist
 	  		http = :bad_request
 	  	end
 
-  		render :json => { music: m }, :status => http
+  		render :json => { music: m.as_json(:include => { genres: {} }) }, :status => http
   	end
 
   	# Route to create an album
@@ -198,9 +213,94 @@ module Artist
 	      end
 			rescue
 		  	error = true
+      	http = :bad_request
 			end
 
-  		render :json => { error: error, album: a.as_json(:include => { musics: {} } ) }, :status => http
+  		render :json => { error: error, album: a.as_json(:include => { musics: {}, genres: {} } ) }, :status => http
+  	end
+
+  	# To update the album
+  	# We can't change the file
+  	def updateAlbum
+  		error = false
+  		a = nil
+  		http = :ok
+  		genres = []
+
+  		begin
+  			if (params.has_key?(:album) && params.has_key?(:id))
+					p = JSON.parse(params[:album])
+					p[:title] = p["title"] if p.has_key?("title")
+					p[:price] = p["price"] if p.has_key?("price")
+					p[:yearProd] = p["yearProd"] if p.has_key?("yearProd")
+	  		else
+	  			error = "Parameters missing"
+	  		end
+
+				genres = JSON.parse(params[:genres]) if params.has_key?(:genres)
+
+				acceptedContentType = [
+          "image/gif",
+          "image/jpeg",
+          "image/pjpeg",
+          "image/png",
+          "image/x-png"
+        ]
+
+        a = Album.find_by_id(params[:id])
+
+        if a != nil && a.user_id == current_user.id && error == false && (!params.has_key?(:file) || (params.has_key?(:file) && acceptedContentType.include?(params[:file].content_type)))
+        	oldFile = nil
+        	newFilename = nil
+
+        	if (params.has_key? :file)
+		        randomNumber = rand(1000..10000)
+		        timestamp = Time.now.to_i
+		        newFilename = Digest::SHA256.hexdigest("#{timestamp}--#{params[:file].original_filename}#{randomNumber}") + "-" + params[:file].original_filename.gsub(/[^0-9A-Za-z\.-]/, '')
+	  				
+		        File.open(Rails.root.join('app', 'assets', 'images', 'albums', newFilename), 'wb') do |f|
+		          f.write(params[:file].tempfile.read)
+		        end
+
+		        oldFile = a.image
+		      end
+
+	        # new music object
+	        parameters = ActionController::Parameters.new({ album: p })
+	        ret = a.update(Album.album_params parameters)
+	        if (ret && newFilename != nil)
+		        a.image = newFilename
+		        a.file = newFilename
+		        a.save!
+		      end
+	        if (ret)
+	        	File.delete Rails.root.join('app', 'assets', 'images', 'albums', oldFile).to_s if oldFile != nil
+						http = :created
+						a.genres = []
+						genres.each { |genre|
+							begin
+								g = Genre.find_by_id(genre)
+								if g != nil
+									g.albums << a
+								end
+							rescue
+							end
+						}
+						a.reload
+		      else
+		      	error = m.errors.full_messages
+		      	File.delete Rails.root.join('app', 'assets', 'images', 'albums', newFilename).to_s
+		        http = :bad_request
+		      end
+	      else
+	      	error = "Wrong file format" if error == false
+	      	http = :bad_request
+	      end
+			rescue
+		  	error = true
+      	http = :bad_request
+			end
+  		render :json => { error: error, album: a.as_json(:include => { musics: {}, genres: {} } ) }, :status => http
   	end
 	end
 end

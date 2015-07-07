@@ -131,6 +131,15 @@ SoonzikArtistApp.factory('HTTPService', ['$http', '$location', 'Upload', functio
       }).progress(progressFunction)
       .success(successFunction)
       .error(errorFunction);
+    },
+    updateAlbum: function (file, parameters, progressFunction, successFunction, errorFunction) {
+      Upload.upload({
+        url: "http://artist." + url + '/musics/updateAlbum.json',
+        fields: parameters,
+        file: file
+      }).progress(progressFunction)
+      .success(successFunction)
+      .error(errorFunction);
     }
   }
 }]);

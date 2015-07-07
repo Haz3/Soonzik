@@ -10,6 +10,7 @@ SoonzikArtistApp.controller('MusicCtrl', ['$scope', 'SecureAuth', 'HTTPService',
 	var container_drop = null;
 	var album_drop = null;
 
+	// Init function
 	$scope.musicInit = function() {
 		var current_user = SecureAuth.getCurrentUser();
 		if (current_user.id != null && current_user.token != null && current_user.username != null) {
@@ -27,7 +28,7 @@ SoonzikArtistApp.controller('MusicCtrl', ['$scope', 'SecureAuth', 'HTTPService',
 				for (var i = 0 ; i < response.data.content.length ; i++) {
 					var inAlbum = false;
 					for (var j = 0 ; j < $scope.albums.length ; j++) {
-						inAlbum = inAlbum || isInAlbum(response.data.content[i].id, $scope.albums[j]);
+						inAlbum = inAlbum || isInAlbum(response.data.content[i], $scope.albums[j]);
 					}
 					if (inAlbum == false) {
 						$scope.noLinkMusics.push(response.data.content[i]);
@@ -48,15 +49,18 @@ SoonzikArtistApp.controller('MusicCtrl', ['$scope', 'SecureAuth', 'HTTPService',
 		});
 	}
 
-	var isInAlbum = function(music_id, album) {
+	// To know if a music is in the specific album
+	var isInAlbum = function(music, album) {
 		for (var i = 0 ; i < album.musics.length ; i++) {
-			if (album.musics[i].id == music_id) {
+			if (album.musics[i].id == music.id) {
+				album.musics[i] = music;
 				return true;
 			}
 		}
 		return false;
 	}
 
+	// Callback on drop
 	$scope.musicDrop = function(list, music, album_id) {
 		music_drop = music;
 		container_drop = list;
@@ -64,6 +68,7 @@ SoonzikArtistApp.controller('MusicCtrl', ['$scope', 'SecureAuth', 'HTTPService',
 		return music;
 	}
 
+	// Callback after the drop
 	$scope.musicMoved = function(listFrom, index) {
 		elem = listFrom.splice(index, 1);
 		var parameters = {
@@ -76,16 +81,67 @@ SoonzikArtistApp.controller('MusicCtrl', ['$scope', 'SecureAuth', 'HTTPService',
 			music_drop = null;
 			container_drop = null;
 			album_drop = null;
-			console.log(response);
 		}, function(error) {
-			console.log(error);
 			listFrom.push(elem);
 		});
 
 		return true;
 	}
 
+	// For the edition of a music
+	$scope.editMusic = function(music) {
+    var modalInstance = $modal.open({
+      templateUrl: '/assets/AngularJS/Artist/views/modalEditMusic.html.haml',
+      controller: 'ModalInstanceEditMusicCtrl',
+      resolve: {
+      	influences: function() {
+      		return $scope.influences;
+      	},
+      	music: function() {
+      		return music;
+      	}
+      }
+    });
+
+    modalInstance.result.then(function (newMusic) {
+    	console.log(newMusic);
+    	music.title = newMusic.title;
+    	music.price = newMusic.price;
+    	music.limited = newMusic.limited;
+    	music.genres = newMusic.genres;
+    }, function () {
+    });
+	}
+
+	// For the edition of an album
+	$scope.editAlbum = function(album) {
+		var modalInstance = $modal.open({
+      templateUrl: '/assets/AngularJS/Artist/views/modalAlbum.html.haml',
+      controller: 'ModalInstanceEditAlbumCtrl',
+      resolve: {
+      	influences: function() {
+      		return $scope.influences;
+      	},
+      	album: function() {
+      		return album;
+      	}
+      }
+    });
+
+    modalInstance.result.then(function (newAlbum) {
+    	console.log(newAlbum);
+    	for (var i = 0 ; i < $scope.albums.length ; i++) {
+    		if ($scope.albums[i].id == album.id) {
+    			$scope.albums[i] = newAlbum;
+    			break;
+    		}
+    	}
+    }, function () {
+    });
+	}
+
 	// For the modal
+	// Upload a music
 	$scope.openMusic = function () {
     var modalInstance = $modal.open({
       templateUrl: '/assets/AngularJS/Artist/views/modalMusic.html.haml',
@@ -100,11 +156,11 @@ SoonzikArtistApp.controller('MusicCtrl', ['$scope', 'SecureAuth', 'HTTPService',
     modalInstance.result.then(function (music) {
     	$scope.noLinkMusics.push(music);
     }, function () {
-      console.log('Modal dismissed at: ' + new Date());
     });
   };
 
 	// For the modal
+	// Create an album
 	$scope.openAlbum = function () {
     var modalInstance = $modal.open({
       templateUrl: '/assets/AngularJS/Artist/views/modalAlbum.html.haml',
@@ -119,16 +175,18 @@ SoonzikArtistApp.controller('MusicCtrl', ['$scope', 'SecureAuth', 'HTTPService',
     modalInstance.result.then(function (album) {
     	$scope.albums.push(album);
     }, function () {
-      console.log('Modal dismissed at: ' + new Date());
     });
   };
 }]);
 
+
 /*
+	*****************************
 	The modal to upload a music
+	*****************************
 */
 
-SoonzikArtistApp.controller('ModalInstanceMusicCtrl', ["$scope", "$modalInstance", "Upload", "HTTPService", "influences", function ($scope, $modalInstance, Upload, HTTPService, influences) {
+SoonzikArtistApp.controller('ModalInstanceMusicCtrl', ["$scope", "$modalInstance", "Upload", "HTTPService", "NotificationService", "influences", function ($scope, $modalInstance, Upload, HTTPService, NotificationService, influences) {
 	$scope.loading = false;
 	$scope.file = null;
 	$scope.form = {
@@ -141,6 +199,7 @@ SoonzikArtistApp.controller('ModalInstanceMusicCtrl', ["$scope", "$modalInstance
 		selectedGenres: []
 	}
 
+	// On the save button
   $scope.ok = function () {
   	var parameters = { music: $scope.form, genres: $scope.selected.selectedGenres };
   	HTTPService.uploadMusic($scope.file, parameters, function (evt) {
@@ -153,14 +212,16 @@ SoonzikArtistApp.controller('ModalInstanceMusicCtrl', ["$scope", "$modalInstance
 				$modalInstance.close(data.music);
 		}, function (error) {
 			$scope.loading = false;
-			console.log(error);
+			NotificationService.error("Error while saving the informations");
 		});
   };
 
+  // On the background click
   $scope.cancel = function () {
     $modalInstance.dismiss('cancel');
   };
 
+  // The file chooser callback
   $scope.uploadMusic = function($file) {
   	if ($file && $file.length) {
 			for (var i = 0; i < $file.length; i++) {
@@ -173,10 +234,12 @@ SoonzikArtistApp.controller('ModalInstanceMusicCtrl', ["$scope", "$modalInstance
 }]);
 
 /*
+	*****************************
 	The modal to create an album
+	*****************************
 */
 
-SoonzikArtistApp.controller('ModalInstanceAlbumCtrl', ["$scope", "$modalInstance", "Upload", "HTTPService", "influences", function ($scope, $modalInstance, Upload, HTTPService, influences) {
+SoonzikArtistApp.controller('ModalInstanceAlbumCtrl', ["$scope", "$modalInstance", "Upload", "HTTPService", "NotificationService", "influences", function ($scope, $modalInstance, Upload, HTTPService, NotificationService, influences) {
 	$scope.loading = false;
 	$scope.file = null;
 	$scope.form = {
@@ -190,6 +253,7 @@ SoonzikArtistApp.controller('ModalInstanceAlbumCtrl', ["$scope", "$modalInstance
 		selectedGenres: []
 	}
 
+	// On the save button
   $scope.ok = function () {
   	var parameters = {
   		album: $scope.form,
@@ -204,14 +268,16 @@ SoonzikArtistApp.controller('ModalInstanceAlbumCtrl', ["$scope", "$modalInstance
 			$modalInstance.close(data.album);
 		}, function (error) {
 			$scope.loading = false;
-			console.log(error);
+			NotificationService.error("Error while saving the informations");
 		});
   };
 
+  // On the background click
   $scope.cancel = function () {
     $modalInstance.dismiss('cancel');
   };
 
+  // The file chooser callback
   $scope.uploadImage = function($file) {
   	if ($file && $file.length) {
 			for (var i = 0; i < $file.length; i++) {
@@ -221,4 +287,122 @@ SoonzikArtistApp.controller('ModalInstanceAlbumCtrl', ["$scope", "$modalInstance
 			}
     }
 	}
+}]);
+
+/*
+	*****************************
+	The modal to update an album
+	*****************************
+*/
+
+SoonzikArtistApp.controller('ModalInstanceEditAlbumCtrl',
+														["$scope", "$modalInstance", "Upload", "HTTPService", "NotificationService", "influences", "album",
+														function ($scope, $modalInstance, Upload, HTTPService, NotificationService, influences, album) {
+	$scope.loading = false;
+
+	var formatGenre = function(genres) {
+		var array = [];
+		for (var i = 0 ; i < genres.length ; i++) {
+			array.push(genres[i].id);
+		}
+		return array;
+	}
+
+	$scope.file = null;
+	$scope.form = {
+		title: album.title,
+		price: album.price,
+		yearProd: album.yearProd
+	};
+	$scope.descriptions = []
+	$scope.influences = influences;
+	$scope.selected = {
+		selectedGenres: formatGenre(album.genres)
+	}
+
+	// On the save button
+  $scope.ok = function () {
+  	var parameters = {
+  		id: album.id,
+  		album: $scope.form,
+  		descriptions: $scope.descriptions,
+  		genres: $scope.selected.selectedGenres
+  	};
+
+  	HTTPService.updateAlbum($scope.file, parameters, function (evt) {
+			$scope.loading = true;
+		}, function (data, status, headers, config) {
+			$scope.loading = false;
+			$modalInstance.close(data.album);
+		}, function (error) {
+			$scope.loading = false;
+			NotificationService.error("Error while saving the informations");
+		});
+  };
+
+  // On the background click
+  $scope.cancel = function () {
+    $modalInstance.dismiss('cancel');
+  };
+
+  // The file chooser callback
+  $scope.uploadImage = function($file) {
+  	if ($file && $file.length) {
+			for (var i = 0; i < $file.length; i++) {
+				var file = $file[i];
+
+				$scope.file = file;
+			}
+    }
+	}
+}]);
+
+/*
+	*****************************
+	The modal to update a music
+	*****************************
+*/
+
+SoonzikArtistApp.controller('ModalInstanceEditMusicCtrl', ["$scope", "$modalInstance", "HTTPService", "NotificationService", "influences", "music",
+														function ($scope, $modalInstance, HTTPService, NotificationService, influences, music) {
+	$scope.loading = false;
+
+	var formatGenre = function(genres) {
+		var array = [];
+		for (var i = 0 ; i < genres.length ; i++) {
+			array.push(genres[i].id);
+		}
+		return array;
+	}
+
+	$scope.form = {
+		title: music.title,
+		price: music.price,
+		limited: music.limited.toString()
+	};
+	$scope.influences = influences;
+	$scope.selected = {
+		selectedGenres: formatGenre(music.genres)
+	}
+
+	// On the save button
+  $scope.ok = function () {
+  	var parameters = {
+  		id: music.id,
+  		music: $scope.form,
+  		genres: $scope.selected.selectedGenres
+  	};
+  	$scope.loading = true;
+  	HTTPService.updateMusic(parameters).then(function(response) {
+			$scope.loading = false;
+			$modalInstance.close(response.data.music);
+  	}, function(error) {
+  		NotificationService.error("Error while saving the informations");
+  	});
+  };
+
+  // On the background click
+  $scope.cancel = function () {
+    $modalInstance.dismiss('cancel');
+  };
 }]);

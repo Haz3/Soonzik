@@ -155,6 +155,7 @@ Rails.application.routes.draw do
     post '/musics/upload' => 'musics#uploadMusic'
     post '/musics/createAlbum' => 'musics#uploadAlbum'
     post '/musics/updateMusic' => 'musics#updateMusic'
+    post '/musics/updateAlbum' => 'musics#updateAlbum'
   end
 
   devise_for :admin_users, ActiveAdmin::Devise.config
