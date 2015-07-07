@@ -79,7 +79,8 @@ module API
                                                       methods: :getAverageNote
                                                     },
                                                     :user => {:only => User.miniKey},
-                                                    descriptions: {  :only => Description.miniKey }
+                                                    descriptions: {  :only => Description.miniKey },
+                                                    genres: { :only => Genre.miniKey }
                                                   },
                                                   methods: :getAverageNote) }
           codeAnswer 200
@@ -184,7 +185,8 @@ module API
                                                           methods: :getAverageNote
                                                         },
                                                         :user => {:only => User.miniKey},
-                                                        descriptions: {  :only => Description.miniKey }
+                                                        descriptions: {  :only => Description.miniKey },
+                                                        genres: { :only => Genre.miniKey }
                                                       },
                                                       methods: :getAverageNote) }
 
