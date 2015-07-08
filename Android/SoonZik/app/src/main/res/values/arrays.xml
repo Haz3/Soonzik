@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="nav_names">
+        <item>News</item>
+        <item>Profile</item>
+        <item>Explorer</item>
+        <item>Packs</item>
+        <item>AroundMe</item>
+        <item>Battle</item>
+        <item>Playlists</item>
+        <item>Friends</item>
+        <item>Cart</item>
+        <item>Log In</item>
+    </string-array>
+
+    <string-array name="nav_classes">
+        <item>com.soonzik.soonzik.NewsListFragment</item>
+        <item>com.soonzik.soonzik.UserProfileFragment</item>
+        <item>com.soonzik.soonzik.ExplorerFragment</item>
+        <item>com.soonzik.soonzik.PacksListFragment</item>
+        <item>com.soonzik.soonzik.AroundMeFragment</item>
+        <item>com.soonzik.soonzik.BattlesListFragment</item>
+        <item>com.soonzik.soonzik.PlaylistsListFragment</item>
+        <item>com.soonzik.soonzik.FriendsListFragment</item>
+        <item>com.soonzik.soonzik.CartFragment</item>
+        <item>com.soonzik.soonzik.LoginFragment</item>
+    </string-array>
+
+    <string-array name="nav_icons">
+        <item>ic_news</item>
+        <item>ic_profile</item>
+        <item>ic_explorer</item>
+        <item>ic_pack</item>
+        <item>ic_arroundme</item>
+        <item>ic_battle</item>
+        <item>ic_playlist</item>
+        <item>ic_friend</item>
+        <item>ic_cart</item>
+        <item>ic_login</item>
+    </string-array>
+
+</resources>

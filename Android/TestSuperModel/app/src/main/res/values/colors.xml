@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <color name="background">#D3D7DA</color>
-    <color name="primary_text">#424242</color>
-    <color name="text_color">#424242</color>
-    <color name="button_submit">#00FF00</color>
-    <color name="tabs_explorer">#00FF00</color>
-    <color name="tabs_search">#FF0000</color>
-</resources>
