@@ -39,11 +39,11 @@
           %tbody.radius
             %tr{ 'ng-repeat' => 'song in show.user.topFive track by $index' }
               %td{:width => '1000'}
-                {{song.music.title}}
+                {{song.title}}
               %td{:width => '100'}
-                {{ formatTime(song.music.duration) }}
+                {{ formatTime(song.duration) }}
               %td{:width => '50'}
-                {{song.music.price}} $
+                {{song.price}} $
               %td{:width => '200'}
                 %i.fi-star{ "ng-repeat" => "n in range(song.note)" }
               %td{:width => '50'}
