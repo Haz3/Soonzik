@@ -1,13 +1,14 @@
-Mon, 06 Jul 2015 15:28:02 +0200
-app/controllers/API/albums_controller.rb	Sat, 27 Jun 2015 17:54:34 +0200
+Wed, 08 Jul 2015 18:43:33 +0200
+app/controllers/API/albums_controller.rb	Tue, 07 Jul 2015 15:32:22 +0200
 app/controllers/API/api_controller.rb	Mon, 11 May 2015 06:00:30 +0200
 app/controllers/API/apisecurity_controller.rb	Sat, 27 Jun 2015 20:42:33 +0200
 app/controllers/API/battles_controller.rb	Sat, 27 Jun 2015 20:41:02 +0200
 app/controllers/API/carts_controller.rb	Fri, 15 May 2015 01:40:39 +0200
 app/controllers/API/concerts_controller.rb	Tue, 19 May 2015 21:46:09 +0200
-app/controllers/API/genres_controller.rb	Mon, 06 Jul 2015 14:27:18 +0200
+app/controllers/API/genres_controller.rb	Mon, 06 Jul 2015 19:29:21 +0200
 app/controllers/API/gifts_controller.rb	Sat, 21 Mar 2015 16:19:19 +0100
 app/controllers/API/influences_controller.rb	Tue, 19 May 2015 21:46:31 +0200
+app/controllers/API/languages_controller.rb	Wed, 08 Jul 2015 15:20:47 +0200
 app/controllers/API/listenings_controller.rb	Tue, 19 May 2015 21:46:35 +0200
 app/controllers/API/messages_controller.rb	Wed, 27 May 2015 14:49:17 +0200
 app/controllers/API/musics_controller.rb	Sat, 27 Jun 2015 17:51:43 +0200
@@ -34,14 +35,15 @@ app/models/description.rb	Thu, 18 Jun 2015 19:00:51 +0200
 app/models/flac.rb	Thu, 18 Jun 2015 19:00:51 +0200
 app/models/follow.rb	Thu, 18 Jun 2015 19:00:51 +0200
 app/models/friend.rb	Thu, 18 Jun 2015 19:00:51 +0200
-app/models/genre.rb	Thu, 18 Jun 2015 19:00:51 +0200
+app/models/genre.rb	Tue, 07 Jul 2015 17:34:33 +0200
 app/models/gift.rb	Thu, 18 Jun 2015 19:00:51 +0200
 app/models/group.rb	Thu, 18 Jun 2015 19:00:51 +0200
 app/models/identity.rb	Thu, 18 Jun 2015 19:00:51 +0200
 app/models/influence.rb	Thu, 18 Jun 2015 19:00:51 +0200
+app/models/language.rb	Wed, 08 Jul 2015 12:15:25 +0200
 app/models/listening.rb	Thu, 18 Jun 2015 19:00:51 +0200
 app/models/message.rb	Thu, 18 Jun 2015 19:00:51 +0200
-app/models/music.rb	Sat, 27 Jun 2015 17:50:34 +0200
+app/models/music.rb	Tue, 07 Jul 2015 14:32:36 +0200
 app/models/music_note.rb	Thu, 18 Jun 2015 19:00:51 +0200
 app/models/news.rb	Thu, 18 Jun 2015 19:00:51 +0200
 app/models/newstext.rb	Thu, 18 Jun 2015 19:00:51 +0200

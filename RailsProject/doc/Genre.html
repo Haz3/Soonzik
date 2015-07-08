@@ -161,7 +161,7 @@ blue ? A particular name like magenta ?)</p>
 											<p>The strong parameters to save or update object</p>					
 											<div class="method-source-code" id="genre_params-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/models/genre.rb, line 37</span>
+								class="language-ruby"><span class="ruby-comment"># File app/models/genre.rb, line 38</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">genre_params</span>(<span class="ruby-identifier">parameters</span>)
   <span class="ruby-identifier">parameters</span>.<span class="ruby-identifier">require</span>(<span class="ruby-value">:genre</span>).<span class="ruby-identifier">permit</span>(<span class="ruby-value">:style_name</span>, <span class="ruby-value">:color_name</span>, <span class="ruby-value">:color_hexa</span>)
 <span class="ruby-keyword">end</span></code></pre>
@@ -185,7 +185,7 @@ blue ? A particular name like magenta ?)</p>
 <p>Fields returned : [:id, :style_name, :color_name, :color_hexa]</p>					
 											<div class="method-source-code" id="miniKey-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/models/genre.rb, line 32</span>
+								class="language-ruby"><span class="ruby-comment"># File app/models/genre.rb, line 33</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">miniKey</span>
   [<span class="ruby-value">:id</span>, <span class="ruby-value">:style_name</span>, <span class="ruby-value">:color_name</span>, <span class="ruby-value">:color_hexa</span>]
 <span class="ruby-keyword">end</span></code></pre>
@@ -235,6 +235,7 @@ blue ? A particular name like magenta ?)</p>
 			<li><a href="./API/GenresController.html">API::GenresController</a></li>
 			<li><a href="./API/GiftsController.html">API::GiftsController</a></li>
 			<li><a href="./API/InfluencesController.html">API::InfluencesController</a></li>
+			<li><a href="./API/LanguagesController.html">API::LanguagesController</a></li>
 			<li><a href="./API/ListeningsController.html">API::ListeningsController</a></li>
 			<li><a href="./API/MessagesController.html">API::MessagesController</a></li>
 			<li><a href="./API/MusicsController.html">API::MusicsController</a></li>
@@ -266,6 +267,7 @@ blue ? A particular name like magenta ?)</p>
 			<li><a href="./Group.html">Group</a></li>
 			<li><a href="./Identity.html">Identity</a></li>
 			<li><a href="./Influence.html">Influence</a></li>
+			<li><a href="./Language.html">Language</a></li>
 			<li><a href="./Listening.html">Listening</a></li>
 			<li><a href="./Message.html">Message</a></li>
 			<li><a href="./Music.html">Music</a></li>

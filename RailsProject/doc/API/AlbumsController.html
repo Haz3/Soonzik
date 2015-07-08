@@ -179,7 +179,7 @@ from ApiSecurity (the parent) is true</p>
 </li></ul>					
 											<div class="method-source-code" id="addcomment-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/albums_controller.rb, line 221</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/albums_controller.rb, line 223</span>
   <span class="ruby-keyword">def</span> <span class="ruby-identifier">addcomment</span>
 <span class="ruby-keyword">begin</span>
   <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@security</span>)
@@ -261,7 +261,7 @@ its music and the artist</p>
 </li></ul>					
 											<div class="method-source-code" id="find-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/albums_controller.rb, line 117</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/albums_controller.rb, line 118</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">find</span>
   <span class="ruby-keyword">begin</span>
     <span class="ruby-identifier">album_object</span> = <span class="ruby-keyword">nil</span>
@@ -332,7 +332,8 @@ its music and the artist</p>
                                                       <span class="ruby-identifier">methods</span><span class="ruby-operator">:</span> <span class="ruby-value">:getAverageNote</span>
                                                     },
                                                     <span class="ruby-value">:user</span> =<span class="ruby-operator">&gt;</span> {<span class="ruby-value">:only</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">User</span>.<span class="ruby-identifier">miniKey</span>},
-                                                    <span class="ruby-identifier">descriptions</span><span class="ruby-operator">:</span> {  <span class="ruby-value">:only</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">Description</span>.<span class="ruby-identifier">miniKey</span> }
+                                                    <span class="ruby-identifier">descriptions</span><span class="ruby-operator">:</span> {  <span class="ruby-value">:only</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">Description</span>.<span class="ruby-identifier">miniKey</span> },
+                                                    <span class="ruby-identifier">genres</span><span class="ruby-operator">:</span> { <span class="ruby-value">:only</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">Genre</span>.<span class="ruby-identifier">miniKey</span> }
                                                   },
                                                   <span class="ruby-identifier">methods</span><span class="ruby-operator">:</span> <span class="ruby-value">:getAverageNote</span>) }
 
@@ -389,7 +390,7 @@ last (default : false)</p>
 </li></ul>					
 											<div class="method-source-code" id="getcomments-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/albums_controller.rb, line 271</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/albums_controller.rb, line 273</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">getcomments</span>
   <span class="ruby-identifier">order</span> = <span class="ruby-string">&quot;false&quot;</span>
 
@@ -528,7 +529,8 @@ and the artist</p>
                                                   <span class="ruby-identifier">methods</span><span class="ruby-operator">:</span> <span class="ruby-value">:getAverageNote</span>
                                                 },
                                                 <span class="ruby-value">:user</span> =<span class="ruby-operator">&gt;</span> {<span class="ruby-value">:only</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">User</span>.<span class="ruby-identifier">miniKey</span>},
-                                                <span class="ruby-identifier">descriptions</span><span class="ruby-operator">:</span> {  <span class="ruby-value">:only</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">Description</span>.<span class="ruby-identifier">miniKey</span> }
+                                                <span class="ruby-identifier">descriptions</span><span class="ruby-operator">:</span> {  <span class="ruby-value">:only</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">Description</span>.<span class="ruby-identifier">miniKey</span> },
+                                                <span class="ruby-identifier">genres</span><span class="ruby-operator">:</span> { <span class="ruby-value">:only</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">Genre</span>.<span class="ruby-identifier">miniKey</span> }
                                               },
                                               <span class="ruby-identifier">methods</span><span class="ruby-operator">:</span> <span class="ruby-value">:getAverageNote</span>) }
       <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">200</span>
@@ -579,6 +581,7 @@ and the artist</p>
 			<li><a href="../API/GenresController.html">API::GenresController</a></li>
 			<li><a href="../API/GiftsController.html">API::GiftsController</a></li>
 			<li><a href="../API/InfluencesController.html">API::InfluencesController</a></li>
+			<li><a href="../API/LanguagesController.html">API::LanguagesController</a></li>
 			<li><a href="../API/ListeningsController.html">API::ListeningsController</a></li>
 			<li><a href="../API/MessagesController.html">API::MessagesController</a></li>
 			<li><a href="../API/MusicsController.html">API::MusicsController</a></li>
@@ -610,6 +613,7 @@ and the artist</p>
 			<li><a href="../Group.html">Group</a></li>
 			<li><a href="../Identity.html">Identity</a></li>
 			<li><a href="../Influence.html">Influence</a></li>
+			<li><a href="../Language.html">Language</a></li>
 			<li><a href="../Listening.html">Listening</a></li>
 			<li><a href="../Message.html">Message</a></li>
 			<li><a href="../Music.html">Music</a></li>

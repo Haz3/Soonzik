@@ -61,6 +61,12 @@ var SearchIndex =
 		"type": "normalclass"
 	},
 	{
+		"name": "API::LanguagesController",
+		"link": "API/LanguagesController.html",
+		"snippet": "<p>Controller which manage the transaction for the Albums objects Here is the\nlist of action available : …\n",
+		"type": "normalclass"
+	},
+	{
 		"name": "API::ListeningsController",
 		"link": "API/ListeningsController.html",
 		"snippet": "<p>Controller which manage the transaction for the Listenings objects Here is\nthe list of action available …\n",
@@ -244,6 +250,12 @@ var SearchIndex =
 		"name": "Influence",
 		"link": "Influence.html",
 		"snippet": "<p>The model of the object Influence Contain the relation and the validation\nCan provide some features linked …\n",
+		"type": "normalclass"
+	},
+	{
+		"name": "Language",
+		"link": "Language.html",
+		"snippet": "<p>The model of the object Language\n<p>Attributes\n<p><code>id</code> - (integer) - The ID of the object\n",
 		"type": "normalclass"
 	},
 	{
@@ -544,6 +556,12 @@ var SearchIndex =
 		"name": "index",
 		"link": "API/InfluencesController.html#method-i-index",
 		"snippet": "<p>Retrieve all the influences\n<p>Route : /influences\n<p>Options\n",
+		"type": "anymethod"
+	},
+	{
+		"name": "index",
+		"link": "API/LanguagesController.html#method-i-index",
+		"snippet": "<p>Retrieve all the languages\n<p>Route : /languages\n<p>HTTP VALUE\n",
 		"type": "anymethod"
 	},
 	{
@@ -1083,7 +1101,7 @@ var SearchIndex =
 	{
 		"name": "miniKey",
 		"link": "Music.html#method-c-miniKey",
-		"snippet": "<p>Filter of information for the API\n<p>Fields returned : [:id, :title, :duration, :price]\n",
+		"snippet": "<p>Filter of information for the API\n<p>Fields returned : [:id, :title, :duration, :price, :limited]\n",
 		"type": "anymethod"
 	},
 	{

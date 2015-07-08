@@ -92,8 +92,8 @@
 				  												<h1 class="class"
 					rel="popover"
 					data-original-title="In files"
-					data-content="app/controllers/API/influences_controller.rb"
-					>InfluencesController</h1>
+					data-content="app/controllers/API/languages_controller.rb"
+					>LanguagesController</h1>
 				</p>
 							</hgroup>
 			<span class="label">class</span>
@@ -110,8 +110,8 @@
 
 		<section class="description">
 			
-<p>Controller which manage the transaction for the Influences objects Here is
-the list of action available :</p>
+<p>Controller which manage the transaction for the Albums objects Here is the
+list of action available :</p>
 <ul><li>
 <p>index       [get]</p>
 </li></ul>
@@ -145,35 +145,22 @@ the list of action available :</p>
 										</header>
 
 					<div class="method-description">
-											<p>Retrieve all the influences</p>
+											<p>Retrieve all the languages</p>
 
-<p>Route : /influences</p>
-
-<h4 id="method-i-index-label-Options">Options<span><a href="#method-i-index-label-Options">&para;</a> <a href="#top">&uarr;</a></span></h4>
-<ul><li>
-<p><code>count</code> - (optionnal) Get the number of object and not the
-object themselve. Useful for pagination</p>
-</li></ul>
+<p>Route : /languages</p>
 
 <h5 id="method-i-index-label-HTTP+VALUE">HTTP VALUE<span><a href="#method-i-index-label-HTTP+VALUE">&para;</a> <a href="#top">&uarr;</a></span></h5>
 <ul><li>
-<p><code>200</code> - In case of success, return a list of influences
-including its genres</p>
+<p><code>200</code> - In case of success, return a list of languages</p>
 </li><li>
 <p><code>503</code> - Error from server</p>
 </li></ul>					
 											<div class="method-source-code" id="index-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/influences_controller.rb, line 21</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/languages_controller.rb, line 18</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">index</span>
-    <span class="ruby-keyword">begin</span>
-    <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@count</span>.<span class="ruby-identifier">present?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-ivar">@count</span> <span class="ruby-operator">==</span> <span class="ruby-string">&quot;true&quot;</span>)
-      <span class="ruby-ivar">@returnValue</span> = { <span class="ruby-identifier">content</span><span class="ruby-operator">:</span> <span class="ruby-constant">Influence</span>.<span class="ruby-identifier">count</span> }
-    <span class="ruby-keyword">else</span>
-      <span class="ruby-ivar">@returnValue</span> = { <span class="ruby-identifier">content</span><span class="ruby-operator">:</span> <span class="ruby-constant">Influence</span>.<span class="ruby-identifier">all</span>.<span class="ruby-identifier">as_json</span>(<span class="ruby-value">:include</span> =<span class="ruby-operator">&gt;</span> {
-                                                        <span class="ruby-value">:genres</span> =<span class="ruby-operator">&gt;</span> { <span class="ruby-value">:only</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">Genre</span>.<span class="ruby-identifier">miniKey</span> }
-                                                      }, <span class="ruby-value">:only</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">Influence</span>.<span class="ruby-identifier">miniKey</span>) }
-    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">begin</span>
+    <span class="ruby-ivar">@returnValue</span> = { <span class="ruby-identifier">content</span><span class="ruby-operator">:</span> <span class="ruby-constant">Language</span>.<span class="ruby-identifier">all</span>.<span class="ruby-identifier">as_json</span>(<span class="ruby-identifier">only</span><span class="ruby-operator">:</span> [<span class="ruby-value">:id</span>, <span class="ruby-value">:language</span>, <span class="ruby-value">:abbreviation</span>]) }
     <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@returnValue</span>[<span class="ruby-value">:content</span>].<span class="ruby-identifier">size</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>)
       <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">202</span>
     <span class="ruby-keyword">else</span>

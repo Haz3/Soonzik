@@ -91,8 +91,8 @@
 								  												<h1 class="class"
 					rel="popover"
 					data-original-title="In files"
-					data-content="app/models/cart.rb"
-					>Cart</h1>
+					data-content="app/models/language.rb"
+					>Language</h1>
 				</p>
 							</hgroup>
 			<span class="label">class</span>
@@ -109,27 +109,15 @@
 
 		<section class="description">
 			
-<p>The model of the object <a href="Cart.html">Cart</a> Contain the relation
-and the validation Can provide some features linked to this model</p>
+<p>The model of the object <a href="Language.html">Language</a></p>
 
-<h4 id="class-Cart-label-Attributes">Attributes<span><a href="#class-Cart-label-Attributes">&para;</a> <a href="#top">&uarr;</a></span></h4>
+<h4 id="class-Language-label-Attributes">Attributes<span><a href="#class-Language-label-Attributes">&para;</a> <a href="#top">&uarr;</a></span></h4>
 <ul><li>
 <p><code>id</code> - (integer) - The ID of the object</p>
 </li><li>
-<p><code>user_id</code> - (integer) - The ID of the user who own it</p>
+<p><code>language</code> - (string) - The name of the language</p>
 </li><li>
-<p><code>gift</code> - (boolean) - Is it a gift or not</p>
-</li></ul>
-
-<h4 id="class-Cart-label-Associations">Associations<span><a href="#class-Cart-label-Associations">&para;</a> <a href="#top">&uarr;</a></span></h4>
-<ul><li>
-<p><code>belongs_to</code> - :user</p>
-</li><li>
-<p><code>has_and_belongs_to_many</code> - :albums</p>
-</li><li>
-<p><code>has_and_belongs_to_many</code> - :musics</p>
-</li><li>
-<p><code>has_and_belongs_to_many</code> - :packs</p>
+<p><code>abbreviation</code> - (string) - The abbreviation of the name</p>
 </li></ul>
 		</section>
 
@@ -140,35 +128,6 @@ and the validation Can provide some features linked to this model</p>
 			
 			<!-- Methods -->
 						
-						<section class="public-methods class-methods methods">
-				<header>
-					<h3>Public Class Methods</h3>
-				</header>
-
-								<a name="method-c-cart_params">anchor</a>
-				<div id="method-c-cart_params-doc" class="method">
-
-					<header>
-											<i class="icon-generic"></i>
-						<span class="method-name">cart_params</span><span 
-							class="method-args">(parameters)</span>
-										</header>
-
-					<div class="method-description">
-											<p>The strong parameters to save or update object</p>					
-											<div class="method-source-code" id="cart_params-source">
-							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/models/cart.rb, line 27</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">cart_params</span>(<span class="ruby-identifier">parameters</span>)
-  <span class="ruby-identifier">parameters</span>.<span class="ruby-identifier">require</span>(<span class="ruby-value">:cart</span>).<span class="ruby-identifier">permit</span>(<span class="ruby-value">:gift</span>, <span class="ruby-value">:user_id</span>)
-<span class="ruby-keyword">end</span></code></pre>
-						</div>
-										</div>
-
-					
-									</div>
-				
-			</section>
 			
 			
 			
