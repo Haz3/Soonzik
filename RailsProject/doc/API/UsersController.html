@@ -812,15 +812,15 @@ object themselve. Useful for pagination</p>
 										</header>
 
 					<div class="method-description">
-											<p>To get all the musics buy by the user</p>
+											<p>To know if the user is an artist, to be use for profile</p>
 
 <p>Route : /users/:id/isartist</p>
 
 <h5 id="method-i-isArtist-label-HTTP+VALUE">HTTP VALUE<span><a href="#method-i-isArtist-label-HTTP+VALUE">&para;</a> <a href="#top">&uarr;</a></span></h5>
 <ul><li>
 <p><code>200</code> - In case of success, return an hash with the key “artist”
-to know if it is one or not, and if yes, the list of albums &amp; musics of
-him</p>
+to know if it is one or not, and if yes, return its albums with the musics
+inside + the top 5 of the musics of this artist</p>
 </li><li>
 <p><code>404</code> - The user doesn&#39;t exist</p>
 </li><li>
@@ -845,9 +845,9 @@ him</p>
         <span class="ruby-identifier">topFive</span> = <span class="ruby-identifier">u</span>.<span class="ruby-identifier">giveTopFive</span>
         <span class="ruby-identifier">hash</span>[<span class="ruby-value">:topFive</span>] = []
         <span class="ruby-identifier">topFive</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">music</span><span class="ruby-operator">|</span>
-          <span class="ruby-identifier">hash</span>[<span class="ruby-value">:topFive</span>] <span class="ruby-operator">&lt;&lt;</span> { <span class="ruby-identifier">note</span><span class="ruby-operator">:</span> <span class="ruby-identifier">music</span>[<span class="ruby-value">:note</span>], <span class="ruby-identifier">music</span><span class="ruby-operator">:</span> <span class="ruby-constant">JSON</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">music</span>[<span class="ruby-value">:object</span>].<span class="ruby-identifier">to_json</span>(<span class="ruby-identifier">only</span><span class="ruby-operator">:</span> <span class="ruby-constant">Music</span>.<span class="ruby-identifier">miniKey</span>, <span class="ruby-value">:include</span> =<span class="ruby-operator">&gt;</span> {
+          <span class="ruby-identifier">hash</span>[<span class="ruby-value">:topFive</span>] <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-constant">JSON</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">music</span>[<span class="ruby-value">:object</span>].<span class="ruby-identifier">to_json</span>(<span class="ruby-identifier">only</span><span class="ruby-operator">:</span> <span class="ruby-constant">Music</span>.<span class="ruby-identifier">miniKey</span>, <span class="ruby-value">:include</span> =<span class="ruby-operator">&gt;</span> {
               <span class="ruby-identifier">album</span><span class="ruby-operator">:</span> { <span class="ruby-identifier">only</span><span class="ruby-operator">:</span> <span class="ruby-constant">Album</span>.<span class="ruby-identifier">miniKey</span> }
-            })) }
+            }, <span class="ruby-identifier">methods</span><span class="ruby-operator">:</span> <span class="ruby-value">:getAverageNote</span>))
         }
       <span class="ruby-keyword">end</span>
       <span class="ruby-ivar">@returnValue</span> = { <span class="ruby-identifier">content</span><span class="ruby-operator">:</span> <span class="ruby-identifier">hash</span> }

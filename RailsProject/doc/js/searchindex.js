@@ -849,7 +849,7 @@ var SearchIndex =
 	{
 		"name": "isArtist",
 		"link": "API/UsersController.html#method-i-isArtist",
-		"snippet": "<p>To get all the musics buy by the user\n<p>Route : /users/:id/isartist\n<p>HTTP VALUE\n",
+		"snippet": "<p>To know if the user is an artist, to be use for profile\n<p>Route : /users/:id/isartist\n<p>HTTP VALUE\n",
 		"type": "anymethod"
 	},
 	{

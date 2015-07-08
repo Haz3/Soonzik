@@ -356,9 +356,9 @@ module API
             topFive = u.giveTopFive
             hash[:topFive] = []
             topFive.each { |music|
-              hash[:topFive] << { note: music[:note], music: JSON.parse(music[:object].to_json(only: Music.miniKey, :include => {
+              hash[:topFive] << JSON.parse(music[:object].to_json(only: Music.miniKey, :include => {
                   album: { only: Album.miniKey }
-                })) }
+                }, methods: :getAverageNote))
             }
           end
           @returnValue = { content: hash }
