@@ -5,6 +5,7 @@ SoonzikArtistApp.controller('MusicCtrl', ['$scope', 'SecureAuth', 'HTTPService',
 	$scope.noLinkMusics = [];
 	$scope.user = false;
 	$scope.influences = [];
+	$scope.languages = [];
 
 	var music_drop = null;
 	var container_drop = null;
@@ -37,7 +38,12 @@ SoonzikArtistApp.controller('MusicCtrl', ['$scope', 'SecureAuth', 'HTTPService',
 
 				HTTPService.indexInfluences().then(function(response) {
 					$scope.influences = response.data.content;
-					$scope.loading = false;
+					HTTPService.getLanguages().then(function(response) {
+						$scope.languages = response.data.content;
+						$scope.loading = false;
+					}, function(error) {
+						NotificationService.error("An error occured while loading");
+					});
 				}, function(error) {
 					NotificationService.error("An error occured while loading");
 				});
@@ -124,6 +130,9 @@ SoonzikArtistApp.controller('MusicCtrl', ['$scope', 'SecureAuth', 'HTTPService',
       	},
       	album: function() {
       		return album;
+      	},
+      	languages: function() {
+      		return $scope.languages;
       	}
       }
     });
@@ -168,6 +177,9 @@ SoonzikArtistApp.controller('MusicCtrl', ['$scope', 'SecureAuth', 'HTTPService',
       resolve: {
       	influences: function() {
       		return $scope.influences;
+      	},
+      	languages: function() {
+      		return $scope.languages;
       	}
       }
     });
@@ -239,19 +251,25 @@ SoonzikArtistApp.controller('ModalInstanceMusicCtrl', ["$scope", "$modalInstance
 	*****************************
 */
 
-SoonzikArtistApp.controller('ModalInstanceAlbumCtrl', ["$scope", "$modalInstance", "Upload", "HTTPService", "NotificationService", "influences", function ($scope, $modalInstance, Upload, HTTPService, NotificationService, influences) {
+SoonzikArtistApp.controller('ModalInstanceAlbumCtrl',
+														["$scope", "$modalInstance", "Upload", "HTTPService", "NotificationService", "influences", "languages",
+														function ($scope, $modalInstance, Upload, HTTPService, NotificationService, influences, languages) {
 	$scope.loading = false;
 	$scope.file = null;
+	$scope.languages = languages;
 	$scope.form = {
 		title: "",
 		price: 0,
 		yearProd: 2000
 	};
-	$scope.descriptions = []
 	$scope.influences = influences;
 	$scope.selected = {
 		selectedGenres: []
 	}
+	$scope.descriptions = [{
+		language: "EN",
+		description: ""
+	}]
 
 	// On the save button
   $scope.ok = function () {
@@ -271,6 +289,22 @@ SoonzikArtistApp.controller('ModalInstanceAlbumCtrl', ["$scope", "$modalInstance
 			NotificationService.error("Error while saving the informations");
 		});
   };
+
+  $scope.addDesc = function() {
+  	$scope.descriptions.push({
+			language: "",
+			description: ""
+		});
+  }
+
+  $scope.removeDesc = function(desc) {
+  	for (var i = 0 ; i < $scope.descriptions.length ; i++) {
+  		if ($scope.descriptions[i] == desc) {
+  			$scope.descriptions.splice(i, 1);
+  			break;
+  		}
+  	}
+  }
 
   // On the background click
   $scope.cancel = function () {
@@ -296,9 +330,10 @@ SoonzikArtistApp.controller('ModalInstanceAlbumCtrl', ["$scope", "$modalInstance
 */
 
 SoonzikArtistApp.controller('ModalInstanceEditAlbumCtrl',
-														["$scope", "$modalInstance", "Upload", "HTTPService", "NotificationService", "influences", "album",
-														function ($scope, $modalInstance, Upload, HTTPService, NotificationService, influences, album) {
+														["$scope", "$modalInstance", "Upload", "HTTPService", "NotificationService", "influences", "album", "languages",
+														function ($scope, $modalInstance, Upload, HTTPService, NotificationService, influences, album, languages) {
 	$scope.loading = false;
+	$scope.languages = languages;
 
 	var formatGenre = function(genres) {
 		var array = [];
@@ -314,11 +349,11 @@ SoonzikArtistApp.controller('ModalInstanceEditAlbumCtrl',
 		price: album.price,
 		yearProd: album.yearProd
 	};
-	$scope.descriptions = []
 	$scope.influences = influences;
 	$scope.selected = {
 		selectedGenres: formatGenre(album.genres)
 	}
+	$scope.descriptions = (album.descriptions.length == 0) ? [{language: "EN",description: ""}] : JSON.parse(JSON.stringify(album.descriptions));
 
 	// On the save button
   $scope.ok = function () {
@@ -339,6 +374,22 @@ SoonzikArtistApp.controller('ModalInstanceEditAlbumCtrl',
 			NotificationService.error("Error while saving the informations");
 		});
   };
+
+  $scope.addDesc = function() {
+  	$scope.descriptions.push({
+			language: "",
+			description: ""
+		});
+  }
+
+  $scope.removeDesc = function(desc) {
+  	for (var i = 0 ; i < $scope.descriptions.length ; i++) {
+  		if ($scope.descriptions[i] == desc) {
+  			$scope.descriptions.splice(i, 1);
+  			break;
+  		}
+  	}
+  }
 
   // On the background click
   $scope.cancel = function () {

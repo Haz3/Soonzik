@@ -149,6 +149,7 @@ module Artist
   		a = nil
   		http = :ok
   		genres = []
+  		descriptions = []
 
   		begin
   			if (params.has_key?(:album))
@@ -167,6 +168,10 @@ module Artist
 	  		end
 
 				genres = JSON.parse(params[:genres]) if params.has_key?(:genres)
+				descriptions = self.parseDescriptions((params.has_key?(:descriptions)) ? JSON.parse(params[:descriptions]) : [], error)
+				puts "--------------"
+				puts descriptions
+				puts "-----------"
 				
 				acceptedContentType = [
           "image/gif",
@@ -202,6 +207,19 @@ module Artist
 							rescue
 							end
 						}
+						descriptions.each { |description|
+							begin
+								d = Description.new
+								d.description = description["description"]
+								d.language = description["language"]
+								puts d
+								if (d.save)
+									puts "add the D !"
+									a.descriptions << d
+								end
+							rescue
+							end
+						}
 		      else
 		      	error = m.errors.full_messages
 		      	File.delete Rails.root.join('app', 'assets', 'images', 'albums', newFilename).to_s
@@ -212,11 +230,12 @@ module Artist
 	      	http = :bad_request
 	      end
 			rescue
+				puts $!, $@
 		  	error = true
       	http = :bad_request
 			end
 
-  		render :json => { error: error, album: a.as_json(:include => { musics: {}, genres: {} } ) }, :status => http
+  		render :json => { error: error, album: a.as_json(:include => { musics: {}, genres: {}, descriptions: {} } ) }, :status => http
   	end
 
   	# To update the album
@@ -238,6 +257,7 @@ module Artist
 	  		end
 
 				genres = JSON.parse(params[:genres]) if params.has_key?(:genres)
+				descriptions = self.parseDescriptions((params.has_key?(:descriptions)) ? JSON.parse(params[:descriptions]) : [], error)
 
 				acceptedContentType = [
           "image/gif",
@@ -286,6 +306,18 @@ module Artist
 							rescue
 							end
 						}
+						a.descriptions = []
+						descriptions.each { |description|
+							begin
+								d = Description.new
+								d.description = description["description"]
+								d.language = description["language"]
+								if (d.save)
+									a.descriptions << d
+								end
+							rescue
+							end
+						}
 						a.reload
 		      else
 		      	error = m.errors.full_messages
@@ -300,7 +332,26 @@ module Artist
 		  	error = true
       	http = :bad_request
 			end
-  		render :json => { error: error, album: a.as_json(:include => { musics: {}, genres: {} } ) }, :status => http
+  		render :json => { error: error, album: a.as_json(:include => { musics: {}, genres: {}, descriptions: {} } ) }, :status => http
   	end
+
+		def parseDescriptions(descriptions, error)
+			tmpDesc = []
+			alreadyIn = []
+
+			descriptions.each { |x|
+				if (!alreadyIn.include? x["language"])
+					obj = Language.find_by_abbreviation(x["language"])
+					if (obj != nil)
+						tmpDesc << x
+						alreadyIn << x["language"]
+					end
+				end
+			}
+			if (!alreadyIn.include? 'EN')
+				error = true
+			end
+			return tmpDesc
+		end
 	end
 end

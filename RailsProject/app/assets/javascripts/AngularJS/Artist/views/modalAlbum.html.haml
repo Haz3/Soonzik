@@ -28,6 +28,15 @@
 			%label{ for: "{{genre.style_name}}", "ng-repeat" => "genre in influence.genres" }
 				%input{ type: "checkbox", "checklist-model" => "selected.selectedGenres", "checklist-value" => "genre.id", id: "{{genre.style_name}}"}
 				{{ genre.style_name }}
+	.row
+		%h4 Descriptions
+		%h6.subtitle.red * The English description need to be set at least
+		.small-12{ "ng-repeat" => "desc in descriptions" }
+			%hr
+			%select.small-6.columns{ "ng-model" => "desc.language", "ng-options" => "lang.abbreviation as lang.language for lang in languages" }
+			%span.button.left.tiny{ "ng-click" => "removeDesc(desc)" } Remove this description
+			%textarea{ "ng-model" => "desc.description" }
+		%span.button.tiny.right{ "ng-click" => "addDesc()" } Add a description
 .button{ "ng-click" => "ok()" }
 	Save
 %loading{ "loading-type" => "'square'", "ng-if" => 'loading == true' }

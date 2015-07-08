@@ -140,6 +140,9 @@ SoonzikArtistApp.factory('HTTPService', ['$http', '$location', 'Upload', functio
       }).progress(progressFunction)
       .success(successFunction)
       .error(errorFunction);
+    },
+    getLanguages: function() {
+      return $http.get("http://api." + url + "/languages");
     }
   }
 }]);

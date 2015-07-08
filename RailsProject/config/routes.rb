@@ -52,6 +52,9 @@ Rails.application.routes.draw do
       end
     end
 
+    resources :languages, only: [:index] do #ok
+    end
+
     resources :messages, only: [:show] do #ok
       collection do
         get 'find' => 'messages#find'
