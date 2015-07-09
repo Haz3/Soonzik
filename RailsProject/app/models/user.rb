@@ -108,6 +108,7 @@ class User < ActiveRecord::Base
   has_many :packs
   has_many :propositions
   has_many :tweets
+  has_many :meets
   has_many :votes
   has_many :purchases
   has_many :purchased_musics, through: :purchases, source: :musics

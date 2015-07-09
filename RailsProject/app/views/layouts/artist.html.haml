@@ -30,7 +30,7 @@
 					%li{ class: "#{'current_page_item' if (defined?(@menu) && @menu == 'streaming')}" }
 						%a{:href => "#"} Streaming
 					%li{ class: "#{'current_page_item' if (defined?(@menu) && @menu == 'meet')}" }
-						%a{:href => "#"} Meet artists
+						=link_to "Meet artists", artist_meet_path
 		- if notice
 			%small.error= notice
 		-if alert
@@ -50,7 +50,7 @@
 						=image_tag("Artist/meet.png")
 					%p.text-justify
 						Do you search someone who play guitar for your next track ? Do you need someone because you search a women voice ? Here is our service to help you to find the perfect person for your needs.
-					.a{:href => "#"}
+					.a{:href => "/meet"}
 						%span.button
 							%i.fi-plus
 							Meet

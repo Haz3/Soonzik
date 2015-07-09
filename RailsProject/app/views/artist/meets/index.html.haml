@@ -1,0 +1,71 @@
+.title
+	%h2 Meet Page
+	%span.byline You can find artists to contact for partnership
+.meetContainer
+	%hr
+	%myMeets
+		%h4 Your requests
+		- if current_user.meets.size > 0
+			%ul
+				- current_user.meets.each do |m|
+					%li
+						%p= m.profession
+						%p= m.what
+						%p= m.fromDate
+						%p= m.toDate
+						%p= m.location
+						%p= m.email
+		- else
+			%p Currently, you don't have meets proposed
+	%hr
+	%h4 Search or propose a partnership
+	= form_for @meet, url: artist_meet_save_path do |f|
+		.row
+			.small-3.columns
+				%label{:for => "right-label"} You want to
+			.small-8.columns
+				%label.small-6.columns{:for => "search"}
+					%input{ :id => "search", :name => "meet[query]", :type => "radio", :value => "search", checked: true}
+					Search
+				%label.small-6.columns.left{:for => "propose"}
+					%input{ :id => "propose", :name => "meet[query]", :type => "radio", :value => "propose" }
+					Propose
+		.row
+			.small-12.medium-6.columns
+				.small-4.columns
+					%label.inline{:for => "profession"} A
+				.small-8.columns
+					%select{ id: "profession", name: "meet[profession]" }
+						- @professionsArray.each do |prof|
+							%option{ value: prof.str }= prof.str
+			.small-12.medium-6.columns
+				.small-4.columns
+					%label.inline{:for => "what"} for a
+				.small-8.columns
+					%select{ id: "type", name: "meet[what]" }
+						- @typesArray.each do |type|
+							%option{ value: type.str }= type.str
+		.row
+			.small-12.medium-6.columns
+				.small-4.columns
+					%label.inline{:for => "dateBegin"} From the
+				.small-8.columns
+					%input{ type: "date", id: "dateBegin", name: "meet[fromDate]" }
+			.small-12.medium-6.columns
+				.small-4.columns
+					%label.inline{:for => "dateTo"} to
+				.small-8.columns
+					%input{ type: "date", id: "dateBegin", name: "meet[toDate]" }
+		.row
+			.small-12.medium-3.columns
+				%label.inline{ :for => "location" } Location
+			.small-12.medium-9.columns
+				%input{ type: "text", id: "location", name: "meet[location]" }
+		.row
+			.small-12.medium-3.columns
+				%label.inline{ :for => "email" } Email
+			.small-12.medium-9.columns
+				%input{ type: "text", id: "email", name: "meet[email]" }
+		= f.submit
+	%hr
+	=link_to "Take a look of the different propositions", artist_meet_all_path

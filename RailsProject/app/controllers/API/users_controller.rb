@@ -330,13 +330,13 @@ module API
       sendJson
     end
 
-    # To get all the musics buy by the user
+    # To know if the user is an artist, to be use for profile
     #
     # Route : /users/:id/isartist
     #
     # ===== HTTP VALUE
     # 
-    # - +200+ - In case of success, return an hash with the key "artist" to know if it is one or not, and if yes, the list of albums & musics of him
+    # - +200+ - In case of success, return an hash with the key "artist" to know if it is one or not, and if yes, return its albums with the musics inside + the top 5 of the musics of this artist
     # - +404+ - The user doesn't exist
     # - +503+ - Error from server
     # 

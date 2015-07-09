@@ -1,0 +1,13 @@
+.title
+	%h2 Meet Page
+	%span.byline You can find artists to contact for partnership
+.meetContainer
+	%ul
+		- @meets.each do |meet|
+			%li
+				%p= meet.profession
+				%p= meet.what
+				%p= meet.fromDate
+				%p= meet.toDate
+				%p= meet.location
+				%p= meet.email
