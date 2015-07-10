@@ -1,5 +1,5 @@
 //
-//  UserViewController.h
+//  HeaderUserView.h
 //  SoonZik
 //
 //  Created by Maxime Sauvage on 09/07/15.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface UserViewController : UIViewController
+@interface HeaderUserView : UIView
 
 @end
