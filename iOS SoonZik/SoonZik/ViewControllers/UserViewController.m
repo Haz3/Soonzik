@@ -2,7 +2,7 @@
 //  UserViewController.m
 //  SoonZik
 //
-//  Created by Maxime Sauvage on 30/06/15.
+//  Created by Maxime Sauvage on 09/07/15.
 //  Copyright (c) 2015 SoonZik - Maxime SAUVAGE. All rights reserved.
 //
 
@@ -16,7 +16,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    // Do any additional setup after loading the view from its nib.
 }
 
 - (void)didReceiveMemoryWarning {
