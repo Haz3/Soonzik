@@ -164,6 +164,7 @@ Rails.application.routes.draw do
     get '/meet' => 'meets#index'
     get '/meet/all' => 'meets#show'
     match '/meet/save' => 'meets#save', via: [:post, :put]
+    get '/meet/delete/:id' => 'meets#destroy', as: "meet_destroy"
   end
 
   devise_for :admin_users, ActiveAdmin::Devise.config

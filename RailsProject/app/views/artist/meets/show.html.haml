@@ -2,12 +2,59 @@
 	%h2 Meet Page
 	%span.byline You can find artists to contact for partnership
 .meetContainer
-	%ul
-		- @meets.each do |meet|
-			%li
-				%p= meet.profession
-				%p= meet.what
-				%p= meet.fromDate
-				%p= meet.toDate
-				%p= meet.location
-				%p= meet.email
+	%h3 What artists search
+	- if @meetSearch.size > 0
+		%table
+			%thead
+				%tr
+					%th
+						Profession
+					%th
+						For what
+					%th
+						From
+					%th
+						To
+					%th
+						Location
+					%th
+						Email
+			%tbody
+				- @meetSearch.each do |m|
+					%tr
+						%td= m.profession
+						%td= m.what
+						%td= m.fromDate
+						%td= m.toDate
+						%td= m.location
+						%td= m.email
+	- else
+		%p Nothing for the moment
+	%h3 What artists propose
+	- if @meetPropose.size > 0
+		%table
+			%thead
+				%tr
+					%th
+						Profession
+					%th
+						For what
+					%th
+						From
+					%th
+						To
+					%th
+						Location
+					%th
+						Email
+			%tbody
+				- @meetPropose.each do |m|
+					%tr
+						%td= m.profession
+						%td= m.what
+						%td= m.fromDate
+						%td= m.toDate
+						%td= m.location
+						%td= m.email
+	- else
+		%p Nothing for the moment

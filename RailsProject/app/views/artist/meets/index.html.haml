@@ -6,66 +6,93 @@
 	%myMeets
 		%h4 Your requests
 		- if current_user.meets.size > 0
-			%ul
-				- current_user.meets.each do |m|
-					%li
-						%p= m.profession
-						%p= m.what
-						%p= m.fromDate
-						%p= m.toDate
-						%p= m.location
-						%p= m.email
+			%table
+				%thead
+					%tr
+						%th
+							Type
+						%th
+							Profession
+						%th
+							For what
+						%th
+							From
+						%th
+							To
+						%th
+							Location
+						%th
+							Email
+						%th
+				%tbody
+					- current_user.meets.each do |m|
+						%tr
+							%td= m.query
+							%td= m.profession
+							%td= m.what
+							%td= m.fromDate
+							%td= m.toDate
+							%td= m.location
+							%td= m.email
+							%td
+								=link_to artist_meet_destroy_path(m) do
+									%i.fi-x
 		- else
 			%p Currently, you don't have meets proposed
 	%hr
+	.link
+		=link_to "Take a look of the different propositions", artist_meet_all_path
+	%hr
 	%h4 Search or propose a partnership
 	= form_for @meet, url: artist_meet_save_path do |f|
+		- if @meet.errors.any?
+			#error_explanation.red
+				%h6= "#{pluralize(@meet.errors.count, "error")} prohibited this meet from being saved:"
+				%ul
+					- @meet.errors.full_messages.each do |msg|
+						%li= msg
+			%hr
 		.row
 			.small-3.columns
-				%label{:for => "right-label"} You want to
+				= f.label(:query, "You want to" )
 			.small-8.columns
-				%label.small-6.columns{:for => "search"}
-					%input{ :id => "search", :name => "meet[query]", :type => "radio", :value => "search", checked: true}
-					Search
-				%label.small-6.columns.left{:for => "propose"}
-					%input{ :id => "propose", :name => "meet[query]", :type => "radio", :value => "propose" }
-					Propose
+				= f.label(:query, nil, :class => "small-6 columns" ) do
+					= f.radio_button(:query, "search", { :id => "search" } )
+					= "Search"
+				= f.label(:query, nil, :class => "small-6 columns" ) do
+					= f.radio_button(:query, "propose", { :id => "propose" } )
+					= "Propose"
 		.row
 			.small-12.medium-6.columns
 				.small-4.columns
-					%label.inline{:for => "profession"} A
+					= f.label(:profession, "A" )
 				.small-8.columns
-					%select{ id: "profession", name: "meet[profession]" }
-						- @professionsArray.each do |prof|
-							%option{ value: prof.str }= prof.str
+					= f.select(:profession, @professionsArray.collect {|p| [ p.str, p.str ] }, { id: "profession" })
 			.small-12.medium-6.columns
 				.small-4.columns
-					%label.inline{:for => "what"} for a
+					= f.label(:what, "for a" )
 				.small-8.columns
-					%select{ id: "type", name: "meet[what]" }
-						- @typesArray.each do |type|
-							%option{ value: type.str }= type.str
+					= f.select(:what, @professionsArray.collect {|p| [ p.str, p.str ] }, { id: "type" })
 		.row
 			.small-12.medium-6.columns
 				.small-4.columns
-					%label.inline{:for => "dateBegin"} From the
+					= f.label(:fromDate, "From the" )
 				.small-8.columns
-					%input{ type: "date", id: "dateBegin", name: "meet[fromDate]" }
+					= f.date_field(:fromDate, { id: "fromDate" })
 			.small-12.medium-6.columns
 				.small-4.columns
-					%label.inline{:for => "dateTo"} to
+					= f.label(:toDate, "to" )
 				.small-8.columns
-					%input{ type: "date", id: "dateBegin", name: "meet[toDate]" }
+					= f.date_field(:toDate, { id: "toDate" })
 		.row
 			.small-12.medium-3.columns
-				%label.inline{ :for => "location" } Location
+				= f.label(:location, "Location" )
 			.small-12.medium-9.columns
-				%input{ type: "text", id: "location", name: "meet[location]" }
+				= f.text_field( :location, { id: "location" } )
 		.row
 			.small-12.medium-3.columns
-				%label.inline{ :for => "email" } Email
+				= f.label(:email, "Email" )
 			.small-12.medium-9.columns
-				%input{ type: "text", id: "email", name: "meet[email]" }
-		= f.submit
+				= f.text_field( :email, { id: "email" } )
+		= f.submit("Create meet", { :class => "button tiny" })
 	%hr
-	=link_to "Take a look of the different propositions", artist_meet_all_path
