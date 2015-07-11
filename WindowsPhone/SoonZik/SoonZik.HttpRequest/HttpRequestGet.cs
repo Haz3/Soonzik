@@ -80,6 +80,11 @@ namespace SoonZik.HttpRequest
             return await DoRequestForObject(myObject, request);
         }
 
+        public async Task<object> getSuggest(object myObject, string key, string userId)
+        {
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(ApiUrl + "suggest?secureKey=" + key + "&user_id=" + userId);
+            return await DoRequestForObject(myObject, request);
+        }
         private static async Task<string> DoRequest(HttpWebRequest request)
         {
             request.Method = HttpMethods.Get;

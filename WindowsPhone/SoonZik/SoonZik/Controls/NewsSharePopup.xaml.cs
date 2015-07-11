@@ -36,18 +36,25 @@ namespace SoonZik.Controls
 
         private async void ShareOnFaceBook(object postParams)
         {
-            try
+            if (Singleton.Instance().MyFacebookClient != null)
             {
-                dynamic fbPostTaskResult =
-                    await Singleton.Instance().MyFacebookClient.PostTaskAsync("/me/feed", postParams);
-                var responseresult = (IDictionary<string, object>) fbPostTaskResult;
-                var SuccessMsg = new MessageDialog("Message posted sucessfully on facebook wall");
-                await SuccessMsg.ShowAsync();
-                NewsViewModel.MessagePrompt.Hide();
+                try
+                {
+                    dynamic fbPostTaskResult =
+                        await Singleton.Instance().MyFacebookClient.PostTaskAsync("/me/feed", postParams);
+                    var responseresult = (IDictionary<string, object>) fbPostTaskResult;
+                    var SuccessMsg = new MessageDialog("Message posted sucessfully on facebook wall");
+                    await SuccessMsg.ShowAsync();
+                    NewsViewModel.MessagePrompt.Hide();
+                }
+                catch (Exception ex)
+                {
+                    var ErrMsg = new MessageDialog("Error Ocuured!" + ex).ShowAsync();
+                }
             }
-            catch (Exception ex)
+            else
             {
-                var ErrMsg = new MessageDialog("Error Ocuured!" + ex);
+                var ErrMsg = new MessageDialog("Vous n'etes pas connecter a facebook").ShowAsync();
             }
         }
 

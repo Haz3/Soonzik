@@ -36,8 +36,7 @@ namespace SoonZik.ViewModel
                 if (_key != null)
                 {
                     var stringEncrypt = KeyHelpers.GetUserKeyFromResponse(_key);
-                    _cryptographic =
-                        EncriptSha256.EncriptStringToSha256(Singleton.Instance().CurrentUser.salt + stringEncrypt);
+                    _cryptographic = EncriptSha256.EncriptStringToSha256(Singleton.Instance().CurrentUser.salt + stringEncrypt);
 
                     var listAlbumTmp = request.GetAllMusicForUser(new UserMusic(), _cryptographic,
                         Singleton.Instance().CurrentUser.id.ToString());

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using Windows.ApplicationModel.Core;
@@ -6,6 +7,7 @@ using Windows.UI.Core;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using SoonZik.Controls;
+using SoonZik.Helpers;
 using SoonZik.HttpRequest;
 using SoonZik.HttpRequest.Poco;
 using SoonZik.Utils;
@@ -31,6 +33,7 @@ namespace SoonZik.ViewModel
 
         #region Attribute
 
+        private string _crypto;
         public INavigationService Navigation;
 
         private ObservableCollection<Genre> _listGenres;
@@ -80,6 +83,7 @@ namespace SoonZik.ViewModel
         public void LoadContent()
         {
             var request = new HttpRequestGet();
+
             var listGenre = request.GetListObject(new List<Genre>(), "genres");
             listGenre.ContinueWith(delegate(Task<object> tmp)
             {
@@ -114,22 +118,32 @@ namespace SoonZik.ViewModel
                     }
                 }
             });
-            var listZik = request.GetListObject(new List<Music>(), "musics");
-            listZik.ContinueWith(delegate(Task<object> tmp)
+            
+            var userKey = request.GetUserKey(Singleton.Instance().CurrentUser.id.ToString());
+            userKey.ContinueWith(delegate(Task<object> task)
             {
-                var test = tmp.Result as List<Music>;
-                if (test != null)
+                var key = task.Result as string;
+                if (key != null)
                 {
-                    foreach (var item in test)
+                    var stringEncrypt = KeyHelpers.GetUserKeyFromResponse(key);
+                    _crypto = EncriptSha256.EncriptStringToSha256(Singleton.Instance().CurrentUser.salt + stringEncrypt);
+                    var listZik = request.getSuggest(new List<Music>(), _crypto, Singleton.Instance().CurrentUser.id.ToString());
+                    listZik.ContinueWith(delegate(Task<object> tmp)
                     {
-                        CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
-                            () => { ListMusique.Add(item); });
-                    }
+                        var test = tmp.Result as List<Music>;
+                        if (test != null)
+                        {
+                            foreach (var item in test)
+                            {
+                                CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () => { ListMusique.Add(item); });
+                            }
+                        }
+                    });
+
                 }
             });
         }
-
-
+        
         private void MusiCommandExecute()
         {
             Singleton.Instance().SelectedMusicSingleton = SelectedMusic;

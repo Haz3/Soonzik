@@ -26,8 +26,10 @@ namespace SoonZik.ViewModel
     {
         #region Attribute
 
+        private string _crypto;
         private readonly CoreApplicationView _coreApplicationView;
         private User _currentUser;
+
         public User CurrentUser
         {
             get { return _currentUser; }
@@ -122,7 +124,7 @@ namespace SoonZik.ViewModel
             filePicker.FileTypeFilter.Add(".jpg");
 
             filePicker.PickSingleFileAndContinue();
-            _coreApplicationView.Activated += ViewActivated; 
+            _coreApplicationView.Activated += ViewActivated;
         }
 
         private async void ViewActivated(CoreApplicationView sender, IActivatedEventArgs args1)
@@ -159,7 +161,8 @@ namespace SoonZik.ViewModel
                 if (key != null)
                 {
                     var stringEncrypt = KeyHelpers.GetUserKeyFromResponse(key);
-                    var cryptographic = EncriptSha256.EncriptStringToSha256(Singleton.Instance().CurrentUser.salt + stringEncrypt);
+                    var cryptographic =
+                        EncriptSha256.EncriptStringToSha256(Singleton.Instance().CurrentUser.salt + stringEncrypt);
                     UploadImage(name, contentType, bitmapImage, cryptographic);
                 }
             });
@@ -195,7 +198,7 @@ namespace SoonZik.ViewModel
             else if (!Singleton.Instance().ItsMe)
                 CurrentUser = Singleton.Instance().SelectedUser;
         }
-        
+
         private void EditInformationExecute()
         {
             var loader = new Windows.ApplicationModel.Resources.ResourceLoader();
@@ -218,15 +221,32 @@ namespace SoonZik.ViewModel
 
         private async Task UpdateData()
         {
-            var getRequest = new HttpRequestGet();
-            var userKey = await getRequest.GetUserKey(CurrentUser.id.ToString()) as string;
-            if (userKey != null)
+            var request = new HttpRequestGet();
+            var post = new HttpRequestPost();
+            try
             {
-                var hash = HashAlgorithmProvider.OpenAlgorithm(HashAlgorithmNames.Sha256);
-                var ch = hash.CreateHash();
+                var userKey = request.GetUserKey(Singleton.Instance().CurrentUser.id.ToString());
+                await userKey.ContinueWith(delegate(Task<object> task)
+                {
+                    var key = task.Result as string;
+                    if (key != null)
+                    {
+                        var stringEncrypt = KeyHelpers.GetUserKeyFromResponse(key);
+                        _crypto = EncriptSha256.EncriptStringToSha256(Singleton.Instance().CurrentUser.salt + stringEncrypt);
+                    }
+                    var test = post.Update(CurrentUser, _crypto);
+                    test.ContinueWith(delegate(Task<string> tmp)
+                    {
+                        var res = tmp.Result;
+                    });
+                });
             }
+            catch (Exception)
+            {
+                new MessageDialog("Erreur lors de l'update").ShowAsync();
+            }
+          
         }
-
         #endregion
     }
 }

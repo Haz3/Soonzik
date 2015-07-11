@@ -150,6 +150,7 @@ namespace SoonZik.ViewModel
                 catch (Exception e)
                 {
                     new MessageDialog("Erreur de connexion" + e).ShowAsync();
+                    ProgressOn = false;
                 }
                 WriteInformation();
                 Singleton.Instance().NewsPage = new News();
@@ -159,6 +160,7 @@ namespace SoonZik.ViewModel
             else
             {
                 new MessageDialog("Erreur de connexion Code 502").ShowAsync();
+                ProgressOn = false;
             }
         }
 
