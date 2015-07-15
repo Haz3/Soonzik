@@ -224,5 +224,38 @@ module API
       end
       sendJson
     end
+
+    # Get some object Listening. For more information on the parameters, check at the model
+    #
+    # Route : /listenings/around/:lat/:lng/:range
+    #
+    # ==== Options
+    # 
+    # * +lat+ - The latitude
+    # * +lng+ - The longitude
+    # * +range+ - The range of the circle (kilometers)
+    # 
+    # ===== HTTP VALUE
+    # 
+    # - +201+ - In case of success, return an array of object
+    # - +503+ - Error from server
+    # 
+    def around
+      begin
+        @lat = @lat.to_f
+        @lng = @lng.to_f
+        @range = @range.to_f
+
+        listen = Listening.within(@range, :origin => [@lat, @lng])
+
+        @returnValue = { content: listen.as_json(only: Listening.miniKey, :include => { user: { only: User.miniKey }, music: { only: Music.miniKey } }) }
+        codeAnswer 200
+      rescue
+        codeAnswer 504
+        defineHttp :service_unavailable
+      end
+      sendJson
+    end
+
   end
 end

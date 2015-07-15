@@ -107,3 +107,7 @@ gem 'websocket-rails', platforms: :ruby
 
 # For playlist
 gem 'ranked-model'
+
+# For geolocation
+gem 'geokit'
+gem 'geokit-rails'

@@ -265,6 +265,18 @@ var SearchIndex =
 		"type": "normalclass"
 	},
 	{
+		"name": "Meet",
+		"link": "Meet.html",
+		"snippet": "<p>The model of the object Meet\n",
+		"type": "normalclass"
+	},
+	{
+		"name": "Meetstring",
+		"link": "Meetstring.html",
+		"snippet": "<p>The model of the object Meetstring\n",
+		"type": "normalclass"
+	},
+	{
 		"name": "Message",
 		"link": "Message.html",
 		"snippet": "<p>The model of the object Message Contain the relation and the validation Can\nprovide some features linked …\n",
@@ -586,6 +598,12 @@ var SearchIndex =
 		"name": "save",
 		"link": "API/ListeningsController.html#method-i-save",
 		"snippet": "<p>Save a new object Listening. For more information on the parameters, check\nat the model\n<p>Route : /listenings/save …\n",
+		"type": "anymethod"
+	},
+	{
+		"name": "around",
+		"link": "API/ListeningsController.html#method-i-around",
+		"snippet": "<p>Get some object Listening. For more information on the parameters, check at\nthe model\n<p>Route : /listenings/around/ …\n",
 		"type": "anymethod"
 	},
 	{
@@ -1077,6 +1095,12 @@ var SearchIndex =
 	{
 		"name": "listening_params",
 		"link": "Listening.html#method-c-listening_params",
+		"snippet": "<p>The strong parameters to save or update object\n",
+		"type": "anymethod"
+	},
+	{
+		"name": "meet_params",
+		"link": "Meet.html#method-c-meet_params",
 		"snippet": "<p>The strong parameters to save or update object\n",
 		"type": "anymethod"
 	},

@@ -49,6 +49,7 @@ Rails.application.routes.draw do
       collection do
         get 'find' => 'listenings#find'
         match 'save' => 'listenings#save', via: [:post, :options]
+        get 'around/:lat/:lng/:range' => 'listenings#around', :constraints => {:lat => /\-*\d+.\d+/ , :lng => /\-*\d+.\d+/ , :range => /\d+/}
       end
     end
 
@@ -186,13 +187,13 @@ Rails.application.routes.draw do
   resources :gifts
   resources :groups
   resources :influences
-  resources :listenings
+  resources :listenings, only: [:index]
   resources :musics
   resources :music_notes
-  resources :news
+  resources :news, only: [:index, :show]
   resources :newstexts
   resources :notifications
-  resources :packs
+  resources :packs, only: [:index, :show]
   resources :playlists, only: [:show]
   resources :propositions
   resources :purchases

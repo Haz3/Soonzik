@@ -22,6 +22,7 @@
 //= require ./tools/messenger-theme-future.js
 //= require ./tools/raphael-min.js
 //= require ./tools/morris.min.js
+//= require ./tools/lodash.min.js
 //= require angular
 //= require angular-animate
 //= require angular-cookies
@@ -32,6 +33,7 @@
 //= require ./AngularJS/controllers/BattlesController.js
 //= require ./AngularJS/controllers/UsersController.js
 //= require ./AngularJS/controllers/IndexController.js
+//= require ./AngularJS/controllers/ListeningsController.js
 //= require ./AngularJS/controllers/PlayerController.js
 //= require ./AngularJS/controllers/NewsController.js
 //= require ./AngularJS/controllers/PackController.js
@@ -56,6 +58,7 @@
 //= require ./tools/mm-foundation-tpls-0.6.0.min.js
 //= require ./tools/checklist-model.js
 //= require ./tools/angular-drag-and-drop-lists.min.js
+//= require ./tools/angular-maps.min.js
 // require_tree .
 
 $(function(){ $(document).foundation(); });

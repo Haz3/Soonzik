@@ -1,4 +1,4 @@
-SoonzikApp = angular.module('SoonzikApp', ['ngRoute', 'ngCookies', 'ngResource', 'ngFileUpload', 'angular-loading-bar', 'ngAnimate', 'mm.foundation']);
+SoonzikApp = angular.module('SoonzikApp', ['ngRoute', 'ngCookies', 'ngResource', 'ngFileUpload', 'angular-loading-bar', 'ngAnimate', 'mm.foundation', 'uiGmapgoogle-maps']);
 
 SoonzikApp.config(['$routeProvider', '$locationProvider', '$httpProvider', function($routeProvider, $locationProvider, $httpProvider) {
 	var url = document.location.pathname;
@@ -54,9 +54,20 @@ SoonzikApp.config(['$routeProvider', '$locationProvider', '$httpProvider', funct
     }).when('/playlists/:id', {
       templateUrl: '<%= asset_path("AngularJS/views/playlists/show.html.haml") %>',
       controller: 'PlaylistsCtrl'
+    }).when('/listenings', {
+      templateUrl: '<%= asset_path("AngularJS/views/listenings/index.html.haml") %>',
+      controller: 'ListeningsCtrl'
     });
   }
 
   $httpProvider.defaults.useXDomain = true;
 	delete $httpProvider.defaults.headers.common["X-Requested-With"];  
 }]);
+
+SoonzikApp.config(function(uiGmapGoogleMapApiProvider) {
+    uiGmapGoogleMapApiProvider.configure({
+        key: 'AIzaSyBdbSsqSM-wMia6xhlQmlVt5cDL18GUsk0',
+        v: '3.17',
+        libraries: 'weather,geometry,visualization'
+    });
+})

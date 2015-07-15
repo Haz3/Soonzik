@@ -91,8 +91,8 @@
 								  												<h1 class="class"
 					rel="popover"
 					data-original-title="In files"
-					data-content="app/models/newstext.rb"
-					>Newstext</h1>
+					data-content="app/models/meetstring.rb"
+					>Meetstring</h1>
 				</p>
 							</hgroup>
 			<span class="label">class</span>
@@ -109,26 +109,7 @@
 
 		<section class="description">
 			
-<p>The model of the object <a href="Newstext.html">Newstext</a> Contain the
-relation and the validation Can provide some features linked to this model</p>
-
-<h4 id="class-Newstext-label-Attributes">Attributes<span><a href="#class-Newstext-label-Attributes">&para;</a> <a href="#top">&uarr;</a></span></h4>
-<ul><li>
-<p><code>id</code> - (integer) - The ID of the object</p>
-</li><li>
-<p><code>news_id</code> - (integer) - The ID of the news</p>
-</li><li>
-<p><code>title</code> - (string) - The title of the block of text</p>
-</li><li>
-<p><code>content</code> - (string) - The content of this block of text</p>
-</li><li>
-<p><code>language</code> - (string) - The language of the block of text</p>
-</li></ul>
-
-<h4 id="class-Newstext-label-Associations">Associations<span><a href="#class-Newstext-label-Associations">&para;</a> <a href="#top">&uarr;</a></span></h4>
-<ul><li>
-<p><code>belongs_to</code> - :news</p>
-</li></ul>
+<p>The model of the object <a href="Meetstring.html">Meetstring</a></p>
 		</section>
 
 				<section id="5Buntitled-5D" class="documentation-section">
@@ -138,59 +119,6 @@ relation and the validation Can provide some features linked to this model</p>
 			
 			<!-- Methods -->
 						
-						<section class="public-methods class-methods methods">
-				<header>
-					<h3>Public Class Methods</h3>
-				</header>
-
-								<a name="method-c-miniKey">anchor</a>
-				<div id="method-c-miniKey-doc" class="method">
-
-					<header>
-											<i class="icon-generic"></i>
-						<span class="method-name">miniKey</span><span 
-							class="method-args">()</span>
-										</header>
-
-					<div class="method-description">
-											<p>Filter of information for the <a href="API.html">API</a></p>
-
-<p>Fields returned : [:id, :title, :content, :language]</p>					
-											<div class="method-source-code" id="miniKey-source">
-							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/models/newstext.rb, line 26</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">miniKey</span>
-      [<span class="ruby-value">:id</span>, <span class="ruby-value">:title</span>, <span class="ruby-value">:content</span>, <span class="ruby-value">:language</span>]
-<span class="ruby-keyword">end</span></code></pre>
-						</div>
-										</div>
-
-					
-									</div>
-								<a name="method-c-newstext_params">anchor</a>
-				<div id="method-c-newstext_params-doc" class="method">
-
-					<header>
-											<i class="icon-generic"></i>
-						<span class="method-name">newstext_params</span><span 
-							class="method-args">(parameters)</span>
-										</header>
-
-					<div class="method-description">
-											<p>The strong parameters to save or update object</p>					
-											<div class="method-source-code" id="newstext_params-source">
-							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/models/newstext.rb, line 31</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">newstext_params</span>(<span class="ruby-identifier">parameters</span>)
-  <span class="ruby-identifier">parameters</span>.<span class="ruby-identifier">require</span>(<span class="ruby-value">:newstext</span>).<span class="ruby-identifier">permit</span>(<span class="ruby-value">:content</span>, <span class="ruby-value">:title</span>, <span class="ruby-value">:language</span>, <span class="ruby-value">:news_id</span>)
-<span class="ruby-keyword">end</span></code></pre>
-						</div>
-										</div>
-
-					
-									</div>
-				
-			</section>
 			
 			
 			

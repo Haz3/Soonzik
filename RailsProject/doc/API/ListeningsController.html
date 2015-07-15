@@ -141,6 +141,60 @@ the list of action available :</p>
 					<h3>Public Instance Methods</h3>
 				</header>
 
+								<a name="method-i-around">anchor</a>
+				<div id="method-i-around-doc" class="method">
+
+					<header>
+											<i class="icon-generic"></i>
+						<span class="method-name">around</span><span 
+							class="method-args">()</span>
+										</header>
+
+					<div class="method-description">
+											<p>Get some object <a href="../Listening.html">Listening</a>. For more
+information on the parameters, check at the model</p>
+
+<p>Route : /listenings/around/:lat/:lng/:range</p>
+
+<h4 id="method-i-around-label-Options">Options<span><a href="#method-i-around-label-Options">&para;</a> <a href="#top">&uarr;</a></span></h4>
+<ul><li>
+<p><code>lat</code> - The latitude</p>
+</li><li>
+<p><code>lng</code> - The longitude</p>
+</li><li>
+<p><code>range</code> - The range of the circle (kilometers)</p>
+</li></ul>
+
+<h5 id="method-i-around-label-HTTP+VALUE">HTTP VALUE<span><a href="#method-i-around-label-HTTP+VALUE">&para;</a> <a href="#top">&uarr;</a></span></h5>
+<ul><li>
+<p><code>201</code> - In case of success, return an array of object</p>
+</li><li>
+<p><code>503</code> - Error from server</p>
+</li></ul>					
+											<div class="method-source-code" id="around-source">
+							<pre class="prettyprint linenums"><code 
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/listenings_controller.rb, line 243</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">around</span>
+  <span class="ruby-keyword">begin</span>
+    <span class="ruby-ivar">@lat</span> = <span class="ruby-ivar">@lat</span>.<span class="ruby-identifier">to_f</span>
+    <span class="ruby-ivar">@lng</span> = <span class="ruby-ivar">@lng</span>.<span class="ruby-identifier">to_f</span>
+    <span class="ruby-ivar">@range</span> = <span class="ruby-ivar">@range</span>.<span class="ruby-identifier">to_f</span>
+
+    <span class="ruby-identifier">listen</span> = <span class="ruby-constant">Listening</span>.<span class="ruby-identifier">within</span>(<span class="ruby-ivar">@range</span>, <span class="ruby-value">:origin</span> =<span class="ruby-operator">&gt;</span> [<span class="ruby-ivar">@lat</span>, <span class="ruby-ivar">@lng</span>])
+
+    <span class="ruby-ivar">@returnValue</span> = { <span class="ruby-identifier">content</span><span class="ruby-operator">:</span> <span class="ruby-identifier">listen</span>.<span class="ruby-identifier">as_json</span>(<span class="ruby-identifier">only</span><span class="ruby-operator">:</span> <span class="ruby-constant">Listening</span>.<span class="ruby-identifier">miniKey</span>, <span class="ruby-value">:include</span> =<span class="ruby-operator">&gt;</span> { <span class="ruby-identifier">user</span><span class="ruby-operator">:</span> { <span class="ruby-identifier">only</span><span class="ruby-operator">:</span> <span class="ruby-constant">User</span>.<span class="ruby-identifier">miniKey</span> } }) }
+    <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">200</span>
+  <span class="ruby-keyword">rescue</span>
+    <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">504</span>
+    <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:service_unavailable</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">sendJson</span>
+<span class="ruby-keyword">end</span></code></pre>
+						</div>
+										</div>
+
+					
+									</div>
 								<a name="method-i-find">anchor</a>
 				<div id="method-i-find-doc" class="method">
 
@@ -517,6 +571,8 @@ wrong</p>
 			<li><a href="../Influence.html">Influence</a></li>
 			<li><a href="../Language.html">Language</a></li>
 			<li><a href="../Listening.html">Listening</a></li>
+			<li><a href="../Meet.html">Meet</a></li>
+			<li><a href="../Meetstring.html">Meetstring</a></li>
 			<li><a href="../Message.html">Message</a></li>
 			<li><a href="../Music.html">Music</a></li>
 			<li><a href="../MusicNote.html">MusicNote</a></li>

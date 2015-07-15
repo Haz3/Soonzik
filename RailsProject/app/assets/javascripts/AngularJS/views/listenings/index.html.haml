@@ -1,0 +1,13 @@
+.listenings{ "ng-init" => "init()" }
+	%loading{ "ng-if" => "loading == true" }
+	.row{ "ng-if" => "loading == false" }
+		%p{ "ng-if" => "location == 0" }
+			Your browser doesn't support geolocation, please update it or choose another one
+		.load{ "ng-if" => "location == 1" }
+			%loading{ "loading-type" => "'square'" }
+			%p Waiting...
+			%p We are getting your position, if you didn't already allowed your browser to give us your location, you need to accept to access to this feature.
+		.map{ "ng-if" => "location == 2" }
+			%ui-gmap-google-map.angular-google-map-container{ :center => "map.center", :zoom => "map.zoom", :events => "map.events"}
+				%ui-gmap-circle{ :center => "circle.center", :stroke => "circle.stroke", :fill => "circle.fill", :radius => "circle.radius", :events => "circle.events", :visible => "circle.visible", :geodesic => "c.geodesic", :editable => "circle.editable", :draggable => "circle.draggable", :clickable => "circle.clickable" }
+				%ui-gmap-markers{ models: "map.markers", coords: "'self'", icon: "'icon'", modelsbyref: "true", idKey: "'idKey'" }

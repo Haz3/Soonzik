@@ -314,7 +314,7 @@ subscribed to the newsletter</p>
 											<p>Filter of information for the <a href="API.html">API</a> - Less Restricted</p>					
 											<div class="method-source-code" id="bigKey-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/models/user.rb, line 267</span>
+								class="language-ruby"><span class="ruby-comment"># File app/models/user.rb, line 268</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">bigKey</span>
   [<span class="ruby-value">:id</span>, <span class="ruby-value">:email</span>, <span class="ruby-value">:username</span>, <span class="ruby-value">:fname</span>, <span class="ruby-value">:lname</span>, <span class="ruby-value">:birthday</span>, <span class="ruby-value">:image</span>, <span class="ruby-value">:description</span>, <span class="ruby-value">:language</span>, <span class="ruby-value">:facebook</span>, <span class="ruby-value">:twitter</span>, <span class="ruby-value">:googlePlus</span>]
 <span class="ruby-keyword">end</span></code></pre>
@@ -336,7 +336,7 @@ subscribed to the newsletter</p>
 											<p>for OAuth interpretation</p>					
 											<div class="method-source-code" id="find_for_oauth-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/models/user.rb, line 156</span>
+								class="language-ruby"><span class="ruby-comment"># File app/models/user.rb, line 157</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">find_for_oauth</span>(<span class="ruby-identifier">auth</span>, <span class="ruby-identifier">signed_in_resource</span> = <span class="ruby-keyword">nil</span>)
 
   <span class="ruby-comment"># Get the identity and user if they exist</span>
@@ -413,7 +413,7 @@ subscribed to the newsletter</p>
 											<p>Filter of information for the <a href="API.html">API</a> - Restricted</p>					
 											<div class="method-source-code" id="miniKey-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/models/user.rb, line 262</span>
+								class="language-ruby"><span class="ruby-comment"># File app/models/user.rb, line 263</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">miniKey</span>
   [<span class="ruby-value">:id</span>, <span class="ruby-value">:email</span>, <span class="ruby-value">:username</span>, <span class="ruby-value">:image</span>, <span class="ruby-value">:description</span>, <span class="ruby-value">:language</span>]
 <span class="ruby-keyword">end</span></code></pre>
@@ -435,7 +435,7 @@ subscribed to the newsletter</p>
 											<p>Filter of information for the <a href="API.html">API</a> - No Restriction</p>					
 											<div class="method-source-code" id="notRestrictedKey-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/models/user.rb, line 272</span>
+								class="language-ruby"><span class="ruby-comment"># File app/models/user.rb, line 273</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">notRestrictedKey</span>
   [<span class="ruby-value">:id</span>, <span class="ruby-value">:email</span>, <span class="ruby-value">:username</span>, <span class="ruby-value">:fname</span>, <span class="ruby-value">:lname</span>, <span class="ruby-value">:birthday</span>, <span class="ruby-value">:image</span>, <span class="ruby-value">:description</span>, <span class="ruby-value">:language</span>, <span class="ruby-value">:facebook</span>, <span class="ruby-value">:twitter</span>, <span class="ruby-value">:googlePlus</span>, <span class="ruby-value">:salt</span>, <span class="ruby-value">:phoneNumber</span>, <span class="ruby-value">:newsletter</span>, <span class="ruby-value">:language</span>, <span class="ruby-value">:created_at</span>]
 <span class="ruby-keyword">end</span></code></pre>
@@ -462,7 +462,7 @@ subscribed to the newsletter</p>
 </li></ul>					
 											<div class="method-source-code" id="secureKey_hash-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/models/user.rb, line 244</span>
+								class="language-ruby"><span class="ruby-comment"># File app/models/user.rb, line 245</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">secureKey_hash</span>(<span class="ruby-identifier">key</span>)
   <span class="ruby-constant">Digest</span><span class="ruby-operator">::</span><span class="ruby-constant">SHA1</span>.<span class="ruby-identifier">hexdigest</span>(<span class="ruby-constant">Digest</span><span class="ruby-operator">::</span><span class="ruby-constant">MD5</span>.<span class="ruby-identifier">hexdigest</span>(<span class="ruby-identifier">key</span>))
 <span class="ruby-keyword">end</span></code></pre>
@@ -484,7 +484,7 @@ subscribed to the newsletter</p>
 											<p>The strong parameters to save or update object</p>					
 											<div class="method-source-code" id="user_params-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/models/user.rb, line 257</span>
+								class="language-ruby"><span class="ruby-comment"># File app/models/user.rb, line 258</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">user_params</span>(<span class="ruby-identifier">parameters</span>)
   <span class="ruby-identifier">parameters</span>.<span class="ruby-identifier">require</span>(<span class="ruby-value">:user</span>).<span class="ruby-identifier">permit</span>(<span class="ruby-value">:email</span>, <span class="ruby-value">:password</span>, <span class="ruby-value">:fname</span>, <span class="ruby-value">:lname</span>, <span class="ruby-value">:username</span>, <span class="ruby-value">:birthday</span>, <span class="ruby-value">:image</span>, <span class="ruby-value">:description</span>, <span class="ruby-value">:phoneNumber</span>, <span class="ruby-value">:facebook</span>, <span class="ruby-value">:twitter</span>, <span class="ruby-value">:googlePlus</span>, <span class="ruby-value">:newsletter</span>, <span class="ruby-value">:language</span>)
 <span class="ruby-keyword">end</span></code></pre>
@@ -519,7 +519,7 @@ subscribed to the newsletter</p>
 											<p>Is there the default email address or not ?</p>					
 											<div class="method-source-code" id="email_verified-3F-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/models/user.rb, line 216</span>
+								class="language-ruby"><span class="ruby-comment"># File app/models/user.rb, line 217</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">email_verified?</span>
   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">email</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">email</span> <span class="ruby-operator">!~</span> <span class="ruby-constant">TEMP_EMAIL_REGEX</span>
 <span class="ruby-keyword">end</span></code></pre>
@@ -541,7 +541,7 @@ subscribed to the newsletter</p>
 											<p>Give the pack where the user has its albums</p>					
 											<div class="method-source-code" id="givePack-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/models/user.rb, line 311</span>
+								class="language-ruby"><span class="ruby-comment"># File app/models/user.rb, line 312</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">givePack</span>
   <span class="ruby-keyword">return</span> <span class="ruby-constant">Pack</span>.<span class="ruby-identifier">joins</span>(<span class="ruby-identifier">albums</span><span class="ruby-operator">:</span> [<span class="ruby-value">:user</span>]).<span class="ruby-identifier">where</span>(<span class="ruby-identifier">users</span><span class="ruby-operator">:</span> {<span class="ruby-identifier">id</span><span class="ruby-operator">:</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">id</span>})
 <span class="ruby-keyword">end</span></code></pre>
@@ -563,7 +563,7 @@ subscribed to the newsletter</p>
 											<p>Give the 5 most popular track of an artist</p>					
 											<div class="method-source-code" id="giveTopFive-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/models/user.rb, line 297</span>
+								class="language-ruby"><span class="ruby-comment"># File app/models/user.rb, line 298</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">giveTopFive</span>
   <span class="ruby-identifier">allMusics</span> = []
 
@@ -594,7 +594,7 @@ subscribed to the newsletter</p>
 											<p>Check if the user is a friend or not</p>					
 											<div class="method-source-code" id="hasFriend-3F-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/models/user.rb, line 287</span>
+								class="language-ruby"><span class="ruby-comment"># File app/models/user.rb, line 288</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">hasFriend?</span>(<span class="ruby-identifier">user</span>)
   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">friends</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">friend</span><span class="ruby-operator">|</span>
     <span class="ruby-keyword">if</span> (<span class="ruby-identifier">friend</span>.<span class="ruby-identifier">id</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">user</span>.<span class="ruby-identifier">id</span>)
@@ -621,7 +621,7 @@ subscribed to the newsletter</p>
 											<p>Check is the user is an artist</p>					
 											<div class="method-source-code" id="isArtist-3F-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/models/user.rb, line 277</span>
+								class="language-ruby"><span class="ruby-comment"># File app/models/user.rb, line 278</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">isArtist?</span>
   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">groups</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">group</span><span class="ruby-operator">|</span>
     <span class="ruby-keyword">if</span> (<span class="ruby-identifier">group</span>.<span class="ruby-identifier">name</span> <span class="ruby-operator">==</span> <span class="ruby-string">&quot;Artist&quot;</span>)
@@ -649,7 +649,7 @@ subscribed to the newsletter</p>
 unique so we check if someone already has this one</p>					
 											<div class="method-source-code" id="regenerateKey-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/models/user.rb, line 227</span>
+								class="language-ruby"><span class="ruby-comment"># File app/models/user.rb, line 228</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">regenerateKey</span>
   <span class="ruby-identifier">key</span> = <span class="ruby-keyword">nil</span>
 
@@ -679,7 +679,7 @@ unique so we check if someone already has this one</p>
 set before</p>					
 											<div class="method-source-code" id="salt_hash-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/models/user.rb, line 250</span>
+								class="language-ruby"><span class="ruby-comment"># File app/models/user.rb, line 251</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">salt_hash</span>
   <span class="ruby-identifier">first_piece</span> = <span class="ruby-constant">Digest</span><span class="ruby-operator">::</span><span class="ruby-constant">SHA256</span>.<span class="ruby-identifier">hexdigest</span>(<span class="ruby-node">&quot;#{Time.now.utc}--#{self.password}&quot;</span>)
   <span class="ruby-identifier">second_piece</span> = <span class="ruby-constant">Digest</span><span class="ruby-operator">::</span><span class="ruby-constant">SHA256</span>.<span class="ruby-identifier">hexdigest</span>(<span class="ruby-keyword">self</span>.<span class="ruby-identifier">password</span>)
@@ -703,7 +703,7 @@ set before</p>
 											<p>Is there the default username or not ?</p>					
 											<div class="method-source-code" id="username_verified-3F-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/models/user.rb, line 221</span>
+								class="language-ruby"><span class="ruby-comment"># File app/models/user.rb, line 222</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">username_verified?</span>
   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">username</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">username</span> <span class="ruby-operator">!~</span> <span class="ruby-constant">TEMP_USERNAME_REGEX</span>
 <span class="ruby-keyword">end</span></code></pre>
@@ -781,6 +781,8 @@ set before</p>
 			<li><a href="./Influence.html">Influence</a></li>
 			<li><a href="./Language.html">Language</a></li>
 			<li><a href="./Listening.html">Listening</a></li>
+			<li><a href="./Meet.html">Meet</a></li>
+			<li><a href="./Meetstring.html">Meetstring</a></li>
 			<li><a href="./Message.html">Message</a></li>
 			<li><a href="./Music.html">Music</a></li>
 			<li><a href="./MusicNote.html">MusicNote</a></li>
