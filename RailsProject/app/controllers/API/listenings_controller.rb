@@ -234,6 +234,7 @@ module API
     # * +lat+ - The latitude
     # * +lng+ - The longitude
     # * +range+ - The range of the circle (kilometers)
+    # * +from+ - (optional) A timestamp. You can give it to get all the new listening object since this time
     # 
     # ===== HTTP VALUE
     # 
@@ -246,9 +247,14 @@ module API
         @lng = @lng.to_f
         @range = @range.to_f
 
-        listen = Listening.within(@range, :origin => [@lat, @lng])
+        listen = Listening.within(@range, :origin => [@lat, @lng]).order(:created_at => :desc)
+        listen.each { |x|
+          x.setOrigin([@lat, @lng])
+        }
 
-        @returnValue = { content: listen.as_json(only: Listening.miniKey, :include => { user: { only: User.miniKey }, music: { only: Music.miniKey } }) }
+        listen.where("created_at > ?", Time.at(@from.to_i).to_datetime) if (@from.present?)
+
+        @returnValue = { content: listen.as_json(only: Listening.miniKey, :methods => :distance, :include => { user: { only: User.miniKey }, music: { only: Music.miniKey } }) }
         codeAnswer 200
       rescue
         codeAnswer 504

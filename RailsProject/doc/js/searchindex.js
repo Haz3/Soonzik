@@ -1089,7 +1089,19 @@ var SearchIndex =
 	{
 		"name": "miniKey",
 		"link": "Listening.html#method-c-miniKey",
-		"snippet": "<p>Filter of information for the API - Restricted\n<p>Fields returned : [:id, :when, :latitude, :longitude]\n",
+		"snippet": "<p>Filter of information for the API - Restricted\n<p>Fields returned : [:id, :created_at, :latitude, :longitude] …\n",
+		"type": "anymethod"
+	},
+	{
+		"name": "setOrigin",
+		"link": "Listening.html#method-i-setOrigin",
+		"snippet": "<p>To render with the distance to\n",
+		"type": "anymethod"
+	},
+	{
+		"name": "distance",
+		"link": "Listening.html#method-i-distance",
+		"snippet": "<p>To render the distance to in json\n",
 		"type": "anymethod"
 	},
 	{

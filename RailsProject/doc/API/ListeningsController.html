@@ -163,6 +163,9 @@ information on the parameters, check at the model</p>
 <p><code>lng</code> - The longitude</p>
 </li><li>
 <p><code>range</code> - The range of the circle (kilometers)</p>
+</li><li>
+<p><code>from</code> - (optional) A timestamp. You can give it to get all the
+new listening object since this time</p>
 </li></ul>
 
 <h5 id="method-i-around-label-HTTP+VALUE">HTTP VALUE<span><a href="#method-i-around-label-HTTP+VALUE">&para;</a> <a href="#top">&uarr;</a></span></h5>
@@ -173,16 +176,21 @@ information on the parameters, check at the model</p>
 </li></ul>					
 											<div class="method-source-code" id="around-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/listenings_controller.rb, line 243</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/listenings_controller.rb, line 244</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">around</span>
   <span class="ruby-keyword">begin</span>
     <span class="ruby-ivar">@lat</span> = <span class="ruby-ivar">@lat</span>.<span class="ruby-identifier">to_f</span>
     <span class="ruby-ivar">@lng</span> = <span class="ruby-ivar">@lng</span>.<span class="ruby-identifier">to_f</span>
     <span class="ruby-ivar">@range</span> = <span class="ruby-ivar">@range</span>.<span class="ruby-identifier">to_f</span>
 
-    <span class="ruby-identifier">listen</span> = <span class="ruby-constant">Listening</span>.<span class="ruby-identifier">within</span>(<span class="ruby-ivar">@range</span>, <span class="ruby-value">:origin</span> =<span class="ruby-operator">&gt;</span> [<span class="ruby-ivar">@lat</span>, <span class="ruby-ivar">@lng</span>])
+    <span class="ruby-identifier">listen</span> = <span class="ruby-constant">Listening</span>.<span class="ruby-identifier">within</span>(<span class="ruby-ivar">@range</span>, <span class="ruby-value">:origin</span> =<span class="ruby-operator">&gt;</span> [<span class="ruby-ivar">@lat</span>, <span class="ruby-ivar">@lng</span>]).<span class="ruby-identifier">order</span>(<span class="ruby-value">:created_at</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">:desc</span>)
+    <span class="ruby-identifier">listen</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">x</span>.<span class="ruby-identifier">setOrigin</span>([<span class="ruby-ivar">@lat</span>, <span class="ruby-ivar">@lng</span>])
+    }
 
-    <span class="ruby-ivar">@returnValue</span> = { <span class="ruby-identifier">content</span><span class="ruby-operator">:</span> <span class="ruby-identifier">listen</span>.<span class="ruby-identifier">as_json</span>(<span class="ruby-identifier">only</span><span class="ruby-operator">:</span> <span class="ruby-constant">Listening</span>.<span class="ruby-identifier">miniKey</span>, <span class="ruby-value">:include</span> =<span class="ruby-operator">&gt;</span> { <span class="ruby-identifier">user</span><span class="ruby-operator">:</span> { <span class="ruby-identifier">only</span><span class="ruby-operator">:</span> <span class="ruby-constant">User</span>.<span class="ruby-identifier">miniKey</span> } }) }
+    <span class="ruby-identifier">listen</span>.<span class="ruby-identifier">where</span>(<span class="ruby-string">&quot;created_at &gt; ?&quot;</span>, <span class="ruby-constant">Time</span>.<span class="ruby-identifier">at</span>(<span class="ruby-ivar">@from</span>.<span class="ruby-identifier">to_i</span>).<span class="ruby-identifier">to_datetime</span>) <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@from</span>.<span class="ruby-identifier">present?</span>)
+
+    <span class="ruby-ivar">@returnValue</span> = { <span class="ruby-identifier">content</span><span class="ruby-operator">:</span> <span class="ruby-identifier">listen</span>.<span class="ruby-identifier">as_json</span>(<span class="ruby-identifier">only</span><span class="ruby-operator">:</span> <span class="ruby-constant">Listening</span>.<span class="ruby-identifier">miniKey</span>, <span class="ruby-value">:methods</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">:distance</span>, <span class="ruby-value">:include</span> =<span class="ruby-operator">&gt;</span> { <span class="ruby-identifier">user</span><span class="ruby-operator">:</span> { <span class="ruby-identifier">only</span><span class="ruby-operator">:</span> <span class="ruby-constant">User</span>.<span class="ruby-identifier">miniKey</span> }, <span class="ruby-identifier">music</span><span class="ruby-operator">:</span> { <span class="ruby-identifier">only</span><span class="ruby-operator">:</span> <span class="ruby-constant">Music</span>.<span class="ruby-identifier">miniKey</span> } }) }
     <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">200</span>
   <span class="ruby-keyword">rescue</span>
     <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">504</span>

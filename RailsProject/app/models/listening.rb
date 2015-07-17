@@ -18,7 +18,6 @@
 #
 class Listening < ActiveRecord::Base
 
-
   acts_as_mappable :default_units => :kms,
                    :default_formula => :sphere,
                    :distance_field_name => :distance,
@@ -35,13 +34,23 @@ class Listening < ActiveRecord::Base
 
   # Filter of information for the API - Restricted
   #
-  # Fields returned : [:id, :when, :latitude, :longitude]
+  # Fields returned : [:id, :created_at, :latitude, :longitude]
   def self.miniKey
-    [:id, :when, :latitude, :longitude]
+    [:id, :created_at, :latitude, :longitude]
+  end
+
+  # To render with the distance to
+  def setOrigin(origin)
+    @origin = origin
+  end
+
+  # To render the distance to in json
+  def distance
+    self.distance_from(@origin) * 1.609344
   end
 
   # The strong parameters to save or update object
   def self.listening_params(parameters)
-    parameters.require(:listening).permit(:user_id, :music_id, :when, :latitude, :longitude)
+    parameters.require(:listening).permit(:user_id, :music_id, :latitude, :longitude)
   end
 end

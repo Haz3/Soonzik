@@ -10,4 +10,7 @@
 		.map{ "ng-if" => "location == 2" }
 			%ui-gmap-google-map.angular-google-map-container{ :center => "map.center", :zoom => "map.zoom", :events => "map.events"}
 				%ui-gmap-circle{ :center => "circle.center", :stroke => "circle.stroke", :fill => "circle.fill", :radius => "circle.radius", :events => "circle.events", :visible => "circle.visible", :geodesic => "c.geodesic", :editable => "circle.editable", :draggable => "circle.draggable", :clickable => "circle.clickable" }
-				%ui-gmap-markers{ models: "map.markers", coords: "'self'", icon: "'icon'", modelsbyref: "true", idKey: "'idKey'" }
+				%ui-gmap-circle.circleZone{ :center => "circleZone.center", :stroke => "circleZone.stroke", :fill => "circleZone.fill", :radius => "circleZone.radius", :events => "circleZone.events", :visible => "circleZone.visible", :geodesic => "c.geodesic", :editable => "circleZone.editable", :draggable => "circleZone.draggable", :clickable => "circleZone.clickable" }
+				%ui-gmap-markers{ models: "map.markers", coords: "'self'", icon: "'icon'", modelsbyref: "true", idKey: "'idKey'", options: "'options'", :events => "circleZone.events" }
+			%input{ type: "range", min: 1, max: 100, "ng-model" => "model.range", "ng-change" => "changeRange()", step: 0.5 }
+			%p You search in a range of : {{ model.range }} kms.
