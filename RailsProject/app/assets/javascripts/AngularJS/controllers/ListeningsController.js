@@ -81,7 +81,7 @@ SoonzikApp.controller('ListeningsCtrl', ['$scope', "$routeParams", 'SecureAuth',
 					HTTPService.getListeningAround(position.coords.latitude, position.coords.longitude, $scope.model.range).then(function(response) {
 						var marks = [];
 
-						for (var i = 0 ; i < response.data.content.length ; i++) {
+						for (var i = 0 ; i < response.data.content.length && i < 10 ; i++) {
 							var obj = response.data.content[i];
 							marks.push(generateCursor(obj));
 						}

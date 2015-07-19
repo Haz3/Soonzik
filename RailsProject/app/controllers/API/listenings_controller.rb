@@ -217,6 +217,9 @@ module API
             codeAnswer 503
             defineHttp :service_unavailable
           end
+        else
+          codeAnswer 500
+          defineHttp :forbidden
         end
       rescue
         codeAnswer 504

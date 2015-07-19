@@ -411,3 +411,20 @@
 		height: auto;
 	}
 }
+
+.joyride-content-wrapper {
+  padding: 1.125rem 0.25rem 0;
+  color: #333;
+
+  h4 {
+  	color: black;
+  }
+}
+
+.joyride-tip-guide {
+	left: 15% !important;
+
+	span.joyride-nub {
+		left: 25%;
+	}
+}

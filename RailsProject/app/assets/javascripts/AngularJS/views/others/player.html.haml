@@ -33,6 +33,10 @@
 				%span.button.small.info{ "ng-click" => "moreClick()" }
 					%i.fi-widget
 					{{ (more.btn == false) ? "More..." : "Less..." }}
+				%span.button.small{ "ng-click" => "activateLocation()", popover: "Share what you're listening around you. Click here to enable or disable this feature. Warning: you need to allow your browser to give us your location.", "popover-title" => "Geolocation", "ng-if" => "geolocDisplay == true", "ng-class" => "{ alert: !geoloc, success: geoloc }", "popover-placement" => "bottom", "popover-trigger" => "mouseenter" }
+					%i.fi-marker
+					Geolocation
+					%i{ "ng-class" => "{ 'fi-x': !geoloc, 'fi-check': geoloc }" }
 				.small-12.moreless{ "ng-show" => "more.btn == true" }
 					.left.relative
 						.pophover.popleft{ "ng-show" => "more.pop == 'share'" }

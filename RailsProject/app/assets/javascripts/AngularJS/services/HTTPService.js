@@ -130,11 +130,10 @@ SoonzikApp.factory('HTTPService', ['$http', '$location', 'Upload', function ($ht
       return $http.post("http://api." + url + "/musics/addtoplaylist", parameters);
     },
     getListeningAround: function(lat, lng, range, parameters) {
-      if (typeof parameters === "undefined") {
-        return $http.get("http://api." + url + "/listenings/around/" + lat.toFixed(3) + "/" + lng.toFixed(3) + "/" + Math.round(range));
-      } else {
-        return $http.get("http://api." + url + "/listenings/around/" + lat.toFixed(3) + "/" + lng.toFixed(3) + "/" + Math.round(range) + urlParametersFormat(parameters));     
-      }
+      return $http.get("http://api." + url + "/listenings/around/" + lat.toFixed(3) + "/" + lng.toFixed(3) + "/" + Math.round(range) + urlParametersFormat(parameters));     
+    },
+    addListening: function(parameters) {
+      return $http.post("http://api." + url + "/listenings/save", parameters);
     }
   }
 }]);

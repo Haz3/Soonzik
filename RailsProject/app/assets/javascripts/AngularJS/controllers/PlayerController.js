@@ -1,5 +1,12 @@
 SoonzikApp.controller("PlayerCtrl", ["$scope", "$rootScope", "HTTPService", "NotificationService", "SecureAuth", function ($scope, $rootScope, HTTPService, NotificationService, SecureAuth) {
 
+  $scope.geolocDisplay = false;
+  $scope.geoloc = false;
+  $scope.position = {
+    latitude: 0,
+    longitude: 0
+  }
+
   var activeUrl = null;
   $scope.user = false;
 
@@ -46,7 +53,20 @@ SoonzikApp.controller("PlayerCtrl", ["$scope", "$rootScope", "HTTPService", "Not
   	var current_user = SecureAuth.getCurrentUser();
 		if (current_user.id != null && current_user.token != null && current_user.username != null) {
 			$scope.user = current_user;
+      $scope.geolocDisplay = true;
 		}
+
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(function(position) {
+        $scope.$apply(function() {
+          $scope.geoloc = true;
+          $scope.position = {
+            latitude: position.coords.latitude,
+            longitude: position.coords.longitude
+          }
+        });
+      });
+    }
 
   	$("#sliderVolume").slider({
       orientation: "vertical",
@@ -432,6 +452,27 @@ SoonzikApp.controller("PlayerCtrl", ["$scope", "$rootScope", "HTTPService", "Not
       }, function(error) {
         NotificationService.error("Error while loading the music : " + $scope.playlist[$scope.indexPlaylist].title);
       });
+      if ($scope.geoloc) {
+        SecureAuth.securedTransaction(function(key, user_id) {
+          var d = new Date();
+          var params = {
+            user_id: user_id,
+            secureKey: key,
+            listening: {
+              music_id: music.id,
+              latitude: $scope.position.latitude,
+              longitude: $scope.position.longitude,
+              when: d.format("yyyy-mm-dd HH:MM:ss")
+            }
+          }
+          HTTPService.addListening(params).then(function(response) {
+          }, function(error) {
+            NotificationService.error("Can't add a music for geolocation")
+          });
+        }, function(error) {
+          NotificationService.error("Error while loading the music : " + $scope.playlist[$scope.indexPlaylist].title);
+        });
+      }
     } else {
       $scope.play(HTTPService.getMP3musicURL(music.id, null));
     }
@@ -511,5 +552,18 @@ SoonzikApp.controller("PlayerCtrl", ["$scope", "$rootScope", "HTTPService", "Not
     }, function(error) {
       NotificationService.error("Error while saving a new music in the playlist");
     });
+  }
+
+  $scope.activateLocation = function() {
+    $scope.geoloc = !$scope.geoloc;
+
+    if ($scope.geoloc && navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(function(position) {
+        $scope.position = {
+          latitude: position.coords.latitude,
+          longitude: position.coords.longitude
+        }
+      });
+    }
   }
 }]);

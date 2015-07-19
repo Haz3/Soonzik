@@ -5,7 +5,7 @@
 # ==== Attributes
 #
 # - +id+ - (integer) - The ID of the object
-# - +when+ - (date) - The name of the group
+# - +when+ - (date) - The name of the group (deprecated, need to be remove)
 # - +latitude+ - (float) - The latitude of the position
 # - +longitude+ - (float) - The longitude of the position
 # - +music_id+ - (integer) - The ID of the music listened
@@ -51,6 +51,6 @@ class Listening < ActiveRecord::Base
 
   # The strong parameters to save or update object
   def self.listening_params(parameters)
-    parameters.require(:listening).permit(:user_id, :music_id, :latitude, :longitude)
+    parameters.require(:listening).permit(:user_id, :music_id, :latitude, :longitude, :when)
   end
 end
