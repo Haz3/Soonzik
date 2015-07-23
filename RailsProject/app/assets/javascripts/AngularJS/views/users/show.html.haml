@@ -45,7 +45,7 @@
               %td{:width => '50'}
                 {{song.price}} $
               %td{:width => '200'}
-                %i.fi-star{ "ng-repeat" => "n in range(song.note)" }
+                %i.fi-star{ "ng-repeat" => "n in range(song.getAverageNote)  track by $index" }
               %td{:width => '50'}
                 %music{ "music-object" => "song" }
                   %i.fi-play
@@ -65,11 +65,13 @@
                   %td{:width => '50'}
                     {{$index + 1 }}
                   %td{:width => '300'}
-                    {{song.title}}
+                    %div {{song.title}}
+                    %div
+                      %i.fi-star{ "ng-repeat" => "n in range(song.getAverageNote)  track by $index" }
                   %td{:width => '100'}
-                    {{song.duration}}
+                    {{formatTime(song.duration)}}
                   %td{:width => '50'}
-                    {{song.price}}
+                    {{song.price}} $
                   %td{:width => '50'}
                     %music{ "music-object" => "song" }
                       %i.fi-play
