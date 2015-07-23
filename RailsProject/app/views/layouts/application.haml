@@ -40,7 +40,7 @@
                       = link_to('Packs (IN PROGRESS)', packs_path)
                       %a Monde Musical
                       = link_to('Battle (DONE)', battles_path)
-                      = link_to ('Amis (DONE)', 'http://lvh.me:3000/users/:id/friendlist')
+                      = link_to('Amis (DONE)', 'http://lvh.me:3000/users/:id/friendlist')
                       = link_to('Logout', destroy_user_session_path, :method => :delete)
                 =image_tag ("usersImage/avatars/" + current_user.image), :class => "photo-profile"              
                 .profile
