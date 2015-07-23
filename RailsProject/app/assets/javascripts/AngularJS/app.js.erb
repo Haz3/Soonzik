@@ -51,6 +51,9 @@ SoonzikApp.config(['$routeProvider', '$locationProvider', '$httpProvider', funct
     }).when('/battles/:id', {
       templateUrl: '<%= asset_path("AngularJS/views/battles/show.html.haml") %>',
       controller: 'BattlesCtrl'
+    }).when('/cart/:id', {
+      templateUrl: '<%= asset_path("AngularJS/views/cart/show.html.haml") %>',
+      controller: 'CartCtrl'
     }).when('/playlists/:id', {
       templateUrl: '<%= asset_path("AngularJS/views/playlists/show.html.haml") %>',
       controller: 'PlaylistsCtrl'

@@ -1,10 +1,27 @@
-%div{ "ng-init" => "showPacksById()" }
+%pack{ "ng-init" => "showPacksById()" }
   %loading{ "ng-if" => "loading == true" }
   .row{ "ng-if" => "loading == false", "ng-init" => "initFoundation()"}
-    %h3.subheader
-      Packs du moment
-    .ul.small-11.small-centered.columns{"ng-show" => "thisPackId"}
-      %li
-        .panel
-          %h5.subheader.text-center
-            {{ thisPack.title }}
+    %div{"ng-show" => "thisPackId"}
+      %h5.subheader.text-center
+        {{ thisPack.title }}
+      .ul.large-block-grid-5.centered.columns
+        %li{ "ng-repeat" => "album in thisPack.albums"}
+          .panel
+            %h3.subheader
+              %p.text-center
+                {{ album.title }}
+            %img{"src" => "/assets/pack1.jpg"}
+            .divider
+            {{ album.user.username }}
+            %br
+            Sortie {{ album.yearProd }}
+        %li{"ng-repeat" => "prix in PackPrice"}
+          .panel.left
+            Slider division du prix
+          .panel.right
+            Infos concernant le prix, ou va l'argent.
+        %li{"ng-repeat" => "infos in thisPack"}
+          .panel.left
+            Graph
+          .panel.right
+            Infos achats users

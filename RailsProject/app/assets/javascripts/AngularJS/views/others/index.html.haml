@@ -1,60 +1,52 @@
-%div{ "ng-init" => "showIndex()" }
+.index{ "ng-init" => "showIndex()" }
   %loading{ "ng-if" => "loading == true" }
   .row{ "ng-if" => "loading == false", "ng-init" => "initFoundation()"}
     %br
     %h3.subheader
       Last News
-    .large-12.large-centered.columns
-      %ul.example-orbit{"data-orbit" => ""}
-        %li
-          %img{"src" => "/assets/slider/satelite-orbit.jpg"}
-          .orbit-caption
-            Caption One.
-        %li.active
-          %img{"src" => "/assets/slider/andromeda-orbit.jpg"}
-          .orbit-caption
-            Caption Two.
-        %li
-          %img{"src" => "/assets/slider/launch-orbit.jpg"}
-          .orbit-caption
-            Caption Three.
+    .large-12.large-centered.columns{"ng-init" => "showNews()"}
+      .orbit-container
+      %ul.example-orbit.orbit-slides-container{"data-orbit" => "", "data-options" => "animation:slide; pause_on_hover:true; animation_speed:500; navigation_arrows:true; bullets:false;"}
+        %li{"ng-repeat" => "new in news", "data-after-render-repeat" => ""}
+          %slide{"ng-repeat" => "img in new.attachments"}
+            %img{"ng-src" => "{{img.url}}"}
+            .orbit-caption
+              {{new.title}}
     .divider
     %h3.subheader.left
       Packs du moment
     %h3.subheader.right
       %a{:href => "http://lvh.me:3000/packs/"} Voir tout
     .ul.large-block-grid-4{"ng-show" => "showPack"}
-      %li{ "ng-repeat" => "pack in packs track by $index"}
+      %li{ "ng-repeat" => "pack in packs"}
         .panel
           %h5.subheader.text-center
             {{ pack.title }}
           %img{"src" => "/assets/pack1.jpg"}
           .divider
-          Temps Restant:
+          Temps Restant :
           %br
-          Moyenne : 
+          Moyenne :
     .divider
     %h3.subheader.left
       Battle en Cours
     %h3.subheader.right
       %a{:href => "http://lvh.me:3000/battle"} Voir Tout
-    .large-block-grid-4{"ng-show" => "showBattle"}
+    .large-block-grid-4{"ng-init" => "showInit()"}
       %hr
-      .medium-4.columns
-        %p
-          {{ battle.artist_one.username }}
-        %img{"ng-src" => "{{ '/assets/usersImage/avatars/' + battle.artist_one.image}}" }
-        %p{ "ng-if" => "currentUser != false" }
-          %span{ "ng-click" => "voteFor(battle, battle.artist_one)", "class" => "label radius {{ voteClass(index.voteCurrentUser[battle.id], battle.artist_one.id) }}" } 
-            {{ voteText(index.voteCurrentUser[battle.id], battle.artist_one.id) }}
-      .medium-4.columns
-        %battle{ style: "height:175px;display: block", "battle-values" => "index.votes[battle.id]" }
-        %a.button.radius{ href: "/battles/{{ battle.id }}" }
-          Page of the battle
-      .medium-4.columns.end
-        %p
-          {{ battle.artist_two.username }}
-        %img{ "ng-src" => "{{ '/assets/usersImage/avatars/' + battle.artist_two.image}}" }
-        %p{ "ng-if" => "currentUser != false" }
-          %span{ "ng-click" => "voteFor(battle, battle.artist_two)", "class" => "label radius {{ voteClass(index.voteCurrentUser[battle.id], battle.artist_two.id) }}" }
-            {{ voteText(index.voteCurrentUser[battle.id], battle.artist_two.id) }}
+      .battleLine{"ng-show" => "showBattle"}
+      .small-2.large-4.columns
+        .battle{"ng-repeat" => "artist in battle"}
+          %p
+            %a{href: "/users/{{ artist.artist_one.id }}"} {{ artist.artist_one.username }}
+            %img{ "ng-src" => "{{'/assets/usersImage/avatars/' + artist.artist_one.image}}" }
+            %span{ "ng-click" => "indexVoteFor(battle, battle.artist_one)", "class" => "label radius {{ voteClass(index.voteCurrentUser[battle.id], battle.artist_one.id) }}" } {{ voteText(index.voteCurrentUser[battle.id], battle.artist_one.id) }}
+      .small-4.large-4-centered.columns{"ng-repeat" => "artist in battle"}
+        %battle{ "battle-values" => "artist.votes[battle.id]" }
+        %a.button.radius{ href: "/battles/{{ battle.id }}" } Page of the battle
+      .small-6.large-4.columns
+        .battle{"ng-repeat" => "artist in battle"}
+          %p{ "ng-if" => "currentUser != false" }
+            %a{href: "/users/{{ artist.artist_one.id }}"} {{ artist.artist_two.username }}
+            %img{ "ng-src" => "{{ '/assets/usersImage/avatars/' + artist.artist_two.image}}" }
+            %span{ "ng-click" => "indexVoteFor(battle, battle.artist_two)", "class" => "label radius {{ voteClass(index.voteCurrentUser[battle.id], battle.artist_two.id) }}" } {{ voteText(index.voteCurrentUser[battle.id], battle.artist_two.id) }}

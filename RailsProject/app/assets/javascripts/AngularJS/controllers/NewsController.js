@@ -9,7 +9,7 @@ SoonzikApp.controller('NewsCtrl', ['$scope', '$routeParams', 'SecureAuth', 'HTTP
 
 	$scope.showNews = function() {
 		var parameters = [
-			{ key: "order_by_asc[]", value: "date" }
+			{ key: "order_by_asc[]", value: "date"}
 		];
 
 		$scope.News = true;
@@ -47,16 +47,21 @@ SoonzikApp.controller('NewsCtrl', ['$scope', '$routeParams', 'SecureAuth', 'HTTP
 			console.log("This news doesn't exist");
 		});
 
+		$scope.thisNewsId = true;
 
+	}
+
+	$scope.postComment = function() {
 		SecureAuth.securedTransaction(function(key, id) {
 			var parameters =
 		  		{	secureKey: key,
 			  		user_id: id,
 			  		content: $scope.commentary.content };
 
+			console.log(parameters);
+
 			HTTPService.addComment($routeParams.id, parameters).then(function(data) {
 				parameters.content = $scope.commentary.content;
-				console.log(parameters);
 
 			}, function(error) {
 				console.log("erreur HTTPService");
@@ -64,9 +69,6 @@ SoonzikApp.controller('NewsCtrl', ['$scope', '$routeParams', 'SecureAuth', 'HTTP
 		}, function(error) {
 			console.log("erreur securedTransaction");
 		});
-
-		$scope.thisNewsId = true;
-
 	}
 
 	$scope.loading = false;

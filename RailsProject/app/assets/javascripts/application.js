@@ -37,6 +37,7 @@
 //= require ./AngularJS/controllers/PlayerController.js
 //= require ./AngularJS/controllers/NewsController.js
 //= require ./AngularJS/controllers/PackController.js
+//= require ./AngularJs/controllers/CartController.js
 //= require ./AngularJS/controllers/PlaylistsController.js
 //= require ./AngularJS/controllers/FriendController.js
 //= require ./AngularJS/directives/autofocus.js
