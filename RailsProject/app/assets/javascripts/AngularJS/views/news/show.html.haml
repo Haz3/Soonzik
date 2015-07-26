@@ -18,17 +18,15 @@
             {{ text.content }}
         .large-12
           %textarea.radius{"placeholder" => "Ecrire un commentaire", "ng-model" => "commentary.content"}
-          .panel
-            {{ commentary.content }}
           .action
             %i.step.fi-social-facebook.size-36
             %i.step.fi-social-twitter.size-36
             %i.step.fi-social-google-plus.size-36
-            .button.success.radius{:type => "submit", "ng-click" => "addComment"} Envoyé
+            .button.success.radius{:type => "submit", "ng-click" => "postComment()"} Envoyé
           .panel.content-comment{"ng-repeat" => "comment in comments"}
             .info-user
               .photo
-                %img{"ng-src" => "{{ comment.user.image }}"}
+                %img{"ng-src" => "{{ '/assets/usersImage/avatars/' + comment.user.image }}"}
               .info
                 %cite
                   {{ comment.user.username }} | {{ comment.created_at }}

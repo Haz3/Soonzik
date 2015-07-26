@@ -5,7 +5,7 @@
     %base{href: "/"}
     %meta{ :name => "viewport", :content => "width=device-width, initial-scale=1.0" }
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
-    = javascript_include_tag 'application'
+    = javascript_include_tag 'application', 'data-turbolinks-track' => true
     = javascript_include_tag 'websocket_rails/main', 'data-turbolinks-track' => true
     = javascript_include_tag "vendor/modernizr"
     = csrf_meta_tags
@@ -35,12 +35,12 @@
                   %ul.dropdown
                     %li
                       = link_to('Modifier le profil (DONE)', edit_user_path(current_user))
-                      = link_to('News (IN PROGRESS)', news_index_path)
+                      = link_to('News (DONE)', news_index_path)
                       %a Explorer
                       = link_to('Packs (IN PROGRESS)', packs_path)
                       %a Monde Musical
-                      = link_to('Battle (IN PROGRESS)', battles_path)
-                      %a Amis (IN PROGRESS)
+                      = link_to('Battle (DONE)', battles_path)
+                      = link_to('Amis (DONE)', 'http://lvh.me:3000/users/:id/friendlist')
                       = link_to('Logout', destroy_user_session_path, :method => :delete)
                 =image_tag ("usersImage/avatars/" + current_user.image), :class => "photo-profile"              
                 .profile

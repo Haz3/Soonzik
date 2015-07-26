@@ -4,7 +4,7 @@ SoonzikApp.directive('battle', [function() {
 		if (values.length == 0) {
 			$element.html("Currently no votes");
 			return;
-    }
+    	}
 
 		var w = $element.parent().width();
 
