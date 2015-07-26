@@ -118,12 +118,14 @@ and the validation Can provide some features linked to this model</p>
 </li><li>
 <p><code>user_id</code> - (integer) - The ID of the user who own it</p>
 </li><li>
-<p><code>gift</code> - (boolean) - Is it a gift or not</p>
+<p><code>gift_id</code> - (integer) - Is it a gift or not</p>
 </li></ul>
 
 <h4 id="class-Cart-label-Associations">Associations<span><a href="#class-Cart-label-Associations">&para;</a> <a href="#top">&uarr;</a></span></h4>
 <ul><li>
 <p><code>belongs_to</code> - :user</p>
+</li><li>
+<p><code>belongs_to</code> - :gift</p>
 </li><li>
 <p><code>has_and_belongs_to_many</code> - :albums</p>
 </li><li>
@@ -158,9 +160,9 @@ and the validation Can provide some features linked to this model</p>
 											<p>The strong parameters to save or update object</p>					
 											<div class="method-source-code" id="cart_params-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/models/cart.rb, line 27</span>
+								class="language-ruby"><span class="ruby-comment"># File app/models/cart.rb, line 29</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">cart_params</span>(<span class="ruby-identifier">parameters</span>)
-  <span class="ruby-identifier">parameters</span>.<span class="ruby-identifier">require</span>(<span class="ruby-value">:cart</span>).<span class="ruby-identifier">permit</span>(<span class="ruby-value">:gift</span>, <span class="ruby-value">:user_id</span>)
+  <span class="ruby-identifier">parameters</span>.<span class="ruby-identifier">require</span>(<span class="ruby-value">:cart</span>).<span class="ruby-identifier">permit</span>(<span class="ruby-value">:gift_id</span>, <span class="ruby-value">:user_id</span>)
 <span class="ruby-keyword">end</span></code></pre>
 						</div>
 										</div>

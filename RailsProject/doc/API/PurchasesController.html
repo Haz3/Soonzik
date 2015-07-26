@@ -114,7 +114,9 @@
 href="../Purchase.html">Purchase</a> objects Here is the list of action
 available :</p>
 <ul><li>
-<p>save                  [post] - SECURE</p>
+<p>buycart       [post] - SECURE</p>
+</li><li>
+<p>buypack               [post] - SECURE</p>
 </li></ul>
 		</section>
 
@@ -136,35 +138,23 @@ available :</p>
 					<h3>Public Instance Methods</h3>
 				</header>
 
-								<a name="method-i-save">anchor</a>
-				<div id="method-i-save-doc" class="method">
+								<a name="method-i-buycart">anchor</a>
+				<div id="method-i-buycart-doc" class="method">
 
 					<header>
 											<i class="icon-generic"></i>
-						<span class="method-name">save</span><span 
+						<span class="method-name">buycart</span><span 
 							class="method-args">()</span>
 										</header>
 
 					<div class="method-description">
-											<p>Save a new object <a href="../Purchase.html">Purchase</a>. For more
-information on the parameters, check at the model</p>
+											<p>Buy the current cart and empty it</p>
 
-<p>Route : /purchases/save</p>
+<p>Route : /purchases/buycart</p>
 
-<h4 id="method-i-save-label-Options">Options<span><a href="#method-i-save-label-Options">&para;</a> <a href="#top">&uarr;</a></span></h4>
-<ul><li>
-<p>+purchase [user_id]+ - Id of the user who has the purchase</p>
-</li><li>
-<p>+purchase [typeObj]+ - Model name of the object to add to the purchase
--&gt; “Music” | “Album” | “Pack”</p>
-</li><li>
-<p>+purchase [obj_id]+ - Id of the object</p>
-</li><li>
-<p>+purchase [partial]+ - Boolean IN CASE OF A PACK to know if the user has
-the entire pack or not</p>
-</li></ul>
+<h4 id="method-i-buycart-label-Options">Options<span><a href="#method-i-buycart-label-Options">&para;</a> <a href="#top">&uarr;</a></span></h4>
 
-<h5 id="method-i-save-label-HTTP+VALUE">HTTP VALUE<span><a href="#method-i-save-label-HTTP+VALUE">&para;</a> <a href="#top">&uarr;</a></span></h5>
+<h5 id="method-i-buycart-label-HTTP+VALUE">HTTP VALUE<span><a href="#method-i-buycart-label-HTTP+VALUE">&para;</a> <a href="#top">&uarr;</a></span></h5>
 <ul><li>
 <p><code>201</code> - In case of success, return the purchase created in this
 format : { user: {}, purchased_musics: { music: {}, purchased_album: {
@@ -174,63 +164,155 @@ album : {}, purchased_pack: { partial: value, pack: {} } } } }</p>
 </li><li>
 <p><code>503</code> - Error from server</p>
 </li></ul>					
-											<div class="method-source-code" id="save-source">
+											<div class="method-source-code" id="buycart-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/purchases_controller.rb, line 27</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">save</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/purchases_controller.rb, line 23</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">buycart</span>
   <span class="ruby-keyword">begin</span>
-    <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@security</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-ivar">@purchase</span>[<span class="ruby-value">:user_id</span>] <span class="ruby-operator">==</span> <span class="ruby-ivar">@user_id</span>)
-      <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>, <span class="ruby-string">&#39;user_id missing&#39;</span> <span class="ruby-keyword">if</span> (<span class="ruby-operator">!</span><span class="ruby-keyword">defined?</span><span class="ruby-ivar">@purchase</span>[<span class="ruby-value">:user_id</span>])
-      <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>, <span class="ruby-string">&#39;typeObj missing&#39;</span> <span class="ruby-keyword">if</span> (<span class="ruby-operator">!</span><span class="ruby-keyword">defined?</span><span class="ruby-ivar">@purchase</span>[<span class="ruby-value">:typeObj</span>])
-      <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>, <span class="ruby-string">&#39;obj_id missing&#39;</span> <span class="ruby-keyword">if</span> (<span class="ruby-operator">!</span><span class="ruby-keyword">defined?</span><span class="ruby-ivar">@purchase</span>[<span class="ruby-value">:obj_id</span>])
+    <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@security</span>)
+      <span class="ruby-identifier">purchases</span> = { <span class="ruby-identifier">musics</span><span class="ruby-operator">:</span> [], <span class="ruby-identifier">albums</span><span class="ruby-operator">:</span> [], <span class="ruby-identifier">musicsFromAlbum</span><span class="ruby-operator">:</span> [] }
+      <span class="ruby-identifier">cartToDelete</span> = []
 
-      <span class="ruby-identifier">purchase</span> = <span class="ruby-constant">Purchase</span>.<span class="ruby-identifier">new</span>
-      <span class="ruby-identifier">purchase</span>.<span class="ruby-identifier">user_id</span> = <span class="ruby-ivar">@purchase</span>[<span class="ruby-value">:user_id</span>]
-      <span class="ruby-identifier">classObj</span> = <span class="ruby-ivar">@purchase</span>[<span class="ruby-value">:typeObj</span>].<span class="ruby-identifier">constantize</span>
-      <span class="ruby-identifier">obj</span> = <span class="ruby-identifier">classObj</span>.<span class="ruby-identifier">find_by_id</span>(<span class="ruby-ivar">@purchase</span>[<span class="ruby-value">:obj_id</span>])
-      <span class="ruby-comment"># check if the object exists</span>
-      <span class="ruby-keyword">if</span> (<span class="ruby-identifier">purchase</span>.<span class="ruby-identifier">save</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">obj</span> <span class="ruby-operator">!=</span> <span class="ruby-keyword">nil</span>)
-        <span class="ruby-keyword">begin</span>
-          <span class="ruby-keyword">case</span> <span class="ruby-ivar">@purchase</span>[<span class="ruby-value">:typeObj</span>]
-            <span class="ruby-keyword">when</span> <span class="ruby-string">&quot;Music&quot;</span>
-              <span class="ruby-identifier">purchase</span>.<span class="ruby-identifier">addPurchasedMusicFromObject</span>(<span class="ruby-identifier">obj</span>);
-            <span class="ruby-keyword">when</span> <span class="ruby-string">&quot;Album&quot;</span>
-              <span class="ruby-identifier">purchase</span>.<span class="ruby-identifier">addPurchasedAlbumFromObject</span>(<span class="ruby-identifier">obj</span>);
-            <span class="ruby-keyword">when</span> <span class="ruby-string">&quot;Pack&quot;</span>
-              <span class="ruby-identifier">purchase</span>.<span class="ruby-identifier">addPurchasedPackFromObject</span>(<span class="ruby-identifier">obj</span>, <span class="ruby-ivar">@purchase</span>[<span class="ruby-value">:partial</span>]);
-          <span class="ruby-keyword">end</span>
+      <span class="ruby-identifier">carts</span> = <span class="ruby-constant">Cart</span>.<span class="ruby-identifier">where</span>(<span class="ruby-identifier">user_id</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@user_id</span>)
 
-          <span class="ruby-ivar">@returnValue</span> = { <span class="ruby-identifier">content</span><span class="ruby-operator">:</span> <span class="ruby-identifier">purchase</span>.<span class="ruby-identifier">as_json</span>(<span class="ruby-value">:include</span> =<span class="ruby-operator">&gt;</span> {
-                                                                    <span class="ruby-value">:user</span> =<span class="ruby-operator">&gt;</span> {<span class="ruby-value">:only</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">User</span>.<span class="ruby-identifier">miniKey</span> },
-                                                                    <span class="ruby-value">:purchased_musics</span> =<span class="ruby-operator">&gt;</span> {
-                                                                      <span class="ruby-value">:include</span> =<span class="ruby-operator">&gt;</span> {
-                                                                        <span class="ruby-value">:music</span> =<span class="ruby-operator">&gt;</span> { <span class="ruby-value">:only</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">Music</span>.<span class="ruby-identifier">miniKey</span>},
-                                                                        <span class="ruby-value">:purchased_album</span> =<span class="ruby-operator">&gt;</span> {
-                                                                          <span class="ruby-value">:include</span> =<span class="ruby-operator">&gt;</span> {
-                                                                            <span class="ruby-value">:album</span> =<span class="ruby-operator">&gt;</span> { <span class="ruby-value">:only</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">Album</span>.<span class="ruby-identifier">miniKey</span> },
-                                                                            <span class="ruby-value">:purchased_pack</span> =<span class="ruby-operator">&gt;</span> {
-                                                                              <span class="ruby-value">:include</span> =<span class="ruby-operator">&gt;</span> {
-                                                                                <span class="ruby-value">:pack</span> =<span class="ruby-operator">&gt;</span> { <span class="ruby-value">:only</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">Pack</span>.<span class="ruby-identifier">miniKey</span> }
-                                                                              }
-                                                                            }
-                                                                          }
-                                                                        }
-                                                                      }
-                                                                    }
-                                                                 })}
-          <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">201</span>
-          <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:created</span>
-        <span class="ruby-keyword">rescue</span>
-          <span class="ruby-identifier">purchase</span>.<span class="ruby-identifier">destroy</span>
-          <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">503</span>
-          <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:service_unavailable</span>
-        <span class="ruby-keyword">end</span>
+      <span class="ruby-keyword">if</span> <span class="ruby-identifier">carts</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span>
+        <span class="ruby-identifier">p</span> = <span class="ruby-constant">Purchase</span>.<span class="ruby-identifier">new</span>
+        <span class="ruby-identifier">p</span>.<span class="ruby-identifier">user_id</span> = <span class="ruby-ivar">@user_id</span>
+        <span class="ruby-identifier">p</span>.<span class="ruby-identifier">save!</span>
+        <span class="ruby-identifier">carts</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">c</span><span class="ruby-operator">|</span>
+          <span class="ruby-identifier">cTd</span> = { <span class="ruby-identifier">cart</span><span class="ruby-operator">:</span> <span class="ruby-identifier">c</span>, <span class="ruby-identifier">musicToDelete</span><span class="ruby-operator">:</span> [], <span class="ruby-identifier">albumToDelete</span><span class="ruby-operator">:</span> [] }
+          <span class="ruby-identifier">cartToDelete</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">cTd</span>
+
+          <span class="ruby-identifier">c</span>.<span class="ruby-identifier">musics</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">music</span><span class="ruby-operator">|</span>
+            <span class="ruby-identifier">pm</span> = <span class="ruby-constant">PurchasedMusic</span>.<span class="ruby-identifier">new</span>
+            <span class="ruby-identifier">pm</span>.<span class="ruby-identifier">purchase_id</span> = <span class="ruby-identifier">p</span>.<span class="ruby-identifier">id</span>
+            <span class="ruby-identifier">pm</span>.<span class="ruby-identifier">music_id</span> = <span class="ruby-identifier">music</span>.<span class="ruby-identifier">id</span>
+            <span class="ruby-identifier">pm</span>.<span class="ruby-identifier">save!</span>
+            <span class="ruby-identifier">purchases</span>[<span class="ruby-value">:musics</span>] <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">pm</span>
+            <span class="ruby-identifier">cTd</span>[<span class="ruby-value">:musicToDelete</span>] <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">music</span>
+          }
+
+          <span class="ruby-identifier">c</span>.<span class="ruby-identifier">albums</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">album</span><span class="ruby-operator">|</span>
+            <span class="ruby-identifier">pa</span> = <span class="ruby-constant">PurchasedAlbum</span>.<span class="ruby-identifier">new</span>
+            <span class="ruby-identifier">pa</span>.<span class="ruby-identifier">album_id</span> = <span class="ruby-identifier">album</span>.<span class="ruby-identifier">id</span>
+            <span class="ruby-identifier">pa</span>.<span class="ruby-identifier">save!</span>
+            <span class="ruby-identifier">purchases</span>[<span class="ruby-value">:albums</span>] <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">pa</span>
+            <span class="ruby-identifier">cTd</span>[<span class="ruby-value">:albumToDelete</span>] <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">album</span>
+
+            <span class="ruby-identifier">album</span>.<span class="ruby-identifier">musics</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">zik</span><span class="ruby-operator">|</span>
+              <span class="ruby-identifier">pm</span> = <span class="ruby-constant">PurchasedMusic</span>.<span class="ruby-identifier">new</span>
+              <span class="ruby-identifier">pm</span>.<span class="ruby-identifier">purchase_id</span> = <span class="ruby-identifier">p</span>.<span class="ruby-identifier">id</span>
+              <span class="ruby-identifier">pm</span>.<span class="ruby-identifier">purchased_album_id</span> = <span class="ruby-identifier">pa</span>.<span class="ruby-identifier">id</span>
+              <span class="ruby-identifier">pm</span>.<span class="ruby-identifier">music_id</span> = <span class="ruby-identifier">zik</span>.<span class="ruby-identifier">id</span>
+              <span class="ruby-identifier">pm</span>.<span class="ruby-identifier">save!</span>
+              <span class="ruby-identifier">purchases</span>[<span class="ruby-value">:musicsFromAlbum</span>] <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">pm</span>
+            }
+          }
+        }
+
+        <span class="ruby-identifier">cartToDelete</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">c</span><span class="ruby-operator">|</span>
+          <span class="ruby-identifier">c</span>[<span class="ruby-value">:musicToDelete</span>].<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">music</span><span class="ruby-operator">|</span>
+            <span class="ruby-identifier">c</span>[<span class="ruby-value">:cart</span>].<span class="ruby-identifier">musics</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-identifier">music</span>)
+          }
+          <span class="ruby-identifier">c</span>[<span class="ruby-value">:albumToDelete</span>].<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">album</span><span class="ruby-operator">|</span>
+            <span class="ruby-identifier">c</span>[<span class="ruby-value">:cart</span>].<span class="ruby-identifier">albums</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-identifier">album</span>)
+          }
+          <span class="ruby-identifier">c</span>[<span class="ruby-value">:cart</span>].<span class="ruby-identifier">destroy</span>
+        }
+
+        <span class="ruby-identifier">ret</span> = { <span class="ruby-identifier">musics</span><span class="ruby-operator">:</span> [], <span class="ruby-identifier">albums</span><span class="ruby-operator">:</span> [] }
+
+        <span class="ruby-identifier">purchases</span>[<span class="ruby-value">:musics</span>].<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">p</span><span class="ruby-operator">|</span>
+          <span class="ruby-identifier">ret</span>[<span class="ruby-value">:musics</span>] <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">p</span>.<span class="ruby-identifier">as_json</span>(<span class="ruby-value">:include</span> =<span class="ruby-operator">&gt;</span> {<span class="ruby-value">:music</span> =<span class="ruby-operator">&gt;</span> { <span class="ruby-identifier">only</span><span class="ruby-operator">:</span> <span class="ruby-constant">Music</span>.<span class="ruby-identifier">miniKey</span> } })
+        }
+        <span class="ruby-identifier">purchases</span>[<span class="ruby-value">:albums</span>].<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">p</span><span class="ruby-operator">|</span>
+          <span class="ruby-identifier">ret</span>[<span class="ruby-value">:albums</span>] <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">p</span>.<span class="ruby-identifier">as_json</span>(<span class="ruby-value">:include</span> =<span class="ruby-operator">&gt;</span> {<span class="ruby-value">:album</span> =<span class="ruby-operator">&gt;</span> { <span class="ruby-identifier">only</span><span class="ruby-operator">:</span> <span class="ruby-constant">Album</span>.<span class="ruby-identifier">miniKey</span> } })
+        }
+
+        <span class="ruby-ivar">@returnValue</span> = { <span class="ruby-identifier">content</span><span class="ruby-operator">:</span> <span class="ruby-identifier">ret</span> }
+        <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">201</span>
+        <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:created</span>
       <span class="ruby-keyword">else</span>
-        <span class="ruby-ivar">@returnValue</span> = { <span class="ruby-identifier">content</span><span class="ruby-operator">:</span> <span class="ruby-identifier">purchase</span>.<span class="ruby-identifier">errors</span>.<span class="ruby-identifier">to_hash</span>.<span class="ruby-identifier">to_json</span> }
-        <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">503</span>
-        <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:service_unavailable</span>
+        <span class="ruby-ivar">@returnValue</span> = { <span class="ruby-identifier">content</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span> }
+        <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">202</span>
       <span class="ruby-keyword">end</span>
     <span class="ruby-keyword">else</span>
+      <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">500</span>
+      <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:forbidden</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">rescue</span>
+    <span class="ruby-identifier">purchases</span>[<span class="ruby-value">:musics</span>].<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">p</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">p</span>.<span class="ruby-identifier">destroy</span>
+    }
+    <span class="ruby-identifier">purchases</span>[<span class="ruby-value">:albums</span>].<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">p</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">p</span>.<span class="ruby-identifier">destroy</span>
+    }
+    <span class="ruby-identifier">purchases</span>[<span class="ruby-value">:musicsFromAlbum</span>].<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">p</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">p</span>.<span class="ruby-identifier">destroy</span>
+    }
+    <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">504</span>
+    <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:service_unavailable</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">sendJson</span>
+<span class="ruby-keyword">end</span></code></pre>
+						</div>
+										</div>
+
+					
+									</div>
+								<a name="method-i-buypack">anchor</a>
+				<div id="method-i-buypack-doc" class="method">
+
+					<header>
+											<i class="icon-generic"></i>
+						<span class="method-name">buypack</span><span 
+							class="method-args">()</span>
+										</header>
+
+					<div class="method-description">
+											<p>Buy the current cart and empty it</p>
+
+<p>Route : /purchases/buycart</p>
+
+<h4 id="method-i-buypack-label-Options">Options<span><a href="#method-i-buypack-label-Options">&para;</a> <a href="#top">&uarr;</a></span></h4>
+
+<p><code>pack_id</code> - The id of the pack purchased <code>amount</code> -
+The donation <code>artist</code> - The percentage for the artist
+<code>association</code> - The percentage for the association
+<code>website</code> - The percentage for the website</p>
+
+<h5 id="method-i-buypack-label-HTTP+VALUE">HTTP VALUE<span><a href="#method-i-buypack-label-HTTP+VALUE">&para;</a> <a href="#top">&uarr;</a></span></h5>
+<ul><li>
+<p><code>201</code> - In case of success, return the purchase created in this
+format : { user: {}, purchased_musics: { music: {}, purchased_album: {
+album : {}, purchased_pack: { partial: value, pack: {} } } } }</p>
+</li><li>
+<p><code>401</code> - It is not a secured transaction</p>
+</li><li>
+<p><code>404</code> - The pack is not found</p>
+</li><li>
+<p><code>503</code> - Error from server</p>
+</li></ul>					
+											<div class="method-source-code" id="buypack-source">
+							<pre class="prettyprint linenums"><code 
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/purchases_controller.rb, line 131</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">buypack</span>
+  <span class="ruby-keyword">begin</span>
+    <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@security</span>)
+      <span class="ruby-identifier">cartToDelete</span> = []
+      <span class="ruby-identifier">p</span> = <span class="ruby-constant">Purchase</span>.<span class="ruby-identifier">new</span>
+      <span class="ruby-identifier">p</span>.<span class="ruby-identifier">user_id</span> = <span class="ruby-ivar">@user_id</span>
+      <span class="ruby-identifier">p</span>.<span class="ruby-identifier">save!</span>
+
+      <span class="ruby-identifier">pack</span> = <span class="ruby-constant">Pack</span>.<span class="ruby-identifier">find_by_id</span>(<span class="ruby-ivar">@pack_id</span>)
+      <span class="ruby-keyword">if</span> (<span class="ruby-identifier">pack</span> <span class="ruby-operator">==</span> <span class="ruby-keyword">nil</span>)
+        <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">502</span>
+        <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:not_found</span>
+      <span class="ruby-keyword">end</span>
+
+      <span class="ruby-identifier">pp</span> = <span class="ruby-constant">PurchasedPack</span>.<span class="ruby-identifier">new</span>
+      <span class="ruby-identifier">pp</span>.
+    <span class="ruby-identifier">else</span>
       <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">500</span>
       <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:forbidden</span>
     <span class="ruby-keyword">end</span>

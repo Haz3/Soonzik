@@ -116,7 +116,8 @@ relation and the validation Can provide some features linked to this model</p>
 <ul><li>
 <p><code>id</code> - (integer) - The ID of the object</p>
 </li><li>
-<p><code>when</code> - (date) - The name of the group</p>
+<p><code>when</code> - (date) - The name of the group (deprecated, need to be
+remove)</p>
 </li><li>
 <p><code>latitude</code> - (float) - The latitude of the position</p>
 </li><li>
@@ -162,7 +163,7 @@ relation and the validation Can provide some features linked to this model</p>
 							<pre class="prettyprint linenums"><code 
 								class="language-ruby"><span class="ruby-comment"># File app/models/listening.rb, line 53</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">listening_params</span>(<span class="ruby-identifier">parameters</span>)
-  <span class="ruby-identifier">parameters</span>.<span class="ruby-identifier">require</span>(<span class="ruby-value">:listening</span>).<span class="ruby-identifier">permit</span>(<span class="ruby-value">:user_id</span>, <span class="ruby-value">:music_id</span>, <span class="ruby-value">:latitude</span>, <span class="ruby-value">:longitude</span>)
+  <span class="ruby-identifier">parameters</span>.<span class="ruby-identifier">require</span>(<span class="ruby-value">:listening</span>).<span class="ruby-identifier">permit</span>(<span class="ruby-value">:user_id</span>, <span class="ruby-value">:music_id</span>, <span class="ruby-value">:latitude</span>, <span class="ruby-value">:longitude</span>, <span class="ruby-value">:when</span>)
 <span class="ruby-keyword">end</span></code></pre>
 						</div>
 										</div>

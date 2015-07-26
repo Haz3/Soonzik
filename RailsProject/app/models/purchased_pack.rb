@@ -8,6 +8,7 @@ class PurchasedPack < ActiveRecord::Base
 	belongs_to :pack
 
 	validates_inclusion_of :partial, :in => [true, false]
+	validates :pack_id, :artist_percentage, :association_percentage, :website_percentage, :value, presence: true
 
 	has_many :purchased_musics, through: :purchased_albums
 end

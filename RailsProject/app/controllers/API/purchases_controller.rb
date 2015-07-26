@@ -2,21 +2,17 @@ module API
   # Controller which manage the transaction for the Purchase objects
   # Here is the list of action available :
   #
-  # * save		    [post] - SECURE
+  # * buycart       [post] - SECURE
+  # * buypack		    [post] - SECURE
   #
   class PurchasesController < ApisecurityController
-    before_action :checkKey, only: [:save]
+    before_action :checkKey, only: [:buypack, :buycart]
     
-    # Save a new object Purchase. For more information on the parameters, check at the model
+    # Buy the current cart and empty it
     # 
-    # Route : /purchases/save
+    # Route : /purchases/buycart
     #
     # ==== Options
-    # 
-    # * +purchase [user_id]+ - Id of the user who has the purchase
-    # * +purchase [typeObj]+ - Model name of the object to add to the purchase -> "Music" | "Album" | "Pack"
-    # * +purchase [obj_id]+ - Id of the object
-    # * +purchase [partial]+ - Boolean IN CASE OF A PACK to know if the user has the entire pack or not
     # 
     # ===== HTTP VALUE
     # 
@@ -24,59 +20,130 @@ module API
     # - +401+ - It is not a secured transaction
     # - +503+ - Error from server
     # 
-    def save
+    def buycart
       begin
-        if (@security && @purchase[:user_id] == @user_id)
-          raise ArgumentError, 'user_id missing' if (!defined?@purchase[:user_id])
-          raise ArgumentError, 'typeObj missing' if (!defined?@purchase[:typeObj])
-          raise ArgumentError, 'obj_id missing' if (!defined?@purchase[:obj_id])
+        if (@security)
+          purchases = { musics: [], albums: [], musicsFromAlbum: [] }
+          cartToDelete = []
 
-          purchase = Purchase.new
-          purchase.user_id = @purchase[:user_id]
-          classObj = @purchase[:typeObj].constantize
-          obj = classObj.find_by_id(@purchase[:obj_id])
-          # check if the object exists
-          if (purchase.save && obj != nil)
-            begin
-              case @purchase[:typeObj]
-                when "Music"
-                  purchase.addPurchasedMusicFromObject(obj);
-                when "Album"
-                  purchase.addPurchasedAlbumFromObject(obj);
-                when "Pack"
-                  purchase.addPurchasedPackFromObject(obj, @purchase[:partial]);
-              end
+          carts = Cart.where(user_id: @user_id)
 
-              @returnValue = { content: purchase.as_json(:include => {
-                                                                        :user => {:only => User.miniKey },
-                                                                        :purchased_musics => {
-                                                                          :include => {
-                                                                            :music => { :only => Music.miniKey},
-                                                                            :purchased_album => {
-                                                                              :include => {
-                                                                                :album => { :only => Album.miniKey },
-                                                                                :purchased_pack => {
-                                                                                  :include => {
-                                                                                    :pack => { :only => Pack.miniKey }
-                                                                                  }
-                                                                                }
-                                                                              }
-                                                                            }
-                                                                          }
-                                                                        }
-                                                                     })}
-              codeAnswer 201
-              defineHttp :created
-            rescue
-              purchase.destroy
-              codeAnswer 503
-              defineHttp :service_unavailable
-            end
+          if carts.length > 0
+            p = Purchase.new
+            p.user_id = @user_id
+            p.save!
+            carts.each { |c|
+              cTd = { cart: c, musicToDelete: [], albumToDelete: [] }
+              cartToDelete << cTd
+
+              c.musics.each { |music|
+                pm = PurchasedMusic.new
+                pm.purchase_id = p.id
+                pm.music_id = music.id
+                pm.save!
+                purchases[:musics] << pm
+                cTd[:musicToDelete] << music
+              }
+
+              c.albums.each { |album|
+                pa = PurchasedAlbum.new
+                pa.album_id = album.id
+                pa.save!
+                purchases[:albums] << pa
+                cTd[:albumToDelete] << album
+
+                album.musics.each { |zik|
+                  pm = PurchasedMusic.new
+                  pm.purchase_id = p.id
+                  pm.purchased_album_id = pa.id
+                  pm.music_id = zik.id
+                  pm.save!
+                  purchases[:musicsFromAlbum] << pm
+                }
+              }
+            }
+
+            cartToDelete.each { |c|
+              c[:musicToDelete].each { |music|
+                c[:cart].musics.delete(music)
+              }
+              c[:albumToDelete].each { |album|
+                c[:cart].albums.delete(album)
+              }
+              c[:cart].destroy
+            }
+
+            ret = { musics: [], albums: [] }
+
+            purchases[:musics].each { |p|
+              ret[:musics] << p.as_json(:include => {:music => { only: Music.miniKey } })
+            }
+            purchases[:albums].each { |p|
+              ret[:albums] << p.as_json(:include => {:album => { only: Album.miniKey } })
+            }
+
+            @returnValue = { content: ret }
+            codeAnswer 201
+            defineHttp :created
           else
-            @returnValue = { content: purchase.errors.to_hash.to_json }
-            codeAnswer 503
-            defineHttp :service_unavailable
+            @returnValue = { content: nil }
+            codeAnswer 202
           end
+        else
+          codeAnswer 500
+          defineHttp :forbidden
+        end
+      rescue
+        purchases[:musics].each { |p|
+          p.destroy
+        }
+        purchases[:albums].each { |p|
+          p.destroy
+        }
+        purchases[:musicsFromAlbum].each { |p|
+          p.destroy
+        }
+        codeAnswer 504
+        defineHttp :service_unavailable
+      end
+      sendJson
+    end
+    
+    # Buy the current cart and empty it
+    # 
+    # Route : /purchases/buycart
+    #
+    # ==== Options
+    #
+    # +pack_id+ - The id of the pack purchased
+    # +amount+ - The donation
+    # +artist+ - The percentage for the artist
+    # +association+ - The percentage for the association
+    # +website+ - The percentage for the website
+    # 
+    # ===== HTTP VALUE
+    # 
+    # - +201+ - In case of success, return the purchase created in this format : { user: {}, purchased_musics: { music: {}, purchased_album: { album : {}, purchased_pack: { partial: value, pack: {} } } } }
+    # - +401+ - It is not a secured transaction
+    # - +404+ - The pack is not found
+    # - +503+ - Error from server
+    # 
+    def buypack
+      begin
+        if (@security)
+          cartToDelete = []
+          p = Purchase.new
+          p.user_id = @user_id
+          p.save!
+
+          pack = Pack.find_by_id(@pack_id)
+          if (pack == nil)
+            codeAnswer 502
+            defineHttp :not_found
+          end
+
+          pp = PurchasedPack.new
+          pp.
         else
           codeAnswer 500
           defineHttp :forbidden

@@ -523,9 +523,9 @@ var SearchIndex =
 		"type": "anymethod"
 	},
 	{
-		"name": "find",
-		"link": "API/CartsController.html#method-i-find",
-		"snippet": "<p>Give a part of the carts depending of the filter passed into parameter\n<p>Route : /carts/find\n<p>Options\n",
+		"name": "show",
+		"link": "API/CartsController.html#method-i-show",
+		"snippet": "<p>Give a part of the carts depending of the filter passed into parameter\n<p>Route : /carts/my_cart\n<p>HTTP VALUE …\n",
 		"type": "anymethod"
 	},
 	{
@@ -781,9 +781,15 @@ var SearchIndex =
 		"type": "anymethod"
 	},
 	{
-		"name": "save",
-		"link": "API/PurchasesController.html#method-i-save",
-		"snippet": "<p>Save a new object Purchase. For more information on the parameters, check\nat the model\n<p>Route : /purchases/save …\n",
+		"name": "buycart",
+		"link": "API/PurchasesController.html#method-i-buycart",
+		"snippet": "<p>Buy the current cart and empty it\n<p>Route : /purchases/buycart\n<p>Options\n",
+		"type": "anymethod"
+	},
+	{
+		"name": "buypack",
+		"link": "API/PurchasesController.html#method-i-buypack",
+		"snippet": "<p>Buy the current cart and empty it\n<p>Route : /purchases/buycart\n<p>Options\n",
 		"type": "anymethod"
 	},
 	{

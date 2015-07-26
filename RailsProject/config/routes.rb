@@ -27,7 +27,7 @@ Rails.application.routes.draw do
       end
     end
 
-    get 'carts/find' => 'carts#find'
+    get 'carts/my_cart' => 'carts#show'
     match 'carts/save' => 'carts#save', via: [:post, :options]
     get 'carts/destroy' => 'carts#destroy' #ok
 
@@ -106,7 +106,13 @@ Rails.application.routes.draw do
       end
     end
 
-    match 'purchases/save' => 'purchases#save', via: [:post, :options] #ok
+    resources :purchases, only: [] do
+      collection do
+        match 'buycart' => 'purchases#buycart', via: [:post, :options] #ok
+        match 'buypack' => 'purchases#buypack', via: [:post, :options] #ok
+      end
+    end
+
     get 'search' => 'searchs#search' #ok
     get 'suggest' => 'suggestions#show' #ok
 
