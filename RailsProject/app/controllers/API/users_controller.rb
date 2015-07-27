@@ -686,15 +686,17 @@ module API
     end
 
     # To upload an image or a background
+    # Return the new user (to get the new image name)
     #
     # Route : /users/upload
     #
     # ==== Options
     #
-    # * +type+ - The type of image you upload : The avatar ('image') or a cover ('backgorund'). It is optionnal, the defulat value is 'image'
+    # * +type+ - The type of image you upload : The avatar ('image') or a cover ('background'). It is optionnal, the default value is 'image'
     # * +file [content_type]+ - The content type of the file. Authorized content type : "image/gif", "image/jpeg", "image/pjpeg", "image/png", "image/x-png"
     # * +file [original_filename]+ - The name of the file
     # * +file [tempfile]+ - The data of the file
+    # * +device+ - TO SPECIFY FOR SMARTPHONE. It needs to be the key type with the value 'smartphone' or it will be considering you're from website.
     #
     # ==== HTTP VALUE
     #
@@ -704,6 +706,8 @@ module API
     # - +503+ - Error from server
     #
     def uploadImg
+      smart = false
+
       begin
         if (@security)
           acceptedContentType = [
@@ -713,6 +717,11 @@ module API
             "image/png",
             "image/x-png"
           ]
+
+          if (@device.present? && @device == 'smartphone')
+            smart = true
+          end
+
           if acceptedContentType.include? @file[:content_type]
             randomNumber = rand(1000..10000)
             timestamp = Time.now.to_i
@@ -722,13 +731,15 @@ module API
             newFilename = Digest::SHA256.hexdigest("#{timestamp}--#{@file[:original_filename]}#{randomNumber}") + "-" + @file[:original_filename].gsub(/[^0-9A-Za-z\.-]/, '')
 
             File.open(Rails.root.join('app', 'assets', 'images', 'usersImage', 'avatars', newFilename), 'wb') do |f|
-              f.write(@file[:tempfile].read)
+              f.write(@file[:tempfile].read) if smart == false
+              f.write(@file[:tempfile]) if smart == true
             end
 
             u = User.find_by_id(@user_id)
             u.image = newFilename if (@type != "background")
             u.background = newFilename if (@type == "background")
             u.save!
+            @returnValue = { content: u.as_json(only: User.miniKey) }
             codeAnswer 201
           else
             codeAnswer 505

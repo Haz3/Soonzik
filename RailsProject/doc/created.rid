@@ -1,4 +1,4 @@
-Sun, 26 Jul 2015 18:16:34 +0200
+Mon, 27 Jul 2015 16:17:58 +0200
 app/controllers/API/albums_controller.rb	Tue, 07 Jul 2015 15:32:22 +0200
 app/controllers/API/api_controller.rb	Mon, 11 May 2015 06:00:30 +0200
 app/controllers/API/apisecurity_controller.rb	Sat, 27 Jun 2015 20:42:33 +0200
@@ -20,7 +20,7 @@ app/controllers/API/purchases_controller.rb	Sun, 26 Jul 2015 17:58:12 +0200
 app/controllers/API/searchs_controller.rb	Fri, 26 Jun 2015 11:47:26 +0200
 app/controllers/API/suggestions_controller.rb	Tue, 02 Jun 2015 21:16:10 +0200
 app/controllers/API/tweets_controller.rb	Tue, 19 May 2015 21:46:54 +0200
-app/controllers/API/users_controller.rb	Wed, 08 Jul 2015 20:54:31 +0200
+app/controllers/API/users_controller.rb	Mon, 27 Jul 2015 16:15:05 +0200
 app/models/access.rb	Thu, 18 Jun 2015 19:00:51 +0200
 app/models/address.rb	Thu, 18 Jun 2015 19:00:51 +0200
 app/models/admin_user.rb	Thu, 18 Jun 2015 19:00:51 +0200

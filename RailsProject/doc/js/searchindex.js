@@ -921,7 +921,7 @@ var SearchIndex =
 	{
 		"name": "uploadImg",
 		"link": "API/UsersController.html#method-i-uploadImg",
-		"snippet": "<p>To upload an image or a background\n<p>Route : /users/upload\n<p>Options\n",
+		"snippet": "<p>To upload an image or a background Return the new user (to get the new\nimage name)\n<p>Route : /users/upload …\n",
 		"type": "anymethod"
 	},
 	{
