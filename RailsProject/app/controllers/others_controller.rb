@@ -5,4 +5,7 @@ class OthersController < ApplicationController
 	def no_content
 		render :text => "", :layout => true
 	end
+
+	def index
+	end
 end
