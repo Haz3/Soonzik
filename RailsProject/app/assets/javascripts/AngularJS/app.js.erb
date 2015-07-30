@@ -60,6 +60,9 @@ SoonzikApp.config(['$routeProvider', '$locationProvider', '$httpProvider', funct
     }).when('/listenings', {
       templateUrl: '<%= asset_path("AngularJS/views/listenings/index.html.haml") %>',
       controller: 'ListeningsCtrl'
+    }).when('/search/:value', {
+      templateUrl: '<%= asset_path("AngularJS/views/search/index.html.haml") %>',
+      controller: 'SearchCtrl'
     });
   }
 

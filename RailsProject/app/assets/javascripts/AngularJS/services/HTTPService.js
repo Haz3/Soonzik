@@ -134,6 +134,9 @@ SoonzikApp.factory('HTTPService', ['$http', '$location', 'Upload', function ($ht
     },
     addListening: function(parameters) {
       return $http.post("http://api." + url + "/listenings/save", parameters);
+    },
+    search: function(parameters) {
+      return $http.get("http://api." + url + "/search" + urlParametersFormat(parameters));
     }
   }
 }]);

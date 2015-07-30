@@ -13,8 +13,8 @@ module API
    	# 
    	# * +offset+ - [Optionnal] Number where to begin the results (only with filter)
     # * +limit+ - [Optionnal] Number of result you want (only with filter)
-    # * +query+ - [Optionnal] What the user type
-    # * +type+ - [Optionnal] 
+    # * +query+ - What the user type
+    # * +type+ - [Optionnal] artist, user, music, album or pack
     # 
     # ===== HTTP VALUE
     # 
@@ -83,15 +83,16 @@ module API
 				    content = {
 				    	artist: JSON.parse(artist_result.to_json(:only => User.miniKey )),
 				    	user: JSON.parse(user_result.to_json(:only => User.miniKey )),
-				    	music: JSON.parse(music_result.to_json(:only => Music.miniKey, :include => { album: { only: Album.miniKey } } )),
-				    	album: JSON.parse(album_result.to_json(:only => Album.miniKey, :include => { user: { only: User.miniKey } } ) )),
-				    	pack: JSON.parse(pack_result.to_json(:only => Pack.miniKey, :include => { albums: { only: Album.miniKey } } ) ))
+				    	music: JSON.parse(music_result.to_json(:only => Music.miniKey, :include => { album: { only: Album.miniKey } } ) ),
+				    	album: JSON.parse(album_result.to_json(:only => Album.miniKey, :include => { user: { only: User.miniKey } } ) ),
+				    	pack: JSON.parse(pack_result.to_json(:only => Pack.miniKey, :include => { albums: { only: Album.miniKey } } ) )
 				    }
 				  end
 	    	end
     		@returnValue[:content] = content
         codeAnswer 200
 	  	rescue
+	  		puts $!, $@
 	    	codeAnswer 504
 	    	defineHttp :service_unavailable
 	  	end

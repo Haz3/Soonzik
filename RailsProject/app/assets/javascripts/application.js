@@ -33,6 +33,7 @@
 //= require ./AngularJS/controllers/BattlesController.js
 //= require ./AngularJS/controllers/UsersController.js
 //= require ./AngularJS/controllers/IndexController.js
+//= require ./AngularJS/controllers/HeaderController.js
 //= require ./AngularJS/controllers/ListeningsController.js
 //= require ./AngularJS/controllers/PlayerController.js
 //= require ./AngularJS/controllers/NewsController.js
@@ -40,6 +41,7 @@
 //= require ./AngularJs/controllers/CartController.js
 //= require ./AngularJS/controllers/PlaylistsController.js
 //= require ./AngularJS/controllers/FriendController.js
+//= require ./AngularJS/controllers/SearchController.js
 //= require ./AngularJS/directives/autofocus.js
 //= require ./AngularJS/directives/autoscrollbottom.js
 //= require ./AngularJS/directives/battle.js

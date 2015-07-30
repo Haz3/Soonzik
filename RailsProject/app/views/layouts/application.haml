@@ -11,47 +11,46 @@
     = csrf_meta_tags
 
   %body{ "ng-app" => "SoonzikApp" }
-    %header.contain-to-grid
-      %nav.top-bar{"data-topbar" => "", :role => "navigation"}
-        %ul.title-area
-          %li.name
-            =link_to image_tag("logo-soonzik.png", :class => "soonzik-logo"), "http://lvh.me:3000"
-            %li.toggle-topbar.menu-icon
-              %a{:href => "#"}
-                %span Menu
-          %section.top-bar-section
-            %ul.left
-              %li.has-form
-                .row.collapse
-                  .large-5.small-5.columns
-                    =image_tag "loupe.png", :class => "loupe"
-                    %input.radius{:placeholder => "Search users, musics, albums...", :type => "text"}
-                  .large-4.small-3.columns
-                    %a.alert.button.expand.radius{:href => "#"} Search
-            %ul.right
-              - if user_signed_in?
-                %li.has-dropdown{"is_hover" => "true", "data-options" => "align:right"}
-                  =image_tag "menu.png", :class => "menu-logo"
-                  %ul.dropdown
-                    %li
-                      = link_to('Modifier le profil (DONE)', edit_user_path(current_user))
-                      = link_to('News (DONE)', news_index_path)
-                      %a Explorer
-                      = link_to('Packs (IN PROGRESS)', packs_path)
-                      %a Monde Musical
-                      = link_to('Battle (DONE)', battles_path)
-                      = link_to('Amis (DONE)', 'http://lvh.me:3000/users/:id/friendlist')
-                      = link_to('Logout', destroy_user_session_path, :method => :delete)
-                =image_tag ("usersImage/avatars/" + current_user.image), :class => "photo-profile"              
-                .profile
-                  %p
-                    = link_to(UsersHelper.validate_username_for_oauth(current_user), user_path(current_user), :class => "profile")
-              - else
-                .large-12.small-10.columns
-                  %li
-                    %a.button.expand.radius{:href => new_user_registration_path, :class => "sign-up", :target => "_self" } Sign Up
-                  %li
-                    %a.button.secondary.expand.radius{:href => new_user_session_path, :class => "log-in info", :target => "_self" } Log In
+    %header{ "ng-controller" => "HeaderCtrl", "ng-init" => "initHeader()" }
+      %nav.top-bar-custom.row
+        .small-3.columns.center-logo
+          %span.helper
+          =link_to image_tag("logo-soonzik.png", :class => "soonzik-logo"), "http://lvh.me:3000"
+        .small-7.columns
+          .row.collapse
+            .small-10.columns.center-h
+              %input.radius#inputSearch{:placeholder => "Search users, musics, albums...", :type => "text", "ng-model" => "search.value" }
+            .small-2.columns.left.center-h
+              %a.alert.button.expand.radius{:href => "#", "ng-click" => "sendSearch()"}
+                =image_tag "loupe.png", :class => "loupe"
+        .small-2.columns.menu
+          =image_tag "menu.png", :class => "menu-logo", "ng-click" => "switchMenu()"
+          - if user_signed_in?
+            %ul.toAppend.no-bullet{ "ng-class" => "{ open: menuOpen }" }
+              %li.clearfix
+                =image_tag ("usersImage/avatars/" + current_user.image), :class => "photo-profile left", id: "profilePicture"
+                %p
+                  = link_to(UsersHelper.validate_username_for_oauth(current_user), user_path(current_user), :class => "profile")
+              %li
+                = link_to('Edit profile', edit_user_path(current_user))
+              %li
+                = link_to('News', news_index_path)
+              %li
+                %a Explorer
+              %li
+                = link_to('Packs', packs_path)
+              %li
+                %a Monde Musical
+              %li
+                = link_to('Battles', battles_path)
+              %li
+                = link_to('Friends', 'http://lvh.me:3000/users/:id/friendlist')
+              %li
+                = link_to('Logout', destroy_user_session_path, :method => :delete)
+          - else
+            .toAppend{ "ng-class" => "{ open: menuOpen }" }
+              %a.button{:href => new_user_registration_path, :target => "_self" } Sign Up
+              %a.button.alert{:href => new_user_session_path, :target => "_self" } Log In
     %main.row
       - if notice
         %small.error= notice
