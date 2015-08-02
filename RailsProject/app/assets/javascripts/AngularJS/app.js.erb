@@ -6,7 +6,7 @@ SoonzikApp.config(['$routeProvider', '$locationProvider', '$httpProvider', funct
 	var whitelist = [
 		/\/users\/[0-9]+\/finish_signup/,
 		/\/users\/sign_in/,
-    /\/users\/sign_up/,
+		/\/users\/sign_up/,
 		/\/users\/sign_out/,
 		/\/users\/password\/new/
 	];
@@ -20,60 +20,83 @@ SoonzikApp.config(['$routeProvider', '$locationProvider', '$httpProvider', funct
 	}
 
 	if (dynamicPage) {
-  	$locationProvider.html5Mode(true);
-    $routeProvider.when('/', {
-      templateUrl: '<%= asset_path("AngularJS/views/others/index.html.haml") %>',
-      controller: 'IndexCtrl'
-    }).when('/news/', {
-      templateUrl: '<%= asset_path("AngularJS/views/news/index.html.haml") %>',
-      controller: 'NewsCtrl'
-    }).when('/news/:id', {
-      templateUrl: '<%= asset_path("AngularJS/views/news/show.html.haml") %>',
-      controller: 'NewsCtrl'
-    }).when('/packs', {
-      templateUrl: '<%= asset_path("AngularJS/views/packs/index.html.haml") %>',
-      controller: 'PacksCtrl'
-    }).when('/packs/:id', {
-      templateUrl: '<%= asset_path("AngularJS/views/packs/show.html.haml") %>',
-      controller: 'PacksCtrl'
-    }).when('/users/:id', {
-      templateUrl: '<%= asset_path("AngularJS/views/users/show.html.haml") %>',
-      controller: 'UsersCtrl'
-    }).when('/users/:id/edit', {
-      templateUrl: '<%= asset_path("AngularJS/views/users/edit.html.haml") %>',
-      controller: 'UsersCtrl'
-    }).when('/users/:id/friendlist', {
-      templateUrl: '<%= asset_path("AngularJS/views/friend/index.html.haml") %>',
-      controller: 'FriendCtrl'
-    }).when('/battles', {
-      templateUrl: '<%= asset_path("AngularJS/views/battles/index.html.haml") %>',
-      controller: 'BattlesCtrl'
-    }).when('/battles/:id', {
-      templateUrl: '<%= asset_path("AngularJS/views/battles/show.html.haml") %>',
-      controller: 'BattlesCtrl'
-    }).when('/cart/:id', {
-      templateUrl: '<%= asset_path("AngularJS/views/cart/show.html.haml") %>',
-      controller: 'CartCtrl'
-    }).when('/playlists/:id', {
-      templateUrl: '<%= asset_path("AngularJS/views/playlists/show.html.haml") %>',
-      controller: 'PlaylistsCtrl'
-    }).when('/listenings', {
-      templateUrl: '<%= asset_path("AngularJS/views/listenings/index.html.haml") %>',
-      controller: 'ListeningsCtrl'
-    }).when('/search/:value', {
-      templateUrl: '<%= asset_path("AngularJS/views/search/index.html.haml") %>',
-      controller: 'SearchCtrl'
-    });
-  }
+		$locationProvider.html5Mode(true);
+		$routeProvider.when('/', {
+			templateUrl: '<%= asset_path("AngularJS/views/others/index.html.haml") %>',
+			controller: 'IndexCtrl'
+		}).when('/news/', {
+			templateUrl: '<%= asset_path("AngularJS/views/news/index.html.haml") %>',
+			controller: 'NewsCtrl'
+		}).when('/news/:id', {
+			templateUrl: '<%= asset_path("AngularJS/views/news/show.html.haml") %>',
+			controller: 'NewsCtrl'
+		}).when('/packs', {
+			templateUrl: '<%= asset_path("AngularJS/views/packs/index.html.haml") %>',
+			controller: 'PacksCtrl'
+		}).when('/packs/:id', {
+			templateUrl: '<%= asset_path("AngularJS/views/packs/show.html.haml") %>',
+			controller: 'PacksCtrl'
+		}).when('/users/:id', {
+			templateUrl: '<%= asset_path("AngularJS/views/users/show.html.haml") %>',
+			controller: 'UsersCtrl'
+		}).when('/users/:id/edit', {
+			templateUrl: '<%= asset_path("AngularJS/views/users/edit.html.haml") %>',
+			controller: 'UsersCtrl'
+		}).when('/users/:id/friendlist', {
+			templateUrl: '<%= asset_path("AngularJS/views/friend/index.html.haml") %>',
+			controller: 'FriendCtrl'
+		}).when('/battles', {
+			templateUrl: '<%= asset_path("AngularJS/views/battles/index.html.haml") %>',
+			controller: 'BattlesCtrl'
+		}).when('/battles/:id', {
+			templateUrl: '<%= asset_path("AngularJS/views/battles/show.html.haml") %>',
+			controller: 'BattlesCtrl'
+		}).when('/cart/:id', {
+			templateUrl: '<%= asset_path("AngularJS/views/cart/show.html.haml") %>',
+			controller: 'CartCtrl'
+		}).when('/playlists/:id', {
+			templateUrl: '<%= asset_path("AngularJS/views/playlists/show.html.haml") %>',
+			controller: 'PlaylistsCtrl'
+		}).when('/listenings', {
+			templateUrl: '<%= asset_path("AngularJS/views/listenings/index.html.haml") %>',
+			controller: 'ListeningsCtrl'
+		}).when('/search/:value', {
+			templateUrl: '<%= asset_path("AngularJS/views/search/index.html.haml") %>',
+			controller: 'SearchCtrl'
+		}).when('/explorer', {
+			templateUrl: '<%= asset_path("AngularJS/views/explorer/index.html.haml") %>',
+			controller: 'ExplorerCtrl'
+		}).when('/explorer/:influence', {
+			templateUrl: '<%= asset_path("AngularJS/views/explorer/index.html.haml") %>',
+			controller: 'ExplorerCtrl'
+		}).when('/explorer/:influence/:genre', {
+			templateUrl: '<%= asset_path("AngularJS/views/explorer/index.html.haml") %>',
+			controller: 'ExplorerCtrl'
+		});
+	}
 
-  $httpProvider.defaults.useXDomain = true;
-	delete $httpProvider.defaults.headers.common["X-Requested-With"];  
+	$httpProvider.defaults.useXDomain = true;
+	delete $httpProvider.defaults.headers.common["X-Requested-With"];
 }]);
 
 SoonzikApp.config(function(uiGmapGoogleMapApiProvider) {
-    uiGmapGoogleMapApiProvider.configure({
-        key: 'AIzaSyBdbSsqSM-wMia6xhlQmlVt5cDL18GUsk0',
-        v: '3.17',
-        libraries: 'weather,geometry,visualization'
-    });
-})
+		uiGmapGoogleMapApiProvider.configure({
+				key: 'AIzaSyBdbSsqSM-wMia6xhlQmlVt5cDL18GUsk0',
+				v: '3.17',
+				libraries: 'weather,geometry,visualization'
+		});
+});
+
+SoonzikApp.run(['$route', '$rootScope', '$location', function ($route, $rootScope, $location) {
+	var original = $location.path;
+	$location.path = function (path, reload) {
+		if (reload === false) {
+			var lastRoute = $route.current;
+			var un = $rootScope.$on('$locationChangeSuccess', function () {
+				$route.current = lastRoute;
+				un();
+			});
+		}
+		return original.apply($location, [path]);
+	};
+}])

@@ -42,6 +42,7 @@
 //= require ./AngularJS/controllers/PlaylistsController.js
 //= require ./AngularJS/controllers/FriendController.js
 //= require ./AngularJS/controllers/SearchController.js
+//= require ./AngularJS/controllers/ExplorerController.js
 //= require ./AngularJS/directives/autofocus.js
 //= require ./AngularJS/directives/autoscrollbottom.js
 //= require ./AngularJS/directives/battle.js

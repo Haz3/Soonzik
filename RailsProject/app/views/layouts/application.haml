@@ -11,7 +11,7 @@
     = csrf_meta_tags
 
   %body{ "ng-app" => "SoonzikApp" }
-    %header{ "ng-controller" => "HeaderCtrl", "ng-init" => "initHeader()" }
+    %header.index{ "ng-controller" => "HeaderCtrl", "ng-init" => "initHeader()" }
       %nav.top-bar-custom.row
         .small-3.columns.center-logo
           %span.helper
@@ -36,11 +36,9 @@
               %li
                 = link_to('News', news_index_path)
               %li
-                %a Explorer
+                = link_to('Explorer', explorer_path)
               %li
                 = link_to('Packs', packs_path)
-              %li
-                %a Monde Musical
               %li
                 = link_to('Battles', battles_path)
               %li

@@ -214,6 +214,7 @@ Rails.application.routes.draw do
   
   resources :votes
 
+  get '/explorer(/:influence(/:genre))' => 'others#explorer', as: "explorer"
   get 'messages' => 'chats#index'
   get '/search/:value' => 'others#search'
   root 'others#index'

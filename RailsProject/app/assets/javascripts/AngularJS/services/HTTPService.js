@@ -137,6 +137,12 @@ SoonzikApp.factory('HTTPService', ['$http', '$location', 'Upload', function ($ht
     },
     search: function(parameters) {
       return $http.get("http://api." + url + "/search" + urlParametersFormat(parameters));
+    },
+    getInfluences: function() {
+      return $http.get("http://api." + url + "/influences");
+    },
+    getGenre: function(id, parameters) {
+      return $http.get("http://api." + url + "/genres/" + id + urlParametersFormat(parameters));
     }
   }
 }]);

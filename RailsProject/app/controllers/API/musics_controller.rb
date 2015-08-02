@@ -30,9 +30,9 @@ module API
     def index
       begin
         if (@count.present? && @count == "true")
-          @returnValue = { content: Music.count }
+          @returnValue = { content: Music.where("album_id IS NOT NULL").count }
         else
-          @returnValue = { content: Music.all.as_json(:only => Music.miniKey, :include => {
+          @returnValue = { content: Music.where("album_id IS NOT NULL").all.as_json(:only => Music.miniKey, :include => {
                                                         :album => { :only => Album.miniKey },
                                                         :genres => { :only => Genre.miniKey },
                                                         :user => {:only => User.miniKey},
@@ -66,7 +66,7 @@ module API
     # 
     def show
       begin
-        music = Music.find_by_id(@id)
+        music = Music.where("album_id IS NOT NULL").find_by_id(@id)
         if (!music)
           codeAnswer 502
           defineHttp :not_found
@@ -124,14 +124,14 @@ module API
             end
 
             if (music_object == nil)          #music_object doesn't exist
-              music_object = Music.where(condition)
+              music_object = Music.where("album_id IS NOT NULL").where(condition)
             else                              #music_object exists
               music_object = music_object.where(condition)
             end
           end
           # - - - - - - - -
         else
-          music_object = Music.all            #no attribute specified
+          music_object = Music.where("album_id IS NOT NULL").all            #no attribute specified
         end
 
         order_asc = ""
@@ -265,7 +265,7 @@ module API
 
         # Find the music
         if (defined?@id)
-          music = Music.find_by_id(@id)
+          music = Music.where("album_id IS NOT NULL").find_by_id(@id)
         end
         if (music == nil)
           codeAnswer 502
@@ -310,7 +310,7 @@ module API
       begin
         if (@security)
           playlist = Playlist.find_by_id(@playlist_id)
-          music = Music.find_by_id(@id)
+          music = Music.where("album_id IS NOT NULL").find_by_id(@id)
           if (playlist && music && playlist.user_id == @user_id.to_i && !playlist.musics.include?(music))
             playlist_obj = PlaylistObject.create(music_id: music.id, playlist_id: playlist.id, row_order: :last)
             playlist_obj.musics << music

@@ -11,4 +11,7 @@ class OthersController < ApplicationController
 
 	def search
 	end
+
+	def explorer
+	end
 end

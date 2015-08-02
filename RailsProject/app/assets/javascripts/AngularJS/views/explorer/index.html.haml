@@ -1,0 +1,47 @@
+.explorerContainer{ "ng-init" => "explorerInit()" }
+	%loading{ "ng-if" => "loading == true" }
+	%h6.navigation{ "ng-if" => "loading == false" }
+		%span.clickable{ "ng-click" => "reset()" } Index
+		%span{ "ng-if" => "selectedInfluence != null" } >>
+		%span.clickable{ "ng-if" => "selectedInfluence != null", "ng-click" => "resetInfluence()" } {{ selectedInfluence.name }}
+		%span{ "ng-if" => "selectedGenre != null" } >> {{ selectedGenre.style_name }}
+	.explorer
+		.influences{ "ng-if" => "loading == false && state == 0" }
+			%h2 Choose an influence
+			%hr
+			%ul.influence.circle
+				%li{ "ng-repeat" => "influence in influences" }
+					%h5.clickable{ "ng-click" => "chooseInfluence(influence)" } {{ influence.name }} ({{ influence.genres.length }} genres)
+		.influenceDetail{ "ng-class" => "influenceWindow" }
+			%h2 {{ selectedInfluence.name }}
+			%hr
+			%loading{ "loading-type" => "'square'", "ng-if" => "loadingGenre == true" }
+			%ul.square
+				%li{ "ng-repeat" => "genre in selectedInfluence.genres" }
+					%h6.clickable{ "ng-click" => "chooseGenre(genre)" } {{ genre.style_name }}
+		.genreDetail{ "ng-class" => "genreWindow" }		
+			%h2 {{ selectedGenre.style_name }}
+			%hr
+				%table
+					%tr.item{ "ng-repeat" => "music in selectedGenre.musics" }
+						%td.small-1.medium-1.large-1
+							%p
+								{{ $index + 1 + ((currentPage - 1) * 30) }}
+						%td.small-2.medium-1
+							%music{ "music-object" => "music" }
+								%img{ "ng-src" => "{{ '/assets/albums/' + music.album.image }}" }
+						%td.small-5.medium-7.large-8
+							%music{ "music-object" => "music" } {{ music.title }}
+						%td.small-2
+							{{ formatTime(music.duration) }}
+						%td.small-2
+							%a{ href: "/albums/{{ music.album.id }}" }
+								%i.fi-arrow-right
+				.pagination-centered{ "ng-if" => "totalPage > 1" }
+					%ul.pagination
+						%li{ "class" => "arrow {{ (currentPage == 1) ? 'unavailable' : '' }}" }
+							%a{ href: ""} &laquo;
+						%li{ "ng-repeat" => "num in range(min(currentPage, 5) + min(totalPage - 1, 5)) track by $index", "class" => "{{ $index + 1 == min(currentPage, 5) ? 'current' : '' }}" }
+							%a{ href: ""} {{ currentPage - min(currentPage, 5) + $index + 1 }}
+						%li{ "class" => "arrow {{ (totalPage == currentPage) ? 'unavailable' : '' }}" }
+							%a{ href: ""} &raquo;
