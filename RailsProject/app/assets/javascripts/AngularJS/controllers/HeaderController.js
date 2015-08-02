@@ -21,4 +21,8 @@ SoonzikApp.controller('HeaderCtrl', ['$scope', "$routeParams", "$location", func
 		$location.path('/search/' + encodeURIComponent($scope.search.value));
 	}
 
+	$scope.closeMenu = function() {
+		$scope.menuOpen = false;
+	}
+
 }]);

@@ -2,7 +2,7 @@ SoonzikApp.controller('UsersCtrl', ['$scope', "$routeParams", 'SecureAuth', 'HTT
 	$scope.loading = true;
 
 	$scope.user = false;
-	$scope.show = {};
+	$scope.show = { style: "" };
 	$scope.form = { user: {} };
 	$scope.formError = {
 		user: {
@@ -57,6 +57,12 @@ SoonzikApp.controller('UsersCtrl', ['$scope', "$routeParams", 'SecureAuth', 'HTT
 				facebook: linkToNothing(dataProfile.facebook),
 				twitter: linkToNothing(dataProfile.twitter),
 				googlePlus: linkToNothing(dataProfile.googlePlus)
+			}
+
+			console.log(dataProfile);
+
+			if (dataProfile.background != null) {
+				$scope.show.style = "background: url('assets/usersImage/backgrounds/" + dataProfile.background + "')";
 			}
 
 

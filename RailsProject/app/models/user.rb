@@ -261,17 +261,17 @@ class User < ActiveRecord::Base
 
   # Filter of information for the API - Restricted
   def self.miniKey
-    [:id, :email, :username, :image, :description, :language]
+    [:id, :email, :username, :image, :description, :language, :background]
   end
 
   # Filter of information for the API - Less Restricted
   def self.bigKey
-    [:id, :email, :username, :fname, :lname, :birthday, :image, :description, :language, :facebook, :twitter, :googlePlus]
+    [:id, :email, :username, :fname, :lname, :birthday, :image, :description, :language, :facebook, :twitter, :googlePlus, :background]
   end
 
   # Filter of information for the API - No Restriction
   def self.notRestrictedKey
-    [:id, :email, :username, :fname, :lname, :birthday, :image, :description, :language, :facebook, :twitter, :googlePlus, :salt, :phoneNumber, :newsletter, :language, :created_at]
+    [:id, :email, :username, :fname, :lname, :birthday, :image, :description, :language, :facebook, :twitter, :googlePlus, :salt, :phoneNumber, :newsletter, :language, :created_at, :background]
   end
 
   # Check is the user is an artist

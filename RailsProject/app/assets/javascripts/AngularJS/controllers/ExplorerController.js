@@ -1,4 +1,4 @@
-SoonzikApp.controller('ExplorerCtrl', ['$scope', "$routeParams", "HTTPService", "NotificationService", "$timeout", function ($scope, $routeParams, HTTPService, NotificationService, $timeout) {
+SoonzikApp.controller('ExplorerCtrl', ['$scope', "$routeParams", "HTTPService", "NotificationService", "$timeout", "$location", function ($scope, $routeParams, HTTPService, NotificationService, $timeout, $location) {
 
 	$scope.loading = true;
 	$scope.loadingGenre = false;
@@ -48,6 +48,7 @@ SoonzikApp.controller('ExplorerCtrl', ['$scope', "$routeParams", "HTTPService", 
 
 	$scope.chooseInfluence = function(influence) {
 		$scope.selectedInfluence = influence;
+		$location.path('/explorer/' + $scope.selectedInfluence.id, false);
 		$scope.state = 1;
 		$scope.influenceOpen();
 	}
@@ -69,6 +70,7 @@ SoonzikApp.controller('ExplorerCtrl', ['$scope', "$routeParams", "HTTPService", 
 
 		HTTPService.getGenre(genre.id).then(function(response) {
 			$scope.selectedGenre = response.data.content;
+			$location.path('/explorer/' + $scope.selectedInfluence.id + "/" + $scope.selectedGenre.id, false);
 			$scope.loadingGenre = false;
 			$scope.genreOpen();
 		}, function(error) {
@@ -99,6 +101,7 @@ SoonzikApp.controller('ExplorerCtrl', ['$scope', "$routeParams", "HTTPService", 
 		$scope.loadingGenre = false;
 		$scope.genreWindow = { onTheLeft: false, displayable: false };
 		$scope.influenceWindow = { onTheLeft: false, displayable: false };
+		$location.path('/explorer/', false);
 	}
 
 	$scope.resetInfluence = function() {
@@ -108,6 +111,7 @@ SoonzikApp.controller('ExplorerCtrl', ['$scope', "$routeParams", "HTTPService", 
 			$scope.loadingGenre = false;
 			$scope.genreWindow = { onTheLeft: false, displayable: false };
 			$scope.influenceOpen();
+			$location.path('/explorer/' + $scope.selectedInfluence.id, false);
 		}
 	}
 

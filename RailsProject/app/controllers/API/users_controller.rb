@@ -720,6 +720,8 @@ module API
 
           if (@device.present? && @device == 'smartphone')
             smart = true
+          else
+            @file = { tempfile: @file.tempfile, content_type: @file.content_type, original_filename: @file.original_filename }
           end
 
           if acceptedContentType.include? @file[:content_type]
@@ -730,7 +732,7 @@ module API
             
             newFilename = Digest::SHA256.hexdigest("#{timestamp}--#{@file[:original_filename]}#{randomNumber}") + "-" + @file[:original_filename].gsub(/[^0-9A-Za-z\.-]/, '')
 
-            File.open(Rails.root.join('app', 'assets', 'images', 'usersImage', 'avatars', newFilename), 'wb') do |f|
+            File.open(Rails.root.join('app', 'assets', 'images', 'usersImage', ((@type != "background") ? 'avatars' : 'backgrounds'), newFilename), 'wb') do |f|
               f.write(@file[:tempfile].read) if smart == false
               f.write(@file[:tempfile]) if smart == true
             end
@@ -750,6 +752,7 @@ module API
           defineHttp :forbidden
         end
       rescue
+        puts $!, $@
         codeAnswer 504
         defineHttp :service_unavailable
       end

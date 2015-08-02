@@ -1,9 +1,7 @@
 .userProfile{ "ng-init" => "showInit()" }
   %loading{ "ng-if" => "loading == true" }
   .row{ "ng-if" => "loading == false" }
-    /#notice= notice
-    .background-profil
-      /=image_tag(@show.user.background)
+    .background-profil{ "style" => "{{ show.style }}" }
       .large-2.small-12.columns.large-centered
         .photo-profil-show.user.large-centered
           %img.photo-profil-user{ "ng-src" => '{{ "/assets/usersImage/avatars/" + show.user.image }}' }

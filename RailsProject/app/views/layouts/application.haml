@@ -24,7 +24,7 @@
               %a.alert.button.expand.radius{:href => "#", "ng-click" => "sendSearch()"}
                 =image_tag "loupe.png", :class => "loupe"
         .small-2.columns.menu
-          =image_tag "menu.png", :class => "menu-logo", "ng-click" => "switchMenu()"
+          =image_tag "menu.png", :class => "menu-logo", id: "menuBtn", "ng-click" => "switchMenu()", "click-outside" => "closeMenu()"
           - if user_signed_in?
             %ul.toAppend.no-bullet{ "ng-class" => "{ open: menuOpen }" }
               %li.clearfix
