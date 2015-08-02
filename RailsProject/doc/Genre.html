@@ -126,13 +126,16 @@ blue ? A particular name like magenta ?)</p>
 
 <h4 id="class-Genre-label-Associations">Associations<span><a href="#class-Genre-label-Associations">&para;</a> <a href="#top">&uarr;</a></span></h4>
 <ul><li>
-<p><code>has_and_belongs_to_many</code> - :musics</p>
+<p><code>has_and_belongs_to_many</code> - :musics — NOT ANYMORE</p>
 </li><li>
 <p><code>has_and_belongs_to_many</code> - :influences</p>
 </li><li>
 <p><code>has_and_belongs_to_many</code> - :descriptions</p>
 </li><li>
 <p><code>has_and_belongs_to_many</code> - :packs</p>
+</li><li>
+<p><code>has_and_belongs_to_many</code> - :finished_musics, -&gt; {
+where(“album_id IS NOT NULL”) }</p>
 </li></ul>
 		</section>
 
@@ -161,7 +164,7 @@ blue ? A particular name like magenta ?)</p>
 											<p>The strong parameters to save or update object</p>					
 											<div class="method-source-code" id="genre_params-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/models/genre.rb, line 38</span>
+								class="language-ruby"><span class="ruby-comment"># File app/models/genre.rb, line 40</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">genre_params</span>(<span class="ruby-identifier">parameters</span>)
   <span class="ruby-identifier">parameters</span>.<span class="ruby-identifier">require</span>(<span class="ruby-value">:genre</span>).<span class="ruby-identifier">permit</span>(<span class="ruby-value">:style_name</span>, <span class="ruby-value">:color_name</span>, <span class="ruby-value">:color_hexa</span>)
 <span class="ruby-keyword">end</span></code></pre>
@@ -185,7 +188,7 @@ blue ? A particular name like magenta ?)</p>
 <p>Fields returned : [:id, :style_name, :color_name, :color_hexa]</p>					
 											<div class="method-source-code" id="miniKey-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/models/genre.rb, line 33</span>
+								class="language-ruby"><span class="ruby-comment"># File app/models/genre.rb, line 35</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">miniKey</span>
   [<span class="ruby-value">:id</span>, <span class="ruby-value">:style_name</span>, <span class="ruby-value">:color_name</span>, <span class="ruby-value">:color_hexa</span>]
 <span class="ruby-keyword">end</span></code></pre>

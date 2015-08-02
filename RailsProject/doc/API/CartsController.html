@@ -222,7 +222,7 @@ the parameters, check at the model</p>
 <p>+cart [user_id]+ - Id of the user who has the cart</p>
 </li><li>
 <p>+cart [typeObj]+ - Model name of the object to add to the cart -&gt;
-“Music” | “Album” | “Pack”</p>
+“Music” | “Album”</p>
 </li><li>
 <p>+cart [obj_id]+ - Id of the object</p>
 </li><li>
@@ -257,11 +257,10 @@ the parameters, check at the model</p>
       <span class="ruby-keyword">if</span> (<span class="ruby-identifier">obj</span> <span class="ruby-operator">!=</span> <span class="ruby-keyword">nil</span>)
         <span class="ruby-keyword">case</span> <span class="ruby-ivar">@cart</span>[<span class="ruby-value">:typeObj</span>]
           <span class="ruby-keyword">when</span> <span class="ruby-string">&quot;Music&quot;</span>
+            <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>, <span class="ruby-string">&#39;music not sell, missing album_id&#39;</span> <span class="ruby-keyword">if</span> (<span class="ruby-identifier">obj</span>.<span class="ruby-identifier">album_id</span> <span class="ruby-operator">==</span> <span class="ruby-keyword">nil</span>)
             <span class="ruby-identifier">cart</span>.<span class="ruby-identifier">musics</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">obj</span>;
           <span class="ruby-keyword">when</span> <span class="ruby-string">&quot;Album&quot;</span>
             <span class="ruby-identifier">cart</span>.<span class="ruby-identifier">albums</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">obj</span>;
-          <span class="ruby-keyword">when</span> <span class="ruby-string">&quot;Pack&quot;</span>
-            <span class="ruby-identifier">cart</span>.<span class="ruby-identifier">packs</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">obj</span>;
         <span class="ruby-keyword">end</span>
 
         <span class="ruby-keyword">if</span> (<span class="ruby-identifier">cart</span>.<span class="ruby-identifier">save</span>)
@@ -321,7 +320,7 @@ the parameters, check at the model</p>
 </li></ul>					
 											<div class="method-source-code" id="show-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/carts_controller.rb, line 134</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/carts_controller.rb, line 133</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">show</span>
   <span class="ruby-keyword">begin</span>
     <span class="ruby-keyword">if</span> (<span class="ruby-operator">!</span><span class="ruby-ivar">@security</span>)
