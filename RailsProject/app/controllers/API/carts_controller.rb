@@ -58,7 +58,7 @@ module API
     # ==== Options
     # 
     # * +cart [user_id]+ - Id of the user who has the cart
-    # * +cart [typeObj]+ - Model name of the object to add to the cart -> "Music" | "Album" | "Pack"
+    # * +cart [typeObj]+ - Model name of the object to add to the cart -> "Music" | "Album"
     # * +cart [obj_id]+ - Id of the object
     # * +cart [gift]+ - Boolean to know if it's a gift or not
     # 
@@ -85,11 +85,10 @@ module API
           if (obj != nil)
             case @cart[:typeObj]
               when "Music"
+                raise ArgumentError, 'music not sell, missing album_id' if (obj.album_id == nil)
                 cart.musics << obj;
               when "Album"
                 cart.albums << obj;
-              when "Pack"
-                cart.packs << obj;
             end
 
             if (cart.save)
