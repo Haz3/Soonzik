@@ -4,16 +4,12 @@
     xmlns:local="using:SoonZik"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:viewmodels="clr-namespace:Soonzik.ViewModels"
-    xmlns:SampleData="using:Blend.SampleData.SampleDataSource"
-    xmlns:SampleData1="using:Blend.SampleData.SampleDataSource1"
-    xmlns:SampleData2="using:Blend.SampleData.ListNews"
-    x:Class="SoonZik.News"
+    xmlns:ViewModels="using:SoonZik.ViewModels"
+    x:Class="SoonZik.NewsView"
 	Background="#CCCCCC">
-	
-	<Page.Resources>
-		<SampleData2:ListNews x:Key="ListNews"/>
-		<DataTemplate x:Key="GroupTemplate">
+
+    <Page.Resources>
+        <DataTemplate x:Key="GroupTemplate">
 			<Grid Height="110" Width="480" Margin="10" >
 				<Grid.ColumnDefinitions>
 					<ColumnDefinition Width="Auto"/>
@@ -22,21 +18,33 @@
 				<Border Background="{StaticResource ListViewItemPlaceholderBackgroundThemeBrush}" Width="110" Height="110">
 					<Image Height="110" Width="110"/>
 				</Border>
-				<StackPanel Grid.Column="1" Margin="10,0,0,0">
-					<TextBlock Text="{Binding Property1}" Style="{StaticResource TitleTextBlockStyle}"/>
-					<TextBlock Text="{Binding Property2}" Style="{StaticResource CaptionTextBlockStyle}" TextWrapping="NoWrap"/>
-				</StackPanel>
 			</Grid>
 		</DataTemplate>
 	</Page.Resources>
-	
-	<Grid Background="#CCCCCC" DataContext="{Binding Source={StaticResource ListNews}}">
-		<Grid Height="80" VerticalAlignment="Top" Width="1920" Background="#B0B0B0">
+
+    <Grid Background="#CCCCCC">
+        <Grid Height="80" VerticalAlignment="Top" Width="1920" Background="#B0B0B0">
 			<TextBlock x:Name="news_txt" HorizontalAlignment="Left" Margin="100,10,0,0" TextWrapping="Wrap" Text="News" VerticalAlignment="Top" Height="55" Width="171" FontSize="53.333" Foreground="Black"/>
 			<Button x:Name="back_btn" Content="Button" HorizontalAlignment="Left" Margin="30,20,0,0" VerticalAlignment="Top" Style="{StaticResource NavigationBackButtonNormalStyle}" RequestedTheme="Light" Click="Button_Click"/>
 		</Grid>
-		<GridView Background="#b0b0b0" HorizontalAlignment="Left" Margin="42,164,0,0" VerticalAlignment="Top" Width="1836" Height="874" ItemTemplate="{StaticResource GroupTemplate}" ItemsSource="{Binding Groups}" IsSwipeEnabled="False" SelectionMode="Single"/>
+        <GridView ItemClick="GridView_ItemClick" ItemsSource="{Binding newslist}" Background="#b0b0b0" HorizontalAlignment="Left" Margin="42,164,0,0" VerticalAlignment="Top" Width="1836" Height="874" IsItemClickEnabled="True" IsSwipeEnabled="False" SelectionMode="None">
+            <GridView.DataContext>
+                <ViewModels:NewsViewModel/>
+            </GridView.DataContext>
+            
+            <GridView.ItemTemplate>
+                <DataTemplate>
+                    <Grid Width="250" Height="250">
+                        <Image Stretch="Fill" Source="http://assos-escrennes.fr/descibel-radio/wp-content/uploads/2015/01/Generic-News-Logo.png" VerticalAlignment="Top" HorizontalAlignment="Center"/>
+                        <StackPanel Orientation="Vertical" VerticalAlignment="Bottom" Margin="0,0,0,10">
+                            <TextBlock Text="{Binding title}" FontSize="25" Margin="10,0,0,0" TextTrimming="WordEllipsis" TextWrapping="Wrap" HorizontalAlignment="Left" Foreground="Black"/>
+                            <TextBlock Text="{Binding user.username}" FontSize="14" Margin="10,0,0,0" TextTrimming="WordEllipsis" TextWrapping="Wrap" HorizontalAlignment="Left" Foreground="Black"/>
+                        </StackPanel>
+                    </Grid>
+                </DataTemplate>
+            </GridView.ItemTemplate>    
+        </GridView>
 
-	</Grid>
+    </Grid>
 
 </Page>

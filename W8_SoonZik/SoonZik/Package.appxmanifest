@@ -22,8 +22,7 @@
   </Applications>
   <Capabilities>
     <Capability Name="internetClient" />
-    <Capability Name="internetClientServer" />
-    <Capability Name="privateNetworkClientServer" />
     <Capability Name="musicLibrary" />
+    <DeviceCapability Name="location" />
   </Capabilities>
 </Package>

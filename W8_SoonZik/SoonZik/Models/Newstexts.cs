@@ -6,13 +6,12 @@ using System.Threading.Tasks;
 
 namespace SoonZik.Models
 {
-    public class Comment
+    public class Newstexts
     {
         public int id { get; set; }
-        public int author_id {get; set;}
-        //public User author { get; set; }
+        public int news_id { get; set; }
+        public string title { get; set; }
         public string content { get; set; }
-        public DateTime create_at { get; set; }
-
+        public string language { get; set; }
     }
 }

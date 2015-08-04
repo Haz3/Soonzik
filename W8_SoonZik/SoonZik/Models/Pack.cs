@@ -10,8 +10,7 @@ namespace SoonZik.Models
     {
         public int id { get; set; }
         public string title { get; set; }
-        public Genre genre { get; set; }
         public double price { get; set; }
-        public List<Album> pack { get; set; }
+        public List<Album> albums { get; set; }
     }
 }

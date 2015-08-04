@@ -4,77 +4,105 @@
     xmlns:local="using:SoonZik"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:SampleData="using:Blend.SampleData.SampleDataSource8" xmlns:SampleData1="using:Blend.SampleData.SampleDataSource6" xmlns:SampleData2="using:Blend.SampleData.SampleDataSource5"
-    x:Class="SoonZik.Home"
+    xmlns:ViewModels="using:SoonZik.ViewModels"
+    xmlns:Tools="using:SoonZik.Tools"
+    x:Class="SoonZik.Views.Home"
     mc:Ignorable="d">
 
 
-	<Page.Resources>
-		<SampleData:SampleDataSource8 x:Key="SampleDataSource8" d:IsDataSource="True"/>
-		<SampleData1:SampleDataSource6 x:Key="SampleDataSource6" d:IsDataSource="True"/>
-		<SampleData2:SampleDataSource5 x:Key="SampleDataSource5" d:IsDataSource="True"/>
-		<DataTemplate x:Key="GroupTemplate">
-			<Grid Height="110" Width="480" Margin="10" >
-				<Grid.ColumnDefinitions>
-					<ColumnDefinition Width="Auto"/>
-					<ColumnDefinition Width="*"/>
-				</Grid.ColumnDefinitions>
-				<Border Background="{StaticResource ListViewItemPlaceholderBackgroundThemeBrush}" Width="110" Height="110">
-					<Image Height="110" Width="110"/>
-				</Border>
-				<StackPanel Grid.Column="1" Margin="10,0,0,0">
-					<TextBlock Text="{Binding Property1}" Style="{StaticResource TitleTextBlockStyle}"/>
-					<TextBlock Text="{Binding Property2}" Style="{StaticResource CaptionTextBlockStyle}" TextWrapping="NoWrap"/>
-				</StackPanel>
-			</Grid>
-		</DataTemplate>
-		<DataTemplate x:Key="GroupTemplate1">
-			<Grid Height="110" Width="480" Margin="10" >
-				<Grid.ColumnDefinitions>
-					<ColumnDefinition Width="Auto"/>
-					<ColumnDefinition Width="*"/>
-				</Grid.ColumnDefinitions>
-				<Border Background="{StaticResource ListViewItemPlaceholderBackgroundThemeBrush}" Width="110" Height="110">
-					<Image Source="{Binding Property3}" Height="110" Width="110"/>
-				</Border>
-				<StackPanel Grid.Column="1" Margin="10,0,0,0">
-					<TextBlock Text="{Binding Property1}" Style="{StaticResource TitleTextBlockStyle}"/>
-					<TextBlock Text="{Binding Property2}" Style="{StaticResource CaptionTextBlockStyle}" TextWrapping="NoWrap"/>
-				</StackPanel>
-			</Grid>
-		</DataTemplate>
-		<DataTemplate x:Key="GroupTemplate2">
-			<Grid Height="110" Width="480" Margin="10" >
-				<Grid.ColumnDefinitions>
-					<ColumnDefinition Width="Auto"/>
-					<ColumnDefinition Width="*"/>
-				</Grid.ColumnDefinitions>
-				<Border Background="{StaticResource ListViewItemPlaceholderBackgroundThemeBrush}" Width="110" Height="110">
-					<Image Source="{Binding Property3}" Height="110" Width="110"/>
-				</Border>
-				<StackPanel Grid.Column="1" Margin="10,0,0,0">
-					<TextBlock Text="{Binding Property1}" Style="{StaticResource TitleTextBlockStyle}"/>
-					<TextBlock Text="{Binding Property2}" Style="{StaticResource CaptionTextBlockStyle}" TextWrapping="NoWrap"/>
-				</StackPanel>
-			</Grid>
-		</DataTemplate>
-	</Page.Resources>
+    <Page.Resources>
+        <DataTemplate x:Key="GroupTemplate">
+            <Grid Height="110" Width="480" Margin="10" >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+            </Grid>
+        </DataTemplate>
+        <DataTemplate x:Key="GroupTemplate1">
+            <Grid Height="110" Width="480" Margin="10" >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+            </Grid>
+        </DataTemplate>
+        <DataTemplate x:Key="GroupTemplate2">
+            <Grid Height="110" Width="480" Margin="10" >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+            </Grid>
+        </DataTemplate>
+    </Page.Resources>
 
 
-	<Grid Background="#CCCCCC" HorizontalAlignment="Left" Height="1080" VerticalAlignment="Top" Width="1920" DataContext="{Binding Source={StaticResource SampleDataSource5}}">
+    <Grid Background="#CCCCCC" HorizontalAlignment="Left" Height="1080" VerticalAlignment="Top" Width="1920">
 
-		<Grid Background="#B0B0B0" Width="1920" Height="80" Margin="0,0,0,997">
-			<Button x:Name="news_btn" x:Uid="news_btn" Content="News" HorizontalAlignment="Left" Margin="-1,1,0,0" VerticalAlignment="Top" Height="86" Width="182" FontFamily="Berlin Sans FB Demi" FontSize="53.333" BorderBrush="{x:Null}" Foreground="#FF27AAE1" Click="news_btn_Click"/>
-            <Button x:Name="shop_btn" x:Uid="shop_btn" Content="Magasin" HorizontalAlignment="Left" Margin="187,1,0,-7" VerticalAlignment="Top" Height="86" Width="253" Background="{x:Null}" FontFamily="Berlin Sans FB Demi" FontSize="53.333" BorderBrush="{x:Null}" Foreground="#FF27AAE1" Click="shop_btn_Click"/>
-            <Button x:Name="community_btn" x:Uid="community_btn" Content="Communauté" HorizontalAlignment="Left" Margin="446,1,0,-7" VerticalAlignment="Top" Height="86" Width="369" Background="{x:Null}" FontFamily="Berlin Sans FB Demi" FontSize="53.333" BorderBrush="{x:Null}" Foreground="#FF27AAE1" Click="community_btn_Click"/>
-            <Button x:Name="audio_player_btn" x:Uid="audio_player_btn" Content="Lecteur Audio" HorizontalAlignment="Left" Margin="824,1,0,-7" VerticalAlignment="Top" Height="86" Width="390" Background="{x:Null}" FontFamily="Berlin Sans FB Demi" FontSize="53.333" BorderBrush="{x:Null}" Foreground="#FF27AAE1" Click="audio_player_btn_Click"/>
-		</Grid>
-		<ListView x:Name="News" Background="#B0B0B0" HorizontalAlignment="Left" Height="800" Margin="154,220,0,0" VerticalAlignment="Top" Width="500" ItemTemplate="{StaticResource GroupTemplate}" ItemsSource="{Binding Groups}"/>
-		<ListView x:Name="Music" Background="#B0B0B0" HorizontalAlignment="Left" Height="800" Margin="710,220,0,0" VerticalAlignment="Top" Width="500" DataContext="{Binding Source={StaticResource SampleDataSource6}}" ItemTemplate="{StaticResource GroupTemplate1}" ItemsSource="{Binding Groups}"/>
-		<ListView x:Name="Community" Background="#B0B0B0" HorizontalAlignment="Left" Height="800" Margin="1266,220,0,0" VerticalAlignment="Top" Width="500" DataContext="{Binding Source={StaticResource SampleDataSource8}}" ItemTemplate="{StaticResource GroupTemplate2}" ItemsSource="{Binding Groups}"/>
+        <StackPanel Orientation="Horizontal" Background="#FFB0B0B0" Width="1920" Height="80" Margin="0,0,0,1000">
+            <Button x:Name="news_btn" x:Uid="news_btn" Content="News" HorizontalAlignment="Left" VerticalAlignment="Top" Height="72" Width="160" FontFamily="Berlin Sans FB Demi" FontSize="40" BorderBrush="White" Click="news_btn_Click" Foreground="White" Margin="10,5,10,0" Background="#FF27AAE1"/>
+            <Button x:Name="explorer_btn" x:Uid="explorer_btn" Content="Explorer" HorizontalAlignment="Left" VerticalAlignment="Top" Height="72" Width="203" Background="#FF27AAE1" FontFamily="Berlin Sans FB Demi" FontSize="40" BorderBrush="White" Click="explorer_btn_Click" Foreground="White" Margin="10,5,10,0"/>
+            <Button x:Name="concert_btn" x:Uid="concert_btn" Content="Concert" HorizontalAlignment="Left" VerticalAlignment="Top" Height="72" Width="190" Background="#FF27AAE1" FontFamily="Berlin Sans FB Demi" FontSize="40" BorderBrush="White" Click="concert_btn_Click" Foreground="White" Margin="10,5,10,0"/>
+            <Button x:Name="battle_btn" x:Uid="battle_btn" Content="Battle" HorizontalAlignment="Left" VerticalAlignment="Top" Height="72" Width="165" Background="#FF27AAE1" FontFamily="Berlin Sans FB Demi" FontSize="40" BorderBrush="White" Click="battle_btn_Click" Foreground="White" Margin="10,5,10,0"/>
+            <Button x:Name="shop_btn" x:Uid="shop_btn" Content="Magasin" HorizontalAlignment="Left" VerticalAlignment="Top" Height="72" Width="223" Background="#FF27AAE1" FontFamily="Berlin Sans FB Demi" FontSize="40" BorderBrush="White" Click="shop_btn_Click" Foreground="White" Margin="10,5,10,0"/>
+            <Button x:Name="audio_player_btn" x:Uid="audio_player_btn" Content="Lecteur Audio" HorizontalAlignment="Left" VerticalAlignment="Top" Height="72" Width="325" Background="#FF27AAE1" FontFamily="Berlin Sans FB Demi" FontSize="40" BorderBrush="White" Click="audio_player_btn_Click" Foreground="White" Margin="10,5,10,0"/>
+            <Button x:Name="sign_out" x:Uid="sign_out_btn" Content="Se deconnecter" HorizontalAlignment="Left" VerticalAlignment="Top" Height="68" Width="197" Background="Red" FontFamily="Berlin Sans FB Demi" FontSize="20" BorderBrush="White" Foreground="White" Margin="10,5,10,0" Click="sign_out_Click"/>
+        </StackPanel>
 
+
+
+        <ListView ItemClick="News_ItemClick" ItemsSource="{Binding newslist}" x:Name="News" Background="#B0B0B0" HorizontalAlignment="Left" Height="800" Margin="154,220,0,0" VerticalAlignment="Top" Width="500"  IsItemClickEnabled="True" IsSwipeEnabled="False" SelectionMode="None">
+            <ListView.DataContext>
+                <ViewModels:NewsViewModel/>
+            </ListView.DataContext>
+
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{Binding title}" FontSize="24"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock>
+								<Run Text="Auteur:"/>
+                            </TextBlock>
+                            <TextBlock Text="{Binding user.username}" FontSize="16" Margin="20,0,0,0"/>
+                        </StackPanel>
+
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+        <ListView ItemClick="Music_ItemClick" ItemsSource="{Binding albumlist}" x:Name="Music" Background="#B0B0B0" HorizontalAlignment="Left" Height="800" Margin="710,220,0,0" VerticalAlignment="Top" Width="500" IsItemClickEnabled="True" IsSwipeEnabled="False" SelectionMode="None">
+            <ListView.DataContext>
+                <ViewModels:AlbumViewModel/>
+            </ListView.DataContext>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel>
+                        <StackPanel Orientation="Horizontal" x:Name="ID">
+                            <TextBlock>
+								<Run Text="Title:"/>
+                            </TextBlock>
+                            <TextBlock Text="{Binding title}" Margin="20,0,0,0"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" x:Name="Title">
+                            <TextBlock>
+								<Run Text="Artist:"/>
+                            </TextBlock>
+                            <TextBlock Text="{Binding user.username}" Margin="20,0,0,0"/>
+                        </StackPanel>
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <ListView x:Name="Community" Background="#B0B0B0" HorizontalAlignment="Left" Height="800" Margin="1266,220,0,0" VerticalAlignment="Top" Width="500" ItemTemplate="{StaticResource GroupTemplate2}"  IsItemClickEnabled="True" IsSwipeEnabled="False" SelectionMode="None"/>
         <TextBlock x:Name="news_txt" x:Uid="news_txt" HorizontalAlignment="Left" Margin="154,159,0,0" TextWrapping="Wrap" Text="Dernières news" VerticalAlignment="Top" Height="50" Width="500" FontSize="40" Foreground="#FF27AAE1"/>
         <TextBlock x:Name="music_txt" x:Uid="music_txt" Margin="710,159,0,0" TextWrapping="Wrap" Text="Musique" VerticalAlignment="Top" Height="50" Width="500" FontSize="40" Foreground="#FF27AAE1" HorizontalAlignment="Left"/>
-		<TextBlock x:Name="community_txt" x:Uid="community_txt" HorizontalAlignment="Left" Margin="1266,159,0,0" TextWrapping="Wrap" Text="Communauté" VerticalAlignment="Top" Height="50" Width="500" FontSize="40" Foreground="#FF27AAE1"/>
-	</Grid>
+        <TextBlock x:Name="community_txt" x:Uid="community_txt" HorizontalAlignment="Left" Margin="1266,159,0,0" TextWrapping="Wrap" Text="Communauté" VerticalAlignment="Top" Height="50" Width="500" FontSize="40" Foreground="#FF27AAE1"/>
+        <TextBlock x:Name="hello_tb" HorizontalAlignment="Left" Margin="1400,85,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="55" Width="455" FontSize="25"/>
+
+    </Grid>
 </Page>

@@ -5,41 +5,46 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Runtime.CompilerServices;
 using SoonZik.Models;
+using SoonZik.Tools;
+using System.Diagnostics;
+using Windows.UI.Popups;
 
 namespace SoonZik.ViewModels
 {
-   public class NewsViewModel : INotifyPropertyChanged
+    class NewsViewModel
     {
-       public List<News> newslist;
-
-
-       public List<News> NewsList
-       {
-           get { return NewsList; }
-           set { NotifyPropertyChanged(ref newslist, value); }
-       }
-
-        public event PropertyChangedEventHandler PropertyChanged ;
-        public void NotifyPropertyChanged ( string nomPropriete )
-        {
-            if (PropertyChanged != null )
-              PropertyChanged (this , new PropertyChangedEventArgs (nomPropriete));
-        }
-
-        private bool NotifyPropertyChanged <T> (ref T variable , T valeur , [CallerMemberName] string nomPropriete = null)
-        {
-            if (object.Equals(variable, valeur))
-                return false;
-            variable = valeur;
-            NotifyPropertyChanged (nomPropriete);
-            return true;
-        }
+        public ObservableCollection<News> newslist { get; set; }
 
         public NewsViewModel()
         {
-            NewsList = new List<News>();
+            load_news();
+        }
+
+        async void load_news()
+        {
+            Exception exception = null;
+            var request = new Http_get();
+            newslist = new ObservableCollection<News>();
+            List<News> list = new List<News>();
+
+            try
+            {
+                var news = (List<News>)await request.get_object_list(list, "news");
+
+                foreach (var item in news)
+                    newslist.Add(item);
+            }
+            catch (Exception e)
+            {
+                exception = e;
+            }
+
+            if (exception != null)
+            {
+                MessageDialog msgdlg = new MessageDialog(exception.Message,"News error");
+                //await msgdlg.ShowAsync();
+            }
         }
     }
 }

@@ -12,20 +12,18 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
-using SoonZik.ViewModels;
 using SoonZik.Models;
-using SoonZik.Views;
 
-// Pour en savoir plus sur le modèle d'élément Page vierge, consultez la page http://go.microsoft.com/fwlink/?LinkId=234238
+// The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
-namespace SoonZik
+namespace SoonZik.Views
 {
     /// <summary>
-    /// Une page vide peut être utilisée seule ou constituer une page de destination au sein d'un frame.
+    /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class NewsView : Page
+    public sealed partial class Album : Page
     {
-        public NewsView()
+        public Album()
         {
             this.InitializeComponent();
         }
@@ -35,10 +33,16 @@ namespace SoonZik
             this.Frame.GoBack();
         }
 
-        private void GridView_ItemClick(object sender, ItemClickEventArgs e)
+        protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            var item = ((News)e.ClickedItem);
-            this.Frame.Navigate(typeof(NewsDetails), item);
+            SoonZik.Models.Album elem = e.Parameter as SoonZik.Models.Album;
+            album_artist.Text = elem.user.username;
+            album_title.Text = elem.title;
+            album_year.Text = elem.yearProd.ToString();
+            album_price.Text = elem.price.ToString();
+            album_music_listview.ItemsSource = elem.musics;
+            
         }
+
     }
 }

@@ -13,21 +13,20 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using SoonZik.ViewModels;
-using SoonZik.Models;
-using SoonZik.Views;
 
-// Pour en savoir plus sur le modèle d'élément Page vierge, consultez la page http://go.microsoft.com/fwlink/?LinkId=234238
+// The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
-namespace SoonZik
+namespace SoonZik.Views
 {
     /// <summary>
-    /// Une page vide peut être utilisée seule ou constituer une page de destination au sein d'un frame.
+    /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class NewsView : Page
+    public sealed partial class Signup : Page
     {
-        public NewsView()
+        public Signup()
         {
             this.InitializeComponent();
+            DataContext = new SignupViewModel();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -35,10 +34,9 @@ namespace SoonZik
             this.Frame.GoBack();
         }
 
-        private void GridView_ItemClick(object sender, ItemClickEventArgs e)
+        private void signup_btn_Click(object sender, RoutedEventArgs e)
         {
-            var item = ((News)e.ClickedItem);
-            this.Frame.Navigate(typeof(NewsDetails), item);
+
         }
     }
 }

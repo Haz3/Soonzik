@@ -9,11 +9,11 @@ namespace SoonZik.Models
     public class Album
     {
         public int id { get; set; }
-        public User artist { get; set; }
         public string title { get; set; }
-        public Genre genre { get; set; }
+        public User user { get; set; }
         public double price { get; set; }
-        public int year { get; set; }
-        public List<Music> music_list { get; set; }
+        public int yearProd { get; set; }
+        public string image { get; set; }
+        public List<Music> musics { get; set; }
     }
 }

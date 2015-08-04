@@ -4,25 +4,16 @@
     xmlns:local="using:SoonZik"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:SampleData="using:Blend.SampleData.SampleDataSource"
     x:Class="SoonZik.music_player"
     mc:Ignorable="d">
 	
 	<Page.Resources>
-		<SampleData:SampleDataSource x:Key="SampleDataSource" d:IsDataSource="True"/>
 		<DataTemplate x:Key="GroupTemplate">
 			<Grid Height="110" Width="480" Margin="10" >
 				<Grid.ColumnDefinitions>
 					<ColumnDefinition Width="Auto"/>
 					<ColumnDefinition Width="*"/>
 				</Grid.ColumnDefinitions>
-				<Border Background="{StaticResource ListViewItemPlaceholderBackgroundThemeBrush}" Width="110" Height="110">
-					<Image Source="{Binding Property3}" Height="110" Width="110"/>
-				</Border>
-				<StackPanel Grid.Column="1" Margin="10,0,0,0">
-					<TextBlock Text="{Binding Property1}" Style="{StaticResource TitleTextBlockStyle}"/>
-					<TextBlock Text="{Binding Property2}" Style="{StaticResource CaptionTextBlockStyle}" TextWrapping="NoWrap"/>
-				</StackPanel>
 			</Grid>
 		</DataTemplate>
 		<DataTemplate x:Key="GroupTemplate1">
@@ -31,18 +22,11 @@
 					<ColumnDefinition Width="Auto"/>
 					<ColumnDefinition Width="*"/>
 				</Grid.ColumnDefinitions>
-				<Border Background="{StaticResource ListViewItemPlaceholderBackgroundThemeBrush}" Width="110" Height="110">
-					<Image Source="{Binding Property3}" Height="110" Width="110"/>
-				</Border>
-				<StackPanel Grid.Column="1" Margin="10,0,0,0">
-					<TextBlock Text="{Binding Property1}" Style="{StaticResource TitleTextBlockStyle}"/>
-					<TextBlock Text="{Binding Property2}" Style="{StaticResource CaptionTextBlockStyle}" TextWrapping="NoWrap"/>
-				</StackPanel>
 			</Grid>
 		</DataTemplate>
 	</Page.Resources>
 	
-	<Grid Background="#FFDEDEDE" DataContext="{Binding Source={StaticResource SampleDataSource}}">
+	<Grid Background="#FFDEDEDE">
 		<Grid Height="80" VerticalAlignment="Top" Width="1920" Background="#B0B0B0">
             <TextBlock x:Name="music_player_txt" x:Uid="music_player_txt" HorizontalAlignment="Left" Margin="100,10,0,0" TextWrapping="Wrap" Text="Lecteur audio" VerticalAlignment="Top" Height="55" Width="351" FontSize="53.333" Foreground="Black"/>
 			<Button x:Name="back_btn" Content="Button" HorizontalAlignment="Left" Margin="30,20,0,0" VerticalAlignment="Top" Style="{StaticResource NavigationBackButtonNormalStyle}" RequestedTheme="Light" Click="Button_Click"/>
@@ -93,7 +77,7 @@
 					<Image Source="ms-appx:///Assets/music_player_icons/Mute.png" Height="33" Width="16" Stretch="Fill" VerticalAlignment="Center" HorizontalAlignment="Right"/>
 				</Button>
 			</Grid>
-			<ListView x:Name="Playlist" HorizontalAlignment="Left" Height="482" Margin="899,171,0,0" VerticalAlignment="Top" Width="321" ItemTemplate="{StaticResource GroupTemplate}" ItemsSource="{Binding Groups}"/>
+			<ListView x:Name="Playlist" HorizontalAlignment="Left" Height="482" Margin="899,171,0,0" VerticalAlignment="Top" Width="321" ItemTemplate="{StaticResource GroupTemplate}"/>
             <Button x:Name="new_playlist_btn" x:Uid="new_playlist_btn" Content="Créer" HorizontalAlignment="Left" Margin="1363,180,0,0" VerticalAlignment="Top" Width="138" Click="new_playlist_btn_Click"/>
             <Button x:Name="add_playlist_btn" x:Uid="add_playlist_btn" Content="Modifier" HorizontalAlignment="Left" Margin="1363,230,0,0" VerticalAlignment="Top" Width="138"/>
             <Button x:Name="remove_playlist_btn" x:Uid="remove_playlist_btn" Content="Supprimer" HorizontalAlignment="Left" Margin="1363,279,0,0" VerticalAlignment="Top" Width="138"/>
