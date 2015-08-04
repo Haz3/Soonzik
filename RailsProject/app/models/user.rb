@@ -138,8 +138,8 @@ class User < ActiveRecord::Base
     minimum: 3,
     maximum: 40,
     too_short: "must have at least %{count} letters",
-    too_long: "must have at most %{count} letters"
-  }
+    too_long: "must have at most %{count} letters",
+  }, format: /\A[a-zA-Z0-9]{3,40}\z/
   validates :idAPI, length: { is: 40 }
   validates :secureKey, length: { is: 64 }
   validates :salt, length: { is: 40 }

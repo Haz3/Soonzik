@@ -60,7 +60,7 @@ module API
     # * +cart [user_id]+ - Id of the user who has the cart
     # * +cart [typeObj]+ - Model name of the object to add to the cart -> "Music" | "Album"
     # * +cart [obj_id]+ - Id of the object
-    # * +cart [gift]+ - Boolean to know if it's a gift or not
+    # * +gift_user_id+ - (Optionnal) If it is a gift, tell the user who will get the gift
     # 
     # ===== HTTP VALUE
     # 
@@ -69,10 +69,11 @@ module API
     # - +503+ - Error from server
     # 
     def save
+      gift_present = false
+
       begin
         if (@security && @cart[:user_id] == @user_id)
           raise ArgumentError, 'user_id missing' if (!defined?@cart[:user_id])
-          raise ArgumentError, 'gift missing' if (!defined?@cart[:gift])
           raise ArgumentError, 'typeObj missing' if (!defined?@cart[:typeObj])
           raise ArgumentError, 'obj_id missing' if (!defined?@cart[:obj_id])
 
@@ -91,16 +92,40 @@ module API
                 cart.albums << obj;
             end
 
+            gift = nil
+
+            if (@gift_user_id.present? && User.find_by_id(@gift_user_id) != nil)
+              gift_present = true
+
+              gift = Gift.new
+              gift.to_user = @gift_user_id
+              gift.from_user = @user_id
+              # check if the object exists
+              if (obj != nil)
+                case @cart[:typeObj]
+                  when "Music"
+                    gift.musics << obj;
+                  when "Album"
+                    gift.albums << obj;
+                end
+              end
+
+              if (gift.save)
+                cart.gift_id = gift.id
+              end
+            end
+
             if (cart.save)
               @returnValue = { content: cart.as_json(:include => {
-                                                                    :user => {:only => User.miniKey() },
-                                                                    :musics => { :only => Music.miniKey() },
-                                                                    :albums => { :only => Album.miniKey() },
-                                                                    :packs => { :only => Pack.miniKey() }
-                                                                  }) }
+                                                      :user => {:only => User.miniKey() },
+                                                      :musics => { :only => Music.miniKey() },
+                                                      :albums => { :only => Album.miniKey() },
+                                                      :gift => { :only => Gift.miniKey }
+                                                    }, only: Cart.miniKey) }
               codeAnswer 201
               defineHttp :created
             else
+              gift.destroy if gift_present == true
               @returnValue = { content: cart.errors.to_hash.to_json }
               codeAnswer 503
               defineHttp :service_unavailable
@@ -140,11 +165,12 @@ module API
           if (cart.size == 0)
             codeAnswer 202
           else
-            @returnValue = { content: cart.as_json(only: [:id],
+            @returnValue = { content: cart.as_json(only: Cart.miniKey,
               :include => {
                 user: { only: User.miniKey },
                 albums: { only: Album.miniKey },
-                musics: { only: Music.miniKey }
+                musics: { only: Music.miniKey },
+                :gift => { :only => Gift.miniKey }
               }) }
             codeAnswer 200
           end

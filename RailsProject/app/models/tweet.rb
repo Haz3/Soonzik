@@ -22,7 +22,7 @@ class Tweet < ActiveRecord::Base
   #
   # Fields returned : [:id, :msg]
   def self.miniKey
-  	[:id, :msg]
+  	[:id, :msg, :created_at]
   end
   
   # The strong parameters to save or update object

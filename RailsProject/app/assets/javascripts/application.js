@@ -54,6 +54,7 @@
 //= require ./AngularJS/directives/submitInput.js
 //= require ./AngularJS/directives/wavesurfer.js
 //= require ./AngularJS/directives/orbit.js
+//= require ./AngularJS/directives/tweet.js
 //= require ./AngularJS/services/SecureAuth.js
 //= require ./AngularJS/services/HTTPService.js
 //= require ./AngularJS/services/NotificationService.js

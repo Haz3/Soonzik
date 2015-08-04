@@ -2,7 +2,10 @@ SoonzikApp.controller('UsersCtrl', ['$scope', "$routeParams", 'SecureAuth', 'HTT
 	$scope.loading = true;
 
 	$scope.user = false;
-	$scope.show = { style: "" };
+	$scope.show = { style: "", tweets: { my: [], others: [] } };
+	$scope.tweet = {
+		input: ""
+	}
 	$scope.form = { user: {} };
 	$scope.formError = {
 		user: {
@@ -43,28 +46,64 @@ SoonzikApp.controller('UsersCtrl', ['$scope', "$routeParams", 'SecureAuth', 'HTT
 			$scope.user = current_user;
 			$scope.user.followers = [];
 		}
-		var id = $routeParams.id;
+		var id = null;
 
-		HTTPService.getProfile(id).then(function(profile) {
+		HTTPService.getProfile($routeParams.id).then(function(profile) {
 			/*- Begin get Profile -*/
 
 			var dataProfile = profile.data.content;
 			// Initialisation of the user profile
 			$scope.show.user = {
-				id: id,
+				id: dataProfile.id,
 				username: dataProfile.username,
 				image: dataProfile.image,
 				facebook: linkToNothing(dataProfile.facebook),
 				twitter: linkToNothing(dataProfile.twitter),
 				googlePlus: linkToNothing(dataProfile.googlePlus)
 			}
-
-			console.log(dataProfile);
+			id = dataProfile.id;
 
 			if (dataProfile.background != null) {
 				$scope.show.style = "background: url('assets/usersImage/backgrounds/" + dataProfile.background + "')";
 			}
 
+			/* Now I have the username so I get the tweets during the rest of the informations */
+
+			var paramsTweet = [
+				{ key: encodeURIComponent("attribute[user_id]"), value: id },
+				{ key: encodeURIComponent("order_by_desc[]"), value: "created_at" },
+				{ key: "limit", value: 20 }
+			];
+
+			HTTPService.findTweet(paramsTweet).then(function(response) {
+				$scope.show.tweets.my = response.data.content;
+
+				/*
+				var paramsTweet = [
+					{ key: encodeURIComponent("attribute[msg]"), value: encodeURIComponent("%" + $scope.user.username + "%") }
+				];
+
+				HTTPService.findTweet(paramsTweet).then(function(response) {
+					tmp_tweets = response.data.content;
+
+					// Loop backward to splice inside
+					for (var i = tmp_tweets.length - 1 ; i >= 0 ; i--) {
+						if (tmp_tweets[i].user.id == id) {
+							tmp_tweets.splice(i, 1);
+						}
+					}
+
+					$scope.show.tweets.others = tmp_tweets;
+
+				}, function(error) {
+					NotificationService.error("");
+				});*/
+
+			}, function(error) {
+				NotificationService.error("");
+			});
+
+			/* Other informations */
 
 			HTTPService.isArtist(id).then(function(artistInformation) {
 				/*- Begin isArtist -*/
@@ -308,6 +347,52 @@ SoonzikApp.controller('UsersCtrl', ['$scope', "$routeParams", 'SecureAuth', 'HTT
 				NotificationService.error("An error occured while following an user");
 			});
 		}
+	}
+
+	$scope.comment = function(username) {
+		$("#inputTweet").focus();
+		$scope.tweet.input = "@" + username + " ";
+	}
+
+	$scope.sendTweet = function() {
+		if ($scope.tweet.input.length < 140) {
+
+			var parameters = {
+				msg: $scope.tweet.input,
+				user_id: $scope.show.user.id
+			}
+
+			SecureAuth.securedTransaction(function(key, user_id) {
+				parameters.user_id = user_id;
+				parameters.secureKey = key;
+				HTTPService.saveTweet(parameters).then(function(response) {
+					$scope.show.tweets.my.unshift(response.data.content);
+					$scope.tweet.input = "";
+				}, function(error) {
+					NotificationService.error("Error while saving the tweet");
+				});
+			}, function(error) {
+				NotificationService.error("Error while saving the tweet");
+			});
+
+		} else {
+			NotificationService.info("Your message is too big. Length max. is 140 characters.");
+		}
+	}
+
+	$scope.reloadTweet = function() {
+		var paramsTweet = [
+			{ key: encodeURIComponent("attribute[user_id]"), value: id },
+			{ key: encodeURIComponent("order_by_desc[]"), value: "created_at" },
+			{ key: "limit", value: 20 },
+			{ key: "offset", value: $scope.show.tweets.my.length }
+		];
+
+		HTTPService.findTweet(paramsTweet).then(function(response) {
+			$scope.show.tweets.my = $scope.show.tweets.my.concat(response.data.content);
+		}, function(error) {
+			NotificationService.error("");
+		});
 	}
 
 	/* Utils function */

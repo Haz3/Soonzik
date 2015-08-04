@@ -69,7 +69,11 @@ module API
     # 
     def show
       begin
-        user = User.find_by_id(@id)
+        if (@id =~ /\A[-+]?\d*\.?\d+\z/)
+          user = User.find_by_id(@id)
+        else
+          user = User.find_by_username(@id)
+        end
         if (!user)
           codeAnswer 502
           defineHttp :not_found

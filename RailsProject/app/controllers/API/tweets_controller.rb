@@ -85,7 +85,7 @@ module API
     # ==== Options
     # 
     # * +:tweet [user_id]+ - Id of the user who has the tweet
-    # * +:tweet [description]+ - The text of the tweet
+    # * +:tweet [msg]+ - The text of the tweet
     # 
     # ===== HTTP VALUE
     # 

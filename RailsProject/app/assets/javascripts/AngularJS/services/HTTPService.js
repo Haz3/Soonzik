@@ -143,6 +143,12 @@ SoonzikApp.factory('HTTPService', ['$http', '$location', 'Upload', function ($ht
     },
     getGenre: function(id, parameters) {
       return $http.get("http://api." + url + "/genres/" + id + urlParametersFormat(parameters));
+    },
+    findTweet: function(parameters) {
+      return $http.get("http://api." + url + "/tweets/find" + urlParametersFormat(parameters));
+    },
+    saveTweet: function(parameters) {
+      return $http.post("http://api." + url + "/tweets/save", parameters);
     }
   }
 }]);

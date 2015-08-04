@@ -56,6 +56,10 @@ class UsersController < ApplicationController
   
   private
     def set_user
-      @user = User.find(params[:id])
+      if (params[:id].to_s =~ /\A[-+]?\d*\.?\d+\z/)
+        user = User.find_by_id(params[:id].to_s)
+      else
+        user = User.find_by_username(params[:id].to_s)
+      end
     end
 end
