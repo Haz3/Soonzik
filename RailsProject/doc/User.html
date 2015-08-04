@@ -316,7 +316,7 @@ subscribed to the newsletter</p>
 							<pre class="prettyprint linenums"><code 
 								class="language-ruby"><span class="ruby-comment"># File app/models/user.rb, line 268</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">bigKey</span>
-  [<span class="ruby-value">:id</span>, <span class="ruby-value">:email</span>, <span class="ruby-value">:username</span>, <span class="ruby-value">:fname</span>, <span class="ruby-value">:lname</span>, <span class="ruby-value">:birthday</span>, <span class="ruby-value">:image</span>, <span class="ruby-value">:description</span>, <span class="ruby-value">:language</span>, <span class="ruby-value">:facebook</span>, <span class="ruby-value">:twitter</span>, <span class="ruby-value">:googlePlus</span>]
+  [<span class="ruby-value">:id</span>, <span class="ruby-value">:email</span>, <span class="ruby-value">:username</span>, <span class="ruby-value">:fname</span>, <span class="ruby-value">:lname</span>, <span class="ruby-value">:birthday</span>, <span class="ruby-value">:image</span>, <span class="ruby-value">:description</span>, <span class="ruby-value">:language</span>, <span class="ruby-value">:facebook</span>, <span class="ruby-value">:twitter</span>, <span class="ruby-value">:googlePlus</span>, <span class="ruby-value">:background</span>]
 <span class="ruby-keyword">end</span></code></pre>
 						</div>
 										</div>
@@ -415,7 +415,7 @@ subscribed to the newsletter</p>
 							<pre class="prettyprint linenums"><code 
 								class="language-ruby"><span class="ruby-comment"># File app/models/user.rb, line 263</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">miniKey</span>
-  [<span class="ruby-value">:id</span>, <span class="ruby-value">:email</span>, <span class="ruby-value">:username</span>, <span class="ruby-value">:image</span>, <span class="ruby-value">:description</span>, <span class="ruby-value">:language</span>]
+  [<span class="ruby-value">:id</span>, <span class="ruby-value">:email</span>, <span class="ruby-value">:username</span>, <span class="ruby-value">:image</span>, <span class="ruby-value">:description</span>, <span class="ruby-value">:language</span>, <span class="ruby-value">:background</span>]
 <span class="ruby-keyword">end</span></code></pre>
 						</div>
 										</div>
@@ -437,7 +437,7 @@ subscribed to the newsletter</p>
 							<pre class="prettyprint linenums"><code 
 								class="language-ruby"><span class="ruby-comment"># File app/models/user.rb, line 273</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">notRestrictedKey</span>
-  [<span class="ruby-value">:id</span>, <span class="ruby-value">:email</span>, <span class="ruby-value">:username</span>, <span class="ruby-value">:fname</span>, <span class="ruby-value">:lname</span>, <span class="ruby-value">:birthday</span>, <span class="ruby-value">:image</span>, <span class="ruby-value">:description</span>, <span class="ruby-value">:language</span>, <span class="ruby-value">:facebook</span>, <span class="ruby-value">:twitter</span>, <span class="ruby-value">:googlePlus</span>, <span class="ruby-value">:salt</span>, <span class="ruby-value">:phoneNumber</span>, <span class="ruby-value">:newsletter</span>, <span class="ruby-value">:language</span>, <span class="ruby-value">:created_at</span>]
+  [<span class="ruby-value">:id</span>, <span class="ruby-value">:email</span>, <span class="ruby-value">:username</span>, <span class="ruby-value">:fname</span>, <span class="ruby-value">:lname</span>, <span class="ruby-value">:birthday</span>, <span class="ruby-value">:image</span>, <span class="ruby-value">:description</span>, <span class="ruby-value">:language</span>, <span class="ruby-value">:facebook</span>, <span class="ruby-value">:twitter</span>, <span class="ruby-value">:googlePlus</span>, <span class="ruby-value">:salt</span>, <span class="ruby-value">:phoneNumber</span>, <span class="ruby-value">:newsletter</span>, <span class="ruby-value">:language</span>, <span class="ruby-value">:created_at</span>, <span class="ruby-value">:background</span>]
 <span class="ruby-keyword">end</span></code></pre>
 						</div>
 										</div>
@@ -745,7 +745,6 @@ set before</p>
 			<li><a href="./API/CartsController.html">API::CartsController</a></li>
 			<li><a href="./API/ConcertsController.html">API::ConcertsController</a></li>
 			<li><a href="./API/GenresController.html">API::GenresController</a></li>
-			<li><a href="./API/GiftsController.html">API::GiftsController</a></li>
 			<li><a href="./API/InfluencesController.html">API::InfluencesController</a></li>
 			<li><a href="./API/LanguagesController.html">API::LanguagesController</a></li>
 			<li><a href="./API/ListeningsController.html">API::ListeningsController</a></li>

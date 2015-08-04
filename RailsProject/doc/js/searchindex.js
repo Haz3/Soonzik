@@ -49,12 +49,6 @@ var SearchIndex =
 		"type": "normalclass"
 	},
 	{
-		"name": "API::GiftsController",
-		"link": "API/GiftsController.html",
-		"snippet": "<p>Controller which manage the transaction for the Gift objects Here is the\nlist of action available :\n<p>save …\n\n",
-		"type": "normalclass"
-	},
-	{
 		"name": "API::InfluencesController",
 		"link": "API/InfluencesController.html",
 		"snippet": "<p>Controller which manage the transaction for the Influences objects Here is\nthe list of action available …\n",
@@ -559,12 +553,6 @@ var SearchIndex =
 		"type": "anymethod"
 	},
 	{
-		"name": "save",
-		"link": "API/GiftsController.html#method-i-save",
-		"snippet": "<p>Save a new object Gift. For more information on the parameters, check at\nthe model\n<p>Route : /gifts/save …\n",
-		"type": "anymethod"
-	},
-	{
 		"name": "index",
 		"link": "API/InfluencesController.html#method-i-index",
 		"snippet": "<p>Retrieve all the influences\n<p>Route : /influences\n<p>Options\n",
@@ -997,6 +985,12 @@ var SearchIndex =
 		"type": "anymethod"
 	},
 	{
+		"name": "miniKey",
+		"link": "Cart.html#method-c-miniKey",
+		"snippet": "<p>Filter of information for the API\n<p>Fields returned : [:id, :created_at]\n",
+		"type": "anymethod"
+	},
+	{
 		"name": "commentary_params",
 		"link": "Commentary.html#method-c-commentary_params",
 		"snippet": "<p>The strong parameters to save or update object\n",
@@ -1054,6 +1048,12 @@ var SearchIndex =
 		"name": "gift_params",
 		"link": "Gift.html#method-c-gift_params",
 		"snippet": "<p>The strong parameters to save or update object\n",
+		"type": "anymethod"
+	},
+	{
+		"name": "miniKey",
+		"link": "Gift.html#method-c-miniKey",
+		"snippet": "<p>Filter of information for the API\n<p>Fields returned : [:id, :created_at]\n",
 		"type": "anymethod"
 	},
 	{

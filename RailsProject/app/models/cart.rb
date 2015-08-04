@@ -21,12 +21,18 @@ class Cart < ActiveRecord::Base
   belongs_to :gift
   has_and_belongs_to_many :albums
   has_and_belongs_to_many :musics
-  has_and_belongs_to_many :packs
 
   validates :user, presence: true
 
   # The strong parameters to save or update object
   def self.cart_params(parameters)
     parameters.require(:cart).permit(:gift_id, :user_id)
+  end
+
+  # Filter of information for the API
+  #
+  # Fields returned : [:id, :created_at]
+  def self.miniKey
+    [:id, :created_at]
   end
 end

@@ -226,7 +226,8 @@ the parameters, check at the model</p>
 </li><li>
 <p>+cart [obj_id]+ - Id of the object</p>
 </li><li>
-<p>+cart [gift]+ - Boolean to know if it&#39;s a gift or not</p>
+<p><code>gift_user_id</code> - (Optionnal) If it is a gift, tell the user who
+will get the gift</p>
 </li></ul>
 
 <h5 id="method-i-save-label-HTTP+VALUE">HTTP VALUE<span><a href="#method-i-save-label-HTTP+VALUE">&para;</a> <a href="#top">&uarr;</a></span></h5>
@@ -241,10 +242,11 @@ the parameters, check at the model</p>
 							<pre class="prettyprint linenums"><code 
 								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/carts_controller.rb, line 71</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">save</span>
+  <span class="ruby-identifier">gift_present</span> = <span class="ruby-keyword">false</span>
+
   <span class="ruby-keyword">begin</span>
     <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@security</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-ivar">@cart</span>[<span class="ruby-value">:user_id</span>] <span class="ruby-operator">==</span> <span class="ruby-ivar">@user_id</span>)
       <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>, <span class="ruby-string">&#39;user_id missing&#39;</span> <span class="ruby-keyword">if</span> (<span class="ruby-operator">!</span><span class="ruby-keyword">defined?</span><span class="ruby-ivar">@cart</span>[<span class="ruby-value">:user_id</span>])
-      <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>, <span class="ruby-string">&#39;gift missing&#39;</span> <span class="ruby-keyword">if</span> (<span class="ruby-operator">!</span><span class="ruby-keyword">defined?</span><span class="ruby-ivar">@cart</span>[<span class="ruby-value">:gift</span>])
       <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>, <span class="ruby-string">&#39;typeObj missing&#39;</span> <span class="ruby-keyword">if</span> (<span class="ruby-operator">!</span><span class="ruby-keyword">defined?</span><span class="ruby-ivar">@cart</span>[<span class="ruby-value">:typeObj</span>])
       <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>, <span class="ruby-string">&#39;obj_id missing&#39;</span> <span class="ruby-keyword">if</span> (<span class="ruby-operator">!</span><span class="ruby-keyword">defined?</span><span class="ruby-ivar">@cart</span>[<span class="ruby-value">:obj_id</span>])
 
@@ -263,16 +265,40 @@ the parameters, check at the model</p>
             <span class="ruby-identifier">cart</span>.<span class="ruby-identifier">albums</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">obj</span>;
         <span class="ruby-keyword">end</span>
 
+        <span class="ruby-identifier">gift</span> = <span class="ruby-keyword">nil</span>
+
+        <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@gift_user_id</span>.<span class="ruby-identifier">present?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-constant">User</span>.<span class="ruby-identifier">find_by_id</span>(<span class="ruby-ivar">@gift_user_id</span>) <span class="ruby-operator">!=</span> <span class="ruby-keyword">nil</span>)
+          <span class="ruby-identifier">gift_present</span> = <span class="ruby-keyword">true</span>
+
+          <span class="ruby-identifier">gift</span> = <span class="ruby-constant">Gift</span>.<span class="ruby-identifier">new</span>
+          <span class="ruby-identifier">gift</span>.<span class="ruby-identifier">to_user</span> = <span class="ruby-ivar">@gift_user_id</span>
+          <span class="ruby-identifier">gift</span>.<span class="ruby-identifier">from_user</span> = <span class="ruby-ivar">@user_id</span>
+          <span class="ruby-comment"># check if the object exists</span>
+          <span class="ruby-keyword">if</span> (<span class="ruby-identifier">obj</span> <span class="ruby-operator">!=</span> <span class="ruby-keyword">nil</span>)
+            <span class="ruby-keyword">case</span> <span class="ruby-ivar">@cart</span>[<span class="ruby-value">:typeObj</span>]
+              <span class="ruby-keyword">when</span> <span class="ruby-string">&quot;Music&quot;</span>
+                <span class="ruby-identifier">gift</span>.<span class="ruby-identifier">musics</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">obj</span>;
+              <span class="ruby-keyword">when</span> <span class="ruby-string">&quot;Album&quot;</span>
+                <span class="ruby-identifier">gift</span>.<span class="ruby-identifier">albums</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">obj</span>;
+            <span class="ruby-keyword">end</span>
+          <span class="ruby-keyword">end</span>
+
+          <span class="ruby-keyword">if</span> (<span class="ruby-identifier">gift</span>.<span class="ruby-identifier">save</span>)
+            <span class="ruby-identifier">cart</span>.<span class="ruby-identifier">gift_id</span> = <span class="ruby-identifier">gift</span>.<span class="ruby-identifier">id</span>
+          <span class="ruby-keyword">end</span>
+        <span class="ruby-keyword">end</span>
+
         <span class="ruby-keyword">if</span> (<span class="ruby-identifier">cart</span>.<span class="ruby-identifier">save</span>)
           <span class="ruby-ivar">@returnValue</span> = { <span class="ruby-identifier">content</span><span class="ruby-operator">:</span> <span class="ruby-identifier">cart</span>.<span class="ruby-identifier">as_json</span>(<span class="ruby-value">:include</span> =<span class="ruby-operator">&gt;</span> {
-                                                                <span class="ruby-value">:user</span> =<span class="ruby-operator">&gt;</span> {<span class="ruby-value">:only</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">User</span>.<span class="ruby-identifier">miniKey</span>() },
-                                                                <span class="ruby-value">:musics</span> =<span class="ruby-operator">&gt;</span> { <span class="ruby-value">:only</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">Music</span>.<span class="ruby-identifier">miniKey</span>() },
-                                                                <span class="ruby-value">:albums</span> =<span class="ruby-operator">&gt;</span> { <span class="ruby-value">:only</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">Album</span>.<span class="ruby-identifier">miniKey</span>() },
-                                                                <span class="ruby-value">:packs</span> =<span class="ruby-operator">&gt;</span> { <span class="ruby-value">:only</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">Pack</span>.<span class="ruby-identifier">miniKey</span>() }
-                                                              }) }
+                                                  <span class="ruby-value">:user</span> =<span class="ruby-operator">&gt;</span> {<span class="ruby-value">:only</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">User</span>.<span class="ruby-identifier">miniKey</span>() },
+                                                  <span class="ruby-value">:musics</span> =<span class="ruby-operator">&gt;</span> { <span class="ruby-value">:only</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">Music</span>.<span class="ruby-identifier">miniKey</span>() },
+                                                  <span class="ruby-value">:albums</span> =<span class="ruby-operator">&gt;</span> { <span class="ruby-value">:only</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">Album</span>.<span class="ruby-identifier">miniKey</span>() },
+                                                  <span class="ruby-value">:gift</span> =<span class="ruby-operator">&gt;</span> { <span class="ruby-value">:only</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">Gift</span>.<span class="ruby-identifier">miniKey</span> }
+                                                }, <span class="ruby-identifier">only</span><span class="ruby-operator">:</span> <span class="ruby-constant">Cart</span>.<span class="ruby-identifier">miniKey</span>) }
           <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">201</span>
           <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:created</span>
         <span class="ruby-keyword">else</span>
+          <span class="ruby-identifier">gift</span>.<span class="ruby-identifier">destroy</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">gift_present</span> <span class="ruby-operator">==</span> <span class="ruby-keyword">true</span>
           <span class="ruby-ivar">@returnValue</span> = { <span class="ruby-identifier">content</span><span class="ruby-operator">:</span> <span class="ruby-identifier">cart</span>.<span class="ruby-identifier">errors</span>.<span class="ruby-identifier">to_hash</span>.<span class="ruby-identifier">to_json</span> }
           <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">503</span>
           <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:service_unavailable</span>
@@ -320,7 +346,7 @@ the parameters, check at the model</p>
 </li></ul>					
 											<div class="method-source-code" id="show-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/carts_controller.rb, line 133</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/carts_controller.rb, line 158</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">show</span>
   <span class="ruby-keyword">begin</span>
     <span class="ruby-keyword">if</span> (<span class="ruby-operator">!</span><span class="ruby-ivar">@security</span>)
@@ -331,11 +357,12 @@ the parameters, check at the model</p>
       <span class="ruby-keyword">if</span> (<span class="ruby-identifier">cart</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>)
         <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">202</span>
       <span class="ruby-keyword">else</span>
-        <span class="ruby-ivar">@returnValue</span> = { <span class="ruby-identifier">content</span><span class="ruby-operator">:</span> <span class="ruby-identifier">cart</span>.<span class="ruby-identifier">as_json</span>(<span class="ruby-identifier">only</span><span class="ruby-operator">:</span> [<span class="ruby-value">:id</span>],
+        <span class="ruby-ivar">@returnValue</span> = { <span class="ruby-identifier">content</span><span class="ruby-operator">:</span> <span class="ruby-identifier">cart</span>.<span class="ruby-identifier">as_json</span>(<span class="ruby-identifier">only</span><span class="ruby-operator">:</span> <span class="ruby-constant">Cart</span>.<span class="ruby-identifier">miniKey</span>,
           <span class="ruby-value">:include</span> =<span class="ruby-operator">&gt;</span> {
             <span class="ruby-identifier">user</span><span class="ruby-operator">:</span> { <span class="ruby-identifier">only</span><span class="ruby-operator">:</span> <span class="ruby-constant">User</span>.<span class="ruby-identifier">miniKey</span> },
             <span class="ruby-identifier">albums</span><span class="ruby-operator">:</span> { <span class="ruby-identifier">only</span><span class="ruby-operator">:</span> <span class="ruby-constant">Album</span>.<span class="ruby-identifier">miniKey</span> },
-            <span class="ruby-identifier">musics</span><span class="ruby-operator">:</span> { <span class="ruby-identifier">only</span><span class="ruby-operator">:</span> <span class="ruby-constant">Music</span>.<span class="ruby-identifier">miniKey</span> }
+            <span class="ruby-identifier">musics</span><span class="ruby-operator">:</span> { <span class="ruby-identifier">only</span><span class="ruby-operator">:</span> <span class="ruby-constant">Music</span>.<span class="ruby-identifier">miniKey</span> },
+            <span class="ruby-value">:gift</span> =<span class="ruby-operator">&gt;</span> { <span class="ruby-value">:only</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">Gift</span>.<span class="ruby-identifier">miniKey</span> }
           }) }
         <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">200</span>
       <span class="ruby-keyword">end</span>
@@ -384,7 +411,6 @@ the parameters, check at the model</p>
 			<li><a href="../API/CartsController.html">API::CartsController</a></li>
 			<li><a href="../API/ConcertsController.html">API::ConcertsController</a></li>
 			<li><a href="../API/GenresController.html">API::GenresController</a></li>
-			<li><a href="../API/GiftsController.html">API::GiftsController</a></li>
 			<li><a href="../API/InfluencesController.html">API::InfluencesController</a></li>
 			<li><a href="../API/LanguagesController.html">API::LanguagesController</a></li>
 			<li><a href="../API/ListeningsController.html">API::ListeningsController</a></li>

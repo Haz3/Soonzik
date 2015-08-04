@@ -160,9 +160,33 @@ and the validation Can provide some features linked to this model</p>
 											<p>The strong parameters to save or update object</p>					
 											<div class="method-source-code" id="cart_params-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/models/cart.rb, line 29</span>
+								class="language-ruby"><span class="ruby-comment"># File app/models/cart.rb, line 28</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">cart_params</span>(<span class="ruby-identifier">parameters</span>)
   <span class="ruby-identifier">parameters</span>.<span class="ruby-identifier">require</span>(<span class="ruby-value">:cart</span>).<span class="ruby-identifier">permit</span>(<span class="ruby-value">:gift_id</span>, <span class="ruby-value">:user_id</span>)
+<span class="ruby-keyword">end</span></code></pre>
+						</div>
+										</div>
+
+					
+									</div>
+								<a name="method-c-miniKey">anchor</a>
+				<div id="method-c-miniKey-doc" class="method">
+
+					<header>
+											<i class="icon-generic"></i>
+						<span class="method-name">miniKey</span><span 
+							class="method-args">()</span>
+										</header>
+
+					<div class="method-description">
+											<p>Filter of information for the <a href="API.html">API</a></p>
+
+<p>Fields returned : [:id, :created_at]</p>					
+											<div class="method-source-code" id="miniKey-source">
+							<pre class="prettyprint linenums"><code 
+								class="language-ruby"><span class="ruby-comment"># File app/models/cart.rb, line 35</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">miniKey</span>
+  [<span class="ruby-value">:id</span>, <span class="ruby-value">:created_at</span>]
 <span class="ruby-keyword">end</span></code></pre>
 						</div>
 										</div>
@@ -208,7 +232,6 @@ and the validation Can provide some features linked to this model</p>
 			<li><a href="./API/CartsController.html">API::CartsController</a></li>
 			<li><a href="./API/ConcertsController.html">API::ConcertsController</a></li>
 			<li><a href="./API/GenresController.html">API::GenresController</a></li>
-			<li><a href="./API/GiftsController.html">API::GiftsController</a></li>
 			<li><a href="./API/InfluencesController.html">API::InfluencesController</a></li>
 			<li><a href="./API/LanguagesController.html">API::LanguagesController</a></li>
 			<li><a href="./API/ListeningsController.html">API::ListeningsController</a></li>
