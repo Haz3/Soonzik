@@ -1,0 +1,72 @@
+﻿<Page
+    x:Class="SoonZik.Views.Concert"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:SoonZik.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:bm="using:Bing.Maps"
+    
+    xmlns:ViewModels="using:SoonZik.ViewModels"
+    mc:Ignorable="d">
+
+    <Grid Background="#CCCCCC" Height="1080">
+        <Grid.DataContext>
+            <ViewModels:ConcertViewModel/>
+        </Grid.DataContext>
+
+
+
+        <Grid Height="80" VerticalAlignment="Top" Width="1920" Background="#B0B0B0">
+            <TextBlock x:Name="concert_txt" HorizontalAlignment="Left" Margin="100,10,0,0" TextWrapping="Wrap" Text="Concert" VerticalAlignment="Top" Height="55" Width="193" FontSize="53.333" Foreground="Black"/>
+            <Button x:Name="back_btn" Content="Button" HorizontalAlignment="Left" Margin="30,20,0,0" VerticalAlignment="Top" Style="{StaticResource NavigationBackButtonNormalStyle}" RequestedTheme="Light" Click="Button_Click"/>
+        </Grid>
+
+
+        <FlipView Name="flip_view" ItemsSource="{Binding concertlist}" HorizontalAlignment="Left" Margin="97,107,0,0" VerticalAlignment="Top" Height="936" Width="1721" FontSize="30">
+
+            <FlipView.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel>
+
+                        <StackPanel>
+                            <TextBlock x:Uid="date_txt" Text="Date:" Foreground="Black"/>
+                            <TextBlock Text="{Binding planification.Date}" Foreground="Black"/>
+                        </StackPanel>
+                        <StackPanel>
+                            <TextBlock x:Uid="website_txt" Text="Site Internet:" Foreground="Black" Margin="0,30,0,0"/>
+                            <TextBlock Text="{Binding url}" Foreground="Black"/>
+
+                        </StackPanel>
+                        <StackPanel>
+                            <TextBlock Name="address_txt" x:Uid="address_txt" Text="Adresse:" Foreground="#FF020202" Margin="0,30,0,0"></TextBlock>
+                            <TextBlock TextWrapping="NoWrap" Foreground="Black">
+                                <Run Text="{Binding address.numberStreet}"/>
+                                <Run Text="{Binding address.street}"/>
+                                <LineBreak></LineBreak>
+                                <Run Text="{Binding address.city}"/>
+                                <Run Text="{Binding address.zipcode}"/>
+                            </TextBlock>
+                        </StackPanel>
+                        <bm:Map ZoomLevel="7" Credentials="Au1nH1MxHdvPVWttdBJJbTRYt6nHZJofF21VgvtHIAb5oYGH5609yjEa51GZZqFO" x:Name="MyMap" Height="423" Width="800" Margin="418,180,497,360">
+                            <bm:Map.Center>
+                                <bm:Location Latitude="48.8566140" Longitude="2.3522219"/>
+                            </bm:Map.Center>
+
+                            <bm:Map.Children>
+                                <bm:Pushpin Tapped="pushpinTapped" Background="#FF990000">
+                                    <bm:MapLayer.Position>
+                                        <!--<bm:Location Latitude="48.8566140" Longitude="2.3522219" />-->
+                                        <bm:Location Latitude="{Binding address.lat}" Longitude="{Binding address.lng}" />
+                                    </bm:MapLayer.Position>
+                                </bm:Pushpin>
+                            </bm:Map.Children>
+                        </bm:Map>
+                        
+                    </StackPanel>
+                </DataTemplate>
+            </FlipView.ItemTemplate>
+        </FlipView>
+
+    </Grid>
+</Page>
