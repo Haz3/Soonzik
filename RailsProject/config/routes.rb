@@ -15,7 +15,7 @@ Rails.application.routes.draw do
     resources :albums, only: [:index, :show] do #ok
       collection do
         get 'find' => 'albums#find'
-        get 'addcomment/:id' => 'albums#addcomment', constraints: {id: /[0-9]+/}
+        match 'addcomment/:id' => 'albums#addcomment', constraints: {id: /[0-9]+/}, via: [:post, :options]
         get ':id/comments' => 'albums#getcomments'
       end
     end
