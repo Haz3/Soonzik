@@ -23,7 +23,7 @@ SoonzikApp.controller('ChatCtrl', ['$scope', 'SecureAuth', 'HTTPService', '$time
 		var dispatcher = new WebSocketRails('lvh.me:3000/websocket');
 
 		dispatcher.on_open = function(data) {
-			dispatcher.trigger('who_is_online', "");
+			dispatcher.trigger('who_is_online', {});
 			dispatcher.bind('onlineFriends', function(data) {
 		    $scope.onlineFriends = data.message;
 		    onlineFriendsCall = true;
@@ -31,6 +31,11 @@ SoonzikApp.controller('ChatCtrl', ['$scope', 'SecureAuth', 'HTTPService', '$time
 		  dispatcher.bind("newMsg", newMessage);
 		  dispatcher.bind("newOnlineFriends", newFriendOn);
 		  dispatcher.bind("newOfflineFriends", newFriendOff);
+		  dispatcher.bind('connection_closed', function() {
+		  	$timeout(function() {
+			  	dispatcher = new WebSocketRails('lvh.me:3000/websocket');
+				}, 5000);
+			})
 		}
 
 		var newMessage = function(data) {

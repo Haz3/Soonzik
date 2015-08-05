@@ -10,11 +10,7 @@ SoonzikApp.directive('onScroll', [function() {
 				$scope.scrollPosition = "bottom";
 			}
 			$element.on("scroll", function(event) {
-				console.log($element);
-				console.log($element.scrollHeight);
-				console.log($($element));
-				console.log($($element).scrollHeight);
-				if (($scope.scrollPosition == "bottom" && $element.scrollTop() == $element.scrollHeight) ||
+				if (($scope.scrollPosition == "bottom" && $element.scrollTop() + $element.height() == $element.context.scrollHeight) ||
 						($scope.scrollPosition == "top" && $element.scrollTop() == 0)) {
 					$scope.onScroll();
 				}

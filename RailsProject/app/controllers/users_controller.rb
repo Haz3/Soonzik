@@ -25,6 +25,7 @@ class UsersController < ApplicationController
         format.html { redirect_to root_path }
         format.json { render :json => {}, status: :forbidden }
       else
+        puts params;
         set_user
         format.html { render :text => "", :layout => true }
         format.json { render :json => @user.as_json(except: [:salt, :password, :idAPI, :secureKey, :created_at, :updated_at, :address_id], :include => {
@@ -56,10 +57,11 @@ class UsersController < ApplicationController
   
   private
     def set_user
+      puts params;
       if (params[:id].to_s =~ /\A[-+]?\d*\.?\d+\z/)
-        user = User.find_by_id(params[:id].to_s)
+        @user = User.find_by_id(params[:id].to_s)
       else
-        user = User.find_by_username(params[:id].to_s)
+        @user = User.find_by_username(params[:id].to_s)
       end
     end
 end

@@ -192,12 +192,15 @@ SoonzikApp.controller('UsersCtrl', ['$scope', "$routeParams", 'SecureAuth', 'HTT
 				document.location.pathname = "/";
 			}, 1000);
 		} else {
+			console.log(id);
 			HTTPService.getFullProfile(id).then(function(profile) {
+				console.log(profile);
 				// Need a new route with security to get a profile with all informations
 				var dataProfile = profile.data;
 
 				// Initialisation of the user profile
 				$scope.form.user = dataProfile;
+				console.log(dataProfile);
 				birthday = dataProfile.birthday.split('-');
 				$scope.form.user["birthday(1i)"] = birthday[0];
 				$scope.form.user["birthday(2i)"] = birthday[1];
@@ -381,8 +384,10 @@ SoonzikApp.controller('UsersCtrl', ['$scope', "$routeParams", 'SecureAuth', 'HTT
 	}
 
 	$scope.reloadTweet = function() {
+		$scope.loading_tweet = true;
+
 		var paramsTweet = [
-			{ key: encodeURIComponent("attribute[user_id]"), value: id },
+			{ key: encodeURIComponent("attribute[user_id]"), value: $scope.show.user.id },
 			{ key: encodeURIComponent("order_by_desc[]"), value: "created_at" },
 			{ key: "limit", value: 20 },
 			{ key: "offset", value: $scope.show.tweets.my.length }
@@ -390,6 +395,9 @@ SoonzikApp.controller('UsersCtrl', ['$scope', "$routeParams", 'SecureAuth', 'HTT
 
 		HTTPService.findTweet(paramsTweet).then(function(response) {
 			$scope.show.tweets.my = $scope.show.tweets.my.concat(response.data.content);
+			$timeout(function() {
+				$scope.loading_tweet = false;
+			}, 1000);
 		}, function(error) {
 			NotificationService.error("");
 		});
