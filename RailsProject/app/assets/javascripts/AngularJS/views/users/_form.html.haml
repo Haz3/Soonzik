@@ -50,11 +50,6 @@
 						%input.radius{ id: "image", type: "text", "ng-model" => "form.user.image" }
 						%small.error{ "ng-if" => "formError.user.image != false", "ng-repeat" => "error in formError.user.image" } Image {{ error }}
 					.large-3.small-3.columns
-						%label{ for: "background" } Background
-					.small-9.columns
-						%input.radius{ id: "background", type: "text", "ng-model" => "form.user.background" }
-						%small.error{ "ng-if" => "formError.user.background != false", "ng-repeat" => "error in formError.user.background" } Background {{ error }}
-					.large-3.small-3.columns
 						%label{ for: "facebook" } Facebook
 					.small-9.columns
 						%input.radius{ id: "facebook", type: "text", "ng-model" => "form.user.facebook" }

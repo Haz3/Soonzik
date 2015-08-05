@@ -31,7 +31,7 @@
 							%th Title
 							%th Duration
 							%th Price
-							%th Rate
+							%th Rate (average)
 							%th 
 							%th 
 					%tbody.radius
@@ -101,6 +101,7 @@
 						%span {{ tweet.created_at }} - 
 						%i.fi-comment.pointer{ "ng-click" => "comment(tweet.user.username)" }
 						%span.pointer{ "ng-click" => "comment(tweet.user.username)" } Answer
+			%loading{ "ng-if" => "loading_tweet", "loading-type" => "'square'" }
 		.playlist
 			%ul.pricing-table.small-12.medium-4.large-3.columns{ "ng-repeat" => "playlist in show.playlists", "ng-class" => "$last ? 'end' : ''" }
 				%li.title {{ playlist.name }}

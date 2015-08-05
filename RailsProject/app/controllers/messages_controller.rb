@@ -2,11 +2,16 @@ class MessagesController < WebsocketRails::BaseController
 	def initialize_session
     # perform application setup here
     controller_store[:user_id] = []
+    controller_store[:smartphone] = []
   end
 
   def client_connected
     checkKey(message)
     if user_signed_in? || @security
+      if @security
+        sign_in(@user)
+        controller_store[:smartphone] << @user.id
+      end
       controller_store[:user_id] << @user.id
       @user.friends.each { |friend|
         controller_store[:user_id].each { |connected_guy|
@@ -21,6 +26,11 @@ class MessagesController < WebsocketRails::BaseController
   def delete_user
     checkKey(message)
     if user_signed_in? || @security
+      controller_store[:smartphone].each do |id|
+        if user_signed_in? && current_user.id == id
+          sign_out(current_user)
+        end
+      end
       controller_store[:user_id] -= [@user.id]
       @user.friends.each { |friend|
         controller_store[:user_id].each { |connected_guy|
