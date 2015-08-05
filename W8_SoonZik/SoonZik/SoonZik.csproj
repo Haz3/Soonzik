@@ -133,10 +133,12 @@
     <Compile Include="Tools\Get_coment.cs" />
     <Compile Include="Tools\Http_get.cs" />
     <Compile Include="Tools\Http_post.cs" />
+    <Compile Include="Tools\Post_comment.cs" />
     <Compile Include="Tools\Singleton.cs" />
     <Compile Include="ViewModels\AlbumViewModel.cs" />
     <Compile Include="ViewModels\ArtistViewModel.cs" />
     <Compile Include="ViewModels\BattleViewModel.cs" />
+    <Compile Include="ViewModels\Command\CommentCommand.cs" />
     <Compile Include="ViewModels\Command\ConnectionCommand.cs" />
     <Compile Include="ViewModels\Command\SignupCommand.cs" />
     <Compile Include="ViewModels\CommentViewModel.cs" />

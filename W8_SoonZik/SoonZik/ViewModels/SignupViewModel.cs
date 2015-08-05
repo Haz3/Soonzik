@@ -102,24 +102,6 @@ namespace SoonZik.ViewModels
                     "&address[country]=" + new_user.address.country +
                     "&address[complement]=" + new_user.address.complement;
 
-
-                //string user_data =
-                //    "&user[fname]=fnamelol" +
-                //    "&user[lname]=lnamelol" +
-                //    "&user[username]=Popopo" +
-                //    "&user[email]=pop@pop.pop" +
-                //    "&user[password]=lolxdlol" +
-                //    "&user[birthday]=1980-10-20" +
-                //    "&user[phoneNumber]=0645454541" +
-                //    "&user[desciption]=je suis moi meme quoi" +
-                //    "&user[language]=" + new_user.language +
-                //    "&address[numberStreet]=21" +
-                //    "&address[street]=avenue de la lolesquerie" +
-                //    "&address[zipcode]=751337" +
-                //    "&address[city]=ParisLeet" +
-                //    "&address[country]=France" +
-                //    "&address[complement]=Mon interphone ne fonctionne pas !!";
-
                 var response = await request.post_request("users/save", user_data);
 
                 var json = JObject.Parse(response).SelectToken("message");
