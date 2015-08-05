@@ -14,6 +14,7 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using SoonZik.Models;
 using SoonZik.ViewModels;
+using SoonZik.Tools;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -34,6 +35,7 @@ namespace SoonZik.Views
             News elem = e.Parameter as News;
             news_author.Text = elem.user.username;
             news_title.Text = elem.title;
+            news_id_txt.Text = elem.id.ToString();
             if (elem.newstexts.Any())
             {
                 news_content.Text = elem.newstexts[0].content;
@@ -43,6 +45,8 @@ namespace SoonZik.Views
 
             // To get the news id
             string request_elem = "/news/" + elem.id.ToString();
+
+            // To get comment list
             var comments = new CommentViewModel(request_elem);
             comment_lv.ItemsSource = comments.commentlist;
         }
@@ -50,6 +54,12 @@ namespace SoonZik.Views
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             this.Frame.GoBack();
+        }
+
+        private void send_com_btn_Click(object sender, RoutedEventArgs e)
+        {
+            string comment_content = send_com_tb.Text;
+            Post_comment com = new Post_comment(comment_content, "news", news_id_txt.Text);
         }
     }
 }

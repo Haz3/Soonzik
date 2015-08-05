@@ -16,6 +16,8 @@ namespace SoonZik.ViewModels
     {
         public ObservableCollection<News> newslist { get; set; }
 
+
+
         public NewsViewModel()
         {
             load_news();

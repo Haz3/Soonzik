@@ -35,14 +35,15 @@
             <TextBlock Name="news_author" HorizontalAlignment="Left" Margin="20,5,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Text="Author" Foreground="Black" Height="25" Width="355" FontSize="20" Grid.ColumnSpan="2"/>
             <TextBlock Name="news_content" Grid.Column="1" HorizontalAlignment="Left" Margin="60,55,-80,0" Grid.Row="2" TextWrapping="Wrap" Text="Content" VerticalAlignment="Top" Height="165" Width="470" Foreground="Black" FontSize="18"/>
             <TextBlock x:Name="news_content2" Grid.Column="1" HorizontalAlignment="Left" Margin="60,255,-80,-129" Grid.Row="2" TextWrapping="Wrap" VerticalAlignment="Top" Height="165" Width="470" Foreground="Black" FontSize="18"/>
+            <TextBlock x:Name="news_id_txt" Grid.Column="1" HorizontalAlignment="Left" Margin="760,10,-395,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Width="85" Height="46" FontSize="30"/>
         </Grid>
 
 
         <ListView Name="comment_lv" HorizontalAlignment="Left" Height="185" Margin="400,775,0,0" VerticalAlignment="Top" Width="1120" Background="White" IsItemClickEnabled="True" IsSwipeEnabled="False" SelectionMode="None">
-            
+
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    
+
                     <StackPanel>
                         <StackPanel Orientation="Horizontal">
                             <TextBlock FontSize="24" Foreground="Black">
@@ -54,13 +55,14 @@
                             </TextBlock>
                         </StackPanel>
                     </StackPanel>
-                    
+
                 </DataTemplate>
             </ListView.ItemTemplate>
-            
+
         </ListView>
-        <TextBox Name="send_com_txt" HorizontalAlignment="Left" Margin="405,1000,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="20" Width="990"/>
-        <Button x:Name="send_com_btn" x:Uid="send_com_btn" Content="Envoyer" HorizontalAlignment="Left" Margin="1413,997,0,0" VerticalAlignment="Top" Width="110" Background="#FF4C9EFF"/>
+
+        <TextBox x:Name="send_com_tb" HorizontalAlignment="Left" Margin="405,1000,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="20" Width="990"/>
+        <Button x:Name="send_com_btn" x:Uid="send_com_btn" Content="Envoyer" HorizontalAlignment="Left" Margin="1413,997,0,0" VerticalAlignment="Top" Width="110" Background="#FF4C9EFF" Click="send_com_btn_Click"/>
 
     </Grid>
 </Page>

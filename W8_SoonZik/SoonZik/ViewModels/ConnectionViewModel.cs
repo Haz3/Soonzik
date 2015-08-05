@@ -81,7 +81,7 @@ namespace SoonZik.ViewModels
                 if (json.ToString() == "Success")
                 {
                     Get_User(response);
-                    await new MessageDialog("Email = " + mail + "\nPassws = " + passwd, "Connexion OK").ShowAsync();
+                    await new MessageDialog("Email = " + mail + "\nPasswd = " + passwd, "Connexion OK").ShowAsync();
                     ((Frame)Window.Current.Content).Navigate(typeof(Home));
                 }
                 else
