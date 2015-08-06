@@ -14,16 +14,18 @@
             <TextBlock x:Name="explorer_txt" HorizontalAlignment="Left" Margin="100,10,0,0" TextWrapping="Wrap" Text="Explorer" VerticalAlignment="Top" Height="55" Width="235" FontSize="53.333" Foreground="Black"/>
             <Button x:Name="back_btn" Content="Button" HorizontalAlignment="Left" Margin="30,20,0,0" VerticalAlignment="Top" Style="{StaticResource NavigationBackButtonNormalStyle}" RequestedTheme="Light" Click="Button_Click"/>
         </Grid>
-        <ListView HorizontalAlignment="Left" Height="690" Margin="1115,180,0,0" VerticalAlignment="Top" Width="460" IsSynchronizedWithCurrentItem="False" Background="#FFB0B0B0"/>
-        <TextBlock x:Uid="genre_txt" Name="genre_txt" HorizontalAlignment="Left" Margin="100,130,0,0" TextWrapping="Wrap" Text="Genre" VerticalAlignment="Top" Height="45" Width="170" Foreground="Black" FontSize="30"/>
-        <GridView ItemClick="GridView_ItemClick" ItemsSource="{Binding genrelist}" Background="#b0b0b0" HorizontalAlignment="Left" Margin="100,180,0,0" VerticalAlignment="Top" Width="760" Height="770" IsItemClickEnabled="True" IsSwipeEnabled="False" SelectionMode="None">
+        
+        
+        <TextBlock x:Uid="genre_txt" Name="genre_txt" HorizontalAlignment="Left" Margin="92,130,0,0" TextWrapping="Wrap" Text="Genres" VerticalAlignment="Top" Height="45" Width="170" Foreground="Black" FontSize="30"/>
+       
+        <GridView x:Name="genre_list" ItemClick="genre_list_ItemClick" ItemsSource="{Binding genrelist}" Background="#b0b0b0" HorizontalAlignment="Left" Margin="90,180,0,0" VerticalAlignment="Top" Width="520" Height="850" IsItemClickEnabled="True" IsSwipeEnabled="False" SelectionMode="None">
             <GridView.DataContext>
                 <ViewModels:GenreViewModel/>
             </GridView.DataContext>
 
             <GridView.ItemTemplate>
                 <DataTemplate>
-                    <Grid Width="250" Height="250">
+                    <Grid Width="200" Height="200">
                         <Image Stretch="Fill" Source="http://www.scottbuckley.com.au/musoscientific/wp-content/uploads/2012/10/treeofmusic.jpg" VerticalAlignment="Top" HorizontalAlignment="Center"/>
                         <StackPanel Orientation="Vertical" VerticalAlignment="Bottom" Margin="0,0,0,10">
                             <TextBlock Text="{Binding style_name}" FontSize="25" Margin="10,0,0,0" TextTrimming="WordEllipsis" TextWrapping="Wrap" HorizontalAlignment="Left" Foreground="#FF0A37FF"/>
@@ -32,6 +34,48 @@
                 </DataTemplate>
             </GridView.ItemTemplate>
         </GridView>
+        
+        <TextBlock x:Uid="pack_txt" x:Name="pack_txt" HorizontalAlignment="Left" Margin="699,130,0,0" TextWrapping="Wrap" Text="Packs" VerticalAlignment="Top" Height="45" Width="170" Foreground="Black" FontSize="30"/>
+
+        <ListView x:Name="pack_list" ItemClick="pack_list_ItemClick" IsItemClickEnabled="True" HorizontalAlignment="Left" Height="850" Margin="695,180,0,0" VerticalAlignment="Top" Width="540" IsSynchronizedWithCurrentItem="False" Background="#FFB0B0B0" ItemsSource="{Binding packlist}">
+            <ListView.DataContext>
+                <ViewModels:PackViewModel/>
+            </ListView.DataContext>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Grid Width="250" Height="250">
+                        <Image Stretch="Fill" Source="http://static.wixstatic.com/media/44433f_4f689883955641309c5c675ff5bffc92.jpg" VerticalAlignment="Top" HorizontalAlignment="Center"/>
+                        <StackPanel Orientation="Vertical" VerticalAlignment="Bottom" Margin="0,0,0,10">
+                            <TextBlock Text="{Binding title}" FontSize="25" Margin="10,0,0,0" TextTrimming="WordEllipsis" TextWrapping="Wrap" HorizontalAlignment="Left" Foreground="#FF0A37FF"/>
+                        </StackPanel>
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        
+        
+        
+        <TextBlock x:Uid="artist_txt" x:Name="artist_txt" HorizontalAlignment="Left" Margin="1312,130,0,0" TextWrapping="Wrap" Text="Artists" VerticalAlignment="Top" Height="45" Width="170" Foreground="Black" FontSize="30"/>
+        <ListView x:Name="artist_list" ItemClick="artist_list_ItemClick" IsItemClickEnabled="True" HorizontalAlignment="Left" Height="850" Margin="1312,180,0,0" VerticalAlignment="Top" Width="540" IsSynchronizedWithCurrentItem="False" Background="#FFB0B0B0" ItemsSource="{Binding artistlist}">
+            <ListView.DataContext>
+                <ViewModels:ArtistViewModel/>
+            </ListView.DataContext>
+
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel>
+   
+                        <StackPanel Orientation="Horizontal" x:Name="Username">
+                            <TextBlock>
+								<Run Text="Artist:"/>
+                            </TextBlock>
+                            <TextBlock Text="{Binding username}" Margin="20,0,0,0"/>
+                        </StackPanel>
+                    </StackPanel>
+                </DataTemplate>
+
+            </ListView.ItemTemplate>
+        </ListView>
 
     </Grid>
 </Page>

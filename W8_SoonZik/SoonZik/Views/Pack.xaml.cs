@@ -27,10 +27,28 @@ namespace SoonZik.Views
             this.InitializeComponent();
         }
 
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            SoonZik.Models.Pack elem = e.Parameter as SoonZik.Models.Pack;
+            pack_title.Text = elem.title;
+            if (elem.descriptions.Any())
+            {
+                description_fr.Text = elem.descriptions[0].description;
+                if (elem.descriptions.Count == 2)
+                  description_en.Text = elem.descriptions[1].description;
+            }
+            pack_album_listview.ItemsSource = elem.albums;
+        }
+
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             this.Frame.GoBack();
         }
 
+        private void pack_album_listview_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            var item = ((SoonZik.Models.Album)e.ClickedItem);
+            this.Frame.Navigate(typeof(Album), item);
+        }
     }
 }

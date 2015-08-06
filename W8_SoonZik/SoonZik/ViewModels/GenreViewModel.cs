@@ -73,7 +73,7 @@ namespace SoonZik.ViewModels
 
             if (exception != null)
             {
-                MessageDialog msgdlg = new MessageDialog(exception.Message, "Genre musics error");
+                MessageDialog msgdlg = new MessageDialog(exception.Message, "Load music in genre error");
                 await msgdlg.ShowAsync();
             }
             return null;

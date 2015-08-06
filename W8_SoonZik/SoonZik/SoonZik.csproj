@@ -121,6 +121,7 @@
     <Compile Include="Models\Comment.cs" />
     <Compile Include="Models\Concert.cs" />
     <Compile Include="Models\Connection.cs" />
+    <Compile Include="Models\Description.cs" />
     <Compile Include="Models\Genre.cs" />
     <Compile Include="Models\Influence.cs" />
     <Compile Include="Models\Music.cs" />
@@ -138,7 +139,6 @@
     <Compile Include="ViewModels\AlbumViewModel.cs" />
     <Compile Include="ViewModels\ArtistViewModel.cs" />
     <Compile Include="ViewModels\BattleViewModel.cs" />
-    <Compile Include="ViewModels\Command\CommentCommand.cs" />
     <Compile Include="ViewModels\Command\ConnectionCommand.cs" />
     <Compile Include="ViewModels\Command\SignupCommand.cs" />
     <Compile Include="ViewModels\CommentViewModel.cs" />
