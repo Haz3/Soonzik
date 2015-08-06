@@ -158,6 +158,9 @@
     <Compile Include="Views\Genre.xaml.cs">
       <DependentUpon>Genre.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Music.xaml.cs">
+      <DependentUpon>Music.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\NewsDetails.xaml.cs">
       <DependentUpon>NewsDetails.xaml</DependentUpon>
     </Compile>
@@ -283,6 +286,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Genre.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Music.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
