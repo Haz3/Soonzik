@@ -10,9 +10,10 @@ module API
   # * addtoplaylist   [post] - SECURITY
   # * delfromplaylist [get] - SECURITY
   # * getcomments [get]
+  # * getNotes    [get]
   #
   class MusicsController < ApisecurityController
-  	before_action :checkKey, only: [:addcomment, :get, :addtoplaylist, :delfromplaylist]
+  	before_action :checkKey, only: [:addcomment, :get, :addtoplaylist, :delfromplaylist, :setNotes]
 
     # Retrieve all the musics
     #
@@ -386,7 +387,7 @@ module API
     # ===== HTTP VALUE
     # 
     # - +200+ - In case of success, return the array of comment
-    # - +404+ - Can't find the news, the id is probably wrong
+    # - +404+ - Can't find the music, the id is probably wrong
     # - +503+ - Error from server
     # 
     def getcomments
@@ -409,6 +410,102 @@ module API
           @returnValue = { content: refine_comments }
         end
       rescue
+        codeAnswer 504
+        defineHttp :service_unavailable
+      end
+      sendJson
+    end
+
+    # Get notes given for multiple musics.
+    #
+    # Route : /musics/getNotes
+    #
+    # ==== Options
+    #
+    # * +:user_id+ - An array of music id
+    # * +:arr_id+ - An array of music id
+    #
+    # ===== HTTP VALUE
+    # 
+    # - +200+ - In case of success, return an array of { music_id / note }
+    # - +404+ - Can't find the music, the id is probably wrong
+    # - +503+ - Error from server
+    # 
+    def getNotes
+      value = []
+      begin
+        if (@user_id.present? && @arr_id.present? && User.find_by_id(@user_id) != nil)
+          arr = JSON.parse(@arr_id)
+          if !arr.is_a?(Array)
+            codeAnswer 502
+            defineHttp :bad_request
+          else
+            arr.each do |music_id|
+              note = MusicNote.where(music_id: music_id).find_by_user_id(@user_id)
+              if note == nil
+                value << { music_id: music_id, note: nil }
+              else
+                value << { music_id: music_id, note: note.value }
+              end
+            end
+            @returnValue = { content: value }
+          end
+        else
+          codeAnswer 502
+          defineHttp :bad_request
+        end
+      rescue
+        codeAnswer 504
+        defineHttp :service_unavailable
+      end
+      sendJson
+    end
+
+    # Get notes given for multiple musics.
+    #
+    # Route : /musics/:id/note/:note
+    #
+    # ==== Options
+    #
+    # * +:id+ - The id of the music
+    # * +:note+ - The note you give to the music
+    #
+    # ===== HTTP VALUE
+    # 
+    # - +200+ - In case of success, return nothing
+    # - +401+ - It is not a secured transaction
+    # - +404+ - Can't find the music, the id is probably wrong
+    # - +503+ - Error from server
+    # 
+    def setNotes
+      begin
+        if (@security)
+          if (@id.present? && @note.present? && Music.find_by_id(@id) != nil && @note.to_i > 0 && @note.to_i <= 5)
+            m = nil
+            m = MusicNote.where(music_id: @id).find_by_user_id(@user_id)
+            if m == nil
+              m = MusicNote.new
+              m.user_id = @user_id
+              m.music_id = @id
+            end
+            m.value = @note
+            if (m.save)
+              defineHttp :created
+              codeAnswer 201
+            else
+              codeAnswer 503
+              defineHttp :service_unavailable
+            end
+          else
+            codeAnswer 502
+            defineHttp :bad_request
+          end
+        else
+          codeAnswer 500
+          defineHttp :forbidden
+        end
+      rescue
+        puts $!, $@
         codeAnswer 504
         defineHttp :service_unavailable
       end

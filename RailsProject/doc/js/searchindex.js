@@ -667,6 +667,18 @@ var SearchIndex =
 		"type": "anymethod"
 	},
 	{
+		"name": "getNotes",
+		"link": "API/MusicsController.html#method-i-getNotes",
+		"snippet": "<p>Get notes given for multiple musics.\n<p>Route : /musics/getNotes\n<p>Options\n",
+		"type": "anymethod"
+	},
+	{
+		"name": "setNotes",
+		"link": "API/MusicsController.html#method-i-setNotes",
+		"snippet": "<p>Get notes given for multiple musics.\n<p>Route : /musics/:id/note/:note\n<p>Options\n",
+		"type": "anymethod"
+	},
+	{
 		"name": "index",
 		"link": "API/NewsController.html#method-i-index",
 		"snippet": "<p>Retrieve all the news\n<p>Route : /news\n<p>Options\n",
