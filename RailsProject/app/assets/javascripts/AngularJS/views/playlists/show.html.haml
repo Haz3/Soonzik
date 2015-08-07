@@ -64,7 +64,7 @@
 										%hr
 										%ul.text-left.small-12.playlistList
 											%li.choice.small-12.playlistChoice{ "ng-repeat" => "myplaylist in myPlaylists" }
-												%input{ "ng-model" => "myplaylist.check", name: "playlistChoice", type: "radio", id: "playlist-{{myplaylist.id}}", "ng-value" => "true" }
+												%input{ "ng-model" => "myplaylist.check", type: "radio", id: "playlist-{{myplaylist.id}}", "ng-value" => "true" }
 												%label{ "for" => "playlist-{{myplaylist.id}}" } {{ myplaylist.name }}
 											%li.small-12.text-center
 												.button.tiny{ "ng-click" => "addToPlaylist()" } Add

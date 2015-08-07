@@ -33,6 +33,9 @@ SoonzikApp.controller('UsersCtrl', ['$scope', "$routeParams", 'SecureAuth', 'HTT
 			zipcode: false
 		}
 	};
+	$scope.tooltip = false;
+	$scope.selectedMusic = null;
+	$scope.myPlaylists = [];
 
 
 	// For the select of date
@@ -102,6 +105,17 @@ SoonzikApp.controller('UsersCtrl', ['$scope', "$routeParams", 'SecureAuth', 'HTT
 			}, function(error) {
 				NotificationService.error("");
 			});
+
+			if ($scope.user != false) {
+				HTTPService.findPlaylist([{ key: "attribute[user_id]", value: $scope.user.id }]).then(function(response) {
+		    	$scope.myPlaylists = response.data.content;
+		    	for (var i = 0 ; i < $scope.myPlaylists.length ; i++) {
+		    		$scope.myPlaylists[i].check = false;
+		    	}
+				}, function(error) {
+					NotificationService.error("Error while deleting the playlist : " + playlist.name);
+				});
+			}
 
 			/* Other informations */
 
@@ -440,6 +454,64 @@ SoonzikApp.controller('UsersCtrl', ['$scope', "$routeParams", 'SecureAuth', 'HTT
 			NotificationService.error("Error while rating the music, please try later.");
 		});
 	}
+
+	$scope.addToPlaylist = function() {
+  	var playlist = false;
+
+  	for (var i = 0 ; i < $scope.myPlaylists.length ; i++) {
+  		if ($scope.myPlaylists[i].check == true)
+	  		playlist = $scope.myPlaylists[i];
+  	}
+
+  	if ($scope.user != false && $scope.selectedMusic != false && playlist != false) {
+  		SecureAuth.securedTransaction(function(key, user_id) {
+		  		var parameters = {
+		  			secureKey: key,
+		  			user_id: user_id,
+	  				id: $scope.selectedMusic.id,
+	  				playlist_id: playlist.id
+		  		};
+		  		HTTPService.addToPlaylist(parameters).then(function(response) {
+		  			NotificationService.success("The music '" + $scope.selectedMusic.title + "' has been added to the playlist");
+		  			$rootScope.$broadcast("player:addToPlaylist", { playlist: playlist, music: $scope.selectedMusic });
+		  			$scope.selectedMusic = false;
+		  			$scope.tooltip = false;
+		  			playlist.check = false;
+		  		}, function(error) {
+		  			NotificationService.error("Error while saving a new music in the playlist");
+		  		});
+		  	}, function(error) {
+		  		NotificationService.error("Error while saving a new music in the playlist");
+		  	});
+  	}
+  }
+
+  $scope.selectMusic = function(music) {
+  	if ($scope.selectedMusic == music) {
+  		$scope.selectedMusic = false;
+  	} else {
+	  	$scope.selectedMusic = music;
+	  }
+  }
+
+  $scope.setTooltip = function(value) {
+  	console.log("mdr");
+  	$scope.tooltip = value;
+  	if ($scope.tooltip != false) {
+  		for (var i = 0 ; i < $scope.myPlaylists.length ; i++) {
+  			for (var j = 0 ; j < $scope.myPlaylists[i].musics.length ; j++) {
+  				if (value.id == $scope.myPlaylists[i].musics[j].id) {
+  					$scope.myPlaylists[i].check = true;
+  				}
+  			}
+  		}
+  	} else {
+  		for (var i = 0 ; i < $scope.myPlaylists.length ; i++) {
+ 				$scope.myPlaylists[i].check = false;
+  		}
+  		$scope.selectMusic(false);
+  	}
+  }
 
 	/* Utils function */
 

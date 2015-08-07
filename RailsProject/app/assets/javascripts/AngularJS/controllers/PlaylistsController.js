@@ -91,8 +91,21 @@ SoonzikApp.controller('PlaylistsCtrl', ['$scope', "$rootScope", "$routeParams", 
 
   $scope.setTooltip = function(value) {
   	$scope.tooltip = value;
-  	if ($scope.tooltip != false)
+  	if ($scope.tooltip != false) {
   		$scope.tooltip.type = "music"
+  		for (var i = 0 ; i < $scope.myPlaylists.length ; i++) {
+  			for (var j = 0 ; j < $scope.myPlaylists[i].musics.length ; j++) {
+  				if (value.id == $scope.myPlaylists[i].musics[j].id) {
+  					$scope.myPlaylists[i].check = true;
+  				}
+  			}
+  		}
+  	} else {
+  		for (var i = 0 ; i < $scope.myPlaylists.length ; i++) {
+ 				$scope.myPlaylists[i].check = false;
+  		}
+  		$scope.selectMusic(false);
+  	}
   }
 
   $scope.toolTipShare = function() {
@@ -160,7 +173,11 @@ SoonzikApp.controller('PlaylistsCtrl', ['$scope', "$rootScope", "$routeParams", 
   }
 
   $scope.selectMusic = function(music) {
-  	$scope.selectedMusic = music;
+  	if ($scope.selectedMusic == music) {
+  		$scope.selectedMusic = false;
+  	} else {
+	  	$scope.selectedMusic = music;
+	  }
   }
 
   $scope.addToPlaylist = function() {

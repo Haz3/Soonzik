@@ -155,6 +155,9 @@ SoonzikApp.factory('HTTPService', ['$http', '$location', 'Upload', function ($ht
     },
     setMusicNote: function(id, note, parameters) {
       return $http.post("http://api." + url + "/musics/" + id + "/note/" + note, parameters);
+    },
+    getAlbum: function(id) {
+      return $http.get("http://api." + url + "/albums/" + id);
     }
   }
 }]);
