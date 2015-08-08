@@ -117,7 +117,6 @@ module API
 
             if (cart.save)
               @returnValue = { content: cart.as_json(:include => {
-                                                      :user => {:only => User.miniKey() },
                                                       :musics => { :only => Music.miniKey() },
                                                       :albums => { :only => Album.miniKey() },
                                                       :gift => { :only => Gift.miniKey }
@@ -167,7 +166,6 @@ module API
           else
             @returnValue = { content: cart.as_json(only: Cart.miniKey,
               :include => {
-                user: { only: User.miniKey },
                 albums: { only: Album.miniKey },
                 musics: { only: Music.miniKey },
                 :gift => { :only => Gift.miniKey }
