@@ -24,6 +24,7 @@
     <RootPropertyPathName Name="ListMusics" />
     <RootPropertyPathName Name="TheAlbum" />
     <RootPropertyPathName Name="ArtistTwo" />
+    <RootPropertyPathName Name="email" />
     <RootPropertyPathName Name="ArtistOne" />
     <RootPropertyPathName Name="SecondesRestantes" />
     <RootPropertyPathName Name="MinutesRestantes" />
@@ -54,7 +55,6 @@
     <RootPropertyPathName Name="lname" />
     <RootPropertyPathName Name="fname" />
     <RootPropertyPathName Name="Password" />
-    <RootPropertyPathName Name="email" />
     <RootPropertyPathName Name="SelectionCommand" />
     <RootPropertyPathName Name="CurrentUser" />
     <RootPropertyPathName Name="follows" />
@@ -87,7 +87,7 @@
     <RootPropertyPathName Name="ThePack" />
     <RootPropertyPathName Name="Datas" />
     <RootPropertyPathName Name="SelectedData" />
-    <RootPropertyPathName Name="ListPlaylist" />
+    <RootPropertyPathName Name="ListPack" />
     <RootPropertyPathName Name="SelectedPlaylist" />
     <RootPropertyPathName Name="ListAlbum" />
     <RootPropertyPathName Name="FollowText" />

@@ -93,6 +93,7 @@ namespace SoonZik.ViewModel
                 _password = _localSettings.Values["SoonZikPassWord"].ToString();
                 _username = _localSettings.Values["SoonZikUserName"].ToString();
             }
+            Network.InternetConnectionChanged += NetworkOnInternetConnectionChanged;
         }
 
         private void ExecuteInscription()
@@ -112,6 +113,14 @@ namespace SoonZik.ViewModel
             //    _username = _localSettings.Values["SoonZikUserName"].ToString();
             //    MakeConnexion();
             //}
+        }
+
+        private void NetworkOnInternetConnectionChanged(object sender, InternetConnectionChangedEventArgs internetConnectionChangedEventArgs)
+        {
+            if (!Network.IsConnected)
+            {
+                return;
+            }
         }
 
         private async void MakeConnexion()

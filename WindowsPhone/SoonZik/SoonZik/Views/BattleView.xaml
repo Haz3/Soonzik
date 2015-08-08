@@ -14,11 +14,12 @@
         <DataTemplate x:Key="BattleDataTemplate">
             <Grid Height="100" Tapped="UIElement_OnTapped">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="15*"/>
-                    <ColumnDefinition Width="15*"/>
+                    <ColumnDefinition Width="200"/>
+                    <ColumnDefinition Width="200"/>
                 </Grid.ColumnDefinitions>
                 <TextBlock Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding Path=artist_one.username}" FontSize="20" TextWrapping="Wrap"/>
                 <TextBlock Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding Path=artist_two.username}" FontSize="20" TextWrapping="Wrap"/>
+
             </Grid>
         </DataTemplate>
     </Page.Resources>
@@ -27,7 +28,9 @@
         <ListView Background="Transparent" x:Name="ListViewNews" ItemsSource="{Binding ListBattles}"
                   ItemTemplate="{StaticResource BattleDataTemplate}"
                   SelectedItem="{Binding SelectedBattle, Mode=TwoWay}" />
-
     </Grid>
+
+
+
 </Page>
     
