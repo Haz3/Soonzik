@@ -16,6 +16,7 @@ namespace SoonZik.Tools
             Exception exception = null;
 
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create("http://api.lvh.me:3000/" + url);
+            //HttpWebRequest request = (HttpWebRequest)WebRequest.Create("http://soonzikapi.herokuapp.com/" + url);
             request.Method = "POST";
             request.ContentType = "application/x-www-form-urlencoded";
 
