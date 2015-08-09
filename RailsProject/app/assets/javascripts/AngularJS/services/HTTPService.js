@@ -158,6 +158,12 @@ SoonzikApp.factory('HTTPService', ['$http', '$location', 'Upload', function ($ht
     },
     getAlbum: function(id) {
       return $http.get("http://api." + url + "/albums/" + id);
+    },
+    linkSocial: function(parameters) {
+      return $http.post("http://api." + url + "/users/linkSocial", parameters);
+    },
+    getIdentities: function() {
+      return $http.get("http://" + url + "/users/getIdentities.json")
     }
   }
 }]);

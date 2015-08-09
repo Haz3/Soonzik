@@ -28,6 +28,8 @@
 //= require angular-cookies
 //= require angular-route
 //= require angular-resource
+//= require ./tools/angular-facebook.js
+//= require ./tools/google-plus-signin.js
 //= require ./AngularJS/app.js.erb
 //= require ./AngularJS/controllers/AlbumsController.js
 //= require ./AngularJS/controllers/ChatController.js

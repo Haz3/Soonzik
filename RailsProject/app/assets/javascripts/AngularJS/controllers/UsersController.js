@@ -1,4 +1,4 @@
-SoonzikApp.controller('UsersCtrl', ['$scope', "$routeParams", 'SecureAuth', 'HTTPService', 'NotificationService', '$timeout', 'Upload', function ($scope, $routeParams, SecureAuth, HTTPService, NotificationService, $timeout, Upload) {
+SoonzikApp.controller('UsersCtrl', ['$scope', "$routeParams", 'SecureAuth', 'HTTPService', 'NotificationService', '$timeout', 'Upload', 'Facebook', function ($scope, $routeParams, SecureAuth, HTTPService, NotificationService, $timeout, Upload, Facebook) {
 	$scope.loading = true;
 
 	$scope.user = false;
@@ -6,7 +6,7 @@ SoonzikApp.controller('UsersCtrl', ['$scope', "$routeParams", 'SecureAuth', 'HTT
 	$scope.tweet = {
 		input: ""
 	}
-	$scope.form = { user: {} };
+	$scope.form = { user: {}, identities: { facebook: null, twitter: null, google: null } };
 	$scope.formError = {
 		user: {
 			email: false,
@@ -36,6 +36,9 @@ SoonzikApp.controller('UsersCtrl', ['$scope', "$routeParams", 'SecureAuth', 'HTT
 	$scope.tooltip = false;
 	$scope.selectedMusic = null;
 	$scope.myPlaylists = [];
+
+	$scope.isFBLogged = false;
+	$scope.facebookReady = false;
 
 
 	// For the select of date
@@ -108,10 +111,10 @@ SoonzikApp.controller('UsersCtrl', ['$scope', "$routeParams", 'SecureAuth', 'HTT
 
 			if ($scope.user != false) {
 				HTTPService.findPlaylist([{ key: "attribute[user_id]", value: $scope.user.id }]).then(function(response) {
-		    	$scope.myPlaylists = response.data.content;
-		    	for (var i = 0 ; i < $scope.myPlaylists.length ; i++) {
-		    		$scope.myPlaylists[i].check = false;
-		    	}
+					$scope.myPlaylists = response.data.content;
+					for (var i = 0 ; i < $scope.myPlaylists.length ; i++) {
+						$scope.myPlaylists[i].check = false;
+					}
 				}, function(error) {
 					NotificationService.error("Error while deleting the playlist : " + playlist.name);
 				});
@@ -130,7 +133,7 @@ SoonzikApp.controller('UsersCtrl', ['$scope', "$routeParams", 'SecureAuth', 'HTT
 				}
 
 
-				if ($scope.user != false) {
+				if ($scope.user != false && $scope.show.user.isArtist == true) {
 					var note_array_id = []
 
 					for (var i = 0 ; i < $scope.show.user.albums.length ; i++) {
@@ -231,6 +234,20 @@ SoonzikApp.controller('UsersCtrl', ['$scope', "$routeParams", 'SecureAuth', 'HTT
 
 		$scope.function_submit = HTTPService.updateUser;
 
+		/**
+		 * Watch for Facebook to be ready.
+		 * There's also the event that could be used
+		 */
+		$scope.$watch(
+			function() {
+				return Facebook.isReady();
+			},
+			function(newVal) {
+				if (newVal)
+					$scope.facebookReady = true;
+			}
+		);
+
 		if (current_user.id != id) {
 			NotificationService.error("You can't edit this profile : it is not yours");
 			$timeout(function() {
@@ -254,14 +271,29 @@ SoonzikApp.controller('UsersCtrl', ['$scope', "$routeParams", 'SecureAuth', 'HTT
 					delete $scope.form.user.address;
 				}
 
-				// In the _form, Image & background need to be replaced by file uploader
-				$scope.loading = false;
+				HTTPService.getIdentities().then(function(response) {
+					var identity = response.data;
+
+					for (var i = 0 ; i < identity.length ; i++) {
+						$scope.form.identities[identity[i].provider] = identity[i].uid;
+					}
+
+					$scope.loading = false;
+				}, function(error) {
+					// Do nothing
+				});
 			}, function (error) {
 				// error management to do
 				NotificationService.error("An error occured while loading this profile");
 			});
 		}
 	}
+
+	/*
+	**
+	** INTERACTION CALLBACK
+	**
+	*/
 
 	$scope.submitForm = function() {
 		SecureAuth.securedTransaction(function (key, user_id) {
@@ -322,7 +354,7 @@ SoonzikApp.controller('UsersCtrl', ['$scope', "$routeParams", 'SecureAuth', 'HTT
 					NotificationService.error("An error occured.");
 				});
 			}
-    }
+		}
 	}
 
 	$scope.uploadBackground = function($file) {
@@ -342,7 +374,7 @@ SoonzikApp.controller('UsersCtrl', ['$scope', "$routeParams", 'SecureAuth', 'HTT
 					NotificationService.error("An error occured.");
 				});
 			}
-    }
+		}
 	}
 
 	$scope.follow = function() {
@@ -374,11 +406,11 @@ SoonzikApp.controller('UsersCtrl', ['$scope', "$routeParams", 'SecureAuth', 'HTT
 				};
 				HTTPService.unfollow(parameters).then(function(followResponse) {
 					for (var i = 0; i < $scope.user.followers.length ; i++) {
-			  		if ($scope.user.followers[i].id == $scope.show.user.id) {
-			  			$scope.user.followers.splice(i, 1);
-			  			break;
-			  		}
-			  	}
+						if ($scope.user.followers[i].id == $scope.show.user.id) {
+							$scope.user.followers.splice(i, 1);
+							break;
+						}
+					}
 				}, function(error) {
 					NotificationService.error("An error occured while following an user");
 				});
@@ -456,90 +488,189 @@ SoonzikApp.controller('UsersCtrl', ['$scope', "$routeParams", 'SecureAuth', 'HTT
 	}
 
 	$scope.addToPlaylist = function() {
-  	var playlist = false;
+		var playlist = false;
 
-  	for (var i = 0 ; i < $scope.myPlaylists.length ; i++) {
-  		if ($scope.myPlaylists[i].check == true)
-	  		playlist = $scope.myPlaylists[i];
-  	}
+		for (var i = 0 ; i < $scope.myPlaylists.length ; i++) {
+			if ($scope.myPlaylists[i].check == true)
+				playlist = $scope.myPlaylists[i];
+		}
 
-  	if ($scope.user != false && $scope.selectedMusic != false && playlist != false) {
-  		SecureAuth.securedTransaction(function(key, user_id) {
-		  		var parameters = {
-		  			secureKey: key,
-		  			user_id: user_id,
-	  				id: $scope.selectedMusic.id,
-	  				playlist_id: playlist.id
-		  		};
-		  		HTTPService.addToPlaylist(parameters).then(function(response) {
-		  			NotificationService.success("The music '" + $scope.selectedMusic.title + "' has been added to the playlist");
-		  			$rootScope.$broadcast("player:addToPlaylist", { playlist: playlist, music: $scope.selectedMusic });
-		  			$scope.selectedMusic = false;
-		  			$scope.tooltip = false;
-		  			playlist.check = false;
-		  		}, function(error) {
-		  			NotificationService.error("Error while saving a new music in the playlist");
-		  		});
-		  	}, function(error) {
-		  		NotificationService.error("Error while saving a new music in the playlist");
-		  	});
-  	}
-  }
+		if ($scope.user != false && $scope.selectedMusic != false && playlist != false) {
+			SecureAuth.securedTransaction(function(key, user_id) {
+					var parameters = {
+						secureKey: key,
+						user_id: user_id,
+						id: $scope.selectedMusic.id,
+						playlist_id: playlist.id
+					};
+					HTTPService.addToPlaylist(parameters).then(function(response) {
+						NotificationService.success("The music '" + $scope.selectedMusic.title + "' has been added to the playlist");
+						$rootScope.$broadcast("player:addToPlaylist", { playlist: playlist, music: $scope.selectedMusic });
+						$scope.selectedMusic = false;
+						$scope.tooltip = false;
+						playlist.check = false;
+					}, function(error) {
+						NotificationService.error("Error while saving a new music in the playlist");
+					});
+				}, function(error) {
+					NotificationService.error("Error while saving a new music in the playlist");
+				});
+		}
+	}
 
-  $scope.selectMusic = function(music) {
-  	if ($scope.selectedMusic == music) {
-  		$scope.selectedMusic = false;
-  	} else {
-	  	$scope.selectedMusic = music;
-	  }
-  }
+	$scope.selectMusic = function(music) {
+		if ($scope.selectedMusic == music) {
+			$scope.selectedMusic = false;
+		} else {
+			$scope.selectedMusic = music;
+		}
+	}
 
-  $scope.setTooltip = function(value) {
-  	console.log("mdr");
-  	$scope.tooltip = value;
-  	if ($scope.tooltip != false) {
-  		for (var i = 0 ; i < $scope.myPlaylists.length ; i++) {
-  			for (var j = 0 ; j < $scope.myPlaylists[i].musics.length ; j++) {
-  				if (value.id == $scope.myPlaylists[i].musics[j].id) {
-  					$scope.myPlaylists[i].check = true;
-  				}
-  			}
-  		}
-  	} else {
-  		for (var i = 0 ; i < $scope.myPlaylists.length ; i++) {
+	$scope.setTooltip = function(value) {
+		$scope.tooltip = value;
+		if ($scope.tooltip != false) {
+			for (var i = 0 ; i < $scope.myPlaylists.length ; i++) {
+				for (var j = 0 ; j < $scope.myPlaylists[i].musics.length ; j++) {
+					if (value.id == $scope.myPlaylists[i].musics[j].id) {
+						$scope.myPlaylists[i].check = true;
+					}
+				}
+			}
+		} else {
+			for (var i = 0 ; i < $scope.myPlaylists.length ; i++) {
  				$scope.myPlaylists[i].check = false;
-  		}
-  		$scope.selectMusic(false);
-  	}
-  }
+			}
+			$scope.selectMusic(false);
+		}
+	}
+
+	/**************************************/
+
+	/* 
+	**
+	** SOCIAL NETWORK
+	**
+	*/
+			
+	Facebook.getLoginStatus(function(response) {
+		if (response.status == 'connected') {
+			$scope.isFBLogged = true;
+		}
+	});
+	
+	/**
+	 * IntentLogin
+	 */
+	$scope.IntentLogin = function() {
+		if (!$scope.isFBLogged && $scope.facebookReady) {
+			Facebook.login(function(response) {
+				if (response.status == 'connected') {
+					$scope.me();
+				}
+			});
+		} else if ($scope.isFBLogged && $scope.facebookReady) {
+			$scope.me();
+		}
+	};
+	 
+ /**
+	* me 
+	*/
+	$scope.me = function() {
+		Facebook.api('/me', function(response) {
+			/**
+			 * Using $scope.$apply since this happens outside angular framework.
+			 */
+			$scope.$apply(function() {
+				SecureAuth.securedTransaction(function (key, user_id) {
+					var parameters = { secureKey: key, user_id: user_id, uid: response.id, provider: "facebook" };
+					
+					HTTPService.linkSocial(parameters).then(function() {
+						$scope.isFBLogged = true;
+						$scope.form.identities.facebook = response.id;
+					}, function(error) {
+						if (error.status == 409) {
+							NotificationService.error("The Facebook account is already linked to another SoonZik account");
+						} else {
+							NotificationService.error("Can't link the social network to your profile, try again later.");
+						}
+					});
+				}, function(error) {
+					NotificationService.error("Can't link the social network to your profile, try again later.");
+				});
+			});
+			
+		});
+	};
+
+	$scope.googleCallback = function() {
+		$scope.$on('event:google-plus-signin-success', function (event, authResult) {
+			$scope.onSignInCallback(authResult);
+		});
+	}
+
+	$scope.onSignInCallback = function(authResult){
+		// Set the access token on the JavaScript API Client
+		gapi.auth.setToken(authResult);
+		// Load G+
+		gapi.client.load('plus', 'v1').then(function() {
+			// Get uid
+			gapi.client.plus.people.get({
+		    'userId': 'me'
+		  }).then(function(res) {
+		  	$scope.$apply(function() {
+					SecureAuth.securedTransaction(function (key, user_id) {
+						var parameters = { secureKey: key, user_id: user_id, uid: res.result.id, provider: "google" };
+						
+						HTTPService.linkSocial(parameters).then(function() {
+							$scope.form.identities.google = res.result.id;
+						}, function(error) {
+							if (error.status == 409) {
+								NotificationService.error("The Google Plus account is already linked to another SoonZik account");
+							} else {
+								NotificationService.error("Can't link the social network to your profile, try again later.");
+							}
+						});
+					}, function(error) {
+						NotificationService.error("Can't link the social network to your profile, try again later.");
+					});
+				});
+		  }, function(err) {
+		  	NotificationService.error("Can't connect to Google, please try later");
+		  });
+		}, function(error) {
+	  	NotificationService.error("Can't connect to Google, please try later");
+		});
+	}
 
 	/* Utils function */
 
 	$scope.range = function(n) {
 		if (n > 0)
-	  	return new Array(n);
-	  else
-	  	return []
-  };
+			return new Array(n);
+		else
+			return []
+	};
 
-  $scope.formatTime = function(duration) {
-  	var min = ~~(duration / 60);
-  	var sec = duration % 60;
+	$scope.formatTime = function(duration) {
+		var min = ~~(duration / 60);
+		var sec = duration % 60;
 
-  	if (min.toString().length == 1)
-  		min = "0" + min;
-  	if (sec.toString().length == 1)
-  		sec = "0" + sec;
-  	return min + ":" + sec;
-  }
+		if (min.toString().length == 1)
+			min = "0" + min;
+		if (sec.toString().length == 1)
+			sec = "0" + sec;
+		return min + ":" + sec;
+	}
 
-  $scope.isaFollower = function() {
-  	if ($scope.user != false) {
-	  	for (var i = 0; i < $scope.user.followers.length ; i++) {
-	  		if ($scope.user.followers[i].id == $scope.show.user.id)
-	  			return true;
-	  	}
-  	}
-  	return false;
-  }
+	$scope.isaFollower = function() {
+		if ($scope.user != false) {
+			for (var i = 0; i < $scope.user.followers.length ; i++) {
+				if ($scope.user.followers[i].id == $scope.show.user.id)
+					return true;
+			}
+		}
+		return false;
+	}
+
 }]);

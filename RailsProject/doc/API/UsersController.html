@@ -113,35 +113,37 @@
 <p>Controller which manage the transaction for the Users objects Here is the
 list of action available :</p>
 <ul><li>
-<p>index       [get]</p>
+<p>index                       [get]</p>
 </li><li>
-<p>show        [get]</p>
+<p>show                               [get]</p>
 </li><li>
-<p>find        [get]</p>
+<p>find                               [get]</p>
 </li><li>
-<p>save        [post]</p>
+<p>save                               [post]</p>
 </li><li>
-<p>update      [post] - SECURE</p>
+<p>update                     [post] - SECURE</p>
 </li><li>
 <p>getmusics   [get] - SECURE</p>
 </li><li>
-<p>isartist    [get]</p>
+<p>isartist           [get]</p>
 </li><li>
-<p>follow      [post] - SECURE</p>
+<p>follow                     [post] - SECURE</p>
 </li><li>
-<p>unfollow    [post] - SECURE</p>
+<p>unfollow           [post] - SECURE</p>
 </li><li>
 <p>addfriend   [post] - SECURE</p>
 </li><li>
 <p>delfriend   [post] - SECURE</p>
 </li><li>
-<p>getFriends  [get]</p>
+<p>getFriends [get]</p>
 </li><li>
-<p>getFollows  [get]</p>
+<p>getFollows [get]</p>
 </li><li>
 <p>getFollowers [get]</p>
 </li><li>
 <p>uploadImg   [post] - SECURE</p>
+</li><li>
+<p>linkSocial [post] - SECURE</p>
 </li></ul>
 		</section>
 
@@ -196,44 +198,44 @@ list of action available :</p>
 </li></ul>					
 											<div class="method-source-code" id="addfriend-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/users_controller.rb, line 502</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/users_controller.rb, line 503</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">addfriend</span>
-  <span class="ruby-keyword">begin</span>
-    <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@security</span>)
-      <span class="ruby-identifier">u</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">find_by_id</span>(<span class="ruby-ivar">@user_id</span>)
-      <span class="ruby-identifier">friend</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">find_by_id</span>(<span class="ruby-ivar">@friend_id</span>)
+        <span class="ruby-keyword">begin</span>
+                <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@security</span>)
+                        <span class="ruby-identifier">u</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">find_by_id</span>(<span class="ruby-ivar">@user_id</span>)
+                        <span class="ruby-identifier">friend</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">find_by_id</span>(<span class="ruby-ivar">@friend_id</span>)
 
-      <span class="ruby-keyword">if</span> (<span class="ruby-operator">!</span><span class="ruby-identifier">u</span> <span class="ruby-operator">||</span> <span class="ruby-operator">!</span><span class="ruby-identifier">friend</span>)
-        <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">502</span>
-        <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:not_found</span>
-      <span class="ruby-keyword">else</span>
-        <span class="ruby-identifier">code</span> = <span class="ruby-value">201</span>
-        <span class="ruby-identifier">http</span> = <span class="ruby-value">:created</span>
-        <span class="ruby-identifier">u</span>.<span class="ruby-identifier">friends</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">friendInList</span><span class="ruby-operator">|</span>
-          <span class="ruby-keyword">if</span> <span class="ruby-identifier">friendInList</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">friend</span>
-            <span class="ruby-identifier">code</span> = <span class="ruby-value">405</span>
-            <span class="ruby-identifier">http</span> = <span class="ruby-value">:method_not_allowed</span>
-          <span class="ruby-keyword">end</span>
-        }
-        <span class="ruby-keyword">if</span> <span class="ruby-identifier">code</span> <span class="ruby-operator">==</span> <span class="ruby-value">201</span>
-          <span class="ruby-identifier">u</span>.<span class="ruby-identifier">friends</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">friend</span>
-          <span class="ruby-identifier">friend</span>.<span class="ruby-identifier">friends</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">u</span>
-          <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">201</span>
-        <span class="ruby-keyword">else</span>
-          <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">502</span>
+                        <span class="ruby-keyword">if</span> (<span class="ruby-operator">!</span><span class="ruby-identifier">u</span> <span class="ruby-operator">||</span> <span class="ruby-operator">!</span><span class="ruby-identifier">friend</span>)
+                                <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">502</span>
+                                <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:not_found</span>
+                        <span class="ruby-keyword">else</span>
+                                <span class="ruby-identifier">code</span> = <span class="ruby-value">201</span>
+                                <span class="ruby-identifier">http</span> = <span class="ruby-value">:created</span>
+                                <span class="ruby-identifier">u</span>.<span class="ruby-identifier">friends</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">friendInList</span><span class="ruby-operator">|</span>
+                                        <span class="ruby-keyword">if</span> <span class="ruby-identifier">friendInList</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">friend</span>
+                                                <span class="ruby-identifier">code</span> = <span class="ruby-value">405</span>
+                                                <span class="ruby-identifier">http</span> = <span class="ruby-value">:method_not_allowed</span>
+                                        <span class="ruby-keyword">end</span>
+                                }
+                                <span class="ruby-keyword">if</span> <span class="ruby-identifier">code</span> <span class="ruby-operator">==</span> <span class="ruby-value">201</span>
+                                        <span class="ruby-identifier">u</span>.<span class="ruby-identifier">friends</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">friend</span>
+                                        <span class="ruby-identifier">friend</span>.<span class="ruby-identifier">friends</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">u</span>
+                                        <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">201</span>
+                                <span class="ruby-keyword">else</span>
+                                        <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">502</span>
+                                <span class="ruby-keyword">end</span>
+                                <span class="ruby-identifier">codeAnswer</span> <span class="ruby-identifier">code</span>
+                                <span class="ruby-identifier">defineHttp</span> <span class="ruby-identifier">http</span>
+                        <span class="ruby-keyword">end</span>
+                <span class="ruby-keyword">else</span>
+                        <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">500</span>
+                        <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:forbidden</span>
+                <span class="ruby-keyword">end</span>
+        <span class="ruby-keyword">rescue</span>
+                <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">504</span>
+                <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:service_unavailable</span>
         <span class="ruby-keyword">end</span>
-        <span class="ruby-identifier">codeAnswer</span> <span class="ruby-identifier">code</span>
-        <span class="ruby-identifier">defineHttp</span> <span class="ruby-identifier">http</span>
-      <span class="ruby-keyword">end</span>
-    <span class="ruby-keyword">else</span>
-      <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">500</span>
-      <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:forbidden</span>
-    <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">rescue</span>
-    <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">504</span>
-    <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:service_unavailable</span>
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-identifier">sendJson</span>
+        <span class="ruby-identifier">sendJson</span>
 <span class="ruby-keyword">end</span></code></pre>
 						</div>
 										</div>
@@ -274,44 +276,44 @@ friendlist</p>
 </li></ul>					
 											<div class="method-source-code" id="delfriend-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/users_controller.rb, line 557</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/users_controller.rb, line 558</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">delfriend</span>
-  <span class="ruby-keyword">begin</span>
-    <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@security</span>)
-      <span class="ruby-identifier">u</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">find_by_id</span>(<span class="ruby-ivar">@user_id</span>)
-      <span class="ruby-identifier">friend</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">find_by_id</span>(<span class="ruby-ivar">@friend_id</span>)
+        <span class="ruby-keyword">begin</span>
+                <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@security</span>)
+                        <span class="ruby-identifier">u</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">find_by_id</span>(<span class="ruby-ivar">@user_id</span>)
+                        <span class="ruby-identifier">friend</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">find_by_id</span>(<span class="ruby-ivar">@friend_id</span>)
 
-      <span class="ruby-keyword">if</span> (<span class="ruby-operator">!</span><span class="ruby-identifier">u</span> <span class="ruby-operator">||</span> <span class="ruby-operator">!</span><span class="ruby-identifier">friend</span>)
-        <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">502</span>
-        <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:not_found</span>
-      <span class="ruby-keyword">else</span>
-        <span class="ruby-identifier">code</span> = <span class="ruby-value">405</span>
-        <span class="ruby-identifier">http</span> = <span class="ruby-value">:method_not_allowed</span>
-        <span class="ruby-identifier">u</span>.<span class="ruby-identifier">friends</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">friendInList</span><span class="ruby-operator">|</span>
-          <span class="ruby-keyword">if</span> <span class="ruby-identifier">friendInList</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">friend</span>
-            <span class="ruby-identifier">code</span> = <span class="ruby-value">200</span>
-            <span class="ruby-identifier">http</span> = <span class="ruby-value">:ok</span>
-          <span class="ruby-keyword">end</span>
-        }
-        <span class="ruby-keyword">if</span> <span class="ruby-identifier">code</span> <span class="ruby-operator">==</span> <span class="ruby-value">200</span>
-          <span class="ruby-identifier">u</span>.<span class="ruby-identifier">friends</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-identifier">friend</span>)
-          <span class="ruby-identifier">friend</span>.<span class="ruby-identifier">friends</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-identifier">u</span>)
-          <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">200</span>
-        <span class="ruby-keyword">else</span>
-          <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">502</span>
+                        <span class="ruby-keyword">if</span> (<span class="ruby-operator">!</span><span class="ruby-identifier">u</span> <span class="ruby-operator">||</span> <span class="ruby-operator">!</span><span class="ruby-identifier">friend</span>)
+                                <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">502</span>
+                                <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:not_found</span>
+                        <span class="ruby-keyword">else</span>
+                                <span class="ruby-identifier">code</span> = <span class="ruby-value">405</span>
+                                <span class="ruby-identifier">http</span> = <span class="ruby-value">:method_not_allowed</span>
+                                <span class="ruby-identifier">u</span>.<span class="ruby-identifier">friends</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">friendInList</span><span class="ruby-operator">|</span>
+                                        <span class="ruby-keyword">if</span> <span class="ruby-identifier">friendInList</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">friend</span>
+                                                <span class="ruby-identifier">code</span> = <span class="ruby-value">200</span>
+                                                <span class="ruby-identifier">http</span> = <span class="ruby-value">:ok</span>
+                                        <span class="ruby-keyword">end</span>
+                                }
+                                <span class="ruby-keyword">if</span> <span class="ruby-identifier">code</span> <span class="ruby-operator">==</span> <span class="ruby-value">200</span>
+                                        <span class="ruby-identifier">u</span>.<span class="ruby-identifier">friends</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-identifier">friend</span>)
+                                        <span class="ruby-identifier">friend</span>.<span class="ruby-identifier">friends</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-identifier">u</span>)
+                                        <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">200</span>
+                                <span class="ruby-keyword">else</span>
+                                        <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">502</span>
+                                <span class="ruby-keyword">end</span>
+                                <span class="ruby-identifier">codeAnswer</span> <span class="ruby-identifier">code</span>
+                                <span class="ruby-identifier">defineHttp</span> <span class="ruby-identifier">http</span>
+                        <span class="ruby-keyword">end</span>
+                <span class="ruby-keyword">else</span>
+                        <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">500</span>
+                        <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:forbidden</span>
+                <span class="ruby-keyword">end</span>
+        <span class="ruby-keyword">rescue</span>
+                <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">504</span>
+                <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:service_unavailable</span>
         <span class="ruby-keyword">end</span>
-        <span class="ruby-identifier">codeAnswer</span> <span class="ruby-identifier">code</span>
-        <span class="ruby-identifier">defineHttp</span> <span class="ruby-identifier">http</span>
-      <span class="ruby-keyword">end</span>
-    <span class="ruby-keyword">else</span>
-      <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">500</span>
-      <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:forbidden</span>
-    <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">rescue</span>
-    <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">504</span>
-    <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:service_unavailable</span>
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-identifier">sendJson</span>
+        <span class="ruby-identifier">sendJson</span>
 <span class="ruby-keyword">end</span></code></pre>
 						</div>
 										</div>
@@ -361,84 +363,84 @@ Note : By default, if you precise no attribute, it will take every row</pre>
 </li></ul>					
 											<div class="method-source-code" id="find-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/users_controller.rb, line 114</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/users_controller.rb, line 115</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">find</span>
-  <span class="ruby-keyword">begin</span>
-    <span class="ruby-identifier">user_object</span> = <span class="ruby-keyword">nil</span>
-    <span class="ruby-keyword">if</span> (<span class="ruby-keyword">defined?</span><span class="ruby-ivar">@attribute</span>)
-      <span class="ruby-comment"># - - - - - - - -</span>
-      <span class="ruby-ivar">@attribute</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">x</span>, <span class="ruby-identifier">y</span><span class="ruby-operator">|</span>
-        <span class="ruby-identifier">condition</span> = <span class="ruby-string">&quot;&quot;</span>
-        <span class="ruby-keyword">if</span> (<span class="ruby-identifier">y</span>[<span class="ruby-value">0</span>] <span class="ruby-operator">==</span> <span class="ruby-string">&quot;%&quot;</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">y</span>[<span class="ruby-value">-1</span>] <span class="ruby-operator">==</span> <span class="ruby-string">&quot;%&quot;</span>)  <span class="ruby-comment">#LIKE</span>
-          <span class="ruby-identifier">condition</span> = [<span class="ruby-string">&quot;&#39;users&#39;.? LIKE ?&quot;</span>, <span class="ruby-node">%Q[#{x}]</span>, <span class="ruby-node">&quot;%#{y[1...-1]}%&quot;</span>];
-        <span class="ruby-keyword">else</span>                              <span class="ruby-comment">#WHERE</span>
-          <span class="ruby-identifier">condition</span> = {<span class="ruby-identifier">x</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">y</span>};
+        <span class="ruby-keyword">begin</span>
+                <span class="ruby-identifier">user_object</span> = <span class="ruby-keyword">nil</span>
+                <span class="ruby-keyword">if</span> (<span class="ruby-keyword">defined?</span><span class="ruby-ivar">@attribute</span>)
+                        <span class="ruby-comment"># - - - - - - - -</span>
+                        <span class="ruby-ivar">@attribute</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">x</span>, <span class="ruby-identifier">y</span><span class="ruby-operator">|</span>
+                                <span class="ruby-identifier">condition</span> = <span class="ruby-string">&quot;&quot;</span>
+                                <span class="ruby-keyword">if</span> (<span class="ruby-identifier">y</span>[<span class="ruby-value">0</span>] <span class="ruby-operator">==</span> <span class="ruby-string">&quot;%&quot;</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">y</span>[<span class="ruby-value">-1</span>] <span class="ruby-operator">==</span> <span class="ruby-string">&quot;%&quot;</span>)  <span class="ruby-comment">#LIKE</span>
+                                        <span class="ruby-identifier">condition</span> = [<span class="ruby-string">&quot;&#39;users&#39;.? LIKE ?&quot;</span>, <span class="ruby-node">%Q[#{x}]</span>, <span class="ruby-node">&quot;%#{y[1...-1]}%&quot;</span>];
+                                <span class="ruby-keyword">else</span>                                                                                                                      <span class="ruby-comment">#WHERE</span>
+                                        <span class="ruby-identifier">condition</span> = {<span class="ruby-identifier">x</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">y</span>};
+                                <span class="ruby-keyword">end</span>
+
+                                <span class="ruby-keyword">if</span> (<span class="ruby-identifier">user_object</span> <span class="ruby-operator">==</span> <span class="ruby-keyword">nil</span>)                                   <span class="ruby-comment">#user_object doesn&#39;t exist</span>
+                                        <span class="ruby-identifier">user_object</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">where</span>(<span class="ruby-identifier">condition</span>)
+                                <span class="ruby-keyword">else</span>                                                                                                                      <span class="ruby-comment">#user_object exists</span>
+                                        <span class="ruby-identifier">user_object</span> = <span class="ruby-identifier">user_object</span>.<span class="ruby-identifier">where</span>(<span class="ruby-identifier">condition</span>)
+                                <span class="ruby-keyword">end</span>
+                        <span class="ruby-keyword">end</span>
+                        <span class="ruby-comment"># - - - - - - - -</span>
+                <span class="ruby-keyword">else</span>
+                        <span class="ruby-identifier">user_object</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">all</span>                                             <span class="ruby-comment">#no attribute specified</span>
+                <span class="ruby-keyword">end</span>
+
+                <span class="ruby-identifier">order_asc</span> = <span class="ruby-string">&quot;&quot;</span>
+                <span class="ruby-identifier">order_desc</span> = <span class="ruby-string">&quot;&quot;</span>
+                <span class="ruby-comment"># filter the order by asc to create the string</span>
+                <span class="ruby-keyword">if</span> (<span class="ruby-keyword">defined?</span><span class="ruby-ivar">@order_by_asc</span>)
+                        <span class="ruby-ivar">@order_by_asc</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span>
+                                <span class="ruby-identifier">order_asc</span> <span class="ruby-operator">+=</span> <span class="ruby-string">&quot;, &quot;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">order_asc</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">!=</span> <span class="ruby-value">0</span>
+                                <span class="ruby-identifier">order_asc</span> <span class="ruby-operator">+=</span> (<span class="ruby-node">%Q[#{x}]</span> <span class="ruby-operator">+</span> <span class="ruby-string">&quot; ASC&quot;</span>)
+                        <span class="ruby-keyword">end</span>
+                <span class="ruby-keyword">end</span>
+                <span class="ruby-comment"># filter the order by desc to create the string</span>
+                <span class="ruby-keyword">if</span> (<span class="ruby-keyword">defined?</span><span class="ruby-ivar">@order_by_desc</span>)
+                        <span class="ruby-ivar">@order_by_desc</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span>
+                                <span class="ruby-identifier">order_desc</span> <span class="ruby-operator">+=</span> <span class="ruby-string">&quot;, &quot;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">order_desc</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">!=</span> <span class="ruby-value">0</span>
+                                <span class="ruby-identifier">order_desc</span> <span class="ruby-operator">+=</span> (<span class="ruby-node">%Q[#{x}]</span> <span class="ruby-operator">+</span> <span class="ruby-string">&quot; DESC&quot;</span>)
+                        <span class="ruby-keyword">end</span>
+                <span class="ruby-keyword">end</span>
+
+                <span class="ruby-keyword">if</span> (<span class="ruby-identifier">order_asc</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">order_desc</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span>)
+                        <span class="ruby-identifier">user_object</span> = <span class="ruby-identifier">user_object</span>.<span class="ruby-identifier">order</span>(<span class="ruby-identifier">order_asc</span> <span class="ruby-operator">+</span> <span class="ruby-string">&quot;, &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">order_desc</span>)
+                <span class="ruby-keyword">elsif</span> (<span class="ruby-identifier">order_asc</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">order_desc</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span>)
+                        <span class="ruby-identifier">user_object</span> = <span class="ruby-identifier">user_object</span>.<span class="ruby-identifier">order</span>(<span class="ruby-identifier">order_desc</span>)
+                <span class="ruby-keyword">elsif</span> (<span class="ruby-identifier">order_asc</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">order_desc</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>)
+                        <span class="ruby-identifier">user_object</span> = <span class="ruby-identifier">user_object</span>.<span class="ruby-identifier">order</span>(<span class="ruby-identifier">order_asc</span>)
+                <span class="ruby-keyword">end</span>
+
+                <span class="ruby-keyword">if</span> (<span class="ruby-keyword">defined?</span><span class="ruby-ivar">@group_by</span>)              <span class="ruby-comment">#group</span>
+                        <span class="ruby-identifier">group</span> = []
+                        <span class="ruby-ivar">@group_by</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span>
+                                <span class="ruby-identifier">group</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">%Q[#{x}]</span>
+                        <span class="ruby-keyword">end</span>
+                        <span class="ruby-identifier">user_object</span> = <span class="ruby-identifier">user_object</span>.<span class="ruby-identifier">group</span>(<span class="ruby-identifier">group</span>.<span class="ruby-identifier">join</span>(<span class="ruby-string">&quot;, &quot;</span>))
+                <span class="ruby-keyword">end</span>
+
+                <span class="ruby-keyword">if</span> (<span class="ruby-keyword">defined?</span><span class="ruby-ivar">@limit</span>)                  <span class="ruby-comment">#limit</span>
+                        <span class="ruby-identifier">user_object</span> = <span class="ruby-identifier">user_object</span>.<span class="ruby-identifier">limit</span>(<span class="ruby-ivar">@limit</span>.<span class="ruby-identifier">to_i</span>)
+                <span class="ruby-keyword">end</span>
+                <span class="ruby-keyword">if</span> (<span class="ruby-keyword">defined?</span><span class="ruby-ivar">@offset</span>)                        <span class="ruby-comment">#offset</span>
+                        <span class="ruby-identifier">user_object</span> = <span class="ruby-identifier">user_object</span>.<span class="ruby-identifier">offset</span>(<span class="ruby-ivar">@offset</span>.<span class="ruby-identifier">to_i</span>)
+                <span class="ruby-keyword">end</span>
+
+                <span class="ruby-ivar">@returnValue</span> = { <span class="ruby-identifier">content</span><span class="ruby-operator">:</span> <span class="ruby-identifier">user_object</span>.<span class="ruby-identifier">as_json</span>(<span class="ruby-value">:only</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">User</span>.<span class="ruby-identifier">miniKey</span>) }
+
+                <span class="ruby-keyword">if</span> (<span class="ruby-identifier">user_object</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>)
+                        <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">202</span>
+                <span class="ruby-keyword">else</span>
+                        <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">200</span>
+                <span class="ruby-keyword">end</span>
+
+        <span class="ruby-keyword">rescue</span>
+                <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">504</span>
+                <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:service_unavailable</span>
         <span class="ruby-keyword">end</span>
-
-        <span class="ruby-keyword">if</span> (<span class="ruby-identifier">user_object</span> <span class="ruby-operator">==</span> <span class="ruby-keyword">nil</span>)          <span class="ruby-comment">#user_object doesn&#39;t exist</span>
-          <span class="ruby-identifier">user_object</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">where</span>(<span class="ruby-identifier">condition</span>)
-        <span class="ruby-keyword">else</span>                              <span class="ruby-comment">#user_object exists</span>
-          <span class="ruby-identifier">user_object</span> = <span class="ruby-identifier">user_object</span>.<span class="ruby-identifier">where</span>(<span class="ruby-identifier">condition</span>)
-        <span class="ruby-keyword">end</span>
-      <span class="ruby-keyword">end</span>
-      <span class="ruby-comment"># - - - - - - - -</span>
-    <span class="ruby-keyword">else</span>
-      <span class="ruby-identifier">user_object</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">all</span>            <span class="ruby-comment">#no attribute specified</span>
-    <span class="ruby-keyword">end</span>
-
-    <span class="ruby-identifier">order_asc</span> = <span class="ruby-string">&quot;&quot;</span>
-    <span class="ruby-identifier">order_desc</span> = <span class="ruby-string">&quot;&quot;</span>
-    <span class="ruby-comment"># filter the order by asc to create the string</span>
-    <span class="ruby-keyword">if</span> (<span class="ruby-keyword">defined?</span><span class="ruby-ivar">@order_by_asc</span>)
-      <span class="ruby-ivar">@order_by_asc</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span>
-        <span class="ruby-identifier">order_asc</span> <span class="ruby-operator">+=</span> <span class="ruby-string">&quot;, &quot;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">order_asc</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">!=</span> <span class="ruby-value">0</span>
-        <span class="ruby-identifier">order_asc</span> <span class="ruby-operator">+=</span> (<span class="ruby-node">%Q[#{x}]</span> <span class="ruby-operator">+</span> <span class="ruby-string">&quot; ASC&quot;</span>)
-      <span class="ruby-keyword">end</span>
-    <span class="ruby-keyword">end</span>
-    <span class="ruby-comment"># filter the order by desc to create the string</span>
-    <span class="ruby-keyword">if</span> (<span class="ruby-keyword">defined?</span><span class="ruby-ivar">@order_by_desc</span>)
-      <span class="ruby-ivar">@order_by_desc</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span>
-        <span class="ruby-identifier">order_desc</span> <span class="ruby-operator">+=</span> <span class="ruby-string">&quot;, &quot;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">order_desc</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">!=</span> <span class="ruby-value">0</span>
-        <span class="ruby-identifier">order_desc</span> <span class="ruby-operator">+=</span> (<span class="ruby-node">%Q[#{x}]</span> <span class="ruby-operator">+</span> <span class="ruby-string">&quot; DESC&quot;</span>)
-      <span class="ruby-keyword">end</span>
-    <span class="ruby-keyword">end</span>
-
-    <span class="ruby-keyword">if</span> (<span class="ruby-identifier">order_asc</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">order_desc</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span>)
-      <span class="ruby-identifier">user_object</span> = <span class="ruby-identifier">user_object</span>.<span class="ruby-identifier">order</span>(<span class="ruby-identifier">order_asc</span> <span class="ruby-operator">+</span> <span class="ruby-string">&quot;, &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">order_desc</span>)
-    <span class="ruby-keyword">elsif</span> (<span class="ruby-identifier">order_asc</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">order_desc</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span>)
-      <span class="ruby-identifier">user_object</span> = <span class="ruby-identifier">user_object</span>.<span class="ruby-identifier">order</span>(<span class="ruby-identifier">order_desc</span>)
-    <span class="ruby-keyword">elsif</span> (<span class="ruby-identifier">order_asc</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">order_desc</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>)
-      <span class="ruby-identifier">user_object</span> = <span class="ruby-identifier">user_object</span>.<span class="ruby-identifier">order</span>(<span class="ruby-identifier">order_asc</span>)
-    <span class="ruby-keyword">end</span>
-
-    <span class="ruby-keyword">if</span> (<span class="ruby-keyword">defined?</span><span class="ruby-ivar">@group_by</span>)    <span class="ruby-comment">#group</span>
-      <span class="ruby-identifier">group</span> = []
-      <span class="ruby-ivar">@group_by</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span>
-        <span class="ruby-identifier">group</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">%Q[#{x}]</span>
-      <span class="ruby-keyword">end</span>
-      <span class="ruby-identifier">user_object</span> = <span class="ruby-identifier">user_object</span>.<span class="ruby-identifier">group</span>(<span class="ruby-identifier">group</span>.<span class="ruby-identifier">join</span>(<span class="ruby-string">&quot;, &quot;</span>))
-    <span class="ruby-keyword">end</span>
-
-    <span class="ruby-keyword">if</span> (<span class="ruby-keyword">defined?</span><span class="ruby-ivar">@limit</span>)       <span class="ruby-comment">#limit</span>
-      <span class="ruby-identifier">user_object</span> = <span class="ruby-identifier">user_object</span>.<span class="ruby-identifier">limit</span>(<span class="ruby-ivar">@limit</span>.<span class="ruby-identifier">to_i</span>)
-    <span class="ruby-keyword">end</span>
-    <span class="ruby-keyword">if</span> (<span class="ruby-keyword">defined?</span><span class="ruby-ivar">@offset</span>)      <span class="ruby-comment">#offset</span>
-      <span class="ruby-identifier">user_object</span> = <span class="ruby-identifier">user_object</span>.<span class="ruby-identifier">offset</span>(<span class="ruby-ivar">@offset</span>.<span class="ruby-identifier">to_i</span>)
-    <span class="ruby-keyword">end</span>
-
-    <span class="ruby-ivar">@returnValue</span> = { <span class="ruby-identifier">content</span><span class="ruby-operator">:</span> <span class="ruby-identifier">user_object</span>.<span class="ruby-identifier">as_json</span>(<span class="ruby-value">:only</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">User</span>.<span class="ruby-identifier">miniKey</span>) }
-
-    <span class="ruby-keyword">if</span> (<span class="ruby-identifier">user_object</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>)
-      <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">202</span>
-    <span class="ruby-keyword">else</span>
-      <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">200</span>
-    <span class="ruby-keyword">end</span>
-
-  <span class="ruby-keyword">rescue</span>
-    <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">504</span>
-    <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:service_unavailable</span>
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-identifier">sendJson</span>
+        <span class="ruby-identifier">sendJson</span>
 <span class="ruby-keyword">end</span></code></pre>
 						</div>
 										</div>
@@ -478,43 +480,43 @@ Note : By default, if you precise no attribute, it will take every row</pre>
 </li></ul>					
 											<div class="method-source-code" id="follow-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/users_controller.rb, line 394</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/users_controller.rb, line 395</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">follow</span>
-  <span class="ruby-keyword">begin</span>
-    <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@security</span>)
-      <span class="ruby-identifier">u</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">find_by_id</span>(<span class="ruby-ivar">@user_id</span>)
-      <span class="ruby-identifier">toFollow</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">find_by_id</span>(<span class="ruby-ivar">@follow_id</span>)
+        <span class="ruby-keyword">begin</span>
+                <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@security</span>)
+                        <span class="ruby-identifier">u</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">find_by_id</span>(<span class="ruby-ivar">@user_id</span>)
+                        <span class="ruby-identifier">toFollow</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">find_by_id</span>(<span class="ruby-ivar">@follow_id</span>)
 
-      <span class="ruby-keyword">if</span> (<span class="ruby-operator">!</span><span class="ruby-identifier">u</span> <span class="ruby-operator">||</span> <span class="ruby-operator">!</span><span class="ruby-identifier">toFollow</span>)
-        <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">502</span>
-        <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:not_found</span>
-      <span class="ruby-keyword">else</span>
-        <span class="ruby-identifier">code</span> = <span class="ruby-value">201</span>
-        <span class="ruby-identifier">http</span> = <span class="ruby-value">:created</span>
-        <span class="ruby-identifier">u</span>.<span class="ruby-identifier">follows</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">follow</span><span class="ruby-operator">|</span>
-          <span class="ruby-keyword">if</span> <span class="ruby-identifier">follow</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">toFollow</span>
-            <span class="ruby-identifier">code</span> = <span class="ruby-value">405</span>
-            <span class="ruby-identifier">http</span> = <span class="ruby-value">:method_not_allowed</span>
-          <span class="ruby-keyword">end</span>
-        }
-        <span class="ruby-keyword">if</span> <span class="ruby-identifier">code</span> <span class="ruby-operator">==</span> <span class="ruby-value">201</span>
-          <span class="ruby-identifier">u</span>.<span class="ruby-identifier">follows</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">toFollow</span>
-          <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">201</span>
-        <span class="ruby-keyword">else</span>
-          <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">503</span>
+                        <span class="ruby-keyword">if</span> (<span class="ruby-operator">!</span><span class="ruby-identifier">u</span> <span class="ruby-operator">||</span> <span class="ruby-operator">!</span><span class="ruby-identifier">toFollow</span>)
+                                <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">502</span>
+                                <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:not_found</span>
+                        <span class="ruby-keyword">else</span>
+                                <span class="ruby-identifier">code</span> = <span class="ruby-value">201</span>
+                                <span class="ruby-identifier">http</span> = <span class="ruby-value">:created</span>
+                                <span class="ruby-identifier">u</span>.<span class="ruby-identifier">follows</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">follow</span><span class="ruby-operator">|</span>
+                                        <span class="ruby-keyword">if</span> <span class="ruby-identifier">follow</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">toFollow</span>
+                                                <span class="ruby-identifier">code</span> = <span class="ruby-value">405</span>
+                                                <span class="ruby-identifier">http</span> = <span class="ruby-value">:method_not_allowed</span>
+                                        <span class="ruby-keyword">end</span>
+                                }
+                                <span class="ruby-keyword">if</span> <span class="ruby-identifier">code</span> <span class="ruby-operator">==</span> <span class="ruby-value">201</span>
+                                        <span class="ruby-identifier">u</span>.<span class="ruby-identifier">follows</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">toFollow</span>
+                                        <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">201</span>
+                                <span class="ruby-keyword">else</span>
+                                        <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">503</span>
+                                <span class="ruby-keyword">end</span>
+                                <span class="ruby-identifier">codeAnswer</span> <span class="ruby-identifier">code</span>
+                                <span class="ruby-identifier">defineHttp</span> <span class="ruby-identifier">http</span>
+                        <span class="ruby-keyword">end</span>
+                <span class="ruby-keyword">else</span>
+                        <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">500</span>
+                        <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:forbidden</span>
+                <span class="ruby-keyword">end</span>
+        <span class="ruby-keyword">rescue</span>
+                <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">504</span>
+                <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:service_unavailable</span>
         <span class="ruby-keyword">end</span>
-        <span class="ruby-identifier">codeAnswer</span> <span class="ruby-identifier">code</span>
-        <span class="ruby-identifier">defineHttp</span> <span class="ruby-identifier">http</span>
-      <span class="ruby-keyword">end</span>
-    <span class="ruby-keyword">else</span>
-      <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">500</span>
-      <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:forbidden</span>
-    <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">rescue</span>
-    <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">504</span>
-    <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:service_unavailable</span>
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-identifier">sendJson</span>
+        <span class="ruby-identifier">sendJson</span>
 <span class="ruby-keyword">end</span></code></pre>
 						</div>
 										</div>
@@ -550,23 +552,23 @@ Note : By default, if you precise no attribute, it will take every row</pre>
 </li></ul>					
 											<div class="method-source-code" id="getFollowers-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/users_controller.rb, line 674</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/users_controller.rb, line 675</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">getFollowers</span>
-  <span class="ruby-keyword">begin</span>
-    <span class="ruby-identifier">u</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">find_by_id</span>(<span class="ruby-ivar">@id</span>)
+        <span class="ruby-keyword">begin</span>
+                <span class="ruby-identifier">u</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">find_by_id</span>(<span class="ruby-ivar">@id</span>)
 
-    <span class="ruby-keyword">if</span> (<span class="ruby-operator">!</span><span class="ruby-identifier">u</span>)
-      <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">502</span>
-      <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:not_found</span>
-    <span class="ruby-keyword">else</span>
-      <span class="ruby-ivar">@returnValue</span> = { <span class="ruby-identifier">content</span><span class="ruby-operator">:</span> <span class="ruby-identifier">u</span>.<span class="ruby-identifier">followers</span>.<span class="ruby-identifier">reverse_order</span>.<span class="ruby-identifier">as_json</span>(<span class="ruby-value">:only</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">User</span>.<span class="ruby-identifier">miniKey</span>) }
-      <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">200</span>
-    <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">rescue</span>
-    <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">504</span>
-    <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:service_unavailable</span>
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-identifier">sendJson</span>
+                <span class="ruby-keyword">if</span> (<span class="ruby-operator">!</span><span class="ruby-identifier">u</span>)
+                        <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">502</span>
+                        <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:not_found</span>
+                <span class="ruby-keyword">else</span>
+                        <span class="ruby-ivar">@returnValue</span> = { <span class="ruby-identifier">content</span><span class="ruby-operator">:</span> <span class="ruby-identifier">u</span>.<span class="ruby-identifier">followers</span>.<span class="ruby-identifier">reverse_order</span>.<span class="ruby-identifier">as_json</span>(<span class="ruby-value">:only</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">User</span>.<span class="ruby-identifier">miniKey</span>) }
+                        <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">200</span>
+                <span class="ruby-keyword">end</span>
+        <span class="ruby-keyword">rescue</span>
+                <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">504</span>
+                <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:service_unavailable</span>
+        <span class="ruby-keyword">end</span>
+        <span class="ruby-identifier">sendJson</span>
 <span class="ruby-keyword">end</span></code></pre>
 						</div>
 										</div>
@@ -602,23 +604,23 @@ Note : By default, if you precise no attribute, it will take every row</pre>
 </li></ul>					
 											<div class="method-source-code" id="getFollows-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/users_controller.rb, line 642</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/users_controller.rb, line 643</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">getFollows</span>
-  <span class="ruby-keyword">begin</span>
-    <span class="ruby-identifier">u</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">find_by_id</span>(<span class="ruby-ivar">@id</span>)
+        <span class="ruby-keyword">begin</span>
+                <span class="ruby-identifier">u</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">find_by_id</span>(<span class="ruby-ivar">@id</span>)
 
-    <span class="ruby-keyword">if</span> (<span class="ruby-operator">!</span><span class="ruby-identifier">u</span>)
-      <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">502</span>
-      <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:not_found</span>
-    <span class="ruby-keyword">else</span>
-      <span class="ruby-ivar">@returnValue</span> = { <span class="ruby-identifier">content</span><span class="ruby-operator">:</span> <span class="ruby-identifier">u</span>.<span class="ruby-identifier">follows</span>.<span class="ruby-identifier">reverse_order</span>.<span class="ruby-identifier">as_json</span>(<span class="ruby-value">:only</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">User</span>.<span class="ruby-identifier">miniKey</span>) }
-      <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">200</span>
-    <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">rescue</span>
-    <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">504</span>
-    <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:service_unavailable</span>
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-identifier">sendJson</span>
+                <span class="ruby-keyword">if</span> (<span class="ruby-operator">!</span><span class="ruby-identifier">u</span>)
+                        <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">502</span>
+                        <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:not_found</span>
+                <span class="ruby-keyword">else</span>
+                        <span class="ruby-ivar">@returnValue</span> = { <span class="ruby-identifier">content</span><span class="ruby-operator">:</span> <span class="ruby-identifier">u</span>.<span class="ruby-identifier">follows</span>.<span class="ruby-identifier">reverse_order</span>.<span class="ruby-identifier">as_json</span>(<span class="ruby-value">:only</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">User</span>.<span class="ruby-identifier">miniKey</span>) }
+                        <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">200</span>
+                <span class="ruby-keyword">end</span>
+        <span class="ruby-keyword">rescue</span>
+                <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">504</span>
+                <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:service_unavailable</span>
+        <span class="ruby-keyword">end</span>
+        <span class="ruby-identifier">sendJson</span>
 <span class="ruby-keyword">end</span></code></pre>
 						</div>
 										</div>
@@ -654,23 +656,23 @@ Note : By default, if you precise no attribute, it will take every row</pre>
 </li></ul>					
 											<div class="method-source-code" id="getFriends-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/users_controller.rb, line 610</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/users_controller.rb, line 611</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">getFriends</span>
-  <span class="ruby-keyword">begin</span>
-    <span class="ruby-identifier">u</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">find_by_id</span>(<span class="ruby-ivar">@id</span>)
+        <span class="ruby-keyword">begin</span>
+                <span class="ruby-identifier">u</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">find_by_id</span>(<span class="ruby-ivar">@id</span>)
 
-    <span class="ruby-keyword">if</span> (<span class="ruby-operator">!</span><span class="ruby-identifier">u</span>)
-      <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">502</span>
-      <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:not_found</span>
-    <span class="ruby-keyword">else</span>
-      <span class="ruby-ivar">@returnValue</span> = { <span class="ruby-identifier">content</span><span class="ruby-operator">:</span> <span class="ruby-identifier">u</span>.<span class="ruby-identifier">friends</span>.<span class="ruby-identifier">reverse_order</span>.<span class="ruby-identifier">as_json</span>(<span class="ruby-value">:only</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">User</span>.<span class="ruby-identifier">miniKey</span>) }
-      <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">200</span>
-    <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">rescue</span>
-    <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">504</span>
-    <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:service_unavailable</span>
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-identifier">sendJson</span>
+                <span class="ruby-keyword">if</span> (<span class="ruby-operator">!</span><span class="ruby-identifier">u</span>)
+                        <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">502</span>
+                        <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:not_found</span>
+                <span class="ruby-keyword">else</span>
+                        <span class="ruby-ivar">@returnValue</span> = { <span class="ruby-identifier">content</span><span class="ruby-operator">:</span> <span class="ruby-identifier">u</span>.<span class="ruby-identifier">friends</span>.<span class="ruby-identifier">reverse_order</span>.<span class="ruby-identifier">as_json</span>(<span class="ruby-value">:only</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">User</span>.<span class="ruby-identifier">miniKey</span>) }
+                        <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">200</span>
+                <span class="ruby-keyword">end</span>
+        <span class="ruby-keyword">rescue</span>
+                <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">504</span>
+                <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:service_unavailable</span>
+        <span class="ruby-keyword">end</span>
+        <span class="ruby-identifier">sendJson</span>
 <span class="ruby-keyword">end</span></code></pre>
 						</div>
 										</div>
@@ -702,48 +704,48 @@ Note : By default, if you precise no attribute, it will take every row</pre>
 </li></ul>					
 											<div class="method-source-code" id="getmusics-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/users_controller.rb, line 203</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/users_controller.rb, line 204</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">getmusics</span>
-  <span class="ruby-keyword">begin</span>
-    <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@security</span>)
-      <span class="ruby-identifier">user</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">find_by_id</span>(<span class="ruby-ivar">@user_id</span>)
-      <span class="ruby-identifier">list</span> = <span class="ruby-identifier">user</span>.<span class="ruby-identifier">purchases</span>
-      <span class="ruby-identifier">contentReturn</span> = { <span class="ruby-identifier">musics</span><span class="ruby-operator">:</span> [], <span class="ruby-identifier">albums</span><span class="ruby-operator">:</span> [], <span class="ruby-identifier">packs</span><span class="ruby-operator">:</span> []}
+        <span class="ruby-keyword">begin</span>
+                <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@security</span>)
+                        <span class="ruby-identifier">user</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">find_by_id</span>(<span class="ruby-ivar">@user_id</span>)
+                        <span class="ruby-identifier">list</span> = <span class="ruby-identifier">user</span>.<span class="ruby-identifier">purchases</span>
+                        <span class="ruby-identifier">contentReturn</span> = { <span class="ruby-identifier">musics</span><span class="ruby-operator">:</span> [], <span class="ruby-identifier">albums</span><span class="ruby-operator">:</span> [], <span class="ruby-identifier">packs</span><span class="ruby-operator">:</span> []}
 
-      <span class="ruby-identifier">list</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span>
-        <span class="ruby-identifier">x</span>.<span class="ruby-identifier">purchased_musics</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">pm</span><span class="ruby-operator">|</span>
-          <span class="ruby-keyword">if</span> (<span class="ruby-identifier">pm</span>.<span class="ruby-identifier">purchased_album_id</span> <span class="ruby-operator">==</span> <span class="ruby-keyword">nil</span>)
-            <span class="ruby-identifier">contentReturn</span>[<span class="ruby-value">:musics</span>] = <span class="ruby-identifier">contentReturn</span>[<span class="ruby-value">:musics</span>] <span class="ruby-operator">|</span> [<span class="ruby-identifier">pm</span>.<span class="ruby-identifier">music</span>.<span class="ruby-identifier">as_json</span>(<span class="ruby-identifier">only</span><span class="ruby-operator">:</span> <span class="ruby-constant">Music</span>.<span class="ruby-identifier">miniKey</span>, <span class="ruby-identifier">include</span><span class="ruby-operator">:</span> { <span class="ruby-identifier">album</span><span class="ruby-operator">:</span> { <span class="ruby-identifier">only</span><span class="ruby-operator">:</span> <span class="ruby-constant">Album</span>.<span class="ruby-identifier">miniKey</span> } })]
-          <span class="ruby-keyword">else</span>
+                        <span class="ruby-identifier">list</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span>
+                                <span class="ruby-identifier">x</span>.<span class="ruby-identifier">purchased_musics</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">pm</span><span class="ruby-operator">|</span>
+                                        <span class="ruby-keyword">if</span> (<span class="ruby-identifier">pm</span>.<span class="ruby-identifier">purchased_album_id</span> <span class="ruby-operator">==</span> <span class="ruby-keyword">nil</span>)
+                                                <span class="ruby-identifier">contentReturn</span>[<span class="ruby-value">:musics</span>] = <span class="ruby-identifier">contentReturn</span>[<span class="ruby-value">:musics</span>] <span class="ruby-operator">|</span> [<span class="ruby-identifier">pm</span>.<span class="ruby-identifier">music</span>.<span class="ruby-identifier">as_json</span>(<span class="ruby-identifier">only</span><span class="ruby-operator">:</span> <span class="ruby-constant">Music</span>.<span class="ruby-identifier">miniKey</span>, <span class="ruby-identifier">include</span><span class="ruby-operator">:</span> { <span class="ruby-identifier">album</span><span class="ruby-operator">:</span> { <span class="ruby-identifier">only</span><span class="ruby-operator">:</span> <span class="ruby-constant">Album</span>.<span class="ruby-identifier">miniKey</span> } })]
+                                        <span class="ruby-keyword">else</span>
 
-            <span class="ruby-keyword">if</span> (<span class="ruby-identifier">pm</span>.<span class="ruby-identifier">purchased_album</span>.<span class="ruby-identifier">purchased_pack_id</span> <span class="ruby-operator">==</span> <span class="ruby-keyword">nil</span>)
-              <span class="ruby-identifier">a</span> = <span class="ruby-identifier">pm</span>.<span class="ruby-identifier">purchased_album</span>.<span class="ruby-identifier">album</span>.<span class="ruby-identifier">as_json</span>(<span class="ruby-identifier">only</span><span class="ruby-operator">:</span> <span class="ruby-constant">Album</span>.<span class="ruby-identifier">miniKey</span>)
-              <span class="ruby-identifier">a</span>[<span class="ruby-value">:musics</span>] = <span class="ruby-identifier">pm</span>.<span class="ruby-identifier">purchased_album</span>.<span class="ruby-identifier">album</span>.<span class="ruby-identifier">musics</span>.<span class="ruby-identifier">as_json</span>(<span class="ruby-identifier">only</span><span class="ruby-operator">:</span> <span class="ruby-constant">Music</span>.<span class="ruby-identifier">miniKey</span>)
-              <span class="ruby-identifier">contentReturn</span>[<span class="ruby-value">:albums</span>] = <span class="ruby-identifier">contentReturn</span>[<span class="ruby-value">:albums</span>] <span class="ruby-operator">|</span> [{ <span class="ruby-identifier">album</span><span class="ruby-operator">:</span> <span class="ruby-identifier">a</span> }]
-            <span class="ruby-keyword">else</span>
-              <span class="ruby-identifier">pack</span> = <span class="ruby-identifier">pm</span>.<span class="ruby-identifier">purchased_album</span>.<span class="ruby-identifier">purchased_pack</span>.<span class="ruby-identifier">pack</span>
-              <span class="ruby-identifier">value</span> = { <span class="ruby-identifier">pack</span><span class="ruby-operator">:</span> <span class="ruby-identifier">pack</span>.<span class="ruby-identifier">as_json</span>(<span class="ruby-identifier">only</span><span class="ruby-operator">:</span> <span class="ruby-constant">Pack</span>.<span class="ruby-identifier">miniKey</span>) }
-              <span class="ruby-identifier">value</span>[<span class="ruby-value">:pack</span>][<span class="ruby-value">:albums</span>] = []
-              <span class="ruby-identifier">pack</span>.<span class="ruby-identifier">albums</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">album</span><span class="ruby-operator">|</span>
-                <span class="ruby-identifier">value</span>[<span class="ruby-value">:pack</span>][<span class="ruby-value">:albums</span>] <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">album</span>.<span class="ruby-identifier">as_json</span>(<span class="ruby-identifier">only</span><span class="ruby-operator">:</span> <span class="ruby-constant">Album</span>.<span class="ruby-identifier">miniKey</span>, <span class="ruby-identifier">include</span><span class="ruby-operator">:</span> { <span class="ruby-identifier">musics</span><span class="ruby-operator">:</span> { <span class="ruby-identifier">only</span><span class="ruby-operator">:</span> <span class="ruby-constant">Music</span>.<span class="ruby-identifier">miniKey</span> } } )
-              <span class="ruby-keyword">end</span>
-              <span class="ruby-identifier">contentReturn</span>[<span class="ruby-value">:packs</span>] = <span class="ruby-identifier">contentReturn</span>[<span class="ruby-value">:packs</span>] <span class="ruby-operator">|</span> [<span class="ruby-identifier">value</span>]
-            <span class="ruby-keyword">end</span>
+                                                <span class="ruby-keyword">if</span> (<span class="ruby-identifier">pm</span>.<span class="ruby-identifier">purchased_album</span>.<span class="ruby-identifier">purchased_pack_id</span> <span class="ruby-operator">==</span> <span class="ruby-keyword">nil</span>)
+                                                        <span class="ruby-identifier">a</span> = <span class="ruby-identifier">pm</span>.<span class="ruby-identifier">purchased_album</span>.<span class="ruby-identifier">album</span>.<span class="ruby-identifier">as_json</span>(<span class="ruby-identifier">only</span><span class="ruby-operator">:</span> <span class="ruby-constant">Album</span>.<span class="ruby-identifier">miniKey</span>)
+                                                        <span class="ruby-identifier">a</span>[<span class="ruby-value">:musics</span>] = <span class="ruby-identifier">pm</span>.<span class="ruby-identifier">purchased_album</span>.<span class="ruby-identifier">album</span>.<span class="ruby-identifier">musics</span>.<span class="ruby-identifier">as_json</span>(<span class="ruby-identifier">only</span><span class="ruby-operator">:</span> <span class="ruby-constant">Music</span>.<span class="ruby-identifier">miniKey</span>)
+                                                        <span class="ruby-identifier">contentReturn</span>[<span class="ruby-value">:albums</span>] = <span class="ruby-identifier">contentReturn</span>[<span class="ruby-value">:albums</span>] <span class="ruby-operator">|</span> [{ <span class="ruby-identifier">album</span><span class="ruby-operator">:</span> <span class="ruby-identifier">a</span> }]
+                                                <span class="ruby-keyword">else</span>
+                                                        <span class="ruby-identifier">pack</span> = <span class="ruby-identifier">pm</span>.<span class="ruby-identifier">purchased_album</span>.<span class="ruby-identifier">purchased_pack</span>.<span class="ruby-identifier">pack</span>
+                                                        <span class="ruby-identifier">value</span> = { <span class="ruby-identifier">pack</span><span class="ruby-operator">:</span> <span class="ruby-identifier">pack</span>.<span class="ruby-identifier">as_json</span>(<span class="ruby-identifier">only</span><span class="ruby-operator">:</span> <span class="ruby-constant">Pack</span>.<span class="ruby-identifier">miniKey</span>) }
+                                                        <span class="ruby-identifier">value</span>[<span class="ruby-value">:pack</span>][<span class="ruby-value">:albums</span>] = []
+                                                        <span class="ruby-identifier">pack</span>.<span class="ruby-identifier">albums</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">album</span><span class="ruby-operator">|</span>
+                                                                <span class="ruby-identifier">value</span>[<span class="ruby-value">:pack</span>][<span class="ruby-value">:albums</span>] <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">album</span>.<span class="ruby-identifier">as_json</span>(<span class="ruby-identifier">only</span><span class="ruby-operator">:</span> <span class="ruby-constant">Album</span>.<span class="ruby-identifier">miniKey</span>, <span class="ruby-identifier">include</span><span class="ruby-operator">:</span> { <span class="ruby-identifier">musics</span><span class="ruby-operator">:</span> { <span class="ruby-identifier">only</span><span class="ruby-operator">:</span> <span class="ruby-constant">Music</span>.<span class="ruby-identifier">miniKey</span> } } )
+                                                        <span class="ruby-keyword">end</span>
+                                                        <span class="ruby-identifier">contentReturn</span>[<span class="ruby-value">:packs</span>] = <span class="ruby-identifier">contentReturn</span>[<span class="ruby-value">:packs</span>] <span class="ruby-operator">|</span> [<span class="ruby-identifier">value</span>]
+                                                <span class="ruby-keyword">end</span>
 
-          <span class="ruby-keyword">end</span>
+                                        <span class="ruby-keyword">end</span>
+                                <span class="ruby-keyword">end</span>
+                        <span class="ruby-keyword">end</span>
+                        <span class="ruby-ivar">@returnValue</span> = { <span class="ruby-identifier">content</span><span class="ruby-operator">:</span> <span class="ruby-identifier">contentReturn</span> }
+                        <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">200</span>
+                <span class="ruby-keyword">else</span>
+                        <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">500</span>
+                        <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:forbidden</span>
+                <span class="ruby-keyword">end</span>
+        <span class="ruby-keyword">rescue</span>
+                <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">504</span>
+                <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:service_unavailable</span>
         <span class="ruby-keyword">end</span>
-      <span class="ruby-keyword">end</span>
-      <span class="ruby-ivar">@returnValue</span> = { <span class="ruby-identifier">content</span><span class="ruby-operator">:</span> <span class="ruby-identifier">contentReturn</span> }
-      <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">200</span>
-    <span class="ruby-keyword">else</span>
-      <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">500</span>
-      <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:forbidden</span>
-    <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">rescue</span>
-    <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">504</span>
-    <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:service_unavailable</span>
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-identifier">sendJson</span>
+        <span class="ruby-identifier">sendJson</span>
 <span class="ruby-keyword">end</span></code></pre>
 						</div>
 										</div>
@@ -778,24 +780,24 @@ object themselve. Useful for pagination</p>
 </li></ul>					
 											<div class="method-source-code" id="index-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/users_controller.rb, line 37</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/users_controller.rb, line 38</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">index</span>
-  <span class="ruby-keyword">begin</span>
-    <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@count</span>.<span class="ruby-identifier">present?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-ivar">@count</span> <span class="ruby-operator">==</span> <span class="ruby-string">&quot;true&quot;</span>)
-      <span class="ruby-ivar">@returnValue</span> = { <span class="ruby-identifier">content</span><span class="ruby-operator">:</span> <span class="ruby-constant">User</span>.<span class="ruby-identifier">count</span> }
-    <span class="ruby-keyword">else</span>
-      <span class="ruby-ivar">@returnValue</span> = { <span class="ruby-identifier">content</span><span class="ruby-operator">:</span> <span class="ruby-constant">User</span>.<span class="ruby-identifier">all</span>.<span class="ruby-identifier">as_json</span>(<span class="ruby-value">:only</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">User</span>.<span class="ruby-identifier">miniKey</span>) }
-    <span class="ruby-keyword">end</span>
-    <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@returnValue</span>[<span class="ruby-value">:content</span>].<span class="ruby-identifier">size</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>)
-      <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">202</span>
-    <span class="ruby-keyword">else</span>
-      <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">200</span>
-    <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">rescue</span>
-    <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">504</span>
-    <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:service_unavailable</span>
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-identifier">sendJson</span>
+        <span class="ruby-keyword">begin</span>
+                <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@count</span>.<span class="ruby-identifier">present?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-ivar">@count</span> <span class="ruby-operator">==</span> <span class="ruby-string">&quot;true&quot;</span>)
+                        <span class="ruby-ivar">@returnValue</span> = { <span class="ruby-identifier">content</span><span class="ruby-operator">:</span> <span class="ruby-constant">User</span>.<span class="ruby-identifier">count</span> }
+                <span class="ruby-keyword">else</span>
+                        <span class="ruby-ivar">@returnValue</span> = { <span class="ruby-identifier">content</span><span class="ruby-operator">:</span> <span class="ruby-constant">User</span>.<span class="ruby-identifier">all</span>.<span class="ruby-identifier">as_json</span>(<span class="ruby-value">:only</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">User</span>.<span class="ruby-identifier">miniKey</span>) }
+                <span class="ruby-keyword">end</span>
+                <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@returnValue</span>[<span class="ruby-value">:content</span>].<span class="ruby-identifier">size</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>)
+                        <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">202</span>
+                <span class="ruby-keyword">else</span>
+                        <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">200</span>
+                <span class="ruby-keyword">end</span>
+        <span class="ruby-keyword">rescue</span>
+                <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">504</span>
+                <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:service_unavailable</span>
+        <span class="ruby-keyword">end</span>
+        <span class="ruby-identifier">sendJson</span>
 <span class="ruby-keyword">end</span></code></pre>
 						</div>
 										</div>
@@ -828,37 +830,111 @@ inside + the top 5 of the musics of this artist</p>
 </li></ul>					
 											<div class="method-source-code" id="isArtist-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/users_controller.rb, line 347</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/users_controller.rb, line 348</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">isArtist</span>
-  <span class="ruby-keyword">begin</span>
-    <span class="ruby-identifier">u</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">find_by_id</span>(<span class="ruby-ivar">@id</span>)
+        <span class="ruby-keyword">begin</span>
+                <span class="ruby-identifier">u</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">find_by_id</span>(<span class="ruby-ivar">@id</span>)
 
-    <span class="ruby-keyword">if</span> (<span class="ruby-operator">!</span><span class="ruby-identifier">u</span>)
-      <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">502</span>
-      <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:not_found</span>
-    <span class="ruby-keyword">else</span>
-      <span class="ruby-identifier">hash</span> = { <span class="ruby-identifier">artist</span><span class="ruby-operator">:</span> <span class="ruby-identifier">u</span>.<span class="ruby-identifier">isArtist?</span> }
-      <span class="ruby-keyword">if</span> <span class="ruby-identifier">hash</span>[<span class="ruby-value">:artist</span>]
-        <span class="ruby-identifier">hash</span>[<span class="ruby-value">:albums</span>] = <span class="ruby-constant">JSON</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">u</span>.<span class="ruby-identifier">albums</span>.<span class="ruby-identifier">to_json</span>(<span class="ruby-value">:only</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">Album</span>.<span class="ruby-identifier">miniKey</span>, <span class="ruby-value">:include</span> =<span class="ruby-operator">&gt;</span> {
-                                            <span class="ruby-identifier">musics</span><span class="ruby-operator">:</span> { <span class="ruby-identifier">only</span><span class="ruby-operator">:</span> <span class="ruby-constant">Music</span>.<span class="ruby-identifier">miniKey</span> }
-                                          } ))
-        <span class="ruby-identifier">topFive</span> = <span class="ruby-identifier">u</span>.<span class="ruby-identifier">giveTopFive</span>
-        <span class="ruby-identifier">hash</span>[<span class="ruby-value">:topFive</span>] = []
-        <span class="ruby-identifier">topFive</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">music</span><span class="ruby-operator">|</span>
-          <span class="ruby-identifier">hash</span>[<span class="ruby-value">:topFive</span>] <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-constant">JSON</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">music</span>[<span class="ruby-value">:object</span>].<span class="ruby-identifier">to_json</span>(<span class="ruby-identifier">only</span><span class="ruby-operator">:</span> <span class="ruby-constant">Music</span>.<span class="ruby-identifier">miniKey</span>, <span class="ruby-value">:include</span> =<span class="ruby-operator">&gt;</span> {
-              <span class="ruby-identifier">album</span><span class="ruby-operator">:</span> { <span class="ruby-identifier">only</span><span class="ruby-operator">:</span> <span class="ruby-constant">Album</span>.<span class="ruby-identifier">miniKey</span> }
-            }, <span class="ruby-identifier">methods</span><span class="ruby-operator">:</span> <span class="ruby-value">:getAverageNote</span>))
-        }
-      <span class="ruby-keyword">end</span>
-      <span class="ruby-ivar">@returnValue</span> = { <span class="ruby-identifier">content</span><span class="ruby-operator">:</span> <span class="ruby-identifier">hash</span> }
-      <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">200</span>
-    <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">rescue</span>
-    <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">504</span>
-    <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:service_unavailable</span>
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-identifier">sendJson</span>
+                <span class="ruby-keyword">if</span> (<span class="ruby-operator">!</span><span class="ruby-identifier">u</span>)
+                        <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">502</span>
+                        <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:not_found</span>
+                <span class="ruby-keyword">else</span>
+                        <span class="ruby-identifier">hash</span> = { <span class="ruby-identifier">artist</span><span class="ruby-operator">:</span> <span class="ruby-identifier">u</span>.<span class="ruby-identifier">isArtist?</span> }
+                        <span class="ruby-keyword">if</span> <span class="ruby-identifier">hash</span>[<span class="ruby-value">:artist</span>]
+                                <span class="ruby-identifier">hash</span>[<span class="ruby-value">:albums</span>] = <span class="ruby-constant">JSON</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">u</span>.<span class="ruby-identifier">albums</span>.<span class="ruby-identifier">to_json</span>(<span class="ruby-value">:only</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">Album</span>.<span class="ruby-identifier">miniKey</span>, <span class="ruby-value">:include</span> =<span class="ruby-operator">&gt;</span> {
+                                                                                                                                                                                <span class="ruby-identifier">musics</span><span class="ruby-operator">:</span> { <span class="ruby-identifier">only</span><span class="ruby-operator">:</span> <span class="ruby-constant">Music</span>.<span class="ruby-identifier">miniKey</span> }
+                                                                                                                                                                        } ))
+                                <span class="ruby-identifier">topFive</span> = <span class="ruby-identifier">u</span>.<span class="ruby-identifier">giveTopFive</span>
+                                <span class="ruby-identifier">hash</span>[<span class="ruby-value">:topFive</span>] = []
+                                <span class="ruby-identifier">topFive</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">music</span><span class="ruby-operator">|</span>
+                                        <span class="ruby-identifier">hash</span>[<span class="ruby-value">:topFive</span>] <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-constant">JSON</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">music</span>[<span class="ruby-value">:object</span>].<span class="ruby-identifier">to_json</span>(<span class="ruby-identifier">only</span><span class="ruby-operator">:</span> <span class="ruby-constant">Music</span>.<span class="ruby-identifier">miniKey</span>, <span class="ruby-value">:include</span> =<span class="ruby-operator">&gt;</span> {
+                                                        <span class="ruby-identifier">album</span><span class="ruby-operator">:</span> { <span class="ruby-identifier">only</span><span class="ruby-operator">:</span> <span class="ruby-constant">Album</span>.<span class="ruby-identifier">miniKey</span> }
+                                                }, <span class="ruby-identifier">methods</span><span class="ruby-operator">:</span> <span class="ruby-value">:getAverageNote</span>))
+                                }
+                        <span class="ruby-keyword">end</span>
+                        <span class="ruby-ivar">@returnValue</span> = { <span class="ruby-identifier">content</span><span class="ruby-operator">:</span> <span class="ruby-identifier">hash</span> }
+                        <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">200</span>
+                <span class="ruby-keyword">end</span>
+        <span class="ruby-keyword">rescue</span>
+                <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">504</span>
+                <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:service_unavailable</span>
+        <span class="ruby-keyword">end</span>
+        <span class="ruby-identifier">sendJson</span>
 <span class="ruby-keyword">end</span></code></pre>
+						</div>
+										</div>
+
+					
+									</div>
+								<a name="method-i-linkSocial">anchor</a>
+				<div id="method-i-linkSocial-doc" class="method">
+
+					<header>
+											<i class="icon-generic"></i>
+						<span class="method-name">linkSocial</span><span 
+							class="method-args">()</span>
+										</header>
+
+					<div class="method-description">
+											<p>To link an account with a social network</p>
+
+<p>Route : /users/linkSocial</p>
+
+<h4 id="method-i-linkSocial-label-Options">Options<span><a href="#method-i-linkSocial-label-Options">&para;</a> <a href="#top">&uarr;</a></span></h4>
+<ul><li>
+<p><code>provider</code> - Name of the social network : “facebook” | “twitter”
+| “google”</p>
+</li><li>
+<p><code>uid</code> - Id from the social network</p>
+</li></ul>
+
+<h4 id="method-i-linkSocial-label-HTTP+VALUE">HTTP VALUE<span><a href="#method-i-linkSocial-label-HTTP+VALUE">&para;</a> <a href="#top">&uarr;</a></span></h4>
+<ul><li>
+<p><code>200</code> - In case of success (content is empty)</p>
+</li><li>
+<p><code>400</code> - If the parameters are not good / the access_token is not
+available</p>
+</li><li>
+<p><code>401</code> - It is not a secured transaction</p>
+</li><li>
+<p><code>409</code> - Http code for conflict, can&#39;t save the identity (uid
+already taken)</p>
+</li><li>
+<p><code>503</code> - Error from server</p>
+</li></ul>					
+											<div class="method-source-code" id="linkSocial-source">
+							<pre class="prettyprint linenums"><code 
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/users_controller.rb, line 783</span>
+          <span class="ruby-keyword">def</span> <span class="ruby-identifier">linkSocial</span>
+                  <span class="ruby-keyword">begin</span>
+                          <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@security</span>)
+    <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@provider</span>.<span class="ruby-identifier">present?</span> <span class="ruby-operator">&amp;&amp;</span> [<span class="ruby-string">&quot;facebook&quot;</span>, <span class="ruby-string">&quot;twitter&quot;</span>, <span class="ruby-string">&quot;google&quot;</span>].<span class="ruby-identifier">include?</span>(<span class="ruby-ivar">@provider</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-ivar">@uid</span>.<span class="ruby-identifier">present?</span>)
+      <span class="ruby-identifier">id</span> = <span class="ruby-constant">Identity</span>.<span class="ruby-identifier">new</span>
+      <span class="ruby-identifier">id</span>.<span class="ruby-identifier">user_id</span> = <span class="ruby-ivar">@user_id</span>
+      <span class="ruby-identifier">id</span>.<span class="ruby-identifier">uid</span> = <span class="ruby-ivar">@uid</span>
+      <span class="ruby-identifier">id</span>.<span class="ruby-identifier">provider</span> = <span class="ruby-ivar">@provider</span>
+      <span class="ruby-identifier">id</span>.<span class="ruby-identifier">newToken</span>()
+      <span class="ruby-keyword">if</span> (<span class="ruby-identifier">id</span>.<span class="ruby-identifier">save</span>)
+        <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">201</span>
+      <span class="ruby-keyword">else</span>
+        <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">504</span>
+        <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:conflict</span>
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">505</span>
+      <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:bad_request</span>
+    <span class="ruby-keyword">end</span>
+
+                          <span class="ruby-keyword">else</span>
+                                  <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">500</span>
+                                  <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:forbidden</span>
+                          <span class="ruby-keyword">end</span>
+                  <span class="ruby-keyword">rescue</span>
+                          <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">504</span>
+                          <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:service_unavailable</span>
+                  <span class="ruby-keyword">end</span>
+<span class="ruby-identifier">sendJson</span>
+          <span class="ruby-keyword">end</span></code></pre>
 						</div>
 										</div>
 
@@ -942,10 +1018,10 @@ address, friends and follow.</p>
 </li></ul>					
 											<div class="method-source-code" id="save-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/users_controller.rb, line 276</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/users_controller.rb, line 277</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">save</span>
-  <span class="ruby-identifier">_save</span>(<span class="ruby-keyword">true</span>, <span class="ruby-identifier">params</span>)
-  <span class="ruby-identifier">sendJson</span>
+        <span class="ruby-identifier">_save</span>(<span class="ruby-keyword">true</span>, <span class="ruby-identifier">params</span>)
+        <span class="ruby-identifier">sendJson</span>
 <span class="ruby-keyword">end</span></code></pre>
 						</div>
 										</div>
@@ -981,26 +1057,26 @@ address, friends and follow.</p>
 </li></ul>					
 											<div class="method-source-code" id="show-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/users_controller.rb, line 70</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/users_controller.rb, line 71</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">show</span>
-  <span class="ruby-keyword">begin</span>
-    <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@id</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">/\A[-+]?\d*\.?\d+\z/</span>)
-      <span class="ruby-identifier">user</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">find_by_id</span>(<span class="ruby-ivar">@id</span>)
-    <span class="ruby-keyword">else</span>
-      <span class="ruby-identifier">user</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">find_by_username</span>(<span class="ruby-ivar">@id</span>)
-    <span class="ruby-keyword">end</span>
-    <span class="ruby-keyword">if</span> (<span class="ruby-operator">!</span><span class="ruby-identifier">user</span>)
-      <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">502</span>
-      <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:not_found</span>
-    <span class="ruby-keyword">else</span>
-      <span class="ruby-ivar">@returnValue</span> = { <span class="ruby-identifier">content</span><span class="ruby-operator">:</span> <span class="ruby-identifier">user</span>.<span class="ruby-identifier">as_json</span>(<span class="ruby-value">:only</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">User</span>.<span class="ruby-identifier">bigKey</span>) }
-      <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">200</span>
-    <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">rescue</span>
-    <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">504</span>
-    <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:service_unavailable</span>
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-identifier">sendJson</span>
+        <span class="ruby-keyword">begin</span>
+                <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@id</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">/\A[-+]?\d*\.?\d+\z/</span>)
+                        <span class="ruby-identifier">user</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">find_by_id</span>(<span class="ruby-ivar">@id</span>)
+                <span class="ruby-keyword">else</span>
+                        <span class="ruby-identifier">user</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">find_by_username</span>(<span class="ruby-ivar">@id</span>)
+                <span class="ruby-keyword">end</span>
+                <span class="ruby-keyword">if</span> (<span class="ruby-operator">!</span><span class="ruby-identifier">user</span>)
+                        <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">502</span>
+                        <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:not_found</span>
+                <span class="ruby-keyword">else</span>
+                        <span class="ruby-ivar">@returnValue</span> = { <span class="ruby-identifier">content</span><span class="ruby-operator">:</span> <span class="ruby-identifier">user</span>.<span class="ruby-identifier">as_json</span>(<span class="ruby-value">:only</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">User</span>.<span class="ruby-identifier">bigKey</span>) }
+                        <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">200</span>
+                <span class="ruby-keyword">end</span>
+        <span class="ruby-keyword">rescue</span>
+                <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">504</span>
+                <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:service_unavailable</span>
+        <span class="ruby-keyword">end</span>
+        <span class="ruby-identifier">sendJson</span>
 <span class="ruby-keyword">end</span></code></pre>
 						</div>
 										</div>
@@ -1040,43 +1116,43 @@ address, friends and follow.</p>
 </li></ul>					
 											<div class="method-source-code" id="unfollow-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/users_controller.rb, line 448</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/users_controller.rb, line 449</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">unfollow</span>
-  <span class="ruby-keyword">begin</span>
-    <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@security</span>)
-      <span class="ruby-identifier">u</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">find_by_id</span>(<span class="ruby-ivar">@user_id</span>)
-      <span class="ruby-identifier">toFollow</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">find_by_id</span>(<span class="ruby-ivar">@follow_id</span>)
+        <span class="ruby-keyword">begin</span>
+                <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@security</span>)
+                        <span class="ruby-identifier">u</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">find_by_id</span>(<span class="ruby-ivar">@user_id</span>)
+                        <span class="ruby-identifier">toFollow</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">find_by_id</span>(<span class="ruby-ivar">@follow_id</span>)
 
-      <span class="ruby-keyword">if</span> (<span class="ruby-operator">!</span><span class="ruby-identifier">u</span> <span class="ruby-operator">||</span> <span class="ruby-operator">!</span><span class="ruby-identifier">toFollow</span>)
-        <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">502</span>
-        <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:not_found</span>
-      <span class="ruby-keyword">else</span>
-        <span class="ruby-identifier">code</span> = <span class="ruby-value">405</span>
-        <span class="ruby-identifier">http</span> = <span class="ruby-value">:method_not_allowed</span>
-        <span class="ruby-identifier">u</span>.<span class="ruby-identifier">follows</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">follow</span><span class="ruby-operator">|</span>
-          <span class="ruby-keyword">if</span> <span class="ruby-identifier">follow</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">toFollow</span>
-            <span class="ruby-identifier">code</span> = <span class="ruby-value">200</span>
-            <span class="ruby-identifier">http</span> = <span class="ruby-value">:ok</span>
-          <span class="ruby-keyword">end</span>
-        }
-        <span class="ruby-keyword">if</span> <span class="ruby-identifier">code</span> <span class="ruby-operator">==</span> <span class="ruby-value">200</span>
-          <span class="ruby-identifier">u</span>.<span class="ruby-identifier">follows</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-identifier">toFollow</span>)
-          <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">200</span>
-        <span class="ruby-keyword">else</span>
-          <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">502</span>
+                        <span class="ruby-keyword">if</span> (<span class="ruby-operator">!</span><span class="ruby-identifier">u</span> <span class="ruby-operator">||</span> <span class="ruby-operator">!</span><span class="ruby-identifier">toFollow</span>)
+                                <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">502</span>
+                                <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:not_found</span>
+                        <span class="ruby-keyword">else</span>
+                                <span class="ruby-identifier">code</span> = <span class="ruby-value">405</span>
+                                <span class="ruby-identifier">http</span> = <span class="ruby-value">:method_not_allowed</span>
+                                <span class="ruby-identifier">u</span>.<span class="ruby-identifier">follows</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">follow</span><span class="ruby-operator">|</span>
+                                        <span class="ruby-keyword">if</span> <span class="ruby-identifier">follow</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">toFollow</span>
+                                                <span class="ruby-identifier">code</span> = <span class="ruby-value">200</span>
+                                                <span class="ruby-identifier">http</span> = <span class="ruby-value">:ok</span>
+                                        <span class="ruby-keyword">end</span>
+                                }
+                                <span class="ruby-keyword">if</span> <span class="ruby-identifier">code</span> <span class="ruby-operator">==</span> <span class="ruby-value">200</span>
+                                        <span class="ruby-identifier">u</span>.<span class="ruby-identifier">follows</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-identifier">toFollow</span>)
+                                        <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">200</span>
+                                <span class="ruby-keyword">else</span>
+                                        <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">502</span>
+                                <span class="ruby-keyword">end</span>
+                                <span class="ruby-identifier">codeAnswer</span> <span class="ruby-identifier">code</span>
+                                <span class="ruby-identifier">defineHttp</span> <span class="ruby-identifier">http</span>
+                        <span class="ruby-keyword">end</span>
+                <span class="ruby-keyword">else</span>
+                        <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">500</span>
+                        <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:forbidden</span>
+                <span class="ruby-keyword">end</span>
+        <span class="ruby-keyword">rescue</span>
+                <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">504</span>
+                <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:service_unavailable</span>
         <span class="ruby-keyword">end</span>
-        <span class="ruby-identifier">codeAnswer</span> <span class="ruby-identifier">code</span>
-        <span class="ruby-identifier">defineHttp</span> <span class="ruby-identifier">http</span>
-      <span class="ruby-keyword">end</span>
-    <span class="ruby-keyword">else</span>
-      <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">500</span>
-      <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:forbidden</span>
-    <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">rescue</span>
-    <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">504</span>
-    <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:service_unavailable</span>
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-identifier">sendJson</span>
+        <span class="ruby-identifier">sendJson</span>
 <span class="ruby-keyword">end</span></code></pre>
 						</div>
 										</div>
@@ -1164,27 +1240,27 @@ address, friends and follow.</p>
 </li></ul>					
 											<div class="method-source-code" id="update-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/users_controller.rb, line 315</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/users_controller.rb, line 316</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">update</span>
-  <span class="ruby-keyword">begin</span>
-    <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@security</span>)
-      <span class="ruby-identifier">user</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">find_by_id</span>(<span class="ruby-ivar">@user_id</span>)
-      <span class="ruby-keyword">if</span> <span class="ruby-identifier">user</span> <span class="ruby-operator">==</span> <span class="ruby-keyword">nil</span>
-        <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">502</span>
-        <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:not_found</span>
-        <span class="ruby-keyword">return</span>
-      <span class="ruby-keyword">else</span>
-        <span class="ruby-identifier">_save</span>(<span class="ruby-keyword">false</span>, <span class="ruby-identifier">params</span>)
-      <span class="ruby-keyword">end</span>
-    <span class="ruby-keyword">else</span>
-      <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">500</span>
-      <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:forbidden</span>
-    <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">rescue</span>
-    <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">504</span>
-    <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:service_unavailable</span>
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-identifier">sendJson</span>
+        <span class="ruby-keyword">begin</span>
+                <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@security</span>)
+                        <span class="ruby-identifier">user</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">find_by_id</span>(<span class="ruby-ivar">@user_id</span>)
+                        <span class="ruby-keyword">if</span> <span class="ruby-identifier">user</span> <span class="ruby-operator">==</span> <span class="ruby-keyword">nil</span>
+                                <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">502</span>
+                                <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:not_found</span>
+                                <span class="ruby-keyword">return</span>
+                        <span class="ruby-keyword">else</span>
+                                <span class="ruby-identifier">_save</span>(<span class="ruby-keyword">false</span>, <span class="ruby-identifier">params</span>)
+                        <span class="ruby-keyword">end</span>
+                <span class="ruby-keyword">else</span>
+                        <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">500</span>
+                        <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:forbidden</span>
+                <span class="ruby-keyword">end</span>
+        <span class="ruby-keyword">rescue</span>
+                <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">504</span>
+                <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:service_unavailable</span>
+        <span class="ruby-keyword">end</span>
+        <span class="ruby-identifier">sendJson</span>
 <span class="ruby-keyword">end</span></code></pre>
 						</div>
 										</div>
@@ -1237,59 +1313,58 @@ are authorized)</p>
 </li></ul>					
 											<div class="method-source-code" id="uploadImg-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/users_controller.rb, line 712</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/users_controller.rb, line 713</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">uploadImg</span>
-  <span class="ruby-identifier">smart</span> = <span class="ruby-keyword">false</span>
+        <span class="ruby-identifier">smart</span> = <span class="ruby-keyword">false</span>
 
-  <span class="ruby-keyword">begin</span>
-    <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@security</span>)
-      <span class="ruby-identifier">acceptedContentType</span> = [
-        <span class="ruby-string">&quot;image/gif&quot;</span>,
-        <span class="ruby-string">&quot;image/jpeg&quot;</span>,
-        <span class="ruby-string">&quot;image/pjpeg&quot;</span>,
-        <span class="ruby-string">&quot;image/png&quot;</span>,
-        <span class="ruby-string">&quot;image/x-png&quot;</span>
-      ]
+        <span class="ruby-keyword">begin</span>
+                <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@security</span>)
+                        <span class="ruby-identifier">acceptedContentType</span> = [
+                                <span class="ruby-string">&quot;image/gif&quot;</span>,
+                                <span class="ruby-string">&quot;image/jpeg&quot;</span>,
+                                <span class="ruby-string">&quot;image/pjpeg&quot;</span>,
+                                <span class="ruby-string">&quot;image/png&quot;</span>,
+                                <span class="ruby-string">&quot;image/x-png&quot;</span>
+                        ]
 
-      <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@device</span>.<span class="ruby-identifier">present?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-ivar">@device</span> <span class="ruby-operator">==</span> <span class="ruby-string">&#39;smartphone&#39;</span>)
-        <span class="ruby-identifier">smart</span> = <span class="ruby-keyword">true</span>
-      <span class="ruby-keyword">else</span>
-        <span class="ruby-ivar">@file</span> = { <span class="ruby-identifier">tempfile</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@file</span>.<span class="ruby-identifier">tempfile</span>, <span class="ruby-identifier">content_type</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@file</span>.<span class="ruby-identifier">content_type</span>, <span class="ruby-identifier">original_filename</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@file</span>.<span class="ruby-identifier">original_filename</span> }
-      <span class="ruby-keyword">end</span>
+                        <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@device</span>.<span class="ruby-identifier">present?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-ivar">@device</span> <span class="ruby-operator">==</span> <span class="ruby-string">&#39;smartphone&#39;</span>)
+                                <span class="ruby-identifier">smart</span> = <span class="ruby-keyword">true</span>
+                        <span class="ruby-keyword">else</span>
+                                <span class="ruby-ivar">@file</span> = { <span class="ruby-identifier">tempfile</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@file</span>.<span class="ruby-identifier">tempfile</span>, <span class="ruby-identifier">content_type</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@file</span>.<span class="ruby-identifier">content_type</span>, <span class="ruby-identifier">original_filename</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@file</span>.<span class="ruby-identifier">original_filename</span> }
+                        <span class="ruby-keyword">end</span>
 
-      <span class="ruby-keyword">if</span> <span class="ruby-identifier">acceptedContentType</span>.<span class="ruby-identifier">include?</span> <span class="ruby-ivar">@file</span>[<span class="ruby-value">:content_type</span>]
-        <span class="ruby-identifier">randomNumber</span> = <span class="ruby-identifier">rand</span>(<span class="ruby-value">1000</span><span class="ruby-operator">..</span><span class="ruby-value">10000</span>)
-        <span class="ruby-identifier">timestamp</span> = <span class="ruby-constant">Time</span>.<span class="ruby-identifier">now</span>.<span class="ruby-identifier">to_i</span>
-        <span class="ruby-identifier">folder</span> = <span class="ruby-constant">ActionController</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>.<span class="ruby-identifier">helpers</span>.<span class="ruby-identifier">asset_path</span>(<span class="ruby-string">&quot;usersImage/avatars&quot;</span>) <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@type</span> <span class="ruby-operator">!=</span> <span class="ruby-string">&quot;background&quot;</span>)
-        <span class="ruby-identifier">folder</span> = <span class="ruby-constant">ActionController</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>.<span class="ruby-identifier">helpers</span>.<span class="ruby-identifier">asset_path</span>(<span class="ruby-string">&quot;usersImage/backgrounds&quot;</span>) <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@type</span> <span class="ruby-operator">==</span> <span class="ruby-string">&quot;background&quot;</span>)
-        
-        <span class="ruby-identifier">newFilename</span> = <span class="ruby-constant">Digest</span><span class="ruby-operator">::</span><span class="ruby-constant">SHA256</span>.<span class="ruby-identifier">hexdigest</span>(<span class="ruby-node">&quot;#{timestamp}--#{@file[:original_filename]}#{randomNumber}&quot;</span>) <span class="ruby-operator">+</span> <span class="ruby-string">&quot;-&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-ivar">@file</span>[<span class="ruby-value">:original_filename</span>].<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp">/[^0-9A-Za-z\.-]/</span>, <span class="ruby-string">&#39;&#39;</span>)
+                        <span class="ruby-keyword">if</span> <span class="ruby-identifier">acceptedContentType</span>.<span class="ruby-identifier">include?</span> <span class="ruby-ivar">@file</span>[<span class="ruby-value">:content_type</span>]
+                                <span class="ruby-identifier">randomNumber</span> = <span class="ruby-identifier">rand</span>(<span class="ruby-value">1000</span><span class="ruby-operator">..</span><span class="ruby-value">10000</span>)
+                                <span class="ruby-identifier">timestamp</span> = <span class="ruby-constant">Time</span>.<span class="ruby-identifier">now</span>.<span class="ruby-identifier">to_i</span>
+                                <span class="ruby-identifier">folder</span> = <span class="ruby-constant">ActionController</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>.<span class="ruby-identifier">helpers</span>.<span class="ruby-identifier">asset_path</span>(<span class="ruby-string">&quot;usersImage/avatars&quot;</span>) <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@type</span> <span class="ruby-operator">!=</span> <span class="ruby-string">&quot;background&quot;</span>)
+                                <span class="ruby-identifier">folder</span> = <span class="ruby-constant">ActionController</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>.<span class="ruby-identifier">helpers</span>.<span class="ruby-identifier">asset_path</span>(<span class="ruby-string">&quot;usersImage/backgrounds&quot;</span>) <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@type</span> <span class="ruby-operator">==</span> <span class="ruby-string">&quot;background&quot;</span>)
+                                
+                                <span class="ruby-identifier">newFilename</span> = <span class="ruby-constant">Digest</span><span class="ruby-operator">::</span><span class="ruby-constant">SHA256</span>.<span class="ruby-identifier">hexdigest</span>(<span class="ruby-node">&quot;#{timestamp}--#{@file[:original_filename]}#{randomNumber}&quot;</span>) <span class="ruby-operator">+</span> <span class="ruby-string">&quot;-&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-ivar">@file</span>[<span class="ruby-value">:original_filename</span>].<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp">/[^0-9A-Za-z\.-]/</span>, <span class="ruby-string">&#39;&#39;</span>)
 
-        <span class="ruby-constant">File</span>.<span class="ruby-identifier">open</span>(<span class="ruby-constant">Rails</span>.<span class="ruby-identifier">root</span>.<span class="ruby-identifier">join</span>(<span class="ruby-string">&#39;app&#39;</span>, <span class="ruby-string">&#39;assets&#39;</span>, <span class="ruby-string">&#39;images&#39;</span>, <span class="ruby-string">&#39;usersImage&#39;</span>, ((<span class="ruby-ivar">@type</span> <span class="ruby-operator">!=</span> <span class="ruby-string">&quot;background&quot;</span>) <span class="ruby-operator">?</span> <span class="ruby-string">&#39;avatars&#39;</span> <span class="ruby-operator">:</span> <span class="ruby-string">&#39;backgrounds&#39;</span>), <span class="ruby-identifier">newFilename</span>), <span class="ruby-string">&#39;wb&#39;</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">f</span><span class="ruby-operator">|</span>
-          <span class="ruby-identifier">f</span>.<span class="ruby-identifier">write</span>(<span class="ruby-ivar">@file</span>[<span class="ruby-value">:tempfile</span>].<span class="ruby-identifier">read</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">smart</span> <span class="ruby-operator">==</span> <span class="ruby-keyword">false</span>
-          <span class="ruby-identifier">f</span>.<span class="ruby-identifier">write</span>(<span class="ruby-ivar">@file</span>[<span class="ruby-value">:tempfile</span>]) <span class="ruby-keyword">if</span> <span class="ruby-identifier">smart</span> <span class="ruby-operator">==</span> <span class="ruby-keyword">true</span>
+                                <span class="ruby-constant">File</span>.<span class="ruby-identifier">open</span>(<span class="ruby-constant">Rails</span>.<span class="ruby-identifier">root</span>.<span class="ruby-identifier">join</span>(<span class="ruby-string">&#39;app&#39;</span>, <span class="ruby-string">&#39;assets&#39;</span>, <span class="ruby-string">&#39;images&#39;</span>, <span class="ruby-string">&#39;usersImage&#39;</span>, ((<span class="ruby-ivar">@type</span> <span class="ruby-operator">!=</span> <span class="ruby-string">&quot;background&quot;</span>) <span class="ruby-operator">?</span> <span class="ruby-string">&#39;avatars&#39;</span> <span class="ruby-operator">:</span> <span class="ruby-string">&#39;backgrounds&#39;</span>), <span class="ruby-identifier">newFilename</span>), <span class="ruby-string">&#39;wb&#39;</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">f</span><span class="ruby-operator">|</span>
+                                        <span class="ruby-identifier">f</span>.<span class="ruby-identifier">write</span>(<span class="ruby-ivar">@file</span>[<span class="ruby-value">:tempfile</span>].<span class="ruby-identifier">read</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">smart</span> <span class="ruby-operator">==</span> <span class="ruby-keyword">false</span>
+                                        <span class="ruby-identifier">f</span>.<span class="ruby-identifier">write</span>(<span class="ruby-ivar">@file</span>[<span class="ruby-value">:tempfile</span>]) <span class="ruby-keyword">if</span> <span class="ruby-identifier">smart</span> <span class="ruby-operator">==</span> <span class="ruby-keyword">true</span>
+                                <span class="ruby-keyword">end</span>
+
+                                <span class="ruby-identifier">u</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">find_by_id</span>(<span class="ruby-ivar">@user_id</span>)
+                                <span class="ruby-identifier">u</span>.<span class="ruby-identifier">image</span> = <span class="ruby-identifier">newFilename</span> <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@type</span> <span class="ruby-operator">!=</span> <span class="ruby-string">&quot;background&quot;</span>)
+                                <span class="ruby-identifier">u</span>.<span class="ruby-identifier">background</span> = <span class="ruby-identifier">newFilename</span> <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@type</span> <span class="ruby-operator">==</span> <span class="ruby-string">&quot;background&quot;</span>)
+                                <span class="ruby-identifier">u</span>.<span class="ruby-identifier">save!</span>
+                                <span class="ruby-ivar">@returnValue</span> = { <span class="ruby-identifier">content</span><span class="ruby-operator">:</span> <span class="ruby-identifier">u</span>.<span class="ruby-identifier">as_json</span>(<span class="ruby-identifier">only</span><span class="ruby-operator">:</span> <span class="ruby-constant">User</span>.<span class="ruby-identifier">miniKey</span>) }
+                                <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">201</span>
+                        <span class="ruby-keyword">else</span>
+                                <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">505</span>
+                                <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:bad_request</span>
+                        <span class="ruby-keyword">end</span>
+                <span class="ruby-keyword">else</span>
+                        <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">500</span>
+                        <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:forbidden</span>
+                <span class="ruby-keyword">end</span>
+        <span class="ruby-keyword">rescue</span>
+                <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">504</span>
+                <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:service_unavailable</span>
         <span class="ruby-keyword">end</span>
-
-        <span class="ruby-identifier">u</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">find_by_id</span>(<span class="ruby-ivar">@user_id</span>)
-        <span class="ruby-identifier">u</span>.<span class="ruby-identifier">image</span> = <span class="ruby-identifier">newFilename</span> <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@type</span> <span class="ruby-operator">!=</span> <span class="ruby-string">&quot;background&quot;</span>)
-        <span class="ruby-identifier">u</span>.<span class="ruby-identifier">background</span> = <span class="ruby-identifier">newFilename</span> <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@type</span> <span class="ruby-operator">==</span> <span class="ruby-string">&quot;background&quot;</span>)
-        <span class="ruby-identifier">u</span>.<span class="ruby-identifier">save!</span>
-        <span class="ruby-ivar">@returnValue</span> = { <span class="ruby-identifier">content</span><span class="ruby-operator">:</span> <span class="ruby-identifier">u</span>.<span class="ruby-identifier">as_json</span>(<span class="ruby-identifier">only</span><span class="ruby-operator">:</span> <span class="ruby-constant">User</span>.<span class="ruby-identifier">miniKey</span>) }
-        <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">201</span>
-      <span class="ruby-keyword">else</span>
-        <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">505</span>
-        <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:bad_request</span>
-      <span class="ruby-keyword">end</span>
-    <span class="ruby-keyword">else</span>
-      <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">500</span>
-      <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:forbidden</span>
-    <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">rescue</span>
-    <span class="ruby-identifier">puts</span> <span class="ruby-identifier">$!</span>, <span class="ruby-identifier">$@</span>
-    <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">504</span>
-    <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:service_unavailable</span>
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-identifier">sendJson</span>
+        <span class="ruby-identifier">sendJson</span>
 <span class="ruby-keyword">end</span></code></pre>
 						</div>
 										</div>
@@ -1382,7 +1457,6 @@ are authorized)</p>
 			<li><a href="../PurchasedPack.html">PurchasedPack</a></li>
 			<li><a href="../Tag.html">Tag</a></li>
 			<li><a href="../Tweet.html">Tweet</a></li>
-			<li><a href="../User.html">User</a></li>
 			<li><a href="../Vote.html">Vote</a></li>
 		</ul>
 	</div>

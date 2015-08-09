@@ -80,6 +80,9 @@
 # - +has_many+ -  :friends, :through => :relations_friend, :source => :user_to
 # - +has_many+ -  :frienders, :through => :relations_friendly, :source => :user
 #
+require 'uri'
+require 'open-uri'
+
 class User < ActiveRecord::Base
   before_validation :beforeCreate, on: :create
 
@@ -139,7 +142,7 @@ class User < ActiveRecord::Base
     maximum: 40,
     too_short: "must have at least %{count} letters",
     too_long: "must have at most %{count} letters",
-  }, format: /\A[a-zA-Z0-9]{3,40}\z/
+  }, format: /\A[a-zA-Z0-9\-]{3,40}\z/
   validates :idAPI, length: { is: 40 }
   validates :secureKey, length: { is: 64 }
   validates :salt, length: { is: 40 }
@@ -177,11 +180,30 @@ class User < ActiveRecord::Base
 
       # Create the user if it's a new registration
       if user.nil?
+
+        url = nil
+        if auth.info.image
+          url_img = auth.info.image.gsub("http", "https")
+
+
+          uri = URI.parse(auth.info.image)
+          url = File.basename(uri.path)
+          url += ".jpg" if (File.extname(url).size == 0)
+
+          randomNumber = rand(1000..10000)
+          timestamp = Time.now.to_i
+          filename = Digest::SHA256.hexdigest("#{timestamp}--#{url}#{randomNumber}") + "-" + url.gsub(/[^0-9A-Za-z\.-]/, '')
+
+          File.open(Rails.root.join('app', 'assets', 'images', 'usersImage', 'avatars', filename), 'wb') do |f|
+            f.write open(url_img).read
+          end
+        end
+
         user = User.new(
-          username: "#{TEMP_USERNAME_PREFIX}-#{auth.extra.raw_info.name}",
+          username: "#{TEMP_USERNAME_PREFIX}-#{auth.extra.raw_info.name.gsub(" ", "")}",
           fname: (auth.extra.raw_info.first_name) ? auth.extra.raw_info.first_name : ((auth.extra.raw_info.given_name) ? auth.extra.raw_info.given_name : nil),
           lname: (auth.extra.raw_info.last_name) ? auth.extra.raw_info.last_name : ((auth.extra.raw_info.family_name) ? auth.extra.raw_info.family_name : nil),
-          image: (auth.info.image) ? auth.info.image : nil,
+          image: url,
           #username: auth.info.nickname || auth.uid,
           email: email ? email : "#{TEMP_EMAIL_PREFIX}-#{auth.uid}-#{auth.provider}.com",
           password: Devise.friendly_token
@@ -191,6 +213,7 @@ class User < ActiveRecord::Base
           user.email = "#{TEMP_EMAIL_PREFIX}-#{auth.uid}-#{auth.provider}.com" if user.errors[:email].any?
           user.username = "#{TEMP_USERNAME_PREFIX}-#{user.username}" if user.errors[:username].any?
           if (!user.save)
+            @flash = {}
             user.errors.messages.each { |errorSym, errorValue|
               @flash[errorSym] = errorValue
             }

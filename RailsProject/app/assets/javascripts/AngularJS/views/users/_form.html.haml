@@ -45,11 +45,6 @@
 							%option{ "ng-repeat" => "day in days", "value" => "{{ (day < 10 ? '0' : '') + day.toString() }}" } {{ day }}
 						%small.error{ "ng-if" => "formError.user.birthday != false", "ng-repeat" => "error in formError.user.birthday" } Birthday {{ error }}
 					.large-3.small-3.columns
-						%label{ for: "image" } Image
-					.small-9.columns
-						%input.radius{ id: "image", type: "text", "ng-model" => "form.user.image" }
-						%small.error{ "ng-if" => "formError.user.image != false", "ng-repeat" => "error in formError.user.image" } Image {{ error }}
-					.large-3.small-3.columns
 						%label{ for: "facebook" } Facebook
 					.small-9.columns
 						%input.radius{ id: "facebook", type: "text", "ng-model" => "form.user.facebook" }
@@ -97,6 +92,28 @@
 					.small-9.columns
 						%input.radius{ id: "language", type: "text", "ng-model" => "form.user.language" }
 						%small.error{ "ng-if" => "formError.user.language != false", "ng-repeat" => "error in formError.user.language" } Language {{ error }}
+					.small-12.clearfix
+						%p Link your account allows you to connect thanks to it to SoonZik
+						.small-12.medium-5.columns
+							%label Link your account with Facebook :
+						.small-12.medium-7.columns
+							.button.tiny{ "ng-if" => "form.identities.facebook != null", "ng-class" => "{ secondary: !facebookReady }" } Your account is linked
+							.button.tiny{ "ng-if" => "form.identities.facebook == null", "ng-class" => "{ secondary: !facebookReady }", "ng-click" => "IntentLogin()" } Login with Facebook
+						.small-12.medium-5.columns
+							%label Link your account with Twitter :
+						.small-12.medium-7.columns
+							.button.tiny{ "ng-if" => "form.identities.twitter != null" } Your account is linked
+							%a.button.tiny{ "ng-if" => "form.identities.twitter == null", href: "/users/auth/twitter", target: "_blank" } Login with Twitter
+						.small-12.medium-5.columns
+							%label Link your account with Google Plus :
+						.small-12.medium-7.columns
+							%script{ src: "https://apis.google.com/js/client.js" }
+							%script{ src: "https://apis.google.com/js/plusone.js" }
+							.button.tiny{ "ng-if" => "form.identities.google != null" } Your account is linked
+							%span#signinButton{ "ng-if" => "form.identities.google == null" }
+								%plus{:action => "connect", :callback => "onSignInCallback", :clientid => "793685873206-mtbd8bm2gvskccm5rnnnkod5n6q7dqpv.apps.googleusercontent.com", :scope => "https://www.googleapis.com/auth/plus.me"}
+								%google-plus-signin{ "ng-init" => "googleCallback()", :clientid => "793685873206-mtbd8bm2gvskccm5rnnnkod5n6q7dqpv.apps.googleusercontent.com" }
+				%hr
 				.actions
 					.large-4.columns.large-centered
 						%input.button.radius.expand.success{ id: "", type: "button", value: "Save", "ng-click" => "submitForm()" }

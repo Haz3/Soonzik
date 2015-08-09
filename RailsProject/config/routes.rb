@@ -144,6 +144,7 @@ Rails.application.routes.draw do
         get ':id/followers' => 'users#getFollowers'
 
         match 'upload' => 'users#uploadImg', via: [:post, :options]
+        match 'linkSocial' => 'users#linkSocial', via: [:post, :options]
       end
     end
   end
@@ -211,6 +212,7 @@ Rails.application.routes.draw do
   resources :users do
     collection do
       get ":id/friendlist" => 'users#friendlist'
+      get "getIdentities" => 'users#getIdentities'
     end
   end
   

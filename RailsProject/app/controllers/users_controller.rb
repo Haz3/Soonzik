@@ -8,13 +8,6 @@ class UsersController < ApplicationController
 
   # GET /users/:id.:format
   def show
-    # authorize! :read, @user
-    @viewArtist = false
-    if (@user.isArtist?)
-      @viewArtist = true
-      @topFive = @user.giveTopFive
-      @packsImplicated = @user.givePack
-    end
   end
 
   # GET /users/:id/edit
@@ -25,11 +18,11 @@ class UsersController < ApplicationController
         format.html { redirect_to root_path }
         format.json { render :json => {}, status: :forbidden }
       else
-        puts params;
         set_user
         format.html { render :text => "", :layout => true }
         format.json { render :json => @user.as_json(except: [:salt, :password, :idAPI, :secureKey, :created_at, :updated_at, :address_id], :include => {
-            :address => { :only => Address.miniKey }
+            :address => { :only => Address.miniKey },
+            :identities => {}
           }) }
       end
     end
@@ -40,14 +33,25 @@ class UsersController < ApplicationController
     if current_user && ( current_user.email_verified?() && current_user.username_verified?())
       redirect_to root_path
     # authorize! :update, @user 
-    elsif request.patch? && params[:user] #&& params[:user][:email]
+    elsif request.patch? && params[:user]
       @user.skip_reconfirmation!
       if @user.update(User.user_params params)
+        puts @user.errors.messages
         @user.skip_reconfirmation!
-        sign_in(@user, :bypass => true)
         redirect_to @user, notice: 'Your profile was successfully updated.'
       else
         @show_errors = true
+        puts "lol"
+      end
+    end
+  end
+
+  def getIdentities
+    respond_to do |format|
+      if user_signed_in?
+        format.json { render :json => current_user.identities.as_json() }
+      else
+        format.json { render :json => {}, status: :forbidden }
       end
     end
   end
@@ -57,7 +61,6 @@ class UsersController < ApplicationController
   
   private
     def set_user
-      puts params;
       if (params[:id].to_s =~ /\A[-+]?\d*\.?\d+\z/)
         @user = User.find_by_id(params[:id].to_s)
       else

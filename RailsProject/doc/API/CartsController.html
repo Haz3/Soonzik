@@ -290,7 +290,6 @@ will get the gift</p>
 
         <span class="ruby-keyword">if</span> (<span class="ruby-identifier">cart</span>.<span class="ruby-identifier">save</span>)
           <span class="ruby-ivar">@returnValue</span> = { <span class="ruby-identifier">content</span><span class="ruby-operator">:</span> <span class="ruby-identifier">cart</span>.<span class="ruby-identifier">as_json</span>(<span class="ruby-value">:include</span> =<span class="ruby-operator">&gt;</span> {
-                                                  <span class="ruby-value">:user</span> =<span class="ruby-operator">&gt;</span> {<span class="ruby-value">:only</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">User</span>.<span class="ruby-identifier">miniKey</span>() },
                                                   <span class="ruby-value">:musics</span> =<span class="ruby-operator">&gt;</span> { <span class="ruby-value">:only</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">Music</span>.<span class="ruby-identifier">miniKey</span>() },
                                                   <span class="ruby-value">:albums</span> =<span class="ruby-operator">&gt;</span> { <span class="ruby-value">:only</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">Album</span>.<span class="ruby-identifier">miniKey</span>() },
                                                   <span class="ruby-value">:gift</span> =<span class="ruby-operator">&gt;</span> { <span class="ruby-value">:only</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">Gift</span>.<span class="ruby-identifier">miniKey</span> }
@@ -346,7 +345,7 @@ will get the gift</p>
 </li></ul>					
 											<div class="method-source-code" id="show-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/carts_controller.rb, line 158</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/carts_controller.rb, line 157</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">show</span>
   <span class="ruby-keyword">begin</span>
     <span class="ruby-keyword">if</span> (<span class="ruby-operator">!</span><span class="ruby-ivar">@security</span>)
@@ -359,7 +358,6 @@ will get the gift</p>
       <span class="ruby-keyword">else</span>
         <span class="ruby-ivar">@returnValue</span> = { <span class="ruby-identifier">content</span><span class="ruby-operator">:</span> <span class="ruby-identifier">cart</span>.<span class="ruby-identifier">as_json</span>(<span class="ruby-identifier">only</span><span class="ruby-operator">:</span> <span class="ruby-constant">Cart</span>.<span class="ruby-identifier">miniKey</span>,
           <span class="ruby-value">:include</span> =<span class="ruby-operator">&gt;</span> {
-            <span class="ruby-identifier">user</span><span class="ruby-operator">:</span> { <span class="ruby-identifier">only</span><span class="ruby-operator">:</span> <span class="ruby-constant">User</span>.<span class="ruby-identifier">miniKey</span> },
             <span class="ruby-identifier">albums</span><span class="ruby-operator">:</span> { <span class="ruby-identifier">only</span><span class="ruby-operator">:</span> <span class="ruby-constant">Album</span>.<span class="ruby-identifier">miniKey</span> },
             <span class="ruby-identifier">musics</span><span class="ruby-operator">:</span> { <span class="ruby-identifier">only</span><span class="ruby-operator">:</span> <span class="ruby-constant">Music</span>.<span class="ruby-identifier">miniKey</span> },
             <span class="ruby-value">:gift</span> =<span class="ruby-operator">&gt;</span> { <span class="ruby-value">:only</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">Gift</span>.<span class="ruby-identifier">miniKey</span> }
@@ -464,7 +462,6 @@ will get the gift</p>
 			<li><a href="../PurchasedPack.html">PurchasedPack</a></li>
 			<li><a href="../Tag.html">Tag</a></li>
 			<li><a href="../Tweet.html">Tweet</a></li>
-			<li><a href="../User.html">User</a></li>
 			<li><a href="../Vote.html">Vote</a></li>
 		</ul>
 	</div>

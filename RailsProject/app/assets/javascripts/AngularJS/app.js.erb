@@ -1,4 +1,4 @@
-SoonzikApp = angular.module('SoonzikApp', ['ngRoute', 'ngCookies', 'ngResource', 'ngFileUpload', 'angular-loading-bar', 'ngAnimate', 'mm.foundation', 'uiGmapgoogle-maps']);
+SoonzikApp = angular.module('SoonzikApp', ['ngRoute', 'ngCookies', 'ngResource', 'ngFileUpload', 'angular-loading-bar', 'ngAnimate', 'mm.foundation', 'uiGmapgoogle-maps', 'facebook', 'directive.g+signin']);
 
 SoonzikApp.config(['$routeProvider', '$locationProvider', '$httpProvider', function($routeProvider, $locationProvider, $httpProvider) {
 	var url = document.location.pathname;
@@ -102,4 +102,8 @@ SoonzikApp.run(['$route', '$rootScope', '$location', function ($route, $rootScop
 		}
 		return original.apply($location, [path]);
 	};
-}])
+}]);
+
+SoonzikApp.config(function(FacebookProvider) {
+	FacebookProvider.init('572371212865769');
+})

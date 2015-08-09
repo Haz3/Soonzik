@@ -369,7 +369,7 @@ var SearchIndex =
 	{
 		"name": "User",
 		"link": "User.html",
-		"snippet": "<p>The model of the object User Contain the relation and the validation Can\nprovide some features linked …\n",
+		"snippet": "",
 		"type": "normalclass"
 	},
 	{
@@ -922,6 +922,12 @@ var SearchIndex =
 		"name": "uploadImg",
 		"link": "API/UsersController.html#method-i-uploadImg",
 		"snippet": "<p>To upload an image or a background Return the new user (to get the new\nimage name)\n<p>Route : /users/upload …\n",
+		"type": "anymethod"
+	},
+	{
+		"name": "linkSocial",
+		"link": "API/UsersController.html#method-i-linkSocial",
+		"snippet": "<p>To link an account with a social network\n<p>Route : /users/linkSocial\n<p>Options\n",
 		"type": "anymethod"
 	},
 	{
