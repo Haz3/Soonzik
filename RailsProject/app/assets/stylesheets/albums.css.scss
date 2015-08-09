@@ -1,3 +1,44 @@
 // Place all the styles related to the Albums controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+.albumContainer {
+	.albums .panel {
+		margin-left: 15px;
+	}
+
+	.albums img {
+		width: 195px;
+		height: 195px;
+		margin-right: 40px;
+	}
+
+	.panel th {
+		text-align: left;
+	}
+
+	.panel .divider {
+		width: 190px;
+	}
+
+	.goldenStar {
+		color: #E6C200;
+	}
+
+	.playlistBlock {
+		background: black;
+
+		ul {
+			margin-left: 0;
+
+			li {
+		    padding-left: 2px;
+			}
+
+			label {
+		    color: #008CBA;
+			}
+		}
+	}
+}

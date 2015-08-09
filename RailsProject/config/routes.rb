@@ -72,6 +72,8 @@ Rails.application.routes.draw do
         match 'addtoplaylist' => 'musics#addtoplaylist', via: [:post, :options]
         get 'delfromplaylist' => 'musics#delfromplaylist'
         get ':id/comments' => 'musics#getcomments'
+        get 'getNotes' => 'musics#getNotes'
+        match ':id/note/:note' => 'musics#setNotes', via: [:post, :options]
       end
     end
 

@@ -4,10 +4,9 @@ namespace SoonZik.HttpRequest.Poco
 {
     public class Pack
     {
-        public int Id { get; set; }
-        public string Title { get; set; }
-        public string CreatedAt { get; set; }
-        public string UpdatedAt { get; set; }
-        public List<Album> Albums { get; set; }
+        public int id { get; set; }
+        public string title { get; set; }
+        public List<Album> albums { get; set; }
+        public List<Description> descriptions { get; set; }
     }
 }

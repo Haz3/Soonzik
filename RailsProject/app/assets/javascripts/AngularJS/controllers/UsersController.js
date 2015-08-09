@@ -33,6 +33,9 @@ SoonzikApp.controller('UsersCtrl', ['$scope', "$routeParams", 'SecureAuth', 'HTT
 			zipcode: false
 		}
 	};
+	$scope.tooltip = false;
+	$scope.selectedMusic = null;
+	$scope.myPlaylists = [];
 
 
 	// For the select of date
@@ -103,6 +106,17 @@ SoonzikApp.controller('UsersCtrl', ['$scope', "$routeParams", 'SecureAuth', 'HTT
 				NotificationService.error("");
 			});
 
+			if ($scope.user != false) {
+				HTTPService.findPlaylist([{ key: "attribute[user_id]", value: $scope.user.id }]).then(function(response) {
+		    	$scope.myPlaylists = response.data.content;
+		    	for (var i = 0 ; i < $scope.myPlaylists.length ; i++) {
+		    		$scope.myPlaylists[i].check = false;
+		    	}
+				}, function(error) {
+					NotificationService.error("Error while deleting the playlist : " + playlist.name);
+				});
+			}
+
 			/* Other informations */
 
 			HTTPService.isArtist(id).then(function(artistInformation) {
@@ -113,6 +127,37 @@ SoonzikApp.controller('UsersCtrl', ['$scope', "$routeParams", 'SecureAuth', 'HTT
 				if ($scope.show.user.isArtist == true) {
 					$scope.show.user.topFive = artistInformation.data.content.topFive;
 					$scope.show.user.albums = artistInformation.data.content.albums;
+				}
+
+
+				if ($scope.user != false) {
+					var note_array_id = []
+
+					for (var i = 0 ; i < $scope.show.user.albums.length ; i++) {
+						for (var j = 0 ; j < $scope.show.user.albums[i].musics.length ; j++) {
+							note_array_id.push($scope.show.user.albums[i].musics[j].id);
+							$scope.show.user.albums[i].musics[j].goldenStars = null;
+						}
+					}
+
+					var noteParameters = [
+						{ key: "user_id", value: $scope.user.id },
+						{ key: "arr_id", value: "[" + encodeURI(note_array_id) + "]" }
+					]
+
+					HTTPService.getMusicNotes(noteParameters).then(function(response) {
+						for (var i = 0 ; i < $scope.show.user.albums.length ; i++) {
+							for (var j = 0 ; j < $scope.show.user.albums[i].musics.length ; j++) {
+								for (var k = 0 ; k < response.data.content.length ; k++) {
+									if (response.data.content[k].music_id == $scope.show.user.albums[i].musics[j].id) {
+										$scope.show.user.albums[i].musics[j].note = response.data.content[k].note;
+									}
+								}
+							}
+						}
+					}, function(error) {
+						NotificationService.error("Error while loading your notes");
+					});
 				}
 
 
@@ -192,15 +237,12 @@ SoonzikApp.controller('UsersCtrl', ['$scope', "$routeParams", 'SecureAuth', 'HTT
 				document.location.pathname = "/";
 			}, 1000);
 		} else {
-			console.log(id);
 			HTTPService.getFullProfile(id).then(function(profile) {
-				console.log(profile);
 				// Need a new route with security to get a profile with all informations
 				var dataProfile = profile.data;
 
 				// Initialisation of the user profile
 				$scope.form.user = dataProfile;
-				console.log(dataProfile);
 				birthday = dataProfile.birthday.split('-');
 				$scope.form.user["birthday(1i)"] = birthday[0];
 				$scope.form.user["birthday(2i)"] = birthday[1];
@@ -272,11 +314,8 @@ SoonzikApp.controller('UsersCtrl', ['$scope', "$routeParams", 'SecureAuth', 'HTT
 				SecureAuth.securedTransaction(function (key, user_id) {
 					HTTPService.uploadProfileImage(file, { secureKey: key, user_id: user_id }, function (evt) {
 						var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
-						console.log('progress: ' + progressPercentage + '% ' + evt.config.file.name);
 					}, function (data, status, headers, config) {
-						console.log('file ' + config.file.name + 'uploaded. Response: ' + data);
 					}, function (error) {
-						console.log(error);
 						$scope.formError.user.image = error;
 					});
 				}, function (error) {
@@ -295,12 +334,9 @@ SoonzikApp.controller('UsersCtrl', ['$scope', "$routeParams", 'SecureAuth', 'HTT
 				SecureAuth.securedTransaction(function (key, user_id) {
 					HTTPService.uploadBackgroundImage(file, { secureKey: key, user_id: user_id }, function (evt) {
 						var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
-						console.log('progress: ' + progressPercentage + '% ' + evt.config.file.name);
 					}, function (data, status, headers, config) {
-						console.log('file ' + config.file.name + 'uploaded. Response: ' + data);
 					}, function (error) {
-						console.log(error);
-						$scope.formError.user.image = error;
+						$scope.formError.user.background = error;
 					});
 				}, function (error) {
 					NotificationService.error("An error occured.");
@@ -403,10 +439,87 @@ SoonzikApp.controller('UsersCtrl', ['$scope', "$routeParams", 'SecureAuth', 'HTT
 		});
 	}
 
+	$scope.setGolden = function(music, index) {
+		music.goldenStars = index;
+	}
+
+	$scope.setNote = function(music) {
+		SecureAuth.securedTransaction(function (key, user_id) {
+			HTTPService.setMusicNote(music.id, music.goldenStars, { user_id: user_id, secureKey: key }).then(function(response) {
+				music.note = music.goldenStars;
+			}, function(error) {
+				NotificationService.error("Error while rating the music, please try later.");
+			});
+		}, function(error) {
+			NotificationService.error("Error while rating the music, please try later.");
+		});
+	}
+
+	$scope.addToPlaylist = function() {
+  	var playlist = false;
+
+  	for (var i = 0 ; i < $scope.myPlaylists.length ; i++) {
+  		if ($scope.myPlaylists[i].check == true)
+	  		playlist = $scope.myPlaylists[i];
+  	}
+
+  	if ($scope.user != false && $scope.selectedMusic != false && playlist != false) {
+  		SecureAuth.securedTransaction(function(key, user_id) {
+		  		var parameters = {
+		  			secureKey: key,
+		  			user_id: user_id,
+	  				id: $scope.selectedMusic.id,
+	  				playlist_id: playlist.id
+		  		};
+		  		HTTPService.addToPlaylist(parameters).then(function(response) {
+		  			NotificationService.success("The music '" + $scope.selectedMusic.title + "' has been added to the playlist");
+		  			$rootScope.$broadcast("player:addToPlaylist", { playlist: playlist, music: $scope.selectedMusic });
+		  			$scope.selectedMusic = false;
+		  			$scope.tooltip = false;
+		  			playlist.check = false;
+		  		}, function(error) {
+		  			NotificationService.error("Error while saving a new music in the playlist");
+		  		});
+		  	}, function(error) {
+		  		NotificationService.error("Error while saving a new music in the playlist");
+		  	});
+  	}
+  }
+
+  $scope.selectMusic = function(music) {
+  	if ($scope.selectedMusic == music) {
+  		$scope.selectedMusic = false;
+  	} else {
+	  	$scope.selectedMusic = music;
+	  }
+  }
+
+  $scope.setTooltip = function(value) {
+  	console.log("mdr");
+  	$scope.tooltip = value;
+  	if ($scope.tooltip != false) {
+  		for (var i = 0 ; i < $scope.myPlaylists.length ; i++) {
+  			for (var j = 0 ; j < $scope.myPlaylists[i].musics.length ; j++) {
+  				if (value.id == $scope.myPlaylists[i].musics[j].id) {
+  					$scope.myPlaylists[i].check = true;
+  				}
+  			}
+  		}
+  	} else {
+  		for (var i = 0 ; i < $scope.myPlaylists.length ; i++) {
+ 				$scope.myPlaylists[i].check = false;
+  		}
+  		$scope.selectMusic(false);
+  	}
+  }
+
 	/* Utils function */
 
 	$scope.range = function(n) {
-  	return new Array(n);
+		if (n > 0)
+	  	return new Array(n);
+	  else
+	  	return []
   };
 
   $scope.formatTime = function(duration) {

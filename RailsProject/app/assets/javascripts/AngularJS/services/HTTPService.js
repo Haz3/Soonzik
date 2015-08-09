@@ -149,6 +149,15 @@ SoonzikApp.factory('HTTPService', ['$http', '$location', 'Upload', function ($ht
     },
     saveTweet: function(parameters) {
       return $http.post("http://api." + url + "/tweets/save", parameters);
+    },
+    getMusicNotes: function(parameters) {
+      return $http.get("http://api." + url + "/musics/getNotes" + urlParametersFormat(parameters));
+    },
+    setMusicNote: function(id, note, parameters) {
+      return $http.post("http://api." + url + "/musics/" + id + "/note/" + note, parameters);
+    },
+    getAlbum: function(id) {
+      return $http.get("http://api." + url + "/albums/" + id);
     }
   }
 }]);

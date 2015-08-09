@@ -29,6 +29,7 @@
 //= require angular-route
 //= require angular-resource
 //= require ./AngularJS/app.js.erb
+//= require ./AngularJS/controllers/AlbumsController.js
 //= require ./AngularJS/controllers/ChatController.js
 //= require ./AngularJS/controllers/BattlesController.js
 //= require ./AngularJS/controllers/UsersController.js

@@ -101,13 +101,13 @@ namespace SoonZik.ViewModel
         private void SelectionExecute()
         {
             Charge();
-            ListAlbums = ThePack.Albums;
+            ListAlbums = ThePack.albums;
         }
 
         public void Charge()
         {
             var request = new HttpRequestGet();
-            var pack = request.GetObject(new Pack(), "packs", ThePack.Id.ToString());
+            var pack = request.GetObject(new Pack(), "packs", ThePack.id.ToString());
             pack.ContinueWith(delegate(Task<object> tmp)
             {
                 var test = tmp.Result as Pack;

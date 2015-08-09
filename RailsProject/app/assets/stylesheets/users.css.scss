@@ -101,6 +101,22 @@
 		}
 	}
 
+	.playlistBlock {
+		background: black;
+
+		ul {
+			margin-left: 0;
+
+			li {
+		    padding-left: 2px;
+			}
+
+			label {
+		    color: #008CBA;
+			}
+		}
+	}
+
 	.goldenStar {
 		color: #E6C200;
 	}

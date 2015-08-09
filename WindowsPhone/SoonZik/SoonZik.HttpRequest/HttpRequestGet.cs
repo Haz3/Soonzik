@@ -65,7 +65,7 @@ namespace SoonZik.HttpRequest
         public async Task<object> GetAllMusicForUser(object MyObj, string key, string id)
         {
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(ApiUrl + "users/getmusics?secureKey=" + key + "&user_id=" + id);
-            return await DoRequestForObject(MyObj, request);
+            return await DoRequestForObject(MyObj, request); 
         }
 
         public async Task<object> GetFollows(object myObject, string element, string id)

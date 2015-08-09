@@ -6,6 +6,6 @@ namespace SoonZik.HttpRequest.Poco
     {
         public List<Music> ListMusiques { get; set; }
         public List<Album> ListAlbums { get; set; }
-        public List<Playlist> ListPlaylists { get; set; } 
+        public List<Pack> ListPack { get; set; } 
     }
 }

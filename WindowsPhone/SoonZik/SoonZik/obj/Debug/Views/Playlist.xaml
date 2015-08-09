@@ -67,7 +67,7 @@
             </PivotItem>
 
             <PivotItem x:Uid="PlaylistPivot" Header="">
-                <GridView Background="Transparent" x:Name="ListBoxPlaylist" ItemsSource="{Binding ListPlaylist}"
+                <GridView Background="Transparent" x:Name="ListBoxPlaylist" ItemsSource="{Binding ListPack}"
                           SelectedItem="{Binding SelectedPlaylist, Mode=TwoWay}" />
             </PivotItem>
         </Pivot>
