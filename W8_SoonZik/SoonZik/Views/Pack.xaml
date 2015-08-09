@@ -23,10 +23,10 @@
                 <RowDefinition Height="75"/>
                 <RowDefinition Height="291"/>
             </Grid.RowDefinitions>
-            <Image  Grid.Row="1" Source="https://pixabay.com/static/uploads/photo/2014/04/03/11/58/record-312730_640.png" Stretch="Fill" Width="174" Height="174" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,175,46,-58"/>
+            <Image  Grid.Row="1" Source="https://pixabay.com/static/uploads/photo/2014/04/03/11/58/record-312730_640.png" Stretch="Fill" Width="174" Height="174" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,334,45,-217"/>
             <Rectangle Fill="#FF00AFDC" HorizontalAlignment="Left" Height="75" StrokeEndLineCap="Square" Stroke="#FF00AFDC" VerticalAlignment="Top" Width="1120" Grid.ColumnSpan="2" Margin="0,0,-405,0"/>
-            <TextBlock Name="pack_title" Text="{Binding title}" Margin="20,10,0,19" TextWrapping="Wrap" VerticalAlignment="Center" FontSize="36" Height="46" Grid.ColumnSpan="2"/>
-            <ListView Name="pack_album_listview" Grid.Column="1" HorizontalAlignment="Left" Height="400" Margin="110,85,-235,-194" Grid.Row="1" VerticalAlignment="Top" Width="575" Background="#FFE0E0E0" IsItemClickEnabled="True" IsSwipeEnabled="False" SelectionMode="None">
+
+            <ListView Name="pack_album_listview" ItemClick="pack_album_listview_ItemClick" IsItemClickEnabled="True" Grid.Column="1" HorizontalAlignment="Left" Height="400" Margin="110,85,-235,-194" Grid.Row="1" VerticalAlignment="Top" Width="575" Background="#FFE0E0E0" IsSwipeEnabled="False" SelectionMode="None">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <StackPanel>
@@ -36,17 +36,21 @@
                             </StackPanel>
                             <StackPanel Orientation="Horizontal">
                                 <TextBlock x:Uid="album_artist_txt" FontSize="16" Foreground="Black">Artiste:</TextBlock>
-                                <TextBlock Name="music_duration" Text="{Binding user}" FontSize="16" Foreground="Black" Margin="20,0,0,0"></TextBlock>
+                                <TextBlock Name="music_duration" Text="{Binding user.username}" FontSize="16" Foreground="Black" Margin="20,0,0,0"></TextBlock>
                             </StackPanel>
                         </StackPanel>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
 
-            <TextBlock x:Name="pack_album_list_txt" x:Uid="album_music_list_txt" Text="Liste des albums:" HorizontalAlignment="Left" Margin="110,27,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Foreground="Black" Height="40" Width="250" FontSize="20" Grid.Column="1"/>
-            <TextBlock x:Name="pack_artist_txt" x:Uid="album_artist_txt" Text="Artiste:" HorizontalAlignment="Left" Margin="10,27,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Foreground="Black" Height="40" Width="70" FontSize="20"/>
-            <TextBlock x:Name="pack_year_txt" x:Uid="album_year_txt" Text="Année:" HorizontalAlignment="Left" Margin="10,67,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Foreground="Black" Height="40" Width="70" FontSize="20"/>
-            <TextBlock x:Name="pack_price_txt" x:Uid="album_price_txt" Text="Prix:" HorizontalAlignment="Left" Margin="10,107,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Foreground="Black" Height="40" Width="70" FontSize="20"/>
+            <TextBlock Name="pack_title" Text="{Binding title}" Margin="20,10,0,19" TextWrapping="Wrap" VerticalAlignment="Center" FontSize="36" Height="46" Grid.ColumnSpan="2"/>
+            <TextBlock x:Name="pack_album_list_txt" x:Uid="album_music_list_txt" Text="Liste des albums:" HorizontalAlignment="Left" Margin="110,45,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Foreground="Black" Height="40" Width="250" FontSize="20" Grid.Column="1"/>
+            <TextBlock x:Name="description_txt" HorizontalAlignment="Left" Margin="20,27,0,0" Grid.Row="1" TextWrapping="Wrap" Text="Description:" VerticalAlignment="Top" Height="22" Width="135" Foreground="Black" FontSize="15"/>
+          
+            <TextBlock x:Name="description_fr" HorizontalAlignment="Left" Margin="10,75,0,0" Grid.Row="1" TextWrapping="Wrap" Text="FR" VerticalAlignment="Top" Height="129" Width="245" Foreground="Black" FontSize="15"/>
+            <TextBlock x:Name="description_en" HorizontalAlignment="Left" Margin="10,209,0,-38" Grid.Row="1" TextWrapping="Wrap" Text="EN" VerticalAlignment="Top" Height="120" Width="245" Foreground="Black" FontSize="15"/>
+
+
         </Grid>
 
     </Grid>

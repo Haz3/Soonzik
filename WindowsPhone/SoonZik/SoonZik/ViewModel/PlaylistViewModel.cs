@@ -18,7 +18,7 @@ namespace SoonZik.ViewModel
         {
             ListAlbum = new ObservableCollection<Album>();
             ListMusique = new ObservableCollection<Music>();
-            ListPlaylist = new ObservableCollection<Playlist>();
+            ListPack = new ObservableCollection<Pack>();
             LoadContent();
         }
 
@@ -52,8 +52,8 @@ namespace SoonZik.ViewModel
                                     ListAlbum.Add(album);
                                 foreach (var music in test.ListMusiques)
                                     ListMusique.Add(music);
-                                foreach (var playlist in test.ListPlaylists)
-                                    ListPlaylist.Add(playlist);
+                                foreach (var playlist in test.ListPack)
+                                    ListPack.Add(playlist);
                             });
                         }
                     });
@@ -91,15 +91,15 @@ namespace SoonZik.ViewModel
             }
         }
 
-        private ObservableCollection<Playlist> _listPlaylist;
+        private ObservableCollection<Pack> _listPack;
 
-        public ObservableCollection<Playlist> ListPlaylist
+        public ObservableCollection<Pack> ListPack
         {
-            get { return _listPlaylist; }
+            get { return _listPack; }
             set
             {
-                _listPlaylist = value;
-                RaisePropertyChanged("ListPlaylist");
+                _listPack = value;
+                RaisePropertyChanged("ListPack");
             }
         }
 

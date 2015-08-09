@@ -32,10 +32,22 @@ namespace SoonZik.Views
             this.Frame.GoBack();
         }
 
-        private void GridView_ItemClick(object sender, ItemClickEventArgs e)
+        private void genre_list_ItemClick(object sender, ItemClickEventArgs e)
         {
             var item = ((SoonZik.Models.Genre)e.ClickedItem);
             this.Frame.Navigate(typeof(Genre), item);
         }
+
+        private void pack_list_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            var item = ((SoonZik.Models.Pack)e.ClickedItem);
+            this.Frame.Navigate(typeof(Pack), item);
+        }
+
+        private void artist_list_ItemClick(object sender, ItemClickEventArgs e)
+        {
+
+        }
+
     }
 }
