@@ -36,12 +36,10 @@ class UsersController < ApplicationController
     elsif request.patch? && params[:user]
       @user.skip_reconfirmation!
       if @user.update(User.user_params params)
-        puts @user.errors.messages
         @user.skip_reconfirmation!
         redirect_to @user, notice: 'Your profile was successfully updated.'
       else
         @show_errors = true
-        puts "lol"
       end
     end
   end
