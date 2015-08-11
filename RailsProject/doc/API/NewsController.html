@@ -166,7 +166,7 @@ href="../News.html">News</a> objects Here is the list of action available :</p>
 
 <h5 id="method-i-addcomment-label-HTTP+VALUE">HTTP VALUE<span><a href="#method-i-addcomment-label-HTTP+VALUE">&para;</a> <a href="#top">&uarr;</a></span></h5>
 <ul><li>
-<p><code>201</code> - In case of success, return nothing</p>
+<p><code>201</code> - In case of success, return the comment</p>
 </li><li>
 <p><code>404</code> - Can&#39;t find the news, the id is probably wrong</p>
 </li><li>
@@ -190,6 +190,7 @@ href="../News.html">News</a> objects Here is the list of action available :</p>
         
         <span class="ruby-keyword">if</span> (<span class="ruby-identifier">com</span>.<span class="ruby-identifier">save</span>)
           <span class="ruby-identifier">com</span>.<span class="ruby-identifier">news</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">news</span>
+          <span class="ruby-ivar">@returnValue</span> = { <span class="ruby-identifier">content</span><span class="ruby-operator">:</span> <span class="ruby-identifier">com</span>.<span class="ruby-identifier">as_json</span>(<span class="ruby-value">:only</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">Commentary</span>.<span class="ruby-identifier">miniKey</span>, <span class="ruby-value">:include</span> =<span class="ruby-operator">&gt;</span> { <span class="ruby-identifier">user</span><span class="ruby-operator">:</span> { <span class="ruby-identifier">only</span><span class="ruby-operator">:</span> <span class="ruby-constant">User</span>.<span class="ruby-identifier">miniKey</span> } }) }
           <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">201</span>
           <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:created</span>
         <span class="ruby-keyword">else</span>
@@ -381,7 +382,7 @@ last (default : false)</p>
 </li></ul>					
 											<div class="method-source-code" id="getcomments-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/news_controller.rb, line 259</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/news_controller.rb, line 260</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">getcomments</span>
   <span class="ruby-identifier">order</span> = <span class="ruby-string">&quot;false&quot;</span>
   <span class="ruby-keyword">begin</span>

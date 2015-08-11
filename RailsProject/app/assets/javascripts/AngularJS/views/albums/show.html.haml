@@ -43,3 +43,20 @@
 											.button.tiny{ "ng-click" => "setTooltip(false)" } Close
 				%hr
 				%p {{ album.yearProd }} - {{ album.user.username }}
+			.commentaries
+				%textarea{ "ng-model" => "comment.value" }
+				.text-right
+					%span.button{ "ng-click" => "sendComment()" } Send
+				.comments
+					.comment.clearfix{ "ng-repeat" => "commentary in commentaries" }
+						%hr
+						.small-2.columns.text-center
+							%a{ href: "/users/{{commentary.user.id}}" }
+								%img{ "ng-src" => '{{ "/assets/usersImage/avatars/" + commentary.user.image }}' }
+								%p {{ commentary.user.username }}
+						.small-10.columns
+							%p {{ commentary.content }}
+							.text-right.dateTime {{ commentary.created_at }}
+					%hr
+					.loadingOffset
+						%loading{ "loading-type" => "'square'", "ng-show" => "commentLoading == true" }

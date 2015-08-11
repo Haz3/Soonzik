@@ -164,6 +164,12 @@ SoonzikApp.factory('HTTPService', ['$http', '$location', 'Upload', function ($ht
     },
     getIdentities: function() {
       return $http.get("http://" + url + "/users/getIdentities.json")
+    },
+    getAlbumComments: function(id, parameters) {
+      return $http.get("http://api." + url + "/albums/" + id + "/comments" + urlParametersFormat(parameters))
+    },
+    addAlbumComment: function(id, parameters) {
+      return $http.post("http://api." + url + '/albums/addcomment/' + id, parameters);
     }
   }
 }]);

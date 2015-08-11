@@ -70,7 +70,8 @@
 						.small-3.columns
 							%img{ "ng-src" => '{{ "/assets/albums/" + album.image }}' }
 						.small-9.columns
-							%h5 {{ album.title }}
+							%h5
+								%a{ href: "/albums/{{album.id}}" } {{ album.title }}
 							%p
 								%em
 									By "

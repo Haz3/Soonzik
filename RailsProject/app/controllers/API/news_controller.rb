@@ -202,7 +202,7 @@ module API
     #
     # ===== HTTP VALUE
     # 
-    # - +201+ - In case of success, return nothing
+    # - +201+ - In case of success, return the comment
     # - +404+ - Can't find the news, the id is probably wrong
     # - +503+ - Error from server
     # 
@@ -221,6 +221,7 @@ module API
             
             if (com.save)
               com.news << news
+              @returnValue = { content: com.as_json(:only => Commentary.miniKey, :include => { user: { only: User.miniKey } }) }
               codeAnswer 201
               defineHttp :created
             else

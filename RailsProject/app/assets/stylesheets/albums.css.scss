@@ -41,4 +41,19 @@
 			}
 		}
 	}
+
+	textarea {
+		resize: none;
+		height: 75px;
+	}
+
+	.loadingOffset {
+		height: 20px;
+		width: 100%;
+	}
+
+	.dateTime {
+		font-size: 12px;
+		color: #00B3BA;
+	}
 }

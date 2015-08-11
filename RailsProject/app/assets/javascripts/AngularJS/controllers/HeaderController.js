@@ -11,6 +11,10 @@ SoonzikApp.controller('HeaderCtrl', ['$scope', "$routeParams", "$location", func
 				$scope.sendSearch();
 			}
 		});
+
+		$scope.$on('user:changeImg', function(event, data) {
+			$("#profilePicture").attr("src", "/assets/usersImage/avatars/" + data.url)
+		});
 	}
 
 	$scope.switchMenu = function() {

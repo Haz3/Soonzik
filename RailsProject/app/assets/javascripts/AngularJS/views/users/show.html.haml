@@ -74,7 +74,9 @@
 						%table.right
 							%thead
 								%tr
-									%th{ colspan: '5' } {{album.title}}
+									%th{ colspan: '5' }
+										%a{ href: "/albums/{{album.id}}" }
+											{{album.title}}
 							%tbody
 								%tr{ 'ng-repeat' => 'song in album.musics track by $index' }
 									%td{:width => '50'}

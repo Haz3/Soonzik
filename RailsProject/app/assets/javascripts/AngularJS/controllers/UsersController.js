@@ -1,4 +1,4 @@
-SoonzikApp.controller('UsersCtrl', ['$scope', "$routeParams", 'SecureAuth', 'HTTPService', 'NotificationService', '$timeout', 'Upload', 'Facebook', function ($scope, $routeParams, SecureAuth, HTTPService, NotificationService, $timeout, Upload, Facebook) {
+SoonzikApp.controller('UsersCtrl', ['$scope', "$routeParams", 'SecureAuth', 'HTTPService', 'NotificationService', '$timeout', 'Upload', 'Facebook', '$rootScope', function ($scope, $routeParams, SecureAuth, HTTPService, NotificationService, $timeout, Upload, Facebook, $rootScope) {
 	$scope.loading = true;
 
 	$scope.user = false;
@@ -347,6 +347,8 @@ SoonzikApp.controller('UsersCtrl', ['$scope', "$routeParams", 'SecureAuth', 'HTT
 					HTTPService.uploadProfileImage(file, { secureKey: key, user_id: user_id }, function (evt) {
 						var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
 					}, function (data, status, headers, config) {
+						$scope.form.user.image = data.content.image;
+						$rootScope.$broadcast('user:changeImg', { url: data.content.image });
 					}, function (error) {
 						$scope.formError.user.image = error;
 					});
@@ -367,6 +369,7 @@ SoonzikApp.controller('UsersCtrl', ['$scope', "$routeParams", 'SecureAuth', 'HTT
 					HTTPService.uploadBackgroundImage(file, { secureKey: key, user_id: user_id }, function (evt) {
 						var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
 					}, function (data, status, headers, config) {
+						$scope.form.user.background = data.content.background;
 					}, function (error) {
 						$scope.formError.user.background = error;
 					});

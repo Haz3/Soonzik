@@ -5,38 +5,43 @@
 				%h3.subheader
 					Images
 				.row
-					.clearfix
-						.large-3.small-3.columns.inline
-							%label{ for: "image" } Avatar
-						.small-3.columns
+					.clearfix.text-center
+						.large-6.small-12.columns
+							%p
+								%label{ for: "image" } Avatar
+							%div
+								%img{ "ng-src" => "{{ '/assets/usersImage/avatars/' + form.user.image }}" }
 							.radius.button{ id: "image", 'ngf-select' => true, "ngf-change" => "uploadAvatar($files)" } Charger une image
-							%small.error{ "ng-if" => "formError.user.image != false", "ng-repeat" => "error in formError.user.image" } Image {{ error }}
-					.clearfix
-						.large-3.small-3.columns.inline
-							%label{ for: "background" } Background
-						.small-3.columns
+							%div
+								%small.error{ "ng-if" => "formError.user.image != false", "ng-repeat" => "error in formError.user.image" } Image {{ error }}
+						.large-6.small-12.columns
+							%p
+								%label{ for: "background" } Background
+							%div
+								%img{ "ng-src" => "{{ '/assets/usersImage/backgrounds/' + form.user.background }}" }
 							.radius.button{ id: "background", 'ngf-select' => true, "ngf-change" => "uploadBackground($files)" } Charger une image
-							%small.error{ "ng-if" => "formError.user.background != false", "ng-repeat" => "error in formError.user.background" } Image {{ error }}
+							%div
+								%small.error{ "ng-if" => "formError.user.background != false", "ng-repeat" => "error in formError.user.background" } Image {{ error }}
 				%h3.subheader
 					Informations Public
 				.row
-					.large-3.small-3.columns.inline
+					.medium-3.small-12.columns.inline
 						%label{ for: "username" } Username
-					.small-9.columns
+					.medium-9.small-12.columns
 						%p.radius{ id: "username" } {{ form.user.username }}
-					.large-3.small-3.columns.inline
+					.medium-3.small-12.columns.inline
 						%label{ for: "email" } Email
-					.small-9.columns
+					.medium-9.small-12.columns
 						%input.radius{ id: "email", type: "text", "ng-model" => "form.user.email" }
 						%small.error{ "ng-if" => "formError.user.email != false", "ng-repeat" => "error in formError.user.email" } Email {{ error }}
-					.large-3.small-3.columns.inline
+					.medium-3.small-12.columns.inline
 						%label{ for: "description" } Description
-					.small-9.columns
+					.medium-9.small-12.columns
 						%textarea.radius{ id: "description" } {{ form.user.description }}
 						%small.error{ "ng-if" => "formError.user.description != false", "ng-repeat" => "error in formError.user.description" } Description {{ error }}
-					.large-3.small-3.columns
+					.medium-3.small-12.columns
 						%label Birthday
-					.small-9.columns
+					.medium-9.small-12.columns
 						%select.medium-4.columns.radius.inline{ "ng-model" => "form.user['birthday(1i)']" }
 							%option{ "ng-repeat" => "year in range(80) track by $index", "ng-value" => "(currentYear - 80 + $index).toString()" } {{ currentYear - $index }}
 						%select.medium-4.columns.radius.inline{ "ng-model" => "form.user['birthday(2i)']" }
@@ -44,52 +49,52 @@
 						%select.medium-4.columns.radius.inline{ "ng-model" => "form.user['birthday(3i)']" }
 							%option{ "ng-repeat" => "day in days", "value" => "{{ (day < 10 ? '0' : '') + day.toString() }}" } {{ day }}
 						%small.error{ "ng-if" => "formError.user.birthday != false", "ng-repeat" => "error in formError.user.birthday" } Birthday {{ error }}
-					.large-3.small-3.columns
+					.medium-3.small-12.columns
 						%label{ for: "facebook" } Facebook
-					.small-9.columns
+					.medium-9.small-12.columns
 						%input.radius{ id: "facebook", type: "text", "ng-model" => "form.user.facebook" }
 						%small.error{ "ng-if" => "formError.user.facebook != false", "ng-repeat" => "error in formError.user.facebook" } Facebook {{ error }}
-					.large-3.small-3.columns
+					.medium-3.small-12.columns
 						%label{ for: "twitter" } Twitter
-					.small-9.columns
+					.medium-9.small-12.columns
 						%input.radius{ id: "twitter", type: "text", "ng-model" => "form.user.twitter" }
 						%small.error{ "ng-if" => "formError.user.twitter != false", "ng-repeat" => "error in formError.user.twitter" } Twitter {{ error }}
-					.large-3.small-3.columns
+					.medium-3.small-12.columns
 						%label{ for: "googleplus" } GooglePlus
-					.small-9.columns
+					.medium-9.small-12.columns
 						%input.radius{ id: "googleplus", type: "text", "ng-model" => "form.user.googlePlus" }
 						%small.error{ "ng-if" => "formError.user.googlePlus != false", "ng-repeat" => "error in formError.user.googlePlus" } GooglePlus {{ error }}
 				%h3.subheader
 					Informations Personnel
 				.row
-					.large-3.small-3.columns.inline
+					.medium-3.small-12.columns.inline
 						%label{ for: "firstname" } Firstname
-					.small-9.columns
+					.medium-9.small-12.columns
 						%input.radius{ id: "firstname", type: "text", "ng-model" => "form.user.fname" }
 						%small.error{ "ng-if" => "formError.user.fname != false", "ng-repeat" => "error in formError.user.fname" } Firstname {{ error }}
-					.large-3.small-3.columns.inline
+					.medium-3.small-12.columns.inline
 						%label{ for: "lastname" } Lastname
-					.small-9.columns
+					.medium-9.small-12.columns
 						%input.radius{ id: "lastname", type: "text", "ng-model" => "form.user.lname" }
 						%small.error{ "ng-if" => "formError.user.lname != false", "ng-repeat" => "error in formError.user.lname" } Lastname {{ error }}
-					.large-3.small-3.columns.inline
+					.medium-3.small-12.columns.inline
 						%label{ for: "password" } Password
-					.small-9.columns
+					.medium-9.small-12.columns
 						%input.radius{ id: "password", type: "password", "ng-model" => "form.user.password" }
 						%small.error{ "ng-if" => "formError.user.password != false", "ng-repeat" => "error in formError.user.password" } Password {{ error }}
-					.large-3.small-3.columns.inline
+					.medium-3.small-12.columns.inline
 						%label{ for: "phone" } Phone
-					.small-9.columns
+					.medium-9.small-12.columns
 						%input.radius{ id: "phone", type: "text", "ng-model" => "form.user.phoneNumber" }
 						%small.error{ "ng-if" => "formError.user.phoneNumber != false", "ng-repeat" => "error in formError.user.phoneNumber" } Phone {{ error }}
-					.large-3.small-3.columns.inline
+					.medium-3.small-12.columns.inline
 						%label{ for: "newsletter" } Newsletter
-					.small-9.columns
+					.medium-9.small-12.columns
 						%input.radius{ id: "newsletter", type: "checkbox", "ng-model" => "form.user.newsletter" }
 						%small.error{ "ng-if" => "formError.user.newsletter != false", "ng-repeat" => "error in formError.user.newsletter" } Newsletter {{ error }}
-					.large-3.small-3.columns.inline
+					.medium-3.small-12.columns.inline
 						%label{ for: "language" } Language
-					.small-9.columns
+					.medium-9.small-12.columns
 						%input.radius{ id: "language", type: "text", "ng-model" => "form.user.language" }
 						%small.error{ "ng-if" => "formError.user.language != false", "ng-repeat" => "error in formError.user.language" } Language {{ error }}
 					.small-12.clearfix
@@ -115,5 +120,5 @@
 								%google-plus-signin{ "ng-init" => "googleCallback()", :clientid => "793685873206-mtbd8bm2gvskccm5rnnnkod5n6q7dqpv.apps.googleusercontent.com" }
 				%hr
 				.actions
-					.large-4.columns.large-centered
+					.large-4.large-centered
 						%input.button.radius.expand.success{ id: "", type: "button", value: "Save", "ng-click" => "submitForm()" }

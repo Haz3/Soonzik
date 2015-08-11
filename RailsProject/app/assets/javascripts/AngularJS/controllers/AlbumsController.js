@@ -6,6 +6,13 @@ SoonzikApp.controller('AlbumsCtrl', ['$scope', "$routeParams", 'SecureAuth', 'HT
 	$scope.selectedMusic = null;
 	$scope.myPlaylists = [];
 
+	$scope.commentariesOffset = 0;
+	$scope.commentaries = [];
+	$scope.commentLoading = false;
+	$scope.comment = {
+		value: ""
+	};
+
 	$scope.initAlbum = function() {
 		var id = $routeParams.id;
 
@@ -57,6 +64,15 @@ SoonzikApp.controller('AlbumsCtrl', ['$scope', "$routeParams", 'SecureAuth', 'HT
 			$scope.loading = false;
 		}, function(error) {
 			NotificationService.error("Error while loading the album");
+		});
+
+		$(window).scroll(function() {
+			if($(window).scrollTop() + $(window).height() == $(document).height() && $scope.commentLoading == false) {
+				$scope.$apply(function() {
+					$scope.commentLoading = true;
+					$scope.loadComments();
+				});
+			}
 		});
 	}
 
@@ -149,5 +165,36 @@ SoonzikApp.controller('AlbumsCtrl', ['$scope', "$routeParams", 'SecureAuth', 'HT
   	if (sec.toString().length == 1)
   		sec = "0" + sec;
   	return min + ":" + sec;
+  }
+
+  $scope.loadComments = function() {
+  	var params = [
+  		{ key: "offset", value: $scope.commentariesOffset },
+  		{ key: "limit", value: 20 }
+  	];
+  	HTTPService.getAlbumComments($scope.album.id, params).then(function(response) {
+  		$scope.commentaries = $scope.commentaries.concat(response.data.content);
+  		$scope.commentariesOffset = $scope.commentaries.length;
+			$scope.commentLoading = false;
+  	}, function(error) {
+  		NotificationService.error("Error while loading commentaries");
+  	});
+  }
+
+  $scope.sendComment = function() {
+  	SecureAuth.securedTransaction(function (key, user_id) {
+			var parameters = { secureKey: key, user_id: user_id, content: $scope.comment.value };
+			
+			HTTPService.addAlbumComment($scope.album.id, parameters).then(function(response) {
+				$scope.commentaries.unshift(response.data.content);
+				$scope.commentariesOffset++;
+			}, function (responseError) {
+				NotificationService.error("Error while saving your comment, please try later");
+			});
+		}, function(error) {
+			NotificationService.error("Error while saving your comment, please try later");
+		});
+
+  	
   }
 }]);
