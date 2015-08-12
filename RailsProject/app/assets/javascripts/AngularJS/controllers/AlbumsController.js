@@ -188,6 +188,7 @@ SoonzikApp.controller('AlbumsCtrl', ['$scope', "$routeParams", 'SecureAuth', 'HT
 			HTTPService.addAlbumComment($scope.album.id, parameters).then(function(response) {
 				$scope.commentaries.unshift(response.data.content);
 				$scope.commentariesOffset++;
+				$scope.comment.value = "";
 			}, function (responseError) {
 				NotificationService.error("Error while saving your comment, please try later");
 			});

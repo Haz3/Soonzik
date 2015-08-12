@@ -1,4 +1,5 @@
 //= require ./Artist/app.js
+//= require ./Artist/controllers/PropositionController.js
 //= require ./Artist/controllers/FollowersController.js
 //= require ./Artist/controllers/HomeController.js
 //= require ./Artist/controllers/MusicController.js

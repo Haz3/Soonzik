@@ -125,3 +125,11 @@
 .error-message {
 	margin-top: -10px;
 }
+
+.gray {
+	color: gray;
+
+	&:hover {
+		color: darkgray;
+	}
+}

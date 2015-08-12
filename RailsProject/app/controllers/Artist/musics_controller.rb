@@ -14,6 +14,10 @@ module Artist
   	def index
   	end
 
+  	# The page to propose a music
+  	def propose
+  	end
+
   	##########
   	#  AJAX  #
   	##########
@@ -169,9 +173,6 @@ module Artist
 
 				genres = JSON.parse(params[:genres]) if params.has_key?(:genres)
 				descriptions = self.parseDescriptions((params.has_key?(:descriptions)) ? JSON.parse(params[:descriptions]) : [], error)
-				puts "--------------"
-				puts descriptions
-				puts "-----------"
 				
 				acceptedContentType = [
           "image/gif",
@@ -335,6 +336,7 @@ module Artist
   		render :json => { error: error, album: a.as_json(:include => { musics: {}, genres: {}, descriptions: {} } ) }, :status => http
   	end
 
+  	# To parse the descriptions and know if one at least is english
 		def parseDescriptions(descriptions, error)
 			tmpDesc = []
 			alreadyIn = []
@@ -352,6 +354,41 @@ module Artist
 				error = true
 			end
 			return tmpDesc
+		end
+
+		# To get the info about the proposed albums
+		def getPropose
+  		albums = current_user.albums
+  		albumInPacks = []
+  		albums.each do |album|
+  			if album.packs.size > 0
+  				albumInPacks << { album: album, pack: album.packs }
+  			end
+
+  			proposed = Proposition.where(artist_id: current_user.id).where(album_id: album.id).all
+  			album.setProposed proposed.size == 1
+  		end
+  		render :json => { albumInPacks: albumInPacks, albums: albums.as_json(:methods => :getProposed, :include => { musics: {}, genres: {}, descriptions: {} } ) }
+		end
+
+		# Delete or create a proposition
+		def proposeAlbums
+			if (params.has_key?(:arr_id) && params[:arr_id].is_a?(Array))
+				params[:arr_id].each do |id|
+					proposed = Proposition.where(artist_id: current_user.id).where(album_id: id).all
+					if (proposed.size == 1)
+						proposed.first.destroy
+					else
+						p = Proposition.new
+						p.artist_id = current_user.id
+						p.album_id = id
+						p.state = 0
+						p.date_posted = Date.new
+						p.save
+					end
+				end
+			end
+			render :json => {}
 		end
 	end
 end

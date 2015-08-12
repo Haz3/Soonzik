@@ -56,4 +56,14 @@ class Album < ActiveRecord::Base
   def getAverageNote
     return AlbumNote.where(album_id: self.id).average(:value).to_f
   end
+
+  # Add an attribute to know if it's an album proposed
+  def setProposed(value)
+    @proposed = value
+  end
+
+  # Get an attribute to know if it's an album proposed
+  def getProposed
+    @proposed
+  end
 end

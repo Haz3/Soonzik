@@ -165,10 +165,14 @@ Rails.application.routes.draw do
 
     # Music
     get '/musics' => 'musics#index'
-    post '/musics/upload' => 'musics#uploadMusic'
-    post '/musics/createAlbum' => 'musics#uploadAlbum'
-    post '/musics/updateMusic' => 'musics#updateMusic'
-    post '/musics/updateAlbum' => 'musics#updateAlbum'
+    get '/musics/propose' => 'musics#propose'
+    #Ajax
+    match '/musics/upload' => 'musics#uploadMusic', via: [:post, :options]
+    match '/musics/createAlbum' => 'musics#uploadAlbum', via: [:post, :options]
+    match '/musics/updateMusic' => 'musics#updateMusic', via: [:post, :options]
+    match '/musics/updateAlbum' => 'musics#updateAlbum', via: [:post, :options]
+    get '/musics/getPropose' => 'musics#getPropose'
+    match '/musics/proposeAlbums' => 'musics#proposeAlbums', via: [:post, :options]
 
     # Meet
     get '/meet' => 'meets#index'

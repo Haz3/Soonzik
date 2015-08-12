@@ -143,6 +143,12 @@ SoonzikArtistApp.factory('HTTPService', ['$http', '$location', 'Upload', functio
     },
     getLanguages: function() {
       return $http.get("http://api." + url + "/languages");
+    },
+    getPropose: function() {
+      return $http.get("http://artist." + url + "/musics/getPropose");
+    },
+    setPropose: function(parameters) {
+      return $http.post("http://artist." + url + "/musics/proposeAlbums", parameters);
     }
   }
 }]);

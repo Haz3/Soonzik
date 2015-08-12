@@ -15,11 +15,11 @@
 					.button.tiny.expand.radius{ "ng-if" => "user != false && user.id != show.user.id", "ng-class" => "isaFollower() ? 'success follow' : 'info notfollow'", "ng-click" => "isaFollower() ? unfollow() : follow()" }
 						{{ isaFollower() ? 'Following' : 'Follow' }}
 			.social-network.text-center
-				%a{:href => '{{show.user.facebook}}'}
+				%a{:href => '{{show.user.facebook}}', "ng-class" => "{ gray: (show.user.facebook == '#') }"}
 					%i.step.fi-social-facebook.size-42
-				%a{:href => '{{show.user.twitter}}'}
+				%a{:href => '{{show.user.twitter}}', "ng-class" => "{ gray: (show.user.twitter == '#') }"}
 					%i.step.fi-social-twitter.size-42
-				%a{:href => '{{show.user.googlePlus}}'}
+				%a{:href => '{{show.user.googlePlus}}', "ng-class" => "{ gray: (show.user.googlePlus == '#') }"}
 					%i.step.fi-social-google-plus.size-42
 		.large-12.large-centered.columns{ 'ng-if' => 'show.user.isArtist' }
 			.top-songs
