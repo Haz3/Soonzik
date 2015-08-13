@@ -117,8 +117,13 @@ module API
 
             if (cart.save)
               @returnValue = { content: cart.as_json(:include => {
-                                                      :musics => { :only => Music.miniKey() },
-                                                      :albums => { :only => Album.miniKey() },
+                                                      :musics => { :only => Music.miniKey(), :include => {
+                                                          album: { :only => Album.miniKey() },
+                                                          user: { :only => User.miniKey } 
+                                                        } },
+                                                      :albums => { :only => Album.miniKey(), :include => { 
+                                                          user: { :only => User.miniKey }
+                                                        } },
                                                       :gift => { :only => Gift.miniKey }
                                                     }, only: Cart.miniKey) }
               codeAnswer 201
@@ -164,12 +169,16 @@ module API
           if (cart.size == 0)
             codeAnswer 202
           else
-            @returnValue = { content: cart.as_json(only: Cart.miniKey,
-              :include => {
-                albums: { only: Album.miniKey },
-                musics: { only: Music.miniKey },
-                :gift => { :only => Gift.miniKey }
-              }) }
+            @returnValue = { content: cart.as_json(:include => {
+                                                      :musics => { :only => Music.miniKey(), :include => {
+                                                          album: { :only => Album.miniKey() },
+                                                          user: { :only => User.miniKey } 
+                                                        } },
+                                                      :albums => { :only => Album.miniKey(), :include => { 
+                                                          user: { :only => User.miniKey }
+                                                        } },
+                                                      :gift => { :only => Gift.miniKey }
+                                                    }, only: Cart.miniKey) }
             codeAnswer 200
           end
         end
