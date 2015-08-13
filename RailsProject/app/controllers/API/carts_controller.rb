@@ -74,7 +74,7 @@ module API
       begin
         if (@security && @cart[:user_id] == @user_id)
           raise ArgumentError, 'user_id missing' if (!defined?@cart[:user_id])
-          raise ArgumentError, 'typeObj missing' if (!defined?@cart[:typeObj])
+          raise ArgumentError, 'typeObj missing' if (!defined?@cart[:typeObj] || (@cart[:typeObj] != "Music" && @cart[:typeObj] != "Album"))
           raise ArgumentError, 'obj_id missing' if (!defined?@cart[:obj_id])
 
           cart = Cart.new
@@ -84,14 +84,6 @@ module API
           obj = classObj.find_by_id(@cart[:obj_id])
           # check if the object exists
           if (obj != nil)
-            case @cart[:typeObj]
-              when "Music"
-                raise ArgumentError, 'music not sell, missing album_id' if (obj.album_id == nil)
-                cart.musics << obj;
-              when "Album"
-                cart.albums << obj;
-            end
-
             gift = nil
 
             if (@gift_user_id.present? && User.find_by_id(@gift_user_id) != nil)
@@ -101,21 +93,32 @@ module API
               gift.to_user = @gift_user_id
               gift.from_user = @user_id
               # check if the object exists
-              if (obj != nil)
+              if (gift.save)
+                cart.gift_id = gift.id
                 case @cart[:typeObj]
                   when "Music"
+                    if (obj.album_id == nil)
+                      gift.destroy
+                      raise ArgumentError, 'music not sell, missing album_id'
+                    end
                     gift.musics << obj;
                   when "Album"
                     gift.albums << obj;
                 end
               end
-
-              if (gift.save)
-                cart.gift_id = gift.id
-              end
             end
 
             if (cart.save)
+              case @cart[:typeObj]
+                when "Music"
+                  if (obj.album_id == nil)
+                    cart.destroy
+                    raise ArgumentError, 'music not sell, missing album_id'
+                  end
+                  cart.musics << obj;
+                when "Album"
+                  cart.albums << obj;
+              end
               @returnValue = { content: cart.as_json(:include => {
                                                       :musics => { :only => Music.miniKey(), :include => {
                                                           album: { :only => Album.miniKey() },
