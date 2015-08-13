@@ -7,29 +7,29 @@ using System.Windows.Input;
 
 namespace SoonZik.ViewModels.Command
 {
-    class ConnectionCommand : ICommand
+    class UnfollowCommand : ICommand
     {
-        private ConnectionViewModel _ViewModel;
+        UserEditViewModel _ViewModel;
 
-        public ConnectionCommand(ConnectionViewModel ViewModel)
+        public UnfollowCommand(UserEditViewModel ViewModel)
         {
             _ViewModel = ViewModel;
         }
 
         // ADD & REMOVE to avoid warning ...
-        public event EventHandler CanExecuteChanged
-        {
-            add { } remove { } }
+        public event EventHandler CanExecuteChanged { add { } remove { } }
 
         public bool CanExecute(object parameter)
         {
-            //return _ViewModel.canUpdate;
+            //if (_ViewModel.new_follow != null)
+            //    return true;
+            //return false;
             return true;
         }
 
         public void Execute(object parameter)
         {
-            _ViewModel.classic_connection();
+            _ViewModel.unfollow();
         }
     }
 }

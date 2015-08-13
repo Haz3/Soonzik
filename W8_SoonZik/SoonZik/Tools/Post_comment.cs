@@ -27,14 +27,13 @@ namespace SoonZik.Tools
 
             try
             {
-                string secureKey = Singleton.Instance.Current_user.salt + await getKey(Singleton.Instance.Current_user.id);
-                string encode = CryptographicBuffer.EncodeToHexString(HashAlgorithmProvider.OpenAlgorithm(HashAlgorithmNames.Sha256).HashData(CryptographicBuffer.ConvertStringToBinary(secureKey, BinaryStringEncoding.Utf8)));
+                string secureKey = await Security.getSecureKey(id);
 
                 string url = type + "/addcomment/" + id;
                 string comment_data =
                     "user_id=" + Singleton.Instance.Current_user.id +
                     "&content=" + WebUtility.UrlEncode(comment_txt) +
-                    "&secureKey=" + encode;
+                    "&secureKey=" + secureKey;
 
 
                 // HTTP_POST -> URL + DATA
@@ -53,7 +52,6 @@ namespace SoonZik.Tools
                 exception = e;
             }
 
-
             if (exception != null)
             {
                 MessageDialog msgdlg = new MessageDialog(exception.Message, "Comment POST Error");
@@ -61,30 +59,30 @@ namespace SoonZik.Tools
             }
         }
 
-        public async Task<string> getKey(int id)
-        {
-            Exception exception = null;
-            HttpClient client = new HttpClient();
+        //public async Task<string> getKey(int id)
+        //{
+        //    Exception exception = null;
+        //    HttpClient client = new HttpClient();
             
-            try
-            {
-                var data = await client.GetStringAsync("http://api.lvh.me:3000/getKey/" + id.ToString());
-                var result = JObject.Parse(data);
+        //    try
+        //    {
+        //        var data = await client.GetStringAsync("http://api.lvh.me:3000/getKey/" + id.ToString());
+        //        var result = JObject.Parse(data);
 
-                //var lat = result["results"][0]["geometry"]["location"]["lat"];
-                string key = result["key"].ToString();
-                return key;
-            }
-            catch (Exception e)
-            {
-                exception = e;
-            }
-            if (exception != null)
-            {
-                MessageDialog msgdlg = new MessageDialog(exception.Message, "GetKey error");
-                await msgdlg.ShowAsync();
-            }
-            return null;
-        }
+        //        //var lat = result["results"][0]["geometry"]["location"]["lat"];
+        //        string key = result["key"].ToString();
+        //        return key;
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        exception = e;
+        //    }
+        //    if (exception != null)
+        //    {
+        //        MessageDialog msgdlg = new MessageDialog(exception.Message, "GetKey error");
+        //        await msgdlg.ShowAsync();
+        //    }
+        //    return null;
+        //}
     }
 }

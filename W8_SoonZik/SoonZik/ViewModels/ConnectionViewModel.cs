@@ -41,6 +41,16 @@ namespace SoonZik.ViewModels
             }
         }
 
+        public bool canUpdate
+        {
+            get
+            {
+                if (mail == null && passwd == null)
+                    return false;
+                return true;
+            }
+        }
+
         public event PropertyChangedEventHandler PropertyChanged;
         protected void OnPropertyChanged(string name)
         {
@@ -60,8 +70,9 @@ namespace SoonZik.ViewModels
 
         public ConnectionViewModel()
         {
-            mail = "";
-            passwd = "";
+            // Dev only
+            mail = "davold@gmail.com";
+            passwd = "lolxdlol";
             do_classic_connection = new ConnectionCommand(this);
         }
 
@@ -85,7 +96,7 @@ namespace SoonZik.ViewModels
                     ((Frame)Window.Current.Content).Navigate(typeof(Home));
                 }
                 else
-                   await new MessageDialog("Connexion KO").ShowAsync();
+                    await new MessageDialog("Connexion KO").ShowAsync();
             }
             catch (Exception e)
             {

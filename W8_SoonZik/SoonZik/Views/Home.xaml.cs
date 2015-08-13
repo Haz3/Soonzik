@@ -36,8 +36,6 @@ namespace SoonZik.Views
             this.Frame.Navigate(typeof(NewsView));
         }
 
-
-
         private void explorer_btn_Click(object sender, RoutedEventArgs e)
         {
             this.Frame.Navigate(typeof(Explorer));
@@ -47,11 +45,11 @@ namespace SoonZik.Views
         {
             this.Frame.Navigate(typeof(Concert));
         }
+
         private void battle_btn_Click(object sender, RoutedEventArgs e)
         {
             this.Frame.Navigate(typeof(battle));
         }
-
 
         private void shop_btn_Click(object sender, RoutedEventArgs e)
         {
@@ -68,6 +66,11 @@ namespace SoonZik.Views
             this.Frame.GoBack();
         }
 
+        private void profil_btn_Click(object sender, RoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(UserEditProfile));
+        }
+
         // Clic in list
         private void News_ItemClick(object sender, ItemClickEventArgs e)
         {
@@ -80,7 +83,6 @@ namespace SoonZik.Views
             var item = ((SoonZik.Models.Album)e.ClickedItem);
             this.Frame.Navigate(typeof(Album), item);
         }
-
-
+        // END
     }
 }

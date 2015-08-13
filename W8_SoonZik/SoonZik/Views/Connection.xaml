@@ -5,7 +5,7 @@
     xmlns:local="using:SoonZik"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:facebookControls="using:Facebook.Client.Controls"
+    
     xmlns:ViewModels="using:SoonZik.ViewModels"
     mc:Ignorable="d">
 
@@ -31,7 +31,7 @@
 
 
 
-        <facebookControls:LoginButton x:Name="loginButton" HorizontalAlignment="Left" Margin="92,530,0,0" VerticalAlignment="Top" d:IsHidden="True"/>
+        <!--<facebookControls:LoginButton x:Name="loginButton" HorizontalAlignment="Left" Margin="92,530,0,0" VerticalAlignment="Top" d:IsHidden="True"/>-->
         <Image Margin="95,662,1601,387" Source="ms-appx:///Assets/connexion_twitter.png" Stretch="Fill"/>
         <Image Margin="95,612,1601,437" Source="ms-appx:///Assets/connexion_gplus.png" Stretch="Fill"/>
         <TextBlock x:Name="signup_txt" x:Uid="signup_txt" HorizontalAlignment="Left" Margin="92,481,0,0" TextWrapping="Wrap" Text="Inscription" VerticalAlignment="Top" Width="77" Foreground="#FF27AAE1" FontSize="16" Tapped="signup_txt_SelectionChanged"/>

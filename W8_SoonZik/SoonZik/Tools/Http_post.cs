@@ -11,12 +11,14 @@ namespace SoonZik.Tools
 {
     public class Http_post
     {
-        public async Task<string> post_request(string url, string data)
+        static string url = "http://api.lvh.me:3000/";
+        //string url = "http://soonzikapi.herokuapp.com/";
+
+        public async Task<string> post_request(string elem, string data)
         {
             Exception exception = null;
 
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create("http://api.lvh.me:3000/" + url);
-            //HttpWebRequest request = (HttpWebRequest)WebRequest.Create("http://soonzikapi.herokuapp.com/" + url);
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url + elem);
             request.Method = "POST";
             request.ContentType = "application/x-www-form-urlencoded";
 
@@ -40,13 +42,6 @@ namespace SoonZik.Tools
                 string ret = reader.ReadToEnd();
                 return ret;
             }
-
-            //if (exception != null)
-            //{
-            //    MessageDialog msgdlg = new MessageDialog(exception.Message, "Post Error");
-            //    await msgdlg.ShowAsync();
-            //}
-            ////return null;
         }
     }
 }
