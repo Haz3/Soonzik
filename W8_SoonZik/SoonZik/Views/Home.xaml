@@ -102,7 +102,8 @@
         <TextBlock x:Name="news_txt" x:Uid="news_txt" HorizontalAlignment="Left" Margin="154,159,0,0" TextWrapping="Wrap" Text="Dernières news" VerticalAlignment="Top" Height="50" Width="500" FontSize="40" Foreground="#FF27AAE1"/>
         <TextBlock x:Name="music_txt" x:Uid="music_txt" Margin="710,159,0,0" TextWrapping="Wrap" Text="Musique" VerticalAlignment="Top" Height="50" Width="500" FontSize="40" Foreground="#FF27AAE1" HorizontalAlignment="Left"/>
         <TextBlock x:Name="community_txt" x:Uid="community_txt" HorizontalAlignment="Left" Margin="1266,159,0,0" TextWrapping="Wrap" Text="Communauté" VerticalAlignment="Top" Height="50" Width="500" FontSize="40" Foreground="#FF27AAE1"/>
-        <TextBlock x:Name="hello_tb" HorizontalAlignment="Left" Margin="1400,85,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="55" Width="455" FontSize="25"/>
+        <TextBlock x:Name="hello_tb" HorizontalAlignment="Left" Margin="1375,85,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="55" Width="410" FontSize="25"/>
+        <Button x:Name="profil_btn" Content="Profil" HorizontalAlignment="Left" Margin="1787,83,0,0" VerticalAlignment="Top" Width="126" Height="60" Foreground="White" Background="#FF27AAE1" Click="profil_btn_Click" FontSize="20"/>
 
     </Grid>
 </Page>
