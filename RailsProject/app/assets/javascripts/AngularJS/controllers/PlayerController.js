@@ -459,6 +459,7 @@ SoonzikApp.controller("PlayerCtrl", ["$scope", "$rootScope", "HTTPService", "Not
             user_id: user_id,
             secureKey: key,
             listening: {
+              user_id: user_id,
               music_id: music.id,
               latitude: $scope.position.latitude,
               longitude: $scope.position.longitude,

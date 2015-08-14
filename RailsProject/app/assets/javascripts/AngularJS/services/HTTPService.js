@@ -170,6 +170,9 @@ SoonzikApp.factory('HTTPService', ['$http', '$location', 'Upload', function ($ht
     },
     addAlbumComment: function(id, parameters) {
       return $http.post("http://api." + url + '/albums/addcomment/' + id, parameters);
+    },
+    findNotif: function(parameters) {
+      return $http.get("http://api." + url + "/notifications/find" + urlParametersFormat(parameters));
     }
   }
 }]);

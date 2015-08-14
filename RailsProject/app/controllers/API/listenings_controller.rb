@@ -190,6 +190,7 @@ module API
     #
     # ==== Options
     # 
+    # * +listening [user_id]+ - Id of the user
     # * +listening [music_id]+ - Id of the music listen
     # * +listening [latitude]+ - Position where the music has been listen
     # * +listening [longitude]+ - Position where the music has been listen
@@ -203,7 +204,6 @@ module API
     def save
       begin
         if (@security)
-          @listening[:user_id] = @user_id
           listening = Listening.new(Listening.listening_params params)
           if (listening.save)
             @returnValue = { content: listening.as_json(:include => {

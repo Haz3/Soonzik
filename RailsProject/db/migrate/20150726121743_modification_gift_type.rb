@@ -1,5 +1,6 @@
 class ModificationGiftType < ActiveRecord::Migration
   def change
-  	change_column :carts, :gift_id, :integer, :null => true
+  	remove_column :carts, :gift_id
+    add_column :carts, :gift_id, :integer, :null => true, default: nil
   end
 end

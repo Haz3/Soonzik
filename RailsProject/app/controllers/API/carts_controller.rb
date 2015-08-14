@@ -7,7 +7,7 @@ module API
   # * destroy     [get] - SECURE
   #
   class CartsController < ApisecurityController
-    before_action :checkKey, only: [:destroy, :save, :show]
+    before_action :checkKey, only: [:destroy, :save, :show, :giftCart]
 
   	# Destroy a specific object by its id
     #
@@ -183,6 +183,62 @@ module API
                                                       :gift => { :only => Gift.miniKey }
                                                     }, only: Cart.miniKey) }
             codeAnswer 200
+          end
+        end
+      rescue
+        codeAnswer 504
+        defineHttp :service_unavailable
+      end
+      sendJson
+    end
+
+    # Modify the "gift" element for a specific cart
+    #
+    # Route : /carts/:id/gift
+    #
+    # ==== Options
+    # 
+    # * +user_gift_id+ - The id to who you want to give the item, or null if you want to remove a gift
+    #
+    # ===== HTTP VALUE
+    # 
+    # - +200+ - In case of success, return the cart
+    # - +401+ - It is not a secured transaction
+    # - +404+ - The cart user_id is not the same as the user_id used for security or the gift user id you gave is not good
+    # - +503+ - Error from server
+    # 
+    def giftCart
+      begin
+        if (!@security)
+          codeAnswer 500
+          defineHttp :forbidden
+        else
+          c = Cart.find_by_id(@id)
+          if (c == nil || c.user_id != @user_id.to_i || User.find_by_id(@user_gift_id) == nil)
+            codeAnswer 502
+            defineHttp :not_found
+          else
+            gift = c.gift
+            if (gift != nil)
+              gift.to_user = user_gift_id.to_i
+              gift.save
+            else
+              gift = Gift.new
+              gift.to_user = user_gift_id.to_i
+              gift.from_user = @user_id
+              gift.save
+              c.gift_id = gift.id
+            end
+            @returnValue = { content: c.as_json(:include => {
+                                                      :musics => { :only => Music.miniKey(), :include => {
+                                                          album: { :only => Album.miniKey() },
+                                                          user: { :only => User.miniKey } 
+                                                        } },
+                                                      :albums => { :only => Album.miniKey(), :include => { 
+                                                          user: { :only => User.miniKey }
+                                                        } },
+                                                      :gift => { :only => Gift.miniKey }
+                                                    }, only: Cart.miniKey) }
           end
         end
       rescue

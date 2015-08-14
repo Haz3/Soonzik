@@ -84,27 +84,6 @@ SoonzikApp.controller('UsersCtrl', ['$scope', "$routeParams", 'SecureAuth', 'HTT
 			HTTPService.findTweet(paramsTweet).then(function(response) {
 				$scope.show.tweets.my = response.data.content;
 
-				/*
-				var paramsTweet = [
-					{ key: encodeURIComponent("attribute[msg]"), value: encodeURIComponent("%" + $scope.user.username + "%") }
-				];
-
-				HTTPService.findTweet(paramsTweet).then(function(response) {
-					tmp_tweets = response.data.content;
-
-					// Loop backward to splice inside
-					for (var i = tmp_tweets.length - 1 ; i >= 0 ; i--) {
-						if (tmp_tweets[i].user.id == id) {
-							tmp_tweets.splice(i, 1);
-						}
-					}
-
-					$scope.show.tweets.others = tmp_tweets;
-
-				}, function(error) {
-					NotificationService.error("");
-				});*/
-
 			}, function(error) {
 				NotificationService.error("");
 			});

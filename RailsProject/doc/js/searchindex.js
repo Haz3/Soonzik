@@ -523,6 +523,12 @@ var SearchIndex =
 		"type": "anymethod"
 	},
 	{
+		"name": "giftCart",
+		"link": "API/CartsController.html#method-i-giftCart",
+		"snippet": "<p>Modify the “gift” element for a specific cart\n<p>Route : /carts/:id/gift\n<p>Options\n",
+		"type": "anymethod"
+	},
+	{
 		"name": "index",
 		"link": "API/ConcertsController.html#method-i-index",
 		"snippet": "<p>Retrieve all the concerts\n<p>Route : /concerts\n<p>Options\n",
@@ -964,6 +970,18 @@ var SearchIndex =
 		"name": "getAverageNote",
 		"link": "Album.html#method-i-getAverageNote",
 		"snippet": "<p>Get the average of notes\n",
+		"type": "anymethod"
+	},
+	{
+		"name": "setProposed",
+		"link": "Album.html#method-i-setProposed",
+		"snippet": "<p>Add an attribute to know if it&#39;s an album proposed\n",
+		"type": "anymethod"
+	},
+	{
+		"name": "getProposed",
+		"link": "Album.html#method-i-getProposed",
+		"snippet": "<p>Get an attribute to know if it&#39;s an album proposed\n",
 		"type": "anymethod"
 	},
 	{

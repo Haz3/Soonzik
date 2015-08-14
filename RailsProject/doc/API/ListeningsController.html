@@ -407,6 +407,8 @@ information on the parameters, check at the model</p>
 
 <h4 id="method-i-save-label-Options">Options<span><a href="#method-i-save-label-Options">&para;</a> <a href="#top">&uarr;</a></span></h4>
 <ul><li>
+<p>+listening [user_id]+ - Id of the user</p>
+</li><li>
 <p>+listening [music_id]+ - Id of the music listen</p>
 </li><li>
 <p>+listening [latitude]+ - Position where the music has been listen</p>
@@ -424,11 +426,10 @@ information on the parameters, check at the model</p>
 </li></ul>					
 											<div class="method-source-code" id="save-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/listenings_controller.rb, line 203</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/listenings_controller.rb, line 204</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">save</span>
   <span class="ruby-keyword">begin</span>
     <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@security</span>)
-      <span class="ruby-ivar">@listening</span>[<span class="ruby-value">:user_id</span>] = <span class="ruby-ivar">@user_id</span>
       <span class="ruby-identifier">listening</span> = <span class="ruby-constant">Listening</span>.<span class="ruby-identifier">new</span>(<span class="ruby-constant">Listening</span>.<span class="ruby-identifier">listening_params</span> <span class="ruby-identifier">params</span>)
       <span class="ruby-keyword">if</span> (<span class="ruby-identifier">listening</span>.<span class="ruby-identifier">save</span>)
         <span class="ruby-ivar">@returnValue</span> = { <span class="ruby-identifier">content</span><span class="ruby-operator">:</span> <span class="ruby-identifier">listening</span>.<span class="ruby-identifier">as_json</span>(<span class="ruby-value">:include</span> =<span class="ruby-operator">&gt;</span> {
