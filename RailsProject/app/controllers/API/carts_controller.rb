@@ -214,7 +214,7 @@ module API
           defineHttp :forbidden
         else
           c = Cart.find_by_id(@id)
-          if (c == nil || c.user_id != @user_id.to_i || User.find_by_id(@user_gift_id) == nil)
+          if (c == nil || c.user_id != @user_id.to_i || User.find_by_id(@user_gift_id) == nil || @user_gift_id.to_i == @user_id.to_i)
             codeAnswer 502
             defineHttp :not_found
           else
@@ -223,12 +223,12 @@ module API
               if user_gift_id == nil
                 gift.destroy
               else
-                gift.to_user = user_gift_id.to_i
+                gift.to_user = @user_gift_id.to_i
                 gift.save
               end
             else
               gift = Gift.new
-              gift.to_user = user_gift_id.to_i
+              gift.to_user = @user_gift_id.to_i
               gift.from_user = @user_id
               gift.save
               c.gift_id = gift.id
@@ -246,6 +246,7 @@ module API
           end
         end
       rescue
+        puts $!, $@
         codeAnswer 504
         defineHttp :service_unavailable
       end
