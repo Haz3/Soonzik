@@ -220,8 +220,12 @@ module API
           else
             gift = c.gift
             if (gift != nil)
-              gift.to_user = user_gift_id.to_i
-              gift.save
+              if user_gift_id == nil
+                gift.destroy
+              else
+                gift.to_user = user_gift_id.to_i
+                gift.save
+              end
             else
               gift = Gift.new
               gift.to_user = user_gift_id.to_i
