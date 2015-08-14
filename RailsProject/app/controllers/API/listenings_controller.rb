@@ -30,7 +30,13 @@ module API
         else
           @returnValue = { content: Listening.all.as_json(:include => {
                                                                       :user => { :only => User.miniKey },
-                                                                      :music => { :only => Music.miniKey }
+                                                                      :music => {
+                                                                        :only => Music.miniKey,
+                                                                        :include => {
+                                                                          album: { :only => Album.miniKey },
+                                                                          user: { :only => User.miniKey }
+                                                                        }
+                                                                      }
                                                                     }, :only => Listening.miniKey) }
         end
         if (@returnValue[:content].size == 0)
@@ -68,7 +74,13 @@ module API
         else
           @returnValue = { content: listening.as_json(:include => {
                                                                     :user => { :only => User.miniKey },
-                                                                    :music => { :only => Music.miniKey }
+                                                                    :music => {
+                                                                        :only => Music.miniKey,
+                                                                        :include => {
+                                                                          album: { :only => Album.miniKey },
+                                                                          user: { :only => User.miniKey }
+                                                                        }
+                                                                      }
                                                                   }, :only => Listening.miniKey) }
           codeAnswer 200
         end
@@ -168,7 +180,13 @@ module API
 
         @returnValue = { content: listening_object.as_json(:include => {
                                                                           :user => { :only => User.miniKey },
-                                                                          :music => { :only => Music.miniKey }
+                                                                          :music => {
+                                                                            :only => Music.miniKey,
+                                                                            :include => {
+                                                                              album: { :only => Album.miniKey },
+                                                                              user: { :only => User.miniKey }
+                                                                            }
+                                                                          }
                                                                         }, :only => Listening.miniKey) }
 
         if (listening_object.size == 0)
@@ -208,7 +226,13 @@ module API
           if (listening.save)
             @returnValue = { content: listening.as_json(:include => {
                                                                       :user => { :only => User.miniKey },
-                                                                      :music => { :only => Music.miniKey }
+                                                                      :music => {
+                                                                        :only => Music.miniKey,
+                                                                        :include => {
+                                                                          album: { :only => Album.miniKey },
+                                                                          user: { :only => User.miniKey }
+                                                                        }
+                                                                      }
                                                                     }, :only => Listening.miniKey) }
             codeAnswer 201
             defineHttp :created
@@ -257,7 +281,16 @@ module API
 
         listen.where("created_at > ?", Time.at(@from.to_i).to_datetime) if (@from.present?)
 
-        @returnValue = { content: listen.as_json(only: Listening.miniKey, :methods => :distance, :include => { user: { only: User.miniKey }, music: { only: Music.miniKey } }) }
+        @returnValue = { content: listen.as_json(only: Listening.miniKey, :methods => :distance, :include => {
+          user: { only: User.miniKey },
+          :music => {
+            :only => Music.miniKey,
+            :include => {
+              album: { :only => Album.miniKey },
+              user: { :only => User.miniKey }
+            }
+          }
+        }) }
         codeAnswer 200
       rescue
         codeAnswer 504
