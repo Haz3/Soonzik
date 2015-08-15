@@ -33,7 +33,8 @@ module API
             defineHttp :not_found
           else
   	        @returnValue = { content: notif.as_json(:include => {
-                                                                  :user => {:only => User.miniKey }
+                                                                  :user => {:only => User.miniKey },
+                                                                  :from => { :only => User.miniKey }
                                                                 }) }
 	          codeAnswer 200
           end
@@ -70,7 +71,8 @@ module API
           notif = Notification.new(Notification.notification_params params)
           if (notif.save)
             @returnValue = { content: notif.as_json(:include => {
-                                                                  :user => {:only => User.miniKey }
+                                                                  :user => {:only => User.miniKey },
+                                                                  :from => { :only => User.miniKey }
                                                                 }) }
             codeAnswer 201
             defineHttp :created
@@ -178,7 +180,8 @@ module API
           end
 
           @returnValue = { content: notification_object.as_json(:include => {
-                                                                              :user => {:only => User.miniKey }
+                                                                              :user => {:only => User.miniKey },
+                                                                              :from => { :only => User.miniKey }
                                                                             }) }
 
           if (notification_object.size == 0)
