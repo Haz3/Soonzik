@@ -19,7 +19,7 @@ SoonzikApp.controller('HeaderCtrl', ['$scope', "$routeParams", "$location", "Sec
 			$("#profilePicture").attr("src", "/assets/usersImage/avatars/" + data.url)
 		});
 
-		var current_user = SecureAuth.getCurrentUser();
+		/*var current_user = SecureAuth.getCurrentUser();
 		if (current_user.id != null && current_user.token != null && current_user.username != null) {
 			$scope.user = current_user;
 
@@ -38,7 +38,8 @@ SoonzikApp.controller('HeaderCtrl', ['$scope', "$routeParams", "$location", "Sec
 				NotificationService.error("Can't load your notification");
 			});
 			notifTweet(true);
-		}
+		}*/
+		$scope.newNotif(true);
 	}
 
 	$scope.switchMenu = function() {
@@ -95,6 +96,49 @@ SoonzikApp.controller('HeaderCtrl', ['$scope', "$routeParams", "$location", "Sec
 					NotificationService.info("New tweet from " + newTweets[i].user.username);
 				}
 			}
+		}, function(error) {
+			// Do nothing
+		});
+	}
+
+
+	$scope.newNotif = function(firstLoop) {
+		SecureAuth.securedTransaction(function (key, user_id) {
+				var params = [
+					{ key: "user_id", value: user_id },
+					{ key: "secureKey", value: key },
+					{ key: "limit", value: 10 }
+				];
+				HTTPService.findNotif(params).then(function(response) {
+					tmp_notif = response.data.content;
+
+				if (firstLoop == true) {
+					$scope.notifs = tmp_notif;
+				} else {
+					var newNotif = [];
+					if ($scope.notifs.length == 0) {
+						newNotif = tmp_notif;
+					} else {
+						var limit = 0
+						for (var i = 0 ; i < tmp_notif.length ; i++) {
+							if (tmp_notif[i].id == $scope.notifs[0].id) {
+								limit = i;
+							}
+						}
+						newNotif = tmp_notif.splice(0, limit);
+					}
+					$scope.notifs = newNotif.concat($scope.notifs);
+
+					if (newNotif.length > 0) {
+						NotificationService.info("You have " + newNotif.length + " new Notifications")
+					}
+				}
+				$timeout(function() {
+					$scope.newNotif(false);
+				}, 10000);
+			}, function(error) {
+				// Do noting
+			});
 		}, function(error) {
 			// Do nothing
 		});

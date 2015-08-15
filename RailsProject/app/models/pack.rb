@@ -34,6 +34,6 @@ class Pack < ActiveRecord::Base
   #
   # Fields returned : [:id, :title]
   def self.miniKey
-  	[:id, :title]
+  	[:id, :title, :begin_date, :end_date, :minimal_price]
   end
 end

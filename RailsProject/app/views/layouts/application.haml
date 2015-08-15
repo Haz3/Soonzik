@@ -1,64 +1,66 @@
 !!! 5
 %html
-  %head
-    %title= "SoonZik | Welcome"
-    %base{href: "/"}
-    %meta{ :name => "viewport", :content => "width=device-width, initial-scale=1.0" }
-    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
-    = javascript_include_tag 'application', 'data-turbolinks-track' => true
-    = javascript_include_tag 'websocket_rails/main', 'data-turbolinks-track' => true
-    = javascript_include_tag "vendor/modernizr"
-    = csrf_meta_tags
+	%head
+		%title= "SoonZik | Welcome"
+		%base{href: "/"}
+		%meta{ :name => "viewport", :content => "width=device-width, initial-scale=1.0" }
+		= stylesheet_link_tag		'application', media: 'all', 'data-turbolinks-track' => true
+		= javascript_include_tag 'application', 'data-turbolinks-track' => true
+		= javascript_include_tag 'websocket_rails/main', 'data-turbolinks-track' => true
+		= javascript_include_tag "vendor/modernizr"
+		= csrf_meta_tags
 
-  %body{ "ng-app" => "SoonzikApp" }
-    %header.index{ "ng-controller" => "HeaderCtrl", "ng-init" => "initHeader()" }
-      %nav.top-bar-custom.row
-        .small-3.columns.center-logo
-          %span.helper
-          =link_to image_tag("logo-soonzik.png", :class => "soonzik-logo"), "http://lvh.me:3000"
-        .small-7.columns
-          .row.collapse
-            .small-10.columns.center-h
-              %input.radius#inputSearch{:placeholder => "Search users, musics, albums...", :type => "text", "ng-model" => "search.value" }
-            .small-2.columns.left.center-h
-              %a.alert.button.expand.radius{:href => "#", "ng-click" => "sendSearch()"}
-                =image_tag "loupe.png", :class => "loupe"
-        .small-2.columns.menu
-          =image_tag "menu.png", :class => "menu-logo", id: "menuBtn", "ng-click" => "switchMenu()", "click-outside" => "closeMenu()"
-          - if user_signed_in?
-            %ul.toAppend.no-bullet{ "ng-class" => "{ open: menuOpen }" }
-              %li.clearfix
-                =image_tag ("usersImage/avatars/" + current_user.image), :class => "photo-profile left", id: "profilePicture"
-                %p
-                  = link_to(UsersHelper.validate_username_for_oauth(current_user), user_path(current_user), :class => "profile")
-              %li
-                = link_to('Edit profile', edit_user_path(current_user))
-              %li
-                = link_to('News', news_index_path)
-              %li
-                = link_to('Explorer', explorer_path)
-              %li
-                = link_to('Packs', packs_path)
-              %li
-                = link_to('Battles', battles_path)
-              %li
-                = link_to('Friends', 'http://lvh.me:3000/users/:id/friendlist')
-              %li
-                = link_to('Logout', destroy_user_session_path, :method => :delete)
-          - else
-            .toAppend{ "ng-class" => "{ open: menuOpen }" }
-              %a.button{:href => new_user_registration_path, :target => "_self" } Sign Up
-              %a.button.alert{:href => new_user_session_path, :target => "_self" } Log In
-    %main.row
-      - if notice
-        %small.error= notice
-      -if alert
-        %small.error= alert
-      .large-12{"ng-view" => true}
-      =yield
-      - if user_signed_in?  
-        #chat{ "ng-include" => "'#{asset_path('AngularJS/views/chat.html.haml')}'" }
+	%body{ "ng-app" => "SoonzikApp" }
+		%header.index{ "ng-controller" => "HeaderCtrl", "ng-init" => "initHeader()" }
+			%nav.top-bar-custom.row
+				.small-3.columns.center-logo
+					%span.helper
+					=link_to image_tag("logo-soonzik.png", :class => "soonzik-logo"), "http://lvh.me:3000"
+				.small-7.columns
+					.row.collapse
+						.small-10.columns.center-h
+							%input.radius#inputSearch{:placeholder => "Search users, musics, albums...", :type => "text", "ng-model" => "search.value" }
+						.small-2.columns.left.center-h
+							%a.alert.button.expand.radius{:href => "#", "ng-click" => "sendSearch()"}
+								=image_tag "loupe.png", :class => "loupe"
+				.small-2.columns.menu
+					=image_tag "menu.png", :class => "menu-logo", id: "menuBtn", "ng-click" => "switchMenu()", "click-outside" => "closeMenu()"
+					- if user_signed_in?
+						.notif{ "ng-show" => "notifs.length > 0" }
+							{{ notifs.length }}
+						%ul.toAppend.no-bullet{ "ng-class" => "{ open: menuOpen }" }
+							%li.clearfix
+								=image_tag ("usersImage/avatars/" + current_user.image), :class => "photo-profile left", id: "profilePicture"
+								%p
+									= link_to(UsersHelper.validate_username_for_oauth(current_user), user_path(current_user), :class => "profile")
+							%li
+								= link_to('Edit profile', edit_user_path(current_user))
+							%li
+								= link_to('News', news_index_path)
+							%li
+								= link_to('Explorer', explorer_path)
+							%li
+								= link_to('Packs', packs_path)
+							%li
+								= link_to('Battles', battles_path)
+							%li
+								= link_to('Friends', 'http://lvh.me:3000/users/:id/friendlist')
+							%li
+								= link_to('Logout', destroy_user_session_path, :method => :delete)
+					- else
+						.toAppend{ "ng-class" => "{ open: menuOpen }" }
+							%a.button{:href => new_user_registration_path, :target => "_self" } Sign Up
+							%a.button.alert{:href => new_user_session_path, :target => "_self" } Log In
+		%main.row
+			- if notice
+				%small.error= notice
+			-if alert
+				%small.error= alert
+			.large-12{"ng-view" => true}
+			=yield
+			- if user_signed_in?	
+				#chat{ "ng-include" => "'#{asset_path('AngularJS/views/chat.html.haml')}'" }
 
-    %footer
-      .container
-        #player-container{ "ng-include" => "'#{asset_path('AngularJS/views/others/player.html.haml')}'" }
+		%footer
+			.container
+				#player-container{ "ng-include" => "'#{asset_path('AngularJS/views/others/player.html.haml')}'" }
