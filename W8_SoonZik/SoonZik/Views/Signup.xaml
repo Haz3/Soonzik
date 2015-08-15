@@ -25,10 +25,10 @@
             </Grid.DataContext>
 
 
-            <TextBlock x:Uid="fname_txt" x:Name="fname_txt" HorizontalAlignment="Left" Margin="65,29,0,0" TextWrapping="Wrap" Text="Prenom" VerticalAlignment="Top" Height="25" Width="370" FontSize="20"/>
+            <TextBlock x:Uid="fname_txt" x:Name="fname_txt" HorizontalAlignment="Left" Margin="65,29,0,0" TextWrapping="Wrap" Text="Prenom*" VerticalAlignment="Top" Height="25" Width="370" FontSize="20"/>
             <TextBox  x:Name="fname_tb" Text="{Binding new_user.fname, Mode=TwoWay}" HorizontalAlignment="Left" Margin="65,59,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="35" Width="370"/>
 
-            <TextBlock x:Uid="lname_txt" x:Name="lname_txt" HorizontalAlignment="Left" Margin="65,134,0,0" TextWrapping="Wrap" Text="Nom" VerticalAlignment="Top" Height="25" Width="370" FontSize="20"/>
+            <TextBlock x:Uid="lname_txt" x:Name="lname_txt" HorizontalAlignment="Left" Margin="65,134,0,0" TextWrapping="Wrap" Text="Nom*" VerticalAlignment="Top" Height="25" Width="370" FontSize="20"/>
             <TextBox  x:Name="lname_tb" Text="{Binding new_user.lname, Mode=TwoWay}" HorizontalAlignment="Left" Margin="65,164,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="35" Width="370"/>
 
             <TextBlock x:Uid="username_txt" x:Name="username_txt" HorizontalAlignment="Left" Margin="65,249,0,0" TextWrapping="Wrap" Text="Pseudo *" VerticalAlignment="Top" Height="25" Width="370" FontSize="20"/>

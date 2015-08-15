@@ -14,8 +14,8 @@ namespace SoonZik.Tools
 {
     public class Http_get
     {
-        //static string url = "http://api.lvh.me:3000/";
-        static string url = "http://soonzikapi.herokuapp.com/";
+        static string url = "http://api.lvh.me:3000/";
+        //static string url = "http://soonzikapi.herokuapp.com/";
 
         public static async Task<User> get_user_by_username(string username)
         {

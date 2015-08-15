@@ -71,36 +71,51 @@ namespace SoonZik.ViewModels
         {
             new_user = new User();
             new_user.address = new Address();
+
+            //DEBUG
+            //new_user.username = "totolol3";
+            //new_user.email = "totolol3@gmail.com";
+            //new_user.language = "FR";
+            //new_user.birthday = "1989-12-20";
+            //passwd = "lolxdlol";
+            //passwd_verif = passwd;
+
             do_signup = new SignupCommand(this);
         }
 
         // Method called in SignupCommand file
         public async void signup()
         {
-
             Exception exception = null;
             var request = new Http_post();
 
             try
             {
-                //new MessageDialog("prenom = " + new_user.fname + "\nnom = " + new_user.lname, "Signup KO").ShowAsync();
-                // HTTP_POST -> URL + DATA
                 string user_data =
-                    "&user[fname]=" + new_user.fname +
-                    "&user[lname]=" + new_user.lname +
-                    "&user[username]=" + new_user.username +
-                    "&user[email]=" + new_user.email +
-                    "&user[password]=" + passwd +
-                    "&user[birthday]=" + new_user.birthday +
-                    "&user[phoneNumber]=" + new_user.phoneNumber +
-                    "&user[desciption]=" + new_user.description +
-                    "&user[language]=" + new_user.language +
-                    "&address[numberStreet]=" + new_user.address.numberStreet +
-                    "&address[street]=" + new_user.address.street +
-                    "&address[zipcode]=" + new_user.address.zipcode +
-                    "&address[city]=" + new_user.address.city +
-                    "&address[country]=" + new_user.address.country +
-                    "&address[complement]=" + new_user.address.complement;
+                        // REQUIRED
+                        "&user[username]=" + new_user.username +
+                        "&user[email]=" + new_user.email +
+                        "&user[password]=" + passwd +
+                        "&user[language]=" + new_user.language +
+                        "&user[birthday]=" + new_user.birthday +
+
+                        // NOT REQUIRED but are :p
+                        "&user[fname]=" + new_user.fname +
+                        "&user[lname]=" + new_user.fname +
+
+                        // NOT REQUIRED
+                        "&user[phoneNumber]=" + new_user.phoneNumber +
+                        "&user[desciption]=" + new_user.description;
+
+                // Check if address null
+                if (check_addr(new_user.address))
+                    user_data +=
+                        "&address[numberStreet]=" + new_user.address.numberStreet +
+                        "&address[street]=" + new_user.address.street +
+                        "&address[zipcode]=" + new_user.address.zipcode +
+                        "&address[city]=" + new_user.address.city +
+                        "&address[country]=" + new_user.address.country +
+                        "&address[complement]=" + new_user.address.complement;
 
                 var response = await request.post_request("users/save", user_data);
 
@@ -108,23 +123,32 @@ namespace SoonZik.ViewModels
 
                 if (json.ToString() == "Created")
                 {
-                    await new MessageDialog("Email = " + new_user.email + "\nPassword = " + passwd, "Signup OK").ShowAsync();
+                    await new MessageDialog("Email = " + new_user.email, "Signup OK").ShowAsync();
                     ((Frame)Window.Current.Content).Navigate(typeof(SoonZik.Views.Connection));
                 }
                 else
-                    await new MessageDialog("Signup KO").ShowAsync();
+                    await new MessageDialog(json.ToString(), "Signup KO").ShowAsync();
             }
             catch (Exception e)
             {
                 exception = e;
             }
 
-
             if (exception != null)
+                await new MessageDialog(exception.Message, "Signup POST Error").ShowAsync();
+        }
+
+        bool check_addr(Address addr)
+        {
+            if (addr.city == null || addr.complement == null || addr.country == null ||
+                addr.numberStreet == null || addr.street == null || addr.zipcode == null)
             {
-                MessageDialog msgdlg = new MessageDialog(exception.Message, "Signup POST Error");
-                await msgdlg.ShowAsync();
+                // To reset addr (delete / new)
+                new_user.address = null;
+                new_user.address = new Address();
+                return false;
             }
+            return true;
         }
     }
 }

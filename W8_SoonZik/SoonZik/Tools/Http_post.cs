@@ -11,8 +11,8 @@ namespace SoonZik.Tools
 {
     public class Http_post
     {
-        //static string url = "http://api.lvh.me:3000/";
-        static string url = "http://soonzikapi.herokuapp.com/";
+        static string url = "http://api.lvh.me:3000/";
+        //static string url = "http://soonzikapi.herokuapp.com/";
 
         public async Task<string> post_request(string elem, string data)
         {
