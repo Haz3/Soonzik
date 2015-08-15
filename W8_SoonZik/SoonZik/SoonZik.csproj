@@ -141,6 +141,7 @@
     <Compile Include="ViewModels\ArtistViewModel.cs" />
     <Compile Include="ViewModels\BattleViewModel.cs" />
     <Compile Include="ViewModels\Command\AddFriendCommand.cs" />
+    <Compile Include="ViewModels\Command\BattleCommand.cs" />
     <Compile Include="ViewModels\Command\ConnectionCommand.cs" />
     <Compile Include="ViewModels\Command\FollowCommand.cs" />
     <Compile Include="ViewModels\Command\RemoveFriendCommand.cs" />

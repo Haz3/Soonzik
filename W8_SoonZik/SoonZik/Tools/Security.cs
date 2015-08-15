@@ -13,14 +13,17 @@ namespace SoonZik.Tools
 {
     class Security
     {
-        static async Task<string> getKey(string id)
+        //public static string url = "http://api.lvh.me:3000/getKey/";
+        public static string url = "http://soonzikapi.herokuapp.com/getKey/";
+
+        public static async Task<string> getKey(string id)
         {
             Exception exception = null;
             HttpClient client = new HttpClient();
 
             try
             {
-                var data = await client.GetStringAsync("http://api.lvh.me:3000/getKey/" + id);
+                var data = await client.GetStringAsync(url + id);
                 var result = JObject.Parse(data);
 
                 string key = result["key"].ToString();
@@ -30,11 +33,9 @@ namespace SoonZik.Tools
             {
                 exception = e;
             }
+
             if (exception != null)
-            {
-                MessageDialog msgdlg = new MessageDialog(exception.Message, "GetKey error");
-                await msgdlg.ShowAsync();
-            }
+                await new MessageDialog(exception.Message, "GetKey error").ShowAsync();
             return null;
         }
 

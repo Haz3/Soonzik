@@ -105,10 +105,7 @@ namespace SoonZik.ViewModels
 
 
             if (exception != null)
-            {
-                MessageDialog msgdlg = new MessageDialog(exception.Message, "Connection POST Error");
-                await msgdlg.ShowAsync();
-            }
+               await new MessageDialog(exception.Message, "Connection POST Error").ShowAsync();
         }
 
         void Get_User(string response)

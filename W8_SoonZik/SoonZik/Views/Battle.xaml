@@ -10,6 +10,7 @@
     Background="#CCCCCC">
 
     <Grid Background="#CCCCCC" Height="1080">
+
         <Grid.DataContext>
             <ViewModels:BattleViewModel/>
         </Grid.DataContext>
@@ -19,32 +20,43 @@
             <Button x:Name="back_btn" Content="Button" HorizontalAlignment="Left" Margin="30,20,0,0" VerticalAlignment="Top" Style="{StaticResource NavigationBackButtonNormalStyle}" RequestedTheme="Light" Click="Button_Click"/>
         </Grid>
 
-        <FlipView Name="battle_fv" ItemsSource="{Binding battlelist}" HorizontalAlignment="Left" Margin="97,177,0,-928" VerticalAlignment="Top" Height="831" Width="1721" FontSize="48">
+        <FlipView SelectedItem="{Binding selected_battle, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Name="battle_fv" ItemsSource="{Binding battlelist}"  VerticalAlignment="Top" Height="413" FontSize="48" Background="#FF24A0D4" Margin="297,140,407,0">
+
             <FlipView.ItemTemplate>
                 <DataTemplate>
-                    <StackPanel>
 
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock x:Uid="end_of_battle_txt">
-                                <Run Text="La Battle finie le: "></Run>
-                                <Run Text="{Binding date_end}"></Run>
-                            </TextBlock>
-                        </StackPanel>
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock>Artist 1:</TextBlock>
-                            <TextBlock Name="artist_one_txt" Text="{Binding artist_one.username}" TextWrapping="NoWrap"></TextBlock>
-                            <Button Click="Artist_one_Button_Click" Content="Vote" x:Name="artist_one_btn" Background="#FFF18484" Width="200" Height="50" FontSize="15" Margin="30,0,0,0"></Button>
-                        </StackPanel>
+                    <Grid Background="#FF24A0D4" Width="Auto" Height="Auto">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
 
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock>Artist 2:</TextBlock>
-                            <TextBlock Name="artist_two_txt" Text="{Binding artist_two.username}" TextWrapping="NoWrap"></TextBlock>
-                            <Button Click="Artist_two_Button_Click" Content="Vote" x:Name="artist_two_btn" Background="#FF308EFF" Width="200" Height="50" FontSize="15" Margin="30,0,0,0"></Button>
-                        </StackPanel>
-                    </StackPanel>
+
+                        <TextBlock x:Name="end_of_battle_txt" x:Uid="end_of_battle_txt" Grid.Column="0" Grid.Row="0"  Text="La Battle finie le:"/>
+                        <TextBlock x:Name="battle_end_time_txt" Grid.Column="1" Grid.Row="0" Text="{Binding date_end}"/>
+
+
+                        <TextBlock x:Name="artist_one_txt" Grid.Column="0" Grid.Row="1" Text="Artist 1"/>
+                        <TextBlock Grid.Column="0" Grid.Row="2" Name="artist_one_tb" Text="{Binding artist_one.username}" TextWrapping="NoWrap" HorizontalAlignment="Left"/>
+
+
+
+                        <TextBlock x:Name="artist_two_txt" Grid.Column="1" Grid.Row="1" Text="Artist 2"/>
+                        <TextBlock Grid.Column="1" Grid.Row="2" Name="artist_two_tb" Text="{Binding artist_two.username}" TextWrapping="NoWrap" HorizontalAlignment="Left"/>
+
+                    </Grid>
                 </DataTemplate>
             </FlipView.ItemTemplate>
         </FlipView>
+
+        <Button x:Name="vote_artist_one_btn" Command="{Binding do_vote_one, Mode=OneWay}" CommandParameter="1" Content="Vote Artist 1" HorizontalAlignment="Left" Margin="297,652,0,0" VerticalAlignment="Top" Height="50" Width="496" Background="#FFE03333" FontSize="20"/>
+        <Button x:Name="vote_artist_two_btn" Command="{Binding do_vote_two, Mode=OneWay}" CommandParameter="2" Content="Vote Artist 2" HorizontalAlignment="Left" Margin="1017,652,0,0" VerticalAlignment="Top" Width="496" Height="50" Background="#FF5D4545" FontSize="20"/>
 
     </Grid>
 </Page>

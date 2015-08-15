@@ -8,19 +8,27 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using Windows.UI.Popups;
+using SoonZik.Models;
 
 namespace SoonZik.Tools
 {
     public class Http_get
     {
-        static string url = "http://api.lvh.me:3000/";
-        //string url = "http://soonzikapi.herokuapp.com/";
+        //static string url = "http://api.lvh.me:3000/";
+        static string url = "http://soonzikapi.herokuapp.com/";
 
-        public static async Task<SoonZik.Models.User> get_user_by_username(string username)
+        public static async Task<User> get_user_by_username(string username)
         {
-            var user = (SoonZik.Models.User)await get_object(new SoonZik.Models.User(), "users/find?attribute[username]=" + username);
+            var user = (User)await get_object(new User(), "users/find?attribute[username]=" + username);
             return user;
         }
+
+        public static async Task<User> get_user_by_id(string id)
+        {
+            var user = (User)await get_object(new User(), "users/find?attribute[id]=" + id);
+            return user;
+        }
+
 
         public static async Task<object> get_object(object Object, string elem)
         {
