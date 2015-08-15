@@ -12,6 +12,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using SoonZik.ViewModels;
 
 // Pour en savoir plus sur le modèle d'élément Page vierge, consultez la page http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -30,18 +31,6 @@ namespace SoonZik.Views
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             this.Frame.GoBack();
-        }
-        private void Artist_one_Button_Click(object sender, RoutedEventArgs e)
-        {
-            var msg = new Windows.UI.Popups.MessageDialog(
-            "Vote pour artist 1");
-            //msg.ShowAsync();
-        }
-        private void Artist_two_Button_Click(object sender, RoutedEventArgs e)
-        {
-            var msg = new Windows.UI.Popups.MessageDialog(
-            "Vote pour artist 2");
-            //msg.ShowAsync();
         }
     }
 }

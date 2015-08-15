@@ -27,7 +27,7 @@ namespace SoonZik.Tools
 
             try
             {
-                string secureKey = await Security.getSecureKey(id);
+                string secureKey = await Security.getSecureKey(Singleton.Instance.Current_user.id.ToString());
 
                 string url = type + "/addcomment/" + id;
                 string comment_data =
@@ -53,36 +53,7 @@ namespace SoonZik.Tools
             }
 
             if (exception != null)
-            {
-                MessageDialog msgdlg = new MessageDialog(exception.Message, "Comment POST Error");
-                await msgdlg.ShowAsync();
-            }
+                await new MessageDialog(exception.Message, "Comment POST Error").ShowAsync();
         }
-
-        //public async Task<string> getKey(int id)
-        //{
-        //    Exception exception = null;
-        //    HttpClient client = new HttpClient();
-            
-        //    try
-        //    {
-        //        var data = await client.GetStringAsync("http://api.lvh.me:3000/getKey/" + id.ToString());
-        //        var result = JObject.Parse(data);
-
-        //        //var lat = result["results"][0]["geometry"]["location"]["lat"];
-        //        string key = result["key"].ToString();
-        //        return key;
-        //    }
-        //    catch (Exception e)
-        //    {
-        //        exception = e;
-        //    }
-        //    if (exception != null)
-        //    {
-        //        MessageDialog msgdlg = new MessageDialog(exception.Message, "GetKey error");
-        //        await msgdlg.ShowAsync();
-        //    }
-        //    return null;
-        //}
     }
 }

@@ -28,14 +28,14 @@ namespace SoonZik.ViewModels
             }
         }
 
-        //private User _SelectedUser;
-        public User SelectedUser { get; set; }
+        //private User _selected_user;
+        public User selected_user { get; set; }
         //{
-        //    get { return _SelectedUser; }
+        //    get { return _selected_user; }
         //    set
         //    {
         //        _SelectedUser = value;
-        //        OnPropertyChanged("SelectedUser");
+        //        OnPropertyChanged("selected_user");
         //    }
         //}
 
@@ -205,7 +205,7 @@ namespace SoonZik.ViewModels
             {
                 string post_data =
                     "user_id=" + Singleton.Instance.Current_user.id.ToString() +
-                    "&friend_id=" + SelectedUser.id +
+                    "&friend_id=" + selected_user.id +
                     "&secureKey=" + await Security.getSecureKey(Singleton.Instance.Current_user.id.ToString());
 
                 var response = await request.post_request("users/delfriend", post_data);
@@ -216,7 +216,7 @@ namespace SoonZik.ViewModels
                 if (json.ToString() == "Success")
                 {
                     await new MessageDialog("Remove friend OK").ShowAsync();
-                    Singleton.Instance.Current_user.friends.Remove(SelectedUser);
+                    Singleton.Instance.Current_user.friends.Remove(selected_user);
                 }
                 else
                     await new MessageDialog("Remove friend KO").ShowAsync();
@@ -239,7 +239,7 @@ namespace SoonZik.ViewModels
             {
                 string post_data =
                     "user_id=" + Singleton.Instance.Current_user.id.ToString() +
-                    "&follow_id=" + SelectedUser.id +
+                    "&follow_id=" + selected_user.id +
                     "&secureKey=" + await Security.getSecureKey(Singleton.Instance.Current_user.id.ToString());
 
                 var response = await request.post_request("users/unfollow", post_data);
@@ -248,7 +248,7 @@ namespace SoonZik.ViewModels
                 if (json.ToString() == "Success")
                 {
                     await new MessageDialog("Unfollow OK").ShowAsync();
-                    Singleton.Instance.Current_user.follows.Remove(SelectedUser);
+                    Singleton.Instance.Current_user.follows.Remove(selected_user);
 
                 }
                 else
