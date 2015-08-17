@@ -69,7 +69,7 @@
             <TextBox Grid.Column="1" x:Name="address_city_tb" Text="{Binding edit_user.address.city, Mode=TwoWay}" HorizontalAlignment="Left" Margin="194,509,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="35"/>
             <TextBox Grid.Column="1" x:Name="address_country_tb" Text="{Binding edit_user.address.country, Mode=TwoWay}" HorizontalAlignment="Left" Margin="330,509,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="35"/>
             <TextBox Grid.Column="1" x:Name="address_complement_tb" Text="{Binding edit_user.address.complement, Mode=TwoWay}" HorizontalAlignment="Left" Margin="65,605,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="385" Height="32"/>
-            <Button x:Name="update_btn"  x:Uid="signup_btn" Content="Enregistrer" HorizontalAlignment="Left" Margin="252,832,0,0" VerticalAlignment="Top" Width="521" Background="#FF446CF5" FontSize="20" Height="45" Grid.ColumnSpan="2"/>
+            <Button x:Name="update_btn" x:Uid="signup_btn" Command="{Binding do_update_user, Mode=OneWay}" Content="Enregistrer" HorizontalAlignment="Left" Margin="252,832,0,0" VerticalAlignment="Top" Width="521" Background="#FF446CF5" FontSize="20" Height="45" Grid.ColumnSpan="2"/>
 
 
             <TextBlock x:Uid="friend_list_txt" x:Name="friend_list_txt" Grid.Column="2" HorizontalAlignment="Left" Margin="45,29,0,0" TextWrapping="Wrap" Text="Liste d'amis" VerticalAlignment="Top" Height="25" Width="310" FontSize="20"/>

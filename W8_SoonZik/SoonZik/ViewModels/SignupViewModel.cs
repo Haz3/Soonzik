@@ -101,11 +101,11 @@ namespace SoonZik.ViewModels
 
                         // NOT REQUIRED but are :p
                         "&user[fname]=" + new_user.fname +
-                        "&user[lname]=" + new_user.fname +
+                        "&user[lname]=" + new_user.lname +
 
                         // NOT REQUIRED
                         "&user[phoneNumber]=" + new_user.phoneNumber +
-                        "&user[desciption]=" + new_user.description;
+                        "&user[description]=" + new_user.description;
 
                 // Check if address null
                 if (check_addr(new_user.address))

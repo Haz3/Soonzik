@@ -84,7 +84,11 @@ namespace SoonZik.ViewModels
                 OnPropertyChanged("new_follow");
             }
         }
-
+        public ICommand do_update_user
+        {
+            get;
+            private set;
+        }
         public ICommand do_add_friend
         {
             get;
@@ -123,6 +127,60 @@ namespace SoonZik.ViewModels
             do_remove_friend = new RemoveFriendCommand(this);
             do_follow = new FollowCommand(this);
             do_unfollow = new UnfollowCommand(this);
+            do_update_user = new EditUserCommand(this);
+        }
+
+        public async void update_user()
+        {
+            Exception exception = null;
+            var request = new Http_post();
+
+            try
+            {
+                string user_data =
+                        "&user_id=" + Singleton.Instance.Current_user.id.ToString() +
+                        "&secureKey=" + await Security.getSecureKey(Singleton.Instance.Current_user.id.ToString()) +
+                        "&user[username]=" + edit_user.username +
+                        "&user[email]=" + edit_user.email +
+                        "&user[password]=" + passwd +
+                        "&user[language]=" + edit_user.language +
+                        "&user[birthday]=" + edit_user.birthday +
+                        "&user[fname]=" + edit_user.fname +
+                        "&user[lname]=" + edit_user.lname +
+                        "&user[phoneNumber]=" + edit_user.phoneNumber +
+                        "&user[description]=" + edit_user.description;
+
+                
+                if (check_addr(edit_user.address))
+                    user_data +=
+                        "&address[numberStreet]=" + edit_user.address.numberStreet +
+                        "&address[street]=" + edit_user.address.street +
+                        "&address[zipcode]=" + edit_user.address.zipcode +
+                        "&address[city]=" + edit_user.address.city +
+                        "&address[country]=" + edit_user.address.country +
+                        "&address[complement]=" + edit_user.address.complement;
+
+                var response = await request.post_request("users/update", user_data);
+
+                var json = JObject.Parse(response).SelectToken("message");
+                var json1 = JObject.Parse(response).SelectToken("content");
+
+                // Debug
+                if (json.ToString() == "Created")
+                {
+                    await new MessageDialog("Update OK").ShowAsync();
+                    Singleton.Instance.Current_user = edit_user;
+                }
+                else
+                    await new MessageDialog(json1.ToString(), "Update KO").ShowAsync();
+            }
+            catch (Exception e)
+            {
+                exception = e;
+            }
+
+            if (exception != null)
+                await new MessageDialog(exception.Message, "Add friend Error").ShowAsync();
         }
 
         public async void add_friend()
@@ -261,6 +319,21 @@ namespace SoonZik.ViewModels
 
             if (exception != null)
                 await new MessageDialog(exception.Message, "Unfollow Error").ShowAsync();
+        }
+
+        bool check_addr(Address addr)
+        {
+            if (addr == null)
+                return false;
+            if (addr.city == null || addr.complement == null || addr.country == null ||
+                addr.numberStreet == null || addr.street == null || addr.zipcode == null)
+            {
+                // To reset addr (delete / new)
+                edit_user.address = null;
+                edit_user.address = new Address();
+                return false;
+            }
+            return true;
         }
     }
 }

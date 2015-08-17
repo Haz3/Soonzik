@@ -32,20 +32,11 @@ namespace SoonZik.Views
         public Concert()
         {
             this.InitializeComponent();
-
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             this.Frame.GoBack();
         }
-
-        private async void pushpinTapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
-        {
-            MessageDialog dialog = new MessageDialog("Hello from Paris !!");
-            await dialog.ShowAsync();
-        }
-
-
-    } // END OF CLASS
-} // END OF NAMESPACE
+    }
+}

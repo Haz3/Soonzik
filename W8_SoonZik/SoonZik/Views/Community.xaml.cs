@@ -40,7 +40,7 @@ namespace SoonZik
 
         private void battle_btn_Click(object sender, RoutedEventArgs e)
         {
-            this.Frame.Navigate(typeof(battle));
+            this.Frame.Navigate(typeof(Battle));
         }
 
         private void follow_btn_Click(object sender, RoutedEventArgs e)

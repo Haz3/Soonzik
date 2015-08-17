@@ -48,7 +48,7 @@ namespace SoonZik.Views
 
         private void battle_btn_Click(object sender, RoutedEventArgs e)
         {
-            this.Frame.Navigate(typeof(battle));
+            this.Frame.Navigate(typeof(Battle));
         }
 
         private void shop_btn_Click(object sender, RoutedEventArgs e)
