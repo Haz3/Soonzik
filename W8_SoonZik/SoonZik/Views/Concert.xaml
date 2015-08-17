@@ -24,46 +24,56 @@
 
 
         <FlipView Name="flip_view" ItemsSource="{Binding concertlist}" HorizontalAlignment="Left" Margin="97,107,0,0" VerticalAlignment="Top" Height="936" Width="1721" FontSize="30">
-
             <FlipView.ItemTemplate>
                 <DataTemplate>
-                    <StackPanel>
 
-                        <StackPanel>
-                            <TextBlock x:Uid="date_txt" Text="Date:" Foreground="Black"/>
-                            <TextBlock Text="{Binding planification.Date}" Foreground="Black"/>
-                        </StackPanel>
-                        <StackPanel>
-                            <TextBlock x:Uid="website_txt" Text="Site Internet:" Foreground="Black" Margin="0,30,0,0"/>
-                            <TextBlock Text="{Binding url}" Foreground="Black"/>
-
-                        </StackPanel>
-                        <StackPanel>
-                            <TextBlock Name="address_txt" x:Uid="address_txt" Text="Adresse:" Foreground="#FF020202" Margin="0,30,0,0"></TextBlock>
-                            <TextBlock TextWrapping="NoWrap" Foreground="Black">
+                    <Grid Width="Auto" Height="Auto" Background="#FF24A0D4">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0.5*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid Grid.Column="0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <StackPanel Grid.Column="0" Grid.Row="0">
+                                <TextBlock x:Uid="date_txt" Text="Date:" Foreground="Black" FontSize="40" FontWeight="Bold"/>
+                                <TextBlock Text="{Binding planification.Date}" Foreground="Black"/>
+                            </StackPanel>
+                            <StackPanel Grid.Column="0" Grid.Row="1">
+                                <TextBlock x:Uid="website_txt" Text="Site Internet:" Foreground="Black" FontSize="40" FontWeight="Bold"/>
+                                <TextBlock Text="{Binding url}" Foreground="Black"/>
+                            </StackPanel>
+                            <StackPanel Grid.Column="0" Grid.Row="2">
+                                <TextBlock Name="address_txt" x:Uid="address_txt" Text="Adresse:" Foreground="#FF020202" Margin="0,30,0,0" FontSize="40" FontWeight="Bold"></TextBlock>
+                                <TextBlock TextWrapping="NoWrap" Foreground="Black">
                                 <Run Text="{Binding address.numberStreet}"/>
                                 <Run Text="{Binding address.street}"/>
                                 <LineBreak></LineBreak>
                                 <Run Text="{Binding address.city}"/>
                                 <Run Text="{Binding address.zipcode}"/>
-                            </TextBlock>
-                        </StackPanel>
-                        <bm:Map ZoomLevel="7" Credentials="Au1nH1MxHdvPVWttdBJJbTRYt6nHZJofF21VgvtHIAb5oYGH5609yjEa51GZZqFO" x:Name="MyMap" Height="423" Width="800" Margin="418,180,497,360">
+                                </TextBlock>
+                            </StackPanel>
+                        </Grid>
+
+
+                        <bm:Map Grid.Column="1" ZoomLevel="6" Credentials="Au1nH1MxHdvPVWttdBJJbTRYt6nHZJofF21VgvtHIAb5oYGH5609yjEa51GZZqFO" x:Name="MyMap" Margin="50,150,50,150">
                             <bm:Map.Center>
-                                <bm:Location Latitude="48.8566140" Longitude="2.3522219"/>
+                                <bm:Location Latitude="46.601595" Longitude="1.904063"/>
                             </bm:Map.Center>
 
                             <bm:Map.Children>
-                                <bm:Pushpin Tapped="pushpinTapped" Background="#FF990000">
+                                <bm:Pushpin Background="#FF990000">
                                     <bm:MapLayer.Position>
-                                        <!--<bm:Location Latitude="48.8566140" Longitude="2.3522219" />-->
                                         <bm:Location Latitude="{Binding address.lat}" Longitude="{Binding address.lng}" />
                                     </bm:MapLayer.Position>
                                 </bm:Pushpin>
                             </bm:Map.Children>
                         </bm:Map>
-                        
-                    </StackPanel>
+
+                    </Grid>
                 </DataTemplate>
             </FlipView.ItemTemplate>
         </FlipView>

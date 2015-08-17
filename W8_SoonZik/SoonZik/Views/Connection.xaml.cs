@@ -30,13 +30,6 @@ namespace SoonZik.Views
             DataContext = new ConnectionViewModel();
         }
 
-        private void Connect_btn_Click(object sender, RoutedEventArgs e)
-        {
-            
-            //connection.do_classic_connection();
-           this.Frame.Navigate(typeof(Home));
-        }
-
         private void signup_txt_SelectionChanged(object sender, TappedRoutedEventArgs e)
         {
             this.Frame.Navigate(typeof(Signup));
