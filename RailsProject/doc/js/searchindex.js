@@ -721,12 +721,6 @@ var SearchIndex =
 		"type": "anymethod"
 	},
 	{
-		"name": "save",
-		"link": "API/NotificationsController.html#method-i-save",
-		"snippet": "<p>Save a new object Notification. For more information on the parameters,\ncheck at the model\n<p>Route : /notifications/save …\n",
-		"type": "anymethod"
-	},
-	{
 		"name": "find",
 		"link": "API/NotificationsController.html#method-i-find",
 		"snippet": "<p>Give a part of the notifications depending of the filter passed into\nparameter\n<p>Route : /notifications/find …\n",
@@ -736,6 +730,12 @@ var SearchIndex =
 		"name": "destroy",
 		"link": "API/NotificationsController.html#method-i-destroy",
 		"snippet": "<p>Destroy a specific object by its id\n<p>Options\n<p><code>id</code> - The id of the specific notification\n",
+		"type": "anymethod"
+	},
+	{
+		"name": "readNotif",
+		"link": "API/NotificationsController.html#method-i-readNotif",
+		"snippet": "<p>Set the notification as a read one\n<p>Route : /notifications/:id/read\n<p>Options\n",
 		"type": "anymethod"
 	},
 	{
@@ -1228,6 +1228,12 @@ var SearchIndex =
 		"name": "notification_params",
 		"link": "Notification.html#method-c-notification_params",
 		"snippet": "<p>The strong parameters to save or update object\n",
+		"type": "anymethod"
+	},
+	{
+		"name": "miniKey",
+		"link": "Notification.html#method-c-miniKey",
+		"snippet": "<p>Filter of information for the API\n<p>Fields returned : [:id, :title, :date]\n",
 		"type": "anymethod"
 	},
 	{

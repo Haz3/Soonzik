@@ -174,7 +174,7 @@ list of action available :</p>
 </li></ul>					
 											<div class="method-source-code" id="destroy-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/tweets_controller.rb, line 241</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/tweets_controller.rb, line 258</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">destroy</span>
   <span class="ruby-keyword">begin</span>
     <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@security</span>)
@@ -250,7 +250,7 @@ its user</p>
 </li></ul>					
 											<div class="method-source-code" id="find-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/tweets_controller.rb, line 145</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/tweets_controller.rb, line 162</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">find</span>
   <span class="ruby-keyword">begin</span>
     <span class="ruby-identifier">tweet_object</span> = <span class="ruby-keyword">nil</span>
@@ -429,6 +429,23 @@ on the parameters, check at the model</p>
     <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@security</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-ivar">@tweet</span>[<span class="ruby-value">:user_id</span>] <span class="ruby-operator">==</span> <span class="ruby-ivar">@user_id</span>)
       <span class="ruby-identifier">tweet</span> = <span class="ruby-constant">Tweet</span>.<span class="ruby-identifier">new</span>(<span class="ruby-constant">Tweet</span>.<span class="ruby-identifier">tweet_params</span> <span class="ruby-identifier">params</span>)
       <span class="ruby-keyword">if</span> (<span class="ruby-identifier">tweet</span>.<span class="ruby-identifier">save</span>)
+
+        <span class="ruby-keyword">if</span> (<span class="ruby-identifier">tweet</span>.<span class="ruby-identifier">msg</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">/(@)(\w{3,40})/i</span>)
+          <span class="ruby-keyword">begin</span>
+            <span class="ruby-identifier">match</span> =  <span class="ruby-regexp">/(@)(\w{3,40})/i</span>.<span class="ruby-identifier">match</span>(<span class="ruby-identifier">tweet</span>.<span class="ruby-identifier">msg</span>)
+            <span class="ruby-keyword">if</span> (<span class="ruby-identifier">tweet</span>.<span class="ruby-identifier">user</span>.<span class="ruby-identifier">username</span> <span class="ruby-operator">!=</span> <span class="ruby-node">$2</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-constant">User</span>.<span class="ruby-identifier">find_by_username</span>(<span class="ruby-node">$2</span>))
+              <span class="ruby-identifier">n</span> = <span class="ruby-constant">Notification</span>.<span class="ruby-identifier">new</span>
+              <span class="ruby-identifier">n</span>.<span class="ruby-identifier">user_id</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">find_by_username</span>(<span class="ruby-node">$2</span>).<span class="ruby-identifier">id</span>
+              <span class="ruby-identifier">n</span>.<span class="ruby-identifier">notif_type</span> = <span class="ruby-string">&quot;tweet&quot;</span>
+              <span class="ruby-identifier">n</span>.<span class="ruby-identifier">from_user_id</span> = <span class="ruby-ivar">@user_id</span>
+              <span class="ruby-identifier">n</span>.<span class="ruby-identifier">read</span> = <span class="ruby-keyword">false</span>
+              <span class="ruby-identifier">n</span>.<span class="ruby-identifier">link</span> = <span class="ruby-node">&quot;/tweets/#{tweet.id}&quot;</span>
+              <span class="ruby-identifier">n</span>.<span class="ruby-identifier">save</span>
+            <span class="ruby-keyword">end</span>
+          <span class="ruby-keyword">rescue</span>
+          <span class="ruby-keyword">end</span>
+        <span class="ruby-keyword">end</span>
+
         <span class="ruby-ivar">@returnValue</span> = { <span class="ruby-identifier">content</span><span class="ruby-operator">:</span> <span class="ruby-identifier">tweet</span>.<span class="ruby-identifier">as_json</span>(<span class="ruby-value">:include</span> =<span class="ruby-operator">&gt;</span> {
                                                   <span class="ruby-value">:user</span> =<span class="ruby-operator">&gt;</span> { <span class="ruby-identifier">only</span><span class="ruby-operator">:</span> <span class="ruby-constant">User</span>.<span class="ruby-identifier">miniKey</span> }
                                                 }, <span class="ruby-value">:only</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">Tweet</span>.<span class="ruby-identifier">miniKey</span>) }

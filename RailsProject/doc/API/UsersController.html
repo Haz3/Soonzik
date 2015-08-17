@@ -198,45 +198,55 @@ list of action available :</p>
 </li></ul>					
 											<div class="method-source-code" id="addfriend-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/users_controller.rb, line 503</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">addfriend</span>
-        <span class="ruby-keyword">begin</span>
-                <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@security</span>)
-                        <span class="ruby-identifier">u</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">find_by_id</span>(<span class="ruby-ivar">@user_id</span>)
-                        <span class="ruby-identifier">friend</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">find_by_id</span>(<span class="ruby-ivar">@friend_id</span>)
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/users_controller.rb, line 513</span>
+  <span class="ruby-keyword">def</span> <span class="ruby-identifier">addfriend</span>
+          <span class="ruby-keyword">begin</span>
+                  <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@security</span>)
+                          <span class="ruby-identifier">u</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">find_by_id</span>(<span class="ruby-ivar">@user_id</span>)
+                          <span class="ruby-identifier">friend</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">find_by_id</span>(<span class="ruby-ivar">@friend_id</span>)
 
-                        <span class="ruby-keyword">if</span> (<span class="ruby-operator">!</span><span class="ruby-identifier">u</span> <span class="ruby-operator">||</span> <span class="ruby-operator">!</span><span class="ruby-identifier">friend</span>)
-                                <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">502</span>
-                                <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:not_found</span>
-                        <span class="ruby-keyword">else</span>
-                                <span class="ruby-identifier">code</span> = <span class="ruby-value">201</span>
-                                <span class="ruby-identifier">http</span> = <span class="ruby-value">:created</span>
-                                <span class="ruby-identifier">u</span>.<span class="ruby-identifier">friends</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">friendInList</span><span class="ruby-operator">|</span>
-                                        <span class="ruby-keyword">if</span> <span class="ruby-identifier">friendInList</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">friend</span>
-                                                <span class="ruby-identifier">code</span> = <span class="ruby-value">405</span>
-                                                <span class="ruby-identifier">http</span> = <span class="ruby-value">:method_not_allowed</span>
-                                        <span class="ruby-keyword">end</span>
-                                }
-                                <span class="ruby-keyword">if</span> <span class="ruby-identifier">code</span> <span class="ruby-operator">==</span> <span class="ruby-value">201</span>
-                                        <span class="ruby-identifier">u</span>.<span class="ruby-identifier">friends</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">friend</span>
-                                        <span class="ruby-identifier">friend</span>.<span class="ruby-identifier">friends</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">u</span>
-                                        <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">201</span>
-                                <span class="ruby-keyword">else</span>
-                                        <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">502</span>
-                                <span class="ruby-keyword">end</span>
-                                <span class="ruby-identifier">codeAnswer</span> <span class="ruby-identifier">code</span>
-                                <span class="ruby-identifier">defineHttp</span> <span class="ruby-identifier">http</span>
-                        <span class="ruby-keyword">end</span>
-                <span class="ruby-keyword">else</span>
-                        <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">500</span>
-                        <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:forbidden</span>
-                <span class="ruby-keyword">end</span>
-        <span class="ruby-keyword">rescue</span>
-                <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">504</span>
-                <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:service_unavailable</span>
-        <span class="ruby-keyword">end</span>
-        <span class="ruby-identifier">sendJson</span>
-<span class="ruby-keyword">end</span></code></pre>
+                          <span class="ruby-keyword">if</span> (<span class="ruby-operator">!</span><span class="ruby-identifier">u</span> <span class="ruby-operator">||</span> <span class="ruby-operator">!</span><span class="ruby-identifier">friend</span>)
+                                  <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">502</span>
+                                  <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:not_found</span>
+                          <span class="ruby-keyword">else</span>
+                                  <span class="ruby-identifier">code</span> = <span class="ruby-value">201</span>
+                                  <span class="ruby-identifier">http</span> = <span class="ruby-value">:created</span>
+                                  <span class="ruby-identifier">u</span>.<span class="ruby-identifier">friends</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">friendInList</span><span class="ruby-operator">|</span>
+                                          <span class="ruby-keyword">if</span> <span class="ruby-identifier">friendInList</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">friend</span>
+                                                  <span class="ruby-identifier">code</span> = <span class="ruby-value">405</span>
+                                                  <span class="ruby-identifier">http</span> = <span class="ruby-value">:method_not_allowed</span>
+                                          <span class="ruby-keyword">end</span>
+                                  }
+                                  <span class="ruby-keyword">if</span> <span class="ruby-identifier">code</span> <span class="ruby-operator">==</span> <span class="ruby-value">201</span>
+                                          <span class="ruby-identifier">u</span>.<span class="ruby-identifier">friends</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">friend</span>
+                                          <span class="ruby-identifier">friend</span>.<span class="ruby-identifier">friends</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">u</span>
+                                          <span class="ruby-keyword">begin</span>
+  <span class="ruby-identifier">n</span> = <span class="ruby-constant">Notification</span>.<span class="ruby-identifier">new</span>
+  <span class="ruby-identifier">n</span>.<span class="ruby-identifier">user_id</span> = <span class="ruby-identifier">friend</span>.<span class="ruby-identifier">id</span>
+  <span class="ruby-identifier">n</span>.<span class="ruby-identifier">notif_type</span> = <span class="ruby-string">&quot;friend&quot;</span>
+  <span class="ruby-identifier">n</span>.<span class="ruby-identifier">from_user_id</span> = <span class="ruby-ivar">@user_id</span>
+  <span class="ruby-identifier">n</span>.<span class="ruby-identifier">read</span> = <span class="ruby-keyword">false</span>
+  <span class="ruby-identifier">n</span>.<span class="ruby-identifier">link</span> = <span class="ruby-node">&quot;/users/#{@user_id}&quot;</span>
+  <span class="ruby-identifier">n</span>.<span class="ruby-identifier">save</span>
+<span class="ruby-keyword">rescue</span>
+<span class="ruby-keyword">end</span>
+                                          <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">201</span>
+                                  <span class="ruby-keyword">else</span>
+                                          <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">502</span>
+                                  <span class="ruby-keyword">end</span>
+                                  <span class="ruby-identifier">codeAnswer</span> <span class="ruby-identifier">code</span>
+                                  <span class="ruby-identifier">defineHttp</span> <span class="ruby-identifier">http</span>
+                          <span class="ruby-keyword">end</span>
+                  <span class="ruby-keyword">else</span>
+                          <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">500</span>
+                          <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:forbidden</span>
+                  <span class="ruby-keyword">end</span>
+          <span class="ruby-keyword">rescue</span>
+                  <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">504</span>
+                  <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:service_unavailable</span>
+          <span class="ruby-keyword">end</span>
+          <span class="ruby-identifier">sendJson</span>
+  <span class="ruby-keyword">end</span></code></pre>
 						</div>
 										</div>
 
@@ -276,7 +286,7 @@ friendlist</p>
 </li></ul>					
 											<div class="method-source-code" id="delfriend-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/users_controller.rb, line 558</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/users_controller.rb, line 578</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">delfriend</span>
         <span class="ruby-keyword">begin</span>
                 <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@security</span>)
@@ -481,43 +491,53 @@ Note : By default, if you precise no attribute, it will take every row</pre>
 											<div class="method-source-code" id="follow-source">
 							<pre class="prettyprint linenums"><code 
 								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/users_controller.rb, line 395</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">follow</span>
-        <span class="ruby-keyword">begin</span>
-                <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@security</span>)
-                        <span class="ruby-identifier">u</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">find_by_id</span>(<span class="ruby-ivar">@user_id</span>)
-                        <span class="ruby-identifier">toFollow</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">find_by_id</span>(<span class="ruby-ivar">@follow_id</span>)
+  <span class="ruby-keyword">def</span> <span class="ruby-identifier">follow</span>
+          <span class="ruby-keyword">begin</span>
+                  <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@security</span>)
+                          <span class="ruby-identifier">u</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">find_by_id</span>(<span class="ruby-ivar">@user_id</span>)
+                          <span class="ruby-identifier">toFollow</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">find_by_id</span>(<span class="ruby-ivar">@follow_id</span>)
 
-                        <span class="ruby-keyword">if</span> (<span class="ruby-operator">!</span><span class="ruby-identifier">u</span> <span class="ruby-operator">||</span> <span class="ruby-operator">!</span><span class="ruby-identifier">toFollow</span>)
-                                <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">502</span>
-                                <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:not_found</span>
-                        <span class="ruby-keyword">else</span>
-                                <span class="ruby-identifier">code</span> = <span class="ruby-value">201</span>
-                                <span class="ruby-identifier">http</span> = <span class="ruby-value">:created</span>
-                                <span class="ruby-identifier">u</span>.<span class="ruby-identifier">follows</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">follow</span><span class="ruby-operator">|</span>
-                                        <span class="ruby-keyword">if</span> <span class="ruby-identifier">follow</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">toFollow</span>
-                                                <span class="ruby-identifier">code</span> = <span class="ruby-value">405</span>
-                                                <span class="ruby-identifier">http</span> = <span class="ruby-value">:method_not_allowed</span>
-                                        <span class="ruby-keyword">end</span>
-                                }
-                                <span class="ruby-keyword">if</span> <span class="ruby-identifier">code</span> <span class="ruby-operator">==</span> <span class="ruby-value">201</span>
-                                        <span class="ruby-identifier">u</span>.<span class="ruby-identifier">follows</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">toFollow</span>
-                                        <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">201</span>
-                                <span class="ruby-keyword">else</span>
-                                        <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">503</span>
-                                <span class="ruby-keyword">end</span>
-                                <span class="ruby-identifier">codeAnswer</span> <span class="ruby-identifier">code</span>
-                                <span class="ruby-identifier">defineHttp</span> <span class="ruby-identifier">http</span>
-                        <span class="ruby-keyword">end</span>
-                <span class="ruby-keyword">else</span>
-                        <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">500</span>
-                        <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:forbidden</span>
-                <span class="ruby-keyword">end</span>
-        <span class="ruby-keyword">rescue</span>
-                <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">504</span>
-                <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:service_unavailable</span>
-        <span class="ruby-keyword">end</span>
-        <span class="ruby-identifier">sendJson</span>
-<span class="ruby-keyword">end</span></code></pre>
+                          <span class="ruby-keyword">if</span> (<span class="ruby-operator">!</span><span class="ruby-identifier">u</span> <span class="ruby-operator">||</span> <span class="ruby-operator">!</span><span class="ruby-identifier">toFollow</span>)
+                                  <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">502</span>
+                                  <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:not_found</span>
+                          <span class="ruby-keyword">else</span>
+                                  <span class="ruby-identifier">code</span> = <span class="ruby-value">201</span>
+                                  <span class="ruby-identifier">http</span> = <span class="ruby-value">:created</span>
+                                  <span class="ruby-identifier">u</span>.<span class="ruby-identifier">follows</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">follow</span><span class="ruby-operator">|</span>
+                                          <span class="ruby-keyword">if</span> <span class="ruby-identifier">follow</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">toFollow</span>
+                                                  <span class="ruby-identifier">code</span> = <span class="ruby-value">405</span>
+                                                  <span class="ruby-identifier">http</span> = <span class="ruby-value">:method_not_allowed</span>
+                                          <span class="ruby-keyword">end</span>
+                                  }
+                                  <span class="ruby-keyword">if</span> <span class="ruby-identifier">code</span> <span class="ruby-operator">==</span> <span class="ruby-value">201</span>
+                                          <span class="ruby-identifier">u</span>.<span class="ruby-identifier">follows</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">toFollow</span>
+                                          <span class="ruby-keyword">begin</span>
+  <span class="ruby-identifier">n</span> = <span class="ruby-constant">Notification</span>.<span class="ruby-identifier">new</span>
+  <span class="ruby-identifier">n</span>.<span class="ruby-identifier">user_id</span> = <span class="ruby-identifier">toFollow</span>.<span class="ruby-identifier">id</span>
+  <span class="ruby-identifier">n</span>.<span class="ruby-identifier">notif_type</span> = <span class="ruby-string">&quot;follow&quot;</span>
+  <span class="ruby-identifier">n</span>.<span class="ruby-identifier">from_user_id</span> = <span class="ruby-ivar">@user_id</span>
+  <span class="ruby-identifier">n</span>.<span class="ruby-identifier">read</span> = <span class="ruby-keyword">false</span>
+  <span class="ruby-identifier">n</span>.<span class="ruby-identifier">link</span> = <span class="ruby-node">&quot;/users/#{@user_id}&quot;</span>
+  <span class="ruby-identifier">n</span>.<span class="ruby-identifier">save</span>
+<span class="ruby-keyword">rescue</span>
+<span class="ruby-keyword">end</span>
+                                          <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">201</span>
+                                  <span class="ruby-keyword">else</span>
+                                          <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">503</span>
+                                  <span class="ruby-keyword">end</span>
+                                  <span class="ruby-identifier">codeAnswer</span> <span class="ruby-identifier">code</span>
+                                  <span class="ruby-identifier">defineHttp</span> <span class="ruby-identifier">http</span>
+                          <span class="ruby-keyword">end</span>
+                  <span class="ruby-keyword">else</span>
+                          <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">500</span>
+                          <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:forbidden</span>
+                  <span class="ruby-keyword">end</span>
+          <span class="ruby-keyword">rescue</span>
+                  <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">504</span>
+                  <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:service_unavailable</span>
+          <span class="ruby-keyword">end</span>
+          <span class="ruby-identifier">sendJson</span>
+  <span class="ruby-keyword">end</span></code></pre>
 						</div>
 										</div>
 
@@ -552,7 +572,7 @@ Note : By default, if you precise no attribute, it will take every row</pre>
 </li></ul>					
 											<div class="method-source-code" id="getFollowers-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/users_controller.rb, line 675</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/users_controller.rb, line 695</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">getFollowers</span>
         <span class="ruby-keyword">begin</span>
                 <span class="ruby-identifier">u</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">find_by_id</span>(<span class="ruby-ivar">@id</span>)
@@ -604,7 +624,7 @@ Note : By default, if you precise no attribute, it will take every row</pre>
 </li></ul>					
 											<div class="method-source-code" id="getFollows-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/users_controller.rb, line 643</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/users_controller.rb, line 663</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">getFollows</span>
         <span class="ruby-keyword">begin</span>
                 <span class="ruby-identifier">u</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">find_by_id</span>(<span class="ruby-ivar">@id</span>)
@@ -656,7 +676,7 @@ Note : By default, if you precise no attribute, it will take every row</pre>
 </li></ul>					
 											<div class="method-source-code" id="getFriends-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/users_controller.rb, line 611</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/users_controller.rb, line 631</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">getFriends</span>
         <span class="ruby-keyword">begin</span>
                 <span class="ruby-identifier">u</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">find_by_id</span>(<span class="ruby-ivar">@id</span>)
@@ -904,7 +924,7 @@ already taken)</p>
 </li></ul>					
 											<div class="method-source-code" id="linkSocial-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/users_controller.rb, line 783</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/users_controller.rb, line 803</span>
           <span class="ruby-keyword">def</span> <span class="ruby-identifier">linkSocial</span>
                   <span class="ruby-keyword">begin</span>
                           <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@security</span>)
@@ -1116,7 +1136,7 @@ address, friends and follow.</p>
 </li></ul>					
 											<div class="method-source-code" id="unfollow-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/users_controller.rb, line 449</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/users_controller.rb, line 459</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">unfollow</span>
         <span class="ruby-keyword">begin</span>
                 <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@security</span>)
@@ -1313,7 +1333,7 @@ are authorized)</p>
 </li></ul>					
 											<div class="method-source-code" id="uploadImg-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/users_controller.rb, line 713</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/users_controller.rb, line 733</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">uploadImg</span>
         <span class="ruby-identifier">smart</span> = <span class="ruby-keyword">false</span>
 
