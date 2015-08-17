@@ -1,0 +1,13 @@
+.notifications{ "ng-init" => "notifInit()" }
+	%loading{ "ng-if" => "loading == true" }
+	.notifications-container{ "ng-if" => "loading == false"}
+		%h4 New Notifications
+		%p{ "ng-repeat" => "notification in notifications", "ng-if" => "notification.read == false" }
+			%a{ href: "{{ notification.link }}" } {{ createContent(notification) }}
+		%hr
+		%h4 Old Notifications
+		%p{ "ng-repeat" => "notification in notifications", "ng-if" => "notification.read == true" }
+			%a{ href: "{{ notification.link }}" } {{ createContent(notification) }}
+	.text-center
+		%span.button{ "ng-click" => "getMoreNotifications(notifications.length)" } See more
+		%loading{ "ng-if" => "loadingNewNotifs == true", "loading-type" => "'square'" }

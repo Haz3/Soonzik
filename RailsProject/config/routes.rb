@@ -88,7 +88,7 @@ Rails.application.routes.draw do
 
     resources :notifications, only: [:show] do #ok
       collection do
-        match 'save' => 'notifications#save', via: [:post, :options]
+        match ':id/read' => 'notifications#readNotif', via: [:post, :options]
         get 'find' => 'notifications#find'
         get 'destroy' => 'notifications#destroy'
       end

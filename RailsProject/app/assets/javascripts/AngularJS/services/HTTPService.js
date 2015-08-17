@@ -173,6 +173,9 @@ SoonzikApp.factory('HTTPService', ['$http', '$location', 'Upload', function ($ht
     },
     findNotif: function(parameters) {
       return $http.get("http://api." + url + "/notifications/find" + urlParametersFormat(parameters));
+    },
+    readNotif: function(id, parameters) {
+      return $http.post("http://api." + url + "/notifications/" + id + "/read", parameters);
     }
   }
 }]);

@@ -98,6 +98,23 @@ module API
         if (@security && @tweet[:user_id] == @user_id)
           tweet = Tweet.new(Tweet.tweet_params params)
           if (tweet.save)
+
+            if (tweet.msg =~ /(@)(\w{3,40})/i)
+              begin
+                match =  /(@)(\w{3,40})/i.match(tweet.msg)
+                if (tweet.user.username != $2 && User.find_by_username($2))
+                  n = Notification.new
+                  n.user_id = User.find_by_username($2).id
+                  n.notif_type = "tweet"
+                  n.from_user_id = @user_id
+                  n.read = false
+                  n.link = "/tweets/#{tweet.id}"
+                  n.save
+                end
+              rescue
+              end
+            end
+
             @returnValue = { content: tweet.as_json(:include => {
                                                       :user => { only: User.miniKey }
                                                     }, :only => Tweet.miniKey) }

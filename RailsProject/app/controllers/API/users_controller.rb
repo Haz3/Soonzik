@@ -412,6 +412,16 @@ module API
 						}
 						if code == 201
 							u.follows << toFollow
+							begin
+                n = Notification.new
+                n.user_id = toFollow.id
+                n.notif_type = "follow"
+                n.from_user_id = @user_id
+                n.read = false
+                n.link = "/users/#{@user_id}"
+                n.save
+              rescue
+              end
 							codeAnswer 201
 						else
 							codeAnswer 503
@@ -521,6 +531,16 @@ module API
 						if code == 201
 							u.friends << friend
 							friend.friends << u
+							begin
+                n = Notification.new
+                n.user_id = friend.id
+                n.notif_type = "friend"
+                n.from_user_id = @user_id
+                n.read = false
+                n.link = "/users/#{@user_id}"
+                n.save
+              rescue
+              end
 							codeAnswer 201
 						else
 							codeAnswer 502

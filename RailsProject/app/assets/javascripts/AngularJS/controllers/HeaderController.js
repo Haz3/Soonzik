@@ -1,4 +1,4 @@
-SoonzikApp.controller('HeaderCtrl', ['$scope', "$routeParams", "$location", "SecureAuth", "HTTPService", "$timeout", "NotificationService", function ($scope, $routeParams, $location, SecureAuth, HTTPService, $timeout, NotificationService) {
+SoonzikApp.controller('HeaderCtrl', ['$scope', "$routeParams", "$location", "SecureAuth", "HTTPService", "$timeout", "NotificationService", '$rootScope', function ($scope, $routeParams, $location, SecureAuth, HTTPService, $timeout, NotificationService, $rootScope) {
 
 	$scope.menuOpen = false;
 	$scope.search = {
@@ -19,26 +19,7 @@ SoonzikApp.controller('HeaderCtrl', ['$scope', "$routeParams", "$location", "Sec
 			$("#profilePicture").attr("src", "/assets/usersImage/avatars/" + data.url)
 		});
 
-		/*var current_user = SecureAuth.getCurrentUser();
-		if (current_user.id != null && current_user.token != null && current_user.username != null) {
-			$scope.user = current_user;
-
-			SecureAuth.securedTransaction(function (key, user_id) {
-				var params = [
-					{ key: "user_id", value: user_id },
-					{ key: "secureKey", value: key },
-					{ key: "limit", value: 10 }
-				];
-				HTTPService.findNotif(params).then(function(response) {
-					$scope.notifs = response.data.content;
-				}, function(error) {
-					NotificationService.error("Can't load your notification");
-				});
-			}, function(error) {
-				NotificationService.error("Can't load your notification");
-			});
-			notifTweet(true);
-		}*/
+		
 		$scope.newNotif(true);
 	}
 
@@ -54,6 +35,7 @@ SoonzikApp.controller('HeaderCtrl', ['$scope', "$routeParams", "$location", "Sec
 		$scope.menuOpen = false;
 	}
 
+/*
 	var notifTweet = function(firstLoop) {
 		var paramsTweet = [
 			{ key: encodeURIComponent("attribute[msg]"), value: encodeURIComponent("%" + $scope.user.username + "%") },
@@ -99,7 +81,7 @@ SoonzikApp.controller('HeaderCtrl', ['$scope', "$routeParams", "$location", "Sec
 		}, function(error) {
 			// Do nothing
 		});
-	}
+	}*/
 
 
 	$scope.newNotif = function(firstLoop) {
@@ -107,6 +89,7 @@ SoonzikApp.controller('HeaderCtrl', ['$scope', "$routeParams", "$location", "Sec
 				var params = [
 					{ key: "user_id", value: user_id },
 					{ key: "secureKey", value: key },
+					{ key: "attribute[read]", value: false },
 					{ key: "limit", value: 10 }
 				];
 				HTTPService.findNotif(params).then(function(response) {
@@ -114,6 +97,12 @@ SoonzikApp.controller('HeaderCtrl', ['$scope', "$routeParams", "$location", "Sec
 
 				if (firstLoop == true) {
 					$scope.notifs = tmp_notif;
+					$scope.$on('notif:askNew', function() { $rootScope.$broadcast('notif:getNews', $scope.notifs); });
+					$scope.$on('notif:read', function(event, data) {
+						for (var i = 0 ; i < $scope.notifs.length ; i++) {
+							if ($scope.notifs[i].id == data) { $scope.notifs[i].read = true; }
+						}
+					});
 				} else {
 					var newNotif = [];
 					if ($scope.notifs.length == 0) {
@@ -127,21 +116,30 @@ SoonzikApp.controller('HeaderCtrl', ['$scope', "$routeParams", "$location", "Sec
 						}
 						newNotif = tmp_notif.splice(0, limit);
 					}
-					$scope.notifs = newNotif.concat($scope.notifs);
 
 					if (newNotif.length > 0) {
+						$scope.notifs = newNotif.concat($scope.notifs);
+						$rootScope.$broadcast('notif:new', newNotif);
 						NotificationService.info("You have " + newNotif.length + " new Notifications")
 					}
 				}
 				$timeout(function() {
 					$scope.newNotif(false);
-				}, 10000);
+				}, 15000);
 			}, function(error) {
 				// Do noting
 			});
 		}, function(error) {
 			// Do nothing
 		});
+	}
+
+	$scope.countNotRead = function() {
+		var count = 0;
+		for (var i = 0 ; i < $scope.notifs.length ; i++) {
+			if ($scope.notifs[i].read == false) { count++; }
+		}
+		return count;
 	}
 
 }]);

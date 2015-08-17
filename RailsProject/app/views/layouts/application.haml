@@ -26,9 +26,12 @@
 				.small-2.columns.menu
 					=image_tag "menu.png", :class => "menu-logo", id: "menuBtn", "ng-click" => "switchMenu()", "click-outside" => "closeMenu()"
 					- if user_signed_in?
-						.notif{ "ng-show" => "notifs.length > 0" }
-							{{ notifs.length }}
+						.notif{ "ng-show" => "countNotRead() > 0" }
+							{{ countNotRead() }}
 						%ul.toAppend.no-bullet{ "ng-class" => "{ open: menuOpen }" }
+							%li.text-center
+								%a{ href: notifications_url }
+									({{ notifs.length }}) Notification{{ (notifs.length > 1) ? 's' : '' }}
 							%li.clearfix
 								=image_tag ("usersImage/avatars/" + current_user.image), :class => "photo-profile left", id: "profilePicture"
 								%p

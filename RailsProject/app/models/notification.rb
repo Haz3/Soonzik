@@ -29,6 +29,6 @@ class Notification < ActiveRecord::Base
   #
   # Fields returned : [:id, :title, :date]
   def self.miniKey
-    [:id, :created_at, :notif_type, :read]
+    [:id, :created_at, :notif_type, :read, :link]
   end
 end

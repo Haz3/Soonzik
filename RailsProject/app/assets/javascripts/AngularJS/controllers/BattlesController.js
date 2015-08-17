@@ -309,35 +309,28 @@ SoonzikApp.controller('BattlesCtrl', ['$scope', "$routeParams", 'SecureAuth', 'H
 		var count = 0;
 		var id_array = [];
 
-		console.log("ça bloque pas");
 		if (votes.length <= 6) {
 			for (var indexVote in votes) {
 				console.log(votes[indexVote]);
 				console.log(id_array);
 				id_array.push(votes[indexVote].user_id);
 			}
-			console.log("leave first loop");
 		} else {
 			while (count < 6) {
-				console.log("count :" + count);
 				var randomNumber = ~~(Math.random() * votes.length);
 				console.log(randomNumber);
 				if ($.inArray(randomNumber, id_array)) {
-					console.log("in array - count :" + count);
 					continue;
 				} else {
-					console.log("not in array - count :" + count);
 					id_array.push(randomNumber);
 					count++;
 				}
 			}
 		}
-		console.log(id_array);
 		fillArray_rec($scope.show.randomVote, 0, id_array, (votes.length <= 6) ? votes.length : 6);
 	}
 
 	var fillArray_rec = function(array, index, id_array, limit) {
-		console.log("fill avec l'index : " + index);
 		HTTPService.getProfile(id_array[index]).then(function(profile) {
 			array[index] = profile.data.content;
 			if (index + 1 < limit) {

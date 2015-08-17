@@ -75,6 +75,9 @@ SoonzikApp.config(['$routeProvider', '$locationProvider', '$httpProvider', funct
 		}).when('/albums/:id', {
 			templateUrl: '<%= asset_path("AngularJS/views/albums/show.html.haml") %>',
 			controller: 'AlbumsCtrl'
+		}).when('/notifications', {
+			templateUrl: '<%= asset_path("AngularJS/views/notifications/index.html.haml") %>',
+			controller: 'NotifsCtrl'
 		});
 	}
 

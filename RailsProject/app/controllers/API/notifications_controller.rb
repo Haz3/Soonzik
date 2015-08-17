@@ -6,9 +6,10 @@ module API
   # * save		    [post] - SECURE
   # * find        [get] - SECURE
   # * destroy     [get] - SECURE
+  # * readNotif   [post] - SECURE
   #
   class NotificationsController < ApisecurityController
-    before_action :checkKey, only: [:show, :save, :find, :destroy]
+    before_action :checkKey, only: [:show, :find, :destroy, :readNotif]
 
   	# Give a specific object by its id
     #
@@ -35,56 +36,13 @@ module API
   	        @returnValue = { content: notif.as_json(:include => {
                                                                   :user => {:only => User.miniKey },
                                                                   :from => { :only => User.miniKey }
-                                                                }) }
+                                                                }, only: Notification.miniKey) }
 	          codeAnswer 200
           end
   	    else
   	    	codeAnswer 500
           defineHttp :forbidden
   	    end
-      rescue
-        codeAnswer 504
-        defineHttp :service_unavailable
-      end
-      sendJson
-    end
-
-    # Save a new object Notification. For more information on the parameters, check at the model
-    # 
-    # Route : /notifications/save
-    #
-    # ==== Options
-    # 
-    # * +:notification [user_id]+ - Id of the user who has the notification
-    # * +:notification [link]+ - The link where the notification redirect without the http://dns.com (to be usefull by the smartphone applications)
-    # * +:notification [description]+ - The text of the notification
-    # 
-    # ===== HTTP VALUE
-    # 
-    # - +201+ - In case of success, return a notification including its user
-    # - +401+ - It is not a secured transaction
-    # - +503+ - Error from server
-    # 
-    def save
-      begin
-        if (@security && @notification[:user_id] == @user_id)
-          notif = Notification.new(Notification.notification_params params)
-          if (notif.save)
-            @returnValue = { content: notif.as_json(:include => {
-                                                                  :user => {:only => User.miniKey },
-                                                                  :from => { :only => User.miniKey }
-                                                                }) }
-            codeAnswer 201
-            defineHttp :created
-          else
-            @returnValue = { content: notif.errors.to_hash.to_json }
-            codeAnswer 503
-            defineHttp :service_unavailable
-          end
-        else
-          codeAnswer 500
-          defineHttp :forbidden
-        end
       rescue
         codeAnswer 504
         defineHttp :service_unavailable
@@ -125,10 +83,14 @@ module API
             # - - - - - - - -
             @attribute.each do |x, y|
               condition = ""
+              variable = y
+              variable = false if y == "false"
+              variable = true if y == "true"
+
               if (y[0] == "%" && y[-1] == "%")  #LIKE
                 condition = ["'notifications'.? LIKE ?", %Q[#{x}], "%#{y[1...-1]}%"];
               else                              #WHERE
-                condition = {x => y};
+                condition = {x => variable};
               end
 
               if (notification_object == nil)          #notification_object doesn't exist
@@ -182,7 +144,7 @@ module API
           @returnValue = { content: notification_object.as_json(:include => {
                                                                               :user => {:only => User.miniKey },
                                                                               :from => { :only => User.miniKey }
-                                                                            }) }
+                                                                            }, only: Notification.miniKey) }
 
           if (notification_object.size == 0)
             codeAnswer 202
@@ -225,6 +187,49 @@ module API
             sendJson and return
           end
           object.destroy
+          codeAnswer 202
+        else
+          codeAnswer 500
+          defineHttp :forbidden
+        end
+      rescue
+        codeAnswer 504
+        defineHttp :service_unavailable
+      end
+      sendJson
+    end
+
+    # Set the notification as a read one
+    #
+    # Route : /notifications/:id/read
+    #
+    # ==== Options
+    # 
+    # * +id+ - The id of the specific notification
+    # 
+    # ===== HTTP VALUE
+    # 
+    # - +200+ - In case of success, return nothing
+    # - +401+ - It is not a secured transaction
+    # - +404+ - The notification was not found
+    # - +503+ - Error from server
+    # 
+    def readNotif
+      begin
+        if (@security)
+          object = Notification.find_by_id(@id)
+          if (!object)
+            codeAnswer 502
+            defineHttp :not_found
+            sendJson and return
+          end
+          if (object.user_id != @user_id.to_i)
+            codeAnswer 500
+            defineHttp :forbidden
+            sendJson and return
+          end
+          object.read = true
+          object.save
           codeAnswer 202
         else
           codeAnswer 500
