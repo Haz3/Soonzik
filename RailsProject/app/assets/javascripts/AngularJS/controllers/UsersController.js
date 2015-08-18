@@ -6,7 +6,7 @@ SoonzikApp.controller('UsersCtrl', ['$scope', "$routeParams", 'SecureAuth', 'HTT
 	$scope.tweet = {
 		input: ""
 	}
-	$scope.form = { user: {}, identities: { facebook: null, twitter: null, google: null } };
+	$scope.form = { user: {}, identities: { facebook: null, twitter: null, google: null }, address: {} };
 	$scope.formError = {
 		user: {
 			email: false,
@@ -239,6 +239,10 @@ SoonzikApp.controller('UsersCtrl', ['$scope', "$routeParams", 'SecureAuth', 'HTT
 
 				// Initialisation of the user profile
 				$scope.form.user = dataProfile;
+				if (typeof dataProfile.address !== "undefined") {
+					$scope.form.address = dataProfile.address;
+				}
+				//$scope.form.address = dataProfile;
 				birthday = dataProfile.birthday.split('-');
 				$scope.form.user["birthday(1i)"] = birthday[0];
 				$scope.form.user["birthday(2i)"] = birthday[1];
@@ -274,47 +278,54 @@ SoonzikApp.controller('UsersCtrl', ['$scope', "$routeParams", 'SecureAuth', 'HTT
 	**
 	*/
 
-	$scope.submitForm = function() {
-		SecureAuth.securedTransaction(function (key, user_id) {
-			// We send this function to be executed after getting the secure key
-			var parameters = { secureKey: key, user_id: user_id, user: jQuery.extend(true, {}, $scope.form.user) };//deep copy of the user object
+	$scope.submitForm = function(type) {
+		var parameters = false;
+		if (type == "user") {
+			var parameters = { user: jQuery.extend(true, {}, $scope.form.user) };//deep copy of the user object
 			delete parameters.user.username; // it can't be modified
-			if (typeof $scope.form.address !== "undefined") {
-				parameters.address = $scope.form.address;
-			}
 			if (parameters.user.password.length == 0) {// we won't forced the user to put its password everytime
 				delete parameters.user.password;
 			}
-			$scope.function_submit(parameters).then(function(response) {
-				NotificationService.success("Profile updated successfully");
-			}, function (responseError) {
-				//if the update fail
+		} else if (type == "address" && typeof $scope.form.address !== "undefined") {
+			var parameters = { address: $scope.form.address };//deep copy of the user object
+		}
 
-				if (typeof responseError.data.content.user !== "undefined") {
-					// Iterate on error
-					for (var key in $scope.formError.user) {
-						if (typeof responseError.data.content.user[key] !== "undefined") {
-							$scope.formError.user[key] = responseError.data.content.user[key];
-						} else {
-							$scope.formError.user[key] = false;
+		if (parameters != false) {
+			SecureAuth.securedTransaction(function (key, user_id) {
+				parameters.secureKey = key;
+				parameters.user_id = user_id;
+				// We send this function to be executed after getting the secure key
+				$scope.function_submit(parameters).then(function(response) {
+					NotificationService.success("Profile updated successfully");
+				}, function (responseError) {
+					//if the update fail
+
+					if (typeof responseError.data.content.user !== "undefined") {
+						// Iterate on error
+						for (var key in $scope.formError.user) {
+							if (typeof responseError.data.content.user[key] !== "undefined") {
+								$scope.formError.user[key] = responseError.data.content.user[key];
+							} else {
+								$scope.formError.user[key] = false;
+							}
 						}
 					}
-				}
-				if (typeof responseError.data.content.address !== "undefined") {
-					// Iterate on error
-					for (var key in $scope.formError.address) {
-						if (typeof responseError.data.content.address[key] !== "undefined") {
-							$scope.formError.address[key] = responseError.data.content.address[key];
-						} else {
-							$scope.formError.address[key] = false;
+					if (typeof responseError.data.content.address !== "undefined") {
+						// Iterate on error
+						for (var key in $scope.formError.address) {
+							if (typeof responseError.data.content.address[key] !== "undefined") {
+								$scope.formError.address[key] = responseError.data.content.address[key];
+							} else {
+								$scope.formError.address[key] = false;
+							}
 						}
 					}
-				}
+					NotificationService.error("An error occured");
+				});
+			}, function (responseForbidden) {
 				NotificationService.error("An error occured");
 			});
-		}, function (responseForbidden) {
-			NotificationService.error("An error occured");
-		});
+		}
 	}
 
 	$scope.uploadAvatar = function($file) {

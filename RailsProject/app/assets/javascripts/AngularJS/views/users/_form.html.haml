@@ -97,28 +97,58 @@
 					.medium-9.small-12.columns
 						%input.radius{ id: "language", type: "text", "ng-model" => "form.user.language" }
 						%small.error{ "ng-if" => "formError.user.language != false", "ng-repeat" => "error in formError.user.language" } Language {{ error }}
-					.small-12.clearfix
-						%p Link your account allows you to connect thanks to it to SoonZik
-						.small-12.medium-5.columns
-							%label Link your account with Facebook :
-						.small-12.medium-7.columns
-							.button.tiny{ "ng-if" => "form.identities.facebook != null", "ng-class" => "{ secondary: !facebookReady }" } Your account is linked
-							.button.tiny{ "ng-if" => "form.identities.facebook == null", "ng-class" => "{ secondary: !facebookReady }", "ng-click" => "IntentLogin()" } Login with Facebook
-						.small-12.medium-5.columns
-							%label Link your account with Twitter :
-						.small-12.medium-7.columns
-							.button.tiny{ "ng-if" => "form.identities.twitter != null" } Your account is linked
-							%a.button.tiny{ "ng-if" => "form.identities.twitter == null", href: "/users/auth/twitter", target: "_blank" } Login with Twitter
-						.small-12.medium-5.columns
-							%label Link your account with Google Plus :
-						.small-12.medium-7.columns
-							%script{ src: "https://apis.google.com/js/client.js" }
-							%script{ src: "https://apis.google.com/js/plusone.js" }
-							.button.tiny{ "ng-if" => "form.identities.google != null" } Your account is linked
-							%span#signinButton{ "ng-if" => "form.identities.google == null" }
-								%plus{:action => "connect", :callback => "onSignInCallback", :clientid => "793685873206-mtbd8bm2gvskccm5rnnnkod5n6q7dqpv.apps.googleusercontent.com", :scope => "https://www.googleapis.com/auth/plus.me"}
-								%google-plus-signin{ "ng-init" => "googleCallback()", :clientid => "793685873206-mtbd8bm2gvskccm5rnnnkod5n6q7dqpv.apps.googleusercontent.com" }
 				%hr
-				.actions
+				.actions.text-center
 					.large-4.large-centered
-						%input.button.radius.expand.success{ id: "", type: "button", value: "Save", "ng-click" => "submitForm()" }
+						%input.button.radius.expand.success{ id: "", type: "button", value: "Save", "ng-click" => "submitForm('user')" }
+				.small-12.clearfix
+					%p Link your account allows you to connect thanks to it to SoonZik
+					.small-12.medium-5.columns
+						%label Link your account with Facebook :
+					.small-12.medium-7.columns
+						.button.tiny{ "ng-if" => "form.identities.facebook != null", "ng-class" => "{ secondary: !facebookReady }" } Your account is linked
+						.button.tiny{ "ng-if" => "form.identities.facebook == null", "ng-class" => "{ secondary: !facebookReady }", "ng-click" => "IntentLogin()" } Login with Facebook
+					.small-12.medium-5.columns
+						%label Link your account with Twitter :
+					.small-12.medium-7.columns
+						.button.tiny{ "ng-if" => "form.identities.twitter != null" } Your account is linked
+						%a.button.tiny{ "ng-if" => "form.identities.twitter == null", href: "/users/auth/twitter", target: "_blank" } Login with Twitter
+					.small-12.medium-5.columns
+						%label Link your account with Google Plus :
+					.small-12.medium-7.columns
+						%script{ src: "https://apis.google.com/js/client.js" }
+						%script{ src: "https://apis.google.com/js/plusone.js" }
+						.button.tiny{ "ng-if" => "form.identities.google != null" } Your account is linked
+						%span#signinButton{ "ng-if" => "form.identities.google == null" }
+							%plus{:action => "connect", :callback => "onSignInCallback", :clientid => "793685873206-mtbd8bm2gvskccm5rnnnkod5n6q7dqpv.apps.googleusercontent.com", :scope => "https://www.googleapis.com/auth/plus.me"}
+							%google-plus-signin{ "ng-init" => "googleCallback()", :clientid => "793685873206-mtbd8bm2gvskccm5rnnnkod5n6q7dqpv.apps.googleusercontent.com" }
+				%hr
+				.row
+					.small-12.medium-5.columns
+						%label{ for: "numberStreet" } Number in the street
+					.small-12.medium-7.columns
+						%input.radius{ id: "numberStreet", type: "text", "ng-model" => "form.address.numberStreet" }
+					.small-12.medium-5.columns
+						%label{ for: "complement" } Complement
+					.small-12.medium-7.columns
+						%input.radius{ id: "complement", type: "text", "ng-model" => "form.address.complement" }
+					.small-12.medium-5.columns
+						%label{ for: "street" } Street
+					.small-12.medium-7.columns
+						%input.radius{ id: "street", type: "text", "ng-model" => "form.address.street" }
+					.small-12.medium-5.columns
+						%label{ for: "city" } City
+					.small-12.medium-7.columns
+						%input.radius{ id: "city", type: "text", "ng-model" => "form.address.city" }
+					.small-12.medium-5.columns
+						%label{ for: "country" } Country
+					.small-12.medium-7.columns
+						%input.radius{ id: "country", type: "text", "ng-model" => "form.address.country" }
+					.small-12.medium-5.columns
+						%label{ for: "zipcode" } Zipcode
+					.small-12.medium-7.columns
+						%input.radius{ id: "zipcode", type: "text", "ng-model" => "form.address.zipcode" }
+				%hr
+				.actions.text-center
+					.large-4.large-centered
+						%input.button.radius.expand.success{ id: "", type: "button", value: "Save", "ng-click" => "submitForm('address')" }

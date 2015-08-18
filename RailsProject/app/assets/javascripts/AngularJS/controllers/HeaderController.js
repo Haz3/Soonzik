@@ -127,7 +127,9 @@ SoonzikApp.controller('HeaderCtrl', ['$scope', "$routeParams", "$location", "Sec
 					$scope.newNotif(false);
 				}, 15000);
 			}, function(error) {
-				// Do noting
+				$timeout(function() {
+					$scope.newNotif(false);
+				}, 20000);
 			});
 		}, function(error) {
 			// Do nothing
