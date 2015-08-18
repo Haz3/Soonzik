@@ -27,11 +27,11 @@ class Address < ActiveRecord::Base
   #
   # Fields returned : [:id, :numberStreet, :street, :city, :country, :zipcode]
   def self.miniKey
-  	[:id, :numberStreet, :street, :city, :country, :zipcode]
+  	[:id, :numberStreet, :street, :city, :country, :zipcode, :complement]
   end
 
   # The strong parameters to save or update object
   def self.address_params(parameters)
-    parameters.require(:address).permit(:numberStreet, :street, :city, :country, :zipcode)
+    parameters.require(:address).permit(:numberStreet, :street, :city, :country, :zipcode, :complement)
   end
 end

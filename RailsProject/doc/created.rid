@@ -1,9 +1,9 @@
-Mon, 17 Aug 2015 22:40:18 +0200
+Tue, 18 Aug 2015 13:03:31 +0200
 app/controllers/API/albums_controller.rb	Tue, 11 Aug 2015 17:08:08 +0200
 app/controllers/API/api_controller.rb	Sat, 15 Aug 2015 18:54:19 +0200
-app/controllers/API/apisecurity_controller.rb	Sat, 27 Jun 2015 20:42:33 +0200
+app/controllers/API/apisecurity_controller.rb	Tue, 18 Aug 2015 13:03:10 +0200
 app/controllers/API/battles_controller.rb	Sat, 27 Jun 2015 20:41:02 +0200
-app/controllers/API/carts_controller.rb	Fri, 14 Aug 2015 22:24:08 +0200
+app/controllers/API/carts_controller.rb	Tue, 18 Aug 2015 13:03:20 +0200
 app/controllers/API/concerts_controller.rb	Tue, 19 May 2015 21:46:09 +0200
 app/controllers/API/genres_controller.rb	Sun, 02 Aug 2015 16:23:29 +0200
 app/controllers/API/influences_controller.rb	Tue, 19 May 2015 21:46:31 +0200
@@ -19,9 +19,9 @@ app/controllers/API/purchases_controller.rb	Sun, 26 Jul 2015 17:58:12 +0200
 app/controllers/API/searchs_controller.rb	Wed, 29 Jul 2015 17:29:53 +0200
 app/controllers/API/suggestions_controller.rb	Tue, 02 Jun 2015 21:16:10 +0200
 app/controllers/API/tweets_controller.rb	Mon, 17 Aug 2015 21:24:52 +0200
-app/controllers/API/users_controller.rb	Mon, 17 Aug 2015 22:00:28 +0200
+app/controllers/API/users_controller.rb	Tue, 18 Aug 2015 13:00:58 +0200
 app/models/access.rb	Thu, 18 Jun 2015 19:00:51 +0200
-app/models/address.rb	Thu, 18 Jun 2015 19:00:51 +0200
+app/models/address.rb	Tue, 18 Aug 2015 13:01:39 +0200
 app/models/admin_user.rb	Thu, 18 Jun 2015 19:00:51 +0200
 app/models/album.rb	Wed, 12 Aug 2015 15:38:33 +0200
 app/models/album_note.rb	Thu, 18 Jun 2015 19:00:51 +0200
