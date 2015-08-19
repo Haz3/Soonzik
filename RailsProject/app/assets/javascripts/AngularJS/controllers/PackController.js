@@ -15,7 +15,6 @@ SoonzikApp.controller('PacksCtrl', ['$scope', '$routeParams', 'SecureAuth', 'HTT
 		HTTPService.findPacks(parameters).then(function(packs) {
 			
 			$scope.pack = packs.data.content;
-			console.log($scope.pack);
 
 		}, function (error) {
 			console.log("No Packs Available");
@@ -39,6 +38,14 @@ SoonzikApp.controller('PacksCtrl', ['$scope', '$routeParams', 'SecureAuth', 'HTT
 
 		$scope.thisPackId = true;
 	
+	}
+
+	$scope.timeLeft = function() {
+		var begin = $scope.pack.begin_date;
+		var end = $scope.pack.end_date;
+		
+		console.log("begin --> " + $begin);
+		console.log("end --> " + $end);
 	}
 
 	$scope.loading = false;
