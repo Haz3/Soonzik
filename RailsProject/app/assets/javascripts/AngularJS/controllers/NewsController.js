@@ -1,11 +1,13 @@
-SoonzikApp.controller('NewsCtrl', ['$scope', '$routeParams', 'SecureAuth', 'HTTPService', function ($scope, $routeParams, SecureAuth, HTTPService) {
+SoonzikApp.controller('NewsCtrl', ['$scope', '$routeParams', 'SecureAuth', 'HTTPService', 'NotificationService', function ($scope, $routeParams, SecureAuth, HTTPService, NotificationService) {
 
 	$scope.loading = true;
 
 	$scope.commentariesOffset = 0;
 	$scope.commentaries = [];
 	$scope.commentLoading = false;
-	$scope.commentary = { content: "" }
+	$scope.commentary = { 
+		content : ""
+	};
 
 
 	$scope.initFoundation = function () {
@@ -44,7 +46,7 @@ SoonzikApp.controller('NewsCtrl', ['$scope', '$routeParams', 'SecureAuth', 'HTTP
 		}, function (error) {
 			console.log("This news doesn't exist");
 		});
-
+/*
 		$(window).scroll(function() {
 			if($(window).scrollTop() + $(window).height() == $(document).height() && $scope.commentLoading == false) {
 				$scope.$apply(function() {
@@ -53,7 +55,8 @@ SoonzikApp.controller('NewsCtrl', ['$scope', '$routeParams', 'SecureAuth', 'HTTP
 				});
 			}
 		});
-
+*/
+		$scope.showComments();
 		$scope.thisNewsId = true;
 
 	}
@@ -63,7 +66,7 @@ SoonzikApp.controller('NewsCtrl', ['$scope', '$routeParams', 'SecureAuth', 'HTTP
 		var parameters = [
   			{ key: "offset", value: $scope.commentariesOffset },
   			{ key: "limit", value: 20 },
-//  			{ order_reverse: false }
+  			{ order_reverse: false }
   		];
 
   		var newsId = $routeParams.id;
@@ -88,16 +91,18 @@ SoonzikApp.controller('NewsCtrl', ['$scope', '$routeParams', 'SecureAuth', 'HTTP
 			  	};
 
 			HTTPService.addComment($routeParams.id, parameters).then(function(response) {
-				
-				$scope.commentaries.push(response.data.content);
+
+				$scope.commentaries.unshift(response.data.content);
 				$scope.commentariesOffset++;
 				$scope.commentary.content = "";
 
 			}, function(error) {
-				NotificationService.error("Error while saving your comment, please try later");
+				console.log("error addComment");
+//				NotificationService.error("Error while saving your comment, please try later");
 			});
 		}, function(error) {
-			NotificationService.error("Error while saving your comment, please try later");
+			console.log("erreur securedTransaction");
+//			NotificationService.error("Error while saving your comment, please try later");
 		});
 	}
 
