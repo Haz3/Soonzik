@@ -255,8 +255,8 @@ module API
 		# * +user [username]+ - Unique username of the user
 		# * +user [birthday]+ - Birthday day with the format : "YYYY-MM-JJ HH:II:SS" you can add '+HH:II' for the GTM
 		# * +user [language]+ - Tiny string for the language. Need to be in our language list.
-		# * +user [fname]+ - (optionnal) Firstname of the user
-		# * +user [lname]+ - (optionnal) Lastname of the user
+		# * +user [fname]+ - Firstname of the user
+		# * +user [lname]+ - Lastname of the user
 		# * +user [description]+ - (optionnal) Description of the user
 		# * +user [phoneNumber]+ - (optionnal) Phone number of the user. Need to be with the format '+code phonenumber'
 		# * +user [facebook]+ - (optionnal) The facebook name after "https://www.facebook.com/" when you are in your profile
@@ -284,9 +284,10 @@ module API
 		# If the user has no address, you need to provide everything (expect 'complement' which is optionnal)
 		# If the user has an address, just provide what you want to update
 		# 
+		# Route : /users/update
+		#
 		# ==== Options
 		# 
-		# * +id+ - Same as user_id used for the authentication (get from the url)
 		# * +user [email]+ - Email of the user
 		# * +user [password]+ - Password of the user, not hashed
 		# * +user [username]+ - Unique username of the user
@@ -846,12 +847,16 @@ module API
 					user = User.find_by_id(@user_id)
 					update_user = false
 					update_address = true
-					update_user = user.update(User.user_params params)
+					if (params.has_key?(:user))
+						update_user = user.update(User.user_params params)
+					else
+						update_user = true
+					end
 
-					update_address = user.address.update(Address.address_params params)	 if user.address != nil && params.has_key?(:address)
+					update_address = user.address.update(Address.address_params params)		if user.address != nil && params.has_key?(:address)
 					address = Address.new(Address.address_params params)									if user.address == nil && params.has_key?(:address)
-					update_address = address.save																				 if user.address == nil && params.has_key?(:address)
-					user.address = address																								if user.address == nil && params.has_key?(:address) && update_address
+					update_address = address.save																					if user.address == nil && params.has_key?(:address)
+					user.address_id = address.id																					if user.address == nil && params.has_key?(:address) && update_address
 
 					if ((update_user && update_address))
 						@returnValue = { content: user.as_json(:include => {

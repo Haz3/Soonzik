@@ -166,7 +166,7 @@ because in some country there are letters</p>
 							<pre class="prettyprint linenums"><code 
 								class="language-ruby"><span class="ruby-comment"># File app/models/address.rb, line 34</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">address_params</span>(<span class="ruby-identifier">parameters</span>)
-  <span class="ruby-identifier">parameters</span>.<span class="ruby-identifier">require</span>(<span class="ruby-value">:address</span>).<span class="ruby-identifier">permit</span>(<span class="ruby-value">:numberStreet</span>, <span class="ruby-value">:street</span>, <span class="ruby-value">:city</span>, <span class="ruby-value">:country</span>, <span class="ruby-value">:zipcode</span>)
+  <span class="ruby-identifier">parameters</span>.<span class="ruby-identifier">require</span>(<span class="ruby-value">:address</span>).<span class="ruby-identifier">permit</span>(<span class="ruby-value">:numberStreet</span>, <span class="ruby-value">:street</span>, <span class="ruby-value">:city</span>, <span class="ruby-value">:country</span>, <span class="ruby-value">:zipcode</span>, <span class="ruby-value">:complement</span>)
 <span class="ruby-keyword">end</span></code></pre>
 						</div>
 										</div>
@@ -190,7 +190,7 @@ because in some country there are letters</p>
 							<pre class="prettyprint linenums"><code 
 								class="language-ruby"><span class="ruby-comment"># File app/models/address.rb, line 29</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">miniKey</span>
-      [<span class="ruby-value">:id</span>, <span class="ruby-value">:numberStreet</span>, <span class="ruby-value">:street</span>, <span class="ruby-value">:city</span>, <span class="ruby-value">:country</span>, <span class="ruby-value">:zipcode</span>]
+      [<span class="ruby-value">:id</span>, <span class="ruby-value">:numberStreet</span>, <span class="ruby-value">:street</span>, <span class="ruby-value">:city</span>, <span class="ruby-value">:country</span>, <span class="ruby-value">:zipcode</span>, <span class="ruby-value">:complement</span>]
 <span class="ruby-keyword">end</span></code></pre>
 						</div>
 										</div>
