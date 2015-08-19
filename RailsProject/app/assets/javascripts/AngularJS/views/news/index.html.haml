@@ -16,3 +16,5 @@
           .content
             %h6{"ng-repeat" => "text in new.newstexts"}
               {{ text.content }}
+          .right
+            %a{:href=>"http://lvh.me:3000/news/" + "{{new.id}}" } Voir plus
