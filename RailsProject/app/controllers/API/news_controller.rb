@@ -268,8 +268,9 @@ module API
           codeAnswer 502
           defineHttp :not_found
         else
-          comments = news.commentaries[(@offset.to_i)...(@offset.to_i + @limit.to_i)] || []
+          comments = albums.commentaries || []
           comments.reverse! if order == "true"
+          comments = comments[(@offset.to_i)...(@offset.to_i + @limit.to_i)]
           refine_comments = []
           comments.each { |comment|
             refine_comments << comment.as_json(:only => Commentary.miniKey, :include => { user: { only: User.miniKey } })
