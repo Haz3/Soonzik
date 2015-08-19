@@ -23,7 +23,7 @@
             %i.step.fi-social-twitter.size-36
             %i.step.fi-social-google-plus.size-36
             .button.success.radius{:type => "submit", "ng-click" => "postComment()"} Envoyé
-          .panel.content-comment{"ng-repeat" => "comment in comments"}
+          .panel.content-comment{"ng-repeat" => "comment in commentaries"}
             .info-user
               .photo
                 %img{"ng-src" => "{{ '/assets/usersImage/avatars/' + comment.user.image }}"}
