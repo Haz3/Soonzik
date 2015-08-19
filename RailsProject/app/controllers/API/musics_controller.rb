@@ -402,7 +402,7 @@ module API
           codeAnswer 502
           defineHttp :not_found
         else
-          comments = musics.commentaries || []
+          comments = musics.commentaries.to_a || []
           comments.reverse! if order == "true"
           comments = comments[(@offset.to_i)...(@offset.to_i + @limit.to_i)]
           refine_comments = []

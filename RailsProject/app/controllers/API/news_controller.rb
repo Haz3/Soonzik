@@ -268,7 +268,7 @@ module API
           codeAnswer 502
           defineHttp :not_found
         else
-          comments = news.commentaries || []
+          comments = news.commentaries.to_a || []
           comments.reverse! if order == "true"
           comments = comments[(@offset.to_i)...(@offset.to_i + @limit.to_i)]
           refine_comments = []
