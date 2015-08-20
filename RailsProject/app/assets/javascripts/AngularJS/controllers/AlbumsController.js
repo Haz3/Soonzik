@@ -1,4 +1,4 @@
-SoonzikApp.controller('AlbumsCtrl', ['$scope', "$routeParams", 'SecureAuth', 'HTTPService', 'NotificationService', function ($scope, $routeParams, SecureAuth, HTTPService, NotificationService) {
+SoonzikApp.controller('AlbumsCtrl', ['$scope', "$routeParams", 'SecureAuth', 'HTTPService', 'NotificationService', '$rootScope', function ($scope, $routeParams, SecureAuth, HTTPService, NotificationService, $rootScope) {
 	$scope.loading = true;
 	$scope.album = {};
 	$scope.user = false;
@@ -8,10 +8,11 @@ SoonzikApp.controller('AlbumsCtrl', ['$scope', "$routeParams", 'SecureAuth', 'HT
 
 	$scope.commentariesOffset = 0;
 	$scope.commentaries = [];
-	$scope.commentLoading = false;
+	$scope.commentLoading = true;
 	$scope.comment = {
 		value: ""
 	};
+	$scope.goldenLock = false;
 
 	$scope.initAlbum = function() {
 		var id = $routeParams.id;
@@ -23,6 +24,7 @@ SoonzikApp.controller('AlbumsCtrl', ['$scope', "$routeParams", 'SecureAuth', 'HT
 
 		HTTPService.getAlbum(id).then(function(response) {
 			$scope.album = response.data.content;
+			$scope.loadComments();
 
 			if ($scope.user != false) {
 				var note_array_id = []
@@ -42,6 +44,7 @@ SoonzikApp.controller('AlbumsCtrl', ['$scope', "$routeParams", 'SecureAuth', 'HT
 						for (var k = 0 ; k < response.data.content.length ; k++) {
 							if (response.data.content[k].music_id == $scope.album.musics[j].id) {
 								$scope.album.musics[j].note = response.data.content[k].note;
+								$scope.album.musics[j].album = $scope.album;
 							}
 						}
 					}
@@ -54,6 +57,7 @@ SoonzikApp.controller('AlbumsCtrl', ['$scope', "$routeParams", 'SecureAuth', 'HT
 			    	$scope.myPlaylists = response.data.content;
 			    	for (var i = 0 ; i < $scope.myPlaylists.length ; i++) {
 			    		$scope.myPlaylists[i].check = false;
+			    		$scope.myPlaylists[i].original_check = false;
 			    	}
 					}, function(error) {
 						NotificationService.error("Error while deleting the playlist : " + playlist.name);
@@ -61,18 +65,18 @@ SoonzikApp.controller('AlbumsCtrl', ['$scope', "$routeParams", 'SecureAuth', 'HT
 				}
 			}
 
+			$(window).scroll(function() {
+				if($(window).scrollTop() + $(window).height() == $(document).height() && $scope.commentLoading == false) {
+					$scope.$apply(function() {
+						$scope.commentLoading = true;
+						$scope.loadComments();
+					});
+				}
+			});
+
 			$scope.loading = false;
 		}, function(error) {
 			NotificationService.error("Error while loading the album");
-		});
-
-		$(window).scroll(function() {
-			if($(window).scrollTop() + $(window).height() == $(document).height() && $scope.commentLoading == false) {
-				$scope.$apply(function() {
-					$scope.commentLoading = true;
-					$scope.loadComments();
-				});
-			}
 		});
 	}
 
@@ -80,41 +84,50 @@ SoonzikApp.controller('AlbumsCtrl', ['$scope', "$routeParams", 'SecureAuth', 'HT
   	var playlist = false;
 
   	for (var i = 0 ; i < $scope.myPlaylists.length ; i++) {
-  		if ($scope.myPlaylists[i].check == true)
+  		if ($scope.myPlaylists[i].check == true) {
 	  		playlist = $scope.myPlaylists[i];
-  	}
-
-  	if ($scope.user != false && $scope.selectedMusic != false && playlist != false) {
-  		SecureAuth.securedTransaction(function(key, user_id) {
-		  		var parameters = {
-		  			secureKey: key,
-		  			user_id: user_id,
-	  				id: $scope.selectedMusic.id,
-	  				playlist_id: playlist.id
-		  		};
-		  		HTTPService.addToPlaylist(parameters).then(function(response) {
-		  			NotificationService.success("The music '" + $scope.selectedMusic.title + "' has been added to the playlist");
-		  			$rootScope.$broadcast("player:addToPlaylist", { playlist: playlist, music: $scope.selectedMusic });
-		  			$scope.selectedMusic = false;
-		  			$scope.tooltip = false;
-		  			playlist.check = false;
-		  		}, function(error) {
-		  			NotificationService.error("Error while saving a new music in the playlist");
-		  		});
-		  	}, function(error) {
-		  		NotificationService.error("Error while saving a new music in the playlist");
-		  	});
+		  	if ($scope.user != false && $scope.selectedMusic != false && playlist != false && playlist.check != playlist.original_check) {
+		  		$scope.uploadAddToPlaylist($scope.selectedMusic, playlist);
+		  	}
+	  	}
   	}
   }
 
+  $scope.uploadAddToPlaylist = function(music, playlist) {
+  	SecureAuth.securedTransaction(function(key, user_id) {
+  		var parameters = {
+  			secureKey: key,
+  			user_id: user_id,
+				id: music.id,
+				playlist_id: playlist.id
+  		};
+  		HTTPService.addToPlaylist(parameters).then(function(response) {
+  			NotificationService.success("The music '" + music.title + "' has been added to the playlist");
+  			$rootScope.$broadcast("player:addToPlaylist", { playlist: playlist, music: music });
+  			$scope.selectedMusic = false;
+  			$scope.tooltip = false;
+  			playlist.original_check = true;
+  			playlist.check = true;
+  		}, function(error) {
+  			NotificationService.error("Error while saving a new music in the playlist");
+  		});
+  	}, function(error) {
+  		NotificationService.error("Error while saving a new music in the playlist");
+  	});
+  }
+
 	$scope.setGolden = function(music, index) {
-		music.goldenStars = index;
+		if ($scope.goldenLock == false) {
+			music.goldenStars = index;
+		}
 	}
 
 	$scope.setNote = function(music) {
+		$scope.goldenLock = true;
 		SecureAuth.securedTransaction(function (key, user_id) {
 			HTTPService.setMusicNote(music.id, music.goldenStars, { user_id: user_id, secureKey: key }).then(function(response) {
 				music.note = music.goldenStars;
+				$scope.goldenLock = false;
 			}, function(error) {
 				NotificationService.error("Error while rating the music, please try later.");
 			});
@@ -140,10 +153,12 @@ SoonzikApp.controller('AlbumsCtrl', ['$scope', "$routeParams", 'SecureAuth', 'HT
   					$scope.myPlaylists[i].check = true;
   				}
   			}
+  			$scope.myPlaylists[i].original_check = $scope.myPlaylists[i].check;
   		}
   	} else {
   		for (var i = 0 ; i < $scope.myPlaylists.length ; i++) {
  				$scope.myPlaylists[i].check = false;
+ 				$scope.myPlaylists[i].original_check = false;
   		}
   		$scope.selectMusic(false);
   	}

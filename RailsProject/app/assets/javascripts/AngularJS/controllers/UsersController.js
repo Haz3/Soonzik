@@ -639,10 +639,12 @@ SoonzikApp.controller('UsersCtrl', ['$scope', "$routeParams", 'SecureAuth', 'HTT
 	/* Utils function */
 
 	$scope.range = function(n) {
-		if (n > 0)
+		if (n > 0) {
+			console.log(n);
 			return new Array(n);
-		else
-			return []
+		} else {
+			return [];
+		}
 	};
 
 	$scope.formatTime = function(duration) {

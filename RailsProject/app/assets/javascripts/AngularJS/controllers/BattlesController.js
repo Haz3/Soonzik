@@ -69,10 +69,10 @@ SoonzikApp.controller('BattlesCtrl', ['$scope', "$routeParams", 'SecureAuth', 'H
 
 				$scope.loading = false;
 			}, function(error) {
-				console.log(error);
+				NotificationService.error("Error while loading the page");
 			});
 		}, function(error) {
-			console.log(error);
+			NotificationService.error("Error while loading the page");
 		});		
 	}
 
@@ -84,7 +84,6 @@ SoonzikApp.controller('BattlesCtrl', ['$scope', "$routeParams", 'SecureAuth', 'H
 		}
 		$scope.show.voteCurrentUser = false;
 		HTTPService.showBattles(id).then(function(response) {
-			console.log(response.data.content);
 			$scope.show.battle = response.data.content;
 			if ($scope.show.battle.votes.length > 0) {
 				$scope.show.votes = [
@@ -111,7 +110,6 @@ SoonzikApp.controller('BattlesCtrl', ['$scope', "$routeParams", 'SecureAuth', 'H
 
 				// Initialisation of the artist profile [if is one]
 				var isArtist = artistInformation.data.content.artist;
-				console.log(artistInformation);
 				if (isArtist == true) {
 					$scope.show.artistOne.topFive = artistInformation.data.content.topFive;
 					$scope.show.artistOne.albums = artistInformation.data.content.albums;
@@ -126,7 +124,6 @@ SoonzikApp.controller('BattlesCtrl', ['$scope', "$routeParams", 'SecureAuth', 'H
 						$scope.show.artistTwo.topFive = artistInformation.data.content.topFive;
 						$scope.show.artistTwo.albums = artistInformation.data.content.albums;
 					}
-					console.log("loading false");
 					$scope.loading = false;
 				}, function(error) {	// error management of the second isArtist
 					NotificationService.error("Error while loading the profile of the second artist.")
@@ -135,7 +132,6 @@ SoonzikApp.controller('BattlesCtrl', ['$scope', "$routeParams", 'SecureAuth', 'H
 				NotificationService.error("Error while loading the profile of the first artist.");
 			});
 
-			console.log("random now :");
 			randomPeople();
 
 		}, function(error) {	// error management of the showBattle call
