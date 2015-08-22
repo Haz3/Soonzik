@@ -6,7 +6,6 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:bm="using:Bing.Maps"
-    
     xmlns:ViewModels="using:SoonZik.ViewModels"
     mc:Ignorable="d">
 
@@ -62,6 +61,7 @@
                         <bm:Map Grid.Column="1" ZoomLevel="6" Credentials="Au1nH1MxHdvPVWttdBJJbTRYt6nHZJofF21VgvtHIAb5oYGH5609yjEa51GZZqFO" x:Name="MyMap" Margin="50,150,50,150">
                             <bm:Map.Center>
                                 <bm:Location Latitude="46.601595" Longitude="1.904063"/>
+                                <!--<bm:Location Latitude="{Binding address.lat}" Longitude="{Binding address.lng}"/>-->
                             </bm:Map.Center>
 
                             <bm:Map.Children>

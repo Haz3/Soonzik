@@ -6,11 +6,12 @@ using System.Threading.Tasks;
 
 namespace SoonZik.Models
 {
-    public class Comment
+    class Listening
     {
         public int id { get; set; }
-        public int author_id {get; set;}
-        public string content { get; set; }
-        public DateTime create_at { get; set; }
+        public string latitude { get; set; }
+        public string longitude { get; set; }
+        public User user { get; set; }
+        public Music music { get; set; }
     }
 }

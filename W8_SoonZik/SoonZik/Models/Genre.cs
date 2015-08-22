@@ -14,5 +14,6 @@ namespace SoonZik.Models
         public string color_hexa { get; set; }
         public List<Influence> influences { get; set; }
         public List<Music> musics { get; set; }
+        public List<Description> descriptions { get; set; }
     }
 }

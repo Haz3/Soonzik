@@ -56,6 +56,11 @@ namespace SoonZik.Views
             this.Frame.Navigate(typeof(Shop));
         }
 
+        private void listenings_btn_Click(object sender, RoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(Listenings));
+        }
+
         private void audio_player_btn_Click(object sender, RoutedEventArgs e)
         {
             this.Frame.Navigate(typeof(music_player));

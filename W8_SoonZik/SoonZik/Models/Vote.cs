@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace SoonZik.Models
 {
-    public class Comment
+    class Vote
     {
         public int id { get; set; }
-        public int author_id {get; set;}
-        public string content { get; set; }
-        public DateTime create_at { get; set; }
+        public int user_id { get; set; }
+        public int battle_id { get; set; }
+        public int artist_id { get; set; }
     }
 }
