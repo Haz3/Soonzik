@@ -43,7 +43,7 @@ SoonzikApp.controller('UsersCtrl', ['$scope', "$routeParams", 'SecureAuth', 'HTT
 
 	// For the select of date
 	$scope.currentYear = (new Date().getFullYear());
-	$scope.months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+	$scope.months = $rootScope.labels.FILE_USER_MONTHS_INFORMATION;
 	$scope.days = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31];
 
 	$scope.showInit = function () {
@@ -96,7 +96,7 @@ SoonzikApp.controller('UsersCtrl', ['$scope', "$routeParams", 'SecureAuth', 'HTT
 						$scope.myPlaylists[i].check = false;
 					}
 				}, function(error) {
-					NotificationService.error("Error while deleting the playlist : " + playlist.name);
+					NotificationService.error($rootScope.labels.FILE_USER_FIND_PLAYLIST_ERROR_MESSAGE + playlist.name);
 				});
 			}
 
@@ -139,7 +139,7 @@ SoonzikApp.controller('UsersCtrl', ['$scope', "$routeParams", 'SecureAuth', 'HTT
 							}
 						}
 					}, function(error) {
-						NotificationService.error("Error while loading your notes");
+						NotificationService.error($rootScope.labels.FILE_USER_GET_NOTES_ERROR_MESSAGE);
 					});
 				}
 
@@ -156,7 +156,7 @@ SoonzikApp.controller('UsersCtrl', ['$scope', "$routeParams", 'SecureAuth', 'HTT
 					/*- End getFollowers -*/
 				}, function(error) {
 					// error management to do
-					NotificationService.error("An error occured while loading the followers of this profile");
+					NotificationService.error($rootScope.labels.FILE_USER_GET_FOLLOWERS_ERROR_MESSAGE);
 				});
 
 				HTTPService.getFriends(id).then(function(friendsInformation) {
@@ -171,7 +171,7 @@ SoonzikApp.controller('UsersCtrl', ['$scope', "$routeParams", 'SecureAuth', 'HTT
 					/*- End getFollowers -*/
 				}, function(error) {
 					// error management to do
-					NotificationService.error("An error occured while loading the friends of this profile");
+					NotificationService.error($rootScope.labels.FILE_USER_GET_FRIENDS_ERROR_MESSAGE);
 				});
 
 				/* get our follows (for the follow button) */
@@ -180,13 +180,13 @@ SoonzikApp.controller('UsersCtrl', ['$scope', "$routeParams", 'SecureAuth', 'HTT
 						// Load the followers of the user
 						$scope.user.followers = followersInformation.data.content;
 					}, function(error) {
-						NotificationService.error("An error occured while loading the followers of your profile");
+						NotificationService.error($rootScope.labels.FILE_USER_GET_FOLLOWS_ERROR_MESSAGE);
 					});
 					HTTPService.getFriends($scope.user.id).then(function(friendsInformation) {
 						// Load the followers of the user
 						$scope.user.friends = friendsInformation.data.content;
 					}, function(error) {
-						NotificationService.error("An error occured while loading the followers of your profile");
+						NotificationService.error($rootScope.labels.FILE_USER_GET_FRIENDS_ERROR_MESSAGE);
 					});
 				}
 
@@ -204,19 +204,19 @@ SoonzikApp.controller('UsersCtrl', ['$scope', "$routeParams", 'SecureAuth', 'HTT
 					}
 				}, function(error) {
 					// error management to do
-					NotificationService.error("An error occured while loading the playlists of this profile");
+					NotificationService.error($rootScope.labels.FILE_USER_GET_PLAYLISTS_ERROR_MESSAGE);
 				});
 
 				/*- End isArtist -*/
 			}, function(error) {
 				// error management to do
-				NotificationService.error("An error occured while loading this profile");
+				NotificationService.error($rootScope.labels.FILE_USER_PROFILE_ERROR_MESSAGE);
 			})
 
 			/*- End get Profile -*/
 		}, function(error) {
 			// error management to do
-			NotificationService.error("An error occured while loading this profile");
+			NotificationService.error($rootScope.labels.FILE_USER_PROFILE_ERROR_MESSAGE);
 		});
 	}
 
@@ -250,7 +250,7 @@ SoonzikApp.controller('UsersCtrl', ['$scope', "$routeParams", 'SecureAuth', 'HTT
 		);
 
 		if (current_user.id != id) {
-			NotificationService.error("You can't edit this profile : it is not yours");
+			NotificationService.error($rootScope.labels.FILE_USER_EDITION_ERROR_MESSAGE);
 			$timeout(function() {
 				document.location.pathname = "/";
 			}, 1000);
@@ -289,7 +289,7 @@ SoonzikApp.controller('UsersCtrl', ['$scope', "$routeParams", 'SecureAuth', 'HTT
 				});
 			}, function (error) {
 				// error management to do
-				NotificationService.error("An error occured while loading this profile");
+				NotificationService.error($rootScope.labels.FILE_USER_PROFILE_ERROR_MESSAGE);
 			});
 		}
 	}
@@ -318,7 +318,7 @@ SoonzikApp.controller('UsersCtrl', ['$scope', "$routeParams", 'SecureAuth', 'HTT
 				parameters.user_id = user_id;
 				// We send this function to be executed after getting the secure key
 				$scope.function_submit(parameters).then(function(response) {
-					NotificationService.success("Profile updated successfully");
+					NotificationService.success($rootScope.labels.FILE_USER_UPDATE_SUCCESS_MESSAGE);
 				}, function (responseError) {
 					//if the update fail
 
@@ -342,10 +342,10 @@ SoonzikApp.controller('UsersCtrl', ['$scope', "$routeParams", 'SecureAuth', 'HTT
 							}
 						}
 					}
-					NotificationService.error("An error occured");
+					NotificationService.error($rootScope.labels.FILE_USER_ERROR_OCCURED_MESSAGE);
 				});
 			}, function (responseForbidden) {
-				NotificationService.error("An error occured");
+				NotificationService.error($rootScope.labels.FILE_USER_ERROR_OCCURED_MESSAGE);
 			});
 		}
 	}
@@ -365,7 +365,7 @@ SoonzikApp.controller('UsersCtrl', ['$scope', "$routeParams", 'SecureAuth', 'HTT
 						$scope.formError.user.image = error;
 					});
 				}, function (error) {
-					NotificationService.error("An error occured.");
+					NotificationService.error($rootScope.labels.FILE_USER_ERROR_OCCURED_MESSAGE);
 				});
 			}
 		}
@@ -386,7 +386,7 @@ SoonzikApp.controller('UsersCtrl', ['$scope', "$routeParams", 'SecureAuth', 'HTT
 						$scope.formError.user.background = error;
 					});
 				}, function (error) {
-					NotificationService.error("An error occured.");
+					NotificationService.error($rootScope.labels.FILE_USER_ERROR_OCCURED_MESSAGE);
 				});
 			}
 		}
@@ -403,10 +403,10 @@ SoonzikApp.controller('UsersCtrl', ['$scope', "$routeParams", 'SecureAuth', 'HTT
 				HTTPService.follow(parameters).then(function(followResponse) {
 					$scope.user.followers.push($scope.show.user);
 				}, function(error) {
-					NotificationService.error("An error occured while following an user");
+					NotificationService.error($rootScope.labels.FILE_USER_FOLLOW_ERROR_MESSAGE);
 				});
 			}, function(error) {
-				NotificationService.error("An error occured while following an user");
+				NotificationService.error($rootScope.labels.FILE_USER_FOLLOW_ERROR_MESSAGE);
 			});
 		}
 	}
@@ -423,10 +423,10 @@ SoonzikApp.controller('UsersCtrl', ['$scope', "$routeParams", 'SecureAuth', 'HTT
 					$scope.user.friends.push($scope.show.user);
 					$rootScope.$broadcast("chat:friend", $scope.show.user);
 				}, function(error) {
-					NotificationService.error("An error occured while adding a friend");
+					NotificationService.error($rootScope.labels.FILE_USER_FRIEND_ERROR_MESSAGE);
 				});
 			}, function(error) {
-				NotificationService.error("An error occured while adding a friend");
+				NotificationService.error($rootScope.labels.FILE_USER_FRIEND_ERROR_MESSAGE);
 			});
 		}
 	}
@@ -447,10 +447,10 @@ SoonzikApp.controller('UsersCtrl', ['$scope', "$routeParams", 'SecureAuth', 'HTT
 						}
 					}
 				}, function(error) {
-					NotificationService.error("An error occured while unfollowing an user");
+					NotificationService.error($rootScope.labels.FILE_USER_UNFOLLOW_ERROR_MESSAGE);
 				});
 			}, function(error) {
-				NotificationService.error("An error occured while unfollowing an user");
+				NotificationService.error($rootScope.labels.FILE_USER_UNFOLLOW_ERROR_MESSAGE);
 			});
 		}
 	}
@@ -472,10 +472,10 @@ SoonzikApp.controller('UsersCtrl', ['$scope', "$routeParams", 'SecureAuth', 'HTT
 						}
 					}
 				}, function(error) {
-					NotificationService.error("An error occured while removing a friend");
+					NotificationService.error($rootScope.labels.FILE_USER_UNFRIEND_ERROR_MESSAGE);
 				});
 			}, function(error) {
-				NotificationService.error("An error occured while removing a friend");
+				NotificationService.error($rootScope.labels.FILE_USER_UNFRIEND_ERROR_MESSAGE);
 			});
 		}
 	}
@@ -500,14 +500,14 @@ SoonzikApp.controller('UsersCtrl', ['$scope', "$routeParams", 'SecureAuth', 'HTT
 					$scope.show.tweets.my.unshift(response.data.content);
 					$scope.tweet.input = "";
 				}, function(error) {
-					NotificationService.error("Error while saving the tweet");
+					NotificationService.error($rootScope.labels.FILE_USER_SAVE_TWEET_ERROR_MESSAGE);
 				});
 			}, function(error) {
-				NotificationService.error("Error while saving the tweet");
+				NotificationService.error($rootScope.labels.FILE_USER_SAVE_TWEET_ERROR_MESSAGE);
 			});
 
 		} else {
-			NotificationService.info("Your message is too big. Length max. is 140 characters.");
+			NotificationService.info($rootScope.labels.FILE_USER_TWEET_TOO_LONG_ERROR_MESSAGE);
 		}
 	}
 
@@ -541,13 +541,13 @@ SoonzikApp.controller('UsersCtrl', ['$scope', "$routeParams", 'SecureAuth', 'HTT
 				HTTPService.setMusicNote(music.id, music.goldenStars, { user_id: user_id, secureKey: key }).then(function(response) {
 					music.note = music.goldenStars;
 				}, function(error) {
-					NotificationService.error("Error while rating the music, please try later.");
+					NotificationService.error($rootScope.labels.FILE_USER_SET_NOTE_ERROR_MESSAGE);
 				});
 			}, function(error) {
-				NotificationService.error("Error while rating the music, please try later.");
+				NotificationService.error($rootScope.labels.FILE_USER_SET_NOTE_ERROR_MESSAGE);
 			});
 		} else {
-			NotificationService.info("You need to login for this action");
+			NotificationService.info($rootScope.labels.FILE_USER_NEED_LOGIN_ERROR_MESSAGE);
 		}
 	}
 
@@ -574,10 +574,10 @@ SoonzikApp.controller('UsersCtrl', ['$scope', "$routeParams", 'SecureAuth', 'HTT
 						$scope.tooltip = false;
 						playlist.check = false;
 					}, function(error) {
-						NotificationService.error("Error while saving a new music in the playlist");
+						NotificationService.error($rootScope.labels.FILE_USER_ADD_PLAYLIST_ERROR_MESSAGE);
 					});
 				}, function(error) {
-					NotificationService.error("Error while saving a new music in the playlist");
+					NotificationService.error($rootScope.labels.FILE_USER_ADD_PLAYLIST_ERROR_MESSAGE);
 				});
 		}
 	}
@@ -654,13 +654,13 @@ SoonzikApp.controller('UsersCtrl', ['$scope', "$routeParams", 'SecureAuth', 'HTT
 						$scope.form.identities.facebook = response.id;
 					}, function(error) {
 						if (error.status == 409) {
-							NotificationService.error("The Facebook account is already linked to another SoonZik account");
+							NotificationService.error($rootScope.labels.FILE_USER_FB_LINKED_ERROR_MESSAGE);
 						} else {
-							NotificationService.error("Can't link the social network to your profile, try again later.");
+							NotificationService.error($rootScope.labels.FILE_USER_FB_LINK_ERROR_MESSAGE);
 						}
 					});
 				}, function(error) {
-					NotificationService.error("Can't link the social network to your profile, try again later.");
+					NotificationService.error($rootScope.labels.FILE_USER_FB_LINK_ERROR_MESSAGE);
 				});
 			});
 			
@@ -690,20 +690,20 @@ SoonzikApp.controller('UsersCtrl', ['$scope', "$routeParams", 'SecureAuth', 'HTT
 							$scope.form.identities.google = res.result.id;
 						}, function(error) {
 							if (error.status == 409) {
-								NotificationService.error("The Google Plus account is already linked to another SoonZik account");
+								NotificationService.error($rootScope.labels.FILE_USER_GOOGLE_LINKED_ERROR_MESSAGE);
 							} else {
-								NotificationService.error("Can't link the social network to your profile, try again later.");
+								NotificationService.error($rootScope.labels.FILE_USER_GOOGLE_LINK_ERROR_MESSAGE);
 							}
 						});
 					}, function(error) {
-						NotificationService.error("Can't link the social network to your profile, try again later.");
+						NotificationService.error($rootScope.labels.FILE_USER_GOOGLE_LINK_ERROR_MESSAGE);
 					});
 				});
 		  }, function(err) {
-		  	NotificationService.error("Can't connect to Google, please try later");
+		  	NotificationService.error($rootScope.labels.FILE_USER_GOOGLE_CONNECTION_ERROR_MESSAGE);
 		  });
 		}, function(error) {
-	  	NotificationService.error("Can't connect to Google, please try later");
+	  	NotificationService.error($rootScope.labels.FILE_USER_GOOGLE_CONNECTION_ERROR_MESSAGE);
 		});
 	}
 

@@ -1,17 +1,17 @@
 .explorerContainer{ "ng-init" => "explorerInit()" }
 	%loading{ "ng-if" => "loading == true" }
 	%h6.navigation{ "ng-if" => "loading == false" }
-		%span.clickable{ "ng-click" => "reset()" } Index
+		%span.clickable{ "ng-click" => "reset()" } {{ labels.DISPLAY_EXPLORER_INDEX_LABEL }}
 		%span{ "ng-if" => "selectedInfluence != null" } >>
 		%span.clickable{ "ng-if" => "selectedInfluence != null", "ng-click" => "resetInfluence()" } {{ selectedInfluence.name }}
 		%span{ "ng-if" => "selectedGenre != null" } >> {{ selectedGenre.style_name }}
 	.explorer
 		.influences{ "ng-if" => "loading == false && state == 0" }
-			%h2 Choose an influence
+			%h2 {{ labels.DISPLAY_EXPLORER_INFLUENCE_CHOOSE_LABEL }}
 			%hr
 			%ul.influence.circle
 				%li{ "ng-repeat" => "influence in influences" }
-					%h5.clickable{ "ng-click" => "chooseInfluence(influence)" } {{ influence.name }} ({{ influence.genres.length }} genres)
+					%h5.clickable{ "ng-click" => "chooseInfluence(influence)" } {{ influence.name }} ({{ influence.genres.length }} {{ labels.DISPLAY_EXPLORER_GENRE_LABEL }})
 		.influenceDetail{ "ng-class" => "influenceWindow" }
 			%h2 {{ selectedInfluence.name }}
 			%hr

@@ -25,58 +25,58 @@
 			%i.fi-list-bullet{ "ng-click" => "displayPlaylist()" }
 	#currentPlaylist.text-center
 		.currentList.columns{ "ng-class" => "user == false ? 'small-12' : 'medium-6'" }
-			%h2.drakolomb Current Playlist
+			%h2.drakolomb {{ labels.DISPLAY_PLAYER_CURRENT_PLAYLIST_LABEL }}
 			%div
 				%span.button.small.alert{ "ng-click" => "cleanPlaylist()" }
 					%i.fi-trash
-					Clean
+					{{ labels.DISPLAY_PLAYER_CLEAN_LABEL }}
 				%span.button.small.info{ "ng-click" => "moreClick()" }
 					%i.fi-widget
 					{{ (more.btn == false) ? "More..." : "Less..." }}
 				%span.button.small{ "ng-click" => "activateLocation()", popover: "Share what you're listening around you. Click here to enable or disable this feature. Warning: you need to allow your browser to give us your location.", "popover-title" => "Geolocation", "ng-if" => "geolocDisplay == true", "ng-class" => "{ alert: !geoloc, success: geoloc }", "popover-placement" => "bottom", "popover-trigger" => "mouseenter" }
 					%i.fi-marker
-					Geolocation
+					{{ labels.DISPLAY_PLAYER_GEOLOCATION_LABEL }}
 					%i{ "ng-class" => "{ 'fi-x': !geoloc, 'fi-check': geoloc }" }
 				.small-12.moreless{ "ng-show" => "more.btn == true" }
 					.left.relative
 						.pophover.popleft{ "ng-show" => "more.pop == 'share'" }
 							%ul.no-bullet
-								%li Share !
+								%li {{ labels.DISPLAY_PLAYER_SHARE_LABEL }} !
 								%li
 									%input{ type: "text", "ng-value" => "tmpPlaylistLink()", readonly: "readonly", "select-on-click" => true }
 								%li.choice{ "ng-click" => "setMorePop(false)" } Close
 					%span{ "ng-click" => "setMorePop('share')" }
 						%i.fi-share.blue
-						Share
+						{{ labels.DISPLAY_PLAYER_SHARE_LABEL }}
 					%span.divider
 					%span{ "ng-click" => "setMorePop('save')" }
 						%i.fi-save.blue
-						Save as new Playlist
+						{{ labels.DISPLAY_PLAYER_SAVE_NEW_PLAYLIST_LABEL }}
 					.right.relative
 						.pophover.popright{ "ng-show" => "more.pop == 'save'" }
 							%ul.no-bullet
-								%li Save the playlist as :
+								%li {{ labels.DISPLAY_PLAYER_SAVE_PLAYLIST_NAME_LABEL }}
 								%li
 									%input{ type: "text", "ng-model" => "newPlaylistFromCurrent.name" }
-								%li.choice{ "ng-click" => "savePlaylistFromCurrent()" } Save
-								%li.choice{ "ng-click" => "setMorePop(false)" } Close
+								%li.choice{ "ng-click" => "savePlaylistFromCurrent()" } {{ labels.DISPLAY_PLAYER_SAVE_LABEL }}
+								%li.choice{ "ng-click" => "setMorePop(false)" } {{ labels.DISPLAY_PLAYER_CLOSE_BUTTON }}
 			.clearfix.small-12.musicInformations{ "ng-show" => "infomusic.current != false" }
 				%i.fi-x.right.red{ "ng-click" => "infoForMusic(false, 'current')" }
 				%ul.square.left.text-left
 					%li
-						%span Title :
+						%span {{ labels.DISPLAY_PLAYER_TITLE_LABEL }} :
 						%span {{ infomusic.current.title }}
 					%li
-						%span Price :
+						%span {{ labels.DISPLAY_PLAYER_PRICE_LABEL }} :
 						%span {{ infomusic.current.price }}
 					%li
-						%span Duration :
+						%span {{ labels.DISPLAY_PLAYER_DURATION_LABEL }} :
 						%span {{ formatedDuration(infomusic.current.duration) }}
 					%li
-						%span Album :
+						%span {{ labels.DISPLAY_PLAYER_ALBUM_LABEL }} :
 						%span {{ infomusic.current.album.title }}
 					%li
-						%a{ href: "/albums/{{ infomusic.current.id }}" } Link to the album page
+						%a{ href: "/albums/{{ infomusic.current.id }}" } {{ labels.DISPLAY_PLAYER_ALBUM_LINK_LABEL }}
 			%hr
 			%div{ "ng-repeat" => "music in playlist track by $index" }
 				.clearfix
@@ -87,64 +87,64 @@
 						%i.fi-info.blue{ "ng-click" => "infoForMusic(music.obj, 'current')" }
 						%i.fi-x.red{ "ng-click" => "removeMusicFromPlaylist($index)" }
 		.myPlaylist.medium-6.columns{ "ng-if" => "user != false" }
-			%h2.drakolomb Your playlists
+			%h2.drakolomb {{ labels.DISPLAY_PLAYER_YOUR_PLAYLIST_LABEL }}
 			%loading{ "ng-if" => "loading" }
 			.row.collapse
 				.small-4.columns
 					%span.prefix
-						%label.inline{ "for" => "playlistName" } Name :
+						%label.inline{ "for" => "playlistName" } {{ labels.DISPLAY_PLAYER_NAME_LABEL }} :
 				.small-6.columns
 					%input{ id: "playlistName", type: "text", placeholder: "New Playlist", "ng-model" => "newItem.name" }
 				.small-2.columns
-					.button.postfix{ "ng-click" => "createPlaylist()" } Save
+					.button.postfix{ "ng-click" => "createPlaylist()" } {{ labels.DISPLAY_PLAYER_SAVE_LABEL }}
 			.clearfix.small-12.musicInformations{ "ng-show" => "infomusic.playlist != false" }
 				%i.fi-x.right.red{ "ng-click" => "infoForMusic(false, 'playlist')" }
 				%ul.square.left.text-left
 					%li
-						%span Title :
+						%span {{ labels.DISPLAY_PLAYER_TITLE_LABEL }} :
 						%span {{ infomusic.playlist.title }}
 					%li
-						%span Price :
+						%span {{ labels.DISPLAY_PLAYER_PRICE_LABEL }} :
 						%span {{ infomusic.playlist.price }}
 					%li
-						%span Duration :
+						%span {{ labels.DISPLAY_PLAYER_DURATION_LABEL }} :
 						%span {{ formatedDuration(infomusic.playlist.duration) }}
 					%li
-						%span Album :
+						%span {{ labels.DISPLAY_PLAYER_ALBUM_LABEL }} :
 						%span {{ infomusic.playlist.album.title }}
 					%li
-						%a{ href: "/albums/{{ infomusic.playlist.id }}" } Link to the album page
+						%a{ href: "/albums/{{ infomusic.playlist.id }}" } {{ labels.DISPLAY_PLAYER_ALBUM_LINK_LABEL }}
 			%div.text-left{ "ng-if" => "!loading" }
 				%hr
 				%div{ "ng-repeat" => "myplaylist in myPlaylists" }
 					.clearfix.playlistElement
 						.left.playlistName{ "ng-click" => "readInfo(myplaylist)" }
 							%i.fi-play-video
-							{{ myplaylist.name }} - Durée : {{ formatedDuration(myplaylist.duration) }}
+							{{ myplaylist.name }} - {{ labels.DISPLAY_PLAYER_DURATION_LABEL }} : {{ formatedDuration(myplaylist.duration) }}
 						.pophover.popleft.radius-10{ "ng-if" => "toRead == myplaylist" }
 							%ul.no-bullet.clearfix
 								%li.small-12.choice{ "ng-click" => "replaceToCurrentPlaylist(myplaylist.musics)" }
-									Replace the current playlist
+									{{ labels.DISPLAY_PLAYER_REPLACE_PLAYLIST_BUTTON }}
 								%li.small-12.choice{ "ng-click" => "toRead = addToCurrentPlaylist(myplaylist.musics)" }
-									Add to the current playlist
+									{{ labels.DISPLAY_PLAYER_ADD_CURRENT_PLAYLIST_BUTTON }}
 								%li.small-12.choice{ "ng-click" => "readInfo(false)" }
-									Close
+									{{ labels.DISPLAY_PLAYER_CLOSE_BUTTON }}
 						.right.relative
 							%i.fi-share.blue{ "ng-click" => "myplaylist.share = true" }
 							.pophover.popright.radius-10{ "ng-if" => "myplaylist.share == true" }
 								%ul.no-bullet.clearfix
 									%li.small-12
-										%p.link Share this link !
+										%p.link {{ labels.DISPLAY_PLAYER_SHARE_PLAYLIST_BUTTON }}
 									%li.small-11.small-centered.columns
 										%input.radius{ type: "text", "ng-value" => "myplaylist.url", "select-on-click" => true, readonly: "readonly" }
-									%li.small-12.choice{ "ng-click" => "unshare(myplaylist)" } Close
+									%li.small-12.choice{ "ng-click" => "unshare(myplaylist)" } {{ labels.DISPLAY_PLAYER_CLOSE_BUTTON }}
 							%i{ "ng-class" => "myplaylist.extend == false ? 'fi-plus green' : 'fi-minus red'", "ng-click" => "myplaylist.extend = !myplaylist.extend" }
 							%i.fi-x.red{ "ng-click" => "toDelete = myplaylist" }
 							.pophover.popright.radius-10{ "ng-show" => "myplaylist == toDelete" }
 								%ul.no-bullet.clearfix
-									%li.small-12.columns Are you sure to delete this playlist ?
-									%li.choice.small-6.columns{ "ng-click" => "removePlaylist(myplaylist)" } Yes
-									%li.choice.small-6.columns{ "ng-click" => "toDelete = false" } No
+									%li.small-12.columns {{ labels.DISPLAY_PLAYER_SURE_DELETE_BUTTON }}
+									%li.choice.small-6.columns{ "ng-click" => "removePlaylist(myplaylist)" } {{ labels.DISPLAY_PLAYER_YES_BUTTON }}
+									%li.choice.small-6.columns{ "ng-click" => "toDelete = false" } {{ labels.DISPLAY_PLAYER_NO_BUTTON }}
 					%ul.no-bullet.aPlaylist{ "ng-class" => "myplaylist.extend ? 'open' : ''" }
 						%li.row{ "ng-repeat" => "music in myplaylist.musics" }
 							%i.fi-x.red.left{ "ng-click" => "removeFromPlaylist(music, myplaylist)" }

@@ -1,32 +1,32 @@
 .seachContainer.clearfix{ "ng-init" => "initSearch()" }
 	.small-12.medium-3.columns
-		%h2 Filters
+		%h2 {( labels.DISPLAY_SEARCH_FILTERS_LABEL )}
 		%hr
 		%ul.no-bullet
 			%li
 				%label
 					%input{ type: "checkbox", "ng-model" => "box.all", "ng-change" => "changeBox('all')" }
-					All
+					{( labels.DISPLAY_SEARCH_ALL_FILTER_LABEL )}
 			%li
 				%label
 					%input{ type: "checkbox", "ng-model" => "box.users", "ng-change" => "changeBox('users')" }
-					Users
+					{{ labels.DISPLAY_SEARCH_USER_FILTER_LABEL }}
 			%li
 				%label
 					%input{ type: "checkbox", "ng-model" => "box.artists", "ng-change" => "changeBox('artists')" }
-					Artists
+					{{ labels.DISPLAY_SEARCH_ARTIST_FILTER_LABEL }}
 			%li
 				%label
 					%input{ type: "checkbox", "ng-model" => "box.albums", "ng-change" => "changeBox('albums')" }
-					Albums
+					{{ labels.DISPLAY_SEARCH_ALBUM_FILTER_LABEL }}
 			%li
 				%label
 					%input{ type: "checkbox", "ng-model" => "box.musics", "ng-change" => "changeBox('musics')" }
-					Musics
+					{{ labels.DISPLAY_SEARCH_MUSIC_FILTER_LABEL }}
 			%li
 				%label
 					%input{ type: "checkbox", "ng-model" => "box.packs", "ng-change" => "changeBox('packs')" }
-					Packs
+					{{ labels.DISPLAY_SEARCH_PACK_FILTER_LABEL }}
 	.small-12.medium-9.columns
 		%loading{ "ng-if" => "loading == true" }
 		.searchResults{ "ng-if" => "loading == false" }
@@ -36,12 +36,12 @@
 						.small-8.medium-6.columns
 							%input{ type: "text", "ng-model" => "searchParam.value" }
 						.small-4.columns.left
-							%a.button.postfix{ href: "#", "ng-click" => "newSearch()" } Search
+							%a.button.postfix{ href: "#", "ng-click" => "newSearch()" } {{ labels.DISPLAY_SEARCH_SEARCH_LABEL }}
 			.contentSeach
 				.users{ "ng-show" => "box.users" }
-					%h4 Users
+					%h4 {{ labels.DISPLAY_SEARCH_USER_FILTER_LABEL }}
 					%hr
-					%p{ "ng-if" => "result.user.length == 0" } Nothing found
+					%p{ "ng-if" => "result.user.length == 0" } {{ labels.DISPLAY_SEARCH_NOTHING_LABEL }}
 					.boxInfo.clearfix{ "ng-if" => "result.user.length > 0", "ng-repeat" => "u in result.user" }
 						.small-3.columns
 							%img{ "ng-src" => '{{ "/assets/usersImage/avatars/" + u.image }}' }
@@ -51,9 +51,9 @@
 									{{ u.username }}
 							%p {{ u.description }}
 				.artists{ "ng-show" => "box.artists" }
-					%h4 Artists
+					%h4 {{ labels.DISPLAY_SEARCH_ARTIST_FILTER_LABEL }}
 					%hr
-					%p{ "ng-if" => "result.artist.length == 0" } Nothing found
+					%p{ "ng-if" => "result.artist.length == 0" } {{ labels.DISPLAY_SEARCH_NOTHING_LABEL }}
 					.boxInfo.clearfix{ "ng-if" => "result.artist.length > 0", "ng-repeat" => "artist in result.artist" }
 						.small-3.columns
 							%img{ "ng-src" => '{{ "/assets/usersImage/avatars/" + artist.image }}' }
@@ -63,9 +63,9 @@
 									{{ artist.username }}
 							%p {{ artist.description }}
 				.albums{ "ng-show" => "box.albums" }
-					%h4 Albums
+					%h4 {{ labels.DISPLAY_SEARCH_ALBUM_FILTER_LABEL }}
 					%hr
-					%p{ "ng-if" => "result.album.length == 0" } Nothing found
+					%p{ "ng-if" => "result.album.length == 0" } {{ labels.DISPLAY_SEARCH_NOTHING_LABEL }}
 					.boxInfo.clearfix{ "ng-if" => "result.album.length > 0", "ng-repeat" => "album in result.album" }
 						.small-3.columns
 							%img{ "ng-src" => '{{ "/assets/albums/" + album.image }}' }
@@ -74,15 +74,15 @@
 								%a{ href: "/albums/{{album.id}}" } {{ album.title }}
 							%p
 								%em
-									By "
+									{{ labels.DISPLAY_SEARCH_BY_LABEL }} "
 								%a{ href: "/users/{{album.user.id}}" }
 									{{ album.user.username }}
 								%em
 									" - {{ album.yearProd }}
 				.musics{ "ng-show" => "box.musics" }
-					%h4 Musics
+					%h4 {{ labels.DISPLAY_SEARCH_MUSIC_FILTER_LABEL }}
 					%hr
-					%p{ "ng-if" => "result.music.length == 0" } Nothing found
+					%p{ "ng-if" => "result.music.length == 0" } {{ labels.DISPLAY_SEARCH_NOTHING_LABEL }}
 					.boxInfo{ "ng-if" => "result.music.length > 0", "ng-repeat" => "music in result.music" }
 						.clearfix
 							.small-1.columns
@@ -96,11 +96,11 @@
 							.small-2.columns
 								{{ formatDuration(music.duration) }}
 						%p.text-right
-							%em From the album
+							%em {{ labels.DISPLAY_SEARCH_ALBUM_FROM_LABEL }}
 							%a{ href: "/albums/{{music.album.id}}" } {{ music.album.title }}
 				.packs{ "ng-show" => "box.packs" }
-					%h4 Packs
+					%h4 {{ labels.DISPLAY_SEARCH_PACK_FILTER_LABEL }}
 					%hr
-					%p{ "ng-if" => "result.pack.length == 0" } Nothing found
+					%p{ "ng-if" => "result.pack.length == 0" } {{ labels.DISPLAY_SEARCH_NOTHING_LABEL }}
 					.boxInfo{ "ng-if" => "result.pack.length > 0", "ng-repeat" => "pack in result.pack" }
 						%a{ href: "/packs/{{pack.id}}" } {{ pack.title }}

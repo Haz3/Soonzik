@@ -1,4 +1,4 @@
-SoonzikApp.controller('ExplorerCtrl', ['$scope', "$routeParams", "HTTPService", "NotificationService", "$timeout", "$location", function ($scope, $routeParams, HTTPService, NotificationService, $timeout, $location) {
+SoonzikApp.controller('ExplorerCtrl', ['$scope', "$routeParams", "HTTPService", "NotificationService", "$timeout", "$location", "$rootScope", function ($scope, $routeParams, HTTPService, NotificationService, $timeout, $location, $rootScope) {
 
 	$scope.loading = true;
 	$scope.loadingGenre = false;
@@ -32,7 +32,7 @@ SoonzikApp.controller('ExplorerCtrl', ['$scope', "$routeParams", "HTTPService", 
 
 			$scope.loading = false;
 		}, function(error) {
-			NotificationService.error("Error while loading the influnces");
+			NotificationService.error($rootScope.labels.FILE_EXPLORER_GET_INFLUENCES_ERROR_MESSAGE);
 		});
 	}
 
@@ -65,7 +65,7 @@ SoonzikApp.controller('ExplorerCtrl', ['$scope', "$routeParams", "HTTPService", 
 		HTTPService.getGenre(genre.id).then(function(response) {
 			$scope.totalPage = toInt(response.data.content);
 		}, function(error) {
-			NotificationService.error("Error while loading the genre");
+			NotificationService.error($rootScope.labels.FILE_EXPLORER_GET_GENRE_ERROR_MESSAGE);
 		});
 
 		HTTPService.getGenre(genre.id).then(function(response) {
@@ -74,7 +74,7 @@ SoonzikApp.controller('ExplorerCtrl', ['$scope', "$routeParams", "HTTPService", 
 			$scope.loadingGenre = false;
 			$scope.genreOpen();
 		}, function(error) {
-			NotificationService.error("Error while loading the genre");
+			NotificationService.error($rootScope.labels.FILE_EXPLORER_GET_GENRE_ERROR_MESSAGE);
 		});
 	}
 

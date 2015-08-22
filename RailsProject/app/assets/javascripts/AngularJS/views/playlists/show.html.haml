@@ -1,46 +1,46 @@
 .playlist{ "ng-init" => "showInit()" }
 	%loading{ "ng-if" => "loading" }
 	.playlistContainer{ "ng-if" => "!loading" }
-		%h3{ "ng-if" => "playlist.musics.length == 0" } This playlist is empty
+		%h3{ "ng-if" => "playlist.musics.length == 0" } {{ labels.DISPLAY_PLAYER_EMPTY_LABEL }}
 		.playlistHeader.clearfix{ "ng-if" => "playlist.musics.length != 0" }
 			.previewPlaylist.small-12.medium-3.columns
 				%img{ "ng-src" => "{{ '/assets/albums/' + playlist.musics[0].album.image }}" }
 			.small-12.medium-9.columns.columns
 				%h3{ "ng-if" => "playlist.name != null" } {{ playlist.name }}
 				%p
-					%span{ "ng-if" => "playlist.user != null" } From
+					%span{ "ng-if" => "playlist.user != null" } {{ labels.DISPLAY_PLAYER_FROM_LABEL }}
 					%a{ "ng-if" => "playlist.user != null", href: "/users/{{ playlist.user.id }}" } {{ playlist.user.username }}
 					%span{ "ng-if" => "playlist.user != null" } - 
-					%span {{ playlist.musics.length }} musics
+					%span {{ playlist.musics.length }} {{ labels.DISPLAY_PLAYER_MUSICS_LABEL }}
 				%ul.button-group
 					%li.relative
 						%span.button{ "ng-click" => "listenPlaylist()" }
 							%i.fi-music
-							Listen
+							{{ labels.DISPLAY_PLAYER_LISTEN_LABEL }}
 					%li.relative
 						%span.button{ "ng-click" => "toolTipShare()" }
 							%i.fi-share
-							Share
+							{{ labels.DISPLAY_PLAYER_SHARE_LABEL }}
 						.mytooltip{ "ng-show" => "tooltip.type == 'share'" }
 							%ul.no-bullet.clearfix
-								%li.text-center.small-12 Share !
+								%li.text-center.small-12 {{ labels.DISPLAY_PLAYER_SHARE_LABEL }} !
 								%li.small-11.small-centered.columns
 									%input.radius{ type: "text", value: "{{tooltip.value}}", "select-on-click" => true }
 								%li.small-12
-									.button.tiny{ "ng-click" => "toolTipShare()" } Close
+									.button.tiny{ "ng-click" => "toolTipShare()" } {{ labels.DISPLAY_PLAYER_CLOSE_LABEL }}
 					%li.relative{ "ng-if" => "user != false" }
 						%span.button{ "ng-click" => "saveTooltip()" }
 							%i.fi-save
-							Save as new playlist
+							{{ labels.DISPLAY_PLAYER_NEW_PLAYLIST_LABEL }}
 						.mytooltip{ "ng-show" => "tooltip.type == 'save'" }
 							%ul.no-bullet.clearfix
-								%li.small-5.columns Save as : 
+								%li.small-5.columns {{ labels.DISPLAY_PLAYER_SAVE_AS_LABEL }}
 								%li.small-7.columns
 									%input.radius{ type: "text", "ng-model" => "newItem.name" }
 								%li.small-6.columns
-									.button.tiny{ "ng-click" => "savePlaylist()", "ng-class" => "newItem.name.length == 0 ? 'secondary' : 'primary'" } Save
+									.button.tiny{ "ng-click" => "savePlaylist()", "ng-class" => "newItem.name.length == 0 ? 'secondary' : 'primary'" } {{ labels.DISPLAY_PLAYER_SAVE_BUTTON }}
 								%li.small-6.columns
-									.button.tiny{ "ng-click" => "saveTooltip()" } Close
+									.button.tiny{ "ng-click" => "saveTooltip()" } {{ labels.DISPLAY_PLAYER_CLOSE_LABEL }}
 		.playlistContent{ "ng-if" => "playlist.musics.length != 0" }
 			.playlistMusic{ "ng-repeat" => "music in playlist.musics track by $index"}
 				%hr
@@ -59,7 +59,7 @@
 							%i.fi-plus{ "ng-click" => "setTooltip(tooltip == false ? music : false)" }
 							.mytooltip.toolright{ "ng-show" => "tooltip == music" }
 								%ul.no-bullet
-									%li.choice{ "ng-if" => "user != false", "ng-click" => "selectMusic(music)" } Add to playlist
+									%li.choice{ "ng-if" => "user != false", "ng-click" => "selectMusic(music)" } {{ labels.DISPLAY_PLAYER_ADD_PLAYLIST_LABEL }}
 									%li.playlistBlock{ "ng-if" => "selectedMusic == music" }
 										%hr
 										%ul.text-left.small-12.playlistList
@@ -67,10 +67,10 @@
 												%input{ "ng-model" => "myplaylist.check", type: "radio", id: "playlist-{{myplaylist.id}}", "ng-value" => "true" }
 												%label{ "for" => "playlist-{{myplaylist.id}}" } {{ myplaylist.name }}
 											%li.small-12.text-center
-												.button.tiny{ "ng-click" => "addToPlaylist()" } Add
+												.button.tiny{ "ng-click" => "addToPlaylist()" } {{ labels.DISPLAY_PLAYER_ADD_PLAYLIST_BUTTON }}
 										%hr
 									%li.choice
-										%music.small-12{ "music-object" => "music", "ng-click" => "setTooltip(false)" } Listen
+										%music.small-12{ "music-object" => "music", "ng-click" => "setTooltip(false)" } {{ labels.DISPLAY_PLAYER_LISTEN_LABEL }}
 									%li
-										.button.tiny{ "ng-click" => "setTooltip(false)" } Close
+										.button.tiny{ "ng-click" => "setTooltip(false)" } {{ labels.DISPLAY_PLAYER_CLOSE_LABEL }}
 			%hr

@@ -1,4 +1,4 @@
-SoonzikApp.controller('ListeningsCtrl', ['$scope', "$routeParams", 'SecureAuth', 'HTTPService', 'NotificationService', 'uiGmapGoogleMapApi', '$timeout', function ($scope, $routeParams, SecureAuth, HTTPService, NotificationService, uiGmapGoogleMapApi, $timeout) {
+SoonzikApp.controller('ListeningsCtrl', ['$scope', "$routeParams", 'SecureAuth', 'HTTPService', 'NotificationService', 'uiGmapGoogleMapApi', '$timeout', '$rootScope', function ($scope, $routeParams, SecureAuth, HTTPService, NotificationService, uiGmapGoogleMapApi, $timeout, $rootScope) {
 
 	// To avoid too much update when the range is modify
 	var callbackID = 0;
@@ -98,7 +98,7 @@ SoonzikApp.controller('ListeningsCtrl', ['$scope', "$routeParams", 'SecureAuth',
 						$scope.circleZone.center = { latitude: position.coords.latitude, longitude: position.coords.longitude };
 						$scope.location = 2;
 					}, function(error) {
-						NotificationService.error("Error while loading the music around you");
+						NotificationService.error($rootScope.labels.FILE_LISTENING_AROUND_ERROR_MESSAGE);
 					});
 
 					$timeout(zoneMove, 200);
@@ -120,7 +120,7 @@ SoonzikApp.controller('ListeningsCtrl', ['$scope', "$routeParams", 'SecureAuth',
       	animation: 2,
       	labelClass: 'marker_labels',
       	labelAnchor: '60 0',
-      	labelContent: "<p><a href='/musics/" + obj.music.id + "'>" + obj.music.title + "</a> listened by <a href='/users/" + obj.user.id + "'>" + obj.user.username + "</a></p>" +
+      	labelContent: "<p><a href='/musics/" + obj.music.id + "'>" + obj.music.title + "</a>" + $rootScope.labels.FILE_LISTENING_INPOPUP_LISTENED_LABEL + "<a href='/users/" + obj.user.id + "'>" + obj.user.username + "</a></p>" +
       	"<p>" + obj.created_at + "</p>"
       },
       idKey: obj.id,

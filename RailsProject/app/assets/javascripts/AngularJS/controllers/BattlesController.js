@@ -1,4 +1,4 @@
-SoonzikApp.controller('BattlesCtrl', ['$scope', "$routeParams", 'SecureAuth', 'HTTPService', 'NotificationService', function ($scope, $routeParams, SecureAuth, HTTPService, NotificationService) {
+SoonzikApp.controller('BattlesCtrl', ['$scope', "$routeParams", 'SecureAuth', 'HTTPService', 'NotificationService', "$rootScope", function ($scope, $routeParams, SecureAuth, HTTPService, NotificationService, $rootScope) {
 	$scope.loading = true;
 	$scope.index = { battles: [], votes: [], voteCurrentUser: [] };
 	$scope.show = { battle: null, artistOne: {}, artistTwo: {}, voteCurrentUser: false, randomVote: [] };
@@ -69,10 +69,10 @@ SoonzikApp.controller('BattlesCtrl', ['$scope', "$routeParams", 'SecureAuth', 'H
 
 				$scope.loading = false;
 			}, function(error) {
-				NotificationService.error("Error while loading the page");
+				NotificationService.error($rootScope.labels.FILE_BATTLE_LOAD_BATTLE_ERROR_MESSAGE);
 			});
 		}, function(error) {
-			NotificationService.error("Error while loading the page");
+			NotificationService.error($rootScope.labels.FILE_BATTLE_LOAD_BATTLE_ERROR_MESSAGE);
 		});		
 	}
 
@@ -126,16 +126,16 @@ SoonzikApp.controller('BattlesCtrl', ['$scope', "$routeParams", 'SecureAuth', 'H
 					}
 					$scope.loading = false;
 				}, function(error) {	// error management of the second isArtist
-					NotificationService.error("Error while loading the profile of the second artist.")
+					NotificationService.error($rootScope.labels.FILE_BATTLE_LOAD_ARTIST_TWO_ERROR_MESSAGE)
 				});
 			}, function(error) {	// error management of the first isArtist
-				NotificationService.error("Error while loading the profile of the first artist.");
+				NotificationService.error($rootScope.labels.FILE_BATTLE_LOAD_ARTIST_ONE_ERROR_MESSAGE);
 			});
 
 			randomPeople();
 
 		}, function(error) {	// error management of the showBattle call
-			NotificationService.error("An error occured while loading the page.")
+			NotificationService.error($rootScope.labels.FILE_BATTLE_LOAD_BATTLE_ERROR_MESSAGE)
 		});
 	}
 
@@ -143,7 +143,7 @@ SoonzikApp.controller('BattlesCtrl', ['$scope', "$routeParams", 'SecureAuth', 'H
 
 	$scope.indexVoteFor = function(battle, artist) {
 		if ($scope.currentUser == false) {
-			NotificationService.error("You need to be authenticated");
+			NotificationService.error($rootScope.labels.FILE_BATTLE_NEED_AUTHENTICATION_ERROR_MESSAGE);
 			return;
 		}
 		if ($scope.index.voteCurrentUser[battle.id] == false || $scope.index.voteCurrentUser[battle.id] != artist.id) {
@@ -192,19 +192,19 @@ SoonzikApp.controller('BattlesCtrl', ['$scope', "$routeParams", 'SecureAuth', 'H
 						}
 					}
 				}, function(error) {
-					NotificationService.error("An error occured while voting. Try again later.");
+					NotificationService.error($rootScope.labels.FILE_BATTLE_VOTE_ERROR_MESSAGE);
 				});
 			}, function(error) {
-				NotificationService.error("An error occured while voting. Try again later.");
+				NotificationService.error($rootScope.labels.FILE_BATTLE_VOTE_ERROR_MESSAGE);
 			});
 		} else {
-			NotificationService.info("This action is impossible : You already vote for this artist");
+			NotificationService.info($rootScope.labels.FILE_BATTLE_ALREADY_VOTED_ERROR_MESSAGE);
 		}
 	}
 
 	$scope.showVoteFor = function(battle, artist) {
 		if ($scope.currentUser == false) {
-			NotificationService.error("You need to be authenticated");
+			NotificationService.error($rootScope.labels.FILE_BATTLE_NEED_AUTHENTICATION_ERROR_MESSAGE);
 			return;
 		}
 		if ($scope.show.voteCurrentUser == false || $scope.show.voteCurrentUser != artist.id) {
@@ -247,13 +247,13 @@ SoonzikApp.controller('BattlesCtrl', ['$scope', "$routeParams", 'SecureAuth', 'H
 						}
 					}
 				}, function(error) {
-					NotificationService.error("An error occured while voting. Try again later.");
+					NotificationService.error($rootScope.labels.FILE_BATTLE_VOTE_ERROR_MESSAGE);
 				});
 			}, function(error) {
-				NotificationService.error("An error occured while voting. Try again later.");
+				NotificationService.error($rootScope.labels.FILE_BATTLE_VOTE_ERROR_MESSAGE);
 			});
 		} else {
-			NotificationService.info("This action is impossible : You already vote for this artist");
+			NotificationService.info($rootScope.labels.FILE_BATTLE_ALREADY_VOTED_ERROR_MESSAGE);
 		}
 	}
 
@@ -292,11 +292,11 @@ SoonzikApp.controller('BattlesCtrl', ['$scope', "$routeParams", 'SecureAuth', 'H
 
 	$scope.voteText = function(value, artist_id) {
 		if (value == false) {
-			return 'Vote';
+			return $rootScope.labels.FILE_BATTLE_VOTETEXT_LABEL;
 		} else if (value == artist_id) {
-			return 'You voted for this artist';
+			return $rootScope.labels.FILE_BATTLE_VOTEDTEXT_LABEL;
 		} else {
-			return 'Cancel your old vote and vote for this artist !';
+			return $rootScope.labels.FILE_BATTLE_CANCEL_TEXT_LABEL;
 		}
 	}
 
@@ -307,8 +307,6 @@ SoonzikApp.controller('BattlesCtrl', ['$scope', "$routeParams", 'SecureAuth', 'H
 
 		if (votes.length <= 6) {
 			for (var indexVote in votes) {
-				console.log(votes[indexVote]);
-				console.log(id_array);
 				id_array.push(votes[indexVote].user_id);
 			}
 		} else {

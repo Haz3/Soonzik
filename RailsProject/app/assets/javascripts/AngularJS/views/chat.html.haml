@@ -24,15 +24,15 @@
 						%span
 							{{ mess.value }}
 			%input{ "submit-input" => "sendMsg(friendWindow.friend)", "ng-model" => "message[friendWindow.friend.username].value", "auto-focus" => true }
-	%p="Connected friends"
+	%p {{ labels.DISPLAY_CHAT_CONNECTED_LABEL }}
 	%ul
 		%li{ "ng-repeat" => "friend in friends | filter:search:strict", "data-id" => "{{ friend.id }}", "ng-if" => "friend.online == true", "ng-click" => "open_chat(friend)" }
 			.online.stateBubble
-			%span= "{{ friend.username }}"
-	%p="Other friends"
+			%span {{ friend.username }}
+	%p {{ labels.DISPLAY_CHAT_DISCONNECTED_LABEL }}
 	%ul
 		%li{ "ng-repeat" => "friend in friends | filter:search:strict", "data-id" => "{{ friend.id }}", "ng-if" => "friend.online == false", "ng-click" => "open_chat(friend)" }
 			.offline.stateBubble
-			%span= "{{ friend.username }}"
+			%span {{ friend.username }}
 	%hr
-	%input{:type => 'text', :placeholder => 'Search a friend', "ng-model" => "search.username"}
+	%input{:type => 'text', :placeholder => "{{ labels.DISPLAY_CHAT_PLACEHOLDER_INPUT_LABEL }}", "ng-model" => "search.username"}

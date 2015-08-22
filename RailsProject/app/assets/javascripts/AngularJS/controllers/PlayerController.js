@@ -102,7 +102,7 @@ SoonzikApp.controller("PlayerCtrl", ["$scope", "$rootScope", "HTTPService", "Not
 	    	}
   			$scope.loading = false;
 	    }, function(error) {
-	    	NotificationService.error("Error : Can't get your playlist");
+	    	NotificationService.error($rootScope.labels.FILE_PLAYER_FIND_PLAYLIST_ERROR_MESSAGE);
 	    });
   	}
   }
@@ -333,10 +333,10 @@ SoonzikApp.controller("PlayerCtrl", ["$scope", "$rootScope", "HTTPService", "Not
   				}
   			}
   		}, function(error) {
-  			NotificationService.error("Error while deleting the playlist : " + playlist.name);
+  			NotificationService.error($rootScope.labels.FILE_PLAYER_DELETE_PLAYLIST_ERROR_MESSAGE + playlist.name);
   		});
   	}, function(error) {
-  		NotificationService.error("Error while deleting the playlist : " + playlist.name);
+  		NotificationService.error($rootScope.labels.FILE_PLAYER_DELETE_PLAYLIST_ERROR_MESSAGE + playlist.name);
   	});
   }
 
@@ -394,10 +394,10 @@ SoonzikApp.controller("PlayerCtrl", ["$scope", "$rootScope", "HTTPService", "Not
   				}
   			}
   		}, function(error) {
-  			NotificationService.error("Error while deleting the music from the playlist");
+  			NotificationService.error($rootScope.labels.FILE_PLAYER_REMOVE_FROM_PLAYLIST_ERROR_MESSAGE);
   		});
   	}, function(error) {
-  		NotificationService.error("Error while deleting the music from the playlist");
+  		NotificationService.error($rootScope.labels.FILE_PLAYER_REMOVE_FROM_PLAYLIST_ERROR_MESSAGE);
   	})
   }
 
@@ -431,10 +431,10 @@ SoonzikApp.controller("PlayerCtrl", ["$scope", "$rootScope", "HTTPService", "Not
           playlist.duration = 0;
           $scope.myPlaylists.push(playlist);
         }, function(error) {
-          NotificationService.error("Error while saving a new music in the playlist");
+          NotificationService.error($rootScope.labels.FILE_PLAYER_SAVE_IN_PLAYLIST_ERROR_MESSAGE);
         });
       }, function(error) {
-        NotificationService.error("Error while saving a new music in the playlist");
+        NotificationService.error($rootScope.labels.FILE_PLAYER_SAVE_IN_PLAYLIST_ERROR_MESSAGE);
       });
     }
   }
@@ -450,7 +450,7 @@ SoonzikApp.controller("PlayerCtrl", ["$scope", "$rootScope", "HTTPService", "Not
       SecureAuth.securedTransaction(function(key, user_id) {
         $scope.play(HTTPService.getMP3musicURL(music.id, [{ key: "user_id", value: user_id}, { key: "secureKey", value: key }]));
       }, function(error) {
-        NotificationService.error("Error while loading the music : " + $scope.playlist[$scope.indexPlaylist].title);
+        NotificationService.error($rootScope.labels.FILE_PLAYER_PLAY_MUSIC_ERROR_MESSAGE + $scope.playlist[$scope.indexPlaylist].title);
       });
       if ($scope.geoloc) {
         SecureAuth.securedTransaction(function(key, user_id) {
@@ -468,10 +468,10 @@ SoonzikApp.controller("PlayerCtrl", ["$scope", "$rootScope", "HTTPService", "Not
           }
           HTTPService.addListening(params).then(function(response) {
           }, function(error) {
-            NotificationService.error("Can't add a music for geolocation")
+            NotificationService.error($rootScope.labels.FILE_PLAYER_GEOLOC_MUSIC_ERROR_MESSAGE)
           });
         }, function(error) {
-          NotificationService.error("Error while loading the music : " + $scope.playlist[$scope.indexPlaylist].title);
+          NotificationService.error($rootScope.labels.FILE_PLAYER_PLAY_MUSIC_ERROR_MESSAGE + $scope.playlist[$scope.indexPlaylist].title);
         });
       }
     } else {
@@ -528,10 +528,10 @@ SoonzikApp.controller("PlayerCtrl", ["$scope", "$rootScope", "HTTPService", "Not
             saveMusicInPlaylist(playlist, $scope.playlist[i]);
           }
         }, function(error) {
-          NotificationService.error("Error while saving a new music in the playlist");
+          NotificationService.error($rootScope.labels.FILE_PLAYER_SAVE_IN_PLAYLIST_ERROR_MESSAGE);
         });
       }, function(error) {
-        NotificationService.error("Error while saving a new music in the playlist");
+        NotificationService.error($rootScope.labels.FILE_PLAYER_SAVE_IN_PLAYLIST_ERROR_MESSAGE);
       });
       $scope.more.pop = false;
     }
@@ -548,10 +548,10 @@ SoonzikApp.controller("PlayerCtrl", ["$scope", "$rootScope", "HTTPService", "Not
       HTTPService.addToPlaylist(parameters).then(function(response) {
         playlist.duration += music.obj.duration;
       }, function(error) {
-        NotificationService.error("Error while saving a new music in the playlist");
+        NotificationService.error($rootScope.labels.FILE_PLAYER_SAVE_IN_PLAYLIST_ERROR_MESSAGE);
       });
     }, function(error) {
-      NotificationService.error("Error while saving a new music in the playlist");
+      NotificationService.error($rootScope.labels.FILE_PLAYER_SAVE_IN_PLAYLIST_ERROR_MESSAGE);
     });
   }
 

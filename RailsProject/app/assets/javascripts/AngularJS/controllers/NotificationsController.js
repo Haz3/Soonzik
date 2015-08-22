@@ -39,11 +39,11 @@ SoonzikApp.controller('NotifsCtrl', ['$scope', 'SecureAuth', 'HTTPService', 'Not
 
 	$scope.createContent = function(notif) {
 		if (notif.notif_type == "tweet") {
-			return notif.from.username + " has tweeted something to you";
+			return notif.from.username + $rootScope.labels.FILE_NOTIFICATION_TWEET_NOTIF_MESSAGE;
 		} else if (notif.notif_type == "friend") {
-			return notif.from.username + " has added you as friend";
+			return notif.from.username + $rootScope.labels.FILE_NOTIFICATION_FRIEND_NOTIF_MESSAGE;
 		} else {
-			return notif.from.username + " follow you";
+			return notif.from.username + $rootScope.labels.FILE_NOTIFICATION_FOLLOW_NOTIF_MESSAGE;
 		}
 	}
 
@@ -52,10 +52,10 @@ SoonzikApp.controller('NotifsCtrl', ['$scope', 'SecureAuth', 'HTTPService', 'Not
 			HTTPService.readNotif(data[index].id, { secureKey: key, user_id: user_id }).then(function(response) {
 				$rootScope.$broadcast('notif:read', data[index].id);
 			}, function(error) {
-				NotificationService.error("Can't mark your notification as read");
+				NotificationService.error($rootScope.labels.FILE_NOTIFICATION_ASREAD_NOTIF_ERROR_MESSAGE);
 			});
 		}, function(error) {
-			NotificationService.error("Can't mark your notification as read");
+			NotificationService.error($rootScope.labels.FILE_NOTIFICATION_ASREAD_NOTIF_ERROR_MESSAGE);
 		});
 	}
 
@@ -73,7 +73,7 @@ SoonzikApp.controller('NotifsCtrl', ['$scope', 'SecureAuth', 'HTTPService', 'Not
 					$scope.notifications = $scope.notifications.concat(response.data.content);
 					$scope.loadingNewNotifs = false;
 				}, function(error) {
-					NotificationService.error("An error occured, can't get more notifications. Try Later.");
+					NotificationService.error($rootScope.labels.FILE_NOTIFICATION_MORE_NOTIF_ERROR_MESSAGE);
 				});
 			});
 		}

@@ -171,11 +171,11 @@ SoonzikApp.controller('ChatCtrl', ['$scope', 'SecureAuth', 'HTTPService', '$time
 						r_secureLoop(index + 1);
 					else
 						return;
-					$scope.message[$scope.onWindows[index].friend.username] = "An error occured during the loading";
+					$scope.message[$scope.onWindows[index].friend.username] = $rootScope.labels.FILE_CHAT_GET_MESSAGE_ERROR_MESSAGE;
 				});
 			}, function(error) {
 				$scope.onWindows[index].loading = false;
-				$scope.message[$scope.onWindows[index].friend.username] = "An error occured during the loading";
+				$scope.message[$scope.onWindows[index].friend.username] = $rootScope.labels.FILE_CHAT_GET_MESSAGE_ERROR_MESSAGE;
 			});
 		}
 
@@ -351,11 +351,11 @@ SoonzikApp.controller('ChatCtrl', ['$scope', 'SecureAuth', 'HTTPService', '$time
 						$scope.message[friend.username].messagesText = newArray.concat($scope.message[friend.username].messagesText);
 					}, 1000);
 				}, function(error) {
-					$scope.message[friend.username].messagesText.push({extern: true, value: "An error occured during the loading"});
+					$scope.message[friend.username].messagesText.push({extern: true, value: $rootScope.labels.FILE_CHAT_GET_MESSAGE_ERROR_MESSAGE});
 					friendWindow.loading = false;
 				});
 			}, function(error) {
-				$scope.message[friend.username].messagesText.push({extern: true, value: "An error occured during the loading"});
+				$scope.message[friend.username].messagesText.push({extern: true, value: $rootScope.labels.FILE_CHAT_GET_MESSAGE_ERROR_MESSAGE});
 				friendWindow.loading = false;
 			});
 		}

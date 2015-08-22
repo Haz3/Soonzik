@@ -49,7 +49,7 @@ SoonzikApp.controller('AlbumsCtrl', ['$scope', "$routeParams", 'SecureAuth', 'HT
 						}
 					}
 				}, function(error) {
-					NotificationService.error("Error while loading your notes");
+					NotificationService.error($rootScope.labels.FILE_ALBUM_GET_NOTES_ERROR_MESSAGE);
 				});
 
 				if ($scope.user) {
@@ -60,7 +60,7 @@ SoonzikApp.controller('AlbumsCtrl', ['$scope', "$routeParams", 'SecureAuth', 'HT
 			    		$scope.myPlaylists[i].original_check = false;
 			    	}
 					}, function(error) {
-						NotificationService.error("Error while deleting the playlist : " + playlist.name);
+						NotificationService.error($rootScope.labels.FILE_ALBUM_FIND_PLAYLIST_ERROR_MESSAGE + playlist.name);
 					});
 				}
 			}
@@ -76,7 +76,7 @@ SoonzikApp.controller('AlbumsCtrl', ['$scope', "$routeParams", 'SecureAuth', 'HT
 
 			$scope.loading = false;
 		}, function(error) {
-			NotificationService.error("Error while loading the album");
+			NotificationService.error($rootScope.labels.FILE_ALBUM_GET_ALBUM_ERROR_MESSAGE);
 		});
 	}
 
@@ -102,17 +102,17 @@ SoonzikApp.controller('AlbumsCtrl', ['$scope', "$routeParams", 'SecureAuth', 'HT
 				playlist_id: playlist.id
   		};
   		HTTPService.addToPlaylist(parameters).then(function(response) {
-  			NotificationService.success("The music '" + music.title + "' has been added to the playlist");
+  			NotificationService.success($rootScope.labels.FILE_ALBUM_ADD_PLAYLIST_NOTIF_SUCCESS_PART_ONE + music.title + $rootScope.labels.FILE_ALBUM_ADD_PLAYLIST_NOTIF_SUCCESS_PART_TWO);
   			$rootScope.$broadcast("player:addToPlaylist", { playlist: playlist, music: music });
   			$scope.selectedMusic = false;
   			$scope.tooltip = false;
   			playlist.original_check = true;
   			playlist.check = true;
   		}, function(error) {
-  			NotificationService.error("Error while saving a new music in the playlist");
+  			NotificationService.error($rootScope.labels.FILE_ALBUM_ADD_PLAYLIST_ERROR_MESSAGE);
   		});
   	}, function(error) {
-  		NotificationService.error("Error while saving a new music in the playlist");
+  		NotificationService.error($rootScope.labels.FILE_ALBUM_ADD_PLAYLIST_ERROR_MESSAGE);
   	});
   }
 
@@ -129,10 +129,10 @@ SoonzikApp.controller('AlbumsCtrl', ['$scope', "$routeParams", 'SecureAuth', 'HT
 				music.note = music.goldenStars;
 				$scope.goldenLock = false;
 			}, function(error) {
-				NotificationService.error("Error while rating the music, please try later.");
+				NotificationService.error($rootScope.labels.FILE_ALBUM_SET_NOTE_ERROR_MESSAGE);
 			});
 		}, function(error) {
-			NotificationService.error("Error while rating the music, please try later.");
+			NotificationService.error($rootScope.labels.FILE_ALBUM_SET_NOTE_ERROR_MESSAGE);
 		});
 	}
 
@@ -192,7 +192,7 @@ SoonzikApp.controller('AlbumsCtrl', ['$scope', "$routeParams", 'SecureAuth', 'HT
   		$scope.commentariesOffset = $scope.commentaries.length;
 			$scope.commentLoading = false;
   	}, function(error) {
-  		NotificationService.error("Error while loading commentaries");
+  		NotificationService.error($rootScope.labels.FILE_ALBUM_LOAD_COMMENT_ERROR_MESSAGE);
   	});
   }
 
@@ -205,10 +205,10 @@ SoonzikApp.controller('AlbumsCtrl', ['$scope', "$routeParams", 'SecureAuth', 'HT
 				$scope.commentariesOffset++;
 				$scope.comment.value = "";
 			}, function (responseError) {
-				NotificationService.error("Error while saving your comment, please try later");
+				NotificationService.error($rootScope.labels.FILE_ALBUM_SEND_COMMENT_ERROR_MESSAGE);
 			});
 		}, function(error) {
-			NotificationService.error("Error while saving your comment, please try later");
+			NotificationService.error($rootScope.labels.FILE_ALBUM_SEND_COMMENT_ERROR_MESSAGE);
 		});
 
   	

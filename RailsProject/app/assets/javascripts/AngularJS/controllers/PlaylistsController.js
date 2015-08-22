@@ -32,7 +32,7 @@ SoonzikApp.controller('PlaylistsCtrl', ['$scope', "$rootScope", "$routeParams", 
 				}
 			}
 		} else {
-			NotificationService.error("Can't load this playlist");
+			NotificationService.error($rootScope.labels.FILE_PLAYLIST_BAD_ARGUMENT_ERROR_MESSAGE);
 		}
 
 		if ($scope.user) {
@@ -42,7 +42,7 @@ SoonzikApp.controller('PlaylistsCtrl', ['$scope', "$rootScope", "$routeParams", 
 	    		$scope.myPlaylists[i].check = false;
 	    	}
   		}, function(error) {
-  			NotificationService.error("Error while deleting the playlist : " + playlist.name);
+  			NotificationService.error($rootScope.labels.FILE_PLAYLIST_FIND_PLAYLIST_ERROR_MESSAGE + playlist.name);
   		});
 		}
 
@@ -53,7 +53,7 @@ SoonzikApp.controller('PlaylistsCtrl', ['$scope', "$rootScope", "$routeParams", 
 	var loadMusics = function() {
 		if ($scope.tmp) {
 			$scope.playlist.id = null;
-			$scope.playlist.name = "Temporary Playlist";
+			$scope.playlist.name = $rootScope.labels.FILE_PLAYLIST_TMP_NAME_LABEL;
 			for (var i = 0 ; i < $scope.id.length ; i++) {
 				getMusic($scope.id[i], i);
 			}
@@ -62,7 +62,7 @@ SoonzikApp.controller('PlaylistsCtrl', ['$scope', "$rootScope", "$routeParams", 
 				$scope.playlist = response.data.content;
 				$scope.loading = false;
 			}, function(error) {
-				NotificationService.error("Error while loading information of the playlist");
+				NotificationService.error($rootScope.labels.FILE_PLAYLIST_GET_PLAYLIST_ERROR_MESSAGE);
 			});
 		}
 	}
@@ -74,7 +74,7 @@ SoonzikApp.controller('PlaylistsCtrl', ['$scope', "$rootScope", "$routeParams", 
 				$scope.loading = false;
 			}
 		}, function(error) {
-			NotificationService.error("Error while loading information of the music number " + i);
+			NotificationService.error($rootScope.labels.FILE_PLAYLIST_GET_MUSIC_ERROR_MESSAGE + i);
 		});
 	}
 
@@ -165,10 +165,10 @@ SoonzikApp.controller('PlaylistsCtrl', ['$scope', "$rootScope", "$routeParams", 
   			$rootScope.$broadcast("player:newPlaylist", pl);
   			$scope.tooltip = false;
   		}, function(error) {
-  			NotificationService.error("Error while saving a new playlist");
+  			NotificationService.error($rootScope.labels.FILE_PLAYLIST_SAVE_PLAYLIST_ERROR_MESSAGE);
   		});
   	}, function(error) {
-  		NotificationService.error("Error while saving a new playlist");
+  		NotificationService.error($rootScope.labels.FILE_PLAYLIST_SAVE_PLAYLIST_ERROR_MESSAGE);
   	});
   }
 
@@ -203,10 +203,10 @@ SoonzikApp.controller('PlaylistsCtrl', ['$scope', "$rootScope", "$routeParams", 
 		  			$scope.tooltip = false;
 		  			playlist.check = false;
 		  		}, function(error) {
-		  			NotificationService.error("Error while saving a new music in the playlist");
+		  			NotificationService.error($rootScope.labels.FILE_PLAYLIST_NEW_MUSIC_ERROR_MESSAGE);
 		  		});
 		  	}, function(error) {
-		  		NotificationService.error("Error while saving a new music in the playlist");
+		  		NotificationService.error($rootScope.labels.FILE_PLAYLIST_NEW_MUSIC_ERROR_MESSAGE);
 		  	});
   	}
   }

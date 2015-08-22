@@ -1,4 +1,4 @@
-SoonzikApp.controller('SearchCtrl', ['$scope', "$routeParams", "HTTPService", "NotificationService", "$location", function ($scope, $routeParams, HTTPService, NotificationService, $location) {
+SoonzikApp.controller('SearchCtrl', ['$scope', "$routeParams", "HTTPService", "NotificationService", "$location", "$rootScope", function ($scope, $routeParams, HTTPService, NotificationService, $location, $rootScope) {
 
 	$scope.searchParam = {
 		value: $routeParams.value
@@ -32,7 +32,7 @@ SoonzikApp.controller('SearchCtrl', ['$scope', "$routeParams", "HTTPService", "N
 			$scope.result = response.data.content;
 			$scope.loading = false;
 		}, function(error) {
-			NotificationService.error("An error occured while loading the results of your search");
+			NotificationService.error($rootScope.labels.FILE_SEARCH_REQUEST_ERROR_MESSAGE);
 		});
 	}
 
