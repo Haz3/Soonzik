@@ -176,6 +176,12 @@ SoonzikApp.factory('HTTPService', ['$http', '$location', 'Upload', function ($ht
     },
     readNotif: function(id, parameters) {
       return $http.post("http://api." + url + "/notifications/" + id + "/read", parameters);
+    },
+    friend: function(parameters) {
+      return $http.post("http://api." + url + "/users/addfriend", parameters);
+    },
+    unfriend: function(parameters) {
+      return $http.post("http://api." + url + "/users/delfriend", parameters);
     }
   }
 }]);

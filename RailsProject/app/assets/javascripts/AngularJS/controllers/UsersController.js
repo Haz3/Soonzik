@@ -51,6 +51,7 @@ SoonzikApp.controller('UsersCtrl', ['$scope', "$routeParams", 'SecureAuth', 'HTT
 		if (current_user.id != null && current_user.token != null && current_user.username != null) {
 			$scope.user = current_user;
 			$scope.user.followers = [];
+			$scope.user.friends = [];
 		}
 		var id = null;
 
@@ -158,11 +159,32 @@ SoonzikApp.controller('UsersCtrl', ['$scope', "$routeParams", 'SecureAuth', 'HTT
 					NotificationService.error("An error occured while loading the followers of this profile");
 				});
 
+				HTTPService.getFriends(id).then(function(friendsInformation) {
+					/*- Begin getFollowers -*/
+
+					// Load the followers of the user
+					$scope.show.user.friends = friendsInformation.data.content;
+
+					// remove loading animation
+					$scope.loading = false;
+
+					/*- End getFollowers -*/
+				}, function(error) {
+					// error management to do
+					NotificationService.error("An error occured while loading the friends of this profile");
+				});
+
 				/* get our follows (for the follow button) */
 				if ($scope.user != false) {
 					HTTPService.getFollows($scope.user.id).then(function(followersInformation) {
 						// Load the followers of the user
 						$scope.user.followers = followersInformation.data.content;
+					}, function(error) {
+						NotificationService.error("An error occured while loading the followers of your profile");
+					});
+					HTTPService.getFriends($scope.user.id).then(function(friendsInformation) {
+						// Load the followers of the user
+						$scope.user.friends = friendsInformation.data.content;
 					}, function(error) {
 						NotificationService.error("An error occured while loading the followers of your profile");
 					});
@@ -389,6 +411,26 @@ SoonzikApp.controller('UsersCtrl', ['$scope', "$routeParams", 'SecureAuth', 'HTT
 		}
 	}
 
+	$scope.friend = function() {
+		if ($scope.user != false) {
+			SecureAuth.securedTransaction(function (key, user_id) {
+				var parameters = {
+					secureKey: key,
+					user_id: user_id,
+					friend_id: $scope.show.user.id
+				};
+				HTTPService.friend(parameters).then(function(friendResponse) {
+					$scope.user.friends.push($scope.show.user);
+					$rootScope.$broadcast("chat:friend", $scope.show.user);
+				}, function(error) {
+					NotificationService.error("An error occured while adding a friend");
+				});
+			}, function(error) {
+				NotificationService.error("An error occured while adding a friend");
+			});
+		}
+	}
+
 	$scope.unfollow = function() {
 		if ($scope.user != false) {
 			SecureAuth.securedTransaction(function (key, user_id) {
@@ -405,10 +447,35 @@ SoonzikApp.controller('UsersCtrl', ['$scope', "$routeParams", 'SecureAuth', 'HTT
 						}
 					}
 				}, function(error) {
-					NotificationService.error("An error occured while following an user");
+					NotificationService.error("An error occured while unfollowing an user");
 				});
 			}, function(error) {
-				NotificationService.error("An error occured while following an user");
+				NotificationService.error("An error occured while unfollowing an user");
+			});
+		}
+	}
+
+	$scope.unfriend = function() {
+		if ($scope.user != false) {
+			SecureAuth.securedTransaction(function (key, user_id) {
+				var parameters = {
+					secureKey: key,
+					user_id: user_id,
+					friend_id: $scope.show.user.id
+				};
+				HTTPService.unfriend(parameters).then(function(friendResponse) {
+					$rootScope.$broadcast("chat:unfriend", $scope.show.user);
+					for (var i = 0; i < $scope.user.friends.length ; i++) {
+						if ($scope.user.friends[i].id == $scope.show.user.id) {
+							$scope.user.friends.splice(i, 1);
+							break;
+						}
+					}
+				}, function(error) {
+					NotificationService.error("An error occured while removing a friend");
+				});
+			}, function(error) {
+				NotificationService.error("An error occured while removing a friend");
 			});
 		}
 	}
@@ -469,15 +536,19 @@ SoonzikApp.controller('UsersCtrl', ['$scope', "$routeParams", 'SecureAuth', 'HTT
 	}
 
 	$scope.setNote = function(music) {
-		SecureAuth.securedTransaction(function (key, user_id) {
-			HTTPService.setMusicNote(music.id, music.goldenStars, { user_id: user_id, secureKey: key }).then(function(response) {
-				music.note = music.goldenStars;
+		if ($scope.user != false) {
+			SecureAuth.securedTransaction(function (key, user_id) {
+				HTTPService.setMusicNote(music.id, music.goldenStars, { user_id: user_id, secureKey: key }).then(function(response) {
+					music.note = music.goldenStars;
+				}, function(error) {
+					NotificationService.error("Error while rating the music, please try later.");
+				});
 			}, function(error) {
 				NotificationService.error("Error while rating the music, please try later.");
 			});
-		}, function(error) {
-			NotificationService.error("Error while rating the music, please try later.");
-		});
+		} else {
+			NotificationService.info("You need to login for this action");
+		}
 	}
 
 	$scope.addToPlaylist = function() {
@@ -640,8 +711,7 @@ SoonzikApp.controller('UsersCtrl', ['$scope', "$routeParams", 'SecureAuth', 'HTT
 
 	$scope.range = function(n) {
 		if (n > 0) {
-			console.log(n);
-			return new Array(n);
+			return new Array(Math.round(n));
 		} else {
 			return [];
 		}
@@ -662,6 +732,16 @@ SoonzikApp.controller('UsersCtrl', ['$scope', "$routeParams", 'SecureAuth', 'HTT
 		if ($scope.user != false) {
 			for (var i = 0; i < $scope.user.followers.length ; i++) {
 				if ($scope.user.followers[i].id == $scope.show.user.id)
+					return true;
+			}
+		}
+		return false;
+	}
+
+	$scope.isaFriend = function() {
+		if ($scope.user != false) {
+			for (var i = 0; i < $scope.user.friends.length ; i++) {
+				if ($scope.user.friends[i].id == $scope.show.user.id)
 					return true;
 			}
 		}

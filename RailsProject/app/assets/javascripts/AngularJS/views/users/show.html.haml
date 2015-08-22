@@ -2,18 +2,18 @@
 	%loading{ "ng-if" => "loading == true" }
 	.row{ "ng-if" => "loading == false" }
 		.background-profil{ "style" => "{{ show.style }}" }
-			.large-2.small-12.columns.large-centered
-				.photo-profil-show.user.large-centered
-					%img.photo-profil-user{ "ng-src" => '{{ "/assets/usersImage/avatars/" + show.user.image }}' }
+			.photo-profil-show
+				%img.photo-profil-user{ "ng-src" => '{{ "/assets/usersImage/avatars/" + show.user.image }}' }
 			.username.text-center
 				%b
 					{{ show.user.username }}
-			.small-2.columns.large-centered.inline
+			.text-center
 				.nb-followers.text-center
-					{{ show.user.followers.length }}
-					Followers
-					.button.tiny.expand.radius{ "ng-if" => "user != false && user.id != show.user.id", "ng-class" => "isaFollower() ? 'success follow' : 'info notfollow'", "ng-click" => "isaFollower() ? unfollow() : follow()" }
+					%p {{ show.user.followers.length }} Followers
+					%span.button.tiny.radius{ "ng-if" => "user != false && user.id != show.user.id", "ng-class" => "isaFollower() ? 'success follow' : 'info notfollow'", "ng-click" => "isaFollower() ? unfollow() : follow()" }
 						{{ isaFollower() ? 'Following' : 'Follow' }}
+					%span.button.tiny.radius{ "ng-if" => "user != false && user.id != show.user.id", "ng-class" => "isaFriend() ? 'success follow' : 'info notfollow'", "ng-click" => "isaFriend() ? unfriend() : friend()" }
+						{{ isaFriend() ? 'Delete Friend' : 'Add Friend' }}
 			.social-network.text-center
 				%a{:href => '{{show.user.facebook}}', "ng-class" => "{ gray: (show.user.facebook == '#') }"}
 					%i.step.fi-social-facebook.size-42
@@ -117,15 +117,16 @@
 					Packs
 				.panel
 					Packs dans lequel est présent l'artiste
-		.row.collapse
-			%h1.subheader
-				Tweets
-			.small-11.columns{ "ng-if" => "user != false" }
-				%input#inputTweet{ type: "text", placeholder: "Tell something !", "ng-model" => "tweet.input", "submit-input" => "sendTweet()" }
-			.small-1.columns.end{ "ng-click" => "sendTweet()", "ng-if" => "user != false" }
-				%a.button.postfix
-					%i.fi-arrow-right
-		%span {{ 140 - tweet.input.length }} characters left
+		%h1.subheader
+			Tweets
+		%div{ "ng-if" => "user != false && show.user.id == user.id" }
+			.row.collapse
+				.small-11.columns{ "ng-if" => "user != false" }
+					%input#inputTweet{ type: "text", placeholder: "Tell something !", "ng-model" => "tweet.input", "submit-input" => "sendTweet()" }
+				.small-1.columns.end{ "ng-click" => "sendTweet()", "ng-if" => "user != false" }
+					%a.button.postfix
+						%i.fi-arrow-right
+			%span {{ 140 - tweet.input.length }} characters left
 		.tweets{ "on-scroll" => "reloadTweet()", "scroll-position" => "'bottom'" }
 			.tweet.clearfix{ "ng-repeat" => "tweet in show.tweets.my" }
 				.small-1.columns

@@ -1,4 +1,4 @@
-SoonzikApp.controller('ChatCtrl', ['$scope', 'SecureAuth', 'HTTPService', '$timeout', function ($scope, SecureAuth, HTTPService, $timeout) {
+SoonzikApp.controller('ChatCtrl', ['$scope', 'SecureAuth', 'HTTPService', '$timeout', "$rootScope", function ($scope, SecureAuth, HTTPService, $timeout, $rootScope) {
 	var sizeChatWindow = 260;
 
 	$scope.available = false;
@@ -199,6 +199,20 @@ SoonzikApp.controller('ChatCtrl', ['$scope', 'SecureAuth', 'HTTPService', '$time
 				for (var index in $scope.friends) {
 					$scope.friends[index].online = false;
 				}
+				$scope.$on('chat:friend', function(event, data) {
+					var friend = JSON.parse(JSON.stringify(data));
+					friend.online = false;
+					$scope.friends.push(friend);
+					dispatcher.trigger('who_is_online', {});
+				});
+				$scope.$on('chat:unfriend', function(event, data) {
+					for (var i = 0 ; i < $scope.friends.length ; i--) {
+						if ($scope.friends[i].id == data.id) {
+							$scope.friends.splice(i, 1);
+							break;
+						}
+					}
+				});
 				listFriendsCall = true;
 			}, function(error) {
 				// TODO

@@ -252,6 +252,10 @@ music {
 	padding: 5px;
 	margin-bottom: 60px;
 
+	.button {
+		margin-bottom: 0px;
+	}
+
 	&.toolleft {
 		left: 20px;
 		right: initial;
@@ -300,6 +304,10 @@ div.reveal-modal-bg {
 
 .pointer {
 	cursor: pointer;
+}
+
+ul .no-bullet {
+	margin-bottom: 5px;
 }
 
 #error_explanation {

@@ -15,12 +15,19 @@ SoonzikApp.controller('HeaderCtrl', ['$scope', "$routeParams", "$location", "Sec
 			}
 		});
 
+		var current_user = SecureAuth.getCurrentUser();
+		if (current_user.id != null && current_user.token != null && current_user.username != null) {
+			$scope.user = current_user;
+		}
+
 		$scope.$on('user:changeImg', function(event, data) {
 			$("#profilePicture").attr("src", "/assets/usersImage/avatars/" + data.url)
 		});
 
 		
-		$scope.newNotif(true);
+		if ($scope.user) {
+			$scope.newNotif(true);
+		}
 	}
 
 	$scope.switchMenu = function() {
