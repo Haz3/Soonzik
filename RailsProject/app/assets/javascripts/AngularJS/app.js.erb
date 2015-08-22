@@ -95,6 +95,7 @@ SoonzikApp.config(function(uiGmapGoogleMapApiProvider) {
 
 SoonzikApp.run(['$route', '$rootScope', '$location', function ($route, $rootScope, $location) {
 	var original = $location.path;
+	
 	$location.path = function (path, reload) {
 		if (reload === false) {
 			var lastRoute = $route.current;
@@ -105,6 +106,8 @@ SoonzikApp.run(['$route', '$rootScope', '$location', function ($route, $rootScop
 		}
 		return original.apply($location, [path]);
 	};
+
+	$rootScope.labels = labels;
 }]);
 
 SoonzikApp.config(function(FacebookProvider) {

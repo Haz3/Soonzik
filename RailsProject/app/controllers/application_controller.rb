@@ -5,6 +5,7 @@ class ApplicationController < ActionController::Base
   before_action :ensure_signup_complete
   before_action :setControllerName
   before_action :cookieMe
+  before_action :specifyLanguage
 
   before_filter :configure_permitted_parameters, if: :devise_controller?
 
@@ -34,6 +35,22 @@ class ApplicationController < ActionController::Base
       cookies[:user_username] = current_user.username
     elsif !user_signed_in?() && cookies.has_key?(:user)
       cookies.delete :user
+    end
+  end
+
+  # Prepare the pages for the multi-language
+  def specifyLanguage
+    l = Language.all
+    l_list = []
+    l.each do |language|
+      l_list << language.abbreviation
+    end
+    if (user_signed_in?)
+      @languageSelected = current_user.language
+    elsif (cookies.has_key?(:language) && l_list.include?(cookies[:language]))
+      @languageSelected = cookies[:language]
+    else
+      @languageSelected = "EN"
     end
   end
 

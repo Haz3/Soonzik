@@ -4,10 +4,11 @@
 		%title= "SoonZik | Welcome"
 		%base{href: "/"}
 		%meta{ :name => "viewport", :content => "width=device-width, initial-scale=1.0" }
-		= stylesheet_link_tag		'application', media: 'all', 'data-turbolinks-track' => true
-		= javascript_include_tag 'application', 'data-turbolinks-track' => true
-		= javascript_include_tag 'websocket_rails/main', 'data-turbolinks-track' => true
+		= stylesheet_link_tag		'application', media: 'all'
+		= javascript_include_tag 'application'
+		= javascript_include_tag 'websocket_rails/main'
 		= javascript_include_tag "vendor/modernizr"
+		= javascript_include_tag "languages/#{@languageSelected}_file"
 		= csrf_meta_tags
 
 	%body{ "ng-app" => "SoonzikApp" }
@@ -31,29 +32,29 @@
 						%ul.toAppend.no-bullet{ "ng-class" => "{ open: menuOpen }" }
 							%li.text-center
 								%a{ href: notifications_url }
-									({{ notifs.length }}) Notification{{ (notifs.length > 1) ? 's' : '' }}
+									({{ notifs.length }}) {{ (notifs.length > 1) ? labels.DISPLAY_MENU_NOTIFICATION_LABEL_PLURAL : labels.DISPLAY_MENU_NOTIFICATION_LABEL_SINGULAR }}
 							%li.clearfix
 								=image_tag ("usersImage/avatars/" + current_user.image), :class => "photo-profile left", id: "profilePicture"
 								%p
 									= link_to(UsersHelper.validate_username_for_oauth(current_user), user_path(current_user), :class => "profile")
 							%li
-								= link_to('Edit profile', edit_user_path(current_user))
+								= link_to('{{ labels.DISPLAY_MENU_PROFILE_EDITION_LABEL }}', edit_user_path(current_user))
 							%li
-								= link_to('News', news_index_path)
+								= link_to('{{ labels.DISPLAY_MENU_NEWS_LABEL }}', news_index_path)
 							%li
-								= link_to('Explorer', explorer_path)
+								= link_to('{{ labels.DISPLAY_MENU_EXPLORER_LABEL }}', explorer_path)
 							%li
-								= link_to('Packs', packs_path)
+								= link_to('{{ labels.DISPLAY_MENU_PACKS_LABEL }}', packs_path)
 							%li
-								= link_to('Battles', battles_path)
+								= link_to('{{ labels.DISPLAY_MENU_BATTLES_LABEL }}', battles_path)
 							%li
-								= link_to('Friends', 'http://lvh.me:3000/users/:id/friendlist')
+								= link_to('{{ labels.DISPLAY_MENU_FRIENDS_LABEL }}', 'http://lvh.me:3000/users/:id/friendlist')
 							%li
-								= link_to('Logout', destroy_user_session_path, :method => :delete)
+								= link_to('{{ labels.DISPLAY_MENU_LOGOUT_LABEL }}', destroy_user_session_path, :method => :delete)
 					- else
 						.toAppend{ "ng-class" => "{ open: menuOpen }" }
-							%a.button{:href => new_user_registration_path, :target => "_self" } Sign Up
-							%a.button.alert{:href => new_user_session_path, :target => "_self" } Log In
+							%a.button{:href => new_user_registration_path, :target => "_self" } {{ labels.DISPLAY_MENU_SIGNUP_LABEL }}
+							%a.button.alert{:href => new_user_session_path, :target => "_self" } {{ labels.DISPLAY_MENU_LOGIN_LABEL }}
 		%main.row
 			- if notice
 				%small.error= notice
