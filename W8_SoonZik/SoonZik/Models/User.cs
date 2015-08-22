@@ -19,6 +19,7 @@ namespace SoonZik.Models
         public string phoneNumber { get; set; }
         public string birthday { get; set; }
         public string description { get; set; }
+        public string background { get; set; }
         public string language { get; set; }
         public string image { get; set; }
         public List<User> friends { get; set; }

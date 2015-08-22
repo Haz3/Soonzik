@@ -12,9 +12,12 @@ namespace SoonZik.Models
         public string title { get; set; }
         public User user { get; set; }
         public int duration { get; set; }
+        public Album album { get; set; }
+        public List<Genre> genres { get; set; }
+        public List<Description> descriptions { get; set; }
         public double price { get; set; }
+        public double getAverageNote { get; set; }
         public string file { get; set; }
-        public string flac_file { get; set; }
-        public bool is_limited { get; set; }
+        public bool limited { get; set; }
     }
 }

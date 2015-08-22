@@ -124,12 +124,16 @@
     <Compile Include="Models\Description.cs" />
     <Compile Include="Models\Genre.cs" />
     <Compile Include="Models\Influence.cs" />
+    <Compile Include="Models\Listening.cs" />
     <Compile Include="Models\Music.cs" />
     <Compile Include="Models\News.cs" />
     <Compile Include="Models\Newstexts.cs" />
+    <Compile Include="Models\Notification.cs" />
     <Compile Include="Models\Pack.cs" />
     <Compile Include="Models\Playlist.cs" />
+    <Compile Include="Models\Search.cs" />
     <Compile Include="Models\User.cs" />
+    <Compile Include="Models\Vote.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tools\Get_coment.cs" />
     <Compile Include="Tools\Http_get.cs" />
@@ -146,15 +150,18 @@
     <Compile Include="ViewModels\Command\EditUserCommand.cs" />
     <Compile Include="ViewModels\Command\FollowCommand.cs" />
     <Compile Include="ViewModels\Command\RemoveFriendCommand.cs" />
+    <Compile Include="ViewModels\Command\SearchCommand.cs" />
     <Compile Include="ViewModels\Command\SignupCommand.cs" />
     <Compile Include="ViewModels\Command\UnfollowCommand.cs" />
     <Compile Include="ViewModels\CommentViewModel.cs" />
     <Compile Include="ViewModels\ConcertViewModel.cs" />
     <Compile Include="ViewModels\ConnectionViewModel.cs" />
     <Compile Include="ViewModels\GenreViewModel.cs" />
+    <Compile Include="ViewModels\ListeningViewModel.cs" />
     <Compile Include="ViewModels\MusicViewModel.cs" />
     <Compile Include="ViewModels\NewsViewModel.cs" />
     <Compile Include="ViewModels\PackViewModel.cs" />
+    <Compile Include="ViewModels\SearchViewModel.cs" />
     <Compile Include="ViewModels\SignupViewModel.cs" />
     <Compile Include="ViewModels\UserEditViewModel.cs" />
     <Compile Include="Views\Album.xaml.cs">
@@ -165,6 +172,9 @@
     </Compile>
     <Compile Include="Views\Genre.xaml.cs">
       <DependentUpon>Genre.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Listenings.xaml.cs">
+      <DependentUpon>Listenings.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Music.xaml.cs">
       <DependentUpon>Music.xaml</DependentUpon>
@@ -297,6 +307,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Genre.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Listenings.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

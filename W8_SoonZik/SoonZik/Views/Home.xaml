@@ -45,9 +45,17 @@
             <Button x:Name="explorer_btn" x:Uid="explorer_btn" Content="Explorer" HorizontalAlignment="Left" VerticalAlignment="Top" Height="72" Width="203" Background="#FF27AAE1" FontFamily="Berlin Sans FB Demi" FontSize="40" BorderBrush="White" Click="explorer_btn_Click" Foreground="White" Margin="10,5,10,0"/>
             <Button x:Name="concert_btn" x:Uid="concert_btn" Content="Concert" HorizontalAlignment="Left" VerticalAlignment="Top" Height="72" Width="190" Background="#FF27AAE1" FontFamily="Berlin Sans FB Demi" FontSize="40" BorderBrush="White" Click="concert_btn_Click" Foreground="White" Margin="10,5,10,0"/>
             <Button x:Name="battle_btn" x:Uid="battle_btn" Content="Battle" HorizontalAlignment="Left" VerticalAlignment="Top" Height="72" Width="165" Background="#FF27AAE1" FontFamily="Berlin Sans FB Demi" FontSize="40" BorderBrush="White" Click="battle_btn_Click" Foreground="White" Margin="10,5,10,0"/>
-            <Button x:Name="shop_btn" x:Uid="shop_btn" Content="Magasin" HorizontalAlignment="Left" VerticalAlignment="Top" Height="72" Width="223" Background="#FF27AAE1" FontFamily="Berlin Sans FB Demi" FontSize="40" BorderBrush="White" Click="shop_btn_Click" Foreground="White" Margin="10,5,10,0"/>
+            <!--<Button x:Name="shop_btn" x:Uid="shop_btn" Content="Magasin" HorizontalAlignment="Left" VerticalAlignment="Top" Height="72" Width="223" Background="#FF27AAE1" FontFamily="Berlin Sans FB Demi" FontSize="40" BorderBrush="White" Click="shop_btn_Click" Foreground="White" Margin="10,5,10,0"/>-->
+            <Button x:Name="listenings_btn" x:Uid="listenings_btn" Content="Listenings" HorizontalAlignment="Left" VerticalAlignment="Top" Height="72" Width="223" Background="#FF27AAE1" FontFamily="Berlin Sans FB Demi" FontSize="40" BorderBrush="White" Click="listenings_btn_Click" Foreground="White" Margin="10,5,10,0"/>
             <Button x:Name="audio_player_btn" x:Uid="audio_player_btn" Content="Lecteur Audio" HorizontalAlignment="Left" VerticalAlignment="Top" Height="72" Width="325" Background="#FF27AAE1" FontFamily="Berlin Sans FB Demi" FontSize="40" BorderBrush="White" Click="audio_player_btn_Click" Foreground="White" Margin="10,5,10,0"/>
             <Button x:Name="sign_out" x:Uid="sign_out_btn" Content="Se deconnecter" HorizontalAlignment="Left" VerticalAlignment="Top" Height="68" Width="197" Background="Red" FontFamily="Berlin Sans FB Demi" FontSize="20" BorderBrush="White" Foreground="White" Margin="10,5,10,0" Click="sign_out_Click"/>
+            <StackPanel Width="317" Orientation="Horizontal" VerticalAlignment="Center">
+                <StackPanel.DataContext>
+                    <ViewModels:SearchViewModel/>
+                </StackPanel.DataContext>
+                <TextBox x:Name="search_tb" Text="{Binding search_value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" TextWrapping="Wrap" Width="182"/>
+                <Button x:Name="search_btn" Command="{Binding do_search, Mode=OneWay}" Content="Chercher" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="98"/>
+            </StackPanel>
         </StackPanel>
 
 
