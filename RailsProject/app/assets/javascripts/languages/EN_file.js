@@ -55,25 +55,25 @@ var labels = {
 	FILE_BATTLE_VOTEDTEXT_LABEL: "You voted for this artist",
 	FILE_BATTLE_CANCEL_TEXT_LABEL: "Cancel your old vote and vote for this artist !",
 
-	// Chat View
+	// Chat Controller
 	FILE_CHAT_GET_MESSAGE_ERROR_MESSAGE: "An error occured during the loading",
 
-	// Explorer View
+	// Explorer Controller
 	FILE_EXPLORER_GET_INFLUENCES_ERROR_MESSAGE: "Error while loading the influences",
 	FILE_EXPLORER_GET_GENRE_ERROR_MESSAGE: "Error while loading the genre",
 
-	// Listening View
+	// Listening Controller
 	FILE_LISTENING_AROUND_ERROR_MESSAGE: "Error while loading the music around you",
 	FILE_LISTENING_INPOPUP_LISTENED_LABEL: " listened by ",
 
-	// Notification View
+	// Notification Controller
 	FILE_NOTIFICATION_TWEET_NOTIF_MESSAGE: " has tweeted something to you",
 	FILE_NOTIFICATION_FRIEND_NOTIF_MESSAGE: " has added you as friend",
 	FILE_NOTIFICATION_FOLLOW_NOTIF_MESSAGE: " follow you",
 	FILE_NOTIFICATION_ASREAD_NOTIF_ERROR_MESSAGE: "Can't mark your notification as read",
 	FILE_NOTIFICATION_MORE_NOTIF_ERROR_MESSAGE: "An error occured, can't get more notifications. Try Later.",
 
-	// Player View
+	// Player Controller
 	FILE_PLAYER_FIND_PLAYLIST_ERROR_MESSAGE: "Error : Can't get your playlist",
 	FILE_PLAYER_DELETE_PLAYLIST_ERROR_MESSAGE: "Error while deleting the playlist : ",
 	FILE_PLAYER_REMOVE_FROM_PLAYLIST_ERROR_MESSAGE: "Error while deleting the music from the playlist",
@@ -81,7 +81,7 @@ var labels = {
 	FILE_PLAYER_PLAY_MUSIC_ERROR_MESSAGE: "Error while loading the music : ",
 	FILE_PLAYER_GEOLOC_MUSIC_ERROR_MESSAGE: "Can't add a music for geolocation",
 
-	// Playlist View
+	// Playlist Controller
 	FILE_PLAYLIST_BAD_ARGUMENT_ERROR_MESSAGE: "Can't load this playlist",
 	FILE_PLAYLIST_FIND_PLAYLIST_ERROR_MESSAGE: "Error while deleting the playlist : ",
 	FILE_PLAYLIST_GET_PLAYLIST_ERROR_MESSAGE: "Error while loading information of the playlist",
@@ -90,10 +90,10 @@ var labels = {
 	FILE_PLAYLIST_SAVE_PLAYLIST_ERROR_MESSAGE: "Error while saving a new playlist",
 	FILE_PLAYLIST_NEW_MUSIC_ERROR_MESSAGE: "Error while saving a new music in the playlist",
 
-	// Search View
+	// Search Controller
 	FILE_SEARCH_REQUEST_ERROR_MESSAGE: "An error occured while loading the results of your search",
 
-	// User View
+	// User Controller
 	FILE_USER_MONTHS_INFORMATION: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
 	FILE_USER_FIND_PLAYLIST_ERROR_MESSAGE: "Error while deleting the playlist : ",
 	FILE_USER_GET_NOTES_ERROR_MESSAGE: "Error while loading your notes",
@@ -101,7 +101,7 @@ var labels = {
 	FILE_USER_GET_FOLLOWS_ERROR_MESSAGE: "An error occured while loading the follows of this profile",
 	FILE_USER_GET_FRIENDS_ERROR_MESSAGE: "An error occured while loading the friends of this profile",
 	FILE_USER_GET_PLAYLISTS_ERROR_MESSAGE: "An error occured while loading the playlists of this profile",
-	FILE_USER_PROFILE_ERROR_MESSAGE: "An error occured while loading the playlists of this profile",
+	FILE_USER_PROFILE_ERROR_MESSAGE: "An error occured while loading this profile",
 	FILE_USER_EDITION_ERROR_MESSAGE: "You can't edit this profile : it is not yours",
 	FILE_USER_UPDATE_SUCCESS_MESSAGE: "Profile updated successfully",
 	FILE_USER_ERROR_OCCURED_MESSAGE: "An error occured",
