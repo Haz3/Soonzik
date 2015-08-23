@@ -9,11 +9,11 @@
 					{{ show.user.username }}
 			.text-center
 				.nb-followers.text-center
-					%p {{ show.user.followers.length }} Followers
+					%p {{ show.user.followers.length }} {{ labels.DISPLAY_USER_FOLLOWERS_LABEL }}
 					%span.button.tiny.radius{ "ng-if" => "user != false && user.id != show.user.id", "ng-class" => "isaFollower() ? 'success follow' : 'info notfollow'", "ng-click" => "isaFollower() ? unfollow() : follow()" }
-						{{ isaFollower() ? 'Following' : 'Follow' }}
+						{{ isaFollower() ? labels.DISPLAY_USER_FOLLOWING_LABEL : labels.DISPLAY_USER_FOLLOW_LABEL }}
 					%span.button.tiny.radius{ "ng-if" => "user != false && user.id != show.user.id", "ng-class" => "isaFriend() ? 'success follow' : 'info notfollow'", "ng-click" => "isaFriend() ? unfriend() : friend()" }
-						{{ isaFriend() ? 'Delete Friend' : 'Add Friend' }}
+						{{ isaFriend() ? labels.DISPLAY_USER_DELFRIEND_LABEL : labels.DISPLAY_USER_ADDFRIEND_LABEL }}
 			.social-network.text-center
 				%a{:href => '{{show.user.facebook}}', "ng-class" => "{ gray: (show.user.facebook == '#') }"}
 					%i.step.fi-social-facebook.size-42
@@ -29,9 +29,9 @@
 					%thead.radius
 						%tr
 							%th {{ labels.DISPLAY_USER_TITLE_SONG_LABEL }}
-							%th {( labels.DISPLAY_USER_DURATION_SONG_LABEL )}
-							%th {( labels.DISPLAY_USER_PRICE_SONG_LABEL )}
-							%th {( labels.DISPLAY_USER_RATE_AV_SONG_LABEL )}
+							%th {{ labels.DISPLAY_USER_DURATION_SONG_LABEL }}
+							%th {{ labels.DISPLAY_USER_PRICE_SONG_LABEL }}
+							%th {{ labels.DISPLAY_USER_RATE_AV_SONG_LABEL }}
 							%th 
 							%th 
 					%tbody.radius
@@ -51,7 +51,7 @@
 								%i.fi-plus.pointer{ "ng-click" => "setTooltip(tooltip == false ? song : false)" }
 								.mytooltip.toolright{ "ng-show" => "tooltip == song" }
 									%ul.no-bullet
-										%li.choice{ "ng-if" => "user != false", "ng-click" => "selectMusic(song)" } {( labels.DISPLAY_USER_ADD_PLAYLIST_LABEL )}
+										%li.choice{ "ng-if" => "user != false", "ng-click" => "selectMusic(song)" } {{ labels.DISPLAY_USER_ADD_PLAYLIST_LABEL }}
 										%li.playlistBlock{ "ng-if" => "selectedMusic == song" }
 											%hr
 											%ul.text-left.small-12.playlistList
@@ -96,7 +96,7 @@
 										%i.fi-plus.pointer{ "ng-click" => "setTooltip(tooltip == false ? song : false)" }
 										.mytooltip.toolright{ "ng-show" => "tooltip == song" }
 											%ul.no-bullet
-												%li.choice{ "ng-if" => "user != false", "ng-click" => "selectMusic(song)" } {( labels.DISPLAY_USER_ADD_PLAYLIST_LABEL )}
+												%li.choice{ "ng-if" => "user != false", "ng-click" => "selectMusic(song)" } {{ labels.DISPLAY_USER_ADD_PLAYLIST_LABEL }}
 												%li.playlistBlock{ "ng-if" => "selectedMusic == song" }
 													%hr
 													%ul.text-left.small-12.playlistList
@@ -107,7 +107,7 @@
 															.button.tiny{ "ng-click" => "addToPlaylist()" } {{ labels.DISPLAY_USER_ADD_BUTTON }}
 													%hr
 												%li.choice
-													%music.small-12{ "music-object" => "song", "ng-click" => "setTooltip(false)" } {( labels.DISPLAY_USER_LISTEN_LABEL )}
+													%music.small-12{ "music-object" => "song", "ng-click" => "setTooltip(false)" } {{ labels.DISPLAY_USER_LISTEN_LABEL }}
 												%li
 													.button.tiny{ "ng-click" => "setTooltip(false)" } {{ labels.DISPLAY_USER_CLOSE_BUTTON }}
 						%hr

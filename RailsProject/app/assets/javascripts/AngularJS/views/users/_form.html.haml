@@ -102,7 +102,7 @@
 					.large-4.large-centered
 						%input.button.radius.expand.success{ id: "", type: "button", value: "Save", "ng-click" => "submitForm('user')" }
 				.small-12.clearfix
-					%p {( labels.DISPLAY_USER_FORM_LINKS_LABEL )}
+					%p {{ labels.DISPLAY_USER_FORM_LINKS_LABEL }}
 					.small-12.medium-5.columns
 						%label {{ labels.DISPLAY_USER_FORM_FB_LINK_LABEL }}
 					.small-12.medium-7.columns
@@ -125,15 +125,15 @@
 				%hr
 				.row
 					.small-12.medium-5.columns
-						%label{ for: "numberStreet" } {( labels.DISPLAY_USER_FORM_NUMBER_LABEL )}
+						%label{ for: "numberStreet" } {{ labels.DISPLAY_USER_FORM_NUMBER_LABEL }}
 					.small-12.medium-7.columns
 						%input.radius{ id: "numberStreet", type: "text", "ng-model" => "form.address.numberStreet" }
 					.small-12.medium-5.columns
-						%label{ for: "complement" } {( labels.DISPLAY_USER_FORM_COMPLEMENT_LABEL )}
+						%label{ for: "complement" } {{ labels.DISPLAY_USER_FORM_COMPLEMENT_LABEL }}
 					.small-12.medium-7.columns
 						%input.radius{ id: "complement", type: "text", "ng-model" => "form.address.complement" }
 					.small-12.medium-5.columns
-						%label{ for: "street" } {( labels.DISPLAY_USER_FORM_STREET_LABEL )}
+						%label{ for: "street" } {{ labels.DISPLAY_USER_FORM_STREET_LABEL }}
 					.small-12.medium-7.columns
 						%input.radius{ id: "street", type: "text", "ng-model" => "form.address.street" }
 					.small-12.medium-5.columns
@@ -141,7 +141,7 @@
 					.small-12.medium-7.columns
 						%input.radius{ id: "city", type: "text", "ng-model" => "form.address.city" }
 					.small-12.medium-5.columns
-						%label{ for: "country" } {( labels.DISPLAY_USER_FORM_COUNTRY_LABEL )}
+						%label{ for: "country" } {{ labels.DISPLAY_USER_FORM_COUNTRY_LABEL }}
 					.small-12.medium-7.columns
 						%input.radius{ id: "country", type: "text", "ng-model" => "form.address.country" }
 					.small-12.medium-5.columns
@@ -151,4 +151,4 @@
 				%hr
 				.actions.text-center
 					.large-4.large-centered
-						%input.button.radius.expand.success{ id: "", type: "button", value: "Save", "ng-click" => "submitForm('address')" }
+						%input.button.radius.expand.success{ id: "", type: "button", value: "{{ labels.DISPLAY_USER_SAVE_BUTTON }}", "ng-click" => "submitForm('address')" }

@@ -20,7 +20,7 @@
 				.small-7.columns
 					.row.collapse
 						.small-10.columns.center-h
-							%input.radius#inputSearch{:placeholder => "Search users, musics, albums...", :type => "text", "ng-model" => "search.value" }
+							%input.radius#inputSearch{:placeholder => "{{ labels.DISPLAY_MENU_SEARCH_PLACEHOLDER }}", :type => "text", "ng-model" => "search.value" }
 						.small-2.columns.left.center-h
 							%a.alert.button.expand.radius{:href => "#", "ng-click" => "sendSearch()"}
 								=image_tag "loupe.png", :class => "loupe"

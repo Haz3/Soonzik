@@ -32,6 +32,7 @@ var labels = {
 	DISPLAY_MENU_LOGIN_LABEL: "Connexion",
 	DISPLAY_MENU_LOGOUT_LABEL: "Déconnexion",
 	DISPLAY_MENU_LANGUAGE_SELECTOR_LABEL: "Languages",	// To add
+	DISPLAY_MENU_SEARCH_PLACEHOLDER: "Chercher des utilisateurs, musiques, albums...",
 
 	// Album Controller
 	FILE_ALBUM_GET_NOTES_ERROR_MESSAGE: "Une erreur s'est produit au chargement des notes",
@@ -155,11 +156,12 @@ var labels = {
 	// Player view
 	DISPLAY_PLAYER_CURRENT_PLAYLIST_LABEL: "Liste de lecture courante",
 	DISPLAY_PLAYER_CLEAN_LABEL: "Vider",
+	DISPLAY_PLAYER_MORE_LABEL: "Plus...",
+	DISPLAY_PLAYER_LESS_LABEL: "Moins...",
 	DISPLAY_PLAYER_GEOLOCATION_LABEL: "Geolocalisation",
 	DISPLAY_PLAYER_SHARE_LABEL: "Partager",
 	DISPLAY_PLAYER_SAVE_NEW_PLAYLIST_LABEL: "Sauvegarder comme nouvelle liste de lecture",
 	DISPLAY_PLAYER_SAVE_PLAYLIST_NAME_LABEL: "Sauvegarder la liste de lecture sous :",
-	DISPLAY_PLAYER_SAVE_LABEL: "Sauvegarder",
 	DISPLAY_PLAYER_CLOSE_BUTTON: "Fermer",
 	DISPLAY_PLAYER_TITLE_LABEL: "Titre",
 	DISPLAY_PLAYER_PRICE_LABEL: "Prix",
@@ -174,6 +176,7 @@ var labels = {
 	DISPLAY_PLAYER_SURE_DELETE_BUTTON: "Êtes vous sûre de vouloir supprimer cette liste ?",
 	DISPLAY_PLAYER_YES_BUTTON: "Oui",
 	DISPLAY_PLAYER_NO_BUTTON: "Non",
+	DISPLAY_PLAYER_NEW_PLAYLIST_PLACEHOLDER: "Nouvelle playlist",
 
 	// Playlist view
 	DISPLAY_PLAYER_EMPTY_LABEL: "Cette liste de lecture est vide",
@@ -236,6 +239,7 @@ var labels = {
 	DISPLAY_USER_FORM_CITY_LABEL: "Ville",
 	DISPLAY_USER_FORM_COUNTRY_LABEL: "Pays",
 	DISPLAY_USER_FORM_ZIPCODE_LABEL: "Code Postal",
+	DISPLAY_USER_SAVE_BUTTON: "Sauvegarder",
 
 	// User show view
 	DISPLAY_USER_ARTIST_TOP_LABEL: "Top Musiques",
@@ -255,6 +259,11 @@ var labels = {
 	DISPLAY_USER_MUSICS_LABEL: "musiques",
 	DISPLAY_USER_PLAYLIST_DURATION_LABEL: "Durée (total)",
 	DISPLAY_USER_MORE_LABEL: "Plus...",
+	DISPLAY_USER_FOLLOWERS_LABEL: "Followers",
+	DISPLAY_USER_FOLLOW_LABEL: "Suivre",
+	DISPLAY_USER_FOLLOWING_LABEL: "Suivi",
+	DISPLAY_USER_ADDFRIEND_LABEL: "Ajouter en ami",
+	DISPLAY_USER_DELFRIEND_LABEL: "Supprimer des amis",
 
 	// Chat view
 	DISPLAY_CHAT_PLACEHOLDER_INPUT_LABEL: "Chercher un ami",

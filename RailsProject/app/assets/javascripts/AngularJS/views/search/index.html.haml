@@ -1,12 +1,12 @@
 .seachContainer.clearfix{ "ng-init" => "initSearch()" }
 	.small-12.medium-3.columns
-		%h2 {( labels.DISPLAY_SEARCH_FILTERS_LABEL )}
+		%h2 {{ labels.DISPLAY_SEARCH_FILTERS_LABEL }}
 		%hr
 		%ul.no-bullet
 			%li
 				%label
 					%input{ type: "checkbox", "ng-model" => "box.all", "ng-change" => "changeBox('all')" }
-					{( labels.DISPLAY_SEARCH_ALL_FILTER_LABEL )}
+					{{ labels.DISPLAY_SEARCH_ALL_FILTER_LABEL }}
 			%li
 				%label
 					%input{ type: "checkbox", "ng-model" => "box.users", "ng-change" => "changeBox('users')" }

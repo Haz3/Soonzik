@@ -32,7 +32,7 @@
 					{{ labels.DISPLAY_PLAYER_CLEAN_LABEL }}
 				%span.button.small.info{ "ng-click" => "moreClick()" }
 					%i.fi-widget
-					{{ (more.btn == false) ? "More..." : "Less..." }}
+					{{ (more.btn == false) ? labels.DISPLAY_PLAYER_MORE_LABEL : labels.DISPLAY_PLAYER_LESS_LABEL }}
 				%span.button.small{ "ng-click" => "activateLocation()", popover: "Share what you're listening around you. Click here to enable or disable this feature. Warning: you need to allow your browser to give us your location.", "popover-title" => "Geolocation", "ng-if" => "geolocDisplay == true", "ng-class" => "{ alert: !geoloc, success: geoloc }", "popover-placement" => "bottom", "popover-trigger" => "mouseenter" }
 					%i.fi-marker
 					{{ labels.DISPLAY_PLAYER_GEOLOCATION_LABEL }}
@@ -94,9 +94,10 @@
 					%span.prefix
 						%label.inline{ "for" => "playlistName" } {{ labels.DISPLAY_PLAYER_NAME_LABEL }} :
 				.small-6.columns
-					%input{ id: "playlistName", type: "text", placeholder: "New Playlist", "ng-model" => "newItem.name" }
+					%input{ id: "playlistName", type: "text", placeholder: "{{ labels.DISPLAY_PLAYER_NEW_PLAYLIST_PLACEHOLDER }}", "ng-model" => "newItem.name" }
 				.small-2.columns
-					.button.postfix{ "ng-click" => "createPlaylist()" } {{ labels.DISPLAY_PLAYER_SAVE_LABEL }}
+					.button.postfix{ "ng-click" => "createPlaylist()" }
+						%i.fi-save
 			.clearfix.small-12.musicInformations{ "ng-show" => "infomusic.playlist != false" }
 				%i.fi-x.right.red{ "ng-click" => "infoForMusic(false, 'playlist')" }
 				%ul.square.left.text-left
