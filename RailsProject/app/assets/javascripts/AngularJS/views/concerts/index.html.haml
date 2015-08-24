@@ -2,5 +2,12 @@
 	%loading{ "ng-if" => "loading == true" }
 	.concertContainer{ "ng-if" => "loading == false" }
 		.concert{ "ng-repeat" => "concert in indexView.concerts" }
-			%p {{ concert }}
+			%h3 {{ " Concert of " }} {{ concert.user.username }}
+			%p
+				%span {{ "Link : " }}
+				%a{ href: "{{ (concert.url.length == 0 || concert.url == null) ? '#' : concert.url }}" } {{ (concert.url.length == 0 || concert.url == null) ? 'No link' : concert.url }}
+			%p {{ "Address : " }} {{ formatAddress(concert.address) }}
+			%p{ "ng-show" => "concert.address.complement != null" } {{ concert.address.complement }}
+			%p.text-right
+				%em {{ concert.planification }}
 			%hr

@@ -58,4 +58,8 @@ SoonzikApp.controller('ConcertsCtrl', ['$scope', 'SecureAuth', 'HTTPService', '$
 			return number;
 		}
 	}
+
+	$scope.formatAddress = function(address) {
+		return address.numberStreet + " " + address.street + ", " + address.zipcode + " " + address.city + ", " + address.country;
+	}
 }]);
