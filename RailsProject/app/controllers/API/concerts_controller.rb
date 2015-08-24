@@ -26,7 +26,8 @@ module API
           @returnValue = { content: Concert.count }
         else
           @returnValue = { content: Concert.all.as_json(:include => {
-                                                            :address => { :only => Address.miniKey  }
+                                                            :address => { :only => Address.miniKey  },
+                                                            :user => { :only => User.miniKey }
                                                             }, :only => Concert.miniKey ) }
         end
         if (@returnValue[:content].size == 0)
@@ -63,7 +64,8 @@ module API
           defineHttp :not_found
         else
           @returnValue = { content: concert.as_json(:include => {
-                                                            :address => { :only => Address.miniKey  }
+                                                            :address => { :only => Address.miniKey  },
+                                                            :user => { :only => User.miniKey }
                                                             }, :only => Concert.miniKey ) }
           codeAnswer 200
         end
@@ -162,7 +164,8 @@ module API
         end
 
         @returnValue = { content: concert_object.as_json(:include => {
-                                                            :address => { :only => Address.miniKey  }
+                                                            :address => { :only => Address.miniKey  },
+                                                            :user => { :only => User.miniKey }
                                                             }, :only => Concert.miniKey ) }
 
         if (concert_object.size == 0)

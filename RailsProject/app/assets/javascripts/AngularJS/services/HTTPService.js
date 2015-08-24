@@ -182,6 +182,12 @@ SoonzikApp.factory('HTTPService', ['$http', '$location', 'Upload', function ($ht
     },
     unfriend: function(parameters) {
       return $http.post("http://api." + url + "/users/delfriend", parameters);
+    },
+    getConcerts: function(parameters) {
+      return $http.get("http://api." + url + "/concerts" + urlParametersFormat(parameters))
+    },
+    findConcerts: function(parameters) {
+      return $http.get("http://api." + url + "/concerts/find" + urlParametersFormat(parameters))
     }
   }
 }]);

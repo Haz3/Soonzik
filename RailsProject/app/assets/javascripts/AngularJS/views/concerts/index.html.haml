@@ -1,0 +1,6 @@
+.concerts{ "ng-init" => "initIndex()" }
+	%loading{ "ng-if" => "loading == true" }
+	.concertContainer{ "ng-if" => "loading == false" }
+		.concert{ "ng-repeat" => "concert in indexView.concerts" }
+			%p {{ concert }}
+			%hr
