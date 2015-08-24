@@ -108,7 +108,159 @@
 		</section>
 
 		<section class="description">
-					</section>
+			
+<p>The model of the object <a href="User.html">User</a> Contain the relation
+and the validation Can provide some features linked to this model</p>
+
+<h4 id="class-User-label-Attributes">Attributes<span><a href="#class-User-label-Attributes">&para;</a> <a href="#top">&uarr;</a></span></h4>
+<ul><li>
+<p><code>id</code> - (integer) - The ID of the object</p>
+</li><li>
+<p><code>email</code> - (string) - The email of the user</p>
+</li><li>
+<p><code>salt</code> - (string) - The salt of the account which is unique</p>
+</li><li>
+<p><code>fname</code> - (string) - The firstname of the user</p>
+</li><li>
+<p><code>lname</code> - (string) - The lastname of the user</p>
+</li><li>
+<p><code>username</code> - (string) - The username of the user (need to delete
+space and accept only specific characters)</p>
+</li><li>
+<p><code>birthday</code> - (date) - The birthday date of the user</p>
+</li><li>
+<p><code>image</code> - (string) - The name of the image used as avatar</p>
+</li><li>
+<p><code>description</code> - (string) - The description of the user</p>
+</li><li>
+<p><code>phoneNumber</code> - (string) - The phone number of the user</p>
+</li><li>
+<p><code>address_id</code> - (integer) - The address id of the user if he set
+it</p>
+</li><li>
+<p><code>facebook</code> - (string) - The facebook name of the user</p>
+</li><li>
+<p><code>twitter</code> - (string) - The twitter name of the user</p>
+</li><li>
+<p><code>googlePlus</code> - (string) - The G+ name of the user</p>
+</li><li>
+<p><code>idAPI</code> - (string) - The token used for request</p>
+</li><li>
+<p><code>secureKey</code> - (string) - The secureKey which is the result of a
+hash between the idAPI and the salt</p>
+</li><li>
+<p><code>newsletter</code> - (boolean) - Boolean to know if the user
+subscribed to the newsletter</p>
+</li><li>
+<p><code>language</code> - (string) - The language choosen by the user</p>
+</li><li>
+<p><code>background</code> - (string) - The name of the background of the user</p>
+</li></ul>
+
+<p>Devise attributes :</p>
+<ul><li>
+<p><code>unconfirmed_email</code> - (string) - ///</p>
+</li><li>
+<p><code>encrypted_password</code> - (string) - ///</p>
+</li><li>
+<p><code>reset_password_token</code> - (string) - ///</p>
+</li><li>
+<p><code>reset_password_sent_at</code> - (date) - ///</p>
+</li><li>
+<p><code>remember_created_at</code> - (date) - ///</p>
+</li><li>
+<p><code>sign_in_count</code> - (integer) - ///</p>
+</li><li>
+<p><code>current_sign_in_at</code> - (date) - ///</p>
+</li><li>
+<p><code>last_sign_in_at</code> - (date) - ///</p>
+</li><li>
+<p><code>current_sign_in_ip</code> - (string) - ///</p>
+</li><li>
+<p><code>last_sign_in_ip</code> - (string) - ///</p>
+</li><li>
+<p><code>confirmation_token</code> - (string) - ///</p>
+</li><li>
+<p><code>confirmed_at</code> - (date) - ///</p>
+</li><li>
+<p><code>confirmation_sent_at</code> - (date) - ///</p>
+</li></ul>
+
+<h4 id="class-User-label-Associations">Associations<span><a href="#class-User-label-Associations">&para;</a> <a href="#top">&uarr;</a></span></h4>
+<ul><li>
+<p><code>belongs_to</code> -  :address</p>
+</li><li>
+<p><code>has_one</code> - :cart</p>
+</li><li>
+<p><code>has_many</code> -  :albums</p>
+</li><li>
+<p><code>has_many</code> -  :identities</p>
+</li><li>
+<p><code>has_many</code> -  :listening</p>
+</li><li>
+<p><code>has_many</code> -  :notifications</p>
+</li><li>
+<p><code>has_many</code> -  :musics</p>
+</li><li>
+<p><code>has_many</code> -  :news</p>
+</li><li>
+<p><code>has_many</code> -  :packs</p>
+</li><li>
+<p><code>has_many</code> -  :propositions</p>
+</li><li>
+<p><code>has_many</code> -  :tweets</p>
+</li><li>
+<p><code>has_many</code> -  :votes</p>
+</li><li>
+<p><code>has_many</code> -  :purchases</p>
+</li><li>
+<p><code>has_many</code> -  :purchased_musics, through: :purchases, source:
+:musics</p>
+</li><li>
+<p><code>has_many</code> -  :commentaries</p>
+</li><li>
+<p><code>has_many</code> -  :gifts_given</p>
+</li><li>
+<p><code>has_many</code> -  :gifts_received</p>
+</li><li>
+<p><code>has_many</code> -  :battles_one</p>
+</li><li>
+<p><code>has_many</code> -  :battles_two</p>
+</li><li>
+<p><code>has_many</code> -  :messages_sender</p>
+</li><li>
+<p><code>has_many</code> -  :messages_receiver</p>
+</li><li>
+<p><code>has_and_belongs_to_many</code> -  :groups</p>
+</li></ul>
+
+<p>Trick for the relation between users with model between the two relations</p>
+<ul><li>
+<p><code>has_many</code> -  :relations_follow, :foreign_key =&gt;
+&#39;user_id&#39;, :class_name =&gt; &#39;Follow&#39;</p>
+</li><li>
+<p><code>has_many</code> -  :relations_follower, :foreign_key =&gt;
+&#39;follow_id&#39;, :class_name =&gt; &#39;Follow&#39;</p>
+</li><li>
+<p><code>has_many</code> -  :follows, :through =&gt; :relations_follow,
+:source =&gt; :user_to</p>
+</li><li>
+<p><code>has_many</code> -  :followers, :through =&gt; :relations_follower,
+:source =&gt; :user</p>
+</li><li>
+<p><code>has_many</code> -  :relations_friend, :foreign_key =&gt;
+&#39;user_id&#39;, :class_name =&gt; &#39;Friend&#39;</p>
+</li><li>
+<p><code>has_many</code> -  :relations_friendly, :foreign_key =&gt;
+&#39;friend_id&#39;, :class_name =&gt; &#39;Friend&#39;</p>
+</li><li>
+<p><code>has_many</code> -  :friends, :through =&gt; :relations_friend,
+:source =&gt; :user_to</p>
+</li><li>
+<p><code>has_many</code> -  :frienders, :through =&gt; :relations_friendly,
+:source =&gt; :user</p>
+</li></ul>
+		</section>
 
 				<section id="5Buntitled-5D" class="documentation-section">
 			
@@ -159,7 +311,7 @@
 										</header>
 
 					<div class="method-description">
-											<p>Filter of information for the API - Less Restricted</p>					
+											<p>Filter of information for the <a href="API.html">API</a> - Less Restricted</p>					
 											<div class="method-source-code" id="bigKey-source">
 							<pre class="prettyprint linenums"><code 
 								class="language-ruby"><span class="ruby-comment"># File app/models/user.rb, line 291</span>
@@ -278,7 +430,7 @@
 										</header>
 
 					<div class="method-description">
-											<p>Filter of information for the API - Restricted</p>					
+											<p>Filter of information for the <a href="API.html">API</a> - Restricted</p>					
 											<div class="method-source-code" id="miniKey-source">
 							<pre class="prettyprint linenums"><code 
 								class="language-ruby"><span class="ruby-comment"># File app/models/user.rb, line 286</span>
@@ -300,7 +452,7 @@
 										</header>
 
 					<div class="method-description">
-											<p>Filter of information for the API - No Restriction</p>					
+											<p>Filter of information for the <a href="API.html">API</a> - No Restriction</p>					
 											<div class="method-source-code" id="notRestrictedKey-source">
 							<pre class="prettyprint linenums"><code 
 								class="language-ruby"><span class="ruby-comment"># File app/models/user.rb, line 296</span>
@@ -605,6 +757,28 @@ set before</p>
 	<!-- Class dropdown menu -->
 	<div id="class-dropdown" class="dropdown-menu has-scroll">
 	<ul>
+			<li><a href="./API.html">API</a></li>
+			<li><a href="./API/AlbumsController.html">API::AlbumsController</a></li>
+			<li><a href="./API/ApiController.html">API::ApiController</a></li>
+			<li><a href="./API/ApisecurityController.html">API::ApisecurityController</a></li>
+			<li><a href="./API/BattlesController.html">API::BattlesController</a></li>
+			<li><a href="./API/CartsController.html">API::CartsController</a></li>
+			<li><a href="./API/ConcertsController.html">API::ConcertsController</a></li>
+			<li><a href="./API/GenresController.html">API::GenresController</a></li>
+			<li><a href="./API/InfluencesController.html">API::InfluencesController</a></li>
+			<li><a href="./API/LanguagesController.html">API::LanguagesController</a></li>
+			<li><a href="./API/ListeningsController.html">API::ListeningsController</a></li>
+			<li><a href="./API/MessagesController.html">API::MessagesController</a></li>
+			<li><a href="./API/MusicsController.html">API::MusicsController</a></li>
+			<li><a href="./API/NewsController.html">API::NewsController</a></li>
+			<li><a href="./API/NotificationsController.html">API::NotificationsController</a></li>
+			<li><a href="./API/PacksController.html">API::PacksController</a></li>
+			<li><a href="./API/PlaylistsController.html">API::PlaylistsController</a></li>
+			<li><a href="./API/PurchasesController.html">API::PurchasesController</a></li>
+			<li><a href="./API/SearchsController.html">API::SearchsController</a></li>
+			<li><a href="./API/SuggestionsController.html">API::SuggestionsController</a></li>
+			<li><a href="./API/TweetsController.html">API::TweetsController</a></li>
+			<li><a href="./API/UsersController.html">API::UsersController</a></li>
 			<li><a href="./Access.html">Access</a></li>
 			<li><a href="./Address.html">Address</a></li>
 			<li><a href="./AdminUser.html">AdminUser</a></li>
@@ -644,6 +818,7 @@ set before</p>
 			<li><a href="./PurchasedPack.html">PurchasedPack</a></li>
 			<li><a href="./Tag.html">Tag</a></li>
 			<li><a href="./Tweet.html">Tweet</a></li>
+			<li><a href="./User.html">User</a></li>
 			<li><a href="./Vote.html">Vote</a></li>
 		</ul>
 	</div>
