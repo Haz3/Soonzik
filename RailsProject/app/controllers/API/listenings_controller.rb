@@ -274,7 +274,7 @@ module API
         @lng = @lng.to_f
         @range = @range.to_f
 
-        listen = Listening.within(@range, :origin => [@lat, @lng]).order(:created_at => :desc)
+        listen = Listening.in_range(0..@range, :origin => [@lat, @lng]).order(:created_at => :desc)
         listen.each { |x|
           x.setOrigin([@lat, @lng])
         }
