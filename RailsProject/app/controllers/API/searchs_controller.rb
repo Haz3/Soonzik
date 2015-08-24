@@ -60,7 +60,7 @@ module API
 					    when "album"
 						  	content = { album: JSON.parse(content.to_json(:only => Album.miniKey, :include => { user: { only: User.miniKey } } ) ) }
 					    when "pack"
-						  	content = { pack: JSON.parse(content.to_json(:only => Pack.miniKey, :include => { albums: { only: Album.miniKey } } ) ) }
+						  	content = { pack: JSON.parse(content.to_json(:only => Pack.miniKey, :include => { albums: { only: Album.miniKey, :include => { user: { only: User.miniKey } } } } ) ) }
 					  end
 					else
 					  artist_result = User.joins(:groups).merge(Group.where(:name => "Artist")).where(["users.username LIKE ?", "%#{@query}%"])
@@ -89,7 +89,7 @@ module API
 					    	user: JSON.parse(user_result.to_json(:only => User.miniKey )),
 					    	music: JSON.parse(music_result.to_json(:only => Music.miniKey, :include => { user: { only: User.miniKey }, album: { only: Album.miniKey } } ) ),
 					    	album: JSON.parse(album_result.to_json(:only => Album.miniKey, :include => { user: { only: User.miniKey } } ) ),
-					    	pack: JSON.parse(pack_result.to_json(:only => Pack.miniKey, :include => { albums: { only: Album.miniKey } } ) )
+					    	pack: JSON.parse(pack_result.to_json(:only => Pack.miniKey, :include => { albums: { only: Album.miniKey, :include => { user: { only: User.miniKey } } } } ) )
 					    }
 					  end
 		    	end
