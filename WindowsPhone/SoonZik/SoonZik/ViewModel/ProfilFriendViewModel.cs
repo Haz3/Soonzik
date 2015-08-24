@@ -25,10 +25,6 @@ namespace SoonZik.ViewModel
 
         #endregion
 
-        private void AddFriendExecute()
-        {
-            AddDelFriendHelpers.GetUserKeyForFriend(CurrentUser.id.ToString());
-        }
 
         #region Attribute
 
@@ -45,6 +41,8 @@ namespace SoonZik.ViewModel
                 RaisePropertyChanged("CurrentUser");
             }
         }
+
+        public static User UserFromButton { get; set; }
 
         public INavigationService Navigation;
 
@@ -66,12 +64,14 @@ namespace SoonZik.ViewModel
 
         #region Method
 
+        private void AddFriendExecute()
+        {
+            AddDelFriendHelpers.GetUserKeyForFriend(CurrentUser.id.ToString());
+        }
+
         private void SelectionExecute()
         {
-            if (Singleton.Instance().ItsMe)
-                CurrentUser = Singleton.Instance().CurrentUser;
-            else if (!Singleton.Instance().ItsMe)
-                CurrentUser = Singleton.Instance().SelectedUser;
+            CurrentUser = UserFromButton;
         }
 
         private void HardwareButtonsOnBackPressed(object sender, BackPressedEventArgs backPressedEventArgs)

@@ -118,6 +118,7 @@
     <Compile Include="ViewModel\AlbumViewModel.cs" />
     <Compile Include="ViewModel\BattleDetailViewModel.cs" />
     <Compile Include="ViewModel\BattleViewModel.cs" />
+    <Compile Include="ViewModel\CartsViewModel.cs" />
     <Compile Include="ViewModel\ConnexionViewModel.cs" />
     <Compile Include="ViewModel\ConversationViewModel.cs" />
     <Compile Include="ViewModel\ExplorerViewModel.cs" />
@@ -137,6 +138,9 @@
     </Compile>
     <Compile Include="Views\BattleDetailView.xaml.cs">
       <DependentUpon>BattleDetailView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\CartsView.xaml.cs">
+      <DependentUpon>CartsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\GeolocalisationView.xaml.cs">
       <DependentUpon>GeolocalisationView.xaml</DependentUpon>
@@ -291,6 +295,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\BattleDetailView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\CartsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

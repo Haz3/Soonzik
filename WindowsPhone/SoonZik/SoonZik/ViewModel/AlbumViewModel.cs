@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using Windows.ApplicationModel.Core;
 using Windows.UI.Core;
 using GalaSoft.MvvmLight;
@@ -19,11 +20,14 @@ namespace SoonZik.ViewModel
         {
             if (MyAlbum != null)
             {
-                TheAlbum = MyAlbum;
+                //TheAlbum = MyAlbum;
                 _navigationService = new NavigationService();
                 ItemClickCommand = new RelayCommand(ItemClickCommandExecute);
-                Charge();
+                //Charge();
             }
+
+
+            SelectionCommand = new RelayCommand(SelectionExecute);
             //ImageAlbum = TheAlbum.image == String.Empty ? new Uri("ms-appx:///Resources/Icones/disc.png", UriKind.Absolute).ToString() : TheAlbum.image;
         }
 
@@ -82,30 +86,27 @@ namespace SoonZik.ViewModel
                 RaisePropertyChanged("ItemClickCommand");
             }
         }
+        
+        public ICommand SelectionCommand { get; private set; }
 
         #endregion
 
         #region Method
+        
+        private void SelectionExecute()
+        {
+            TheAlbum = MyAlbum;
+            Charge();
+        }
 
         private void ItemClickCommandExecute()
         {
-            //PlayerControl. = TheAlbum;
             _navigationService.Navigate(new PlayerControl().GetType());
         }
 
         public void Charge()
         {
             var request = new HttpRequestGet();
-            //try
-            //{
-            //    TheAlbum = (Album)await request.GetObject(new Album(), "albums", MyAlbum.id.ToString());
-            //    ListMusics = TheAlbum.musics;
-            //}
-            //catch (Exception e)
-            //{
-            //    Debug.WriteLine(e.ToString());
-            //}
-
             var album = request.GetObject(new Album(), "albums", MyAlbum.id.ToString());
             album.ContinueWith(delegate(Task<object> tmp)
             {

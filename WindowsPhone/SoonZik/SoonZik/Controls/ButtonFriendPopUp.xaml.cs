@@ -46,9 +46,25 @@ namespace SoonZik.Controls
 
         private void GoToProfil(object sender, RoutedEventArgs e)
         {
-            Singleton.Instance().NewProfilUser = Friend;
-            Singleton.Instance().ItsMe = false;
-            Singleton.Instance().Charge();
+        //    Singleton.Instance().NewProfilUser = Friend;
+        //    Singleton.Instance().ItsMe = false;
+        //    Singleton.Instance().Charge();
+
+            var request = new HttpRequestGet();
+
+            var test = request.GetObject(new User(), "users", Friend.ToString());
+            test.ContinueWith(delegate(Task<object> tmp)
+            {
+                var res = tmp.Result as User;
+                if (res != null)
+                {
+                    CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
+                        () =>
+                        {
+                            ProfilFriendViewModel.UserFromButton = res;
+                        });
+                }
+            });
             GlobalMenuControl.MyGrid.Children.Clear();
             GlobalMenuControl.MyGrid.Children.Add(new ProfilFriendView());
             FriendViewModel.MeaagePrompt.Hide();
@@ -72,7 +88,6 @@ namespace SoonZik.Controls
                 }
             });
         }
-
 
         private void DelFriend(HttpRequestPost post, string cryptographic, HttpRequestGet get)
         {
