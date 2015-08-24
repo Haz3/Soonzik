@@ -51,6 +51,7 @@ namespace SoonZik.ViewModel
             SimpleIoc.Default.Register<PlaylistViewModel>();
             SimpleIoc.Default.Register<InscriptionViewModel>();
             SimpleIoc.Default.Register<BattleDetailViewModel>();
+            SimpleIoc.Default.Register<CartsViewModel>();
         }
 
         public MainViewModel Main
@@ -142,6 +143,12 @@ namespace SoonZik.ViewModel
         {
             get { return ServiceLocator.Current.GetInstance<BattleDetailViewModel>(); }
         }
+
+        public CartsViewModel Carts
+        {
+            get { return ServiceLocator.Current.GetInstance<CartsViewModel>(); }
+        }
+
         public static void Cleanup()
         {
             // TODO Clear the ViewModels

@@ -93,7 +93,7 @@
 
         <DataTemplate x:Key="PackItemTemplate" x:Name="PackDataTemplate">
             <StackPanel x:ConnectionId='3' Margin="0,0,0,30" x:Name="PackStackPanel"                                 >
-                <TextBlock Text="{Binding Path=Title}" FontSize="20" />
+                <TextBlock Text="{Binding Path=title}" FontSize="20" />
             </StackPanel>
         </DataTemplate>
 

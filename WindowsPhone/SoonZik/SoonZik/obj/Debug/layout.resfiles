@@ -23,6 +23,7 @@ SoonZik.xr.xml
 Views\AlbumView.xbf
 Views\BattleDetailView.xbf
 Views\BattleView.xbf
+Views\CartsView.xbf
 Views\Connexion.xbf
 Views\Conversation.xbf
 Views\Explorer.xbf
