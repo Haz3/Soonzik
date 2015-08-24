@@ -50,7 +50,6 @@ module API
 					  if (limit != nil)
 					  	content = content.limit(limit)
 					  end
-					  content = JSON.parse(content.to_json)
 					  case @type
 		    	    when "artist"
 						  	content = { artist: JSON.parse(content.to_json(:only => User.miniKey )) }
