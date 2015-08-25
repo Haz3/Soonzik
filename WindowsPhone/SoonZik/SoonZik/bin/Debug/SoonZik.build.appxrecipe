@@ -281,6 +281,9 @@
     <AppxPackagedFile Include="C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\bin\Debug\Views\BattleDetailView.xbf">
       <PackagePath>Views\BattleDetailView.xbf</PackagePath>
     </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\bin\Debug\Views\CartsView.xbf">
+      <PackagePath>Views\CartsView.xbf</PackagePath>
+    </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\bin\Debug\Views\GeolocalisationView.xbf">
       <PackagePath>Views\GeolocalisationView.xbf</PackagePath>
     </AppxPackagedFile>

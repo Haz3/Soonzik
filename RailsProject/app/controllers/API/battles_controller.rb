@@ -230,7 +230,8 @@ module API
             end
             @returnValue[:content] = oldVote.as_json(only: [:id], :include => {
                 battle: { only: Battle.miniKey },
-                artist: { only: User.miniKey }
+                artist: { only: User.miniKey },
+                :votes => { :only => Vote.miniKey }
               })
           end
         else

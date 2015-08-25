@@ -4,9 +4,9 @@
     <RootInterface FullName="Windows.UI.Xaml.Data.IValueConverter" />
   </Roots.Interfaces>
   <Roots.PropertyPathNames>
-    <RootPropertyPathName Name="Title" />
     <RootPropertyPathName Name="title" />
     <RootPropertyPathName Name="username" />
+    <RootPropertyPathName Name="Title" />
     <RootPropertyPathName Name="ImageBoutton" />
     <RootPropertyPathName Name="SelectedPack" />
     <RootPropertyPathName Name="SelectedAlbum" />
@@ -21,6 +21,7 @@
     <RootPropertyPathName Name="Username" />
     <RootPropertyPathName Name="GridVisibility" />
     <RootPropertyPathName Name="isActive" />
+    <RootPropertyPathName Name="SelectionCommand" />
     <RootPropertyPathName Name="ListMusics" />
     <RootPropertyPathName Name="TheAlbum" />
     <RootPropertyPathName Name="ArtistTwo" />
@@ -55,7 +56,6 @@
     <RootPropertyPathName Name="lname" />
     <RootPropertyPathName Name="fname" />
     <RootPropertyPathName Name="Password" />
-    <RootPropertyPathName Name="SelectionCommand" />
     <RootPropertyPathName Name="CurrentUser" />
     <RootPropertyPathName Name="follows" />
     <RootPropertyPathName Name="SelectUser" />
@@ -120,6 +120,7 @@
     <RootType FullName="SoonZik.ViewModel.InscriptionViewModel" />
     <RootType FullName="SoonZik.ViewModel.GeolocalisationViewModel" />
     <RootType FullName="SoonZik.ViewModel.BattleViewModel" />
+    <RootType FullName="SoonZik.ViewModel.CartsViewModel" />
     <RootType FullName="SoonZik.ViewModel.PlaylistViewModel" />
     <RootType FullName="SoonZik.ViewModel.BattleDetailViewModel" />
     <RootType FullName="Windows.UI.Xaml.DataTemplate">
@@ -457,6 +458,7 @@
     <RootType FullName="SoonZik.MainPage" />
     <RootType FullName="SoonZik.Views.AlbumView" />
     <RootType FullName="SoonZik.Views.BattleDetailView" />
+    <RootType FullName="SoonZik.Views.CartsView" />
     <RootType FullName="Windows.UI.Xaml.Controls.Maps.MapControl">
       <RootProperty Name="Center" />
     </RootType>

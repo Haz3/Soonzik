@@ -183,7 +183,7 @@ new listening object since this time</p>
     <span class="ruby-ivar">@lng</span> = <span class="ruby-ivar">@lng</span>.<span class="ruby-identifier">to_f</span>
     <span class="ruby-ivar">@range</span> = <span class="ruby-ivar">@range</span>.<span class="ruby-identifier">to_f</span>
 
-    <span class="ruby-identifier">listen</span> = <span class="ruby-constant">Listening</span>.<span class="ruby-identifier">within</span>(<span class="ruby-ivar">@range</span>, <span class="ruby-value">:origin</span> =<span class="ruby-operator">&gt;</span> [<span class="ruby-ivar">@lat</span>, <span class="ruby-ivar">@lng</span>]).<span class="ruby-identifier">order</span>(<span class="ruby-value">:created_at</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">:desc</span>)
+    <span class="ruby-identifier">listen</span> = <span class="ruby-constant">Listening</span>.<span class="ruby-identifier">in_range</span>(<span class="ruby-value">0</span><span class="ruby-operator">..</span><span class="ruby-ivar">@range</span>, <span class="ruby-value">:origin</span> =<span class="ruby-operator">&gt;</span> [<span class="ruby-ivar">@lat</span>, <span class="ruby-ivar">@lng</span>]).<span class="ruby-identifier">order</span>(<span class="ruby-value">:created_at</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">:desc</span>)
     <span class="ruby-identifier">listen</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span>
       <span class="ruby-identifier">x</span>.<span class="ruby-identifier">setOrigin</span>([<span class="ruby-ivar">@lat</span>, <span class="ruby-ivar">@lng</span>])
     }
@@ -633,6 +633,7 @@ wrong</p>
 			<li><a href="../PurchasedPack.html">PurchasedPack</a></li>
 			<li><a href="../Tag.html">Tag</a></li>
 			<li><a href="../Tweet.html">Tweet</a></li>
+			<li><a href="../User.html">User</a></li>
 			<li><a href="../Vote.html">Vote</a></li>
 		</ul>
 	</div>

@@ -34,6 +34,7 @@
 //= require ./AngularJS/controllers/AlbumsController.js
 //= require ./AngularJS/controllers/BattlesController.js
 //= require ./AngularJs/controllers/CartController.js
+//= require ./AngularJs/controllers/ConcertsController.js
 //= require ./AngularJS/controllers/ChatController.js
 //= require ./AngularJS/controllers/ExplorerController.js
 //= require ./AngularJS/controllers/FriendController.js
