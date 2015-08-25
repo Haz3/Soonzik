@@ -1,6 +1,6 @@
 .news{ "ng-init" => "showNewsById()" }
   %loading{ "ng-if" => "loading == true" }
-  .row{ "ng-if" => "loading == false", "ng-init" => "initFoundation()"}
+  .row{ "ng-if" => "loading == false", "ng-init" => "initOneNews()"}
     .clearfix
       .ul.small-11.small-centered.columns{"ng-show" => "thisNewsId"}
         .panel.radius
@@ -16,12 +16,43 @@
             %img{"ng-src" => "{{ url.url }}"}
           %p{"ng-repeat" => "text in thisNews.newstexts"}
             {{ text.content }}
+        %meta{:property => "og:url", :content => "http://www.lvh.me:3000/news/{{thisNews.id}}"}
+        %meta{:property => "og:type", :content => "article"}
+        %meta{:property => "og:title", :content => "{{thisNews.title}}"}
+        %meta{:property => "og:description", :content => "{{thisNews.title}}"}
+        %meta{:property => "og:image", :content => "{{url.url}}"}
         .large-12
           %textarea.radius{"placeholder" => "Ecrire un commentaire", "ng-model" => "commentary.content"}
           .action
-            %i.step.fi-social-facebook.size-36
-            %i.step.fi-social-twitter.size-36
-            %i.step.fi-social-google-plus.size-36
+            :javascript
+              //  Twitter
+              !function(d,s,id)
+                {
+                  var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';
+                  if(!d.getElementById(id)){
+                    js=d.createElement(s);
+                    js.id=id;
+                    js.src=p+'://platform.twitter.com/widgets.js';
+                    fjs.parentNode.insertBefore(js,fjs);
+                  }
+                }(document, 'script', 'twitter-wjs');
+
+              // Google +
+
+              (function() {
+                var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+                po.src = 'https://apis.google.com/js/client:plusone.js';
+                var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+              })();
+
+            // Share Facebook
+            .fb-share-button{":data-href" => "http://www.your-domain.com/your-page.html", ":data-layout" => "button_count"}
+            // Share Twitter
+            %a.twitter-share-button{"data-hashtags" => "Soonzik", "data-url" => "http://lvh.me:3000/news/{{thisNews.id}}", "data-text" => "{{thisNews.title}}", "data-via" => "Soonzik", :href => "https://twitter.com/share"} Tweet
+            // Share Google +
+            
+            /%button.g-interactivepost{"data-calltoactiondeeplinkid" => "/pages/create", "data-calltoactionlabel" => "CREATE", "data-calltoactionurl" => "http://plus.google.com/pages/create", "data-clientid" => "xxxxx.apps.googleusercontent.com", "data-contentdeeplinkid" => "/pages", "data-contenturl" => "http://lvh.me:3000/news/1", "data-cookiepolicy" => "single_host_origin", "data-prefilltext" => "News 1"} Tell your friends
+
             .button.success.radius{:type => "submit", "ng-click" => "postComment()"} Envoyé
           .panel.content-comment{"ng-repeat" => "comment in commentaries"}
             .info-user
@@ -33,3 +64,4 @@
             .divider
             .comment
               {{ comment.content }}
+            %loading{ "loading-type" => "'square'", "ng-show" => "commentLoading == true" }
