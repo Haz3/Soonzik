@@ -22,8 +22,8 @@
 		.pagination-centered
 			%ul.pagination
 				%li{ "class" => "arrow {{ (index.currentPage == 1) ? 'unavailable' : '' }}" }
-					%a{ href: ""} &laquo;
+					%a{ href: "/battles?page={{ max(1, index.currentPage - 1) }}"} &laquo;
 				%li{ "ng-repeat" => "num in range(min(index.currentPage, 5) + min(index.numberPages - 1, 5)) track by $index", "class" => "{{ $index + 1 == min(index.currentPage, 5) ? 'current' : '' }}" }
-					%a{ href: ""} {{ index.currentPage - min(index.currentPage, 5) + $index + 1 }}
+					%a{ href: "/battles?page={{ index.currentPage - min(index.currentPage, 5) + $index + 1 }}"} {{ index.currentPage - min(index.currentPage, 5) + $index + 1 }}
 				%li{ "class" => "arrow {{ (index.numberPages == index.currentPage) ? 'unavailable' : '' }}" }
-					%a{ href: ""} &raquo;
+					%a{ href: "/battles?page={{ min(index.numberPages, index.currentPage + 1) }}"} &raquo;

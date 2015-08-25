@@ -1,13 +1,22 @@
 .concerts{ "ng-init" => "initIndex()" }
 	%loading{ "ng-if" => "loading == true" }
 	.concertContainer{ "ng-if" => "loading == false" }
-		.concert{ "ng-repeat" => "concert in indexView.concerts" }
-			%h3 {{ " Concert of " }} {{ concert.user.username }}
+		%p{ "ng-if" => "indexView.currentPage > indexView.numberPages" } {{ labels.DISPLAY_CONCERT_TOO_MANY_PAGE_LABEL }} 
+		.concert{ "ng-if" => "indexView.currentPage <= indexView.numberPages", "ng-repeat" => "concert in indexView.concerts" }
+			%h3 {{ labels.DISPLAY_CONCERT_CONCERT_OF_LABEL }} {{ concert.user.username }}
 			%p
-				%span {{ "Link : " }}
-				%a{ href: "{{ (concert.url.length == 0 || concert.url == null) ? '#' : concert.url }}" } {{ (concert.url.length == 0 || concert.url == null) ? 'No link' : concert.url }}
-			%p {{ "Address : " }} {{ formatAddress(concert.address) }}
+				%span {{ labels.DISPLAY_CONCERT_LINK_LABEL }}
+				%a{ href: "{{ (concert.url.length == 0 || concert.url == null) ? '#' : concert.url }}" } {{ (concert.url.length == 0 || concert.url == null) ? labels.DISPLAY_CONCERT_NO_LINK_LABEL : concert.url }}
+			%p {{ labels.DISPLAY_CONCERT_ADDRESS_LABEL }} {{ formatAddress(concert.address) }}
 			%p{ "ng-show" => "concert.address.complement != null" } {{ concert.address.complement }}
 			%p.text-right
 				%em {{ concert.planification }}
 			%hr
+		.pagination-centered{ "ng-if" => "indexView.currentPage > indexView.numberPages" }
+			%ul.pagination
+				%li{ "class" => "arrow {{ (indexView.currentPage == 1) ? 'unavailable' : '' }}" }
+					%a{ href: "/concerts?page={{ max(1, indexView.currentPage - 1) }}"} &laquo;
+				%li{ "ng-repeat" => "num in range(min(indexView.currentPage, 5) + min(indexView.numberPages - 1, 5)) track by $index", "class" => "{{ $index + 1 == min(indexView.currentPage, 5) ? 'current' : '' }}" }
+					%a{ href: "/concerts?page={{ indexView.currentPage - min(indexView.currentPage, 5) + $index + 1 }}"} {{ indexView.currentPage - min(indexView.currentPage, 5) + $index + 1 }}
+				%li{ "class" => "arrow {{ (indexView.numberPages == indexView.currentPage) ? 'unavailable' : '' }}" }
+					%a{ href: "/concerts?page={{ min(indexView.numberPages, indexView.currentPage + 1) }}"} &raquo;

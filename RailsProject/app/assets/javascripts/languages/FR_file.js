@@ -35,36 +35,36 @@ var labels = {
 	DISPLAY_MENU_SEARCH_PLACEHOLDER: "Chercher des utilisateurs, musiques, albums...",
 
 	// Album Controller
-	FILE_ALBUM_GET_NOTES_ERROR_MESSAGE: "Une erreur s'est produit au chargement des notes",
-	FILE_ALBUM_FIND_PLAYLIST_ERROR_MESSAGE: "Une erreur s'est produit pendant la suppresion d'une liste de lecture : ",
-	FILE_ALBUM_GET_ALBUM_ERROR_MESSAGE: "Une erreur s'est produit au chargement d'un album",
+	FILE_ALBUM_GET_NOTES_ERROR_MESSAGE: "Une erreur s'est produite au chargement des notes",
+	FILE_ALBUM_FIND_PLAYLIST_ERROR_MESSAGE: "Une erreur s'est produite pendant la suppresion d'une liste de lecture : ",
+	FILE_ALBUM_GET_ALBUM_ERROR_MESSAGE: "Une erreur s'est produite au chargement d'un album",
 	FILE_ALBUM_ADD_PLAYLIST_NOTIF_SUCCESS_PART_ONE: "La musique '",
 	FILE_ALBUM_ADD_PLAYLIST_NOTIF_SUCCESS_PART_TWO: "' a été ajouté à la liste de lecture",
-	FILE_ALBUM_ADD_PLAYLIST_ERROR_MESSAGE: "Une erreur s'est produit à l'ajout d'une musique dans une liste de lecture",
-	FILE_ALBUM_SET_NOTE_ERROR_MESSAGE: "Une erreur s'est produit à la notation d'une musique",
-	FILE_ALBUM_LOAD_COMMENT_ERROR_MESSAGE: "Une erreur s'est produit au chargement des commentaires",
-	FILE_ALBUM_SEND_COMMENT_ERROR_MESSAGE: "Une erreur s'est produit à la sauvegarde de votre commentaire",
+	FILE_ALBUM_ADD_PLAYLIST_ERROR_MESSAGE: "Une erreur s'est produite à l'ajout d'une musique dans une liste de lecture",
+	FILE_ALBUM_SET_NOTE_ERROR_MESSAGE: "Une erreur s'est produite à la notation d'une musique",
+	FILE_ALBUM_LOAD_COMMENT_ERROR_MESSAGE: "Une erreur s'est produite au chargement des commentaires",
+	FILE_ALBUM_SEND_COMMENT_ERROR_MESSAGE: "Une erreur s'est produite à la sauvegarde de votre commentaire",
 
 	// Battle Controller
-	FILE_BATTLE_LOAD_BATTLE_ERROR_MESSAGE: "Une erreur s'est produit au chargement de la page",
-	FILE_BATTLE_LOAD_ARTIST_ONE_ERROR_MESSAGE: "Une erreur s'est produit au chargement du profil du premier artiste",
-	FILE_BATTLE_LOAD_ARTIST_TWO_ERROR_MESSAGE: "Une erreur s'est produit au chargement du profil du deuxieme artiste",
+	FILE_BATTLE_LOAD_BATTLE_ERROR_MESSAGE: "Une erreur s'est produite au chargement de la page",
+	FILE_BATTLE_LOAD_ARTIST_ONE_ERROR_MESSAGE: "Une erreur s'est produite au chargement du profil du premier artiste",
+	FILE_BATTLE_LOAD_ARTIST_TWO_ERROR_MESSAGE: "Une erreur s'est produite au chargement du profil du deuxieme artiste",
 	FILE_BATTLE_NEED_AUTHENTICATION_ERROR_MESSAGE: "Vous devez être authentifié pour cette action",
-	FILE_BATTLE_VOTE_ERROR_MESSAGE: "Une erreur s'est produit à la sauvegarde de votre vote",
+	FILE_BATTLE_VOTE_ERROR_MESSAGE: "Une erreur s'est produite à la sauvegarde de votre vote",
 	FILE_BATTLE_ALREADY_VOTED_ERROR_MESSAGE: "Cette action est impossible : Vous avez déjà voté pour cet artiste",
 	FILE_BATTLE_VOTETEXT_LABEL: "Vote",
 	FILE_BATTLE_VOTEDTEXT_LABEL: "Vous avez voté pour cet artist",
 	FILE_BATTLE_CANCEL_TEXT_LABEL: "Annulez votre précédent vote pour voter pour cet artiste !",
 
 	// Chat Controller
-	FILE_CHAT_GET_MESSAGE_ERROR_MESSAGE: "Une erreur s'est produit au chargement de la page",
+	FILE_CHAT_GET_MESSAGE_ERROR_MESSAGE: "Une erreur s'est produite au chargement de la page",
 
 	// Explorer Controller
-	FILE_EXPLORER_GET_INFLUENCES_ERROR_MESSAGE: "Une erreur s'est produit au chargement des influences",
-	FILE_EXPLORER_GET_GENRE_ERROR_MESSAGE: "Une erreur s'est produit des genres",
+	FILE_EXPLORER_GET_INFLUENCES_ERROR_MESSAGE: "Une erreur s'est produite au chargement des influences",
+	FILE_EXPLORER_GET_GENRE_ERROR_MESSAGE: "Une erreur s'est produite des genres",
 
 	// Listening Controller
-	FILE_LISTENING_AROUND_ERROR_MESSAGE: "Une erreur s'est produit au chargement des musiques autour de vous",
+	FILE_LISTENING_AROUND_ERROR_MESSAGE: "Une erreur s'est produite au chargement des musiques autour de vous",
 	FILE_LISTENING_INPOPUP_LISTENED_LABEL: " écouté par ",
 
 	// Notification Controller
@@ -72,49 +72,49 @@ var labels = {
 	FILE_NOTIFICATION_FRIEND_NOTIF_MESSAGE: " vous a ajouté en ami",
 	FILE_NOTIFICATION_FOLLOW_NOTIF_MESSAGE: " vous suit",
 	FILE_NOTIFICATION_ASREAD_NOTIF_ERROR_MESSAGE: "Impossible de marquer vos notifications comme lues",
-	FILE_NOTIFICATION_MORE_NOTIF_ERROR_MESSAGE: "Une erreur s'est produit à la récupération d'anciennes notifications",
+	FILE_NOTIFICATION_MORE_NOTIF_ERROR_MESSAGE: "Une erreur s'est produite à la récupération d'anciennes notifications",
 
 	// Player Controller
 	FILE_PLAYER_FIND_PLAYLIST_ERROR_MESSAGE: "Erreur : Impossible de récupérer vos listes de lecture",
-	FILE_PLAYER_DELETE_PLAYLIST_ERROR_MESSAGE: "Une erreur s'est produit à la suppression de la liste de lecture : ",
-	FILE_PLAYER_REMOVE_FROM_PLAYLIST_ERROR_MESSAGE: "Une erreur s'est produit à la suppression d'une musique d'une liste de lecture",
-	FILE_PLAYER_SAVE_IN_PLAYLIST_ERROR_MESSAGE: "Une erreur s'est produit à la sauvegarde d'une nouvelle musique dans une liste de lecture",
-	FILE_PLAYER_PLAY_MUSIC_ERROR_MESSAGE: "Une erreur s'est produit au chargement de la musique : ",
+	FILE_PLAYER_DELETE_PLAYLIST_ERROR_MESSAGE: "Une erreur s'est produite à la suppression de la liste de lecture : ",
+	FILE_PLAYER_REMOVE_FROM_PLAYLIST_ERROR_MESSAGE: "Une erreur s'est produite à la suppression d'une musique d'une liste de lecture",
+	FILE_PLAYER_SAVE_IN_PLAYLIST_ERROR_MESSAGE: "Une erreur s'est produite à la sauvegarde d'une nouvelle musique dans une liste de lecture",
+	FILE_PLAYER_PLAY_MUSIC_ERROR_MESSAGE: "Une erreur s'est produite au chargement de la musique : ",
 	FILE_PLAYER_GEOLOC_MUSIC_ERROR_MESSAGE: "Impossible d'ajouter cette musique au module de géolocalisation",
 
 	// Playlist Controller
 	FILE_PLAYLIST_BAD_ARGUMENT_ERROR_MESSAGE: "Impossible de charger cette liste de lecture",
-	FILE_PLAYLIST_FIND_PLAYLIST_ERROR_MESSAGE: "Une erreur s'est produit à la suppression de la liste de lecture : ",
-	FILE_PLAYLIST_GET_PLAYLIST_ERROR_MESSAGE: "Une erreur s'est produit au chargement des informations de la liste de lecture",
-	FILE_PLAYLIST_GET_MUSIC_ERROR_MESSAGE: "Une erreur s'est produit au chargement des informations de la musique numéro ",
+	FILE_PLAYLIST_FIND_PLAYLIST_ERROR_MESSAGE: "Une erreur s'est produite à la suppression de la liste de lecture : ",
+	FILE_PLAYLIST_GET_PLAYLIST_ERROR_MESSAGE: "Une erreur s'est produite au chargement des informations de la liste de lecture",
+	FILE_PLAYLIST_GET_MUSIC_ERROR_MESSAGE: "Une erreur s'est produite au chargement des informations de la musique numéro ",
 	FILE_PLAYLIST_TMP_NAME_LABEL: "Playlist temporaire",
-	FILE_PLAYLIST_SAVE_PLAYLIST_ERROR_MESSAGE: "Une erreur s'est produit à la sauvegarde d'une nouvelle liste de lecture",
-	FILE_PLAYLIST_NEW_MUSIC_ERROR_MESSAGE: "Une erreur s'est produit à la sauvegarde d'une musique dans la liste de lecture",
+	FILE_PLAYLIST_SAVE_PLAYLIST_ERROR_MESSAGE: "Une erreur s'est produite à la sauvegarde d'une nouvelle liste de lecture",
+	FILE_PLAYLIST_NEW_MUSIC_ERROR_MESSAGE: "Une erreur s'est produite à la sauvegarde d'une musique dans la liste de lecture",
 
 	// Search Controller
-	FILE_SEARCH_REQUEST_ERROR_MESSAGE: "Une erreur s'est produit au chargement des résultats de votre recherche",
+	FILE_SEARCH_REQUEST_ERROR_MESSAGE: "Une erreur s'est produite au chargement des résultats de votre recherche",
 
 	// User Controller
 	FILE_USER_MONTHS_INFORMATION: ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Aout", "Septembre", "Octobre", "Novembre", "Décembre"],
-	FILE_USER_FIND_PLAYLIST_ERROR_MESSAGE: "Une erreur s'est produit à la suppression de la liste de lecture : ",
-	FILE_USER_GET_NOTES_ERROR_MESSAGE: "Une erreur s'est produit au chargement des notes",
-	FILE_USER_GET_FOLLOWERS_ERROR_MESSAGE: "Une erreur s'est produit au chargement des personnes qui suivent ce profil",
-	FILE_USER_GET_FOLLOWS_ERROR_MESSAGE: "Une erreur s'est produit au chargement des personnes suivies par ce profil",
-	FILE_USER_GET_FRIENDS_ERROR_MESSAGE: "Une erreur s'est produit au chargement des amis de ce profil",
-	FILE_USER_GET_PLAYLISTS_ERROR_MESSAGE: "Une erreur s'est produit au chargement des listes de lecture de ce profil",
-	FILE_USER_PROFILE_ERROR_MESSAGE: "Une erreur s'est produit au chargement de ce profil",
+	FILE_USER_FIND_PLAYLIST_ERROR_MESSAGE: "Une erreur s'est produite à la suppression de la liste de lecture : ",
+	FILE_USER_GET_NOTES_ERROR_MESSAGE: "Une erreur s'est produite au chargement des notes",
+	FILE_USER_GET_FOLLOWERS_ERROR_MESSAGE: "Une erreur s'est produite au chargement des personnes qui suivent ce profil",
+	FILE_USER_GET_FOLLOWS_ERROR_MESSAGE: "Une erreur s'est produite au chargement des personnes suivies par ce profil",
+	FILE_USER_GET_FRIENDS_ERROR_MESSAGE: "Une erreur s'est produite au chargement des amis de ce profil",
+	FILE_USER_GET_PLAYLISTS_ERROR_MESSAGE: "Une erreur s'est produite au chargement des listes de lecture de ce profil",
+	FILE_USER_PROFILE_ERROR_MESSAGE: "Une erreur s'est produite au chargement de ce profil",
 	FILE_USER_EDITION_ERROR_MESSAGE: "Vous ne pouvez pas éditer ce profil : ce n'est pas le votre",
 	FILE_USER_UPDATE_SUCCESS_MESSAGE: "Profil mis à jour avec succès",
-	FILE_USER_ERROR_OCCURED_MESSAGE: "Une erreur s'est produit",
-	FILE_USER_FOLLOW_ERROR_MESSAGE: "Une erreur s'est produit au moment de suivre cet utilisateur",
-	FILE_USER_FRIEND_ERROR_MESSAGE: "Une erreur s'est produit à l'ajout d'un ami",
-	FILE_USER_UNFOLLOW_ERROR_MESSAGE: "Une erreur s'est produit au moment de ne plus suivre cet utilisateur",
-	FILE_USER_UNFFRIEND_ERROR_MESSAGE: "Une erreur s'est produit à la suppression d'un ami",
-	FILE_USER_SAVE_TWEET_ERROR_MESSAGE: "Une erreur s'est produit à la sauvegarde du tweet",
+	FILE_USER_ERROR_OCCURED_MESSAGE: "Une erreur s'est produite",
+	FILE_USER_FOLLOW_ERROR_MESSAGE: "Une erreur s'est produite au moment de suivre cet utilisateur",
+	FILE_USER_FRIEND_ERROR_MESSAGE: "Une erreur s'est produite à l'ajout d'un ami",
+	FILE_USER_UNFOLLOW_ERROR_MESSAGE: "Une erreur s'est produite au moment de ne plus suivre cet utilisateur",
+	FILE_USER_UNFFRIEND_ERROR_MESSAGE: "Une erreur s'est produite à la suppression d'un ami",
+	FILE_USER_SAVE_TWEET_ERROR_MESSAGE: "Une erreur s'est produite à la sauvegarde du tweet",
 	FILE_USER_TWEET_TOO_LONG_ERROR_MESSAGE: "Votre message est trop grand. La taille max. est de 140 caractères.",
-	FILE_USER_SET_NOTE_ERROR_MESSAGE: "Une erreur s'est produit à la notation d'une musique",
+	FILE_USER_SET_NOTE_ERROR_MESSAGE: "Une erreur s'est produite à la notation d'une musique",
 	FILE_USER_NEED_LOGIN_ERROR_MESSAGE: "Vous devez être authentifié pour cette action",
-	FILE_USER_ADD_PLAYLIST_ERROR_MESSAGE: "Une erreur s'est produit à l'ajout d'une musique dans la liste de lecture",
+	FILE_USER_ADD_PLAYLIST_ERROR_MESSAGE: "Une erreur s'est produite à l'ajout d'une musique dans la liste de lecture",
 	FILE_USER_FB_LINKED_ERROR_MESSAGE: "Le compte Facebook est déjà lié à un autre compte SoonZik",
 	FILE_USER_FB_LINK_ERROR_MESSAGE: "Impossible de lier ce compte à votre profil",
 	FILE_USER_GOOGLE_LINKED_ERROR_MESSAGE: "Le compte google + est déjà lié à un autre compte SoonZik",
@@ -269,4 +269,14 @@ var labels = {
 	DISPLAY_CHAT_PLACEHOLDER_INPUT_LABEL: "Chercher un ami",
 	DISPLAY_CHAT_CONNECTED_LABEL: "Amis connectés",
 	DISPLAY_CHAT_DISCONNECTED_LABEL: "Amis déconnectés",
+
+	// Concert Index view
+	DISPLAY_CONCERT_TOO_MANY_PAGE_LABEL: "La page demandée n'existe pas",
+	DISPLAY_CONCERT_CONCERT_OF_LABEL: "Concert de ",
+	DISPLAY_CONCERT_LINK_LABEL: "Lien : ",
+	DISPLAY_CONCERT_NO_LINK_LABEL: "Aucun lien",
+	DISPLAY_CONCERT_ADDRESS_LABEL: "Adresse : ",
+
+	// Concert Controller
+	FILE_CONCERT_FIND_CONCERT_ERROR_MESSAGE: "Une erreur s'est produite lors du chargement des concerts",
 }
