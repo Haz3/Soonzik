@@ -45,7 +45,7 @@
             <TextBlock x:Name="AlbumTitle" Text="{Binding TheArtiste.username}" FontSize="30"
                        VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,120,0,0" />
 
-            <TextBlock x:Name="ArtistName" Text="{Binding TheArtiste.follows.Count}" FontSize="20"
+            <TextBlock x:Name="ArtistName" Text="{Binding NbrFollowers}" FontSize="20"
                        VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,250,0,0" />
             <Button VerticalAlignment="Bottom" HorizontalAlignment="Left" Content="{Binding FollowText}"
                     Command="{Binding FollowCommand}" />

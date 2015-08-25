@@ -335,7 +335,7 @@ namespace SoonZik.Controls
             //if (myObj.GetType() != typeof(Playlist))
             // PlaylistAdd.Visibility = Visibility.Collapsed;
             Singleton.Instance().LastElement = MyGrid.Children.First();
-            _lastElement = MyGrid.Children.FirstOrDefault();
+            _lastElement = MyGrid.Children.LastOrDefault();
             MyGrid.Children.Clear();
             MyGrid.Children.Add(myObj);
             CloseMenu();
