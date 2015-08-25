@@ -1,3 +1,6 @@
+require 'uri'
+require 'open-uri'
+
 # The model of the object User
 # Contain the relation and the validation
 # Can provide some features linked to this model
@@ -80,9 +83,6 @@
 # - +has_many+ -  :friends, :through => :relations_friend, :source => :user_to
 # - +has_many+ -  :frienders, :through => :relations_friendly, :source => :user
 #
-require 'uri'
-require 'open-uri'
-
 class User < ActiveRecord::Base
   before_validation :beforeCreate, on: :create
 

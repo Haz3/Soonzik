@@ -369,7 +369,7 @@ var SearchIndex =
 	{
 		"name": "User",
 		"link": "User.html",
-		"snippet": "",
+		"snippet": "<p>The model of the object User Contain the relation and the validation Can\nprovide some features linked …\n",
 		"type": "normalclass"
 	},
 	{
