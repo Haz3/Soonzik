@@ -269,4 +269,14 @@ var labels = {
 	DISPLAY_CHAT_PLACEHOLDER_INPUT_LABEL: "Search a friend",
 	DISPLAY_CHAT_CONNECTED_LABEL: "Connected friend",
 	DISPLAY_CHAT_DISCONNECTED_LABEL: "Disconnected friend",
+
+	// Concert Index view
+	DISPLAY_CONCERT_TOO_MANY_PAGE_LABEL: "The page you asked for is not available",
+	DISPLAY_CONCERT_CONCERT_OF_LABEL: "Concert of ",
+	DISPLAY_CONCERT_LINK_LABEL: "Link : ",
+	DISPLAY_CONCERT_NO_LINK_LABEL: "No link",
+	DISPLAY_CONCERT_ADDRESS_LABEL: "Address : ",
+
+	// Concert Controller
+	FILE_CONCERT_FIND_CONCERT_ERROR_MESSAGE: "An error occured while loading the concerts",
 }
