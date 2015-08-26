@@ -93,7 +93,7 @@
                         </Grid.RowDefinitions>
                         <TextBlock Grid.Row="0" FontSize="20" Foreground="White" Text="{Binding ThePack.title}"/>
                         <TextBlock Grid.Row="1" FontSize="20" Foreground="White" Text="{Binding ThePack.price}"/>
-                        <Button Grid.Row="2" HorizontalAlignment="Center" Content="Acheter"/>
+                        <Button Grid.Row="2" HorizontalAlignment="Center" Content="Acheter" Command="{Binding BuyCommand}"/>
                     </Grid>
                 </PivotItem>
                 

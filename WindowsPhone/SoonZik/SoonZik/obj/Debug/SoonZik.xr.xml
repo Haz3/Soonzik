@@ -89,6 +89,7 @@
     <RootPropertyPathName Name="ArtistTappedCommand" />
     <RootPropertyPathName Name="ListAlbums" />
     <RootPropertyPathName Name="AlbumTappedCommand" />
+    <RootPropertyPathName Name="BuyCommand" />
     <RootPropertyPathName Name="ThePack" />
     <RootPropertyPathName Name="price" />
     <RootPropertyPathName Name="CompleteListPack" />
@@ -444,8 +445,11 @@
       <RootProperty Name="Width" />
       <RootProperty Name="VerticalAlignment" />
       <RootProperty Name="HorizontalAlignment" />
+      <RootProperty Name="Margin" />
+      <RootEvent Name="ManipulationDelta" />
     </RootType>
     <RootType FullName="SoonZik.Controls.PlayerControl" />
+    <RootType FullName="SoonZik.Controls.PriceControl" />
     <RootType FullName="SoonZik.Controls.ProgressRingControl" />
     <RootType FullName="SoonZik.Views.Connexion" />
     <RootType FullName="SoonZik.MainPage" />

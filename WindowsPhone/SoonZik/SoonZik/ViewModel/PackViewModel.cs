@@ -71,6 +71,7 @@ namespace SoonZik.ViewModel
         public RelayCommand PackTappedCommand { get; private set; }
         public RelayCommand AlbumTappedCommand { get; private set; }
         public RelayCommand ArtistTappedCommand { get; private set; }
+        public RelayCommand BuyCommand { get; private set; }
 
         private List<User> _listArtistes;
 
@@ -129,7 +130,7 @@ namespace SoonZik.ViewModel
             PackTappedCommand = new RelayCommand(ExecutePackTapped);
             AlbumTappedCommand = new RelayCommand(ExecuteAlbumTapped);
             ArtistTappedCommand = new RelayCommand(ExecuteArtistTapped);
-
+            BuyCommand = new RelayCommand(ExecuteBuyCommand);
             Datas = datas;
             Charge();
             
@@ -138,10 +139,19 @@ namespace SoonZik.ViewModel
                 SelectionCommand = new RelayCommand(SelectionExecute);
             }
         }
+
+
         #endregion
 
 
         #region Method
+        private void ExecuteBuyCommand()
+        {
+            PriceControl.SelecetdPack = ThePack;
+            GlobalMenuControl.MyGrid.Children.Clear();
+            GlobalMenuControl.MyGrid.Children.Add(new PriceControl());
+        }
+
         private void SelectionExecute()
         {
             Charge();
