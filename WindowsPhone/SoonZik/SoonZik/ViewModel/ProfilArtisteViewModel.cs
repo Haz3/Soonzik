@@ -103,6 +103,18 @@ namespace SoonZik.ViewModel
             }
         }
 
+        private int _nbrFollowers;
+
+        public int NbrFollowers
+        {
+            get { return _nbrFollowers; }
+            set
+            {
+                _nbrFollowers = value;
+                RaisePropertyChanged("NbrFollowers");
+            }
+        }
+        
         #endregion
 
         #region Method
@@ -126,6 +138,8 @@ namespace SoonZik.ViewModel
                             ListAlbums.Add(album);
                         }
                     }
+                    if (TheArtiste.follows != null)
+                        NbrFollowers = TheArtiste.follows.Count;
                 });
             });
         }

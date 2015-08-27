@@ -69,11 +69,11 @@
             <TextBox Grid.Column="1" x:Name="address_city_tb" Text="{Binding edit_user.address.city, Mode=TwoWay}" HorizontalAlignment="Left" Margin="194,509,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="35"/>
             <TextBox Grid.Column="1" x:Name="address_country_tb" Text="{Binding edit_user.address.country, Mode=TwoWay}" HorizontalAlignment="Left" Margin="330,509,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="35"/>
             <TextBox Grid.Column="1" x:Name="address_complement_tb" Text="{Binding edit_user.address.complement, Mode=TwoWay}" HorizontalAlignment="Left" Margin="65,605,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="385" Height="32"/>
-            <Button x:Name="update_btn" x:Uid="signup_btn" Command="{Binding do_update_user, Mode=OneWay}" Content="Enregistrer" HorizontalAlignment="Left" Margin="252,832,0,0" VerticalAlignment="Top" Width="521" Background="#FF446CF5" FontSize="20" Height="45" Grid.ColumnSpan="2"/>
+            <Button x:Name="update_btn" x:Uid="update_btn" Command="{Binding do_update_user, Mode=OneWay}" Content="Enregistrer" HorizontalAlignment="Left" Margin="252,832,0,0" VerticalAlignment="Top" Width="521" Background="#FF446CF5" FontSize="20" Height="45" Grid.ColumnSpan="2"/>
 
 
             <TextBlock x:Uid="friend_list_txt" x:Name="friend_list_txt" Grid.Column="2" HorizontalAlignment="Left" Margin="45,29,0,0" TextWrapping="Wrap" Text="Liste d'amis" VerticalAlignment="Top" Height="25" Width="310" FontSize="20"/>
-            <ListView x:Name="friend_list_lv" ItemsSource="{Binding edit_user.friends}" Grid.Column="2" HorizontalAlignment="Left" Height="320" Margin="45,69,0,0" VerticalAlignment="Top" Width="310" Background="White" Foreground="Black"  BorderBrush="#FF27AAE1" SelectedItem="{Binding selected_user, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+            <ListView x:Name="friend_list_lv" ItemsSource="{Binding friends, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="2" HorizontalAlignment="Left" Height="320" Margin="45,69,0,0" VerticalAlignment="Top" Width="310" Background="White" Foreground="Black"  BorderBrush="#FF27AAE1" SelectedItem="{Binding selected_user, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <StackPanel>
@@ -93,7 +93,7 @@
 
 
             <TextBlock x:Uid="follow_list_txt" x:Name="follow_list_txt" Grid.Column="2" Margin="45,445,0,0" TextWrapping="Wrap" Text="Liste des personnes suivies" VerticalAlignment="Top" Height="23" FontSize="20" HorizontalAlignment="Left" Width="310"/>
-            <ListView x:Name="follow_list_lv" ItemsSource="{Binding edit_user.follows}" Grid.Column="2" HorizontalAlignment="Left" Height="320" Margin="45,479,0,0" VerticalAlignment="Top" Width="310" Background="White" Foreground="Black" SelectedItem="{Binding selected_user, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+            <ListView x:Name="follow_list_lv" ItemsSource="{Binding follows, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="2" HorizontalAlignment="Left" Height="320" Margin="45,479,0,0" VerticalAlignment="Top" Width="310" Background="White" Foreground="Black" SelectedItem="{Binding selected_user, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <StackPanel>

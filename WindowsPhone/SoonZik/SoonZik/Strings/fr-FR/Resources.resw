@@ -264,4 +264,16 @@
   <data name="UpdateInformation" xml:space="preserve">
     <value>Vos informations sont mise a jour</value>
   </data>
+  <data name="Association.Text" xml:space="preserve">
+    <value>Association</value>
+  </data>
+  <data name="GoToCard.Content" xml:space="preserve">
+    <value>Ajouter au panier</value>
+  </data>
+  <data name="Price.Text" xml:space="preserve">
+    <value>Prix</value>
+  </data>
+  <data name="SoonZik.Text" xml:space="preserve">
+    <value>SoonZik</value>
+  </data>
 </root>

@@ -82,18 +82,24 @@
     <RootPropertyPathName Name="SelectedNews" />
     <RootPropertyPathName Name="SelectNews" />
     <RootPropertyPathName Name="User" />
-    <RootPropertyPathName Name="BitmapImage" />
+    <RootPropertyPathName Name="NewsContent" />
+    <RootPropertyPathName Name="NewsTitle" />
+    <RootPropertyPathName Name="ListArtistes" />
+    <RootPropertyPathName Name="TheArtiste" />
+    <RootPropertyPathName Name="ArtistTappedCommand" />
     <RootPropertyPathName Name="ListAlbums" />
+    <RootPropertyPathName Name="AlbumTappedCommand" />
+    <RootPropertyPathName Name="BuyCommand" />
     <RootPropertyPathName Name="ThePack" />
-    <RootPropertyPathName Name="Datas" />
-    <RootPropertyPathName Name="SelectedData" />
+    <RootPropertyPathName Name="price" />
+    <RootPropertyPathName Name="CompleteListPack" />
+    <RootPropertyPathName Name="PackTappedCommand" />
     <RootPropertyPathName Name="ListPack" />
     <RootPropertyPathName Name="SelectedPlaylist" />
     <RootPropertyPathName Name="ListAlbum" />
     <RootPropertyPathName Name="FollowText" />
     <RootPropertyPathName Name="FollowCommand" />
-    <RootPropertyPathName Name="TheArtiste" />
-    <RootPropertyPathName Name="Count" />
+    <RootPropertyPathName Name="NbrFollowers" />
     <RootPropertyPathName Name="ButtonContent" />
     <RootPropertyPathName Name="EditClickCommand" />
     <RootPropertyPathName Name="FollowerCommand" />
@@ -270,16 +276,6 @@
       <RootProperty Name="VerticalContentAlignment" />
       <RootProperty Name="ZoomMode" />
       <RootProperty Name="Content" />
-      <RootMethod Name="GetHorizontalScrollBarVisibility" />
-      <RootMethod Name="SetHorizontalScrollBarVisibility" />
-      <RootMethod Name="GetVerticalScrollBarVisibility" />
-      <RootMethod Name="SetVerticalScrollBarVisibility" />
-      <RootMethod Name="GetHorizontalScrollMode" />
-      <RootMethod Name="SetHorizontalScrollMode" />
-      <RootMethod Name="GetVerticalScrollMode" />
-      <RootMethod Name="SetVerticalScrollMode" />
-      <RootMethod Name="GetZoomMode" />
-      <RootMethod Name="SetZoomMode" />
     </RootType>
     <RootType FullName="Microsoft.Xaml.Tools.DirectUI.ProxyTypes.StaticResourceExtension" />
     <RootType FullName="Windows.UI.Xaml.Controls.Primitives.PivotPanel">
@@ -408,8 +404,6 @@
       <RootProperty Name="Background" />
       <RootProperty Name="IsHoldingEnabled" />
       <RootProperty Name="GroupStyle" />
-      <RootProperty Name="VerticalContentAlignment" />
-      <RootProperty Name="ItemsPanel" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.ProgressRing">
       <RootProperty Name="Height" />
@@ -451,8 +445,11 @@
       <RootProperty Name="Width" />
       <RootProperty Name="VerticalAlignment" />
       <RootProperty Name="HorizontalAlignment" />
+      <RootProperty Name="Margin" />
+      <RootEvent Name="ManipulationDelta" />
     </RootType>
     <RootType FullName="SoonZik.Controls.PlayerControl" />
+    <RootType FullName="SoonZik.Controls.PriceControl" />
     <RootType FullName="SoonZik.Controls.ProgressRingControl" />
     <RootType FullName="SoonZik.Views.Connexion" />
     <RootType FullName="SoonZik.MainPage" />
@@ -486,7 +483,6 @@
       <RootProperty Name="ItemsSource" />
       <RootProperty Name="ItemTemplate" />
       <RootProperty Name="SelectedItem" />
-      <RootProperty Name="Items" />
     </RootType>
     <RootType FullName="SoonZik.ViewModel.ProfilFriendView" />
     <RootType FullName="SoonZik.Views.BattleView" />
@@ -535,9 +531,6 @@
     <RootType FullName="SoonZik.Views.MainView" />
     <RootType FullName="SoonZik.Views.News" />
     <RootType FullName="SoonZik.Views.NewsDetail" />
-    <RootType FullName="Windows.UI.Xaml.Controls.VirtualizingStackPanel">
-      <RootProperty Name="Orientation" />
-    </RootType>
     <RootType FullName="SoonZik.Views.Packs" />
     <RootType FullName="SoonZik.Views.Playlist" />
     <RootType FullName="SoonZik.Views.ProfilArtiste" />

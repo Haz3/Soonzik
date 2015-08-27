@@ -38,24 +38,7 @@ namespace SoonZik.Views
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             SoonZik.Models.Album elem = e.Parameter as SoonZik.Models.Album;
-            album_artist.Text = elem.user.username;
-            album_title.Text = elem.title;
-            album_year.Text = elem.yearProd.ToString();
-            album_price.Text = elem.price.ToString();
-            album_music_listview.ItemsSource = elem.musics;
-            album_id_tb.Text = elem.id.ToString();
-
-            string request_elem = "/albums/" + elem.id.ToString();
-
-            // To get comment list
-            var comments = new CommentViewModel(request_elem);
-            comment_lv.ItemsSource = comments.commentlist;
-        }
-
-        private void send_com_btn_Click(object sender, RoutedEventArgs e)
-        {
-            string comment_content = send_com_tb.Text;
-            Post_comment com = new Post_comment(comment_content, "albums", album_id_tb.Text);
+            DataContext = new AlbumViewModel(elem.id);
         }
 
         private void album_music_listview_ItemClick(object sender, ItemClickEventArgs e)

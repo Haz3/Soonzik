@@ -10,6 +10,7 @@ namespace SoonZik.Models
     {
         public int id { get; set; }
         public string title { get; set; }
+        public string content { get; set; }
         public User user { get; set; }
         public List<Newstexts> newstexts { get; set; }
         public List<Attachments> attachments { get; set; }

@@ -54,16 +54,13 @@
                     <ViewModels:SearchViewModel/>
                 </StackPanel.DataContext>
                 <TextBox x:Name="search_tb" Text="{Binding search_value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" TextWrapping="Wrap" Width="182"/>
-                <Button x:Name="search_btn" Command="{Binding do_search, Mode=OneWay}" Content="Chercher" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="98"/>
+                <Button x:Name="search_btn" x:Uid="search_btn" Command="{Binding do_search, Mode=OneWay}" Content="Chercher" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="98"/>
             </StackPanel>
         </StackPanel>
 
 
 
-        <ListView ItemClick="News_ItemClick" ItemsSource="{Binding newslist}" x:Name="News" Background="#B0B0B0" HorizontalAlignment="Left" Height="800" Margin="154,220,0,0" VerticalAlignment="Top" Width="500"  IsItemClickEnabled="True" IsSwipeEnabled="False" SelectionMode="None">
-            <ListView.DataContext>
-                <ViewModels:NewsViewModel/>
-            </ListView.DataContext>
+        <ListView ItemClick="News_ItemClick" ItemsSource="{Binding news_list}" x:Name="News" Background="#B0B0B0" HorizontalAlignment="Left" Height="800" Margin="154,220,0,0" VerticalAlignment="Top" Width="500"  IsItemClickEnabled="True" IsSwipeEnabled="False" SelectionMode="None">
 
             <ListView.ItemTemplate>
                 <DataTemplate>
@@ -83,10 +80,7 @@
             </ListView.ItemTemplate>
         </ListView>
 
-        <ListView ItemClick="Music_ItemClick" ItemsSource="{Binding albumlist}" x:Name="Music" Background="#B0B0B0" HorizontalAlignment="Left" Height="800" Margin="710,220,0,0" VerticalAlignment="Top" Width="500" IsItemClickEnabled="True" IsSwipeEnabled="False" SelectionMode="None">
-            <ListView.DataContext>
-                <ViewModels:AlbumViewModel/>
-            </ListView.DataContext>
+        <ListView ItemClick="Music_ItemClick" ItemsSource="{Binding album_list}" x:Name="Music" Background="#B0B0B0" HorizontalAlignment="Left" Height="800" Margin="710,220,0,0" VerticalAlignment="Top" Width="500" IsItemClickEnabled="True" IsSwipeEnabled="False" SelectionMode="None">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <StackPanel>
@@ -111,7 +105,7 @@
         <TextBlock x:Name="music_txt" x:Uid="music_txt" Margin="710,159,0,0" TextWrapping="Wrap" Text="Musique" VerticalAlignment="Top" Height="50" Width="500" FontSize="40" Foreground="#FF27AAE1" HorizontalAlignment="Left"/>
         <TextBlock x:Name="community_txt" x:Uid="community_txt" HorizontalAlignment="Left" Margin="1266,159,0,0" TextWrapping="Wrap" Text="Communauté" VerticalAlignment="Top" Height="50" Width="500" FontSize="40" Foreground="#FF27AAE1"/>
         <TextBlock x:Name="hello_tb" HorizontalAlignment="Left" Margin="1375,85,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="55" Width="410" FontSize="25"/>
-        <Button x:Name="profil_btn" Content="Profil" HorizontalAlignment="Left" Margin="1787,83,0,0" VerticalAlignment="Top" Width="126" Height="60" Foreground="White" Background="#FF27AAE1" Click="profil_btn_Click" FontSize="20"/>
+        <Button x:Name="profil_btn" x:Uid="profil_btn" Content="Profil" HorizontalAlignment="Left" Margin="1787,83,0,0" VerticalAlignment="Top" Width="126" Height="60" Foreground="White" Background="#FF27AAE1" Click="profil_btn_Click" FontSize="20"/>
 
     </Grid>
 </Page>

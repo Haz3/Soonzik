@@ -18,7 +18,7 @@
     </interactivity:Interaction.Behaviors>
 
     <Page.Resources>
-        <DataTemplate x:Key="PackItemTemplate">
+        <!--<DataTemplate x:Key="PackItemTemplate">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="110" />
@@ -27,7 +27,7 @@
                 </Grid.ColumnDefinitions>
                 <Image Grid.Column="1" Source="{Binding Path=BitmapImage}" Height="200" Width="200" />
             </Grid>
-        </DataTemplate>
+        </DataTemplate>-->
 
         <DataTemplate x:Key="AlbumTemplate">
             <Grid Height="70" Margin="20,0,0,0">
@@ -39,15 +39,25 @@
                        HorizontalAlignment="Right" Margin="0,0,10,0" />
             </Grid>
         </DataTemplate>
+        
+        <DataTemplate x:Key="ListPackItemTemplate">
+            <TextBlock FontSize="25" Text="{Binding title}"></TextBlock>
+        </DataTemplate>
+
+        <DataTemplate x:Key="ListArtisteItemTemplate">
+            <TextBlock FontSize="25" Text="{Binding username}"></TextBlock>
+        </DataTemplate>
+        
     </Page.Resources>
 
     <Grid x:Name="GlobalGrid">
+        
         <Grid.RowDefinitions>
             <RowDefinition Height="250" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <ListView Grid.Row="0" ItemsSource="{Binding Datas}" ItemTemplate="{StaticResource PackItemTemplate}"
+        <!--<ListView Grid.Row="0" ItemsSource="{Binding Datas}" ItemTemplate="{StaticResource PackItemTemplate}"
                   SelectedItem="{Binding SelectedData, Mode=TwoWay}"
                   ScrollViewer.HorizontalScrollBarVisibility="Auto"
                   ScrollViewer.VerticalScrollBarVisibility="Disabled"
@@ -59,22 +69,57 @@
                     <VirtualizingStackPanel Orientation="Horizontal" />
                 </ItemsPanelTemplate>
             </ListView.ItemsPanel>
-        </ListView>
+        </ListView>-->
+            <ListView Grid.Row="0" ItemsSource="{Binding CompleteListPack}" ItemTemplate="{StaticResource ListPackItemTemplate}"
+                  SelectedItem="{Binding ThePack, Mode=TwoWay}">
+            <interactivity:Interaction.Behaviors>
+                <core:EventTriggerBehavior EventName="Tapped">
+                    <core:InvokeCommandAction Command="{Binding PackTappedCommand}" />
+                </core:EventTriggerBehavior>
+            </interactivity:Interaction.Behaviors>
 
+        </ListView>
+        
         <Grid Grid.Row="1">
             <Pivot x:Name="PivotGlobal" HeaderTemplate="{StaticResource SizeHeaderGlobalPivot}"
                    Foreground="Transparent" RenderTransformOrigin="0.5,0.5" Style="{StaticResource PivotStyle1}"
                    Margin="0,20,0,0">
+                <PivotItem Header="Pack Info">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="60"/>
+                            <RowDefinition Height="60"/>
+                            <RowDefinition Height="60"/>
+                        </Grid.RowDefinitions>
+                        <TextBlock Grid.Row="0" FontSize="20" Foreground="White" Text="{Binding ThePack.title}"/>
+                        <TextBlock Grid.Row="1" FontSize="20" Foreground="White" Text="{Binding ThePack.price}"/>
+                        <Button Grid.Row="2" HorizontalAlignment="Center" Content="Acheter" Command="{Binding BuyCommand}"/>
+                    </Grid>
+                </PivotItem>
+                
                 <PivotItem x:Uid="AlbumPivot" Header="">
                     <ListBox Background="Transparent" x:Name="ListBoxAlbum" ItemsSource="{Binding ListAlbums}"
                              ItemTemplate="{StaticResource AlbumTemplate}"
                              SelectedItem="{Binding SelectedAlbum, Mode=TwoWay}">
-                        <TextBlock Text="{Binding ThePack.Title, Mode=TwoWay}" FontSize="30" />
 
+                        <interactivity:Interaction.Behaviors>
+                            <core:EventTriggerBehavior EventName="Tapped">
+                                <core:InvokeCommandAction Command="{Binding AlbumTappedCommand}" />
+                            </core:EventTriggerBehavior>
+                        </interactivity:Interaction.Behaviors>
                     </ListBox>
                 </PivotItem>
+                
                 <PivotItem x:Uid="ArtistPivot" Header="">
-                    <ListBox Background="Transparent" x:Name="ListBoxArtiste" />
+                    <ListBox Background="Transparent" x:Name="ListBoxArtiste" ItemsSource="{Binding ListArtistes}"
+                             ItemTemplate="{StaticResource ListArtisteItemTemplate}"
+                             SelectedItem="{Binding TheArtiste, Mode=TwoWay}"/>
+
+                    <interactivity:Interaction.Behaviors>
+                        <core:EventTriggerBehavior EventName="Tapped">
+                            <core:InvokeCommandAction Command="{Binding ArtistTappedCommand}" />
+                        </core:EventTriggerBehavior>
+                    </interactivity:Interaction.Behaviors>
                 </PivotItem>
             </Pivot>
         </Grid>

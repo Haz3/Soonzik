@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SoonZik.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -25,6 +26,7 @@ namespace SoonZik.Views
         public Explorer()
         {
             this.InitializeComponent();
+            DataContext = new ExplorerViewModel();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -36,6 +38,12 @@ namespace SoonZik.Views
         {
             var item = ((SoonZik.Models.Genre)e.ClickedItem);
             this.Frame.Navigate(typeof(Genre), item);
+        }
+
+        private void album_list_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            var item = ((SoonZik.Models.Album)e.ClickedItem);
+            this.Frame.Navigate(typeof(Album), item);
         }
 
         private void pack_list_ItemClick(object sender, ItemClickEventArgs e)

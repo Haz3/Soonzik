@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Globalization;
 using System.Threading.Tasks;
 using Windows.ApplicationModel.Core;
 using Windows.UI.Core;
@@ -45,8 +46,7 @@ namespace SoonZik.ViewModel
         private ObservableCollection<News> _listNews;
 
         public RelayCommand ShareTapped { get; set; }
-
-
+        
         private News _selectedNews;
 
         public static News DetailSelectedNews { get; set; }
@@ -72,7 +72,8 @@ namespace SoonZik.ViewModel
                 RaisePropertyChanged("ItemClickCommand");
             }
         }
-
+        
+       
         #endregion
 
         #region Method

@@ -31,11 +31,23 @@ namespace SoonZik.HttpRequest
         public async Task<String> Save(User myUser, string sha256, string password)
         {
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(ApiUrl + "users/save");
-            var postData = "user[email]=" + myUser.email + "&user[password]=" + password + "&user[username]=" + myUser.username + "&user[birthday]=" + myUser.birthday
-                + "&user[language]=" + myUser.language + "&user[fname]=" + myUser.fname + "&user[lname]=" + myUser.lname + "&user[desciption]=" + myUser.description
-                + "&user[phoneNumber]=" + myUser.phoneNumber + "&address[numberStreet]=" + myUser.address.NumberStreet + "&address[complement]=" + myUser.address.Complement 
-                + "&address[street]=" + myUser.address.Street
-                + "&address[city]=" + myUser.address.City + "&address[country]=" + myUser.address.Country + "&address[zipcode]=" + myUser.address.Zipcode;
+            var postData = 
+                "&user[email]=" + myUser.email + 
+                "&user[password]=" + password + 
+                "&user[username]=" + myUser.username + 
+                "&user[birthday]=" + myUser.birthday + 
+                "&user[language]=" + "fr" + 
+                "&user[fname]=" + myUser.fname + 
+                "&user[lname]=" + myUser.lname + 
+                "&user[desciption]=" + myUser.description + 
+                "&user[phoneNumber]=" + myUser.phoneNumber + 
+
+                "&address[numberStreet]=" + myUser.address.NumberStreet + 
+                "&address[complement]=" + myUser.address.Complement + 
+                "&address[street]=" + myUser.address.Street + 
+                "&address[city]=" + myUser.address.City + 
+                "&address[country]=" + myUser.address.Country + 
+                "&address[zipcode]=" + myUser.address.Zipcode;
             return await GetHttpPostResponse(request, postData);
         }
 

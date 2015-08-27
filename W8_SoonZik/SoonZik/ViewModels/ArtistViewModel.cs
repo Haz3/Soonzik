@@ -22,13 +22,11 @@ namespace SoonZik.ViewModels
         async void load_artist()
         {
             Exception exception = null;
-            var request = new Http_get();
             artistlist = new ObservableCollection<User>();
-            List<User> list = new List<User>();
 
             try
             {
-                var albums = (List<User>)await request.get_object_list(list, "users");
+                var albums = (List<User>)await Http_get.get_object(new List<User>(), "users");
 
                 foreach (var item in albums)
                     artistlist.Add(item);
@@ -38,12 +36,8 @@ namespace SoonZik.ViewModels
                 exception = e;
             }
 
-
             if (exception != null)
-            {
-                MessageDialog msgdlg = new MessageDialog(exception.Message, "Artist Error");
-                await msgdlg.ShowAsync();
-            }
+                await new MessageDialog(exception.Message, "Artist Error").ShowAsync();
         }
     }
 }

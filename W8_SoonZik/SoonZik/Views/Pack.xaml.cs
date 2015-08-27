@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SoonZik.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -30,14 +31,19 @@ namespace SoonZik.Views
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             SoonZik.Models.Pack elem = e.Parameter as SoonZik.Models.Pack;
-            pack_title.Text = elem.title;
-            if (elem.descriptions.Any())
-            {
-                description_fr.Text = elem.descriptions[0].description;
-                if (elem.descriptions.Count == 2)
-                  description_en.Text = elem.descriptions[1].description;
-            }
-            pack_album_listview.ItemsSource = elem.albums;
+            DataContext = new PackViewModel(elem.id);
+            //pack_title.Text = elem.title;
+            //pack_date_begin.Text = elem.begin_date;
+            //pack_date_end.Text = elem.end_date;
+            //pack_price.Text = elem.minimal_price.ToString();
+
+            //if (elem.descriptions.Any())
+            //{
+            //    description_fr.Text = elem.descriptions[0].description;
+            //    if (elem.descriptions.Count == 2)
+            //      description_en.Text = elem.descriptions[1].description;
+            //}
+            //pack_album_listview.ItemsSource = elem.albums;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

@@ -12,6 +12,7 @@ using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using SoonZik.ViewModels.Command;
+using System.Collections.ObjectModel;
 
 namespace SoonZik.ViewModels
 {
@@ -27,6 +28,9 @@ namespace SoonZik.ViewModels
                 OnPropertyChanged("edit_user");
             }
         }
+
+        public ObservableCollection<User> friends { get; set; }
+        public ObservableCollection<User> follows { get; set; }
 
         //private User _selected_user;
         public User selected_user { get; set; }
@@ -123,6 +127,9 @@ namespace SoonZik.ViewModels
         public UserEditViewModel()
         {
             edit_user = Singleton.Instance.Current_user;
+            friends = new ObservableCollection<User>(edit_user.friends);
+            follows = new ObservableCollection<User>(edit_user.follows);
+
             do_add_friend = new AddFriendCommand(this);
             do_remove_friend = new RemoveFriendCommand(this);
             do_follow = new FollowCommand(this);
@@ -204,7 +211,10 @@ namespace SoonZik.ViewModels
                 if (json.ToString() == "Created")
                 {
                     await new MessageDialog("Add friend OK").ShowAsync();
+                    // To save current user state
                     Singleton.Instance.Current_user.friends.Add(friend);
+                    // To update UI (observableCollection)
+                    friends.Add(friend);
                 }
                 else
                     await new MessageDialog("Add friend KO").ShowAsync();
@@ -240,6 +250,7 @@ namespace SoonZik.ViewModels
                 {
                     await new MessageDialog("Follow OK").ShowAsync();
                     Singleton.Instance.Current_user.follows.Add(follow);
+                    follows.Add(follow);
 
                 }
                 else
@@ -275,6 +286,7 @@ namespace SoonZik.ViewModels
                 {
                     await new MessageDialog("Remove friend OK").ShowAsync();
                     Singleton.Instance.Current_user.friends.Remove(selected_user);
+                    friends.Remove(selected_user);
                 }
                 else
                     await new MessageDialog("Remove friend KO").ShowAsync();
@@ -307,7 +319,7 @@ namespace SoonZik.ViewModels
                 {
                     await new MessageDialog("Unfollow OK").ShowAsync();
                     Singleton.Instance.Current_user.follows.Remove(selected_user);
-
+                    follows.Remove(selected_user);
                 }
                 else
                     await new MessageDialog("Unfollow KO").ShowAsync();
