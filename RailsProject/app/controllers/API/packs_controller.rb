@@ -38,7 +38,7 @@ module API
                                                                   descriptions: {
                                                                     :only => Description.miniKey
                                                                   }
-                                                                }, :only => Pack.miniKey) }
+                                                                }, :only => Pack.miniKey, methods: :averagePrice) }
         end
         if (@returnValue[:content].size == 0)
           codeAnswer 202
@@ -86,7 +86,7 @@ module API
                                                                 descriptions: {
                                                                   :only => Description.miniKey
                                                                 }
-                                                              }, :only => Pack.miniKey) }
+                                                              }, :only => Pack.miniKey, methods: :averagePrice) }
           codeAnswer 200
         end
       rescue
@@ -196,7 +196,7 @@ module API
                                                                   descriptions: {
                                                                     :only => Description.miniKey
                                                                   }
-                                                                  }, :only => Pack.miniKey) }
+                                                                  }, :only => Pack.miniKey, methods: :averagePrice) }
 
         if (pack_object.size == 0)
           codeAnswer 202

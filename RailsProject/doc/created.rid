@@ -1,10 +1,10 @@
-Mon, 24 Aug 2015 17:46:53 +0200
+Thu, 27 Aug 2015 22:50:45 +0200
 app/controllers/API/albums_controller.rb	Wed, 19 Aug 2015 17:53:11 +0200
 app/controllers/API/api_controller.rb	Sat, 15 Aug 2015 18:54:19 +0200
 app/controllers/API/apisecurity_controller.rb	Tue, 18 Aug 2015 13:03:10 +0200
-app/controllers/API/battles_controller.rb	Sat, 27 Jun 2015 20:41:02 +0200
-app/controllers/API/carts_controller.rb	Tue, 18 Aug 2015 13:03:20 +0200
-app/controllers/API/concerts_controller.rb	Tue, 19 May 2015 21:46:09 +0200
+app/controllers/API/battles_controller.rb	Wed, 26 Aug 2015 17:55:22 +0200
+app/controllers/API/carts_controller.rb	Wed, 26 Aug 2015 21:45:25 +0200
+app/controllers/API/concerts_controller.rb	Mon, 24 Aug 2015 21:35:55 +0200
 app/controllers/API/genres_controller.rb	Sun, 02 Aug 2015 16:23:29 +0200
 app/controllers/API/influences_controller.rb	Tue, 19 May 2015 21:46:31 +0200
 app/controllers/API/languages_controller.rb	Wed, 08 Jul 2015 15:20:47 +0200
@@ -13,10 +13,10 @@ app/controllers/API/messages_controller.rb	Wed, 27 May 2015 14:49:17 +0200
 app/controllers/API/musics_controller.rb	Thu, 20 Aug 2015 21:31:40 +0200
 app/controllers/API/news_controller.rb	Wed, 19 Aug 2015 17:53:38 +0200
 app/controllers/API/notifications_controller.rb	Mon, 17 Aug 2015 22:28:02 +0200
-app/controllers/API/packs_controller.rb	Tue, 16 Jun 2015 15:58:54 +0200
+app/controllers/API/packs_controller.rb	Thu, 27 Aug 2015 22:39:11 +0200
 app/controllers/API/playlists_controller.rb	Thu, 20 Aug 2015 19:54:51 +0200
-app/controllers/API/purchases_controller.rb	Sun, 26 Jul 2015 17:58:12 +0200
-app/controllers/API/searchs_controller.rb	Mon, 24 Aug 2015 17:46:11 +0200
+app/controllers/API/purchases_controller.rb	Thu, 27 Aug 2015 22:43:51 +0200
+app/controllers/API/searchs_controller.rb	Mon, 24 Aug 2015 18:28:26 +0200
 app/controllers/API/suggestions_controller.rb	Tue, 02 Jun 2015 21:16:10 +0200
 app/controllers/API/tweets_controller.rb	Mon, 17 Aug 2015 21:24:52 +0200
 app/controllers/API/users_controller.rb	Tue, 18 Aug 2015 18:44:36 +0200
@@ -49,7 +49,7 @@ app/models/music_note.rb	Thu, 18 Jun 2015 19:00:51 +0200
 app/models/news.rb	Thu, 18 Jun 2015 19:00:51 +0200
 app/models/newstext.rb	Thu, 18 Jun 2015 19:00:51 +0200
 app/models/notification.rb	Sun, 16 Aug 2015 22:57:35 +0200
-app/models/pack.rb	Sat, 15 Aug 2015 12:54:56 +0200
+app/models/pack.rb	Thu, 27 Aug 2015 22:38:41 +0200
 app/models/playlist.rb	Thu, 18 Jun 2015 19:00:51 +0200
 app/models/playlist_object.rb	Thu, 18 Jun 2015 19:00:51 +0200
 app/models/proposition.rb	Thu, 18 Jun 2015 19:00:51 +0200

@@ -36,4 +36,18 @@ class Pack < ActiveRecord::Base
   def self.miniKey
   	[:id, :title, :begin_date, :end_date, :minimal_price]
   end
+
+  # Calculate the average of donation for this pack
+  def averagePrice
+    id = self.id
+    average = 0.0
+    pp = PurchasedPack.where(pack_id: id).all
+
+    pp.each do |purchase|
+      average += purchase.value
+    end
+
+    average = average / pp.size if pp.size > 0
+    return average
+  end
 end

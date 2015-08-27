@@ -444,9 +444,12 @@ the artists and the vote</p>
           <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:created</span>
         <span class="ruby-keyword">end</span>
         <span class="ruby-ivar">@returnValue</span>[<span class="ruby-value">:content</span>] = <span class="ruby-identifier">oldVote</span>.<span class="ruby-identifier">as_json</span>(<span class="ruby-identifier">only</span><span class="ruby-operator">:</span> [<span class="ruby-value">:id</span>], <span class="ruby-value">:include</span> =<span class="ruby-operator">&gt;</span> {
-            <span class="ruby-identifier">battle</span><span class="ruby-operator">:</span> { <span class="ruby-identifier">only</span><span class="ruby-operator">:</span> <span class="ruby-constant">Battle</span>.<span class="ruby-identifier">miniKey</span> },
-            <span class="ruby-identifier">artist</span><span class="ruby-operator">:</span> { <span class="ruby-identifier">only</span><span class="ruby-operator">:</span> <span class="ruby-constant">User</span>.<span class="ruby-identifier">miniKey</span> }
-          })
+          <span class="ruby-identifier">battle</span><span class="ruby-operator">:</span> { <span class="ruby-identifier">only</span><span class="ruby-operator">:</span> <span class="ruby-constant">Battle</span>.<span class="ruby-identifier">miniKey</span>, <span class="ruby-value">:include</span> =<span class="ruby-operator">&gt;</span> {
+              <span class="ruby-value">:votes</span> =<span class="ruby-operator">&gt;</span> { <span class="ruby-value">:only</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">Vote</span>.<span class="ruby-identifier">miniKey</span> }
+            }
+          },
+          <span class="ruby-identifier">artist</span><span class="ruby-operator">:</span> { <span class="ruby-identifier">only</span><span class="ruby-operator">:</span> <span class="ruby-constant">User</span>.<span class="ruby-identifier">miniKey</span> }
+        })
       <span class="ruby-keyword">end</span>
     <span class="ruby-keyword">else</span>
       <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">500</span>

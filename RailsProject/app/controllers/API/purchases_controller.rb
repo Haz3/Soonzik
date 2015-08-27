@@ -111,44 +111,84 @@ module API
     
     # Buy the current cart and empty it
     # 
-    # Route : /purchases/buycart
+    # Route : /purchases/buypack
     #
     # ==== Options
     #
-    # +pack_id+ - The id of the pack purchased
-    # +amount+ - The donation
-    # +artist+ - The percentage for the artist
-    # +association+ - The percentage for the association
-    # +website+ - The percentage for the website
+    # - +pack_id+ - The id of the pack purchased
+    # - +amount+ - The donation
+    # - +artist+ - The percentage for the artist
+    # - +association+ - The percentage for the association
+    # - +website+ - The percentage for the website
     # 
     # ===== HTTP VALUE
     # 
     # - +201+ - In case of success, return the purchase created in this format : { user: {}, purchased_musics: { music: {}, purchased_album: { album : {}, purchased_pack: { partial: value, pack: {} } } } }
     # - +401+ - It is not a secured transaction
-    # - +404+ - The pack is not found
+    # - +403+ - The sum of the percentage != 100
     # - +503+ - Error from server
     # 
     def buypack
+      objectToDelete = []
       begin
         if (@security)
-          cartToDelete = []
-          p = Purchase.new
-          p.user_id = @user_id
-          p.save!
-
           pack = Pack.find_by_id(@pack_id)
           if (pack == nil)
             codeAnswer 502
             defineHttp :not_found
-          end
+          elsif @artist.to_i + @association.to_i + @website.to_i != 100 || @amount.to_i < pack.minimal_price
+            codeAnswer 504
+            defineHttp :bad_request
+          else
+            p = Purchase.new
+            p.user_id = @user_id
+            p.save!
 
-          pp = PurchasedPack.new
-          pp.
+            objectToDelete.unshift p
+
+            pp = PurchasedPack.new
+            pp.pack_id = pack.id
+            pp.partial = (pack.averagePrice > @amount)
+            pp.artist_percentage = @artist
+            pp.association_percentage = @association
+            pp.website_percentage = @website
+            pp.value = @amount
+            pp.save!
+
+            objectToDelete.unshift pp
+
+            pack.albums.each do |album|
+              pa = PurchasedAlbum.new
+              pa.album_id = album.id
+              pa.save!
+              objectToDelete.unshift pa
+
+              album.musics.each { |zik|
+                pm = PurchasedMusic.new
+                pm.purchase_id = p.id
+                pm.purchased_album_id = pa.id
+                pm.music_id = zik.id
+                pm.save!
+                objectToDelete.unshift pm
+              }
+            end
+
+            @returnValue = {
+              content: pp.as_json(except: [:updated_at], :include => {
+                pack: {
+                  only: Pack.miniKey
+                }
+              } )
+            }
+          end
         else
           codeAnswer 500
           defineHttp :forbidden
         end
       rescue
+        objectToDelete.each do |obj|
+          obj.destroy
+        end
         codeAnswer 504
         defineHttp :service_unavailable
       end

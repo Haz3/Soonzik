@@ -795,7 +795,7 @@ var SearchIndex =
 	{
 		"name": "buypack",
 		"link": "API/PurchasesController.html#method-i-buypack",
-		"snippet": "<p>Buy the current cart and empty it\n<p>Route : /purchases/buycart\n<p>Options\n",
+		"snippet": "<p>Buy the current cart and empty it\n<p>Route : /purchases/buypack\n<p>Options\n",
 		"type": "anymethod"
 	},
 	{
@@ -1246,6 +1246,12 @@ var SearchIndex =
 		"name": "miniKey",
 		"link": "Pack.html#method-c-miniKey",
 		"snippet": "<p>Filter of information for the API\n<p>Fields returned : [:id, :title]\n",
+		"type": "anymethod"
+	},
+	{
+		"name": "averagePrice",
+		"link": "Pack.html#method-i-averagePrice",
+		"snippet": "<p>Calculate the average of donation for this pack\n",
 		"type": "anymethod"
 	},
 	{
