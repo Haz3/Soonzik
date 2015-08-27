@@ -160,6 +160,7 @@ module API
             pack.albums.each do |album|
               pa = PurchasedAlbum.new
               pa.album_id = album.id
+              pa.purchased_pack_id = pp.id
               pa.save!
               objectToDelete.unshift pa
 

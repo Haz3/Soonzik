@@ -92,7 +92,8 @@ SoonzikApp.controller('DiscothequeCtrl', ['$scope', 'SecureAuth', 'HTTPService',
 		  		/*
 						GET NOTE PACKS
 		  		*/
-	  			for (var i = 0 ; i < $scope.mymusic.packs.length ; i++) {
+	  			
+	  			/*for (var i = 0 ; i < $scope.mymusic.packs.length ; i++) {
 	  				for (var j = 0 ; j < $scope.mymusic.packs[i].albums.length ; j++) {
 		  				for (var k = 0 ; k < $scope.mymusic.packs[i].albums[j].musics.length ; k++) {
 		  					arr_pack_id.push($scope.mymusic.packs[i].albums[j].musics[k].id);
@@ -116,11 +117,11 @@ SoonzikApp.controller('DiscothequeCtrl', ['$scope', 'SecureAuth', 'HTTPService',
 				  				}
 				  			}
 			  			}
-			  		*/
+			  		//
 			  		}, function(error) {
 			  			NotificationService.error(" labels.note ");
 			  		});
-		  		}
+		  		}*/
 
 
 					$scope.loading = false;
