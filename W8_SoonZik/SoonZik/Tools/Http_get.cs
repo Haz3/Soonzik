@@ -47,6 +47,18 @@ namespace SoonZik.Tools
             return news;
         }
 
+        public static async Task<Album> get_album_by_id(int id)
+        {
+            var album = (Album)await get_object(new Album(), "albums/" + id.ToString());
+            return album;
+        }
+
+        public static async Task<Music> get_music_by_id(int id)
+        {
+            var music = (Music)await get_object(new Music(), "musics/" + id.ToString());
+            return music;
+        }
+
         public static async Task<object> get_object(object Object, string elem)
         {
             Exception exception = null;

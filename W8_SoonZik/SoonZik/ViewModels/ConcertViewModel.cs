@@ -51,7 +51,7 @@ namespace SoonZik.ViewModels
             HttpClient client = new HttpClient();
             Exception exception = null;
 
-            string address = addr.numberStreet.ToString() + " " + addr.street + " " + addr.zipcode;
+            string address = addr.numberStreet.ToString() + " " + addr.street + " " + addr.zipcode + " " + addr.city;
             string url = "http://maps.google.com/maps/api/geocode/json?address=" + WebUtility.UrlEncode(address);
 
             try

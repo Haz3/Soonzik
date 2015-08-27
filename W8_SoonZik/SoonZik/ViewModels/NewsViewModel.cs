@@ -28,7 +28,16 @@ namespace SoonZik.ViewModels
             }
         }
 
-
+        private string _content;
+        public string content
+        {
+            get { return _content; }
+            set
+            {
+                _content = value;
+                OnPropertyChanged("content");
+            }
+        }
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -50,6 +59,7 @@ namespace SoonZik.ViewModels
         {
             load_news_list();
         }
+
         async public void load_news(int id)
         {
             Exception exception = null;
@@ -72,24 +82,41 @@ namespace SoonZik.ViewModels
                 //        if (news.newstexts[1].content == null)
                 //            news.newstexts[1].content = "NO CONTENT AVAILABLE";
 
+
+
+                //if (news.newstexts.Any())
+                //{
+                //    if (Windows.System.UserProfile.GlobalizationPreferences.Languages[0] == "fr-FR")
+                //        news.content = news.newstexts[0].content;
+                //    else
+                //        if (news.newstexts.Count == 2)
+                //            news.content = news.newstexts[1].content;
+                //}
+                //else
+                //{
+                //    if (Windows.System.UserProfile.GlobalizationPreferences.Languages[0] == "fr-FR")
+                //        news.content = "Pas de contenu disponible.";
+                //    else
+                //        news.content = "No content available.";
+                //}
+
                 if (news.newstexts.Any())
                 {
                     if (Windows.System.UserProfile.GlobalizationPreferences.Languages[0] == "fr-FR")
-                        news.content = news.newstexts[0].content;
+                        content = news.newstexts[0].content;
                     else
-                        if (news.newstexts.Count == 2)
-                            news.content = news.newstexts[1].content;
+                        if (news.newstexts.Count == 1)
+                            content = news.newstexts[1].content;
                 }
                 else
                 {
                     if (Windows.System.UserProfile.GlobalizationPreferences.Languages[0] == "fr-FR")
-                        news.content = "Pas de contenu disponible.";
+                        content = "Pas de contenu disponible.";
                     else
-                        news.content = "No content available.";
+                        content = "No content available.";
                 }
 
                 // Load comment
-                    news.title = "enculer";
 
             }
 
