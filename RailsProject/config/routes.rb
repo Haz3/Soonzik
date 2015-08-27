@@ -226,6 +226,7 @@ Rails.application.routes.draw do
 
   get '/explorer(/:influence(/:genre))' => 'others#explorer', as: "explorer"
   get 'messages' => 'chats#index'
+  get '/my_music' => 'others#discotheque'
   get '/search/:value' => 'others#search'
   root 'others#index'
 

@@ -229,10 +229,12 @@ module API
               defineHttp :created
             end
             @returnValue[:content] = oldVote.as_json(only: [:id], :include => {
-                battle: { only: Battle.miniKey },
-                artist: { only: User.miniKey },
-                :votes => { :only => Vote.miniKey }
-              })
+              battle: { only: Battle.miniKey, :include => {
+                  :votes => { :only => Vote.miniKey }
+                }
+              },
+              artist: { only: User.miniKey }
+            })
           end
         else
           codeAnswer 500

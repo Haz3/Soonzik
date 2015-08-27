@@ -14,4 +14,10 @@ class OthersController < ApplicationController
 
 	def explorer
 	end
+
+	def discotheque
+		if (!user_sign_in?)
+			redirect_to :root
+		end
+	end
 end

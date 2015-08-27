@@ -84,6 +84,9 @@ SoonzikApp.config(['$routeProvider', '$locationProvider', '$httpProvider', funct
 		}).when('/concerts', {
 			templateUrl: '<%= asset_path("AngularJS/views/concerts/index.html.haml") %>',
 			controller: 'ConcertsCtrl'
+		}).when('/my_music', {
+			templateUrl: '<%= asset_path("AngularJS/views/discotheque/index.html.haml") %>',
+			controller: 'DiscothequeCtrl'
 		});
 	}
 

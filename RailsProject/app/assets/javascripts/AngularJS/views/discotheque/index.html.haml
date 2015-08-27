@@ -1,0 +1,18 @@
+.discotheque{ "ng-init" => "discoInit()" }
+	%loading{ "ng-if" => "loading == true" }
+	.discothequeContainer{ "ng-if" => "loading == false" }
+		%h3 {{ "labels. musics" }}
+		%hr
+		.music{ "ng-if" => "mymusic.musics.length > 0" }
+			%p{ "ng-repeat" => "music in mymusic.musics" } {{ music }}
+		%p{ "ng-if" => "mymusic.musics.length == 0" } {{ "labels. No content" }}
+		%h3 {{ "labels. albums" }}
+		%hr
+		.album{ "ng-if" => "mymusic.albums.length > 0" }
+			%p{ "ng-repeat" => "album in mymusic.albums" } {{ album }}
+		%p{ "ng-if" => "mymusic.albums.length == 0" } {{ "labels. No content" }}
+		%h3 {{ "labels. packs" }}
+		%hr
+		.pack{ "ng-if" => "mymusic.packs.length > 0" }
+			%p{ "ng-repeat" => "pack in mymusic.packs" } {{ pack }}
+		%p{ "ng-if" => "mymusic.packs.length == 0" } {{ "labels. No content" }}
