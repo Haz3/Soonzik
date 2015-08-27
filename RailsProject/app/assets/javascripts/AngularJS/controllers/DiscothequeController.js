@@ -58,8 +58,8 @@ SoonzikApp.controller('DiscothequeCtrl', ['$scope', 'SecureAuth', 'HTTPService',
 						GET NOTE ALBUMS
 		  		*/
 	  			for (var i = 0 ; i < $scope.mymusic.albums.length ; i++) {
-	  				for (var j = 0 ; j < $scope.mymusic.albums[i].album.musics.length ; j++) {
-	  					arr_alb_id.push($scope.mymusic.albums[i].album.musics[j].id);
+	  				for (var j = 0 ; j < $scope.mymusic.albums[i].musics.length ; j++) {
+	  					arr_alb_id.push($scope.mymusic.albums[i].musics[j].id);
 	  				}
 	  			}
 
@@ -71,13 +71,13 @@ SoonzikApp.controller('DiscothequeCtrl', ['$scope', 'SecureAuth', 'HTTPService',
 					if (arr_alb_id.length > 0) {
 						HTTPService.getMusicNotes(noteParametersAlbums).then(function(response) {
 			  			for (var ibis = 0 ; ibis < $scope.mymusic.albums.length ; ibis++) {
-			  				for (var jbis = 0 ; jbis < $scope.mymusic.albums[ibis].album.musics.length ; jbis++) {
+			  				for (var jbis = 0 ; jbis < $scope.mymusic.albums[ibis].musics.length ; jbis++) {
 
 			  					// iteration on notes
 			  					for (var kbis = 0 ; kbis < response.data.content.length ; kbis++) {
-				  					if (response.data.content[kbis].music_id == $scope.mymusic.albums[ibis].album.musics[jbis].id) {
-					  					$scope.mymusic.albums[ibis].album.musics[jbis].note = response.data.content[kbis].note;
-					  					$scope.mymusic.albums[ibis].album.musics[jbis].goldenStars = $scope.mymusic.albums[ibis].album.musics[jbis].note;
+				  					if (response.data.content[kbis].music_id == $scope.mymusic.albums[ibis].musics[jbis].id) {
+					  					$scope.mymusic.albums[ibis].musics[jbis].note = response.data.content[kbis].note;
+					  					$scope.mymusic.albums[ibis].musics[jbis].goldenStars = $scope.mymusic.albums[ibis].musics[jbis].note;
 					  					break;
 					  				}
 					  			}
@@ -93,7 +93,7 @@ SoonzikApp.controller('DiscothequeCtrl', ['$scope', 'SecureAuth', 'HTTPService',
 						GET NOTE PACKS
 		  		*/
 	  			
-	  			/*for (var i = 0 ; i < $scope.mymusic.packs.length ; i++) {
+	  			for (var i = 0 ; i < $scope.mymusic.packs.length ; i++) {
 	  				for (var j = 0 ; j < $scope.mymusic.packs[i].albums.length ; j++) {
 		  				for (var k = 0 ; k < $scope.mymusic.packs[i].albums[j].musics.length ; k++) {
 		  					arr_pack_id.push($scope.mymusic.packs[i].albums[j].musics[k].id);
@@ -108,20 +108,29 @@ SoonzikApp.controller('DiscothequeCtrl', ['$scope', 'SecureAuth', 'HTTPService',
 
 					if (arr_pack_id.length > 0) {
 		  			HTTPService.getMusicNotes(noteParametersPacks).then(function(response) {
-			  			console.log(response);
-			  			/*
-			  			for (var i = 0 ; i < $scope.mymusic.packs.length ; i++) {
-			  				for (var j = 0 ; j < $scope.mymusic.packs[i].albums.length ; j++) {
-				  				for (var k = 0 ; k < $scope.mymusic.packs[i].albums[j].musics.length ; k++) {
-				  					$scope.mymusic.packs[i].albums[j].musics[k].goldenStars = $scope.mymusic.packs[i].albums[j].musics[k].note;
+			  			
+			  			for (var ibis = 0 ; ibis < $scope.mymusic.packs.length ; ibis++) {
+			  				for (var jbis = 0 ; jbis < $scope.mymusic.packs[ibis].albums.length ; jbis++) {
+				  				for (var kbis = 0 ; kbis < $scope.mymusic.packs[ibis].albums[jbis].musics.length ; kbis++) {
+
+				  					// iteration on notes
+				  					for (var lbis = 0 ; lbis < response.data.content.length ; lbis++) {
+					  					if (response.data.content[lbis].music_id == $scope.mymusic.packs[ibis].albums[jbis].musics[kbis].id) {
+						  					$scope.mymusic.packs[ibis].albums[jbis].musics[kbis].note = response.data.content[lbis].note;
+						  					$scope.mymusic.packs[ibis].albums[jbis].musics[kbis].goldenStars = $scope.mymusic.packs[ibis].albums[jbis].musics[kbis].note;
+						  					break;
+						  				}
+						  			}
+
+				  					
 				  				}
 				  			}
 			  			}
-			  		//
+			  		
 			  		}, function(error) {
 			  			NotificationService.error(" labels.note ");
 			  		});
-		  		}*/
+		  		}
 
 
 					$scope.loading = false;

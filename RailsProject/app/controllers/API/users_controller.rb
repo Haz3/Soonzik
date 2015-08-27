@@ -217,13 +217,13 @@ module API
 								if (pm.purchased_album.purchased_pack_id == nil)
 									a = pm.purchased_album.album.as_json(only: Album.miniKey)
 									a[:musics] = pm.purchased_album.album.musics.as_json(only: Music.miniKey)
-									contentReturn[:albums] = contentReturn[:albums] | [{ album: a }]
+									contentReturn[:albums] = contentReturn[:albums] | [a]
 								else
 									pack = pm.purchased_album.purchased_pack.pack
-									value = { pack: pack.as_json(only: Pack.miniKey) }
-									value[:pack][:albums] = []
+									value = pack.as_json(only: Pack.miniKey)
+									value[:albums] = []
 									pack.albums.each do |album|
-										value[:pack][:albums] << album.as_json(only: Album.miniKey, include: { musics: { only: Music.miniKey } } )
+										value[:albums] << album.as_json(only: Album.miniKey, include: { musics: { only: Music.miniKey } } )
 									end
 									contentReturn[:packs] = contentReturn[:packs] | [value]
 								end
