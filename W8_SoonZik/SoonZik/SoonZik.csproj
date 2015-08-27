@@ -149,7 +149,6 @@
     <Compile Include="ViewModels\Command\ConnectionCommand.cs" />
     <Compile Include="ViewModels\Command\EditUserCommand.cs" />
     <Compile Include="ViewModels\Command\FollowCommand.cs" />
-    <Compile Include="ViewModels\Command\GenreCommand.cs" />
     <Compile Include="ViewModels\Command\RemoveFriendCommand.cs" />
     <Compile Include="ViewModels\Command\SearchCommand.cs" />
     <Compile Include="ViewModels\Command\SignupCommand.cs" />
