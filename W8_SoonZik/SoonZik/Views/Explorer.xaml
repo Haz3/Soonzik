@@ -16,10 +16,10 @@
         </Grid>
 
 
-        <TextBlock x:Uid="genre_txt" Name="genre_txt" HorizontalAlignment="Left" Margin="92,130,0,0" TextWrapping="Wrap" Text="Genres" VerticalAlignment="Top" Height="45" Width="170" Foreground="Black" FontSize="30"/>
-        <TextBlock x:Uid="pack_txt" x:Name="pack_txt" HorizontalAlignment="Left" Margin="590,135,0,0" TextWrapping="Wrap" Text="Packs" VerticalAlignment="Top" Height="45" Width="170" Foreground="Black" FontSize="30"/>
-        <TextBlock x:Uid="artist_txt" x:Name="artist_txt" HorizontalAlignment="Left" Margin="1590,130,0,0" TextWrapping="Wrap" Text="Artists" VerticalAlignment="Top" Height="45" Width="170" Foreground="Black" FontSize="30"/>
-        <TextBlock x:Uid="album_txt" x:Name="album_txt" HorizontalAlignment="Left" Margin="1090,130,0,0" TextWrapping="Wrap" Text="Albums" VerticalAlignment="Top" Height="45" Width="170" Foreground="Black" FontSize="30"/>
+        <TextBlock x:Uid="genres_txt" Name="genres_txt" HorizontalAlignment="Left" Margin="92,130,0,0" TextWrapping="Wrap" Text="Genres" VerticalAlignment="Top" Height="45" Width="170" Foreground="Black" FontSize="30"/>
+        <TextBlock x:Uid="packs_txt" x:Name="packs_txt" HorizontalAlignment="Left" Margin="590,135,0,0" TextWrapping="Wrap" Text="Packs" VerticalAlignment="Top" Height="45" Width="170" Foreground="Black" FontSize="30"/>
+        <TextBlock x:Uid="artists_txt" x:Name="artists_txt" HorizontalAlignment="Left" Margin="1590,130,0,0" TextWrapping="Wrap" Text="Artists" VerticalAlignment="Top" Height="45" Width="170" Foreground="Black" FontSize="30"/>
+        <TextBlock x:Uid="albums_txt" x:Name="albums_txt" HorizontalAlignment="Left" Margin="1090,130,0,0" TextWrapping="Wrap" Text="Albums" VerticalAlignment="Top" Height="45" Width="170" Foreground="Black" FontSize="30"/>
 
         <GridView x:Name="genre_list" ItemClick="genre_list_ItemClick" ItemsSource="{Binding genre_list}" Background="#b0b0b0" HorizontalAlignment="Left" Margin="90,180,0,0" VerticalAlignment="Top" Width="435" Height="850" IsItemClickEnabled="True" IsSwipeEnabled="False" SelectionMode="None" SelectedItem="{Binding genre_selected, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
             <GridView.ItemTemplate>

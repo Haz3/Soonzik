@@ -55,8 +55,8 @@
             </FlipView.ItemTemplate>
         </FlipView>
 
-        <Button x:Name="vote_artist_one_btn" Command="{Binding do_vote_one, Mode=OneWay}" CommandParameter="1" Content="Vote Artist 1" HorizontalAlignment="Left" Margin="297,652,0,0" VerticalAlignment="Top" Height="50" Width="496" Background="#FFE03333" FontSize="20"/>
-        <Button x:Name="vote_artist_two_btn" Command="{Binding do_vote_two, Mode=OneWay}" CommandParameter="2" Content="Vote Artist 2" HorizontalAlignment="Left" Margin="1017,652,0,0" VerticalAlignment="Top" Width="496" Height="50" Background="#FF5D4545" FontSize="20"/>
+        <Button x:Uid="vote_artist_one_btn" x:Name="vote_artist_one_btn" Command="{Binding do_vote_one, Mode=OneWay}" CommandParameter="1" Content="Vote Artist 1" HorizontalAlignment="Left" Margin="297,652,0,0" VerticalAlignment="Top" Height="50" Width="496" Background="#FFE03333" FontSize="20"/>
+        <Button x:Uid="vote_artist_two_btn" x:Name="vote_artist_two_btn" Command="{Binding do_vote_two, Mode=OneWay}" CommandParameter="2" Content="Vote Artist 2" HorizontalAlignment="Left" Margin="1017,652,0,0" VerticalAlignment="Top" Width="496" Height="50" Background="#FF5D4545" FontSize="20"/>
 
     </Grid>
 </Page>

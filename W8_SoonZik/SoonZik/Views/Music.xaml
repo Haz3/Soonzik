@@ -9,7 +9,7 @@
 
     <Grid Background="#CCCCCC" Height="1080">
         <Grid Height="80" VerticalAlignment="Top" Width="1920" Background="#B0B0B0">
-            <TextBlock x:Name="music_txt" HorizontalAlignment="Left" Margin="100,10,0,0" TextWrapping="Wrap" Text="Music" VerticalAlignment="Top" Height="55" Width="171" FontSize="53.333" Foreground="Black"/>
+            <TextBlock x:Name="music_txt" x:Uid="music_txt" HorizontalAlignment="Left" Margin="100,10,0,0" TextWrapping="Wrap" Text="Music" VerticalAlignment="Top" Height="55" Width="171" FontSize="53.333" Foreground="Black"/>
             <Button x:Name="back_btn" Content="Button" HorizontalAlignment="Left" Margin="30,20,0,0" VerticalAlignment="Top" Style="{StaticResource NavigationBackButtonNormalStyle}" RequestedTheme="Light" Click="Button_Click"/>
         </Grid>
 
@@ -37,7 +37,7 @@
             <TextBlock x:Name="duration_txt" x:Uid="duration_txt" Text="Duration:" HorizontalAlignment="Left" Margin="90,136,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Foreground="Black" Height="40" Width="90" FontSize="20" Grid.Column="1"/>
             <TextBlock x:Name="note_txt" x:Uid="note_txt" Text="Note:" HorizontalAlignment="Left" Margin="90,172,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Foreground="Black" Height="40" Width="70" FontSize="20" Grid.Column="1"/>
 
-            <Button x:Name="add_to_cart_btn" Content="Ajouter au panier" Margin="632,11,-383,12" Grid.Column="1" Height="52" Width="201" Background="#FFEC3F3F" FontSize="20"/>
+            <Button x:Name="add_to_cart_btn" x:Uid="add_to_cart_btn" Content="Ajouter au panier" Margin="632,11,-383,12" Grid.Column="1" Height="52" Width="201" Background="#FFEC3F3F" FontSize="20"/>
 
         </Grid>
 
