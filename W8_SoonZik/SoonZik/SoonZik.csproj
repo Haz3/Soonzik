@@ -135,10 +135,8 @@
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\Vote.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Tools\Get_coment.cs" />
     <Compile Include="Tools\Http_get.cs" />
     <Compile Include="Tools\Http_post.cs" />
-    <Compile Include="Tools\Post_comment.cs" />
     <Compile Include="Tools\Security.cs" />
     <Compile Include="Tools\Singleton.cs" />
     <Compile Include="ViewModels\AlbumViewModel.cs" />
