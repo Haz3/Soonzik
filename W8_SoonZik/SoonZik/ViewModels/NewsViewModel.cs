@@ -1,13 +1,15 @@
-﻿using System;
+﻿using SoonZik.Common;
+using SoonZik.Models;
+using SoonZik.Tools;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
-using SoonZik.Models;
-using SoonZik.Tools;
-using System.Diagnostics;
+using System.Windows.Input;
 using Windows.UI.Popups;
 using Windows.UI.Xaml;
 
@@ -17,6 +19,17 @@ namespace SoonZik.ViewModels
     {
         public ObservableCollection<News> newslist { get; set; }
 
+        private ObservableCollection<Comment> _commentlist;
+        public ObservableCollection<Comment> commentlist
+        {
+            get { return _commentlist; }
+            set
+            {
+                _commentlist = value;
+                OnPropertyChanged("commentlist");
+            }
+        }
+
         private News _news;
         public News news
         {
@@ -25,6 +38,17 @@ namespace SoonZik.ViewModels
             {
                 _news = value;
                 OnPropertyChanged("news");
+            }
+        }
+
+        private string _comment_content;
+        public string comment_content
+        {
+            get { return _comment_content; }
+            set
+            {
+                _comment_content = value;
+                OnPropertyChanged("comment_content");
             }
         }
 
@@ -39,6 +63,12 @@ namespace SoonZik.ViewModels
             }
         }
 
+        public ICommand do_send_comment
+        {
+            get;
+            private set;
+        }
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected void OnPropertyChanged(string name)
@@ -50,14 +80,32 @@ namespace SoonZik.ViewModels
             }
         }
 
+        // CLICK SUR UNE NEWS CTOR
         public NewsViewModel(int id)
         {
+            commentlist = new ObservableCollection<Comment>();
+            do_send_comment = new RelayCommand(send_comment);
             load_news(id);
         }
 
+        // CTOR POUR LA PAGE LISTE NEWS
         public NewsViewModel()
         {
             load_news_list();
+        }
+
+        async public void send_comment()
+        {
+            if (await CommentViewModel.send_comment(comment_content, "news", news.id.ToString()))
+            {
+                // New comment to add in the observable collection in order to refresh the list ...
+                var new_comment = new Comment();
+                new_comment.author_id = Singleton.Instance.Current_user.id;
+                new_comment.content = comment_content;
+                commentlist.Add(new_comment);
+                // To delete text in comment bar
+                comment_content = "";
+            }
         }
 
         async public void load_news(int id)
@@ -66,47 +114,21 @@ namespace SoonZik.ViewModels
 
             try
             {
+                // Load the news
                 news = await Http_get.get_news_by_id(id);
 
-                // Detect current language and set visibility
-                //if (Windows.System.UserProfile.GlobalizationPreferences.Languages[0] == "fr-FR")
-                //    content_en_visibility = Visibility.Collapsed;
-                //else
-                //    content_fr_visibility = Visibility.Collapsed;
-
-                // if newstexts is not empty -> check current language -> set content
-
-                //    if (news.newstexts[0].content == null)
-                //        news.newstexts[0].content = "PAS DE CONTENU DISPONIBLE";
-                //    if (news.newstexts.Count == 1)
-                //        if (news.newstexts[1].content == null)
-                //            news.newstexts[1].content = "NO CONTENT AVAILABLE";
-
-
-
-                //if (news.newstexts.Any())
-                //{
-                //    if (Windows.System.UserProfile.GlobalizationPreferences.Languages[0] == "fr-FR")
-                //        news.content = news.newstexts[0].content;
-                //    else
-                //        if (news.newstexts.Count == 2)
-                //            news.content = news.newstexts[1].content;
-                //}
-                //else
-                //{
-                //    if (Windows.System.UserProfile.GlobalizationPreferences.Languages[0] == "fr-FR")
-                //        news.content = "Pas de contenu disponible.";
-                //    else
-                //        news.content = "No content available.";
-                //}
-
+                // Check language
                 if (news.newstexts.Any())
                 {
                     if (Windows.System.UserProfile.GlobalizationPreferences.Languages[0] == "fr-FR")
                         content = news.newstexts[0].content;
                     else
-                        if (news.newstexts.Count == 1)
+                    {
+                        if ((news.newstexts).Count == 2)
                             content = news.newstexts[1].content;
+                        else
+                            content = "No content available.";
+                    }
                 }
                 else
                 {
@@ -116,8 +138,8 @@ namespace SoonZik.ViewModels
                         content = "No content available.";
                 }
 
-                // Load comment
-
+                var comment_vm = await CommentViewModel.load_comments("/news/" + news.id.ToString());
+                commentlist = comment_vm;
             }
 
             catch (Exception e)

@@ -60,10 +60,7 @@
 
 
 
-        <ListView ItemClick="News_ItemClick" ItemsSource="{Binding newslist}" x:Name="News" Background="#B0B0B0" HorizontalAlignment="Left" Height="800" Margin="154,220,0,0" VerticalAlignment="Top" Width="500"  IsItemClickEnabled="True" IsSwipeEnabled="False" SelectionMode="None">
-            <ListView.DataContext>
-                <ViewModels:NewsViewModel/>
-            </ListView.DataContext>
+        <ListView ItemClick="News_ItemClick" ItemsSource="{Binding news_list}" x:Name="News" Background="#B0B0B0" HorizontalAlignment="Left" Height="800" Margin="154,220,0,0" VerticalAlignment="Top" Width="500"  IsItemClickEnabled="True" IsSwipeEnabled="False" SelectionMode="None">
 
             <ListView.ItemTemplate>
                 <DataTemplate>
@@ -83,10 +80,7 @@
             </ListView.ItemTemplate>
         </ListView>
 
-        <ListView ItemClick="Music_ItemClick" ItemsSource="{Binding albumlist}" x:Name="Music" Background="#B0B0B0" HorizontalAlignment="Left" Height="800" Margin="710,220,0,0" VerticalAlignment="Top" Width="500" IsItemClickEnabled="True" IsSwipeEnabled="False" SelectionMode="None">
-            <ListView.DataContext>
-                <ViewModels:AlbumViewModel/>
-            </ListView.DataContext>
+        <ListView ItemClick="Music_ItemClick" ItemsSource="{Binding album_list}" x:Name="Music" Background="#B0B0B0" HorizontalAlignment="Left" Height="800" Margin="710,220,0,0" VerticalAlignment="Top" Width="500" IsItemClickEnabled="True" IsSwipeEnabled="False" SelectionMode="None">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <StackPanel>

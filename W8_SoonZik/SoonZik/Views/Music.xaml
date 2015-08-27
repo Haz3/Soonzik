@@ -9,7 +9,7 @@
 
     <Grid Background="#CCCCCC" Height="1080">
         <Grid Height="80" VerticalAlignment="Top" Width="1920" Background="#B0B0B0">
-            <TextBlock x:Name="music_txt" x:Uid="music_txt" HorizontalAlignment="Left" Margin="100,10,0,0" TextWrapping="Wrap" Text="Music" VerticalAlignment="Top" Height="55" Width="171" FontSize="53.333" Foreground="Black"/>
+            <TextBlock x:Name="music_txt" x:Uid="music_txt" HorizontalAlignment="Left" Margin="100,10,0,0" TextWrapping="Wrap" Text="Music" VerticalAlignment="Top" Height="55" Width="Auto" FontSize="53.333" Foreground="Black"/>
             <Button x:Name="back_btn" Content="Button" HorizontalAlignment="Left" Margin="30,20,0,0" VerticalAlignment="Top" Style="{StaticResource NavigationBackButtonNormalStyle}" RequestedTheme="Light" Click="Button_Click"/>
         </Grid>
 
@@ -25,12 +25,12 @@
             <Image  Grid.Row="1" Source="https://pixabay.com/static/uploads/photo/2014/04/03/11/58/record-312730_640.png" Stretch="Fill" Width="174" Height="174" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,117,46,0"/>
             <Rectangle Fill="#FF00AFDC" HorizontalAlignment="Left" Height="75" StrokeEndLineCap="Square" Stroke="#FF00AFDC" VerticalAlignment="Top" Width="1120" Grid.ColumnSpan="2" Margin="0,0,-405,0"/>
 
-            <TextBlock Name="music_title" Margin="20,10,0,19" TextWrapping="Wrap" Text="Title" VerticalAlignment="Center" FontSize="36" Height="46" Grid.ColumnSpan="2"/>
-            <TextBlock Name="music_artist" Text="Artist" HorizontalAlignment="Left" Margin="185,57,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Foreground="Black" Height="40" Width="160" FontSize="20" Grid.Column="1"/>
+            <TextBlock Name="music_title" Text="{Binding music.title, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="20,10,0,19" TextWrapping="Wrap" VerticalAlignment="Center" FontSize="36" Height="46" Grid.ColumnSpan="2"/>
+            <TextBlock Name="music_artist" Text="{Binding music.user.username, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="185,57,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Foreground="Black" Height="40" Width="160" FontSize="20" Grid.Column="1"/>
             <TextBlock x:Name="music_id" Visibility="Collapsed" Text="ID" Grid.Column="1" HorizontalAlignment="Left" Margin="765,10,-405,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="90" Height="46" FontSize="25"/>
-            <TextBlock x:Name="music_price" Text="Price" HorizontalAlignment="Left" Margin="185,96,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Foreground="Black" Height="40" Width="160" FontSize="20" Grid.Column="1"/>
-            <TextBlock x:Name="music_duration" Text="Duration" HorizontalAlignment="Left" Margin="185,135,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Foreground="Black" Height="40" Width="160" FontSize="20" Grid.Column="1"/>
-            <TextBlock x:Name="music_note" Text="Note" HorizontalAlignment="Left" Margin="185,172,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Foreground="Black" Height="40" Width="160" FontSize="20" Grid.Column="1"/>
+            <TextBlock x:Name="music_price" Text="{Binding music.price, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="185,96,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Foreground="Black" Height="40" Width="160" FontSize="20" Grid.Column="1"/>
+            <TextBlock x:Name="music_duration" Text="{Binding music.duration, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="185,135,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Foreground="Black" Height="40" Width="160" FontSize="20" Grid.Column="1"/>
+            <TextBlock x:Name="music_note" Text="{Binding music.getAverageNote, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="185,172,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Foreground="Black" Height="40" Width="160" FontSize="20" Grid.Column="1"/>
 
             <TextBlock x:Name="artist_txt" x:Uid="artist_txt" Text="Artiste:" HorizontalAlignment="Left" Margin="90,57,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Foreground="Black" Height="40" Width="70" FontSize="20" Grid.Column="1"/>
             <TextBlock x:Name="price_txt" x:Uid="price_txt" Text="Prix:" HorizontalAlignment="Left" Margin="90,96,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Foreground="Black" Height="40" Width="70" FontSize="20" Grid.Column="1"/>
@@ -41,7 +41,7 @@
 
         </Grid>
 
-        <ListView Name="comment_lv"  HorizontalAlignment="Left" Height="185" Margin="400,775,0,0" VerticalAlignment="Top" Width="1120" Background="White" IsItemClickEnabled="True" IsSwipeEnabled="False" SelectionMode="None">
+        <ListView Name="comment_lv" ItemsSource="{Binding commentlist, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Height="185" Margin="400,775,0,0" VerticalAlignment="Top" Width="1120" Background="White" IsItemClickEnabled="True" IsSwipeEnabled="False" SelectionMode="None">
 
             <ListView.ItemTemplate>
                 <DataTemplate>
@@ -63,8 +63,8 @@
 
         </ListView>
 
-        <TextBox x:Name="send_com_tb" HorizontalAlignment="Left" Margin="405,1000,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="20" Width="990"/>
-        <Button x:Name="send_com_btn" x:Uid="send_com_btn" Content="Envoyer" HorizontalAlignment="Left" Margin="1413,997,0,0" VerticalAlignment="Top" Width="110" Background="#FF4C9EFF" Click="send_com_btn_Click"/>
+        <TextBox x:Name="send_com_tb" Text="{Binding comment_content, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="405,1000,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="20" Width="990"/>
+        <Button x:Name="send_com_btn" Command="{Binding do_send_comment, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" x:Uid="send_com_btn" Content="Envoyer" HorizontalAlignment="Left" Margin="1413,997,0,0" VerticalAlignment="Top" Width="110" Background="#FF4C9EFF"/>
 
 
     </Grid>

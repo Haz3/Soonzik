@@ -13,6 +13,7 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using SoonZik.Tools;
+using SoonZik.ViewModels;
 
 using SoonZik.Views;
 
@@ -28,6 +29,7 @@ namespace SoonZik.Views
         public Home()
         {
             this.InitializeComponent();
+            DataContext = new HomeViewModel();
             hello_tb.Text = "Salut " + Singleton.Instance.Current_user.username;
         }
 

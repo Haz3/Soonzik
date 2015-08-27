@@ -1,9 +1,12 @@
-﻿using SoonZik.Models;
+﻿using Newtonsoft.Json.Linq;
+using SoonZik.Models;
 using SoonZik.Tools;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using Windows.UI.Popups;
@@ -13,44 +16,62 @@ namespace SoonZik.ViewModels
     class CommentViewModel
     {
         public ObservableCollection<Comment> commentlist { get; set; }
+        public static ObservableCollection<Comment> _commentlist { get; set; }
+
 
         public CommentViewModel()
         {
 
         }
 
-        public CommentViewModel(string elem)
+        async static public Task<ObservableCollection<Comment>> load_comments(string elem)
         {
-            load_comments(elem);
+            _commentlist = new ObservableCollection<Comment>();
+            elem += "/comments";
+
+            var comments = (List<Comment>)await Http_get.get_object(new List<Comment>(), elem);
+
+            foreach (var item in comments)
+                _commentlist.Add(item);
+            return _commentlist;
         }
 
-        async public void load_comments(string elem)
+        public static async Task<bool> send_comment(string comment_txt, string type, string id)
         {
             Exception exception = null;
-            commentlist = new ObservableCollection<Comment>();
-
-            //string elem = "news/" + id.ToString() + "/comments";
-            elem += "/comments";
+            var request = new Http_post();
 
             try
             {
-                var comments = (List<Comment>)await Http_get.get_object(new List<Comment>(), elem);
+                string secureKey = await Security.getSecureKey(Singleton.Instance.Current_user.id.ToString());
 
-                foreach (var item in comments)
-                    commentlist.Add(item);
+                string url = type + "/addcomment/" + id;
+                string comment_data =
+                    "user_id=" + Singleton.Instance.Current_user.id +
+                    "&content=" + WebUtility.UrlEncode(comment_txt) +
+                    "&secureKey=" + secureKey;
+
+
+                // HTTP_POST -> URL + DATA
+                var response = await request.post_request(type + "/addcomment/" + id, comment_data);
+                var json = JObject.Parse(response).SelectToken("message");
+
+                if (json.ToString() == "Created")
+                {
+                    await new MessageDialog("Comment SEND").ShowAsync();
+                    return true;
+                }
+                else
+                    await new MessageDialog("Comment KO").ShowAsync();
             }
-
             catch (Exception e)
             {
                 exception = e;
             }
 
             if (exception != null)
-            {
-	            MessageDialog msgdlg = new MessageDialog(exception.Message,"Comment error");
-	            await msgdlg.ShowAsync();
-            }
-
+                await new MessageDialog(exception.Message, "Comment POST Error").ShowAsync();
+            return false;
         }
     }
 }
