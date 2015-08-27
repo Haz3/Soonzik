@@ -28,6 +28,8 @@ namespace SoonZik.Views
         {
             this.InitializeComponent();
             DataContext = new ConnectionViewModel();
+
+            //langue.Text = Windows.System.UserProfile.GlobalizationPreferences.Languages[0];
         }
 
         private void signup_txt_SelectionChanged(object sender, TappedRoutedEventArgs e)

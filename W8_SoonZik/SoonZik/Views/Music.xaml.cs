@@ -33,9 +33,12 @@ namespace SoonZik.Views
         {
             SoonZik.Models.Music elem = e.Parameter as SoonZik.Models.Music;
             music_id.Text = elem.id.ToString();
-            music_artist.Text = "test";
+            //music_artist.Text = elem.user.username;
             music_title.Text = elem.title;
-            music_price.Text = elem.price.ToString();
+            music_price.Text = Math.Round(elem.price, 3).ToString();
+            music_note.Text = elem.getAverageNote.ToString();
+            music_duration.Text = TimeSpan.FromSeconds(elem.duration).ToString();   
+
 
             string request_elem = "/musics/" + elem.id.ToString();
 

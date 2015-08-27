@@ -19,16 +19,33 @@ namespace SoonZik.Tools
 
         public static async Task<User> get_user_by_username(string username)
         {
-            var user = (User)await get_object(new User(), "users/find?attribute[username]=" + username);
+            var user = (User)await get_object_find(new User(), "users/find?attribute[username]=" + username);
             return user;
         }
 
         public static async Task<User> get_user_by_id(string id)
         {
-            var user = (User)await get_object(new User(), "users/find?attribute[id]=" + id);
+            var user = (User)await get_object_find(new User(), "users/find?attribute[id]=" + id);
             return user;
         }
 
+        public static async Task<Genre> get_genre_by_id(int id)
+        {
+            var genre = (Genre)await get_object(new Genre(), "genres/" + id.ToString());
+            return genre;
+        }
+
+        public static async Task<Pack> get_pack_by_id(int id)
+        {
+            var pack = (Pack)await get_object(new Pack(), "packs/" + id.ToString());
+            return pack;
+        }
+
+        public static async Task<News> get_news_by_id(int id)
+        {
+            var news = (News)await get_object(new News(), "news/" + id.ToString());
+            return news;
+        }
 
         public static async Task<object> get_object(object Object, string elem)
         {
@@ -42,10 +59,7 @@ namespace SoonZik.Tools
                 HttpWebResponse response = (HttpWebResponse)await request.GetResponseAsync();
                 var reader = new StreamReader(response.GetResponseStream());
                 var json = JObject.Parse(reader.ReadToEnd()).SelectToken("content").ToString();
-
-                // Substring json to remove [ and ]
-                var deserialized = JsonConvert.DeserializeObject(json.Substring(1, json.Length - 2), Object.GetType());
-                return deserialized;
+                return JsonConvert.DeserializeObject(json, Object.GetType());
             }
             catch (WebException ex)
             {
@@ -57,7 +71,8 @@ namespace SoonZik.Tools
             return null;
         }
 
-        public async Task<object> get_object_list(object Object, string elem)
+        // COPY PASTE CAUSE FIND GIVES ME AN ARAY OF USER AND ITS NO GOOD
+        public static async Task<object> get_object_find(object Object, string elem)
         {
             Exception exception = null;
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url + elem);
@@ -69,8 +84,9 @@ namespace SoonZik.Tools
                 HttpWebResponse response = (HttpWebResponse)await request.GetResponseAsync();
                 var reader = new StreamReader(response.GetResponseStream());
                 var json = JObject.Parse(reader.ReadToEnd()).SelectToken("content").ToString();
-                var deserialized = JsonConvert.DeserializeObject(json, Object.GetType());
-                return deserialized;
+
+                // Substring json to remove [ and ] (Array)
+                return JsonConvert.DeserializeObject(json.Substring(1, json.Length - 2), Object.GetType());
             }
             catch (WebException ex)
             {
@@ -78,7 +94,7 @@ namespace SoonZik.Tools
             }
 
             if (exception != null)
-                await new MessageDialog(exception.Message, "Get Object List Error").ShowAsync();
+                await new MessageDialog(exception.Message, "Get Object Error").ShowAsync();
             return null;
         }
     }

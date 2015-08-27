@@ -36,10 +36,7 @@ namespace SoonZik.Views
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             SoonZik.Models.Genre elem = e.Parameter as SoonZik.Models.Genre;
-            genre_name.Text = elem.style_name;
-            genre_color.Text = elem.color_name;
-            genre_musics.ItemsSource = elem.musics;
-            genre_influences.ItemsSource = elem.influences;
+            DataContext = new GenreViewModel(elem.id);
         }
     }
 }

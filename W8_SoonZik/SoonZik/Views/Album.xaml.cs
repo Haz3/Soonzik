@@ -41,7 +41,7 @@ namespace SoonZik.Views
             album_artist.Text = elem.user.username;
             album_title.Text = elem.title;
             album_year.Text = elem.yearProd.ToString();
-            album_price.Text = elem.price.ToString();
+            album_price.Text = Math.Round(elem.price, 3).ToString();
             album_music_listview.ItemsSource = elem.musics;
             album_id_tb.Text = elem.id.ToString();
 

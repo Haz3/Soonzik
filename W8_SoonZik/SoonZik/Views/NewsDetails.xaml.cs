@@ -33,15 +33,17 @@ namespace SoonZik.Views
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             News elem = e.Parameter as News;
-            news_author.Text = elem.user.username;
-            news_title.Text = elem.title;
-            news_id_txt.Text = elem.id.ToString();
-            if (elem.newstexts.Any())
-            {
-                news_content.Text = elem.newstexts[0].content;
-                if (elem.newstexts.Count == 2)
-                   news_content2.Text = elem.newstexts[1].content;
-            }
+            DataContext = new NewsViewModel(elem.id);
+
+            //news_author.Text = elem.user.username;
+            //news_title.Text = elem.title;
+            //news_id_txt.Text = elem.id.ToString();
+            //if (elem.newstexts.Any())
+            //{
+            //    news_content.Text = elem.newstexts[0].content;
+            //    if (elem.newstexts.Count == 2)
+            //       news_content2.Text = elem.newstexts[1].content;
+            //}
 
             // To get the news id
             string request_elem = "/news/" + elem.id.ToString();

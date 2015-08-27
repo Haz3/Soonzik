@@ -9,6 +9,7 @@ using SoonZik.Tools;
 using Windows.UI.Popups;
 using System.Net.Http;
 using Newtonsoft.Json.Linq;
+using System.Net;
 
 namespace SoonZik.ViewModels
 {
@@ -24,15 +25,11 @@ namespace SoonZik.ViewModels
         async void load_concert()
         {
             Exception exception = null;
-            var request = new Http_get();
             concertlist = new ObservableCollection<Concert>();
-            List<Concert> list = new List<Concert>();
-
-            //Get_coordinates geocode = new Get_coordinates();
 
             try
             {
-                var concert = (List<Concert>)await request.get_object_list(list, "concerts");
+                var concert = (List<Concert>)await Http_get.get_object(new List<Concert>(), "concerts");
 
                 foreach (var item in concert)
                 {
@@ -46,10 +43,7 @@ namespace SoonZik.ViewModels
             }
 
             if (exception != null)
-            {
-                MessageDialog msgdlg = new MessageDialog(exception.Message, "Concert error");
-                await msgdlg.ShowAsync();
-            }
+                await new MessageDialog(exception.Message, "Concert error").ShowAsync();
         }
 
         async Task<Address> geocode(Address addr)
@@ -57,9 +51,8 @@ namespace SoonZik.ViewModels
             HttpClient client = new HttpClient();
             Exception exception = null;
 
-            string rawaddr = addr.numberStreet.ToString() + " " + addr.street + " " + addr.zipcode;
-            string address = rawaddr.Replace(" ", "+");
-            string url = "http://maps.google.com/maps/api/geocode/json?address=" + address;
+            string address = addr.numberStreet.ToString() + " " + addr.street + " " + addr.zipcode;
+            string url = "http://maps.google.com/maps/api/geocode/json?address=" + WebUtility.UrlEncode(address);
 
             try
             {
@@ -78,10 +71,7 @@ namespace SoonZik.ViewModels
                 exception = e;
             }
             if (exception != null)
-            {
-                MessageDialog msgdlg = new MessageDialog(exception.Message, "Concert geocode error");
-                await msgdlg.ShowAsync();
-            }
+                await new MessageDialog(exception.Message, "Concert geocode error").ShowAsync();
             return addr;
         }
     }

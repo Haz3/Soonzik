@@ -73,7 +73,7 @@
 
 
             <TextBlock x:Uid="friend_list_txt" x:Name="friend_list_txt" Grid.Column="2" HorizontalAlignment="Left" Margin="45,29,0,0" TextWrapping="Wrap" Text="Liste d'amis" VerticalAlignment="Top" Height="25" Width="310" FontSize="20"/>
-            <ListView x:Name="friend_list_lv" ItemsSource="{Binding edit_user.friends}" Grid.Column="2" HorizontalAlignment="Left" Height="320" Margin="45,69,0,0" VerticalAlignment="Top" Width="310" Background="White" Foreground="Black"  BorderBrush="#FF27AAE1" SelectedItem="{Binding selected_user, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+            <ListView x:Name="friend_list_lv" ItemsSource="{Binding friends, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="2" HorizontalAlignment="Left" Height="320" Margin="45,69,0,0" VerticalAlignment="Top" Width="310" Background="White" Foreground="Black"  BorderBrush="#FF27AAE1" SelectedItem="{Binding selected_user, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <StackPanel>
@@ -93,7 +93,7 @@
 
 
             <TextBlock x:Uid="follow_list_txt" x:Name="follow_list_txt" Grid.Column="2" Margin="45,445,0,0" TextWrapping="Wrap" Text="Liste des personnes suivies" VerticalAlignment="Top" Height="23" FontSize="20" HorizontalAlignment="Left" Width="310"/>
-            <ListView x:Name="follow_list_lv" ItemsSource="{Binding edit_user.follows}" Grid.Column="2" HorizontalAlignment="Left" Height="320" Margin="45,479,0,0" VerticalAlignment="Top" Width="310" Background="White" Foreground="Black" SelectedItem="{Binding selected_user, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+            <ListView x:Name="follow_list_lv" ItemsSource="{Binding follows, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="2" HorizontalAlignment="Left" Height="320" Margin="45,479,0,0" VerticalAlignment="Top" Width="310" Background="White" Foreground="Black" SelectedItem="{Binding selected_user, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <StackPanel>

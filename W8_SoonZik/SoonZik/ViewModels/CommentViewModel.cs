@@ -27,16 +27,14 @@ namespace SoonZik.ViewModels
         async public void load_comments(string elem)
         {
             Exception exception = null;
-            var request = new Http_get();
             commentlist = new ObservableCollection<Comment>();
-            List<Comment> list = new List<Comment>();
 
             //string elem = "news/" + id.ToString() + "/comments";
             elem += "/comments";
 
             try
             {
-                var comments = (List<Comment>)await request.get_object_list(list, elem);
+                var comments = (List<Comment>)await Http_get.get_object(new List<Comment>(), elem);
 
                 foreach (var item in comments)
                     commentlist.Add(item);

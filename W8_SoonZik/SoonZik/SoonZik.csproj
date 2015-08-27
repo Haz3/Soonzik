@@ -149,6 +149,7 @@
     <Compile Include="ViewModels\Command\ConnectionCommand.cs" />
     <Compile Include="ViewModels\Command\EditUserCommand.cs" />
     <Compile Include="ViewModels\Command\FollowCommand.cs" />
+    <Compile Include="ViewModels\Command\GenreCommand.cs" />
     <Compile Include="ViewModels\Command\RemoveFriendCommand.cs" />
     <Compile Include="ViewModels\Command\SearchCommand.cs" />
     <Compile Include="ViewModels\Command\SignupCommand.cs" />
@@ -156,6 +157,7 @@
     <Compile Include="ViewModels\CommentViewModel.cs" />
     <Compile Include="ViewModels\ConcertViewModel.cs" />
     <Compile Include="ViewModels\ConnectionViewModel.cs" />
+    <Compile Include="ViewModels\ExplorerViewModel.cs" />
     <Compile Include="ViewModels\GenreViewModel.cs" />
     <Compile Include="ViewModels\ListeningViewModel.cs" />
     <Compile Include="ViewModels\MusicViewModel.cs" />

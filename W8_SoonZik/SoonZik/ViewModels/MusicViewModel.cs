@@ -22,13 +22,11 @@ namespace SoonZik.ViewModels
             async void load_music()
             {
                 Exception exception = null;
-                var request = new Http_get();
                 musiclist = new ObservableCollection<Music>();
-                List<Music> list = new List<Music>();
 
                 try
                 {
-                    var musics = (List<Music>)await request.get_object_list(list, "musics");
+                    var musics = (List<Music>)await Http_get.get_object(new List<Music>(), "musics");
 
                     foreach (var item in musics)
                         musiclist.Add(item);
@@ -39,10 +37,7 @@ namespace SoonZik.ViewModels
                 }
 
                 if (exception != null)
-                {
-	                MessageDialog msgdlg = new MessageDialog(exception.Message,"Music error");
-	                await msgdlg.ShowAsync();
-                }
+	                await new MessageDialog(exception.Message,"Music error").ShowAsync();
             }
     }
 }

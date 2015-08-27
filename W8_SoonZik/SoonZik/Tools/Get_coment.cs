@@ -16,16 +16,13 @@ namespace SoonZik.Tools
 
         async public void load_coments(string elem)
         {
-            var request = new Http_get();
             commentlist = new ObservableCollection<Comment>();
 
-
             List<Comment> list = new List<Comment>();
-            var comments = (List<Comment>)await request.get_object_list(list, elem);
+            var comments = (List<Comment>)await Http_get.get_object(list, elem);
 
             foreach (var item in comments)
                 commentlist.Add(item);
-
         }
     }
 }

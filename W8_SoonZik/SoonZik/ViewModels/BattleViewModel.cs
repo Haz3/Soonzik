@@ -41,12 +41,11 @@ namespace SoonZik.ViewModels
         async void load_battle()
         {
             Exception exception = null;
-            var request = new Http_get();
             battlelist = new ObservableCollection<Battle>();
 
             try
             {
-                var battles = (List<Battle>)await request.get_object_list(new List<Battle>(), "battles");
+                var battles = (List<Battle>)await Http_get.get_object(new List<Battle>(), "battles");
                 foreach (var item in battles)
                     battlelist.Add(item);
             }

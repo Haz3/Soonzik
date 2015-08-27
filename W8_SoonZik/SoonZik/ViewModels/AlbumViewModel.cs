@@ -18,20 +18,27 @@ namespace SoonZik.ViewModels
 
         public AlbumViewModel()
         {
-            load_album();
+            load_albums();
         }
 
-        async void load_album()
+        //public AlbumViewModel(int id)
+        //{
+        //    load_albums(id);
+        //}
+
+        //async void load_albums(int id)
+        //{
+        //      SOON
+        //}
+
+        async void load_albums()
         {
             Exception exception = null;
-            var request = new Http_get();
             albumlist = new ObservableCollection<Album>();
-            List<Album> list = new List<Album>();
 
             try
             {
-                var albums = (List<Album>)await request.get_object_list(list, "albums");
-
+                var albums = (List<Album>)await Http_get.get_object(new List<Album>(), "albums");
                 foreach (var item in albums)
                     albumlist.Add(item);
             }
@@ -40,12 +47,8 @@ namespace SoonZik.ViewModels
                 exception = e;
             }
 
-
             if (exception != null)
-            {
-                MessageDialog msgdlg = new MessageDialog(exception.Message, "Album Error");
-                await msgdlg.ShowAsync();
-            }
+                await new MessageDialog(exception.Message, "Album Error").ShowAsync();
         }
     }
 }
