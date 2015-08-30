@@ -1,6 +1,6 @@
 class OthersController < ApplicationController
   include FormatsHelper
-	before_action :no_content
+	before_action :no_content, except: [:discotheque]
 
 	def no_content
 		render :text => "", :layout => true
@@ -16,8 +16,11 @@ class OthersController < ApplicationController
 	end
 
 	def discotheque
-		if (!user_sign_in?)
+		if (!user_signed_in?)
+			flash[:notice] = "You need to be login to access to this page"
 			redirect_to :root
+		else
+			render :text => "", :layout => true
 		end
 	end
 end

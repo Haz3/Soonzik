@@ -148,7 +148,7 @@ class User < ActiveRecord::Base
   validates :salt, length: { is: 40 }
   validates :email, :salt, :username, :fname, :lname, :birthday, :image, :idAPI, :secureKey, :language, presence: true
   validates :newsletter, :inclusion => { :in => [true, false] }
-  validates :email, :username, uniqueness: true
+  validates :email, :username, uniqueness: true, :case_sensitive => false
   validates :birthday, format: /(\d{4})-(\d{2})-(\d{2})/
   validates :password, presence: true, on: :created
 
