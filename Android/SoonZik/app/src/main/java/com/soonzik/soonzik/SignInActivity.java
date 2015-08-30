@@ -30,9 +30,11 @@ public class SignInActivity extends Activity {
                 Map<String, String> params = new HashMap<String, String>();
 
                 params.put("email", ((EditText) findViewById(R.id.emailSigninInput)).getText().toString());
+                params.put("fname", ((EditText) findViewById(R.id.firstnameSigninInput)).getText().toString());
+                params.put("lname", ((EditText) findViewById(R.id.lastnameSigninInput)).getText().toString());
                 params.put("username", ((EditText) findViewById(R.id.usernameSigninInput)).getText().toString());
                 params.put("password", ((EditText) findViewById(R.id.passwordSigninInput)).getText().toString());
-                params.put("birthday", ((EditText) findViewById(R.id.birthdaySigninInput)).getText().toString());
+                params.put("birthday", ((EditText) findViewById(R.id.birthdaySigninInput)).getText().toString() + " 00:00:01");
                 params.put("language", ((EditText) findViewById(R.id.languageSigninInput)).getText().toString());
 
                 ActiveRecord.save("User", params, false, new ActiveRecord.OnJSONResponseCallback() {
@@ -45,29 +47,8 @@ public class SignInActivity extends Activity {
                         t.show();
                     }
                 });
+                finish();
             }
         });
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_sign_in, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
     }
 }

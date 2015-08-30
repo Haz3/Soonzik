@@ -22,8 +22,8 @@ public class SearchFragment extends Fragment {
 
     EditText searchfield;
 
-    CharSequence Titles[]={"All","Music", "Pack", "User"};
-    int NumbOfTabs = 4;
+    CharSequence Titles[]={"All","Music", "Pack", "User", "Artist"};
+    int NumbOfTabs = 5;
     String searchText;
 
     @Override

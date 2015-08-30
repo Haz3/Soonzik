@@ -421,6 +421,9 @@ public class ActiveRecord {
     }
 
     public static void search(int offset, int limit, String query, String type, final OnJSONResponseCallback callback) {
+        if (query.equals(""))
+            return;
+
         RequestParams params = new RequestParams();
         Map<String, String> paramList = new HashMap<String, String>();
 

@@ -9,8 +9,10 @@ import java.util.Date;
  */
 public class Concert extends ActiveRecord {
     private int id = -1;
+    private User user = null;
     private Address address = null;
-    private Date date = null;
+    private String url = "";
+    private Date planification = null;
 
     public Concert() {}
 
@@ -22,8 +24,30 @@ public class Concert extends ActiveRecord {
     public String toString() {
         return (
                 "id = " + Integer.toString(id)
+                        + " : User = { " + (user != null ? user.toString() : "") + " }"
                 + " : Address = { " + (address != null ? address.toString() : "") + " }"
-                + " : Date = " + (date != null ? date.toString() : "")
+                        + " : url = " + url
+                + " : Date = " + (planification != null ? planification.toString() : "")
                 );
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public Date getPlanification() {
+        return planification;
     }
 }

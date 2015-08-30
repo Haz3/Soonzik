@@ -1,7 +1,19 @@
 package com.soonzik.soonzik;
 
+import android.util.Log;
+
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.JsonHttpResponseHandler;
+import com.loopj.android.http.RequestParams;
+
+import org.apache.http.Header;
+import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.UnsupportedEncodingException;
+import java.lang.reflect.InvocationTargetException;
+import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -9,11 +21,10 @@ import java.util.Date;
  */
 public class Cart extends ActiveRecord {
     private int id = -1;
-    private Music music = null;
-    private Album album = null;
-    private Pack pack = null;
-    private Date date = null;
-    private boolean gift = false;
+    private ArrayList<Music> musics = null;
+    private ArrayList<Album> albums = null;
+    private Date create_at = null;
+    private Gift gift = null;
 
     public Cart() {}
 
@@ -21,15 +32,121 @@ public class Cart extends ActiveRecord {
         super.createInstance(this, json, this.getClass());
     }
 
+    public static void myCart(final OnJSONResponseCallback callback) throws ClassNotFoundException {
+        final String className = "Cart";
+        final Class<?> classT = Class.forName("com.soonzik.soonzik." + className);
+
+        RequestParams params = new RequestParams();
+        currentUser.getUserSecureKey(params, new User.OnJSONResponseCallback() {
+            @Override
+            public void onJSONResponse(boolean success, JSONObject response, RequestParams params) throws JSONException, UnsupportedEncodingException, NoSuchAlgorithmException {
+                ActiveRecord.secureCase(currentUser, params, response.getString("key"));
+                AsyncHttpClient client = new AsyncHttpClient();
+                char lastChar = className.charAt(className.length() - 1);
+                client.get("http://10.0.3.2:3000/api/" + className.toLowerCase() + (lastChar == 's' ? "/" : "s/") + "my_cart", params, new JsonHttpResponseHandler() {
+
+                    @Override
+                    public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                        try {
+                            JSONObject obj = response.getJSONObject("content");
+                            Log.v("MYCART JSON", obj.toString());
+
+                            callback.onJSONResponse(true, obj, classT);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        } catch (NoSuchMethodException e) {
+                            e.printStackTrace();
+                        } catch (InstantiationException e) {
+                            e.printStackTrace();
+                        } catch (IllegalAccessException e) {
+                            e.printStackTrace();
+                        } catch (InvocationTargetException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(int statusCode, Header[] headers, Throwable e, JSONObject response) {
+                        Log.v("FAIL", response.toString());
+                    }
+
+                });
+            }
+        });
+    }
+
+    public static void giftCart(final int id_cart, int user_gift_id, final OnJSONResponseCallback callback) throws ClassNotFoundException {
+        final String className = "Cart";
+        final Class<?> classT = Class.forName("com.soonzik.soonzik." + className);
+
+        RequestParams params = new RequestParams();
+        params.add("user_gift_id", Integer.toString(user_gift_id));
+        currentUser.getUserSecureKey(params, new User.OnJSONResponseCallback() {
+            @Override
+            public void onJSONResponse(boolean success, JSONObject response, RequestParams params) throws JSONException, UnsupportedEncodingException, NoSuchAlgorithmException {
+                ActiveRecord.secureCase(currentUser, params, response.getString("key"));
+                AsyncHttpClient client = new AsyncHttpClient();
+                char lastChar = className.charAt(className.length() - 1);
+                client.post("http://10.0.3.2:3000/api/" + className.toLowerCase() + (lastChar == 's' ? "/" : "s/") + Integer.toString(id_cart) + "/gift", params, new JsonHttpResponseHandler() {
+
+                    @Override
+                    public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                        try {
+                            JSONObject obj = response.getJSONObject("content");
+                            Log.v("GIFTCART JSON", obj.toString());
+
+                            callback.onJSONResponse(true, obj, classT);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        } catch (NoSuchMethodException e) {
+                            e.printStackTrace();
+                        } catch (InstantiationException e) {
+                            e.printStackTrace();
+                        } catch (IllegalAccessException e) {
+                            e.printStackTrace();
+                        } catch (InvocationTargetException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(int statusCode, Header[] headers, Throwable e, JSONObject response) {
+                        Log.v("FAIL", response.toString());
+                    }
+
+                });
+            }
+        });
+    }
+
     @Override
     public String toString() {
         return (
                 "id = " + Integer.toString(id)
-                + " : music = { " + (music != null ? music.toString() : "") + " }"
-                + " : album = { " + (album != null ? album.toString() : "") + " }"
-                + " : pack = { " + (pack != null ? pack.toString() : "") + " }"
-                + " : date = " + (date != null ? date.toString() : "")
-                + " : gift = " + Boolean.toString(gift)
+                + " : musics = { " + (musics != null ? musics.toString() : "") + " }"
+                + " : albums = { " + (albums != null ? albums.toString() : "") + " }"
+                + " : date = " + (create_at != null ? create_at.toString() : "")
+                + " : gift = " + (gift != null ? gift.toString() : "")
                 );
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public ArrayList<Music> getMusics() {
+        return musics;
+    }
+
+    public ArrayList<Album> getAlbums() {
+        return albums;
+    }
+
+    public Date getCreate_at() {
+        return create_at;
+    }
+
+    public Gift getGift() {
+        return gift;
     }
 }

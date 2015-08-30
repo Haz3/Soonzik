@@ -44,6 +44,10 @@ public class SearchPagerAdapter extends FragmentStatePagerAdapter {
                 SearchUserFragment userFragment = new SearchUserFragment();
                 userFragment.setArguments(bundle);
                 return userFragment;
+            case 4:
+                SearchArtistFragment artistFragment = new SearchArtistFragment();
+                artistFragment.setArguments(bundle);
+                return artistFragment;
             default:
                 return null;
         }

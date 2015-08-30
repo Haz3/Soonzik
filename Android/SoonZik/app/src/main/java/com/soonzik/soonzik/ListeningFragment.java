@@ -80,7 +80,11 @@ public class ListeningFragment extends Fragment {
                     .strokeWidth(8);
 
             final Circle circle = map.addCircle(circleOptions);
-            setMarker(gpsTracker.latitude, gpsTracker.longitude);
+            try {
+                setMarker(gpsTracker.latitude, gpsTracker.longitude);
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            }
 
             rangeGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
                 @Override
@@ -94,7 +98,11 @@ public class ListeningFragment extends Fragment {
                     circle.setRadius(currentRange * 1000);
                     circle.setCenter(position);
 
-                    setMarker(gpsTracker.latitude, gpsTracker.longitude);
+                    try {
+                        setMarker(gpsTracker.latitude, gpsTracker.longitude);
+                    } catch (ClassNotFoundException e) {
+                        e.printStackTrace();
+                    }
 
                     map.moveCamera(CameraUpdateFactory.newLatLngZoom(position, 19));
                     map.animateCamera(CameraUpdateFactory.zoomTo(getZoomLevel(circle)), 2000, null);
@@ -146,7 +154,7 @@ public class ListeningFragment extends Fragment {
         mapView.onPause();
     }
 
-    private void setMarker(double lat, double lon) {
+    private void setMarker(double lat, double lon) throws ClassNotFoundException {
         Listening.arroundMe(lat, lon, currentRange, new ActiveRecord.OnJSONResponseCallback() {
             @Override
             public void onJSONResponse(boolean success, Object response, Class<?> classT) throws InvocationTargetException, NoSuchMethodException, java.lang.InstantiationException, IllegalAccessException, JSONException {

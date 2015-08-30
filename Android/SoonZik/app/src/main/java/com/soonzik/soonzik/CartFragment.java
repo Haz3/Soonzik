@@ -72,7 +72,7 @@ public class CartFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 try {
-                    Gift.giftCart(2, 1, new ActiveRecord.OnJSONResponseCallback() {
+                    Cart.giftCart(2, 1, new ActiveRecord.OnJSONResponseCallback() {
                         @Override
                         public void onJSONResponse(boolean success, Object response, Class<?> classT) throws InvocationTargetException, NoSuchMethodException, java.lang.InstantiationException, IllegalAccessException, JSONException {
                             JSONObject object = (JSONObject) response;

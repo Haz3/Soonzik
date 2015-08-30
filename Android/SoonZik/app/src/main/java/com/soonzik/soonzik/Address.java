@@ -25,6 +25,10 @@ public class Address extends ActiveRecord {
         super.createInstance(this, json, this.getClass());
     }
 
+    public String formatAddress() {
+        return (numberStreet + ", " + street + " " + zipcode + " " + city + ", " + country);
+    }
+
     public String toString() {
         return ("id = " + Integer.toString(id)
                 + " : numberStreet = " + numberStreet

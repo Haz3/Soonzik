@@ -53,33 +53,18 @@ public class LoginActivity extends Activity {
                         startActivity(mainActivity);
 
                         finish();
-                        /*FragmentTransaction tx = getActivity().getSupportFragmentManager().beginTransaction();
-                        tx.replace(R.id.main, Fragment.instantiate(getActivity(), redirectClass));
-                        tx.commit();
-
-                        String[] names = getResources().getStringArray(R.array.nav_names);
-                        String[] classes = getResources().getStringArray(R.array.nav_classes);
-
-                        int idx = 0;
-                        for (int i = 0; i < classes.length; i++) {
-                            if (classes[i].equals(redirectClass)) {
-                                idx = i;
-                            }
-                        }
-
-                        ((ActionBarActivity) getActivity()).getSupportActionBar().setTitle(names[idx]);*/
                     }
                 });
             }
         });
 
-        /*signinButton = (Button) findViewById(R.id.signinButton);
+        signinButton = (Button) findViewById(R.id.signinButton);
         signinButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent signinActivity = new Intent(getApplicationContext(), SignInActivity.class);
                 startActivity(signinActivity);
             }
-        });*/
+        });
 
     }
 }

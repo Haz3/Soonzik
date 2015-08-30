@@ -44,7 +44,8 @@ public class NewsAdapter extends ArrayAdapter<Object> {
         TextView textViewContent = (TextView) rowView.findViewById(R.id.content);
         ArrayList<Newstext> texts = nw.getNewstexts();
         for (Newstext text : texts) {
-            if (text.getLanguage().equals("FR")) {
+
+            if (text.getLanguage().equals("FR"/*ActiveRecord.currentUser.getLanguage()*/)) {
                 textViewContent.setText(text.getContent());
             }
         }
