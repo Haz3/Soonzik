@@ -334,6 +334,7 @@ album : {}, purchased_pack: { partial: value, pack: {} } } } }</p>
         <span class="ruby-identifier">pack</span>.<span class="ruby-identifier">albums</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">album</span><span class="ruby-operator">|</span>
           <span class="ruby-identifier">pa</span> = <span class="ruby-constant">PurchasedAlbum</span>.<span class="ruby-identifier">new</span>
           <span class="ruby-identifier">pa</span>.<span class="ruby-identifier">album_id</span> = <span class="ruby-identifier">album</span>.<span class="ruby-identifier">id</span>
+          <span class="ruby-identifier">pa</span>.<span class="ruby-identifier">purchased_pack_id</span> = <span class="ruby-identifier">pp</span>.<span class="ruby-identifier">id</span>
           <span class="ruby-identifier">pa</span>.<span class="ruby-identifier">save!</span>
           <span class="ruby-identifier">objectToDelete</span>.<span class="ruby-identifier">unshift</span> <span class="ruby-identifier">pa</span>
 

@@ -256,7 +256,7 @@ probably wrong</p>
 </li></ul>					
 											<div class="method-source-code" id="addtoplaylist-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/musics_controller.rb, line 311</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/musics_controller.rb, line 317</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">addtoplaylist</span>
   <span class="ruby-keyword">begin</span>
     <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@security</span>)
@@ -321,7 +321,7 @@ probably wrong</p>
 </li></ul>					
 											<div class="method-source-code" id="delfromplaylist-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/musics_controller.rb, line 352</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/musics_controller.rb, line 358</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">delfromplaylist</span>
   <span class="ruby-keyword">begin</span>
     <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@security</span>)
@@ -502,6 +502,9 @@ its album, genres and user (artist)</p>
 <h4 id="method-i-get-label-Options">Options<span><a href="#method-i-get-label-Options">&para;</a> <a href="#top">&uarr;</a></span></h4>
 <ul><li>
 <p><code>id</code> - The id of the music where is the comment</p>
+</li><li>
+<p><code>download</code> - (optionnal) If it&#39;s equal to “true”, the header
+allows to download the file immediatly</p>
 </li></ul>
 
 <h5 id="method-i-get-label-HTTP+VALUE">HTTP VALUE<span><a href="#method-i-get-label-HTTP+VALUE">&para;</a> <a href="#top">&uarr;</a></span></h5>
@@ -515,11 +518,12 @@ as raw format</p>
 </li></ul>					
 											<div class="method-source-code" id="get-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/musics_controller.rb, line 262</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/musics_controller.rb, line 263</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">get</span>
   <span class="ruby-identifier">buffer</span> = <span class="ruby-string">&quot;&quot;</span>
+  <span class="ruby-identifier">music</span> = <span class="ruby-keyword">nil</span>
+  <span class="ruby-identifier">file</span> = <span class="ruby-string">&quot;&quot;</span>
   <span class="ruby-keyword">begin</span>
-    <span class="ruby-identifier">music</span> = <span class="ruby-keyword">nil</span>
     <span class="ruby-identifier">cut</span> = <span class="ruby-keyword">true</span>
 
     <span class="ruby-comment"># Find the music</span>
@@ -544,8 +548,12 @@ as raw format</p>
     <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">504</span>
     <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:service_unavailable</span>
   <span class="ruby-keyword">end</span>
-  <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
-    <span class="ruby-identifier">format</span>.<span class="ruby-identifier">mp3</span> { <span class="ruby-identifier">render</span> <span class="ruby-value">:text</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">buffer</span>, <span class="ruby-value">:content_type</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;audio/mpeg&#39;</span> }
+  <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@download</span>.<span class="ruby-identifier">present?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-ivar">@download</span> <span class="ruby-operator">==</span> <span class="ruby-string">&quot;true&quot;</span>)
+    <span class="ruby-identifier">send_file</span>(<span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span>(<span class="ruby-constant">Rails</span>.<span class="ruby-identifier">root</span>, <span class="ruby-string">&quot;app&quot;</span>, <span class="ruby-string">&quot;assets&quot;</span>, <span class="ruby-string">&quot;musics&quot;</span>, <span class="ruby-identifier">music</span>.<span class="ruby-identifier">album</span>.<span class="ruby-identifier">user</span>.<span class="ruby-identifier">id</span>.<span class="ruby-identifier">to_s</span>, <span class="ruby-node">&quot;#{file}.mp3&quot;</span>), <span class="ruby-value">:type</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;audio/mpeg&#39;</span>)
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">format</span>.<span class="ruby-identifier">mp3</span> { <span class="ruby-identifier">render</span> <span class="ruby-value">:text</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">buffer</span>, <span class="ruby-value">:content_type</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;audio/mpeg&#39;</span> }
+    <span class="ruby-keyword">end</span>
   <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></code></pre>
 						</div>
@@ -585,7 +593,7 @@ as raw format</p>
 </li></ul>					
 											<div class="method-source-code" id="getNotes-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/musics_controller.rb, line 436</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/musics_controller.rb, line 442</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">getNotes</span>
   <span class="ruby-identifier">value</span> = []
   <span class="ruby-keyword">begin</span>
@@ -656,7 +664,7 @@ last (default : false)</p>
 </li></ul>					
 											<div class="method-source-code" id="getcomments-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/musics_controller.rb, line 394</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/musics_controller.rb, line 400</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">getcomments</span>
   <span class="ruby-identifier">order</span> = <span class="ruby-string">&quot;false&quot;</span>
   <span class="ruby-keyword">begin</span>
@@ -780,7 +788,7 @@ its user, album and genre</p>
 </li></ul>					
 											<div class="method-source-code" id="setNotes-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/musics_controller.rb, line 482</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/musics_controller.rb, line 488</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">setNotes</span>
   <span class="ruby-keyword">begin</span>
     <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@security</span>)

@@ -190,8 +190,8 @@ SoonzikApp.controller('UsersCtrl', ['$scope', "$routeParams", 'SecureAuth', 'HTT
 					});
 				}
 
-				HTTPService.findPlaylist([{ key: "attribute[user_id]", value: $scope.show.user.id }]).then(function(followersInformation) {
-					$scope.show.playlists = followersInformation.data.content;
+				HTTPService.findPlaylist([{ key: "attribute[user_id]", value: $scope.show.user.id }]).then(function(playlistResponse) {
+					$scope.show.playlists = playlistResponse.data.content;
 
 					for (var i = 0 ; i < $scope.show.playlists.length ; i++) {
 						var duration = 0;

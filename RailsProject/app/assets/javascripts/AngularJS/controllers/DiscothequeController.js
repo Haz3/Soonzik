@@ -4,6 +4,10 @@ SoonzikApp.controller('DiscothequeCtrl', ['$scope', 'SecureAuth', 'HTTPService',
 	$scope.user = false;
 	$scope.mymusic = { musics: [], albums: [], packs: [] };
 
+	$scope.tooltip = false;
+	$scope.selectedMusic = null;
+	$scope.myPlaylists = [];
+
 	$scope.discoInit = function() {
 		var current_user = SecureAuth.getCurrentUser();
 		if (current_user.id != null && current_user.token != null && current_user.username != null) {
@@ -50,7 +54,7 @@ SoonzikApp.controller('DiscothequeCtrl', ['$scope', 'SecureAuth', 'HTTPService',
 				  			}
 			  			}
 			  		}, function(error) {
-			  			NotificationService.error(" labels.note ");
+			  			NotificationService.error($rootScope.labels.FILE_DISCOTHEQUE_GET_NOTES_ERROR_MESSAGE);
 			  		});
 					}
 
@@ -84,7 +88,7 @@ SoonzikApp.controller('DiscothequeCtrl', ['$scope', 'SecureAuth', 'HTTPService',
 			  				}
 			  			}
 			  		}, function(error) {
-			  			NotificationService.error(" labels.note ");
+			  			NotificationService.error($rootScope.labels.FILE_DISCOTHEQUE_GET_NOTES_ERROR_MESSAGE);
 			  		});
 					}
 
@@ -128,19 +132,41 @@ SoonzikApp.controller('DiscothequeCtrl', ['$scope', 'SecureAuth', 'HTTPService',
 			  			}
 			  		
 			  		}, function(error) {
-			  			NotificationService.error(" labels.note ");
+			  			NotificationService.error($rootScope.labels.FILE_DISCOTHEQUE_GET_NOTES_ERROR_MESSAGE);
 			  		});
 		  		}
 
 
 					$scope.loading = false;
 	  		}, function(error) {
-	  			NotificationService.error(" labels. ");
+	  			NotificationService.error($rootScope.labels.FILE_DISCOTHEQUE_GET_MUSICS_ERROR_MESSAGE);
 	  		});
 			}, function(error) {
-	 			NotificationService.error(" labels. ");
+	 			NotificationService.error($rootScope.labels.FILE_DISCOTHEQUE_GET_MUSICS_ERROR_MESSAGE);
+			});
+
+			HTTPService.findPlaylist([{ key: "attribute[user_id]", value: $scope.user.id }]).then(function(response) {
+				$scope.myPlaylists = response.data.content;
+				for (var i = 0 ; i < $scope.myPlaylists.length ; i++) {
+					$scope.myPlaylists[i].check = false;
+				}
+				$scope.$on('newPlaylist', function(event, data) {
+					playlist = JSON.parse(JSON.stringify(data));
+					playlist.check = false;
+					$scope.myPlaylists.push(playlist);
+				});
+			}, function(error) {
+				NotificationService.error($rootScope.labels.FILE_USER_FIND_PLAYLIST_ERROR_MESSAGE + playlist.name);
 			});
 		}
+	}
+
+	$scope.download = function(music) {
+		SecureAuth.securedTransaction(function (key, user_id) {
+			var url = HTTPService.getMP3musicURL(music.id, [{ key: "user_id", value: user_id}, { key: "secureKey", value: key }, { key: "download", value: "true" }]);
+			var win = window.open(url, '_blank');
+		}, function(error) {
+		});
 	}
 
 	// Utils
@@ -222,5 +248,14 @@ SoonzikApp.controller('DiscothequeCtrl', ['$scope', 'SecureAuth', 'HTTPService',
 		}
 	}
 
+	$scope.formatTime = function(duration) {
+		var min = ~~(duration / 60);
+		var sec = duration % 60;
 
+		if (min.toString().length == 1)
+			min = "0" + min;
+		if (sec.toString().length == 1)
+			sec = "0" + sec;
+		return min + ":" + sec;
+	}
 }]);
