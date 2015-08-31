@@ -73,3 +73,11 @@
 // require_tree .
 
 $(function(){ $(document).foundation(); });
+
+$(document).ready(function() {
+	$(".removeInfo").each(function() {
+		$(this).click(function() {
+			$(this).parent().remove();
+		});
+	});
+});

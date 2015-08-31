@@ -52,6 +52,10 @@ main.row {
 
 	& > small.error {
 		margin-top: 0;
+
+		p {
+			margin-bottom: 3px;
+		}
 	}
 
 	& > .large-12 > div {
@@ -315,4 +319,26 @@ ul .no-bullet {
 	padding-left: 30px;
 	margin-bottom: 30px;
 	font-weight: bold;
+}
+
+.feedback {
+	position: fixed;
+	bottom: 100px;
+	left: 0;
+
+	p {
+		margin-left: -20px;
+    padding: 15px 5px 15px 5px;
+    font-size: 18px;
+    font-weight: bold;
+    border: 1px solid darkgray;
+    background: lightgray;
+		
+		transform:rotate(-90deg); 
+		-ms-transform:rotate(-90deg); /* Internet Explorer */
+		-moz-transform:rotate(-90deg); /* Firefox */
+		-webkit-transform:rotate(-90deg); /* Safari et Chrome */ 
+		-o-transform:rotate(-90deg); /* Opera */
+	}
+
 }
