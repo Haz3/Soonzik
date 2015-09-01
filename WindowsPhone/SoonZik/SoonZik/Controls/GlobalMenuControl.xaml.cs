@@ -310,7 +310,7 @@ namespace SoonZik.Controls
             }
             else
             {
-                SetChildren(new GeolocalisationView());
+                SetChildren(new GeolocalisationControl());
             }
         }
 

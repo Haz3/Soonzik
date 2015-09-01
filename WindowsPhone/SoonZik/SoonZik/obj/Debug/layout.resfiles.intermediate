@@ -14,6 +14,7 @@ Assets\WideLogo.scale-240.png
 App.xbf
 Controls\ButtonFriendPopUp.xbf
 Controls\Genre.xbf
+Controls\GeolocalisationControl.xbf
 Controls\GlobalMenuControl.xbf
 Controls\NewsSharePopup.xbf
 Controls\PlayerControl.xbf

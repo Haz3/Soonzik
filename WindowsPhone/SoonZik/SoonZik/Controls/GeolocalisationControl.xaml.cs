@@ -1,31 +1,36 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using Windows.Devices.Geolocation;
 using Windows.Foundation;
+using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Maps;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using SoonZik.Annotations;
 using SoonZik.HttpRequest.Poco;
 
-namespace SoonZik.ViewModel
-{
-    public class GeolocalisationViewModel : ViewModelBase
-    {
-        #region Ctor
+// Pour en savoir plus sur le modèle d'élément Contrôle utilisateur, consultez la page http://go.microsoft.com/fwlink/?LinkId=234236
 
-        public GeolocalisationViewModel()
+namespace SoonZik.Controls
+{
+    public sealed partial class GeolocalisationControl : UserControl, INotifyPropertyChanged
+    {
+        public GeolocalisationControl()
         {
+            this.InitializeComponent();
+
             var task = Task.Run(async () => await InitVariable());
             task.Wait();
 
             CreateListElement();
         }
 
-        #endregion
-
-        #region Method
+         #region Method
 
         private void CreateListElement()
         {
@@ -37,6 +42,10 @@ namespace SoonZik.ViewModel
 
             MapElements = new ObservableCollection<MapElement>();
             MapElements.Add(mapIcon);
+
+            MyMapControl.MapElements.Add(mapIcon);
+            MyMapControl.Center = UserLocation.Point;
+            MyMapControl.ZoomLevel = 15;
         }
 
         private async Task InitVariable()
@@ -118,7 +127,7 @@ namespace SoonZik.ViewModel
 
         public User UserSelected { get; set; }
 
-        public RelayCommand TwoChecked { get; private set; }
+        public ICommand TwoChecked { get; private set; }
         public RelayCommand FiveChecked { get; private set; }
         public RelayCommand TenChecked { get; private set; }
         public RelayCommand TwentyChecked { get; private set; }
@@ -185,5 +194,13 @@ namespace SoonZik.ViewModel
 
         #endregion
 
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        [NotifyPropertyChangedInvocator]
+        private void RaisePropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            var handler = PropertyChanged;
+            if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
+        }
     }
 }

@@ -4,8 +4,16 @@
     <RootInterface FullName="Windows.UI.Xaml.Data.IValueConverter" />
   </Roots.Interfaces>
   <Roots.PropertyPathNames>
-    <RootPropertyPathName Name="title" />
     <RootPropertyPathName Name="username" />
+    <RootPropertyPathName Name="ListUser" />
+    <RootPropertyPathName Name="UserSelected" />
+    <RootPropertyPathName Name="UserTappedCommand" />
+    <RootPropertyPathName Name="TwentyKmActivated" />
+    <RootPropertyPathName Name="TenKmActivated" />
+    <RootPropertyPathName Name="FiveKmActivated" />
+    <RootPropertyPathName Name="TwoKmActivated" />
+    <RootPropertyPathName Name="TwoChecked" />
+    <RootPropertyPathName Name="title" />
     <RootPropertyPathName Name="Title" />
     <RootPropertyPathName Name="ImageBoutton" />
     <RootPropertyPathName Name="SelectedPack" />
@@ -41,7 +49,8 @@
     <RootPropertyPathName Name="image" />
     <RootPropertyPathName Name="artist_one" />
     <RootPropertyPathName Name="UserLocation" />
-    <RootPropertyPathName Name="Latitude" />
+    <RootPropertyPathName Name="Point" />
+    <RootPropertyPathName Name="MapElements" />
     <RootPropertyPathName Name="ValidateCommand" />
     <RootPropertyPathName Name="NewUser" />
     <RootPropertyPathName Name="phoneNumber" />
@@ -352,8 +361,8 @@
       <RootProperty Name="Padding" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Data.Binding">
-      <RootProperty Name="Path" />
       <RootProperty Name="Mode" />
+      <RootProperty Name="Path" />
       <RootProperty Name="Converter" />
       <RootProperty Name="Source" />
     </RootType>
@@ -363,15 +372,43 @@
     </RootType>
     <RootType FullName="SoonZik.Controls.ButtonFriendPopUp" />
     <RootType FullName="SoonZik.Controls.Genre" />
+    <RootType FullName="Windows.UI.Xaml.Controls.Maps.MapControl">
+      <RootProperty Name="Center" />
+      <RootProperty Name="ZoomLevel" />
+      <RootProperty Name="Children" />
+    </RootType>
+    <RootType FullName="Windows.UI.Xaml.Controls.ListBox">
+      <RootProperty Name="Background" />
+      <RootProperty Name="ItemsSource" />
+      <RootProperty Name="ItemTemplate" />
+      <RootProperty Name="SelectedItem" />
+    </RootType>
+    <RootType FullName="Microsoft.Xaml.Interactivity.Interaction">
+      <RootMethod Name="GetBehaviors" />
+      <RootMethod Name="SetBehaviors" />
+    </RootType>
+    <RootType FullName="Microsoft.Xaml.Interactions.Core.EventTriggerBehavior">
+      <RootProperty Name="EventName" />
+      <RootProperty Name="Actions" />
+    </RootType>
+    <RootType FullName="Microsoft.Xaml.Interactions.Core.InvokeCommandAction">
+      <RootProperty Name="Command" />
+    </RootType>
+    <RootType FullName="Windows.UI.Xaml.Controls.ColumnDefinition">
+      <RootProperty Name="Width" />
+    </RootType>
+    <RootType FullName="Windows.UI.Xaml.Controls.RadioButton">
+      <RootProperty Name="Content" />
+      <RootProperty Name="IsChecked" />
+      <RootProperty Name="Command" />
+    </RootType>
+    <RootType FullName="SoonZik.Controls.GeolocalisationControl" />
     <RootType FullName="Windows.UI.Xaml.Controls.StackPanel">
       <RootProperty Name="Margin" />
       <RootProperty Name="Children" />
       <RootProperty Name="Background" />
       <RootProperty Name="VerticalAlignment" />
       <RootEvent Name="Tapped" />
-    </RootType>
-    <RootType FullName="Windows.UI.Xaml.Controls.ColumnDefinition">
-      <RootProperty Name="Width" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Media.Animation.DoubleAnimation">
       <RootProperty Name="Duration" />
@@ -415,14 +452,6 @@
       <RootProperty Name="Opacity" />
       <RootProperty Name="Margin" />
     </RootType>
-    <RootType FullName="Microsoft.Xaml.Interactivity.Interaction">
-      <RootMethod Name="GetBehaviors" />
-      <RootMethod Name="SetBehaviors" />
-    </RootType>
-    <RootType FullName="Microsoft.Xaml.Interactions.Core.EventTriggerBehavior">
-      <RootProperty Name="EventName" />
-      <RootProperty Name="Actions" />
-    </RootType>
     <RootType FullName="Microsoft.Xaml.Interactions.Media.ControlStoryboardAction">
       <RootProperty Name="Storyboard" />
     </RootType>
@@ -433,9 +462,6 @@
       <RootProperty Name="Content" />
       <RootProperty Name="DataContext" />
       <RootProperty Name="Resources" />
-    </RootType>
-    <RootType FullName="Microsoft.Xaml.Interactions.Core.InvokeCommandAction">
-      <RootProperty Name="Command" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.MediaElement">
       <RootProperty Name="AutoPlay" />
@@ -457,8 +483,8 @@
     <RootType FullName="SoonZik.Views.AlbumView" />
     <RootType FullName="SoonZik.Views.BattleDetailView" />
     <RootType FullName="SoonZik.Views.CartsView" />
-    <RootType FullName="Windows.UI.Xaml.Controls.Maps.MapControl">
-      <RootProperty Name="Center" />
+    <RootType FullName="Windows.UI.Xaml.Controls.Maps.MapItemsControl">
+      <RootProperty Name="ItemsSource" />
     </RootType>
     <RootType FullName="SoonZik.Views.GeolocalisationView" />
     <RootType FullName="Windows.UI.Xaml.Controls.PasswordBox">
@@ -479,12 +505,6 @@
       <RootProperty Name="Foreground" />
     </RootType>
     <RootType FullName="SoonZik.Views.InscriptionView" />
-    <RootType FullName="Windows.UI.Xaml.Controls.ListBox">
-      <RootProperty Name="Background" />
-      <RootProperty Name="ItemsSource" />
-      <RootProperty Name="ItemTemplate" />
-      <RootProperty Name="SelectedItem" />
-    </RootType>
     <RootType FullName="SoonZik.ViewModel.ProfilFriendView" />
     <RootType FullName="SoonZik.Views.BattleView" />
     <RootType FullName="SoonZik.Utils.BooleanToVisibilityConverter">

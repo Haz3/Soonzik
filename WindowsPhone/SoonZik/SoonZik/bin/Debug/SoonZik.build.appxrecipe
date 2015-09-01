@@ -260,6 +260,9 @@
     <AppxPackagedFile Include="C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\bin\Debug\Controls\Genre.xbf">
       <PackagePath>Controls\Genre.xbf</PackagePath>
     </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\bin\Debug\Controls\GeolocalisationControl.xbf">
+      <PackagePath>Controls\GeolocalisationControl.xbf</PackagePath>
+    </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\bin\Debug\Controls\GlobalMenuControl.xbf">
       <PackagePath>Controls\GlobalMenuControl.xbf</PackagePath>
     </AppxPackagedFile>

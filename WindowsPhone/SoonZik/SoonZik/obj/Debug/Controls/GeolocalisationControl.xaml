@@ -1,40 +1,38 @@
-﻿<Page
-    x:Class="SoonZik.Views.GeolocalisationView"
+﻿<UserControl
+    x:Class="SoonZik.Controls.GeolocalisationControl"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:SoonZik.Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d"
-    xmlns:Maps="using:Windows.UI.Xaml.Controls.Maps"
+    xmlns:maps="using:Windows.UI.Xaml.Controls.Maps"
     xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
     xmlns:core="using:Microsoft.Xaml.Interactions.Core"
-    DataContext="{StaticResource GeolocalisationViewModel}"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-
-    <Page.Resources>
+    mc:Ignorable="d">
+    
+    <UserControl.Resources>
 
         <DataTemplate x:Key="ListUserItemTemplate">
             <TextBlock FontSize="25" Text="{Binding username}"></TextBlock>
         </DataTemplate>
-    </Page.Resources>
-    
+    </UserControl.Resources>
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
             <RowDefinition Height="200" />
         </Grid.RowDefinitions>
 
-        <Maps:MapControl Grid.Row="0" Center="{Binding UserLocation.Point, Mode=TwoWay}" ZoomLevel="15">
-            <Maps:MapItemsControl ItemsSource="{Binding MapElements, Mode=TwoWay}">
-            </Maps:MapItemsControl>
-        </Maps:MapControl>
+        <maps:MapControl x:Name="MyMapControl" Grid.Row="0">
+
+        </maps:MapControl>
 
         <Grid Grid.Row="1">
             <Grid.RowDefinitions>
                 <RowDefinition Height="60"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-            
+
             <Grid Grid.Row="0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="10*"/>
@@ -43,12 +41,12 @@
                     <ColumnDefinition Width="10*"/>
                 </Grid.ColumnDefinitions>
 
-                <RadioButton Grid.Row="0" Grid.Column="0" Content="2km" IsChecked="{Binding TwoKmActivated, Mode=TwoWay}" Command="{Binding TwoChecked}"/>
+                <RadioButton Grid.Row="0" Grid.Column="0" Content="2km" IsChecked="{Binding TwoKmActivated, Mode=TwoWay}" Command="{Binding Path=TwoChecked}"/>
                 <RadioButton Grid.Row="0" Grid.Column="1" Content="5km" IsChecked="{Binding FiveKmActivated, Mode=TwoWay}"/>
                 <RadioButton Grid.Row="0" Grid.Column="2" Content="10km" IsChecked="{Binding TenKmActivated, Mode=TwoWay}"/>
                 <RadioButton Grid.Row="0" Grid.Column="3" Content="20km" IsChecked="{Binding TwentyKmActivated, Mode=TwoWay}"/>
             </Grid>
-            
+
             <ListBox Background="Transparent" Grid.Row="1" x:Name="UserListView" ItemsSource="{Binding ListUser}"
                 ItemTemplate="{StaticResource ListUserItemTemplate}" SelectedItem="{Binding UserSelected, Mode=TwoWay}">
 
@@ -60,5 +58,5 @@
             </ListBox>
         </Grid>
     </Grid>
+</UserControl>
 
-</Page>
