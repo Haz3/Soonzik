@@ -90,9 +90,10 @@
     <RootPropertyPathName Name="ListAlbums" />
     <RootPropertyPathName Name="AlbumTappedCommand" />
     <RootPropertyPathName Name="BuyCommand" />
-    <RootPropertyPathName Name="ThePack" />
-    <RootPropertyPathName Name="price" />
+    <RootPropertyPathName Name="MyPack" />
+    <RootPropertyPathName Name="descriptions" />
     <RootPropertyPathName Name="CompleteListPack" />
+    <RootPropertyPathName Name="ThePack" />
     <RootPropertyPathName Name="PackTappedCommand" />
     <RootPropertyPathName Name="ListPack" />
     <RootPropertyPathName Name="SelectedPlaylist" />
@@ -446,7 +447,7 @@
       <RootProperty Name="VerticalAlignment" />
       <RootProperty Name="HorizontalAlignment" />
       <RootProperty Name="Margin" />
-      <RootEvent Name="ManipulationDelta" />
+      <RootEvent Name="GotFocus" />
     </RootType>
     <RootType FullName="SoonZik.Controls.PlayerControl" />
     <RootType FullName="SoonZik.Controls.PriceControl" />

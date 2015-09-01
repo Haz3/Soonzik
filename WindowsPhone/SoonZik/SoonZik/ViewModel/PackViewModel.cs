@@ -4,10 +4,10 @@ using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Windows.ApplicationModel.Core;
+using Windows.ApplicationModel.Resources;
 using Windows.UI.Core;
-using Windows.UI.Xaml;
+using Windows.UI.Popups;
 using Windows.UI.Xaml.Media.Imaging;
-using Coding4Fun.Toolkit.Controls;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using SoonZik.Controls;
@@ -25,13 +25,13 @@ namespace SoonZik.ViewModel
         private Data _selectedData;
         public ObservableCollection<Data> Datas { get; set; }
 
-        public ObservableCollection<Pack> CompleteListPack { get; set; } 
+        public ObservableCollection<Pack> CompleteListPack { get; set; }
         public static Pack ThePack { get; set; }
 
         private User _theArtiste;
         public User TheArtiste
         {
-            get { return _theArtiste;}
+            get { return _theArtiste; }
             set
             {
                 _theArtiste = value;
@@ -77,11 +77,23 @@ namespace SoonZik.ViewModel
 
         public List<User> ListArtistes
         {
-            get { return _listArtistes;}
+            get { return _listArtistes; }
             set
             {
                 _listArtistes = value;
                 RaisePropertyChanged("ListArtistes");
+            }
+        }
+
+        private Pack _myPack;
+
+        public Pack MyPack
+        {
+            get { return _myPack;}
+            set
+            {
+                _myPack = value;
+                RaisePropertyChanged("MyPack");
             }
         }
         #endregion
@@ -133,7 +145,7 @@ namespace SoonZik.ViewModel
             BuyCommand = new RelayCommand(ExecuteBuyCommand);
             Datas = datas;
             Charge();
-            
+
             if (ThePack != null)
             {
                 SelectionCommand = new RelayCommand(SelectionExecute);
@@ -147,9 +159,18 @@ namespace SoonZik.ViewModel
         #region Method
         private void ExecuteBuyCommand()
         {
-            PriceControl.SelecetdPack = ThePack;
-            GlobalMenuControl.MyGrid.Children.Clear();
-            GlobalMenuControl.MyGrid.Children.Add(new PriceControl());
+            if (ThePack != null)
+            {
+                PriceControl.SelecetdPack = ThePack;
+                GlobalMenuControl.MyGrid.Children.Clear();
+                GlobalMenuControl.MyGrid.Children.Add(new PriceControl());
+            }
+            else
+            {
+                var loader = new ResourceLoader();
+                new MessageDialog(loader.GetString("PackError")).ShowAsync();
+            }
+
         }
 
         private void SelectionExecute()
@@ -159,6 +180,7 @@ namespace SoonZik.ViewModel
 
         private void ExecutePackTapped()
         {
+            MyPack = ThePack;
             ListAlbums = ThePack.albums;
             foreach (var album in ListAlbums)
             {
@@ -183,17 +205,6 @@ namespace SoonZik.ViewModel
         public void Charge()
         {
             var request = new HttpRequestGet();
-            //var pack = request.GetObject(new Pack(), "packs", ThePack.id.ToString());
-            //pack.ContinueWith(delegate(Task<object> tmp)
-            //{
-            //    var test = tmp.Result as Pack;
-            //    if (test != null)
-            //    {
-            //        CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
-            //            () => { ThePack = test; });
-            //    }
-            //});
-
             var ListPack = request.GetListObject(new List<Pack>(), "packs");
             CompleteListPack = new ObservableCollection<Pack>();
             ListPack.ContinueWith(delegate(Task<object> obj)
@@ -201,10 +212,10 @@ namespace SoonZik.ViewModel
                 var res = obj.Result as List<Pack>;
                 if (res != null)
                 {
-                    foreach (var lol in res)
+                    foreach (var pack in res)
                     {
                         CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
-                            () => { CompleteListPack.Add(lol); });
+                            () => { CompleteListPack.Add(pack); });
                     }
                 }
             });

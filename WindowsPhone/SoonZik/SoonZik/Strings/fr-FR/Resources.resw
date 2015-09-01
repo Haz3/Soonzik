@@ -276,4 +276,7 @@
   <data name="SoonZik.Text" xml:space="preserve">
     <value>SoonZik</value>
   </data>
+  <data name="PackError" xml:space="preserve">
+    <value>Veuillez selectionner un pack</value>
+  </data>
 </root>
