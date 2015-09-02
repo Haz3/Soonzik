@@ -131,7 +131,7 @@
                         </interactivity:Interaction.Behaviors>
                     </ListBox>
                     
-                    <TextBox Grid.Row="1" Width="220" HorizontalAlignment="Left" Margin="10,5,0,0" Text="{Binding TextTweet, Mode=TwoWay}"/>
+                    <TextBox Grid.Row="1" Width="200" HorizontalAlignment="Left" Margin="10,5,0,0" Text="{Binding TextTweet, Mode=TwoWay}"/>
                     <Button x:Uid="Send" Content="" Grid.Row="1" HorizontalAlignment="Right" Margin="0,0,10,0" Command="{Binding SendTweet}"/>
                 </Grid>
             </PivotItem>

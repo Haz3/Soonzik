@@ -1,14 +1,19 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Windows.ApplicationModel.Core;
 using Windows.Storage;
+using Windows.UI.Core;
+using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Coding4Fun.Toolkit.Controls;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using SoonZik.Controls;
+using SoonZik.Helpers;
 using SoonZik.HttpRequest;
 using SoonZik.HttpRequest.Poco;
 using SoonZik.Utils;
@@ -45,12 +50,39 @@ namespace SoonZik.ViewModel
 
         private void TweetCommandExecute()
         {
-            
+
         }
 
         private void SendTweetExecute()
         {
-            
+            var request = new HttpRequestGet();
+            var post = new HttpRequestPost();
+            try
+            {
+                var userKey = request.GetUserKey(Singleton.Instance().CurrentUser.id.ToString());
+                userKey.ContinueWith(delegate(Task<object> task)
+                {
+                    var key = task.Result as string;
+                    if (key != null)
+                    {
+                        var stringEncrypt = KeyHelpers.GetUserKeyFromResponse(key);
+                        _crypto = EncriptSha256.EncriptStringToSha256(Singleton.Instance().CurrentUser.salt + stringEncrypt);
+                    }
+                    var test = post.SendTweet(TextTweet, CurrentUser, _crypto);
+                    test.ContinueWith(delegate(Task<string> tmp)
+                    {
+                        var res = tmp.Result;
+                        if (res != null)
+                        {
+                            CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, LoadTweet);
+                        }
+                    });
+                });
+            }
+            catch (Exception)
+            {
+                new MessageDialog("Erreur lors de l'update").ShowAsync();
+            }
         }
 
         private void LoadTweet()
@@ -65,7 +97,10 @@ namespace SoonZik.ViewModel
                 {
                     foreach (var item in res)
                     {
-                        ListTweets.Add(item);
+                        CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+                        {
+                            ListTweets.Add(item);
+                        });
                     }
                 }
             });
@@ -144,7 +179,7 @@ namespace SoonZik.ViewModel
         private string _textTweet;
         public string TextTweet
         {
-            get { return _textTweet;}
+            get { return _textTweet; }
             set
             {
                 _textTweet = value;
@@ -152,6 +187,7 @@ namespace SoonZik.ViewModel
             }
         }
 
+        private string _crypto;
         #endregion
 
         #region Ctor
@@ -168,16 +204,16 @@ namespace SoonZik.ViewModel
             ItemSource = new ObservableCollection<AlphaKeyGroups<User>>();
             CurrentUser = Singleton.Instance().CurrentUser;
 
-            if (_localSettings != null && (string) _localSettings.Values["SoonZikAlreadyConnect"] == "yes")
+            if (_localSettings != null && (string)_localSettings.Values["SoonZikAlreadyConnect"] == "yes")
             {
                 Sources = Singleton.Instance().CurrentUser.friends;
                 ItemSource = AlphaKeyGroups<User>.CreateGroups(Sources, CultureInfo.CurrentUICulture, s => s.username,
                     true);
             }
-            
+
             LoadTweet();
         }
-        
+
         #endregion
     }
 }
