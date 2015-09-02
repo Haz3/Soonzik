@@ -102,6 +102,7 @@
     <Compile Include="Poco\Playlist.cs" />
     <Compile Include="Poco\SearchResult.cs" />
     <Compile Include="Poco\SocialKey.cs" />
+    <Compile Include="Poco\Tweets.cs" />
     <Compile Include="Poco\User.cs" />
     <Compile Include="Poco\UserMusic.cs" />
     <Compile Include="Poco\Vote.cs" />

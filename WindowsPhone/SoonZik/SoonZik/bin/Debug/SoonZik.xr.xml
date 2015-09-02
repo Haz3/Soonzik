@@ -85,6 +85,13 @@
     <RootPropertyPathName Name="Key" />
     <RootPropertyPathName Name="Group" />
     <RootPropertyPathName Name="ItemSource" />
+    <RootPropertyPathName Name="msg" />
+    <RootPropertyPathName Name="SendTweet" />
+    <RootPropertyPathName Name="TextTweet" />
+    <RootPropertyPathName Name="ListTweets" />
+    <RootPropertyPathName Name="SelectedTweet" />
+    <RootPropertyPathName Name="TweetCommand" />
+    <RootPropertyPathName Name="FollowerCommand" />
     <RootPropertyPathName Name="TappedCommand" />
     <RootPropertyPathName Name="CollectionGroups" />
     <RootPropertyPathName Name="Date" />
@@ -113,7 +120,6 @@
     <RootPropertyPathName Name="NbrFollowers" />
     <RootPropertyPathName Name="ButtonContent" />
     <RootPropertyPathName Name="EditClickCommand" />
-    <RootPropertyPathName Name="FollowerCommand" />
     <RootPropertyPathName Name="CanUpdate" />
     <RootPropertyPathName Name="profilImage" />
   </Roots.PropertyPathNames>
@@ -360,6 +366,7 @@
       <RootProperty Name="FontWeight" />
       <RootProperty Name="Style" />
       <RootProperty Name="Padding" />
+      <RootProperty Name="TextAlignment" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Data.Binding">
       <RootProperty Name="Mode" />

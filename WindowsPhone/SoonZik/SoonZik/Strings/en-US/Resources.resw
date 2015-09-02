@@ -163,7 +163,7 @@
     <value>Forgot Password</value>
   </data>
   <data name="Friends.Content" xml:space="preserve">
-    <value>Friends</value>
+    <value>My Network</value>
   </data>
   <data name="Genre.Text" xml:space="preserve">
     <value>Genre</value>
@@ -278,5 +278,17 @@
   </data>
   <data name="PackError" xml:space="preserve">
     <value>Please select a pack</value>
+  </data>
+  <data name="Follow.Header" xml:space="preserve">
+    <value>Followers</value>
+  </data>
+  <data name="Friend.Header" xml:space="preserve">
+    <value>Friends</value>
+  </data>
+  <data name="Tweet.Header" xml:space="preserve">
+    <value>Tweets</value>
+  </data>
+  <data name="Send.Content" xml:space="preserve">
+    <value>Send</value>
   </data>
 </root>

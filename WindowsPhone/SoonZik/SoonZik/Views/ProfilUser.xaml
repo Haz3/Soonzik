@@ -16,22 +16,11 @@
         </core:EventTriggerBehavior>
     </interactivity:Interaction.Behaviors>
 
-    <Page.Resources>
-        <DataTemplate x:Key="UserTemplate">
-            <StackPanel Margin="0,0,0,10">
-                <TextBlock Text="{Binding Path=username}" Foreground="White" FontSize="15" />
-            </StackPanel>
-        </DataTemplate>
-
-
-    </Page.Resources>
-
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="100" />
             <RowDefinition Height="*" />
-            <RowDefinition Height="100" />
-            <RowDefinition Height="40" />
+            <RowDefinition Height="80" />
         </Grid.RowDefinitions>
 
         <!-- Grid 0 -->
@@ -80,19 +69,9 @@
 
 
         <!-- Grid 2 -->
-        <ListBox Grid.Row="2" Background="Transparent" x:Name="FollowListBox"
-                 ItemsSource="{Binding CurrentUser.follows}" ItemTemplate="{StaticResource UserTemplate}"
-                 SelectedItem="{Binding SelectUser, Mode=TwoWay}">
-            <interactivity:Interaction.Behaviors>
-                <core:EventTriggerBehavior EventName="SelectionChanged">
-                    <core:InvokeCommandAction Command="{Binding FollowerCommand}" />
-                </core:EventTriggerBehavior>
-            </interactivity:Interaction.Behaviors>
-        </ListBox>
-
 
         <!-- Grid 3 -->
-        <Button Content="{Binding ButtonContent}" Grid.Row="3" HorizontalAlignment="Center" BorderThickness="0,0,0,0">
+        <Button Content="{Binding ButtonContent}" Grid.Row="2" HorizontalAlignment="Center" BorderThickness="0,0,0,0">
             <interactivity:Interaction.Behaviors>
                 <core:EventTriggerBehavior EventName="Click">
                     <core:InvokeCommandAction Command="{Binding EditClickCommand}" />

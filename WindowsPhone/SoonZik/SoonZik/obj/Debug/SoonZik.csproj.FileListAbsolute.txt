@@ -495,7 +495,6 @@ C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\obj\Debug\Vi
 C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\obj\Debug\Views\Connexion.xaml
 C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\obj\Debug\Views\Conversation.xaml
 C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\obj\Debug\Views\Explorer.xaml
-C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\obj\Debug\Views\Friends.xaml
 C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\obj\Debug\Views\MainView.xaml
 C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\obj\Debug\Views\News.xaml
 C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\obj\Debug\Views\NewsDetail.xaml
@@ -523,7 +522,6 @@ C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\obj\Debug\Vi
 C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\obj\Debug\Views\Connexion.xbf
 C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\obj\Debug\Views\Conversation.xbf
 C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\obj\Debug\Views\Explorer.xbf
-C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\obj\Debug\Views\Friends.xbf
 C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\obj\Debug\Views\MainView.xbf
 C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\obj\Debug\Views\News.xbf
 C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\obj\Debug\Views\NewsDetail.xbf
@@ -532,6 +530,8 @@ C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\obj\Debug\Vi
 C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\obj\Debug\Views\ProfilArtiste.xbf
 C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\obj\Debug\Views\ProfilUser.xbf
 C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\obj\Debug\XamlSaveStateFile.xml
+C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\obj\Debug\Views\Friends.xaml
+C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\obj\Debug\Views\Friends.xbf
 C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\obj\Debug\SoonZik.exe
 C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\obj\Debug\SoonZik.pdb
 C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\obj\Debug\Microsoft.Practices.ServiceLocation\en-US\Microsoft.Practices.ServiceLocation.Properties.Resources.resw
@@ -555,3 +555,11 @@ C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\obj\Debug\Co
 C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\obj\Debug\Facebook.Client.pri.xml
 C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\obj\Debug\GalaSoft.MvvmLight.Platform.pri.xml
 C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\obj\Debug\ProjectArchitectures.txt
+C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\obj\Debug\Microsoft.Practices.ServiceLocation\layout.resfiles
+C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\obj\Debug\Microsoft.Practices.ServiceLocation\layout.resfiles.intermediate
+C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\obj\Debug\Microsoft.Practices.ServiceLocation\Resources.resfiles
+C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\obj\Debug\Microsoft.Practices.ServiceLocation\Resources.resfiles.intermediate
+C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\obj\Debug\Microsoft.Practices.ServiceLocation\pri.resfiles
+C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\obj\Debug\Microsoft.Practices.ServiceLocation\pri.resfiles.intermediate
+C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\obj\Debug\Microsoft.Practices.ServiceLocation\priconfig.xml
+C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\obj\Debug\Microsoft.Practices.ServiceLocation\priconfig.xml.intermediate
