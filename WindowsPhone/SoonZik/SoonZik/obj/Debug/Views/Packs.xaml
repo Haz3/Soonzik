@@ -91,8 +91,8 @@
                             <RowDefinition Height="60"/>
                             <RowDefinition Height="60"/>
                         </Grid.RowDefinitions>
-                        <TextBlock Grid.Row="0" FontSize="20" Foreground="White" Text="{Binding ThePack.title}"/>
-                        <TextBlock Grid.Row="1" FontSize="20" Foreground="White" Text="{Binding ThePack.price}"/>
+                        <TextBlock Grid.Row="0" FontSize="20" Foreground="White" Text="{Binding MyPack.title, Mode=TwoWay}"/>
+                        <TextBlock Grid.Row="1" FontSize="20" Foreground="White" Text="{Binding MyPack.descriptions[0].description, Mode=TwoWay}"/>
                         <Button Grid.Row="2" HorizontalAlignment="Center" Content="Acheter" Command="{Binding BuyCommand}"/>
                     </Grid>
                 </PivotItem>

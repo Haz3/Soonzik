@@ -3,6 +3,7 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Input;
+using Windows.UI.Xaml.Media;
 using SoonZik.HttpRequest.Poco;
 
 // Pour en savoir plus sur le modèle d'élément Contrôle utilisateur, consultez la page http://go.microsoft.com/fwlink/?LinkId=234236
@@ -12,13 +13,21 @@ namespace SoonZik.Controls
     public sealed partial class PriceControl : UserControl
     {
         #region Attribute
+
         public static Pack SelecetdPack { get; set; }
+        private bool AssoBool { get; set; }
+        private bool SoonBool { get; set; }
+        private bool ArtisBool { get; set; }
         #endregion
 
         #region Ctor
         public PriceControl()
         {
             this.InitializeComponent();
+
+            AssoBool = false;
+            SoonBool = false;
+            ArtisBool = false;
 
             InitializePrice();
         }
@@ -29,11 +38,11 @@ namespace SoonZik.Controls
         private void InitializePrice()
         {
             if (SelecetdPack.price != null)
-                PriceTextBox.Text = SelecetdPack.price;
+                PriceTextBox.Text = SelecetdPack.price.ToString();
             else
             {
                 SelecetdPack.price = "10";
-                PriceTextBox.Text = SelecetdPack.price;
+                PriceTextBox.Text = SelecetdPack.price.ToString();
             }
                 
 
@@ -64,30 +73,39 @@ namespace SoonZik.Controls
 
         #endregion
 
-        private void AssociationSlider_OnManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
+        private void AssociationSlider_OnManipulationDelta(object sender, RangeBaseValueChangedEventArgs e)
         {
-            if (e.Position.X < 10)
+            if (e.NewValue < 10)
             {
-                ArtistePriceCalc(e.Position.X);
-                SoonZikPriceCalc(e.Position.X);
+                ArtistePriceCalc(e.NewValue);
+                SoonZikPriceCalc(e.NewValue);
             }
         }
 
-        private void ArtistSlider_OnManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
+        private void ArtistSlider_OnManipulationDelta(object sender, RangeBaseValueChangedEventArgs e)
         {
-            if (e.Position.X < 10)
+            if (e.NewValue < 10)
             {
-                AssociationPriceCalc(e.Position.X);
-                SoonZikPriceCalc(e.Position.X);
+                AssociationPriceCalc(e.NewValue);
+                SoonZikPriceCalc(e.NewValue);
             }
         }
 
-        private void SoonZikSlider_OnManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
+        private void SoonZikSlider_OnManipulationDelta(object sender, RangeBaseValueChangedEventArgs e)
         {
-            if (e.Position.X < 10)
+            if (e.NewValue < 10)
             {
-                ArtistePriceCalc(e.Position.X);
-                AssociationPriceCalc(e.Position.X);
+                ArtistePriceCalc(e.NewValue);
+                AssociationPriceCalc(e.NewValue);
+            }
+        }
+
+        private void ArtistSlider_OnGotFocus(object sender, RoutedEventArgs e)
+        {
+            if (ArtistSlider.Value < 10)
+            {
+                AssociationPriceCalc(ArtistSlider.Value);
+                SoonZikPriceCalc(ArtistSlider.Value);
             }
         }
     }

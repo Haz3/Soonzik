@@ -25,11 +25,7 @@ namespace SoonZik.ViewModel
     public class ProfilUserViewModel : ViewModelBase
     {
         #region Attribute
-
-        private string _crypto;
-        private readonly CoreApplicationView _coreApplicationView;
         private User _currentUser;
-
         public User CurrentUser
         {
             get { return _currentUser; }
@@ -39,31 +35,15 @@ namespace SoonZik.ViewModel
                 RaisePropertyChanged("CurrentUser");
             }
         }
-
+        private string _crypto;
+        private readonly CoreApplicationView _coreApplicationView;
         public INavigationService Navigation;
         private string _newImagePath;
-
-        public User SelectUser
-        {
-            get { return _selectUser; }
-            set
-            {
-                _selectUser = value;
-                RaisePropertyChanged("SelectUser");
-            }
-        }
-
-        private User _selectUser;
-
-        public ICommand FollowerCommand { get; private set; }
         public ICommand SelectionCommand { get; private set; }
         public ICommand EditClickCommand { get; private set; }
         public ICommand TappedCommand { get; private set; }
-
         public bool NeedUpdate;
-
         private bool _canUdpate;
-
         public bool CanUpdate
         {
             get { return _canUdpate; }
@@ -73,9 +53,7 @@ namespace SoonZik.ViewModel
                 RaisePropertyChanged("CanUpdate");
             }
         }
-
         private string _buttonContent;
-
         public string ButtonContent
         {
             get { return _buttonContent; }
@@ -85,7 +63,6 @@ namespace SoonZik.ViewModel
                 RaisePropertyChanged("ButtonContent");
             }
         }
-
         #endregion
 
         #region Ctor
@@ -99,7 +76,6 @@ namespace SoonZik.ViewModel
             ButtonContent = "Editer mes informations";
             SelectionCommand = new RelayCommand(SelectionExecute);
             EditClickCommand = new RelayCommand(EditInformationExecute);
-            FollowerCommand = new RelayCommand(FollowerCommandExecute);
             TappedCommand = new RelayCommand(TappedCommandExecute);
             _coreApplicationView = CoreApplication.GetCurrentView();
             //Navigation.GoBack();
@@ -184,13 +160,7 @@ namespace SoonZik.ViewModel
                 }
             });
         }
-
-        private void FollowerCommandExecute()
-        {
-            ProfilArtisteViewModel.TheUser = SelectUser;
-            GlobalMenuControl.SetChildren(new ProfilArtiste());
-        }
-
+        
         private void SelectionExecute()
         {
             if (Singleton.Instance().ItsMe)

@@ -70,8 +70,7 @@ namespace SoonZik.ViewModel
         {
             if (EmailHelper.IsValidEmail(NewUser.email))
             {
-                NewUser.birthday = Birthday.Year + "-" + Birthday.Month + "-" + Birthday.Day + " " + Birthday.Hour +
-                                   ":" + Birthday.Minute + ":" + Birthday.Second;
+                NewUser.birthday = Birthday.Year + "-" + Birthday.Month + "-" + Birthday.Day;
                 PostUser();
             }
             else

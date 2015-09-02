@@ -33,5 +33,11 @@ namespace SoonZik.Views
             var vm = DataContext as AlbumViewModel;
             if (vm != null) vm.ItemClickCommand.Execute(null);
         }
+
+        private void MoreOption_OnTapped(object sender, TappedRoutedEventArgs e)
+        {
+            var vm = DataContext as AlbumViewModel;
+            if (vm != null) vm.MoreOptionOnTapped.Execute(null);
+        }
     }
 }

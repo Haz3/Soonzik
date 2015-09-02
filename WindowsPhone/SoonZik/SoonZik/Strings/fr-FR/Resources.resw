@@ -163,7 +163,7 @@
     <value>Mot de passe oublier</value>
   </data>
   <data name="Friends.Content" xml:space="preserve">
-    <value>Amis</value>
+    <value>Mon reseau</value>
   </data>
   <data name="Genre.Text" xml:space="preserve">
     <value>Genre</value>
@@ -275,5 +275,20 @@
   </data>
   <data name="SoonZik.Text" xml:space="preserve">
     <value>SoonZik</value>
+  </data>
+  <data name="PackError" xml:space="preserve">
+    <value>Veuillez selectionner un pack</value>
+  </data>
+  <data name="Follow.Header" xml:space="preserve">
+    <value>Followers</value>
+  </data>
+  <data name="Friend.Header" xml:space="preserve">
+    <value>Amis</value>
+  </data>
+  <data name="Tweet.Header" xml:space="preserve">
+    <value>Tweets</value>
+  </data>
+  <data name="Send.Content" xml:space="preserve">
+    <value>Envoyer</value>
   </data>
 </root>
