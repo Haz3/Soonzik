@@ -555,6 +555,11 @@ C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\obj\Debug\Co
 C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\obj\Debug\Facebook.Client.pri.xml
 C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\obj\Debug\GalaSoft.MvvmLight.Platform.pri.xml
 C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\obj\Debug\ProjectArchitectures.txt
+C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\obj\Debug\Controls\MoreOptionPopUp.g.i.cs
+C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\obj\Debug\Controls\MoreOptionPopUp.g.cs
+C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\bin\Debug\Controls\MoreOptionPopUp.xbf
+C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\obj\Debug\Controls\MoreOptionPopUp.xaml
+C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\obj\Debug\Controls\MoreOptionPopUp.xbf
 C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\obj\Debug\Microsoft.Practices.ServiceLocation\layout.resfiles
 C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\obj\Debug\Microsoft.Practices.ServiceLocation\layout.resfiles.intermediate
 C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\obj\Debug\Microsoft.Practices.ServiceLocation\Resources.resfiles

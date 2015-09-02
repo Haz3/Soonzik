@@ -3,6 +3,8 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using Windows.ApplicationModel.Core;
 using Windows.UI.Core;
+using Windows.UI.Xaml;
+using Coding4Fun.Toolkit.Controls;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using SoonZik.Controls;
@@ -26,7 +28,7 @@ namespace SoonZik.ViewModel
                 //Charge();
             }
 
-
+            MoreOptionOnTapped = new RelayCommand(MoreOptionOnTappedExecute);
             SelectionCommand = new RelayCommand(SelectionExecute);
             //ImageAlbum = TheAlbum.image == String.Empty ? new Uri("ms-appx:///Resources/Icones/disc.png", UriKind.Absolute).ToString() : TheAlbum.image;
         }
@@ -74,7 +76,21 @@ namespace SoonZik.ViewModel
         }
 
         public static Album MyAlbum { get; set; }
+        private Music _selectedMusic;
 
+        public Music SelectedMusic
+        {
+            get
+            {
+                return _selectedMusic;
+            }
+            set
+            {
+                _selectedMusic = value;
+                RaisePropertyChanged("SelectedMusic");
+            }
+        }
+        public MessagePrompt MessagePrompt { get; set; }
         private RelayCommand _itemClickCommand;
 
         public RelayCommand ItemClickCommand
@@ -88,11 +104,29 @@ namespace SoonZik.ViewModel
         }
         
         public ICommand SelectionCommand { get; private set; }
+        public ICommand MoreOptionOnTapped { get; set; }
 
         #endregion
 
         #region Method
-        
+
+        private void MoreOptionOnTappedExecute()
+        {
+            var newsBody = new MoreOptionPopUp(SelectedMusic);
+            MessagePrompt = new MessagePrompt
+            {
+                Width = 300,
+                Height = 450,
+                IsAppBarVisible = false,
+                VerticalAlignment = VerticalAlignment.Center,
+                Body = newsBody,
+                Opacity = 0.6
+            };
+            MessagePrompt.ActionPopUpButtons.Clear();
+            MessagePrompt.Show();
+        }
+
+
         private void SelectionExecute()
         {
             TheAlbum = MyAlbum;
@@ -101,7 +135,7 @@ namespace SoonZik.ViewModel
 
         private void ItemClickCommandExecute()
         {
-            _navigationService.Navigate(new PlayerControl().GetType());
+            //_navigationService.Navigate(new PlayerControl().GetType());
         }
 
         public void Charge()

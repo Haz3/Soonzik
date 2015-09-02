@@ -30,7 +30,7 @@
                     <RowDefinition Height="20"/>
                 </Grid.RowDefinitions>
                 <TextBlock Grid.Row="0" Text="{Binding Path=msg}" Foreground="White" FontSize="15"></TextBlock>
-                <TextBlock Grid.Row="1" Text="{Binding Path=user.username}" Foreground="White" FontSize="10" TextAlignment="Right" Margin="0,0,10,0"/>
+                <TextBlock Grid.Row="1" Text="{Binding Path=user.username}" Foreground="White" FontSize="10" TextAlignment="Right" Margin="0,0,15,0"/>
             </Grid>
         </DataTemplate>
 

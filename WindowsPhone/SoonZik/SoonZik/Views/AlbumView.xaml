@@ -8,6 +8,7 @@
     xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
     xmlns:core="using:Microsoft.Xaml.Interactions.Core"
     mc:Ignorable="d"
+    xmlns:toolkit="using:Coding4Fun.Toolkit.Controls"
     DataContext="{StaticResource AlbumViewModel}"
     Background="#424242">
 
@@ -30,8 +31,11 @@
                     <TextBlock x:Name="MusicTitle" Text="{Binding Path=title}" FontSize="25" Margin="20,0,0,0" />
                     <TextBlock x:Name="ArtistNameList" Text="{Binding Path=user.Username}" FontSize="15"
                                VerticalAlignment="Bottom" Margin="20,0,0,10" />
-                    <Image x:Name="MoreOption" Source="../Resources/Icones/menu.png" Height="30"
-                           VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,20,0" />
+                    
+                    <Image x:Name="MoreOption" Source="../Resources/Icones/menu.png" Height="30" Tapped="MoreOption_OnTapped"
+                           VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,20,0">
+                    
+                    </Image>
                 </Grid>
             </DataTemplate>
         </Grid.Resources>
@@ -48,7 +52,7 @@
                        VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,250,0,0" />
         </Grid>
         <ListView Grid.Row="1" x:Name="MusicListView" ItemsSource="{Binding ListMusics}"
-                  ItemTemplate="{StaticResource MusicTemplate}" />
+                  ItemTemplate="{StaticResource MusicTemplate}" SelectedItem="{Binding SelectedMusic, Mode=TwoWay}"/>
 
     </Grid>
 </Page>
