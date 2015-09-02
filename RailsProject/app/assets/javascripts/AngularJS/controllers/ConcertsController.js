@@ -2,7 +2,10 @@ SoonzikApp.controller('ConcertsCtrl', ['$scope', 'SecureAuth', 'HTTPService', '$
 
 	$scope.loading = true;
 	$scope.indexView = { concerts: [], numberPages: 0, currentPage: 1 };
-	$scope.showView = { concert: null };
+	$scope.modelObj = {
+		user: { username: "" },
+		address: { country: "" }
+	}
 
 	var ConcertPerPage = 10;
 

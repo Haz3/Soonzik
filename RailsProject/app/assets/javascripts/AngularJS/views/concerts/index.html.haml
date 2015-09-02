@@ -1,8 +1,18 @@
 .concerts{ "ng-init" => "initIndex()" }
 	%loading{ "ng-if" => "loading == true" }
 	.concertContainer{ "ng-if" => "loading == false" }
+		.groupFilter.clearfix
+			.small-12.medium-4.columns
+				%label{ :for => "artistInput" }
+					%strong {{ labels.DISPLAY_CONCERT_ARTIST_FILTER_LABEL }}
+				%input#artistInput{ "type" => "text", name: "artistInput", "ng-model" => "modelObj.user.username" }
+			.small-12.medium-4.columns.end
+				%label{ :for => "addressInput" }
+					%strong {{ labels.DISPLAY_CONCERT_COUNTRY_FILTER_LABEL }}
+				%input#artistInput{ "type" => "text", name: "addressInput", "ng-model" => "modelObj.address.country" }
+		%hr
 		%p{ "ng-if" => "indexView.currentPage > indexView.numberPages" } {{ labels.DISPLAY_CONCERT_TOO_MANY_PAGE_LABEL }} 
-		.concert{ "ng-if" => "indexView.currentPage <= indexView.numberPages", "ng-repeat" => "concert in indexView.concerts" }
+		.concert{ "ng-if" => "indexView.currentPage <= indexView.numberPages", "ng-repeat" => "concert in indexView.concerts | filter:modelObj" }
 			%h3 {{ labels.DISPLAY_CONCERT_CONCERT_OF_LABEL }} {{ concert.user.username }}
 			%p
 				%span {{ labels.DISPLAY_CONCERT_LINK_LABEL }}

@@ -1,16 +1,21 @@
 SoonzikApp.controller('IndexCtrl', ['$scope', 'SecureAuth', 'HTTPService', '$routeParams', 'NotificationService', function ($scope, SecureAuth, HTTPService, $routeParams, NotificationService) {
 	
 	$scope.loading = true;
-	$scope.index = { battles: [], votes: [], voteCurrentUser: [] };
-	$scope.show = { battle: null, artistOne: {}, artistTwo: {}, voteCurrentUser: false, randomVote: [] };
 	$scope.currentUser = false;
+	$scope.randomVote = [];
+	$scope.votes = [
+		{ value: 0, label: "" },
+		{ value: 0, label: "" }
+	];
+	$scope.user = false;
+	$scope.voteCurrentUser = false;
 
 	/*
 	**	Fonction d'init de foundation.
 	**	+ Init Slider.
 	*/
 
-	$scope.initFoundation = function () {
+	$scope.initIndex = function () {
 		$(document).foundation({
 		  orbit: {
 		    animation: 'slide',
@@ -20,163 +25,128 @@ SoonzikApp.controller('IndexCtrl', ['$scope', 'SecureAuth', 'HTTPService', '$rou
 		    navigation_arrows: true,
 		    bullets: false
 		  }
-		
 		});
 		$(window).trigger("resize");
-	}
 
-	/*
-	**	ShowNews --> Recupere les 3 dernieres news pour le slider.
-	*/
 
-	$scope.showNews = function() {
-
-		var parameters = [
-			{ key: "order_by_desc[]", value: "date", limit: 3}
-		];
-
-		$scope.News = true;
-
-		HTTPService.findNews(parameters).then(function(news) {
-			
-			$scope.news = news.data.content;
-
-		}, function (error) {
-			console.log("No News Available");
-		})
-	}
-
-	/*
-	**	ShowIndex --> Recupere les 4 derniers packs mis en ligne.
-	*/
-
- 	$scope.showIndex = function() {
-		var parameters = [
-			{ key: "limit", value: 4 },
-			{ key: "order_by_asc[]", value: "created_at" }
-		];
-
-		$scope.showPack = true;
-
-		$scope.imgPack = [
-			{ "img": "http://upload.wikimedia.org/wikipedia/en/6/66/SallyCD.jpg"},
-	        { "img": "http://upload.wikimedia.org/wikipedia/en/f/f1/Loureedtransformer.jpeg"},
-	        { "img": "http://upload.wikimedia.org/wikipedia/en/7/70/Berlinloureed.jpeg"},
-	        { "img": "http://upload.wikimedia.org/wikipedia/en/8/88/Lour72.jpg"},
-	    ];
-
-		HTTPService.findPacks(parameters).then(function (packs) {
-
-			$scope.packs = packs.data.content;
-
-		}, function (error) {
-			console.log("There is no pack available");
-		})
-	}
-
-	/*
-	**	ShowBattleInfo --> Récupère la derniere battle mis en ligne.
-	*/
-
-	$scope.showBattleInfo = function() {
-		var parameters = [
-			{key: "order_by_desc[]", value: "created_at"},
-			{key: "limit", value: 1}
-		]
-
-		$scope.showBattle = true;
-
-		HTTPService.findBattles(parameters).then(function(response) {
-			
-			$scope.battle = response.data.content;
-			console.log($scope.battle);
-
-		}, function(error) {
-			console.log("no battles available")
-		})
-
-	}
-
-	$scope.showInit = function() {
-		var id = $routeParams.id;
 		var current_user = SecureAuth.getCurrentUser();
 		if (current_user.id != null && current_user.token != null && current_user.username != null) {
-			$scope.currentUser = current_user;
+			$scope.user = current_user;
 		}
-		$scope.show.voteCurrentUser = false;
-		HTTPService.showBattles(id).then(function(response) {
-			console.log(response.data.content);
-			$scope.show.battle = response.data.content;
-			if ($scope.show.battle.votes.length > 0) {
-				$scope.show.votes = [
-					{ value: 0, label: $scope.show.battle.artist_one.username },
-					{ value: 0, label: $scope.show.battle.artist_two.username }
-				];
-				for (var voteIndex in $scope.show.battle.votes) {
-					if ($scope.show.battle.votes[voteIndex].artist_id == $scope.show.battle.artist_one.id) {
-						$scope.show.votes[0].value++;
-					} else {
-						$scope.show.votes[1].value++;
+		$scope.user = false;
+
+		/*
+		**	Recupere les 3 dernieres news pour le slider.
+		*/
+		HTTPService.findNews([{ key: "order_by_desc[]", value: "date", limit: 3}]).then(function(news) {
+			$scope.news = news.data.content;
+			console.log($scope.news);
+
+			/*
+			**	 Recupere les 4 derniers packs mis en ligne.
+			*/
+
+			var parameters = [
+				{ key: "limit", value: 4 },
+				{ key: "order_by_asc[]", value: "created_at" }
+			];
+
+			/*$scope.imgPack = [
+				{ "img": "http://upload.wikimedia.org/wikipedia/en/6/66/SallyCD.jpg"},
+		        { "img": "http://upload.wikimedia.org/wikipedia/en/f/f1/Loureedtransformer.jpeg"},
+		        { "img": "http://upload.wikimedia.org/wikipedia/en/7/70/Berlinloureed.jpeg"},
+		        { "img": "http://upload.wikimedia.org/wikipedia/en/8/88/Lour72.jpg"},
+		    ];*/
+
+			HTTPService.findPacks(parameters).then(function (packs) {
+				$scope.packs = packs.data.content;
+
+
+				/*
+				**	ShowBattleInfo --> Récupère la derniere battle mis en ligne.
+				*/
+
+				var parameters = [
+					{key: "order_by_desc[]", value: "created_at"},
+					{key: "limit", value: 1}
+				]
+
+				$scope.showBattle = true;
+
+				HTTPService.findBattles(parameters).then(function(response) {
+					
+					if (response.data.content.length > 0) {
+						$scope.battle = response.data.content[0];
+
+						if ($scope.battle.votes.length > 0) {
+							$scope.votes = [
+								{ value: 0, label: $scope.battle.artist_one.username },
+								{ value: 0, label: $scope.battle.artist_two.username }
+							];
+							for (var voteIndex in $scope.battle.votes) {
+								if ($scope.battle.votes[voteIndex].artist_id == $scope.battle.artist_one.id) {
+									$scope.votes[0].value++;
+								} else {
+									$scope.votes[1].value++;
+								}
+								if ($scope.battle.votes[voteIndex].user_id == $scope.currentUser.id) {
+									$scope.voteCurrentUser = $scope.battle.votes[voteIndex].artist_id;
+								}
+							}
+						} else {
+							$scope.votes = false;
+						}
+
+						// Get top 5 of artists
+						HTTPService.isArtist($scope.battle.artist_one.id).then(function(artistInformation) {
+							/*- Begin isArtist - artist 1 -*/
+
+							// Initialisation of the artist profile [if is one]
+							var isArtist = artistInformation.data.content.artist;
+							if (isArtist == true) {
+								$scope.battle.artist_one.topFive = artistInformation.data.content.topFive;
+								$scope.battle.artist_one.albums = artistInformation.data.content.albums;
+							}
+
+							HTTPService.isArtist($scope.battle.artist_two.id).then(function(artistInformation) {
+								/*- Begin isArtist - artist 2 -*/
+
+								// Initialisation of the artist profile [if is one]
+								var isArtist = artistInformation.data.content.artist;
+								if (isArtist == true) {
+									$scope.battle.artist_two.topFive = artistInformation.data.content.topFive;
+									$scope.battle.artist_two.albums = artistInformation.data.content.albums;
+								}
+								$scope.loading = false;
+							}, function(error) {	// error management of the second isArtist
+								NotificationService.error($rootScope.labels.FILE_BATTLE_LOAD_ARTIST_TWO_ERROR_MESSAGE)
+							});
+						}, function(error) {	// error management of the first isArtist
+							NotificationService.error($rootScope.labels.FILE_BATTLE_LOAD_ARTIST_ONE_ERROR_MESSAGE);
+						});
+
+						randomPeople();
+
+						$scope.loading = false;
 					}
-					if ($scope.show.battle.votes[voteIndex].user_id == $scope.currentUser.id) {
-						$scope.show.voteCurrentUser = $scope.show.battle.votes[voteIndex].artist_id;
-					}
-				}
-			} else {
-				$scope.show.votes = false;
-			}
-
-			// Get top 5 of artists
-			HTTPService.isArtist($scope.show.battle.artist_one.id).then(function(artistInformation) {
-				/*- Begin isArtist - artist 1 -*/
-
-				// Initialisation of the artist profile [if is one]
-				var isArtist = artistInformation.data.content.artist;
-				console.log(artistInformation);
-				if (isArtist == true) {
-					$scope.show.artistOne.topFive = artistInformation.data.content.topFive;
-					$scope.show.artistOne.albums = artistInformation.data.content.albums;
-				}
-
-				HTTPService.isArtist($scope.show.battle.artist_two.id).then(function(artistInformation) {
-					/*- Begin isArtist - artist 2 -*/
-
-					// Initialisation of the artist profile [if is one]
-					var isArtist = artistInformation.data.content.artist;
-					if (isArtist == true) {
-						$scope.show.artistTwo.topFive = artistInformation.data.content.topFive;
-						$scope.show.artistTwo.albums = artistInformation.data.content.albums;
-					}
-					console.log("loading false");
-					$scope.loading = false;
-				}, function(error) {	// error management of the second isArtist
-					NotificationService.error("Error while loading the profile of the second artist.")
+				}, function(error) {
+					console.log("no battles available")
 				});
-			}, function(error) {	// error management of the first isArtist
-				NotificationService.error("Error while loading the profile of the first artist.");
+
+			}, function (error) {
+				console.log("There is no pack available");
 			});
-
-			console.log("random now :");
-			randomPeople();
-
-		}, function(error) {	// error management of the showBattle call
-			NotificationService.error("An error occured while loading the page.")
+		}, function (error) {
+			console.log("No News Available");
 		});
 	}
 
 	$scope.indexVoteFor = function(battle, artist) {
-		var id = $routeParams.id;
-		var current_user = SecureAuth.getCurrentUser();
-		if (current_user.id != null && current_user.token != null && current_user.username != null) {
-			$scope.currentUser = current_user;
-		}
-		$scope.show.voteCurrentUser = false;
-		
 		if ($scope.currentUser == false) {
-			NotificationService.error("You need to be authenticated");
+			NotificationService.error($rootScope.labels.FILE_BATTLE_NEED_AUTHENTICATION_ERROR_MESSAGE);
 			return;
 		}
-		if ($scope.index.voteCurrentUser[battle.id] == false || $scope.index.voteCurrentUser[battle.id] != artist.id) {
+		if ($scope.voteCurrentUser == false || $scope.voteCurrentUser != artist.id) {
 			SecureAuth.securedTransaction(function(key, id) {
 				var parameters = {
 					secureKey: key,
@@ -187,48 +157,42 @@ SoonzikApp.controller('IndexCtrl', ['$scope', 'SecureAuth', 'HTTPService', '$rou
 					// is there a previous vote ?
 					var oldVote = true;
 					// init the array of values
-					if ($scope.index.votes[battle.id].length == 0) {
-						$scope.index.votes[battle.id] = [
-							{ value: 0, label: battle.artist_one.username },
-							{ value: 0, label: battle.artist_two.username }
+					if ($scope.votes.length == 0) {
+						$scope.votes = [
+							{ value: 0, label: $scope.battle.artist_one.username },
+							{ value: 0, label: $scope.battle.artist_two.username }
 						];
 						oldVote = false;
 					}
-					$scope.index.voteCurrentUser[battle.id] = artist.id;
+					$scope.voteCurrentUser = artist.id;
 
-					// iterate on votes
-					for (var battleIndex in $scope.index.battles) {
-						// If this is the good battle
-						if ($scope.index.battles[battleIndex].id == battle.id) {
-							// Iterate on the votes
-							for (var voteIndex in $scope.index.battles[battleIndex].votes) {
-								// We modify the vote value
-								if ($scope.index.battles[battleIndex].votes[voteIndex].user_id == $scope.currentUser.id) {
-									$scope.index.battles[battleIndex].votes[voteIndex].artist_id = artist.id;
-									
-									// if you vote for the first
-									if (artist.id == $scope.index.battles[battleIndex].artist_one.id) {
-										$scope.index.votes[$scope.index.battles[battleIndex].id][0].value++;
-										// if there is a previous vote, reduce the value for the other artist
-										if (oldVote) {	$scope.index.votes[$scope.index.battles[battleIndex].id][1].value--;	}
-									}
-									else {		// if you vote for the second
-										$scope.index.votes[$scope.index.battles[battleIndex].id][1].value++;
-										// if there is a previous vote, reduce the value for the other artist
-										if (oldVote) {	$scope.index.votes[$scope.index.battles[battleIndex].id][0].value--;	}
-									}
-								}
+					// Iterate on the votes
+					for (var voteIndex in $scope.battle.votes) {
+						// We modify the vote value
+						if ($scope.battle.votes[voteIndex].user_id == $scope.currentUser.id) {
+							$scope.battle.votes[voteIndex].artist_id = artist.id;
+							
+							// if you vote for the first
+							if (artist.id == $scope.battle.artist_one.id) {
+								$scope.votes[0].value++;
+								// if there is a previous vote, reduce the value for the other artist
+								if (oldVote) {	$scope.votes[1].value--;	}
+							}
+							else {		// if you vote for the second
+								$scope.votes[1].value++;
+								// if there is a previous vote, reduce the value for the other artist
+								if (oldVote) {	$scope.votes[0].value--;	}
 							}
 						}
 					}
 				}, function(error) {
-					NotificationService.error("An error occured while voting. Try again later.");
+					NotificationService.error($rootScope.labels.FILE_BATTLE_VOTE_ERROR_MESSAGE);
 				});
 			}, function(error) {
-				NotificationService.error("An error occured while voting. Try again later.");
+				NotificationService.error($rootScope.labels.FILE_BATTLE_VOTE_ERROR_MESSAGE);
 			});
 		} else {
-			NotificationService.info("This action is impossible : You already vote for this artist");
+			NotificationService.info($rootScope.labels.FILE_BATTLE_ALREADY_VOTED_ERROR_MESSAGE);
 		}
 	}
 
@@ -253,5 +217,39 @@ SoonzikApp.controller('IndexCtrl', ['$scope', 'SecureAuth', 'HTTPService', '$rou
 		}
 	}
 
-	$scope.loading = false;
+
+	var randomPeople = function() {
+		var votes = $scope.battle.votes;
+		var count = 0;
+		var id_array = [];
+
+		if (votes.length <= 6) {
+			for (var indexVote in votes) {
+				id_array.push(votes[indexVote].user_id);
+			}
+		} else {
+			while (count < 6) {
+				var randomNumber = ~~(Math.random() * votes.length);
+				console.log(randomNumber);
+				if ($.inArray(randomNumber, id_array)) {
+					continue;
+				} else {
+					id_array.push(randomNumber);
+					count++;
+				}
+			}
+		}
+		fillArray_rec($scope.randomVote, 0, id_array, (votes.length <= 6) ? votes.length : 6);
+	}
+
+	var fillArray_rec = function(array, index, id_array, limit) {
+		HTTPService.getProfile(id_array[index]).then(function(profile) {
+			array[index] = profile.data.content;
+			if (index + 1 < limit) {
+				fillArray_rec(array, index + 1, id_array, limit);
+			}
+		}, function(error) {
+			array[index] = null;
+		});
+	}
 }]);

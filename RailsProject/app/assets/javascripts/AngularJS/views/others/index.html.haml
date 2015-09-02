@@ -1,52 +1,94 @@
-.index{ "ng-init" => "showIndex()" }
+.index{ "ng-init" => "initIndex()" }
   %loading{ "ng-if" => "loading == true" }
-  .row{ "ng-if" => "loading == false", "ng-init" => "initFoundation()"}
-    %br
-    %h3.subheader
-      Last News
-    .large-12.large-centered.columns{"ng-init" => "showNews()"}
-      .orbit-container
-      %ul.example-orbit.orbit-slides-container{"data-orbit" => "", "data-options" => "animation:slide; pause_on_hover:true; animation_speed:500; navigation_arrows:true; bullets:false;"}
-        %li{"ng-repeat" => "new in news", "data-after-render-repeat" => ""}
-          %slide{"ng-repeat" => "img in new.attachments"}
-            %img{"ng-src" => "{{img.url}}"}
-            .orbit-caption
-              {{new.title}}
-    .divider
-    %h3.subheader.left
-      Packs du moment
-    %h3.subheader.right
-      %a{:href => "http://lvh.me:3000/packs/"} Voir tout
-    .ul.large-block-grid-4{"ng-show" => "showPack"}
-      %li{ "ng-repeat" => "pack in packs"}
-        .panel
-          %h5.subheader.text-center
-            {{ pack.title }}
-          %img{"src" => "/assets/pack1.jpg"}
-          .divider
-          Temps Restant :
-          %br
-          Moyenne :
-    .divider
-    %h3.subheader.left
-      Battle en Cours
-    %h3.subheader.right
-      %a{:href => "http://lvh.me:3000/battle"} Voir Tout
-    .large-block-grid-4{"ng-init" => "showInit()"}
-      %hr
-      .battleLine{"ng-show" => "showBattle"}
-      .small-2.large-4.columns
-        .battle{"ng-repeat" => "artist in battle"}
-          %p
-            %a{href: "/users/{{ artist.artist_one.id }}"} {{ artist.artist_one.username }}
-            %img{ "ng-src" => "{{'/assets/usersImage/avatars/' + artist.artist_one.image}}" }
-            %span{ "ng-click" => "indexVoteFor(battle, battle.artist_one)", "class" => "label radius {{ voteClass(index.voteCurrentUser[battle.id], battle.artist_one.id) }}" } {{ voteText(index.voteCurrentUser[battle.id], battle.artist_one.id) }}
-      .small-4.large-4-centered.columns{"ng-repeat" => "artist in battle"}
-        %battle{ "battle-values" => "artist.votes[battle.id]" }
-        %a.button.radius{ href: "/battles/{{ battle.id }}" } Page of the battle
-      .small-6.large-4.columns
-        .battle{"ng-repeat" => "artist in battle"}
-          %p{ "ng-if" => "currentUser != false" }
-            %a{href: "/users/{{ artist.artist_one.id }}"} {{ artist.artist_two.username }}
-            %img{ "ng-src" => "{{ '/assets/usersImage/avatars/' + artist.artist_two.image}}" }
-            %span{ "ng-click" => "indexVoteFor(battle, battle.artist_two)", "class" => "label radius {{ voteClass(index.voteCurrentUser[battle.id], battle.artist_two.id) }}" } {{ voteText(index.voteCurrentUser[battle.id], battle.artist_two.id) }}
+  .index{ "ng-if" => "loading == false" }
+    .row
+      .small-12.medium-8.columns
+        %h3.subheader
+          Last News
+        .clearfix
+          .small-6.medium-3.columns{"ng-repeat" => "new in news", :class => "{{ $last ? 'end' : '' }}"}
+            %img{ "ng-src" => "{{ (new.attachments.length == 0) ? '/assets/news/placeholder.jpg' : '/assets/news/' + new.attachments[0].url }}" }
+            %p.text-center
+              %strong {{new.title}}
+        .divider
+        %h3.subheader.left
+          Packs du moment
+        %h3.subheader.right
+          %a{:href => "http://lvh.me:3000/packs/"} Voir tout
+        .ul.large-block-grid-4
+          %li{ "ng-repeat" => "pack in packs"}
+            .panel
+              %h5.subheader.text-center
+                {{ pack.title }}
+              %img{"src" => "/assets/pack1.jpg"}
+              .divider
+              Temps Restant :
+              %br
+              Moyenne :
+      .small-12.medium-4.columns
+        %p tweets
+        %hr
+        %p Suggestion
+    .row
+      .divider
+      %h3.subheader.left
+        Battle en Cours
+      %h3.subheader.right
+        %a{:href => "http://lvh.me:3000/battle"} Voir Tout
+      .large-block-grid-4.battle
+        %hr
+        .clearfix.battleLine
+          .medium-4.columns
+            %h4
+              %a{ href: "/users/{{ battle.artist_one.id }}" } {{ battle.artist_one.username }}
+            %img{ "ng-src" => "{{ '/assets/usersImage/avatars/' + battle.artist_one.image}}" }
+            %p{ "ng-if" => "user != false" }
+              %span{ "ng-click" => "showVoteFor(battle, battle.artist_one)", "class" => "label radius {{ voteClass(voteCurrentUser, battle.artist_one.id) }}" } {{ voteText(voteCurrentUser, battle.artist_one.id) }}
+            .topFive.text-center{ "ng-if" => "battle.artist_one.topFive.length != 0" }
+              %h5
+                {{ labels.DISPLAY_BATTLE_TOP_LABEL }}
+                %a{ href: "/users/{{ battle.artist_one.id }}" } {{ battle.artist_one.username }}
+              %table.small-12
+                %tr{ "ng-repeat" => "topFiveOne in battle.artist_one.topFive" }
+                  %td
+                    %i.fi-play
+                  %td
+                    {{ topFiveOne.title }}
+                  %td
+                    {{ topFiveOne.duration }}
+                  %td
+                    {{ topFiveOne.price }} $
+            %h5{ "ng-if" => "battle.artist_one.topFive.length == 0" }
+              {{ labels.DISPLAY_BATTLE_NO_MUSIC_LABEL }}
+          .medium-4.columns
+            %battle{ "battle-values" => "votes" }
+            .peopleVote{ "ng-if" => "votes.length > 0" }
+              %h5
+                {{ labels.DISPLAY_BATTLE_THEY_VOTED_LABEL }}
+              %ul.small-block-grid-3.medium-block-grid-2.large-block-grid-3
+                %li{ "ng-repeat" => "people in randomVote" }
+                  %a{ href: "/users/{{ people.id }}" }
+                    %img{ "ng-src" => "{{ '/assets/usersImage/avatars/' + people.image }}" }
+
+          .medium-4.columns
+            %h4
+              %a{ href: "/users/{{ battle.artist_two.id }}" } {{ battle.artist_two.username }}
+            %img{ "ng-src" => "{{ '/assets/usersImage/avatars/' + battle.artist_two.image}}" }
+            %p{ "ng-if" => "currentUser != false" }
+              %span{ "ng-click" => "showVoteFor(battle, battle.artist_two)", "class" => "label radius {{ voteClass(voteCurrentUser, battle.artist_two.id) }}" } {{ voteText(voteCurrentUser, battle.artist_two.id) }}
+            .topFive.text-center{ "ng-if" => "battle.artist_two.topFive.length != 0" }
+              %h5
+                {{ labels.DISPLAY_BATTLE_TOP_LABEL }}
+                %a{ href: "/users/{{ battle.artist_two.id }}" } {{ battle.artist_two.username }}
+              %table.small-12
+                %tr{ "ng-repeat" => "topFiveTwo in battle.artist_two.topFive" }
+                  %td
+                    %i.fi-play
+                  %td
+                    {{ topFiveTwo.music.title }}
+                  %td
+                    {{ topFiveTwo.music.duration }}
+                  %td
+                    {{ topFiveTwo.music.price }} $
+            %h5{ "ng-if" => "battle.artist_two.topFive.length == 0" }
+              {{ labels.DISPLAY_BATTLE_NO_MUSIC_LABEL }}

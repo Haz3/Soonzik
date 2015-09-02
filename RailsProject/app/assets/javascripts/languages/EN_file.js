@@ -276,6 +276,8 @@ var labels = {
 	DISPLAY_CONCERT_LINK_LABEL: "Link : ",
 	DISPLAY_CONCERT_NO_LINK_LABEL: "No link",
 	DISPLAY_CONCERT_ADDRESS_LABEL: "Address : ",
+	DISPLAY_CONCERT_ARTIST_FILTER_LABEL: "Artist : ",
+	DISPLAY_CONCERT_COUNTRY_FILTER_LABEL: "Country : ",
 
 	// Concert Controller
 	FILE_CONCERT_FIND_CONCERT_ERROR_MESSAGE: "An error occured while loading the concerts",

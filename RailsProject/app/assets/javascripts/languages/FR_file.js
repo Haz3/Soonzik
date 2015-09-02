@@ -276,6 +276,8 @@ var labels = {
 	DISPLAY_CONCERT_LINK_LABEL: "Lien : ",
 	DISPLAY_CONCERT_NO_LINK_LABEL: "Aucun lien",
 	DISPLAY_CONCERT_ADDRESS_LABEL: "Adresse : ",
+	DISPLAY_CONCERT_ARTIST_FILTER_LABEL: "Artiste : ",
+	DISPLAY_CONCERT_COUNTRY_FILTER_LABEL: "Pays : ",
 
 	// Concert Controller
 	FILE_CONCERT_FIND_CONCERT_ERROR_MESSAGE: "Une erreur s'est produite lors du chargement des concerts",
