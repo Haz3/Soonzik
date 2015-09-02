@@ -279,4 +279,21 @@ var labels = {
 
 	// Concert Controller
 	FILE_CONCERT_FIND_CONCERT_ERROR_MESSAGE: "Une erreur s'est produite lors du chargement des concerts",
+
+	// Discotheque Index view
+
+	DISPLAY_DISCOTHEQUE_ADD_PLAYLIST_LABEL: "Ajouter à la liste de lecture",
+	DISPLAY_DISCOTHEQUE_ADD_PLAYLIST_BUTTON: "Ajouter",
+	DISPLAY_DISCOTHEQUE_LISTEN_LABEL: "Ecouter",
+	DISPLAY_DISCOTHEQUE_CLOSE_LABEL: "Fermer",
+	DISPLAY_DISCOTHEQUE_NOTHING_LABEL: "Rien n'est disponible",
+	DISPLAY_DISCOTHEQUE_MUSIC_LABEL: "Vos musiques",
+	DISPLAY_DISCOTHEQUE_ALBUM_LABEL: "Vos albums",
+	DISPLAY_DISCOTHEQUE_PACK_LABEL: "Vos packs",
+
+	// Discotheque Controller
+	FILE_DISCOTHEQUE_GET_NOTES_ERROR_MESSAGE: "Une erreur s'est produite à la récupération des notes",
+	FILE_DISCOTHEQUE_GET_MUSICS_ERROR_MESSAGE: "Une erreur s'est produite au chargement de vos musiques",
+
+
 }

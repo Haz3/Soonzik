@@ -25,28 +25,28 @@
             </Grid.RowDefinitions>
             <Image  Grid.Row="1" Source="http://www.scottbuckley.com.au/musoscientific/wp-content/uploads/2012/10/treeofmusic.jpg" Stretch="Fill" Width="174" Height="174" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,175,46,-58"/>
             <Rectangle Fill="#FF00AFDC" HorizontalAlignment="Left" Height="75" StrokeEndLineCap="Square" Stroke="#FF00AFDC" VerticalAlignment="Top" Width="1120" Grid.ColumnSpan="2" Margin="0,0,-405,0"/>
-            <TextBlock Name="genre_name" Margin="20,10,0,19" TextWrapping="Wrap" Text="Genre name" VerticalAlignment="Center" FontSize="36" Height="46" Grid.ColumnSpan="2"/>
-            <TextBlock Name="genre_color" HorizontalAlignment="Left" Margin="45,85,0,0" Grid.Row="1" TextWrapping="Wrap" Text="color" VerticalAlignment="Top" Foreground="Black" FontSize="25"/>
+            <TextBlock Name="genre_name" Margin="20,10,0,19" TextWrapping="Wrap" Text="{Binding genre.style_name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" FontSize="36" Height="46" Grid.ColumnSpan="2"/>
+            <TextBlock Name="genre_color" HorizontalAlignment="Left" Margin="45,85,0,0" Grid.Row="1" TextWrapping="Wrap" Text="{Binding genre.color_name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Foreground="Black" FontSize="25"/>
 
-            <ListView Name="genre_musics" Grid.Column="1" HorizontalAlignment="Left" Height="370" Margin="60,85,0,-164" Grid.Row="1" VerticalAlignment="Top" Width="260" Background="#FFE0E0E0" IsItemClickEnabled="True" IsSwipeEnabled="False" SelectionMode="None">
+            <ListView Name="genre_musics" ItemsSource="{Binding genre.musics, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" HorizontalAlignment="Left" Height="370" Margin="60,85,0,-164" Grid.Row="1" VerticalAlignment="Top" Width="260" Background="#FFE0E0E0" IsItemClickEnabled="True" IsSwipeEnabled="False" SelectionMode="None">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <StackPanel>
                             <StackPanel Orientation="Horizontal">
-                                <TextBlock FontSize="16" Foreground="Black">Title:</TextBlock>
+                                <TextBlock Name="music_title_txt" x:Uid="music_title_txt" Text="Titre:" FontSize="16" Foreground="Black"/>
                                 <TextBlock Name="music_title" Text="{Binding title}" FontSize="16" Foreground="Black" Margin="20,0,0,0"></TextBlock>
                             </StackPanel>
 
                             <StackPanel Orientation="Horizontal">
-                                <TextBlock FontSize="16" Foreground="Black">Duration:</TextBlock>
-                                <TextBlock Name="music_duration" Text="{Binding duration}" FontSize="16" Foreground="Black" Margin="20,0,0,0"></TextBlock>
+                                <TextBlock Name="price_txt" x:Uid="price_txt" Text="Prix" FontSize="16" Foreground="Black"/>
+                                <TextBlock Name="music_duration" Text="{Binding price}" FontSize="16" Foreground="Black" Margin="20,0,0,0"></TextBlock>
                             </StackPanel>
                         </StackPanel>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
 
-            <ListView Name="genre_influences" Grid.Column="1" HorizontalAlignment="Left" Height="370" Margin="405,85,-215,-164" Grid.Row="1" VerticalAlignment="Top" Width="260" Background="#FFE0E0E0" IsItemClickEnabled="True" IsSwipeEnabled="False" SelectionMode="None">
+            <ListView Name="genre_influences" ItemsSource="{Binding genre.influences, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" HorizontalAlignment="Left" Height="370" Margin="405,85,-215,-164" Grid.Row="1" VerticalAlignment="Top" Width="260" Background="#FFE0E0E0" IsItemClickEnabled="True" IsSwipeEnabled="False" SelectionMode="None">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <StackPanel>
@@ -60,8 +60,8 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-            <TextBlock x:Name="music_list_txt" x:Uid="music_list_txt" Grid.Column="1" HorizontalAlignment="Left" Margin="60,35,0,0" Grid.Row="1" TextWrapping="Wrap" Text="Music" VerticalAlignment="Top" Height="45" Width="260" Foreground="Black" FontSize="18"/>
-            <TextBlock x:Name="influence_list_txt" x:Uid="influence_list_txt" Grid.Column="1" HorizontalAlignment="Left" Margin="405,35,-215,0" Grid.Row="1" TextWrapping="Wrap" Text="Influence" VerticalAlignment="Top" Height="45" Width="260" Foreground="Black" FontSize="18"/>
+            <TextBlock x:Name="music_list_txt" x:Uid="music_list_txt" Grid.Column="1" HorizontalAlignment="Left" Margin="60,55,0,0" Grid.Row="1" TextWrapping="Wrap" Text="Musiques" VerticalAlignment="Top" Height="30" Width="260" Foreground="Black" FontSize="18"/>
+            <TextBlock x:Name="influence_list_txt" x:Uid="influence_list_txt" Grid.Column="1" HorizontalAlignment="Left" Margin="405,55,-215,0" Grid.Row="1" TextWrapping="Wrap" Text="Influences" VerticalAlignment="Top" Height="30" Width="260" Foreground="Black" FontSize="18"/>
 
 
         </Grid>

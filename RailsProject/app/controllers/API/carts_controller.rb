@@ -5,6 +5,7 @@ module API
   # * show        [get] - SECURE
   # * save       	[post] - SECURE
   # * destroy     [get] - SECURE
+  # * giftCart    [post] - SECURE
   #
   class CartsController < ApisecurityController
     before_action :checkKey, only: [:destroy, :save, :show, :giftCart]
@@ -246,7 +247,6 @@ module API
           end
         end
       rescue
-        puts $!, $@
         codeAnswer 504
         defineHttp :service_unavailable
       end

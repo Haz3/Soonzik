@@ -272,14 +272,20 @@ album : {}, purchased_pack: { partial: value, pack: {} } } } }</p>
 					<div class="method-description">
 											<p>Buy the current cart and empty it</p>
 
-<p>Route : /purchases/buycart</p>
+<p>Route : /purchases/buypack</p>
 
 <h4 id="method-i-buypack-label-Options">Options<span><a href="#method-i-buypack-label-Options">&para;</a> <a href="#top">&uarr;</a></span></h4>
-
-<p><code>pack_id</code> - The id of the pack purchased <code>amount</code> -
-The donation <code>artist</code> - The percentage for the artist
-<code>association</code> - The percentage for the association
-<code>website</code> - The percentage for the website</p>
+<ul><li>
+<p><code>pack_id</code> - The id of the pack purchased</p>
+</li><li>
+<p><code>amount</code> - The donation</p>
+</li><li>
+<p><code>artist</code> - The percentage for the artist</p>
+</li><li>
+<p><code>association</code> - The percentage for the association</p>
+</li><li>
+<p><code>website</code> - The percentage for the website</p>
+</li></ul>
 
 <h5 id="method-i-buypack-label-HTTP+VALUE">HTTP VALUE<span><a href="#method-i-buypack-label-HTTP+VALUE">&para;</a> <a href="#top">&uarr;</a></span></h5>
 <ul><li>
@@ -289,7 +295,7 @@ album : {}, purchased_pack: { partial: value, pack: {} } } } }</p>
 </li><li>
 <p><code>401</code> - It is not a secured transaction</p>
 </li><li>
-<p><code>404</code> - The pack is not found</p>
+<p><code>403</code> - The sum of the percentage != 100</p>
 </li><li>
 <p><code>503</code> - Error from server</p>
 </li></ul>					
@@ -297,26 +303,67 @@ album : {}, purchased_pack: { partial: value, pack: {} } } } }</p>
 							<pre class="prettyprint linenums"><code 
 								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/purchases_controller.rb, line 131</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">buypack</span>
+  <span class="ruby-identifier">objectToDelete</span> = []
   <span class="ruby-keyword">begin</span>
     <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@security</span>)
-      <span class="ruby-identifier">cartToDelete</span> = []
-      <span class="ruby-identifier">p</span> = <span class="ruby-constant">Purchase</span>.<span class="ruby-identifier">new</span>
-      <span class="ruby-identifier">p</span>.<span class="ruby-identifier">user_id</span> = <span class="ruby-ivar">@user_id</span>
-      <span class="ruby-identifier">p</span>.<span class="ruby-identifier">save!</span>
-
       <span class="ruby-identifier">pack</span> = <span class="ruby-constant">Pack</span>.<span class="ruby-identifier">find_by_id</span>(<span class="ruby-ivar">@pack_id</span>)
       <span class="ruby-keyword">if</span> (<span class="ruby-identifier">pack</span> <span class="ruby-operator">==</span> <span class="ruby-keyword">nil</span>)
         <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">502</span>
         <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:not_found</span>
-      <span class="ruby-keyword">end</span>
+      <span class="ruby-keyword">elsif</span> <span class="ruby-ivar">@artist</span>.<span class="ruby-identifier">to_i</span> <span class="ruby-operator">+</span> <span class="ruby-ivar">@association</span>.<span class="ruby-identifier">to_i</span> <span class="ruby-operator">+</span> <span class="ruby-ivar">@website</span>.<span class="ruby-identifier">to_i</span> <span class="ruby-operator">!=</span> <span class="ruby-value">100</span> <span class="ruby-operator">||</span> <span class="ruby-ivar">@amount</span>.<span class="ruby-identifier">to_i</span> <span class="ruby-operator">&lt;</span> <span class="ruby-identifier">pack</span>.<span class="ruby-identifier">minimal_price</span>
+        <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">504</span>
+        <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:bad_request</span>
+      <span class="ruby-keyword">else</span>
+        <span class="ruby-identifier">p</span> = <span class="ruby-constant">Purchase</span>.<span class="ruby-identifier">new</span>
+        <span class="ruby-identifier">p</span>.<span class="ruby-identifier">user_id</span> = <span class="ruby-ivar">@user_id</span>
+        <span class="ruby-identifier">p</span>.<span class="ruby-identifier">save!</span>
 
-      <span class="ruby-identifier">pp</span> = <span class="ruby-constant">PurchasedPack</span>.<span class="ruby-identifier">new</span>
-      <span class="ruby-identifier">pp</span>.
-    <span class="ruby-identifier">else</span>
+        <span class="ruby-identifier">objectToDelete</span>.<span class="ruby-identifier">unshift</span> <span class="ruby-identifier">p</span>
+
+        <span class="ruby-identifier">pp</span> = <span class="ruby-constant">PurchasedPack</span>.<span class="ruby-identifier">new</span>
+        <span class="ruby-identifier">pp</span>.<span class="ruby-identifier">pack_id</span> = <span class="ruby-identifier">pack</span>.<span class="ruby-identifier">id</span>
+        <span class="ruby-identifier">pp</span>.<span class="ruby-identifier">partial</span> = (<span class="ruby-identifier">pack</span>.<span class="ruby-identifier">averagePrice</span> <span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@amount</span>)
+        <span class="ruby-identifier">pp</span>.<span class="ruby-identifier">artist_percentage</span> = <span class="ruby-ivar">@artist</span>
+        <span class="ruby-identifier">pp</span>.<span class="ruby-identifier">association_percentage</span> = <span class="ruby-ivar">@association</span>
+        <span class="ruby-identifier">pp</span>.<span class="ruby-identifier">website_percentage</span> = <span class="ruby-ivar">@website</span>
+        <span class="ruby-identifier">pp</span>.<span class="ruby-identifier">value</span> = <span class="ruby-ivar">@amount</span>
+        <span class="ruby-identifier">pp</span>.<span class="ruby-identifier">save!</span>
+
+        <span class="ruby-identifier">objectToDelete</span>.<span class="ruby-identifier">unshift</span> <span class="ruby-identifier">pp</span>
+
+        <span class="ruby-identifier">pack</span>.<span class="ruby-identifier">albums</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">album</span><span class="ruby-operator">|</span>
+          <span class="ruby-identifier">pa</span> = <span class="ruby-constant">PurchasedAlbum</span>.<span class="ruby-identifier">new</span>
+          <span class="ruby-identifier">pa</span>.<span class="ruby-identifier">album_id</span> = <span class="ruby-identifier">album</span>.<span class="ruby-identifier">id</span>
+          <span class="ruby-identifier">pa</span>.<span class="ruby-identifier">purchased_pack_id</span> = <span class="ruby-identifier">pp</span>.<span class="ruby-identifier">id</span>
+          <span class="ruby-identifier">pa</span>.<span class="ruby-identifier">save!</span>
+          <span class="ruby-identifier">objectToDelete</span>.<span class="ruby-identifier">unshift</span> <span class="ruby-identifier">pa</span>
+
+          <span class="ruby-identifier">album</span>.<span class="ruby-identifier">musics</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">zik</span><span class="ruby-operator">|</span>
+            <span class="ruby-identifier">pm</span> = <span class="ruby-constant">PurchasedMusic</span>.<span class="ruby-identifier">new</span>
+            <span class="ruby-identifier">pm</span>.<span class="ruby-identifier">purchase_id</span> = <span class="ruby-identifier">p</span>.<span class="ruby-identifier">id</span>
+            <span class="ruby-identifier">pm</span>.<span class="ruby-identifier">purchased_album_id</span> = <span class="ruby-identifier">pa</span>.<span class="ruby-identifier">id</span>
+            <span class="ruby-identifier">pm</span>.<span class="ruby-identifier">music_id</span> = <span class="ruby-identifier">zik</span>.<span class="ruby-identifier">id</span>
+            <span class="ruby-identifier">pm</span>.<span class="ruby-identifier">save!</span>
+            <span class="ruby-identifier">objectToDelete</span>.<span class="ruby-identifier">unshift</span> <span class="ruby-identifier">pm</span>
+          }
+        <span class="ruby-keyword">end</span>
+
+        <span class="ruby-ivar">@returnValue</span> = {
+          <span class="ruby-identifier">content</span><span class="ruby-operator">:</span> <span class="ruby-identifier">pp</span>.<span class="ruby-identifier">as_json</span>(<span class="ruby-identifier">except</span><span class="ruby-operator">:</span> [<span class="ruby-value">:updated_at</span>], <span class="ruby-value">:include</span> =<span class="ruby-operator">&gt;</span> {
+            <span class="ruby-identifier">pack</span><span class="ruby-operator">:</span> {
+              <span class="ruby-identifier">only</span><span class="ruby-operator">:</span> <span class="ruby-constant">Pack</span>.<span class="ruby-identifier">miniKey</span>
+            }
+          } )
+        }
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">else</span>
       <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">500</span>
       <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:forbidden</span>
     <span class="ruby-keyword">end</span>
   <span class="ruby-keyword">rescue</span>
+    <span class="ruby-identifier">objectToDelete</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">obj</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">obj</span>.<span class="ruby-identifier">destroy</span>
+    <span class="ruby-keyword">end</span>
     <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">504</span>
     <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:service_unavailable</span>
   <span class="ruby-keyword">end</span>

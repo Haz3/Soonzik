@@ -252,6 +252,7 @@ module API
     # ==== Options
     #
     # * +id+ - The id of the music where is the comment
+    # * +download+ - (optionnal) If it's equal to "true", the header allows to download the file immediatly
     #
     # ===== HTTP VALUE
     # 
@@ -261,8 +262,9 @@ module API
     # 
     def get
       buffer = ""
+      music = nil
+      file = ""
       begin
-        music = nil
         cut = true
 
         # Find the music
@@ -287,8 +289,12 @@ module API
         codeAnswer 504
         defineHttp :service_unavailable
       end
-      respond_to do |format|
-        format.mp3 { render :text => buffer, :content_type => 'audio/mpeg' }
+      if (@download.present? && @download == "true")
+        send_file(File.join(Rails.root, "app", "assets", "musics", music.album.user.id.to_s, "#{file}.mp3"), :type => 'audio/mpeg')
+      else
+        respond_to do |format|
+          format.mp3 { render :text => buffer, :content_type => 'audio/mpeg' }
+        end
       end
     end
 

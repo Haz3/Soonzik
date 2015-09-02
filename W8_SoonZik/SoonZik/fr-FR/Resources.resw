@@ -148,7 +148,7 @@
     <value>Connexion</value>
   </data>
   <data name="follow_btn.Content" xml:space="preserve">
-    <value>Follow</value>
+    <value>Suivre cette personne</value>
   </data>
   <data name="forgot_password_txt.Text" xml:space="preserve">
     <value>Récuperation du mot de passe</value>
@@ -185,5 +185,179 @@
   </data>
   <data name="year_txt.Text" xml:space="preserve">
     <value>Année:</value>
+  </data>
+  <data name="address_city_txt.Text" xml:space="preserve">
+    <value>Ville</value>
+  </data>
+  <data name="address_complement_txt.Text" xml:space="preserve">
+    <value>Complement</value>
+  </data>
+  <data name="address_country_txt.Text" xml:space="preserve">
+    <value>Pays</value>
+  </data>
+  <data name="address_num_txt.Text" xml:space="preserve">
+    <value>Numero</value>
+  </data>
+  <data name="address_street_txt.Text" xml:space="preserve">
+    <value>Adresse</value>
+  </data>
+  <data name="address_txt.Text" xml:space="preserve">
+    <value>Adresse</value>
+  </data>
+  <data name="address_zip_txt.Text" xml:space="preserve">
+    <value>Code postale</value>
+  </data>
+  <data name="add_friend_btn.Content" xml:space="preserve">
+    <value>Ajouter un ami</value>
+  </data>
+  <data name="add_friend_txt.Text" xml:space="preserve">
+    <value>Ajouter un nouvel ami avec son pseudo</value>
+  </data>
+  <data name="add_to_cart_btn.Content" xml:space="preserve">
+    <value>Ajouter au panier</value>
+  </data>
+  <data name="albums_txt.Text" xml:space="preserve">
+    <value>Albums</value>
+  </data>
+  <data name="album_artist_txt.Text" xml:space="preserve">
+    <value>Artiste:</value>
+  </data>
+  <data name="album_music_list_txt.Text" xml:space="preserve">
+    <value>Liste des pistes:</value>
+  </data>
+  <data name="album_price_txt.Text" xml:space="preserve">
+    <value>Prix:</value>
+  </data>
+  <data name="album_year_txt.Text" xml:space="preserve">
+    <value>Année:</value>
+  </data>
+  <data name="artists_txt.Text" xml:space="preserve">
+    <value>Artistes</value>
+  </data>
+  <data name="birthday_txt.Text" xml:space="preserve">
+    <value>Date de naissance (AAAA-MM-JJ)*</value>
+  </data>
+  <data name="buy_pack_btn.Content" xml:space="preserve">
+    <value>Acheter ce pack</value>
+  </data>
+  <data name="delete_friend_btn.Content" xml:space="preserve">
+    <value>Supprimer un ami</value>
+  </data>
+  <data name="delete_friend_txt.Text" xml:space="preserve">
+    <value>Supprimer l'ami selectioné</value>
+  </data>
+  <data name="description_txt.Text" xml:space="preserve">
+    <value>Description:</value>
+  </data>
+  <data name="desc_txt.Text" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="detail_news_txt.Text" xml:space="preserve">
+    <value>Détail de la news</value>
+  </data>
+  <data name="duration_txt.Text" xml:space="preserve">
+    <value>Duration:</value>
+  </data>
+  <data name="email_txt.Text" xml:space="preserve">
+    <value>Email*</value>
+  </data>
+  <data name="end_of_battle_txt.Text" xml:space="preserve">
+    <value>La Battle finie le:</value>
+  </data>
+  <data name="fname_txt.Text" xml:space="preserve">
+    <value>Prenom*</value>
+  </data>
+  <data name="follow_list_txt.Text" xml:space="preserve">
+    <value>Liste des personnes suivies</value>
+  </data>
+  <data name="follow_txt.Text" xml:space="preserve">
+    <value>Suivre une personne</value>
+  </data>
+  <data name="friend_list_txt.Text" xml:space="preserve">
+    <value>Liste d'amis</value>
+  </data>
+  <data name="genres_txt.Text" xml:space="preserve">
+    <value>Genres</value>
+  </data>
+  <data name="gift_pack_btn.Content" xml:space="preserve">
+    <value>Offrir ce pack</value>
+  </data>
+  <data name="influence_list_txt.Text" xml:space="preserve">
+    <value>Influences</value>
+  </data>
+  <data name="language_txt.Text" xml:space="preserve">
+    <value>Langue</value>
+  </data>
+  <data name="listening_txt.Text" xml:space="preserve">
+    <value>Listenings</value>
+  </data>
+  <data name="lname_txt.Text" xml:space="preserve">
+    <value>Nom*</value>
+  </data>
+  <data name="music_list_txt.Text" xml:space="preserve">
+    <value>Musiques</value>
+  </data>
+  <data name="note_txt.Text" xml:space="preserve">
+    <value>Note:</value>
+  </data>
+  <data name="packs_txt.Text" xml:space="preserve">
+    <value>Packs</value>
+  </data>
+  <data name="pack_album_list_txt.Text" xml:space="preserve">
+    <value>Liste des albums:</value>
+  </data>
+  <data name="pack_date_begin_txt.Text" xml:space="preserve">
+    <value>Debut:</value>
+  </data>
+  <data name="pack_date_end_txt.Text" xml:space="preserve">
+    <value>Fin:</value>
+  </data>
+  <data name="password_txt.Text" xml:space="preserve">
+    <value>Mot de passe*</value>
+  </data>
+  <data name="password_verify_txt.Text" xml:space="preserve">
+    <value>Verification du mot de passe*</value>
+  </data>
+  <data name="phone_txt.Text" xml:space="preserve">
+    <value>Telephone</value>
+  </data>
+  <data name="price_txt.Text" xml:space="preserve">
+    <value>Prix:</value>
+  </data>
+  <data name="profil_btn.Content" xml:space="preserve">
+    <value>Profil</value>
+  </data>
+  <data name="search_btn.Content" xml:space="preserve">
+    <value>Chercher</value>
+  </data>
+  <data name="send_com_btn.Content" xml:space="preserve">
+    <value>Envoyer</value>
+  </data>
+  <data name="signup_btn.Content" xml:space="preserve">
+    <value>S'inscrire</value>
+  </data>
+  <data name="sign_out_btn.Content" xml:space="preserve">
+    <value>Se deconnecter</value>
+  </data>
+  <data name="unfollow_btn.Content" xml:space="preserve">
+    <value>Ne plus suivre cette personne</value>
+  </data>
+  <data name="unfollow_txt.Text" xml:space="preserve">
+    <value>Ne plus suivre la personne selectionnée</value>
+  </data>
+  <data name="username_txt.Text" xml:space="preserve">
+    <value>Pseudo*</value>
+  </data>
+  <data name="vote_artist_one_btn.Content" xml:space="preserve">
+    <value>Vote Artist 1</value>
+  </data>
+  <data name="vote_artist_two_btn.Content" xml:space="preserve">
+    <value>Vote Artist 2</value>
+  </data>
+  <data name="update_btn.Content" xml:space="preserve">
+    <value>Enregistrer</value>
+  </data>
+  <data name="website_txt.Text" xml:space="preserve">
+    <value>Site internet:</value>
   </data>
 </root>

@@ -1,0 +1,69 @@
+.discotheque {
+
+	.discothequeContainer {
+
+		h3 {
+			padding-top: 20px;
+		}
+
+		.music {
+			.clearfix {
+				height: 55px;
+				line-height: 55px;
+			}
+		}
+
+		.playlistBlock {
+			background: black;
+
+			ul {
+				margin-left: 0;
+
+				li {
+			    padding-left: 2px;
+				}
+
+				label {
+			    color: #008CBA;
+				}
+			}
+		}
+
+		.mytooltip {
+	    right: 0px;
+	    top: 40px;
+		}
+	}
+
+	.pack {
+
+		h4 {
+			margin-bottom: 4px;
+		}
+
+		h4 span {
+			margin-left: 10px;
+	    padding-right: 10px;
+	    border-bottom: 2px solid darkgray;
+	    padding-bottom: 5px;
+		}
+
+		.packContent {
+			border-left: 2px solid darkgray;
+			margin-left: 10px;
+		}
+
+		.redBorder {
+			border-color: #AA3333;
+		}
+
+		.blueBorder {
+			border-color: #3333AA;
+		}
+
+		.greenBorder {
+			border-color: #33AA33;
+		}
+	}
+
+}

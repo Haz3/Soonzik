@@ -32,16 +32,21 @@ namespace SoonZik.Views
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             SoonZik.Models.Music elem = e.Parameter as SoonZik.Models.Music;
-            music_id.Text = elem.id.ToString();
-            music_artist.Text = "test";
-            music_title.Text = elem.title;
-            music_price.Text = elem.price.ToString();
+            DataContext = new MusicViewModel(elem.id);
 
-            string request_elem = "/musics/" + elem.id.ToString();
+            //music_id.Text = elem.id.ToString();
+            ////music_artist.Text = elem.user.username;
+            //music_title.Text = elem.title;
+            //music_price.Text = Math.Round(elem.price, 3).ToString();
+            //music_note.Text = elem.getAverageNote.ToString();
+            //music_duration.Text = TimeSpan.FromSeconds(elem.duration).ToString();   
 
-            // To get comment list
-            var comments = new CommentViewModel(request_elem);
-            comment_lv.ItemsSource = comments.commentlist;
+
+            //string request_elem = "/musics/" + elem.id.ToString();
+
+            //// To get comment list
+            //var comments = new CommentViewModel(request_elem);
+            //comment_lv.ItemsSource = comments.commentlist;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -49,11 +54,11 @@ namespace SoonZik.Views
             this.Frame.GoBack();
         }
 
-        private void send_com_btn_Click(object sender, RoutedEventArgs e)
-        {
-            string comment_content = send_com_tb.Text;
-            Post_comment com = new Post_comment(comment_content, "musics", music_id.Text);
-        }
+        //private void send_com_btn_Click(object sender, RoutedEventArgs e)
+        //{
+        //    string comment_content = send_com_tb.Text;
+        //    Post_comment com = new Post_comment(comment_content, "musics", music_id.Text);
+        //}
 
 
     }

@@ -1,2 +1,0 @@
-class PropositionsController < ApplicationController
-end

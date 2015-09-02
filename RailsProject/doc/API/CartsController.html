@@ -118,6 +118,8 @@ list of action available :</p>
 <p>save              [post] - SECURE</p>
 </li><li>
 <p>destroy     [get] - SECURE</p>
+</li><li>
+<p>giftCart    [post] - SECURE</p>
 </li></ul>
 		</section>
 
@@ -170,7 +172,7 @@ list of action available :</p>
 </li></ul>					
 											<div class="method-source-code" id="destroy-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/carts_controller.rb, line 27</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/carts_controller.rb, line 28</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">destroy</span>
   <span class="ruby-keyword">begin</span>
     <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@security</span>)
@@ -235,7 +237,7 @@ security or the gift user id you gave is not good</p>
 </li></ul>					
 											<div class="method-source-code" id="giftCart-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/carts_controller.rb, line 210</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/carts_controller.rb, line 211</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">giftCart</span>
   <span class="ruby-keyword">begin</span>
     <span class="ruby-keyword">if</span> (<span class="ruby-operator">!</span><span class="ruby-ivar">@security</span>)
@@ -275,7 +277,6 @@ security or the gift user id you gave is not good</p>
       <span class="ruby-keyword">end</span>
     <span class="ruby-keyword">end</span>
   <span class="ruby-keyword">rescue</span>
-    <span class="ruby-identifier">puts</span> <span class="ruby-identifier">$!</span>, <span class="ruby-identifier">$@</span>
     <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">504</span>
     <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:service_unavailable</span>
   <span class="ruby-keyword">end</span>
@@ -324,7 +325,7 @@ will get the gift</p>
 </li></ul>					
 											<div class="method-source-code" id="save-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/carts_controller.rb, line 71</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/carts_controller.rb, line 72</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">save</span>
   <span class="ruby-identifier">gift_present</span> = <span class="ruby-keyword">false</span>
 
@@ -437,7 +438,7 @@ will get the gift</p>
 </li></ul>					
 											<div class="method-source-code" id="show-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/carts_controller.rb, line 165</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/carts_controller.rb, line 166</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">show</span>
   <span class="ruby-keyword">begin</span>
     <span class="ruby-keyword">if</span> (<span class="ruby-operator">!</span><span class="ruby-ivar">@security</span>)

@@ -1,2 +1,0 @@
-class InfluencesController < ApplicationController
-end

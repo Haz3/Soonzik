@@ -4,6 +4,7 @@ using SoonZik.Tools;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
@@ -12,34 +13,42 @@ using Windows.UI.Popups;
 
 namespace SoonZik.ViewModels
 {
-    public class GenreViewModel
+    public class GenreViewModel : INotifyPropertyChanged
     {
-        public ObservableCollection<Genre> genrelist { get; set; }
-
-        public GenreViewModel()
+        private Genre _genre;
+        public Genre genre
         {
-            load_genres();
+            get { return _genre; }
+            set
+            {
+                _genre = value;
+                OnPropertyChanged("genre");
+            }
         }
 
-        async public void load_genres()
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected void OnPropertyChanged(string name)
+        {
+            PropertyChangedEventHandler handler = PropertyChanged;
+            if (handler != null)
+            {
+                handler(this, new PropertyChangedEventArgs(name));
+            }
+        }
+
+        public GenreViewModel(int id)
+        {
+            load_genre(id);
+        }
+
+        async public void load_genre(int id)
         {
             Exception exception = null;
             var request = new Http_get();
 
             try
             {
-                genrelist = new ObservableCollection<Genre>();
-                List<Genre> list = new List<Genre>();
-
-                var genres = (List<Genre>)await request.get_object_list(list, "genres");
-
-
-                ///// TEST //////
-                foreach (var item in genres)
-                {
-                    item.musics = await load_musics(item);
-                    genrelist.Add(item);
-                }
+                genre = await Http_get.get_genre_by_id(id);
             }
 
             catch (Exception e)
@@ -48,35 +57,7 @@ namespace SoonZik.ViewModels
             }
 
             if (exception != null)
-            {
-                MessageDialog msgdlg = new MessageDialog(exception.Message, "Genre error");
-                await msgdlg.ShowAsync();
-            }
-        }
-
-        async public Task<List<Music>> load_musics(Genre genre)
-        {
-            Exception exception = null;
-            var request = new Http_get();
-
-            try
-            {
-                var genres = (Genre)await request.get_object_list(genre, "genres/" + genre.id);
-                //genre.musics = genres.musics;
-
-                return genres.musics;
-            }
-            catch (Exception e)
-            {
-                exception = e;
-            }
-
-            if (exception != null)
-            {
-                MessageDialog msgdlg = new MessageDialog(exception.Message, "Load music in genre error");
-                await msgdlg.ShowAsync();
-            }
-            return null;
+                await new MessageDialog(exception.Message, "Genre error").ShowAsync();
         }
     }
 }

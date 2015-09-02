@@ -187,32 +187,18 @@ Rails.application.routes.draw do
 
   ActiveAdmin.routes(self)
 
-  resources :accesses
-  resources :addresses
-  resources :albums
-  resources :album_notes
-  resources :attachments
+  resources :albums, only: [:show]
   resources :battles, only: [:index, :show]
   resources :carts
-  resources :commentaries
-  resources :concerts
-  resources :descriptions
-  resources :flacs
-  resources :genres
+  resources :concerts, only: [:index]
+  resources :feedbacks, only: [:new, :create]
   resources :gifts
-  resources :groups
-  resources :influences
   resources :listenings, only: [:index]
-  resources :musics
-  resources :music_notes
   resources :news, only: [:index, :show]
-  resources :newstexts
-  resources :notifications
+  resources :notifications, only: [:index]
   resources :packs, only: [:index, :show]
   resources :playlists, only: [:show]
-  resources :propositions
   resources :purchases
-  resources :tags
   resources :tweets
   
   resources :users do
@@ -226,6 +212,7 @@ Rails.application.routes.draw do
 
   get '/explorer(/:influence(/:genre))' => 'others#explorer', as: "explorer"
   get 'messages' => 'chats#index'
+  get '/my_music' => 'others#discotheque'
   get '/search/:value' => 'others#search'
   root 'others#index'
 

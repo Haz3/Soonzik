@@ -279,4 +279,19 @@ var labels = {
 
 	// Concert Controller
 	FILE_CONCERT_FIND_CONCERT_ERROR_MESSAGE: "An error occured while loading the concerts",
+
+	// Discotheque Index view
+	DISPLAY_DISCOTHEQUE_ADD_PLAYLIST_LABEL: "Add to playlist",
+	DISPLAY_DISCOTHEQUE_ADD_PLAYLIST_BUTTON: "Add",
+	DISPLAY_DISCOTHEQUE_LISTEN_LABEL: "Listen",
+	DISPLAY_DISCOTHEQUE_CLOSE_LABEL: "Close",
+	DISPLAY_DISCOTHEQUE_NOTHING_LABEL: "Nothing found",
+	DISPLAY_DISCOTHEQUE_MUSIC_LABEL: "Your musics",
+	DISPLAY_DISCOTHEQUE_ALBUM_LABEL: "Your albums",
+	DISPLAY_DISCOTHEQUE_PACK_LABEL: "Your packs",
+
+	// Discotheque Controller
+	FILE_DISCOTHEQUE_GET_NOTES_ERROR_MESSAGE: "An error occured while getting the notes",
+	FILE_DISCOTHEQUE_GET_MUSICS_ERROR_MESSAGE: "An error occured while getting your musics",
+
 }

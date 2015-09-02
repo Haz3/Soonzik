@@ -57,14 +57,19 @@
 							%a.button.alert{:href => new_user_session_path, :target => "_self" } {{ labels.DISPLAY_MENU_LOGIN_LABEL }}
 		%main.row
 			- if notice
-				%small.error= notice
+				%small.error
+					%i.fi-x.left.removeInfo
+					%p= notice
 			-if alert
-				%small.error= alert
+				%small.error
+					%i.fi-x.left.removeInfo
+					%p= alert
 			.large-12{"ng-view" => true}
 			=yield
 			- if user_signed_in?	
 				#chat{ "ng-include" => "'#{asset_path('AngularJS/views/chat.html.haml')}'" }
-
 		%footer
 			.container
 				#player-container{ "ng-include" => "'#{asset_path('AngularJS/views/others/player.html.haml')}'" }
+		.feedback
+			%p= link_to "Feedback {{ labels.feedback }}", new_feedback_path, :target => "_self"

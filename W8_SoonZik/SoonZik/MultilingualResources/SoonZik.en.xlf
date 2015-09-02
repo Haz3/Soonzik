@@ -6,97 +6,323 @@
     </header>
     <body>
       <group id="Resources">
+        <trans-unit id="Resources\website_txt\Text" translate="yes" xml:space="preserve">
+          <source>Site internet:</source>
+          <target state="final">Website:</target>
+        </trans-unit>
+        <trans-unit id="Resources\update_btn\Content" translate="yes" xml:space="preserve">
+          <source>Enregistrer</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">Save</target>
+        </trans-unit>
+        <trans-unit id="Resources\signup_btn\Content" translate="yes" xml:space="preserve">
+          <source>S'inscrire</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">Register</target>
+        </trans-unit>
+        <trans-unit id="Resources\sign_out_btn\Content" translate="yes" xml:space="preserve">
+          <source>Se deconnecter</source>
+          <target state="final">Log out</target>
+        </trans-unit>
+        <trans-unit id="Resources\unfollow_btn\Content" translate="yes" xml:space="preserve">
+          <source>Ne plus suivre cette personne</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">No longer follow this person</target>
+        </trans-unit>
+        <trans-unit id="Resources\unfollow_txt\Text" translate="yes" xml:space="preserve">
+          <source>Ne plus suivre la personne selectionnée</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">No longer follow the person selected</target>
+        </trans-unit>
+        <trans-unit id="Resources\username_txt\Text" translate="yes" xml:space="preserve">
+          <source>Pseudo*</source>
+          <target state="final">Username*</target>
+        </trans-unit>
+        <trans-unit id="Resources\vote_artist_one_btn\Content" translate="yes" xml:space="preserve">
+          <source>Vote Artist 1</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Vote Artist 1</target>
+        </trans-unit>
+        <trans-unit id="Resources\vote_artist_two_btn\Content" translate="yes" xml:space="preserve">
+          <source>Vote Artist 2</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Vote Artist 2</target>
+        </trans-unit>
+        <trans-unit id="Resources\send_com_btn\Content" translate="yes" xml:space="preserve">
+          <source>Envoyer</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">Send</target>
+        </trans-unit>
+        <trans-unit id="Resources\artists_txt\Text" translate="yes" xml:space="preserve">
+          <source>Artistes</source>
+          <target state="final" state-qualifier="mt-suggestion">Artists</target>
+        </trans-unit>
+        <trans-unit id="Resources\birthday_txt\Text" translate="yes" xml:space="preserve">
+          <source>Date de naissance (AAAA-MM-JJ)*</source>
+          <target state="final">Date of birth (YYYY-MM-DD) *</target></trans-unit>
+        <trans-unit id="Resources\buy_pack_btn\Content" translate="yes" xml:space="preserve">
+          <source>Acheter ce pack</source>
+          <target state="final" state-qualifier="mt-suggestion">Buy this pack</target>
+        </trans-unit>
+        <trans-unit id="Resources\delete_friend_btn\Content" translate="yes" xml:space="preserve">
+          <source>Supprimer un ami</source>
+          <target state="final">Remove a friend</target></trans-unit>
+        <trans-unit id="Resources\delete_friend_txt\Text" translate="yes" xml:space="preserve">
+          <source>Supprimer l'ami selectioné</source>
+          <target state="final">Remove the selected friend</target></trans-unit>
+        <trans-unit id="Resources\description_txt\Text" translate="yes" xml:space="preserve">
+          <source>Description:</source>
+          <target state="final" state-qualifier="mt-suggestion">Description:</target>
+        </trans-unit>
+        <trans-unit id="Resources\desc_txt\Text" translate="yes" xml:space="preserve">
+          <source>Description</source>
+          <target state="final" state-qualifier="mt-suggestion">Description</target>
+        </trans-unit>
+        <trans-unit id="Resources\detail_news_txt\Text" translate="yes" xml:space="preserve">
+          <source>Détail de la news</source>
+          <target state="final">News</target>
+        </trans-unit>
+        <trans-unit id="Resources\duration_txt\Text" translate="yes" xml:space="preserve">
+          <source>Duration:</source>
+          <target state="final" state-qualifier="mt-suggestion">Duration:</target>
+        </trans-unit>
+        <trans-unit id="Resources\email_txt\Text" translate="yes" xml:space="preserve">
+          <source>Email*</source>
+          <target state="final">Email *</target>
+        </trans-unit>
+        <trans-unit id="Resources\end_of_battle_txt\Text" translate="yes" xml:space="preserve">
+          <source>La Battle finie le:</source>
+          <target state="final">End of battle:</target>
+        </trans-unit>
+        <trans-unit id="Resources\fname_txt\Text" translate="yes" xml:space="preserve">
+          <source>Prenom*</source>
+          <target state="final">First name *</target>
+        </trans-unit>
+        <trans-unit id="Resources\follow_list_txt\Text" translate="yes" xml:space="preserve">
+          <source>Liste des personnes suivies</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">List of followed people</target>
+        </trans-unit>
+        <trans-unit id="Resources\follow_txt\Text" translate="yes" xml:space="preserve">
+          <source>Suivre une personne</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Follow a person</target>
+        </trans-unit>
+        <trans-unit id="Resources\friend_list_txt\Text" translate="yes" xml:space="preserve">
+          <source>Liste d'amis</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Friends list</target>
+        </trans-unit>
+        <trans-unit id="Resources\genres_txt\Text" translate="yes" xml:space="preserve">
+          <source>Genres</source>
+          <target state="final">Genres</target>
+        </trans-unit>
+        <trans-unit id="Resources\gift_pack_btn\Content" translate="yes" xml:space="preserve">
+          <source>Offrir ce pack</source>
+          <target state="final" state-qualifier="mt-suggestion">Offer this pack</target>
+        </trans-unit>
+        <trans-unit id="Resources\influence_list_txt\Text" translate="yes" xml:space="preserve">
+          <source>Influences</source>
+          <target state="final" state-qualifier="mt-suggestion">Influences</target>
+        </trans-unit>
+        <trans-unit id="Resources\language_txt\Text" translate="yes" xml:space="preserve">
+          <source>Langue</source>
+          <target state="final" state-qualifier="mt-suggestion">Language</target>
+        </trans-unit>
+        <trans-unit id="Resources\listening_txt\Text" translate="yes" xml:space="preserve">
+          <source>Listenings</source>
+          <target state="final" state-qualifier="mt-suggestion">Listenings</target>
+        </trans-unit>
+        <trans-unit id="Resources\lname_txt\Text" translate="yes" xml:space="preserve">
+          <source>Nom*</source>
+          <target state="final">Name *</target>
+        </trans-unit>
+        <trans-unit id="Resources\music_list_txt\Text" translate="yes" xml:space="preserve">
+          <source>Musiques</source>
+          <target state="final" state-qualifier="mt-suggestion">Music</target>
+        </trans-unit>
+        <trans-unit id="Resources\note_txt\Text" translate="yes" xml:space="preserve">
+          <source>Note:</source>
+          <target state="final" state-qualifier="mt-suggestion">Note:</target>
+        </trans-unit>
+        <trans-unit id="Resources\packs_txt\Text" translate="yes" xml:space="preserve">
+          <source>Packs</source>
+          <target state="final" state-qualifier="mt-suggestion">Packs</target>
+        </trans-unit>
+        <trans-unit id="Resources\pack_album_list_txt\Text" translate="yes" xml:space="preserve">
+          <source>Liste des albums:</source>
+          <target state="final" state-qualifier="mt-suggestion">List of albums:</target>
+        </trans-unit>
+        <trans-unit id="Resources\pack_date_begin_txt\Text" translate="yes" xml:space="preserve">
+          <source>Debut:</source>
+          <target state="final" state-qualifier="mt-suggestion">Start:</target>
+        </trans-unit>
+        <trans-unit id="Resources\pack_date_end_txt\Text" translate="yes" xml:space="preserve">
+          <source>Fin:</source>
+          <target state="final" state-qualifier="mt-suggestion">End:</target>
+        </trans-unit>
+        <trans-unit id="Resources\password_txt\Text" translate="yes" xml:space="preserve">
+          <source>Mot de passe*</source>
+          <target state="translated">Password *</target>
+        </trans-unit>
+        <trans-unit id="Resources\password_verify_txt\Text" translate="yes" xml:space="preserve">
+          <source>Verification du mot de passe*</source>
+          <target state="final">Confirm password *</target>
+        </trans-unit>
+        <trans-unit id="Resources\phone_txt\Text" translate="yes" xml:space="preserve">
+          <source>Telephone</source>
+          <target state="final" state-qualifier="mt-suggestion">Phone</target>
+        </trans-unit>
+        <trans-unit id="Resources\price_txt\Text" translate="yes" xml:space="preserve">
+          <source>Prix:</source>
+          <target state="final" state-qualifier="mt-suggestion">Price:</target>
+        </trans-unit>
+        <trans-unit id="Resources\profil_btn\Content" translate="yes" xml:space="preserve">
+          <source>Profil</source>
+          <target state="final" state-qualifier="mt-suggestion">Profile</target>
+        </trans-unit>
+        <trans-unit id="Resources\search_btn\Content" translate="yes" xml:space="preserve">
+          <source>Chercher</source>
+          <target state="final" state-qualifier="mt-suggestion">Search</target>
+        </trans-unit>
+        <trans-unit id="Resources\add_to_cart_btn\Content" translate="yes" xml:space="preserve">
+          <source>Ajouter au panier</source>
+          <target state="final" state-qualifier="mt-suggestion">Add to cart</target>
+        </trans-unit>
+        <trans-unit id="Resources\address_city_txt\Text" translate="yes" xml:space="preserve">
+          <source>Ville</source>
+          <target state="final" state-qualifier="mt-suggestion">City</target>
+        </trans-unit>
+        <trans-unit id="Resources\address_complement_txt\Text" translate="yes" xml:space="preserve">
+          <source>Complement</source>
+          <target state="final" state-qualifier="mt-suggestion">Add-in</target>
+        </trans-unit>
+        <trans-unit id="Resources\address_country_txt\Text" translate="yes" xml:space="preserve">
+          <source>Pays</source>
+          <target state="final" state-qualifier="mt-suggestion">Country</target>
+        </trans-unit>
+        <trans-unit id="Resources\address_num_txt\Text" translate="yes" xml:space="preserve">
+          <source>Numero</source>
+          <target state="final" state-qualifier="mt-suggestion">Number</target>
+        </trans-unit>
+        <trans-unit id="Resources\address_street_txt\Text" translate="yes" xml:space="preserve">
+          <source>Adresse</source>
+          <target state="final" state-qualifier="mt-suggestion">Address</target>
+        </trans-unit>
+        <trans-unit id="Resources\address_txt\Text" translate="yes" xml:space="preserve">
+          <source>Adresse</source>
+          <target state="final" state-qualifier="mt-suggestion">Address</target>
+        </trans-unit>
+        <trans-unit id="Resources\address_zip_txt\Text" translate="yes" xml:space="preserve">
+          <source>Code postale</source>
+          <target state="final">Zip code</target>
+        </trans-unit>
+        <trans-unit id="Resources\add_friend_btn\Content" translate="yes" xml:space="preserve">
+          <source>Ajouter un ami</source>
+          <target state="final">Add a friend</target></trans-unit>
+        <trans-unit id="Resources\add_friend_txt\Text" translate="yes" xml:space="preserve">
+          <source>Ajouter un nouvel ami avec son pseudo</source>
+          <target state="final">Add a new friend with his nickname</target></trans-unit>
+        <trans-unit id="Resources\album_artist_txt\Text" translate="yes" xml:space="preserve">
+          <source>Artiste:</source>
+          <target state="final" state-qualifier="mt-suggestion">Artist:</target>
+        </trans-unit>
+        <trans-unit id="Resources\albums_txt\Text" translate="yes" xml:space="preserve">
+          <source>Albums</source>
+          <target state="final" state-qualifier="mt-suggestion">Albums</target>
+        </trans-unit>
+        <trans-unit id="Resources\album_music_list_txt\Text" translate="yes" xml:space="preserve">
+          <source>Liste des pistes:</source>
+          <target state="final" state-qualifier="mt-suggestion">Track list:</target>
+        </trans-unit>
+        <trans-unit id="Resources\album_price_txt\Text" translate="yes" xml:space="preserve">
+          <source>Prix:</source>
+          <target state="final" state-qualifier="mt-suggestion">Price:</target>
+        </trans-unit>
+        <trans-unit id="Resources\album_year_txt\Text" translate="yes" xml:space="preserve">
+          <source>Année:</source>
+          <target state="final" state-qualifier="mt-suggestion">Year:</target>
+        </trans-unit>
         <trans-unit id="Resources\year_txt\Text" translate="yes" xml:space="preserve">
           <source>Année:</source>
-          <target state="signed-off" state-qualifier="mt-suggestion">Year:</target>
+          <target state="final" state-qualifier="mt-suggestion">Year:</target>
         </trans-unit>
         <trans-unit id="Resources\signup_txt\Text" translate="yes" xml:space="preserve">
           <source>Inscription</source>
-          <target state="signed-off">Sign up</target>
+          <target state="final">Sign up</target>
         </trans-unit>
         <trans-unit id="Resources\shop_txt\Text" translate="yes" xml:space="preserve">
           <source>Magasin</source>
-          <target state="signed-off" state-qualifier="mt-suggestion">Store</target>
+          <target state="final" state-qualifier="mt-suggestion">Store</target>
         </trans-unit>
         <trans-unit id="Resources\music_txt\Text" translate="yes" xml:space="preserve">
           <source>Musique</source>
-          <target state="signed-off" state-qualifier="mt-suggestion">Music</target>
+          <target state="final" state-qualifier="mt-suggestion">Music</target>
         </trans-unit>
         <trans-unit id="Resources\music_player_txt\Text" translate="yes" xml:space="preserve">
           <source>Lecteur Audio</source>
-          <target state="signed-off" state-qualifier="mt-suggestion">Audio Player</target>
+          <target state="final" state-qualifier="mt-suggestion">Audio Player</target>
         </trans-unit>
         <trans-unit id="Resources\news_btn\Content" translate="yes" xml:space="preserve">
           <source>News</source>
-          <target state="signed-off" state-qualifier="mt-suggestion">News</target>
+          <target state="final" state-qualifier="mt-suggestion">News</target>
         </trans-unit>
         <trans-unit id="Resources\news_txt\Text" translate="yes" xml:space="preserve">
           <source>Dernières news</source>
-          <target state="signed-off">Last news</target>
+          <target state="final">Last news</target>
         </trans-unit>
         <trans-unit id="Resources\shop_btn\Content" translate="yes" xml:space="preserve">
           <source>Magasin</source>
-          <target state="signed-off" state-qualifier="mt-suggestion">Store</target>
+          <target state="final" state-qualifier="mt-suggestion">Store</target>
         </trans-unit>
         <trans-unit id="Resources\new_playlist_btn\Content" translate="yes" xml:space="preserve">
           <source>Créer</source>
-          <target state="signed-off" state-qualifier="mt-suggestion">Create</target>
+          <target state="final" state-qualifier="mt-suggestion">Create</target>
         </trans-unit>
         <trans-unit id="Resources\playlist_txt\Text" translate="yes" xml:space="preserve">
           <source>Playlist</source>
-          <target state="signed-off" state-qualifier="mt-suggestion">Playlist</target>
+          <target state="final" state-qualifier="mt-suggestion">Playlist</target>
         </trans-unit>
         <trans-unit id="Resources\remove_playlist_btn\Content" translate="yes" xml:space="preserve">
           <source>Supprimer</source>
-          <target state="signed-off" state-qualifier="mt-suggestion">Delete</target>
+          <target state="final" state-qualifier="mt-suggestion">Delete</target>
         </trans-unit>
         <trans-unit id="Resources\forgot_password_txt\Text" translate="yes" xml:space="preserve">
           <source>Récuperation du mot de passe</source>
-          <target state="signed-off">Password recovery</target>
+          <target state="final">Password recovery</target>
         </trans-unit>
         <trans-unit id="Resources\follow_btn\Content" translate="yes" xml:space="preserve">
-          <source>Follow</source>
-          <target state="signed-off" state-qualifier="mt-suggestion">Follow</target>
-        </trans-unit>
+          <source>Suivre cette personne</source>
+          <target state="final" state-qualifier="mt-suggestion">Follow</target></trans-unit>
         <trans-unit id="Resources\connect_btn\Content" translate="yes" xml:space="preserve">
           <source>Connexion</source>
-          <target state="signed-off" state-qualifier="mt-suggestion">Connection</target>
+          <target state="final" state-qualifier="mt-suggestion">Connection</target>
         </trans-unit>
         <trans-unit id="Resources\audio_player_btn\Content" translate="yes" xml:space="preserve">
           <source>Lecteur Audio</source>
-          <target state="signed-off" state-qualifier="mt-suggestion">Audio Player</target>
+          <target state="final" state-qualifier="mt-suggestion">Audio Player</target>
         </trans-unit>
         <trans-unit id="Resources\add_playlist_btn\Content" translate="yes" xml:space="preserve">
           <source>Modifier</source>
-          <target state="signed-off" state-qualifier="mt-suggestion">Edit</target>
+          <target state="final" state-qualifier="mt-suggestion">Edit</target>
         </trans-unit>
         <trans-unit id="Resources\album_txt\Text" translate="yes" xml:space="preserve">
           <source>Album:</source>
-          <target state="signed-off" state-qualifier="mt-suggestion">Album:</target>
+          <target state="final" state-qualifier="mt-suggestion">Album:</target>
         </trans-unit>
         <trans-unit id="Resources\artist_txt\Text" translate="yes" xml:space="preserve">
           <source>Artiste:</source>
-          <target state="signed-off" state-qualifier="mt-suggestion">Artist:</target>
+          <target state="final" state-qualifier="mt-suggestion">Artist:</target>
         </trans-unit>
         <trans-unit id="Resources\community_btn\Content" translate="yes" xml:space="preserve">
           <source>Communauté</source>
-          <target state="signed-off" state-qualifier="mt-suggestion">Community</target>
+          <target state="final" state-qualifier="mt-suggestion">Community</target>
         </trans-unit>
         <trans-unit id="Resources\battle_btn\Content" translate="yes" xml:space="preserve">
           <source>Battle</source>
-          <target state="signed-off" state-qualifier="mt-suggestion">Battle</target>
+          <target state="final" state-qualifier="mt-suggestion">Battle</target>
         </trans-unit>
         <trans-unit id="Resources\community_txt\Text" translate="yes" xml:space="preserve">
           <source>Communauté</source>
-          <target state="signed-off" state-qualifier="mt-suggestion">Community</target>
+          <target state="final" state-qualifier="mt-suggestion">Community</target>
         </trans-unit>
         <trans-unit id="Resources\connection_txt\Text" translate="yes" xml:space="preserve">
           <source>Connexion</source>
-          <target state="signed-off" state-qualifier="mt-suggestion">Connection</target>
+          <target state="final" state-qualifier="mt-suggestion">Connection</target>
         </trans-unit>
         <trans-unit id="Resources\concert_btn\Content" translate="yes" xml:space="preserve">
           <source>Concert</source>
-          <target state="signed-off" state-qualifier="mt-suggestion">Concert</target>
+          <target state="final" state-qualifier="mt-suggestion">Concert</target>
         </trans-unit>
       </group>
     </body>
