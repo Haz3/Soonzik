@@ -23,6 +23,7 @@ namespace SoonZik.Controls
         public GeolocalisationControl()
         {
             this.InitializeComponent();
+            DataContext = this;
 
             var task = Task.Run(async () => await InitVariable());
             task.Wait();
@@ -127,7 +128,7 @@ namespace SoonZik.Controls
 
         public User UserSelected { get; set; }
 
-        public ICommand TwoChecked { get; private set; }
+        public RelayCommand TwoChecked { get; private set; }
         public RelayCommand FiveChecked { get; private set; }
         public RelayCommand TenChecked { get; private set; }
         public RelayCommand TwentyChecked { get; private set; }

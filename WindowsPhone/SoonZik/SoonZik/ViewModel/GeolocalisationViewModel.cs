@@ -2,11 +2,14 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
+using Windows.ApplicationModel.Core;
 using Windows.Devices.Geolocation;
 using Windows.Foundation;
+using Windows.UI.Core;
 using Windows.UI.Xaml.Controls.Maps;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using SoonZik.HttpRequest;
 using SoonZik.HttpRequest.Poco;
 
 namespace SoonZik.ViewModel
@@ -20,6 +23,11 @@ namespace SoonZik.ViewModel
             var task = Task.Run(async () => await InitVariable());
             task.Wait();
 
+            ListMapIcons = new List<MapIcon>();
+
+            GetConcert();
+            GetListeners();
+
             CreateListElement();
         }
 
@@ -29,14 +37,66 @@ namespace SoonZik.ViewModel
 
         private void CreateListElement()
         {
-            MapIcon mapIcon = new MapIcon();
+            var mapIcon = new MapIcon
+            {
+                Location =
+                    new Geopoint(new BasicGeoposition()
+                    {
+                        Latitude = UserLocation.Latitude,
+                        Longitude = UserLocation.Longitude
+                    }),
+                NormalizedAnchorPoint = new Point(0.5, 1.0),
+                Title = "Moi"
+            };
 
-            mapIcon.Location = new Geopoint(new BasicGeoposition() { Latitude = UserLocation.Latitude, Longitude = UserLocation.Longitude });
-            mapIcon.NormalizedAnchorPoint = new Point(0.5, 1.0);
-            mapIcon.Title = "Moi";
-
+            ListMapIcons.Add(mapIcon);
             MapElements = new ObservableCollection<MapElement>();
-            MapElements.Add(mapIcon);
+            foreach (var icon in ListMapIcons)
+            {
+                MapElements.Add(icon);
+            }
+            //MapElements.Add(mapIcon);
+        }
+
+        private void GetListeners()
+        {
+            var reqGet = new HttpRequestGet();
+            ListListeners = new ObservableCollection<Listenings>();
+            var listListeners = reqGet.GetListObject(new List<Listenings>(), "listenings");
+            listListeners.ContinueWith(delegate(Task<object> tmp)
+            {
+                var res = tmp.Result as List<Listenings>;
+                if (res != null)
+                {
+                    foreach (var item in res)
+                    {
+                        CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
+                            () =>
+                            {
+                                ListListeners.Add(item);
+                            });
+                    }
+                }
+            });
+        }
+
+        private void GetConcert()
+        {
+            var reqGet = new HttpRequestGet();
+            ListConcerts = new ObservableCollection<Concerts>();
+            var listConcerts = reqGet.GetListObject(new List<Concerts>(), "concerts");
+            listConcerts.ContinueWith(delegate(Task<object> tmp)
+            {
+                var test = tmp.Result as List<Concerts>;
+                if (test != null)
+                {
+                    foreach (var item in test)
+                    {
+                        CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
+                            () => { ListConcerts.Add(item); });
+                    }
+                }
+            });
         }
 
         private async Task InitVariable()
@@ -53,6 +113,7 @@ namespace SoonZik.ViewModel
         }
 
         #region Command
+
         private void UserTappedExecute()
         {
 
@@ -81,6 +142,22 @@ namespace SoonZik.ViewModel
 
         private void TwoCheckedExecute()
         {
+            if (ListListeners != null)
+            {
+                foreach (var listener in ListListeners)
+                {
+                    var t = new MapIcon
+                    {
+                        Location = new Geopoint(new BasicGeoposition()
+                        {
+                            Latitude = listener.latitude,
+                            Longitude = listener.longitude
+                        }),
+                        NormalizedAnchorPoint = new Point(0.5, 1.0)
+                    };
+                    MapElements.Add(t);
+                }
+            }
             FiveKmActivated = false;
             TenKmActivated = false;
             TwentyKmActivated = false;
@@ -91,9 +168,9 @@ namespace SoonZik.ViewModel
         #endregion
 
         #region Attrivute
+        public List<MapIcon> ListMapIcons { get; set; } 
 
         private ObservableCollection<MapElement> _mapElements;
-
         public ObservableCollection<MapElement> MapElements
         {
             get { return _mapElements; }
@@ -102,10 +179,37 @@ namespace SoonZik.ViewModel
                 _mapElements = value;
                 RaisePropertyChanged("MapElements");
             }
-    } 
+    }
+
+        private ObservableCollection<Concerts> _listConcerts;
+        public ObservableCollection<Concerts> ListConcerts
+        {
+            get
+            {
+                return _listConcerts;
+            }
+            set
+            {
+                _listConcerts = value;
+                RaisePropertyChanged("ListConcerts");
+            }
+        }
+
+        private ObservableCollection<Listenings> _listListeners;
+        public ObservableCollection<Listenings> ListListeners
+        {
+            get
+            {
+                return _listListeners;
+            }
+            set
+            {
+                _listListeners = value;
+                RaisePropertyChanged("ListListeners");
+            }
+        }
 
         private List<User> _listUser;
-
         public List<User> ListUser
         {
             get { return _listUser;}
@@ -123,11 +227,10 @@ namespace SoonZik.ViewModel
         public RelayCommand TenChecked { get; private set; }
         public RelayCommand TwentyChecked { get; private set; }
         public RelayCommand UserTappedCommand { get; private set; }
+        public RelayCommand GetMap { get; private set; }
 
         private Geolocator _myGeolocator;
-
         private Geocoordinate _userLocation;
-
         public Geocoordinate UserLocation
         {
             get { return _userLocation; }
@@ -181,8 +284,7 @@ namespace SoonZik.ViewModel
                 RaisePropertyChanged("TwentyKmActivated");
             }
         }
-
-
+        
         #endregion
 
     }
