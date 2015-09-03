@@ -191,6 +191,9 @@ SoonzikApp.factory('HTTPService', ['$http', '$location', 'Upload', function ($ht
     },
     getMyMusic: function(parameters) {
       return $http.get("http://api." + url + "/users/getmusics" + urlParametersFormat(parameters))
+    },
+    getFlux: function(parameters) {
+      return $http.get("http://api." + url + "/tweets/flux" + urlParametersFormat(parameters));
     }
   }
 }]);

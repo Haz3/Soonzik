@@ -1,0 +1,47 @@
+.sweet {
+	height: 300px;
+	width: 100%;
+	border: 1px solid lightgray;
+	border-radius: 4px;
+	padding: 0px 3px 0px 3px;
+	position: relative;
+	overflow: auto;
+
+	.sweetContainer {
+		width: 100%;
+		background: #EEE;
+		margin-top: 5px;
+		margin-bottom: 5px;
+
+		.columns {
+			padding: 0;
+		}
+	}
+}
+
+.contentRightSide {
+
+	.btnGroup {
+		padding-top: 10px;
+
+		.button {
+			margin-bottom: 0;
+		}
+	}
+
+	input {
+    margin: 0;
+    border-top: 0;
+	}
+
+	a.button.postfix {
+    padding-left: 1px;
+    padding-right: 1px;
+	}
+}
+
+.lastPacks {
+	.panel {
+		text-color: #333;
+	}
+}

@@ -58,11 +58,11 @@
 		%main.row
 			- if notice
 				%small.error
-					%i.fi-x.left.removeInfo
+					%i.fi-x.left.removeInfo.pointer
 					%p= notice
 			-if alert
 				%small.error
-					%i.fi-x.left.removeInfo
+					%i.fi-x.left.removeInfo.pointer
 					%p= alert
 			.large-12{"ng-view" => true}
 			=yield

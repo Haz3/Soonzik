@@ -91,8 +91,8 @@
 								  												<h1 class="class"
 					rel="popover"
 					data-original-title="In files"
-					data-content="app/models/news.rb"
-					>News</h1>
+					data-content="app/models/feedback.rb"
+					>Feedback</h1>
 				</p>
 							</hgroup>
 			<span class="label">class</span>
@@ -109,37 +109,28 @@
 
 		<section class="description">
 			
-<p>The model of the object <a href="News.html">News</a> Contain the relation
-and the validation Can provide some features linked to this model</p>
+<p>The model of the object <a href="Address.html">Address</a> Contain the
+relation and the validation Can provide some features linked to this model</p>
 
-<h4 id="class-News-label-Attributes">Attributes<span><a href="#class-News-label-Attributes">&para;</a> <a href="#top">&uarr;</a></span></h4>
+<h4 id="class-Feedback-label-Attributes">Attributes<span><a href="#class-Feedback-label-Attributes">&para;</a> <a href="#top">&uarr;</a></span></h4>
 <ul><li>
 <p><code>id</code> - (integer) - The ID of the object</p>
 </li><li>
-<p><code>author_id</code> - (integer) - The ID of the user</p>
+<p><code>email</code> - (string) - The email to contact</p>
 </li><li>
-<p><code>title</code> - (string) - The title of the news (need to change for
-multi language)</p>
+<p><code>user_id</code> - (integer) - The email to contact</p>
 </li><li>
-<p><code>date</code> - (date) - The date of the news (need to be delete, there
-is created_at field for it no ?)</p>
+<p><code>type_object</code> - (string) - The type of object (the category)</p>
 </li><li>
-<p><code>news_type</code> - (string) - The type of news (example :
-“discovery”, “promotion”, “information”…)</p>
+<p><code>object</code> - (string) - The object of the feedback</p>
+</li><li>
+<p><code>text</code> - (string) - The content of the feedback</p>
 </li></ul>
 
-<h4 id="class-News-label-Associations">Associations<span><a href="#class-News-label-Associations">&para;</a> <a href="#top">&uarr;</a></span></h4>
-<ul><li>
-<p><code>belongs_to</code> - :user</p>
-</li><li>
-<p><code>has_many</code> - :tags</p>
-</li><li>
-<p><code>has_many</code> - :newstexts</p>
-</li><li>
-<p><code>has_and_belongs_to_many</code> - :attachments</p>
-</li><li>
-<p><code>has_and_belongs_to_many</code> - :commentaries</p>
-</li></ul>
+<h4 id="class-Feedback-label-Associations">Associations<span><a href="#class-Feedback-label-Associations">&para;</a> <a href="#top">&uarr;</a></span></h4>
+
+<pre class="ruby"><span class="ruby-operator">+</span>:<span class="ruby-identifier">belongs_to</span><span class="ruby-operator">+</span> <span class="ruby-operator">-</span> :<span class="ruby-identifier">user</span>
+</pre>
 		</section>
 
 				<section id="5Buntitled-5D" class="documentation-section">
@@ -154,46 +145,22 @@ is created_at field for it no ?)</p>
 					<h3>Public Class Methods</h3>
 				</header>
 
-								<a name="method-c-miniKey">anchor</a>
-				<div id="method-c-miniKey-doc" class="method">
+								<a name="method-c-feedback_params">anchor</a>
+				<div id="method-c-feedback_params-doc" class="method">
 
 					<header>
 											<i class="icon-generic"></i>
-						<span class="method-name">miniKey</span><span 
-							class="method-args">()</span>
-										</header>
-
-					<div class="method-description">
-											<p>Filter of information for the <a href="API.html">API</a></p>
-
-<p>Fields returned : [:id, :title, :date]</p>					
-											<div class="method-source-code" id="miniKey-source">
-							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/models/news.rb, line 34</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">miniKey</span>
-  [<span class="ruby-value">:id</span>, <span class="ruby-value">:title</span>, <span class="ruby-value">:date</span>]
-<span class="ruby-keyword">end</span></code></pre>
-						</div>
-										</div>
-
-					
-									</div>
-								<a name="method-c-news_params">anchor</a>
-				<div id="method-c-news_params-doc" class="method">
-
-					<header>
-											<i class="icon-generic"></i>
-						<span class="method-name">news_params</span><span 
+						<span class="method-name">feedback_params</span><span 
 							class="method-args">(parameters)</span>
 										</header>
 
 					<div class="method-description">
 											<p>The strong parameters to save or update object</p>					
-											<div class="method-source-code" id="news_params-source">
+											<div class="method-source-code" id="feedback_params-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/models/news.rb, line 38</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">news_params</span>(<span class="ruby-identifier">parameters</span>)
-  <span class="ruby-identifier">parameters</span>.<span class="ruby-identifier">require</span>(<span class="ruby-value">:news</span>).<span class="ruby-identifier">permit</span>(<span class="ruby-value">:title</span>, <span class="ruby-value">:date</span>, <span class="ruby-value">:author_id</span>)
+								class="language-ruby"><span class="ruby-comment"># File app/models/feedback.rb, line 25</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">feedback_params</span>(<span class="ruby-identifier">parameters</span>)
+  <span class="ruby-identifier">parameters</span>.<span class="ruby-identifier">require</span>(<span class="ruby-value">:feedback</span>).<span class="ruby-identifier">permit</span>(<span class="ruby-value">:email</span>, <span class="ruby-value">:type_object</span>, <span class="ruby-value">:object</span>, <span class="ruby-value">:text</span>)
 <span class="ruby-keyword">end</span></code></pre>
 						</div>
 										</div>
