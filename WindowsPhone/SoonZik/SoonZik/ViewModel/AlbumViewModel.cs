@@ -1,13 +1,18 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Windows.ApplicationModel.Core;
 using Windows.UI.Core;
+using Windows.UI.Popups;
+using Windows.UI.StartScreen;
 using Windows.UI.Xaml;
 using Coding4Fun.Toolkit.Controls;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using SoonZik.Controls;
+using SoonZik.Helpers;
 using SoonZik.HttpRequest;
 using SoonZik.HttpRequest.Poco;
 using SoonZik.Utils;
@@ -30,6 +35,7 @@ namespace SoonZik.ViewModel
 
             MoreOptionOnTapped = new RelayCommand(MoreOptionOnTappedExecute);
             SelectionCommand = new RelayCommand(SelectionExecute);
+            SendComment = new RelayCommand(SendCommentExecute);
             //ImageAlbum = TheAlbum.image == String.Empty ? new Uri("ms-appx:///Resources/Icones/disc.png", UriKind.Absolute).ToString() : TheAlbum.image;
         }
 
@@ -51,9 +57,9 @@ namespace SoonZik.ViewModel
             }
         }
 
-        private List<Music> _listMusics;
+        private ObservableCollection<Music> _listMusics;
 
-        public List<Music> ListMusics
+        public ObservableCollection<Music> ListMusics
         {
             get { return _listMusics; }
             set
@@ -105,13 +111,41 @@ namespace SoonZik.ViewModel
         
         public ICommand SelectionCommand { get; private set; }
         public ICommand MoreOptionOnTapped { get; set; }
+        public ICommand SendComment { get; private set; }
+        private bool _moreOption;
 
+        private string _textComment;
+
+        public string TextComment
+        {
+            get { return _textComment;}
+            set
+            {
+                _textComment = value;
+                RaisePropertyChanged("TextComment");
+            }
+        }
+
+        private ObservableCollection<Comments> _listCommAlbum;
+
+        public ObservableCollection<Comments> ListCommAlbum
+        {
+            get { return _listCommAlbum; }
+            set
+            {
+                _listCommAlbum = value;
+                RaisePropertyChanged("ListCommAlbum");
+            }
+        }
+
+        private string _crypto;
         #endregion
 
         #region Method
 
         private void MoreOptionOnTappedExecute()
         {
+            _moreOption = true;
             var newsBody = new MoreOptionPopUp(SelectedMusic);
             MessagePrompt = new MessagePrompt
             {
@@ -126,6 +160,37 @@ namespace SoonZik.ViewModel
             MessagePrompt.Show();
         }
 
+        private void SendCommentExecute()
+        {
+            var request = new HttpRequestGet();
+            var post = new HttpRequestPost();
+            try
+            {
+                var userKey = request.GetUserKey(Singleton.Instance().CurrentUser.id.ToString());
+                userKey.ContinueWith(delegate(Task<object> task)
+                {
+                    var key = task.Result as string;
+                    if (key != null)
+                    {
+                        var stringEncrypt = KeyHelpers.GetUserKeyFromResponse(key);
+                        _crypto = EncriptSha256.EncriptStringToSha256(Singleton.Instance().CurrentUser.salt + stringEncrypt);
+                    }
+                    var test = post.SendComment(TextComment, TheAlbum,_crypto ,Singleton.Instance().CurrentUser);
+                    test.ContinueWith(delegate(Task<string> tmp)
+                    {
+                        var res = tmp.Result;
+                        if (res != null)
+                        {
+                            CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, LoadComment);
+                        }
+                    });
+                });
+            }
+            catch (Exception)
+            {
+                new MessageDialog("Erreur lors du post").ShowAsync();
+            }
+        }
 
         private void SelectionExecute()
         {
@@ -135,11 +200,15 @@ namespace SoonZik.ViewModel
 
         private void ItemClickCommandExecute()
         {
-            //_navigationService.Navigate(new PlayerControl().GetType());
+            if (!_moreOption)
+                _navigationService.Navigate(new PlayerControl().GetType());
+            else
+                _moreOption = false;
         }
 
         public void Charge()
         {
+            ListMusics = new ObservableCollection<Music>();
             var request = new HttpRequestGet();
             var album = request.GetObject(new Album(), "albums", MyAlbum.id.ToString());
             album.ContinueWith(delegate(Task<object> tmp)
@@ -150,12 +219,38 @@ namespace SoonZik.ViewModel
                     CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
                     {
                         TheAlbum = test;
-                        ListMusics = TheAlbum.musics;
+                        foreach (var music in test.musics)
+                        {
+                            ListMusics.Add(music);
+                        }
+                    });
+                }
+            });
+            LoadComment();
+        }
+
+        private void LoadComment()
+        {
+            TextComment = "";
+            var request = new HttpRequestGet(); 
+            ListCommAlbum = new ObservableCollection<Comments>();
+            var elem = "albums/" + TheAlbum.id.ToString() + "/comments";
+            var listCom = request.GetListObject(new List<Comments>(), elem);
+            listCom.ContinueWith(delegate(Task<object> tmp)
+            {
+                var res = tmp.Result as List<Comments>;
+                if (res != null)
+                {
+                    CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+                    {
+                        foreach (var item in res)
+                        {
+                            ListCommAlbum.Add(item);
+                        }
                     });
                 }
             });
         }
-
         #endregion
     }
 }

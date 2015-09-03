@@ -21,6 +21,7 @@ C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik.Helpers\bin\
 C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik.Helpers\bin\Debug\SoonZik.Helpers.pri
 C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik.Helpers\bin\Debug\Facebook.dll
 C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik.Helpers\bin\Debug\Facebook.xml
+C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik.Helpers\obj\Debug\SoonZik.Helpers.csprojResolveAssemblyReference.cache
 C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik.Helpers\obj\Debug\SoonZik.Helpers.dll
 C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik.Helpers\obj\Debug\SoonZik.Helpers.pdb
 C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik.Helpers\obj\Debug\priconfig.xml

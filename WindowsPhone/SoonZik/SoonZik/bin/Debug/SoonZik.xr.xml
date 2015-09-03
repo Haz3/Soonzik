@@ -28,7 +28,11 @@
     <RootPropertyPathName Name="Username" />
     <RootPropertyPathName Name="GridVisibility" />
     <RootPropertyPathName Name="isActive" />
+    <RootPropertyPathName Name="content" />
     <RootPropertyPathName Name="SelectionCommand" />
+    <RootPropertyPathName Name="SendComment" />
+    <RootPropertyPathName Name="TextComment" />
+    <RootPropertyPathName Name="ListCommAlbum" />
     <RootPropertyPathName Name="ListMusics" />
     <RootPropertyPathName Name="TheAlbum" />
     <RootPropertyPathName Name="ArtistTwo" />
@@ -185,12 +189,12 @@
       <RootProperty Name="Style" />
       <RootProperty Name="MinHeight" />
       <RootProperty Name="MinWidth" />
+      <RootProperty Name="Margin" />
+      <RootProperty Name="Command" />
       <RootProperty Name="Height" />
       <RootProperty Name="IsEnabled" />
       <RootProperty Name="Foreground" />
       <RootProperty Name="Opacity" />
-      <RootProperty Name="Margin" />
-      <RootProperty Name="Command" />
       <RootEvent Name="Click" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.Control">
@@ -230,8 +234,8 @@
       <RootProperty Name="Foreground" />
       <RootProperty Name="RenderTransformOrigin" />
       <RootProperty Name="Style" />
-      <RootProperty Name="Items" />
       <RootProperty Name="Margin" />
+      <RootProperty Name="Items" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.FrameworkElement">
       <RootProperty Name="Margin" />
@@ -439,8 +443,8 @@
       <RootProperty Name="Opacity" />
       <RootProperty Name="HorizontalAlignment" />
       <RootProperty Name="VerticalAlignment" />
-      <RootProperty Name="InputScope" />
       <RootProperty Name="Text" />
+      <RootProperty Name="InputScope" />
       <RootProperty Name="IsEnabled" />
       <RootEvent Name="TextChanged" />
     </RootType>
@@ -448,8 +452,8 @@
       <RootProperty Name="Header" />
       <RootProperty Name="ItemTemplate" />
       <RootProperty Name="SelectedItem" />
-      <RootProperty Name="ItemsSource" />
       <RootProperty Name="Background" />
+      <RootProperty Name="ItemsSource" />
       <RootProperty Name="IsHoldingEnabled" />
       <RootProperty Name="GroupStyle" />
     </RootType>
@@ -491,6 +495,10 @@
     <RootType FullName="SoonZik.Controls.ProgressRingControl" />
     <RootType FullName="SoonZik.Views.Connexion" />
     <RootType FullName="SoonZik.MainPage" />
+    <RootType FullName="Windows.UI.Xaml.Controls.PivotItem">
+      <RootProperty Name="Header" />
+      <RootProperty Name="Content" />
+    </RootType>
     <RootType FullName="SoonZik.Views.AlbumView" />
     <RootType FullName="SoonZik.Views.BattleDetailView" />
     <RootType FullName="SoonZik.Views.CartsView" />
@@ -534,10 +542,6 @@
       <RootProperty Name="False" />
     </RootType>
     <RootType FullName="SoonZik.Views.Conversation" />
-    <RootType FullName="Windows.UI.Xaml.Controls.PivotItem">
-      <RootProperty Name="Header" />
-      <RootProperty Name="Content" />
-    </RootType>
     <RootType FullName="SoonZik.Views.Explorer" />
     <RootType FullName="Windows.UI.Xaml.Data.CollectionViewSource">
       <RootProperty Name="Source" />

@@ -81,7 +81,7 @@ namespace SoonZik.ViewModel
             }
             catch (Exception)
             {
-                new MessageDialog("Erreur lors de l'update").ShowAsync();
+                new MessageDialog("Erreur lors du post").ShowAsync();
             }
         }
 

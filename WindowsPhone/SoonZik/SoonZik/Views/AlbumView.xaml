@@ -13,6 +13,15 @@
     Background="#424242">
 
 
+    <Page.Resources>
+        <DataTemplate x:Key="ComTemplate">
+            <StackPanel Margin="0,0,0,10">
+                <TextBlock Text="{Binding Path=content}" Foreground="White" FontSize="15" />
+            </StackPanel>
+        </DataTemplate>
+       
+    </Page.Resources>
+
     <interactivity:Interaction.Behaviors>
         <core:EventTriggerBehavior EventName="Loaded">
             <core:InvokeCommandAction Command="{Binding SelectionCommand}" />
@@ -22,7 +31,7 @@
     <Grid x:Name="GlobalGrid">
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
-            <RowDefinition Height="250" />
+            <RowDefinition Height="300" />
         </Grid.RowDefinitions>
         <Grid.Resources>
             <DataTemplate x:Key="MusicTemplate">
@@ -31,10 +40,10 @@
                     <TextBlock x:Name="MusicTitle" Text="{Binding Path=title}" FontSize="25" Margin="20,0,0,0" />
                     <TextBlock x:Name="ArtistNameList" Text="{Binding Path=user.Username}" FontSize="15"
                                VerticalAlignment="Bottom" Margin="20,0,0,10" />
-                    
+
                     <Image x:Name="MoreOption" Source="../Resources/Icones/menu.png" Height="30" Tapped="MoreOption_OnTapped"
                            VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,20,0">
-                    
+
                     </Image>
                 </Grid>
             </DataTemplate>
@@ -43,16 +52,38 @@
         <Grid Grid.Row="0">
             <Image Name="AlbumImage" Source="ms-appx:///Resources/Icones/MenuExplorer.png" Width="150" Height="150"
                    HorizontalAlignment="Center" VerticalAlignment="Top"
-                   Margin="0,30,0,0" />
+                   Margin="0,20,0,0" />
 
             <TextBlock x:Name="AlbumTitle" Text="{Binding TheAlbum.title}" FontSize="30" VerticalAlignment="Center"
-                       HorizontalAlignment="Center" Margin="0,120,0,0" />
+                       HorizontalAlignment="Center" Margin="0,100,0,0" />
 
             <TextBlock x:Name="ArtistName" Text="{Binding TheAlbum.user.username}" FontSize="20"
-                       VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,250,0,0" />
+                       VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,200,0,0" />
         </Grid>
-        <ListView Grid.Row="1" x:Name="MusicListView" ItemsSource="{Binding ListMusics}"
-                  ItemTemplate="{StaticResource MusicTemplate}" SelectedItem="{Binding SelectedMusic, Mode=TwoWay}"/>
 
+        <Pivot Grid.Row="1" x:Name="PivotGlobal" HeaderTemplate="{StaticResource SizeHeaderGlobalPivot}"
+                   Foreground="Transparent" RenderTransformOrigin="0.5,0.5" Style="{StaticResource PivotStyle1}"
+                   Margin="0,20,0,0">
+            <PivotItem x:Uid="MusicPivot" Header="">
+                <ListBox Background="Transparent" Grid.Row="1" x:Name="MusicListView" ItemsSource="{Binding ListMusics}"
+                  ItemTemplate="{StaticResource MusicTemplate}" SelectedItem="{Binding SelectedMusic, Mode=TwoWay}"/>
+            </PivotItem>
+
+            <PivotItem x:Uid="SocialPivot" Header="">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="40"/>
+                    </Grid.RowDefinitions>
+                    <ScrollViewer Grid.Row="0">
+                        <ListBox Grid.Row="0" Background="Transparent" x:Name="FollowListBox"
+                        ItemsSource="{Binding ListCommAlbum}" ItemTemplate="{StaticResource ComTemplate}">
+                        </ListBox>
+                    </ScrollViewer>
+                    <TextBox Grid.Row="1" Width="200" HorizontalAlignment="Left" Margin="10,0,0,0" Text="{Binding TextComment, Mode=TwoWay}"/>
+                    <Button x:Uid="Send" Content="" Grid.Row="1" HorizontalAlignment="Right" Margin="0,0,10,0" Command="{Binding SendComment}"/>
+                </Grid>
+            </PivotItem>
+        </Pivot>
     </Grid>
 </Page>
