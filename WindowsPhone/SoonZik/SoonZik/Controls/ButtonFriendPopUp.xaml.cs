@@ -46,9 +46,9 @@ namespace SoonZik.Controls
 
         private void GoToProfil(object sender, RoutedEventArgs e)
         {
-        //    Singleton.Instance().NewProfilUser = Friend;
-        //    Singleton.Instance().ItsMe = false;
-        //    Singleton.Instance().Charge();
+            //    Singleton.Instance().NewProfilUser = Friend;
+            //    Singleton.Instance().ItsMe = false;
+            //    Singleton.Instance().Charge();
 
             var request = new HttpRequestGet();
 
@@ -59,10 +59,7 @@ namespace SoonZik.Controls
                 if (res != null)
                 {
                     CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
-                        () =>
-                        {
-                            ProfilFriendViewModel.UserFromButton = res;
-                        });
+                        () => { ProfilFriendViewModel.UserFromButton = res; });
                 }
             });
             GlobalMenuControl.MyGrid.Children.Clear();

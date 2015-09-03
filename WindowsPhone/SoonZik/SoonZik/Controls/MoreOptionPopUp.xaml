@@ -13,11 +13,12 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="50" />
             <RowDefinition Height="50" />
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="*" />
             <RowDefinition Height="60" />
         </Grid.RowDefinitions>
 
-        
-        <TextBlock Grid.Row="0" FontSize="25" Foreground="White" VerticalAlignment="Center" TextAlignment="Center" Text="{Binding Path=SelectedMusic.title}"/>
+
+        <TextBlock Grid.Row="0" FontSize="25" Foreground="White" VerticalAlignment="Center" TextAlignment="Center"
+                   Text="{Binding Path=SelectedMusic.title}" />
     </Grid>
 </UserControl>

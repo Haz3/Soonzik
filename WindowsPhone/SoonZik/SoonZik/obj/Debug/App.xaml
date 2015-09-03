@@ -20,7 +20,7 @@
         <vm:InscriptionViewModel x:Key="InscriptionViewModel" />
         <vm:GeolocalisationViewModel x:Key="GeolocalisationViewModel" />
         <vm:BattleViewModel x:Key="BattleViewModel" />
-        <vm:CartsViewModel x:Key="CartsViewModel"/>
+        <vm:CartsViewModel x:Key="CartsViewModel" />
         <vm:PlaylistViewModel x:Key="PlaylistViewModel" />
         <vm:BattleDetailViewModel x:Key="BattleDetailViewModel" />
 

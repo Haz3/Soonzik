@@ -20,15 +20,16 @@ namespace SoonZik.ViewModel
         public BattleViewModel()
         {
             SelectedCommand = new RelayCommand(SelectedCommandExecute);
-            ListBattles=new ObservableCollection<Battle>();
+            ListBattles = new ObservableCollection<Battle>();
             LoadBattle();
         }
-
 
         #endregion
 
         #region Attribute
+
         private Battle _selectedBattle;
+
         public Battle SelectedBattle
         {
             get { return _selectedBattle; }
@@ -37,11 +38,13 @@ namespace SoonZik.ViewModel
                 _selectedBattle = value;
                 RaisePropertyChanged("SelectedBattle");
             }
-    }
+        }
+
         private ObservableCollection<Battle> _listBattles;
+
         public ObservableCollection<Battle> ListBattles
         {
-            get { return _listBattles;}
+            get { return _listBattles; }
             set
             {
                 _listBattles = value;
@@ -50,6 +53,7 @@ namespace SoonZik.ViewModel
         }
 
         public ICommand SelectedCommand;
+
         #endregion
 
         #region Method
@@ -75,15 +79,16 @@ namespace SoonZik.ViewModel
                             () =>
                             {
                                 item.artist_one.image = "http://soonzikapi.herokuapp.com/assets/usersImage/avatars/" +
-                                                        item.artist_one.image; 
+                                                        item.artist_one.image;
                                 item.artist_two.image = "http://soonzikapi.herokuapp.com/assets/usersImage/avatars/" +
-                                                         item.artist_two.image;
+                                                        item.artist_two.image;
                                 ListBattles.Add(item);
                             });
                     }
                 }
             });
         }
+
         #endregion
     }
 }

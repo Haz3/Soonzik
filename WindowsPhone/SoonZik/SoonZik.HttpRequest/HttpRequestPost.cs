@@ -113,6 +113,13 @@ namespace SoonZik.HttpRequest
             return await GetHttpPostResponse(request, postData);
         }
 
+        public async Task<String> SendComment(string message, Album myAlbum, string sha256, User myUser)
+        {
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(ApiUrl + "albums/addcomment/" + myAlbum.id);
+            var postData = "content=" + message + "&secureKey=" + sha256 + "&user_id=" + myUser.id;
+            return await GetHttpPostResponse(request, postData);
+        }
+
         public async Task<String> GetHttpPostResponse(HttpWebRequest request, string postData)
         {
             Received = null;

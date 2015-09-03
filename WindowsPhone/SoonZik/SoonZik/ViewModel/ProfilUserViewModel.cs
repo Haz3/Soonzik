@@ -3,8 +3,8 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using Windows.ApplicationModel.Activation;
 using Windows.ApplicationModel.Core;
+using Windows.ApplicationModel.Resources;
 using Windows.Graphics.Imaging;
-using Windows.Security.Cryptography.Core;
 using Windows.Storage;
 using Windows.Storage.Pickers;
 using Windows.UI.Core;
@@ -13,58 +13,15 @@ using Windows.UI.Xaml.Media.Imaging;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Ioc;
-using SoonZik.Controls;
 using SoonZik.Helpers;
 using SoonZik.HttpRequest;
 using SoonZik.HttpRequest.Poco;
 using SoonZik.Utils;
-using SoonZik.Views;
 
 namespace SoonZik.ViewModel
 {
     public class ProfilUserViewModel : ViewModelBase
     {
-        #region Attribute
-        private User _currentUser;
-        public User CurrentUser
-        {
-            get { return _currentUser; }
-            set
-            {
-                _currentUser = value;
-                RaisePropertyChanged("CurrentUser");
-            }
-        }
-        private string _crypto;
-        private readonly CoreApplicationView _coreApplicationView;
-        public INavigationService Navigation;
-        private string _newImagePath;
-        public ICommand SelectionCommand { get; private set; }
-        public ICommand EditClickCommand { get; private set; }
-        public ICommand TappedCommand { get; private set; }
-        public bool NeedUpdate;
-        private bool _canUdpate;
-        public bool CanUpdate
-        {
-            get { return _canUdpate; }
-            set
-            {
-                _canUdpate = value;
-                RaisePropertyChanged("CanUpdate");
-            }
-        }
-        private string _buttonContent;
-        public string ButtonContent
-        {
-            get { return _buttonContent; }
-            set
-            {
-                _buttonContent = value;
-                RaisePropertyChanged("ButtonContent");
-            }
-        }
-        #endregion
-
         #region Ctor
 
         [PreferredConstructor]
@@ -83,12 +40,60 @@ namespace SoonZik.ViewModel
 
         #endregion
 
+        #region Attribute
+
+        private User _currentUser;
+
+        public User CurrentUser
+        {
+            get { return _currentUser; }
+            set
+            {
+                _currentUser = value;
+                RaisePropertyChanged("CurrentUser");
+            }
+        }
+
+        private string _crypto;
+        private readonly CoreApplicationView _coreApplicationView;
+        public INavigationService Navigation;
+        private string _newImagePath;
+        public ICommand SelectionCommand { get; private set; }
+        public ICommand EditClickCommand { get; private set; }
+        public ICommand TappedCommand { get; private set; }
+        public bool NeedUpdate;
+        private bool _canUdpate;
+
+        public bool CanUpdate
+        {
+            get { return _canUdpate; }
+            set
+            {
+                _canUdpate = value;
+                RaisePropertyChanged("CanUpdate");
+            }
+        }
+
+        private string _buttonContent;
+
+        public string ButtonContent
+        {
+            get { return _buttonContent; }
+            set
+            {
+                _buttonContent = value;
+                RaisePropertyChanged("ButtonContent");
+            }
+        }
+
+        #endregion
+
         #region Method
 
         private void TappedCommandExecute()
         {
             _newImagePath = string.Empty;
-            FileOpenPicker filePicker = new FileOpenPicker();
+            var filePicker = new FileOpenPicker();
             filePicker.SuggestedStartLocation = PickerLocationId.PicturesLibrary;
             filePicker.ViewMode = PickerViewMode.Thumbnail;
 
@@ -105,14 +110,14 @@ namespace SoonZik.ViewModel
 
         private async void ViewActivated(CoreApplicationView sender, IActivatedEventArgs args1)
         {
-            FileOpenPickerContinuationEventArgs args = args1 as FileOpenPickerContinuationEventArgs;
+            var args = args1 as FileOpenPickerContinuationEventArgs;
 
             if (args != null)
             {
                 if (args.Files.Count == 0) return;
 
                 _coreApplicationView.Activated -= ViewActivated;
-                StorageFile storageFile = args.Files[0];
+                var storageFile = args.Files[0];
                 var stream = await storageFile.OpenAsync(FileAccessMode.Read);
                 var bitmapImage = new BitmapImage();
                 await bitmapImage.SetSourceAsync(stream);
@@ -153,14 +158,11 @@ namespace SoonZik.ViewModel
                 var test = tmp.Result;
                 if (test != null)
                 {
-                    CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
-                    {
-
-                    });
+                    CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () => { });
                 }
             });
         }
-        
+
         private void SelectionExecute()
         {
             if (Singleton.Instance().ItsMe)
@@ -171,7 +173,7 @@ namespace SoonZik.ViewModel
 
         private void EditInformationExecute()
         {
-            var loader = new Windows.ApplicationModel.Resources.ResourceLoader();
+            var loader = new ResourceLoader();
             if (!NeedUpdate)
             {
                 CanUpdate = true;
@@ -202,21 +204,19 @@ namespace SoonZik.ViewModel
                     if (key != null)
                     {
                         var stringEncrypt = KeyHelpers.GetUserKeyFromResponse(key);
-                        _crypto = EncriptSha256.EncriptStringToSha256(Singleton.Instance().CurrentUser.salt + stringEncrypt);
+                        _crypto =
+                            EncriptSha256.EncriptStringToSha256(Singleton.Instance().CurrentUser.salt + stringEncrypt);
                     }
                     var test = post.Update(CurrentUser, _crypto);
-                    test.ContinueWith(delegate(Task<string> tmp)
-                    {
-                        var res = tmp.Result;
-                    });
+                    test.ContinueWith(delegate(Task<string> tmp) { var res = tmp.Result; });
                 });
             }
             catch (Exception)
             {
                 new MessageDialog("Erreur lors de l'update").ShowAsync();
             }
-          
         }
+
         #endregion
     }
 }

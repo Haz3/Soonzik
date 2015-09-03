@@ -9,8 +9,6 @@
     DataContext="{StaticResource CartsViewModel}"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Grid>
-
-    </Grid>
+    <Grid />
 </Page>
 

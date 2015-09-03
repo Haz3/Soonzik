@@ -291,4 +291,7 @@
   <data name="Send.Content" xml:space="preserve">
     <value>Send</value>
   </data>
+  <data name="SocialPivot.Header" xml:space="preserve">
+    <value>Social</value>
+  </data>
 </root>

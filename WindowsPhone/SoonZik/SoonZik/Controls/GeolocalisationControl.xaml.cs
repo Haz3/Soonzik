@@ -4,12 +4,10 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
-using System.Windows.Input;
 using Windows.Devices.Geolocation;
 using Windows.Foundation;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Maps;
-using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using SoonZik.Annotations;
 using SoonZik.HttpRequest.Poco;
@@ -22,7 +20,7 @@ namespace SoonZik.Controls
     {
         public GeolocalisationControl()
         {
-            this.InitializeComponent();
+            InitializeComponent();
             DataContext = this;
 
             var task = Task.Run(async () => await InitVariable());
@@ -31,13 +29,23 @@ namespace SoonZik.Controls
             CreateListElement();
         }
 
-         #region Method
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        [NotifyPropertyChangedInvocator]
+        private void RaisePropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            var handler = PropertyChanged;
+            if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        #region Method
 
         private void CreateListElement()
         {
-            MapIcon mapIcon = new MapIcon();
+            var mapIcon = new MapIcon();
 
-            mapIcon.Location = new Geopoint(new BasicGeoposition() { Latitude = UserLocation.Latitude, Longitude = UserLocation.Longitude });
+            mapIcon.Location =
+                new Geopoint(new BasicGeoposition {Latitude = UserLocation.Latitude, Longitude = UserLocation.Longitude});
             mapIcon.NormalizedAnchorPoint = new Point(0.5, 1.0);
             mapIcon.Title = "Moi";
 
@@ -54,7 +62,7 @@ namespace SoonZik.Controls
             _myGeolocator = new Geolocator();
             var myGeoposition = await _myGeolocator.GetGeopositionAsync();
             UserLocation = myGeoposition.Coordinate;
-            
+
             TwoChecked = new RelayCommand(TwoCheckedExecute);
             FiveChecked = new RelayCommand(FiveCheckedExecute);
             TenChecked = new RelayCommand(TenCheckedExecute);
@@ -63,9 +71,9 @@ namespace SoonZik.Controls
         }
 
         #region Command
+
         private void UserTappedExecute()
         {
-
         }
 
         private void TwentyCheckedExecute()
@@ -94,8 +102,8 @@ namespace SoonZik.Controls
             FiveKmActivated = false;
             TenKmActivated = false;
             TwentyKmActivated = false;
-
         }
+
         #endregion
 
         #endregion
@@ -112,13 +120,13 @@ namespace SoonZik.Controls
                 _mapElements = value;
                 RaisePropertyChanged("MapElements");
             }
-    } 
+        }
 
         private List<User> _listUser;
 
         public List<User> ListUser
         {
-            get { return _listUser;}
+            get { return _listUser; }
             set
             {
                 _listUser = value;
@@ -149,6 +157,7 @@ namespace SoonZik.Controls
         }
 
         private bool _twoKmActivated;
+
         public bool TwoKmActivated
         {
             get { return _twoKmActivated; }
@@ -160,6 +169,7 @@ namespace SoonZik.Controls
         }
 
         private bool _fiveKmActivated;
+
         public bool FiveKmActivated
         {
             get { return _fiveKmActivated; }
@@ -169,8 +179,9 @@ namespace SoonZik.Controls
                 RaisePropertyChanged("FiveKmActivated");
             }
         }
-        
+
         private bool _tenKmActivated;
+
         public bool TenKmActivated
         {
             get { return _tenKmActivated; }
@@ -180,8 +191,9 @@ namespace SoonZik.Controls
                 RaisePropertyChanged("TenKmActivated");
             }
         }
-        
+
         private bool _twentyKmActivated;
+
         public bool TwentyKmActivated
         {
             get { return _twentyKmActivated; }
@@ -192,16 +204,6 @@ namespace SoonZik.Controls
             }
         }
 
-
         #endregion
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        [NotifyPropertyChangedInvocator]
-        private void RaisePropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            var handler = PropertyChanged;
-            if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
-        }
     }
 }

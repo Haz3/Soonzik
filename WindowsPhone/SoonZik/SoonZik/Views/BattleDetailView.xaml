@@ -12,58 +12,69 @@
 
     <Grid x:Name="GlobalGrid">
         <Grid.RowDefinitions>
-            <RowDefinition Height="250"/>
-            <RowDefinition Height="50"/>
-            <RowDefinition Height="80"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="250" />
+            <RowDefinition Height="50" />
+            <RowDefinition Height="80" />
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <Grid Grid.Row="0" Background="Transparent">
-            <Image Height="250" Source="{Binding CurrentBattle.artist_one.image}" HorizontalAlignment="Left"/>
-            <Image Height="250" Source="{Binding CurrentBattle.artist_two.image}" HorizontalAlignment="Right"/>
+            <Image Height="250" Source="{Binding CurrentBattle.artist_one.image}" HorizontalAlignment="Left" />
+            <Image Height="250" Source="{Binding CurrentBattle.artist_two.image}" HorizontalAlignment="Right" />
 
-            <Button HorizontalAlignment="Left" Height="80" Content="Vote" IsEnabled="{Binding CanVote}" Foreground="Black"
-                    Opacity="0.8" BorderThickness="1,1,1,1" Margin="20,0,0,0" Command="{Binding VoteArtisteOneCommand}"/>
-            <Button HorizontalAlignment="Right" Height="80" Content="Vote" IsEnabled="{Binding CanVote}" Foreground="Black"
-                    Opacity="0.8" BorderThickness="1,1,1,1" Margin="0,0,20,0" Command="{Binding VoteArtisteTwoCommand}"/>
+            <Button HorizontalAlignment="Left" Height="80" Content="Vote" IsEnabled="{Binding CanVote}"
+                    Foreground="Black"
+                    Opacity="0.8" BorderThickness="1,1,1,1" Margin="20,0,0,0" Command="{Binding VoteArtisteOneCommand}" />
+            <Button HorizontalAlignment="Right" Height="80" Content="Vote" IsEnabled="{Binding CanVote}"
+                    Foreground="Black"
+                    Opacity="0.8" BorderThickness="1,1,1,1" Margin="0,0,20,0" Command="{Binding VoteArtisteTwoCommand}" />
         </Grid>
         <Grid Grid.Row="1" Background="Transparent">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="15*"/>
-                <ColumnDefinition Width="15*"/>
+                <ColumnDefinition Width="15*" />
+                <ColumnDefinition Width="15*" />
             </Grid.ColumnDefinitions>
-            <TextBlock Grid.Column="0" Text="{Binding PourcentageVote1}" FontSize="40" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-            <TextBlock Grid.Column="1" Text="{Binding PourcentageVote2}" FontSize="40" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <TextBlock Grid.Column="0" Text="{Binding PourcentageVote1}" FontSize="40" HorizontalAlignment="Center"
+                       VerticalAlignment="Center" />
+            <TextBlock Grid.Column="1" Text="{Binding PourcentageVote2}" FontSize="40" HorizontalAlignment="Center"
+                       VerticalAlignment="Center" />
         </Grid>
         <Grid Grid.Row="2" Background="Transparent">
 
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="15*"/>
-                <ColumnDefinition Width="15*"/>
-                <ColumnDefinition Width="15*"/>
-                <ColumnDefinition Width="15*"/>
+                <ColumnDefinition Width="15*" />
+                <ColumnDefinition Width="15*" />
+                <ColumnDefinition Width="15*" />
+                <ColumnDefinition Width="15*" />
             </Grid.ColumnDefinitions>
-            <TextBlock Grid.Column="0" Text="{Binding JoursRestants, Mode=TwoWay}" FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-            <TextBlock Grid.Column="1" Text="{Binding HeuresRestantes, Mode=TwoWay}" FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-            <TextBlock Grid.Column="2" Text="{Binding MinutesRestantes, Mode=TwoWay}" FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-            <TextBlock Grid.Column="3" Text="{Binding SecondesRestantes, Mode=TwoWay}" FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <TextBlock Grid.Column="0" Text="{Binding JoursRestants, Mode=TwoWay}" FontSize="30"
+                       HorizontalAlignment="Center" VerticalAlignment="Center" />
+            <TextBlock Grid.Column="1" Text="{Binding HeuresRestantes, Mode=TwoWay}" FontSize="30"
+                       HorizontalAlignment="Center" VerticalAlignment="Center" />
+            <TextBlock Grid.Column="2" Text="{Binding MinutesRestantes, Mode=TwoWay}" FontSize="30"
+                       HorizontalAlignment="Center" VerticalAlignment="Center" />
+            <TextBlock Grid.Column="3" Text="{Binding SecondesRestantes, Mode=TwoWay}" FontSize="30"
+                       HorizontalAlignment="Center" VerticalAlignment="Center" />
         </Grid>
         <ScrollViewer Grid.Row="3">
             <Grid Background="Transparent">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="40"/>
-                    <RowDefinition Height="40"/>
-                    <RowDefinition Height="40"/>
-                    <RowDefinition Height="40"/>
-                    <RowDefinition Height="40"/>
+                    <RowDefinition Height="40" />
+                    <RowDefinition Height="40" />
+                    <RowDefinition Height="40" />
+                    <RowDefinition Height="40" />
+                    <RowDefinition Height="40" />
                 </Grid.RowDefinitions>
-                <TextBlock Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding Path=ArtistOne.username}" FontSize="20" TextWrapping="Wrap"/>
-                <TextBlock Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding Path=ArtistOne.email}" FontSize="20" TextWrapping="Wrap"/>
-                <TextBlock Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding Path=ArtistTwo.username}" FontSize="20" TextWrapping="Wrap"/>
-                <TextBlock Grid.Row="3" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding Path=ArtistTwo.email}" FontSize="20" TextWrapping="Wrap"/>
+                <TextBlock Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center"
+                           Text="{Binding Path=ArtistOne.username}" FontSize="20" TextWrapping="Wrap" />
+                <TextBlock Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center"
+                           Text="{Binding Path=ArtistOne.email}" FontSize="20" TextWrapping="Wrap" />
+                <TextBlock Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center"
+                           Text="{Binding Path=ArtistTwo.username}" FontSize="20" TextWrapping="Wrap" />
+                <TextBlock Grid.Row="3" VerticalAlignment="Center" HorizontalAlignment="Center"
+                           Text="{Binding Path=ArtistTwo.email}" FontSize="20" TextWrapping="Wrap" />
 
             </Grid>
         </ScrollViewer>
     </Grid>
 
 </Page>
-
