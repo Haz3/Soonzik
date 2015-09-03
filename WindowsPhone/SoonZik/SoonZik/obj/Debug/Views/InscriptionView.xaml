@@ -5,6 +5,8 @@
     xmlns:local="using:SoonZik.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
+    xmlns:core="using:Microsoft.Xaml.Interactions.Core"
     mc:Ignorable="d"
     DataContext="{StaticResource InscriptionViewModel}"
     Background="#424242">
@@ -42,60 +44,67 @@
                     <RowDefinition Height="60" />
                 </Grid.RowDefinitions>
                 <TextBox Grid.Row="0" InputScope="5" Text="{Binding NewUser.email, Mode=TwoWay}" Height="40"
-                         Background="Transparent" BorderThickness="0,0,0,0" Foreground="Aqua" x:Uid="Email"
+                         Background="Transparent" BorderThickness="0,0,0,0" Foreground="Black" x:Uid="Email"
                          PlaceholderText="" />
 
                 <PasswordBox Grid.Row="1" Password="{Binding Password, Mode=TwoWay}" Height="40"
-                             Background="Transparent" BorderThickness="0,0,0,0" Foreground="Aqua" x:Uid="Password"
-                             PlaceholderText="" />
+                             Background="Transparent" BorderThickness="0,0,0,0" Foreground="Black" x:Uid="Password"
+                             PlaceholderText="">
+                    <interactivity:Interaction.Behaviors>
+                        <core:EventTriggerBehavior EventName="LostFocus">
+                            <core:InvokeCommandAction Command="{Binding PasswordBoxCommand}" />
+                        </core:EventTriggerBehavior>
+                    </interactivity:Interaction.Behaviors>
+
+                </PasswordBox>
 
                 <TextBox Grid.Row="2" Text="{Binding NewUser.fname, Mode=TwoWay}" Height="40"
-                         Background="Transparent" BorderThickness="0,0,0,0" Foreground="Aqua" x:Uid="FirstName"
+                         Background="Transparent" BorderThickness="0,0,0,0" Foreground="Black" x:Uid="FirstName"
                          PlaceholderText="" />
 
                 <TextBox Grid.Row="3" Text="{Binding NewUser.lname, Mode=TwoWay}" Height="40"
-                         Background="Transparent" BorderThickness="0,0,0,0" Foreground="Aqua" x:Uid="LastName"
+                         Background="Transparent" BorderThickness="0,0,0,0" Foreground="Black" x:Uid="LastName"
                          PlaceholderText="" />
 
                 <DatePicker Grid.Row="4" Date="{Binding Birthday, Mode=TwoWay}" BorderBrush="Transparent" Height="60"
-                            Background="Transparent" VerticalAlignment="Center" Foreground="Aqua" />
+                            Background="Transparent" VerticalAlignment="Center" Foreground="Black" />
 
                 <TextBox Grid.Row="5" Text="{Binding NewUser.username, Mode=TwoWay}"
-                         Background="Transparent" BorderThickness="0,0,0,0" Foreground="Aqua" x:Uid="UserName"
+                         Background="Transparent" BorderThickness="0,0,0,0" Foreground="Black" x:Uid="UserName"
                          PlaceholderText="" />
 
                 <TextBox Grid.Row="6" InputScope="39" Text="{Binding NewUser.address.NumberStreet, Mode=TwoWay}"
                          Height="40"
-                         Background="Transparent" BorderThickness="0,0,0,0" Foreground="Aqua" x:Uid="NumberStreet"
+                         Background="Transparent" BorderThickness="0,0,0,0" Foreground="Black" x:Uid="NumberStreet"
                          PlaceholderText="" />
 
                 <TextBox Grid.Row="7" Text="{Binding NewUser.address.Street, Mode=TwoWay}" Height="40"
-                         Background="Transparent" BorderThickness="0,0,0,0" Foreground="Aqua" x:Uid="Street"
+                         Background="Transparent" BorderThickness="0,0,0,0" Foreground="Black" x:Uid="Street"
                          PlaceholderText="" />
 
                 <TextBox Grid.Row="8" Text="{Binding NewUser.address.Complement, Mode=TwoWay}" Height="40"
-                         Background="Transparent" BorderThickness="0,0,0,0" Foreground="Aqua" x:Uid="Complement"
+                         Background="Transparent" BorderThickness="0,0,0,0" Foreground="Black" x:Uid="Complement"
                          PlaceholderText="" />
 
                 <TextBox Grid.Row="9" Text="{Binding NewUser.address.City, Mode=TwoWay}" Height="40"
-                         Background="Transparent" BorderThickness="0,0,0,0" Foreground="Aqua" x:Uid="City"
+                         Background="Transparent" BorderThickness="0,0,0,0" Foreground="Black" x:Uid="City"
                          PlaceholderText="" />
 
                 <TextBox Grid.Row="10" Text="{Binding NewUser.address.Country, Mode=TwoWay}" Height="40"
-                         Background="Transparent" BorderThickness="0,0,0,0" Foreground="Aqua" x:Uid="Country"
+                         Background="Transparent" BorderThickness="0,0,0,0" Foreground="Black" x:Uid="Country"
                          PlaceholderText="" />
 
                 <TextBox Grid.Row="11" InputScope="39" Text="{Binding NewUser.address.Zipcode, Mode=TwoWay}"
                          Height="40"
-                         Background="Transparent" BorderThickness="0,0,0,0" Foreground="Aqua" x:Uid="ZipCode"
+                         Background="Transparent" BorderThickness="0,0,0,0" Foreground="Black" x:Uid="ZipCode"
                          PlaceholderText="" />
 
                 <TextBox Grid.Row="12" InputScope="32" Text="{Binding NewUser.phoneNumber, Mode=TwoWay}" Height="40"
-                         Background="Transparent" BorderThickness="0,0,0,0" Foreground="Aqua" x:Uid="Phone"
+                         Background="Transparent" BorderThickness="0,0,0,0" Foreground="Black" x:Uid="Phone"
                          PlaceholderText="" />
 
                 <TextBox Grid.Row="13" Text="{Binding NewUser.image, Mode=TwoWay}" Height="40"
-                         Background="Transparent" BorderThickness="0,0,0,0" Foreground="Aqua" x:Uid="Picture"
+                         Background="Transparent" BorderThickness="0,0,0,0" Foreground="Black" x:Uid="Picture"
                          PlaceholderText="" />
             </Grid>
 

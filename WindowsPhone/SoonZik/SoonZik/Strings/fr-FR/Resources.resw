@@ -151,13 +151,13 @@
     <value>Editer mes informations</value>
   </data>
   <data name="Email.PlaceholderText" xml:space="preserve">
-    <value>Email</value>
+    <value>Email*</value>
   </data>
   <data name="Explorer.Content" xml:space="preserve">
     <value>Explorer</value>
   </data>
   <data name="FirstName.PlaceholderText" xml:space="preserve">
-    <value>Prenom</value>
+    <value>Prenom*</value>
   </data>
   <data name="ForgotPassword.Content" xml:space="preserve">
     <value>Mot de passe oublier</value>
@@ -172,7 +172,7 @@
     <value>Genre(s)</value>
   </data>
   <data name="LastName.PlaceholderText" xml:space="preserve">
-    <value>Nom</value>
+    <value>Nom*</value>
   </data>
   <data name="LogIn.Content" xml:space="preserve">
     <value>Connexion</value>
@@ -202,7 +202,7 @@
     <value>Packs</value>
   </data>
   <data name="Password.PlaceholderText" xml:space="preserve">
-    <value>Mot de passe</value>
+    <value>Mot de passe*</value>
   </data>
   <data name="Phone.PlaceholderText" xml:space="preserve">
     <value>Telephone</value>
@@ -244,7 +244,7 @@
     <value>Utilisateur(s)</value>
   </data>
   <data name="UserName.PlaceholderText" xml:space="preserve">
-    <value>Pseudo</value>
+    <value>Pseudo*</value>
   </data>
   <data name="Validate.Content" xml:space="preserve">
     <value>Valider</value>
@@ -293,5 +293,11 @@
   </data>
   <data name="SocialPivot.Header" xml:space="preserve">
     <value>Social</value>
+  </data>
+  <data name="AddFriend" xml:space="preserve">
+    <value>Ajouter</value>
+  </data>
+  <data name="DelFriend" xml:space="preserve">
+    <value>Suprimer</value>
   </data>
 </root>

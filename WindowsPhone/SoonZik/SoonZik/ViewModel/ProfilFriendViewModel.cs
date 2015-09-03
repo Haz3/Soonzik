@@ -1,5 +1,7 @@
 ﻿using System.Windows.Input;
+using Windows.ApplicationModel.Resources;
 using Windows.Phone.UI.Input;
+using Windows.UI.Popups;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Ioc;
@@ -16,16 +18,30 @@ namespace SoonZik.ViewModel
         public ProfilFriendViewModel()
         {
             Navigation = new NavigationService();
-            //CurrentUser = Singleton.Instance().CurrentUser;
-            //HardwareButtons.BackPressed += HardwareButtonsOnBackPressed;
             SelectionCommand = new RelayCommand(SelectionExecute);
             AddCommand = new RelayCommand(AddFriendExecute);
-            //Navigation.GoBack();
+
+            CheckIfFriend();
         }
 
         #endregion
 
         #region Attribute
+
+        private bool _friend;
+
+        private string _buttonFriendText;
+
+        public string ButtonFriendText
+        {
+            get { return _buttonFriendText; }
+            set
+            {
+                _buttonFriendText = value;
+                RaisePropertyChanged("ButtonFriendText");
+            }
+
+        }
 
         public ICommand AddCommand { get; private set; }
 
@@ -63,9 +79,34 @@ namespace SoonZik.ViewModel
 
         #region Method
 
+        private void CheckIfFriend()
+        {
+            var loader = new ResourceLoader();
+            foreach (var friend in Singleton.Instance().CurrentUser.friends)
+            {
+                if (friend.username == UserFromButton.username)
+                {
+                    ButtonFriendText = loader.GetString("DelFriend");
+                    _friend = true;
+                }
+                else
+                {
+                    ButtonFriendText = loader.GetString("AddFriend");
+                    _friend = false;
+                }
+
+            }
+        }
+
         private void AddFriendExecute()
         {
-            AddDelFriendHelpers.GetUserKeyForFriend(CurrentUser.id.ToString());
+            if (CurrentUser != null)
+            {
+                AddDelFriendHelpers.GetUserKeyForFriend(CurrentUser.id.ToString(), _friend);
+                CheckIfFriend();
+            }
+            else
+                new MessageDialog("Erreur lors de la recuperation de l'id user").ShowAsync();
         }
 
         private void SelectionExecute()

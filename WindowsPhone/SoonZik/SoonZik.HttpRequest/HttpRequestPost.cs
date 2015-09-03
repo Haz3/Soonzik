@@ -39,7 +39,7 @@ namespace SoonZik.HttpRequest
                 "&user[language]=" + "fr" +
                 "&user[fname]=" + myUser.fname +
                 "&user[lname]=" + myUser.lname +
-                "&user[desciption]=" + myUser.description +
+                //"&user[description]=" + myUser.description +
                 "&user[phoneNumber]=" + myUser.phoneNumber +
 
                 "&address[numberStreet]=" + myUser.address.NumberStreet +

@@ -42,7 +42,7 @@
         <TextBlock x:Name="FirstNameUser" Grid.Row="0" Height="50" Foreground="White" HorizontalAlignment="Right"
                    VerticalAlignment="Top" Margin="0, 20, 20, 0"
                    Text="{Binding CurrentUser.username}" FontSize="23" />
-        <Button Grid.Row="0" VerticalAlignment="Bottom" HorizontalAlignment="Center" Content="Add"
+        <Button Grid.Row="0" VerticalAlignment="Bottom" HorizontalAlignment="Center" Content="{Binding ButtonFriendText}"
                 Command="{Binding AddCommand}" />
 
         <!-- Grid 1 -->

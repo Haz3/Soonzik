@@ -26,6 +26,19 @@ namespace SoonZik.Controls
             InitializeComponent();
             Navigation = new NavigationService();
             Friend = Id;
+
+            var request = new HttpRequestGet();
+
+            var test = request.GetObject(new User(), "users", Friend.ToString());
+            test.ContinueWith(delegate(Task<object> tmp)
+            {
+                var res = tmp.Result as User;
+                if (res != null)
+                {
+                    CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
+                        () => { ProfilFriendViewModel.UserFromButton = res; });
+                }
+            });
         }
 
         #endregion
@@ -49,19 +62,6 @@ namespace SoonZik.Controls
             //    Singleton.Instance().NewProfilUser = Friend;
             //    Singleton.Instance().ItsMe = false;
             //    Singleton.Instance().Charge();
-
-            var request = new HttpRequestGet();
-
-            var test = request.GetObject(new User(), "users", Friend.ToString());
-            test.ContinueWith(delegate(Task<object> tmp)
-            {
-                var res = tmp.Result as User;
-                if (res != null)
-                {
-                    CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
-                        () => { ProfilFriendViewModel.UserFromButton = res; });
-                }
-            });
             GlobalMenuControl.MyGrid.Children.Clear();
             GlobalMenuControl.MyGrid.Children.Add(new ProfilFriendView());
             FriendViewModel.MeaagePrompt.Hide();
@@ -69,21 +69,21 @@ namespace SoonZik.Controls
 
         private void DeleteContact(object sender, RoutedEventArgs e)
         {
-            var post = new HttpRequestPost();
-            var get = new HttpRequestGet();
+            AddDelFriendHelpers.GetUserKeyForFriend(Friend.ToString(), true);
+            //var post = new HttpRequestPost();
+            //var get = new HttpRequestGet();
 
-            var userKey = get.GetUserKey(Singleton.Instance().CurrentUser.id.ToString());
-            userKey.ContinueWith(delegate(Task<object> task)
-            {
-                var key = task.Result as string;
-                if (key != null)
-                {
-                    var stringEncrypt = KeyHelpers.GetUserKeyFromResponse(key);
-                    var cryptographic =
-                        EncriptSha256.EncriptStringToSha256(Singleton.Instance().CurrentUser.salt + stringEncrypt);
-                    DelFriend(post, cryptographic, get);
-                }
-            });
+            //var userKey = get.GetUserKey(Singleton.Instance().CurrentUser.id.ToString());
+            //userKey.ContinueWith(delegate(Task<object> task)
+            //{
+            //    var key = task.Result as string;
+            //    if (key != null)
+            //    {
+            //        var stringEncrypt = KeyHelpers.GetUserKeyFromResponse(key);
+            //        var cryptographic = EncriptSha256.EncriptStringToSha256(Singleton.Instance().CurrentUser.salt + stringEncrypt);
+            //        DelFriend(post, cryptographic, get);
+            //    }
+            //});
         }
 
         private void DelFriend(HttpRequestPost post, string cryptographic, HttpRequestGet get)
