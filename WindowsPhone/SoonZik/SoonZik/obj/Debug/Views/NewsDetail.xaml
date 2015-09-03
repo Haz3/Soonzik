@@ -16,14 +16,14 @@
         </Grid.RowDefinitions>
 
         <Grid Grid.Row="0">
-            <Image Height="100" VerticalAlignment="Top"/>
+            <Image Height="100" VerticalAlignment="Top" />
             <TextBlock Foreground="White" Text="{Binding NewsTitle}" VerticalAlignment="Bottom"
                        HorizontalAlignment="Center" FontSize="30" />
         </Grid>
         <Grid Grid.Row="1">
-            
-            <TextBlock Foreground="White" VerticalAlignment="Top" FontSize="15" Text="{Binding NewsContent}"></TextBlock>
-            
+
+            <TextBlock Foreground="White" VerticalAlignment="Top" FontSize="15" Text="{Binding NewsContent}" />
+
             <TextBlock Foreground="White" VerticalAlignment="Bottom" HorizontalAlignment="Left" FontSize="15"
                        Text="{Binding SelectNews.User.username}" />
             <TextBlock Foreground="White" VerticalAlignment="Bottom" HorizontalAlignment="Right" FontSize="15"

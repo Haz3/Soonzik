@@ -19,89 +19,12 @@ namespace SoonZik.ViewModel
 {
     public class PackViewModel : ViewModelBase
     {
-        #region attributes
-        private List<Album> _listAlbums;
-        private Album _selectedAlbum;
-        private Data _selectedData;
-        public ObservableCollection<Data> Datas { get; set; }
-
-        public ObservableCollection<Pack> CompleteListPack { get; set; }
-        public static Pack ThePack { get; set; }
-
-        private User _theArtiste;
-        public User TheArtiste
-        {
-            get { return _theArtiste; }
-            set
-            {
-                _theArtiste = value;
-                RaisePropertyChanged("TheArtiste");
-            }
-        }
-
-        public Data SelectedData
-        {
-            get { return _selectedData; }
-            set
-            {
-                _selectedData = value;
-                RaisePropertyChanged("SelectedData");
-            }
-        }
-        public Album SelectedAlbum
-        {
-            get { return _selectedAlbum; }
-            set
-            {
-                _selectedAlbum = value;
-                RaisePropertyChanged("SelectedAlbum");
-            }
-        }
-        public List<Album> ListAlbums
-        {
-            get { return _listAlbums; }
-            set
-            {
-                _listAlbums = value;
-                RaisePropertyChanged("ListAlbums");
-            }
-        }
-        public ICommand SelectionCommand { get; private set; }
-
-        public RelayCommand PackTappedCommand { get; private set; }
-        public RelayCommand AlbumTappedCommand { get; private set; }
-        public RelayCommand ArtistTappedCommand { get; private set; }
-        public RelayCommand BuyCommand { get; private set; }
-
-        private List<User> _listArtistes;
-
-        public List<User> ListArtistes
-        {
-            get { return _listArtistes; }
-            set
-            {
-                _listArtistes = value;
-                RaisePropertyChanged("ListArtistes");
-            }
-        }
-
-        private Pack _myPack;
-
-        public Pack MyPack
-        {
-            get { return _myPack;}
-            set
-            {
-                _myPack = value;
-                RaisePropertyChanged("MyPack");
-            }
-        }
-        #endregion
-
         #region ctor
+
         public PackViewModel()
         {
             #region DataTest
+
             var datas = new ObservableCollection<Data>
             {
                 new Data
@@ -135,6 +58,7 @@ namespace SoonZik.ViewModel
                     Title = "06"
                 }
             };
+
             #endregion
 
             ListArtistes = new List<User>();
@@ -152,11 +76,95 @@ namespace SoonZik.ViewModel
             }
         }
 
+        #endregion
+
+        #region attributes
+
+        private List<Album> _listAlbums;
+        private Album _selectedAlbum;
+        private Data _selectedData;
+        public ObservableCollection<Data> Datas { get; set; }
+
+        public ObservableCollection<Pack> CompleteListPack { get; set; }
+        public static Pack ThePack { get; set; }
+
+        private User _theArtiste;
+
+        public User TheArtiste
+        {
+            get { return _theArtiste; }
+            set
+            {
+                _theArtiste = value;
+                RaisePropertyChanged("TheArtiste");
+            }
+        }
+
+        public Data SelectedData
+        {
+            get { return _selectedData; }
+            set
+            {
+                _selectedData = value;
+                RaisePropertyChanged("SelectedData");
+            }
+        }
+
+        public Album SelectedAlbum
+        {
+            get { return _selectedAlbum; }
+            set
+            {
+                _selectedAlbum = value;
+                RaisePropertyChanged("SelectedAlbum");
+            }
+        }
+
+        public List<Album> ListAlbums
+        {
+            get { return _listAlbums; }
+            set
+            {
+                _listAlbums = value;
+                RaisePropertyChanged("ListAlbums");
+            }
+        }
+
+        public ICommand SelectionCommand { get; private set; }
+
+        public RelayCommand PackTappedCommand { get; private set; }
+        public RelayCommand AlbumTappedCommand { get; private set; }
+        public RelayCommand ArtistTappedCommand { get; private set; }
+        public RelayCommand BuyCommand { get; private set; }
+
+        private List<User> _listArtistes;
+
+        public List<User> ListArtistes
+        {
+            get { return _listArtistes; }
+            set
+            {
+                _listArtistes = value;
+                RaisePropertyChanged("ListArtistes");
+            }
+        }
+
+        private Pack _myPack;
+
+        public Pack MyPack
+        {
+            get { return _myPack; }
+            set
+            {
+                _myPack = value;
+                RaisePropertyChanged("MyPack");
+            }
+        }
 
         #endregion
 
-
         #region Method
+
         private void ExecuteBuyCommand()
         {
             if (ThePack != null)
@@ -170,7 +178,6 @@ namespace SoonZik.ViewModel
                 var loader = new ResourceLoader();
                 new MessageDialog(loader.GetString("PackError")).ShowAsync();
             }
-
         }
 
         private void SelectionExecute()

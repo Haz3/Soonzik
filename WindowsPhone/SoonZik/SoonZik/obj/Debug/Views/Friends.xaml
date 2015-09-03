@@ -26,11 +26,12 @@
         <DataTemplate x:Key="TweetTemplate">
             <Grid Width="350" Height="70">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="50"/>
-                    <RowDefinition Height="20"/>
+                    <RowDefinition Height="50" />
+                    <RowDefinition Height="20" />
                 </Grid.RowDefinitions>
-                <TextBlock Grid.Row="0" Text="{Binding Path=msg}" Foreground="White" FontSize="15"></TextBlock>
-                <TextBlock Grid.Row="1" Text="{Binding Path=user.username}" Foreground="White" FontSize="10" TextAlignment="Right" Margin="0,0,15,0"/>
+                <TextBlock Grid.Row="0" Text="{Binding Path=msg}" Foreground="White" FontSize="15" />
+                <TextBlock Grid.Row="1" Text="{Binding Path=user.username}" Foreground="White" FontSize="10"
+                           TextAlignment="Right" Margin="0,0,15,0" />
             </Grid>
         </DataTemplate>
 
@@ -73,16 +74,16 @@
 
     <Grid x:Name="ContentRoot">
         <Pivot x:Name="PivotGlobal" HeaderTemplate="{StaticResource SizeHeaderGlobalPivot}"
-                   Foreground="Transparent" RenderTransformOrigin="0.5,0.5" Style="{StaticResource PivotStyle1}"
-                   Margin="0,20,0,0">
+               Foreground="Transparent" RenderTransformOrigin="0.5,0.5" Style="{StaticResource PivotStyle1}"
+               Margin="0,20,0,0">
             <PivotItem x:Uid="Friend" Header="">
                 <SemanticZoom>
                     <SemanticZoom.ZoomedInView>
                         <ListView x:Name="ListView" IsHoldingEnabled="True"
-                          ItemsSource="{Binding Source={StaticResource AddressGroups}}"
-                          ItemTemplate="{StaticResource AddrBookItemTemplate}"
-                          ContinuumNavigationTransitionInfo.ExitElementContainer="True"
-                          SelectedItem="{Binding SelectedUser, Mode=TwoWay}">
+                                  ItemsSource="{Binding Source={StaticResource AddressGroups}}"
+                                  ItemTemplate="{StaticResource AddrBookItemTemplate}"
+                                  ContinuumNavigationTransitionInfo.ExitElementContainer="True"
+                                  SelectedItem="{Binding SelectedUser, Mode=TwoWay}">
                             <interactivity:Interaction.Behaviors>
                                 <core:EventTriggerBehavior EventName="Tapped">
                                     <core:InvokeCommandAction Command="{Binding TappedCommand}" />
@@ -90,23 +91,24 @@
                             </interactivity:Interaction.Behaviors>
 
                             <ListView.GroupStyle>
-                                <GroupStyle HidesIfEmpty="True" HeaderTemplate="{StaticResource AddrBookGroupHeaderTemplate}" />
+                                <GroupStyle HidesIfEmpty="True"
+                                            HeaderTemplate="{StaticResource AddrBookGroupHeaderTemplate}" />
                             </ListView.GroupStyle>
 
                         </ListView>
                     </SemanticZoom.ZoomedInView>
                     <SemanticZoom.ZoomedOutView>
                         <GridView Background="Black"
-                          ItemsSource="{Binding CollectionGroups, Source={StaticResource AddressGroups}}"
-                          ItemTemplate="{StaticResource AddrBookJumpTemplate}" />
+                                  ItemsSource="{Binding CollectionGroups, Source={StaticResource AddressGroups}}"
+                                  ItemTemplate="{StaticResource AddrBookJumpTemplate}" />
                     </SemanticZoom.ZoomedOutView>
                 </SemanticZoom>
             </PivotItem>
 
             <PivotItem x:Uid="Follow" Header="">
                 <ListBox Background="Transparent" x:Name="FollowListBox"
-                 ItemsSource="{Binding CurrentUser.follows}" ItemTemplate="{StaticResource UserTemplate}"
-                 SelectedItem="{Binding SelectedUser, Mode=TwoWay}">
+                         ItemsSource="{Binding CurrentUser.follows}" ItemTemplate="{StaticResource UserTemplate}"
+                         SelectedItem="{Binding SelectedUser, Mode=TwoWay}">
                     <interactivity:Interaction.Behaviors>
                         <core:EventTriggerBehavior EventName="SelectionChanged">
                             <core:InvokeCommandAction Command="{Binding FollowerCommand}" />
@@ -118,21 +120,23 @@
             <PivotItem x:Uid="Tweet" Header="">
                 <Grid>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="50"/>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="50" />
                     </Grid.RowDefinitions>
                     <ListBox Grid.Row="0" Background="Transparent" x:Name="ListBoxTweet"
-                 ItemsSource="{Binding ListTweets}" ItemTemplate="{StaticResource TweetTemplate}"
-                 SelectedItem="{Binding SelectedTweet, Mode=TwoWay}">
+                             ItemsSource="{Binding ListTweets}" ItemTemplate="{StaticResource TweetTemplate}"
+                             SelectedItem="{Binding SelectedTweet, Mode=TwoWay}">
                         <interactivity:Interaction.Behaviors>
                             <core:EventTriggerBehavior EventName="SelectionChanged">
                                 <core:InvokeCommandAction Command="{Binding TweetCommand}" />
                             </core:EventTriggerBehavior>
                         </interactivity:Interaction.Behaviors>
                     </ListBox>
-                    
-                    <TextBox Grid.Row="1" Width="200" HorizontalAlignment="Left" Margin="10,5,0,0" Text="{Binding TextTweet, Mode=TwoWay}"/>
-                    <Button x:Uid="Send" Content="" Grid.Row="1" HorizontalAlignment="Right" Margin="0,0,10,0" Command="{Binding SendTweet}"/>
+
+                    <TextBox Grid.Row="1" Width="200" HorizontalAlignment="Left" Margin="10,5,0,0"
+                             Text="{Binding TextTweet, Mode=TwoWay}" />
+                    <Button x:Uid="Send" Content="" Grid.Row="1" HorizontalAlignment="Right" Margin="0,0,10,0"
+                            Command="{Binding SendTweet}" />
                 </Grid>
             </PivotItem>
         </Pivot>

@@ -115,11 +115,11 @@ namespace SoonZik.ViewModel
             //}
         }
 
-        private void NetworkOnInternetConnectionChanged(object sender, InternetConnectionChangedEventArgs internetConnectionChangedEventArgs)
+        private void NetworkOnInternetConnectionChanged(object sender,
+            InternetConnectionChangedEventArgs internetConnectionChangedEventArgs)
         {
             if (!Network.IsConnected)
             {
-                return;
             }
         }
 
@@ -152,8 +152,12 @@ namespace SoonZik.ViewModel
                 {
                     var stringJson = JObject.Parse(res).SelectToken("content").ToString();
                     Singleton.Instance().CurrentUser = JsonConvert.DeserializeObject(stringJson, typeof (User)) as User;
-                    Singleton.Instance().CurrentUser.profilImage = new BitmapImage(new Uri("http://soonzikapi.herokuapp.com/assets/usersImage/avatars/" + Singleton.Instance().CurrentUser.image, UriKind.RelativeOrAbsolute));
-                        
+                    Singleton.Instance().CurrentUser.profilImage =
+                        new BitmapImage(
+                            new Uri(
+                                "http://soonzikapi.herokuapp.com/assets/usersImage/avatars/" +
+                                Singleton.Instance().CurrentUser.image, UriKind.RelativeOrAbsolute));
+
                     ServiceLocator.Current.GetInstance<FriendViewModel>().UpdateFriend();
                 }
                 catch (Exception e)

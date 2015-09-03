@@ -11,6 +11,17 @@ namespace SoonZik.ViewModel
 {
     public class InscriptionViewModel : ViewModelBase
     {
+        #region Ctor
+
+        public InscriptionViewModel()
+        {
+            ValidateCommand = new RelayCommand(ValidateExecute);
+            NewUser = new User();
+            NewUser.address = new Address();
+        }
+
+        #endregion
+
         #region Attribute
 
         private string _password;
@@ -54,18 +65,8 @@ namespace SoonZik.ViewModel
 
         #endregion
 
-        #region Ctor
-
-        public InscriptionViewModel()
-        {
-            ValidateCommand = new RelayCommand(ValidateExecute);
-            NewUser = new User();
-            NewUser.address = new Address();
-        }
-        
-        #endregion
-
         #region Method
+
         private void ValidateExecute()
         {
             if (EmailHelper.IsValidEmail(NewUser.email))
@@ -83,8 +84,9 @@ namespace SoonZik.ViewModel
         {
             var postRequest = new HttpRequestPost();
             var res = await postRequest.Save(NewUser, "", _password);
-            new MessageDialog("Content = " + res.ToString()).ShowAsync();
+            new MessageDialog("Content = " + res).ShowAsync();
         }
+
         #endregion
     }
 }

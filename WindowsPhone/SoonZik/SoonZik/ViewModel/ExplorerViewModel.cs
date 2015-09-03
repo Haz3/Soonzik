@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using Windows.ApplicationModel.Core;
@@ -118,7 +117,7 @@ namespace SoonZik.ViewModel
                     }
                 }
             });
-            
+
             var userKey = request.GetUserKey(Singleton.Instance().CurrentUser.id.ToString());
             userKey.ContinueWith(delegate(Task<object> task)
             {
@@ -127,7 +126,8 @@ namespace SoonZik.ViewModel
                 {
                     var stringEncrypt = KeyHelpers.GetUserKeyFromResponse(key);
                     _crypto = EncriptSha256.EncriptStringToSha256(Singleton.Instance().CurrentUser.salt + stringEncrypt);
-                    var listZik = request.getSuggest(new List<Music>(), _crypto, Singleton.Instance().CurrentUser.id.ToString());
+                    var listZik = request.getSuggest(new List<Music>(), _crypto,
+                        Singleton.Instance().CurrentUser.id.ToString());
                     listZik.ContinueWith(delegate(Task<object> tmp)
                     {
                         var test = tmp.Result as List<Music>;
@@ -135,15 +135,15 @@ namespace SoonZik.ViewModel
                         {
                             foreach (var item in test)
                             {
-                                CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () => { ListMusique.Add(item); });
+                                CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
+                                    () => { ListMusique.Add(item); });
                             }
                         }
                     });
-
                 }
             });
         }
-        
+
         private void MusiCommandExecute()
         {
             Singleton.Instance().SelectedMusicSingleton = SelectedMusic;

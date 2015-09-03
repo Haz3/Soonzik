@@ -114,7 +114,7 @@ namespace SoonZik.ViewModel
                 RaisePropertyChanged("NbrFollowers");
             }
         }
-        
+
         #endregion
 
         #region Method

@@ -11,6 +11,16 @@ namespace SoonZik.Controls
 {
     public sealed partial class MoreOptionPopUp : UserControl, INotifyPropertyChanged
     {
+        #region Ctor
+
+        public MoreOptionPopUp(Music theMusic)
+        {
+            InitializeComponent();
+            SelectedMusic = theMusic;
+        }
+
+        #endregion
+
         #region Attribute
 
         public static readonly DependencyProperty MusicProperty = DependencyProperty.Register(
@@ -21,18 +31,11 @@ namespace SoonZik.Controls
             get { return (Music) GetValue(MusicProperty); }
             set { SetValue(MusicProperty, value); }
         }
-        #endregion
 
-        #region Ctor
-        public MoreOptionPopUp(Music theMusic)
-        {
-            InitializeComponent();
-            SelectedMusic = theMusic;
-        }
         #endregion
-
 
         #region INotifyPropertyChange
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         [NotifyPropertyChangedInvocator]
@@ -41,6 +44,7 @@ namespace SoonZik.Controls
             var handler = PropertyChanged;
             if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
         }
+
         #endregion
     }
 }

@@ -23,7 +23,34 @@ namespace SoonZik.ViewModel
 {
     public class FriendViewModel : ViewModelBase
     {
+        #region Ctor
+
+        public FriendViewModel()
+        {
+            FollowerCommand = new RelayCommand(FollowerCommandExecute);
+            TweetCommand = new RelayCommand(TweetCommandExecute);
+            TappedCommand = new RelayCommand(Execute);
+            LoadedCommand = new RelayCommand(UpdateFriend);
+            SendTweet = new RelayCommand(SendTweetExecute);
+
+            Sources = new ObservableCollection<User>();
+            ItemSource = new ObservableCollection<AlphaKeyGroups<User>>();
+            CurrentUser = Singleton.Instance().CurrentUser;
+
+            if (_localSettings != null && (string) _localSettings.Values["SoonZikAlreadyConnect"] == "yes")
+            {
+                Sources = Singleton.Instance().CurrentUser.friends;
+                ItemSource = AlphaKeyGroups<User>.CreateGroups(Sources, CultureInfo.CurrentUICulture, s => s.username,
+                    true);
+            }
+
+            LoadTweet();
+        }
+
+        #endregion
+
         #region Method
+
         private void Execute()
         {
             MeaagePrompt = new MessagePrompt
@@ -50,7 +77,6 @@ namespace SoonZik.ViewModel
 
         private void TweetCommandExecute()
         {
-
         }
 
         private void SendTweetExecute()
@@ -66,7 +92,8 @@ namespace SoonZik.ViewModel
                     if (key != null)
                     {
                         var stringEncrypt = KeyHelpers.GetUserKeyFromResponse(key);
-                        _crypto = EncriptSha256.EncriptStringToSha256(Singleton.Instance().CurrentUser.salt + stringEncrypt);
+                        _crypto =
+                            EncriptSha256.EncriptStringToSha256(Singleton.Instance().CurrentUser.salt + stringEncrypt);
                     }
                     var test = post.SendTweet(TextTweet, CurrentUser, _crypto);
                     test.ContinueWith(delegate(Task<string> tmp)
@@ -74,7 +101,8 @@ namespace SoonZik.ViewModel
                         var res = tmp.Result;
                         if (res != null)
                         {
-                            CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, LoadTweet);
+                            CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
+                                LoadTweet);
                         }
                     });
                 });
@@ -97,18 +125,17 @@ namespace SoonZik.ViewModel
                 {
                     foreach (var item in res)
                     {
-                        CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
-                        {
-                            ListTweets.Add(item);
-                        });
+                        CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
+                            () => { ListTweets.Add(item); });
                     }
                 }
             });
-
         }
+
         #endregion
 
         #region Attribute
+
         public ICommand FollowerCommand { get; private set; }
         public ICommand TweetCommand { get; private set; }
         public ICommand LoadedCommand { get; private set; }
@@ -116,6 +143,7 @@ namespace SoonZik.ViewModel
         private readonly ApplicationDataContainer _localSettings = ApplicationData.Current.LocalSettings;
         public static MessagePrompt MeaagePrompt { get; set; }
         private ObservableCollection<User> _sources;
+
         public ObservableCollection<User> Sources
         {
             get { return _sources; }
@@ -125,7 +153,9 @@ namespace SoonZik.ViewModel
                 RaisePropertyChanged("Sources");
             }
         }
+
         private ObservableCollection<AlphaKeyGroups<User>> _itemSource;
+
         public ObservableCollection<AlphaKeyGroups<User>> ItemSource
         {
             get { return _itemSource; }
@@ -135,7 +165,9 @@ namespace SoonZik.ViewModel
                 RaisePropertyChanged("ItemSource");
             }
         }
+
         private ObservableCollection<Tweets> _listTweets;
+
         public ObservableCollection<Tweets> ListTweets
         {
             get { return _listTweets; }
@@ -145,8 +177,10 @@ namespace SoonZik.ViewModel
                 RaisePropertyChanged("ListTweets");
             }
         }
+
         public RelayCommand TappedCommand { get; private set; }
         private User _selectedUser;
+
         public User SelectedUser
         {
             get { return _selectedUser; }
@@ -156,7 +190,9 @@ namespace SoonZik.ViewModel
                 RaisePropertyChanged("SelectedUser");
             }
         }
+
         private User _currentUser;
+
         public User CurrentUser
         {
             get { return _currentUser; }
@@ -166,7 +202,9 @@ namespace SoonZik.ViewModel
                 RaisePropertyChanged("CurrentUser");
             }
         }
+
         private Tweets _selectedTweet;
+
         public Tweets SelectedTweet
         {
             get { return _selectedTweet; }
@@ -176,7 +214,9 @@ namespace SoonZik.ViewModel
                 RaisePropertyChanged("SelectedTweet");
             }
         }
+
         private string _textTweet;
+
         public string TextTweet
         {
             get { return _textTweet; }
@@ -188,31 +228,6 @@ namespace SoonZik.ViewModel
         }
 
         private string _crypto;
-        #endregion
-
-        #region Ctor
-
-        public FriendViewModel()
-        {
-            FollowerCommand = new RelayCommand(FollowerCommandExecute);
-            TweetCommand = new RelayCommand(TweetCommandExecute);
-            TappedCommand = new RelayCommand(Execute);
-            LoadedCommand = new RelayCommand(UpdateFriend);
-            SendTweet = new RelayCommand(SendTweetExecute);
-
-            Sources = new ObservableCollection<User>();
-            ItemSource = new ObservableCollection<AlphaKeyGroups<User>>();
-            CurrentUser = Singleton.Instance().CurrentUser;
-
-            if (_localSettings != null && (string)_localSettings.Values["SoonZikAlreadyConnect"] == "yes")
-            {
-                Sources = Singleton.Instance().CurrentUser.friends;
-                ItemSource = AlphaKeyGroups<User>.CreateGroups(Sources, CultureInfo.CurrentUICulture, s => s.username,
-                    true);
-            }
-
-            LoadTweet();
-        }
 
         #endregion
     }

@@ -19,7 +19,7 @@
                 <TextBlock Text="{Binding Path=content}" Foreground="White" FontSize="15" />
             </StackPanel>
         </DataTemplate>
-       
+
     </Page.Resources>
 
     <interactivity:Interaction.Behaviors>
@@ -41,10 +41,9 @@
                     <TextBlock x:Name="ArtistNameList" Text="{Binding Path=user.Username}" FontSize="15"
                                VerticalAlignment="Bottom" Margin="20,0,0,10" />
 
-                    <Image x:ConnectionId='2' x:Name="MoreOption" Source="../Resources/Icones/menu.png" Height="30"                             
-                           VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,20,0">
-
-                    </Image>
+                    <Image x:ConnectionId='2' x:Name="MoreOption" Source="../Resources/Icones/menu.png" Height="30"
+                                                       
+                           VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,20,0" />
                 </Grid>
             </DataTemplate>
         </Grid.Resources>
@@ -62,26 +61,29 @@
         </Grid>
 
         <Pivot Grid.Row="1" x:Name="PivotGlobal" HeaderTemplate="{StaticResource SizeHeaderGlobalPivot}"
-                   Foreground="Transparent" RenderTransformOrigin="0.5,0.5" Style="{StaticResource PivotStyle1}"
-                   Margin="0,20,0,0">
+               Foreground="Transparent" RenderTransformOrigin="0.5,0.5" Style="{StaticResource PivotStyle1}"
+               Margin="0,20,0,0">
             <PivotItem x:Uid="MusicPivot" Header="">
-                <ListBox Background="Transparent" Grid.Row="1" x:Name="MusicListView" ItemsSource="{Binding ListMusics}"
-                  ItemTemplate="{StaticResource MusicTemplate}" SelectedItem="{Binding SelectedMusic, Mode=TwoWay}"/>
+                <ListBox Background="Transparent" Grid.Row="1" x:Name="MusicListView"
+                         ItemsSource="{Binding ListMusics}"
+                         ItemTemplate="{StaticResource MusicTemplate}"
+                         SelectedItem="{Binding SelectedMusic, Mode=TwoWay}" />
             </PivotItem>
 
             <PivotItem x:Uid="SocialPivot" Header="">
                 <Grid>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="40"/>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="40" />
                     </Grid.RowDefinitions>
                     <ScrollViewer Grid.Row="0">
                         <ListBox Grid.Row="0" Background="Transparent" x:Name="FollowListBox"
-                        ItemsSource="{Binding ListCommAlbum}" ItemTemplate="{StaticResource ComTemplate}">
-                        </ListBox>
+                                 ItemsSource="{Binding ListCommAlbum}" ItemTemplate="{StaticResource ComTemplate}" />
                     </ScrollViewer>
-                    <TextBox Grid.Row="1" Width="200" HorizontalAlignment="Left" Margin="10,0,0,0" Text="{Binding TextComment, Mode=TwoWay}"/>
-                    <Button x:Uid="Send" Content="" Grid.Row="1" HorizontalAlignment="Right" Margin="0,0,10,0" Command="{Binding SendComment}"/>
+                    <TextBox Grid.Row="1" Width="200" HorizontalAlignment="Left" Margin="10,0,0,0"
+                             Text="{Binding TextComment, Mode=TwoWay}" />
+                    <Button x:Uid="Send" Content="" Grid.Row="1" HorizontalAlignment="Right" Margin="0,0,10,0"
+                            Command="{Binding SendComment}" />
                 </Grid>
             </PivotItem>
         </Pivot>

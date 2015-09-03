@@ -6,7 +6,6 @@ using System.Windows.Input;
 using Windows.ApplicationModel.Core;
 using Windows.UI.Core;
 using Windows.UI.Popups;
-using Windows.UI.StartScreen;
 using Windows.UI.Xaml;
 using Coding4Fun.Toolkit.Controls;
 using GalaSoft.MvvmLight;
@@ -86,16 +85,14 @@ namespace SoonZik.ViewModel
 
         public Music SelectedMusic
         {
-            get
-            {
-                return _selectedMusic;
-            }
+            get { return _selectedMusic; }
             set
             {
                 _selectedMusic = value;
                 RaisePropertyChanged("SelectedMusic");
             }
         }
+
         public MessagePrompt MessagePrompt { get; set; }
         private RelayCommand _itemClickCommand;
 
@@ -108,7 +105,7 @@ namespace SoonZik.ViewModel
                 RaisePropertyChanged("ItemClickCommand");
             }
         }
-        
+
         public ICommand SelectionCommand { get; private set; }
         public ICommand MoreOptionOnTapped { get; set; }
         public ICommand SendComment { get; private set; }
@@ -118,7 +115,7 @@ namespace SoonZik.ViewModel
 
         public string TextComment
         {
-            get { return _textComment;}
+            get { return _textComment; }
             set
             {
                 _textComment = value;
@@ -139,6 +136,7 @@ namespace SoonZik.ViewModel
         }
 
         private string _crypto;
+
         #endregion
 
         #region Method
@@ -173,15 +171,17 @@ namespace SoonZik.ViewModel
                     if (key != null)
                     {
                         var stringEncrypt = KeyHelpers.GetUserKeyFromResponse(key);
-                        _crypto = EncriptSha256.EncriptStringToSha256(Singleton.Instance().CurrentUser.salt + stringEncrypt);
+                        _crypto =
+                            EncriptSha256.EncriptStringToSha256(Singleton.Instance().CurrentUser.salt + stringEncrypt);
                     }
-                    var test = post.SendComment(TextComment, TheAlbum,_crypto ,Singleton.Instance().CurrentUser);
+                    var test = post.SendComment(TextComment, TheAlbum, _crypto, Singleton.Instance().CurrentUser);
                     test.ContinueWith(delegate(Task<string> tmp)
                     {
                         var res = tmp.Result;
                         if (res != null)
                         {
-                            CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, LoadComment);
+                            CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
+                                LoadComment);
                         }
                     });
                 });
@@ -232,9 +232,9 @@ namespace SoonZik.ViewModel
         private void LoadComment()
         {
             TextComment = "";
-            var request = new HttpRequestGet(); 
+            var request = new HttpRequestGet();
             ListCommAlbum = new ObservableCollection<Comments>();
-            var elem = "albums/" + TheAlbum.id.ToString() + "/comments";
+            var elem = "albums/" + TheAlbum.id + "/comments";
             var listCom = request.GetListObject(new List<Comments>(), elem);
             listCom.ContinueWith(delegate(Task<object> tmp)
             {
@@ -251,6 +251,7 @@ namespace SoonZik.ViewModel
                 }
             });
         }
+
         #endregion
     }
 }

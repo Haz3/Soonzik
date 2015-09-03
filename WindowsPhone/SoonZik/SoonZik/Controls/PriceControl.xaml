@@ -6,27 +6,30 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
-    
+
     <Grid Background="#424242">
         <Grid.RowDefinitions>
-            <RowDefinition Height="80"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="60"/>
+            <RowDefinition Height="80" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="60" />
         </Grid.RowDefinitions>
-        
-        <TextBlock Grid.Row="0" x:Uid="Price" Text="" FontSize="25" Height="30" Width="60" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="40,40,0,0"/>
-        <TextBox Grid.Row="0" x:Name="PriceTextBox" Height="30" Width="40" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="140,40,0,0"></TextBox>
-        
-        <TextBlock Grid.Row="1" VerticalAlignment="Top" x:Uid="Artist" Text="" FontSize="25" Margin="0,80,0,0"/>
-        <Slider GotFocus="ArtistSlider_OnGotFocus" x:Name="ArtistSlider" Grid.Row="1" VerticalAlignment="Top" Margin="0,100,0,0" Width="300" />
 
-        <TextBlock Grid.Row="1" VerticalAlignment="Center" x:Uid="Association" Text="" FontSize="25" Margin="0,0,0,80"/>
+        <TextBlock Grid.Row="0" x:Uid="Price" Text="" FontSize="25" Height="30" Width="60" VerticalAlignment="Top"
+                   HorizontalAlignment="Left" Margin="40,40,0,0" />
+        <TextBox Grid.Row="0" x:Name="PriceTextBox" Height="30" Width="40" VerticalAlignment="Top"
+                 HorizontalAlignment="Left" Margin="140,40,0,0" />
+
+        <TextBlock Grid.Row="1" VerticalAlignment="Top" x:Uid="Artist" Text="" FontSize="25" Margin="0,80,0,0" />
+        <Slider GotFocus="ArtistSlider_OnGotFocus" x:Name="ArtistSlider" Grid.Row="1" VerticalAlignment="Top"
+                Margin="0,100,0,0" Width="300" />
+
+        <TextBlock Grid.Row="1" VerticalAlignment="Center" x:Uid="Association" Text="" FontSize="25" Margin="0,0,0,80" />
         <Slider x:Name="AssociationSlider" Grid.Row="1" VerticalAlignment="Center" Width="300" />
 
-        <TextBlock Grid.Row="1" VerticalAlignment="Bottom" x:Uid="SoonZik" Text="" FontSize="25" Margin="0,0,0,150"/>
-        <Slider x:Name="SoonZikSlider" Grid.Row="1"  VerticalAlignment="Bottom" Margin="0,0,0,100" Width="300" />
-        
-        <Button x:Uid="GoToCard" Content="" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        <TextBlock Grid.Row="1" VerticalAlignment="Bottom" x:Uid="SoonZik" Text="" FontSize="25" Margin="0,0,0,150" />
+        <Slider x:Name="SoonZikSlider" Grid.Row="1" VerticalAlignment="Bottom" Margin="0,0,0,100" Width="300" />
+
+        <Button x:Uid="GoToCard" Content="" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center" />
     </Grid>
-    
+
 </UserControl>

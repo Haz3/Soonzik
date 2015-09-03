@@ -25,7 +25,6 @@ namespace SoonZik.ViewModel
 
         #endregion
 
-
         #region Attribute
 
         public ICommand AddCommand { get; private set; }

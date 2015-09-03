@@ -2,7 +2,6 @@
 {
     public class CartsViewModel
     {
-
         #region Attributes
 
         #endregion
