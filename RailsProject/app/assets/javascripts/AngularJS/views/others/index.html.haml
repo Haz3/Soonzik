@@ -32,12 +32,13 @@
       .small-12.medium-4.columns{ "ng-if" => "user != false" }
         %loading{ "ng-if" => "loadingRightSide == true" }
         .contentRightSide.userProfile{ "ng-if" => "loadingRightSide == false" }
+          %h3 Tweets
           .btnGroup
             .button.tiny{ "ng-click" => "selectFlux()" } Flux
             .button.tiny{ "ng-click" => "selectInteraction()" } Interactions
           .tab_flux{ "ng-show" => "tab == 0" }
-            %p{ "ng-if" => "tweets.length == 0" } No tweets to display
             .sweet.tweets{ "on-scroll" => "reloadTweet()", "scroll-position" => "'bottom'" }
+              %p{ "ng-if" => "tweets.length == 0" } No tweets to display
               .sweetContainer.tweet.clearfix{ "ng-repeat" => "tweet in tweets" }
                 .small-1.columns
                   %a{ href: "/users/{{tweet.user.id}}" }
@@ -51,8 +52,8 @@
                     %span.pointer{ "ng-click" => "comment(tweet.user.username)" } Answer
               %loading{ "ng-if" => "loading_tweet", "loading-type" => "'square'" }
           .tab_my_talk{ "ng-show" => "tab != 0" }
-            %p{ "ng-if" => "otherTweets.length == 0" } No tweets to display
             .sweet.tweets{ "on-scroll" => "reloadPersonalTweet()", "scroll-position" => "'bottom'" }
+              %p{ "ng-if" => "otherTweets.length == 0" } No tweets to display
               .sweetContainer.tweet.clearfix{ "ng-repeat" => "tweet in otherTweets" }
                 .small-1.columns
                   %img{ "ng-src" => "{{ '/assets/usersImage/avatars/' + tweet.user.image }}" }
@@ -72,7 +73,14 @@
                 %i.fi-arrow-right
           %span {{ 140 - tweet.input.length }} {{ labels.DISPLAY_USER_TWEETS_CHARACTERS_LABEL }}
           %hr
-          %p Suggestion
+          .suggestions
+            %h3 Suggestions
+            .music.clearfix{ "ng-repeat" => "suggestion in suggestions" }
+              %music.small-2.columns{ "music-object" => "suggestion" }
+                %i.fi-play
+              .small-10.columns
+                %a{ href: "/albums/{{ suggestion.album.id }}" }
+                  {{ suggestion.title }}
     .row
       .divider
       %h3.subheader.left

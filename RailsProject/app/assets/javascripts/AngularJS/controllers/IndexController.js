@@ -20,6 +20,7 @@ SoonzikApp.controller('IndexCtrl', ['$scope', 'SecureAuth', 'HTTPService', '$tim
 		'medium-8': true
 	}
 	$scope.tab = 0;
+	$scope.suggestions = [];
 
 	/*
 	**	Fonction d'init de foundation.
@@ -144,14 +145,19 @@ SoonzikApp.controller('IndexCtrl', ['$scope', 'SecureAuth', 'HTTPService', '$tim
 			console.log("No News Available");
 		});
 
+		// Load the right column
+
 		if ($scope.user != false) {
 			SecureAuth.securedTransaction(function(key, id) {
+				// Get the tweets of your follows
 				HTTPService.getFlux([{ key: "secureKey", value: key }, { key: "user_id", value: id }]).then(function(response) {
 					$scope.tweets = response.data.content;
 
 					var paramsTweet = [
 						{ key: encodeURIComponent("attribute[msg]"), value: encodeURIComponent("%" + $scope.user.username + "%") }
 					];
+
+					// Find the tweet who speak to you
 					HTTPService.findTweet(paramsTweet).then(function(response) {
 						tmp_tweets = response.data.content;
 						// Loop backward to splice inside
@@ -161,16 +167,32 @@ SoonzikApp.controller('IndexCtrl', ['$scope', 'SecureAuth', 'HTTPService', '$tim
 							}
 						}
 						$scope.otherTweets = tmp_tweets;
-						$scope.loadingRightSide = false;
+
+						// Get the suggestion
+						SecureAuth.securedTransaction(function(key, id) {
+							HTTPService.getSuggestion([{ key: "secureKey", value: key }, { key: "user_id", value: id }]).then(function(response) {
+								$scope.suggestions = response.data.content;
+								$scope.loadingRightSide = false;
+							}, function(error) {
+
+							});
+							/*------ end suggestion ------*/
+						}, function(error) {
+
+						});
+						/*------ end secured transaction ------*/
 					}, function(error) {
 						NotificationService.error("");
 					});
+					/*------ end find tweet ------*/
 				}, function(error) {
 					NotificationService.error("pb flux")
 				});
+				/*----- end get flux -------*/
 			}, function(error) {
 				NotificationService.error("pb flux")
 			});
+			/*------ end secured transaction ------*/
 		}
 	}
 
