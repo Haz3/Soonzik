@@ -87,7 +87,7 @@
         Battle en Cours
       %h3.subheader.right
         %a{:href => "/battles"} Voir Tout
-      .large-block-grid-4.battle
+      .large-block-grid-4.battle{ "ng-if" => "battle != false" }
         %hr
         .clearfix.battleLine
           .medium-4.columns
@@ -121,7 +121,6 @@
                 %li{ "ng-repeat" => "people in randomVote" }
                   %a{ href: "/users/{{ people.id }}" }
                     %img{ "ng-src" => "{{ '/assets/usersImage/avatars/' + people.image }}" }
-
           .medium-4.columns
             %h4
               %a{ href: "/users/{{ battle.artist_two.id }}" } {{ battle.artist_two.username }}
@@ -144,3 +143,4 @@
                     {{ topFiveTwo.music.price }} $
             %h5{ "ng-if" => "battle.artist_two.topFive.length == 0" }
               {{ labels.DISPLAY_BATTLE_NO_MUSIC_LABEL }}
+      %p Currently no battle

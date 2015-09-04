@@ -10,6 +10,7 @@ SoonzikApp.controller('IndexCtrl', ['$scope', 'SecureAuth', 'HTTPService', '$tim
 		{ value: 0, label: "" }
 	];
 	$scope.user = false;
+	$scope.battle = false;
 	$scope.voteCurrentUser = false;
 	$scope.tweets = [];
 	$scope.tweet = {
@@ -50,7 +51,11 @@ SoonzikApp.controller('IndexCtrl', ['$scope', 'SecureAuth', 'HTTPService', '$tim
 		/*
 		**	Recupere les 3 dernieres news pour le slider.
 		*/
-		HTTPService.findNews([{ key: "order_by_desc[]", value: "date", limit: 4}]).then(function(news) {
+		var parametersNews = [
+			{ key: "limit", value: 4 },
+			{ key: "order_by_desc[]", value: "date" }
+		];
+		HTTPService.findNews(parametersNews).then(function(news) {
 			$scope.news = news.data.content;
 
 			/*
@@ -59,7 +64,7 @@ SoonzikApp.controller('IndexCtrl', ['$scope', 'SecureAuth', 'HTTPService', '$tim
 
 			var parameters = [
 				{ key: "limit", value: 2 },
-				{ key: "order_by_asc[]", value: "created_at" }
+				{ key: "order_by_desc[]", value: "created_at" }
 			];
 
 			HTTPService.findPacks(parameters).then(function (packs) {
