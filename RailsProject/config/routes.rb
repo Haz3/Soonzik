@@ -190,7 +190,7 @@ Rails.application.routes.draw do
 
   resources :albums, only: [:show]
   resources :battles, only: [:index, :show]
-  resources :carts
+  get '/carts/my_cart' => 'carts#index'
   resources :concerts, only: [:index]
   resources :feedbacks, only: [:new, :create]
   resources :gifts

@@ -28,11 +28,6 @@ SoonzikApp.directive('battle', [function() {
 			'battleValues': '='
 		},
 		link: function ($scope, $element, attr) {
-			var values = [
-			    {value: 700, label: 'foo'},
-			    {value: 500, label: 'A really really long label'}
-			  ];
-
 			$(window).resize(function() {
 				$element.html("");
       	drawMyDonut($element, $scope.battleValues);
