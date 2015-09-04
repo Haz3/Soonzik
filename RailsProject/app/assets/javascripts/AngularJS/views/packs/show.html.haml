@@ -13,14 +13,14 @@
               %p.text-center
                 {{ album.title }}
             %a{:href => "http://lvh.me:3000/albums/ {{ album.id }}"}
-              %img{"src" => "/assets/pack1.jpg"}
+              %img{"src" => "albums/{{ album.image }}"}
             .divider
             Artiste : {{ album.user.username }}
             %br
             Sortie : {{ album.yearProd }}
       .row
         .large-6.columns
-          .panel.left
+          .panel.left{"ng-init" => "managePrice()"}
             .large-9.columns
               Artiste
               .range-slider.round{"data-options" => "display-selector: #priceArtist; start:0; end:100; initial: 70", "data-slider" => ""}
@@ -28,7 +28,7 @@
                 %span.range-slider-active-segment
             .small-3.columns
               %br
-              %input#priceArtist{:type => "number", "value" => "70"}
+              %input#priceArtist{:type => "number", "value" => "{{ artistPercentage }}" }
             .large-9.columns
               Associations
               .range-slider.round{"data-options" => "display-selector: #priceAsso; start:0; end:100; initial: 20", "data-slider" => ""}
@@ -36,7 +36,7 @@
                 %span.range-slider-active-segment
             .small-3.columns
               %br
-              %input#priceAsso{:type => "number", "value" => "20"}
+              %input#priceAsso{:type => "number", "value" => "{{ associationPercentage }}" }
             .large-9.columns
               Développeur
               .range-slider.round{"data-options" => "display-selector: #priceDev; start:0; end:100; initial: 10", "data-slider" => ""}
@@ -44,32 +44,16 @@
                 %span.range-slider-active-segment
             .small-3.columns
               %br
-              %input#priceDev{:type => "number", "value" => "10"}
+              %input#priceDev{:type => "number", "value" => "{{ websitePercentage }}" }
             .large-4.columns
               .divider
-              Total : 
+              Total : {{ priceMini }}
         .large-6.columns
           .panel.right
             Infos concernant le prix, ou va l'argent.
+        
+        //Albums + song
+        
         .large-12.columns
           .button.expand.radius.success
-            %a{"data-reveal-id" => "addToCart", :href => "#"} Ajouter au Panier
-            #addToCart.reveal-modal{"aria-hidden" => "true", "aria-labelledby" => "modalTitle", "data-reveal" => "", :role => "dialog"}
-              %h2#modalTitle ET HOP ! C'EST DANS VOTRE PANIER
-              %h3.center {{ thisPack.title }}
-              .ul.large-block-grid-4.centered.columns
-                %li{"ng-repeat" => "album in thisPack.albums"}
-                  .panel
-                    %h3.subheader
-                      %p.large-text-center 
-                        {{ album.title }}
-                    %a{:href => "http://lvh.me:3000/albums/ {{ album.id }}"}
-                      %img{"src" => "/assets/pack1.jpg"}
-                    .divider
-                    Artiste : {{ album.user.username }}
-                    %br
-                    Sortie : {{ album.yearProd }}
-              %a.close-reveal-modal{"aria-label" => "Close"} ×
-              %p
-                %a.close-reveal-modal.my-modal Continuer mes achats
-              %a.close-reveal-modal.my-modal{:href => "http://lvh.me:3000/carts"} Voir mon Panier
+            %a{:href => "http://www.paypal.com"} Acheter le pack

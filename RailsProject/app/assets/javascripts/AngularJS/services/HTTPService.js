@@ -183,6 +183,18 @@ SoonzikApp.factory('HTTPService', ['$http', '$location', 'Upload', function ($ht
     unfriend: function(parameters) {
       return $http.post("http://api." + url + "/users/delfriend", parameters);
     },
+    getCart: function(id, parameters) {
+      return $http.get("http://api." + url + "/carts/"+ id, parameters);
+    },
+    showCart: function(parameters) {
+      return $http.get("http://api." + url + "/carts/my_cart/" + urlParametersFormat(parameters));
+    },
+    addToCart: function(parameters) {
+      return $http.post("http://api." + url + "/carts/save", parameters);
+    },
+    savePack: function(parameters) {
+      return $http.post("http://api." + url + "/purchases/buycart", parameters);
+    },
     getConcerts: function(parameters) {
       return $http.get("http://api." + url + "/concerts" + urlParametersFormat(parameters))
     },

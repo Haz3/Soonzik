@@ -182,6 +182,60 @@ SoonzikApp.controller('AlbumsCtrl', ['$scope', "$routeParams", 'SecureAuth', 'HT
   	return min + ":" + sec;
   }
 
+  $scope.addAlbumToCart = function () {
+
+  	SecureAuth.securedTransaction(function (secure_key, user_id) {
+
+	  	var parameters = [
+	  		{ key: "secureKey", value: secure_key},
+	  		{ key: "user_id", value: $scope.user.id },
+			{ key: "cart[typeObj]", value : "Album" },
+			{ key: "cart[ojb_id]", value : $scope.album.id },
+			{ key: "cart[user_id]", value : $scope.user.id }
+		];
+
+		console.log(parameters);
+
+			HTTPService.addToCart(parameters).then(function(response) {
+				
+				$scope.album.push(response.data.content);
+			
+			}, function(repsonseError) {
+				NotificationService.error("Error Add To Cart");
+			});
+		}, function(error) {
+			NotificationService.error("Error securedTransaction");
+		});
+  	console.log($scope.album);
+  }
+
+  $scope.addSongToCart = function() {
+  	SecureAuth.securedTransaction(function (key, user_id) {
+			
+			var parameters = [
+				{ key: "secureKey", value: key },
+				{ key: "user_id", value: user_id },
+				{ key: "cart[typeObj]", value: "Music" },
+				{ key: "cart[ojb_id]", value:  2 },
+				{ key: "cart[user_id]", value: user_id }
+//				{ key: "cart[ojb_id]", value : music.id },
+			];
+
+			console.log(parameters);
+
+			HTTPService.addToCart(parameters).then(function(response) {
+				
+				$scope.album.push(response.data.content);
+			
+			}, function(repsonseError) {
+				NotificationService.error("Error Add To Cart");
+			});
+		}, function(error) {
+			NotificationService.error("Error securedTransaction");
+		});
+  	$scope.loading = false;
+  }
+
   $scope.loadComments = function() {
   	var params = [
   		{ key: "offset", value: $scope.commentariesOffset },

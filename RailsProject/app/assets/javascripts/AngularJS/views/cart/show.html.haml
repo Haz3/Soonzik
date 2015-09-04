@@ -1,3 +1,10 @@
-%cart{ "ng-init" => "showPacksById()" }
-  %loading{ "ng-if" => "loading == true" }
-  .row{ "ng-if" => "loading == false", "ng-init" => "initFoundation()"}
+%cart{ "ng-init" => "showCart()" }
+	%loading{ "ng-if" => "loading == true" }
+		.row{ "ng-if" => "loading == false", "ng-init" => "initFoundation()"}
+			.clearfix{"ng-if" => "haveAlbum == true"}
+				Album : {{}}
+			.clearfix{"ng-if" => "haveMusic == true"}
+				Musique : {{}}
+	.button.success.radius
+		Acheter le panier ?
+
