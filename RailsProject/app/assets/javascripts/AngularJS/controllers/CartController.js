@@ -1,4 +1,4 @@
-SoonzikApp.controller('CartCtrl', ['$scope', 'SecureAuth', 'HTTPService', '$timeout', function ($scope, SecureAuth, HTTPService, $timeout) {
+SoonzikApp.controller('CartCtrl', ['$scope', 'SecureAuth', 'HTTPService', '$timeout', 'NotificationService', function ($scope, SecureAuth, HTTPService, $timeout, NotificationService) {
 
 	$scope.loading = true;
 	$scope.haveAlbum = false;
@@ -17,26 +17,33 @@ SoonzikApp.controller('CartCtrl', ['$scope', 'SecureAuth', 'HTTPService', '$time
 	}
 
 	$scope.showCart = function() {
-		var parameters = {
- 			secureKey: key,
-			user_id: user_id
-		};
 
-	  	SecureAuth.securedTransaction(function (key, user_id) {		
+
+	  	SecureAuth.securedTransaction(function (key, id) {
+
+			var parameters = [
+				{ key: "user_id", value: id },
+				{ key: "secureKey", value: key }
+			];
 
 			HTTPService.showCart(parameters).then(function(response) {
-				$scope.cart = response.data.content;
-				$scope.haveMusic = true;
-				$scope.haveAlbum = true;
-			
+
+				$scope.carts = response.data.content;
+
+				console.log($scope.carts);
+
+
 			}, function(repsonseError) {
-				NotificationService.error("Error Add To Cart");
+				NotificationService.error("Error get Cart");
 			});
 		}, function(error) {
 			NotificationService.error("Error securedTransaction");
 		});
+  
   	$scope.loading = false;
+  
   }
+
 
 
 }]);
