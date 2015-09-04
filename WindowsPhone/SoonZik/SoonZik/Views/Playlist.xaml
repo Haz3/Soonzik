@@ -11,12 +11,15 @@
 
 
     <Page.Resources>
-        <DataTemplate x:Key="PlaylistTemplate">
-            <Grid Height="150" Width="150">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="50" />
-                </Grid.RowDefinitions>
+        <DataTemplate x:Key="PackTemplate">
+            <Grid Width="350">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="80" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Image Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left"
+                       Source="../Resources/Icones/MenuPack.png" Height="80" Width="80" />
+                <TextBlock Grid.Column="1" Text="{Binding Path=title}" Margin="15,0,0,0" FontSize="25" />
             </Grid>
         </DataTemplate>
 
@@ -29,7 +32,7 @@
                 <Image Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left"
                        Source="../Resources/Icones/profil.jpg" Height="80" Width="80" />
                 <TextBlock Grid.Column="1" Text="{Binding Path=user.username}" Margin="15,0,0,0" FontSize="15" />
-                <TextBlock Grid.Column="1" Text="{Binding Path=duration}" HorizontalAlignment="Right" Margin="0,0,15,0"
+                <TextBlock Grid.Column="1" Text="{Binding Path=duration}" HorizontalAlignment="Right" Margin="0,0,25,0"
                            FontSize="15" />
                 <TextBlock Grid.Column="1" VerticalAlignment="Bottom" Text="{Binding Path=title}" Margin="20,0,0,0"
                            FontSize="30" />
@@ -43,8 +46,8 @@
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
                 <Image Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left"
-                       Source="../Resources/Icones/profil.jpg" Height="80" Width="80" />
-                <TextBlock Grid.Column="1" Text="{Binding Path=username}" Margin="15,0,0,0" FontSize="25" />
+                       Source="../Resources/Icones/disc.png" Height="80" Width="80" />
+                <TextBlock Grid.Column="1" Text="{Binding Path=title}" Margin="15,0,0,0" FontSize="25" />
             </Grid>
         </DataTemplate>
     </Page.Resources>
@@ -63,12 +66,11 @@
                 <ListBox Background="Transparent" x:Name="ListBoxMusics" ItemsSource="{Binding ListAlbum}"
                          ItemTemplate="{StaticResource AlbumTemplate}"
                          SelectedItem="{Binding SelectedAlbum, Mode=TwoWay}" />
-
             </PivotItem>
 
-            <PivotItem x:Uid="PlaylistPivot" Header="">
-                <GridView Background="Transparent" x:Name="ListBoxPlaylist" ItemsSource="{Binding ListPack}"
-                          SelectedItem="{Binding SelectedPlaylist, Mode=TwoWay}" />
+            <PivotItem x:Uid="PackPivot" Header="">
+                <ListBox Background="Transparent" x:Name="ListBoxPack" ItemsSource="{Binding ListPack}"
+                          SelectedItem="{Binding SelectedPlaylist, Mode=TwoWay}" ItemTemplate="{StaticResource PackTemplate}" />
             </PivotItem>
         </Pivot>
     </Grid>

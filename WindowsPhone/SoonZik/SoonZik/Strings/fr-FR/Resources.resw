@@ -300,4 +300,7 @@
   <data name="DelFriend" xml:space="preserve">
     <value>Suprimer</value>
   </data>
+  <data name="PackPivot.Header" xml:space="preserve">
+    <value>Pack(s)</value>
+  </data>
 </root>

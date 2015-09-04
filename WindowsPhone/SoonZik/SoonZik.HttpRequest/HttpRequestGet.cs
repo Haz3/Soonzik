@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Net;
@@ -7,6 +8,7 @@ using Windows.UI.Popups;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using SoonZik.HttpRequest.HttpExtensions;
+using SoonZik.HttpRequest.Poco;
 
 namespace SoonZik.HttpRequest
 {
@@ -85,6 +87,7 @@ namespace SoonZik.HttpRequest
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(ApiUrl + "suggest?secureKey=" + key + "&user_id=" + userId);
             return await DoRequestForObject(myObject, request);
         }
+
         private static async Task<string> DoRequest(HttpWebRequest request)
         {
             request.Method = HttpMethods.Get;
@@ -123,9 +126,29 @@ namespace SoonZik.HttpRequest
                 string data;
                 using (var reader = new StreamReader(streamResponse))
                 data = reader.ReadToEnd();
-                var stringJson = JObject.Parse(data).SelectToken("content").ToString();
-                var obj = JsonConvert.DeserializeObject(stringJson, myObject.GetType());
-                return obj;
+                if (myObject.GetType() == typeof (UserMusic))
+                {
+                    var stringJson = JObject.Parse(data).SelectToken("content").ToString();
+                    stringJson = JObject.Parse(stringJson).SelectToken("musics").ToString();
+                    var listMusic = JsonConvert.DeserializeObject(stringJson, new List<Music>().GetType());
+                    stringJson = JObject.Parse(data).SelectToken("content").ToString();
+                    stringJson = JObject.Parse(stringJson).SelectToken("albums").ToString();
+                    var listAlbum = JsonConvert.DeserializeObject(stringJson, new List<Album>().GetType());
+                    stringJson = JObject.Parse(data).SelectToken("content").ToString();
+                    stringJson = JObject.Parse(stringJson).SelectToken("packs").ToString();
+                    var listPack = JsonConvert.DeserializeObject(stringJson, new List<Pack>().GetType());
+                    
+                    var obj = new UserMusic();
+                    obj.ListMusiques = (List<Music>) listMusic;
+                    obj.ListPack = (List<Pack>) listPack;
+                    obj.ListAlbums = (List<Album>) listAlbum;
+                    return obj;
+                }
+                else
+                {
+                    var stringJson = JObject.Parse(data).SelectToken("content").ToString();
+                    return JsonConvert.DeserializeObject(stringJson, myObject.GetType());
+                }
             }
             catch (Exception ex)
             {
