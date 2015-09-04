@@ -100,10 +100,12 @@ namespace SoonZik.ViewModel
 
         private void AddFriendExecute()
         {
+            var loader = new ResourceLoader();
             if (CurrentUser != null)
             {
                 AddDelFriendHelpers.GetUserKeyForFriend(CurrentUser.id.ToString(), _friend);
-                CheckIfFriend();
+                _friend = !_friend;
+                ButtonFriendText = loader.GetString(_friend ? "DelFriend" : "AddFriend");
             }
             else
                 new MessageDialog("Erreur lors de la recuperation de l'id user").ShowAsync();

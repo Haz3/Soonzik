@@ -29,22 +29,6 @@ namespace SoonZik.ViewModel
                 ItemClickCommand = new RelayCommand(ItemClickCommandExecute);
                 ListAlbums = new ObservableCollection<Album>();
                 AddCommand = new RelayCommand(AddFriendExecute);
-
-                var loader = new ResourceLoader();
-                foreach (var friend in Singleton.Instance().CurrentUser.friends)
-                {
-                    if (friend.username == TheArtiste.username)
-                    {
-                        ButtonFriendText = loader.GetString("DelFriend");
-                        _friend = true;
-                    }
-                    else
-                    {
-                        ButtonFriendText = loader.GetString("AddFriend");
-                        _friend = false;
-                    }
-
-                }
             }
         }
 
@@ -263,6 +247,7 @@ namespace SoonZik.ViewModel
             TheArtiste = TheUser;
             SetFollowText();
             Charge();
+            CheckIfFriend();
         }
 
         private void FollowCommandExecute()
@@ -287,9 +272,31 @@ namespace SoonZik.ViewModel
             });
         }
 
+        private void CheckIfFriend()
+        {
+            var loader = new ResourceLoader();
+            foreach (var friend in Singleton.Instance().CurrentUser.friends)
+            {
+                if (friend.username == TheArtiste.username)
+                {
+                    ButtonFriendText = loader.GetString("DelFriend");
+                    _friend = true;
+                }
+                else
+                {
+                    ButtonFriendText = loader.GetString("AddFriend");
+                    _friend = false;
+                }
+
+            }
+        }
+
         private void AddFriendExecute()
         {
+            var loader = new ResourceLoader();
             AddDelFriendHelpers.GetUserKeyForFriend(TheArtiste.id.ToString(), _friend);
+            _friend = !_friend;
+            ButtonFriendText = loader.GetString(_friend ? "DelFriend" : "AddFriend");
         }
 
         #endregion
