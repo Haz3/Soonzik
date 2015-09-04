@@ -195,7 +195,8 @@ SoonzikApp.controller('AlbumsCtrl', ['$scope', "$routeParams", 'SecureAuth', 'HT
 			}
 		};
 			HTTPService.addToCart(parameters).then(function(response) {
-				console.log("Ajout au panier de l'album " + $scope.album.id);
+				NotificationService.success("Ajout au panier de l'album " + $scope.album.id );
+			
 			}, function(repsonseError) {
 				NotificationService.error("Error Add To Cart");
 			});
@@ -218,7 +219,7 @@ SoonzikApp.controller('AlbumsCtrl', ['$scope', "$routeParams", 'SecureAuth', 'HT
 			};
 
 			HTTPService.addToCart(parameters).then(function(response) {
-				console.log("Ajout au panier de la musique " + music.id );
+				NotificationService.success("Ajout au panier de la musique " + music.id );
 			
 			}, function(repsonseError) {
 				NotificationService.error("Error Add To Cart");
