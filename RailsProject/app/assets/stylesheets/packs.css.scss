@@ -6,4 +6,17 @@ pack {
 	.panel {
 		margin-left: 20px;
 	}
+
+	.my-modal {
+		position: relative !important;
+		bottom: 0;
+		font-size: 12px;
+	}
+
+	battle {
+		line-height: 175px;
+		height: 175px;
+		display: block;
+	}
+
 }
