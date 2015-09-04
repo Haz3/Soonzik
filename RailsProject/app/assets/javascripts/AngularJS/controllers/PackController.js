@@ -12,7 +12,7 @@ SoonzikApp.controller('PacksCtrl', ['$scope', '$routeParams', 'SecureAuth', 'HTT
 			{ key: "limit", value: 4 },
 			{ key: "order_by_desc[]", value: "created_at" }
 		];
-
+		
 		HTTPService.findPacks(parameters).then(function(packs) {
 			
 			$scope.pack = packs.data.content;
@@ -27,6 +27,12 @@ SoonzikApp.controller('PacksCtrl', ['$scope', '$routeParams', 'SecureAuth', 'HTT
 
 	$scope.showPacksById = function() {
 		var id = $routeParams.id;
+
+		$scope.percentages = [
+			{ value: 65, label: "Artiste" },
+			{ value: 20, label: "Association" },
+			{ value: 15, label: "website" }
+		];
 
 		HTTPService.showPack(id).then(function(response) {
 
@@ -47,11 +53,11 @@ SoonzikApp.controller('PacksCtrl', ['$scope', '$routeParams', 'SecureAuth', 'HTT
 		
 		$scope.priceMini = 20;
 
-		$scope.artistPercentage = (($scope.priceMini * 65) / 100)
+		$scope.artistPercentage = (($scope.priceMini * 65) / 100);
 		$scope.associationPercentage = (($scope.priceMini * 20) / 100);
 		$scope.websitePercentage = (($scope.priceMini * 15) / 100);
 
-		console.log(artistPercentage);
+		console.log($scope.artistPercentage);
 	}
 
 	$scope.timeLeft = function() {
