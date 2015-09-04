@@ -568,7 +568,6 @@
       <RootProperty Name="Background" />
       <RootProperty Name="ItemsSource" />
       <RootProperty Name="ItemTemplate" />
-      <RootProperty Name="SelectedItem" />
     </RootType>
     <RootType FullName="SoonZik.Views.Friends" />
     <RootType FullName="SoonZik.Views.MainView" />
