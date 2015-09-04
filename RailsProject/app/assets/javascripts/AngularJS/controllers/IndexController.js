@@ -133,6 +133,8 @@ SoonzikApp.controller('IndexCtrl', ['$scope', 'SecureAuth', 'HTTPService', '$tim
 						randomPeople();
 
 						$scope.loading = false;
+					} else {
+						$scope.loading = false;
 					}
 				}, function(error) {
 					console.log("no battles available")
