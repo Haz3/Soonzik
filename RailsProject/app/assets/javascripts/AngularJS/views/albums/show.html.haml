@@ -21,30 +21,8 @@
 							%td{:width => '60'}
 								{{song.price}} $
 							%td{:width => '50'}
-								%a{"data-reveal-id" => "addOneSong", :type => "submit", "ng-click" => "addSongToCart(song)"}
+								%a{"ng-click" => "addSongToCart(song)"}
 									%i.fi-shopping-cart
-									#addOneSong.reveal-modal{"aria-hidden" => "true", "aria-labelledby" => "modalTitle", "data-reveal" => "", :role => "dialog"}
-										%h2#modalTitle ET HOP ! C'EST DANS VOTRE PANIER
-										%h3.center {{ albums.title }}
-										.ul.large-block-grid-4.centered.columns
-											%li
-												.panel
-													%h3.subheader
-														%p.large-text-center 
-														{{ albums.title }}
-													%a{:href => "http://lvh.me:3000/albums/ {{ album.id }}"}
-														%img{"src" => "/assets/pack1.jpg"}
-													.divider
-													Artiste : {{ albums.user.username }}
-													%br
-													Sortie : {{ albums.yearProd }}
-										%a.close-reveal-modal{"aria-label" => "Close"} ×
-										%p
-											%a.close-reveal-modal.my-modal Continuer mes achats
-											%a.close-reveal-modal.my-modal{:href => "http://lvh.me:3000/carts"} Voir mon Panier
-							%hr
-							%p {{ album.yearProd }} - {{ album.user.username }}
-
 							%td{:width => '50'}
 								%music{ "music-object" => "song" }
 									%i.fi-play
@@ -68,27 +46,7 @@
 											.button.tiny{ "ng-click" => "setTooltip(false)" } {{ labels.DISPLAY_ALBUM_CLOSE_LABEL }}
 
 			.button.expand.radius.success
-				%a{"data-reveal-id" => "addAlbumToCart", :type => "submit", "ng-click" => "addAlbumToCart()"} Ajouter au Panier
-				#addAlbumToCart.reveal-modal{"aria-hidden" => "true", "aria-labelledby" => "modalTitle", "data-reveal" => "", :role => "dialog"}
-					%h2#modalTitle ET HOP ! C'EST DANS VOTRE PANIER
-					%h3.center {{ albums.title }}
-					.ul.large-block-grid-4.centered.columns
-						%li
-							.panel
-								%h3.subheader
-									%p.large-text-center 
-										{{ albums.title }}
-								%a{:href => "http://lvh.me:3000/albums/ {{ album.id }}"}
-									%img{"src" => "/assets/pack1.jpg"}
-								.divider
-								Artiste : {{ albums.user.username }}
-								%br
-								Sortie : {{ albums.yearProd }}
-								%a.close-reveal-modal{"aria-label" => "Close"} ×
-								%p
-									%a.close-reveal-modal.my-modal Continuer mes achats
-								%a.close-reveal-modal.my-modal{:href => "http://lvh.me:3000/carts"} Voir mon Panier
-
+				%a{"ng-click" => "addAlbumToCart()"} Ajouter au Panier
 			.commentaries
 				%textarea{ "ng-model" => "comment.value" }
 				.text-right
