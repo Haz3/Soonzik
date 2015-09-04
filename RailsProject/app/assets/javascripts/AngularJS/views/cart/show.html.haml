@@ -1,10 +1,8 @@
-%cart{ "ng-init" => "showCart()" }
-	%loading{ "ng-if" => "loading == true" }
-		.row{ "ng-if" => "loading == false", "ng-init" => "initFoundation()"}
-			.clearfix{"ng-if" => "haveAlbum == true"}
-				Album : {{}}
-			.clearfix{"ng-if" => "haveMusic == true"}
-				Musique : {{}}
-	.button.success.radius
-		Acheter le panier ?
-
+%cart{"ng-init" => "initFoundation()" }
+	.row{"ng-init" => "showCart()"}
+		%h1 Panier
+		%div{"ng-repeat" => "musics in carts"}
+			%div{"ng-repeat" => "music in musics"}
+				%tbody
+					%div{"ng-repeat" => "test in music"}
+							{{ test.title }}
