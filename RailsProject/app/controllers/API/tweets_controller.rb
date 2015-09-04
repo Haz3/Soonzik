@@ -7,9 +7,10 @@ module API
   # * find        [get]
   # * save        [post] - SECURE
   # * destroy     [get] - SECURE
+  # * flux        [get] - SECURE
   #
   class TweetsController < ApisecurityController
-    before_action :checkKey, only: [:destroy, :save]
+    before_action :checkKey, only: [:destroy, :save, :flux]
 
   	# Retrieve all the tweets
     #
@@ -271,6 +272,50 @@ module API
           end
           object.destroy
           codeAnswer 202
+        else
+          codeAnswer 500
+          defineHttp :forbidden
+        end
+      rescue
+        codeAnswer 504
+        defineHttp :service_unavailable
+      end
+      sendJson
+    end
+
+    # Get your tweets and the tweet of your follows
+    # 
+    # Route : /tweets/flux
+    # 
+    # ==== Options
+    # 
+    # * +offset+ - The offset of your search. Default value : 0
+    # * +limit+ - The number of tweets you want. Default value : 30
+    #
+    # ===== HTTP VALUE
+    # 
+    # - +201+ - In case of success, return the tweets
+    # - +401+ - It is not a secured transaction
+    # - +503+ - Error from server
+    # 
+    def flux
+      begin
+        if (@security)
+          u = User.find_by_id(@user_id)
+          tweets = u.tweets
+          offset = (@offset.present?) ? @offset.to_i : 0
+          limit = (@limit.present?) ? @limit.to_i : 30
+          u.follows.each do |user|
+            tweets |= user.tweets
+          end
+          tweets.sort_by { |obj| obj.created_at}
+          tweets.reverse!
+          @returnValue = {
+            content: tweets.as_json(only: Tweet.miniKey, :include => {
+              user: {
+                only: User.miniKey }
+              })[offset..(offset + limit)]
+          }
         else
           codeAnswer 500
           defineHttp :forbidden

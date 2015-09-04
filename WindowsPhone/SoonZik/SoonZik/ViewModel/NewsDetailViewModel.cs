@@ -1,4 +1,5 @@
 ﻿using System.Globalization;
+using Windows.System.UserProfile;
 using GalaSoft.MvvmLight;
 using SoonZik.HttpRequest.Poco;
 
@@ -12,7 +13,7 @@ namespace SoonZik.ViewModel
         {
             SelectNews = NewsViewModel.DetailSelectedNews;
 
-            CultureInfo ci = new CultureInfo(Windows.System.UserProfile.GlobalizationPreferences.Languages[0]);
+            var ci = new CultureInfo(GlobalizationPreferences.Languages[0]);
             if (ci.Name.Equals("en-US"))
             {
                 NewsContent = SelectNews.Newstexts[1].content;
@@ -48,6 +49,7 @@ namespace SoonZik.ViewModel
                 RaisePropertyChanged("NewsTitle");
             }
         }
+
         #endregion
 
         #region Method

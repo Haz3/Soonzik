@@ -211,7 +211,7 @@
 
                 <ListView Grid.Row="0" x:Name="ResultArtisteListView" Header="Artiste"
                           ItemTemplate="{StaticResource ArtistItemTemplate}"
-                          SelectedItem="{Binding SelectedUser, Mode=TwoWay}" />
+                          SelectedItem="{Binding SelectedArtist, Mode=TwoWay}" />
                 <ListView Grid.Row="1" x:Name="ResultUserListView" Header="Utilisateur"
                           ItemTemplate="{StaticResource UserItemTemplate}"
                           SelectedItem="{Binding SelectedUser, Mode=TwoWay}" />

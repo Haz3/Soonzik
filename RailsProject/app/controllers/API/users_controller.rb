@@ -881,7 +881,7 @@ module API
 				if (address == true || address.save)
 					user.address_id = address.id if address != true
 					user.skip_confirmation!
-					if (user.save!)
+					if (user.save)
 						@returnValue = { content: user.as_json(:include => {
 																																	:address => { :only => Address.miniKey }
 																																},

@@ -199,6 +199,12 @@ var SearchIndex =
 		"type": "normalclass"
 	},
 	{
+		"name": "Feedback",
+		"link": "Feedback.html",
+		"snippet": "<p>The model of the object Address Contain the relation and the validation Can\nprovide some features linked …\n",
+		"type": "normalclass"
+	},
+	{
 		"name": "Flac",
 		"link": "Flac.html",
 		"snippet": "<p>The model of the object Flac Contain the relation and the validation Can\nprovide some features linked …\n",
@@ -841,6 +847,12 @@ var SearchIndex =
 		"type": "anymethod"
 	},
 	{
+		"name": "flux",
+		"link": "API/TweetsController.html#method-i-flux",
+		"snippet": "<p>Get your tweets and the tweet of your follows\n<p>Route : /tweets/flux\n<p>Options\n",
+		"type": "anymethod"
+	},
+	{
 		"name": "index",
 		"link": "API/UsersController.html#method-i-index",
 		"snippet": "<p>Retrieve all the users\n<p>Route : /users\n<p>Options\n",
@@ -1060,6 +1072,12 @@ var SearchIndex =
 		"name": "miniKey",
 		"link": "Description.html#method-c-miniKey",
 		"snippet": "<p>The information filtered for the API\n<p>Fields returned : [:id, :description, :language]\n",
+		"type": "anymethod"
+	},
+	{
+		"name": "feedback_params",
+		"link": "Feedback.html#method-c-feedback_params",
+		"snippet": "<p>The strong parameters to save or update object\n",
 		"type": "anymethod"
 	},
 	{

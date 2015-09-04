@@ -126,6 +126,17 @@ namespace SoonZik.Controls
         private static UIElement _lastElement;
         private User _selectedUser;
 
+        private User _selectedArtist;
+        public User SelectedArtist
+        {
+            get { return _selectedArtist; }
+            set
+            {
+                _selectedArtist = value;
+                RaisePropertyChange("SelectedArtist");
+            }
+        }
+
         public User SelectedUser
         {
             get { return _selectedUser; }
@@ -216,7 +227,6 @@ namespace SoonZik.Controls
             AchatButton.Command = new RelayCommand(GoToAchat);
             ConnexionButton.Command = new RelayCommand(GoToConnexionPage);
 
-            CollapsedListOfResul();
         }
 
         private void HardwareButtonsOnBackPressed(object sender, BackPressedEventArgs e)
@@ -388,15 +398,6 @@ namespace SoonZik.Controls
             }
         }
 
-        private void CollapsedListOfResul()
-        {
-            //ResultArtisteListView.Visibility = Visibility.Collapsed;
-            //ResultAlbumListView.Visibility = Visibility.Collapsed;
-            //ResultMusicListView.Visibility = Visibility.Collapsed;
-            //ResultPackListView.Visibility = Visibility.Collapsed;
-            //ResultUserListView.Visibility = Visibility.Collapsed;
-        }
-
         private void DisplayResult()
         {
             if (MyResult.artist != null)
@@ -442,12 +443,8 @@ namespace SoonZik.Controls
 
         private void UsersStackPanel_OnTapped(object sender, TappedRoutedEventArgs e)
         {
-            Singleton.Instance().NewProfilUser = SelectedUser.id;
-            Singleton.Instance().ItsMe = false;
-            Singleton.Instance().Charge();
-            MyGrid.Children.Clear();
-            MyGrid.Children.Add(new ProfilFriendView());
-            CloseMenu();
+            ProfilFriendViewModel.UserFromButton = SelectedUser;
+            SetChildren(new ProfilFriendView());
         }
 
         private void MusicStackPanel_OnTapped(object sender, TappedRoutedEventArgs e)
@@ -465,7 +462,7 @@ namespace SoonZik.Controls
 
         private void ArtistStackPanel_OnTapped(object sender, TappedRoutedEventArgs e)
         {
-            ProfilArtisteViewModel.TheUser = SelectedUser;
+            ProfilArtisteViewModel.TheUser = SelectedArtist;
             SetChildren(new ProfilArtiste());
         }
 

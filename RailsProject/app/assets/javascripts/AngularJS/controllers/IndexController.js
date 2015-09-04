@@ -1,6 +1,8 @@
-SoonzikApp.controller('IndexCtrl', ['$scope', 'SecureAuth', 'HTTPService', '$routeParams', 'NotificationService', function ($scope, SecureAuth, HTTPService, $routeParams, NotificationService) {
+SoonzikApp.controller('IndexCtrl', ['$scope', 'SecureAuth', 'HTTPService', '$timeout', 'NotificationService', function ($scope, SecureAuth, HTTPService, $timeout, NotificationService) {
 	
 	$scope.loading = true;
+	$scope.loadingRightSide = true;
+	$scope.loading_tweet = false;
 	$scope.currentUser = false;
 	$scope.randomVote = [];
 	$scope.votes = [
@@ -9,6 +11,16 @@ SoonzikApp.controller('IndexCtrl', ['$scope', 'SecureAuth', 'HTTPService', '$rou
 	];
 	$scope.user = false;
 	$scope.voteCurrentUser = false;
+	$scope.tweets = [];
+	$scope.tweet = {
+		input: ""
+	}
+	$scope.otherTweets = [];
+	$scope.classLeftSide = {
+		'medium-8': true
+	}
+	$scope.tab = 0;
+	$scope.suggestions = [];
 
 	/*
 	**	Fonction d'init de foundation.
@@ -33,33 +45,26 @@ SoonzikApp.controller('IndexCtrl', ['$scope', 'SecureAuth', 'HTTPService', '$rou
 		if (current_user.id != null && current_user.token != null && current_user.username != null) {
 			$scope.user = current_user;
 		}
-		$scope.user = false;
+		$scope.classLeftSide['medium-8'] = ($scope.user != false);
 
 		/*
 		**	Recupere les 3 dernieres news pour le slider.
 		*/
-		HTTPService.findNews([{ key: "order_by_desc[]", value: "date", limit: 3}]).then(function(news) {
+		HTTPService.findNews([{ key: "order_by_desc[]", value: "date", limit: 4}]).then(function(news) {
 			$scope.news = news.data.content;
-			console.log($scope.news);
 
 			/*
 			**	 Recupere les 4 derniers packs mis en ligne.
 			*/
 
 			var parameters = [
-				{ key: "limit", value: 4 },
+				{ key: "limit", value: 2 },
 				{ key: "order_by_asc[]", value: "created_at" }
 			];
 
-			/*$scope.imgPack = [
-				{ "img": "http://upload.wikimedia.org/wikipedia/en/6/66/SallyCD.jpg"},
-		        { "img": "http://upload.wikimedia.org/wikipedia/en/f/f1/Loureedtransformer.jpeg"},
-		        { "img": "http://upload.wikimedia.org/wikipedia/en/7/70/Berlinloureed.jpeg"},
-		        { "img": "http://upload.wikimedia.org/wikipedia/en/8/88/Lour72.jpg"},
-		    ];*/
-
 			HTTPService.findPacks(parameters).then(function (packs) {
 				$scope.packs = packs.data.content;
+				timeLeftPack();
 
 
 				/*
@@ -89,7 +94,7 @@ SoonzikApp.controller('IndexCtrl', ['$scope', 'SecureAuth', 'HTTPService', '$rou
 								} else {
 									$scope.votes[1].value++;
 								}
-								if ($scope.battle.votes[voteIndex].user_id == $scope.currentUser.id) {
+								if ($scope.battle.votes[voteIndex].user_id == $scope.user.id) {
 									$scope.voteCurrentUser = $scope.battle.votes[voteIndex].artist_id;
 								}
 							}
@@ -139,10 +144,60 @@ SoonzikApp.controller('IndexCtrl', ['$scope', 'SecureAuth', 'HTTPService', '$rou
 		}, function (error) {
 			console.log("No News Available");
 		});
+
+		// Load the right column
+
+		if ($scope.user != false) {
+			SecureAuth.securedTransaction(function(key, id) {
+				// Get the tweets of your follows
+				HTTPService.getFlux([{ key: "secureKey", value: key }, { key: "user_id", value: id }]).then(function(response) {
+					$scope.tweets = response.data.content;
+
+					var paramsTweet = [
+						{ key: encodeURIComponent("attribute[msg]"), value: encodeURIComponent("%" + $scope.user.username + "%") }
+					];
+
+					// Find the tweet who speak to you
+					HTTPService.findTweet(paramsTweet).then(function(response) {
+						tmp_tweets = response.data.content;
+						// Loop backward to splice inside
+						for (var i = tmp_tweets.length - 1 ; i >= 0 ; i--) {
+							if (tmp_tweets[i].user.id == id) {
+								tmp_tweets.splice(i, 1);
+							}
+						}
+						$scope.otherTweets = tmp_tweets;
+
+						// Get the suggestion
+						SecureAuth.securedTransaction(function(key, id) {
+							HTTPService.getSuggestion([{ key: "secureKey", value: key }, { key: "user_id", value: id }]).then(function(response) {
+								$scope.suggestions = response.data.content;
+								$scope.loadingRightSide = false;
+							}, function(error) {
+
+							});
+							/*------ end suggestion ------*/
+						}, function(error) {
+
+						});
+						/*------ end secured transaction ------*/
+					}, function(error) {
+						NotificationService.error("");
+					});
+					/*------ end find tweet ------*/
+				}, function(error) {
+					NotificationService.error("pb flux")
+				});
+				/*----- end get flux -------*/
+			}, function(error) {
+				NotificationService.error("pb flux")
+			});
+			/*------ end secured transaction ------*/
+		}
 	}
 
-	$scope.indexVoteFor = function(battle, artist) {
-		if ($scope.currentUser == false) {
+	$scope.voteFor = function(battle, artist) {
+		if ($scope.user == false) {
 			NotificationService.error($rootScope.labels.FILE_BATTLE_NEED_AUTHENTICATION_ERROR_MESSAGE);
 			return;
 		}
@@ -169,7 +224,7 @@ SoonzikApp.controller('IndexCtrl', ['$scope', 'SecureAuth', 'HTTPService', '$rou
 					// Iterate on the votes
 					for (var voteIndex in $scope.battle.votes) {
 						// We modify the vote value
-						if ($scope.battle.votes[voteIndex].user_id == $scope.currentUser.id) {
+						if ($scope.battle.votes[voteIndex].user_id == $scope.user.id) {
 							$scope.battle.votes[voteIndex].artist_id = artist.id;
 							
 							// if you vote for the first
@@ -252,4 +307,109 @@ SoonzikApp.controller('IndexCtrl', ['$scope', 'SecureAuth', 'HTTPService', '$rou
 			array[index] = null;
 		});
 	}
+
+	var timeLeftPack = function() {
+		var now = new Date();
+
+		for (var i = 0 ; i < $scope.packs.length ; i++) {
+			var end = new Date($scope.packs[i].end_date);
+			var left = (end > now) ? end - now : "Finish !"
+
+			if (left != "Finish !") {
+				var date = new Date(left);
+				var hours = date.getHours();
+				var minutes = "0" + date.getMinutes();
+				var seconds = "0" + date.getSeconds();
+				left = hours + 'h' + minutes.substr(-2) + 'mn' + seconds.substr(-2) + 's';
+			}
+			$scope.packs[i].timeLeft = left;
+		}
+		$timeout(timeLeftPack, 1000);
+	}
+
+	$scope.comment = function(username) {
+		$("#inputTweet").focus();
+		$scope.tweet.input = "@" + username + " ";
+	}
+
+	$scope.sendTweet = function() {
+		if ($scope.tweet.input.length < 140) {
+
+			var parameters = {
+				msg: $scope.tweet.input,
+				user_id: $scope.user.id
+			}
+
+			SecureAuth.securedTransaction(function(key, user_id) {
+				parameters.user_id = user_id;
+				parameters.secureKey = key;
+				HTTPService.saveTweet(parameters).then(function(response) {
+					$scope.tweets.unshift(response.data.content);
+					$scope.tweet.input = "";
+				}, function(error) {
+					NotificationService.error($rootScope.labels.FILE_USER_SAVE_TWEET_ERROR_MESSAGE);
+				});
+			}, function(error) {
+				NotificationService.error($rootScope.labels.FILE_USER_SAVE_TWEET_ERROR_MESSAGE);
+			});
+
+		} else {
+			NotificationService.info($rootScope.labels.FILE_USER_TWEET_TOO_LONG_ERROR_MESSAGE);
+		}
+	}
+
+	$scope.reloadTweet = function() {
+		if ($scope.loading_tweet == false) {
+			$scope.loading_tweet = true;
+
+			var paramsTweet = [
+				{ key: encodeURIComponent("attribute[user_id]"), value: $scope.user.id },
+				{ key: encodeURIComponent("order_by_desc[]"), value: "created_at" },
+				{ key: "limit", value: 20 },
+				{ key: "offset", value: $scope.tweets.length }
+			];
+
+			HTTPService.findTweet(paramsTweet).then(function(response) {
+				$scope.tweets = $scope.tweets.concat(response.data.content);
+				$timeout(function() {
+					$scope.loading_tweet = false;
+				}, 1000);
+			}, function(error) {
+				NotificationService.error("");
+			});
+		}
+	}
+
+	$scope.reloadPersonalTweet = function() {
+		if ($scope.loading_tweet == false) {
+			$scope.loading_tweet = true;
+
+			var paramsTweet = [
+				{ key: encodeURIComponent("attribute[user_id]"), value: $scope.user.id },
+				{ key: encodeURIComponent("order_by_desc[]"), value: "created_at" },
+				{ key: "limit", value: 20 },
+				{ key: "offset", value: $scope.otherTweets.length },
+				{ key: encodeURIComponent("attribute[msg]"), value: encodeURIComponent("%" + $scope.user.username + "%") }
+			];
+
+			HTTPService.findTweet(paramsTweet).then(function(response) {
+				tmp_tweets = response.data.content;
+				// Loop backward to splice inside
+				for (var i = tmp_tweets.length - 1 ; i >= 0 ; i--) {
+					if (tmp_tweets[i].user.id == id) {
+						tmp_tweets.splice(i, 1);
+					}
+				}
+				$scope.otherTweets = $scope.otherTweets.concat(tmp_tweets);
+				$timeout(function() {
+					$scope.loading_tweet = false;
+				}, 1000);
+			}, function(error) {
+				NotificationService.error("");
+			});
+		}
+	}
+
+	$scope.selectFlux = function() { $scope.tab = 0; }
+	$scope.selectInteraction = function() { $scope.tab = 1; }
 }]);

@@ -40,7 +40,7 @@ namespace SoonZik.ViewModel
             var mapIcon = new MapIcon
             {
                 Location =
-                    new Geopoint(new BasicGeoposition()
+                    new Geopoint(new BasicGeoposition
                     {
                         Latitude = UserLocation.Latitude,
                         Longitude = UserLocation.Longitude
@@ -71,10 +71,7 @@ namespace SoonZik.ViewModel
                     foreach (var item in res)
                     {
                         CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
-                            () =>
-                            {
-                                ListListeners.Add(item);
-                            });
+                            () => { ListListeners.Add(item); });
                     }
                 }
             });
@@ -104,7 +101,7 @@ namespace SoonZik.ViewModel
             _myGeolocator = new Geolocator();
             var myGeoposition = await _myGeolocator.GetGeopositionAsync();
             UserLocation = myGeoposition.Coordinate;
-            
+
             TwoChecked = new RelayCommand(TwoCheckedExecute);
             FiveChecked = new RelayCommand(FiveCheckedExecute);
             TenChecked = new RelayCommand(TenCheckedExecute);
@@ -116,7 +113,6 @@ namespace SoonZik.ViewModel
 
         private void UserTappedExecute()
         {
-
         }
 
         private void TwentyCheckedExecute()
@@ -148,7 +144,7 @@ namespace SoonZik.ViewModel
                 {
                     var t = new MapIcon
                     {
-                        Location = new Geopoint(new BasicGeoposition()
+                        Location = new Geopoint(new BasicGeoposition
                         {
                             Latitude = listener.latitude,
                             Longitude = listener.longitude
@@ -161,16 +157,18 @@ namespace SoonZik.ViewModel
             FiveKmActivated = false;
             TenKmActivated = false;
             TwentyKmActivated = false;
-
         }
+
         #endregion
 
         #endregion
 
         #region Attrivute
-        public List<MapIcon> ListMapIcons { get; set; } 
+
+        public List<MapIcon> ListMapIcons { get; set; }
 
         private ObservableCollection<MapElement> _mapElements;
+
         public ObservableCollection<MapElement> MapElements
         {
             get { return _mapElements; }
@@ -179,15 +177,13 @@ namespace SoonZik.ViewModel
                 _mapElements = value;
                 RaisePropertyChanged("MapElements");
             }
-    }
+        }
 
         private ObservableCollection<Concerts> _listConcerts;
+
         public ObservableCollection<Concerts> ListConcerts
         {
-            get
-            {
-                return _listConcerts;
-            }
+            get { return _listConcerts; }
             set
             {
                 _listConcerts = value;
@@ -196,12 +192,10 @@ namespace SoonZik.ViewModel
         }
 
         private ObservableCollection<Listenings> _listListeners;
+
         public ObservableCollection<Listenings> ListListeners
         {
-            get
-            {
-                return _listListeners;
-            }
+            get { return _listListeners; }
             set
             {
                 _listListeners = value;
@@ -210,9 +204,10 @@ namespace SoonZik.ViewModel
         }
 
         private List<User> _listUser;
+
         public List<User> ListUser
         {
-            get { return _listUser;}
+            get { return _listUser; }
             set
             {
                 _listUser = value;
@@ -231,6 +226,7 @@ namespace SoonZik.ViewModel
 
         private Geolocator _myGeolocator;
         private Geocoordinate _userLocation;
+
         public Geocoordinate UserLocation
         {
             get { return _userLocation; }
@@ -242,6 +238,7 @@ namespace SoonZik.ViewModel
         }
 
         private bool _twoKmActivated;
+
         public bool TwoKmActivated
         {
             get { return _twoKmActivated; }
@@ -253,6 +250,7 @@ namespace SoonZik.ViewModel
         }
 
         private bool _fiveKmActivated;
+
         public bool FiveKmActivated
         {
             get { return _fiveKmActivated; }
@@ -262,8 +260,9 @@ namespace SoonZik.ViewModel
                 RaisePropertyChanged("FiveKmActivated");
             }
         }
-        
+
         private bool _tenKmActivated;
+
         public bool TenKmActivated
         {
             get { return _tenKmActivated; }
@@ -273,8 +272,9 @@ namespace SoonZik.ViewModel
                 RaisePropertyChanged("TenKmActivated");
             }
         }
-        
+
         private bool _twentyKmActivated;
+
         public bool TwentyKmActivated
         {
             get { return _twentyKmActivated; }
@@ -284,8 +284,7 @@ namespace SoonZik.ViewModel
                 RaisePropertyChanged("TwentyKmActivated");
             }
         }
-        
-        #endregion
 
+        #endregion
     }
 }

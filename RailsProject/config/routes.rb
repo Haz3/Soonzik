@@ -125,6 +125,7 @@ Rails.application.routes.draw do
         get 'find' => 'tweets#find'
         match 'save' => 'tweets#save', via: [:post, :options]
         get 'destroy' => 'tweets#destroy'
+        get 'flux' => 'tweets#flux'
       end
     end
 

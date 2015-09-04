@@ -122,6 +122,8 @@ list of action available :</p>
 <p>save        [post] - SECURE</p>
 </li><li>
 <p>destroy     [get] - SECURE</p>
+</li><li>
+<p>flux        [get] - SECURE</p>
 </li></ul>
 		</section>
 
@@ -174,7 +176,7 @@ list of action available :</p>
 </li></ul>					
 											<div class="method-source-code" id="destroy-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/tweets_controller.rb, line 258</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/tweets_controller.rb, line 259</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">destroy</span>
   <span class="ruby-keyword">begin</span>
     <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@security</span>)
@@ -250,7 +252,7 @@ its user</p>
 </li></ul>					
 											<div class="method-source-code" id="find-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/tweets_controller.rb, line 162</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/tweets_controller.rb, line 163</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">find</span>
   <span class="ruby-keyword">begin</span>
     <span class="ruby-identifier">tweet_object</span> = <span class="ruby-keyword">nil</span>
@@ -336,6 +338,71 @@ its user</p>
 
 					
 									</div>
+								<a name="method-i-flux">anchor</a>
+				<div id="method-i-flux-doc" class="method">
+
+					<header>
+											<i class="icon-generic"></i>
+						<span class="method-name">flux</span><span 
+							class="method-args">()</span>
+										</header>
+
+					<div class="method-description">
+											<p>Get your tweets and the tweet of your follows</p>
+
+<p>Route : /tweets/flux</p>
+
+<h4 id="method-i-flux-label-Options">Options<span><a href="#method-i-flux-label-Options">&para;</a> <a href="#top">&uarr;</a></span></h4>
+<ul><li>
+<p><code>offset</code> - The offset of your search. Default value : 0</p>
+</li><li>
+<p><code>limit</code> - The number of tweets you want. Default value : 30</p>
+</li></ul>
+
+<h5 id="method-i-flux-label-HTTP+VALUE">HTTP VALUE<span><a href="#method-i-flux-label-HTTP+VALUE">&para;</a> <a href="#top">&uarr;</a></span></h5>
+<ul><li>
+<p><code>201</code> - In case of success, return the tweets</p>
+</li><li>
+<p><code>401</code> - It is not a secured transaction</p>
+</li><li>
+<p><code>503</code> - Error from server</p>
+</li></ul>					
+											<div class="method-source-code" id="flux-source">
+							<pre class="prettyprint linenums"><code 
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/tweets_controller.rb, line 301</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">flux</span>
+  <span class="ruby-keyword">begin</span>
+    <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@security</span>)
+      <span class="ruby-identifier">u</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">find_by_id</span>(<span class="ruby-ivar">@user_id</span>)
+      <span class="ruby-identifier">tweets</span> = <span class="ruby-identifier">u</span>.<span class="ruby-identifier">tweets</span>
+      <span class="ruby-identifier">offset</span> = (<span class="ruby-ivar">@offset</span>.<span class="ruby-identifier">present?</span>) <span class="ruby-operator">?</span> <span class="ruby-ivar">@offset</span>.<span class="ruby-identifier">to_i</span> <span class="ruby-operator">:</span> <span class="ruby-value">0</span>
+      <span class="ruby-identifier">limit</span> = (<span class="ruby-ivar">@limit</span>.<span class="ruby-identifier">present?</span>) <span class="ruby-operator">?</span> <span class="ruby-ivar">@limit</span>.<span class="ruby-identifier">to_i</span> <span class="ruby-operator">:</span> <span class="ruby-value">30</span>
+      <span class="ruby-identifier">u</span>.<span class="ruby-identifier">follows</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">user</span><span class="ruby-operator">|</span>
+        <span class="ruby-identifier">tweets</span> <span class="ruby-operator">|=</span> <span class="ruby-identifier">user</span>.<span class="ruby-identifier">tweets</span>
+      <span class="ruby-keyword">end</span>
+      <span class="ruby-identifier">tweets</span>.<span class="ruby-identifier">sort_by</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">obj</span><span class="ruby-operator">|</span> <span class="ruby-identifier">obj</span>.<span class="ruby-identifier">created_at</span>}
+      <span class="ruby-identifier">tweets</span>.<span class="ruby-identifier">reverse!</span>
+      <span class="ruby-ivar">@returnValue</span> = {
+        <span class="ruby-identifier">content</span><span class="ruby-operator">:</span> <span class="ruby-identifier">tweets</span>.<span class="ruby-identifier">as_json</span>(<span class="ruby-identifier">only</span><span class="ruby-operator">:</span> <span class="ruby-constant">Tweet</span>.<span class="ruby-identifier">miniKey</span>, <span class="ruby-value">:include</span> =<span class="ruby-operator">&gt;</span> {
+          <span class="ruby-identifier">user</span><span class="ruby-operator">:</span> {
+            <span class="ruby-identifier">only</span><span class="ruby-operator">:</span> <span class="ruby-constant">User</span>.<span class="ruby-identifier">miniKey</span> }
+          })[<span class="ruby-identifier">offset</span><span class="ruby-operator">..</span>(<span class="ruby-identifier">offset</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">limit</span>)]
+      }
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">500</span>
+      <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:forbidden</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">rescue</span>
+    <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">504</span>
+    <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:service_unavailable</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">sendJson</span>
+<span class="ruby-keyword">end</span></code></pre>
+						</div>
+										</div>
+
+					
+									</div>
 								<a name="method-i-index">anchor</a>
 				<div id="method-i-index-doc" class="method">
 
@@ -365,7 +432,7 @@ its user</p>
 </li></ul>					
 											<div class="method-source-code" id="index-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/tweets_controller.rb, line 27</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/tweets_controller.rb, line 28</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">index</span>
   <span class="ruby-keyword">begin</span>
     <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@count</span>.<span class="ruby-identifier">present?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-ivar">@count</span> <span class="ruby-operator">==</span> <span class="ruby-string">&quot;true&quot;</span>)
@@ -423,7 +490,7 @@ on the parameters, check at the model</p>
 </li></ul>					
 											<div class="method-source-code" id="save-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/tweets_controller.rb, line 96</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/tweets_controller.rb, line 97</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">save</span>
   <span class="ruby-keyword">begin</span>
     <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@security</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-ivar">@tweet</span>[<span class="ruby-value">:user_id</span>] <span class="ruby-operator">==</span> <span class="ruby-ivar">@user_id</span>)
@@ -500,7 +567,7 @@ on the parameters, check at the model</p>
 </li></ul>					
 											<div class="method-source-code" id="show-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/tweets_controller.rb, line 62</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/tweets_controller.rb, line 63</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">show</span>
   <span class="ruby-keyword">begin</span>
     <span class="ruby-identifier">tweets</span> = <span class="ruby-constant">Tweet</span>.<span class="ruby-identifier">find_by_id</span>(<span class="ruby-ivar">@id</span>)
@@ -582,6 +649,7 @@ on the parameters, check at the model</p>
 			<li><a href="../Commentary.html">Commentary</a></li>
 			<li><a href="../Concert.html">Concert</a></li>
 			<li><a href="../Description.html">Description</a></li>
+			<li><a href="../Feedback.html">Feedback</a></li>
 			<li><a href="../Flac.html">Flac</a></li>
 			<li><a href="../Follow.html">Follow</a></li>
 			<li><a href="../Friend.html">Friend</a></li>

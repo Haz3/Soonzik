@@ -39,19 +39,19 @@
                        HorizontalAlignment="Right" Margin="0,0,10,0" />
             </Grid>
         </DataTemplate>
-        
+
         <DataTemplate x:Key="ListPackItemTemplate">
-            <TextBlock FontSize="25" Text="{Binding title}"></TextBlock>
+            <TextBlock FontSize="25" Text="{Binding title}" />
         </DataTemplate>
 
         <DataTemplate x:Key="ListArtisteItemTemplate">
-            <TextBlock FontSize="25" Text="{Binding username}"></TextBlock>
+            <TextBlock FontSize="25" Text="{Binding username}" />
         </DataTemplate>
-        
+
     </Page.Resources>
 
     <Grid x:Name="GlobalGrid">
-        
+
         <Grid.RowDefinitions>
             <RowDefinition Height="250" />
             <RowDefinition Height="*" />
@@ -70,7 +70,8 @@
                 </ItemsPanelTemplate>
             </ListView.ItemsPanel>
         </ListView>-->
-            <ListView Grid.Row="0" ItemsSource="{Binding CompleteListPack}" ItemTemplate="{StaticResource ListPackItemTemplate}"
+        <ListView Grid.Row="0" ItemsSource="{Binding CompleteListPack}"
+                  ItemTemplate="{StaticResource ListPackItemTemplate}"
                   SelectedItem="{Binding ThePack, Mode=TwoWay}">
             <interactivity:Interaction.Behaviors>
                 <core:EventTriggerBehavior EventName="Tapped">
@@ -79,7 +80,7 @@
             </interactivity:Interaction.Behaviors>
 
         </ListView>
-        
+
         <Grid Grid.Row="1">
             <Pivot x:Name="PivotGlobal" HeaderTemplate="{StaticResource SizeHeaderGlobalPivot}"
                    Foreground="Transparent" RenderTransformOrigin="0.5,0.5" Style="{StaticResource PivotStyle1}"
@@ -87,16 +88,19 @@
                 <PivotItem Header="Pack Info">
                     <Grid>
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="60"/>
-                            <RowDefinition Height="60"/>
-                            <RowDefinition Height="60"/>
+                            <RowDefinition Height="60" />
+                            <RowDefinition Height="60" />
+                            <RowDefinition Height="60" />
                         </Grid.RowDefinitions>
-                        <TextBlock Grid.Row="0" FontSize="20" Foreground="White" Text="{Binding MyPack.title, Mode=TwoWay}"/>
-                        <TextBlock Grid.Row="1" FontSize="20" Foreground="White" Text="{Binding MyPack.descriptions[0].description, Mode=TwoWay}"/>
-                        <Button Grid.Row="2" HorizontalAlignment="Center" Content="Acheter" Command="{Binding BuyCommand}"/>
+                        <TextBlock Grid.Row="0" FontSize="20" Foreground="White"
+                                   Text="{Binding MyPack.title, Mode=TwoWay}" />
+                        <TextBlock Grid.Row="1" FontSize="20" Foreground="White"
+                                   Text="{Binding MyPack.descriptions[0].description, Mode=TwoWay}" />
+                        <Button Grid.Row="2" HorizontalAlignment="Center" Content="Acheter"
+                                Command="{Binding BuyCommand}" />
                     </Grid>
                 </PivotItem>
-                
+
                 <PivotItem x:Uid="AlbumPivot" Header="">
                     <ListBox Background="Transparent" x:Name="ListBoxAlbum" ItemsSource="{Binding ListAlbums}"
                              ItemTemplate="{StaticResource AlbumTemplate}"
@@ -109,11 +113,11 @@
                         </interactivity:Interaction.Behaviors>
                     </ListBox>
                 </PivotItem>
-                
+
                 <PivotItem x:Uid="ArtistPivot" Header="">
                     <ListBox Background="Transparent" x:Name="ListBoxArtiste" ItemsSource="{Binding ListArtistes}"
                              ItemTemplate="{StaticResource ListArtisteItemTemplate}"
-                             SelectedItem="{Binding TheArtiste, Mode=TwoWay}"/>
+                             SelectedItem="{Binding TheArtiste, Mode=TwoWay}" />
 
                     <interactivity:Interaction.Behaviors>
                         <core:EventTriggerBehavior EventName="Tapped">

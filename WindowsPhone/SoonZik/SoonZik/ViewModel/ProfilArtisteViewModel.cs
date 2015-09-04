@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Windows.ApplicationModel.Core;
+using Windows.ApplicationModel.Resources;
 using Windows.UI.Core;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
@@ -28,15 +29,42 @@ namespace SoonZik.ViewModel
                 ItemClickCommand = new RelayCommand(ItemClickCommandExecute);
                 ListAlbums = new ObservableCollection<Album>();
                 AddCommand = new RelayCommand(AddFriendExecute);
+
+                var loader = new ResourceLoader();
+                foreach (var friend in Singleton.Instance().CurrentUser.friends)
+                {
+                    if (friend.username == TheArtiste.username)
+                    {
+                        ButtonFriendText = loader.GetString("DelFriend");
+                        _friend = true;
+                    }
+                    else
+                    {
+                        ButtonFriendText = loader.GetString("AddFriend");
+                        _friend = false;
+                    }
+
+                }
             }
         }
 
         #endregion
 
         #region Attribute
+        private string _buttonFriendText;
 
+        public string ButtonFriendText
+        {
+            get { return _buttonFriendText; }
+            set
+            {
+                _buttonFriendText = value;
+                RaisePropertyChanged("ButtonFriendText");
+            }
+
+        }
         public ICommand AddCommand { get; private set; }
-
+        private bool _friend;
         private bool _follow;
         public ICommand FollowCommand { get; private set; }
         private User _theArtiste;
@@ -114,7 +142,7 @@ namespace SoonZik.ViewModel
                 RaisePropertyChanged("NbrFollowers");
             }
         }
-        
+
         #endregion
 
         #region Method
@@ -261,7 +289,7 @@ namespace SoonZik.ViewModel
 
         private void AddFriendExecute()
         {
-            AddDelFriendHelpers.GetUserKeyForFriend(TheArtiste.id.ToString());
+            AddDelFriendHelpers.GetUserKeyForFriend(TheArtiste.id.ToString(), _friend);
         }
 
         #endregion

@@ -2,39 +2,91 @@
   %loading{ "ng-if" => "loading == true" }
   .index{ "ng-if" => "loading == false" }
     .row
-      .small-12.medium-8.columns
-        %h3.subheader
-          Last News
+      .small-12.columns{ "ng-class" => "classLeftSide" }
         .clearfix
-          .small-6.medium-3.columns{"ng-repeat" => "new in news", :class => "{{ $last ? 'end' : '' }}"}
-            %img{ "ng-src" => "{{ (new.attachments.length == 0) ? '/assets/news/placeholder.jpg' : '/assets/news/' + new.attachments[0].url }}" }
+          %h3.subheader.left
+            Dernières news
+          %h3.subheader.right
+            %a{:href => "/news"} Voir tout
+        .clearfix
+          .small-6.columns{"ng-repeat" => "new in news", :class => "{{ $last ? 'end' : '' }}"}
+            %a{ href: "/news/{{new.id}}" }
+              %img{ "ng-src" => "{{ (new.attachments.length == 0) ? '/assets/news/placeholder.jpg' : '/assets/news/' + new.attachments[0].url }}" }
             %p.text-center
-              %strong {{new.title}}
+              %a{ href: "/news/{{new.id}}" }
+                %strong {{new.title}}
         .divider
-        %h3.subheader.left
-          Packs du moment
-        %h3.subheader.right
-          %a{:href => "http://lvh.me:3000/packs/"} Voir tout
-        .ul.large-block-grid-4
-          %li{ "ng-repeat" => "pack in packs"}
+        .clearfix
+          %h3.subheader.left
+            Packs du moment
+          %h3.subheader.right
+            %a{:href => "/packs"} Voir tout
+        %ul.no-bullet.clearfix.lastPacks
+          %li.small-6.columns{ "ng-repeat" => "pack in packs"}
             .panel
               %h5.subheader.text-center
-                {{ pack.title }}
-              %img{"src" => "/assets/pack1.jpg"}
-              .divider
-              Temps Restant :
-              %br
-              Moyenne :
-      .small-12.medium-4.columns
-        %p tweets
-        %hr
-        %p Suggestion
+                %a{ href: "/packs/{{pack.id}}" } {{ pack.title }}
+              %img{ "ng-src" => "{{ '/assets/albums/' + pack.albums[0].image }}"}
+              %p Temps Restant : {{ pack.timeLeft }}
+              %p Moyenne : {{ pack.averagePrice }} $
+      .small-12.medium-4.columns{ "ng-if" => "user != false" }
+        %loading{ "ng-if" => "loadingRightSide == true" }
+        .contentRightSide.userProfile{ "ng-if" => "loadingRightSide == false" }
+          %h3 Tweets
+          .btnGroup
+            .button.tiny{ "ng-click" => "selectFlux()" } Flux
+            .button.tiny{ "ng-click" => "selectInteraction()" } Interactions
+          .tab_flux{ "ng-show" => "tab == 0" }
+            .sweet.tweets{ "on-scroll" => "reloadTweet()", "scroll-position" => "'bottom'" }
+              %p{ "ng-if" => "tweets.length == 0" } No tweets to display
+              .sweetContainer.tweet.clearfix{ "ng-repeat" => "tweet in tweets" }
+                .small-1.columns
+                  %a{ href: "/users/{{tweet.user.id}}" }
+                    %img{ "ng-src" => "{{ '/assets/usersImage/avatars/' + tweet.user.image }}" }
+                .contentTweet.small-11.columns
+                  %tweet{ "tweet-msg" => "tweet.msg" }
+                  %p.underTweet
+                    %i.fi-clock
+                    %span {{ tweet.created_at }} -
+                    %i.fi-comment.pointer{ "ng-click" => "comment(tweet.user.username)" }
+                    %span.pointer{ "ng-click" => "comment(tweet.user.username)" } Answer
+              %loading{ "ng-if" => "loading_tweet", "loading-type" => "'square'" }
+          .tab_my_talk{ "ng-show" => "tab != 0" }
+            .sweet.tweets{ "on-scroll" => "reloadPersonalTweet()", "scroll-position" => "'bottom'" }
+              %p{ "ng-if" => "otherTweets.length == 0" } No tweets to display
+              .sweetContainer.tweet.clearfix{ "ng-repeat" => "tweet in otherTweets" }
+                .small-1.columns
+                  %img{ "ng-src" => "{{ '/assets/usersImage/avatars/' + tweet.user.image }}" }
+                .contentTweet.small-11.columns
+                  %tweet{ "tweet-msg" => "tweet.msg" }
+                  %p.underTweet
+                    %i.fi-clock
+                    %span {{ tweet.created_at }} -
+                    %i.fi-comment.pointer{ "ng-click" => "comment(tweet.user.username)" }
+                    %span.pointer{ "ng-click" => "comment(tweet.user.username)" } Answer
+              %loading{ "ng-if" => "loading_tweet", "loading-type" => "'square'" }
+          .row.collapse
+            .small-10.columns
+              %input#inputTweet{ type: "text", placeholder: "Tell something !", "ng-model" => "tweet.input", "submit-input" => "sendTweet()" }
+            .small-2.columns.end{ "ng-click" => "sendTweet()" }
+              %a.button.postfix
+                %i.fi-arrow-right
+          %span {{ 140 - tweet.input.length }} {{ labels.DISPLAY_USER_TWEETS_CHARACTERS_LABEL }}
+          %hr
+          .suggestions
+            %h3 Suggestions
+            .music.clearfix{ "ng-repeat" => "suggestion in suggestions" }
+              %music.small-2.columns{ "music-object" => "suggestion" }
+                %i.fi-play
+              .small-10.columns
+                %a{ href: "/albums/{{ suggestion.album.id }}" }
+                  {{ suggestion.title }}
     .row
       .divider
       %h3.subheader.left
         Battle en Cours
       %h3.subheader.right
-        %a{:href => "http://lvh.me:3000/battle"} Voir Tout
+        %a{:href => "/battles"} Voir Tout
       .large-block-grid-4.battle
         %hr
         .clearfix.battleLine
@@ -43,7 +95,7 @@
               %a{ href: "/users/{{ battle.artist_one.id }}" } {{ battle.artist_one.username }}
             %img{ "ng-src" => "{{ '/assets/usersImage/avatars/' + battle.artist_one.image}}" }
             %p{ "ng-if" => "user != false" }
-              %span{ "ng-click" => "showVoteFor(battle, battle.artist_one)", "class" => "label radius {{ voteClass(voteCurrentUser, battle.artist_one.id) }}" } {{ voteText(voteCurrentUser, battle.artist_one.id) }}
+              %span{ "ng-click" => "voteFor(battle, battle.artist_one)", "class" => "label radius {{ voteClass(voteCurrentUser, battle.artist_one.id) }}" } {{ voteText(voteCurrentUser, battle.artist_one.id) }}
             .topFive.text-center{ "ng-if" => "battle.artist_one.topFive.length != 0" }
               %h5
                 {{ labels.DISPLAY_BATTLE_TOP_LABEL }}
@@ -74,8 +126,8 @@
             %h4
               %a{ href: "/users/{{ battle.artist_two.id }}" } {{ battle.artist_two.username }}
             %img{ "ng-src" => "{{ '/assets/usersImage/avatars/' + battle.artist_two.image}}" }
-            %p{ "ng-if" => "currentUser != false" }
-              %span{ "ng-click" => "showVoteFor(battle, battle.artist_two)", "class" => "label radius {{ voteClass(voteCurrentUser, battle.artist_two.id) }}" } {{ voteText(voteCurrentUser, battle.artist_two.id) }}
+            %p{ "ng-if" => "user != false" }
+              %span{ "ng-click" => "voteFor(battle, battle.artist_two)", "class" => "label radius {{ voteClass(voteCurrentUser, battle.artist_two.id) }}" } {{ voteText(voteCurrentUser, battle.artist_two.id) }}
             .topFive.text-center{ "ng-if" => "battle.artist_two.topFive.length != 0" }
               %h5
                 {{ labels.DISPLAY_BATTLE_TOP_LABEL }}

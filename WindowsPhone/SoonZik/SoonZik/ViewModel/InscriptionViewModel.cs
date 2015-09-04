@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Windows.Input;
 using Windows.UI.Popups;
 using GalaSoft.MvvmLight;
@@ -11,10 +12,20 @@ namespace SoonZik.ViewModel
 {
     public class InscriptionViewModel : ViewModelBase
     {
+        #region Ctor
+
+        public InscriptionViewModel()
+        {
+            ValidateCommand = new RelayCommand(ValidateExecute);
+            PasswordBoxCommand = new RelayCommand(PasswordBoxCommandExecute);
+            NewUser = new User();
+            NewUser.address = new Address();
+        }
+        #endregion
+
         #region Attribute
 
         private string _password;
-
         public string Password
         {
             get { return _password; }
@@ -26,7 +37,6 @@ namespace SoonZik.ViewModel
         }
 
         private DateTimeOffset _birthday;
-
         public DateTimeOffset Birthday
         {
             get { return _birthday; }
@@ -36,12 +46,8 @@ namespace SoonZik.ViewModel
                 RaisePropertyChanged("Birthday");
             }
         }
-
         public ICommand ValidateCommand { get; private set; }
-
-
         private User _newUser;
-
         public User NewUser
         {
             get { return _newUser; }
@@ -51,31 +57,40 @@ namespace SoonZik.ViewModel
                 RaisePropertyChanged("NewUser");
             }
         }
+        public ICommand PasswordBoxCommand { get; private set; }
 
-        #endregion
-
-        #region Ctor
-
-        public InscriptionViewModel()
-        {
-            ValidateCommand = new RelayCommand(ValidateExecute);
-            NewUser = new User();
-            NewUser.address = new Address();
-        }
-        
         #endregion
 
         #region Method
+
+        private void PasswordBoxCommandExecute()
+        {
+            if (Password.Length < 8 && Password != null)
+            {
+                new MessageDialog("Password need 8").ShowAsync();
+            }
+        }
+        
         private void ValidateExecute()
         {
             if (EmailHelper.IsValidEmail(NewUser.email))
             {
-                NewUser.birthday = Birthday.Year + "-" + Birthday.Month + "-" + Birthday.Day;
+                var month = Birthday.Month.ToString();
+                var day = Birthday.Day.ToString();
+                if (Birthday.Month < 10)
+                {
+                    month = "0" + Birthday.Month.ToString();
+                }
+                if (Birthday.Day < 10)
+                {
+                    day = "0" + Birthday.Day;
+                }
+                NewUser.birthday = Birthday.Year + "-" + month + "-" + day + " 00:00:00";
                 PostUser();
             }
             else
             {
-                new MessageDialog("").ShowAsync();
+                new MessageDialog("Email not Valid").ShowAsync();
             }
         }
 
@@ -83,8 +98,9 @@ namespace SoonZik.ViewModel
         {
             var postRequest = new HttpRequestPost();
             var res = await postRequest.Save(NewUser, "", _password);
-            new MessageDialog("Content = " + res.ToString()).ShowAsync();
+            new MessageDialog("Inscription OK").ShowAsync();
         }
+
         #endregion
     }
 }

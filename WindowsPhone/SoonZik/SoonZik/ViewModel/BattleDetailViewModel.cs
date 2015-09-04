@@ -25,7 +25,7 @@ namespace SoonZik.ViewModel
             InitializeData();
             InitializeTimer();
         }
-        
+
         #endregion
 
         #region Attribute
@@ -34,6 +34,7 @@ namespace SoonZik.ViewModel
         public ICommand VoteArtisteTwoCommand { get; set; }
 
         private bool _canVote;
+
         public bool CanVote
         {
             get { return _canVote; }
@@ -45,6 +46,7 @@ namespace SoonZik.ViewModel
         }
 
         private string _pourcentageVote1;
+
         public string PourcentageVote1
         {
             get { return _pourcentageVote1; }
@@ -56,6 +58,7 @@ namespace SoonZik.ViewModel
         }
 
         private string _pourcentageVote2;
+
         public string PourcentageVote2
         {
             get { return _pourcentageVote2; }
@@ -64,10 +67,10 @@ namespace SoonZik.ViewModel
                 _pourcentageVote2 = value;
                 RaisePropertyChanged("PourcentageVote2");
             }
-            
         }
 
         private string _jourdRestants;
+
         public string JoursRestants
         {
             get { return _jourdRestants; }
@@ -79,6 +82,7 @@ namespace SoonZik.ViewModel
         }
 
         private string _heuresRestantes;
+
         public string HeuresRestantes
         {
             get { return _heuresRestantes; }
@@ -87,10 +91,10 @@ namespace SoonZik.ViewModel
                 _heuresRestantes = value;
                 RaisePropertyChanged("HeuresRestantes");
             }
-
         }
 
         private string _minutesRestantes;
+
         public string MinutesRestantes
         {
             get { return _minutesRestantes; }
@@ -102,6 +106,7 @@ namespace SoonZik.ViewModel
         }
 
         private string _secondesRestantes;
+
         public string SecondesRestantes
         {
             get { return _secondesRestantes; }
@@ -110,21 +115,22 @@ namespace SoonZik.ViewModel
                 _secondesRestantes = value;
                 RaisePropertyChanged("SecondesRestantes");
             }
-
         }
 
         private ArtistOne _artistOne;
+
         public ArtistOne ArtistOne
         {
-            get { return _artistOne;}
+            get { return _artistOne; }
             set
             {
                 _artistOne = value;
                 RaisePropertyChanged("ArtistOne");
             }
-        }        
+        }
 
         private ArtistTwo _artisTwo;
+
         public ArtistTwo ArtistTwo
         {
             get { return _artisTwo; }
@@ -166,16 +172,16 @@ namespace SoonZik.ViewModel
                 }
             }
             a = (a*100)/CurrentBattle.votes.Count;
-            b = (b * 100) / CurrentBattle.votes.Count;
+            b = (b*100)/CurrentBattle.votes.Count;
             PourcentageVote1 = a + " %";
             PourcentageVote2 = b + " %";
         }
 
         private void InitializeTimer()
         {
-            char[] delimiter = { ' ', '-', ':'};
-            string[] word = CurrentBattle.date_end.Split(delimiter);
-            
+            char[] delimiter = {' ', '-', ':'};
+            var word = CurrentBattle.date_end.Split(delimiter);
+
             //_endDate = new DateTime(Int32.Parse(word[0]), Int32.Parse(word[1]), Int32.Parse(word[2]), Int32.Parse(word[3]), Int32.Parse(word[4]), Int32.Parse(word[5]));
             _endDate = new DateTime(2015, 6, 29, 0, 0, 0);
             _timer = new DispatcherTimer();
@@ -217,7 +223,8 @@ namespace SoonZik.ViewModel
                 if (key != null)
                 {
                     var stringEncrypt = KeyHelpers.GetUserKeyFromResponse(key);
-                    var cryptographic = EncriptSha256.EncriptStringToSha256(Singleton.Instance().CurrentUser.salt + stringEncrypt);
+                    var cryptographic =
+                        EncriptSha256.EncriptStringToSha256(Singleton.Instance().CurrentUser.salt + stringEncrypt);
                     Vote(post, cryptographic, get, artistId);
                 }
             });
@@ -225,7 +232,8 @@ namespace SoonZik.ViewModel
 
         private void Vote(HttpRequestPost post, string cryptographic, HttpRequestGet get, string artistId)
         {
-            var resPost = post.Vote(cryptographic, CurrentBattle.id.ToString(), artistId, Singleton.Instance().CurrentUser.id.ToString());
+            var resPost = post.Vote(cryptographic, CurrentBattle.id.ToString(), artistId,
+                Singleton.Instance().CurrentUser.id.ToString());
             resPost.ContinueWith(delegate(Task<string> tmp)
             {
                 var test = tmp.Result;
@@ -234,16 +242,14 @@ namespace SoonZik.ViewModel
                     CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
                     {
                         var resGet = get.GetObject(new Battle(), "battles", CurrentBattle.id.ToString());
-                        resGet.ContinueWith(delegate(Task<object> newBattle)
-                        {
-                            CurrentBattle = newBattle.Result as Battle;
-                        });
+                        resGet.ContinueWith(
+                            delegate(Task<object> newBattle) { CurrentBattle = newBattle.Result as Battle; });
                         InitializeData();
                     });
                 }
             });
         }
-        #endregion
 
+        #endregion
     }
 }

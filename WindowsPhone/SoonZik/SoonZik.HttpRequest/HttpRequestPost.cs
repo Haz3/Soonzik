@@ -39,7 +39,7 @@ namespace SoonZik.HttpRequest
                 "&user[language]=" + "fr" +
                 "&user[fname]=" + myUser.fname +
                 "&user[lname]=" + myUser.lname +
-                "&user[desciption]=" + myUser.description +
+                //"&user[description]=" + myUser.description +
                 "&user[phoneNumber]=" + myUser.phoneNumber +
 
                 "&address[numberStreet]=" + myUser.address.NumberStreet +
@@ -110,6 +110,13 @@ namespace SoonZik.HttpRequest
             HttpWebRequest request = (HttpWebRequest) WebRequest.Create(ApiUrl + "tweets/save");
             var postData = "tweet[user_id]=" + myUser.id + "&tweet[msg]=" + message + "&secureKey=" + sha256 +
                            "&user_id=" + myUser.id;
+            return await GetHttpPostResponse(request, postData);
+        }
+
+        public async Task<String> SendComment(string message, Album myAlbum, string sha256, User myUser)
+        {
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(ApiUrl + "albums/addcomment/" + myAlbum.id);
+            var postData = "content=" + message + "&secureKey=" + sha256 + "&user_id=" + myUser.id;
             return await GetHttpPostResponse(request, postData);
         }
 
