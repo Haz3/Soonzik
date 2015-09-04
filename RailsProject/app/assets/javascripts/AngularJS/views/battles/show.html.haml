@@ -17,7 +17,7 @@
 							%td
 								%i.fi-play
 							%td
-								{{ topFiveOne.title }}
+								%music{ "music-object" => "topFiveOne" } {{ topFiveOne.title }}
 							%td
 								{{ topFiveOne.duration }}
 							%td
@@ -49,7 +49,7 @@
 							%td
 								%i.fi-play
 							%td
-								{{ topFiveTwo.music.title }}
+								%music{ "music-object" => "topFiveTwo" } {{ topFiveTwo.music.title }}
 							%td
 								{{ topFiveTwo.music.duration }}
 							%td

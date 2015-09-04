@@ -37,7 +37,7 @@
 					%tbody.radius
 						%tr{ 'ng-repeat' => 'song in show.user.topFive track by $index' }
 							%td{:width => '1000'}
-								{{song.title}}
+								%music{ "music-object" => "song" } {{song.title}}
 							%td{:width => '100'}
 								{{ formatTime(song.duration) }}
 							%td{:width => '50'}

@@ -42,55 +42,6 @@ SoonzikApp.controller('HeaderCtrl', ['$scope', "$routeParams", "$location", "Sec
 		$scope.menuOpen = false;
 	}
 
-/*
-	var notifTweet = function(firstLoop) {
-		var paramsTweet = [
-			{ key: encodeURIComponent("attribute[msg]"), value: encodeURIComponent("%" + $scope.user.username + "%") },
-			{ key: encodeURIComponent("order_by_desc[]"), value: encodeURIComponent("created_at") }
-		];
-
-		HTTPService.findTweet(paramsTweet).then(function(response) {
-			tmp_tweets = response.data.content;
-
-
-			// Loop backward to splice inside
-			for (var i = tmp_tweets.length - 1 ; i >= 0 ; i--) {
-				if (tmp_tweets[i].user.id == $scope.user.id) {
-					tmp_tweets.splice(i, 1);
-				}
-			}
-
-			if (firstLoop == true) {
-				$scope.tweets = tmp_tweets;
-
-				$timeout(function() {
-					notifTweet(false);
-				}, 10000);
-			} else {
-				var newTweets = [];
-				if ($scope.tweets.length == 0) {
-					newTweets = tmp_tweets;
-				} else {
-					var limit = 0
-					for (var i = 0 ; i < tmp_tweets.length ; i++) {
-						if (tmp_tweets[i].id == $scope.tweets[0].id) {
-							limit = i;
-						}
-					}
-					newTweets = tmp_tweets.splice(0, limit);
-				}
-				$scope.tweets = newTweets.concat($scope.tweets);
-
-				for (var i = 0 ; i < newTweets.length ; i++) {
-					NotificationService.info("New tweet from " + newTweets[i].user.username);
-				}
-			}
-		}, function(error) {
-			// Do nothing
-		});
-	}*/
-
-
 	$scope.newNotif = function(firstLoop) {
 		SecureAuth.securedTransaction(function (key, user_id) {
 				var params = [
@@ -139,7 +90,9 @@ SoonzikApp.controller('HeaderCtrl', ['$scope', "$routeParams", "$location", "Sec
 				}, 20000);
 			});
 		}, function(error) {
-			// Do nothing
+				$timeout(function() {
+					$scope.newNotif(firstLoop);
+				}, 100000);
 		});
 	}
 

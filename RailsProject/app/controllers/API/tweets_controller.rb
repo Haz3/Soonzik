@@ -302,11 +302,12 @@ module API
       begin
         if (@security)
           u = User.find_by_id(@user_id)
-          tweets = u.tweets
+          tweets = []
+          tweets |= u.tweets || []
           offset = (@offset.present?) ? @offset.to_i : 0
           limit = (@limit.present?) ? @limit.to_i : 30
           u.follows.each do |user|
-            tweets |= user.tweets
+            tweets |= user.tweets || []
           end
           tweets.sort_by { |obj| obj.created_at}
           tweets.reverse!
