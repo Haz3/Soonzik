@@ -184,48 +184,41 @@ SoonzikApp.controller('AlbumsCtrl', ['$scope', "$routeParams", 'SecureAuth', 'HT
 
   $scope.addAlbumToCart = function () {
 
-  	SecureAuth.securedTransaction(function (secure_key, user_id) {
-
-	  	var parameters = [
-	  		{ key: "secureKey", value: secure_key},
-	  		{ key: "user_id", value: $scope.user.id },
-			{ key: "cart[typeObj]", value : "Album" },
-			{ key: "cart[ojb_id]", value : $scope.album.id },
-			{ key: "cart[user_id]", value : $scope.user.id }
-		];
-
-		console.log(parameters);
-
+  	SecureAuth.securedTransaction(function (key, user_id) {
+		var parameters = {
+			secureKey: key,
+			user_id: user_id,
+			cart: {
+				typeObj: "Album",
+				obj_id: $scope.album.id,
+				user_id: user_id
+			}
+		};
 			HTTPService.addToCart(parameters).then(function(response) {
-				
-				$scope.album.push(response.data.content);
-			
+				console.log("Ajout au panier de l'album " + $scope.album.id);
 			}, function(repsonseError) {
 				NotificationService.error("Error Add To Cart");
 			});
 		}, function(error) {
 			NotificationService.error("Error securedTransaction");
 		});
-  	console.log($scope.album);
   }
 
-  $scope.addSongToCart = function() {
+  $scope.addSongToCart = function(music) {
   	SecureAuth.securedTransaction(function (key, user_id) {
 			
-			var parameters = [
-				{ key: "secureKey", value: key },
-				{ key: "user_id", value: user_id },
-				{ key: "cart[typeObj]", value: "Music" },
-				{ key: "cart[ojb_id]", value:  2 },
-				{ key: "cart[user_id]", value: user_id }
-//				{ key: "cart[ojb_id]", value : music.id },
-			];
-
-			console.log(parameters);
+			var parameters = {
+				secureKey: key,
+				user_id: user_id,
+				cart: {
+					typeObj: "Music",
+					obj_id: music.id,
+					user_id: user_id
+				}
+			};
 
 			HTTPService.addToCart(parameters).then(function(response) {
-				
-				$scope.album.push(response.data.content);
+				console.log("Ajout au panier de la musique " + music.id );
 			
 			}, function(repsonseError) {
 				NotificationService.error("Error Add To Cart");
