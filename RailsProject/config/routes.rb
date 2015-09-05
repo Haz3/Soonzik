@@ -131,6 +131,7 @@ Rails.application.routes.draw do
 
     resources :users, only: [:index, :show] do #ok
       collection do
+        get 'artists' => 'users#artists'
         get 'find' => 'users#find'
         match 'save' => 'users#save', via: [:post, :options]
         match 'update' => 'users#update', via: [:post, :options]

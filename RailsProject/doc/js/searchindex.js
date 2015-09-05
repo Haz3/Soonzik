@@ -859,6 +859,12 @@ var SearchIndex =
 		"type": "anymethod"
 	},
 	{
+		"name": "artists",
+		"link": "API/UsersController.html#method-i-artists",
+		"snippet": "<p>Retrieve all the artists\n<p>Route : /users/artists\n<p>Options\n",
+		"type": "anymethod"
+	},
+	{
 		"name": "show",
 		"link": "API/UsersController.html#method-i-show",
 		"snippet": "<p>Give a specific object by its id\n<p>Route : /users/:id\n<p>Options\n",
