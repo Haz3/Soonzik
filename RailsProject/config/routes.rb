@@ -30,7 +30,6 @@ Rails.application.routes.draw do
 
     get 'carts/my_cart' => 'carts#show'
     match 'carts/save' => 'carts#save', via: [:post, :options]
-    match 'carts/:id/gift' => 'carts#giftCart', via: [:post, :options]
     get 'carts/destroy' => 'carts#destroy' #ok
 
     resources :concerts, only: [:index, :show] do #ok
