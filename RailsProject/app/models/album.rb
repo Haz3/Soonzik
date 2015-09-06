@@ -72,4 +72,18 @@ class Album < ActiveRecord::Base
   def getProposed
     @proposed
   end
+
+  # To know if the album is in the pack
+  def isPartial
+    if (@pack_id.present?)
+      PartialAlbum.where(album_id: self.id).where(pack_id: @pack_id).size > 0
+    else
+      nil
+    end
+  end
+
+  # To know if the album is in the pack
+  def setPack(value)
+    @pack_id = value
+  end
 end

@@ -73,12 +73,16 @@ module API
           codeAnswer 502
           defineHttp :not_found
         else
+          pack.albums.each do |album|
+            album.setPack(pack.id)
+          end
           @returnValue = { content: pack.as_json(:include => { albums: {
                                                                   :include => {
                                                                     :user => { :only => User.miniKey },
                                                                     :musics => { :only => Music.miniKey }
                                                                   },
-                                                                  :only => Album.miniKey
+                                                                  :only => Album.miniKey,
+                                                                  :methods => :isPartial
                                                                 },
                                                                 user: {
                                                                   :only => User.miniKey
@@ -90,6 +94,7 @@ module API
           codeAnswer 200
         end
       rescue
+        puts $!, $@
         codeAnswer 504
         defineHttp :service_unavailable
       end

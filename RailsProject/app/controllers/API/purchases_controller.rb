@@ -158,20 +158,23 @@ module API
             objectToDelete.unshift pp
 
             pack.albums.each do |album|
-              pa = PurchasedAlbum.new
-              pa.album_id = album.id
-              pa.purchased_pack_id = pp.id
-              pa.save!
-              objectToDelete.unshift pa
+              album.setPack(@pack_id)
+              if (!album.isPartial || (album.isPartial && @amount > pack.averagePrice))
+                pa = PurchasedAlbum.new
+                pa.album_id = album.id
+                pa.purchased_pack_id = pp.id
+                pa.save!
+                objectToDelete.unshift pa
 
-              album.musics.each { |zik|
-                pm = PurchasedMusic.new
-                pm.purchase_id = p.id
-                pm.purchased_album_id = pa.id
-                pm.music_id = zik.id
-                pm.save!
-                objectToDelete.unshift pm
-              }
+                album.musics.each { |zik|
+                  pm = PurchasedMusic.new
+                  pm.purchase_id = p.id
+                  pm.purchased_album_id = pa.id
+                  pm.music_id = zik.id
+                  pm.save!
+                  objectToDelete.unshift pm
+                }
+              end
             end
 
             @returnValue = {
