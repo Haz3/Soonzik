@@ -2,38 +2,76 @@
 .row
   = form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
     = devise_error_messages!
-    .small-6.small-centered.columns.left
-      .panel
-        .field
-          = f.label :fname
-          = f.text_field :fname
-        .field
-          = f.label :username
-          = f.text_field :username
-        .field
-          = f.label :email
-          = f.email_field :email, autofocus: true
-        .field
-          = f.label :password
-          - if @validatable
-            %em
-              (#{@minimum_password_length} characters minimum)
-          = f.password_field :password, autocomplete: "off"
-        .field
-          = f.label :password_confirmation
-          %br/
-          = f.password_field :password_confirmation, autocomplete: "off"
-    .small-6.small-centered.columns.right
-      .panel
-        .field
-          = f.label :lname
-          = f.text_field :lname
-        .field
-          = f.label :birthday
-          = f.date_select :birthday, :start_year => 1950, :end_year => 2005, order: [:day, :month, :year], default: { day: 1, month: 1, year: 1990}
-        .field
-          = f.label :newsletter
-          = f.check_box :newsletter
-        .actions
-          = f.submit "Sign up"
+    .row
+      .contain-to-grid
+        .large-12.small-8.columns
+          .panel
+            %h3.subheader
+              Informations Public
+            .row
+              .large-3.small-3.columns
+                = f.label :username, "{{ labels.DISPLAY_SIGNUP_USERNAME_LABEL }}", :class => "right inline"
+              .small-9.columns
+                = f.text_field :username, :class => "radius"
+            .row
+              .large-3.small-3.columns
+                = f.label :description, "{{ labels.DISPLAY_SIGNUP_DESCRIPTION_LABEL }}", :class => "right inline"
+              .small-9.columns
+                = f.text_area :description, :class => "radius"
+            .row
+              .large-3.small-3.columns
+                = f.label :birthday, "{{ labels.DISPLAY_SIGNUP_BIRTHDAY_LABEL }}", :class => "right inline"
+              .small-9.columns
+                .clearfix
+                  = f.date_select :birthday, { start_year: 1900, end_year: 2010, :use_two_digit_numbers => true, order: [:day, :month, :year] }, { :class => "medium-4 columns radius" }
+            .row
+              .large-3.small-3.columns
+                = f.label :facebook, "{{ labels.DISPLAY_SIGNUP_FACEBOOK_LABEL }}", :class => "right inline"
+              .small-9.columns
+                = f.text_field :facebook, :class => "radius"
+            .row
+              .large-3.small-3.columns
+                = f.label :twitter, "{{ labels.DISPLAY_SIGNUP_TWITTER_LABEL }}", :class => "right inline"
+              .small-9.columns
+                = f.text_field :twitter, :class => "radius"
+            .row
+              .large-3.small-3.columns
+                = f.label :googlePlus, "{{ labels.DISPLAY_SIGNUP_GPLUS_LABEL }}", :class => "right inline"
+              .small-9.columns
+                = f.text_field :googlePlus, :class => "radius"
+            %h3.subheader
+              Informations Personnel
+            .row
+              .large-3.small-3.columns
+                = f.label :fname, "{{ labels.DISPLAY_SIGNUP_FIRSTNAME_LABEL }}", :class => "right inline"
+              .small-9.columns
+                = f.text_field :fname, :class => "radius"
+            .row
+              .large-3.small-3.columns
+                = f.label :lname, "{{ labels.DISPLAY_SIGNUP_LASTNAME_LABEL }}", :class => "right inline"
+              .small-9.columns
+                = f.text_field :lname, :class => "radius"
+            .row
+              .large-3.small-3.columns
+                = f.label :password, "{{ labels.DISPLAY_SIGNUP_PASSWORD_LABEL }}", :class => "right inline"
+              .small-9.columns
+                = f.text_field :password, :type => "password", :class => "radius"
+            .row
+              .large-3.small-3.columns
+                = f.label :email, "{{ labels.DISPLAY_SIGNUP_EMAIL_LABEL }}", :class => "right inline"
+              .small-9.columns
+                = f.text_field :email, :class => "radius"
+            .row
+              .large-3.small-3.columns
+                = f.label :phoneNumber, "{{ labels.DISPLAY_SIGNUP_PHONE_LABEL }}", :class => "right inline"
+              .small-9.columns
+                = f.text_field :phoneNumber, :class => "radius"
+            .row
+              .large-3.small-3.columns
+                = f.label :newsletter, "{{ labels.DISPLAY_SIGNUP_NEWSLETTER_LABEL }}", :class => "right inline"
+              .small-9.columns
+                = f.check_box :newsletter, :class => "radius"
+            .actions
+              .large-4.columns.large-centered
+                = f.submit 'Sign up', :class => "button radius expand success"
 = render "devise/shared/links"

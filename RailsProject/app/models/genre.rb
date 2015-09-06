@@ -19,9 +19,7 @@
 #
 class Genre < ActiveRecord::Base
   has_and_belongs_to_many :influences
-  has_and_belongs_to_many :descriptions
   has_and_belongs_to_many :albums
-  #has_and_belongs_to_many :musics
   has_and_belongs_to_many :packs
   has_and_belongs_to_many :musics, -> { where("album_id IS NOT NULL") }, class_name: 'Music', foreign_key: 'genre_id', join_table: 'genres_musics', association_foreign_key: 'music_id'
 

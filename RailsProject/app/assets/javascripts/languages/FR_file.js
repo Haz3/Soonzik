@@ -297,5 +297,19 @@ var labels = {
 	FILE_DISCOTHEQUE_GET_NOTES_ERROR_MESSAGE: "Une erreur s'est produite à la récupération des notes",
 	FILE_DISCOTHEQUE_GET_MUSICS_ERROR_MESSAGE: "Une erreur s'est produite au chargement de vos musiques",
 
+	// User signup view
+	DISPLAY_SIGNUP_USERNAME_LABEL: "Pseudo *",
+	DISPLAY_SIGNUP_DESCRIPTION_LABEL: "Description",
+	DISPLAY_SIGNUP_BIRTHDAY_LABEL: "Naissance *",
+	DISPLAY_SIGNUP_FACEBOOK_LABEL: "Facebook",
+	DISPLAY_SIGNUP_TWITTER_LABEL: "Twitter",
+	DISPLAY_SIGNUP_GPLUS_LABEL: "Google Plus",
+	DISPLAY_SIGNUP_FIRSTNAME_LABEL: "Prénom *",
+	DISPLAY_SIGNUP_LASTNAME_LABEL: "Nom *",
+	DISPLAY_SIGNUP_PASSWORD_LABEL: "Mot de passe *",
+	DISPLAY_SIGNUP_EMAIL_LABEL: "Email *",
+	DISPLAY_SIGNUP_PHONE_LABEL: "Numéro de téléphone",
+	DISPLAY_SIGNUP_NEWSLETTER_LABEL: "Newsletter",
+
 
 }

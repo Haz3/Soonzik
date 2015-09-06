@@ -58,7 +58,7 @@ module API
 					    when "music"
 						  	content = { music: JSON.parse(content.to_json(:only => Music.miniKey, :include => { user: { only: User.miniKey }, album: { only: Album.miniKey } } ) ) }
 					    when "album"
-						  	content = { album: JSON.parse(content.to_json(:only => Album.miniKey, :include => { user: { only: User.miniKey } } ) ) }
+						  	content = { album: JSON.parse(content.to_json(:only => Album.miniKey, :include => { user: { only: User.miniKey }, musics: { only: Music.miniKey } } ) ) }
 					    when "pack"
 						  	content = { pack: JSON.parse(content.to_json(:only => Pack.miniKey, :include => { albums: { only: Album.miniKey, :include => { user: { only: User.miniKey } } } } ) ) }
 					  end
