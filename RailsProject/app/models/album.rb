@@ -53,7 +53,14 @@ class Album < ActiveRecord::Base
 
   # Get the average of notes
   def getAverageNote
-    return AlbumNote.where(album_id: self.id).average(:value).to_f
+    notes = 0
+    if (self.musics.size > 0)
+      self.musics.each do |music|
+        notes += MusicNote.where(music_id: music.id).average(:value).to_f
+      end
+      notes = notes / self.musics.size
+    end
+    return notes
   end
 
   # Add an attribute to know if it's an album proposed
