@@ -178,7 +178,7 @@ was released</p>
 											<p>The strong parameters to save or update object</p>					
 											<div class="method-source-code" id="album_params-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/models/album.rb, line 44</span>
+								class="language-ruby"><span class="ruby-comment"># File app/models/album.rb, line 43</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">album_params</span>(<span class="ruby-identifier">parameters</span>)
   <span class="ruby-identifier">parameters</span>.<span class="ruby-identifier">require</span>(<span class="ruby-value">:album</span>).<span class="ruby-identifier">permit</span>(<span class="ruby-value">:user_id</span>, <span class="ruby-value">:title</span>, <span class="ruby-value">:price</span>, <span class="ruby-value">:file</span>, <span class="ruby-value">:yearProd</span>, <span class="ruby-value">:image</span>)
 <span class="ruby-keyword">end</span></code></pre>
@@ -202,7 +202,7 @@ was released</p>
 <p>Fields returned : [:id, :title, :price, :image, :yearProd]</p>					
 											<div class="method-source-code" id="miniKey-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/models/album.rb, line 51</span>
+								class="language-ruby"><span class="ruby-comment"># File app/models/album.rb, line 50</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">miniKey</span>
   [<span class="ruby-value">:id</span>, <span class="ruby-value">:title</span>, <span class="ruby-value">:price</span>, <span class="ruby-value">:image</span>, <span class="ruby-value">:yearProd</span>]
 <span class="ruby-keyword">end</span></code></pre>
@@ -237,7 +237,7 @@ was released</p>
 											<p>Get the average of notes</p>					
 											<div class="method-source-code" id="getAverageNote-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/models/album.rb, line 56</span>
+								class="language-ruby"><span class="ruby-comment"># File app/models/album.rb, line 55</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">getAverageNote</span>
   <span class="ruby-keyword">return</span> <span class="ruby-constant">AlbumNote</span>.<span class="ruby-identifier">where</span>(<span class="ruby-identifier">album_id</span><span class="ruby-operator">:</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">id</span>).<span class="ruby-identifier">average</span>(<span class="ruby-value">:value</span>).<span class="ruby-identifier">to_f</span>
 <span class="ruby-keyword">end</span></code></pre>
@@ -259,7 +259,7 @@ was released</p>
 											<p>Get an attribute to know if it&#39;s an album proposed</p>					
 											<div class="method-source-code" id="getProposed-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/models/album.rb, line 66</span>
+								class="language-ruby"><span class="ruby-comment"># File app/models/album.rb, line 65</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">getProposed</span>
   <span class="ruby-ivar">@proposed</span>
 <span class="ruby-keyword">end</span></code></pre>
@@ -281,7 +281,7 @@ was released</p>
 											<p>Add an attribute to know if it&#39;s an album proposed</p>					
 											<div class="method-source-code" id="setProposed-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/models/album.rb, line 61</span>
+								class="language-ruby"><span class="ruby-comment"># File app/models/album.rb, line 60</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">setProposed</span>(<span class="ruby-identifier">value</span>)
   <span class="ruby-ivar">@proposed</span> = <span class="ruby-identifier">value</span>
 <span class="ruby-keyword">end</span></code></pre>
@@ -337,11 +337,9 @@ was released</p>
 			<li><a href="./API/SuggestionsController.html">API::SuggestionsController</a></li>
 			<li><a href="./API/TweetsController.html">API::TweetsController</a></li>
 			<li><a href="./API/UsersController.html">API::UsersController</a></li>
-			<li><a href="./Access.html">Access</a></li>
 			<li><a href="./Address.html">Address</a></li>
 			<li><a href="./AdminUser.html">AdminUser</a></li>
 			<li><a href="./Album.html">Album</a></li>
-			<li><a href="./AlbumNote.html">AlbumNote</a></li>
 			<li><a href="./Attachment.html">Attachment</a></li>
 			<li><a href="./Battle.html">Battle</a></li>
 			<li><a href="./Cart.html">Cart</a></li>
@@ -349,11 +347,9 @@ was released</p>
 			<li><a href="./Concert.html">Concert</a></li>
 			<li><a href="./Description.html">Description</a></li>
 			<li><a href="./Feedback.html">Feedback</a></li>
-			<li><a href="./Flac.html">Flac</a></li>
 			<li><a href="./Follow.html">Follow</a></li>
 			<li><a href="./Friend.html">Friend</a></li>
 			<li><a href="./Genre.html">Genre</a></li>
-			<li><a href="./Gift.html">Gift</a></li>
 			<li><a href="./Group.html">Group</a></li>
 			<li><a href="./Identity.html">Identity</a></li>
 			<li><a href="./Influence.html">Influence</a></li>
@@ -375,7 +371,6 @@ was released</p>
 			<li><a href="./PurchasedAlbum.html">PurchasedAlbum</a></li>
 			<li><a href="./PurchasedMusic.html">PurchasedMusic</a></li>
 			<li><a href="./PurchasedPack.html">PurchasedPack</a></li>
-			<li><a href="./Tag.html">Tag</a></li>
 			<li><a href="./Tweet.html">Tweet</a></li>
 			<li><a href="./User.html">User</a></li>
 			<li><a href="./Vote.html">Vote</a></li>

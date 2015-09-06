@@ -117,15 +117,11 @@ and the validation Can provide some features linked to this model</p>
 <p><code>id</code> - (integer) - The ID of the object</p>
 </li><li>
 <p><code>user_id</code> - (integer) - The ID of the user who own it</p>
-</li><li>
-<p><code>gift_id</code> - (integer) - Is it a gift or not</p>
 </li></ul>
 
 <h4 id="class-Cart-label-Associations">Associations<span><a href="#class-Cart-label-Associations">&para;</a> <a href="#top">&uarr;</a></span></h4>
 <ul><li>
 <p><code>belongs_to</code> - :user</p>
-</li><li>
-<p><code>belongs_to</code> - :gift</p>
 </li><li>
 <p><code>has_and_belongs_to_many</code> - :albums</p>
 </li><li>
@@ -160,9 +156,9 @@ and the validation Can provide some features linked to this model</p>
 											<p>The strong parameters to save or update object</p>					
 											<div class="method-source-code" id="cart_params-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/models/cart.rb, line 28</span>
+								class="language-ruby"><span class="ruby-comment"># File app/models/cart.rb, line 25</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">cart_params</span>(<span class="ruby-identifier">parameters</span>)
-  <span class="ruby-identifier">parameters</span>.<span class="ruby-identifier">require</span>(<span class="ruby-value">:cart</span>).<span class="ruby-identifier">permit</span>(<span class="ruby-value">:gift_id</span>, <span class="ruby-value">:user_id</span>)
+  <span class="ruby-identifier">parameters</span>.<span class="ruby-identifier">require</span>(<span class="ruby-value">:cart</span>).<span class="ruby-identifier">permit</span>(<span class="ruby-value">:user_id</span>)
 <span class="ruby-keyword">end</span></code></pre>
 						</div>
 										</div>
@@ -184,7 +180,7 @@ and the validation Can provide some features linked to this model</p>
 <p>Fields returned : [:id, :created_at]</p>					
 											<div class="method-source-code" id="miniKey-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/models/cart.rb, line 35</span>
+								class="language-ruby"><span class="ruby-comment"># File app/models/cart.rb, line 32</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">miniKey</span>
   [<span class="ruby-value">:id</span>, <span class="ruby-value">:created_at</span>]
 <span class="ruby-keyword">end</span></code></pre>
@@ -246,11 +242,9 @@ and the validation Can provide some features linked to this model</p>
 			<li><a href="./API/SuggestionsController.html">API::SuggestionsController</a></li>
 			<li><a href="./API/TweetsController.html">API::TweetsController</a></li>
 			<li><a href="./API/UsersController.html">API::UsersController</a></li>
-			<li><a href="./Access.html">Access</a></li>
 			<li><a href="./Address.html">Address</a></li>
 			<li><a href="./AdminUser.html">AdminUser</a></li>
 			<li><a href="./Album.html">Album</a></li>
-			<li><a href="./AlbumNote.html">AlbumNote</a></li>
 			<li><a href="./Attachment.html">Attachment</a></li>
 			<li><a href="./Battle.html">Battle</a></li>
 			<li><a href="./Cart.html">Cart</a></li>
@@ -258,11 +252,9 @@ and the validation Can provide some features linked to this model</p>
 			<li><a href="./Concert.html">Concert</a></li>
 			<li><a href="./Description.html">Description</a></li>
 			<li><a href="./Feedback.html">Feedback</a></li>
-			<li><a href="./Flac.html">Flac</a></li>
 			<li><a href="./Follow.html">Follow</a></li>
 			<li><a href="./Friend.html">Friend</a></li>
 			<li><a href="./Genre.html">Genre</a></li>
-			<li><a href="./Gift.html">Gift</a></li>
 			<li><a href="./Group.html">Group</a></li>
 			<li><a href="./Identity.html">Identity</a></li>
 			<li><a href="./Influence.html">Influence</a></li>
@@ -284,7 +276,6 @@ and the validation Can provide some features linked to this model</p>
 			<li><a href="./PurchasedAlbum.html">PurchasedAlbum</a></li>
 			<li><a href="./PurchasedMusic.html">PurchasedMusic</a></li>
 			<li><a href="./PurchasedPack.html">PurchasedPack</a></li>
-			<li><a href="./Tag.html">Tag</a></li>
 			<li><a href="./Tweet.html">Tweet</a></li>
 			<li><a href="./User.html">User</a></li>
 			<li><a href="./Vote.html">Vote</a></li>

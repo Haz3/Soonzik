@@ -133,12 +133,6 @@ var SearchIndex =
 		"type": "normalclass"
 	},
 	{
-		"name": "Access",
-		"link": "Access.html",
-		"snippet": "<p>The model of the object Access Contain the relation and the validation Can\nprovide some features linked …\n",
-		"type": "normalclass"
-	},
-	{
 		"name": "Address",
 		"link": "Address.html",
 		"snippet": "<p>The model of the object Address Contain the relation and the validation Can\nprovide some features linked …\n",
@@ -154,12 +148,6 @@ var SearchIndex =
 		"name": "Album",
 		"link": "Album.html",
 		"snippet": "<p>The model of the object Album Contain the relation and the validation Can\nprovide some features linked …\n",
-		"type": "normalclass"
-	},
-	{
-		"name": "AlbumNote",
-		"link": "AlbumNote.html",
-		"snippet": "<p>The model of the object AlbumNote Contain the relation and the validation\nCan provide some features linked …\n",
 		"type": "normalclass"
 	},
 	{
@@ -205,12 +193,6 @@ var SearchIndex =
 		"type": "normalclass"
 	},
 	{
-		"name": "Flac",
-		"link": "Flac.html",
-		"snippet": "<p>The model of the object Flac Contain the relation and the validation Can\nprovide some features linked …\n",
-		"type": "normalclass"
-	},
-	{
 		"name": "Follow",
 		"link": "Follow.html",
 		"snippet": "<p>The model of the object Follow Contain the relations It is only here for\nlinked user to user, never an …\n",
@@ -226,12 +208,6 @@ var SearchIndex =
 		"name": "Genre",
 		"link": "Genre.html",
 		"snippet": "<p>The model of the object Genre Contain the relation and the validation Can\nprovide some features linked …\n",
-		"type": "normalclass"
-	},
-	{
-		"name": "Gift",
-		"link": "Gift.html",
-		"snippet": "<p>The model of the object Gift Contain the relation and the validation Can\nprovide some features linked …\n",
 		"type": "normalclass"
 	},
 	{
@@ -358,12 +334,6 @@ var SearchIndex =
 		"name": "PurchasedPack",
 		"link": "PurchasedPack.html",
 		"snippet": "<p>The model of the object PurchasedPacks Contain the relation and the\nvalidation Can provide some features …\n",
-		"type": "normalclass"
-	},
-	{
-		"name": "Tag",
-		"link": "Tag.html",
-		"snippet": "<p>The model of the object Tag Contain the relation and the validation Can\nprovide some features linked …\n",
 		"type": "normalclass"
 	},
 	{
@@ -526,12 +496,6 @@ var SearchIndex =
 		"name": "show",
 		"link": "API/CartsController.html#method-i-show",
 		"snippet": "<p>Give a part of the carts depending of the filter passed into parameter\n<p>Route : /carts/my_cart\n<p>HTTP VALUE …\n",
-		"type": "anymethod"
-	},
-	{
-		"name": "giftCart",
-		"link": "API/CartsController.html#method-i-giftCart",
-		"snippet": "<p>Modify the “gift” element for a specific cart\n<p>Route : /carts/:id/gift\n<p>Options\n",
 		"type": "anymethod"
 	},
 	{
@@ -955,12 +919,6 @@ var SearchIndex =
 		"type": "anymethod"
 	},
 	{
-		"name": "access_params",
-		"link": "Access.html#method-c-access_params",
-		"snippet": "<p>The strong parameters to save or update object\n",
-		"type": "anymethod"
-	},
-	{
 		"name": "miniKey",
 		"link": "Address.html#method-c-miniKey",
 		"snippet": "<p>Filter of information for the API\n<p>Fields returned : [:id, :numberStreet, :street, :city, :country, :zipcode]\n…\n",
@@ -1000,12 +958,6 @@ var SearchIndex =
 		"name": "getProposed",
 		"link": "Album.html#method-i-getProposed",
 		"snippet": "<p>Get an attribute to know if it&#39;s an album proposed\n",
-		"type": "anymethod"
-	},
-	{
-		"name": "album_note_params",
-		"link": "AlbumNote.html#method-c-album_note_params",
-		"snippet": "<p>The strong parameters to save or update object\n",
 		"type": "anymethod"
 	},
 	{
@@ -1087,12 +1039,6 @@ var SearchIndex =
 		"type": "anymethod"
 	},
 	{
-		"name": "flac_params",
-		"link": "Flac.html#method-c-flac_params",
-		"snippet": "<p>The strong parameters to save or update object\n",
-		"type": "anymethod"
-	},
-	{
 		"name": "miniKey",
 		"link": "Genre.html#method-c-miniKey",
 		"snippet": "<p>Filter of information for the API\n<p>Fields returned : [:id, :style_name, :color_name, :color_hexa]\n",
@@ -1102,18 +1048,6 @@ var SearchIndex =
 		"name": "genre_params",
 		"link": "Genre.html#method-c-genre_params",
 		"snippet": "<p>The strong parameters to save or update object\n",
-		"type": "anymethod"
-	},
-	{
-		"name": "gift_params",
-		"link": "Gift.html#method-c-gift_params",
-		"snippet": "<p>The strong parameters to save or update object\n",
-		"type": "anymethod"
-	},
-	{
-		"name": "miniKey",
-		"link": "Gift.html#method-c-miniKey",
-		"snippet": "<p>Filter of information for the API\n<p>Fields returned : [:id, :created_at]\n",
 		"type": "anymethod"
 	},
 	{
@@ -1324,18 +1258,6 @@ var SearchIndex =
 		"name": "addPurchasedPackFromObject",
 		"link": "Purchase.html#method-i-addPurchasedPackFromObject",
 		"snippet": "",
-		"type": "anymethod"
-	},
-	{
-		"name": "miniKey",
-		"link": "Tag.html#method-c-miniKey",
-		"snippet": "<p>Filter of information for the API\n<p>Fields returned : [:id, :tag]\n",
-		"type": "anymethod"
-	},
-	{
-		"name": "tag_params",
-		"link": "Tag.html#method-c-tag_params",
-		"snippet": "<p>The strong parameters to save or update object\n",
 		"type": "anymethod"
 	},
 	{
