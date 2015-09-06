@@ -88,7 +88,7 @@ module API
 					    	artist: JSON.parse(artist_result.to_json(:only => User.miniKey )),
 					    	user: JSON.parse(user_result.to_json(:only => User.miniKey )),
 					    	music: JSON.parse(music_result.to_json(:only => Music.miniKey, :include => { user: { only: User.miniKey }, album: { only: Album.miniKey } } ) ),
-					    	album: JSON.parse(album_result.to_json(:only => Album.miniKey, :include => { user: { only: User.miniKey } } ) ),
+					    	album: JSON.parse(album_result.to_json(:only => Album.miniKey, :include => { user: { only: User.miniKey }, musics: { only: Music.miniKey } } ) ),
 					    	pack: JSON.parse(pack_result.to_json(:only => Pack.miniKey, :include => { albums: { only: Album.miniKey, :include => { user: { only: User.miniKey } } } } ) )
 					    }
 					  end
