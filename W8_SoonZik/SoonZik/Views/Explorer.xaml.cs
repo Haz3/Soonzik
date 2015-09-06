@@ -54,7 +54,13 @@ namespace SoonZik.Views
 
         private void artist_list_ItemClick(object sender, ItemClickEventArgs e)
         {
+            var item = ((SoonZik.Models.User)e.ClickedItem);
+            this.Frame.Navigate(typeof(User), item);
+        }
 
+        private void cart_btn_Click(object sender, RoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(Cart));
         }
 
     }

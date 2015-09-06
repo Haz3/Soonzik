@@ -13,8 +13,8 @@ namespace SoonZik.Tools
 {
     class Security
     {
-        static string url = "http://api.lvh.me:3000/getKey/";
-        //static string url = "http://soonzikapi.herokuapp.com/getKey/";
+        static string url = "http://api.lvh.me:3000/";
+        //static string url = "http://soonzikapi.herokuapp.com/";
 
         static async Task<string> getKey(string id)
         {
@@ -23,7 +23,7 @@ namespace SoonZik.Tools
 
             try
             {
-                var data = await client.GetStringAsync(url + id);
+                var data = await client.GetStringAsync(url + "getKey/" + id);
                 var result = JObject.Parse(data);
 
                 string key = result["key"].ToString();

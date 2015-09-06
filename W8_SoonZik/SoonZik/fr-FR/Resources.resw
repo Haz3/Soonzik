@@ -360,4 +360,7 @@
   <data name="website_txt.Text" xml:space="preserve">
     <value>Site internet:</value>
   </data>
+  <data name="cart_txt.Text" xml:space="preserve">
+    <value>Panier</value>
+  </data>
 </root>

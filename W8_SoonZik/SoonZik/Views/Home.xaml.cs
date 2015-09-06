@@ -33,6 +33,7 @@ namespace SoonZik.Views
             hello_tb.Text = "Salut " + Singleton.Instance.Current_user.username;
         }
 
+        // NAV
         private void news_btn_Click(object sender, RoutedEventArgs e)
         {
             this.Frame.Navigate(typeof(NewsView));
@@ -76,6 +77,11 @@ namespace SoonZik.Views
         private void profil_btn_Click(object sender, RoutedEventArgs e)
         {
             this.Frame.Navigate(typeof(UserEditProfile));
+        }
+
+        private void disco_btn_Click(object sender, RoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(Discotheque));
         }
 
         // Clic in list

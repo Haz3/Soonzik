@@ -6,6 +6,10 @@
     </header>
     <body>
       <group id="Resources">
+        <trans-unit id="Resources\cart_txt\Text" translate="yes" xml:space="preserve">
+          <source>Panier</source>
+          <target state="new">Panier</target>
+        </trans-unit>
         <trans-unit id="Resources\website_txt\Text" translate="yes" xml:space="preserve">
           <source>Site internet:</source>
           <target state="new">Site internet:</target>
