@@ -13,6 +13,7 @@
         <Grid Height="80" VerticalAlignment="Top" Width="1920" Background="#B0B0B0">
             <TextBlock x:Name="explorer_txt" HorizontalAlignment="Left" Margin="100,10,0,0" TextWrapping="Wrap" Text="Explorer" VerticalAlignment="Top" Height="55" Width="235" FontSize="53.333" Foreground="Black"/>
             <Button x:Name="back_btn" Content="Button" HorizontalAlignment="Left" Margin="30,20,0,0" VerticalAlignment="Top" Style="{StaticResource NavigationBackButtonNormalStyle}" RequestedTheme="Light" Click="Button_Click"/>
+            <Button x:Name="cart_btn" Content="Cart" HorizontalAlignment="Left" Margin="1547,3,0,0" VerticalAlignment="Top" Height="76" Width="361" Background="#FF27AAE1" FontSize="40" Click="cart_btn_Click"/>
         </Grid>
 
 
@@ -25,9 +26,9 @@
             <GridView.ItemTemplate>
                 <DataTemplate>
                     <Grid Width="200" Height="200">
-                        <Image Stretch="Fill" Source="http://www.scottbuckley.com.au/musoscientific/wp-content/uploads/2012/10/treeofmusic.jpg" VerticalAlignment="Top" HorizontalAlignment="Center"/>
+                        <Image Stretch="Fill" Source="https://upload.wikimedia.org/wikipedia/commons/e/ec/Record-Album-02.jpg" VerticalAlignment="Top" HorizontalAlignment="Center"/>
                         <StackPanel Orientation="Vertical" VerticalAlignment="Bottom" Margin="0,0,0,10">
-                            <TextBlock Text="{Binding style_name}" FontSize="25" Margin="10,0,0,0" TextTrimming="WordEllipsis" TextWrapping="Wrap" HorizontalAlignment="Left" Foreground="#FF0A37FF"/>
+                            <TextBlock Text="{Binding style_name}" FontSize="25" Margin="10,0,0,0" TextTrimming="WordEllipsis" TextWrapping="Wrap" HorizontalAlignment="Left" Foreground="White"/>
                         </StackPanel>
                     </Grid>
                 </DataTemplate>
@@ -38,10 +39,10 @@
         <GridView x:Name="pack_list" ItemClick="pack_list_ItemClick" IsItemClickEnabled="True" HorizontalAlignment="Left" Height="850" Margin="590,180,0,0" VerticalAlignment="Top" Width="435" IsSynchronizedWithCurrentItem="False" Background="#FFB0B0B0" ItemsSource="{Binding pack_list}">
             <GridView.ItemTemplate>
                 <DataTemplate>
-                    <Grid Width="250" Height="250">
-                        <Image Stretch="Fill" Source="http://static.wixstatic.com/media/44433f_4f689883955641309c5c675ff5bffc92.jpg" VerticalAlignment="Top" HorizontalAlignment="Center"/>
+                    <Grid Width="200" Height="200">
+                        <Image Stretch="Fill" Source="https://upload.wikimedia.org/wikipedia/commons/e/ec/Record-Album-02.jpg" VerticalAlignment="Top" HorizontalAlignment="Center"/>
                         <StackPanel Orientation="Vertical" VerticalAlignment="Bottom" Margin="0,0,0,10">
-                            <TextBlock Text="{Binding title}" FontSize="25" Margin="10,0,0,0" TextTrimming="WordEllipsis" TextWrapping="Wrap" HorizontalAlignment="Left" Foreground="#FF0A37FF"/>
+                            <TextBlock Text="{Binding title}" FontSize="25" Margin="10,0,0,0" TextTrimming="WordEllipsis" TextWrapping="Wrap" HorizontalAlignment="Left" Foreground="White"/>
                         </StackPanel>
                     </Grid>
                 </DataTemplate>
@@ -52,11 +53,11 @@
             <GridView.ItemTemplate>
                 <DataTemplate>
                     <Grid Width="200" Height="200" Background="White">
-                        <Image Stretch="Fill" Source="https://pixabay.com/static/uploads/photo/2014/04/03/11/58/record-312730_640.png" VerticalAlignment="Top" HorizontalAlignment="Center"/>
+                        <Image Stretch="Fill" Source="https://upload.wikimedia.org/wikipedia/commons/e/ec/Record-Album-02.jpg" VerticalAlignment="Top" HorizontalAlignment="Center"/>
                         <StackPanel Orientation="Vertical" VerticalAlignment="Bottom" Margin="0,0,0,10">
 
-                            <TextBlock Text="{Binding user.username}" FontSize="20" Margin="10,0,0,0" TextTrimming="WordEllipsis" TextWrapping="Wrap" HorizontalAlignment="Left" Foreground="Blue"/>
-                            <TextBlock Text="{Binding title}" FontSize="20" Margin="10,0,0,0" TextTrimming="WordEllipsis" TextWrapping="Wrap" HorizontalAlignment="Left" Foreground="Blue"/>
+                            <TextBlock Text="{Binding user.username}" FontSize="20" Margin="10,0,0,0" TextTrimming="WordEllipsis" TextWrapping="Wrap" HorizontalAlignment="Left" Foreground="White"/>
+                            <TextBlock Text="{Binding title}" FontSize="20" Margin="10,0,0,0" TextTrimming="WordEllipsis" TextWrapping="Wrap" HorizontalAlignment="Left" Foreground="White"/>
 
                         </StackPanel>
                     </Grid>

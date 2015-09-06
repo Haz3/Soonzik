@@ -25,7 +25,7 @@ namespace SoonZik.Tools
 
         public static async Task<User> get_user_by_id(string id)
         {
-            var user = (User)await get_object_find(new User(), "users/find?attribute[id]=" + id);
+            var user = (User)await get_object(new User(), "users/" + id);
             return user;
         }
 
@@ -58,7 +58,34 @@ namespace SoonZik.Tools
             var music = (Music)await get_object(new Music(), "musics/" + id.ToString());
             return music;
         }
+        
+        // THIS FUNC DO NOT DESERIALIZE (used to destroycart fyi)
+        public static async Task<string> get_data(string elem)
+        {
+            Exception exception = null;
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url + elem);
+            request.Method = "GET";
+            request.ContentType = "application/json; charset=utf-8";
 
+            try
+            {
+                HttpWebResponse response = (HttpWebResponse)await request.GetResponseAsync();
+                var reader = new StreamReader(response.GetResponseStream());
+                var json = JObject.Parse(reader.ReadToEnd()).SelectToken("code").ToString();
+                // if success: code=202
+                return json;
+            }
+            catch (WebException ex)
+            {
+                exception = ex;
+            }
+
+            if (exception != null)
+                await new MessageDialog(exception.Message, "Get data error").ShowAsync();
+            return null;
+        }
+
+        // DESERIALIZE AND EVERYTHING
         public static async Task<object> get_object(object Object, string elem)
         {
             Exception exception = null;

@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using SoonZik.Models;
-using SoonZik.Views;
 using SoonZik.ViewModels.Command;
 using System.ComponentModel;
 using System.Windows.Input;
@@ -13,6 +12,7 @@ using Newtonsoft.Json.Linq;
 using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+
 
 namespace SoonZik.ViewModels
 {

@@ -12,8 +12,6 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
-using SoonZik.Models;
-using SoonZik.ViewModels;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -22,27 +20,11 @@ namespace SoonZik.Views
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class Genre : Page
+    public sealed partial class Artist : Page
     {
-        public Genre()
+        public Artist()
         {
             this.InitializeComponent();
-        }
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            this.Frame.GoBack();
-        }
-
-        protected override void OnNavigatedTo(NavigationEventArgs e)
-        {
-            SoonZik.Models.Genre elem = e.Parameter as SoonZik.Models.Genre;
-            DataContext = new GenreViewModel(elem.id);
-        }
-
-        private void genre_musics_ItemClick(object sender, ItemClickEventArgs e)
-        {
-            var item = ((SoonZik.Models.Music)e.ClickedItem);
-            this.Frame.Navigate(typeof(Music), item);
         }
     }
 }

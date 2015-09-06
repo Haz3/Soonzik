@@ -25,7 +25,7 @@
             </Grid.RowDefinitions>
             <Image  Grid.Row="1" Source="https://pixabay.com/static/uploads/photo/2014/04/03/11/58/record-312730_640.png" Stretch="Fill" Width="174" Height="174" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,235,46,-118"/>
             <Rectangle Fill="#FF00AFDC" HorizontalAlignment="Left" Height="75" StrokeEndLineCap="Square" Stroke="#FF00AFDC" VerticalAlignment="Top" Width="1120" Grid.ColumnSpan="2" Margin="0,0,-405,0"/>
-            <TextBlock Name="album_title" Margin="20,10,0,19" TextWrapping="Wrap" Text="Title" VerticalAlignment="Center" FontSize="36" Height="46" Grid.ColumnSpan="2"/>
+            <TextBlock Name="album_title" Text="{Binding album.title, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="20,10,0,19" TextWrapping="Wrap" VerticalAlignment="Center" FontSize="36" Height="46" Grid.ColumnSpan="2"/>
             <TextBlock Name="album_artist" Text="{Binding album.user.username, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="90,27,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Foreground="Black" Height="40" Width="115" FontSize="20"/>
             <TextBlock x:Name="album_year" Text="{Binding album.yearProd, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="90,67,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Foreground="Black" Height="40" Width="115" FontSize="20"/>
             <TextBlock x:Name="album_price" Text="{Binding album.price, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="90,107,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Foreground="Black" Height="40" Width="129" FontSize="20"/>
@@ -53,7 +53,7 @@
             <TextBlock x:Name="album_price_txt" x:Uid="album_price_txt" Text="Prix:" HorizontalAlignment="Left" Margin="10,107,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Foreground="Black" Height="40" Width="70" FontSize="20"/>
             <TextBlock x:Name="album_id_tb" Visibility="Collapsed" Grid.Column="1" HorizontalAlignment="Left" Margin="725,10,-395,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Width="120" Height="36" FontSize="25"/>
 
-            <Button x:Name="add_to_cart_btn" x:Uid="add_to_cart_btn" Content="Ajouter au panier" Margin="632,11,-383,12" Grid.Column="1" Height="52" Width="201" Background="#FFEC3F3F" FontSize="20"/>
+            <Button x:Name="add_to_cart_btn" Command="{Binding do_add_to_cart}" x:Uid="add_to_cart_btn" Content="Ajouter au panier" Margin="632,11,-383,12" Grid.Column="1" Height="52" Width="201" Background="#FFEC3F3F" FontSize="20"/>
         </Grid>
 
         <ListView Name="comment_lv" ItemsSource="{Binding commentlist, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  HorizontalAlignment="Left" Height="185" Margin="400,775,0,0" VerticalAlignment="Top" Width="1120" Background="White" IsItemClickEnabled="True" IsSwipeEnabled="False" SelectionMode="None">

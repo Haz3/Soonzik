@@ -58,6 +58,12 @@ namespace SoonZik.ViewModels
             private set;
         }
 
+        public ICommand do_add_to_cart
+        {
+            get;
+            private set;
+        }
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected void OnPropertyChanged(string name)
@@ -78,6 +84,7 @@ namespace SoonZik.ViewModels
         {
             //commentlist = new ObservableCollection<Comment>();
             do_send_comment = new RelayCommand(send_comment);
+            do_add_to_cart = new RelayCommand(add_to_cart);
             load_album(id);
         }
 
@@ -135,6 +142,12 @@ namespace SoonZik.ViewModels
                 // To delete text in comment bar
                 comment_content = "";
             }
+        }
+
+        public void add_to_cart()
+        {
+            //                        USER ID,                            ALBUM ID,   TYPE,  GIFT USER ID (IF < 0 : NOT A GIFT)
+            CartViewModel.add_to_cart(Singleton.Instance.Current_user.id, album.id, "Album", 0);
         }
     }
 }

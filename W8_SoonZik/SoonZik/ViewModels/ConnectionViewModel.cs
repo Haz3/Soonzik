@@ -1,7 +1,6 @@
 ﻿using Newtonsoft.Json.Linq;
 using SoonZik.Tools;
 using SoonZik.ViewModels.Command;
-using SoonZik.Views;
 using SoonZik.Models;
 using System;
 using System.Collections.Generic;
@@ -93,7 +92,7 @@ namespace SoonZik.ViewModels
                 {
                     Get_User(response);
                     //await new MessageDialog("Email = " + mail + "\nPasswd = " + passwd, "Connexion OK").ShowAsync();
-                    ((Frame)Window.Current.Content).Navigate(typeof(Home));
+                    ((Frame)Window.Current.Content).Navigate(typeof(SoonZik.Views.Home));
                 }
                 else
                     await new MessageDialog("Connexion KO").ShowAsync();
