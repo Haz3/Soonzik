@@ -33,7 +33,7 @@ SoonzikApp.controller('NewsCtrl', ['$scope', '$routeParams', 'SecureAuth', 'HTTP
 
 	$scope.showNews = function() {
 		var parameters = [
-			{ key: "order_by_desc[]", value: "date"},
+			{ key: "order_by_desc[]", value: "created_at"},
   			{ key: "offset", value: $scope.newsOffset },
   			{ key: "limit", value: 20 }
 		];
