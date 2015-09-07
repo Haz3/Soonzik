@@ -106,15 +106,22 @@
             </PivotItem>
             
             <PivotItem x:Uid="PlaylistPivot" Header="">
-                <ListBox Background="Transparent" x:Name="ListPlayList" ItemsSource="{Binding ListPlaylist}"
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="80"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <ListBox Grid.Row="0" Background="Transparent" x:Name="ListPlayList" ItemsSource="{Binding ListPlaylist}"
                           SelectedItem="{Binding SelectedPlaylist, Mode=TwoWay}" ItemTemplate="{StaticResource PlaylistTemplate}" >
-                    <interactivity:Interaction.Behaviors>
-                        <core:EventTriggerBehavior EventName="Tapped">
-                            <core:InvokeCommandAction Command="{Binding PlaylistTappedCommand}" />
-                        </core:EventTriggerBehavior>
-                    </interactivity:Interaction.Behaviors>
-                </ListBox>
-            </PivotItem>
+                        <interactivity:Interaction.Behaviors>
+                            <core:EventTriggerBehavior EventName="Tapped">
+                                <core:InvokeCommandAction Command="{Binding PlaylistTappedCommand}" />
+                            </core:EventTriggerBehavior>
+                        </interactivity:Interaction.Behaviors>
+                    </ListBox>
+                    <Button Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                </Grid>
+                </PivotItem>
         </Pivot>
     </Grid>
 </Page>

@@ -125,9 +125,18 @@ namespace SoonZik.HttpRequest
         public async Task<String> UpdatePlaylist(Playlist thePlaylist, string sha256, User myUser)
         {
             int[] listMusic = thePlaylist.musics.Select(music => music.id).ToArray();
+            string test = "[";
+            for (int index = 0; index < listMusic.Length; index++)
+            {
+                if (index < listMusic.Length - 1)
+                    test += listMusic[index] + ",";
+                else
+                    test += listMusic[index];
+            }
+            test += "]";
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(ApiUrl + "playlists/update/" + thePlaylist.id);
 
-            var postData = "playlist[name]=" + thePlaylist.name + "&playlist[music]=" + listMusic  + "&secureKey=" + sha256 + "&user_id=" + myUser.id;
+            var postData = "playlist[name]=" + thePlaylist.name + "&playlist[music]=" + test  + "&secureKey=" + sha256 + "&user_id=" + myUser.id;
             return await GetHttpPostResponse(request, postData);
         } 
 
