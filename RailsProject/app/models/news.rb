@@ -21,7 +21,7 @@ class News < ActiveRecord::Base
 
   belongs_to :user, class_name: 'User', foreign_key: 'author_id'
   has_many :newstexts
-  has_many :newstitles
+  has_many :news_titles
   has_and_belongs_to_many :attachments
   has_and_belongs_to_many :commentaries
 
