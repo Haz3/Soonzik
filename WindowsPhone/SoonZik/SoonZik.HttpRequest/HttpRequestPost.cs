@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
@@ -119,6 +121,15 @@ namespace SoonZik.HttpRequest
             var postData = "content=" + message + "&secureKey=" + sha256 + "&user_id=" + myUser.id;
             return await GetHttpPostResponse(request, postData);
         }
+
+        public async Task<String> UpdatePlaylist(Playlist thePlaylist, string sha256, User myUser)
+        {
+            int[] listMusic = thePlaylist.musics.Select(music => music.id).ToArray();
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(ApiUrl + "playlists/update/" + thePlaylist.id);
+
+            var postData = "playlist[name]=" + thePlaylist.name + "&playlist[music]=" + listMusic  + "&secureKey=" + sha256 + "&user_id=" + myUser.id;
+            return await GetHttpPostResponse(request, postData);
+        } 
 
         public async Task<String> GetHttpPostResponse(HttpWebRequest request, string postData)
         {

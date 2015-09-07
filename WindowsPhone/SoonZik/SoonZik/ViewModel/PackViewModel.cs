@@ -199,7 +199,7 @@ namespace SoonZik.ViewModel
         {
             AlbumViewModel.MyAlbum = SelectedAlbum;
             GlobalMenuControl.MyGrid.Children.Clear();
-            GlobalMenuControl.MyGrid.Children.Add(new PlaylistView());
+            GlobalMenuControl.MyGrid.Children.Add(new AlbumView());
         }
 
         private void ExecuteArtistTapped()

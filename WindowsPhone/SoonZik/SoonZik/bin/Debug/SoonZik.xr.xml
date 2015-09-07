@@ -125,6 +125,7 @@
     <RootPropertyPathName Name="CompleteListPack" />
     <RootPropertyPathName Name="ThePack" />
     <RootPropertyPathName Name="PackTappedCommand" />
+    <RootPropertyPathName Name="SelectedIndex" />
     <RootPropertyPathName Name="ListPlaylist" />
     <RootPropertyPathName Name="SelectedPlaylist" />
     <RootPropertyPathName Name="PlaylistTappedCommand" />
@@ -249,6 +250,7 @@
       <RootProperty Name="Style" />
       <RootProperty Name="Margin" />
       <RootProperty Name="Items" />
+      <RootProperty Name="SelectedIndex" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.FrameworkElement">
       <RootProperty Name="Margin" />

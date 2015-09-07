@@ -40,7 +40,7 @@
     <Grid x:Name="GlobalGrid">
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
-            <RowDefinition Height="400" />
+            <RowDefinition Height="350" />
         </Grid.RowDefinitions>
         <Grid Grid.Row="0">
             <Image Name="AlbumImage" Source="ms-appx:///Resources/Icones/MenuExplorer.png" Width="120" Height="120" HorizontalAlignment="Center" VerticalAlignment="Top"

@@ -450,14 +450,14 @@ namespace SoonZik.Controls
         private void MusicStackPanel_OnTapped(object sender, TappedRoutedEventArgs e)
         {
             AlbumViewModel.MyAlbum = SelectedMusic.album;
-            SetChildren(new PlaylistView());
+            SetChildren(new AlbumView());
             CloseMenu();
         }
 
         private void AlbumStackPanel_OnTapped(object sender, TappedRoutedEventArgs e)
         {
             AlbumViewModel.MyAlbum = SelectedAlbum;
-            SetChildren(new PlaylistView());
+            SetChildren(new AlbumView());
         }
 
         private void ArtistStackPanel_OnTapped(object sender, TappedRoutedEventArgs e)

@@ -12,14 +12,14 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="50" />
-            <RowDefinition Height="50" />
             <RowDefinition Height="*" />
             <RowDefinition Height="60" />
         </Grid.RowDefinitions>
 
 
-        <TextBlock Grid.Row="0" FontSize="25" Foreground="White" VerticalAlignment="Center" TextAlignment="Center"
-                   Text="{Binding Path=SelectedMusic.title}" />
+        <TextBlock Grid.Row="0" FontSize="25" Foreground="White" VerticalAlignment="Center" TextAlignment="Center" x:Name="TitleBlock" />
+        <Button x:ConnectionId='1' Grid.Row="1" x:Uid="AddToPlaylist" Content="" HorizontalAlignment="Center" VerticalAlignment="Top"
+                                      BorderThickness="0,0,0,0" />
     </Grid>
 </UserControl>
 

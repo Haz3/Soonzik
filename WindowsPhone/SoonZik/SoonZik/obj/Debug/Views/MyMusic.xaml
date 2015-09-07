@@ -69,7 +69,7 @@
     <Grid x:Name="GlobalGrid">
         <ProgressRing IsActive="{Binding ProgressOn, Mode=TwoWay}" Background="Black" Foreground="Aqua" Opacity="0.5" />
         <Pivot x:Name="PivotGlobal" HeaderTemplate="{StaticResource SizeHeaderGlobalPivot}" Foreground="Transparent"
-               RenderTransformOrigin="0.5,0.5" Style="{StaticResource PivotStyle1}">
+               RenderTransformOrigin="0.5,0.5" Style="{StaticResource PivotStyle1}" SelectedIndex="{Binding SelectedIndex, Mode=TwoWay}">
             <PivotItem x:Uid="MusicPivot" Header="">
                 <ListBox Background="Transparent" x:Name="ListBoxMusic" ItemsSource="{Binding ListMusique}"
                          ItemTemplate="{StaticResource MusiqueTemplate}"

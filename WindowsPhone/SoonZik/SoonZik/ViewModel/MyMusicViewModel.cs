@@ -1,9 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Windows.ApplicationModel.Core;
 using Windows.UI.Core;
+using Windows.UI.Popups;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using SoonZik.Controls;
@@ -31,6 +33,8 @@ namespace SoonZik.ViewModel
             AlbumTappedCommand = new RelayCommand(AlbumTappedExecute);
             PackTappedCommand = new RelayCommand(PackTappedExecute);
             PlaylistTappedCommand = new RelayCommand(PlaylistTappedExecute);
+
+            SelectedIndex = IndexForPlaylist;
 
             LoadContent();
         }
@@ -112,14 +116,69 @@ namespace SoonZik.ViewModel
 
         private void PlaylistTappedExecute()
         {
-            PlaylistViewModel.PlaylistTmp = SelectedPlaylist;
-            GlobalMenuControl.SetChildren(new PlaylistView());
+            if (MusicForPlaylist == null)
+            {
+                PlaylistViewModel.PlaylistTmp = SelectedPlaylist;
+                GlobalMenuControl.SetChildren(new PlaylistView());
+            }
+            else
+            {
+                new MessageDialog("Ajout a playlist").ShowAsync();
+
+                SelectedPlaylist.musics.Add(MusicForPlaylist);
+
+                var request = new HttpRequestGet();
+                var post = new HttpRequestPost();
+                try
+                {
+                    var userKey = request.GetUserKey(Singleton.Instance().CurrentUser.id.ToString());
+                    userKey.ContinueWith(delegate(Task<object> task)
+                    {
+                        var key = task.Result as string;
+                        if (key != null)
+                        {
+                            var stringEncrypt = KeyHelpers.GetUserKeyFromResponse(key);
+                            _crypto = EncriptSha256.EncriptStringToSha256(Singleton.Instance().CurrentUser.salt + stringEncrypt);
+                        }
+                        var test = post.UpdatePlaylist(SelectedPlaylist, _crypto, Singleton.Instance().CurrentUser);
+                        test.ContinueWith(delegate(Task<string> tmp)
+                        {
+                            var res = tmp.Result;
+                            if (res != null)
+                            {
+                                CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, RefreshPlaylist);
+                            }
+                        });
+                    });
+                }
+                catch (Exception)
+                {
+                    new MessageDialog("Erreur update pl").ShowAsync();
+                }
+            }
+        }
+
+        private void RefreshPlaylist()
+        {
 
         }
 
         #endregion
 
         #region Attribute
+
+        private string _crypto { get; set; }
+        public static int IndexForPlaylist { get; set; }
+        private int _selectedIndex;
+        public int SelectedIndex
+        {
+            get { return _selectedIndex;}
+            set
+            {
+                _selectedIndex = value;
+                RaisePropertyChanged("SelectedIndex");
+            }
+        }
 
         private string _key { get; set; }
         private string _cryptographic { get; set; }
@@ -177,6 +236,9 @@ namespace SoonZik.ViewModel
         public ICommand PackTappedCommand { get; private set; }
         public ICommand AlbumTappedCommand { get; private set; }
         public ICommand PlaylistTappedCommand { get; private set; }
+
+        public static Music MusicForPlaylist;
+
         #endregion
     }
 }

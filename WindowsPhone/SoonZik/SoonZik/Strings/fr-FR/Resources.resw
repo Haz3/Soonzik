@@ -306,4 +306,7 @@
   <data name="EndBattle.Text" xml:space="preserve">
     <value>La battle est terminee</value>
   </data>
+  <data name="AddToPlaylist.Content" xml:space="preserve">
+    <value>Ajouter a la playlist</value>
+  </data>
 </root>
