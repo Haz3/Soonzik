@@ -86,6 +86,8 @@
     <RootPropertyPathName Name="FacebookTapped" />
     <RootPropertyPathName Name="style_name" />
     <RootPropertyPathName Name="ListArtiste" />
+    <RootPropertyPathName Name="SelectedArtiste" />
+    <RootPropertyPathName Name="TappedCommand" />
     <RootPropertyPathName Name="ListMusique" />
     <RootPropertyPathName Name="ListGenres" />
     <RootPropertyPathName Name="LoadedCommand" />
@@ -99,7 +101,6 @@
     <RootPropertyPathName Name="SelectedTweet" />
     <RootPropertyPathName Name="TweetCommand" />
     <RootPropertyPathName Name="FollowerCommand" />
-    <RootPropertyPathName Name="TappedCommand" />
     <RootPropertyPathName Name="CollectionGroups" />
     <RootPropertyPathName Name="Date" />
     <RootPropertyPathName Name="ListNews" />

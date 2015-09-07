@@ -5,6 +5,8 @@
     xmlns:local="using:SoonZik.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:core="using:Microsoft.Xaml.Interactions.Core"
+    xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
     mc:Ignorable="d"
     DataContext="{StaticResource PlaylistViewModel}"
     Background="#424242">
@@ -59,7 +61,13 @@
             <PivotItem x:Uid="MusicPivot" Header="">
                 <ListBox Background="Transparent" x:Name="ListBoxMusic" ItemsSource="{Binding ListMusique}"
                          ItemTemplate="{StaticResource MusiqueTemplate}"
-                         SelectedItem="{Binding SelectedMusic, Mode=TwoWay}" />
+                         SelectedItem="{Binding SelectedMusic, Mode=TwoWay}">
+                    <interactivity:Interaction.Behaviors>
+                        <core:EventTriggerBehavior EventName="Tapped">
+                            <core:InvokeCommandAction Command="{Binding TappedCommand}" />
+                        </core:EventTriggerBehavior>
+                    </interactivity:Interaction.Behaviors>
+                </ListBox>
             </PivotItem>
 
             <PivotItem x:Uid="AlbumPivot" Header="">

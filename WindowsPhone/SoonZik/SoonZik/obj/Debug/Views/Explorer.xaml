@@ -5,6 +5,8 @@
     xmlns:local="using:SoonZik.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:core="using:Microsoft.Xaml.Interactions.Core"
+    xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
     mc:Ignorable="d"
     DataContext="{StaticResource ExplorerViewModel}"
     Background="#424242">
@@ -33,7 +35,7 @@
         </DataTemplate>
 
         <DataTemplate x:Key="ArtisteTemplate">
-            <Grid Width="350">
+            <Grid Width="350" x:Name="ArtisteGridTemplate">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="80" />
                     <ColumnDefinition Width="*" />
@@ -62,7 +64,13 @@
 
             <PivotItem x:Uid="ArtistPivot" Header="">
                 <ListBox Background="Transparent" x:Name="ListBoxArtiste" ItemsSource="{Binding ListArtiste}"
-                         ItemTemplate="{StaticResource ArtisteTemplate}" />
+                         ItemTemplate="{StaticResource ArtisteTemplate}" SelectedItem="{Binding SelectedArtiste, Mode=TwoWay}">
+                    <interactivity:Interaction.Behaviors>
+                        <core:EventTriggerBehavior EventName="Tapped">
+                            <core:InvokeCommandAction Command="{Binding TappedCommand}" />
+                        </core:EventTriggerBehavior>
+                    </interactivity:Interaction.Behaviors>
+                </ListBox>
             </PivotItem>
         </Pivot>
 

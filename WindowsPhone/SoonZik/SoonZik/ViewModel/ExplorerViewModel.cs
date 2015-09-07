@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using Windows.ApplicationModel.Core;
 using Windows.UI.Core;
 using GalaSoft.MvvmLight;
@@ -10,6 +11,7 @@ using SoonZik.Helpers;
 using SoonZik.HttpRequest;
 using SoonZik.HttpRequest.Poco;
 using SoonZik.Utils;
+using SoonZik.Views;
 using Genre = SoonZik.HttpRequest.Poco.Genre;
 
 namespace SoonZik.ViewModel
@@ -25,9 +27,10 @@ namespace SoonZik.ViewModel
             ListGenres = new ObservableCollection<Genre>();
             ListArtiste = new ObservableCollection<User>();
             ListMusique = new ObservableCollection<Music>();
+            TappedCommand = new RelayCommand(ArtisteTappedCommand);
             LoadContent();
         }
-
+        
         #endregion
 
         #region Attribute
@@ -75,6 +78,14 @@ namespace SoonZik.ViewModel
         public static Music PlayerSelectedMusic { get; set; }
         public RelayCommand MusiCommand { get; set; }
 
+        private User _selectedArtiste;
+
+        public User SelectedArtiste
+        {
+            get { return _selectedArtiste; }
+            set { _selectedArtiste = value; RaisePropertyChanged("SelectedArtiste");}
+        }
+        public ICommand TappedCommand { get; private set; }
         #endregion
 
         #region Method
@@ -148,6 +159,12 @@ namespace SoonZik.ViewModel
         {
             Singleton.Instance().SelectedMusicSingleton = SelectedMusic;
             Navigation.Navigate(new PlayerControl().GetType());
+        }
+
+        private void ArtisteTappedCommand()
+        {
+            ProfilArtisteViewModel.TheUser = SelectedArtiste;
+            GlobalMenuControl.SetChildren(new ProfilArtiste());
         }
 
         #endregion

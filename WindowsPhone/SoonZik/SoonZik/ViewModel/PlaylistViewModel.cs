@@ -1,8 +1,10 @@
 ﻿using System.Collections.ObjectModel;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using Windows.ApplicationModel.Core;
 using Windows.UI.Core;
 using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Command;
 using SoonZik.Helpers;
 using SoonZik.HttpRequest;
 using SoonZik.HttpRequest.Poco;
@@ -19,7 +21,13 @@ namespace SoonZik.ViewModel
             ListAlbum = new ObservableCollection<Album>();
             ListMusique = new ObservableCollection<Music>();
             ListPack = new ObservableCollection<Pack>();
+            TappedCommand = new RelayCommand(MusicTappedExecute);
             LoadContent();
+        }
+
+        private void MusicTappedExecute()
+        {
+
         }
 
         #endregion
@@ -108,6 +116,7 @@ namespace SoonZik.ViewModel
         public Album SelectedAlbum { get; set; }
         public Playlist SelectedPlaylist { get; set; }
 
+        public ICommand TappedCommand { get; private set; }
         #endregion
     }
 }

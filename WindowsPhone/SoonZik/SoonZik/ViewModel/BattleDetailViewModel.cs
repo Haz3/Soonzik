@@ -182,12 +182,18 @@ namespace SoonZik.ViewModel
             char[] delimiter = {' ', '-', ':'};
             var word = CurrentBattle.date_end.Split(delimiter);
 
-            //_endDate = new DateTime(Int32.Parse(word[0]), Int32.Parse(word[1]), Int32.Parse(word[2]), Int32.Parse(word[3]), Int32.Parse(word[4]), Int32.Parse(word[5]));
-            _endDate = new DateTime(2015, 6, 29, 0, 0, 0);
-            _timer = new DispatcherTimer();
-            _timer.Tick += CountDown;
-            _timer.Interval = TimeSpan.FromSeconds(1);
-            _timer.Start();
+            _endDate = new DateTime(Int32.Parse(word[0]), Int32.Parse(word[1]), Int32.Parse(word[2]), Int32.Parse(word[3]), Int32.Parse(word[4]), Int32.Parse(word[5]));
+            if (_endDate.Ticks > DateTime.Now.Ticks)
+            {
+                _timer = new DispatcherTimer();
+                _timer.Tick += CountDown;
+                _timer.Interval = TimeSpan.FromSeconds(1);
+                _timer.Start();
+            }
+            else
+            {
+                _endDate = new DateTime(2014, 6, 29, 0, 0, 0);
+            }
         }
 
         private void CountDown(object sender, object e)
