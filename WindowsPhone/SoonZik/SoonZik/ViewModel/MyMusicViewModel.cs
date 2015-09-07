@@ -140,7 +140,7 @@ namespace SoonZik.ViewModel
                             var stringEncrypt = KeyHelpers.GetUserKeyFromResponse(key);
                             _crypto = EncriptSha256.EncriptStringToSha256(Singleton.Instance().CurrentUser.salt + stringEncrypt);
                         }
-                        var test = post.UpdatePlaylist(SelectedPlaylist, _crypto, Singleton.Instance().CurrentUser);
+                        var test = post.UpdatePlaylist(SelectedPlaylist, MusicForPlaylist, _crypto, Singleton.Instance().CurrentUser);
                         test.ContinueWith(delegate(Task<string> tmp)
                         {
                             var res = tmp.Result;
@@ -160,7 +160,7 @@ namespace SoonZik.ViewModel
 
         private void RefreshPlaylist()
         {
-
+            MusicForPlaylist = null;
         }
 
         #endregion

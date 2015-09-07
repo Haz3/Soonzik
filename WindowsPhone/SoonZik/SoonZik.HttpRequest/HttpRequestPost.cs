@@ -122,21 +122,11 @@ namespace SoonZik.HttpRequest
             return await GetHttpPostResponse(request, postData);
         }
 
-        public async Task<String> UpdatePlaylist(Playlist thePlaylist, string sha256, User myUser)
+        public async Task<String> UpdatePlaylist(Playlist thePlaylist, Music theMusic, string sha256, User myUser)
         {
-            int[] listMusic = thePlaylist.musics.Select(music => music.id).ToArray();
-            string test = "[";
-            for (int index = 0; index < listMusic.Length; index++)
-            {
-                if (index < listMusic.Length - 1)
-                    test += listMusic[index] + ",";
-                else
-                    test += listMusic[index];
-            }
-            test += "]";
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(ApiUrl + "playlists/update/" + thePlaylist.id);
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(ApiUrl + "/musics/addtoplaylist/");
 
-            var postData = "playlist[name]=" + thePlaylist.name + "&playlist[music]=" + test  + "&secureKey=" + sha256 + "&user_id=" + myUser.id;
+            var postData = "id=" + theMusic.id + "&playlist_id=" + thePlaylist.id + "&secureKey=" + sha256 + "&user_id=" + myUser.id;
             return await GetHttpPostResponse(request, postData);
         } 
 
