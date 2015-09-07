@@ -62,8 +62,6 @@ require 'open-uri'
 # - +has_many+ -  :purchases
 # - +has_many+ -  :purchased_musics, through: :purchases, source: :musics
 # - +has_many+ -  :commentaries
-# - +has_many+ -  :gifts_given
-# - +has_many+ -  :gifts_received
 # - +has_many+ -  :battles_one
 # - +has_many+ -  :battles_two
 # - +has_many+ -  :messages_sender
@@ -117,8 +115,6 @@ class User < ActiveRecord::Base
   has_many :purchased_musics, through: :purchases, source: :musics
   has_many :commentaries, foreign_key: 'author_id'
 
-  has_many :gifts_given, class_name: 'Gift', foreign_key: 'from_user'
-  has_many :gifts_received, class_name: 'Gift', foreign_key: 'to_user'
   has_many :battles_one, class_name: 'Battle', foreign_key: 'artist_one_id'
   has_many :battles_two, class_name: 'Battle', foreign_key: 'artist_two_id'
   has_many :messages_sender, class_name: 'Message', foreign_key: 'user_id'

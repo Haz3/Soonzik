@@ -36,8 +36,7 @@ module API
           @returnValue = { content: Music.where("album_id IS NOT NULL").all.as_json(:only => Music.miniKey, :include => {
                                                         :album => { :only => Album.miniKey },
                                                         :genres => { :only => Genre.miniKey },
-                                                        :user => {:only => User.miniKey},
-                                                        descriptions: {  :only => Description.miniKey }
+                                                        :user => {:only => User.miniKey}
                                                       },
                                                       methods: :getAverageNote)}
         end
@@ -75,8 +74,7 @@ module API
           @returnValue = { content: music.as_json(:only => Music.miniKey, :include => {
                                                     :album => { :only => Album.miniKey },
                                                     :genres => { :only => Genre.miniKey },
-                                                    :user => {:only => User.miniKey},
-                                                    descriptions: {  :only => Description.miniKey }
+                                                    :user => {:only => User.miniKey}
                                                   },
                                                   methods: :getAverageNote) }
           codeAnswer 200
@@ -178,8 +176,7 @@ module API
         @returnValue = { content: music_object.as_json(:only => Music.miniKey, :include => {
                                                         :album => { :only => Album.miniKey },
                                                         :genres => { :only => Genre.miniKey },
-                                                        :user => {:only => User.miniKey},
-                                                        descriptions: {  :only => Description.miniKey }
+                                                        :user => {:only => User.miniKey}
                                                       },
                                                       methods: :getAverageNote) }
 

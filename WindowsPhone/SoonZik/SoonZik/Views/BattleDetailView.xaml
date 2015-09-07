@@ -38,8 +38,7 @@
             <TextBlock Grid.Column="1" Text="{Binding PourcentageVote2}" FontSize="40" HorizontalAlignment="Center"
                        VerticalAlignment="Center" />
         </Grid>
-        <Grid Grid.Row="2" Background="Transparent">
-
+        <Grid Grid.Row="2" Background="Transparent" Visibility="{Binding DateGridVisibility}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="15*" />
                 <ColumnDefinition Width="15*" />
@@ -54,6 +53,9 @@
                        HorizontalAlignment="Center" VerticalAlignment="Center" />
             <TextBlock Grid.Column="3" Text="{Binding SecondesRestantes, Mode=TwoWay}" FontSize="30"
                        HorizontalAlignment="Center" VerticalAlignment="Center" />
+        </Grid>
+        <Grid Grid.Row="2" Background="Transparent" Visibility="{Binding FinishGridVisibility}">
+            <TextBlock x:Uid="EndBattle" Text="" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="30"/>
         </Grid>
         <ScrollViewer Grid.Row="3">
             <Grid Background="Transparent">

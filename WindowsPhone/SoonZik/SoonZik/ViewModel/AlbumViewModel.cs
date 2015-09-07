@@ -93,7 +93,7 @@ namespace SoonZik.ViewModel
             }
         }
 
-        public MessagePrompt MessagePrompt { get; set; }
+        public static MessagePrompt MessagePrompt { get; set; }
         private RelayCommand _itemClickCommand;
 
         public RelayCommand ItemClickCommand

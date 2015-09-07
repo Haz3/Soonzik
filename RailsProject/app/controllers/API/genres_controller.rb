@@ -24,8 +24,7 @@ module API
           @returnValue = { content: Genre.count }
         else
           @returnValue = { content: Genre.all.as_json(:include => {
-                                                        :influences => { :only => Influence.miniKey },
-                                                        descriptions: {  :only => Description.miniKey }
+                                                        :influences => { :only => Influence.miniKey }
                                                     }, :only => Genre.miniKey) }
         end
         if (@returnValue[:content].size == 0)
@@ -76,8 +75,7 @@ module API
                                     :include => {
                                       album: { only: Album.miniKey }
                                     }
-                                  },
-                                  descriptions: {  :only => Description.miniKey }
+                                  }
                                   }, :only => Genre.miniKey)
 
             json["musics"] = json["musics"][offset..(offset + limit - 1)] if json["musics"]

@@ -29,7 +29,6 @@ class Album < ActiveRecord::Base
   has_and_belongs_to_many :genres
   has_and_belongs_to_many :packs
   has_and_belongs_to_many :commentaries
-  has_many :album_notes
   has_many :propositions
   has_many :musics
   belongs_to :user
@@ -54,7 +53,14 @@ class Album < ActiveRecord::Base
 
   # Get the average of notes
   def getAverageNote
-    return AlbumNote.where(album_id: self.id).average(:value).to_f
+    notes = 0
+    if (self.musics.size > 0)
+      self.musics.each do |music|
+        notes += MusicNote.where(music_id: music.id).average(:value).to_f
+      end
+      notes = notes / self.musics.size
+    end
+    return notes
   end
 
   # Add an attribute to know if it's an album proposed
@@ -65,5 +71,19 @@ class Album < ActiveRecord::Base
   # Get an attribute to know if it's an album proposed
   def getProposed
     @proposed
+  end
+
+  # To know if the album is in the pack
+  def isPartial
+    if (@pack_id.present?)
+      PartialAlbum.where(album_id: self.id).where(pack_id: @pack_id).size > 0
+    else
+      nil
+    end
+  end
+
+  # To know if the album is in the pack
+  def setPack(value)
+    @pack_id = value
   end
 end

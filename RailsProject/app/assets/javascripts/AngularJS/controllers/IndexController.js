@@ -53,7 +53,7 @@ SoonzikApp.controller('IndexCtrl', ['$scope', 'SecureAuth', 'HTTPService', '$tim
 		*/
 		var parametersNews = [
 			{ key: "limit", value: 4 },
-			{ key: "order_by_desc[]", value: "date" }
+			{ key: "order_by_desc[]", value: "created_at" }
 		];
 		HTTPService.findNews(parametersNews).then(function(news) {
 			$scope.news = news.data.content;

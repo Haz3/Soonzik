@@ -138,8 +138,6 @@ listening even if we don&#39;t buy it</p>
 </li><li>
 <p><code>belongs_to</code> - :user</p>
 </li><li>
-<p><code>has_one</code> - :flac</p>
-</li><li>
 <p><code>has_many</code> - :listening</p>
 </li><li>
 <p><code>has_many</code> - :music_notes</p>
@@ -183,7 +181,7 @@ listening even if we don&#39;t buy it</p>
 <p>Fields returned : [:id, :title, :duration, :price, :limited]</p>					
 											<div class="method-source-code" id="miniKey-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/models/music.rb, line 56</span>
+								class="language-ruby"><span class="ruby-comment"># File app/models/music.rb, line 53</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">miniKey</span>
   [<span class="ruby-value">:id</span>, <span class="ruby-value">:title</span>, <span class="ruby-value">:duration</span>, <span class="ruby-value">:price</span>, <span class="ruby-value">:limited</span>]
 <span class="ruby-keyword">end</span></code></pre>
@@ -205,7 +203,7 @@ listening even if we don&#39;t buy it</p>
 											<p>The strong parameters to save or update object</p>					
 											<div class="method-source-code" id="music_params-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/models/music.rb, line 49</span>
+								class="language-ruby"><span class="ruby-comment"># File app/models/music.rb, line 46</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">music_params</span>(<span class="ruby-identifier">parameters</span>)
   <span class="ruby-identifier">parameters</span>.<span class="ruby-identifier">require</span>(<span class="ruby-value">:music</span>).<span class="ruby-identifier">permit</span>(<span class="ruby-value">:user_id</span>, <span class="ruby-value">:album_id</span>, <span class="ruby-value">:title</span>, <span class="ruby-value">:duration</span>, <span class="ruby-value">:price</span>, <span class="ruby-value">:file</span>, <span class="ruby-value">:limited</span>)
 <span class="ruby-keyword">end</span></code></pre>
@@ -227,7 +225,7 @@ listening even if we don&#39;t buy it</p>
 											<p>Suggestion logic</p>					
 											<div class="method-source-code" id="suggest-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/models/music.rb, line 66</span>
+								class="language-ruby"><span class="ruby-comment"># File app/models/music.rb, line 63</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">suggest</span>(<span class="ruby-identifier">user</span>)
   <span class="ruby-identifier">index</span> =           <span class="ruby-value">0</span>
   <span class="ruby-identifier">gPond</span> =           {}
@@ -314,7 +312,7 @@ listening even if we don&#39;t buy it</p>
 											<p>Get the average of notes</p>					
 											<div class="method-source-code" id="getAverageNote-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/models/music.rb, line 61</span>
+								class="language-ruby"><span class="ruby-comment"># File app/models/music.rb, line 58</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">getAverageNote</span>
   <span class="ruby-keyword">return</span> <span class="ruby-constant">MusicNote</span>.<span class="ruby-identifier">where</span>(<span class="ruby-identifier">music_id</span><span class="ruby-operator">:</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">id</span>).<span class="ruby-identifier">average</span>(<span class="ruby-value">:value</span>).<span class="ruby-identifier">to_f</span>
 <span class="ruby-keyword">end</span></code></pre>
@@ -370,11 +368,9 @@ listening even if we don&#39;t buy it</p>
 			<li><a href="./API/SuggestionsController.html">API::SuggestionsController</a></li>
 			<li><a href="./API/TweetsController.html">API::TweetsController</a></li>
 			<li><a href="./API/UsersController.html">API::UsersController</a></li>
-			<li><a href="./Access.html">Access</a></li>
 			<li><a href="./Address.html">Address</a></li>
 			<li><a href="./AdminUser.html">AdminUser</a></li>
 			<li><a href="./Album.html">Album</a></li>
-			<li><a href="./AlbumNote.html">AlbumNote</a></li>
 			<li><a href="./Attachment.html">Attachment</a></li>
 			<li><a href="./Battle.html">Battle</a></li>
 			<li><a href="./Cart.html">Cart</a></li>
@@ -382,11 +378,9 @@ listening even if we don&#39;t buy it</p>
 			<li><a href="./Concert.html">Concert</a></li>
 			<li><a href="./Description.html">Description</a></li>
 			<li><a href="./Feedback.html">Feedback</a></li>
-			<li><a href="./Flac.html">Flac</a></li>
 			<li><a href="./Follow.html">Follow</a></li>
 			<li><a href="./Friend.html">Friend</a></li>
 			<li><a href="./Genre.html">Genre</a></li>
-			<li><a href="./Gift.html">Gift</a></li>
 			<li><a href="./Group.html">Group</a></li>
 			<li><a href="./Identity.html">Identity</a></li>
 			<li><a href="./Influence.html">Influence</a></li>
@@ -408,7 +402,6 @@ listening even if we don&#39;t buy it</p>
 			<li><a href="./PurchasedAlbum.html">PurchasedAlbum</a></li>
 			<li><a href="./PurchasedMusic.html">PurchasedMusic</a></li>
 			<li><a href="./PurchasedPack.html">PurchasedPack</a></li>
-			<li><a href="./Tag.html">Tag</a></li>
 			<li><a href="./Tweet.html">Tweet</a></li>
 			<li><a href="./User.html">User</a></li>
 			<li><a href="./Vote.html">Vote</a></li>

@@ -5,10 +5,9 @@ module API
   # * show        [get] - SECURE
   # * save       	[post] - SECURE
   # * destroy     [get] - SECURE
-  # * giftCart    [post] - SECURE
   #
   class CartsController < ApisecurityController
-    before_action :checkKey, only: [:destroy, :save, :show, :giftCart]
+    before_action :checkKey, only: [:destroy, :save, :show]
 
   	# Destroy a specific object by its id
     #
@@ -61,7 +60,6 @@ module API
     # * +cart [user_id]+ - Id of the user who has the cart
     # * +cart [typeObj]+ - Model name of the object to add to the cart -> "Music" | "Album"
     # * +cart [obj_id]+ - Id of the object
-    # * +gift_user_id+ - (Optionnal) If it is a gift, tell the user who will get the gift
     # 
     # ===== HTTP VALUE
     # 
@@ -70,8 +68,6 @@ module API
     # - +503+ - Error from server
     # 
     def save
-      gift_present = false
-
       begin
         if (@security && @cart[:user_id] == @user_id)
           raise ArgumentError, 'user_id missing' if (!defined?@cart[:user_id])
@@ -80,34 +76,10 @@ module API
 
           cart = Cart.new
           cart.user_id = @cart[:user_id]
-          cart.gift = @cart[:gift]
           classObj = @cart[:typeObj].constantize
           obj = classObj.find_by_id(@cart[:obj_id])
           # check if the object exists
           if (obj != nil)
-            gift = nil
-
-            if (@gift_user_id.present? && User.find_by_id(@gift_user_id) != nil)
-              gift_present = true
-
-              gift = Gift.new
-              gift.to_user = @gift_user_id
-              gift.from_user = @user_id
-              # check if the object exists
-              if (gift.save)
-                cart.gift_id = gift.id
-                case @cart[:typeObj]
-                  when "Music"
-                    if (obj.album_id == nil)
-                      gift.destroy
-                      raise ArgumentError, 'music not sell, missing album_id'
-                    end
-                    gift.musics << obj;
-                  when "Album"
-                    gift.albums << obj;
-                end
-              end
-            end
 
             if (cart.save)
               case @cart[:typeObj]
@@ -127,13 +99,11 @@ module API
                                                         } },
                                                       :albums => { :only => Album.miniKey(), :include => { 
                                                           user: { :only => User.miniKey }
-                                                        } },
-                                                      :gift => { :only => Gift.miniKey }
+                                                        } }
                                                     }, only: Cart.miniKey) }
               codeAnswer 201
               defineHttp :created
             else
-              gift.destroy if gift_present == true
               @returnValue = { content: cart.errors.to_hash.to_json }
               codeAnswer 503
               defineHttp :service_unavailable
@@ -180,70 +150,9 @@ module API
                                                         } },
                                                       :albums => { :only => Album.miniKey(), :include => { 
                                                           user: { :only => User.miniKey }
-                                                        } },
-                                                      :gift => { :only => Gift.miniKey }
+                                                        } }
                                                     }, only: Cart.miniKey) }
             codeAnswer 200
-          end
-        end
-      rescue
-        codeAnswer 504
-        defineHttp :service_unavailable
-      end
-      sendJson
-    end
-
-    # Modify the "gift" element for a specific cart
-    #
-    # Route : /carts/:id/gift
-    #
-    # ==== Options
-    # 
-    # * +user_gift_id+ - The id to who you want to give the item, or null if you want to remove a gift
-    #
-    # ===== HTTP VALUE
-    # 
-    # - +200+ - In case of success, return the cart
-    # - +401+ - It is not a secured transaction
-    # - +404+ - The cart user_id is not the same as the user_id used for security or the gift user id you gave is not good
-    # - +503+ - Error from server
-    # 
-    def giftCart
-      begin
-        if (!@security)
-          codeAnswer 500
-          defineHttp :forbidden
-        else
-          c = Cart.find_by_id(@id)
-          if (c == nil || c.user_id != @user_id.to_i || User.find_by_id(@user_gift_id) == nil || @user_gift_id.to_i == @user_id.to_i)
-            codeAnswer 502
-            defineHttp :not_found
-          else
-            gift = c.gift
-            if (gift != nil)
-              if user_gift_id == nil
-                gift.destroy
-              else
-                gift.to_user = @user_gift_id.to_i
-                gift.save
-              end
-            else
-              gift = Gift.new
-              gift.to_user = @user_gift_id.to_i
-              gift.from_user = @user_id
-              gift.save
-              c.gift_id = gift.id
-            end
-            @returnValue = { content: c.as_json(:include => {
-                                                      :musics => { :only => Music.miniKey(), :include => {
-                                                          album: { :only => Album.miniKey() },
-                                                          user: { :only => User.miniKey } 
-                                                        } },
-                                                      :albums => { :only => Album.miniKey(), :include => { 
-                                                          user: { :only => User.miniKey }
-                                                        } },
-                                                      :gift => { :only => Gift.miniKey }
-                                                    }, only: Cart.miniKey) }
           end
         end
       rescue

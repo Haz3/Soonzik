@@ -4,6 +4,8 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using SoonZik.Annotations;
 using SoonZik.HttpRequest.Poco;
+using SoonZik.ViewModel;
+using SoonZik.Views;
 
 // Pour en savoir plus sur le modèle d'élément Contrôle utilisateur, consultez la page http://go.microsoft.com/fwlink/?LinkId=234236
 
@@ -17,19 +19,20 @@ namespace SoonZik.Controls
         {
             InitializeComponent();
             SelectedMusic = theMusic;
+            TitleBlock.Text = SelectedMusic.title;
         }
 
         #endregion
 
         #region Attribute
 
-        public static readonly DependencyProperty MusicProperty = DependencyProperty.Register(
-            "Music", typeof (Music), typeof (MoreOptionPopUp), new PropertyMetadata(default(Music)));
+        public static readonly DependencyProperty SelectedMusicProperty = DependencyProperty.Register(
+            "SelectedMusic", typeof (Music), typeof (MoreOptionPopUp), new PropertyMetadata(default(Music)));
 
         public Music SelectedMusic
         {
-            get { return (Music) GetValue(MusicProperty); }
-            set { SetValue(MusicProperty, value); }
+            get { return (Music) GetValue(SelectedMusicProperty); }
+            set { SetValue(SelectedMusicProperty, value); }
         }
 
         #endregion
@@ -46,5 +49,13 @@ namespace SoonZik.Controls
         }
 
         #endregion
+
+        private void AddToPlaylist(object sender, RoutedEventArgs e)
+        {
+            MyMusicViewModel.MusicForPlaylist = SelectedMusic;
+            MyMusicViewModel.IndexForPlaylist = 3;
+            GlobalMenuControl.SetChildren(new MyMusic());
+            AlbumViewModel.MessagePrompt.Hide();
+        }
     }
 }

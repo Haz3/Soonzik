@@ -303,4 +303,10 @@
   <data name="PackPivot.Header" xml:space="preserve">
     <value>Pack(s)</value>
   </data>
+  <data name="EndBattle.Text" xml:space="preserve">
+    <value>The battle is done</value>
+  </data>
+  <data name="AddToPlaylist.Content" xml:space="preserve">
+    <value>Add to playlist</value>
+  </data>
 </root>

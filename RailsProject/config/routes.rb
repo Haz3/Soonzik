@@ -30,7 +30,6 @@ Rails.application.routes.draw do
 
     get 'carts/my_cart' => 'carts#show'
     match 'carts/save' => 'carts#save', via: [:post, :options]
-    match 'carts/:id/gift' => 'carts#giftCart', via: [:post, :options]
     get 'carts/destroy' => 'carts#destroy' #ok
 
     resources :concerts, only: [:index, :show] do #ok
@@ -131,6 +130,7 @@ Rails.application.routes.draw do
 
     resources :users, only: [:index, :show] do #ok
       collection do
+        get 'artists' => 'users#artists'
         get 'find' => 'users#find'
         match 'save' => 'users#save', via: [:post, :options]
         match 'update' => 'users#update', via: [:post, :options]

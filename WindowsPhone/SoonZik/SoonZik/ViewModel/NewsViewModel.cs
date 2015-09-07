@@ -79,8 +79,7 @@ namespace SoonZik.ViewModel
         private void ItemClickExecute()
         {
             DetailSelectedNews = SelectedNews;
-            GlobalMenuControl.MyGrid.Children.Clear();
-            GlobalMenuControl.MyGrid.Children.Add(new NewsDetail());
+            GlobalMenuControl.SetChildren(new NewsDetail());
         }
 
         private void ShareTappedExecute()

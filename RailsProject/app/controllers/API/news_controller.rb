@@ -32,8 +32,7 @@ module API
           @returnValue = { content: News.all.as_json(:include => {
                                                       :user => { :only => User.miniKey },
                                                       :newstexts => { :only => Newstext.miniKey },
-                                                      :attachments => { :only => Attachment.miniKey },
-                                                      :tags => { :only => Tag.miniKey }
+                                                      :attachments => { :only => Attachment.miniKey }
                                                     }, :only => News.miniKey) }
         end
         if (@returnValue[:content].size == 0)
@@ -72,8 +71,7 @@ module API
           @returnValue = { content: news.as_json(:include => {
                                                   :user => { :only => User.miniKey },
                                                   :newstexts => { :only => Newstext.miniKey },
-                                                  :attachments => { :only => Attachment.miniKey },
-                                                  :tags => { :only => Tag.miniKey }
+                                                  :attachments => { :only => Attachment.miniKey }
                                                 }, :only => News.miniKey) }
           codeAnswer 200
         end
@@ -174,8 +172,7 @@ module API
         @returnValue = { content: new_object.as_json(:include => {
                                                       :user => { :only => User.miniKey },
                                                       :newstexts => { :only => Newstext.miniKey },
-                                                      :attachments => { :only => Attachment.miniKey },
-                                                      :tags => { :only => Tag.miniKey }
+                                                      :attachments => { :only => Attachment.miniKey }
                                                     }, :only => News.miniKey) }
 
         if (new_object.size == 0)

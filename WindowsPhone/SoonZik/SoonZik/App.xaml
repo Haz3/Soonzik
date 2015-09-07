@@ -14,15 +14,16 @@
         <vm:ProfilFriendViewModel x:Key="ProfilFriendViewModel" />
         <vm:PackViewModel x:Key="PackViewModel" />
         <vm:NewsDetailViewModel x:Key="NewsDetailViewModel" />
-        <vm:FriendViewModel x:Key="FriendViewModel" />
+        <vm:MyNetworkViewModel x:Key="MyNetworkViewModel" />
         <vm:AlbumViewModel x:Key="AlbumViewModel" />
         <vm:ProfilArtisteViewModel x:Key="ProfilArtisteViewModel" />
         <vm:InscriptionViewModel x:Key="InscriptionViewModel" />
         <vm:GeolocalisationViewModel x:Key="GeolocalisationViewModel" />
         <vm:BattleViewModel x:Key="BattleViewModel" />
         <vm:CartsViewModel x:Key="CartsViewModel" />
-        <vm:PlaylistViewModel x:Key="PlaylistViewModel" />
+        <vm:MyMusicViewModel x:Key="MyMusicViewModel" />
         <vm:BattleDetailViewModel x:Key="BattleDetailViewModel" />
+        <vm:PlaylistViewModel x:Key="PlaylistViewModel"/>
 
         <DataTemplate x:Key="SizePivotHeader">
             <ContentPresenter>

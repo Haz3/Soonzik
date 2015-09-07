@@ -2,7 +2,8 @@ module API
 	# Controller which manage the transaction for the Users objects
 	# Here is the list of action available :
 	#
-	# * index			 [get]
+	# * index			  [get]
+	# * artists		  [get]
 	# * show				[get]
 	# * find				[get]
 	# * save				[post]
@@ -28,7 +29,7 @@ module API
 		#
 		# ==== Options
 		# 
-		# * +count+ - (optionnal) Get the number of object and not the object themselve. Useful for pagination
+		# * +count+ - (optionnal) Get the number of object and not the object themselve. Useful for pagination. Set it to "true".
 		#
 		# ===== HTTP VALUE
 		# 
@@ -40,7 +41,47 @@ module API
 				if (@count.present? && @count == "true")
 					@returnValue = { content: User.count }
 				else
-					@returnValue = { content: User.all.as_json(:only => User.miniKey) }
+					@returnValue = { content: User.all.as_json(:only => User.miniKey, :include => { groups: { only: [:name] } } ) }
+				end
+				if (@returnValue[:content].size == 0)
+					codeAnswer 202
+				else
+					codeAnswer 200
+				end
+			rescue
+				codeAnswer 504
+				defineHttp :service_unavailable
+			end
+			sendJson
+		end
+
+		# Retrieve all the artists
+		#
+		# Route : /users/artists
+		#
+		# ==== Options
+		# 
+		# * +count+ - (optionnal) Get the number of object and not the object themselve. Useful for pagination. Set it to "true".
+		# * +offset+ - (optionnal) The offset, default value : 0
+		# * +limit+ - (optionnal) The number of user you want, default value : 30
+		#
+		# ===== HTTP VALUE
+		# 
+		# - +200+ - In case of success, return a list of users
+		# - +503+ - Error from server
+		# 
+		def artists
+			offset = 0
+			limit = 30
+
+			begin
+				if (@count.present? && @count == "true")
+					@returnValue = { content: User.count }
+				else
+					offset = @offset.to_i if @offset.present?
+					limit = @limit.to_i if @limit.present?
+ 					u = User.includes(:groups).where(groups: { name: "Artist" }).offset(offset).limit(limit)
+					@returnValue = { content: u.as_json(:only => User.miniKey) }
 				end
 				if (@returnValue[:content].size == 0)
 					codeAnswer 202
@@ -79,7 +120,7 @@ module API
 					codeAnswer 502
 					defineHttp :not_found
 				else
-					@returnValue = { content: user.as_json(:only => User.bigKey) }
+					@returnValue = { content: user.as_json(:only => User.bigKey, :include => { groups: { only: [:name] } } ) }
 					codeAnswer 200
 				end
 			rescue
@@ -176,7 +217,7 @@ module API
 					user_object = user_object.offset(@offset.to_i)
 				end
 
-				@returnValue = { content: user_object.as_json(:only => User.miniKey) }
+				@returnValue = { content: user_object.as_json(:only => User.miniKey, :include => { groups: { only: [:name] } } ) }
 
 				if (user_object.size == 0)
 					codeAnswer 202
@@ -211,19 +252,19 @@ module API
 					list.each do |x|
 						x.purchased_musics.each do |pm|
 							if (pm.purchased_album_id == nil)
-								contentReturn[:musics] = contentReturn[:musics] | [pm.music.as_json(only: Music.miniKey, include: { album: { only: Album.miniKey } })]
+								contentReturn[:musics] = contentReturn[:musics] | [pm.music.as_json(only: Music.miniKey, :include => { album: { only: Album.miniKey }, user: { only: User.miniKey } })]
 							else
 
 								if (pm.purchased_album.purchased_pack_id == nil)
 									a = pm.purchased_album.album.as_json(only: Album.miniKey)
-									a[:musics] = pm.purchased_album.album.musics.as_json(only: Music.miniKey)
+									a[:musics] = pm.purchased_album.album.musics.as_json(only: Music.miniKey, :include => { musics: { only: Music.miniKey }, user: { only: User.miniKey } })
 									contentReturn[:albums] = contentReturn[:albums] | [a]
 								else
 									pack = pm.purchased_album.purchased_pack.pack
 									value = pack.as_json(only: Pack.miniKey)
 									value[:albums] = []
 									pack.albums.each do |album|
-										value[:albums] << album.as_json(only: Album.miniKey, include: { musics: { only: Music.miniKey } } )
+										value[:albums] << album.as_json(only: Album.miniKey, :include => { musics: { only: Music.miniKey }, user: { only: User.miniKey } } )
 									end
 									contentReturn[:packs] = contentReturn[:packs] | [value]
 								end

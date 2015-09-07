@@ -9,10 +9,10 @@
           %h3.subheader.right
             %a{:href => "/news"} Voir tout
         .clearfix
-          .small-6.columns{"ng-repeat" => "new in news", :class => "{{ $last ? 'end' : '' }}"}
+          .small-6.columns.text-center{"ng-repeat" => "new in news", :class => "{{ $last ? 'end' : '' }}"}
             %a{ href: "/news/{{new.id}}" }
               %img{ "ng-src" => "{{ (new.attachments.length == 0) ? '/assets/news/placeholder.jpg' : '/assets/news/' + new.attachments[0].url }}" }
-            %p.text-center
+            %p
               %a{ href: "/news/{{new.id}}" }
                 %strong {{new.title}}
         .divider

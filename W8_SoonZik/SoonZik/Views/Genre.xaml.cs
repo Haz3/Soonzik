@@ -38,5 +38,11 @@ namespace SoonZik.Views
             SoonZik.Models.Genre elem = e.Parameter as SoonZik.Models.Genre;
             DataContext = new GenreViewModel(elem.id);
         }
+
+        private void genre_musics_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            var item = ((SoonZik.Models.Music)e.ClickedItem);
+            this.Frame.Navigate(typeof(Music), item);
+        }
     }
 }

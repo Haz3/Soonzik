@@ -17,7 +17,6 @@
 #
 # - +belongs_to+ - :album
 # - +belongs_to+ - :user
-# - +has_one+ - :flac
 # - +has_many+ - :listening
 # - +has_many+ - :music_notes
 # - +has_and_belongs_to_many+ - :commentaries
@@ -29,11 +28,9 @@
 class Music < ActiveRecord::Base
   belongs_to :album
   belongs_to :user
-  has_one :flac
   has_many :listening
   has_many :music_notes
   has_and_belongs_to_many :commentaries
-  has_and_belongs_to_many :descriptions
   has_and_belongs_to_many :playlist_objects
   has_and_belongs_to_many :genres
 

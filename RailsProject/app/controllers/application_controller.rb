@@ -3,7 +3,6 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
   before_action :ensure_signup_complete
-  before_action :setControllerName
   before_action :cookieMe
   before_action :specifyLanguage
 
@@ -19,12 +18,6 @@ class ApplicationController < ActionController::Base
     if user_signed_in? && current_user && ( !current_user.email_verified?() || !current_user.username_verified?())
       redirect_to finish_signup_path(current_user)
     end
-  end
-
-  # Set the controller name into a variable to get it simply
-  def setControllerName
-    @controller = ""
-    @controller = params[:controller] if params.has_key?(:controller)
   end
 
   # If the user is logged, we put some information into the cookies to allow Ajax call

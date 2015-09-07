@@ -57,7 +57,7 @@ namespace SoonZik.Utils
                                     {
                                         Singleton.Instance().CurrentUser.friends.Add(user);
                                     }
-                                    ServiceLocator.Current.GetInstance<FriendViewModel>().UpdateFriend();
+                                    ServiceLocator.Current.GetInstance<MyNetworkViewModel>().UpdateFriend();
                                     new MessageDialog("Supr effectue").ShowAsync();
                                 });
                         }
@@ -91,7 +91,7 @@ namespace SoonZik.Utils
                                         {
                                             Singleton.Instance().CurrentUser.friends.Add(user);
                                         }
-                                        ServiceLocator.Current.GetInstance<FriendViewModel>().UpdateFriend();
+                                        ServiceLocator.Current.GetInstance<MyNetworkViewModel>().UpdateFriend();
                                         new MessageDialog("Demande effectue").ShowAsync();
                                     });
                             }

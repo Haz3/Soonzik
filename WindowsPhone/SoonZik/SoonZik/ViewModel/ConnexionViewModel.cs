@@ -158,7 +158,7 @@ namespace SoonZik.ViewModel
                                 "http://soonzikapi.herokuapp.com/assets/usersImage/avatars/" +
                                 Singleton.Instance().CurrentUser.image, UriKind.RelativeOrAbsolute));
 
-                    ServiceLocator.Current.GetInstance<FriendViewModel>().UpdateFriend();
+                    ServiceLocator.Current.GetInstance<MyNetworkViewModel>().UpdateFriend();
                 }
                 catch (Exception e)
                 {
