@@ -192,6 +192,12 @@ SoonzikApp.factory('HTTPService', ['$http', '$location', 'Upload', function ($ht
     addToCart: function(parameters) {
       return $http.post("http://api." + url + "/carts/save", parameters);
     },
+    destroyItem: function(parameters) {
+      return $http.get("http://api." + url + "/carts/destroy/" + urlParametersFormat(parameters));
+    },
+    buyCart: function(parameters) {
+      return $http.post("http://api." + url + "/purchases/buycart/", parameters);
+    },
     savePack: function(parameters) {
       return $http.post("http://api." + url + "/purchases/buycart", parameters);
     },

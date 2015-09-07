@@ -1,7 +1,19 @@
 %cart{"ng-init" => "initFoundation()" }
 	.row{"ng-init" => "showCart()"}
 		%h1 Panier
-		%div{"ng-repeat" => "musics in carts"}
-			%div{"ng-repeat" => "music in musics"}
-				%div{"ng-repeat" => "test in music"}
-					{{ test.title }}
+		%table
+			%thead
+				%tr
+					%th{ colspan: '5' } Panier
+			%tbody{"ng-repeat" => "musics in carts"}
+				%tr{"ng-repeat" => "music in musics.musics"}
+					%td {{ music.title }}
+					%td
+						%a.fi-x{"ng-click" => "deleteItem(musics.id)"}
+				%tr{"ng-repeat" => "album in musics.albums"}
+					%td{:width => 300}
+						{{ album.title}}
+					%td
+						%a.fi-x{"ng-click" => "deleteItem(musics.id)"}
+		.button.expand.radius.success
+			%a{:href => "#", "ng-click" => "buyCart()"} Acheter le panier
