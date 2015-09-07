@@ -21,11 +21,11 @@ using SoonZik.Views;
 
 namespace SoonZik.ViewModel
 {
-    public class FriendViewModel : ViewModelBase
+    public class MyNetworkViewModel : ViewModelBase
     {
         #region Ctor
 
-        public FriendViewModel()
+        public MyNetworkViewModel()
         {
             FollowerCommand = new RelayCommand(FollowerCommandExecute);
             TweetCommand = new RelayCommand(TweetCommandExecute);

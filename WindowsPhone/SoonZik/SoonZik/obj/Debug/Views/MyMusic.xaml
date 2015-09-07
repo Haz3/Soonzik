@@ -1,5 +1,5 @@
 ﻿<Page
-    x:Class="SoonZik.Views.Playlist"
+    x:Class="SoonZik.Views.MyMusic"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:SoonZik.Views"
@@ -8,7 +8,7 @@
     xmlns:core="using:Microsoft.Xaml.Interactions.Core"
     xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
     mc:Ignorable="d"
-    DataContext="{StaticResource PlaylistViewModel}"
+    DataContext="{StaticResource MyMusicViewModel}"
     Background="#424242">
 
 
@@ -22,6 +22,18 @@
                 <Image Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left"
                        Source="../Resources/Icones/MenuPack.png" Height="80" Width="80" />
                 <TextBlock Grid.Column="1" Text="{Binding Path=title}" Margin="15,0,0,0" FontSize="25" />
+            </Grid>
+        </DataTemplate>
+
+        <DataTemplate x:Key="PlaylistTemplate">
+            <Grid Width="350">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="80" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Image Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left"
+                       Source="../Resources/Icones/MenuPack.png" Height="80" Width="80" />
+                <TextBlock Grid.Column="1" Text="{Binding Path=name}" Margin="15,0,0,0" FontSize="25" />
             </Grid>
         </DataTemplate>
 
@@ -64,7 +76,7 @@
                          SelectedItem="{Binding SelectedMusic, Mode=TwoWay}">
                     <interactivity:Interaction.Behaviors>
                         <core:EventTriggerBehavior EventName="Tapped">
-                            <core:InvokeCommandAction Command="{Binding TappedCommand}" />
+                            <core:InvokeCommandAction Command="{Binding MusicTappedCommand}" />
                         </core:EventTriggerBehavior>
                     </interactivity:Interaction.Behaviors>
                 </ListBox>
@@ -73,12 +85,35 @@
             <PivotItem x:Uid="AlbumPivot" Header="">
                 <ListBox Background="Transparent" x:Name="ListBoxMusics" ItemsSource="{Binding ListAlbum}"
                          ItemTemplate="{StaticResource AlbumTemplate}"
-                         SelectedItem="{Binding SelectedAlbum, Mode=TwoWay}" />
+                         SelectedItem="{Binding SelectedAlbum, Mode=TwoWay}" >
+                    <interactivity:Interaction.Behaviors>
+                        <core:EventTriggerBehavior EventName="Tapped">
+                            <core:InvokeCommandAction Command="{Binding AlbumTappedCommand}" />
+                        </core:EventTriggerBehavior>
+                    </interactivity:Interaction.Behaviors>
+                </ListBox>
             </PivotItem>
 
             <PivotItem x:Uid="PackPivot" Header="">
                 <ListBox Background="Transparent" x:Name="ListBoxPack" ItemsSource="{Binding ListPack}"
-                          SelectedItem="{Binding SelectedPlaylist, Mode=TwoWay}" ItemTemplate="{StaticResource PackTemplate}" />
+                          SelectedItem="{Binding SelectedPack, Mode=TwoWay}" ItemTemplate="{StaticResource PackTemplate}" >
+                    <interactivity:Interaction.Behaviors>
+                        <core:EventTriggerBehavior EventName="Tapped">
+                            <core:InvokeCommandAction Command="{Binding PackTappedCommand}" />
+                        </core:EventTriggerBehavior>
+                    </interactivity:Interaction.Behaviors>
+                </ListBox>
+            </PivotItem>
+            
+            <PivotItem x:Uid="PlaylistPivot" Header="">
+                <ListBox Background="Transparent" x:Name="ListPlayList" ItemsSource="{Binding ListPlaylist}"
+                          SelectedItem="{Binding SelectedPlaylist, Mode=TwoWay}" ItemTemplate="{StaticResource PlaylistTemplate}" >
+                    <interactivity:Interaction.Behaviors>
+                        <core:EventTriggerBehavior EventName="Tapped">
+                            <core:InvokeCommandAction Command="{Binding PlaylistTappedCommand}" />
+                        </core:EventTriggerBehavior>
+                    </interactivity:Interaction.Behaviors>
+                </ListBox>
             </PivotItem>
         </Pivot>
     </Grid>

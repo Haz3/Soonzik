@@ -132,7 +132,7 @@
     <Compile Include="ViewModel\ConnexionViewModel.cs" />
     <Compile Include="ViewModel\ConversationViewModel.cs" />
     <Compile Include="ViewModel\ExplorerViewModel.cs" />
-    <Compile Include="ViewModel\FriendViewModel.cs" />
+    <Compile Include="ViewModel\MyNetworkViewModel.cs" />
     <Compile Include="ViewModel\GeolocalisationViewModel.cs" />
     <Compile Include="ViewModel\InscriptionViewModel.cs" />
     <Compile Include="ViewModel\MainPageViewModel.cs" />
@@ -140,9 +140,13 @@
     <Compile Include="ViewModel\NewsDetailViewModel.cs" />
     <Compile Include="ViewModel\NewsViewModel.cs" />
     <Compile Include="ViewModel\PackViewModel.cs" />
+    <Compile Include="ViewModel\MyMusicViewModel.cs" />
     <Compile Include="ViewModel\PlaylistViewModel.cs" />
     <Compile Include="ViewModel\ProfilArtisteViewModel.cs" />
     <Compile Include="ViewModel\ProfilFriendViewModel.cs" />
+    <Compile Include="Views\PlaylistView.xaml.cs">
+      <DependentUpon>PlaylistView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\AlbumView.xaml.cs">
       <DependentUpon>AlbumView.xaml</DependentUpon>
     </Compile>
@@ -175,8 +179,8 @@
     <Compile Include="Views\Explorer.xaml.cs">
       <DependentUpon>Explorer.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Friends.xaml.cs">
-      <DependentUpon>Friends.xaml</DependentUpon>
+    <Compile Include="Views\MyNetwork.xaml.cs">
+      <DependentUpon>MyNetwork.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\MainView.xaml.cs">
       <DependentUpon>MainView.xaml</DependentUpon>
@@ -190,8 +194,8 @@
     <Compile Include="Views\Packs.xaml.cs">
       <DependentUpon>Packs.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Playlist.xaml.cs">
-      <DependentUpon>Playlist.xaml</DependentUpon>
+    <Compile Include="Views\MyMusic.xaml.cs">
+      <DependentUpon>MyMusic.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ProfilArtiste.xaml.cs">
       <DependentUpon>ProfilArtiste.xaml</DependentUpon>
@@ -312,6 +316,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Views\PlaylistView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Views\AlbumView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -352,7 +360,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Friends.xaml">
+    <Page Include="Views\MyNetwork.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -372,7 +380,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Playlist.xaml">
+    <Page Include="Views\MyMusic.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

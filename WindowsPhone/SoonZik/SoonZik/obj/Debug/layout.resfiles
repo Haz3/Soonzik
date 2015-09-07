@@ -30,14 +30,15 @@ Views\CartsView.xbf
 Views\Connexion.xbf
 Views\Conversation.xbf
 Views\Explorer.xbf
-Views\Friends.xbf
 Views\GeolocalisationView.xbf
 Views\InscriptionView.xbf
 Views\MainView.xbf
+Views\MyMusic.xbf
+Views\MyNetwork.xbf
 Views\News.xbf
 Views\NewsDetail.xbf
 Views\Packs.xbf
-Views\Playlist.xbf
+Views\PlaylistView.xbf
 Views\ProfilArtiste.xbf
 Views\ProfilFriendView.xbf
 Views\ProfilUser.xbf

@@ -64,7 +64,7 @@ namespace SoonZik.Controls
             //    Singleton.Instance().Charge();
             GlobalMenuControl.MyGrid.Children.Clear();
             GlobalMenuControl.MyGrid.Children.Add(new ProfilFriendView());
-            FriendViewModel.MeaagePrompt.Hide();
+            MyNetworkViewModel.MeaagePrompt.Hide();
         }
 
         private void DeleteContact(object sender, RoutedEventArgs e)
@@ -112,7 +112,7 @@ namespace SoonZik.Controls
                                         {
                                             Singleton.Instance().CurrentUser.friends.Add(user);
                                         }
-                                        ServiceLocator.Current.GetInstance<FriendViewModel>().UpdateFriend();
+                                        ServiceLocator.Current.GetInstance<MyNetworkViewModel>().UpdateFriend();
                                         new MessageDialog("Suppression OK").ShowAsync();
                                     });
                             }

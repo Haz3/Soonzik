@@ -21,7 +21,7 @@ using SoonZik.ViewModel;
 using SoonZik.Views;
 using Battle = SoonZik.Views.BattleView;
 using News = SoonZik.Views.News;
-using Playlist = SoonZik.Views.Playlist;
+using Playlist = SoonZik.Views.MyMusic;
 
 // Pour en savoir plus sur le modèle d'élément Contrôle utilisateur, consultez la page http://go.microsoft.com/fwlink/?LinkId=234236
 
@@ -337,7 +337,7 @@ namespace SoonZik.Controls
 
         private void GoToAmis()
         {
-            SetChildren(new Friends());
+            SetChildren(new MyNetwork());
         }
 
         public static void SetChildren(UIElement myObj)
@@ -450,14 +450,14 @@ namespace SoonZik.Controls
         private void MusicStackPanel_OnTapped(object sender, TappedRoutedEventArgs e)
         {
             AlbumViewModel.MyAlbum = SelectedMusic.album;
-            SetChildren(new AlbumView());
+            SetChildren(new PlaylistView());
             CloseMenu();
         }
 
         private void AlbumStackPanel_OnTapped(object sender, TappedRoutedEventArgs e)
         {
             AlbumViewModel.MyAlbum = SelectedAlbum;
-            SetChildren(new AlbumView());
+            SetChildren(new PlaylistView());
         }
 
         private void ArtistStackPanel_OnTapped(object sender, TappedRoutedEventArgs e)

@@ -40,7 +40,7 @@ namespace SoonZik.ViewModel
             SimpleIoc.Default.Register<ProfilUserViewModel>();
             SimpleIoc.Default.Register<ProfilArtisteViewModel>();
             SimpleIoc.Default.Register<BattleViewModel>();
-            SimpleIoc.Default.Register<FriendViewModel>();
+            SimpleIoc.Default.Register<MyNetworkViewModel>();
             SimpleIoc.Default.Register<ConversationViewModel>();
             SimpleIoc.Default.Register<MainPageViewModel>();
             SimpleIoc.Default.Register<ExplorerViewModel>();
@@ -48,10 +48,11 @@ namespace SoonZik.ViewModel
             SimpleIoc.Default.Register<ProfilFriendViewModel>();
             SimpleIoc.Default.Register<AlbumViewModel>();
             SimpleIoc.Default.Register<GeolocalisationView>();
-            SimpleIoc.Default.Register<PlaylistViewModel>();
+            SimpleIoc.Default.Register<MyMusicViewModel>();
             SimpleIoc.Default.Register<InscriptionViewModel>();
             SimpleIoc.Default.Register<BattleDetailViewModel>();
             SimpleIoc.Default.Register<CartsViewModel>();
+            SimpleIoc.Default.Register<PlaylistViewModel>();
         }
 
         public MainViewModel Main
@@ -89,9 +90,9 @@ namespace SoonZik.ViewModel
             get { return ServiceLocator.Current.GetInstance<BattleViewModel>(); }
         }
 
-        public FriendViewModel Friend
+        public MyNetworkViewModel Friend
         {
-            get { return ServiceLocator.Current.GetInstance<FriendViewModel>(); }
+            get { return ServiceLocator.Current.GetInstance<MyNetworkViewModel>(); }
         }
 
         public ConversationViewModel Conversation
@@ -129,9 +130,9 @@ namespace SoonZik.ViewModel
             get { return ServiceLocator.Current.GetInstance<GeolocalisationView>(); }
         }
 
-        public PlaylistViewModel PlaylistView
+        public MyMusicViewModel PlaylistView
         {
-            get { return ServiceLocator.Current.GetInstance<PlaylistViewModel>(); }
+            get { return ServiceLocator.Current.GetInstance<MyMusicViewModel>(); }
         }
 
         public InscriptionViewModel InscriptionView
@@ -147,6 +148,11 @@ namespace SoonZik.ViewModel
         public CartsViewModel Carts
         {
             get { return ServiceLocator.Current.GetInstance<CartsViewModel>(); }
+        }
+
+        public PlaylistViewModel Playlist
+        {
+            get { return ServiceLocator.Current.GetInstance<PlaylistViewModel>(); }
         }
 
         public static void Cleanup()

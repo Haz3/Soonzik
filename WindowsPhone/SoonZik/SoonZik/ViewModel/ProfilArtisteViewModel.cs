@@ -239,7 +239,7 @@ namespace SoonZik.ViewModel
         {
             AlbumViewModel.MyAlbum = TheAlbum;
             GlobalMenuControl.MyGrid.Children.Clear();
-            GlobalMenuControl.MyGrid.Children.Add(new AlbumView());
+            GlobalMenuControl.MyGrid.Children.Add(new PlaylistView());
         }
 
         private void SelectionExecute()

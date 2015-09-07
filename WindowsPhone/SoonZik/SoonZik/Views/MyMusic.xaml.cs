@@ -8,9 +8,9 @@ namespace SoonZik.Views
     /// <summary>
     ///     Une page vide peut être utilisée seule ou constituer une page de destination au sein d'un frame.
     /// </summary>
-    public sealed partial class Friends : Page
+    public sealed partial class MyMusic : Page
     {
-        public Friends()
+        public MyMusic()
         {
             InitializeComponent();
         }

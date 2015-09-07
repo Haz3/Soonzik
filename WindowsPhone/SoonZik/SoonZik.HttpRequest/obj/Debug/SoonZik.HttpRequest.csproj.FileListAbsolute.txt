@@ -3,6 +3,7 @@ C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik.HttpRequest\
 C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik.HttpRequest\bin\Debug\SoonZik.HttpRequest.pri
 C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik.HttpRequest\bin\Debug\Newtonsoft.Json.dll
 C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik.HttpRequest\bin\Debug\Newtonsoft.Json.xml
+C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik.HttpRequest\obj\Debug\SoonZik.HttpRequest.csprojResolveAssemblyReference.cache
 C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik.HttpRequest\obj\Debug\SoonZik.HttpRequest.dll
 C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik.HttpRequest\obj\Debug\SoonZik.HttpRequest.pdb
 C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik.HttpRequest\obj\Debug\priconfig.xml
@@ -16,4 +17,3 @@ C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik.HttpRequest\
 C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik.HttpRequest\obj\Debug\qualifiers.txt
 C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik.HttpRequest\obj\Debug\qualifiers.txt.intermediate
 C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik.HttpRequest\obj\Debug\MultipleQualifiersPerDimensionFound.txt
-C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik.HttpRequest\obj\Debug\SoonZik.HttpRequest.csprojResolveAssemblyReference.cache

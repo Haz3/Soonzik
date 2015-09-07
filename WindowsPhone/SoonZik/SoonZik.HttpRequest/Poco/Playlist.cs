@@ -4,6 +4,9 @@ namespace SoonZik.HttpRequest.Poco
 {
     public class Playlist
     {
-        public List<Music> ListMusics;
+        public int id { get; set; }
+        public string name { get; set; }
+        public List<Music> musics { get; set; }
+        public User user { get; set; }
     }
 }

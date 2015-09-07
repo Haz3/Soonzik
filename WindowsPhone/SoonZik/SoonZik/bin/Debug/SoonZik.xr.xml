@@ -29,7 +29,11 @@
     <RootPropertyPathName Name="Username" />
     <RootPropertyPathName Name="GridVisibility" />
     <RootPropertyPathName Name="isActive" />
+    <RootPropertyPathName Name="LoadedCommand" />
     <RootPropertyPathName Name="content" />
+    <RootPropertyPathName Name="ThePlaylist" />
+    <RootPropertyPathName Name="musics" />
+    <RootPropertyPathName Name="name" />
     <RootPropertyPathName Name="SelectionCommand" />
     <RootPropertyPathName Name="SendComment" />
     <RootPropertyPathName Name="TextComment" />
@@ -39,6 +43,8 @@
     <RootPropertyPathName Name="ArtistTwo" />
     <RootPropertyPathName Name="email" />
     <RootPropertyPathName Name="ArtistOne" />
+    <RootPropertyPathName Name="FinishGridVisibility" />
+    <RootPropertyPathName Name="DateGridVisibility" />
     <RootPropertyPathName Name="SecondesRestantes" />
     <RootPropertyPathName Name="MinutesRestantes" />
     <RootPropertyPathName Name="HeuresRestantes" />
@@ -90,7 +96,6 @@
     <RootPropertyPathName Name="TappedCommand" />
     <RootPropertyPathName Name="ListMusique" />
     <RootPropertyPathName Name="ListGenres" />
-    <RootPropertyPathName Name="LoadedCommand" />
     <RootPropertyPathName Name="Key" />
     <RootPropertyPathName Name="Group" />
     <RootPropertyPathName Name="ItemSource" />
@@ -120,9 +125,12 @@
     <RootPropertyPathName Name="CompleteListPack" />
     <RootPropertyPathName Name="ThePack" />
     <RootPropertyPathName Name="PackTappedCommand" />
-    <RootPropertyPathName Name="ListPack" />
+    <RootPropertyPathName Name="ListPlaylist" />
     <RootPropertyPathName Name="SelectedPlaylist" />
+    <RootPropertyPathName Name="PlaylistTappedCommand" />
+    <RootPropertyPathName Name="ListPack" />
     <RootPropertyPathName Name="ListAlbum" />
+    <RootPropertyPathName Name="MusicTappedCommand" />
     <RootPropertyPathName Name="FollowText" />
     <RootPropertyPathName Name="FollowCommand" />
     <RootPropertyPathName Name="NbrFollowers" />
@@ -145,15 +153,16 @@
     <RootType FullName="SoonZik.ViewModel.ProfilFriendViewModel" />
     <RootType FullName="SoonZik.ViewModel.PackViewModel" />
     <RootType FullName="SoonZik.ViewModel.NewsDetailViewModel" />
-    <RootType FullName="SoonZik.ViewModel.FriendViewModel" />
+    <RootType FullName="SoonZik.ViewModel.MyNetworkViewModel" />
     <RootType FullName="SoonZik.ViewModel.AlbumViewModel" />
     <RootType FullName="SoonZik.ViewModel.ProfilArtisteViewModel" />
     <RootType FullName="SoonZik.ViewModel.InscriptionViewModel" />
     <RootType FullName="SoonZik.ViewModel.GeolocalisationViewModel" />
     <RootType FullName="SoonZik.ViewModel.BattleViewModel" />
     <RootType FullName="SoonZik.ViewModel.CartsViewModel" />
-    <RootType FullName="SoonZik.ViewModel.PlaylistViewModel" />
+    <RootType FullName="SoonZik.ViewModel.MyMusicViewModel" />
     <RootType FullName="SoonZik.ViewModel.BattleDetailViewModel" />
+    <RootType FullName="SoonZik.ViewModel.PlaylistViewModel" />
     <RootType FullName="Windows.UI.Xaml.DataTemplate">
       <RootProperty Name="Template" />
     </RootType>
@@ -499,6 +508,7 @@
     <RootType FullName="SoonZik.Controls.ProgressRingControl" />
     <RootType FullName="SoonZik.Views.Connexion" />
     <RootType FullName="SoonZik.MainPage" />
+    <RootType FullName="SoonZik.Views.PlaylistView" />
     <RootType FullName="Windows.UI.Xaml.Controls.PivotItem">
       <RootProperty Name="Header" />
       <RootProperty Name="Content" />
@@ -570,12 +580,12 @@
       <RootProperty Name="ItemsSource" />
       <RootProperty Name="ItemTemplate" />
     </RootType>
-    <RootType FullName="SoonZik.Views.Friends" />
+    <RootType FullName="SoonZik.Views.MyNetwork" />
     <RootType FullName="SoonZik.Views.MainView" />
     <RootType FullName="SoonZik.Views.News" />
     <RootType FullName="SoonZik.Views.NewsDetail" />
     <RootType FullName="SoonZik.Views.Packs" />
-    <RootType FullName="SoonZik.Views.Playlist" />
+    <RootType FullName="SoonZik.Views.MyMusic" />
     <RootType FullName="SoonZik.Views.ProfilArtiste" />
     <RootType FullName="SoonZik.Views.ProfilUser" />
   </Roots.RootTypes>

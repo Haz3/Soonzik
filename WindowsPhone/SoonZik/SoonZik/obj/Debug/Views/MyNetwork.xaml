@@ -3,12 +3,12 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    x:Class="SoonZik.Views.Friends"
+    x:Class="SoonZik.Views.MyNetwork"
     xmlns:toolkit="using:Coding4Fun.Toolkit.Controls"
     xmlns:core="using:Microsoft.Xaml.Interactions.Core"
     xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
     mc:Ignorable="d"
-    DataContext="{StaticResource FriendViewModel}"
+    DataContext="{StaticResource MyNetworkViewModel}"
     Background="Transparent">
 
     <interactivity:Interaction.Behaviors>
@@ -31,7 +31,7 @@
                 </Grid.RowDefinitions>
                 <TextBlock Grid.Row="0" Text="{Binding Path=msg}" Foreground="White" FontSize="15" />
                 <TextBlock Grid.Row="1" Text="{Binding Path=user.username}" Foreground="White" FontSize="10"
-                           TextAlignment="Right" Margin="0,0,15,0" />
+                           TextAlignment="Right" Margin="0,0,45,0" />
             </Grid>
         </DataTemplate>
 
