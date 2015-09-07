@@ -277,6 +277,12 @@ var SearchIndex =
 		"type": "normalclass"
 	},
 	{
+		"name": "NewsTitle",
+		"link": "NewsTitle.html",
+		"snippet": "<p>The model of the object NewsTitle Contain the relation and the validation\nCan provide some features linked …\n",
+		"type": "normalclass"
+	},
+	{
 		"name": "Newstext",
 		"link": "Newstext.html",
 		"snippet": "<p>The model of the object Newstext Contain the relation and the validation\nCan provide some features linked …\n",
@@ -292,6 +298,12 @@ var SearchIndex =
 		"name": "Pack",
 		"link": "Pack.html",
 		"snippet": "<p>The model of the object Pack Contain the relation and the validation Can\nprovide some features linked …\n",
+		"type": "normalclass"
+	},
+	{
+		"name": "PartialAlbum",
+		"link": "PartialAlbum.html",
+		"snippet": "<p>The model of the object PartialAlbum Contain the relation and the\nvalidation Can provide some features …\n",
 		"type": "normalclass"
 	},
 	{
@@ -961,6 +973,18 @@ var SearchIndex =
 		"type": "anymethod"
 	},
 	{
+		"name": "isPartial",
+		"link": "Album.html#method-i-isPartial",
+		"snippet": "<p>To know if the album is in the pack\n",
+		"type": "anymethod"
+	},
+	{
+		"name": "setPack",
+		"link": "Album.html#method-i-setPack",
+		"snippet": "<p>To know if the album is in the pack\n",
+		"type": "anymethod"
+	},
+	{
 		"name": "miniKey",
 		"link": "Attachment.html#method-c-miniKey",
 		"snippet": "<p>Filter of information for the API\n<p>Fields returned : [:id, :url, :file_size, :content_type]\n",
@@ -1159,6 +1183,12 @@ var SearchIndex =
 		"type": "anymethod"
 	},
 	{
+		"name": "myConstructor",
+		"link": "News.html#method-i-myConstructor",
+		"snippet": "<p>My constructor called after activerecord create the object ; it init the\ndefault language\n",
+		"type": "anymethod"
+	},
+	{
 		"name": "miniKey",
 		"link": "News.html#method-c-miniKey",
 		"snippet": "<p>Filter of information for the API\n<p>Fields returned : [:id, :title, :date]\n",
@@ -1168,6 +1198,24 @@ var SearchIndex =
 		"name": "news_params",
 		"link": "News.html#method-c-news_params",
 		"snippet": "<p>The strong parameters to save or update object\n",
+		"type": "anymethod"
+	},
+	{
+		"name": "setLanguage",
+		"link": "News.html#method-i-setLanguage",
+		"snippet": "<p>To give the title of the good language\n",
+		"type": "anymethod"
+	},
+	{
+		"name": "title",
+		"link": "News.html#method-i-title",
+		"snippet": "<p>To give the title of the good language\n",
+		"type": "anymethod"
+	},
+	{
+		"name": "miniKey",
+		"link": "NewsTitle.html#method-c-miniKey",
+		"snippet": "<p>Filter of information for the API\n<p>Fields returned : [:title, :language]\n",
 		"type": "anymethod"
 	},
 	{

@@ -256,15 +256,16 @@ module API
 							else
 
 								if (pm.purchased_album.purchased_pack_id == nil)
-									a = pm.purchased_album.album.as_json(only: Album.miniKey)
-									a[:musics] = pm.purchased_album.album.musics.as_json(only: Music.miniKey, :include => { musics: { only: Music.miniKey }, user: { only: User.miniKey } })
+									a = pm.purchased_album.album.as_json(only: Album.miniKey, :include => { user: { only: User.miniKey } })
+									a[:musics] = pm.purchased_album.album.musics.as_json(only: Music.miniKey)
 									contentReturn[:albums] = contentReturn[:albums] | [a]
 								else
 									pack = pm.purchased_album.purchased_pack.pack
 									value = pack.as_json(only: Pack.miniKey)
 									value[:albums] = []
 									pack.albums.each do |album|
-										value[:albums] << album.as_json(only: Album.miniKey, :include => { musics: { only: Music.miniKey }, user: { only: User.miniKey } } )
+                    album.setPack(pack)
+									  value[:albums] << album.as_json(only: Album.miniKey, :include => { musics: { only: Music.miniKey }, user: { only: User.miniKey } } ) if (!(pm.purchased_album.purchased_pack.partial && !album.isPartial))
 									end
 									contentReturn[:packs] = contentReturn[:packs] | [value]
 								end

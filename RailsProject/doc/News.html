@@ -164,9 +164,9 @@ multi language)</p>
 <p>Fields returned : [:id, :title, :date]</p>					
 											<div class="method-source-code" id="miniKey-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/models/news.rb, line 30</span>
+								class="language-ruby"><span class="ruby-comment"># File app/models/news.rb, line 38</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">miniKey</span>
-  [<span class="ruby-value">:id</span>, <span class="ruby-value">:title</span>, <span class="ruby-value">:created_at</span>]
+  [<span class="ruby-value">:id</span>, <span class="ruby-value">:created_at</span>]
 <span class="ruby-keyword">end</span></code></pre>
 						</div>
 										</div>
@@ -186,7 +186,7 @@ multi language)</p>
 											<p>The strong parameters to save or update object</p>					
 											<div class="method-source-code" id="news_params-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/models/news.rb, line 34</span>
+								class="language-ruby"><span class="ruby-comment"># File app/models/news.rb, line 43</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">news_params</span>(<span class="ruby-identifier">parameters</span>)
   <span class="ruby-identifier">parameters</span>.<span class="ruby-identifier">require</span>(<span class="ruby-value">:news</span>).<span class="ruby-identifier">permit</span>(<span class="ruby-value">:title</span>, <span class="ruby-value">:author_id</span>)
 <span class="ruby-keyword">end</span></code></pre>
@@ -203,6 +203,90 @@ multi language)</p>
 			
 			
 									
+						<section class="public-methods instance-methods methods">
+				<header>
+					<h3>Public Instance Methods</h3>
+				</header>
+
+								<a name="method-i-myConstructor">anchor</a>
+				<div id="method-i-myConstructor-doc" class="method">
+
+					<header>
+											<i class="icon-generic"></i>
+						<span class="method-name">myConstructor</span><span 
+							class="method-args">()</span>
+										</header>
+
+					<div class="method-description">
+											<p>My constructor called after activerecord create the object ; it init the
+default language</p>					
+											<div class="method-source-code" id="myConstructor-source">
+							<pre class="prettyprint linenums"><code 
+								class="language-ruby"><span class="ruby-comment"># File app/models/news.rb, line 31</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">myConstructor</span>
+  <span class="ruby-ivar">@language</span> = <span class="ruby-string">&quot;EN&quot;</span>
+<span class="ruby-keyword">end</span></code></pre>
+						</div>
+										</div>
+
+					
+									</div>
+								<a name="method-i-setLanguage">anchor</a>
+				<div id="method-i-setLanguage-doc" class="method">
+
+					<header>
+											<i class="icon-generic"></i>
+						<span class="method-name">setLanguage</span><span 
+							class="method-args">(language)</span>
+										</header>
+
+					<div class="method-description">
+											<p>To give the title of the good language</p>					
+											<div class="method-source-code" id="setLanguage-source">
+							<pre class="prettyprint linenums"><code 
+								class="language-ruby"><span class="ruby-comment"># File app/models/news.rb, line 48</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">setLanguage</span>(<span class="ruby-identifier">language</span>)
+  <span class="ruby-keyword">if</span> (<span class="ruby-constant">Language</span>.<span class="ruby-identifier">where</span>(<span class="ruby-identifier">abbreviation</span><span class="ruby-operator">:</span> <span class="ruby-identifier">language</span>).<span class="ruby-identifier">size</span> <span class="ruby-operator">!=</span> <span class="ruby-value">0</span>)
+    <span class="ruby-ivar">@language</span> = <span class="ruby-identifier">language</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></code></pre>
+						</div>
+										</div>
+
+					
+									</div>
+								<a name="method-i-title">anchor</a>
+				<div id="method-i-title-doc" class="method">
+
+					<header>
+											<i class="icon-generic"></i>
+						<span class="method-name">title</span><span 
+							class="method-args">()</span>
+										</header>
+
+					<div class="method-description">
+											<p>To give the title of the good language</p>					
+											<div class="method-source-code" id="title-source">
+							<pre class="prettyprint linenums"><code 
+								class="language-ruby"><span class="ruby-comment"># File app/models/news.rb, line 55</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">title</span>
+  <span class="ruby-identifier">title</span> = <span class="ruby-string">&quot;No Title&quot;</span>
+  <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@language</span>.<span class="ruby-identifier">present?</span>)
+    <span class="ruby-identifier">nt</span> = <span class="ruby-constant">NewsTitle</span>.<span class="ruby-identifier">where</span>(<span class="ruby-identifier">news_id</span><span class="ruby-operator">:</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">id</span>).<span class="ruby-identifier">where</span>(<span class="ruby-identifier">language</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@language</span>)
+    <span class="ruby-keyword">if</span> (<span class="ruby-identifier">nt</span> <span class="ruby-operator">!=</span> <span class="ruby-keyword">nil</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">nt</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span>)
+      <span class="ruby-identifier">title</span> = <span class="ruby-identifier">nt</span>.<span class="ruby-identifier">first</span>.<span class="ruby-identifier">title</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">title</span>
+<span class="ruby-keyword">end</span></code></pre>
+						</div>
+										</div>
+
+					
+									</div>
+				
+			</section>
 			
 			
 			
@@ -272,9 +356,11 @@ multi language)</p>
 			<li><a href="./Music.html">Music</a></li>
 			<li><a href="./MusicNote.html">MusicNote</a></li>
 			<li><a href="./News.html">News</a></li>
+			<li><a href="./NewsTitle.html">NewsTitle</a></li>
 			<li><a href="./Newstext.html">Newstext</a></li>
 			<li><a href="./Notification.html">Notification</a></li>
 			<li><a href="./Pack.html">Pack</a></li>
+			<li><a href="./PartialAlbum.html">PartialAlbum</a></li>
 			<li><a href="./Playlist.html">Playlist</a></li>
 			<li><a href="./PlaylistObject.html">PlaylistObject</a></li>
 			<li><a href="./Proposition.html">Proposition</a></li>

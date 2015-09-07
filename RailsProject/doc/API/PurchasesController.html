@@ -332,20 +332,23 @@ album : {}, purchased_pack: { partial: value, pack: {} } } } }</p>
         <span class="ruby-identifier">objectToDelete</span>.<span class="ruby-identifier">unshift</span> <span class="ruby-identifier">pp</span>
 
         <span class="ruby-identifier">pack</span>.<span class="ruby-identifier">albums</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">album</span><span class="ruby-operator">|</span>
-          <span class="ruby-identifier">pa</span> = <span class="ruby-constant">PurchasedAlbum</span>.<span class="ruby-identifier">new</span>
-          <span class="ruby-identifier">pa</span>.<span class="ruby-identifier">album_id</span> = <span class="ruby-identifier">album</span>.<span class="ruby-identifier">id</span>
-          <span class="ruby-identifier">pa</span>.<span class="ruby-identifier">purchased_pack_id</span> = <span class="ruby-identifier">pp</span>.<span class="ruby-identifier">id</span>
-          <span class="ruby-identifier">pa</span>.<span class="ruby-identifier">save!</span>
-          <span class="ruby-identifier">objectToDelete</span>.<span class="ruby-identifier">unshift</span> <span class="ruby-identifier">pa</span>
+          <span class="ruby-identifier">album</span>.<span class="ruby-identifier">setPack</span>(<span class="ruby-ivar">@pack_id</span>)
+          <span class="ruby-keyword">if</span> (<span class="ruby-operator">!</span><span class="ruby-identifier">album</span>.<span class="ruby-identifier">isPartial</span> <span class="ruby-operator">||</span> (<span class="ruby-identifier">album</span>.<span class="ruby-identifier">isPartial</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-ivar">@amount</span> <span class="ruby-operator">&gt;</span> <span class="ruby-identifier">pack</span>.<span class="ruby-identifier">averagePrice</span>))
+            <span class="ruby-identifier">pa</span> = <span class="ruby-constant">PurchasedAlbum</span>.<span class="ruby-identifier">new</span>
+            <span class="ruby-identifier">pa</span>.<span class="ruby-identifier">album_id</span> = <span class="ruby-identifier">album</span>.<span class="ruby-identifier">id</span>
+            <span class="ruby-identifier">pa</span>.<span class="ruby-identifier">purchased_pack_id</span> = <span class="ruby-identifier">pp</span>.<span class="ruby-identifier">id</span>
+            <span class="ruby-identifier">pa</span>.<span class="ruby-identifier">save!</span>
+            <span class="ruby-identifier">objectToDelete</span>.<span class="ruby-identifier">unshift</span> <span class="ruby-identifier">pa</span>
 
-          <span class="ruby-identifier">album</span>.<span class="ruby-identifier">musics</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">zik</span><span class="ruby-operator">|</span>
-            <span class="ruby-identifier">pm</span> = <span class="ruby-constant">PurchasedMusic</span>.<span class="ruby-identifier">new</span>
-            <span class="ruby-identifier">pm</span>.<span class="ruby-identifier">purchase_id</span> = <span class="ruby-identifier">p</span>.<span class="ruby-identifier">id</span>
-            <span class="ruby-identifier">pm</span>.<span class="ruby-identifier">purchased_album_id</span> = <span class="ruby-identifier">pa</span>.<span class="ruby-identifier">id</span>
-            <span class="ruby-identifier">pm</span>.<span class="ruby-identifier">music_id</span> = <span class="ruby-identifier">zik</span>.<span class="ruby-identifier">id</span>
-            <span class="ruby-identifier">pm</span>.<span class="ruby-identifier">save!</span>
-            <span class="ruby-identifier">objectToDelete</span>.<span class="ruby-identifier">unshift</span> <span class="ruby-identifier">pm</span>
-          }
+            <span class="ruby-identifier">album</span>.<span class="ruby-identifier">musics</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">zik</span><span class="ruby-operator">|</span>
+              <span class="ruby-identifier">pm</span> = <span class="ruby-constant">PurchasedMusic</span>.<span class="ruby-identifier">new</span>
+              <span class="ruby-identifier">pm</span>.<span class="ruby-identifier">purchase_id</span> = <span class="ruby-identifier">p</span>.<span class="ruby-identifier">id</span>
+              <span class="ruby-identifier">pm</span>.<span class="ruby-identifier">purchased_album_id</span> = <span class="ruby-identifier">pa</span>.<span class="ruby-identifier">id</span>
+              <span class="ruby-identifier">pm</span>.<span class="ruby-identifier">music_id</span> = <span class="ruby-identifier">zik</span>.<span class="ruby-identifier">id</span>
+              <span class="ruby-identifier">pm</span>.<span class="ruby-identifier">save!</span>
+              <span class="ruby-identifier">objectToDelete</span>.<span class="ruby-identifier">unshift</span> <span class="ruby-identifier">pm</span>
+            }
+          <span class="ruby-keyword">end</span>
         <span class="ruby-keyword">end</span>
 
         <span class="ruby-ivar">@returnValue</span> = {
@@ -445,9 +448,11 @@ album : {}, purchased_pack: { partial: value, pack: {} } } } }</p>
 			<li><a href="../Music.html">Music</a></li>
 			<li><a href="../MusicNote.html">MusicNote</a></li>
 			<li><a href="../News.html">News</a></li>
+			<li><a href="../NewsTitle.html">NewsTitle</a></li>
 			<li><a href="../Newstext.html">Newstext</a></li>
 			<li><a href="../Notification.html">Notification</a></li>
 			<li><a href="../Pack.html">Pack</a></li>
+			<li><a href="../PartialAlbum.html">PartialAlbum</a></li>
 			<li><a href="../Playlist.html">Playlist</a></li>
 			<li><a href="../PlaylistObject.html">PlaylistObject</a></li>
 			<li><a href="../Proposition.html">Proposition</a></li>

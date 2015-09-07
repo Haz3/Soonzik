@@ -183,7 +183,7 @@ albums which includes its musics and user (artist)</p>
 </li></ul>					
 											<div class="method-source-code" id="find-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/packs_controller.rb, line 122</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/packs_controller.rb, line 127</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">find</span>
   <span class="ruby-keyword">begin</span>
     <span class="ruby-identifier">pack_object</span> = <span class="ruby-keyword">nil</span>
@@ -384,12 +384,16 @@ which includes its musics and the user (artist)</p>
       <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">502</span>
       <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:not_found</span>
     <span class="ruby-keyword">else</span>
+      <span class="ruby-identifier">pack</span>.<span class="ruby-identifier">albums</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">album</span><span class="ruby-operator">|</span>
+        <span class="ruby-identifier">album</span>.<span class="ruby-identifier">setPack</span>(<span class="ruby-identifier">pack</span>.<span class="ruby-identifier">id</span>)
+      <span class="ruby-keyword">end</span>
       <span class="ruby-ivar">@returnValue</span> = { <span class="ruby-identifier">content</span><span class="ruby-operator">:</span> <span class="ruby-identifier">pack</span>.<span class="ruby-identifier">as_json</span>(<span class="ruby-value">:include</span> =<span class="ruby-operator">&gt;</span> { <span class="ruby-identifier">albums</span><span class="ruby-operator">:</span> {
                                                               <span class="ruby-value">:include</span> =<span class="ruby-operator">&gt;</span> {
                                                                 <span class="ruby-value">:user</span> =<span class="ruby-operator">&gt;</span> { <span class="ruby-value">:only</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">User</span>.<span class="ruby-identifier">miniKey</span> },
                                                                 <span class="ruby-value">:musics</span> =<span class="ruby-operator">&gt;</span> { <span class="ruby-value">:only</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">Music</span>.<span class="ruby-identifier">miniKey</span> }
                                                               },
-                                                              <span class="ruby-value">:only</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">Album</span>.<span class="ruby-identifier">miniKey</span>
+                                                              <span class="ruby-value">:only</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">Album</span>.<span class="ruby-identifier">miniKey</span>,
+                                                              <span class="ruby-value">:methods</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">:isPartial</span>
                                                             },
                                                             <span class="ruby-identifier">user</span><span class="ruby-operator">:</span> {
                                                               <span class="ruby-value">:only</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">User</span>.<span class="ruby-identifier">miniKey</span>
@@ -401,6 +405,7 @@ which includes its musics and the user (artist)</p>
       <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">200</span>
     <span class="ruby-keyword">end</span>
   <span class="ruby-keyword">rescue</span>
+    <span class="ruby-identifier">puts</span> <span class="ruby-identifier">$!</span>, <span class="ruby-identifier">$@</span>
     <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">504</span>
     <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:service_unavailable</span>
   <span class="ruby-keyword">end</span>
@@ -482,9 +487,11 @@ which includes its musics and the user (artist)</p>
 			<li><a href="../Music.html">Music</a></li>
 			<li><a href="../MusicNote.html">MusicNote</a></li>
 			<li><a href="../News.html">News</a></li>
+			<li><a href="../NewsTitle.html">NewsTitle</a></li>
 			<li><a href="../Newstext.html">Newstext</a></li>
 			<li><a href="../Notification.html">Notification</a></li>
 			<li><a href="../Pack.html">Pack</a></li>
+			<li><a href="../PartialAlbum.html">PartialAlbum</a></li>
 			<li><a href="../Playlist.html">Playlist</a></li>
 			<li><a href="../PlaylistObject.html">PlaylistObject</a></li>
 			<li><a href="../Proposition.html">Proposition</a></li>

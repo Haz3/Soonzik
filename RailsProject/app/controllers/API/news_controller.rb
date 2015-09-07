@@ -18,6 +18,7 @@ module API
     # ==== Options
     # 
     # * +count+ - (optionnal) Get the number of object and not the object themselve. Useful for pagination
+    # * +language+ - (optionnal) To get the news of a specific language. Default : "EN"
     #
     # ===== HTTP VALUE
     # 
@@ -29,11 +30,17 @@ module API
         if (@count.present? && @count == "true")
           @returnValue = { content: News.count }
         else
+          n = News.all
+          if @language.present?
+            n.each do |news|
+              news.setLanguage @language
+            end
+          end
           @returnValue = { content: News.all.as_json(:include => {
                                                       :user => { :only => User.miniKey },
                                                       :newstexts => { :only => Newstext.miniKey },
                                                       :attachments => { :only => Attachment.miniKey }
-                                                    }, :only => News.miniKey) }
+                                                    }, :only => News.miniKey, methods: :title) }
         end
         if (@returnValue[:content].size == 0)
           codeAnswer 202
@@ -54,6 +61,7 @@ module API
     # ==== Options
     # 
     # * +id+ - The id of the specific news
+    # * +language+ - (optionnal) To get the news of a specific language. Default : "EN"
     # 
     # ===== HTTP VALUE
     # 
@@ -68,11 +76,12 @@ module API
           codeAnswer 502
           defineHttp :not_found
         else
+          news.setLanguage @language if @language.present?
           @returnValue = { content: news.as_json(:include => {
                                                   :user => { :only => User.miniKey },
                                                   :newstexts => { :only => Newstext.miniKey },
                                                   :attachments => { :only => Attachment.miniKey }
-                                                }, :only => News.miniKey) }
+                                                }, :only => News.miniKey, methods: :title) }
           codeAnswer 200
         end
       rescue
@@ -94,6 +103,7 @@ module API
     # * +group_by []+ - If you want to group by field
     # * +limit+ - The number of row you want
     # * +offset+ - The offset of the array
+    # * +language+ - (optionnal) To get the news of a specific language. Default : "EN"
     # 
     # ==== Example
     #
@@ -169,11 +179,17 @@ module API
           new_object = new_object.offset(@offset.to_i)
         end
 
+        if (@language.present?)
+          new_object.each do |news|
+            news.setLanguage @language
+          end
+        end
+
         @returnValue = { content: new_object.as_json(:include => {
                                                       :user => { :only => User.miniKey },
                                                       :newstexts => { :only => Newstext.miniKey },
                                                       :attachments => { :only => Attachment.miniKey }
-                                                    }, :only => News.miniKey) }
+                                                    }, :only => News.miniKey, methods: :title) }
 
         if (new_object.size == 0)
           codeAnswer 202

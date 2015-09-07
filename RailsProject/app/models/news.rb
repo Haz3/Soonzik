@@ -17,21 +17,50 @@
 # - +has_and_belongs_to_many+ - :commentaries
 #
 class News < ActiveRecord::Base
+  after_initialize :myConstructor
+
   belongs_to :user, class_name: 'User', foreign_key: 'author_id'
   has_many :newstexts
+  has_many :newstitles
   has_and_belongs_to_many :attachments
   has_and_belongs_to_many :commentaries
 
   validates :user, :title, presence: true
 
+  # My constructor called after activerecord create the object ; it init the default language
+  def myConstructor
+    @language = "EN"
+  end
+
   # Filter of information for the API
   #
   # Fields returned : [:id, :title, :date]
   def self.miniKey
-    [:id, :title, :created_at]
+    [:id, :created_at]
   end
+
   # The strong parameters to save or update object
   def self.news_params(parameters)
     parameters.require(:news).permit(:title, :author_id)
+  end
+
+  # To give the title of the good language
+  def setLanguage(language)
+    if (Language.where(abbreviation: language).size != 0)
+      @language = language
+    end
+  end
+
+  # To give the title of the good language
+  def title
+    title = "No Title"
+    if (@language.present?)
+      nt = NewsTitle.where(news_id: self.id).where(language: @language)
+      if (nt != nil && nt.size > 0)
+        title = nt.first.title
+      end
+    end
+
+    title
   end
 end

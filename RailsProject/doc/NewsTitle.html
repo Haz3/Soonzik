@@ -91,8 +91,8 @@
 								  												<h1 class="class"
 					rel="popover"
 					data-original-title="In files"
-					data-content="app/models/friend.rb"
-					>Friend</h1>
+					data-content="app/models/news_title.rb"
+					>NewsTitle</h1>
 				</p>
 							</hgroup>
 			<span class="label">class</span>
@@ -109,9 +109,24 @@
 
 		<section class="description">
 			
-<p>The model of the object <a href="Follow.html">Follow</a> Contain the
-relations It is only here for linked user to user, never an object <a
-href="Follow.html">Follow</a> will be instanciate</p>
+<p>The model of the object <a href="NewsTitle.html">NewsTitle</a> Contain the
+relation and the validation Can provide some features linked to this model</p>
+
+<h4 id="class-NewsTitle-label-Attributes">Attributes<span><a href="#class-NewsTitle-label-Attributes">&para;</a> <a href="#top">&uarr;</a></span></h4>
+<ul><li>
+<p><code>id</code> - (integer) - The ID of the object</p>
+</li><li>
+<p><code>title</code> - (string) - The title</p>
+</li><li>
+<p><code>language</code> - (string) - The language of the title</p>
+</li><li>
+<p><code>news_id</code> - (string) - The id of the news who has the title</p>
+</li></ul>
+
+<h4 id="class-NewsTitle-label-Associations">Associations<span><a href="#class-NewsTitle-label-Associations">&para;</a> <a href="#top">&uarr;</a></span></h4>
+
+<pre class="ruby"><span class="ruby-operator">+</span>:<span class="ruby-identifier">belongs_to</span><span class="ruby-operator">+</span> <span class="ruby-operator">-</span> :<span class="ruby-identifier">users</span>
+</pre>
 		</section>
 
 				<section id="5Buntitled-5D" class="documentation-section">
@@ -121,6 +136,37 @@ href="Follow.html">Follow</a> will be instanciate</p>
 			
 			<!-- Methods -->
 						
+						<section class="public-methods class-methods methods">
+				<header>
+					<h3>Public Class Methods</h3>
+				</header>
+
+								<a name="method-c-miniKey">anchor</a>
+				<div id="method-c-miniKey-doc" class="method">
+
+					<header>
+											<i class="icon-generic"></i>
+						<span class="method-name">miniKey</span><span 
+							class="method-args">()</span>
+										</header>
+
+					<div class="method-description">
+											<p>Filter of information for the <a href="API.html">API</a></p>
+
+<p>Fields returned : [:title, :language]</p>					
+											<div class="method-source-code" id="miniKey-source">
+							<pre class="prettyprint linenums"><code 
+								class="language-ruby"><span class="ruby-comment"># File app/models/news_title.rb, line 24</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">miniKey</span>
+      [<span class="ruby-value">:title</span>, <span class="ruby-value">:language</span>]
+<span class="ruby-keyword">end</span></code></pre>
+						</div>
+										</div>
+
+					
+									</div>
+				
+			</section>
 			
 			
 			

@@ -239,7 +239,14 @@ was released</p>
 							<pre class="prettyprint linenums"><code 
 								class="language-ruby"><span class="ruby-comment"># File app/models/album.rb, line 55</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">getAverageNote</span>
-  <span class="ruby-keyword">return</span> <span class="ruby-constant">AlbumNote</span>.<span class="ruby-identifier">where</span>(<span class="ruby-identifier">album_id</span><span class="ruby-operator">:</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">id</span>).<span class="ruby-identifier">average</span>(<span class="ruby-value">:value</span>).<span class="ruby-identifier">to_f</span>
+  <span class="ruby-identifier">notes</span> = <span class="ruby-value">0</span>
+  <span class="ruby-keyword">if</span> (<span class="ruby-keyword">self</span>.<span class="ruby-identifier">musics</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span>)
+    <span class="ruby-keyword">self</span>.<span class="ruby-identifier">musics</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">music</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">notes</span> <span class="ruby-operator">+=</span> <span class="ruby-constant">MusicNote</span>.<span class="ruby-identifier">where</span>(<span class="ruby-identifier">music_id</span><span class="ruby-operator">:</span> <span class="ruby-identifier">music</span>.<span class="ruby-identifier">id</span>).<span class="ruby-identifier">average</span>(<span class="ruby-value">:value</span>).<span class="ruby-identifier">to_f</span>
+    <span class="ruby-keyword">end</span>
+    <span class="ruby-identifier">notes</span> = <span class="ruby-identifier">notes</span> <span class="ruby-operator">/</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">musics</span>.<span class="ruby-identifier">size</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">notes</span>
 <span class="ruby-keyword">end</span></code></pre>
 						</div>
 										</div>
@@ -259,9 +266,57 @@ was released</p>
 											<p>Get an attribute to know if it&#39;s an album proposed</p>					
 											<div class="method-source-code" id="getProposed-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/models/album.rb, line 65</span>
+								class="language-ruby"><span class="ruby-comment"># File app/models/album.rb, line 72</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">getProposed</span>
   <span class="ruby-ivar">@proposed</span>
+<span class="ruby-keyword">end</span></code></pre>
+						</div>
+										</div>
+
+					
+									</div>
+								<a name="method-i-isPartial">anchor</a>
+				<div id="method-i-isPartial-doc" class="method">
+
+					<header>
+											<i class="icon-generic"></i>
+						<span class="method-name">isPartial</span><span 
+							class="method-args">()</span>
+										</header>
+
+					<div class="method-description">
+											<p>To know if the album is in the pack</p>					
+											<div class="method-source-code" id="isPartial-source">
+							<pre class="prettyprint linenums"><code 
+								class="language-ruby"><span class="ruby-comment"># File app/models/album.rb, line 77</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">isPartial</span>
+  <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@pack_id</span>.<span class="ruby-identifier">present?</span>)
+    <span class="ruby-constant">PartialAlbum</span>.<span class="ruby-identifier">where</span>(<span class="ruby-identifier">album_id</span><span class="ruby-operator">:</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">id</span>).<span class="ruby-identifier">where</span>(<span class="ruby-identifier">pack_id</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@pack_id</span>).<span class="ruby-identifier">size</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-keyword">nil</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></code></pre>
+						</div>
+										</div>
+
+					
+									</div>
+								<a name="method-i-setPack">anchor</a>
+				<div id="method-i-setPack-doc" class="method">
+
+					<header>
+											<i class="icon-generic"></i>
+						<span class="method-name">setPack</span><span 
+							class="method-args">(value)</span>
+										</header>
+
+					<div class="method-description">
+											<p>To know if the album is in the pack</p>					
+											<div class="method-source-code" id="setPack-source">
+							<pre class="prettyprint linenums"><code 
+								class="language-ruby"><span class="ruby-comment"># File app/models/album.rb, line 86</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">setPack</span>(<span class="ruby-identifier">value</span>)
+  <span class="ruby-ivar">@pack_id</span> = <span class="ruby-identifier">value</span>
 <span class="ruby-keyword">end</span></code></pre>
 						</div>
 										</div>
@@ -281,7 +336,7 @@ was released</p>
 											<p>Add an attribute to know if it&#39;s an album proposed</p>					
 											<div class="method-source-code" id="setProposed-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/models/album.rb, line 60</span>
+								class="language-ruby"><span class="ruby-comment"># File app/models/album.rb, line 67</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">setProposed</span>(<span class="ruby-identifier">value</span>)
   <span class="ruby-ivar">@proposed</span> = <span class="ruby-identifier">value</span>
 <span class="ruby-keyword">end</span></code></pre>
@@ -361,9 +416,11 @@ was released</p>
 			<li><a href="./Music.html">Music</a></li>
 			<li><a href="./MusicNote.html">MusicNote</a></li>
 			<li><a href="./News.html">News</a></li>
+			<li><a href="./NewsTitle.html">NewsTitle</a></li>
 			<li><a href="./Newstext.html">Newstext</a></li>
 			<li><a href="./Notification.html">Notification</a></li>
 			<li><a href="./Pack.html">Pack</a></li>
+			<li><a href="./PartialAlbum.html">PartialAlbum</a></li>
 			<li><a href="./Playlist.html">Playlist</a></li>
 			<li><a href="./PlaylistObject.html">PlaylistObject</a></li>
 			<li><a href="./Proposition.html">Proposition</a></li>

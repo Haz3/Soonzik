@@ -171,8 +171,7 @@ its influences</p>
       <span class="ruby-ivar">@returnValue</span> = { <span class="ruby-identifier">content</span><span class="ruby-operator">:</span> <span class="ruby-constant">Genre</span>.<span class="ruby-identifier">count</span> }
     <span class="ruby-keyword">else</span>
       <span class="ruby-ivar">@returnValue</span> = { <span class="ruby-identifier">content</span><span class="ruby-operator">:</span> <span class="ruby-constant">Genre</span>.<span class="ruby-identifier">all</span>.<span class="ruby-identifier">as_json</span>(<span class="ruby-value">:include</span> =<span class="ruby-operator">&gt;</span> {
-                                                    <span class="ruby-value">:influences</span> =<span class="ruby-operator">&gt;</span> { <span class="ruby-value">:only</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">Influence</span>.<span class="ruby-identifier">miniKey</span> },
-                                                    <span class="ruby-identifier">descriptions</span><span class="ruby-operator">:</span> {  <span class="ruby-value">:only</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">Description</span>.<span class="ruby-identifier">miniKey</span> }
+                                                    <span class="ruby-value">:influences</span> =<span class="ruby-operator">&gt;</span> { <span class="ruby-value">:only</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">Influence</span>.<span class="ruby-identifier">miniKey</span> }
                                                 }, <span class="ruby-value">:only</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">Genre</span>.<span class="ruby-identifier">miniKey</span>) }
     <span class="ruby-keyword">end</span>
     <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@returnValue</span>[<span class="ruby-value">:content</span>].<span class="ruby-identifier">size</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>)
@@ -228,7 +227,7 @@ influences and musics</p>
 </li></ul>					
 											<div class="method-source-code" id="show-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/genres_controller.rb, line 60</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/genres_controller.rb, line 59</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">show</span>
     <span class="ruby-keyword">begin</span>
     <span class="ruby-identifier">genre</span> = <span class="ruby-constant">Genre</span>.<span class="ruby-identifier">find_by_id</span>(<span class="ruby-ivar">@id</span>)
@@ -248,8 +247,7 @@ influences and musics</p>
                                 <span class="ruby-value">:include</span> =<span class="ruby-operator">&gt;</span> {
                                   <span class="ruby-identifier">album</span><span class="ruby-operator">:</span> { <span class="ruby-identifier">only</span><span class="ruby-operator">:</span> <span class="ruby-constant">Album</span>.<span class="ruby-identifier">miniKey</span> }
                                 }
-                              },
-                              <span class="ruby-identifier">descriptions</span><span class="ruby-operator">:</span> {  <span class="ruby-value">:only</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">Description</span>.<span class="ruby-identifier">miniKey</span> }
+                              }
                               }, <span class="ruby-value">:only</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">Genre</span>.<span class="ruby-identifier">miniKey</span>)
 
         <span class="ruby-identifier">json</span>[<span class="ruby-string">&quot;musics&quot;</span>] = <span class="ruby-identifier">json</span>[<span class="ruby-string">&quot;musics&quot;</span>][<span class="ruby-identifier">offset</span><span class="ruby-operator">..</span>(<span class="ruby-identifier">offset</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">limit</span> <span class="ruby-operator">-</span> <span class="ruby-value">1</span>)] <span class="ruby-keyword">if</span> <span class="ruby-identifier">json</span>[<span class="ruby-string">&quot;musics&quot;</span>]
@@ -340,9 +338,11 @@ influences and musics</p>
 			<li><a href="../Music.html">Music</a></li>
 			<li><a href="../MusicNote.html">MusicNote</a></li>
 			<li><a href="../News.html">News</a></li>
+			<li><a href="../NewsTitle.html">NewsTitle</a></li>
 			<li><a href="../Newstext.html">Newstext</a></li>
 			<li><a href="../Notification.html">Notification</a></li>
 			<li><a href="../Pack.html">Pack</a></li>
+			<li><a href="../PartialAlbum.html">PartialAlbum</a></li>
 			<li><a href="../Playlist.html">Playlist</a></li>
 			<li><a href="../PlaylistObject.html">PlaylistObject</a></li>
 			<li><a href="../Proposition.html">Proposition</a></li>

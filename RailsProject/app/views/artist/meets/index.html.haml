@@ -72,7 +72,7 @@
 				.small-4.columns
 					= f.label(:what, "for a" )
 				.small-8.columns
-					= f.select(:what, @professionsArray.collect {|p| [ p.str, p.str ] }, { id: "type" })
+					= f.select(:what, @typesArray.collect {|p| [ p.str, p.str ] }, { id: "type" })
 		.row
 			.small-12.medium-6.columns
 				.small-4.columns

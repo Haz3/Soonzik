@@ -174,7 +174,7 @@ href="../News.html">News</a> objects Here is the list of action available :</p>
 </li></ul>					
 											<div class="method-source-code" id="addcomment-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/news_controller.rb, line 206</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/news_controller.rb, line 222</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">addcomment</span>
   <span class="ruby-keyword">begin</span>
     <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@security</span>)
@@ -241,6 +241,9 @@ value</p>
 <p><code>limit</code> - The number of row you want</p>
 </li><li>
 <p><code>offset</code> - The offset of the array</p>
+</li><li>
+<p><code>language</code> - (optionnal) To get the news of a specific language.
+Default : “EN”</p>
 </li></ul>
 
 <h4 id="method-i-find-label-Example">Example<span><a href="#method-i-find-label-Example">&para;</a> <a href="#top">&uarr;</a></span></h4>
@@ -257,7 +260,7 @@ user (the author), the newstacts, the attachments</p>
 </li></ul>					
 											<div class="method-source-code" id="find-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/news_controller.rb, line 108</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/news_controller.rb, line 118</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">find</span>
   <span class="ruby-keyword">begin</span>
     <span class="ruby-identifier">new_object</span> = <span class="ruby-keyword">nil</span>
@@ -322,11 +325,17 @@ user (the author), the newstacts, the attachments</p>
       <span class="ruby-identifier">new_object</span> = <span class="ruby-identifier">new_object</span>.<span class="ruby-identifier">offset</span>(<span class="ruby-ivar">@offset</span>.<span class="ruby-identifier">to_i</span>)
     <span class="ruby-keyword">end</span>
 
+    <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@language</span>.<span class="ruby-identifier">present?</span>)
+      <span class="ruby-identifier">new_object</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">news</span><span class="ruby-operator">|</span>
+        <span class="ruby-identifier">news</span>.<span class="ruby-identifier">setLanguage</span> <span class="ruby-ivar">@language</span>
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">end</span>
+
     <span class="ruby-ivar">@returnValue</span> = { <span class="ruby-identifier">content</span><span class="ruby-operator">:</span> <span class="ruby-identifier">new_object</span>.<span class="ruby-identifier">as_json</span>(<span class="ruby-value">:include</span> =<span class="ruby-operator">&gt;</span> {
                                                   <span class="ruby-value">:user</span> =<span class="ruby-operator">&gt;</span> { <span class="ruby-value">:only</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">User</span>.<span class="ruby-identifier">miniKey</span> },
                                                   <span class="ruby-value">:newstexts</span> =<span class="ruby-operator">&gt;</span> { <span class="ruby-value">:only</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">Newstext</span>.<span class="ruby-identifier">miniKey</span> },
                                                   <span class="ruby-value">:attachments</span> =<span class="ruby-operator">&gt;</span> { <span class="ruby-value">:only</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">Attachment</span>.<span class="ruby-identifier">miniKey</span> }
-                                                }, <span class="ruby-value">:only</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">News</span>.<span class="ruby-identifier">miniKey</span>) }
+                                                }, <span class="ruby-value">:only</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">News</span>.<span class="ruby-identifier">miniKey</span>, <span class="ruby-identifier">methods</span><span class="ruby-operator">:</span> <span class="ruby-value">:title</span>) }
 
     <span class="ruby-keyword">if</span> (<span class="ruby-identifier">new_object</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>)
       <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">202</span>
@@ -381,7 +390,7 @@ last (default : false)</p>
 </li></ul>					
 											<div class="method-source-code" id="getcomments-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/news_controller.rb, line 257</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/news_controller.rb, line 273</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">getcomments</span>
   <span class="ruby-identifier">order</span> = <span class="ruby-string">&quot;false&quot;</span>
   <span class="ruby-keyword">begin</span>
@@ -431,6 +440,9 @@ last (default : false)</p>
 <ul><li>
 <p><code>count</code> - (optionnal) Get the number of object and not the
 object themselve. Useful for pagination</p>
+</li><li>
+<p><code>language</code> - (optionnal) To get the news of a specific language.
+Default : “EN”</p>
 </li></ul>
 
 <h5 id="method-i-index-label-HTTP+VALUE">HTTP VALUE<span><a href="#method-i-index-label-HTTP+VALUE">&para;</a> <a href="#top">&uarr;</a></span></h5>
@@ -442,17 +454,23 @@ user (the author), the newstexts, the attachments and the tags</p>
 </li></ul>					
 											<div class="method-source-code" id="index-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/news_controller.rb, line 27</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/news_controller.rb, line 28</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">index</span>
   <span class="ruby-keyword">begin</span>
     <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@count</span>.<span class="ruby-identifier">present?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-ivar">@count</span> <span class="ruby-operator">==</span> <span class="ruby-string">&quot;true&quot;</span>)
       <span class="ruby-ivar">@returnValue</span> = { <span class="ruby-identifier">content</span><span class="ruby-operator">:</span> <span class="ruby-constant">News</span>.<span class="ruby-identifier">count</span> }
     <span class="ruby-keyword">else</span>
+      <span class="ruby-identifier">n</span> = <span class="ruby-constant">News</span>.<span class="ruby-identifier">all</span>
+      <span class="ruby-keyword">if</span> <span class="ruby-ivar">@language</span>.<span class="ruby-identifier">present?</span>
+        <span class="ruby-identifier">n</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">news</span><span class="ruby-operator">|</span>
+          <span class="ruby-identifier">news</span>.<span class="ruby-identifier">setLanguage</span> <span class="ruby-ivar">@language</span>
+        <span class="ruby-keyword">end</span>
+      <span class="ruby-keyword">end</span>
       <span class="ruby-ivar">@returnValue</span> = { <span class="ruby-identifier">content</span><span class="ruby-operator">:</span> <span class="ruby-constant">News</span>.<span class="ruby-identifier">all</span>.<span class="ruby-identifier">as_json</span>(<span class="ruby-value">:include</span> =<span class="ruby-operator">&gt;</span> {
                                                   <span class="ruby-value">:user</span> =<span class="ruby-operator">&gt;</span> { <span class="ruby-value">:only</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">User</span>.<span class="ruby-identifier">miniKey</span> },
                                                   <span class="ruby-value">:newstexts</span> =<span class="ruby-operator">&gt;</span> { <span class="ruby-value">:only</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">Newstext</span>.<span class="ruby-identifier">miniKey</span> },
                                                   <span class="ruby-value">:attachments</span> =<span class="ruby-operator">&gt;</span> { <span class="ruby-value">:only</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">Attachment</span>.<span class="ruby-identifier">miniKey</span> }
-                                                }, <span class="ruby-value">:only</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">News</span>.<span class="ruby-identifier">miniKey</span>) }
+                                                }, <span class="ruby-value">:only</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">News</span>.<span class="ruby-identifier">miniKey</span>, <span class="ruby-identifier">methods</span><span class="ruby-operator">:</span> <span class="ruby-value">:title</span>) }
     <span class="ruby-keyword">end</span>
     <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@returnValue</span>[<span class="ruby-value">:content</span>].<span class="ruby-identifier">size</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>)
       <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">202</span>
@@ -487,6 +505,9 @@ user (the author), the newstexts, the attachments and the tags</p>
 <h4 id="method-i-show-label-Options">Options<span><a href="#method-i-show-label-Options">&para;</a> <a href="#top">&uarr;</a></span></h4>
 <ul><li>
 <p><code>id</code> - The id of the specific news</p>
+</li><li>
+<p><code>language</code> - (optionnal) To get the news of a specific language.
+Default : “EN”</p>
 </li></ul>
 
 <h5 id="method-i-show-label-HTTP+VALUE">HTTP VALUE<span><a href="#method-i-show-label-HTTP+VALUE">&para;</a> <a href="#top">&uarr;</a></span></h5>
@@ -500,7 +521,7 @@ user (the author), the newstexts, the attachments and the tags</p>
 </li></ul>					
 											<div class="method-source-code" id="show-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/news_controller.rb, line 64</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/news_controller.rb, line 72</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">show</span>
   <span class="ruby-keyword">begin</span>
     <span class="ruby-identifier">news</span> = <span class="ruby-constant">News</span>.<span class="ruby-identifier">find_by_id</span>(<span class="ruby-ivar">@id</span>)
@@ -508,11 +529,12 @@ user (the author), the newstexts, the attachments and the tags</p>
       <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">502</span>
       <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:not_found</span>
     <span class="ruby-keyword">else</span>
+      <span class="ruby-identifier">news</span>.<span class="ruby-identifier">setLanguage</span> <span class="ruby-ivar">@language</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@language</span>.<span class="ruby-identifier">present?</span>
       <span class="ruby-ivar">@returnValue</span> = { <span class="ruby-identifier">content</span><span class="ruby-operator">:</span> <span class="ruby-identifier">news</span>.<span class="ruby-identifier">as_json</span>(<span class="ruby-value">:include</span> =<span class="ruby-operator">&gt;</span> {
                                               <span class="ruby-value">:user</span> =<span class="ruby-operator">&gt;</span> { <span class="ruby-value">:only</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">User</span>.<span class="ruby-identifier">miniKey</span> },
                                               <span class="ruby-value">:newstexts</span> =<span class="ruby-operator">&gt;</span> { <span class="ruby-value">:only</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">Newstext</span>.<span class="ruby-identifier">miniKey</span> },
                                               <span class="ruby-value">:attachments</span> =<span class="ruby-operator">&gt;</span> { <span class="ruby-value">:only</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">Attachment</span>.<span class="ruby-identifier">miniKey</span> }
-                                            }, <span class="ruby-value">:only</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">News</span>.<span class="ruby-identifier">miniKey</span>) }
+                                            }, <span class="ruby-value">:only</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">News</span>.<span class="ruby-identifier">miniKey</span>, <span class="ruby-identifier">methods</span><span class="ruby-operator">:</span> <span class="ruby-value">:title</span>) }
       <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">200</span>
     <span class="ruby-keyword">end</span>
   <span class="ruby-keyword">rescue</span>
@@ -597,9 +619,11 @@ user (the author), the newstexts, the attachments and the tags</p>
 			<li><a href="../Music.html">Music</a></li>
 			<li><a href="../MusicNote.html">MusicNote</a></li>
 			<li><a href="../News.html">News</a></li>
+			<li><a href="../NewsTitle.html">NewsTitle</a></li>
 			<li><a href="../Newstext.html">Newstext</a></li>
 			<li><a href="../Notification.html">Notification</a></li>
 			<li><a href="../Pack.html">Pack</a></li>
+			<li><a href="../PartialAlbum.html">PartialAlbum</a></li>
 			<li><a href="../Playlist.html">Playlist</a></li>
 			<li><a href="../PlaylistObject.html">PlaylistObject</a></li>
 			<li><a href="../Proposition.html">Proposition</a></li>

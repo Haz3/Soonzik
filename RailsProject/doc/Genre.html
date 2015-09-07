@@ -164,7 +164,7 @@ where(“album_id IS NOT NULL”) }</p>
 											<p>The strong parameters to save or update object</p>					
 											<div class="method-source-code" id="genre_params-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/models/genre.rb, line 38</span>
+								class="language-ruby"><span class="ruby-comment"># File app/models/genre.rb, line 37</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">genre_params</span>(<span class="ruby-identifier">parameters</span>)
   <span class="ruby-identifier">parameters</span>.<span class="ruby-identifier">require</span>(<span class="ruby-value">:genre</span>).<span class="ruby-identifier">permit</span>(<span class="ruby-value">:style_name</span>, <span class="ruby-value">:color_name</span>, <span class="ruby-value">:color_hexa</span>)
 <span class="ruby-keyword">end</span></code></pre>
@@ -188,7 +188,7 @@ where(“album_id IS NOT NULL”) }</p>
 <p>Fields returned : [:id, :style_name, :color_name, :color_hexa]</p>					
 											<div class="method-source-code" id="miniKey-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/models/genre.rb, line 33</span>
+								class="language-ruby"><span class="ruby-comment"># File app/models/genre.rb, line 32</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">miniKey</span>
   [<span class="ruby-value">:id</span>, <span class="ruby-value">:style_name</span>, <span class="ruby-value">:color_name</span>, <span class="ruby-value">:color_hexa</span>]
 <span class="ruby-keyword">end</span></code></pre>
@@ -274,9 +274,11 @@ where(“album_id IS NOT NULL”) }</p>
 			<li><a href="./Music.html">Music</a></li>
 			<li><a href="./MusicNote.html">MusicNote</a></li>
 			<li><a href="./News.html">News</a></li>
+			<li><a href="./NewsTitle.html">NewsTitle</a></li>
 			<li><a href="./Newstext.html">Newstext</a></li>
 			<li><a href="./Notification.html">Notification</a></li>
 			<li><a href="./Pack.html">Pack</a></li>
+			<li><a href="./PartialAlbum.html">PartialAlbum</a></li>
 			<li><a href="./Playlist.html">Playlist</a></li>
 			<li><a href="./PlaylistObject.html">PlaylistObject</a></li>
 			<li><a href="./Proposition.html">Proposition</a></li>

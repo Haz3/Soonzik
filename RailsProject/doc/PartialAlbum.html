@@ -91,8 +91,8 @@
 								  												<h1 class="class"
 					rel="popover"
 					data-original-title="In files"
-					data-content="app/models/friend.rb"
-					>Friend</h1>
+					data-content="app/models/partial_album.rb"
+					>PartialAlbum</h1>
 				</p>
 							</hgroup>
 			<span class="label">class</span>
@@ -109,9 +109,15 @@
 
 		<section class="description">
 			
-<p>The model of the object <a href="Follow.html">Follow</a> Contain the
-relations It is only here for linked user to user, never an object <a
-href="Follow.html">Follow</a> will be instanciate</p>
+<p>The model of the object <a href="PartialAlbum.html">PartialAlbum</a>
+Contain the relation and the validation Can provide some features linked to
+this model</p>
+
+<h4 id="class-PartialAlbum-label-Associations">Associations<span><a href="#class-PartialAlbum-label-Associations">&para;</a> <a href="#top">&uarr;</a></span></h4>
+
+<pre class="ruby"><span class="ruby-operator">+</span>:<span class="ruby-identifier">belongs_to</span><span class="ruby-operator">+</span> <span class="ruby-operator">-</span> :<span class="ruby-identifier">pack</span>
+<span class="ruby-operator">+</span>:<span class="ruby-identifier">belongs_to</span><span class="ruby-operator">+</span> <span class="ruby-operator">-</span> :<span class="ruby-identifier">album</span>
+</pre>
 		</section>
 
 				<section id="5Buntitled-5D" class="documentation-section">

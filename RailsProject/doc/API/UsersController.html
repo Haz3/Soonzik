@@ -200,7 +200,7 @@ list of action available :</p>
 </li></ul>					
 											<div class="method-source-code" id="addfriend-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/users_controller.rb, line 555</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/users_controller.rb, line 556</span>
   <span class="ruby-keyword">def</span> <span class="ruby-identifier">addfriend</span>
           <span class="ruby-keyword">begin</span>
                   <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@security</span>)
@@ -351,7 +351,7 @@ friendlist</p>
 </li></ul>					
 											<div class="method-source-code" id="delfriend-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/users_controller.rb, line 620</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/users_controller.rb, line 621</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">delfriend</span>
         <span class="ruby-keyword">begin</span>
                 <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@security</span>)
@@ -555,7 +555,7 @@ Note : By default, if you precise no attribute, it will take every row</pre>
 </li></ul>					
 											<div class="method-source-code" id="follow-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/users_controller.rb, line 437</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/users_controller.rb, line 438</span>
   <span class="ruby-keyword">def</span> <span class="ruby-identifier">follow</span>
           <span class="ruby-keyword">begin</span>
                   <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@security</span>)
@@ -637,7 +637,7 @@ Note : By default, if you precise no attribute, it will take every row</pre>
 </li></ul>					
 											<div class="method-source-code" id="getFollowers-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/users_controller.rb, line 737</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/users_controller.rb, line 738</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">getFollowers</span>
         <span class="ruby-keyword">begin</span>
                 <span class="ruby-identifier">u</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">find_by_id</span>(<span class="ruby-ivar">@id</span>)
@@ -689,7 +689,7 @@ Note : By default, if you precise no attribute, it will take every row</pre>
 </li></ul>					
 											<div class="method-source-code" id="getFollows-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/users_controller.rb, line 705</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/users_controller.rb, line 706</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">getFollows</span>
         <span class="ruby-keyword">begin</span>
                 <span class="ruby-identifier">u</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">find_by_id</span>(<span class="ruby-ivar">@id</span>)
@@ -741,7 +741,7 @@ Note : By default, if you precise no attribute, it will take every row</pre>
 </li></ul>					
 											<div class="method-source-code" id="getFriends-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/users_controller.rb, line 673</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/users_controller.rb, line 674</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">getFriends</span>
         <span class="ruby-keyword">begin</span>
                 <span class="ruby-identifier">u</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">find_by_id</span>(<span class="ruby-ivar">@id</span>)
@@ -804,15 +804,16 @@ Note : By default, if you precise no attribute, it will take every row</pre>
                                         <span class="ruby-keyword">else</span>
 
                                                 <span class="ruby-keyword">if</span> (<span class="ruby-identifier">pm</span>.<span class="ruby-identifier">purchased_album</span>.<span class="ruby-identifier">purchased_pack_id</span> <span class="ruby-operator">==</span> <span class="ruby-keyword">nil</span>)
-                                                        <span class="ruby-identifier">a</span> = <span class="ruby-identifier">pm</span>.<span class="ruby-identifier">purchased_album</span>.<span class="ruby-identifier">album</span>.<span class="ruby-identifier">as_json</span>(<span class="ruby-identifier">only</span><span class="ruby-operator">:</span> <span class="ruby-constant">Album</span>.<span class="ruby-identifier">miniKey</span>)
-                                                        <span class="ruby-identifier">a</span>[<span class="ruby-value">:musics</span>] = <span class="ruby-identifier">pm</span>.<span class="ruby-identifier">purchased_album</span>.<span class="ruby-identifier">album</span>.<span class="ruby-identifier">musics</span>.<span class="ruby-identifier">as_json</span>(<span class="ruby-identifier">only</span><span class="ruby-operator">:</span> <span class="ruby-constant">Music</span>.<span class="ruby-identifier">miniKey</span>, <span class="ruby-value">:include</span> =<span class="ruby-operator">&gt;</span> { <span class="ruby-identifier">musics</span><span class="ruby-operator">:</span> { <span class="ruby-identifier">only</span><span class="ruby-operator">:</span> <span class="ruby-constant">Music</span>.<span class="ruby-identifier">miniKey</span> }, <span class="ruby-identifier">user</span><span class="ruby-operator">:</span> { <span class="ruby-identifier">only</span><span class="ruby-operator">:</span> <span class="ruby-constant">User</span>.<span class="ruby-identifier">miniKey</span> } })
+                                                        <span class="ruby-identifier">a</span> = <span class="ruby-identifier">pm</span>.<span class="ruby-identifier">purchased_album</span>.<span class="ruby-identifier">album</span>.<span class="ruby-identifier">as_json</span>(<span class="ruby-identifier">only</span><span class="ruby-operator">:</span> <span class="ruby-constant">Album</span>.<span class="ruby-identifier">miniKey</span>, <span class="ruby-value">:include</span> =<span class="ruby-operator">&gt;</span> { <span class="ruby-identifier">user</span><span class="ruby-operator">:</span> { <span class="ruby-identifier">only</span><span class="ruby-operator">:</span> <span class="ruby-constant">User</span>.<span class="ruby-identifier">miniKey</span> } })
+                                                        <span class="ruby-identifier">a</span>[<span class="ruby-value">:musics</span>] = <span class="ruby-identifier">pm</span>.<span class="ruby-identifier">purchased_album</span>.<span class="ruby-identifier">album</span>.<span class="ruby-identifier">musics</span>.<span class="ruby-identifier">as_json</span>(<span class="ruby-identifier">only</span><span class="ruby-operator">:</span> <span class="ruby-constant">Music</span>.<span class="ruby-identifier">miniKey</span>)
                                                         <span class="ruby-identifier">contentReturn</span>[<span class="ruby-value">:albums</span>] = <span class="ruby-identifier">contentReturn</span>[<span class="ruby-value">:albums</span>] <span class="ruby-operator">|</span> [<span class="ruby-identifier">a</span>]
                                                 <span class="ruby-keyword">else</span>
                                                         <span class="ruby-identifier">pack</span> = <span class="ruby-identifier">pm</span>.<span class="ruby-identifier">purchased_album</span>.<span class="ruby-identifier">purchased_pack</span>.<span class="ruby-identifier">pack</span>
                                                         <span class="ruby-identifier">value</span> = <span class="ruby-identifier">pack</span>.<span class="ruby-identifier">as_json</span>(<span class="ruby-identifier">only</span><span class="ruby-operator">:</span> <span class="ruby-constant">Pack</span>.<span class="ruby-identifier">miniKey</span>)
                                                         <span class="ruby-identifier">value</span>[<span class="ruby-value">:albums</span>] = []
                                                         <span class="ruby-identifier">pack</span>.<span class="ruby-identifier">albums</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">album</span><span class="ruby-operator">|</span>
-                                                                <span class="ruby-identifier">value</span>[<span class="ruby-value">:albums</span>] <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">album</span>.<span class="ruby-identifier">as_json</span>(<span class="ruby-identifier">only</span><span class="ruby-operator">:</span> <span class="ruby-constant">Album</span>.<span class="ruby-identifier">miniKey</span>, <span class="ruby-value">:include</span> =<span class="ruby-operator">&gt;</span> { <span class="ruby-identifier">musics</span><span class="ruby-operator">:</span> { <span class="ruby-identifier">only</span><span class="ruby-operator">:</span> <span class="ruby-constant">Music</span>.<span class="ruby-identifier">miniKey</span> }, <span class="ruby-identifier">user</span><span class="ruby-operator">:</span> { <span class="ruby-identifier">only</span><span class="ruby-operator">:</span> <span class="ruby-constant">User</span>.<span class="ruby-identifier">miniKey</span> } } )
+    <span class="ruby-identifier">album</span>.<span class="ruby-identifier">setPack</span>(<span class="ruby-identifier">pack</span>)
+                                                          <span class="ruby-identifier">value</span>[<span class="ruby-value">:albums</span>] <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">album</span>.<span class="ruby-identifier">as_json</span>(<span class="ruby-identifier">only</span><span class="ruby-operator">:</span> <span class="ruby-constant">Album</span>.<span class="ruby-identifier">miniKey</span>, <span class="ruby-value">:include</span> =<span class="ruby-operator">&gt;</span> { <span class="ruby-identifier">musics</span><span class="ruby-operator">:</span> { <span class="ruby-identifier">only</span><span class="ruby-operator">:</span> <span class="ruby-constant">Music</span>.<span class="ruby-identifier">miniKey</span> }, <span class="ruby-identifier">user</span><span class="ruby-operator">:</span> { <span class="ruby-identifier">only</span><span class="ruby-operator">:</span> <span class="ruby-constant">User</span>.<span class="ruby-identifier">miniKey</span> } } ) <span class="ruby-keyword">if</span> (<span class="ruby-operator">!</span>(<span class="ruby-identifier">pm</span>.<span class="ruby-identifier">purchased_album</span>.<span class="ruby-identifier">purchased_pack</span>.<span class="ruby-identifier">partial</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-identifier">album</span>.<span class="ruby-identifier">isPartial</span>))
                                                         <span class="ruby-keyword">end</span>
                                                         <span class="ruby-identifier">contentReturn</span>[<span class="ruby-value">:packs</span>] = <span class="ruby-identifier">contentReturn</span>[<span class="ruby-value">:packs</span>] <span class="ruby-operator">|</span> [<span class="ruby-identifier">value</span>]
                                                 <span class="ruby-keyword">end</span>
@@ -915,7 +916,7 @@ inside + the top 5 of the musics of this artist</p>
 </li></ul>					
 											<div class="method-source-code" id="isArtist-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/users_controller.rb, line 390</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/users_controller.rb, line 391</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">isArtist</span>
         <span class="ruby-keyword">begin</span>
                 <span class="ruby-identifier">u</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">find_by_id</span>(<span class="ruby-ivar">@id</span>)
@@ -989,7 +990,7 @@ already taken)</p>
 </li></ul>					
 											<div class="method-source-code" id="linkSocial-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/users_controller.rb, line 845</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/users_controller.rb, line 846</span>
           <span class="ruby-keyword">def</span> <span class="ruby-identifier">linkSocial</span>
                   <span class="ruby-keyword">begin</span>
                           <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@security</span>)
@@ -1103,7 +1104,7 @@ address, friends and follow.</p>
 </li></ul>					
 											<div class="method-source-code" id="save-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/users_controller.rb, line 318</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/users_controller.rb, line 319</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">save</span>
         <span class="ruby-identifier">_save</span>(<span class="ruby-keyword">true</span>, <span class="ruby-identifier">params</span>)
         <span class="ruby-identifier">sendJson</span>
@@ -1201,7 +1202,7 @@ address, friends and follow.</p>
 </li></ul>					
 											<div class="method-source-code" id="unfollow-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/users_controller.rb, line 501</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/users_controller.rb, line 502</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">unfollow</span>
         <span class="ruby-keyword">begin</span>
                 <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@security</span>)
@@ -1324,7 +1325,7 @@ address, friends and follow.</p>
 </li></ul>					
 											<div class="method-source-code" id="update-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/users_controller.rb, line 358</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/users_controller.rb, line 359</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">update</span>
         <span class="ruby-keyword">begin</span>
                 <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@security</span>)
@@ -1397,7 +1398,7 @@ are authorized)</p>
 </li></ul>					
 											<div class="method-source-code" id="uploadImg-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/users_controller.rb, line 775</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/users_controller.rb, line 776</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">uploadImg</span>
         <span class="ruby-identifier">smart</span> = <span class="ruby-keyword">false</span>
 
@@ -1526,9 +1527,11 @@ are authorized)</p>
 			<li><a href="../Music.html">Music</a></li>
 			<li><a href="../MusicNote.html">MusicNote</a></li>
 			<li><a href="../News.html">News</a></li>
+			<li><a href="../NewsTitle.html">NewsTitle</a></li>
 			<li><a href="../Newstext.html">Newstext</a></li>
 			<li><a href="../Notification.html">Notification</a></li>
 			<li><a href="../Pack.html">Pack</a></li>
+			<li><a href="../PartialAlbum.html">PartialAlbum</a></li>
 			<li><a href="../Playlist.html">Playlist</a></li>
 			<li><a href="../PlaylistObject.html">PlaylistObject</a></li>
 			<li><a href="../Proposition.html">Proposition</a></li>
