@@ -137,7 +137,7 @@ namespace SoonZik.ViewModel
                 {
                     var stringEncrypt = KeyHelpers.GetUserKeyFromResponse(key);
                     _crypto = EncriptSha256.EncriptStringToSha256(Singleton.Instance().CurrentUser.salt + stringEncrypt);
-                    var listZik = request.getSuggest(new List<Music>(), _crypto,
+                    var listZik = request.GetSuggest(new List<Music>(), _crypto,
                         Singleton.Instance().CurrentUser.id.ToString());
                     listZik.ContinueWith(delegate(Task<object> tmp)
                     {

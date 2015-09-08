@@ -67,12 +67,15 @@ namespace SoonZik.ViewModel
                         {
                             CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
                             {
-                                foreach (var album in test.ListAlbums)
-                                    ListAlbum.Add(album);
-                                foreach (var music in test.ListMusiques)
-                                    ListMusique.Add(music);
-                                foreach (var playlist in test.ListPack)
-                                    ListPack.Add(playlist);
+                                if (test.ListAlbums != null)
+                                    foreach (var album in test.ListAlbums)
+                                        ListAlbum.Add(album);
+                                if (test.ListMusiques != null)
+                                    foreach (var music in test.ListMusiques)
+                                        ListMusique.Add(music);
+                                if (test.ListPack != null)
+                                    foreach (var playlist in test.ListPack)
+                                        ListPack.Add(playlist);
                             });
                         }
                     });

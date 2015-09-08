@@ -82,9 +82,15 @@ namespace SoonZik.HttpRequest
             return await DoRequestForObject(myObject, request);
         }
 
-        public async Task<object> getSuggest(object myObject, string key, string userId)
+        public async Task<object> GetSuggest(object myObject, string key, string userId)
         {
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(ApiUrl + "suggest?secureKey=" + key + "&user_id=" + userId);
+            return await DoRequestForObject(myObject, request);
+        }
+
+        public async Task<object> GetListenerAroundMe(object myObject, string lat, string lon, string range)
+        {
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(ApiUrl + "listenings/around/" + lat + "/" + lon + "/" + range);
             return await DoRequestForObject(myObject, request);
         }
 
