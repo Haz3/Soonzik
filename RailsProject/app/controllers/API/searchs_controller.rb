@@ -38,7 +38,8 @@ module API
 		    	    when "artist"
 						  	content = User.joins(:groups).merge(Group.where(:name => "Artist")).where(["users.username LIKE ?", "%#{@query}%"])
 					    when "user"
-						  	content = User.joins('LEFT OUTER JOIN "groups_users" ON "groups_users"."user_id" = "users"."id" LEFT OUTER JOIN "groups" ON "groups"."id" = "groups_users"."group_id"').where('(("groups"."name" <> "Artist" OR "groups"."name" IS NULL))').where(["users.username LIKE ?", "%#{@query}%"])
+					    	groupArel = Group.arel_table
+						  	content = User.joins('LEFT OUTER JOIN "groups_users" ON "groups_users"."user_id" = "users"."id" LEFT OUTER JOIN "groups" ON "groups"."id" = "groups_users"."group_id"').where(groupArel[:name].not_eq("Artist").or(groupArel[:name].eq(nil))).where(["users.username LIKE ?", "%#{@query}%"])
 					    when "music"
 						  	content = Music.where(["musics.title LIKE ?", "%#{@query}%"]).where.not(album_id: nil)
 					    when "album"
@@ -63,8 +64,10 @@ module API
 						  	content = { pack: JSON.parse(content.to_json(:only => Pack.miniKey, :include => { albums: { only: Album.miniKey, :include => { user: { only: User.miniKey } } } } ) ) }
 					  end
 					else
+			    	groupArel = Group.arel_table
+
 					  artist_result = User.joins(:groups).merge(Group.where(:name => "Artist")).where(["users.username LIKE ?", "%#{@query}%"])
-					  user_result = User.joins('LEFT OUTER JOIN "groups_users" ON "groups_users"."user_id" = "users"."id" LEFT OUTER JOIN "groups" ON "groups"."id" = "groups_users"."group_id"').where('(("groups"."name" <> "Artist" OR "groups"."name" IS NULL))').where(["users.username LIKE ?", "%#{@query}%"])
+						user_result = User.joins('LEFT OUTER JOIN "groups_users" ON "groups_users"."user_id" = "users"."id" LEFT OUTER JOIN "groups" ON "groups"."id" = "groups_users"."group_id"').where(groupArel[:name].not_eq("Artist").or(groupArel[:name].eq(nil))).where(["users.username LIKE ?", "%#{@query}%"])
 					  music_result = Music.where(["musics.title LIKE ?", "%#{@query}%"]).where.not(album_id: nil)
 					  album_result = Album.where(["albums.title LIKE ?", "%#{@query}%"])
 					  pack_result = Pack.where(["packs.title LIKE ?", "%#{@query}%"])
