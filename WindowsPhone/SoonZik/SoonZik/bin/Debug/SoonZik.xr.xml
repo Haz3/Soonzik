@@ -58,6 +58,9 @@
     <RootPropertyPathName Name="artist_two" />
     <RootPropertyPathName Name="image" />
     <RootPropertyPathName Name="artist_one" />
+    <RootPropertyPathName Name="TwentyChecked" />
+    <RootPropertyPathName Name="TenChecked" />
+    <RootPropertyPathName Name="FiveChecked" />
     <RootPropertyPathName Name="TwoChecked" />
     <RootPropertyPathName Name="UserLocation" />
     <RootPropertyPathName Name="Point" />
@@ -405,6 +408,8 @@
       <RootProperty Name="Children" />
       <RootMethod Name="GetLocation" />
       <RootMethod Name="SetLocation" />
+      <RootMethod Name="GetNormalizedAnchorPoint" />
+      <RootMethod Name="SetNormalizedAnchorPoint" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.ListBox">
       <RootProperty Name="Background" />

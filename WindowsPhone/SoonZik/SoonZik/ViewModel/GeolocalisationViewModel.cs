@@ -24,10 +24,7 @@ namespace SoonZik.ViewModel
             task.Wait();
 
             ListMapIcons = new List<MapIcon>();
-
-            GetConcert();
-            GetListeners();
-
+            
             CreateListElement();
         }
 
@@ -55,14 +52,13 @@ namespace SoonZik.ViewModel
             {
                 MapElements.Add(icon);
             }
-            //MapElements.Add(mapIcon);
         }
 
-        private void GetListeners()
+        private void GetListeners(string range)
         {
             var reqGet = new HttpRequestGet();
             ListListeners = new ObservableCollection<Listenings>();
-            var listListeners = reqGet.GetListObject(new List<Listenings>(), "listenings");
+            var listListeners = reqGet.GetListenerAroundMe(new List<Listenings>(), UserLocation.Latitude.ToString(), UserLocation.Longitude.ToString(), range);
             listListeners.ContinueWith(delegate(Task<object> tmp)
             {
                 var res = tmp.Result as List<Listenings>;
@@ -71,8 +67,13 @@ namespace SoonZik.ViewModel
                     foreach (var item in res)
                     {
                         CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
-                            () => { ListListeners.Add(item); });
+                            () =>
+                            {
+                                ListListeners.Add(item);
+                            });
                     }
+                    CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
+                        AddMappElements);
                 }
             });
         }
@@ -117,6 +118,7 @@ namespace SoonZik.ViewModel
 
         private void TwentyCheckedExecute()
         {
+            GetListeners("20");
             TwoKmActivated = false;
             FiveKmActivated = false;
             TenKmActivated = false;
@@ -124,6 +126,7 @@ namespace SoonZik.ViewModel
 
         private void TenCheckedExecute()
         {
+            GetListeners("10");
             TwoKmActivated = false;
             FiveKmActivated = false;
             TwentyKmActivated = false;
@@ -131,12 +134,22 @@ namespace SoonZik.ViewModel
 
         private void FiveCheckedExecute()
         {
+            GetListeners("5");
             TwoKmActivated = false;
             TenKmActivated = false;
             TwentyKmActivated = false;
         }
 
         private void TwoCheckedExecute()
+        {
+            GetListeners("2");
+
+            FiveKmActivated = false;
+            TenKmActivated = false;
+            TwentyKmActivated = false;
+        }
+
+        private void AddMappElements()
         {
             if (ListListeners != null)
             {
@@ -154,9 +167,6 @@ namespace SoonZik.ViewModel
                     MapElements.Add(t);
                 }
             }
-            FiveKmActivated = false;
-            TenKmActivated = false;
-            TwentyKmActivated = false;
         }
 
         #endregion
