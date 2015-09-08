@@ -102,7 +102,7 @@ class User < ActiveRecord::Base
 
   has_many :albums
   has_many :identities
-  has_many :listening
+  has_many :listenings
   has_many :notifications
   has_many :musics
   has_many :news
@@ -330,6 +330,36 @@ class User < ActiveRecord::Base
   # Give the pack where the user has its albums
   def givePack
     return Pack.joins(albums: [:user]).where(users: {id: self.id})
+  end
+
+  # Algorithm to get artist for suggestv2
+  def self.suggestArtist(u, offset, limit)
+    content = []
+    if (u == nil)
+      content = User.joins(:groups).merge(Group.where(:name => "Artist")).limit(limit * 2).shuffle[offset..(offset + limit)].as_json(only: User.miniKey)
+    else
+      interesting = {}
+      toRemove = [u] | u.follows.to_a
+      u.friends.each do |friend|
+        friend.follows.each do |f|
+          interesting[f.id] = (interesting.has_key?(f.id)) ? interesting[f.id] + 1 : 0 if f.isArtist?
+        end
+      end
+      u.listenings.limit(30).each do |listening|
+        interesting[listening.music.user.id] = (interesting.has_key?(listening.music.user.id)) ? interesting[listening.music.user.id] + 1 : 0
+      end
+
+      toRemove.each do |remove|
+        if (interesting.has_key?(remove.id))
+          interesting.delete(remove.id)
+        end
+      end
+
+      interesting = interesting.sort_by{|k,v| v}
+      content = interesting.reverse
+    end
+
+    return content
   end
 
   ########
