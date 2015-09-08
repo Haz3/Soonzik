@@ -94,6 +94,12 @@ namespace SoonZik.HttpRequest
             return await DoRequestForObject(myObject, request);
         }
 
+        public async Task<object> GetItemFromCarts(object myObject, string sha256, User myUser)
+        {
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(ApiUrl + "carts/my_cart?secureKey=" + sha256 + "&user_id=" + myUser.id);
+            return await DoRequestForObject(myObject, request);
+        }
+
         private static async Task<string> DoRequest(HttpWebRequest request)
         {
             request.Method = HttpMethods.Get;

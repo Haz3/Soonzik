@@ -5,9 +5,101 @@
     xmlns:local="using:SoonZik.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
+    xmlns:core="using:Microsoft.Xaml.Interactions.Core"
     mc:Ignorable="d"
     DataContext="{StaticResource CartsViewModel}"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Grid />
+    <Page.Resources>
+        <DataTemplate x:Key="PackTemplate">
+            <Grid Width="350">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="80" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Image Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left"
+                       Source="../Resources/Icones/MenuPack.png" Height="80" Width="80" />
+                <TextBlock Grid.Column="1" Text="{Binding Path=title}" Margin="15,0,0,0" FontSize="25" />
+            </Grid>
+        </DataTemplate>
+        
+        <DataTemplate x:Key="MusiqueTemplate">
+            <Grid Width="350">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="80" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Image Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left"
+                       Source="../Resources/Icones/profil.jpg" Height="80" Width="80" />
+                <TextBlock Grid.Column="1" Text="{Binding Path=user.username}" Margin="15,0,0,0" FontSize="15" />
+                <TextBlock Grid.Column="1" Text="{Binding Path=duration}" HorizontalAlignment="Right" Margin="0,0,25,0"
+                           FontSize="15" />
+                <TextBlock Grid.Column="1" VerticalAlignment="Bottom" Text="{Binding Path=title}" Margin="20,0,0,0"
+                           FontSize="30" />
+            </Grid>
+        </DataTemplate>
+
+        <DataTemplate x:Key="AlbumTemplate">
+            <Grid Width="350">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="80" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Image Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left"
+                       Source="../Resources/Icones/MenuPlaylist.png" Height="80" Width="80" />
+                <TextBlock Grid.Column="1" Text="{Binding Path=title}" VerticalAlignment="Top" Margin="15,0,0,0" FontSize="25" />
+                <TextBlock Grid.Column="1" Text="{Binding Path=musics.count}" VerticalAlignment="Center" Margin="15,0,0,0" FontSize="25" />
+            </Grid>
+        </DataTemplate>
+    </Page.Resources>
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="60"/>
+        </Grid.RowDefinitions>
+        
+        <TextBlock Grid.Row="0" x:Uid="Carts" Text="" FontSize="30" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <ListBox Grid.Row="0" Background="Transparent" x:Name="ListBoxMusic" ItemsSource="{Binding ListMusique}"
+                         ItemTemplate="{StaticResource MusiqueTemplate}"
+                         SelectedItem="{Binding SelectedMusic, Mode=TwoWay}">
+                <interactivity:Interaction.Behaviors>
+                    <core:EventTriggerBehavior EventName="Tapped">
+                        <core:InvokeCommandAction Command="{Binding MusicTappedCommand}" />
+                    </core:EventTriggerBehavior>
+                </interactivity:Interaction.Behaviors>
+            </ListBox>
+
+            <ListBox Grid.Row="1" Background="Transparent" x:Name="ListBoxAlbums" ItemsSource="{Binding ListAlbum}"
+                         ItemTemplate="{StaticResource AlbumTemplate}"
+                         SelectedItem="{Binding SelectedAlbum, Mode=TwoWay}" >
+                <interactivity:Interaction.Behaviors>
+                    <core:EventTriggerBehavior EventName="Tapped">
+                        <core:InvokeCommandAction Command="{Binding AlbumTappedCommand}" />
+                    </core:EventTriggerBehavior>
+                </interactivity:Interaction.Behaviors>
+            </ListBox>
+
+            <ListBox Grid.Row="2" Background="Transparent" x:Name="ListBoxPack" ItemsSource="{Binding ListPack}"
+                          SelectedItem="{Binding SelectedPack, Mode=TwoWay}" ItemTemplate="{StaticResource PackTemplate}" >
+                <interactivity:Interaction.Behaviors>
+                    <core:EventTriggerBehavior EventName="Tapped">
+                        <core:InvokeCommandAction Command="{Binding PackTappedCommand}" />
+                    </core:EventTriggerBehavior>
+                </interactivity:Interaction.Behaviors>
+            </ListBox>
+        </Grid>
+        
+        <Button Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+    </Grid>
 </Page>

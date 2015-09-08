@@ -4084,7 +4084,7 @@ namespace SoonZik.SoonZik_XamlTypeInfo
         private void set_210_GeolocalisationViewModel_ListUser(object instance, object Value)
         {
             var that = (global::SoonZik.ViewModel.GeolocalisationViewModel)instance;
-            that.ListUser = (global::System.Collections.Generic.List<global::SoonZik.HttpRequest.Poco.User>)Value;
+            that.ListUser = (global::System.Collections.ObjectModel.ObservableCollection<global::SoonZik.HttpRequest.Poco.User>)Value;
         }
         private object get_211_GeolocalisationViewModel_UserSelected(object instance)
         {
@@ -6324,7 +6324,7 @@ namespace SoonZik.SoonZik_XamlTypeInfo
                 break;
             case "SoonZik.ViewModel.GeolocalisationViewModel.ListUser":
                 userType = (global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType)GetXamlTypeByName("SoonZik.ViewModel.GeolocalisationViewModel");
-                xamlMember = new global::SoonZik.SoonZik_XamlTypeInfo.XamlMember(this, "ListUser", "System.Collections.Generic.List`1<SoonZik.HttpRequest.Poco.User>");
+                xamlMember = new global::SoonZik.SoonZik_XamlTypeInfo.XamlMember(this, "ListUser", "System.Collections.ObjectModel.ObservableCollection`1<SoonZik.HttpRequest.Poco.User>");
                 xamlMember.Getter = get_210_GeolocalisationViewModel_ListUser;
                 xamlMember.Setter = set_210_GeolocalisationViewModel_ListUser;
                 break;

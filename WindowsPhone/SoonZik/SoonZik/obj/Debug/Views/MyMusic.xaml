@@ -83,7 +83,7 @@
             </PivotItem>
 
             <PivotItem x:Uid="AlbumPivot" Header="">
-                <ListBox Background="Transparent" x:Name="ListBoxMusics" ItemsSource="{Binding ListAlbum}"
+                <ListBox Background="Transparent" x:Name="ListBoxAlbums" ItemsSource="{Binding ListAlbum}"
                          ItemTemplate="{StaticResource AlbumTemplate}"
                          SelectedItem="{Binding SelectedAlbum, Mode=TwoWay}" >
                     <interactivity:Interaction.Behaviors>

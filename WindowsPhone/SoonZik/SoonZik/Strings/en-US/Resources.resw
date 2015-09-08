@@ -309,4 +309,7 @@
   <data name="AddToPlaylist.Content" xml:space="preserve">
     <value>Add to playlist</value>
   </data>
+  <data name="Carts.Text" xml:space="preserve">
+    <value>My cart</value>
+  </data>
 </root>
