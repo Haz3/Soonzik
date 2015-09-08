@@ -231,6 +231,7 @@
     <Content Include="Resources\AppIcon\58.png" />
     <Content Include="Resources\AppIcon\744.png" />
     <Content Include="Resources\guetta.jpg" />
+    <Content Include="Resources\Icones\concert_pushpin.png" />
     <Content Include="Resources\Icones\disc.png" />
     <Content Include="Resources\Icones\empty_list.png" />
     <Content Include="Resources\Icones\facebook.png" />
@@ -260,6 +261,7 @@
     <Content Include="Resources\Icones\shuffle-0_icon.png" />
     <Content Include="Resources\Icones\shuffle.png" />
     <Content Include="Resources\Icones\twitter.png" />
+    <Content Include="Resources\Icones\user_pushpin.png" />
     <Content Include="Resources\iphone5_background.jpg" />
     <Content Include="Resources\logo.scale-240.png" />
     <Content Include="Resources\MusicTest.mp3" />

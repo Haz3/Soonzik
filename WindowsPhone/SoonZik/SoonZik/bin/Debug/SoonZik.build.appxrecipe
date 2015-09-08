@@ -116,6 +116,9 @@
     <AppxPackagedFile Include="C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\Resources\AppIcon\744.png">
       <PackagePath>Resources\AppIcon\744.png</PackagePath>
     </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\Resources\Icones\concert_pushpin.png">
+      <PackagePath>Resources\Icones\concert_pushpin.png</PackagePath>
+    </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\Resources\Icones\disc.png">
       <PackagePath>Resources\Icones\disc.png</PackagePath>
     </AppxPackagedFile>
@@ -199,6 +202,9 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\Resources\Icones\twitter.png">
       <PackagePath>Resources\Icones\twitter.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\Resources\Icones\user_pushpin.png">
+      <PackagePath>Resources\Icones\user_pushpin.png</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\Resources\logo.scale-240.png">
       <PackagePath>Resources\logo.scale-240.png</PackagePath>
