@@ -136,7 +136,7 @@ module API
           if (pack == nil)
             codeAnswer 502
             defineHttp :not_found
-          elsif @artist.to_i + @association.to_i + @website.to_i != 100 || @amount.to_i < pack.minimal_price
+          elsif @artist.to_f + @association.to_f + @website.to_f != 100 || @amount.to_f < pack.minimal_price
             codeAnswer 504
             defineHttp :bad_request
           else
@@ -148,7 +148,7 @@ module API
 
             pp = PurchasedPack.new
             pp.pack_id = pack.id
-            pp.partial = (pack.averagePrice > @amount)
+            pp.partial = (pack.averagePrice > @amount.to_f)
             pp.artist_percentage = @artist
             pp.association_percentage = @association
             pp.website_percentage = @website
@@ -159,7 +159,7 @@ module API
 
             pack.albums.each do |album|
               album.setPack(@pack_id)
-              if (!album.isPartial || (album.isPartial && @amount > pack.averagePrice))
+              if (!album.isPartial || (album.isPartial && @amount.to_f > pack.averagePrice))
                 pa = PurchasedAlbum.new
                 pa.album_id = album.id
                 pa.purchased_pack_id = pp.id
@@ -190,6 +190,7 @@ module API
           defineHttp :forbidden
         end
       rescue
+        puts $!, $@
         objectToDelete.each do |obj|
           obj.destroy
         end
