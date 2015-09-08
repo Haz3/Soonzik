@@ -36,7 +36,7 @@ module API
               news.setLanguage @language
             end
           end
-          @returnValue = { content: News.all.as_json(:include => {
+          @returnValue = { content: n.all.as_json(:include => {
                                                       :user => { :only => User.miniKey },
                                                       :newstexts => { :only => Newstext.miniKey },
                                                       :attachments => { :only => Attachment.miniKey }
