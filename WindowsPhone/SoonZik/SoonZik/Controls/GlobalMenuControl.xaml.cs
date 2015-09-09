@@ -353,8 +353,7 @@ namespace SoonZik.Controls
 
         private void GoToAchat()
         {
-            MyGrid.Children.Clear();
-            CloseMenu();
+            SetChildren(new CartsView());
         }
 
         private void GoToConnexionPage()

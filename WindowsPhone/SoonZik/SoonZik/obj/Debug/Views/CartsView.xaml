@@ -11,16 +11,25 @@
     DataContext="{StaticResource CartsViewModel}"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
+    <interactivity:Interaction.Behaviors>
+        <core:EventTriggerBehavior EventName="Loaded">
+            <core:InvokeCommandAction Command="{Binding LoadedCommand}" />
+        </core:EventTriggerBehavior>
+    </interactivity:Interaction.Behaviors>
+
     <Page.Resources>
         <DataTemplate x:Key="PackTemplate">
             <Grid Width="350">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="80" />
                     <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="50"/>
                 </Grid.ColumnDefinitions>
                 <Image Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left"
                        Source="../Resources/Icones/MenuPack.png" Height="80" Width="80" />
                 <TextBlock Grid.Column="1" Text="{Binding Path=title}" Margin="15,0,0,0" FontSize="25" />
+                <Image x:ConnectionId='3' Grid.Column="2"                              VerticalAlignment="Center" HorizontalAlignment="Center" Source="../Resources/Icones/trash.png" Width="50" Height="50"></Image>
+
             </Grid>
         </DataTemplate>
         
@@ -29,6 +38,7 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="80" />
                     <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="50"/>
                 </Grid.ColumnDefinitions>
                 <Image Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left"
                        Source="../Resources/Icones/profil.jpg" Height="80" Width="80" />
@@ -37,6 +47,7 @@
                            FontSize="15" />
                 <TextBlock Grid.Column="1" VerticalAlignment="Bottom" Text="{Binding Path=title}" Margin="20,0,0,0"
                            FontSize="30" />
+                <Image x:ConnectionId='2' Grid.Column="2"                              VerticalAlignment="Center" HorizontalAlignment="Center" Source="../Resources/Icones/trash.png" Width="50" Height="50"></Image>
             </Grid>
         </DataTemplate>
 
@@ -45,10 +56,14 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="80" />
                     <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="50"/>
                 </Grid.ColumnDefinitions>
                 <Image Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left"
-                       Source="../Resources/Icones/disc.png" Height="80" Width="80" />
-                <TextBlock Grid.Column="1" Text="{Binding Path=title}" Margin="15,0,0,0" FontSize="25" />
+                       Source="../Resources/Icones/MenuPlaylist.png" Height="80" Width="80" />
+                <TextBlock Grid.Column="1" Text="{Binding Path=title}" VerticalAlignment="Top" Margin="15,0,0,0" FontSize="25" />
+                <TextBlock Grid.Column="1" Text="{Binding Path=musics.count}" VerticalAlignment="Center" Margin="15,0,0,0" FontSize="25" />
+                <Image x:ConnectionId='1' x:Name="DeleteItem" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center" Source="../Resources/Icones/trash.png" Width="50" Height="50"                             />
+
             </Grid>
         </DataTemplate>
     </Page.Resources>
@@ -64,7 +79,6 @@
         
         <Grid Grid.Row="1">
             <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
@@ -88,16 +102,9 @@
                     </core:EventTriggerBehavior>
                 </interactivity:Interaction.Behaviors>
             </ListBox>
-
-            <ListBox Grid.Row="2" Background="Transparent" x:Name="ListBoxPack" ItemsSource="{Binding ListPack}"
-                          SelectedItem="{Binding SelectedPack, Mode=TwoWay}" ItemTemplate="{StaticResource PackTemplate}" >
-                <interactivity:Interaction.Behaviors>
-                    <core:EventTriggerBehavior EventName="Tapped">
-                        <core:InvokeCommandAction Command="{Binding PackTappedCommand}" />
-                    </core:EventTriggerBehavior>
-                </interactivity:Interaction.Behaviors>
-            </ListBox>
         </Grid>
+        
+        <Button Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center" x:Uid="Buy" Content=""/>
     </Grid>
 </Page>
 

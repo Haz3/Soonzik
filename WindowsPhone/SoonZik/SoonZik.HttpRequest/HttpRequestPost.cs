@@ -128,6 +128,18 @@ namespace SoonZik.HttpRequest
 
             var postData = "id=" + theMusic.id + "&playlist_id=" + thePlaylist.id + "&secureKey=" + sha256 + "&user_id=" + myUser.id;
             return await GetHttpPostResponse(request, postData);
+        }
+
+        public async Task<String> SaveCart(Music theMusic, Album theAlbum, string sha256, User myUser)
+        {
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(ApiUrl + "/carts/save");
+
+            var postData = "";
+            if(theMusic != null)
+                postData = "cart[user_id]=" + myUser.id + "&cart[typeObj]=" + "Music" + "&cart[obj_id]=" + theMusic.id + "&secureKey=" + sha256 + "&user_id=" + myUser.id;
+            else if (theAlbum != null)
+                postData = "cart[user_id]=" + myUser.id + "&cart[typeObj]=" + "Album" + "&cart[obj_id]=" + theAlbum.id + "&secureKey=" + sha256 + "&user_id=" + myUser.id;
+            return await GetHttpPostResponse(request, postData);
         } 
 
         public async Task<String> GetHttpPostResponse(HttpWebRequest request, string postData)

@@ -312,4 +312,7 @@
   <data name="Carts.Text" xml:space="preserve">
     <value>Mon panier</value>
   </data>
+  <data name="Buy.Content" xml:space="preserve">
+    <value>Acheter</value>
+  </data>
 </root>

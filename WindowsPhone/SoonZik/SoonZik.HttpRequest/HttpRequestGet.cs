@@ -14,8 +14,12 @@ namespace SoonZik.HttpRequest
 {
     public class HttpRequestGet
     {
-        private const string ApiUrl = "http://soonzikapi.herokuapp.com/";
+        #region Attribute
 
+        private const string ApiUrl = "http://soonzikapi.herokuapp.com/";
+        #endregion
+
+        #region Method Get
         public async Task<object> GetListObject(object myObject, string element)
         {
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(ApiUrl + element);
@@ -64,12 +68,6 @@ namespace SoonZik.HttpRequest
             return await DoRequest(request);
         }
 
-        public async Task<object> GetAllMusicForUser(object MyObj, string key, string id)
-        {
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(ApiUrl + "users/getmusics?secureKey=" + key + "&user_id=" + id);
-            return await DoRequestForObject(MyObj, request); 
-        }
-
         public async Task<object> GetFollows(object myObject, string element, string id)
         {
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(ApiUrl + element + "/" + id + "/follows");
@@ -82,15 +80,24 @@ namespace SoonZik.HttpRequest
             return await DoRequestForObject(myObject, request);
         }
 
-        public async Task<object> GetSuggest(object myObject, string key, string userId)
-        {
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(ApiUrl + "suggest?secureKey=" + key + "&user_id=" + userId);
-            return await DoRequestForObject(myObject, request);
-        }
-
         public async Task<object> GetListenerAroundMe(object myObject, string lat, string lon, string range)
         {
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(ApiUrl + "listenings/around/" + lat + "/" + lon + "/" + range);
+            return await DoRequestForObject(myObject, request);
+        }
+
+        #endregion
+
+        #region Method Get Secure
+        public async Task<object> GetAllMusicForUser(object myObj, string sha256, string id)
+        {
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(ApiUrl + "users/getmusics?secureKey=" + sha256 + "&user_id=" + id);
+            return await DoRequestForObject(myObj, request);
+        }
+
+        public async Task<object> GetSuggest(object myObject, string sha256, string userId)
+        {
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(ApiUrl + "suggest?secureKey=" + sha256 + "&user_id=" + userId);
             return await DoRequestForObject(myObject, request);
         }
 
@@ -99,6 +106,15 @@ namespace SoonZik.HttpRequest
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(ApiUrl + "carts/my_cart?secureKey=" + sha256 + "&user_id=" + myUser.id);
             return await DoRequestForObject(myObject, request);
         }
+
+        public async Task<string> DeleteFromCart(Carts myCart, string sha256, User myUser)
+        {
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(ApiUrl + "carts/destroy?id=" + myCart.id + "&secureKey=" + sha256 + "&user_id=" + myUser.id);
+            return await DoRequest(request);
+        }
+        #endregion
+
+        #region Method Request
 
         private static async Task<string> DoRequest(HttpWebRequest request)
         {
@@ -113,32 +129,28 @@ namespace SoonZik.HttpRequest
                     data = reader.ReadToEnd();
                 return data;
             }
-            catch (Exception ex)
+            catch (WebException ex)
             {
-                var we = ex.InnerException as WebException;
-                if (we != null)
-                {
-                    new MessageDialog("RespCallback Exception raised! Message:{0}" + we.Message).ShowAsync();
-                    Debug.WriteLine("Status:{0}", we.Status);
-                }
-                else
-                    throw;
+                var reader = new StreamReader(ex.Response.GetResponseStream());
+                string responseString = reader.ReadToEnd();
+                Debug.WriteLine(responseString);
+                return responseString;
             }
             return null;
         }
-        
+
         private static async Task<object> DoRequestForObject(object myObject, HttpWebRequest request)
         {
             request.Method = HttpMethods.Get;
             request.Accept = "application/json;odata=verbose";
             try
             {
-                var response = (HttpWebResponse) await request.GetResponseAsync();
+                var response = (HttpWebResponse)await request.GetResponseAsync();
                 Stream streamResponse = response.GetResponseStream();
                 string data;
                 using (var reader = new StreamReader(streamResponse))
-                data = reader.ReadToEnd();
-                if (myObject.GetType() == typeof (UserMusic))
+                    data = reader.ReadToEnd();
+                if (myObject.GetType() == typeof(UserMusic))
                 {
                     var stringJson = JObject.Parse(data).SelectToken("content").ToString();
                     stringJson = JObject.Parse(stringJson).SelectToken("musics").ToString();
@@ -149,11 +161,11 @@ namespace SoonZik.HttpRequest
                     stringJson = JObject.Parse(data).SelectToken("content").ToString();
                     stringJson = JObject.Parse(stringJson).SelectToken("packs").ToString();
                     var listPack = JsonConvert.DeserializeObject(stringJson, new List<Pack>().GetType());
-                    
+
                     var obj = new UserMusic();
-                    obj.ListMusiques = (List<Music>) listMusic;
-                    obj.ListPack = (List<Pack>) listPack;
-                    obj.ListAlbums = (List<Album>) listAlbum;
+                    obj.ListMusiques = (List<Music>)listMusic;
+                    obj.ListPack = (List<Pack>)listPack;
+                    obj.ListAlbums = (List<Album>)listAlbum;
                     return obj;
                 }
                 else
@@ -175,5 +187,7 @@ namespace SoonZik.HttpRequest
             }
             return null;
         }
+
+        #endregion
     }
 }
