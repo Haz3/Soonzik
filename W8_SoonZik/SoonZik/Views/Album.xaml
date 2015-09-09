@@ -60,19 +60,15 @@
 
             <ListView.ItemTemplate>
                 <DataTemplate>
-
-                    <StackPanel>
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock FontSize="24" Foreground="Black">
-                                <Run Text="Auteur ID: "></Run>
-                                <Run Text="{Binding author_id}" FontSize="16" Foreground="Black"/>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock FontSize="24" Foreground="Black">
+                                <Run x:Uid="author_txt" Text="Auteur: "></Run>
+                                <Run Text="{Binding user.username}" FontSize="16" Foreground="Black"/>
                                 <LineBreak/>
-                                <Run Text="Commentaire: "></Run>
+                                <Run x:Uid="comment_txt" Text="Commentaire: "></Run>
                                 <Run Text="{Binding content}" FontSize="16" Foreground="Black"/>
-                            </TextBlock>
-                        </StackPanel>
+                        </TextBlock>
                     </StackPanel>
-
                 </DataTemplate>
             </ListView.ItemTemplate>
 

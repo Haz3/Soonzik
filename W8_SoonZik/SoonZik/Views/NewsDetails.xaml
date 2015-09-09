@@ -30,38 +30,37 @@
                 <RowDefinition Height="291"/>
             </Grid.RowDefinitions>
             <Rectangle Fill="#FF00AFDC" HorizontalAlignment="Left" Height="75" StrokeEndLineCap="Square" Stroke="#FF00AFDC" VerticalAlignment="Top" Width="1120" Grid.ColumnSpan="2" Margin="0,0,-405,0"/>
+         
             <TextBlock x:Name="news_title" Margin="20,10,0,19" TextWrapping="Wrap" Text="{Binding news.title, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" FontSize="36" Height="46" Grid.ColumnSpan="2"/>
+           
             <Image  Grid.Row="2" Source="http://assos-escrennes.fr/descibel-radio/wp-content/uploads/2015/01/Generic-News-Logo.png" Stretch="Fill" Width="174" Height="174" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,116,71,0"/>
+         
             <TextBlock x:Name="news_author" HorizontalAlignment="Left" Margin="20,5,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Text="{Binding news.user.username, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Foreground="Black" Height="25" Width="Auto" FontSize="20" Grid.ColumnSpan="2"/>
             
             <TextBlock x:Name="news_content" Grid.Column="1" HorizontalAlignment="Left" Margin="60,55,-80,0" Grid.Row="2" TextWrapping="Wrap" Text="{Binding Path=content, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Height="165" Width="470" Foreground="Black" FontSize="18"/>
           
             <!--<TextBlock x:Name="news_content_en" Visibility="{Binding content_en_visibility}" Grid.Column="1" HorizontalAlignment="Left" Margin="60,55,-80,0" Grid.Row="2" TextWrapping="Wrap" Text="{Binding news.newstexts[1].content, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Height="165" Width="470" Foreground="Black" FontSize="18"/>-->
+          
             <TextBlock x:Name="news_id_txt" Grid.Column="1" HorizontalAlignment="Left" Visibility="Collapsed" Margin="760,10,-395,0" TextWrapping="Wrap" Text="{Binding news.id, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="85" Height="46" FontSize="30"/>
-            <TextBlock x:Name="news_date" HorizontalAlignment="Left" Margin="20,10,0,0" Grid.Row="2" TextWrapping="Wrap" VerticalAlignment="Top" Text="{Binding news.date, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Foreground="Black" Height="25" Width="Auto" FontSize="20"/>
+         
+            <TextBlock x:Name="news_date" HorizontalAlignment="Left" Margin="20,10,0,0" Grid.Row="2" TextWrapping="Wrap" VerticalAlignment="Top" Text="{Binding news.created_at, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Foreground="Black" Height="25" Width="Auto" FontSize="20"/>
         </Grid>
 
 
         <ListView Name="comment_lv" ItemsSource="{Binding commentlist, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Height="185" Margin="400,775,0,0" VerticalAlignment="Top" Width="1120" Background="White" IsItemClickEnabled="True" IsSwipeEnabled="False" SelectionMode="None">
-
             <ListView.ItemTemplate>
                 <DataTemplate>
-
-                    <StackPanel>
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock FontSize="24" Foreground="Black">
-                                <Run Text="Auteur ID: "></Run>
-                                <Run Text="{Binding author_id}" FontSize="16" Foreground="Black"/>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock FontSize="24" Foreground="Black">
+                                <Run x:Uid="author_txt" Text="Auteur: "></Run>
+                                <Run Text="{Binding user.username}" FontSize="16" Foreground="Black"/>
                                 <LineBreak/>
-                                <Run Text="Commentaire: "></Run>
+                                <Run x:Uid="comment_txt" Text="Commentaire: "></Run>
                                 <Run Text="{Binding content}" FontSize="16" Foreground="Black"/>
-                            </TextBlock>
-                        </StackPanel>
+                        </TextBlock>
                     </StackPanel>
-
                 </DataTemplate>
             </ListView.ItemTemplate>
-
         </ListView>
 
         <TextBox x:Name="send_com_tb" Text="{Binding comment_content, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="405,1000,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="20" Width="990"/>

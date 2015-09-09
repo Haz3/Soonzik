@@ -28,6 +28,51 @@ namespace SoonZik.ViewModels
             }
         }
 
+        private int _amount;
+        public int amount
+        {
+            get { return _amount; }
+            set
+            {
+                _amount = value;
+                OnPropertyChanged("amount");
+            }
+        }
+
+        private int _artist;
+        public int artist
+        {
+            get { return _artist; }
+            set
+            {
+                _artist = value;
+                OnPropertyChanged("artist");
+            }
+        }
+
+        private int _association;
+        public int association
+        {
+            get { return _association; }
+            set
+            {
+                _association = value;
+                OnPropertyChanged("association");
+            }
+        }
+
+        private int _website;
+        public int website
+        {
+            get { return _website; }
+            set
+            {
+                _website = value;
+                OnPropertyChanged("website");
+            }
+        }
+
+
         private Visibility _desc_fr_visibility;
         public Visibility desc_fr_visibility
         {
@@ -75,6 +120,11 @@ namespace SoonZik.ViewModels
             desc_fr_visibility = Visibility.Visible;
             desc_en_visibility = Visibility.Visible;
             do_buy_pack = new RelayCommand(buy_pack);
+
+            // SET DEFAULT VALUE FOR BUYING A PACK
+            artist = 65;
+            association = 20;
+            website = 15;
         }
 
         async public void load_pack(int id)
@@ -125,20 +175,21 @@ namespace SoonZik.ViewModels
                     "user_id=" + Singleton.Instance.Current_user.id +
                     "&secureKey=" + secureKey +
                     "&pack_id=" + pack.id.ToString() +
-                    "&amount=" + "5" + 
-                    "&artist=" + "2" + 
-                    "&association=" + "1" + 
-                    "&website=" + "2";
+                    "&amount=" + amount.ToString() + 
+                    "&artist=" + artist.ToString() + 
+                    "&association=" + association.ToString() + 
+                    "&website=" + website.ToString();
 
 
                 // HTTP_POST -> URL + DATA
                 var response = await request.post_request("purchases/buypack", pack_data);
+
                 var json = JObject.Parse(response).SelectToken("message");
 
-                if (json.ToString() == "Created")
-                    await new MessageDialog("Purchase PACK OK").ShowAsync();
-                else
-                    await new MessageDialog(json.ToString(), "Purchase PACK KO").ShowAsync();
+                //if (json.ToString() == "Created")
+                //    await new MessageDialog("Purchase PACK OK").ShowAsync();
+                //else
+                //    await new MessageDialog(json.ToString(), "Purchase PACK KO").ShowAsync();
             }
             catch (Exception e)
             {
@@ -148,6 +199,11 @@ namespace SoonZik.ViewModels
             if (exception != null)
                 await new MessageDialog(exception.Message, "Purchase PACK error").ShowAsync();
         }
+
+        //public bool verif_price()
+        //{
+        //    if ()
+        //}
     }
 }
 

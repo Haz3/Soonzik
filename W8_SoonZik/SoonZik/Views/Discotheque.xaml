@@ -57,8 +57,8 @@
                     <Grid Width="200" Height="200" Background="White">
                         <Image Stretch="Fill" Source="https://upload.wikimedia.org/wikipedia/commons/e/ec/Record-Album-02.jpg" VerticalAlignment="Top" HorizontalAlignment="Center"/>
                         <StackPanel Orientation="Vertical" VerticalAlignment="Bottom" Margin="0,0,0,10">
-                            <TextBlock Text="{Binding user.username}" FontSize="20" Margin="10,0,0,0" TextTrimming="WordEllipsis" TextWrapping="Wrap" HorizontalAlignment="Left" Foreground="Blue"/>
-                            <TextBlock Text="{Binding title}" FontSize="20" Margin="10,0,0,0" TextTrimming="WordEllipsis" TextWrapping="Wrap" HorizontalAlignment="Left" Foreground="Blue"/>
+                            <TextBlock Text="{Binding user.username}" FontSize="20" Margin="10,0,0,0" TextTrimming="WordEllipsis" TextWrapping="Wrap" HorizontalAlignment="Left" Foreground="White"/>
+                            <TextBlock Text="{Binding title}" FontSize="20" Margin="10,0,0,0" TextTrimming="WordEllipsis" TextWrapping="Wrap" HorizontalAlignment="Left" Foreground="White"/>
                         </StackPanel>
                     </Grid>
                 </DataTemplate>

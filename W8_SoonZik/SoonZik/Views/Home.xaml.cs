@@ -30,7 +30,7 @@ namespace SoonZik.Views
         {
             this.InitializeComponent();
             DataContext = new HomeViewModel();
-            hello_tb.Text = "Salut " + Singleton.Instance.Current_user.username;
+            hello_tb.Text = Singleton.Instance.Current_user.username;
         }
 
         // NAV
@@ -84,6 +84,11 @@ namespace SoonZik.Views
             this.Frame.Navigate(typeof(Discotheque));
         }
 
+        private void community_btn_Click(object sender, RoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(Community));
+        }
+
         // Clic in list
         private void News_ItemClick(object sender, ItemClickEventArgs e)
         {
@@ -96,6 +101,14 @@ namespace SoonZik.Views
             var item = ((SoonZik.Models.Album)e.ClickedItem);
             this.Frame.Navigate(typeof(Album), item);
         }
+
+        private void Community_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            var item = ((SoonZik.Models.User)e.ClickedItem);
+            this.Frame.Navigate(typeof(User), item);
+        }
+
+
         // END
     }
 }

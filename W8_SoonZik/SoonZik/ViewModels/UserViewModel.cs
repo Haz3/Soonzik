@@ -30,6 +30,7 @@ namespace SoonZik.ViewModels
 
         static public ObservableCollection<User> friends { get; set; }
         static public ObservableCollection<User> follows { get; set; }
+        static public ObservableCollection<Tweet> tweets { get; set; }
 
         public ICommand do_add_friend
         {
@@ -88,9 +89,7 @@ namespace SoonZik.ViewModels
 
             get_friends(id);
             get_follows(id);
-
-
-
+            get_tweets(id);
 
         }
 
@@ -111,6 +110,29 @@ namespace SoonZik.ViewModels
 
             if (exception != null)
                 await new MessageDialog(exception.Message, "user error").ShowAsync();
+        }
+
+
+        public async void get_tweets(int id)
+        {
+            Exception exception = null;
+            tweets = new ObservableCollection<Tweet>();
+
+            try
+            {
+                var list = (List<Tweet>)await Http_get.get_object(new List<Tweet>(), "tweets/find?attribute[user_id]=" + id.ToString());
+
+                foreach (var item in list)
+                    tweets.Add(item);
+            }
+
+            catch (Exception e)
+            {
+                exception = e;
+            }
+
+            if (exception != null)
+                await new MessageDialog(exception.Message, "get user's tweets error").ShowAsync();
         }
 
         public async void get_friends(int id)

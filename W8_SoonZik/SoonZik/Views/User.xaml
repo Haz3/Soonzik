@@ -50,9 +50,10 @@
         </Grid>
 
         <TextBlock x:Uid="friends_list_txt" x:Name="friends_list_txt" HorizontalAlignment="Left" Margin="210,690,0,0" TextWrapping="Wrap" Text="Amis" VerticalAlignment="Top" Height="45" Width="175" Foreground="Black" FontSize="30"/>
-        <TextBlock x:Uid="follows_list_txt" x:Name="follows_list_txt" HorizontalAlignment="Left" Margin="1125,690,0,0" TextWrapping="Wrap" Text="Follows" VerticalAlignment="Top" Height="45" Width="175" Foreground="Black" FontSize="30"/>
-      
-        <ListView x:Name="friend_list" ItemsSource="{Binding friends, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Height="290" Margin="210,740,0,0" VerticalAlignment="Top" Width="585" Background="White">
+        <TextBlock x:Uid="follows_list_txt" x:Name="follows_list_txt" HorizontalAlignment="Left" Margin="615,690,0,0" TextWrapping="Wrap" Text="Follows" VerticalAlignment="Top" Height="45" Width="175" Foreground="Black" FontSize="30"/>
+        <TextBlock x:Uid="tweets_list_txt" x:Name="tweets_list_txt" HorizontalAlignment="Left" Margin="1020,690,0,0" TextWrapping="Wrap" Text="Tweets" VerticalAlignment="Top" Height="45" Width="175" Foreground="Black" FontSize="30"/>
+
+        <ListView x:Name="friend_list" ItemsSource="{Binding friends, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Height="290" Margin="210,740,0,0" VerticalAlignment="Top" Width="355" Background="White">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <StackPanel>
@@ -65,7 +66,7 @@
         </ListView>
 
 
-        <ListView x:Name="follows_list" ItemsSource="{Binding follows, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Height="290" Margin="1125,740,0,0" VerticalAlignment="Top" Width="585" Background="White">
+        <ListView x:Name="follows_list" ItemsSource="{Binding follows, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Height="290" Margin="615,740,0,0" VerticalAlignment="Top" Width="355" Background="White">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <StackPanel>
@@ -77,6 +78,17 @@
             </ListView.ItemTemplate>
         </ListView>
 
-        
+        <ListView x:Name="tweets_list" ItemsSource="{Binding tweets, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Height="290" Margin="1020,740,0,0" VerticalAlignment="Top" Width="690" Background="White" IsItemClickEnabled="False">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Name="music_title" Text="{Binding msg, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="16" Foreground="Black" Margin="20,0,0,0"></TextBlock>
+                        </StackPanel>
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
     </Grid>
 </Page>

@@ -37,7 +37,7 @@ namespace SoonZik.ViewModels
             {
                 var pack = (List<Pack>)await Http_get.get_object(new List<Pack>(), "packs");
                 var album = (List<Album>)await Http_get.get_object(new List<Album>(), "albums");
-                var artist = (List<User>)await Http_get.get_object(new List<User>(), "users");
+                var artist = (List<User>)await Http_get.get_object(new List<User>(), "users/artists");
                 var genre = (List<Genre>)await Http_get.get_object(new List<Genre>(), "genres");
 
                 foreach (var item in pack)

@@ -14,7 +14,7 @@
             <Button x:Name="back_btn" Content="Button" HorizontalAlignment="Left" Margin="30,20,0,0" VerticalAlignment="Top" Style="{StaticResource NavigationBackButtonNormalStyle}" RequestedTheme="Light" Click="Button_Click"/>
         </Grid>
 
-        <Grid Height="593" Margin="400,140,400,0" VerticalAlignment="Top" Background="White">
+        <Grid Height="555" Margin="400,140,400,0" VerticalAlignment="Top" Background="White">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="265"/>
                 <ColumnDefinition Width="450"/>
@@ -26,7 +26,7 @@
             <Image  Grid.Row="1" Source="https://pixabay.com/static/uploads/photo/2014/04/03/11/58/record-312730_640.png" Stretch="Fill" Width="174" Height="174" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,235,45,-118"/>
             <Rectangle Fill="#FF00AFDC" HorizontalAlignment="Left" Height="75" StrokeEndLineCap="Square" Stroke="#FF00AFDC" VerticalAlignment="Top" Width="1120" Grid.ColumnSpan="2" Margin="0,0,-405,0"/>
 
-            <ListView Name="pack_album_listview" ItemsSource="{Binding Path=pack.albums, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ItemClick="pack_album_listview_ItemClick" IsItemClickEnabled="True" Grid.Column="1" HorizontalAlignment="Left" Height="400" Margin="110,85,-80,-194" Grid.Row="1" VerticalAlignment="Top" Width="420" Background="#FFE0E0E0" IsSwipeEnabled="False" SelectionMode="None">
+            <ListView Name="pack_album_listview" ItemsSource="{Binding Path=pack.albums, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ItemClick="pack_album_listview_ItemClick" IsItemClickEnabled="True" Grid.Column="1" HorizontalAlignment="Left" Height="365" Margin="110,85,-80,-159" Grid.Row="1" VerticalAlignment="Top" Width="420" Background="#FFE0E0E0" IsSwipeEnabled="False" SelectionMode="None">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <StackPanel>
@@ -44,7 +44,7 @@
             </ListView>
 
 
-            <TextBlock Name="pack_title" Text="{Binding title}" Margin="20,10,70,19" TextWrapping="Wrap" VerticalAlignment="Center" FontSize="36" Height="46" Grid.ColumnSpan="2"/>
+            <TextBlock Name="pack_title" Text="{Binding title, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="20,10,70,19" TextWrapping="Wrap" VerticalAlignment="Center" FontSize="36" Height="46" Grid.ColumnSpan="2"/>
 
             <TextBlock x:Name="pack_date_begin_tb" x:Uid="pack_date_begin_txt" Text="Debut:" HorizontalAlignment="Left" Margin="10,62,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Foreground="Black" Height="40" Width="70" FontSize="20"/>
             <TextBlock x:Name="pack_date_begin" x:Uid="pack_date_begin" Text="{Binding Path=pack.begin_date, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="85,62,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Foreground="Black" Height="40" Width="245" FontSize="20" Grid.ColumnSpan="2"/>
@@ -61,9 +61,32 @@
             <TextBlock x:Name="description_fr" HorizontalAlignment="Left" Margin="570,85,-365,0" Grid.Row="1" Visibility="{Binding desc_fr_visibility, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" TextWrapping="Wrap" Text="{Binding Path=pack.descriptions[0].description, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Height="129" Width="245" Foreground="Black" FontSize="15" Grid.Column="1"/>
             <TextBlock x:Name="description_en" HorizontalAlignment="Left" Margin="570,85,-365,0" Grid.Row="1" Visibility="{Binding desc_en_visibility, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" TextWrapping="Wrap" Text="{Binding Path=pack.descriptions[1].description, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Height="129" Width="245" Foreground="Black" FontSize="15" Grid.Column="1"/>
 
-            <Button x:Uid="gift_pack_btn" x:Name="gift_pack_btn" Content="Offrir ce pack" Margin="407,11,-158,12" Grid.Column="1" Height="52" Width="201" Background="#FFEC3F3F" FontSize="20"/>
-            <Button x:Uid="buy_pack_btn" Command="{Binding do_buy_pack}" x:Name="buy_pack_btn" Content="Acheter ce pack" Margin="632,11,-383,12" Grid.Column="1" Height="52" Width="201" Background="#FFEC3F3F" FontSize="20"/>
+            <!--<Button x:Uid="gift_pack_btn" x:Name="gift_pack_btn" Content="Offrir ce pack" Margin="407,11,-158,12" Grid.Column="1" Height="52" Width="201" Background="#FFEC3F3F" FontSize="20"/>-->
 
+        </Grid>
+
+        <Grid Margin="400,730,400,10" Background="White">
+
+            <Slider x:Name="artist_bar" HorizontalAlignment="Left" Value="{Binding artist, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Height="25" Margin="225,107,0,0" VerticalAlignment="Top" Width="720" Background="#590377D6" BorderBrush="#FFF0FF94" Foreground="#FF1D0063" SmallChange="1"/>
+            <TextBlock x:Name="artist_txt" HorizontalAlignment="Left" Margin="105,107,0,0" TextWrapping="Wrap" Text="Artist" VerticalAlignment="Top" Height="25" Width="115" Foreground="Black" FontSize="20"/>
+            <TextBlock x:Name="artist_value" HorizontalAlignment="Left" Margin="965,106,0,0" TextWrapping="Wrap" Text="{Binding artist, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Height="25" Width="Auto" Foreground="Black" FontSize="20"/>
+
+
+            <Slider x:Name="association_bar" HorizontalAlignment="Left" Value="{Binding association, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Height="25" Margin="225,167,0,0" VerticalAlignment="Top" Width="720" Background="#590377D6" BorderBrush="#FFF0FF94" Foreground="#FF1D0063" SmallChange="1"/>
+            <TextBlock x:Name="association_txt" HorizontalAlignment="Left" Margin="105,167,0,0" TextWrapping="Wrap" Text="Assiciation" VerticalAlignment="Top" Height="25" Width="115" Foreground="Black" FontSize="20"/>
+            <TextBlock x:Name="association_value" HorizontalAlignment="Left" Margin="965,166,0,0" TextWrapping="Wrap" Text="{Binding association, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Height="Auto" Width="45" Foreground="Black" FontSize="20"/>
+
+
+            <Slider x:Name="website_bar" Value="{Binding website, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Height="25" Margin="225,222,0,0" VerticalAlignment="Top" Background="#590377D6" BorderBrush="#FFF0FF94" Foreground="#FF1D0063" SmallChange="1" HorizontalAlignment="Left" Width="720"/>
+            <TextBlock x:Name="website_txt" HorizontalAlignment="Left" Margin="105,222,0,0" TextWrapping="Wrap" Text="Site" VerticalAlignment="Top" Height="25" Width="115" Foreground="Black" FontSize="20"/>
+            <TextBlock x:Name="website_value" HorizontalAlignment="Left" Margin="965,222,0,0" TextWrapping="Wrap" Text="{Binding website, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Height="25" Width="Auto" Foreground="Black" FontSize="20"/>
+
+            <Button x:Uid="buy_pack_btn" Command="{Binding do_buy_pack}" x:Name="buy_pack_btn" Content="Acheter ce pack" Margin="460,263,0,7" Height="52" Background="#FFEC3F3F" FontSize="20" HorizontalAlignment="Left" Width="201"/>
+            <TextBlock Margin="463,82,0,0" TextWrapping="Wrap" Text="Repartissez vos dons !" VerticalAlignment="Top" Height="37" Foreground="Black" FontSize="20" HorizontalAlignment="Left" Width="195"/>
+            
+            <TextBlock Margin="97,21,0,0" TextWrapping="Wrap" Text="Payez ce que vous voulez (Minimum 1$)" VerticalAlignment="Top" Height="37" Foreground="Black" FontSize="20" HorizontalAlignment="Left" Width="Auto"/>
+           
+            <TextBox x:Name="price_tb" HorizontalAlignment="Left" Margin="473,15,0,0" TextWrapping="Wrap" Text="{Binding amount, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Height="37" Width="185" BorderBrush="#FF767676"/>
 
         </Grid>
 

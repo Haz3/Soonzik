@@ -6,9 +6,17 @@
     </header>
     <body>
       <group id="Resources">
+        <trans-unit id="Resources\comment_txt\Text" translate="yes" xml:space="preserve">
+          <source>Commentaire:</source>
+          <target state="final">Comment:</target>
+        </trans-unit>
+        <trans-unit id="Resources\author_txt\Text" translate="yes" xml:space="preserve">
+          <source>Auteur:</source>
+          <target state="final">Author:</target>
+        </trans-unit>
         <trans-unit id="Resources\cart_txt\Text" translate="yes" xml:space="preserve">
           <source>Panier</source>
-          <target state="new">Panier</target>
+          <target state="final">Cart</target>
         </trans-unit>
         <trans-unit id="Resources\website_txt\Text" translate="yes" xml:space="preserve">
           <source>Site internet:</source>

@@ -17,6 +17,7 @@ namespace SoonZik.ViewModels
     {
         public ObservableCollection<News> news_list { get; set; }
         public ObservableCollection<Album> album_list { get; set; }
+        public ObservableCollection<Tweet> tweet_list { get; set; }
 
         public HomeViewModel()
         {
@@ -28,18 +29,26 @@ namespace SoonZik.ViewModels
             Exception exception = null;
             news_list = new ObservableCollection<News>();
             album_list = new ObservableCollection<Album>();
+            tweet_list = new ObservableCollection<Tweet>();
+            string language = null;
 
             try
             {
-                var news = (List<News>)await Http_get.get_object(new List<News>(), "news");
-                var album = (List<Album>)await Http_get.get_object(new List<Album>(), "albums");
+                if (Windows.System.UserProfile.GlobalizationPreferences.Languages[0] == "fr-FR")
+                    language = "FR";
+                else
+                    language = "EN";
 
+                var news = (List<News>)await Http_get.get_object(new List<News>(), "news?language=" + language);
+                var albums = (List<Album>)await Http_get.get_object(new List<Album>(), "albums");
+
+               // tweet_list = await TweetViewModel.load_flux_tweets();
 
                 foreach (var item in news)
                     news_list.Add(item);
-                foreach (var item in album)
+                foreach (var item in albums)
                     album_list.Add(item);
-
+             
             }
             catch (Exception e)
             {

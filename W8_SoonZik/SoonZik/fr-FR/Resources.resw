@@ -363,4 +363,10 @@
   <data name="cart_txt.Text" xml:space="preserve">
     <value>Panier</value>
   </data>
+  <data name="author_txt.Text" xml:space="preserve">
+    <value>Auteur:</value>
+  </data>
+  <data name="comment_txt.Text" xml:space="preserve">
+    <value>Commentaire:</value>
+  </data>
 </root>

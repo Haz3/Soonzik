@@ -47,6 +47,12 @@ namespace SoonZik.Tools
             return news;
         }
 
+        public static async Task<News> get_news_by_id_and_language(int id, string language)
+        {
+            var news = (News)await get_object(new News(), "news/" + id.ToString() + "?language=" + language);
+            return news;
+        }
+
         public static async Task<Album> get_album_by_id(int id)
         {
             var album = (Album)await get_object(new Album(), "albums/" + id.ToString());

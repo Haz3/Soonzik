@@ -81,12 +81,6 @@ namespace SoonZik.ViewModels
             load_cart();
         }
 
-
-        //public CartViewModel(int user_id, int obj_id, string obj_type, int gift_user_id)
-        //{
-        //    add_to_cart(user_id, obj_id, obj_type, gift_user_id);
-        //}
-
         public async void load_cart()
         {
             Exception exception = null;
@@ -110,8 +104,6 @@ namespace SoonZik.ViewModels
                 await new MessageDialog(exception.Message, "Cart load error").ShowAsync();
         }
 
-
-        //http://api.lvh.me:3000/carts/save?user_id=2&secureKey=65134b5f9f11bc5381bf987542b644485b681a15cdaf05a8e71b67259b7b59f8&cart[user_id]=2&cart[typeObj]=Music&cart[obj_id]=1
         async public static void add_to_cart(int user_id, int obj_id, string obj_type, int gift_user_id)
         {
             Exception exception = null;

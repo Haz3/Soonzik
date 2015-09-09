@@ -13,10 +13,11 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using SoonZik.Views;
+using SoonZik.ViewModels;
 
 // Pour en savoir plus sur le modèle d'élément Page vierge, consultez la page http://go.microsoft.com/fwlink/?LinkId=234238
 
-namespace SoonZik
+namespace SoonZik.Views
 {
     /// <summary>
     /// Une page vide peut être utilisée seule ou constituer une page de destination au sein d'un frame.
@@ -26,6 +27,7 @@ namespace SoonZik
         public Community()
         {
             this.InitializeComponent();
+            DataContext = new TweetViewModel();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -33,20 +35,25 @@ namespace SoonZik
             this.Frame.GoBack();
         }
 
-        private void concert_btn_Click(object sender, RoutedEventArgs e)
+        private void user_list_ItemClick(object sender, ItemClickEventArgs e)
         {
-            this.Frame.Navigate(typeof(Concert));
+            var item = ((SoonZik.Models.User)e.ClickedItem);
+            this.Frame.Navigate(typeof(User), item);
         }
+        //private void concert_btn_Click(object sender, RoutedEventArgs e)
+        //{
+        //    this.Frame.Navigate(typeof(Concert));
+        //}
 
-        private void battle_btn_Click(object sender, RoutedEventArgs e)
-        {
-            this.Frame.Navigate(typeof(Battle));
-        }
+        //private void battle_btn_Click(object sender, RoutedEventArgs e)
+        //{
+        //    this.Frame.Navigate(typeof(Battle));
+        //}
 
-        private void follow_btn_Click(object sender, RoutedEventArgs e)
-        {
-            this.Frame.Navigate(typeof(follow));
+        //private void follow_btn_Click(object sender, RoutedEventArgs e)
+        //{
+        //    this.Frame.Navigate(typeof(follow));
+        //}
 
-        }
     }
 }

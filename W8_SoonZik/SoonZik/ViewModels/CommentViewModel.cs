@@ -15,7 +15,7 @@ namespace SoonZik.ViewModels
 {
     class CommentViewModel
     {
-        public ObservableCollection<Comment> commentlist { get; set; }
+        //public ObservableCollection<Comment> commentlist { get; set; }
         public static ObservableCollection<Comment> _commentlist { get; set; }
 
 
@@ -26,14 +26,28 @@ namespace SoonZik.ViewModels
 
         async static public Task<ObservableCollection<Comment>> load_comments(string elem)
         {
+            Exception exception = null;
             _commentlist = new ObservableCollection<Comment>();
             elem += "/comments";
 
-            var comments = (List<Comment>)await Http_get.get_object(new List<Comment>(), elem);
+            try
+            {
+                var comments = (List<Comment>)await Http_get.get_object(new List<Comment>(), elem);
 
-            foreach (var item in comments)
-                _commentlist.Add(item);
-            return _commentlist;
+                foreach (var item in comments)
+                    _commentlist.Insert(0, item); // To have the last comment on top
+                //_commentlist.Add(item);
+                return _commentlist;
+            }
+            catch (Exception e)
+            {
+                exception = e;
+            }
+
+            if (exception != null)
+                await new MessageDialog(exception.Message, "Load comment Error").ShowAsync();
+            return null;
+           
         }
 
         public static async Task<bool> send_comment(string comment_txt, string type, string id)
@@ -58,7 +72,7 @@ namespace SoonZik.ViewModels
 
                 if (json.ToString() == "Created")
                 {
-                    await new MessageDialog("Comment SEND").ShowAsync();
+                    //await new MessageDialog("Comment SEND").ShowAsync();
                     return true;
                 }
                 else
