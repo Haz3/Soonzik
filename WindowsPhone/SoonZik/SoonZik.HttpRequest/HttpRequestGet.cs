@@ -112,6 +112,12 @@ namespace SoonZik.HttpRequest
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(ApiUrl + "carts/destroy?id=" + myCart.id + "&secureKey=" + sha256 + "&user_id=" + myUser.id);
             return await DoRequest(request);
         }
+
+        public async Task<string> DeletePlaylist(Playlist myPlaylist, string sha256, User myUser)
+        {
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(ApiUrl + "playlists/destroy?id=" + myPlaylist.id + "&secureKey=" + sha256 + "&user_id=" + myUser.id);
+            return await DoRequest(request);
+        }
         #endregion
 
         #region Method Request

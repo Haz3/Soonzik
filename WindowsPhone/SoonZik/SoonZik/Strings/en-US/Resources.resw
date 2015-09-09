@@ -315,4 +315,7 @@
   <data name="Buy.Content" xml:space="preserve">
     <value>Buy</value>
   </data>
+  <data name="CreatePlaylist.Content" xml:space="preserve">
+    <value>Create a playlist</value>
+  </data>
 </root>

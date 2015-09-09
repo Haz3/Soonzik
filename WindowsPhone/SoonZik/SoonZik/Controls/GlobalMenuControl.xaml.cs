@@ -361,10 +361,6 @@ namespace SoonZik.Controls
             _navigationService.Navigate(typeof (Connexion));
         }
 
-        private void PlaylistAdd_OnTapped(object sender, TappedRoutedEventArgs e)
-        {
-        }
-
         #endregion
 
         #region Methods Search

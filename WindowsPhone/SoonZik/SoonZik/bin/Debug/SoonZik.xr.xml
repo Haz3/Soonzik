@@ -133,6 +133,7 @@
     <RootPropertyPathName Name="ThePack" />
     <RootPropertyPathName Name="PackTappedCommand" />
     <RootPropertyPathName Name="SelectedIndex" />
+    <RootPropertyPathName Name="CreatePlaylist" />
     <RootPropertyPathName Name="ListPlaylist" />
     <RootPropertyPathName Name="SelectedPlaylist" />
     <RootPropertyPathName Name="PlaylistTappedCommand" />
