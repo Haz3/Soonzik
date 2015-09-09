@@ -190,6 +190,28 @@ listening even if we don&#39;t buy it</p>
 
 					
 									</div>
+								<a name="method-c-musicToJson">anchor</a>
+				<div id="method-c-musicToJson-doc" class="method">
+
+					<header>
+											<i class="icon-generic"></i>
+						<span class="method-name">musicToJson</span><span 
+							class="method-args">(m)</span>
+										</header>
+
+					<div class="method-description">
+											<p>To render the object as json (for suggestv2 only)</p>					
+											<div class="method-source-code" id="musicToJson-source">
+							<pre class="prettyprint linenums"><code 
+								class="language-ruby"><span class="ruby-comment"># File app/models/music.rb, line 144</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">musicToJson</span>(<span class="ruby-identifier">m</span>)
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">m</span>.<span class="ruby-identifier">as_json</span>(<span class="ruby-identifier">only</span><span class="ruby-operator">:</span> <span class="ruby-constant">Music</span>.<span class="ruby-identifier">miniKey</span>, <span class="ruby-identifier">methods</span><span class="ruby-operator">:</span> <span class="ruby-value">:getAverageNote</span>, <span class="ruby-value">:include</span> =<span class="ruby-operator">&gt;</span> { <span class="ruby-identifier">user</span><span class="ruby-operator">:</span> { <span class="ruby-identifier">only</span><span class="ruby-operator">:</span> <span class="ruby-constant">User</span>.<span class="ruby-identifier">miniKey</span> }, <span class="ruby-identifier">album</span><span class="ruby-operator">:</span> { <span class="ruby-identifier">only</span><span class="ruby-operator">:</span> <span class="ruby-constant">Album</span>.<span class="ruby-identifier">miniKey</span> } })
+<span class="ruby-keyword">end</span></code></pre>
+						</div>
+										</div>
+
+					
+									</div>
 								<a name="method-c-music_params">anchor</a>
 				<div id="method-c-music_params-doc" class="method">
 
@@ -280,6 +302,47 @@ listening even if we don&#39;t buy it</p>
   <span class="ruby-keyword">end</span>
 
   <span class="ruby-keyword">return</span> <span class="ruby-identifier">suggestionList</span>
+<span class="ruby-keyword">end</span></code></pre>
+						</div>
+										</div>
+
+					
+									</div>
+								<a name="method-c-suggestMusic">anchor</a>
+				<div id="method-c-suggestMusic-doc" class="method">
+
+					<header>
+											<i class="icon-generic"></i>
+						<span class="method-name">suggestMusic</span><span 
+							class="method-args">(u, limit)</span>
+										</header>
+
+					<div class="method-description">
+											<p>Algorithm to get musics for suggestv2</p>					
+											<div class="method-source-code" id="suggestMusic-source">
+							<pre class="prettyprint linenums"><code 
+								class="language-ruby"><span class="ruby-comment"># File app/models/music.rb, line 120</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">suggestMusic</span>(<span class="ruby-identifier">u</span>, <span class="ruby-identifier">limit</span>)
+  <span class="ruby-identifier">content</span> = []
+  <span class="ruby-keyword">if</span> (<span class="ruby-identifier">u</span> <span class="ruby-operator">==</span> <span class="ruby-keyword">nil</span>)
+    <span class="ruby-identifier">content</span> = <span class="ruby-constant">Music</span>.<span class="ruby-identifier">musicToJson</span> <span class="ruby-constant">Music</span>.<span class="ruby-identifier">joins</span>(<span class="ruby-value">:music_notes</span>).<span class="ruby-identifier">select</span>(<span class="ruby-string">&#39;*, AVG(music_notes.value) AS note&#39;</span>).<span class="ruby-identifier">order</span>(<span class="ruby-string">&quot;note DESC&quot;</span>).<span class="ruby-identifier">group</span>(<span class="ruby-string">&quot;musics.id&quot;</span>).<span class="ruby-identifier">limit</span>(<span class="ruby-identifier">limit</span> <span class="ruby-operator">*</span> <span class="ruby-value">2</span>).<span class="ruby-identifier">shuffle</span>[<span class="ruby-value">0</span><span class="ruby-operator">..</span>(<span class="ruby-identifier">limit</span>)]
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">toRemove</span> = <span class="ruby-constant">Music</span>.<span class="ruby-identifier">musicToJson</span> <span class="ruby-constant">Music</span>.<span class="ruby-identifier">joins</span>(<span class="ruby-identifier">purchased_musics</span><span class="ruby-operator">:</span> [<span class="ruby-value">:purchase</span>]).<span class="ruby-identifier">where</span>([<span class="ruby-string">&quot;purchases.user_id = ?&quot;</span>, <span class="ruby-identifier">u</span>.<span class="ruby-identifier">id</span>])
+    <span class="ruby-identifier">interesting</span> = <span class="ruby-constant">Music</span>.<span class="ruby-identifier">musicToJson</span> <span class="ruby-constant">Music</span>.<span class="ruby-identifier">joins</span>(<span class="ruby-value">:listenings</span>).<span class="ruby-identifier">where</span>([<span class="ruby-string">&quot;listenings.user_id = ?&quot;</span>, <span class="ruby-identifier">u</span>.<span class="ruby-identifier">id</span>])
+    <span class="ruby-identifier">puts</span> <span class="ruby-identifier">interesting</span>.<span class="ruby-identifier">inspect</span>
+    <span class="ruby-identifier">u</span>.<span class="ruby-identifier">friends</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">friend</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">interesting</span> = <span class="ruby-identifier">interesting</span> <span class="ruby-operator">|</span> (<span class="ruby-constant">Music</span>.<span class="ruby-identifier">musicToJson</span> <span class="ruby-constant">Music</span>.<span class="ruby-identifier">joins</span>(<span class="ruby-identifier">purchased_musics</span><span class="ruby-operator">:</span> [<span class="ruby-value">:purchase</span>]).<span class="ruby-identifier">where</span>([<span class="ruby-string">&quot;purchases.user_id = ?&quot;</span>, <span class="ruby-identifier">friend</span>.<span class="ruby-identifier">id</span>]))
+      <span class="ruby-identifier">friend</span>.<span class="ruby-identifier">listenings</span>.<span class="ruby-identifier">limit</span>(<span class="ruby-value">30</span>).<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">listening</span><span class="ruby-operator">|</span>
+        <span class="ruby-identifier">interesting</span> = <span class="ruby-identifier">interesting</span> <span class="ruby-operator">|</span> [<span class="ruby-constant">Music</span>.<span class="ruby-identifier">musicToJson</span>(<span class="ruby-identifier">listening</span>.<span class="ruby-identifier">music</span>)]
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-identifier">content</span> = <span class="ruby-identifier">interesting</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">toRemove</span>
+    <span class="ruby-identifier">content</span> = <span class="ruby-identifier">content</span>.<span class="ruby-identifier">shuffle</span>
+    <span class="ruby-identifier">content</span> = <span class="ruby-identifier">content</span>[<span class="ruby-value">0</span><span class="ruby-operator">..</span>(<span class="ruby-identifier">limit</span> <span class="ruby-operator">+</span> <span class="ruby-value">10</span>)]
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">content</span>
 <span class="ruby-keyword">end</span></code></pre>
 						</div>
 										</div>

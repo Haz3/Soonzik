@@ -26,10 +26,12 @@ class ApplicationController < ActionController::Base
       cookies[:user_id] = current_user.id
       cookies[:user_token] = current_user.salt
       cookies[:user_username] = current_user.username
+      cookies[:language] = current_user.language
     elsif !user_signed_in?()
       cookies.delete :user_id
       cookies.delete :user_token
       cookies.delete :user_username
+      cookies.delete :language
     end
   end
 

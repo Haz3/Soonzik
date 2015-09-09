@@ -793,6 +793,12 @@ var SearchIndex =
 		"type": "anymethod"
 	},
 	{
+		"name": "showTwo",
+		"link": "API/SuggestionsController.html#method-i-showTwo",
+		"snippet": "<p>Give a list of music based on the purchases\n<p>Route : /suggestv2\n<p><code>type</code> - What do you want ? &#39;music&#39; …\n",
+		"type": "anymethod"
+	},
+	{
 		"name": "index",
 		"link": "API/TweetsController.html#method-i-index",
 		"snippet": "<p>Retrieve all the tweets\n<p>Route : /tweets\n<p>Options\n",
@@ -1177,6 +1183,18 @@ var SearchIndex =
 		"type": "anymethod"
 	},
 	{
+		"name": "suggestMusic",
+		"link": "Music.html#method-c-suggestMusic",
+		"snippet": "<p>Algorithm to get musics for suggestv2\n",
+		"type": "anymethod"
+	},
+	{
+		"name": "musicToJson",
+		"link": "Music.html#method-c-musicToJson",
+		"snippet": "<p>To render the object as json (for suggestv2 only)\n",
+		"type": "anymethod"
+	},
+	{
 		"name": "music_note_params",
 		"link": "MusicNote.html#method-c-music_note_params",
 		"snippet": "<p>The strong parameters to save or update object\n",
@@ -1210,6 +1228,12 @@ var SearchIndex =
 		"name": "title",
 		"link": "News.html#method-i-title",
 		"snippet": "<p>To give the title of the good language\n",
+		"type": "anymethod"
+	},
+	{
+		"name": "content",
+		"link": "News.html#method-i-content",
+		"snippet": "<p>To give the content of the good language\n",
 		"type": "anymethod"
 	},
 	{
@@ -1402,6 +1426,12 @@ var SearchIndex =
 		"name": "givePack",
 		"link": "User.html#method-i-givePack",
 		"snippet": "<p>Give the pack where the user has its albums\n",
+		"type": "anymethod"
+	},
+	{
+		"name": "suggestArtist",
+		"link": "User.html#method-c-suggestArtist",
+		"snippet": "<p>Algorithm to get artist for suggestv2\n",
 		"type": "anymethod"
 	},
 	{

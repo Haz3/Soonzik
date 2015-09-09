@@ -57,7 +57,6 @@ module API
     #
     # - +type+ - What do you want ? 'music' or 'artist' ?
     # - +limit+ - (optionnal) The limit of the list. Default : 30
-    # - +offset+ - (optionnal) The offset of the list. Default : 0
     #
     # ===== HTTP VALUE
     # 
@@ -69,7 +68,6 @@ module API
     def showTwo
       u = nil
       result = []
-      offset = (@offset.present?) ? @offset.to_i : 0
       limit = (@limit.present?) ? @limit.to_i : 30
 
       begin
@@ -78,10 +76,11 @@ module API
         end
 
         if (@type.present? && @type == "artist")
-          @returnValue = { content: User.suggestArtist(u, offset, limit) }
+          @returnValue = { content: User.suggestArtist(u, limit) }
           codeAnswer 200
         elsif (@type.present? && @type == "music")
-
+          @returnValue = { content: Music.suggestMusic(u, limit) }
+          codeAnswer 200
         else
           codeAnswer 504
           defineHttp :bad_request

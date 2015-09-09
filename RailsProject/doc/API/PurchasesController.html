@@ -310,7 +310,7 @@ album : {}, purchased_pack: { partial: value, pack: {} } } } }</p>
       <span class="ruby-keyword">if</span> (<span class="ruby-identifier">pack</span> <span class="ruby-operator">==</span> <span class="ruby-keyword">nil</span>)
         <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">502</span>
         <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:not_found</span>
-      <span class="ruby-keyword">elsif</span> <span class="ruby-ivar">@artist</span>.<span class="ruby-identifier">to_i</span> <span class="ruby-operator">+</span> <span class="ruby-ivar">@association</span>.<span class="ruby-identifier">to_i</span> <span class="ruby-operator">+</span> <span class="ruby-ivar">@website</span>.<span class="ruby-identifier">to_i</span> <span class="ruby-operator">!=</span> <span class="ruby-value">100</span> <span class="ruby-operator">||</span> <span class="ruby-ivar">@amount</span>.<span class="ruby-identifier">to_i</span> <span class="ruby-operator">&lt;</span> <span class="ruby-identifier">pack</span>.<span class="ruby-identifier">minimal_price</span>
+      <span class="ruby-keyword">elsif</span> <span class="ruby-ivar">@artist</span>.<span class="ruby-identifier">to_f</span> <span class="ruby-operator">+</span> <span class="ruby-ivar">@association</span>.<span class="ruby-identifier">to_f</span> <span class="ruby-operator">+</span> <span class="ruby-ivar">@website</span>.<span class="ruby-identifier">to_f</span> <span class="ruby-operator">!=</span> <span class="ruby-value">100</span> <span class="ruby-operator">||</span> <span class="ruby-ivar">@amount</span>.<span class="ruby-identifier">to_f</span> <span class="ruby-operator">&lt;</span> <span class="ruby-identifier">pack</span>.<span class="ruby-identifier">minimal_price</span>
         <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">504</span>
         <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:bad_request</span>
       <span class="ruby-keyword">else</span>
@@ -322,7 +322,7 @@ album : {}, purchased_pack: { partial: value, pack: {} } } } }</p>
 
         <span class="ruby-identifier">pp</span> = <span class="ruby-constant">PurchasedPack</span>.<span class="ruby-identifier">new</span>
         <span class="ruby-identifier">pp</span>.<span class="ruby-identifier">pack_id</span> = <span class="ruby-identifier">pack</span>.<span class="ruby-identifier">id</span>
-        <span class="ruby-identifier">pp</span>.<span class="ruby-identifier">partial</span> = (<span class="ruby-identifier">pack</span>.<span class="ruby-identifier">averagePrice</span> <span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@amount</span>)
+        <span class="ruby-identifier">pp</span>.<span class="ruby-identifier">partial</span> = (<span class="ruby-identifier">pack</span>.<span class="ruby-identifier">averagePrice</span> <span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@amount</span>.<span class="ruby-identifier">to_f</span>)
         <span class="ruby-identifier">pp</span>.<span class="ruby-identifier">artist_percentage</span> = <span class="ruby-ivar">@artist</span>
         <span class="ruby-identifier">pp</span>.<span class="ruby-identifier">association_percentage</span> = <span class="ruby-ivar">@association</span>
         <span class="ruby-identifier">pp</span>.<span class="ruby-identifier">website_percentage</span> = <span class="ruby-ivar">@website</span>
@@ -333,7 +333,7 @@ album : {}, purchased_pack: { partial: value, pack: {} } } } }</p>
 
         <span class="ruby-identifier">pack</span>.<span class="ruby-identifier">albums</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">album</span><span class="ruby-operator">|</span>
           <span class="ruby-identifier">album</span>.<span class="ruby-identifier">setPack</span>(<span class="ruby-ivar">@pack_id</span>)
-          <span class="ruby-keyword">if</span> (<span class="ruby-operator">!</span><span class="ruby-identifier">album</span>.<span class="ruby-identifier">isPartial</span> <span class="ruby-operator">||</span> (<span class="ruby-identifier">album</span>.<span class="ruby-identifier">isPartial</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-ivar">@amount</span> <span class="ruby-operator">&gt;</span> <span class="ruby-identifier">pack</span>.<span class="ruby-identifier">averagePrice</span>))
+          <span class="ruby-keyword">if</span> (<span class="ruby-operator">!</span><span class="ruby-identifier">album</span>.<span class="ruby-identifier">isPartial</span> <span class="ruby-operator">||</span> (<span class="ruby-identifier">album</span>.<span class="ruby-identifier">isPartial</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-ivar">@amount</span>.<span class="ruby-identifier">to_f</span> <span class="ruby-operator">&gt;</span> <span class="ruby-identifier">pack</span>.<span class="ruby-identifier">averagePrice</span>))
             <span class="ruby-identifier">pa</span> = <span class="ruby-constant">PurchasedAlbum</span>.<span class="ruby-identifier">new</span>
             <span class="ruby-identifier">pa</span>.<span class="ruby-identifier">album_id</span> = <span class="ruby-identifier">album</span>.<span class="ruby-identifier">id</span>
             <span class="ruby-identifier">pa</span>.<span class="ruby-identifier">purchased_pack_id</span> = <span class="ruby-identifier">pp</span>.<span class="ruby-identifier">id</span>
@@ -364,6 +364,7 @@ album : {}, purchased_pack: { partial: value, pack: {} } } } }</p>
       <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:forbidden</span>
     <span class="ruby-keyword">end</span>
   <span class="ruby-keyword">rescue</span>
+    <span class="ruby-identifier">puts</span> <span class="ruby-identifier">$!</span>, <span class="ruby-identifier">$@</span>
     <span class="ruby-identifier">objectToDelete</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">obj</span><span class="ruby-operator">|</span>
       <span class="ruby-identifier">obj</span>.<span class="ruby-identifier">destroy</span>
     <span class="ruby-keyword">end</span>

@@ -333,10 +333,10 @@ class User < ActiveRecord::Base
   end
 
   # Algorithm to get artist for suggestv2
-  def self.suggestArtist(u, offset, limit)
+  def self.suggestArtist(u, limit)
     content = []
     if (u == nil)
-      content = User.joins(:groups).merge(Group.where(:name => "Artist")).limit(limit * 2).shuffle[offset..(offset + limit)].as_json(only: User.miniKey)
+      content = User.joins(:groups).merge(Group.where(:name => "Artist")).limit(limit * 2).shuffle[0..(limit)].as_json(only: User.miniKey)
     else
       interesting = {}
       toRemove = [u] | u.follows.to_a
@@ -349,6 +349,11 @@ class User < ActiveRecord::Base
         interesting[listening.music.user.id] = (interesting.has_key?(listening.music.user.id)) ? interesting[listening.music.user.id] + 1 : 0
       end
 
+      buyMusicFrom = User.joins(musics: [purchased_musics: [:purchase] ]).where(['purchases.user_id == ?', u.id]).group('users.id').select('users.id')
+      buyMusicFrom.each do |musicFrom|
+        interesting[musicFrom.id] = (interesting.has_key?(musicFrom.id)) ? interesting[musicFrom.id] + 1 : 0
+      end
+
       toRemove.each do |remove|
         if (interesting.has_key?(remove.id))
           interesting.delete(remove.id)
@@ -356,7 +361,10 @@ class User < ActiveRecord::Base
       end
 
       interesting = interesting.sort_by{|k,v| v}
-      content = interesting.reverse
+      interesting = interesting.reverse.shuffle[0..(limit + 10)]
+      interesting.each do |artist|
+        content << User.find_by_id(artist[0]).as_json(only: User.miniKey)
+      end
     end
 
     return content

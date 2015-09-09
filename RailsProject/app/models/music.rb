@@ -28,7 +28,7 @@
 class Music < ActiveRecord::Base
   belongs_to :album
   belongs_to :user
-  has_many :listening
+  has_many :listenings
   has_many :music_notes
   has_and_belongs_to_many :commentaries
   has_and_belongs_to_many :playlist_objects
@@ -114,6 +114,35 @@ class Music < ActiveRecord::Base
     end
 
     return suggestionList
+  end
+
+  # Algorithm to get musics for suggestv2
+  def self.suggestMusic(u, limit)
+    content = []
+    if (u == nil)
+      content = Music.musicToJson Music.joins(:music_notes).select('*, AVG(music_notes.value) AS note').order("note DESC").group("musics.id").limit(limit * 2).shuffle[0..(limit)]
+    else
+      toRemove = Music.musicToJson Music.joins(purchased_musics: [:purchase]).where(["purchases.user_id = ?", u.id])
+      interesting = Music.musicToJson Music.joins(:listenings).where(["listenings.user_id = ?", u.id])
+      puts interesting.inspect
+      u.friends.each do |friend|
+        interesting = interesting | (Music.musicToJson Music.joins(purchased_musics: [:purchase]).where(["purchases.user_id = ?", friend.id]))
+        friend.listenings.limit(30).each do |listening|
+          interesting = interesting | [Music.musicToJson(listening.music)]
+        end
+      end
+
+      content = interesting - toRemove
+      content = content.shuffle
+      content = content[0..(limit + 10)]
+    end
+
+    return content
+  end
+
+  # To render the object as json (for suggestv2 only)
+  def self.musicToJson(m)
+    return m.as_json(only: Music.miniKey, methods: :getAverageNote, :include => { user: { only: User.miniKey }, album: { only: Album.miniKey } })
   end
 
 end

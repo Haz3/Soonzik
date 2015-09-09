@@ -487,6 +487,61 @@ subscribed to the newsletter</p>
 
 					
 									</div>
+								<a name="method-c-suggestArtist">anchor</a>
+				<div id="method-c-suggestArtist-doc" class="method">
+
+					<header>
+											<i class="icon-generic"></i>
+						<span class="method-name">suggestArtist</span><span 
+							class="method-args">(u, limit)</span>
+										</header>
+
+					<div class="method-description">
+											<p>Algorithm to get artist for suggestv2</p>					
+											<div class="method-source-code" id="suggestArtist-source">
+							<pre class="prettyprint linenums"><code 
+								class="language-ruby"><span class="ruby-comment"># File app/models/user.rb, line 336</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">suggestArtist</span>(<span class="ruby-identifier">u</span>, <span class="ruby-identifier">limit</span>)
+  <span class="ruby-identifier">content</span> = []
+  <span class="ruby-keyword">if</span> (<span class="ruby-identifier">u</span> <span class="ruby-operator">==</span> <span class="ruby-keyword">nil</span>)
+    <span class="ruby-identifier">content</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">joins</span>(<span class="ruby-value">:groups</span>).<span class="ruby-identifier">merge</span>(<span class="ruby-constant">Group</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">:name</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;Artist&quot;</span>)).<span class="ruby-identifier">limit</span>(<span class="ruby-identifier">limit</span> <span class="ruby-operator">*</span> <span class="ruby-value">2</span>).<span class="ruby-identifier">shuffle</span>[<span class="ruby-value">0</span><span class="ruby-operator">..</span>(<span class="ruby-identifier">limit</span>)].<span class="ruby-identifier">as_json</span>(<span class="ruby-identifier">only</span><span class="ruby-operator">:</span> <span class="ruby-constant">User</span>.<span class="ruby-identifier">miniKey</span>)
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">interesting</span> = {}
+    <span class="ruby-identifier">toRemove</span> = [<span class="ruby-identifier">u</span>] <span class="ruby-operator">|</span> <span class="ruby-identifier">u</span>.<span class="ruby-identifier">follows</span>.<span class="ruby-identifier">to_a</span>
+    <span class="ruby-identifier">u</span>.<span class="ruby-identifier">friends</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">friend</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">friend</span>.<span class="ruby-identifier">follows</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">f</span><span class="ruby-operator">|</span>
+        <span class="ruby-identifier">interesting</span>[<span class="ruby-identifier">f</span>.<span class="ruby-identifier">id</span>] = (<span class="ruby-identifier">interesting</span>.<span class="ruby-identifier">has_key?</span>(<span class="ruby-identifier">f</span>.<span class="ruby-identifier">id</span>)) <span class="ruby-operator">?</span> <span class="ruby-identifier">interesting</span>[<span class="ruby-identifier">f</span>.<span class="ruby-identifier">id</span>] <span class="ruby-operator">+</span> <span class="ruby-value">1</span> <span class="ruby-operator">:</span> <span class="ruby-value">0</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">f</span>.<span class="ruby-identifier">isArtist?</span>
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">end</span>
+    <span class="ruby-identifier">u</span>.<span class="ruby-identifier">listenings</span>.<span class="ruby-identifier">limit</span>(<span class="ruby-value">30</span>).<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">listening</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">interesting</span>[<span class="ruby-identifier">listening</span>.<span class="ruby-identifier">music</span>.<span class="ruby-identifier">user</span>.<span class="ruby-identifier">id</span>] = (<span class="ruby-identifier">interesting</span>.<span class="ruby-identifier">has_key?</span>(<span class="ruby-identifier">listening</span>.<span class="ruby-identifier">music</span>.<span class="ruby-identifier">user</span>.<span class="ruby-identifier">id</span>)) <span class="ruby-operator">?</span> <span class="ruby-identifier">interesting</span>[<span class="ruby-identifier">listening</span>.<span class="ruby-identifier">music</span>.<span class="ruby-identifier">user</span>.<span class="ruby-identifier">id</span>] <span class="ruby-operator">+</span> <span class="ruby-value">1</span> <span class="ruby-operator">:</span> <span class="ruby-value">0</span>
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-identifier">buyMusicFrom</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">joins</span>(<span class="ruby-identifier">musics</span><span class="ruby-operator">:</span> [<span class="ruby-identifier">purchased_musics</span><span class="ruby-operator">:</span> [<span class="ruby-value">:purchase</span>] ]).<span class="ruby-identifier">where</span>([<span class="ruby-string">&#39;purchases.user_id == ?&#39;</span>, <span class="ruby-identifier">u</span>.<span class="ruby-identifier">id</span>]).<span class="ruby-identifier">group</span>(<span class="ruby-string">&#39;users.id&#39;</span>).<span class="ruby-identifier">select</span>(<span class="ruby-string">&#39;users.id&#39;</span>)
+    <span class="ruby-identifier">buyMusicFrom</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">musicFrom</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">interesting</span>[<span class="ruby-identifier">musicFrom</span>.<span class="ruby-identifier">id</span>] = (<span class="ruby-identifier">interesting</span>.<span class="ruby-identifier">has_key?</span>(<span class="ruby-identifier">musicFrom</span>.<span class="ruby-identifier">id</span>)) <span class="ruby-operator">?</span> <span class="ruby-identifier">interesting</span>[<span class="ruby-identifier">musicFrom</span>.<span class="ruby-identifier">id</span>] <span class="ruby-operator">+</span> <span class="ruby-value">1</span> <span class="ruby-operator">:</span> <span class="ruby-value">0</span>
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-identifier">toRemove</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">remove</span><span class="ruby-operator">|</span>
+      <span class="ruby-keyword">if</span> (<span class="ruby-identifier">interesting</span>.<span class="ruby-identifier">has_key?</span>(<span class="ruby-identifier">remove</span>.<span class="ruby-identifier">id</span>))
+        <span class="ruby-identifier">interesting</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-identifier">remove</span>.<span class="ruby-identifier">id</span>)
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-identifier">interesting</span> = <span class="ruby-identifier">interesting</span>.<span class="ruby-identifier">sort_by</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">k</span>,<span class="ruby-identifier">v</span><span class="ruby-operator">|</span> <span class="ruby-identifier">v</span>}
+    <span class="ruby-identifier">interesting</span> = <span class="ruby-identifier">interesting</span>.<span class="ruby-identifier">reverse</span>.<span class="ruby-identifier">shuffle</span>[<span class="ruby-value">0</span><span class="ruby-operator">..</span>(<span class="ruby-identifier">limit</span> <span class="ruby-operator">+</span> <span class="ruby-value">10</span>)]
+    <span class="ruby-identifier">interesting</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">artist</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">content</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-constant">User</span>.<span class="ruby-identifier">find_by_id</span>(<span class="ruby-identifier">artist</span>[<span class="ruby-value">0</span>]).<span class="ruby-identifier">as_json</span>(<span class="ruby-identifier">only</span><span class="ruby-operator">:</span> <span class="ruby-constant">User</span>.<span class="ruby-identifier">miniKey</span>)
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">content</span>
+<span class="ruby-keyword">end</span></code></pre>
+						</div>
+										</div>
+
+					
+									</div>
 								<a name="method-c-user_params">anchor</a>
 				<div id="method-c-user_params-doc" class="method">
 
