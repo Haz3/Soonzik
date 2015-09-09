@@ -61,7 +61,7 @@ namespace SoonZik.ViewModel
 
             #endregion
 
-            ListArtistes = new List<User>();
+            ListArtistes = new ObservableCollection<User>();
 
             PackTappedCommand = new RelayCommand(ExecutePackTapped);
             AlbumTappedCommand = new RelayCommand(ExecuteAlbumTapped);
@@ -137,9 +137,9 @@ namespace SoonZik.ViewModel
         public RelayCommand ArtistTappedCommand { get; private set; }
         public RelayCommand BuyCommand { get; private set; }
 
-        private List<User> _listArtistes;
+        private ObservableCollection<User> _listArtistes;
 
-        public List<User> ListArtistes
+        public ObservableCollection<User> ListArtistes
         {
             get { return _listArtistes; }
             set

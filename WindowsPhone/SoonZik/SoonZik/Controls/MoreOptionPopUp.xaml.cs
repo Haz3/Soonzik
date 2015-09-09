@@ -6,6 +6,7 @@ using Windows.UI.Core;
 using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Newtonsoft.Json.Linq;
 using SoonZik.Annotations;
 using SoonZik.Helpers;
 using SoonZik.HttpRequest;
@@ -45,6 +46,8 @@ namespace SoonZik.Controls
         private Music _selectedMusic { get; set; }
 
         private string _cryptographic { get; set; }
+
+        public static Playlist ThePlaylist { get; set; }
         #endregion
 
         #region INotifyPropertyChange
@@ -99,8 +102,56 @@ namespace SoonZik.Controls
                     }
                 });
             });
-        } 
-        #endregion
+        }
 
+        private void DelFromPlaylist(object sender, RoutedEventArgs e)
+        {
+            if (ThePlaylist != null)
+            {
+                _selectedMusic = SelectedMusic;
+                var request = new HttpRequestGet();
+                var userKey = request.GetUserKey(Singleton.Instance().CurrentUser.id.ToString());
+                userKey.ContinueWith(delegate(Task<object> task)
+                {
+                    var _key = task.Result as string;
+                    if (_key != null)
+                    {
+                        var stringEncrypt = KeyHelpers.GetUserKeyFromResponse(_key);
+                        _cryptographic = EncriptSha256.EncriptStringToSha256(Singleton.Instance().CurrentUser.salt + stringEncrypt);
+
+                        var resDel = request.DeleteMusicFromPlaylist(ThePlaylist, _selectedMusic, _cryptographic, Singleton.Instance().CurrentUser);
+
+                        resDel.ContinueWith(delegate(Task<string> tmp)
+                        {
+                            var test = tmp.Result;
+                            if (test != null)
+                            {
+                                CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
+                                    () =>
+                                    {
+                                        var stringJson = JObject.Parse(test).SelectToken("code").ToString();
+                                        if (stringJson == "200")
+                                        {
+                                            new MessageDialog("Music delete").ShowAsync();
+                                            PlaylistViewModel.UpdatePlaylist.Execute(null);
+                                            PlaylistViewModel.MessagePrompt.Hide();
+                                        }
+                                        else
+                                        {
+                                            new MessageDialog("Delete Fail code: " + stringJson).ShowAsync();
+                                            PlaylistViewModel.MessagePrompt.Hide();
+                                        }
+                                    });
+                            }
+                        });
+                    }
+                });
+            }
+            else
+            {
+                new MessageDialog("You need to be on the playlist").ShowAsync();
+            }
+        }
+        #endregion
     }
 }

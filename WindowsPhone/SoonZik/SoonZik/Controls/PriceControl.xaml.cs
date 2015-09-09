@@ -86,22 +86,22 @@ namespace SoonZik.Controls
 
         private void InitializePrice()
         {
-            if (SelecetdPack.price != null)
-                PriceTextBox.Text = SelecetdPack.price;
-            else
-            {
-                SelecetdPack.price = "10";
-                PriceTextBox.Text = SelecetdPack.price;
-            }
+            //if (SelecetdPack.averagePrice != 0)
+            PriceTextBox.Text = SelecetdPack.averagePrice;
+            //else
+            //{
+            //    SelecetdPack.averagePrice = "10";
+            //    PriceTextBox.Text = SelecetdPack.price;
+            //}
 
 
-            ArtistSlider.Maximum = Convert.ToDouble(SelecetdPack.price);
-            AssociationSlider.Maximum = Convert.ToDouble(SelecetdPack.price);
-            SoonZikSlider.Maximum = Convert.ToDouble(SelecetdPack.price);
+            ArtistSlider.Maximum = Convert.ToDouble(SelecetdPack.averagePrice);
+            AssociationSlider.Maximum = Convert.ToDouble(SelecetdPack.averagePrice);
+            SoonZikSlider.Maximum = Convert.ToDouble(SelecetdPack.averagePrice);
 
-            ArtistePriceCalc(Convert.ToDouble(SelecetdPack.price));
-            AssociationPriceCalc(Convert.ToDouble(SelecetdPack.price));
-            SoonZikPriceCalc(Convert.ToDouble(SelecetdPack.price));
+            ArtistePriceCalc(Convert.ToDouble(SelecetdPack.averagePrice));
+            AssociationPriceCalc(Convert.ToDouble(SelecetdPack.averagePrice));
+            SoonZikPriceCalc(Convert.ToDouble(SelecetdPack.averagePrice));
         }
 
         private void ArtistePriceCalc(double price)

@@ -118,6 +118,13 @@ namespace SoonZik.HttpRequest
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(ApiUrl + "playlists/destroy?id=" + myPlaylist.id + "&secureKey=" + sha256 + "&user_id=" + myUser.id);
             return await DoRequest(request);
         }
+
+
+        public async Task<string> DeleteMusicFromPlaylist(Playlist myPlaylist, Music theMusic,string sha256, User myUser)
+        {
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(ApiUrl + "musics/delfromplaylist?id=" + theMusic.id + "&playlist_id=" + myPlaylist.id + "&secureKey=" + sha256 + "&user_id=" + myUser.id);
+            return await DoRequest(request);
+        }
         #endregion
 
         #region Method Request

@@ -318,4 +318,7 @@
   <data name="CreatePlaylist.Content" xml:space="preserve">
     <value>Create a playlist</value>
   </data>
+  <data name="DelFromPlaylist.Content" xml:space="preserve">
+    <value>Delete from the playlist</value>
+  </data>
 </root>
