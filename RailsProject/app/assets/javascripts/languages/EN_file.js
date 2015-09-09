@@ -310,4 +310,27 @@ var labels = {
 	DISPLAY_SIGNUP_PHONE_LABEL: "Phone Number",
 	DISPLAY_SIGNUP_NEWSLETTER_LABEL: "Newsletter",
 
+
+    // Cart Controller
+    CART_LOAD_ERROR_MESSAGE: "An error occured while getting the cart",
+    CART_DELETE_ITEM_ERROR_MESSAGE: "An error occured while destroying an item in cart",
+    CART_DELETE_ERROR_MESSAGE: "An error occured while destroying the cart",
+    CART_SUCCESS_BUY_CART_MESSAGE: "Cart is successfuly buy",
+    CART_BUY_ERROR_MESSAGE: "An error occured while buying the cart", 
+    
+    // Friends Controller
+    FRIEND_ERROR_DISPLAY_MESSAGE: "An error occured while loading your friends",
+
+    // News Controller
+    NEWS_LOAD_COMMENT_ERROR_MESSAGE: "Error while loading commentaries",
+    NEWS_SEND_COMMENT_ERROR_MESSAGE: "Error while saving your comment, please try later",
+    NEWS_LOAD_ERROR_MESSAGE: "Error while loading news",
+    NEWS_LOAD_ERROR_MESSAGE: "Error while loading news",
+    NEWS_LOAD_ONE_NEWS_ERROR_MESSAGE: "The page you asked is not available",
+
+
+   // Packs Controller
+   PACK_LOAD_ERROR_MESSAGE: "Error while loading packs",
+   PACK_LOAD_ONE_PACK_ERROR_MESSAGE: "The page you asked is not available",
+   PACK_BUY_PACK_ERROR_MESSAGE: "Error while buying your cart", 
 }

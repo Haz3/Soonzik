@@ -63,4 +63,17 @@ class News < ActiveRecord::Base
 
     title
   end
+
+  # To give the content of the good language
+  def content
+    content = "No Content"
+    if (@language.present?)
+      nt = Newstext.where(news_id: self.id).where(language: @language)
+      if (nt != nil && nt.size > 0)
+        content = nt.first.content
+      end
+    end
+
+    content
+  end
 end

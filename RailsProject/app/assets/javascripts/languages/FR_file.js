@@ -276,8 +276,6 @@ var labels = {
 	DISPLAY_CONCERT_LINK_LABEL: "Lien : ",
 	DISPLAY_CONCERT_NO_LINK_LABEL: "Aucun lien",
 	DISPLAY_CONCERT_ADDRESS_LABEL: "Adresse : ",
-	DISPLAY_CONCERT_ARTIST_FILTER_LABEL: "Artiste : ",
-	DISPLAY_CONCERT_COUNTRY_FILTER_LABEL: "Pays : ",
 
 	// Concert Controller
 	FILE_CONCERT_FIND_CONCERT_ERROR_MESSAGE: "Une erreur s'est produite lors du chargement des concerts",
@@ -297,19 +295,26 @@ var labels = {
 	FILE_DISCOTHEQUE_GET_NOTES_ERROR_MESSAGE: "Une erreur s'est produite à la récupération des notes",
 	FILE_DISCOTHEQUE_GET_MUSICS_ERROR_MESSAGE: "Une erreur s'est produite au chargement de vos musiques",
 
-	// User signup view
-	DISPLAY_SIGNUP_USERNAME_LABEL: "Pseudo *",
-	DISPLAY_SIGNUP_DESCRIPTION_LABEL: "Description",
-	DISPLAY_SIGNUP_BIRTHDAY_LABEL: "Naissance *",
-	DISPLAY_SIGNUP_FACEBOOK_LABEL: "Facebook",
-	DISPLAY_SIGNUP_TWITTER_LABEL: "Twitter",
-	DISPLAY_SIGNUP_GPLUS_LABEL: "Google Plus",
-	DISPLAY_SIGNUP_FIRSTNAME_LABEL: "Prénom *",
-	DISPLAY_SIGNUP_LASTNAME_LABEL: "Nom *",
-	DISPLAY_SIGNUP_PASSWORD_LABEL: "Mot de passe *",
-	DISPLAY_SIGNUP_EMAIL_LABEL: "Email *",
-	DISPLAY_SIGNUP_PHONE_LABEL: "Numéro de téléphone",
-	DISPLAY_SIGNUP_NEWSLETTER_LABEL: "Newsletter",
+    // Cart Controller
+    CART_LOAD_ERROR_MESSAGE: "Une erreur s'est produite lors de la recupération du panier",
+    CART_DELETE_ITEM_ERROR_MESSAGE: "Une error s'est produite lors de la destruction du panier",
+    CART_DELETE_ERROR_MESSAGE: "Une erreur s'est produite lors de la destruction du panier",
+    CART_SUCCESS_BUY_CART_MESSAGE: "Votre panier a bien été acheté",
+    CART_BUY_ERROR_MESSAGE: "Une errur s'est produite lors de l'achat du panier",
+
+    // Friends Controller
+    FRIEND_ERROR_DISPLAY_MESSAGE: "Une erreur s'est produite lors de la recupération des amis",
+     
+    // News Controller
+    NEWS_LOAD_COMMENT_ERROR_MESSAGE: "Une erreur s'est produite lors de la recupération des commentaires",
+    NEWS_SEND_COMMENT_ERROR_MESSAGE: "Une erreur s'est produite lors de la sauvegarde du commentaire",
+    NEWS_LOAD_ERROR_MESSAGE: "Une erreur s'est produite lors de la recupération des actualités",
+    NEWS_LOAD_ONE_NEWS_ERROR_MESSAGE: "La page que vous avez demandé n'existe pas",
+     
+    // Packs Controller
+    PACK_LOAD_ERROR_MESSAGE: "Une erreur s'est produite lors de la recupération des packs",
+    PACK_LOAD_ONE_PACK_ERROR_MESSAGE: "La page que vous avez demandé n'est pas disponible",
+    PACK_BUY_PACK_ERROR_MESSAGE: "Une erreur s'est produite lors de l'achat du pack",
 
 
 }

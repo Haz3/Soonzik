@@ -37,9 +37,11 @@
         <Image Margin="95,662,1601,387" Source="ms-appx:///Assets/connexion_twitter.png" Stretch="Fill"/>
         <Image Margin="95,612,1601,437" Source="ms-appx:///Assets/connexion_gplus.png" Stretch="Fill"/>
        
-        <TextBlock x:Name="signup_txt" x:Uid="signup_txt" HorizontalAlignment="Left" Margin="95,495,0,0" TextWrapping="Wrap" Text="Inscription" VerticalAlignment="Top" Width="113" Foreground="#FF27AAE1" FontSize="20" Tapped="signup_txt_SelectionChanged" />
+        <TextBlock x:Name="signup_txt" x:Uid="signup_txt" HorizontalAlignment="Left" Margin="95,495,0,0" TextWrapping="Wrap" Text="Inscription" VerticalAlignment="Top" Width="Auto" Foreground="#FF27AAE1" FontSize="25" Tapped="signup_txt_SelectionChanged" />
         <!--<TextBlock x:Name="langue" HorizontalAlignment="Left" Margin="80,40,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="80" Width="239" Foreground="#FF006A00" FontSize="40"/>-->
         <!--<TextBlock x:Name="forgot_password_txt" x:Uid="forgot_password_txt" HorizontalAlignment="Left" Margin="92,522,0,0" TextWrapping="Wrap" Text="Récuperation du mot de passe" VerticalAlignment="Top" Width="283" Foreground="#FF27AAE1" FontSize="20"/>-->
-
+        <TextBlock x:Name="feedback" HorizontalAlignment="Left" Margin="25,1045,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="25" Width="275" Foreground="#FF111111" FontSize="25">
+            <Hyperlink NavigateUri="http://api.lvh.me:3000/feedbacks/new" Foreground="#FF611EFF" >Feedback</Hyperlink>
+        </TextBlock>
     </Grid>
 </Page>

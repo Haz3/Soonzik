@@ -13,21 +13,6 @@
             <TextBlock x:Name="cart_txt" HorizontalAlignment="Left" Margin="100,10,0,0" TextWrapping="Wrap" Text="Cart" VerticalAlignment="Top" Height="55" Width="Auto" FontSize="53.333" Foreground="Black"/>
             <Button x:Name="back_btn" Content="Button" HorizontalAlignment="Left" Margin="30,20,0,0" VerticalAlignment="Top" Style="{StaticResource NavigationBackButtonNormalStyle}" RequestedTheme="Light" Click="Button_Click"/>
         </Grid>
-        <!--<TextBlock x:Uid="packs_txt" x:Name="packs_txt" HorizontalAlignment="Left" Margin="1170,130,0,0" TextWrapping="Wrap" Text="Packs" VerticalAlignment="Top" Height="45" Width="170" Foreground="Black" FontSize="30"/>-->
-
-
-        <!--<GridView x:Name="pack_list" ItemsSource="{Binding music_own.packs}" ItemClick="pack_list_ItemClick" IsItemClickEnabled="True" HorizontalAlignment="Left" Height="850" Margin="1170,180,0,0" VerticalAlignment="Top" Width="435" IsSynchronizedWithCurrentItem="False" Background="#FFB0B0B0">
-            <GridView.ItemTemplate>
-                <DataTemplate>
-                    <Grid Width="250" Height="250">
-                        <Image Stretch="Fill" Source="http://static.wixstatic.com/media/44433f_4f689883955641309c5c675ff5bffc92.jpg" VerticalAlignment="Top" HorizontalAlignment="Center"/>
-                        <StackPanel Orientation="Vertical" VerticalAlignment="Bottom" Margin="0,0,0,10">
-                            <TextBlock Text="{Binding title}" FontSize="25" Margin="10,0,0,0" TextTrimming="WordEllipsis" TextWrapping="Wrap" HorizontalAlignment="Left" Foreground="#FF0A37FF"/>
-                        </StackPanel>
-                    </Grid>
-                </DataTemplate>
-            </GridView.ItemTemplate>
-        </GridView>-->
 
         <ListView x:Name="cart_list" ItemsSource="{Binding Path=list_cart}" Background="#FF878787" Margin="355,140,355,0" VerticalAlignment="Top" Height="635" SelectedItem="{Binding cart, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
             <ListView.ItemTemplate>
@@ -40,12 +25,11 @@
                             <TextBlock Text="{Binding musics[0].title, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="20" Margin="10,0,0,0" TextTrimming="WordEllipsis" TextWrapping="Wrap" HorizontalAlignment="Left" Foreground="White"/>
                         </StackPanel>
                     </StackPanel>
-
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
 
-        <Button x:Uid="remove_cart" x:Name="remove_cart" Command="{Binding do_remove_cart, Mode=OneWay}" Content="Supprimer" HorizontalAlignment="Left" Margin="1590,137,0,0" VerticalAlignment="Top" Height="96" Width="233" FontSize="30" Background="#FFE84D46"/>
+        <Button x:Uid="remove_cart" x:Name="remove_cart" Command="{Binding do_remove_cart, Mode=OneWay}" Content="Supprimer" HorizontalAlignment="Left" Margin="1590,137,0,0" VerticalAlignment="Top" Height="96" Width="298" FontSize="30" Background="#FFE84D46"/>
         <Button x:Uid="buy_btn" x:Name="buy_btn" Command="{Binding do_buy_cart, Mode=OneWay}" Content="Acheter" HorizontalAlignment="Left" Margin="380,900,0,0" VerticalAlignment="Top" Height="68" Width="1188" Background="#FF0C91FF" FontSize="30"/>
     </Grid>
 </Page>

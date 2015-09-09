@@ -42,25 +42,19 @@
         </Grid>
 
         <ListView Name="comment_lv" ItemsSource="{Binding commentlist, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Height="185" Margin="400,775,0,0" VerticalAlignment="Top" Width="1120" Background="White" IsItemClickEnabled="True" IsSwipeEnabled="False" SelectionMode="None">
-
             <ListView.ItemTemplate>
                 <DataTemplate>
-
-                    <StackPanel>
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock FontSize="24" Foreground="Black">
-                                <Run Text="Auteur ID: "></Run>
-                                <Run Text="{Binding author_id}" FontSize="16" Foreground="Black"/>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock FontSize="24" Foreground="Black">
+                                <Run x:Uid="author_txt" Text="Auteur: "></Run>
+                                <Run Text="{Binding user.username}" FontSize="16" Foreground="Black"/>
                                 <LineBreak/>
-                                <Run Text="Commentaire: "></Run>
+                                <Run x:Uid="comment_txt" Text="Commentaire: "></Run>
                                 <Run Text="{Binding content}" FontSize="16" Foreground="Black"/>
-                            </TextBlock>
-                        </StackPanel>
+                        </TextBlock>
                     </StackPanel>
-
                 </DataTemplate>
             </ListView.ItemTemplate>
-
         </ListView>
 
         <TextBox x:Name="send_com_tb" Text="{Binding comment_content, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="405,1000,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="20" Width="990"/>

@@ -36,11 +36,10 @@ module API
               news.setLanguage @language
             end
           end
-          @returnValue = { content: News.all.as_json(:include => {
+          @returnValue = { content: n.as_json(:include => {
                                                       :user => { :only => User.miniKey },
-                                                      :newstexts => { :only => Newstext.miniKey },
                                                       :attachments => { :only => Attachment.miniKey }
-                                                    }, :only => News.miniKey, methods: :title) }
+                                                    }, :only => News.miniKey, methods: [:title, :content]) }
         end
         if (@returnValue[:content].size == 0)
           codeAnswer 202
@@ -79,9 +78,8 @@ module API
           news.setLanguage @language if @language.present?
           @returnValue = { content: news.as_json(:include => {
                                                   :user => { :only => User.miniKey },
-                                                  :newstexts => { :only => Newstext.miniKey },
                                                   :attachments => { :only => Attachment.miniKey }
-                                                }, :only => News.miniKey, methods: :title) }
+                                                }, :only => News.miniKey, methods: [:title, :content]) }
           codeAnswer 200
         end
       rescue
@@ -187,9 +185,8 @@ module API
 
         @returnValue = { content: new_object.as_json(:include => {
                                                       :user => { :only => User.miniKey },
-                                                      :newstexts => { :only => Newstext.miniKey },
                                                       :attachments => { :only => Attachment.miniKey }
-                                                    }, :only => News.miniKey, methods: :title) }
+                                                    }, :only => News.miniKey, methods: [:title, :content]) }
 
         if (new_object.size == 0)
           codeAnswer 202

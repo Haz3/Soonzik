@@ -136,9 +136,10 @@ namespace SoonZik.ViewModels
             {
                 // New comment to add in the observable collection in order to refresh the list ...
                 var new_comment = new Comment();
-                new_comment.author_id = Singleton.Instance.Current_user.id;
+
+                new_comment.user = Singleton.Instance.Current_user;
                 new_comment.content = comment_content;
-                commentlist.Add(new_comment);
+                commentlist.Insert(0, new_comment);
                 // To delete text in comment bar
                 comment_content = "";
             }

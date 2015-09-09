@@ -12,9 +12,9 @@ namespace SoonZik.Models
         public string title { get; set; }
         public string content { get; set; }
         public User user { get; set; }
-        public List<Newstexts> newstexts { get; set; }
+        //public List<Newstexts> newstexts { get; set; }
         public List<Attachments> attachments { get; set; }
-        public DateTime date { get; set; }
-        //public List<Comment> comment_list { get; set; }
+        public DateTime created_at { get; set; }
+        //public DateTime date { get; set; }
     }
 }

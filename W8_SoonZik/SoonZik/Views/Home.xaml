@@ -70,7 +70,7 @@
                         </StackPanel>
                         <StackPanel Orientation="Horizontal">
                             <TextBlock>
-								<Run Text="Auteur:"/>
+								<Run x:Uid="author_txt" Text="Auteur:"/>
                             </TextBlock>
                             <TextBlock Text="{Binding user.username}" FontSize="16" Margin="20,0,0,0"/>
                         </StackPanel>
@@ -86,7 +86,7 @@
                     <StackPanel>
                         <StackPanel Orientation="Horizontal" x:Name="ID">
                             <TextBlock>
-								<Run Text="Title:"/>
+								<Run x:Uid="title_txt" Text="Title:"/>
                             </TextBlock>
                             <TextBlock Text="{Binding title}" Margin="20,0,0,0"/>
                         </StackPanel>
@@ -100,13 +100,30 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-        <ListView x:Name="Community" Background="#B0B0B0" HorizontalAlignment="Left" Height="800" Margin="1266,220,0,0" VerticalAlignment="Top" Width="500" ItemTemplate="{StaticResource GroupTemplate2}"  IsItemClickEnabled="True" IsSwipeEnabled="False" SelectionMode="None"/>
+
+        <ListView x:Name="Community" ItemsSource="{Binding tweet_list, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Background="#B0B0B0" HorizontalAlignment="Left" Height="800" Margin="1266,220,0,0" VerticalAlignment="Top" Width="500" IsItemClickEnabled="True" IsSwipeEnabled="False" SelectionMode="None">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{Binding user.username}" Margin="20,0,0,0"/>
+                            <TextBlock Text="{Binding msg}"/>
+                        </StackPanel>
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
         <TextBlock x:Name="news_txt" x:Uid="news_txt" HorizontalAlignment="Left" Margin="154,159,0,0" TextWrapping="Wrap" Text="Dernières news" VerticalAlignment="Top" Height="50" Width="500" FontSize="40" Foreground="#FF27AAE1"/>
         <TextBlock x:Name="music_txt" x:Uid="music_txt" Margin="710,159,0,0" TextWrapping="Wrap" Text="Musique" VerticalAlignment="Top" Height="50" Width="500" FontSize="40" Foreground="#FF27AAE1" HorizontalAlignment="Left"/>
         <TextBlock x:Name="community_txt" x:Uid="community_txt" HorizontalAlignment="Left" Margin="1266,159,0,0" TextWrapping="Wrap" Text="Communauté" VerticalAlignment="Top" Height="50" Width="500" FontSize="40" Foreground="#FF27AAE1"/>
         <TextBlock x:Name="hello_tb" HorizontalAlignment="Left" Margin="1375,85,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="55" Width="410" FontSize="25"/>
         <Button x:Name="profil_btn" x:Uid="profil_btn" Content="Profil" HorizontalAlignment="Left" Margin="1787,83,0,0" VerticalAlignment="Top" Width="126" Height="60" Foreground="White" Background="#FF27AAE1" Click="profil_btn_Click" FontSize="20"/>
         <Button x:Name="discotheque_btn" x:Uid="discotheque_btn" Content="Disco" HorizontalAlignment="Left" Margin="1787,156,0,0" VerticalAlignment="Top" Width="126" Height="60" Foreground="White" Background="#FF27AAE1" Click="disco_btn_Click" FontSize="20"/>
+        <Button x:Name="community_btn" x:Uid="community_btn" Content="Community" HorizontalAlignment="Left" Margin="1787,228,0,0" VerticalAlignment="Top" Width="126" Height="60" Foreground="White" Background="#FF27AAE1" Click="community_btn_Click" FontSize="20"/>
+        <TextBlock x:Name="feedback" HorizontalAlignment="Left" Margin="10,1045,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="25" Width="275" Foreground="#FF111111" FontSize="25">
+            <Hyperlink NavigateUri="http://api.lvh.me:3000/feedbacks/new" Foreground="#FF611EFF" >Feedback</Hyperlink>
+        </TextBlock>
 
     </Grid>
 </Page>

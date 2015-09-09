@@ -134,6 +134,7 @@
     <Compile Include="Models\Pack.cs" />
     <Compile Include="Models\Playlist.cs" />
     <Compile Include="Models\Search.cs" />
+    <Compile Include="Models\Tweet.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\Vote.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -167,6 +168,7 @@
     <Compile Include="ViewModels\PackViewModel.cs" />
     <Compile Include="ViewModels\SearchViewModel.cs" />
     <Compile Include="ViewModels\SignupViewModel.cs" />
+    <Compile Include="ViewModels\TweetViewModel.cs" />
     <Compile Include="ViewModels\UserEditViewModel.cs" />
     <Compile Include="ViewModels\UserViewModel.cs" />
     <Compile Include="Views\Album.xaml.cs">
@@ -228,6 +230,9 @@
     </Compile>
     <Compile Include="Views\Signup.xaml.cs">
       <DependentUpon>Signup.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Tweet.xaml.cs">
+      <DependentUpon>Tweet.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\User.xaml.cs">
       <DependentUpon>User.xaml</DependentUpon>
@@ -392,6 +397,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\Signup.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Tweet.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

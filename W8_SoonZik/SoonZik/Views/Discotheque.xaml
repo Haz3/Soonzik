@@ -11,12 +11,12 @@
     <Grid Background="#CCCCCC" Height="1080">
 
         <Grid Height="80" VerticalAlignment="Top" Width="1920" Background="#B0B0B0">
-            <TextBlock x:Name="disco_txt" HorizontalAlignment="Left" Margin="100,10,0,0" TextWrapping="Wrap" Text="Discotheque" VerticalAlignment="Top" Height="55" Width="Auto" FontSize="53.333" Foreground="Black"/>
+            <TextBlock x:Uid="discotheque_txt" x:Name="discotheque_txt" HorizontalAlignment="Left" Margin="100,10,0,0" TextWrapping="Wrap" Text="Discotheque" VerticalAlignment="Top" Height="70" Width="Auto" FontSize="53.333" Foreground="Black"/>
             <Button x:Name="back_btn" Content="Button" HorizontalAlignment="Left" Margin="30,20,0,0" VerticalAlignment="Top" Style="{StaticResource NavigationBackButtonNormalStyle}" RequestedTheme="Light" Click="Button_Click"/>
         </Grid>
 
 
-        <TextBlock x:Uid="musics_txt" x:Name="musics_txt" HorizontalAlignment="Left" Margin="92,130,0,0" TextWrapping="Wrap" Text="Musiques" VerticalAlignment="Top" Height="45" Width="170" Foreground="Black" FontSize="30"/>
+        <TextBlock x:Uid="music_list_txt" x:Name="musics_txt" HorizontalAlignment="Left" Margin="92,130,0,0" TextWrapping="Wrap" Text="Musiques" VerticalAlignment="Top" Height="45" Width="170" Foreground="Black" FontSize="30"/>
         <TextBlock x:Uid="albums_txt" x:Name="albums_txt" HorizontalAlignment="Left" Margin="636,130,0,0" TextWrapping="Wrap" Text="Albums" VerticalAlignment="Top" Height="45" Width="170" Foreground="Black" FontSize="30"/>
         <TextBlock x:Uid="packs_txt" x:Name="packs_txt" HorizontalAlignment="Left" Margin="1170,130,0,0" TextWrapping="Wrap" Text="Packs" VerticalAlignment="Top" Height="45" Width="170" Foreground="Black" FontSize="30"/>
 
@@ -57,8 +57,8 @@
                     <Grid Width="200" Height="200" Background="White">
                         <Image Stretch="Fill" Source="https://upload.wikimedia.org/wikipedia/commons/e/ec/Record-Album-02.jpg" VerticalAlignment="Top" HorizontalAlignment="Center"/>
                         <StackPanel Orientation="Vertical" VerticalAlignment="Bottom" Margin="0,0,0,10">
-                            <TextBlock Text="{Binding user.username}" FontSize="20" Margin="10,0,0,0" TextTrimming="WordEllipsis" TextWrapping="Wrap" HorizontalAlignment="Left" Foreground="Blue"/>
-                            <TextBlock Text="{Binding title}" FontSize="20" Margin="10,0,0,0" TextTrimming="WordEllipsis" TextWrapping="Wrap" HorizontalAlignment="Left" Foreground="Blue"/>
+                            <TextBlock Text="{Binding user.username}" FontSize="20" Margin="10,0,0,0" TextTrimming="WordEllipsis" TextWrapping="Wrap" HorizontalAlignment="Left" Foreground="White"/>
+                            <TextBlock Text="{Binding title}" FontSize="20" Margin="10,0,0,0" TextTrimming="WordEllipsis" TextWrapping="Wrap" HorizontalAlignment="Left" Foreground="White"/>
                         </StackPanel>
                     </Grid>
                 </DataTemplate>

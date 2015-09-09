@@ -118,6 +118,7 @@ Rails.application.routes.draw do
 
     get 'search' => 'searchs#search' #ok
     get 'suggest' => 'suggestions#show' #ok
+    get 'suggestv2' => 'suggestions#showTwo' #ok
 
     resources :tweets, only: [:index, :show] do #ok
       collection do

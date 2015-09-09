@@ -6,6 +6,50 @@
     </header>
     <body>
       <group id="Resources">
+        <trans-unit id="Resources\user_txt\Text" translate="yes" xml:space="preserve">
+          <source>Utilisateur</source>
+          <target state="new">Utilisateur</target>
+        </trans-unit>
+        <trans-unit id="Resources\discotheque_btn\Content" translate="yes" xml:space="preserve">
+          <source>Discothèque</source>
+          <target state="new">Discothèque</target>
+        </trans-unit>
+        <trans-unit id="Resources\discotheque_txt\Text" translate="yes" xml:space="preserve">
+          <source>Discothèque</source>
+          <target state="new">Discothèque</target>
+        </trans-unit>
+        <trans-unit id="Resources\friends_list_txt\Text" translate="yes" xml:space="preserve">
+          <source>Amis</source>
+          <target state="new">Amis</target>
+        </trans-unit>
+        <trans-unit id="Resources\remove_friend_btn\Content" translate="yes" xml:space="preserve">
+          <source>Ne plus etre ami</source>
+          <target state="new">Ne plus etre ami</target>
+        </trans-unit>
+        <trans-unit id="Resources\title_txt\Text" translate="yes" xml:space="preserve">
+          <source>Titre:</source>
+          <target state="new">Titre:</target>
+        </trans-unit>
+        <trans-unit id="Resources\tweets_list_txt\Text" translate="yes" xml:space="preserve">
+          <source>Liste des Tweets de la communauté</source>
+          <target state="new">Liste des Tweets de la communauté</target>
+        </trans-unit>
+        <trans-unit id="Resources\user_list_txt\Text" translate="yes" xml:space="preserve">
+          <source>Liste des utilisateurs</source>
+          <target state="new">Liste des utilisateurs</target>
+        </trans-unit>
+        <trans-unit id="Resources\user_profile_tb\Text" translate="yes" xml:space="preserve">
+          <source>Profil de l'utilisateur</source>
+          <target state="new">Profil de l'utilisateur</target>
+        </trans-unit>
+        <trans-unit id="Resources\comment_txt\Text" translate="yes" xml:space="preserve">
+          <source>Commentaire:</source>
+          <target state="new">Commentaire:</target>
+        </trans-unit>
+        <trans-unit id="Resources\author_txt\Text" translate="yes" xml:space="preserve">
+          <source>Auteur:</source>
+          <target state="new">Auteur:</target>
+        </trans-unit>
         <trans-unit id="Resources\cart_txt\Text" translate="yes" xml:space="preserve">
           <source>Panier</source>
           <target state="new">Panier</target>
