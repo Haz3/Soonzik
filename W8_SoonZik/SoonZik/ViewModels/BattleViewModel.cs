@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json.Linq;
+using SoonZik.Common;
 using SoonZik.Models;
 using SoonZik.Tools;
 using SoonZik.ViewModels.Command;
@@ -19,23 +20,26 @@ namespace SoonZik.ViewModels
         public ObservableCollection<Battle> battlelist { get; set; }
         public Battle selected_battle { get; set; }
 
-        public ICommand do_vote_one
-        {
-            get;
-            private set;
-        }
+        //public ICommand do_vote_one
+        //{
+        //    get;
+        //    private set;
+        //}
 
-        public ICommand do_vote_two
-        {
-            get;
-            private set;
-        }
+        //public ICommand do_vote_two
+        //{
+        //    get;
+        //    private set;
+        //}
 
         public BattleViewModel()
         {
             load_battle();
-            do_vote_one = new BattleCommand(this);
-            do_vote_two = new BattleCommand(this);
+            //do_vote_one = new BattleCommand(this);
+            //do_vote_two = new BattleCommand(this);
+
+            //do_vote_one = new RelayCommand(vote_a1);
+            //do_vote_two = new RelayCommand(vote_a2);
         }
 
         async void load_battle()
@@ -47,7 +51,11 @@ namespace SoonZik.ViewModels
             {
                 var battles = (List<Battle>)await Http_get.get_object(new List<Battle>(), "battles");
                 foreach (var item in battles)
+                {
+                    item.do_vote_one = new RelayCommand(vote_a1);
+                    item.do_vote_two = new RelayCommand(vote_a2);
                     battlelist.Add(item);
+                }
             }
             catch (Exception e)
             {
@@ -56,6 +64,16 @@ namespace SoonZik.ViewModels
 
             if (exception != null)
                 await new MessageDialog(exception.Message, "Battle error").ShowAsync();
+        }
+
+        public void vote_a1()
+        {
+            vote(selected_battle.artist_one.id.ToString());
+        }
+
+        public void vote_a2()
+        {
+            vote(selected_battle.artist_two.id.ToString());
         }
 
         public async void vote(string id)
@@ -75,7 +93,7 @@ namespace SoonZik.ViewModels
 
                 // Debug. 200 = success
                 if (json.ToString() == "200" || json.ToString() == "201")
-                    await new MessageDialog("Vote OK").ShowAsync();
+                    await new MessageDialog("Vote for " + id + " OK").ShowAsync();
                 else
                     await new MessageDialog("Vote KO").ShowAsync();
             }

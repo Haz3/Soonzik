@@ -16,6 +16,9 @@ namespace SoonZik.Models
         public User artist_two { get; set; }
         //public float vote_artist1 { get; set; }
         //public float vote_artist2 { get; set; }
+
+        public ICommand do_vote_one { get; set; }
+        public ICommand do_vote_two { get; set; }
     }
 
     public class Votes
