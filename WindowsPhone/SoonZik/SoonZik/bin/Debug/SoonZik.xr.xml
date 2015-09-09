@@ -39,6 +39,7 @@
     <RootPropertyPathName Name="TextComment" />
     <RootPropertyPathName Name="ListCommAlbum" />
     <RootPropertyPathName Name="ListMusics" />
+    <RootPropertyPathName Name="AddToCart" />
     <RootPropertyPathName Name="TheAlbum" />
     <RootPropertyPathName Name="ArtistTwo" />
     <RootPropertyPathName Name="email" />
@@ -58,8 +59,7 @@
     <RootPropertyPathName Name="artist_two" />
     <RootPropertyPathName Name="image" />
     <RootPropertyPathName Name="artist_one" />
-    <RootPropertyPathName Name="ListPack" />
-    <RootPropertyPathName Name="PackTappedCommand" />
+    <RootPropertyPathName Name="count" />
     <RootPropertyPathName Name="ListAlbum" />
     <RootPropertyPathName Name="AlbumTappedCommand" />
     <RootPropertyPathName Name="ListMusique" />
@@ -131,10 +131,13 @@
     <RootPropertyPathName Name="descriptions" />
     <RootPropertyPathName Name="CompleteListPack" />
     <RootPropertyPathName Name="ThePack" />
+    <RootPropertyPathName Name="PackTappedCommand" />
     <RootPropertyPathName Name="SelectedIndex" />
+    <RootPropertyPathName Name="CreatePlaylist" />
     <RootPropertyPathName Name="ListPlaylist" />
     <RootPropertyPathName Name="SelectedPlaylist" />
     <RootPropertyPathName Name="PlaylistTappedCommand" />
+    <RootPropertyPathName Name="ListPack" />
     <RootPropertyPathName Name="FollowText" />
     <RootPropertyPathName Name="FollowCommand" />
     <RootPropertyPathName Name="NbrFollowers" />

@@ -353,17 +353,12 @@ namespace SoonZik.Controls
 
         private void GoToAchat()
         {
-            MyGrid.Children.Clear();
-            CloseMenu();
+            SetChildren(new CartsView());
         }
 
         private void GoToConnexionPage()
         {
             _navigationService.Navigate(typeof (Connexion));
-        }
-
-        private void PlaylistAdd_OnTapped(object sender, TappedRoutedEventArgs e)
-        {
         }
 
         #endregion

@@ -18,7 +18,7 @@
     <Grid Background="#CCCCCC" Height="1080">
 
         <Grid Height="80" VerticalAlignment="Top" Width="1920" Background="#B0B0B0">
-            <TextBlock x:Name="community_txt" HorizontalAlignment="Left" Margin="100,10,0,0" TextWrapping="Wrap" Text="Communaute" VerticalAlignment="Top" Height="55" Width="Auto" FontSize="53.333" Foreground="Black"/>
+            <TextBlock x:Uid="community_txt" x:Name="community_txt" HorizontalAlignment="Left" Margin="100,10,0,0" TextWrapping="Wrap" Text="Communaute" VerticalAlignment="Top" Height="55" Width="Auto" FontSize="53.333" Foreground="Black"/>
             <Button x:Name="back_btn" Content="Button" HorizontalAlignment="Left" Margin="30,20,0,0" VerticalAlignment="Top" Style="{StaticResource NavigationBackButtonNormalStyle}" RequestedTheme="Light" Click="Button_Click"/>
         </Grid>
 

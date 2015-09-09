@@ -260,6 +260,7 @@
     <Content Include="Resources\Icones\share.png" />
     <Content Include="Resources\Icones\shuffle-0_icon.png" />
     <Content Include="Resources\Icones\shuffle.png" />
+    <Content Include="Resources\Icones\trash.png" />
     <Content Include="Resources\Icones\twitter.png" />
     <Content Include="Resources\Icones\user_pushpin.png" />
     <Content Include="Resources\iphone5_background.jpg" />

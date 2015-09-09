@@ -35,6 +35,7 @@ namespace SoonZik.ViewModel
             MoreOptionOnTapped = new RelayCommand(MoreOptionOnTappedExecute);
             SelectionCommand = new RelayCommand(SelectionExecute);
             SendComment = new RelayCommand(SendCommentExecute);
+            AddToCart = new RelayCommand(AddToCartExecute);
             //ImageAlbum = TheAlbum.image == String.Empty ? new Uri("ms-appx:///Resources/Icones/disc.png", UriKind.Absolute).ToString() : TheAlbum.image;
         }
 
@@ -109,6 +110,10 @@ namespace SoonZik.ViewModel
         public ICommand SelectionCommand { get; private set; }
         public ICommand MoreOptionOnTapped { get; set; }
         public ICommand SendComment { get; private set; }
+        public ICommand AddToCart { get; set; }
+
+        private string _cryptographic { get; set; }
+
         private bool _moreOption;
 
         private string _textComment;
@@ -134,6 +139,7 @@ namespace SoonZik.ViewModel
                 RaisePropertyChanged("ListCommAlbum");
             }
         }
+
 
         private string _crypto;
 
@@ -204,6 +210,35 @@ namespace SoonZik.ViewModel
                 _navigationService.Navigate(new PlayerControl().GetType());
             else
                 _moreOption = false;
+        }
+
+        private void AddToCartExecute()
+        {
+            var request = new HttpRequestGet();
+            var post = new HttpRequestPost();
+            _cryptographic = "";
+            var userKey2 = request.GetUserKey(Singleton.Instance().CurrentUser.id.ToString());
+            userKey2.ContinueWith(delegate(Task<object> task2)
+            {
+                var key2 = task2.Result as string;
+                if (key2 != null)
+                {
+                    var stringEncrypt = KeyHelpers.GetUserKeyFromResponse(key2);
+                    _cryptographic = EncriptSha256.EncriptStringToSha256(Singleton.Instance().CurrentUser.salt + stringEncrypt);
+                }
+                var res = post.SaveCart(null, TheAlbum, _cryptographic, Singleton.Instance().CurrentUser);
+                res.ContinueWith(delegate(Task<string> tmp2)
+                {
+                    var res2 = tmp2.Result;
+                    if (res2 != null)
+                    {
+                        CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+                        {
+                            new MessageDialog("Article ajoute au panier").ShowAsync();
+                        });
+                    }
+                });
+            });
         }
 
         public void Charge()

@@ -27,5 +27,12 @@ namespace SoonZik.Views
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
         }
+
+        private void MoreOption_OnTapped(object sender, TappedRoutedEventArgs e)
+        {
+            var vm = DataContext as PlaylistViewModel;
+            if (vm != null)
+                vm.MoreOptionCommand.Execute(null);
+        }
     }
 }

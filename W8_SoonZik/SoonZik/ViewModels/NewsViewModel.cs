@@ -52,16 +52,16 @@ namespace SoonZik.ViewModels
             }
         }
 
-        private string _content;
-        public string content
-        {
-            get { return _content; }
-            set
-            {
-                _content = value;
-                OnPropertyChanged("content");
-            }
-        }
+        //private string _content;
+        //public string content
+        //{
+        //    get { return _content; }
+        //    set
+        //    {
+        //        _content = value;
+        //        OnPropertyChanged("content");
+        //    }
+        //}
 
         public ICommand do_send_comment
         {
@@ -115,31 +115,35 @@ namespace SoonZik.ViewModels
             try
             {
                 // Load the news
-                news = await Http_get.get_news_by_id(id);
+                //news = await Http_get.get_news_by_id(id);
 
-                //news = await Http_get.get_news_by_id_and_language(id, "FR");
-
-                //news = await Http_get.get_news_by_id_and_language(id, "EN");
-                // Check language
-                if (news.newstexts.Any())
-                {
-                    if (Windows.System.UserProfile.GlobalizationPreferences.Languages[0] == "fr-FR")
-                        content = news.newstexts[0].content;
-                    else
-                    {
-                        if ((news.newstexts).Count == 2)
-                            content = news.newstexts[1].content;
-                        else
-                            content = "No content available.";
-                    }
-                }
+                if (Windows.System.UserProfile.GlobalizationPreferences.Languages[0] == "fr-FR")
+                    news = await Http_get.get_news_by_id_and_language(id, "FR");
                 else
-                {
-                    if (Windows.System.UserProfile.GlobalizationPreferences.Languages[0] == "fr-FR")
-                        content = "Pas de contenu disponible.";
-                    else
-                        content = "No content available.";
-                }
+                    news = await Http_get.get_news_by_id_and_language(id, "EN");
+
+                // Check language
+                //if (news.newstexts.Any())
+                //{
+                //    if (Windows.System.UserProfile.GlobalizationPreferences.Languages[0] == "fr-FR")
+                //        content = news.newstexts[0].content;
+                //    else
+                //    {
+                //        if ((news.newstexts).Count == 2)
+                //            content = news.newstexts[1].content;
+                //        else
+                //            content = "No content available.";
+                //    }
+                //}
+                //else
+                //{
+                //    if (Windows.System.UserProfile.GlobalizationPreferences.Languages[0] == "fr-FR")
+                //        content = "Pas de contenu disponible.";
+                //    else
+                //        content = "No content available.";
+                //}
+
+
 
                 var comment_vm = await CommentViewModel.load_comments("/news/" + news.id.ToString());
                 commentlist = comment_vm;
@@ -165,9 +169,9 @@ namespace SoonZik.ViewModels
                 List<News> news;
 
                 if (Windows.System.UserProfile.GlobalizationPreferences.Languages[0] == "fr-FR")
-                 news = (List<News>)await Http_get.get_object(new List<News>(), "news?language=FR");
+                    news = (List<News>)await Http_get.get_object(new List<News>(), "news?language=FR");
                 else
-                 news = (List<News>)await Http_get.get_object(new List<News>(), "news?language=EN");
+                    news = (List<News>)await Http_get.get_object(new List<News>(), "news?language=EN");
 
                 foreach (var item in news)
                     newslist.Add(item);

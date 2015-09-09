@@ -1,8 +1,17 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using Windows.ApplicationModel.Core;
+using Windows.UI.Core;
+using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
+using SoonZik.Helpers;
+using SoonZik.HttpRequest;
 using SoonZik.HttpRequest.Poco;
+using SoonZik.Utils;
+using SoonZik.ViewModel;
 using SoonZik.Views;
 
 // Pour en savoir plus sur le modèle d'élément Contrôle utilisateur, consultez la page http://go.microsoft.com/fwlink/?LinkId=234236
@@ -26,6 +35,7 @@ namespace SoonZik.Controls
 
         #endregion
 
+        #region Slider
         private void AssociationSlider_OnManipulationDelta(object sender, RangeBaseValueChangedEventArgs e)
         {
             if (e.NewValue < 10)
@@ -61,9 +71,10 @@ namespace SoonZik.Controls
                 SoonZikPriceCalc(ArtistSlider.Value);
             }
         }
+        #endregion
 
         #region Attribute
-
+        private string _cryptographic { get; set; }
         public static Pack SelecetdPack { get; set; }
         private bool AssoBool { get; set; }
         private bool SoonBool { get; set; }
@@ -75,44 +86,44 @@ namespace SoonZik.Controls
 
         private void InitializePrice()
         {
-            if (SelecetdPack.price != null)
-                PriceTextBox.Text = SelecetdPack.price;
-            else
-            {
-                SelecetdPack.price = "10";
-                PriceTextBox.Text = SelecetdPack.price;
-            }
+            //if (SelecetdPack.averagePrice != 0)
+            PriceTextBox.Text = SelecetdPack.averagePrice;
+            //else
+            //{
+            //    SelecetdPack.averagePrice = "10";
+            //    PriceTextBox.Text = SelecetdPack.price;
+            //}
 
 
-            ArtistSlider.Maximum = Convert.ToDouble(SelecetdPack.price);
-            AssociationSlider.Maximum = Convert.ToDouble(SelecetdPack.price);
-            SoonZikSlider.Maximum = Convert.ToDouble(SelecetdPack.price);
+            ArtistSlider.Maximum = Convert.ToDouble(SelecetdPack.averagePrice);
+            AssociationSlider.Maximum = Convert.ToDouble(SelecetdPack.averagePrice);
+            SoonZikSlider.Maximum = Convert.ToDouble(SelecetdPack.averagePrice);
 
-            ArtistePriceCalc(Convert.ToDouble(SelecetdPack.price));
-            AssociationPriceCalc(Convert.ToDouble(SelecetdPack.price));
-            SoonZikPriceCalc(Convert.ToDouble(SelecetdPack.price));
+            ArtistePriceCalc(Convert.ToDouble(SelecetdPack.averagePrice));
+            AssociationPriceCalc(Convert.ToDouble(SelecetdPack.averagePrice));
+            SoonZikPriceCalc(Convert.ToDouble(SelecetdPack.averagePrice));
         }
 
         private void ArtistePriceCalc(double price)
         {
-            ArtistSlider.Value = (price*70)/100;
+            ArtistSlider.Value = (price * 70) / 100;
         }
 
         private void AssociationPriceCalc(double price)
         {
-            AssociationSlider.Value = (price*20)/100;
+            AssociationSlider.Value = (price * 20) / 100;
         }
 
         private void SoonZikPriceCalc(double price)
         {
-            SoonZikSlider.Value = (price*10)/100;
+            SoonZikSlider.Value = (price * 10) / 100;
         }
 
         #endregion
 
         private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
         {
-            GlobalMenuControl.SetChildren(new CartsView());
+            new MessageDialog("En cours de dev").ShowAsync();
         }
     }
 }

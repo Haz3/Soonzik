@@ -200,6 +200,9 @@
     <AppxPackagedFile Include="C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\Resources\Icones\shuffle.png">
       <PackagePath>Resources\Icones\shuffle.png</PackagePath>
     </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\Resources\Icones\trash.png">
+      <PackagePath>Resources\Icones\trash.png</PackagePath>
+    </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\Resources\Icones\twitter.png">
       <PackagePath>Resources\Icones\twitter.png</PackagePath>
     </AppxPackagedFile>
