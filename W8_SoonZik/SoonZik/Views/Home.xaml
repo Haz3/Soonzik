@@ -70,7 +70,7 @@
                         </StackPanel>
                         <StackPanel Orientation="Horizontal">
                             <TextBlock>
-								<Run Text="Auteur:"/>
+								<Run x:Uid="author_txt" Text="Auteur:"/>
                             </TextBlock>
                             <TextBlock Text="{Binding user.username}" FontSize="16" Margin="20,0,0,0"/>
                         </StackPanel>
@@ -86,7 +86,7 @@
                     <StackPanel>
                         <StackPanel Orientation="Horizontal" x:Name="ID">
                             <TextBlock>
-								<Run Text="Title:"/>
+								<Run x:Uid="title_txt" Text="Title:"/>
                             </TextBlock>
                             <TextBlock Text="{Binding title}" Margin="20,0,0,0"/>
                         </StackPanel>

@@ -37,10 +37,8 @@
          
             <TextBlock x:Name="news_author" HorizontalAlignment="Left" Margin="20,5,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Text="{Binding news.user.username, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Foreground="Black" Height="25" Width="Auto" FontSize="20" Grid.ColumnSpan="2"/>
             
-            <TextBlock x:Name="news_content" Grid.Column="1" HorizontalAlignment="Left" Margin="60,55,-80,0" Grid.Row="2" TextWrapping="Wrap" Text="{Binding Path=content, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Height="165" Width="470" Foreground="Black" FontSize="18"/>
-          
-            <!--<TextBlock x:Name="news_content_en" Visibility="{Binding content_en_visibility}" Grid.Column="1" HorizontalAlignment="Left" Margin="60,55,-80,0" Grid.Row="2" TextWrapping="Wrap" Text="{Binding news.newstexts[1].content, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Height="165" Width="470" Foreground="Black" FontSize="18"/>-->
-          
+            <TextBlock x:Name="news_content" Grid.Column="1" HorizontalAlignment="Left" Margin="60,55,-80,0" Grid.Row="2" TextWrapping="Wrap" Text="{Binding news.content, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Height="165" Width="470" Foreground="Black" FontSize="18"/>
+                    
             <TextBlock x:Name="news_id_txt" Grid.Column="1" HorizontalAlignment="Left" Visibility="Collapsed" Margin="760,10,-395,0" TextWrapping="Wrap" Text="{Binding news.id, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="85" Height="46" FontSize="30"/>
          
             <TextBlock x:Name="news_date" HorizontalAlignment="Left" Margin="20,10,0,0" Grid.Row="2" TextWrapping="Wrap" VerticalAlignment="Top" Text="{Binding news.created_at, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Foreground="Black" Height="25" Width="Auto" FontSize="20"/>

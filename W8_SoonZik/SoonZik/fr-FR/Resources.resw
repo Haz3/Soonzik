@@ -369,4 +369,31 @@
   <data name="comment_txt.Text" xml:space="preserve">
     <value>Commentaire:</value>
   </data>
+  <data name="discotheque_btn.Content" xml:space="preserve">
+    <value>Discothèque</value>
+  </data>
+  <data name="discotheque_txt.Text" xml:space="preserve">
+    <value>Discothèque</value>
+  </data>
+  <data name="friends_list_txt.Text" xml:space="preserve">
+    <value>Amis</value>
+  </data>
+  <data name="remove_friend_btn.Content" xml:space="preserve">
+    <value>Ne plus etre ami</value>
+  </data>
+  <data name="title_txt.Text" xml:space="preserve">
+    <value>Titre:</value>
+  </data>
+  <data name="tweets_list_txt.Text" xml:space="preserve">
+    <value>Liste des Tweets de la communauté</value>
+  </data>
+  <data name="user_list_txt.Text" xml:space="preserve">
+    <value>Liste des utilisateurs</value>
+  </data>
+  <data name="user_profile_tb.Text" xml:space="preserve">
+    <value>Profil de l'utilisateur</value>
+  </data>
+  <data name="user_txt.Text" xml:space="preserve">
+    <value>Utilisateur</value>
+  </data>
 </root>
