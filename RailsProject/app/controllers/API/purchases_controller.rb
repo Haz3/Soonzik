@@ -190,7 +190,6 @@ module API
           defineHttp :forbidden
         end
       rescue
-        puts $!, $@
         objectToDelete.each do |obj|
           obj.destroy
         end

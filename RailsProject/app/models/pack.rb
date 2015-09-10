@@ -22,7 +22,7 @@ class Pack < ActiveRecord::Base
 
   has_many :purchased_packs
 
-  validates :title, :albums, presence: true
+  validates :title, :begin_date, :end_date, :minimal_price, presence: true
 
   # The strong parameters to save or update object
   def self.pack_params(parameters)
@@ -47,6 +47,7 @@ class Pack < ActiveRecord::Base
     end
 
     average = average / pp.size if pp.size > 0
+    average = self.minimal_price if pp.size == 0
     return average
   end
 end

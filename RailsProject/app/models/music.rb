@@ -39,7 +39,6 @@ class Music < ActiveRecord::Base
   validates :user, :title, :duration, :price, :file, presence: true
   validates :title, length: { minimum: 4, maximum: 30 }
   validates :price, :duration, numericality: true
-  validates :file, uniqueness: true
   validates_inclusion_of :limited, :in => [true, false]
 
   # The strong parameters to save or update object
