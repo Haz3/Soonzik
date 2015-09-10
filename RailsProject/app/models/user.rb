@@ -382,6 +382,7 @@ class User < ActiveRecord::Base
     self.regenerateKey() if defined?(self.password) && self.password != nil
     self.birthday = Time.new(1900,1,1).to_s(:db) if (self.birthday == nil)
     self.language = "EN" if (self.language == nil)
+    self.skip_confirmation!
   end
 
   # Private function to create a random key of 48 characters
