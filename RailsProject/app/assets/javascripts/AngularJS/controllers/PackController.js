@@ -1,4 +1,4 @@
-SoonzikApp.controller('PacksCtrl', ['$scope', '$routeParams', 'SecureAuth', 'HTTPService', 'NotificationService', function ($scope, $routeParams, SecureAuth, HTTPService, NotificationService) {
+SoonzikApp.controller('PacksCtrl', ['$scope', '$routeParams', 'SecureAuth', 'HTTPService', 'NotificationService', '$rootScope','$timeout',  function ($scope, $routeParams, SecureAuth, HTTPService, NotificationService, $rootScope, $timeout) {
 
 	$scope.loading = true;
 	$scope.saveCart = [];
@@ -29,15 +29,19 @@ SoonzikApp.controller('PacksCtrl', ['$scope', '$routeParams', 'SecureAuth', 'HTT
 		var id = $routeParams.id;
 
 		$scope.percentages = [
-			{ value: 65, label: "Artiste" },
+			{ value: 65, label: "Artist" },
 			{ value: 20, label: "Association" },
 			{ value: 15, label: "website" }
 		];
+
+		
 
 		HTTPService.showPack(id).then(function(response) {
 
 			$scope.thisPack = response.data.content;
 			$scope.end_date = $scope.thisPack.end_date;
+			timeLeft();
+
 
 		}, function (error) {
 			console.log($rootScope.labels.FILE_PACK_LOAD_ONE_PACK_ERROR_MESSAGE);
@@ -56,18 +60,28 @@ SoonzikApp.controller('PacksCtrl', ['$scope', '$routeParams', 'SecureAuth', 'HTT
 		$scope.websitePercentage = (($scope.priceMini * 15) / 100);
 	}
 
-	$scope.timeLeft = function() {
-		var now = new Date();
-		var end = new Date($scope.end_date);
+	var timeLeft = function() {
+		
+		var timer = setInterval(function() {
+			var now = new Date();
+			var end = new Date($scope.end_date);
+		
+			if (end > now) {
+				var countDown = end - now;
+			} else {
+				var left = "Finish !";
+			}
 
-		console.log(now);
-		console.log(end);
+       		var date = new Date(countDown);
+       		var hours = date.getHours();
+       		var minutes = "0" + date.getMinutes();
+       		var seconds = "0" + date.getSeconds();
+			var formattedTime = hours + 'h ' + minutes.substr(-2) + 'mn ' + seconds.substr(-2) + 's';
 
-		if (end > now) {
-			$scope.timeLeftPack = "Terminé";
-		} else {
-			$scope.timeLeftPack = end - now
-		}
+			$scope.thisPack.timeLeftPack = formattedTime;
+			$scope.$apply();
+
+    	}, 1000);
 	}
 
 	$scope.addToCart = function() {

@@ -347,7 +347,7 @@ var labels = {
    DISPLAY_PACK_TIMELEFT: "Time left",
    DISPLAY_PACK_AVERAGE: "Average",
    DISPLAY_PACK_YEAR_ALBUM: "Release",
-   DISPLAU_PACK_ARTIST_NAME: "Artist",
+   DISPLAY_PACK_ARTIST_NAME: "Artist",
    DISPLAY_PACK_DEV_NAME: "Developper",
    DISPLAY_PACK_ASSOCIATION_NAME: "Association",
    DISPLAY_PACK_BUY_PACK: "Buy this pack",

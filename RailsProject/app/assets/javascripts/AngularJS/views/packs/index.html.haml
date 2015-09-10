@@ -2,7 +2,7 @@
   %loading{ "ng-if" => "loading == true" }
   .row{ "ng-if" => "loading == false", "ng-init" => "initFoundation()"}
     %h3.subheader
-      {{ DISPLAY_PACK_LABEL }}
+      {{ labels.DISPLAY_PACK_LABEL }}
     .ul.large-block-grid-4{"ng-show" => "Pack"}
       %li{ "ng-repeat" => "packs in pack"}
         .panel
@@ -11,7 +11,6 @@
           %a{:href=>"http://lvh.me:3000/packs/" + "{{packs.id}}" }
             %img{"src" => "/assets/pack1.jpg"}
           .divider
-          {{ DISPLAY_PACK_TIMELEFT }} :
+          {{ labels.DISPLAY_PACK_TIMELEFT }} :
           %br
-          {{ DISPLAY_PACK_AVERAGE }} : 
-        
+          {{ labels.DISPLAY_PACK_AVERAGE }} : 

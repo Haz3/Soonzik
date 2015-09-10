@@ -331,7 +331,7 @@ var labels = {
 	DISPLAY_PACK_TIMELEFT: "Temps Restant",
 	DISPLAY_PACK_AVERAGE: "Moyenne",
    	DISPLAY_PACK_YEAR_ALBUM: "Date de sortie",
-  	DISPLAU_PACK_ARTIST_NAME: "Artiste",
+  	DISPLAY_PACK_ARTIST_NAME: "Artiste",
    	DISPLAY_PACK_DEV_NAME: "Developpeur",
    	DISPLAY_PACK_ASSOCIATION_NAME: "Association",
    	DISPLAY_PACK_BUY_PACK: "Acheter ce pack",
