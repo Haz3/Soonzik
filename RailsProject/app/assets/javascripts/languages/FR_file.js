@@ -296,8 +296,8 @@ var labels = {
 	FILE_DISCOTHEQUE_GET_MUSICS_ERROR_MESSAGE: "Une erreur s'est produite au chargement de vos musiques",
 
     // Cart Controller
-    DISPLAY_CART_INDEX: "Panier"
-    DISPLAY_CART_BUY: "Ajouter au panier"
+    DISPLAY_CART_INDEX: "Panier",
+    DISPLAY_CART_BUY: "Ajouter au panier",
 
     FILE_CART_LOAD_ERROR_MESSAGE: "Une erreur s'est produite lors de la recupération du panier",
     FILE_CART_DELETE_ITEM_ERROR_MESSAGE: "Une error s'est produite lors de la destruction du panier",

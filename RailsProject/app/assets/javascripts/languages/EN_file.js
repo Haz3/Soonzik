@@ -312,8 +312,8 @@ var labels = {
 
 
     // Cart Controller
-    DISPLAY_CART_INDEX: "Cart"
-    DISPLAY_CART_BUY: "Buy your cart"
+    DISPLAY_CART_INDEX: "Cart",
+    DISPLAY_CART_BUY: "Buy your cart",
 
     FILE_CART_LOAD_ERROR_MESSAGE: "An error occured while getting the cart",
     FILE_CART_DELETE_ITEM_ERROR_MESSAGE: "An error occured while destroying an item in cart",
