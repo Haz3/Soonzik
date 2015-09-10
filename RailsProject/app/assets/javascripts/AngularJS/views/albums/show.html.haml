@@ -46,7 +46,7 @@
 											.button.tiny{ "ng-click" => "setTooltip(false)" } {{ labels.DISPLAY_ALBUM_CLOSE_LABEL }}
 
 			.button.expand.radius.success
-				%a{"ng-click" => "addAlbumToCart()"} Ajouter au Panier
+				%a{"ng-click" => "addAlbumToCart()"} {{ labels.DISPLAY_ALBUM_ADD_TO_CART }}
 			.commentaries
 				%textarea{ "ng-model" => "comment.value" }
 				.text-right

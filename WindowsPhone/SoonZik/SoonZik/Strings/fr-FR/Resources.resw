@@ -321,4 +321,7 @@
   <data name="DelFromPlaylist.Content" xml:space="preserve">
     <value>Supprimer de la playlist</value>
   </data>
+  <data name="Description.PlaceholderText" xml:space="preserve">
+    <value>Description</value>
+  </data>
 </root>

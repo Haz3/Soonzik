@@ -207,7 +207,11 @@ namespace SoonZik.ViewModel
         private void ItemClickCommandExecute()
         {
             if (!_moreOption)
-                _navigationService.Navigate(new PlayerControl().GetType());
+            {
+                Singleton.Instance().SelectedMusicSingleton = SelectedMusic;
+                GlobalMenuControl.SetChildren(new PlayerControl());
+            }
+            //_navigationService.Navigate(new PlayerControl().GetType());
             else
                 _moreOption = false;
         }
@@ -224,7 +228,8 @@ namespace SoonZik.ViewModel
                 if (key2 != null)
                 {
                     var stringEncrypt = KeyHelpers.GetUserKeyFromResponse(key2);
-                    _cryptographic = EncriptSha256.EncriptStringToSha256(Singleton.Instance().CurrentUser.salt + stringEncrypt);
+                    _cryptographic =
+                        EncriptSha256.EncriptStringToSha256(Singleton.Instance().CurrentUser.salt + stringEncrypt);
                 }
                 var res = post.SaveCart(null, TheAlbum, _cryptographic, Singleton.Instance().CurrentUser);
                 res.ContinueWith(delegate(Task<string> tmp2)
@@ -232,10 +237,8 @@ namespace SoonZik.ViewModel
                     var res2 = tmp2.Result;
                     if (res2 != null)
                     {
-                        CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
-                        {
-                            new MessageDialog("Article ajoute au panier").ShowAsync();
-                        });
+                        CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
+                            () => { new MessageDialog("Article ajoute au panier").ShowAsync(); });
                     }
                 });
             });

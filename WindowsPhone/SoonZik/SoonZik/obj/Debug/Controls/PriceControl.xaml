@@ -29,7 +29,8 @@
         <TextBlock Grid.Row="1" VerticalAlignment="Bottom" x:Uid="SoonZik" Text="" FontSize="25" Margin="0,0,0,150" />
         <Slider x:Name="SoonZikSlider" Grid.Row="1" VerticalAlignment="Bottom" Margin="0,0,0,100" Width="300" />
 
-        <Button x:ConnectionId='2' x:Uid="Buy" Content="" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center"                           />
+        <Button x:ConnectionId='2' x:Uid="Buy" Content="" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center"
+                                           />
     </Grid>
 
 </UserControl>

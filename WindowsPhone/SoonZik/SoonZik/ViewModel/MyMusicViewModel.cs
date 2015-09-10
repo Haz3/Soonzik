@@ -16,7 +16,6 @@ using SoonZik.HttpRequest;
 using SoonZik.HttpRequest.Poco;
 using SoonZik.Utils;
 using SoonZik.Views;
-using Playlist = SoonZik.HttpRequest.Poco.Playlist;
 
 namespace SoonZik.ViewModel
 {
@@ -42,6 +41,7 @@ namespace SoonZik.ViewModel
 
             LoadContent();
         }
+
         #endregion
 
         #region Method
@@ -82,7 +82,8 @@ namespace SoonZik.ViewModel
                         }
                     });
 
-                    var listPlaylist = request.Find(new List<Playlist>(), "playlists", Singleton.Instance().CurrentUser.id.ToString());
+                    var listPlaylist = request.Find(new List<Playlist>(), "playlists",
+                        Singleton.Instance().CurrentUser.id.ToString());
                     listPlaylist.ContinueWith(delegate(Task<object> tmp)
                     {
                         var res = tmp.Result as List<Playlist>;
@@ -142,15 +143,19 @@ namespace SoonZik.ViewModel
                         if (key != null)
                         {
                             var stringEncrypt = KeyHelpers.GetUserKeyFromResponse(key);
-                            _crypto = EncriptSha256.EncriptStringToSha256(Singleton.Instance().CurrentUser.salt + stringEncrypt);
+                            _crypto =
+                                EncriptSha256.EncriptStringToSha256(Singleton.Instance().CurrentUser.salt +
+                                                                    stringEncrypt);
                         }
-                        var test = post.UpdatePlaylist(SelectedPlaylist, MusicForPlaylist, _crypto, Singleton.Instance().CurrentUser);
+                        var test = post.UpdatePlaylist(SelectedPlaylist, MusicForPlaylist, _crypto,
+                            Singleton.Instance().CurrentUser);
                         test.ContinueWith(delegate(Task<string> tmp)
                         {
                             var res = tmp.Result;
                             if (res != null)
                             {
-                                CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, RefreshPlaylist);
+                                CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
+                                    RefreshPlaylist);
                             }
                         });
                     });
@@ -171,7 +176,8 @@ namespace SoonZik.ViewModel
             ListPlaylist = new ObservableCollection<Playlist>();
             MusicForPlaylist = null;
             var request = new HttpRequestGet();
-            var listPlaylist = request.Find(new List<Playlist>(), "playlists", Singleton.Instance().CurrentUser.id.ToString());
+            var listPlaylist = request.Find(new List<Playlist>(), "playlists",
+                Singleton.Instance().CurrentUser.id.ToString());
             listPlaylist.ContinueWith(delegate(Task<object> tmp)
             {
                 var res = tmp.Result as List<Playlist>;
@@ -194,7 +200,7 @@ namespace SoonZik.ViewModel
             {
                 name = "MyPlaylist" + _id,
                 user = Singleton.Instance().CurrentUser,
-                musics = new List<Music> { MusicForPlaylist }
+                musics = new List<Music> {MusicForPlaylist}
             };
             if (MusicForPlaylist != null)
             {
@@ -209,7 +215,9 @@ namespace SoonZik.ViewModel
                         if (key != null)
                         {
                             var stringEncrypt = KeyHelpers.GetUserKeyFromResponse(key);
-                            _crypto = EncriptSha256.EncriptStringToSha256(Singleton.Instance().CurrentUser.salt + stringEncrypt);
+                            _crypto =
+                                EncriptSha256.EncriptStringToSha256(Singleton.Instance().CurrentUser.salt +
+                                                                    stringEncrypt);
                         }
                         var test = post.SavePlaylist(playlist, _crypto, Singleton.Instance().CurrentUser);
                         test.ContinueWith(delegate(Task<string> tmp)
@@ -217,37 +225,45 @@ namespace SoonZik.ViewModel
                             var res = tmp.Result;
                             if (res != null)
                             {
-                                CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
-                                {
-                                    var stringJson = JObject.Parse(res).SelectToken("content").ToString();
-                                    var playList = (Playlist)JsonConvert.DeserializeObject(stringJson, new Playlist().GetType());
-                                    try
+                                CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
+                                    () =>
                                     {
-                                        var userKey2 = request.GetUserKey(Singleton.Instance().CurrentUser.id.ToString());
-                                        userKey2.ContinueWith(delegate(Task<object> task2)
+                                        var stringJson = JObject.Parse(res).SelectToken("content").ToString();
+                                        var playList =
+                                            (Playlist)
+                                                JsonConvert.DeserializeObject(stringJson, new Playlist().GetType());
+                                        try
                                         {
-                                            var key2 = task2.Result as string;
-                                            if (key2 != null)
+                                            var userKey2 =
+                                                request.GetUserKey(Singleton.Instance().CurrentUser.id.ToString());
+                                            userKey2.ContinueWith(delegate(Task<object> task2)
                                             {
-                                                var stringEncrypt = KeyHelpers.GetUserKeyFromResponse(key2);
-                                                _crypto = EncriptSha256.EncriptStringToSha256(Singleton.Instance().CurrentUser.salt + stringEncrypt);
-                                            }
-                                            var up = post.UpdatePlaylist(playList, MusicForPlaylist, _crypto, Singleton.Instance().CurrentUser);
-                                            up.ContinueWith(delegate(Task<string> tmp2)
-                                            {
-                                                var res2 = tmp2.Result;
-                                                if (res2 != null)
+                                                var key2 = task2.Result as string;
+                                                if (key2 != null)
                                                 {
-                                                    CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, RefreshPlaylist);
+                                                    var stringEncrypt = KeyHelpers.GetUserKeyFromResponse(key2);
+                                                    _crypto =
+                                                        EncriptSha256.EncriptStringToSha256(
+                                                            Singleton.Instance().CurrentUser.salt + stringEncrypt);
                                                 }
+                                                var up = post.UpdatePlaylist(playList, MusicForPlaylist, _crypto,
+                                                    Singleton.Instance().CurrentUser);
+                                                up.ContinueWith(delegate(Task<string> tmp2)
+                                                {
+                                                    var res2 = tmp2.Result;
+                                                    if (res2 != null)
+                                                    {
+                                                        CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(
+                                                            CoreDispatcherPriority.Normal, RefreshPlaylist);
+                                                    }
+                                                });
                                             });
-                                        });
-                                    }
-                                    catch (Exception)
-                                    {
-                                        new MessageDialog("Erreur update pl").ShowAsync();
-                                    }
-                                });
+                                        }
+                                        catch (Exception)
+                                        {
+                                            new MessageDialog("Erreur update pl").ShowAsync();
+                                        }
+                                    });
                             }
                         });
                     });
@@ -274,9 +290,11 @@ namespace SoonZik.ViewModel
                 if (_key != null)
                 {
                     var stringEncrypt = KeyHelpers.GetUserKeyFromResponse(_key);
-                    _cryptographic = EncriptSha256.EncriptStringToSha256(Singleton.Instance().CurrentUser.salt + stringEncrypt);
+                    _cryptographic =
+                        EncriptSha256.EncriptStringToSha256(Singleton.Instance().CurrentUser.salt + stringEncrypt);
 
-                    var resDel = request.DeletePlaylist(SelectedPlaylist, _cryptographic, Singleton.Instance().CurrentUser);
+                    var resDel = request.DeletePlaylist(SelectedPlaylist, _cryptographic,
+                        Singleton.Instance().CurrentUser);
 
                     resDel.ContinueWith(delegate(Task<string> tmp)
                     {
@@ -304,11 +322,12 @@ namespace SoonZik.ViewModel
 
         #region Attribute
 
-        private static int _id = 0;
+        private static int _id;
         private bool _delete;
         private string _crypto { get; set; }
         public static int IndexForPlaylist { get; set; }
         private int _selectedIndex;
+
         public int SelectedIndex
         {
             get { return _selectedIndex; }
@@ -322,6 +341,7 @@ namespace SoonZik.ViewModel
         private string _key { get; set; }
         private string _cryptographic { get; set; }
         private ObservableCollection<Album> _listAlbum;
+
         public ObservableCollection<Album> ListAlbum
         {
             get { return _listAlbum; }
@@ -331,7 +351,9 @@ namespace SoonZik.ViewModel
                 RaisePropertyChanged("ListAlbum");
             }
         }
+
         private ObservableCollection<Music> _listMusique;
+
         public ObservableCollection<Music> ListMusique
         {
             get { return _listMusique; }
@@ -341,7 +363,9 @@ namespace SoonZik.ViewModel
                 RaisePropertyChanged("ListMusique");
             }
         }
+
         private ObservableCollection<Pack> _listPack;
+
         public ObservableCollection<Pack> ListPack
         {
             get { return _listPack; }
@@ -351,7 +375,9 @@ namespace SoonZik.ViewModel
                 RaisePropertyChanged("ListPack");
             }
         }
+
         private ObservableCollection<Playlist> _listPlaylist;
+
         public ObservableCollection<Playlist> ListPlaylist
         {
             get { return _listPlaylist; }
@@ -363,13 +389,52 @@ namespace SoonZik.ViewModel
         }
 
         private Music _selectedMusic;
-        public Music SelectedMusic { get { return _selectedMusic; } set { _selectedMusic = value; RaisePropertyChanged("SelectedMusic"); } }
+
+        public Music SelectedMusic
+        {
+            get { return _selectedMusic; }
+            set
+            {
+                _selectedMusic = value;
+                RaisePropertyChanged("SelectedMusic");
+            }
+        }
+
         private Album _selectedAlbum;
-        public Album SelectedAlbum { get { return _selectedAlbum; } set { _selectedAlbum = value; RaisePropertyChanged("SelectedAlbum"); } }
+
+        public Album SelectedAlbum
+        {
+            get { return _selectedAlbum; }
+            set
+            {
+                _selectedAlbum = value;
+                RaisePropertyChanged("SelectedAlbum");
+            }
+        }
+
         private Pack _selectedPack;
-        public Pack SelectedPack { get { return _selectedPack; } set { _selectedPack = value; RaisePropertyChanged("SelectedPack"); } }
+
+        public Pack SelectedPack
+        {
+            get { return _selectedPack; }
+            set
+            {
+                _selectedPack = value;
+                RaisePropertyChanged("SelectedPack");
+            }
+        }
+
         private Playlist _selectedPlaylist;
-        public Playlist SelectedPlaylist { get { return _selectedPlaylist; } set { _selectedPlaylist = value; RaisePropertyChanged("SelectedPlaylist"); } }
+
+        public Playlist SelectedPlaylist
+        {
+            get { return _selectedPlaylist; }
+            set
+            {
+                _selectedPlaylist = value;
+                RaisePropertyChanged("SelectedPlaylist");
+            }
+        }
 
         public ICommand MusicTappedCommand { get; private set; }
         public ICommand PackTappedCommand { get; private set; }
@@ -381,6 +446,5 @@ namespace SoonZik.ViewModel
         public static Music MusicForPlaylist;
 
         #endregion
-
     }
 }

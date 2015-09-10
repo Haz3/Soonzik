@@ -195,13 +195,13 @@ SoonzikApp.controller('AlbumsCtrl', ['$scope', "$routeParams", 'SecureAuth', 'HT
 			}
 		};
 			HTTPService.addToCart(parameters).then(function(response) {
-				NotificationService.success("Ajout au panier de l'album " + $scope.album.id );
+				NotificationService.success($rootScope.labels.FILE_ALBUM_ADD_ALBUM_MESSAGE + " " + $scope.album.id );
 			
 			}, function(repsonseError) {
-				NotificationService.error("Error Add To Cart");
+				NotificationService.error($rootScope.labels.FILE_ALBUM_ADD_ALBUM_ERROR_MESSAGE);
 			});
 		}, function(error) {
-			NotificationService.error("Error securedTransaction");
+			NotificationService.error($rootScope.labels.FILE_ALBUM_ADD_ALBUM_ERROR_MESSAGE);
 		});
   }
 
@@ -219,13 +219,13 @@ SoonzikApp.controller('AlbumsCtrl', ['$scope', "$routeParams", 'SecureAuth', 'HT
 			};
 
 			HTTPService.addToCart(parameters).then(function(response) {
-				NotificationService.success("Ajout au panier de la musique " + music.id );
+				NotificationService.success($rootScope.labels.FILE_ALBUM_ADD_SONG_MESSAGE + " " + + music.id );
 			
 			}, function(repsonseError) {
-				NotificationService.error("Error Add To Cart");
+				NotificationService.error($rootScope.labels.FILE_ALBUM_ADD_SONG_ERROR_MESSAGE);
 			});
 		}, function(error) {
-			NotificationService.error("Error securedTransaction");
+			NotificationService.error($rootScope.labels.FILE_ALBUM_ADD_SONG_ERROR_MESSAGE);
 		});
   	$scope.loading = false;
   }

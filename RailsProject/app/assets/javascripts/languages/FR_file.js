@@ -35,6 +35,11 @@ var labels = {
 	DISPLAY_MENU_SEARCH_PLACEHOLDER: "Chercher des utilisateurs, musiques, albums...",
 
 	// Album Controller
+	FILE_ALBUM_ADD_ALBUM_MESSAGE: "L'album a bien été ajouté au panier",
+	FILE_ALBUM_ADD_ALBUM_ERROR_MESSAGE: "Une erreur s'est produite lors de l'ajout au panier",
+    FILE_ALBUM_ADD_SONG_MESSAGE: "La musique a bien été ajouté au panier", 
+    FILE_ALBUM_ADD_SONG_ERROR_MESSAGE: "Une erreur s'est produite lors de l'ajout au panier",
+
 	FILE_ALBUM_GET_NOTES_ERROR_MESSAGE: "Une erreur s'est produite au chargement des notes",
 	FILE_ALBUM_FIND_PLAYLIST_ERROR_MESSAGE: "Une erreur s'est produite pendant la suppresion d'une liste de lecture : ",
 	FILE_ALBUM_GET_ALBUM_ERROR_MESSAGE: "Une erreur s'est produite au chargement d'un album",
@@ -122,6 +127,7 @@ var labels = {
 	FILE_USER_GOOGLE_CONNECTION_ERROR_MESSAGE: "Impossible de se connecter à Google Plus",
 
 	// Album Show View
+	DISPLAY_ALBUM_ADD_TO_CART: "Ajouter au panier",
 	DISPLAY_ALBUM_ADD_PLAYLIST_BUTTON: "Ajouter à la liste de lecture",
 	DISPLAY_ALBUM_ADD_PLAYLIST_LABEL: "Ajouter",
 	DISPLAY_ALBUM_LISTEN_LABEL: "Ecouter",
@@ -306,18 +312,34 @@ var labels = {
     FILE_CART_BUY_ERROR_MESSAGE: "Une errur s'est produite lors de l'achat du panier",
 
     // Friends Controller
-    FRIEND_ERROR_DISPLAY_MESSAGE: "Une erreur s'est produite lors de la recupération des amis",
+
+    DISPLAY_FRIENDS_LABEL: "Amis",
+    FILE_FRIEND_LOAD_FRIENDS_ERROR_MESSAGE: "Une erreur s'est produite lors de la recupération des amis",
      
     // News Controller
-    NEWS_LOAD_COMMENT_ERROR_MESSAGE: "Une erreur s'est produite lors de la recupération des commentaires",
-    NEWS_SEND_COMMENT_ERROR_MESSAGE: "Une erreur s'est produite lors de la sauvegarde du commentaire",
-    NEWS_LOAD_ERROR_MESSAGE: "Une erreur s'est produite lors de la recupération des actualités",
-    NEWS_LOAD_ONE_NEWS_ERROR_MESSAGE: "La page que vous avez demandé n'existe pas",
+    DISPLAY_NEWS_LABEL: "News",
+    DISPLAY_NEWS_SHOW_MORE: "Show More",
+    DISPLAY_NEWS_COMMENT_SEND: "Send",
+
+    FILE_NEWS_LOAD_COMMENT_ERROR_MESSAGE: "Une erreur s'est produite lors de la recupération des commentaires",
+    FILE_NEWS_SEND_COMMENT_ERROR_MESSAGE: "Une erreur s'est produite lors de la sauvegarde du commentaire",
+    FILE_NEWS_LOAD_ERROR_MESSAGE: "Une erreur s'est produite lors de la recupération des actualités",
+    FILE_NEWS_LOAD_ONE_NEWS_ERROR_MESSAGE: "La page que vous avez demandé n'existe pas",
      
     // Packs Controller
-    PACK_LOAD_ERROR_MESSAGE: "Une erreur s'est produite lors de la recupération des packs",
-    PACK_LOAD_ONE_PACK_ERROR_MESSAGE: "La page que vous avez demandé n'est pas disponible",
-    PACK_BUY_PACK_ERROR_MESSAGE: "Une erreur s'est produite lors de l'achat du pack",
+	DISPLAY_PACK_LABEL: "Packs du moment",
+	DISPLAY_PACK_TIMELEFT: "Temps Restant",
+	DISPLAY_PACK_AVERAGE: "Moyenne",
+   	DISPLAY_PACK_YEAR_ALBUM: "Date de sortie",
+  	DISPLAY_PACK_ARTIST_NAME: "Artiste",
+   	DISPLAY_PACK_DEV_NAME: "Developpeur",
+   	DISPLAY_PACK_ASSOCIATION_NAME: "Association",
+   	DISPLAY_PACK_BUY_PACK: "Acheter ce pack",
+   	DISPLAY_PACK_TOTAL_PACK: "Total",
+
+    FILE_PACK_LOAD_ERROR_MESSAGE: "Une erreur s'est produite lors de la recupération des packs",
+    FILE_PACK_LOAD_ONE_PACK_ERROR_MESSAGE: "La page que vous avez demandé n'est pas disponible",
+    FILE_PACK_BUY_PACK_ERROR_MESSAGE: "Une erreur s'est produite lors de l'achat du pack",
 
 
 }

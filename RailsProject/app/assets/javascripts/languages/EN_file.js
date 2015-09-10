@@ -35,6 +35,11 @@ var labels = {
 	DISPLAY_MENU_SEARCH_PLACEHOLDER: "Search users, musics, albums...",
 
 	// Album Controller
+	FILE_ALBUM_ADD_ALBUM_MESSAGE: "Album successfuly adding into the cart",
+	FILE_ALBUM_ADD_ALBUM_ERROR_MESSAGE: "An error occured while adding album into the cart",
+    FILE_ALBUM_ADD_SONG_MESSAGE: "Song is successfuly add into the cart", 
+    FILE_ALBUM_ADD_SONG_ERROR_MESSAGE: "An error occured while adding song into the cart",
+
 	FILE_ALBUM_GET_NOTES_ERROR_MESSAGE: "Error while loading your notes",
 	FILE_ALBUM_FIND_PLAYLIST_ERROR_MESSAGE: "Error while deleting the playlist : ",
 	FILE_ALBUM_GET_ALBUM_ERROR_MESSAGE: "Error while loading the album",
@@ -122,6 +127,7 @@ var labels = {
 	FILE_USER_GOOGLE_CONNECTION_ERROR_MESSAGE: "Can't connect to Google, please try later",
 
 	// Album Show View
+	DISPLAY_ALBUM_ADD_TO_CART: "Add to cart",
 	DISPLAY_ALBUM_ADD_PLAYLIST_BUTTON: "Add to Playlist",
 	DISPLAY_ALBUM_ADD_PLAYLIST_LABEL: "Add",
 	DISPLAY_ALBUM_LISTEN_LABEL: "Listen",
@@ -314,7 +320,7 @@ var labels = {
     // Cart Controller
     DISPLAY_CART_INDEX: "Cart",
     DISPLAY_CART_BUY: "Buy your cart",
-
+ 
     FILE_CART_LOAD_ERROR_MESSAGE: "An error occured while getting the cart",
     FILE_CART_DELETE_ITEM_ERROR_MESSAGE: "An error occured while destroying an item in cart",
     FILE_CART_DELETE_SUCCESS_MESSAGE: "Item is successfuly delete",
@@ -322,18 +328,32 @@ var labels = {
     FILE_CART_BUY_ERROR_MESSAGE: "An error occured while buying the cart", 
     
     // Friends Controller
-    FRIEND_ERROR_DISPLAY_MESSAGE: "An error occured while loading your friends",
+    DISPLAY_FRIENDS_LABEL: "Friends",
+    FILE_FRIEND_LOAD_FRIENDS_ERROR_MESSAGE: "An error occured while loading your friends",
 
     // News Controller
-    NEWS_LOAD_COMMENT_ERROR_MESSAGE: "Error while loading commentaries",
-    NEWS_SEND_COMMENT_ERROR_MESSAGE: "Error while saving your comment, please try later",
-    NEWS_LOAD_ERROR_MESSAGE: "Error while loading news",
-    NEWS_LOAD_ERROR_MESSAGE: "Error while loading news",
-    NEWS_LOAD_ONE_NEWS_ERROR_MESSAGE: "The page you asked is not available",
+    DISPLAY_NEWS_LABEL: "News",
+    DISPLAY_NEWS_SHOW_MORE: "Show More",
+    DISPLAY_NEWS_COMMENT_SEND: "Send",
+
+    FILE_NEWS_LOAD_COMMENT_ERROR_MESSAGE: "Error while loading commentaries",
+    FILE_NEWS_SEND_COMMENT_ERROR_MESSAGE: "Error while saving your comment, please try later",
+    FILE_NEWS_LOAD_ERROR_MESSAGE: "Error while loading news",
+    FILE_NEWS_LOAD_ONE_NEWS_ERROR_MESSAGE: "The page you asked is not available",
 
 
    // Packs Controller
-   PACK_LOAD_ERROR_MESSAGE: "Error while loading packs",
-   PACK_LOAD_ONE_PACK_ERROR_MESSAGE: "The page you asked is not available",
-   PACK_BUY_PACK_ERROR_MESSAGE: "Error while buying your cart", 
+   DISPLAY_PACK_LABEL: "Packs of the moment",
+   DISPLAY_PACK_TIMELEFT: "Time left",
+   DISPLAY_PACK_AVERAGE: "Average",
+   DISPLAY_PACK_YEAR_ALBUM: "Release",
+   DISPLAY_PACK_ARTIST_NAME: "Artist",
+   DISPLAY_PACK_DEV_NAME: "Developper",
+   DISPLAY_PACK_ASSOCIATION_NAME: "Association",
+   DISPLAY_PACK_BUY_PACK: "Buy this pack",
+   DISPLAY_PACK_TOTAL_PACK: "Total",
+
+   FILE_PACK_LOAD_ERROR_MESSAGE: "Error while loading packs",
+   FILE_PACK_LOAD_ONE_PACK_ERROR_MESSAGE: "The page you asked is not available",
+   FILE_PACK_BUY_PACK_ERROR_MESSAGE: "Error while buying your cart", 
 }

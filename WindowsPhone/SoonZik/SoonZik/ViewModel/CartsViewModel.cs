@@ -17,12 +17,26 @@ namespace SoonZik.ViewModel
 {
     public class CartsViewModel : ViewModelBase
     {
+        #region Ctor
+
+        public CartsViewModel()
+        {
+            LoadedCommand = new RelayCommand(Charge);
+
+            MusicTappedCommand = new RelayCommand(MusicTappedExecute);
+            AlbumTappedCommand = new RelayCommand(AlbumTappedExecute);
+            DeleteCommand = new RelayCommand(DeleteCommandExecute);
+        }
+
+        #endregion
+
         #region Attributes
 
         private string _key { get; set; }
         private string _cryptographic { get; set; }
 
         private ObservableCollection<Album> _listAlbum;
+
         public ObservableCollection<Album> ListAlbum
         {
             get { return _listAlbum; }
@@ -32,7 +46,9 @@ namespace SoonZik.ViewModel
                 RaisePropertyChanged("ListAlbum");
             }
         }
+
         private ObservableCollection<Music> _listMusique;
+
         public ObservableCollection<Music> ListMusique
         {
             get { return _listMusique; }
@@ -43,12 +59,31 @@ namespace SoonZik.ViewModel
             }
         }
 
-        private ObservableCollection<Carts> _listCarts; 
+        private ObservableCollection<Carts> _listCarts;
 
         private Music _selectedMusic;
-        public Music SelectedMusic { get { return _selectedMusic; } set { _selectedMusic = value; RaisePropertyChanged("SelectedMusic"); } }
+
+        public Music SelectedMusic
+        {
+            get { return _selectedMusic; }
+            set
+            {
+                _selectedMusic = value;
+                RaisePropertyChanged("SelectedMusic");
+            }
+        }
+
         private Album _selectedAlbum;
-        public Album SelectedAlbum { get { return _selectedAlbum; } set { _selectedAlbum = value; RaisePropertyChanged("SelectedAlbum"); } }
+
+        public Album SelectedAlbum
+        {
+            get { return _selectedAlbum; }
+            set
+            {
+                _selectedAlbum = value;
+                RaisePropertyChanged("SelectedAlbum");
+            }
+        }
 
         public ICommand MusicTappedCommand { get; private set; }
         public ICommand AlbumTappedCommand { get; private set; }
@@ -87,7 +122,6 @@ namespace SoonZik.ViewModel
                         {
                             CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
                             {
-                                
                                 foreach (var cart in res)
                                 {
                                     _listCarts.Add(cart);
@@ -106,6 +140,7 @@ namespace SoonZik.ViewModel
         }
 
         #region Method Command
+
         private void AlbumTappedExecute()
         {
         }
@@ -124,7 +159,8 @@ namespace SoonZik.ViewModel
                 if (_key != null)
                 {
                     var stringEncrypt = KeyHelpers.GetUserKeyFromResponse(_key);
-                    _cryptographic = EncriptSha256.EncriptStringToSha256(Singleton.Instance().CurrentUser.salt + stringEncrypt);
+                    _cryptographic =
+                        EncriptSha256.EncriptStringToSha256(Singleton.Instance().CurrentUser.salt + stringEncrypt);
 
                     Carts cart = null;
 
@@ -132,7 +168,8 @@ namespace SoonZik.ViewModel
                     {
                         if (SelectedAlbum != null && (item.albums.Count > 0 && item.albums[0].id == SelectedAlbum.id))
                             cart = item;
-                        else if (SelectedMusic != null && (item.musics.Count > 0 && item.musics[0].id == SelectedMusic.id))
+                        else if (SelectedMusic != null &&
+                                 (item.musics.Count > 0 && item.musics[0].id == SelectedMusic.id))
                             cart = item;
                     }
 
@@ -159,20 +196,8 @@ namespace SoonZik.ViewModel
                 }
             });
         }
-        #endregion
 
         #endregion
-
-        #region Ctor
-
-        public CartsViewModel()
-        {
-            LoadedCommand = new RelayCommand(Charge);
-
-            MusicTappedCommand = new RelayCommand(MusicTappedExecute);
-            AlbumTappedCommand = new RelayCommand(AlbumTappedExecute);
-            DeleteCommand = new RelayCommand(DeleteCommandExecute);
-        }
 
         #endregion
     }

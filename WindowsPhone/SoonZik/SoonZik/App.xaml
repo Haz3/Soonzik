@@ -23,7 +23,7 @@
         <vm:CartsViewModel x:Key="CartsViewModel" />
         <vm:MyMusicViewModel x:Key="MyMusicViewModel" />
         <vm:BattleDetailViewModel x:Key="BattleDetailViewModel" />
-        <vm:PlaylistViewModel x:Key="PlaylistViewModel"/>
+        <vm:PlaylistViewModel x:Key="PlaylistViewModel" />
 
         <DataTemplate x:Key="SizePivotHeader">
             <ContentPresenter>

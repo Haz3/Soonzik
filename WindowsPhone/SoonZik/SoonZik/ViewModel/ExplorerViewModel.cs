@@ -30,7 +30,7 @@ namespace SoonZik.ViewModel
             TappedCommand = new RelayCommand(ArtisteTappedCommand);
             LoadContent();
         }
-        
+
         #endregion
 
         #region Attribute
@@ -83,9 +83,15 @@ namespace SoonZik.ViewModel
         public User SelectedArtiste
         {
             get { return _selectedArtiste; }
-            set { _selectedArtiste = value; RaisePropertyChanged("SelectedArtiste");}
+            set
+            {
+                _selectedArtiste = value;
+                RaisePropertyChanged("SelectedArtiste");
+            }
         }
+
         public ICommand TappedCommand { get; private set; }
+
         #endregion
 
         #region Method
@@ -158,7 +164,8 @@ namespace SoonZik.ViewModel
         private void MusiCommandExecute()
         {
             Singleton.Instance().SelectedMusicSingleton = SelectedMusic;
-            Navigation.Navigate(new PlayerControl().GetType());
+            GlobalMenuControl.SetChildren(new PlayerControl());
+            //Navigation.Navigate(new PlayerControl().GetType());
         }
 
         private void ArtisteTappedCommand()

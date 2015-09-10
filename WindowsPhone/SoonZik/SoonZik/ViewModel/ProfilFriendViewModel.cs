@@ -40,7 +40,6 @@ namespace SoonZik.ViewModel
                 _buttonFriendText = value;
                 RaisePropertyChanged("ButtonFriendText");
             }
-
         }
 
         public ICommand AddCommand { get; private set; }
@@ -94,7 +93,6 @@ namespace SoonZik.ViewModel
                     ButtonFriendText = loader.GetString("AddFriend");
                     _friend = false;
                 }
-
             }
         }
 

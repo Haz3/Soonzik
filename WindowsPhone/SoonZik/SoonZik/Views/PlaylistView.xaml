@@ -13,13 +13,12 @@
     Background="#424242">
 
 
-
     <interactivity:Interaction.Behaviors>
         <core:EventTriggerBehavior EventName="Loaded">
             <core:InvokeCommandAction Command="{Binding LoadedCommand}" />
         </core:EventTriggerBehavior>
     </interactivity:Interaction.Behaviors>
-    
+
     <Page.Resources>
         <DataTemplate x:Key="ComTemplate">
             <StackPanel Margin="0,0,0,10">
@@ -30,9 +29,11 @@
             <Grid Height="70" Margin="20,0,0,0">
                 <Border BorderThickness="0,0,0,1" Width="350" BorderBrush="White" />
                 <TextBlock x:Name="MusicTitle" Text="{Binding Path=title}" FontSize="25" Margin="20,0,0,0" />
-                <TextBlock x:Name="ArtistNameList" Text="{Binding Path=user.Username}" FontSize="15" VerticalAlignment="Bottom" Margin="20,0,0,10" />
+                <TextBlock x:Name="ArtistNameList" Text="{Binding Path=user.Username}" FontSize="15"
+                           VerticalAlignment="Bottom" Margin="20,0,0,10" />
 
-                <Image x:Name="MoreOption" Source="../Resources/Icones/menu.png" Height="30" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,20,0" Tapped="MoreOption_OnTapped"/>
+                <Image x:Name="MoreOption" Source="../Resources/Icones/menu.png" Height="30" VerticalAlignment="Center"
+                       HorizontalAlignment="Right" Margin="0,0,20,0" Tapped="MoreOption_OnTapped" />
             </Grid>
         </DataTemplate>
     </Page.Resources>
@@ -43,16 +44,17 @@
             <RowDefinition Height="350" />
         </Grid.RowDefinitions>
         <Grid Grid.Row="0">
-            <Image Name="AlbumImage" Source="ms-appx:///Resources/Icones/MenuExplorer.png" Width="120" Height="120" HorizontalAlignment="Center" VerticalAlignment="Top"
+            <Image Name="AlbumImage" Source="ms-appx:///Resources/Icones/MenuExplorer.png" Width="120" Height="120"
+                   HorizontalAlignment="Center" VerticalAlignment="Top"
                    Margin="0,20,0,0" />
 
             <TextBlock x:Name="AlbumTitle" Text="{Binding ThePlaylist.name}" FontSize="30" VerticalAlignment="Center"
                        HorizontalAlignment="Center" Margin="0,150,0,0" />
         </Grid>
-        
+
         <ListBox Background="Transparent" Grid.Row="1" x:Name="MusicListView"
-                         ItemsSource="{Binding ThePlaylist.musics}"
-                         ItemTemplate="{StaticResource MusicTemplate}"
-                         SelectedItem="{Binding SelectedMusic, Mode=TwoWay}" />
+                 ItemsSource="{Binding ThePlaylist.musics}"
+                 ItemTemplate="{StaticResource MusicTemplate}"
+                 SelectedItem="{Binding SelectedMusic, Mode=TwoWay}" />
     </Grid>
 </Page>

@@ -55,7 +55,7 @@
                        HorizontalAlignment="Center" VerticalAlignment="Center" />
         </Grid>
         <Grid Grid.Row="2" Background="Transparent" Visibility="{Binding FinishGridVisibility}">
-            <TextBlock x:Uid="EndBattle" Text="" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="30"/>
+            <TextBlock x:Uid="EndBattle" Text="" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="30" />
         </Grid>
         <ScrollViewer Grid.Row="3">
             <Grid Background="Transparent">

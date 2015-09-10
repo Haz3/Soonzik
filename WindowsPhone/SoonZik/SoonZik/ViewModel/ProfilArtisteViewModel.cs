@@ -35,6 +35,7 @@ namespace SoonZik.ViewModel
         #endregion
 
         #region Attribute
+
         private string _buttonFriendText;
 
         public string ButtonFriendText
@@ -45,8 +46,8 @@ namespace SoonZik.ViewModel
                 _buttonFriendText = value;
                 RaisePropertyChanged("ButtonFriendText");
             }
-
         }
+
         public ICommand AddCommand { get; private set; }
         private bool _friend;
         private bool _follow;
@@ -287,7 +288,6 @@ namespace SoonZik.ViewModel
                     ButtonFriendText = loader.GetString("AddFriend");
                     _friend = false;
                 }
-
             }
         }
 

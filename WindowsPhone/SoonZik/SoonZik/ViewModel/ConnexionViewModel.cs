@@ -9,15 +9,16 @@ using Windows.UI.Xaml.Media.Imaging;
 using Facebook;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using LinqToTwitter;
 using Microsoft.Practices.ServiceLocation;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using SoonZik.Helpers;
 using SoonZik.HttpRequest;
-using SoonZik.HttpRequest.Poco;
 using SoonZik.Utils;
 using SoonZik.Views;
 using News = SoonZik.Views.News;
+using User = SoonZik.HttpRequest.Poco.User;
 
 namespace SoonZik.ViewModel
 {
@@ -74,6 +75,8 @@ namespace SoonZik.ViewModel
 
         public RelayCommand FacebookTapped { get; private set; }
 
+        public ICommand TwitterTapped { get; private set; }
+
         public INavigationService Navigation;
 
         #endregion
@@ -88,6 +91,7 @@ namespace SoonZik.ViewModel
             FacebookTapped = new RelayCommand(MakeFacebookConnection);
             SelectionCommand = new RelayCommand(SelectionExecute);
             InscritpiomCommand = new RelayCommand(ExecuteInscription);
+            TwitterTapped = new RelayCommand(TwitterCommandExecute);
             if (_localSettings != null && (string) _localSettings.Values["SoonZikAlreadyConnect"] == "yes")
             {
                 _password = _localSettings.Values["SoonZikPassWord"].ToString();
@@ -187,6 +191,23 @@ namespace SoonZik.ViewModel
         private async void MakeFacebookConnection()
         {
             ObjFBHelper.LoginAndContinue();
+        }
+
+        private void TwitterCommandExecute()
+        {
+            var twitterConenc = new PinAuthorizer
+            {
+                CredentialStore = new InMemoryCredentialStore
+                {
+                    ConsumerKey = "ooWEcrlhooUKVOxSgsVNDJ1RK",
+                    ConsumerSecret = "BtLpq9ZlFzXrFklC2f1CXqy8EsSzgRRVPZrKVh0imI2TOrZAan",
+                    OAuthToken = "1951971955-TJuWAfR6awbG9ds1lEh9quuHzqtnx1xlRtORZD2",
+                    OAuthTokenSecret = "mrRO5x2p4z0tOGeIwvnw5D6iDplGIFhONL0bGbZpmhYLF"
+                }
+            };
+
+            var res = twitterConenc.AuthorizeAsync();
+            var service = new TwitterContext(twitterConenc);
         }
 
         public async void ContinueWithWebAuthenticationBroker(WebAuthenticationBrokerContinuationEventArgs args)

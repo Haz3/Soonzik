@@ -50,21 +50,24 @@
                 <RowDefinition Height="40" />
             </Grid.RowDefinitions>
             <TextBox Grid.Row="0" IsEnabled="{Binding CanUpdate}" Text="{Binding CurrentUser.email, Mode=TwoWay}"
-                     Background="Transparent" Foreground="Red" BorderThickness="0,0,0,1" Margin="0,0,0,10" />
+                     Background="Transparent" Foreground="Red" BorderThickness="0,0,0,1" Margin="0,0,0,10"
+                     x:Uid="Email" PlaceholderText="" />
             <TextBox Grid.Row="1" IsEnabled="{Binding CanUpdate}" Text="{Binding CurrentUser.description, Mode=TwoWay}"
-                     Background="Transparent" Foreground="Red" BorderThickness="0,0,0,1" Margin="0,0,0,10" />
+                     Background="Transparent" Foreground="Red" BorderThickness="0,0,0,1" Margin="0,0,0,10"
+                     x:Uid="Description" PlaceholderText="" />
             <TextBox Grid.Row="2" IsEnabled="{Binding CanUpdate}"
                      Text="{Binding CurrentUser.address.NumberStreet, Mode=TwoWay}" Background="Transparent"
-                     Foreground="Red" BorderThickness="0,0,0,1" Margin="0,0,0,10" />
+                     Foreground="Red" BorderThickness="0,0,0,1" Margin="0,0,0,10" x:Uid="NumberStreet"
+                     PlaceholderText="" />
             <TextBox Grid.Row="3" IsEnabled="{Binding CanUpdate}"
                      Text="{Binding CurrentUser.address.Street, Mode=TwoWay}" Background="Transparent" Foreground="Red"
-                     BorderThickness="0,0,0,1" Margin="0,0,0,10" />
+                     BorderThickness="0,0,0,1" Margin="0,0,0,10" x:Uid="Street" PlaceholderText="" />
             <TextBox Grid.Row="4" IsEnabled="{Binding CanUpdate}"
                      Text="{Binding CurrentUser.address.Zipcode, Mode=TwoWay}" Background="Transparent"
-                     Foreground="Red" BorderThickness="0,0,0,1" Margin="0,0,0,10" />
+                     Foreground="Red" BorderThickness="0,0,0,1" Margin="0,0,0,10" x:Uid="ZipCode" PlaceholderText="" />
             <TextBox Grid.Row="5" IsEnabled="{Binding CanUpdate}"
                      Text="{Binding CurrentUser.address.Country, Mode=TwoWay}" Background="Transparent"
-                     Foreground="Red" BorderThickness="0,0,0,1" Margin="0,0,0,10" />
+                     Foreground="Red" BorderThickness="0,0,0,1" Margin="0,0,0,10" x:Uid="Country" PlaceholderText="" />
         </Grid>
 
 

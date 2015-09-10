@@ -4,8 +4,9 @@
     %div{"ng-show" => "thisPackId"}
       %h3.subheader.text-center
         {{ thisPack.title }}
-      %h5.subheader.text-center
-        Time is running out : {{ timeLeft }}
+      %div{"ng-init" => "timeLeft()"}
+        %h5.subheader.text-center
+          {{ labels.DISPLAY_PACK_TIMELEFT }} : {{ thisPack.timeLeftPack }}
       .ul.large-block-grid-4.centered.columns
         %li{"ng-repeat" => "album in thisPack.albums"}
           .panel
@@ -13,16 +14,16 @@
               %p.text-center
                 {{ album.title }}
             %a{:href => "http://lvh.me:3000/albums/ {{ album.id }}"}
-              %img{"src" => "albums/{{ album.image }}"}
+              %img{ "ng-src" => "{{ '/assets/albums/' + thisPack.albums[0].image }} " }
             .divider
-            Artiste : {{ album.user.username }}
+            {{ labels.DISPLAY_PACK_ARTIST_NAME }} : {{ album.user.username }}
             %br
-            Sortie : {{ album.yearProd }}
+            {{ labels.DISPLAY_PACK_YEAR_ALBUM }} : {{ album.yearProd }}
       .row
         .large-6.columns
           .panel.left{"ng-init" => "managePrice()"}
             .large-9.columns
-              Artiste
+              {{ labels.DISPLAY_PACK_ARTIST_NAME }}
               .range-slider.round{"data-options" => "display-selector: #priceArtist; start:0; end:100; initial: 70", "data-slider" => ""}
                 %span.range-slider-handle{:role => "slider", "tabindex" => "0"}
                 %span.range-slider-active-segment
@@ -30,7 +31,7 @@
               %br
               %input#priceArtist{:type => "number", "value" => "{{ artistPercentage }}" }
             .large-9.columns
-              Associations
+              {{ labels.DISPLAY_PACK_ASSOCIATION_NAME }}
               .range-slider.round{"data-options" => "display-selector: #priceAsso; start:0; end:100; initial: 20", "data-slider" => ""}
                 %span.range-slider-handle{:role => "slider", "tabindex" => "0"}
                 %span.range-slider-active-segment
@@ -38,7 +39,7 @@
               %br
               %input#priceAsso{:type => "number", "value" => "{{ associationPercentage }}" }
             .large-9.columns
-              Développeur
+              {{ labels.DISPLAY_PACK_DEV_NAME }}
               .range-slider.round{"data-options" => "display-selector: #priceDev; start:0; end:100; initial: 10", "data-slider" => ""}
                 %span.range-slider-handle{:role => "slider", "tabindex" => "0"}
                 %span.range-slider-active-segment
@@ -47,13 +48,13 @@
               %input#priceDev{:type => "number", "value" => "{{ websitePercentage }}" }
             .large-4.columns
               .divider
-              Total : {{ priceMini }}
+              {{ labels.DISPLAY_PACK_TOTAL_PACK }} : {{ priceMini }}
         .large-6.columns
-          .panel.right
-            %battle{ "battle-values" => "show.percentages" }
+          .panel
+            %battle{ "battle-values" => "percentages" }
         
         //Albums + song
         
         .large-12.columns
           .button.expand.radius.success
-            %a{:href => "http://www.paypal.com"} Acheter le pack
+            %a{:href => "http://www.paypal.com"} {{ labels.DISPLAY_PACK_BUY_PACK }}

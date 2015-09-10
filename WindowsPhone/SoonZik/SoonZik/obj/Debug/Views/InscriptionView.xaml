@@ -73,28 +73,28 @@
                          Background="Transparent" BorderThickness="0,0,0,0" Foreground="Black" x:Uid="UserName"
                          PlaceholderText="" />
 
-                <TextBox Grid.Row="6" InputScope="39" Text="{Binding NewUser.address.NumberStreet, Mode=TwoWay}"
+                <TextBox Grid.Row="6" InputScope="39" Text="{Binding NewAddress.NumberStreet, Mode=TwoWay}"
                          Height="40"
                          Background="Transparent" BorderThickness="0,0,0,0" Foreground="Black" x:Uid="NumberStreet"
                          PlaceholderText="" />
 
-                <TextBox Grid.Row="7" Text="{Binding NewUser.address.Street, Mode=TwoWay}" Height="40"
+                <TextBox Grid.Row="7" Text="{Binding NewAddress.Street, Mode=TwoWay}" Height="40"
                          Background="Transparent" BorderThickness="0,0,0,0" Foreground="Black" x:Uid="Street"
                          PlaceholderText="" />
 
-                <TextBox Grid.Row="8" Text="{Binding NewUser.address.Complement, Mode=TwoWay}" Height="40"
+                <TextBox Grid.Row="8" Text="{Binding NewAddress.Complement, Mode=TwoWay}" Height="40"
                          Background="Transparent" BorderThickness="0,0,0,0" Foreground="Black" x:Uid="Complement"
                          PlaceholderText="" />
 
-                <TextBox Grid.Row="9" Text="{Binding NewUser.address.City, Mode=TwoWay}" Height="40"
+                <TextBox Grid.Row="9" Text="{Binding NewAddress.City, Mode=TwoWay}" Height="40"
                          Background="Transparent" BorderThickness="0,0,0,0" Foreground="Black" x:Uid="City"
                          PlaceholderText="" />
 
-                <TextBox Grid.Row="10" Text="{Binding NewUser.address.Country, Mode=TwoWay}" Height="40"
+                <TextBox Grid.Row="10" Text="{Binding NewAddress.Country, Mode=TwoWay}" Height="40"
                          Background="Transparent" BorderThickness="0,0,0,0" Foreground="Black" x:Uid="Country"
                          PlaceholderText="" />
 
-                <TextBox Grid.Row="11" InputScope="39" Text="{Binding NewUser.address.Zipcode, Mode=TwoWay}"
+                <TextBox Grid.Row="11" InputScope="39" Text="{Binding NewAddress.Zipcode, Mode=TwoWay}"
                          Height="40"
                          Background="Transparent" BorderThickness="0,0,0,0" Foreground="Black" x:Uid="ZipCode"
                          PlaceholderText="" />

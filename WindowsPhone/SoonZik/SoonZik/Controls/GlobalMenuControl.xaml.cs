@@ -127,6 +127,7 @@ namespace SoonZik.Controls
         private User _selectedUser;
 
         private User _selectedArtist;
+
         public User SelectedArtist
         {
             get { return _selectedArtist; }
@@ -226,7 +227,6 @@ namespace SoonZik.Controls
             AmisButton.Command = new RelayCommand(GoToAmis);
             AchatButton.Command = new RelayCommand(GoToAchat);
             ConnexionButton.Command = new RelayCommand(GoToConnexionPage);
-
         }
 
         private void HardwareButtonsOnBackPressed(object sender, BackPressedEventArgs e)

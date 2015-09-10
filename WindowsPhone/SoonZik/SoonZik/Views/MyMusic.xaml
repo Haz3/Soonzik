@@ -22,7 +22,7 @@
                 <Image Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left"
                        Source="../Resources/Icones/MenuPack.png" Height="80" Width="80" />
                 <TextBlock Grid.Column="1" Text="{Binding Path=title}" Margin="15,0,0,0" FontSize="25" />
-            
+
             </Grid>
         </DataTemplate>
 
@@ -36,7 +36,8 @@
                 <Image Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left"
                        Source="../Resources/Icones/MenuPack.png" Height="50" Width="50" />
                 <TextBlock Grid.Column="1" Text="{Binding Path=name}" Margin="15,0,0,0" FontSize="25" />
-                <Image Grid.Column="2" Tapped="DeleteItem_OnTapped" VerticalAlignment="Center" HorizontalAlignment="Center" Source="../Resources/Icones/trash.png" Width="50" Height="50"></Image>
+                <Image Grid.Column="2" Tapped="DeleteItem_OnTapped" VerticalAlignment="Center"
+                       HorizontalAlignment="Center" Source="../Resources/Icones/trash.png" Width="50" Height="50" />
 
             </Grid>
         </DataTemplate>
@@ -73,7 +74,8 @@
     <Grid x:Name="GlobalGrid">
         <ProgressRing IsActive="{Binding ProgressOn, Mode=TwoWay}" Background="Black" Foreground="Aqua" Opacity="0.5" />
         <Pivot x:Name="PivotGlobal" HeaderTemplate="{StaticResource SizeHeaderGlobalPivot}" Foreground="Transparent"
-               RenderTransformOrigin="0.5,0.5" Style="{StaticResource PivotStyle1}" SelectedIndex="{Binding SelectedIndex, Mode=TwoWay}">
+               RenderTransformOrigin="0.5,0.5" Style="{StaticResource PivotStyle1}"
+               SelectedIndex="{Binding SelectedIndex, Mode=TwoWay}">
             <PivotItem x:Uid="MusicPivot" Header="">
                 <ListBox Background="Transparent" x:Name="ListBoxMusic" ItemsSource="{Binding ListMusique}"
                          ItemTemplate="{StaticResource MusiqueTemplate}"
@@ -89,7 +91,7 @@
             <PivotItem x:Uid="AlbumPivot" Header="">
                 <ListBox Background="Transparent" x:Name="ListBoxAlbums" ItemsSource="{Binding ListAlbum}"
                          ItemTemplate="{StaticResource AlbumTemplate}"
-                         SelectedItem="{Binding SelectedAlbum, Mode=TwoWay}" >
+                         SelectedItem="{Binding SelectedAlbum, Mode=TwoWay}">
                     <interactivity:Interaction.Behaviors>
                         <core:EventTriggerBehavior EventName="Tapped">
                             <core:InvokeCommandAction Command="{Binding AlbumTappedCommand}" />
@@ -100,7 +102,8 @@
 
             <PivotItem x:Uid="PackPivot" Header="">
                 <ListBox Background="Transparent" x:Name="ListBoxPack" ItemsSource="{Binding ListPack}"
-                          SelectedItem="{Binding SelectedPack, Mode=TwoWay}" ItemTemplate="{StaticResource PackTemplate}" >
+                         SelectedItem="{Binding SelectedPack, Mode=TwoWay}"
+                         ItemTemplate="{StaticResource PackTemplate}">
                     <interactivity:Interaction.Behaviors>
                         <core:EventTriggerBehavior EventName="Tapped">
                             <core:InvokeCommandAction Command="{Binding PackTappedCommand}" />
@@ -108,25 +111,28 @@
                     </interactivity:Interaction.Behaviors>
                 </ListBox>
             </PivotItem>
-            
+
             <PivotItem x:Uid="PlaylistPivot" Header="">
                 <Grid>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="80"></RowDefinition>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="80" />
                     </Grid.RowDefinitions>
-                    <ListBox Grid.Row="0" Background="Transparent" x:Name="ListPlayList" ItemsSource="{Binding ListPlaylist}"
-                          SelectedItem="{Binding SelectedPlaylist, Mode=TwoWay}" ItemTemplate="{StaticResource PlaylistTemplate}" >
+                    <ListBox Grid.Row="0" Background="Transparent" x:Name="ListPlayList"
+                             ItemsSource="{Binding ListPlaylist}"
+                             SelectedItem="{Binding SelectedPlaylist, Mode=TwoWay}"
+                             ItemTemplate="{StaticResource PlaylistTemplate}">
                         <interactivity:Interaction.Behaviors>
                             <core:EventTriggerBehavior EventName="Tapped">
                                 <core:InvokeCommandAction Command="{Binding PlaylistTappedCommand}" />
                             </core:EventTriggerBehavior>
                         </interactivity:Interaction.Behaviors>
                     </ListBox>
-                    <Button Grid.Row="1" x:Uid="CreatePlaylist" Content="" VerticalAlignment="Center" HorizontalAlignment="Center"
-                            Command="{Binding CreatePlaylist}"/>
+                    <Button Grid.Row="1" x:Uid="CreatePlaylist" Content="" VerticalAlignment="Center"
+                            HorizontalAlignment="Center"
+                            Command="{Binding CreatePlaylist}" />
                 </Grid>
-                </PivotItem>
+            </PivotItem>
         </Pivot>
     </Grid>
 </Page>

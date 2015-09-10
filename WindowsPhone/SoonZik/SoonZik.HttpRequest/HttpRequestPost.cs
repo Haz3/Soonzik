@@ -46,14 +46,17 @@ namespace SoonZik.HttpRequest
                 "&user[fname]=" + myUser.fname +
                 "&user[lname]=" + myUser.lname +
                 //"&user[description]=" + myUser.description +
-                "&user[phoneNumber]=" + myUser.phoneNumber +
-
-                "&address[numberStreet]=" + myUser.address.NumberStreet +
+                "&user[phoneNumber]=" + myUser.phoneNumber;
+                
+            if (myUser.address != null)
+            {
+                postData += "&address[numberStreet]=" + myUser.address.NumberStreet +
                 "&address[complement]=" + myUser.address.Complement +
                 "&address[street]=" + myUser.address.Street +
                 "&address[city]=" + myUser.address.City +
                 "&address[country]=" + myUser.address.Country +
                 "&address[zipcode]=" + myUser.address.Zipcode;
+            }
             return await GetHttpPostResponse(request, postData);
         }
 
