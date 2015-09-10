@@ -23,8 +23,8 @@
             %a{:href => "/packs"} Voir tout
         %ul.no-bullet.clearfix.lastPacks
           %li.small-6.columns{ "ng-repeat" => "pack in packs"}
-            .panel
-              %h5.subheader.text-center
+            .panel.text-center
+              %h5.subheader
                 %a{ href: "/packs/{{pack.id}}" } {{ pack.title }}
               %img{ "ng-src" => "{{ '/assets/albums/' + pack.albums[0].image }}"}
               %p Temps Restant : {{ pack.timeLeft }}
@@ -103,11 +103,12 @@
               %table.small-12
                 %tr{ "ng-repeat" => "topFiveOne in battle.artist_one.topFive" }
                   %td
-                    %i.fi-play
+                    %music{ "music-object" => "topFiveOne" }
+                      %i.fi-play.pointer
                   %td
                     {{ topFiveOne.title }}
                   %td
-                    {{ topFiveOne.duration }}
+                    {{ formatTime(topFiveOne.duration) }}
                   %td
                     {{ topFiveOne.price }} $
             %h5{ "ng-if" => "battle.artist_one.topFive.length == 0" }
@@ -136,11 +137,11 @@
                   %td
                     %i.fi-play
                   %td
-                    {{ topFiveTwo.music.title }}
+                    {{ topFiveTwo.title }}
                   %td
-                    {{ topFiveTwo.music.duration }}
+                    {{ formatTime(topFiveTwo.duration) }}
                   %td
-                    {{ topFiveTwo.music.price }} $
+                    {{ topFiveTwo.price }} $
             %h5{ "ng-if" => "battle.artist_two.topFive.length == 0" }
               {{ labels.DISPLAY_BATTLE_NO_MUSIC_LABEL }}
-      %p Currently no battle
+      %p{ "ng-if" => "battle == false" } Currently no battle

@@ -21,15 +21,6 @@ SoonzikApp.controller('NewsCtrl', ['$scope', '$routeParams', 'SecureAuth', 'HTTP
 	$scope.initOneNews = function() {
 		$scope.initFoundation();
 
-		$(window).scroll(function() {
-			if($(window).scrollTop() + $(window).height() == $(document).height() && $scope.commentLoading == false) {
-				$scope.$apply(function() {
-					$scope.commentLoading = true;
-					$scope.showComments();
-				});
-			}
-		});
-
 		// Share Twitter
 		!function(d,s,id)
             {
@@ -80,7 +71,7 @@ SoonzikApp.controller('NewsCtrl', ['$scope', '$routeParams', 'SecureAuth', 'HTTP
 			$scope.newsLoading = false;
 
 		}, function (error) {
-			console.log($rootScope.labels.FILE_NEWS_LOAD_ERROR_MESSAGE);
+			NotificationService.error($rootScope.labels.FILE_NEWS_LOAD_ERROR_MESSAGE);
 		})
 	}
 
@@ -93,9 +84,19 @@ SoonzikApp.controller('NewsCtrl', ['$scope', '$routeParams', 'SecureAuth', 'HTTP
 			$scope.thisNews = response.data.content;
 			$scope.attachments = $scope.thisNews.attachments;
 			$scope.author = $scope.thisNews.user;
+			$scope.showComments();
+
+		$(window).scroll(function() {
+			if($(window).scrollTop() + $(window).height() == $(document).height() && $scope.newsLoading == false) {
+				$scope.$apply(function() {
+					$scope.newsLoading = true;
+					$scope.showComments();
+				});
+			}
+		});
 
 		}, function (error) {
-			console.log($rootScope.labels.FILE_NEWS_ONE_NEWS_ERROR_MESSAGE);
+			NotificationService.error($rootScope.labels.FILE_NEWS_ONE_NEWS_ERROR_MESSAGE);
 		});
 
 		$scope.thisNewsId = true;
@@ -105,19 +106,16 @@ SoonzikApp.controller('NewsCtrl', ['$scope', '$routeParams', 'SecureAuth', 'HTTP
 	$scope.showComments = function() {
 
 		var parameters = [
-  			{ key: "offset", value: $scope.commentariesOffset },
-  			{ key: "limit", value: 20 },
-  			{ key: "order_reverse", value: true }
-  		];
+			{ key: "offset", value: $scope.commentaries.length },
+			{ key: "limit", value: 20 },
+			{ key: "order_reverse", value: true }
+  	];
 
-  		var newsId = $routeParams.id;
+  	var newsId = $routeParams.id;
 		
 		HTTPService.showComment(newsId, parameters).then(function(response) {
 
 			$scope.commentaries = $scope.commentaries.concat(response.data.content);
-			$scope.commentariesOffset = $scope.commentaries.length;
-
-			console.log($scope.commentariesOffset);
 
 			$scope.commentLoading = false;
   		
@@ -137,7 +135,6 @@ SoonzikApp.controller('NewsCtrl', ['$scope', '$routeParams', 'SecureAuth', 'HTTP
 			HTTPService.addComment($routeParams.id, parameters).then(function(response) {
 
 				$scope.commentaries.unshift(response.data.content);
-				$scope.commentariesOffset++;
 				$scope.commentary.content = "";
 
 			}, function(error) {

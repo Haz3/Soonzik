@@ -11,12 +11,12 @@
               %a{:href=>"http://lvh.me:3000/news/" + "{{new.id}}" }
                 {{ new.title }}
           .small-12.small-centered.columns.vignette{"ng-repeat" => "url in new.attachments" }
-            %a{:href=>"http://lvh.me:3000/news/" + "{{new.id}}" }
-              %img{"ng-src" => "{{ url.url }}"}
+            %a{:href=>"/news/" + "{{new.id}}" }
+              %img{"ng-src" => "{{ '/assets/news/' + url.url }}"}
           .content
-            %h6{"ng-repeat" => "text in new.newstexts"}
-              {{ text.content }}
+            %p.black
+              {{ new.content }}
           .right
-            %a{:href=>"http://lvh.me:3000/news/" + "{{new.id}}" } {{ labels.DISPLAY_NEWS_SHOW_MORE }}
+            %a{:href=>"/news/" + "{{new.id}}" } {{ labels.DISPLAY_NEWS_SHOW_MORE }}
         %loading{ "loading-type" => "'square'", "ng-show" => "commentLoading == true" }
 

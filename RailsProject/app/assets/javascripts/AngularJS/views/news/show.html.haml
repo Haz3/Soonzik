@@ -1,6 +1,6 @@
 .news{ "ng-init" => "showNewsById()" }
   %loading{ "ng-if" => "loading == true" }
-  .row{ "ng-if" => "loading == false", "ng-init" => "initOneNews()"}
+  .row{ "ng-if" => "loading == false", "ng-init" => "initOneNews()", "on-scroll" => "showComments()", "scroll-position" => "'bottom'"}
     .clearfix
       .ul.small-11.small-centered.columns{"ng-show" => "thisNewsId"}
         .panel.radius
@@ -12,10 +12,10 @@
                 {{ thisNews.title }}
               %li.right.small-3.columns.date
                 {{ thisNews.date | date:"MM/dd/yyyy 'at' h:mma"}}
-          %p{"ng-repeat" => "url in attachments" }
-            %img{"ng-src" => "{{ url.url }}"}
-          %p{"ng-repeat" => "text in thisNews.newstexts"}
-            {{ text.content }}
+          %div{"ng-repeat" => "url in attachments" }
+            %img{"ng-src" => "{{ '/assets/news/' + url.url }}"}
+          %p.black
+            {{ thisNews.content }}
         %meta{:property => "og:url", :content => "http://www.lvh.me:3000/news/{{thisNews.id}}"}
         %meta{:property => "og:type", :content => "article"}
         %meta{:property => "og:title", :content => "{{thisNews.title}}"}
@@ -23,7 +23,7 @@
         %meta{:property => "og:image", :content => "http://static01.nyt.com/images/2015/02/19/arts/international/19iht-btnumbers19A/19iht-btnumbers19A-facebookJumbo-v2.jpg"}
         .large-12
           %textarea.radius{"placeholder" => "Ecrire un commentaire", "ng-model" => "commentary.content"}
-          .action
+          .action.clearfix
             // Share Facebook
             .fb-share-button{":data-href" => "http://www.lvh.me:3000/news/{{thisNews.id}}", ":data-layout" => "button_count"}
             // Share Twitter
@@ -32,8 +32,8 @@
             
             /%button.g-interactivepost{"data-calltoactiondeeplinkid" => "/pages/create", "data-calltoactionlabel" => "CREATE", "data-calltoactionurl" => "http://plus.google.com/pages/create", "data-clientid" => "xxxxx.apps.googleusercontent.com", "data-contentdeeplinkid" => "/pages", "data-contenturl" => "http://lvh.me:3000/news/1", "data-cookiepolicy" => "single_host_origin", "data-prefilltext" => "News 1"} Tell your friends
 
-            .button.success.radius{:type => "submit", "ng-click" => "postComment()"} Envoyé
-          .panel.content-comment{"ng-repeat" => "comment in commentaries"}
+            .button.success.radius{:type => "submit", "ng-click" => "postComment()"} Envoyer
+          .panel.content-comment.clearfix{"ng-repeat" => "comment in commentaries"}
             .info-user
               .photo
                 %img{"ng-src" => "{{ '/assets/usersImage/avatars/' + comment.user.image }}"}
@@ -43,4 +43,4 @@
             .divider
             .comment
               {{ comment.content }}
-            %loading{ "loading-type" => "'square'", "ng-show" => "commentLoading == true" }
+          %loading{ "loading-type" => "'square'", "ng-show" => "commentLoading == true" }
