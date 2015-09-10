@@ -14,11 +14,11 @@ SoonzikApp.factory('SecureAuth', ['$http', '$routeParams', '$location', '$cookie
       		user.username = $cookies.get("user_username");
       	return user;
       },
-      securedTransaction: function(securedFunctionSuccess, securedFunctionError, test) {
+      securedTransaction: function(securedFunctionSuccess, securedFunctionError) {
         if (isUsed) {
           var that = this;
           $timeout(function() {
-            that.securedTransaction(securedFunctionSuccess, securedFunctionError, test);
+            that.securedTransaction(securedFunctionSuccess, securedFunctionError);
           }, 500);
         } else {
           isUsed = true;
@@ -38,6 +38,13 @@ SoonzikApp.factory('SecureAuth', ['$http', '$routeParams', '$location', '$cookie
             isUsed = false;
             securedFunctionError(error);
           });
+        }
+      },
+      getLanguage: function() {
+        if (typeof $cookies.get("language") !== "undefined") {
+          return $cookies.get("language");
+        } else {
+          return "EN";
         }
       }
   }
