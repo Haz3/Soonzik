@@ -27,7 +27,8 @@ namespace SoonZik.Controls
 
             var postParams = new
             {
-                name = "Facebook Post Testing from App.",
+                name = _selectedNews.Newstexts[0].title,
+                caption = _selectedNews.Newstexts[0].content,
                 description = TextBoxShare.Text,
                 picture = "http://facebooksdk.net/assets/img/logo75x75.png"
             };

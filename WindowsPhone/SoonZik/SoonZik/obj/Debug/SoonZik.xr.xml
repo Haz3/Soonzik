@@ -98,6 +98,7 @@
     <RootPropertyPathName Name="ProgressOn" />
     <RootPropertyPathName Name="InscritpiomCommand" />
     <RootPropertyPathName Name="ConnexionCommand" />
+    <RootPropertyPathName Name="TwitterTapped" />
     <RootPropertyPathName Name="FacebookTapped" />
     <RootPropertyPathName Name="style_name" />
     <RootPropertyPathName Name="ListArtiste" />

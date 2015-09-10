@@ -1,4 +1,6 @@
 ﻿using System;
+using System.IO;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using Windows.ApplicationModel.Activation;
 using Windows.ApplicationModel.Core;
@@ -9,15 +11,17 @@ using Windows.UI.Xaml.Media.Imaging;
 using Facebook;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using LinqToTwitter;
+using LinqToTwitter.Security;
 using Microsoft.Practices.ServiceLocation;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using SoonZik.Helpers;
 using SoonZik.HttpRequest;
-using SoonZik.HttpRequest.Poco;
 using SoonZik.Utils;
 using SoonZik.Views;
 using News = SoonZik.Views.News;
+using User = SoonZik.HttpRequest.Poco.User;
 
 namespace SoonZik.ViewModel
 {
@@ -74,6 +78,8 @@ namespace SoonZik.ViewModel
 
         public RelayCommand FacebookTapped { get; private set; }
 
+        public ICommand TwitterTapped { get; private set; }
+
         public INavigationService Navigation;
 
         #endregion
@@ -88,7 +94,8 @@ namespace SoonZik.ViewModel
             FacebookTapped = new RelayCommand(MakeFacebookConnection);
             SelectionCommand = new RelayCommand(SelectionExecute);
             InscritpiomCommand = new RelayCommand(ExecuteInscription);
-            if (_localSettings != null && (string) _localSettings.Values["SoonZikAlreadyConnect"] == "yes")
+            TwitterTapped = new RelayCommand(TwitterCommandExecute);
+            if (_localSettings != null && (string)_localSettings.Values["SoonZikAlreadyConnect"] == "yes")
             {
                 _password = _localSettings.Values["SoonZikPassWord"].ToString();
                 _username = _localSettings.Values["SoonZikUserName"].ToString();
@@ -115,8 +122,7 @@ namespace SoonZik.ViewModel
             //}
         }
 
-        private void NetworkOnInternetConnectionChanged(object sender,
-            InternetConnectionChangedEventArgs internetConnectionChangedEventArgs)
+        private void NetworkOnInternetConnectionChanged(object sender, InternetConnectionChangedEventArgs internetConnectionChangedEventArgs)
         {
             if (!Network.IsConnected)
             {
@@ -151,12 +157,9 @@ namespace SoonZik.ViewModel
                 try
                 {
                     var stringJson = JObject.Parse(res).SelectToken("content").ToString();
-                    Singleton.Instance().CurrentUser = JsonConvert.DeserializeObject(stringJson, typeof (User)) as User;
+                    Singleton.Instance().CurrentUser = JsonConvert.DeserializeObject(stringJson, typeof(User)) as User;
                     Singleton.Instance().CurrentUser.profilImage =
-                        new BitmapImage(
-                            new Uri(
-                                "http://soonzikapi.herokuapp.com/assets/usersImage/avatars/" +
-                                Singleton.Instance().CurrentUser.image, UriKind.RelativeOrAbsolute));
+                        new BitmapImage(new Uri("http://soonzikapi.herokuapp.com/assets/usersImage/avatars/" + Singleton.Instance().CurrentUser.image, UriKind.RelativeOrAbsolute));
 
                     ServiceLocator.Current.GetInstance<MyNetworkViewModel>().UpdateFriend();
                 }
@@ -167,7 +170,7 @@ namespace SoonZik.ViewModel
                 }
                 WriteInformation();
                 Singleton.Instance().NewsPage = new News();
-                Navigation.Navigate(typeof (MainView));
+                Navigation.Navigate(typeof(MainView));
                 ProgressOn = false;
             }
             else
@@ -189,6 +192,23 @@ namespace SoonZik.ViewModel
             ObjFBHelper.LoginAndContinue();
         }
 
+        private void TwitterCommandExecute()
+        {
+            var twitterConenc = new PinAuthorizer()
+            {
+                CredentialStore = new InMemoryCredentialStore
+                {
+                    ConsumerKey = "ooWEcrlhooUKVOxSgsVNDJ1RK",
+                    ConsumerSecret = "BtLpq9ZlFzXrFklC2f1CXqy8EsSzgRRVPZrKVh0imI2TOrZAan",
+                    OAuthToken = "1951971955-TJuWAfR6awbG9ds1lEh9quuHzqtnx1xlRtORZD2",
+                    OAuthTokenSecret = "mrRO5x2p4z0tOGeIwvnw5D6iDplGIFhONL0bGbZpmhYLF"
+                }
+            };
+
+            var res = twitterConenc.AuthorizeAsync();
+            var service = new TwitterContext(twitterConenc);
+        }
+
         public async void ContinueWithWebAuthenticationBroker(WebAuthenticationBrokerContinuationEventArgs args)
         {
             ProgressOn = true;
@@ -205,7 +225,7 @@ namespace SoonZik.ViewModel
                 var getKey = new HttpRequestGet();
 
                 var key = await getKey.GetSocialToken(id, "facebook") as string;
-                char[] delimiter = {' ', '"', '{', '}'};
+                char[] delimiter = { ' ', '"', '{', '}' };
                 var word = key.Split(delimiter);
                 var stringEncrypt = (id + word[4] + "3uNi@rCK$L$om40dNnhX)#jV2$40wwbr_bAK99%E");
                 var sha256 = EncriptSha256.EncriptStringToSha256(stringEncrypt);
