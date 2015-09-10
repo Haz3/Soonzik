@@ -35,6 +35,11 @@ var labels = {
 	DISPLAY_MENU_SEARCH_PLACEHOLDER: "Search users, musics, albums...",
 
 	// Album Controller
+	FILE_ALBUM_ADD_ALBUM_MESSAGE: "Album successfuly adding into the cart",
+	FILE_ALBUM_ADD_ALBUM_ERROR_MESSAGE: "An error occured while adding album into the cart",
+    FILE_ALBUM_ADD_SONG_MESSAGE: "Song is successfuly add into the cart", 
+    FILE_ALBUM_ADD_SONG_ERROR_MESSAGE: "An error occured while adding song into the cart",
+
 	FILE_ALBUM_GET_NOTES_ERROR_MESSAGE: "Error while loading your notes",
 	FILE_ALBUM_FIND_PLAYLIST_ERROR_MESSAGE: "Error while deleting the playlist : ",
 	FILE_ALBUM_GET_ALBUM_ERROR_MESSAGE: "Error while loading the album",
@@ -122,6 +127,7 @@ var labels = {
 	FILE_USER_GOOGLE_CONNECTION_ERROR_MESSAGE: "Can't connect to Google, please try later",
 
 	// Album Show View
+	DISPLAY_ALBUM_ADD_TO_CART: "Add to cart",
 	DISPLAY_ALBUM_ADD_PLAYLIST_BUTTON: "Add to Playlist",
 	DISPLAY_ALBUM_ADD_PLAYLIST_LABEL: "Add",
 	DISPLAY_ALBUM_LISTEN_LABEL: "Listen",
@@ -314,7 +320,7 @@ var labels = {
     // Cart Controller
     DISPLAY_CART_INDEX: "Cart",
     DISPLAY_CART_BUY: "Buy your cart",
-
+ 
     FILE_CART_LOAD_ERROR_MESSAGE: "An error occured while getting the cart",
     FILE_CART_DELETE_ITEM_ERROR_MESSAGE: "An error occured while destroying an item in cart",
     FILE_CART_DELETE_SUCCESS_MESSAGE: "Item is successfuly delete",

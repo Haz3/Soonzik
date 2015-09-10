@@ -35,6 +35,11 @@ var labels = {
 	DISPLAY_MENU_SEARCH_PLACEHOLDER: "Chercher des utilisateurs, musiques, albums...",
 
 	// Album Controller
+	FILE_ALBUM_ADD_ALBUM_MESSAGE: "L'album a bien été ajouté au panier",
+	FILE_ALBUM_ADD_ALBUM_ERROR_MESSAGE: "Une erreur s'est produite lors de l'ajout au panier",
+    FILE_ALBUM_ADD_SONG_MESSAGE: "La musique a bien été ajouté au panier", 
+    FILE_ALBUM_ADD_SONG_ERROR_MESSAGE: "Une erreur s'est produite lors de l'ajout au panier",
+
 	FILE_ALBUM_GET_NOTES_ERROR_MESSAGE: "Une erreur s'est produite au chargement des notes",
 	FILE_ALBUM_FIND_PLAYLIST_ERROR_MESSAGE: "Une erreur s'est produite pendant la suppresion d'une liste de lecture : ",
 	FILE_ALBUM_GET_ALBUM_ERROR_MESSAGE: "Une erreur s'est produite au chargement d'un album",
@@ -122,6 +127,7 @@ var labels = {
 	FILE_USER_GOOGLE_CONNECTION_ERROR_MESSAGE: "Impossible de se connecter à Google Plus",
 
 	// Album Show View
+	DISPLAY_ALBUM_ADD_TO_CART: "Ajouter au panier",
 	DISPLAY_ALBUM_ADD_PLAYLIST_BUTTON: "Ajouter à la liste de lecture",
 	DISPLAY_ALBUM_ADD_PLAYLIST_LABEL: "Ajouter",
 	DISPLAY_ALBUM_LISTEN_LABEL: "Ecouter",
