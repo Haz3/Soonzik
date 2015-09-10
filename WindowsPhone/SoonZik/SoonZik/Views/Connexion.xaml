@@ -47,7 +47,13 @@
             </interactivity:Interaction.Behaviors>
         </Image>
         <Image Grid.Row="1" Source="../Resources/Icones/twitter.png" Width="50" Height="50" VerticalAlignment="Center"
-               HorizontalAlignment="Center" />
+               HorizontalAlignment="Center">
+            <interactivity:Interaction.Behaviors>
+                <core:EventTriggerBehavior EventName="Tapped">
+                    <core:InvokeCommandAction Command="{Binding TwitterTapped}" />
+                </core:EventTriggerBehavior>
+            </interactivity:Interaction.Behaviors>
+        </Image>
         <Image Grid.Row="1" Source="../Resources/Icones/googleplus.png" Width="50" Height="50"
                VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,225,60,225" />
 
