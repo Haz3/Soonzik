@@ -75,7 +75,7 @@
     <RootPropertyPathName Name="ValidateCommand" />
     <RootPropertyPathName Name="NewUser" />
     <RootPropertyPathName Name="phoneNumber" />
-    <RootPropertyPathName Name="address" />
+    <RootPropertyPathName Name="NewAddress" />
     <RootPropertyPathName Name="Zipcode" />
     <RootPropertyPathName Name="Country" />
     <RootPropertyPathName Name="City" />
@@ -90,6 +90,7 @@
     <RootPropertyPathName Name="CurrentUser" />
     <RootPropertyPathName Name="follows" />
     <RootPropertyPathName Name="SelectUser" />
+    <RootPropertyPathName Name="address" />
     <RootPropertyPathName Name="description" />
     <RootPropertyPathName Name="ButtonFriendText" />
     <RootPropertyPathName Name="AddCommand" />

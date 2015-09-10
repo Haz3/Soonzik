@@ -1,12 +1,21 @@
 ﻿using System;
 using System.Linq;
 using System.Windows.Input;
+using Windows.ApplicationModel.Core;
+using Windows.UI.Core;
 using Windows.UI.Popups;
+using Windows.UI.Xaml.Media.Imaging;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using Microsoft.Practices.ServiceLocation;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using SoonZik.Helpers;
 using SoonZik.HttpRequest;
 using SoonZik.HttpRequest.Poco;
+using SoonZik.Utils;
+using SoonZik.Views;
+using News = SoonZik.HttpRequest.Poco.News;
 
 namespace SoonZik.ViewModel
 {
@@ -19,8 +28,11 @@ namespace SoonZik.ViewModel
             ValidateCommand = new RelayCommand(ValidateExecute);
             PasswordBoxCommand = new RelayCommand(PasswordBoxCommandExecute);
             NewUser = new User();
-            NewUser.address = new Address();
+            NewAddress = new Address();
+            Navigation = new NavigationService();
         }
+
+
         #endregion
 
         #region Attribute
@@ -46,7 +58,6 @@ namespace SoonZik.ViewModel
                 RaisePropertyChanged("Birthday");
             }
         }
-        public ICommand ValidateCommand { get; private set; }
         private User _newUser;
         public User NewUser
         {
@@ -57,12 +68,23 @@ namespace SoonZik.ViewModel
                 RaisePropertyChanged("NewUser");
             }
         }
-        public ICommand PasswordBoxCommand { get; private set; }
 
+        private Address _newAddress;
+
+        public Address NewAddress
+        {
+            get { return _newAddress;}
+            set { _newAddress = value; RaisePropertyChanged("NewAddress"); }
+        }
+        public ICommand PasswordBoxCommand { get; private set; }
+        public ICommand ValidateCommand { get; private set; }
+        public ICommand CheckAdress { get; private set; }
+
+        public INavigationService Navigation;
         #endregion
 
         #region Method
-
+        
         private void PasswordBoxCommandExecute()
         {
             if (Password.Length < 8 && Password != null)
@@ -86,6 +108,13 @@ namespace SoonZik.ViewModel
                     day = "0" + Birthday.Day;
                 }
                 NewUser.birthday = Birthday.Year + "-" + month + "-" + day + " 00:00:00";
+
+                if (NewAddress.City != null)
+                {
+                    NewUser.address = new Address();
+                    NewUser.address = NewAddress;
+                }
+
                 PostUser();
             }
             else
@@ -97,8 +126,55 @@ namespace SoonZik.ViewModel
         private async void PostUser()
         {
             var postRequest = new HttpRequestPost();
-            var res = await postRequest.Save(NewUser, "", _password);
+            var res = await postRequest.Save(NewUser, "", Password);
             new MessageDialog("Inscription OK").ShowAsync();
+            MakeConnexion();
+        }
+
+        private async void MakeConnexion()
+        {
+            var dispatcher = CoreApplication.MainView.CoreWindow.Dispatcher;
+
+            await dispatcher.RunAsync(CoreDispatcherPriority.Normal, async () =>
+            {
+                if (NewUser.username != string.Empty && _password != string.Empty)
+                {
+                    var connec = new HttpRequestPost();
+                    await connec.ConnexionSimple(NewUser.email, _password);
+                    var res = connec.Received;
+                    GetUser(res);
+                }
+                else
+                {
+                    new MessageDialog("Veuillez entrer vos informations de connexion").ShowAsync();
+                }
+            });
+        }
+
+        private void GetUser(string res)
+        {
+            if (res != null)
+            {
+                try
+                {
+                    var stringJson = JObject.Parse(res).SelectToken("content").ToString();
+                    Singleton.Instance().CurrentUser = JsonConvert.DeserializeObject(stringJson, typeof(User)) as User;
+                    Singleton.Instance().CurrentUser.profilImage =
+                        new BitmapImage(new Uri("http://soonzikapi.herokuapp.com/assets/usersImage/avatars/" + Singleton.Instance().CurrentUser.image, UriKind.RelativeOrAbsolute));
+
+                    ServiceLocator.Current.GetInstance<MyNetworkViewModel>().UpdateFriend();
+                }
+                catch (Exception e)
+                {
+                    new MessageDialog("Erreur de connexion" + e).ShowAsync();
+                }
+                Singleton.Instance().NewsPage = new Views.News();
+                Navigation.Navigate(typeof(MainView));
+            }
+            else
+            {
+                new MessageDialog("Erreur de connexion Code 502").ShowAsync();
+            }
         }
 
         #endregion
