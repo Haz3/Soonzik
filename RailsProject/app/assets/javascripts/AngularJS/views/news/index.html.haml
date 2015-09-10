@@ -2,7 +2,7 @@
   %loading{ "ng-if" => "loading == true" }
   .row{ "ng-if" => "loading == false", "ng-init" => "initNews()"}
     %h3.subheader
-      Listing news
+      {{ labels.DISPLAY_NEWS_LABEL }}
     .ul.small-11.small-centered.columns{"ng-show" => "News"}
       %li{ "ng-repeat" => "new in news"}
         .panel.radius
@@ -17,4 +17,6 @@
             %h6{"ng-repeat" => "text in new.newstexts"}
               {{ text.content }}
           .right
-            %a{:href=>"http://lvh.me:3000/news/" + "{{new.id}}" } Voir plus
+            %a{:href=>"http://lvh.me:3000/news/" + "{{new.id}}" } {{ labels.DISPLAY_NEWS_SHOW_MORE }}
+        %loading{ "loading-type" => "'square'", "ng-show" => "commentLoading == true" }
+

@@ -1,4 +1,4 @@
-SoonzikApp.controller('NewsCtrl', ['$scope', '$routeParams', 'SecureAuth', 'HTTPService', 'NotificationService', function ($scope, $routeParams, SecureAuth, HTTPService, NotificationService) {
+SoonzikApp.controller('NewsCtrl', ['$scope', '$routeParams', 'SecureAuth', 'HTTPService', 'NotificationService', "$rootScope", function ($scope, $routeParams, SecureAuth, HTTPService, NotificationService, $rootScope) {
 
 	$scope.loading = true;
 
@@ -80,7 +80,7 @@ SoonzikApp.controller('NewsCtrl', ['$scope', '$routeParams', 'SecureAuth', 'HTTP
 			$scope.newsLoading = false;
 
 		}, function (error) {
-			console.log("No News Available");
+			console.log($rootScope.labels.FILE_NEWS_LOAD_ERROR_MESSAGE);
 		})
 	}
 
@@ -95,7 +95,7 @@ SoonzikApp.controller('NewsCtrl', ['$scope', '$routeParams', 'SecureAuth', 'HTTP
 			$scope.author = $scope.thisNews.user;
 
 		}, function (error) {
-			console.log("This news doesn't exist");
+			console.log($rootScope.labels.FILE_NEWS_ONE_NEWS_ERROR_MESSAGE);
 		});
 
 		$scope.thisNewsId = true;
@@ -122,7 +122,7 @@ SoonzikApp.controller('NewsCtrl', ['$scope', '$routeParams', 'SecureAuth', 'HTTP
 			$scope.commentLoading = false;
   		
   		}, function(error) {
-  			NotificationService.error("Error while loading commentaries");
+  			NotificationService.error($rootScope.labels.FILE_NEWS_LOAD_COMMENT_ERROR_MESSAGE);
   		});
 	}
 
@@ -141,10 +141,10 @@ SoonzikApp.controller('NewsCtrl', ['$scope', '$routeParams', 'SecureAuth', 'HTTP
 				$scope.commentary.content = "";
 
 			}, function(error) {
-				NotificationService.error("Error while saving your comment, please try later");
+				NotificationService.error($rootScope.labels.FILE_NEWS_SEND_COMMENT_ERROR_MESSAGE);
 			});
 		}, function(error) {
-			NotificationService.error("Error while saving your comment, are you connected ?");
+			NotificationService.error($rootScope.labels.FILE_NEWS_SEND_COMMENT_ERROR_MESSAGE);
 		});
 	}
 

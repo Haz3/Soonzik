@@ -312,18 +312,28 @@ var labels = {
     FILE_CART_BUY_ERROR_MESSAGE: "Une errur s'est produite lors de l'achat du panier",
 
     // Friends Controller
-    FRIEND_ERROR_DISPLAY_MESSAGE: "Une erreur s'est produite lors de la recupération des amis",
+
+    DISPLAY_FRIENDS_LABEL: "Amis",
+    FILE_FRIEND_LOAD_FRIENDS_ERROR_MESSAGE: "Une erreur s'est produite lors de la recupération des amis",
      
     // News Controller
-    NEWS_LOAD_COMMENT_ERROR_MESSAGE: "Une erreur s'est produite lors de la recupération des commentaires",
-    NEWS_SEND_COMMENT_ERROR_MESSAGE: "Une erreur s'est produite lors de la sauvegarde du commentaire",
-    NEWS_LOAD_ERROR_MESSAGE: "Une erreur s'est produite lors de la recupération des actualités",
-    NEWS_LOAD_ONE_NEWS_ERROR_MESSAGE: "La page que vous avez demandé n'existe pas",
+    DISPLAY_NEWS_LABEL: "News",
+    DISPLAY_NEWS_SHOW_MORE: "Show More",
+    DISPLAY_NEWS_COMMENT_SEND: "Send",
+
+    FILE_NEWS_LOAD_COMMENT_ERROR_MESSAGE: "Une erreur s'est produite lors de la recupération des commentaires",
+    FILE_NEWS_SEND_COMMENT_ERROR_MESSAGE: "Une erreur s'est produite lors de la sauvegarde du commentaire",
+    FILE_NEWS_LOAD_ERROR_MESSAGE: "Une erreur s'est produite lors de la recupération des actualités",
+    FILE_NEWS_LOAD_ONE_NEWS_ERROR_MESSAGE: "La page que vous avez demandé n'existe pas",
      
     // Packs Controller
-    PACK_LOAD_ERROR_MESSAGE: "Une erreur s'est produite lors de la recupération des packs",
-    PACK_LOAD_ONE_PACK_ERROR_MESSAGE: "La page que vous avez demandé n'est pas disponible",
-    PACK_BUY_PACK_ERROR_MESSAGE: "Une erreur s'est produite lors de l'achat du pack",
+	DISPLAY_PACK_LABEL: "Packs du moment",
+	DISPLAY_PACK_TIMELEFT: "Temps Restant",
+	DISPLAY_PACK_AVERAGE: "Moyenne", 
+
+    FILE_PACK_LOAD_ERROR_MESSAGE: "Une erreur s'est produite lors de la recupération des packs",
+    FILE_PACK_LOAD_ONE_PACK_ERROR_MESSAGE: "La page que vous avez demandé n'est pas disponible",
+    FILE_PACK_BUY_PACK_ERROR_MESSAGE: "Une erreur s'est produite lors de l'achat du pack",
 
 
 }

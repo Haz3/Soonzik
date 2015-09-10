@@ -20,33 +20,12 @@
         %meta{:property => "og:type", :content => "article"}
         %meta{:property => "og:title", :content => "{{thisNews.title}}"}
         %meta{:property => "og:description", :content => "{{thisNews.title}}"}
-        %meta{:property => "og:image", :content => "{{url.url}}"}
+        %meta{:property => "og:image", :content => "http://static01.nyt.com/images/2015/02/19/arts/international/19iht-btnumbers19A/19iht-btnumbers19A-facebookJumbo-v2.jpg"}
         .large-12
           %textarea.radius{"placeholder" => "Ecrire un commentaire", "ng-model" => "commentary.content"}
           .action
-            :javascript
-              //  Twitter
-              !function(d,s,id)
-                {
-                  var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';
-                  if(!d.getElementById(id)){
-                    js=d.createElement(s);
-                    js.id=id;
-                    js.src=p+'://platform.twitter.com/widgets.js';
-                    fjs.parentNode.insertBefore(js,fjs);
-                  }
-                }(document, 'script', 'twitter-wjs');
-
-              // Google +
-
-              (function() {
-                var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
-                po.src = 'https://apis.google.com/js/client:plusone.js';
-                var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
-              })();
-
             // Share Facebook
-            .fb-share-button{":data-href" => "http://www.your-domain.com/your-page.html", ":data-layout" => "button_count"}
+            .fb-share-button{":data-href" => "http://www.lvh.me:3000/news/{{thisNews.id}}", ":data-layout" => "button_count"}
             // Share Twitter
             %a.twitter-share-button{"data-hashtags" => "Soonzik", "data-url" => "http://lvh.me:3000/news/{{thisNews.id}}", "data-text" => "{{thisNews.title}}", "data-via" => "Soonzik", :href => "https://twitter.com/share"} Tweet
             // Share Google +

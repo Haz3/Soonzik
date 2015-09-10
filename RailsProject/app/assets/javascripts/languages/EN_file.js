@@ -328,18 +328,26 @@ var labels = {
     FILE_CART_BUY_ERROR_MESSAGE: "An error occured while buying the cart", 
     
     // Friends Controller
-    FRIEND_ERROR_DISPLAY_MESSAGE: "An error occured while loading your friends",
+    DISPLAY_FRIENDS_LABEL: "Friends",
+    FILE_FRIEND_LOAD_FRIENDS_ERROR_MESSAGE: "An error occured while loading your friends",
 
     // News Controller
-    NEWS_LOAD_COMMENT_ERROR_MESSAGE: "Error while loading commentaries",
-    NEWS_SEND_COMMENT_ERROR_MESSAGE: "Error while saving your comment, please try later",
-    NEWS_LOAD_ERROR_MESSAGE: "Error while loading news",
-    NEWS_LOAD_ERROR_MESSAGE: "Error while loading news",
-    NEWS_LOAD_ONE_NEWS_ERROR_MESSAGE: "The page you asked is not available",
+    DISPLAY_NEWS_LABEL: "News",
+    DISPLAY_NEWS_SHOW_MORE: "Show More",
+    DISPLAY_NEWS_COMMENT_SEND: "Send",
+
+    FILE_NEWS_LOAD_COMMENT_ERROR_MESSAGE: "Error while loading commentaries",
+    FILE_NEWS_SEND_COMMENT_ERROR_MESSAGE: "Error while saving your comment, please try later",
+    FILE_NEWS_LOAD_ERROR_MESSAGE: "Error while loading news",
+    FILE_NEWS_LOAD_ONE_NEWS_ERROR_MESSAGE: "The page you asked is not available",
 
 
    // Packs Controller
-   PACK_LOAD_ERROR_MESSAGE: "Error while loading packs",
-   PACK_LOAD_ONE_PACK_ERROR_MESSAGE: "The page you asked is not available",
-   PACK_BUY_PACK_ERROR_MESSAGE: "Error while buying your cart", 
+   DISPLAY_PACK_LABEL: "Packs of the moment",
+   DISPLAY_PACK_TIMELEFT: "Time left",
+   DISPLAY_PACK_AVERAGE: "Average", 
+
+   FILE_PACK_LOAD_ERROR_MESSAGE: "Error while loading packs",
+   FILE_PACK_LOAD_ONE_PACK_ERROR_MESSAGE: "The page you asked is not available",
+   FILE_PACK_BUY_PACK_ERROR_MESSAGE: "Error while buying your cart", 
 }

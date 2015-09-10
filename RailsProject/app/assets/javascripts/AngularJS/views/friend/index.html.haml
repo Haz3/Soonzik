@@ -2,7 +2,7 @@
   %loading{ "ng-if" => "loading == true" }
   .row{ "ng-if" => "loading == false", "ng-init" => "initFoundation()"}
     %h3.subheader
-      Amis
+      {{ labels.DISPLAY_FRIENDS_LABEL }}
     .ul.large-block-grid-4{"ng-show" => "Friend"}
       %li{ "ng-repeat" => "friend in friends"}
         .panel

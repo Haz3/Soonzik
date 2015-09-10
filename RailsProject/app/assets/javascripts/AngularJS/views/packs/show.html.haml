@@ -4,8 +4,9 @@
     %div{"ng-show" => "thisPackId"}
       %h3.subheader.text-center
         {{ thisPack.title }}
-      %h5.subheader.text-center
-        Time is running out : {{ timeLeft }}
+      %div{"ng-init" => "timeLeft()"}
+        %h5.subheader.text-center
+          Time is running out : {{ timeLeftPack }}
       .ul.large-block-grid-4.centered.columns
         %li{"ng-repeat" => "album in thisPack.albums"}
           .panel
@@ -13,7 +14,7 @@
               %p.text-center
                 {{ album.title }}
             %a{:href => "http://lvh.me:3000/albums/ {{ album.id }}"}
-              %img{"src" => "albums/{{ album.image }}"}
+              %img{ "ng-src" => "{{ '/assets/albums/' + thisPack.albums[0].image }} " }
             .divider
             Artiste : {{ album.user.username }}
             %br
@@ -49,8 +50,8 @@
               .divider
               Total : {{ priceMini }}
         .large-6.columns
-          .panel.right
-            %battle{ "battle-values" => "show.percentages" }
+          .panel
+            %battle{ "battle-values" => "percentages" }
         
         //Albums + song
         

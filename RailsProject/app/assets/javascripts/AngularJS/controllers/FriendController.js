@@ -1,4 +1,4 @@
-SoonzikApp.controller('FriendCtrl', ['$scope', 'SecureAuth', 'HTTPService', 'NotificationService', function ($scope, SecureAuth, HTTPService, NotificationService) {
+SoonzikApp.controller('FriendCtrl', ['$scope', 'SecureAuth', 'HTTPService', 'NotificationService', "$rootScope", function ($scope, SecureAuth, HTTPService, NotificationService, $rootScope) {
 
 $scope.loading = true;
 
@@ -15,7 +15,7 @@ $scope.loading = true;
 			console.log($scope.friends);
 
 		}, function (error) {
-			console.log("No friends available");
+			console.log($rootScope.labels.FILE_FRIEND_LOAD_FRIENDS_ERROR_MESSAGE);
 		});
 
 		$scope.Friend = true;

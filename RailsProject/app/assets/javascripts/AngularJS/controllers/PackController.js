@@ -18,7 +18,7 @@ SoonzikApp.controller('PacksCtrl', ['$scope', '$routeParams', 'SecureAuth', 'HTT
 			$scope.pack = packs.data.content;
 
 		}, function (error) {
-			console.log("No Packs Available");
+			console.log($rootScope.labels.FILE_PACK_LOAD_ERROR_MESSAGE);
 		});
 
 		$scope.Pack = true;
@@ -37,10 +37,10 @@ SoonzikApp.controller('PacksCtrl', ['$scope', '$routeParams', 'SecureAuth', 'HTT
 		HTTPService.showPack(id).then(function(response) {
 
 			$scope.thisPack = response.data.content;
-			console.log($scope.thisPack);
+			$scope.end_date = $scope.thisPack.end_date;
 
 		}, function (error) {
-			console.log("This pack doesn't exist");
+			console.log($rootScope.labels.FILE_PACK_LOAD_ONE_PACK_ERROR_MESSAGE);
 		});
 
 		$scope.thisPackId = true;
@@ -49,21 +49,25 @@ SoonzikApp.controller('PacksCtrl', ['$scope', '$routeParams', 'SecureAuth', 'HTT
 
 	$scope.managePrice = function () {
 
-		console.log("managePrice");
-		
 		$scope.priceMini = 20;
 
 		$scope.artistPercentage = (($scope.priceMini * 65) / 100);
 		$scope.associationPercentage = (($scope.priceMini * 20) / 100);
 		$scope.websitePercentage = (($scope.priceMini * 15) / 100);
-
-		console.log($scope.artistPercentage);
 	}
 
 	$scope.timeLeft = function() {
-		var begin = $scope.pack.begin_date;
-		var end = $scope.pack.end_date;
-		
+		var now = new Date();
+		var end = new Date($scope.end_date);
+
+		console.log(now);
+		console.log(end);
+
+		if (end > now) {
+			$scope.timeLeftPack = "Terminé";
+		} else {
+			$scope.timeLeftPack = end - now
+		}
 	}
 
 	$scope.addToCart = function() {
@@ -86,7 +90,7 @@ SoonzikApp.controller('PacksCtrl', ['$scope', '$routeParams', 'SecureAuth', 'HTT
 			});
 */
 		}, function(error) {
-			NotificationService.error("Error while saving your cart, are you connected ?");
+			NotificationService.error($rootScope.labels.FILE_PACK_BUY_PACK_ERROR_MESSAGE);
 		});
 	}
 
