@@ -345,7 +345,13 @@ var labels = {
    // Packs Controller
    DISPLAY_PACK_LABEL: "Packs of the moment",
    DISPLAY_PACK_TIMELEFT: "Time left",
-   DISPLAY_PACK_AVERAGE: "Average", 
+   DISPLAY_PACK_AVERAGE: "Average",
+   DISPLAY_PACK_YEAR_ALBUM: "Release",
+   DISPLAU_PACK_ARTIST_NAME: "Artist",
+   DISPLAY_PACK_DEV_NAME: "Developper",
+   DISPLAY_PACK_ASSOCIATION_NAME: "Association",
+   DISPLAY_PACK_BUY_PACK: "Buy this pack",
+   DISPLAY_PACK_TOTAL_PACK: "Total",
 
    FILE_PACK_LOAD_ERROR_MESSAGE: "Error while loading packs",
    FILE_PACK_LOAD_ONE_PACK_ERROR_MESSAGE: "The page you asked is not available",

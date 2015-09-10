@@ -329,7 +329,13 @@ var labels = {
     // Packs Controller
 	DISPLAY_PACK_LABEL: "Packs du moment",
 	DISPLAY_PACK_TIMELEFT: "Temps Restant",
-	DISPLAY_PACK_AVERAGE: "Moyenne", 
+	DISPLAY_PACK_AVERAGE: "Moyenne",
+   	DISPLAY_PACK_YEAR_ALBUM: "Date de sortie",
+  	DISPLAU_PACK_ARTIST_NAME: "Artiste",
+   	DISPLAY_PACK_DEV_NAME: "Developpeur",
+   	DISPLAY_PACK_ASSOCIATION_NAME: "Association",
+   	DISPLAY_PACK_BUY_PACK: "Acheter ce pack",
+   	DISPLAY_PACK_TOTAL_PACK: "Total",
 
     FILE_PACK_LOAD_ERROR_MESSAGE: "Une erreur s'est produite lors de la recupération des packs",
     FILE_PACK_LOAD_ONE_PACK_ERROR_MESSAGE: "La page que vous avez demandé n'est pas disponible",
