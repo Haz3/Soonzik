@@ -1,6 +1,6 @@
 %cart{"ng-init" => "initFoundation()" }
 	.row{"ng-init" => "showCart()"}
-		%h1 Panier
+		%h1 {{ labels.DISPLAY_CART_LABEL }}
 		%table
 			%thead
 				%tr
@@ -16,4 +16,4 @@
 					%td
 						%a.fi-x{"ng-click" => "deleteItem(musics.id)"}
 		.button.expand.radius.success
-			%a{:href => "#", "ng-click" => "buyCart()"} Acheter le panier
+			%a{:href => "#", "ng-click" => "buyCart()"} {{ labels.DISPLAY_CART_BUY }}

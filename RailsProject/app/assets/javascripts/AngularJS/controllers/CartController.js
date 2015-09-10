@@ -1,4 +1,4 @@
-SoonzikApp.controller('CartCtrl', ['$scope', 'SecureAuth', 'HTTPService', '$timeout', 'NotificationService', function ($scope, SecureAuth, HTTPService, $timeout, NotificationService) {
+SoonzikApp.controller('CartCtrl', ['$scope', 'SecureAuth', 'HTTPService', '$timeout', 'NotificationService', '$rootScope', function ($scope, SecureAuth, HTTPService, $timeout, NotificationService, $rootScope) {
 
 	$scope.loading = true;
 	$scope.haveAlbum = false;
@@ -36,11 +36,11 @@ SoonzikApp.controller('CartCtrl', ['$scope', 'SecureAuth', 'HTTPService', '$time
 
 			}, function(repsonseError) {
 
-				NotificationService.error("Error get Cart");
+				NotificationService.error($rootScope.labels.FILE_CART_LOAD_ERROR_MESSAGE);
 			});
 
 		}, function(error) {
-			NotificationService.error("Error securedTransaction");
+			NotificationService.error($rootScope.labels.FILE_CART_LOAD_ERROR_MESSAGE);
 		});
 		$scope.loading = false;
 	}
@@ -56,34 +56,33 @@ SoonzikApp.controller('CartCtrl', ['$scope', 'SecureAuth', 'HTTPService', '$time
 
 			HTTPService.destroyItem(parameters).then(function(response) {
 
-				NotificationService.success("Objet détruit");
+				NotificationService.success($rootScope.labels.FILE_CART_DELETE_SUCCESS_MESSAGE);
 
 			}, function(error) {
-				NotificationService.error("Erreur lors de la destruction");
+				NotificationService.error($rootScope.labels.FILE_CART_DELETE_ITEM_ERROR_MESSAGE);
 			});
 
 		}, function(error) {
-			NotificationService.error("Error securedTransaction");
+			NotificationService.error($rootScope.labels.FILE_CART_DELETE_ITEM_ERROR_MESSAGE);
 		});
 	}
 
 	$scope.buyCart = function() {
 		SecureAuth.securedTransaction(function(key, id) {
-			
-			var parameters = [
-				{ key: "secureKey" ,value: key },
-				{ key: "user_id", value: id }
-			];
+			var parameters = {
+				secureKey: key,
+				user_id: id
+			};
 
 			HTTPService.buyCart(parameters).then(function(response) {
 
-				NotificationService.success("Le panier a bien été acheté");
+				NotificationService.success($rootScope.labels.FILE_CART_SUCCESS_BUY_CART_MESSAGE);
 
 			}, function(error) {
-				NotificationService.success("Une erreur est survenu lors de l'achat du panier");
+				NotificationService.success($rootScope.labels.FILE_CART_BUY_ERROR_MESSAGE);
 			});
 		}, function(error) {
-			NotificationService.success("Erreur securedTransaction");
+			NotificationService.success($rootScope.labels.FILE_CART_BUY_ERROR_MESSAGE);
 		});
 	}
 

@@ -44,7 +44,7 @@ var labels = {
 	FILE_ALBUM_SET_NOTE_ERROR_MESSAGE: "Error while rating the music, please try later.",
 	FILE_ALBUM_LOAD_COMMENT_ERROR_MESSAGE: "Error while loading commentaries",
 	FILE_ALBUM_SEND_COMMENT_ERROR_MESSAGE: "Error while saving your comment, please try later",
-
+		
 	// Battle Controller
 	FILE_BATTLE_LOAD_BATTLE_ERROR_MESSAGE: "Error while loading the page",
 	FILE_BATTLE_LOAD_ARTIST_ONE_ERROR_MESSAGE: "Error while loading the profile of the first artist.",
@@ -312,11 +312,14 @@ var labels = {
 
 
     // Cart Controller
-    CART_LOAD_ERROR_MESSAGE: "An error occured while getting the cart",
-    CART_DELETE_ITEM_ERROR_MESSAGE: "An error occured while destroying an item in cart",
-    CART_DELETE_ERROR_MESSAGE: "An error occured while destroying the cart",
-    CART_SUCCESS_BUY_CART_MESSAGE: "Cart is successfuly buy",
-    CART_BUY_ERROR_MESSAGE: "An error occured while buying the cart", 
+    DISPLAY_CART_INDEX: "Cart"
+    DISPLAY_CART_BUY: "Buy your cart"
+
+    FILE_CART_LOAD_ERROR_MESSAGE: "An error occured while getting the cart",
+    FILE_CART_DELETE_ITEM_ERROR_MESSAGE: "An error occured while destroying an item in cart",
+    FILE_CART_DELETE_SUCCESS_MESSAGE: "Item is successfuly delete",
+    FILE_CART_SUCCESS_BUY_CART_MESSAGE: "Cart is successfuly buy",
+    FILE_CART_BUY_ERROR_MESSAGE: "An error occured while buying the cart", 
     
     // Friends Controller
     FRIEND_ERROR_DISPLAY_MESSAGE: "An error occured while loading your friends",
