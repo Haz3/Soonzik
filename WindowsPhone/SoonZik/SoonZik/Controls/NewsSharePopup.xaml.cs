@@ -13,7 +13,7 @@ namespace SoonZik.Controls
 {
     public sealed partial class NewsSharePopup : UserControl
     {
-        private News _selectedNews;
+        private readonly News _selectedNews;
 
         public NewsSharePopup(News theNews)
         {

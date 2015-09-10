@@ -1,6 +1,4 @@
 ﻿using System;
-using System.IO;
-using System.Threading.Tasks;
 using System.Windows.Input;
 using Windows.ApplicationModel.Activation;
 using Windows.ApplicationModel.Core;
@@ -12,7 +10,6 @@ using Facebook;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using LinqToTwitter;
-using LinqToTwitter.Security;
 using Microsoft.Practices.ServiceLocation;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -95,7 +92,7 @@ namespace SoonZik.ViewModel
             SelectionCommand = new RelayCommand(SelectionExecute);
             InscritpiomCommand = new RelayCommand(ExecuteInscription);
             TwitterTapped = new RelayCommand(TwitterCommandExecute);
-            if (_localSettings != null && (string)_localSettings.Values["SoonZikAlreadyConnect"] == "yes")
+            if (_localSettings != null && (string) _localSettings.Values["SoonZikAlreadyConnect"] == "yes")
             {
                 _password = _localSettings.Values["SoonZikPassWord"].ToString();
                 _username = _localSettings.Values["SoonZikUserName"].ToString();
@@ -122,7 +119,8 @@ namespace SoonZik.ViewModel
             //}
         }
 
-        private void NetworkOnInternetConnectionChanged(object sender, InternetConnectionChangedEventArgs internetConnectionChangedEventArgs)
+        private void NetworkOnInternetConnectionChanged(object sender,
+            InternetConnectionChangedEventArgs internetConnectionChangedEventArgs)
         {
             if (!Network.IsConnected)
             {
@@ -157,9 +155,12 @@ namespace SoonZik.ViewModel
                 try
                 {
                     var stringJson = JObject.Parse(res).SelectToken("content").ToString();
-                    Singleton.Instance().CurrentUser = JsonConvert.DeserializeObject(stringJson, typeof(User)) as User;
+                    Singleton.Instance().CurrentUser = JsonConvert.DeserializeObject(stringJson, typeof (User)) as User;
                     Singleton.Instance().CurrentUser.profilImage =
-                        new BitmapImage(new Uri("http://soonzikapi.herokuapp.com/assets/usersImage/avatars/" + Singleton.Instance().CurrentUser.image, UriKind.RelativeOrAbsolute));
+                        new BitmapImage(
+                            new Uri(
+                                "http://soonzikapi.herokuapp.com/assets/usersImage/avatars/" +
+                                Singleton.Instance().CurrentUser.image, UriKind.RelativeOrAbsolute));
 
                     ServiceLocator.Current.GetInstance<MyNetworkViewModel>().UpdateFriend();
                 }
@@ -170,7 +171,7 @@ namespace SoonZik.ViewModel
                 }
                 WriteInformation();
                 Singleton.Instance().NewsPage = new News();
-                Navigation.Navigate(typeof(MainView));
+                Navigation.Navigate(typeof (MainView));
                 ProgressOn = false;
             }
             else
@@ -194,7 +195,7 @@ namespace SoonZik.ViewModel
 
         private void TwitterCommandExecute()
         {
-            var twitterConenc = new PinAuthorizer()
+            var twitterConenc = new PinAuthorizer
             {
                 CredentialStore = new InMemoryCredentialStore
                 {
@@ -225,7 +226,7 @@ namespace SoonZik.ViewModel
                 var getKey = new HttpRequestGet();
 
                 var key = await getKey.GetSocialToken(id, "facebook") as string;
-                char[] delimiter = { ' ', '"', '{', '}' };
+                char[] delimiter = {' ', '"', '{', '}'};
                 var word = key.Split(delimiter);
                 var stringEncrypt = (id + word[4] + "3uNi@rCK$L$om40dNnhX)#jV2$40wwbr_bAK99%E");
                 var sha256 = EncriptSha256.EncriptStringToSha256(stringEncrypt);

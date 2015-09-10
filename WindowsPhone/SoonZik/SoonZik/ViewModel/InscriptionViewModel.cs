@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using System.Windows.Input;
 using Windows.ApplicationModel.Core;
 using Windows.UI.Core;
@@ -15,7 +14,7 @@ using SoonZik.HttpRequest;
 using SoonZik.HttpRequest.Poco;
 using SoonZik.Utils;
 using SoonZik.Views;
-using News = SoonZik.HttpRequest.Poco.News;
+using News = SoonZik.Views.News;
 
 namespace SoonZik.ViewModel
 {
@@ -32,12 +31,12 @@ namespace SoonZik.ViewModel
             Navigation = new NavigationService();
         }
 
-
         #endregion
 
         #region Attribute
 
         private string _password;
+
         public string Password
         {
             get { return _password; }
@@ -49,6 +48,7 @@ namespace SoonZik.ViewModel
         }
 
         private DateTimeOffset _birthday;
+
         public DateTimeOffset Birthday
         {
             get { return _birthday; }
@@ -58,7 +58,9 @@ namespace SoonZik.ViewModel
                 RaisePropertyChanged("Birthday");
             }
         }
+
         private User _newUser;
+
         public User NewUser
         {
             get { return _newUser; }
@@ -73,18 +75,24 @@ namespace SoonZik.ViewModel
 
         public Address NewAddress
         {
-            get { return _newAddress;}
-            set { _newAddress = value; RaisePropertyChanged("NewAddress"); }
+            get { return _newAddress; }
+            set
+            {
+                _newAddress = value;
+                RaisePropertyChanged("NewAddress");
+            }
         }
+
         public ICommand PasswordBoxCommand { get; private set; }
         public ICommand ValidateCommand { get; private set; }
         public ICommand CheckAdress { get; private set; }
 
         public INavigationService Navigation;
+
         #endregion
 
         #region Method
-        
+
         private void PasswordBoxCommandExecute()
         {
             if (Password.Length < 8 && Password != null)
@@ -92,7 +100,7 @@ namespace SoonZik.ViewModel
                 new MessageDialog("Password need 8").ShowAsync();
             }
         }
-        
+
         private void ValidateExecute()
         {
             if (EmailHelper.IsValidEmail(NewUser.email))
@@ -101,7 +109,7 @@ namespace SoonZik.ViewModel
                 var day = Birthday.Day.ToString();
                 if (Birthday.Month < 10)
                 {
-                    month = "0" + Birthday.Month.ToString();
+                    month = "0" + Birthday.Month;
                 }
                 if (Birthday.Day < 10)
                 {
@@ -158,9 +166,12 @@ namespace SoonZik.ViewModel
                 try
                 {
                     var stringJson = JObject.Parse(res).SelectToken("content").ToString();
-                    Singleton.Instance().CurrentUser = JsonConvert.DeserializeObject(stringJson, typeof(User)) as User;
+                    Singleton.Instance().CurrentUser = JsonConvert.DeserializeObject(stringJson, typeof (User)) as User;
                     Singleton.Instance().CurrentUser.profilImage =
-                        new BitmapImage(new Uri("http://soonzikapi.herokuapp.com/assets/usersImage/avatars/" + Singleton.Instance().CurrentUser.image, UriKind.RelativeOrAbsolute));
+                        new BitmapImage(
+                            new Uri(
+                                "http://soonzikapi.herokuapp.com/assets/usersImage/avatars/" +
+                                Singleton.Instance().CurrentUser.image, UriKind.RelativeOrAbsolute));
 
                     ServiceLocator.Current.GetInstance<MyNetworkViewModel>().UpdateFriend();
                 }
@@ -168,8 +179,8 @@ namespace SoonZik.ViewModel
                 {
                     new MessageDialog("Erreur de connexion" + e).ShowAsync();
                 }
-                Singleton.Instance().NewsPage = new Views.News();
-                Navigation.Navigate(typeof(MainView));
+                Singleton.Instance().NewsPage = new News();
+                Navigation.Navigate(typeof (MainView));
             }
             else
             {

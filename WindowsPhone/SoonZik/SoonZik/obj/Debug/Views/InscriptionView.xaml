@@ -76,8 +76,7 @@
                 <TextBox Grid.Row="6" InputScope="39" Text="{Binding NewAddress.NumberStreet, Mode=TwoWay}"
                          Height="40"
                          Background="Transparent" BorderThickness="0,0,0,0" Foreground="Black" x:Uid="NumberStreet"
-                         PlaceholderText="" >
-                </TextBox>
+                         PlaceholderText="" />
 
                 <TextBox Grid.Row="7" Text="{Binding NewAddress.Street, Mode=TwoWay}" Height="40"
                          Background="Transparent" BorderThickness="0,0,0,0" Foreground="Black" x:Uid="Street"

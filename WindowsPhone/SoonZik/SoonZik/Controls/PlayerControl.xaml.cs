@@ -55,12 +55,21 @@ namespace SoonZik.Controls
         {
             InitializeComponent();
             DataContext = this;
+            Loaded += OnLoaded;
             Initialize();
+        }
+
+        private void OnLoaded(object sender, RoutedEventArgs routedEventArgs)
+        {
+            PlayedMusic = ListOfMusics[0];
+            CurrentMusicIndex = 0;
+            MyMediaElement.Source = new Uri(Singleton.Instance().SelectedMusicSingleton.file, UriKind.Absolute);
+            StartTimer();
         }
 
         private void Initialize()
         {
-            HardwareButtons.BackPressed += HardwareButtonsOnBackPressed;
+            //HardwareButtons.BackPressed += HardwareButtonsOnBackPressed;
             MyMediaElement.MediaEnded += MyMediaElement_MediaEnded;
 
             _navigationService = new NavigationService();
@@ -187,6 +196,7 @@ namespace SoonZik.Controls
         private void MyMediaElement_OnMediaOpened(object sender, RoutedEventArgs e)
         {
             StartTimer();
+            PlayMedia();
         }
 
         private void HardwareButtonsOnBackPressed(object sender, BackPressedEventArgs backPressedEventArgs)

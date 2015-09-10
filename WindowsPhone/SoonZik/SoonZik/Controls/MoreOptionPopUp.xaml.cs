@@ -35,11 +35,11 @@ namespace SoonZik.Controls
         #region Attribute
 
         public static readonly DependencyProperty SelectedMusicProperty = DependencyProperty.Register(
-            "SelectedMusic", typeof(Music), typeof(MoreOptionPopUp), new PropertyMetadata(default(Music)));
+            "SelectedMusic", typeof (Music), typeof (MoreOptionPopUp), new PropertyMetadata(default(Music)));
 
         public Music SelectedMusic
         {
-            get { return (Music)GetValue(SelectedMusicProperty); }
+            get { return (Music) GetValue(SelectedMusicProperty); }
             set { SetValue(SelectedMusicProperty, value); }
         }
 
@@ -48,6 +48,7 @@ namespace SoonZik.Controls
         private string _cryptographic { get; set; }
 
         public static Playlist ThePlaylist { get; set; }
+
         #endregion
 
         #region INotifyPropertyChange
@@ -86,7 +87,8 @@ namespace SoonZik.Controls
                 if (key2 != null)
                 {
                     var stringEncrypt = KeyHelpers.GetUserKeyFromResponse(key2);
-                    _cryptographic = EncriptSha256.EncriptStringToSha256(Singleton.Instance().CurrentUser.salt + stringEncrypt);
+                    _cryptographic =
+                        EncriptSha256.EncriptStringToSha256(Singleton.Instance().CurrentUser.salt + stringEncrypt);
                 }
                 var res = post.SaveCart(_selectedMusic, null, _cryptographic, Singleton.Instance().CurrentUser);
                 res.ContinueWith(delegate(Task<string> tmp2)
@@ -117,9 +119,11 @@ namespace SoonZik.Controls
                     if (_key != null)
                     {
                         var stringEncrypt = KeyHelpers.GetUserKeyFromResponse(_key);
-                        _cryptographic = EncriptSha256.EncriptStringToSha256(Singleton.Instance().CurrentUser.salt + stringEncrypt);
+                        _cryptographic =
+                            EncriptSha256.EncriptStringToSha256(Singleton.Instance().CurrentUser.salt + stringEncrypt);
 
-                        var resDel = request.DeleteMusicFromPlaylist(ThePlaylist, _selectedMusic, _cryptographic, Singleton.Instance().CurrentUser);
+                        var resDel = request.DeleteMusicFromPlaylist(ThePlaylist, _selectedMusic, _cryptographic,
+                            Singleton.Instance().CurrentUser);
 
                         resDel.ContinueWith(delegate(Task<string> tmp)
                         {
@@ -152,6 +156,7 @@ namespace SoonZik.Controls
                 new MessageDialog("You need to be on the playlist").ShowAsync();
             }
         }
+
         #endregion
     }
 }

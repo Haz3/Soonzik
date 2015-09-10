@@ -5,11 +5,8 @@ using System.Threading.Tasks;
 using Windows.ApplicationModel.Core;
 using Windows.Devices.Geolocation;
 using Windows.Foundation;
-using Windows.Storage.Streams;
 using Windows.UI.Core;
-using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Maps;
-using Windows.UI.Xaml.Media.Imaging;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using SoonZik.HttpRequest;
@@ -27,7 +24,7 @@ namespace SoonZik.ViewModel
             task.Wait();
 
             ListMapIcons = new List<MapIcon>();
-            
+
             CreateListElement();
         }
 
@@ -40,10 +37,10 @@ namespace SoonZik.ViewModel
             var mapIcon = new MapIcon
             {
                 Location = new Geopoint(new BasicGeoposition
-                    {
-                        Latitude = UserLocation.Latitude,
-                        Longitude = UserLocation.Longitude
-                    }),
+                {
+                    Latitude = UserLocation.Latitude,
+                    Longitude = UserLocation.Longitude
+                }),
                 NormalizedAnchorPoint = new Point(0.5, 1.0),
                 Title = "Moi"
             };
@@ -61,7 +58,8 @@ namespace SoonZik.ViewModel
             var reqGet = new HttpRequestGet();
             ListListeners = new ObservableCollection<Listenings>();
             ListUser = new ObservableCollection<User>();
-            var listListeners = reqGet.GetListenerAroundMe(new List<Listenings>(), UserLocation.Latitude.ToString(), UserLocation.Longitude.ToString(), range);
+            var listListeners = reqGet.GetListenerAroundMe(new List<Listenings>(), UserLocation.Latitude.ToString(),
+                UserLocation.Longitude.ToString(), range);
             listListeners.ContinueWith(delegate(Task<object> tmp)
             {
                 var res = tmp.Result as List<Listenings>;
@@ -118,7 +116,6 @@ namespace SoonZik.ViewModel
 
         private void UserTappedExecute()
         {
-
         }
 
         private void TwentyCheckedExecute()

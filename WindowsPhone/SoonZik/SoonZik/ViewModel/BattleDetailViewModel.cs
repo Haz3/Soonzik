@@ -150,8 +150,12 @@ namespace SoonZik.ViewModel
 
         public Visibility DateGridVisibility
         {
-            get { return _dateGridVisibility;}
-            set { _dateGridVisibility = value; RaisePropertyChanged("DateGridVisibility"); }
+            get { return _dateGridVisibility; }
+            set
+            {
+                _dateGridVisibility = value;
+                RaisePropertyChanged("DateGridVisibility");
+            }
         }
 
         private Visibility _finishGridVisibility;
@@ -159,8 +163,13 @@ namespace SoonZik.ViewModel
         public Visibility FinishGridVisibility
         {
             get { return _finishGridVisibility; }
-            set { _finishGridVisibility = value; RaisePropertyChanged("FinishGridVisibility"); }
+            set
+            {
+                _finishGridVisibility = value;
+                RaisePropertyChanged("FinishGridVisibility");
+            }
         }
+
         #endregion
 
         #region Method
@@ -197,7 +206,8 @@ namespace SoonZik.ViewModel
             char[] delimiter = {' ', '-', ':'};
             var word = CurrentBattle.date_end.Split(delimiter);
 
-            _endDate = new DateTime(Int32.Parse(word[0]), Int32.Parse(word[1]), Int32.Parse(word[2]), Int32.Parse(word[3]), Int32.Parse(word[4]), Int32.Parse(word[5]));
+            _endDate = new DateTime(Int32.Parse(word[0]), Int32.Parse(word[1]), Int32.Parse(word[2]),
+                Int32.Parse(word[3]), Int32.Parse(word[4]), Int32.Parse(word[5]));
             if (_endDate.Ticks > DateTime.Now.Ticks)
             {
                 FinishGridVisibility = Visibility.Collapsed;

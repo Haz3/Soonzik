@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Windows.ApplicationModel.Core;
@@ -16,7 +15,19 @@ namespace SoonZik.ViewModel
 {
     public class PlaylistViewModel : ViewModelBase
     {
+        #region Ctor
+
+        public PlaylistViewModel()
+        {
+            LoadedCommand = new RelayCommand(OnLoadedPageExecute);
+            MoreOptionCommand = new RelayCommand(MoreOptionCommandExecute);
+            UpdatePlaylist = new RelayCommand(UpdatePlaylistExecute);
+        }
+
+        #endregion
+
         #region Attribute
+
         public ICommand LoadedCommand { get; private set; }
         public ICommand MoreOptionCommand { get; private set; }
         public static ICommand UpdatePlaylist { get; private set; }
@@ -27,6 +38,7 @@ namespace SoonZik.ViewModel
         private bool _moreOption;
 
         private Playlist _thePlaylist;
+
         public Playlist ThePlaylist
         {
             get { return _thePlaylist; }
@@ -38,6 +50,7 @@ namespace SoonZik.ViewModel
         }
 
         private ObservableCollection<Music> _listMusics;
+
         public ObservableCollection<Music> ListMusics
         {
             get { return _listMusics; }
@@ -49,23 +62,16 @@ namespace SoonZik.ViewModel
         }
 
         private Music _selectedMusic;
+
         public Music SelectedMusic
         {
             get { return _selectedMusic; }
-            set { _selectedMusic = value; RaisePropertyChanged("SelectedMusic"); }
+            set
+            {
+                _selectedMusic = value;
+                RaisePropertyChanged("SelectedMusic");
+            }
         }
-
-        #endregion
-
-        #region Ctor
-
-        public PlaylistViewModel()
-        {
-            LoadedCommand = new RelayCommand(OnLoadedPageExecute);
-            MoreOptionCommand = new RelayCommand(MoreOptionCommandExecute);
-            UpdatePlaylist = new RelayCommand(UpdatePlaylistExecute);
-        }
-
 
         #endregion
 
@@ -111,6 +117,7 @@ namespace SoonZik.ViewModel
             ThePlaylist = PlaylistTmp;
             ListMusics = new ObservableCollection<Music>();
         }
+
         #endregion
     }
 }
