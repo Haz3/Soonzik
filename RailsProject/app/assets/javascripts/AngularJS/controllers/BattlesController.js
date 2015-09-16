@@ -335,4 +335,15 @@ SoonzikApp.controller('BattlesCtrl', ['$scope', "$routeParams", 'SecureAuth', 'H
 		});
 	}
 
+	$scope.formatTime = function(duration) {
+		var min = ~~(duration / 60);
+		var sec = duration % 60;
+
+		if (min.toString().length == 1)
+			min = "0" + min;
+		if (sec.toString().length == 1)
+			sec = "0" + sec;
+		return min + ":" + sec;
+	}
+
 }]);

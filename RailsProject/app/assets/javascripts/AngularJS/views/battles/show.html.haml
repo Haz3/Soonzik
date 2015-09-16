@@ -15,11 +15,12 @@
 					%table.small-12
 						%tr{ "ng-repeat" => "topFiveOne in show.artistOne.topFive" }
 							%td
-								%i.fi-play
+								%music{ "music-object" => "topFiveOne" }
+									%i.fi-play
 							%td
 								%music{ "music-object" => "topFiveOne" } {{ topFiveOne.title }}
 							%td
-								{{ topFiveOne.duration }}
+								{{ formatTime(topFiveOne.duration) }}
 							%td
 								{{ topFiveOne.price }} $
 				%h5{ "ng-if" => "show.artistOne.topFive.length == 0" }
@@ -47,12 +48,13 @@
 					%table.small-12
 						%tr{ "ng-repeat" => "topFiveTwo in show.artistTwo.topFive" }
 							%td
-								%i.fi-play
+								%music{ "music-object" => "topFiveTwo" }
+									%i.fi-play
 							%td
-								%music{ "music-object" => "topFiveTwo" } {{ topFiveTwo.music.title }}
+								%music{ "music-object" => "topFiveTwo" } {{ topFiveTwo.title }}
 							%td
-								{{ topFiveTwo.music.duration }}
+								{{ formatTime(topFiveTwo.duration) }}
 							%td
-								{{ topFiveTwo.music.price }} $
+								{{ topFiveTwo.price }} $
 				%h5{ "ng-if" => "show.artistTwo.topFive.length == 0" }
 					{{ labels.DISPLAY_BATTLE_NO_MUSIC_LABEL }}
