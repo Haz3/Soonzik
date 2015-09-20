@@ -7,7 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "Genre.h"
 
 @interface GenresController : NSObject
+
++ (Genre *)getGenre:(int)genreID;
 
 @end

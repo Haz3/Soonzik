@@ -10,8 +10,8 @@
 
 @interface TitleSongPreview : UIView
 
-@property (nonatomic, weak) IBOutlet UIImageView *albumImage;
-@property (nonatomic, weak) IBOutlet UILabel *trackLabel;
-@property (nonatomic, weak) IBOutlet UILabel *artistLabel;
+@property (nonatomic, strong) IBOutlet UIImageView *albumImage;
+@property (nonatomic, strong) IBOutlet UILabel *trackLabel;
+@property (nonatomic, strong) IBOutlet UILabel *artistLabel;
 
 @end

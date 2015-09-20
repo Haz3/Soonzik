@@ -10,4 +10,8 @@
 
 @interface BoughtContent : ObjectFactory
 
+@property (nonatomic, strong) NSMutableArray *listOfMusics;
+@property (nonatomic, strong) NSMutableArray *listOfAlbums;
+@property (nonatomic, strong) NSMutableArray *listOfPacks;
+
 @end

@@ -8,28 +8,29 @@
 
 #import <UIKit/UIKit.h>
 #import "TypeViewController.h"
+#import "User.h"
 
-@interface ArtistViewController : TypeViewController <UIScrollViewDelegate, UITableViewDataSource, UITableViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate>
+@interface ArtistViewController : TypeViewController <UIScrollViewDelegate, UITableViewDataSource, UITableViewDelegate>
 
-@property (weak, nonatomic) IBOutlet UIScrollView *horizontalScrollView;
-@property (weak, nonatomic) IBOutlet UIView *horizontalContentView;
+@property (nonatomic, strong) User *artist;
+@property (nonatomic, strong) User *user;
 
-@property (nonatomic, assign) int index;
+@property (strong, nonatomic) IBOutlet UITableView *tableView;
+@property (strong, nonatomic) NSMutableArray *listOfAlbums;
+@property (strong, nonatomic) IBOutlet UIVisualEffectView *visualEffectView;
+@property (strong, nonatomic) IBOutlet UILabel *artistName;
+@property (strong, nonatomic) IBOutlet UIImageView *artistImage;
+@property (strong, nonatomic) IBOutlet UIButton *shareButton;
+@property (strong, nonatomic) IBOutlet UIButton *followButton;
+@property (strong, nonatomic) IBOutlet UIButton *friendButton;
+@property (nonatomic, assign) bool followed;
+@property (nonatomic, assign) bool isFriend;
+@property (nonatomic, assign) bool fromSearch;
+@property (nonatomic, assign) bool fromCurrentList;
+@property (nonatomic, strong) UITextView *textView;
+@property (nonatomic, strong) NSMutableArray *listOfTweets;
 
-@property (weak, nonatomic) IBOutlet UIView *movingView;
-
-@property (weak, nonatomic) IBOutlet UIButton *section1;
-@property (weak, nonatomic) IBOutlet UIButton *section2;
-@property (weak, nonatomic) IBOutlet UIButton *section3;
-@property (weak, nonatomic) IBOutlet UIButton *section4;
-
-@property (weak, nonatomic) IBOutlet UITableView *songsTableView;
-@property (strong, nonatomic) NSMutableArray *songsList;
-@property (strong, nonatomic) NSMutableDictionary *albumsList;
-@property (strong, nonatomic) NSMutableDictionary *albumsContent;
-@property (strong, nonatomic) NSMutableArray *albumTitles;
-@property (weak, nonatomic) IBOutlet UIButton *shareButton;
-
-@property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
+@property (nonatomic, assign) bool dataLoaded;
+@property (nonatomic, strong) UIActivityIndicatorView *spin;
 
 @end

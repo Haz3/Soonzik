@@ -8,6 +8,22 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ShareView : UIView
+@protocol CloseShareDelegate <NSObject>
+
+- (void)closeView;
+
+@end
+
+@interface ShareView : UIView <UITextViewDelegate>
+
+@property (nonatomic, strong) id<CloseShareDelegate> closeDelegate;
+@property (nonatomic, assign) bool facebookbSharing;
+@property (nonatomic, assign) bool twitterSharing;
+
+@property (nonatomic, strong) UIButton *facebookButton;
+@property (nonatomic, strong) UIButton *twitterButton;
+
+- (id)initWithElement:(id)elem onView:(UIView *)view;
+
 
 @end

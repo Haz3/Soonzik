@@ -11,14 +11,6 @@
 
 @implementation HeaderPackView
 
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect {
-    // Drawing code
-}
-*/
-
 - (void)createSliderWithPacks:(NSArray *)listOfPacks andPage:(int)index
 {
     self.indexOfPage = index;
@@ -26,19 +18,14 @@
     
     Pack *currentPack = [self.listOfPacks objectAtIndex:self.indexOfPage];
     
+    self.packTitleLabel.font = SOONZIK_FONT_BODY_BIG;
     self.packTitleLabel.text = currentPack.title;
-    
     self.backgroundColor = [UIColor clearColor];
-    
     self.scrollView.delegate = self;
     self.scrollView.pagingEnabled = YES;
-    
-    float imageWith = 150.0f;
+    float imageWith = 304;
     float imageEcart = (self.scrollView.frame.size.width - imageWith) / 2;
-    NSLog(@"imageEcart : %f", imageEcart);
-    
     self.scrollView.clipsToBounds = NO;
-    //self.automaticallyAdjustsScrollViewInsets = NO;
     
     CGFloat contentOffset = 0.0f;
     
@@ -46,12 +33,12 @@
         UIImageView *imgV = [[UIImageView alloc] initWithFrame:CGRectMake(i * imageWith + imageEcart * (i * 2 + 1), self.scrollView.frame.origin.y, imageWith, imageWith)];
         Pack *pack = [listOfPacks objectAtIndex:i];
         NSArray *listOfAlbums = pack.listOfAlbums;
-        //imgV.image = [self.listOfPacks objectAtIndex:i];
         imgV.layer.backgroundColor = [UIColor blackColor].CGColor;
         imgV.layer.shadowOffset = CGSizeMake(5, 5);
         imgV.layer.shadowRadius = 5.0;
         imgV.layer.shadowColor = [UIColor blackColor].CGColor;
         imgV.layer.shadowOpacity = 0.8;
+        
         [imgV addSubview:[self loadImagePreviewPack:listOfAlbums andImageView:imgV]];
         [self.scrollView addSubview:imgV];
         contentOffset += self.scrollView.frame.size.width;
@@ -64,7 +51,6 @@
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
 {
     self.indexOfPage = scrollView.contentOffset.x / scrollView.frame.size.width;
-    NSLog(@"index : %i", self.indexOfPage);
     Pack *pack = [self.listOfPacks objectAtIndex:self.indexOfPage];
     self.packTitleLabel.text = pack.title;
     
@@ -82,6 +68,7 @@
     [view addSubview:album3Image];
     UIImageView *album4Image = [[UIImageView alloc] initWithFrame:CGRectMake(imageView.frame.size.width/2, imageView.frame.size.height/2, imageView.frame.size.width/2, imageView.frame.size.height/2)];
     [view addSubview:album4Image];
+    
     int i = 1;
     for (Album *album in albums) {
         switch (i) {

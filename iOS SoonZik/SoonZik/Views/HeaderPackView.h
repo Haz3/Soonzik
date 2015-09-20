@@ -16,9 +16,9 @@
 
 @interface HeaderPackView : UIView <UIScrollViewDelegate>
 
-@property (nonatomic, weak) IBOutlet UIScrollView *scrollView;
+@property (nonatomic, strong) IBOutlet UIScrollView *scrollView;
 @property (nonatomic) int indexOfPage;
-@property (nonatomic, weak) IBOutlet UILabel *packTitleLabel;
+@property (nonatomic, strong) IBOutlet UILabel *packTitleLabel;
 
 @property (nonatomic, strong) NSArray *listOfPacks;
 

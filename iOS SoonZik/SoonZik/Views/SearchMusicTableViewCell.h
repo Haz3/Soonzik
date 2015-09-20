@@ -7,7 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Music.h"
+#import "Pack.h"
 
 @interface SearchMusicTableViewCell : UITableViewCell
+
+@property (strong, nonatomic) IBOutlet UILabel *musicLabel;
+
+- (void)initCell:(id)elem;
 
 @end

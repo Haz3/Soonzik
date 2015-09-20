@@ -10,12 +10,19 @@
 
 @implementation HeaderUserView
 
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect {
-    // Drawing code
+- (void)initHeader {
+    self.imageView.layer.cornerRadius = 60;
+    self.imageView.layer.borderWidth = 1;
+    self.imageView.layer.borderColor = [UIColor whiteColor].CGColor;
+    self.userLabel.textColor = [UIColor whiteColor];
+    self.imageView.layer.masksToBounds = true;
+    self.backgroundColor = [UIColor clearColor];
+    self.friendsLabel.textColor = [UIColor whiteColor];
+    self.friendsLabel.font = SOONZIK_FONT_BODY_VERY_SMALL;
+    self.followersLabel.textColor = [UIColor whiteColor];
+    self.followersLabel.font = SOONZIK_FONT_BODY_VERY_SMALL;
+    self.followsLabel.textColor = [UIColor whiteColor];
+    self.followsLabel.font = SOONZIK_FONT_BODY_VERY_SMALL;
 }
-*/
 
 @end

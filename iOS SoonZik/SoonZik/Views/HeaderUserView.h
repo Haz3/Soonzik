@@ -10,4 +10,14 @@
 
 @interface HeaderUserView : UIView
 
+@property (nonatomic, strong) IBOutlet UIImageView *imageView;
+@property (nonatomic, strong) IBOutlet UILabel *userLabel;
+@property (nonatomic, strong) IBOutlet UILabel *followersLabel;
+@property (nonatomic, strong) IBOutlet UILabel *followsLabel;
+@property (nonatomic, strong) IBOutlet UILabel *friendsLabel;
+@property (nonatomic, strong) IBOutlet UIButton *friendButton;
+@property (nonatomic, strong) IBOutlet UIButton *followButton;
+
+- (void)initHeader;
+
 @end

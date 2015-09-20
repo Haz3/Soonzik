@@ -6,8 +6,16 @@
 //  Copyright (c) 2015 SoonZik - Maxime SAUVAGE. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "TypeViewController.h"
+#import "OnLTMusicPopupView.h"
+#import "Genre.h"
 
-@interface GenreViewController : UIViewController
+@interface GenreViewController : TypeViewController <UITableViewDataSource, UITableViewDelegate, PopUpDetailMusicDelegate>
+
+@property (nonatomic, strong) UITableView *tableView;
+@property (nonatomic, strong) Genre *genre;
+
+@property (nonatomic, assign) bool dataLoaded;
+@property (nonatomic, strong) UIActivityIndicatorView *spin;
 
 @end

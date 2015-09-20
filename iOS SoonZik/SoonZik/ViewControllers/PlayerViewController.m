@@ -7,10 +7,10 @@
 //
 
 #import "PlayerViewController.h"
-#import "PlaylistViewCell.h"
 #import "AppDelegate.h"
 #import "Tools.h"
 #import "SVGKImage.h"
+#import "CurrentListViewController.h"
 
 @interface PlayerViewController ()
 
@@ -22,34 +22,103 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        // Custom initialization
+        
     }
     return self;
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    self.view.backgroundColor = BACKGROUND_COLOR;
+    [[UIApplication sharedApplication] setStatusBarHidden:false withAnimation:UIStatusBarAnimationNone];
+    self.player = ((AppDelegate *)[UIApplication sharedApplication].delegate).thePlayer;
+    self.player.finishDelegate = self;
     
-    self.navigationItem.hidesBackButton = YES;
-    UIImage *closeImage = [Tools imageWithImage:[SVGKImage imageNamed:@"close"].UIImage scaledToSize:CGSizeMake(30, 30)];
-    UIBarButtonItem *closeButton = [[UIBarButtonItem alloc] initWithImage:closeImage style:UIBarButtonItemStylePlain target:self action:@selector(closePlayerViewController)];
-    self.navigationItem.leftBarButtonItem = closeButton;
+    if (self.player.listeningList.count == 0)
+    {
+        [self.player prepareSong:0];
+        [self.navigationController popViewControllerAnimated:false];
+    } else {
+        self.view.backgroundColor = DARK_GREY;
+        
+        self.navigationItem.hidesBackButton = YES;
+        UIImage *closeImage = [Tools imageWithImage:[SVGKImage imageNamed:@"close"].UIImage scaledToSize:CGSizeMake(30, 30)];
+        UIBarButtonItem *closeButton = [[UIBarButtonItem alloc] initWithImage:closeImage style:UIBarButtonItemStylePlain target:self action:@selector(closePlayerViewController)];
+        [closeButton setTintColor:[UIColor whiteColor]];
+        self.navigationItem.leftBarButtonItem = closeButton;
+        
+        UIImage *currentListenImage = [Tools imageWithImage:[SVGKImage imageNamed:@"current_listen"].UIImage scaledToSize:CGSizeMake(30, 30)];
+        UIBarButtonItem *listenButton = [[UIBarButtonItem alloc] initWithImage:currentListenImage style:UIBarButtonItemStylePlain target:self action:@selector(displayCurrentListen)];
+        [listenButton setTintColor:[UIColor whiteColor]];
+        self.navigationItem.rightBarButtonItem = listenButton;
+        
+        [self.progressionSlider setThumbImage:[Tools imageWithImage:[SVGKImage imageNamed:@"dot"].UIImage scaledToSize:CGSizeMake(14, 14)] forState:UIControlStateNormal];
+        [self.shareButton setBackgroundImage:[Tools imageWithImage:[SVGKImage imageNamed:@"share_white"].UIImage scaledToSize:CGSizeMake(24, 24)] forState:UIControlStateNormal];
+        
+        self.navigationItem.hidesBackButton = NO;
+        self.navigationItem.backBarButtonItem.title = @"";
+        
+        [self refresh];
+        
+        self.lastVolumeLevel = self.player.audioPlayer.volume;
+        
+        
+        [self initPlayer];
+        
+        self.songTitle.font = SOONZIK_FONT_BODY_BIG;
+        self.songArtist.font = SOONZIK_FONT_BODY_MEDIUM;
+        
+        self.currentTimeLabel.font = SOONZIK_FONT_BODY_VERY_SMALL;
+        self.finishTimeLabel.font = SOONZIK_FONT_BODY_VERY_SMALL;
+        
+        [self.previousButton setImage:[Tools imageWithImage:[SVGKImage imageNamed:@"icon_previous"].UIImage scaledToSize:CGSizeMake(30, 30)] forState:UIControlStateNormal];
+        [self.nextButton setImage:[Tools imageWithImage:[SVGKImage imageNamed:@"icon_next"].UIImage scaledToSize:CGSizeMake(30, 30)] forState:UIControlStateNormal];
+        [self.playButton setImage:[Tools imageWithImage:[SVGKImage imageNamed:@"icon_play-circle"].UIImage scaledToSize:CGSizeMake(40, 40)] forState:UIControlStateNormal];
+        
+        [self.progressionSlider setMinimumTrackTintColor:BLUE_1];
+    }
     
-    CGContextRef currentContext = UIGraphicsGetCurrentContext();
-    CGContextSaveGState(currentContext);
-    self.playerArea.layer.shadowColor = [UIColor blackColor].CGColor;
-    self.playerArea.layer.shadowOpacity = 1;
-    self.playerArea.layer.shadowRadius = 10;
-    self.playerArea.layer.shadowOffset = CGSizeMake(0, 2);
+}
+
+- (void)displayCurrentListen {
+    self.currentListViewController = [[CurrentListViewController alloc] initWithNibName:@"CurrentListViewController" bundle:nil];
+    [self.navigationController pushViewController:self.currentListViewController animated:YES];
+}
+
+- (void) initPlayer
+{
+    self.indexOfPage = self.player.index;
+
+    self.scrollView.delegate = self;
+    self.scrollView.pagingEnabled = YES;
     
-    [self.progressionSlider setThumbImage:[UIImage imageNamed:@"cursor.png"] forState:UIControlStateNormal];
+    float imageWith = 320.0f;
+    float imageEcart = 0;
     
-    self.songTitle.font = SOONZIK_FONT_BODY_BIG;
-    self.songArtist.font = SOONZIK_FONT_BODY_MEDIUM;
+    self.scrollView.clipsToBounds = NO;
     
-    self.currentTimeLabel.font = SOONZIK_FONT_BODY_VERY_SMALL;
-    self.finishTimeLabel.font = SOONZIK_FONT_BODY_VERY_SMALL;
+    CGFloat contentOffset = 0.0f;
+    
+    for (int i = 0; i < self.player.listeningList.count; i++) {
+        UIImageView *imgV = [[UIImageView alloc] initWithFrame:CGRectMake(i * imageWith + imageEcart * (i * 2 + 1), self.scrollView.frame.origin.y, imageWith, imageWith)];
+        Music *music = [self.player.listeningList objectAtIndex:i];
+        imgV.image = [UIImage imageNamed:music.albumImage];
+        [self.scrollView addSubview:imgV];
+        contentOffset += self.scrollView.frame.size.width;
+    }
+    self.scrollView.contentSize = CGSizeMake(contentOffset, self.scrollView.frame.size.height);
+    self.scrollView.contentOffset = CGPointMake((contentOffset / self.player.listeningList.count) * self.indexOfPage, 0);
+}
+
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
+{
+    self.indexOfPage = scrollView.contentOffset.x / scrollView.frame.size.width;
+    
+    [self.player stopSound];
+    
+    self.player.index = self.indexOfPage;
+    Music *music = [self.player.listeningList objectAtIndex:self.indexOfPage];
+    [self.player prepareSong:music.identifier];
+    [self.player playSound];
 }
 
 - (void)closePlayerViewController
@@ -60,39 +129,6 @@
     transition.type = kCATransitionFromBottom;
     [self.navigationController.view.layer addAnimation:transition forKey:nil];
     [self.navigationController popViewControllerAnimated:NO];
-}
-
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
-    
-    self.navigationItem.hidesBackButton = NO;
-    self.navigationItem.backBarButtonItem.title = @"";
-    
-    /*self.playlistTableView.delegate = self;
-    self.playlistTableView.dataSource = self;
-    
-    self.playlistTableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
-    self.playlistTableView.backgroundColor = [UIColor darkGrayColor];*/
-    
-    self.isMute = NO;
-    
-    self.player = ((AppDelegate *)[UIApplication sharedApplication].delegate).thePlayer;
-    self.player.finishDelegate = self;
-    
-    if (self.player.listeningList.count == 0)
-    {
-        [self.player prepareSong:0];
-    }
-    
-    [self refresh];
-    
-    self.volumeSlider.value = self.player.audioPlayer.volume;
-    self.lastVolumeLevel = self.player.audioPlayer.volume;
-    
-    //[self.playlistTableView reloadData];
-    //[self updateListeningCells];
 }
 
 - (void)refresh
@@ -117,12 +153,16 @@
 {
     if (self.player.listeningList.count > 0) {
         if (!self.player.currentlyPlaying) {
-            [self.playButton setImage:[UIImage imageNamed:@"play_icon.png"] forState:UIControlStateNormal];
+            [self.playButton setImage:[Tools imageWithImage:[SVGKImage imageNamed:@"icon_play-circle"].UIImage scaledToSize:CGSizeMake(40, 40)] forState:UIControlStateNormal];
         } else {
-            [self.playButton setImage:[UIImage imageNamed:@"pause_icon.png"] forState:UIControlStateNormal];
+            [self.playButton setImage:[Tools imageWithImage:[SVGKImage imageNamed:@"icon_pause-circle"].UIImage scaledToSize:CGSizeMake(40, 40)] forState:UIControlStateNormal];
         }
         
-        int duration = self.player.audioPlayer.duration;
+        Music *s = [self.player.listeningList objectAtIndex:self.player.index];
+        
+        [self.progressionSlider setMaximumValue:self.player.audioPlayer.duration];
+        
+        int duration = s.duration;
         self.finishTimeLabel.text = [NSString stringWithFormat:@"%.02d:%.02d", duration/60, duration%60];
         
         int current = self.player.audioPlayer.currentTime;
@@ -130,11 +170,8 @@
         
         [self.progressionSlider setValue:current];
         
-        Music *s = [self.player.listeningList objectAtIndex:self.player.index];
-        self.title = s.title;
         self.songTitle.text = s.title;
         self.songArtist.text = s.artist.username;
-        self.songImage.image = [UIImage imageNamed:s.image];
     }
 }
 
@@ -161,41 +198,30 @@
 {
     [self.player playSound];
     self.player.audioPlayer.volume = self.lastVolumeLevel;
-    
-    //[self updateListeningCells];
 }
 
 - (IBAction)previous:(id)sender
 {
     [self.player previous];
     self.player.audioPlayer.volume = self.lastVolumeLevel;
-        
-   // [self updateListeningCells];
+    
+    self.indexOfPage = self.player.index;
+    [self.scrollView setContentOffset:CGPointMake(self.indexOfPage*self.scrollView.frame.size.width, 0) animated:YES];
 }
 
 - (IBAction)next:(id)sender
 {
     [self.player next];
     self.player.audioPlayer.volume = self.lastVolumeLevel;
-        
-   // [self updateListeningCells];
+    
+    self.indexOfPage = self.player.index;
+    [self.scrollView setContentOffset:CGPointMake(self.indexOfPage*self.scrollView.frame.size.width, 0) animated:YES];
 }
 
 - (void)playerHasFinishedToPlay
 {
     [self next:nil];
-}
-
-- (IBAction)mute:(id)sender
-{
-    if (!self.isMute) {
-        self.lastVolumeLevel = self.player.audioPlayer.volume;
-        self.volumeSlider.value = 0;
-        self.player.audioPlayer.volume = 0;
-    } else {
-        self.volumeSlider.value = self.lastVolumeLevel;
-        self.player.audioPlayer.volume = self.lastVolumeLevel;
-    }
+    [self play:nil];
 }
 
 - (IBAction)random:(id)sender
@@ -225,154 +251,6 @@
             break;
     }
     [self.player repeat];
-}
-
-- (void)updateListeningCells
-{
-    /*NSIndexPath *indexPath = [NSIndexPath indexPathForRow:self.player.index inSection:0];
-    [self.playlistTableView.delegate tableView:self.playlistTableView didSelectRowAtIndexPath:indexPath];
-    
-    for (int i=0; i < self.player.listeningList.count; i++) {
-        NSIndexPath *indexPath2 = [NSIndexPath indexPathForRow:i inSection:0];
-        if (i != self.player.index)
-            [self.playlistTableView.delegate tableView:self.playlistTableView didDeselectRowAtIndexPath:indexPath2];
-    }*/
-}
-
-/*
- *  TableView
- */
-
-/*- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-    return 1;
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    return self.player.listeningList.count;
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    return 50;
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    static NSString *cellIdentifier = @"cellID";
-    
-    PlaylistViewCell *cell = (PlaylistViewCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-    if (cell == nil) {
-        [tableView registerNib:[UINib nibWithNibName:@"PlaylistViewCell" bundle:nil] forCellReuseIdentifier:cellIdentifier];
-        cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-    }
-    
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    cell.backgroundColor = [UIColor clearColor];
-    
-    [cell initCell];
-    Music *s = [self.player.listeningList objectAtIndex:indexPath.row];
-    cell.songTitleLabel.text = s.title;
-    
-    NSMutableArray *rightUtilityButtons = [NSMutableArray new];
-    [rightUtilityButtons sw_addUtilityButtonWithColor:BLUE_2 icon:[Tools imageWithImage:[SVGKImage imageNamed:@"delete"].UIImage scaledToSize:CGSizeMake(30, 30)]];
-
-    cell.rightUtilityButtons = rightUtilityButtons;
-    cell.delegate = self;
-    
-    UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(0, cell.contentView.frame.size.height - 0.5, cell.contentView.frame.size.width, 0.5)];
-    lineView.backgroundColor = BACKGROUND_COLOR;
-    [cell.contentView addSubview:lineView];
-    
-    return cell;
-}
-
-- (void)swipeableTableViewCell:(SWTableViewCell *)cell didTriggerRightUtilityButtonWithIndex:(NSInteger)index
-{
-    switch (index) {
-        case 0:
-        {
-            [self removeElementFromPlaylist:index];
-            break;
-        }
-        default:
-            break;
-    }
-}
-
-- (void)removeElementFromPlaylist:(int)index
-{
-    NSMutableArray *tmpSongList = self.player.listeningList;
-    NSString *element = [tmpSongList objectAtIndex:index];
-    [tmpSongList removeObject:element];
-    self.listeningList = [[NSMutableArray alloc] init];
-    for (NSString *element in tmpSongList)
-        [self.listeningList addObject:element];
-    self.player.audioPlayer.volume = self.lastVolumeLevel;
-    self.player.listeningList = [[NSMutableArray alloc] initWithArray:self.listeningList];
-    
-    if (self.player.index == index) {
-        [self.player pauseSound];
-        self.player.index = 0;
-        if (self.player.listeningList.count > 0) {
-            Music *s = [self.player.listeningList objectAtIndex:self.player.index];
-            if (![s.title isEqualToString:self.player.songName]) {
-                NSString *data = [[NSBundle mainBundle] pathForResource:s.file ofType:@"mp3"];
-                NSURL *url = [[NSURL alloc] initFileURLWithPath:data];
-                self.player.audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:nil];
-                self.player.audioPlayer.currentTime = 0.0;
-            }
-        }
-    } else if (self.player.listeningList.count == 1) {
-        self.player.index = 0;
-        
-    } else if (self.player.index >= self.player.listeningList.count) {
-        self.player.index--;
-    }
-
-    
-    if (self.player.listeningList.count <= 0) {
-        [self.playButton setImage:[UIImage imageNamed:@"play_icon.png"] forState:UIControlStateNormal];
-        self.player.currentlyPlaying = NO;
-    }
-    
-    [self.playlistTableView reloadData];
-    [self updateListeningCells];
-}
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    self.player.index = indexPath.row;
-    
-    NSLog(@"oldIndex : %i", self.player.oldIndex);
-    NSLog(@"newIndex : %i", self.player.index);
-    
-    if (self.player.oldIndex != self.player.index && self.player.listeningList.count > 1) {
-        self.player.oldIndex = self.player.index;
-        //NSLog(@"ok");
-        Music *s = [self.player.listeningList objectAtIndex:self.player.index];
-        [self.player prepareSong:s.file];
-        self.player.audioPlayer.volume = self.lastVolumeLevel;
-        [self.player playSound];
-        self.player.songName = s.title;
-        [self updateListeningCells];
-    }
-    
-    [self refresh];
-    [[tableView cellForRowAtIndexPath:indexPath] setSelected:YES];
-    [self.playButton setImage:[UIImage imageNamed:@"pause_icon.png"] forState:UIControlStateNormal];
-}
-
-- (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-   // [[tableView cellForRowAtIndexPath:indexPath] setSelected:NO];
-}
-*/
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 @end

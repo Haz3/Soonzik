@@ -7,6 +7,8 @@
 //
 
 #import "MusicTableViewCell.h"
+#import "SVGKImage.h"
+#import "Tools.h"
 
 @implementation MusicTableViewCell
 
@@ -16,8 +18,18 @@
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
+    
+    if (selected) {
+        self.musicTitle.textColor = BLUE_3;
+        self.musicTitle.font = SOONZIK_FONT_BODY_MEDIUM;
+    } else {
+        self.musicTitle.textColor = [UIColor whiteColor];
+    }
+}
 
-    // Configure the view for the selected state
+- (void)initCell
+{
+    [self.optionsButton setBackgroundImage:[Tools imageWithImage:[UIImage imageNamed:@"options_white"] scaledToSize:CGSizeMake(30, 30)] forState:UIControlStateNormal];
 }
 
 @end

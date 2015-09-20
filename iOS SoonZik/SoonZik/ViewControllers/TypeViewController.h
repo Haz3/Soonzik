@@ -11,36 +11,25 @@
 #import "MenuTabDelegate.h"
 #import "AudioPlayer.h"
 #import "Music.h"
-#import "LoadingView.h"
 #import "TitleSongPreview.h"
+#import "OnLTMusicPopupView.h"
+#import "Tools.h"
+#import "ShareView.h"
+#import "SocialConnect.h"
+#import "Translate.h"
 
-@interface TypeViewController : UIViewController <MenuTabDelegate, FinishPlayPlayer>
+@interface TypeViewController : UIViewController <FinishPlayPlayer, PopUpDetailMusicDelegate, UIActionSheetDelegate>
 
 @property (nonatomic, strong) NSUserDefaults *prefs;
-
 @property (strong, nonatomic) AudioPlayer *player;
-
-@property (strong, nonatomic) UIView *menuView;
-@property (strong, nonatomic) UIView *menuUserPreview;
-@property (strong, nonatomic) UIView *searchView;
-@property (strong, nonatomic) LoadingView *loadingView;
-
-@property (assign, nonatomic) CGFloat statusBarHeight;
-
-@property (assign, nonatomic) bool menuOpened;
-@property (strong, nonatomic) NSMutableArray *tableData;
-@property (strong, nonatomic) NSMutableArray *tableImageData;
-@property (assign, nonatomic) bool searchOpened;
-
-@property (assign, nonatomic) int selectedMenuIndex;
-
-- (void)closeTheMenuView;
-- (UIImage *)imageWithImage:(UIImage *)image scaledToSize:(CGSize)newSize;
+@property (nonatomic, strong) ShareView *shareView;
+@property (nonatomic, strong) Translate *translate;
 
 - (void)addBlurEffectOnView:(UIView *)view;
 - (void)removeBlurEffect:(int)tag onView:(UIView *)v;
+- (void)closeViewController;
+- (void)closePopUp;
+- (void)launchShareView:(id)elem;
 
-- (void)showErrorDuringLoading;
-- (void)hideErrorDuringLoading;
 
 @end

@@ -6,8 +6,13 @@
 //  Copyright (c) 2015 SoonZik - Maxime SAUVAGE. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "TypeViewController.h"
+#import "Concert.h"
 
-@interface ConcertViewController : UIViewController
+@interface ConcertViewController : TypeViewController <UITableViewDataSource, UITableViewDelegate>
+
+@property (nonatomic, strong) Concert *concert;
+@property (nonatomic, strong) IBOutlet UITableView *tableView;
+@property (nonatomic, strong) NSArray *listOfTexts;
 
 @end

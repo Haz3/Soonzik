@@ -7,7 +7,13 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "Playlist.h"
+#import "Music.h"
 
 @interface PlaylistsController : NSObject
+
++ (Playlist *)createAPlaylist:(Playlist *)playlist;
++ (BOOL)addToPlaylist:(Playlist *)playlist :(Music *)music;
++ (BOOL)removeFromPlaylist:(Playlist *)playlist :(Music *)music;
 
 @end

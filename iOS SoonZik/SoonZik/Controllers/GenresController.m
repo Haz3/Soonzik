@@ -10,4 +10,17 @@
 
 @implementation GenresController
 
++ (Genre *)getGenre:(int)genreID {
+    NSString *url = [NSString stringWithFormat:@"%@genres/%i", API_URL, genreID];
+    NSDictionary *json = [Request getRequest:url];
+    NSDictionary *content = [json objectForKey:@"content"];
+    
+    NSLog(@"json genre : %@", content);
+    if (content.count == 0) {
+        return [[Genre alloc] init];
+    }
+    Genre *genre = [[Genre alloc] initWithJsonObject:content];
+    return genre;
+}
+
 @end

@@ -15,6 +15,4 @@
 @property (nonatomic, assign) float note;
 @property (nonatomic, strong) Music *music;
 
-+ (TopMusic *)getBestMusicOfArtist:(User *)artist;
-
 @end

@@ -7,7 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "Battle.h"
 
 @interface BattlesController : NSObject
+
++ (NSMutableArray *)getAllTheBattles;
++ (Battle *)getBattle:(int)battleID;
++ (Battle *)vote:(int)battleID :(int)artistID;
 
 @end

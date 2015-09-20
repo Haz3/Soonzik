@@ -7,7 +7,28 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "User.h"
+#import "Address.h"
+#import <AssetsLibrary/AssetsLibrary.h>
+#import "BoughtContent.h"
+#import "User.h"
+#import "Music.h"
+#import "Album.h"
+#import "Pack.h"
 
 @interface UsersController : NSObject
+
++ (BOOL)follow:(int)artistId;
++ (BOOL)unfollow:(int)artistId;
++ (NSMutableArray *)getFollows :(int)userID;
++ (NSMutableArray *)getFollowers :(int)userID;
++ (NSMutableArray *)getFriends;
++ (BOOL)addFriend:(int)userID;
++ (BOOL)delFriend:(int)userID;
++ (BOOL)isArtist:(int)userID;
++ (User *)getUser:(int)userID;
++ (BoughtContent *)getContent;
++ (NSMutableArray *)getUsersInArea:(double)latitude :(double)longitude :(int)range;
++ (User *)update:(User *)user;
 
 @end

@@ -6,8 +6,10 @@
 //  Copyright (c) 2015 SoonZik - Maxime SAUVAGE. All rights reserved.
 //
 
-#ifndef SoonZik_ShareDelegate_h
-#define SoonZik_ShareDelegate_h
+#import <Foundation/Foundation.h>
 
+@protocol ShareDelegate <NSObject>
 
-#endif
+- (void)launchShareView:(id)elem;
+
+@end

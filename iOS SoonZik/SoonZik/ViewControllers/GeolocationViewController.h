@@ -7,18 +7,26 @@
 //
 
 #import "TypeViewController.h"
+#import "Music.h"
 #import <MapKit/MapKit.h>
 
 @interface GeolocationViewController : TypeViewController <CLLocationManagerDelegate, MKMapViewDelegate>
 
-@property (nonatomic, weak) IBOutlet MKMapView *mapView;
-@property (nonatomic, weak) IBOutlet UIView *detailView;
+@property (nonatomic, strong) IBOutlet MKMapView *mapView;
+@property (nonatomic, strong) IBOutlet UIView *detailView;
 
-@property (nonatomic, weak) IBOutlet UIButton *myPositionButton;
-@property (nonatomic, weak) IBOutlet UISlider *slider;
+@property (nonatomic, strong) NSMutableArray *listOfListenings;
+
+@property (nonatomic, strong) IBOutlet UIButton *myPositionButton;
 
 @property (nonatomic, strong) CLLocationManager *userPosition;
 
-@property (nonatomic, weak) IBOutlet UIView *sliderView;
+@property (nonatomic, strong) IBOutlet UILabel *userLabel;
+@property (nonatomic, strong) IBOutlet UIImageView *userImage;
+@property (nonatomic, strong) IBOutlet UILabel *trackLabel;
+
+@property (nonatomic, strong) IBOutlet UISlider *areaSlider;
+
+@property (nonatomic, strong) Music *userListenMusic;
 
 @end

@@ -13,32 +13,28 @@
 #import "OAMutableURLRequest.h"
 #import "OADataFetcher.h"
 #import "OATokenManager.h"
-//#import "GPPSignIn.h"
-//#import "GPPSignInButton.h"
+#import <GooglePlus/GPPSignIn.h>
+#import "Translate.h"
 
-//@class GPPSignInButton;
-
-@interface ConnexionViewController : UIViewController //<GPPSignInDelegate>
+@interface ConnexionViewController : UIViewController <UIScrollViewDelegate, UITextFieldDelegate, GPPSignInDelegate>
 
 @property (assign, nonatomic) bool isFacebookAvailable;
-
 @property (strong, nonatomic) NSString *fbID, *globalFBID;
-
 @property (nonatomic, strong) NSUserDefaults *prefs;
-
 @property (strong, nonatomic) UIActivityIndicatorView *loadingDataIndicator;
-
-@property (weak, nonatomic) IBOutlet UIView *kindOfConnexionArea;
-@property (weak, nonatomic) IBOutlet UIView *emailConnexionArea;
-@property (weak, nonatomic) IBOutlet UIButton *facebookButton;
-@property (weak, nonatomic) IBOutlet UIButton *twitterButton;
-@property (weak, nonatomic) IBOutlet UIButton *googleButton;
-@property (weak, nonatomic) IBOutlet UIButton *emailButton;
-@property (weak, nonatomic) IBOutlet UITextField *emailAddressTextField;
-@property (weak, nonatomic) IBOutlet UITextField *passwordTextField;
-@property (weak, nonatomic) IBOutlet UIImageView *soonzikLogo;
-
-//@property (strong, nonatomic) GPPSignIn *signIn;
-
+@property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
+@property (nonatomic, assign) int indexOfScroll;
+@property (strong, nonatomic) IBOutlet UIView *kindOfConnexionArea;
+@property (strong, nonatomic) IBOutlet UIView *emailConnexionArea;
+@property (strong, nonatomic) IBOutlet UIButton *facebookButton;
+@property (strong, nonatomic) IBOutlet UIButton *twitterButton;
+@property (strong, nonatomic) IBOutlet UIButton *googleButton;
+@property (strong, nonatomic) IBOutlet UITextField *emailAddressTextField;
+@property (strong, nonatomic) IBOutlet UITextField *passwordTextField;
+@property (strong, nonatomic) IBOutlet UIButton *connexionButton;
+@property (strong, nonatomic) IBOutlet UIButton *subscribeButton;
+@property (strong, nonatomic) IBOutlet UIImageView *soonzikLogo;
+@property (strong, nonatomic) Translate *translate;
+@property (nonatomic, strong) GPPSignIn *signIn;
 
 @end

@@ -10,4 +10,14 @@
 
 @implementation PacksController
 
++ (Pack *)getPack:(int)packID {
+    NSString *url = [NSString stringWithFormat:@"%@packs/%i", API_URL, packID];
+    NSDictionary *json = [Request getRequest:url];
+    
+    NSLog(@"%@", [json objectForKey:@"content"]);
+    Pack *pack = [[Pack alloc] initWithJsonObject:[json objectForKey:@"content"]];
+
+    return pack;
+}
+
 @end

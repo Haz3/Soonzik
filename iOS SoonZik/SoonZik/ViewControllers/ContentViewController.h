@@ -7,12 +7,27 @@
 //
 
 #import "TypeViewController.h"
+#import "ReloadPlaylistsDelegate.h"
+#import "BoughtContent.h"
 
-@interface ContentViewController : TypeViewController <UICollectionViewDataSource, UICollectionViewDelegate, UIAlertViewDelegate>
+@interface ContentViewController : TypeViewController <UICollectionViewDataSource, UICollectionViewDelegate, UIAlertViewDelegate, ReloadPlaylistsDelegate, UIScrollViewDelegate, UITableViewDataSource, UITableViewDelegate>
 
-@property (nonatomic, weak) IBOutlet UICollectionView *playlistsCollectionView;
-
+@property (nonatomic, strong) UIScrollView *scrollView;
+@property (nonatomic, strong) UITableView *albumsTableView;
+@property (nonatomic, strong) UITableView *musicsTableView;
+@property (nonatomic, strong) UITableView *packsTableView;
+@property (nonatomic, strong) UICollectionView *playlistsCollectionView;
 @property (nonatomic, strong) NSMutableArray *listOfPlaylists;
 @property (nonatomic, strong) NSMutableArray *listOfAlbums;
+@property (nonatomic, strong) UIButton *addPlaylistButton;
+@property (nonatomic, strong) UIButton *playlistButton;
+@property (nonatomic, strong) UIButton *albumButton;
+@property (nonatomic, strong) UIButton *musicButton;
+@property (nonatomic, strong) UIButton *packButton;
+@property (nonatomic, strong) UILabel *noPlaylistLabel;
+@property (nonatomic, strong) BoughtContent *boughtContent;
+
+@property (nonatomic, assign) bool dataLoaded;
+@property (nonatomic, strong) UIActivityIndicatorView *spin;
 
 @end

@@ -8,8 +8,14 @@
 
 #import "ArtistViewController.h"
 #import "Album.h"
-#import "AlbumSongCell.h"
-#import "OtherArtistsCollectionViewCell.h"
+#import "SVGKImage.h"
+#import "Tools.h"
+#import "TitleAlbumsTableViewCell.h"
+#import "AlbumViewController.h"
+#import "SimplePopUp.h"
+#import "UsersController.h"
+#import "TweetsController.h"
+#import "Tweet.h"
 
 @interface ArtistViewController ()
 
@@ -26,304 +32,357 @@
     return self;
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    [[UIApplication sharedApplication] setStatusBarHidden:false withAnimation:UIStatusBarAnimationFade];
+    
+    UIButton *closeButton = [[UIButton alloc] initWithFrame:CGRectMake(self.view.frame.size.width - 40, 4, 36, 36)];
+    [closeButton setImage:[SVGKImage imageNamed:@"delete"].UIImage forState:UIControlStateNormal];
+    [closeButton addTarget:self action:@selector(closeViewController) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:closeButton];
+    
+    if (self.fromSearch) {
+        closeButton.hidden = true;
+        self.navigationController.navigationBarHidden = false;
+        [[UIApplication sharedApplication] setStatusBarHidden:false withAnimation:UIStatusBarAnimationFade];
+    } else if (self.fromCurrentList) {
+        closeButton.hidden = false;
+        self.navigationController.navigationBarHidden = false;
+        [[UIApplication sharedApplication] setStatusBarHidden:true withAnimation:UIStatusBarAnimationFade];
+    } else {
+        [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationFade];
+        self.navigationItem.backBarButtonItem = nil;
+        self.navigationItem.leftBarButtonItem = nil;
+    }
+}
+
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
+    
+    NSLog(@"artist view controller");
+    
+    NSData *userData = [[NSUserDefaults standardUserDefaults] objectForKey:@"User"];
+    self.user = [NSKeyedUnarchiver unarchiveObjectWithData:userData];
+    NSData *translateData = [[NSUserDefaults standardUserDefaults] objectForKey:@"Translate"];
+    self.translate = [NSKeyedUnarchiver unarchiveObjectWithData:translateData];
+    
+    self.dataLoaded = NO;
+    [self getData];
     
     self.view.backgroundColor = BACKGROUND_COLOR;
+    self.tableView.backgroundColor = [UIColor clearColor];
     
-    self.songsTableView.delegate = self;
-    self.songsTableView.dataSource = self;
-    
-    self.collectionView.delegate = self;
-    self.collectionView.dataSource = self;
-    self.collectionView.backgroundColor = [UIColor clearColor];
-    
-    self.navigationItem.rightBarButtonItems = nil;
-    self.navigationItem.leftBarButtonItems = nil;
-    
-    self.horizontalScrollView.tag = 2;
-    
-    self.horizontalScrollView.delegate = self;
-    
-    self.index = 0;
-
-    CGSize size = CGSizeMake(self.horizontalContentView.frame.size.width, self.horizontalContentView.frame.size.height);
-    self.horizontalScrollView.contentSize = size;
-    [self.horizontalScrollView addSubview:self.horizontalContentView];
-    
-    [self.songsTableView setFrame:CGRectMake(0, 0, self.horizontalContentView.frame.size.width/4, self.horizontalScrollView.contentSize.height)];
+    self.tableView.delegate = self;
+    self.tableView.dataSource = self;
 
     [self.shareButton addTarget:self action:@selector(launchShareView) forControlEvents:UIControlEventTouchUpInside];
+    [self.shareButton setBackgroundImage:[Tools imageWithImage:[SVGKImage imageNamed:@"share"].UIImage scaledToSize:CGSizeMake(30, 30)] forState:UIControlStateNormal];
+
+    [self.followButton addTarget:self action:@selector(followPeople) forControlEvents:UIControlEventTouchUpInside];
+    [self.friendButton addTarget:self action:@selector(friendAction) forControlEvents:UIControlEventTouchUpInside];
     
-    [self.section1 addTarget:self action:@selector(goToSection1) forControlEvents:UIControlEventTouchUpInside];
-    [self.section2 addTarget:self action:@selector(goToSection2) forControlEvents:UIControlEventTouchUpInside];
-    [self.section3 addTarget:self action:@selector(goToSection3) forControlEvents:UIControlEventTouchUpInside];
-    [self.section4 addTarget:self action:@selector(goToSection4) forControlEvents:UIControlEventTouchUpInside];
+    self.artistImage.layer.borderWidth = 1;
+    self.artistImage.layer.borderColor = [UIColor whiteColor].CGColor;
+    self.artistName.text = self.artist.username;
     
-    [self getAlbumInfos];
+    //UIActivityIndicatorView *spin = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
     
-    [self.songsTableView reloadData];
+    //dispatch_queue_t backgroundQueue = dispatch_queue_create("com.mycompany.myqueue", 0);
+    //dispatch_async(backgroundQueue, ^{
+       // dispatch_async(dispatch_get_main_queue(), ^{
+            
+            NSString *urlImage = [NSString stringWithFormat:@"%@assets/usersImage/avatars/%@", API_URL, self.artist.image];
+            NSData * imageData = [[NSData alloc] initWithContentsOfURL: [NSURL URLWithString: urlImage]];
+            self.artistImage.image = [UIImage imageWithData:imageData];
+            self.visualEffectView.backgroundColor = [UIColor colorWithPatternImage:self.artistImage.image];
+         //   [spin stopAnimating];
+       // });
+       // spin.center = self.artistImage.center;
+       // [self.view addSubview:spin];
+       // [spin startAnimating];
+        
+    //});
+
+}
+
+- (void)getData {
+    self.spin = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
+    self.spin.center = self.view.center;
+    [self.view addSubview:self.spin];
+    [self.spin startAnimating];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT,0),  ^{
+        //this block runs on a background thread; Do heavy operation here
+        self.listOfAlbums = [Factory findElementWithClassName:@"Album" andValues:[NSString stringWithFormat:@"attribute[user_id]=%i", self.artist.identifier]];
+        self.listOfTweets = [TweetsController getTweets:self.artist.identifier];
+        
+        NSMutableArray *listOfFollows = [UsersController getFollows :self.user.identifier];
+        for (User *artist in listOfFollows) {
+            if (artist.identifier == self.artist.identifier) {
+                self.followed = true;
+            }
+        }
+        NSLog(@"countttt : %i", self.user.friends.count);
+        for (User *friend in self.user.friends) {
+            NSLog(@"friend.identifier : %i", friend.identifier);
+            NSLog(@"self.artist.identifier : %i", self.artist.identifier);
+            if (friend.identifier == self.artist.identifier) {
+                
+                self.isFriend = true;
+                NSLog(@"it's a friend");
+            }
+        }
+        
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            //This block runs on main thread, so update UI
+            [self.spin stopAnimating];
+            self.dataLoaded = true;
+            if (self.followed) {
+                [self.followButton setBackgroundImage:[Tools imageWithImage:[SVGKImage imageNamed:@"follow_1"].UIImage scaledToSize:CGSizeMake(30, 30)] forState:UIControlStateNormal];
+            } else {
+                [self.followButton setBackgroundImage:[Tools imageWithImage:[SVGKImage imageNamed:@"follow_0"].UIImage scaledToSize:CGSizeMake(30, 30)] forState:UIControlStateNormal];
+            }
+            
+            if (self.isFriend) {
+                [self.friendButton setBackgroundImage:[Tools imageWithImage:[SVGKImage imageNamed:@"people_followed"].UIImage scaledToSize:CGSizeMake(30, 30)] forState:UIControlStateNormal];
+            } else {
+                [self.friendButton setBackgroundImage:[Tools imageWithImage:[SVGKImage imageNamed:@"people"].UIImage scaledToSize:CGSizeMake(30, 30)] forState:UIControlStateNormal];
+            }
+            [self.tableView reloadData];
+        });
+    });
+}
+
+- (void)followPeople {
+    if (self.followed) {
+        if ([UsersController unfollow:self.artist.identifier]) {
+            [[[SimplePopUp alloc] initWithMessage:[NSString stringWithFormat:[self.translate.dict objectForKey:@"unfollow_artist"], self.artist.username] onView:self.view withSuccess:true] show];
+            [self.followButton setBackgroundImage:[Tools imageWithImage:[SVGKImage imageNamed:@"follow_0"].UIImage scaledToSize:CGSizeMake(30, 30)] forState:UIControlStateNormal];
+            self.followed = false;
+        } else {
+            [[[SimplePopUp alloc] initWithMessage:[NSString stringWithFormat:[self.translate.dict objectForKey:@"playlist_deleted_error"], self.artist.username] onView:self.view withSuccess:false] show];
+        }
+    } else {
+        if ([UsersController follow:self.artist.identifier]) {
+            [[[SimplePopUp alloc] initWithMessage:[NSString stringWithFormat:[self.translate.dict objectForKey:@"follow_artist"], self.artist.username] onView:self.view withSuccess:true] show];
+            [self.followButton setBackgroundImage:[Tools imageWithImage:[SVGKImage imageNamed:@"follow_1"].UIImage scaledToSize:CGSizeMake(30, 30)] forState:UIControlStateNormal];
+            self.followed = true;
+        } else {
+            [[[SimplePopUp alloc] initWithMessage:[NSString stringWithFormat:[self.translate.dict objectForKey:@"playlist_deleted_error"], self.artist.username] onView:self.view withSuccess:false] show];
+        }
+    }
+}
+
+- (void)friendAction {
+    if (self.isFriend) {
+        if ([UsersController delFriend:self.artist.identifier]) {
+            for (int i =0; i<self.user.friends.count; i++) {
+                User *friend = [self.user.friends objectAtIndex:i];
+                if (friend.identifier == self.artist.identifier) {
+                    [self.user.friends removeObjectAtIndex:i];
+                }
+            }
+            NSData *dataStore = [NSKeyedArchiver archivedDataWithRootObject:self.user];
+            [[NSUserDefaults standardUserDefaults] setObject:dataStore forKey:@"User"];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+            [[[SimplePopUp alloc] initWithMessage:[NSString stringWithFormat:[self.translate.dict objectForKey:@"del_friend"], self.artist.username] onView:self.view withSuccess:true] show];
+            [self.friendButton setBackgroundImage:[Tools imageWithImage:[SVGKImage imageNamed:@"people"].UIImage scaledToSize:CGSizeMake(30, 30)] forState:UIControlStateNormal];
+            self.isFriend = false;
+        } else {
+            [[[SimplePopUp alloc] initWithMessage:[NSString stringWithFormat:[self.translate.dict objectForKey:@"playlist_deleted_error"], self.artist.username] onView:self.view withSuccess:false] show];
+        }
+    } else {
+        if ([UsersController addFriend:self.artist.identifier]) {
+            [self.user.friends addObject:self.artist];
+            NSData *dataStore = [NSKeyedArchiver archivedDataWithRootObject:self.user];
+            [[NSUserDefaults standardUserDefaults] setObject:dataStore forKey:@"User"];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+            [[[SimplePopUp alloc] initWithMessage:[NSString stringWithFormat:[self.translate.dict objectForKey:@"add_friend"], self.artist.username] onView:self.view withSuccess:true] show];
+            [self.friendButton setBackgroundImage:[Tools imageWithImage:[SVGKImage imageNamed:@"people_followed"].UIImage scaledToSize:CGSizeMake(30, 30)] forState:UIControlStateNormal];
+            self.isFriend = true;
+        } else {
+            [[[SimplePopUp alloc] initWithMessage:[NSString stringWithFormat:[self.translate.dict objectForKey:@"playlist_deleted_error"], self.artist.username] onView:self.view withSuccess:false] show];
+        }
+    }
 }
 
 - (void)launchShareView
 {
-    NSString *shareText = @"The text I am sharing";
-    UIImage *shareImage = [UIImage imageNamed:@"artist2.jpg"];
-    NSArray *itemsToShare = @[shareText, shareImage];
-    UIActivityViewController *activityVC = [[UIActivityViewController alloc] initWithActivityItems:itemsToShare applicationActivities:nil];
-    activityVC.excludedActivityTypes = @[UIActivityTypeAssignToContact, UIActivityTypeCopyToPasteboard];
-    [self presentViewController:activityVC animated:YES completion:nil];
+    [super launchShareView:self.artist];
 }
 
-- (void)getAlbumInfos
-{
-    self.albumTitles = [[NSMutableArray alloc] init];
-    
-    self.albumsList = [[NSMutableDictionary alloc] init];
-    self.albumsContent = [[NSMutableDictionary alloc] init];
-    Album *a = [[Album alloc] init];
-    a.title = @"Album1";
-    a.artist.username = @"Route 94";
-    a.image = @"song2.jpg";
-    
-    self.songsList = [[NSMutableArray alloc] init];
-    Music *s1 = [[Music alloc] init];
-    s1.title = @"My Love";
-    [self.songsList addObject:s1];
-    
-    s1 = [[Music alloc] init];
-    s1.title = @"My Love";
-    [self.songsList addObject:s1];
-    
-    s1 = [[Music alloc] init];
-    s1.title = @"My Love";
-    [self.songsList addObject:s1];
-    
-    s1 = [[Music alloc] init];
-    s1.title = @"My Love";
-    [self.songsList addObject:s1];
-    
-    [self.albumsContent setValue:a forKey:@"albumInfos"];
-    [self.albumsContent setValue:self.songsList forKey:@"albumContent"];
-    
-    [self.albumsList setValue:self.albumsContent forKey:a.title];
-    [self.albumTitles addObject:a.title];
-    
-    self.albumsContent = [[NSMutableDictionary alloc] init];
-    Album *a2 = [[Album alloc] init];
-    a2.title = @"Album2";
-    a2.artist.username = @"I got U";
-    a2.image = @"song3.jpg";
-    
-    self.songsList = [[NSMutableArray alloc] init];
-    s1 = [[Music alloc] init];
-    s1.title = @"I got U";
-    [self.songsList addObject:s1];
-    
-    s1 = [[Music alloc] init];
-    s1.title = @"I got U UUU";
-    [self.songsList addObject:s1];
-    
-    s1 = [[Music alloc] init];
-    s1.title = @"My Love";
-    [self.songsList addObject:s1];
-    
-    s1 = [[Music alloc] init];
-    s1.title = @"My Love";
-    [self.songsList addObject:s1];
-    
-    [self.albumsContent setValue:a2 forKey:@"albumInfos"];
-    [self.albumsContent setValue:self.songsList forKey:@"albumContent"];
-    
-    [self.albumsList setValue:self.albumsContent forKey:a2.title];
-    [self.albumTitles addObject:a2.title];
-
-    self.albumsContent = [[NSMutableDictionary alloc] init];
-    Album *a3 = [[Album alloc] init];
-    a3.title = @"Wesjjj";
-    a3.artist.username = @"prout";
-    a3.image = @"song3.jpg";
-    
-    self.songsList = [[NSMutableArray alloc] init];
-    s1 = [[Music alloc] init];
-    s1.title = @"dqsddd";
-    [self.songsList addObject:s1];
-    
-    s1 = [[Music alloc] init];
-    s1.title = @"yiytre";
-    [self.songsList addObject:s1];
-    
-    s1 = [[Music alloc] init];
-    s1.title = @"My Love";
-    [self.songsList addObject:s1];
-    
-    s1 = [[Music alloc] init];
-    s1.title = @"My Love";
-    [self.songsList addObject:s1];
-    
-    [self.albumsContent setValue:a3 forKey:@"albumInfos"];
-    [self.albumsContent setValue:self.songsList forKey:@"albumContent"];
-    
-    [self.albumsList setValue:self.albumsContent forKey:a3.title];
-    [self.albumTitles addObject:a3.title];
-
+- (void)closeView {
+    [self.shareView removeFromSuperview];
+    [self removeBlurEffect:200 onView:self.view];
 }
-
-- (void)goToSection1
-{
-    self.index = 0;
-    [self.horizontalScrollView setContentOffset:CGPointMake(self.index * self.view.frame.size.width, 0) animated:YES];
-    [UIView animateWithDuration:0.5 animations:^{
-        [self.movingView setFrame:CGRectMake(self.view.frame.size.width / 4 * self.index, self.movingView.frame.origin.y, self.movingView.frame.size.width, self.movingView.frame.size.height)];
-    }];
-}
-
-- (void)goToSection2
-{
-    self.index = 1;
-    [self.horizontalScrollView setContentOffset:CGPointMake(self.index * self.view.frame.size.width, 0) animated:YES];
-    [UIView animateWithDuration:0.5 animations:^{
-        [self.movingView setFrame:CGRectMake(self.view.frame.size.width / 4 * self.index, self.movingView.frame.origin.y, self.movingView.frame.size.width, self.movingView.frame.size.height)];
-    }];
-}
-
-- (void)goToSection3
-{
-    self.index = 2;
-    [self.horizontalScrollView setContentOffset:CGPointMake(self.index * self.view.frame.size.width, 0) animated:YES];
-    [UIView animateWithDuration:0.5 animations:^{
-        [self.movingView setFrame:CGRectMake(self.view.frame.size.width / 4 * self.index, self.movingView.frame.origin.y, self.movingView.frame.size.width, self.movingView.frame.size.height)];
-    }];
-}
-
-- (void)goToSection4
-{
-    self.index = 3;
-    [self.horizontalScrollView setContentOffset:CGPointMake(self.index * self.view.frame.size.width, 0) animated:YES];
-    [UIView animateWithDuration:0.5 animations:^{
-        [self.movingView setFrame:CGRectMake(self.view.frame.size.width / 4 * self.index, self.movingView.frame.origin.y, self.movingView.frame.size.width, self.movingView.frame.size.height)];
-    }];
-}
-
-- (void)scrollViewWillEndDragging:(UIScrollView *)scrollView withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset
-{
-    if (scrollView.tag == 2) {
-        self.index = (int)targetContentOffset->x / self.view.frame.size.width;
-        //[self.pageControl setCurrentPage:self.index];
-        
-        [UIView animateWithDuration:0.5 animations:^{
-            [self.movingView setFrame:CGRectMake(self.view.frame.size.width / 4 * self.index, self.movingView.frame.origin.y, self.movingView.frame.size.width, self.movingView.frame.size.height)];
-        }];
-    }
-}
-
-/*
- *      TABLE VIEW SONGS
- */
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return self.albumTitles.count;
+    return 3;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    NSString *nameOfTheAlbum = [self.albumTitles objectAtIndex:section];
-    NSDictionary *album = [[NSDictionary alloc] initWithDictionary:[self.albumsList objectForKey:nameOfTheAlbum]];
-    NSArray *listOfSongs = [NSArray arrayWithArray:[album objectForKey:@"albumContent"]];
+    if (section == 0) {
+        return self.listOfAlbums.count;
+    } else if (section == 1) {
+        return 4;
+    }
     
-    return listOfSongs.count;
-}
+    return self.listOfTweets.count;
+   }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 40;
+    return 56;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
-{
-    return 60;
+/*- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+    if (section == 2) {
+        return 60;
+    }
+    
+    return 0;
+}*/
+
+/*- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
+    if (section == 2) {
+        UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.tableView.frame.size.width, 60)];
+        self.textView = [[UITextView alloc] initWithFrame:CGRectMake(0, 0, self.tableView.frame.size.width, 40)];
+        self.textView.textColor = [UIColor whiteColor];
+        [self.textView setBackgroundColor:DARK_GREY];
+        self.textView.layer.cornerRadius = 0.5f;
+        self.textView.layer.borderColor = [UIColor lightGrayColor].CGColor;
+        self.textView.layer.borderWidth = 1;
+        [view addSubview:self.textView];
+        UIButton *btn = [[UIButton alloc] initWithFrame:CGRectMake(self.tableView.frame.size.width-80-5, self.textView.frame.size.height, 80, 20)];
+        [btn addTarget:self action:@selector(sendTweet) forControlEvents:UIControlEventTouchUpInside];
+        [btn setTitle:@"Envoyer" forState:UIControlStateNormal];
+        [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [view addSubview:btn];
+        view.backgroundColor = DARK_GREY;
+        return view;
+    }
+    
+    return nil;
+}*/
+
+- (void)sendTweet {
+    if ([TweetsController sendTweet:self.textView.text]) {
+        [[[SimplePopUp alloc] initWithMessage:[NSString stringWithFormat:@"Tweet envoyé à %@", self.artist.username] onView:self.view withSuccess:true] show];
+    } else {
+        [[[SimplePopUp alloc] initWithMessage:@"Erreur lors de l'envoi du tweet" onView:self.view withSuccess:false] show];
+    }
 }
 
-- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
-    NSString *nameOfTheAlbum = [self.albumTitles objectAtIndex:section];
-    NSDictionary *album = [[NSDictionary alloc] initWithDictionary:[self.albumsList objectForKey:nameOfTheAlbum]];
-    Album *a = [album objectForKey:@"albumInfos"];
-    
-    
-    UIView *sectionView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, 60)];
-    UIImageView *albumImage = [[UIImageView alloc] initWithFrame:CGRectMake(5, 5, 50, 50)];
-    albumImage.image = [UIImage imageNamed:a.image];
-    [sectionView addSubview:albumImage];
-    
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(10 + albumImage.frame.size.width, 5, sectionView.frame.size.width - albumImage.frame.size.width - 10, sectionView.frame.size.height - 10)];
-    label.font = SOONZIK_FONT_BODY_BIG;
-    label.textColor = [UIColor whiteColor];
-    label.text = a.title;
-    
-    [sectionView addSubview:label];
-    
-    [sectionView setBackgroundColor:[UIColor colorWithRed:51/255.0f green:51/255.0f blue:51/255.0f alpha:1.0f]];
-    
-    return sectionView;
+    if (section == 0) {
+        // albums
+        return [self.translate.dict objectForKey:@"title_albums"];
+    } else if (section == 1) {
+        // titres
+        return [self.translate.dict objectForKey:@"title_musics"];
+    }
+    // social
+    return [self.translate.dict objectForKey:@"title_social"];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *cellIdentifier = @"cellId";
+    if (indexPath.section == 0) {
+        static NSString *cellIdentifier = @"cellId";
+        
+        TitleAlbumsTableViewCell *cell = (TitleAlbumsTableViewCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+        if (cell == nil) {
+            [tableView registerNib:[UINib nibWithNibName:@"TitleAlbumsTableViewCell" bundle:nil] forCellReuseIdentifier:cellIdentifier];
+            cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+        }
+        
+        Album *album = [self.listOfAlbums objectAtIndex:indexPath.row];
+        cell.albumImage.image = [UIImage imageNamed:album.image];
+        cell.albumTitle.text = album.title;
+        cell.albumArtist.text = album.artist.username;
+        cell.backgroundColor = DARK_GREY;
+        
+        return cell;
     
-    AlbumSongCell *cell = (AlbumSongCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-    if (cell == nil) {
-        [tableView registerNib:[UINib nibWithNibName:@"AlbumSongCell" bundle:nil] forCellReuseIdentifier:cellIdentifier];
-        cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    } else if (indexPath.section == 1) {
+        static NSString *cellIdentifier = @"cellId2";
+        
+        UITableViewCell *cell = (UITableViewCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+        if (cell == nil) {
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+        }
+        
+        //cell.artistImage.image = [UIImage imageNamed:@"artist2.jpg"];
+        //cell.artistName.text = @"artist 2";
+        cell.backgroundColor = DARK_GREY;
+        return cell;
     }
     
-    [cell initCell];
+    static NSString *cellIdentifier = @"cellId3";
     
-    NSString *nameOfTheAlbum = [self.albumTitles objectAtIndex:indexPath.section];
-    NSDictionary *album = [[NSDictionary alloc] initWithDictionary:[self.albumsList objectForKey:nameOfTheAlbum]];
-    NSArray *listOfSongs = [album objectForKey:@"albumContent"];
-    Music *s = [listOfSongs objectAtIndex:indexPath.row];
+    UITableViewCell *cell = (UITableViewCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    if (cell == nil) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellIdentifier];
+    }
     
-    cell.songTitle.text = s.title;
+    cell.backgroundColor = [UIColor clearColor];
+    cell.textLabel.textColor = [UIColor whiteColor];
     
+    Tweet *tweet = [self.listOfTweets objectAtIndex:indexPath.row];
+    
+    cell.textLabel.text = tweet.msg;
+    unsigned int unitFlags = NSCalendarUnitDay | NSCalendarUnitMinute | NSCalendarUnitSecond | NSCalendarUnitHour;
+    NSDateComponents *conversionInfo = [[[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian] components:unitFlags fromDate:tweet.date   toDate:[NSDate date]  options:0];
+    
+    NSLog(@"msg date : %@", tweet.date);
+    
+    int seconds = [conversionInfo second];
+    int days = [conversionInfo day];
+    int hours = [conversionInfo hour];
+    int minutes = [conversionInfo minute];
+    
+    NSLog(@"%i %i:%i%i", days, hours, minutes, seconds);
+    
+    if (days < 1) {
+        if (hours < 1) {
+            if (minutes < 1) {
+                cell.detailTextLabel.text = [NSString stringWithFormat:@"Il y a %i secondes", seconds];
+            } else {
+                cell.detailTextLabel.text = [NSString stringWithFormat:@"Il y a %i minutes", minutes];
+            }
+        } else {
+            cell.detailTextLabel.text = [NSString stringWithFormat:@"Il y a %i heures", hours];
+        }
+    } else if (days == 1) {
+        cell.detailTextLabel.text = [NSString stringWithFormat:@"Il y a %i jour", 1];
+    } else if (days > 1) {
+        cell.detailTextLabel.text = [NSString stringWithFormat:@"Il y a %i jours", days];
+    }
+
+    cell.textLabel.font = SOONZIK_FONT_BODY_SMALL;
+    cell.detailTextLabel.font = SOONZIK_FONT_BODY_VERY_SMALL;
+    cell.textLabel.textColor = [UIColor whiteColor];
+    cell.detailTextLabel.textColor = [UIColor whiteColor];
+    [cell sizeToFit];
+
     return cell;
 }
 
-- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
-{
-    return 1;
-}
-
-- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
-{
-    return 10;
-}
-
-- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
-{
-    static NSString *cellID = @"cellID";
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    Album *album = [self.listOfAlbums objectAtIndex:indexPath.row];
     
-    [collectionView registerNib:[UINib nibWithNibName:@"OtherArtistsCollectionViewCell" bundle:nil] forCellWithReuseIdentifier:cellID];
-    OtherArtistsCollectionViewCell *cell = (OtherArtistsCollectionViewCell *)[collectionView dequeueReusableCellWithReuseIdentifier:cellID forIndexPath:indexPath];
+    [self closePopUp];
     
-    [cell initCell];
+    AlbumViewController *vc = [[AlbumViewController alloc] initWithNibName:@"AlbumViewController" bundle:nil];
+    vc.album = album;
     
-    return cell;
-}
-
-- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
-{
-    NSLog(@"element: %i", indexPath.row);
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    [self presentViewController:vc animated:YES completion:nil];
 }
 
 @end

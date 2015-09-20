@@ -23,7 +23,7 @@
     NSRange range = [str1 rangeOfString:@" "];
     NSString *newString = [str1 substringToIndex:range.location];
     self.date = newString;
-
+    
     self.listOfAttachments = [[NSMutableArray alloc] init];
     if ([[json objectForKey:@"attachments"] count] > 0) {
         for (NSDictionary *dict in [json objectForKey:@"attachments"]) {
@@ -32,9 +32,17 @@
         }
     }
     
-    if ([[json objectForKey:@"newstexts"] count] > 0) {
-        self.listOfNewsTexts = [[NSMutableArray alloc] init];
-        for (NSDictionary *dict in [json objectForKey:@"newstexts"]) {
+    NSString *language = [[NSLocale preferredLanguages] objectAtIndex:0];
+    NSString *lang;
+    if ([language isEqualToString:@"en"]) {
+        lang = @"EN";
+    } else if ([language isEqualToString:@"fr"]) {
+        lang = @"FR";
+    }
+    
+    self.listOfNewsTexts = [[NSMutableArray alloc] init];
+    for (NSDictionary *dict in [json objectForKey:@"newstexts"]) {
+        if ([lang isEqualToString:[dict objectForKey:@"language"]]) {
             NewsText *newsText = [[NewsText alloc] initWithJsonObject:dict];
             [self.listOfNewsTexts addObject:newsText];
         }

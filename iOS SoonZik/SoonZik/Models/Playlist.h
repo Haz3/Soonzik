@@ -14,6 +14,4 @@
 @property (nonatomic, strong) NSString *title;
 @property (nonatomic, strong) NSMutableArray *listOfMusics;
 
-+ (Playlist *)createAPlaylist:(Playlist *)playlist;
-
 @end

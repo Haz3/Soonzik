@@ -12,7 +12,5 @@
 @interface ObjectFactory : NSObject
 
 - (id)initWithJsonObject:(NSDictionary *)json;
-- (NSString *)toParameters;
-
 
 @end

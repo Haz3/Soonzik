@@ -16,13 +16,11 @@
 
 - (NSDictionary *) getJsonWithClassName:(NSString *)className;
 - (NSDictionary *) getJsonWithClassName:className andIdentifier:(int)identifier;
-- (NSDictionary *)getJsonClient:(NSString *)token email:(NSString *)email uid:(NSString *)uid type:(int)type;
-- (NSDictionary *) getJsonClient:(NSString *)email andPassword:(NSString *)password;
 
 - (NSDictionary *) findJsonElementWithClassName:className andValues:(NSString *)values;
 
 - (NSDictionary *)create:(id)elem;
-- (NSDictionary *)update:(id)elem;
+//- (NSDictionary *)update:(id)elem;
 - (NSDictionary *)destroy:(id)elem;
 
 @end

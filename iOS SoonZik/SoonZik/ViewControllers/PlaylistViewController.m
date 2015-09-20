@@ -15,32 +15,74 @@
 #import "AlbumViewController.h"
 #import "SVGKImage.h"
 #import "Tools.h"
+#import "SimplePopUp.h"
+#import "PlaylistsController.h"
 
 @interface PlaylistViewController ()
 
 @end
 
-
 @implementation PlaylistViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+- (void)viewWillAppear:(BOOL)animated
 {
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
+    [super viewWillAppear:animated];
+    [[UIApplication sharedApplication] setStatusBarHidden:false withAnimation:UIStatusBarAnimationNone];
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
+    NSData *translateData = [[NSUserDefaults standardUserDefaults] objectForKey:@"Translate"];
+    self.translate = [NSKeyedUnarchiver unarchiveObjectWithData:translateData];
+    
+    UIBarButtonItem *deleteButton = [[UIBarButtonItem alloc] initWithTitle:[self.translate.dict objectForKey:@"delete"] style:UIBarButtonItemStyleDone target:self action:@selector(deletePlaylist)];
+    deleteButton.tintColor = [UIColor whiteColor];
+    self.navigationItem.rightBarButtonItem = deleteButton;
+    
     self.navigationItem.hidesBackButton = NO;
     self.navigationItem.leftBarButtonItem = nil;
     
+    self.view.backgroundColor = DARK_GREY;
+    
     self.playlistTableView.dataSource = self;
     self.playlistTableView.delegate = self;
+    self.playlistTableView.backgroundColor = [UIColor clearColor];
+    
+    self.title = self.playlist.title;
+    
+    self.noContentLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, CGRectGetMidY(self.view.frame)/2, self.view.frame.size.width-40, 100)];
+    self.noContentLabel.textAlignment = NSTextAlignmentCenter;
+    self.noContentLabel.numberOfLines = 3;
+    self.noContentLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:25];
+    self.noContentLabel.textColor = [UIColor whiteColor];
+    self.noContentLabel.text = [self.translate.dict objectForKey:@"no_playlist_content"];
+    [self.view addSubview:self.noContentLabel];
+    
+    [self checkPlaylist];
+}
+
+- (void)checkPlaylist
+{
+    if (self.playlist.listOfMusics.count == 0) {
+        [self.playlistTableView setHidden:YES];
+        [self.noContentLabel setHidden:NO];
+    } else {
+        [self.playlistTableView setHidden:NO];
+        [self.noContentLabel setHidden:YES];
+    }
+}
+
+- (void)deletePlaylist {
+    bool success = [Factory destroy:self.playlist];
+    if (success) {
+        [[[SimplePopUp alloc] initWithMessage:[self.translate.dict objectForKey:@"playlist_deleted"] onView:self.view withSuccess:true] show];
+        [self.navigationController popViewControllerAnimated:YES];
+        [self.reloadDelegate reloadList];
+    } else {
+        [[[SimplePopUp alloc] initWithMessage:[self.translate.dict objectForKey:@"playlist_deleted_error"] onView:self.view withSuccess:false] show];
+    }
 }
 
 - (void)goToAlbumView:(Music *)music
@@ -48,15 +90,16 @@
     [self closePopUp];
     AlbumViewController *vc = [[AlbumViewController alloc] initWithNibName:@"AlbumViewController" bundle:nil];
     vc.album = [[Album alloc] init];
-    vc.album.identifier = 1;
-    [self.navigationController pushViewController:vc animated:YES];
+    vc.album.identifier = music.albumId;
+    [self presentViewController:vc animated:YES completion:nil];
 }
 
 - (void)goToArtistView:(Music *)music
 {
     [self closePopUp];
     ArtistViewController *vc = [[ArtistViewController alloc] initWithNibName:@"ArtistViewController" bundle:nil];
-    [self.navigationController pushViewController:vc animated:YES];
+    vc.artist = music.artist;
+    [self presentViewController:vc animated:YES completion:nil];
 }
 
 - (void)addToCurrentPlaylist:(Music *)music
@@ -65,13 +108,9 @@
     self.player = ((AppDelegate *)[UIApplication sharedApplication].delegate).thePlayer;
     [self.player.listeningList addObject:music];
     
-    UIAlertView *popUp = [[UIAlertView alloc] initWithTitle:@"" message:[NSString stringWithFormat:@"Vous avez ajouté: %@ à la liste de lecture actuelle", music.title] delegate:self cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
-    
-    [popUp show];
+    [[[SimplePopUp alloc] initWithMessage:[NSString stringWithFormat:[self.translate.dict objectForKey:@"music_added_current_list"], music.title] onView:self.view withSuccess:true] show];
     
     [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(closePopUp) userInfo:nil repeats:NO];
-    
-    NSLog(@"Vous avez cliqué sur la piste : %@", music.title);
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -92,9 +131,10 @@
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 44)];
-    view.backgroundColor = [UIColor grayColor];
+    view.backgroundColor = [UIColor clearColor];
     UIButton *playAllButton = [[UIButton alloc] initWithFrame:CGRectMake(4, 4, 312, 36)];
-    [playAllButton setTitle:@"Lire" forState:UIControlStateNormal];
+    [playAllButton setTitle:[self.translate.dict objectForKey:@"play_all"] forState:UIControlStateNormal];
+    [playAllButton.titleLabel setFont:[UIFont fontWithName:@"HelveticaNeue-Light" size:25]];
     [playAllButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [playAllButton addTarget:self action:@selector(playAllPlaylist) forControlEvents:UIControlEventTouchUpInside];
     [view addSubview:playAllButton];
@@ -103,21 +143,47 @@
     
 }
 
+- (void)displayPopUp:(MusicOptionsButton *)btn
+{
+    [self addBlurEffectOnView:self.view];
+    OnLTMusicPopupView *popUpView = (OnLTMusicPopupView *)[[[NSBundle mainBundle] loadNibNamed:@"OnLTMusicPopupView" owner:self options:nil] objectAtIndex:0];
+    popUpView.tag = 100;
+    popUpView.choiceDelegate = self;
+    [self.view addSubview:popUpView];
+    [popUpView initPopupWithSong:btn.music andPlaylist:btn.playlist andTypeOfParent:0];
+}
+
 - (void) playAllPlaylist
 {
-    NSLog(@"clic");
     self.player = ((AppDelegate *)[UIApplication sharedApplication].delegate).thePlayer;
     self.player.listeningList = [[NSMutableArray alloc] init];
-    [self.player.audioPlayer stop];
+    [self.player stopSound];
+    self.player.currentlyPlaying = NO;
     self.player.index = 0;
     self.player.oldIndex = 0;
     
     for (Music *music in self.playlist.listOfMusics) {
         [self.player.listeningList addObject:music];
-        NSLog(@"add music to listening list");
     }
     
+    Music *music = [self.player.listeningList objectAtIndex:0];
+    [self.player prepareSong:music.identifier];
     [self.player playSound];
+}
+
+- (void)removeMusicFromPlayList:(Music *)music and:(Playlist *)playlist {
+    if ([PlaylistsController removeFromPlaylist:playlist :music]) {
+        [[[SimplePopUp alloc] initWithMessage:[NSString stringWithFormat:[self.translate.dict objectForKey:@"playlist_delete_music"], music.title] onView:self.view withSuccess:YES] show];
+        for (int i=0; i<self.playlist.listOfMusics.count; i++) {
+            Music *m = [self.playlist.listOfMusics objectAtIndex:i];
+            if (music.identifier == m.identifier) {
+                [self.playlist.listOfMusics removeObjectAtIndex:i];
+            }
+        }
+        [self.playlistTableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationFade];
+    } else {
+        [[[SimplePopUp alloc] initWithMessage:[self.translate.dict objectForKey:@"playlists_deleted_error"] onView:self.view withSuccess:NO] show];
+    }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -137,17 +203,14 @@
     
     [cell initCell];
     
-    //get the song name
-    
     Music *s = [self.playlist.listOfMusics objectAtIndex:indexPath.row];
-    NSLog(@"music.file : %@", s.file);
     cell.trackTitle.text = s.title;
     cell.trackArtist.text = s.artist.username;
     [cell.optionsButton addTarget:self action:@selector(displayPopUp:) forControlEvents:UIControlEventTouchUpInside];
     cell.optionsButton.music = s;
     cell.optionsButton.playlist = self.playlist;
     
-    UIImage* optionImage = [Tools imageWithImage:[SVGKImage imageNamed:@"music_options.svg"].UIImage scaledToSize:CGSizeMake(30, 30)];
+    UIImage* optionImage = [Tools imageWithImage:[UIImage imageNamed:@"options_white"] scaledToSize:CGSizeMake(30, 30)];
     [cell.optionsButton setImage:optionImage forState:UIControlStateNormal];
     
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -157,16 +220,6 @@
     [cell.contentView addSubview:lineView];
     
     return cell;
-}
-
-- (void)displayPopUp:(MusicOptionsButton *)btn
-{
-    [self addBlurEffectOnView:self.view];
-    OnLTMusicPopupView *popUpView = (OnLTMusicPopupView *)[[[NSBundle mainBundle] loadNibNamed:@"OnLTMusicPopupView" owner:self options:nil] objectAtIndex:0];
-    popUpView.tag = 100;
-    popUpView.choiceDelegate = self;
-    [self.view addSubview:popUpView];
-    [popUpView initPopupWithSong:btn.music andPlaylist:btn.playlist];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -180,43 +233,9 @@
     self.player.listeningList = [[NSMutableArray alloc] init];
     [self.player.listeningList addObject:s];
     self.player.index = 0;
-    [self.player prepareSong:s.file];
+    [self.player prepareSong:s.identifier];
     [self.player playSound];
     self.player.songName = s.title;
-}
-
-- (void)closePopUp
-{
-    for (UIView *v in [self.view subviews]) {
-        if (v.tag == 100) {
-            [UIView animateWithDuration:1 animations:^{
-                v.alpha = 0;
-            } completion:^(BOOL finished) {
-                [v removeFromSuperview];
-            }];
-        }
-    }
-    [self removeBlurEffect:200 onView:self.view];
-}
-
-- (void)closePopUpView
-{
-    for (UIView *v in [self.view subviews]) {
-        if (v.tag == 100) {
-            [UIView animateWithDuration:1 animations:^{
-                v.alpha = 0;
-            } completion:^(BOOL finished) {
-                [v removeFromSuperview];
-            }];
-        }
-    }
-    [self removeBlurEffect:200 onView:self.view];
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 @end

@@ -10,4 +10,14 @@
 
 @implementation Language
 
+- (id)initWithJsonObject:(NSDictionary *)json {
+    self = [super init];
+    
+    self.identifier = [[json objectForKey:@"id"] intValue];
+    self.abbreviation = [json objectForKey:@"abbreviation"];
+    self.language = [json objectForKey:@"language"];
+    
+    return self;
+}
+
 @end

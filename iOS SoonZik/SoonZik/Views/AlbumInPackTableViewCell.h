@@ -10,9 +10,7 @@
 
 @interface AlbumInPackTableViewCell : UITableViewCell
 
-@property (nonatomic, weak) IBOutlet UILabel *artistLabel;
-@property (nonatomic, weak) IBOutlet UILabel *albumLabel;
-
-- (void)initCell;
+@property (nonatomic, strong) IBOutlet UILabel *artistLabel;
+@property (nonatomic, strong) IBOutlet UILabel *albumLabel;
 
 @end

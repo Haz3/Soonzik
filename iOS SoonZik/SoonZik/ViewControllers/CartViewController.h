@@ -6,8 +6,18 @@
 //  Copyright (c) 2015 SoonZik - Maxime SAUVAGE. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "TypeViewController.h"
+#import "Cart.h"
+#import "Translate.h"
+#import "CartItemTableViewCell.h"
 
-@interface CartViewController : UIViewController
+@interface CartViewController : TypeViewController <UITableViewDataSource, UITableViewDelegate>
+
+@property (nonatomic, strong) IBOutlet UITableView *tableView;
+@property (nonatomic, strong) NSArray *carts;
+@property (nonatomic, strong) NSMutableArray *albums;
+@property (nonatomic, strong) NSMutableArray *musics;
+
+@property (nonatomic, assign) bool fromMenu;
 
 @end

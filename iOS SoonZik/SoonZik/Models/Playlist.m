@@ -31,18 +31,4 @@
     return self;
 }
 
-+ (Playlist *)createAPlaylist:(Playlist *)playlist {
-    Network *net = [[Network alloc] init];
-    NSDictionary *json = [net create:playlist];
-    
-    Playlist *p;
-    if ([[json objectForKey:@"code"] intValue] != 503) {
-        p = [[Playlist alloc] initWithJsonObject:[json objectForKey:@"content"]];
-    } else {
-        p = [[Playlist alloc] init];
-        p.identifier = -1;
-    }
-    return p;
-}
-
 @end

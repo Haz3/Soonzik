@@ -7,20 +7,19 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "ShareNewsDelegate.h"
+#import "ShareDelegate.h"
 #import "News.h"
 
 @interface NewsNouvelleCell : UITableViewCell
 
-@property (weak, nonatomic) IBOutlet UIView *cellContent;
-@property (weak, nonatomic) IBOutlet UIButton *shareButton;
-@property (weak, nonatomic) IBOutlet UILabel *titleLabel;
-@property (weak, nonatomic) IBOutlet UILabel *subtitleLabel;
-@property (weak, nonatomic) IBOutlet UILabel *dateLabel;
+@property (strong, nonatomic) IBOutlet UIButton *shareButton;
+@property (strong, nonatomic) IBOutlet UILabel *titleLabel;
+@property (strong, nonatomic) IBOutlet UILabel *subtitleLabel;
+@property (strong, nonatomic) IBOutlet UILabel *dateLabel;
 
 @property (strong, nonatomic) News *news;
 
-@property (nonatomic, strong) id<ShareNewsDelegate>shareDelegate;
+@property (nonatomic, strong) id<ShareDelegate>shareDelegate;
 
 - (void)initCellWithNews:(News *)news;
 

@@ -10,21 +10,25 @@
 
 @implementation PlayListsCells
 
-- (void)awakeFromNib
-{
-    // Initialization code
-}
-
 - (void)initCell
 {
-    self.trackTitle.font = SOONZIK_FONT_BODY_SMALL;
+    self.trackTitle.font = SOONZIK_FONT_BODY_MEDIUM;
+    self.trackArtist.font = SOONZIK_FONT_BODY_SMALL;
+    self.backgroundColor =  DARK_GREY;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
 {
     [super setSelected:selected animated:animated];
 
-    // Configure the view for the selected state
+    if (selected) {
+        self.trackArtist.textColor = BLUE_3;
+        self.trackTitle.textColor = BLUE_3;
+    }
+    else {
+        self.trackArtist.textColor = [UIColor whiteColor];
+        self.trackTitle.textColor = [UIColor whiteColor];
+    }
 }
 
 @end

@@ -9,7 +9,9 @@
 #import "GeolocationViewController.h"
 #import "ArtistViewController.h"
 #import "UserAnnotation.h"
-#import "CalloutView.h"
+#import "UserListen.h"
+#import "UsersController.h"
+#import "AlbumViewController.h"
 
 #define METERS_PER_MILE 1609.344
 
@@ -20,6 +22,12 @@
 @end
 
 @implementation GeolocationViewController
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [[UIApplication sharedApplication] setStatusBarHidden:false withAnimation:UIStatusBarAnimationNone];
+}
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -35,12 +43,13 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    CGAffineTransform rotationTransform = CGAffineTransformIdentity;
-    rotationTransform = CGAffineTransformRotate(rotationTransform, DEGREES_RADIANS(90));
-    self.sliderView.transform = rotationTransform;
-    
     self.mapView.delegate = self;
     self.mapView.showsUserLocation = YES;
+    
+    self.areaSlider.minimumValue = 0.5;
+    self.areaSlider.maximumValue = 10;
+    self.areaSlider.value = 0.5;
+    [self.areaSlider addTarget:self action:@selector(getAllOtherUsers) forControlEvents:UIControlEventValueChanged];
     
     self.navigationItem.hidesBackButton = NO;
     self.navigationItem.backBarButtonItem.title = @"";
@@ -53,14 +62,7 @@
         [self.userPosition requestWhenInUseAuthorization];
     }
     
-    [self.myPositionButton addTarget:self action:@selector(getUserLocation) forControlEvents:UIControlEventTouchUpInside];
-    
     [self getUserLocation];
-    
-    self.slider.value = 400;
-    self.slider.minimumValue = 200;
-    self.slider.maximumValue = 30000;
-    [self.slider setThumbImage:[UIImage imageNamed:@"cursor.png"] forState:UIControlStateNormal];
     
     [self getAllOtherUsers];
     
@@ -68,9 +70,10 @@
     [self.view addSubview:self.detailView];
     
     [self.myPositionButton addTarget:self action:@selector(getUserLocation) forControlEvents:UIControlEventTouchUpInside];
-    [self.slider addTarget:self action:@selector(sliderValueChanged:) forControlEvents:UIControlEventValueChanged];
     
     [self.detailView setAlpha:0];
+    UITapGestureRecognizer *reco = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(goToAlbumView:)];
+    [self.detailView addGestureRecognizer:reco];
     
 }
 
@@ -85,19 +88,6 @@
         [self.mapView setRegion:viewRegion];
     }];
     
-   // self.longitude = location.coordinate.longitude;
-   // self.latitude = location.coordinate.latitude;
-    NSArray *overlays = self.mapView.overlays;
-    for (id overlay in overlays) {
-        [self.mapView removeOverlay:overlay];
-    }
-    
-    //[self.userPosition startUpdatingLocation];
-    CLLocationDistance fenceDistance = (int)self.slider.value;
-    CLLocationCoordinate2D circleMiddlePoint = location.coordinate;
-    MKCircle *circle = [MKCircle circleWithCenterCoordinate:circleMiddlePoint radius:fenceDistance];
-    [self.mapView addOverlay:circle];
-    
     [self.userPosition stopUpdatingLocation];
 }
 
@@ -105,6 +95,15 @@
 {
     NSLog(@"get location");
     [self.userPosition startUpdatingLocation];
+    
+    NSLog(@"size : %f", self.areaSlider.value*1000);
+    
+    [self.mapView removeOverlays:self.mapView.overlays];
+    
+    CLLocation *loca = [[CLLocation alloc] initWithLatitude:50.6310675 longitude:3.0471604];
+    
+    MKCircle *circle = [MKCircle circleWithCenterCoordinate:loca.coordinate radius:(int)self.areaSlider.value*1000];
+    [self.mapView addOverlay:circle];
 }
 
 #pragma mark - CLLocationManagerDelegate
@@ -117,58 +116,43 @@
     [errorAlert show];
 }
 
-
-- (void)sliderValueChanged:(UISlider *)sender
-{
-    NSLog(@"sender.value : %f", sender.value);
-    [self getUserLocation];
-}
-
 - (MKOverlayRenderer *)mapView:(MKMapView *)mapView rendererForOverlay:(id < MKOverlay >)overlay
 {
-    MKCircleRenderer *circleR = [[MKCircleRenderer alloc] initWithCircle:(MKCircle *)overlay];
-    circleR.fillColor = [UIColor purpleColor];
-    circleR.alpha = 0.2;
+    MKCircleRenderer *circle = [[MKCircleRenderer alloc] initWithCircle:(MKCircle *)overlay];
+    circle.fillColor = [UIColor blueColor];
+    circle.strokeColor = [UIColor redColor];
+    circle.alpha = 0.2;
+    circle.lineWidth = 1;
     
-    return circleR;
+    return circle;
 }
-
-    
-    
-    /*
-- (void)goToUserLocation
-{
-    NSArray *overlays = self.mapView.overlays;
-    for (id overlay in overlays) {
-        [self.mapView removeOverlay:overlay];
-    }
-    
-    [self.userPosition startUpdatingLocation];
-    CLLocationDistance fenceDistance = (int)self.slider.value;
-    CLLocationCoordinate2D circleMiddlePoint = self.userPosition.location.coordinate;
-    MKCircle *circle = [MKCircle circleWithCenterCoordinate:circleMiddlePoint radius:fenceDistance];
-    [self.mapView addOverlay:circle];
-}*/
 
 - (void)getAllOtherUsers
 {
-    CLLocationCoordinate2D coord1;
-    coord1.latitude = 45.001245;
-    coord1.longitude = 4.001212;
-    UserAnnotation *ann = [[UserAnnotation alloc] initWithCoordinate:coord1 username:@"user1" track:@"song1" artist:@"John Newman" album:@"song1.jpg"];
+    //self.listOfListenings = [UsersController getUsersInArea:self.userPosition.location.coordinate.latitude :self.userPosition.location.coordinate.longitude :(int)self.areaSlider.value];
+    self.listOfListenings = [UsersController getUsersInArea:50.6310675 :3.0471604 :(int)self.areaSlider.value];
     
-    [self.mapView addAnnotation:ann];
+    for (id annotation in self.mapView.annotations) {
+        if ([annotation isKindOfClass:[UserAnnotation class]]) {
+            [self.mapView removeAnnotation:annotation];
+            NSLog(@"annotation");
+        }
+    }
+    
+    [self.mapView reloadInputViews];
+    
+    [self getUserLocation];
+    
+    for (UserListen *listen in self.listOfListenings) {
+        NSLog(@"found");
+        CLLocationCoordinate2D coord;
+        coord.latitude = listen.lat;
+        coord.longitude = listen.lng;
+        NSLog(@"user name : %@", listen.user.username);
+        UserAnnotation *ann = [[UserAnnotation alloc] initWithCoordinate:coord user:listen.user music:listen.music artist:listen.artist];
+        [self.mapView addAnnotation:ann];
+    }
 }
-
-    /*
-- (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation
-{
-    CLLocationCoordinate2D zoomLocation = newLocation.coordinate;
-    MKCoordinateRegion viewRegion = MKCoordinateRegionMakeWithDistance(zoomLocation, 2 * METERS_PER_MILE, 2 * METERS_PER_MILE);
-    [self.mapView setRegion:viewRegion];
-    
-    [self.userPosition stopUpdatingLocation];
-} */
 
 - (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation
 {
@@ -177,7 +161,6 @@
     
     if (!annotationView) {
         annotationView = [[MKAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:identifier];
-        
     } else {
         annotationView.annotation = annotation;
     }
@@ -210,6 +193,12 @@
     if (![view.annotation isKindOfClass:[MKUserLocation class]]) {
         UserAnnotation *userAnnot = (UserAnnotation *)view.annotation;
         
+        self.userListenMusic = userAnnot.music;
+        
+        self.userLabel.text = userAnnot.user.username;
+        self.userImage.image = [UIImage imageNamed:userAnnot.user.image];
+        self.trackLabel.text = userAnnot.music.title;
+
         if (self.detailView.alpha == 0) {
             [UIView animateWithDuration:1 animations:^{
                 [self.mapView setFrame:CGRectMake(self.mapView.frame.origin.x, self.mapView.frame.origin.y, self.mapView.frame.size.width, self.mapView.frame.size.height - self.detailView.frame.size.height)];
@@ -227,9 +216,13 @@
     }];
 }
 
-- (void)goToArtistView:(UITapGestureRecognizer *)reco
+- (void)goToAlbumView:(UITapGestureRecognizer *)reco
 {
-    NSLog(@"ok tapped");
+    NSLog(@"tap");
+    AlbumViewController *vc = [[AlbumViewController alloc] initWithNibName:@"AlbumViewController" bundle:nil];
+    vc.album = [[Album alloc] init];
+    vc.album.identifier = self.userListenMusic.albumId;
+    [self presentViewController:vc animated:YES completion:nil];
 }
 
 - (void)mapView:(MKMapView *)mapView didDeselectAnnotationView:(MKAnnotationView *)view
@@ -237,13 +230,6 @@
     for (UIView *subview in view.subviews) {
         [subview removeFromSuperview];
     }
-}
-
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 @end

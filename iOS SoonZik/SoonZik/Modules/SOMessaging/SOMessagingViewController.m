@@ -58,7 +58,7 @@
 - (void)setup
 {
     self.tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStyleGrouped];
-    self.tableView.backgroundColor = [UIColor whiteColor];
+    self.tableView.backgroundColor = [UIColor clearColor];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -215,7 +215,8 @@
     cell.messageFont = [self messageFont];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.balloonImage = message.fromMe ? self.balloonSendImage : self.balloonReceiveImage;
-    cell.textView.textColor = message.fromMe ? [UIColor whiteColor] : [UIColor blackColor];
+    //cell.textView.textColor = message.fromMe ? [UIColor whiteColor] : [UIColor blackColor];
+    cell.textView.textColor = [UIColor whiteColor];
     cell.message = message;    
     
     // For user customization

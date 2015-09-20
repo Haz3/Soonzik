@@ -76,19 +76,6 @@
     return list;
 }
 
-+ (id)update:(id)elem
-{
-    Network *net = [[Network alloc] init];
-    NSDictionary *json = [net update:elem];
-    
-    if ([elem isKindOfClass:[User class]]) {
-        User *u = [[User alloc] initWithJsonObject:[json objectForKey:@"content"]];
-        return u;
-    }
-    
-    return nil;
-}
-
 + (BOOL)destroy:(id)elem
 {
     Network *net = [[Network alloc] init];

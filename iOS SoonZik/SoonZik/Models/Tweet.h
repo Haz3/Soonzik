@@ -7,7 +7,13 @@
 //
 
 #import "ObjectFactory.h"
+#import "User.h"
 
 @interface Tweet : ObjectFactory
+
+@property (nonatomic, assign) int identifier;
+@property (nonatomic, strong) NSString *msg;
+@property (nonatomic, strong) User *user;
+@property (nonatomic, strong) NSDate *date;
 
 @end

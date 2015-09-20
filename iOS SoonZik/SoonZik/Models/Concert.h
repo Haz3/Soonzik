@@ -8,6 +8,7 @@
 
 #import "ObjectFactory.h"
 #import "Address.h"
+#import "User.h"
 
 @interface Concert : ObjectFactory
 
@@ -15,6 +16,6 @@
 @property (nonatomic, strong) NSDate *date;
 @property (nonatomic, strong) Address *address;
 @property (nonatomic, strong) NSString *url;
-@property (nonatomic, strong) NSArray *listOfComments;
+@property (nonatomic, strong) User *user;
 
 @end

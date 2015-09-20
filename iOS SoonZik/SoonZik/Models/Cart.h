@@ -10,9 +10,9 @@
 
 @interface Cart : ObjectFactory
 
+@property (nonatomic, strong) NSMutableArray *albums;
+@property (nonatomic, strong) NSMutableArray *musics;
 @property (nonatomic, assign) int identifier;
-@property (nonatomic, strong) NSArray *listOfItems;
-
-- (void)validCart;
+@property (nonatomic, assign) int type;
 
 @end

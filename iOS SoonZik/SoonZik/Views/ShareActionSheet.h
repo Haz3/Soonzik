@@ -10,4 +10,6 @@
 
 @interface ShareActionSheet : UIActionSheet
 
+@property (nonatomic, strong) id elem;
+
 @end

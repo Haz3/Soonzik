@@ -20,4 +20,12 @@
     // Configure the view for the selected state
 }
 
+- (void)initCell {
+    
+}
+
+- (void)rateSliderChanged:(UISlider *)slider {
+    [self.delegate valueChanged:slider.value];
+}
+
 @end

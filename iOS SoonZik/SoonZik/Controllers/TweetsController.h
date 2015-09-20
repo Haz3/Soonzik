@@ -7,7 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "Tweet.h"
 
 @interface TweetsController : NSObject
+
++ (BOOL)sendTweet:(NSString *)message;
++ (NSMutableArray *)getTweets:(int)userId;
 
 @end

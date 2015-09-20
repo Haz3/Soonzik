@@ -8,7 +8,10 @@
 
 #import <Foundation/Foundation.h>
 
-@interface Request : NSObject
+@interface Request : NSObject <NSURLConnectionDelegate>
+{
+    NSMutableData *_responseData;
+}
 
 + (NSDictionary *)getRequest:(NSString *)url;
 + (NSDictionary *)postRequest:(NSString *)post url:(NSString *)url;

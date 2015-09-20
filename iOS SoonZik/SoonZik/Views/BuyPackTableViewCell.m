@@ -7,17 +7,20 @@
 //
 
 #import "BuyPackTableViewCell.h"
+#import "Translate.h"
 
 @implementation BuyPackTableViewCell
 
-- (void)awakeFromNib {
-    // Initialization code
-}
-
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    [super setSelected:selected animated:animated];
-
-    // Configure the view for the selected state
+- (void)initCell
+{
+    self.buyButton.layer.cornerRadius = 5;
+    self.buyButton.backgroundColor = BLUE_1;
+    self.backgroundColor = [UIColor clearColor];
+    
+    NSData *translateData = [[NSUserDefaults standardUserDefaults] objectForKey:@"Translate"];
+    Translate *translate = [NSKeyedUnarchiver unarchiveObjectWithData:translateData];
+    
+    [self.buyButton setTitle:[translate.dict objectForKey:@"buy_now"] forState:UIControlStateNormal];
 }
 
 @end

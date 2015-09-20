@@ -20,9 +20,4 @@
     // Configure the view for the selected state
 }
 
-- (void)initCell
-{
-    self.backgroundColor = [UIColor clearColor];
-}
-
 @end

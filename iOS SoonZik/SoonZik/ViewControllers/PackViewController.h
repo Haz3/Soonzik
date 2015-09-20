@@ -9,18 +9,16 @@
 #import "TypeViewController.h"
 #import "HeaderPackView.h"
 
-@interface PackViewController : TypeViewController <UITableViewDataSource, UITableViewDelegate, SlidePacksDelegate>
+@interface PackViewController : TypeViewController <SlidePacksDelegate>
 
 @property (nonatomic, strong) NSArray *listOfPacks;
-
-@property (nonatomic, weak) IBOutlet UILabel *packLabel;
+@property (nonatomic, strong) IBOutlet UILabel *packLabel;
 @property (nonatomic, strong) UIView *contentView;
-@property (nonatomic, weak) IBOutlet UIView *blurView;
-
-@property (nonatomic, weak) IBOutlet UITableView *tableView;
-
+@property (nonatomic, strong) IBOutlet UIView *blurView;
 @property (nonatomic, strong) CALayer *subLayer;
-
 @property (nonatomic, assign) int indexOfPage;
+
+@property (nonatomic, assign) bool dataLoaded;
+@property (nonatomic, strong) UIActivityIndicatorView *spin;
 
 @end

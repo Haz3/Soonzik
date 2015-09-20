@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "Music.h"
 #import "Playlist.h"
+#import "Translate.h"
+#import "RatingTableViewCell.h"
 
 @protocol PopUpDetailMusicDelegate <NSObject>
 
@@ -16,27 +18,39 @@
 - (void)goToArtistView:(Music *)music;
 - (void)addToCurrentPlaylist:(Music *)music;
 - (void)removeMusicFromPlayList:(Music *)music and:(Playlist *)playlist;
-- (void)closePopUpView;
+- (void)deleteFromCurrentList:(Music *)music;
+- (void)addToPlaylist:(Playlist *)playlist :(Music *)music;
+- (void)closePopUp;
+- (void)addMusicToCart:(Music *)music;
+- (void)rateMusic:(Music *)music :(float)rating;
 
 @end
 
-@interface OnLTMusicPopupView : UIView
+@interface OnLTMusicPopupView : UIView <UITableViewDataSource, UITableViewDelegate, ValueChangedProtocol>
 
-@property (nonatomic, weak) IBOutlet UIView *popupView;
+@property (nonatomic, strong) IBOutlet UIView *popupView;
 
-@property (nonatomic, weak) IBOutlet UIButton *removeFromPlaylistButton;
-@property (nonatomic, weak) IBOutlet UIButton *artistButton;
-@property (nonatomic, weak) IBOutlet UIButton *albumButton;
-@property (nonatomic, weak) IBOutlet UIButton *addToPlaylistButton;
+@property (nonatomic, strong) IBOutlet UITableView *tableView;
 
-@property (nonatomic, weak) IBOutlet UIImageView *musicImage;
-@property (nonatomic, weak) IBOutlet UILabel *musicName;
+@property (nonatomic, assign) int typeOfParent;
+@property (nonatomic, strong) NSArray *listOfOptionsName;
+@property (nonatomic, strong) NSArray *listOfOptionsId;
 
+@property (nonatomic, strong) IBOutlet UIImageView *musicImage;
+@property (nonatomic, strong) IBOutlet UILabel *musicName;
+@property (nonatomic, strong) IBOutlet UILabel *artistName;
+
+@property (nonatomic, strong) RatingTableViewCell *ratingCell;
+
+@property (nonatomic, strong) Translate *translate;
 @property (nonatomic, strong) Playlist *playlist;
 @property (nonatomic, strong) Music *song;
 
 @property (nonatomic, strong) id<PopUpDetailMusicDelegate> choiceDelegate;
 
-- (void)initPopupWithSong:(Music *)song andPlaylist:(Playlist *)playlist;
+- (void)initPopupWithSong:(Music *)song andPlaylist:(Playlist *)playlist andTypeOfParent:(int)type;
+
+@property (nonatomic, assign) bool playlistDisplayMode;
+@property (nonatomic, assign) bool ratingDisplayMode;
 
 @end
