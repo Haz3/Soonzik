@@ -10,8 +10,6 @@
 
 @implementation Translate
 
-static Translate *sharedInstance = nil;
-
 - (id)initWithPath:(NSString *)path {
     self = [super init];
     self.dict = [[NSDictionary alloc] initWithContentsOfFile:path];

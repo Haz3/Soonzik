@@ -77,7 +77,17 @@
     [self.toolbar setFrame:CGRectMake(0, self.view.frame.size.height, self.toolbar.frame.size.width, self.toolbar.frame.size.height)];
     [self.collecView setFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
     toolbarOpened = NO;
+    
+    //[[Socket sharedCenter] whoIsOnline];
 }
+
+
+
+/*- (IBAction)sendMessage:(id)sender {
+    NSString *request  = [NSString stringWithFormat:@"msg:%@", inputMessageField.text];
+    NSData *data = [[NSData alloc] initWithData:[response dataUsingEncoding:NSASCIIStringEncoding]];
+    [outputStream write:[data bytes] maxLength:[data length]];
+}*/
 
 - (void)getData {
     self.spin = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];

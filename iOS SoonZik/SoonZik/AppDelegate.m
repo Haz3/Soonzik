@@ -35,7 +35,14 @@
     NSData *userData = [[NSUserDefaults standardUserDefaults] objectForKey:@"User"];
     self.user = [NSKeyedUnarchiver unarchiveObjectWithData:userData];
     
-    [self getTranslationFile];
+    NSData *translateData = [[NSUserDefaults standardUserDefaults] objectForKey:@"Translate"];
+    self.translate = [NSKeyedUnarchiver unarchiveObjectWithData:translateData];
+    if (translateData == nil) {
+        NSLog(@"translateData is nil");
+        [self getTranslationFile];
+    }
+    
+    NSLog(@"%@", [self.translate.dict objectForKey:@"menu_news"]);
     
     [self initializeMenuSystem];
     
@@ -81,14 +88,22 @@
 
 - (void)getTranslationFile {
     NSString *language = [[NSLocale preferredLanguages] objectAtIndex:0];
+    NSArray *data = [language componentsSeparatedByString:@"-"];
     NSString *path;
-    if ([language isEqualToString:@"en"]) {
+    if ([data[0] isEqualToString:@"en"]) {
         path = [[NSBundle mainBundle] pathForResource:@"TR_English" ofType:@"plist"];
-    } else if ([language isEqualToString:@"fr"]) {
+    } else if ([data[0] isEqualToString:@"fr"]) {
         path = [[NSBundle mainBundle] pathForResource:@"TR_French" ofType:@"plist"];
     }
     
+    
+    
+    NSLog(@"language : %@", data[0]);
+    
     self.translate = [[Translate alloc] initWithPath:path];
+    
+    NSLog(@"self.translate: %@", [self.translate.dict objectForKey:@"menu_news"]);
+    
     NSData *dataStore = [NSKeyedArchiver archivedDataWithRootObject:self.translate];
     [[NSUserDefaults standardUserDefaults] setObject:dataStore forKey:@"Translate"];
     [[NSUserDefaults standardUserDefaults] synchronize];
@@ -146,7 +161,7 @@
 
 - (void)revealController:(PKRevealController *)revealController willChangeToState:(PKRevealControllerState)next
 {
-    PKRevealControllerState current = revealController.state;
+    //PKRevealControllerState current = revealController.state;
     //NSLog(@"%@ (%d -> %d)", NSStringFromSelector(_cmd), (int)current, (int)next);
 }
 
@@ -464,8 +479,6 @@
 - (void)remoteControlReceivedWithEvent:(UIEvent *)receivedEvent
 {
     if (receivedEvent.type == UIEventTypeRemoteControl) {
-        NSLog(@"remove control");
-        NSLog(@"event : %li", receivedEvent.subtype);
         switch (receivedEvent.subtype) {
             case 101:
             {

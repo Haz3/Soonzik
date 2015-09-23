@@ -8,6 +8,7 @@
 
 #import "TypeViewController.h"
 #import "TweetCollectionViewCell.h"
+#import "Socket.h"
 
 @interface FriendsViewController : TypeViewController <UICollectionViewDataSource, UICollectionViewDelegate, SendTweetDelegate>
 
@@ -29,6 +30,7 @@
 @property (strong, nonatomic) IBOutlet UIButton *pageButton;
 @property (strong, nonatomic) User *selectedFriend;
 @property (strong, nonatomic) IBOutlet UIView *toolbar;
+@property (strong, nonatomic) Socket *socket;
 
 @property (nonatomic, assign) bool dataLoaded;
 @property (nonatomic, strong) UIActivityIndicatorView *spin;

@@ -130,14 +130,14 @@
     RepartionTableViewCell *cell3 = [self.cells objectAtIndex:3];
     
     if (slider.tag == 1) {
-        cell2.slider.value = 0.20 * (self.price - cell1.slider.value);
-        cell3.slider.value = 0.15 * (self.price - cell1.slider.value);
+        cell2.slider.value = 1 * (self.price - cell1.slider.value);
+        cell3.slider.value = 0.75 * (self.price - cell1.slider.value);
     } else if (slider.tag == 2) {
-        cell1.slider.value = 0.65 * (self.price - cell2.slider.value);
-        cell3.slider.value = 0.15 * (self.price - cell2.slider.value);
+        cell1.slider.value = 1 * (self.price - cell2.slider.value);
+        cell3.slider.value = (0.15 / 0.65) * (self.price - cell2.slider.value);
     } else if (slider.tag == 3) {
-        cell1.slider.value = 0.65 * (self.price - cell3.slider.value);
-        cell2.slider.value = 0.20 * (self.price - cell3.slider.value);
+        cell1.slider.value = 1 * (self.price - cell3.slider.value);
+        cell2.slider.value = (0.20 / 0.60) * (self.price - cell3.slider.value);
     }
     
     cell1.value.text = [NSString stringWithFormat:@"%.1f", cell1.slider.value];

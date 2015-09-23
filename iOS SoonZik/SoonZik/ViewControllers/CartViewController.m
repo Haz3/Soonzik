@@ -38,7 +38,7 @@
     self.view.backgroundColor = DARK_GREY;
     
     if (!self.fromMenu) {
-        UIImage *searchImage = [Tools imageWithImage:[SVGKImage imageNamed:@"delete"].UIImage scaledToSize:CGSizeMake(30, 30)];
+        UIImage *searchImage = [Tools imageWithImage:[SVGKImage imageNamed:@"search"].UIImage scaledToSize:CGSizeMake(30, 30)];
         UIBarButtonItem *searchButton = [[UIBarButtonItem alloc] initWithImage:searchImage style:UIBarButtonItemStylePlain target:self action:@selector(closeViewController)];
         searchButton.tintColor = [UIColor whiteColor];
         self.navigationItem.rightBarButtonItem = searchButton;
