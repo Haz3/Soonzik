@@ -208,7 +208,10 @@ namespace SoonZik.ViewModel
                             EncriptSha256.EncriptStringToSha256(Singleton.Instance().CurrentUser.salt + stringEncrypt);
                     }
                     var test = post.Update(CurrentUser, _crypto);
-                    test.ContinueWith(delegate(Task<string> tmp) { var res = tmp.Result; });
+                    test.ContinueWith(delegate(Task<string> tmp)
+                    {
+                        var res = tmp.Result;
+                    });
                 });
             }
             catch (Exception)

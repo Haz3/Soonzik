@@ -176,7 +176,7 @@ namespace SoonZik.ViewModel
             }
             else
             {
-                new MessageDialog("Erreur de connexion Code 502").ShowAsync();
+                new MessageDialog("Reseau insufisant").ShowAsync();
                 ProgressOn = false;
             }
         }

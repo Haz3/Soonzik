@@ -125,6 +125,7 @@
     <Compile Include="Utils\INavigationService.cs" />
     <Compile Include="Utils\NavigationService.cs" />
     <Compile Include="Utils\Singleton.cs" />
+    <Compile Include="Utils\TextBlockExtension.cs" />
     <Compile Include="ViewModel\AlbumViewModel.cs" />
     <Compile Include="ViewModel\BattleDetailViewModel.cs" />
     <Compile Include="ViewModel\BattleViewModel.cs" />
@@ -230,6 +231,7 @@
     <Content Include="Resources\AppIcon\360.png" />
     <Content Include="Resources\AppIcon\58.png" />
     <Content Include="Resources\AppIcon\744.png" />
+    <Content Include="Resources\background.jpg" />
     <Content Include="Resources\guetta.jpg" />
     <Content Include="Resources\Icones\concert_pushpin.png" />
     <Content Include="Resources\Icones\disc.png" />

@@ -11,6 +11,14 @@
     mc:Ignorable="d">
 
     <UserControl.Resources>
+        <Style x:Key="MenuStyle" TargetType="Grid">
+            <Setter Property="Background">
+                <Setter.Value>
+                    <ImageBrush ImageSource="../Resources/background.jpg" Opacity="0.5"/>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
         <Storyboard x:Name="MenuStoryBoard">
             <DoubleAnimation Duration="0:0:0.25" To="300"
                              Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)"
@@ -99,7 +107,7 @@
 
     </UserControl.Resources>
 
-    <Grid x:Name="GeneralGrid" Background="Transparent">
+    <Grid x:Name="GeneralGrid">
         <Grid.RowDefinitions>
             <RowDefinition Height="40" />
             <RowDefinition Height="*" />
@@ -141,7 +149,7 @@
         </Grid>
 
         <Grid x:Name="MenuGrid" Grid.Row="1" HorizontalAlignment="Left" Margin="-300,0,0,0" Width="300"
-              Background="Black" Opacity="0.7" RenderTransformOrigin="0.5,0.5">
+               RenderTransformOrigin="0.5,0.5">
             <Grid.RenderTransform>
                 <CompositeTransform />
             </Grid.RenderTransform>
@@ -186,8 +194,7 @@
 
         </Grid>
 
-        <Grid x:Name="SearchGrid" Grid.Row="1" Width="300" Background="Black" Opacity="0.7"
-              RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Right" Margin="0,0,-300,0">
+        <Grid x:Name="SearchGrid" Grid.Row="1" Width="300" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Right" Margin="0,0,-300,0">
             <Grid.RenderTransform>
                 <CompositeTransform />
             </Grid.RenderTransform>

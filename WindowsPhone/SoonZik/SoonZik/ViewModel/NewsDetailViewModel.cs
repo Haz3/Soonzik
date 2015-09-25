@@ -1,4 +1,5 @@
-﻿using System.Globalization;
+﻿using System;
+using System.Globalization;
 using Windows.System.UserProfile;
 using GalaSoft.MvvmLight;
 using SoonZik.HttpRequest.Poco;
@@ -12,12 +13,18 @@ namespace SoonZik.ViewModel
         public NewsDetailViewModel()
         {
             SelectNews = NewsViewModel.DetailSelectedNews;
-
+            SelectNews.attachments[0].url = new Uri("http://soonzikapi.herokuapp.com/assets/" + SelectNews.attachments[0].url,
+                UriKind.RelativeOrAbsolute).ToString();
             var ci = new CultureInfo(GlobalizationPreferences.Languages[0]);
             if (ci.Name.Equals("en-US"))
             {
-                NewsContent = SelectNews.Newstexts[1].content;
-                NewsTitle = SelectNews.Newstexts[1].title;
+                NewsContent = SelectNews.newstexts[1].content;
+                NewsTitle = SelectNews.title;
+            }
+            else if (ci.Name.Equals("fr-FR"))
+            {
+                NewsContent = SelectNews.newstexts[0].content;
+                NewsTitle = SelectNews.title;
             }
         }
 

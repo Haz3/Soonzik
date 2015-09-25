@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Globalization;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Windows.ApplicationModel.Core;
@@ -126,7 +127,11 @@ namespace SoonZik.ViewModel
                     foreach (var item in res)
                     {
                         CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
-                            () => { ListTweets.Add(item); });
+                            () =>
+                            { 
+                                ListTweets.Insert(0, item);
+                                //ListTweets.Add(item);
+                            });
                     }
                 }
             });

@@ -1,10 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Windows.ApplicationModel.Core;
 using Windows.ApplicationModel.Resources;
 using Windows.UI.Core;
+using Windows.UI.Xaml.Media.Imaging;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using SoonZik.Controls;
@@ -246,6 +248,8 @@ namespace SoonZik.ViewModel
         private void SelectionExecute()
         {
             TheArtiste = TheUser;
+            TheUser.profilImage = new BitmapImage(new Uri("http://soonzikapi.herokuapp.com/assets/usersImage/avatars/" +
+                                                                                 TheUser.image, UriKind.RelativeOrAbsolute));
             SetFollowText();
             Charge();
             CheckIfFriend();
