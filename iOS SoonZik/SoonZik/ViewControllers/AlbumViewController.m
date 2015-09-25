@@ -41,6 +41,11 @@
         closeButton.hidden = false;
         self.navigationController.navigationBarHidden = false;
         [[UIApplication sharedApplication] setStatusBarHidden:true withAnimation:UIStatusBarAnimationFade];
+    } else if (self.fromPack) {
+        closeButton.hidden = true;
+        self.navigationController.navigationBarHidden = false;
+        self.navigationItem.leftBarButtonItem = nil;
+        [[UIApplication sharedApplication] setStatusBarHidden:false withAnimation:UIStatusBarAnimationFade];
     } else {
          [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationFade];
         self.navigationItem.backBarButtonItem = nil;
@@ -73,7 +78,6 @@
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT,0),  ^{
         //this block runs on a background thread; Do heavy operation here
         self.album = [Factory provideObjectWithClassName:@"Album" andIdentifier:self.album.identifier];
-        self.visualView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:self.album.image]];
         self.listOfMusics = self.album.listOfMusics;
         
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -109,7 +113,11 @@
 {
     HeaderAlbumTableView *view = (HeaderAlbumTableView *)[[[NSBundle mainBundle] loadNibNamed:@"HeaderAlbumTableView" owner:self options:nil] firstObject];
     
-    view.albumImage.image = [UIImage imageNamed:self.album.image];
+    NSString *urlImage = [NSString stringWithFormat:@"%@assets/albums/%@", API_URL, self.album.image];
+    NSLog(@"url image : %@", urlImage);
+    NSData *imageData = [[NSData alloc] initWithContentsOfURL: [NSURL URLWithString: urlImage]];
+    view.albumImage.image = [UIImage imageWithData:imageData];
+    self.visualView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageWithData:imageData]];
     view.albumTitle.text = self.album.title;
     view.artistLabel.text = self.album.artist.username;
     view.backgroundColor = [UIColor clearColor];
@@ -159,8 +167,7 @@
     return view;
 }
 
-- (void)launchShareView
-{
+- (void)launchShareView {
     [self launchShareView:self.album];
 }
 
@@ -220,10 +227,8 @@
 }
 
 - (void)deselectAllTheRows {
-    for (NSInteger j = 0; j < [self.tableview numberOfSections]; ++j)
-    {
-        for (NSInteger i = 0; i < [self.tableview numberOfRowsInSection:j]; ++i)
-        {
+    for (NSInteger j = 0; j < [self.tableview numberOfSections]; ++j) {
+        for (NSInteger i = 0; i < [self.tableview numberOfRowsInSection:j]; ++i) {
             MusicTableViewCell *cell = (MusicTableViewCell *)[self.tableview cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:j]];
             [cell setSelected:NO animated:YES];
         }
@@ -292,31 +297,31 @@
 }
 
 - (void)popUpBuy {
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Acheter" message:@"voulez vous acheter cet album?" delegate:self cancelButtonTitle:@"non" otherButtonTitles:@"oui", nil];
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:[self.translate.dict objectForKey:@"ask_buy_album"] delegate:self cancelButtonTitle:[self.translate.dict objectForKey:@"no"] otherButtonTitles:[self.translate.dict objectForKey:@"yes"], nil];
     alert.backgroundColor = DARK_GREY;
     [alert show];
 }
 
 - (void)addMusicToCart:(Music *)music {
     if ([CartController addToCart:@"Music" :music.identifier] != nil){
-        [[[SimplePopUp alloc] initWithMessage:@"Ajout au panier réussi" onView:self.view withSuccess:true] show];
+        [[[SimplePopUp alloc] initWithMessage:[self.translate.dict objectForKey:@"add_to_cart_success"] onView:self.view withSuccess:true] show];
     } else {
-        [[[SimplePopUp alloc] initWithMessage:@"Erreur lors de l'ajout au panier" onView:self.view withSuccess:false] show];
+        [[[SimplePopUp alloc] initWithMessage:[self.translate.dict objectForKey:@"add_to_cart_success"] onView:self.view withSuccess:false] show];
     }
 }
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     if (buttonIndex == 1) {
-        if ([CartController addToCart:@"Album" :self.album.identifier] != nil){
-            [[[SimplePopUp alloc] initWithMessage:@"Ajout au panier réussi" onView:self.view withSuccess:true] show];
+        if ([CartController addToCart:@"Album" :self.album.identifier] != nil) {
+            [[[SimplePopUp alloc] initWithMessage:[self.translate.dict objectForKey:@"add_to_cart_success"] onView:self.view withSuccess:true] show];
         } else {
-            [[[SimplePopUp alloc] initWithMessage:@"Erreur lors de l'ajout au panier" onView:self.view withSuccess:false] show];
+            [[[SimplePopUp alloc] initWithMessage:[self.translate.dict objectForKey:@"add_to_cart_success"] onView:self.view withSuccess:false] show];
         }
         
     }
-    CartViewController *vc = [[CartViewController alloc] initWithNibName:@"CartViewController" bundle:nil];
+    /*CartViewController *vc = [[CartViewController alloc] initWithNibName:@"CartViewController" bundle:nil];
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
-    [self presentViewController:nav animated:YES completion:nil];
+    [self presentViewController:nav animated:YES completion:nil];*/
 }
 
 

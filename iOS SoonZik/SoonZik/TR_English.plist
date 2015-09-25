@@ -168,5 +168,15 @@
 	<string>Your rate has been registered</string>
 	<key>rating_error</key>
 	<string>Error occured during the rating</string>
+	<key>ask_buy_album</key>
+	<string>Do you want to buy this album?</string>
+	<key>no</key>
+	<string>No</string>
+	<key>yes</key>
+	<string>Yes</string>
+	<key>add_to_cart_success</key>
+	<string>Successfully added in your cart</string>
+	<key>add_to_cart_error</key>
+	<string>An error occured during the add</string>
 </dict>
 </plist>

@@ -13,6 +13,7 @@
 #import "Description.h"
 #import "PacksController.h"
 #import "RepartitionAmountViewController.h"
+#import "AlbumViewController.h"
 
 @interface PackDetailViewController ()
 
@@ -192,6 +193,11 @@
     if (indexPath.section == 2) {
         RepartitionAmountViewController *vc = [[RepartitionAmountViewController alloc] initWithNibName:@"RepartitionAmountViewController" bundle:nil];
         vc.price = self.pack.price;
+        [self.navigationController pushViewController:vc animated:true];
+    } else {
+        AlbumViewController *vc = [[AlbumViewController alloc] initWithNibName:@"AlbumViewController" bundle:nil];
+        vc.album = [self.pack.listOfAlbums objectAtIndex:indexPath.row];
+        vc.fromPack = true;
         [self.navigationController pushViewController:vc animated:true];
     }
 }

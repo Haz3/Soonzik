@@ -13,6 +13,7 @@
 #import "CartDeleteButton.h"
 #import "SimplePopUp.h"
 #import "Tools.h"
+#import "AppDelegate.h"
 
 @interface CartViewController ()
 
@@ -22,10 +23,6 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    
-    self.carts = [CartController getCart];
-    self.musics = [self getMusics];
-    self.albums = [self getAlbums];
 }
 
 - (void)viewDidLoad {
@@ -39,11 +36,33 @@
     
     if (!self.fromMenu) {
         UIImage *searchImage = [Tools imageWithImage:[SVGKImage imageNamed:@"search"].UIImage scaledToSize:CGSizeMake(30, 30)];
-        UIBarButtonItem *searchButton = [[UIBarButtonItem alloc] initWithImage:searchImage style:UIBarButtonItemStylePlain target:self action:@selector(closeViewController)];
+        UIBarButtonItem *searchButton = [[UIBarButtonItem alloc] initWithImage:searchImage style:UIBarButtonItemStylePlain target:self action:@selector(presentRightMenuViewController)];
         searchButton.tintColor = [UIColor whiteColor];
         self.navigationItem.rightBarButtonItem = searchButton;
         self.navigationItem.leftBarButtonItems = nil;
     }
+    
+    self.carts = [CartController getCart];
+    self.musics = [self getMusics];
+    self.albums = [self getAlbums];
+    
+    NSLog(@"self.musics.count : %i", self.musics.count);
+    NSLog(@"self.albums.count : %i", self.albums.count);
+    
+    if (self.musics.count == 0 && self.albums.count == 0) {
+        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, self.view.frame.size.width - 20, self.view.frame.size.height / 2)];
+        label.textAlignment = NSTextAlignmentCenter;
+        label.textColor = [UIColor whiteColor];
+        label.text = @"Votre panier est vide";
+        label.font = SOONZIK_FONT_BODY_BIG;
+        [self.view addSubview:label];
+        [self.tableView removeFromSuperview];
+    }
+}
+
+- (void)presentRightMenuViewController {
+    AppDelegate *app = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    [app.revealController showRightViewController];
 }
 
 - (void)closeViewController {
@@ -257,6 +276,16 @@
         self.albums = [self getAlbums];
         [self checkCells];
         [self.tableView reloadData];
+        
+        if (self.musics.count == 0 && self.albums.count == 0) {
+            UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, self.view.frame.size.width - 20, self.view.frame.size.height / 2)];
+            label.textAlignment = NSTextAlignmentCenter;
+            label.textColor = [UIColor whiteColor];
+            label.text = @"Votre panier est vide";
+            label.font = SOONZIK_FONT_BODY_BIG;
+            [self.view addSubview:label];
+            [self.tableView removeFromSuperview];
+        }
     } else {
         [[[SimplePopUp alloc] initWithMessage:@"erreur de suppression" onView:self.view withSuccess:false] show];
     }

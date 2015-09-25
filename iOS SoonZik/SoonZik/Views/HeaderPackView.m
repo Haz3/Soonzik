@@ -71,21 +71,23 @@
     
     int i = 1;
     for (Album *album in albums) {
+        NSString *urlImage = [NSString stringWithFormat:@"%@assets/albums/%@", API_URL, album.image];
+        NSData *imageData = [[NSData alloc] initWithContentsOfURL: [NSURL URLWithString: urlImage]];
         switch (i) {
             case 1:
-                album1Image.image = [UIImage imageNamed:album.image];
+                album1Image.image = [UIImage imageWithData:imageData];
                 i++;
                 break;
             case 2:
-                album2Image.image = [UIImage imageNamed:album.image];
+                album2Image.image = [UIImage imageWithData:imageData];
                 i++;
                 break;
             case 3:
-                album3Image.image = [UIImage imageNamed:album.image];
+                album3Image.image = [UIImage imageWithData:imageData];
                 i++;
                 break;
             case 4:
-                album4Image.image = [UIImage imageNamed:album.image];
+                album4Image.image = [UIImage imageWithData:imageData];
                 i++;
                 break;
             default:

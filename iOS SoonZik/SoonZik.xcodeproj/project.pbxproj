@@ -110,7 +110,6 @@
 		ED9F44D41B984459001EB277 /* Language.m in Sources */ = {isa = PBXBuildFile; fileRef = ED9F44D31B984459001EB277 /* Language.m */; };
 		ED9F44D81B9998E3001EB277 /* RatingTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = ED9F44D61B9998E3001EB277 /* RatingTableViewCell.m */; };
 		ED9F44D91B9998E3001EB277 /* RatingTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = ED9F44D71B9998E3001EB277 /* RatingTableViewCell.xib */; };
-		EDA0738B1BB2D920001107A6 /* MenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EDA0738A1BB2D920001107A6 /* MenuViewController.m */; settings = {ASSET_TAGS = (); }; };
 		EDA54B301B837981007B25CD /* CartDeleteButton.m in Sources */ = {isa = PBXBuildFile; fileRef = EDA54B2F1B837981007B25CD /* CartDeleteButton.m */; };
 		EDA54B341B838BDF007B25CD /* CartItemTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EDA54B321B838BDF007B25CD /* CartItemTableViewCell.m */; };
 		EDA54B351B838BDF007B25CD /* CartItemTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EDA54B331B838BDF007B25CD /* CartItemTableViewCell.xib */; };
@@ -498,8 +497,6 @@
 		ED9F44D51B9998E3001EB277 /* RatingTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RatingTableViewCell.h; sourceTree = "<group>"; };
 		ED9F44D61B9998E3001EB277 /* RatingTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RatingTableViewCell.m; sourceTree = "<group>"; };
 		ED9F44D71B9998E3001EB277 /* RatingTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RatingTableViewCell.xib; sourceTree = "<group>"; };
-		EDA073891BB2D920001107A6 /* MenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuViewController.h; sourceTree = "<group>"; };
-		EDA0738A1BB2D920001107A6 /* MenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuViewController.m; sourceTree = "<group>"; };
 		EDA54B2E1B837981007B25CD /* CartDeleteButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CartDeleteButton.h; sourceTree = "<group>"; };
 		EDA54B2F1B837981007B25CD /* CartDeleteButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CartDeleteButton.m; sourceTree = "<group>"; };
 		EDA54B311B838BDF007B25CD /* CartItemTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CartItemTableViewCell.h; sourceTree = "<group>"; };
@@ -1503,8 +1500,6 @@
 				EDA6F6D71B79E1D4005A291D /* CartViewController.h */,
 				EDA6F6D81B79E1D4005A291D /* CartViewController.m */,
 				EDA6F6D91B79E1D4005A291D /* CartViewController.xib */,
-				EDA073891BB2D920001107A6 /* MenuViewController.h */,
-				EDA0738A1BB2D920001107A6 /* MenuViewController.m */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -2303,7 +2298,6 @@
 				EDEDED5D1AA15C5D0024CF38 /* OAToken.m in Sources */,
 				EDEDED541AA15C5D0024CF38 /* OACall.m in Sources */,
 				EDD895C51B8E4B810053023D /* CartGiftButton.m in Sources */,
-				EDA0738B1BB2D920001107A6 /* MenuViewController.m in Sources */,
 				EDD53E451B4AF29100E98D99 /* PlaylistsController.m in Sources */,
 				EDEDEB921AA15B5C0024CF38 /* BattleViewController.m in Sources */,
 				D55AB41F192CE1950065CB9C /* AppDelegate.m in Sources */,

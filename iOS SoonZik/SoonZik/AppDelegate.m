@@ -96,8 +96,6 @@
         path = [[NSBundle mainBundle] pathForResource:@"TR_French" ofType:@"plist"];
     }
     
-    
-    
     NSLog(@"language : %@", data[0]);
     
     self.translate = [[Translate alloc] initWithPath:path];
@@ -368,7 +366,7 @@
    NSLog(@"titles : %@", listOftitles[indexPath.row]);
     cell.textLabel.text = listOftitles[indexPath.row];
     
-    if (indexPath.row == 8) {
+    /*if (indexPath.row == 8) {
         NSString *urlImage = [NSString stringWithFormat:@"%@assets/usersImage/avatars/%@", API_URL, self.user.image];
         NSData * imageData = [[NSData alloc] initWithContentsOfURL: [NSURL URLWithString: urlImage]];
        cell.imageView.image = [Tools imageWithImage:[UIImage imageWithData:imageData] scaledToSize:CGSizeMake(40, 40)];
@@ -379,7 +377,7 @@
     } else {
         //cell.imageView.image = [SVGKImage imageNamed:[listOfImages objectAtIndex:indexPath.row]].UIImage;
          NSLog(@"ok");
-    }
+    }*/
     return cell;
 }
 

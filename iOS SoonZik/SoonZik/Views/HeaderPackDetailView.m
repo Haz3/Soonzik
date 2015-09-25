@@ -11,49 +11,41 @@
 @implementation HeaderPackDetailView
 
 - (void)initHeader:(Pack *)pack {
-    self.images = [[NSMutableArray alloc] init];
-    self.packLabel.text = pack.title;
-    /*for (Album *album in pack.listOfAlbums) {
-        [images addObject:album.image];
-    }*/
-    [self.images addObject:@"onandon.jpg"];
-    [self.images addObject:@"recognise.jpg"];
-    [self.images addObject:@"motifs.jpg"];
-    self.packImage = [[UIImageView alloc] initWithFrame:self.frame];
-    [self addSubview:self.packImage];
-    self.packImage.contentMode = UIViewContentModeScaleToFill;
-    [self bringSubviewToFront:self.packLabel];
-    
-    self.index = 0;
-    
-   // [NSThread detachNewThreadSelector:@selector(startTheBackgroundJob) toTarget:self withObject:nil];
-    
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT,0),  ^{
-        //[self startTheBackgroundJob];
+    UIImageView *album1Image = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width/2, self.frame.size.height/2)];
+    [self addSubview:album1Image];
+    UIImageView *album2Image = [[UIImageView alloc] initWithFrame:CGRectMake(self.frame.size.width/2, 0, self.frame.size.width/2, self.frame.size.height/2)];
+    [self addSubview:album2Image];
+    UIImageView *album3Image = [[UIImageView alloc] initWithFrame:CGRectMake(0, self.frame.size.height/2, self.frame.size.width/2, self.frame.size.height/2)];
+    [self addSubview:album3Image];
+    UIImageView *album4Image = [[UIImageView alloc] initWithFrame:CGRectMake(self.frame.size.width/2, self.frame.size.height/2, self.frame.size.width/2, self.frame.size.height/2)];
+    [self addSubview:album4Image];
         
-        
-        dispatch_async(dispatch_get_main_queue(), ^{
-            //This block runs on main thread, so update UI
-            [self startTheBackgroundJob];
-            
-        });    
-    });
-}
-
-- (void)startTheBackgroundJob {
-    UIImage *toImage = [UIImage imageNamed:[self.images objectAtIndex:self.index]];
-    [UIView transitionWithView:self.packImage
-                        duration:5.0f
-                        options:UIViewAnimationOptionTransitionCrossDissolve
-                        animations:^{
-                            self.packImage.image = toImage;
-                        } completion:^(BOOL finished) {
-                            self.index++;
-                            if (self.index == self.images.count) {
-                                self.index = 0;
-                            }
-                            [self startTheBackgroundJob];
-                        }];
+    int i = 1;
+    for (Album *album in pack.listOfAlbums) {
+        NSString *urlImage = [NSString stringWithFormat:@"%@assets/albums/%@", API_URL, album.image];
+        NSData *imageData = [[NSData alloc] initWithContentsOfURL: [NSURL URLWithString: urlImage]];
+        switch (i) {
+            case 1:
+                album1Image.image = [UIImage imageWithData:imageData];
+                i++;
+                break;
+            case 2:
+                album2Image.image = [UIImage imageWithData:imageData];
+                i++;
+                break;
+            case 3:
+                album3Image.image = [UIImage imageWithData:imageData];
+                i++;
+                break;
+            case 4:
+                album4Image.image = [UIImage imageWithData:imageData];
+                i++;
+                break;
+            default:
+                break;
+        }
+    }
+    //return view;
 }
 
 @end
