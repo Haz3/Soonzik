@@ -11,7 +11,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -29,6 +28,7 @@ public class MusicsAdapter extends ArrayAdapter<Object> {
     public MusicsAdapter(Context context, List<Object> objects) {
         super(context, R.layout.row_musics, objects);
         this.context = context;
+
         this.values = objects;
     }
 
@@ -41,9 +41,9 @@ public class MusicsAdapter extends ArrayAdapter<Object> {
         final Music ms = (Music) values.get(position);
 
         ImageView imageViewPicture = (ImageView) rowView.findViewById(R.id.albumpicture);
-        imageViewPicture.setImageResource(R.drawable.ic_profile);
+        imageViewPicture.setImageResource(R.drawable.ic_explorer);
 
-        TextView textViewArtist = (TextView) rowView.findViewById(R.id.musictitle);
+        TextView textViewArtist = (TextView) rowView.findViewById(R.id.artistname);
         textViewArtist.setText(ms.getUser().getUsername());
 
         textViewArtist.setOnClickListener(new View.OnClickListener() {

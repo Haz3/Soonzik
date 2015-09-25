@@ -11,12 +11,10 @@ import java.util.Date;
 public class News extends ActiveRecord {
     private int id = -1;
     private String title = "";
-    private Date date = null;
-    private String news_type = "";
+    private Date created_at = null;
     private User user = null;
-    private ArrayList<Newstext> newstexts = null;
+    private String content = "";
     private ArrayList<Attachment> attachments = null;
-    private ArrayList<Tag> tags = null;
 
     public News() {}
 
@@ -27,26 +25,14 @@ public class News extends ActiveRecord {
     @Override
     public String toString() {
         String str = "id = " + Integer.toString(id)
-                    + " : author = { " + (user != null ? user.toString() : "") + " }"
-                    + " : date = " + (date != null ? date.toString() : "")
-                    + " : newstexts = [";
-        if (newstexts != null) {
-            for (Newstext newstext : newstexts) {
-                str += "{ " + newstext.toString() + " } ";
-            }
-        }
-        str += " ]";
+                    + " : user = { " + (user != null ? user.toString() : "") + " }"
+                    + " : created_at = " + (created_at != null ? created_at.toString() : "")
+                    + " : title = " + title
+                    + " : content = " + content;
         str += " : attachments = [ ";
         if (attachments != null) {
             for (Attachment attachment : attachments) {
                 str += "{ " + attachment.toString() + " } ";
-            }
-        }
-        str += " ]";
-        str += " : tag = [ ";
-        if (tags != null) {
-            for (Tag tag : tags) {
-                str += "{ " + tag.toString() + " } ";
             }
         }
         str += " ]";
@@ -61,27 +47,19 @@ public class News extends ActiveRecord {
         return title;
     }
 
-    public Date getDate() {
-        return date;
-    }
-
-    public String getNews_type() {
-        return news_type;
+    public Date getCreated_at() {
+        return created_at;
     }
 
     public User getUser() {
         return user;
     }
 
-    public ArrayList<Newstext> getNewstexts() {
-        return newstexts;
-    }
-
     public ArrayList<Attachment> getAttachments() {
         return attachments;
     }
 
-    public ArrayList<Tag> getTags() {
-        return tags;
+    public String getContent() {
+        return content;
     }
 }

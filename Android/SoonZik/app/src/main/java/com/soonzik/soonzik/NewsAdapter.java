@@ -39,16 +39,8 @@ public class NewsAdapter extends ArrayAdapter<Object> {
 
         DateFormat dateFormat = android.text.format.DateFormat.getDateFormat(context);
 
-        textViewDate.setText(dateFormat.format(nw.getDate()));
+        textViewDate.setText(dateFormat.format(nw.getCreated_at()));
 
-        TextView textViewContent = (TextView) rowView.findViewById(R.id.content);
-        ArrayList<Newstext> texts = nw.getNewstexts();
-        for (Newstext text : texts) {
-
-            if (text.getLanguage().equals("FR"/*ActiveRecord.currentUser.getLanguage()*/)) {
-                textViewContent.setText(text.getContent());
-            }
-        }
         return rowView;
     }
 }

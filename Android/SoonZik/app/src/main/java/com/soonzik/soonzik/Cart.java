@@ -7,6 +7,7 @@ import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
 import org.apache.http.Header;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -48,7 +49,7 @@ public class Cart extends ActiveRecord {
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                         try {
-                            JSONObject obj = response.getJSONObject("content");
+                            JSONArray obj = response.getJSONArray("content");
                             Log.v("MYCART JSON", obj.toString());
 
                             callback.onJSONResponse(true, obj, classT);

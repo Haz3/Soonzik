@@ -18,6 +18,7 @@ public class Album extends ActiveRecord {
     private double note = 0.0;
     private ArrayList<Music> musics = null;
     private ArrayList<Description> descriptions = null;
+    private Boolean isPartial = true;
 
     private String file = "";
 
@@ -36,7 +37,8 @@ public class Album extends ActiveRecord {
                 + " : price = " + Double.toString(price)
                 + " : image = " + image
                 + " : note = " + Double.toString(note)
-                + " : yearProd = " + Integer.toString(yearProd);
+                + " : yearProd = " + Integer.toString(yearProd)
+                + " : is_partial = " + Boolean.toString(isPartial);
         str += " : Music = [ ";
         if (musics != null) {
             for (Music music : musics) {

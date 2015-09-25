@@ -2,6 +2,7 @@ package com.soonzik.soonzik;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +20,9 @@ import java.util.List;
  * Created by kevin_000 on 28/05/2015.
  */
 public class SearchPacksFragment extends Fragment {
+
+    private String redirectClass = "com.soonzik.soonzik.PackFragment";
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_search_pack, container, false);
@@ -35,9 +39,9 @@ public class SearchPacksFragment extends Fragment {
 
                 final List<Object> all = new ArrayList<Object>();
 
-                ArrayList<Pack> ms = sc.getPack();
-                if (ms != null)
-                    all.addAll(ms);
+                final ArrayList<Pack> packs = sc.getPack();
+                if (packs != null)
+                    all.addAll(packs);
 
                 if (!all.isEmpty()) {
                     PacksAdapter packsAdapter = new PacksAdapter(getActivity(), all);
@@ -47,7 +51,16 @@ public class SearchPacksFragment extends Fragment {
                     lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                         @Override
                         public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
-                            Toast.makeText(getActivity(), (all.get(position)).toString(), Toast.LENGTH_SHORT).show();
+
+                            Bundle bundle = new Bundle();
+                            bundle.putInt("pack_id", packs.get(position).getId());
+                            Fragment frg = Fragment.instantiate(getActivity(), redirectClass);
+                            frg.setArguments(bundle);
+
+                            FragmentTransaction tx = getActivity().getSupportFragmentManager().beginTransaction();
+                            tx.replace(R.id.main, frg);
+                            tx.addToBackStack(null);
+                            tx.commit();
                         }
                     });
                 }

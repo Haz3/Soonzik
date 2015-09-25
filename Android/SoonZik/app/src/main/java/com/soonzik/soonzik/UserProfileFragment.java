@@ -20,7 +20,6 @@ import java.lang.reflect.InvocationTargetException;
 public class UserProfileFragment extends Fragment {
 
     Button updateUserButton;
-    Button playlistsUserButton;
 
     private String redirectClass = "com.soonzik.soonzik.UserProfileUpdateFragment";
 
@@ -61,27 +60,11 @@ public class UserProfileFragment extends Fragment {
 
                     FragmentTransaction tx = getActivity().getSupportFragmentManager().beginTransaction();
                     tx.replace(R.id.main, Fragment.instantiate(getActivity(), redirectClass));
+                    tx.addToBackStack(null);
                     tx.commit();
-
-                    /*Intent updateUserActivity = new Intent(getActivity().getApplicationContext(), UpdateUserActivity.class);
-
-                    updateUserActivity.putExtra("userId", ActiveRecord.currentUser.getId());
-                    startActivity(updateUserActivity);*/
-
 
                 }
             });
-
-            /*playlistsUserButton = (Button) view.findViewById(R.id.playlistsUserButton);
-            playlistsUserButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent playlistsActivity = new Intent(getActivity().getApplicationContext(), PlaylistsActivity.class);
-
-                    playlistsActivity.putExtra("userId", ActiveRecord.currentUser.getId());
-                    startActivity(playlistsActivity);
-                }
-            });*/
 
         }
         else {

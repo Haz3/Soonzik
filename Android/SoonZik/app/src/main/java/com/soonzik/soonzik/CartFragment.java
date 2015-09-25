@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -21,6 +22,9 @@ import java.util.ArrayList;
  * Created by kevin_000 on 03/08/2015.
  */
 public class CartFragment extends Fragment {
+
+    private ArrayList<Object> carts = null;
+
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
@@ -34,6 +38,7 @@ public class CartFragment extends Fragment {
                     JSONArray data = (JSONArray) response;
 
                     final ArrayList<Object> items = ActiveRecord.jsonArrayData(data, classT);
+                    carts = new ArrayList<Object>(items);
 
                     int nbArticle = 0;
                     double totalPrice = 0;
@@ -71,19 +76,16 @@ public class CartFragment extends Fragment {
         purchase.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                try {
-                    Cart.giftCart(2, 1, new ActiveRecord.OnJSONResponseCallback() {
+                if (carts != null) {
+                    Purchase.buyCart(new ActiveRecord.OnJSONResponseCallback() {
                         @Override
                         public void onJSONResponse(boolean success, Object response, Class<?> classT) throws InvocationTargetException, NoSuchMethodException, java.lang.InstantiationException, IllegalAccessException, JSONException {
-                            JSONObject object = (JSONObject) response;
-
-                            Log.v("GIFT INSIDE", object.toString());
+                            JSONObject obj = (JSONObject) response;
+                            Toast.makeText(getActivity(), "Purchase OK", Toast.LENGTH_SHORT).show();
                         }
                     });
-                } catch (ClassNotFoundException e) {
-                    e.printStackTrace();
-                }
 
+                }
             }
         });
 

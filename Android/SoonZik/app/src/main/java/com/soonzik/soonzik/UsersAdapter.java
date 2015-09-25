@@ -5,8 +5,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+
+import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
 /**
@@ -30,9 +35,23 @@ public class UsersAdapter extends ArrayAdapter<Object> {
         View rowView = inflater.inflate(R.layout.row_users, parent, false);
         User us = (User) values.get(position);
 
-        TextView textView = (TextView) rowView.findViewById(R.id.label);
+        TextView username = (TextView) rowView.findViewById(R.id.username);
+        username.setText(us.getUsername());
 
-        textView.setText(us.getUsername());
+        TextView userLanguage = (TextView) rowView.findViewById(R.id.userlanguage);
+        userLanguage.setText(us.getLanguage());
+
+        final TextView nbFollowers = (TextView) rowView.findViewById(R.id.nbfollowers);
+        User.getFollowers(us.getId(), new ActiveRecord.OnJSONResponseCallback() {
+            @Override
+            public void onJSONResponse(boolean success, Object response, Class<?> classT) throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException, JSONException {
+                JSONArray data = (JSONArray) response;
+
+                List<Object> followers = ActiveRecord.jsonArrayData(data, classT);
+                nbFollowers.setText(Integer.toString(followers.size()));
+            }
+        });
+
         return rowView;
     }
 }

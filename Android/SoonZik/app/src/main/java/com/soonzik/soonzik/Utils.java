@@ -83,6 +83,8 @@ public class Utils {
                 return ("User");
             case "pack":
                 return ("Pack");
+            case "packs":
+                return ("Pack");
             case "album":
                 return ("Album");
             case "albums":

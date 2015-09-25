@@ -6,14 +6,19 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by kevin_000 on 16/06/2015.
@@ -68,6 +73,30 @@ public class AlbumFragment extends Fragment {
 
                     TextView nbTitle = (TextView) view.findViewById(R.id.nbtitle);
                     nbTitle.setText(Integer.toString(ms.size()));
+
+                    TextView price = (TextView) view.findViewById(R.id.price);
+                    price.setText(Double.toString(al.getPrice()) + "$");
+
+                    Button addToCart = (Button) view.findViewById(R.id.addtocart);
+                    addToCart.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            final Map<String, String> data = new HashMap<String, String>();
+                            data.put("user_id", Integer.toString(ActiveRecord.currentUser.getId()));
+                            data.put("typeObj", "Album");
+                            data.put("obj_id", Integer.toString(al.getId()));
+
+                            ActiveRecord.save("Cart", data, true, new ActiveRecord.OnJSONResponseCallback() {
+                                @Override
+                                public void onJSONResponse(boolean success, Object response, Class<?> classT) throws InvocationTargetException, NoSuchMethodException, java.lang.InstantiationException, IllegalAccessException, JSONException {
+                                    JSONObject obj = (JSONObject) response;
+
+                                    Cart cart = (Cart) ActiveRecord.jsonObjectData(obj, classT);
+                                    Toast.makeText(getActivity(), "Album add to cart", Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                        }
+                    });
 
                     MusicsAdapter musicsAdapter = new MusicsAdapter(getActivity(), ms);
                     ListView lv = (ListView) getActivity().findViewById(R.id.musicslistview);

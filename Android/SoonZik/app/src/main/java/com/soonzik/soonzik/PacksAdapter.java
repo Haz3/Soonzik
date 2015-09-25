@@ -34,7 +34,7 @@ public class PacksAdapter extends ArrayAdapter<Object> {
         Pack pc = (Pack) values.get(position);
 
         ImageView imageViewPicture = (ImageView) rowView.findViewById(R.id.packpicture);
-        imageViewPicture.setImageResource(R.drawable.ic_profile);
+        imageViewPicture.setImageResource(R.drawable.ic_pack);
 
         ArrayList<Album> alb = pc.getAlbums();
 
@@ -65,7 +65,7 @@ public class PacksAdapter extends ArrayAdapter<Object> {
         TextView textViewNbAlbums = (TextView) rowView.findViewById(R.id.nbalbums);
         textViewNbAlbums.setText(Integer.toString(nbalb));
 
-        TextView textViewTitle = (TextView) rowView.findViewById(R.id.musictitle);
+        TextView textViewTitle = (TextView) rowView.findViewById(R.id.artistname);
         textViewTitle.setText(pc.getTitle());
         return rowView;
     }

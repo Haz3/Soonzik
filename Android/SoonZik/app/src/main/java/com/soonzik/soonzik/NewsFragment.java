@@ -38,13 +38,8 @@ public class NewsFragment extends Fragment {
                     newsTitle = (TextView) view.findViewById(R.id.news_title);
                     newsContent = (TextView) view.findViewById(R.id.news_content);
 
-                    ArrayList<Newstext> texts = news.getNewstexts();
-                    for (Newstext text : texts) {
-                        if (text.getLanguage().equals("FR")) {
-                            newsTitle.setText(text.getTitle());
-                            newsContent.setText(text.getContent());
-                        }
-                    }
+                    newsTitle.setText(news.getTitle());
+                    newsContent.setText(news.getContent());
 
                 }
             });

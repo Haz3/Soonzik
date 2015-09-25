@@ -9,14 +9,14 @@
         android:layout_width="50sp"
         android:layout_height="50sp"
         android:id="@+id/albumpicture"
-        android:src="@drawable/ic_profile"
+        android:src="@drawable/ic_explorer"
         android:contentDescription="@string/imgmenudescription"
         android:layout_marginLeft="15dp"
         android:layout_marginStart="15dp"
         android:layout_marginTop="5dp" />
 
     <TextView
-        android:id="@+id/musictitle"
+        android:id="@+id/artistname"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Nom de l'artiste"
@@ -44,8 +44,8 @@
         android:text="Titre de la musique"
         android:textSize="25sp"
         android:layout_alignBottom="@+id/albumpicture"
-        android:layout_alignLeft="@+id/musictitle"
-        android:layout_alignStart="@+id/musictitle">
+        android:layout_alignLeft="@+id/artistname"
+        android:layout_alignStart="@+id/artistname">
     </TextView>
 
     <TextView

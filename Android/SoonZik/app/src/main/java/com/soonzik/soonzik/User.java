@@ -33,6 +33,7 @@ public class User extends ActiveRecord {
     private String username = "";
     private String birthday = "";
     private String image = "";
+    private String background = "";
     private String description = "";
     private String facebook = "";
     private String twitter = "";
@@ -43,6 +44,8 @@ public class User extends ActiveRecord {
     private boolean newsletter = false;
     private ArrayList<User> follows = null;
     private ArrayList<User> friends = null;
+
+    private MyContent content = null;
 
     private String secureKey = "";
     private String idAPI = "";
@@ -120,7 +123,7 @@ public class User extends ActiveRecord {
                     public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                         Log.v("JSON", response.toString());
                         try {
-                            final Class<?> classT = Class.forName("com.soonzik.soonzik." + "Music");
+                            final Class<?> classT = Class.forName("com.soonzik.soonzik." + "MyContent");
                             JSONObject obj = response.getJSONObject("content");
 
                             callback.onJSONResponse(true, obj, classT);
@@ -485,6 +488,7 @@ public class User extends ActiveRecord {
                         + " : username = " + username
                         + " : birthday = " + birthday
                         + " : image = " + image
+                        + " : background = " + background
                         + " : description = " + description
                         + " : language = " + language
                         + " : fname = " + fname
@@ -542,6 +546,8 @@ public class User extends ActiveRecord {
     public String getImage() {
         return image;
     }
+
+    public String getBackground() { return background; }
 
     public String getDescription() {
         return description;
@@ -609,5 +615,13 @@ public class User extends ActiveRecord {
 
     public void setFriends(ArrayList<User> friends) {
         this.friends = friends;
+    }
+
+    public void setContent(MyContent content) {
+        this.content = content;
+    }
+
+    public MyContent getContent() {
+        return this.content;
     }
 }

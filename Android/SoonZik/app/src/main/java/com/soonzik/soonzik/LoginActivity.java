@@ -31,8 +31,8 @@ public class LoginActivity extends Activity {
             finish();
         }
 
-        ((EditText) findViewById(R.id.loginUsername)).setText("kevin.lansel@epitech.eu");
-        ((EditText) findViewById(R.id.loginPassword)).setText("dgo8ffzd");
+        ((EditText) findViewById(R.id.loginUsername)).setText("user_one@gmail.com");
+        ((EditText) findViewById(R.id.loginPassword)).setText("azertyuiop");
 
 
         loginButton = (Button) findViewById(R.id.loginButton);

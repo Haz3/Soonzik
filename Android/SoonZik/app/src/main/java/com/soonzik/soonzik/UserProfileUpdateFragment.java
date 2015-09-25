@@ -8,10 +8,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.InvocationTargetException;
@@ -45,9 +47,8 @@ public class UserProfileUpdateFragment extends Fragment {
                     ((EditText) view.findViewById(R.id.emailUpdateInput)).setText(res.getEmail());
                     ((EditText) view.findViewById(R.id.lnameUpdateInput)).setText(res.getLname());
                     ((EditText) view.findViewById(R.id.fnameUpdateInput)).setText(res.getFname());
-                    ((EditText) view.findViewById(R.id.usernameUpdateInput)).setText(res.getUsername());
+                    ((TextView) view.findViewById(R.id.usernameUpdateInput)).setText(res.getUsername());
                     ((EditText) view.findViewById(R.id.birthdayUpdateInput)).setText(res.getBirthday());
-                    ((EditText) view.findViewById(R.id.languageUpdateInput)).setText(res.getLanguage());
                     ((EditText) view.findViewById(R.id.descriptionUpdateInput)).setText(res.getDescription());
                 }
             });
@@ -64,9 +65,7 @@ public class UserProfileUpdateFragment extends Fragment {
                 params.put("email", ((EditText) view.findViewById(R.id.emailUpdateInput)).getText().toString());
                 params.put("lname", ((EditText) view.findViewById(R.id.lnameUpdateInput)).getText().toString());
                 params.put("fname", ((EditText) view.findViewById(R.id.fnameUpdateInput)).getText().toString());
-                params.put("username", ((EditText) view.findViewById(R.id.usernameUpdateInput)).getText().toString());
                 params.put("birthday", ((EditText) view.findViewById(R.id.birthdayUpdateInput)).getText().toString());
-                params.put("language", ((EditText) view.findViewById(R.id.languageUpdateInput)).getText().toString());
                 params.put("description", ((EditText) view.findViewById(R.id.descriptionUpdateInput)).getText().toString());
 
                 /*Uri uri = Uri.parse("www.google.com/images/image.jpg");

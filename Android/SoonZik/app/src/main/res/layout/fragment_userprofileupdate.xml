@@ -37,10 +37,9 @@
 
             <TextView android:text="Username" android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
-            <EditText android:layout_width="wrap_content" android:layout_height="wrap_content"
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
                 android:paddingLeft="15dp"
-                android:id="@+id/usernameUpdateInput"
-                android:inputType="text" />
+                android:id="@+id/usernameUpdateInput"/>
 
         </TableRow>
 
@@ -52,17 +51,6 @@
             <EditText android:layout_width="wrap_content" android:layout_height="wrap_content"
                 android:paddingLeft="15dp"
                 android:id="@+id/birthdayUpdateInput" android:inputType="date" android:hint="YYYY-MM-DD"/>
-        </TableRow>
-
-
-        <TableRow android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-
-            <TextView android:text="Language" android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-            <EditText android:layout_width="wrap_content" android:layout_height="wrap_content"
-                android:id="@+id/languageUpdateInput" android:inputType="text"/>
-
         </TableRow>
 
         <TableRow android:layout_width="wrap_content"

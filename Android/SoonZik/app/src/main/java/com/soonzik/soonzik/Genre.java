@@ -13,7 +13,6 @@ public class Genre extends ActiveRecord {
     private String color_name = "";
     private String color_hexa = "";
     private ArrayList<Influence> influences = null;
-    private ArrayList<Description> descriptions = null;
 
     public Genre() {}
 
@@ -35,13 +34,6 @@ public class Genre extends ActiveRecord {
             }
         }
         str += "]";
-        str += " : Description = [ ";
-        if (descriptions != null) {
-            for (Description description: descriptions) {
-                str += "{ " + description.toString() + " } ";
-            }
-        }
-        str += " ]";
         return (str);
     }
 

@@ -12,6 +12,8 @@
         <item>Friends</item>
         <item>Cart</item>
         <item>Concert</item>
+        <item>My Content</item>
+        <item>Sweets</item>
     </string-array>
 
     <string-array name="nav_classes">
@@ -25,6 +27,8 @@
         <item>com.soonzik.soonzik.FriendsListFragment</item>
         <item>com.soonzik.soonzik.CartFragment</item>
         <item>com.soonzik.soonzik.ConcertsListFragment</item>
+        <item>com.soonzik.soonzik.MyContentFragment</item>
+        <item>com.soonzik.soonzik.TweetsListFragment</item>
     </string-array>
 
     <string-array name="nav_icons">
@@ -37,6 +41,8 @@
         <item>ic_playlist</item>
         <item>ic_friend</item>
         <item>ic_cart</item>
+        <item>ic_playlist</item>
+        <item>ic_playlist</item>
         <item>ic_playlist</item>
     </string-array>
 

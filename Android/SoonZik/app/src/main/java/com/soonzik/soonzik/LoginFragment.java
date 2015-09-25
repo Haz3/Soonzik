@@ -32,8 +32,8 @@ public class LoginFragment extends Fragment {
             TODO : delete at the end of dev
          */
 
-        ((EditText) view.findViewById(R.id.loginUsername)).setText("kevin.lansel@epitech.eu");
-        ((EditText) view.findViewById(R.id.loginPassword)).setText("dgo8ffzd");
+        ((EditText) view.findViewById(R.id.loginUsername)).setText("user_one@gmail.com");
+        ((EditText) view.findViewById(R.id.loginPassword)).setText("azertyuiop");
 
 
         loginButton = (Button) view.findViewById(R.id.loginButton);

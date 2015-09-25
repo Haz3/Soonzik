@@ -1,6 +1,12 @@
 package com.soonzik.soonzik;
 
+import android.app.Activity;
+import android.app.DialogFragment;
 import android.content.Context;
+import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,6 +14,10 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,7 +35,7 @@ public class SearchAllAdapter extends ArrayAdapter<Object> {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
         String className = values.get(position).getClass().getSimpleName();
 
         LayoutInflater inflater = (LayoutInflater) context
@@ -34,13 +44,59 @@ public class SearchAllAdapter extends ArrayAdapter<Object> {
         switch (className) {
             case "User" :
                 View rowUser = inflater.inflate(R.layout.row_users, parent, false);
-                TextView textUserView = (TextView) rowUser.findViewById(R.id.label);
-                User us = (User) values.get(position);
-                textUserView.setText(us.getUsername());
+                final User us = (User) values.get(position);
+
+                TextView username = (TextView) rowUser.findViewById(R.id.username);
+                username.setText(us.getUsername());
+
+                TextView userLanguage = (TextView) rowUser.findViewById(R.id.userlanguage);
+                userLanguage.setText(us.getLanguage());
+
+                final TextView nbFollowers = (TextView) rowUser.findViewById(R.id.nbfollowers);
+                User.getFollowers(us.getId(), new ActiveRecord.OnJSONResponseCallback() {
+                    @Override
+                    public void onJSONResponse(boolean success, Object response, Class<?> classT) throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException, JSONException {
+                        JSONArray data = (JSONArray) response;
+
+                        List<Object> followers = ActiveRecord.jsonArrayData(data, classT);
+                        nbFollowers.setText(Integer.toString(followers.size()));
+                    }
+                });
+
+                rowUser.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Bundle bundle = new Bundle();
+                        bundle.putInt("artist_id", us.getId());
+                        Fragment frg = Fragment.instantiate(context, "com.soonzik.soonzik.ArtistFragment");
+                        frg.setArguments(bundle);
+
+                        FragmentTransaction tx = ((FragmentActivity) context).getSupportFragmentManager().beginTransaction();
+                        tx.replace(R.id.main, frg);
+                        tx.addToBackStack(null);
+                        tx.commit();
+                    }
+                });
                 return rowUser;
             case "Pack" :
                 View rowPack = inflater.inflate(R.layout.row_packs, parent, false);
-                Pack pc = (Pack) values.get(position);
+
+                final Pack pc = (Pack) values.get(position);
+
+                rowPack.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Bundle bundle = new Bundle();
+                        bundle.putInt("pack_id", pc.getId());
+                        Fragment frg = Fragment.instantiate(context, "com.soonzik.soonzik.PackFragment");
+                        frg.setArguments(bundle);
+
+                        FragmentTransaction tx = ((FragmentActivity) context).getSupportFragmentManager().beginTransaction();
+                        tx.replace(R.id.main, frg);
+                        tx.addToBackStack(null);
+                        tx.commit();
+                    }
+                });
 
                 ImageView imageViewPack = (ImageView) rowPack.findViewById(R.id.packpicture);
                 imageViewPack.setImageResource(R.drawable.ic_profile);
@@ -74,24 +130,47 @@ public class SearchAllAdapter extends ArrayAdapter<Object> {
                 TextView textViewNbAlbums = (TextView) rowPack.findViewById(R.id.nbalbums);
                 textViewNbAlbums.setText(Integer.toString(nbalb));
 
-                TextView textViewTitlePack = (TextView) rowPack.findViewById(R.id.musictitle);
+                TextView textViewTitlePack = (TextView) rowPack.findViewById(R.id.artistname);
                 textViewTitlePack.setText(pc.getTitle());
                 return rowPack;
             case "Album" :
                 View rowAlbum = inflater.inflate(R.layout.row_albums, parent, false);
-                TextView textAlbumView = (TextView) rowAlbum.findViewById(R.id.label);
-                Album ab = (Album) values.get(position);
-                textAlbumView.setText(ab.getTitle());
+                final Album al = (Album) values.get(position);
+
+                rowAlbum.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Bundle bundle = new Bundle();
+                        bundle.putInt("album_id", al.getId());
+                        Fragment frg = Fragment.instantiate(context, "com.soonzik.soonzik.AlbumFragment");
+                        frg.setArguments(bundle);
+
+                        FragmentTransaction tx = ((FragmentActivity)context).getSupportFragmentManager().beginTransaction();
+                        tx.replace(R.id.main, frg);
+                        tx.addToBackStack(null);
+                        tx.commit();
+                    }
+                });
+
+
+                TextView title = (TextView) rowAlbum.findViewById(R.id.albumtitle);
+                title.setText(al.getTitle());
+
+                TextView artistname = (TextView) rowAlbum.findViewById(R.id.artistname);
+                artistname.setText(al.getUser().getUsername());
+
+                TextView nbTitle = (TextView) rowAlbum.findViewById(R.id.nbtitle);
+                nbTitle.setText(Integer.toString(al.getMusics().size()));
                 return rowAlbum;
             case "Music" :
                 View rowMusic = inflater.inflate(R.layout.row_musics, parent, false);
-                Music ms = (Music) values.get(position);
+                final Music ms = (Music) values.get(position);
 
                 ImageView imageViewMusic = (ImageView) rowMusic.findViewById(R.id.albumpicture);
                 imageViewMusic.setImageResource(R.drawable.ic_profile);
 
-                /*TextView textViewArtist = (TextView) rowMusic.findViewById(R.id.nameartist);
-                textViewArtist.setText(ms.getUser().getUsername());*/
+                TextView textViewArtist = (TextView) rowMusic.findViewById(R.id.artistname);
+                textViewArtist.setText(ms.getUser().getUsername());
 
                 int duration = ms.getDuration();
 
@@ -107,6 +186,19 @@ public class SearchAllAdapter extends ArrayAdapter<Object> {
 
                 TextView textViewTitleMusic = (TextView) rowMusic.findViewById(R.id.title);
                 textViewTitleMusic.setText(ms.getTitle());
+
+                TextView musication = (TextView) rowMusic.findViewById(R.id.musicaction);
+                musication.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        DialogFragment newFragment = new MusicActionDialogFragment();
+                        Bundle bundle = new Bundle();
+                        bundle.putInt("music_id", ms.getId());
+
+                        newFragment.setArguments(bundle);
+                        newFragment.show(((FragmentActivity) context).getFragmentManager(), "com.soonzik.soonzik.MusicActionDialogFragment");
+                    }
+                });
                 return rowMusic;
             default:
                 View rowView = inflater.inflate(R.layout.row_searchs, parent, false);

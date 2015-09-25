@@ -35,7 +35,7 @@ public class Music extends ActiveRecord {
     private ArrayList<Genre> genres = null;
     private Album album = null;
     private boolean limited = true;
-    private ArrayList<Description> descriptions = null;
+    private int getAverageNote = 0;
 
     public Music() {}
 
@@ -221,6 +221,48 @@ public class Music extends ActiveRecord {
         });
     }
 
+    public static void setNotes(final int music_id, final int note, final ActiveRecord.OnJSONResponseCallback callback) {
+        RequestParams params = new RequestParams();
+
+        ActiveRecord.currentUser.getUserSecureKey(params, new User.OnJSONResponseCallback() {
+            @Override
+            public void onJSONResponse(boolean success, JSONObject response, RequestParams params) throws JSONException, UnsupportedEncodingException, NoSuchAlgorithmException {
+                ActiveRecord.secureCase(ActiveRecord.currentUser, params, response.getString("key"));
+                AsyncHttpClient client = new AsyncHttpClient();
+
+                client.post("http://10.0.3.2:3000/api/musics/" + Integer.toString(music_id) + "/note/" + Integer.toString(note), params, new JsonHttpResponseHandler() {
+                    @Override
+                    public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                        Log.v("JSON", response.toString());
+                        try {
+                            final Class<?> classT = Class.forName("com.soonzik.soonzik." + "Music");
+                            JSONArray data = response.getJSONArray("content");
+
+                            callback.onJSONResponse(true, data, classT);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        } catch (NoSuchMethodException e) {
+                            e.printStackTrace();
+                        } catch (InstantiationException e) {
+                            e.printStackTrace();
+                        } catch (IllegalAccessException e) {
+                            e.printStackTrace();
+                        } catch (InvocationTargetException e) {
+                            e.printStackTrace();
+                        } catch (ClassNotFoundException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(int statusCode, Header[] headers, Throwable e, JSONObject response) {
+                        Log.v("FAIL", response.toString());
+                    }
+                });
+            }
+        });
+    }
+
     @Override
     public String toString() {
         String str = "";
@@ -233,15 +275,6 @@ public class Music extends ActiveRecord {
                 + " : User = { " + (user != null ? user.toString() : "") + " }"
                 + " : Genres = { " + (genres != null ? genres.toString() : "") + " }"
                 + " : Album = { " + (album != null ? album.toString() : "") + " }";
-
-        str += " : Description = [ ";
-        if (descriptions != null) {
-            for (Description description: descriptions) {
-                str += "{ " + description.toString() + " } ";
-            }
-        }
-        str += " ]";
-
         return (str);
     }
 
@@ -284,5 +317,9 @@ public class Music extends ActiveRecord {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public int getGetAverageNote() {
+        return getAverageNote;
     }
 }

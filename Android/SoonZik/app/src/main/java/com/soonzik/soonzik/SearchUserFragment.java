@@ -2,6 +2,7 @@ package com.soonzik.soonzik;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +20,8 @@ import java.util.List;
  * Created by kevin_000 on 28/05/2015.
  */
 public class SearchUserFragment extends Fragment {
+    private String redirectClass = "com.soonzik.soonzik.ArtistFragment";
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_search_user, container, false);
@@ -35,9 +38,9 @@ public class SearchUserFragment extends Fragment {
 
                 final List<Object> all = new ArrayList<Object>();
 
-                ArrayList<User> ms = sc.getUser();
-                if (ms != null)
-                    all.addAll(ms);
+                final ArrayList<User> us = sc.getUser();
+                if (us != null)
+                    all.addAll(us);
 
                 if (!all.isEmpty()) {
                     UsersAdapter usersAdapter = new UsersAdapter(getActivity(), all);
@@ -47,7 +50,16 @@ public class SearchUserFragment extends Fragment {
                     lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                         @Override
                         public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
-                            Toast.makeText(getActivity(), (all.get(position)).toString(), Toast.LENGTH_SHORT).show();
+
+                            Bundle bundle = new Bundle();
+                            bundle.putInt("artist_id", us.get(position).getId());
+                            Fragment frg = Fragment.instantiate(getActivity(), redirectClass);
+                            frg.setArguments(bundle);
+
+                            FragmentTransaction tx = getActivity().getSupportFragmentManager().beginTransaction();
+                            tx.replace(R.id.main, frg);
+                            tx.addToBackStack(null);
+                            tx.commit();
                         }
                     });
                 }

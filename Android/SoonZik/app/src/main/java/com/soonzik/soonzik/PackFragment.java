@@ -2,10 +2,12 @@ package com.soonzik.soonzik;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import org.json.JSONObject;
@@ -17,6 +19,8 @@ import java.util.ArrayList;
  * Created by kevin_000 on 26/05/2015.
  */
 public class PackFragment extends Fragment {
+
+    private String redirectClass = "com.soonzik.soonzik.PackPurchaseFragment";
 
     PackPagerAdapter adapter;
     ViewPager pager;
@@ -41,7 +45,7 @@ public class PackFragment extends Fragment {
                 @Override
                 public void onJSONResponse(boolean success, Object response, Class<?> classT) throws InvocationTargetException, NoSuchMethodException, java.lang.InstantiationException, IllegalAccessException {
                     JSONObject data = (JSONObject) response;
-                    Pack pack = (Pack) ActiveRecord.jsonObjectData(data, classT);
+                    final Pack pack = (Pack) ActiveRecord.jsonObjectData(data, classT);
 
                     nameText = (TextView) getActivity().findViewById(R.id.packName);
                     nameText.setText(pack.getTitle());
@@ -78,6 +82,29 @@ public class PackFragment extends Fragment {
                             textViewDescription.setText(desc.getDescription());
                         }
                     }
+
+                    TextView minimalPrice = (TextView) view.findViewById(R.id.minimalprice);
+                    minimalPrice.setText(Double.toString(pack.getMinimal_price()) + "$");
+
+                    TextView averagePrice = (TextView) view.findViewById(R.id.averageprice);
+                    averagePrice.setText(Double.toString(pack.getAveragePrice()) + "$");
+
+
+                    Button purchasePack = (Button) view.findViewById(R.id.buypackbutton);
+                    purchasePack.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            Bundle bundle = new Bundle();
+                            bundle.putInt("pack_id", pack.getId());
+                            Fragment frg = Fragment.instantiate(getActivity(), redirectClass);
+                            frg.setArguments(bundle);
+
+                            FragmentTransaction tx = getActivity().getSupportFragmentManager().beginTransaction();
+                            tx.replace(R.id.main, frg);
+                            tx.addToBackStack(null);
+                            tx.commit();
+                        }
+                    });
 
                     adapter = new PackPagerAdapter(getActivity().getSupportFragmentManager(), Titles, NumbOfTabs, pack.getId());
 

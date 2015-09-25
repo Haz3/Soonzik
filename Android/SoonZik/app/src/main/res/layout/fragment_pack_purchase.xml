@@ -16,7 +16,6 @@
             android:contentDescription="@string/imgmenudescription"
             android:layout_marginLeft="20dp"
             android:layout_marginStart="20dp"
-            android:layout_centerVertical="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true" />
 
@@ -47,20 +46,22 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="5"
-            android:layout_marginLeft="10dp"
-            android:layout_marginStart="10dp"
-            android:layout_alignTop="@+id/imageView2"
-            android:layout_toRightOf="@+id/imageView2"
-            android:layout_toEndOf="@+id/imageView2" />
+            android:layout_marginRight="28dp"
+            android:layout_marginEnd="28dp"
+            android:layout_alignTop="@+id/packname"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
 
         <ImageView
             android:src="@drawable/ic_disc"
             android:layout_width="20sp"
             android:layout_height="20sp"
             android:id="@+id/imageView2"
-            android:layout_below="@+id/packpicture"
-            android:layout_alignLeft="@+id/artistnames"
-            android:layout_alignStart="@+id/artistnames" />
+            android:layout_marginRight="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_alignTop="@+id/nbalbums"
+            android:layout_toLeftOf="@+id/nbalbums"
+            android:layout_toStartOf="@+id/nbalbums" />
 
     </RelativeLayout>
 
@@ -76,7 +77,7 @@
             android:id="@+id/textviewdeveloper"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="For the devolpers"
+            android:text="For the SoonZik"
             android:layout_marginTop="72dp"
             android:layout_below="@+id/textviewcharity"
             android:layout_alignLeft="@+id/textviewcharity"
@@ -117,7 +118,7 @@
             android:layout_height="wrap_content"
             android:inputType="numberDecimal"
             android:ems="10"
-            android:id="@+id/edittextvalue"
+            android:id="@+id/edittextamount"
             android:layout_toRightOf="@+id/textviewvalue"
             android:layout_marginLeft="24dp"
             android:layout_marginStart="24dp"
@@ -129,8 +130,8 @@
             android:text="$"
             android:id="@+id/textviewcurrency"
             android:layout_alignTop="@+id/textviewvalue"
-            android:layout_toRightOf="@+id/edittextvalue"
-            android:layout_toEndOf="@+id/edittextvalue" />
+            android:layout_toRightOf="@+id/edittextamount"
+            android:layout_toEndOf="@+id/edittextamount" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -140,8 +141,8 @@
             android:layout_marginLeft="14dp"
             android:layout_marginStart="14dp"
             android:layout_alignTop="@+id/textviewartist"
-            android:layout_alignLeft="@+id/edittextvalue"
-            android:layout_alignStart="@+id/edittextvalue" />
+            android:layout_alignLeft="@+id/edittextamount"
+            android:layout_alignStart="@+id/edittextamount" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -161,6 +162,39 @@
             android:layout_alignLeft="@+id/valueforcharity"
             android:layout_alignStart="@+id/valueforcharity" />
 
+        <SeekBar
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/seekbarartist"
+            android:max="100"
+            android:progress="65"
+            android:layout_marginTop="29dp"
+            android:layout_below="@+id/textviewartist"
+            android:layout_alignLeft="@+id/textviewartist"
+            android:layout_alignStart="@+id/textviewartist" />
+
+        <SeekBar
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/seekbarcharity"
+            android:max="100"
+            android:progress="20"
+            android:layout_marginTop="26dp"
+            android:layout_below="@+id/textviewcharity"
+            android:layout_alignLeft="@+id/textviewcharity"
+            android:layout_alignStart="@+id/textviewcharity" />
+
+        <SeekBar
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/seekbardeveloper"
+            android:max="100"
+            android:progress="15"
+            android:layout_marginTop="29dp"
+            android:layout_below="@+id/textviewdeveloper"
+            android:layout_alignLeft="@+id/textviewdeveloper"
+            android:layout_alignStart="@+id/textviewdeveloper" />
+
     </RelativeLayout>
 
     <Button
@@ -171,5 +205,6 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="36dp" />
+
 
 </RelativeLayout>

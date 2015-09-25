@@ -10,6 +10,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
@@ -26,6 +27,18 @@ public class NewsListFragment extends Fragment {
                              Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.listfragment_news,
                 container, false);
+
+        if (ActiveRecord.currentUser != null) {
+            User.getMusics(new ActiveRecord.OnJSONResponseCallback() {
+                @Override
+                public void onJSONResponse(boolean success, Object response, Class<?> classT) throws InvocationTargetException, NoSuchMethodException, java.lang.InstantiationException, IllegalAccessException {
+                    JSONObject data = (JSONObject) response;
+                    final MyContent ct = (MyContent) ActiveRecord.jsonObjectData(data, classT);
+
+                    ActiveRecord.currentUser.setContent(ct);
+                }
+            });
+        }
 
         try {
             ActiveRecord.index("News", new ActiveRecord.OnJSONResponseCallback() {

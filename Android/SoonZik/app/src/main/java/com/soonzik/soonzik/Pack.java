@@ -3,6 +3,7 @@ package com.soonzik.soonzik;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  * Created by kevin_000 on 21/03/2015.
@@ -13,6 +14,10 @@ public class Pack extends ActiveRecord {
     private ArrayList<Album> albums = null;
     private User user = null;
     private ArrayList<Description> descriptions = null;
+    private double minimal_price = 0d;
+    private double averagePrice = 0d;
+    private Date begin_date = null;
+    private Date end_date = null;
 
     public Pack() {}
 
@@ -32,6 +37,10 @@ public class Pack extends ActiveRecord {
         }
         str += " ]";
         str += " : User = [ " + (user != null ? user.toString() : "") +  " ]";
+        str += " : minimal_price = " + Double.toString(minimal_price);
+        str += " : averagePrice = " + Double.toString(averagePrice);
+        str += " : begin_date = " + (begin_date != null ? begin_date.toString() : "");
+        str += " : end_date = " + (end_date != null ? end_date.toString() : "");
         str += " : Description = [ ";
         if (descriptions != null) {
             for (Description description: descriptions) {
@@ -60,5 +69,21 @@ public class Pack extends ActiveRecord {
 
     public User getUser() {
         return user;
+    }
+
+    public double getMinimal_price() {
+        return minimal_price;
+    }
+
+    public double getAveragePrice() {
+        return averagePrice;
+    }
+
+    public Date getEnd_date() {
+        return end_date;
+    }
+
+    public Date getBegin_date() {
+        return begin_date;
     }
 }
