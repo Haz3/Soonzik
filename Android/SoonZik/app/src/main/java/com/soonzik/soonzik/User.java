@@ -14,8 +14,10 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.InvocationTargetException;
+import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -151,8 +153,6 @@ public class User extends ActiveRecord {
         });
 
     }
-
-
 
     public static void follow(int id, final ActiveRecord.OnJSONResponseCallback callback) {
         RequestParams params = new RequestParams();
@@ -479,6 +479,88 @@ public class User extends ActiveRecord {
         });
     }
 
+    static void getSocialToken(String uid, String provider, final OnJSONResponseCallback callback) {
+        AsyncHttpClient client = new AsyncHttpClient();
+
+        client.get("http://10.0.3.2:3000/api/getSocialToken/" + uid + "/" + provider, new JsonHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                try {
+                    callback.onJSONResponse(true, response, null);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                } catch (NoSuchAlgorithmException e) {
+                    e.printStackTrace();
+                } catch (UnsupportedEncodingException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, Throwable e, JSONObject response) {
+                Log.v("FAIL", response.toString());
+            }
+        });
+    }
+
+    public static void socialLogin(final String uid, final String provider, final String socialtoken, final ActiveRecord.OnJSONResponseCallback callback) {
+        final String salt = "3uNi@rCK$L$om40dNnhX)#jV2$40wwbr_bAK99%E";
+
+        getSocialToken(uid, provider, new OnJSONResponseCallback() {
+            @Override
+            public void onJSONResponse(boolean success, JSONObject response, RequestParams params) throws JSONException, UnsupportedEncodingException, NoSuchAlgorithmException, IOException {
+                AsyncHttpClient client = new AsyncHttpClient();
+                RequestParams p = new RequestParams();
+
+                p.put("uid", uid);
+                p.put("provider", provider);
+
+                String toHash = uid + response.getString("key") + salt;
+                MessageDigest digest = MessageDigest.getInstance("SHA-256");
+                byte[] hash = digest.digest(toHash.getBytes("UTF-8"));
+                StringBuffer hexString = new StringBuffer();
+
+                for (int i = 0; i < hash.length; i++) {
+                    String hex = Integer.toHexString(0xff & hash[i]);
+                    if(hex.length() == 1) hexString.append('0');
+                    hexString.append(hex);
+                }
+
+                p.put("encrypted_key", hexString);
+                p.put("token", socialtoken);
+                client.post("http://10.0.3.2:3000/api/social-login", p, new JsonHttpResponseHandler() {
+                    public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                        try {
+                            Class<?> classT = Class.forName("com.soonzik.soonzik.User");
+                            callback.onJSONResponse(true, response, classT);
+                        } catch (InvocationTargetException e) {
+                            e.printStackTrace();
+                        } catch (NoSuchMethodException e) {
+                            e.printStackTrace();
+                        } catch (InstantiationException e) {
+                            e.printStackTrace();
+                        } catch (IllegalAccessException e) {
+                            e.printStackTrace();
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        } catch (ClassNotFoundException e) {
+                            e.printStackTrace();
+                        }
+
+                    }
+
+                    @Override
+                    public void onFailure(int statusCode, Header[] headers, Throwable e, JSONObject response) {
+                        Log.v("FAIL", response.toString());
+                    }
+                });
+            }
+        });
+    }
+
+
     @Override
     public String toString() {
         String str = "id = " + Integer.toString(id)
@@ -518,6 +600,7 @@ public class User extends ActiveRecord {
         str += " ]";
         return (str);
     }
+
 
     public int getId() {
         return id;
