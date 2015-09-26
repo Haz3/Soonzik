@@ -8,12 +8,13 @@
 
 #import <UIKit/UIKit.h>
 #import "SOMessagingViewController.h"
+#import "User.h"
 
 @interface ChatViewController : SOMessagingViewController
 
 @property (strong, nonatomic) NSMutableArray *dataSource;
-
 @property (strong, nonatomic) UIImage *myImage;
 @property (strong, nonatomic) UIImage *partnerImage;
+@property (strong, nonatomic) User *friend;
 
 @end

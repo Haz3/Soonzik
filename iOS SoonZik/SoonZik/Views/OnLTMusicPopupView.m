@@ -9,78 +9,224 @@
 #import "OnLTMusicPopupView.h"
 #import "Tools.h"
 #import "SVGKImage.h"
+#import "MusicsController.h"
+#import "SimplePopUp.h"
 
 @implementation OnLTMusicPopupView
 
-- (id)initWithFrame:(CGRect)frame
+- (void)initPopupWithSong:(Music *)song andPlaylist:(Playlist *)playlist andTypeOfParent:(int)type
 {
-    self = [super initWithFrame:frame];
-    if (self) {
-        // Initialization code
-    }
-    return self;
-}
-
-- (void)initPopupWithSong:(Music *)song andPlaylist:(Playlist *)playlist
-{
+    NSData *translateData = [[NSUserDefaults standardUserDefaults] objectForKey:@"Translate"];
+    self.translate = [NSKeyedUnarchiver unarchiveObjectWithData:translateData];
+    
+    self.playlistDisplayMode = false;
+    self.ratingDisplayMode = false;
+    
+    self.tableView.delegate = self;
+    self.tableView.dataSource = self;
+    self.tableView.backgroundColor = DARK_GREY;
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    
+    self.typeOfParent = type;
+    
     self.alpha = 0;
     self.song = song;
     self.playlist = playlist;
     
-    self.popupView.layer.cornerRadius = 10;
+    self.popupView.layer.masksToBounds = YES;
+    self.popupView.layer.cornerRadius = 10; // if you like rounded corners
+    self.popupView.layer.shadowOffset = CGSizeMake(-15, 20);
+    self.popupView.layer.shadowRadius = 5;
+    self.popupView.layer.shadowOpacity = 0.5;
+    self.popupView.layer.borderColor = [UIColor whiteColor].CGColor;
+    self.popupView.layer.borderWidth = 1;
     
-    //[self.popupView setFrame:CGRectMake(self.popupView.frame.origin.x, self.popupView.frame.origin.y, self.popupView.frame.size.width, self.popupView.frame.size.height)];
     [UIView animateWithDuration:0.25 animations:^{
         self.alpha = 1;
     }];
     
-    self.musicImage.image = [UIImage imageNamed:song.image];
+    self.musicImage.image = [UIImage imageNamed:song.albumImage];
     self.musicName.text = song.title;
+    self.artistName.text = song.artist.username;
     
-    [self.removeFromPlaylistButton setImage:[Tools imageWithImage:[SVGKImage imageNamed:@"remove_from_playlist"].UIImage scaledToSize:CGSizeMake(40, 40)] forState:UIControlStateNormal];
-    [self.removeFromPlaylistButton setTintColor:[UIColor whiteColor]];
-    [self.albumButton setImage:[Tools imageWithImage:[SVGKImage imageNamed:@"album"].UIImage scaledToSize:CGSizeMake(40, 40)] forState:UIControlStateNormal];
-    [self.albumButton setTintColor:[UIColor whiteColor]];
-    [self.artistButton setImage:[Tools imageWithImage:[SVGKImage imageNamed:@"user"].UIImage scaledToSize:CGSizeMake(40, 40)] forState:UIControlStateNormal];
-    [self.artistButton setTintColor:[UIColor whiteColor]];
-    [self.addToPlaylistButton setImage:[Tools imageWithImage:[SVGKImage imageNamed:@"play_later"].UIImage scaledToSize:CGSizeMake(40, 40)] forState:UIControlStateNormal];
-    [self.addToPlaylistButton setTintColor:[UIColor whiteColor]];
+    switch (type) {
+        case 0:
+        {
+            // Playlist
+            self.listOfOptionsName = @[[self.translate.dict objectForKey:@"title_remove_from_playlist"], [self.translate.dict objectForKey:@"title_album_view"], [self.translate.dict objectForKey:@"title_artist_view"], [self.translate.dict objectForKey:@"title_rate_music"]];
+            self.listOfOptionsId = @[[NSNumber numberWithInt:0], [NSNumber numberWithInt:2], [NSNumber numberWithInt:3], [NSNumber numberWithInt:7]];
+        }
+            break;
+        case 1:
+        {
+            // Album
+           self.listOfOptionsName = @[[self.translate.dict objectForKey:@"title_artist_view"], [self.translate.dict objectForKey:@"title_add_to_playing_list"], [self.translate.dict objectForKey:@"title_add_to_playlist"], [self.translate.dict objectForKey:@"buy_music"], [self.translate.dict objectForKey:@"title_rate_music"]];
+            self.listOfOptionsId = @[[NSNumber numberWithInt:3], [NSNumber numberWithInt:1], [NSNumber numberWithInt:5], [NSNumber numberWithInt:6], [NSNumber numberWithInt:7]];
+        }
+            break;
+        case 2:
+        {
+            // listening list
+            self.listOfOptionsName = @[[self.translate.dict objectForKey:@"title_album_view"], [self.translate.dict objectForKey:@"title_artist_view"], [self.translate.dict objectForKey:@"title_delete_from_playing_list"], [self.translate.dict objectForKey:@"title_rate_music"]];
+            self.listOfOptionsId = @[[NSNumber numberWithInt:2], [NSNumber numberWithInt:3], [NSNumber numberWithInt:4], [NSNumber numberWithInt:7]];
+        }
+            break;
+        case 3:
+        {
+            // music in genre
+            self.listOfOptionsName = @[[self.translate.dict objectForKey:@"title_artist_view"], [self.translate.dict objectForKey:@"title_album_view"], [self.translate.dict objectForKey:@"title_add_to_playing_list"], [self.translate.dict objectForKey:@"title_add_to_playlist"], [self.translate.dict objectForKey:@"title_rate_music"]];
+            self.listOfOptionsId = @[[NSNumber numberWithInt:3], [NSNumber numberWithInt:2], [NSNumber numberWithInt:1], [NSNumber numberWithInt:5], [NSNumber numberWithInt:7]];
+        }
+            break;
+        default:
+            break;
+    }
     
-    [self.removeFromPlaylistButton addTarget:self action:@selector(removeFromPlayList) forControlEvents:UIControlEventTouchUpInside];
-    [self.albumButton addTarget:self action:@selector(pressAlbumButton) forControlEvents:UIControlEventTouchUpInside];
-    [self.artistButton addTarget:self action:@selector(pressArtistButton) forControlEvents:UIControlEventTouchUpInside];
-    [self.addToPlaylistButton addTarget:self action:@selector(pressAddToCurrentPlaylistButton) forControlEvents:UIControlEventTouchUpInside];
+    
 }
 
 - (BOOL)pointInside:(CGPoint)point withEvent:(UIEvent *)event
 {
     if ((point.x < self.popupView.frame.origin.x) || (point.x > (self.popupView.frame.origin.x + self.popupView.frame.size.width))) {
-       [self.choiceDelegate closePopUpView];
+       [self.choiceDelegate closePopUp];
     } else if ((point.y < self.popupView.frame.origin.y) || (point.y > (self.popupView.frame.origin.y + self.popupView.frame.size.height))) {
-        [self.choiceDelegate closePopUpView];
+        [self.choiceDelegate closePopUp];
     }
-    
     return YES;
 }
 
-- (void)removeFromPlayList
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    [self.choiceDelegate removeMusicFromPlayList:self.song and:self.playlist];
+    return 1;
 }
 
-- (void)pressAlbumButton
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    [self.choiceDelegate goToAlbumView:self.song];
+    if (self.ratingDisplayMode)
+        return 1;
+    
+    return self.listOfOptionsName.count;
 }
 
-- (void)pressArtistButton
-{
-    [self.choiceDelegate goToArtistView:self.song];
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (self.ratingDisplayMode)
+        return 162;
+    
+    return 44;
 }
 
-- (void)pressAddToCurrentPlaylistButton
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [self.choiceDelegate addToCurrentPlaylist:self.song];
+    if (self.ratingDisplayMode) {
+        [self.tableView registerNib:[UINib nibWithNibName:@"RatingTableViewCell" bundle:nil] forCellReuseIdentifier:@"cellRate"];
+        self.ratingCell = [self.tableView dequeueReusableCellWithIdentifier:@"cellRate"];
+        self.ratingCell.backgroundColor = [UIColor clearColor];
+        self.ratingCell.rateLabel.textColor = [UIColor whiteColor];
+        self.ratingCell.rateLabel.font = SOONZIK_FONT_BODY_BIG;
+        self.ratingCell.delegate = self;
+        self.ratingCell.slider.value = 2.0;
+        self.ratingCell.slider.tag = 3;
+        self.ratingCell.slider.minimumValue = 1.0;
+        self.ratingCell.slider.maximumValue = 5.0;
+        self.ratingCell.rateLabel.text = [NSString stringWithFormat:@"%i", (int)self.ratingCell.slider.value];
+        [self.ratingCell.btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [self.ratingCell.btn setTitle:@"Noter" forState:UIControlStateNormal];
+        [self.ratingCell.btn addTarget:self action:@selector(sendRate) forControlEvents:UIControlEventTouchUpInside];
+        return self.ratingCell;
+    }
+    
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cellOption"];
+    if (!cell) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cellOption"];
+        cell.backgroundColor = [UIColor clearColor];
+        cell.textLabel.textColor = [UIColor whiteColor];
+    }
+    
+    if (!self.playlistDisplayMode && !self.ratingDisplayMode)
+        cell.textLabel.text = [self.listOfOptionsName objectAtIndex:indexPath.row];
+    else if (self.playlistDisplayMode) {
+        Playlist *playlist = [self.listOfOptionsName objectAtIndex:indexPath.row];
+        cell.textLabel.text = playlist.title;
+    }
+    
+    return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (!self.playlistDisplayMode && !self.ratingDisplayMode) {
+        NSNumber *identifier = [self.listOfOptionsId objectAtIndex:indexPath.row];
+        
+        switch ([identifier intValue]) {
+            case 0:
+                [self.choiceDelegate removeMusicFromPlayList:self.song and:self.playlist];
+                [self.choiceDelegate closePopUp];
+                break;
+            case 1:
+                [self.choiceDelegate addToCurrentPlaylist:self.song];
+                [self.choiceDelegate closePopUp];
+                break;
+            case 2:
+                [self.choiceDelegate goToAlbumView:self.song];
+                [self.choiceDelegate closePopUp];
+                break;
+            case 3:
+                [self.choiceDelegate goToArtistView:self.song];
+                [self.choiceDelegate closePopUp];
+                break;
+            case 4:
+                [self.choiceDelegate deleteFromCurrentList:self.song];
+                [self.choiceDelegate closePopUp];
+                break;
+            case 5:
+                [self addToAPlaylist];
+                break;
+            case 6:
+                [self.choiceDelegate addMusicToCart:self.song];
+                [self.choiceDelegate closePopUp];
+                break;
+            case 7:
+                [self rateMusic];
+                break;
+            default:
+                break;
+        }
+    }
+    else if (self.playlistDisplayMode) {
+        Playlist *playlist = [self.listOfOptionsName objectAtIndex:indexPath.row];
+        [self.choiceDelegate addToPlaylist:playlist :self.song];
+    }
+}
+
+- (void)addToAPlaylist {
+    self.playlistDisplayMode = true;
+    NSArray *listOfPlaylist = [self getPlaylists];
+    self.listOfOptionsName = listOfPlaylist;
+    [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationAutomatic];
+}
+
+- (NSArray *)getPlaylists {
+    NSData *userData = [[NSUserDefaults standardUserDefaults] objectForKey:@"User"];
+    User *user = (User *)[NSKeyedUnarchiver unarchiveObjectWithData:userData];
+    return [Factory findElementWithClassName:@"Playlist" andValues:[NSString stringWithFormat:@"attribute[user_id]=%i", user.identifier]];
+}
+
+- (void)rateMusic {
+    self.ratingDisplayMode = true;
+    [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationAutomatic];
+}
+
+- (void)valueChanged:(float)value {
+    self.ratingCell.rateLabel.text = [NSString stringWithFormat:@"%i", (int)value];
+}
+
+- (void)sendRate {
+    [self.choiceDelegate closePopUp];
+    if ([MusicsController rateMusic:self.song :(int)self.ratingCell.slider.value]) {
+        [[[SimplePopUp alloc] initWithMessage:[self.translate.dict objectForKey:@"rating_success"] onView:self.superview withSuccess:true] show];
+    } else {
+        [[[SimplePopUp alloc] initWithMessage:[self.translate.dict objectForKey:@"rating_error"] onView:self.superview withSuccess:false] show];
+    }
 }
 
 @end

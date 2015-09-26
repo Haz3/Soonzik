@@ -10,4 +10,7 @@
 
 @interface RepartionTableViewCell : UITableViewCell
 
+@property (nonatomic, strong) IBOutlet UISlider *slider;
+@property (nonatomic, strong) IBOutlet UILabel *value;
+
 @end

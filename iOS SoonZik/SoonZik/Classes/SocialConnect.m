@@ -16,30 +16,6 @@
 
 @implementation SocialConnect
 
-- (User *)facebookConnect:(NSString *)token email:(NSString *)email uid:(NSString *)uid
-{
-    NSDictionary *net = [[Network alloc] getJsonClient:token email:email uid:uid type:0];
-    User *user = [[User alloc] initWithJsonObject:[net objectForKey:@"content"]];
-    
-    return user;
-}
-
-- (User *)twitterConnect:(NSString *)token email:(NSString *)email uid:(NSString *)uid
-{
-    NSDictionary *net = [[Network alloc] getJsonClient:token email:email uid:uid type:1];
-    User *user = [[User alloc] initWithJsonObject:[net objectForKey:@"content"]];
-    
-    return user;
-}
-
-- (User *)googleConnect:(NSString *)token email:(NSString *)email uid:(NSString *)uid
-{
-    NSDictionary *net = [[Network alloc] getJsonClient:token email:email uid:uid type:2];
-    User *user = [[User alloc] initWithJsonObject:[net objectForKey:@"content"]];
-    
-    return user;
-}
-
 + (BOOL)shareOnFacebook:(id)elem onVC:(UIViewController *)vc
 {
     if ([SLComposeViewController isAvailableForServiceType:SLServiceTypeFacebook])

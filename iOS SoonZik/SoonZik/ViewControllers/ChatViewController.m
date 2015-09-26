@@ -15,19 +15,28 @@
 
 @implementation ChatViewController
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [[UIApplication sharedApplication] setStatusBarHidden:false withAnimation:UIStatusBarAnimationNone];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
     
-    self.myImage      = [UIImage imageNamed:@"arturdev.jpg"];
-    self.partnerImage = [UIImage imageNamed:@"jobs.jpg"];
+    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+    NSData *data = [prefs objectForKey:@"User"];
+    User *user = (User *)[NSKeyedUnarchiver unarchiveObjectWithData:data];
+    
+    self.myImage      = [UIImage imageNamed:user.image];
+    self.partnerImage = [UIImage imageNamed:self.friend.image];
     
     //--------------------------------------------------
     //         Customizing input view
     //--------------------------------------------------
     self.inputView.textInitialHeight = 45;
-    self.inputView.textView.font = [UIFont systemFontOfSize:17];
+    self.inputView.textView.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:17];
     
     // Apply changes
     [self.inputView adjustInputView];
@@ -35,7 +44,7 @@
     
     [self loadMessages];
     
-    self.view.backgroundColor = BACKGROUND_COLOR;
+    self.view.backgroundColor = DARK_GREY;
 }
 
 - (void)loadMessages
@@ -69,7 +78,10 @@
         cell.contentInsets = UIEdgeInsetsMake(0, 0, 0, 4.0f); //Move content for 4 pt. to left
     }
     
-    cell.textView.textColor = [UIColor blackColor];
+    cell.textView.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:17];
+    cell.textView.textColor = [UIColor whiteColor];
+    cell.textView.backgroundColor = [UIColor clearColor];
+    cell.backgroundColor = [UIColor clearColor];
     
     cell.userImageView.layer.cornerRadius = 3;
     

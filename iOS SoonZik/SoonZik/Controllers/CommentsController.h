@@ -7,7 +7,13 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "Request.h"
+#import "News.h"
+#import "Crypto.h"
 
 @interface CommentsController : NSObject
+
++ (NSMutableArray *)getCommentsFromNews:(News *)news;
++ (BOOL)addComment:(News *)news andComment:(NSString *)content;
 
 @end

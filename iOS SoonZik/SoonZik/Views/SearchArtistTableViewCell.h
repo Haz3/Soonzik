@@ -7,7 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "User.h"
 
 @interface SearchArtistTableViewCell : UITableViewCell
+
+@property (strong, nonatomic) IBOutlet UILabel *artistLabel;
+@property (strong, nonatomic) IBOutlet UIImageView *artistImage;
+
+- (void)initCell:(User *)artist;
 
 @end

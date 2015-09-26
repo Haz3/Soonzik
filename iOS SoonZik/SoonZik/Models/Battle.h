@@ -12,12 +12,12 @@
 @interface Battle : ObjectFactory
 
 @property (nonatomic, assign) int identifier;
+@property (nonatomic, strong) NSString *title;
 @property (nonatomic, strong) User *artistOne;
 @property (nonatomic, strong) User *artistTwo;
-@property (nonatomic, assign) int artistOneVotes;
-@property (nonatomic, assign) int artistTwoVotes;
-@property (nonatomic, assign) int choice;
 @property (nonatomic, strong) NSDate *beginDate;
 @property (nonatomic, strong) NSDate *endDate;
+@property (nonatomic, assign) int voteArtistOne;
+@property (nonatomic, assign) int voteArtistTwo;
 
 @end

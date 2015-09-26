@@ -38,7 +38,7 @@
         </Grid.Resources>
 
         <Grid Grid.Row="0">
-            <Image Name="ImageArtiste" Source="ms-appx:///Resources/Icones/ProfilMenu.png" Width="200" Height="200"
+            <Image Name="ImageArtiste" Source="{Binding TheArtiste.profilImage}" Width="200" Height="200"
                    HorizontalAlignment="Center" VerticalAlignment="Top"
                    Margin="0,30,0,0" />
 

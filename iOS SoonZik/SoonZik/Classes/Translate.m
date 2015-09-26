@@ -10,22 +10,23 @@
 
 @implementation Translate
 
-+ (id)sharedInstance {
-    static Translate *sharedMyManager = nil;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        sharedMyManager = [[self alloc] init];
-    });
-    return sharedMyManager;
-}
-
 - (id)initWithPath:(NSString *)path {
     self = [super init];
     self.dict = [[NSDictionary alloc] initWithContentsOfFile:path];
-    int number = [[[[self.dict objectForKey:@"One"] objectForKey:@"Two"]objectForKey:@"Three"] intValue];
-    NSLog(@"%d",number);
     
     return self;
 }
+
+- (void)encodeWithCoder:(NSCoder *)aCoder {
+    [aCoder encodeObject:self.dict forKey:@"dict"];
+}
+
+- (id)initWithCoder:(NSCoder *)aDecoder{
+    if(self = [super init]){
+        self.dict = [aDecoder decodeObjectForKey:@"dict"];
+    }
+    return self;
+}
+
 
 @end

@@ -7,7 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Album.h"
 
 @interface SearchAlbumTableViewCell : UITableViewCell
+
+@property (strong, nonatomic) IBOutlet UILabel *albumLabel;
+@property (strong, nonatomic) IBOutlet UIImageView *albumImage;
+
+- (void)initCell:(Album *)album;
 
 @end

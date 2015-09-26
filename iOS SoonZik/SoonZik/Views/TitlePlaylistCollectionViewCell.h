@@ -10,15 +10,14 @@
 
 @interface TitlePlaylistCollectionViewCell : UICollectionViewCell
 
-@property (nonatomic, weak) IBOutlet UIImageView *album1Image;
-@property (nonatomic, weak) IBOutlet UIImageView *album2Image;
-@property (nonatomic, weak) IBOutlet UIImageView *album3Image;
-@property (nonatomic, weak) IBOutlet UIImageView *album4Image;
+@property (nonatomic, strong) IBOutlet UIImageView *album1Image;
+@property (nonatomic, strong) IBOutlet UIImageView *album2Image;
+@property (nonatomic, strong) IBOutlet UIImageView *album3Image;
+@property (nonatomic, strong) IBOutlet UIImageView *album4Image;
 
-@property (nonatomic, weak) IBOutlet UIView *containView;
+@property (nonatomic, strong) IBOutlet UIView *containView;
 
-@property (nonatomic, weak) IBOutlet UILabel *playlistTitle;
-@property (nonatomic, weak) IBOutlet UILabel *nbrOfTracks;
+@property (nonatomic, strong) IBOutlet UILabel *playlistTitle;
 
 - (void)initCell;
 

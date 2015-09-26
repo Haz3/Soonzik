@@ -21,13 +21,9 @@
 @property (nonatomic, assign) int duration;
 @property (nonatomic, strong) Genre *genre;
 @property (nonatomic, assign) float price;
-@property (nonatomic, strong) NSString *file;
 @property (nonatomic, strong) User *artist;
-@property (nonatomic, strong) NSString *image;
-@property (nonatomic, strong) NSMutableArray *album;
+@property (nonatomic, strong) NSString *albumImage;
+@property (nonatomic, assign) int albumId;
 @property (nonatomic, assign) int isLimited;
-
-+ (BOOL)addToPlaylist:(Playlist *)playlist :(Music *)music;
-+ (BOOL)removeFromPlaylist:(Playlist *)playlist :(Music *)music;
 
 @end

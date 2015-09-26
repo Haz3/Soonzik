@@ -10,4 +10,8 @@
 
 @interface BuyPackTableViewCell : UITableViewCell
 
+@property (nonatomic, strong) IBOutlet UIButton *buyButton;
+
+- (void)initCell;
+
 @end

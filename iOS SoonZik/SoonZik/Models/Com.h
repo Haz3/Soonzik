@@ -17,7 +17,4 @@
 @property (nonatomic, strong) NSString *content;
 @property (nonatomic, strong) NSDate *date;
 
-+ (NSMutableArray *)getCommentsFromNews:(News *)news;
-+ (BOOL)addComment:(News *)news andComment:(NSString *)content;
-
 @end

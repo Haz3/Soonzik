@@ -7,7 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "Search.h"
 
 @interface SearchsController : NSObject
+
++ (Search *)getSearchResults:(NSString *)word;
 
 @end

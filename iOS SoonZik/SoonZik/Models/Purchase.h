@@ -10,4 +10,9 @@
 
 @interface Purchase : ObjectFactory
 
+@property (nonatomic, assign) int identifier;
+@property (nonatomic, strong) NSMutableArray *listOfMusics;
+@property (nonatomic, strong) NSMutableArray *listOfAlbums;
+@property (nonatomic, strong) NSMutableArray *listOfPacks;
+
 @end

@@ -248,6 +248,9 @@
     <AppxPackagedFile Include="C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\ReadMe.Coding4Fun.Toolkit.txt">
       <PackagePath>ReadMe.Coding4Fun.Toolkit.txt</PackagePath>
     </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\Resources\background.jpg">
+      <PackagePath>Resources\background.jpg</PackagePath>
+    </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\Resources\guetta.jpg">
       <PackagePath>Resources\guetta.jpg</PackagePath>
     </AppxPackagedFile>

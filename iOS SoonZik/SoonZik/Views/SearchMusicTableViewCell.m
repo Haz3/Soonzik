@@ -10,14 +10,15 @@
 
 @implementation SearchMusicTableViewCell
 
-- (void)awakeFromNib {
-    // Initialization code
-}
-
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    [super setSelected:selected animated:animated];
-
-    // Configure the view for the selected state
+- (void)initCell:(id)elem {
+    if ([elem isKindOfClass:[Music class]]) {
+        Music *m = (Music *)elem;
+        self.musicLabel.text = m.title;
+    } else if ([elem isKindOfClass:[Pack class]]) {
+        Pack *m = (Pack *)elem;
+        self.musicLabel.text = m.title;
+    }
+    
 }
 
 @end

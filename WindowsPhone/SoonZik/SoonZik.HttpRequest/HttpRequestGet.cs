@@ -18,8 +18,16 @@ namespace SoonZik.HttpRequest
 
         private const string ApiUrl = "http://soonzikapi.herokuapp.com/";
         #endregion
-
+        
         #region Method Get
+        
+            
+        public async Task<object> FindUser(object myObject, string element)
+        {
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(ApiUrl + "users/find?attribute[username]=" + element);
+            return await DoRequestForObject(myObject, request);
+        }
+
         public async Task<object> GetListObject(object myObject, string element)
         {
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(ApiUrl + element);

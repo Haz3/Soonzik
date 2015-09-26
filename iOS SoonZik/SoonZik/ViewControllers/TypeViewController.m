@@ -16,12 +16,15 @@
 #import "ArtistViewController.h"
 #import "ExploreViewController.h"
 #import "FriendsViewController.h"
-#import "ErrorLoadingView.h"
-#import "LeftMenuViewController.h"
+#import "MusicOptionsButton.h"
 #import "AppDelegate.h"
 #import "Music.h"
 #import "Tools.h"
 #import "SVGKImage.h"
+#import "AlbumViewController.h"
+#import "SimplePopUp.h"
+#import "ShareActionSheet.h"
+
 
 @interface TypeViewController ()
 
@@ -38,46 +41,43 @@
     return self;
 }
 
-- (void)viewWillDisappear:(BOOL)animated
-{
-    self.menuView.hidden = YES;
-}
-
-- (void)viewWillAppear:(BOOL)animated
-{
-    self.menuView.hidden = YES;
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
     
     UIImage *menuImage = [Tools imageWithImage:[SVGKImage imageNamed:@"menu"].UIImage scaledToSize:CGSizeMake(30, 30)];
-    UIBarButtonItem *menuButton = [[UIBarButtonItem alloc] initWithImage:menuImage style:UIBarButtonItemStylePlain target:self action:@selector(presentLeftMenuViewController:)];
+    UIBarButtonItem *menuButton = [[UIBarButtonItem alloc] initWithImage:menuImage style:UIBarButtonItemStylePlain target:self action:@selector(presentLeftMenuViewController)];
+    menuButton.tintColor = [UIColor whiteColor];
     self.navigationItem.leftBarButtonItem = menuButton;
     
     UIImage *searchImage = [Tools imageWithImage:[SVGKImage imageNamed:@"search"].UIImage scaledToSize:CGSizeMake(30, 30)];
-    UIBarButtonItem *searchButton = [[UIBarButtonItem alloc] initWithImage:searchImage style:UIBarButtonItemStylePlain target:self action:@selector(presentRightMenuViewController:)];
+    UIBarButtonItem *searchButton = [[UIBarButtonItem alloc] initWithImage:searchImage style:UIBarButtonItemStylePlain target:self action:@selector(presentRightMenuViewController)];
+    searchButton.tintColor = [UIColor whiteColor];
     self.navigationItem.rightBarButtonItem = searchButton;
     
     [self initTitleView];
     
-    self.view.backgroundColor = BACKGROUND_COLOR;
-    
-    self.statusBarHeight = [[UIApplication sharedApplication] statusBarFrame].size.height;
+    self.view.backgroundColor = DARK_GREY;
     
     [self.navigationController.navigationBar setTranslucent:NO];
     [self.navigationController setNavigationBarHidden:NO animated:YES];
     UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@" " style:UIBarButtonItemStylePlain target:nil action:nil];
     self.navigationItem.backBarButtonItem = backButton;
-    self.menuOpened = NO;
-    self.searchOpened = NO;
 
     self.player = ((AppDelegate *)[UIApplication sharedApplication].delegate).thePlayer;
     self.player.finishDelegate = self;
     
     [self refreshThePlayerPreview];
+}
+
+- (void)presentLeftMenuViewController {
+    AppDelegate *app = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    [app.revealController showLeftViewController];
+}
+
+- (void)presentRightMenuViewController {
+    AppDelegate *app = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    [app.revealController showRightViewController];
 }
 
 - (void)playerHasFinishedToPlay
@@ -88,6 +88,7 @@
 - (void)initTitleView
 {
     TitleSongPreview *songPreview = [[[NSBundle mainBundle] loadNibNamed:@"TitleSongPreview" owner:self options:nil] firstObject];
+    songPreview.backgroundColor = [UIColor clearColor];
     self.navigationItem.titleView = songPreview;
     
     UITapGestureRecognizer *tapOnListeningPreview = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(launchPlayerView:)];
@@ -109,10 +110,10 @@
         if (self.player.audioPlayer != nil) {
             
         } else {
-            [self.player prepareSong:s.file];
+            [self.player prepareSong:s.identifier];
         }
         
-        songPreview.albumImage.image = [UIImage imageNamed:s.image];
+        songPreview.albumImage.image = [UIImage imageNamed:s.albumImage];
         songPreview.trackLabel.text = s.title;
         songPreview.artistLabel.text = s.artist.username;
         
@@ -136,8 +137,8 @@
         [self.navigationController.view.layer addAnimation:transition forKey:@"openPlayer"];
         [self.navigationController pushViewController:vc animated:NO];
     } else {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:@"La liste de lecture est vide" delegate:self cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
-        [alert show];
+        SimplePopUp *popUp = [[SimplePopUp alloc] initWithMessage:[self.translate.dict objectForKey:@"current_list_no_content"] onView:self.view];
+        [popUp show];
     }
     
     
@@ -162,95 +163,31 @@
     [UIView commitAnimations];
 }
 
-- (void)play
-{
-    NSLog(@"play");
-    
-    if (self.player.listeningList.count > 0) {
-        
-        Music *s = [self.player.listeningList objectAtIndex:self.player.index];
-        
-        if (!self.player.currentlyPlaying) {
-            [self.player playSound];
-            self.player.songName = s.title;
-        } else {
-            [self.player pauseSound];
-        }
-    }
+
+
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+    [self.view endEditing:YES];
 }
 
-- (void)previous
+- (void)closePopUp
 {
-    NSLog(@"previous");
-    NSLog(@"%i", self.player.index);
-    if (self.player.listeningList.count > 0) {
-        if (self.player.index > 0) {
-            self.player.index--;
-            Music *s = [self.player.listeningList objectAtIndex:self.player.index];
-            [self.player prepareSong:s.file];
-            if (self.player.currentlyPlaying) {
-                [self.player playSound];
-                self.player.songName = s.title;
-            }
+    for (UIView *v in [self.view subviews]) {
+        if (v.tag == 100) {
+            [UIView animateWithDuration:1 animations:^{
+                v.alpha = 0;
+            } completion:^(BOOL finished) {
+                [v removeFromSuperview];
+            }];
         }
     }
-}
-
-- (void)next
-{
-    NSLog(@"next");
-    
-    if (self.player.listeningList.count > 0) {
-        if (self.player.repeatingLevel == 2) {
-            Music *s = [self.player.listeningList objectAtIndex:self.player.index];
-            [self.player prepareSong:s.file];
-            [self.player playSound];
-            self.player.songName = s.title;
-        } else if (self.player.repeatingLevel == 1) {
-            if (self.player.index == self.player.listeningList.count - 1) {
-                self.player.index = 0;
-            } else {
-                self.player.index++;
-            }
-            Music *s = [self.player.listeningList objectAtIndex:self.player.index];
-            [self.player prepareSong:s.file];
-            [self.player playSound];
-            self.player.songName = s.title;
-        } else if (self.player.repeatingLevel == 0) {
-            if (self.player.index < self.player.listeningList.count - 1) {
-                self.player.index++;
-                Music *s = [self.player.listeningList objectAtIndex:self.player.index];
-                [self.player prepareSong:s.file];
-                if (self.player.currentlyPlaying) {
-                    [self.player playSound];
-                    self.player.songName = s.title;
-                }
-            }
-        }
-    }
+    [self removeBlurEffect:200 onView:self.view];
 }
 
 - (void)addBlurEffectOnView:(UIView *)view
 {
+    [self.navigationController setNavigationBarHidden:true animated:true];
     UIVisualEffect *blurEffect;
     blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
-    
-    UIVisualEffectView *visualEffectView;
-    visualEffectView = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
-    visualEffectView.frame = view.bounds;
-    visualEffectView.tag = 200;
-    [view addSubview:visualEffectView];
-    visualEffectView.alpha = 0;
-    
-    [UIView animateWithDuration:0.5 animations:^{
-        visualEffectView.alpha = 1;
-    }];
-}
-
-- (void)addBlurDarkEffectOnView:(UIView *)view
-{
-    UIVisualEffect *blurEffect;
-    blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleDark];
     
     UIVisualEffectView *visualEffectView;
     visualEffectView = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
@@ -272,31 +209,83 @@
                 view.alpha = 0;
             } completion:^(BOOL finished) {
                 [view removeFromSuperview];
+                [self.navigationController setNavigationBarHidden:false animated:true];
             }];
         }
     }
 }
 
-- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-    [self.view endEditing:YES];
+- (void)closeViewController {
+    [self dismissViewControllerAnimated:true completion:nil];
 }
 
-- (void)showErrorDuringLoading
-{
-    ErrorLoadingView *errorView = [[[NSBundle mainBundle] loadNibNamed:@"ErrorLoadingView" owner:self options:nil] firstObject];
-    errorView.tag = 404;
+- (void)goToAlbumView:(Music *)music {
+    [self closePopUp];
+    AlbumViewController *vc = [[AlbumViewController alloc] initWithNibName:@"AlbumViewController" bundle:nil];
+    vc.album = [[Album alloc] init];
+    vc.album.identifier = music.albumId;
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+- (void)goToArtistView:(Music *)music {
+    [self closePopUp];
+    ArtistViewController *vc = [[ArtistViewController alloc] initWithNibName:@"ArtistViewController" bundle:nil];
+    vc.artist = music.artist;
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+- (void)deleteFromCurrentList:(Music *)music {
+    Music *m = [self.player.listeningList objectAtIndex:self.player.index];
+    if (m.identifier == music.identifier) {
+        [self.player pauseSound];
+        self.player.oldIndex = 0;
+        self.player.index = -20;
+    }
     
-    [self.view addSubview:errorView];
-}
-
-- (void)hideErrorDuringLoading
-{
+    for (int i = 0; i < self.player.listeningList.count; i++) {
+        Music *m = [self.player.listeningList objectAtIndex:i];
+        if (m.identifier == music.identifier) {
+            [self.player.listeningList removeObjectAtIndex:i];
+        }
+        
+    }
+    
+    NSMutableArray *listeningList = [[NSMutableArray alloc] init];
+    for (Music *m in self.player.listeningList) {
+        [listeningList addObject:m];
+    }
+    self.player.listeningList = listeningList;
+    
     for (UIView *view in self.view.subviews) {
-        if (view.tag == 404) {
-            [view removeFromSuperview];
+        if ([view isKindOfClass:[UITableView class]]) {
+            UITableView *tableView = (UITableView *)view;
+            [tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationFade];
         }
     }
 }
 
+- (void)launchShareView:(id)elem
+{
+    ShareActionSheet *actionSheet = [[ShareActionSheet alloc] initWithTitle:[self.translate.dict objectForKey:@"choose_social_network"] delegate:self cancelButtonTitle:@"Annuler" destructiveButtonTitle:nil otherButtonTitles:nil, nil];
+    
+    [actionSheet addButtonWithTitle:@"Facebook"];
+    [actionSheet addButtonWithTitle:@"Twitter"];
+    actionSheet.delegate = self;
+    actionSheet.elem = elem;
+    [actionSheet showInView:self.view];
+}
+
+- (void)actionSheet:(ShareActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+    switch (buttonIndex) {
+        case 1:
+            [SocialConnect shareOnFacebook:actionSheet.elem onVC:self];
+            break;
+        case 2:
+            [SocialConnect shareOnTwitter:actionSheet.elem onVC:self];
+            break;
+        default:
+            break;
+    }
+}
 
 @end

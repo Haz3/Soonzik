@@ -7,15 +7,28 @@
 //
 
 #import "VoteButton.h"
+#import "Tools.h"
+#import "SVGKImage.h"
 
 @implementation VoteButton
 
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect {
-    // Drawing code
+- (void)initButton:(User *)artist
+{
+    self.artist = artist;
+    self.image.image = [SVGKImage imageNamed:@"check"].UIImage;
+    
+    self.visualEffect.layer.cornerRadius = 20;
+    self.visualEffect.layer.borderWidth = 1;
+    self.visualEffect.layer.borderColor = [UIColor whiteColor].CGColor;
+    self.visualEffect.layer.masksToBounds = YES;
+    
+    UITapGestureRecognizer *reco = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(voteForArtist)];
+    [self addGestureRecognizer:reco];
 }
-*/
+
+- (void)voteForArtist
+{
+    [self.voteDelegate vote:self.artist];
+}
 
 @end

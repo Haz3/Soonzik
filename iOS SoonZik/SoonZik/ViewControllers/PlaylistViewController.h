@@ -10,11 +10,15 @@
 #import "TypeViewController.h"
 #import "OnLTMusicPopupView.h"
 #import "SWTableViewCell.h"
+#import "ReloadPlaylistsDelegate.h"
 
 @interface PlaylistViewController : TypeViewController <UITableViewDataSource, UITableViewDelegate, UIGestureRecognizerDelegate, PopUpDetailMusicDelegate>
 
-@property (nonatomic, weak) IBOutlet UITableView *playlistTableView;
+@property (nonatomic, strong) IBOutlet UITableView *playlistTableView;
 @property (nonatomic, strong) NSMutableArray *tracks;
 @property (nonatomic, strong) Playlist *playlist;
+@property (nonatomic, strong) UILabel *noContentLabel;
+
+@property (nonatomic, strong) id<ReloadPlaylistsDelegate> reloadDelegate;
 
 @end

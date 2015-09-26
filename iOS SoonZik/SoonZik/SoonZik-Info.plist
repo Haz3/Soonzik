@@ -2,6 +2,11 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
+	</dict>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
@@ -9,7 +14,7 @@
 	<key>CFBundleExecutable</key>
 	<string>${EXECUTABLE_NAME}</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.soonzik.${PRODUCT_NAME:rfc1034identifier}</string>
+	<string>com.soonzik.$(PRODUCT_NAME:rfc1034identifier)</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
@@ -29,7 +34,7 @@
 			<string>facebookConnect</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>fb1501598246776281</string>
+				<string>fb572371212865769</string>
 			</array>
 		</dict>
 		<dict>
@@ -47,8 +52,27 @@
 	</array>
 	<key>CFBundleVersion</key>
 	<string>1.0</string>
+	<key>Fabric</key>
+	<dict>
+		<key>APIKey</key>
+		<string>ead54f2a8d82acad8c0c88daeca2c428f24869d7</string>
+		<key>Kits</key>
+		<array>
+			<dict>
+				<key>KitInfo</key>
+				<dict>
+					<key>consumerKey</key>
+					<string>YQKxbcf48Z8MGPuFgzbr5fEsp</string>
+					<key>consumerSecret</key>
+					<string>Iy9s9c18mhA7f3jkINwO7sjzBikF92N4qm7P8gYlLf2qJFWfmK</string>
+				</dict>
+				<key>KitName</key>
+				<string>Twitter</string>
+			</dict>
+		</array>
+	</dict>
 	<key>FacebookAppID</key>
-	<string>1501598246776281</string>
+	<string>572371212865769</string>
 	<key>FacebookDisplayName</key>
 	<string>SoonZik</string>
 	<key>LSRequiresIPhoneOS</key>
@@ -84,5 +108,7 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>UIViewControllerBasedStatusBarAppearance</key>
+	<false/>
 </dict>
 </plist>

@@ -10,14 +10,10 @@
 
 @implementation SearchArtistTableViewCell
 
-- (void)awakeFromNib {
-    // Initialization code
+- (void)initCell:(User *)artist {
+    self.artistLabel.text = artist.username;
+    self.artistImage.image = [UIImage imageNamed:artist.image];
 }
-
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    [super setSelected:selected animated:animated];
-
-    // Configure the view for the selected state
-}
+    
 
 @end

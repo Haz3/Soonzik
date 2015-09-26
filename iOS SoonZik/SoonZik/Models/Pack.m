@@ -7,6 +7,7 @@
 //
 
 #import "Pack.h"
+#import "Description.h"
 
 @implementation Pack
 
@@ -24,7 +25,38 @@
         [self.listOfAlbums addObject:al];
     }
     
+    self.listOfDescriptions = [[NSMutableArray alloc] init];
+    NSArray *descriptions = [json objectForKey:@"descriptions"];
+    NSString *language = [[NSLocale preferredLanguages] objectAtIndex:0];
+    if ([language isEqualToString:@"en"]) {
+        for (NSDictionary *dict in descriptions) {
+            if ([[dict objectForKey:@"language"] isEqualToString:@"EN"]) {
+                Description *desc = [[Description alloc] initWithJsonObject:dict];
+                [self.listOfDescriptions addObject:desc];
+            }
+        }
+    } else if ([language isEqualToString:@"fr"]) {
+        for (NSDictionary *dict in descriptions) {
+            if ([[dict objectForKey:@"language"] isEqualToString:@"FR"]) {
+                Description *desc = [[Description alloc] initWithJsonObject:dict];
+                [self.listOfDescriptions addObject:desc];
+            }
+        }
+    }
+
+    
+    
     return self;
+}
+
++ (Pack *)getPack:(int)packID {
+    NSString *url = [NSString stringWithFormat:@"%@packs/%i", API_URL, packID];
+    NSDictionary *json = [Request getRequest:url];
+    NSDictionary *dict = [json objectForKey:@"content"];
+    
+    Pack *pack = [[Pack alloc] initWithJsonObject:dict];
+    
+    return pack;
 }
 
 @end

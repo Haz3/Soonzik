@@ -10,4 +10,8 @@
 
 @interface CollectionReusableView : UICollectionReusableView
 
+@property (nonatomic, strong) IBOutlet UILabel *titleL;
+@property (nonatomic, strong) IBOutlet UILabel *numberLabel;
+@property (nonatomic, strong) IBOutlet UIImageView *imageV;
+
 @end

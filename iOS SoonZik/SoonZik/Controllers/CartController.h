@@ -7,7 +7,13 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "Cart.h"
 
 @interface CartController : NSObject
+
++ (NSMutableArray *)getCart;
++ (Cart *)addToCart:(NSString *)type :(int)objId;
++ (BOOL)removeCart:(int)cartId;
++ (NSMutableArray *)giftCart:(int)cartId forUser:(int)userId;
 
 @end

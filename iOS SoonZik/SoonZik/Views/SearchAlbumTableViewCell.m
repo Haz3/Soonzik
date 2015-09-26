@@ -10,14 +10,9 @@
 
 @implementation SearchAlbumTableViewCell
 
-- (void)awakeFromNib {
-    // Initialization code
-}
-
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    [super setSelected:selected animated:animated];
-
-    // Configure the view for the selected state
+- (void)initCell:(Album *)album {
+    self.albumLabel.text = album.title;
+    self.albumImage.image = [UIImage imageNamed:album.image];
 }
 
 @end

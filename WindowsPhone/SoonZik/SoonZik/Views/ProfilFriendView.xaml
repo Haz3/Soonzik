@@ -38,7 +38,7 @@
 
         <!-- Grid 0 -->
         <Image x:Name="UserImage" Grid.Row="0" Height="100" Width="100" HorizontalAlignment="Left" Margin="20,0,0,0"
-               Source="{Binding CurrentUser.image}" />
+               Source="{Binding CurrentUser.profilImage}" />
         <TextBlock x:Name="FirstNameUser" Grid.Row="0" Height="50" Foreground="White" HorizontalAlignment="Right"
                    VerticalAlignment="Top" Margin="0, 20, 20, 0"
                    Text="{Binding CurrentUser.username}" FontSize="23" />

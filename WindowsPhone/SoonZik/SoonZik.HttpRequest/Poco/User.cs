@@ -26,7 +26,6 @@ namespace SoonZik.HttpRequest.Poco
         public Address address { get; set; }
         public ObservableCollection<User> friends { get; set; }
         public List<User> follows { get; set; }
-
         public List<Group> groups { get; set; }
         public BitmapImage profilImage { get; set; }
 

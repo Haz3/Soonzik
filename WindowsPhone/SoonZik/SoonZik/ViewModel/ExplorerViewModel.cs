@@ -1,9 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Windows.ApplicationModel.Core;
 using Windows.UI.Core;
+using Windows.UI.Popups;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using SoonZik.Controls;
@@ -100,65 +102,72 @@ namespace SoonZik.ViewModel
         {
             var request = new HttpRequestGet();
 
-            var listGenre = request.GetListObject(new List<Genre>(), "genres");
-            listGenre.ContinueWith(delegate(Task<object> tmp)
+            try
             {
-                var test = tmp.Result as List<Genre>;
-                if (test != null)
+                var listGenre = request.GetListObject(new List<Genre>(), "genres");
+                listGenre.ContinueWith(delegate(Task<object> tmp)
                 {
-                    foreach (var item in test)
+                    var test = tmp.Result as List<Genre>;
+                    if (test != null)
                     {
-                        CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
-                            () => { ListGenres.Add(item); });
-                    }
-                }
-            });
-            var listUser = request.GetListObject(new List<User>(), "users");
-            listUser.ContinueWith(delegate(Task<object> tmp)
-            {
-                var test = tmp.Result as List<User>;
-                if (test != null)
-                {
-                    foreach (var item in test)
-                    {
-                        var res = request.GetArtist(new Artist(), "users", item.id.ToString());
-                        res.ContinueWith(delegate(Task<object> obj)
+                        foreach (var item in test)
                         {
-                            CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+                            CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
+                                () => { ListGenres.Add(item); });
+                        }
+                    }
+                });
+                var listUser = request.GetListObject(new List<User>(), "users");
+                listUser.ContinueWith(delegate(Task<object> tmp)
+                {
+                    var test = tmp.Result as List<User>;
+                    if (test != null)
+                    {
+                        foreach (var item in test)
+                        {
+                            var res = request.GetArtist(new Artist(), "users", item.id.ToString());
+                            res.ContinueWith(delegate(Task<object> obj)
                             {
-                                var art = obj.Result as Artist;
-                                if (art != null && art.artist)
-                                    ListArtiste.Add(item);
+                                CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+                                {
+                                    var art = obj.Result as Artist;
+                                    if (art != null && art.artist)
+                                        ListArtiste.Add(item);
+                                });
                             });
+                        }
+                    }
+                });
+
+                var userKey = request.GetUserKey(Singleton.Instance().CurrentUser.id.ToString());
+                userKey.ContinueWith(delegate(Task<object> task)
+                {
+                    var key = task.Result as string;
+                    if (key != null)
+                    {
+                        var stringEncrypt = KeyHelpers.GetUserKeyFromResponse(key);
+                        _crypto = EncriptSha256.EncriptStringToSha256(Singleton.Instance().CurrentUser.salt + stringEncrypt);
+                        var listZik = request.GetSuggest(new List<Music>(), _crypto,
+                            Singleton.Instance().CurrentUser.id.ToString());
+                        listZik.ContinueWith(delegate(Task<object> tmp)
+                        {
+                            var test = tmp.Result as List<Music>;
+                            if (test != null)
+                            {
+                                foreach (var item in test)
+                                {
+                                    CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
+                                        () => { ListMusique.Add(item); });
+                                }
+                            }
                         });
                     }
-                }
-            });
-
-            var userKey = request.GetUserKey(Singleton.Instance().CurrentUser.id.ToString());
-            userKey.ContinueWith(delegate(Task<object> task)
+                });
+            }
+            catch (Exception e)
             {
-                var key = task.Result as string;
-                if (key != null)
-                {
-                    var stringEncrypt = KeyHelpers.GetUserKeyFromResponse(key);
-                    _crypto = EncriptSha256.EncriptStringToSha256(Singleton.Instance().CurrentUser.salt + stringEncrypt);
-                    var listZik = request.GetSuggest(new List<Music>(), _crypto,
-                        Singleton.Instance().CurrentUser.id.ToString());
-                    listZik.ContinueWith(delegate(Task<object> tmp)
-                    {
-                        var test = tmp.Result as List<Music>;
-                        if (test != null)
-                        {
-                            foreach (var item in test)
-                            {
-                                CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
-                                    () => { ListMusique.Add(item); });
-                            }
-                        }
-                    });
-                }
-            });
+                new MessageDialog("probleme reseau : " + e.Message).ShowAsync();
+            }
         }
 
         private void MusiCommandExecute()

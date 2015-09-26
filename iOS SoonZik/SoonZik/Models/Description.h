@@ -10,4 +10,8 @@
 
 @interface Description : ObjectFactory
 
+@property (nonatomic, assign) int identifier;
+@property (nonatomic, strong) NSString *text;
+@property (nonatomic, strong) NSString *language;
+
 @end

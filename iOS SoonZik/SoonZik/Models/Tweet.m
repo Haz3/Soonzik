@@ -10,4 +10,18 @@
 
 @implementation Tweet
 
+- (id)initWithJsonObject:(NSDictionary *)json {
+    self = [super init];
+    
+    self.identifier = [[json objectForKey:@"id"] intValue];
+    self.msg = [json objectForKey:@"msg"];
+    NSDateFormatter *dateformat = [[NSDateFormatter alloc] init];
+    [dateformat setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    dateformat.timeZone = [NSTimeZone timeZoneForSecondsFromGMT:1];
+    self.date = [dateformat dateFromString:[json objectForKey:@"created_at"]];
+    self.user = [[User alloc] initWithJsonObject:[json objectForKey:@"user"]];
+    
+    return self;
+}
+
 @end

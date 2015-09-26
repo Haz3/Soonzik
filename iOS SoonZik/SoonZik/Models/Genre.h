@@ -13,5 +13,6 @@
 @property (nonatomic, assign) int identifier;
 @property (nonatomic, strong) NSString *name;
 @property (nonatomic, strong) NSString *color;
+@property (nonatomic, strong) NSMutableArray *listOfMusics;
 
 @end

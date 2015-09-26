@@ -18,5 +18,8 @@
 @property (nonatomic, assign) float price;
 @property (nonatomic, strong) NSMutableArray *listOfAlbums;
 @property (nonatomic, strong) NSMutableArray *listOfComments;
+@property (nonatomic, strong) NSMutableArray *listOfDescriptions;
+
++ (Pack *)getPack:(int)packID;
 
 @end

@@ -7,6 +7,17 @@
 //
 
 #import "SearchViewController.h"
+#import "Factory.h"
+#import "Album.h"
+#import "Music.h"
+#import "User.h"
+#import "SearchAlbumTableViewCell.h"
+#import "SearchArtistTableViewCell.h"
+#import "SearchMusicTableViewCell.h"
+#import "AlbumViewController.h"
+#import "ArtistViewController.h"
+#import "SearchsController.h"
+#import "Pack.h"
 
 @interface SearchViewController ()
 
@@ -14,11 +25,21 @@
 
 @implementation SearchViewController
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [[UIApplication sharedApplication] setStatusBarHidden:false withAnimation:UIStatusBarAnimationNone];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
     
-    //[self.view setBackgroundColor:[UIColor colorWithRed:51/255.0f green:51/255.0f blue:51/255.0f alpha:1.0f]];
+    self.dataLoaded = NO;
+    
+    self.view.backgroundColor = BLUE_2;
+    
+    NSData *translateData = [[NSUserDefaults standardUserDefaults] objectForKey:@"Translate"];
+    self.translate = [NSKeyedUnarchiver unarchiveObjectWithData:translateData];
     
     self.searchBar.delegate = self;
     [[UITextField appearanceWhenContainedIn:[UISearchBar class], nil] setTextColor:[UIColor whiteColor]];
@@ -26,70 +47,199 @@
     self.tableView.delegate = self;
     self.tableView.hidden = YES;
     self.noResultLabel.hidden = NO;
+    self.noResultLabel.text = [self.translate.dict objectForKey:@"search_no_result"];
+    self.searchBar.placeholder = [self.translate.dict objectForKey:@"title_search"];
+    self.tableView.backgroundColor = [UIColor clearColor];
     
     self.tableData = [[NSMutableArray alloc] init];
-    self.filteredData = [[NSMutableArray alloc] init];
 }
 
+- (void)launchLoadData {
+    NSLog(@"Launching thread");
+    [NSThread detachNewThreadSelector:@selector(loadData) toTarget:self withObject:nil];
+}
+
+- (void) loadData {
+    self.dataLoaded = NO;
+    NSLog(@" thread launched");
+    [self loadDataFromAPI];
+    self.dataLoaded = YES;
+    [self.tableView reloadData];
+}
+
+- (void)loadDataFromAPI {
+    [NSThread detachNewThreadSelector: @selector(spinBegin) toTarget:self withObject:nil];
+    
+    self.search = [SearchsController getSearchResults:self.searchBar.text];
+    [self checkIfIsThereNoResult];
+    
+    [NSThread detachNewThreadSelector: @selector(spinEnd) toTarget:self withObject:nil];
+}
+
+- (void)spinBegin {
+    self.noResultLabel.hidden = YES;
+    self.spin = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
+    self.spin.center = self.view.center;
+    [self.view addSubview:self.spin];
+    //[self.tableView bringSubviewToFront:self.spin];
+    [self.tableView reloadData];
+    [self.spin startAnimating];
+}
+
+- (void)spinEnd {
+    [self.spin stopAnimating];
+}
+
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    //if (self.isFiltered == YES)
-    return self.filteredData.count;
-    //else
-    return [self.tableData count];
+    
+    switch (section) {
+        case 0:
+            return self.search.listOfMusics.count;
+            break;
+        case 1:
+            return self.search.listOfAlbums.count;
+            break;
+        case 2:
+            return self.search.listOfArtists.count;
+            break;
+        case 3:
+            return self.search.listOfUsers.count;
+            break;
+        case 4:
+            return self.search.listOfPacks.count;
+            break;
+        default:
+            break;
+    }
+    
+    return 0;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 1;
+    return 5;
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{
+    if ([tableView.dataSource tableView:tableView numberOfRowsInSection:section] == 0) {
+        return nil;
+    }
+    if (section == 0) {
+        return [self.translate.dict objectForKey:@"title_musics"];
+    } else if (section == 1) {
+        return [self.translate.dict objectForKey:@"title_albums"];
+    } else if (section == 2) {
+        return [self.translate.dict objectForKey:@"title_artists"];
+    } else if (section == 3) {
+        return [self.translate.dict objectForKey:@"title_users"];
+    }
+    
+    return [self.translate.dict objectForKey:@"title_packs"];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *cellIdentifier = @"cell";
-    
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-    if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+   if (indexPath.section == 0) {
+        Music *m = [self.search.listOfMusics objectAtIndex:indexPath.row];
+        static NSString *cellIdentifier = @"cellMusic";
+        
+        SearchMusicTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+        if (cell == nil) {
+            cell = (SearchMusicTableViewCell *)[[[NSBundle mainBundle] loadNibNamed:@"SearchMusicTableViewCell" owner:self options:nil] lastObject];
+            [cell initCell:m];
+            cell.backgroundColor = [UIColor clearColor];
+            cell.tag = 0;
+        }
+       return cell;
+    }
+    else if (indexPath.section == 1) {
+        Album *a = [self.search.listOfAlbums objectAtIndex:indexPath.row];
+        static NSString *cellIdentifier = @"cellAlbum";
+        
+        SearchAlbumTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+        if (cell == nil) {
+            cell = (SearchAlbumTableViewCell *)[[[NSBundle mainBundle] loadNibNamed:@"SearchAlbumTableViewCell" owner:self options:nil] lastObject];
+            [cell initCell:a];
+            cell.backgroundColor = [UIColor clearColor];
+            cell.tag = 1;
+        }
+        return cell;
+    }
+    else if (indexPath.section == 2) {
+        User *a = [self.search.listOfArtists objectAtIndex:indexPath.row];
+        static NSString *cellIdentifier = @"cellArtist";
+        
+        SearchArtistTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+        if (cell == nil) {
+            cell = (SearchArtistTableViewCell *)[[[NSBundle mainBundle] loadNibNamed:@"SearchArtistTableViewCell" owner:self options:nil] lastObject];
+            [cell initCell:a];
+            cell.backgroundColor = [UIColor clearColor];
+            cell.tag = 2;
+        }
+        return cell;
+    } else if (indexPath.section == 3) {
+        User *a = [self.search.listOfUsers objectAtIndex:indexPath.row];
+        static NSString *cellIdentifier = @"cellUser";
+        
+        SearchArtistTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+        if (cell == nil) {
+            cell = (SearchArtistTableViewCell *)[[[NSBundle mainBundle] loadNibNamed:@"SearchArtistTableViewCell" owner:self options:nil] lastObject];
+            [cell initCell:a];
+            cell.backgroundColor = [UIColor clearColor];
+            cell.tag = 3;
+        }
+        return cell;
     }
     
-    /*Element *e;
-     if (self.isFiltered == YES) {
-     e = [self.filteredData objectAtIndex:indexPath.row];
-     } else {
-     e = [self.tableData objectAtIndex:indexPath.row];
-     }
-     
-     cell.textLabel.text = e.title;*/
+    Pack *a = [self.search.listOfPacks objectAtIndex:indexPath.row];
+    static NSString *cellIdentifier = @"cellPack";
+    
+    SearchMusicTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    if (cell == nil) {
+        cell = (SearchMusicTableViewCell *)[[[NSBundle mainBundle] loadNibNamed:@"SearchMusicTableViewCell" owner:self options:nil] lastObject];
+        [cell initCell:a];
+        cell.backgroundColor = [UIColor clearColor];
+        cell.tag = 4;
+    }
     
     return cell;
 }
 
-- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    self.noResultLabel.hidden = YES;
-    self.tableView.hidden = NO;
-    if ([searchText length] == 0) {
-        //self.isFiltered = NO;
-    } else {
-        /*self.isFiltered = YES;
-         
-         self.filteredData = [[NSMutableArray alloc] init];
-         
-         for (Element *e in self.tableData) {
-         NSString *value = e.title;
-         NSRange valueRange = [value rangeOfString:searchText options:NSCaseInsensitiveSearch];
-         
-         if (valueRange.location != NSNotFound) {
-         [self.filteredData addObject:e];
-         }
-         }*/
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    if (cell.tag == 0) {
+        Music *music = [self.search.listOfMusics objectAtIndex:indexPath.row];
+        Album *album = [[Album alloc] init];
+        album.identifier = music.albumId;
+        [self.delegate elementClicked:album];
+    } else if (cell.tag == 1) {
+       [self.delegate elementClicked:[self.search.listOfAlbums objectAtIndex:indexPath.row]];
+    } else if (cell.tag == 2) {
+        [self.delegate elementClicked:[self.search.listOfArtists objectAtIndex:indexPath.row]];
+    } else if (cell.tag == 3) {
+        [self.delegate elementClicked:[self.search.listOfUsers objectAtIndex:indexPath.row]];
+    } else if (cell.tag == 4) {
+        [self.delegate elementClicked:[self.search.listOfPacks objectAtIndex:indexPath.row]];
     }
-    //[self.tableView reloadData];
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
     [self.searchBar resignFirstResponder];
+}
+
+- (void)checkIfIsThereNoResult {
+    if (self.search.listOfAlbums.count > 0 || self.search.listOfArtists.count > 0 || self.search.listOfMusics > 0 || self.search.listOfUsers > 0 || self.search.listOfPacks > 0) {
+        self.noResultLabel.hidden = YES;
+        self.tableView.hidden = NO;
+    } else {
+        self.noResultLabel.hidden = NO;
+        [self.tableView setHidden:YES];
+    }
 }
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
@@ -99,6 +249,8 @@
         self.noResultLabel.hidden = NO;
     }
     [searchBar resignFirstResponder];
+    //self.dataLoaded = NO;
+    [self launchLoadData];
 }
 
 @end

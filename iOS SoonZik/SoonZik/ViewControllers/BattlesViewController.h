@@ -7,7 +7,14 @@
 //
 
 #import "TypeViewController.h"
+#import "Battle.h"
 
-@interface BattlesViewController : TypeViewController
+@interface BattlesViewController : TypeViewController <UITableViewDataSource, UITableViewDelegate>
+
+@property (nonatomic, strong) UITableView *tableView;
+@property (nonatomic, strong) NSMutableArray *listOfBattles;
+
+@property (nonatomic, assign) bool dataLoaded;
+@property (nonatomic, strong) UIActivityIndicatorView *spin;
 
 @end

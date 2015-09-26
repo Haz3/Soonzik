@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Cart.h"
 
 @interface CartGiftButton : UIButton
+
+@property (nonatomic, strong) Cart *cart;
 
 @end

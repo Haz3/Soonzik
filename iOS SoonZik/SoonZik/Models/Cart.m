@@ -7,17 +7,31 @@
 //
 
 #import "Cart.h"
+#import "Album.h"
 
 @implementation Cart
 
-+ (id)initWithJsonObject:(NSDictionary *)json
+- (id)initWithJsonObject:(NSDictionary *)json
 {
-    return nil;
-}
-
-- (void)validCart
-{
+    self = [super init];
     
+    self.albums = [[NSMutableArray alloc] init];
+    self.musics = [[NSMutableArray alloc] init];
+    
+    NSArray *albums = [json objectForKey:@"albums"];
+    NSArray *musics = [json objectForKey:@"musics"];
+    self.identifier = [[json objectForKey:@"id"] intValue];
+    if (albums.count != 0) {
+        NSLog(@"UN ALBUM");
+        [self.albums addObject:[[Album alloc] initWithJsonObject:[albums firstObject]]];
+        self.type = 1;
+    } else if (musics.count != 0) {
+        NSLog(@"UNE MUSIQUE");
+        [self.musics addObject:[[Music alloc] initWithJsonObject:[musics firstObject]]];
+        self.type = 2;
+    }
+    
+    return self;
 }
 
 @end

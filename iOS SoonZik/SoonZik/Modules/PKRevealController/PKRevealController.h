@@ -123,6 +123,9 @@ FOUNDATION_EXTERN NSString * const PKRevealControllerRecognizesResetTapOnFrontVi
 /// The controller's delegate, conforming to the PKRevealing protocol.
 @property (nonatomic, weak, readwrite) id<PKRevealing> delegate;
 
+- (void)showRightViewController;
+- (void)showLeftViewController;
+
 #pragma mark - Methods
 /**
  Convenience initializer. Use if both left and right rear views are used.

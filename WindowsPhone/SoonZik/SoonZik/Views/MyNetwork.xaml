@@ -8,6 +8,7 @@
     xmlns:core="using:Microsoft.Xaml.Interactions.Core"
     xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
     mc:Ignorable="d"
+    xmlns:local="using:SoonZik.Utils"
     DataContext="{StaticResource MyNetworkViewModel}"
     Background="Transparent">
 
@@ -29,7 +30,7 @@
                     <RowDefinition Height="50" />
                     <RowDefinition Height="20" />
                 </Grid.RowDefinitions>
-                <TextBlock Grid.Row="0" Text="{Binding Path=msg}" Foreground="White" FontSize="15" TextWrapping="Wrap" />
+                <TextBlock local:TextBlockExtension.FormattedText="{Binding Path=msg}" Grid.Row="0" Foreground="White" FontSize="15" TextWrapping="Wrap" />
                 <TextBlock Grid.Row="1" Text="{Binding Path=user.username}" Foreground="White" FontSize="10"
                            TextAlignment="Right" Margin="0,0,45,0" />
             </Grid>

@@ -7,14 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "MusicOptionsButton.h"
 
 @interface AlbumTableViewCell : UITableViewCell
 
-@property (nonatomic, weak) IBOutlet UILabel *musicTitle;
-@property (nonatomic, weak) IBOutlet UILabel *musicLength;
-@property (nonatomic, weak) IBOutlet MusicOptionsButton *optionsButton;
-
-- (void)initCell;
+@property (nonatomic, strong) IBOutlet UILabel *albumLabel;
+@property (nonatomic, strong) IBOutlet UIImageView *albumImage;
 
 @end

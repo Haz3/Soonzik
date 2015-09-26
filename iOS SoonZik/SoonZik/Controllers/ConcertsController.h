@@ -10,4 +10,6 @@
 
 @interface ConcertsController : NSObject
 
++ (NSMutableArray *)getConcerts;
+
 @end

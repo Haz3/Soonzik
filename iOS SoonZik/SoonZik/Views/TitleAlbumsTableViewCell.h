@@ -10,8 +10,8 @@
 
 @interface TitleAlbumsTableViewCell : UITableViewCell
 
-@property (nonatomic, weak) IBOutlet UIImageView *albumImage;
-@property (nonatomic, weak) IBOutlet UILabel *albumTitle;
-@property (nonatomic, weak) IBOutlet UILabel *albumArtist;
+@property (nonatomic, strong) IBOutlet UIImageView *albumImage;
+@property (nonatomic, strong) IBOutlet UILabel *albumTitle;
+@property (nonatomic, strong) IBOutlet UILabel *albumArtist;
 
 @end

@@ -6,17 +6,22 @@
 //  Copyright (c) 2014 Coordina. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
 #import "Album.h"
 #import "AudioPlayer.h"
 #import "OnLTMusicPopupView.h"
+#import "TypeViewController.h"
 
-@interface AlbumViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, PopUpDetailMusicDelegate>
+@interface AlbumViewController : TypeViewController <UITableViewDataSource, UITableViewDelegate, PopUpDetailMusicDelegate, UIAlertViewDelegate>
 
-@property (nonatomic, weak) IBOutlet UITableView *tableview;
-
+@property (nonatomic, strong) IBOutlet UITableView *tableview;
+@property (nonatomic, strong) IBOutlet UIVisualEffectView *visualView;
 @property (nonatomic, strong) Album *album;
-@property (nonatomic, strong) AudioPlayer *player;
 @property (nonatomic, strong) NSMutableArray *listOfMusics;
+@property (nonatomic, assign) bool fromSearch;
+@property (nonatomic, assign) bool fromCurrentList;
+@property (nonatomic, assign) bool fromPack;
+
+@property (nonatomic, assign) bool dataLoaded;
+@property (nonatomic, strong) UIActivityIndicatorView *spin;
 
 @end

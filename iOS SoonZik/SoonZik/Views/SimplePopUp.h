@@ -8,6 +8,19 @@
 
 #import <UIKit/UIKit.h>
 
+
 @interface SimplePopUp : UIView
+
+- (id)initWithMessage:(NSString *)message onView:(UIView *)view;
+- (id)initWithMessage:(NSString *)message onView:(UIView *)view withSuccess:(BOOL)success;
+- (void)show;
+
+@property (nonatomic, assign) float popUpH;
+@property (nonatomic, assign) float popUpW;
+@property (nonatomic, assign) float screenH;
+@property (nonatomic, assign) float screenW;
+@property (nonatomic, assign) float finalYPos;
+
+@property (nonatomic, strong) UIView *parentView;
 
 @end

@@ -27,15 +27,7 @@
         int i = 0;
         for (NSDictionary *music in musics) {
             Music *m = [[Music alloc] initWithJsonObject:music];
-            m.image = self.image;
-            Album *album = [[Album alloc] init];
-            album.identifier = self.identifier;
-            album.image = self.image;
-            album.price = self.price;
-            album.title = self.title;
-            album.artist = self.artist;
-            m.album = [[NSMutableArray alloc] init];
-            [m.album addObject:album];
+            m.albumImage = self.image;
             [self.listOfMusics addObject:m];
             i++;
         }

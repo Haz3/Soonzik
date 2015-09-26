@@ -10,11 +10,11 @@
 #import "SWTableViewCell.h"
 #import "MusicOptionsButton.h"
 
-@interface PlayListsCells : UITableViewCell// SWTableViewCell
+@interface PlayListsCells : UITableViewCell
 
-@property (nonatomic, weak) IBOutlet UILabel *trackTitle;
-@property (nonatomic, weak) IBOutlet UILabel *trackArtist;
-@property (nonatomic, weak) IBOutlet MusicOptionsButton *optionsButton;
+@property (nonatomic, strong) IBOutlet UILabel *trackTitle;
+@property (nonatomic, strong) IBOutlet UILabel *trackArtist;
+@property (nonatomic, strong) IBOutlet MusicOptionsButton *optionsButton;
 
 - (void)initCell;
 

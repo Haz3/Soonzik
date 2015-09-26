@@ -8,8 +8,20 @@
 
 #import "TypeViewController.h"
 
-@interface ExploreViewController : TypeViewController <UICollectionViewDataSource, UICollectionViewDelegate>
+@interface ExploreViewController : TypeViewController <UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate>
 
-@property (nonatomic, weak) IBOutlet UICollectionView *collectionView;
+@property (nonatomic, strong) UITableView *influencesTableView;
+@property (nonatomic, strong) UITableView *artistsTableView;
+@property (nonatomic, strong) UITableView *concertsTableView;
+@property (nonatomic, strong) NSArray *listOfInfluences;
+@property (nonatomic, strong) NSArray *listOfConcerts;
+@property (nonatomic, strong) UIScrollView *scrollView;
+
+@property (nonatomic, assign) bool dataLoaded;
+@property (nonatomic, strong) UIActivityIndicatorView *spin;
+
+@end
+
+@interface CustomLabel : UILabel
 
 @end

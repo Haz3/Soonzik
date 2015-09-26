@@ -7,6 +7,13 @@
 //
 
 #import "CartViewController.h"
+#import "CartController.h"
+#import "Album.h"
+#import "SVGKImage.h"
+#import "CartDeleteButton.h"
+#import "SimplePopUp.h"
+#import "Tools.h"
+#import "AppDelegate.h"
 
 @interface CartViewController ()
 
@@ -14,24 +21,281 @@
 
 @implementation CartViewController
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
+    
+    self.tableView.dataSource = self;
+    self.tableView.delegate = self;
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    self.tableView.backgroundColor = [UIColor clearColor];
+    self.view.backgroundColor = DARK_GREY;
+    
+    if (!self.fromMenu) {
+        UIImage *searchImage = [Tools imageWithImage:[SVGKImage imageNamed:@"search"].UIImage scaledToSize:CGSizeMake(30, 30)];
+        UIBarButtonItem *searchButton = [[UIBarButtonItem alloc] initWithImage:searchImage style:UIBarButtonItemStylePlain target:self action:@selector(presentRightMenuViewController)];
+        searchButton.tintColor = [UIColor whiteColor];
+        self.navigationItem.rightBarButtonItem = searchButton;
+        self.navigationItem.leftBarButtonItems = nil;
+    }
+    
+    self.carts = [CartController getCart];
+    self.musics = [self getMusics];
+    self.albums = [self getAlbums];
+    
+    NSLog(@"self.musics.count : %i", self.musics.count);
+    NSLog(@"self.albums.count : %i", self.albums.count);
+    
+    if (self.musics.count == 0 && self.albums.count == 0) {
+        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, self.view.frame.size.width - 20, self.view.frame.size.height / 2)];
+        label.textAlignment = NSTextAlignmentCenter;
+        label.textColor = [UIColor whiteColor];
+        label.text = @"Votre panier est vide";
+        label.font = SOONZIK_FONT_BODY_BIG;
+        [self.view addSubview:label];
+        [self.tableView removeFromSuperview];
+    }
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (void)presentRightMenuViewController {
+    AppDelegate *app = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    [app.revealController showRightViewController];
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (void)closeViewController {
+    [self dismissViewControllerAnimated:true completion:nil];
 }
-*/
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.section == 0) {
+        if (self.albums.count > 0) {
+            return 70;
+        } else if (self.musics.count > 0) {
+            return 70;
+        }
+    } else if (indexPath.section == 1 && ([self getNumberOfSections] != 1)) {
+        if (self.musics.count > 0) {
+            return 70;
+        } else {
+            return 44;
+        }
+    }
+    
+    return 44;
+}
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    NSLog(@"number of sections : %i", [self getNumberOfSections]);
+    return [self getNumberOfSections]+1;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+   if (section == 0) {
+        if (self.albums.count > 0) {
+            return self.albums.count;
+        } else if (self.musics.count > 0) {
+            return self.musics.count;
+        }
+    } else if (section == 1 && ([self getNumberOfSections] != 1)) {
+        if (self.musics.count > 0) {
+            return self.musics.count;
+        } else {
+            return 1;
+        }
+    }
+    
+    return 1;
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+   if (section == 0) {
+        if (self.albums.count > 0) {
+            return @"Albums";
+        } else if (self.musics.count > 0) {
+            return @"Musiques";
+        }
+    } else if (section == 1 && ([self getNumberOfSections] != 1)) {
+        if (self.musics.count > 0) {
+            return @"Musiques";
+        } else {
+            return @"";
+        }
+    }
+    
+    return @"";
+}
+
+- (int)getNumberOfSections {
+    int cpt = 0;
+    if (self.albums.count > 0)
+        cpt++;
+    if (self.musics.count > 0)
+        cpt++;
+    
+    return cpt;
+}
+
+- (float)getTotalPrice {
+    float price = 0;
+    for (Cart *cart in self.albums) {
+        Album *album = [cart.albums firstObject];
+        price += album.price;
+    }
+    for (Cart *cart in self.musics) {
+        Music *music = [cart.musics firstObject];
+        price += music.price;
+    }
+    
+    return price;
+}
+
+- (NSMutableArray *)getAlbums {
+    NSMutableArray *albums = [NSMutableArray new];
+    for (Cart *cart in self.carts) {
+        if (cart.type == 1) {
+            [albums addObject:cart];
+        }
+    }
+    
+    return albums;
+}
+
+- (NSMutableArray *)getMusics {
+    NSMutableArray *musics = [NSMutableArray new];
+    for (Cart *cart in self.carts) {
+        if (cart.type == 2) {
+            [musics addObject:cart];
+        }
+    }
+    
+    return musics;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.section == 0) {
+        if (self.albums.count > 0) {
+            CartItemTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cellItem"];
+            if (!cell) {
+                [self.tableView registerNib:[UINib nibWithNibName:@"CartItemTableViewCell" bundle:nil] forCellReuseIdentifier:@"cellItem"];
+                cell = [tableView dequeueReusableCellWithIdentifier:@"cellItem"];
+            }
+            Cart *cart = [self.albums objectAtIndex:indexPath.row];
+            Album *album = [cart.albums firstObject];
+            cell.titleLabel.text = album.title;
+            cell.artistLabel.text = album.artist.username;
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            [cell.deleteButton setImage:[SVGKImage imageNamed:@"delete"].UIImage forState:UIControlStateNormal];
+            [cell.deleteButton addTarget:self action:@selector(deleteCart:) forControlEvents:UIControlEventTouchUpInside];
+            cell.deleteButton.cart = cart;
+            cell.titleLabel.textColor = [UIColor whiteColor];
+            cell.artistLabel.textColor = [UIColor whiteColor];
+            cell.backgroundColor = [UIColor clearColor];
+            
+            return cell;
+        } else if (self.musics.count > 0) {
+            CartItemTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cellItem"];
+            if (!cell) {
+                [self.tableView registerNib:[UINib nibWithNibName:@"CartItemTableViewCell" bundle:nil] forCellReuseIdentifier:@"cellItem"];
+                cell = [tableView dequeueReusableCellWithIdentifier:@"cellItem"];
+            }
+            Cart *cart = [self.musics objectAtIndex:indexPath.row];
+            Music *music = [cart.musics firstObject];
+            cell.titleLabel.text = music.title;
+            cell.artistLabel.text = music.artist.username;
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            [cell.deleteButton setImage:[SVGKImage imageNamed:@"delete"].UIImage forState:UIControlStateNormal];
+            [cell.deleteButton addTarget:self action:@selector(deleteCart:) forControlEvents:UIControlEventTouchUpInside];
+            cell.deleteButton.cart = cart;
+            cell.titleLabel.textColor = [UIColor whiteColor];
+            cell.artistLabel.textColor = [UIColor whiteColor];
+            cell.backgroundColor = [UIColor clearColor];
+            
+            return cell;
+        }
+    } else if (indexPath.section == 1 && ([self getNumberOfSections] != 1)){
+        if (self.musics.count > 0) {
+            CartItemTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cellItem"];
+            if (!cell) {
+                [self.tableView registerNib:[UINib nibWithNibName:@"CartItemTableViewCell" bundle:nil] forCellReuseIdentifier:@"cellItem"];
+                cell = [tableView dequeueReusableCellWithIdentifier:@"cellItem"];
+            }
+            Cart *cart = [self.musics objectAtIndex:indexPath.row];
+            Music *music = [cart.musics firstObject];
+            cell.titleLabel.text = music.title;
+            cell.artistLabel.text = music.artist.username;
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            [cell.deleteButton setImage:[SVGKImage imageNamed:@"delete"].UIImage forState:UIControlStateNormal];
+            [cell.deleteButton addTarget:self action:@selector(deleteCart:) forControlEvents:UIControlEventTouchUpInside];
+            cell.deleteButton.cart = cart;
+            cell.titleLabel.textColor = [UIColor whiteColor];
+            cell.artistLabel.textColor = [UIColor whiteColor];
+            cell.backgroundColor = [UIColor clearColor];
+            
+            return cell;
+        } else {
+            UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cellTotal"];
+            if (!cell) {
+                cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"cellTotal"];
+            }
+            cell.detailTextLabel.text = @"prix total : ";
+            cell.textLabel.text = [NSString stringWithFormat:@"%.1f", [self getTotalPrice]];
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            cell.accessoryView = nil;
+            cell.backgroundColor = [UIColor clearColor];
+            cell.detailTextLabel.textColor = [UIColor whiteColor];
+            cell.textLabel.textColor = [UIColor whiteColor];
+            
+            return cell;
+        }
+    }
+    
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cellTotal"];
+    if (!cell) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"cellTotal"];
+    }
+    cell.detailTextLabel.text = @"prix total : ";
+    cell.textLabel.text = [NSString stringWithFormat:@"%.1f", [self getTotalPrice]];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    cell.accessoryView = nil;
+    cell.backgroundColor = [UIColor clearColor];
+    cell.detailTextLabel.textColor = [UIColor whiteColor];
+    cell.textLabel.textColor = [UIColor whiteColor];
+    
+    return cell;
+}
+
+- (void)deleteCart:(CartDeleteButton *)button {
+    NSLog(@"delete item : %@", button);
+    if ([CartController removeCart:button.cart.identifier]) {
+        [[[SimplePopUp alloc] initWithMessage:@"suppression reussie" onView:self.view withSuccess:true] show];
+        self.carts = [CartController getCart];
+        self.musics = [self getMusics];
+        self.albums = [self getAlbums];
+        [self checkCells];
+        [self.tableView reloadData];
+        
+        if (self.musics.count == 0 && self.albums.count == 0) {
+            UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, self.view.frame.size.width - 20, self.view.frame.size.height / 2)];
+            label.textAlignment = NSTextAlignmentCenter;
+            label.textColor = [UIColor whiteColor];
+            label.text = @"Votre panier est vide";
+            label.font = SOONZIK_FONT_BODY_BIG;
+            [self.view addSubview:label];
+            [self.tableView removeFromSuperview];
+        }
+    } else {
+        [[[SimplePopUp alloc] initWithMessage:@"erreur de suppression" onView:self.view withSuccess:false] show];
+    }
+    
+}
+
+- (void)checkCells {
+    if ([self getNumberOfSections] == 0){
+        [self dismissViewControllerAnimated:true completion:nil];
+    }
+}
 
 @end

@@ -10,4 +10,9 @@
 
 @interface FriendCollectionViewCell : UICollectionViewCell
 
+@property (nonatomic, strong) IBOutlet UIImageView *imageV;
+@property (nonatomic, strong) IBOutlet UILabel *nameLabel;
+
+- (void)initCell;
+
 @end

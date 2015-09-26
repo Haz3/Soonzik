@@ -10,9 +10,20 @@
 
 @implementation Concert
 
-+ (id)initWithJsonObject:(NSDictionary *)json
+- (id)initWithJsonObject:(NSDictionary *)json
 {
-    return nil;
+    self = [super init];
+    
+    self.identifier = [[json objectForKey:@"id"] intValue];
+    NSDateFormatter *dateformat = [[NSDateFormatter alloc] init];
+    [dateformat setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    dateformat.timeZone = [NSTimeZone timeZoneForSecondsFromGMT:1];
+    self.date = [dateformat dateFromString:[json objectForKey:@"planification"]];
+    self.url = [json objectForKey:@"url"];
+    self.user = [[User alloc] initWithJsonObject:[json objectForKey:@"user"]];
+    self.address = [[Address alloc] initWithJsonObject:[json objectForKey:@"address"]];
+    
+    return self;
 }
 
 @end

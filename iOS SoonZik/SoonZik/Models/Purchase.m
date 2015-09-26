@@ -10,4 +10,10 @@
 
 @implementation Purchase
 
+- (id) initWithJsonObject:(NSDictionary *)json {
+    self = [super init];
+    
+    return self;
+}
+
 @end

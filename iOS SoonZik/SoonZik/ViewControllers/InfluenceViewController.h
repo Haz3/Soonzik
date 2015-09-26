@@ -6,8 +6,12 @@
 //  Copyright (c) 2015 SoonZik - Maxime SAUVAGE. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "TypeViewController.h"
+#import "Influence.h"
 
-@interface InfluenceViewController : UIViewController
+@interface InfluenceViewController : TypeViewController <UITableViewDataSource, UITableViewDelegate>
+
+@property (nonatomic, strong) Influence *influence;
+@property (nonatomic, strong) UITableView *tableView;
 
 @end

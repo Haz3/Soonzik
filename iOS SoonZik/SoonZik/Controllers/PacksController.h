@@ -7,7 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "Pack.h"
 
 @interface PacksController : NSObject
+
++ (Pack *)getPack:(int)packID;
 
 @end

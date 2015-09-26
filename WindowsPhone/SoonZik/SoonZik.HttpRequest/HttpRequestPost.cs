@@ -64,7 +64,7 @@ namespace SoonZik.HttpRequest
         {
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(ApiUrl + "users/update/");
             var postData = "user[email]=" + myUser.email + "&user[username]=" + myUser.username + "&user[birthday]=" + myUser.birthday
-                + "&user[language]=" + myUser.language + "&user[fname]=" + myUser.fname + "&user[lname]=" + myUser.lname + "&user[desciption]=" + myUser.description
+                + "&user[language]=" + myUser.language + "&user[fname]=" + myUser.fname + "&user[lname]=" + myUser.lname + "&user[description]=" + myUser.description
                 + "&user[phoneNumber]=" + myUser.phoneNumber + "&address[numberStreet]=" + myUser.address.NumberStreet + "&address[complement]=" + myUser.address.Complement
                 + "&address[street]=" + myUser.address.Street
                 + "&address[city]=" + myUser.address.City + "&address[country]=" + myUser.address.Country + "&address[zipcode]=" + myUser.address.Zipcode

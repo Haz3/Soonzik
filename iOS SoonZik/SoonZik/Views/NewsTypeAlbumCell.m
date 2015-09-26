@@ -7,29 +7,19 @@
 //
 
 #import "NewsTypeAlbumCell.h"
+#import "Tools.h"
+#import "SVGKImage.h"
 #import <QuartzCore/QuartzCore.h>
 
 @implementation NewsTypeAlbumCell
-
-- (void)awakeFromNib
-{
-    // Initialization code
-}
-
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated
-{
-    [super setSelected:selected animated:animated];
-
-    // Configure the view for the selected state
-}
 
 - (void)initCellWithNews:(News *)news
 {
     self.news = news;
     
-    CGFloat borderWidth = 0.5;
-    self.cellContent.layer.borderColor = [UIColor grayColor].CGColor;
-    self.cellContent.layer.borderWidth = borderWidth;
+    self.backgroundColor = [UIColor whiteColor];
+    self.layer.borderColor = [UIColor grayColor].CGColor;
+    self.layer.borderWidth = 0.5;
     
     [self.shareButton addTarget:self action:@selector(launchShareView) forControlEvents:UIControlEventTouchUpInside];
     
@@ -40,7 +30,7 @@
 
 - (void)launchShareView
 {
-    [self.shareDelegate launchShareViewWithNews:self.news andCell:self];
+    [self.shareDelegate launchShareView:self.news];
 }
 
 @end

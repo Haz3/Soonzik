@@ -88,6 +88,7 @@
     <Compile Include="Poco\Artist.cs" />
     <Compile Include="Poco\ArtistOne.cs" />
     <Compile Include="Poco\ArtistTwo.cs" />
+    <Compile Include="Poco\Attachment.cs" />
     <Compile Include="Poco\Battle.cs" />
     <Compile Include="Poco\Carts.cs" />
     <Compile Include="Poco\Comments.cs" />

@@ -7,78 +7,410 @@
 //
 
 #import "AppDelegate.h"
-
-#import "FirstLaunchViewController.h"
 #import "ConnexionViewController.h"
 #import "HomeViewController.h"
 #import "SocialConnect.h"
-//#import "GPPURLHandler.h"
+#import "SearchViewController.h"
+#import "PackDetailViewController.h"
+#import "SVGKImage.h"
+#import "Tools.h"
+#import "Pack.h"
+#import <Fabric/Fabric.h>
+#import <TwitterKit/TwitterKit.h>
+#import <GooglePlus/GPPURLHandler.h>
+#import "Translate.h"
+#import "UsersController.h"
+#import "UserViewController.h"
+#import "CartViewController.h"
+#import "IdenticationsController.h"
+
+@interface AppDelegate() <PKRevealing, UITableViewDataSource, UITableViewDelegate, SearchElementInterface>
+
+@end
 
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    NSData *userData = [[NSUserDefaults standardUserDefaults] objectForKey:@"User"];
+    self.user = [NSKeyedUnarchiver unarchiveObjectWithData:userData];
+    
+    NSData *translateData = [[NSUserDefaults standardUserDefaults] objectForKey:@"Translate"];
+    self.translate = [NSKeyedUnarchiver unarchiveObjectWithData:translateData];
+    if (translateData == nil) {
+        NSLog(@"translateData is nil");
+        [self getTranslationFile];
+    }
+    
+    NSLog(@"%@", [self.translate.dict objectForKey:@"menu_news"]);
+    
+    [self initializeMenuSystem];
+    
+    [self initThePlayer];
+    [self initBasicGraphics];
+    
+    [[Twitter sharedInstance] startWithConsumerKey:@"jwRxE6l8j6t0uGGNjEaMPfYEG" consumerSecret:@"2770ueiokY2QLNYcykUFJfHUrr0avop7TsIlsJUE3FtKxaM4P0"];
+    [Fabric with:@[[Twitter sharedInstance]]];
+    
+    if (self.user.identifier != 0) {
+        [self launchHome];
+    } else {
+       [self launchConnexion];
+    }
+    
+    return YES;
+}
+
+- (void)initializeMenuSystem {
+    self.homeVC = [[UINavigationController alloc] initWithRootViewController:[[HomeViewController alloc] initWithNibName:@"HomeViewController" bundle:nil]];
+    self.exploreVC = [[UINavigationController alloc] initWithRootViewController:[[ExploreViewController alloc] initWithNibName:@"ExploreViewController" bundle:nil]];
+    self.packVC = [[UINavigationController alloc] initWithRootViewController:[[PackViewController alloc] initWithNibName:@"PackViewController" bundle:nil]];
+    self.geoVC = [[UINavigationController alloc] initWithRootViewController:[[GeolocationViewController alloc] initWithNibName:@"GeolocationViewController" bundle:nil]];
+    self.accountVC = [[UINavigationController alloc] initWithRootViewController:[[AccountViewController alloc] initWithNibName:@"AccountViewController" bundle:nil]];
+    
+    self.friendsVC = [[UINavigationController alloc] initWithRootViewController:[[FriendsViewController alloc] initWithNibName:@"FriendsViewController" bundle:nil]];
+    self.battleVC = [[UINavigationController alloc] initWithRootViewController:[[BattlesViewController alloc] init]];
+    self.contentVC = [[UINavigationController alloc] initWithRootViewController:[[ContentViewController alloc] initWithNibName:@"ContentViewController" bundle:nil]];
+    CartViewController *cart = [[CartViewController alloc] initWithNibName:@"CartViewController" bundle:nil];
+    cart.fromMenu = true;
+    self.cartVC = [[UINavigationController alloc] initWithRootViewController:cart];
+    
+    UINavigationController *frontNavigationController = self.homeVC;
+    self.searchVC = [[SearchViewController alloc] initWithNibName:@"SearchViewController" bundle:nil];
+    self.searchVC.delegate = self;
+    
+    self.revealController = [PKRevealController revealControllerWithFrontViewController:frontNavigationController
+                                                                     leftViewController:[self leftViewController]
+                                                                    rightViewController:self.searchVC];
+    self.revealController.delegate = self;
+    self.revealController.animationDuration = 0.25;
+}
+
+- (void)getTranslationFile {
+    NSString *language = [[NSLocale preferredLanguages] objectAtIndex:0];
+    NSArray *data = [language componentsSeparatedByString:@"-"];
+    NSString *path;
+    if ([data[0] isEqualToString:@"en"]) {
+        path = [[NSBundle mainBundle] pathForResource:@"TR_English" ofType:@"plist"];
+    } else if ([data[0] isEqualToString:@"fr"]) {
+        path = [[NSBundle mainBundle] pathForResource:@"TR_French" ofType:@"plist"];
+    }
+    
+    NSLog(@"language : %@", data[0]);
+    
+    self.translate = [[Translate alloc] initWithPath:path];
+    
+    NSLog(@"self.translate: %@", [self.translate.dict objectForKey:@"menu_news"]);
+    
+    NSData *dataStore = [NSKeyedArchiver archivedDataWithRootObject:self.translate];
+    [[NSUserDefaults standardUserDefaults] setObject:dataStore forKey:@"Translate"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+- (void) initBasicGraphics {
+    UIColor *barColour = DARK_GREY;
+    UIView *colourView = [[UIView alloc] initWithFrame:CGRectMake(0.f, -20.f, 320.f, 64.f)];
+    colourView.opaque = NO;
+    colourView.alpha = .1f;
+    colourView.backgroundColor = barColour;
+    [[UINavigationBar appearance] setBarTintColor:barColour];
+    [[[UINavigationBar appearance] layer] insertSublayer:colourView.layer atIndex:1];
+    [[UIBarButtonItem appearance] setBackButtonTitlePositionAdjustment:UIOffsetMake(0, -60) forBarMetrics:UIBarMetricsDefault];
+    [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
+    [[UIApplication sharedApplication]setStatusBarStyle:UIStatusBarStyleLightContent];
+}
+
+- (void) initThePlayer {
     self.thePlayer = [[AudioPlayer alloc] init];
     self.thePlayer.index = 0;
     self.thePlayer.oldIndex = 0;
     self.thePlayer.repeatingLevel = 0;
     self.thePlayer.listeningList = [[NSMutableArray alloc] init];
-    
-    [[UINavigationBar appearance] setTintColor:BLUE_2];
+    self.thePlayer.currentlyPlaying = NO;
     
     [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback error:nil];
     [[AVAudioSession sharedInstance] setActive: YES error: nil];
     [[UIApplication sharedApplication] beginReceivingRemoteControlEvents];
-    
-    self.prefs = [NSUserDefaults standardUserDefaults];
-    
-    UIViewController *vc;
-    
-    if (FBSession.activeSession.state == FBSessionStateCreatedTokenLoaded) {
-        [FBSession openActiveSessionWithReadPermissions:@[@"public_profile", @"email"]
-                                           allowLoginUI:NO
-                                      completionHandler:^(FBSession *session, FBSessionState state, NSError *error) {
-                                          [self sessionStateChanged:session state:state error:error];
-                                      }];
-    }
-    
-    //vc = [[ConnexionViewController alloc] initWithNibName:@"ConnexionViewController" bundle:nil];
-    vc = [[HomeViewController alloc] initWithNibName:@"HomeViewController" bundle:nil];
-    //MenuViewController *mainVC = [[MenuViewController alloc] init];
-    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
-    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+}
 
+- (void)launchConnexion {
+    UIViewController *vc = [[ConnexionViewController alloc] initWithNibName:@"ConnexionViewController" bundle:nil];
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
     self.window.rootViewController = nav;
     [self.window makeKeyAndVisible];
+}
 
-    return YES;
+- (void)launchHome {
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    self.window.backgroundColor = BLUE_1;
+    self.window.rootViewController = self.revealController;
+    
+    [self.window makeKeyAndVisible];
+
+}
+
+#pragma mark - PKRevealing
+
+- (void)revealController:(PKRevealController *)revealController didChangeToState:(PKRevealControllerState)state
+{
+    //NSLog(@"%@ (%d)", NSStringFromSelector(_cmd), (int)state);
+}
+
+- (void)revealController:(PKRevealController *)revealController willChangeToState:(PKRevealControllerState)next
+{
+    //PKRevealControllerState current = revealController.state;
+    //NSLog(@"%@ (%d -> %d)", NSStringFromSelector(_cmd), (int)current, (int)next);
+}
+
+#pragma mark - Helpers
+
+- (UIViewController *)leftViewController
+{
+    UIViewController *leftViewController = [[UIViewController alloc] init];
+    leftViewController.view.backgroundColor = BLUE_1;
+    
+    UITableView *tableView = ({
+        UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, ([[UIScreen mainScreen] bounds].size.height - 54 * 9) / 2.0f + 40, [[UIScreen mainScreen] bounds].size.width, /*54 * 8*/[[UIScreen mainScreen] bounds].size.height) style:UITableViewStylePlain];
+        tableView.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleWidth;
+        tableView.delegate = self;
+        tableView.dataSource = self;
+        tableView.opaque = NO;
+        tableView.backgroundColor = [UIColor clearColor];
+        tableView.backgroundView = nil;
+        tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        tableView.bounces = NO;
+        tableView;
+    });
+    [leftViewController.view addSubview:tableView];
+    
+    UIImageView *logoView = [[UIImageView alloc] initWithFrame:CGRectMake(10, 50, 150, 42)];
+    logoView.image = [UIImage imageNamed:@"logo_SZ.png"];
+    [leftViewController.view addSubview:logoView];
+    
+    return leftViewController;
+}
+
+- (void)elementClicked:(id)elem {
+    self.revealController.frontViewController = nil;
+    UINavigationController *frontNavigationController;
+    if ([elem isKindOfClass:[Music class]]){
+        Music *music = (Music *)elem;
+        AlbumViewController *vc = [[AlbumViewController alloc] initWithNibName:@"AlbumViewController" bundle:nil];
+        vc.album = [[Album alloc] init];
+        vc.album.identifier = music.albumId;
+        vc.fromSearch = true;
+        frontNavigationController = [[UINavigationController alloc] initWithRootViewController:vc];
+        [self.revealController setFrontViewController:frontNavigationController];
+    } else if ([elem isKindOfClass:[Album class]]) {
+        Album *album = (Album *)elem;
+        AlbumViewController *vc = [[AlbumViewController alloc] initWithNibName:@"AlbumViewController" bundle:nil];
+        vc.album = album;
+        vc.fromSearch = true;
+        frontNavigationController = [[UINavigationController alloc] initWithRootViewController:vc];
+        [self.revealController setFrontViewController:frontNavigationController];
+    } else if ([elem isKindOfClass:[User class]]) {
+        frontNavigationController = nil;
+        User *artist = (User *)elem;
+        if ([UsersController isArtist:artist.identifier]) {
+            ArtistViewController *vc = [[ArtistViewController alloc] initWithNibName:@"ArtistViewController" bundle:nil];
+            vc.artist = artist;
+            vc.fromSearch = true;
+            frontNavigationController = [[UINavigationController alloc] initWithRootViewController:vc];
+        } else {
+            UserViewController *vc = [[UserViewController alloc] initWithNibName:@"UserViewController" bundle:nil];
+            vc.user = artist;
+            vc.fromSearch = true;
+            frontNavigationController = [[UINavigationController alloc] initWithRootViewController:vc];
+        }
+        [self.revealController setFrontViewController:frontNavigationController];
+    } else if ([elem isKindOfClass:[Pack class]]) {
+        Pack *pack = (Pack *)elem;
+        NSLog(@"pack %i", pack.identifier);
+        PackDetailViewController *vc = [[PackDetailViewController alloc] initWithNibName:@"PackDetailViewController" bundle:nil];
+        vc.pack = pack;
+        vc.fromSearch = true;
+        frontNavigationController = [[UINavigationController alloc] initWithRootViewController:vc];
+        [self.revealController setFrontViewController:frontNavigationController];
+    }
+    [self.revealController resignPresentationModeEntirely:YES animated:YES completion:nil];
+}
+
+- (void)startPresentationMode
+{
+    if (![self.revealController isPresentationModeActive])
+    {
+        [self.revealController enterPresentationModeAnimated:YES completion:nil];
+    }
+    else
+    {
+        [self.revealController resignPresentationModeEntirely:NO animated:YES completion:nil];
+    }
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    UINavigationController *frontNavigationController;
+    switch (indexPath.row) {
+        case 0:
+        {
+            frontNavigationController = self.homeVC;
+            [self.revealController setFrontViewController:frontNavigationController];
+        }
+            break;
+        case 1:
+            // explorer
+        {
+            frontNavigationController = self.exploreVC;
+            [self.revealController setFrontViewController:frontNavigationController];
+        }
+            break;
+        case 2:
+            // pack
+        {
+            frontNavigationController = self.packVC;
+            [self.revealController setFrontViewController:frontNavigationController];
+        }
+            break;
+        case 3:
+            // monde musical
+        {
+            frontNavigationController = self.geoVC;
+            [self.revealController setFrontViewController:frontNavigationController];
+        }
+            break;
+        case 4:
+            // battles
+        {
+            frontNavigationController = self.battleVC;
+            [self.revealController setFrontViewController:frontNavigationController];
+        }
+            break;
+        case 5:
+            // playlists
+        {
+            frontNavigationController = self.contentVC;
+            [self.revealController setFrontViewController:frontNavigationController];
+        }
+            break;
+        case 6:
+            // amis
+        {
+            //frontNavigationController = self.friendsVC;
+            [self.revealController setFrontViewController:[[UINavigationController alloc] initWithRootViewController:[[FriendsViewController alloc] initWithNibName:@"FriendsViewController" bundle:nil]]];
+        }
+            break;
+        case 7:
+            // cart
+        {
+            [self.revealController setFrontViewController:[[UINavigationController alloc] initWithRootViewController:[[CartViewController alloc] initWithNibName:@"CartViewController" bundle:nil]]];
+            
+        }
+            break;
+        case 8:
+            // compte user
+        {
+            frontNavigationController = self.accountVC;
+            [self.revealController setFrontViewController:frontNavigationController];
+        }
+            break;
+    }
+    
+    [self.revealController resignPresentationModeEntirely:true animated:true completion:nil];
+}
+
+#pragma mark -
+#pragma mark UITableView Datasource
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 54;
+}
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 1;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)sectionIndex
+{
+    return 9;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    static NSString *cellIdentifier = @"Cell";
+    
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    
+    if (cell == nil) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+        cell.backgroundColor = [UIColor clearColor];
+        cell.textLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:21];
+        cell.textLabel.textColor = [UIColor whiteColor];
+        cell.textLabel.highlightedTextColor = [UIColor lightGrayColor];
+        cell.selectedBackgroundView = [[UIView alloc] init];
+    }
+    
+    NSArray *listOftitles = @[[self.translate.dict objectForKey:@"menu_news"],
+                              [self.translate.dict objectForKey:@"menu_explore"],
+                              [self.translate.dict objectForKey:@"menu_packs"],
+                              [self.translate.dict objectForKey:@"menu_geoloc"],
+                              [self.translate.dict objectForKey:@"menu_battle"],
+                              [self.translate.dict objectForKey:@"menu_content"],
+                              [self.translate.dict objectForKey:@"menu_network"],
+                              [self.translate.dict objectForKey:@"menu_cart"],
+                              [self.translate.dict objectForKey:@"menu_account"]];
+    
+   NSLog(@"titles : %@", listOftitles[indexPath.row]);
+    cell.textLabel.text = listOftitles[indexPath.row];
+    
+    /*if (indexPath.row == 8) {
+        NSString *urlImage = [NSString stringWithFormat:@"%@assets/usersImage/avatars/%@", API_URL, self.user.image];
+        NSData * imageData = [[NSData alloc] initWithContentsOfURL: [NSURL URLWithString: urlImage]];
+       cell.imageView.image = [Tools imageWithImage:[UIImage imageWithData:imageData] scaledToSize:CGSizeMake(40, 40)];
+        cell.imageView.layer.cornerRadius = 19;
+        cell.imageView.layer.borderWidth = 1;
+        cell.imageView.layer.borderColor = [UIColor whiteColor].CGColor;
+        cell.imageView.layer.masksToBounds = true;
+    } else {
+        //cell.imageView.image = [SVGKImage imageNamed:[listOfImages objectAtIndex:indexPath.row]].UIImage;
+         NSLog(@"ok");
+    }*/
+    return cell;
 }
 
 
-// This method will handle ALL the session state changes in the app
+
+/****
+ 
+ FACEBOOK DELEGATE METHODS
+ 
+ ****/
+
 - (void)sessionStateChanged:(FBSession *)session state:(FBSessionState)state error:(NSError *)error
 {
     if (!error && state == FBSessionStateOpen){
         NSLog(@"Session opened");
+        
         [[FBRequest requestForMe] startWithCompletionHandler:^(FBRequestConnection *connection, NSDictionary<FBGraphUser> *u, NSError *error) {
             if (!error) {
-                NSString *token = [[[FBSession activeSession] accessTokenData] accessToken];
-                User *user = [SocialConnect facebookConnect:token email:[u objectForKey:@"email"]];
-                self.prefs = [NSUserDefaults standardUserDefaults];
-                [self.prefs setObject:[NSKeyedArchiver archivedDataWithRootObject:user] forKey:@"User"];
-                [self.prefs synchronize];
-
-                HomeViewController *vc = [[HomeViewController alloc] initWithNibName:@"HomeViewController" bundle:nil];
-                UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
-                self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
                 
-                self.window.rootViewController = nav;
-                [self.window makeKeyAndVisible];
-
+                NSString *token = [[[FBSession activeSession] accessTokenData] accessToken];
+                
+                NSLog(@"facebook profile : %@", u);
+                
+                User *user =  [IdenticationsController facebookConnect:token email:[u objectForKey:@"email"] uid:[u objectForKey:@"id"]];
+                NSLog(@"user.username : %@", user.username);
+                
+                NSData *dataStore = [NSKeyedArchiver archivedDataWithRootObject:user];
+                [[NSUserDefaults standardUserDefaults] setObject:dataStore forKey:@"User"];
+                [[NSUserDefaults standardUserDefaults] synchronize];
+                
+                [self launchHome];
             }
         }];
-        
-        return;
     }
     if (state == FBSessionStateClosed || state == FBSessionStateClosedLoginFailed){
         NSLog(@"Session closed");
@@ -111,12 +443,40 @@
     }
 }
 
+- (void)applicationDidBecomeActive:(UIApplication *)application
+{
+    [FBAppCall handleDidBecomeActive];
+}
+
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
+{
+    NSLog(@"url = %@", url);
+    //NSLog(@"source application = %@", sourceApplication);
+    //NSLog(@"type : %i", self.type);
+    
+    if (self.type == 1)
+    {
+        [FBSession.activeSession setStateChangeHandler:
+         ^(FBSession *session, FBSessionState state, NSError *error) {
+             AppDelegate* appDelegate = [UIApplication sharedApplication].delegate;
+             [appDelegate sessionStateChanged:session state:state error:error];
+         }];
+        return [FBAppCall handleOpenURL:url sourceApplication:sourceApplication];
+    }
+    
+    return [GPPURLHandler handleURL:url sourceApplication:sourceApplication annotation:annotation];
+    //return [FBAppCall handleOpenURL:url sourceApplication:sourceApplication];
+}
+
+- (void)setTypeConnexion:(int)type
+{
+    NSLog(@"change type");
+    self.type = type;
+}
 
 - (void)remoteControlReceivedWithEvent:(UIEvent *)receivedEvent
 {
     if (receivedEvent.type == UIEventTypeRemoteControl) {
-        NSLog(@"remove control");
-        NSLog(@"event : %li", receivedEvent.subtype);
         switch (receivedEvent.subtype) {
             case 101:
             {
@@ -165,40 +525,6 @@
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
-}
-
-- (void)applicationDidBecomeActive:(UIApplication *)application
-{
-    [FBAppCall handleDidBecomeActive];
-}
-
-- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
-{
-    NSLog(@"url = %@", url);
-    NSLog(@"source application = %@", sourceApplication);
-    NSLog(@"type : %i", self.type);
-    
-    if (self.type == 1)
-    {
-        [FBSession.activeSession setStateChangeHandler:
-         ^(FBSession *session, FBSessionState state, NSError *error) {
-             
-             // Retrieve the app delegate
-             AppDelegate* appDelegate = [UIApplication sharedApplication].delegate;
-             // Call the app delegate's sessionStateChanged:state:error method to handle session state changes
-             [appDelegate sessionStateChanged:session state:state error:error];
-         }];
-        return [FBAppCall handleOpenURL:url sourceApplication:sourceApplication];
-    }
-    
-    //return [GPPURLHandler handleURL:url sourceApplication:sourceApplication annotation:annotation];
-    return [FBAppCall handleOpenURL:url sourceApplication:sourceApplication];
-}
-
-- (void)setTypeConnexion:(int)type
-{
-    NSLog(@"change type");
-    self.type = type;
 }
 
 
