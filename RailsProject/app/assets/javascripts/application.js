@@ -15,7 +15,6 @@
 //= require jquery-ui
 //= require foundation
 //= require ./player/wavesurfer.min.js
-//= require ./player/main.js
 //= require ./tools/better-date.js
 //= require ./tools/sha256.js
 //= require ./tools/messenger.min.js

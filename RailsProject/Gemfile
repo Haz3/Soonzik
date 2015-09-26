@@ -111,3 +111,9 @@ gem 'ranked-model'
 # For geolocation
 gem 'geokit'
 gem 'geokit-rails'
+
+# Because of an error
+gem 'i18n', '~> 0.7.0'
+
+# For Paypal
+gem 'paypal-sdk-rest'

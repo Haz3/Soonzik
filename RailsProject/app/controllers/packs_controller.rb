@@ -10,5 +10,4 @@ class PacksController < ApplicationController
 
 	def show
 	end
-	
 end

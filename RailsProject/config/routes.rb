@@ -216,6 +216,15 @@ Rails.application.routes.draw do
   get 'messages' => 'chats#index'
   get '/my_music' => 'others#discotheque'
   get '/search/:value' => 'others#search'
+
+  get '/purchase/cart' => 'purchases#buyCart'
+  get '/successCallback/cart' => 'purchases#paymentCallbackCart'
+  get '/cancelCallback/cart' => 'purchases#cancelCallbackCart'
+
+  get '/purchase/pack' => 'purchases#buyPack'
+  get '/successCallback/pack/:id/' => 'purchases#paymentCallbackPack'
+  get '/cancelCallback/pack/:id/' => 'purchases#cancelCallbackPack'
+
   root 'others#index'
 
 

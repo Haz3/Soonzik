@@ -59,42 +59,56 @@ class Purchase < ActiveRecord::Base
     parameters.require(:purchase).permit(:user_id)
   end
 
-  def addPurchasedMusicFromObject(musicObject)
+  def addPurchasedMusicFromObject(musicObject, album_id = nil)
   	pMusic = PurchasedMusic.new
   	pMusic.music_id = musicObject.id
   	pMusic.purchase_id = self.id
+  	pMusic.purchased_album_id = album_id
   	pMusic.save!
   	return pMusic
   end
 
-  def addPurchasedAlbumFromObject(albumObject)
+  def addPurchasedAlbumFromObject(albumObject, pack_id = nil)
   	listSavedMusics = []
 
   	pAlbum = PurchasedAlbum.new
   	pAlbum.album_id = albumObject.id
+  	pAlbum.purchased_pack_id = pack_id
+  	pAlbum.save!
   	begin
 	  	albumObject.musics.each { |musicObject|
-	  		pMusic = addPurchasedMusicFromObject(musicObject)
+	  		pMusic = addPurchasedMusicFromObject(musicObject, pAlbum.id)
 		  	listSavedMusics << pMusic
 	  	}
 	  rescue
 	  	listSavedMusics.each { |pMusic|
 	  		pMusic.destroy
 	  	}
+	  	pAlbum.destroy
 	  	raise
 	  end
-  	pAlbum.save!
   	return pAlbum
   end
 
-  def addPurchasedPackFromObject(packObject, partial)
+  def addPurchasedPackFromObject(packObject, partial, artist, association, website, value)
   	listSavedAlbums = []
 
   	pPack = PurchasedPack.new
   	pPack.pack_id = packObject.id
+	  if partial == true
+		  pPack.partial = true
+		else
+			pPack.partial = false
+		end
+  	pPack.artist_percentage = artist
+  	pPack.association_percentage = association
+  	pPack.website_percentage = website
+  	pPack.value = value
+  	pPack.save!
+
   	begin
 	  	packObject.albums.each { |albumObject|
-	  		pAlbum = addPurchasedAlbumFromObject(albumObject)
+	  		pAlbum = addPurchasedAlbumFromObject(albumObject, pPack.id)
 		  	listSavedAlbums << pAlbum
 	  	}
 	  rescue
@@ -106,13 +120,40 @@ class Purchase < ActiveRecord::Base
 	  	}
 	  	raise
 	  end
+  end
 
-	  if partial == true
-		  pPack.partial = true
-		else
-			pPack.partial = false
+  def buyCart(cart, getPurchasedObject = false, getObjects = false)
+  	purchasedItems = []
+  	items = []
+
+  	begin
+	  	cart.each do |cartItem|
+				obj = nil
+				if (cartItem.musics.size != 0)
+					items << cartItem.musics.first
+					obj = addPurchasedMusicFromObject(cartItem.musics.first)
+				else
+					items << cartItem.albums.first
+					obj = addPurchasedAlbumFromObject(cartItem.albums.first)
+				end
+				purchasedItems << obj
+			end
+
+	  	cart.each do |cartItem|
+	  		cartItem.destroy
+	  	end
+			return purchasedItems if (getPurchasedObject)
+			return items if (getObjects)
+			return true
+		rescue
+			items.each { |item|
+				if item.is_a?(PurchasedAlbum)
+					item.purchased_musics.each { |music| music.destroy }
+				end
+				item.destroy
+			}
+			self.destroy
+			return false
 		end
-
-  	pPack.save!
   end
 end
