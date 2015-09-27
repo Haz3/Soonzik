@@ -91,8 +91,8 @@
 								  												<h1 class="class"
 					rel="popover"
 					data-original-title="In files"
-					data-content="app/models/identity.rb"
-					>Identity</h1>
+					data-content="app/models/paypal_payment.rb"
+					>PaypalPayment</h1>
 				</p>
 							</hgroup>
 			<span class="label">class</span>
@@ -109,143 +109,29 @@
 
 		<section class="description">
 			
-<p>The model of the object <a href="Identity.html">Identity</a> Contain the
-relation and the validation Can provide some features linked to this model</p>
+<p>The model of the object <a href="PaypalPayment.html">PaypalPayment</a>
+Contain the relation and the validation Can provide some features linked to
+this model</p>
 
-<p>This model is used for social network connection. The salt that the
-smartphone application need to use for the login thanks to social network
-is : “3uNi@rCK$L$om40dNnhX)#jV2$40wwbr_bAK99%E”</p>
+<h4 id="class-PaypalPayment-label-Associations">Associations<span><a href="#class-PaypalPayment-label-Associations">&para;</a> <a href="#top">&uarr;</a></span></h4>
 
-<h4 id="class-Identity-label-Attributes">Attributes<span><a href="#class-Identity-label-Attributes">&para;</a> <a href="#top">&uarr;</a></span></h4>
-<ul><li>
-<p><code>id</code> - (integer) - The ID of the object</p>
-</li><li>
-<p><code>name</code> - (string) - The name of the group</p>
-</li></ul>
-
-<h4 id="class-Identity-label-Associations">Associations<span><a href="#class-Identity-label-Associations">&para;</a> <a href="#top">&uarr;</a></span></h4>
-<ul><li>
-<p><code>has_many</code> - :accesses (Not sure if we will keep it)</p>
-</li><li>
-<p><code>has_and_belongs_to_many</code> - :users</p>
-</li></ul>
+<pre class="ruby"><span class="ruby-operator">+</span>:<span class="ruby-identifier">belongs_to</span><span class="ruby-operator">+</span> <span class="ruby-operator">-</span> :<span class="ruby-identifier">purchase</span>
+</pre>
 		</section>
 
 				<section id="5Buntitled-5D" class="documentation-section">
 			
 		    
-						<!-- Constants -->
-			<section class="constants-list">
-				<header>
-					<h3>Constants</h3>
-				</header>
-				<dl>
-									<dt id="SALT"><i class="icon-generic"></i>SALT</dt>
-										<dd class="description"></dd>
-													</dl>
-			</section>
 			
 			
 			<!-- Methods -->
 						
-						<section class="public-methods class-methods methods">
-				<header>
-					<h3>Public Class Methods</h3>
-				</header>
-
-								<a name="method-c-find_for_oauth">anchor</a>
-				<div id="method-c-find_for_oauth-doc" class="method">
-
-					<header>
-											<i class="icon-generic"></i>
-						<span class="method-name">find_for_oauth</span><span 
-							class="method-args">(auth)</span>
-										</header>
-
-					<div class="method-description">
-											<p>Find or create an user by the oauth value</p>					
-											<div class="method-source-code" id="find_for_oauth-source">
-							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/models/identity.rb, line 29</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">find_for_oauth</span>(<span class="ruby-identifier">auth</span>)
-  <span class="ruby-identifier">find_or_create_by</span>(<span class="ruby-identifier">uid</span><span class="ruby-operator">:</span> <span class="ruby-identifier">auth</span>.<span class="ruby-identifier">uid</span>, <span class="ruby-identifier">provider</span><span class="ruby-operator">:</span> <span class="ruby-identifier">auth</span>.<span class="ruby-identifier">provider</span>)
-<span class="ruby-keyword">end</span></code></pre>
-						</div>
-										</div>
-
-					
-									</div>
-								<a name="method-c-tokenGenerator">anchor</a>
-				<div id="method-c-tokenGenerator-doc" class="method">
-
-					<header>
-											<i class="icon-generic"></i>
-						<span class="method-name">tokenGenerator</span><span 
-							class="method-args">()</span>
-										</header>
-
-					<div class="method-description">
-											<p>Return a new random token</p>					
-											<div class="method-source-code" id="tokenGenerator-source">
-							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/models/identity.rb, line 43</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">tokenGenerator</span>
-              <span class="ruby-identifier">sha256</span> = <span class="ruby-constant">Digest</span><span class="ruby-operator">::</span><span class="ruby-constant">SHA1</span>.<span class="ruby-identifier">new</span>
-
-  <span class="ruby-identifier">key</span> = <span class="ruby-string">&quot;&quot;</span>
-  <span class="ruby-identifier">example</span> = (<span class="ruby-string">&#39;a&#39;</span><span class="ruby-operator">..</span><span class="ruby-string">&#39;z&#39;</span>).<span class="ruby-identifier">to_a</span>.<span class="ruby-identifier">concat</span>((<span class="ruby-string">&#39;A&#39;</span><span class="ruby-operator">..</span><span class="ruby-string">&#39;Z&#39;</span>).<span class="ruby-identifier">to_a</span>.<span class="ruby-identifier">concat</span>((<span class="ruby-string">&#39;0&#39;</span><span class="ruby-operator">..</span><span class="ruby-string">&#39;9&#39;</span>).<span class="ruby-identifier">to_a</span>)).<span class="ruby-identifier">shuffle</span>[<span class="ruby-value">0</span>,<span class="ruby-value">48</span>].<span class="ruby-identifier">join</span>
-  <span class="ruby-value">48</span>.<span class="ruby-identifier">times</span> <span class="ruby-keyword">do</span>
-    <span class="ruby-identifier">key</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">example</span>[<span class="ruby-constant">Random</span>.<span class="ruby-identifier">rand</span>(<span class="ruby-identifier">example</span>.<span class="ruby-identifier">size</span>)]
-  <span class="ruby-keyword">end</span>
-
-  <span class="ruby-keyword">return</span> <span class="ruby-identifier">sha256</span>.<span class="ruby-identifier">hexdigest</span> <span class="ruby-identifier">key</span>
-      <span class="ruby-keyword">end</span></code></pre>
-						</div>
-										</div>
-
-					
-									</div>
-				
-			</section>
 			
 			
 			
 			
 			
 									
-						<section class="public-methods instance-methods methods">
-				<header>
-					<h3>Public Instance Methods</h3>
-				</header>
-
-								<a name="method-i-newToken">anchor</a>
-				<div id="method-i-newToken-doc" class="method">
-
-					<header>
-											<i class="icon-generic"></i>
-						<span class="method-name">newToken</span><span 
-							class="method-args">()</span>
-										</header>
-
-					<div class="method-description">
-											<p>Create a new token</p>					
-											<div class="method-source-code" id="newToken-source">
-							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/models/identity.rb, line 34</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">newToken</span>
-      <span class="ruby-identifier">key</span> = <span class="ruby-keyword">nil</span>
-      <span class="ruby-keyword">begin</span>
-    <span class="ruby-identifier">key</span> = <span class="ruby-constant">Identity</span>.<span class="ruby-identifier">tokenGenerator</span>
-  <span class="ruby-keyword">end</span> <span class="ruby-keyword">while</span> (<span class="ruby-constant">Identity</span>.<span class="ruby-identifier">find_by_token</span>(<span class="ruby-identifier">key</span>))
-  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">token</span> = <span class="ruby-identifier">key</span>
-<span class="ruby-keyword">end</span></code></pre>
-						</div>
-										</div>
-
-					
-									</div>
-				
-			</section>
 			
 			
 			

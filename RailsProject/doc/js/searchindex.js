@@ -307,6 +307,12 @@ var SearchIndex =
 		"type": "normalclass"
 	},
 	{
+		"name": "PaypalPayment",
+		"link": "PaypalPayment.html",
+		"snippet": "<p>The model of the object PaypalPayment Contain the relation and the\nvalidation Can provide some features …\n",
+		"type": "normalclass"
+	},
+	{
 		"name": "Playlist",
 		"link": "Playlist.html",
 		"snippet": "<p>The model of the object Playlist Contain the relation and the validation\nCan provide some features linked …\n",
@@ -1329,6 +1335,12 @@ var SearchIndex =
 	{
 		"name": "addPurchasedPackFromObject",
 		"link": "Purchase.html#method-i-addPurchasedPackFromObject",
+		"snippet": "",
+		"type": "anymethod"
+	},
+	{
+		"name": "buyCart",
+		"link": "Purchase.html#method-i-buyCart",
 		"snippet": "",
 		"type": "anymethod"
 	},

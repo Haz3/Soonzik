@@ -158,9 +158,9 @@ relation and the validation Can provide some features linked to this model</p>
 <p>Fields returned : [:id, :title, :content, :language]</p>					
 											<div class="method-source-code" id="miniKey-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/models/newstext.rb, line 26</span>
+								class="language-ruby"><span class="ruby-comment"># File app/models/newstext.rb, line 25</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">miniKey</span>
-      [<span class="ruby-value">:id</span>, <span class="ruby-value">:title</span>, <span class="ruby-value">:content</span>, <span class="ruby-value">:language</span>]
+      [<span class="ruby-value">:id</span>, <span class="ruby-value">:content</span>, <span class="ruby-value">:language</span>]
 <span class="ruby-keyword">end</span></code></pre>
 						</div>
 										</div>
@@ -180,9 +180,9 @@ relation and the validation Can provide some features linked to this model</p>
 											<p>The strong parameters to save or update object</p>					
 											<div class="method-source-code" id="newstext_params-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/models/newstext.rb, line 31</span>
+								class="language-ruby"><span class="ruby-comment"># File app/models/newstext.rb, line 30</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">newstext_params</span>(<span class="ruby-identifier">parameters</span>)
-  <span class="ruby-identifier">parameters</span>.<span class="ruby-identifier">require</span>(<span class="ruby-value">:newstext</span>).<span class="ruby-identifier">permit</span>(<span class="ruby-value">:content</span>, <span class="ruby-value">:title</span>, <span class="ruby-value">:language</span>, <span class="ruby-value">:news_id</span>)
+  <span class="ruby-identifier">parameters</span>.<span class="ruby-identifier">require</span>(<span class="ruby-value">:newstext</span>).<span class="ruby-identifier">permit</span>(<span class="ruby-value">:content</span>, <span class="ruby-value">:language</span>, <span class="ruby-value">:news_id</span>)
 <span class="ruby-keyword">end</span></code></pre>
 						</div>
 										</div>
@@ -271,6 +271,7 @@ relation and the validation Can provide some features linked to this model</p>
 			<li><a href="./Notification.html">Notification</a></li>
 			<li><a href="./Pack.html">Pack</a></li>
 			<li><a href="./PartialAlbum.html">PartialAlbum</a></li>
+			<li><a href="./PaypalPayment.html">PaypalPayment</a></li>
 			<li><a href="./Playlist.html">Playlist</a></li>
 			<li><a href="./PlaylistObject.html">PlaylistObject</a></li>
 			<li><a href="./Proposition.html">Proposition</a></li>
