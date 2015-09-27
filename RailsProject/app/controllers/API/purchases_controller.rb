@@ -38,9 +38,7 @@ module API
     def buycart
       ret = { musics: [], albums: [] }
 
-      if (!(@paypal.present? && @paypal.has_key?(:payment_id) && @paypal.has_key?(:payment_method) && @paypal.has_key?(:status) && @paypal.has_key?(:payer_email)
-          && @paypal.has_key?(:payer_first_name) && @paypal.has_key?(:payer_last_name) && @paypal.has_key?(:payer_id) && @paypal.has_key?(:payer_phone) && @paypal.has_key?(:payer_country_code)
-          && @paypal.has_key?(:payer_street) && @paypal.has_key?(:payer_city) && @paypal.has_key?(:payer_postal_code) && @paypal.has_key?(:payer_country_code) && @paypal.has_key?(:payer_recipient_name)))
+      if (!(@paypal.present?() && @paypal.has_key?(:payment_id) && @paypal.has_key?(:payment_method) && @paypal.has_key?(:status) && @paypal.has_key?(:payer_email) && @paypal.has_key?(:payer_first_name) && @paypal.has_key?(:payer_last_name) && @paypal.has_key?(:payer_id) && @paypal.has_key?(:payer_phone) && @paypal.has_key?(:payer_country_code) && @paypal.has_key?(:payer_street) && @paypal.has_key?(:payer_city) && @paypal.has_key?(:payer_postal_code) && @paypal.has_key?(:payer_country_code) && @paypal.has_key?(:payer_recipient_name)))
         codeAnswer 503
         defineHttp :bad_request
       else
@@ -134,9 +132,7 @@ module API
     # 
     def buypack
       objectToDelete = []
-      if (!(@paypal.present? && @paypal.has_key?(:payment_id) && @paypal.has_key?(:payment_method) && @paypal.has_key?(:status) && @paypal.has_key?(:payer_email)
-          && @paypal.has_key?(:payer_first_name) && @paypal.has_key?(:payer_last_name) && @paypal.has_key?(:payer_id) && @paypal.has_key?(:payer_phone) && @paypal.has_key?(:payer_country_code)
-          && @paypal.has_key?(:payer_street) && @paypal.has_key?(:payer_city) && @paypal.has_key?(:payer_postal_code) && @paypal.has_key?(:payer_country_code) && @paypal.has_key?(:payer_recipient_name)))
+      if (!(@paypal.present?() && @paypal.has_key?(:payment_id) && @paypal.has_key?(:payment_method) && @paypal.has_key?(:status) && @paypal.has_key?(:payer_email) && @paypal.has_key?(:payer_first_name) && @paypal.has_key?(:payer_last_name) && @paypal.has_key?(:payer_id) && @paypal.has_key?(:payer_phone) && @paypal.has_key?(:payer_country_code) && @paypal.has_key?(:payer_street) && @paypal.has_key?(:payer_city) && @paypal.has_key?(:payer_postal_code) && @paypal.has_key?(:payer_country_code) && @paypal.has_key?(:payer_recipient_name)))
         codeAnswer 503
         defineHttp :bad_request
       else
