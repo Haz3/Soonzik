@@ -44,31 +44,32 @@
 						%img{ "ng-src" => "{{ '/assets/albums/' + album.image }}" }
 						%h5.text-center
 							%a{ href: "/albums/{{ album.id }}" } {{ album.title }}
-					.small-9.medium-10.columns{ "ng-repeat" => "music in album.musics" }
-						.small-8.columns
-							%music{ "music-object" => "music" } {{ music.title }}
-						.small-2.columns
-							.left.hide-for-small-only.hide-for-medium-only {{ formatTime(music.duration) }}
-							.text-right.relative
-								%i.fi-plus.pointer{ "ng-click" => "setTooltip(tooltip == false ? music : false)" }
-								.mytooltip.toolright{ "ng-show" => "tooltip == music" }
-									%ul.no-bullet
-										%li.choice{ "ng-if" => "user != false", "ng-click" => "selectMusic(music)" } {{ labels.DISPLAY_DISCOTHEQUE_ADD_PLAYLIST_LABEL }}
-										%li.playlistBlock{ "ng-if" => "selectedMusic == music" }
-											%hr
-											%ul.no-bullet.text-left.small-12.playlistList
-												%li.choice.small-12.playlistChoice{ "ng-repeat" => "myplaylist in myPlaylists" }
-													%input{ "ng-model" => "myplaylist.check", type: "radio", id: "playlist-{{myplaylist.id}}", "ng-value" => "true" }
-													%label{ "for" => "playlist-{{myplaylist.id}}" } {{ myplaylist.name }}
-												%li.small-12.text-center
-													.button.tiny{ "ng-click" => "addToPlaylist()" } {{ labels.DISPLAY_DISCOTHEQUE_ADD_PLAYLIST_BUTTON }}
-											%hr
-										%li.choice
-											%music.small-12{ "music-object" => "music", "ng-click" => "setTooltip(false)" } {{ labels.DISPLAY_DISCOTHEQUE_LISTEN_LABEL }}
-										%li
-											.button.tiny{ "ng-click" => "setTooltip(false)" } {{ labels.DISPLAY_DISCOTHEQUE_CLOSE_LABEL }}
-						.small-2.columns
-							%i.fi-download.pointer{ "ng-click" => "download(music)" }
+					.small-9.medium-10.columns
+						.clearfix{ "ng-repeat" => "music in album.musics" }
+							.small-8.columns
+								%music{ "music-object" => "music" } {{ music.title }}
+							.small-2.columns
+								.left.hide-for-small-only.hide-for-medium-only {{ formatTime(music.duration) }}
+								.text-right.relative
+									%i.fi-plus.pointer{ "ng-click" => "setTooltip(tooltip == false ? music : false)" }
+									.mytooltip.toolright{ "ng-show" => "tooltip == music" }
+										%ul.no-bullet
+											%li.choice{ "ng-if" => "user != false", "ng-click" => "selectMusic(music)" } {{ labels.DISPLAY_DISCOTHEQUE_ADD_PLAYLIST_LABEL }}
+											%li.playlistBlock{ "ng-if" => "selectedMusic == music" }
+												%hr
+												%ul.no-bullet.text-left.small-12.playlistList
+													%li.choice.small-12.playlistChoice{ "ng-repeat" => "myplaylist in myPlaylists" }
+														%input{ "ng-model" => "myplaylist.check", type: "radio", id: "playlist-{{myplaylist.id}}", "ng-value" => "true" }
+														%label{ "for" => "playlist-{{myplaylist.id}}" } {{ myplaylist.name }}
+													%li.small-12.text-center
+														.button.tiny{ "ng-click" => "addToPlaylist()" } {{ labels.DISPLAY_DISCOTHEQUE_ADD_PLAYLIST_BUTTON }}
+												%hr
+											%li.choice
+												%music.small-12{ "music-object" => "music", "ng-click" => "setTooltip(false)" } {{ labels.DISPLAY_DISCOTHEQUE_LISTEN_LABEL }}
+											%li
+												.button.tiny{ "ng-click" => "setTooltip(false)" } {{ labels.DISPLAY_DISCOTHEQUE_CLOSE_LABEL }}
+							.small-2.columns
+								%i.fi-download.pointer{ "ng-click" => "download(music)" }
 				%hr
 		%p{ "ng-if" => "mymusic.albums.length == 0" } {{ labels.DISPLAY_DISCOTHEQUE_NOTHING_LABEL }}
 		%h3 {{ labels.DISPLAY_DISCOTHEQUE_PACK_LABEL }}
@@ -82,29 +83,31 @@
 						%img{ "ng-src" => "{{ '/assets/albums/' + album.image }}" }
 						%h5.text-center
 							%a{ href: "/albums/{{ album.id }}" } {{ album.title }}
-					.small-9.medium-10.columns{ "ng-repeat" => "music in album.musics" }
-						.small-8.columns
-							%music{ "music-object" => "music" } {{ music.title }}
-						.small-2.columns
-							.left.hide-for-small-only.hide-for-medium-only {{ formatTime(music.duration) }}
-							.text-right.relative
-								%i.fi-plus.pointer{ "ng-click" => "setTooltip(tooltip == false ? music : false)" }
-								.mytooltip.toolright{ "ng-show" => "tooltip == music" }
-									%ul.no-bullet
-										%li.choice{ "ng-if" => "user != false", "ng-click" => "selectMusic(music)" } {{ labels.DISPLAY_DISCOTHEQUE_ADD_PLAYLIST_LABEL }}
-										%li.playlistBlock{ "ng-if" => "selectedMusic == music" }
-											%hr
-											%ul.no-bullet.text-left.small-12.playlistList
-												%li.choice.small-12.playlistChoice{ "ng-repeat" => "myplaylist in myPlaylists" }
-													%input{ "ng-model" => "myplaylist.check", type: "radio", id: "playlist-{{myplaylist.id}}", "ng-value" => "true" }
-													%label{ "for" => "playlist-{{myplaylist.id}}" } {{ myplaylist.name }}
-												%li.small-12.text-center
-													.button.tiny{ "ng-click" => "addToPlaylist()" } {{ labels.DISPLAY_DISCOTHEQUE_ADD_PLAYLIST_BUTTON }}
-											%hr
-										%li.choice
-											%music.small-12{ "music-object" => "music", "ng-click" => "setTooltip(false)" } {{ labels.DISPLAY_DISCOTHEQUE_LISTEN_LABEL }}
-										%li
-											.button.tiny{ "ng-click" => "setTooltip(false)" } {{ labels.DISPLAY_DISCOTHEQUE_CLOSE_LABEL }}
-						.small-2.columns
-							%i.fi-download.pointer{ "ng-click" => "download(music)" }
+					.small-9.medium-10.columns
+						.clearfix{ "ng-repeat" => "music in album.musics" }
+							.small-8.columns
+								%music{ "music-object" => "music" } {{ music.title }}
+							.small-2.columns
+								.left.hide-for-small-only.hide-for-medium-only {{ formatTime(music.duration) }}
+								.text-right.relative
+									%i.fi-plus.pointer{ "ng-click" => "setTooltip(tooltip == false ? music : false)" }
+									.mytooltip.toolright{ "ng-show" => "tooltip == music" }
+										%ul.no-bullet
+											%li.choice{ "ng-if" => "user != false", "ng-click" => "selectMusic(music)" } {{ labels.DISPLAY_DISCOTHEQUE_ADD_PLAYLIST_LABEL }}
+											%li.playlistBlock{ "ng-if" => "selectedMusic == music" }
+												%hr
+												%ul.no-bullet.text-left.small-12.playlistList
+													%li.choice.small-12.playlistChoice{ "ng-repeat" => "myplaylist in myPlaylists" }
+														%input{ "ng-model" => "myplaylist.check", type: "radio", id: "playlist-{{myplaylist.id}}", "ng-value" => "true" }
+														%label{ "for" => "playlist-{{myplaylist.id}}" } {{ myplaylist.name }}
+													%li.small-12.text-center
+														.button.tiny{ "ng-click" => "addToPlaylist()" } {{ labels.DISPLAY_DISCOTHEQUE_ADD_PLAYLIST_BUTTON }}
+												%hr
+											%li.choice
+												%music.small-12{ "music-object" => "music", "ng-click" => "setTooltip(false)" } {{ labels.DISPLAY_DISCOTHEQUE_LISTEN_LABEL }}
+											%li
+												.button.tiny{ "ng-click" => "setTooltip(false)" } {{ labels.DISPLAY_DISCOTHEQUE_CLOSE_LABEL }}
+							.small-2.columns
+								%i.fi-download.pointer{ "ng-click" => "download(music)" }
+					%hr
 		%p{ "ng-if" => "mymusic.packs.length == 0" } {{ labels.DISPLAY_DISCOTHEQUE_NOTHING_LABEL }}

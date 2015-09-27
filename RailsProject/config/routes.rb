@@ -221,7 +221,7 @@ Rails.application.routes.draw do
   get '/successCallback/cart' => 'purchases#paymentCallbackCart'
   get '/cancelCallback/cart' => 'purchases#cancelCallbackCart'
 
-  get '/purchase/pack' => 'purchases#buyPack'
+  get '/purchase/pack/:id' => 'purchases#buyPack'
   get '/successCallback/pack/:id/' => 'purchases#paymentCallbackPack'
   get '/cancelCallback/pack/:id/' => 'purchases#cancelCallbackPack'
 

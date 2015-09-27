@@ -445,13 +445,12 @@ module API
             codeAnswer 502
             defineHttp :bad_request
           else
-            arr.each do |music_id|
-              note = MusicNote.where(music_id: music_id).find_by_user_id(@user_id)
-              if note == nil
-                value << { music_id: music_id, note: nil }
-              else
-                value << { music_id: music_id, note: note.value }
-              end
+            arr.each_with_index do |id, i|
+              arr[i] = arr[i].to_i
+            end
+            notes = MusicNote.where(music_id: arr).where(user_id: @user_id).group(:music_id)
+            notes.each do |note|
+                value << { music_id: note.music_id, note: note.value }
             end
             @returnValue = { content: value }
           end
@@ -460,6 +459,7 @@ module API
           defineHttp :bad_request
         end
       rescue
+        puts $!, $@
         codeAnswer 504
         defineHttp :service_unavailable
       end

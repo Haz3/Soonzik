@@ -14,6 +14,21 @@ module API
     #
     # ==== Options
     # 
+    # - +paypal [:payment_id] + - The informations that paypal returns after a payment
+    # - +paypal [:payment_method] + - The informations that paypal returns after a payment
+    # - +paypal [:status] + - The informations that paypal returns after a payment
+    # - +paypal [:payer_email] + - The informations that paypal returns after a payment
+    # - +paypal [:payer_first_name] + - The informations that paypal returns after a payment
+    # - +paypal [:payer_last_name] + - The informations that paypal returns after a payment
+    # - +paypal [:payer_id] + - The informations that paypal returns after a payment
+    # - +paypal [:payer_phone] + - The informations that paypal returns after a payment
+    # - +paypal [:payer_country_code] + - The informations that paypal returns after a payment
+    # - +paypal [:payer_street] + - The informations that paypal returns after a payment
+    # - +paypal [:payer_city] + - The informations that paypal returns after a payment
+    # - +paypal [:payer_postal_code] + - The informations that paypal returns after a payment
+    # - +paypal [:payer_country_code] + - The informations that paypal returns after a payment
+    # - +paypal [:payer_recipient_name] + - The informations that paypal returns after a payment
+    # 
     # ===== HTTP VALUE
     # 
     # - +201+ - In case of success, return the purchase created in this format : { user: {}, purchased_musics: { music: {}, purchased_album: { album : {}, purchased_pack: { partial: value, pack: {} } } } }
@@ -23,38 +38,62 @@ module API
     def buycart
       ret = { musics: [], albums: [] }
 
-      begin
-        if (@security)
-          p = Purchase.new
-          p.user_id = @user_id
-          p.save!
+      if (!(@paypal.present? && @paypal.has_key?(:payment_id) && @paypal.has_key?(:payment_method) && @paypal.has_key?(:status) && @paypal.has_key?(:payer_email)
+          && @paypal.has_key?(:payer_first_name) && @paypal.has_key?(:payer_last_name) && @paypal.has_key?(:payer_id) && @paypal.has_key?(:payer_phone) && @paypal.has_key?(:payer_country_code)
+          && @paypal.has_key?(:payer_street) && @paypal.has_key?(:payer_city) && @paypal.has_key?(:payer_postal_code) && @paypal.has_key?(:payer_country_code) && @paypal.has_key?(:payer_recipient_name)))
+        codeAnswer 503
+        defineHttp :bad_request
+      else
+        begin
+          if (@security)
+            p = Purchase.new
+            p.user_id = @user_id
+            p.save!
 
-          cart = Cart.eager_load(albums: { musics: {} }).where(carts: { user_id: @user_id })
-          list = p.buyCart(cart, false, true)
-          if (list == false)
-            p.destroy
-            @returnValue = { content: nil }
-            codeAnswer 202
+            cart = Cart.eager_load(albums: { musics: {} }).where(carts: { user_id: @user_id })
+            list = p.buyCart(cart, false, true)
+            PaypalPayment.create({
+              payment_id: @paypal[:payment_id],
+              payment_method: @paypal[:payment_method],
+              status: @paypal[:status],
+              payer_email: @paypal[:payer_email],
+              payer_first_name: @paypal[:payer_first_name],
+              payer_last_name: @paypal[:payer_last_name],
+              payer_id: @paypal[:payer_id],
+              payer_phone: @paypal[:payer_phone],
+              payer_country_code: @paypal[:payer_country_code],
+              payer_street: @paypal[:payer_street],
+              payer_city: @paypal[:payer_city],
+              payer_postal_code: @paypal[:payer_postal_code],
+              payer_country_code: @paypal[:payer_country_code],
+              payer_recipient_name: @paypal[:payer_recipient_name],
+              purchase_id: p.id
+            })
+            if (list == false)
+              p.destroy
+              @returnValue = { content: nil }
+              codeAnswer 202
+            else
+              list.each { |item|
+                if (item.is_a?(Music))
+                  ret[:musics] << p.as_json(:include => {:album => { only: Album.miniKey } })
+                else
+                  ret[:albums] << p.as_json(:include => {:musics => { only: Music.miniKey } })
+                end
+              }
+
+              @returnValue = { content: ret }
+              codeAnswer 201
+              defineHttp :created
+            end
           else
-            list.each { |item|
-              if (item.is_a?(Music))
-                ret[:musics] << p.as_json(:include => {:album => { only: Album.miniKey } })
-              else
-                ret[:albums] << p.as_json(:include => {:musics => { only: Music.miniKey } })
-              end
-            }
-
-            @returnValue = { content: ret }
-            codeAnswer 201
-            defineHttp :created
+            codeAnswer 500
+            defineHttp :forbidden
           end
-        else
-          codeAnswer 500
-          defineHttp :forbidden
+        rescue
+          codeAnswer 504
+          defineHttp :service_unavailable
         end
-      rescue
-        codeAnswer 504
-        defineHttp :service_unavailable
       end
       sendJson
     end
@@ -70,6 +109,21 @@ module API
     # - +artist+ - The percentage for the artist
     # - +association+ - The percentage for the association
     # - +website+ - The percentage for the website
+    # - +paypal [:payment_id] + - The informations that paypal returns after a payment
+    # - +paypal [:payment_method] + - The informations that paypal returns after a payment
+    # - +paypal [:status] + - The informations that paypal returns after a payment
+    # - +paypal [:payer_email] + - The informations that paypal returns after a payment
+    # - +paypal [:payer_first_name] + - The informations that paypal returns after a payment
+    # - +paypal [:payer_last_name] + - The informations that paypal returns after a payment
+    # - +paypal [:payer_id] + - The informations that paypal returns after a payment
+    # - +paypal [:payer_phone] + - The informations that paypal returns after a payment
+    # - +paypal [:payer_country_code] + - The informations that paypal returns after a payment
+    # - +paypal [:payer_street] + - The informations that paypal returns after a payment
+    # - +paypal [:payer_city] + - The informations that paypal returns after a payment
+    # - +paypal [:payer_postal_code] + - The informations that paypal returns after a payment
+    # - +paypal [:payer_country_code] + - The informations that paypal returns after a payment
+    # - +paypal [:payer_recipient_name] + - The informations that paypal returns after a payment
+    # 
     # 
     # ===== HTTP VALUE
     # 
@@ -80,71 +134,66 @@ module API
     # 
     def buypack
       objectToDelete = []
-      begin
-        if (@security)
-          pack = Pack.find_by_id(@pack_id)
-          if (pack == nil)
-            codeAnswer 502
-            defineHttp :not_found
-          elsif @artist.to_f + @association.to_f + @website.to_f != 100 || @amount.to_f < pack.minimal_price
-            codeAnswer 504
-            defineHttp :bad_request
-          else
-            p = Purchase.new
-            p.user_id = @user_id
-            p.save!
+      if (!(@paypal.present? && @paypal.has_key?(:payment_id) && @paypal.has_key?(:payment_method) && @paypal.has_key?(:status) && @paypal.has_key?(:payer_email)
+          && @paypal.has_key?(:payer_first_name) && @paypal.has_key?(:payer_last_name) && @paypal.has_key?(:payer_id) && @paypal.has_key?(:payer_phone) && @paypal.has_key?(:payer_country_code)
+          && @paypal.has_key?(:payer_street) && @paypal.has_key?(:payer_city) && @paypal.has_key?(:payer_postal_code) && @paypal.has_key?(:payer_country_code) && @paypal.has_key?(:payer_recipient_name)))
+        codeAnswer 503
+        defineHttp :bad_request
+      else
+        begin
+          if (@security)
+            pack = Pack.find_by_id(@pack_id)
+            if (pack == nil)
+              codeAnswer 502
+              defineHttp :not_found
+            elsif @artist.to_f + @association.to_f + @website.to_f != 100 || @amount.to_f < pack.minimal_price
+              codeAnswer 504
+              defineHttp :bad_request
+            else
+              p = Purchase.new
+              p.user_id = @user_id
+              p.save!
 
-            objectToDelete.unshift p
+              p.addPurchasedPackFromObject(pack, (pack.averagePrice > @amount.to_f), @artist, @association, @website, @amount)
 
-            pp = PurchasedPack.new
-            pp.pack_id = pack.id
-            pp.partial = (pack.averagePrice > @amount.to_f)
-            pp.artist_percentage = @artist
-            pp.association_percentage = @association
-            pp.website_percentage = @website
-            pp.value = @amount
-            pp.save!
+              PaypalPayment.create({
+                payment_id: @paypal[:payment_id],
+                payment_method: @paypal[:payment_method],
+                status: @paypal[:status],
+                payer_email: @paypal[:payer_email],
+                payer_first_name: @paypal[:payer_first_name],
+                payer_last_name: @paypal[:payer_last_name],
+                payer_id: @paypal[:payer_id],
+                payer_phone: @paypal[:payer_phone],
+                payer_country_code: @paypal[:payer_country_code],
+                payer_street: @paypal[:payer_street],
+                payer_city: @paypal[:payer_city],
+                payer_postal_code: @paypal[:payer_postal_code],
+                payer_country_code: @paypal[:payer_country_code],
+                payer_recipient_name: @paypal[:payer_recipient_name],
+                purchase_id: p.id
+              })
 
-            objectToDelete.unshift pp
-
-            pack.albums.each do |album|
-              album.setPack(@pack_id)
-              if (!album.isPartial || (album.isPartial && @amount.to_f > pack.averagePrice))
-                pa = PurchasedAlbum.new
-                pa.album_id = album.id
-                pa.purchased_pack_id = pp.id
-                pa.save!
-                objectToDelete.unshift pa
-
-                album.musics.each { |zik|
-                  pm = PurchasedMusic.new
-                  pm.purchase_id = p.id
-                  pm.purchased_album_id = pa.id
-                  pm.music_id = zik.id
-                  pm.save!
-                  objectToDelete.unshift pm
-                }
-              end
+              @returnValue = {
+                content: pack.as_json(only: Pack.miniKey, :include => {
+                  albums: {
+                    only: Album.miniKey,
+                    :include => {
+                      musics: { only: Music.miniKey }
+                    }
+                  }
+                })
+              }
             end
-
-            @returnValue = {
-              content: pp.as_json(except: [:updated_at], :include => {
-                pack: {
-                  only: Pack.miniKey
-                }
-              } )
-            }
+          else
+            codeAnswer 500
+            defineHttp :forbidden
           end
-        else
-          codeAnswer 500
-          defineHttp :forbidden
+        rescue
+          p.destroy
+          codeAnswer 504
+          defineHttp :service_unavailable
         end
-      rescue
-        objectToDelete.each do |obj|
-          obj.destroy
-        end
-        codeAnswer 504
-        defineHttp :service_unavailable
       end
       sendJson
     end

@@ -56,5 +56,5 @@
         //Albums + song
         
         .large-12.columns
-          .button.expand.radius.success
-            %a{:href => "http://www.paypal.com"} {{ labels.DISPLAY_PACK_BUY_PACK }}
+          .button.expand.radius.success{ "ng-click" => "toPayment()" }
+            {{ labels.DISPLAY_PACK_BUY_PACK }}

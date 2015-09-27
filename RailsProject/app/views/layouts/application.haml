@@ -61,7 +61,7 @@
 							%a.button.alert{:href => new_user_session_path, :target => "_self" } {{ labels.DISPLAY_MENU_LOGIN_LABEL }}
 		%main.row
 			- if notice
-				%small.error
+				%small.error.bg-green
 					%i.fi-x.left.removeInfo.pointer
 					%p= notice
 			-if alert

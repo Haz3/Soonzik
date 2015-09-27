@@ -246,33 +246,12 @@ module API
 			begin
 				if (@security)
 					user = User.find_by_id(@user_id)
-					list = user.purchases
 					contentReturn = { musics: [], albums: [], packs: []}
 
-					list.each do |x|
-						x.purchased_musics.each do |pm|
-							if (pm.purchased_album_id == nil)
-								contentReturn[:musics] = contentReturn[:musics] | [pm.music.as_json(only: Music.miniKey, :include => { album: { only: Album.miniKey }, user: { only: User.miniKey } })]
-							else
+					contentReturn[:musics] = Music.eager_load([:album, :user]).joins(:purchased_musics => { :purchase => {} }).where(purchased_musics: { purchased_album: nil }).where(purchases: { user_id: user.id }).as_json(only: Music.miniKey, :include => { album: { only: Album.miniKey }, user: { only: User.miniKey } })
+					contentReturn[:albums] = Album.eager_load([:musics, :user]).joins(:purchased_albums => { :purchased_musics => { :purchase => {} } }).where(purchased_albums: { purchased_pack: nil }).where(purchases: { user_id: user.id }).as_json(only: Album.miniKey, :include => { musics: { only: Music.miniKey }, user: { only: User.miniKey } })
+					contentReturn[:packs] = Pack.eager_load(albums: { user: {}, musics: {} }).joins(:purchased_packs => { :purchased_albums => { :purchased_musics => { :purchase => {} } } }).where(purchases: { user_id: user.id }).as_json(only: Pack.miniKey, :include => { albums: { only: Album.miniKey, :include => { musics: { only: Music.miniKey }, user: { only: User.miniKey } } } })
 
-								if (pm.purchased_album.purchased_pack_id == nil)
-									a = pm.purchased_album.album.as_json(only: Album.miniKey, :include => { user: { only: User.miniKey } })
-									a[:musics] = pm.purchased_album.album.musics.as_json(only: Music.miniKey)
-									contentReturn[:albums] = contentReturn[:albums] | [a]
-								else
-									pack = pm.purchased_album.purchased_pack.pack
-									value = pack.as_json(only: Pack.miniKey)
-									value[:albums] = []
-									pack.albums.each do |album|
-                    album.setPack(pack)
-									  value[:albums] << album.as_json(only: Album.miniKey, :include => { musics: { only: Music.miniKey }, user: { only: User.miniKey } } ) if (!(pm.purchased_album.purchased_pack.partial && !album.isPartial))
-									end
-									contentReturn[:packs] = contentReturn[:packs] | [value]
-								end
-
-							end
-						end
-					end
 					@returnValue = { content: contentReturn }
 					codeAnswer 200
 				else

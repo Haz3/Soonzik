@@ -67,23 +67,8 @@ SoonzikApp.controller('CartCtrl', ['$scope', 'SecureAuth', 'HTTPService', '$time
 		});
 	}
 
-	$scope.buyCart = function() {
-		SecureAuth.securedTransaction(function(key, id) {
-			var parameters = {
-				secureKey: key,
-				user_id: id
-			};
-
-			HTTPService.buyCart(parameters).then(function(response) {
-
-				NotificationService.success($rootScope.labels.FILE_CART_SUCCESS_BUY_CART_MESSAGE);
-
-			}, function(error) {
-				NotificationService.success($rootScope.labels.FILE_CART_BUY_ERROR_MESSAGE);
-			});
-		}, function(error) {
-			NotificationService.success($rootScope.labels.FILE_CART_BUY_ERROR_MESSAGE);
-		});
+	$scope.toPayment = function() {
+		document.location.href = "/purchase/cart/";
 	}
 
 }]);

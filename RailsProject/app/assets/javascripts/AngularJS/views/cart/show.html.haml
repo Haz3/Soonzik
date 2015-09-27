@@ -15,5 +15,5 @@
 						{{ album.title}}
 					%td
 						%a.fi-x{"ng-click" => "deleteItem(musics.id)"}
-		.button.expand.radius.success
-			%a{:href => "#", "ng-click" => "buyCart()"} {{ labels.DISPLAY_CART_BUY }}
+		.button.expand.radius.success{ "ng-click" => "toPayment()" }
+			{{ labels.DISPLAY_CART_BUY }}

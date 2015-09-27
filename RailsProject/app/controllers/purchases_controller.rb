@@ -37,14 +37,14 @@ class PurchasesController < ApplicationController
 	end
 
 	def buyPack
-		if (params.has_key?(:pack_id) && params.has_key?(:amount) &&
+		if (params.has_key?(:id) && params.has_key?(:amount) &&
 				params.has_key?(:artist) && params.has_key?(:association) &&
-				params.has_key?(:website) && (p = Pack.find_by_id(params[:pack_id])) != nil &&
+				params.has_key?(:website) && (p = Pack.find_by_id(params[:id])) != nil &&
 				params[:amount].to_f > p.minimal_price && params[:artist].to_f + params[:association].to_f + params[:website].to_f == 100)
 
 			makePayment({
-		    :return_url => "http://lvh.me:3000/Pack/#{p.id}/testCallback",
-		    :cancel_url => "http://lvh.me:3000/Pack/#{p.id}/cancelCallback"
+		    :return_url => "http://lvh.me:3000/successCallback/pack/#{p.id}?amount=#{params[:amount].to_f}&artist=#{params[:artist].to_f}&association=#{params[:association].to_f}&website=#{params[:website].to_f}",
+		    :cancel_url => "http://lvh.me:3000//cancelCallback/pack/#{p.id}"
 		  }, [{
         :name => p.title,
         :sku => "Pack",
@@ -73,7 +73,7 @@ class PurchasesController < ApplicationController
 		payer_info = payment.payer.payer_info
 
 		paymentModel = PaypalPayment.create({
-			id: payment.id,
+			payment_id: payment.id,
 			payment_method: payment.payer.payment_method,
 			status: payment.payer.status,
 			payer_email: payment.payer.payer_info.email,
@@ -90,54 +90,61 @@ class PurchasesController < ApplicationController
 			purchase_id: p.id
 		})
 
-		render json: paymentModel.as_json
+		redirect_to my_music_path
 	end
 
 	def cancelCallbackCart
-		render text: params
+		flash[:alert] = "You cancelled your payment"
+		redirect_to carts_my_cart_path
 	end
 
 	# Pack payment
 
 	def paymentCallbackPack
-		payment = Payment.find(params[:paymentId])
+		if (params.has_key?(:id) && params.has_key?(:amount) &&
+				params.has_key?(:artist) && params.has_key?(:association) &&
+				params.has_key?(:website) && (p = Pack.find_by_id(params[:id])) != nil &&
+				params[:amount].to_f > p.minimal_price && params[:artist].to_f + params[:association].to_f + params[:website].to_f == 100)
 
-		cart = Cart.eager_load(albums: { musics: {} }).where(carts: { user_id: current_user.id })
-		cart.each do |cartItem|
-			obj = nil
-			if (inCart.musics.size != 0)
-				obj = inCart.musics.first
-			else
-				obj = inCart.albums.first
-			end
+			payment = Payment.find(params[:paymentId])
+
+			purch = Purchase.new
+	    purch.user_id = current_user.id
+	    purch.save!
+			purch.addPurchasedPackFromObject(p, (p.averagePrice > params[:amount].to_f), params[:artist], params[:association], params[:website], params[:amount])
+
+			address = payment.payer.payer_info.shipping_address
+			payer_info = payment.payer.payer_info
+
+			paymentModel = PaypalPayment.create({
+				payment_id: payment.id,
+				payment_method: payment.payer.payment_method,
+				status: payment.payer.status,
+				payer_email: payment.payer.payer_info.email,
+				payer_first_name: payment.payer.payer_info.first_name,
+				payer_last_name: payment.payer.payer_info.last_name,
+				payer_id: payment.payer.payer_info.payer_id,
+				payer_phone: payment.payer.payer_info.phone,
+				payer_country_code: payment.payer.payer_info.country_code,
+				payer_street: payment.payer.payer_info.shipping_address.line1,
+				payer_city: payment.payer.payer_info.shipping_address.city,
+				payer_postal_code: payment.payer.payer_info.shipping_address.postal_code,
+				payer_country_code: payment.payer.payer_info.shipping_address.country_code,
+				payer_recipient_name: payment.payer.payer_info.shipping_address.recipient_name,
+				purchase_id: p.id
+			})
+			redirect_to my_music_path
+		else
+			flash[:alert] = "An error occured, please contact us if you have been debited"
+			redirect_to :root
 		end
-
-		address = payment.payer.payer_info.shipping_address
-		payer_info = payment.payer.payer_info
-
-
-		PaypalPayment.create({
-			id: payment.id,
-			payment_method: "paypal",
-			status: "VERIFIED",
-			payer_email: "belgium-buyer@gmail.com",
-			payer_first_name: "Florian",
-			payer_last_name: "Dewulf",
-			payer_id: "S9MLLHFSU6R26",
-			payer_phone: "0477706784",
-			payer_country_code: "BE",
-			payer_street: "Rue du Cornet 6",
-			payer_city: "VERVIERS",
-			payer_postal_code: "4800",
-			payer_country_code: "BE",
-			payer_recipient_name: "Florian Dewulf"
-		})
-
-		render json: payment.as_json
 	end
 
 	def cancelCallbackPack
-		render text: params
+		p = Pack.find_by_id(params[:id])
+		flash[:alert] = "An error occured while communicating with Paypal"
+		redirect_to carts_my_cart_path if (p != nil)
+		redirect_to :root if (p == nil)
 	end
 
 	###########################
@@ -176,7 +183,7 @@ class PurchasesController < ApplicationController
 				test += 1
 				retry
 			else
-				flash[:notice] = "An error occured while communicating with Paypal"
+				flash[:alert] = "An error occured while communicating with Paypal"
 			end
 		end
 	end

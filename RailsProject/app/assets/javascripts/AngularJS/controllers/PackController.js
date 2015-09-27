@@ -1,4 +1,4 @@
-SoonzikApp.controller('PacksCtrl', ['$scope', '$routeParams', 'SecureAuth', 'HTTPService', 'NotificationService', '$rootScope','$timeout',  function ($scope, $routeParams, SecureAuth, HTTPService, NotificationService, $rootScope, $timeout) {
+SoonzikApp.controller('PacksCtrl', ['$scope', '$routeParams', 'SecureAuth', 'HTTPService', 'NotificationService', '$rootScope','$timeout', '$location',  function ($scope, $routeParams, SecureAuth, HTTPService, NotificationService, $rootScope, $timeout, $location) {
 
 	$scope.loading = true;
 	$scope.saveCart = [];
@@ -16,6 +16,7 @@ SoonzikApp.controller('PacksCtrl', ['$scope', '$routeParams', 'SecureAuth', 'HTT
 		HTTPService.findPacks(parameters).then(function(packs) {
 			
 			$scope.pack = packs.data.content;
+			$scope.loading = false;
 
 		}, function (error) {
 			console.log($rootScope.labels.FILE_PACK_LOAD_ERROR_MESSAGE);
@@ -33,7 +34,7 @@ SoonzikApp.controller('PacksCtrl', ['$scope', '$routeParams', 'SecureAuth', 'HTT
 			{ value: 20, label: "Association" },
 			{ value: 15, label: "website" }
 		];
-
+		$scope.amountDonation = 20;
 		
 
 		HTTPService.showPack(id).then(function(response) {
@@ -41,6 +42,7 @@ SoonzikApp.controller('PacksCtrl', ['$scope', '$routeParams', 'SecureAuth', 'HTT
 			$scope.thisPack = response.data.content;
 			$scope.end_date = $scope.thisPack.end_date;
 			timeLeft();
+			$scope.loading = false;
 
 
 		}, function (error) {
@@ -84,30 +86,8 @@ SoonzikApp.controller('PacksCtrl', ['$scope', '$routeParams', 'SecureAuth', 'HTT
     	}, 1000);
 	}
 
-	$scope.addToCart = function() {
-		SecureAuth.securedTransaction(function(key, id) {
-			var parameters =
-		  		{	secureKey: key,
-		  			user_id : id,
-			  		pack_id: $scope.thisPack.id,
-			  		amount: $scope.thisPack.minimal_price,
-			  		artist : $scope.artistPercentage,
-			  		association : $scope.associationPercentage,
-			  		website : $scope.websitePercentage
-			  	};
-/*
-			HTTPService.(parameters).then(function(response) {
-				$scope.saveCart.push(response.data.content);
-			
-			}, function(error) {
-				NotificationService.error("Error while saving your cart, please try later");
-			});
-*/
-		}, function(error) {
-			NotificationService.error($rootScope.labels.FILE_PACK_BUY_PACK_ERROR_MESSAGE);
-		});
+	$scope.toPayment = function() {
+		document.location.href = "/purchase/pack/" + $routeParams.id + "?amount=" + $scope.amountDonation + "&artist=" + $scope.percentages[0].value + "&association=" + $scope.percentages[1].value + "&website=" + $scope.percentages[2].value;
 	}
-
-	$scope.loading = false;
 
 }]);
