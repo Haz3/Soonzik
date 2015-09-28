@@ -186,6 +186,7 @@ namespace SoonZik.ViewModels
 
                 var json = JObject.Parse(response).SelectToken("message");
 
+                // NO CONTENT RETURNED WHEN OK
                 //if (json.ToString() == "Created")
                 //    await new MessageDialog("Purchase PACK OK").ShowAsync();
                 //else

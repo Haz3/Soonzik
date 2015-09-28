@@ -224,8 +224,8 @@ namespace SoonZik.ViewModels
                 exception = e;
             }
 
-            if (exception != null)
-                await new MessageDialog(exception.Message, "Add friend Error").ShowAsync();
+            //if (exception != null)
+                //await new MessageDialog(exception.Message, "Add friend Error").ShowAsync();
         }
 
         public async void follow()

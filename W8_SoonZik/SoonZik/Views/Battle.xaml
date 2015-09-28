@@ -22,7 +22,7 @@
 
 
 
-        <FlipView SelectedItem="{Binding selected_battle, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Name="battle_fv" ItemsSource="{Binding battlelist}" FontSize="48" Background="White" Margin="190,173,0,0" Foreground="#FF020202" HorizontalAlignment="Left" Width="1541" Height="773" VerticalAlignment="Top">
+        <FlipView SelectedItem="{Binding selected_battle, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Name="battle_fv" ItemsSource="{Binding battlelist, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="48" Background="White" Margin="190,173,0,0" Foreground="#FF020202" HorizontalAlignment="Left" Width="1541" Height="773" VerticalAlignment="Top">
 
             <FlipView.ItemTemplate>
                 <DataTemplate>
@@ -50,14 +50,16 @@
                             </Grid.ColumnDefinitions>
 
                             <TextBlock Grid.Row="1" Grid.Column="0" Text="{Binding artist_one.username, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" HorizontalAlignment="Center"/>
-                            <Image  Grid.Row="1" Source="https://upload.wikimedia.org/wikipedia/commons/0/0e/Lakeyboy_Silhouette.PNG" Stretch="Fill" Width="174" Height="218" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,63,46,0"/>
-
+                            <Image  Grid.Row="1" Source="ms-appx:///Assets/user_profile.PNG" Stretch="Fill" Width="174" Height="218" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,63,46,0"/>
+                            <TextBlock Visibility="{Binding result_visibility, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Grid.Column="0" Text="{Binding artist_one_result, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Bottom" HorizontalAlignment="Center"/>
+                            
                             <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding artist_two.username, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" HorizontalAlignment="Center"/>
-                            <Image  Grid.Row="1" Grid.Column="1" Source="https://upload.wikimedia.org/wikipedia/commons/0/0e/Lakeyboy_Silhouette.PNG" Stretch="Fill" Width="174" Height="218" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,63,46,0"/>
+                            <Image  Grid.Row="1" Grid.Column="1" Source="ms-appx:///Assets/user_profile.PNG" Stretch="Fill" Width="174" Height="218" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,63,46,0"/>
+                            <TextBlock Visibility="{Binding result_visibility, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Grid.Column="1" Text="{Binding artist_two_result, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Bottom" HorizontalAlignment="Center"/>
 
                         </Grid>
 
-                        <Image  Grid.Row="1" Source="https://upload.wikimedia.org/wikipedia/commons/f/f6/Versus_sign.png" Stretch="Fill" Width="295" Height="305" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="597,88,643,92"/>
+                        <Image  Grid.Row="1" Source="ms-appx:///Assets/Versus_sign.png" Stretch="Fill" Width="295" Height="305" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="597,88,643,92"/>
 
                         <!-- THIRD ROW  -->
                         <Grid Grid.Row="2">
@@ -65,9 +67,9 @@
                                 <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
-                            
-                            <Button Content="{Binding artist_one.username, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="0" Command="{Binding do_vote_one, Mode=OneWay}" Background="#FFFF5D5D" FontSize="25" HorizontalAlignment="Center"  Width="250" VerticalAlignment="Center" BorderBrush="#FFFF5D5D"></Button>
-                            <Button Content="{Binding artist_two.username, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" Command="{Binding do_vote_two, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Background="#FF125EFF" FontSize="25" HorizontalAlignment="Center"  Width="250" VerticalAlignment="Center" BorderBrush="#FF125EFF"></Button>
+
+                            <Button Visibility="{Binding btn_visibility, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Content="{Binding artist_one.username, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="0" Command="{Binding do_vote_one, Mode=OneWay}" Background="#FFFF5D5D" FontSize="25" HorizontalAlignment="Center"  Width="250" VerticalAlignment="Center" BorderBrush="#FFFF5D5D"></Button>
+                            <Button Visibility="{Binding btn_visibility, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Content="{Binding artist_two.username, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" Command="{Binding do_vote_two, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Background="#FF125EFF" FontSize="25" HorizontalAlignment="Center"  Width="250" VerticalAlignment="Center" BorderBrush="#FF125EFF"></Button>
 
                         </Grid>
 

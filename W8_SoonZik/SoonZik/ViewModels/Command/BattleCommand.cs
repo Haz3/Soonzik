@@ -31,10 +31,10 @@ namespace SoonZik.ViewModels.Command
         public void Execute(object parameter)
         {
             // CommandParameter="1" for command "do_vote_one"
-            if (parameter as string == "1")
-                _ViewModel.vote(_ViewModel.selected_battle.artist_one.id.ToString());
-            else
-                _ViewModel.vote(_ViewModel.selected_battle.artist_two.id.ToString());
+            //if (parameter as string == "1")
+            //    _ViewModel.vote(_ViewModel.selected_battle.artist_one.id.ToString());
+            //else
+            //    _ViewModel.vote(_ViewModel.selected_battle.artist_two.id.ToString());
         }
     }
 }

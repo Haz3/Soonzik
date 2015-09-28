@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SoonZik.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -25,6 +26,28 @@ namespace SoonZik.Views
         public Artist()
         {
             this.InitializeComponent();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            this.Frame.GoBack();
+        }
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            SoonZik.Models.User elem = e.Parameter as SoonZik.Models.User;
+            DataContext = new ArtistViewModel(elem.id);
+        }
+
+        private void top_five_ListView_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            var item = ((SoonZik.Models.Music)e.ClickedItem);
+            this.Frame.Navigate(typeof(Music), item);
+        }
+
+        private void album_list_ListView_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            var item = ((SoonZik.Models.Album)e.ClickedItem);
+            this.Frame.Navigate(typeof(Album), item);
         }
     }
 }

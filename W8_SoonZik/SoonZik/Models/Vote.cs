@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace SoonZik.Models
 {
-    class Vote
+    public class Vote
     {
         public int id { get; set; }
         public int user_id { get; set; }
-        public int battle_id { get; set; }
+        //public int battle_id { get; set; }
         public int artist_id { get; set; }
     }
 }

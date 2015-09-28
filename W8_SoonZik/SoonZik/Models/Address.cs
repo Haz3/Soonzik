@@ -19,5 +19,8 @@ namespace SoonZik.Models
         // Just used to geocode
         public string lat { get; set; }
         public string lng { get; set; }
+
+        public double latt { get; set; }
+        public double lngg { get; set; }
     }
 }

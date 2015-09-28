@@ -64,6 +64,9 @@ namespace SoonZik.ViewModels
 
                 addr.lat = lat.ToString().Replace(",", ".");
                 addr.lng = lng.ToString().Replace(",", ".");
+                addr.latt = Double.Parse(lat.ToString());
+                addr.lngg = Double.Parse(lng.ToString());
+
                 return addr;
             }
             catch (Exception e)

@@ -18,6 +18,7 @@ namespace SoonZik.ViewModels
     class TweetViewModel : INotifyPropertyChanged
     {
         public ObservableCollection<Tweet> tweetlist { get; set; }
+        public ObservableCollection<User> userlist { get; set; }
 
         private string _message;
         public string message
@@ -51,6 +52,7 @@ namespace SoonZik.ViewModels
         {
             do_send_tweet = new RelayCommand(send_tweets);
             load_all_tweets();
+            load_users();
         }
 
         async static public Task<ObservableCollection<Tweet>> load_flux_tweets()
@@ -140,6 +142,27 @@ namespace SoonZik.ViewModels
             if (exception != null)
                 await new MessageDialog(exception.Message, "Send tweet error").ShowAsync();
             //return false;
+        }
+
+        async public void load_users()
+        {
+            Exception exception = null;
+            userlist = new ObservableCollection<User>();
+
+            try
+            {
+                var users = (List<User>)await Http_get.get_object(new List<User>(), "users");
+
+                foreach (var item in users)
+                    userlist.Add(item);
+            }
+            catch (Exception e)
+            {
+                exception = e;
+            }
+
+            if (exception != null)
+                await new MessageDialog(exception.Message, "Load user error").ShowAsync();
         }
     }
 }

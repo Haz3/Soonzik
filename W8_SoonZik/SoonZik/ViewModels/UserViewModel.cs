@@ -12,11 +12,16 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using Windows.UI.Popups;
 using Windows.UI.Xaml;
+using Windows.UI.Xaml.Media.Imaging;
 
 namespace SoonZik.ViewModels
 {
     class UserViewModel : INotifyPropertyChanged
     {
+        static string url = "http://api.lvh.me:3000/";
+        //static string url = "http://soonzikapi.herokuapp.com/";
+
+
         private User _user;
         public User user
         {
@@ -25,6 +30,17 @@ namespace SoonZik.ViewModels
             {
                 _user = value;
                 OnPropertyChanged("user");
+            }
+        }
+
+        private BitmapImage _user_img;
+        public BitmapImage user_img
+        {
+            get { return _user_img; }
+            set
+            {
+                _user_img = value;
+                OnPropertyChanged("user_img");
             }
         }
 
@@ -100,7 +116,7 @@ namespace SoonZik.ViewModels
             try
             {
                 user = await Http_get.get_user_by_id(id.ToString());
-
+                user_img = new BitmapImage(new Uri(url + "assets/usersImage/avatars/" + user.image, UriKind.RelativeOrAbsolute));
             }
 
             catch (Exception e)

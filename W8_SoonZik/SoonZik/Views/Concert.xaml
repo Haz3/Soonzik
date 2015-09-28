@@ -26,10 +26,56 @@
             <FlipView.ItemTemplate>
                 <DataTemplate>
 
-                    <Grid Width="Auto" Height="Auto" Background="#FF24A0D4">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="0.5*"/>
-                            <ColumnDefinition Width="*"/>
+                    <Grid Width="Auto" Height="Auto" Background="White">
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition Height="5*"/>
+                        </Grid.RowDefinitions>
+
+                        <Grid x:Name="concert_info_grid">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <!--ROW 0-->
+                            <TextBlock Grid.Column="0" Grid.Row="0" x:Uid="date_txt" Text="Date:" Foreground="Black" FontSize="40" FontWeight="Bold" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+                            <TextBlock Grid.Column="0" Grid.Row="0" Text="{Binding planification.Date}" Foreground="Black" VerticalAlignment="Center"/>
+
+                            <!--ROW 1-->
+                            <TextBlock Grid.Column="1" Grid.Row="0" x:Uid="website_txt" Text="Site Internet:" Foreground="Black" FontSize="40" FontWeight="Bold" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+                            <TextBlock Grid.Column="1" Grid.Row="0" Text="{Binding url}" Foreground="Black" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+
+                            <!--ROW 2-->
+                            <TextBlock Grid.Column="2" Grid.Row="0" Name="address_txt" x:Uid="address_txt" Text="Adresse:" Foreground="#FF020202" FontSize="40" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Top"></TextBlock>
+                            <TextBlock Grid.Column="2" Grid.Row="0" TextWrapping="NoWrap" Foreground="Black" HorizontalAlignment="Left" VerticalAlignment="Center">
+                                <Run Text="{Binding address.numberStreet}"/>
+                                <Run Text="{Binding address.street}"/>
+                                <LineBreak></LineBreak>
+                                <Run Text="{Binding address.city}"/>
+                                <Run Text="{Binding address.zipcode}"/>
+                            </TextBlock>
+                        </Grid>
+
+
+                        <bm:Map Grid.Row="1" ZoomLevel="6" Credentials="Au1nH1MxHdvPVWttdBJJbTRYt6nHZJofF21VgvtHIAb5oYGH5609yjEa51GZZqFO" x:Name="MyMap" Height="Auto" Width="Auto">
+                            <bm:Map.Center>
+                                <bm:Location Latitude="46.601595" Longitude="1.904063"/>
+                            </bm:Map.Center>
+
+                            <bm:Map.Children>
+                                <bm:Pushpin Background="#FF990000">
+                                    <bm:MapLayer.Position>
+                                        <bm:Location Latitude="{Binding address.lat}" Longitude="{Binding address.lng}" />
+                                    </bm:MapLayer.Position>
+                                </bm:Pushpin>
+                            </bm:Map.Children>
+                        </bm:Map>
+
+                        <!--<Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="89*"/>
+                            <ColumnDefinition Width="254*"/>
                         </Grid.ColumnDefinitions>
                         <Grid Grid.Column="0">
                             <Grid.RowDefinitions>
@@ -37,6 +83,7 @@
                                 <RowDefinition Height="*"/>
                                 <RowDefinition Height="*"/>
                             </Grid.RowDefinitions>
+                        
                             <StackPanel Grid.Column="0" Grid.Row="0">
                                 <TextBlock x:Uid="date_txt" Text="Date:" Foreground="Black" FontSize="40" FontWeight="Bold"/>
                                 <TextBlock Text="{Binding planification.Date}" Foreground="Black"/>
@@ -61,7 +108,8 @@
                         <bm:Map Grid.Column="1" ZoomLevel="6" Credentials="Au1nH1MxHdvPVWttdBJJbTRYt6nHZJofF21VgvtHIAb5oYGH5609yjEa51GZZqFO" x:Name="MyMap" Margin="50,150,50,150">
                             <bm:Map.Center>
                                 <bm:Location Latitude="46.601595" Longitude="1.904063"/>
-                                <!--<bm:Location Latitude="{Binding address.lat}" Longitude="{Binding address.lng}"/>-->
+                                <bm:Location Latitude="{Binding address.lat}" Longitude="{Binding address.lng}"/>-->
+                        <!--
                             </bm:Map.Center>
 
                             <bm:Map.Children>
@@ -71,7 +119,7 @@
                                     </bm:MapLayer.Position>
                                 </bm:Pushpin>
                             </bm:Map.Children>
-                        </bm:Map>
+                        </bm:Map>-->
 
                     </Grid>
                 </DataTemplate>

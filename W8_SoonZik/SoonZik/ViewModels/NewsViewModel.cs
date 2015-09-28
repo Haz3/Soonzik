@@ -114,40 +114,13 @@ namespace SoonZik.ViewModels
 
             try
             {
-                // Load the news
-                //news = await Http_get.get_news_by_id(id);
-
                 if (Windows.System.UserProfile.GlobalizationPreferences.Languages[0] == "fr-FR")
                     news = await Http_get.get_news_by_id_and_language(id, "FR");
                 else
                     news = await Http_get.get_news_by_id_and_language(id, "EN");
 
-                // Check language
-                //if (news.newstexts.Any())
-                //{
-                //    if (Windows.System.UserProfile.GlobalizationPreferences.Languages[0] == "fr-FR")
-                //        content = news.newstexts[0].content;
-                //    else
-                //    {
-                //        if ((news.newstexts).Count == 2)
-                //            content = news.newstexts[1].content;
-                //        else
-                //            content = "No content available.";
-                //    }
-                //}
-                //else
-                //{
-                //    if (Windows.System.UserProfile.GlobalizationPreferences.Languages[0] == "fr-FR")
-                //        content = "Pas de contenu disponible.";
-                //    else
-                //        content = "No content available.";
-                //}
-
-
-
                 var comment_vm = await CommentViewModel.load_comments("/news/" + news.id.ToString());
                 commentlist = comment_vm;
-                //commentlist.Reverse(); // DONT WORK .....
             }
 
             catch (Exception e)

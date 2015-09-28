@@ -23,7 +23,16 @@
                 <RowDefinition Height="291"/>
             </Grid.RowDefinitions>
 
-            <Image  Grid.Row="1" Source="https://upload.wikimedia.org/wikipedia/commons/0/0e/Lakeyboy_Silhouette.PNG" Stretch="Fill" Width="174" Height="218" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,63,46,0"/>
+            <!--Source="{Binding user.bmp, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"-->
+
+
+            <Image Source="{Binding user_img, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Stretch="Fill" Width="174" Height="218" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,63,46,0">
+                <!--<Image.Source>
+                    <BitmapImage DecodePixelWidth="200" UriSource="{Binding Path=user.bmp, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                </Image.Source>-->
+            </Image>
+            
+            <!--<Image  Grid.Row="1" Source="https://upload.wikimedia.org/wikipedia/commons/0/0e/Lakeyboy_Silhouette.PNG" Stretch="Fill" Width="174" Height="218" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,63,46,0"/>-->
             <Rectangle Fill="#FF00AFDC" HorizontalAlignment="Left" Height="75" StrokeEndLineCap="Square" Stroke="#FF00AFDC" VerticalAlignment="Top" Width="1500" Grid.ColumnSpan="2" Margin="0,0,-785,0"/>
 
             <TextBlock Name="user_username_txt" Text="{Binding user.username, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="20,10,0,19" TextWrapping="Wrap" VerticalAlignment="Center" FontSize="36" Height="46" Grid.ColumnSpan="2"/>
@@ -35,8 +44,8 @@
             <TextBlock Name="user_lname" Text="{Binding user.lname, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="275,96,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Foreground="Black" Height="25" Width="Auto" FontSize="20" Grid.Column="1"/>
 
 
-            <TextBlock x:Name="user_email_txt" x:Uid="user_email_txt" Text="Email:" HorizontalAlignment="Left" Margin="90,136,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Foreground="Black" Height="Auto" Width="Auto" FontSize="20" Grid.Column="1"/>
-            <TextBlock x:Name="user_email" Text="{Binding user.email, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="275,135,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Foreground="Black" Height="25" Width="Auto" FontSize="20" Grid.Column="1"/>
+            <TextBlock x:Name="user_email_txt" x:Uid="user_email_txt" Text="Email:" Margin="90,136,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Foreground="Black" Height="Auto" Width="52" FontSize="20" Grid.Column="1" HorizontalAlignment="Left"/>
+            <TextBlock x:Name="user_email" Text="{Binding user.email, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="275,135,-225,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Foreground="Black" Height="25" FontSize="20" Grid.Column="1" Width="400" HorizontalAlignment="Left"/>
 
             <TextBlock x:Name="user_birthday_txt" x:Uid="user_birthday_txt" Text="Date de naissance:" HorizontalAlignment="Left" Margin="90,175,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Foreground="Black" Height="Auto" Width="Auto" FontSize="20" Grid.Column="1"/>
             <TextBlock x:Name="user_birthday" Text="{Binding user.birthday, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="275,174,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Foreground="Black" Height="25" Width="Auto" FontSize="20" Grid.Column="1"/>
@@ -50,10 +59,10 @@
         </Grid>
 
         <TextBlock x:Uid="friends_list_txt" x:Name="friends_list_txt" HorizontalAlignment="Left" Margin="210,690,0,0" TextWrapping="Wrap" Text="Amis" VerticalAlignment="Top" Height="45" Width="175" Foreground="Black" FontSize="30"/>
-        <TextBlock x:Uid="follows_list_txt" x:Name="follows_list_txt" HorizontalAlignment="Left" Margin="615,690,0,0" TextWrapping="Wrap" Text="Follows" VerticalAlignment="Top" Height="45" Width="175" Foreground="Black" FontSize="30"/>
-        <TextBlock x:Uid="tweets_list_txt" x:Name="tweets_list_txt" HorizontalAlignment="Left" Margin="1020,690,0,0" TextWrapping="Wrap" Text="Tweets" VerticalAlignment="Top" Height="45" Width="175" Foreground="Black" FontSize="30"/>
+        <TextBlock x:Uid="follows_list_txt" x:Name="follows_list_txt" HorizontalAlignment="Left" Margin="615,690,0,0" TextWrapping="Wrap" Text="Follows" VerticalAlignment="Top" Height="45" Width="Auto" Foreground="Black" FontSize="30"/>
+        <TextBlock x:Uid="tweets_list_txt" x:Name="tweets_list_txt" HorizontalAlignment="Left" Margin="1020,690,0,0" TextWrapping="Wrap" Text="Tweets" VerticalAlignment="Top" Height="45" Width="Auto" Foreground="Black" FontSize="30"/>
 
-        <ListView x:Name="friend_list" ItemsSource="{Binding friends, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Height="290" Margin="210,740,0,0" VerticalAlignment="Top" Width="355" Background="White">
+        <ListView x:Name="friend_list" ItemsSource="{Binding friends, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Height="290" Margin="210,740,0,0" VerticalAlignment="Top" Width="355" Background="White" IsSwipeEnabled="False" SelectionMode="None">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <StackPanel>
@@ -66,7 +75,7 @@
         </ListView>
 
 
-        <ListView x:Name="follows_list" ItemsSource="{Binding follows, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Height="290" Margin="615,740,0,0" VerticalAlignment="Top" Width="355" Background="White">
+        <ListView x:Name="follows_list" ItemsSource="{Binding follows, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Height="290" Margin="615,740,0,0" VerticalAlignment="Top" Width="355" Background="White" IsSwipeEnabled="False" SelectionMode="None">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <StackPanel>
@@ -78,7 +87,7 @@
             </ListView.ItemTemplate>
         </ListView>
 
-        <ListView x:Name="tweets_list" ItemsSource="{Binding tweets, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Height="290" Margin="1020,740,0,0" VerticalAlignment="Top" Width="690" Background="White" IsItemClickEnabled="False">
+        <ListView x:Name="tweets_list" ItemsSource="{Binding tweets, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Height="290" Margin="1020,740,0,0" VerticalAlignment="Top" Width="690" Background="White" IsItemClickEnabled="False" IsSwipeEnabled="False" SelectionMode="None">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <StackPanel>

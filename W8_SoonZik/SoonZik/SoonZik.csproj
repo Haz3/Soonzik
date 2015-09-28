@@ -116,6 +116,7 @@
     <Compile Include="Common\SuspensionManager.cs" />
     <Compile Include="Models\Address.cs" />
     <Compile Include="Models\Album.cs" />
+    <Compile Include="Models\Artist_info.cs" />
     <Compile Include="Models\Attachments.cs" />
     <Compile Include="Models\Battle.cs" />
     <Compile Include="Models\Cart.cs" />
@@ -247,6 +248,7 @@
     </AppxManifest>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\cd.png" />
     <Content Include="Assets\connexion_fb.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -284,6 +286,7 @@
     <Content Include="Assets\music_player_icons\Volume.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Assets\Record-Album-02.jpg" />
     <Content Include="Assets\SmallLogo.scale-100.png" />
     <Content Include="Assets\SoonZik_splashscreen.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -314,6 +317,8 @@
     <Content Include="Assets\twitter_signin.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Assets\user_profile.PNG" />
+    <Content Include="Assets\Versus_sign.png" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">

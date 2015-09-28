@@ -26,12 +26,12 @@
         <TextBlock x:Uid="user_list_txt" x:Name="user_list_txt" HorizontalAlignment="Left" Margin="92,130,0,0" TextWrapping="Wrap" Text="Liste des utilisateurs" VerticalAlignment="Top" Height="45" Width="Auto" Foreground="Black" FontSize="30"/>
         <TextBlock x:Uid="tweets_list_txt" x:Name="tweets_list_txt" HorizontalAlignment="Left" Margin="490,130,0,0" TextWrapping="Wrap" Text="Liste de Tweets de la communaute" VerticalAlignment="Top" Height="45" Width="Auto" Foreground="Black" FontSize="30"/>
 
-        <ListView x:Name="user_list" ItemClick="user_list_ItemClick" ItemsSource="{Binding users}" Background="#b0b0b0" HorizontalAlignment="Left" Margin="92,180,0,0" VerticalAlignment="Top" Width="310" Height="850" IsItemClickEnabled="True" IsSwipeEnabled="False" SelectionMode="None" SelectedItem="{Binding user_selected, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+        <ListView x:Name="user_list" ItemClick="user_list_ItemClick" ItemsSource="{Binding userlist, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Background="#b0b0b0" HorizontalAlignment="Left" Margin="92,180,0,0" VerticalAlignment="Top" Width="310" Height="850" IsItemClickEnabled="True" IsSwipeEnabled="False" SelectionMode="None" SelectedItem="{Binding user_selected, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <StackPanel>
                         <StackPanel Orientation="Horizontal">
-                            <TextBlock Name="music_title" Text="{Binding username}" FontSize="16" Foreground="Black" Margin="20,0,0,0"></TextBlock>
+                            <TextBlock Name="user_username" Text="{Binding username}" FontSize="16" Foreground="White" Margin="20,0,0,0"></TextBlock>
                         </StackPanel>
                     </StackPanel>
                 </DataTemplate>
