@@ -22,7 +22,7 @@
                     <Image Tapped="UIElement_OnTapped" Grid.Row="0" Source="../Resources/Icones/share.png" Height="30"
                        VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,10,0" />
                     <Grid Background="White" Grid.Row="1">
-                        <Image Source="../Resources/Icones/disc.png" Height="70" HorizontalAlignment="Left"
+                    <Image Source="{Binding Path=attachments[0].url}" Height="70" HorizontalAlignment="Left"
                            Margin="20,15,0,15" />
                         <TextBlock Text="{Binding Path=title}" Style="{StaticResource TitleTextBlockStyle}" FontSize="15"
                                Foreground="#424242"

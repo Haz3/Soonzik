@@ -94,7 +94,6 @@
     <RootPropertyPathName Name="description" />
     <RootPropertyPathName Name="ButtonFriendText" />
     <RootPropertyPathName Name="AddCommand" />
-    <RootPropertyPathName Name="profilImage" />
     <RootPropertyPathName Name="ListBattles" />
     <RootPropertyPathName Name="SelectedBattle" />
     <RootPropertyPathName Name="ProgressOn" />
@@ -119,13 +118,13 @@
     <RootPropertyPathName Name="FollowerCommand" />
     <RootPropertyPathName Name="CollectionGroups" />
     <RootPropertyPathName Name="created_at" />
+    <RootPropertyPathName Name="attachments" />
+    <RootPropertyPathName Name="url" />
     <RootPropertyPathName Name="ListNews" />
     <RootPropertyPathName Name="SelectedNews" />
     <RootPropertyPathName Name="SelectNews" />
     <RootPropertyPathName Name="NewsContent" />
     <RootPropertyPathName Name="NewsTitle" />
-    <RootPropertyPathName Name="attachments" />
-    <RootPropertyPathName Name="url" />
     <RootPropertyPathName Name="ListArtistes" />
     <RootPropertyPathName Name="TheArtiste" />
     <RootPropertyPathName Name="ArtistTappedCommand" />
@@ -148,6 +147,7 @@
     <RootPropertyPathName Name="ButtonContent" />
     <RootPropertyPathName Name="EditClickCommand" />
     <RootPropertyPathName Name="CanUpdate" />
+    <RootPropertyPathName Name="profilImage" />
   </Roots.PropertyPathNames>
   <Roots.RootTypes>
     <RootType FullName="Windows.UI.Xaml.Application">

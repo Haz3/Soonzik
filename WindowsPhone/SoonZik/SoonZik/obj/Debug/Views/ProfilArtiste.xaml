@@ -20,8 +20,8 @@
 
     <Grid x:Name="GlobalGrid">
         <Grid.RowDefinitions>
+            <RowDefinition Height="300" />
             <RowDefinition Height="*" />
-            <RowDefinition Height="250" />
         </Grid.RowDefinitions>
         <Grid.Resources>
             <DataTemplate x:Key="AlbumTemplate">
@@ -38,9 +38,9 @@
         </Grid.Resources>
 
         <Grid Grid.Row="0">
-            <Image Name="ImageArtiste" Source="{Binding TheArtiste.profilImage}" Width="200" Height="200"
+            <Image Name="ImageArtiste" Source="{Binding Path=TheArtiste.image}" Width="200" Height="200"
                    HorizontalAlignment="Center" VerticalAlignment="Top"
-                   Margin="0,30,0,0" />
+                   Margin="0,10,0,0" />
 
             <TextBlock x:Name="AlbumTitle" Text="{Binding TheArtiste.username}" FontSize="30"
                        VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,120,0,0" />
@@ -56,85 +56,5 @@
         <ListView Grid.Row="1" x:Name="MusicListView" ItemsSource="{Binding ListAlbums}"
                   ItemTemplate="{StaticResource AlbumTemplate}" SelectedItem="{Binding TheAlbum, Mode=TwoWay}" />
     </Grid>
-
-
 </Page>
-<!--<Grid Background="Transparent">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="18*"/>
-            <RowDefinition Height="30*"/>
-        </Grid.RowDefinitions>
-
-        -->
-<!-- Row 1 -->
-<!--<Grid Grid.Row="0" Background="#d3d7da">
-            <Image Source="../Resources/logo.png" Height="100" Width="150" Grid.Row="0" VerticalAlignment="Center"/>
-        </Grid>-->
-<!-- Row 2 -->
-<!--
-        <Grid Grid.Row="0" Background="Transparent">
-            <Image Source="../Resources/Icones/disc.png" Height="160" Width="160" HorizontalAlignment="Left" Margin="20,0,0,0"/>
-            <TextBlock Text="Artist Name" FontFamily="Calibri" FontSize="30" HorizontalAlignment="Right" Margin="0,38,49,42"/>
-        </Grid>
-        -->
-<!-- Row 3 -->
-<!--<Grid Grid.Row="1" Background="Transparent">
-            <Pivot x:Name="PivotProfil" HeaderTemplate="{StaticResource SizeHeaderGlobalPivot}" Style="{StaticResource PivotStyle1}">
-                <PivotItem Header="Bio">
-                    <ScrollViewer>
-                        <StackPanel>
-                            <TextBlock FontSize="20" FontFamily="Calibri" TextWrapping="Wrap">
-                                <TextBlock.Text>
-                                    Un texte est donc écrit, avant d'être lu. 
-                                    Il n'y a pas de limitation dans la longueur d'un texte. Du fait de la syntaxe de la plupart des langages, un texte s'organise généralement en une suite de mots et de phrases.
-                                    La définition de texte ci-dessus désigne une sémiotique du langage (proprement acte sémique) qui en tant que tel transcende l'acte textuel. Il en résulte que tout texte peut se transposer dans n'importe quelle langue écrite, au travers d'un processus de traduction, aux dépens cependant d'une perte partielle de sens selon la qualité de la traduction et la proximité des langages.
-                                </TextBlock.Text>
-                            </TextBlock>
-                        </StackPanel>
-                    </ScrollViewer>
-                </PivotItem>
-                <PivotItem Header="Discographie">
-                    <ScrollViewer>
-                        <StackPanel>
-                            <TextBlock FontSize="20" FontFamily="Calibri" TextWrapping="Wrap">
-                                <TextBlock.Text>
-                                    Un texte est donc écrit, avant d'être lu. 
-                                    Il n'y a pas de limitation dans la longueur d'un texte. Du fait de la syntaxe de la plupart des langages, un texte s'organise généralement en une suite de mots et de phrases.
-                                    La définition de texte ci-dessus désigne une sémiotique du langage (proprement acte sémique) qui en tant que tel transcende l'acte textuel. Il en résulte que tout texte peut se transposer dans n'importe quelle langue écrite, au travers d'un processus de traduction, aux dépens cependant d'une perte partielle de sens selon la qualité de la traduction et la proximité des langages.
-                                </TextBlock.Text>
-                            </TextBlock>
-                        </StackPanel>
-                    </ScrollViewer>
-                </PivotItem>
-                <PivotItem Header="Social">
-                    <ScrollViewer>
-                        <StackPanel>
-                            <TextBlock FontSize="20" FontFamily="Calibri" TextWrapping="Wrap">
-                                <TextBlock.Text>
-                                    Un texte est donc écrit, avant d'être lu. 
-                                    Il n'y a pas de limitation dans la longueur d'un texte. Du fait de la syntaxe de la plupart des langages, un texte s'organise généralement en une suite de mots et de phrases.
-                                    La définition de texte ci-dessus désigne une sémiotique du langage (proprement acte sémique) qui en tant que tel transcende l'acte textuel. Il en résulte que tout texte peut se transposer dans n'importe quelle langue écrite, au travers d'un processus de traduction, aux dépens cependant d'une perte partielle de sens selon la qualité de la traduction et la proximité des langages.
-                                </TextBlock.Text>
-                            </TextBlock>
-                        </StackPanel>
-                    </ScrollViewer>
-                </PivotItem>
-                <PivotItem Header="A écouter">
-                    <ScrollViewer>
-                        <StackPanel>
-                            <TextBlock FontSize="20" FontFamily="Calibri" TextWrapping="Wrap">
-                                <TextBlock.Text>
-                                    Un texte est donc écrit, avant d'être lu. 
-                                    Il n'y a pas de limitation dans la longueur d'un texte. Du fait de la syntaxe de la plupart des langages, un texte s'organise généralement en une suite de mots et de phrases.
-                                    La définition de texte ci-dessus désigne une sémiotique du langage (proprement acte sémique) qui en tant que tel transcende l'acte textuel. Il en résulte que tout texte peut se transposer dans n'importe quelle langue écrite, au travers d'un processus de traduction, aux dépens cependant d'une perte partielle de sens selon la qualité de la traduction et la proximité des langages.
-                                </TextBlock.Text>
-                            </TextBlock>
-                        </StackPanel>
-                    </ScrollViewer>
-                </PivotItem>
-            </Pivot>
-        </Grid>-->
-<!-- Row 4 -->
-<!--
-    </Grid>-->
 

@@ -37,6 +37,7 @@ namespace SoonZik.ViewModel
         #endregion
 
         #region Attribute
+        private const string UrlImage = "http://soonzikapi.herokuapp.com/assets/usersImage/avatars/";
 
         private string _buttonFriendText;
 
@@ -118,9 +119,9 @@ namespace SoonZik.ViewModel
             }
         }
 
-        private int _nbrFollowers;
+        private string _nbrFollowers;
 
-        public int NbrFollowers
+        public string NbrFollowers
         {
             get { return _nbrFollowers; }
             set
@@ -154,7 +155,7 @@ namespace SoonZik.ViewModel
                         }
                     }
                     if (TheArtiste.follows != null)
-                        NbrFollowers = TheArtiste.follows.Count;
+                        NbrFollowers = TheArtiste.follows.Count.ToString();
                 });
             });
         }
@@ -248,8 +249,7 @@ namespace SoonZik.ViewModel
         private void SelectionExecute()
         {
             TheArtiste = TheUser;
-            TheUser.profilImage = new BitmapImage(new Uri("http://soonzikapi.herokuapp.com/assets/usersImage/avatars/" +
-                                                                                 TheUser.image, UriKind.RelativeOrAbsolute));
+            TheArtiste.image = new Uri(UrlImage + TheUser.image, UriKind.RelativeOrAbsolute).ToString();
             SetFollowText();
             Charge();
             CheckIfFriend();

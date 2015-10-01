@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using Windows.ApplicationModel.Core;
@@ -30,6 +31,7 @@ namespace SoonZik.ViewModel
 
         #region Attribute
 
+        private const string UrlImage = "http://soonzikapi.herokuapp.com/assets/news/";
         public static MessagePrompt MessagePrompt { get; set; }
 
         public ObservableCollection<News> ListNews
@@ -109,7 +111,11 @@ namespace SoonZik.ViewModel
                     foreach (var item in test)
                     {
                         CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
-                            () => { ListNews.Add(item); });
+                            () =>
+                            {
+                                item.attachments[0].url = new Uri(UrlImage + item.attachments[0].url, UriKind.RelativeOrAbsolute).ToString();
+                                ListNews.Add(item);
+                            });
                     }
                 }
             });

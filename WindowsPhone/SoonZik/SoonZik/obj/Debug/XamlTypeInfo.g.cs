@@ -3967,7 +3967,7 @@ namespace SoonZik.SoonZik_XamlTypeInfo
         private void set_194_ProfilArtisteViewModel_NbrFollowers(object instance, object Value)
         {
             var that = (global::SoonZik.ViewModel.ProfilArtisteViewModel)instance;
-            that.NbrFollowers = (global::System.Int32)Value;
+            that.NbrFollowers = (global::System.String)Value;
         }
         private object get_195_InscriptionViewModel_Password(object instance)
         {
@@ -6409,7 +6409,7 @@ namespace SoonZik.SoonZik_XamlTypeInfo
                 break;
             case "SoonZik.ViewModel.ProfilArtisteViewModel.NbrFollowers":
                 userType = (global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType)GetXamlTypeByName("SoonZik.ViewModel.ProfilArtisteViewModel");
-                xamlMember = new global::SoonZik.SoonZik_XamlTypeInfo.XamlMember(this, "NbrFollowers", "Int32");
+                xamlMember = new global::SoonZik.SoonZik_XamlTypeInfo.XamlMember(this, "NbrFollowers", "String");
                 xamlMember.Getter = get_194_ProfilArtisteViewModel_NbrFollowers;
                 xamlMember.Setter = set_194_ProfilArtisteViewModel_NbrFollowers;
                 break;

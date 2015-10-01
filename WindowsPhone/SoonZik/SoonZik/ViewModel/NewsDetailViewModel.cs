@@ -13,8 +13,6 @@ namespace SoonZik.ViewModel
         public NewsDetailViewModel()
         {
             SelectNews = NewsViewModel.DetailSelectedNews;
-            SelectNews.attachments[0].url = new Uri("http://soonzikapi.herokuapp.com/assets/" + SelectNews.attachments[0].url,
-                UriKind.RelativeOrAbsolute).ToString();
             var ci = new CultureInfo(GlobalizationPreferences.Languages[0]);
             if (ci.Name.Equals("en-US"))
             {
@@ -31,7 +29,7 @@ namespace SoonZik.ViewModel
         #endregion
 
         #region Attribute
-
+        
         public News SelectNews { get; set; }
         private string _newsContent;
 

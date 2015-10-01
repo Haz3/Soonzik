@@ -30,6 +30,7 @@ namespace SoonZik.ViewModel
 
         #region Attribute
 
+        private const string UrlImage = "http://soonzikapi.herokuapp.com/assets/usersImage/avatars/";
         private bool _friend;
 
         private string _buttonFriendText;
@@ -114,8 +115,7 @@ namespace SoonZik.ViewModel
         private void SelectionExecute()
         {
             CurrentUser = UserFromButton;
-            CurrentUser.profilImage = new BitmapImage(new Uri("http://soonzikapi.herokuapp.com/assets/usersImage/avatars/" +
-                                                                                 CurrentUser.image, UriKind.RelativeOrAbsolute));
+            CurrentUser.image = new Uri(UrlImage + CurrentUser.image, UriKind.RelativeOrAbsolute).ToString();
         }
 
         private void HardwareButtonsOnBackPressed(object sender, BackPressedEventArgs backPressedEventArgs)
