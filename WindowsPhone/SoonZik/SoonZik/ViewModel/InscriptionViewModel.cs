@@ -166,12 +166,12 @@ namespace SoonZik.ViewModel
                 try
                 {
                     var stringJson = JObject.Parse(res).SelectToken("content").ToString();
-                    Singleton.Instance().CurrentUser = JsonConvert.DeserializeObject(stringJson, typeof (User)) as User;
-                    Singleton.Instance().CurrentUser.profilImage =
+                    Singleton.Singleton.Instance().CurrentUser = JsonConvert.DeserializeObject(stringJson, typeof (User)) as User;
+                    Singleton.Singleton.Instance().CurrentUser.profilImage =
                         new BitmapImage(
                             new Uri(
                                 "http://soonzikapi.herokuapp.com/assets/usersImage/avatars/" +
-                                Singleton.Instance().CurrentUser.image, UriKind.RelativeOrAbsolute));
+                                Singleton.Singleton.Instance().CurrentUser.image, UriKind.RelativeOrAbsolute));
 
                     ServiceLocator.Current.GetInstance<MyNetworkViewModel>().UpdateFriend();
                 }
@@ -179,7 +179,6 @@ namespace SoonZik.ViewModel
                 {
                     new MessageDialog("Erreur de connexion" + e).ShowAsync();
                 }
-                Singleton.Instance().NewsPage = new News();
                 Navigation.Navigate(typeof (MainView));
             }
             else

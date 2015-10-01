@@ -33,7 +33,7 @@
         </m3:InitialRotationPreference>
       </m3:VisualElements>
       <Extensions>
-        <Extension Category="windows.backgroundTasks" EntryPoint="SoonZik.BackgroundAudioTask.BackgroundAudioTask">
+        <Extension Category="windows.backgroundTasks" EntryPoint="SoonZik.BackgroundAudioTask.MyBackgroundAudioTask">
           <BackgroundTasks>
             <Task Type="audio" />
           </BackgroundTasks>
@@ -53,6 +53,16 @@
     <Capability Name="picturesLibrary" />
     <DeviceCapability Name="location" />
   </Capabilities>
+  <Extensions>
+    <Extension Category="windows.activatableClass.inProcessServer">
+      <InProcessServer>
+        <Path>CLRHost.dll</Path>
+        <ActivatableClass ActivatableClassId="SoonZik.BackgroundAudioTask.MyBackgroundAudioTask" ThreadingModel="both" />
+        <ActivatableClass ActivatableClassId="SoonZik.MyPlaylistManager.MyPlaylist" ThreadingModel="both" />
+        <ActivatableClass ActivatableClassId="SoonZik.MyPlaylistManager.MyPlaylistManager" ThreadingModel="both" />
+      </InProcessServer>
+    </Extension>
+  </Extensions>
   <build:Metadata>
     <build:Item Name="TargetFrameworkMoniker" Value="WindowsPhoneApp,Version=v8.1" />
     <build:Item Name="VisualStudio" Version="12.0" />

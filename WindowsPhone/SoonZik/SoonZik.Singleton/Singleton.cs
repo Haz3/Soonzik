@@ -5,12 +5,10 @@ using Windows.UI.Xaml;
 using Facebook;
 using SoonZik.HttpRequest;
 using SoonZik.HttpRequest.Poco;
-using SoonZik.Views;
-using News = SoonZik.Views.News;
 
-namespace SoonZik.Utils
+namespace SoonZik.Singleton
 {
-    public class Singleton
+    public sealed class Singleton
     {
         #region Ctor
 
@@ -58,11 +56,7 @@ namespace SoonZik.Utils
         public User SelectedUser { get; set; }
 
         public bool ItsMe { get; set; }
-
-        public News NewsPage { get; set; }
-
-        public ProfilUser ProfilPage { get; set; }
-
+        
         public int NewProfilUser { get; set; }
 
         public UIElement LastElement { get; set; }

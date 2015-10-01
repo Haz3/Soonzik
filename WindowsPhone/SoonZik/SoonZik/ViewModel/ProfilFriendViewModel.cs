@@ -84,7 +84,7 @@ namespace SoonZik.ViewModel
         private void CheckIfFriend()
         {
             var loader = new ResourceLoader();
-            foreach (var friend in Singleton.Instance().CurrentUser.friends)
+            foreach (var friend in Singleton.Singleton.Instance().CurrentUser.friends)
             {
                 if (friend.username == UserFromButton.username)
                 {

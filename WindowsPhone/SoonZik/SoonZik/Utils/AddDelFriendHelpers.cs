@@ -18,7 +18,7 @@ namespace SoonZik.Utils
             var post = new HttpRequestPost();
             var get = new HttpRequestGet();
 
-            var userKey = get.GetUserKey(Singleton.Instance().CurrentUser.id.ToString());
+            var userKey = get.GetUserKey(Singleton.Singleton.Instance().CurrentUser.id.ToString());
             userKey.ContinueWith(delegate(Task<object> task)
             {
                 var key = task.Result as string;
@@ -26,7 +26,7 @@ namespace SoonZik.Utils
                 {
                     var stringEncrypt = KeyHelpers.GetUserKeyFromResponse(key);
                     var cryptographic =
-                        EncriptSha256.EncriptStringToSha256(Singleton.Instance().CurrentUser.salt + stringEncrypt);
+                        EncriptSha256.EncriptStringToSha256(Singleton.Singleton.Instance().CurrentUser.salt + stringEncrypt);
                     if (!friend)
                         AddFriend(post, cryptographic, get, id);
                     else
@@ -37,26 +37,26 @@ namespace SoonZik.Utils
 
         private static void DelFriend(HttpRequestPost post, string cryptographic, HttpRequestGet get, string id)
         {
-            var resPost = post.DelFriend(cryptographic, id, Singleton.Instance().CurrentUser.id.ToString());
+            var resPost = post.DelFriend(cryptographic, id, Singleton.Singleton.Instance().CurrentUser.id.ToString());
             resPost.ContinueWith(delegate(Task<string> tmp)
             {
                 var res = tmp.Result;
                 CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
                 {
                     var followers = get.GetFriends(new List<User>(), "users",
-                        Singleton.Instance().CurrentUser.id.ToString());
+                        Singleton.Singleton.Instance().CurrentUser.id.ToString());
                     followers.ContinueWith(delegate(Task<object> task1)
                     {
                         var res2 = task1.Result as List<User>;
                         if (res2 != null)
                         {
-                            Singleton.Instance().CurrentUser.friends.Clear();
+                            Singleton.Singleton.Instance().CurrentUser.friends.Clear();
                             CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
                                 () =>
                                 {
                                     foreach (var user in res2)
                                     {
-                                        Singleton.Instance().CurrentUser.friends.Add(user);
+                                        Singleton.Singleton.Instance().CurrentUser.friends.Add(user);
                                     }
                                     ServiceLocator.Current.GetInstance<MyNetworkViewModel>().UpdateFriend();
                                     new MessageDialog("Supr effectue").ShowAsync();
@@ -69,7 +69,7 @@ namespace SoonZik.Utils
 
         private static void AddFriend(HttpRequestPost post, string cryptographic, HttpRequestGet get, string id)
         {
-            var resPost = post.AddFriend(cryptographic, id, Singleton.Instance().CurrentUser.id.ToString());
+            var resPost = post.AddFriend(cryptographic, id, Singleton.Singleton.Instance().CurrentUser.id.ToString());
             resPost.ContinueWith(delegate(Task<string> tmp)
             {
                 var test = tmp.Result;
@@ -78,19 +78,19 @@ namespace SoonZik.Utils
                     CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
                     {
                         var followers = get.GetFriends(new List<User>(), "users",
-                            Singleton.Instance().CurrentUser.id.ToString());
+                            Singleton.Singleton.Instance().CurrentUser.id.ToString());
                         followers.ContinueWith(delegate(Task<object> task1)
                         {
                             var res = task1.Result as List<User>;
                             if (res != null)
                             {
-                                Singleton.Instance().CurrentUser.friends.Clear();
+                                Singleton.Singleton.Instance().CurrentUser.friends.Clear();
                                 CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
                                     () =>
                                     {
                                         foreach (var user in res)
                                         {
-                                            Singleton.Instance().CurrentUser.friends.Add(user);
+                                            Singleton.Singleton.Instance().CurrentUser.friends.Add(user);
                                         }
                                         ServiceLocator.Current.GetInstance<MyNetworkViewModel>().UpdateFriend();
                                         new MessageDialog("Demande effectue").ShowAsync();

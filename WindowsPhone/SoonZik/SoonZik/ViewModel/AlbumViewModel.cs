@@ -4,12 +4,14 @@ using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Windows.ApplicationModel.Core;
+using Windows.Storage;
 using Windows.UI.Core;
 using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Coding4Fun.Toolkit.Controls;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using SoonZik.BackgroundAudioTask;
 using SoonZik.Controls;
 using SoonZik.Helpers;
 using SoonZik.HttpRequest;
@@ -42,7 +44,7 @@ namespace SoonZik.ViewModel
         #endregion
 
         #region Attribute
-
+        
         private readonly INavigationService _navigationService;
 
         private string _imageAlbum;
@@ -170,7 +172,7 @@ namespace SoonZik.ViewModel
             var post = new HttpRequestPost();
             try
             {
-                var userKey = request.GetUserKey(Singleton.Instance().CurrentUser.id.ToString());
+                var userKey = request.GetUserKey(Singleton.Singleton.Instance().CurrentUser.id.ToString());
                 userKey.ContinueWith(delegate(Task<object> task)
                 {
                     var key = task.Result as string;
@@ -178,9 +180,9 @@ namespace SoonZik.ViewModel
                     {
                         var stringEncrypt = KeyHelpers.GetUserKeyFromResponse(key);
                         _crypto =
-                            EncriptSha256.EncriptStringToSha256(Singleton.Instance().CurrentUser.salt + stringEncrypt);
+                            EncriptSha256.EncriptStringToSha256(Singleton.Singleton.Instance().CurrentUser.salt + stringEncrypt);
                     }
-                    var test = post.SendComment(TextComment, TheAlbum, _crypto, Singleton.Instance().CurrentUser);
+                    var test = post.SendComment(TextComment, TheAlbum, _crypto, Singleton.Singleton.Instance().CurrentUser);
                     test.ContinueWith(delegate(Task<string> tmp)
                     {
                         var res = tmp.Result;
@@ -203,13 +205,14 @@ namespace SoonZik.ViewModel
             TheAlbum = MyAlbum;
             Charge();
         }
-
+        
         private void ItemClickCommandExecute()
         {
             if (!_moreOption)
             {
-                Singleton.Instance().SelectedMusicSingleton = SelectedMusic;
-                GlobalMenuControl.SetChildren(new PlayerControl());
+                Singleton.Singleton.Instance().SelectedMusicSingleton = SelectedMusic;
+                LocalFolderHelper.WriteTimestamp();
+                GlobalMenuControl.SetChildren(new BackgroundAudioPlayer());
             }
             //_navigationService.Navigate(new PlayerControl().GetType());
             else
@@ -221,7 +224,7 @@ namespace SoonZik.ViewModel
             var request = new HttpRequestGet();
             var post = new HttpRequestPost();
             _cryptographic = "";
-            var userKey2 = request.GetUserKey(Singleton.Instance().CurrentUser.id.ToString());
+            var userKey2 = request.GetUserKey(Singleton.Singleton.Instance().CurrentUser.id.ToString());
             userKey2.ContinueWith(delegate(Task<object> task2)
             {
                 var key2 = task2.Result as string;
@@ -229,9 +232,9 @@ namespace SoonZik.ViewModel
                 {
                     var stringEncrypt = KeyHelpers.GetUserKeyFromResponse(key2);
                     _cryptographic =
-                        EncriptSha256.EncriptStringToSha256(Singleton.Instance().CurrentUser.salt + stringEncrypt);
+                        EncriptSha256.EncriptStringToSha256(Singleton.Singleton.Instance().CurrentUser.salt + stringEncrypt);
                 }
-                var res = post.SaveCart(null, TheAlbum, _cryptographic, Singleton.Instance().CurrentUser);
+                var res = post.SaveCart(null, TheAlbum, _cryptographic, Singleton.Singleton.Instance().CurrentUser);
                 res.ContinueWith(delegate(Task<string> tmp2)
                 {
                     var res2 = tmp2.Result;

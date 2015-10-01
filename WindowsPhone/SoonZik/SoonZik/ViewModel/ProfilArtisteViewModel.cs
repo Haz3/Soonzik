@@ -162,7 +162,7 @@ namespace SoonZik.ViewModel
 
         private void SetFollowText()
         {
-            foreach (var follow in Singleton.Instance().CurrentUser.follows)
+            foreach (var follow in Singleton.Singleton.Instance().CurrentUser.follows)
             {
                 if (follow.id == TheArtiste.id)
                     _follow = true;
@@ -173,7 +173,7 @@ namespace SoonZik.ViewModel
         private void Follow(HttpRequestPost post, string cryptographic, HttpRequestGet get)
         {
             var resPost = post.Follow(cryptographic, TheArtiste.id.ToString(),
-                Singleton.Instance().CurrentUser.id.ToString());
+                Singleton.Singleton.Instance().CurrentUser.id.ToString());
             resPost.ContinueWith(delegate(Task<string> tmp)
             {
                 var test = tmp.Result;
@@ -182,7 +182,7 @@ namespace SoonZik.ViewModel
                     CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
                     {
                         var followers = get.GetFollows(new List<User>(), "users",
-                            Singleton.Instance().CurrentUser.id.ToString());
+                            Singleton.Singleton.Instance().CurrentUser.id.ToString());
                         followers.ContinueWith(delegate(Task<object> task1)
                         {
                             var res = task1.Result as List<User>;
@@ -191,7 +191,7 @@ namespace SoonZik.ViewModel
                                 CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
                                     () =>
                                     {
-                                        Singleton.Instance().CurrentUser.follows = res;
+                                        Singleton.Singleton.Instance().CurrentUser.follows = res;
                                         var a = TheArtiste;
                                         SetFollowText();
                                     });
@@ -205,7 +205,7 @@ namespace SoonZik.ViewModel
         private void Unfollow(HttpRequestPost post, string cryptographic, HttpRequestGet get)
         {
             var resPost = post.Unfollow(cryptographic, TheArtiste.id.ToString(),
-                Singleton.Instance().CurrentUser.id.ToString());
+                Singleton.Singleton.Instance().CurrentUser.id.ToString());
             resPost.ContinueWith(delegate(Task<string> tmp)
             {
                 var test = tmp.Result;
@@ -214,7 +214,7 @@ namespace SoonZik.ViewModel
                     CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
                     {
                         var followers = get.GetFollows(new List<User>(), "users",
-                            Singleton.Instance().CurrentUser.id.ToString());
+                            Singleton.Singleton.Instance().CurrentUser.id.ToString());
                         followers.ContinueWith(delegate(Task<object> task1)
                         {
                             var res = task1.Result as List<User>;
@@ -223,7 +223,7 @@ namespace SoonZik.ViewModel
                                 CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
                                     () =>
                                     {
-                                        Singleton.Instance().CurrentUser.follows = res;
+                                        Singleton.Singleton.Instance().CurrentUser.follows = res;
                                         var a = TheArtiste;
                                         _follow = false;
                                         SetFollowText();
@@ -260,7 +260,7 @@ namespace SoonZik.ViewModel
             var post = new HttpRequestPost();
             var get = new HttpRequestGet();
 
-            var userKey = get.GetUserKey(Singleton.Instance().CurrentUser.id.ToString());
+            var userKey = get.GetUserKey(Singleton.Singleton.Instance().CurrentUser.id.ToString());
             userKey.ContinueWith(delegate(Task<object> task)
             {
                 var key = task.Result as string;
@@ -268,7 +268,7 @@ namespace SoonZik.ViewModel
                 {
                     var stringEncrypt = KeyHelpers.GetUserKeyFromResponse(key);
                     var cryptographic =
-                        EncriptSha256.EncriptStringToSha256(Singleton.Instance().CurrentUser.salt + stringEncrypt);
+                        EncriptSha256.EncriptStringToSha256(Singleton.Singleton.Instance().CurrentUser.salt + stringEncrypt);
                     if (_follow)
                         Unfollow(post, cryptographic, get);
                     else if (!_follow)
@@ -280,7 +280,7 @@ namespace SoonZik.ViewModel
         private void CheckIfFriend()
         {
             var loader = new ResourceLoader();
-            foreach (var friend in Singleton.Instance().CurrentUser.friends)
+            foreach (var friend in Singleton.Singleton.Instance().CurrentUser.friends)
             {
                 if (friend.username == TheArtiste.username)
                 {

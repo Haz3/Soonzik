@@ -135,7 +135,7 @@ namespace SoonZik.ViewModel
         {
             var get = new HttpRequestGet();
 
-            var userKey = get.GetUserKey(Singleton.Instance().CurrentUser.id.ToString());
+            var userKey = get.GetUserKey(Singleton.Singleton.Instance().CurrentUser.id.ToString());
             userKey.ContinueWith(delegate(Task<object> task)
             {
                 var key = task.Result as string;
@@ -143,7 +143,7 @@ namespace SoonZik.ViewModel
                 {
                     var stringEncrypt = KeyHelpers.GetUserKeyFromResponse(key);
                     var cryptographic =
-                        EncriptSha256.EncriptStringToSha256(Singleton.Instance().CurrentUser.salt + stringEncrypt);
+                        EncriptSha256.EncriptStringToSha256(Singleton.Singleton.Instance().CurrentUser.salt + stringEncrypt);
                     UploadImage(name, contentType, bitmapImage, cryptographic);
                 }
             });
@@ -165,10 +165,10 @@ namespace SoonZik.ViewModel
 
         private void SelectionExecute()
         {
-            if (Singleton.Instance().ItsMe)
-                CurrentUser = Singleton.Instance().CurrentUser;
-            else if (!Singleton.Instance().ItsMe)
-                CurrentUser = Singleton.Instance().SelectedUser;
+            if (Singleton.Singleton.Instance().ItsMe)
+                CurrentUser = Singleton.Singleton.Instance().CurrentUser;
+            else if (!Singleton.Singleton.Instance().ItsMe)
+                CurrentUser = Singleton.Singleton.Instance().SelectedUser;
         }
 
         private void EditInformationExecute()
@@ -197,7 +197,7 @@ namespace SoonZik.ViewModel
             var post = new HttpRequestPost();
             try
             {
-                var userKey = request.GetUserKey(Singleton.Instance().CurrentUser.id.ToString());
+                var userKey = request.GetUserKey(Singleton.Singleton.Instance().CurrentUser.id.ToString());
                 await userKey.ContinueWith(delegate(Task<object> task)
                 {
                     var key = task.Result as string;
@@ -205,7 +205,7 @@ namespace SoonZik.ViewModel
                     {
                         var stringEncrypt = KeyHelpers.GetUserKeyFromResponse(key);
                         _crypto =
-                            EncriptSha256.EncriptStringToSha256(Singleton.Instance().CurrentUser.salt + stringEncrypt);
+                            EncriptSha256.EncriptStringToSha256(Singleton.Singleton.Instance().CurrentUser.salt + stringEncrypt);
                     }
                     var test = post.Update(CurrentUser, _crypto);
                     test.ContinueWith(delegate(Task<string> tmp)

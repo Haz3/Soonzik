@@ -62,8 +62,8 @@
                              Storyboard.TargetName="SearchGrid" d:IsOptimized="True" />
         </Storyboard>
 
-        <DataTemplate x:Key="MenuListItemTemplate">
-            <Grid x:ConnectionId='8' x:Name="GridItemMenu" Height="50"                               >
+        <!--<DataTemplate x:Key="MenuListItemTemplate">
+            <Grid x:Name="GridItemMenu" Height="50" Tapped="GridItemMenu_OnTapped">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="55" />
                     <ColumnDefinition Width="*" />
@@ -73,7 +73,7 @@
                 <TextBlock Margin="15,0,0,0" Grid.Column="1" HorizontalAlignment="Center" Text="{Binding Title}"
                            VerticalAlignment="Center" FontSize="20" />
             </Grid>
-        </DataTemplate>
+        </DataTemplate>-->
 
         <DataTemplate x:Key="UserItemTemplate" x:Name="UserDataTemplate">
             <StackPanel x:ConnectionId='7' Margin="0,0,0,30" x:Name="UsersStackPanel"                                  >
@@ -203,7 +203,7 @@
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
 
-            <TextBox x:ConnectionId='10' x:Name="SearchTextBlock" Grid.Row="0" Width="200" BorderThickness="0" AcceptsReturn="True"
+            <TextBox x:ConnectionId='9' x:Name="SearchTextBlock" Grid.Row="0" Width="200" BorderThickness="0" AcceptsReturn="True"
                      Height="13" Margin="50,3,50,0" TextAlignment="Center" VerticalContentAlignment="Center"
                      Foreground="Black" Background="Gray" FontSize="18" x:Uid="Search" PlaceholderText=""
                                                                  />
@@ -234,7 +234,7 @@
             </Grid>
         </Grid>
 
-        <Grid x:ConnectionId='9' Grid.Row="1" x:Name="GlobalGrid" RenderTransformOrigin="0.5,0.5" Margin="0, 15, 0, 0"
+        <Grid x:ConnectionId='8' Grid.Row="1" x:Name="GlobalGrid" RenderTransformOrigin="0.5,0.5" Margin="0, 15, 0, 0"
                                           >
             <Grid.RenderTransform>
                 <CompositeTransform />

@@ -37,12 +37,12 @@ namespace SoonZik.Controls
 
         private async void ShareOnFaceBook(object postParams)
         {
-            if (Singleton.Instance().MyFacebookClient != null)
+            if (Singleton.Singleton.Instance().MyFacebookClient != null)
             {
                 try
                 {
                     dynamic fbPostTaskResult =
-                        await Singleton.Instance().MyFacebookClient.PostTaskAsync("/me/feed", postParams);
+                        await Singleton.Singleton.Instance().MyFacebookClient.PostTaskAsync("/me/feed", postParams);
                     var responseresult = (IDictionary<string, object>) fbPostTaskResult;
                     var SuccessMsg = new MessageDialog("Message posted sucessfully on facebook wall");
                     await SuccessMsg.ShowAsync();

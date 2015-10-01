@@ -1,6 +1,6 @@
-﻿namespace SoonZik.Helpers
+﻿namespace SoonZik.Utils
 {
-    public class Constants
+    class Constants
     {
         public const string CurrentTrack = "trackname";
         public const string BackgroundTaskStarted = "BackgroundTaskStarted";

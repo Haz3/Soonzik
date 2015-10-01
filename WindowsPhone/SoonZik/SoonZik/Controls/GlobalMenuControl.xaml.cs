@@ -209,7 +209,7 @@ namespace SoonZik.Controls
             InitializeComponent();
             DataContext = this;
             MyGrid = GlobalGrid;
-            GlobalGrid.Children.Add(Singleton.Instance().NewsPage);
+            GlobalGrid.Children.Add(new News());
 
             _navigationService = new NavigationService();
             //MyResult = new ObservableCollection<SearchResult>();
@@ -239,33 +239,33 @@ namespace SoonZik.Controls
 
         #region Method Menu
 
-        private void GridItemMenu_OnTapped(object sender, TappedRoutedEventArgs e)
-        {
-            if (SelectedBouttonMenu.PageBoutton.Equals(new ProfilUser()))
-            {
-                Singleton.Instance().ItsMe = true;
-                Singleton.Instance().ProfilPage = new ProfilUser();
-                SetChildren(Singleton.Instance().ProfilPage);
-            }
-            else if (SelectedBouttonMenu.PageBoutton.Equals(new News()))
-                SetChildren(Singleton.Instance().NewsPage);
-            else if (SelectedBouttonMenu.PageBoutton.Equals(new GeolocalisationView()))
-            {
-                var locator = new Geolocator();
-                if (locator.LocationStatus == PositionStatus.Disabled)
-                    new MessageDialog("Veuillez activer votre Location").ShowAsync();
-                else
-                    SetChildren(new GeolocalisationView());
-            }
-            else if (SelectedBouttonMenu.PageBoutton.Equals(new Connexion()))
-                _navigationService.Navigate(typeof (Connexion));
-            else
-            {
-                var obj = SelectedBouttonMenu.PageBoutton as UIElement;
+        //private void GridItemMenu_OnTapped(object sender, TappedRoutedEventArgs e)
+        //{
+        //    if (SelectedBouttonMenu.PageBoutton.Equals(new ProfilUser()))
+        //    {
+        //        Singleton.Singleton.Instance().ItsMe = true;
+        //        Singleton.Singleton.Instance().ProfilPage = new ProfilUser();
+        //        SetChildren(Singleton.Singleton.Instance().ProfilPage);
+        //    }
+        //    else if (SelectedBouttonMenu.PageBoutton.Equals(new News()))
+        //        SetChildren(Singleton.Singleton.Instance().NewsPage);
+        //    else if (SelectedBouttonMenu.PageBoutton.Equals(new GeolocalisationView()))
+        //    {
+        //        var locator = new Geolocator();
+        //        if (locator.LocationStatus == PositionStatus.Disabled)
+        //            new MessageDialog("Veuillez activer votre Location").ShowAsync();
+        //        else
+        //            SetChildren(new GeolocalisationView());
+        //    }
+        //    else if (SelectedBouttonMenu.PageBoutton.Equals(new Connexion()))
+        //        _navigationService.Navigate(typeof (Connexion));
+        //    else
+        //    {
+        //        var obj = SelectedBouttonMenu.PageBoutton as UIElement;
 
-                SetChildren(obj);
-            }
-        }
+        //        SetChildren(obj);
+        //    }
+        //}
 
         private void MenuAloneClose_OnCompleted(object sender, object e)
         {
@@ -291,14 +291,13 @@ namespace SoonZik.Controls
 
         private void GoToProfil()
         {
-            Singleton.Instance().ItsMe = true;
-            Singleton.Instance().ProfilPage = new ProfilUser();
-            SetChildren(Singleton.Instance().ProfilPage);
+            Singleton.Singleton.Instance().ItsMe = true;
+            SetChildren(new ProfilUser());
         }
 
         private void GoToNews()
         {
-            SetChildren(Singleton.Instance().NewsPage);
+            SetChildren(new News());
         }
 
         private void GoToExplorer()
@@ -344,7 +343,7 @@ namespace SoonZik.Controls
         {
             //if (myObj.GetType() != typeof(Playlist))
             // PlaylistAdd.Visibility = Visibility.Collapsed;
-            Singleton.Instance().LastElement = MyGrid.Children.First();
+            Singleton.Singleton.Instance().LastElement = MyGrid.Children.First();
             _lastElement = MyGrid.Children.LastOrDefault();
             MyGrid.Children.Clear();
             MyGrid.Children.Add(myObj);

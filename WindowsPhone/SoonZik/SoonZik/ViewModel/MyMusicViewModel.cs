@@ -49,7 +49,7 @@ namespace SoonZik.ViewModel
         public void LoadContent()
         {
             var request = new HttpRequestGet();
-            var userKey = request.GetUserKey(Singleton.Instance().CurrentUser.id.ToString());
+            var userKey = request.GetUserKey(Singleton.Singleton.Instance().CurrentUser.id.ToString());
             userKey.ContinueWith(delegate(Task<object> task)
             {
                 _key = task.Result as string;
@@ -57,10 +57,10 @@ namespace SoonZik.ViewModel
                 {
                     var stringEncrypt = KeyHelpers.GetUserKeyFromResponse(_key);
                     _cryptographic =
-                        EncriptSha256.EncriptStringToSha256(Singleton.Instance().CurrentUser.salt + stringEncrypt);
+                        EncriptSha256.EncriptStringToSha256(Singleton.Singleton.Instance().CurrentUser.salt + stringEncrypt);
 
                     var listAlbumTmp = request.GetAllMusicForUser(new UserMusic(), _cryptographic,
-                        Singleton.Instance().CurrentUser.id.ToString());
+                        Singleton.Singleton.Instance().CurrentUser.id.ToString());
 
                     listAlbumTmp.ContinueWith(delegate(Task<object> tmp)
                     {
@@ -83,7 +83,7 @@ namespace SoonZik.ViewModel
                     });
 
                     var listPlaylist = request.Find(new List<Playlist>(), "playlists",
-                        Singleton.Instance().CurrentUser.id.ToString());
+                        Singleton.Singleton.Instance().CurrentUser.id.ToString());
                     listPlaylist.ContinueWith(delegate(Task<object> tmp)
                     {
                         var res = tmp.Result as List<Playlist>;
@@ -136,7 +136,7 @@ namespace SoonZik.ViewModel
                 var post = new HttpRequestPost();
                 try
                 {
-                    var userKey = request.GetUserKey(Singleton.Instance().CurrentUser.id.ToString());
+                    var userKey = request.GetUserKey(Singleton.Singleton.Instance().CurrentUser.id.ToString());
                     userKey.ContinueWith(delegate(Task<object> task)
                     {
                         var key = task.Result as string;
@@ -144,11 +144,11 @@ namespace SoonZik.ViewModel
                         {
                             var stringEncrypt = KeyHelpers.GetUserKeyFromResponse(key);
                             _crypto =
-                                EncriptSha256.EncriptStringToSha256(Singleton.Instance().CurrentUser.salt +
+                                EncriptSha256.EncriptStringToSha256(Singleton.Singleton.Instance().CurrentUser.salt +
                                                                     stringEncrypt);
                         }
                         var test = post.UpdatePlaylist(SelectedPlaylist, MusicForPlaylist, _crypto,
-                            Singleton.Instance().CurrentUser);
+                            Singleton.Singleton.Instance().CurrentUser);
                         test.ContinueWith(delegate(Task<string> tmp)
                         {
                             var res = tmp.Result;
@@ -177,7 +177,7 @@ namespace SoonZik.ViewModel
             MusicForPlaylist = null;
             var request = new HttpRequestGet();
             var listPlaylist = request.Find(new List<Playlist>(), "playlists",
-                Singleton.Instance().CurrentUser.id.ToString());
+                Singleton.Singleton.Instance().CurrentUser.id.ToString());
             listPlaylist.ContinueWith(delegate(Task<object> tmp)
             {
                 var res = tmp.Result as List<Playlist>;
@@ -199,7 +199,7 @@ namespace SoonZik.ViewModel
             var playlist = new Playlist
             {
                 name = "MyPlaylist" + _id,
-                user = Singleton.Instance().CurrentUser,
+                user = Singleton.Singleton.Instance().CurrentUser,
                 musics = new List<Music> {MusicForPlaylist}
             };
             if (MusicForPlaylist != null)
@@ -208,7 +208,7 @@ namespace SoonZik.ViewModel
                 var post = new HttpRequestPost();
                 try
                 {
-                    var userKey = request.GetUserKey(Singleton.Instance().CurrentUser.id.ToString());
+                    var userKey = request.GetUserKey(Singleton.Singleton.Instance().CurrentUser.id.ToString());
                     userKey.ContinueWith(delegate(Task<object> task)
                     {
                         var key = task.Result as string;
@@ -216,10 +216,10 @@ namespace SoonZik.ViewModel
                         {
                             var stringEncrypt = KeyHelpers.GetUserKeyFromResponse(key);
                             _crypto =
-                                EncriptSha256.EncriptStringToSha256(Singleton.Instance().CurrentUser.salt +
+                                EncriptSha256.EncriptStringToSha256(Singleton.Singleton.Instance().CurrentUser.salt +
                                                                     stringEncrypt);
                         }
-                        var test = post.SavePlaylist(playlist, _crypto, Singleton.Instance().CurrentUser);
+                        var test = post.SavePlaylist(playlist, _crypto, Singleton.Singleton.Instance().CurrentUser);
                         test.ContinueWith(delegate(Task<string> tmp)
                         {
                             var res = tmp.Result;
@@ -235,7 +235,7 @@ namespace SoonZik.ViewModel
                                         try
                                         {
                                             var userKey2 =
-                                                request.GetUserKey(Singleton.Instance().CurrentUser.id.ToString());
+                                                request.GetUserKey(Singleton.Singleton.Instance().CurrentUser.id.ToString());
                                             userKey2.ContinueWith(delegate(Task<object> task2)
                                             {
                                                 var key2 = task2.Result as string;
@@ -244,10 +244,10 @@ namespace SoonZik.ViewModel
                                                     var stringEncrypt = KeyHelpers.GetUserKeyFromResponse(key2);
                                                     _crypto =
                                                         EncriptSha256.EncriptStringToSha256(
-                                                            Singleton.Instance().CurrentUser.salt + stringEncrypt);
+                                                            Singleton.Singleton.Instance().CurrentUser.salt + stringEncrypt);
                                                 }
                                                 var up = post.UpdatePlaylist(playList, MusicForPlaylist, _crypto,
-                                                    Singleton.Instance().CurrentUser);
+                                                    Singleton.Singleton.Instance().CurrentUser);
                                                 up.ContinueWith(delegate(Task<string> tmp2)
                                                 {
                                                     var res2 = tmp2.Result;
@@ -283,7 +283,7 @@ namespace SoonZik.ViewModel
         {
             _delete = true;
             var request = new HttpRequestGet();
-            var userKey = request.GetUserKey(Singleton.Instance().CurrentUser.id.ToString());
+            var userKey = request.GetUserKey(Singleton.Singleton.Instance().CurrentUser.id.ToString());
             userKey.ContinueWith(delegate(Task<object> task)
             {
                 _key = task.Result as string;
@@ -291,10 +291,10 @@ namespace SoonZik.ViewModel
                 {
                     var stringEncrypt = KeyHelpers.GetUserKeyFromResponse(_key);
                     _cryptographic =
-                        EncriptSha256.EncriptStringToSha256(Singleton.Instance().CurrentUser.salt + stringEncrypt);
+                        EncriptSha256.EncriptStringToSha256(Singleton.Singleton.Instance().CurrentUser.salt + stringEncrypt);
 
                     var resDel = request.DeletePlaylist(SelectedPlaylist, _cryptographic,
-                        Singleton.Instance().CurrentUser);
+                        Singleton.Singleton.Instance().CurrentUser);
 
                     resDel.ContinueWith(delegate(Task<string> tmp)
                     {

@@ -36,11 +36,11 @@ namespace SoonZik.ViewModel
 
             Sources = new ObservableCollection<User>();
             ItemSource = new ObservableCollection<AlphaKeyGroups<User>>();
-            CurrentUser = Singleton.Instance().CurrentUser;
+            CurrentUser = Singleton.Singleton.Instance().CurrentUser;
 
             if (_localSettings != null && (string) _localSettings.Values["SoonZikAlreadyConnect"] == "yes")
             {
-                Sources = Singleton.Instance().CurrentUser.friends;
+                Sources = Singleton.Singleton.Instance().CurrentUser.friends;
                 ItemSource = AlphaKeyGroups<User>.CreateGroups(Sources, CultureInfo.CurrentUICulture, s => s.username,
                     true);
             }
@@ -72,7 +72,7 @@ namespace SoonZik.ViewModel
 
         public void UpdateFriend()
         {
-            Sources = Singleton.Instance().CurrentUser.friends;
+            Sources = Singleton.Singleton.Instance().CurrentUser.friends;
             ItemSource = AlphaKeyGroups<User>.CreateGroups(Sources, CultureInfo.CurrentUICulture, s => s.username, true);
         }
 
@@ -86,7 +86,7 @@ namespace SoonZik.ViewModel
             var post = new HttpRequestPost();
             try
             {
-                var userKey = request.GetUserKey(Singleton.Instance().CurrentUser.id.ToString());
+                var userKey = request.GetUserKey(Singleton.Singleton.Instance().CurrentUser.id.ToString());
                 userKey.ContinueWith(delegate(Task<object> task)
                 {
                     var key = task.Result as string;
@@ -94,7 +94,7 @@ namespace SoonZik.ViewModel
                     {
                         var stringEncrypt = KeyHelpers.GetUserKeyFromResponse(key);
                         _crypto =
-                            EncriptSha256.EncriptStringToSha256(Singleton.Instance().CurrentUser.salt + stringEncrypt);
+                            EncriptSha256.EncriptStringToSha256(Singleton.Singleton.Instance().CurrentUser.salt + stringEncrypt);
                     }
                     var test = post.SendTweet(TextTweet, CurrentUser, _crypto);
                     test.ContinueWith(delegate(Task<string> tmp)

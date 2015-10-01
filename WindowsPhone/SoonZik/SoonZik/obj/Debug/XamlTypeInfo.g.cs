@@ -148,7 +148,7 @@ namespace SoonZik.SoonZik_XamlTypeInfo
 
         private void InitTypeTables()
         {
-            _typeNameTable = new string[151];
+            _typeNameTable = new string[152];
             _typeNameTable[0] = "SoonZik.ViewModel.ViewModelLocator";
             _typeNameTable[1] = "Object";
             _typeNameTable[2] = "SoonZik.ViewModel.MainViewModel";
@@ -253,55 +253,56 @@ namespace SoonZik.SoonZik_XamlTypeInfo
             _typeNameTable[101] = "System.Collections.ObjectModel.Collection`1<SoonZik.HttpRequest.Poco.Playlist>";
             _typeNameTable[102] = "SoonZik.HttpRequest.Poco.Playlist";
             _typeNameTable[103] = "Windows.UI.Xaml.Visibility";
-            _typeNameTable[104] = "SoonZik.Controls.ButtonFriendPopUp";
-            _typeNameTable[105] = "SoonZik.Controls.Genre";
-            _typeNameTable[106] = "Microsoft.Xaml.Interactivity.Interaction";
-            _typeNameTable[107] = "Microsoft.Xaml.Interactivity.BehaviorCollection";
-            _typeNameTable[108] = "Windows.UI.Xaml.DependencyObjectCollection";
-            _typeNameTable[109] = "Windows.UI.Xaml.DependencyObject";
-            _typeNameTable[110] = "Microsoft.Xaml.Interactions.Core.EventTriggerBehavior";
-            _typeNameTable[111] = "Microsoft.Xaml.Interactivity.ActionCollection";
-            _typeNameTable[112] = "Microsoft.Xaml.Interactions.Core.InvokeCommandAction";
-            _typeNameTable[113] = "Windows.UI.Xaml.Data.IValueConverter";
-            _typeNameTable[114] = "SoonZik.Controls.GeolocalisationControl";
-            _typeNameTable[115] = "Microsoft.Xaml.Interactions.Media.ControlStoryboardAction";
-            _typeNameTable[116] = "Windows.UI.Xaml.Media.Animation.Storyboard";
-            _typeNameTable[117] = "Microsoft.Xaml.Interactions.Media.ControlStoryboardOption";
-            _typeNameTable[118] = "System.Enum";
-            _typeNameTable[119] = "SoonZik.Controls.GlobalMenuControl";
-            _typeNameTable[120] = "SoonZik.HttpRequest.Poco.SearchResult";
-            _typeNameTable[121] = "SoonZik.Utils.BouttonMenu";
-            _typeNameTable[122] = "System.Collections.Generic.List`1<SoonZik.Utils.BouttonMenu>";
-            _typeNameTable[123] = "SoonZik.Controls.MoreOptionPopUp";
-            _typeNameTable[124] = "SoonZik.Controls.NewsSharePopup";
-            _typeNameTable[125] = "SoonZik.Controls.PlayerControl";
-            _typeNameTable[126] = "SoonZik.Controls.PriceControl";
-            _typeNameTable[127] = "SoonZik.Controls.ProgressRingControl";
-            _typeNameTable[128] = "SoonZik.Views.Connexion";
-            _typeNameTable[129] = "SoonZik.MainPage";
-            _typeNameTable[130] = "SoonZik.Views.PlaylistView";
-            _typeNameTable[131] = "SoonZik.Views.AlbumView";
-            _typeNameTable[132] = "SoonZik.Views.BattleDetailView";
-            _typeNameTable[133] = "SoonZik.Views.CartsView";
-            _typeNameTable[134] = "System.Collections.Generic.IList`1<Windows.UI.Xaml.DependencyObject>";
-            _typeNameTable[135] = "SoonZik.Views.InscriptionView";
-            _typeNameTable[136] = "SoonZik.ViewModel.ProfilFriendView";
-            _typeNameTable[137] = "SoonZik.Views.BattleView";
-            _typeNameTable[138] = "SoonZik.Utils.BooleanToVisibilityConverter";
-            _typeNameTable[139] = "SoonZik.Utils.BooleanConverter`1<Windows.UI.Xaml.Visibility>";
-            _typeNameTable[140] = "SoonZik.Views.Conversation";
-            _typeNameTable[141] = "SoonZik.Views.Explorer";
-            _typeNameTable[142] = "SoonZik.Utils.TextBlockExtension";
-            _typeNameTable[143] = "SoonZik.Views.MyNetwork";
-            _typeNameTable[144] = "SoonZik.Views.MainView";
-            _typeNameTable[145] = "SoonZik.Views.News";
-            _typeNameTable[146] = "SoonZik.Views.NewsDetail";
-            _typeNameTable[147] = "SoonZik.Views.Packs";
-            _typeNameTable[148] = "SoonZik.Views.MyMusic";
-            _typeNameTable[149] = "SoonZik.Views.ProfilArtiste";
-            _typeNameTable[150] = "SoonZik.Views.ProfilUser";
+            _typeNameTable[104] = "SoonZik.Controls.BackgroundAudioPlayer";
+            _typeNameTable[105] = "SoonZik.Controls.ButtonFriendPopUp";
+            _typeNameTable[106] = "SoonZik.Controls.Genre";
+            _typeNameTable[107] = "Microsoft.Xaml.Interactivity.Interaction";
+            _typeNameTable[108] = "Microsoft.Xaml.Interactivity.BehaviorCollection";
+            _typeNameTable[109] = "Windows.UI.Xaml.DependencyObjectCollection";
+            _typeNameTable[110] = "Windows.UI.Xaml.DependencyObject";
+            _typeNameTable[111] = "Microsoft.Xaml.Interactions.Core.EventTriggerBehavior";
+            _typeNameTable[112] = "Microsoft.Xaml.Interactivity.ActionCollection";
+            _typeNameTable[113] = "Microsoft.Xaml.Interactions.Core.InvokeCommandAction";
+            _typeNameTable[114] = "Windows.UI.Xaml.Data.IValueConverter";
+            _typeNameTable[115] = "SoonZik.Controls.GeolocalisationControl";
+            _typeNameTable[116] = "Microsoft.Xaml.Interactions.Media.ControlStoryboardAction";
+            _typeNameTable[117] = "Windows.UI.Xaml.Media.Animation.Storyboard";
+            _typeNameTable[118] = "Microsoft.Xaml.Interactions.Media.ControlStoryboardOption";
+            _typeNameTable[119] = "System.Enum";
+            _typeNameTable[120] = "SoonZik.Controls.GlobalMenuControl";
+            _typeNameTable[121] = "SoonZik.HttpRequest.Poco.SearchResult";
+            _typeNameTable[122] = "SoonZik.Utils.BouttonMenu";
+            _typeNameTable[123] = "System.Collections.Generic.List`1<SoonZik.Utils.BouttonMenu>";
+            _typeNameTable[124] = "SoonZik.Controls.MoreOptionPopUp";
+            _typeNameTable[125] = "SoonZik.Controls.NewsSharePopup";
+            _typeNameTable[126] = "SoonZik.Controls.PlayerControl";
+            _typeNameTable[127] = "SoonZik.Controls.PriceControl";
+            _typeNameTable[128] = "SoonZik.Controls.ProgressRingControl";
+            _typeNameTable[129] = "SoonZik.Views.Connexion";
+            _typeNameTable[130] = "SoonZik.MainPage";
+            _typeNameTable[131] = "SoonZik.Views.PlaylistView";
+            _typeNameTable[132] = "SoonZik.Views.AlbumView";
+            _typeNameTable[133] = "SoonZik.Views.BattleDetailView";
+            _typeNameTable[134] = "SoonZik.Views.CartsView";
+            _typeNameTable[135] = "System.Collections.Generic.IList`1<Windows.UI.Xaml.DependencyObject>";
+            _typeNameTable[136] = "SoonZik.Views.InscriptionView";
+            _typeNameTable[137] = "SoonZik.ViewModel.ProfilFriendView";
+            _typeNameTable[138] = "SoonZik.Views.BattleView";
+            _typeNameTable[139] = "SoonZik.Utils.BooleanToVisibilityConverter";
+            _typeNameTable[140] = "SoonZik.Utils.BooleanConverter`1<Windows.UI.Xaml.Visibility>";
+            _typeNameTable[141] = "SoonZik.Views.Conversation";
+            _typeNameTable[142] = "SoonZik.Views.Explorer";
+            _typeNameTable[143] = "SoonZik.Utils.TextBlockExtension";
+            _typeNameTable[144] = "SoonZik.Views.MyNetwork";
+            _typeNameTable[145] = "SoonZik.Views.MainView";
+            _typeNameTable[146] = "SoonZik.Views.News";
+            _typeNameTable[147] = "SoonZik.Views.NewsDetail";
+            _typeNameTable[148] = "SoonZik.Views.Packs";
+            _typeNameTable[149] = "SoonZik.Views.MyMusic";
+            _typeNameTable[150] = "SoonZik.Views.ProfilArtiste";
+            _typeNameTable[151] = "SoonZik.Views.ProfilUser";
 
-            _typeTable = new global::System.Type[151];
+            _typeTable = new global::System.Type[152];
             _typeTable[0] = typeof(global::SoonZik.ViewModel.ViewModelLocator);
             _typeTable[1] = typeof(global::System.Object);
             _typeTable[2] = typeof(global::SoonZik.ViewModel.MainViewModel);
@@ -406,53 +407,54 @@ namespace SoonZik.SoonZik_XamlTypeInfo
             _typeTable[101] = typeof(global::System.Collections.ObjectModel.Collection<global::SoonZik.HttpRequest.Poco.Playlist>);
             _typeTable[102] = typeof(global::SoonZik.HttpRequest.Poco.Playlist);
             _typeTable[103] = typeof(global::Windows.UI.Xaml.Visibility);
-            _typeTable[104] = typeof(global::SoonZik.Controls.ButtonFriendPopUp);
-            _typeTable[105] = typeof(global::SoonZik.Controls.Genre);
-            _typeTable[106] = typeof(global::Microsoft.Xaml.Interactivity.Interaction);
-            _typeTable[107] = typeof(global::Microsoft.Xaml.Interactivity.BehaviorCollection);
-            _typeTable[108] = typeof(global::Windows.UI.Xaml.DependencyObjectCollection);
-            _typeTable[109] = typeof(global::Windows.UI.Xaml.DependencyObject);
-            _typeTable[110] = typeof(global::Microsoft.Xaml.Interactions.Core.EventTriggerBehavior);
-            _typeTable[111] = typeof(global::Microsoft.Xaml.Interactivity.ActionCollection);
-            _typeTable[112] = typeof(global::Microsoft.Xaml.Interactions.Core.InvokeCommandAction);
-            _typeTable[113] = typeof(global::Windows.UI.Xaml.Data.IValueConverter);
-            _typeTable[114] = typeof(global::SoonZik.Controls.GeolocalisationControl);
-            _typeTable[115] = typeof(global::Microsoft.Xaml.Interactions.Media.ControlStoryboardAction);
-            _typeTable[116] = typeof(global::Windows.UI.Xaml.Media.Animation.Storyboard);
-            _typeTable[117] = typeof(global::Microsoft.Xaml.Interactions.Media.ControlStoryboardOption);
-            _typeTable[118] = typeof(global::System.Enum);
-            _typeTable[119] = typeof(global::SoonZik.Controls.GlobalMenuControl);
-            _typeTable[120] = typeof(global::SoonZik.HttpRequest.Poco.SearchResult);
-            _typeTable[121] = typeof(global::SoonZik.Utils.BouttonMenu);
-            _typeTable[122] = typeof(global::System.Collections.Generic.List<global::SoonZik.Utils.BouttonMenu>);
-            _typeTable[123] = typeof(global::SoonZik.Controls.MoreOptionPopUp);
-            _typeTable[124] = typeof(global::SoonZik.Controls.NewsSharePopup);
-            _typeTable[125] = typeof(global::SoonZik.Controls.PlayerControl);
-            _typeTable[126] = typeof(global::SoonZik.Controls.PriceControl);
-            _typeTable[127] = typeof(global::SoonZik.Controls.ProgressRingControl);
-            _typeTable[128] = typeof(global::SoonZik.Views.Connexion);
-            _typeTable[129] = typeof(global::SoonZik.MainPage);
-            _typeTable[130] = typeof(global::SoonZik.Views.PlaylistView);
-            _typeTable[131] = typeof(global::SoonZik.Views.AlbumView);
-            _typeTable[132] = typeof(global::SoonZik.Views.BattleDetailView);
-            _typeTable[133] = typeof(global::SoonZik.Views.CartsView);
-            _typeTable[134] = typeof(global::System.Collections.Generic.IList<global::Windows.UI.Xaml.DependencyObject>);
-            _typeTable[135] = typeof(global::SoonZik.Views.InscriptionView);
-            _typeTable[136] = typeof(global::SoonZik.ViewModel.ProfilFriendView);
-            _typeTable[137] = typeof(global::SoonZik.Views.BattleView);
-            _typeTable[138] = typeof(global::SoonZik.Utils.BooleanToVisibilityConverter);
-            _typeTable[139] = typeof(global::SoonZik.Utils.BooleanConverter<global::Windows.UI.Xaml.Visibility>);
-            _typeTable[140] = typeof(global::SoonZik.Views.Conversation);
-            _typeTable[141] = typeof(global::SoonZik.Views.Explorer);
-            _typeTable[142] = typeof(global::SoonZik.Utils.TextBlockExtension);
-            _typeTable[143] = typeof(global::SoonZik.Views.MyNetwork);
-            _typeTable[144] = typeof(global::SoonZik.Views.MainView);
-            _typeTable[145] = typeof(global::SoonZik.Views.News);
-            _typeTable[146] = typeof(global::SoonZik.Views.NewsDetail);
-            _typeTable[147] = typeof(global::SoonZik.Views.Packs);
-            _typeTable[148] = typeof(global::SoonZik.Views.MyMusic);
-            _typeTable[149] = typeof(global::SoonZik.Views.ProfilArtiste);
-            _typeTable[150] = typeof(global::SoonZik.Views.ProfilUser);
+            _typeTable[104] = typeof(global::SoonZik.Controls.BackgroundAudioPlayer);
+            _typeTable[105] = typeof(global::SoonZik.Controls.ButtonFriendPopUp);
+            _typeTable[106] = typeof(global::SoonZik.Controls.Genre);
+            _typeTable[107] = typeof(global::Microsoft.Xaml.Interactivity.Interaction);
+            _typeTable[108] = typeof(global::Microsoft.Xaml.Interactivity.BehaviorCollection);
+            _typeTable[109] = typeof(global::Windows.UI.Xaml.DependencyObjectCollection);
+            _typeTable[110] = typeof(global::Windows.UI.Xaml.DependencyObject);
+            _typeTable[111] = typeof(global::Microsoft.Xaml.Interactions.Core.EventTriggerBehavior);
+            _typeTable[112] = typeof(global::Microsoft.Xaml.Interactivity.ActionCollection);
+            _typeTable[113] = typeof(global::Microsoft.Xaml.Interactions.Core.InvokeCommandAction);
+            _typeTable[114] = typeof(global::Windows.UI.Xaml.Data.IValueConverter);
+            _typeTable[115] = typeof(global::SoonZik.Controls.GeolocalisationControl);
+            _typeTable[116] = typeof(global::Microsoft.Xaml.Interactions.Media.ControlStoryboardAction);
+            _typeTable[117] = typeof(global::Windows.UI.Xaml.Media.Animation.Storyboard);
+            _typeTable[118] = typeof(global::Microsoft.Xaml.Interactions.Media.ControlStoryboardOption);
+            _typeTable[119] = typeof(global::System.Enum);
+            _typeTable[120] = typeof(global::SoonZik.Controls.GlobalMenuControl);
+            _typeTable[121] = typeof(global::SoonZik.HttpRequest.Poco.SearchResult);
+            _typeTable[122] = typeof(global::SoonZik.Utils.BouttonMenu);
+            _typeTable[123] = typeof(global::System.Collections.Generic.List<global::SoonZik.Utils.BouttonMenu>);
+            _typeTable[124] = typeof(global::SoonZik.Controls.MoreOptionPopUp);
+            _typeTable[125] = typeof(global::SoonZik.Controls.NewsSharePopup);
+            _typeTable[126] = typeof(global::SoonZik.Controls.PlayerControl);
+            _typeTable[127] = typeof(global::SoonZik.Controls.PriceControl);
+            _typeTable[128] = typeof(global::SoonZik.Controls.ProgressRingControl);
+            _typeTable[129] = typeof(global::SoonZik.Views.Connexion);
+            _typeTable[130] = typeof(global::SoonZik.MainPage);
+            _typeTable[131] = typeof(global::SoonZik.Views.PlaylistView);
+            _typeTable[132] = typeof(global::SoonZik.Views.AlbumView);
+            _typeTable[133] = typeof(global::SoonZik.Views.BattleDetailView);
+            _typeTable[134] = typeof(global::SoonZik.Views.CartsView);
+            _typeTable[135] = typeof(global::System.Collections.Generic.IList<global::Windows.UI.Xaml.DependencyObject>);
+            _typeTable[136] = typeof(global::SoonZik.Views.InscriptionView);
+            _typeTable[137] = typeof(global::SoonZik.ViewModel.ProfilFriendView);
+            _typeTable[138] = typeof(global::SoonZik.Views.BattleView);
+            _typeTable[139] = typeof(global::SoonZik.Utils.BooleanToVisibilityConverter);
+            _typeTable[140] = typeof(global::SoonZik.Utils.BooleanConverter<global::Windows.UI.Xaml.Visibility>);
+            _typeTable[141] = typeof(global::SoonZik.Views.Conversation);
+            _typeTable[142] = typeof(global::SoonZik.Views.Explorer);
+            _typeTable[143] = typeof(global::SoonZik.Utils.TextBlockExtension);
+            _typeTable[144] = typeof(global::SoonZik.Views.MyNetwork);
+            _typeTable[145] = typeof(global::SoonZik.Views.MainView);
+            _typeTable[146] = typeof(global::SoonZik.Views.News);
+            _typeTable[147] = typeof(global::SoonZik.Views.NewsDetail);
+            _typeTable[148] = typeof(global::SoonZik.Views.Packs);
+            _typeTable[149] = typeof(global::SoonZik.Views.MyMusic);
+            _typeTable[150] = typeof(global::SoonZik.Views.ProfilArtiste);
+            _typeTable[151] = typeof(global::SoonZik.Views.ProfilUser);
         }
 
         private int LookupTypeIndexByName(string typeName)
@@ -573,41 +575,42 @@ namespace SoonZik.SoonZik_XamlTypeInfo
         private object Activate_100_ObservableCollection() { return new global::System.Collections.ObjectModel.ObservableCollection<global::SoonZik.HttpRequest.Poco.Playlist>(); }
         private object Activate_101_Collection() { return new global::System.Collections.ObjectModel.Collection<global::SoonZik.HttpRequest.Poco.Playlist>(); }
         private object Activate_102_Playlist() { return new global::SoonZik.HttpRequest.Poco.Playlist(); }
-        private object Activate_105_Genre() { return new global::SoonZik.Controls.Genre(); }
-        private object Activate_107_BehaviorCollection() { return new global::Microsoft.Xaml.Interactivity.BehaviorCollection(); }
-        private object Activate_110_EventTriggerBehavior() { return new global::Microsoft.Xaml.Interactions.Core.EventTriggerBehavior(); }
-        private object Activate_111_ActionCollection() { return new global::Microsoft.Xaml.Interactivity.ActionCollection(); }
-        private object Activate_112_InvokeCommandAction() { return new global::Microsoft.Xaml.Interactions.Core.InvokeCommandAction(); }
-        private object Activate_114_GeolocalisationControl() { return new global::SoonZik.Controls.GeolocalisationControl(); }
-        private object Activate_115_ControlStoryboardAction() { return new global::Microsoft.Xaml.Interactions.Media.ControlStoryboardAction(); }
-        private object Activate_119_GlobalMenuControl() { return new global::SoonZik.Controls.GlobalMenuControl(); }
-        private object Activate_120_SearchResult() { return new global::SoonZik.HttpRequest.Poco.SearchResult(); }
-        private object Activate_121_BouttonMenu() { return new global::SoonZik.Utils.BouttonMenu(); }
-        private object Activate_122_List() { return new global::System.Collections.Generic.List<global::SoonZik.Utils.BouttonMenu>(); }
-        private object Activate_125_PlayerControl() { return new global::SoonZik.Controls.PlayerControl(); }
-        private object Activate_126_PriceControl() { return new global::SoonZik.Controls.PriceControl(); }
-        private object Activate_127_ProgressRingControl() { return new global::SoonZik.Controls.ProgressRingControl(); }
-        private object Activate_128_Connexion() { return new global::SoonZik.Views.Connexion(); }
-        private object Activate_129_MainPage() { return new global::SoonZik.MainPage(); }
-        private object Activate_130_PlaylistView() { return new global::SoonZik.Views.PlaylistView(); }
-        private object Activate_131_AlbumView() { return new global::SoonZik.Views.AlbumView(); }
-        private object Activate_132_BattleDetailView() { return new global::SoonZik.Views.BattleDetailView(); }
-        private object Activate_133_CartsView() { return new global::SoonZik.Views.CartsView(); }
-        private object Activate_135_InscriptionView() { return new global::SoonZik.Views.InscriptionView(); }
-        private object Activate_136_ProfilFriendView() { return new global::SoonZik.ViewModel.ProfilFriendView(); }
-        private object Activate_137_BattleView() { return new global::SoonZik.Views.BattleView(); }
-        private object Activate_138_BooleanToVisibilityConverter() { return new global::SoonZik.Utils.BooleanToVisibilityConverter(); }
-        private object Activate_140_Conversation() { return new global::SoonZik.Views.Conversation(); }
-        private object Activate_141_Explorer() { return new global::SoonZik.Views.Explorer(); }
-        private object Activate_142_TextBlockExtension() { return new global::SoonZik.Utils.TextBlockExtension(); }
-        private object Activate_143_MyNetwork() { return new global::SoonZik.Views.MyNetwork(); }
-        private object Activate_144_MainView() { return new global::SoonZik.Views.MainView(); }
-        private object Activate_145_News() { return new global::SoonZik.Views.News(); }
-        private object Activate_146_NewsDetail() { return new global::SoonZik.Views.NewsDetail(); }
-        private object Activate_147_Packs() { return new global::SoonZik.Views.Packs(); }
-        private object Activate_148_MyMusic() { return new global::SoonZik.Views.MyMusic(); }
-        private object Activate_149_ProfilArtiste() { return new global::SoonZik.Views.ProfilArtiste(); }
-        private object Activate_150_ProfilUser() { return new global::SoonZik.Views.ProfilUser(); }
+        private object Activate_104_BackgroundAudioPlayer() { return new global::SoonZik.Controls.BackgroundAudioPlayer(); }
+        private object Activate_106_Genre() { return new global::SoonZik.Controls.Genre(); }
+        private object Activate_108_BehaviorCollection() { return new global::Microsoft.Xaml.Interactivity.BehaviorCollection(); }
+        private object Activate_111_EventTriggerBehavior() { return new global::Microsoft.Xaml.Interactions.Core.EventTriggerBehavior(); }
+        private object Activate_112_ActionCollection() { return new global::Microsoft.Xaml.Interactivity.ActionCollection(); }
+        private object Activate_113_InvokeCommandAction() { return new global::Microsoft.Xaml.Interactions.Core.InvokeCommandAction(); }
+        private object Activate_115_GeolocalisationControl() { return new global::SoonZik.Controls.GeolocalisationControl(); }
+        private object Activate_116_ControlStoryboardAction() { return new global::Microsoft.Xaml.Interactions.Media.ControlStoryboardAction(); }
+        private object Activate_120_GlobalMenuControl() { return new global::SoonZik.Controls.GlobalMenuControl(); }
+        private object Activate_121_SearchResult() { return new global::SoonZik.HttpRequest.Poco.SearchResult(); }
+        private object Activate_122_BouttonMenu() { return new global::SoonZik.Utils.BouttonMenu(); }
+        private object Activate_123_List() { return new global::System.Collections.Generic.List<global::SoonZik.Utils.BouttonMenu>(); }
+        private object Activate_126_PlayerControl() { return new global::SoonZik.Controls.PlayerControl(); }
+        private object Activate_127_PriceControl() { return new global::SoonZik.Controls.PriceControl(); }
+        private object Activate_128_ProgressRingControl() { return new global::SoonZik.Controls.ProgressRingControl(); }
+        private object Activate_129_Connexion() { return new global::SoonZik.Views.Connexion(); }
+        private object Activate_130_MainPage() { return new global::SoonZik.MainPage(); }
+        private object Activate_131_PlaylistView() { return new global::SoonZik.Views.PlaylistView(); }
+        private object Activate_132_AlbumView() { return new global::SoonZik.Views.AlbumView(); }
+        private object Activate_133_BattleDetailView() { return new global::SoonZik.Views.BattleDetailView(); }
+        private object Activate_134_CartsView() { return new global::SoonZik.Views.CartsView(); }
+        private object Activate_136_InscriptionView() { return new global::SoonZik.Views.InscriptionView(); }
+        private object Activate_137_ProfilFriendView() { return new global::SoonZik.ViewModel.ProfilFriendView(); }
+        private object Activate_138_BattleView() { return new global::SoonZik.Views.BattleView(); }
+        private object Activate_139_BooleanToVisibilityConverter() { return new global::SoonZik.Utils.BooleanToVisibilityConverter(); }
+        private object Activate_141_Conversation() { return new global::SoonZik.Views.Conversation(); }
+        private object Activate_142_Explorer() { return new global::SoonZik.Views.Explorer(); }
+        private object Activate_143_TextBlockExtension() { return new global::SoonZik.Utils.TextBlockExtension(); }
+        private object Activate_144_MyNetwork() { return new global::SoonZik.Views.MyNetwork(); }
+        private object Activate_145_MainView() { return new global::SoonZik.Views.MainView(); }
+        private object Activate_146_News() { return new global::SoonZik.Views.News(); }
+        private object Activate_147_NewsDetail() { return new global::SoonZik.Views.NewsDetail(); }
+        private object Activate_148_Packs() { return new global::SoonZik.Views.Packs(); }
+        private object Activate_149_MyMusic() { return new global::SoonZik.Views.MyMusic(); }
+        private object Activate_150_ProfilArtiste() { return new global::SoonZik.Views.ProfilArtiste(); }
+        private object Activate_151_ProfilUser() { return new global::SoonZik.Views.ProfilUser(); }
         private void VectorAdd_30_ObservableCollection(object instance, object item)
         {
             var collection = (global::System.Collections.Generic.ICollection<global::SoonZik.HttpRequest.Poco.News>)instance;
@@ -860,25 +863,25 @@ namespace SoonZik.SoonZik_XamlTypeInfo
             var newItem = (global::SoonZik.HttpRequest.Poco.Playlist)item;
             collection.Add(newItem);
         }
-        private void VectorAdd_107_BehaviorCollection(object instance, object item)
+        private void VectorAdd_108_BehaviorCollection(object instance, object item)
         {
             var collection = (global::System.Collections.Generic.ICollection<global::Windows.UI.Xaml.DependencyObject>)instance;
             var newItem = (global::Windows.UI.Xaml.DependencyObject)item;
             collection.Add(newItem);
         }
-        private void VectorAdd_111_ActionCollection(object instance, object item)
+        private void VectorAdd_112_ActionCollection(object instance, object item)
         {
             var collection = (global::System.Collections.Generic.ICollection<global::Windows.UI.Xaml.DependencyObject>)instance;
             var newItem = (global::Windows.UI.Xaml.DependencyObject)item;
             collection.Add(newItem);
         }
-        private void VectorAdd_122_List(object instance, object item)
+        private void VectorAdd_123_List(object instance, object item)
         {
             var collection = (global::System.Collections.Generic.ICollection<global::SoonZik.Utils.BouttonMenu>)instance;
             var newItem = (global::SoonZik.Utils.BouttonMenu)item;
             collection.Add(newItem);
         }
-        private void VectorAdd_134_IList(object instance, object item)
+        private void VectorAdd_135_IList(object instance, object item)
         {
             var collection = (global::System.Collections.Generic.ICollection<global::Windows.UI.Xaml.DependencyObject>)instance;
             var newItem = (global::Windows.UI.Xaml.DependencyObject)item;
@@ -1846,43 +1849,50 @@ namespace SoonZik.SoonZik_XamlTypeInfo
                 xamlType = new global::SoonZik.SoonZik_XamlTypeInfo.XamlSystemBaseType(typeName, type);
                 break;
 
-            case 104:   //  SoonZik.Controls.ButtonFriendPopUp
+            case 104:   //  SoonZik.Controls.BackgroundAudioPlayer
+                userType = new global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Page"));
+                userType.Activator = Activate_104_BackgroundAudioPlayer;
+                userType.SetIsLocalType();
+                xamlType = userType;
+                break;
+
+            case 105:   //  SoonZik.Controls.ButtonFriendPopUp
                 userType = new global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.UserControl"));
                 userType.SetIsLocalType();
                 xamlType = userType;
                 break;
 
-            case 105:   //  SoonZik.Controls.Genre
+            case 106:   //  SoonZik.Controls.Genre
                 userType = new global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.UserControl"));
-                userType.Activator = Activate_105_Genre;
+                userType.Activator = Activate_106_Genre;
                 userType.SetIsLocalType();
                 xamlType = userType;
                 break;
 
-            case 106:   //  Microsoft.Xaml.Interactivity.Interaction
+            case 107:   //  Microsoft.Xaml.Interactivity.Interaction
                 userType = new global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Object"));
                 userType.AddMemberName("Behaviors");
                 xamlType = userType;
                 break;
 
-            case 107:   //  Microsoft.Xaml.Interactivity.BehaviorCollection
+            case 108:   //  Microsoft.Xaml.Interactivity.BehaviorCollection
                 userType = new global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.DependencyObjectCollection"));
-                userType.CollectionAdd = VectorAdd_107_BehaviorCollection;
+                userType.CollectionAdd = VectorAdd_108_BehaviorCollection;
                 userType.SetIsReturnTypeStub();
                 xamlType = userType;
                 break;
 
-            case 108:   //  Windows.UI.Xaml.DependencyObjectCollection
+            case 109:   //  Windows.UI.Xaml.DependencyObjectCollection
                 xamlType = new global::SoonZik.SoonZik_XamlTypeInfo.XamlSystemBaseType(typeName, type);
                 break;
 
-            case 109:   //  Windows.UI.Xaml.DependencyObject
+            case 110:   //  Windows.UI.Xaml.DependencyObject
                 xamlType = new global::SoonZik.SoonZik_XamlTypeInfo.XamlSystemBaseType(typeName, type);
                 break;
 
-            case 110:   //  Microsoft.Xaml.Interactions.Core.EventTriggerBehavior
+            case 111:   //  Microsoft.Xaml.Interactions.Core.EventTriggerBehavior
                 userType = new global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.DependencyObject"));
-                userType.Activator = Activate_110_EventTriggerBehavior;
+                userType.Activator = Activate_111_EventTriggerBehavior;
                 userType.SetContentPropertyName("Microsoft.Xaml.Interactions.Core.EventTriggerBehavior.Actions");
                 userType.AddMemberName("Actions");
                 userType.AddMemberName("EventName");
@@ -1891,16 +1901,16 @@ namespace SoonZik.SoonZik_XamlTypeInfo
                 xamlType = userType;
                 break;
 
-            case 111:   //  Microsoft.Xaml.Interactivity.ActionCollection
+            case 112:   //  Microsoft.Xaml.Interactivity.ActionCollection
                 userType = new global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.DependencyObjectCollection"));
-                userType.CollectionAdd = VectorAdd_111_ActionCollection;
+                userType.CollectionAdd = VectorAdd_112_ActionCollection;
                 userType.SetIsReturnTypeStub();
                 xamlType = userType;
                 break;
 
-            case 112:   //  Microsoft.Xaml.Interactions.Core.InvokeCommandAction
+            case 113:   //  Microsoft.Xaml.Interactions.Core.InvokeCommandAction
                 userType = new global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.DependencyObject"));
-                userType.Activator = Activate_112_InvokeCommandAction;
+                userType.Activator = Activate_113_InvokeCommandAction;
                 userType.AddMemberName("Command");
                 userType.AddMemberName("CommandParameter");
                 userType.AddMemberName("InputConverter");
@@ -1909,13 +1919,13 @@ namespace SoonZik.SoonZik_XamlTypeInfo
                 xamlType = userType;
                 break;
 
-            case 113:   //  Windows.UI.Xaml.Data.IValueConverter
+            case 114:   //  Windows.UI.Xaml.Data.IValueConverter
                 xamlType = new global::SoonZik.SoonZik_XamlTypeInfo.XamlSystemBaseType(typeName, type);
                 break;
 
-            case 114:   //  SoonZik.Controls.GeolocalisationControl
+            case 115:   //  SoonZik.Controls.GeolocalisationControl
                 userType = new global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.UserControl"));
-                userType.Activator = Activate_114_GeolocalisationControl;
+                userType.Activator = Activate_115_GeolocalisationControl;
                 userType.AddMemberName("MapElements");
                 userType.AddMemberName("ListUser");
                 userType.AddMemberName("UserSelected");
@@ -1933,19 +1943,19 @@ namespace SoonZik.SoonZik_XamlTypeInfo
                 xamlType = userType;
                 break;
 
-            case 115:   //  Microsoft.Xaml.Interactions.Media.ControlStoryboardAction
+            case 116:   //  Microsoft.Xaml.Interactions.Media.ControlStoryboardAction
                 userType = new global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.DependencyObject"));
-                userType.Activator = Activate_115_ControlStoryboardAction;
+                userType.Activator = Activate_116_ControlStoryboardAction;
                 userType.AddMemberName("Storyboard");
                 userType.AddMemberName("ControlStoryboardOption");
                 xamlType = userType;
                 break;
 
-            case 116:   //  Windows.UI.Xaml.Media.Animation.Storyboard
+            case 117:   //  Windows.UI.Xaml.Media.Animation.Storyboard
                 xamlType = new global::SoonZik.SoonZik_XamlTypeInfo.XamlSystemBaseType(typeName, type);
                 break;
 
-            case 117:   //  Microsoft.Xaml.Interactions.Media.ControlStoryboardOption
+            case 118:   //  Microsoft.Xaml.Interactions.Media.ControlStoryboardOption
                 userType = new global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("System.Enum"));
                 userType.AddEnumValue("Play", global::Microsoft.Xaml.Interactions.Media.ControlStoryboardOption.Play);
                 userType.AddEnumValue("Stop", global::Microsoft.Xaml.Interactions.Media.ControlStoryboardOption.Stop);
@@ -1956,14 +1966,14 @@ namespace SoonZik.SoonZik_XamlTypeInfo
                 xamlType = userType;
                 break;
 
-            case 118:   //  System.Enum
+            case 119:   //  System.Enum
                 userType = new global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("System.ValueType"));
                 xamlType = userType;
                 break;
 
-            case 119:   //  SoonZik.Controls.GlobalMenuControl
+            case 120:   //  SoonZik.Controls.GlobalMenuControl
                 userType = new global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.UserControl"));
-                userType.Activator = Activate_119_GlobalMenuControl;
+                userType.Activator = Activate_120_GlobalMenuControl;
                 userType.AddMemberName("HeaderArtiste");
                 userType.AddMemberName("HeaderMusique");
                 userType.AddMemberName("HeaderUser");
@@ -1982,15 +1992,15 @@ namespace SoonZik.SoonZik_XamlTypeInfo
                 xamlType = userType;
                 break;
 
-            case 120:   //  SoonZik.HttpRequest.Poco.SearchResult
+            case 121:   //  SoonZik.HttpRequest.Poco.SearchResult
                 userType = new global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Object"));
                 userType.SetIsReturnTypeStub();
                 xamlType = userType;
                 break;
 
-            case 121:   //  SoonZik.Utils.BouttonMenu
+            case 122:   //  SoonZik.Utils.BouttonMenu
                 userType = new global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Object"));
-                userType.Activator = Activate_121_BouttonMenu;
+                userType.Activator = Activate_122_BouttonMenu;
                 userType.AddMemberName("ImageBoutton");
                 userType.AddMemberName("Title");
                 userType.AddMemberName("PageBoutton");
@@ -1998,128 +2008,128 @@ namespace SoonZik.SoonZik_XamlTypeInfo
                 xamlType = userType;
                 break;
 
-            case 122:   //  System.Collections.Generic.List`1<SoonZik.Utils.BouttonMenu>
+            case 123:   //  System.Collections.Generic.List`1<SoonZik.Utils.BouttonMenu>
                 userType = new global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Object"));
-                userType.CollectionAdd = VectorAdd_122_List;
+                userType.CollectionAdd = VectorAdd_123_List;
                 userType.SetIsReturnTypeStub();
                 xamlType = userType;
                 break;
 
-            case 123:   //  SoonZik.Controls.MoreOptionPopUp
+            case 124:   //  SoonZik.Controls.MoreOptionPopUp
                 userType = new global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.UserControl"));
                 userType.AddMemberName("SelectedMusic");
                 userType.SetIsLocalType();
                 xamlType = userType;
                 break;
 
-            case 124:   //  SoonZik.Controls.NewsSharePopup
+            case 125:   //  SoonZik.Controls.NewsSharePopup
                 userType = new global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.UserControl"));
                 userType.SetIsLocalType();
                 xamlType = userType;
                 break;
 
-            case 125:   //  SoonZik.Controls.PlayerControl
+            case 126:   //  SoonZik.Controls.PlayerControl
                 userType = new global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Page"));
-                userType.Activator = Activate_125_PlayerControl;
+                userType.Activator = Activate_126_PlayerControl;
                 userType.AddMemberName("ListOfMusics");
                 userType.AddMemberName("PlayedMusic");
                 userType.SetIsLocalType();
                 xamlType = userType;
                 break;
 
-            case 126:   //  SoonZik.Controls.PriceControl
+            case 127:   //  SoonZik.Controls.PriceControl
                 userType = new global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.UserControl"));
-                userType.Activator = Activate_126_PriceControl;
+                userType.Activator = Activate_127_PriceControl;
                 userType.SetIsLocalType();
                 xamlType = userType;
                 break;
 
-            case 127:   //  SoonZik.Controls.ProgressRingControl
+            case 128:   //  SoonZik.Controls.ProgressRingControl
                 userType = new global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.UserControl"));
-                userType.Activator = Activate_127_ProgressRingControl;
+                userType.Activator = Activate_128_ProgressRingControl;
                 userType.AddMemberName("GridVisibility");
                 userType.AddMemberName("isActive");
                 userType.SetIsLocalType();
                 xamlType = userType;
                 break;
 
-            case 128:   //  SoonZik.Views.Connexion
+            case 129:   //  SoonZik.Views.Connexion
                 userType = new global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Page"));
-                userType.Activator = Activate_128_Connexion;
+                userType.Activator = Activate_129_Connexion;
                 userType.SetIsLocalType();
                 xamlType = userType;
                 break;
 
-            case 129:   //  SoonZik.MainPage
+            case 130:   //  SoonZik.MainPage
                 userType = new global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Page"));
-                userType.Activator = Activate_129_MainPage;
+                userType.Activator = Activate_130_MainPage;
                 userType.SetIsLocalType();
                 xamlType = userType;
                 break;
 
-            case 130:   //  SoonZik.Views.PlaylistView
+            case 131:   //  SoonZik.Views.PlaylistView
                 userType = new global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Page"));
-                userType.Activator = Activate_130_PlaylistView;
+                userType.Activator = Activate_131_PlaylistView;
                 userType.SetIsLocalType();
                 xamlType = userType;
                 break;
 
-            case 131:   //  SoonZik.Views.AlbumView
+            case 132:   //  SoonZik.Views.AlbumView
                 userType = new global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Page"));
-                userType.Activator = Activate_131_AlbumView;
+                userType.Activator = Activate_132_AlbumView;
                 userType.SetIsLocalType();
                 xamlType = userType;
                 break;
 
-            case 132:   //  SoonZik.Views.BattleDetailView
+            case 133:   //  SoonZik.Views.BattleDetailView
                 userType = new global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Page"));
-                userType.Activator = Activate_132_BattleDetailView;
+                userType.Activator = Activate_133_BattleDetailView;
                 userType.SetIsLocalType();
                 xamlType = userType;
                 break;
 
-            case 133:   //  SoonZik.Views.CartsView
+            case 134:   //  SoonZik.Views.CartsView
                 userType = new global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Page"));
-                userType.Activator = Activate_133_CartsView;
+                userType.Activator = Activate_134_CartsView;
                 userType.SetIsLocalType();
                 xamlType = userType;
                 break;
 
-            case 134:   //  System.Collections.Generic.IList`1<Windows.UI.Xaml.DependencyObject>
+            case 135:   //  System.Collections.Generic.IList`1<Windows.UI.Xaml.DependencyObject>
                 userType = new global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType(this, typeName, type, null);
-                userType.CollectionAdd = VectorAdd_134_IList;
+                userType.CollectionAdd = VectorAdd_135_IList;
                 xamlType = userType;
                 break;
 
-            case 135:   //  SoonZik.Views.InscriptionView
+            case 136:   //  SoonZik.Views.InscriptionView
                 userType = new global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Page"));
-                userType.Activator = Activate_135_InscriptionView;
+                userType.Activator = Activate_136_InscriptionView;
                 userType.SetIsLocalType();
                 xamlType = userType;
                 break;
 
-            case 136:   //  SoonZik.ViewModel.ProfilFriendView
+            case 137:   //  SoonZik.ViewModel.ProfilFriendView
                 userType = new global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Page"));
-                userType.Activator = Activate_136_ProfilFriendView;
+                userType.Activator = Activate_137_ProfilFriendView;
                 userType.SetIsLocalType();
                 xamlType = userType;
                 break;
 
-            case 137:   //  SoonZik.Views.BattleView
+            case 138:   //  SoonZik.Views.BattleView
                 userType = new global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Page"));
-                userType.Activator = Activate_137_BattleView;
+                userType.Activator = Activate_138_BattleView;
                 userType.SetIsLocalType();
                 xamlType = userType;
                 break;
 
-            case 138:   //  SoonZik.Utils.BooleanToVisibilityConverter
+            case 139:   //  SoonZik.Utils.BooleanToVisibilityConverter
                 userType = new global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("SoonZik.Utils.BooleanConverter`1<Windows.UI.Xaml.Visibility>"));
-                userType.Activator = Activate_138_BooleanToVisibilityConverter;
+                userType.Activator = Activate_139_BooleanToVisibilityConverter;
                 userType.SetIsLocalType();
                 xamlType = userType;
                 break;
 
-            case 139:   //  SoonZik.Utils.BooleanConverter`1<Windows.UI.Xaml.Visibility>
+            case 140:   //  SoonZik.Utils.BooleanConverter`1<Windows.UI.Xaml.Visibility>
                 userType = new global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Object"));
                 userType.AddMemberName("True");
                 userType.AddMemberName("False");
@@ -2127,80 +2137,80 @@ namespace SoonZik.SoonZik_XamlTypeInfo
                 xamlType = userType;
                 break;
 
-            case 140:   //  SoonZik.Views.Conversation
+            case 141:   //  SoonZik.Views.Conversation
                 userType = new global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Page"));
-                userType.Activator = Activate_140_Conversation;
+                userType.Activator = Activate_141_Conversation;
                 userType.SetIsLocalType();
                 xamlType = userType;
                 break;
 
-            case 141:   //  SoonZik.Views.Explorer
+            case 142:   //  SoonZik.Views.Explorer
                 userType = new global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Page"));
-                userType.Activator = Activate_141_Explorer;
+                userType.Activator = Activate_142_Explorer;
                 userType.SetIsLocalType();
                 xamlType = userType;
                 break;
 
-            case 142:   //  SoonZik.Utils.TextBlockExtension
+            case 143:   //  SoonZik.Utils.TextBlockExtension
                 userType = new global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Object"));
-                userType.Activator = Activate_142_TextBlockExtension;
+                userType.Activator = Activate_143_TextBlockExtension;
                 userType.AddMemberName("FormattedText");
                 userType.SetIsLocalType();
                 xamlType = userType;
                 break;
 
-            case 143:   //  SoonZik.Views.MyNetwork
+            case 144:   //  SoonZik.Views.MyNetwork
                 userType = new global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Page"));
-                userType.Activator = Activate_143_MyNetwork;
+                userType.Activator = Activate_144_MyNetwork;
                 userType.SetIsLocalType();
                 xamlType = userType;
                 break;
 
-            case 144:   //  SoonZik.Views.MainView
+            case 145:   //  SoonZik.Views.MainView
                 userType = new global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Page"));
-                userType.Activator = Activate_144_MainView;
+                userType.Activator = Activate_145_MainView;
                 userType.SetIsLocalType();
                 xamlType = userType;
                 break;
 
-            case 145:   //  SoonZik.Views.News
+            case 146:   //  SoonZik.Views.News
                 userType = new global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Page"));
-                userType.Activator = Activate_145_News;
+                userType.Activator = Activate_146_News;
                 userType.SetIsLocalType();
                 xamlType = userType;
                 break;
 
-            case 146:   //  SoonZik.Views.NewsDetail
+            case 147:   //  SoonZik.Views.NewsDetail
                 userType = new global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Page"));
-                userType.Activator = Activate_146_NewsDetail;
+                userType.Activator = Activate_147_NewsDetail;
                 userType.SetIsLocalType();
                 xamlType = userType;
                 break;
 
-            case 147:   //  SoonZik.Views.Packs
+            case 148:   //  SoonZik.Views.Packs
                 userType = new global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Page"));
-                userType.Activator = Activate_147_Packs;
+                userType.Activator = Activate_148_Packs;
                 userType.SetIsLocalType();
                 xamlType = userType;
                 break;
 
-            case 148:   //  SoonZik.Views.MyMusic
+            case 149:   //  SoonZik.Views.MyMusic
                 userType = new global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Page"));
-                userType.Activator = Activate_148_MyMusic;
+                userType.Activator = Activate_149_MyMusic;
                 userType.SetIsLocalType();
                 xamlType = userType;
                 break;
 
-            case 149:   //  SoonZik.Views.ProfilArtiste
+            case 150:   //  SoonZik.Views.ProfilArtiste
                 userType = new global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Page"));
-                userType.Activator = Activate_149_ProfilArtiste;
+                userType.Activator = Activate_150_ProfilArtiste;
                 userType.SetIsLocalType();
                 xamlType = userType;
                 break;
 
-            case 150:   //  SoonZik.Views.ProfilUser
+            case 151:   //  SoonZik.Views.ProfilUser
                 userType = new global::SoonZik.SoonZik_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Page"));
-                userType.Activator = Activate_150_ProfilUser;
+                userType.Activator = Activate_151_ProfilUser;
                 userType.SetIsLocalType();
                 xamlType = userType;
                 break;

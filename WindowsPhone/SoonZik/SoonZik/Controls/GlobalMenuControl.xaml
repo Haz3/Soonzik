@@ -62,7 +62,7 @@
                              Storyboard.TargetName="SearchGrid" d:IsOptimized="True" />
         </Storyboard>
 
-        <DataTemplate x:Key="MenuListItemTemplate">
+        <!--<DataTemplate x:Key="MenuListItemTemplate">
             <Grid x:Name="GridItemMenu" Height="50" Tapped="GridItemMenu_OnTapped">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="55" />
@@ -73,7 +73,7 @@
                 <TextBlock Margin="15,0,0,0" Grid.Column="1" HorizontalAlignment="Center" Text="{Binding Title}"
                            VerticalAlignment="Center" FontSize="20" />
             </Grid>
-        </DataTemplate>
+        </DataTemplate>-->
 
         <DataTemplate x:Key="UserItemTemplate" x:Name="UserDataTemplate">
             <StackPanel Margin="0,0,0,30" x:Name="UsersStackPanel" Tapped="UsersStackPanel_OnTapped">

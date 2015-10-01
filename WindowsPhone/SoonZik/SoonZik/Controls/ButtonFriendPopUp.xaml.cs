@@ -68,9 +68,9 @@ namespace SoonZik.Controls
 
         private void GoToProfil(object sender, RoutedEventArgs e)
         {
-            //    Singleton.Instance().NewProfilUser = Friend;
-            //    Singleton.Instance().ItsMe = false;
-            //    Singleton.Instance().Charge();
+            //    Singleton.Singleton.Instance().NewProfilUser = Friend;
+            //    Singleton.Singleton.Instance().ItsMe = false;
+            //    Singleton.Singleton.Instance().Charge();
             if (ProfilFriendViewModel.UserFromButton != null)
                 GlobalMenuControl.SetChildren(new ProfilFriendView());
             else if (ProfilArtisteViewModel.TheUser != null)
@@ -86,7 +86,7 @@ namespace SoonZik.Controls
         private void DelFriend(HttpRequestPost post, string cryptographic, HttpRequestGet get)
         {
             var resPost = post.DelFriend(cryptographic, Friend.ToString(),
-                Singleton.Instance().CurrentUser.id.ToString());
+                Singleton.Singleton.Instance().CurrentUser.id.ToString());
             resPost.ContinueWith(delegate(Task<string> tmp)
             {
                 var test = tmp.Result;
@@ -95,19 +95,19 @@ namespace SoonZik.Controls
                     CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
                     {
                         var followers = get.GetFriends(new List<User>(), "users",
-                            Singleton.Instance().CurrentUser.id.ToString());
+                            Singleton.Singleton.Instance().CurrentUser.id.ToString());
                         followers.ContinueWith(delegate(Task<object> task1)
                         {
                             var res = task1.Result as List<User>;
                             if (res != null)
                             {
-                                Singleton.Instance().CurrentUser.friends.Clear();
+                                Singleton.Singleton.Instance().CurrentUser.friends.Clear();
                                 CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
                                     () =>
                                     {
                                         foreach (var user in res)
                                         {
-                                            Singleton.Instance().CurrentUser.friends.Add(user);
+                                            Singleton.Singleton.Instance().CurrentUser.friends.Add(user);
                                         }
                                         ServiceLocator.Current.GetInstance<MyNetworkViewModel>().UpdateFriend();
                                         new MessageDialog("Suppression OK").ShowAsync();

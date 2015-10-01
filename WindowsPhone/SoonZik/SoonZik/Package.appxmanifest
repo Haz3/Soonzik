@@ -26,7 +26,7 @@
         </m3:InitialRotationPreference>
       </m3:VisualElements>
       <Extensions>
-        <Extension Category="windows.backgroundTasks" EntryPoint="SoonZik.BackgroundAudioTask.BackgroundAudioTask">
+        <Extension Category="windows.backgroundTasks" EntryPoint="SoonZik.BackgroundAudioTask.MyBackgroundAudioTask">
           <BackgroundTasks>
             <Task Type="audio" />
           </BackgroundTasks>

@@ -102,7 +102,7 @@ namespace SoonZik.ViewModel
             _listCarts = new ObservableCollection<Carts>();
 
             var request = new HttpRequestGet();
-            var userKey = request.GetUserKey(Singleton.Instance().CurrentUser.id.ToString());
+            var userKey = request.GetUserKey(Singleton.Singleton.Instance().CurrentUser.id.ToString());
             userKey.ContinueWith(delegate(Task<object> task)
             {
                 _key = task.Result as string;
@@ -110,10 +110,10 @@ namespace SoonZik.ViewModel
                 {
                     var stringEncrypt = KeyHelpers.GetUserKeyFromResponse(_key);
                     _cryptographic =
-                        EncriptSha256.EncriptStringToSha256(Singleton.Instance().CurrentUser.salt + stringEncrypt);
+                        EncriptSha256.EncriptStringToSha256(Singleton.Singleton.Instance().CurrentUser.salt + stringEncrypt);
 
                     var listCarts = request.GetItemFromCarts(new List<Carts>(), _cryptographic,
-                        Singleton.Instance().CurrentUser);
+                        Singleton.Singleton.Instance().CurrentUser);
 
                     listCarts.ContinueWith(delegate(Task<object> tmp)
                     {
@@ -152,7 +152,7 @@ namespace SoonZik.ViewModel
         private void DeleteCommandExecute()
         {
             var request = new HttpRequestGet();
-            var userKey = request.GetUserKey(Singleton.Instance().CurrentUser.id.ToString());
+            var userKey = request.GetUserKey(Singleton.Singleton.Instance().CurrentUser.id.ToString());
             userKey.ContinueWith(delegate(Task<object> task)
             {
                 _key = task.Result as string;
@@ -160,7 +160,7 @@ namespace SoonZik.ViewModel
                 {
                     var stringEncrypt = KeyHelpers.GetUserKeyFromResponse(_key);
                     _cryptographic =
-                        EncriptSha256.EncriptStringToSha256(Singleton.Instance().CurrentUser.salt + stringEncrypt);
+                        EncriptSha256.EncriptStringToSha256(Singleton.Singleton.Instance().CurrentUser.salt + stringEncrypt);
 
                     Carts cart = null;
 
@@ -173,7 +173,7 @@ namespace SoonZik.ViewModel
                             cart = item;
                     }
 
-                    var resDel = request.DeleteFromCart(cart, _cryptographic, Singleton.Instance().CurrentUser);
+                    var resDel = request.DeleteFromCart(cart, _cryptographic, Singleton.Singleton.Instance().CurrentUser);
 
                     resDel.ContinueWith(delegate(Task<string> tmp)
                     {

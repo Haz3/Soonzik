@@ -13,8 +13,6 @@
     <RootPropertyPathName Name="FiveKmActivated" />
     <RootPropertyPathName Name="TwoKmActivated" />
     <RootPropertyPathName Name="title" />
-    <RootPropertyPathName Name="Title" />
-    <RootPropertyPathName Name="ImageBoutton" />
     <RootPropertyPathName Name="SelectedPack" />
     <RootPropertyPathName Name="SelectedAlbum" />
     <RootPropertyPathName Name="SelectedMusic" />
@@ -71,6 +69,7 @@
     <RootPropertyPathName Name="UserLocation" />
     <RootPropertyPathName Name="Point" />
     <RootPropertyPathName Name="MapElements" />
+    <RootPropertyPathName Name="Title" />
     <RootPropertyPathName Name="Location" />
     <RootPropertyPathName Name="ValidateCommand" />
     <RootPropertyPathName Name="NewUser" />
@@ -206,6 +205,8 @@
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.Button">
       <RootProperty Name="Content" />
+      <RootProperty Name="Height" />
+      <RootProperty Name="Width" />
       <RootProperty Name="HorizontalAlignment" />
       <RootProperty Name="VerticalAlignment" />
       <RootProperty Name="BorderThickness" />
@@ -214,7 +215,6 @@
       <RootProperty Name="MinWidth" />
       <RootProperty Name="Margin" />
       <RootProperty Name="Command" />
-      <RootProperty Name="Height" />
       <RootProperty Name="IsEnabled" />
       <RootProperty Name="Foreground" />
       <RootProperty Name="Opacity" />
@@ -362,8 +362,8 @@
       <RootProperty Name="Height" />
       <RootProperty Name="HorizontalAlignment" />
       <RootProperty Name="Width" />
-      <RootProperty Name="Margin" />
       <RootProperty Name="VerticalAlignment" />
+      <RootProperty Name="Margin" />
       <RootProperty Name="Stretch" />
       <RootProperty Name="Name" />
       <RootEvent Name="Tapped" />
@@ -384,16 +384,16 @@
       <RootProperty Name="FontFamily" />
       <RootProperty Name="FontStyle" />
       <RootProperty Name="FontSize" />
-      <RootProperty Name="VerticalAlignment" />
-      <RootProperty Name="Foreground" />
-      <RootProperty Name="HorizontalAlignment" />
       <RootProperty Name="Height" />
-      <RootProperty Name="Width" />
+      <RootProperty Name="HorizontalAlignment" />
       <RootProperty Name="Margin" />
-      <RootProperty Name="TextAlignment" />
+      <RootProperty Name="VerticalAlignment" />
+      <RootProperty Name="Width" />
       <RootProperty Name="TextWrapping" />
-      <RootProperty Name="FontWeight" />
       <RootProperty Name="Style" />
+      <RootProperty Name="Foreground" />
+      <RootProperty Name="TextAlignment" />
+      <RootProperty Name="FontWeight" />
       <RootProperty Name="Padding" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Data.Binding">
@@ -402,6 +402,22 @@
       <RootProperty Name="Converter" />
       <RootProperty Name="Source" />
     </RootType>
+    <RootType FullName="Windows.UI.Xaml.Controls.Page">
+      <RootProperty Name="Content" />
+      <RootProperty Name="Background" />
+      <RootProperty Name="DataContext" />
+      <RootProperty Name="Resources" />
+    </RootType>
+    <RootType FullName="Windows.UI.Xaml.Controls.StackPanel">
+      <RootProperty Name="Margin" />
+      <RootProperty Name="Children" />
+      <RootProperty Name="Orientation" />
+      <RootProperty Name="Width" />
+      <RootProperty Name="VerticalAlignment" />
+      <RootProperty Name="Background" />
+      <RootEvent Name="Tapped" />
+    </RootType>
+    <RootType FullName="SoonZik.Controls.BackgroundAudioPlayer" />
     <RootType FullName="Windows.UI.Xaml.Controls.UserControl">
       <RootProperty Name="Content" />
       <RootProperty Name="Resources" />
@@ -443,13 +459,6 @@
       <RootProperty Name="Command" />
     </RootType>
     <RootType FullName="SoonZik.Controls.GeolocalisationControl" />
-    <RootType FullName="Windows.UI.Xaml.Controls.StackPanel">
-      <RootProperty Name="Margin" />
-      <RootProperty Name="Children" />
-      <RootProperty Name="Background" />
-      <RootProperty Name="VerticalAlignment" />
-      <RootEvent Name="Tapped" />
-    </RootType>
     <RootType FullName="Windows.UI.Xaml.Media.Animation.DoubleAnimation">
       <RootProperty Name="Duration" />
       <RootProperty Name="To" />
@@ -502,12 +511,6 @@
     <RootType FullName="SoonZik.Controls.GlobalMenuControl" />
     <RootType FullName="SoonZik.Controls.MoreOptionPopUp" />
     <RootType FullName="SoonZik.Controls.NewsSharePopup" />
-    <RootType FullName="Windows.UI.Xaml.Controls.Page">
-      <RootProperty Name="Background" />
-      <RootProperty Name="Content" />
-      <RootProperty Name="DataContext" />
-      <RootProperty Name="Resources" />
-    </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.MediaElement">
       <RootProperty Name="AutoPlay" />
       <RootEvent Name="MediaOpened" />

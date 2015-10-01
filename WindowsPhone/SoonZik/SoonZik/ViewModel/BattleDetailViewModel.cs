@@ -190,7 +190,7 @@ namespace SoonZik.ViewModel
                 {
                     b += 1.0;
                 }
-                if (Singleton.Instance().CurrentUser.id == vote.user_id)
+                if (Singleton.Singleton.Instance().CurrentUser.id == vote.user_id)
                 {
                     CanVote = false;
                 }
@@ -250,7 +250,7 @@ namespace SoonZik.ViewModel
             var post = new HttpRequestPost();
             var get = new HttpRequestGet();
 
-            var userKey = get.GetUserKey(Singleton.Instance().CurrentUser.id.ToString());
+            var userKey = get.GetUserKey(Singleton.Singleton.Instance().CurrentUser.id.ToString());
             userKey.ContinueWith(delegate(Task<object> task)
             {
                 var key = task.Result as string;
@@ -258,7 +258,7 @@ namespace SoonZik.ViewModel
                 {
                     var stringEncrypt = KeyHelpers.GetUserKeyFromResponse(key);
                     var cryptographic =
-                        EncriptSha256.EncriptStringToSha256(Singleton.Instance().CurrentUser.salt + stringEncrypt);
+                        EncriptSha256.EncriptStringToSha256(Singleton.Singleton.Instance().CurrentUser.salt + stringEncrypt);
                     Vote(post, cryptographic, get, artistId);
                 }
             });
@@ -267,7 +267,7 @@ namespace SoonZik.ViewModel
         private void Vote(HttpRequestPost post, string cryptographic, HttpRequestGet get, string artistId)
         {
             var resPost = post.Vote(cryptographic, CurrentBattle.id.ToString(), artistId,
-                Singleton.Instance().CurrentUser.id.ToString());
+                Singleton.Singleton.Instance().CurrentUser.id.ToString());
             resPost.ContinueWith(delegate(Task<string> tmp)
             {
                 var test = tmp.Result;

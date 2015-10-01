@@ -139,16 +139,16 @@ namespace SoonZik.ViewModel
                     }
                 });
 
-                var userKey = request.GetUserKey(Singleton.Instance().CurrentUser.id.ToString());
+                var userKey = request.GetUserKey(Singleton.Singleton.Instance().CurrentUser.id.ToString());
                 userKey.ContinueWith(delegate(Task<object> task)
                 {
                     var key = task.Result as string;
                     if (key != null)
                     {
                         var stringEncrypt = KeyHelpers.GetUserKeyFromResponse(key);
-                        _crypto = EncriptSha256.EncriptStringToSha256(Singleton.Instance().CurrentUser.salt + stringEncrypt);
+                        _crypto = EncriptSha256.EncriptStringToSha256(Singleton.Singleton.Instance().CurrentUser.salt + stringEncrypt);
                         var listZik = request.GetSuggest(new List<Music>(), _crypto,
-                            Singleton.Instance().CurrentUser.id.ToString());
+                            Singleton.Singleton.Instance().CurrentUser.id.ToString());
                         listZik.ContinueWith(delegate(Task<object> tmp)
                         {
                             var test = tmp.Result as List<Music>;
@@ -172,7 +172,7 @@ namespace SoonZik.ViewModel
 
         private void MusiCommandExecute()
         {
-            Singleton.Instance().SelectedMusicSingleton = SelectedMusic;
+            Singleton.Singleton.Instance().SelectedMusicSingleton = SelectedMusic;
             GlobalMenuControl.SetChildren(new PlayerControl());
             //Navigation.Navigate(new PlayerControl().GetType());
         }

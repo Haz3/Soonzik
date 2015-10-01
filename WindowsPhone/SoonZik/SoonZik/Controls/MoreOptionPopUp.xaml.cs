@@ -80,7 +80,7 @@ namespace SoonZik.Controls
             var request = new HttpRequestGet();
             var post = new HttpRequestPost();
             _cryptographic = "";
-            var userKey2 = request.GetUserKey(Singleton.Instance().CurrentUser.id.ToString());
+            var userKey2 = request.GetUserKey(Singleton.Singleton.Instance().CurrentUser.id.ToString());
             userKey2.ContinueWith(delegate(Task<object> task2)
             {
                 var key2 = task2.Result as string;
@@ -88,9 +88,9 @@ namespace SoonZik.Controls
                 {
                     var stringEncrypt = KeyHelpers.GetUserKeyFromResponse(key2);
                     _cryptographic =
-                        EncriptSha256.EncriptStringToSha256(Singleton.Instance().CurrentUser.salt + stringEncrypt);
+                        EncriptSha256.EncriptStringToSha256(Singleton.Singleton.Instance().CurrentUser.salt + stringEncrypt);
                 }
-                var res = post.SaveCart(_selectedMusic, null, _cryptographic, Singleton.Instance().CurrentUser);
+                var res = post.SaveCart(_selectedMusic, null, _cryptographic, Singleton.Singleton.Instance().CurrentUser);
                 res.ContinueWith(delegate(Task<string> tmp2)
                 {
                     var res2 = tmp2.Result;
@@ -112,7 +112,7 @@ namespace SoonZik.Controls
             {
                 _selectedMusic = SelectedMusic;
                 var request = new HttpRequestGet();
-                var userKey = request.GetUserKey(Singleton.Instance().CurrentUser.id.ToString());
+                var userKey = request.GetUserKey(Singleton.Singleton.Instance().CurrentUser.id.ToString());
                 userKey.ContinueWith(delegate(Task<object> task)
                 {
                     var _key = task.Result as string;
@@ -120,10 +120,10 @@ namespace SoonZik.Controls
                     {
                         var stringEncrypt = KeyHelpers.GetUserKeyFromResponse(_key);
                         _cryptographic =
-                            EncriptSha256.EncriptStringToSha256(Singleton.Instance().CurrentUser.salt + stringEncrypt);
+                            EncriptSha256.EncriptStringToSha256(Singleton.Singleton.Instance().CurrentUser.salt + stringEncrypt);
 
                         var resDel = request.DeleteMusicFromPlaylist(ThePlaylist, _selectedMusic, _cryptographic,
-                            Singleton.Instance().CurrentUser);
+                            Singleton.Singleton.Instance().CurrentUser);
 
                         resDel.ContinueWith(delegate(Task<string> tmp)
                         {

@@ -83,6 +83,9 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\BackgroundAudioPlayer.xaml.cs">
+      <DependentUpon>BackgroundAudioPlayer.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\ButtonFriendPopUp.xaml.cs">
       <DependentUpon>ButtonFriendPopUp.xaml</DependentUpon>
     </Compile>
@@ -121,10 +124,10 @@
     <Compile Include="Utils\ApplicationSettingsHelper.cs" />
     <Compile Include="Utils\BooleanToVisibilityConverter.cs" />
     <Compile Include="Utils\BouttonMenu.cs" />
+    <Compile Include="Utils\Constants.cs" />
     <Compile Include="Utils\ContinuationManager.cs" />
     <Compile Include="Utils\INavigationService.cs" />
     <Compile Include="Utils\NavigationService.cs" />
-    <Compile Include="Utils\Singleton.cs" />
     <Compile Include="Utils\TextBlockExtension.cs" />
     <Compile Include="ViewModel\AlbumViewModel.cs" />
     <Compile Include="ViewModel\BattleDetailViewModel.cs" />
@@ -281,6 +284,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Controls\BackgroundAudioPlayer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\ButtonFriendPopUp.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -470,6 +477,10 @@
     <PRIResource Include="Strings\en-US\Resources.resw" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\SoonZik.BackgroundAudioTask\SoonZik.BackgroundAudioTask.csproj">
+      <Project>{3e25ea79-0ebb-4fa5-b9ea-89c4f7d9c6a3}</Project>
+      <Name>SoonZik.BackgroundAudioTask</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SoonZik.Helpers\SoonZik.Helpers.csproj">
       <Project>{88596864-9b34-4163-8424-091c5df907ce}</Project>
       <Name>SoonZik.Helpers</Name>
@@ -477,6 +488,14 @@
     <ProjectReference Include="..\SoonZik.HttpRequest\SoonZik.HttpRequest.csproj">
       <Project>{9db6a4a8-c6b5-4c81-8991-8aa40da71a52}</Project>
       <Name>SoonZik.HttpRequest</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SoonZik.MyPlaylistManager\SoonZik.MyPlaylistManager.csproj">
+      <Project>{30D0BF85-43CD-4D29-9A7A-A0B1CE06A8A7}</Project>
+      <Name>SoonZik.MyPlaylistManager</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SoonZik.Singleton\SoonZik.Singleton.csproj">
+      <Project>{ac713eb3-eb58-4ec0-8bc3-e86f3fb89260}</Project>
+      <Name>SoonZik.Singleton</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

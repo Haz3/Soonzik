@@ -155,12 +155,12 @@ namespace SoonZik.ViewModel
                 try
                 {
                     var stringJson = JObject.Parse(res).SelectToken("content").ToString();
-                    Singleton.Instance().CurrentUser = JsonConvert.DeserializeObject(stringJson, typeof (User)) as User;
-                    Singleton.Instance().CurrentUser.profilImage =
+                    Singleton.Singleton.Instance().CurrentUser = JsonConvert.DeserializeObject(stringJson, typeof (User)) as User;
+                    Singleton.Singleton.Instance().CurrentUser.profilImage =
                         new BitmapImage(
                             new Uri(
                                 "http://soonzikapi.herokuapp.com/assets/usersImage/avatars/" +
-                                Singleton.Instance().CurrentUser.image, UriKind.RelativeOrAbsolute));
+                                Singleton.Singleton.Instance().CurrentUser.image, UriKind.RelativeOrAbsolute));
 
                     ServiceLocator.Current.GetInstance<MyNetworkViewModel>().UpdateFriend();
                 }
@@ -170,7 +170,6 @@ namespace SoonZik.ViewModel
                     ProgressOn = false;
                 }
                 WriteInformation();
-                Singleton.Instance().NewsPage = new News();
                 Navigation.Navigate(typeof (MainView));
                 ProgressOn = false;
             }
@@ -217,7 +216,7 @@ namespace SoonZik.ViewModel
             if (ObjFBHelper.AccessToken != null)
             {
                 fbclient = new FacebookClient(ObjFBHelper.AccessToken);
-                Singleton.Instance().MyFacebookClient = new FacebookClient(ObjFBHelper.AccessToken);
+                Singleton.Singleton.Instance().MyFacebookClient = new FacebookClient(ObjFBHelper.AccessToken);
 
                 dynamic result = await fbclient.GetTaskAsync("me");
                 string id = result.id;
