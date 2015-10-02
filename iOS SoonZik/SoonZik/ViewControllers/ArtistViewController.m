@@ -88,24 +88,10 @@
     self.artistImage.layer.borderColor = [UIColor whiteColor].CGColor;
     self.artistName.text = self.artist.username;
     
-    //UIActivityIndicatorView *spin = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
-    
-    //dispatch_queue_t backgroundQueue = dispatch_queue_create("com.mycompany.myqueue", 0);
-    //dispatch_async(backgroundQueue, ^{
-       // dispatch_async(dispatch_get_main_queue(), ^{
-            
-            NSString *urlImage = [NSString stringWithFormat:@"%@assets/usersImage/avatars/%@", API_URL, self.artist.image];
-            NSData * imageData = [[NSData alloc] initWithContentsOfURL: [NSURL URLWithString: urlImage]];
-            self.artistImage.image = [UIImage imageWithData:imageData];
-            self.visualEffectView.backgroundColor = [UIColor colorWithPatternImage:self.artistImage.image];
-         //   [spin stopAnimating];
-       // });
-       // spin.center = self.artistImage.center;
-       // [self.view addSubview:spin];
-       // [spin startAnimating];
-        
-    //});
-
+    NSString *urlImage = [NSString stringWithFormat:@"%@assets/usersImage/avatars/%@", API_URL, self.artist.image];
+    NSData * imageData = [[NSData alloc] initWithContentsOfURL: [NSURL URLWithString: urlImage]];
+    self.artistImage.image = [UIImage imageWithData:imageData];
+    self.visualEffectView.backgroundColor = [UIColor colorWithPatternImage:self.artistImage.image];
 }
 
 - (void)getData {
@@ -303,7 +289,11 @@
         }
         
         Album *album = [self.listOfAlbums objectAtIndex:indexPath.row];
-        cell.albumImage.image = [UIImage imageNamed:album.image];
+        
+        NSString *urlImage = [NSString stringWithFormat:@"%@assets/albums/%@", API_URL, album.image];
+        NSData *imageData = [[NSData alloc] initWithContentsOfURL: [NSURL URLWithString: urlImage]];
+        cell.albumImage.image = [UIImage imageWithData:imageData];
+        
         cell.albumTitle.text = album.title;
         cell.albumArtist.text = album.artist.username;
         cell.backgroundColor = DARK_GREY;

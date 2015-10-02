@@ -15,14 +15,16 @@
 - (id)initWithJsonObject:(NSDictionary *)json
 {
     self = [super init];
+    NSLog(@"NEWS JSON : %@", json);
+    
     self.identifier = [[json objectForKey:@"id"] intValue];
     self.title = [json objectForKey:@"title"];
     self.type = [json objectForKey:@"news_type"];
     
-    NSString *str1 = [json objectForKey:@"date"];
-    NSRange range = [str1 rangeOfString:@" "];
-    NSString *newString = [str1 substringToIndex:range.location];
-    self.date = newString;
+    NSDateFormatter *dateformat = [[NSDateFormatter alloc] init];
+    [dateformat setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    dateformat.timeZone = [NSTimeZone timeZoneForSecondsFromGMT:1];
+    self.date = [dateformat dateFromString:[json objectForKey:@"created_at"]];
     
     self.listOfAttachments = [[NSMutableArray alloc] init];
     if ([[json objectForKey:@"attachments"] count] > 0) {

@@ -64,8 +64,10 @@
     UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@" " style:UIBarButtonItemStylePlain target:nil action:nil];
     self.navigationItem.backBarButtonItem = backButton;
 
-    self.player = ((AppDelegate *)[UIApplication sharedApplication].delegate).thePlayer;
+    //self.player = ((AppDelegate *)[UIApplication sharedApplication].delegate).thePlayer;
+    self.player = [AudioPlayer sharedCenter];
     self.player.finishDelegate = self;
+    NSLog(@"self.player.repeatLevel : %i", self.player.repeatingLevel);
     
     [self refreshThePlayerPreview];
 }

@@ -210,7 +210,8 @@
     Music *s = [self.listOfMusics objectAtIndex:indexPath.row];
     s.artist = self.album.artist;
     
-    self.player = ((AppDelegate *)[UIApplication sharedApplication].delegate).thePlayer;
+    //self.player = ((AppDelegate *)[UIApplication sharedApplication].delegate).thePlayer;
+    self.player = [AudioPlayer sharedCenter];
     if ([self.player currentlyPlaying])
         [self.player pauseSound];
     self.player.listeningList = nil;
@@ -237,7 +238,9 @@
 
 - (void) playAlbum
 {
-    self.player = ((AppDelegate *)[UIApplication sharedApplication].delegate).thePlayer;
+    //self.player = ((AppDelegate *)[UIApplication sharedApplication].delegate).thePlayer;
+    
+    self.player = [AudioPlayer sharedCenter];
     self.player.listeningList = [[NSMutableArray alloc] init];
     [self.player stopSound];
     self.player.currentlyPlaying = NO;
@@ -287,7 +290,9 @@
 - (void)addToCurrentPlaylist:(Music *)music
 {
     [self closePopUp];
-    self.player = ((AppDelegate *)[UIApplication sharedApplication].delegate).thePlayer;
+    //self.player = ((AppDelegate *)[UIApplication sharedApplication].delegate).thePlayer;
+    
+    self.player = [AudioPlayer sharedCenter];
     music.artist.username = self.album.artist.username;
     [self.player.listeningList addObject:music];
     

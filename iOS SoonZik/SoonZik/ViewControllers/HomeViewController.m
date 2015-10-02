@@ -96,7 +96,7 @@
     
     News *news = (News *)[self.listOfNews objectAtIndex:indexPath.row];
     
-    if ([news.type isEqualToString:@"Nouvelle"]) {
+    //if ([news.type isEqualToString:@"Nouvelle"]) {
         NewsNouvelleCell *cell = (NewsNouvelleCell *)[tableView dequeueReusableCellWithIdentifier:cellId1];
         if (cell == nil) {
             [tableView registerNib:[UINib nibWithNibName:@"NewsNouvelleCell" bundle:nil] forCellReuseIdentifier:cellId1];
@@ -105,11 +105,51 @@
         [cell initCellWithNews:news];
         cell.shareDelegate = self;
         [cell.shareButton setBackgroundImage:[Tools imageWithImage:[UIImage imageNamed:@"share"] scaledToSize:CGSizeMake(26, 26)] forState:UIControlStateNormal];
+        bool found = false;
+        int i = 0;
         
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        while ((i < news.listOfAttachments.count) && (!found)) {
+            Attachment *att = [news.listOfAttachments objectAtIndex:i];
+            NSLog(@"%@", att.contentType);
+            if ([att.contentType isEqualToString:@"image/jpegNews"]) {
+                NSLog(@"att.url : %@", att.url);
+                NSString *urlImage = [NSString stringWithFormat:@"%@assets/news/%@", API_URL, att.url];
+                NSData *imageData = [[NSData alloc] initWithContentsOfURL: [NSURL URLWithString: urlImage]];
+                cell.newsImage.image = [UIImage imageWithData:imageData];
+                found = true;
+            }
+            i++;
+        }
+    
+    unsigned int unitFlags = NSCalendarUnitDay | NSCalendarUnitMinute | NSCalendarUnitSecond | NSCalendarUnitHour;
+    NSDateComponents *conversionInfo = [[[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian] components:unitFlags fromDate:news.date   toDate:[NSDate date]  options:0];
+    
+    int seconds = [conversionInfo second];
+    int days = [conversionInfo day];
+    int hours = [conversionInfo hour];
+    int minutes = [conversionInfo minute];
+    
+    if (days < 1) {
+        if (hours < 1) {
+            if (minutes < 1) {
+                cell.dateLabel.text = [NSString stringWithFormat:@"Il y a %i secondes", seconds];
+            } else {
+                cell.dateLabel.text = [NSString stringWithFormat:@"Il y a %i minutes", minutes];
+            }
+        } else {
+            cell.dateLabel.text = [NSString stringWithFormat:@"Il y a %i heures", hours];
+        }
+    } else if (days == 1) {
+        cell.dateLabel.text = [NSString stringWithFormat:@"Il y a %i jour", 1];
+    } else if (days > 1) {
         
-        return cell;
+        cell.dateLabel.text = [NSString stringWithFormat:@"Il y a %i jours", days];
     }
+
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+
+        return cell;
+  /*  }
         
     NewsTypeAlbumCell *cell = (NewsTypeAlbumCell *)[tableView dequeueReusableCellWithIdentifier:cellId2];
     if (cell == nil) {
@@ -122,7 +162,7 @@
     
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
-    return cell;
+    return cell;*/
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath

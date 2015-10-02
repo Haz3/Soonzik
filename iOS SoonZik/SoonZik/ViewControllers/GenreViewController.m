@@ -187,7 +187,8 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     Music *s = [self.genre.listOfMusics objectAtIndex:indexPath.row];
     
-    self.player = ((AppDelegate *)[UIApplication sharedApplication].delegate).thePlayer;
+    //self.player = ((AppDelegate *)[UIApplication sharedApplication].delegate).thePlayer;
+    self.player = [AudioPlayer sharedCenter];
     if ([self.player currentlyPlaying])
         [self.player pauseSound];
     self.player.listeningList = nil;
@@ -202,7 +203,8 @@
 - (void)addToCurrentPlaylist:(Music *)music
 {
     [self closePopUp];
-    self.player = ((AppDelegate *)[UIApplication sharedApplication].delegate).thePlayer;
+    //self.player = ((AppDelegate *)[UIApplication sharedApplication].delegate).thePlayer;
+    self.player = [AudioPlayer sharedCenter];
     //music.artist.username = self.album.artist.username;
     [self.player.listeningList addObject:music];
     

@@ -105,7 +105,8 @@
 - (void)addToCurrentPlaylist:(Music *)music
 {
     [self closePopUp];
-    self.player = ((AppDelegate *)[UIApplication sharedApplication].delegate).thePlayer;
+    //self.player = ((AppDelegate *)[UIApplication sharedApplication].delegate).thePlayer;
+    self.player = [AudioPlayer sharedCenter];
     [self.player.listeningList addObject:music];
     
     [[[SimplePopUp alloc] initWithMessage:[NSString stringWithFormat:[self.translate.dict objectForKey:@"music_added_current_list"], music.title] onView:self.view withSuccess:true] show];
@@ -155,7 +156,8 @@
 
 - (void) playAllPlaylist
 {
-    self.player = ((AppDelegate *)[UIApplication sharedApplication].delegate).thePlayer;
+    //self.player = ((AppDelegate *)[UIApplication sharedApplication].delegate).thePlayer;
+    self.player = [AudioPlayer sharedCenter];
     self.player.listeningList = [[NSMutableArray alloc] init];
     [self.player stopSound];
     self.player.currentlyPlaying = NO;
@@ -226,7 +228,8 @@
 {
     Music *s = [self.playlist.listOfMusics objectAtIndex:indexPath.row];
     
-    self.player = ((AppDelegate *)[UIApplication sharedApplication].delegate).thePlayer;
+    //self.player = ((AppDelegate *)[UIApplication sharedApplication].delegate).thePlayer;
+    self.player = [AudioPlayer sharedCenter];
     if ([self.player currentlyPlaying])
         [self.player pauseSound];
     self.player.listeningList = nil;

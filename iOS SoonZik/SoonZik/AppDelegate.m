@@ -23,6 +23,7 @@
 #import "UserViewController.h"
 #import "CartViewController.h"
 #import "IdenticationsController.h"
+#import "Socket.h"
 
 @interface AppDelegate() <PKRevealing, UITableViewDataSource, UITableViewDelegate, SearchElementInterface>
 
@@ -45,8 +46,6 @@
     NSLog(@"%@", [self.translate.dict objectForKey:@"menu_news"]);
     
     [self initializeMenuSystem];
-    
-    [self initThePlayer];
     [self initBasicGraphics];
     
     [[Twitter sharedInstance] startWithConsumerKey:@"jwRxE6l8j6t0uGGNjEaMPfYEG" consumerSecret:@"2770ueiokY2QLNYcykUFJfHUrr0avop7TsIlsJUE3FtKxaM4P0"];
@@ -120,19 +119,6 @@
     [[UIApplication sharedApplication]setStatusBarStyle:UIStatusBarStyleLightContent];
 }
 
-- (void) initThePlayer {
-    self.thePlayer = [[AudioPlayer alloc] init];
-    self.thePlayer.index = 0;
-    self.thePlayer.oldIndex = 0;
-    self.thePlayer.repeatingLevel = 0;
-    self.thePlayer.listeningList = [[NSMutableArray alloc] init];
-    self.thePlayer.currentlyPlaying = NO;
-    
-    [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback error:nil];
-    [[AVAudioSession sharedInstance] setActive: YES error: nil];
-    [[UIApplication sharedApplication] beginReceivingRemoteControlEvents];
-}
-
 - (void)launchConnexion {
     UIViewController *vc = [[ConnexionViewController alloc] initWithNibName:@"ConnexionViewController" bundle:nil];
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
@@ -142,6 +128,7 @@
 }
 
 - (void)launchHome {
+    [Socket sharedCenter];
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = BLUE_1;
     self.window.rootViewController = self.revealController;

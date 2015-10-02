@@ -30,7 +30,8 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [[UIApplication sharedApplication] setStatusBarHidden:false withAnimation:UIStatusBarAnimationNone];
-    self.player = ((AppDelegate *)[UIApplication sharedApplication].delegate).thePlayer;
+    //self.player = ((AppDelegate *)[UIApplication sharedApplication].delegate).thePlayer;
+    self.player = [AudioPlayer sharedCenter];
     self.player.finishDelegate = self;
     
     if (self.player.listeningList.count == 0)
@@ -101,7 +102,11 @@
     for (int i = 0; i < self.player.listeningList.count; i++) {
         UIImageView *imgV = [[UIImageView alloc] initWithFrame:CGRectMake(i * imageWith + imageEcart * (i * 2 + 1), self.scrollView.frame.origin.y, imageWith, imageWith)];
         Music *music = [self.player.listeningList objectAtIndex:i];
-        imgV.image = [UIImage imageNamed:music.albumImage];
+        NSString *urlImage = [NSString stringWithFormat:@"%@assets/albums/%@", API_URL, music.albumImage];
+        NSLog(@"url image : %@", urlImage);
+        NSData *imageData = [[NSData alloc] initWithContentsOfURL: [NSURL URLWithString: urlImage]];
+        imgV.image = [UIImage imageWithData:imageData];
+
         [self.scrollView addSubview:imgV];
         contentOffset += self.scrollView.frame.size.width;
     }
@@ -220,8 +225,7 @@
 
 - (void)playerHasFinishedToPlay
 {
-    [self next:nil];
-    [self play:nil];
+    [self.player stopSound];
 }
 
 - (IBAction)random:(id)sender

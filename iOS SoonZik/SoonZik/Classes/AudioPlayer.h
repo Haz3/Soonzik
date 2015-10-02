@@ -42,4 +42,7 @@
 - (void)next;
 - (void)repeat;
 
+
++ (AudioPlayer *)sharedCenter;
+
 @end
