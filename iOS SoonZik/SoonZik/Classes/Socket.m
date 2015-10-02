@@ -35,6 +35,7 @@ static Socket *sharedSocket = nil;    // static instance variable
     self.user = (User *)[NSKeyedUnarchiver unarchiveObjectWithData:data];
     
     [self connect];
+    [self initToServer];
     [self bindEvents];
     
     return self;
@@ -53,6 +54,27 @@ static Socket *sharedSocket = nil;    // static instance variable
         NSLog(@"Disconnected!");
     }];
     [dispatcher disconnect];
+}
+
+- (void)initToServer {
+    
+    NSLog(@"initError");
+    NSString *key = [Crypto getKey:self.user.identifier];
+    NSString *conca = [NSString stringWithFormat:@"%@%@", self.user.salt, key];
+    NSString *secureKey = [Crypto sha256HashFor:conca];
+    
+    NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:
+                         [NSString stringWithFormat:@"%i", self.user.identifier], @"user_id",
+                         secureKey, @"secureKey",
+                         nil];
+    
+    [dispatcher trigger:@"init_connection" data:@{@"data": dic} success:^(id data) {
+        NSLog(@"INIT CONNECTION DONE");
+        
+    } failure:^(id data) {
+        NSLog(@"ERROR : INIT CONNECTION FAILED");
+    }];
+
 }
 
 - (void)bindEvents {

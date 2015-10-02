@@ -29,8 +29,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.player = ((AppDelegate *)[UIApplication sharedApplication].delegate).thePlayer;
-    
+    //self.player = ((AppDelegate *)[UIApplication sharedApplication].delegate).thePlayer;
+    self.player = [AudioPlayer sharedCenter];
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     self.view.backgroundColor = DARK_GREY;

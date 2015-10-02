@@ -38,7 +38,8 @@
     self.view.backgroundColor = DARK_GREY;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
-    NSLog(@"listOfNews.count : %i", self.news.listOfNewsTexts.count);
+    NSLog(@"listOfNews.text.count : %i", self.news.listOfNewsTexts.count);
+    NSLog(@"listOfAttachments.count : %i", self.news.listOfAttachments.count);
 }
 
 - (void)getData {
@@ -68,8 +69,12 @@
         int i = 0;
         while ((i < self.news.listOfAttachments.count) && (!found)) {
             Attachment *att = [self.news.listOfAttachments objectAtIndex:i];
-            if ([att.contentType isEqualToString:@"image"]) {
-                imgv.image = [UIImage imageNamed:att.url];
+            NSLog(@"%@", att.contentType);
+            if ([att.contentType isEqualToString:@"image/jpegNews"]) {
+                NSLog(@"att.url : %@", att.url);
+                NSString *urlImage = [NSString stringWithFormat:@"%@assets/news/%@", API_URL, att.url];
+                NSData *imageData = [[NSData alloc] initWithContentsOfURL: [NSURL URLWithString: urlImage]];
+                imgv.image = [UIImage imageWithData:imageData];
                 found = true;
             }
             i++;

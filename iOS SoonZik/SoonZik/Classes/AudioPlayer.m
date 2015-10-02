@@ -13,10 +13,27 @@
 
 static AudioPlayer *sharedInstance = nil;
 
++ (AudioPlayer *)sharedCenter {
+    if (sharedInstance == nil) {
+        sharedInstance = [[AudioPlayer alloc] init];
+    }
+    return sharedInstance;
+}
+
 - (id)init
 {
     self = [super init];
     if (self) {
+        self.index = 0;
+        self.oldIndex = 0;
+        self.repeatingLevel = 0;
+        [self.audioPlayer setNumberOfLoops:0];
+        self.listeningList = [[NSMutableArray alloc] init];
+        self.currentlyPlaying = NO;
+        
+        [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback error:nil];
+        [[AVAudioSession sharedInstance] setActive: YES error: nil];
+        [[UIApplication sharedApplication] beginReceivingRemoteControlEvents];
     }
     
     return self;
@@ -62,7 +79,6 @@ static AudioPlayer *sharedInstance = nil;
 - (void)pauseSound
 {
     [self.audioPlayer pause];
-    
     self.currentlyPlaying = NO;
 }
 
@@ -148,6 +164,7 @@ static AudioPlayer *sharedInstance = nil;
 - (void)audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)flag
 {
     self.currentlyPlaying = NO;
+    [self stopSound];
     [self.finishDelegate playerHasFinishedToPlay];
 }
 
