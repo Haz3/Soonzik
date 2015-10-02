@@ -77,8 +77,6 @@
     [self.toolbar setFrame:CGRectMake(0, self.view.frame.size.height, self.toolbar.frame.size.width, self.toolbar.frame.size.height)];
     [self.collecView setFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
     toolbarOpened = NO;
-    
-    //[[Socket sharedCenter] whoIsOnline];
 }
 
 

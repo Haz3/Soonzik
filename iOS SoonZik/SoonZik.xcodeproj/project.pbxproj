@@ -100,6 +100,13 @@
 		ED80E6281A370A460070C33A /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED80E6271A370A460070C33A /* CoreText.framework */; };
 		ED80E62A1A370A540070C33A /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = ED80E6291A370A540070C33A /* libxml2.dylib */; };
 		ED8CC96519F02AF600F4AFEC /* Conversation.plist in Resources */ = {isa = PBXBuildFile; fileRef = ED8CC96419F02AF600F4AFEC /* Conversation.plist */; };
+		ED9512A41BB59154004D7FD8 /* libicucore.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = ED9512A31BB59154004D7FD8 /* libicucore.tbd */; };
+		ED9512AF1BB59C19004D7FD8 /* WebSocketRailsChannel.m in Sources */ = {isa = PBXBuildFile; fileRef = ED9512A71BB59C19004D7FD8 /* WebSocketRailsChannel.m */; settings = {ASSET_TAGS = (); }; };
+		ED9512B01BB59C19004D7FD8 /* WebSocketRailsConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = ED9512A91BB59C19004D7FD8 /* WebSocketRailsConnection.m */; settings = {ASSET_TAGS = (); }; };
+		ED9512B11BB59C19004D7FD8 /* WebSocketRailsDispatcher.m in Sources */ = {isa = PBXBuildFile; fileRef = ED9512AB1BB59C19004D7FD8 /* WebSocketRailsDispatcher.m */; settings = {ASSET_TAGS = (); }; };
+		ED9512B21BB59C19004D7FD8 /* WebSocketRailsEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = ED9512AD1BB59C19004D7FD8 /* WebSocketRailsEvent.m */; settings = {ASSET_TAGS = (); }; };
+		ED9512B81BB59DF8004D7FD8 /* SRWebSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = ED9512B71BB59DF8004D7FD8 /* SRWebSocket.m */; settings = {ASSET_TAGS = (); }; };
+		ED9512BB1BB5ABA4004D7FD8 /* MessagesController.m in Sources */ = {isa = PBXBuildFile; fileRef = ED9512BA1BB5ABA4004D7FD8 /* MessagesController.m */; settings = {ASSET_TAGS = (); }; };
 		ED9B0E861B6E7B050024DC1E /* RepartitionAmountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ED9B0E841B6E7B050024DC1E /* RepartitionAmountViewController.m */; };
 		ED9B0E871B6E7B050024DC1E /* RepartitionAmountViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = ED9B0E851B6E7B050024DC1E /* RepartitionAmountViewController.xib */; };
 		ED9B0E8B1B6E86740024DC1E /* RepartionTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = ED9B0E891B6E86740024DC1E /* RepartionTableViewCell.m */; };
@@ -157,6 +164,7 @@
 		EDA978291B3B97190056EC75 /* UserListen.m in Sources */ = {isa = PBXBuildFile; fileRef = EDA978091B3B97190056EC75 /* UserListen.m */; };
 		EDAB8EF91ABF94DA0047B913 /* BuyPackTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EDAB8EF71ABF94DA0047B913 /* BuyPackTableViewCell.m */; };
 		EDAB8EFA1ABF94DA0047B913 /* BuyPackTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EDAB8EF81ABF94DA0047B913 /* BuyPackTableViewCell.xib */; };
+		EDB31C451BB6D65F00FE30B0 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EDB31C441BB6D65F00FE30B0 /* CFNetwork.framework */; };
 		EDBF40971AF9AC50008C5078 /* onandon.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EDBF40961AF9AC50008C5078 /* onandon.jpg */; };
 		EDC717831AC38C80000274BC /* add.svg in Resources */ = {isa = PBXBuildFile; fileRef = EDC717811AC38C80000274BC /* add.svg */; };
 		EDC717841AC38C80000274BC /* back.svg in Resources */ = {isa = PBXBuildFile; fileRef = EDC717821AC38C80000274BC /* back.svg */; };
@@ -481,6 +489,21 @@
 		ED80E6271A370A460070C33A /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		ED80E6291A370A540070C33A /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
 		ED8CC96419F02AF600F4AFEC /* Conversation.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Conversation.plist; sourceTree = "<group>"; };
+		ED9512A31BB59154004D7FD8 /* libicucore.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libicucore.tbd; path = usr/lib/libicucore.tbd; sourceTree = SDKROOT; };
+		ED9512A61BB59C19004D7FD8 /* WebSocketRailsChannel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebSocketRailsChannel.h; sourceTree = "<group>"; };
+		ED9512A71BB59C19004D7FD8 /* WebSocketRailsChannel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebSocketRailsChannel.m; sourceTree = "<group>"; };
+		ED9512A81BB59C19004D7FD8 /* WebSocketRailsConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebSocketRailsConnection.h; sourceTree = "<group>"; };
+		ED9512A91BB59C19004D7FD8 /* WebSocketRailsConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebSocketRailsConnection.m; sourceTree = "<group>"; };
+		ED9512AA1BB59C19004D7FD8 /* WebSocketRailsDispatcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebSocketRailsDispatcher.h; sourceTree = "<group>"; };
+		ED9512AB1BB59C19004D7FD8 /* WebSocketRailsDispatcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebSocketRailsDispatcher.m; sourceTree = "<group>"; };
+		ED9512AC1BB59C19004D7FD8 /* WebSocketRailsEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebSocketRailsEvent.h; sourceTree = "<group>"; };
+		ED9512AD1BB59C19004D7FD8 /* WebSocketRailsEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebSocketRailsEvent.m; sourceTree = "<group>"; };
+		ED9512AE1BB59C19004D7FD8 /* WebSocketRailsTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebSocketRailsTypes.h; sourceTree = "<group>"; };
+		ED9512B51BB59DF8004D7FD8 /* SocketRocket-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SocketRocket-Prefix.pch"; sourceTree = "<group>"; };
+		ED9512B61BB59DF8004D7FD8 /* SRWebSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SRWebSocket.h; sourceTree = "<group>"; };
+		ED9512B71BB59DF8004D7FD8 /* SRWebSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SRWebSocket.m; sourceTree = "<group>"; };
+		ED9512B91BB5ABA4004D7FD8 /* MessagesController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessagesController.h; sourceTree = "<group>"; };
+		ED9512BA1BB5ABA4004D7FD8 /* MessagesController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessagesController.m; sourceTree = "<group>"; };
 		ED9B0E831B6E7B050024DC1E /* RepartitionAmountViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RepartitionAmountViewController.h; sourceTree = "<group>"; };
 		ED9B0E841B6E7B050024DC1E /* RepartitionAmountViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RepartitionAmountViewController.m; sourceTree = "<group>"; };
 		ED9B0E851B6E7B050024DC1E /* RepartitionAmountViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RepartitionAmountViewController.xib; sourceTree = "<group>"; };
@@ -590,6 +613,7 @@
 		EDAB8EF61ABF94DA0047B913 /* BuyPackTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BuyPackTableViewCell.h; sourceTree = "<group>"; };
 		EDAB8EF71ABF94DA0047B913 /* BuyPackTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BuyPackTableViewCell.m; sourceTree = "<group>"; };
 		EDAB8EF81ABF94DA0047B913 /* BuyPackTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BuyPackTableViewCell.xib; sourceTree = "<group>"; };
+		EDB31C441BB6D65F00FE30B0 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		EDBF40961AF9AC50008C5078 /* onandon.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = onandon.jpg; sourceTree = "<group>"; };
 		EDC717811AC38C80000274BC /* add.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = add.svg; sourceTree = "<group>"; };
 		EDC717821AC38C80000274BC /* back.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = back.svg; sourceTree = "<group>"; };
@@ -1020,6 +1044,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EDB31C451BB6D65F00FE30B0 /* CFNetwork.framework in Frameworks */,
+				ED9512A41BB59154004D7FD8 /* libicucore.tbd in Frameworks */,
 				ED081E871AA408E1002F5C32 /* AssetsLibrary.framework in Frameworks */,
 				D53B4F1419335D1000D65128 /* Social.framework in Frameworks */,
 				ED2E2B5C1B2D1B2E00D2D922 /* SystemConfiguration.framework in Frameworks */,
@@ -1103,6 +1129,8 @@
 		D55AB40D192CE1950065CB9C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				EDB31C441BB6D65F00FE30B0 /* CFNetwork.framework */,
+				ED9512A31BB59154004D7FD8 /* libicucore.tbd */,
 				ED2E2B5B1B2D1B2E00D2D922 /* SystemConfiguration.framework */,
 				ED2E2B591B2D1B1D00D2D922 /* Security.framework */,
 				ED2E2B571B2D1B1100D2D922 /* MediaPlayer.framework */,
@@ -1183,6 +1211,32 @@
 				D55AB439192CE1950065CB9C /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		ED9512A51BB59C19004D7FD8 /* WebSocketRails-iOS */ = {
+			isa = PBXGroup;
+			children = (
+				ED9512A61BB59C19004D7FD8 /* WebSocketRailsChannel.h */,
+				ED9512A71BB59C19004D7FD8 /* WebSocketRailsChannel.m */,
+				ED9512A81BB59C19004D7FD8 /* WebSocketRailsConnection.h */,
+				ED9512A91BB59C19004D7FD8 /* WebSocketRailsConnection.m */,
+				ED9512AA1BB59C19004D7FD8 /* WebSocketRailsDispatcher.h */,
+				ED9512AB1BB59C19004D7FD8 /* WebSocketRailsDispatcher.m */,
+				ED9512AC1BB59C19004D7FD8 /* WebSocketRailsEvent.h */,
+				ED9512AD1BB59C19004D7FD8 /* WebSocketRailsEvent.m */,
+				ED9512AE1BB59C19004D7FD8 /* WebSocketRailsTypes.h */,
+			);
+			path = "WebSocketRails-iOS";
+			sourceTree = "<group>";
+		};
+		ED9512B41BB59DF8004D7FD8 /* SocketRocket */ = {
+			isa = PBXGroup;
+			children = (
+				ED9512B51BB59DF8004D7FD8 /* SocketRocket-Prefix.pch */,
+				ED9512B61BB59DF8004D7FD8 /* SRWebSocket.h */,
+				ED9512B71BB59DF8004D7FD8 /* SRWebSocket.m */,
+			);
+			path = SocketRocket;
 			sourceTree = "<group>";
 		};
 		EDA977A11B3B85E90056EC75 /* PKRevealController */ = {
@@ -1381,6 +1435,8 @@
 				ED76A4911B8CA26A006FC89B /* SuggestsController.m */,
 				ED9F44CF1B982936001EB277 /* IdenticationsController.h */,
 				ED9F44D01B982936001EB277 /* IdenticationsController.m */,
+				ED9512B91BB5ABA4004D7FD8 /* MessagesController.h */,
+				ED9512BA1BB5ABA4004D7FD8 /* MessagesController.m */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -1600,6 +1656,8 @@
 		EDEDEC261AA15C5D0024CF38 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				ED9512B41BB59DF8004D7FD8 /* SocketRocket */,
+				ED9512A51BB59C19004D7FD8 /* WebSocketRails-iOS */,
 				EDA977A11B3B85E90056EC75 /* PKRevealController */,
 				EDD7A99A1AEB5CFA0000790C /* PayPalMobile */,
 				EDEDEC2B1AA15C5D0024CF38 /* AMSlideMenu */,
@@ -2322,6 +2380,8 @@
 				EDA978161B3B97190056EC75 /* Album.m in Sources */,
 				D55AB41B192CE1950065CB9C /* main.m in Sources */,
 				EDEDED481AA15C5D0024CF38 /* NSString+URLEncoding.m in Sources */,
+				ED9512B01BB59C19004D7FD8 /* WebSocketRailsConnection.m in Sources */,
+				ED9512B11BB59C19004D7FD8 /* WebSocketRailsDispatcher.m in Sources */,
 				ED9B0E8B1B6E86740024DC1E /* RepartionTableViewCell.m in Sources */,
 				EDA9780C1B3B97190056EC75 /* Factory.m in Sources */,
 				EDEDED511AA15C5D0024CF38 /* sha1.c in Sources */,
@@ -2370,6 +2430,7 @@
 				EDEDED781AA15C5D0024CF38 /* SOPlaceholderedTextView.m in Sources */,
 				ED9F44D41B984459001EB277 /* Language.m in Sources */,
 				ED3104661ACDED8700D40FB6 /* FriendCollectionViewCell.m in Sources */,
+				ED9512AF1BB59C19004D7FD8 /* WebSocketRailsChannel.m in Sources */,
 				EDEDEBA01AA15B5C0024CF38 /* GeolocationViewController.m in Sources */,
 				EDA9781A1B3B97190056EC75 /* Com.m in Sources */,
 				EDEDEB961AA15B5C0024CF38 /* ConnexionViewController.m in Sources */,
@@ -2400,13 +2461,16 @@
 				EDEDED411AA15C5D0024CF38 /* AMSlideMenuLeftMenuSegue.m in Sources */,
 				EDEDEC101AA15B8D0024CF38 /* TitleAlbumsTableViewCell.m in Sources */,
 				EDA9780D1B3B97190056EC75 /* MusicOptionsButton.m in Sources */,
+				ED9512B81BB59DF8004D7FD8 /* SRWebSocket.m in Sources */,
 				EDEDEBFF1AA15B8D0024CF38 /* HeaderAlbumTableView.m in Sources */,
+				ED9512B21BB59C19004D7FD8 /* WebSocketRailsEvent.m in Sources */,
 				ED9B0E861B6E7B050024DC1E /* RepartitionAmountViewController.m in Sources */,
 				EDA978231B3B97190056EC75 /* Pack.m in Sources */,
 				EDF259BD1BB306F700FCE470 /* Socket.m in Sources */,
 				EDF7EBC71B2A08600091994C /* InfluenceViewController.m in Sources */,
 				EDA978141B3B97190056EC75 /* UserAnnotation.m in Sources */,
 				EDEDED751AA15C5D0024CF38 /* SOMessageCell.m in Sources */,
+				ED9512BB1BB5ABA4004D7FD8 /* MessagesController.m in Sources */,
 				ED65E9F11AA523DF00A7BD89 /* VoteButton.m in Sources */,
 				EDEDEBA71AA15B5C0024CF38 /* PlayerViewController.m in Sources */,
 				EDEDED7B1AA15C5D0024CF38 /* SWCellScrollView.m in Sources */,

@@ -7,15 +7,16 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "User.h"
+#import "SRWebSocket.h"
 
-@interface Socket : NSObject <NSStreamDelegate>
+@interface Socket : NSObject
 
-@property (strong, nonatomic) NSInputStream *inputStream;
-@property (strong, nonatomic) NSOutputStream *outputStream;
+@property (strong, nonatomic) User *user;
 
 + (Socket *)sharedCenter;
 
-- (void)sendMessage:(NSString *)msg;
+- (void)sendMessage:(NSString *)msg toUserId:(int)userID;
 - (void)whoIsOnline;
 
 @end

@@ -23,6 +23,7 @@
 #import "UserViewController.h"
 #import "CartViewController.h"
 #import "IdenticationsController.h"
+#import "Socket.h"
 
 @interface AppDelegate() <PKRevealing, UITableViewDataSource, UITableViewDelegate, SearchElementInterface>
 
@@ -142,6 +143,7 @@
 }
 
 - (void)launchHome {
+    [Socket sharedCenter];
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = BLUE_1;
     self.window.rootViewController = self.revealController;

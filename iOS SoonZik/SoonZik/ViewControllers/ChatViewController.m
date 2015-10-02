@@ -8,6 +8,8 @@
 
 #import "ChatViewController.h"
 #import "Message.h"
+#import "Socket.h"
+#import "MessagesController.h"
 
 @interface ChatViewController ()
 
@@ -30,7 +32,9 @@
     User *user = (User *)[NSKeyedUnarchiver unarchiveObjectWithData:data];
     
     self.myImage      = [UIImage imageNamed:user.image];
-    self.partnerImage = [UIImage imageNamed:self.friend.image];
+    NSString *urlImage = [NSString stringWithFormat:@"%@assets/usersImage/avatars/%@", API_URL, self.friend.image];
+    NSData * imageData = [[NSData alloc] initWithContentsOfURL: [NSURL URLWithString: urlImage]];
+    self.partnerImage = [UIImage imageWithData:imageData];
     
     //--------------------------------------------------
     //         Customizing input view
@@ -50,6 +54,11 @@
 - (void)loadMessages
 {
     self.dataSource = [[self generateConversation] mutableCopy];
+    
+    NSMutableArray *arr = [MessagesController getMessagesWithFriendId:self.friend.identifier withOffset:0];
+    for (Message *mes in arr) {
+        NSLog(@"message : %@", mes.text);
+    }
 }
 
 #pragma mark - SOMessaging data source
@@ -188,6 +197,8 @@
     msg.fromMe = YES;
     
     [self sendMessage:msg];
+    
+    [[Socket sharedCenter] sendMessage:message toUserId:self.friend.identifier];
 }
 
 - (void)messageInputViewDidSelectMediaButton:(SOMessageInputView *)inputView
