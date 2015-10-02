@@ -30,10 +30,11 @@ class PurchasesController < ApplicationController
       }
       amount += obj.price
 		end
+
 		makePayment({
 	    :return_url => "http://lvh.me:3000/successCallback/cart",
 	    :cancel_url => "http://lvh.me:3000/cancelCallback/cart"
-	  }, itemList, '%.2f' % amount, "You are purchasing your cart.")
+	  }, itemList, '%.2f' % amount, "You are purchasing your cart #1")
 	end
 
 	def buyPack
@@ -173,7 +174,7 @@ class PurchasesController < ApplicationController
 		begin
 			if @payment.create
 			  # Redirect the user to given approval url
-			  @redirect_url = @payment.links.find{|v| v.method == "REDIRECT" }.href
+			  @redirect_url = @payment.links.find{|v| v.method == "REDIRECT" }.href.gsub("https://www.paypal", "https://www.sandbox.paypal")
 				redirect_to @redirect_url
 			else
 			  render text: @payment.error.inspect

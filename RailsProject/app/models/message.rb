@@ -35,7 +35,7 @@ class Message < ActiveRecord::Base
   	[:id, :msg, :user_id, :dest_id]
   end
 
-  # Function for the chat
+  # Function for the chat to get the user who do the request
   def self.checkKey(message, current_user = nil)
     user = nil
     if (message.has_key?("user_id") && message.has_key?("secureKey"))

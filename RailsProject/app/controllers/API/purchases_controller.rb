@@ -22,7 +22,6 @@ module API
     # - +paypal [:payer_last_name] + - The informations that paypal returns after a payment
     # - +paypal [:payer_id] + - The informations that paypal returns after a payment
     # - +paypal [:payer_phone] + - The informations that paypal returns after a payment
-    # - +paypal [:payer_country_code] + - The informations that paypal returns after a payment
     # - +paypal [:payer_street] + - The informations that paypal returns after a payment
     # - +paypal [:payer_city] + - The informations that paypal returns after a payment
     # - +paypal [:payer_postal_code] + - The informations that paypal returns after a payment
@@ -59,7 +58,6 @@ module API
               payer_last_name: @paypal[:payer_last_name],
               payer_id: @paypal[:payer_id],
               payer_phone: @paypal[:payer_phone],
-              payer_country_code: @paypal[:payer_country_code],
               payer_street: @paypal[:payer_street],
               payer_city: @paypal[:payer_city],
               payer_postal_code: @paypal[:payer_postal_code],
