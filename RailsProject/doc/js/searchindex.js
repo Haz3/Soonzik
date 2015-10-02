@@ -1167,7 +1167,7 @@ var SearchIndex =
 	{
 		"name": "checkKey",
 		"link": "Message.html#method-c-checkKey",
-		"snippet": "<p>Function for the chat\n",
+		"snippet": "<p>Function for the chat to get the user who do the request\n",
 		"type": "anymethod"
 	},
 	{
