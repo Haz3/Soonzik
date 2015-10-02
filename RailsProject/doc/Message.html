@@ -145,6 +145,42 @@ relation and the validation Can provide some features linked to this model</p>
 					<h3>Public Class Methods</h3>
 				</header>
 
+								<a name="method-c-checkKey">anchor</a>
+				<div id="method-c-checkKey-doc" class="method">
+
+					<header>
+											<i class="icon-generic"></i>
+						<span class="method-name">checkKey</span><span 
+							class="method-args">(message, current_user = nil)</span>
+										</header>
+
+					<div class="method-description">
+											<p>Function for the chat</p>					
+											<div class="method-source-code" id="checkKey-source">
+							<pre class="prettyprint linenums"><code 
+								class="language-ruby"><span class="ruby-comment"># File app/models/message.rb, line 39</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">checkKey</span>(<span class="ruby-identifier">message</span>, <span class="ruby-identifier">current_user</span> = <span class="ruby-keyword">nil</span>)
+  <span class="ruby-identifier">user</span> = <span class="ruby-keyword">nil</span>
+  <span class="ruby-keyword">if</span> (<span class="ruby-identifier">message</span>.<span class="ruby-identifier">has_key?</span>(<span class="ruby-string">&quot;user_id&quot;</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">message</span>.<span class="ruby-identifier">has_key?</span>(<span class="ruby-string">&quot;secureKey&quot;</span>))
+    <span class="ruby-keyword">begin</span>
+      <span class="ruby-identifier">u</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">find_by_id</span>(<span class="ruby-identifier">message</span>[<span class="ruby-string">&quot;user_id&quot;</span>])
+      <span class="ruby-keyword">if</span> (<span class="ruby-identifier">message</span>[<span class="ruby-string">&quot;secureKey&quot;</span>] <span class="ruby-operator">==</span> <span class="ruby-identifier">u</span>.<span class="ruby-identifier">secureKey</span>)
+        <span class="ruby-identifier">user</span> = <span class="ruby-identifier">u</span>
+        <span class="ruby-identifier">u</span>.<span class="ruby-identifier">regenerateKey</span>
+        <span class="ruby-identifier">u</span>.<span class="ruby-identifier">save</span>
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">rescue</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">elsif</span> (<span class="ruby-identifier">current_user</span> <span class="ruby-operator">!=</span> <span class="ruby-keyword">nil</span>)
+    <span class="ruby-identifier">user</span> = <span class="ruby-identifier">current_user</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">user</span>
+<span class="ruby-keyword">end</span></code></pre>
+						</div>
+										</div>
+
+					
+									</div>
 								<a name="method-c-message_params">anchor</a>
 				<div id="method-c-message_params-doc" class="method">
 

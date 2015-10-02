@@ -1165,6 +1165,12 @@ var SearchIndex =
 		"type": "anymethod"
 	},
 	{
+		"name": "checkKey",
+		"link": "Message.html#method-c-checkKey",
+		"snippet": "<p>Function for the chat\n",
+		"type": "anymethod"
+	},
+	{
 		"name": "music_params",
 		"link": "Music.html#method-c-music_params",
 		"snippet": "<p>The strong parameters to save or update object\n",

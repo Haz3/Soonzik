@@ -34,4 +34,23 @@ class Message < ActiveRecord::Base
   def self.miniKey
   	[:id, :msg, :user_id, :dest_id]
   end
+
+  # Function for the chat
+  def self.checkKey(message, current_user = nil)
+    user = nil
+    if (message.has_key?("user_id") && message.has_key?("secureKey"))
+      begin
+        u = User.find_by_id(message["user_id"])
+        if (message["secureKey"] == u.secureKey)
+          user = u
+          u.regenerateKey
+          u.save
+        end
+      rescue
+      end
+    elsif (current_user != nil)
+      user = current_user
+    end
+    return user
+  end
 end

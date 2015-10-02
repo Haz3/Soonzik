@@ -2,21 +2,40 @@ class MessagesController < WebsocketRails::BaseController
 	def initialize_session
     # perform application setup here
     controller_store[:user_id] = []
-    controller_store[:smartphone] = []
   end
 
   def client_connected
-    checkKey(message)
-    if user_signed_in? || @security
-      if @security
-        sign_in(@user)
-        controller_store[:smartphone] << @user.id
-      end
-      controller_store[:user_id] << @user.id
+    if !user_signed_in?
+      controller_store[:user_id] << { id: nil, socket: self.connection }
+    else
+      controller_store[:user_id] << { id: current_user.id, socket: self.connection }
+      current_user.friends.each { |friend|
+        controller_store[:user_id].each { |connected_guy|
+          if friend.id == connected_guy[:id]
+            connected_guy[:socket].send_message('newOnlineFriends', { :idFriend => current_user.id })
+          end
+        }
+      }
+    end
+  end
+
+  def init_smartphone_connection
+    @user = nil
+    begin
+      @user = Message.checkKey(message, (user_signed_in?) ? current_user : nil)
+    rescue
+    end
+    if @user != nil
+      controller_store[:user_id].each_with_index { |user, index|
+        if (user[:socket] == self.connection)
+          user[:id] = @user.id
+          break
+        end
+      }
       @user.friends.each { |friend|
         controller_store[:user_id].each { |connected_guy|
-          if friend.id == connected_guy
-            WebsocketRails.users[connected_guy].send_message('newOnlineFriends', { :idFriend => @user.id })
+          if friend.id == connected_guy[:id]
+            connected_guy[:socket].send_message('newOnlineFriends', { :idFriend => @user.id })
           end
         }
       }
@@ -24,18 +43,19 @@ class MessagesController < WebsocketRails::BaseController
   end
 
   def delete_user
-    checkKey(message)
-    if user_signed_in? || @security
-      controller_store[:smartphone].each do |id|
-        if user_signed_in? && current_user.id == id
-          sign_out(current_user)
-        end
+    user_id = nil
+    controller_store[:user_id].each_with_index { |user, index|
+      if (user[:socket] == self.connection)
+        user_id = user[:id]
+        controller_store[:user_id].delete_at(index)
+        break
       end
-      controller_store[:user_id] -= [@user.id]
-      @user.friends.each { |friend|
+    }
+    if (user_id != nil && (u = User.find_by_id(user_id)))
+      u.friends.each { |friend|
         controller_store[:user_id].each { |connected_guy|
-          if friend.id == connected_guy
-            WebsocketRails.users[connected_guy].send_message('newOfflineFriends', { :idFriend => @user.id })
+          if friend.id == connected_guy[:id]
+            connected_guy[:socket].send_message('newOfflineFriends', { :idFriend => user_id })
           end
         }
       }
@@ -43,50 +63,50 @@ class MessagesController < WebsocketRails::BaseController
   end
   
   def sendMsg
-    checkKey(message)
-    if ((user_signed_in? || @security) && defined?message[:toWho])
-      target = User.find_by_id(message[:toWho]);
+    @user = nil
+    begin
+      @user = Message.checkKey(message, (user_signed_in?) ? current_user : nil)
+    rescue
+    end
+    if (@user != nil && defined?message["toWho"])
+      target = User.find_by_id(message["toWho"]);
       if (target != nil)
         newMsg = Message.new
-        newMsg.msg = message[:messageValue]
+        newMsg.msg = message["messageValue"]
         newMsg.user_id = @user.id
         newMsg.dest_id = target.id
         newMsg.session = "web"
         newMsg.save!
-        WebsocketRails.users[target.id].send_message('newMsg', { message: message[:messageValue], from: @user.username })
+        controller_store[:user_id].each_with_index { |user, index|
+          if (user[:id] == target.id)
+            user[:socket].send_message('newMsg', { message: message["messageValue"], from: @user.username })
+            break
+          end
+        }
       end
     end
   end
 
   def getOnlineFriend
-    checkKey(message)
+    @user = nil
+    begin
+      @user = Message.checkKey(message, (user_signed_in?) ? current_user : nil)
+    rescue
+    end
     friends = []
-    if (user_signed_in? || @security)
+    if (@user != nil)
+      u = nil
       @user.friends.each { |friend|
         controller_store[:user_id].each { |connected_guy|
-          friends << connected_guy if friend.id == connected_guy
+          friends << connected_guy[:id] if friend.id == connected_guy[:id]
         }
       }
-      WebsocketRails.users[@user.id].send_message('onlineFriends', {:message => friends})
-    end
-  end
-
-  private
-  def checkKey(message)
-    @security = false
-    if (message.has_key?(:user_id) && message.has_key?(:secureKey))
-      begin
-        u = User.find_by_id(@user_id)
-        if (message[:secureKey] == u.secureKey)
-          @security = true
-          @user = u
-          u.regenerateKey
-          u.save
+      controller_store[:user_id].each_with_index { |user, index|
+        if (user[:id] == @user.id)
+          user[:socket].send_message('onlineFriends', {:message => friends})
+          break
         end
-      rescue
-      end
-    elsif (user_signed_in?)
-      @user = current_user
+      }
     end
   end
 end
