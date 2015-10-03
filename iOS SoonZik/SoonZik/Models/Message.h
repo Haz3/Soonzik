@@ -14,6 +14,7 @@
 
 @property (nonatomic, assign) int identifier;
 @property (nonatomic, strong) User *fromUser;
+@property (nonatomic, strong) NSString *fromUsername;
 @property (nonatomic, strong) User *toUser;
 @property (nonatomic, strong) NSDate *date;
 @property (nonatomic, strong) NSString *content;
@@ -24,5 +25,7 @@
 @property (strong, nonatomic) NSData *media;
 @property (strong, nonatomic) UIImage *thumbnail;
 @property (nonatomic) SOMessageType type;
+
+- (id)initWithSocket:(NSDictionary *)sock;
 
 @end

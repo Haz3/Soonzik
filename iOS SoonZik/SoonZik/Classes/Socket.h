@@ -9,6 +9,11 @@
 #import <Foundation/Foundation.h>
 #import "User.h"
 #import "SRWebSocket.h"
+#import "Message.h"
+
+@protocol MessageReceivedDelegate <NSObject>
+- (void)messageHasBeenReceived:(Message *)msg;
+@end
 
 @interface Socket : NSObject
 
@@ -18,5 +23,7 @@
 
 - (void)sendMessage:(NSString *)msg toUserId:(int)userID;
 - (void)whoIsOnline;
+
+@property (strong, nonatomic) id<MessageReceivedDelegate> delegate;
 
 @end
