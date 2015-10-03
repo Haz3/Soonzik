@@ -156,7 +156,7 @@ module API
       if (defined?(@uid) && defined?(@provider) && defined?(@encrypted_key) && defined?(@token))
         begin
           identity = Identity.where(provider: @provider).find_by_uid(@uid)
-          valid = (@provider == "twitter") ? true : isValidToken?(@token, @provider)
+          valid = (@provider.downcase == "twitter") ? true : isValidToken?(@token, @provider)
           if (identity != nil && Digest::SHA256.hexdigest(@uid.to_s + identity.token + Identity::SALT) == @encrypted_key && valid)
             codeAnswer 200
             @returnValue = { content: identity.user.as_json(:include => {
