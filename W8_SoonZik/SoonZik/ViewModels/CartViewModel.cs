@@ -12,11 +12,27 @@ using System.Collections.ObjectModel;
 using Windows.UI.Xaml;
 using System.Windows.Input;
 using SoonZik.Common;
+using PayPal.Checkout;
+using PayPal;
 
 namespace SoonZik.ViewModels
 {
     class CartViewModel : INotifyPropertyChanged
     {
+        private string _txt_pp;
+        public string txt_pp
+        {
+            get { return _txt_pp; }
+            set
+            {
+                _txt_pp = value;
+                OnPropertyChanged("txt_pp");
+            }
+        }
+
+        public string pp_transac_id { get; set; }
+
+
         private Cart _cart;
         public Cart cart
         {
@@ -163,7 +179,59 @@ namespace SoonZik.ViewModels
                 await new MessageDialog(exception.Message, "remove cart error").ShowAsync();
         }
 
-        async public static void buy_cart()
+        async public void buy_cart()
+        {
+
+            //buy_cart_after_pp_validation();
+
+            PayPal.Checkout.BuyNow purchase = new PayPal.Checkout.BuyNow("test_sz_merchant@gmail.com");
+            purchase.UseSandbox = true;
+
+            purchase.Currency = "EUR";
+
+            // Use the ItemBuilder to create a new example item
+            PayPal.Checkout.ItemBuilder itemBuilder = new PayPal.Checkout.ItemBuilder("Example Item")
+                .ID("test_250")
+                .Price("2.50")
+                .Description("the item i want to buy loooooooooooool")
+                .Quantity(1);
+
+            // Add the item to the purchase,
+            purchase.AddItem(itemBuilder.Build());
+
+            // Attach event handlers so you will be notified of important events
+            // The BuyNow interface provides 5 events - Start, Auth, Cancel, Complete and Error
+            // See http://paypal.github.io/Windows8SDK/csharp.html#Events for more
+            purchase.Error += new EventHandler<PayPal.Checkout.Event.ErrorEventArgs>((source, eventArg) =>
+            {
+                this.txt_pp = "There was an error processing your payment: " + eventArg.Message;
+            });
+            purchase.Auth += new EventHandler<PayPal.Checkout.Event.AuthEventArgs>((source, eventArg) =>
+            {
+                this.txt_pp = "Auth" + eventArg.Token;
+            });
+            purchase.Start += new EventHandler<PayPal.Checkout.Event.StartEventArgs>((source, eventArg) =>
+            {
+                this.txt_pp = "Start";
+            });
+            purchase.Complete += new EventHandler<PayPal.Checkout.Event.CompleteEventArgs>((source, eventArg) =>
+            {
+                //buy_cart_after_pp_validation();
+                this.txt_pp = "Payment is complete. Transaction id: " + eventArg.TransactionID;
+                this.pp_transac_id = eventArg.TransactionID;
+                this.buy_cart_after_pp_validation();
+            });
+            purchase.Cancel += new EventHandler<PayPal.Checkout.Event.CancelEventArgs>((source, eventArg) =>
+            {
+                this.txt_pp = "Payment was canceled by the user.";
+            });
+
+            // Launch the secure PayPal interface. This is an asynchronous method
+            await purchase.Execute();
+
+        }
+
+        async public void buy_cart_after_pp_validation()
         {
             Exception exception = null;
             var request = new Http_post();
@@ -174,14 +242,33 @@ namespace SoonZik.ViewModels
 
                 string pack_data =
                     "user_id=" + Singleton.Instance.Current_user.id +
-                    "&secureKey=" + secureKey;
+                    "&secureKey=" + secureKey +
+                    "&paypal[payment_id]=" + pp_transac_id +
+                    "&paypal[payment_method]=" + "pp" +
+                    "&paypal[status]=" + "lol_status" +
+                    "&paypal[payer_email]=" + "test@test.test" +
+                    "&paypal[payer_first_name]=" + "roger" +
+                    "&paypal[payer_last_name]=" + "jean_michel" +
+                    "&paypal[payer_id]=" + "1337" +
+                    "&paypal[payer_phone]=" + "0606060606" +
+                    "&paypal[payer_country_code]=" + "FR" +
+                    "&paypal[payer_street]=" + "69" +
+                    "&paypal[payer_city]=" + "Parise" +
+                    "&paypal[payer_postal_code]=" + "75000" +
+                    //"&paypal[payer_country_code]=" + "FR" +
+                    "&paypal[payer_recipient_name]=" + "robert";
+
 
                 // HTTP_POST -> URL + DATA
                 var response = await request.post_request("purchases/buycart", pack_data);
                 var json = JObject.Parse(response).SelectToken("message");
 
                 if (json.ToString() == "Created")
+                {
+                    // empty cart
+                    list_cart = null;
                     await new MessageDialog("Achat du panier OK").ShowAsync();
+                }
                 else
                     await new MessageDialog("Achat du panier KO").ShowAsync();
             }

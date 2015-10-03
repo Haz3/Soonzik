@@ -15,7 +15,7 @@
   </Resources>
   <Applications>
     <Application Id="App" Executable="$targetnametoken$.exe" EntryPoint="SoonZik.App">
-      <m2:VisualElements DisplayName="SoonZik" Square150x150Logo="Assets\Logo.png" Square30x30Logo="Assets\SmallLogo.png" Description="SoonZik" ForegroundText="light" BackgroundColor="#464646">
+      <m2:VisualElements DisplayName="SoonZik" Square150x150Logo="Assets\Logo.png" Square30x30Logo="Assets\SmallLogo.png" Description="SoonZik" ForegroundText="light" BackgroundColor="#464646" ToastCapable="true">
         <m2:SplashScreen Image="Assets\SplashScreen.png" BackgroundColor="#CCCCCC" />
       </m2:VisualElements>
     </Application>

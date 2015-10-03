@@ -14,7 +14,7 @@
             <Button x:Name="back_btn" Content="Button" HorizontalAlignment="Left" Margin="30,20,0,0" VerticalAlignment="Top" Style="{StaticResource NavigationBackButtonNormalStyle}" RequestedTheme="Light" Click="Button_Click"/>
         </Grid>
 
-        <ListView x:Name="cart_list" ItemsSource="{Binding Path=list_cart}" Background="#FF878787" Margin="355,140,355,0" VerticalAlignment="Top" Height="635" SelectedItem="{Binding cart, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+        <ListView x:Name="cart_list" ItemsSource="{Binding Path=list_cart}" Background="#FF878787" Margin="355,140,845,0" VerticalAlignment="Top" Height="635" SelectedItem="{Binding cart, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <StackPanel x:Name="cart">
@@ -31,5 +31,6 @@
 
         <Button x:Uid="remove_cart" x:Name="remove_cart" Command="{Binding do_remove_cart, Mode=OneWay}" Content="Supprimer" HorizontalAlignment="Left" Margin="1590,137,0,0" VerticalAlignment="Top" Height="96" Width="298" FontSize="30" Background="#FFE84D46"/>
         <Button x:Uid="buy_btn" x:Name="buy_btn" Command="{Binding do_buy_cart, Mode=OneWay}" Content="Acheter" HorizontalAlignment="Left" Margin="380,900,0,0" VerticalAlignment="Top" Height="68" Width="1188" Background="#FF0C91FF" FontSize="30"/>
+        <TextBlock x:Name="txt_pp" HorizontalAlignment="Left" Margin="383,995,0,0" TextWrapping="Wrap" Text="{Binding txt_pp, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Height="55" Width="1182" FontSize="25" Foreground="Black"/>
     </Grid>
 </Page>
