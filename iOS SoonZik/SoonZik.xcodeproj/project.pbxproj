@@ -82,6 +82,8 @@
 		ED65E9EE1AA523A800A7BD89 /* check.svg in Resources */ = {isa = PBXBuildFile; fileRef = ED65E9ED1AA523A800A7BD89 /* check.svg */; };
 		ED65E9F11AA523DF00A7BD89 /* VoteButton.m in Sources */ = {isa = PBXBuildFile; fileRef = ED65E9F01AA523DF00A7BD89 /* VoteButton.m */; };
 		ED65E9F31AA5243500A7BD89 /* VoteButton.xib in Resources */ = {isa = PBXBuildFile; fileRef = ED65E9F21AA5243500A7BD89 /* VoteButton.xib */; };
+		ED67509C1BC0262B00CC0211 /* MessagePopUp.m in Sources */ = {isa = PBXBuildFile; fileRef = ED67509B1BC0262B00CC0211 /* MessagePopUp.m */; settings = {ASSET_TAGS = (); }; };
+		ED67509E1BC0272D00CC0211 /* MessagePopUp.xib in Resources */ = {isa = PBXBuildFile; fileRef = ED67509D1BC0272D00CC0211 /* MessagePopUp.xib */; settings = {ASSET_TAGS = (); }; };
 		ED6F97971AE990E00013564E /* AccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ED6F97951AE990E00013564E /* AccountViewController.m */; };
 		ED6F97981AE990E00013564E /* AccountViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = ED6F97961AE990E00013564E /* AccountViewController.xib */; };
 		ED717AB71B0BD327003CAA0D /* DetailNewsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ED717AB51B0BD327003CAA0D /* DetailNewsViewController.m */; };
@@ -463,6 +465,9 @@
 		ED65E9EF1AA523DF00A7BD89 /* VoteButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VoteButton.h; sourceTree = "<group>"; };
 		ED65E9F01AA523DF00A7BD89 /* VoteButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VoteButton.m; sourceTree = "<group>"; };
 		ED65E9F21AA5243500A7BD89 /* VoteButton.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VoteButton.xib; sourceTree = "<group>"; };
+		ED67509A1BC0262B00CC0211 /* MessagePopUp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessagePopUp.h; sourceTree = "<group>"; };
+		ED67509B1BC0262B00CC0211 /* MessagePopUp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessagePopUp.m; sourceTree = "<group>"; };
+		ED67509D1BC0272D00CC0211 /* MessagePopUp.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MessagePopUp.xib; sourceTree = "<group>"; };
 		ED6F97941AE990E00013564E /* AccountViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccountViewController.h; sourceTree = "<group>"; };
 		ED6F97951AE990E00013564E /* AccountViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountViewController.m; sourceTree = "<group>"; };
 		ED6F97961AE990E00013564E /* AccountViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AccountViewController.xib; sourceTree = "<group>"; };
@@ -1636,6 +1641,9 @@
 				ED7546B11AE1956A00F2F350 /* SearchMusicTableViewCell.xib */,
 				ED1C61291B066B8D00E09287 /* SimplePopUp.h */,
 				ED1C612A1B066B8D00E09287 /* SimplePopUp.m */,
+				ED67509A1BC0262B00CC0211 /* MessagePopUp.h */,
+				ED67509B1BC0262B00CC0211 /* MessagePopUp.m */,
+				ED67509D1BC0272D00CC0211 /* MessagePopUp.xib */,
 				EDE0D3B31B11442700274818 /* ShareView.h */,
 				EDE0D3B41B11442700274818 /* ShareView.m */,
 				EDCB83BB1B34D79E0044C8AA /* ShareActionSheet.h */,
@@ -2184,6 +2192,7 @@
 				D55AB42A192CE1950065CB9C /* Images.xcassets in Resources */,
 				EDEDEC0D1AA15B8D0024CF38 /* PlayListsCells.xib in Resources */,
 				EDEDEE0C1AA1633B0024CF38 /* license.pdf in Resources */,
+				ED67509E1BC0272D00CC0211 /* MessagePopUp.xib in Resources */,
 				EDEDEE131AA1633B0024CF38 /* menu.svg in Resources */,
 				EDEDEE291AA1633B0024CF38 /* repeat-1_icon.png in Resources */,
 				ED65E9EC1AA50FFE00A7BD89 /* wilkinson.jpg in Resources */,
@@ -2481,6 +2490,7 @@
 				EDE1E0EF1B360E00001F7B5B /* CollectionReusableView.m in Sources */,
 				ED2D2FCA1B95D15E006F5165 /* ConcertViewController.m in Sources */,
 				EDEDED7A1AA15C5D0024CF38 /* NSMutableArray+SWUtilityButtons.m in Sources */,
+				ED67509C1BC0262B00CC0211 /* MessagePopUp.m in Sources */,
 				ED320F531B3E0B1F0049F671 /* BoughtContent.m in Sources */,
 				EDA978101B3B97190056EC75 /* Request.m in Sources */,
 			);

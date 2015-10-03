@@ -48,7 +48,7 @@
     
     self.fromMe = false;
     self.fromUsername = [sock objectForKey:@"from"];
-    self.content = [sock objectForKey:@"msg"];
+    self.content = [sock objectForKey:@"message"];
     
     return self;
 }
