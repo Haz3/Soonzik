@@ -16,6 +16,15 @@ import com.facebook.FacebookSdk;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 
+import com.twitter.sdk.android.Twitter;
+import com.twitter.sdk.android.core.Callback;
+import com.twitter.sdk.android.core.Result;
+import com.twitter.sdk.android.core.TwitterAuthConfig;
+import com.twitter.sdk.android.core.TwitterException;
+import com.twitter.sdk.android.core.TwitterSession;
+import com.twitter.sdk.android.core.identity.TwitterLoginButton;
+
+import io.fabric.sdk.android.Fabric;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -26,13 +35,23 @@ import java.lang.reflect.InvocationTargetException;
  */
 public class LoginActivity extends Activity {
 
+    // Note: Your consumer key and secret should be obfuscated in your source code before shipping.
+/*    private static final String TWITTER_KEY = "kEB2H1DUxgZ9upJSvavu9yaQ8";
+    private static final String TWITTER_SECRET = "YkTTmNcgOmGqNaGAdayCfjCIDr2ev84sLPfLa28Y7OOz6qrBg0";*/
+
+    private static final String TWITTER_KEY = "ooWEcrlhooUKVOxSgsVNDJ1RK";
+    private static final String TWITTER_SECRET = "BtLpq9ZlFzXrFklC2f1CXqy8EsSzgRRVPZrKVh0imI2TOrZAan";
+
     CallbackManager callbackManager;
+    TwitterLoginButton loginTwitter;
 
     Button loginButton;
     Button signinButton;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        TwitterAuthConfig authConfig = new TwitterAuthConfig(TWITTER_KEY, TWITTER_SECRET);
+        Fabric.with(this, new Twitter(authConfig));
 
         FacebookSdk.sdkInitialize(getApplicationContext());
         setContentView(R.layout.fragment_login);
@@ -58,6 +77,8 @@ public class LoginActivity extends Activity {
                     @Override
                     public void onJSONResponse(boolean success, Object response, Class<?> classT) throws InvocationTargetException, NoSuchMethodException, Fragment.InstantiationException, IllegalAccessException, java.lang.InstantiationException {
                         JSONObject obj = (JSONObject) response;
+
+                        Log.v("TWITTER", response.toString());
 
                         User res = (User) ActiveRecord.jsonObjectData(obj, classT);
                         ActiveRecord.setCurrentUser(res);
@@ -114,12 +135,50 @@ public class LoginActivity extends Activity {
             }
         });
 
+        loginTwitter = (TwitterLoginButton) findViewById(R.id.login_twitter);
+        loginTwitter.setCallback(new Callback<TwitterSession>() {
+            @Override
+            public void success(Result<TwitterSession> result) {
+                // Do something with result, which provides a TwitterSession for making API calls
+                Log.v("Twitter", "OKKKKK");
+
+                User.socialLogin(Long.toString(result.data.getUserId()), "twitter", result.data.getAuthToken().token, new ActiveRecord.OnJSONResponseCallback() {
+                    @Override
+                    public void onJSONResponse(boolean success, Object response, Class<?> classT) throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException, JSONException {
+                        JSONObject obj = (JSONObject) response;
+
+                        Log.v("TWITTER", response.toString());
+
+                        Log.v("TWITTER", classT.toString());
+
+                        User res = (User) ActiveRecord.jsonObjectData(obj, classT);
+                        ActiveRecord.setCurrentUser(res);
+
+                        Log.v("TWITTER", response.toString());
+
+
+                        Intent mainActivity = new Intent(getApplicationContext(), MainActivity.class);
+                        startActivity(mainActivity);
+
+                        finish();
+                    }
+                });
+            }
+
+            @Override
+            public void failure(TwitterException exception) {
+                // Do something on failure
+            }
+        });
+
+
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         callbackManager.onActivityResult(requestCode, resultCode, data);
+        loginTwitter.onActivityResult(requestCode, resultCode, data);
     }
 
     @Override

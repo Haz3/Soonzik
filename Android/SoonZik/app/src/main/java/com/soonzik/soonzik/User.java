@@ -533,8 +533,11 @@ public class User extends ActiveRecord {
                 client.post("http://10.0.3.2:3000/api/social-login", p, new JsonHttpResponseHandler() {
                     public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                         try {
-                            Class<?> classT = Class.forName("com.soonzik.soonzik.User");
-                            callback.onJSONResponse(true, response, classT);
+                            final Class<?> classT = Class.forName("com.soonzik.soonzik.User");
+                            JSONObject obj = response.getJSONObject("content");
+                            Log.v("SOCIAL LOGIN JSON", obj.toString());
+
+                            callback.onJSONResponse(true, obj, classT);
                         } catch (InvocationTargetException e) {
                             e.printStackTrace();
                         } catch (NoSuchMethodException e) {
