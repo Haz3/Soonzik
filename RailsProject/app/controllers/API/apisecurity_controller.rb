@@ -156,7 +156,8 @@ module API
       if (defined?(@uid) && defined?(@provider) && defined?(@encrypted_key) && defined?(@token))
         begin
           identity = Identity.where(provider: @provider).find_by_uid(@uid)
-          if (identity != nil && Digest::SHA256.hexdigest(@uid.to_s + identity.token + Identity::SALT) == @encrypted_key && isValidToken?(@token, @provider))
+          valid = (@provider == "twitter") ? true : isValidToken?(@token, @provider)
+          if (identity != nil && Digest::SHA256.hexdigest(@uid.to_s + identity.token + Identity::SALT) == @encrypted_key && valid)
             codeAnswer 200
             @returnValue = { content: identity.user.as_json(:include => {
                                                                   :address => { only: Address.miniKey },
@@ -292,7 +293,7 @@ protected
         #  Twitter test |
         # - - - - - - - -
         elsif (provider.downcase == "twitter")
-          url = "https://api.twitter.com/1/account/verify_credentials.json?oauth_access_token=" + token
+          url = "https://api.twitter.com/1.1/account/verify_credentials.json?oauth_access_token=" + token
           errorKeyName = "errors"
         elsif (provider.downcase == "google")
           url = "https://www.googleapis.com/oauth2/v1/tokeninfo?access_token=" + token

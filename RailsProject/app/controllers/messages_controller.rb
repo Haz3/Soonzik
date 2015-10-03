@@ -1,5 +1,5 @@
 class MessagesController < WebsocketRails::BaseController
-	def initialize_session
+  def initialize_session
     # perform application setup here
     controller_store[:user_id] = []
   end
@@ -61,7 +61,7 @@ class MessagesController < WebsocketRails::BaseController
       }
     end
   end
-  
+
   def sendMsg
     @user = nil
     begin
