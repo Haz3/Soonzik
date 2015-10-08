@@ -22,14 +22,11 @@
 
         <DataTemplate x:Key="MusicTemplate">
             <Grid Height="70" Margin="20,0,0,0" Tapped="UIElement_OnTapped">
-                <Border BorderThickness="0,0,0,1" Width="350" BorderBrush="White" />
-                <TextBlock x:Name="MusicTitle" Text="{Binding Path=title}" FontSize="25" Margin="20,0,0,0" />
-                <TextBlock x:Name="ArtistNameList" Text="{Binding Path=user.Username}" FontSize="15"
-                           VerticalAlignment="Bottom" Margin="20,0,0,10" />
+                <Border BorderThickness="0,0,0,1" Width="350" BorderBrush="#7bc2fa" />
+                <TextBlock x:Name="MusicTitle" Text="{Binding Path=title}" Foreground="#40a8e2" FontSize="25" Margin="20,0,0,0" />
+                <TextBlock x:Name="ArtistNameList" Text="{Binding Path=getAverageNote}" Foreground="White" FontSize="15" VerticalAlignment="Bottom" Margin="20,0,0,10" />
 
-                <Image x:Name="MoreOption" Source="../Resources/Icones/menu.png" Height="30"
-                       Tapped="MoreOption_OnTapped"
-                       VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,20,0" />
+                <Image x:Name="MoreOption" Source="../Resources/Icones/menu.png" Height="30" Tapped="MoreOption_OnTapped" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,20,0" />
             </Grid>
         </DataTemplate>
     </Page.Resources>
@@ -43,22 +40,21 @@
     <Grid x:Name="GlobalGrid">
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
-            <RowDefinition Height="350" />
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
         <Grid Grid.Row="0">
-            <Image Name="AlbumImage" Source="ms-appx:///Resources/Icones/MenuExplorer.png" Width="100" Height="100"
+            <Image Name="AlbumImage" Source="{Binding TheAlbum.imageAlbum}" Width="100" Height="100"
                    HorizontalAlignment="Center" VerticalAlignment="Top" />
 
-            <TextBlock x:Name="AlbumTitle" Text="{Binding TheAlbum.title}" FontSize="30" VerticalAlignment="Center"
+            <TextBlock x:Name="AlbumTitle" Text="{Binding TheAlbum.title}" FontSize="30" Foreground="#40a8e2" VerticalAlignment="Center"
                        HorizontalAlignment="Center" />
 
-            <TextBlock x:Name="ArtistName" Text="{Binding TheAlbum.user.username}" FontSize="20"
+            <TextBlock x:Name="ArtistName" Text="{Binding TheAlbum.user.username}" FontSize="20" Foreground="#40a8e2"
                        VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,80,0,0" />
 
-            <Button VerticalAlignment="Center" HorizontalAlignment="Center" x:Uid="GoToCard" Content=""
-                    Command="{Binding AddToCart}"
-                    Margin="0,200,0,0" />
+            <Button VerticalAlignment="Bottom" HorizontalAlignment="Center" x:Uid="GoToCard" Content=""
+                    Command="{Binding AddToCart}" />
         </Grid>
 
         <Pivot Grid.Row="1" x:Name="PivotGlobal" HeaderTemplate="{StaticResource SizeHeaderGlobalPivot}"

@@ -24,6 +24,7 @@
         <vm:MyMusicViewModel x:Key="MyMusicViewModel" />
         <vm:BattleDetailViewModel x:Key="BattleDetailViewModel" />
         <vm:PlaylistViewModel x:Key="PlaylistViewModel" />
+        <vm:AboutViewModel x:Key="AboutViewModel"/>
 
         <DataTemplate x:Key="SizePivotHeader">
             <ContentPresenter>
@@ -285,7 +286,20 @@
                 </Setter.Value>
             </Setter>
         </Style>
-
+        <Style x:Key="AProposButtonStyle" TargetType="Button">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Grid Width="198" MaxHeight="50" MinHeight="50" MaxWidth="200" MinWidth="200">
+                            <Image Source="../Resources/Icones/menu_about.png" Height="40" HorizontalAlignment="Left"
+                                   Width="40" />
+                            <ContentPresenter x:Uid="About" Content="" Margin="70,0,0,0" HorizontalAlignment="Left"
+                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
         <Style x:Key="AchatButtonStyle" TargetType="Button">
             <Setter Property="Template">
                 <Setter.Value>

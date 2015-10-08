@@ -1,12 +1,15 @@
 C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik.BackgroundAudioTask\SoonZik.BackgroundAudioTask.csproj;neutral
 C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik.Helpers\SoonZik.Helpers.csproj;neutral
 C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik.Helpers\SoonZik.Helpers.csproj;neutral
+C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik.Helpers\SoonZik.Helpers.csproj;neutral
+C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik.HttpRequest\SoonZik.HttpRequest.csproj;neutral
 C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik.HttpRequest\SoonZik.HttpRequest.csproj;neutral
 C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik.HttpRequest\SoonZik.HttpRequest.csproj;neutral
 C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik.HttpRequest\SoonZik.HttpRequest.csproj;neutral
 C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik.HttpRequest\SoonZik.HttpRequest.csproj;neutral
 C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik.MyPlaylistManager\SoonZik.MyPlaylistManager.csproj;neutral
 C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik.MyPlaylistManager\SoonZik.MyPlaylistManager.csproj;neutral
+C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik.Singleton\SoonZik.Singleton.csproj;neutral
 C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik.Singleton\SoonZik.Singleton.csproj;neutral
 C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik.Singleton\SoonZik.Singleton.csproj;neutral
 C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik.Singleton\SoonZik.Singleton.csproj;neutral

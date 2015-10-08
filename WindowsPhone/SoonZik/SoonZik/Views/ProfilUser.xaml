@@ -18,63 +18,66 @@
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="100" />
+            <RowDefinition Height="150" />
+            <RowDefinition Height="150" />
             <RowDefinition Height="*" />
-            <RowDefinition Height="80" />
+            <RowDefinition Height="50" />
         </Grid.RowDefinitions>
 
         <!-- Grid 0 -->
-        <Image x:Name="UserImage" Grid.Row="0" Height="100" Width="100" HorizontalAlignment="Left" Margin="20,0,0,0"
-               Source="{Binding CurrentUser.profilImage}">
-
-            <interactivity:Interaction.Behaviors>
-                <core:EventTriggerBehavior EventName="Tapped">
-                    <core:InvokeCommandAction Command="{Binding TappedCommand}" />
-                </core:EventTriggerBehavior>
-            </interactivity:Interaction.Behaviors>
-
-        </Image>
-        <TextBlock x:Name="FirstNameUser" Grid.Row="0" Height="50" Foreground="White" HorizontalAlignment="Right"
-                   VerticalAlignment="Top" Margin="0, 20, 20, 0"
-                   Text="{Binding CurrentUser.username}" FontSize="23" />
-
+        <Grid Grid.Row="0">
+            <Image x:Name="UserImage" Grid.Row="0" Height="150" Width="150" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="20,0,0,0" Source="{Binding CurrentUser.profilImage}">
+                <interactivity:Interaction.Behaviors>
+                    <core:EventTriggerBehavior EventName="Tapped">
+                        <core:InvokeCommandAction Command="{Binding TappedCommand}" />
+                    </core:EventTriggerBehavior>
+                </interactivity:Interaction.Behaviors>
+            </Image>
+            <TextBlock x:Name="FirstNameUser" Grid.Row="0" Height="50" Foreground="White" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0, 0, 20, 0"
+                   Text="{Binding CurrentUser.username}" FontSize="30" />
+        </Grid>
         <!-- Grid 1 -->
-        <Grid Grid.Row="1">
+        <Grid Grid.Row="1" x:Name="InfoGeneralGrid">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="40" />
+                <RowDefinition Height="40" />
+                <RowDefinition Height="40" />
+            </Grid.RowDefinitions>
+            <TextBlock Grid.Row="0" Foreground="White" FontSize="25" HorizontalAlignment="Center" VerticalAlignment="Center" x:Uid="InfoGeneral" Text=""/>
+            <TextBox Grid.Row="1" IsEnabled="{Binding CanUpdate}" Text="{Binding CurrentUser.email, Mode=TwoWay}" 
+                     Background="Transparent" Foreground="DodgerBlue" BorderThickness="0,0,0,1" Margin="0,0,0,10"
+                     x:Uid="Email" PlaceholderText="" />
+            <TextBox Grid.Row="2" IsEnabled="{Binding CanUpdate}" Text="{Binding CurrentUser.description, Mode=TwoWay}"
+                     Background="Transparent" Foreground="DodgerBlue" BorderThickness="0,0,0,1" Margin="0,0,0,10"
+                     x:Uid="Description" PlaceholderText="" />
+        </Grid>
+        <ScrollViewer Grid.Row="2">
+            <Grid Grid.Row="2" x:Name="InfoAddressGrid">
             <Grid.RowDefinitions>
                 <RowDefinition Height="40" />
                 <RowDefinition Height="40" />
                 <RowDefinition Height="40" />
                 <RowDefinition Height="40" />
                 <RowDefinition Height="40" />
-                <RowDefinition Height="40" />
-                <RowDefinition Height="40" />
             </Grid.RowDefinitions>
-            <TextBox Grid.Row="0" IsEnabled="{Binding CanUpdate}" Text="{Binding CurrentUser.email, Mode=TwoWay}"
-                     Background="Transparent" Foreground="Red" BorderThickness="0,0,0,1" Margin="0,0,0,10"
-                     x:Uid="Email" PlaceholderText="" />
-            <TextBox Grid.Row="1" IsEnabled="{Binding CanUpdate}" Text="{Binding CurrentUser.description, Mode=TwoWay}"
-                     Background="Transparent" Foreground="Red" BorderThickness="0,0,0,1" Margin="0,0,0,10"
-                     x:Uid="Description" PlaceholderText="" />
-            <TextBox Grid.Row="2" IsEnabled="{Binding CanUpdate}"
-                     Text="{Binding CurrentUser.address.NumberStreet, Mode=TwoWay}" Background="Transparent"
-                     Foreground="Red" BorderThickness="0,0,0,1" Margin="0,0,0,10" x:Uid="NumberStreet"
+                <TextBlock Grid.Row="0" Foreground="White" FontSize="25" HorizontalAlignment="Center" VerticalAlignment="Center" x:Uid="InfoAddress" Text=""/>
+                <TextBox Grid.Row="1" IsEnabled="{Binding CanUpdate}" Text="{Binding CurrentUser.address.NumberStreet, Mode=TwoWay}" Background="Transparent"
+                     Foreground="DodgerBlue" BorderThickness="0,0,0,1" Margin="0,0,0,10" x:Uid="NumberStreet"
                      PlaceholderText="" />
-            <TextBox Grid.Row="3" IsEnabled="{Binding CanUpdate}"
-                     Text="{Binding CurrentUser.address.Street, Mode=TwoWay}" Background="Transparent" Foreground="Red"
+                <TextBox Grid.Row="2" IsEnabled="{Binding CanUpdate}"
+                     Text="{Binding CurrentUser.address.Street, Mode=TwoWay}" Background="Transparent" Foreground="DodgerBlue"
                      BorderThickness="0,0,0,1" Margin="0,0,0,10" x:Uid="Street" PlaceholderText="" />
-            <TextBox Grid.Row="4" IsEnabled="{Binding CanUpdate}"
+                <TextBox Grid.Row="3" IsEnabled="{Binding CanUpdate}"
                      Text="{Binding CurrentUser.address.Zipcode, Mode=TwoWay}" Background="Transparent"
-                     Foreground="Red" BorderThickness="0,0,0,1" Margin="0,0,0,10" x:Uid="ZipCode" PlaceholderText="" />
-            <TextBox Grid.Row="5" IsEnabled="{Binding CanUpdate}"
+                     Foreground="DodgerBlue" BorderThickness="0,0,0,1" Margin="0,0,0,10" x:Uid="ZipCode" PlaceholderText="" />
+                <TextBox Grid.Row="4" IsEnabled="{Binding CanUpdate}"
                      Text="{Binding CurrentUser.address.Country, Mode=TwoWay}" Background="Transparent"
-                     Foreground="Red" BorderThickness="0,0,0,1" Margin="0,0,0,10" x:Uid="Country" PlaceholderText="" />
-        </Grid>
-
-
-        <!-- Grid 2 -->
+                     Foreground="DodgerBlue" BorderThickness="0,0,0,1" Margin="0,0,0,10" x:Uid="Country" PlaceholderText="" />
+            </Grid>
+        </ScrollViewer>
 
         <!-- Grid 3 -->
-        <Button Content="{Binding ButtonContent}" Grid.Row="2" HorizontalAlignment="Center" BorderThickness="0,0,0,0">
+        <Button Content="{Binding ButtonContent}" Grid.Row="3" HorizontalAlignment="Center" BorderThickness="0,0,0,0">
             <interactivity:Interaction.Behaviors>
                 <core:EventTriggerBehavior EventName="Click">
                     <core:InvokeCommandAction Command="{Binding EditClickCommand}" />

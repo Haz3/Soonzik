@@ -24,6 +24,7 @@ Controls\PriceControl.xbf
 Controls\ProgressRingControl.xbf
 MainPage.xbf
 SoonZik.xr.xml
+Views\AboutView.xbf
 Views\AlbumView.xbf
 Views\BattleDetailView.xbf
 Views\BattleView.xbf
@@ -60,6 +61,7 @@ Resources\Icones\facebook.png
 Resources\Icones\forward.png
 Resources\Icones\googleplus.png
 Resources\Icones\menu.png
+Resources\Icones\menu_about.png
 Resources\Icones\MenuAchat.png
 Resources\Icones\MenuBattle.png
 Resources\Icones\MenuDeco.png
@@ -87,6 +89,7 @@ Resources\Icones\twitter.png
 Resources\Icones\user_pushpin.png
 Resources\iphone5_background.jpg
 Resources\logo.scale-240.png
+Resources\Logo_SoonZik.png
 Resources\MusicTest.mp3
 Resources\pic01.jpg
 Resources\pic02.jpg
@@ -94,4 +97,10 @@ Resources\pic03.jpg
 Resources\pic04.jpg
 Resources\pic05.jpg
 Resources\pic06.jpg
+Resources\PlayerIcons\forward.png
+Resources\PlayerIcons\pause.png
+Resources\PlayerIcons\play.png
+Resources\PlayerIcons\repeat.png
+Resources\PlayerIcons\rewind.png
+Resources\PlayerIcons\shuffle.png
 Resources\stromae.jpg

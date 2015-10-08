@@ -7,6 +7,8 @@ using System.Text;
 using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.Media.Playback;
+using SoonZik.Helpers;
+using SoonZik.HttpRequest.Poco;
 
 namespace SoonZik.MyPlaylistManager
 {
@@ -40,6 +42,7 @@ namespace SoonZik.MyPlaylistManager
     {
         #region Private members
         private static ObservableCollection<string> tracks;
+        private const string UrlMusique = "http://soonzikapi.herokuapp.com/musics/get/";
         //private static String[] tracks;
         int CurrentTrackId = -1;
         private MediaPlayer mediaPlayer;
@@ -51,9 +54,20 @@ namespace SoonZik.MyPlaylistManager
             mediaPlayer.MediaEnded += MediaPlayer_MediaEnded;
             mediaPlayer.CurrentStateChanged += mediaPlayer_CurrentStateChanged;
             mediaPlayer.MediaFailed += mediaPlayer_MediaFailed;
+            //LocalFolderHelper.ReadTimestamp().ContinueWith(delegate(Task<object> tmp)
+            //{
+            //    var res = tmp.Result as List<Music>;
+            //    if (res != null)
+            //    {
+            //        foreach (var music in res)
+            //        {
+            //            MyPlaylist.AddTracks(new Uri(UrlMusique + music.id, UriKind.RelativeOrAbsolute));
+            //        }
+            //    }
+            //});
         }
         #endregion
-        
+
         #region Public properties, events and handlers
         public string CurrentTrackName
         {

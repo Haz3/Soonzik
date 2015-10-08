@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.ObjectModel;
+using System.Threading.Tasks;
 using Windows.ApplicationModel.Core;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
@@ -61,7 +62,7 @@ namespace SoonZik.Singleton
 
         public UIElement LastElement { get; set; }
 
-        public Music SelectedMusicSingleton { get; set; }
+        public ObservableCollection<Music> SelectedMusicSingleton { get; set; }
 
         public FacebookClient MyFacebookClient { get; set; }
 

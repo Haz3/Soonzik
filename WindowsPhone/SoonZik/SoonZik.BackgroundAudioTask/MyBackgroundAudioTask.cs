@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Threading;
@@ -26,7 +27,6 @@ namespace SoonZik.BackgroundAudioTask
     public sealed class MyBackgroundAudioTask : IBackgroundTask
     {
         #region Private fields, properties
-        private const string UrlMusique = "http://soonzikapi.herokuapp.com/musics/get/";
         private SystemMediaTransportControls systemmediatransportcontrol;
         private MyPlaylistManager.MyPlaylistManager playlistManager;
         private BackgroundTaskDeferral deferral; // Used to keep task alive
@@ -47,7 +47,7 @@ namespace SoonZik.BackgroundAudioTask
             }
         }
         #endregion
-        
+
         #region IBackgroundTask and IBackgroundTaskInstance Interface Members and handlers
         public void Run(IBackgroundTaskInstance taskInstance)
         {
@@ -86,7 +86,7 @@ namespace SoonZik.BackgroundAudioTask
             backgroundtaskrunning = true;
 
             ApplicationSettingsHelper.SaveSettingsValue(Constants.BackgroundTaskState, Constants.BackgroundTaskRunning);
-            deferral = taskInstance.GetDeferral(); 
+            deferral = taskInstance.GetDeferral();
         }
 
         void Taskcompleted(BackgroundTaskRegistration sender, BackgroundTaskCompletedEventArgs args)
@@ -117,7 +117,7 @@ namespace SoonZik.BackgroundAudioTask
             {
                 Debug.WriteLine(ex.ToString());
             }
-            deferral.Complete(); 
+            deferral.Complete();
             Debug.WriteLine("MyBackgroundAudioTask Cancel complete...");
         }
         #endregion
@@ -176,36 +176,28 @@ namespace SoonZik.BackgroundAudioTask
         #region Playlist management functions and handlers
         private void StartPlayback()
         {
-            LocalFolderHelper.ReadTimestamp().ContinueWith(delegate(Task<object> tmp)
+            try
             {
-                var res = tmp.Result as Music;
-                if (res != null)
+                if (Playlist.CurrentTrackName == string.Empty)
                 {
-                    MyPlaylist.AddTracks(new Uri(UrlMusique + res.id, UriKind.RelativeOrAbsolute)); 
-                    try
-                    {
-                        if (Playlist.CurrentTrackName == string.Empty)
-                        {
-                            var currenttrackname = ApplicationSettingsHelper.ReadResetSettingsValue(Constants.CurrentTrack);
-                            var currenttrackposition = ApplicationSettingsHelper.ReadResetSettingsValue(Constants.Position);
-                            if (currenttrackname != null)
-                                if (currenttrackposition == null)
-                                    Playlist.StartTrackAt((string)currenttrackname);
-                                else
-                                    Playlist.StartTrackAt((string)currenttrackname,
-                                        TimeSpan.Parse((string)currenttrackposition));
-                            else
-                                Playlist.PlayAllTracks();
-                        }
+                    var currenttrackname = ApplicationSettingsHelper.ReadResetSettingsValue(Constants.CurrentTrack);
+                    var currenttrackposition = ApplicationSettingsHelper.ReadResetSettingsValue(Constants.Position);
+                    if (currenttrackname != null)
+                        if (currenttrackposition == null)
+                            Playlist.StartTrackAt((string)currenttrackname);
                         else
-                            BackgroundMediaPlayer.Current.Play();
-                    }
-                    catch (Exception ex)
-                    {
-                        Debug.WriteLine(ex.ToString());
-                    }
+                            Playlist.StartTrackAt((string)currenttrackname,
+                                TimeSpan.Parse((string)currenttrackposition));
+                    else
+                        Playlist.PlayAllTracks();
                 }
-            });
+                else
+                    BackgroundMediaPlayer.Current.Play();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.ToString());
+            }
         }
 
         void playList_TrackChanged(MyPlaylist sender, object args)

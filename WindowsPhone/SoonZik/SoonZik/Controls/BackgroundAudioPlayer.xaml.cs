@@ -9,6 +9,9 @@ using Windows.Media.Playback;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Input;
+using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
 using SoonZik.BackgroundAudioTask;
 using SoonZik.MyPlaylistManager;
@@ -91,16 +94,19 @@ namespace SoonZik.Controls
 
                 if (BackgroundMediaPlayer.Current.CurrentState == MediaPlayerState.Playing)
                 {
-                    playButton.Content = "| |";     // Change to pause button
+                    playButton.Content = "| |";
+                    PlayImage.Source = new BitmapImage(new System.Uri("../Resources/PlayerIcons/pause.png", UriKind.RelativeOrAbsolute));// Change to pause button
                 }
                 else
                 {
                     playButton.Content = ">";     // Change to play button
+                    PlayImage.Source = new BitmapImage(new System.Uri("../Resources/PlayerIcons/play.png", UriKind.RelativeOrAbsolute));
                 }
                 txtCurrentTrack.Text = CurrentTrack;
             }
             else
             {
+                PlayImage.Source = new BitmapImage(new System.Uri("../Resources/PlayerIcons/play.png", UriKind.RelativeOrAbsolute));
                 playButton.Content = ">";     // Change to play button
                 txtCurrentTrack.Text = "";
             }
@@ -170,7 +176,13 @@ namespace SoonZik.Controls
         #endregion
 
         #region ButtonClick Event Handler
-        private void prevButton_Click(object sender, RoutedEventArgs e)
+
+        private void ShullfeImage_OnTapped(object sender, TappedRoutedEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void RewindImage_OnTapped(object sender, TappedRoutedEventArgs e)
         {
             var value = new ValueSet();
             value.Add(Constants.SkipPrevious, "");
@@ -180,6 +192,52 @@ namespace SoonZik.Controls
             // a backlong of button presses to be handled. This button is re-eneabled 
             // in the TrackReady Playstate handler.
             prevButton.IsEnabled = false;
+        }
+
+        private void PlayImage_OnTapped(object sender, TappedRoutedEventArgs e)
+        {
+            Debug.WriteLine("Play button pressed from App");
+            if (IsMyBackgroundTaskRunning)
+            {
+                if (MediaPlayerState.Playing == BackgroundMediaPlayer.Current.CurrentState)
+                {
+                    BackgroundMediaPlayer.Current.Pause();
+                }
+                else if (MediaPlayerState.Paused == BackgroundMediaPlayer.Current.CurrentState)
+                {
+                    BackgroundMediaPlayer.Current.Play();
+                }
+                else if (MediaPlayerState.Closed == BackgroundMediaPlayer.Current.CurrentState)
+                {
+                    StartBackgroundAudioTask();
+                }
+            }
+            else
+            {
+                StartBackgroundAudioTask();
+            }
+        }
+
+        private void ForwardImage_OnTapped(object sender, TappedRoutedEventArgs e)
+        {
+            var value = new ValueSet();
+            value.Add(Constants.SkipNext, "");
+            BackgroundMediaPlayer.SendMessageToBackground(value);
+
+            // Prevent the user from repeatedly pressing the button and causing 
+            // a backlong of button presses to be handled. This button is re-eneabled 
+            // in the TrackReady Playstate handler.
+            nextButton.IsEnabled = false;
+        }
+
+        private void RepeatImage_OnTapped(object sender, TappedRoutedEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void prevButton_Click(object sender, RoutedEventArgs e)
+        {
+
         }
 
         private void playButton_Click(object sender, RoutedEventArgs e)
@@ -208,14 +266,7 @@ namespace SoonZik.Controls
 
         private void nextButton_Click(object sender, RoutedEventArgs e)
         {
-            var value = new ValueSet();
-            value.Add(Constants.SkipNext, "");
-            BackgroundMediaPlayer.SendMessageToBackground(value);
 
-            // Prevent the user from repeatedly pressing the button and causing 
-            // a backlong of button presses to be handled. This button is re-eneabled 
-            // in the TrackReady Playstate handler.
-            nextButton.IsEnabled = false;
         }
 
         #endregion
