@@ -52,6 +52,9 @@
     <AppxPackagedFile Include="C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\packages\MvvmLightLibs.5.1.1.0\lib\wpa81\GalaSoft.MvvmLight.Platform.dll">
       <PackagePath>GalaSoft.MvvmLight.Platform.dll</PackagePath>
     </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\packages\JISoft.Rating.1.0.3\lib\portable-wpa81+win81\JRatingControl.dll">
+      <PackagePath>JRatingControl.dll</PackagePath>
+    </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\packages\LinqToTwitter.3.1.2\lib\wpa\LinqToTwitterPcl.dll">
       <PackagePath>LinqToTwitterPcl.dll</PackagePath>
     </AppxPackagedFile>
@@ -454,6 +457,12 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\packages\Facebook.Client.0.9.1-alpha\lib\portable-win81+wpa81\Facebook.Client\Themes\Generic.xbf">
       <PackagePath>Facebook.Client\Themes\Generic.xbf</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\packages\JISoft.Rating.1.0.3\lib\portable-wpa81+win81\JRatingControl\JRatingControl.xr.xml">
+      <PackagePath>JRatingControl\JRatingControl.xr.xml</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\packages\JISoft.Rating.1.0.3\lib\portable-wpa81+win81\JRatingControl\Themes\Generic.xbf">
+      <PackagePath>JRatingControl\Themes\Generic.xbf</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\bin\Debug\resources.pri">
       <PackagePath>resources.pri</PackagePath>

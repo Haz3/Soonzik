@@ -26,11 +26,13 @@
                 </Grid.ColumnDefinitions>
                 <Image Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left"
                        Source="../Resources/Icones/profil.jpg" Height="80" Width="80" />
-                <TextBlock Grid.Column="1" Text="{Binding Path=user.username}" Foreground="White" Margin="15,0,0,0" FontSize="15" />
-                <TextBlock Grid.Column="1" Text="{Binding Path=duration}" Foreground="White" HorizontalAlignment="Right" Margin="0,0,25,0"
+                <TextBlock Grid.Column="1" Text="{Binding Path=user.username}" Foreground="White" Margin="15,0,0,0"
+                           FontSize="15" />
+                <TextBlock Grid.Column="1" Text="{Binding Path=duration}" Foreground="White"
+                           HorizontalAlignment="Right" Margin="0,0,25,0"
                            FontSize="15" />
                 <TextBlock Grid.Column="1" VerticalAlignment="Bottom" Text="{Binding Path=title}" Margin="20,0,0,0"
-                           FontSize="25" Foreground="White"/>
+                           FontSize="25" Foreground="White" />
             </Grid>
         </DataTemplate>
 
@@ -42,7 +44,8 @@
                 </Grid.ColumnDefinitions>
                 <Image Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left"
                        Source="../Resources/Icones/profil.jpg" Height="80" Width="80" />
-                <TextBlock Grid.Column="1" Text="{Binding Path=username}" Foreground="White" Margin="15,0,0,0" FontSize="25" />
+                <TextBlock Grid.Column="1" Text="{Binding Path=username}" Foreground="White" Margin="15,0,0,0"
+                           FontSize="25" />
             </Grid>
         </DataTemplate>
     </Page.Resources>

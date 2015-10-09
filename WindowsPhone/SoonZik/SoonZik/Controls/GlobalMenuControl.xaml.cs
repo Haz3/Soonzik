@@ -365,6 +365,7 @@ namespace SoonZik.Controls
             MyGrid.Children.Add(myObj);
             CloseMenu();
         }
+
         #endregion
 
         #region Methods Search
@@ -450,7 +451,6 @@ namespace SoonZik.Controls
         {
             AlbumViewModel.MyAlbum = SelectedMusic.album;
             SetChildren(new AlbumView());
-            CloseMenu();
         }
 
         private void AlbumStackPanel_OnTapped(object sender, TappedRoutedEventArgs e)

@@ -126,7 +126,9 @@
     <Compile Include="Utils\BouttonMenu.cs" />
     <Compile Include="Utils\Constants.cs" />
     <Compile Include="Utils\ContinuationManager.cs" />
+    <Compile Include="Utils\DataTemplateSelector.cs" />
     <Compile Include="Utils\INavigationService.cs" />
+    <Compile Include="Utils\MessageTemplateSelector.cs" />
     <Compile Include="Utils\NavigationService.cs" />
     <Compile Include="Utils\TextBlockExtension.cs" />
     <Compile Include="ViewModel\AboutViewModel.cs" />
@@ -448,6 +450,10 @@
     <Reference Include="GalaSoft.MvvmLight.Platform, Version=5.1.1.35052, Culture=neutral, PublicKeyToken=2d6752c4fdf70b88, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\MvvmLightLibs.5.1.1.0\lib\wpa81\GalaSoft.MvvmLight.Platform.dll</HintPath>
+    </Reference>
+    <Reference Include="JRatingControl, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\JISoft.Rating.1.0.3\lib\portable-wpa81+win81\JRatingControl.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="LinqToTwitterPcl, Version=3.1.2.18329, Culture=neutral, PublicKeyToken=957107be965c25d9, processorArchitecture=MSIL">
       <HintPath>..\packages\LinqToTwitter.3.1.2\lib\wpa\LinqToTwitterPcl.dll</HintPath>

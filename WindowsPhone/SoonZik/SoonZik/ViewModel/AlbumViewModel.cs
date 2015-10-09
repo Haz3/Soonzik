@@ -4,15 +4,12 @@ using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Windows.ApplicationModel.Core;
-using Windows.Storage;
 using Windows.UI.Core;
 using Windows.UI.Popups;
 using Windows.UI.Xaml;
-using Windows.UI.Xaml.Media.Imaging;
 using Coding4Fun.Toolkit.Controls;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
-using SoonZik.BackgroundAudioTask;
 using SoonZik.Controls;
 using SoonZik.Helpers;
 using SoonZik.HttpRequest;
@@ -29,23 +26,21 @@ namespace SoonZik.ViewModel
         {
             if (MyAlbum != null)
             {
-                //TheAlbum = MyAlbum;
                 _navigationService = new NavigationService();
                 ItemClickCommand = new RelayCommand(ItemClickCommandExecute);
-                //Charge();
             }
-
             MoreOptionOnTapped = new RelayCommand(MoreOptionOnTappedExecute);
             SelectionCommand = new RelayCommand(SelectionExecute);
             SendComment = new RelayCommand(SendCommentExecute);
             AddToCart = new RelayCommand(AddToCartExecute);
-            //ImageAlbum = TheAlbum.image == String.Empty ? new Uri("ms-appx:///Resources/Icones/disc.png", UriKind.Absolute).ToString() : TheAlbum.image;
+            RatingValueChange = new RelayCommand(RatingValueChangeExecute);
+            PlayCommand = new RelayCommand(PlayCommandExecute);
         }
 
         #endregion
 
         #region Attribute
-        
+
         private readonly INavigationService _navigationService;
 
         private string _imageAlbum;
@@ -57,18 +52,6 @@ namespace SoonZik.ViewModel
             {
                 _imageAlbum = value;
                 RaisePropertyChanged("ImageAlbum");
-            }
-        }
-
-        private ObservableCollection<Music> _listMusics;
-
-        public ObservableCollection<Music> ListMusics
-        {
-            get { return _listMusics; }
-            set
-            {
-                _listMusics = value;
-                RaisePropertyChanged("ListMusics");
             }
         }
 
@@ -114,11 +97,12 @@ namespace SoonZik.ViewModel
         public ICommand MoreOptionOnTapped { get; set; }
         public ICommand SendComment { get; private set; }
         public ICommand AddToCart { get; set; }
+        public ICommand RatingValueChange { get; private set; }
+        public ICommand PlayCommand { get; private set; }
 
+        private string _crypto;
         private string _cryptographic { get; set; }
-
         private bool _moreOption;
-
         private string _textComment;
 
         public string TextComment
@@ -143,8 +127,17 @@ namespace SoonZik.ViewModel
             }
         }
 
+        private ObservableCollection<Music> _listMusics;
 
-        private string _crypto;
+        public ObservableCollection<Music> ListMusics
+        {
+            get { return _listMusics; }
+            set
+            {
+                _listMusics = value;
+                RaisePropertyChanged("ListMusics");
+            }
+        }
 
         #endregion
 
@@ -157,7 +150,7 @@ namespace SoonZik.ViewModel
             MessagePrompt = new MessagePrompt
             {
                 Width = 300,
-                Height = 450,
+                Height = 500,
                 IsAppBarVisible = false,
                 VerticalAlignment = VerticalAlignment.Center,
                 Body = newsBody,
@@ -181,9 +174,11 @@ namespace SoonZik.ViewModel
                     {
                         var stringEncrypt = KeyHelpers.GetUserKeyFromResponse(key);
                         _crypto =
-                            EncriptSha256.EncriptStringToSha256(Singleton.Singleton.Instance().CurrentUser.salt + stringEncrypt);
+                            EncriptSha256.EncriptStringToSha256(Singleton.Singleton.Instance().CurrentUser.salt +
+                                                                stringEncrypt);
                     }
-                    var test = post.SendComment(TextComment, TheAlbum, _crypto, Singleton.Singleton.Instance().CurrentUser);
+                    var test = post.SendComment(TextComment, TheAlbum, _crypto,
+                        Singleton.Singleton.Instance().CurrentUser);
                     test.ContinueWith(delegate(Task<string> tmp)
                     {
                         var res = tmp.Result;
@@ -204,9 +199,10 @@ namespace SoonZik.ViewModel
         private void SelectionExecute()
         {
             TheAlbum = MyAlbum;
+            TheAlbum.image = Constant.UrlImageAlbum + MyAlbum.image;
             Charge();
         }
-        
+
         private void ItemClickCommandExecute()
         {
             if (!_moreOption)
@@ -234,7 +230,8 @@ namespace SoonZik.ViewModel
                 {
                     var stringEncrypt = KeyHelpers.GetUserKeyFromResponse(key2);
                     _cryptographic =
-                        EncriptSha256.EncriptStringToSha256(Singleton.Singleton.Instance().CurrentUser.salt + stringEncrypt);
+                        EncriptSha256.EncriptStringToSha256(Singleton.Singleton.Instance().CurrentUser.salt +
+                                                            stringEncrypt);
                 }
                 var res = post.SaveCart(null, TheAlbum, _cryptographic, Singleton.Singleton.Instance().CurrentUser);
                 res.ContinueWith(delegate(Task<string> tmp2)
@@ -261,8 +258,6 @@ namespace SoonZik.ViewModel
                 {
                     CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
                     {
-                        TheAlbum = test;
-                        TheAlbum.imageAlbum = new BitmapImage(new Uri(Constant.UrlImageAlbum + TheAlbum.image, UriKind.RelativeOrAbsolute));;
                         foreach (var music in test.musics)
                         {
                             ListMusics.Add(music);
@@ -294,6 +289,16 @@ namespace SoonZik.ViewModel
                     });
                 }
             });
+        }
+
+        private void RatingValueChangeExecute()
+        {
+            var test = SelectedMusic.getAverageNote;
+        }
+
+        private void PlayCommandExecute()
+        {
+            var test = 0;
         }
 
         #endregion

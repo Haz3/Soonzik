@@ -57,7 +57,7 @@ namespace SoonZik.Singleton
         public User SelectedUser { get; set; }
 
         public bool ItsMe { get; set; }
-        
+
         public int NewProfilUser { get; set; }
 
         public UIElement LastElement { get; set; }

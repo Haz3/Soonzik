@@ -1,23 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Threading;
-using System.Threading.Tasks;
 using Windows.ApplicationModel.Background;
 using Windows.Foundation.Collections;
 using Windows.Media;
 using Windows.Media.Playback;
-using Windows.Storage;
-using Windows.UI.Xaml;
-using SoonZik.Helpers;
-using SoonZik.HttpRequest.Poco;
 using SoonZik.MyPlaylistManager;
 using SoonZik.Utils;
 
 namespace SoonZik.BackgroundAudioTask
 {
-    enum ForegroundAppStatus
+    internal enum ForegroundAppStatus
     {
         Active,
         Suspended,
@@ -27,12 +20,13 @@ namespace SoonZik.BackgroundAudioTask
     public sealed class MyBackgroundAudioTask : IBackgroundTask
     {
         #region Private fields, properties
+
         private SystemMediaTransportControls systemmediatransportcontrol;
         private MyPlaylistManager.MyPlaylistManager playlistManager;
         private BackgroundTaskDeferral deferral; // Used to keep task alive
         private ForegroundAppStatus foregroundAppState = ForegroundAppStatus.Unknown;
-        private AutoResetEvent BackgroundTaskStarted = new AutoResetEvent(false);
-        private bool backgroundtaskrunning = false;
+        private readonly AutoResetEvent BackgroundTaskStarted = new AutoResetEvent(false);
+        private bool backgroundtaskrunning;
 
 
         public MyPlaylist Playlist
@@ -46,9 +40,11 @@ namespace SoonZik.BackgroundAudioTask
                 return playlistManager.Current;
             }
         }
+
         #endregion
 
         #region IBackgroundTask and IBackgroundTaskInstance Interface Members and handlers
+
         public void Run(IBackgroundTaskInstance taskInstance)
         {
             Debug.WriteLine("Background Audio Task " + taskInstance.Task.Name + " starting...");
@@ -61,14 +57,14 @@ namespace SoonZik.BackgroundAudioTask
             systemmediatransportcontrol.IsNextEnabled = true;
             systemmediatransportcontrol.IsPreviousEnabled = true;
 
-            taskInstance.Canceled += new BackgroundTaskCanceledEventHandler(OnCanceled);
+            taskInstance.Canceled += OnCanceled;
             taskInstance.Task.Completed += Taskcompleted;
 
             var value = ApplicationSettingsHelper.ReadResetSettingsValue(Constants.AppState);
             if (value == null)
                 foregroundAppState = ForegroundAppStatus.Unknown;
             else
-                foregroundAppState = (ForegroundAppStatus)Enum.Parse(typeof(ForegroundAppStatus), value.ToString());
+                foregroundAppState = (ForegroundAppStatus) Enum.Parse(typeof (ForegroundAppStatus), value.ToString());
 
             BackgroundMediaPlayer.Current.CurrentStateChanged += Current_CurrentStateChanged;
 
@@ -78,7 +74,7 @@ namespace SoonZik.BackgroundAudioTask
 
             if (foregroundAppState != ForegroundAppStatus.Suspended)
             {
-                ValueSet message = new ValueSet();
+                var message = new ValueSet();
                 message.Add(Constants.BackgroundTaskStarted, "");
                 BackgroundMediaPlayer.SendMessageToForeground(message);
             }
@@ -89,7 +85,7 @@ namespace SoonZik.BackgroundAudioTask
             deferral = taskInstance.GetDeferral();
         }
 
-        void Taskcompleted(BackgroundTaskRegistration sender, BackgroundTaskCompletedEventArgs args)
+        private void Taskcompleted(BackgroundTaskRegistration sender, BackgroundTaskCompletedEventArgs args)
         {
             Debug.WriteLine("MyBackgroundAudioTask " + sender.TaskId + " Completed...");
             deferral.Complete();
@@ -101,9 +97,12 @@ namespace SoonZik.BackgroundAudioTask
             try
             {
                 ApplicationSettingsHelper.SaveSettingsValue(Constants.CurrentTrack, Playlist.CurrentTrackName);
-                ApplicationSettingsHelper.SaveSettingsValue(Constants.Position, BackgroundMediaPlayer.Current.Position.ToString());
-                ApplicationSettingsHelper.SaveSettingsValue(Constants.BackgroundTaskState, Constants.BackgroundTaskCancelled);
-                ApplicationSettingsHelper.SaveSettingsValue(Constants.AppState, Enum.GetName(typeof(ForegroundAppStatus), foregroundAppState));
+                ApplicationSettingsHelper.SaveSettingsValue(Constants.Position,
+                    BackgroundMediaPlayer.Current.Position.ToString());
+                ApplicationSettingsHelper.SaveSettingsValue(Constants.BackgroundTaskState,
+                    Constants.BackgroundTaskCancelled);
+                ApplicationSettingsHelper.SaveSettingsValue(Constants.AppState,
+                    Enum.GetName(typeof (ForegroundAppStatus), foregroundAppState));
                 backgroundtaskrunning = false;
                 systemmediatransportcontrol.ButtonPressed -= systemmediatransportcontrol_ButtonPressed;
                 systemmediatransportcontrol.PropertyChanged -= systemmediatransportcontrol_PropertyChanged;
@@ -120,9 +119,11 @@ namespace SoonZik.BackgroundAudioTask
             deferral.Complete();
             Debug.WriteLine("MyBackgroundAudioTask Cancel complete...");
         }
+
         #endregion
 
         #region SysteMediaTransportControls related functions and handlers
+
         private void UpdateUVCOnNewTrack()
         {
             systemmediatransportcontrol.PlaybackStatus = MediaPlaybackStatus.Playing;
@@ -131,12 +132,14 @@ namespace SoonZik.BackgroundAudioTask
             systemmediatransportcontrol.DisplayUpdater.Update();
         }
 
-        void systemmediatransportcontrol_PropertyChanged(SystemMediaTransportControls sender, SystemMediaTransportControlsPropertyChangedEventArgs args)
+        private void systemmediatransportcontrol_PropertyChanged(SystemMediaTransportControls sender,
+            SystemMediaTransportControlsPropertyChangedEventArgs args)
         {
             //TODO: If soundlevel turns to muted, app can choose to pause the music
         }
 
-        private void systemmediatransportcontrol_ButtonPressed(SystemMediaTransportControls sender, SystemMediaTransportControlsButtonPressedEventArgs args)
+        private void systemmediatransportcontrol_ButtonPressed(SystemMediaTransportControls sender,
+            SystemMediaTransportControlsButtonPressedEventArgs args)
         {
             switch (args.Button)
             {
@@ -144,7 +147,7 @@ namespace SoonZik.BackgroundAudioTask
                     Debug.WriteLine("UVC play button pressed");
                     if (!backgroundtaskrunning)
                     {
-                        bool result = BackgroundTaskStarted.WaitOne(2000);
+                        var result = BackgroundTaskStarted.WaitOne(2000);
                         if (!result)
                             throw new Exception("Background Task didnt initialize in time");
                     }
@@ -171,9 +174,11 @@ namespace SoonZik.BackgroundAudioTask
                     break;
             }
         }
+
         #endregion
 
         #region Playlist management functions and handlers
+
         private void StartPlayback()
         {
             try
@@ -184,10 +189,10 @@ namespace SoonZik.BackgroundAudioTask
                     var currenttrackposition = ApplicationSettingsHelper.ReadResetSettingsValue(Constants.Position);
                     if (currenttrackname != null)
                         if (currenttrackposition == null)
-                            Playlist.StartTrackAt((string)currenttrackname);
+                            Playlist.StartTrackAt((string) currenttrackname);
                         else
-                            Playlist.StartTrackAt((string)currenttrackname,
-                                TimeSpan.Parse((string)currenttrackposition));
+                            Playlist.StartTrackAt((string) currenttrackname,
+                                TimeSpan.Parse((string) currenttrackposition));
                     else
                         Playlist.PlayAllTracks();
                 }
@@ -200,14 +205,14 @@ namespace SoonZik.BackgroundAudioTask
             }
         }
 
-        void playList_TrackChanged(MyPlaylist sender, object args)
+        private void playList_TrackChanged(MyPlaylist sender, object args)
         {
             UpdateUVCOnNewTrack();
             ApplicationSettingsHelper.SaveSettingsValue(Constants.CurrentTrack, sender.CurrentTrackName);
 
             if (foregroundAppState == ForegroundAppStatus.Active)
             {
-                ValueSet message = new ValueSet();
+                var message = new ValueSet();
                 message.Add(Constants.Trackchanged, sender.CurrentTrackName);
                 BackgroundMediaPlayer.SendMessageToForeground(message);
             }
@@ -228,7 +233,8 @@ namespace SoonZik.BackgroundAudioTask
         #endregion
 
         #region Background Media Player Handlers
-        void Current_CurrentStateChanged(MediaPlayer sender, object args)
+
+        private void Current_CurrentStateChanged(MediaPlayer sender, object args)
         {
             if (sender.CurrentState == MediaPlayerState.Playing)
             {
@@ -240,9 +246,10 @@ namespace SoonZik.BackgroundAudioTask
             }
         }
 
-        void BackgroundMediaPlayer_MessageReceivedFromForeground(object sender, MediaPlayerDataReceivedEventArgs e)
+        private void BackgroundMediaPlayer_MessageReceivedFromForeground(object sender,
+            MediaPlayerDataReceivedEventArgs e)
         {
-            foreach (string key in e.Data.Keys)
+            foreach (var key in e.Data.Keys)
             {
                 switch (key.ToLower())
                 {
@@ -270,7 +277,7 @@ namespace SoonZik.BackgroundAudioTask
                 }
             }
         }
-        #endregion
 
+        #endregion
     }
 }

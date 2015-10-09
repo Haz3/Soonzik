@@ -28,16 +28,16 @@ namespace SoonZik.Views
         {
         }
 
-        private void UIElement_OnTapped(object sender, TappedRoutedEventArgs e)
-        {
-            var vm = DataContext as AlbumViewModel;
-            if (vm != null) vm.ItemClickCommand.Execute(null);
-        }
-
         private void MoreOption_OnTapped(object sender, TappedRoutedEventArgs e)
         {
             var vm = DataContext as AlbumViewModel;
             if (vm != null) vm.MoreOptionOnTapped.Execute(null);
+        }
+
+        private void PlayImage_OnTapped(object sender, TappedRoutedEventArgs e)
+        {
+            var vm = DataContext as AlbumViewModel;
+            if (vm != null) vm.PlayCommand.Execute(null);
         }
     }
 }

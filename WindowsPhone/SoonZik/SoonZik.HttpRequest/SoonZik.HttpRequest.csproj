@@ -100,6 +100,9 @@
     <Compile Include="Poco\Influence.cs" />
     <Compile Include="Poco\Key.cs" />
     <Compile Include="Poco\Listenings.cs" />
+    <Compile Include="Poco\Message.cs" />
+    <Compile Include="Poco\MessageEnvoye.cs" />
+    <Compile Include="Poco\MessageRecu.cs" />
     <Compile Include="Poco\Music.cs" />
     <Compile Include="Poco\News.cs" />
     <Compile Include="Poco\NewsText.cs" />

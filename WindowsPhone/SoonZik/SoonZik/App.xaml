@@ -5,6 +5,7 @@
 
     <Application.Resources>
         <vm:ViewModelLocator x:Key="Locator" />
+        <vm:ConversationViewModel x:Key="ConversationViewModel" />
         <vm:MainPageViewModel x:Key="MainPageViewModel" />
         <vm:ConnexionViewModel x:Key="ConnexionViewModel" />
         <vm:MainViewModel x:Key="MainViewModel" />
@@ -24,7 +25,7 @@
         <vm:MyMusicViewModel x:Key="MyMusicViewModel" />
         <vm:BattleDetailViewModel x:Key="BattleDetailViewModel" />
         <vm:PlaylistViewModel x:Key="PlaylistViewModel" />
-        <vm:AboutViewModel x:Key="AboutViewModel"/>
+        <vm:AboutViewModel x:Key="AboutViewModel" />
 
         <DataTemplate x:Key="SizePivotHeader">
             <ContentPresenter>
@@ -439,5 +440,40 @@
             </Setter>
         </Style>
 
+        <Style x:Key="ItemContainerStyle" TargetType="ListBoxItem">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ListBoxItem">
+                        <Grid>
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="CommonStates">
+                                    <VisualState x:Name="Normal" />
+                                </VisualStateGroup>
+                                <VisualStateGroup x:Name="SelectionStates">
+                                    <VisualState x:Name="Unselected">
+                                        <Storyboard>
+                                            <ColorAnimation Duration="0" Storyboard.TargetName="myback"
+                                                            Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)"
+                                                            To="Transparent" />
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="SelectedUnfocused">
+                                        <Storyboard>
+                                            <ColorAnimation Duration="0" Storyboard.TargetName="myback"
+                                                            Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)"
+                                                            To="Transparent" />
+                                        </Storyboard>
+                                    </VisualState>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                            <Border x:Name="myback" Background="Transparent">
+                                <ContentPresenter Content="{TemplateBinding Content}"
+                                                  ContentTemplate="{TemplateBinding ContentTemplate}" />
+                            </Border>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
     </Application.Resources>
 </Application>

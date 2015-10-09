@@ -5,6 +5,7 @@ namespace SoonZik.HttpRequest.Poco
     public class News
     {
         #region Attributes
+
         public int id { get; set; }
         public string created_at { get; set; }
         public string title { get; set; }
@@ -12,6 +13,7 @@ namespace SoonZik.HttpRequest.Poco
         public User user { get; set; }
         public List<Newstext> newstexts { get; set; }
         public List<Attachment> attachments { get; set; }
+
         #endregion
     }
 }

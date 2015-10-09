@@ -34,6 +34,7 @@ namespace SoonZik.Controls
         #region Attribute
 
         public int Friend;
+        private User TheUser { get; set; }
         public INavigationService Navigation;
 
         #endregion
@@ -52,10 +53,18 @@ namespace SoonZik.Controls
                     CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
                         () =>
                         {
-                            if (user.groups[0].name == "User")
+                            TheUser = user;
+                            if (user.groups.Count > 0)
+                            {
+                                if (user.groups[0].name == "User")
+                                    ProfilFriendViewModel.UserFromButton = user;
+                                else if (user.groups[0].name == "Artist")
+                                    ProfilArtisteViewModel.TheUser = user;
+                            }
+                            else
+                            {
                                 ProfilFriendViewModel.UserFromButton = user;
-                            else if (user.groups[0].name == "Artist")
-                                ProfilArtisteViewModel.TheUser = user;
+                            }
                         });
                 }
             });
@@ -63,7 +72,8 @@ namespace SoonZik.Controls
 
         private void SendMessage(object sender, RoutedEventArgs e)
         {
-            Navigation.Navigate(typeof (Conversation));
+            ConversationViewModel.NewUser = TheUser;
+            GlobalMenuControl.SetChildren(new Conversation());
         }
 
         private void GoToProfil(object sender, RoutedEventArgs e)
