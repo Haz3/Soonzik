@@ -1,24 +1,21 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.Media.Playback;
-using SoonZik.Helpers;
-using SoonZik.HttpRequest.Poco;
 
 namespace SoonZik.MyPlaylistManager
 {
     public sealed class MyPlaylistManager
     {
         #region Private members
+
         private static MyPlaylist instance;
+
         #endregion
 
         #region Playlist management methods/properties
+
         public MyPlaylist Current
         {
             get
@@ -35,18 +32,21 @@ namespace SoonZik.MyPlaylistManager
         {
             instance = null;
         }
+
         #endregion
     }
 
     public sealed class MyPlaylist
     {
         #region Private members
+
         private static ObservableCollection<string> tracks;
         private const string UrlMusique = "http://soonzikapi.herokuapp.com/musics/get/";
         //private static String[] tracks;
-        int CurrentTrackId = -1;
-        private MediaPlayer mediaPlayer;
+        private int CurrentTrackId = -1;
+        private readonly MediaPlayer mediaPlayer;
         private TimeSpan startPosition = TimeSpan.FromSeconds(0);
+
         internal MyPlaylist()
         {
             mediaPlayer = BackgroundMediaPlayer.Current;
@@ -66,9 +66,11 @@ namespace SoonZik.MyPlaylistManager
             //    }
             //});
         }
+
         #endregion
 
         #region Public properties, events and handlers
+
         public string CurrentTrackName
         {
             get
@@ -79,22 +81,22 @@ namespace SoonZik.MyPlaylistManager
                 }
                 if (CurrentTrackId < tracks.Count)
                 {
-                    string fullUrl = tracks[CurrentTrackId];
+                    var fullUrl = tracks[CurrentTrackId];
                     return fullUrl;
                     //return fullUrl.Split('/')[fullUrl.Split('/').Length - 1];
                 }
-                else
-                    throw new ArgumentOutOfRangeException("Track Id is higher than total number of tracks");
+                throw new ArgumentOutOfRangeException("Track Id is higher than total number of tracks");
             }
         }
 
         public event TypedEventHandler<MyPlaylist, object> TrackChanged;
+
         #endregion
 
         #region MediaPlayer Handlers
-        void mediaPlayer_CurrentStateChanged(MediaPlayer sender, object args)
-        {
 
+        private void mediaPlayer_CurrentStateChanged(MediaPlayer sender, object args)
+        {
             if (sender.CurrentState == MediaPlayerState.Playing && startPosition != TimeSpan.FromSeconds(0))
             {
                 // if the start position is other than 0, then set it now
@@ -105,11 +107,11 @@ namespace SoonZik.MyPlaylistManager
             }
         }
 
-        void MediaPlayer_MediaOpened(MediaPlayer sender, object args)
+        private void MediaPlayer_MediaOpened(MediaPlayer sender, object args)
         {
             // wait for media to be ready
             sender.Play();
-            Debug.WriteLine("New Track" + this.CurrentTrackName);
+            Debug.WriteLine("New Track" + CurrentTrackName);
             TrackChanged.Invoke(this, CurrentTrackName);
         }
 
@@ -120,14 +122,16 @@ namespace SoonZik.MyPlaylistManager
 
         private void mediaPlayer_MediaFailed(MediaPlayer sender, MediaPlayerFailedEventArgs args)
         {
-            Debug.WriteLine("Failed with error code " + args.ExtendedErrorCode.ToString());
+            Debug.WriteLine("Failed with error code " + args.ExtendedErrorCode);
         }
+
         #endregion
 
         #region Playlist command handlers
+
         private void StartTrackAt(int id)
         {
-            string source = tracks[id];
+            var source = tracks[id];
             CurrentTrackId = id;
             mediaPlayer.AutoPlay = false;
             mediaPlayer.SetUriSource(new Uri(source));
@@ -135,11 +139,11 @@ namespace SoonZik.MyPlaylistManager
 
         public void StartTrackAt(string TrackName)
         {
-            for (int i = 0; i < tracks.Count; i++)
+            for (var i = 0; i < tracks.Count; i++)
             {
                 if (tracks[i].Contains(TrackName))
                 {
-                    string source = tracks[i];
+                    var source = tracks[i];
                     CurrentTrackId = i;
                     mediaPlayer.AutoPlay = false;
                     mediaPlayer.SetUriSource(new Uri(source));
@@ -149,7 +153,7 @@ namespace SoonZik.MyPlaylistManager
 
         public void StartTrackAt(string TrackName, TimeSpan position)
         {
-            for (int i = 0; i < tracks.Count; i++)
+            for (var i = 0; i < tracks.Count; i++)
             {
                 if (tracks[i].Contains(TrackName))
                 {
@@ -171,7 +175,7 @@ namespace SoonZik.MyPlaylistManager
 
         public void SkipToNext()
         {
-            StartTrackAt((CurrentTrackId + 1) % tracks.Count);
+            StartTrackAt((CurrentTrackId + 1)%tracks.Count);
         }
 
         public void SkipToPrevious()

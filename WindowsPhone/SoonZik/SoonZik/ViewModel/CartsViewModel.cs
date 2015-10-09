@@ -8,12 +8,10 @@ using Windows.UI.Core;
 using Windows.UI.Popups;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
-using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using SoonZik.Helpers;
 using SoonZik.HttpRequest;
 using SoonZik.HttpRequest.Poco;
-using SoonZik.Utils;
 
 namespace SoonZik.ViewModel
 {
@@ -107,6 +105,7 @@ namespace SoonZik.ViewModel
                 RaisePropertyChanged("TotalPrice");
             }
         }
+
         #endregion
 
         #region Methods
@@ -127,7 +126,8 @@ namespace SoonZik.ViewModel
                 {
                     var stringEncrypt = KeyHelpers.GetUserKeyFromResponse(_key);
                     _cryptographic =
-                        EncriptSha256.EncriptStringToSha256(Singleton.Singleton.Instance().CurrentUser.salt + stringEncrypt);
+                        EncriptSha256.EncriptStringToSha256(Singleton.Singleton.Instance().CurrentUser.salt +
+                                                            stringEncrypt);
 
                     var listCarts = request.GetItemFromCarts(new List<Carts>(), _cryptographic,
                         Singleton.Singleton.Instance().CurrentUser);
@@ -155,7 +155,7 @@ namespace SoonZik.ViewModel
                                             price += Double.Parse(music.price);
                                         }
                                 }
-                                TotalPrice = "Total : " + price.ToString() + " Euros";
+                                TotalPrice = "Total : " + price + " Euros";
                             });
                         }
                     });
@@ -265,7 +265,9 @@ namespace SoonZik.ViewModel
                 if (_key != null)
                 {
                     var stringEncrypt = KeyHelpers.GetUserKeyFromResponse(_key);
-                    _cryptographic = EncriptSha256.EncriptStringToSha256(Singleton.Singleton.Instance().CurrentUser.salt + stringEncrypt);
+                    _cryptographic =
+                        EncriptSha256.EncriptStringToSha256(Singleton.Singleton.Instance().CurrentUser.salt +
+                                                            stringEncrypt);
 
                     Carts cart = null;
 

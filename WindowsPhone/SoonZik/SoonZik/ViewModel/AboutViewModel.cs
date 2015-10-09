@@ -1,5 +1,4 @@
-﻿using System;
-using System.Windows.Input;
+﻿using System.Windows.Input;
 using Windows.ApplicationModel.Resources;
 using Windows.UI.Popups;
 using GalaSoft.MvvmLight;
@@ -9,6 +8,28 @@ namespace SoonZik.ViewModel
 {
     public class AboutViewModel : ViewModelBase
     {
+        #region Ctor
+
+        public AboutViewModel()
+        {
+            SendCommand = new RelayCommand(SendFeedBack);
+        }
+
+        #endregion
+
+        private void SendFeedBack()
+        {
+            if (Email != null && Username != null && Object != null && Comment != null)
+            {
+                //TODO send to the serveur
+            }
+            else
+            {
+                var loader = new ResourceLoader();
+                new MessageDialog(loader.GetString("ErrorAbout")).ShowAsync();
+            }
+        }
+
         #region Attribute
 
         public ICommand SendCommand { get; private set; }
@@ -23,6 +44,7 @@ namespace SoonZik.ViewModel
                 RaisePropertyChanged("Email");
             }
         }
+
         private string _username;
 
         public string Username
@@ -34,6 +56,7 @@ namespace SoonZik.ViewModel
                 RaisePropertyChanged("Username");
             }
         }
+
         private string _object;
 
         public string Object
@@ -45,6 +68,7 @@ namespace SoonZik.ViewModel
                 RaisePropertyChanged("Object");
             }
         }
+
         private string _comment;
 
         public string Comment
@@ -58,32 +82,9 @@ namespace SoonZik.ViewModel
         }
 
         #endregion
-        private void SendFeedBack()
-        {
-            if (Email != null && Username != null && Object != null && Comment != null)
-            {
-                //TODO send to the serveur
-            }
-            else
-            {
-                var loader = new ResourceLoader();
-                new MessageDialog(loader.GetString("ErrorAbout")).ShowAsync();
-            }
-        }
 
         #region Method
 
         #endregion
-
-        #region Ctor
-
-        public AboutViewModel()
-        {
-            SendCommand = new RelayCommand(SendFeedBack);
-        }
-
-
-        #endregion
-
     }
 }

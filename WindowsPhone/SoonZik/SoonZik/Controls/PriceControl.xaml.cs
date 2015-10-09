@@ -34,7 +34,7 @@ namespace SoonZik.Controls
 
         private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
         {
-            new MessageDialog("En cours de dev").ShowAsync(); 
+            new MessageDialog("En cours de dev").ShowAsync();
             var request = new HttpRequestGet();
             var post = new HttpRequestPost();
             _cryptographic = "";
@@ -46,22 +46,24 @@ namespace SoonZik.Controls
                 {
                     var stringEncrypt = KeyHelpers.GetUserKeyFromResponse(key2);
                     _cryptographic =
-                        EncriptSha256.EncriptStringToSha256(Singleton.Singleton.Instance().CurrentUser.salt + stringEncrypt);
+                        EncriptSha256.EncriptStringToSha256(Singleton.Singleton.Instance().CurrentUser.salt +
+                                                            stringEncrypt);
                 }
-                var res = post.PurchasePack(SelecetdPack.id, Double.Parse(PriceTextBox.Text), ArtistSlider.Value, AssociationSlider.Value, SoonZikSlider.Value, _cryptographic, Singleton.Singleton.Instance().CurrentUser);
+                var res = post.PurchasePack(SelecetdPack.id, Double.Parse(PriceTextBox.Text), ArtistSlider.Value,
+                    AssociationSlider.Value, SoonZikSlider.Value, _cryptographic,
+                    Singleton.Singleton.Instance().CurrentUser);
                 res.ContinueWith(delegate(Task<string> tmp2)
                 {
                     var res2 = tmp2.Result;
                     if (res2 != null)
                     {
-                        var message = (ErrorMessage)JsonConvert.DeserializeObject(res2, typeof(ErrorMessage));
+                        var message = (ErrorMessage) JsonConvert.DeserializeObject(res2, typeof (ErrorMessage));
                         if (message.code != 201)
                             CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
                                 () => { new MessageDialog("Erreur lors du paiement").ShowAsync(); });
                         else
                             CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
                                 () => { new MessageDialog("paiement effectue").ShowAsync(); });
-
                     }
                 });
             });

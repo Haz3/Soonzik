@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using Windows.ApplicationModel.Core;
 using Windows.UI.Core;
-using Windows.UI.Popups;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using SoonZik.Controls;
@@ -128,12 +127,13 @@ namespace SoonZik.ViewModel
                             var res = request.GetArtist(new Artist(), "users", item.id.ToString());
                             res.ContinueWith(delegate(Task<object> obj)
                             {
-                                CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
-                                {
-                                    var art = obj.Result as Artist;
-                                    if (art != null && art.artist)
-                                        ListArtiste.Add(item);
-                                });
+                                CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
+                                    () =>
+                                    {
+                                        var art = obj.Result as Artist;
+                                        if (art != null && art.artist)
+                                            ListArtiste.Add(item);
+                                    });
                             });
                         }
                     }
@@ -146,7 +146,9 @@ namespace SoonZik.ViewModel
                     if (key != null)
                     {
                         var stringEncrypt = KeyHelpers.GetUserKeyFromResponse(key);
-                        _crypto = EncriptSha256.EncriptStringToSha256(Singleton.Singleton.Instance().CurrentUser.salt + stringEncrypt);
+                        _crypto =
+                            EncriptSha256.EncriptStringToSha256(Singleton.Singleton.Instance().CurrentUser.salt +
+                                                                stringEncrypt);
                         var listZik = request.GetSuggest(new List<Music>(), _crypto,
                             Singleton.Singleton.Instance().CurrentUser.id.ToString());
                         listZik.ContinueWith(delegate(Task<object> tmp)
@@ -156,7 +158,8 @@ namespace SoonZik.ViewModel
                             {
                                 foreach (var item in test)
                                 {
-                                    CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
+                                    CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(
+                                        CoreDispatcherPriority.Normal,
                                         () => { ListMusique.Add(item); });
                                 }
                             }
