@@ -117,13 +117,6 @@ namespace SoonZik.ViewModel
             CurrentUser = UserFromButton;
             CurrentUser.image = new Uri(UrlImage + CurrentUser.image, UriKind.RelativeOrAbsolute).ToString();
         }
-
-        private void HardwareButtonsOnBackPressed(object sender, BackPressedEventArgs backPressedEventArgs)
-        {
-            backPressedEventArgs.Handled = true;
-            Navigation.GoBack();
-        }
-
         #endregion
     }
 }

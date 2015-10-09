@@ -94,6 +94,7 @@
     <Compile Include="Poco\Comments.cs" />
     <Compile Include="Poco\Concerts.cs" />
     <Compile Include="Poco\Description.cs" />
+    <Compile Include="Poco\ErrorMessage.cs" />
     <Compile Include="Poco\Genre.cs" />
     <Compile Include="Poco\Group.cs" />
     <Compile Include="Poco\Influence.cs" />

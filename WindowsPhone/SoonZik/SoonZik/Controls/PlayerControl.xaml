@@ -9,7 +9,7 @@
     xmlns:core="using:Microsoft.Xaml.Interactions.Core"
     mc:Ignorable="d"
     Background="#424242">
-    <interactivity:Interaction.Behaviors>
+    <!--<interactivity:Interaction.Behaviors>
         <core:EventTriggerBehavior EventName="Loaded">
             <core:InvokeCommandAction Command="{Binding PlayerLoaded}" />
         </core:EventTriggerBehavior>
@@ -17,7 +17,7 @@
 
 
     <Grid x:Name="GlobalPlayerGrid">
-        <Grid.RowDefinitions>
+        --><!--<Grid.RowDefinitions>
             <RowDefinition Height="*" />
             <RowDefinition Height="60" />
             <RowDefinition Height="60" />
@@ -63,6 +63,6 @@
             <Image x:Name="ForwardImage" Tapped="ForwardImage_OnTapped" HorizontalAlignment="Right"
                    VerticalAlignment="Center" Width="30" Height="30" Source="ms-appx:///Resources/Icones/forward.png"
                    Margin="0,0,130,0" Stretch="Fill" />
-        </Grid>
-    </Grid>
+        </Grid>--><!--
+    </Grid>-->
 </Page>

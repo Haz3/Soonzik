@@ -8,6 +8,7 @@ using Windows.Storage;
 using Windows.UI.Core;
 using Windows.UI.Popups;
 using Windows.UI.Xaml;
+using Windows.UI.Xaml.Media.Imaging;
 using Coding4Fun.Toolkit.Controls;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
@@ -210,7 +211,8 @@ namespace SoonZik.ViewModel
         {
             if (!_moreOption)
             {
-                Singleton.Singleton.Instance().SelectedMusicSingleton = SelectedMusic;
+                //LocalFolderHelper.Delete();
+                Singleton.Singleton.Instance().SelectedMusicSingleton.Add(SelectedMusic);
                 LocalFolderHelper.WriteTimestamp();
                 GlobalMenuControl.SetChildren(new BackgroundAudioPlayer());
             }
@@ -260,6 +262,7 @@ namespace SoonZik.ViewModel
                     CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
                     {
                         TheAlbum = test;
+                        TheAlbum.imageAlbum = new BitmapImage(new Uri(Constant.UrlImageAlbum + TheAlbum.image, UriKind.RelativeOrAbsolute));;
                         foreach (var music in test.musics)
                         {
                             ListMusics.Add(music);

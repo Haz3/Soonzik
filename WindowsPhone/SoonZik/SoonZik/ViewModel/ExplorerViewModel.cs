@@ -166,14 +166,14 @@ namespace SoonZik.ViewModel
             }
             catch (Exception e)
             {
-                new MessageDialog("probleme reseau : " + e.Message).ShowAsync();
+                //new MessageDialog("probleme reseau : " + e.Message).ShowAsync();
             }
         }
 
         private void MusiCommandExecute()
         {
-            Singleton.Singleton.Instance().SelectedMusicSingleton = SelectedMusic;
-            GlobalMenuControl.SetChildren(new PlayerControl());
+            Singleton.Singleton.Instance().SelectedMusicSingleton.Add(SelectedMusic);
+            GlobalMenuControl.SetChildren(new BackgroundAudioPlayer());
             //Navigation.Navigate(new PlayerControl().GetType());
         }
 

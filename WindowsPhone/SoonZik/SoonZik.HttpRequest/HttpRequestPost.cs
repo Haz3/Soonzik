@@ -156,6 +156,24 @@ namespace SoonZik.HttpRequest
             var postData = "playlist[user_id]=" + myUser.id + "&playlist[name]=" + thePlaylist.name + "&secureKey=" + sha256 + "&user_id=" + myUser.id;
             return await GetHttpPostResponse(request, postData);
         }
+
+        public async Task<String> Purchase(string sha256, User myUser)
+        {
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(ApiUrl + "/purchases/buycart");
+
+            var postData = "paypal[]=" + "&secureKey=" + sha256 + "&user_id=" + myUser.id;
+            return await GetHttpPostResponse(request, postData);
+            
+        }
+
+        public async Task<String> PurchasePack(int id, double donate, double artiste, double assoc, double site, string sha256, User myUser)
+        {
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(ApiUrl + "/purchases/buypack");
+
+            var postData = "secureKey=" + sha256 + "&user_id=" + myUser.id;
+            return await GetHttpPostResponse(request, postData);
+
+        } 
         #endregion
 
         #region DoPost

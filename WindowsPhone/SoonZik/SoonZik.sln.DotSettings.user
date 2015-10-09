@@ -3,4 +3,5 @@
   &lt;Assembly Path="C:\Users\Juan-Pablo Bastardos\Documents\GitHub\SoonZik\Soonzik\WindowsPhone\SoonZik\packages\Coding4Fun.Toolkit.Controls.2.1.0\lib\wpa81\Coding4Fun.Toolkit.Controls.dll" /&gt;&#xD;
   &lt;Assembly Path="C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\packages\Coding4Fun.Toolkit.Controls.2.1.0\lib\wpa81\Coding4Fun.Toolkit.dll" /&gt;&#xD;
   &lt;Assembly Path="C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\packages\Coding4Fun.Toolkit.Controls.2.1.0\lib\wpa81\Coding4Fun.Toolkit.Controls.dll" /&gt;&#xD;
+  &lt;Assembly Path="C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\packages\PayPal.Checkout.SDK-WindowsPhone8.dll" /&gt;&#xD;
 &lt;/AssemblyExplorer&gt;</s:String></wpf:ResourceDictionary>

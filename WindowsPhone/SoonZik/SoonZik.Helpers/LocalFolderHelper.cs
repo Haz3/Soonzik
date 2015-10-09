@@ -24,11 +24,19 @@ namespace SoonZik.Helpers
 
         #region Method
 
+        public static async void Delete()
+        {
+            await localFolder.DeleteAsync();
+        }
+
         public static async void WriteTimestamp()
         {
             StorageFile sampleFile = await localFolder.CreateFileAsync("Musiques.txt", CreationCollisionOption.ReplaceExisting);
-            var json = JsonConvert.SerializeObject(Singleton.Singleton.Instance().SelectedMusicSingleton);
-            await FileIO.WriteTextAsync(sampleFile, json);
+            foreach (var music in Singleton.Singleton.Instance().SelectedMusicSingleton)
+            {
+                var json = JsonConvert.SerializeObject(music);
+                await FileIO.WriteTextAsync(sampleFile, json);
+            }
         }
 
         public static async Task<object> ReadTimestamp()
