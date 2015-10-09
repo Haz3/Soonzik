@@ -1,8 +1,10 @@
 package com.soonzik.soonzik;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.multidex.MultiDex;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.View;
@@ -190,4 +192,5 @@ public class LoginActivity extends Activity {
     protected void onStop() {
         super.onStop();
     }
+
 }

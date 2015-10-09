@@ -1,5 +1,7 @@
 package com.soonzik.soonzik;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -15,12 +17,19 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.paypal.android.sdk.payments.PayPalConfiguration;
+import com.paypal.android.sdk.payments.PayPalPayment;
+import com.paypal.android.sdk.payments.PayPalService;
+import com.paypal.android.sdk.payments.PaymentActivity;
+import com.paypal.android.sdk.payments.PaymentConfirmation;
+
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.w3c.dom.Text;
 
 import java.lang.reflect.InvocationTargetException;
+import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Created by Kevin on 2015-09-09.
@@ -28,6 +37,12 @@ import java.util.ArrayList;
 public class PackPurchaseFragment extends Fragment {
 
     private String redirectClass = "com.soonzik.soonzik.PackFragment";
+    private static PayPalConfiguration config;
+    private float finalamount;
+    private Pack pack;
+    private SeekBar seekBarArtist;
+    private SeekBar seekBarCharity;
+    private SeekBar seekBarDeveloper;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -37,13 +52,20 @@ public class PackPurchaseFragment extends Fragment {
 
         int id = this.getArguments().getInt("pack_id");
 
+        config = new PayPalConfiguration()
+
+                // Start with mock environment.  When ready, switch to sandbox (ENVIRONMENT_SANDBOX)
+                // or live (ENVIRONMENT_PRODUCTION)
+                .environment(PayPalConfiguration.ENVIRONMENT_NO_NETWORK)
+                .clientId("AfCwBQSyxx6Ys2fnbB_1AmmuINiAPaGlGtk38vTZTCbcevPBIU0Ptt4TgvjNznxkLbSi9fdiaJxG8-u-");
+
         try {
             ActiveRecord.show("Pack", id, false, new ActiveRecord.OnJSONResponseCallback() {
                 @Override
                 public void onJSONResponse(boolean success, Object response, Class<?> classT) throws InvocationTargetException, NoSuchMethodException, java.lang.InstantiationException, IllegalAccessException {
                     JSONObject data = (JSONObject) response;
 
-                    final Pack pack = (Pack) ActiveRecord.jsonObjectData(data, classT);
+                    pack = (Pack) ActiveRecord.jsonObjectData(data, classT);
 
                     TextView packName = (TextView) getActivity().findViewById(R.id.packname);
                     packName.setText(pack.getTitle());
@@ -80,9 +102,9 @@ public class PackPurchaseFragment extends Fragment {
                     editTextAmount.setText(Double.toString(pack.getAveragePrice() + 0.01));
                     final Double[] amount = {Double.parseDouble(editTextAmount.getText().toString())};
 
-                    final SeekBar seekBarArtist = (SeekBar) view.findViewById(R.id.seekbarartist);
-                    final SeekBar seekBarCharity = (SeekBar) view.findViewById(R.id.seekbarcharity);
-                    final SeekBar seekBarDeveloper = (SeekBar) view.findViewById(R.id.seekbardeveloper);
+                    seekBarArtist = (SeekBar) view.findViewById(R.id.seekbarartist);
+                    seekBarCharity = (SeekBar) view.findViewById(R.id.seekbarcharity);
+                    seekBarDeveloper = (SeekBar) view.findViewById(R.id.seekbardeveloper);
 
                     final TextView valueArtist = (TextView) view.findViewById(R.id.valueforartist);
                     final TextView valueCharity = (TextView) view.findViewById(R.id.valueforcharity);
@@ -109,7 +131,6 @@ public class PackPurchaseFragment extends Fragment {
                             double totalValue = artistAmount + charityAmount + developerAmount;
 
                             if (totalValue < amount[0]) {
-                                Log.v("TOTAL VALUE < amount", Double.toString(totalValue));
                                 if (artistAmount > 0) {
                                     artistAmount += amount[0] - totalValue;
                                 } else if (charityAmount > 0) {
@@ -118,7 +139,6 @@ public class PackPurchaseFragment extends Fragment {
                                     developerAmount += amount[0] - totalValue;
                                 }
                             } else if (totalValue > amount[0]) {
-                                Log.v("TOTAL VALUE > amount", Double.toString(totalValue));
                                 if (artistAmount > 0) {
                                     artistAmount -= (totalValue - amount[0]);
                                 } else if (charityAmount > 0) {
@@ -154,8 +174,6 @@ public class PackPurchaseFragment extends Fragment {
                             } else {
                                 diff = 0;
                             }
-
-                            Log.v("DIFF ARTIST 1", Integer.toString(diff));
                             progress = progresValue;
                             fromUser = fromUs;
                         }
@@ -173,29 +191,21 @@ public class PackPurchaseFragment extends Fragment {
                                 int progressDeveloper = seekBarDeveloper.getProgress();
 
                                 if (progress == 100) {
-                                    Log.v("CASE", "1");
                                     seekBarDeveloper.setProgress(0);
                                     seekBarCharity.setProgress(0);
                                 } else if (progressCharity == 0 && diff > 0 && progressDeveloper > 0) {
-                                    Log.v("CASE", "2");
-                                    Log.v("Dev", Integer.toString(progressDeveloper));
-                                    Log.v("diff", Integer.toString(diff));
                                     seekBarDeveloper.setProgress(progressDeveloper - diff);
                                 } else if (progressDeveloper == 0 && diff > 0 && progressCharity > 0) {
-                                    Log.v("CASE", "3");
                                     seekBarCharity.setProgress(progressCharity - diff);
                                 } else if (progressDeveloper - (diff / 2) < 0) {
-                                    Log.v("CASE", "4");
                                     diff = diff + progressDeveloper;
                                     seekBarDeveloper.setProgress(0);
                                     seekBarCharity.setProgress(progressCharity - diff);
                                 } else if (progressCharity - (diff / 2) < 0) {
-                                    Log.v("CASE", "5");
                                     diff = diff + progressCharity;
                                     seekBarCharity.setProgress(0);
                                     seekBarDeveloper.setProgress(progressDeveloper - diff);
                                 } else {
-                                    Log.v("CASE", "6");
                                     seekBarCharity.setProgress(progressCharity - (diff / 2));
                                     seekBarDeveloper.setProgress(progressDeveloper - (diff / 2));
                                 }
@@ -206,7 +216,6 @@ public class PackPurchaseFragment extends Fragment {
                             int totalPercent = seekBarArtist.getProgress() + seekBarCharity.getProgress() + seekBarDeveloper.getProgress();
 
                             if (totalPercent < 100) {
-                                Log.v("TOTAL PERCENT < 100", Integer.toString(totalPercent));
                                 if (seekBarCharity.getProgress() > 0) {
                                     seekBarCharity.setProgress(seekBarCharity.getProgress() + 100 - totalPercent);
                                 } else if (seekBarDeveloper.getProgress() > 0) {
@@ -215,7 +224,6 @@ public class PackPurchaseFragment extends Fragment {
                                     seekBarArtist.setProgress(seekBarArtist.getProgress() + 100 - totalPercent);
                                 }
                             } else if (totalPercent > 100) {
-                                Log.v("TOTAL PERCENT > 100", Integer.toString(totalPercent));
                                 if (seekBarCharity.getProgress() > 0) {
                                     seekBarCharity.setProgress(seekBarCharity.getProgress() - (totalPercent - 100));
                                 } else if (seekBarDeveloper.getProgress() > 0) {
@@ -232,7 +240,6 @@ public class PackPurchaseFragment extends Fragment {
                             double totalValue = artistAmount + charityAmount + developerAmount;
 
                             if (totalValue < amount[0]) {
-                                Log.v("TOTAL VALUE < amount", Double.toString(totalValue));
                                 if (charityAmount > 0) {
                                     charityAmount += amount[0] - totalValue;
                                 } else if (developerAmount > 0) {
@@ -241,7 +248,6 @@ public class PackPurchaseFragment extends Fragment {
                                     artistAmount += amount[0] - totalValue;
                                 }
                             } else if (totalValue > amount[0]) {
-                                Log.v("TOTAL VALUE > amount", Double.toString(totalValue));
                                 if (charityAmount > 0) {
                                     charityAmount -= (totalValue - amount[0]);
                                 } else if (developerAmount > 0) {
@@ -270,7 +276,6 @@ public class PackPurchaseFragment extends Fragment {
                             } else {
                                 diff = 0;
                             }
-                            Log.v("DIFF CHARITY", Integer.toString(diff));
                             progress = progresValue;
                             fromUser = fromUs;
                         }
@@ -287,27 +292,21 @@ public class PackPurchaseFragment extends Fragment {
                                 int progressDeveloper = seekBarDeveloper.getProgress();
 
                                 if (progress == 100) {
-                                    Log.v("CASE", "1");
                                     seekBarArtist.setProgress(0);
                                     seekBarDeveloper.setProgress(0);
                                 } else if (progressArtist == 0 && diff > 0 && progressDeveloper > 0) {
-                                    Log.v("CASE", "2");
                                     seekBarDeveloper.setProgress(progressDeveloper - diff);
                                 } else if (progressDeveloper == 0 && diff > 0 && progressArtist > 0) {
-                                    Log.v("CASE", "3");
                                     seekBarArtist.setProgress(progressArtist - diff);
                                 } else if (progressDeveloper - (diff / 2) < 0) {
-                                    Log.v("CASE", "4");
                                     diff -= progressDeveloper;
                                     seekBarDeveloper.setProgress(0);
                                     seekBarArtist.setProgress(progressArtist - diff);
                                 } else if (progressArtist - (diff / 2) < 0) {
-                                    Log.v("CASE", "5");
                                     diff -= progressArtist;
                                     seekBarArtist.setProgress(0);
                                     seekBarDeveloper.setProgress(progressDeveloper - diff);
                                 } else {
-                                    Log.v("CASE", "6");
                                     seekBarArtist.setProgress(progressArtist - (diff / 2));
                                     seekBarDeveloper.setProgress(progressDeveloper - (diff / 2));
                                 }
@@ -318,7 +317,6 @@ public class PackPurchaseFragment extends Fragment {
                             int totalPercent = seekBarArtist.getProgress() + seekBarCharity.getProgress() + seekBarDeveloper.getProgress();
 
                             if (totalPercent < 100) {
-                                Log.v("TOTAL PERCENT < 100", Integer.toString(totalPercent));
                                 if (seekBarArtist.getProgress() > 0) {
                                     seekBarArtist.setProgress(seekBarArtist.getProgress() + 100 - totalPercent);
                                 } else if (seekBarDeveloper.getProgress() > 0) {
@@ -327,8 +325,6 @@ public class PackPurchaseFragment extends Fragment {
                                     seekBarCharity.setProgress(seekBarCharity.getProgress() + 100 - totalPercent);
                                 }
                             } else if (totalPercent > 100) {
-                                Log.v("TOTAL PERCENT > 100", Integer.toString(totalPercent));
-
                                 if (seekBarArtist.getProgress() > 0) {
                                     seekBarArtist.setProgress(seekBarArtist.getProgress() - (totalPercent - 100));
                                 } else if (seekBarDeveloper.getProgress() > 0) {
@@ -345,7 +341,6 @@ public class PackPurchaseFragment extends Fragment {
                             double totalValue = artistAmount + charityAmount + developerAmount;
 
                             if (totalValue < amount[0]) {
-                                Log.v("TOTAL VALUE < amount", Double.toString(totalValue));
                                 if (artistAmount > 0) {
                                     artistAmount += amount[0] - totalValue;
                                 } else if (developerAmount > 0) {
@@ -354,7 +349,6 @@ public class PackPurchaseFragment extends Fragment {
                                     charityAmount += amount[0] - totalValue;
                                 }
                             } else if (totalValue > amount[0]) {
-                                Log.v("TOTAL VALUE > amount", Double.toString(totalValue));
                                 if (artistAmount > 0) {
                                     artistAmount -= (totalValue - amount[0]);
                                 } else if (developerAmount > 0) {
@@ -383,7 +377,6 @@ public class PackPurchaseFragment extends Fragment {
                             } else {
                                 diff = 0;
                             }
-                            Log.v("DIFF DEVELOPER", Integer.toString(diff));
                             progress = progresValue;
                             fromUser = fromUs;
                         }
@@ -400,27 +393,21 @@ public class PackPurchaseFragment extends Fragment {
                                 int progressCharity = seekBarCharity.getProgress();
 
                                 if (progress == 100) {
-                                    Log.v("CASE", "1");
                                     seekBarArtist.setProgress(0);
                                     seekBarCharity.setProgress(0);
                                 } else if (progressArtist == 0 && diff > 0 && progressCharity > 0) {
-                                    Log.v("CASE", "2");
                                     seekBarCharity.setProgress(progressCharity - diff);
                                 } else if (progressCharity == 0 && diff > 0 && progressArtist > 0) {
-                                    Log.v("CASE", "3");
                                     seekBarArtist.setProgress(progressArtist - diff);
                                 } else if (progressCharity - (diff / 2) < 0) {
-                                    Log.v("CASE", "4");
                                     diff = diff + progressCharity;
                                     seekBarCharity.setProgress(0);
                                     seekBarArtist.setProgress(progressArtist - diff);
                                 } else if (progressArtist - (diff / 2) < 0) {
-                                    Log.v("CASE", "5");
                                     diff = diff + progressArtist;
                                     seekBarArtist.setProgress(0);
                                     seekBarCharity.setProgress(progressCharity - diff);
                                 } else {
-                                    Log.v("CASE", "6");
                                     seekBarArtist.setProgress(progressArtist - (diff / 2));
                                     seekBarCharity.setProgress(progressCharity - (diff / 2));
                                 }
@@ -455,7 +442,6 @@ public class PackPurchaseFragment extends Fragment {
                             double totalValue = artistAmount + charityAmount + developerAmount;
 
                             if (totalValue < amount[0]) {
-                                Log.v("TOTAL VALUE < amount", Double.toString(totalValue));
                                 if (artistAmount > 0) {
                                     artistAmount += amount[0] - totalValue;
                                 } else if (charityAmount > 0) {
@@ -464,7 +450,6 @@ public class PackPurchaseFragment extends Fragment {
                                     developerAmount += amount[0] - totalValue;
                                 }
                             } else if (totalValue > amount[0]) {
-                                Log.v("TOTAL VALUE > amount", Double.toString(totalValue));
                                 if (artistAmount > 0) {
                                     artistAmount -= (totalValue - amount[0]);
                                 } else if (charityAmount > 0) {
@@ -484,25 +469,9 @@ public class PackPurchaseFragment extends Fragment {
                     purchasePack.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            float finalamount = Float.parseFloat(editTextAmount.getText().toString());
+                            finalamount = Float.parseFloat(editTextAmount.getText().toString());
 
-                            Purchase.buyPack(pack.getId(), finalamount, seekBarArtist.getProgress(), seekBarCharity.getProgress(), seekBarDeveloper.getProgress(), new ActiveRecord.OnJSONResponseCallback() {
-                                @Override
-                                public void onJSONResponse(boolean success, Object response, Class<?> classT) throws InvocationTargetException, NoSuchMethodException, java.lang.InstantiationException, IllegalAccessException, JSONException {
-                                    JSONObject obj = (JSONObject) response;
-                                    Toast.makeText(getActivity(), "Purchase OK", Toast.LENGTH_SHORT).show();
-
-                                    Bundle bundle = new Bundle();
-                                    bundle.putInt("pack_id", pack.getId());
-                                    Fragment frg = Fragment.instantiate(getActivity(), redirectClass);
-                                    frg.setArguments(bundle);
-
-                                    FragmentTransaction tx = getActivity().getSupportFragmentManager().beginTransaction();
-                                    tx.replace(R.id.main, frg);
-                                    tx.addToBackStack(null);
-                                    tx.commit();
-                                }
-                            });
+                            onBuyPressed(view);
                         }
                     });
 
@@ -515,5 +484,87 @@ public class PackPurchaseFragment extends Fragment {
         }
 
         return view;
+    }
+
+    public void onBuyPressed(View pressed) {
+
+        // PAYMENT_INTENT_SALE will cause the payment to complete immediately.
+        // Change PAYMENT_INTENT_SALE to
+        //   - PAYMENT_INTENT_AUTHORIZE to only authorize payment and capture funds later.
+        //   - PAYMENT_INTENT_ORDER to create a payment for authorization and capture
+        //     later via calls from your server.
+
+        PayPalPayment payment = new PayPalPayment(new BigDecimal(finalamount), "EUR", pack.getTitle(),
+                PayPalPayment.PAYMENT_INTENT_SALE);
+
+        Intent intent = new Intent(getActivity(), PaymentActivity.class);
+
+        // send the same configuration for restart resiliency
+        intent.putExtra(PayPalService.EXTRA_PAYPAL_CONFIGURATION, config);
+
+        intent.putExtra(PaymentActivity.EXTRA_PAYMENT, payment);
+
+        startActivityForResult(intent, 0);
+    }
+
+
+    @Override
+    public void onActivityResult (int requestCode, int resultCode, Intent data) {
+        if (resultCode == Activity.RESULT_OK) {
+            PaymentConfirmation confirm = data.getParcelableExtra(PaymentActivity.EXTRA_RESULT_CONFIRMATION);
+            if (confirm != null) {
+                try {
+                    Log.i("paymentExample", confirm.toJSONObject().toString(4));
+
+                    JSONObject paypalJSON = confirm.toJSONObject();
+
+                    HashMap<String, String> paypal = new HashMap<String, String>();
+
+                    Log.v("PAYPALID", paypalJSON.getJSONObject("response").get("id").toString());
+
+                    paypal.put("payment_id", paypalJSON.getJSONObject("response").get("id").toString());
+                    paypal.put("payment_method", "");
+                    paypal.put("status", paypalJSON.getJSONObject("response").get("state").toString());
+                    paypal.put("payer_email", "");
+                    paypal.put("payer_first_name", "");
+                    paypal.put("payer_last_name", "");
+                    paypal.put("payer_id", "");
+                    paypal.put("payer_phone", "");
+                    paypal.put("payer_country_code", "");
+                    paypal.put("payer_street", "");
+                    paypal.put("payer_city", "");
+                    paypal.put("payer_postal_code", "");
+                    paypal.put("payer_country_code", "");
+                    paypal.put("payer_recipient_name", "");
+
+                    Purchase.buyPack(pack.getId(), finalamount, seekBarArtist.getProgress(), seekBarCharity.getProgress(), seekBarDeveloper.getProgress(), paypal, new ActiveRecord.OnJSONResponseCallback() {
+                        @Override
+                        public void onJSONResponse(boolean success, Object response, Class<?> classT) throws InvocationTargetException, NoSuchMethodException, java.lang.InstantiationException, IllegalAccessException, JSONException {
+                            JSONObject obj = (JSONObject) response;
+                            Toast.makeText(getActivity(), "Purchase OK", Toast.LENGTH_SHORT).show();
+
+                            Bundle bundle = new Bundle();
+                            bundle.putInt("pack_id", pack.getId());
+                            Fragment frg = Fragment.instantiate(getActivity(), redirectClass);
+                            frg.setArguments(bundle);
+
+                            FragmentTransaction tx = getActivity().getSupportFragmentManager().beginTransaction();
+                            tx.replace(R.id.main, frg);
+                            tx.addToBackStack(null);
+                            tx.commit();
+                        }
+                    });
+
+                } catch (JSONException e) {
+                    Log.e("paymentExample", "an extremely unlikely failure occurred: ", e);
+                }
+            }
+        }
+        else if (resultCode == Activity.RESULT_CANCELED) {
+            Log.i("paymentExample", "The user canceled.");
+        }
+        else if (resultCode == PaymentActivity.RESULT_EXTRAS_INVALID) {
+            Log.i("paymentExample", "An invalid Payment or PayPalConfiguration was submitted. Please see the docs.");
+        }
     }
 }

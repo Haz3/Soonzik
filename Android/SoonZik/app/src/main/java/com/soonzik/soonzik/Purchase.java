@@ -14,6 +14,7 @@ import java.io.UnsupportedEncodingException;
 import java.lang.reflect.InvocationTargetException;
 import java.security.NoSuchAlgorithmException;
 import java.util.Date;
+import java.util.HashMap;
 
 /**
  * Created by kevin_000 on 21/03/2015.
@@ -30,10 +31,11 @@ public class Purchase extends ActiveRecord {
     }
 
 
-    public static void buyCart(final OnJSONResponseCallback callback) {
+    public static void buyCart(HashMap<String, String> paypal, final OnJSONResponseCallback callback) {
         final String className = "Purchase";
         RequestParams params = new RequestParams();
 
+        params.put("paypal", paypal);
         currentUser.getUserSecureKey(params, new User.OnJSONResponseCallback() {
             @Override
             public void onJSONResponse(boolean success, JSONObject response, RequestParams params) throws JSONException, UnsupportedEncodingException, NoSuchAlgorithmException {
@@ -85,7 +87,7 @@ public class Purchase extends ActiveRecord {
         });
     }
 
-    public static void buyPack(int pack_id, float amount, int artist, int association, int website, final OnJSONResponseCallback callback) {
+    public static void buyPack(int pack_id, float amount, int artist, int association, int website, HashMap<String, String> paypal, final OnJSONResponseCallback callback) {
         final String className = "Purchase";
         RequestParams params = new RequestParams();
 
@@ -94,6 +96,7 @@ public class Purchase extends ActiveRecord {
         params.put("artist", Integer.toString(artist));
         params.put("association", Integer.toString(association));
         params.put("website", Integer.toString(website));
+        params.put("paypal", paypal);
 
         currentUser.getUserSecureKey(params, new User.OnJSONResponseCallback() {
             @Override
