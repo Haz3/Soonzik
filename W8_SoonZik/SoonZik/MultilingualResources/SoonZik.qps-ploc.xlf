@@ -6,6 +6,14 @@
     </header>
     <body>
       <group id="Resources">
+        <trans-unit id="Resources\artist_page_txt\Text" translate="yes" xml:space="preserve">
+          <source>Artiste</source>
+          <target state="new">Artiste</target>
+        </trans-unit>
+        <trans-unit id="Resources\total_price_txt\Text" translate="yes" xml:space="preserve">
+          <source>Prix total:</source>
+          <target state="new">Prix total:</target>
+        </trans-unit>
         <trans-unit id="Resources\user_txt\Text" translate="yes" xml:space="preserve">
           <source>Utilisateur</source>
           <target state="new">Utilisateur</target>

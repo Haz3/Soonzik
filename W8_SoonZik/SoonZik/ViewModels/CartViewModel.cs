@@ -32,7 +32,18 @@ namespace SoonZik.ViewModels
 
         public string pp_transac_id { get; set; }
 
+        private double _cart_price;
+        public double cart_price
+        {
+            get { return _cart_price; }
+            set
+            {
+                _cart_price = value;
+                OnPropertyChanged("cart_price");
+            }
+        }
 
+        // Selected Cart
         private Cart _cart;
         public Cart cart
         {
@@ -99,6 +110,7 @@ namespace SoonZik.ViewModels
 
         public async void load_cart()
         {
+            
             Exception exception = null;
             list_cart = new ObservableCollection<Cart>();
             music_visibility = Visibility.Visible;
@@ -109,6 +121,9 @@ namespace SoonZik.ViewModels
                 var list = (List<Cart>)await Http_get.get_object(new List<Cart>(), "carts/my_cart?user_id=" + Singleton.Instance.Current_user.id.ToString() + "&secureKey=" + await Security.getSecureKey(Singleton.Instance.Current_user.id.ToString()));
                 foreach (var item in list)
                     list_cart.Add(item);
+
+                // to get cart price obviously
+                calc_cart_price();
             }
 
             catch (Exception e)
@@ -167,6 +182,8 @@ namespace SoonZik.ViewModels
             {
                 var ret = await Http_get.get_data("carts/destroy?user_id=" + Singleton.Instance.Current_user.id.ToString() + "&secureKey=" + await Security.getSecureKey(Singleton.Instance.Current_user.id.ToString()) + "&id=" + cart.id.ToString());
                 list_cart.Remove(cart);
+
+                calc_cart_price();
                 await new MessageDialog("code = " + ret, "remove cart OK").ShowAsync();
             }
 
@@ -181,7 +198,11 @@ namespace SoonZik.ViewModels
 
         async public void buy_cart()
         {
-
+            if (list_cart.Count() == 0)
+            {
+                await new MessageDialog("Cart is empty").ShowAsync();
+                return;
+            }
             //buy_cart_after_pp_validation();
 
             PayPal.Checkout.BuyNow purchase = new PayPal.Checkout.BuyNow("test_sz_merchant@gmail.com");
@@ -190,10 +211,10 @@ namespace SoonZik.ViewModels
             purchase.Currency = "EUR";
 
             // Use the ItemBuilder to create a new example item
-            PayPal.Checkout.ItemBuilder itemBuilder = new PayPal.Checkout.ItemBuilder("Example Item")
-                .ID("test_250")
-                .Price("2.50")
-                .Description("the item i want to buy loooooooooooool")
+            PayPal.Checkout.ItemBuilder itemBuilder = new PayPal.Checkout.ItemBuilder("W8_PP")
+                .ID("W8_pp")
+                .Price(cart_price.ToString())
+                .Description("")
                 .Quantity(1);
 
             // Add the item to the purchase,
@@ -208,7 +229,7 @@ namespace SoonZik.ViewModels
             });
             purchase.Auth += new EventHandler<PayPal.Checkout.Event.AuthEventArgs>((source, eventArg) =>
             {
-                this.txt_pp = "Auth" + eventArg.Token;
+                this.txt_pp = "Auth: " + eventArg.Token;
             });
             purchase.Start += new EventHandler<PayPal.Checkout.Event.StartEventArgs>((source, eventArg) =>
             {
@@ -228,7 +249,6 @@ namespace SoonZik.ViewModels
 
             // Launch the secure PayPal interface. This is an asynchronous method
             await purchase.Execute();
-
         }
 
         async public void buy_cart_after_pp_validation()
@@ -244,19 +264,18 @@ namespace SoonZik.ViewModels
                     "user_id=" + Singleton.Instance.Current_user.id +
                     "&secureKey=" + secureKey +
                     "&paypal[payment_id]=" + pp_transac_id +
-                    "&paypal[payment_method]=" + "pp" +
-                    "&paypal[status]=" + "lol_status" +
+                    "&paypal[payment_method]=" + "PayPal" +
+                    "&paypal[status]=" + "complete" +
                     "&paypal[payer_email]=" + "test@test.test" +
-                    "&paypal[payer_first_name]=" + "roger" +
-                    "&paypal[payer_last_name]=" + "jean_michel" +
+                    "&paypal[payer_first_name]=" + Singleton.Instance.Current_user.fname +
+                    "&paypal[payer_last_name]=" + Singleton.Instance.Current_user.language +
                     "&paypal[payer_id]=" + "1337" +
                     "&paypal[payer_phone]=" + "0606060606" +
                     "&paypal[payer_country_code]=" + "FR" +
                     "&paypal[payer_street]=" + "69" +
                     "&paypal[payer_city]=" + "Parise" +
                     "&paypal[payer_postal_code]=" + "75000" +
-                    //"&paypal[payer_country_code]=" + "FR" +
-                    "&paypal[payer_recipient_name]=" + "robert";
+                    "&paypal[payer_recipient_name]=" + Singleton.Instance.Current_user.fname;
 
 
                 // HTTP_POST -> URL + DATA
@@ -266,7 +285,8 @@ namespace SoonZik.ViewModels
                 if (json.ToString() == "Created")
                 {
                     // empty cart
-                    list_cart = null;
+                    list_cart.Clear();
+                    cart_price = 0.0;
                     await new MessageDialog("Achat du panier OK").ShowAsync();
                 }
                 else
@@ -279,6 +299,21 @@ namespace SoonZik.ViewModels
 
             if (exception != null)
                 await new MessageDialog(exception.Message, "Achat du panier error").ShowAsync();
+        }
+
+        public void calc_cart_price()
+        {
+            cart_price = 0.0;
+
+            if (list_cart.Count() == 0)
+                cart_price = 0.0;
+            foreach (var item in list_cart)
+            {
+                if (item.albums.Any())
+                    cart_price += item.albums[0].price;
+                if (item.musics.Any())
+                    cart_price += item.musics[0].price;
+            }
         }
     }
 }
