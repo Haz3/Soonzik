@@ -24,7 +24,7 @@
     NSDateFormatter *dateformat = [[NSDateFormatter alloc] init];
     [dateformat setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
     dateformat.timeZone = [NSTimeZone timeZoneForSecondsFromGMT:1];
-    self.date = [dateformat dateFromString:[json objectForKey:@"created_at"]];
+    //self.date = [dateformat dateFromString:[json objectForKey:@"created_at"]];
     
     self.listOfAttachments = [[NSMutableArray alloc] init];
     if ([[json objectForKey:@"attachments"] count] > 0) {

@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Globalization;
-using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Windows.ApplicationModel.Core;
@@ -94,7 +93,8 @@ namespace SoonZik.ViewModel
                     {
                         var stringEncrypt = KeyHelpers.GetUserKeyFromResponse(key);
                         _crypto =
-                            EncriptSha256.EncriptStringToSha256(Singleton.Singleton.Instance().CurrentUser.salt + stringEncrypt);
+                            EncriptSha256.EncriptStringToSha256(Singleton.Singleton.Instance().CurrentUser.salt +
+                                                                stringEncrypt);
                     }
                     var test = post.SendTweet(TextTweet, CurrentUser, _crypto);
                     test.ContinueWith(delegate(Task<string> tmp)
@@ -128,7 +128,7 @@ namespace SoonZik.ViewModel
                     {
                         CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
                             () =>
-                            { 
+                            {
                                 ListTweets.Insert(0, item);
                                 //ListTweets.Add(item);
                             });

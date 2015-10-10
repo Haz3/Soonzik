@@ -5,6 +5,7 @@
 
     <Application.Resources>
         <vm:ViewModelLocator x:Key="Locator" />
+        <vm:ConversationViewModel x:Key="ConversationViewModel"/>
         <vm:MainPageViewModel x:Key="MainPageViewModel" />
         <vm:ConnexionViewModel x:Key="ConnexionViewModel" />
         <vm:MainViewModel x:Key="MainViewModel" />
@@ -24,6 +25,7 @@
         <vm:MyMusicViewModel x:Key="MyMusicViewModel" />
         <vm:BattleDetailViewModel x:Key="BattleDetailViewModel" />
         <vm:PlaylistViewModel x:Key="PlaylistViewModel" />
+        <vm:AboutViewModel x:Key="AboutViewModel"/>
 
         <DataTemplate x:Key="SizePivotHeader">
             <ContentPresenter>
@@ -285,7 +287,20 @@
                 </Setter.Value>
             </Setter>
         </Style>
-
+        <Style x:Key="AProposButtonStyle" TargetType="Button">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Grid Width="198" MaxHeight="50" MinHeight="50" MaxWidth="200" MinWidth="200">
+                            <Image Source="../Resources/Icones/menu_about.png" Height="40" HorizontalAlignment="Left"
+                                   Width="40" />
+                            <ContentPresenter x:Uid="About" Content="" Margin="70,0,0,0" HorizontalAlignment="Left"
+                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
         <Style x:Key="AchatButtonStyle" TargetType="Button">
             <Setter Property="Template">
                 <Setter.Value>
@@ -425,6 +440,36 @@
             </Setter>
         </Style>
 
+        <Style x:Key="ItemContainerStyle" TargetType="ListBoxItem">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ListBoxItem">
+                        <Grid>
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="CommonStates">
+                                    <VisualState x:Name="Normal"/>
+                                </VisualStateGroup>
+                                <VisualStateGroup x:Name="SelectionStates">
+                                    <VisualState x:Name="Unselected">
+                                        <Storyboard>
+                                            <ColorAnimation Duration="0" Storyboard.TargetName="myback" Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)" To="Transparent"/>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="SelectedUnfocused">
+                                        <Storyboard>
+                                            <ColorAnimation Duration="0" Storyboard.TargetName="myback" Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)" To="Transparent"/>
+                                        </Storyboard>
+                                    </VisualState>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                            <Border x:Name="myback" Background="Transparent">
+                                <ContentPresenter Content="{TemplateBinding Content}" ContentTemplate="{TemplateBinding ContentTemplate}"/>
+                            </Border>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
     </Application.Resources>
 </Application>
 

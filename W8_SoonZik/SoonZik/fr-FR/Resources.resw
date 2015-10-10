@@ -396,4 +396,10 @@
   <data name="user_txt.Text" xml:space="preserve">
     <value>Utilisateur</value>
   </data>
+  <data name="total_price_txt.Text" xml:space="preserve">
+    <value>Prix total:</value>
+  </data>
+  <data name="artist_page_txt.Text" xml:space="preserve">
+    <value>Artiste</value>
+  </data>
 </root>

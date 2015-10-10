@@ -18,22 +18,6 @@
     </interactivity:Interaction.Behaviors>
 
     <Page.Resources>
-        <DataTemplate x:Key="PackTemplate">
-            <Grid Width="350">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="80" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="50" />
-                </Grid.ColumnDefinitions>
-                <Image Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left"
-                       Source="../Resources/Icones/MenuPack.png" Height="80" Width="80" />
-                <TextBlock Grid.Column="1" Text="{Binding Path=title}" Margin="15,0,0,0" FontSize="25" />
-                <Image x:ConnectionId='3' Grid.Column="2"                              VerticalAlignment="Center"
-                       HorizontalAlignment="Center" Source="../Resources/Icones/trash.png" Width="50" Height="50" />
-
-            </Grid>
-        </DataTemplate>
-
         <DataTemplate x:Key="MusiqueTemplate">
             <Grid Width="350">
                 <Grid.ColumnDefinitions>
@@ -41,12 +25,9 @@
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="50" />
                 </Grid.ColumnDefinitions>
-                <Image Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left"
-                       Source="../Resources/Icones/profil.jpg" Height="80" Width="80" />
-                <TextBlock Grid.Column="1" Text="{Binding Path=user.username}" Margin="15,0,0,0" FontSize="15" />
-                <TextBlock Grid.Column="1" Text="{Binding Path=duration}" HorizontalAlignment="Right" Margin="0,0,25,0"
-                           FontSize="15" />
-                <TextBlock Grid.Column="1" VerticalAlignment="Bottom" Text="{Binding Path=title}" Margin="20,0,0,0"
+                <Image Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left" Source="../Resources/Icones/profil.jpg" Height="80" Width="80" />
+                <TextBlock Grid.Column="1" Text="{Binding Path=user.username}" Margin="15,0,0,0" FontSize="20" Foreground="White" />
+                <TextBlock Grid.Column="1" VerticalAlignment="Bottom" Text="{Binding Path=title}" Foreground="White"  Margin="20,0,0,0"
                            FontSize="30" />
                 <Image x:ConnectionId='2' Grid.Column="2"                              VerticalAlignment="Center"
                        HorizontalAlignment="Center" Source="../Resources/Icones/trash.png" Width="50" Height="50" />
@@ -62,10 +43,10 @@
                 </Grid.ColumnDefinitions>
                 <Image Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left"
                        Source="../Resources/Icones/MenuPlaylist.png" Height="80" Width="80" />
-                <TextBlock Grid.Column="1" Text="{Binding Path=title}" VerticalAlignment="Top" Margin="15,0,0,0"
+                <TextBlock Grid.Column="1" Text="{Binding Path=title}" Foreground="White"  VerticalAlignment="Top" Margin="15,0,0,0"
                            FontSize="25" />
-                <TextBlock Grid.Column="1" Text="{Binding Path=musics.count}" VerticalAlignment="Center"
-                           Margin="15,0,0,0" FontSize="25" />
+                <TextBlock Grid.Column="1" Text="{Binding Path=user.username}" Foreground="White"  VerticalAlignment="Center"
+                           Margin="15,10,0,0" FontSize="25" />
                 <Image x:ConnectionId='1' x:Name="DeleteItem" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center"
                        Source="../Resources/Icones/trash.png" Width="50" Height="50"                              />
 
@@ -81,7 +62,7 @@
         </Grid.RowDefinitions>
 
         <TextBlock Grid.Row="0" x:Uid="Carts" Text="" FontSize="30" VerticalAlignment="Center"
-                   HorizontalAlignment="Center" />
+                   HorizontalAlignment="Center" Foreground="#1d59a2"/>
 
         <Grid Grid.Row="1">
             <Grid.RowDefinitions>
@@ -110,7 +91,8 @@
             </ListBox>
         </Grid>
 
-        <Button Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center" x:Uid="Buy" Content="" />
+        <Button Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Left" x:Uid="Buy" Content="" Margin="20,0,0,0" Command="{Binding BuyCommand}" />
+        <TextBlock Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Right" FontSize="25" Margin="0,0,20,0" Text="{Binding TotalPrice}"/>
     </Grid>
 </Page>
 

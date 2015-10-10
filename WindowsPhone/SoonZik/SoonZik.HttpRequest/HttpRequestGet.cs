@@ -17,122 +17,148 @@ namespace SoonZik.HttpRequest
         #region Attribute
 
         private const string ApiUrl = "http://soonzikapi.herokuapp.com/";
+
         #endregion
-        
+
         #region Method Get
-        
-            
+
         public async Task<object> FindUser(object myObject, string element)
         {
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(ApiUrl + "users/find?attribute[username]=" + element);
+            var request = (HttpWebRequest) WebRequest.Create(ApiUrl + "users/find?attribute[username]=" + element);
             return await DoRequestForObject(myObject, request);
         }
 
         public async Task<object> GetListObject(object myObject, string element)
         {
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(ApiUrl + element);
+            var request = (HttpWebRequest) WebRequest.Create(ApiUrl + element);
             return await DoRequestForObject(myObject, request);
         }
 
         public async Task<object> GetObject(object myObject, string element, string id)
         {
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(ApiUrl + element + "/" + id);
+            var request = (HttpWebRequest) WebRequest.Create(ApiUrl + element + "/" + id);
             return await DoRequestForObject(myObject, request);
         }
 
         public async Task<object> GetArtist(object myObject, string element, string id)
         {
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(ApiUrl + element + "/" + id + "/" + "isartist");
+            var request = (HttpWebRequest) WebRequest.Create(ApiUrl + element + "/" + id + "/" + "isartist");
             return await DoRequestForObject(myObject, request);
         }
 
         public async Task<object> Search(object myObject, string element)
         {
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(ApiUrl + "search?query=" + element);
+            var request = (HttpWebRequest) WebRequest.Create(ApiUrl + "search?query=" + element);
             return await DoRequestForObject(myObject, request);
         }
 
         public async Task<object> GetUserKey(string id)
         {
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(ApiUrl + "getKey/" + id);
+            var request = (HttpWebRequest) WebRequest.Create(ApiUrl + "getKey/" + id);
             return await DoRequest(request);
         }
 
         public async Task<object> GetSocialToken(string id, string socialNetwork)
         {
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(ApiUrl + "getSocialToken/" + id + "/" + socialNetwork);
+            var request = (HttpWebRequest) WebRequest.Create(ApiUrl + "getSocialToken/" + id + "/" + socialNetwork);
             return await DoRequest(request);
         }
 
         public async Task<object> Find(object myObject, string type, string id)
         {
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(ApiUrl + type + "/find?attribute[user_id]=" + id);
+            var request = (HttpWebRequest) WebRequest.Create(ApiUrl + type + "/find?attribute[user_id]=" + id);
             return await DoRequestForObject(myObject, request);
         }
 
         public async Task<object> GetMusic(string id)
         {
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(ApiUrl + "musics/get/" + id);
+            var request = (HttpWebRequest) WebRequest.Create(ApiUrl + "musics/get/" + id);
             return await DoRequest(request);
         }
 
         public async Task<object> GetFollows(object myObject, string element, string id)
         {
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(ApiUrl + element + "/" + id + "/follows");
+            var request = (HttpWebRequest) WebRequest.Create(ApiUrl + element + "/" + id + "/follows");
             return await DoRequestForObject(myObject, request);
         }
 
         public async Task<object> GetFriends(object myObject, string element, string id)
         {
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(ApiUrl + element + "/" + id + "/friends");
+            var request = (HttpWebRequest) WebRequest.Create(ApiUrl + element + "/" + id + "/friends");
             return await DoRequestForObject(myObject, request);
         }
 
         public async Task<object> GetListenerAroundMe(object myObject, string lat, string lon, string range)
         {
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(ApiUrl + "listenings/around/" + lat + "/" + lon + "/" + range);
+            var request =
+                (HttpWebRequest) WebRequest.Create(ApiUrl + "listenings/around/" + lat + "/" + lon + "/" + range);
             return await DoRequestForObject(myObject, request);
         }
 
         #endregion
 
         #region Method Get Secure
+
         public async Task<object> GetAllMusicForUser(object myObj, string sha256, string id)
         {
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(ApiUrl + "users/getmusics?secureKey=" + sha256 + "&user_id=" + id);
+            var request =
+                (HttpWebRequest) WebRequest.Create(ApiUrl + "users/getmusics?secureKey=" + sha256 + "&user_id=" + id);
             return await DoRequestForObject(myObj, request);
         }
 
         public async Task<object> GetSuggest(object myObject, string sha256, string userId)
         {
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(ApiUrl + "suggest?secureKey=" + sha256 + "&user_id=" + userId);
+            var request =
+                (HttpWebRequest) WebRequest.Create(ApiUrl + "suggest?secureKey=" + sha256 + "&user_id=" + userId);
             return await DoRequestForObject(myObject, request);
         }
 
         public async Task<object> GetItemFromCarts(object myObject, string sha256, User myUser)
         {
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(ApiUrl + "carts/my_cart?secureKey=" + sha256 + "&user_id=" + myUser.id);
+            var request =
+                (HttpWebRequest)
+                    WebRequest.Create(ApiUrl + "carts/my_cart?secureKey=" + sha256 + "&user_id=" + myUser.id);
             return await DoRequestForObject(myObject, request);
         }
 
         public async Task<string> DeleteFromCart(Carts myCart, string sha256, User myUser)
         {
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(ApiUrl + "carts/destroy?id=" + myCart.id + "&secureKey=" + sha256 + "&user_id=" + myUser.id);
+            var request =
+                (HttpWebRequest)
+                    WebRequest.Create(ApiUrl + "carts/destroy?id=" + myCart.id + "&secureKey=" + sha256 + "&user_id=" +
+                                      myUser.id);
             return await DoRequest(request);
         }
 
         public async Task<string> DeletePlaylist(Playlist myPlaylist, string sha256, User myUser)
         {
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(ApiUrl + "playlists/destroy?id=" + myPlaylist.id + "&secureKey=" + sha256 + "&user_id=" + myUser.id);
+            var request =
+                (HttpWebRequest)
+                    WebRequest.Create(ApiUrl + "playlists/destroy?id=" + myPlaylist.id + "&secureKey=" + sha256 +
+                                      "&user_id=" + myUser.id);
             return await DoRequest(request);
         }
 
 
-        public async Task<string> DeleteMusicFromPlaylist(Playlist myPlaylist, Music theMusic,string sha256, User myUser)
+        public async Task<string> DeleteMusicFromPlaylist(Playlist myPlaylist, Music theMusic, string sha256,
+            User myUser)
         {
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(ApiUrl + "musics/delfromplaylist?id=" + theMusic.id + "&playlist_id=" + myPlaylist.id + "&secureKey=" + sha256 + "&user_id=" + myUser.id);
+            var request =
+                (HttpWebRequest)
+                    WebRequest.Create(ApiUrl + "musics/delfromplaylist?id=" + theMusic.id + "&playlist_id=" +
+                                      myPlaylist.id + "&secureKey=" + sha256 + "&user_id=" + myUser.id);
             return await DoRequest(request);
         }
+
+        public async Task<object> GetConversation(User FriendUser, string sha256, User myUser, object myObject)
+        {
+            var request =
+                (HttpWebRequest)
+                    WebRequest.Create(ApiUrl + "messages/conversation/" + FriendUser.id + "?secureKey=" + sha256 +
+                                      "&user_id=" + myUser.id);
+            return await DoRequestForObject(myObject, request);
+        }
+
         #endregion
 
         #region Method Request
@@ -143,8 +169,8 @@ namespace SoonZik.HttpRequest
             request.Accept = "application/json;odata=verbose";
             try
             {
-                var response = (HttpWebResponse)await request.GetResponseAsync();
-                Stream streamResponse = response.GetResponseStream();
+                var response = (HttpWebResponse) await request.GetResponseAsync();
+                var streamResponse = response.GetResponseStream();
                 string data;
                 using (var reader = new StreamReader(streamResponse))
                     data = reader.ReadToEnd();
@@ -153,7 +179,7 @@ namespace SoonZik.HttpRequest
             catch (WebException ex)
             {
                 var reader = new StreamReader(ex.Response.GetResponseStream());
-                string responseString = reader.ReadToEnd();
+                var responseString = reader.ReadToEnd();
                 Debug.WriteLine(responseString);
                 return responseString;
             }
@@ -166,12 +192,12 @@ namespace SoonZik.HttpRequest
             request.Accept = "application/json;odata=verbose";
             try
             {
-                var response = (HttpWebResponse)await request.GetResponseAsync();
-                Stream streamResponse = response.GetResponseStream();
+                var response = (HttpWebResponse) await request.GetResponseAsync();
+                var streamResponse = response.GetResponseStream();
                 string data;
                 using (var reader = new StreamReader(streamResponse))
                     data = reader.ReadToEnd();
-                if (myObject.GetType() == typeof(UserMusic))
+                if (myObject.GetType() == typeof (UserMusic))
                 {
                     var stringJson = JObject.Parse(data).SelectToken("content").ToString();
                     stringJson = JObject.Parse(stringJson).SelectToken("musics").ToString();
@@ -184,9 +210,9 @@ namespace SoonZik.HttpRequest
                     var listPack = JsonConvert.DeserializeObject(stringJson, new List<Pack>().GetType());
 
                     var obj = new UserMusic();
-                    obj.ListMusiques = (List<Music>)listMusic;
-                    obj.ListPack = (List<Pack>)listPack;
-                    obj.ListAlbums = (List<Album>)listAlbum;
+                    obj.ListMusiques = (List<Music>) listMusic;
+                    obj.ListPack = (List<Pack>) listPack;
+                    obj.ListAlbums = (List<Album>) listAlbum;
                     return obj;
                 }
                 else

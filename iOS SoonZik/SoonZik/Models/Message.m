@@ -7,12 +7,50 @@
 //
 
 #import "Message.h"
+#import "User.h"
 
 @implementation Message
 
-+ (id)initWithJsonObject:(NSDictionary *)json
+- (id)initWithJsonObject:(NSDictionary *)json
 {
-    return nil;
+    self = [super init];
+    
+    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+    NSData *data = [prefs objectForKey:@"User"];
+    User *me = (User *)[NSKeyedUnarchiver unarchiveObjectWithData:data];
+    
+    if ([[json objectForKey:@"user_id"] intValue] == me.identifier) {
+        self.fromUser = me;
+        self.fromMe = true;
+    } else {
+        //self.fromUser = [Factory provideObjectWithClassName:@"User" andIdentifier:[[json objectForKey:@"user_id"] intValue]];
+        self.fromUser = [[User alloc] init];
+        self.fromUser.identifier = [[json objectForKey:@"dest_id"] intValue];
+        self.fromMe = false;
+    }
+    
+    self.identifier = [[json objectForKey:@"id"] intValue];
+    self.content = [json objectForKey:@"msg"];
+    self.text = [json objectForKey:@"msg"];
+    
+    if ([[json objectForKey:@"dest_id"] intValue] == me.identifier) {
+        self.toUser = me;
+    } else {
+        self.toUser = [[User alloc] init];
+        self.toUser.identifier = [[json objectForKey:@"dest_id"] intValue];
+    }
+    
+    return self;
+}
+
+- (id)initWithSocket:(NSDictionary *)sock {
+    self = [super init];
+    
+    self.fromMe = false;
+    self.fromUsername = [sock objectForKey:@"from"];
+    self.content = [sock objectForKey:@"message"];
+    
+    return self;
 }
 
 @end

@@ -7,24 +7,17 @@ namespace SoonZik.Helpers
     {
         public InternetConnectionChangedEventArgs(bool isConnected)
         {
-            this._isConnected = isConnected;
+            IsConnected = isConnected;
         }
 
-        private bool _isConnected;
-        public bool IsConnected
-        {
-            get { return _isConnected; }
-        }
+        public bool IsConnected { get; private set; }
     }
 
     public static class Network
     {
-        public static event EventHandler<InternetConnectionChangedEventArgs>
-            InternetConnectionChanged;
-
         static Network()
         {
-            NetworkInformation.NetworkStatusChanged += (s) =>
+            NetworkInformation.NetworkStatusChanged += s =>
             {
                 if (InternetConnectionChanged != null)
                 {
@@ -40,11 +33,13 @@ namespace SoonZik.Helpers
             {
                 var profile = NetworkInformation.GetInternetConnectionProfile();
                 var isConnected = (profile != null
-                    && profile.GetNetworkConnectivityLevel() ==
-                    NetworkConnectivityLevel.InternetAccess);
+                                   && profile.GetNetworkConnectivityLevel() ==
+                                   NetworkConnectivityLevel.InternetAccess);
                 return isConnected;
             }
         }
-    }
 
+        public static event EventHandler<InternetConnectionChangedEventArgs>
+            InternetConnectionChanged;
+    }
 }

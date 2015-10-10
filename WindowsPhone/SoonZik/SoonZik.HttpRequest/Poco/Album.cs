@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Windows.UI.Xaml.Media.Imaging;
 
 namespace SoonZik.HttpRequest.Poco
 {
@@ -16,6 +17,7 @@ namespace SoonZik.HttpRequest.Poco
         public User user { get; set; }
         public List<Description> descriptions { get; set; }
         public List<Genre> genres { get; set; }
+        public BitmapImage imageAlbum { get; set; }
 
         #endregion
     }

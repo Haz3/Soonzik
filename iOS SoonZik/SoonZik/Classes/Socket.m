@@ -80,6 +80,7 @@ static Socket *sharedSocket = nil;    // static instance variable
 - (void)bindEvents {
     [dispatcher bind:@"newMsg" callback:^(id data) {
         NSLog(@"%@", data);
+        [self.delegate messageHasBeenReceived:[[Message alloc] initWithSocket:(NSDictionary *)data]];
     }];
     
     [dispatcher bind:@"onlineFriends" callback:^(id data) {
@@ -94,33 +95,6 @@ static Socket *sharedSocket = nil;    // static instance variable
         NSLog(@"%@", data);
     }];
 }
-
-/*- (void)globalEvent {
-    [dispatcher bind:@"global_event" callback:^(id data) {
-        NSLog(@"Global event: %@", data);
-    }];
-    [dispatcher trigger:@"global_event" data:[self eventDataWithString:@"global_event_test"] success:nil failure:nil];
-}
-
-- (void)nameSpaceEvent {
-    [dispatcher bind:@"namespace.namespace_event" callback:^(id data) {
-        NSLog(@"Namespace event: %@", data);
-    }];
-    [dispatcher trigger:@"namespace.namespace_event" data:[self eventDataWithString:@"namespace.namespace_event_test"] success:nil failure:nil];
-}
-
-- (void)channelEvent {
-    WebSocketRailsChannel *testChannel = [dispatcher subscribe:@"channel_event"];
-    [testChannel bind:@"channel_event" callback:^(id data) {
-        NSLog(@"Channel event: %@", data);
-    }];
-    
-    double delayInSeconds = 4.0;
-    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
-    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-        [testChannel trigger:@"channel_event" message:@"channel_event_test"];
-    });
-}*/
 
 - (void)whoIsOnline {
     NSString *key = [Crypto getKey:self.user.identifier];

@@ -79,6 +79,7 @@
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Constant.cs" />
     <Compile Include="EmailHelper.cs" />
     <Compile Include="EncriptSha256.cs" />
     <Compile Include="FacebookHelper.cs" />

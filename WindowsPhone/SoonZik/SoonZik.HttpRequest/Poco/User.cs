@@ -7,6 +7,7 @@ namespace SoonZik.HttpRequest.Poco
     public class User
     {
         #region Attribute
+
         public int id { get; set; }
         public string email { get; set; }
         public string salt { get; set; }

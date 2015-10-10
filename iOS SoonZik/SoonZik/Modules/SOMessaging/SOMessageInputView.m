@@ -308,6 +308,8 @@
 #pragma mark - Notifications handlers
 - (void)handleKeyboardWillShowNote:(NSNotification *)notification
 {
+    NSLog(@"SHOW KEYBOARD");
+    
     CGRect keyboardRect = [[notification.userInfo objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
     CGRect windowRect = self.window.bounds;
     if (UIInterfaceOrientationIsLandscape([UIApplication sharedApplication].statusBarOrientation)) {
@@ -325,7 +327,7 @@
     
     CGRect frame = self.frame;
     // calculate the absolute ending point (based on the window rather than superview, which could be contained in a tab bar or tool bar)
-    frame.origin.y = windowRect.size.height - frame.size.height - keyboardRect.size.height;
+    frame.origin.y = windowRect.size.height - frame.size.height * 2.4 - keyboardRect.size.height;
     initialInputViewPosYWhenKeyboardIsShown = frame.origin.y;
     
     [self adjustTableViewWithCurve:YES scrollsToBottom:YES];
@@ -333,6 +335,7 @@
     [UIView animateWithDuration:duration animations:^{
         [UIView setAnimationCurve:curve];
         self.frame = frame;
+        NSLog(@"%f", self.frame.origin.y);
     }];
     
     //Closing keyboard on tap

@@ -31,7 +31,10 @@
     NSData *data = [prefs objectForKey:@"User"];
     User *user = (User *)[NSKeyedUnarchiver unarchiveObjectWithData:data];
     
-    self.myImage      = [UIImage imageNamed:user.image];
+    NSString *urlImage1 = [NSString stringWithFormat:@"%@assets/usersImage/avatars/%@", API_URL, user.image];
+    NSData * imageData1 = [[NSData alloc] initWithContentsOfURL: [NSURL URLWithString: urlImage1]];
+    self.myImage = [UIImage imageWithData:imageData1];
+    
     NSString *urlImage = [NSString stringWithFormat:@"%@assets/usersImage/avatars/%@", API_URL, self.friend.image];
     NSData * imageData = [[NSData alloc] initWithContentsOfURL: [NSURL URLWithString: urlImage]];
     self.partnerImage = [UIImage imageWithData:imageData];
@@ -48,24 +51,32 @@
     
     [self loadMessages];
     
+    self.socket = [Socket sharedCenter];
+    self.socket.delegate = self;
+    
     self.view.backgroundColor = DARK_GREY;
+}
+
+- (void)messageHasBeenReceived:(Message *)msg {
+    [self loadMessages];
+    [self refreshMessages];
 }
 
 - (void)loadMessages
 {
-    self.dataSource = [[self generateConversation] mutableCopy];
+    self.messages = [[self generateConversation] mutableCopy];
     
-    NSMutableArray *arr = [MessagesController getMessagesWithFriendId:self.friend.identifier withOffset:0];
+   /* NSMutableArray *arr = [MessagesController getMessagesWithFriendId:self.friend.identifier withOffset:0];
     for (Message *mes in arr) {
         NSLog(@"message : %@", mes.text);
-    }
+    }*/
 }
 
 #pragma mark - SOMessaging data source
-- (NSMutableArray *)messages
+/*- (NSMutableArray *)messages
 {
-    return self.dataSource;
-}
+    return self.messages;
+}*/
 
 - (CGFloat)heightForMessageForIndex:(NSInteger)index
 {
@@ -78,7 +89,8 @@
 
 - (void)configureMessageCell:(SOMessageCell *)cell forMessageAtIndex:(NSInteger)index
 {
-    Message *message = self.dataSource[index];
+    Message *message = self.messages[index];
+    NSLog(@"MESSAGE : %@", message.content);
     
     // Adjusting content for 4pt. (In this demo the width of bubble's tail is 8pt)
     if (!message.fromMe) {
@@ -88,7 +100,12 @@
     }
     
     cell.textView.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:17];
-    cell.textView.textColor = [UIColor whiteColor];
+    if (message.fromMe) {
+        cell.textView.textColor = ORANGE;
+    } else {
+        cell.textView.textColor = BLUE_1;
+    }
+    
     cell.textView.backgroundColor = [UIColor clearColor];
     cell.backgroundColor = [UIColor clearColor];
     
@@ -166,12 +183,12 @@
 
 - (CGSize)userImageSize
 {
-    return CGSizeMake(60, 60);
+    return CGSizeMake(44, 44);
 }
 
 - (CGFloat)balloonMinHeight
 {
-    return 60;
+    return 44;
 }
 
 - (CGFloat)balloonMinWidth
@@ -209,20 +226,11 @@
 - (NSArray *)generateConversation
 {
     NSMutableArray *result = [NSMutableArray new];
-    NSArray *data = [NSArray arrayWithContentsOfURL:[NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"Conversation" ofType:@"plist"]]];
-    for (NSDictionary *msg in data) {
-        Message *message = [[Message alloc] init];
-        message.fromMe = [[msg objectForKey:@"fromMe"] boolValue];
-        message.text = msg[@"message"];
-        message.content = msg[@"message"];
-        message.type = 0;//[self messageTypeFromString:msg[@"type"]];
-        message.date = [NSDate date];
-        
-        int index = (int)[data indexOfObject:msg];
-        if (index > 0) {
-            Message *prevMesage = result.lastObject;
-            message.date = [NSDate dateWithTimeInterval:((index % 2) ? 2 * 24 * 60 * 60 : 120) sinceDate:prevMesage.date];
-        }
+    NSArray *data = [MessagesController getMessagesWithFriendId:self.friend.identifier withOffset:0];
+    for (Message *msg in data) {
+        msg.type = 0;//[self messageTypeFromString:msg[@"type"]];
+        msg.date = [NSDate date];
+        NSLog(@"message.content: %@", msg.content);
         
         /*if (message.type == SOMessageTypePhoto) {
             message.media = UIImageJPEGRepresentation([UIImage imageNamed:msg[@"image"]], 1);
@@ -231,7 +239,7 @@
             message.thumbnail = [UIImage imageNamed:msg[@"thumbnail"]];
         }*/
         
-        [result addObject:message];
+        [result addObject:msg];
     }
     
     return result;

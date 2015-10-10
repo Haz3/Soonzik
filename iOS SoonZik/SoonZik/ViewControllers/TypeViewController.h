@@ -17,13 +17,15 @@
 #import "ShareView.h"
 #import "SocialConnect.h"
 #import "Translate.h"
+#import "Socket.h"
 
-@interface TypeViewController : UIViewController <FinishPlayPlayer, PopUpDetailMusicDelegate, UIActionSheetDelegate>
+@interface TypeViewController : UIViewController <FinishPlayPlayer, PopUpDetailMusicDelegate, UIActionSheetDelegate, MessageReceivedDelegate>
 
 @property (nonatomic, strong) NSUserDefaults *prefs;
 @property (strong, nonatomic) AudioPlayer *player;
 @property (nonatomic, strong) ShareView *shareView;
 @property (nonatomic, strong) Translate *translate;
+
 
 - (void)addBlurEffectOnView:(UIView *)view;
 - (void)removeBlurEffect:(int)tag onView:(UIView *)v;

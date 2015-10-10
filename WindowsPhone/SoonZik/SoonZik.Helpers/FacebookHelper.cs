@@ -8,15 +8,11 @@ namespace SoonZik.Helpers
 {
     public class FaceBookHelper
     {
-        FacebookClient _fb = new FacebookClient();
-        readonly Uri _callbackUri = WebAuthenticationBroker.GetCurrentApplicationCallbackUri();
-        readonly Uri _loginUrl;
-        private const string FacebookAppId = "383777021829578";//Enter your FaceBook App ID here  
+        private const string FacebookAppId = "383777021829578"; //Enter your FaceBook App ID here  
         private const string FacebookPermissions = "user_about_me,read_stream,publish_actions";
-        public string AccessToken
-        {
-            get { return _fb.AccessToken; }
-        }
+        private readonly Uri _callbackUri = WebAuthenticationBroker.GetCurrentApplicationCallbackUri();
+        private readonly FacebookClient _fb = new FacebookClient();
+        private readonly Uri _loginUrl;
 
         public FaceBookHelper()
         {
@@ -28,8 +24,14 @@ namespace SoonZik.Helpers
                 display = "popup",
                 response_type = "token"
             });
-            Debug.WriteLine(_callbackUri);//This is useful for fill Windows Store ID in Facebook WebSite  
+            Debug.WriteLine(_callbackUri); //This is useful for fill Windows Store ID in Facebook WebSite  
         }
+
+        public string AccessToken
+        {
+            get { return _fb.AccessToken; }
+        }
+
         private void ValidateAndProccessResult(WebAuthenticationResult result)
         {
             if (result.ResponseStatus == WebAuthenticationStatus.Success)
@@ -41,13 +43,15 @@ namespace SoonZik.Helpers
                     _fb.AccessToken = facebookOAuthResult.AccessToken;
             }
             else if (result.ResponseStatus == WebAuthenticationStatus.ErrorHttp)
-            {// error de http  
+            {
+// error de http  
             }
             else
             {
-                _fb.AccessToken = null;//Keep null when user signout from facebook  
+                _fb.AccessToken = null; //Keep null when user signout from facebook  
             }
         }
+
         public void LoginAndContinue()
         {
             WebAuthenticationBroker.AuthenticateAndContinue(_loginUrl);

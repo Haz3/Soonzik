@@ -14,7 +14,6 @@ using SoonZik.HttpRequest;
 using SoonZik.HttpRequest.Poco;
 using SoonZik.Utils;
 using SoonZik.Views;
-using News = SoonZik.Views.News;
 
 namespace SoonZik.ViewModel
 {
@@ -166,7 +165,8 @@ namespace SoonZik.ViewModel
                 try
                 {
                     var stringJson = JObject.Parse(res).SelectToken("content").ToString();
-                    Singleton.Singleton.Instance().CurrentUser = JsonConvert.DeserializeObject(stringJson, typeof (User)) as User;
+                    Singleton.Singleton.Instance().CurrentUser =
+                        JsonConvert.DeserializeObject(stringJson, typeof (User)) as User;
                     Singleton.Singleton.Instance().CurrentUser.profilImage =
                         new BitmapImage(
                             new Uri(

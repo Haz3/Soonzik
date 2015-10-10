@@ -6,7 +6,6 @@ using System.Windows.Input;
 using Windows.ApplicationModel.Core;
 using Windows.ApplicationModel.Resources;
 using Windows.UI.Core;
-using Windows.UI.Xaml.Media.Imaging;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using SoonZik.Controls;
@@ -37,6 +36,7 @@ namespace SoonZik.ViewModel
         #endregion
 
         #region Attribute
+
         private const string UrlImage = "http://soonzikapi.herokuapp.com/assets/usersImage/avatars/";
 
         private string _buttonFriendText;
@@ -268,7 +268,8 @@ namespace SoonZik.ViewModel
                 {
                     var stringEncrypt = KeyHelpers.GetUserKeyFromResponse(key);
                     var cryptographic =
-                        EncriptSha256.EncriptStringToSha256(Singleton.Singleton.Instance().CurrentUser.salt + stringEncrypt);
+                        EncriptSha256.EncriptStringToSha256(Singleton.Singleton.Instance().CurrentUser.salt +
+                                                            stringEncrypt);
                     if (_follow)
                         Unfollow(post, cryptographic, get);
                     else if (!_follow)

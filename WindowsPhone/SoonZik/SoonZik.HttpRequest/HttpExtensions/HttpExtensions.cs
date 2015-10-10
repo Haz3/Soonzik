@@ -12,13 +12,13 @@ namespace SoonZik.HttpRequest.HttpExtensions
             {
                 try
                 {
-                    HttpWebRequest responseRequest = (HttpWebRequest)asyncResponse.AsyncState;
-                    HttpWebResponse theResponse = (HttpWebResponse)responseRequest.EndGetResponse(asyncResponse);
+                    var responseRequest = (HttpWebRequest) asyncResponse.AsyncState;
+                    var theResponse = (HttpWebResponse) responseRequest.EndGetResponse(asyncResponse);
                     taskComplete.TrySetResult(theResponse);
                 }
                 catch (WebException e)
                 {
-                    var failedResponse = (HttpWebResponse)e.Response;
+                    var failedResponse = (HttpWebResponse) e.Response;
                     taskComplete.TrySetResult(failedResponse);
                 }
             }, request);

@@ -324,4 +324,34 @@
   <data name="Description.PlaceholderText" xml:space="preserve">
     <value>Description</value>
   </data>
+  <data name="About.Content" xml:space="preserve">
+    <value>About</value>
+  </data>
+  <data name="Comment.PlaceholderText" xml:space="preserve">
+    <value>Comment*</value>
+  </data>
+  <data name="Dev.Text" xml:space="preserve">
+    <value>Developer : Baudry Gery</value>
+  </data>
+  <data name="ErrorAbout" xml:space="preserve">
+    <value>Please fill out all fields completely.</value>
+  </data>
+  <data name="Feedback.Text" xml:space="preserve">
+    <value>Feedback</value>
+  </data>
+  <data name="InfoAddress.Text" xml:space="preserve">
+    <value>Address</value>
+  </data>
+  <data name="InfoGeneral.Text" xml:space="preserve">
+    <value>General Information</value>
+  </data>
+  <data name="Object.PlaceholderText" xml:space="preserve">
+    <value>Object*</value>
+  </data>
+  <data name="Site.Text" xml:space="preserve">
+    <value>Site : www.SoonZik.com</value>
+  </data>
+  <data name="Version.Text" xml:space="preserve">
+    <value>Version : 1.0.3</value>
+  </data>
 </root>

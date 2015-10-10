@@ -24,7 +24,7 @@
 #import "AlbumViewController.h"
 #import "SimplePopUp.h"
 #import "ShareActionSheet.h"
-
+#import "MessagePopUp.h"
 
 @interface TypeViewController ()
 
@@ -70,6 +70,19 @@
     NSLog(@"self.player.repeatLevel : %i", self.player.repeatingLevel);
     
     [self refreshThePlayerPreview];
+    
+    [Socket sharedCenter].delegate = self;
+    
+}
+
+- (void)messageHasBeenReceived:(Message *)msg {
+    NSLog(@"message.content: %@", msg.content);
+    NSLog(@"message.fromUsername: %@", msg.fromUsername);
+    MessagePopUp *popUp = (MessagePopUp *)[[[NSBundle mainBundle] loadNibNamed:@"MessagePopUp" owner:self options:nil] firstObject];
+    [self.view addSubview:popUp];
+    popUp.usernameLabel.text = msg.fromUsername;
+    popUp.contentLabel.text = msg.content;
+    [popUp initView];
 }
 
 - (void)presentLeftMenuViewController {

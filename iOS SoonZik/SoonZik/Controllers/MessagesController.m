@@ -8,6 +8,7 @@
 
 #import "MessagesController.h"
 #import "User.h"
+#import "Message.h"
 #import "Crypto.h"
 
 @implementation MessagesController
@@ -25,13 +26,13 @@
     url = [NSString stringWithFormat:@"%@messages/conversation/%i?user_id=%i&secureKey=%@&offset=%i", API_URL, userID, user.identifier, secureKey, offset];
     
     NSDictionary *json = [Request getRequest:url];
-    NSLog(@"json messages : %@", json);
-   // NSMutableArray *array = [[NSMutableArray alloc] init];
-   // for (NSDictionary *dic in [json objectForKey:@"content"]) {
-   //     [array addObject:[[Cart alloc] initWithJsonObject:dic]];
-   // }
+    //NSLog(@"json messages : %@", json);
+    NSMutableArray *array = [[NSMutableArray alloc] init];
+    for (NSDictionary *dic in [json objectForKey:@"content"]) {
+        [array addObject:[[Message alloc] initWithJsonObject:dic]];
+    }
 
-    return messages;
+    return array;
 }
 
 @end

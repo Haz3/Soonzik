@@ -121,7 +121,7 @@
             i++;
         }
     
-    unsigned int unitFlags = NSCalendarUnitDay | NSCalendarUnitMinute | NSCalendarUnitSecond | NSCalendarUnitHour;
+    /*unsigned int unitFlags = NSCalendarUnitDay | NSCalendarUnitMinute | NSCalendarUnitSecond | NSCalendarUnitHour;
     NSDateComponents *conversionInfo = [[[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian] components:unitFlags fromDate:news.date   toDate:[NSDate date]  options:0];
     
     int seconds = [conversionInfo second];
@@ -144,7 +144,7 @@
     } else if (days > 1) {
         
         cell.dateLabel.text = [NSString stringWithFormat:@"Il y a %i jours", days];
-    }
+    }*/
 
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
 

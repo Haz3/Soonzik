@@ -143,7 +143,8 @@ namespace SoonZik.ViewModel
                 {
                     var stringEncrypt = KeyHelpers.GetUserKeyFromResponse(key);
                     var cryptographic =
-                        EncriptSha256.EncriptStringToSha256(Singleton.Singleton.Instance().CurrentUser.salt + stringEncrypt);
+                        EncriptSha256.EncriptStringToSha256(Singleton.Singleton.Instance().CurrentUser.salt +
+                                                            stringEncrypt);
                     UploadImage(name, contentType, bitmapImage, cryptographic);
                 }
             });
@@ -205,13 +206,11 @@ namespace SoonZik.ViewModel
                     {
                         var stringEncrypt = KeyHelpers.GetUserKeyFromResponse(key);
                         _crypto =
-                            EncriptSha256.EncriptStringToSha256(Singleton.Singleton.Instance().CurrentUser.salt + stringEncrypt);
+                            EncriptSha256.EncriptStringToSha256(Singleton.Singleton.Instance().CurrentUser.salt +
+                                                                stringEncrypt);
                     }
                     var test = post.Update(CurrentUser, _crypto);
-                    test.ContinueWith(delegate(Task<string> tmp)
-                    {
-                        var res = tmp.Result;
-                    });
+                    test.ContinueWith(delegate(Task<string> tmp) { var res = tmp.Result; });
                 });
             }
             catch (Exception)

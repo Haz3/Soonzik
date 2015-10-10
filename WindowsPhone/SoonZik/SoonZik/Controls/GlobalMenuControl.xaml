@@ -14,7 +14,7 @@
         <Style x:Key="MenuStyle" TargetType="Grid">
             <Setter Property="Background">
                 <Setter.Value>
-                    <ImageBrush ImageSource="../Resources/background.jpg" Opacity="0.5"/>
+                    <ImageBrush ImageSource="../Resources/background.jpg" Opacity="0.5" />
                 </Setter.Value>
             </Setter>
         </Style>
@@ -149,12 +149,12 @@
         </Grid>
 
         <Grid x:Name="MenuGrid" Grid.Row="1" HorizontalAlignment="Left" Margin="-300,0,0,0" Width="300"
-               RenderTransformOrigin="0.5,0.5">
+              RenderTransformOrigin="0.5,0.5">
             <Grid.RenderTransform>
                 <CompositeTransform />
             </Grid.RenderTransform>
             <Grid.RowDefinitions>
-                <RowDefinition Height="*" />
+                <RowDefinition Height="50" />
                 <RowDefinition Height="50" />
                 <RowDefinition Height="50" />
                 <RowDefinition Height="50" />
@@ -167,34 +167,32 @@
                 <RowDefinition Height="50" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
-            <Button x:Name="ProfilButton" Grid.Row="1" Style="{StaticResource ProfilButtonStyle}" MinHeight="50"
+            <Button x:Name="ProfilButton" Grid.Row="0" Style="{StaticResource ProfilButtonStyle}" MinHeight="50"
                     MinWidth="200" />
-            <Button x:Name="NewsButton" Grid.Row="2" Style="{StaticResource NewsButtonStyle}" MinHeight="50"
+            <Button x:Name="NewsButton" Grid.Row="1" Style="{StaticResource NewsButtonStyle}" MinHeight="50"
                     MinWidth="200" />
-            <Button x:Name="ExplorerButton" Grid.Row="3" Style="{StaticResource ExplorerButtonStyle}" MinHeight="50"
+            <Button x:Name="ExplorerButton" Grid.Row="2" Style="{StaticResource ExplorerButtonStyle}" MinHeight="50"
                     MinWidth="200" />
-            <Button x:Name="PacksButton" Grid.Row="4" Style="{StaticResource PackButtonStyle}" MinHeight="50"
+            <Button x:Name="PacksButton" Grid.Row="3" Style="{StaticResource PackButtonStyle}" MinHeight="50"
                     MinWidth="200" />
-            <Button x:Name="MondeMusicalButton" Grid.Row="5" Style="{StaticResource MondeMusicalButtonStyle}"
+            <Button x:Name="MondeMusicalButton" Grid.Row="4" Style="{StaticResource MondeMusicalButtonStyle}"
                     MinHeight="50" MinWidth="200" />
-            <Button x:Name="BattleButton" Grid.Row="6" Style="{StaticResource BattleButtonStyle}" MinHeight="50"
+            <Button x:Name="BattleButton" Grid.Row="5" Style="{StaticResource BattleButtonStyle}" MinHeight="50"
                     MinWidth="200" />
-            <Button x:Name="PlaylistButton" Grid.Row="7" Style="{StaticResource PlaylistButtonStyle}" MinHeight="50"
+            <Button x:Name="PlaylistButton" Grid.Row="6" Style="{StaticResource PlaylistButtonStyle}" MinHeight="50"
                     MinWidth="200" />
-            <Button x:Name="AmisButton" Grid.Row="8" Style="{StaticResource FriendButtonStyle}" MinHeight="50"
+            <Button x:Name="AmisButton" Grid.Row="7" Style="{StaticResource FriendButtonStyle}" MinHeight="50"
                     MinWidth="200" />
-            <Button x:Name="AchatButton" Grid.Row="9" Style="{StaticResource AchatButtonStyle}" MinHeight="50"
+            <Button x:Name="AchatButton" Grid.Row="8" Style="{StaticResource AchatButtonStyle}" MinHeight="50"
+                    MinWidth="200" />
+            <Button x:Name="APropos" Grid.Row="9" Style="{StaticResource AProposButtonStyle}" MinHeight="50"
                     MinWidth="200" />
             <Button x:Name="ConnexionButton" Grid.Row="10" Style="{StaticResource DecoButtonStyle}" MinHeight="50"
                     MinWidth="200" />
-
-            <!--<ListView x:Name="MenuListView" ItemTemplate="{StaticResource MenuListItemTemplate}" SelectedItem="{Binding SelectedBouttonMenu, Mode=TwoWay}">
-                
-            </ListView>-->
-
         </Grid>
 
-        <Grid x:Name="SearchGrid" Grid.Row="1" Width="300" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Right" Margin="0,0,-300,0">
+        <Grid x:Name="SearchGrid" Grid.Row="1" Width="300" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Right"
+              Margin="0,0,-300,0">
             <Grid.RenderTransform>
                 <CompositeTransform />
             </Grid.RenderTransform>

@@ -9,12 +9,14 @@
 #import <UIKit/UIKit.h>
 #import "SOMessagingViewController.h"
 #import "User.h"
+#import "Socket.h"
 
-@interface ChatViewController : SOMessagingViewController
+@interface ChatViewController : SOMessagingViewController <MessageReceivedDelegate>
 
-@property (strong, nonatomic) NSMutableArray *dataSource;
+@property (strong, nonatomic) NSMutableArray *messages;
 @property (strong, nonatomic) UIImage *myImage;
 @property (strong, nonatomic) UIImage *partnerImage;
 @property (strong, nonatomic) User *friend;
+@property (strong, nonatomic) Socket *socket;
 
 @end

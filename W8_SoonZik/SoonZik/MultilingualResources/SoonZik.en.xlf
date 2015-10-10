@@ -6,6 +6,14 @@
     </header>
     <body>
       <group id="Resources">
+        <trans-unit id="Resources\artist_page_txt\Text" translate="yes" xml:space="preserve">
+          <source>Artiste</source>
+          <target state="final">Artist</target>
+        </trans-unit>
+        <trans-unit id="Resources\total_price_txt\Text" translate="yes" xml:space="preserve">
+          <source>Prix total:</source>
+          <target state="final">Total price:</target>
+        </trans-unit>
         <trans-unit id="Resources\user_txt\Text" translate="yes" xml:space="preserve">
           <source>Utilisateur</source>
           <target state="final">User</target>
@@ -141,7 +149,7 @@
         </trans-unit>
         <trans-unit id="Resources\follow_list_txt\Text" translate="yes" xml:space="preserve">
           <source>Liste des personnes suivies</source>
-          <target state="needs-review-translation" state-qualifier="mt-suggestion">List of followed people</target>
+          <target state="translated">Follows list</target>
         </trans-unit>
         <trans-unit id="Resources\follow_txt\Text" translate="yes" xml:space="preserve">
           <source>Suivre une personne</source>
