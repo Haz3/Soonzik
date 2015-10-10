@@ -138,10 +138,6 @@ class Purchase < ActiveRecord::Base
 				end
 				purchasedItems << obj
 			end
-
-	  	cart.each do |cartItem|
-	  		cartItem.destroy
-	  	end
 			return purchasedItems if (getPurchasedObject)
 			return items if (getObjects)
 			return true
