@@ -337,10 +337,6 @@ relation and the validation Can provide some features linked to this model</p>
                               <span class="ruby-keyword">end</span>
                               <span class="ruby-identifier">purchasedItems</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">obj</span>
                       <span class="ruby-keyword">end</span>
-
-             <span class="ruby-identifier">cart</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">cartItem</span><span class="ruby-operator">|</span>
-                     <span class="ruby-identifier">cartItem</span>.<span class="ruby-identifier">destroy</span>
-             <span class="ruby-keyword">end</span>
                       <span class="ruby-keyword">return</span> <span class="ruby-identifier">purchasedItems</span> <span class="ruby-keyword">if</span> (<span class="ruby-identifier">getPurchasedObject</span>)
                       <span class="ruby-keyword">return</span> <span class="ruby-identifier">items</span> <span class="ruby-keyword">if</span> (<span class="ruby-identifier">getObjects</span>)
                       <span class="ruby-keyword">return</span> <span class="ruby-keyword">true</span>
