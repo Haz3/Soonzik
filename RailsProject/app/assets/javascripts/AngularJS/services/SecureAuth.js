@@ -31,7 +31,7 @@ SoonzikApp.factory('SecureAuth', ['$http', '$routeParams', '$location', '$cookie
             user.token = $cookies.get("user_token");
           }
 
-          if (last_update == null || (last_update + 280) * 1000 < d.getTime() || last_key == null) {
+          if (last_update == null || (last_update + 280000) < d.getTime() || last_key == null) {
             isUsed = true;
             /*
              * If we need a valid token
@@ -42,7 +42,7 @@ SoonzikApp.factory('SecureAuth', ['$http', '$routeParams', '$location', '$cookie
     		    	var key_obj = new jsSHA(user.token + json.data.key, "TEXT");
     					var key = key_obj.getHash("SHA-256", "HEX");
               
-              last_update = Math.floor(d.getTime() / 1000);
+              last_update = Date.parse(json.data.last_update);
               last_key = key;
     		    	
     		    	securedFunctionSuccess(key, user.id);
