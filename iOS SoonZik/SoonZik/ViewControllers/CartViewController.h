@@ -10,8 +10,9 @@
 #import "Cart.h"
 #import "Translate.h"
 #import "CartItemTableViewCell.h"
+#import "PayPalMobile.h"
 
-@interface CartViewController : TypeViewController <UITableViewDataSource, UITableViewDelegate>
+@interface CartViewController : TypeViewController <UITableViewDataSource, UITableViewDelegate, PayPalPaymentDelegate>
 
 @property (nonatomic, strong) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) NSArray *carts;

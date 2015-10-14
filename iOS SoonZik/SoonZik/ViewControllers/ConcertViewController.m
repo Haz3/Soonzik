@@ -90,6 +90,7 @@
         }
     }
     
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.textLabel.font = SOONZIK_FONT_BODY_SMALL;
     
     

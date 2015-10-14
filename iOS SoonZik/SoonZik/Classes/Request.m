@@ -13,7 +13,7 @@
 + (NSDictionary *)getRequest:(NSString *)url {
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
     NSString* encodedUrl = [url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-    NSLog(@"url : %@", encodedUrl);
+    //NSLog(@"url : %@", encodedUrl);
     [request setURL:[NSURL URLWithString:encodedUrl]];
     [request setHTTPMethod:@"GET"];
     //[request setValue:@"" forHTTPHeaderField:@"Content-Length"];
@@ -37,7 +37,7 @@
     NSString *postLength = [NSString stringWithFormat:@"%d", [postData length]];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
     NSString* encodedUrl = [url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-    NSLog(@"url : %@ /!\ post : %@", encodedUrl, post);
+    //NSLog(@"url : %@ /!\ post : %@", encodedUrl, post);
     [request setURL:[NSURL URLWithString:encodedUrl]];
     [request setHTTPMethod:@"POST"];
     [request setValue:postLength forHTTPHeaderField:@"Content-Length"];

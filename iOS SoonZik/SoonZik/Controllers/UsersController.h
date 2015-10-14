@@ -10,11 +10,11 @@
 #import "User.h"
 #import "Address.h"
 #import <AssetsLibrary/AssetsLibrary.h>
-#import "BoughtContent.h"
 #import "User.h"
 #import "Music.h"
 #import "Album.h"
 #import "Pack.h"
+#import "BoughtContent.h"
 
 @interface UsersController : NSObject
 

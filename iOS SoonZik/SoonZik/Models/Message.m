@@ -23,7 +23,6 @@
         self.fromUser = me;
         self.fromMe = true;
     } else {
-        //self.fromUser = [Factory provideObjectWithClassName:@"User" andIdentifier:[[json objectForKey:@"user_id"] intValue]];
         self.fromUser = [[User alloc] init];
         self.fromUser.identifier = [[json objectForKey:@"dest_id"] intValue];
         self.fromMe = false;

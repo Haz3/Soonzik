@@ -178,5 +178,25 @@
 	<string>Successfully added in your cart</string>
 	<key>add_to_cart_error</key>
 	<string>An error occured during the add</string>
+	<key>cart_empty</key>
+	<string>Your cart is empty</string>
+	<key>cart_error_delete</key>
+	<string>An error occured during the removing</string>
+	<key>cart_success_delete</key>
+	<string>The item has been successfuly deleted</string>
+	<key>pack_average_message</key>
+	<string>If you spend more or the same amount as the other users, you will own all the content of this pack</string>
+	<key>pack_average</key>
+	<string>The average is %.2f€</string>
+	<key>payment_title_success</key>
+	<string>Successfull Payment</string>
+	<key>payment_message_success</key>
+	<string>Your payment has been successfully accomplished. You can go in the &quot;Explorer&quot; section to listen you favorite songs.</string>
+	<key>let_message_to_followers</key>
+	<string>Let a message to your followers</string>
+	<key>tweet_sended</key>
+	<string>Tweet sended</string>
+	<key>tweet_sended_error</key>
+	<string>The tweet hasn&apos;t been sent</string>
 </dict>
 </plist>

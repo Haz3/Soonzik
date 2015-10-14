@@ -93,4 +93,24 @@
     return array;
 }
 
++ (BOOL)buyCart {
+    NSString *url, *key, *conca, *secureKey, *post;
+    NSData *data = [[NSUserDefaults standardUserDefaults] objectForKey:@"User"];
+    User *user = (User *)[NSKeyedUnarchiver unarchiveObjectWithData:data];
+    
+    key = [Crypto getKey:user.identifier];
+    conca = [NSString stringWithFormat:@"%@%@", user.salt, key];
+    secureKey = [Crypto sha256HashFor:conca];
+    url = [NSString stringWithFormat:@"%@purchases/buycart", API_URL];
+    post = [NSString stringWithFormat:@"user_id=%i&secureKey=%@", user.identifier, secureKey];
+    
+    NSDictionary *json = [Request postRequest:post url:url];
+    NSLog(@"%@", json);
+    
+    if ([[json objectForKey:@"code"] intValue] == 201)
+        return true;
+    
+    return false;
+}
+
 @end
