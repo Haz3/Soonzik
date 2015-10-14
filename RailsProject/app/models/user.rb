@@ -253,6 +253,7 @@ class User < ActiveRecord::Base
 
     self.idAPI = key
     self.secureKey = generateHash(self.salt, key)
+    self.token_update = Time.now
   end
 
   # Static function to create the hash of the secureKey
@@ -382,6 +383,7 @@ class User < ActiveRecord::Base
     self.regenerateKey() if defined?(self.password) && self.password != nil
     self.birthday = Time.new(1900,1,1).to_s(:db) if (self.birthday == nil)
     self.language = "EN" if (self.language == nil)
+    self.token_update = Time.now
     self.skip_confirmation!
   end
 

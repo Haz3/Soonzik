@@ -14,7 +14,6 @@ using SoonZik.Controls;
 using SoonZik.Helpers;
 using SoonZik.HttpRequest;
 using SoonZik.HttpRequest.Poco;
-using SoonZik.Utils;
 using SoonZik.Views;
 
 namespace SoonZik.ViewModel
@@ -57,7 +56,8 @@ namespace SoonZik.ViewModel
                 {
                     var stringEncrypt = KeyHelpers.GetUserKeyFromResponse(_key);
                     _cryptographic =
-                        EncriptSha256.EncriptStringToSha256(Singleton.Singleton.Instance().CurrentUser.salt + stringEncrypt);
+                        EncriptSha256.EncriptStringToSha256(Singleton.Singleton.Instance().CurrentUser.salt +
+                                                            stringEncrypt);
 
                     var listAlbumTmp = request.GetAllMusicForUser(new UserMusic(), _cryptographic,
                         Singleton.Singleton.Instance().CurrentUser.id.ToString());
@@ -235,7 +235,8 @@ namespace SoonZik.ViewModel
                                         try
                                         {
                                             var userKey2 =
-                                                request.GetUserKey(Singleton.Singleton.Instance().CurrentUser.id.ToString());
+                                                request.GetUserKey(
+                                                    Singleton.Singleton.Instance().CurrentUser.id.ToString());
                                             userKey2.ContinueWith(delegate(Task<object> task2)
                                             {
                                                 var key2 = task2.Result as string;
@@ -244,7 +245,8 @@ namespace SoonZik.ViewModel
                                                     var stringEncrypt = KeyHelpers.GetUserKeyFromResponse(key2);
                                                     _crypto =
                                                         EncriptSha256.EncriptStringToSha256(
-                                                            Singleton.Singleton.Instance().CurrentUser.salt + stringEncrypt);
+                                                            Singleton.Singleton.Instance().CurrentUser.salt +
+                                                            stringEncrypt);
                                                 }
                                                 var up = post.UpdatePlaylist(playList, MusicForPlaylist, _crypto,
                                                     Singleton.Singleton.Instance().CurrentUser);
@@ -291,7 +293,8 @@ namespace SoonZik.ViewModel
                 {
                     var stringEncrypt = KeyHelpers.GetUserKeyFromResponse(_key);
                     _cryptographic =
-                        EncriptSha256.EncriptStringToSha256(Singleton.Singleton.Instance().CurrentUser.salt + stringEncrypt);
+                        EncriptSha256.EncriptStringToSha256(Singleton.Singleton.Instance().CurrentUser.salt +
+                                                            stringEncrypt);
 
                     var resDel = request.DeletePlaylist(SelectedPlaylist, _cryptographic,
                         Singleton.Singleton.Instance().CurrentUser);

@@ -2,6 +2,8 @@ SoonzikApp.factory('SecureAuth', ['$http', '$routeParams', '$location', '$cookie
 
 	var url = "lvh.me:3000";
   var isUsed = false;
+  var last_update = null;
+  var last_key = null;
 
   return {
       getCurrentUser: function () {
@@ -10,8 +12,8 @@ SoonzikApp.factory('SecureAuth', ['$http', '$routeParams', '$location', '$cookie
       		user.id = $cookies.get("user_id");
       	if (typeof $cookies.get("user_token") !== "undefined")
       		user.token = $cookies.get("user_token");
-      	if (typeof $cookies.get("user_username") !== "undefined")
-      		user.username = $cookies.get("user_username");
+        if (typeof $cookies.get("user_username") !== "undefined")
+          user.username = $cookies.get("user_username");
       	return user;
       },
       securedTransaction: function(securedFunctionSuccess, securedFunctionError) {
@@ -21,23 +23,40 @@ SoonzikApp.factory('SecureAuth', ['$http', '$routeParams', '$location', '$cookie
             that.securedTransaction(securedFunctionSuccess, securedFunctionError);
           }, 500);
         } else {
-          isUsed = true;
-        	var user = { id: null, token: null }
-        	if (typeof $cookies.get("user_id") !== "undefined" &&
-        			typeof $cookies.get("user_token") !== "undefined") {
-  	        user.id = $cookies.get("user_id");
-  	      	user.token = $cookies.get("user_token");
+          d = new Date();
+          var user = { id: null, token: null }
+          if (typeof $cookies.get("user_id") !== "undefined" &&
+              typeof $cookies.get("user_token") !== "undefined") {
+            user.id = $cookies.get("user_id");
+            user.token = $cookies.get("user_token");
           }
-  		    $http.get("http://api." + url + '/getKey/' + user.id).then(function (json) {
-            isUsed = false;
-  		    	var key_obj = new jsSHA(user.token + json.data.key, "TEXT");
-  					var key = key_obj.getHash("SHA-256", "HEX");
-  		    	
-  		    	securedFunctionSuccess(key, user.id);
-  		    }, function(error) {
-            isUsed = false;
-            securedFunctionError(error);
-          });
+
+          if (last_update == null || (last_update + 280000) < d.getTime() || last_key == null) {
+            isUsed = true;
+            /*
+             * If we need a valid token
+             */
+    		    $http.get("http://api." + url + '/getKey/' + user.id).then(function (json) {
+              isUsed = false;
+
+    		    	var key_obj = new jsSHA(user.token + json.data.key, "TEXT");
+    					var key = key_obj.getHash("SHA-256", "HEX");
+              
+              last_update = Date.parse(json.data.last_update);
+              last_key = key;
+    		    	
+    		    	securedFunctionSuccess(key, user.id);
+    		    }, function(error) {
+              isUsed = false;
+              securedFunctionError(error);
+            });
+            /********************************/
+          } else {
+            /*
+             * If we have a valid token
+             */
+            securedFunctionSuccess(last_key, user.id);
+          }
         }
       },
       getLanguage: function() {

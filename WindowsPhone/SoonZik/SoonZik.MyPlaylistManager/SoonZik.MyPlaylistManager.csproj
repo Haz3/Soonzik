@@ -80,6 +80,14 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
+    <ProjectReference Include="..\SoonZik.Helpers\SoonZik.Helpers.csproj">
+      <Project>{88596864-9B34-4163-8424-091C5DF907CE}</Project>
+      <Name>SoonZik.Helpers</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SoonZik.HttpRequest\SoonZik.HttpRequest.csproj">
+      <Project>{9DB6A4A8-C6B5-4C81-8991-8AA40DA71A52}</Project>
+      <Name>SoonZik.HttpRequest</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\SoonZik\Utils\Constants.cs">

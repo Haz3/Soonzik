@@ -9,7 +9,6 @@ using GalaSoft.MvvmLight.Command;
 using SoonZik.Helpers;
 using SoonZik.HttpRequest;
 using SoonZik.HttpRequest.Poco;
-using SoonZik.Utils;
 
 namespace SoonZik.ViewModel
 {
@@ -258,7 +257,8 @@ namespace SoonZik.ViewModel
                 {
                     var stringEncrypt = KeyHelpers.GetUserKeyFromResponse(key);
                     var cryptographic =
-                        EncriptSha256.EncriptStringToSha256(Singleton.Singleton.Instance().CurrentUser.salt + stringEncrypt);
+                        EncriptSha256.EncriptStringToSha256(Singleton.Singleton.Instance().CurrentUser.salt +
+                                                            stringEncrypt);
                     Vote(post, cryptographic, get, artistId);
                 }
             });

@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Windows.Input;
 using Windows.ApplicationModel.Resources;
-using Windows.Phone.UI.Input;
 using Windows.UI.Popups;
-using Windows.UI.Xaml.Media.Imaging;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Ioc;
@@ -116,12 +114,6 @@ namespace SoonZik.ViewModel
         {
             CurrentUser = UserFromButton;
             CurrentUser.image = new Uri(UrlImage + CurrentUser.image, UriKind.RelativeOrAbsolute).ToString();
-        }
-
-        private void HardwareButtonsOnBackPressed(object sender, BackPressedEventArgs backPressedEventArgs)
-        {
-            backPressedEventArgs.Handled = true;
-            Navigation.GoBack();
         }
 
         #endregion

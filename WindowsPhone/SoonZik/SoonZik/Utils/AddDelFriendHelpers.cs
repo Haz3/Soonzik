@@ -26,7 +26,8 @@ namespace SoonZik.Utils
                 {
                     var stringEncrypt = KeyHelpers.GetUserKeyFromResponse(key);
                     var cryptographic =
-                        EncriptSha256.EncriptStringToSha256(Singleton.Singleton.Instance().CurrentUser.salt + stringEncrypt);
+                        EncriptSha256.EncriptStringToSha256(Singleton.Singleton.Instance().CurrentUser.salt +
+                                                            stringEncrypt);
                     if (!friend)
                         AddFriend(post, cryptographic, get, id);
                     else

@@ -11,7 +11,6 @@ using SoonZik.Annotations;
 using SoonZik.Helpers;
 using SoonZik.HttpRequest;
 using SoonZik.HttpRequest.Poco;
-using SoonZik.Utils;
 using SoonZik.ViewModel;
 using SoonZik.Views;
 
@@ -88,7 +87,8 @@ namespace SoonZik.Controls
                 {
                     var stringEncrypt = KeyHelpers.GetUserKeyFromResponse(key2);
                     _cryptographic =
-                        EncriptSha256.EncriptStringToSha256(Singleton.Singleton.Instance().CurrentUser.salt + stringEncrypt);
+                        EncriptSha256.EncriptStringToSha256(Singleton.Singleton.Instance().CurrentUser.salt +
+                                                            stringEncrypt);
                 }
                 var res = post.SaveCart(_selectedMusic, null, _cryptographic, Singleton.Singleton.Instance().CurrentUser);
                 res.ContinueWith(delegate(Task<string> tmp2)
@@ -120,7 +120,8 @@ namespace SoonZik.Controls
                     {
                         var stringEncrypt = KeyHelpers.GetUserKeyFromResponse(_key);
                         _cryptographic =
-                            EncriptSha256.EncriptStringToSha256(Singleton.Singleton.Instance().CurrentUser.salt + stringEncrypt);
+                            EncriptSha256.EncriptStringToSha256(Singleton.Singleton.Instance().CurrentUser.salt +
+                                                                stringEncrypt);
 
                         var resDel = request.DeleteMusicFromPlaylist(ThePlaylist, _selectedMusic, _cryptographic,
                             Singleton.Singleton.Instance().CurrentUser);

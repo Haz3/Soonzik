@@ -3,6 +3,7 @@
     public class Address
     {
         #region Attributes
+
         public int Id { get; set; }
         public string NumberStreet { get; set; }
         public object Complement { get; set; }
@@ -12,6 +13,7 @@
         public string Zipcode { get; set; }
         public string CreatedAt { get; set; }
         public string UpdatedAt { get; set; }
+
         #endregion
     }
 }

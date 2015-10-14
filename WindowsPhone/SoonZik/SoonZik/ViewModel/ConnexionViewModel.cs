@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.ObjectModel;
 using System.Windows.Input;
 using Windows.ApplicationModel.Activation;
 using Windows.ApplicationModel.Core;
@@ -15,9 +16,9 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using SoonZik.Helpers;
 using SoonZik.HttpRequest;
+using SoonZik.HttpRequest.Poco;
 using SoonZik.Utils;
 using SoonZik.Views;
-using News = SoonZik.Views.News;
 using User = SoonZik.HttpRequest.Poco.User;
 
 namespace SoonZik.ViewModel
@@ -86,6 +87,7 @@ namespace SoonZik.ViewModel
         public ConnexionViewModel()
         {
             ProgressOn = false;
+            Singleton.Singleton.Instance().SelectedMusicSingleton = new ObservableCollection<Music>();
             Navigation = new NavigationService();
             ConnexionCommand = new RelayCommand(MakeConnexion);
             FacebookTapped = new RelayCommand(MakeFacebookConnection);
@@ -155,11 +157,12 @@ namespace SoonZik.ViewModel
                 try
                 {
                     var stringJson = JObject.Parse(res).SelectToken("content").ToString();
-                    Singleton.Singleton.Instance().CurrentUser = JsonConvert.DeserializeObject(stringJson, typeof (User)) as User;
+                    Singleton.Singleton.Instance().CurrentUser =
+                        JsonConvert.DeserializeObject(stringJson, typeof (User)) as User;
                     Singleton.Singleton.Instance().CurrentUser.profilImage =
                         new BitmapImage(
                             new Uri(
-                                "http://soonzikapi.herokuapp.com/assets/usersImage/avatars/" +
+                                Constant.UrlImageUser +
                                 Singleton.Singleton.Instance().CurrentUser.image, UriKind.RelativeOrAbsolute));
 
                     ServiceLocator.Current.GetInstance<MyNetworkViewModel>().UpdateFriend();

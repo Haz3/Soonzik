@@ -1,5 +1,4 @@
-﻿using System;
-using System.Globalization;
+﻿using System.Globalization;
 using Windows.System.UserProfile;
 using GalaSoft.MvvmLight;
 using SoonZik.HttpRequest.Poco;
@@ -29,7 +28,7 @@ namespace SoonZik.ViewModel
         #endregion
 
         #region Attribute
-        
+
         public News SelectNews { get; set; }
         private string _newsContent;
 

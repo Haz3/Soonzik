@@ -4,8 +4,8 @@
     {
         public static string GetUserKeyFromResponse(string key)
         {
-            char[] delimiter = { ' ', '"', '{', '}' };
-            string[] word = key.Split(delimiter);
+            char[] delimiter = {' ', '"', '{', '}'};
+            var word = key.Split(delimiter);
             var stringEncrypt = (word[4]);
             return stringEncrypt;
         }

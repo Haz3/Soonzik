@@ -9,9 +9,15 @@
     xmlns:core="using:Microsoft.Xaml.Interactions.Core"
     mc:Ignorable="d"
     xmlns:toolkit="using:Coding4Fun.Toolkit.Controls"
+    xmlns:ratingControl="using:JISoft.RatingControl"
     DataContext="{StaticResource AlbumViewModel}"
     Background="#424242">
 
+    <interactivity:Interaction.Behaviors>
+        <core:EventTriggerBehavior EventName="Loaded">
+            <core:InvokeCommandAction Command="{Binding SelectionCommand}" />
+        </core:EventTriggerBehavior>
+    </interactivity:Interaction.Behaviors>
 
     <Page.Resources>
         <DataTemplate x:Key="ComTemplate">
@@ -21,54 +27,66 @@
         </DataTemplate>
 
         <DataTemplate x:Key="MusicTemplate">
-            <Grid Height="70" Margin="20,0,0,0" Tapped="UIElement_OnTapped">
-                <Border BorderThickness="0,0,0,1" Width="350" BorderBrush="White" />
-                <TextBlock x:Name="MusicTitle" Text="{Binding Path=title}" FontSize="25" Margin="20,0,0,0" />
-                <TextBlock x:Name="ArtistNameList" Text="{Binding Path=user.Username}" FontSize="15"
-                           VerticalAlignment="Bottom" Margin="20,0,0,10" />
-
+            <Grid Height="70" Margin="20,0,0,0">
+                <Border BorderThickness="0,0,0,1" Width="350" BorderBrush="#7bc2fa" />
+                <TextBlock x:Name="MusicTitle" Text="{Binding Path=title}" Foreground="#40a8e2" FontSize="25"
+                           Margin="50,0,0,0" />
+                <ratingControl:Rating Height="25" Width="125" Margin="50,10,0,0" VerticalAlignment="Bottom"
+                                      HorizontalAlignment="Left" ReadOnly="True" Background="Transparent"
+                                      RatingItemCount="5" Value="{Binding Path=getAverageNote, Mode=TwoWay}">
+                    <ratingControl:Rating.FilledItemStyle>
+                        <Style TargetType="ratingControl:RatingItem">
+                            <Setter Property="Background" Value="Goldenrod" />
+                        </Style>
+                    </ratingControl:Rating.FilledItemStyle>
+                    <ratingControl:Rating.UnfilledItemStyle>
+                        <Style TargetType="ratingControl:RatingItem">
+                            <Setter Property="Background" Value="Gray" />
+                        </Style>
+                    </ratingControl:Rating.UnfilledItemStyle>
+                </ratingControl:Rating>
                 <Image x:Name="MoreOption" Source="../Resources/Icones/menu.png" Height="30"
-                       Tapped="MoreOption_OnTapped"
-                       VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,20,0" />
+                       Tapped="MoreOption_OnTapped" VerticalAlignment="Center" HorizontalAlignment="Right"
+                       Margin="0,0,20,0" />
+                <Image x:Name="PlayImage" Source="../Resources/Icones/play.png" Height="30" Tapped="PlayImage_OnTapped"
+                       VerticalAlignment="Center" HorizontalAlignment="Left" />
             </Grid>
         </DataTemplate>
     </Page.Resources>
 
-    <interactivity:Interaction.Behaviors>
-        <core:EventTriggerBehavior EventName="Loaded">
-            <core:InvokeCommandAction Command="{Binding SelectionCommand}" />
-        </core:EventTriggerBehavior>
-    </interactivity:Interaction.Behaviors>
-
     <Grid x:Name="GlobalGrid">
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
-            <RowDefinition Height="350" />
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
         <Grid Grid.Row="0">
-            <Image Name="AlbumImage" Source="ms-appx:///Resources/Icones/MenuExplorer.png" Width="100" Height="100"
-                   HorizontalAlignment="Center" VerticalAlignment="Top" />
+            <Image Name="AlbumImage" Width="100" Height="100" HorizontalAlignment="Center" VerticalAlignment="Top">
+                <Image.Source>
+                    <BitmapImage UriSource="{Binding TheAlbum.image}" />
+                </Image.Source>
+            </Image>
 
-            <TextBlock x:Name="AlbumTitle" Text="{Binding TheAlbum.title}" FontSize="30" VerticalAlignment="Center"
+            <TextBlock x:Name="AlbumTitle" Text="{Binding TheAlbum.title}" FontSize="30" Foreground="#40a8e2"
+                       VerticalAlignment="Center"
                        HorizontalAlignment="Center" />
 
-            <TextBlock x:Name="ArtistName" Text="{Binding TheAlbum.user.username}" FontSize="20"
+            <TextBlock x:Name="ArtistName" Text="{Binding TheAlbum.user.username}" FontSize="20" Foreground="#40a8e2"
                        VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,80,0,0" />
 
-            <Button VerticalAlignment="Center" HorizontalAlignment="Center" x:Uid="GoToCard" Content=""
-                    Command="{Binding AddToCart}"
-                    Margin="0,200,0,0" />
+            <Button VerticalAlignment="Bottom" HorizontalAlignment="Center" x:Uid="GoToCard" Content=""
+                    Command="{Binding AddToCart}" />
         </Grid>
 
         <Pivot Grid.Row="1" x:Name="PivotGlobal" HeaderTemplate="{StaticResource SizeHeaderGlobalPivot}"
                Foreground="Transparent" RenderTransformOrigin="0.5,0.5" Style="{StaticResource PivotStyle1}"
                Margin="0,20,0,0">
             <PivotItem x:Uid="MusicPivot" Header="">
-                <ListBox Background="Transparent" Grid.Row="1" x:Name="MusicListView"
+                <ListBox Background="Transparent" Grid.Row="1" x:Name="MusicListView" IsTapEnabled="False"
                          ItemsSource="{Binding ListMusics}"
                          ItemTemplate="{StaticResource MusicTemplate}"
-                         SelectedItem="{Binding SelectedMusic, Mode=TwoWay}" />
+                         SelectedItem="{Binding SelectedMusic, Mode=TwoWay}"
+                         ItemContainerStyle="{StaticResource ItemContainerStyle}" />
             </PivotItem>
 
             <PivotItem x:Uid="SocialPivot" Header="">

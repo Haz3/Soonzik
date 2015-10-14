@@ -227,6 +227,7 @@ namespace SoonZik.Controls
             AmisButton.Command = new RelayCommand(GoToAmis);
             AchatButton.Command = new RelayCommand(GoToAchat);
             ConnexionButton.Command = new RelayCommand(GoToConnexionPage);
+            APropos.Command = new RelayCommand(GoToAbout);
         }
 
         private void HardwareButtonsOnBackPressed(object sender, BackPressedEventArgs e)
@@ -339,15 +340,9 @@ namespace SoonZik.Controls
             SetChildren(new MyNetwork());
         }
 
-        public static void SetChildren(UIElement myObj)
+        private void GoToAbout()
         {
-            //if (myObj.GetType() != typeof(Playlist))
-            // PlaylistAdd.Visibility = Visibility.Collapsed;
-            Singleton.Singleton.Instance().LastElement = MyGrid.Children.First();
-            _lastElement = MyGrid.Children.LastOrDefault();
-            MyGrid.Children.Clear();
-            MyGrid.Children.Add(myObj);
-            CloseMenu();
+            SetChildren(new AboutView());
         }
 
         private void GoToAchat()
@@ -358,6 +353,17 @@ namespace SoonZik.Controls
         private void GoToConnexionPage()
         {
             _navigationService.Navigate(typeof (Connexion));
+        }
+
+        public static void SetChildren(UIElement myObj)
+        {
+            //if (myObj.GetType() != typeof(Playlist))
+            // PlaylistAdd.Visibility = Visibility.Collapsed;
+            Singleton.Singleton.Instance().LastElement = MyGrid.Children.First();
+            _lastElement = MyGrid.Children.LastOrDefault();
+            MyGrid.Children.Clear();
+            MyGrid.Children.Add(myObj);
+            CloseMenu();
         }
 
         #endregion
@@ -445,7 +451,6 @@ namespace SoonZik.Controls
         {
             AlbumViewModel.MyAlbum = SelectedMusic.album;
             SetChildren(new AlbumView());
-            CloseMenu();
         }
 
         private void AlbumStackPanel_OnTapped(object sender, TappedRoutedEventArgs e)

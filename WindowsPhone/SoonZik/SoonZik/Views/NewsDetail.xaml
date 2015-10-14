@@ -18,7 +18,7 @@
         </Grid.RowDefinitions>
 
         <Grid Grid.Row="0">
-            <Image VerticalAlignment="Center" Source="{Binding SelectNews.attachments[0].url}"/>
+            <Image VerticalAlignment="Center" Source="{Binding SelectNews.attachments[0].url}" />
         </Grid>
         <Grid Grid.Row="1">
             <TextBlock Foreground="White" Text="{Binding NewsTitle}" VerticalAlignment="Center"
@@ -26,15 +26,15 @@
         </Grid>
         <Grid Grid.Row="2">
             <ScrollViewer>
-                <TextBlock Foreground="White" VerticalAlignment="Top" FontSize="15" Text="{Binding NewsContent}" 
-                       TextWrapping="Wrap"/>
+                <TextBlock Foreground="White" VerticalAlignment="Top" FontSize="15" Text="{Binding NewsContent}"
+                           TextWrapping="Wrap" />
             </ScrollViewer>
         </Grid>
         <Grid Grid.Row="3">
             <TextBlock Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="15"
-                       Text="{Binding SelectNews.user.username}" Margin="10,0,0,0"/>
+                       Text="{Binding SelectNews.user.username}" Margin="10,0,0,0" />
             <TextBlock Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Right" FontSize="15"
-                       Text="{Binding SelectNews.created_at}" Margin="0,0,10,0"/>
+                       Text="{Binding SelectNews.created_at}" Margin="0,0,10,0" />
         </Grid>
     </Grid>
 </Page>
