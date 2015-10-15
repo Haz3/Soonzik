@@ -267,7 +267,7 @@
   <data name="Association.Text" xml:space="preserve">
     <value>Association</value>
   </data>
-  <data name="GoToCard.Content" xml:space="preserve">
+  <data name="GoToCard.Text" xml:space="preserve">
     <value>Ajouter au panier</value>
   </data>
   <data name="Price.Text" xml:space="preserve">
@@ -306,7 +306,7 @@
   <data name="EndBattle.Text" xml:space="preserve">
     <value>La battle est terminee</value>
   </data>
-  <data name="AddToPlaylist.Content" xml:space="preserve">
+  <data name="AddToPlaylist.Text" xml:space="preserve">
     <value>Ajouter a la playlist</value>
   </data>
   <data name="Carts.Text" xml:space="preserve">
@@ -318,7 +318,7 @@
   <data name="CreatePlaylist.Content" xml:space="preserve">
     <value>Creer une playlist</value>
   </data>
-  <data name="DelFromPlaylist.Content" xml:space="preserve">
+  <data name="DelFromPlaylist.Text" xml:space="preserve">
     <value>Supprimer de la playlist</value>
   </data>
   <data name="Description.PlaceholderText" xml:space="preserve">
@@ -353,5 +353,11 @@
   </data>
   <data name="Version.Text" xml:space="preserve">
     <value>Version : 1.0.3</value>
+  </data>
+  <data name="AssociationPivot.Header" xml:space="preserve">
+    <value>Association</value>
+  </data>
+  <data name="InfluencePivot.Header" xml:space="preserve">
+    <value>Influences</value>
   </data>
 </root>

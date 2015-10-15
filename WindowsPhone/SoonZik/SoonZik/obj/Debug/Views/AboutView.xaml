@@ -14,11 +14,11 @@
             <RowDefinition Height="100" />
             <RowDefinition Height="100" />
             <RowDefinition Height="*" />
-            <RowDefinition Height="50"/>
+            <RowDefinition Height="50" />
         </Grid.RowDefinitions>
 
         <Grid Grid.Row="0">
-            <Image Source="../Resources/Logo_SoonZik.png"></Image>
+            <Image Source="../Resources/Logo_SoonZik.png" />
         </Grid>
 
         <Grid Grid.Row="1">
@@ -27,9 +27,10 @@
                 <RowDefinition Height="*" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
-            <TextBlock Grid.Row="0" VerticalAlignment="Center" Foreground="#40a8e2" FontSize="25" x:Uid="Version" Text=""/>
-            <TextBlock Grid.Row="1" VerticalAlignment="Center" Foreground="#40a8e2" FontSize="25" x:Uid="Dev" Text=""/>
-            <TextBlock Grid.Row="2" VerticalAlignment="Center" Foreground="#40a8e2" FontSize="25" x:Uid="Site" Text=""/>
+            <TextBlock Grid.Row="0" VerticalAlignment="Center" Foreground="#40a8e2" FontSize="25" x:Uid="Version"
+                       Text="" />
+            <TextBlock Grid.Row="1" VerticalAlignment="Center" Foreground="#40a8e2" FontSize="25" x:Uid="Dev" Text="" />
+            <TextBlock Grid.Row="2" VerticalAlignment="Center" Foreground="#40a8e2" FontSize="25" x:Uid="Site" Text="" />
         </Grid>
 
         <ScrollViewer Grid.Row="2">
@@ -42,14 +43,21 @@
                     <RowDefinition Height="*" />
                     <RowDefinition Height="60" />
                 </Grid.RowDefinitions>
-                <TextBlock Grid.Row="0" Foreground="#1d59a2" FontSize="25" HorizontalAlignment="Center" VerticalAlignment="Center" x:Uid="Feedback" Text=""/>
-                <TextBox Grid.Row="1" Background="Transparent" Foreground="#40a8e2" BorderThickness="0,0,0,0" x:Uid="Email" PlaceholderText="" Text="{Binding Email, Mode=TwoWay}"/>
-                <TextBox Grid.Row="2" Background="Transparent" Foreground="#40a8e2" BorderThickness="0,0,0,0" x:Uid="Username" PlaceholderText="" Text="{Binding Username, Mode=TwoWay}"/>
-                <TextBox Grid.Row="3" Background="Transparent" Foreground="#40a8e2" BorderThickness="0,0,0,0" x:Uid="Object" PlaceholderText="" Text="{Binding Object, Mode=TwoWay}"/>
-                <TextBox Grid.Row="4" Height="100" Background="Transparent" Foreground="#40a8e2" BorderThickness="0,0,0,0" x:Uid="Comment"  PlaceholderText="" Text="{Binding Comment, Mode=TwoWay}"/>
+                <TextBlock Grid.Row="0" Foreground="#1d59a2" FontSize="25" HorizontalAlignment="Center"
+                           VerticalAlignment="Center" x:Uid="Feedback" Text="" />
+                <TextBox Grid.Row="1" Background="Transparent" Foreground="#40a8e2" BorderThickness="0,0,0,0"
+                         x:Uid="Email" PlaceholderText="" Text="{Binding Email, Mode=TwoWay}" />
+                <TextBox Grid.Row="2" Background="Transparent" Foreground="#40a8e2" BorderThickness="0,0,0,0"
+                         x:Uid="Username" PlaceholderText="" Text="{Binding Username, Mode=TwoWay}" />
+                <TextBox Grid.Row="3" Background="Transparent" Foreground="#40a8e2" BorderThickness="0,0,0,0"
+                         x:Uid="Object" PlaceholderText="" Text="{Binding Object, Mode=TwoWay}" />
+                <TextBox Grid.Row="4" Height="100" Background="Transparent" Foreground="#40a8e2"
+                         BorderThickness="0,0,0,0" x:Uid="Comment" PlaceholderText=""
+                         Text="{Binding Comment, Mode=TwoWay}" />
             </Grid>
         </ScrollViewer>
-        <Button Grid.Row="3" x:Uid="Send" Content="" Foreground="#1d59a2" Width="200" HorizontalAlignment="Center" VerticalAlignment="Center" Command="{Binding SendCommand}"/>
+        <Button Grid.Row="3" x:Uid="Send" Content="" Foreground="#1d59a2" Width="200" HorizontalAlignment="Center"
+                VerticalAlignment="Center" Command="{Binding SendCommand}" />
     </Grid>
 </Page>
 

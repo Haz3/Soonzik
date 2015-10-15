@@ -512,6 +512,7 @@ C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\obj\Debug\Vi
 C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\obj\Debug\Views\ProfilUser.g.i.cs
 C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\obj\Debug\Views\ProfilUser.g.cs
 C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\obj\Debug\XamlTypeInfo.g.cs
+C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\obj\Debug\App.xaml
 C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\obj\Debug\Controls\BackgroundAudioPlayer.xaml
 C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\obj\Debug\Controls\ButtonFriendPopUp.xaml
 C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\obj\Debug\Controls\Genre.xaml
@@ -533,6 +534,7 @@ C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\obj\Debug\Vi
 C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\obj\Debug\Views\ProfilFriendView.xaml
 C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\obj\Debug\Views\BattleView.xaml
 C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\obj\Debug\Views\Connexion.xaml
+C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\obj\Debug\Views\Conversation.xaml
 C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\obj\Debug\Views\Explorer.xaml
 C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\obj\Debug\Views\MyNetwork.xaml
 C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\obj\Debug\Views\MainView.xaml
@@ -542,6 +544,7 @@ C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\obj\Debug\Vi
 C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\obj\Debug\Views\MyMusic.xaml
 C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\obj\Debug\Views\ProfilArtiste.xaml
 C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\obj\Debug\Views\ProfilUser.xaml
+C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\obj\Debug\App.xbf
 C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\obj\Debug\Controls\BackgroundAudioPlayer.xbf
 C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\obj\Debug\Controls\ButtonFriendPopUp.xbf
 C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\obj\Debug\Controls\Genre.xbf
@@ -563,6 +566,7 @@ C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\obj\Debug\Vi
 C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\obj\Debug\Views\ProfilFriendView.xbf
 C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\obj\Debug\Views\BattleView.xbf
 C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\obj\Debug\Views\Connexion.xbf
+C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\obj\Debug\Views\Conversation.xbf
 C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\obj\Debug\Views\Explorer.xbf
 C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\obj\Debug\Views\MyNetwork.xbf
 C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\obj\Debug\Views\MainView.xbf
@@ -573,10 +577,6 @@ C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\obj\Debug\Vi
 C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\obj\Debug\Views\ProfilArtiste.xbf
 C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\obj\Debug\Views\ProfilUser.xbf
 C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\obj\Debug\XamlSaveStateFile.xml
-C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\obj\Debug\App.xaml
-C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\obj\Debug\Views\Conversation.xaml
-C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\obj\Debug\App.xbf
-C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\obj\Debug\Views\Conversation.xbf
 C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\obj\Debug\SoonZik.exe
 C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\obj\Debug\SoonZik.pdb
 C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\obj\Debug\Microsoft.Practices.ServiceLocation\en-US\Microsoft.Practices.ServiceLocation.Properties.Resources.resw

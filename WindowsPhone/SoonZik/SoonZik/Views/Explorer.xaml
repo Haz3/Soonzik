@@ -7,32 +7,45 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:core="using:Microsoft.Xaml.Interactions.Core"
     xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
+    xmlns:ratingControl="using:JISoft.RatingControl"
     mc:Ignorable="d"
     DataContext="{StaticResource ExplorerViewModel}"
     Background="#424242">
 
     <Page.Resources>
-        <DataTemplate x:Key="GenreTemplate">
+        <DataTemplate x:Key="InfluencesTemplate">
             <StackPanel Margin="0,0,0,30">
-                <TextBlock Text="{Binding Path=style_name}" Style="{StaticResource TitleTextBlockStyle}" />
+                <TextBlock Text="{Binding Path=name}" Style="{StaticResource TitleTextBlockStyle}" />
             </StackPanel>
         </DataTemplate>
 
         <DataTemplate x:Key="MusicTemplate">
-            <Grid Width="350" Tapped="UIElement_OnTapped">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="80" />
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
-                <Image Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left"
-                       Source="../Resources/Icones/profil.jpg" Height="80" Width="80" />
-                <TextBlock Grid.Column="1" Text="{Binding Path=user.username}" Foreground="White" Margin="15,0,0,0"
-                           FontSize="15" />
-                <TextBlock Grid.Column="1" Text="{Binding Path=duration}" Foreground="White"
-                           HorizontalAlignment="Right" Margin="0,0,25,0"
-                           FontSize="15" />
-                <TextBlock Grid.Column="1" VerticalAlignment="Bottom" Text="{Binding Path=title}" Margin="20,0,0,0"
-                           FontSize="25" Foreground="White" />
+            <Grid Height="70" Margin="0,0,0,0" Tapped="UIElement_OnTapped">
+                <Border BorderThickness="0,0,0,1" Width="350" BorderBrush="#7bc2fa" />
+                <TextBlock x:Name="MusicTitle" Text="{Binding Path=title}" Foreground="#40a8e2" FontSize="25"
+                           Margin="50,0,0,0" />
+                <ratingControl:Rating Height="25" Width="125" Margin="50,10,0,0" VerticalAlignment="Bottom"
+                                      HorizontalAlignment="Left" ReadOnly="True" Background="Transparent"
+                                      RatingItemCount="5" Value="{Binding Path=getAverageNote, Mode=TwoWay}">
+                    <ratingControl:Rating.FilledItemStyle>
+                        <Style TargetType="ratingControl:RatingItem">
+                            <Setter Property="Background" Value="Goldenrod" />
+                        </Style>
+                    </ratingControl:Rating.FilledItemStyle>
+                    <ratingControl:Rating.UnfilledItemStyle>
+                        <Style TargetType="ratingControl:RatingItem">
+                            <Setter Property="Background" Value="Gray" />
+                        </Style>
+                    </ratingControl:Rating.UnfilledItemStyle>
+                </ratingControl:Rating>
+                <Image x:Name="PlayImage" Source="../Resources/Icones/play.png" Height="30" Tapped="PlayImage_OnTapped"
+                       VerticalAlignment="Center" HorizontalAlignment="Left" />
+                <FlyoutBase.AttachedFlyout>
+                    <MenuFlyout>
+                        <MenuFlyoutItem Text="Add to playlist"/>
+                        <MenuFlyoutItem Text="Add to cart"/>
+                    </MenuFlyout>
+                </FlyoutBase.AttachedFlyout>
             </Grid>
         </DataTemplate>
 
@@ -53,9 +66,9 @@
     <Grid>
         <Pivot x:Name="PivotGlobal" HeaderTemplate="{StaticResource SizeHeaderGlobalPivot}" Foreground="Transparent"
                RenderTransformOrigin="0.5,0.5" Style="{StaticResource PivotStyle1}">
-            <PivotItem x:Uid="GenrePivot" Header="">
-                <ListBox Background="Transparent" x:Name="ListBoxGenre" ItemsSource="{Binding ListGenres}"
-                         ItemTemplate="{StaticResource GenreTemplate}" />
+            <PivotItem x:Uid="InfluencePivot" Header="">
+                <ListBox Background="Transparent" x:Name="ListBoxGenre" ItemsSource="{Binding ListInfluences}"
+                         ItemTemplate="{StaticResource InfluencesTemplate}" />
             </PivotItem>
 
             <PivotItem x:Uid="MusicPivot" Header="">

@@ -362,9 +362,6 @@
     <AppxPackagedFile Include="C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\bin\Debug\Views\AboutView.xbf">
       <PackagePath>Views\AboutView.xbf</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\bin\Debug\Views\PlaylistView.xbf">
-      <PackagePath>Views\PlaylistView.xbf</PackagePath>
-    </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\bin\Debug\Views\AlbumView.xbf">
       <PackagePath>Views\AlbumView.xbf</PackagePath>
     </AppxPackagedFile>
@@ -379,6 +376,9 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\bin\Debug\Views\InscriptionView.xbf">
       <PackagePath>Views\InscriptionView.xbf</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\bin\Debug\Views\PlaylistView.xbf">
+      <PackagePath>Views\PlaylistView.xbf</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\bin\Debug\Views\ProfilFriendView.xbf">
       <PackagePath>Views\ProfilFriendView.xbf</PackagePath>

@@ -33,5 +33,10 @@ namespace SoonZik.Views
             var vm = DataContext as ExplorerViewModel;
             if (vm != null) vm.MusiCommand.Execute(null);
         }
+
+        private void PlayImage_OnTapped(object sender, TappedRoutedEventArgs e)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

@@ -21,21 +21,25 @@
     <Page.Resources>
         <DataTemplate x:Key="MessageDataTemplate">
             <local:MessageTemplateSelector Content="{Binding}">
-                <local:MessageTemplateSelector.Recu>
+                <local:MessageTemplateSelector.Recu >
                     <DataTemplate>
-                        <controls:ChatBubble ChatBubbleDirection="UpperLeft" HorizontalAlignment="Left" Background="#7bc2fa">
-                            <StackPanel>
-                                <TextBlock x:Name="Message" Text="{Binding Path=msg}" Foreground="White" TextWrapping="Wrap" FontSize="20"/>
-                            </StackPanel>
+                        <controls:ChatBubble  ChatBubbleDirection="UpperLeft" HorizontalContentAlignment="Right"
+                                             Background="#7bc2fa">
+                            <Grid>
+                                <TextBlock x:Name="Message" Text="{Binding Path=msg}" Foreground="White"
+                                           TextWrapping="Wrap" FontSize="20" />
+                            </Grid>
                         </controls:ChatBubble>
                     </DataTemplate>
                 </local:MessageTemplateSelector.Recu>
-                <local:MessageTemplateSelector.Envoye>
+                <local:MessageTemplateSelector.Envoye >
                     <DataTemplate>
-                        <controls:ChatBubble ChatBubbleDirection="LowerRight" HorizontalAlignment="Right" Background="#1d59a2">
-                            <StackPanel>
-                                <TextBlock x:Name="Message" Text="{Binding}" Foreground="White" TextWrapping="Wrap" FontSize="20"/>
-                            </StackPanel>
+                        <controls:ChatBubble ChatBubbleDirection="LowerRight" Grid.Column="1"
+                                             Background="#1d59a2">
+                            <Grid HorizontalAlignment="Right">
+                                <TextBlock x:Name="Message" Text="{Binding Path=msg}" Foreground="White" TextWrapping="Wrap"
+                                           FontSize="20"  HorizontalAlignment="Right" />
+                            </Grid>
                         </controls:ChatBubble>
                     </DataTemplate>
                 </local:MessageTemplateSelector.Envoye>
@@ -45,26 +49,28 @@
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="80"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="60"/>
+            <RowDefinition Height="80" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="60" />
         </Grid.RowDefinitions>
 
         <Grid Grid.Row="0">
-            <Image Height="80" Width="80" HorizontalAlignment="Left" Margin="20,0,0,0" Source="{Binding FriendUser.image}"/>
-            <TextBlock FontSize="30" Foreground="#40a8e2" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,20,0" Text="{Binding FriendUser.username}"/>
+            <Image Height="80" Width="80" HorizontalAlignment="Left" Margin="20,0,0,0"
+                   Source="{Binding FriendUser.image}" />
+            <TextBlock FontSize="30" Foreground="#40a8e2" VerticalAlignment="Center" HorizontalAlignment="Right"
+                       Margin="0,0,20,0" Text="{Binding FriendUser.username}" />
         </Grid>
 
         <Grid Grid.Row="1">
-            <ListBox Background="Transparent" ItemsSource="{Binding ListMessages}" ItemTemplate="{StaticResource MessageDataTemplate}">
-
-            </ListBox>
+            <ListBox Background="Transparent" ItemsSource="{Binding ListMessages}"
+                     ItemTemplate="{StaticResource MessageDataTemplate}" HorizontalAlignment="Center" />
 
         </Grid>
         <Grid Grid.Row="2">
-            <TextBox VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10,0,0,0" Width="250" 
-                     Text="{Binding ConversationText, Mode=TwoWay}" Foreground="#40a8e2"/>
-            <Button HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,10,0" x:Uid="Send" Content="" Command="{Binding SendCommand}"/>
+            <TextBox VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10,0,0,0" Width="250"
+                     Text="{Binding ConversationText, Mode=TwoWay}" Foreground="#40a8e2" />
+            <Button HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,10,0" x:Uid="Send" Content=""
+                    Command="{Binding SendCommand}" />
         </Grid>
     </Grid>
 </Page>

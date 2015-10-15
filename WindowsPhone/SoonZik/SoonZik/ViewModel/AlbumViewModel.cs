@@ -6,15 +6,16 @@ using System.Windows.Input;
 using Windows.ApplicationModel.Core;
 using Windows.UI.Core;
 using Windows.UI.Popups;
-using Windows.UI.Xaml;
 using Coding4Fun.Toolkit.Controls;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using Newtonsoft.Json.Linq;
 using SoonZik.Controls;
 using SoonZik.Helpers;
 using SoonZik.HttpRequest;
 using SoonZik.HttpRequest.Poco;
 using SoonZik.Utils;
+using SoonZik.Views;
 
 namespace SoonZik.ViewModel
 {
@@ -29,12 +30,13 @@ namespace SoonZik.ViewModel
                 _navigationService = new NavigationService();
                 ItemClickCommand = new RelayCommand(ItemClickCommandExecute);
             }
-            MoreOptionOnTapped = new RelayCommand(MoreOptionOnTappedExecute);
             SelectionCommand = new RelayCommand(SelectionExecute);
             SendComment = new RelayCommand(SendCommentExecute);
             AddToCart = new RelayCommand(AddToCartExecute);
             RatingValueChange = new RelayCommand(RatingValueChangeExecute);
             PlayCommand = new RelayCommand(PlayCommandExecute);
+            AddToPlaylist = new RelayCommand(AddToPlaylistExecute);
+            AddMusicToCart = new RelayCommand(AddMusicToCartExecute);
         }
 
         #endregion
@@ -94,11 +96,12 @@ namespace SoonZik.ViewModel
         }
 
         public ICommand SelectionCommand { get; private set; }
-        public ICommand MoreOptionOnTapped { get; set; }
         public ICommand SendComment { get; private set; }
         public ICommand AddToCart { get; set; }
         public ICommand RatingValueChange { get; private set; }
         public ICommand PlayCommand { get; private set; }
+        public ICommand AddToPlaylist { get; private set; }
+        public ICommand AddMusicToCart { get; private set; }
 
         private string _crypto;
         private string _cryptographic { get; set; }
@@ -142,23 +145,6 @@ namespace SoonZik.ViewModel
         #endregion
 
         #region Method
-
-        private void MoreOptionOnTappedExecute()
-        {
-            _moreOption = true;
-            var newsBody = new MoreOptionPopUp(SelectedMusic);
-            MessagePrompt = new MessagePrompt
-            {
-                Width = 300,
-                Height = 500,
-                IsAppBarVisible = false,
-                VerticalAlignment = VerticalAlignment.Center,
-                Body = newsBody,
-                Opacity = 0.6
-            };
-            MessagePrompt.ActionPopUpButtons.Clear();
-            MessagePrompt.Show();
-        }
 
         private void SendCommentExecute()
         {
@@ -300,7 +286,46 @@ namespace SoonZik.ViewModel
         {
             var test = 0;
         }
+        
+        private void AddMusicToCartExecute()
+        {
+            _selectedMusic = SelectedMusic;
+            var request = new HttpRequestGet();
+            var post = new HttpRequestPost();
+            _cryptographic = "";
+            var userKey2 = request.GetUserKey(Singleton.Singleton.Instance().CurrentUser.id.ToString());
+            userKey2.ContinueWith(delegate(Task<object> task2)
+            {
+                var key2 = task2.Result as string;
+                if (key2 != null)
+                {
+                    var stringEncrypt = KeyHelpers.GetUserKeyFromResponse(key2);
+                    _cryptographic =
+                        EncriptSha256.EncriptStringToSha256(Singleton.Singleton.Instance().CurrentUser.salt +
+                                                            stringEncrypt);
+                }
+                var res = post.SaveCart(_selectedMusic, null, _cryptographic, Singleton.Singleton.Instance().CurrentUser);
+                res.ContinueWith(delegate(Task<string> tmp2)
+                {
+                    var res2 = tmp2.Result;
+                    if (res2 != null)
+                    {
+                        CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+                        {
+                            new MessageDialog("Article ajoute au panier").ShowAsync();
+                        });
+                    }
+                });
+            });
+        }
 
+       
+        private void AddToPlaylistExecute()
+        {
+            MyMusicViewModel.MusicForPlaylist = SelectedMusic;
+            MyMusicViewModel.IndexForPlaylist = 3;
+            GlobalMenuControl.SetChildren(new MyMusic());
+        }
         #endregion
     }
 }

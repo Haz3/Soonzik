@@ -5,11 +5,9 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Windows.ApplicationModel.Core;
-using Windows.Data.Xml.Dom;
 using Windows.Networking.Sockets;
 using Windows.Storage.Streams;
 using Windows.UI.Core;
-using Windows.UI.Notifications;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using SoonZik.Helpers;
@@ -31,7 +29,8 @@ namespace SoonZik.ViewModel
         #endregion
 
         #region Attribute
-
+        
+        private string _key { get; set; }
         public MessageWebSocket webSocket;
         public MessageWebSocket messageWebSocket;
         public DataWriter messageWriter;
@@ -89,11 +88,15 @@ namespace SoonZik.ViewModel
             ConnectSocket();
         }
 
-        private async void SendCommandExecute()
+        private void SendCommandExecute()
         {
             messageWriter = new DataWriter(webSocket.OutputStream);
             messageWriter.WriteString(ConversationText);
-            await messageWriter.StoreAsync();
+            CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
+                () =>
+                {
+                    messageWriter.StoreAsync();
+                });
             //if (ConversationText == null)
             //    return;
             //var Message = new Message{dest_id = FriendUser.id, user_id = Singleton.Singleton.Instance().CurrentUser.id, msg = ConversationText};
@@ -176,17 +179,50 @@ namespace SoonZik.ViewModel
 
         private async void ConnectSocket()
         {
+            //WebSocketRailsDispatcher dispatcher = new WebSocketRailsDispatcher(new Uri("ws://soonzikapi.herokuapp.com/websocket"));
+            
+            var request = new HttpRequestGet();
+            var userKey = request.GetUserKey(Singleton.Singleton.Instance().CurrentUser.id.ToString());
+            userKey.ContinueWith(delegate(Task<object> task)
+            {
+                _key = task.Result as string;
+                if (_key != null)
+                {
+                    var stringEncrypt = KeyHelpers.GetUserKeyFromResponse(_key);
+                    _cryptographic = EncriptSha256.EncriptStringToSha256(Singleton.Singleton.Instance().CurrentUser.salt +
+                                                            stringEncrypt);
+                }
+            });
+
+            var init = new InitConnection
+            {
+                Crypto = _cryptographic,
+                UserId = Singleton.Singleton.Instance().CurrentUser.id
+            };
+
+
+
+                //trigger
+            //dispatcher.Trigger("init_connection", init);
+            //dispatcher.Trigger("who-is-online", init);
+            
+            //Bind
+            //dispatcher.Bind("newMsg", MessageReceived);
+            //dispatcher.Bind("onlineFriends", OnlineFriend);
+
+            #region Test Avant
+
             try
             {
                 webSocket = new MessageWebSocket();
 
-                var serveur = new Uri("ws://echo.websocket.org", UriKind.RelativeOrAbsolute);
+                var serveur = new Uri("ws://soonzikapi.herokuapp.com/websocket", UriKind.RelativeOrAbsolute);
 
                 webSocket.Control.MessageType = SocketMessageType.Utf8;
                 // Set up callbacks
+
                 webSocket.MessageReceived += MessageReceived;
                 webSocket.Closed += Closed;
-
                 await webSocket.ConnectAsync(serveur);
                 messageWebSocket = webSocket;
             }
@@ -194,7 +230,14 @@ namespace SoonZik.ViewModel
             {
                 var status = WebSocketError.GetStatus(e.GetBaseException().HResult);
             }
+
+            #endregion
         }
+
+        //private void OnlineFriend(object sender, WebSocketRailsDataEventArgs e)
+        //{
+        //    int i = 0;
+        //}
 
         private void Closed(IWebSocket sender, WebSocketClosedEventArgs args)
         {
@@ -210,36 +253,26 @@ namespace SoonZik.ViewModel
             }
         }
 
-        private void MessageReceived(MessageWebSocket sender, MessageWebSocketMessageReceivedEventArgs args)
+        private void MessageReceived(MessageWebSocket socket, MessageWebSocketMessageReceivedEventArgs args)
         {
-            try
-            {
-                using (var reader = args.GetDataReader())
-                {
-                    reader.UnicodeEncoding = UnicodeEncoding.Utf8;
-                    var read = reader.ReadString(reader.UnconsumedBufferLength);
+            int i = 0;
+            #region toas
 
+            //var toastType = ToastTemplateType.ToastText02;
 
-                    var toastType = ToastTemplateType.ToastText02;
+            //var toastXml = ToastNotificationManager.GetTemplateContent(toastType);
 
-                    var toastXml = ToastNotificationManager.GetTemplateContent(toastType);
+            //var toastTextElement = toastXml.GetElementsByTagName("text");
+            //toastTextElement[0].AppendChild(toastXml.CreateTextNode("New Message"));
+            //toastTextElement[1].AppendChild(toastXml.CreateTextNode(read));
 
-                    var toastTextElement = toastXml.GetElementsByTagName("text");
-                    toastTextElement[0].AppendChild(toastXml.CreateTextNode("Hello C# Corner"));
-                    toastTextElement[1].AppendChild(toastXml.CreateTextNode("I am poping you from a Winmdows Phone App"));
+            //var toastNode = toastXml.SelectSingleNode("/toast");
+            //((XmlElement) toastNode).SetAttribute("duration", "long");
 
-                    var toastNode = toastXml.SelectSingleNode("/toast");
-                    ((XmlElement) toastNode).SetAttribute("duration", "long");
+            //var toast = new ToastNotification(toastXml);
+            //ToastNotificationManager.CreateToastNotifier().Show(toast);
 
-                    var toast = new ToastNotification(toastXml);
-                    ToastNotificationManager.CreateToastNotifier().Show(toast);
-                }
-            }
-            catch (Exception ex) // For debugging
-            {
-                var status = WebSocketError.GetStatus(ex.GetBaseException().HResult);
-                // Add your specific error-handling code here.
-            }
+            #endregion
         }
 
         #endregion

@@ -32,8 +32,8 @@
         </Grid.RowDefinitions>
 
         <!-- Row 1 -->
-        <TextBlock x:Name="TitleBlock" x:Uid="Welcome" Text="" FontFamily="{StaticResource Roboto}" FontSize="50"
-                   Foreground="Black" Grid.Row="0" />
+        <!--<TextBlock x:Name="TitleBlock" x:Uid="Welcome" Text="" FontFamily="{StaticResource Roboto}" FontSize="50"
+                   Foreground="Black" Grid.Row="0" />-->
 
         <!-- Row 2 -->
         <Image Grid.Row="1" Source="../Resources/Logo_SoonZik.png" Width="300" Height="150" VerticalAlignment="Top" />

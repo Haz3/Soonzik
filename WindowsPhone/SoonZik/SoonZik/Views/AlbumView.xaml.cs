@@ -1,4 +1,6 @@
-﻿using Windows.UI.Xaml.Controls;
+﻿using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Navigation;
 using SoonZik.ViewModel;
@@ -12,6 +14,8 @@ namespace SoonZik.Views
     /// </summary>
     public sealed partial class AlbumView : Page
     {
+        private bool PlayTapped = false;
+
         public AlbumView()
         {
             InitializeComponent();
@@ -28,16 +32,23 @@ namespace SoonZik.Views
         {
         }
 
-        private void MoreOption_OnTapped(object sender, TappedRoutedEventArgs e)
-        {
-            var vm = DataContext as AlbumViewModel;
-            if (vm != null) vm.MoreOptionOnTapped.Execute(null);
-        }
-
         private void PlayImage_OnTapped(object sender, TappedRoutedEventArgs e)
         {
+            PlayTapped = true;
             var vm = DataContext as AlbumViewModel;
             if (vm != null) vm.PlayCommand.Execute(null);
+        }
+
+        private void UIElement_OnTapped(object sender, TappedRoutedEventArgs e)
+        {
+            if (!PlayTapped)
+            {
+                FrameworkElement senderElement = sender as FrameworkElement;
+                FlyoutBase flyoutBase = FlyoutBase.GetAttachedFlyout(senderElement);
+
+                flyoutBase.ShowAt(senderElement);
+            }
+            PlayTapped = false;
         }
     }
 }
