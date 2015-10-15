@@ -31,13 +31,22 @@
     NSData *data = [prefs objectForKey:@"User"];
     User *user = (User *)[NSKeyedUnarchiver unarchiveObjectWithData:data];
     
-    NSString *urlImage1 = [NSString stringWithFormat:@"%@assets/usersImage/avatars/%@", API_URL, user.image];
-    NSData * imageData1 = [[NSData alloc] initWithContentsOfURL: [NSURL URLWithString: urlImage1]];
-    self.myImage = [UIImage imageWithData:imageData1];
     
-    NSString *urlImage = [NSString stringWithFormat:@"%@assets/usersImage/avatars/%@", API_URL, self.friend.image];
-    NSData * imageData = [[NSData alloc] initWithContentsOfURL: [NSURL URLWithString: urlImage]];
-    self.partnerImage = [UIImage imageWithData:imageData];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT,0),  ^{
+        //this block runs on a background thread; Do heavy operation here
+        NSString *urlImage1 = [NSString stringWithFormat:@"%@assets/usersImage/avatars/%@", API_URL, user.image];
+        NSData * imageData1 = [[NSData alloc] initWithContentsOfURL: [NSURL URLWithString: urlImage1]];
+        self.myImage = [UIImage imageWithData:imageData1];
+
+        NSString *urlImage = [NSString stringWithFormat:@"%@assets/usersImage/avatars/%@", API_URL, self.friend.image];
+        NSData * imageData = [[NSData alloc] initWithContentsOfURL: [NSURL URLWithString: urlImage]];
+        self.partnerImage = [UIImage imageWithData:imageData];
+
+        dispatch_async(dispatch_get_main_queue(), ^{
+            //This block runs on main thread, so update UI
+            [self refreshMessages];
+        });
+    });
     
     //--------------------------------------------------
     //         Customizing input view
@@ -65,18 +74,9 @@
 - (void)loadMessages
 {
     self.messages = [[self generateConversation] mutableCopy];
-    
-   /* NSMutableArray *arr = [MessagesController getMessagesWithFriendId:self.friend.identifier withOffset:0];
-    for (Message *mes in arr) {
-        NSLog(@"message : %@", mes.text);
-    }*/
 }
 
 #pragma mark - SOMessaging data source
-/*- (NSMutableArray *)messages
-{
-    return self.messages;
-}*/
 
 - (CGFloat)heightForMessageForIndex:(NSInteger)index
 {

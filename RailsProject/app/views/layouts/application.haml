@@ -13,53 +13,94 @@
 
 	%body{ "ng-app" => "SoonzikApp" }
 		%header.index{ "ng-controller" => "HeaderCtrl", "ng-init" => "initHeader()" }
-			%nav.top-bar-custom.row
-				.small-3.columns.center-logo
-					%span.helper
-					=link_to image_tag("logo-soonzik.png", :class => "soonzik-logo"), "http://lvh.me:3000"
-				.small-7.columns
-					.row.collapse
-						.small-10.columns.center-h
-							%input.radius#inputSearch{:placeholder => "{{ labels.DISPLAY_MENU_SEARCH_PLACEHOLDER }}", :type => "text", "ng-model" => "search.value" }
-						.small-2.columns.left.center-h
-							%a.alert.button.expand.radius{:href => "#", "ng-click" => "sendSearch()"}
-								=image_tag "loupe.png", :class => "loupe"
-				.small-2.columns.menu
-					=image_tag "menu.png", :class => "menu-logo", id: "menuBtn", "ng-click" => "switchMenu()", "click-outside" => "closeMenu()"
+			%nav.top-bar-custom
+				.center-logo
+					=link_to image_tag("logo-soonzik.png"), "http://lvh.me:3000", :class => "soonzik-logo"
+					%input#inputSearch{:placeholder => "{{ labels.DISPLAY_MENU_SEARCH_PLACEHOLDER }}", :type => "text", "ng-model" => "search.value" }
+					%a.alert.button.expand.searchBtn{:href => "#", "ng-click" => "sendSearch()"}
+						=image_tag "loupe.png", :class => "loupe"
 					- if user_signed_in?
 						.notif{ "ng-show" => "countNotRead() > 0" }
 							{{ countNotRead() }}
-						%ul.toAppend.no-bullet{ "ng-class" => "{ open: menuOpen }" }
+						%ul.no-bullet{ "ng-class" => "{ open: menuOpen }" }
 							%li.text-center
 								%a{ href: notifications_url }
-									({{ notifs.length }}) {{ (notifs.length > 1) ? labels.DISPLAY_MENU_NOTIFICATION_LABEL_PLURAL : labels.DISPLAY_MENU_NOTIFICATION_LABEL_SINGULAR }}
+									%span
+										({{ notifs.length }})
+									%span.small_menu
+										{{ (notifs.length > 1) ? labels.DISPLAY_MENU_NOTIFICATION_LABEL_PLURAL : labels.DISPLAY_MENU_NOTIFICATION_LABEL_SINGULAR }}
 							%li.clearfix
 								=image_tag ("usersImage/avatars/" + current_user.image), :class => "photo-profile left", id: "profilePicture"
-								%p
+								%p.small_menu
 									= link_to(UsersHelper.validate_username_for_oauth(current_user), user_path(current_user), :class => "profile")
 							%li
-								= link_to('{{ labels.DISPLAY_MENU_PROFILE_EDITION_LABEL }}', edit_user_path(current_user))
+								= link_to edit_user_path(current_user)do
+									%i.fi-wrench
+									%span.small_menu
+										{{ labels.DISPLAY_MENU_PROFILE_EDITION_LABEL }}
 							%li
-								= link_to('{{ labels.DISPLAY_MENU_NEWS_LABEL }}', news_index_path)
+								= link_to news_index_path do
+									%i.fi-clipboard
+									%span.small_menu
+										{{ labels.DISPLAY_MENU_NEWS_LABEL }}
 							%li
-								= link_to('{{ labels.DISPLAY_MENU_EXPLORER_LABEL }}', explorer_path)
+								= link_to explorer_path do
+									%i.fi-web
+									%span.small_menu
+										{{ labels.DISPLAY_MENU_EXPLORER_LABEL }}
 							%li
-								= link_to('{{ labels.DISPLAY_MENU_PACKS_LABEL }}', packs_path)
+								= link_to packs_path do
+									%i.fi-results
+									%span.small_menu
+										{{ labels.DISPLAY_MENU_PACKS_LABEL }}
 							%li
-								= link_to('Listening', listenings_path)
+								= link_to listenings_path do
+									%i.fi-map
+									%span.small_menu
+										{{ labels.DISPLAY_MENU_LISTENING_LABEL }}
 							%li
-								= link_to('My cart', carts_my_cart_path)
+								= link_to concerts_path do
+									%i.fi-ticket
+									%span.small_menu
+										{{ labels.DISPLAY_MENU_CONCERT_LABEL }}
 							%li
-								= link_to('{{ labels.DISPLAY_MENU_BATTLES_LABEL }}', battles_path)
+								= link_to carts_my_cart_path do
+									%i.fi-shopping-cart
+									%span.small_menu
+										{{ labels.DISPLAY_MENU_CART_LABEL }}
 							%li
-								= link_to('{{ labels.DISPLAY_MENU_FRIENDS_LABEL }}', 'http://lvh.me:3000/users/:id/friendlist')
+								= link_to battles_path do
+									%i.fi-flag
+									%span.small_menu
+										{{ labels.DISPLAY_MENU_BATTLES_LABEL }}
 							%li
-								= link_to('{{ labels.DISPLAY_MENU_LOGOUT_LABEL }}', destroy_user_session_path, :method => :delete)
+								= link_to new_feedback_path, :target => "_self" do
+									%i.fi-comment
+									%span.small_menu
+										{{ labels.DISPLAY_MENU_FEEDBACK_LABEL }}
+							%li
+								= link_to 'http://lvh.me:3000/users/:id/friendlist' do
+									%i.fi-torsos-all
+									%span.small_menu
+										{{ labels.DISPLAY_MENU_FRIENDS_LABEL }}
+							%li
+								= link_to destroy_user_session_path :method => :delete  do
+									%i.fi-power
+									%span.small_menu
+										{{ labels.DISPLAY_MENU_LOGOUT_LABEL }}
 					- else
-						.toAppend{ "ng-class" => "{ open: menuOpen }" }
-							%a.button{:href => new_user_registration_path, :target => "_self" } {{ labels.DISPLAY_MENU_SIGNUP_LABEL }}
-							%a.button.alert{:href => new_user_session_path, :target => "_self" } {{ labels.DISPLAY_MENU_LOGIN_LABEL }}
-		%main.row
+						%ul.no-bullet{ "ng-class" => "{ open: menuOpen }" }
+							%li
+								%a{:href => new_user_registration_path, :target => "_self" }
+									%i.fi-save
+									%span{ :class => "small_menu" }
+										{{ labels.DISPLAY_MENU_SIGNUP_LABEL }}
+							%li
+								%a{:href => new_user_session_path, :target => "_self" }
+									%i.fi-power
+									%span{ :class => "small_menu" }
+										{{ labels.DISPLAY_MENU_LOGIN_LABEL }}
+		%main
 			- if notice
 				%small.error.bg-green
 					%i.fi-x.left.removeInfo.pointer
@@ -76,4 +117,3 @@
 			.container
 				#player-container{ "ng-include" => "'#{asset_path('AngularJS/views/others/player.html.haml')}'" }
 		.feedback
-			%p= link_to "Feedback {{ labels.feedback }}", new_feedback_path, :target => "_self"

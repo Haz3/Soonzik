@@ -2,11 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>NSAppTransportSecurity</key>
-	<dict>
-		<key>NSAllowsArbitraryLoads</key>
-		<true/>
-	</dict>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
@@ -55,16 +50,16 @@
 	<key>Fabric</key>
 	<dict>
 		<key>APIKey</key>
-		<string>ead54f2a8d82acad8c0c88daeca2c428f24869d7</string>
+		<string>357ab9804a7cb9f4d8177066529c574e6d1d3616</string>
 		<key>Kits</key>
 		<array>
 			<dict>
 				<key>KitInfo</key>
 				<dict>
 					<key>consumerKey</key>
-					<string>YQKxbcf48Z8MGPuFgzbr5fEsp</string>
+					<string>AtWLRnysn6G1ZHK0ZtfOVXC67</string>
 					<key>consumerSecret</key>
-					<string>Iy9s9c18mhA7f3jkINwO7sjzBikF92N4qm7P8gYlLf2qJFWfmK</string>
+					<string>5oAa0hXMR4mYZt3r8V13iHWksqxfzHtEhNUBrPmrlTPjQWwEDn</string>
 				</dict>
 				<key>KitName</key>
 				<string>Twitter</string>
@@ -75,8 +70,19 @@
 	<string>572371212865769</string>
 	<key>FacebookDisplayName</key>
 	<string>SoonZik</string>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>com.paypal.ppclient.touch.v1</string>
+		<string>com.paypal.ppclient.touch.v2</string>
+		<string>org-appextension-feature-password-management</string>
+	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
+	</dict>
 	<key>NSLocationAlwaysUsageDescription</key>
 	<string></string>
 	<key>NSLocationWhenInUseUsageDescription</key>

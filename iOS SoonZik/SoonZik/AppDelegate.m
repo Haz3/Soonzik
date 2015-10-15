@@ -24,6 +24,7 @@
 #import "CartViewController.h"
 #import "IdenticationsController.h"
 #import "Socket.h"
+#import "PayPalMobile.h"
 
 @interface AppDelegate() <PKRevealing, UITableViewDataSource, UITableViewDelegate, SearchElementInterface>
 
@@ -48,8 +49,11 @@
     [self initializeMenuSystem];
     [self initBasicGraphics];
     
-    [[Twitter sharedInstance] startWithConsumerKey:@"jwRxE6l8j6t0uGGNjEaMPfYEG" consumerSecret:@"2770ueiokY2QLNYcykUFJfHUrr0avop7TsIlsJUE3FtKxaM4P0"];
+    //[[Twitter sharedInstance] startWithConsumerKey:@"jwRxE6l8j6t0uGGNjEaMPfYEG" consumerSecret:@"2770ueiokY2QLNYcykUFJfHUrr0avop7TsIlsJUE3FtKxaM4P0"];
     [Fabric with:@[[Twitter sharedInstance]]];
+    
+    [PayPalMobile initializeWithClientIdsForEnvironments:@{PayPalEnvironmentProduction : CLIENT_ID_PROD,
+                                                           PayPalEnvironmentSandbox : CLIENT_ID_SAND}];
     
     if (self.user.identifier != 0) {
         [self launchHome];

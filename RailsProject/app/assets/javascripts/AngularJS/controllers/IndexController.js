@@ -292,7 +292,6 @@ SoonzikApp.controller('IndexCtrl', ['$scope', 'SecureAuth', 'HTTPService', '$tim
 		} else {
 			while (count < 6) {
 				var randomNumber = ~~(Math.random() * votes.length);
-				console.log(randomNumber);
 				if ($.inArray(randomNumber, id_array)) {
 					continue;
 				} else {

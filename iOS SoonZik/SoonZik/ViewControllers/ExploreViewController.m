@@ -12,6 +12,7 @@
 #import "ConcertsController.h"
 #import "Concert.h"
 #import "ConcertViewController.h"
+#import "SuggestsController.h"
 
 #define NAVIGATIONBAR_HEIGHT 50
 
@@ -97,7 +98,7 @@
         //this block runs on a background thread; Do heavy operation here
         self.listOfInfluences = [Factory provideListWithClassName:@"Influence"];
         self.listOfConcerts = [ConcertsController getConcerts];
-        
+        [SuggestsController getSuggests:@"artist"];
         NSLog(@"concerts.count : %i", self.listOfConcerts.count);
         
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -113,6 +114,7 @@
 - (void)initNavigationButtons {
     UIView *navigationArea = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, NAVIGATIONBAR_HEIGHT)];
     navigationArea.backgroundColor = DARK_GREY;
+    navigationArea.tag = 2000;
     
     UIButton *influencesButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width/3, navigationArea.frame.size.height)];
     [influencesButton setTitle:[self.translate.dict objectForKey:@"title_influences"] forState:UIControlStateNormal];
@@ -137,10 +139,13 @@
     
     [self.view addSubview:navigationArea];
     [self.view bringSubviewToFront:navigationArea];
+    
+    [influencesButton setTitleColor:BLUE_1 forState:UIControlStateNormal];
 }
 
 - (void)moveToTheGoodView:(UIButton *)btn {
     NSLog(@"move to the right view");
+    [self refreshButtonsColor:btn.tag];
     switch (btn.tag) {
         case 1:
             [self.scrollView setContentOffset:CGPointMake(0, 0) animated:true];
@@ -153,6 +158,26 @@
             break;
         default:
             break;
+    }
+}
+
+- (void)refreshButtonsColor:(int)tag {
+    UIView *navBar = [self.view viewWithTag:2000];
+    UIButton *influencesButton = (UIButton *)[navBar viewWithTag:1];
+    UIButton *artistsButton = (UIButton *)[navBar viewWithTag:2];
+    UIButton *concertsButton = (UIButton *)[navBar viewWithTag:3];
+    if (tag == 1) {
+        [influencesButton setTitleColor:BLUE_1 forState:UIControlStateNormal];
+        [artistsButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [concertsButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    } else if (tag == 2) {
+        [influencesButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [artistsButton setTitleColor:BLUE_1 forState:UIControlStateNormal];
+        [concertsButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    } else if (tag == 3) {
+        [influencesButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [artistsButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [concertsButton setTitleColor:BLUE_1 forState:UIControlStateNormal];
     }
 }
 

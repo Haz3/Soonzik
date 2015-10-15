@@ -100,7 +100,7 @@
     
     [self.mapView removeOverlays:self.mapView.overlays];
     
-    CLLocation *loca = [[CLLocation alloc] initWithLatitude:50.6310675 longitude:3.0471604];
+    CLLocation *loca = [[CLLocation alloc] initWithLatitude:self.userPosition.location.coordinate.latitude longitude:self.userPosition.location.coordinate.longitude];
     
     MKCircle *circle = [MKCircle circleWithCenterCoordinate:loca.coordinate radius:(int)self.areaSlider.value*1000];
     [self.mapView addOverlay:circle];
@@ -130,7 +130,7 @@
 - (void)getAllOtherUsers
 {
     //self.listOfListenings = [UsersController getUsersInArea:self.userPosition.location.coordinate.latitude :self.userPosition.location.coordinate.longitude :(int)self.areaSlider.value];
-    self.listOfListenings = [UsersController getUsersInArea:50.6310675 :3.0471604 :(int)self.areaSlider.value];
+    self.listOfListenings = [UsersController getUsersInArea:self.userPosition.location.coordinate.latitude :self.userPosition.location.coordinate.longitude :(int)self.areaSlider.value];
     
     for (id annotation in self.mapView.annotations) {
         if ([annotation isKindOfClass:[UserAnnotation class]]) {

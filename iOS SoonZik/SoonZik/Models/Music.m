@@ -21,9 +21,7 @@
     NSDictionary *album = [json objectForKey:@"album"];
     self.albumImage = [album objectForKey:@"image"];
     self.albumId = [[album objectForKey:@"id"] intValue];
-    
     self.artist = [[User alloc] initWithJsonObject:[json objectForKey:@"user"]];
-    //NSLog(@"json music : %@", json);
     
     return self;
 }

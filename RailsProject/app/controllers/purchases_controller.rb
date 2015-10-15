@@ -91,6 +91,8 @@ class PurchasesController < ApplicationController
 			purchase_id: p.id
 		})
 
+		cart.destroy_all
+
 		redirect_to my_music_path
 	end
 

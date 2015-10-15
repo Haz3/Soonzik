@@ -35,7 +35,7 @@ module API
     #
     # ===== HTTP VALUE
     # 
-    # - +200+ - In case of success, return { key: token_user }
+    # - +200+ - In case of success, return { key: token_user, last_update: date_with_the_pattern("2007-11-19T08:37:48-06:00") }
     # - +404+ - Can't get an user with the id given
     # - +503+ - Error from server
     # 
@@ -43,7 +43,12 @@ module API
       if (defined?(@id))
         begin
           u = User.find_by_id(@id)
-          @returnValue = {key: u.idAPI}
+          if (Time.at(u.token_update).to_i + 300 < Time.now.to_i)
+            u.regenerateKey
+            u.save
+            u.reload
+          end
+          @returnValue = { key: u.idAPI, last_update: u.token_update.strftime("%FT%T%:z") }
           codeAnswer 200
         rescue
           codeAnswer 504
@@ -218,8 +223,10 @@ protected
           u = User.find_by_id(@user_id)
           if (@secureKey == u.secureKey)
             @security = true
-            u.regenerateKey
-            u.save
+            if (Time.at(u.token_update).to_i + 300 < Time.now.to_i)
+              u.regenerateKey
+              u.save
+            end
           else
             codeAnswer 501
             @httpCode = :unauthorized

@@ -59,9 +59,6 @@
     [self.collecView registerNib:[UINib nibWithNibName:@"CollectionReusableView" bundle:nil] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"HeaderView"];
     self.collecView.backgroundColor = [UIColor clearColor];
     
-    //UICollectionViewFlowLayout *collectionViewLayout = (UICollectionViewFlowLayout*)self.collecView.collectionViewLayout;
-    //collectionViewLayout.sectionInset = UIEdgeInsetsMake(20, 0, 20, 0);
-    
     self.selectedCell = -10;
     self.selectedCellOld = -10;
     self.selected = NO;
@@ -78,14 +75,6 @@
     [self.collecView setFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
     toolbarOpened = NO;
 }
-
-
-
-/*- (IBAction)sendMessage:(id)sender {
-    NSString *request  = [NSString stringWithFormat:@"msg:%@", inputMessageField.text];
-    NSData *data = [[NSData alloc] initWithData:[response dataUsingEncoding:NSASCIIStringEncoding]];
-    [outputStream write:[data bytes] maxLength:[data length]];
-}*/
 
 - (void)getData {
     self.spin = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
@@ -280,9 +269,9 @@
 
 - (void)sendTweet:(NSString *)text {
     if ([TweetsController sendTweet:text]) {
-        [[[SimplePopUp alloc] initWithMessage:@"Tweet envoyé" onView:self.view withSuccess:true] show];
+        [[[SimplePopUp alloc] initWithMessage:[self.translate.dict objectForKey:@"tweet_sended"] onView:self.view withSuccess:true] show];
     } else {
-        [[[SimplePopUp alloc] initWithMessage:@"Erreur lors de l'envoi du tweet" onView:self.view withSuccess:false] show];
+        [[[SimplePopUp alloc] initWithMessage:[self.translate.dict objectForKey:@"tweet_sended_error"] onView:self.view withSuccess:false] show];
     }
 }
 
@@ -294,7 +283,7 @@
         CollectionReusableView *headerView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"HeaderView" forIndexPath:indexPath];
         NSString *title;
         if (indexPath.section == 0) {
-            title = @"Laisser un message a vos followers";
+            title = [self.translate.dict objectForKey:@"let_message_to_followers"];
             headerView.imageV.hidden = true;
             headerView.numberLabel.hidden = true;
             headerView.titleL.font = SOONZIK_FONT_BODY_SMALL;
@@ -303,16 +292,19 @@
             title = [self.translate.dict objectForKey:@"title_friends"];
             headerView.imageV.hidden = true;
             headerView.numberLabel.hidden = true;
+            headerView.titleL.font = SOONZIK_FONT_BODY_MEDIUM;
         }
         if (indexPath.section == 2) {
             title = [self.translate.dict objectForKey:@"title_follows"];
             headerView.imageV.image = [SVGKImage imageNamed:@"people_white"].UIImage;
             headerView.numberLabel.text = [[NSString alloc] initWithFormat:@"%i", self.listOfFollows.count];
+            headerView.titleL.font = SOONZIK_FONT_BODY_MEDIUM;
         }
         if (indexPath.section == 3) {
             title = [self.translate.dict objectForKey:@"title_followers"];
             headerView.imageV.image = [SVGKImage imageNamed:@"people_white"].UIImage;
             headerView.numberLabel.text = [[NSString alloc] initWithFormat:@"%i", self.listOfFollowers.count];
+            headerView.titleL.font = SOONZIK_FONT_BODY_MEDIUM;
         }
         headerView.titleL.text = title;
         reusableview = headerView;

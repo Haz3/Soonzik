@@ -22,11 +22,9 @@
     NSArray *musics = [json objectForKey:@"musics"];
     self.identifier = [[json objectForKey:@"id"] intValue];
     if (albums.count != 0) {
-        NSLog(@"UN ALBUM");
         [self.albums addObject:[[Album alloc] initWithJsonObject:[albums firstObject]]];
         self.type = 1;
     } else if (musics.count != 0) {
-        NSLog(@"UNE MUSIQUE");
         [self.musics addObject:[[Music alloc] initWithJsonObject:[musics firstObject]]];
         self.type = 2;
     }

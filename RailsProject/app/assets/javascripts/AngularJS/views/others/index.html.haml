@@ -1,7 +1,7 @@
 .index{ "ng-init" => "initIndex()" }
   %loading{ "ng-if" => "loading == true" }
   .index{ "ng-if" => "loading == false" }
-    .row
+    .clearfix
       .small-12.columns{ "ng-class" => "classLeftSide" }
         .clearfix
           %h3.subheader.left
@@ -81,7 +81,7 @@
               .small-10.columns
                 %a{ href: "/albums/{{ suggestion.album.id }}" }
                   {{ suggestion.title }}
-    .row
+    .clearfix
       .divider
       %h3.subheader.left
         Battle en Cours

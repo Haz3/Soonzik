@@ -207,7 +207,7 @@ given or the combinaison is false</p>
 </li></ul>					
 											<div class="method-source-code" id="getSocialToken-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/apisecurity_controller.rb, line 117</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/apisecurity_controller.rb, line 122</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">getSocialToken</span>
   <span class="ruby-keyword">if</span> (<span class="ruby-keyword">defined?</span>(<span class="ruby-ivar">@uid</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-keyword">defined?</span>(<span class="ruby-ivar">@provider</span>))
     <span class="ruby-keyword">begin</span>
@@ -265,7 +265,7 @@ combinaison is false</p>
 </li></ul>					
 											<div class="method-source-code" id="login-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/apisecurity_controller.rb, line 74</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/apisecurity_controller.rb, line 79</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">login</span>
   <span class="ruby-keyword">if</span> (<span class="ruby-keyword">defined?</span>(<span class="ruby-ivar">@email</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-keyword">defined?</span>(<span class="ruby-ivar">@password</span>))
     <span class="ruby-keyword">begin</span>
@@ -318,7 +318,8 @@ combinaison is false</p>
 
 <h5 id="method-i-provideKey-label-HTTP+VALUE">HTTP VALUE<span><a href="#method-i-provideKey-label-HTTP+VALUE">&para;</a> <a href="#top">&uarr;</a></span></h5>
 <ul><li>
-<p><code>200</code> - In case of success, return { key: token_user }</p>
+<p><code>200</code> - In case of success, return { key: token_user,
+last_update: date_with_the_pattern(“2007-11-19T08:37:48-06:00”) }</p>
 </li><li>
 <p><code>404</code> - Can&#39;t get an user with the id given</p>
 </li><li>
@@ -331,7 +332,12 @@ combinaison is false</p>
   <span class="ruby-keyword">if</span> (<span class="ruby-keyword">defined?</span>(<span class="ruby-ivar">@id</span>))
     <span class="ruby-keyword">begin</span>
       <span class="ruby-identifier">u</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">find_by_id</span>(<span class="ruby-ivar">@id</span>)
-      <span class="ruby-ivar">@returnValue</span> = {<span class="ruby-identifier">key</span><span class="ruby-operator">:</span> <span class="ruby-identifier">u</span>.<span class="ruby-identifier">idAPI</span>}
+      <span class="ruby-keyword">if</span> (<span class="ruby-constant">Time</span>.<span class="ruby-identifier">at</span>(<span class="ruby-identifier">u</span>.<span class="ruby-identifier">token_update</span>).<span class="ruby-identifier">to_i</span> <span class="ruby-operator">+</span> <span class="ruby-value">300</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">Time</span>.<span class="ruby-identifier">now</span>.<span class="ruby-identifier">to_i</span>)
+        <span class="ruby-identifier">u</span>.<span class="ruby-identifier">regenerateKey</span>
+        <span class="ruby-identifier">u</span>.<span class="ruby-identifier">save</span>
+        <span class="ruby-identifier">u</span>.<span class="ruby-identifier">reload</span>
+      <span class="ruby-keyword">end</span>
+      <span class="ruby-ivar">@returnValue</span> = { <span class="ruby-identifier">key</span><span class="ruby-operator">:</span> <span class="ruby-identifier">u</span>.<span class="ruby-identifier">idAPI</span>, <span class="ruby-identifier">last_update</span><span class="ruby-operator">:</span> <span class="ruby-identifier">u</span>.<span class="ruby-identifier">token_update</span>.<span class="ruby-identifier">strftime</span>(<span class="ruby-string">&quot;%FT%T%:z&quot;</span>) }
       <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">200</span>
     <span class="ruby-keyword">rescue</span>
       <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">504</span>
@@ -380,12 +386,13 @@ validity)</p>
 <h5 id="method-i-socialLogin-label-HTTP+VALUE">HTTP VALUE<span><a href="#method-i-socialLogin-label-HTTP+VALUE">&para;</a> <a href="#top">&uarr;</a></span></h5>					
 											<div class="method-source-code" id="socialLogin-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/apisecurity_controller.rb, line 155</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/apisecurity_controller.rb, line 160</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">socialLogin</span>
   <span class="ruby-keyword">if</span> (<span class="ruby-keyword">defined?</span>(<span class="ruby-ivar">@uid</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-keyword">defined?</span>(<span class="ruby-ivar">@provider</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-keyword">defined?</span>(<span class="ruby-ivar">@encrypted_key</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-keyword">defined?</span>(<span class="ruby-ivar">@token</span>))
     <span class="ruby-keyword">begin</span>
       <span class="ruby-identifier">identity</span> = <span class="ruby-constant">Identity</span>.<span class="ruby-identifier">where</span>(<span class="ruby-identifier">provider</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@provider</span>).<span class="ruby-identifier">find_by_uid</span>(<span class="ruby-ivar">@uid</span>)
-      <span class="ruby-keyword">if</span> (<span class="ruby-identifier">identity</span> <span class="ruby-operator">!=</span> <span class="ruby-keyword">nil</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-constant">Digest</span><span class="ruby-operator">::</span><span class="ruby-constant">SHA256</span>.<span class="ruby-identifier">hexdigest</span>(<span class="ruby-ivar">@uid</span>.<span class="ruby-identifier">to_s</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">identity</span>.<span class="ruby-identifier">token</span> <span class="ruby-operator">+</span> <span class="ruby-constant">Identity</span><span class="ruby-operator">::</span><span class="ruby-constant">SALT</span>) <span class="ruby-operator">==</span> <span class="ruby-ivar">@encrypted_key</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">isValidToken?</span>(<span class="ruby-ivar">@token</span>, <span class="ruby-ivar">@provider</span>))
+      <span class="ruby-identifier">valid</span> = (<span class="ruby-ivar">@provider</span>.<span class="ruby-identifier">downcase</span> <span class="ruby-operator">==</span> <span class="ruby-string">&quot;twitter&quot;</span>) <span class="ruby-operator">?</span> <span class="ruby-keyword">true</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">isValidToken?</span>(<span class="ruby-ivar">@token</span>, <span class="ruby-ivar">@provider</span>)
+      <span class="ruby-keyword">if</span> (<span class="ruby-identifier">identity</span> <span class="ruby-operator">!=</span> <span class="ruby-keyword">nil</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-constant">Digest</span><span class="ruby-operator">::</span><span class="ruby-constant">SHA256</span>.<span class="ruby-identifier">hexdigest</span>(<span class="ruby-ivar">@uid</span>.<span class="ruby-identifier">to_s</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">identity</span>.<span class="ruby-identifier">token</span> <span class="ruby-operator">+</span> <span class="ruby-constant">Identity</span><span class="ruby-operator">::</span><span class="ruby-constant">SALT</span>) <span class="ruby-operator">==</span> <span class="ruby-ivar">@encrypted_key</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">valid</span>)
         <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">200</span>
         <span class="ruby-ivar">@returnValue</span> = { <span class="ruby-identifier">content</span><span class="ruby-operator">:</span> <span class="ruby-identifier">identity</span>.<span class="ruby-identifier">user</span>.<span class="ruby-identifier">as_json</span>(<span class="ruby-value">:include</span> =<span class="ruby-operator">&gt;</span> {
                                                               <span class="ruby-value">:address</span> =<span class="ruby-operator">&gt;</span> { <span class="ruby-identifier">only</span><span class="ruby-operator">:</span> <span class="ruby-constant">Address</span>.<span class="ruby-identifier">miniKey</span> },
@@ -469,15 +476,17 @@ the access is not granted</p>
 </li></ul>					
 											<div class="method-source-code" id="checkKey-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/apisecurity_controller.rb, line 214</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/apisecurity_controller.rb, line 220</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">checkKey</span>
   <span class="ruby-keyword">if</span> (<span class="ruby-keyword">defined?</span>(<span class="ruby-ivar">@user_id</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-keyword">defined?</span>(<span class="ruby-ivar">@secureKey</span>))
     <span class="ruby-keyword">begin</span>
       <span class="ruby-identifier">u</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">find_by_id</span>(<span class="ruby-ivar">@user_id</span>)
       <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@secureKey</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">u</span>.<span class="ruby-identifier">secureKey</span>)
         <span class="ruby-ivar">@security</span> = <span class="ruby-keyword">true</span>
-        <span class="ruby-identifier">u</span>.<span class="ruby-identifier">regenerateKey</span>
-        <span class="ruby-identifier">u</span>.<span class="ruby-identifier">save</span>
+        <span class="ruby-keyword">if</span> (<span class="ruby-constant">Time</span>.<span class="ruby-identifier">at</span>(<span class="ruby-identifier">u</span>.<span class="ruby-identifier">token_update</span>).<span class="ruby-identifier">to_i</span> <span class="ruby-operator">+</span> <span class="ruby-value">300</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">Time</span>.<span class="ruby-identifier">now</span>.<span class="ruby-identifier">to_i</span>)
+          <span class="ruby-identifier">u</span>.<span class="ruby-identifier">regenerateKey</span>
+          <span class="ruby-identifier">u</span>.<span class="ruby-identifier">save</span>
+        <span class="ruby-keyword">end</span>
       <span class="ruby-keyword">else</span>
         <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">501</span>
         <span class="ruby-ivar">@httpCode</span> = <span class="ruby-value">:unauthorized</span>
@@ -513,7 +522,7 @@ modify it.</p>
 </li></ul>					
 											<div class="method-source-code" id="codeAnswer-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/apisecurity_controller.rb, line 251</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/apisecurity_controller.rb, line 259</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">codeAnswer</span>(<span class="ruby-identifier">index</span>)
   <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@returnValue</span>[<span class="ruby-value">:code</span>] <span class="ruby-operator">!=</span> <span class="ruby-keyword">nil</span>)
     <span class="ruby-keyword">return</span>
@@ -551,7 +560,7 @@ modify it.</p>
 </li></ul>					
 											<div class="method-source-code" id="defineHttp-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/apisecurity_controller.rb, line 273</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/apisecurity_controller.rb, line 281</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">defineHttp</span>(<span class="ruby-identifier">sym</span>)
   <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@httpCode</span> <span class="ruby-operator">==</span> <span class="ruby-keyword">nil</span>)
     <span class="ruby-ivar">@httpCode</span> = <span class="ruby-identifier">sym</span>
@@ -575,7 +584,7 @@ modify it.</p>
 											<p>Render the value to return in json</p>					
 											<div class="method-source-code" id="sendJson-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/apisecurity_controller.rb, line 235</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/apisecurity_controller.rb, line 243</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">sendJson</span>
   <span class="ruby-identifier">codeAnswer</span>(<span class="ruby-value">202</span>) <span class="ruby-keyword">if</span> <span class="ruby-keyword">defined?</span>(<span class="ruby-ivar">@returnValue</span>[<span class="ruby-value">:content</span>]) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-keyword">defined?</span>(<span class="ruby-ivar">@returnValue</span>[<span class="ruby-value">:content</span>].<span class="ruby-identifier">size</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-ivar">@returnValue</span>[<span class="ruby-value">:content</span>].<span class="ruby-identifier">size</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-keyword">defined?</span><span class="ruby-ivar">@returnValue</span>[<span class="ruby-value">:code</span>]
   <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:ok</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@httpCode</span> <span class="ruby-operator">==</span> <span class="ruby-keyword">nil</span>
