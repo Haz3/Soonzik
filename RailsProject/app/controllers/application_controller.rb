@@ -31,7 +31,6 @@ class ApplicationController < ActionController::Base
       cookies.delete :user_id
       cookies.delete :user_token
       cookies.delete :user_username
-      cookies.delete :language
     end
   end
 
@@ -48,6 +47,7 @@ class ApplicationController < ActionController::Base
       @languageSelected = cookies[:language]
     else
       @languageSelected = "EN"
+      cookies[:language] = "EN"
     end
   end
 

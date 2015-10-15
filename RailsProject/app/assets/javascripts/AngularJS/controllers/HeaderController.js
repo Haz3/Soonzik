@@ -1,4 +1,4 @@
-SoonzikApp.controller('HeaderCtrl', ['$scope', "$routeParams", "$location", "SecureAuth", "HTTPService", "$timeout", "NotificationService", '$rootScope', function ($scope, $routeParams, $location, SecureAuth, HTTPService, $timeout, NotificationService, $rootScope) {
+SoonzikApp.controller('HeaderCtrl', ['$scope', "$routeParams", "$location", "SecureAuth", "HTTPService", "$timeout", "NotificationService", '$rootScope', '$cookies', '$window', function ($scope, $routeParams, $location, SecureAuth, HTTPService, $timeout, NotificationService, $rootScope, $cookies, $window) {
 
 	$scope.menuOpen = false;
 	$scope.search = {
@@ -102,6 +102,11 @@ SoonzikApp.controller('HeaderCtrl', ['$scope', "$routeParams", "$location", "Sec
 			if ($scope.notifs[i].read == false) { count++; }
 		}
 		return count;
+	}
+
+	$scope.chooseLanguage = function(lang) {
+		$cookies.put("language", lang);
+		$window.location.reload();
 	}
 
 }]);

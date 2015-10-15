@@ -1,5 +1,5 @@
 SoonzikApp.directive('tweet', [function() {
-	var reg = /(@)(\w{3,40})/i
+	var reg = /(@)(\w{3,40})/g
 
 	return {
 		restrict: 'E',

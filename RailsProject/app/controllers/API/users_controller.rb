@@ -900,7 +900,7 @@ module API
 				address = true
 				address = Address.new(Address.address_params params) if params.has_key?(:address)
 				if (address == true || address.save)
-					user.address_id = address.id if address != true
+					user.address_id = address.id if address == true
 					user.skip_confirmation!
 					if (user.save)
 						@returnValue = { content: user.as_json(:include => {

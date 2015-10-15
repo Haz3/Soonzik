@@ -54,6 +54,15 @@ header {
 		overflow-y: auto;
 		border-right: 1px solid #191919;
 	}
+
+	.flags ul li {
+
+		border-bottom: 0px;
+
+		img {
+			width: 30px;
+		}
+	}
 }
 
 main {

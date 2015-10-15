@@ -22,7 +22,8 @@
 					- if user_signed_in?
 						.notif{ "ng-show" => "countNotRead() > 0" }
 							{{ countNotRead() }}
-						%ul.no-bullet{ "ng-class" => "{ open: menuOpen }" }
+					%ul.no-bullet{ "ng-class" => "{ open: menuOpen }" }
+						- if user_signed_in?
 							%li.text-center
 								%a{ href: notifications_url }
 									%span
@@ -38,58 +39,7 @@
 									%i.fi-wrench
 									%span.small_menu
 										{{ labels.DISPLAY_MENU_PROFILE_EDITION_LABEL }}
-							%li
-								= link_to news_index_path do
-									%i.fi-clipboard
-									%span.small_menu
-										{{ labels.DISPLAY_MENU_NEWS_LABEL }}
-							%li
-								= link_to explorer_path do
-									%i.fi-web
-									%span.small_menu
-										{{ labels.DISPLAY_MENU_EXPLORER_LABEL }}
-							%li
-								= link_to packs_path do
-									%i.fi-results
-									%span.small_menu
-										{{ labels.DISPLAY_MENU_PACKS_LABEL }}
-							%li
-								= link_to listenings_path do
-									%i.fi-map
-									%span.small_menu
-										{{ labels.DISPLAY_MENU_LISTENING_LABEL }}
-							%li
-								= link_to concerts_path do
-									%i.fi-ticket
-									%span.small_menu
-										{{ labels.DISPLAY_MENU_CONCERT_LABEL }}
-							%li
-								= link_to carts_my_cart_path do
-									%i.fi-shopping-cart
-									%span.small_menu
-										{{ labels.DISPLAY_MENU_CART_LABEL }}
-							%li
-								= link_to battles_path do
-									%i.fi-flag
-									%span.small_menu
-										{{ labels.DISPLAY_MENU_BATTLES_LABEL }}
-							%li
-								= link_to new_feedback_path, :target => "_self" do
-									%i.fi-comment
-									%span.small_menu
-										{{ labels.DISPLAY_MENU_FEEDBACK_LABEL }}
-							%li
-								= link_to 'http://lvh.me:3000/users/:id/friendlist' do
-									%i.fi-torsos-all
-									%span.small_menu
-										{{ labels.DISPLAY_MENU_FRIENDS_LABEL }}
-							%li
-								= link_to destroy_user_session_path :method => :delete  do
-									%i.fi-power
-									%span.small_menu
-										{{ labels.DISPLAY_MENU_LOGOUT_LABEL }}
-					- else
-						%ul.no-bullet{ "ng-class" => "{ open: menuOpen }" }
+						- else
 							%li
 								%a{:href => new_user_registration_path, :target => "_self" }
 									%i.fi-save
@@ -100,6 +50,63 @@
 									%i.fi-power
 									%span{ :class => "small_menu" }
 										{{ labels.DISPLAY_MENU_LOGIN_LABEL }}
+						%li
+							= link_to news_index_path do
+								%i.fi-clipboard
+								%span.small_menu
+									{{ labels.DISPLAY_MENU_NEWS_LABEL }}
+						%li
+							= link_to explorer_path do
+								%i.fi-web
+								%span.small_menu
+									{{ labels.DISPLAY_MENU_EXPLORER_LABEL }}
+						%li
+							= link_to packs_path do
+								%i.fi-results
+								%span.small_menu
+									{{ labels.DISPLAY_MENU_PACKS_LABEL }}
+						%li
+							= link_to listenings_path do
+								%i.fi-map
+								%span.small_menu
+									{{ labels.DISPLAY_MENU_LISTENING_LABEL }}
+						%li
+							= link_to concerts_path do
+								%i.fi-ticket
+								%span.small_menu
+									{{ labels.DISPLAY_MENU_CONCERT_LABEL }}
+						%li
+							= link_to battles_path do
+								%i.fi-flag
+								%span.small_menu
+									{{ labels.DISPLAY_MENU_BATTLES_LABEL }}
+						%li
+							= link_to new_feedback_path, :target => "_self" do
+								%i.fi-comment
+								%span.small_menu
+									{{ labels.DISPLAY_MENU_FEEDBACK_LABEL }}
+						- if user_signed_in?
+							%li
+								= link_to carts_my_cart_path do
+									%i.fi-shopping-cart
+									%span.small_menu
+										{{ labels.DISPLAY_MENU_CART_LABEL }}
+							%li
+								= link_to 'http://lvh.me:3000/users/:id/friendlist' do
+									%i.fi-torsos-all
+									%span.small_menu
+										{{ labels.DISPLAY_MENU_FRIENDS_LABEL }}
+							%li
+								= link_to destroy_user_session_path :method => :delete  do
+									%i.fi-power
+									%span.small_menu
+										{{ labels.DISPLAY_MENU_LOGOUT_LABEL }}
+						.flags
+							%ul.inline-list
+								%li.pointer{ "ng-click" => "chooseLanguage('EN')" }
+									= image_tag "flag-gb.png"
+								%li.pointer{ "ng-click" => "chooseLanguage('FR')" }
+									= image_tag "flag-fr.png"
 		%main
 			- if notice
 				%small.error.bg-green
