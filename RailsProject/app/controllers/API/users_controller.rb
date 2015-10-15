@@ -874,10 +874,18 @@ module API
 						update_user = true
 					end
 
-					update_address = user.address.update(Address.address_params params)		if user.address != nil && params.has_key?(:address)
-					address = Address.new(Address.address_params params)									if user.address == nil && params.has_key?(:address)
-					update_address = address.save																					if user.address == nil && params.has_key?(:address)
-					user.address_id = address.id																					if user.address == nil && params.has_key?(:address) && update_address
+					if params.has_key?(:address)
+						if user.address != nil
+							update_address = user.address.update(Address.address_params params)
+						else
+							address = Address.new(Address.address_params params)
+							update_address = address.save
+							if (update_address)
+								user.address_id = address.id
+								user.save
+							end
+						end
+					end
 
 					if ((update_user && update_address))
 						@returnValue = { content: user.as_json(:include => {
@@ -899,8 +907,8 @@ module API
 
 				address = true
 				address = Address.new(Address.address_params params) if params.has_key?(:address)
-				if (address == true || address.save)
-					user.address_id = address.id if address == true
+				if (address.save)
+					user.address_id = address.id
 					user.skip_confirmation!
 					if (user.save)
 						@returnValue = { content: user.as_json(:include => {
