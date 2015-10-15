@@ -20,12 +20,15 @@ namespace SoonZik.ViewModel
 
         public GeolocalisationViewModel()
         {
-            var task = Task.Run(async () => await InitVariable());
-            task.Wait();
-
-            ListMapIcons = new List<MapIcon>();
-
-            CreateListElement();
+            InitVariable().ContinueWith(delegate(Task tmp)
+            {
+                CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
+                    () =>
+                    {
+                        ListMapIcons = new List<MapIcon>();
+                        CreateListElement();
+                    });
+            });
         }
 
         #endregion

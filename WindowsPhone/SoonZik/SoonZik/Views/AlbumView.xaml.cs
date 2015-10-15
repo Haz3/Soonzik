@@ -14,7 +14,6 @@ namespace SoonZik.Views
     /// </summary>
     public sealed partial class AlbumView : Page
     {
-        private bool PlayTapped = false;
 
         public AlbumView()
         {
@@ -32,6 +31,7 @@ namespace SoonZik.Views
         {
         }
 
+        private bool PlayTapped = false;
         private void PlayImage_OnTapped(object sender, TappedRoutedEventArgs e)
         {
             PlayTapped = true;
@@ -49,6 +49,18 @@ namespace SoonZik.Views
                 flyoutBase.ShowAt(senderElement);
             }
             PlayTapped = false;
+        }
+
+        private void ItemPlaylist_OnTapped(object sender, RoutedEventArgs routedEventArgs)
+        {
+            var vm = DataContext as AlbumViewModel;
+            if (vm != null) vm.AddToPlaylist.Execute(null);
+        }
+
+        private void ItemCart_OnTapped(object sender, RoutedEventArgs routedEventArgs)
+        {
+            var vm = DataContext as AlbumViewModel;
+            if (vm != null) vm.AddToCart.Execute(null);
         }
     }
 }

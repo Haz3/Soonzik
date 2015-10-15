@@ -267,7 +267,7 @@
   <data name="Association.Text" xml:space="preserve">
     <value>Association</value>
   </data>
-  <data name="GoToCard.Text" xml:space="preserve">
+  <data name="GoToCard.Content" xml:space="preserve">
     <value>Ajouter au panier</value>
   </data>
   <data name="Price.Text" xml:space="preserve">

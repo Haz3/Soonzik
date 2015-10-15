@@ -70,8 +70,8 @@
         <!-- Row 3 -->
         <Button Grid.Row="2" Command="{Binding InscritpiomCommand}" x:Uid="SignIn" Content="" Foreground="Black"
                 BorderThickness="0" Margin="18,7,0,6" />
-        <Button Grid.Row="2" x:Uid="ForgotPassword" Content="" Foreground="Black" BorderThickness="0"
-                Margin="229,7,0,6" />
+        <!--<Button Grid.Row="2" x:Uid="ForgotPassword" Content="" Foreground="Black" BorderThickness="0"
+                Margin="229,7,0,6" />-->
 
         <ProgressRing Grid.Row="1" IsActive="{Binding ProgressOn, Mode=TwoWay}" Background="Black" Foreground="Aqua"
                       Opacity="0.5" Margin="0,-98,0,-69" />

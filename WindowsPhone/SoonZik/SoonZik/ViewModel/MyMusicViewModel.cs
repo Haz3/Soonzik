@@ -38,6 +38,7 @@ namespace SoonZik.ViewModel
             AddToPlaylist = new RelayCommand(AddToPlaylistExecute);
             AddMusicToCart = new RelayCommand(AddMusicToCartExecute);
 
+            PlayCommand = new RelayCommand(PlayCommandExecute);
             SelectedIndex = IndexForPlaylist;
 
             LoadContent();
@@ -45,7 +46,12 @@ namespace SoonZik.ViewModel
 
         #endregion
 
-        #region Method
+        #region Method        
+        private void PlayCommandExecute()
+        {
+            var test = 0;
+        }
+
         private void AddMusicToCartExecute()
         {
             _selectedMusic = SelectedMusic;
@@ -365,6 +371,7 @@ namespace SoonZik.ViewModel
 
         #region Attribute
 
+        public ICommand PlayCommand { get; private set; }
         public ICommand AddToPlaylist { get; private set; }
         public ICommand AddMusicToCart { get; private set; }
         private static int _id;

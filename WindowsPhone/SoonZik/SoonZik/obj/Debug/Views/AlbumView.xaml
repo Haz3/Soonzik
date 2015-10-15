@@ -49,8 +49,8 @@
                        VerticalAlignment="Center" HorizontalAlignment="Left" />
                 <FlyoutBase.AttachedFlyout>
                     <MenuFlyout>
-                        <MenuFlyoutItem Text="Add playlist" Command="{Binding AddToPlaylist}"/>
-                        <MenuFlyoutItem Text="Go to cart" Command="{Binding AddMusicToCart}"/>
+                        <MenuFlyoutItem x:ConnectionId='3' x:Name="ItemPlaylist" Text="Add playlist"                              />
+                        <MenuFlyoutItem x:ConnectionId='4' x:Name="ItemCart" Text="Go to cart"                          />
                     </MenuFlyout>
                 </FlyoutBase.AttachedFlyout>
             </Grid>

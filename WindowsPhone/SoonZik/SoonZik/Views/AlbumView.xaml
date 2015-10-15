@@ -49,8 +49,8 @@
                        VerticalAlignment="Center" HorizontalAlignment="Left" />
                 <FlyoutBase.AttachedFlyout>
                     <MenuFlyout>
-                        <MenuFlyoutItem Text="Add playlist" Command="{Binding AddToPlaylist}"/>
-                        <MenuFlyoutItem Text="Go to cart" Command="{Binding AddMusicToCart}"/>
+                        <MenuFlyoutItem x:Name="ItemPlaylist" Text="Add playlist" Click="ItemPlaylist_OnTapped"/>
+                        <MenuFlyoutItem x:Name="ItemCart" Text="Go to cart" Click="ItemCart_OnTapped"/>
                     </MenuFlyout>
                 </FlyoutBase.AttachedFlyout>
             </Grid>

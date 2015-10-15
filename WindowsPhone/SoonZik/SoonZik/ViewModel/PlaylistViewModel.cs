@@ -29,6 +29,7 @@ namespace SoonZik.ViewModel
             AddToPlaylist = new RelayCommand(AddToPlaylistExecute);
             DelToPlaylist = new RelayCommand(DelToPlaylistExecute);
             AddMusicToCart = new RelayCommand(AddMusicToCartExecute);
+            PlayCommand = new RelayCommand(PlayCommandExecute);
         }
 
         #endregion
@@ -36,6 +37,7 @@ namespace SoonZik.ViewModel
         #region Attribute
 
         private string _cryptographic;
+        public ICommand PlayCommand { get; private set; }
         public ICommand AddToPlaylist { get; private set; }
         public ICommand DelToPlaylist { get; private set; }
         public ICommand AddMusicToCart { get; private set; }
@@ -86,7 +88,11 @@ namespace SoonZik.ViewModel
 
         #endregion
 
-        #region Method
+        #region Method       
+        private void PlayCommandExecute()
+        {
+            var test = 0;
+        }
 
         private void UpdatePlaylistExecute()
         {
@@ -127,6 +133,7 @@ namespace SoonZik.ViewModel
         {
             ThePlaylist = PlaylistTmp;
             ListMusics = new ObservableCollection<Music>();
+            UpdatePlaylistExecute();
         }
 
         private void AddMusicToCartExecute()
@@ -193,7 +200,7 @@ namespace SoonZik.ViewModel
                                         if (stringJson == "200")
                                         {
                                             new MessageDialog("Music delete").ShowAsync();
-                                            PlaylistViewModel.UpdatePlaylist.Execute(null);
+                                            UpdatePlaylist.Execute(null);
                                         }
                                         else
                                         {

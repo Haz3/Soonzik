@@ -1,17 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using System.Threading;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
-using Windows.UI.Xaml;
+﻿using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using SoonZik.ViewModel;
 
@@ -42,7 +32,7 @@ namespace SoonZik.Views
         private void PlayImage_OnTapped(object sender, TappedRoutedEventArgs e)
         {
             PlayTapped = true;
-            var vm = DataContext as AlbumViewModel;
+            var vm = DataContext as PlaylistViewModel;
             if (vm != null) vm.PlayCommand.Execute(null);
         }
 
@@ -56,6 +46,24 @@ namespace SoonZik.Views
                 flyoutBase.ShowAt(senderElement);
             }
             PlayTapped = false;
+        }
+
+        private void ItemPlaylist_OnTapped(object sender, RoutedEventArgs routedEventArgs)
+        {
+            var vm = DataContext as PlaylistViewModel;
+            if (vm != null) vm.AddToPlaylist.Execute(null);
+        }
+
+        private void ItemCart_OnTapped(object sender, RoutedEventArgs routedEventArgs)
+        {
+            var vm = DataContext as PlaylistViewModel;
+            if (vm != null) vm.AddMusicToCart.Execute(null);
+        }
+
+        private void ItemDelete_OnTapped(object sender, RoutedEventArgs routedEventArgs)
+        {
+            var vm = DataContext as PlaylistViewModel;
+            if (vm != null) vm.DelToPlaylist.Execute(null);
         }
     }
 }

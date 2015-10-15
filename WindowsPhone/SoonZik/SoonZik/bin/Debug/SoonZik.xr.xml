@@ -27,8 +27,6 @@
     <RootPropertyPathName Name="Email" />
     <RootPropertyPathName Name="SelectionCommand" />
     <RootPropertyPathName Name="getAverageNote" />
-    <RootPropertyPathName Name="AddMusicToCart" />
-    <RootPropertyPathName Name="AddToPlaylist" />
     <RootPropertyPathName Name="content" />
     <RootPropertyPathName Name="SendComment" />
     <RootPropertyPathName Name="TextComment" />
@@ -86,7 +84,6 @@
     <RootPropertyPathName Name="fname" />
     <RootPropertyPathName Name="Password" />
     <RootPropertyPathName Name="PasswordBoxCommand" />
-    <RootPropertyPathName Name="DelToPlaylist" />
     <RootPropertyPathName Name="ThePlaylist" />
     <RootPropertyPathName Name="musics" />
     <RootPropertyPathName Name="name" />
@@ -558,7 +555,7 @@
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.MenuFlyoutItem">
       <RootProperty Name="Text" />
-      <RootProperty Name="Command" />
+      <RootEvent Name="Click" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.PivotItem">
       <RootProperty Name="Header" />

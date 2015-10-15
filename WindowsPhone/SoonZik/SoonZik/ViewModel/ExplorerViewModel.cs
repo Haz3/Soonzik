@@ -30,12 +30,14 @@ namespace SoonZik.ViewModel
             ListArtiste = new ObservableCollection<User>();
             ListMusique = new ObservableCollection<Music>();
             ListInfluences = new ObservableCollection<Influence>();
+
+            AlbumCommand = new RelayCommand(AlbumCommandExecute);
             TappedCommand = new RelayCommand(ArtisteTappedCommand);
             AddToPlaylist = new RelayCommand(AddToPlaylistExecute);
             AddMusicToCart = new RelayCommand(AddMusicToCartExecute);
+            PlayCommand = new RelayCommand(PlayCommandExecute);
             LoadContent();
         }
-
         #endregion
 
         #region Attribute
@@ -110,10 +112,23 @@ namespace SoonZik.ViewModel
         }
 
         public ICommand TappedCommand { get; private set; }
+        public ICommand AlbumCommand { get; private set; }
+        public ICommand PlayCommand { get; set; }
 
         #endregion
 
         #region Method
+
+        private void AlbumCommandExecute()
+        {
+            AlbumViewModel.MyAlbum = SelectedMusic.album;
+            GlobalMenuControl.SetChildren(new AlbumView());
+        }
+
+        private void PlayCommandExecute()
+        {
+            var test = 0;
+        }
 
         public void LoadContent()
         {
