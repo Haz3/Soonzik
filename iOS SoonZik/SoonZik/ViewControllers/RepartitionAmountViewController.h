@@ -8,12 +8,18 @@
 
 #import <UIKit/UIKit.h>
 #import "Translate.h"
+#import "PayPalMobile.h"
 
-@interface RepartitionAmountViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate>
+@interface RepartitionAmountViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate, PayPalPaymentDelegate>
 
 @property (nonatomic, assign) float price;
+@property (nonatomic, assign) int packID;
 @property (nonatomic, strong) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) Translate *translate;
+
+@property (nonatomic, assign) float artist;
+@property (nonatomic, assign) float association;
+@property (nonatomic, assign) float website;
 
 @property (nonatomic, assign) float pourcentLeft;
 

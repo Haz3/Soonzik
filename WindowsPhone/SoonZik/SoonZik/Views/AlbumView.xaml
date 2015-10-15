@@ -27,7 +27,7 @@
         </DataTemplate>
 
         <DataTemplate x:Key="MusicTemplate">
-            <Grid Height="70" Margin="20,0,0,0">
+            <Grid Height="70" Margin="0,0,0,0" Tapped="UIElement_OnTapped">
                 <Border BorderThickness="0,0,0,1" Width="350" BorderBrush="#7bc2fa" />
                 <TextBlock x:Name="MusicTitle" Text="{Binding Path=title}" Foreground="#40a8e2" FontSize="25"
                            Margin="50,0,0,0" />
@@ -45,11 +45,14 @@
                         </Style>
                     </ratingControl:Rating.UnfilledItemStyle>
                 </ratingControl:Rating>
-                <Image x:Name="MoreOption" Source="../Resources/Icones/menu.png" Height="30"
-                       Tapped="MoreOption_OnTapped" VerticalAlignment="Center" HorizontalAlignment="Right"
-                       Margin="0,0,20,0" />
                 <Image x:Name="PlayImage" Source="../Resources/Icones/play.png" Height="30" Tapped="PlayImage_OnTapped"
                        VerticalAlignment="Center" HorizontalAlignment="Left" />
+                <FlyoutBase.AttachedFlyout>
+                    <MenuFlyout>
+                        <MenuFlyoutItem x:Name="ItemPlaylist" Text="Add playlist" Click="ItemPlaylist_OnTapped"/>
+                        <MenuFlyoutItem x:Name="ItemCart" Text="Go to cart" Click="ItemCart_OnTapped"/>
+                    </MenuFlyout>
+                </FlyoutBase.AttachedFlyout>
             </Grid>
         </DataTemplate>
     </Page.Resources>
@@ -82,7 +85,7 @@
                Foreground="Transparent" RenderTransformOrigin="0.5,0.5" Style="{StaticResource PivotStyle1}"
                Margin="0,20,0,0">
             <PivotItem x:Uid="MusicPivot" Header="">
-                <ListBox Background="Transparent" Grid.Row="1" x:Name="MusicListView" IsTapEnabled="False"
+                <ListBox Background="Transparent" x:Name="MusicListView" IsTapEnabled="True"
                          ItemsSource="{Binding ListMusics}"
                          ItemTemplate="{StaticResource MusicTemplate}"
                          SelectedItem="{Binding SelectedMusic, Mode=TwoWay}"
@@ -95,10 +98,8 @@
                         <RowDefinition Height="*" />
                         <RowDefinition Height="40" />
                     </Grid.RowDefinitions>
-                    <ScrollViewer Grid.Row="0">
-                        <ListBox Grid.Row="0" Background="Transparent" x:Name="FollowListBox"
+                        <ListBox Background="Transparent" x:Name="FollowListBox"
                                  ItemsSource="{Binding ListCommAlbum}" ItemTemplate="{StaticResource ComTemplate}" />
-                    </ScrollViewer>
                     <TextBox Grid.Row="1" Width="200" HorizontalAlignment="Left" Margin="10,0,0,0"
                              Text="{Binding TextComment, Mode=TwoWay}" />
                     <Button x:Uid="Send" Content="" Grid.Row="1" HorizontalAlignment="Right" Margin="0,0,10,0"

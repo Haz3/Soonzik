@@ -164,6 +164,9 @@
             [cell initCell:a];
             cell.backgroundColor = [UIColor clearColor];
             cell.tag = 1;
+            NSString *urlImage = [NSString stringWithFormat:@"%@assets/albums/%@", API_URL, a.image];
+            NSData *imageData = [[NSData alloc] initWithContentsOfURL: [NSURL URLWithString: urlImage]];
+            cell.albumImage.image = [UIImage imageWithData:imageData];
         }
         return cell;
     }
@@ -177,6 +180,9 @@
             [cell initCell:a];
             cell.backgroundColor = [UIColor clearColor];
             cell.tag = 2;
+            NSString *urlImage = [NSString stringWithFormat:@"%@assets/usersImage/avatars/%@", API_URL, a.image];
+            NSData *imageData = [[NSData alloc] initWithContentsOfURL: [NSURL URLWithString: urlImage]];
+            cell.artistImage.image = [UIImage imageWithData:imageData];
         }
         return cell;
     } else if (indexPath.section == 3) {
@@ -189,6 +195,9 @@
             [cell initCell:a];
             cell.backgroundColor = [UIColor clearColor];
             cell.tag = 3;
+            NSString *urlImage = [NSString stringWithFormat:@"%@assets/usersImage/avatars/%@", API_URL, a.image];
+            NSData *imageData = [[NSData alloc] initWithContentsOfURL: [NSURL URLWithString: urlImage]];
+            cell.artistImage.image = [UIImage imageWithData:imageData];
         }
         return cell;
     }

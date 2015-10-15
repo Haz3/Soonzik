@@ -25,20 +25,16 @@
     <RootPropertyPathName Name="Object" />
     <RootPropertyPathName Name="Username" />
     <RootPropertyPathName Name="Email" />
-    <RootPropertyPathName Name="LoadedCommand" />
-    <RootPropertyPathName Name="user" />
-    <RootPropertyPathName Name="content" />
-    <RootPropertyPathName Name="ThePlaylist" />
-    <RootPropertyPathName Name="musics" />
-    <RootPropertyPathName Name="name" />
     <RootPropertyPathName Name="SelectionCommand" />
     <RootPropertyPathName Name="getAverageNote" />
+    <RootPropertyPathName Name="content" />
     <RootPropertyPathName Name="SendComment" />
     <RootPropertyPathName Name="TextComment" />
     <RootPropertyPathName Name="ListCommAlbum" />
     <RootPropertyPathName Name="ListMusics" />
     <RootPropertyPathName Name="AddToCart" />
     <RootPropertyPathName Name="TheAlbum" />
+    <RootPropertyPathName Name="user" />
     <RootPropertyPathName Name="image" />
     <RootPropertyPathName Name="ArtistTwo" />
     <RootPropertyPathName Name="email" />
@@ -57,6 +53,7 @@
     <RootPropertyPathName Name="CurrentBattle" />
     <RootPropertyPathName Name="artist_two" />
     <RootPropertyPathName Name="artist_one" />
+    <RootPropertyPathName Name="LoadedCommand" />
     <RootPropertyPathName Name="TotalPrice" />
     <RootPropertyPathName Name="BuyCommand" />
     <RootPropertyPathName Name="ListAlbum" />
@@ -87,6 +84,9 @@
     <RootPropertyPathName Name="fname" />
     <RootPropertyPathName Name="Password" />
     <RootPropertyPathName Name="PasswordBoxCommand" />
+    <RootPropertyPathName Name="ThePlaylist" />
+    <RootPropertyPathName Name="musics" />
+    <RootPropertyPathName Name="name" />
     <RootPropertyPathName Name="CurrentUser" />
     <RootPropertyPathName Name="follows" />
     <RootPropertyPathName Name="SelectUser" />
@@ -105,12 +105,10 @@
     <RootPropertyPathName Name="ConversationText" />
     <RootPropertyPathName Name="ListMessages" />
     <RootPropertyPathName Name="FriendUser" />
-    <RootPropertyPathName Name="duration" />
-    <RootPropertyPathName Name="style_name" />
     <RootPropertyPathName Name="ListArtiste" />
     <RootPropertyPathName Name="SelectedArtiste" />
     <RootPropertyPathName Name="TappedCommand" />
-    <RootPropertyPathName Name="ListGenres" />
+    <RootPropertyPathName Name="ListInfluences" />
     <RootPropertyPathName Name="Key" />
     <RootPropertyPathName Name="Group" />
     <RootPropertyPathName Name="ItemSource" />
@@ -451,6 +449,7 @@
       <RootProperty Name="SelectedItem" />
       <RootProperty Name="IsTapEnabled" />
       <RootProperty Name="ItemContainerStyle" />
+      <RootProperty Name="HorizontalAlignment" />
     </RootType>
     <RootType FullName="Microsoft.Xaml.Interactivity.Interaction">
       <RootMethod Name="GetBehaviors" />
@@ -533,7 +532,10 @@
     <RootType FullName="SoonZik.Views.Connexion" />
     <RootType FullName="SoonZik.MainPage" />
     <RootType FullName="SoonZik.Views.AboutView" />
-    <RootType FullName="SoonZik.Views.PlaylistView" />
+    <RootType FullName="Windows.UI.Xaml.Controls.Primitives.FlyoutBase">
+      <RootMethod Name="GetAttachedFlyout" />
+      <RootMethod Name="SetAttachedFlyout" />
+    </RootType>
     <RootType FullName="JISoft.RatingControl.Rating">
       <RootProperty Name="Height" />
       <RootProperty Name="Width" />
@@ -548,6 +550,13 @@
       <RootProperty Name="UnfilledItemStyle" />
     </RootType>
     <RootType FullName="JISoft.RatingControl.RatingItem" />
+    <RootType FullName="Windows.UI.Xaml.Controls.MenuFlyout">
+      <RootProperty Name="Items" />
+    </RootType>
+    <RootType FullName="Windows.UI.Xaml.Controls.MenuFlyoutItem">
+      <RootProperty Name="Text" />
+      <RootEvent Name="Click" />
+    </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.PivotItem">
       <RootProperty Name="Header" />
       <RootProperty Name="Content" />
@@ -588,6 +597,7 @@
       <RootProperty Name="Foreground" />
     </RootType>
     <RootType FullName="SoonZik.Views.InscriptionView" />
+    <RootType FullName="SoonZik.Views.PlaylistView" />
     <RootType FullName="SoonZik.ViewModel.ProfilFriendView" />
     <RootType FullName="SoonZik.Views.BattleView" />
     <RootType FullName="SoonZik.Utils.BooleanToVisibilityConverter">
@@ -601,7 +611,7 @@
     </RootType>
     <RootType FullName="Coding4Fun.Toolkit.Controls.ChatBubble">
       <RootProperty Name="ChatBubbleDirection" />
-      <RootProperty Name="HorizontalAlignment" />
+      <RootProperty Name="HorizontalContentAlignment" />
       <RootProperty Name="Background" />
       <RootProperty Name="Content" />
     </RootType>

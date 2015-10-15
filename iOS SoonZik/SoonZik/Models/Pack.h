@@ -16,6 +16,7 @@
 @property (nonatomic, assign) int identifier;
 @property (nonatomic, strong) NSString *title;
 @property (nonatomic, assign) float price;
+@property (nonatomic, assign) float avgPrice;
 @property (nonatomic, strong) NSMutableArray *listOfAlbums;
 @property (nonatomic, strong) NSMutableArray *listOfComments;
 @property (nonatomic, strong) NSMutableArray *listOfDescriptions;

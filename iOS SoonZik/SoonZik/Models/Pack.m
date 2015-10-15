@@ -43,9 +43,9 @@
             }
         }
     }
+    
+    self.avgPrice = [[json objectForKey:@"averagePrice"] floatValue];
 
-    
-    
     return self;
 }
 

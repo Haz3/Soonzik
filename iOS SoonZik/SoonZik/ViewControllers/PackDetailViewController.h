@@ -9,12 +9,15 @@
 #import "TypeViewController.h"
 #import "Pack.h"
 
-@interface PackDetailViewController : TypeViewController <UITableViewDelegate, UITableViewDataSource>
+@interface PackDetailViewController : TypeViewController <UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate>
 
 @property (nonatomic, strong) Pack *pack;
 @property (nonatomic, strong) IBOutlet UITableView *tableView;
 @property (nonatomic, assign) bool fromSearch;
 @property (nonatomic, assign) bool fromPack;
+@property (nonatomic, assign) float avg;
+@property (nonatomic, assign) float price;
+@property (nonatomic, strong) UITextField *textField;
 
 @property (nonatomic, assign) bool dataLoaded;
 @property (nonatomic, strong) UIActivityIndicatorView *spin;

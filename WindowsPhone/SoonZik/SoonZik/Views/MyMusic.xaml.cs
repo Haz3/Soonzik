@@ -1,4 +1,6 @@
-﻿using Windows.UI.Xaml.Controls;
+﻿using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Navigation;
 using SoonZik.ViewModel;
@@ -12,6 +14,7 @@ namespace SoonZik.Views
     /// </summary>
     public sealed partial class MyMusic : Page
     {
+        private bool PlayTapped = false;
         public MyMusic()
         {
             InitializeComponent();
@@ -33,6 +36,43 @@ namespace SoonZik.Views
             var vm = DataContext as MyMusicViewModel;
             if (vm != null)
                 vm.DeletePlaylist.Execute(null);
+        }
+
+        private void PlayImage_OnTapped(object sender, TappedRoutedEventArgs e)
+        {
+            PlayTapped = true;
+            var vm = DataContext as MyMusicViewModel;
+            if (vm != null) vm.PlayCommand.Execute(null);
+        }
+
+        private void UIElement_OnTapped(object sender, TappedRoutedEventArgs e)
+        {
+            if (!PlayTapped)
+            {
+                FrameworkElement senderElement = sender as FrameworkElement;
+                FlyoutBase flyoutBase = FlyoutBase.GetAttachedFlyout(senderElement);
+
+                flyoutBase.ShowAt(senderElement);
+            }
+            PlayTapped = false;
+        }
+
+        private void ItemPlaylist_OnTapped(object sender, RoutedEventArgs routedEventArgs)
+        {
+            var vm = DataContext as MyMusicViewModel;
+            if (vm != null) vm.AddToPlaylist.Execute(null);
+        }
+
+        private void ItemCart_OnTapped(object sender, RoutedEventArgs routedEventArgs)
+        {
+            var vm = DataContext as MyMusicViewModel;
+            if (vm != null) vm.AddMusicToCart.Execute(null);
+        }
+
+        private void ItemAlbum_OnTapped(object sender, RoutedEventArgs routedEventArgs)
+        {
+            var vm = DataContext as MyMusicViewModel;
+            if (vm != null) vm.MusicTappedCommand.Execute(null);
         }
     }
 }

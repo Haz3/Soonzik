@@ -30,22 +30,20 @@
         </DataTemplate>-->
 
         <DataTemplate x:Key="AlbumTemplate">
-            <Grid Height="70" Margin="20,0,0,0">
+            <Grid Height="70" Margin="0,0,0,0">
                 <Border BorderThickness="0,0,0,0.5" Width="350" BorderBrush="White" />
                 <Image x:Name="AlbumImage" Source="../Resources/Icones/MenuExplorer.png" Height="40"
                        VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10,0,0,0" />
-                <TextBlock x:Name="MusicTitle" Text="{Binding title}" FontSize="25" HorizontalAlignment="Center" />
-                <Image x:Name="MoreOption" Source="../Resources/Icones/menu.png" Height="30" VerticalAlignment="Center"
-                       HorizontalAlignment="Right" Margin="0,0,10,0" />
+                <TextBlock x:Name="MusicTitle" Text="{Binding title}" Foreground="White" FontSize="25" HorizontalAlignment="Center" />
             </Grid>
         </DataTemplate>
 
         <DataTemplate x:Key="ListPackItemTemplate">
-            <TextBlock FontSize="25" Text="{Binding title}" />
+            <TextBlock FontSize="25" Text="{Binding title}" Foreground="White"/>
         </DataTemplate>
 
         <DataTemplate x:Key="ListArtisteItemTemplate">
-            <TextBlock FontSize="25" Text="{Binding username}" />
+            <TextBlock FontSize="25" Text="{Binding username}" Foreground="White"/>
         </DataTemplate>
 
     </Page.Resources>
@@ -70,7 +68,7 @@
                 </ItemsPanelTemplate>
             </ListView.ItemsPanel>
         </ListView>-->
-        <ListView Grid.Row="0" ItemsSource="{Binding CompleteListPack}"
+        <ListBox Grid.Row="0" Background="Transparent" ItemsSource="{Binding CompleteListPack}"
                   ItemTemplate="{StaticResource ListPackItemTemplate}"
                   SelectedItem="{Binding ThePack, Mode=TwoWay}">
             <interactivity:Interaction.Behaviors>
@@ -79,7 +77,7 @@
                 </core:EventTriggerBehavior>
             </interactivity:Interaction.Behaviors>
 
-        </ListView>
+        </ListBox>
 
         <Grid Grid.Row="1">
             <Pivot x:Name="PivotGlobal" HeaderTemplate="{StaticResource SizeHeaderGlobalPivot}"
@@ -124,6 +122,10 @@
                             <core:InvokeCommandAction Command="{Binding ArtistTappedCommand}" />
                         </core:EventTriggerBehavior>
                     </interactivity:Interaction.Behaviors>
+                </PivotItem>
+
+                <PivotItem x:Uid="AssociationPivot" Header="">
+                    
                 </PivotItem>
             </Pivot>
         </Grid>

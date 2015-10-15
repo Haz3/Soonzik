@@ -36,6 +36,8 @@
     self.dataLoaded = true;
     [self launchLoadData];
     
+    self.price = self.pack.avgPrice;
+    
     [[UIApplication sharedApplication] setStatusBarHidden:true withAnimation:UIStatusBarAnimationFade];
     UIButton *closeButton = [[UIButton alloc] initWithFrame:CGRectMake(self.view.frame.size.width - 40, 4, 36, 36)];
     [closeButton setImage:[SVGKImage imageNamed:@"delete"].UIImage forState:UIControlStateNormal];
@@ -90,6 +92,7 @@
     [self.spin stopAnimating];
 }
 
+#pragma mark UITABLEVIEW DELEGATE METHODS
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     if (self.dataLoaded) {
@@ -123,7 +126,7 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     if (self.dataLoaded) {
-        return 3;
+        return 5;
     }
     
     return 0;
@@ -133,10 +136,16 @@
     if (self.dataLoaded) {
         if (section == 0) {
             return self.pack.listOfAlbums.count;
-        } if (section == 2) {
+        } else if (section == 1) {
+            return self.pack.listOfDescriptions.count;
+        } else if (section == 2) {
+            return 1;
+        } else if (section == 3) {
+            return 1;
+        } else if (section == 4) {
             return 1;
         }
-        return self.pack.listOfDescriptions.count;
+        
     }
    
     return 0;
@@ -150,51 +159,94 @@
             [tableView registerNib:[UINib nibWithNibName:@"AlbumInPackTableViewCell" bundle:nil] forCellReuseIdentifier:@"cellAlbum"];
             cell = [tableView dequeueReusableCellWithIdentifier:@"cellAlbum"];
         }
-        
-        
         cell.albumLabel.text = album.title;
         cell.artistLabel.text = album.artist.username;
         cell.backgroundColor = [UIColor clearColor];
-        
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
     }
-    
     else if (indexPath.section == 1) {
         Description *description = [self.pack.listOfDescriptions objectAtIndex:indexPath.row];
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cellDescription"];
         if (!cell) {
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cellDescription"];
         }
-        
         cell.textLabel.text = description.text;
         cell.backgroundColor = [UIColor clearColor];
         cell.textLabel.font = SOONZIK_FONT_BODY_SMALL;
         cell.textLabel.textColor = [UIColor whiteColor];
         [cell sizeToFit];
+        return cell;
+    } else if (indexPath.section == 2) {
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cellAmount"];
+        if (!cell) {
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cellAmount"];
+        }
+        self.textField = [[UITextField alloc] initWithFrame:CGRectMake(10, 0, cell.frame.size.width - 20, cell.frame.size.height)];
+        self.textField.placeholder = [self.translate.dict objectForKey:@"choose_amount"];
+        self.textField.textColor = [UIColor whiteColor];
+        self.textField.keyboardType = UIKeyboardTypeNumberPad;
+        self.textField.delegate = self;
+        self.textField.tintColor = [UIColor whiteColor];
+        self.textField.text = [NSString stringWithFormat:@"%.2f", self.pack.avgPrice];
+        [cell.contentView addSubview:self.textField];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.backgroundColor = [UIColor clearColor];
+        return cell;
+    } else if (indexPath.section == 3) {
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cellPurchase"];
+        if (!cell) {
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cellPurchase"];
+        }
+    
+        UIView *buttonView = [[UIView alloc] initWithFrame:CGRectMake(20, 0, cell.frame.size.width - 40, cell.frame.size.height)];
+        buttonView.layer.borderColor = [UIColor lightGrayColor].CGColor;
+        buttonView.layer.borderWidth = 1;
+        buttonView.layer.cornerRadius = 10;
+        buttonView.layer.backgroundColor = BLUE_1.CGColor;
         
+        UILabel *text = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, buttonView.frame.size.width, buttonView.frame.size.height)];
+        text.text = [self.translate.dict objectForKey:@"buy_now"];
+        text.textAlignment = NSTextAlignmentCenter;
+        text.font = SOONZIK_FONT_BODY_MEDIUM;
+        text.textColor = [UIColor whiteColor];
+        
+        [buttonView addSubview:text];
+        
+        [cell.contentView addSubview:buttonView];
+        
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.backgroundColor = [UIColor clearColor];
+        
+        [cell sizeToFit];
         return cell;
     }
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cellDescription"];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cellAvg"];
     if (!cell) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cellPurchase"];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"cellAvg"];
     }
-    
-    cell.textLabel.text = [self.translate.dict objectForKey:@"buy_now"];
-    cell.backgroundColor = [UIColor clearColor];
+    cell.textLabel.text = [NSString stringWithFormat:[self.translate.dict objectForKey:@"pack_average"], self.avg];
     cell.textLabel.font = SOONZIK_FONT_BODY_MEDIUM;
     cell.textLabel.textColor = [UIColor whiteColor];
+    cell.detailTextLabel.text = [self.translate.dict objectForKey:@"pack_average_message"];
+    cell.detailTextLabel.font = SOONZIK_FONT_BODY_SMALL;
+    cell.detailTextLabel.numberOfLines = 3;
+    cell.detailTextLabel.textColor = ORANGE;
+    cell.backgroundColor = [UIColor clearColor];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    cell.backgroundColor = [UIColor clearColor];
     [cell sizeToFit];
-    
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.section == 2) {
+    if (indexPath.section == 3) {
         RepartitionAmountViewController *vc = [[RepartitionAmountViewController alloc] initWithNibName:@"RepartitionAmountViewController" bundle:nil];
-        vc.price = self.pack.price;
+        vc.price = self.price;
+        vc.packID = self.pack.identifier;
         [self.navigationController pushViewController:vc animated:true];
-    } else {
+    } else if (indexPath.section == 0) {
         AlbumViewController *vc = [[AlbumViewController alloc] initWithNibName:@"AlbumViewController" bundle:nil];
         vc.album = [self.pack.listOfAlbums objectAtIndex:indexPath.row];
         vc.fromPack = true;
@@ -204,12 +256,39 @@
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
     if (section == 0) {
-        return @"Albums";
+        return @"";
     } else if (section == 1) {
-        return @"Description";
+        return @"";
+    } else if (section == 2) {
+        return [self.translate.dict objectForKey:@"repartition_choice"];
     }
     
     return nil;
+}
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+    NSLog(@"replacement string : %@", string);
+    NSString *before = textField.text;
+    NSString *after = [NSString stringWithFormat:@"%@%@", before, string];
+    self.price = after.floatValue;
+    [self checkPrice];
+    return true;
+}
+
+- (void)checkPrice {
+    UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:3]];
+    if (self.price == 0) {
+        cell.userInteractionEnabled = false;
+        cell.alpha = 0.2;
+    } else {
+        cell.userInteractionEnabled = true;
+        cell.alpha = 1;
+    }
+}
+
+- (BOOL)textFieldShouldEndEditing:(UITextField *)textField {
+    [textField resignFirstResponder];
+    return true;
 }
 
 @end

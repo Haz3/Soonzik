@@ -1,4 +1,6 @@
-﻿using Windows.UI.Xaml.Controls;
+﻿using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Navigation;
 using SoonZik.ViewModel;
@@ -28,10 +30,42 @@ namespace SoonZik.Views
         {
         }
 
+        private bool PlayTapped = false;
+        private void PlayImage_OnTapped(object sender, TappedRoutedEventArgs e)
+        {
+            PlayTapped = true;
+            var vm = DataContext as ExplorerViewModel;
+            if (vm != null) vm.PlayCommand.Execute(null);
+        }
+
         private void UIElement_OnTapped(object sender, TappedRoutedEventArgs e)
         {
+            if (!PlayTapped)
+            {
+                FrameworkElement senderElement = sender as FrameworkElement;
+                FlyoutBase flyoutBase = FlyoutBase.GetAttachedFlyout(senderElement);
+
+                flyoutBase.ShowAt(senderElement);
+            }
+            PlayTapped = false;
+        }
+
+        private void ItemCart_OnTapped(object sender, RoutedEventArgs routedEventArgs)
+        {
             var vm = DataContext as ExplorerViewModel;
-            if (vm != null) vm.MusiCommand.Execute(null);
+            if (vm != null) vm.AddMusicToCart.Execute(null);
+        }
+
+        private void ItemPlaylist_OnClick(object sender, RoutedEventArgs e)
+        {
+            var vm = DataContext as ExplorerViewModel;
+            if (vm != null) vm.AddToPlaylist.Execute(null);
+        }
+
+        private void ItemAlbum_OnClick(object sender, RoutedEventArgs e)
+        {
+            var vm = DataContext as ExplorerViewModel;
+            if (vm != null) vm.AlbumCommand.Execute(null);
         }
     }
 }

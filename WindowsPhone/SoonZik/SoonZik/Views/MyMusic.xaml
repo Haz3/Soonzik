@@ -7,6 +7,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:core="using:Microsoft.Xaml.Interactions.Core"
     xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
+    xmlns:ratingControl="using:JISoft.RatingControl"
     mc:Ignorable="d"
     DataContext="{StaticResource MyMusicViewModel}"
     Background="#424242">
@@ -35,26 +36,41 @@
                 </Grid.ColumnDefinitions>
                 <Image Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left"
                        Source="../Resources/Icones/MenuPack.png" Height="50" Width="50" />
-                <TextBlock Grid.Column="1" Text="{Binding Path=name}" Margin="15,0,0,0" FontSize="25" />
+                <TextBlock Grid.Column="1" Text="{Binding Path=name}" Margin="15,0,0,0" FontSize="25" Foreground="White"/>
                 <Image Grid.Column="2" Tapped="DeleteItem_OnTapped" VerticalAlignment="Center"
                        HorizontalAlignment="Center" Source="../Resources/Icones/trash.png" Width="50" Height="50" />
 
             </Grid>
         </DataTemplate>
 
-        <DataTemplate x:Key="MusiqueTemplate">
-            <Grid Width="350">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="80" />
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
-                <Image Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left"
-                       Source="../Resources/Icones/profil.jpg" Height="80" Width="80" />
-                <TextBlock Grid.Column="1" Text="{Binding Path=user.username}" Margin="15,0,0,0" FontSize="15" />
-                <TextBlock Grid.Column="1" Text="{Binding Path=duration}" HorizontalAlignment="Right" Margin="0,0,25,0"
-                           FontSize="15" />
-                <TextBlock Grid.Column="1" VerticalAlignment="Bottom" Text="{Binding Path=title}" Margin="20,0,0,0"
-                           FontSize="30" />
+        <DataTemplate x:Key="MusicTemplate">
+            <Grid Height="70" Margin="0,0,0,0" Tapped="UIElement_OnTapped">
+                <Border BorderThickness="0,0,0,1" Width="350" BorderBrush="#7bc2fa" />
+                <TextBlock x:Name="MusicTitle" Text="{Binding Path=title}" Foreground="#40a8e2" FontSize="25"
+                           Margin="50,0,0,0" />
+                <ratingControl:Rating Height="25" Width="125" Margin="50,10,0,0" VerticalAlignment="Bottom"
+                                      HorizontalAlignment="Left" ReadOnly="True" Background="Transparent"
+                                      RatingItemCount="5" Value="{Binding Path=getAverageNote, Mode=TwoWay}">
+                    <ratingControl:Rating.FilledItemStyle>
+                        <Style TargetType="ratingControl:RatingItem">
+                            <Setter Property="Background" Value="Goldenrod" />
+                        </Style>
+                    </ratingControl:Rating.FilledItemStyle>
+                    <ratingControl:Rating.UnfilledItemStyle>
+                        <Style TargetType="ratingControl:RatingItem">
+                            <Setter Property="Background" Value="Gray" />
+                        </Style>
+                    </ratingControl:Rating.UnfilledItemStyle>
+                </ratingControl:Rating>
+                <Image x:Name="PlayImage" Source="../Resources/Icones/play.png" Height="30" Tapped="PlayImage_OnTapped"
+                       VerticalAlignment="Center" HorizontalAlignment="Left" />
+                <FlyoutBase.AttachedFlyout>
+                    <MenuFlyout>
+                        <MenuFlyoutItem Text="Add to playlist" x:Name="ItemPlaylist" Click="ItemPlaylist_OnTapped"/>
+                        <MenuFlyoutItem Text="Add to cart" x:Name="ItemCart" Click="ItemCart_OnTapped"/>
+                        <MenuFlyoutItem Text="Go to album" x:Name="ItemAlbum" Click="ItemAlbum_OnTapped"/>
+                    </MenuFlyout>
+                </FlyoutBase.AttachedFlyout>
             </Grid>
         </DataTemplate>
 
@@ -66,7 +82,7 @@
                 </Grid.ColumnDefinitions>
                 <Image Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left"
                        Source="../Resources/Icones/disc.png" Height="80" Width="80" />
-                <TextBlock Grid.Column="1" Text="{Binding Path=title}" Margin="15,0,0,0" FontSize="25" />
+                <TextBlock Grid.Column="1" Text="{Binding Path=title}" Margin="15,0,0,0" FontSize="25" Foreground="White"/>
             </Grid>
         </DataTemplate>
     </Page.Resources>
@@ -78,13 +94,8 @@
                SelectedIndex="{Binding SelectedIndex, Mode=TwoWay}">
             <PivotItem x:Uid="MusicPivot" Header="">
                 <ListBox Background="Transparent" x:Name="ListBoxMusic" ItemsSource="{Binding ListMusique}"
-                         ItemTemplate="{StaticResource MusiqueTemplate}"
+                         ItemTemplate="{StaticResource MusicTemplate}"
                          SelectedItem="{Binding SelectedMusic, Mode=TwoWay}">
-                    <interactivity:Interaction.Behaviors>
-                        <core:EventTriggerBehavior EventName="Tapped">
-                            <core:InvokeCommandAction Command="{Binding MusicTappedCommand}" />
-                        </core:EventTriggerBehavior>
-                    </interactivity:Interaction.Behaviors>
                 </ListBox>
             </PivotItem>
 

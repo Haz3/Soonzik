@@ -279,17 +279,7 @@
     
     Playlist *playlist = [self.listOfPlaylists objectAtIndex:indexPath.row];
     cell.playlistTitle.text = playlist.title;
-    
-    
-    dispatch_queue_t backgroundQueue = dispatch_queue_create("com.mycompany.myqueue", 0);
-    __block __weak TitlePlaylistCollectionViewCell *c;
-    dispatch_async(backgroundQueue, ^{
-        c = [self loadImagePreviewPlaylist:playlist.listOfMusics forCell:cell];
-        
-        dispatch_async(dispatch_get_main_queue(), ^{
-            cell = c;
-        });
-    });
+    cell = [self loadImagePreviewPlaylist:playlist.listOfMusics forCell:cell];
     
     return cell;
 }
@@ -383,6 +373,31 @@
 
 - (TitlePlaylistCollectionViewCell *)loadImagePreviewPlaylist:(NSArray *)playlist forCell:(TitlePlaylistCollectionViewCell *)cell
 {
+    Music *music1 = playlist[0];
+    NSString *urlImage = [NSString stringWithFormat:@"%@assets/albums/%@", API_URL, music1.albumImage];
+    NSData *imageData = [[NSData alloc] initWithContentsOfURL: [NSURL URLWithString: urlImage]];
+    cell.album1Image.image = [UIImage imageWithData:imageData];
+    if (playlist.count > 1) {
+        Music *music2 = playlist[1];
+        NSString *urlImage2 = [NSString stringWithFormat:@"%@assets/albums/%@", API_URL, music2.albumImage];
+        NSData *imageData2 = [[NSData alloc] initWithContentsOfURL: [NSURL URLWithString: urlImage2]];
+        cell.album2Image.image = [UIImage imageWithData:imageData2];
+    }
+    if (playlist.count > 2) {
+        Music *music3 = playlist[2];
+        NSString *urlImage3 = [NSString stringWithFormat:@"%@assets/albums/%@", API_URL, music3.albumImage];
+        NSData *imageData3 = [[NSData alloc] initWithContentsOfURL: [NSURL URLWithString: urlImage3]];
+        cell.album3Image.image = [UIImage imageWithData:imageData3];
+    }
+    if (playlist.count > 3) {
+        Music *music4 = playlist[3];
+        NSString *urlImage4 = [NSString stringWithFormat:@"%@assets/albums/%@", API_URL, music4.albumImage];
+        NSData *imageData4 = [[NSData alloc] initWithContentsOfURL: [NSURL URLWithString: urlImage4]];
+        cell.album4Image.image = [UIImage imageWithData:imageData4];
+    }
+    
+    return cell;
+    /*
     int i = 1;
     for (Music *music in playlist) {
         switch (i) {
@@ -406,7 +421,7 @@
                 break;
         }
     }
-    return cell;
+    return cell;*/
 }
 
 - (void)addAPlaylist

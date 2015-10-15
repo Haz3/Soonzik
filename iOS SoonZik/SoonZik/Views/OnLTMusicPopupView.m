@@ -45,7 +45,11 @@
         self.alpha = 1;
     }];
     
-    self.musicImage.image = [UIImage imageNamed:song.albumImage];
+    
+    NSString *urlImage = [NSString stringWithFormat:@"%@assets/albums/%@", API_URL, self.song.albumImage];
+    NSLog(@"url image : %@", urlImage);
+    NSData *imageData = [[NSData alloc] initWithContentsOfURL: [NSURL URLWithString: urlImage]];
+    self.musicImage.image = [UIImage imageWithData:imageData];
     self.musicName.text = song.title;
     self.artistName.text = song.artist.username;
     

@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using Windows.ApplicationModel.Core;
 using Windows.UI.Core;
+using Windows.UI.Popups;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using SoonZik.Controls;
@@ -28,16 +29,35 @@ namespace SoonZik.ViewModel
             ListGenres = new ObservableCollection<Genre>();
             ListArtiste = new ObservableCollection<User>();
             ListMusique = new ObservableCollection<Music>();
+            ListInfluences = new ObservableCollection<Influence>();
+
+            AlbumCommand = new RelayCommand(AlbumCommandExecute);
             TappedCommand = new RelayCommand(ArtisteTappedCommand);
+            AddToPlaylist = new RelayCommand(AddToPlaylistExecute);
+            AddMusicToCart = new RelayCommand(AddMusicToCartExecute);
+            PlayCommand = new RelayCommand(PlayCommandExecute);
             LoadContent();
         }
-
         #endregion
 
         #region Attribute
 
+        public ICommand AddToPlaylist { get; private set; }
+        public ICommand AddMusicToCart { get; private set; }
         private string _crypto;
         public INavigationService Navigation;
+
+        private ObservableCollection<Influence> _listInfluences;
+
+        public ObservableCollection<Influence> ListInfluences
+        {
+            get { return _listInfluences; }
+            set
+            {
+                _listInfluences = value;
+                RaisePropertyChanged("ListInfluences");
+            }
+        }
 
         private ObservableCollection<Genre> _listGenres;
 
@@ -78,7 +98,7 @@ namespace SoonZik.ViewModel
         public Music SelectedMusic { get; set; }
         public static Music PlayerSelectedMusic { get; set; }
         public RelayCommand MusiCommand { get; set; }
-
+        private string _cryptographic;
         private User _selectedArtiste;
 
         public User SelectedArtiste
@@ -92,10 +112,23 @@ namespace SoonZik.ViewModel
         }
 
         public ICommand TappedCommand { get; private set; }
+        public ICommand AlbumCommand { get; private set; }
+        public ICommand PlayCommand { get; set; }
 
         #endregion
 
         #region Method
+
+        private void AlbumCommandExecute()
+        {
+            AlbumViewModel.MyAlbum = SelectedMusic.album;
+            GlobalMenuControl.SetChildren(new AlbumView());
+        }
+
+        private void PlayCommandExecute()
+        {
+            var test = 0;
+        }
 
         public void LoadContent()
         {
@@ -103,16 +136,16 @@ namespace SoonZik.ViewModel
 
             try
             {
-                var listGenre = request.GetListObject(new List<Genre>(), "genres");
+                var listGenre = request.GetListObject(new List<Influence>(), "influences");
                 listGenre.ContinueWith(delegate(Task<object> tmp)
                 {
-                    var test = tmp.Result as List<Genre>;
+                    var test = tmp.Result as List<Influence>;
                     if (test != null)
                     {
                         foreach (var item in test)
                         {
                             CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
-                                () => { ListGenres.Add(item); });
+                                () => { ListInfluences.Add(item); });
                         }
                     }
                 });
@@ -138,7 +171,6 @@ namespace SoonZik.ViewModel
                         }
                     }
                 });
-
                 var userKey = request.GetUserKey(Singleton.Singleton.Instance().CurrentUser.id.ToString());
                 userKey.ContinueWith(delegate(Task<object> task)
                 {
@@ -171,6 +203,46 @@ namespace SoonZik.ViewModel
             {
                 //new MessageDialog("probleme reseau : " + e.Message).ShowAsync();
             }
+        }
+
+        private void AddMusicToCartExecute()
+        {
+            SelectedMusic = SelectedMusic;
+            var request = new HttpRequestGet();
+            var post = new HttpRequestPost();
+            _cryptographic = "";
+            var userKey2 = request.GetUserKey(Singleton.Singleton.Instance().CurrentUser.id.ToString());
+            userKey2.ContinueWith(delegate(Task<object> task2)
+            {
+                var key2 = task2.Result as string;
+                if (key2 != null)
+                {
+                    var stringEncrypt = KeyHelpers.GetUserKeyFromResponse(key2);
+                    _cryptographic =
+                        EncriptSha256.EncriptStringToSha256(Singleton.Singleton.Instance().CurrentUser.salt +
+                                                            stringEncrypt);
+                }
+                var res = post.SaveCart(SelectedMusic, null, _cryptographic, Singleton.Singleton.Instance().CurrentUser);
+                res.ContinueWith(delegate(Task<string> tmp2)
+                {
+                    var res2 = tmp2.Result;
+                    if (res2 != null)
+                    {
+                        CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+                        {
+                            new MessageDialog("Article ajoute au panier").ShowAsync();
+                        });
+                    }
+                });
+            });
+        }
+
+
+        private void AddToPlaylistExecute()
+        {
+            MyMusicViewModel.MusicForPlaylist = SelectedMusic;
+            MyMusicViewModel.IndexForPlaylist = 3;
+            GlobalMenuControl.SetChildren(new MyMusic());
         }
 
         private void MusiCommandExecute()

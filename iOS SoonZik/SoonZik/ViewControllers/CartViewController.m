@@ -16,7 +16,7 @@
 #import "AppDelegate.h"
 
 @interface CartViewController ()
-
+@property (nonatomic, strong, readwrite) PayPalConfiguration *payPalConfiguration;
 @end
 
 @implementation CartViewController
@@ -28,11 +28,19 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    NSData *translateData = [[NSUserDefaults standardUserDefaults] objectForKey:@"Translate"];
+    self.translate = [NSKeyedUnarchiver unarchiveObjectWithData:translateData];
+    
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.backgroundColor = [UIColor clearColor];
     self.view.backgroundColor = DARK_GREY;
+    
+    UIImage *menuImage = [Tools imageWithImage:[SVGKImage imageNamed:@"menu"].UIImage scaledToSize:CGSizeMake(30, 30)];
+    UIBarButtonItem *menuButton = [[UIBarButtonItem alloc] initWithImage:menuImage style:UIBarButtonItemStylePlain target:self action:@selector(presentLeftMenuViewController)];
+    menuButton.tintColor = [UIColor whiteColor];
+    self.navigationItem.leftBarButtonItem = menuButton;
     
     if (!self.fromMenu) {
         UIImage *searchImage = [Tools imageWithImage:[SVGKImage imageNamed:@"search"].UIImage scaledToSize:CGSizeMake(30, 30)];
@@ -46,8 +54,8 @@
     self.musics = [self getMusics];
     self.albums = [self getAlbums];
     
-    NSLog(@"self.musics.count : %i", self.musics.count);
-    NSLog(@"self.albums.count : %i", self.albums.count);
+   /* NSLog(@"self.musics.count : %i", self.musics.count);
+    NSLog(@"self.albums.count : %i", self.albums.count);*/
     
     if (self.musics.count == 0 && self.albums.count == 0) {
         UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, self.view.frame.size.width - 20, self.view.frame.size.height / 2)];
@@ -58,11 +66,49 @@
         [self.view addSubview:label];
         [self.tableView removeFromSuperview];
     }
+    
+    [self initPayPal];
+}
+
+- (void)initPayPal {
+    _payPalConfiguration = [[PayPalConfiguration alloc] init];
+    _payPalConfiguration.acceptCreditCards = NO;
+    _payPalConfiguration.payPalShippingAddressOption = PayPalShippingAddressOptionPayPal;
+    [PayPalMobile preconnectWithEnvironment:PayPalEnvironmentNoNetwork];
+}
+
+#pragma mark - PayPalPaymentDelegate methods
+
+- (void)payPalPaymentViewController:(PayPalPaymentViewController *)paymentViewController didCompletePayment:(PayPalPayment *)completedPayment {
+    [self dismissViewControllerAnimated:YES completion:nil];
+    [self verifyCompletedPayment:completedPayment];
+}
+
+- (void)payPalPaymentDidCancel:(PayPalPaymentViewController *)paymentViewController {
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)verifyCompletedPayment:(PayPalPayment *)completedPayment {
+    NSDictionary *json = completedPayment.confirmation;
+    NSDictionary *response = [json objectForKey:@"response"];
+    NSString *identifier = nil;
+    if ([[response objectForKey:@"state"] isEqualToString:@"approved"]) {
+        [self.navigationController popToRootViewControllerAnimated:true];
+        identifier = [response objectForKey:@"id"];
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:[self.translate.dict objectForKey:@"payment_title_success"] message:[self.translate.dict objectForKey:@"payment_message_success"] delegate:nil cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
+        [alertView show];
+        [CartController buyCart];
+    }
 }
 
 - (void)presentRightMenuViewController {
     AppDelegate *app = (AppDelegate *)[UIApplication sharedApplication].delegate;
     [app.revealController showRightViewController];
+}
+
+- (void)presentLeftMenuViewController {
+    AppDelegate *app = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    [app.revealController showLeftViewController];
 }
 
 - (void)closeViewController {
@@ -88,41 +134,71 @@
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    NSLog(@"number of sections : %i", [self getNumberOfSections]);
-    return [self getNumberOfSections]+1;
+   // NSLog(@"number of sections : %i", [self getNumberOfSections]);
+    return [self getNumberOfSections]+2;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
    if (section == 0) {
         if (self.albums.count > 0) {
+            // ALBUM
             return self.albums.count;
         } else if (self.musics.count > 0) {
+            // MUSIC
             return self.musics.count;
         }
-    } else if (section == 1 && ([self getNumberOfSections] != 1)) {
+   } else if (section == 1) {
         if (self.musics.count > 0) {
+            // MUSIC
             return self.musics.count;
         } else {
+            // TOTAL
             return 1;
         }
+    } else if (section == 2) {
+        if (self.albums.count > 0 && self.musics.count > 0) {
+            // TOTAL
+            return 1;
+        } else if ([self getNumberOfSections] == 1) {
+            // BUY
+            return 1;
+        }
+    } else if (section == 3) {
+        // BUY
+        return 1;
     }
     
     return 1;
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-   if (section == 0) {
+    if (section == 0) {
         if (self.albums.count > 0) {
+            // ALBUM
             return @"Albums";
         } else if (self.musics.count > 0) {
-            return @"Musiques";
+            // MUSIC
+            return @"Musics";
         }
-    } else if (section == 1 && ([self getNumberOfSections] != 1)) {
+    } else if (section == 1) {
         if (self.musics.count > 0) {
-            return @"Musiques";
+            // MUSIC
+            return @"Musics";
         } else {
+            // TOTAL
             return @"";
         }
+    } else if (section == 2) {
+        if (self.albums.count > 0 && self.musics.count > 0) {
+            // TOTAL
+            return @"";
+        } else if ([self getNumberOfSections] == 1) {
+            // BUY
+            return @"";
+        }
+    } else if (section == 3) {
+        // BUY
+        return @"";
     }
     
     return @"";
@@ -177,6 +253,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0) {
         if (self.albums.count > 0) {
+            // ALBUM
             CartItemTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cellItem"];
             if (!cell) {
                 [self.tableView registerNib:[UINib nibWithNibName:@"CartItemTableViewCell" bundle:nil] forCellReuseIdentifier:@"cellItem"];
@@ -196,6 +273,7 @@
             
             return cell;
         } else if (self.musics.count > 0) {
+            // MUSIC
             CartItemTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cellItem"];
             if (!cell) {
                 [self.tableView registerNib:[UINib nibWithNibName:@"CartItemTableViewCell" bundle:nil] forCellReuseIdentifier:@"cellItem"];
@@ -212,11 +290,11 @@
             cell.titleLabel.textColor = [UIColor whiteColor];
             cell.artistLabel.textColor = [UIColor whiteColor];
             cell.backgroundColor = [UIColor clearColor];
-            
             return cell;
         }
-    } else if (indexPath.section == 1 && ([self getNumberOfSections] != 1)){
+    } else if (indexPath.section == 1) {
         if (self.musics.count > 0) {
+            // MUSIC
             CartItemTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cellItem"];
             if (!cell) {
                 [self.tableView registerNib:[UINib nibWithNibName:@"CartItemTableViewCell" bundle:nil] forCellReuseIdentifier:@"cellItem"];
@@ -233,9 +311,9 @@
             cell.titleLabel.textColor = [UIColor whiteColor];
             cell.artistLabel.textColor = [UIColor whiteColor];
             cell.backgroundColor = [UIColor clearColor];
-            
             return cell;
         } else {
+            // TOTAL
             UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cellTotal"];
             if (!cell) {
                 cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"cellTotal"];
@@ -247,30 +325,79 @@
             cell.backgroundColor = [UIColor clearColor];
             cell.detailTextLabel.textColor = [UIColor whiteColor];
             cell.textLabel.textColor = [UIColor whiteColor];
+            return cell;
+        }
+    } else if (indexPath.section == 2) {
+        if (self.albums.count > 0 && self.musics.count > 0) {
+            // TOTAL
+            UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cellTotal"];
+            if (!cell) {
+                cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"cellTotal"];
+            }
+            cell.detailTextLabel.text = @"prix total : ";
+            cell.textLabel.text = [NSString stringWithFormat:@"%.1f", [self getTotalPrice]];
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            cell.accessoryView = nil;
+            cell.backgroundColor = [UIColor clearColor];
+            cell.detailTextLabel.textColor = [UIColor whiteColor];
+            cell.textLabel.textColor = [UIColor whiteColor];
+            return cell;
+        } else if ([self getNumberOfSections] == 1) {
+            // BUY
+            UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cellButton"];
+            if (!cell) {
+                cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cellButton"];
+            }
+            UIView *buttonView = [[UIView alloc] initWithFrame:CGRectMake(20, 0, cell.frame.size.width - 40, cell.frame.size.height)];
+            buttonView.layer.borderColor = [UIColor lightGrayColor].CGColor;
+            buttonView.layer.borderWidth = 1;
+            buttonView.layer.cornerRadius = 10;
+            buttonView.layer.backgroundColor = BLUE_1.CGColor;
             
+            UILabel *text = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, buttonView.frame.size.width, buttonView.frame.size.height)];
+            text.text = [self.translate.dict objectForKey:@"buy_now"];
+            text.textAlignment = NSTextAlignmentCenter;
+            text.font = SOONZIK_FONT_BODY_MEDIUM;
+            text.textColor = [UIColor whiteColor];
+            
+            [buttonView addSubview:text];
+            
+            [cell.contentView addSubview:buttonView];
+            cell.backgroundColor = [UIColor clearColor];
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
             return cell;
         }
     }
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cellTotal"];
+    // BUY
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cellButton"];
     if (!cell) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"cellTotal"];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cellButton"];
     }
-    cell.detailTextLabel.text = @"prix total : ";
-    cell.textLabel.text = [NSString stringWithFormat:@"%.1f", [self getTotalPrice]];
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    cell.accessoryView = nil;
-    cell.backgroundColor = [UIColor clearColor];
-    cell.detailTextLabel.textColor = [UIColor whiteColor];
-    cell.textLabel.textColor = [UIColor whiteColor];
+    UIView *buttonView = [[UIView alloc] initWithFrame:CGRectMake(20, 0, cell.frame.size.width - 40, cell.frame.size.height)];
+    buttonView.layer.borderColor = [UIColor lightGrayColor].CGColor;
+    buttonView.layer.borderWidth = 1;
+    buttonView.layer.cornerRadius = 10;
+    buttonView.layer.backgroundColor = BLUE_1.CGColor;
+    UILabel *text = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, buttonView.frame.size.width, buttonView.frame.size.height)];
+    text.text = [self.translate.dict objectForKey:@"buy_now"];
+    text.textAlignment = NSTextAlignmentCenter;
+    text.font = SOONZIK_FONT_BODY_MEDIUM;
+    text.textColor = [UIColor whiteColor];
     
+    [buttonView addSubview:text];
+    
+    [cell.contentView addSubview:buttonView];
+    cell.backgroundColor = [UIColor clearColor];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
+    
 }
 
 - (void)deleteCart:(CartDeleteButton *)button {
-    NSLog(@"delete item : %@", button);
+  //  NSLog(@"delete item : %@", button);
     if ([CartController removeCart:button.cart.identifier]) {
-        [[[SimplePopUp alloc] initWithMessage:@"suppression reussie" onView:self.view withSuccess:true] show];
+        [[[SimplePopUp alloc] initWithMessage:[self.translate.dict objectForKey:@"cart_success_delete"] onView:self.view withSuccess:true] show];
         self.carts = [CartController getCart];
         self.musics = [self getMusics];
         self.albums = [self getAlbums];
@@ -281,15 +408,46 @@
             UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, self.view.frame.size.width - 20, self.view.frame.size.height / 2)];
             label.textAlignment = NSTextAlignmentCenter;
             label.textColor = [UIColor whiteColor];
-            label.text = @"Votre panier est vide";
+            label.text = [self.translate.dict objectForKey:@"cart_empty"];
             label.font = SOONZIK_FONT_BODY_BIG;
             [self.view addSubview:label];
             [self.tableView removeFromSuperview];
         }
     } else {
-        [[[SimplePopUp alloc] initWithMessage:@"erreur de suppression" onView:self.view withSuccess:false] show];
+        [[[SimplePopUp alloc] initWithMessage:[self.translate.dict objectForKey:@"cart_error_delete"] onView:self.view withSuccess:false] show];
+    }
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.section == 2) {
+        if ([self getNumberOfSections] == 1) {
+          //  NSLog(@"BUY");
+            [self launchPaypal];
+        }
+    } else if (indexPath.section == 3) {
+        //NSLog(@"BUY");
+        [self launchPaypal];
+    }
+}
+
+- (void)launchPaypal {
+    PayPalPayment *payment = [[PayPalPayment alloc] init];
+    payment.amount = [[NSDecimalNumber alloc] initWithFloat:[self getTotalPrice]];
+    payment.currencyCode = @"EUR";
+    payment.shortDescription = @"Soonzik transaction";
+    payment.intent = PayPalPaymentIntentSale;
+    
+    if (!payment.processable) {
+        // If, for example, the amount was negative or the shortDescription was empty, then
+        // this payment would not be processable. You would want to handle that here.
     }
     
+    PayPalPaymentViewController *paymentViewController;
+    paymentViewController = [[PayPalPaymentViewController alloc] initWithPayment:payment
+                                                                   configuration:self.payPalConfiguration
+                                                                        delegate:self];
+    
+    [self presentViewController:paymentViewController animated:YES completion:nil];
 }
 
 - (void)checkCells {

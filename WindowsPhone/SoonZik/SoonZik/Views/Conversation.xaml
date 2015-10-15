@@ -21,25 +21,25 @@
     <Page.Resources>
         <DataTemplate x:Key="MessageDataTemplate">
             <local:MessageTemplateSelector Content="{Binding}">
-                <local:MessageTemplateSelector.Recu>
+                <local:MessageTemplateSelector.Recu >
                     <DataTemplate>
-                        <controls:ChatBubble ChatBubbleDirection="UpperLeft" HorizontalAlignment="Left"
+                        <controls:ChatBubble  ChatBubbleDirection="UpperLeft" HorizontalContentAlignment="Right"
                                              Background="#7bc2fa">
-                            <StackPanel>
+                            <Grid>
                                 <TextBlock x:Name="Message" Text="{Binding Path=msg}" Foreground="White"
                                            TextWrapping="Wrap" FontSize="20" />
-                            </StackPanel>
+                            </Grid>
                         </controls:ChatBubble>
                     </DataTemplate>
                 </local:MessageTemplateSelector.Recu>
-                <local:MessageTemplateSelector.Envoye>
+                <local:MessageTemplateSelector.Envoye >
                     <DataTemplate>
-                        <controls:ChatBubble ChatBubbleDirection="LowerRight" HorizontalAlignment="Right"
+                        <controls:ChatBubble ChatBubbleDirection="LowerRight" Grid.Column="1"
                                              Background="#1d59a2">
-                            <StackPanel>
-                                <TextBlock x:Name="Message" Text="{Binding}" Foreground="White" TextWrapping="Wrap"
-                                           FontSize="20" />
-                            </StackPanel>
+                            <Grid HorizontalAlignment="Right">
+                                <TextBlock x:Name="Message" Text="{Binding Path=msg}" Foreground="White" TextWrapping="Wrap"
+                                           FontSize="20"  HorizontalAlignment="Right" />
+                            </Grid>
                         </controls:ChatBubble>
                     </DataTemplate>
                 </local:MessageTemplateSelector.Envoye>
@@ -63,7 +63,7 @@
 
         <Grid Grid.Row="1">
             <ListBox Background="Transparent" ItemsSource="{Binding ListMessages}"
-                     ItemTemplate="{StaticResource MessageDataTemplate}" />
+                     ItemTemplate="{StaticResource MessageDataTemplate}" HorizontalAlignment="Center" />
 
         </Grid>
         <Grid Grid.Row="2">

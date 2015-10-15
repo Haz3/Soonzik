@@ -12,12 +12,8 @@
 
 - (void)initCell
 {
-    self.containView.layer.borderWidth = 1;
+    self.containView.layer.borderWidth = .5;
     self.containView.layer.borderColor = [UIColor grayColor].CGColor;
-    CALayer *TopBorder = [CALayer layer];
-    TopBorder.frame = CGRectMake(0.0f, 0.0f, self.frame.size.width, 2.0f);
-    TopBorder.backgroundColor = [UIColor grayColor].CGColor;
-    [self.containView.layer addSublayer:TopBorder];
 }
 
 @end

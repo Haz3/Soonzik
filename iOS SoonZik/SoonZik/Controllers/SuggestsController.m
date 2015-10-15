@@ -13,7 +13,7 @@
 
 @implementation SuggestsController
 
-+ (NSMutableArray *)getSuggests {
++ (NSMutableArray *)getSuggests:(NSString *)type {
     NSString *url, *key, *conca, *secureKey;
     NSData *data = [[NSUserDefaults standardUserDefaults] objectForKey:@"User"];
     User *user = (User *)[NSKeyedUnarchiver unarchiveObjectWithData:data];
@@ -21,10 +21,12 @@
     key = [Crypto getKey:user.identifier];
     conca = [NSString stringWithFormat:@"%@%@", user.salt, key];
     secureKey = [Crypto sha256HashFor:conca];
-    url = [NSString stringWithFormat:@"%@suggest?user_id=%i&secureKey=%@", API_URL, user.identifier, secureKey];
+    url = [NSString stringWithFormat:@"%@suggestv2?user_id=%i&secureKey=%@&type=%@&limit=%i", API_URL, user.identifier, secureKey, type, 30];
+    
+    NSLog(@"url: %@", url);
     
     NSDictionary *json = [Request getRequest:url];
-    NSLog(@"json : %@", json);
+    NSLog(@"json SUGGEST: %@", json);
     
     return nil;
 }

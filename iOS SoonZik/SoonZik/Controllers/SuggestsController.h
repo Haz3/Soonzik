@@ -10,6 +10,6 @@
 
 @interface SuggestsController : NSObject
 
-+ (NSMutableArray *)getSuggests;
++ (NSMutableArray *)getSuggests:(NSString *)type;
 
 @end

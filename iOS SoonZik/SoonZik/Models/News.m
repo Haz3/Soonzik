@@ -15,8 +15,6 @@
 - (id)initWithJsonObject:(NSDictionary *)json
 {
     self = [super init];
-    NSLog(@"NEWS JSON : %@", json);
-    
     self.identifier = [[json objectForKey:@"id"] intValue];
     self.title = [json objectForKey:@"title"];
     self.type = [json objectForKey:@"news_type"];
@@ -24,7 +22,6 @@
     NSDateFormatter *dateformat = [[NSDateFormatter alloc] init];
     [dateformat setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
     dateformat.timeZone = [NSTimeZone timeZoneForSecondsFromGMT:1];
-    //self.date = [dateformat dateFromString:[json objectForKey:@"created_at"]];
     
     self.listOfAttachments = [[NSMutableArray alloc] init];
     if ([[json objectForKey:@"attachments"] count] > 0) {
