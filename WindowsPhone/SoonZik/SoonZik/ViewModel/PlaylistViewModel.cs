@@ -89,6 +89,7 @@ namespace SoonZik.ViewModel
         #endregion
 
         #region Method       
+
         private void PlayCommandExecute()
         {
             var test = 0;
@@ -159,10 +160,8 @@ namespace SoonZik.ViewModel
                     var res2 = tmp2.Result;
                     if (res2 != null)
                     {
-                        CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
-                        {
-                            new MessageDialog("Article ajoute au panier").ShowAsync();
-                        });
+                        CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
+                            () => { new MessageDialog("Article ajoute au panier").ShowAsync(); });
                     }
                 });
             });

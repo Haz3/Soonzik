@@ -14,6 +14,8 @@ namespace SoonZik.Views
     /// </summary>
     public sealed partial class Explorer : Page
     {
+        private bool PlayTapped;
+
         public Explorer()
         {
             InitializeComponent();
@@ -30,7 +32,6 @@ namespace SoonZik.Views
         {
         }
 
-        private bool PlayTapped = false;
         private void PlayImage_OnTapped(object sender, TappedRoutedEventArgs e)
         {
             PlayTapped = true;
@@ -42,8 +43,8 @@ namespace SoonZik.Views
         {
             if (!PlayTapped)
             {
-                FrameworkElement senderElement = sender as FrameworkElement;
-                FlyoutBase flyoutBase = FlyoutBase.GetAttachedFlyout(senderElement);
+                var senderElement = sender as FrameworkElement;
+                var flyoutBase = FlyoutBase.GetAttachedFlyout(senderElement);
 
                 flyoutBase.ShowAt(senderElement);
             }

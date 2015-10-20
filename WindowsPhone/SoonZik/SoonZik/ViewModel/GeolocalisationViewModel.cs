@@ -20,7 +20,7 @@ namespace SoonZik.ViewModel
 
         public GeolocalisationViewModel()
         {
-            InitVariable().ContinueWith(delegate(Task tmp)
+            InitVariable().ContinueWith(delegate
             {
                 CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
                     () =>

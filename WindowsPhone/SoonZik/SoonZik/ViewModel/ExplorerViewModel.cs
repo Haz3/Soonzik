@@ -38,6 +38,7 @@ namespace SoonZik.ViewModel
             PlayCommand = new RelayCommand(PlayCommandExecute);
             LoadContent();
         }
+
         #endregion
 
         #region Attribute
@@ -228,10 +229,8 @@ namespace SoonZik.ViewModel
                     var res2 = tmp2.Result;
                     if (res2 != null)
                     {
-                        CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
-                        {
-                            new MessageDialog("Article ajoute au panier").ShowAsync();
-                        });
+                        CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
+                            () => { new MessageDialog("Article ajoute au panier").ShowAsync(); });
                     }
                 });
             });

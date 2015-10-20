@@ -96,7 +96,7 @@ namespace SoonZik.Controls
                     playButton.Content = "| |";
                     PlayImage.Source =
                         new BitmapImage(new Uri("../Resources/PlayerIcons/pause.png", UriKind.RelativeOrAbsolute));
-                        // Change to pause button
+                    // Change to pause button
                 }
                 else
                 {
@@ -147,8 +147,7 @@ namespace SoonZik.Controls
                 case MediaPlayerState.Paused:
                     await
                         Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
-                            () => {
-                                      playButton.Content = ">"; // Change to play button
+                            () => { playButton.Content = ">"; // Change to play button
                             }
                             );
 
