@@ -18,7 +18,6 @@ using SoonZik.HttpRequest;
 using SoonZik.HttpRequest.Poco;
 using SoonZik.Utils;
 using SoonZik.Views;
-using User = SoonZik.HttpRequest.Poco.User;
 
 namespace SoonZik.ViewModel
 {
@@ -76,6 +75,7 @@ namespace SoonZik.ViewModel
         public RelayCommand FacebookTapped { get; private set; }
 
         public ICommand TwitterTapped { get; private set; }
+        public ICommand GoogleTapped { get; private set; }
 
         public INavigationService Navigation;
 
@@ -93,6 +93,7 @@ namespace SoonZik.ViewModel
             SelectionCommand = new RelayCommand(SelectionExecute);
             InscritpiomCommand = new RelayCommand(ExecuteInscription);
             TwitterTapped = new RelayCommand(TwitterCommandExecute);
+            GoogleTapped = new RelayCommand(GoogleTappedExecute);
             if (_localSettings != null && (string) _localSettings.Values["SoonZikAlreadyConnect"] == "yes")
             {
                 _password = _localSettings.Values["SoonZikPassWord"].ToString();
@@ -120,7 +121,8 @@ namespace SoonZik.ViewModel
             //}
         }
 
-        private void NetworkOnInternetConnectionChanged(object sender, InternetConnectionChangedEventArgs internetConnectionChangedEventArgs)
+        private void NetworkOnInternetConnectionChanged(object sender,
+            InternetConnectionChangedEventArgs internetConnectionChangedEventArgs)
         {
             if (!Network.IsConnected)
             {
@@ -158,11 +160,14 @@ namespace SoonZik.ViewModel
                     Singleton.Singleton.Instance().CurrentUser =
                         JsonConvert.DeserializeObject(stringJson, typeof (User)) as User;
                     Singleton.Singleton.Instance().CurrentUser.profilImage =
-                        new BitmapImage(
-                            new Uri(
-                                Constant.UrlImageUser +
-                                Singleton.Singleton.Instance().CurrentUser.image, UriKind.RelativeOrAbsolute));
-
+                        new BitmapImage(new Uri(
+                            Constant.UrlImageUser + Singleton.Singleton.Instance().CurrentUser.image,
+                            UriKind.RelativeOrAbsolute));
+                    foreach (var friend in Singleton.Singleton.Instance().CurrentUser.friends)
+                    {
+                        friend.profilImage =
+                            new BitmapImage(new Uri(Constant.UrlImageUser + friend.image, UriKind.RelativeOrAbsolute));
+                    }
                     ServiceLocator.Current.GetInstance<MyNetworkViewModel>().UpdateFriend();
                 }
                 catch (Exception e)
@@ -195,7 +200,10 @@ namespace SoonZik.ViewModel
 
         private void TwitterCommandExecute()
         {
-           
+        }
+
+        private void GoogleTappedExecute()
+        {
         }
 
         public async void ContinueWithWebAuthenticationBroker(WebAuthenticationBrokerContinuationEventArgs args)

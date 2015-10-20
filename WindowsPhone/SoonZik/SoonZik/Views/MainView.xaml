@@ -7,7 +7,7 @@
     x:Class="SoonZik.Views.MainView"
     mc:Ignorable="d"
     DataContext="{StaticResource MainViewModel}"
-    Background="#292929">
+    Background="#181818">
 
     <control:GlobalMenuControl />
 </Page>

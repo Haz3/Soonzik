@@ -171,11 +171,21 @@ namespace SoonZik.HttpRequest
             return await GetHttpPostResponse(request, postData);
         }
 
-        public async Task<String> SendComment(string message, Album myAlbum, string sha256, User myUser)
+        public async Task<String> SendComment(string message, Album myAlbum, News myNews, string sha256, User myUser)
         {
-            var request = (HttpWebRequest) WebRequest.Create(ApiUrl + "albums/addcomment/" + myAlbum.id);
-            var postData = "content=" + message + "&secureKey=" + sha256 + "&user_id=" + myUser.id;
-            return await GetHttpPostResponse(request, postData);
+            if (myAlbum != null)
+            {
+                var request = (HttpWebRequest) WebRequest.Create(ApiUrl + "albums/addcomment/" + myAlbum.id);
+                var postData = "content=" + message + "&secureKey=" + sha256 + "&user_id=" + myUser.id;
+                return await GetHttpPostResponse(request, postData);
+            }
+            if (myNews != null)
+            {
+                var request = (HttpWebRequest) WebRequest.Create(ApiUrl + "news/addcomment/" + myNews.id);
+                var postData = "content=" + message + "&secureKey=" + sha256 + "&user_id=" + myUser.id;
+                return await GetHttpPostResponse(request, postData);
+            }
+            return null;
         }
 
         public async Task<String> UpdatePlaylist(Playlist thePlaylist, Music theMusic, string sha256, User myUser)

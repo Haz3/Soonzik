@@ -29,7 +29,7 @@ namespace SoonZik.ViewModel
         #endregion
 
         #region Attribute
-        
+
         private string _key { get; set; }
         public MessageWebSocket webSocket;
         public MessageWebSocket messageWebSocket;
@@ -83,6 +83,7 @@ namespace SoonZik.ViewModel
 
         private void SelectionCommandExecute()
         {
+            MyNetworkViewModel.MeaagePrompt.Hide();
             FriendUser = NewUser;
             Charge();
             ConnectSocket();
@@ -91,12 +92,12 @@ namespace SoonZik.ViewModel
         private void SendCommandExecute()
         {
             messageWriter = new DataWriter(webSocket.OutputStream);
-            messageWriter.WriteString(ConversationText);
-            CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
-                () =>
-                {
-                    messageWriter.StoreAsync();
-                });
+            if (ConversationText != null)
+            {
+                messageWriter.WriteString(ConversationText);
+                CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
+                    () => { messageWriter.StoreAsync(); });
+            }
             //if (ConversationText == null)
             //    return;
             //var Message = new Message{dest_id = FriendUser.id, user_id = Singleton.Singleton.Instance().CurrentUser.id, msg = ConversationText};
@@ -180,7 +181,7 @@ namespace SoonZik.ViewModel
         private async void ConnectSocket()
         {
             //WebSocketRailsDispatcher dispatcher = new WebSocketRailsDispatcher(new Uri("ws://soonzikapi.herokuapp.com/websocket"));
-            
+
             var request = new HttpRequestGet();
             var userKey = request.GetUserKey(Singleton.Singleton.Instance().CurrentUser.id.ToString());
             userKey.ContinueWith(delegate(Task<object> task)
@@ -189,7 +190,8 @@ namespace SoonZik.ViewModel
                 if (_key != null)
                 {
                     var stringEncrypt = KeyHelpers.GetUserKeyFromResponse(_key);
-                    _cryptographic = EncriptSha256.EncriptStringToSha256(Singleton.Singleton.Instance().CurrentUser.salt +
+                    _cryptographic =
+                        EncriptSha256.EncriptStringToSha256(Singleton.Singleton.Instance().CurrentUser.salt +
                                                             stringEncrypt);
                 }
             });
@@ -201,11 +203,10 @@ namespace SoonZik.ViewModel
             };
 
 
-
-                //trigger
+            //trigger
             //dispatcher.Trigger("init_connection", init);
             //dispatcher.Trigger("who-is-online", init);
-            
+
             //Bind
             //dispatcher.Bind("newMsg", MessageReceived);
             //dispatcher.Bind("onlineFriends", OnlineFriend);
@@ -255,7 +256,8 @@ namespace SoonZik.ViewModel
 
         private void MessageReceived(MessageWebSocket socket, MessageWebSocketMessageReceivedEventArgs args)
         {
-            int i = 0;
+            var i = 0;
+
             #region toas
 
             //var toastType = ToastTemplateType.ToastText02;

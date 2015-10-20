@@ -99,6 +99,7 @@
     <RootPropertyPathName Name="ProgressOn" />
     <RootPropertyPathName Name="InscritpiomCommand" />
     <RootPropertyPathName Name="ConnexionCommand" />
+    <RootPropertyPathName Name="GoogleTapped" />
     <RootPropertyPathName Name="TwitterTapped" />
     <RootPropertyPathName Name="FacebookTapped" />
     <RootPropertyPathName Name="msg" />
@@ -110,6 +111,7 @@
     <RootPropertyPathName Name="TappedCommand" />
     <RootPropertyPathName Name="ListInfluences" />
     <RootPropertyPathName Name="Key" />
+    <RootPropertyPathName Name="profilImage" />
     <RootPropertyPathName Name="Group" />
     <RootPropertyPathName Name="ItemSource" />
     <RootPropertyPathName Name="SendTweet" />
@@ -125,7 +127,9 @@
     <RootPropertyPathName Name="ListNews" />
     <RootPropertyPathName Name="SelectedNews" />
     <RootPropertyPathName Name="SelectNews" />
+    <RootPropertyPathName Name="ListCommNews" />
     <RootPropertyPathName Name="NewsContent" />
+    <RootPropertyPathName Name="Like" />
     <RootPropertyPathName Name="NewsTitle" />
     <RootPropertyPathName Name="ListArtistes" />
     <RootPropertyPathName Name="TheArtiste" />
@@ -148,7 +152,6 @@
     <RootPropertyPathName Name="ButtonContent" />
     <RootPropertyPathName Name="EditClickCommand" />
     <RootPropertyPathName Name="CanUpdate" />
-    <RootPropertyPathName Name="profilImage" />
   </Roots.PropertyPathNames>
   <Roots.RootTypes>
     <RootType FullName="Windows.UI.Xaml.Application">
@@ -193,9 +196,9 @@
       <RootProperty Name="Margin" />
       <RootProperty Name="Width" />
       <RootProperty Name="ColumnDefinitions" />
+      <RootProperty Name="Opacity" />
       <RootProperty Name="RenderTransformOrigin" />
       <RootProperty Name="RenderTransform" />
-      <RootProperty Name="Opacity" />
       <RootProperty Name="Visibility" />
       <RootProperty Name="Resources" />
       <RootEvent Name="Tapped" />
@@ -240,7 +243,6 @@
       <RootProperty Name="HorizontalAlignment" />
       <RootProperty Name="Height" />
       <RootProperty Name="Margin" />
-      <RootProperty Name="Style" />
       <RootProperty Name="VerticalAlignment" />
       <RootProperty Name="Width" />
       <RootProperty Name="MinHeight" />
@@ -248,6 +250,9 @@
       <RootProperty Name="IsChecked" />
       <RootProperty Name="MaxHeight" />
       <RootProperty Name="MaxWidth" />
+      <RootProperty Name="Style" />
+      <RootEvent Name="Checked" />
+      <RootEvent Name="Unchecked" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.ControlTemplate">
       <RootProperty Name="TargetType" />
@@ -380,6 +385,7 @@
       <RootProperty Name="VerticalAlignment" />
       <RootProperty Name="Margin" />
       <RootProperty Name="Name" />
+      <RootProperty Name="Stretch" />
       <RootEvent Name="Tapped" />
     </RootType>
     <RootType FullName="Microsoft.Xaml.Tools.DirectUI.ProxyTypes.NullExtension" />
@@ -476,26 +482,6 @@
       <RootProperty Name="ImageSource" />
       <RootProperty Name="Opacity" />
     </RootType>
-    <RootType FullName="Windows.UI.Xaml.Controls.TextBox">
-      <RootProperty Name="Width" />
-      <RootProperty Name="BorderThickness" />
-      <RootProperty Name="AcceptsReturn" />
-      <RootProperty Name="Height" />
-      <RootProperty Name="Margin" />
-      <RootProperty Name="TextAlignment" />
-      <RootProperty Name="VerticalContentAlignment" />
-      <RootProperty Name="Foreground" />
-      <RootProperty Name="Background" />
-      <RootProperty Name="FontSize" />
-      <RootProperty Name="PlaceholderText" />
-      <RootProperty Name="Opacity" />
-      <RootProperty Name="HorizontalAlignment" />
-      <RootProperty Name="VerticalAlignment" />
-      <RootProperty Name="Text" />
-      <RootProperty Name="InputScope" />
-      <RootProperty Name="IsEnabled" />
-      <RootEvent Name="TextChanged" />
-    </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.ListView">
       <RootProperty Name="Header" />
       <RootProperty Name="ItemTemplate" />
@@ -505,14 +491,25 @@
       <RootProperty Name="IsHoldingEnabled" />
       <RootProperty Name="GroupStyle" />
     </RootType>
-    <RootType FullName="Windows.UI.Xaml.Controls.ProgressRing">
-      <RootProperty Name="Height" />
+    <RootType FullName="Windows.UI.Xaml.Controls.TextBox">
       <RootProperty Name="Width" />
+      <RootProperty Name="BorderThickness" />
+      <RootProperty Name="AcceptsReturn" />
+      <RootProperty Name="Height" />
+      <RootProperty Name="TextAlignment" />
+      <RootProperty Name="VerticalContentAlignment" />
+      <RootProperty Name="HorizontalAlignment" />
+      <RootProperty Name="VerticalAlignment" />
       <RootProperty Name="Foreground" />
-      <RootProperty Name="IsActive" />
-      <RootProperty Name="Background" />
       <RootProperty Name="Opacity" />
+      <RootProperty Name="FontSize" />
+      <RootProperty Name="PlaceholderText" />
+      <RootProperty Name="Background" />
       <RootProperty Name="Margin" />
+      <RootProperty Name="Text" />
+      <RootProperty Name="InputScope" />
+      <RootProperty Name="IsEnabled" />
+      <RootEvent Name="TextChanged" />
     </RootType>
     <RootType FullName="Microsoft.Xaml.Interactions.Media.ControlStoryboardAction">
       <RootProperty Name="Storyboard" />
@@ -528,6 +525,13 @@
       <RootEvent Name="GotFocus" />
     </RootType>
     <RootType FullName="SoonZik.Controls.PriceControl" />
+    <RootType FullName="Windows.UI.Xaml.Controls.ProgressRing">
+      <RootProperty Name="IsActive" />
+      <RootProperty Name="Foreground" />
+      <RootProperty Name="Background" />
+      <RootProperty Name="Opacity" />
+      <RootProperty Name="Margin" />
+    </RootType>
     <RootType FullName="SoonZik.Controls.ProgressRingControl" />
     <RootType FullName="SoonZik.Views.Connexion" />
     <RootType FullName="SoonZik.MainPage" />
