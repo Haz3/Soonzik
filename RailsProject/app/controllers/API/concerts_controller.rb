@@ -25,7 +25,7 @@ module API
         if (@count.present? && @count == "true")
           @returnValue = { content: Concert.count }
         else
-          @returnValue = { content: Concert.all.as_json(:include => {
+          @returnValue = { content: Concert.eager_load([:address, :user]).all.as_json(:include => {
                                                             :address => { :only => Address.miniKey  },
                                                             :user => { :only => User.miniKey }
                                                             }, :only => Concert.miniKey ) }
@@ -58,7 +58,7 @@ module API
     # 
     def show
       begin
-        concert = Concert.find_by_id(@id)
+        concert = Concert.eager_load([:address, :user]).find_by_id(@id)
         if (!concert)
           codeAnswer 502
           defineHttp :not_found
@@ -113,14 +113,14 @@ module API
             end
 
             if (concert_object == nil)          #concert_object doesn't exist
-              concert_object = Concert.where(condition)
+              concert_object = Concert.eager_load([:address, :user]).where(condition)
             else                              #concert_object exists
               concert_object = concert_object.where(condition)
             end
           end
           # - - - - - - - -
         else
-          concert_object = Concert.all            #no attribute specified
+          concert_object = Concert.eager_load([:address, :user]).all            #no attribute specified
         end
 
         order_asc = ""
@@ -129,14 +129,14 @@ module API
         if (defined?@order_by_asc)
           @order_by_asc.each do |x|
             order_asc += ", " if order_asc.size != 0
-            order_asc += (%Q[#{x}] + " ASC")
+            order_asc += ("'concerts'." + %Q[#{x}] + " ASC")
           end
         end
         # filter the order by desc to create the string
         if (defined?@order_by_desc)
           @order_by_desc.each do |x|
             order_desc += ", " if order_desc.size != 0
-            order_desc += (%Q[#{x}] + " DESC")
+            order_desc += ("'concerts'." + %Q[#{x}] + " DESC")
           end
         end
 

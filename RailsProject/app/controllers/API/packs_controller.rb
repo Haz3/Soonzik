@@ -25,7 +25,7 @@ module API
         if (@count.present? && @count == "true")
           @returnValue = { content: Pack.count }
         else
-          @returnValue = { content: Pack.all.as_json(:include => { albums: {
+          @returnValue = { content: Pack.eager_load([albums: { user: {}, musics: {} }, user: {}, descriptions: {}]).all.as_json(:include => { albums: {
                                                                     :include => {
                                                                       :user => { :only => User.miniKey },
                                                                       :musics => { :only => Music.miniKey }
@@ -68,7 +68,7 @@ module API
     # 
     def show
       begin
-        pack = Pack.find_by_id(@id)
+        pack = Pack.eager_load([albums: { user: {}, musics: {} }, user: {}, descriptions: {}]).find_by_id(@id)
         if (!pack)
           codeAnswer 502
           defineHttp :not_found
@@ -138,14 +138,14 @@ module API
             end
 
             if (pack_object == nil)          #pack_object doesn't exist
-              pack_object = Pack.where(condition)
+              pack_object = Pack.eager_load([albums: { user: {}, musics: {} }, user: {}, descriptions: {}]).where(condition)
             else                              #pack_object exists
               pack_object = pack_object.where(condition)
             end
           end
           # - - - - - - - -
         else
-          pack_object = Pack.all            #no attribute specified
+          pack_object = Pack.eager_load([albums: { user: {}, musics: {} }, user: {}, descriptions: {}]).all            #no attribute specified
         end
 
         order_asc = ""
@@ -154,14 +154,14 @@ module API
         if (defined?@order_by_asc)
           @order_by_asc.each do |x|
             order_asc += ", " if order_asc.size != 0
-            order_asc += (%Q[#{x}] + " ASC")
+            order_asc += ("'packs'." + %Q[#{x}] + " ASC")
           end
         end
         # filter the order by desc to create the string
         if (defined?@order_by_desc)
           @order_by_desc.each do |x|
             order_desc += ", " if order_desc.size != 0
-            order_desc += (%Q[#{x}] + " DESC")
+            order_desc += ("'packs'." + %Q[#{x}] + " DESC")
           end
         end
 

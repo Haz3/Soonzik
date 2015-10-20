@@ -28,7 +28,7 @@ module API
         if (@count.present? && @count == "true")
           @returnValue = { content: Listening.count }
         else
-          @returnValue = { content: Listening.all.as_json(:include => {
+          @returnValue = { content: Listening.eager_load([:user => {}, music: { album: {}, user: {} }]).all.as_json(:include => {
                                                                       :user => { :only => User.miniKey },
                                                                       :music => {
                                                                         :only => Music.miniKey,
@@ -67,7 +67,7 @@ module API
     # 
     def show
       begin
-        listening = Listening.find_by_id(@id)
+        listening = Listening.eager_load([:user => {}, music: { album: {}, user: {} }]).find_by_id(@id)
         if (!listening)
           codeAnswer 502
           defineHttp :not_found
@@ -128,14 +128,14 @@ module API
             end
 
             if (listening_object == nil)          #listening_object doesn't exist
-              listening_object = Listening.where(condition)
+              listening_object = Listening.eager_load([:user => {}, music: { album: {}, user: {} }]).where(condition)
             else                              #listening_object exists
               listening_object = listening_object.where(condition)
             end
           end
           # - - - - - - - -
         else
-          listening_object = Listening.all            #no attribute specified
+          listening_object = Listening.eager_load([:user => {}, music: { album: {}, user: {} }]).all            #no attribute specified
         end
 
         order_asc = ""
@@ -144,14 +144,14 @@ module API
         if (defined?@order_by_asc)
           @order_by_asc.each do |x|
             order_asc += ", " if order_asc.size != 0
-            order_asc += (%Q[#{x}] + " ASC")
+            order_asc += ("'listenings'." + %Q[#{x}] + " ASC")
           end
         end
         # filter the order by desc to create the string
         if (defined?@order_by_desc)
           @order_by_desc.each do |x|
             order_desc += ", " if order_desc.size != 0
-            order_desc += (%Q[#{x}] + " DESC")
+            order_desc += ("'listenings'." + %Q[#{x}] + " DESC")
           end
         end
 
@@ -274,7 +274,7 @@ module API
         @lng = @lng.to_f
         @range = @range.to_f
 
-        listen = Listening.in_range(0..@range, :origin => [@lat, @lng]).order(:created_at => :desc)
+        listen = Listening.eager_load([:user => {}, music: { album: {}, user: {} }]).in_range(0..@range, :origin => [@lat, @lng]).order(:created_at => :desc)
         listen.each { |x|
           x.setOrigin([@lat, @lng])
         }

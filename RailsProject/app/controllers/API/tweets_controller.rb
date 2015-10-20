@@ -30,7 +30,7 @@ module API
         if (@count.present? && @count == "true")
           @returnValue = { content: Tweet.count }
         else
-          @returnValue = { content: Tweet.all.as_json(:include => {
+          @returnValue = { content: Tweet.eager_load(:user).all.as_json(:include => {
                                                       :user => { only: User.miniKey }
                                                     }, :only => Tweet.miniKey) }
         end
@@ -62,7 +62,7 @@ module API
     # 
     def show
       begin
-        tweets = Tweet.find_by_id(@id)
+        tweets = Tweet.eager_load(:user).find_by_id(@id)
         if (!tweets)
           codeAnswer 502
           defineHttp :not_found
@@ -174,14 +174,14 @@ module API
             end
 
             if (tweet_object == nil)          #tweet_object doesn't exist
-              tweet_object = Tweet.where(condition)
+              tweet_object = Tweet.eager_load(:user).where(condition)
             else                              #tweet_object exists
               tweet_object = tweet_object.where(condition)
             end
           end
           # - - - - - - - -
         else
-          tweet_object = Tweet.all            #no attribute specified
+          tweet_object = Tweet.eager_load(:user).all            #no attribute specified
         end
 
         order_asc = ""
@@ -190,14 +190,14 @@ module API
         if (defined?@order_by_asc)
           @order_by_asc.each do |x|
             order_asc += ", " if order_asc.size != 0
-            order_asc += (%Q[#{x}] + " ASC")
+            order_asc += ("'tweets'." + %Q[#{x}] + " ASC")
           end
         end
         # filter the order by desc to create the string
         if (defined?@order_by_desc)
           @order_by_desc.each do |x|
             order_desc += ", " if order_desc.size != 0
-            order_desc += (%Q[#{x}] + " DESC")
+            order_desc += ("'tweets'." + %Q[#{x}] + " DESC")
           end
         end
 
@@ -301,7 +301,7 @@ module API
     def flux
       begin
         if (@security)
-          u = User.find_by_id(@user_id)
+          u = User.eager_load(tweets: { user: {} }).find_by_id(@user_id)
           tweets = []
           tweets |= u.tweets || []
           offset = (@offset.present?) ? @offset.to_i : 0

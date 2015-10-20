@@ -23,7 +23,7 @@ module API
         if (@count.present? && @count == "true")
           @returnValue = { content: Genre.count }
         else
-          @returnValue = { content: Genre.all.as_json(:include => {
+          @returnValue = { content: Genre.eager_load(:influence).all.as_json(:include => {
                                                         :influences => { :only => Influence.miniKey }
                                                     }, :only => Genre.miniKey) }
         end
@@ -58,7 +58,7 @@ module API
     # 
     def show
     	begin
-        genre = Genre.find_by_id(@id)
+        genre = Genre.eager_load([:influences => {}, :musics => { album: {} }]).find_by_id(@id)
         if (!genre)
           codeAnswer 502
           defineHttp :not_found

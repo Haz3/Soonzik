@@ -27,7 +27,7 @@ module API
     # 
     def show
       begin
-        playlist = Playlist.find_by_id(@id)
+        playlist = Playlist.eager_load([musics: { user: {}, album: {} }, user: {}]).find_by_id(@id)
         if (!playlist)
           codeAnswer 502
           defineHttp :not_found
@@ -120,7 +120,7 @@ module API
     def update
       begin
         if (@security)
-          playlist = Playlist.find_by_id(@id)
+          playlist = Playlist.eager_load([musics: { user: {}, album: {} }, user: {}]).find_by_id(@id)
           if (playlist != nil && playlist.user_id == @user_id)
             if (defined?(@playlist) && @playlist.has_key?(:music) && @playlist[:music].size > 0)
               playlist.musics = []
@@ -200,14 +200,14 @@ module API
             end
 
             if (playlist_object == nil)          #playlist_object doesn't exist
-              playlist_object = Playlist.where(condition)
+              playlist_object = Playlist.eager_load([musics: { user: {}, album: {} }, user: {}]).where(condition)
             else                              #playlist_object exists
               playlist_object = playlist_object.where(condition)
             end
           end
           # - - - - - - - -
         else
-          playlist_object = Playlist.all            #no attribute specified
+          playlist_object = Playlist.eager_load([musics: { user: {}, album: {} }, user: {}]).all            #no attribute specified
         end
 
         order_asc = ""
@@ -216,14 +216,14 @@ module API
         if (defined?@order_by_asc)
           @order_by_asc.each do |x|
             order_asc += ", " if order_asc.size != 0
-            order_asc += (%Q[#{x}] + " ASC")
+            order_asc += ("'playlists'." + %Q[#{x}] + " ASC")
           end
         end
         # filter the order by desc to create the string
         if (defined?@order_by_desc)
           @order_by_desc.each do |x|
             order_desc += ", " if order_desc.size != 0
-            order_desc += (%Q[#{x}] + " DESC")
+            order_desc += ("'playlists'." + %Q[#{x}] + " DESC")
           end
         end
 

@@ -41,7 +41,7 @@ module API
 				if (@count.present? && @count == "true")
 					@returnValue = { content: User.count }
 				else
-					@returnValue = { content: User.all.as_json(:only => User.miniKey, :include => { groups: { only: [:name] } } ) }
+					@returnValue = { content: User.eager_load(:groups).all.as_json(:only => User.miniKey, :include => { groups: { only: [:name] } } ) }
 				end
 				if (@returnValue[:content].size == 0)
 					codeAnswer 202
@@ -112,9 +112,9 @@ module API
 		def show
 			begin
 				if (@id =~ /\A[-+]?\d*\.?\d+\z/)
-					user = User.find_by_id(@id)
+					user = User.eager_load(:groups).find_by_id(@id)
 				else
-					user = User.find_by_username(@id)
+					user = User.eager_load(:groups).find_by_username(@id)
 				end
 				if (!user)
 					codeAnswer 502
@@ -167,14 +167,14 @@ module API
 						end
 
 						if (user_object == nil)					#user_object doesn't exist
-							user_object = User.where(condition)
+							user_object = User.eager_load(:groups).where(condition)
 						else															#user_object exists
 							user_object = user_object.where(condition)
 						end
 					end
 					# - - - - - - - -
 				else
-					user_object = User.all						#no attribute specified
+					user_object = User.eager_load(:groups).all						#no attribute specified
 				end
 
 				order_asc = ""
@@ -183,14 +183,14 @@ module API
 				if (defined?@order_by_asc)
 					@order_by_asc.each do |x|
 						order_asc += ", " if order_asc.size != 0
-						order_asc += (%Q[#{x}] + " ASC")
+						order_asc += ("'users'." + %Q[#{x}] + " ASC")
 					end
 				end
 				# filter the order by desc to create the string
 				if (defined?@order_by_desc)
 					@order_by_desc.each do |x|
 						order_desc += ", " if order_desc.size != 0
-						order_desc += (%Q[#{x}] + " DESC")
+						order_desc += ("'users'." + %Q[#{x}] + " DESC")
 					end
 				end
 
@@ -338,7 +338,7 @@ module API
 		def update
 			begin
 				if (@security)
-					user = User.find_by_id(@user_id)
+					user = User.eager_load(:address).find_by_id(@user_id)
 					if user == nil
 						codeAnswer 502
 						defineHttp :not_found
@@ -369,7 +369,7 @@ module API
 		# 
 		def isArtist
 			begin
-				u = User.find_by_id(@id)
+				u = User.eager_load(:albums => { musics: {} }).find_by_id(@id)
 
 				if (!u)
 					codeAnswer 502
@@ -417,7 +417,7 @@ module API
 		def follow
 			begin
 				if (@security)
-					u = User.find_by_id(@user_id)
+					u = User.eager_load(:follows).find_by_id(@user_id)
 					toFollow = User.find_by_id(@follow_id)
 
 					if (!u || !toFollow)
@@ -535,7 +535,7 @@ module API
 		def addfriend
 			begin
 				if (@security)
-					u = User.find_by_id(@user_id)
+					u = User.eager_load(:friends).find_by_id(@user_id)
 					friend = User.find_by_id(@friend_id)
 
 					if (!u || !friend)
@@ -652,7 +652,7 @@ module API
 		# 
 		def getFriends
 			begin
-				u = User.find_by_id(@id)
+				u = User.eager_load(:friends).find_by_id(@id)
 
 				if (!u)
 					codeAnswer 502
@@ -684,7 +684,7 @@ module API
 		# 
 		def getFollows
 			begin
-				u = User.find_by_id(@id)
+				u = User.eager_load(:follows).find_by_id(@id)
 
 				if (!u)
 					codeAnswer 502
@@ -716,7 +716,7 @@ module API
 		# 
 		def getFollowers
 			begin
-				u = User.find_by_id(@id)
+				u = User.eager_load(:followers).find_by_id(@id)
 
 				if (!u)
 					codeAnswer 502
@@ -865,7 +865,7 @@ module API
 			begin
 				user = nil
 				if (@security && save == false)
-					user = User.find_by_id(@user_id)
+					user = User.eager_load(:address).find_by_id(@user_id)
 					update_user = false
 					update_address = true
 					if (params.has_key?(:user))

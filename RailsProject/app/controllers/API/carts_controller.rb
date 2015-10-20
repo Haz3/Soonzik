@@ -139,7 +139,7 @@ module API
           codeAnswer 500
           defineHttp :forbidden
         else
-          cart = Cart.where(user_id: @user_id)
+          cart = Cart.eager_load([musics: { album: {}, user: {} }, albums: { user: {} }]).where(user_id: @user_id)
           if (cart.size == 0)
             codeAnswer 202
           else

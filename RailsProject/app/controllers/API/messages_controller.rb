@@ -28,7 +28,7 @@ module API
     def show
       begin
       	if (@security)
-	        msg = Message.find_by_id(@id)
+	        msg = Message.eager_load([:sender, :receiver]).find_by_id(@id)
 	        if (!msg || (msg && (msg.user_id == @user_id || msg.dest_id == @user_id)))
 	          codeAnswer 502
             defineHttp :not_found
@@ -119,7 +119,7 @@ module API
         if (!@security)
           codeAnswer 500
         else
-          message_object = Message.where("user_id = ? OR dest_id = ?", @user_id, @user_id)
+          message_object = Message.eager_load([:sender, :receiver]).where("user_id = ? OR dest_id = ?", @user_id, @user_id)
           if (defined?@attribute)
             # - - - - - - - -
             @attribute.each do |x, y|
@@ -130,15 +130,11 @@ module API
                 condition = {x => y};
               end
 
-              if (message_object == nil)          #message_object doesn't exist
-                message_object = Message.where(condition).where(user_id: @user_id)
-              else                              #message_object exists
+              if (message_object != nil)
                 message_object = message_object.where(condition)
               end
             end
             # - - - - - - - -
-          else
-            message_object = Message.where("user_id = ? OR dest_id = ?", @user_id, @user_id)            #no attribute specified
           end
 
           order_asc = ""
@@ -147,14 +143,14 @@ module API
           if (defined?@order_by_asc)
             @order_by_asc.each do |x|
               order_asc += ", " if order_asc.size != 0
-              order_asc += (%Q[#{x}] + " ASC")
+              order_asc += ("'messages'." + %Q[#{x}] + " ASC")
             end
           end
           # filter the order by desc to create the string
           if (defined?@order_by_desc)
             @order_by_desc.each do |x|
               order_desc += ", " if order_desc.size != 0
-              order_desc += (%Q[#{x}] + " DESC")
+              order_desc += ("'messages'." + %Q[#{x}] + " DESC")
             end
           end
 

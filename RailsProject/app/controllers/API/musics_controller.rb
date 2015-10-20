@@ -33,7 +33,7 @@ module API
         if (@count.present? && @count == "true")
           @returnValue = { content: Music.where("album_id IS NOT NULL").count }
         else
-          @returnValue = { content: Music.where("album_id IS NOT NULL").all.as_json(:only => Music.miniKey, :include => {
+          @returnValue = { content: Music.eager_load([:album, :genres, :user]).where("album_id IS NOT NULL").all.as_json(:only => Music.miniKey, :include => {
                                                         :album => { :only => Album.miniKey },
                                                         :genres => { :only => Genre.miniKey },
                                                         :user => {:only => User.miniKey}
@@ -66,7 +66,7 @@ module API
     # 
     def show
       begin
-        music = Music.where("album_id IS NOT NULL").find_by_id(@id)
+        music = Music.eager_load([:album, :genres, :user]).where("album_id IS NOT NULL").find_by_id(@id)
         if (!music)
           codeAnswer 502
           defineHttp :not_found
@@ -123,14 +123,14 @@ module API
             end
 
             if (music_object == nil)          #music_object doesn't exist
-              music_object = Music.where("album_id IS NOT NULL").where(condition)
+              music_object = Music.eager_load([:album, :genres, :user]).where("album_id IS NOT NULL").where(condition)
             else                              #music_object exists
               music_object = music_object.where(condition)
             end
           end
           # - - - - - - - -
         else
-          music_object = Music.where("album_id IS NOT NULL").all            #no attribute specified
+          music_object = Music.eager_load([:album, :genres, :user]).where("album_id IS NOT NULL").all            #no attribute specified
         end
 
         order_asc = ""
@@ -139,14 +139,14 @@ module API
         if (defined?@order_by_asc)
           @order_by_asc.each do |x|
             order_asc += ", " if order_asc.size != 0
-            order_asc += (%Q[#{x}] + " ASC")
+            order_asc += ("'musics'." + %Q[#{x}] + " ASC")
           end
         end
         # filter the order by desc to create the string
         if (defined?@order_by_desc)
           @order_by_desc.each do |x|
             order_desc += ", " if order_desc.size != 0
-            order_desc += (%Q[#{x}] + " DESC")
+            order_desc += ("'musics'." + %Q[#{x}] + " DESC")
           end
         end
 
@@ -314,7 +314,7 @@ module API
     def addtoplaylist
       begin
         if (@security)
-          playlist = Playlist.find_by_id(@playlist_id)
+          playlist = Playlist.eager_load(:musics).find_by_id(@playlist_id)
           music = Music.where("album_id IS NOT NULL").find_by_id(@id)
           if (playlist && music && playlist.user_id == @user_id.to_i && !playlist.musics.include?(music))
             playlist_obj = PlaylistObject.create(music_id: music.id, playlist_id: playlist.id, row_order: :last)
@@ -355,7 +355,7 @@ module API
     def delfromplaylist
       begin
         if (@security)
-          playlist = Playlist.find_by_id(@playlist_id)
+          playlist = Playlist.eager_load(:musics).find_by_id(@playlist_id)
           music = Music.find_by_id(@id)
           if (playlist && music && playlist.user_id == @user_id.to_i && playlist.musics.include?(music))
             playlist_obj = PlaylistObject.where(playlist_id: @playlist_id).find_by_music_id(@id)
@@ -397,7 +397,7 @@ module API
     def getcomments
       order = "false"
       begin
-        musics = Music.find_by_id(@id)
+        musics = Music.eager_load(:commentaries => { user: {} }).find_by_id(@id)
         @offset = 0 if !@offset.present?
         @limit = 20 if !@limit.present?
         order = @order_reverse if @order_reverse.present?() && (@order_reverse == "true" || @order_reverse == "false")
@@ -459,7 +459,6 @@ module API
           defineHttp :bad_request
         end
       rescue
-        puts $!, $@
         codeAnswer 504
         defineHttp :service_unavailable
       end

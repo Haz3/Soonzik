@@ -30,7 +30,7 @@ module API
         if (@count.present? && @count == "true")
           @returnValue = { content: Album.count }
         else
-          @returnValue = { content: Album.all.as_json(:only => Album.miniKey, :include => {
+          @returnValue = { content: Album.eager_load([:user, :musics, :descriptions]).all.as_json(:only => Album.miniKey, :include => {
                                                         :user => { :only => User.miniKey },
                                                         :musics => {
                                                           :only => Music.miniKey,
@@ -46,7 +46,6 @@ module API
           codeAnswer 200
         end
       rescue
-        puts $!, $@
         codeAnswer 504
         defineHttp :service_unavailable
       end
@@ -69,7 +68,7 @@ module API
     # 
     def show
       begin
-        album = Album.find_by_id(@id)
+        album = Album.eager_load([:user, :musics, :descriptions]).find_by_id(@id)
         if (!album)
           codeAnswer 502
           defineHttp :not_found
@@ -130,14 +129,14 @@ module API
             end
 
             if (album_object == nil)          #album_object doesn't exist
-              album_object = Album.where(condition)
+              album_object = Album.eager_load([:user, :musics, :descriptions, :genres]).where(condition)
             else                              #album_object exists
               album_object = album_object.where(condition)
             end
           end
           # - - - - - - - -
         else
-          album_object = Album.all            #no attribute specified
+          album_object = Album.eager_load([:user, :musics, :descriptions, :genres]).all            #no attribute specified
         end
 
         order_asc = ""
@@ -146,14 +145,14 @@ module API
         if (defined?@order_by_asc)
           @order_by_asc.each do |x|
             order_asc += ", " if order_asc.size != 0
-            order_asc += (%Q[#{x}] + " ASC")
+            order_asc += ("'albums'." + %Q[#{x}] + " ASC")
           end
         end
         # filter the order by desc to create the string
         if (defined?@order_by_desc)
           @order_by_desc.each do |x|
             order_desc += ", " if order_desc.size != 0
-            order_desc += (%Q[#{x}] + " DESC")
+            order_desc += ("'albums'." + %Q[#{x}] + " DESC")
           end
         end
 
@@ -236,7 +235,7 @@ module API
             
             if (com.save)
               com.albums << album
-              @returnValue = { content: com.as_json(:only => Commentary.miniKey, :include => { user: { only: User.miniKey } }) }
+              @returnValue = { content: com.as_json(:only => Commentary.eager_load(:user).miniKey, :include => { user: { only: User.miniKey } }) }
               codeAnswer 201
               defineHttp :created
             else
@@ -276,7 +275,7 @@ module API
       order = "false"
 
       begin
-        albums = Album.find_by_id(@id)
+        albums = Album.eager_load(commentaries: { user: {} }).find_by_id(@id)
         @offset = 0 if !@offset.present?()
         @limit = 20 if !@limit.present?()
         order = @order_reverse if @order_reverse.present?() && (@order_reverse == "true" || @order_reverse == "false")
@@ -294,6 +293,7 @@ module API
             })
           }
           @returnValue = { content: refine_comments }
+          codeAnswer 200
         end
       rescue
         codeAnswer 504

@@ -28,7 +28,7 @@ module API
     def show
       begin
       	if (@security)
-	        notif = Notification.find_by_id(@id)
+	        notif = Notification.eager_load([:user, :from]).find_by_id(@id)
 	        if (!notif || (notif && notif.user_id != @user_id))
 	          codeAnswer 502
             defineHttp :not_found
@@ -78,7 +78,7 @@ module API
         if (!@security)
           codeAnswer 500
         else
-          notification_object = Notification.where(user_id: @user_id)
+          notification_object = Notification.eager_load([:user, :from]).where(user_id: @user_id)
           if (defined?@attribute)
             # - - - - - - - -
             @attribute.each do |x, y|
@@ -93,9 +93,7 @@ module API
                 condition = {x => variable};
               end
 
-              if (notification_object == nil)          #notification_object doesn't exist
-                notification_object = Notification.where(condition).where(user_id: @user_id)
-              else                              #notification_object exists
+              if (notification_object == nil)
                 notification_object = notification_object.where(condition)
               end
             end
@@ -107,14 +105,14 @@ module API
           if (defined?@order_by_asc)
             @order_by_asc.each do |x|
               order_asc += ", " if order_asc.size != 0
-              order_asc += (%Q[#{x}] + " ASC")
+              order_asc += ("'notifications'." + %Q[#{x}] + " ASC")
             end
           end
           # filter the order by desc to create the string
           if (defined?@order_by_desc)
             @order_by_desc.each do |x|
               order_desc += ", " if order_desc.size != 0
-              order_desc += (%Q[#{x}] + " DESC")
+              order_desc += ("'notifications'." + %Q[#{x}] + " DESC")
             end
           end
 

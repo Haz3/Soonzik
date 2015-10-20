@@ -28,7 +28,7 @@ module API
         if (@count.present? && @count == "true")
           @returnValue = { content: Battle.count }
         else
-          @returnValue = { content: Battle.all.as_json(:include => {
+          @returnValue = { content: Battle.eager_load([:artist_one, :artist_two, :votes]).all.as_json(:include => {
         														:artist_one => { :only => User.miniKey },
         														:artist_two => { :only => User.miniKey },
         														:votes      => { :only => Vote.miniKey }
@@ -62,7 +62,7 @@ module API
     # 
     def show
       begin
-        battle = Battle.find_by_id(@id)
+        battle = Battle.eager_load([:artist_one, :artist_two, :votes]).find_by_id(@id)
         if (!battle)
           codeAnswer 502
           defineHttp :not_found
@@ -118,14 +118,14 @@ module API
             end
 
             if (battle_object == nil)          #battle_object doesn't exist
-              battle_object = Battle.where(condition)
+              battle_object = Battle.eager_load([:artist_one, :artist_two, :votes]).where(condition)
             else                              #battle_object exists
               battle_object = battle_object.where(condition)
             end
           end
           # - - - - - - - -
         else
-          battle_object = Battle.all            #no attribute specified
+          battle_object = Battle.eager_load([:artist_one, :artist_two, :votes]).all            #no attribute specified
         end
 
         order_asc = ""
@@ -134,14 +134,14 @@ module API
         if (defined?@order_by_asc)
           @order_by_asc.each do |x|
             order_asc += ", " if order_asc.size != 0
-            order_asc += (%Q[#{x}] + " ASC")
+            order_asc += ("'battles'." + %Q[#{x}] + " ASC")
           end
         end
         # filter the order by desc to create the string
         if (defined?@order_by_desc)
           @order_by_desc.each do |x|
             order_desc += ", " if order_desc.size != 0
-            order_desc += (%Q[#{x}] + " DESC")
+            order_desc += ("'battles'." + %Q[#{x}] + " DESC")
           end
         end
 
@@ -212,7 +212,7 @@ module API
             codeAnswer 502
             defineHttp :not_found
           else
-            oldVote = Vote.where(battle_id: @id).find_by_user_id(@user_id)
+            oldVote = Vote.eager_load([:battle => { votes: {} }, artist: {}]).where(battle_id: @id).find_by_user_id(@user_id)
             if (oldVote)
               oldVote.artist_id = @artist_id
               oldVote.save!

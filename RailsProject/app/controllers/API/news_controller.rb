@@ -30,7 +30,7 @@ module API
         if (@count.present? && @count == "true")
           @returnValue = { content: News.count }
         else
-          n = News.all
+          n = News.eager_load([:user, :attachments]).all
           if @language.present?
             n.each do |news|
               news.setLanguage @language
@@ -70,7 +70,7 @@ module API
     # 
     def show
       begin
-        news = News.find_by_id(@id)
+        news = News.eager_load([:user, :attachments]).find_by_id(@id)
         if (!news)
           codeAnswer 502
           defineHttp :not_found
@@ -127,14 +127,14 @@ module API
             end
 
             if (new_object == nil)          #new_object doesn't exist
-              new_object = News.where(condition)
+              new_object = News.eager_load([:user, :attachments]).where(condition)
             else                              #new_object exists
               new_object = new_object.where(condition)
             end
           end
           # - - - - - - - -
         else
-          new_object = News.all            #no attribute specified
+          new_object = News.eager_load([:user, :attachments]).all            #no attribute specified
         end
 
         order_asc = ""
@@ -143,14 +143,14 @@ module API
         if (defined?@order_by_asc)
           @order_by_asc.each do |x|
             order_asc += ", " if order_asc.size != 0
-            order_asc += (%Q[#{x}] + " ASC")
+            order_asc += ("'news'." + %Q[#{x}] + " ASC")
           end
         end
         # filter the order by desc to create the string
         if (defined?@order_by_desc)
           @order_by_desc.each do |x|
             order_desc += ", " if order_desc.size != 0
-            order_desc += (%Q[#{x}] + " DESC")
+            order_desc += ("'news'." + %Q[#{x}] + " DESC")
           end
         end
 
@@ -270,7 +270,7 @@ module API
     def getcomments
       order = "false"
       begin
-        news = News.find_by_id(@id)
+        news = News.eager_load(commentaries: { user: {} }).find_by_id(@id)
         @offset = 0 if !@offset.present?
         @limit = 20 if !@limit.present?
         order = @order_reverse if @order_reverse.present?() && (@order_reverse == "true" || @order_reverse == "false")

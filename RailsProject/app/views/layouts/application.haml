@@ -97,7 +97,7 @@
 									%span.small_menu
 										{{ labels.DISPLAY_MENU_FRIENDS_LABEL }}
 							%li
-								= link_to destroy_user_session_path :method => :delete  do
+								= link_to destroy_user_session_path, :target => "_self", :method => :delete  do
 									%i.fi-power
 									%span.small_menu
 										{{ labels.DISPLAY_MENU_LOGOUT_LABEL }}
