@@ -194,7 +194,6 @@ namespace SoonZik.ViewModel
             {
                 //LocalFolderHelper.Delete();
                 Singleton.Singleton.Instance().SelectedMusicSingleton.Add(SelectedMusic);
-                LocalFolderHelper.WriteTimestamp();
                 GlobalMenuControl.SetChildren(new BackgroundAudioPlayer());
             }
             //_navigationService.Navigate(new PlayerControl().GetType());
@@ -283,7 +282,11 @@ namespace SoonZik.ViewModel
 
         private void PlayCommandExecute()
         {
-            var test = 0;
+            SelectedMusic.album = MyAlbum;
+            SelectedMusic.user = MyAlbum.user;
+            SelectedMusic.file = "http://soonzikapi.herokuapp.com/musics/get/" + SelectedMusic.id;
+            Singleton.Singleton.Instance().SelectedMusicSingleton.Add(SelectedMusic);
+            GlobalMenuControl.SetChildren(new BackgroundAudioPlayer());
         }
 
         private void AddMusicToCartExecute()

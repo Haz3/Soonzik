@@ -11,6 +11,7 @@ using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
+using SoonZik.Helpers;
 using SoonZik.Utils;
 
 // Pour en savoir plus sur le modèle d'élément Contrôle utilisateur, consultez la page http://go.microsoft.com/fwlink/?LinkId=234236
@@ -93,24 +94,21 @@ namespace SoonZik.Controls
 
                 if (BackgroundMediaPlayer.Current.CurrentState == MediaPlayerState.Playing)
                 {
-                    playButton.Content = "| |";
-                    PlayImage.Source =
-                        new BitmapImage(new Uri("../Resources/PlayerIcons/pause.png", UriKind.RelativeOrAbsolute));
+                    //playButton.Content = "| |";
+                    PlayImage.Source = new BitmapImage(new Uri("ms-appx:///Resources/PlayerIcons/pause.png", UriKind.RelativeOrAbsolute));
                     // Change to pause button
                 }
                 else
                 {
-                    playButton.Content = ">"; // Change to play button
-                    PlayImage.Source =
-                        new BitmapImage(new Uri("../Resources/PlayerIcons/play.png", UriKind.RelativeOrAbsolute));
+                    //playButton.Content = ">"; // Change to play button
+                    PlayImage.Source = new BitmapImage(new Uri("ms-appx:///Resources/PlayerIcons/play.png", UriKind.RelativeOrAbsolute));
                 }
                 txtCurrentTrack.Text = CurrentTrack;
             }
             else
             {
-                PlayImage.Source =
-                    new BitmapImage(new Uri("../Resources/PlayerIcons/play.png", UriKind.RelativeOrAbsolute));
-                playButton.Content = ">"; // Change to play button
+                PlayImage.Source = new BitmapImage(new Uri("ms-appx:///Resources/PlayerIcons/play.png", UriKind.RelativeOrAbsolute));
+                //playButton.Content = ">"; // Change to play button
                 txtCurrentTrack.Text = "";
             }
         }
@@ -137,9 +135,10 @@ namespace SoonZik.Controls
                 case MediaPlayerState.Playing:
                     await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
                     {
-                        playButton.Content = "| |"; // Change to pause button
-                        prevButton.IsEnabled = true;
-                        nextButton.IsEnabled = true;
+                        //playButton.Content = "| |"; // Change to pause button
+                        PlayImage.Source = new BitmapImage(new Uri("ms-appx:///Resources/PlayerIcons/pause.png", UriKind.RelativeOrAbsolute));
+                        //prevButton.IsEnabled = true;
+                        //nextButton.IsEnabled = true;
                     }
                         );
 
@@ -147,7 +146,10 @@ namespace SoonZik.Controls
                 case MediaPlayerState.Paused:
                     await
                         Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
-                            () => { playButton.Content = ">"; // Change to play button
+                            () =>
+                            {
+                                //playButton.Content = ">"; // Change to play button
+                                PlayImage.Source = new BitmapImage(new Uri("ms-appx:///Resources/PlayerIcons/play.png", UriKind.RelativeOrAbsolute));
                             }
                             );
 
@@ -196,7 +198,7 @@ namespace SoonZik.Controls
             // Prevent the user from repeatedly pressing the button and causing 
             // a backlong of button presses to be handled. This button is re-eneabled 
             // in the TrackReady Playstate handler.
-            prevButton.IsEnabled = false;
+            //prevButton.IsEnabled = false;
         }
 
         private void PlayImage_OnTapped(object sender, TappedRoutedEventArgs e)
@@ -232,7 +234,7 @@ namespace SoonZik.Controls
             // Prevent the user from repeatedly pressing the button and causing 
             // a backlong of button presses to be handled. This button is re-eneabled 
             // in the TrackReady Playstate handler.
-            nextButton.IsEnabled = false;
+            //nextButton.IsEnabled = false;
         }
 
         private void RepeatImage_OnTapped(object sender, TappedRoutedEventArgs e)
@@ -284,12 +286,22 @@ namespace SoonZik.Controls
 
         private void AddMediaPlayerEventHandlers()
         {
+            BackgroundMediaPlayer.Current.MediaEnded += CurrentOnMediaEnded;
             BackgroundMediaPlayer.Current.CurrentStateChanged += MediaPlayer_CurrentStateChanged;
             BackgroundMediaPlayer.MessageReceivedFromBackground += BackgroundMediaPlayer_MessageReceivedFromBackground;
         }
 
+        private void CurrentOnMediaEnded(MediaPlayer sender, object args)
+        {
+            int i = 0;
+        }
+
         private void StartBackgroundAudioTask()
         {
+            BackgroundMediaPlayer.Current.SetUriSource(new Uri(Singleton.Singleton.Instance().SelectedMusicSingleton[0].file, UriKind.RelativeOrAbsolute));
+            txtCurrentTrack.Text = Singleton.Singleton.Instance().SelectedMusicSingleton[0].title;
+            //txtCurrentArtist.Text = Singleton.Singleton.Instance().SelectedMusicSingleton[0].user.username;
+            //ImageMusique.Source = new BitmapImage(new Uri(Constant.UrlImageAlbum + Singleton.Singleton.Instance().SelectedMusicSingleton[0].album.image, UriKind.RelativeOrAbsolute));
             AddMediaPlayerEventHandlers();
             var backgroundtaskinitializationresult = Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
             {

@@ -17,7 +17,7 @@
             <core:InvokeCommandAction Command="{Binding LoadedCommand}" />
         </core:EventTriggerBehavior>
     </interactivity:Interaction.Behaviors>
-    
+
     <Page.Resources>
         <DataTemplate x:Key="UserTemplate">
             <StackPanel Margin="0,0,0,10">

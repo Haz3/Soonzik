@@ -117,7 +117,8 @@
             <!--<ProgressBar x:Name="ProgressBar" Visibility="Visible" Width="200" IsIndeterminate="True" VerticalAlignment="Center" Height="10" HorizontalAlignment="Center" Foreground="Aqua"></ProgressBar>-->
 
             <ToggleButton x:ConnectionId='10' x:Name="ToggleButtonMenu" Content="ToggleButton" HorizontalAlignment="Left" Height="30"
-                          Margin="10,8,0,12" VerticalAlignment="Center"                                                                              
+                          Margin="10,8,0,12" VerticalAlignment="Center"                                     
+                                                                  
                           Width="30" MinHeight="20" MinWidth="30" IsChecked="False" MaxHeight="30" MaxWidth="30">
                 <interactivity:Interaction.Behaviors>
                     <core:EventTriggerBehavior EventName="Checked">
@@ -145,7 +146,8 @@
             <!--<Image x:Name="PlaylistAdd" Source="../Resources/Icones/plus.png" Height="30" Tapped="PlaylistAdd_OnTapped" Visibility="Visible" HorizontalAlignment="Right" Margin="0,0,60,5" VerticalAlignment="Center"/>-->
         </Grid>
 
-        <Grid x:Name="MenuGrid" Grid.Row="1" HorizontalAlignment="Left" Margin="-200,0,0,0" Width="200" Background="Transparent" Opacity="0.8"
+        <Grid x:Name="MenuGrid" Grid.Row="1" HorizontalAlignment="Left" Margin="-200,0,0,0" Width="200"
+              Background="Transparent" Opacity="0.8"
               RenderTransformOrigin="0.5,0.5">
             <Grid.RenderTransform>
                 <CompositeTransform />
@@ -188,7 +190,8 @@
                     MinWidth="200" />
         </Grid>
 
-        <Grid x:Name="SearchGrid" Grid.Row="1" Width="200" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Right" Background="Transparent"
+        <Grid x:Name="SearchGrid" Grid.Row="1" Width="200" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Right"
+              Background="Transparent"
               Margin="0,0,-200,0" Opacity="0.8">
             <Grid.RenderTransform>
                 <CompositeTransform />
@@ -200,10 +203,11 @@
 
             <Border BorderThickness="1" Grid.Row="0" BorderBrush="Transparent" Background="Gray" CornerRadius="10">
                 <TextBox x:ConnectionId='9' x:Name="SearchTextBlock" Width="190" BorderThickness="0" AcceptsReturn="True"
-                     Height="13" TextAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Center" 
-                     VerticalAlignment="Center" Foreground="White" Opacity="0.5" FontSize="18"
-                     x:Uid="Search" PlaceholderText=""
-                                                                 />
+                         Height="13" TextAlignment="Center" VerticalContentAlignment="Center"
+                         HorizontalAlignment="Center"
+                         VerticalAlignment="Center" Foreground="White" Opacity="0.5" FontSize="18"
+                         x:Uid="Search" PlaceholderText=""
+                                                                     />
             </Border>
             <Grid Grid.Row="1">
                 <Grid.RowDefinitions>

@@ -1,6 +1,6 @@
 <XamlCompilerSaveState>
   <ReferenceAssemblyList>
-    <LocalAssembly PathName="c:\users\gery\documents\github\soonzik\windowsphone\soonzik\soonzik\obj\debug\intermediatexaml\soonzik.exe" HashGuid="f258c656-3adf-8302-1fb6-2324388d0e3a" />
+    <LocalAssembly PathName="c:\users\gery\documents\github\soonzik\windowsphone\soonzik\soonzik\obj\debug\intermediatexaml\soonzik.exe" HashGuid="eae22649-df9d-fead-1f62-e6364551f680" />
     <ReferenceAssembly PathName="c:\program files (x86)\microsoft sdks\windowsphoneapp\v8.1\extensionsdks\behaviorsxamlsdkmanaged\12.0\references\commonconfiguration\neutral\microsoft.xaml.interactions.dll" HashGuid="95a94f94-3917-d473-4f7c-18c4bd437046" />
     <ReferenceAssembly PathName="c:\program files (x86)\microsoft sdks\windowsphoneapp\v8.1\extensionsdks\behaviorsxamlsdkmanaged\12.0\references\commonconfiguration\neutral\microsoft.xaml.interactivity.dll" HashGuid="d25f59e6-dd81-900a-0dfc-55b39f6898ef" />
     <ReferenceAssembly PathName="c:\users\gery\documents\github\soonzik\windowsphone\soonzik\packages\coding4fun.toolkit.controls.2.1.0\lib\wpa81\coding4fun.toolkit.controls.dll" HashGuid="21a915fd-eec9-e7f8-8a81-6938e33d1e8f" />
@@ -17,7 +17,7 @@
     <ReferenceAssembly PathName="c:\users\gery\documents\github\soonzik\windowsphone\soonzik\packages\microsoft.bcl.async.1.0.168\lib\wpa81\microsoft.threading.tasks.extensions.dll" HashGuid="79a01987-c06c-c9d7-37eb-629809787680" />
     <ReferenceAssembly PathName="c:\users\gery\documents\github\soonzik\windowsphone\soonzik\packages\newtonsoft.json.7.0.1\lib\portable-net40+sl5+wp80+win8+wpa81\newtonsoft.json.dll" HashGuid="0b4cdfc1-2257-2e75-23cf-4052e97b309e" />
     <ReferenceAssembly PathName="c:\users\gery\documents\github\soonzik\windowsphone\soonzik\soonzik.backgroundaudiotask\bin\debug\soonzik.backgroundaudiotask.winmd" HashGuid="9532822a-839a-3f5d-38f3-ad026f5ad3e4" />
-    <ReferenceAssembly PathName="c:\users\gery\documents\github\soonzik\windowsphone\soonzik\soonzik.helpers\bin\debug\soonzik.helpers.dll" HashGuid="97b2f835-b128-cd8f-3041-c9fc697167ae" />
+    <ReferenceAssembly PathName="c:\users\gery\documents\github\soonzik\windowsphone\soonzik\soonzik.helpers\bin\debug\soonzik.helpers.dll" HashGuid="5192e3bb-e722-0776-f953-15431c18ffa4" />
     <ReferenceAssembly PathName="c:\users\gery\documents\github\soonzik\windowsphone\soonzik\soonzik.httprequest\bin\debug\soonzik.httprequest.dll" HashGuid="5781fc0d-a7fb-5b5e-6a41-1310d5416329" />
     <ReferenceAssembly PathName="c:\users\gery\documents\github\soonzik\windowsphone\soonzik\soonzik.myplaylistmanager\bin\debug\soonzik.myplaylistmanager.winmd" HashGuid="84ef09e7-f9cf-b722-4179-6bc795564f95" />
     <ReferenceAssembly PathName="c:\users\gery\documents\github\soonzik\windowsphone\soonzik\soonzik.singleton\bin\debug\soonzik.singleton.dll" HashGuid="71173b62-4e7d-0346-3c01-a800cefaf7c4" />
