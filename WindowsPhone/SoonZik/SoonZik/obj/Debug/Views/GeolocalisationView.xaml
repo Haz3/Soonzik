@@ -10,11 +10,17 @@
     xmlns:core="using:Microsoft.Xaml.Interactions.Core"
     DataContext="{StaticResource GeolocalisationViewModel}"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-
+    
+    <interactivity:Interaction.Behaviors>
+        <core:EventTriggerBehavior EventName="Loaded">
+            <core:InvokeCommandAction Command="{Binding LoadedCommand}" />
+        </core:EventTriggerBehavior>
+    </interactivity:Interaction.Behaviors>
+    
     <Page.Resources>
 
         <DataTemplate x:Key="ListUserItemTemplate">
-            <TextBlock FontSize="25" Text="{Binding username}" />
+            <TextBlock FontSize="25" Text="{Binding username}" Foreground="White" />
         </DataTemplate>
     </Page.Resources>
 
@@ -62,13 +68,13 @@
                     <ColumnDefinition Width="10*" />
                 </Grid.ColumnDefinitions>
 
-                <RadioButton Grid.Row="0" Grid.Column="0" Content="2km"
-                             IsChecked="{Binding TwoKmActivated, Mode=TwoWay}" Command="{Binding TwoChecked}" />
-                <RadioButton Grid.Row="0" Grid.Column="1" Content="5km"
-                             IsChecked="{Binding FiveKmActivated, Mode=TwoWay}" Command="{Binding FiveChecked}" />
-                <RadioButton Grid.Row="0" Grid.Column="2" Content="10km"
+                <RadioButton x:ConnectionId='1' Grid.Row="0" Grid.Column="0" Content="2km" x:Name="TwoRadioButton"
+                             IsChecked="{Binding TwoKmActivated, Mode=TwoWay}" Command="{Binding TwoChecked}"                                />
+                <RadioButton x:ConnectionId='2' Grid.Row="0" Grid.Column="1" Content="5km" x:Name="FiveRadioButton"
+                             IsChecked="{Binding FiveKmActivated, Mode=TwoWay}" Command="{Binding FiveChecked}"                                 />
+                <RadioButton x:ConnectionId='3' Grid.Row="0" Grid.Column="2" Content="10km" x:Name="TenRadioButton"                               
                              IsChecked="{Binding TenKmActivated, Mode=TwoWay}" Command="{Binding TenChecked}" />
-                <RadioButton Grid.Row="0" Grid.Column="3" Content="20km"
+                <RadioButton x:ConnectionId='4' Grid.Row="0" Grid.Column="3" Content="20km" x:Name="TwentyRadioButton"                                  
                              IsChecked="{Binding TwentyKmActivated, Mode=TwoWay}" Command="{Binding TwentyChecked}" />
             </Grid>
 

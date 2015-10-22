@@ -86,7 +86,10 @@
     <RootPropertyPathName Name="PasswordBoxCommand" />
     <RootPropertyPathName Name="ThePlaylist" />
     <RootPropertyPathName Name="musics" />
+    <RootPropertyPathName Name="RenameButton" />
+    <RootPropertyPathName Name="RenameCommand" />
     <RootPropertyPathName Name="name" />
+    <RootPropertyPathName Name="BoolRename" />
     <RootPropertyPathName Name="CurrentUser" />
     <RootPropertyPathName Name="follows" />
     <RootPropertyPathName Name="SelectUser" />
@@ -469,6 +472,7 @@
       <RootProperty Name="Content" />
       <RootProperty Name="IsChecked" />
       <RootProperty Name="Command" />
+      <RootEvent Name="Click" />
     </RootType>
     <RootType FullName="SoonZik.Controls.GeolocalisationControl" />
     <RootType FullName="Windows.UI.Xaml.Media.Animation.DoubleAnimation">

@@ -96,7 +96,10 @@ namespace SoonZik.ViewModel
             {
                 messageWriter.WriteString(ConversationText);
                 CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
-                    () => { messageWriter.StoreAsync(); });
+                    () =>
+                    {
+                        messageWriter.StoreAsync();
+                    });
             }
             //if (ConversationText == null)
             //    return;
@@ -145,11 +148,8 @@ namespace SoonZik.ViewModel
                 if (_key != null)
                 {
                     var stringEncrypt = KeyHelpers.GetUserKeyFromResponse(_key);
-                    _cryptographic =
-                        EncriptSha256.EncriptStringToSha256(Singleton.Singleton.Instance().CurrentUser.salt +
-                                                            stringEncrypt);
-                    var resDel = request.GetConversation(FriendUser, _cryptographic,
-                        Singleton.Singleton.Instance().CurrentUser, new List<Message>());
+                    _cryptographic = EncriptSha256.EncriptStringToSha256(Singleton.Singleton.Instance().CurrentUser.salt + stringEncrypt);
+                    var resDel = request.GetConversation(FriendUser, _cryptographic, Singleton.Singleton.Instance().CurrentUser, new List<Message>());
                     resDel.ContinueWith(delegate(Task<object> tmp)
                     {
                         var test = tmp.Result as List<Message>;

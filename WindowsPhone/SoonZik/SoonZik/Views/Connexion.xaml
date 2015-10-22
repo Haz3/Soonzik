@@ -61,11 +61,11 @@
 
             <TextBox x:Name="UserTextBox" PlaceholderText="Username" Text="{Binding Username, Mode=TwoWay}"
                      Grid.Row="0"
-                     Background="LightGray" Margin="50,368,50,0" BorderThickness="0,0,0,2" />
+                     Background="LightGray" Margin="50,346,50,0" BorderThickness="0,0,0,2" />
             <PasswordBox x:Name="PasswordTextBox" PlaceholderText="Password" Password="{Binding Password, Mode=TwoWay}"
-                         Grid.Row="0" Background="LightGray" Margin="50,420,50,0" BorderThickness="0,0,0,2" />
+                         Grid.Row="0" Background="LightGray" Margin="50,387,50,0" BorderThickness="0,0,0,2" />
 
-            <Button Grid.Row="0" x:Uid="LogIn" Content="" BorderThickness="0" Foreground="Black" Margin="250,492,0,31"
+            <Button Grid.Row="0" x:Uid="LogIn" Content="" BorderThickness="0" Foreground="Black" Margin="250,445,0,58"
                     Command="{Binding ConnexionCommand}" />
         </Grid>
         <Grid Grid.Row="1">
@@ -73,7 +73,7 @@
                     BorderThickness="0" Margin="18,7,0,6" />
         </Grid>
         <ProgressRing Grid.Row="0" IsActive="{Binding ProgressOn, Mode=TwoWay}" Background="Black" Foreground="Aqua"
-                      Opacity="0.5" Margin="0,0,0,-69" />
+                      Opacity="0.5" Margin="0,-62,0,-115" />
 
     </Grid>
 </Page>

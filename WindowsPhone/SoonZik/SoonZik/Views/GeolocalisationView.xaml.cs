@@ -1,5 +1,7 @@
-﻿using Windows.UI.Xaml.Controls;
+﻿using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
+using SoonZik.ViewModel;
 
 // Pour en savoir plus sur le modèle d’élément Page vierge, consultez la page http://go.microsoft.com/fwlink/?LinkID=390556
 
@@ -24,6 +26,30 @@ namespace SoonZik.Views
         /// </param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
+        }
+
+        private void TwoRadioButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            var vm = DataContext as GeolocalisationViewModel;
+            if (vm != null) vm.TwoChecked.Execute(null);
+        }
+
+        private void FiveRadioButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            var vm = DataContext as GeolocalisationViewModel;
+            if (vm != null) vm.FiveChecked.Execute(null);
+        }
+
+        private void TenRadioButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            var vm = DataContext as GeolocalisationViewModel;
+            if (vm != null) vm.TenChecked.Execute(null);
+        }
+
+        private void TwentyRadioButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            var vm = DataContext as GeolocalisationViewModel;
+            if (vm != null) vm.TwentyChecked.Execute(null);
         }
     }
 }

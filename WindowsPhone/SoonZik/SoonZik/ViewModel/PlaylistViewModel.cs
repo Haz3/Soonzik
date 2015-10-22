@@ -24,7 +24,7 @@ namespace SoonZik.ViewModel
         public PlaylistViewModel()
         {
             LoadedCommand = new RelayCommand(OnLoadedPageExecute);
-            MoreOptionCommand = new RelayCommand(MoreOptionCommandExecute);
+            RenameCommand = new RelayCommand(RenameCommandExecute);
             UpdatePlaylist = new RelayCommand(UpdatePlaylistExecute);
             AddToPlaylist = new RelayCommand(AddToPlaylistExecute);
             DelToPlaylist = new RelayCommand(DelToPlaylistExecute);
@@ -37,12 +37,12 @@ namespace SoonZik.ViewModel
         #region Attribute
 
         private string _cryptographic;
+        public ICommand RenameCommand { get; private set; }
         public ICommand PlayCommand { get; private set; }
         public ICommand AddToPlaylist { get; private set; }
         public ICommand DelToPlaylist { get; private set; }
         public ICommand AddMusicToCart { get; private set; }
         public ICommand LoadedCommand { get; private set; }
-        public ICommand MoreOptionCommand { get; private set; }
         public static ICommand UpdatePlaylist { get; private set; }
 
         public static Playlist PlaylistTmp { get; set; }
@@ -86,9 +86,55 @@ namespace SoonZik.ViewModel
             }
         }
 
+        private bool _boolRename;
+
+        public bool BoolRename
+        {
+            get
+            {
+                return _boolRename;
+            }
+            set
+            {
+                _boolRename = value;
+                RaisePropertyChanged("BoolRename");
+            }
+        }
+
+        private string _renameButton;
+
+        public string RenameButton
+        {
+            get
+            {
+                return _renameButton;
+            }
+            set
+            {
+                _renameButton = value;
+                RaisePropertyChanged("RenameButton");
+            }
+        }
+
         #endregion
 
         #region Method       
+        
+        private void RenameCommandExecute()
+        {
+            if (!BoolRename)
+            {
+                BoolRename = true;
+                RenameButton = "Validate";
+                return;
+            }
+            if (BoolRename)
+            {
+                RenameButton = "Rename";
+                // TODO save the playlist name
+                BoolRename = false;
+            }
+        }
 
         private void PlayCommandExecute()
         {
@@ -112,28 +158,11 @@ namespace SoonZik.ViewModel
             });
         }
 
-        private void MoreOptionCommandExecute()
-        {
-            _moreOption = true;
-            MoreOptionPopUp.ThePlaylist = ThePlaylist;
-            var newsBody = new MoreOptionPopUp(SelectedMusic);
-            MessagePrompt = new MessagePrompt
-            {
-                Width = 300,
-                Height = 450,
-                IsAppBarVisible = false,
-                VerticalAlignment = VerticalAlignment.Center,
-                Body = newsBody,
-                Opacity = 0.6
-            };
-            MessagePrompt.ActionPopUpButtons.Clear();
-            MessagePrompt.Show();
-        }
-
         public void OnLoadedPageExecute()
         {
             ThePlaylist = PlaylistTmp;
             ListMusics = new ObservableCollection<Music>();
+            RenameButton = "Rename";
             UpdatePlaylistExecute();
         }
 

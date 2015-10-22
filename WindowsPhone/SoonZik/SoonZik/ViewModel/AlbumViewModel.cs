@@ -282,11 +282,23 @@ namespace SoonZik.ViewModel
 
         private void PlayCommandExecute()
         {
-            SelectedMusic.album = MyAlbum;
-            SelectedMusic.user = MyAlbum.user;
-            SelectedMusic.file = "http://soonzikapi.herokuapp.com/musics/get/" + SelectedMusic.id;
-            Singleton.Singleton.Instance().SelectedMusicSingleton.Add(SelectedMusic);
-            GlobalMenuControl.SetChildren(new BackgroundAudioPlayer());
+            var request = new HttpRequestGet();
+            var res = request.GetObject(new Music(), "musics", SelectedMusic.id.ToString());
+            res.ContinueWith(delegate(Task<object> task)
+            {
+                var music = task.Result as Music;
+                if (music != null)
+                {
+                    CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
+                        () =>
+                        {
+                            SelectedMusic = music;
+                            SelectedMusic.file = "http://soonzikapi.herokuapp.com/musics/get/" + SelectedMusic.id;
+                            Singleton.Singleton.Instance().SelectedMusicSingleton.Add(SelectedMusic);
+                            GlobalMenuControl.SetChildren(new BackgroundAudioPlayer());
+                        });
+                }
+            });
         }
 
         private void AddMusicToCartExecute()

@@ -60,16 +60,13 @@
 
     <Grid x:Name="GlobalGrid">
         <Grid.RowDefinitions>
+            <RowDefinition Height="100" />
             <RowDefinition Height="*" />
-            <RowDefinition Height="350" />
         </Grid.RowDefinitions>
         <Grid Grid.Row="0">
-            <Image Name="AlbumImage" Source="ms-appx:///Resources/Icones/MenuExplorer.png" Width="120" Height="120"
-                   HorizontalAlignment="Center" VerticalAlignment="Top"
-                   Margin="0,20,0,0" />
-
-            <TextBlock x:Name="AlbumTitle" Text="{Binding ThePlaylist.name}" FontSize="30" VerticalAlignment="Center"
-                       HorizontalAlignment="Center" Margin="0,150,0,0" />
+            <TextBox Foreground="White" x:Name="PlayListTitle" Text="{Binding ThePlaylist.name, Mode=TwoWay}" FontSize="30" VerticalAlignment="Center"
+                       HorizontalAlignment="Left" Background="Transparent" BorderThickness="0,0,0,1" IsEnabled="{Binding BoolRename}"/>
+            <Button VerticalAlignment="Center" HorizontalAlignment="Right" Content="{Binding RenameButton}" Command="{Binding RenameCommand}"></Button>
         </Grid>
 
         <ListBox Background="Transparent" Grid.Row="1" x:Name="MusicListView"
