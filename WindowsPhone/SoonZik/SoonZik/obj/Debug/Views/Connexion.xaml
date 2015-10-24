@@ -26,56 +26,54 @@
     <Grid x:Name="GlobalGrid">
 
         <Grid.RowDefinitions>
-            <RowDefinition Height="70" />
-            <RowDefinition Height="500" />
             <RowDefinition Height="*" />
+            <RowDefinition Height="80" />
         </Grid.RowDefinitions>
 
-        <!-- Row 1 -->
-        <!--<TextBlock x:Name="TitleBlock" x:Uid="Welcome" Text="" FontFamily="{StaticResource Roboto}" FontSize="50"
-                   Foreground="Black" Grid.Row="0" />-->
+        <Grid Grid.Row="0">
+            <Image Source="../Resources/Logo_SoonZik.png" Height="200" VerticalAlignment="Top" Stretch="UniformToFill" />
 
-        <!-- Row 2 -->
-        <Image Grid.Row="1" Source="../Resources/Logo_SoonZik.png" Width="300" Height="150" VerticalAlignment="Top" />
+            <Image Source="../Resources/Icones/facebook.png" Width="50" Height="50" VerticalAlignment="Center"
+                   HorizontalAlignment="Left" Margin="60,225,0,225">
+                <interactivity:Interaction.Behaviors>
+                    <core:EventTriggerBehavior EventName="Tapped">
+                        <core:InvokeCommandAction Command="{Binding FacebookTapped}" />
+                    </core:EventTriggerBehavior>
+                </interactivity:Interaction.Behaviors>
+            </Image>
+            <Image Source="../Resources/Icones/twitter.png" Width="50" Height="50" VerticalAlignment="Center"
+                   HorizontalAlignment="Center">
+                <interactivity:Interaction.Behaviors>
+                    <core:EventTriggerBehavior EventName="Tapped">
+                        <core:InvokeCommandAction Command="{Binding TwitterTapped}" />
+                    </core:EventTriggerBehavior>
+                </interactivity:Interaction.Behaviors>
+            </Image>
+            <Image Source="../Resources/Icones/googleplus.png" Width="50" Height="50"
+                   VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,225,60,225">
 
-        <Image Grid.Row="1" Source="../Resources/Icones/facebook.png" Width="50" Height="50" VerticalAlignment="Center"
-               HorizontalAlignment="Left" Margin="60,225,0,225">
-            <interactivity:Interaction.Behaviors>
-                <core:EventTriggerBehavior EventName="Tapped">
-                    <core:InvokeCommandAction Command="{Binding FacebookTapped}" />
-                </core:EventTriggerBehavior>
-            </interactivity:Interaction.Behaviors>
-        </Image>
-        <Image Grid.Row="1" Source="../Resources/Icones/twitter.png" Width="50" Height="50" VerticalAlignment="Center"
-               HorizontalAlignment="Center">
-            <interactivity:Interaction.Behaviors>
-                <core:EventTriggerBehavior EventName="Tapped">
-                    <core:InvokeCommandAction Command="{Binding TwitterTapped}" />
-                </core:EventTriggerBehavior>
-            </interactivity:Interaction.Behaviors>
-        </Image>
-        <Image Grid.Row="1" Source="../Resources/Icones/googleplus.png" Width="50" Height="50"
-               VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,225,60,225" />
+                <interactivity:Interaction.Behaviors>
+                    <core:EventTriggerBehavior EventName="Tapped">
+                        <core:InvokeCommandAction Command="{Binding GoogleTapped}" />
+                    </core:EventTriggerBehavior>
+                </interactivity:Interaction.Behaviors>
+            </Image>
 
-        <TextBox x:Name="UserTextBox" PlaceholderText="Username" Text="{Binding Username, Mode=TwoWay}" Grid.Row="1"
-                 Background="LightGray" Margin="50,318,50,0" BorderThickness="0,0,0,2" />
-        <PasswordBox x:Name="PasswordTextBox" PlaceholderText="Password" Password="{Binding Password, Mode=TwoWay}"
-                     Grid.Row="1" Background="LightGray" Margin="50,381,50,0" BorderThickness="0,0,0,2" />
+            <TextBox x:Name="UserTextBox" PlaceholderText="Username" Text="{Binding Username, Mode=TwoWay}"
+                     Grid.Row="0"
+                     Background="LightGray" Margin="50,346,50,0" BorderThickness="0,0,0,2" />
+            <PasswordBox x:Name="PasswordTextBox" PlaceholderText="Password" Password="{Binding Password, Mode=TwoWay}"
+                         Grid.Row="0" Background="LightGray" Margin="50,387,50,0" BorderThickness="0,0,0,2" />
 
-        <Button Grid.Row="1" x:Uid="LogIn" Content="" BorderThickness="0" Foreground="Black" Margin="250,415,0,28"
-                Command="{Binding ConnexionCommand}" />
-
-        <!-- login control -->
-
-        <!-- Row 3 -->
-        <Button Grid.Row="2" Command="{Binding InscritpiomCommand}" x:Uid="SignIn" Content="" Foreground="Black"
-                BorderThickness="0" Margin="18,7,0,6" />
-        <!--<Button Grid.Row="2" x:Uid="ForgotPassword" Content="" Foreground="Black" BorderThickness="0"
-                Margin="229,7,0,6" />-->
-
-        <ProgressRing Grid.Row="1" IsActive="{Binding ProgressOn, Mode=TwoWay}" Background="Black" Foreground="Aqua"
-                      Opacity="0.5" Margin="0,-98,0,-69" />
-        <!--<controls:ProgressRingControl Grid.Row="1" isActive="{Binding ProgressOn, Mode=TwoWay}" GridVisibility="{Binding ProgressVisibility, Mode=TwoWay}"/>-->
+            <Button Grid.Row="0" x:Uid="LogIn" Content="" BorderThickness="0" Foreground="Black" Margin="250,445,0,58"
+                    Command="{Binding ConnexionCommand}" />
+        </Grid>
+        <Grid Grid.Row="1">
+            <Button Command="{Binding InscritpiomCommand}" x:Uid="SignIn" Content="" Foreground="Black"
+                    BorderThickness="0" Margin="18,7,0,6" />
+        </Grid>
+        <ProgressRing Grid.Row="0" IsActive="{Binding ProgressOn, Mode=TwoWay}" Background="Black" Foreground="Aqua"
+                      Opacity="0.5" Margin="0,-62,0,-115" />
 
     </Grid>
 </Page>

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
@@ -42,71 +41,25 @@ namespace SoonZik.Controls
 
         #region Attribute
 
-        #region Attribute Headers
-
-        private string _headerArtiste;
-
-        public string HeaderArtiste
-        {
-            get { return _headerArtiste; }
-            set
-            {
-                _headerArtiste = value;
-                RaisePropertyChange("HeaderArtiste");
-            }
-        }
-
-        private string _headerMusique;
-
-        public string HeaderMusique
-        {
-            get { return _headerMusique; }
-            set
-            {
-                _headerMusique = value;
-                RaisePropertyChange("HeaderMusique");
-            }
-        }
-
-        private string _headerUser;
-
-        public string HeaderUser
-        {
-            get { return _headerUser; }
-            set
-            {
-                _headerUser = value;
-                RaisePropertyChange("Header");
-            }
-        }
-
-        private string _headerPack;
-
-        public string HeaderPack
-        {
-            get { return _headerPack; }
-            set
-            {
-                _headerPack = value;
-                RaisePropertyChange("HeaderPack");
-            }
-        }
-
-        private string _headerAlbum;
-
-        public string HeaderAlbum
-        {
-            get { return _headerAlbum; }
-            set
-            {
-                _headerAlbum = value;
-                RaisePropertyChange("HeaderAlbum");
-            }
-        }
+        public static Grid MyGrid { get; set; }
+        public ObservableCollection<SearchResult> ListObject;
+        public event PropertyChangedEventHandler PropertyChanged;
+        public string SearchText { get; set; }
+        private readonly INavigationService _navigationService;
+        private static UIElement _lastElement;
 
         #endregion
 
-        public static Grid MyGrid { get; set; }
+        #region Attributes StoryBoard Menu
+
+        private static Storyboard story { get; set; }
+        private static ToggleButton toggle { get; set; }
+        public static ToggleButton MenuToggleButton { get; set; }
+
+        #endregion
+
+        #region Attributes Recherche
+
         private SearchResult _myResult;
 
         public SearchResult MyResult
@@ -119,11 +72,6 @@ namespace SoonZik.Controls
             }
         }
 
-        public ObservableCollection<SearchResult> ListObject;
-        public event PropertyChangedEventHandler PropertyChanged;
-        public string SearchText { get; set; }
-        private readonly INavigationService _navigationService;
-        private static UIElement _lastElement;
         private User _selectedUser;
 
         private User _selectedArtist;
@@ -196,9 +144,69 @@ namespace SoonZik.Controls
             }
         }
 
-        public List<BouttonMenu> ListBouttonMenus { get; set; }
-        private static Storyboard story { get; set; }
-        private static ToggleButton toggle { get; set; }
+        #endregion
+
+        #region Attribute Headers
+
+        private string _headerArtiste;
+
+        public string HeaderArtiste
+        {
+            get { return _headerArtiste; }
+            set
+            {
+                _headerArtiste = value;
+                RaisePropertyChange("HeaderArtiste");
+            }
+        }
+
+        private string _headerMusique;
+
+        public string HeaderMusique
+        {
+            get { return _headerMusique; }
+            set
+            {
+                _headerMusique = value;
+                RaisePropertyChange("HeaderMusique");
+            }
+        }
+
+        private string _headerUser;
+
+        public string HeaderUser
+        {
+            get { return _headerUser; }
+            set
+            {
+                _headerUser = value;
+                RaisePropertyChange("Header");
+            }
+        }
+
+        private string _headerPack;
+
+        public string HeaderPack
+        {
+            get { return _headerPack; }
+            set
+            {
+                _headerPack = value;
+                RaisePropertyChange("HeaderPack");
+            }
+        }
+
+        private string _headerAlbum;
+
+        public string HeaderAlbum
+        {
+            get { return _headerAlbum; }
+            set
+            {
+                _headerAlbum = value;
+                RaisePropertyChange("HeaderAlbum");
+            }
+        }
 
         #endregion
 
@@ -212,10 +220,12 @@ namespace SoonZik.Controls
             GlobalGrid.Children.Add(new News());
 
             _navigationService = new NavigationService();
-            //MyResult = new ObservableCollection<SearchResult>();
             HardwareButtons.BackPressed += HardwareButtonsOnBackPressed;
+
             story = MenuStoryBoardBack;
             toggle = ToggleButtonSearch;
+            MenuToggleButton = ToggleButtonMenu;
+            MenuToggleButton.Style = Application.Current.Resources["MenuToggleStyle"] as Style;
 
             ProfilButton.Command = new RelayCommand(GoToProfil);
             NewsButton.Command = new RelayCommand(GoToNews);
@@ -240,37 +250,10 @@ namespace SoonZik.Controls
 
         #region Method Menu
 
-        //private void GridItemMenu_OnTapped(object sender, TappedRoutedEventArgs e)
-        //{
-        //    if (SelectedBouttonMenu.PageBoutton.Equals(new ProfilUser()))
-        //    {
-        //        Singleton.Singleton.Instance().ItsMe = true;
-        //        Singleton.Singleton.Instance().ProfilPage = new ProfilUser();
-        //        SetChildren(Singleton.Singleton.Instance().ProfilPage);
-        //    }
-        //    else if (SelectedBouttonMenu.PageBoutton.Equals(new News()))
-        //        SetChildren(Singleton.Singleton.Instance().NewsPage);
-        //    else if (SelectedBouttonMenu.PageBoutton.Equals(new GeolocalisationView()))
-        //    {
-        //        var locator = new Geolocator();
-        //        if (locator.LocationStatus == PositionStatus.Disabled)
-        //            new MessageDialog("Veuillez activer votre Location").ShowAsync();
-        //        else
-        //            SetChildren(new GeolocalisationView());
-        //    }
-        //    else if (SelectedBouttonMenu.PageBoutton.Equals(new Connexion()))
-        //        _navigationService.Navigate(typeof (Connexion));
-        //    else
-        //    {
-        //        var obj = SelectedBouttonMenu.PageBoutton as UIElement;
-
-        //        SetChildren(obj);
-        //    }
-        //}
-
         private void MenuAloneClose_OnCompleted(object sender, object e)
         {
             ToggleButtonMenu.IsChecked = false;
+            MenuToggleButton.Style = Application.Current.Resources["MenuToggleStyle"] as Style;
             MenuStoryBoardBack.Pause();
         }
 
@@ -282,6 +265,7 @@ namespace SoonZik.Controls
 
         public static void CloseMenu()
         {
+            MenuToggleButton.Style = Application.Current.Resources["MenuToggleStyle"] as Style;
             story.Begin();
             toggle.IsChecked = false;
         }
@@ -439,6 +423,7 @@ namespace SoonZik.Controls
         private void GlobalGrid_OnTapped(object sender, TappedRoutedEventArgs e)
         {
             CloseMenu();
+            ToggleButtonMenu.Style = Application.Current.Resources["MenuToggleStyle"] as Style;
         }
 
         private void UsersStackPanel_OnTapped(object sender, TappedRoutedEventArgs e)
@@ -469,6 +454,20 @@ namespace SoonZik.Controls
         {
             PackViewModel.ThePack = SelectedPack;
             SetChildren(new Packs());
+        }
+
+        #endregion
+
+        #region Method Toggle
+
+        private void ToggleButtonMenu_OnChecked(object sender, RoutedEventArgs e)
+        {
+            MenuToggleButton.Style = Application.Current.Resources["MenuToggleCloseStyle"] as Style;
+        }
+
+        private void ToggleButtonMenu_OnUnchecked(object sender, RoutedEventArgs e)
+        {
+            MenuToggleButton.Style = Application.Current.Resources["MenuToggleStyle"] as Style;
         }
 
         #endregion

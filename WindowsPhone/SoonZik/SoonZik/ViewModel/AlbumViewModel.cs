@@ -9,7 +9,6 @@ using Windows.UI.Popups;
 using Coding4Fun.Toolkit.Controls;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
-using Newtonsoft.Json.Linq;
 using SoonZik.Controls;
 using SoonZik.Helpers;
 using SoonZik.HttpRequest;
@@ -163,7 +162,7 @@ namespace SoonZik.ViewModel
                             EncriptSha256.EncriptStringToSha256(Singleton.Singleton.Instance().CurrentUser.salt +
                                                                 stringEncrypt);
                     }
-                    var test = post.SendComment(TextComment, TheAlbum, _crypto,
+                    var test = post.SendComment(TextComment, TheAlbum, null, _crypto,
                         Singleton.Singleton.Instance().CurrentUser);
                     test.ContinueWith(delegate(Task<string> tmp)
                     {
@@ -195,7 +194,6 @@ namespace SoonZik.ViewModel
             {
                 //LocalFolderHelper.Delete();
                 Singleton.Singleton.Instance().SelectedMusicSingleton.Add(SelectedMusic);
-                LocalFolderHelper.WriteTimestamp();
                 GlobalMenuControl.SetChildren(new BackgroundAudioPlayer());
             }
             //_navigationService.Navigate(new PlayerControl().GetType());
@@ -284,9 +282,25 @@ namespace SoonZik.ViewModel
 
         private void PlayCommandExecute()
         {
-            var test = 0;
+            var request = new HttpRequestGet();
+            var res = request.GetObject(new Music(), "musics", SelectedMusic.id.ToString());
+            res.ContinueWith(delegate(Task<object> task)
+            {
+                var music = task.Result as Music;
+                if (music != null)
+                {
+                    CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
+                        () =>
+                        {
+                            SelectedMusic = music;
+                            SelectedMusic.file = "http://soonzikapi.herokuapp.com/musics/get/" + SelectedMusic.id;
+                            Singleton.Singleton.Instance().SelectedMusicSingleton.Add(SelectedMusic);
+                            GlobalMenuControl.SetChildren(new BackgroundAudioPlayer());
+                        });
+                }
+            });
         }
-        
+
         private void AddMusicToCartExecute()
         {
             _selectedMusic = SelectedMusic;
@@ -310,22 +324,21 @@ namespace SoonZik.ViewModel
                     var res2 = tmp2.Result;
                     if (res2 != null)
                     {
-                        CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
-                        {
-                            new MessageDialog("Article ajoute au panier").ShowAsync();
-                        });
+                        CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
+                            () => { new MessageDialog("Article ajoute au panier").ShowAsync(); });
                     }
                 });
             });
         }
 
-       
+
         private void AddToPlaylistExecute()
         {
             MyMusicViewModel.MusicForPlaylist = SelectedMusic;
             MyMusicViewModel.IndexForPlaylist = 3;
             GlobalMenuControl.SetChildren(new MyMusic());
         }
+
         #endregion
     }
 }

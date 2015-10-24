@@ -14,7 +14,8 @@ namespace SoonZik.Views
     /// </summary>
     public sealed partial class MyMusic : Page
     {
-        private bool PlayTapped = false;
+        private bool PlayTapped;
+
         public MyMusic()
         {
             InitializeComponent();
@@ -49,8 +50,8 @@ namespace SoonZik.Views
         {
             if (!PlayTapped)
             {
-                FrameworkElement senderElement = sender as FrameworkElement;
-                FlyoutBase flyoutBase = FlyoutBase.GetAttachedFlyout(senderElement);
+                var senderElement = sender as FrameworkElement;
+                var flyoutBase = FlyoutBase.GetAttachedFlyout(senderElement);
 
                 flyoutBase.ShowAt(senderElement);
             }

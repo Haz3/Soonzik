@@ -34,16 +34,17 @@
                 <Border BorderThickness="0,0,0,0.5" Width="350" BorderBrush="White" />
                 <Image x:Name="AlbumImage" Source="../Resources/Icones/MenuExplorer.png" Height="40"
                        VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10,0,0,0" />
-                <TextBlock x:Name="MusicTitle" Text="{Binding title}" Foreground="White" FontSize="25" HorizontalAlignment="Center" />
+                <TextBlock x:Name="MusicTitle" Text="{Binding title}" Foreground="White" FontSize="25"
+                           HorizontalAlignment="Center" />
             </Grid>
         </DataTemplate>
 
         <DataTemplate x:Key="ListPackItemTemplate">
-            <TextBlock FontSize="25" Text="{Binding title}" Foreground="White"/>
+            <TextBlock FontSize="25" Text="{Binding title}" Foreground="White" />
         </DataTemplate>
 
         <DataTemplate x:Key="ListArtisteItemTemplate">
-            <TextBlock FontSize="25" Text="{Binding username}" Foreground="White"/>
+            <TextBlock FontSize="25" Text="{Binding username}" Foreground="White" />
         </DataTemplate>
 
     </Page.Resources>
@@ -69,8 +70,8 @@
             </ListView.ItemsPanel>
         </ListView>-->
         <ListBox Grid.Row="0" Background="Transparent" ItemsSource="{Binding CompleteListPack}"
-                  ItemTemplate="{StaticResource ListPackItemTemplate}"
-                  SelectedItem="{Binding ThePack, Mode=TwoWay}">
+                 ItemTemplate="{StaticResource ListPackItemTemplate}"
+                 SelectedItem="{Binding ThePack, Mode=TwoWay}">
             <interactivity:Interaction.Behaviors>
                 <core:EventTriggerBehavior EventName="Tapped">
                     <core:InvokeCommandAction Command="{Binding PackTappedCommand}" />
@@ -124,9 +125,7 @@
                     </interactivity:Interaction.Behaviors>
                 </PivotItem>
 
-                <PivotItem x:Uid="AssociationPivot" Header="">
-                    
-                </PivotItem>
+                <PivotItem x:Uid="AssociationPivot" Header="" />
             </Pivot>
         </Grid>
     </Grid>

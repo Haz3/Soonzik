@@ -123,7 +123,19 @@
                 <Setter.Value>
                     <ControlTemplate TargetType="ToggleButton">
                         <Grid MaxHeight="30" MaxWidth="30" MinHeight="30" MinWidth="30" HorizontalAlignment="Left">
-                            <Image Source="../Resources/Icones/menu.png" />
+                            <Image Source="../Resources/Icones/menu_icon.png" />
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="MenuToggleCloseStyle" TargetType="ToggleButton">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ToggleButton">
+                        <Grid MaxHeight="30" MaxWidth="30" MinHeight="30" MinWidth="30" HorizontalAlignment="Left">
+                            <Image Source="../Resources/Icones/cross_icon.png" />
                         </Grid>
                     </ControlTemplate>
                 </Setter.Value>

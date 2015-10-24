@@ -30,15 +30,13 @@
         <DataTemplate x:Key="PlaylistTemplate">
             <Grid Width="350">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="50" />
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="50" />
                 </Grid.ColumnDefinitions>
-                <Image Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left"
-                       Source="../Resources/Icones/MenuPack.png" Height="50" Width="50" />
-                <TextBlock Grid.Column="1" Text="{Binding Path=name}" Margin="15,0,0,0" FontSize="25" Foreground="White"/>
-                <Image x:ConnectionId='6' Grid.Column="2"                              VerticalAlignment="Center"
-                       HorizontalAlignment="Center" Source="../Resources/Icones/trash.png" Width="50" Height="50" />
+                <TextBlock Grid.Column="0" Text="{Binding Path=name}" Margin="15,0,0,0" FontSize="25"
+                           Foreground="White" />
+                <Image x:ConnectionId='6' Grid.Column="1"                              VerticalAlignment="Center"
+                       HorizontalAlignment="Center" Source="../Resources/Icones/trash.png" Width="40" Height="40" />
 
             </Grid>
         </DataTemplate>
@@ -66,9 +64,9 @@
                        VerticalAlignment="Center" HorizontalAlignment="Left" />
                 <FlyoutBase.AttachedFlyout>
                     <MenuFlyout>
-                        <MenuFlyoutItem x:ConnectionId='3' Text="Add to playlist" x:Name="ItemPlaylist"                              />
-                        <MenuFlyoutItem x:ConnectionId='4' Text="Add to cart" x:Name="ItemCart"                          />
-                        <MenuFlyoutItem x:ConnectionId='5' Text="Go to album" x:Name="ItemAlbum"                           />
+                        <MenuFlyoutItem x:ConnectionId='3' Text="Add to playlist" x:Name="ItemPlaylist"                               />
+                        <MenuFlyoutItem x:ConnectionId='4' Text="Add to cart" x:Name="ItemCart"                           />
+                        <MenuFlyoutItem x:ConnectionId='5' Text="Go to album" x:Name="ItemAlbum"                            />
                     </MenuFlyout>
                 </FlyoutBase.AttachedFlyout>
             </Grid>
@@ -82,7 +80,8 @@
                 </Grid.ColumnDefinitions>
                 <Image Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left"
                        Source="../Resources/Icones/disc.png" Height="80" Width="80" />
-                <TextBlock Grid.Column="1" Text="{Binding Path=title}" Margin="15,0,0,0" FontSize="25" Foreground="White"/>
+                <TextBlock Grid.Column="1" Text="{Binding Path=title}" Margin="15,0,0,0" FontSize="25"
+                           Foreground="White" />
             </Grid>
         </DataTemplate>
     </Page.Resources>
@@ -95,8 +94,7 @@
             <PivotItem x:Uid="MusicPivot" Header="">
                 <ListBox Background="Transparent" x:Name="ListBoxMusic" ItemsSource="{Binding ListMusique}"
                          ItemTemplate="{StaticResource MusicTemplate}"
-                         SelectedItem="{Binding SelectedMusic, Mode=TwoWay}">
-                </ListBox>
+                         SelectedItem="{Binding SelectedMusic, Mode=TwoWay}" />
             </PivotItem>
 
             <PivotItem x:Uid="AlbumPivot" Header="">

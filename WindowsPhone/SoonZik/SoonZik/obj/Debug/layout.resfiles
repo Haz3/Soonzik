@@ -55,13 +55,16 @@ Resources\AppIcon\744.png
 Resources\background.jpg
 Resources\guetta.jpg
 Resources\Icones\concert_pushpin.png
+Resources\Icones\cross_icon.png
 Resources\Icones\disc.png
 Resources\Icones\empty_list.png
 Resources\Icones\facebook.png
 Resources\Icones\forward.png
 Resources\Icones\googleplus.png
+Resources\Icones\like_icon.png
 Resources\Icones\menu.png
 Resources\Icones\menu_about.png
+Resources\Icones\menu_icon.png
 Resources\Icones\MenuAchat.png
 Resources\Icones\MenuBattle.png
 Resources\Icones\MenuDeco.png
@@ -72,6 +75,7 @@ Resources\Icones\MenuNews.png
 Resources\Icones\MenuPack.png
 Resources\Icones\MenuPlaylist.png
 Resources\Icones\next_icon.png
+Resources\Icones\notlike_icon.png
 Resources\Icones\pause.png
 Resources\Icones\play.png
 Resources\Icones\plus.png

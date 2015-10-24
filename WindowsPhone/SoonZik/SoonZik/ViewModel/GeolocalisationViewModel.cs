@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using Windows.ApplicationModel.Core;
 using Windows.Devices.Geolocation;
 using Windows.Foundation;
@@ -20,15 +21,7 @@ namespace SoonZik.ViewModel
 
         public GeolocalisationViewModel()
         {
-            InitVariable().ContinueWith(delegate(Task tmp)
-            {
-                CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
-                    () =>
-                    {
-                        ListMapIcons = new List<MapIcon>();
-                        CreateListElement();
-                    });
-            });
+            LoadedCommand = new RelayCommand(LoadedCommandExecute);
         }
 
         #endregion
@@ -107,12 +100,6 @@ namespace SoonZik.ViewModel
             _myGeolocator = new Geolocator();
             var myGeoposition = await _myGeolocator.GetGeopositionAsync();
             UserLocation = myGeoposition.Coordinate;
-
-            TwoChecked = new RelayCommand(TwoCheckedExecute);
-            FiveChecked = new RelayCommand(FiveCheckedExecute);
-            TenChecked = new RelayCommand(TenCheckedExecute);
-            TwentyChecked = new RelayCommand(TwentyCheckedExecute);
-            UserTappedCommand = new RelayCommand(UserTappedExecute);
         }
 
         #region Command
@@ -234,12 +221,13 @@ namespace SoonZik.ViewModel
 
         public User UserSelected { get; set; }
 
-        public RelayCommand TwoChecked { get; private set; }
-        public RelayCommand FiveChecked { get; private set; }
-        public RelayCommand TenChecked { get; private set; }
-        public RelayCommand TwentyChecked { get; private set; }
-        public RelayCommand UserTappedCommand { get; private set; }
-        public RelayCommand GetMap { get; private set; }
+        public ICommand TwoChecked { get; private set; }
+        public ICommand FiveChecked { get; private set; }
+        public ICommand TenChecked { get; private set; }
+        public ICommand TwentyChecked { get; private set; }
+        public ICommand UserTappedCommand { get; private set; }
+        public ICommand GetMap { get; private set; }
+        public ICommand LoadedCommand { get; private set; }
 
         private Geolocator _myGeolocator;
         private Geocoordinate _userLocation;
@@ -303,5 +291,23 @@ namespace SoonZik.ViewModel
         }
 
         #endregion
+
+        private void LoadedCommandExecute()
+        {
+            TwoChecked = new RelayCommand(TwoCheckedExecute);
+            FiveChecked = new RelayCommand(FiveCheckedExecute);
+            TenChecked = new RelayCommand(TenCheckedExecute);
+            TwentyChecked = new RelayCommand(TwentyCheckedExecute);
+            UserTappedCommand = new RelayCommand(UserTappedExecute);
+            InitVariable().ContinueWith(delegate
+            {
+                CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
+                    () =>
+                    {
+                        ListMapIcons = new List<MapIcon>();
+                        CreateListElement();
+                    });
+            });
+        }
     }
 }

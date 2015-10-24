@@ -17,6 +17,7 @@
             <core:InvokeCommandAction Command="{Binding LoadedCommand}" />
         </core:EventTriggerBehavior>
     </interactivity:Interaction.Behaviors>
+
     <Page.Resources>
         <DataTemplate x:Key="UserTemplate">
             <StackPanel Margin="0,0,0,10">
@@ -54,11 +55,11 @@
             </Border>
         </DataTemplate>
         <DataTemplate x:Key="AddrBookItemTemplate">
-            <StackPanel VerticalAlignment="Top">
-                <Image Source="{Binding Path=image}" Height="30" Width="30" />
+            <Grid VerticalAlignment="Top">
+                <Image Source="{Binding Path=profilImage}" HorizontalAlignment="Left" Height="30" Width="30" />
                 <TextBlock FontWeight="Bold" Text="{Binding Path=username}" Foreground="White" Margin="60,0,0,0"
                            FontSize="25" />
-            </StackPanel>
+            </Grid>
         </DataTemplate>
         <DataTemplate x:Key="AddrBookGroupHeaderTemplate">
             <Border Background="Transparent" Padding="5">
@@ -142,5 +143,6 @@
                 </Grid>
             </PivotItem>
         </Pivot>
+
     </Grid>
 </Page>

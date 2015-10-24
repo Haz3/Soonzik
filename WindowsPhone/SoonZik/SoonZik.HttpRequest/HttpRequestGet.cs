@@ -152,10 +152,7 @@ namespace SoonZik.HttpRequest
 
         public async Task<object> GetConversation(User FriendUser, string sha256, User myUser, object myObject)
         {
-            var request =
-                (HttpWebRequest)
-                    WebRequest.Create(ApiUrl + "messages/conversation/" + FriendUser.id + "?secureKey=" + sha256 +
-                                      "&user_id=" + myUser.id);
+            var request = (HttpWebRequest) WebRequest.Create(ApiUrl + "messages/conversation/" + FriendUser.id + "?secureKey=" + sha256 + "&user_id=" + myUser.id);
             return await DoRequestForObject(myObject, request);
         }
 

@@ -11,6 +11,7 @@ using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
+using SoonZik.Helpers;
 using SoonZik.Utils;
 
 // Pour en savoir plus sur le modèle d'élément Contrôle utilisateur, consultez la page http://go.microsoft.com/fwlink/?LinkId=234236
@@ -21,6 +22,8 @@ namespace SoonZik.Controls
     {
         #region Private field
 
+        private int _actuelMusic = 0;
+        private bool _isPlaylist;
         private readonly AutoResetEvent SererInitialized;
         private bool isMyBackgroundTaskRunning;
 
@@ -36,7 +39,7 @@ namespace SoonZik.Controls
                 {
                     return false;
                 }
-                isMyBackgroundTaskRunning = ((String) value).Equals(Constants.BackgroundTaskRunning);
+                isMyBackgroundTaskRunning = ((String)value).Equals(Constants.BackgroundTaskRunning);
                 return isMyBackgroundTaskRunning;
             }
         }
@@ -48,7 +51,7 @@ namespace SoonZik.Controls
                 var value = ApplicationSettingsHelper.ReadResetSettingsValue(Constants.CurrentTrack);
                 if (value != null)
                 {
-                    return (String) value;
+                    return (String)value;
                 }
                 return String.Empty;
             }
@@ -63,6 +66,12 @@ namespace SoonZik.Controls
             InitializeComponent();
             SererInitialized = new AutoResetEvent(false);
             NavigationCacheMode = NavigationCacheMode.Required;
+            Loaded += OnLoaded;
+        }
+
+        private void OnLoaded(object sender, RoutedEventArgs routedEventArgs)
+        {
+            SetMusicAndInfo();
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -93,24 +102,21 @@ namespace SoonZik.Controls
 
                 if (BackgroundMediaPlayer.Current.CurrentState == MediaPlayerState.Playing)
                 {
-                    playButton.Content = "| |";
-                    PlayImage.Source =
-                        new BitmapImage(new Uri("../Resources/PlayerIcons/pause.png", UriKind.RelativeOrAbsolute));
-                        // Change to pause button
+                    //playButton.Content = "| |";
+                    PlayImage.Source = new BitmapImage(new Uri("ms-appx:///Resources/PlayerIcons/pause.png", UriKind.RelativeOrAbsolute));
+                    // Change to pause button
                 }
                 else
                 {
-                    playButton.Content = ">"; // Change to play button
-                    PlayImage.Source =
-                        new BitmapImage(new Uri("../Resources/PlayerIcons/play.png", UriKind.RelativeOrAbsolute));
+                    //playButton.Content = ">"; // Change to play button
+                    PlayImage.Source = new BitmapImage(new Uri("ms-appx:///Resources/PlayerIcons/play.png", UriKind.RelativeOrAbsolute));
                 }
                 txtCurrentTrack.Text = CurrentTrack;
             }
             else
             {
-                PlayImage.Source =
-                    new BitmapImage(new Uri("../Resources/PlayerIcons/play.png", UriKind.RelativeOrAbsolute));
-                playButton.Content = ">"; // Change to play button
+                PlayImage.Source = new BitmapImage(new Uri("ms-appx:///Resources/PlayerIcons/play.png", UriKind.RelativeOrAbsolute));
+                //playButton.Content = ">"; // Change to play button
                 txtCurrentTrack.Text = "";
             }
         }
@@ -137,9 +143,10 @@ namespace SoonZik.Controls
                 case MediaPlayerState.Playing:
                     await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
                     {
-                        playButton.Content = "| |"; // Change to pause button
-                        prevButton.IsEnabled = true;
-                        nextButton.IsEnabled = true;
+                        //playButton.Content = "| |"; // Change to pause button
+                        PlayImage.Source = new BitmapImage(new Uri("ms-appx:///Resources/PlayerIcons/pause.png", UriKind.RelativeOrAbsolute));
+                        //prevButton.IsEnabled = true;
+                        //nextButton.IsEnabled = true;
                     }
                         );
 
@@ -147,8 +154,10 @@ namespace SoonZik.Controls
                 case MediaPlayerState.Paused:
                     await
                         Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
-                            () => {
-                                      playButton.Content = ">"; // Change to play button
+                            () =>
+                            {
+                                //playButton.Content = ">"; // Change to play button
+                                PlayImage.Source = new BitmapImage(new Uri("ms-appx:///Resources/PlayerIcons/play.png", UriKind.RelativeOrAbsolute));
                             }
                             );
 
@@ -167,7 +176,7 @@ namespace SoonZik.Controls
                         //When foreground app is active change track based on background message
                         await
                             Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
-                                () => { txtCurrentTrack.Text = (string) e.Data[key]; }
+                                () => { txtCurrentTrack.Text = (string)e.Data[key]; }
                                 );
                         break;
                     case Constants.BackgroundTaskStarted:
@@ -197,7 +206,7 @@ namespace SoonZik.Controls
             // Prevent the user from repeatedly pressing the button and causing 
             // a backlong of button presses to be handled. This button is re-eneabled 
             // in the TrackReady Playstate handler.
-            prevButton.IsEnabled = false;
+            //prevButton.IsEnabled = false;
         }
 
         private void PlayImage_OnTapped(object sender, TappedRoutedEventArgs e)
@@ -208,10 +217,12 @@ namespace SoonZik.Controls
                 if (MediaPlayerState.Playing == BackgroundMediaPlayer.Current.CurrentState)
                 {
                     BackgroundMediaPlayer.Current.Pause();
+                    PlayImage.Source = new BitmapImage(new Uri("ms-appx:///Resources/PlayerIcons/play.png", UriKind.RelativeOrAbsolute));
                 }
                 else if (MediaPlayerState.Paused == BackgroundMediaPlayer.Current.CurrentState)
                 {
                     BackgroundMediaPlayer.Current.Play();
+                    PlayImage.Source = new BitmapImage(new Uri("ms-appx:///Resources/PlayerIcons/pause.png", UriKind.RelativeOrAbsolute));
                 }
                 else if (MediaPlayerState.Closed == BackgroundMediaPlayer.Current.CurrentState)
                 {
@@ -233,7 +244,7 @@ namespace SoonZik.Controls
             // Prevent the user from repeatedly pressing the button and causing 
             // a backlong of button presses to be handled. This button is re-eneabled 
             // in the TrackReady Playstate handler.
-            nextButton.IsEnabled = false;
+            //nextButton.IsEnabled = false;
         }
 
         private void RepeatImage_OnTapped(object sender, TappedRoutedEventArgs e)
@@ -285,8 +296,42 @@ namespace SoonZik.Controls
 
         private void AddMediaPlayerEventHandlers()
         {
+            BackgroundMediaPlayer.Current.MediaEnded += CurrentOnMediaEnded;
             BackgroundMediaPlayer.Current.CurrentStateChanged += MediaPlayer_CurrentStateChanged;
             BackgroundMediaPlayer.MessageReceivedFromBackground += BackgroundMediaPlayer_MessageReceivedFromBackground;
+        }
+
+        private void CurrentOnMediaEnded(MediaPlayer sender, object args)
+        {
+            if (_isPlaylist)
+            {
+                _actuelMusic += 1;
+                BackgroundMediaPlayer.Current.SetUriSource(new Uri(Singleton.Singleton.Instance().SelectedMusicSingleton[_actuelMusic].file, UriKind.RelativeOrAbsolute));
+                txtCurrentTrack.Text = Singleton.Singleton.Instance().SelectedMusicSingleton[_actuelMusic].title;
+                txtCurrentArtist.Text = Singleton.Singleton.Instance().SelectedMusicSingleton[_actuelMusic].user.username;
+                ImageMusique.Source = new BitmapImage(new Uri(Constant.UrlImageAlbum + Singleton.Singleton.Instance().SelectedMusicSingleton[_actuelMusic].album.image, UriKind.RelativeOrAbsolute));
+            }
+            else
+            {
+                PlayImage.Source = new BitmapImage(new Uri("ms-appx:///Resources/PlayerIcons/play.png", UriKind.RelativeOrAbsolute));
+                BackgroundMediaPlayer.Shutdown();
+            }
+        }
+
+        private void SetMusicAndInfo()
+        {
+            if (Singleton.Singleton.Instance().SelectedMusicSingleton.Count == 1)
+            {
+                _isPlaylist = false;
+            }
+            else if (Singleton.Singleton.Instance().SelectedMusicSingleton.Count > 1)
+            {
+                _isPlaylist = true;
+            }
+            BackgroundMediaPlayer.Current.SetUriSource(new Uri(Singleton.Singleton.Instance().SelectedMusicSingleton[_actuelMusic].file, UriKind.RelativeOrAbsolute));
+            txtCurrentTrack.Text = Singleton.Singleton.Instance().SelectedMusicSingleton[_actuelMusic].title;
+            txtCurrentArtist.Text = Singleton.Singleton.Instance().SelectedMusicSingleton[_actuelMusic].user.username;
+            ImageMusique.Source = new BitmapImage(new Uri(Constant.UrlImageAlbum + Singleton.Singleton.Instance().SelectedMusicSingleton[_actuelMusic].album.image, UriKind.RelativeOrAbsolute));
         }
 
         private void StartBackgroundAudioTask()
@@ -306,8 +351,7 @@ namespace SoonZik.Controls
                 {
                     throw new Exception("Background Audio Task didn't start in expected time");
                 }
-            }
-                );
+            });
             backgroundtaskinitializationresult.Completed = BackgroundTaskInitializationCompleted;
         }
 

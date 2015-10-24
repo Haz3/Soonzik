@@ -21,9 +21,9 @@
     <Page.Resources>
         <DataTemplate x:Key="MessageDataTemplate">
             <local:MessageTemplateSelector Content="{Binding}">
-                <local:MessageTemplateSelector.Recu >
+                <local:MessageTemplateSelector.Recu>
                     <DataTemplate>
-                        <controls:ChatBubble  ChatBubbleDirection="UpperLeft" HorizontalContentAlignment="Right"
+                        <controls:ChatBubble ChatBubbleDirection="UpperLeft" HorizontalContentAlignment="Right"
                                              Background="#7bc2fa">
                             <Grid>
                                 <TextBlock x:Name="Message" Text="{Binding Path=msg}" Foreground="White"
@@ -32,13 +32,14 @@
                         </controls:ChatBubble>
                     </DataTemplate>
                 </local:MessageTemplateSelector.Recu>
-                <local:MessageTemplateSelector.Envoye >
+                <local:MessageTemplateSelector.Envoye>
                     <DataTemplate>
                         <controls:ChatBubble ChatBubbleDirection="LowerRight" Grid.Column="1"
                                              Background="#1d59a2">
                             <Grid HorizontalAlignment="Right">
-                                <TextBlock x:Name="Message" Text="{Binding Path=msg}" Foreground="White" TextWrapping="Wrap"
-                                           FontSize="20"  HorizontalAlignment="Right" />
+                                <TextBlock x:Name="Message" Text="{Binding Path=msg}" Foreground="White"
+                                           TextWrapping="Wrap"
+                                           FontSize="20" HorizontalAlignment="Right" />
                             </Grid>
                         </controls:ChatBubble>
                     </DataTemplate>

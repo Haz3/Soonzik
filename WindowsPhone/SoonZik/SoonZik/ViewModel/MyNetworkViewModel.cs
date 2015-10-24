@@ -43,7 +43,6 @@ namespace SoonZik.ViewModel
                 ItemSource = AlphaKeyGroups<User>.CreateGroups(Sources, CultureInfo.CurrentUICulture, s => s.username,
                     true);
             }
-
             LoadTweet();
         }
 

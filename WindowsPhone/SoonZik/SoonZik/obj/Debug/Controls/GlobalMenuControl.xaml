@@ -20,10 +20,10 @@
         </Style>
 
         <Storyboard x:Name="MenuStoryBoard">
-            <DoubleAnimation Duration="0:0:0.25" To="300"
+            <DoubleAnimation Duration="0:0:0.25" To="200"
                              Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)"
                              Storyboard.TargetName="MenuGrid" d:IsOptimized="True" />
-            <DoubleAnimation Duration="0:0:0.25" To="300"
+            <DoubleAnimation Duration="0:0:0.25" To="200"
                              Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)"
                              Storyboard.TargetName="GlobalGrid" d:IsOptimized="True" />
         </Storyboard>
@@ -36,10 +36,10 @@
                              Storyboard.TargetName="GlobalGrid" d:IsOptimized="True" />
         </Storyboard>
         <Storyboard x:Name="SearchStoryBoard">
-            <DoubleAnimation Duration="0:0:0.25" To="-300"
+            <DoubleAnimation Duration="0:0:0.25" To="-200"
                              Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)"
                              Storyboard.TargetName="SearchGrid" d:IsOptimized="True" />
-            <DoubleAnimation Duration="0:0:0.25" To="-300"
+            <DoubleAnimation Duration="0:0:0.25" To="-200"
                              Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)"
                              Storyboard.TargetName="GlobalGrid" d:IsOptimized="True" />
         </Storyboard>
@@ -109,23 +109,21 @@
 
     <Grid x:Name="GeneralGrid">
         <Grid.RowDefinitions>
-            <RowDefinition Height="40" />
+            <RowDefinition Height="50" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
         <Grid x:Name="HeaderGrid" Grid.Row="0" Background="Transparent" Height="50">
             <!--<ProgressBar x:Name="ProgressBar" Visibility="Visible" Width="200" IsIndeterminate="True" VerticalAlignment="Center" Height="10" HorizontalAlignment="Center" Foreground="Aqua"></ProgressBar>-->
 
-            <ProgressRing x:Name="ProgressTest" Height="15" Width="15" Foreground="Aqua" />
-
-            <ToggleButton x:Name="ToggleButtonMenu" Content="ToggleButton" HorizontalAlignment="Left" Height="30"
-                          Margin="10,8,0,12" Style="{StaticResource MenuToggleStyle}" VerticalAlignment="Center"
+            <ToggleButton x:ConnectionId='10' x:Name="ToggleButtonMenu" Content="ToggleButton" HorizontalAlignment="Left" Height="30"
+                          Margin="10,8,0,12" VerticalAlignment="Center"                                     
+                                                                  
                           Width="30" MinHeight="20" MinWidth="30" IsChecked="False" MaxHeight="30" MaxWidth="30">
                 <interactivity:Interaction.Behaviors>
                     <core:EventTriggerBehavior EventName="Checked">
                         <media:ControlStoryboardAction Storyboard="{StaticResource MenuStoryBoard}" />
                         <media:ControlStoryboardAction Storyboard="{StaticResource SearchAloneBack}" />
-
                     </core:EventTriggerBehavior>
                     <core:EventTriggerBehavior EventName="Unchecked">
                         <media:ControlStoryboardAction Storyboard="{StaticResource MenuStoryBoardBack}" />
@@ -148,7 +146,8 @@
             <!--<Image x:Name="PlaylistAdd" Source="../Resources/Icones/plus.png" Height="30" Tapped="PlaylistAdd_OnTapped" Visibility="Visible" HorizontalAlignment="Right" Margin="0,0,60,5" VerticalAlignment="Center"/>-->
         </Grid>
 
-        <Grid x:Name="MenuGrid" Grid.Row="1" HorizontalAlignment="Left" Margin="-300,0,0,0" Width="300"
+        <Grid x:Name="MenuGrid" Grid.Row="1" HorizontalAlignment="Left" Margin="-200,0,0,0" Width="200"
+              Background="Transparent" Opacity="0.8"
               RenderTransformOrigin="0.5,0.5">
             <Grid.RenderTransform>
                 <CompositeTransform />
@@ -191,8 +190,9 @@
                     MinWidth="200" />
         </Grid>
 
-        <Grid x:Name="SearchGrid" Grid.Row="1" Width="300" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Right"
-              Margin="0,0,-300,0">
+        <Grid x:Name="SearchGrid" Grid.Row="1" Width="200" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Right"
+              Background="Transparent"
+              Margin="0,0,-200,0" Opacity="0.8">
             <Grid.RenderTransform>
                 <CompositeTransform />
             </Grid.RenderTransform>
@@ -201,10 +201,14 @@
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
 
-            <TextBox x:ConnectionId='9' x:Name="SearchTextBlock" Grid.Row="0" Width="200" BorderThickness="0" AcceptsReturn="True"
-                     Height="13" Margin="50,3,50,0" TextAlignment="Center" VerticalContentAlignment="Center"
-                     Foreground="Black" Background="Gray" FontSize="18" x:Uid="Search" PlaceholderText=""
-                                                                 />
+            <Border BorderThickness="1" Grid.Row="0" BorderBrush="Transparent" Background="Gray" CornerRadius="10">
+                <TextBox x:ConnectionId='9' x:Name="SearchTextBlock" Width="190" BorderThickness="0" AcceptsReturn="True"
+                         Height="13" TextAlignment="Center" VerticalContentAlignment="Center"
+                         HorizontalAlignment="Center"
+                         VerticalAlignment="Center" Foreground="White" Opacity="0.5" FontSize="18"
+                         x:Uid="Search" PlaceholderText=""
+                                                                     />
+            </Border>
             <Grid Grid.Row="1">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*" />
@@ -232,7 +236,7 @@
             </Grid>
         </Grid>
 
-        <Grid x:ConnectionId='8' Grid.Row="1" x:Name="GlobalGrid" RenderTransformOrigin="0.5,0.5" Margin="0, 15, 0, 0"
+        <Grid x:ConnectionId='8' Grid.Row="1" x:Name="GlobalGrid" RenderTransformOrigin="0.5,0.5" Margin="0, 0, 0, 0"
                                           >
             <Grid.RenderTransform>
                 <CompositeTransform />
