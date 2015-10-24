@@ -25,7 +25,8 @@ SoonzikApp.controller('ChatCtrl', ['$scope', 'SecureAuth', 'HTTPService', '$time
 		dispatcher.on_open = function(data) {
 			dispatcher.trigger('who_is_online', {});
 			dispatcher.bind('onlineFriends', function(data) {
-		    $scope.onlineFriends = data.message;
+				var response = JSON.parse(data);
+		    $scope.onlineFriends = response.message;
 		    onlineFriendsCall = true;
 		  });
 		  dispatcher.bind("newMsg", newMessage);
@@ -39,23 +40,27 @@ SoonzikApp.controller('ChatCtrl', ['$scope', 'SecureAuth', 'HTTPService', '$time
 		}
 
 		var newMessage = function(data) {
-			if (typeof data !== "undefined" &&
-					typeof data.from !== "undefined") {
+			var response = JSON.parse(data);
 
-				if ((typeof $scope.message[data.from] == "undefined" && isInFriendList(data.from) != false) ||
-						(typeof $scope.message[data.from] != "undefined" && isOpen(data.from))) {
-					$scope.open_chat(isInFriendList(data.from));
-				} else if (typeof $scope.message[data.from] == "undefined" && isInFriendList(data.from) == false) {
+			if (typeof response !== "undefined" &&
+					typeof response.from !== "undefined") {
+
+				if ((typeof $scope.message[response.from] == "undefined" && isInFriendList(response.from) != false) ||
+						(typeof $scope.message[response.from] != "undefined" && isOpen(response.from))) {
+					$scope.open_chat(isInFriendList(response.from));
+				} else if (typeof $scope.message[response.from] == "undefined" && isInFriendList(response.from) == false) {
 					return;
 				}
-				$scope.message[data.from].messagesText.push({ extern: true, value: data.message });
+				$scope.message[response.from].messagesText.push({ extern: true, value: response.message });
 		    $scope.$digest();
 	  	}
 		}
 
 		var newFriendOn = function(data) {
+			var response = JSON.parse(data);
+
 			for (var index in $scope.friends) {
-				if ($scope.friends[index].id == data.idFriend && $scope.friends[index].online == false) {
+				if ($scope.friends[index].id == response.idFriend && $scope.friends[index].online == false) {
 					$scope.friends[index].online = true;
 		    	$scope.$digest();
 					return;
@@ -64,8 +69,10 @@ SoonzikApp.controller('ChatCtrl', ['$scope', 'SecureAuth', 'HTTPService', '$time
 		}
 
 		var newFriendOff = function(data) {
+			var response = JSON.parse(data);
+
 			for (var index in $scope.friends) {
-				if ($scope.friends[index].id == data.idFriend && $scope.friends[index].online == true) {
+				if ($scope.friends[index].id == response.idFriend && $scope.friends[index].online == true) {
 					$scope.friends[index].online = false;
 		    	$scope.$digest();
 					return;

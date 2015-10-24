@@ -12,7 +12,7 @@ class MessagesController < WebsocketRails::BaseController
       current_user.friends.each { |friend|
         controller_store[:user_id].each { |connected_guy|
           if friend.id == connected_guy[:id]
-            connected_guy[:socket].send_message('newOnlineFriends', { :idFriend => current_user.id })
+            connected_guy[:socket].send_message('newOnlineFriends', { :idFriend => current_user.id }.to_json)
           end
         }
       }
@@ -35,7 +35,7 @@ class MessagesController < WebsocketRails::BaseController
       @user.friends.each { |friend|
         controller_store[:user_id].each { |connected_guy|
           if friend.id == connected_guy[:id]
-            connected_guy[:socket].send_message('newOnlineFriends', { :idFriend => @user.id })
+            connected_guy[:socket].send_message('newOnlineFriends', { :idFriend => @user.id }.to_json)
           end
         }
       }
@@ -55,7 +55,7 @@ class MessagesController < WebsocketRails::BaseController
       u.friends.each { |friend|
         controller_store[:user_id].each { |connected_guy|
           if friend.id == connected_guy[:id]
-            connected_guy[:socket].send_message('newOfflineFriends', { :idFriend => user_id })
+            connected_guy[:socket].send_message('newOfflineFriends', { :idFriend => user_id }.to_json)
           end
         }
       }
@@ -79,7 +79,7 @@ class MessagesController < WebsocketRails::BaseController
         newMsg.save!
         controller_store[:user_id].each_with_index { |user, index|
           if (user[:id] == target.id)
-            user[:socket].send_message('newMsg', { message: message["messageValue"], from: @user.username })
+            user[:socket].send_message('newMsg', { message: message["messageValue"], from: @user.username }.to_json)
             break
           end
         }
@@ -103,7 +103,7 @@ class MessagesController < WebsocketRails::BaseController
       }
       controller_store[:user_id].each_with_index { |user, index|
         if (user[:id] == @user.id)
-          user[:socket].send_message('onlineFriends', {:message => friends})
+          user[:socket].send_message('onlineFriends', {:message => friends}.to_json)
           break
         end
       }
