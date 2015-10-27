@@ -98,7 +98,7 @@
         //this block runs on a background thread; Do heavy operation here
         self.listOfInfluences = [Factory provideListWithClassName:@"Influence"];
         self.listOfConcerts = [ConcertsController getConcerts];
-        [SuggestsController getSuggests:@"artist"];
+        self.listOfArtists = [SuggestsController getSuggests:@"artist"];
         NSLog(@"concerts.count : %i", self.listOfConcerts.count);
         
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -107,6 +107,7 @@
             self.dataLoaded = true;
             [self.influencesTableView reloadData];
             [self.concertsTableView reloadData];
+            [self.artistsTableView reloadData];
         });
     });
 }
@@ -189,6 +190,8 @@
     if (self.dataLoaded) {
         if (tableView.tag == 1)
             return self.listOfInfluences.count;
+        else if (tableView.tag == 2)
+            return self.listOfArtists.count;
         else if (tableView.tag == 3)
             return self.listOfConcerts.count;
     }
@@ -227,9 +230,11 @@
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cellArtists"];
     }
+    User *artist = [self.listOfArtists objectAtIndex:indexPath.row];
     cell.textLabel.textColor = [UIColor whiteColor];
     cell.backgroundColor = [UIColor clearColor];
     cell.textLabel.font = SOONZIK_FONT_BODY_MEDIUM;
+    cell.textLabel.text = artist.username;
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     return cell;

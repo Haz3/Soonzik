@@ -22,7 +22,7 @@
 @property (nonatomic, strong) CLLocationManager *userPosition;
 
 @property (nonatomic, strong) IBOutlet UILabel *userLabel;
-@property (nonatomic, strong) IBOutlet UIImageView *userImage;
+@property (nonatomic, strong) IBOutlet UIImageView *albumImage;
 @property (nonatomic, strong) IBOutlet UILabel *trackLabel;
 
 @property (nonatomic, strong) IBOutlet UISlider *areaSlider;

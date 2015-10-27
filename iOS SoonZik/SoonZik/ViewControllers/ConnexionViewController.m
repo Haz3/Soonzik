@@ -176,22 +176,33 @@
             NSLog(@"session.userID : %@", session.userID);
             NSLog(@"session.authToken : %@", session.authToken);
             NSLog(@"session.authTokenSecret : %@", session.authTokenSecret);
-            
-            TWTRShareEmailViewController* shareEmailViewController =  [[TWTRShareEmailViewController alloc] initWithCompletion:^(NSString* email, NSError* error) {
-                 NSLog(@"Email %@, Error: %@", email, error);
-             }];
+            NSLog(@"%@", session);
+        
+            TWTRShareEmailViewController* shareEmailViewController = [[TWTRShareEmailViewController alloc] initWithCompletion:^(NSString * _Nullable email, NSError * _Nullable error) {
+                NSLog(@"email: %@", email);
+                NSLog(@"error : %@", error);
+            }];
             [self presentViewController:shareEmailViewController animated:YES completion:nil];
-            
-            /*User *user =  [IdenticationsController twitterConnect:session.authToken email:user.email uid:session.userID];
-            
-            NSData *dataStore = [NSKeyedArchiver archivedDataWithRootObject:user];
-            [[NSUserDefaults standardUserDefaults] setObject:dataStore forKey:@"User"];
-            [[NSUserDefaults standardUserDefaults] synchronize];
-            
-            AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
-            [appDelegate launchHome];*/
         }
     }];
+    
+    
+
+    
+                /*
+                 User *user =  [IdenticationsController twitterConnect:session.authToken email:email uid:session.userID];
+                 NSLog(@"user.username : %@", user.username);
+                 NSLog(@"email : %@", email);
+                 
+                 if (user.identifier != 0) {
+                 NSData *dataStore = [NSKeyedArchiver archivedDataWithRootObject:user];
+                 [[NSUserDefaults standardUserDefaults] setObject:dataStore forKey:@"User"];
+                 [[NSUserDefaults standardUserDefaults] synchronize];
+                 
+                 AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
+                 [appDelegate launchHome];
+                 }
+                 */
 }
 
 - (void)loginWithGoogle

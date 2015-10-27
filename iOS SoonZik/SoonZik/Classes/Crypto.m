@@ -13,6 +13,7 @@
 + (NSString *)getKey:(int)userID {
     NSString *url = [NSString stringWithFormat:@"%@getKey/%i", API_URL, userID];
     NSDictionary *results = [Request getRequest:url];
+    NSLog(@"GET KEY : %@", results);
     return [results objectForKey:@"key"];
 }
 
