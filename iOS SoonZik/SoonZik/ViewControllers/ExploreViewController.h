@@ -15,6 +15,7 @@
 @property (nonatomic, strong) UITableView *concertsTableView;
 @property (nonatomic, strong) NSArray *listOfInfluences;
 @property (nonatomic, strong) NSArray *listOfConcerts;
+@property (nonatomic, strong) NSArray *listOfArtists;
 @property (nonatomic, strong) UIScrollView *scrollView;
 
 @property (nonatomic, assign) bool dataLoaded;

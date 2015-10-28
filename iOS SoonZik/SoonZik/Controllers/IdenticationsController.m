@@ -53,6 +53,7 @@
     secureKey = [Crypto sha256HashFor:conca];
     post = [NSString stringWithFormat:@"uid=%@&provider=%@&encrypted_key=%@&token=%@", uid, @"twitter", secureKey, token];
     NSDictionary *json = [Request postRequest:post url:url];
+    NSLog(@"json twitter: %@", json);
     User *user = [[User alloc] initWithJsonObject:[json objectForKey:@"content"]];
     
     return user;

@@ -13,6 +13,9 @@
 - (id)initWithJsonObject:(NSDictionary *)json
 {
     self = [super init];
+    
+    NSLog(@"%@", json);
+    
     self.identifier = [[json objectForKey:@"id"] intValue];
     self.image = [json objectForKey:@"image"];
     self.price = [[json objectForKey:@"price"] floatValue];

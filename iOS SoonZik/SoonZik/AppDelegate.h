@@ -24,6 +24,7 @@
 #import "FriendsViewController.h"
 #import "AccountViewController.h"
 #import "SearchViewController.h"
+#import "ContactViewController.h"
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
@@ -46,6 +47,7 @@
 @property (nonatomic, strong) UINavigationController *accountVC;
 @property (nonatomic, strong) UINavigationController *cartVC;
 @property (nonatomic, strong) SearchViewController *searchVC;
+@property (nonatomic, strong) UINavigationController *feedbackVC;
 
 @property (nonatomic, strong, readwrite) PKRevealController *revealController;
 

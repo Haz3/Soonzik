@@ -49,7 +49,7 @@
     [self initializeMenuSystem];
     [self initBasicGraphics];
     
-    //[[Twitter sharedInstance] startWithConsumerKey:@"jwRxE6l8j6t0uGGNjEaMPfYEG" consumerSecret:@"2770ueiokY2QLNYcykUFJfHUrr0avop7TsIlsJUE3FtKxaM4P0"];
+    [[Twitter sharedInstance] startWithConsumerKey:@"ooWEcrlhooUKVOxSgsVNDJ1RK" consumerSecret:@"BtLpq9ZlFzXrFklC2f1CXqy8EsSzgRRVPZrKVh0imI2TOrZAan"];
     [Fabric with:@[[Twitter sharedInstance]]];
     
     [PayPalMobile initializeWithClientIdsForEnvironments:@{PayPalEnvironmentProduction : CLIENT_ID_PROD,
@@ -77,6 +77,9 @@
     CartViewController *cart = [[CartViewController alloc] initWithNibName:@"CartViewController" bundle:nil];
     cart.fromMenu = true;
     self.cartVC = [[UINavigationController alloc] initWithRootViewController:cart];
+    
+    ContactViewController *contact = [[ContactViewController alloc] initWithNibName:@"ContactViewController" bundle:nil];
+    self.feedbackVC = [[UINavigationController alloc] initWithRootViewController:contact];
     
     UINavigationController *frontNavigationController = self.homeVC;
     self.searchVC = [[SearchViewController alloc] initWithNibName:@"SearchViewController" bundle:nil];
@@ -162,7 +165,7 @@
     leftViewController.view.backgroundColor = BLUE_1;
     
     UITableView *tableView = ({
-        UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, ([[UIScreen mainScreen] bounds].size.height - 54 * 9) / 2.0f + 40, [[UIScreen mainScreen] bounds].size.width, /*54 * 8*/[[UIScreen mainScreen] bounds].size.height) style:UITableViewStylePlain];
+        UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, ([[UIScreen mainScreen] bounds].size.height - 54 * 9) / 2.0f + 40, [[UIScreen mainScreen] bounds].size.width, /*54 * 8*/[[UIScreen mainScreen] bounds].size.height - 92) style:UITableViewStylePlain];
         tableView.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleWidth;
         tableView.delegate = self;
         tableView.dataSource = self;
@@ -170,12 +173,12 @@
         tableView.backgroundColor = [UIColor clearColor];
         tableView.backgroundView = nil;
         tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-        tableView.bounces = NO;
+        tableView.bounces = true;
         tableView;
     });
     [leftViewController.view addSubview:tableView];
     
-    UIImageView *logoView = [[UIImageView alloc] initWithFrame:CGRectMake(10, 50, 150, 42)];
+    UIImageView *logoView = [[UIImageView alloc] initWithFrame:CGRectMake(10, 40, 150, 42)];
     logoView.image = [UIImage imageNamed:@"logo_SZ.png"];
     [leftViewController.view addSubview:logoView];
     
@@ -306,6 +309,12 @@
             [self.revealController setFrontViewController:frontNavigationController];
         }
             break;
+        case 9:
+            // feedback
+        {
+            frontNavigationController = self.feedbackVC;
+            [self.revealController setFrontViewController:frontNavigationController];
+        }
     }
     
     [self.revealController resignPresentationModeEntirely:true animated:true completion:nil];
@@ -326,7 +335,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)sectionIndex
 {
-    return 9;
+    return 10;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -352,7 +361,7 @@
                               [self.translate.dict objectForKey:@"menu_content"],
                               [self.translate.dict objectForKey:@"menu_network"],
                               [self.translate.dict objectForKey:@"menu_cart"],
-                              [self.translate.dict objectForKey:@"menu_account"]];
+                              [self.translate.dict objectForKey:@"menu_account"], @"Contact us"];
     
    NSLog(@"titles : %@", listOftitles[indexPath.row]);
     cell.textLabel.text = listOftitles[indexPath.row];

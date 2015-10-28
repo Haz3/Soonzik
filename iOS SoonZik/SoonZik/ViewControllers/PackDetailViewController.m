@@ -226,7 +226,7 @@
     if (!cell) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"cellAvg"];
     }
-    cell.textLabel.text = [NSString stringWithFormat:[self.translate.dict objectForKey:@"pack_average"], self.avg];
+    cell.textLabel.text = [NSString stringWithFormat:[self.translate.dict objectForKey:@"pack_average"], self.pack.avgPrice];
     cell.textLabel.font = SOONZIK_FONT_BODY_MEDIUM;
     cell.textLabel.textColor = [UIColor whiteColor];
     cell.detailTextLabel.text = [self.translate.dict objectForKey:@"pack_average_message"];

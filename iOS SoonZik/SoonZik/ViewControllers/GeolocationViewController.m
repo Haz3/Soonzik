@@ -130,29 +130,44 @@
 - (void)getAllOtherUsers
 {
     //self.listOfListenings = [UsersController getUsersInArea:self.userPosition.location.coordinate.latitude :self.userPosition.location.coordinate.longitude :(int)self.areaSlider.value];
-    self.listOfListenings = [UsersController getUsersInArea:self.userPosition.location.coordinate.latitude :self.userPosition.location.coordinate.longitude :(int)self.areaSlider.value];
     
-    for (id annotation in self.mapView.annotations) {
-        if ([annotation isKindOfClass:[UserAnnotation class]]) {
-            [self.mapView removeAnnotation:annotation];
-            NSLog(@"annotation");
-        }
-    }
     
-    [self.mapView reloadInputViews];
     
     [self getUserLocation];
     
-    for (UserListen *listen in self.listOfListenings) {
-        NSLog(@"found");
-        CLLocationCoordinate2D coord;
-        coord.latitude = listen.lat;
-        coord.longitude = listen.lng;
-        NSLog(@"user name : %@", listen.user.username);
-        UserAnnotation *ann = [[UserAnnotation alloc] initWithCoordinate:coord user:listen.user music:listen.music artist:listen.artist];
-        [self.mapView addAnnotation:ann];
-    }
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT,0),  ^{
+        //this block runs on a background thread; Do heavy operation here
+        self.listOfListenings = [UsersController getUsersInArea:self.userPosition.location.coordinate.latitude :self.userPosition.location.coordinate.longitude :(int)self.areaSlider.value];
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            //This block runs on main thread, so update UI
+            for (id annotation in self.mapView.annotations) {
+                if ([annotation isKindOfClass:[UserAnnotation class]]) {
+                    [self.mapView removeAnnotation:annotation];
+                    NSLog(@"annotation");
+                }
+            }
+            
+            [self.mapView reloadInputViews];
+            
+            for (UserListen *listen in self.listOfListenings) {
+                NSLog(@"found");
+                CLLocationCoordinate2D coord;
+                coord.latitude = listen.lat;
+                coord.longitude = listen.lng;
+                NSLog(@"user name : %@", listen.user.username);
+                UserAnnotation *ann = [[UserAnnotation alloc] initWithCoordinate:coord user:listen.user music:listen.music artist:listen.artist];
+                [self.mapView addAnnotation:ann];
+            }
+        });
+    });
 }
+
+/// LE KREMLIN BICETRE
+//48.829974, 2.362233
+
+
+
 
 - (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation
 {
@@ -196,8 +211,20 @@
         self.userListenMusic = userAnnot.music;
         
         self.userLabel.text = userAnnot.user.username;
-        self.userImage.image = [UIImage imageNamed:userAnnot.user.image];
+        
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT,0),  ^{
+            //this block runs on a background thread; Do heavy operation here
+            NSString *urlImage = [NSString stringWithFormat:@"%@assets/albums/%@", API_URL, userAnnot.music.albumImage];
+            NSData *imageData = [[NSData alloc] initWithContentsOfURL: [NSURL URLWithString: urlImage]];
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                //This block runs on main thread, so update UI
+                self.albumImage.image = [UIImage imageWithData:imageData];
+            });
+        });
+        
         self.trackLabel.text = userAnnot.music.title;
+        
 
         if (self.detailView.alpha == 0) {
             [UIView animateWithDuration:1 animations:^{

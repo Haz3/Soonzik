@@ -191,7 +191,7 @@
 	<key>payment_title_success</key>
 	<string>Successfull Payment</string>
 	<key>payment_message_success</key>
-	<string>Your payment has been successfully accomplished. You can go in the &quot;Explorer&quot; section to listen you favorite songs.</string>
+	<string>Your payment has been successfully accomplished. You can go in the &quot;Explore&quot; section to listen you favorite songs.</string>
 	<key>let_message_to_followers</key>
 	<string>Let a message to your followers</string>
 	<key>tweet_sended</key>

@@ -28,6 +28,9 @@
     self.albumImage.layer.shadowRadius = 5.0;
     self.albumImage.layer.shadowColor = [UIColor blackColor].CGColor;
     self.albumImage.layer.shadowOpacity = 0.8;
+    
+    [self.buyButton setTitleColor:ORANGE forState:UIControlStateNormal];
+    self.buyButton.titleLabel.font = SOONZIK_FONT_BODY_MEDIUM;
 }
 
 @end
