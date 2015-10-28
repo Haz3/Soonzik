@@ -29,7 +29,6 @@
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
-@property (retain, nonatomic) AudioPlayer *thePlayer;
 @property (strong, nonatomic) ConnexionViewController *connexionViewController;
 @property (strong, nonatomic) NSUserDefaults *prefs;
 @property (nonatomic) int type;

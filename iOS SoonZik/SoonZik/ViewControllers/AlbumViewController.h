@@ -20,6 +20,7 @@
 @property (nonatomic, assign) bool fromSearch;
 @property (nonatomic, assign) bool fromCurrentList;
 @property (nonatomic, assign) bool fromPack;
+@property (nonatomic, strong) UIImage *albumImage;
 
 @property (nonatomic, assign) bool dataLoaded;
 @property (nonatomic, strong) UIActivityIndicatorView *spin;

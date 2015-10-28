@@ -321,7 +321,7 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellIdentifier];
     }
     
-    cell.backgroundColor = [UIColor clearColor];
+    cell.backgroundColor = DARK_GREY;
     cell.textLabel.textColor = [UIColor whiteColor];
     
     Tweet *tweet = [self.listOfTweets objectAtIndex:indexPath.row];

@@ -316,10 +316,11 @@
             // TOTAL
             UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cellTotal"];
             if (!cell) {
-                cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"cellTotal"];
+                cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cellTotal"];
             }
-            cell.detailTextLabel.text = @"prix total : ";
-            cell.textLabel.text = [NSString stringWithFormat:@"%.1f", [self getTotalPrice]];
+            cell.textLabel.text = [NSString stringWithFormat:@"%.1f €", [self getTotalPrice]];
+            cell.textLabel.font = SOONZIK_FONT_BODY_MEDIUM;
+            cell.textLabel.textAlignment = NSTextAlignmentRight;
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             cell.accessoryView = nil;
             cell.backgroundColor = [UIColor clearColor];
@@ -332,10 +333,11 @@
             // TOTAL
             UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cellTotal"];
             if (!cell) {
-                cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"cellTotal"];
+                cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cellTotal"];
             }
-            cell.detailTextLabel.text = @"prix total : ";
-            cell.textLabel.text = [NSString stringWithFormat:@"%.1f", [self getTotalPrice]];
+            cell.textLabel.text = [NSString stringWithFormat:@"%.1f €", [self getTotalPrice]];
+            cell.textLabel.font = SOONZIK_FONT_BODY_MEDIUM;
+            cell.textLabel.textAlignment = NSTextAlignmentRight;
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             cell.accessoryView = nil;
             cell.backgroundColor = [UIColor clearColor];

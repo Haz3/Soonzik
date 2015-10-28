@@ -182,6 +182,8 @@
     logoView.image = [UIImage imageNamed:@"logo_SZ.png"];
     [leftViewController.view addSubview:logoView];
     
+    [self startPresentationMode];
+    
     return leftViewController;
 }
 
@@ -351,6 +353,7 @@
         cell.textLabel.textColor = [UIColor whiteColor];
         cell.textLabel.highlightedTextColor = [UIColor lightGrayColor];
         cell.selectedBackgroundView = [[UIView alloc] init];
+        cell.textLabel.textAlignment = NSTextAlignmentLeft;
     }
     
     NSArray *listOftitles = @[[self.translate.dict objectForKey:@"menu_news"],
@@ -478,26 +481,18 @@
 {
     if (receivedEvent.type == UIEventTypeRemoteControl) {
         switch (receivedEvent.subtype) {
-            case 101:
-            {
-                // pause / play
-                if (self.thePlayer.audioPlayer.isPlaying) {
-                    [self.thePlayer pauseSound];
-                } else {
-                    [self.thePlayer playSound];
-                }
-                
-            }
-            break;
-                
-                /*case UIEventSubtypeRemoteControlPreviousTrack:
-                 [self previousTrack: nil];
-                 break;
-                 
-                 case UIEventSubtypeRemoteControlNextTrack:
-                 [self nextTrack: nil];
-                 break;
-                 */
+            case UIEventSubtypeRemoteControlPause:
+               [[AudioPlayer sharedCenter] pauseSound];
+                break;
+            case UIEventSubtypeRemoteControlPlay:
+                [[AudioPlayer sharedCenter] playSound];
+                break;
+            case UIEventSubtypeRemoteControlPreviousTrack:
+                [[AudioPlayer sharedCenter] previous];
+                break;
+            case UIEventSubtypeRemoteControlNextTrack:
+                [[AudioPlayer sharedCenter] next];
+                break;
             default:
                 break;
         }

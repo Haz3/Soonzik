@@ -37,15 +37,11 @@
     self.tableView.backgroundColor = [UIColor clearColor];
     self.view.backgroundColor = DARK_GREY;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    
-    NSLog(@"listOfNews.text.count : %i", self.news.listOfNewsTexts.count);
-    NSLog(@"listOfAttachments.count : %i", self.news.listOfAttachments.count);
 }
 
 - (void)getData {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT,0),  ^{
         //this block runs on a background thread; Do heavy operation here
-        
         self.listOfComments = [CommentsController getCommentsFromNews:self.news];
         
         dispatch_async(dispatch_get_main_queue(), ^{

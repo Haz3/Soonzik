@@ -39,9 +39,6 @@
 - (IBAction)previous:(id)sender;
 - (IBAction)next:(id)sender;
 
-- (IBAction)random:(id)sender;
-- (IBAction)repeat:(id)sender;
-
 - (IBAction)goToThisPeriod:(id)sender;
 
 @end

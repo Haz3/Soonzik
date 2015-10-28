@@ -33,8 +33,8 @@
     NSData *translateData = [[NSUserDefaults standardUserDefaults] objectForKey:@"Translate"];
     self.translate = [NSKeyedUnarchiver unarchiveObjectWithData:translateData];
     
-    self.dataLoaded = true;
-    [self launchLoadData];
+    self.dataLoaded = false;
+    [self getData];
     
     self.price = self.pack.avgPrice;
     
@@ -58,39 +58,26 @@
         self.navigationItem.backBarButtonItem = nil;
         self.navigationItem.leftBarButtonItem = nil;
     }
-   
 }
 
-- (void)launchLoadData {
-    [NSThread detachNewThreadSelector:@selector(loadData) toTarget:self withObject:nil];
-}
-
-- (void) loadData {
-    self.dataLoaded = NO;
-    [self loadDataFromAPI];
-    self.dataLoaded = YES;
-    [self.tableView reloadData];
-}
-
-- (void)loadDataFromAPI {
-    [NSThread detachNewThreadSelector: @selector(spinBegin) toTarget:self withObject:nil];
-    
-    self.pack = [PacksController getPack:self.pack.identifier];
-    
-    [NSThread detachNewThreadSelector: @selector(spinEnd) toTarget:self withObject:nil];
-}
-
-- (void)spinBegin {
+- (void)getData {
     self.spin = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
     self.spin.center = self.view.center;
     [self.view addSubview:self.spin];
-    
     [self.spin startAnimating];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT,0),  ^{
+        //this block runs on a background thread; Do heavy operation here
+        self.pack = [PacksController getPack:self.pack.identifier];
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            //This block runs on main thread, so update UI
+            [self.spin stopAnimating];
+            self.dataLoaded = true;
+            [self.tableView reloadData];
+        });
+    });
 }
 
-- (void)spinEnd {
-    [self.spin stopAnimating];
-}
 
 #pragma mark UITABLEVIEW DELEGATE METHODS
 

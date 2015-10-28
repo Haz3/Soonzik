@@ -57,6 +57,7 @@
 {
     [super viewDidLoad];
     
+    self.albumImage = [UIImage imageNamed:@"empty_list"];
     self.dataLoaded = NO;
     [self getData];
     
@@ -113,11 +114,24 @@
 {
     HeaderAlbumTableView *view = (HeaderAlbumTableView *)[[[NSBundle mainBundle] loadNibNamed:@"HeaderAlbumTableView" owner:self options:nil] firstObject];
     
-    NSString *urlImage = [NSString stringWithFormat:@"%@assets/albums/%@", API_URL, self.album.image];
-    NSLog(@"url image : %@", urlImage);
-    NSData *imageData = [[NSData alloc] initWithContentsOfURL: [NSURL URLWithString: urlImage]];
-    view.albumImage.image = [UIImage imageWithData:imageData];
-    self.visualView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageWithData:imageData]];
+   if (!self.dataLoaded) {
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT,0),  ^{
+            NSString *urlImage = [NSString stringWithFormat:@"%@assets/albums/%@", API_URL, self.album.image];
+            NSLog(@"url image : %@", urlImage);
+            NSData *imageData = [[NSData alloc] initWithContentsOfURL: [NSURL URLWithString: urlImage]];
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                self.albumImage = [UIImage imageWithData:imageData];
+                self.visualView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageWithData:imageData]];
+                
+                [self.spin stopAnimating];
+                self.dataLoaded = true;
+                [self.tableview reloadData];
+            });
+        });
+    }
+    
+    view.albumImage.image = self.albumImage;
     view.albumTitle.text = self.album.title;
     view.artistLabel.text = self.album.artist.username;
     view.backgroundColor = [UIColor clearColor];
@@ -209,17 +223,15 @@
 {
     Music *s = [self.listOfMusics objectAtIndex:indexPath.row];
     s.artist = self.album.artist;
-    
-    //self.player = ((AppDelegate *)[UIApplication sharedApplication].delegate).thePlayer;
     self.player = [AudioPlayer sharedCenter];
     if ([self.player currentlyPlaying])
-        [self.player pauseSound];
+//        [self.player pauseSound];
     self.player.listeningList = nil;
     self.player.listeningList = [[NSMutableArray alloc] init];
     [self.player.listeningList addObject:s];
     self.player.index = 0;
     [self.player prepareSong:s.identifier];
-    [self.player playSound];
+ //   [self.player playSound];
     self.player.songName = s.title;
     
     [self deselectAllTheRows];
@@ -238,11 +250,9 @@
 
 - (void) playAlbum
 {
-    //self.player = ((AppDelegate *)[UIApplication sharedApplication].delegate).thePlayer;
-    
     self.player = [AudioPlayer sharedCenter];
     self.player.listeningList = [[NSMutableArray alloc] init];
-    [self.player stopSound];
+//    [self.player stopSound];
     self.player.currentlyPlaying = NO;
     self.player.index = 0;
     self.player.oldIndex = 0;
@@ -251,9 +261,12 @@
         [self.player.listeningList addObject:music];
     }
     
+    [AudioPlayer sharedCenter].listeningList = self.player.listeningList;
+    
+    NSLog(@"TAILLLE : %i", self.player.listeningList.count);
     Music *music = [self.player.listeningList objectAtIndex:0];
     [self.player prepareSong:music.identifier];
-    [self.player playSound];
+//    [self.player playSound];
 }
 
 - (void)displayPopUp:(MusicOptionsButton *)btn
@@ -290,8 +303,6 @@
 - (void)addToCurrentPlaylist:(Music *)music
 {
     [self closePopUp];
-    //self.player = ((AppDelegate *)[UIApplication sharedApplication].delegate).thePlayer;
-    
     self.player = [AudioPlayer sharedCenter];
     music.artist.username = self.album.artist.username;
     [self.player.listeningList addObject:music];
@@ -322,11 +333,7 @@
         } else {
             [[[SimplePopUp alloc] initWithMessage:[self.translate.dict objectForKey:@"add_to_cart_success"] onView:self.view withSuccess:false] show];
         }
-        
     }
-    /*CartViewController *vc = [[CartViewController alloc] initWithNibName:@"CartViewController" bundle:nil];
-    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
-    [self presentViewController:nav animated:YES completion:nil];*/
 }
 
 

@@ -14,6 +14,7 @@
 
 - (void)awakeFromNib {
     // Initialization code
+    self.musicTitle.font = SOONZIK_FONT_BODY_SMALL;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -21,7 +22,7 @@
     
     if (selected) {
         self.musicTitle.textColor = BLUE_3;
-        self.musicTitle.font = SOONZIK_FONT_BODY_MEDIUM;
+        self.musicTitle.font = SOONZIK_FONT_BODY_SMALL;
     } else {
         self.musicTitle.textColor = [UIColor whiteColor];
     }

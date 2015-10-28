@@ -67,7 +67,6 @@
     //self.player = ((AppDelegate *)[UIApplication sharedApplication].delegate).thePlayer;
     self.player = [AudioPlayer sharedCenter];
     self.player.finishDelegate = self;
-    NSLog(@"self.player.repeatLevel : %i", self.player.repeatingLevel);
     
     [self refreshThePlayerPreview];
     
@@ -252,7 +251,7 @@
 - (void)deleteFromCurrentList:(Music *)music {
     Music *m = [self.player.listeningList objectAtIndex:self.player.index];
     if (m.identifier == music.identifier) {
-        [self.player pauseSound];
+ //       [self.player pauseSound];
         self.player.oldIndex = 0;
         self.player.index = -20;
     }
