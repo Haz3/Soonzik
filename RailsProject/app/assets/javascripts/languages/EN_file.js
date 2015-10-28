@@ -42,9 +42,8 @@ var labels = {
 	// Album Controller
 	FILE_ALBUM_ADD_ALBUM_MESSAGE: "Album successfuly adding into the cart",
 	FILE_ALBUM_ADD_ALBUM_ERROR_MESSAGE: "An error occured while adding album into the cart",
-    FILE_ALBUM_ADD_SONG_MESSAGE: "Song is successfuly add into the cart", 
-    FILE_ALBUM_ADD_SONG_ERROR_MESSAGE: "An error occured while adding song into the cart",
-
+  FILE_ALBUM_ADD_SONG_MESSAGE: "Song is successfuly add into the cart", 
+  FILE_ALBUM_ADD_SONG_ERROR_MESSAGE: "An error occured while adding song into the cart",
 	FILE_ALBUM_GET_NOTES_ERROR_MESSAGE: "Error while loading your notes",
 	FILE_ALBUM_FIND_PLAYLIST_ERROR_MESSAGE: "Error while deleting the playlist : ",
 	FILE_ALBUM_GET_ALBUM_ERROR_MESSAGE: "Error while loading the album",
@@ -321,44 +320,73 @@ var labels = {
 	DISPLAY_SIGNUP_PHONE_LABEL: "Phone Number",
 	DISPLAY_SIGNUP_NEWSLETTER_LABEL: "Newsletter",
 
+  // Cart view
+  DISPLAY_CART_INDEX: "Cart",
+  DISPLAY_CART_BUY: "Buy your cart",
 
-    // Cart Controller
-    DISPLAY_CART_INDEX: "Cart",
-    DISPLAY_CART_BUY: "Buy your cart",
- 
-    FILE_CART_LOAD_ERROR_MESSAGE: "An error occured while getting the cart",
-    FILE_CART_DELETE_ITEM_ERROR_MESSAGE: "An error occured while destroying an item in cart",
-    FILE_CART_DELETE_SUCCESS_MESSAGE: "Item is successfuly delete",
-    FILE_CART_SUCCESS_BUY_CART_MESSAGE: "Cart is successfuly buy",
-    FILE_CART_BUY_ERROR_MESSAGE: "An error occured while buying the cart", 
-    
-    // Friends Controller
-    DISPLAY_FRIENDS_LABEL: "Friends",
-    FILE_FRIEND_LOAD_FRIENDS_ERROR_MESSAGE: "An error occured while loading your friends",
+  // Cart Controller
+  FILE_CART_LOAD_ERROR_MESSAGE: "An error occured while getting the cart",
+  FILE_CART_DELETE_ITEM_ERROR_MESSAGE: "An error occured while destroying an item in cart",
+  FILE_CART_DELETE_SUCCESS_MESSAGE: "Item is successfuly delete",
+  FILE_CART_SUCCESS_BUY_CART_MESSAGE: "Cart is successfuly buy",
+  FILE_CART_BUY_ERROR_MESSAGE: "An error occured while buying the cart", 
+  
+  // Friends view
+  DISPLAY_FRIENDS_LABEL: "Friends",
 
-    // News Controller
-    DISPLAY_NEWS_LABEL: "News",
-    DISPLAY_NEWS_SHOW_MORE: "Show More",
-    DISPLAY_NEWS_COMMENT_SEND: "Send",
+  // Friends Controller
+  FILE_FRIEND_LOAD_FRIENDS_ERROR_MESSAGE: "An error occured while loading your friends",
 
-    FILE_NEWS_LOAD_COMMENT_ERROR_MESSAGE: "Error while loading commentaries",
-    FILE_NEWS_SEND_COMMENT_ERROR_MESSAGE: "Error while saving your comment, please try later",
-    FILE_NEWS_LOAD_ERROR_MESSAGE: "Error while loading news",
-    FILE_NEWS_LOAD_ONE_NEWS_ERROR_MESSAGE: "The page you asked is not available",
+  // News view
+  DISPLAY_NEWS_LABEL: "News",
+  DISPLAY_NEWS_SHOW_MORE: "Show More",
+  DISPLAY_NEWS_COMMENT_SEND: "Send",
 
+  // News Controller
+  FILE_NEWS_LOAD_COMMENT_ERROR_MESSAGE: "Error while loading commentaries",
+  FILE_NEWS_SEND_COMMENT_ERROR_MESSAGE: "Error while saving your comment, please try later",
+  FILE_NEWS_LOAD_ERROR_MESSAGE: "Error while loading news",
+  FILE_NEWS_LOAD_ONE_NEWS_ERROR_MESSAGE: "The page you asked is not available",
 
-   // Packs Controller
-   DISPLAY_PACK_LABEL: "Packs of the moment",
-   DISPLAY_PACK_TIMELEFT: "Time left",
-   DISPLAY_PACK_AVERAGE: "Average",
-   DISPLAY_PACK_YEAR_ALBUM: "Release",
-   DISPLAY_PACK_ARTIST_NAME: "Artist",
-   DISPLAY_PACK_DEV_NAME: "Developper",
-   DISPLAY_PACK_ASSOCIATION_NAME: "Association",
-   DISPLAY_PACK_BUY_PACK: "Buy this pack",
-   DISPLAY_PACK_TOTAL_PACK: "Total",
+  // Packs view
+  DISPLAY_PACK_LABEL: "Packs of the moment",
+  DISPLAY_PACK_TIMELEFT: "Time left",
+  DISPLAY_PACK_AVERAGE: "Average",
+  DISPLAY_PACK_YEAR_ALBUM: "Release",
+  DISPLAY_PACK_ARTIST_NAME: "Artist",
+  DISPLAY_PACK_DEV_NAME: "Developper",
+  DISPLAY_PACK_ASSOCIATION_NAME: "Association",
+  DISPLAY_PACK_BUY_PACK: "Buy this pack",
+  DISPLAY_PACK_TOTAL_PACK: "Total",
 
-   FILE_PACK_LOAD_ERROR_MESSAGE: "Error while loading packs",
-   FILE_PACK_LOAD_ONE_PACK_ERROR_MESSAGE: "The page you asked is not available",
-   FILE_PACK_BUY_PACK_ERROR_MESSAGE: "Error while buying your cart", 
+  // Packs Controller
+  FILE_PACK_LOAD_ERROR_MESSAGE: "Error while loading packs",
+  FILE_PACK_LOAD_ONE_PACK_ERROR_MESSAGE: "The page you asked is not available",
+  FILE_PACK_BUY_PACK_ERROR_MESSAGE: "Error while buying your cart", 
+
+  // Index view
+  DISPLAY_INDEX_NEWS_SEE_MORE: "See more news",
+  DISPLAY_INDEX_PACKS_SEE_MORE: "See more packs",
+  DISPLAY_INDEX_BATTLES_SEE_MORE: "See more battles",
+  DISPLAY_INDEX_SWEET_LABEL: "Sweets",
+  DISPLAY_INDEX_ACTIVITY_LABEL: "Activities",
+  DISPLAY_INDEX_INTERACTION_LABEL: "Interactions",
+  DISPLAY_INDEX_NO_SWEET_LABEL: "No sweet to show",
+  DISPLAY_INDEX_ANSWER_LABEL: "Answer",
+  DISPLAY_INDEX_CHARACTER_LEFT_LABEL: "characters left",
+  DISPLAY_INDEX_LAST_NEWS_LABEL: "The last news",
+  DISPLAY_INDEX_LAST_PACKS_LABEL: "The last packs",
+  DISPLAY_INDEX_PAY_MORE_LABEL_PART_ONE: "Pay",
+  DISPLAY_INDEX_PAY_MORE_LABEL_PART_TWO: "$ or more to unlock",
+  DISPLAY_INDEX_SUGGESTION_LABEL: "Suggestions",
+  DISPLAY_INDEX_BATTLE_PAGE_LABEL: "Access to the battle",
+  DISPLAY_INDEX_PACK_PAGE_LABEL: "Access to the pack",
+
+  // Index Controller
+  FILE_INDEX_NEWS_LOAD_ERROR_MESSAGE: "An error occured while loading the news",
+  FILE_INDEX_PACKS_LOAD_ERROR_MESSAGE: "An error occured while loading the packs",
+  FILE_INDEX_BATTLES_LOAD_ERROR_MESSAGE: "An error occured while loading the battles",
+  FILE_INDEX_PROFILE_LOAD_ERROR_MESSAGE: "An error occured while loading the profile of an artist",
+  FILE_INDEX_FLUX_LOAD_ERROR_MESSAGE: "An error occured while loading your activities",
+  FILE_INDEX_SUGGESTION_LOAD_ERROR_MESSAGE: "An error occured while loading your suggestions",
 }

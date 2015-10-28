@@ -43,7 +43,7 @@ module API
       if (defined?(@id))
         begin
           u = User.find_by_id(@id)
-          if (Time.at(u.token_update).to_i + 300 < Time.now.to_i)
+          if (Time.at(u.token_update).to_i + 3600 < Time.now.to_i)
             u.regenerateKey
             u.save
             u.reload
@@ -223,7 +223,7 @@ protected
           u = User.find_by_id(@user_id)
           if (@secureKey == u.secureKey)
             @security = true
-            if (Time.at(u.token_update).to_i + 300 < Time.now.to_i)
+            if (Time.at(u.token_update).to_i + 3600 < Time.now.to_i)
               u.regenerateKey
               u.save
             end

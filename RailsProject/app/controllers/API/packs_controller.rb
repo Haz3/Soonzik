@@ -25,7 +25,7 @@ module API
         if (@count.present? && @count == "true")
           @returnValue = { content: Pack.count }
         else
-          @returnValue = { content: Pack.eager_load([albums: { user: {}, musics: {} }, user: {}, descriptions: {}]).all.as_json(:include => { albums: {
+          @returnValue = { content: Pack.eager_load([albums: { user: {}, musics: {} }, user: {}, descriptions: {}, partial_albums: {}]).all.as_json(:include => { albums: {
                                                                     :include => {
                                                                       :user => { :only => User.miniKey },
                                                                       :musics => { :only => Music.miniKey }
@@ -37,6 +37,9 @@ module API
                                                                   },
                                                                   descriptions: {
                                                                     :only => Description.miniKey
+                                                                  },
+                                                                  partial_albums: {
+                                                                    :only => PartialAlbum.miniKey
                                                                   }
                                                                 }, :only => Pack.miniKey, methods: :averagePrice) }
         end
@@ -68,7 +71,7 @@ module API
     # 
     def show
       begin
-        pack = Pack.eager_load([albums: { user: {}, musics: {} }, user: {}, descriptions: {}]).find_by_id(@id)
+        pack = Pack.eager_load([albums: { user: {}, musics: {} }, user: {}, descriptions: {}, partial_albums: {}]).find_by_id(@id)
         if (!pack)
           codeAnswer 502
           defineHttp :not_found
@@ -89,6 +92,9 @@ module API
                                                                 },
                                                                 descriptions: {
                                                                   :only => Description.miniKey
+                                                                },
+                                                                partial_albums: {
+                                                                  :only => PartialAlbum.miniKey
                                                                 }
                                                               }, :only => Pack.miniKey, methods: :averagePrice) }
           codeAnswer 200
@@ -138,14 +144,14 @@ module API
             end
 
             if (pack_object == nil)          #pack_object doesn't exist
-              pack_object = Pack.eager_load([albums: { user: {}, musics: {} }, user: {}, descriptions: {}]).where(condition)
+              pack_object = Pack.eager_load([albums: { user: {}, musics: {} }, user: {}, descriptions: {}, partial_albums: {}]).where(condition)
             else                              #pack_object exists
               pack_object = pack_object.where(condition)
             end
           end
           # - - - - - - - -
         else
-          pack_object = Pack.eager_load([albums: { user: {}, musics: {} }, user: {}, descriptions: {}]).all            #no attribute specified
+          pack_object = Pack.eager_load([albums: { user: {}, musics: {} }, user: {}, descriptions: {}, partial_albums: {}]).all            #no attribute specified
         end
 
         order_asc = ""
@@ -200,6 +206,9 @@ module API
                                                                   },
                                                                   descriptions: {
                                                                     :only => Description.miniKey
+                                                                  },
+                                                                  partial_albums: {
+                                                                    :only => PartialAlbum.miniKey
                                                                   }
                                                                   }, :only => Pack.miniKey, methods: :averagePrice) }
 

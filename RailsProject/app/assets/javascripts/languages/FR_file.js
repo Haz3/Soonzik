@@ -42,9 +42,8 @@ var labels = {
 	// Album Controller
 	FILE_ALBUM_ADD_ALBUM_MESSAGE: "L'album a bien été ajouté au panier",
 	FILE_ALBUM_ADD_ALBUM_ERROR_MESSAGE: "Une erreur s'est produite lors de l'ajout au panier",
-    FILE_ALBUM_ADD_SONG_MESSAGE: "La musique a bien été ajouté au panier", 
-    FILE_ALBUM_ADD_SONG_ERROR_MESSAGE: "Une erreur s'est produite lors de l'ajout au panier",
-
+  FILE_ALBUM_ADD_SONG_MESSAGE: "La musique a bien été ajouté au panier", 
+  FILE_ALBUM_ADD_SONG_ERROR_MESSAGE: "Une erreur s'est produite lors de l'ajout au panier",
 	FILE_ALBUM_GET_NOTES_ERROR_MESSAGE: "Une erreur s'est produite au chargement des notes",
 	FILE_ALBUM_FIND_PLAYLIST_ERROR_MESSAGE: "Une erreur s'est produite pendant la suppresion d'une liste de lecture : ",
 	FILE_ALBUM_GET_ALBUM_ERROR_MESSAGE: "Une erreur s'est produite au chargement d'un album",
@@ -292,7 +291,6 @@ var labels = {
 	FILE_CONCERT_FIND_CONCERT_ERROR_MESSAGE: "Une erreur s'est produite lors du chargement des concerts",
 
 	// Discotheque Index view
-
 	DISPLAY_DISCOTHEQUE_ADD_PLAYLIST_LABEL: "Ajouter à la liste de lecture",
 	DISPLAY_DISCOTHEQUE_ADD_PLAYLIST_BUTTON: "Ajouter",
 	DISPLAY_DISCOTHEQUE_LISTEN_LABEL: "Ecouter",
@@ -306,45 +304,73 @@ var labels = {
 	FILE_DISCOTHEQUE_GET_NOTES_ERROR_MESSAGE: "Une erreur s'est produite à la récupération des notes",
 	FILE_DISCOTHEQUE_GET_MUSICS_ERROR_MESSAGE: "Une erreur s'est produite au chargement de vos musiques",
 
-    // Cart Controller
-    DISPLAY_CART_INDEX: "Panier",
-    DISPLAY_CART_BUY: "Ajouter au panier",
+  // Cart view
+  DISPLAY_CART_INDEX: "Panier",
+  DISPLAY_CART_BUY: "Ajouter au panier",
 
-    FILE_CART_LOAD_ERROR_MESSAGE: "Une erreur s'est produite lors de la recupération du panier",
-    FILE_CART_DELETE_ITEM_ERROR_MESSAGE: "Une error s'est produite lors de la destruction du panier",
-    FILE_CART_DELETE_ERROR_MESSAGE: "Une erreur s'est produite lors de la destruction du panier",
-    FILE_CART_SUCCESS_BUY_CART_MESSAGE: "Votre panier a bien été acheté",
-    FILE_CART_BUY_ERROR_MESSAGE: "Une errur s'est produite lors de l'achat du panier",
+  // Cart Controller
+  FILE_CART_LOAD_ERROR_MESSAGE: "Une erreur s'est produite lors de la recupération du panier",
+  FILE_CART_DELETE_ITEM_ERROR_MESSAGE: "Une error s'est produite lors de la destruction du panier",
+  FILE_CART_DELETE_ERROR_MESSAGE: "Une erreur s'est produite lors de la destruction du panier",
+  FILE_CART_SUCCESS_BUY_CART_MESSAGE: "Votre panier a bien été acheté",
+  FILE_CART_BUY_ERROR_MESSAGE: "Une erreur s'est produite lors de l'achat du panier",
 
-    // Friends Controller
+  // Friends view
+  DISPLAY_FRIENDS_LABEL: "Amis",
 
-    DISPLAY_FRIENDS_LABEL: "Amis",
-    FILE_FRIEND_LOAD_FRIENDS_ERROR_MESSAGE: "Une erreur s'est produite lors de la recupération des amis",
+  // Friends Controller
+  FILE_FRIEND_LOAD_FRIENDS_ERROR_MESSAGE: "Une erreur s'est produite lors de la recupération des amis",
+   
+  // News view
+  DISPLAY_NEWS_LABEL: "News",
+  DISPLAY_NEWS_SHOW_MORE: "Show More",
+  DISPLAY_NEWS_COMMENT_SEND: "Send",
+
+  // News Controller
+  FILE_NEWS_LOAD_COMMENT_ERROR_MESSAGE: "Une erreur s'est produite lors de la recupération des commentaires",
+  FILE_NEWS_SEND_COMMENT_ERROR_MESSAGE: "Une erreur s'est produite lors de la sauvegarde du commentaire",
+  FILE_NEWS_LOAD_ERROR_MESSAGE: "Une erreur s'est produite lors de la recupération des actualités",
+  FILE_NEWS_LOAD_ONE_NEWS_ERROR_MESSAGE: "La page que vous avez demandé n'existe pas",
      
-    // News Controller
-    DISPLAY_NEWS_LABEL: "News",
-    DISPLAY_NEWS_SHOW_MORE: "Show More",
-    DISPLAY_NEWS_COMMENT_SEND: "Send",
-
-    FILE_NEWS_LOAD_COMMENT_ERROR_MESSAGE: "Une erreur s'est produite lors de la recupération des commentaires",
-    FILE_NEWS_SEND_COMMENT_ERROR_MESSAGE: "Une erreur s'est produite lors de la sauvegarde du commentaire",
-    FILE_NEWS_LOAD_ERROR_MESSAGE: "Une erreur s'est produite lors de la recupération des actualités",
-    FILE_NEWS_LOAD_ONE_NEWS_ERROR_MESSAGE: "La page que vous avez demandé n'existe pas",
-     
-    // Packs Controller
+  // Packs view
 	DISPLAY_PACK_LABEL: "Packs du moment",
 	DISPLAY_PACK_TIMELEFT: "Temps Restant",
 	DISPLAY_PACK_AVERAGE: "Moyenne",
-   	DISPLAY_PACK_YEAR_ALBUM: "Date de sortie",
-  	DISPLAY_PACK_ARTIST_NAME: "Artiste",
-   	DISPLAY_PACK_DEV_NAME: "Developpeur",
-   	DISPLAY_PACK_ASSOCIATION_NAME: "Association",
-   	DISPLAY_PACK_BUY_PACK: "Acheter ce pack",
-   	DISPLAY_PACK_TOTAL_PACK: "Total",
+ 	DISPLAY_PACK_YEAR_ALBUM: "Date de sortie",
+	DISPLAY_PACK_ARTIST_NAME: "Artiste",
+ 	DISPLAY_PACK_DEV_NAME: "Developpeur",
+ 	DISPLAY_PACK_ASSOCIATION_NAME: "Association",
+ 	DISPLAY_PACK_BUY_PACK: "Acheter ce pack",
+ 	DISPLAY_PACK_TOTAL_PACK: "Total",
 
-    FILE_PACK_LOAD_ERROR_MESSAGE: "Une erreur s'est produite lors de la recupération des packs",
-    FILE_PACK_LOAD_ONE_PACK_ERROR_MESSAGE: "La page que vous avez demandé n'est pas disponible",
-    FILE_PACK_BUY_PACK_ERROR_MESSAGE: "Une erreur s'est produite lors de l'achat du pack",
+  // Packs Controller
+  FILE_PACK_LOAD_ERROR_MESSAGE: "Une erreur s'est produite lors de la recupération des packs",
+  FILE_PACK_LOAD_ONE_PACK_ERROR_MESSAGE: "La page que vous avez demandé n'est pas disponible",
+  FILE_PACK_BUY_PACK_ERROR_MESSAGE: "Une erreur s'est produite lors de l'achat du pack",
 
+  // Index view
+  DISPLAY_INDEX_NEWS_SEE_MORE: "Voir plus de news",
+  DISPLAY_INDEX_PACKS_SEE_MORE: "Voir plus de packs",
+  DISPLAY_INDEX_BATTLES_SEE_MORE: "Voir plus de duels",
+  DISPLAY_INDEX_SWEET_LABEL: "Sweets",
+  DISPLAY_INDEX_ACTIVITY_LABEL: "Flux",
+  DISPLAY_INDEX_INTERACTION_LABEL: "Interactions",
+  DISPLAY_INDEX_NO_SWEET_LABEL: "Aucun sweet à afficher",
+  DISPLAY_INDEX_ANSWER_LABEL: "Répondre",
+  DISPLAY_INDEX_CHARACTER_LEFT_LABEL: "caractères restants",
+  DISPLAY_INDEX_LAST_NEWS_LABEL: "Les dernieres news",
+  DISPLAY_INDEX_LAST_PACKS_LABEL: "Les derniers packs",
+  DISPLAY_INDEX_PAY_MORE_LABEL_PART_ONE: "Payez",
+  DISPLAY_INDEX_PAY_MORE_LABEL_PART_TWO: "$ ou plus pour débloquer",
+  DISPLAY_INDEX_SUGGESTION_LABEL: "Suggestions",
+  DISPLAY_INDEX_BATTLE_PAGE_LABEL: "Accéder au duel",
+  DISPLAY_INDEX_PACK_PAGE_LABEL: "Accéder au pack",
 
+  // Index Controller
+  FILE_INDEX_NEWS_LOAD_ERROR_MESSAGE: "Une erreur s'est produite lors du chargement des news",
+  FILE_INDEX_PACKS_LOAD_ERROR_MESSAGE: "Une erreur s'est produite lors du chargement des packs",
+  FILE_INDEX_BATTLES_LOAD_ERROR_MESSAGE: "Une erreur s'est produite lors du chargement des duels",
+  FILE_INDEX_PROFILE_LOAD_ERROR_MESSAGE: "Une erreur s'est produite lors du chargement du profil de l'artiste",
+  FILE_INDEX_FLUX_LOAD_ERROR_MESSAGE: "Une erreur s'est produite lors du chargement de votre flux",
+  FILE_INDEX_SUGGESTION_LOAD_ERROR_MESSAGE: "Une erreur s'est produite lors du chargement des suggestions personnalisées",
 }

@@ -21,6 +21,7 @@ class Pack < ActiveRecord::Base
   belongs_to :user, foreign_key: 'association_id'
 
   has_many :purchased_packs
+  has_many :partial_albums
 
   validates :title, :begin_date, :end_date, :minimal_price, presence: true
 
@@ -31,7 +32,7 @@ class Pack < ActiveRecord::Base
 
   # Filter of information for the API
   #
-  # Fields returned : [:id, :title]
+  # Fields returned : [:id, :title, begin_date, end_date, minimal_price]
   def self.miniKey
   	[:id, :title, :begin_date, :end_date, :minimal_price]
   end

@@ -31,7 +31,7 @@ SoonzikApp.factory('SecureAuth', ['$http', '$routeParams', '$location', '$cookie
             user.token = $cookies.get("user_token");
           }
 
-          if (last_update == null || (last_update + 280000) < d.getTime() || last_key == null) {
+          if (last_update == null || (last_update + 3590000) < d.getTime() || last_key == null) {
             isUsed = true;
             /*
              * If we need a valid token
