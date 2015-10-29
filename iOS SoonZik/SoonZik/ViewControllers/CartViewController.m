@@ -74,7 +74,8 @@
     _payPalConfiguration = [[PayPalConfiguration alloc] init];
     _payPalConfiguration.acceptCreditCards = NO;
     _payPalConfiguration.payPalShippingAddressOption = PayPalShippingAddressOptionPayPal;
-    [PayPalMobile preconnectWithEnvironment:PayPalEnvironmentNoNetwork];
+    
+    [PayPalMobile preconnectWithEnvironment:PayPalEnvironmentSandbox];
 }
 
 #pragma mark - PayPalPaymentDelegate methods
@@ -97,7 +98,7 @@
         identifier = [response objectForKey:@"id"];
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:[self.translate.dict objectForKey:@"payment_title_success"] message:[self.translate.dict objectForKey:@"payment_message_success"] delegate:nil cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
         [alertView show];
-        [CartController buyCart];
+        [CartController buyCart:identifier];
     }
 }
 

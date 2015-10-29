@@ -93,7 +93,7 @@
     return array;
 }
 
-+ (BOOL)buyCart {
++ (BOOL)buyCart:(NSString *)paypalId {
     NSString *url, *key, *conca, *secureKey, *post;
     NSData *data = [[NSUserDefaults standardUserDefaults] objectForKey:@"User"];
     User *user = (User *)[NSKeyedUnarchiver unarchiveObjectWithData:data];
@@ -102,7 +102,8 @@
     conca = [NSString stringWithFormat:@"%@%@", user.salt, key];
     secureKey = [Crypto sha256HashFor:conca];
     url = [NSString stringWithFormat:@"%@purchases/buycart", API_URL];
-    post = [NSString stringWithFormat:@"user_id=%i&secureKey=%@", user.identifier, secureKey];
+    post = [NSString stringWithFormat:@"user_id=%i&secureKey=%@&paypal[payment_id]=%@", user.identifier, secureKey, paypalId];
+    NSLog(@"url : %@      |      post : %@", url, post);
     
     NSDictionary *json = [Request postRequest:post url:url];
     NSLog(@"%@", json);

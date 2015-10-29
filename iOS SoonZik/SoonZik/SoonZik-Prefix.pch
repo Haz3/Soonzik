@@ -37,8 +37,6 @@
 #define FIX_SALT        @"3uNi@rCK$L$om40dNnhX)#jV2$40wwbr_bAK99%E"
 
 // PAYPAL
-#define CLIENT_ID_PROD  @"AfCwBQSyxx6Ys2fnbB_1AmmuINiAPaGlGtk38vTZTCbcevPBIU0Ptt4TgvjNznxkLbSi9fdiaJxG8-u-"
-#define CLIENT_ID_SAND  @"AfCwBQSyxx6Ys2fnbB_1AmmuINiAPaGlGtk38vTZTCbcevPBIU0Ptt4TgvjNznxkLbSi9fdiaJxG8-u-"
 
 // GOOGLE +
 #define googleClientID  @"485472921989-j0idqmomdgutqba1e0nbthda48lbdt3n.apps.googleusercontent.com"

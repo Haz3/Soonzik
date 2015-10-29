@@ -59,10 +59,6 @@
         self.navigationItem.backBarButtonItem.title = @"";
         
         [self refresh];
-        
-        self.lastVolumeLevel = self.player.audioPlayer.volume;
-        
-        
         [self initPlayer];
         
         self.songTitle.font = SOONZIK_FONT_BODY_BIG;
@@ -153,14 +149,16 @@
 
 - (void)refresh
 {
+    Music *s = [self.player.listeningList objectAtIndex:self.player.index];
+
     if (self.player.listeningList.count > 0) {
         [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(refreshDisplay) userInfo:nil repeats:YES];
         
         [self.progressionSlider setMinimumValue:0.0];
-        [self.progressionSlider setMaximumValue:30];
+        [self.progressionSlider setMaximumValue:s.duration];
     } else {
         [self.progressionSlider setValue:0.0];
-        [self.progressionSlider setMaximumValue:30];
+        [self.progressionSlider setMaximumValue:s.duration];
         int duration = 0;
         self.finishTimeLabel.text = [NSString stringWithFormat:@"%.02d:%.02d", duration/60, duration%60];
         
@@ -180,7 +178,7 @@
         
         Music *s = [self.player.listeningList objectAtIndex:self.player.index];
         
-        [self.progressionSlider setMaximumValue:30];
+        [self.progressionSlider setMaximumValue:s.duration];
         
         int duration = s.duration;
         self.finishTimeLabel.text = [NSString stringWithFormat:@"%.02d:%.02d", duration/60, duration%60];
@@ -201,18 +199,10 @@
     
     if (slider.value >= 30) {
         [self.player pauseSound];
-       // [self next:nil];
     } else {
        [self.player playSoundAtPeriod:slider.value]; 
     }
   
-}
-
-- (IBAction)changeVolume:(id)sender
-{
-    UISlider *slider = sender;
-    self.player.audioPlayer.volume = slider.value;
-    self.lastVolumeLevel = slider.value;
 }
 
 - (IBAction)play:(id)sender
@@ -222,15 +212,11 @@
     } else {
         [self.player playSound];
     }
-   
- //   self.player.audioPlayer.volume = self.lastVolumeLevel;
 }
 
 - (IBAction)previous:(id)sender
 {
     [self.player previous];
- //   self.player.audioPlayer.volume = self.lastVolumeLevel;
-    
     self.indexOfPage = self.player.index;
     [self.scrollView setContentOffset:CGPointMake(self.indexOfPage*self.scrollView.frame.size.width, 0) animated:YES];
 }
@@ -238,8 +224,6 @@
 - (IBAction)next:(id)sender
 {
     [self.player next];
- //   self.player.audioPlayer.volume = self.lastVolumeLevel;
-    
     self.indexOfPage = self.player.index;
     [self.scrollView setContentOffset:CGPointMake(self.indexOfPage*self.scrollView.frame.size.width, 0) animated:YES];
 }

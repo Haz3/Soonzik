@@ -52,9 +52,9 @@
     [[Twitter sharedInstance] startWithConsumerKey:@"ooWEcrlhooUKVOxSgsVNDJ1RK" consumerSecret:@"BtLpq9ZlFzXrFklC2f1CXqy8EsSzgRRVPZrKVh0imI2TOrZAan"];
     [Fabric with:@[[Twitter sharedInstance]]];
     
-    [PayPalMobile initializeWithClientIdsForEnvironments:@{PayPalEnvironmentProduction : CLIENT_ID_PROD,
-                                                           PayPalEnvironmentSandbox : CLIENT_ID_SAND}];
-    
+    [PayPalMobile initializeWithClientIdsForEnvironments:@{PayPalEnvironmentProduction : @"AfCwBQSyxx6Ys2fnbB_1AmmuINiAPaGlGtk38vTZTCbcevPBIU0Ptt4TgvjNznxkLbSi9fdiaJxG8-u-",
+                                                           PayPalEnvironmentSandbox : @"AfCwBQSyxx6Ys2fnbB_1AmmuINiAPaGlGtk38vTZTCbcevPBIU0Ptt4TgvjNznxkLbSi9fdiaJxG8-u-"}];
+        
     if (self.user.identifier != 0) {
         [self launchHome];
     } else {

@@ -13,6 +13,7 @@
 #import "Concert.h"
 #import "ConcertViewController.h"
 #import "SuggestsController.h"
+#import "ArtistViewController.h"
 
 #define NAVIGATIONBAR_HEIGHT 50
 
@@ -246,6 +247,13 @@
         Influence *influence = [self.listOfInfluences objectAtIndex:indexPath.row];
         InfluenceViewController *vc = [[InfluenceViewController alloc] init];
         vc.influence = influence;
+        [self.navigationController pushViewController:vc animated:true];
+    }
+    else if (tableView.tag == 2) {
+        User *artist = [self.listOfArtists objectAtIndex:indexPath.row];
+        ArtistViewController *vc = [[ArtistViewController alloc] initWithNibName:@"ArtistViewController" bundle:nil];
+        vc.artist = artist;
+        vc.fromNav = true;
         [self.navigationController pushViewController:vc animated:true];
     }
     else if (tableView.tag == 3) {

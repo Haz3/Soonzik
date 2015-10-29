@@ -25,6 +25,7 @@
 @property (strong, nonatomic) IBOutlet UIButton *friendButton;
 @property (nonatomic, assign) bool followed;
 @property (nonatomic, assign) bool isFriend;
+@property (nonatomic, assign) bool fromNav;
 @property (nonatomic, assign) bool fromSearch;
 @property (nonatomic, assign) bool fromCurrentList;
 @property (nonatomic, strong) UITextView *textView;
