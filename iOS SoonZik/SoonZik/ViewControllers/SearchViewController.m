@@ -54,40 +54,24 @@
     self.tableData = [[NSMutableArray alloc] init];
 }
 
-- (void)launchLoadData {
-    NSLog(@"Launching thread");
-    [NSThread detachNewThreadSelector:@selector(loadData) toTarget:self withObject:nil];
-}
-
-- (void) loadData {
-    self.dataLoaded = NO;
-    NSLog(@" thread launched");
-    [self loadDataFromAPI];
-    self.dataLoaded = YES;
-    [self.tableView reloadData];
-}
-
-- (void)loadDataFromAPI {
-    [NSThread detachNewThreadSelector: @selector(spinBegin) toTarget:self withObject:nil];
-    
-    self.search = [SearchsController getSearchResults:self.searchBar.text];
-    [self checkIfIsThereNoResult];
-    
-    [NSThread detachNewThreadSelector: @selector(spinEnd) toTarget:self withObject:nil];
-}
-
-- (void)spinBegin {
+- (void)getData {
     self.noResultLabel.hidden = YES;
     self.spin = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
     self.spin.center = self.view.center;
     [self.view addSubview:self.spin];
-    //[self.tableView bringSubviewToFront:self.spin];
-    [self.tableView reloadData];
     [self.spin startAnimating];
-}
-
-- (void)spinEnd {
-    [self.spin stopAnimating];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT,0),  ^{
+        //this block runs on a background thread; Do heavy operation here
+        self.search = [SearchsController getSearchResults:self.searchBar.text];
+        [self checkIfIsThereNoResult];
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            //This block runs on main thread, so update UI
+            [self.spin stopAnimating];
+            self.dataLoaded = true;
+            [self.tableView reloadData];
+        });
+    });
 }
 
 
@@ -259,7 +243,7 @@
     }
     [searchBar resignFirstResponder];
     //self.dataLoaded = NO;
-    [self launchLoadData];
+    [self getData];
 }
 
 @end

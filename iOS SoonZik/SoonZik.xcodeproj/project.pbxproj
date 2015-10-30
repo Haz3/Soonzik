@@ -73,6 +73,8 @@
 		ED5C00141B2A746400E7B636 /* AddToCurrentListeningButton.m in Sources */ = {isa = PBXBuildFile; fileRef = ED5C00121B2A746400E7B636 /* AddToCurrentListeningButton.m */; };
 		ED5C00151B2A746400E7B636 /* AlbumInPackTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = ED5C00131B2A746400E7B636 /* AlbumInPackTableViewCell.m */; };
 		ED5D48401B76000C00743F4D /* CartController.m in Sources */ = {isa = PBXBuildFile; fileRef = ED5D483F1B76000C00743F4D /* CartController.m */; };
+		ED627D991BE0D6DA00DA1B0C /* PlayerCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = ED627D971BE0D6DA00DA1B0C /* PlayerCollectionViewCell.m */; };
+		ED627D9A1BE0D6DA00DA1B0C /* PlayerCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = ED627D981BE0D6DA00DA1B0C /* PlayerCollectionViewCell.xib */; };
 		ED65E9E21AA50B2400A7BD89 /* lazersnotincluded.jpg in Resources */ = {isa = PBXBuildFile; fileRef = ED65E9E11AA50B2400A7BD89 /* lazersnotincluded.jpg */; };
 		ED65E9E41AA50B3900A7BD89 /* recognise.jpg in Resources */ = {isa = PBXBuildFile; fileRef = ED65E9E31AA50B3900A7BD89 /* recognise.jpg */; };
 		ED65E9E61AA50CA000A7BD89 /* motifs.jpg in Resources */ = {isa = PBXBuildFile; fileRef = ED65E9E51AA50CA000A7BD89 /* motifs.jpg */; };
@@ -463,6 +465,9 @@
 		ED5C00171B2A91D700E7B636 /* ShareDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShareDelegate.h; sourceTree = "<group>"; };
 		ED5D483E1B76000C00743F4D /* CartController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CartController.h; sourceTree = "<group>"; };
 		ED5D483F1B76000C00743F4D /* CartController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CartController.m; sourceTree = "<group>"; };
+		ED627D961BE0D6DA00DA1B0C /* PlayerCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerCollectionViewCell.h; sourceTree = "<group>"; };
+		ED627D971BE0D6DA00DA1B0C /* PlayerCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayerCollectionViewCell.m; sourceTree = "<group>"; };
+		ED627D981BE0D6DA00DA1B0C /* PlayerCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PlayerCollectionViewCell.xib; sourceTree = "<group>"; };
 		ED65E9E11AA50B2400A7BD89 /* lazersnotincluded.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = lazersnotincluded.jpg; sourceTree = "<group>"; };
 		ED65E9E31AA50B3900A7BD89 /* recognise.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = recognise.jpg; sourceTree = "<group>"; };
 		ED65E9E51AA50CA000A7BD89 /* motifs.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = motifs.jpg; sourceTree = "<group>"; };
@@ -1712,6 +1717,9 @@
 				EDA54B311B838BDF007B25CD /* CartItemTableViewCell.h */,
 				EDA54B321B838BDF007B25CD /* CartItemTableViewCell.m */,
 				EDA54B331B838BDF007B25CD /* CartItemTableViewCell.xib */,
+				ED627D961BE0D6DA00DA1B0C /* PlayerCollectionViewCell.h */,
+				ED627D971BE0D6DA00DA1B0C /* PlayerCollectionViewCell.m */,
+				ED627D981BE0D6DA00DA1B0C /* PlayerCollectionViewCell.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -2199,6 +2207,7 @@
 				EDEDEE2D1AA1633B0024CF38 /* search.svg in Resources */,
 				EDEDEE111AA1633B0024CF38 /* love.svg in Resources */,
 				EDEDEB911AA15B5C0024CF38 /* ArtistViewController.xib in Resources */,
+				ED627D9A1BE0D6DA00DA1B0C /* PlayerCollectionViewCell.xib in Resources */,
 				EDEDED711AA15C5D0024CF38 /* inputTextBG@2x.png in Resources */,
 				EDEDED6F1AA15C5D0024CF38 /* bubbleReceive@2x.png in Resources */,
 				EDEAFADE1AD5E70F0018A35B /* appicon.png in Resources */,
@@ -2474,6 +2483,7 @@
 				EDA978121B3B97190056EC75 /* Tools.m in Sources */,
 				EDA9780F1B3B97190056EC75 /* ObjectFactory.m in Sources */,
 				ED7546A81AE192EC00F2F350 /* SearchArtistTableViewCell.m in Sources */,
+				ED627D991BE0D6DA00DA1B0C /* PlayerCollectionViewCell.m in Sources */,
 				ED717AB71B0BD327003CAA0D /* DetailNewsViewController.m in Sources */,
 				ED0A1A0F1B945B74004FE237 /* TweetCollectionViewCell.m in Sources */,
 				EDA977C61B3B85E90056EC75 /* PKLog.m in Sources */,
@@ -2692,7 +2702,7 @@
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -2727,7 +2737,7 @@
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

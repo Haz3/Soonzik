@@ -21,8 +21,6 @@
 @property (nonatomic, strong) IBOutlet UISlider *progressionSlider;
 @property (assign, nonatomic) CGFloat screenWidth;
 @property (assign, nonatomic) CGFloat screenHeight;
-@property (assign, nonatomic) bool isRandom;
-@property (nonatomic, assign) float lastVolumeLevel;
 @property (strong, nonatomic) IBOutlet UILabel *songTitle;
 @property (strong, nonatomic) IBOutlet UILabel *songArtist;
 @property (nonatomic, assign) int indexOfPage;
@@ -38,9 +36,6 @@
 - (IBAction)play:(id)sender;
 - (IBAction)previous:(id)sender;
 - (IBAction)next:(id)sender;
-
-- (IBAction)random:(id)sender;
-- (IBAction)repeat:(id)sender;
 
 - (IBAction)goToThisPeriod:(id)sender;
 

@@ -159,7 +159,7 @@
     //self.player = ((AppDelegate *)[UIApplication sharedApplication].delegate).thePlayer;
     self.player = [AudioPlayer sharedCenter];
     self.player.listeningList = [[NSMutableArray alloc] init];
-    [self.player stopSound];
+ //   [self.player stopSound];
     self.player.currentlyPlaying = NO;
     self.player.index = 0;
     self.player.oldIndex = 0;
@@ -170,7 +170,7 @@
     
     Music *music = [self.player.listeningList objectAtIndex:0];
     [self.player prepareSong:music.identifier];
-    [self.player playSound];
+ //   [self.player playSound];
 }
 
 - (void)removeMusicFromPlayList:(Music *)music and:(Playlist *)playlist {
@@ -231,13 +231,13 @@
     //self.player = ((AppDelegate *)[UIApplication sharedApplication].delegate).thePlayer;
     self.player = [AudioPlayer sharedCenter];
     if ([self.player currentlyPlaying])
-        [self.player pauseSound];
+//        [self.player pauseSound];
     self.player.listeningList = nil;
     self.player.listeningList = [[NSMutableArray alloc] init];
     [self.player.listeningList addObject:s];
     self.player.index = 0;
     [self.player prepareSong:s.identifier];
-    [self.player playSound];
+//    [self.player playSound];
     self.player.songName = s.title;
 }
 

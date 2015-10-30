@@ -30,7 +30,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [[UIApplication sharedApplication] setStatusBarHidden:false withAnimation:UIStatusBarAnimationNone];
-    //self.player = ((AppDelegate *)[UIApplication sharedApplication].delegate).thePlayer;
+   
     self.player = [AudioPlayer sharedCenter];
     self.player.finishDelegate = self;
     
@@ -59,10 +59,6 @@
         self.navigationItem.backBarButtonItem.title = @"";
         
         [self refresh];
-        
-        self.lastVolumeLevel = self.player.audioPlayer.volume;
-        
-        
         [self initPlayer];
         
         self.songTitle.font = SOONZIK_FONT_BODY_BIG;
@@ -92,26 +88,40 @@
     self.scrollView.delegate = self;
     self.scrollView.pagingEnabled = YES;
     
-    float imageWith = 320.0f;
-    float imageEcart = 0;
-    
     self.scrollView.clipsToBounds = NO;
     
     CGFloat contentOffset = 0.0f;
     
     for (int i = 0; i < self.player.listeningList.count; i++) {
-        UIImageView *imgV = [[UIImageView alloc] initWithFrame:CGRectMake(i * imageWith + imageEcart * (i * 2 + 1), self.scrollView.frame.origin.y, imageWith, imageWith)];
-        Music *music = [self.player.listeningList objectAtIndex:i];
-        NSString *urlImage = [NSString stringWithFormat:@"%@assets/albums/%@", API_URL, music.albumImage];
-        NSLog(@"url image : %@", urlImage);
-        NSData *imageData = [[NSData alloc] initWithContentsOfURL: [NSURL URLWithString: urlImage]];
-        imgV.image = [UIImage imageWithData:imageData];
-
-        [self.scrollView addSubview:imgV];
         contentOffset += self.scrollView.frame.size.width;
     }
     self.scrollView.contentSize = CGSizeMake(contentOffset, self.scrollView.frame.size.height);
     self.scrollView.contentOffset = CGPointMake((contentOffset / self.player.listeningList.count) * self.indexOfPage, 0);
+    
+    [self loadPictures];
+}
+
+- (void)loadPictures {
+    float imageWith = self.view.frame.size.width;
+    float imageEcart = 0;
+    
+    for (int i = 0; i < self.player.listeningList.count; i++) {
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT,0),  ^{
+            //this block runs on a background thread; Do heavy operation here
+            UIImageView *imgV = [[UIImageView alloc] initWithFrame:CGRectMake(i * imageWith + imageEcart * (i * 2 + 1), self.scrollView.frame.origin.y, imageWith, imageWith)];
+            Music *music = [self.player.listeningList objectAtIndex:i];
+            NSString *urlImage = [NSString stringWithFormat:@"%@assets/albums/%@", API_URL, music.albumImage];
+            NSData *imageData = [[NSData alloc] initWithContentsOfURL: [NSURL URLWithString: urlImage]];
+            
+            [self.scrollView addSubview:imgV];
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                //This block runs on main thread, so update UI
+                imgV.image = [UIImage imageWithData:imageData];
+                NSLog(@"image loaded");
+            });
+        });
+    }
 }
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
@@ -123,6 +133,7 @@
     self.player.index = self.indexOfPage;
     Music *music = [self.player.listeningList objectAtIndex:self.indexOfPage];
     [self.player prepareSong:music.identifier];
+
     [self.player playSound];
 }
 
@@ -138,14 +149,16 @@
 
 - (void)refresh
 {
+    Music *s = [self.player.listeningList objectAtIndex:self.player.index];
+
     if (self.player.listeningList.count > 0) {
         [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(refreshDisplay) userInfo:nil repeats:YES];
         
         [self.progressionSlider setMinimumValue:0.0];
-        [self.progressionSlider setMaximumValue:self.player.audioPlayer.duration];
+        [self.progressionSlider setMaximumValue:s.duration];
     } else {
         [self.progressionSlider setValue:0.0];
-        [self.progressionSlider setMaximumValue:self.player.audioPlayer.duration];
+        [self.progressionSlider setMaximumValue:s.duration];
         int duration = 0;
         self.finishTimeLabel.text = [NSString stringWithFormat:@"%.02d:%.02d", duration/60, duration%60];
         
@@ -165,12 +178,12 @@
         
         Music *s = [self.player.listeningList objectAtIndex:self.player.index];
         
-        [self.progressionSlider setMaximumValue:self.player.audioPlayer.duration];
+        [self.progressionSlider setMaximumValue:s.duration];
         
         int duration = s.duration;
         self.finishTimeLabel.text = [NSString stringWithFormat:@"%.02d:%.02d", duration/60, duration%60];
         
-        int current = self.player.audioPlayer.currentTime;
+        int current = CMTimeGetSeconds(self.player.audioPlayer.currentItem.currentTime);
         self.currentTimeLabel.text = [NSString stringWithFormat:@"%.02d:%.02d", current/60, current%60];
         
         [self.progressionSlider setValue:current];
@@ -184,32 +197,26 @@
 {
     UISlider *slider = (UISlider *)sender;
     
-    if (slider.value >= self.player.audioPlayer.duration) {
+    if (slider.value >= 30) {
         [self.player pauseSound];
-        [self next:nil];
     } else {
        [self.player playSoundAtPeriod:slider.value]; 
     }
-}
-
-- (IBAction)changeVolume:(id)sender
-{
-    UISlider *slider = sender;
-    self.player.audioPlayer.volume = slider.value;
-    self.lastVolumeLevel = slider.value;
+  
 }
 
 - (IBAction)play:(id)sender
 {
-    [self.player playSound];
-    self.player.audioPlayer.volume = self.lastVolumeLevel;
+    if (self.player.currentlyPlaying) {
+        [self.player pauseSound];
+    } else {
+        [self.player playSound];
+    }
 }
 
 - (IBAction)previous:(id)sender
 {
     [self.player previous];
-    self.player.audioPlayer.volume = self.lastVolumeLevel;
-    
     self.indexOfPage = self.player.index;
     [self.scrollView setContentOffset:CGPointMake(self.indexOfPage*self.scrollView.frame.size.width, 0) animated:YES];
 }
@@ -217,44 +224,15 @@
 - (IBAction)next:(id)sender
 {
     [self.player next];
-    self.player.audioPlayer.volume = self.lastVolumeLevel;
-    
     self.indexOfPage = self.player.index;
     [self.scrollView setContentOffset:CGPointMake(self.indexOfPage*self.scrollView.frame.size.width, 0) animated:YES];
 }
 
 - (void)playerHasFinishedToPlay
 {
-    [self.player stopSound];
-}
-
-- (IBAction)random:(id)sender
-{
-    
-}
-
-- (IBAction)repeat:(id)sender
-{
-    switch (self.player.repeatingLevel) {
-        case 0:
-            // repeat the list when it's finished
-            NSLog(@"Repeating all");
-            [self.repeatButton setImage:[UIImage imageNamed:@"repeat-1_icon.png"] forState:UIControlStateNormal];
-            break;
-        case 1:
-            // just repeat this one indefinely only
-            NSLog(@"Repeating one");
-            [self.repeatButton setImage:[UIImage imageNamed:@"repeat-2_icon.png"] forState:UIControlStateNormal];
-            break;
-        case 2:
-            // stop the repeating action
-            NSLog(@"NO Repeating");
-            [self.repeatButton setImage:[UIImage imageNamed:@"repeat-0_icon.png"] forState:UIControlStateNormal];
-            break;
-        default:
-            break;
-    }
-    [self.player repeat];
+    [self.player next];
+    self.indexOfPage = self.player.index;
+    [self.scrollView setContentOffset:CGPointMake(self.indexOfPage*self.scrollView.frame.size.width, 0) animated:YES];
 }
 
 @end

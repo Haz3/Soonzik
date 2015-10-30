@@ -322,12 +322,14 @@
         }
         Album *album = [self.boughtContent.listOfAlbums objectAtIndex:indexPath.row];
         cell.albumLabel.text = album.title;
-        NSLog(@"album.title : %@", album.title);
         cell.albumLabel.textColor = [UIColor whiteColor];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.backgroundColor = [UIColor clearColor];
         cell.albumLabel.font = SOONZIK_FONT_BODY_SMALL;
-        cell.albumImage.image = [UIImage imageNamed:@"onandon.jpg"];
+        
+        NSString *urlImage = [NSString stringWithFormat:@"%@assets/albums/%@", API_URL, album.image];
+        NSData *imageData = [[NSData alloc] initWithContentsOfURL: [NSURL URLWithString: urlImage]];
+        cell.albumImage.image = [UIImage imageWithData:imageData];
         
         return cell;
     } else if (tableView.tag == 3) {
@@ -397,31 +399,6 @@
     }
     
     return cell;
-    /*
-    int i = 1;
-    for (Music *music in playlist) {
-        switch (i) {
-            case 1:
-                cell.album1Image.image = [UIImage imageNamed:music.albumImage];
-                i++;
-                break;
-            case 2:
-                cell.album2Image.image = [UIImage imageNamed:music.albumImage];
-                i++;
-                break;
-            case 3:
-                cell.album3Image.image = [UIImage imageNamed:music.albumImage];
-                i++;
-                break;
-            case 4:
-                cell.album4Image.image = [UIImage imageNamed:music.albumImage];
-                i++;
-                break;
-            default:
-                break;
-        }
-    }
-    return cell;*/
 }
 
 - (void)addAPlaylist

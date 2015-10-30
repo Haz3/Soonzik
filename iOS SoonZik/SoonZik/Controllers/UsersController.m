@@ -168,6 +168,7 @@
     url = [NSString stringWithFormat:@"%@users/getmusics?user_id=%i&secureKey=%@", API_URL, user.identifier, secureKey];
     
     NSDictionary *json = [Request getRequest:url];
+    
     NSDictionary *content = [json objectForKey:@"content"];
     NSArray *listOfMusics = [content objectForKey:@"musics"];
     NSArray *listOfAlbums = [content objectForKey:@"albums"];
@@ -178,7 +179,7 @@
         [boughtContent.listOfMusics addObject:music];
     }
     for (NSDictionary *dict in listOfAlbums) {
-        Album *album = [[Album alloc] initWithJsonObject:[dict objectForKey:@"album"]];
+        Album *album = [[Album alloc] initWithJsonObject:dict];
         [boughtContent.listOfAlbums addObject:album];
     }
     for (NSDictionary *dict in listOfPacks) {

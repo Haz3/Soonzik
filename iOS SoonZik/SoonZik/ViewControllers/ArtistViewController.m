@@ -42,7 +42,13 @@
     [closeButton addTarget:self action:@selector(closeViewController) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:closeButton];
     
-    if (self.fromSearch) {
+    if (self.fromNav) {
+        closeButton.hidden = true;
+        self.navigationItem.leftBarButtonItem = nil;
+        self.navigationController.navigationBarHidden = false;
+        [[UIApplication sharedApplication] setStatusBarHidden:false withAnimation:UIStatusBarAnimationFade];
+    }
+    else if (self.fromSearch) {
         closeButton.hidden = true;
         self.navigationController.navigationBarHidden = false;
         [[UIApplication sharedApplication] setStatusBarHidden:false withAnimation:UIStatusBarAnimationFade];
@@ -321,7 +327,7 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellIdentifier];
     }
     
-    cell.backgroundColor = [UIColor clearColor];
+    cell.backgroundColor = DARK_GREY;
     cell.textLabel.textColor = [UIColor whiteColor];
     
     Tweet *tweet = [self.listOfTweets objectAtIndex:indexPath.row];

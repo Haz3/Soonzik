@@ -74,7 +74,8 @@
     _payPalConfiguration = [[PayPalConfiguration alloc] init];
     _payPalConfiguration.acceptCreditCards = NO;
     _payPalConfiguration.payPalShippingAddressOption = PayPalShippingAddressOptionPayPal;
-    [PayPalMobile preconnectWithEnvironment:PayPalEnvironmentNoNetwork];
+    
+    [PayPalMobile preconnectWithEnvironment:PayPalEnvironmentSandbox];
 }
 
 #pragma mark - PayPalPaymentDelegate methods
@@ -97,7 +98,7 @@
         identifier = [response objectForKey:@"id"];
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:[self.translate.dict objectForKey:@"payment_title_success"] message:[self.translate.dict objectForKey:@"payment_message_success"] delegate:nil cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
         [alertView show];
-        [CartController buyCart];
+        [CartController buyCart:identifier];
     }
 }
 
@@ -316,10 +317,11 @@
             // TOTAL
             UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cellTotal"];
             if (!cell) {
-                cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"cellTotal"];
+                cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cellTotal"];
             }
-            cell.detailTextLabel.text = @"prix total : ";
-            cell.textLabel.text = [NSString stringWithFormat:@"%.1f", [self getTotalPrice]];
+            cell.textLabel.text = [NSString stringWithFormat:@"%.1f €", [self getTotalPrice]];
+            cell.textLabel.font = SOONZIK_FONT_BODY_MEDIUM;
+            cell.textLabel.textAlignment = NSTextAlignmentRight;
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             cell.accessoryView = nil;
             cell.backgroundColor = [UIColor clearColor];
@@ -332,10 +334,11 @@
             // TOTAL
             UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cellTotal"];
             if (!cell) {
-                cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"cellTotal"];
+                cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cellTotal"];
             }
-            cell.detailTextLabel.text = @"prix total : ";
-            cell.textLabel.text = [NSString stringWithFormat:@"%.1f", [self getTotalPrice]];
+            cell.textLabel.text = [NSString stringWithFormat:@"%.1f €", [self getTotalPrice]];
+            cell.textLabel.font = SOONZIK_FONT_BODY_MEDIUM;
+            cell.textLabel.textAlignment = NSTextAlignmentRight;
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             cell.accessoryView = nil;
             cell.backgroundColor = [UIColor clearColor];

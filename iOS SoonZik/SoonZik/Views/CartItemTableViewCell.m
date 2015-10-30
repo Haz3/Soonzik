@@ -12,6 +12,9 @@
 
 - (void)awakeFromNib {
     // Initialization code
+    self.titleLabel.font = SOONZIK_FONT_BODY_MEDIUM;
+    self.artistLabel.font = SOONZIK_FONT_BODY_SMALL;
+    [self.deleteButton setTintColor:ORANGE];
 }
 
 @end

@@ -67,6 +67,7 @@
     self.view.backgroundColor = DARK_GREY;
     [self.pageButton setImage:[Tools imageWithImage:[SVGKImage imageNamed:@"user_white"].UIImage scaledToSize:CGSizeMake(30, 30)] forState:UIControlStateNormal];
     [self.pageButton setTintColor:[UIColor whiteColor]];
+    [self.pageButton addTarget:self action:@selector(goToView) forControlEvents:UIControlEventTouchUpInside];
     [self.chatButton setImage:[Tools imageWithImage:[SVGKImage imageNamed:@"chat"].UIImage scaledToSize:CGSizeMake(30, 30)] forState:UIControlStateNormal];
     [self.chatButton setTintColor:[UIColor whiteColor]];
     [self.chatButton addTarget:self action:@selector(goToChat) forControlEvents:UIControlEventTouchUpInside];
@@ -101,6 +102,11 @@
     ChatViewController *chatVC = [[ChatViewController alloc] initWithNibName:@"ChatViewController" bundle:nil];
     chatVC.friend = self.selectedFriend;
     [self.navigationController pushViewController:chatVC animated:YES];
+}
+
+- (void)goToView
+{
+    
 }
 
 - (void)getFollowersList

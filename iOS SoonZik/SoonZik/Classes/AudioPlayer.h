@@ -19,12 +19,10 @@
 
 @property (strong, nonatomic) id<FinishPlayPlayer> finishDelegate;
 
-@property (strong, nonatomic) AVAudioPlayer *audioPlayer;
+@property (strong, nonatomic) AVPlayer *audioPlayer;
 
 @property (assign, nonatomic) int index;
 @property (assign, nonatomic) int oldIndex;
-
-@property (assign, nonatomic) int repeatingLevel;
 
 @property (assign, nonatomic) bool currentlyPlaying;
 
@@ -33,15 +31,13 @@
 @property (strong, nonatomic) NSString *songName;
 
 - (void)prepareSong:(int)identifier;
+
 - (void)playSound;
 - (void)playSoundAtPeriod:(float)period;
 - (void)pauseSound;
 - (void)stopSound;
-
 - (void)previous;
 - (void)next;
-- (void)repeat;
-
 
 + (AudioPlayer *)sharedCenter;
 

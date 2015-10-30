@@ -190,13 +190,13 @@
     //self.player = ((AppDelegate *)[UIApplication sharedApplication].delegate).thePlayer;
     self.player = [AudioPlayer sharedCenter];
     if ([self.player currentlyPlaying])
-        [self.player pauseSound];
+//        [self.player pauseSound];
     self.player.listeningList = nil;
     self.player.listeningList = [[NSMutableArray alloc] init];
     [self.player.listeningList addObject:s];
     self.player.index = 0;
     [self.player prepareSong:s.identifier];
-    [self.player playSound];
+//    [self.player playSound];
     self.player.songName = s.title;
 }
 

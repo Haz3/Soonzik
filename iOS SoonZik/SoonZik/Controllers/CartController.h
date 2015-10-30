@@ -15,6 +15,6 @@
 + (Cart *)addToCart:(NSString *)type :(int)objId;
 + (BOOL)removeCart:(int)cartId;
 + (NSMutableArray *)giftCart:(int)cartId forUser:(int)userId;
-+ (BOOL)buyCart;
++ (BOOL)buyCart:(NSString *)paypalId;
 
 @end

@@ -21,14 +21,20 @@
     key = [Crypto getKey:user.identifier];
     conca = [NSString stringWithFormat:@"%@%@", user.salt, key];
     secureKey = [Crypto sha256HashFor:conca];
-    url = [NSString stringWithFormat:@"%@suggestv2?user_id=%i&secureKey=%@&type=%@&limit=%i", API_URL, user.identifier, secureKey, type, 30];
+    url = [NSString stringWithFormat:@"%@suggestv2?type=%@&limit=%i", API_URL, type, 30];
     
     NSLog(@"url: %@", url);
     
     NSDictionary *json = [Request getRequest:url];
-    NSLog(@"json SUGGEST: %@", json);
+    NSDictionary *content = [json objectForKey:@"content"];
+    NSMutableArray *list = [[NSMutableArray alloc] init];
     
-    return nil;
+    for (NSDictionary *u in content) {
+        User *user = [[User alloc] initWithJsonObject:u];
+        [list addObject:user];
+    }
+    
+    return list;
 }
 
 
