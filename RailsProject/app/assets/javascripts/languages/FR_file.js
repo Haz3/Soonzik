@@ -360,6 +360,7 @@ var labels = {
   DISPLAY_INDEX_CHARACTER_LEFT_LABEL: "caractères restants",
   DISPLAY_INDEX_LAST_NEWS_LABEL: "Les dernieres news",
   DISPLAY_INDEX_LAST_PACKS_LABEL: "Les derniers packs",
+  DISPLAY_INDEX_LAST_BATTLES_LABEL: "Les derniers duels",
   DISPLAY_INDEX_PAY_MORE_LABEL_PART_ONE: "Payez",
   DISPLAY_INDEX_PAY_MORE_LABEL_PART_TWO: "$ ou plus pour débloquer",
   DISPLAY_INDEX_SUGGESTION_LABEL: "Suggestions",

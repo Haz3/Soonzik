@@ -265,14 +265,14 @@ its musics (which includes its albums and artist) and user</p>
         <span class="ruby-keyword">end</span>
 
         <span class="ruby-keyword">if</span> (<span class="ruby-identifier">playlist_object</span> <span class="ruby-operator">==</span> <span class="ruby-keyword">nil</span>)          <span class="ruby-comment">#playlist_object doesn&#39;t exist</span>
-          <span class="ruby-identifier">playlist_object</span> = <span class="ruby-constant">Playlist</span>.<span class="ruby-identifier">where</span>(<span class="ruby-identifier">condition</span>)
+          <span class="ruby-identifier">playlist_object</span> = <span class="ruby-constant">Playlist</span>.<span class="ruby-identifier">eager_load</span>([<span class="ruby-identifier">musics</span><span class="ruby-operator">:</span> { <span class="ruby-identifier">user</span><span class="ruby-operator">:</span> {}, <span class="ruby-identifier">album</span><span class="ruby-operator">:</span> {} }, <span class="ruby-identifier">user</span><span class="ruby-operator">:</span> {}]).<span class="ruby-identifier">where</span>(<span class="ruby-identifier">condition</span>)
         <span class="ruby-keyword">else</span>                              <span class="ruby-comment">#playlist_object exists</span>
           <span class="ruby-identifier">playlist_object</span> = <span class="ruby-identifier">playlist_object</span>.<span class="ruby-identifier">where</span>(<span class="ruby-identifier">condition</span>)
         <span class="ruby-keyword">end</span>
       <span class="ruby-keyword">end</span>
       <span class="ruby-comment"># - - - - - - - -</span>
     <span class="ruby-keyword">else</span>
-      <span class="ruby-identifier">playlist_object</span> = <span class="ruby-constant">Playlist</span>.<span class="ruby-identifier">all</span>            <span class="ruby-comment">#no attribute specified</span>
+      <span class="ruby-identifier">playlist_object</span> = <span class="ruby-constant">Playlist</span>.<span class="ruby-identifier">eager_load</span>([<span class="ruby-identifier">musics</span><span class="ruby-operator">:</span> { <span class="ruby-identifier">user</span><span class="ruby-operator">:</span> {}, <span class="ruby-identifier">album</span><span class="ruby-operator">:</span> {} }, <span class="ruby-identifier">user</span><span class="ruby-operator">:</span> {}]).<span class="ruby-identifier">all</span>            <span class="ruby-comment">#no attribute specified</span>
     <span class="ruby-keyword">end</span>
 
     <span class="ruby-identifier">order_asc</span> = <span class="ruby-string">&quot;&quot;</span>
@@ -281,14 +281,14 @@ its musics (which includes its albums and artist) and user</p>
     <span class="ruby-keyword">if</span> (<span class="ruby-keyword">defined?</span><span class="ruby-ivar">@order_by_asc</span>)
       <span class="ruby-ivar">@order_by_asc</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span>
         <span class="ruby-identifier">order_asc</span> <span class="ruby-operator">+=</span> <span class="ruby-string">&quot;, &quot;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">order_asc</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">!=</span> <span class="ruby-value">0</span>
-        <span class="ruby-identifier">order_asc</span> <span class="ruby-operator">+=</span> (<span class="ruby-node">%Q[#{x}]</span> <span class="ruby-operator">+</span> <span class="ruby-string">&quot; ASC&quot;</span>)
+        <span class="ruby-identifier">order_asc</span> <span class="ruby-operator">+=</span> (<span class="ruby-string">&quot;&#39;playlists&#39;.&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-node">%Q[#{x}]</span> <span class="ruby-operator">+</span> <span class="ruby-string">&quot; ASC&quot;</span>)
       <span class="ruby-keyword">end</span>
     <span class="ruby-keyword">end</span>
     <span class="ruby-comment"># filter the order by desc to create the string</span>
     <span class="ruby-keyword">if</span> (<span class="ruby-keyword">defined?</span><span class="ruby-ivar">@order_by_desc</span>)
       <span class="ruby-ivar">@order_by_desc</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span>
         <span class="ruby-identifier">order_desc</span> <span class="ruby-operator">+=</span> <span class="ruby-string">&quot;, &quot;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">order_desc</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">!=</span> <span class="ruby-value">0</span>
-        <span class="ruby-identifier">order_desc</span> <span class="ruby-operator">+=</span> (<span class="ruby-node">%Q[#{x}]</span> <span class="ruby-operator">+</span> <span class="ruby-string">&quot; DESC&quot;</span>)
+        <span class="ruby-identifier">order_desc</span> <span class="ruby-operator">+=</span> (<span class="ruby-string">&quot;&#39;playlists&#39;.&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-node">%Q[#{x}]</span> <span class="ruby-operator">+</span> <span class="ruby-string">&quot; DESC&quot;</span>)
       <span class="ruby-keyword">end</span>
     <span class="ruby-keyword">end</span>
 
@@ -449,7 +449,7 @@ musics (which includes its albums and artist) and user</p>
 								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/playlists_controller.rb, line 28</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">show</span>
   <span class="ruby-keyword">begin</span>
-    <span class="ruby-identifier">playlist</span> = <span class="ruby-constant">Playlist</span>.<span class="ruby-identifier">find_by_id</span>(<span class="ruby-ivar">@id</span>)
+    <span class="ruby-identifier">playlist</span> = <span class="ruby-constant">Playlist</span>.<span class="ruby-identifier">eager_load</span>([<span class="ruby-identifier">musics</span><span class="ruby-operator">:</span> { <span class="ruby-identifier">user</span><span class="ruby-operator">:</span> {}, <span class="ruby-identifier">album</span><span class="ruby-operator">:</span> {} }, <span class="ruby-identifier">user</span><span class="ruby-operator">:</span> {}]).<span class="ruby-identifier">find_by_id</span>(<span class="ruby-ivar">@id</span>)
     <span class="ruby-keyword">if</span> (<span class="ruby-operator">!</span><span class="ruby-identifier">playlist</span>)
       <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">502</span>
       <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:not_found</span>
@@ -517,7 +517,7 @@ including its musics (which includes its albums and artist) and user</p>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">update</span>
   <span class="ruby-keyword">begin</span>
     <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@security</span>)
-      <span class="ruby-identifier">playlist</span> = <span class="ruby-constant">Playlist</span>.<span class="ruby-identifier">find_by_id</span>(<span class="ruby-ivar">@id</span>)
+      <span class="ruby-identifier">playlist</span> = <span class="ruby-constant">Playlist</span>.<span class="ruby-identifier">eager_load</span>([<span class="ruby-identifier">musics</span><span class="ruby-operator">:</span> { <span class="ruby-identifier">user</span><span class="ruby-operator">:</span> {}, <span class="ruby-identifier">album</span><span class="ruby-operator">:</span> {} }, <span class="ruby-identifier">user</span><span class="ruby-operator">:</span> {}]).<span class="ruby-identifier">find_by_id</span>(<span class="ruby-ivar">@id</span>)
       <span class="ruby-keyword">if</span> (<span class="ruby-identifier">playlist</span> <span class="ruby-operator">!=</span> <span class="ruby-keyword">nil</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">playlist</span>.<span class="ruby-identifier">user_id</span> <span class="ruby-operator">==</span> <span class="ruby-ivar">@user_id</span>)
         <span class="ruby-keyword">if</span> (<span class="ruby-keyword">defined?</span>(<span class="ruby-ivar">@playlist</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-ivar">@playlist</span>.<span class="ruby-identifier">has_key?</span>(<span class="ruby-value">:music</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-ivar">@playlist</span>[<span class="ruby-value">:music</span>].<span class="ruby-identifier">size</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span>)
           <span class="ruby-identifier">playlist</span>.<span class="ruby-identifier">musics</span> = []
@@ -614,11 +614,13 @@ including its musics (which includes its albums and artist) and user</p>
 			<li><a href="../Address.html">Address</a></li>
 			<li><a href="../AdminUser.html">AdminUser</a></li>
 			<li><a href="../Album.html">Album</a></li>
+			<li><a href="../Albumslike.html">Albumslike</a></li>
 			<li><a href="../Attachment.html">Attachment</a></li>
 			<li><a href="../Battle.html">Battle</a></li>
 			<li><a href="../Cart.html">Cart</a></li>
 			<li><a href="../Commentary.html">Commentary</a></li>
 			<li><a href="../Concert.html">Concert</a></li>
+			<li><a href="../Concertslike.html">Concertslike</a></li>
 			<li><a href="../Description.html">Description</a></li>
 			<li><a href="../Feedback.html">Feedback</a></li>
 			<li><a href="../Follow.html">Follow</a></li>
@@ -636,6 +638,7 @@ including its musics (which includes its albums and artist) and user</p>
 			<li><a href="../MusicNote.html">MusicNote</a></li>
 			<li><a href="../News.html">News</a></li>
 			<li><a href="../NewsTitle.html">NewsTitle</a></li>
+			<li><a href="../Newslike.html">Newslike</a></li>
 			<li><a href="../Newstext.html">Newstext</a></li>
 			<li><a href="../Notification.html">Notification</a></li>
 			<li><a href="../Pack.html">Pack</a></li>

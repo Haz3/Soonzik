@@ -70,7 +70,6 @@ SoonzikApp.controller('IndexCtrl', ['$scope', 'SecureAuth', 'HTTPService', '$tim
 			if (packs.length > 0) {
 				checkPartial(packs);
 				$scope.selectedPack = { pack: $scope.packs[0], display: true };
-				console.log($scope.selectedPack);
 			}
 			timeLeftPack();
 			packsLoading = true;
@@ -314,6 +313,5 @@ SoonzikApp.controller('IndexCtrl', ['$scope', 'SecureAuth', 'HTTPService', '$tim
 
 			$scope.packs.push({ albumList: partial_pack, object: packs[i], partialList: partial_array });
 		}
-		console.log($scope.packs);
 	}
 }]);

@@ -212,7 +212,6 @@ module API
     # * +listening [music_id]+ - Id of the music listen
     # * +listening [latitude]+ - Position where the music has been listen
     # * +listening [longitude]+ - Position where the music has been listen
-    # * +listening [when]+ - When the music has been listen
     # 
     # ===== HTTP VALUE
     # 

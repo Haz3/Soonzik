@@ -51,6 +51,6 @@ class Listening < ActiveRecord::Base
 
   # The strong parameters to save or update object
   def self.listening_params(parameters)
-    parameters.require(:listening).permit(:user_id, :music_id, :latitude, :longitude, :when)
+    parameters.require(:listening).permit(:user_id, :music_id, :latitude, :longitude)
   end
 end

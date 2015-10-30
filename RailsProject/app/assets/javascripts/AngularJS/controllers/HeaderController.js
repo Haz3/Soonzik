@@ -105,8 +105,30 @@ SoonzikApp.controller('HeaderCtrl', ['$scope', "$routeParams", "$location", "Sec
 	}
 
 	$scope.chooseLanguage = function(lang) {
-		$cookies.put("language", lang);
-		$window.location.reload();
+		if ($scope.user) {
+			
+			SecureAuth.securedTransaction(function(key, id) {
+				var params = {
+					secureKey: key,
+					user_id: id,
+					user: {
+						language: lang
+					}
+				};
+
+				HTTPService.updateUser(params).then(function(response) {
+					$window.location.reload();
+				}, function(error) {
+					Notification.error(" labels.error ");
+				});
+			}, function(error) {
+				Notification.error(" labels.error ");
+			});
+
+		} else {
+			$cookies.put("language", lang);
+			$window.location.reload();
+		}
 	}
 
 }]);

@@ -151,6 +151,12 @@ var SearchIndex =
 		"type": "normalclass"
 	},
 	{
+		"name": "Albumslike",
+		"link": "Albumslike.html",
+		"snippet": "<p>The model of the object Albumlike Contain the relation and the validation\nCan provide some features linked …\n",
+		"type": "normalclass"
+	},
+	{
 		"name": "Attachment",
 		"link": "Attachment.html",
 		"snippet": "<p>The model of the object Attachment Contain the relation and the validation\nCan provide some features …\n",
@@ -178,6 +184,12 @@ var SearchIndex =
 		"name": "Concert",
 		"link": "Concert.html",
 		"snippet": "<p>The model of the object Concert Contain the relation and the validation Can\nprovide some features linked …\n",
+		"type": "normalclass"
+	},
+	{
+		"name": "Concertslike",
+		"link": "Concertslike.html",
+		"snippet": "<p>The model of the object Concertlike Contain the relation and the validation\nCan provide some features …\n",
 		"type": "normalclass"
 	},
 	{
@@ -280,6 +292,12 @@ var SearchIndex =
 		"name": "NewsTitle",
 		"link": "NewsTitle.html",
 		"snippet": "<p>The model of the object NewsTitle Contain the relation and the validation\nCan provide some features linked …\n",
+		"type": "normalclass"
+	},
+	{
+		"name": "Newslike",
+		"link": "Newslike.html",
+		"snippet": "<p>The model of the object Albumlike Contain the relation and the validation\nCan provide some features linked …\n",
 		"type": "normalclass"
 	},
 	{
@@ -1287,13 +1305,19 @@ var SearchIndex =
 	{
 		"name": "miniKey",
 		"link": "Pack.html#method-c-miniKey",
-		"snippet": "<p>Filter of information for the API\n<p>Fields returned : [:id, :title]\n",
+		"snippet": "<p>Filter of information for the API\n<p>Fields returned : [:id, :title, begin_date, end_date, minimal_price …\n",
 		"type": "anymethod"
 	},
 	{
 		"name": "averagePrice",
 		"link": "Pack.html#method-i-averagePrice",
 		"snippet": "<p>Calculate the average of donation for this pack\n",
+		"type": "anymethod"
+	},
+	{
+		"name": "miniKey",
+		"link": "PartialAlbum.html#method-c-miniKey",
+		"snippet": "<p>Filter of information for the API\n<p>Fields returned : [:id, :title]\n",
 		"type": "anymethod"
 	},
 	{

@@ -75,7 +75,6 @@ class MessagesController < WebsocketRails::BaseController
         newMsg.msg = message["messageValue"]
         newMsg.user_id = @user.id
         newMsg.dest_id = target.id
-        newMsg.session = "web"
         newMsg.save!
         controller_store[:user_id].each_with_index { |user, index|
           if (user[:id] == target.id)

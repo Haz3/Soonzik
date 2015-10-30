@@ -204,7 +204,7 @@ list of action available :</p>
   <span class="ruby-keyword">def</span> <span class="ruby-identifier">addfriend</span>
           <span class="ruby-keyword">begin</span>
                   <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@security</span>)
-                          <span class="ruby-identifier">u</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">find_by_id</span>(<span class="ruby-ivar">@user_id</span>)
+                          <span class="ruby-identifier">u</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">eager_load</span>(<span class="ruby-value">:friends</span>).<span class="ruby-identifier">find_by_id</span>(<span class="ruby-ivar">@user_id</span>)
                           <span class="ruby-identifier">friend</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">find_by_id</span>(<span class="ruby-ivar">@friend_id</span>)
 
                           <span class="ruby-keyword">if</span> (<span class="ruby-operator">!</span><span class="ruby-identifier">u</span> <span class="ruby-operator">||</span> <span class="ruby-operator">!</span><span class="ruby-identifier">friend</span>)
@@ -453,14 +453,14 @@ Note : By default, if you precise no attribute, it will take every row</pre>
                                 <span class="ruby-keyword">end</span>
 
                                 <span class="ruby-keyword">if</span> (<span class="ruby-identifier">user_object</span> <span class="ruby-operator">==</span> <span class="ruby-keyword">nil</span>)                                   <span class="ruby-comment">#user_object doesn&#39;t exist</span>
-                                        <span class="ruby-identifier">user_object</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">where</span>(<span class="ruby-identifier">condition</span>)
+                                        <span class="ruby-identifier">user_object</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">eager_load</span>(<span class="ruby-value">:groups</span>).<span class="ruby-identifier">where</span>(<span class="ruby-identifier">condition</span>)
                                 <span class="ruby-keyword">else</span>                                                                                                                      <span class="ruby-comment">#user_object exists</span>
                                         <span class="ruby-identifier">user_object</span> = <span class="ruby-identifier">user_object</span>.<span class="ruby-identifier">where</span>(<span class="ruby-identifier">condition</span>)
                                 <span class="ruby-keyword">end</span>
                         <span class="ruby-keyword">end</span>
                         <span class="ruby-comment"># - - - - - - - -</span>
                 <span class="ruby-keyword">else</span>
-                        <span class="ruby-identifier">user_object</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">all</span>                                             <span class="ruby-comment">#no attribute specified</span>
+                        <span class="ruby-identifier">user_object</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">eager_load</span>(<span class="ruby-value">:groups</span>).<span class="ruby-identifier">all</span>                                         <span class="ruby-comment">#no attribute specified</span>
                 <span class="ruby-keyword">end</span>
 
                 <span class="ruby-identifier">order_asc</span> = <span class="ruby-string">&quot;&quot;</span>
@@ -469,14 +469,14 @@ Note : By default, if you precise no attribute, it will take every row</pre>
                 <span class="ruby-keyword">if</span> (<span class="ruby-keyword">defined?</span><span class="ruby-ivar">@order_by_asc</span>)
                         <span class="ruby-ivar">@order_by_asc</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span>
                                 <span class="ruby-identifier">order_asc</span> <span class="ruby-operator">+=</span> <span class="ruby-string">&quot;, &quot;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">order_asc</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">!=</span> <span class="ruby-value">0</span>
-                                <span class="ruby-identifier">order_asc</span> <span class="ruby-operator">+=</span> (<span class="ruby-node">%Q[#{x}]</span> <span class="ruby-operator">+</span> <span class="ruby-string">&quot; ASC&quot;</span>)
+                                <span class="ruby-identifier">order_asc</span> <span class="ruby-operator">+=</span> (<span class="ruby-string">&quot;&#39;users&#39;.&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-node">%Q[#{x}]</span> <span class="ruby-operator">+</span> <span class="ruby-string">&quot; ASC&quot;</span>)
                         <span class="ruby-keyword">end</span>
                 <span class="ruby-keyword">end</span>
                 <span class="ruby-comment"># filter the order by desc to create the string</span>
                 <span class="ruby-keyword">if</span> (<span class="ruby-keyword">defined?</span><span class="ruby-ivar">@order_by_desc</span>)
                         <span class="ruby-ivar">@order_by_desc</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span>
                                 <span class="ruby-identifier">order_desc</span> <span class="ruby-operator">+=</span> <span class="ruby-string">&quot;, &quot;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">order_desc</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">!=</span> <span class="ruby-value">0</span>
-                                <span class="ruby-identifier">order_desc</span> <span class="ruby-operator">+=</span> (<span class="ruby-node">%Q[#{x}]</span> <span class="ruby-operator">+</span> <span class="ruby-string">&quot; DESC&quot;</span>)
+                                <span class="ruby-identifier">order_desc</span> <span class="ruby-operator">+=</span> (<span class="ruby-string">&quot;&#39;users&#39;.&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-node">%Q[#{x}]</span> <span class="ruby-operator">+</span> <span class="ruby-string">&quot; DESC&quot;</span>)
                         <span class="ruby-keyword">end</span>
                 <span class="ruby-keyword">end</span>
 
@@ -559,7 +559,7 @@ Note : By default, if you precise no attribute, it will take every row</pre>
   <span class="ruby-keyword">def</span> <span class="ruby-identifier">follow</span>
           <span class="ruby-keyword">begin</span>
                   <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@security</span>)
-                          <span class="ruby-identifier">u</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">find_by_id</span>(<span class="ruby-ivar">@user_id</span>)
+                          <span class="ruby-identifier">u</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">eager_load</span>(<span class="ruby-value">:follows</span>).<span class="ruby-identifier">find_by_id</span>(<span class="ruby-ivar">@user_id</span>)
                           <span class="ruby-identifier">toFollow</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">find_by_id</span>(<span class="ruby-ivar">@follow_id</span>)
 
                           <span class="ruby-keyword">if</span> (<span class="ruby-operator">!</span><span class="ruby-identifier">u</span> <span class="ruby-operator">||</span> <span class="ruby-operator">!</span><span class="ruby-identifier">toFollow</span>)
@@ -640,7 +640,7 @@ Note : By default, if you precise no attribute, it will take every row</pre>
 								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/users_controller.rb, line 717</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">getFollowers</span>
         <span class="ruby-keyword">begin</span>
-                <span class="ruby-identifier">u</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">find_by_id</span>(<span class="ruby-ivar">@id</span>)
+                <span class="ruby-identifier">u</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">eager_load</span>(<span class="ruby-value">:followers</span>).<span class="ruby-identifier">find_by_id</span>(<span class="ruby-ivar">@id</span>)
 
                 <span class="ruby-keyword">if</span> (<span class="ruby-operator">!</span><span class="ruby-identifier">u</span>)
                         <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">502</span>
@@ -692,7 +692,7 @@ Note : By default, if you precise no attribute, it will take every row</pre>
 								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/users_controller.rb, line 685</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">getFollows</span>
         <span class="ruby-keyword">begin</span>
-                <span class="ruby-identifier">u</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">find_by_id</span>(<span class="ruby-ivar">@id</span>)
+                <span class="ruby-identifier">u</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">eager_load</span>(<span class="ruby-value">:follows</span>).<span class="ruby-identifier">find_by_id</span>(<span class="ruby-ivar">@id</span>)
 
                 <span class="ruby-keyword">if</span> (<span class="ruby-operator">!</span><span class="ruby-identifier">u</span>)
                         <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">502</span>
@@ -744,7 +744,7 @@ Note : By default, if you precise no attribute, it will take every row</pre>
 								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/users_controller.rb, line 653</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">getFriends</span>
         <span class="ruby-keyword">begin</span>
-                <span class="ruby-identifier">u</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">find_by_id</span>(<span class="ruby-ivar">@id</span>)
+                <span class="ruby-identifier">u</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">eager_load</span>(<span class="ruby-value">:friends</span>).<span class="ruby-identifier">find_by_id</span>(<span class="ruby-ivar">@id</span>)
 
                 <span class="ruby-keyword">if</span> (<span class="ruby-operator">!</span><span class="ruby-identifier">u</span>)
                         <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">502</span>
@@ -851,7 +851,7 @@ object themselve. Useful for pagination. Set it to “true”.</p>
                 <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@count</span>.<span class="ruby-identifier">present?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-ivar">@count</span> <span class="ruby-operator">==</span> <span class="ruby-string">&quot;true&quot;</span>)
                         <span class="ruby-ivar">@returnValue</span> = { <span class="ruby-identifier">content</span><span class="ruby-operator">:</span> <span class="ruby-constant">User</span>.<span class="ruby-identifier">count</span> }
                 <span class="ruby-keyword">else</span>
-                        <span class="ruby-ivar">@returnValue</span> = { <span class="ruby-identifier">content</span><span class="ruby-operator">:</span> <span class="ruby-constant">User</span>.<span class="ruby-identifier">all</span>.<span class="ruby-identifier">as_json</span>(<span class="ruby-value">:only</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">User</span>.<span class="ruby-identifier">miniKey</span>, <span class="ruby-value">:include</span> =<span class="ruby-operator">&gt;</span> { <span class="ruby-identifier">groups</span><span class="ruby-operator">:</span> { <span class="ruby-identifier">only</span><span class="ruby-operator">:</span> [<span class="ruby-value">:name</span>] } } ) }
+                        <span class="ruby-ivar">@returnValue</span> = { <span class="ruby-identifier">content</span><span class="ruby-operator">:</span> <span class="ruby-constant">User</span>.<span class="ruby-identifier">eager_load</span>(<span class="ruby-value">:groups</span>).<span class="ruby-identifier">all</span>.<span class="ruby-identifier">as_json</span>(<span class="ruby-value">:only</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">User</span>.<span class="ruby-identifier">miniKey</span>, <span class="ruby-value">:include</span> =<span class="ruby-operator">&gt;</span> { <span class="ruby-identifier">groups</span><span class="ruby-operator">:</span> { <span class="ruby-identifier">only</span><span class="ruby-operator">:</span> [<span class="ruby-value">:name</span>] } } ) }
                 <span class="ruby-keyword">end</span>
                 <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@returnValue</span>[<span class="ruby-value">:content</span>].<span class="ruby-identifier">size</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>)
                         <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">202</span>
@@ -898,7 +898,7 @@ inside + the top 5 of the musics of this artist</p>
 								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/users_controller.rb, line 370</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">isArtist</span>
         <span class="ruby-keyword">begin</span>
-                <span class="ruby-identifier">u</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">find_by_id</span>(<span class="ruby-ivar">@id</span>)
+                <span class="ruby-identifier">u</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">eager_load</span>(<span class="ruby-value">:albums</span> =<span class="ruby-operator">&gt;</span> { <span class="ruby-identifier">musics</span><span class="ruby-operator">:</span> {} }).<span class="ruby-identifier">find_by_id</span>(<span class="ruby-ivar">@id</span>)
 
                 <span class="ruby-keyword">if</span> (<span class="ruby-operator">!</span><span class="ruby-identifier">u</span>)
                         <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">502</span>
@@ -1126,9 +1126,9 @@ address, friends and follow.</p>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">show</span>
         <span class="ruby-keyword">begin</span>
                 <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@id</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">/\A[-+]?\d*\.?\d+\z/</span>)
-                        <span class="ruby-identifier">user</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">find_by_id</span>(<span class="ruby-ivar">@id</span>)
+                        <span class="ruby-identifier">user</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">eager_load</span>(<span class="ruby-value">:groups</span>).<span class="ruby-identifier">find_by_id</span>(<span class="ruby-ivar">@id</span>)
                 <span class="ruby-keyword">else</span>
-                        <span class="ruby-identifier">user</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">find_by_username</span>(<span class="ruby-ivar">@id</span>)
+                        <span class="ruby-identifier">user</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">eager_load</span>(<span class="ruby-value">:groups</span>).<span class="ruby-identifier">find_by_username</span>(<span class="ruby-ivar">@id</span>)
                 <span class="ruby-keyword">end</span>
                 <span class="ruby-keyword">if</span> (<span class="ruby-operator">!</span><span class="ruby-identifier">user</span>)
                         <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">502</span>
@@ -1308,7 +1308,7 @@ address, friends and follow.</p>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">update</span>
         <span class="ruby-keyword">begin</span>
                 <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@security</span>)
-                        <span class="ruby-identifier">user</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">find_by_id</span>(<span class="ruby-ivar">@user_id</span>)
+                        <span class="ruby-identifier">user</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">eager_load</span>(<span class="ruby-value">:address</span>).<span class="ruby-identifier">find_by_id</span>(<span class="ruby-ivar">@user_id</span>)
                         <span class="ruby-keyword">if</span> <span class="ruby-identifier">user</span> <span class="ruby-operator">==</span> <span class="ruby-keyword">nil</span>
                                 <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">502</span>
                                 <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:not_found</span>
@@ -1485,11 +1485,13 @@ are authorized)</p>
 			<li><a href="../Address.html">Address</a></li>
 			<li><a href="../AdminUser.html">AdminUser</a></li>
 			<li><a href="../Album.html">Album</a></li>
+			<li><a href="../Albumslike.html">Albumslike</a></li>
 			<li><a href="../Attachment.html">Attachment</a></li>
 			<li><a href="../Battle.html">Battle</a></li>
 			<li><a href="../Cart.html">Cart</a></li>
 			<li><a href="../Commentary.html">Commentary</a></li>
 			<li><a href="../Concert.html">Concert</a></li>
+			<li><a href="../Concertslike.html">Concertslike</a></li>
 			<li><a href="../Description.html">Description</a></li>
 			<li><a href="../Feedback.html">Feedback</a></li>
 			<li><a href="../Follow.html">Follow</a></li>
@@ -1507,6 +1509,7 @@ are authorized)</p>
 			<li><a href="../MusicNote.html">MusicNote</a></li>
 			<li><a href="../News.html">News</a></li>
 			<li><a href="../NewsTitle.html">NewsTitle</a></li>
+			<li><a href="../Newslike.html">Newslike</a></li>
 			<li><a href="../Newstext.html">Newstext</a></li>
 			<li><a href="../Notification.html">Notification</a></li>
 			<li><a href="../Pack.html">Pack</a></li>
