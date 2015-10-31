@@ -14,6 +14,7 @@
         <item>Concert</item>
         <item>My Content</item>
         <item>Sweets</item>
+        <item>Feedback</item>
     </string-array>
 
     <string-array name="nav_classes">
@@ -29,6 +30,7 @@
         <item>com.soonzik.soonzik.ConcertsListFragment</item>
         <item>com.soonzik.soonzik.MyContentFragment</item>
         <item>com.soonzik.soonzik.TweetsListFragment</item>
+        <item>com.soonzik.soonzik.FeedbackFragment</item>
     </string-array>
 
     <string-array name="nav_icons">
@@ -44,6 +46,21 @@
         <item>ic_playlist</item>
         <item>ic_playlist</item>
         <item>ic_playlist</item>
+        <item>ic_playlist</item>
+    </string-array>
+
+    <string-array name="feedback_array">
+        <item>Bug on the website</item>
+        <item>Payment issue</item>
+        <item>Account issue</item>
+        <item>Other</item>
+    </string-array>
+
+    <string-array name="feedback_code">
+        <item>bug</item>
+        <item>payment</item>
+        <item>account</item>
+        <item>other</item>
     </string-array>
 
 </resources>

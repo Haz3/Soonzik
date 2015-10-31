@@ -57,18 +57,15 @@
             android:layout_alignStart="@+id/artistname"
             android:id="@+id/imageView3" />
 
-        <Button
+        <TextView
             style="?android:attr/buttonStyleSmall"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Add to cart"
-            android:id="@+id/addtocart"
-            android:textSize="10sp"
-            android:layout_marginRight="11dp"
-            android:layout_marginEnd="11dp"
+            android:text="+"
+            android:id="@+id/albumaction"
             android:layout_alignBottom="@+id/nbtitle"
             android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true" />
+            android:layout_alignParentEnd="true"  />
 
         <TextView
             android:id="@+id/price"
@@ -76,8 +73,8 @@
             android:layout_height="wrap_content"
             android:text="10,00$"
             android:layout_alignTop="@+id/albumpicture"
-            android:layout_alignRight="@+id/addtocart"
-            android:layout_alignEnd="@+id/addtocart" />
+            android:layout_alignRight="@+id/albumaction"
+            android:layout_alignEnd="@+id/albumaction" />
 
     </RelativeLayout>
 

@@ -15,6 +15,7 @@ import android.widget.Toast;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.w3c.dom.Comment;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
@@ -25,6 +26,9 @@ import java.util.Map;
  * Created by Kevin on 2015-08-30.
  */
 public class CommentaryListFragment extends Fragment {
+
+    private CommentaryAdapter commentaryAdapter;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -48,7 +52,7 @@ public class CommentaryListFragment extends Fragment {
 
                         final ArrayList<Object> cmts = ActiveRecord.jsonArrayData(data, classTComment);
 
-                        CommentaryAdapter commentaryAdapter = new CommentaryAdapter(getActivity(), cmts);
+                        commentaryAdapter = new CommentaryAdapter(getActivity(), cmts);
                         ListView lv = (ListView) getActivity().findViewById(R.id.commentslistview);
                         lv.setAdapter(commentaryAdapter);
                     } catch (ClassNotFoundException e) {
@@ -60,10 +64,9 @@ public class CommentaryListFragment extends Fragment {
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
-        final Object those = this;
 
-        Button sendTweet = (Button) v.findViewById(R.id.sendcomment);
-        sendTweet.setOnClickListener(new View.OnClickListener() {
+        Button sendComment = (Button) v.findViewById(R.id.sendcomment);
+        sendComment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View view) {
                 String msg = ((EditText) v.findViewById(R.id.edittextcomment)).getText().toString();
@@ -73,8 +76,13 @@ public class CommentaryListFragment extends Fragment {
                     public void onJSONResponse(boolean success, Object response, Class<?> classT) throws InvocationTargetException, NoSuchMethodException, java.lang.InstantiationException, IllegalAccessException, JSONException {
                         JSONObject obj = (JSONObject) response;
 
-                        Tweet tweet = (Tweet) ActiveRecord.jsonObjectData(obj, classT);
+                        Commentary comment = (Commentary) ActiveRecord.jsonObjectData(obj, classT);
                         ((EditText) v.findViewById(R.id.edittextcomment)).setText("");
+
+                        Log.v("COMMENT", comment.toString());
+
+                        commentaryAdapter.updateData(comment);
+                        commentaryAdapter.notifyDataSetChanged();
 
                         Toast.makeText(getActivity(), "Comment Send", Toast.LENGTH_SHORT).show();
                     }

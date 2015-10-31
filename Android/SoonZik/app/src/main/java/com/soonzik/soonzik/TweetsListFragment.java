@@ -24,6 +24,9 @@ import java.util.Map;
  * Created by Kevin on 2015-08-30.
  */
 public class TweetsListFragment extends Fragment {
+
+    private TweetsAdapter tweetsAdapter;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -42,7 +45,7 @@ public class TweetsListFragment extends Fragment {
 
                     final ArrayList<Object> tweets = ActiveRecord.jsonArrayData(data, classT);
 
-                    TweetsAdapter tweetsAdapter = new TweetsAdapter(getActivity(), tweets);
+                    tweetsAdapter = new TweetsAdapter(getActivity(), tweets);
                     ListView lv = (ListView) getActivity().findViewById(R.id.tweetslistview);
                     lv.setAdapter(tweetsAdapter);
                 }
@@ -68,6 +71,9 @@ public class TweetsListFragment extends Fragment {
 
                         Tweet tweet = (Tweet) ActiveRecord.jsonObjectData(obj, classT);
                         ((EditText) v.findViewById(R.id.edittexttweet)).setText("");
+
+                        tweetsAdapter.updateData(tweet);
+                        tweetsAdapter.notifyDataSetChanged();
 
                         Toast.makeText(getActivity(), "Tweet Send", Toast.LENGTH_SHORT).show();
                     }

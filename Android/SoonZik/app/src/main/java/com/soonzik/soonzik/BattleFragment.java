@@ -170,7 +170,7 @@ public class BattleFragment extends Fragment {
                                     mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
 
                                     try {
-                                        mediaPlayer.setDataSource("http://10.0.3.2:3000/api/musics/get/1");
+                                        mediaPlayer.setDataSource(ActiveRecord.serverLink + "musics/get/1");
                                         mediaPlayer.prepare();
                                         mediaPlayer.start();
                                     } catch (IOException e) {
@@ -212,7 +212,7 @@ public class BattleFragment extends Fragment {
                                     mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
 
                                     try {
-                                        mediaPlayer.setDataSource("http://10.0.3.2:3000/api/musics/get/1");
+                                        mediaPlayer.setDataSource(ActiveRecord.serverLink + "musics/get/1");
                                         mediaPlayer.prepare();
                                         mediaPlayer.start();
                                     } catch (IOException e) {

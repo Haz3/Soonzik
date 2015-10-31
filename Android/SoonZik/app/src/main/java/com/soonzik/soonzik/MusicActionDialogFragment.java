@@ -49,7 +49,7 @@ public class MusicActionDialogFragment extends DialogFragment {
                     musicTitle.setText(ms.getTitle());
 
                     TextView albumTitle = (TextView) v.findViewById(R.id.albumtitle);
-                    albumTitle.setText(ms.getTitle());
+                    albumTitle.setText(ms.getAlbum().getTitle());
 
                     TextView artistName = (TextView) v.findViewById(R.id.artistname);
                     artistName.setText(ms.getUser().getUsername());

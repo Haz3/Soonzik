@@ -6,6 +6,7 @@ import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
 
 import org.apache.http.Header;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -34,12 +35,13 @@ public class Listening extends ActiveRecord {
 
         AsyncHttpClient client = new AsyncHttpClient();
         char lastChar = className.charAt(className.length() - 1);
-        client.get("http://10.0.3.2:3000/api/" + className.toLowerCase() + (lastChar == 's' ? "/" : "s/") + "around/" + Double.toString(latitude) + "/" + Double.toString(longitude) + "/" + Integer.toString(range), new JsonHttpResponseHandler() {
+        client.get(ActiveRecord.serverLink + className.toLowerCase() + (lastChar == 's' ? "/" : "s/") + "around/" + Double.toString(latitude) + "/" + Double.toString(longitude) + "/" + Integer.toString(range), new JsonHttpResponseHandler() {
 
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 try {
-                    JSONObject obj = response.getJSONObject("content");
+                    Log.v("AROUND JSON", response.toString());
+                    JSONArray obj = response.getJSONArray("content");
                     Log.v("AROUND JSON", obj.toString());
 
                     callback.onJSONResponse(true, obj, classT);

@@ -42,7 +42,7 @@ public class Artist extends ActiveRecord {
     public static void isArtist(int id, final ActiveRecord.OnJSONResponseCallback callback) {
         AsyncHttpClient client = new AsyncHttpClient();
 
-        client.get("http://10.0.3.2:3000/api/users/" + Integer.toString(id) + "/isartist", new JsonHttpResponseHandler() {
+        client.get(ActiveRecord.serverLink + "users/" + Integer.toString(id) + "/isartist", new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 Log.v("JSON", response.toString());

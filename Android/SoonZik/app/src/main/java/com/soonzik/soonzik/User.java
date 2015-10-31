@@ -21,6 +21,7 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Scanner;
 
 /**
  * Created by kevin_000 on 13/03/2015.
@@ -80,7 +81,7 @@ public class User extends ActiveRecord {
         AsyncHttpClient client = new AsyncHttpClient();
         ActiveRecord.userId = this.id;
 
-        client.get("http://10.0.3.2:3000/api/getKey/" + Integer.toString(this.id), new JsonHttpResponseHandler() {
+        client.get(ActiveRecord.serverLink + "getKey/" + Integer.toString(this.id), new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 Log.v("SECURERESP1", response.toString());
@@ -120,7 +121,7 @@ public class User extends ActiveRecord {
                 ActiveRecord.secureCase(ActiveRecord.currentUser, params, response.getString("key"));
                 AsyncHttpClient client = new AsyncHttpClient();
 
-                client.get("http://10.0.3.2:3000/api/users/getmusics", params, new JsonHttpResponseHandler() {
+                client.get(ActiveRecord.serverLink + "users/getmusics", params, new JsonHttpResponseHandler() {
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                         Log.v("JSON", response.toString());
@@ -164,7 +165,7 @@ public class User extends ActiveRecord {
                 ActiveRecord.secureCase(ActiveRecord.currentUser, params, response.getString("key"));
                 AsyncHttpClient client = new AsyncHttpClient();
 
-                client.post("http://10.0.3.2:3000/api/users/follow", params, new JsonHttpResponseHandler() {
+                client.post(ActiveRecord.serverLink + "users/follow", params, new JsonHttpResponseHandler() {
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                         Log.v("JSON", response.toString());
@@ -207,7 +208,7 @@ public class User extends ActiveRecord {
                 ActiveRecord.secureCase(ActiveRecord.currentUser, params, response.getString("key"));
                 AsyncHttpClient client = new AsyncHttpClient();
 
-                client.post("http://10.0.3.2:3000/api/users/unfollow", params, new JsonHttpResponseHandler() {
+                client.post(ActiveRecord.serverLink + "users/unfollow", params, new JsonHttpResponseHandler() {
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                         Log.v("JSON", response.toString());
@@ -250,7 +251,7 @@ public class User extends ActiveRecord {
                 ActiveRecord.secureCase(ActiveRecord.currentUser, params, response.getString("key"));
                 AsyncHttpClient client = new AsyncHttpClient();
 
-                client.post("http://10.0.3.2:3000/api/users/addfriend", params, new JsonHttpResponseHandler() {
+                client.post(ActiveRecord.serverLink + "users/addfriend", params, new JsonHttpResponseHandler() {
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                         Log.v("JSON", response.toString());
@@ -293,7 +294,7 @@ public class User extends ActiveRecord {
                 ActiveRecord.secureCase(ActiveRecord.currentUser, params, response.getString("key"));
                 AsyncHttpClient client = new AsyncHttpClient();
 
-                client.post("http://10.0.3.2:3000/api/users/delfriend", params, new JsonHttpResponseHandler() {
+                client.post(ActiveRecord.serverLink + "users/delfriend", params, new JsonHttpResponseHandler() {
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                         Log.v("JSON", response.toString());
@@ -329,7 +330,7 @@ public class User extends ActiveRecord {
     public static void getFriends(int id, final ActiveRecord.OnJSONResponseCallback callback) {
         AsyncHttpClient client = new AsyncHttpClient();
 
-        client.get("http://10.0.3.2:3000/api/users/" + Integer.toString(id) + "/friends", new JsonHttpResponseHandler() {
+        client.get(ActiveRecord.serverLink + "users/" + Integer.toString(id) + "/friends", new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 Log.v("JSON getFriends", response.toString());
@@ -363,7 +364,7 @@ public class User extends ActiveRecord {
     public static void getFollows(int id, final ActiveRecord.OnJSONResponseCallback callback) {
         AsyncHttpClient client = new AsyncHttpClient();
 
-        client.get("http://10.0.3.2:3000/api/users/" + Integer.toString(id) + "/follows", new JsonHttpResponseHandler(){
+        client.get(ActiveRecord.serverLink + "users/" + Integer.toString(id) + "/follows", new JsonHttpResponseHandler(){
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 Log.v("JSON", response.toString());
@@ -397,7 +398,7 @@ public class User extends ActiveRecord {
     public static void getFollowers(int id, final ActiveRecord.OnJSONResponseCallback callback) {
         AsyncHttpClient client = new AsyncHttpClient();
 
-        client.get("http://10.0.3.2:3000/api/users/" + Integer.toString(id) + "/followers", new JsonHttpResponseHandler() {
+        client.get(ActiveRecord.serverLink + "users/" + Integer.toString(id) + "/followers", new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 Log.v("JSON", response.toString());
@@ -446,7 +447,7 @@ public class User extends ActiveRecord {
             public void onJSONResponse(boolean success, JSONObject response, RequestParams params) throws JSONException, UnsupportedEncodingException, NoSuchAlgorithmException {
                 AsyncHttpClient client = new AsyncHttpClient();
 
-                client.post("http://10.0.3.2:3000/api/users/upload", params, new JsonHttpResponseHandler() {
+                client.post(ActiveRecord.serverLink + "users/upload", params, new JsonHttpResponseHandler() {
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                         Log.v("JSON", response.toString());
@@ -482,7 +483,7 @@ public class User extends ActiveRecord {
     static void getSocialToken(String uid, String provider, final OnJSONResponseCallback callback) {
         AsyncHttpClient client = new AsyncHttpClient();
 
-        client.get("http://10.0.3.2:3000/api/getSocialToken/" + uid + "/" + provider, new JsonHttpResponseHandler() {
+        client.get(ActiveRecord.serverLink + "getSocialToken/" + uid + "/" + provider, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 try {
@@ -530,7 +531,7 @@ public class User extends ActiveRecord {
 
                 p.put("encrypted_key", hexString);
                 p.put("token", socialtoken);
-                client.post("http://10.0.3.2:3000/api/social-login", p, new JsonHttpResponseHandler() {
+                client.post(ActiveRecord.serverLink + "social-login", p, new JsonHttpResponseHandler() {
                     public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                         try {
                             final Class<?> classT = Class.forName("com.soonzik.soonzik.User");

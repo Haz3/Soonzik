@@ -43,7 +43,7 @@ public class Purchase extends ActiveRecord {
                 AsyncHttpClient client = new AsyncHttpClient();
 
                 char lastChar = className.charAt(className.length() - 1);
-                client.post("http://10.0.3.2:3000/api/" + className.toLowerCase() + (lastChar == 's' ? "/buycart" : "s/buycart"), params, new JsonHttpResponseHandler() {
+                client.post(ActiveRecord.serverLink + className.toLowerCase() + (lastChar == 's' ? "/buycart" : "s/buycart"), params, new JsonHttpResponseHandler() {
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                         //Log.v("JSON", response.toString());
@@ -105,7 +105,7 @@ public class Purchase extends ActiveRecord {
                 AsyncHttpClient client = new AsyncHttpClient();
 
                 char lastChar = className.charAt(className.length() - 1);
-                client.post("http://10.0.3.2:3000/api/" + className.toLowerCase() + (lastChar == 's' ? "/buypack" : "s/buypack"), params, new JsonHttpResponseHandler() {
+                client.post(ActiveRecord.serverLink + className.toLowerCase() + (lastChar == 's' ? "/buypack" : "s/buypack"), params, new JsonHttpResponseHandler() {
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                         //Log.v("JSON", response.toString());

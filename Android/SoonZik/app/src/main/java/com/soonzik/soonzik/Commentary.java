@@ -19,6 +19,7 @@ public class Commentary extends ActiveRecord {
         super.createInstance(this, json, this.getClass());
     }
 
+
     @Override
     public String toString() {
         return (

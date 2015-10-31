@@ -37,14 +37,19 @@ public class MessagesAdapter extends ArrayAdapter<Object> {
         textViewMsg.setText(ms.getMsg());
 
         if (ms.getUser_id() == ActiveRecord.currentUser.getId()) {
-            textViewMsg.setBackgroundResource(R.drawable.bubble_green);
+            textViewMsg.setBackgroundResource(R.drawable.box_green);
             textViewMsg.setGravity(Gravity.END);
         }
         else {
-            textViewMsg.setBackgroundResource(R.drawable.bubble_yellow);
+            textViewMsg.setBackgroundResource(R.drawable.box_yellow);
             textViewMsg.setGravity(Gravity.START);
         }
 
         return rowView;
     }
+
+    public void updateData(Object newData) {
+        this.values.add(newData);
+    }
+
 }

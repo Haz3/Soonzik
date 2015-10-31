@@ -44,7 +44,7 @@ public class Cart extends ActiveRecord {
                 ActiveRecord.secureCase(currentUser, params, response.getString("key"));
                 AsyncHttpClient client = new AsyncHttpClient();
                 char lastChar = className.charAt(className.length() - 1);
-                client.get("http://10.0.3.2:3000/api/" + className.toLowerCase() + (lastChar == 's' ? "/" : "s/") + "my_cart", params, new JsonHttpResponseHandler() {
+                client.get(ActiveRecord.serverLink + className.toLowerCase() + (lastChar == 's' ? "/" : "s/") + "my_cart", params, new JsonHttpResponseHandler() {
 
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
@@ -88,7 +88,7 @@ public class Cart extends ActiveRecord {
                 ActiveRecord.secureCase(currentUser, params, response.getString("key"));
                 AsyncHttpClient client = new AsyncHttpClient();
                 char lastChar = className.charAt(className.length() - 1);
-                client.post("http://10.0.3.2:3000/api/" + className.toLowerCase() + (lastChar == 's' ? "/" : "s/") + Integer.toString(id_cart) + "/gift", params, new JsonHttpResponseHandler() {
+                client.post(ActiveRecord.serverLink + className.toLowerCase() + (lastChar == 's' ? "/" : "s/") + Integer.toString(id_cart) + "/gift", params, new JsonHttpResponseHandler() {
 
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, JSONObject response) {

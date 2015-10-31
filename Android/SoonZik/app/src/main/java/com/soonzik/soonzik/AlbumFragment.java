@@ -1,8 +1,11 @@
 package com.soonzik.soonzik;
 
+import android.app.Activity;
+import android.app.DialogFragment;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -77,24 +80,18 @@ public class AlbumFragment extends Fragment {
                     TextView price = (TextView) view.findViewById(R.id.price);
                     price.setText(Double.toString(al.getPrice()) + "$");
 
-                    Button addToCart = (Button) view.findViewById(R.id.addtocart);
-                    addToCart.setOnClickListener(new View.OnClickListener() {
+                    TextView albumation = (TextView) view.findViewById(R.id.albumaction);
+                    albumation.setOnClickListener(new View.OnClickListener() {
                         @Override
-                        public void onClick(View view) {
-                            final Map<String, String> data = new HashMap<String, String>();
-                            data.put("user_id", Integer.toString(ActiveRecord.currentUser.getId()));
-                            data.put("typeObj", "Album");
-                            data.put("obj_id", Integer.toString(al.getId()));
+                        public void onClick(View v) {
+                            DialogFragment newFragment = new AlbumActionDialogFragment();
+                            Bundle bundle = new Bundle();
+                            bundle.putInt("album_id", al.getId());
 
-                            ActiveRecord.save("Cart", data, true, new ActiveRecord.OnJSONResponseCallback() {
-                                @Override
-                                public void onJSONResponse(boolean success, Object response, Class<?> classT) throws InvocationTargetException, NoSuchMethodException, java.lang.InstantiationException, IllegalAccessException, JSONException {
-                                    JSONObject obj = (JSONObject) response;
+                            Log.v("ALBUM_ID", Integer.toString(al.getId()));
 
-                                    Cart cart = (Cart) ActiveRecord.jsonObjectData(obj, classT);
-                                    Toast.makeText(getActivity(), "Album add to cart", Toast.LENGTH_SHORT).show();
-                                }
-                            });
+                            newFragment.setArguments(bundle);
+                            newFragment.show(getActivity().getFragmentManager(), "com.soonzik.soonzik.AlbumActionDialogFragment");
                         }
                     });
 

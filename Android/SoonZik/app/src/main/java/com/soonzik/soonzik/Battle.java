@@ -43,7 +43,7 @@ public class Battle extends ActiveRecord {
                 ActiveRecord.secureCase(ActiveRecord.currentUser, params, response.getString("key"));
                 AsyncHttpClient client = new AsyncHttpClient();
 
-                client.post("http://10.0.3.2:3000/api/battles/" + Integer.toString(id) + "/vote", params, new JsonHttpResponseHandler() {
+                client.post(ActiveRecord.serverLink + "battles/" + Integer.toString(id) + "/vote", params, new JsonHttpResponseHandler() {
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                         Log.v("JSON", response.toString());

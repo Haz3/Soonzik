@@ -5,11 +5,13 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import org.json.JSONException;
@@ -34,7 +36,7 @@ public class CartsAdapter extends ArrayAdapter<Object> {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, final ViewGroup parent) {
         LayoutInflater inflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
@@ -107,14 +109,46 @@ public class CartsAdapter extends ArrayAdapter<Object> {
         deletebutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                final TextView textViewNbObject = ((TextView) ((RelativeLayout) parent.getParent()).findViewById(R.id.nbobject));
+                final TextView textViewPrice = ((TextView) ((RelativeLayout) parent.getParent()).findViewById(R.id.totalvalue));
+
                 ActiveRecord.destroy("Cart", ct.getId(), new ActiveRecord.OnJSONResponseCallback() {
                     @Override
                     public void onJSONResponse(boolean success, Object response, Class<?> classT) throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException, JSONException {
 
+                        Cart deletedCart = (Cart) values.get(position);
+
+                        int nbObj = Integer.parseInt(textViewNbObject.getText().toString());
+                        String totalPrice = textViewPrice.getText().toString();
+                        float finalprice = Float.parseFloat(totalPrice.substring(0, totalPrice.length() - 1));
+
+                        if (deletedCart.getMusics().size() > 0) {
+                            for (Music mc : deletedCart.getMusics()) {
+                                finalprice -= mc.getPrice();
+                                nbObj--;
+                            }
+                        } else if (deletedCart.getAlbums().size() > 0) {
+                            for (Album am : deletedCart.getAlbums()) {
+                                finalprice -= am.getPrice();
+                                nbObj--;
+                            }
+                        }
+                        textViewNbObject.setText(Integer.toString(nbObj));
+                        textViewPrice.setText(Float.toString(finalprice) + "$");
+
+                        values.remove(position);
+                        updateData();
                     }
                 });
             }
         });
         return rowView;
     }
+
+    private void updateData() {
+        this.notifyDataSetChanged();
+    }
+
+
 }

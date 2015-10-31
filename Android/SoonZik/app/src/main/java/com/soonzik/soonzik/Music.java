@@ -54,7 +54,7 @@ public class Music extends ActiveRecord {
                 ActiveRecord.secureCase(ActiveRecord.currentUser, params, response.getString("key"));
                 AsyncHttpClient client = new AsyncHttpClient();
 
-                client.post("http://10.0.3.2:3000/api/musics/addtoplaylist", params, new JsonHttpResponseHandler() {
+                client.post(ActiveRecord.serverLink + "musics/addtoplaylist", params, new JsonHttpResponseHandler() {
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                         Log.v("JSON", response.toString());
@@ -98,7 +98,7 @@ public class Music extends ActiveRecord {
                 ActiveRecord.secureCase(ActiveRecord.currentUser, params, response.getString("key"));
                 AsyncHttpClient client = new AsyncHttpClient();
 
-                client.post("http://10.0.3.2:3000/api/musics/delfromplaylist", params, new JsonHttpResponseHandler() {
+                client.post(ActiveRecord.serverLink + "musics/delfromplaylist", params, new JsonHttpResponseHandler() {
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                         Log.v("JSON", response.toString());
@@ -142,7 +142,7 @@ public class Music extends ActiveRecord {
 
                 File f = File.createTempFile("temp_", "_handled");
 
-                client.get("http://10.0.3.2:3000/api/musics/get/" + Integer.toString(id), params, new FileAsyncHttpResponseHandler(f) {
+                client.get(ActiveRecord.serverLink + "musics/get/" + Integer.toString(id), params, new FileAsyncHttpResponseHandler(f) {
                     @Override
                     public void onFailure(int i, Header[] headers, Throwable throwable, File file) {
                         Log.v("FAIL", "Oups");
@@ -168,7 +168,7 @@ public class Music extends ActiveRecord {
                     }
                 });
 
-                /*client.get("http://10.0.3.2:3000/api/musics/get/" + Integer.toString(id), params, new JsonHttpResponseHandler() {
+                /*client.get(ActiveRecord.serverLink + "musics/get/" + Integer.toString(id), params, new JsonHttpResponseHandler() {
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                         //Log.v("JSON", response.toString());
@@ -204,7 +204,7 @@ public class Music extends ActiveRecord {
         ActiveRecord.currentUser.getUserSecureKey(params, new User.OnJSONResponseCallback() {
             @Override
             public void onJSONResponse(boolean success, JSONObject response, RequestParams params) throws JSONException, IOException, NoSuchAlgorithmException {
-                String secureUrl = "http://10.0.3.2:3000/api/musics/get/" + Integer.toString(id) + "?user_id=" + Integer.toString(ActiveRecord.currentUser.getId()) + "&secureKey=" + ActiveRecord.currentUser.getSecureKey();
+                String secureUrl = ActiveRecord.serverLink + "musics/get/" + Integer.toString(id) + "?user_id=" + Integer.toString(ActiveRecord.currentUser.getId()) + "&secureKey=" + ActiveRecord.currentUser.getSecureKey();
 
                 try {
                     callback.onJSONResponse(true, secureUrl, null);
@@ -230,7 +230,7 @@ public class Music extends ActiveRecord {
                 ActiveRecord.secureCase(ActiveRecord.currentUser, params, response.getString("key"));
                 AsyncHttpClient client = new AsyncHttpClient();
 
-                client.post("http://10.0.3.2:3000/api/musics/" + Integer.toString(music_id) + "/note/" + Integer.toString(note), params, new JsonHttpResponseHandler() {
+                client.post(ActiveRecord.serverLink + "musics/" + Integer.toString(music_id) + "/note/" + Integer.toString(note), params, new JsonHttpResponseHandler() {
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                         Log.v("JSON", response.toString());

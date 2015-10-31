@@ -74,7 +74,7 @@ public class Player extends Fragment {
         }
         else {
             try {
-                mediaPlayer.setDataSource("http://10.0.3.2:3000/api/musics/get/1");
+                mediaPlayer.setDataSource(ActiveRecord.serverLink + "musics/get/1");
             } catch (IOException e) {
                 e.printStackTrace();
             }

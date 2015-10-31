@@ -21,6 +21,8 @@ import java.util.Iterator;
 import java.lang.reflect.*;
 import java.util.Map;
 
+import br.net.bmobile.websocketrails.WebSocketRailsDispatcher;
+
 /**
  * Created by kevin_000 on 13/03/2015.
  */
@@ -28,9 +30,14 @@ import java.util.Map;
 
 
 public class ActiveRecord {
+    //static String serverLink = "http://10.0.3.2:3000/api/";
+    static String serverLink = "http://soonzikapi.herokuapp.com/";
+
+
     static User currentUser;
     static int userId = -1;
     static String secureKey = "";
+    private WebSocketRailsDispatcher dispatcher;
 
     public interface OnJSONResponseCallback {
         public void onJSONResponse(boolean success, Object response, Class<?> classT) throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException, JSONException;
@@ -67,7 +74,7 @@ public class ActiveRecord {
         AsyncHttpClient client = new AsyncHttpClient();
         ;
         char lastChar = className.charAt(className.length() - 1);
-        client.get("http://10.0.3.2:3000/api/" + className.toLowerCase() + (lastChar == 's' ? "" : "s"), new JsonHttpResponseHandler() {
+        client.get(serverLink + className.toLowerCase() + (lastChar == 's' ? "" : "s"), new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 try {
@@ -99,7 +106,7 @@ public class ActiveRecord {
                     ActiveRecord.secureCase(currentUser, params, response.getString("key"));
                     AsyncHttpClient client = new AsyncHttpClient();
                     char lastChar = className.charAt(className.length() - 1);
-                    client.get("http://10.0.3.2:3000/api/" + className.toLowerCase() + (lastChar == 's' ? "/" : "s/") + Integer.toString(id), params, new JsonHttpResponseHandler() {
+                    client.get(serverLink + className.toLowerCase() + (lastChar == 's' ? "/" : "s/") + Integer.toString(id), params, new JsonHttpResponseHandler() {
 
                         @Override
                         public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
@@ -133,7 +140,7 @@ public class ActiveRecord {
         else {
             AsyncHttpClient client = new AsyncHttpClient();
             char lastChar = className.charAt(className.length() - 1);
-            client.get("http://10.0.3.2:3000/api/" + className.toLowerCase() + (lastChar == 's' ? "/" : "s/") + Integer.toString(id), new JsonHttpResponseHandler() {
+            client.get(serverLink + className.toLowerCase() + (lastChar == 's' ? "/" : "s/") + Integer.toString(id), new JsonHttpResponseHandler() {
 
                 @Override
                 public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
@@ -188,7 +195,7 @@ public class ActiveRecord {
                 public void onJSONResponse(boolean success, JSONObject response, RequestParams params) throws JSONException, UnsupportedEncodingException, NoSuchAlgorithmException {
                     ActiveRecord.secureCase(currentUser, params, response.getString("key"));
                     AsyncHttpClient client = new AsyncHttpClient();
-                    client.get("http://10.0.3.2:3000/api/" + finalLinkParam, new JsonHttpResponseHandler() {
+                    client.get(serverLink + finalLinkParam, new JsonHttpResponseHandler() {
                         @Override
                         public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                             try {
@@ -219,7 +226,7 @@ public class ActiveRecord {
         }
         else {
             AsyncHttpClient client = new AsyncHttpClient();
-            client.get("http://10.0.3.2:3000/api/" + linkParam, new JsonHttpResponseHandler() {
+            client.get(serverLink + linkParam, new JsonHttpResponseHandler() {
                 @Override
                 public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                     try {
@@ -266,7 +273,7 @@ public class ActiveRecord {
                     AsyncHttpClient client = new AsyncHttpClient();
 
                     char lastChar = className.charAt(className.length() - 1);
-                    client.post("http://10.0.3.2:3000/api/" + className.toLowerCase() + (lastChar == 's' ? "/save" : "s/save"), params, new JsonHttpResponseHandler() {
+                    client.post(serverLink + className.toLowerCase() + (lastChar == 's' ? "/save" : "s/save"), params, new JsonHttpResponseHandler() {
                         @Override
                         public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                             //Log.v("JSON", response.toString());
@@ -295,6 +302,7 @@ public class ActiveRecord {
                         @Override
                         public void onFailure(int statusCode, Header[] headers, Throwable e, JSONObject response) {
                             Log.v("FAIL", response.toString());
+                            Log.v("FAIL", e.toString());
                         }
                     });
                 }
@@ -303,7 +311,7 @@ public class ActiveRecord {
         else {
             AsyncHttpClient client = new AsyncHttpClient();
             char lastChar = className.charAt(className.length() - 1);
-            client.post("http://10.0.3.2:3000/api/" + className.toLowerCase() + (lastChar == 's' ? "/save" : "s/save"), params, new JsonHttpResponseHandler() {
+            client.post(serverLink + className.toLowerCase() + (lastChar == 's' ? "/save" : "s/save"), params, new JsonHttpResponseHandler() {
                 @Override
                 public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                     //Log.v("JSON", response.toString());
@@ -355,7 +363,7 @@ public class ActiveRecord {
                 AsyncHttpClient client = new AsyncHttpClient();
 
                 char lastChar = className.charAt(className.length() - 1);
-                client.post("http://10.0.3.2:3000/api/" + className.toLowerCase() + (lastChar == 's' ? "/update" : "s/update"), params, new JsonHttpResponseHandler() {
+                client.post(serverLink + className.toLowerCase() + (lastChar == 's' ? "/update" : "s/update"), params, new JsonHttpResponseHandler() {
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                         Log.v("JSON", response.toString());
@@ -399,16 +407,25 @@ public class ActiveRecord {
                 AsyncHttpClient client = new AsyncHttpClient();
                 params.put("id", id);
                 char lastChar = className.charAt(className.length() - 1);
-                client.get("http://10.0.3.2:3000/api/" + className.toLowerCase() + (lastChar == 's' ? "/destroy" : "s/destroy"), params, new JsonHttpResponseHandler() {
+                client.get(serverLink + className.toLowerCase() + (lastChar == 's' ? "/destroy" : "s/destroy"), params, new JsonHttpResponseHandler() {
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                         Log.v("JSON DESTROY", response.toString());
-                        /*
-                            final Class<?> classT = Class.forName("com.soonzik.soonzik." + className);
-                            JSONObject obj = response.getJSONObject("content");
 
-                            callback.onJSONResponse(true, obj, classT);
-                         */
+                        try {
+                            callback.onJSONResponse(true, null, null);
+                        } catch (NoSuchMethodException e) {
+                            e.printStackTrace();
+                        } catch (InstantiationException e) {
+                            e.printStackTrace();
+                        } catch (IllegalAccessException e) {
+                            e.printStackTrace();
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        } catch (InvocationTargetException e) {
+                            e.printStackTrace();
+                        }
+
                     }
 
                     @Override
@@ -441,7 +458,7 @@ public class ActiveRecord {
             params.put("type", type);
         }
 
-        client.get("http://10.0.3.2:3000/api/" + "search", params, new JsonHttpResponseHandler() {
+        client.get(serverLink + "search", params, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 Log.v("JSON search", response.toString());
@@ -484,7 +501,7 @@ public class ActiveRecord {
                 ActiveRecord.secureCase(currentUser, params, response.getString("key"));
                 AsyncHttpClient client = new AsyncHttpClient();
 
-                client.get("http://10.0.3.2:3000/api/" + "suggest", params, new JsonHttpResponseHandler() {
+                client.get(serverLink + "suggest", params, new JsonHttpResponseHandler() {
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                         Log.v("JSON SUGGEST", response.toString());
@@ -530,16 +547,30 @@ public class ActiveRecord {
                 AsyncHttpClient client = new AsyncHttpClient();
                 char lastChar = className.charAt(className.length() - 1);
 
-                client.post("http://10.0.3.2:3000/api/" + className.toLowerCase() + (lastChar == 's' ? "/addcomment/" : "s/addcomment/") + Integer.toString(id), params, new JsonHttpResponseHandler() {
+                client.post(serverLink + className.toLowerCase() + (lastChar == 's' ? "/addcomment/" : "s/addcomment/") + Integer.toString(id), params, new JsonHttpResponseHandler() {
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                         Log.v("JSON ADDCOMMENT", response.toString());
-                        /*
-                            final Class<?> classT = Class.forName("com.soonzik.soonzik." + className);
+
+                        try {
+                            Class<?> classT = Class.forName("com.soonzik.soonzik.Commentary");
                             JSONObject obj = response.getJSONObject("content");
 
                             callback.onJSONResponse(true, obj, classT);
-                         */
+                        } catch (ClassNotFoundException e) {
+                            e.printStackTrace();
+                        } catch (NoSuchMethodException e) {
+                            e.printStackTrace();
+                        } catch (InstantiationException e) {
+                            e.printStackTrace();
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        } catch (IllegalAccessException e) {
+                            e.printStackTrace();
+                        } catch (InvocationTargetException e) {
+                            e.printStackTrace();
+                        }
+
                     }
 
                     @Override
@@ -566,7 +597,7 @@ public class ActiveRecord {
         }
 
         char lastChar = className.charAt(className.length() - 1);
-        client.get("http://10.0.3.2:3000/api/" + className.toLowerCase() + (lastChar == 's' ? "" : "s/") + Integer.toString(id) + "/comments", params, new JsonHttpResponseHandler() {
+        client.get(serverLink + className.toLowerCase() + (lastChar == 's' ? "" : "s/") + Integer.toString(id) + "/comments", params, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 try {
@@ -604,7 +635,7 @@ public class ActiveRecord {
         params.put("email", email);
         params.put("password", password/*hashed*/);
 
-        client.post("http://10.0.3.2:3000/api/login", params, new JsonHttpResponseHandler() {
+        client.post(serverLink + "login", params, new JsonHttpResponseHandler() {
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 try {
                     final Class<?> classT = Class.forName("com.soonzik.soonzik.User");
@@ -677,4 +708,7 @@ public class ActiveRecord {
         currentUser = _currentUser;
     }
 
+    public void setDispatcher(WebSocketRailsDispatcher dispatcher) {
+        this.dispatcher = dispatcher;
+    }
 }

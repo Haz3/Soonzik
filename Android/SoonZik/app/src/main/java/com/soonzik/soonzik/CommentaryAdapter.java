@@ -65,4 +65,8 @@ public class CommentaryAdapter extends ArrayAdapter<Object> {
 
         return rowView;
     }
+
+    public void updateData(Object newData) {
+        this.values.add(newData);
+    }
 }

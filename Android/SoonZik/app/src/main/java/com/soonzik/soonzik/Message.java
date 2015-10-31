@@ -30,6 +30,12 @@ public class Message extends ActiveRecord {
         super.createInstance(this, json, this.getClass());
     }
 
+    public Message(String message, int destination_id, int source_id) {
+        msg = message;
+        dest_id = destination_id;
+        user_id = source_id;
+    }
+
     @Override
     public String toString() {
         return (
@@ -50,7 +56,7 @@ public class Message extends ActiveRecord {
                 ActiveRecord.secureCase(currentUser, params, response.getString("key"));
                 AsyncHttpClient client = new AsyncHttpClient();
 
-                client.get("http://10.0.3.2:3000/api/messages/conversation/" + Integer.toString(userId), params, new JsonHttpResponseHandler() {
+                client.get(ActiveRecord.serverLink + "messages/conversation/" + Integer.toString(userId), params, new JsonHttpResponseHandler() {
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                         Log.v("JSON", response.toString());

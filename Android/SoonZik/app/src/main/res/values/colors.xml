@@ -8,4 +8,6 @@
     <color name="tabs_search">#FF0000</color>
     <color name="tabs_pack">#0000FF</color>
     <color name="tabs_artist">#FA58D0</color>
+    <color name="yellow_message">#FFFF00</color>
+    <color name="green_message">#40FF00</color>
 </resources>
