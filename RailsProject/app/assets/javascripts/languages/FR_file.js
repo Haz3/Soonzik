@@ -36,8 +36,10 @@ var labels = {
 	DISPLAY_MENU_SIGNUP_LABEL: "Inscription",
 	DISPLAY_MENU_LOGIN_LABEL: "Connexion",
 	DISPLAY_MENU_LOGOUT_LABEL: "Déconnexion",
-	DISPLAY_MENU_LANGUAGE_SELECTOR_LABEL: "Languages",	// To add
 	DISPLAY_MENU_SEARCH_PLACEHOLDER: "Chercher des utilisateurs, musiques, albums...",
+
+	// Header Controller
+	FILE_MENU_LANGUAGE_ERROR_LABEL: "Une erreur s'est produite lors du changement de langue",
 
 	// Album Controller
 	FILE_ALBUM_ADD_ALBUM_MESSAGE: "L'album a bien été ajouté au panier",
@@ -304,6 +306,23 @@ var labels = {
 	FILE_DISCOTHEQUE_GET_NOTES_ERROR_MESSAGE: "Une erreur s'est produite à la récupération des notes",
 	FILE_DISCOTHEQUE_GET_MUSICS_ERROR_MESSAGE: "Une erreur s'est produite au chargement de vos musiques",
 
+	// User signup view
+	DISPLAY_SIGNUP_SIGNUP_LABEL: "Inscription",
+	DISPLAY_SIGNUP_PUBLIC_INFO_LABEL: "Informations publiques",
+	DISPLAY_SIGNUP_PERSO_INFO_LABEL: "Informations personnelles",
+	DISPLAY_SIGNUP_USERNAME_LABEL: "Pseudonyme *",
+	DISPLAY_SIGNUP_DESCRIPTION_LABEL: "Description",
+	DISPLAY_SIGNUP_BIRTHDAY_LABEL: "Date de naissance *",
+	DISPLAY_SIGNUP_FACEBOOK_LABEL: "Facebook",
+	DISPLAY_SIGNUP_TWITTER_LABEL: "Twitter",
+	DISPLAY_SIGNUP_GPLUS_LABEL: "Google Plus",
+	DISPLAY_SIGNUP_FIRSTNAME_LABEL: "Prénom *",
+	DISPLAY_SIGNUP_LASTNAME_LABEL: "Nom *",
+	DISPLAY_SIGNUP_PASSWORD_LABEL: "Mot de passe *",
+	DISPLAY_SIGNUP_EMAIL_LABEL: "Email *",
+	DISPLAY_SIGNUP_PHONE_LABEL: "Numéro de téléphone",
+	DISPLAY_SIGNUP_NEWSLETTER_LABEL: "Newsletter",
+
   // Cart view
   DISPLAY_CART_INDEX: "Panier",
   DISPLAY_CART_BUY: "Ajouter au panier",
@@ -374,4 +393,17 @@ var labels = {
   FILE_INDEX_PROFILE_LOAD_ERROR_MESSAGE: "Une erreur s'est produite lors du chargement du profil de l'artiste",
   FILE_INDEX_FLUX_LOAD_ERROR_MESSAGE: "Une erreur s'est produite lors du chargement de votre flux",
   FILE_INDEX_SUGGESTION_LOAD_ERROR_MESSAGE: "Une erreur s'est produite lors du chargement des suggestions personnalisées",
+
+  // Sign in View
+  DISPLAY_SIGNIN_MAIL_PLACEHOLDER: "Adresse email",
+  DISPLAY_SIGNIN_PASSWORD_PLACEHOLDER: "Mot de passe",
+  DISPLAY_SIGNIN_REMEMBER_LABEL: "Se souvenir de moi",
+  DISPLAY_SIGNIN_PASSWORD_FORGOTTEN_LABEL: "Mot de passe oublié ?",
+  DISPLAY_SIGNIN_SIGNIN_LABEL: "Se connecter",
+  DISPLAY_SIGNIN_NOT_SIGNUP_LABEL: "Pas encore inscrit ?",
+  DISPLAY_SIGNIN_SIGNUP_LABEL: "S'inscrire",
+  DISPLAY_SIGNIN_CONFIRM_NOT_RECEIVED_LABEL: "Confirmation de compte non reçus ?",
+  DISPLAY_SIGNIN_SEND_LABEL: "Envoyer",
+  DISPLAY_SIGNIN_NEWPASSWORD_LABEL: "Nouveau mot de passe",
+  DISPLAY_SIGNIN_CONFIRM_NEWPASSWORD_LABEL: "Confirmez le nouveau mot de passe",
 }

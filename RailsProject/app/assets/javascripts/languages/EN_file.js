@@ -36,8 +36,10 @@ var labels = {
 	DISPLAY_MENU_SIGNUP_LABEL: "Sign up",
 	DISPLAY_MENU_LOGIN_LABEL: "Login",
 	DISPLAY_MENU_LOGOUT_LABEL: "Log out",
-	DISPLAY_MENU_LANGUAGE_SELECTOR_LABEL: "Languages",	// To add
 	DISPLAY_MENU_SEARCH_PLACEHOLDER: "Search users, musics, albums...",
+
+	// Header Controller
+	FILE_MENU_LANGUAGE_ERROR_LABEL: "Error while changing the language",
 
 	// Album Controller
 	FILE_ALBUM_ADD_ALBUM_MESSAGE: "Album successfuly adding into the cart",
@@ -307,6 +309,9 @@ var labels = {
 	FILE_DISCOTHEQUE_GET_MUSICS_ERROR_MESSAGE: "An error occured while getting your musics",
 
 	// User signup view
+	DISPLAY_SIGNUP_SIGNUP_LABEL: "Sign up",
+	DISPLAY_SIGNUP_PUBLIC_INFO_LABEL: "Public informations",
+	DISPLAY_SIGNUP_PERSO_INFO_LABEL: "Personal informations",
 	DISPLAY_SIGNUP_USERNAME_LABEL: "Username *",
 	DISPLAY_SIGNUP_DESCRIPTION_LABEL: "Description",
 	DISPLAY_SIGNUP_BIRTHDAY_LABEL: "Birthday *",
@@ -390,4 +395,17 @@ var labels = {
   FILE_INDEX_PROFILE_LOAD_ERROR_MESSAGE: "An error occured while loading the profile of an artist",
   FILE_INDEX_FLUX_LOAD_ERROR_MESSAGE: "An error occured while loading your activities",
   FILE_INDEX_SUGGESTION_LOAD_ERROR_MESSAGE: "An error occured while loading your suggestions",
+
+  // Sign in View
+  DISPLAY_SIGNIN_MAIL_PLACEHOLDER: "Email address",
+  DISPLAY_SIGNIN_PASSWORD_PLACEHOLDER: "Password",
+  DISPLAY_SIGNIN_REMEMBER_LABEL: "Remember me",
+  DISPLAY_SIGNIN_PASSWORD_FORGOTTEN_LABEL: "Password forgotten ?",
+  DISPLAY_SIGNIN_SIGNIN_LABEL: "Sign in",
+  DISPLAY_SIGNIN_NOT_SIGNUP_LABEL: "Not registered ?",
+  DISPLAY_SIGNIN_SIGNUP_LABEL: "Sign up",
+  DISPLAY_SIGNIN_CONFIRM_NOT_RECEIVED_LABEL: "Account confirmation not received ?",
+  DISPLAY_SIGNIN_SEND_LABEL: "Send",
+  DISPLAY_SIGNIN_NEWPASSWORD_LABEL: "New password",
+  DISPLAY_SIGNIN_CONFIRM_NEWPASSWORD_LABEL: "Confirm new password",
 }

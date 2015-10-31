@@ -20,7 +20,8 @@ class FeedbacksController < ApplicationController
 		@selectedObject = [
 			["Bug on the website", "bug"],
 			["Payment issue", "payment"],
-			["Account issue", "account"]
+			["Account issue", "account"],
+			["Other", "other"]
 		]
 	end
 end
