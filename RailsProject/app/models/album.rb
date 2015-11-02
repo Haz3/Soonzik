@@ -51,6 +51,11 @@ class Album < ActiveRecord::Base
     [:id, :title, :price, :image, :yearProd]
   end
 
+  # To join tables in sql query
+  def self.sql_join
+    self.joins('LEFT OUTER JOIN "users" ON "users"."id" = "albums"."user_id" LEFT OUTER JOIN "musics" ON "musics"."album_id" = "albums"."id" LEFT OUTER JOIN "albums_descriptions" ON "albums_descriptions"."album_id" = "albums"."id" LEFT OUTER JOIN "descriptions" ON "descriptions"."id" = "albums_descriptions"."description_id"')
+  end
+
   # Get the average of notes
   def getAverageNote
     notes = 0

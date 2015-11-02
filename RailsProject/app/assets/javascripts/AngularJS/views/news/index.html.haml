@@ -1,22 +1,20 @@
-.news{ "ng-init" => "showNews()" }
+.indexNews{ "ng-init" => "initIndexNews()" }
   %loading{ "ng-if" => "loading == true" }
-  .row{ "ng-if" => "loading == false", "ng-init" => "initNews()"}
-    %h3.subheader
-      {{ labels.DISPLAY_NEWS_LABEL }}
-    .ul.small-11.small-centered.columns{"ng-show" => "News"}
-      %li{ "ng-repeat" => "new in news"}
-        .panel.radius
-          .title
-            %h5.subheader.text-center
-              %a{:href=>"http://lvh.me:3000/news/" + "{{new.id}}" }
-                {{ new.title }}
-          .small-12.small-centered.columns.vignette{"ng-repeat" => "url in new.attachments" }
-            %a{:href=>"/news/" + "{{new.id}}" }
-              %img{"ng-src" => "{{ '/assets/news/' + url.url }}"}
-          .content
-            %p.black
-              {{ new.content }}
-          .right
-            %a{:href=>"/news/" + "{{new.id}}" } {{ labels.DISPLAY_NEWS_SHOW_MORE }}
-        %loading{ "loading-type" => "'square'", "ng-show" => "commentLoading == true" }
-
+  .clearfix{ "ng-if" => "loading == false" }
+    %h2 {{ labels.DISPLAY_NEWS_LABEL }}
+    .small-11.small-centered.columns
+      .newsItem{ "ng-repeat" => "new in news"}
+        .panel.radius.clearfix
+          .contentNewsContainer.clearfix
+            .small-12.columns.medium-6.large-8.columns.left
+              .title.text-center
+                %a{:href=>"http://lvh.me:3000/news/" + "{{new.id}}" }
+                  {{ new.title }}
+            .illustration.small-12.medium-6.large-4.columns.right{"ng-repeat" => "url in new.attachments|limitTo:2" }
+              %a{:href=>"/news/" + "{{new.id}}" }
+                %img{"ng-src" => "{{ '/assets/news/' + url.url }}"}
+            .small-12.columns.medium-6.large-8.columns.left
+              .contentNews
+                {{ new.content }}
+              %a.linkNews{:href=>"/news/" + "{{new.id}}" } {{ labels.DISPLAY_NEWS_SHOW_MORE }}
+// Need pagination

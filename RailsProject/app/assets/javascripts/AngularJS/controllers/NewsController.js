@@ -3,19 +3,19 @@ SoonzikApp.controller('NewsCtrl', ['$scope', '$routeParams', 'SecureAuth', 'HTTP
 	$scope.loading = true;
 
 	$scope.news = [];
-	$scope.newsLoading = false;
-	$scope.newsOffset = 0;
+	$scope.index = {
+		currentPage: 1
+	};
 
-	$scope.commentariesOffset = 0;
-	$scope.commentaries = [];
+	$scope.resourcesCommentaries = [];
 	$scope.commentLoading = false;
 	$scope.commentary = { 
 		content : ""
 	};
 
-	$scope.initFoundation = function () {
-		$(document).foundation();
-
+	$scope.initIndexNews = function() {
+		$scope.index.currentPage = (toInt($routeParams.page) == 0 ? 1 : toInt($routeParams.page));
+		$scope.loadNews();
 	}
 
 	$scope.initOneNews = function() {
@@ -23,53 +23,42 @@ SoonzikApp.controller('NewsCtrl', ['$scope', '$routeParams', 'SecureAuth', 'HTTP
 
 		// Share Twitter
 		!function(d,s,id)
-            {
-              var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';
-              if(!d.getElementById(id)){
-                js=d.createElement(s);
-                js.id=id;
-                js.src=p+'://platform.twitter.com/widgets.js';
-                fjs.parentNode.insertBefore(js,fjs);
-              }
-            }(document, 'script', 'twitter-wjs');
+    {
+      var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';
+      if(!d.getElementById(id)){
+        js=d.createElement(s);
+        js.id=id;
+        js.src=p+'://platform.twitter.com/widgets.js';
+        fjs.parentNode.insertBefore(js,fjs);
+      }
+    }(document, 'script', 'twitter-wjs');
 
-        // Share Google Plus 
-      	(function() {
-      		var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
-	        po.src = 'https://apis.google.com/js/client:plusone.js';
-	        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
-	    })();
-
+    // Share Google Plus 
+  	(function() {
+  		var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+      po.src = 'https://apis.google.com/js/client:plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+    })();
 	}
 
-	$scope.initNews = function() {
-		$scope.initFoundation();
-		
-		$(window).scroll(function() {
-			if($(window).scrollTop() + $(window).height() == $(document).height() && $scope.newsLoading == false) {
-				$scope.$apply(function() {
-					$scope.newsLoading = true;
-					$scope.showNews();
-				});
-			}
-		});
-	}
-
-	$scope.showNews = function() {
+	$scope.loadNews = function() {
+		$scope.loading = true;
 		var parameters = [
 			{ key: "order_by_desc[]", value: "created_at"},
-  			{ key: "offset", value: $scope.newsOffset },
+  			{ key: "offset", value: ($scope.index.currentPage - 1) * 20 },
   			{ key: "limit", value: 20 }
 		];
 
-		$scope.News = true;
-
 		HTTPService.findNews(parameters).then(function(response) {
-			
-			$scope.news = $scope.news.concat(response.data.content);
-			$scope.newsOffset = $scope.news.length;
-			$scope.newsLoading = false;
+			$scope.news = response.data.content;
 
+			for (var indexNews in $scope.news) {
+				if ($scope.news[indexNews].content.length > 170) {
+					$scope.news[indexNews].content = $scope.news[indexNews].content.substr(0, 170) + "...";
+				}
+			}
+
+			$scope.loading = false;
 		}, function (error) {
 			NotificationService.error($rootScope.labels.FILE_NEWS_LOAD_ERROR_MESSAGE);
 		})
@@ -106,7 +95,7 @@ SoonzikApp.controller('NewsCtrl', ['$scope', '$routeParams', 'SecureAuth', 'HTTP
 	$scope.showComments = function() {
 
 		var parameters = [
-			{ key: "offset", value: $scope.commentaries.length },
+			{ key: "offset", value: $scope.resourcesCommentaries.length },
 			{ key: "limit", value: 20 },
 			{ key: "order_reverse", value: true }
   	];
@@ -115,7 +104,7 @@ SoonzikApp.controller('NewsCtrl', ['$scope', '$routeParams', 'SecureAuth', 'HTTP
 		
 		HTTPService.showComment(newsId, parameters).then(function(response) {
 
-			$scope.commentaries = $scope.commentaries.concat(response.data.content);
+			$scope.resourcesCommentaries = $scope.resourcesCommentaries.concat(response.data.content);
 
 			$scope.commentLoading = false;
   		
@@ -134,7 +123,7 @@ SoonzikApp.controller('NewsCtrl', ['$scope', '$routeParams', 'SecureAuth', 'HTTP
 
 			HTTPService.addComment($routeParams.id, parameters).then(function(response) {
 
-				$scope.commentaries.unshift(response.data.content);
+				$scope.resourcesCommentaries.unshift(response.data.content);
 				$scope.commentary.content = "";
 
 			}, function(error) {
@@ -145,6 +134,27 @@ SoonzikApp.controller('NewsCtrl', ['$scope', '$routeParams', 'SecureAuth', 'HTTP
 		});
 	}
 
-	$scope.loading = false;
+	/* Utils function */
+
+	$scope.range = function(n) {
+  	return new Array(n);
+  }
+
+  $scope.min = function(a, b) {
+  	return (a < b ? a : b);
+  }
+
+  $scope.max = function(a, b) {
+  	return (a > b ? a : b);
+  }
+
+	var toInt = function(value) {
+		var number = parseInt(value);
+		if (isNaN(number)) {
+			return 0;
+		} else {
+			return number;
+		}
+	}
 
 }]);

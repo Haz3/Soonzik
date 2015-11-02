@@ -30,6 +30,20 @@ module API
         if (@count.present? && @count == "true")
           @returnValue = { content: Album.count }
         else
+=begin
+          @returnValue = {
+            content: Album.select(Tool::select_join(albums: Album.miniKey + [:user_id], musics: Music.miniKey + [:album_id], descriptions: Description.miniKey))
+                          .sql_join
+                          .all.as_json(:only => Album.miniKey, :include => {
+                                                        :user => { :only => User.miniKey },
+                                                        :musics => {
+                                                          :only => Music.miniKey,
+                                                          methods: :getAverageNote
+                                                        },
+                                                        descriptions: {  :only => Description.miniKey }
+                                                      },
+                                                      methods: :getAverageNote) }
+=end
           @returnValue = { content: Album.eager_load([:user, :musics, :descriptions]).all.as_json(:only => Album.miniKey, :include => {
                                                         :user => { :only => User.miniKey },
                                                         :musics => {
@@ -46,6 +60,7 @@ module API
           codeAnswer 200
         end
       rescue
+        puts $!, $@
         codeAnswer 504
         defineHttp :service_unavailable
       end

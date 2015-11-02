@@ -51,16 +51,5 @@
 				%textarea{ "ng-model" => "comment.value" }
 				.text-right
 					%span.button{ "ng-click" => "sendComment()" } {{ labels.DISPLAY_ALBUM_SEND_COMMENT_BUTTON }}
-				.comments
-					.comment.clearfix{ "ng-repeat" => "commentary in commentaries" }
-						%hr
-						.small-2.columns.text-center
-							%a{ href: "/users/{{commentary.user.id}}" }
-								%img{ "ng-src" => '{{ "/assets/usersImage/avatars/" + commentary.user.image }}' }
-								%p {{ commentary.user.username }}
-						.small-10.columns
-							%p {{ commentary.content }}
-							.text-right.dateTime {{ commentary.created_at }}
-					%hr
-					.loadingOffset
-						%loading{ "loading-type" => "'square'", "ng-show" => "commentLoading == true" }
+		.commentariesContainer{ "ng-include" => "'/assets/AngularJS/views/commentaries/index.html.haml'" }
+		%loading{ "loading-type" => "'square'", "ng-show" => "commentLoading == true" }

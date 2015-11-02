@@ -406,4 +406,8 @@ var labels = {
   DISPLAY_SIGNIN_SEND_LABEL: "Envoyer",
   DISPLAY_SIGNIN_NEWPASSWORD_LABEL: "Nouveau mot de passe",
   DISPLAY_SIGNIN_CONFIRM_NEWPASSWORD_LABEL: "Confirmez le nouveau mot de passe",
+
+  // Commentaries view
+  DISPLAY_COMMENTARY_TITLE_LABEL: "Commentaires",
+  DISPLAY_NO_COMMENTARY_LABEL: "Aucun commentaires",
 }

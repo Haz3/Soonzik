@@ -408,4 +408,8 @@ var labels = {
   DISPLAY_SIGNIN_SEND_LABEL: "Send",
   DISPLAY_SIGNIN_NEWPASSWORD_LABEL: "New password",
   DISPLAY_SIGNIN_CONFIRM_NEWPASSWORD_LABEL: "Confirm new password",
+
+  // Commentaries view
+  DISPLAY_COMMENTARY_TITLE_LABEL: "Commentaries",
+  DISPLAY_NO_COMMENTARY_LABEL: "No commentaries",
 }

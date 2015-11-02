@@ -7,7 +7,7 @@ SoonzikApp.controller('AlbumsCtrl', ['$scope', "$routeParams", 'SecureAuth', 'HT
 	$scope.myPlaylists = [];
 
 	$scope.commentariesOffset = 0;
-	$scope.commentaries = [];
+	$scope.resourcesCommentaries = [];
 	$scope.commentLoading = true;
 	$scope.comment = {
 		value: ""
@@ -236,8 +236,8 @@ SoonzikApp.controller('AlbumsCtrl', ['$scope', "$routeParams", 'SecureAuth', 'HT
   		{ key: "limit", value: 20 }
   	];
   	HTTPService.getAlbumComments($scope.album.id, params).then(function(response) {
-  		$scope.commentaries = $scope.commentaries.concat(response.data.content);
-  		$scope.commentariesOffset = $scope.commentaries.length;
+  		$scope.resourcesCommentaries = $scope.resourcesCommentaries.concat(response.data.content);
+  		$scope.commentariesOffset = $scope.resourcesCommentaries.length;
 			$scope.commentLoading = false;
   	}, function(error) {
   		NotificationService.error($rootScope.labels.FILE_ALBUM_LOAD_COMMENT_ERROR_MESSAGE);
@@ -249,7 +249,7 @@ SoonzikApp.controller('AlbumsCtrl', ['$scope', "$routeParams", 'SecureAuth', 'HT
 			var parameters = { secureKey: key, user_id: user_id, content: $scope.comment.value };
 			
 			HTTPService.addAlbumComment($scope.album.id, parameters).then(function(response) {
-				$scope.commentaries.unshift(response.data.content);
+				$scope.resourcesCommentaries.unshift(response.data.content);
 				$scope.commentariesOffset++;
 				$scope.comment.value = "";
 			}, function (responseError) {

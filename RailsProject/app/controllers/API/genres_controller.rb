@@ -23,7 +23,7 @@ module API
         if (@count.present? && @count == "true")
           @returnValue = { content: Genre.count }
         else
-          @returnValue = { content: Genre.eager_load(:influence).all.as_json(:include => {
+          @returnValue = { content: Genre.eager_load(:influences).all.as_json(:include => {
                                                         :influences => { :only => Influence.miniKey }
                                                     }, :only => Genre.miniKey) }
         end
