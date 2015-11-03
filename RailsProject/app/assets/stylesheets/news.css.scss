@@ -53,5 +53,20 @@
 }
 
 .showNews {
+	.panel {
+		padding: 0 0 1.25rem 0;
 
+		h3 {
+			height: 40px;
+			background: #008CBA;
+			font-family: "Lato";
+			font-weight: bold;
+			ul li { color: white; line-height: 40px; }
+		}
+
+		.contentNews {
+			padding: 10px 15px;
+			color: #006A8D;
+		}
+	}
 }

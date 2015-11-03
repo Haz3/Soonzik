@@ -51,5 +51,5 @@
 				%textarea{ "ng-model" => "comment.value" }
 				.text-right
 					%span.button{ "ng-click" => "sendComment()" } {{ labels.DISPLAY_ALBUM_SEND_COMMENT_BUTTON }}
-		.commentariesContainer{ "ng-include" => "'/assets/AngularJS/views/commentaries/index.html.haml'" }
+		.commentariesContainer{ "ng-include" => "'/assets/AngularJS/views/include/commentaries.html.haml'" }
 		%loading{ "loading-type" => "'square'", "ng-show" => "commentLoading == true" }

@@ -2,25 +2,74 @@ SoonzikApp.controller('NewsCtrl', ['$scope', '$routeParams', 'SecureAuth', 'HTTP
 
 	$scope.loading = true;
 
-	$scope.news = [];
+	// For the pagination
 	$scope.index = {
-		currentPage: 1
+		currentPage: 1,
+		totalPage: 1,
+		resources: [],
+		resourceName: "news"
 	};
 
 	$scope.resourcesCommentaries = [];
 	$scope.commentLoading = false;
-	$scope.commentary = { 
-		content : ""
+	$scope.show = {
+		news: null,
+		contentCommentary : ""
 	};
 
 	$scope.initIndexNews = function() {
-		$scope.index.currentPage = (toInt($routeParams.page) == 0 ? 1 : toInt($routeParams.page));
-		$scope.loadNews();
+		$scope.index.currentPage = ($rootScope.toInt($routeParams.page) == 0 ? 1 : $rootScope.toInt($routeParams.page));
+		var parameters = [
+			{ key: "order_by_desc[]", value: "created_at" },
+  		{ key: "offset", value: ($scope.index.currentPage - 1) * 20 },
+  		{ key: "limit", value: 20 }
+		];
+
+		HTTPService.findNews(parameters).then(function(response) {
+			$scope.index.resources = response.data.content;
+
+			for (var indexNews in $scope.index.resources) {
+				if ($scope.index.resources[indexNews].content.length > 170) {
+					$scope.index.resources[indexNews].content = $scope.index.resources[indexNews].content.substr(0, 170) + "...";
+				}
+			}
+
+			$scope.index.totalPage = Math.floor($scope.index.resources.length / 20 + 1);
+
+			$scope.loading = false;
+		}, function (error) {
+			NotificationService.error($rootScope.labels.FILE_NEWS_LOAD_ERROR_MESSAGE);
+		});
 	}
 
-	$scope.initOneNews = function() {
-		$scope.initFoundation();
+	$scope.initShowNews = function() {
+		var newsId = $routeParams.id;
 
+		HTTPService.showNews(newsId).then(function(response) {
+			$scope.show.news = response.data.content;
+			$scope.showComments();
+
+			$(window).scroll(function() {
+				if($(window).scrollTop() + $(window).height() == $(document).height() && $scope.newsLoading == false) {
+					$scope.$apply(function() {
+						$scope.newsLoading = true;
+						$scope.showComments();
+					});
+				}
+			});
+
+			$scope.loading = false;
+		}, function (error) {
+			NotificationService.error($rootScope.labels.FILE_NEWS_ONE_NEWS_ERROR_MESSAGE);
+		});
+	}
+
+	/*
+	 *
+	 * Because we need the DOM
+	 * 
+	 */
+	$scope.initSocialAPI = function() {
 		// Share Twitter
 		!function(d,s,id)
     {
@@ -41,76 +90,19 @@ SoonzikApp.controller('NewsCtrl', ['$scope', '$routeParams', 'SecureAuth', 'HTTP
     })();
 	}
 
-	$scope.loadNews = function() {
-		$scope.loading = true;
-		var parameters = [
-			{ key: "order_by_desc[]", value: "created_at"},
-  			{ key: "offset", value: ($scope.index.currentPage - 1) * 20 },
-  			{ key: "limit", value: 20 }
-		];
-
-		HTTPService.findNews(parameters).then(function(response) {
-			$scope.news = response.data.content;
-
-			for (var indexNews in $scope.news) {
-				if ($scope.news[indexNews].content.length > 170) {
-					$scope.news[indexNews].content = $scope.news[indexNews].content.substr(0, 170) + "...";
-				}
-			}
-
-			$scope.loading = false;
-		}, function (error) {
-			NotificationService.error($rootScope.labels.FILE_NEWS_LOAD_ERROR_MESSAGE);
-		})
-	}
-
-	$scope.showNewsById = function() {
-
-		var newsId = $routeParams.id;
-
-		HTTPService.showNews(newsId).then(function(response) {
-
-			$scope.thisNews = response.data.content;
-			$scope.attachments = $scope.thisNews.attachments;
-			$scope.author = $scope.thisNews.user;
-			$scope.showComments();
-
-		$(window).scroll(function() {
-			if($(window).scrollTop() + $(window).height() == $(document).height() && $scope.newsLoading == false) {
-				$scope.$apply(function() {
-					$scope.newsLoading = true;
-					$scope.showComments();
-				});
-			}
-		});
-
-		}, function (error) {
-			NotificationService.error($rootScope.labels.FILE_NEWS_ONE_NEWS_ERROR_MESSAGE);
-		});
-
-		$scope.thisNewsId = true;
-
-	}
-
 	$scope.showComments = function() {
-
 		var parameters = [
 			{ key: "offset", value: $scope.resourcesCommentaries.length },
 			{ key: "limit", value: 20 },
 			{ key: "order_reverse", value: true }
   	];
 
-  	var newsId = $routeParams.id;
-		
-		HTTPService.showComment(newsId, parameters).then(function(response) {
-
+		HTTPService.showComment($scope.show.news.id, parameters).then(function(response) {
 			$scope.resourcesCommentaries = $scope.resourcesCommentaries.concat(response.data.content);
-
 			$scope.commentLoading = false;
-  		
-  		}, function(error) {
-  			NotificationService.error($rootScope.labels.FILE_NEWS_LOAD_COMMENT_ERROR_MESSAGE);
-  		});
+		}, function(error) {
+			NotificationService.error($rootScope.labels.FILE_NEWS_LOAD_COMMENT_ERROR_MESSAGE);
+		});
 	}
 
 	$scope.postComment = function() {
@@ -118,13 +110,13 @@ SoonzikApp.controller('NewsCtrl', ['$scope', '$routeParams', 'SecureAuth', 'HTTP
 			var parameters =
 		  		{	secureKey: key,
 			  		user_id: id,
-			  		content: $scope.commentary.content
+			  		content: $scope.show.contentCommentary
 			  	};
 
-			HTTPService.addComment($routeParams.id, parameters).then(function(response) {
+			HTTPService.addComment($scope.show.news.id, parameters).then(function(response) {
 
 				$scope.resourcesCommentaries.unshift(response.data.content);
-				$scope.commentary.content = "";
+				$scope.show.contentCommentary = "";
 
 			}, function(error) {
 				NotificationService.error($rootScope.labels.FILE_NEWS_SEND_COMMENT_ERROR_MESSAGE);
@@ -132,29 +124,6 @@ SoonzikApp.controller('NewsCtrl', ['$scope', '$routeParams', 'SecureAuth', 'HTTP
 		}, function(error) {
 			NotificationService.error($rootScope.labels.FILE_NEWS_SEND_COMMENT_ERROR_MESSAGE);
 		});
-	}
-
-	/* Utils function */
-
-	$scope.range = function(n) {
-  	return new Array(n);
-  }
-
-  $scope.min = function(a, b) {
-  	return (a < b ? a : b);
-  }
-
-  $scope.max = function(a, b) {
-  	return (a > b ? a : b);
-  }
-
-	var toInt = function(value) {
-		var number = parseInt(value);
-		if (isNaN(number)) {
-			return 0;
-		} else {
-			return number;
-		}
 	}
 
 }]);

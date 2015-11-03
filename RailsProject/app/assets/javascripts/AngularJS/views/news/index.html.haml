@@ -3,13 +3,14 @@
   .clearfix{ "ng-if" => "loading == false" }
     %h2 {{ labels.DISPLAY_NEWS_LABEL }}
     .small-11.small-centered.columns
-      .newsItem{ "ng-repeat" => "new in news"}
+      .newsItem{ "ng-repeat" => "new in index.resources"}
         .panel.radius.clearfix
           .contentNewsContainer.clearfix
             .small-12.columns.medium-6.large-8.columns.left
               .title.text-center
                 %a{:href=>"http://lvh.me:3000/news/" + "{{new.id}}" }
                   {{ new.title }}
+              %hr
             .illustration.small-12.medium-6.large-4.columns.right{"ng-repeat" => "url in new.attachments|limitTo:2" }
               %a{:href=>"/news/" + "{{new.id}}" }
                 %img{"ng-src" => "{{ '/assets/news/' + url.url }}"}
@@ -17,4 +18,4 @@
               .contentNews
                 {{ new.content }}
               %a.linkNews{:href=>"/news/" + "{{new.id}}" } {{ labels.DISPLAY_NEWS_SHOW_MORE }}
-// Need pagination
+      %div{ "ng-include" => "'/assets/AngularJS/views/include/pagination.html.haml'" }

@@ -118,6 +118,30 @@ SoonzikApp.run(['$route', '$rootScope', '$location', function ($route, $rootScop
 	};
 
 	$rootScope.labels = labels;
+
+	$rootScope.range = function(n) {
+		if (Math.floor(n) > 0)
+	  	return new Array(Math.floor(n));
+	  else
+	  	return [];
+  }
+
+  $rootScope.min = function(a, b) {
+  	return (a < b ? a : b);
+  }
+
+  $rootScope.max = function(a, b) {
+  	return (a > b ? a : b);
+  }
+
+	$rootScope.toInt = function(value) {
+		var number = parseInt(value);
+		if (isNaN(number)) {
+			return 0;
+		} else {
+			return number;
+		}
+	}
 }]);
 
 SoonzikApp.config(function(FacebookProvider) {
