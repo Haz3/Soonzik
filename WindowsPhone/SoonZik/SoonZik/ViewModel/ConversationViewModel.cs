@@ -5,14 +5,18 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Windows.ApplicationModel.Core;
+using Windows.Data.Json;
 using Windows.Networking.Sockets;
 using Windows.Storage.Streams;
 using Windows.UI.Core;
+using Windows.UI.Popups;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using Newtonsoft.Json;
 using SoonZik.Helpers;
 using SoonZik.HttpRequest;
 using SoonZik.HttpRequest.Poco;
+using WebSocketRails;
 
 namespace SoonZik.ViewModel
 {
@@ -180,7 +184,6 @@ namespace SoonZik.ViewModel
 
         private async void ConnectSocket()
         {
-            //WebSocketRailsDispatcher dispatcher = new WebSocketRailsDispatcher(new Uri("ws://soonzikapi.herokuapp.com/websocket"));
 
             var request = new HttpRequestGet();
             var userKey = request.GetUserKey(Singleton.Singleton.Instance().CurrentUser.id.ToString());
@@ -190,30 +193,30 @@ namespace SoonZik.ViewModel
                 if (_key != null)
                 {
                     var stringEncrypt = KeyHelpers.GetUserKeyFromResponse(_key);
-                    _cryptographic =
-                        EncriptSha256.EncriptStringToSha256(Singleton.Singleton.Instance().CurrentUser.salt +
-                                                            stringEncrypt);
+                    _cryptographic = EncriptSha256.EncriptStringToSha256(Singleton.Singleton.Instance().CurrentUser.salt + stringEncrypt);
+
+                    var init = new InitConnection
+                    {
+                        sercureKey = _cryptographic,
+                        user_id = Singleton.Singleton.Instance().CurrentUser.id
+                    };
+
+                    var dispatcher = new WebSocketRailsDispatcher(new Uri("ws://soonzikapi.herokuapp.com/websocket", UriKind.RelativeOrAbsolute));
+                    var json = JsonConvert.SerializeObject(init);
+                    dispatcher.ConnectionEstablished(init);
+                    //trigger
+                    dispatcher.Trigger("init_connection", init);
+                    dispatcher.Trigger("who_is_online", init);
+
+                    //Bind
+                    dispatcher.Bind("onlineFriends", OnlineFriend);
+                    dispatcher.Bind("newMsg", MessageReceived);
                 }
             });
 
-            var init = new InitConnection
-            {
-                Crypto = _cryptographic,
-                UserId = Singleton.Singleton.Instance().CurrentUser.id
-            };
+                #region Test Avant
 
-
-            //trigger
-            //dispatcher.Trigger("init_connection", init);
-            //dispatcher.Trigger("who-is-online", init);
-
-            //Bind
-            //dispatcher.Bind("newMsg", MessageReceived);
-            //dispatcher.Bind("onlineFriends", OnlineFriend);
-
-            #region Test Avant
-
-            try
+            /*try
             {
                 webSocket = new MessageWebSocket();
 
@@ -230,34 +233,19 @@ namespace SoonZik.ViewModel
             catch (Exception e)
             {
                 var status = WebSocketError.GetStatus(e.GetBaseException().HResult);
-            }
+            }*/
 
             #endregion
         }
 
-        //private void OnlineFriend(object sender, WebSocketRailsDataEventArgs e)
-        //{
-        //    int i = 0;
-        //}
-
-        private void Closed(IWebSocket sender, WebSocketClosedEventArgs args)
+        private void MessageReceived(object sender, WebSocketRailsDataEventArgs e)
         {
-            // You can add code to log or display the code and reason
-            // for the closure (stored in args.Code and args.Reason)
-
-            // This is invoked on another thread so use Interlocked 
-            // to avoid races with the Start/Close/Reset methods.
-            var webSocket = Interlocked.Exchange(ref messageWebSocket, null);
-            if (webSocket != null)
-            {
-                webSocket.Dispose();
-            }
+            int i = 0;
         }
 
-        private void MessageReceived(MessageWebSocket socket, MessageWebSocketMessageReceivedEventArgs args)
+        private void OnlineFriend(object sender, WebSocketRailsDataEventArgs e)
         {
-            var i = 0;
-
+            int i = 0;
             #region toas
 
             //var toastType = ToastTemplateType.ToastText02;
@@ -277,6 +265,14 @@ namespace SoonZik.ViewModel
             #endregion
         }
 
+        private void Closed(IWebSocket sender, WebSocketClosedEventArgs args)
+        {
+            // You can add code to log or display the code and reason
+            // for the closure (stored in args.Code and args.Reason)
+
+            // This is invoked on another thread so use Interlocked 
+            // to avoid races with the Start/Close/Reset methods.
+        }
         #endregion
     }
 }

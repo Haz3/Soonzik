@@ -6,7 +6,6 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:local="using:SoonZik.ViewModel"
     xmlns:view="using:SoonZik.Views"
-    xmlns:utils="using:SoonZik.Utils"
     mc:Ignorable="d"
     xmlns:controls="using:SoonZik.Controls"
     xmlns:converters="using:Coding4Fun.Toolkit.Controls.Converters"

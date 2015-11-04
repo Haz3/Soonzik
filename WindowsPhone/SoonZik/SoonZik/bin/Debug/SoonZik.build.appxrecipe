@@ -31,15 +31,6 @@
     <AppxPackagedFile Include="C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\packages\Coding4Fun.Toolkit.Controls.2.1.0\lib\wpa81\Coding4Fun.Toolkit.Controls.dll">
       <PackagePath>Coding4Fun.Toolkit.Controls.dll</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\packages\Coding4Fun.Toolkit.Controls.2.1.0\lib\wpa81\Coding4Fun.Toolkit.dll">
-      <PackagePath>Coding4Fun.Toolkit.dll</PackagePath>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\packages\Coding4Fun.Toolkit.Storage.2.0.8\lib\wpa81\Coding4Fun.Toolkit.Storage.dll">
-      <PackagePath>Coding4Fun.Toolkit.Storage.dll</PackagePath>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\packages\Facebook.Client.0.9.1-alpha\lib\portable-win81+wpa81\Facebook.Client.dll">
-      <PackagePath>Facebook.Client.dll</PackagePath>
-    </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\packages\Facebook.6.8.0\lib\portable-win81+wpa81\Facebook.dll">
       <PackagePath>Facebook.dll</PackagePath>
     </AppxPackagedFile>
@@ -58,12 +49,6 @@
     <AppxPackagedFile Include="C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\packages\CommonServiceLocator.1.3\lib\portable-net4+sl5+netcore45+wpa81+wp8\Microsoft.Practices.ServiceLocation.dll">
       <PackagePath>Microsoft.Practices.ServiceLocation.dll</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\packages\Microsoft.Bcl.Async.1.0.168\lib\wpa81\Microsoft.Threading.Tasks.dll">
-      <PackagePath>Microsoft.Threading.Tasks.dll</PackagePath>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\packages\Microsoft.Bcl.Async.1.0.168\lib\wpa81\Microsoft.Threading.Tasks.Extensions.dll">
-      <PackagePath>Microsoft.Threading.Tasks.Extensions.dll</PackagePath>
-    </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\packages\Newtonsoft.Json.7.0.1\lib\portable-net40+sl5+wp80+win8+wpa81\Newtonsoft.Json.dll">
       <PackagePath>Newtonsoft.Json.dll</PackagePath>
     </AppxPackagedFile>
@@ -76,32 +61,17 @@
     <AppxPackagedFile Include="C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik.Singleton\bin\Debug\SoonZik.Singleton.dll">
       <PackagePath>SoonZik.Singleton.dll</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\packages\Microsoft.Net.Http.2.2.29\lib\wpa81\System.Net.Http.Extensions.dll">
-      <PackagePath>System.Net.Http.Extensions.dll</PackagePath>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\packages\Microsoft.Net.Http.2.2.29\lib\wpa81\System.Net.Http.Primitives.dll">
-      <PackagePath>System.Net.Http.Primitives.dll</PackagePath>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\packages\Rx-Core.2.2.5\lib\portable-win81+wpa81\System.Reactive.Core.dll">
-      <PackagePath>System.Reactive.Core.dll</PackagePath>
-    </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\packages\Rx-Interfaces.2.2.5\lib\portable-win81+wpa81\System.Reactive.Interfaces.dll">
       <PackagePath>System.Reactive.Interfaces.dll</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\packages\Rx-Linq.2.2.5\lib\portable-win81+wpa81\System.Reactive.Linq.dll">
-      <PackagePath>System.Reactive.Linq.dll</PackagePath>
+    <AppxPackagedFile Include="C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\WebSocketRails-WP-master\WebSocketRails-WP\Bin\Debug\WebSocketRails.dll">
+      <PackagePath>WebSocketRails.dll</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\packages\Rx-PlatformServices.2.2.5\lib\portable-win81+wpa81\System.Reactive.PlatformServices.dll">
-      <PackagePath>System.Reactive.PlatformServices.dll</PackagePath>
+    <AppxPackagedFile Include="C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\packages\Coding4Fun.Toolkit.Controls.2.1.0\lib\wpa81\Coding4Fun.Toolkit.dll">
+      <PackagePath>Coding4Fun.Toolkit.dll</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\packages\Zlib.Portable.Signed.1.11.0\lib\portable-net4+sl5+wp8+win8+wpa81+MonoTouch+MonoAndroid\Zlib.Portable.dll">
-      <PackagePath>Zlib.Portable.dll</PackagePath>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik.BackgroundAudioTask\bin\Debug\SoonZik.BackgroundAudioTask.winmd">
-      <PackagePath>SoonZik.BackgroundAudioTask.winmd</PackagePath>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik.MyPlaylistManager\bin\Debug\SoonZik.MyPlaylistManager.winmd">
-      <PackagePath>SoonZik.MyPlaylistManager.winmd</PackagePath>
+    <AppxPackagedFile Include="C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\WebSocketRails-WP-master\WebSocketRails-WP\Bin\Debug\WebSocket4Net.dll">
+      <PackagePath>WebSocket4Net.dll</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\Assets\BadgeLogo.scale-240.png">
       <PackagePath>Assets\BadgeLogo.scale-240.png</PackagePath>
@@ -445,36 +415,6 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\packages\Coding4Fun.Toolkit.Controls.2.1.0\lib\wpa81\Coding4Fun.Toolkit.Controls\Themes\Generic.xbf">
       <PackagePath>Coding4Fun.Toolkit.Controls\Themes\Generic.xbf</PackagePath>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\packages\Facebook.Client.0.9.1-alpha\lib\portable-win81+wpa81\Facebook.Client\Facebook.Client.xr.xml">
-      <PackagePath>Facebook.Client\Facebook.Client.xr.xml</PackagePath>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\packages\Facebook.Client.0.9.1-alpha\lib\portable-win81+wpa81\Facebook.Client\FacebookDialogPage.xbf">
-      <PackagePath>Facebook.Client\FacebookDialogPage.xbf</PackagePath>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\packages\Facebook.Client.0.9.1-alpha\lib\portable-win81+wpa81\Facebook.Client\Controls\FriendPicker\FriendPicker.xbf">
-      <PackagePath>Facebook.Client\Controls\FriendPicker\FriendPicker.xbf</PackagePath>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\packages\Facebook.Client.0.9.1-alpha\lib\portable-win81+wpa81\Facebook.Client\Controls\LoginButton\LoginButton.xbf">
-      <PackagePath>Facebook.Client\Controls\LoginButton\LoginButton.xbf</PackagePath>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\packages\Facebook.Client.0.9.1-alpha\lib\portable-win81+wpa81\Facebook.Client\Controls\PlacePicker\PlacePicker.xbf">
-      <PackagePath>Facebook.Client\Controls\PlacePicker\PlacePicker.xbf</PackagePath>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\packages\Facebook.Client.0.9.1-alpha\lib\portable-win81+wpa81\Facebook.Client\Controls\ProfilePicture\ProfilePicture.xbf">
-      <PackagePath>Facebook.Client\Controls\ProfilePicture\ProfilePicture.xbf</PackagePath>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\packages\Facebook.Client.0.9.1-alpha\lib\portable-win81+wpa81\Facebook.Client\Images\fb_blank_place_profile_square.png">
-      <PackagePath>Facebook.Client\Images\fb_blank_place_profile_square.png</PackagePath>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\packages\Facebook.Client.0.9.1-alpha\lib\portable-win81+wpa81\Facebook.Client\Images\fb_blank_profile_portrait.png">
-      <PackagePath>Facebook.Client\Images\fb_blank_profile_portrait.png</PackagePath>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\packages\Facebook.Client.0.9.1-alpha\lib\portable-win81+wpa81\Facebook.Client\Images\fb_blank_profile_square.png">
-      <PackagePath>Facebook.Client\Images\fb_blank_profile_square.png</PackagePath>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\packages\Facebook.Client.0.9.1-alpha\lib\portable-win81+wpa81\Facebook.Client\Themes\Generic.xbf">
-      <PackagePath>Facebook.Client\Themes\Generic.xbf</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\packages\JISoft.Rating.1.0.3\lib\portable-wpa81+win81\JRatingControl\JRatingControl.xr.xml">
       <PackagePath>JRatingControl\JRatingControl.xr.xml</PackagePath>
