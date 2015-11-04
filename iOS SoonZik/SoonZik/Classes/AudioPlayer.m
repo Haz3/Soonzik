@@ -50,24 +50,19 @@ static AudioPlayer *sharedInstance = nil;
     NSString *secureKey = [Crypto sha256HashFor:conca];
     NSString *url = [NSString stringWithFormat:@"%@musics/get/%i?user_id=%i&secureKey=%@", API_URL, identifier, user.identifier, secureKey];
     
- //   NSLog(@"url of the music : %@", url);
-    //NSURL *nurl = [NSURL URLWithString:url];
-    
-    
-    
     self.audioPlayer = [[AVPlayer alloc] initWithURL:[NSURL URLWithString:url]];
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(playerItemDidReachEnd:)
                                                  name:AVPlayerItemDidPlayToEndTimeNotification
                                                object:[self.audioPlayer currentItem]];
     [self.audioPlayer addObserver:self forKeyPath:@"status" options:0 context:nil];
- //   [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(updateProgress:) userInfo:nil repeats:YES];
 }
 
 - (void)deleteCurrentPlayer {
-    @try{
+    @try {
         [self.audioPlayer removeObserver:self forKeyPath:@"status"];
-    }@catch(id anException){
+    }
+    @catch (id anException) {
         //do nothing, obviously it wasn't attached because an exception was thrown
     }
 }
@@ -81,10 +76,8 @@ static AudioPlayer *sharedInstance = nil;
             
         } else if (self.audioPlayer.status == AVPlayerStatusReadyToPlay) {
             NSLog(@"AVPlayerStatusReadyToPlay");
-           // if (self.currentlyPlaying) {
-                [self.audioPlayer play];
+            [self.audioPlayer play];
             self.currentlyPlaying = true;
-            //}
             
         } else if (self.audioPlayer.status == AVPlayerItemStatusUnknown) {
             NSLog(@"AVPlayer Unknown");
@@ -141,7 +134,7 @@ static AudioPlayer *sharedInstance = nil;
 - (void)stopSound
 {
     [self.audioPlayer pause];
-    [self.audioPlayer seekToTime:CMTimeMake(0, 0)];
+    //[self.audioPlayer seekToTime:CMTimeMake(0, 0)];
     
     self.currentlyPlaying = NO;
 }

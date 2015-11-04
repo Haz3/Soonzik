@@ -34,6 +34,8 @@
     self.player = [AudioPlayer sharedCenter];
     self.player.finishDelegate = self;
     
+    self.scrollView.userInteractionEnabled = false;
+    
     if (self.player.listeningList.count == 0)
     {
         [self.player prepareSong:0];
@@ -98,33 +100,38 @@
     self.scrollView.contentSize = CGSizeMake(contentOffset, self.scrollView.frame.size.height);
     self.scrollView.contentOffset = CGPointMake((contentOffset / self.player.listeningList.count) * self.indexOfPage, 0);
     
-    [self loadPictures];
+    [self loadPictureAtIndexOfPage:self.indexOfPage];
 }
 
-- (void)loadPictures {
+- (void)loadPictureAtIndexOfPage:(int)page {
     float imageWith = self.view.frame.size.width;
     float imageEcart = 0;
     
-    for (int i = 0; i < self.player.listeningList.count; i++) {
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT,0),  ^{
-            //this block runs on a background thread; Do heavy operation here
-            UIImageView *imgV = [[UIImageView alloc] initWithFrame:CGRectMake(i * imageWith + imageEcart * (i * 2 + 1), self.scrollView.frame.origin.y, imageWith, imageWith)];
-            Music *music = [self.player.listeningList objectAtIndex:i];
-            NSString *urlImage = [NSString stringWithFormat:@"%@assets/albums/%@", API_URL, music.albumImage];
-            NSData *imageData = [[NSData alloc] initWithContentsOfURL: [NSURL URLWithString: urlImage]];
-            
-            [self.scrollView addSubview:imgV];
-            
-            dispatch_async(dispatch_get_main_queue(), ^{
-                //This block runs on main thread, so update UI
-                imgV.image = [UIImage imageWithData:imageData];
-                NSLog(@"image loaded");
-            });
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT,0),  ^{
+        //this block runs on a background thread; Do heavy operation here
+        UIActivityIndicatorView *activity = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
+        activity.frame = CGRectMake(page * imageWith + imageEcart * (page * 2 + 1), self.scrollView.frame.origin.y, imageWith, imageWith);
+        [self.scrollView addSubview:activity];
+        [activity startAnimating];
+
+        UIImageView *imgV = [[UIImageView alloc] initWithFrame:CGRectMake(page * imageWith + imageEcart * (page * 2 + 1), self.scrollView.frame.origin.y, imageWith, imageWith)];
+        Music *music = [self.player.listeningList objectAtIndex:page];
+        NSString *urlImage = [NSString stringWithFormat:@"%@assets/albums/%@", API_URL, music.albumImage];
+        NSData *imageData = [[NSData alloc] initWithContentsOfURL: [NSURL URLWithString: urlImage]];
+        
+        [self.scrollView addSubview:imgV];
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            //This block runs on main thread, so update UI
+            imgV.image = [UIImage imageWithData:imageData];
+            NSLog(@"image loaded");
+            [activity stopAnimating];
+            [activity removeFromSuperview];
         });
-    }
+    });
 }
 
-- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
+/*- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
 {
     self.indexOfPage = scrollView.contentOffset.x / scrollView.frame.size.width;
     
@@ -135,7 +142,7 @@
     [self.player prepareSong:music.identifier];
 
     [self.player playSound];
-}
+}*/
 
 - (void)closePlayerViewController
 {
@@ -219,6 +226,8 @@
     [self.player previous];
     self.indexOfPage = self.player.index;
     [self.scrollView setContentOffset:CGPointMake(self.indexOfPage*self.scrollView.frame.size.width, 0) animated:YES];
+    
+    [self loadPictureAtIndexOfPage:self.indexOfPage];
 }
 
 - (IBAction)next:(id)sender
@@ -226,6 +235,8 @@
     [self.player next];
     self.indexOfPage = self.player.index;
     [self.scrollView setContentOffset:CGPointMake(self.indexOfPage*self.scrollView.frame.size.width, 0) animated:YES];
+    
+    [self loadPictureAtIndexOfPage:self.indexOfPage];
 }
 
 - (void)playerHasFinishedToPlay

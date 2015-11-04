@@ -25,6 +25,7 @@
 #import "IdenticationsController.h"
 #import "Socket.h"
 #import "PayPalMobile.h"
+#import "MenuTableViewCell.h"
 
 @interface AppDelegate() <PKRevealing, UITableViewDataSource, UITableViewDelegate, SearchElementInterface>
 
@@ -176,6 +177,8 @@
         tableView.bounces = true;
         tableView;
     });
+    
+    [tableView registerNib:[UINib nibWithNibName:@"MenuTableViewCell" bundle:nil] forCellReuseIdentifier:@"cell"];
     [leftViewController.view addSubview:tableView];
     
     UIImageView *logoView = [[UIImageView alloc] initWithFrame:CGRectMake(10, 40, 150, 42)];
@@ -342,19 +345,9 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *cellIdentifier = @"Cell";
+    static NSString *cellIdentifier = @"cell";
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-    
-    if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
-        cell.backgroundColor = [UIColor clearColor];
-        cell.textLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:21];
-        cell.textLabel.textColor = [UIColor whiteColor];
-        cell.textLabel.highlightedTextColor = [UIColor lightGrayColor];
-        cell.selectedBackgroundView = [[UIView alloc] init];
-        cell.textLabel.textAlignment = NSTextAlignmentLeft;
-    }
+    MenuTableViewCell *cell = (MenuTableViewCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     
     NSArray *listOftitles = @[[self.translate.dict objectForKey:@"menu_news"],
                               [self.translate.dict objectForKey:@"menu_explore"],
@@ -366,24 +359,9 @@
                               [self.translate.dict objectForKey:@"menu_cart"],
                               [self.translate.dict objectForKey:@"menu_account"], @"Contact us"];
     
-   NSLog(@"titles : %@", listOftitles[indexPath.row]);
-    cell.textLabel.text = listOftitles[indexPath.row];
-    
-    /*if (indexPath.row == 8) {
-        NSString *urlImage = [NSString stringWithFormat:@"%@assets/usersImage/avatars/%@", API_URL, self.user.image];
-        NSData * imageData = [[NSData alloc] initWithContentsOfURL: [NSURL URLWithString: urlImage]];
-       cell.imageView.image = [Tools imageWithImage:[UIImage imageWithData:imageData] scaledToSize:CGSizeMake(40, 40)];
-        cell.imageView.layer.cornerRadius = 19;
-        cell.imageView.layer.borderWidth = 1;
-        cell.imageView.layer.borderColor = [UIColor whiteColor].CGColor;
-        cell.imageView.layer.masksToBounds = true;
-    } else {
-        //cell.imageView.image = [SVGKImage imageNamed:[listOfImages objectAtIndex:indexPath.row]].UIImage;
-         NSLog(@"ok");
-    }*/
+    cell.lbl.text = listOftitles[indexPath.row];
     return cell;
 }
-
 
 
 /****

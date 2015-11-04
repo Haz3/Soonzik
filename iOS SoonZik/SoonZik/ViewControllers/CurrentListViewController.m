@@ -104,11 +104,12 @@
     if (self.player.index != indexPath.row) {
         Music *music = [self.player.listeningList objectAtIndex:indexPath.row];
         [tableView deselectRowAtIndexPath:indexPath animated:YES];
- //       [self.player pauseSound];
+        [self.player stopSound];
+        [self.player deleteCurrentPlayer];
         [self.player prepareSong:music.identifier];
         self.player.oldIndex = self.player.index;
         self.player.index = indexPath.row;
- //       [self.player playSound];
+        [self.player playSound];
         [self deselectAllTheRows];
         PlayListsCells *cell = (PlayListsCells *)[tableView cellForRowAtIndexPath:indexPath];
         [cell setSelected:YES animated:YES];
@@ -206,7 +207,8 @@
 - (void)deleteFromCurrentList:(Music *)music {
     Music *m = [self.player.listeningList objectAtIndex:self.player.index];
     if (m.identifier == music.identifier) {
- //       [self.player pauseSound];
+       [self.player stopSound];
+        [self.player deleteCurrentPlayer];
         self.player.oldIndex = 0;
         self.player.index = -20;
     }

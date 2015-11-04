@@ -33,6 +33,8 @@
 		ED081E8D1AA40D47002F5C32 /* dot.svg in Resources */ = {isa = PBXBuildFile; fileRef = ED081E8C1AA40D47002F5C32 /* dot.svg */; };
 		ED0A1A0F1B945B74004FE237 /* TweetCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = ED0A1A0D1B945B74004FE237 /* TweetCollectionViewCell.m */; };
 		ED0A1A101B945B74004FE237 /* TweetCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = ED0A1A0E1B945B74004FE237 /* TweetCollectionViewCell.xib */; };
+		ED1753021BE61E0500542D81 /* MenuTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = ED1753011BE61E0500542D81 /* MenuTableViewCell.m */; };
+		ED1753041BE61F7800542D81 /* MenuTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = ED1753031BE61F7800542D81 /* MenuTableViewCell.xib */; };
 		ED1C612B1B066B8D00E09287 /* SimplePopUp.m in Sources */ = {isa = PBXBuildFile; fileRef = ED1C612A1B066B8D00E09287 /* SimplePopUp.m */; };
 		ED1C612D1B0678FD00E09287 /* check_white.svg in Resources */ = {isa = PBXBuildFile; fileRef = ED1C612C1B0678FD00E09287 /* check_white.svg */; };
 		ED2D2FC61B95C90D006F5165 /* ConcertsController.m in Sources */ = {isa = PBXBuildFile; fileRef = ED2D2FC51B95C90D006F5165 /* ConcertsController.m */; };
@@ -416,6 +418,9 @@
 		ED0A1A0C1B945B74004FE237 /* TweetCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TweetCollectionViewCell.h; sourceTree = "<group>"; };
 		ED0A1A0D1B945B74004FE237 /* TweetCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TweetCollectionViewCell.m; sourceTree = "<group>"; };
 		ED0A1A0E1B945B74004FE237 /* TweetCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TweetCollectionViewCell.xib; sourceTree = "<group>"; };
+		ED1753001BE61E0500542D81 /* MenuTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuTableViewCell.h; sourceTree = "<group>"; };
+		ED1753011BE61E0500542D81 /* MenuTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuTableViewCell.m; sourceTree = "<group>"; };
+		ED1753031BE61F7800542D81 /* MenuTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MenuTableViewCell.xib; sourceTree = "<group>"; };
 		ED1C61291B066B8D00E09287 /* SimplePopUp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimplePopUp.h; sourceTree = "<group>"; };
 		ED1C612A1B066B8D00E09287 /* SimplePopUp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimplePopUp.m; sourceTree = "<group>"; };
 		ED1C612C1B0678FD00E09287 /* check_white.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = check_white.svg; sourceTree = "<group>"; };
@@ -1720,6 +1725,9 @@
 				ED627D961BE0D6DA00DA1B0C /* PlayerCollectionViewCell.h */,
 				ED627D971BE0D6DA00DA1B0C /* PlayerCollectionViewCell.m */,
 				ED627D981BE0D6DA00DA1B0C /* PlayerCollectionViewCell.xib */,
+				ED1753001BE61E0500542D81 /* MenuTableViewCell.h */,
+				ED1753011BE61E0500542D81 /* MenuTableViewCell.m */,
+				ED1753031BE61F7800542D81 /* MenuTableViewCell.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -2357,6 +2365,7 @@
 				EDEDEC091AA15B8D0024CF38 /* OnLTMusicPopupView.xib in Resources */,
 				ED2E2ACC1B2D1A8B00D2D922 /* GooglePlus.bundle in Resources */,
 				EDEDEC151AA15B8D0024CF38 /* TitleSongPreview.xib in Resources */,
+				ED1753041BE61F7800542D81 /* MenuTableViewCell.xib in Resources */,
 				EDEDEBAD1AA15B5C0024CF38 /* SearchViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2486,6 +2495,7 @@
 				ED627D991BE0D6DA00DA1B0C /* PlayerCollectionViewCell.m in Sources */,
 				ED717AB71B0BD327003CAA0D /* DetailNewsViewController.m in Sources */,
 				ED0A1A0F1B945B74004FE237 /* TweetCollectionViewCell.m in Sources */,
+				ED1753021BE61E0500542D81 /* MenuTableViewCell.m in Sources */,
 				EDA977C61B3B85E90056EC75 /* PKLog.m in Sources */,
 				EDA978171B3B97190056EC75 /* Attachment.m in Sources */,
 				EDEDED7C1AA15C5D0024CF38 /* SWLongPressGestureRecognizer.m in Sources */,
