@@ -1,32 +1,20 @@
 <XamlCompilerSaveState>
   <ReferenceAssemblyList>
-    <LocalAssembly PathName="c:\users\gery\documents\github\soonzik\windowsphone\soonzik\soonzik\obj\debug\intermediatexaml\soonzik.exe" HashGuid="e943e6bc-777b-160f-a37d-f44e2195bbca" />
+    <LocalAssembly PathName="c:\users\gery\documents\github\soonzik\windowsphone\soonzik\soonzik\obj\debug\intermediatexaml\soonzik.exe" HashGuid="64eabcdb-d906-fc0c-b924-609672161dc9" />
     <ReferenceAssembly PathName="c:\program files (x86)\microsoft sdks\windowsphoneapp\v8.1\extensionsdks\behaviorsxamlsdkmanaged\12.0\references\commonconfiguration\neutral\microsoft.xaml.interactions.dll" HashGuid="95a94f94-3917-d473-4f7c-18c4bd437046" />
     <ReferenceAssembly PathName="c:\program files (x86)\microsoft sdks\windowsphoneapp\v8.1\extensionsdks\behaviorsxamlsdkmanaged\12.0\references\commonconfiguration\neutral\microsoft.xaml.interactivity.dll" HashGuid="d25f59e6-dd81-900a-0dfc-55b39f6898ef" />
     <ReferenceAssembly PathName="c:\users\gery\documents\github\soonzik\windowsphone\soonzik\packages\coding4fun.toolkit.controls.2.1.0\lib\wpa81\coding4fun.toolkit.controls.dll" HashGuid="21a915fd-eec9-e7f8-8a81-6938e33d1e8f" />
-    <ReferenceAssembly PathName="c:\users\gery\documents\github\soonzik\windowsphone\soonzik\packages\coding4fun.toolkit.controls.2.1.0\lib\wpa81\coding4fun.toolkit.dll" HashGuid="63c5f85e-39ba-9cf8-2429-552f57eb5034" />
-    <ReferenceAssembly PathName="c:\users\gery\documents\github\soonzik\windowsphone\soonzik\packages\coding4fun.toolkit.storage.2.0.8\lib\wpa81\coding4fun.toolkit.storage.dll" HashGuid="10e1cfdd-97fb-256e-c050-81891682f11a" />
-    <ReferenceAssembly PathName="c:\users\gery\documents\github\soonzik\windowsphone\soonzik\packages\facebook.client.0.9.1-alpha\lib\portable-win81+wpa81\facebook.client.dll" HashGuid="aeda242f-e768-3f5a-2625-7b5fdf37a42e" />
     <ReferenceAssembly PathName="c:\users\gery\documents\github\soonzik\windowsphone\soonzik\packages\facebook.6.8.0\lib\portable-win81+wpa81\facebook.dll" HashGuid="bedf50c2-16f9-eaae-1bc4-d838270a0113" />
     <ReferenceAssembly PathName="c:\users\gery\documents\github\soonzik\windowsphone\soonzik\packages\mvvmlightlibs.5.1.1.0\lib\wpa81\galasoft.mvvmlight.dll" HashGuid="d702f8e6-9904-1220-8de7-be8614bf93e8" />
     <ReferenceAssembly PathName="c:\users\gery\documents\github\soonzik\windowsphone\soonzik\packages\mvvmlightlibs.5.1.1.0\lib\wpa81\galasoft.mvvmlight.extras.dll" HashGuid="f59e2cac-89a1-06f4-bbe7-18857251ef78" />
     <ReferenceAssembly PathName="c:\users\gery\documents\github\soonzik\windowsphone\soonzik\packages\mvvmlightlibs.5.1.1.0\lib\wpa81\galasoft.mvvmlight.platform.dll" HashGuid="27c4f135-c15f-18a2-cb9f-847748d33bdb" />
     <ReferenceAssembly PathName="c:\users\gery\documents\github\soonzik\windowsphone\soonzik\packages\jisoft.rating.1.0.3\lib\portable-wpa81+win81\jratingcontrol.dll" HashGuid="404d1537-603d-fde1-aa59-115669ee8e27" />
     <ReferenceAssembly PathName="c:\users\gery\documents\github\soonzik\windowsphone\soonzik\packages\commonservicelocator.1.3\lib\portable-net4+sl5+netcore45+wpa81+wp8\microsoft.practices.servicelocation.dll" HashGuid="89de7f80-26d8-a17c-5ad9-b855f81ea5b2" />
-    <ReferenceAssembly PathName="c:\users\gery\documents\github\soonzik\windowsphone\soonzik\packages\microsoft.bcl.async.1.0.168\lib\wpa81\microsoft.threading.tasks.dll" HashGuid="3a1beea5-1547-d5c6-af32-3b5c761c2a6a" />
-    <ReferenceAssembly PathName="c:\users\gery\documents\github\soonzik\windowsphone\soonzik\packages\microsoft.bcl.async.1.0.168\lib\wpa81\microsoft.threading.tasks.extensions.dll" HashGuid="79a01987-c06c-c9d7-37eb-629809787680" />
     <ReferenceAssembly PathName="c:\users\gery\documents\github\soonzik\windowsphone\soonzik\packages\newtonsoft.json.7.0.1\lib\portable-net40+sl5+wp80+win8+wpa81\newtonsoft.json.dll" HashGuid="0b4cdfc1-2257-2e75-23cf-4052e97b309e" />
-    <ReferenceAssembly PathName="c:\users\gery\documents\github\soonzik\windowsphone\soonzik\soonzik.backgroundaudiotask\bin\debug\soonzik.backgroundaudiotask.winmd" HashGuid="9532822a-839a-3f5d-38f3-ad026f5ad3e4" />
-    <ReferenceAssembly PathName="c:\users\gery\documents\github\soonzik\windowsphone\soonzik\soonzik.helpers\bin\debug\soonzik.helpers.dll" HashGuid="cc7870f2-30cd-084b-2be9-ac8612feaaa8" />
-    <ReferenceAssembly PathName="c:\users\gery\documents\github\soonzik\windowsphone\soonzik\soonzik.httprequest\bin\debug\soonzik.httprequest.dll" HashGuid="5781fc0d-a7fb-5b5e-6a41-1310d5416329" />
-    <ReferenceAssembly PathName="c:\users\gery\documents\github\soonzik\windowsphone\soonzik\soonzik.myplaylistmanager\bin\debug\soonzik.myplaylistmanager.winmd" HashGuid="84ef09e7-f9cf-b722-4179-6bc795564f95" />
+    <ReferenceAssembly PathName="c:\users\gery\documents\github\soonzik\windowsphone\soonzik\soonzik.helpers\bin\debug\soonzik.helpers.dll" HashGuid="a2454971-ba79-f3ee-ba4f-5c15d266cae9" />
+    <ReferenceAssembly PathName="c:\users\gery\documents\github\soonzik\windowsphone\soonzik\soonzik.httprequest\bin\debug\soonzik.httprequest.dll" HashGuid="65990843-5942-55fc-39e1-404c34e373db" />
     <ReferenceAssembly PathName="c:\users\gery\documents\github\soonzik\windowsphone\soonzik\soonzik.singleton\bin\debug\soonzik.singleton.dll" HashGuid="71173b62-4e7d-0346-3c01-a800cefaf7c4" />
-    <ReferenceAssembly PathName="c:\users\gery\documents\github\soonzik\windowsphone\soonzik\packages\microsoft.net.http.2.2.29\lib\wpa81\system.net.http.extensions.dll" HashGuid="794366f8-cc6d-f0fa-3d07-33b45136e193" />
-    <ReferenceAssembly PathName="c:\users\gery\documents\github\soonzik\windowsphone\soonzik\packages\microsoft.net.http.2.2.29\lib\wpa81\system.net.http.primitives.dll" HashGuid="7b71418d-e056-7613-c839-85fb8f6472a6" />
-    <ReferenceAssembly PathName="c:\users\gery\documents\github\soonzik\windowsphone\soonzik\packages\rx-core.2.2.5\lib\portable-win81+wpa81\system.reactive.core.dll" HashGuid="e88ff990-7aa8-b77f-93a1-598ee1f64e5f" />
     <ReferenceAssembly PathName="c:\users\gery\documents\github\soonzik\windowsphone\soonzik\packages\rx-interfaces.2.2.5\lib\portable-win81+wpa81\system.reactive.interfaces.dll" HashGuid="2fd855ee-8440-f81f-a427-ceb8eb15ce8f" />
-    <ReferenceAssembly PathName="c:\users\gery\documents\github\soonzik\windowsphone\soonzik\packages\rx-linq.2.2.5\lib\portable-win81+wpa81\system.reactive.linq.dll" HashGuid="415e3b50-c164-f753-1f27-a0a2efe20748" />
-    <ReferenceAssembly PathName="c:\users\gery\documents\github\soonzik\windowsphone\soonzik\packages\rx-platformservices.2.2.5\lib\portable-win81+wpa81\system.reactive.platformservices.dll" HashGuid="af6ba9ad-5f77-bdaa-1d18-22248e6f3c99" />
-    <ReferenceAssembly PathName="c:\users\gery\documents\github\soonzik\windowsphone\soonzik\packages\zlib.portable.signed.1.11.0\lib\portable-net4+sl5+wp8+win8+wpa81+monotouch+monoandroid\zlib.portable.dll" HashGuid="d82003a1-a222-b48a-0b13-6d66e945ee8a" />
+    <ReferenceAssembly PathName="c:\users\gery\documents\github\soonzik\windowsphone\soonzik\websocketrails-wp-master\websocketrails-wp\bin\debug\websocketrails.dll" HashGuid="9933d1db-222e-8909-a69b-476d3f1c1204" />
   </ReferenceAssemblyList>
 </XamlCompilerSaveState>

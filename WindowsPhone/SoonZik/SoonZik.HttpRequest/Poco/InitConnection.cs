@@ -2,7 +2,7 @@
 {
     public class InitConnection
     {
-        public int UserId { get; set; }
-        public string Crypto { get; set; }
+        public int user_id { get; set; }
+        public string sercureKey { get; set; }
     }
 }
