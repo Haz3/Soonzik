@@ -6,6 +6,7 @@ using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
+using Windows.UI.Xaml.Input;
 using Newtonsoft.Json;
 using SoonZik.Helpers;
 using SoonZik.HttpRequest;
@@ -71,41 +72,6 @@ namespace SoonZik.Controls
 
         #region Slider
 
-        private void AssociationSlider_OnManipulationDelta(object sender, RangeBaseValueChangedEventArgs e)
-        {
-            if (e.NewValue < 10)
-            {
-                ArtistePriceCalc(e.NewValue);
-                SoonZikPriceCalc(e.NewValue);
-            }
-        }
-
-        private void ArtistSlider_OnManipulationDelta(object sender, RangeBaseValueChangedEventArgs e)
-        {
-            if (e.NewValue < 10)
-            {
-                AssociationPriceCalc(e.NewValue);
-                SoonZikPriceCalc(e.NewValue);
-            }
-        }
-
-        private void SoonZikSlider_OnManipulationDelta(object sender, RangeBaseValueChangedEventArgs e)
-        {
-            if (e.NewValue < 10)
-            {
-                ArtistePriceCalc(e.NewValue);
-                AssociationPriceCalc(e.NewValue);
-            }
-        }
-
-        private void ArtistSlider_OnGotFocus(object sender, RoutedEventArgs e)
-        {
-            if (ArtistSlider.Value < 10)
-            {
-                AssociationPriceCalc(ArtistSlider.Value);
-                SoonZikPriceCalc(ArtistSlider.Value);
-            }
-        }
 
         #endregion
 
@@ -123,14 +89,7 @@ namespace SoonZik.Controls
 
         private void InitializePrice()
         {
-            //if (SelecetdPack.averagePrice != 0)
             PriceTextBox.Text = SelecetdPack.averagePrice;
-            //else
-            //{
-            //    SelecetdPack.averagePrice = "10";
-            //    PriceTextBox.Text = SelecetdPack.price;
-            //}
-
 
             ArtistSlider.Maximum = Convert.ToDouble(SelecetdPack.averagePrice);
             AssociationSlider.Maximum = Convert.ToDouble(SelecetdPack.averagePrice);
@@ -143,7 +102,7 @@ namespace SoonZik.Controls
 
         private void ArtistePriceCalc(double price)
         {
-            ArtistSlider.Value = (price*70)/100;
+            ArtistSlider.Value = (price*65)/100;
         }
 
         private void AssociationPriceCalc(double price)
@@ -153,9 +112,11 @@ namespace SoonZik.Controls
 
         private void SoonZikPriceCalc(double price)
         {
-            SoonZikSlider.Value = (price*10)/100;
+            SoonZikSlider.Value = (price*15)/100;
         }
 
         #endregion
+
+
     }
 }

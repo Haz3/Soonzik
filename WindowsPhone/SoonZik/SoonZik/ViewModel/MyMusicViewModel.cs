@@ -46,7 +46,7 @@ namespace SoonZik.ViewModel
 
         #endregion
 
-        #region Method        
+        #region Method
 
         private void PlayCommandExecute()
         {
@@ -240,12 +240,11 @@ namespace SoonZik.ViewModel
 
         private void CreatePlaylistExecute()
         {
-            _id += 1;
             var playlist = new Playlist
             {
-                name = "MyPlaylist" + _id,
+                name = "MyPlaylist",
                 user = Singleton.Singleton.Instance().CurrentUser,
-                musics = new List<Music> {MusicForPlaylist}
+                musics = new List<Music> { MusicForPlaylist }
             };
             if (MusicForPlaylist != null)
             {
@@ -279,31 +278,17 @@ namespace SoonZik.ViewModel
                                                 JsonConvert.DeserializeObject(stringJson, new Playlist().GetType());
                                         try
                                         {
-                                            var userKey2 =
-                                                request.GetUserKey(
-                                                    Singleton.Singleton.Instance().CurrentUser.id.ToString());
-                                            userKey2.ContinueWith(delegate(Task<object> task2)
+
+                                            var up = post.UpdatePlaylist(playList, MusicForPlaylist, _crypto,
+                                                Singleton.Singleton.Instance().CurrentUser);
+                                            up.ContinueWith(delegate(Task<string> tmp2)
                                             {
-                                                var key2 = task2.Result as string;
-                                                if (key2 != null)
+                                                var res2 = tmp2.Result;
+                                                if (res2 != null)
                                                 {
-                                                    var stringEncrypt = KeyHelpers.GetUserKeyFromResponse(key2);
-                                                    _crypto =
-                                                        EncriptSha256.EncriptStringToSha256(
-                                                            Singleton.Singleton.Instance().CurrentUser.salt +
-                                                            stringEncrypt);
+                                                    CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(
+                                                        CoreDispatcherPriority.Normal, RefreshPlaylist);
                                                 }
-                                                var up = post.UpdatePlaylist(playList, MusicForPlaylist, _crypto,
-                                                    Singleton.Singleton.Instance().CurrentUser);
-                                                up.ContinueWith(delegate(Task<string> tmp2)
-                                                {
-                                                    var res2 = tmp2.Result;
-                                                    if (res2 != null)
-                                                    {
-                                                        CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(
-                                                            CoreDispatcherPriority.Normal, RefreshPlaylist);
-                                                    }
-                                                });
                                             });
                                         }
                                         catch (Exception)

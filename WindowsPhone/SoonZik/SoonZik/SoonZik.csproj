@@ -107,6 +107,9 @@
     <Compile Include="Controls\NewsSharePopup.xaml.cs">
       <DependentUpon>NewsSharePopup.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\NotationMusic.xaml.cs">
+      <DependentUpon>NotationMusic.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\PlayerControl.xaml.cs">
       <DependentUpon>PlayerControl.xaml</DependentUpon>
     </Compile>
@@ -278,6 +281,10 @@
     <Content Include="Resources\Icones\share.png" />
     <Content Include="Resources\Icones\shuffle-0_icon.png" />
     <Content Include="Resources\Icones\shuffle.png" />
+    <Content Include="Resources\Icones\star2.png" />
+    <Content Include="Resources\Icones\star3.png" />
+    <Content Include="Resources\Icones\star4.png" />
+    <Content Include="Resources\Icones\star5.png" />
     <Content Include="Resources\Icones\trash.png" />
     <Content Include="Resources\Icones\twitter.png" />
     <Content Include="Resources\Icones\user_pushpin.png" />
@@ -298,6 +305,7 @@
     <Content Include="Resources\PlayerIcons\repeat.png" />
     <Content Include="Resources\PlayerIcons\rewind.png" />
     <Content Include="Resources\PlayerIcons\shuffle.png" />
+    <Content Include="Resources\Icones\star.png" />
     <Content Include="Resources\stromae.jpg" />
   </ItemGroup>
   <ItemGroup>
@@ -330,6 +338,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Controls\NewsSharePopup.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\NotationMusic.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

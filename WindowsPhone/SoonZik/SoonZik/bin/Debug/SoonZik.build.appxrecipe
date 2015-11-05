@@ -224,6 +224,18 @@
     <AppxPackagedFile Include="C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\Resources\Icones\shuffle.png">
       <PackagePath>Resources\Icones\shuffle.png</PackagePath>
     </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\Resources\Icones\star2.png">
+      <PackagePath>Resources\Icones\star2.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\Resources\Icones\star3.png">
+      <PackagePath>Resources\Icones\star3.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\Resources\Icones\star4.png">
+      <PackagePath>Resources\Icones\star4.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\Resources\Icones\star5.png">
+      <PackagePath>Resources\Icones\star5.png</PackagePath>
+    </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\Resources\Icones\trash.png">
       <PackagePath>Resources\Icones\trash.png</PackagePath>
     </AppxPackagedFile>
@@ -259,6 +271,9 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\Resources\PlayerIcons\shuffle.png">
       <PackagePath>Resources\PlayerIcons\shuffle.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\Resources\Icones\star.png">
+      <PackagePath>Resources\Icones\star.png</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\Assets\Media\Ring01.wma">
       <PackagePath>Assets\Media\Ring01.wma</PackagePath>
@@ -334,6 +349,9 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\bin\Debug\Controls\NewsSharePopup.xbf">
       <PackagePath>Controls\NewsSharePopup.xbf</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\bin\Debug\Controls\NotationMusic.xbf">
+      <PackagePath>Controls\NotationMusic.xbf</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\bin\Debug\Controls\PlayerControl.xbf">
       <PackagePath>Controls\PlayerControl.xbf</PackagePath>

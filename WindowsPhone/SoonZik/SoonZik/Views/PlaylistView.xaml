@@ -31,7 +31,7 @@
                 <Border BorderThickness="0,0,0,1" Width="350" BorderBrush="#7bc2fa" />
                 <TextBlock x:Name="MusicTitle" Text="{Binding Path=title}" Foreground="#40a8e2" FontSize="25"
                            Margin="50,0,0,0" />
-                <ratingControl:Rating Height="25" Width="125" Margin="50,10,0,0" VerticalAlignment="Bottom"
+                <!--<ratingControl:Rating Height="25" Width="125" Margin="50,10,0,0" VerticalAlignment="Bottom"
                                       HorizontalAlignment="Left" ReadOnly="True" Background="Transparent"
                                       RatingItemCount="5" Value="{Binding Path=getAverageNote, Mode=TwoWay}">
                     <ratingControl:Rating.FilledItemStyle>
@@ -44,7 +44,7 @@
                             <Setter Property="Background" Value="Gray" />
                         </Style>
                     </ratingControl:Rating.UnfilledItemStyle>
-                </ratingControl:Rating>
+                </ratingControl:Rating>-->
                 <Image x:Name="PlayImage" Source="../Resources/Icones/play.png" Height="30" Tapped="PlayImage_OnTapped"
                        VerticalAlignment="Center" HorizontalAlignment="Left" />
                 <FlyoutBase.AttachedFlyout>
@@ -62,16 +62,19 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="100" />
             <RowDefinition Height="*" />
+            <RowDefinition Height="50"/>
         </Grid.RowDefinitions>
         <Grid Grid.Row="0">
-            <TextBox Foreground="White" x:Name="PlayListTitle" Text="{Binding ThePlaylist.name, Mode=TwoWay}" FontSize="30" VerticalAlignment="Center"
+            <TextBox Foreground="Gray" x:Name="PlayListTitle" Text="{Binding ThePlaylist.name, Mode=TwoWay}" FontSize="25" VerticalAlignment="Center"
                        HorizontalAlignment="Left" Background="Transparent" BorderThickness="0,0,0,1" IsEnabled="{Binding BoolRename}"/>
-            <Button VerticalAlignment="Center" HorizontalAlignment="Right" Content="{Binding RenameButton}" Command="{Binding RenameCommand}"></Button>
+            <Button VerticalAlignment="Center" HorizontalAlignment="Right" Content="{Binding RenameButton}" Command="{Binding RenameCommand}" Margin="0,22,10,21"></Button>
         </Grid>
 
         <ListBox Background="Transparent" Grid.Row="1" x:Name="MusicListView"
                  ItemsSource="{Binding ThePlaylist.musics}"
                  ItemTemplate="{StaticResource MusicTemplate}"
                  SelectedItem="{Binding SelectedMusic, Mode=TwoWay}" />
+        
+        <Image x:Name="PlayAll" Grid.Row="2" Source="../Resources/Icones/play.png" Tapped="PlayAll_OnTapped"/>
     </Grid>
 </Page>

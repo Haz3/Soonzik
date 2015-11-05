@@ -436,6 +436,8 @@
     <RootType FullName="Windows.UI.Xaml.Controls.UserControl">
       <RootProperty Name="Content" />
       <RootProperty Name="Resources" />
+      <RootProperty Name="Width" />
+      <RootProperty Name="Height" />
     </RootType>
     <RootType FullName="SoonZik.Controls.ButtonFriendPopUp" />
     <RootType FullName="SoonZik.Controls.Genre" />
@@ -483,15 +485,6 @@
       <RootProperty Name="ImageSource" />
       <RootProperty Name="Opacity" />
     </RootType>
-    <RootType FullName="Windows.UI.Xaml.Controls.ListView">
-      <RootProperty Name="Header" />
-      <RootProperty Name="ItemTemplate" />
-      <RootProperty Name="SelectedItem" />
-      <RootProperty Name="Background" />
-      <RootProperty Name="ItemsSource" />
-      <RootProperty Name="IsHoldingEnabled" />
-      <RootProperty Name="GroupStyle" />
-    </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.TextBox">
       <RootProperty Name="Width" />
       <RootProperty Name="BorderThickness" />
@@ -512,18 +505,27 @@
       <RootProperty Name="IsEnabled" />
       <RootEvent Name="TextChanged" />
     </RootType>
+    <RootType FullName="Windows.UI.Xaml.Controls.ListView">
+      <RootProperty Name="Header" />
+      <RootProperty Name="ItemTemplate" />
+      <RootProperty Name="SelectedItem" />
+      <RootProperty Name="Background" />
+      <RootProperty Name="ItemsSource" />
+      <RootProperty Name="IsHoldingEnabled" />
+      <RootProperty Name="GroupStyle" />
+    </RootType>
     <RootType FullName="Microsoft.Xaml.Interactions.Media.ControlStoryboardAction">
       <RootProperty Name="Storyboard" />
     </RootType>
     <RootType FullName="SoonZik.Controls.GlobalMenuControl" />
     <RootType FullName="SoonZik.Controls.MoreOptionPopUp" />
     <RootType FullName="SoonZik.Controls.NewsSharePopup" />
+    <RootType FullName="SoonZik.Controls.NotationMusic" />
     <RootType FullName="SoonZik.Controls.PlayerControl" />
     <RootType FullName="Windows.UI.Xaml.Controls.Slider">
       <RootProperty Name="VerticalAlignment" />
       <RootProperty Name="Margin" />
       <RootProperty Name="Width" />
-      <RootEvent Name="GotFocus" />
     </RootType>
     <RootType FullName="SoonZik.Controls.PriceControl" />
     <RootType FullName="Windows.UI.Xaml.Controls.ProgressRing">

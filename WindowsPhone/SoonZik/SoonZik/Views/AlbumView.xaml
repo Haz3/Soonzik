@@ -51,6 +51,7 @@
                     <MenuFlyout>
                         <MenuFlyoutItem x:Name="ItemPlaylist" Text="Add playlist" Click="ItemPlaylist_OnTapped" />
                         <MenuFlyoutItem x:Name="ItemCart" Text="Go to cart" Click="ItemCart_OnTapped" />
+                        <MenuFlyoutItem x:Name="NotationMusic" Text="Rate" Click="NotationMusic_OnClick" />
                     </MenuFlyout>
                 </FlyoutBase.AttachedFlyout>
             </Grid>
