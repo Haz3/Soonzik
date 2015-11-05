@@ -221,10 +221,10 @@
       <RootProperty Name="Style" />
       <RootProperty Name="MinHeight" />
       <RootProperty Name="MinWidth" />
-      <RootProperty Name="Margin" />
       <RootProperty Name="Foreground" />
       <RootProperty Name="Width" />
       <RootProperty Name="Command" />
+      <RootProperty Name="Margin" />
       <RootProperty Name="Height" />
       <RootProperty Name="IsEnabled" />
       <RootProperty Name="Opacity" />
@@ -407,10 +407,10 @@
       <RootProperty Name="Height" />
       <RootProperty Name="Width" />
       <RootProperty Name="Margin" />
-      <RootProperty Name="TextAlignment" />
       <RootProperty Name="TextWrapping" />
       <RootProperty Name="Padding" />
       <RootProperty Name="FontWeight" />
+      <RootProperty Name="TextAlignment" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Data.Binding">
       <RootProperty Name="Mode" />
@@ -518,7 +518,6 @@
       <RootProperty Name="Storyboard" />
     </RootType>
     <RootType FullName="SoonZik.Controls.GlobalMenuControl" />
-    <RootType FullName="SoonZik.Controls.MoreOptionPopUp" />
     <RootType FullName="SoonZik.Controls.NewsSharePopup" />
     <RootType FullName="SoonZik.Controls.NotationMusic" />
     <RootType FullName="SoonZik.Controls.PlayerControl" />

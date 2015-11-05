@@ -101,9 +101,6 @@
     <Compile Include="Controls\GlobalMenuControl.xaml.cs">
       <DependentUpon>GlobalMenuControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\MoreOptionPopUp.xaml.cs">
-      <DependentUpon>MoreOptionPopUp.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Controls\NewsSharePopup.xaml.cs">
       <DependentUpon>NewsSharePopup.xaml</DependentUpon>
     </Compile>
@@ -332,10 +329,6 @@
     <Page Include="Controls\GlobalMenuControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Controls\MoreOptionPopUp.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
     </Page>
     <Page Include="Controls\NewsSharePopup.xaml">
       <SubType>Designer</SubType>

@@ -10,12 +10,12 @@
 
     <Grid Background="#181818">
         <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
         <RadioButton x:Name="RadioButtonOne" Grid.Row="0">
@@ -33,6 +33,6 @@
         <RadioButton x:Name="RadioButtonFive" Grid.Row="4">
             <Image Source="../Resources/Icones/star5.png" />
         </RadioButton>
-        <Button Content="Valider" Grid.Row="5" HorizontalAlignment="Center" Click="ButtonBase_OnClick"/>
+        <Button Content="Valider" Grid.Row="5" HorizontalAlignment="Center" Click="ButtonBase_OnClick" />
     </Grid>
 </UserControl>

@@ -356,7 +356,6 @@ C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\bin\Debug\Co
 C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\bin\Debug\Controls\Genre.xbf
 C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\bin\Debug\Controls\GeolocalisationControl.xbf
 C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\bin\Debug\Controls\GlobalMenuControl.xbf
-C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\bin\Debug\Controls\MoreOptionPopUp.xbf
 C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\bin\Debug\Controls\NewsSharePopup.xbf
 C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\bin\Debug\Controls\NotationMusic.xbf
 C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\bin\Debug\Controls\PlayerControl.xbf
@@ -441,8 +440,6 @@ C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\obj\Debug\Co
 C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\obj\Debug\Controls\GeolocalisationControl.g.cs
 C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\obj\Debug\Controls\GlobalMenuControl.g.i.cs
 C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\obj\Debug\Controls\GlobalMenuControl.g.cs
-C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\obj\Debug\Controls\MoreOptionPopUp.g.i.cs
-C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\obj\Debug\Controls\MoreOptionPopUp.g.cs
 C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\obj\Debug\Controls\NewsSharePopup.g.i.cs
 C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\obj\Debug\Controls\NewsSharePopup.g.cs
 C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\obj\Debug\Controls\NotationMusic.g.i.cs
@@ -502,7 +499,6 @@ C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\obj\Debug\Co
 C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\obj\Debug\Controls\Genre.xaml
 C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\obj\Debug\Controls\GeolocalisationControl.xaml
 C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\obj\Debug\Controls\GlobalMenuControl.xaml
-C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\obj\Debug\Controls\MoreOptionPopUp.xaml
 C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\obj\Debug\Controls\NewsSharePopup.xaml
 C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\obj\Debug\Controls\PlayerControl.xaml
 C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\obj\Debug\Controls\PriceControl.xaml
@@ -533,7 +529,6 @@ C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\obj\Debug\Co
 C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\obj\Debug\Controls\Genre.xbf
 C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\obj\Debug\Controls\GeolocalisationControl.xbf
 C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\obj\Debug\Controls\GlobalMenuControl.xbf
-C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\obj\Debug\Controls\MoreOptionPopUp.xbf
 C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\obj\Debug\Controls\NewsSharePopup.xbf
 C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\obj\Debug\Controls\PlayerControl.xbf
 C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\obj\Debug\Controls\PriceControl.xbf
