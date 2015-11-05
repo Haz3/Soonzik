@@ -2,7 +2,7 @@
 	%loading{ "ng-if" => "loading == true" }
 	.row{ "ng-if" => "loading == false" }
 		%h1.subheader {{ labels.DISPLAY_BATTLE_LIST_LABEL }}
-		.clearfix.battleLine{ "ng-repeat" => "battle in index.battles" }
+		.clearfix.battleLine{ "ng-repeat" => "battle in index.resources" }
 			%hr
 			.medium-4.columns
 				%p
@@ -19,11 +19,4 @@
 				%img{ "ng-src" => "{{ '/assets/usersImage/avatars/' + battle.artist_two.image}}" }
 				%p{ "ng-if" => "currentUser != false" }
 					%span{ "ng-click" => "indexVoteFor(battle, battle.artist_two)", "class" => "label radius {{ voteClass(index.voteCurrentUser[battle.id], battle.artist_two.id) }}" } {{ voteText(index.voteCurrentUser[battle.id], battle.artist_two.id) }}
-		.pagination-centered
-			%ul.pagination
-				%li{ "class" => "arrow {{ (index.currentPage == 1) ? 'unavailable' : '' }}" }
-					%a{ href: "/battles?page={{ max(1, index.currentPage - 1) }}"} &laquo;
-				%li{ "ng-repeat" => "num in range(min(index.currentPage, 5) + min(index.numberPages - 1, 5)) track by $index", "class" => "{{ $index + 1 == min(index.currentPage, 5) ? 'current' : '' }}" }
-					%a{ href: "/battles?page={{ index.currentPage - min(index.currentPage, 5) + $index + 1 }}"} {{ index.currentPage - min(index.currentPage, 5) + $index + 1 }}
-				%li{ "class" => "arrow {{ (index.numberPages == index.currentPage) ? 'unavailable' : '' }}" }
-					%a{ href: "/battles?page={{ min(index.numberPages, index.currentPage + 1) }}"} &raquo;
+		%div{ "ng-include" => "'/assets/AngularJS/views/include/pagination.html.haml'" }

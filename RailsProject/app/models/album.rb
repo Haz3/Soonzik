@@ -61,7 +61,7 @@ class Album < ActiveRecord::Base
     notes = 0
     if (self.musics.size > 0)
       self.musics.each do |music|
-        notes += MusicNote.where(music_id: music.id).average(:value).to_f
+        notes += music.getAverageNote
       end
       notes = notes / self.musics.size
     end

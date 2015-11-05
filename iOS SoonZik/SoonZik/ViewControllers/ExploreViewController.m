@@ -217,8 +217,7 @@
     else if (tableView.tag == 3) {
         UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cellConcerts"];
         Concert *concert = [self.listOfConcerts objectAtIndex:indexPath.row];
-        cell.textLabel.text = [NSString stringWithFormat:@"%i", concert.identifier];
-        NSLog(@"concert.identifier : %i", concert.identifier);
+        cell.textLabel.text = [NSString stringWithFormat:@"%@ - %@", concert.address.city, concert.address.street];
         cell.textLabel.textColor = [UIColor whiteColor];
         cell.backgroundColor = [UIColor clearColor];
         cell.textLabel.font = SOONZIK_FONT_BODY_MEDIUM;

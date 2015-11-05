@@ -20,7 +20,7 @@
     dateformat.timeZone = [NSTimeZone timeZoneForSecondsFromGMT:1];
     self.date = [dateformat dateFromString:[json objectForKey:@"planification"]];
     self.url = [json objectForKey:@"url"];
-    self.user = [[User alloc] initWithJsonObject:[json objectForKey:@"user"]];
+    self.artist = [[User alloc] initWithJsonObject:[json objectForKey:@"user"]];
     self.address = [[Address alloc] initWithJsonObject:[json objectForKey:@"address"]];
     
     return self;

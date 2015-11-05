@@ -1,13 +1,13 @@
 SoonzikApp.controller('BattlesCtrl', ['$scope', "$routeParams", 'SecureAuth', 'HTTPService', 'NotificationService', "$rootScope", function ($scope, $routeParams, SecureAuth, HTTPService, NotificationService, $rootScope) {
 	$scope.loading = true;
-	$scope.index = { battles: [], votes: [], voteCurrentUser: [] };
+	$scope.index = { resources: [], votes: [], voteCurrentUser: [], currentPage: 1, totalPage: 1, resourceName: "battles" };
 	$scope.show = { battle: null, artistOne: {}, artistTwo: {}, voteCurrentUser: false, randomVote: [] };
 	$scope.currentUser = false;
 
 	var BattlePerPage = 10;
 
 	$scope.indexInit = function() {
-		$scope.index.currentPage = (toInt($routeParams.page) == 0 ? 1 : toInt($routeParams.page));
+		$scope.index.currentPage = ($rootScope.toInt($routeParams.page) == 0 ? 1 : $rootScope.toInt($routeParams.page));
 		var current_user = SecureAuth.getCurrentUser();
 		if (current_user.id != null && current_user.token != null && current_user.username != null) {
 			$scope.currentUser = current_user;
@@ -23,46 +23,46 @@ SoonzikApp.controller('BattlesCtrl', ['$scope', "$routeParams", 'SecureAuth', 'H
 			var numberResults = response.data.content;
 
 			if (typeof numberResults != "undefined") {
-				$scope.index.numberPages = ~~(numberResults / BattlePerPage) + 1;
+				$scope.index.totalPage = ~~(numberResults / BattlePerPage) + 1;
 			} else {
-				$scope.index.numberPages = 1;
+				$scope.index.totalPage = 1;
 			}
 
 			HTTPService.findBattles(parameters).then(function(response) {
-				$scope.index.battles = response.data.content;
+				$scope.index.resources = response.data.content;
 
 				// For each battles
-				for (var battleIndex in $scope.index.battles) {
+				for (var battleIndex in $scope.index.resources) {
 					var votes = [
-						{ value: 0, label: $scope.index.battles[battleIndex].artist_one.username },
-						{ value: 0, label: $scope.index.battles[battleIndex].artist_two.username }
+						{ value: 0, label: $scope.index.resources[battleIndex].artist_one.username },
+						{ value: 0, label: $scope.index.resources[battleIndex].artist_two.username }
 					];
 
 					// For each votes
-					for (var voteIndex in $scope.index.battles[battleIndex].votes) {
+					for (var voteIndex in $scope.index.resources[battleIndex].votes) {
 						// fill the votes object
-						if ($scope.index.battles[battleIndex].votes[voteIndex].artist_id == $scope.index.battles[battleIndex].artist_one.id) {
+						if ($scope.index.resources[battleIndex].votes[voteIndex].artist_id == $scope.index.resources[battleIndex].artist_one.id) {
 							votes[0].value++;
-						} else if ($scope.index.battles[battleIndex].votes[voteIndex].artist_id == $scope.index.battles[battleIndex].artist_two.id) {
+						} else if ($scope.index.resources[battleIndex].votes[voteIndex].artist_id == $scope.index.resources[battleIndex].artist_two.id) {
 							votes[1].value++;
 						}
 
 						// fill the vote array of the current user
-						if ($scope.currentUser != false && $scope.index.battles[battleIndex].votes[voteIndex].user_id == $scope.currentUser.id) {
-							$scope.index.voteCurrentUser[$scope.index.battles[battleIndex].id] = $scope.index.battles[battleIndex].votes[voteIndex].artist_id;
+						if ($scope.currentUser != false && $scope.index.resources[battleIndex].votes[voteIndex].user_id == $scope.currentUser.id) {
+							$scope.index.voteCurrentUser[$scope.index.resources[battleIndex].id] = $scope.index.resources[battleIndex].votes[voteIndex].artist_id;
 						}
 					}
 
 					// if no votes, no values
 					if (votes[0].value == 0 && votes[1].value == 0) {
-						$scope.index.votes[$scope.index.battles[battleIndex].id] = [];
+						$scope.index.votes[$scope.index.resources[battleIndex].id] = [];
 					} else {
-						$scope.index.votes[$scope.index.battles[battleIndex].id] = votes;
+						$scope.index.votes[$scope.index.resources[battleIndex].id] = votes;
 					}
 
 					// if no vote for the current user
-					if (typeof $scope.index.voteCurrentUser[$scope.index.battles[battleIndex].id] === "undefined") {
-						$scope.index.voteCurrentUser[$scope.index.battles[battleIndex].id] = false;
+					if (typeof $scope.index.voteCurrentUser[$scope.index.resources[battleIndex].id] === "undefined") {
+						$scope.index.voteCurrentUser[$scope.index.resources[battleIndex].id] = false;
 					}
 
 				}
@@ -167,25 +167,25 @@ SoonzikApp.controller('BattlesCtrl', ['$scope', "$routeParams", 'SecureAuth', 'H
 					$scope.index.voteCurrentUser[battle.id] = artist.id;
 
 					// iterate on votes
-					for (var battleIndex in $scope.index.battles) {
+					for (var battleIndex in $scope.index.resources) {
 						// If this is the good battle
-						if ($scope.index.battles[battleIndex].id == battle.id) {
+						if ($scope.index.resources[battleIndex].id == battle.id) {
 							// Iterate on the votes
-							for (var voteIndex in $scope.index.battles[battleIndex].votes) {
+							for (var voteIndex in $scope.index.resources[battleIndex].votes) {
 								// We modify the vote value
-								if ($scope.index.battles[battleIndex].votes[voteIndex].user_id == $scope.currentUser.id) {
-									$scope.index.battles[battleIndex].votes[voteIndex].artist_id = artist.id;
+								if ($scope.index.resources[battleIndex].votes[voteIndex].user_id == $scope.currentUser.id) {
+									$scope.index.resources[battleIndex].votes[voteIndex].artist_id = artist.id;
 									
 									// if you vote for the first
-									if (artist.id == $scope.index.battles[battleIndex].artist_one.id) {
-										$scope.index.votes[$scope.index.battles[battleIndex].id][0].value++;
+									if (artist.id == $scope.index.resources[battleIndex].artist_one.id) {
+										$scope.index.votes[$scope.index.resources[battleIndex].id][0].value++;
 										// if there is a previous vote, reduce the value for the other artist
-										if (oldVote) {	$scope.index.votes[$scope.index.battles[battleIndex].id][1].value--;	}
+										if (oldVote) {	$scope.index.votes[$scope.index.resources[battleIndex].id][1].value--;	}
 									}
 									else {		// if you vote for the second
-										$scope.index.votes[$scope.index.battles[battleIndex].id][1].value++;
+										$scope.index.votes[$scope.index.resources[battleIndex].id][1].value++;
 										// if there is a previous vote, reduce the value for the other artist
-										if (oldVote) {	$scope.index.votes[$scope.index.battles[battleIndex].id][0].value--;	}
+										if (oldVote) {	$scope.index.votes[$scope.index.resources[battleIndex].id][0].value--;	}
 									}
 								}
 							}
@@ -258,27 +258,6 @@ SoonzikApp.controller('BattlesCtrl', ['$scope', "$routeParams", 'SecureAuth', 'H
 	}
 
 	/* Utils function */
-
-	$scope.range = function(n) {
-  	return new Array(n);
-  }
-
-  $scope.min = function(a, b) {
-  	return (a < b ? a : b);
-  }
-
-  $scope.max = function(a, b) {
-  	return (a > b ? a : b);
-  }
-
-	var toInt = function(value) {
-		var number = parseInt(value);
-		if (isNaN(number)) {
-			return 0;
-		} else {
-			return number;
-		}
-	}
 
 	$scope.voteClass = function(value, artist_id) {
 		if (value == false) {

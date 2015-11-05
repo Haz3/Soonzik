@@ -7,6 +7,8 @@
 //
 
 #import "ConcertViewController.h"
+#import "ConcertHeaderView.h"
+#import "ArtistViewController.h"
 
 @interface ConcertViewController ()
 
@@ -31,32 +33,67 @@
     self.tableView.estimatedRowHeight = 44;
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    if (section == 0) {
+        return 122;
+    }
+    
+    return 30;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    if (section == 0) {
+        ConcertHeaderView *header = (ConcertHeaderView *)[[[NSBundle mainBundle] loadNibNamed:@"ConcertHeaderView" owner:self options:nil] firstObject];
+        [header initHeader:self.concert];
+        [header.shareButton addTarget:self action:@selector(launchShareView) forControlEvents:UIControlEventTouchUpInside];
+        [header.artistButton addTarget:self action:@selector(goToArtistView) forControlEvents:UIControlEventTouchUpInside];
+
+        return header;
+    }
+    
+    return nil;
+}
+
+- (void)launchShareView {
+    [self launchShareView:self.concert];
+}
+
+- (void)goToArtistView
+{
+    ArtistViewController *vc = [[ArtistViewController alloc] initWithNibName:@"ArtistViewController" bundle:nil];
+    vc.artist = self.concert.artist;
+    vc.fromNav = true;
+    [self.navigationController pushViewController:vc animated:true];
+}
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (section == 0)
-        return 1;
+        return 0;
     else if (section == 1)
+        return 1;
+    else if (section == 2)
         return 3;
     
     return 1;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 3;
+    return 4;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.section == 0)
+    if (indexPath.section == 1)
         return 44;
-    else if (indexPath.section == 1)
+    else if (indexPath.section == 2)
         return 30;
     
     return 44;
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    if (section == 0)
+    if (section == 1)
         return @"Date";
-    else if (section == 1)
+    else if (section == 2)
         return @"Adresse";
     
     return @"Plus d'infos";
@@ -71,20 +108,20 @@
     cell.backgroundColor = [UIColor clearColor];
     cell.textLabel.textColor = [UIColor whiteColor];
     
-    if (indexPath.section == 0) {
+    if (indexPath.section == 1) {
         if (indexPath.row == 0) {
             NSDateComponents *components = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear fromDate:self.concert.date];
             cell.textLabel.text = [NSString stringWithFormat:@"Le %.2i/%.2i/%.4i", components.day, components.month, components.year];
         }
-    } else if (indexPath.section == 1) {
+    } else if (indexPath.section == 2) {
         if (indexPath.row == 0) {
             cell.textLabel.text = [NSString stringWithFormat:@"%@ %@", self.concert.address.streetNbr, self.concert.address.street];
         } else if (indexPath.row == 1) {
             cell.textLabel.text = [NSString stringWithFormat:@"%@ %@", self.concert.address.zipCode, self.concert.address.city];
-        } else if (indexPath.row == 3) {
+        } else if (indexPath.row == 2) {
             cell.textLabel.text = [NSString stringWithFormat:@"%@", self.concert.address.country];
         }
-    } else if (indexPath.section == 2) {
+    } else if (indexPath.section == 3) {
         if (indexPath.row == 0) {
             cell.textLabel.text = [NSString stringWithFormat:@"%@", self.concert.url];
         }
