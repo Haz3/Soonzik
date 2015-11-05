@@ -118,18 +118,27 @@ module API
     # - +503+ - Error from server
     # 
     def update
+      old_playlist = []
       begin
         if (@security)
           playlist = Playlist.eager_load([musics: { user: {}, album: {} }, user: {}]).find_by_id(@id)
-          if (playlist != nil && playlist.user_id == @user_id)
-            if (defined?(@playlist) && @playlist.has_key?(:music) && @playlist[:music].size > 0)
-              playlist.musics = []
-              @playlist[:music].each do |music_id|
-                music = Music.find_by_id(music_id)
-                playlist.musics << music if (music != nil)
+          if (playlist != nil && playlist.user_id == @user_id.to_i)
+            if (@playlist.present? && @playlist.has_key?(:music) && JSON.parse(@playlist[:music]).size > 0)
+              playlist.playlist_objects.each do |item|
+                item.musics = []
+                old_playlist << item.music_id
+                item.destroy
               end
+              JSON.parse(@playlist[:music]).each_with_index do |music_id, i|
+                music = Music.find_by_id(music_id)
+                if (music != nil)
+                  po = PlaylistObject.create({ playlist_id: playlist.id, music_id: music.id, row_order: i })
+                  po.musics << music
+                end
+              end
+              playlist = Playlist.eager_load([musics: { user: {}, album: {} }, user: {}]).find_by_id(@id)
             end
-            playlist.name = @playlist[:name] if defined?@playlist && @playlist.has_key?(:name)
+            playlist.name = @playlist[:name] if @playlist.present? && @playlist.has_key?(:name)
             if (playlist.save)
               @returnValue = { content: playlist.as_json(:include => {
                                         :musics => {
@@ -145,6 +154,9 @@ module API
               codeAnswer 201
               defineHttp :created
             else
+              old_playlist.each do |music_id|
+                PlaylistObject.create({ playlist_id: playlist.id, music_id: music_id })
+              end
               codeAnswer 505
               defineHttp :service_unavailable
             end
@@ -157,6 +169,9 @@ module API
           defineHttp :forbidden
         end
       rescue
+        old_playlist.each do |music_id|
+          PlaylistObject.create({ playlist_id: playlist.id, music_id: music_id })
+        end
         codeAnswer 504
         defineHttp :service_unavailable
       end
