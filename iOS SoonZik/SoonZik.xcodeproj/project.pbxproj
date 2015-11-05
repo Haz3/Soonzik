@@ -171,6 +171,8 @@
 		EDA978291B3B97190056EC75 /* UserListen.m in Sources */ = {isa = PBXBuildFile; fileRef = EDA978091B3B97190056EC75 /* UserListen.m */; };
 		EDAB8EF91ABF94DA0047B913 /* BuyPackTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EDAB8EF71ABF94DA0047B913 /* BuyPackTableViewCell.m */; };
 		EDAB8EFA1ABF94DA0047B913 /* BuyPackTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EDAB8EF81ABF94DA0047B913 /* BuyPackTableViewCell.xib */; };
+		EDACB4C61BEB46F200F7F97D /* ConcertHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = EDACB4C51BEB46F200F7F97D /* ConcertHeaderView.m */; };
+		EDACB4C81BEB47C300F7F97D /* ConcertHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = EDACB4C71BEB47C300F7F97D /* ConcertHeaderView.xib */; };
 		EDB0412D1BC7D58200730C49 /* libPayPalMobile.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EDB041251BC7D58200730C49 /* libPayPalMobile.a */; };
 		EDB0412F1BC7D5CE00730C49 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EDB0412E1BC7D5CE00730C49 /* Accelerate.framework */; };
 		EDB041311BC7D5EA00730C49 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EDB041301BC7D5EA00730C49 /* AudioToolbox.framework */; };
@@ -638,6 +640,9 @@
 		EDAB8EF61ABF94DA0047B913 /* BuyPackTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BuyPackTableViewCell.h; sourceTree = "<group>"; };
 		EDAB8EF71ABF94DA0047B913 /* BuyPackTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BuyPackTableViewCell.m; sourceTree = "<group>"; };
 		EDAB8EF81ABF94DA0047B913 /* BuyPackTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BuyPackTableViewCell.xib; sourceTree = "<group>"; };
+		EDACB4C41BEB46F200F7F97D /* ConcertHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConcertHeaderView.h; sourceTree = "<group>"; };
+		EDACB4C51BEB46F200F7F97D /* ConcertHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConcertHeaderView.m; sourceTree = "<group>"; };
+		EDACB4C71BEB47C300F7F97D /* ConcertHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ConcertHeaderView.xib; sourceTree = "<group>"; };
 		EDB041251BC7D58200730C49 /* libPayPalMobile.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libPayPalMobile.a; sourceTree = "<group>"; };
 		EDB041261BC7D58200730C49 /* PayPalConfiguration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PayPalConfiguration.h; sourceTree = "<group>"; };
 		EDB041271BC7D58200730C49 /* PayPalFuturePaymentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PayPalFuturePaymentViewController.h; sourceTree = "<group>"; };
@@ -1728,6 +1733,9 @@
 				ED1753001BE61E0500542D81 /* MenuTableViewCell.h */,
 				ED1753011BE61E0500542D81 /* MenuTableViewCell.m */,
 				ED1753031BE61F7800542D81 /* MenuTableViewCell.xib */,
+				EDACB4C41BEB46F200F7F97D /* ConcertHeaderView.h */,
+				EDACB4C51BEB46F200F7F97D /* ConcertHeaderView.m */,
+				EDACB4C71BEB47C300F7F97D /* ConcertHeaderView.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -2305,6 +2313,7 @@
 				EDD1CEE01B1E94FE006F4ACE /* twitter_disable.svg in Resources */,
 				EDF0AC411B375917000C84DA /* TR_English.plist in Resources */,
 				EDF0A1D71B4EFB1700FE2FB4 /* HeaderUserView.xib in Resources */,
+				EDACB4C81BEB47C300F7F97D /* ConcertHeaderView.xib in Resources */,
 				ED9B0E871B6E7B050024DC1E /* RepartitionAmountViewController.xib in Resources */,
 				EDD53E531B4AFB1100E98D99 /* MusicTableViewCell.xib in Resources */,
 				ED320F4C1B3E037A0049F671 /* share.png in Resources */,
@@ -2569,6 +2578,7 @@
 				EDEDED7A1AA15C5D0024CF38 /* NSMutableArray+SWUtilityButtons.m in Sources */,
 				ED67509C1BC0262B00CC0211 /* MessagePopUp.m in Sources */,
 				EDA978101B3B97190056EC75 /* Request.m in Sources */,
+				EDACB4C61BEB46F200F7F97D /* ConcertHeaderView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

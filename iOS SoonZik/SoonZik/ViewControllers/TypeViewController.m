@@ -292,9 +292,11 @@
 - (void)actionSheet:(ShareActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
     switch (buttonIndex) {
         case 1:
+            NSLog(@"Facebook");
             [SocialConnect shareOnFacebook:actionSheet.elem onVC:self];
             break;
         case 2:
+            NSLog(@"Twitter");
             [SocialConnect shareOnTwitter:actionSheet.elem onVC:self];
             break;
         default:
