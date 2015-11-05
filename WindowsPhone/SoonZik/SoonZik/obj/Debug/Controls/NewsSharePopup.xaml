@@ -6,27 +6,29 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    d:DesignHeight="300"
-    d:DesignWidth="300">
+    Width="300"
+    Height="300">
 
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="50" />
-            <RowDefinition Height="*" />
-            <RowDefinition Height="60" />
-        </Grid.RowDefinitions>
+    <Border BorderBrush="White">
+        <Grid Background="#181818">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="60" />
+            </Grid.RowDefinitions>
 
-        <TextBlock x:Uid="Share" Text="" VerticalAlignment="Center" HorizontalAlignment="Center"
+            <TextBlock x:Uid="Share" Text="" VerticalAlignment="Center" HorizontalAlignment="Center"
                    FontSize="30" Foreground="White" FontFamily="{StaticResource Roboto}" />
 
-        <TextBox Grid.Row="1" Width="200" x:Name="TextBoxShare" Height="160"
+            <TextBox Grid.Row="1" Width="200" x:Name="TextBoxShare" Height="160"
                  Background="White" Opacity="0.2" BorderThickness="0,0,0,0" Foreground="White"
                  HorizontalAlignment="Center" VerticalAlignment="Center" />
 
-        <Image x:ConnectionId='1' x:Name="FacebookShare" Grid.Row="2" VerticalAlignment="Center" Source="../Resources/Icones/facebook.png"
+            <Image x:ConnectionId='1' x:Name="FacebookShare" Grid.Row="2" VerticalAlignment="Center" Source="../Resources/Icones/facebook.png"
                Width="50" HorizontalAlignment="Right" Margin="0,0,10,0"                                 />
-        <Image x:ConnectionId='2' x:Name="TwitterShare" Grid.Row="2" VerticalAlignment="Center" Source="../Resources/Icones/twitter.png"
+            <Image x:ConnectionId='2' x:Name="TwitterShare" Grid.Row="2" VerticalAlignment="Center" Source="../Resources/Icones/twitter.png"
                Width="50" HorizontalAlignment="Right" Margin="0,0,70,0"                                />
-    </Grid>
+        </Grid>
+    </Border>
 </UserControl>
 

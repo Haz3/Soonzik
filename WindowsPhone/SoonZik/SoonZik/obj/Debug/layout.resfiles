@@ -19,6 +19,7 @@ Controls\GeolocalisationControl.xbf
 Controls\GlobalMenuControl.xbf
 Controls\MoreOptionPopUp.xbf
 Controls\NewsSharePopup.xbf
+Controls\NotationMusic.xbf
 Controls\PlayerControl.xbf
 Controls\PriceControl.xbf
 Controls\ProgressRingControl.xbf
@@ -88,6 +89,11 @@ Resources\Icones\search.png
 Resources\Icones\share.png
 Resources\Icones\shuffle.png
 Resources\Icones\shuffle-0_icon.png
+Resources\Icones\star.png
+Resources\Icones\star2.png
+Resources\Icones\star3.png
+Resources\Icones\star4.png
+Resources\Icones\star5.png
 Resources\Icones\trash.png
 Resources\Icones\twitter.png
 Resources\Icones\user_pushpin.png

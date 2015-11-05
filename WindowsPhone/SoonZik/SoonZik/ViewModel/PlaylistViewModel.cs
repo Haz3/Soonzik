@@ -8,6 +8,7 @@ using Windows.UI.Xaml;
 using Coding4Fun.Toolkit.Controls;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using SoonZik.Controls;
 using SoonZik.Helpers;
@@ -30,6 +31,7 @@ namespace SoonZik.ViewModel
             DelToPlaylist = new RelayCommand(DelToPlaylistExecute);
             AddMusicToCart = new RelayCommand(AddMusicToCartExecute);
             PlayCommand = new RelayCommand(PlayCommandExecute);
+            PlayAllCommand = new RelayCommand(PlayAllCommandExecute);
         }
 
         #endregion
@@ -39,6 +41,7 @@ namespace SoonZik.ViewModel
         private string _cryptographic;
         public ICommand RenameCommand { get; private set; }
         public ICommand PlayCommand { get; private set; }
+        public ICommand PlayAllCommand { get; private set; }
         public ICommand AddToPlaylist { get; private set; }
         public ICommand DelToPlaylist { get; private set; }
         public ICommand AddMusicToCart { get; private set; }
@@ -115,7 +118,8 @@ namespace SoonZik.ViewModel
                 RaisePropertyChanged("RenameButton");
             }
         }
-
+        private string _key { get; set; }
+        private string _cryptocraphic { get; set; }
         #endregion
 
         #region Method       
@@ -132,13 +136,80 @@ namespace SoonZik.ViewModel
             {
                 RenameButton = "Rename";
                 // TODO save the playlist name
+                var request2 = new HttpRequestPost();
+                var request = new HttpRequestGet();
+                var userKey = request.GetUserKey(Singleton.Singleton.Instance().CurrentUser.id.ToString());
+                userKey.ContinueWith(delegate(Task<object> task)
+                {
+                    _key = task.Result as string;
+                    if (_key != null)
+                    {
+                        var stringEncrypt = KeyHelpers.GetUserKeyFromResponse(_key);
+                        _cryptographic = EncriptSha256.EncriptStringToSha256(Singleton.Singleton.Instance().CurrentUser.salt +
+                                                                stringEncrypt);
+
+                        var res = request2.UpdateNamePlaylist(ThePlaylist, _cryptographic, Singleton.Singleton.Instance().CurrentUser);
+                        res.ContinueWith(delegate(Task<string> tmp)
+                        {
+                            if (tmp.Result != null)
+                            {
+                                CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
+                                    () =>
+                                        ThePlaylist =
+                                            (Playlist)
+                                                JsonConvert.DeserializeObject(tmp.Result.ToString(), typeof (Playlist))
+                                                );
+                            }
+                        });
+                    }
+                });
                 BoolRename = false;
             }
         }
 
         private void PlayCommandExecute()
         {
-            var test = 0;
+            var request = new HttpRequestGet();
+            var res = request.GetObject(new Music(), "musics", SelectedMusic.id.ToString());
+            res.ContinueWith(delegate(Task<object> task)
+            {
+                var music = task.Result as Music;
+                if (music != null)
+                {
+                    CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
+                        () =>
+                        {
+                            SelectedMusic = music;
+                            SelectedMusic.file = "http://soonzikapi.herokuapp.com/musics/get/" + SelectedMusic.id;
+                            Singleton.Singleton.Instance().SelectedMusicSingleton.Add(SelectedMusic);
+                        });
+                }
+            });
+            GlobalMenuControl.SetChildren(new BackgroundAudioPlayer());
+        }
+
+        private void PlayAllCommandExecute()
+        {
+            var request = new HttpRequestGet();
+            foreach (var music in ThePlaylist.musics)
+            {
+                var res = request.GetObject(new Music(), "musics", music.id.ToString());
+                res.ContinueWith(delegate(Task<object> task)
+                {
+                    var musics = task.Result as Music;
+                    if (musics != null)
+                    {
+                        CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
+                            () =>
+                            {
+                                SelectedMusic = musics;
+                                SelectedMusic.file = "http://soonzikapi.herokuapp.com/musics/get/" + SelectedMusic.id;
+                                Singleton.Singleton.Instance().SelectedMusicSingleton.Add(SelectedMusic);
+                            });
+                    }
+                });
+            }
+            GlobalMenuControl.SetChildren(new BackgroundAudioPlayer());
         }
 
         private void UpdatePlaylistExecute()

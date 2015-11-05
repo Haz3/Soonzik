@@ -6,6 +6,8 @@ using System.Windows.Input;
 using Windows.ApplicationModel.Core;
 using Windows.UI.Core;
 using Windows.UI.Popups;
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls.Primitives;
 using Coding4Fun.Toolkit.Controls;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
@@ -36,11 +38,36 @@ namespace SoonZik.ViewModel
             PlayCommand = new RelayCommand(PlayCommandExecute);
             AddToPlaylist = new RelayCommand(AddToPlaylistExecute);
             AddMusicToCart = new RelayCommand(AddMusicToCartExecute);
+            RateMusic = new RelayCommand(RateMusicExecute);
+        }
+
+        private void RateMusicExecute()
+        {
+            NotationMusic.SelectMusic = SelectedMusic;
+            RatePopup= new Popup();
+            var content = new NotationMusic();
+            width = content.Width;
+            height = content.Height;
+            RatePopup.Child = content;
+            RatePopup.VerticalOffset = (Window.Current.Bounds.Height - height) /2;
+            RatePopup.HorizontalOffset = (Window.Current.Bounds.Width - width)/2;
+            RatePopup.IsOpen = true;
+            RatePopup.Closed += RatePopupOnClosed;
+        }
+
+        private void RatePopupOnClosed(object sender, object o)
+        {
+            Charge();
         }
 
         #endregion
 
         #region Attribute
+
+        public static Popup RatePopup { get; set; }
+
+        public double width;
+        public double height;
 
         private readonly INavigationService _navigationService;
 
@@ -101,6 +128,7 @@ namespace SoonZik.ViewModel
         public ICommand PlayCommand { get; private set; }
         public ICommand AddToPlaylist { get; private set; }
         public ICommand AddMusicToCart { get; private set; }
+        public ICommand RateMusic { get; private set; }
 
         private string _crypto;
         private string _cryptographic { get; set; }

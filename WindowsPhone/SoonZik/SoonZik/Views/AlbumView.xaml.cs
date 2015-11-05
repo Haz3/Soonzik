@@ -62,5 +62,11 @@ namespace SoonZik.Views
             var vm = DataContext as AlbumViewModel;
             if (vm != null) vm.AddToCart.Execute(null);
         }
+
+        private void NotationMusic_OnClick(object sender, RoutedEventArgs e)
+        {
+            var vm = DataContext as AlbumViewModel;
+            if (vm != null) vm.RateMusic.Execute(null);
+        }
     }
 }

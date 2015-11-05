@@ -201,7 +201,23 @@ namespace SoonZik.Controls
         {
             var value = new ValueSet();
             value.Add(Constants.SkipPrevious, "");
-            BackgroundMediaPlayer.SendMessageToBackground(value);
+            BackgroundMediaPlayer.SendMessageToBackground(value); 
+            if (_isPlaylist)
+            {
+                if (_actuelMusic == 0)
+                {
+                    _actuelMusic = Singleton.Singleton.Instance().SelectedMusicSingleton.Count;
+                }
+                else
+                {
+                    _actuelMusic -= 1;
+                }
+                BackgroundMediaPlayer.Current.SetUriSource(new Uri(Singleton.Singleton.Instance().SelectedMusicSingleton[_actuelMusic].file, UriKind.RelativeOrAbsolute));
+                PlayImage.Source = new BitmapImage(new Uri("ms-appx:///Resources/PlayerIcons/pause.png", UriKind.RelativeOrAbsolute));
+                txtCurrentTrack.Text = Singleton.Singleton.Instance().SelectedMusicSingleton[_actuelMusic].title;
+                txtCurrentArtist.Text = Singleton.Singleton.Instance().SelectedMusicSingleton[_actuelMusic].user.username;
+                ImageMusique.Source = new BitmapImage(new Uri(Constant.UrlImageAlbum + Singleton.Singleton.Instance().SelectedMusicSingleton[_actuelMusic].album.image, UriKind.RelativeOrAbsolute));
+            }
 
             // Prevent the user from repeatedly pressing the button and causing 
             // a backlong of button presses to be handled. This button is re-eneabled 
@@ -240,7 +256,21 @@ namespace SoonZik.Controls
             var value = new ValueSet();
             value.Add(Constants.SkipNext, "");
             BackgroundMediaPlayer.SendMessageToBackground(value);
-
+            if (_isPlaylist)
+            {
+                if (_actuelMusic > Singleton.Singleton.Instance().SelectedMusicSingleton.Count)
+                {
+                    _actuelMusic = 0;
+                }
+                else
+                {
+                    _actuelMusic += 1;
+                }
+                BackgroundMediaPlayer.Current.SetUriSource(new Uri(Singleton.Singleton.Instance().SelectedMusicSingleton[_actuelMusic].file, UriKind.RelativeOrAbsolute));
+                txtCurrentTrack.Text = Singleton.Singleton.Instance().SelectedMusicSingleton[_actuelMusic].title;
+                txtCurrentArtist.Text = Singleton.Singleton.Instance().SelectedMusicSingleton[_actuelMusic].user.username;
+                ImageMusique.Source = new BitmapImage(new Uri(Constant.UrlImageAlbum + Singleton.Singleton.Instance().SelectedMusicSingleton[_actuelMusic].album.image, UriKind.RelativeOrAbsolute));
+            }
             // Prevent the user from repeatedly pressing the button and causing 
             // a backlong of button presses to be handled. This button is re-eneabled 
             // in the TrackReady Playstate handler.
@@ -250,38 +280,6 @@ namespace SoonZik.Controls
         private void RepeatImage_OnTapped(object sender, TappedRoutedEventArgs e)
         {
             throw new NotImplementedException();
-        }
-
-        private void prevButton_Click(object sender, RoutedEventArgs e)
-        {
-        }
-
-        private void playButton_Click(object sender, RoutedEventArgs e)
-        {
-            Debug.WriteLine("Play button pressed from App");
-            if (IsMyBackgroundTaskRunning)
-            {
-                if (MediaPlayerState.Playing == BackgroundMediaPlayer.Current.CurrentState)
-                {
-                    BackgroundMediaPlayer.Current.Pause();
-                }
-                else if (MediaPlayerState.Paused == BackgroundMediaPlayer.Current.CurrentState)
-                {
-                    BackgroundMediaPlayer.Current.Play();
-                }
-                else if (MediaPlayerState.Closed == BackgroundMediaPlayer.Current.CurrentState)
-                {
-                    StartBackgroundAudioTask();
-                }
-            }
-            else
-            {
-                StartBackgroundAudioTask();
-            }
-        }
-
-        private void nextButton_Click(object sender, RoutedEventArgs e)
-        {
         }
 
         #endregion
@@ -320,18 +318,22 @@ namespace SoonZik.Controls
 
         private void SetMusicAndInfo()
         {
-            if (Singleton.Singleton.Instance().SelectedMusicSingleton.Count == 1)
+            if (Singleton.Singleton.Instance().SelectedMusicSingleton.Count > 0)
             {
-                _isPlaylist = false;
+                if (Singleton.Singleton.Instance().SelectedMusicSingleton.Count == 1)
+                {
+                    _isPlaylist = false;
+                }
+                else if (Singleton.Singleton.Instance().SelectedMusicSingleton.Count > 1)
+                {
+                    _isPlaylist = true;
+                }
+                BackgroundMediaPlayer.Current.SetUriSource(new Uri(Singleton.Singleton.Instance().SelectedMusicSingleton[_actuelMusic].file, UriKind.RelativeOrAbsolute));
+                PlayImage.Source = new BitmapImage(new Uri("ms-appx:///Resources/PlayerIcons/pause.png", UriKind.RelativeOrAbsolute));
+                txtCurrentTrack.Text = Singleton.Singleton.Instance().SelectedMusicSingleton[_actuelMusic].title;
+                txtCurrentArtist.Text = Singleton.Singleton.Instance().SelectedMusicSingleton[_actuelMusic].user.username;
+                ImageMusique.Source = new BitmapImage(new Uri(Constant.UrlImageAlbum + Singleton.Singleton.Instance().SelectedMusicSingleton[_actuelMusic].album.image, UriKind.RelativeOrAbsolute));
             }
-            else if (Singleton.Singleton.Instance().SelectedMusicSingleton.Count > 1)
-            {
-                _isPlaylist = true;
-            }
-            BackgroundMediaPlayer.Current.SetUriSource(new Uri(Singleton.Singleton.Instance().SelectedMusicSingleton[_actuelMusic].file, UriKind.RelativeOrAbsolute));
-            txtCurrentTrack.Text = Singleton.Singleton.Instance().SelectedMusicSingleton[_actuelMusic].title;
-            txtCurrentArtist.Text = Singleton.Singleton.Instance().SelectedMusicSingleton[_actuelMusic].user.username;
-            ImageMusique.Source = new BitmapImage(new Uri(Constant.UrlImageAlbum + Singleton.Singleton.Instance().SelectedMusicSingleton[_actuelMusic].album.image, UriKind.RelativeOrAbsolute));
         }
 
         private void StartBackgroundAudioTask()

@@ -45,7 +45,7 @@ namespace SoonZik.Controls
                     var responseresult = (IDictionary<string, object>) fbPostTaskResult;
                     var SuccessMsg = new MessageDialog("Message posted sucessfully on facebook wall");
                     await SuccessMsg.ShowAsync();
-                    NewsViewModel.MessagePrompt.Hide();
+                    NewsViewModel.SharePopup.IsOpen = false;
                 }
                 catch (Exception ex)
                 {
@@ -61,7 +61,7 @@ namespace SoonZik.Controls
         public void TwitterShare_OnTapped(object sender, TappedRoutedEventArgs e)
         {
             // TODO Share on Twittter
-            NewsViewModel.MessagePrompt.Hide();
+            NewsViewModel.SharePopup.IsOpen = false;
         }
     }
 }

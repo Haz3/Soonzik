@@ -35,8 +35,8 @@
                 </Grid.ColumnDefinitions>
                 <TextBlock Grid.Column="0" Text="{Binding Path=name}" Margin="15,0,0,0" FontSize="25"
                            Foreground="White" />
-                <Image Grid.Column="1" Tapped="DeleteItem_OnTapped" VerticalAlignment="Center"
-                       HorizontalAlignment="Center" Source="../Resources/Icones/trash.png" Width="40" Height="40" />
+                <Image Grid.Column="1" Tapped="DeleteItem_OnTapped" VerticalAlignment="Center" Margin="0,0,15,0"
+                       HorizontalAlignment="Center" Source="../Resources/Icones/trash.png" Width="30" Height="30" />
 
             </Grid>
         </DataTemplate>
@@ -46,7 +46,7 @@
                 <Border BorderThickness="0,0,0,1" Width="350" BorderBrush="#7bc2fa" />
                 <TextBlock x:Name="MusicTitle" Text="{Binding Path=title}" Foreground="#40a8e2" FontSize="25"
                            Margin="50,0,0,0" />
-                <ratingControl:Rating Height="25" Width="125" Margin="50,10,0,0" VerticalAlignment="Bottom"
+                <!--<ratingControl:Rating Height="25" Width="125" Margin="50,10,0,0" VerticalAlignment="Bottom"
                                       HorizontalAlignment="Left" ReadOnly="True" Background="Transparent"
                                       RatingItemCount="5" Value="{Binding Path=getAverageNote, Mode=TwoWay}">
                     <ratingControl:Rating.FilledItemStyle>
@@ -59,7 +59,7 @@
                             <Setter Property="Background" Value="Gray" />
                         </Style>
                     </ratingControl:Rating.UnfilledItemStyle>
-                </ratingControl:Rating>
+                </ratingControl:Rating>-->
                 <Image x:Name="PlayImage" Source="../Resources/Icones/play.png" Height="30" Tapped="PlayImage_OnTapped"
                        VerticalAlignment="Center" HorizontalAlignment="Left" />
                 <FlyoutBase.AttachedFlyout>
@@ -86,7 +86,7 @@
         </DataTemplate>
     </Page.Resources>
 
-    <Grid x:Name="GlobalGrid">
+    <Grid x:Name="GlobalGrid" Margin="0,10,0,0">
         <ProgressRing IsActive="{Binding ProgressOn, Mode=TwoWay}" Background="Black" Foreground="Aqua" Opacity="0.5" />
         <Pivot x:Name="PivotGlobal" HeaderTemplate="{StaticResource SizeHeaderGlobalPivot}" Foreground="Transparent"
                RenderTransformOrigin="0.5,0.5" Style="{StaticResource PivotStyle1}"

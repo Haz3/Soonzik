@@ -68,5 +68,11 @@ namespace SoonZik.Views
             var vm = DataContext as PlaylistViewModel;
             if (vm != null) vm.DelToPlaylist.Execute(null);
         }
+
+        private void PlayAll_OnTapped(object sender, TappedRoutedEventArgs e)
+        {
+            var vm = DataContext as PlaylistViewModel;
+            if (vm != null) vm.PlayAllCommand.Execute(null);
+        }
     }
 }
