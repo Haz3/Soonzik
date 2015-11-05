@@ -42,13 +42,14 @@ namespace SoonZik.ViewModels
                 var news = (List<News>)await Http_get.get_object(new List<News>(), "news?language=" + language);
                 var albums = (List<Album>)await Http_get.get_object(new List<Album>(), "albums");
 
-               // tweet_list = await TweetViewModel.load_flux_tweets();
+                var tweet = await TweetViewModel.load_flux_tweets();
 
                 foreach (var item in news)
                     news_list.Add(item);
                 foreach (var item in albums)
                     album_list.Add(item);
-             
+                foreach (var item in tweet)
+                    tweet_list.Add(item);
             }
             catch (Exception e)
             {

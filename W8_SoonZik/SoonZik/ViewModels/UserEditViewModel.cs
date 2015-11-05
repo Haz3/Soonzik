@@ -127,6 +127,8 @@ namespace SoonZik.ViewModels
         public UserEditViewModel()
         {
             edit_user = Singleton.Instance.Current_user;
+            if (edit_user.address == null)
+                edit_user.address = new Address();
             friends = new ObservableCollection<User>(edit_user.friends);
             follows = new ObservableCollection<User>(edit_user.follows);
 

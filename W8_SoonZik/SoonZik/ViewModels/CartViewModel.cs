@@ -204,7 +204,7 @@ namespace SoonZik.ViewModels
                 return;
             }
             //buy_cart_after_pp_validation();
-
+            //florian.dewulf-facilitator@gmail.com
             PayPal.Checkout.BuyNow purchase = new PayPal.Checkout.BuyNow("test_sz_merchant@gmail.com");
             purchase.UseSandbox = true;
 
@@ -249,7 +249,7 @@ namespace SoonZik.ViewModels
 
             // Launch the secure PayPal interface. This is an asynchronous method
             await purchase.Execute();
-        }
+        }// buy_cart_after_pp_validation
 
         async public void buy_cart_after_pp_validation()
         {
@@ -263,7 +263,7 @@ namespace SoonZik.ViewModels
                 string pack_data =
                     "user_id=" + Singleton.Instance.Current_user.id +
                     "&secureKey=" + secureKey +
-                    "&paypal[payment_id]=" + pp_transac_id +
+                    "&paypal[payment_id]=" + "PAY-qweqweqweqwe" +
                     "&paypal[payment_method]=" + "PayPal" +
                     "&paypal[status]=" + "complete" +
                     "&paypal[payer_email]=" + "test@test.test" +

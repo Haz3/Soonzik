@@ -72,6 +72,29 @@ namespace SoonZik.ViewModels
             }
         }
 
+        private string _txt_pp;
+        public string txt_pp
+        {
+            get { return _txt_pp; }
+            set
+            {
+                _txt_pp = value;
+                OnPropertyChanged("txt_pp");
+            }
+        }
+
+        public string pp_transac_id { get; set; }
+
+        private double _cart_price;
+        public double cart_price
+        {
+            get { return _cart_price; }
+            set
+            {
+                _cart_price = value;
+                OnPropertyChanged("cart_price");
+            }
+        }
 
         private Visibility _desc_fr_visibility;
         public Visibility desc_fr_visibility
@@ -161,6 +184,95 @@ namespace SoonZik.ViewModels
                 await new MessageDialog(exception.Message, "pack error").ShowAsync();
         }
 
+        //async public void buy_pack()
+        //{
+        //    Exception exception = null;
+        //    var request = new Http_post();
+
+        //    try
+        //    {
+        //        string secureKey = await Security.getSecureKey(Singleton.Instance.Current_user.id.ToString());
+
+        //        // NOT DONE -> FIND WHAT FUCK IT UP
+        //        string pack_data =
+        //            "user_id=" + Singleton.Instance.Current_user.id +
+        //            "&secureKey=" + secureKey +
+        //            "&pack_id=" + pack.id.ToString() +
+        //            "&amount=" + amount.ToString() + 
+        //            "&artist=" + artist.ToString() + 
+        //            "&association=" + association.ToString() + 
+        //            "&website=" + website.ToString();
+
+
+        //        // HTTP_POST -> URL + DATA
+        //        var response = await request.post_request("purchases/buypack", pack_data);
+
+        //        var json = JObject.Parse(response).SelectToken("message");
+
+        //        // NO CONTENT RETURNED WHEN OK
+        //        if (json.ToString() == "Created")
+        //            await new MessageDialog("Purchase PACK OK").ShowAsync();
+        //        else
+        //            await new MessageDialog(json.ToString(), "Purchase PACK KO").ShowAsync();
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        exception = e;
+        //    }
+
+        //    if (exception != null)
+        //        await new MessageDialog(exception.Message, "Purchase PACK error").ShowAsync();
+        //}
+
+        //async public void buy_pack()
+        //{
+
+        //    PayPal.Checkout.BuyNow purchase = new PayPal.Checkout.BuyNow("test_sz_merchant@gmail.com");
+        //    purchase.UseSandbox = true;
+
+        //    purchase.Currency = "EUR";
+
+        //    // Use the ItemBuilder to create a new example item
+        //    PayPal.Checkout.ItemBuilder itemBuilder = new PayPal.Checkout.ItemBuilder("W8_PP")
+        //        .ID("W8_PP")
+        //        .Price(amount.ToString())
+        //        .Description(pack.title)
+        //        .Quantity(1);
+
+        //    // Add the item to the purchase,
+        //    purchase.AddItem(itemBuilder.Build());
+
+        //    // Attach event handlers so you will be notified of important events
+        //    // The BuyNow interface provides 5 events - Start, Auth, Cancel, Complete and Error
+        //    // See http://paypal.github.io/Windows8SDK/csharp.html#Events for more
+        //    purchase.Error += new EventHandler<PayPal.Checkout.Event.ErrorEventArgs>((source, eventArg) =>
+        //    {
+        //        this.txt_pp = "There was an error processing your payment: " + eventArg.Message;
+        //    });
+        //    purchase.Auth += new EventHandler<PayPal.Checkout.Event.AuthEventArgs>((source, eventArg) =>
+        //    {
+        //        this.txt_pp = "Auth: " + eventArg.Token;
+        //    });
+        //    purchase.Start += new EventHandler<PayPal.Checkout.Event.StartEventArgs>((source, eventArg) =>
+        //    {
+        //        this.txt_pp = "Start";
+        //    });
+        //    purchase.Complete += new EventHandler<PayPal.Checkout.Event.CompleteEventArgs>((source, eventArg) =>
+        //    {
+        //        //buy_cart_after_pp_validation();
+        //        this.txt_pp = "Payment is complete. Transaction id: " + eventArg.TransactionID;
+        //        this.pp_transac_id = eventArg.TransactionID;
+        //        this.buy_cart_after_pp_validation();
+        //    });
+        //    purchase.Cancel += new EventHandler<PayPal.Checkout.Event.CancelEventArgs>((source, eventArg) =>
+        //    {
+        //        this.txt_pp = "Payment was canceled by the user.";
+        //    });
+
+        //    // Launch the secure PayPal interface. This is an asynchronous method
+        //    await purchase.Execute();
+        //} buy_cart_after_pp_validation
+
         async public void buy_pack()
         {
             Exception exception = null;
@@ -170,27 +282,40 @@ namespace SoonZik.ViewModels
             {
                 string secureKey = await Security.getSecureKey(Singleton.Instance.Current_user.id.ToString());
 
-                // NOT DONE -> FIND WHAT FUCK IT UP
                 string pack_data =
                     "user_id=" + Singleton.Instance.Current_user.id +
                     "&secureKey=" + secureKey +
                     "&pack_id=" + pack.id.ToString() +
-                    "&amount=" + amount.ToString() + 
-                    "&artist=" + artist.ToString() + 
-                    "&association=" + association.ToString() + 
-                    "&website=" + website.ToString();
+                    "&amount=" + amount.ToString() +
+                    "&artist=" + artist.ToString() +
+                    "&association=" + association.ToString() +
+                    "&website=" + website.ToString() +
+                    "&paypal[payment_id]=" + pp_transac_id +
+                    "&paypal[payment_method]=" + "PayPal" +
+                    "&paypal[status]=" + "complete" +
+                    "&paypal[payer_email]=" + "test@test.test" +
+                    "&paypal[payer_first_name]=" + Singleton.Instance.Current_user.fname +
+                    "&paypal[payer_last_name]=" + Singleton.Instance.Current_user.language +
+                    "&paypal[payer_id]=" + "1337" +
+                    "&paypal[payer_phone]=" + "0606060606" +
+                    "&paypal[payer_country_code]=" + "FR" +
+                    "&paypal[payer_street]=" + "69" +
+                    "&paypal[payer_city]=" + "Parise" +
+                    "&paypal[payer_postal_code]=" + "75000" +
+                    "&paypal[payer_recipient_name]=" + Singleton.Instance.Current_user.fname +
+                    "&paypal[payer_country_code]=" + "FR";
 
 
                 // HTTP_POST -> URL + DATA
-                var response = await request.post_request("purchases/buypack", pack_data);
-
+                var response = await request.post_request("purchases/buycart", pack_data);
                 var json = JObject.Parse(response).SelectToken("message");
 
-                // NO CONTENT RETURNED WHEN OK
-                //if (json.ToString() == "Created")
-                //    await new MessageDialog("Purchase PACK OK").ShowAsync();
-                //else
-                //    await new MessageDialog(json.ToString(), "Purchase PACK KO").ShowAsync();
+                if (json.ToString() == "Created")
+                {
+                    await new MessageDialog("Achat du pack OK").ShowAsync();
+                }
+                else
+                    await new MessageDialog("Achat du pack KO").ShowAsync();
             }
             catch (Exception e)
             {
@@ -198,7 +323,7 @@ namespace SoonZik.ViewModels
             }
 
             if (exception != null)
-                await new MessageDialog(exception.Message, "Purchase PACK error").ShowAsync();
+                await new MessageDialog(exception.Message, "Achat du pack error").ShowAsync();
         }
 
         //public bool verif_price()
@@ -206,5 +331,7 @@ namespace SoonZik.ViewModels
         //    if ()
         //}
     }
+
+
 }
 

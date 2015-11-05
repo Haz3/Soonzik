@@ -48,6 +48,19 @@ namespace SoonZik.ViewModels
         static public ObservableCollection<User> follows { get; set; }
         static public ObservableCollection<Tweet> tweets { get; set; }
 
+        public ObservableCollection<Message> msg_list { get; set; }
+        private string _msg;
+        public string msg
+        {
+            get { return _msg; }
+            set
+            {
+                _msg = value;
+                OnPropertyChanged("msg");
+            }
+        }
+
+
         public ICommand do_add_friend
         {
             get;
@@ -155,6 +168,7 @@ namespace SoonZik.ViewModels
         {
             Exception exception = null;
             friends = new ObservableCollection<User>();
+            msg_list = new ObservableCollection<Message>();
 
             try
             {
@@ -163,8 +177,25 @@ namespace SoonZik.ViewModels
                 foreach (var item in list)
                     friends.Add(item);
 
-                if (friends.Any(x=> x.username == Singleton.Instance.Current_user.username))
+                if (friends.Any(x => x.username == Singleton.Instance.Current_user.username))
+                {
                     add_friend_btn = Visibility.Collapsed;
+
+                    // LOAD CONVERSATION
+                    var messages = (List<Message>)await Http_get.get_object(new List<Message>(), "/messages/conversation/" + id.ToString() + "?user_id=" + Singleton.Instance.Current_user.id.ToString() + "&secureKey=" + await Security.getSecureKey(Singleton.Instance.Current_user.id.ToString()));
+
+                    foreach (var item in messages)
+                    {
+                        if (item.user_id == Singleton.Instance.Current_user.id)
+                            item.name = "Vous";
+                        else
+                            item.name = user.username;
+
+                        //msg_list.Add(item);
+                        msg_list.Insert(0, item);
+                    }
+
+                }
                 else
                     remove_friend_btn = Visibility.Collapsed;
             }

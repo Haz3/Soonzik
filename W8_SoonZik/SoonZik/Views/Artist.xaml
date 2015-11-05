@@ -54,7 +54,7 @@
             <TextBlock x:Name="user_description" Text="{Binding artist.description, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="210,211,-250,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Foreground="Black" Height="Auto" Width="490" FontSize="20" Grid.Column="1"/>
 
             <Button x:Uid="add_follow_btn" Visibility="{Binding add_follow_btn, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" x:Name="add_follow_btn" Command="{Binding do_add_follow, Mode=OneWay}" Content="Follow cet artist" Grid.Column="1" HorizontalAlignment="Left" Margin="1030,12,-778,0" VerticalAlignment="Top" Width="198" Height="49" Background="#FF50A837"/>
-            <Button x:Uid="remove_follow_btn" Visibility="{Binding remove_follow_btn, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" x:Name="remove_follow_btn" Command="{Binding do_remove_follow, Mode=OneWay}" Content="Unfollow cet artist" Grid.Column="1" HorizontalAlignment="Left" Margin="1030,12,-778,0" VerticalAlignment="Top" Width="198" Height="49" Background="#FFF05D5D"/>
+            <Button x:Uid="remove_follow_btn" Visibility="{Binding remove_follow_btn, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" x:Name="remove_follow_btn" Command="{Binding do_remove_follow, Mode=OneWay}" Content="Unfollow cet artiste" Grid.Column="1" HorizontalAlignment="Left" Margin="1030,12,-778,0" VerticalAlignment="Top" Width="198" Height="49" Background="#FFF05D5D"/>
 
             <TextBlock Grid.Column="1" Margin="635,57,-405,0" Grid.Row="1" TextWrapping="Wrap" Text="Top Five" VerticalAlignment="Top" Foreground="Black" Height="Auto" Width="Auto" FontSize="20"/>
 
@@ -68,15 +68,18 @@
                             </StackPanel>
                             <StackPanel Orientation="Horizontal">
                                 <TextBlock FontSize="16" Foreground="Black">Price:</TextBlock>
-                                <TextBlock Name="music_duration" Text="{Binding duration}" FontSize="16" Foreground="Black" Margin="20,0,0,0"></TextBlock>
+                                <TextBlock Name="music_duration" FontSize="16" Foreground="Black" Margin="20,0,0,0">
+                                    <Run Text="{Binding price}"></Run>
+                                    <Run Text="€"></Run>
+                                </TextBlock>
                             </StackPanel>
                         </StackPanel>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-            
+
             <TextBlock Grid.Column="1" Margin="938,57,-708,0" Grid.Row="1" TextWrapping="Wrap" Text="Liste des albums" VerticalAlignment="Top" Foreground="Black" Height="Auto" Width="Auto" FontSize="20"/>
-           
+
             <ListView x:Name="album_list_ListView" ItemClick="album_list_ListView_ItemClick" ItemsSource="{Binding list_album, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" Margin="938,88,-753,-92" Grid.Row="1" Background="#FFCCCCCC" IsItemClickEnabled="True">
                 <ListView.ItemTemplate>
                     <DataTemplate>
@@ -87,7 +90,10 @@
                             </StackPanel>
                             <StackPanel Orientation="Horizontal">
                                 <TextBlock FontSize="16" Foreground="Black">Price:</TextBlock>
-                                <TextBlock Name="music_duration" Text="{Binding duratiion}" FontSize="16" Foreground="Black" Margin="20,0,0,0"></TextBlock>
+                                <TextBlock Name="music_duration" FontSize="16" Foreground="Black" Margin="20,0,0,0">
+                                    <Run Text="{Binding price}"></Run>
+                                    <Run Text="€"></Run>
+                                </TextBlock>
                             </StackPanel>
                         </StackPanel>
                     </DataTemplate>
@@ -96,10 +102,11 @@
         </Grid>
 
         <TextBlock x:Uid="friends_list_txt" x:Name="friends_list_txt" HorizontalAlignment="Left" Margin="210,690,0,0" TextWrapping="Wrap" Text="Amis" VerticalAlignment="Top" Height="45" Width="175" Foreground="Black" FontSize="30"/>
-        <TextBlock x:Uid="follows_list_txt" x:Name="follows_list_txt" HorizontalAlignment="Left" Margin="615,690,0,0" TextWrapping="Wrap" Text="Follows" VerticalAlignment="Top" Height="45" Width="Auto" Foreground="Black" FontSize="30"/>
-        <TextBlock x:Uid="tweets_list_txt" x:Name="tweets_list_txt" HorizontalAlignment="Left" Margin="1020,690,0,0" TextWrapping="Wrap" Text="Tweets" VerticalAlignment="Top" Height="45" Width="Auto" Foreground="Black" FontSize="30"/>
+        <TextBlock x:Uid="follows_list_txt" x:Name="follows_list_txt" HorizontalAlignment="Left" Margin="465,695,0,0" TextWrapping="Wrap" Text="Follows" VerticalAlignment="Top" Height="45" Width="Auto" Foreground="Black" FontSize="30"/>
+        <TextBlock x:Uid="follower_list_txt" x:Name="follower_list_txt" HorizontalAlignment="Left" Margin="720,695,0,0" TextWrapping="Wrap" Text="Followers" VerticalAlignment="Top" Height="45" Width="Auto" Foreground="Black" FontSize="30"/>
+        <TextBlock x:Uid="artist_tweets_list_txt" x:Name="tweets_list_txt" HorizontalAlignment="Left" Margin="1020,690,0,0" TextWrapping="Wrap" Text="Tweets" VerticalAlignment="Top" Height="45" Width="Auto" Foreground="Black" FontSize="30"/>
 
-        <ListView x:Name="friend_list" ItemsSource="{Binding friends, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Height="290" Margin="210,740,0,0" VerticalAlignment="Top" Width="355" Background="White" IsSwipeEnabled="False" SelectionMode="None">
+        <ListView x:Name="friend_list" ItemsSource="{Binding friends, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Height="290" Margin="210,740,0,0" VerticalAlignment="Top" Width="225" Background="White" IsSwipeEnabled="False" SelectionMode="None">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <StackPanel>
@@ -112,7 +119,7 @@
         </ListView>
 
 
-        <ListView x:Name="follows_list" ItemsSource="{Binding follows, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Height="290" Margin="615,740,0,0" VerticalAlignment="Top" Width="355" Background="White" IsSwipeEnabled="False" SelectionMode="None">
+        <ListView x:Name="follows_list" ItemsSource="{Binding follows, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Height="290" Margin="465,740,0,0" VerticalAlignment="Top" Width="225" Background="White" IsSwipeEnabled="False" SelectionMode="None">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <StackPanel>
@@ -130,6 +137,18 @@
                     <StackPanel>
                         <StackPanel Orientation="Horizontal">
                             <TextBlock Name="music_title" Text="{Binding msg, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="16" Foreground="Black" Margin="20,0,0,0"></TextBlock>
+                        </StackPanel>
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+      
+        <ListView x:Name="follower_list" ItemsSource="{Binding followers, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Height="290" Margin="720,740,0,0" VerticalAlignment="Top" Width="225" Background="White" IsSwipeEnabled="False" SelectionMode="None">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock x:Name="music_title" Text="{Binding username, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="16" Foreground="Black" Margin="20,0,0,0"/>
                         </StackPanel>
                     </StackPanel>
                 </DataTemplate>
