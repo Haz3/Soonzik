@@ -44,7 +44,12 @@ module API
                                                       },
                                                       methods: :getAverageNote) }
 =end
-          @returnValue = { content: Album.eager_load([:user, :musics, :descriptions]).all.as_json(:only => Album.miniKey, :include => {
+          albums = Album.eager_load([:user, :musics, :descriptions]).all
+          albums.each do |album|
+            Music.fillAverageNote album.musics if album.musics.size > 0
+          end
+
+          @returnValue = { content: albums.as_json(:only => Album.miniKey, :include => {
                                                         :user => { :only => User.miniKey },
                                                         :musics => {
                                                           :only => Music.miniKey,
@@ -88,6 +93,7 @@ module API
           codeAnswer 502
           defineHttp :not_found
         else
+          Music.fillAverageNote album.musics
           @returnValue = { content: album.as_json(:only => Album.miniKey, :include => {
                                                     :musics => {
                                                       :only => Music.miniKey,
@@ -192,6 +198,10 @@ module API
         end
         if (defined?@offset)      #offset
           album_object = album_object.offset(@offset.to_i)
+        end
+
+        album_object.each do |album|
+          Music.fillAverageNote album.musics if album.musics.size > 0
         end
 
         @returnValue = { content: album_object.as_json(:only => Album.miniKey, :include => {

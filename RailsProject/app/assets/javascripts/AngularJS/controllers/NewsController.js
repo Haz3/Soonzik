@@ -17,12 +17,29 @@ SoonzikApp.controller('NewsCtrl', ['$scope', '$routeParams', 'SecureAuth', 'HTTP
 		contentCommentary : ""
 	};
 
+	var newsPerPage = 20;
+
 	$scope.initIndexNews = function() {
 		$scope.index.currentPage = ($rootScope.toInt($routeParams.page) == 0 ? 1 : $rootScope.toInt($routeParams.page));
+
+		// For pagination
+		HTTPService.indexNews([{ key: "count", value: "true" }]).then(function(response) {
+			var numberResults = response.data.content;
+
+			if (typeof numberResults != "undefined") {
+				$scope.index.totalPage = ~~(numberResults / newsPerPage) + 1;
+			} else {
+				$scope.index.totalPage = 1;
+			}
+		}, function(error) {
+			NotificationService.error($rootScope.labels.FILE_NEWS_LOAD_ERROR_MESSAGE);
+		});
+
+		// Get news
 		var parameters = [
 			{ key: "order_by_desc[]", value: "created_at" },
   		{ key: "offset", value: ($scope.index.currentPage - 1) * 20 },
-  		{ key: "limit", value: 20 }
+  		{ key: "limit", value: newsPerPage }
 		];
 
 		HTTPService.findNews(parameters).then(function(response) {
