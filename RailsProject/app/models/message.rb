@@ -20,12 +20,12 @@ class Message < ActiveRecord::Base
   belongs_to :receiver, class_name: 'User', foreign_key: 'dest_id'
 
 
-  validates :sender, :receiver, :msg, :session, presence: true
+  validates :sender, :receiver, :msg, presence: true
   validates :msg, length: { minimum: 1 }
 
   # The strong parameters to save or update object
   def self.message_params(parameters)
-    parameters.require(:message).permit(:msg, :user_id, :dest_id, :session)
+    parameters.require(:message).permit(:msg, :user_id, :dest_id)
   end
 
   # Filter of information for API
