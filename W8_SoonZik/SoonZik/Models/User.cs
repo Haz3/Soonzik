@@ -25,5 +25,6 @@ namespace SoonZik.Models
         public string image { get; set; }
         public List<User> friends { get; set; }
         public List<User> follows { get; set; }
+        public List<User> followers { get; set; }
     }
 }

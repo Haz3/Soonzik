@@ -116,6 +116,38 @@ namespace SoonZik.Tools
             return null;
         }
 
+        public static async Task<object> get_search_result(object Object, string elem)
+        {
+            Exception exception = null;
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url + elem);
+            request.Method = "GET";
+            request.ContentType = "application/json; charset=utf-8";
+
+            try
+            {
+                HttpWebResponse response = (HttpWebResponse)await request.GetResponseAsync();
+                var reader = new StreamReader(response.GetResponseStream());
+                var json = JObject.Parse(reader.ReadToEnd()).SelectToken("content").ToString();
+
+                if (json == "[]")
+                {
+                    await new MessageDialog("Nothing to be found...").ShowAsync();
+                    return null;
+                }
+                return JsonConvert.DeserializeObject(json, Object.GetType());
+                
+
+            }
+            catch (WebException ex)
+            {
+                exception = ex;
+            }
+
+            if (exception != null)
+                await new MessageDialog(exception.Message, "Get Object Error").ShowAsync();
+            return null;
+        }
+
         // COPY PASTE CAUSE FIND GIVES ME AN ARAY OF USER AND ITS NO GOOD
         public static async Task<object> get_object_find(object Object, string elem)
         {

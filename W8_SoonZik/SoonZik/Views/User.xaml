@@ -31,7 +31,7 @@
                     <BitmapImage DecodePixelWidth="200" UriSource="{Binding Path=user.bmp, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                 </Image.Source>-->
             </Image>
-            
+
             <!--<Image  Grid.Row="1" Source="https://upload.wikimedia.org/wikipedia/commons/0/0e/Lakeyboy_Silhouette.PNG" Stretch="Fill" Width="174" Height="218" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,63,46,0"/>-->
             <Rectangle Fill="#FF00AFDC" HorizontalAlignment="Left" Height="75" StrokeEndLineCap="Square" Stroke="#FF00AFDC" VerticalAlignment="Top" Width="1500" Grid.ColumnSpan="2" Margin="0,0,-785,0"/>
 
@@ -98,6 +98,23 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
+
+        <ListView x:Name="messages_lv" ItemsSource="{Binding msg_list, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Visibility="{Binding remove_friend_btn, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Height="300" Margin="1020,225,0,0" VerticalAlignment="Top" Width="675" Background="#FFD4D4D4" IsItemClickEnabled="False" IsSwipeEnabled="False" SelectionMode="None">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel>
+                        <StackPanel Orientation="Vertical">
+                            <TextBlock Name="name_tb" Text="{Binding name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="16" Foreground="Black" Margin="20,0,0,0"></TextBlock>
+                            <TextBlock Name="chat_msg" Text="{Binding msg, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="16" Foreground="Black" Margin="20,0,0,0"></TextBlock>
+                        </StackPanel>
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        
+        <TextBox x:Name="message_tb" Text="{Binding msg, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Visibility="{Binding remove_friend_btn, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="1020,545,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="520" Background="#FFC3C3C3"/>
+        <Button x:Name="send_msg_btn" Visibility="{Binding remove_friend_btn, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Content="Envoyer" HorizontalAlignment="Left" Height="38" Margin="1565,542,0,0" VerticalAlignment="Top" Width="133" Background="#FFC7C2C2"/>
+
 
     </Grid>
 </Page>

@@ -6,6 +6,14 @@
     </header>
     <body>
       <group id="Resources">
+        <trans-unit id="Resources\artist_tweets_list_txt\Text" translate="yes" xml:space="preserve">
+          <source>Liste des Tweets de l'artiste</source>
+          <target state="new">Liste des Tweets de l'artiste</target>
+        </trans-unit>
+        <trans-unit id="Resources\association_txt\Text" translate="yes" xml:space="preserve">
+          <source>Association:</source>
+          <target state="new">Association:</target>
+        </trans-unit>
         <trans-unit id="Resources\artist_page_txt\Text" translate="yes" xml:space="preserve">
           <source>Artiste</source>
           <target state="final">Artist</target>
