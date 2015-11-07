@@ -103,9 +103,9 @@ SoonzikApp.config(function(uiGmapGoogleMapApiProvider) {
 		});
 });
 
-SoonzikApp.run(['$route', '$rootScope', '$location', function ($route, $rootScope, $location) {
+SoonzikApp.run(['$route', '$rootScope', '$location', 'SecureAuth', 'HTTPService', '$routeParams', function ($route, $rootScope, $location, SecureAuth, HTTPService, $routeParams) {
 	var original = $location.path;
-	
+
 	$location.path = function (path, reload) {
 		if (reload === false) {
 			var lastRoute = $route.current;
@@ -124,15 +124,15 @@ SoonzikApp.run(['$route', '$rootScope', '$location', function ($route, $rootScop
 	  	return new Array(Math.floor(n));
 	  else
 	  	return [];
-  }
+	}
 
-  $rootScope.min = function(a, b) {
-  	return (a < b ? a : b);
-  }
+	$rootScope.min = function(a, b) {
+		return (a < b ? a : b);
+	}
 
-  $rootScope.max = function(a, b) {
-  	return (a > b ? a : b);
-  }
+	$rootScope.max = function(a, b) {
+		return (a > b ? a : b);
+	}
 
 	$rootScope.toInt = function(value) {
 		var number = parseInt(value);
@@ -141,6 +141,30 @@ SoonzikApp.run(['$route', '$rootScope', '$location', function ($route, $rootScop
 		} else {
 			return number;
 		}
+	}
+
+	$rootScope.likeResource = function(resourceName) {
+		var resource = resourceName.charAt(0).toUpperCase() + resourceName.slice(1);
+
+		SecureAuth.securedTransaction(function(key, id) {
+			var parameters = {
+				secureKey: key,
+		  		user_id: id,
+		  		like: {
+		  			user_id: id,
+		  			typeObj: resource,
+		  			obj_id: $routeParams.id
+		  		}
+		  	};
+
+			HTTPService.likeResource(parameters).then(function(response) {
+				$rootScope.likes++;
+			}, function(error) {
+				//NotificationService.error(" fail like ");
+			});
+		}, function(error) {
+			//NotificationService.error(" fail like ");
+		});
 	}
 }]);
 

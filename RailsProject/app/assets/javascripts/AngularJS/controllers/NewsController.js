@@ -1,13 +1,15 @@
 SoonzikApp.controller('NewsCtrl', ['$scope', '$routeParams', 'SecureAuth', 'HTTPService', 'NotificationService', "$rootScope", function ($scope, $routeParams, SecureAuth, HTTPService, NotificationService, $rootScope) {
 
 	$scope.loading = true;
+	$scope.resourceName = "news"
+
+	$rootScope.likes = 0;
 
 	// For the pagination
 	$scope.index = {
 		currentPage: 1,
 		totalPage: 1,
-		resources: [],
-		resourceName: "news"
+		resources: []
 	};
 
 	$scope.resourcesCommentaries = [];
@@ -64,6 +66,7 @@ SoonzikApp.controller('NewsCtrl', ['$scope', '$routeParams', 'SecureAuth', 'HTTP
 
 		HTTPService.showNews(newsId).then(function(response) {
 			$scope.show.news = response.data.content;
+			$rootScope.likes = response.data.content.likes;
 			$scope.showComments();
 
 			$(window).scroll(function() {

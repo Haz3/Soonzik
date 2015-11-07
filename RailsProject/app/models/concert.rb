@@ -19,6 +19,7 @@
 class Concert < ActiveRecord::Base
   belongs_to :address
   belongs_to :user
+  has_many :concertslikes
 
   validates :user, :address, :planification, presence: true
   validates :planification, format: /(\d{4})-(\d{2})-(\d{2}) (\d{2}):(\d{2}):(\d{2})/
@@ -28,6 +29,43 @@ class Concert < ActiveRecord::Base
   # Fields returned : [:id, :planification, :url]
   def self.miniKey
   	[:id, :planification, :url]
+  end
+
+  # Fill an association of records of the notes average
+  def self.fillLikes(ar_concerts)
+    sql = "SELECT concert_id, COUNT(concert_id) AS count FROM concertslikes WHERE (concert_id IN ("
+
+    ar_concerts.each_with_index do |concert, index|
+      sql += ", " if index != 0
+      sql += concert[:id].to_s
+    end
+
+    sql += ")) GROUP BY concert_id"
+    records_array = ActiveRecord::Base.connection.execute(sql)
+
+    ar_concerts.each do |concert|
+      passIn = false
+
+      records_array.each do |record|
+        if (concert[:id].to_i == record['concert_id'].to_i)
+          passIn = true
+          concert.setLike record['count']
+          break
+        end
+      end
+
+      concert.setLike 0 if !passIn
+    end
+  end
+
+  # Set the number of likes
+  def setLike(value)
+    @likes = value
+  end
+
+  # Return the number of likes
+  def likes
+    return (@likes.present?) ? @likes : ActiveRecord::Base.connection.execute("SELECT COUNT(concert_id) AS count FROM concertslikes WHERE concert_id = #{self.id.to_s}")[0]["count"]
   end
 
   # The strong parameters to save or update object

@@ -45,6 +45,7 @@ module API
                                                       methods: :getAverageNote) }
 =end
           albums = Album.eager_load([:user, :musics, :descriptions]).all
+          Album.fillLikes albums
           albums.each do |album|
             Music.fillAverageNote album.musics if album.musics.size > 0
           end
@@ -57,7 +58,7 @@ module API
                                                         },
                                                         descriptions: {  :only => Description.miniKey }
                                                       },
-                                                      methods: :getAverageNote ) }
+                                                      methods: [:getAverageNote, :likes] ) }
         end
         if (@returnValue[:content].size == 0)
           codeAnswer 202
@@ -65,7 +66,6 @@ module API
           codeAnswer 200
         end
       rescue
-        puts $!, $@
         codeAnswer 504
         defineHttp :service_unavailable
       end
@@ -94,6 +94,7 @@ module API
           defineHttp :not_found
         else
           Music.fillAverageNote album.musics
+          Album.fillLikes [album]
           @returnValue = { content: album.as_json(:only => Album.miniKey, :include => {
                                                     :musics => {
                                                       :only => Music.miniKey,
@@ -103,7 +104,7 @@ module API
                                                     descriptions: {  :only => Description.miniKey },
                                                     genres: { :only => Genre.miniKey }
                                                   },
-                                                  methods: :getAverageNote) }
+                                                  methods: [:getAverageNote, :likes]) }
           codeAnswer 200
         end
       rescue
@@ -203,6 +204,7 @@ module API
         album_object.each do |album|
           Music.fillAverageNote album.musics if album.musics.size > 0
         end
+        Album.fillLikes album_object
 
         @returnValue = { content: album_object.as_json(:only => Album.miniKey, :include => {
                                                         :musics => {
@@ -213,7 +215,7 @@ module API
                                                         descriptions: {  :only => Description.miniKey },
                                                         genres: { :only => Genre.miniKey }
                                                       },
-                                                      methods: :getAverageNote) }
+                                                      methods: [:getAverageNote, :likes]) }
 
         if (album_object.size == 0)
           codeAnswer 202

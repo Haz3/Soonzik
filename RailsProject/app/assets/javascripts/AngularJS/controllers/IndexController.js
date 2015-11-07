@@ -307,7 +307,7 @@ SoonzikApp.controller('IndexCtrl', ['$scope', 'SecureAuth', 'HTTPService', '$tim
 				for (var indexPartial in partial) {
 					if (partial[indexPartial].album_id == packs[i].albums[indexAlbums].id) { packs[i].albums[indexAlbums].partial = true; }
 				}
-				if (packs[i].albums[indexAlbums].partial) { partial_array.push(packs[i].albums[indexAlbums]); }
+				if (!packs[i].albums[indexAlbums].partial) { partial_array.push(packs[i].albums[indexAlbums]); }
 				else { partial_pack.push(packs[i].albums[indexAlbums]); }
 			}
 

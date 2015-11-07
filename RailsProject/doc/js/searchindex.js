@@ -13,6 +13,12 @@ var SearchIndex =
 		"type": "normalclass"
 	},
 	{
+		"name": "API::AmbiancesController",
+		"link": "API/AmbiancesController.html",
+		"snippet": "<p>Controller which manage the transaction for the ambiances objects Here is\nthe list of action available …\n",
+		"type": "normalclass"
+	},
+	{
 		"name": "API::ApiController",
 		"link": "API/ApiController.html",
 		"snippet": "<p>The class is the parent of every class because it is inherit from\n&#39;Apisecurity&#39; ApiController …\n",
@@ -58,6 +64,12 @@ var SearchIndex =
 		"name": "API::LanguagesController",
 		"link": "API/LanguagesController.html",
 		"snippet": "<p>Controller which manage the transaction for the Albums objects Here is the\nlist of action available : …\n",
+		"type": "normalclass"
+	},
+	{
+		"name": "API::LikesController",
+		"link": "API/LikesController.html",
+		"snippet": "<p>Controller which manage the transaction for the Likes objects Here is the\nlist of action available : …\n",
 		"type": "normalclass"
 	},
 	{
@@ -154,6 +166,12 @@ var SearchIndex =
 		"name": "Albumslike",
 		"link": "Albumslike.html",
 		"snippet": "<p>The model of the object Albumlike Contain the relation and the validation\nCan provide some features linked …\n",
+		"type": "normalclass"
+	},
+	{
+		"name": "Ambiance",
+		"link": "Ambiance.html",
+		"snippet": "<p>The model of the object Ambiance Contain the relation and the validation\nCan provide some features linked …\n",
 		"type": "normalclass"
 	},
 	{
@@ -373,6 +391,12 @@ var SearchIndex =
 		"type": "normalclass"
 	},
 	{
+		"name": "Tool",
+		"link": "Tool.html",
+		"snippet": "<p>Class to put generic functions into\n",
+		"type": "normalclass"
+	},
+	{
 		"name": "Tweet",
 		"link": "Tweet.html",
 		"snippet": "<p>The model of the object Tweet Contain the relation and the validation Can\nprovide some features linked …\n",
@@ -418,6 +442,18 @@ var SearchIndex =
 		"name": "getcomments",
 		"link": "API/AlbumsController.html#method-i-getcomments",
 		"snippet": "<p>Get comments of a specific albums.\n<p>Route : /albums/:id/comments\n<p>Options\n",
+		"type": "anymethod"
+	},
+	{
+		"name": "index",
+		"link": "API/AmbiancesController.html#method-i-index",
+		"snippet": "<p>Retrieve all the ambiances\n<p>Route : /ambiances\n<p>Options\n",
+		"type": "anymethod"
+	},
+	{
+		"name": "show",
+		"link": "API/AmbiancesController.html#method-i-show",
+		"snippet": "<p>Give a specific object by its id\n<p>Route : /ambiances/:id\n<p>Options\n",
 		"type": "anymethod"
 	},
 	{
@@ -574,6 +610,18 @@ var SearchIndex =
 		"name": "index",
 		"link": "API/LanguagesController.html#method-i-index",
 		"snippet": "<p>Retrieve all the languages\n<p>Route : /languages\n<p>HTTP VALUE\n",
+		"type": "anymethod"
+	},
+	{
+		"name": "destroy",
+		"link": "API/LikesController.html#method-i-destroy",
+		"snippet": "<p>Destroy a specific object by its id\n<p>Route : /likes/destroy\n<p>Options\n",
+		"type": "anymethod"
+	},
+	{
+		"name": "save",
+		"link": "API/LikesController.html#method-i-save",
+		"snippet": "<p>Save a new object like. For more information on the parameters, check at\nthe model\n<p>Route : /likes/save …\n",
 		"type": "anymethod"
 	},
 	{
@@ -985,6 +1033,12 @@ var SearchIndex =
 		"type": "anymethod"
 	},
 	{
+		"name": "sql_join",
+		"link": "Album.html#method-c-sql_join",
+		"snippet": "<p>To join tables in sql query\n",
+		"type": "anymethod"
+	},
+	{
 		"name": "getAverageNote",
 		"link": "Album.html#method-i-getAverageNote",
 		"snippet": "<p>Get the average of notes\n",
@@ -1009,9 +1063,21 @@ var SearchIndex =
 		"type": "anymethod"
 	},
 	{
+		"name": "likes",
+		"link": "Album.html#method-i-likes",
+		"snippet": "<p>Return the number of likes\n",
+		"type": "anymethod"
+	},
+	{
 		"name": "setPack",
 		"link": "Album.html#method-i-setPack",
 		"snippet": "<p>To know if the album is in the pack\n",
+		"type": "anymethod"
+	},
+	{
+		"name": "miniKey",
+		"link": "Ambiance.html#method-c-miniKey",
+		"snippet": "",
 		"type": "anymethod"
 	},
 	{
@@ -1066,6 +1132,12 @@ var SearchIndex =
 		"name": "miniKey",
 		"link": "Concert.html#method-c-miniKey",
 		"snippet": "<p>Filter of information for the API\n<p>Fields returned : [:id, :planification, :url]\n",
+		"type": "anymethod"
+	},
+	{
+		"name": "likes",
+		"link": "Concert.html#method-i-likes",
+		"snippet": "<p>Return the number of likes\n",
 		"type": "anymethod"
 	},
 	{
@@ -1201,9 +1273,21 @@ var SearchIndex =
 		"type": "anymethod"
 	},
 	{
+		"name": "setAverageNote",
+		"link": "Music.html#method-i-setAverageNote",
+		"snippet": "<p>Set the average of notes\n",
+		"type": "anymethod"
+	},
+	{
 		"name": "getAverageNote",
 		"link": "Music.html#method-i-getAverageNote",
 		"snippet": "<p>Get the average of notes\n",
+		"type": "anymethod"
+	},
+	{
+		"name": "fillAverageNote",
+		"link": "Music.html#method-c-fillAverageNote",
+		"snippet": "<p>Fill an association of records of the notes average\n",
 		"type": "anymethod"
 	},
 	{
@@ -1240,6 +1324,12 @@ var SearchIndex =
 		"name": "miniKey",
 		"link": "News.html#method-c-miniKey",
 		"snippet": "<p>Filter of information for the API\n<p>Fields returned : [:id, :title, :date]\n",
+		"type": "anymethod"
+	},
+	{
+		"name": "likes",
+		"link": "News.html#method-i-likes",
+		"snippet": "<p>Return the number of likes\n",
 		"type": "anymethod"
 	},
 	{
@@ -1372,6 +1462,12 @@ var SearchIndex =
 		"name": "buyCart",
 		"link": "Purchase.html#method-i-buyCart",
 		"snippet": "",
+		"type": "anymethod"
+	},
+	{
+		"name": "select_join",
+		"link": "Tool.html#method-c-select_join",
+		"snippet": "<p>To select the right fields\n",
 		"type": "anymethod"
 	},
 	{

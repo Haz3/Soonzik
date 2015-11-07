@@ -92,8 +92,8 @@
 				  												<h1 class="class"
 					rel="popover"
 					data-original-title="In files"
-					data-content="app/controllers/API/suggestions_controller.rb"
-					>SuggestionsController</h1>
+					data-content="app/controllers/API/likes_controller.rb"
+					>LikesController</h1>
 				</p>
 							</hgroup>
 			<span class="label">class</span>
@@ -110,12 +110,14 @@
 
 		<section class="description">
 			
-<p>Controller which manage the transaction for the Suggestions objects Here is
-the list of action available :</p>
+<p>Controller which manage the transaction for the Likes objects Here is the
+list of action available :</p>
 <ul><li>
 <p>show        [get] - SECURE</p>
 </li><li>
-<p>showTwo     [get] - SECURE OR NOT !</p>
+<p>save              [post] - SECURE</p>
+</li><li>
+<p>destroy     [get] - SECURE</p>
 </li></ul>
 		</section>
 
@@ -137,57 +139,57 @@ the list of action available :</p>
 					<h3>Public Instance Methods</h3>
 				</header>
 
-								<a name="method-i-show">anchor</a>
-				<div id="method-i-show-doc" class="method">
+								<a name="method-i-destroy">anchor</a>
+				<div id="method-i-destroy-doc" class="method">
 
 					<header>
 											<i class="icon-generic"></i>
-						<span class="method-name">show</span><span 
+						<span class="method-name">destroy</span><span 
 							class="method-args">()</span>
 										</header>
 
 					<div class="method-description">
-											<p>Give a list of music based on the purchases</p>
+											<p>Destroy a specific object by its id</p>
 
-<p>Route : /suggest</p>
+<p>Route : /likes/destroy</p>
 
-<h5 id="method-i-show-label-HTTP+VALUE">HTTP VALUE<span><a href="#method-i-show-label-HTTP+VALUE">&para;</a> <a href="#top">&uarr;</a></span></h5>
+<h4 id="method-i-destroy-label-Options">Options<span><a href="#method-i-destroy-label-Options">&para;</a> <a href="#top">&uarr;</a></span></h4>
 <ul><li>
-<p><code>200</code> - In case of success, return an array of music</p>
+<p><code>id</code> - The id of the specific like</p>
+</li></ul>
+
+<h5 id="method-i-destroy-label-HTTP+VALUE">HTTP VALUE<span><a href="#method-i-destroy-label-HTTP+VALUE">&para;</a> <a href="#top">&uarr;</a></span></h5>
+<ul><li>
+<p><code>200</code> - In case of success, there is nothing to return</p>
 </li><li>
 <p><code>401</code> - It is not a secured transaction</p>
 </li><li>
-<p><code>404</code> - Can&#39;t find musics to suggest</p>
+<p><code>404</code> - The like was not found</p>
 </li><li>
 <p><code>503</code> - Error from server</p>
 </li></ul>					
-											<div class="method-source-code" id="show-source">
+											<div class="method-source-code" id="destroy-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/suggestions_controller.rb, line 22</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">show</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/likes_controller.rb, line 27</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">destroy</span>
   <span class="ruby-keyword">begin</span>
     <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@security</span>)
-      <span class="ruby-identifier">u</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">find_by_id</span>(<span class="ruby-ivar">@user_id</span>)
-
-      <span class="ruby-identifier">suggestion</span> = <span class="ruby-constant">Music</span>.<span class="ruby-identifier">suggest</span>(<span class="ruby-identifier">u</span>)
-      <span class="ruby-identifier">suggestArray</span> = []
-
-      <span class="ruby-identifier">suggestion</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">music</span><span class="ruby-operator">|</span>
-        <span class="ruby-identifier">suggestArray</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-constant">JSON</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">music</span>.<span class="ruby-identifier">to_json</span>(<span class="ruby-value">:only</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">Music</span>.<span class="ruby-identifier">miniKey</span>, <span class="ruby-value">:include</span> =<span class="ruby-operator">&gt;</span> {
-          <span class="ruby-identifier">album</span><span class="ruby-operator">:</span> { <span class="ruby-identifier">only</span><span class="ruby-operator">:</span> <span class="ruby-constant">Album</span>.<span class="ruby-identifier">miniKey</span> }
-        }))
-      }
-
-      <span class="ruby-keyword">if</span> (<span class="ruby-operator">!</span><span class="ruby-identifier">suggestion</span>)
+      <span class="ruby-identifier">object</span> = <span class="ruby-constant">Like</span>.<span class="ruby-identifier">find_by_id</span>(<span class="ruby-ivar">@id</span>)
+      <span class="ruby-keyword">if</span> (<span class="ruby-operator">!</span><span class="ruby-identifier">object</span>)
         <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">502</span>
         <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:not_found</span>
-      <span class="ruby-keyword">else</span>
-        <span class="ruby-ivar">@returnValue</span> = { <span class="ruby-identifier">content</span><span class="ruby-operator">:</span> <span class="ruby-identifier">suggestArray</span>.<span class="ruby-identifier">as_json</span> }
-        <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">200</span>
+        <span class="ruby-identifier">sendJson</span> <span class="ruby-keyword">and</span> <span class="ruby-keyword">return</span>
       <span class="ruby-keyword">end</span>
+      <span class="ruby-keyword">if</span> (<span class="ruby-identifier">object</span>.<span class="ruby-identifier">user_id</span> <span class="ruby-operator">!=</span> <span class="ruby-ivar">@user_id</span>.<span class="ruby-identifier">to_i</span>)
+        <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">500</span>
+        <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:forbidden</span>
+        <span class="ruby-identifier">sendJson</span> <span class="ruby-keyword">and</span> <span class="ruby-keyword">return</span>
+      <span class="ruby-keyword">end</span>
+      <span class="ruby-identifier">object</span>.<span class="ruby-identifier">destroy</span>
+      <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">202</span>
     <span class="ruby-keyword">else</span>
       <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">500</span>
-     <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:forbidden</span>
+      <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:forbidden</span>
     <span class="ruby-keyword">end</span>
   <span class="ruby-keyword">rescue</span>
     <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">504</span>
@@ -200,60 +202,77 @@ the list of action available :</p>
 
 					
 									</div>
-								<a name="method-i-showTwo">anchor</a>
-				<div id="method-i-showTwo-doc" class="method">
+								<a name="method-i-save">anchor</a>
+				<div id="method-i-save-doc" class="method">
 
 					<header>
 											<i class="icon-generic"></i>
-						<span class="method-name">showTwo</span><span 
+						<span class="method-name">save</span><span 
 							class="method-args">()</span>
 										</header>
 
 					<div class="method-description">
-											<p>Give a list of music based on the purchases</p>
+											<p>Save a new object like. For more information on the parameters, check at
+the model</p>
 
-<p>Route : /suggestv2</p>
+<p>Route : /likes/save</p>
+
+<h4 id="method-i-save-label-Options">Options<span><a href="#method-i-save-label-Options">&para;</a> <a href="#top">&uarr;</a></span></h4>
 <ul><li>
-<p><code>type</code> - What do you want ? &#39;music&#39; or &#39;artist&#39;
-?</p>
+<p>+like [user_id]+ - Id of the user who has the like</p>
 </li><li>
-<p><code>limit</code> - (optionnal) The limit of the list. Default : 30</p>
+<p>+like [typeObj]+ - Model name of the object to add to the like -&gt; “News”
+| “Albums” | “Concerts”</p>
+</li><li>
+<p>+like [obj_id]+ - ID of the object linked to the like</p>
 </li></ul>
 
-<h5 id="method-i-showTwo-label-HTTP+VALUE">HTTP VALUE<span><a href="#method-i-showTwo-label-HTTP+VALUE">&para;</a> <a href="#top">&uarr;</a></span></h5>
+<h5 id="method-i-save-label-HTTP+VALUE">HTTP VALUE<span><a href="#method-i-save-label-HTTP+VALUE">&para;</a> <a href="#top">&uarr;</a></span></h5>
 <ul><li>
-<p><code>200</code> - In case of success, return an array of music</p>
+<p><code>201</code> - In case of success, return the new item</p>
 </li><li>
-<p><code>401</code> - It is not a secured transaction</p>
-</li><li>
-<p><code>404</code> - Can&#39;t find musics to suggest</p>
+<p><code>403</code> - It is not a secured transaction</p>
 </li><li>
 <p><code>503</code> - Error from server</p>
 </li></ul>					
-											<div class="method-source-code" id="showTwo-source">
+											<div class="method-source-code" id="save-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/suggestions_controller.rb, line 68</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">showTwo</span>
-  <span class="ruby-identifier">u</span> = <span class="ruby-keyword">nil</span>
-  <span class="ruby-identifier">result</span> = []
-  <span class="ruby-identifier">limit</span> = (<span class="ruby-ivar">@limit</span>.<span class="ruby-identifier">present?</span>) <span class="ruby-operator">?</span> <span class="ruby-ivar">@limit</span>.<span class="ruby-identifier">to_i</span> <span class="ruby-operator">:</span> <span class="ruby-value">30</span>
-
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/likes_controller.rb, line 70</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">save</span>
   <span class="ruby-keyword">begin</span>
-    <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@security</span>)
-      <span class="ruby-identifier">u</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">find_by_id</span>(<span class="ruby-ivar">@user_id</span>)
-    <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@security</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-ivar">@like</span>[<span class="ruby-value">:user_id</span>] <span class="ruby-operator">==</span> <span class="ruby-ivar">@user_id</span> <span class="ruby-operator">&amp;&amp;</span> [<span class="ruby-string">&quot;News&quot;</span>, <span class="ruby-string">&quot;Albums&quot;</span>, <span class="ruby-string">&quot;Concerts&quot;</span>].<span class="ruby-identifier">include?</span>(<span class="ruby-ivar">@like</span>[<span class="ruby-value">:typeObj</span>]))
+      <span class="ruby-identifier">obj</span> = <span class="ruby-keyword">nil</span>
+      <span class="ruby-identifier">objLiked</span> = <span class="ruby-keyword">nil</span>
+      <span class="ruby-identifier">classType</span> = <span class="ruby-keyword">nil</span>
 
-    <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@type</span>.<span class="ruby-identifier">present?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-ivar">@type</span> <span class="ruby-operator">==</span> <span class="ruby-string">&quot;artist&quot;</span>)
-      <span class="ruby-ivar">@returnValue</span> = { <span class="ruby-identifier">content</span><span class="ruby-operator">:</span> <span class="ruby-constant">User</span>.<span class="ruby-identifier">suggestArtist</span>(<span class="ruby-identifier">u</span>, <span class="ruby-identifier">limit</span>) }
-      <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">200</span>
-    <span class="ruby-keyword">elsif</span> (<span class="ruby-ivar">@type</span>.<span class="ruby-identifier">present?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-ivar">@type</span> <span class="ruby-operator">==</span> <span class="ruby-string">&quot;music&quot;</span>)
-      <span class="ruby-ivar">@returnValue</span> = { <span class="ruby-identifier">content</span><span class="ruby-operator">:</span> <span class="ruby-constant">Music</span>.<span class="ruby-identifier">suggestMusic</span>(<span class="ruby-identifier">u</span>, <span class="ruby-identifier">limit</span>) }
-      <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">200</span>
+      <span class="ruby-keyword">case</span> <span class="ruby-ivar">@like</span>[<span class="ruby-value">:typeObj</span>]
+      <span class="ruby-keyword">when</span> <span class="ruby-string">&quot;Albums&quot;</span>
+        <span class="ruby-identifier">obj</span> = <span class="ruby-constant">Albumslike</span>.<span class="ruby-identifier">new</span>
+        <span class="ruby-identifier">objLiked</span> = <span class="ruby-constant">Album</span>.<span class="ruby-identifier">find_by_id</span>(<span class="ruby-ivar">@like</span>[<span class="ruby-value">:obj_id</span>])
+        <span class="ruby-identifier">obj</span>.<span class="ruby-identifier">album_id</span> = <span class="ruby-ivar">@like</span>[<span class="ruby-value">:obj_id</span>]
+      <span class="ruby-keyword">when</span> <span class="ruby-string">&quot;Concerts&quot;</span>
+        <span class="ruby-identifier">obj</span> = <span class="ruby-constant">Concertslike</span>.<span class="ruby-identifier">new</span>
+        <span class="ruby-identifier">objLiked</span> = <span class="ruby-constant">Concert</span>.<span class="ruby-identifier">find_by_id</span>(<span class="ruby-ivar">@like</span>[<span class="ruby-value">:obj_id</span>])
+        <span class="ruby-identifier">obj</span>.<span class="ruby-identifier">concert_id</span> = <span class="ruby-ivar">@like</span>[<span class="ruby-value">:obj_id</span>]
+      <span class="ruby-keyword">when</span> <span class="ruby-string">&quot;News&quot;</span>
+        <span class="ruby-identifier">obj</span> = <span class="ruby-constant">Newslike</span>.<span class="ruby-identifier">new</span>
+        <span class="ruby-identifier">objLiked</span> = <span class="ruby-constant">News</span>.<span class="ruby-identifier">find_by_id</span>(<span class="ruby-ivar">@like</span>[<span class="ruby-value">:obj_id</span>])
+        <span class="ruby-identifier">obj</span>.<span class="ruby-identifier">news_id</span> = <span class="ruby-ivar">@like</span>[<span class="ruby-value">:obj_id</span>]
+      <span class="ruby-keyword">end</span>
+      <span class="ruby-identifier">obj</span>.<span class="ruby-identifier">user_id</span> = <span class="ruby-ivar">@user_id</span>
+      <span class="ruby-identifier">obj</span>.<span class="ruby-identifier">save</span>
+
+      <span class="ruby-keyword">if</span> (<span class="ruby-identifier">objLiked</span> <span class="ruby-operator">==</span> <span class="ruby-keyword">nil</span>)
+        <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">502</span>
+        <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:not_found</span>
+      <span class="ruby-keyword">else</span>
+        <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">201</span>
+        <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:created</span>
+      <span class="ruby-keyword">end</span>
     <span class="ruby-keyword">else</span>
-      <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">504</span>
-      <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:bad_request</span>
+      <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">500</span>
+      <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:forbidden</span>
     <span class="ruby-keyword">end</span>
-
   <span class="ruby-keyword">rescue</span>
     <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">504</span>
     <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:service_unavailable</span>

@@ -91,8 +91,8 @@
 								  												<h1 class="class"
 					rel="popover"
 					data-original-title="In files"
-					data-content="app/models/group.rb"
-					>Group</h1>
+					data-content="app/models/tool.rb"
+					>Tool</h1>
 				</p>
 							</hgroup>
 			<span class="label">class</span>
@@ -101,7 +101,7 @@
 		<section class="module-relations">
 			<dl>
 								<dt>Superclass</dt>
-								<dd class="superclass">ActiveRecord::Base</dd>
+								<dd class="superclass">Object</dd>
 								
 				
 							</dl>
@@ -109,22 +109,7 @@
 
 		<section class="description">
 			
-<p>The model of the object <a href="Group.html">Group</a> Contain the relation
-and the validation Can provide some features linked to this model</p>
-
-<h4 id="class-Group-label-Attributes">Attributes<span><a href="#class-Group-label-Attributes">&para;</a> <a href="#top">&uarr;</a></span></h4>
-<ul><li>
-<p><code>id</code> - (integer) - The ID of the object</p>
-</li><li>
-<p><code>name</code> - (string) - The name of the group</p>
-</li></ul>
-
-<h4 id="class-Group-label-Associations">Associations<span><a href="#class-Group-label-Associations">&para;</a> <a href="#top">&uarr;</a></span></h4>
-<ul><li>
-<p><code>has_many</code> - :accesses (Not sure if we will keep it)</p>
-</li><li>
-<p><code>has_and_belongs_to_many</code> - :users</p>
-</li></ul>
+<p>Class to put generic functions into</p>
 		</section>
 
 				<section id="5Buntitled-5D" class="documentation-section">
@@ -139,22 +124,30 @@ and the validation Can provide some features linked to this model</p>
 					<h3>Public Class Methods</h3>
 				</header>
 
-								<a name="method-c-group_params">anchor</a>
-				<div id="method-c-group_params-doc" class="method">
+								<a name="method-c-select_join">anchor</a>
+				<div id="method-c-select_join-doc" class="method">
 
 					<header>
 											<i class="icon-generic"></i>
-						<span class="method-name">group_params</span><span 
-							class="method-args">(parameters)</span>
+						<span class="method-name">select_join</span><span 
+							class="method-args">(keySelected)</span>
 										</header>
 
 					<div class="method-description">
-											<p>The strong parameters to save or update object</p>					
-											<div class="method-source-code" id="group_params-source">
+											<p>To select the right fields</p>					
+											<div class="method-source-code" id="select_join-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/models/group.rb, line 21</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">group_params</span>(<span class="ruby-identifier">parameters</span>)
-  <span class="ruby-identifier">parameters</span>.<span class="ruby-identifier">require</span>(<span class="ruby-value">:group</span>).<span class="ruby-identifier">permit</span>(<span class="ruby-value">:name</span>)
+								class="language-ruby"><span class="ruby-comment"># File app/models/tool.rb, line 4</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">select_join</span>(<span class="ruby-identifier">keySelected</span>)
+  <span class="ruby-identifier">select</span> = <span class="ruby-string">&quot;&quot;</span>
+  <span class="ruby-identifier">keySelected</span>.<span class="ruby-identifier">each_with_index</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span>(<span class="ruby-identifier">key</span>, <span class="ruby-identifier">array_value</span>), <span class="ruby-identifier">index</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">table_name</span> = <span class="ruby-identifier">key</span>.<span class="ruby-identifier">to_s</span>
+    <span class="ruby-identifier">array_value</span>.<span class="ruby-identifier">each_with_index</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">value</span>, <span class="ruby-identifier">second_index</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">select</span> <span class="ruby-operator">+=</span> <span class="ruby-string">&quot;, &quot;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">index</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">second_index</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span>
+      <span class="ruby-identifier">select</span> <span class="ruby-operator">+=</span> <span class="ruby-node">&quot;\&quot;#{table_name.to_s}\&quot;.\&quot;#{value.to_s}\&quot;&quot;</span><span class="ruby-comment"># AS t#{index}_r#{second_index}&quot;</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">select</span>
 <span class="ruby-keyword">end</span></code></pre>
 						</div>
 										</div>

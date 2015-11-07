@@ -20,6 +20,7 @@
           %img{"ng-src" => "{{ '/assets/news/' + url.url }}"}
         %p.contentNews
           {{ show.news.content }}
+        .likeContainer.text-right{ "ng-include" => "'/assets/AngularJS/views/include/like.html.haml'" }
       .large-12
         %textarea.radius{"placeholder" => "Ecrire un commentaire", "ng-model" => "show.contentCommentary"}
         .action.clearfix

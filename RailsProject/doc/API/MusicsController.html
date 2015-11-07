@@ -182,7 +182,7 @@ list of action available :</p>
 </li></ul>					
 											<div class="method-source-code" id="addcomment-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/musics_controller.rb, line 211</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/musics_controller.rb, line 215</span>
   <span class="ruby-keyword">def</span> <span class="ruby-identifier">addcomment</span>
 <span class="ruby-keyword">begin</span>
   <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@security</span>)
@@ -256,7 +256,7 @@ probably wrong</p>
 </li></ul>					
 											<div class="method-source-code" id="addtoplaylist-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/musics_controller.rb, line 314</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/musics_controller.rb, line 318</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">addtoplaylist</span>
   <span class="ruby-keyword">begin</span>
     <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@security</span>)
@@ -321,7 +321,7 @@ probably wrong</p>
 </li></ul>					
 											<div class="method-source-code" id="delfromplaylist-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/musics_controller.rb, line 355</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/musics_controller.rb, line 359</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">delfromplaylist</span>
   <span class="ruby-keyword">begin</span>
     <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@security</span>)
@@ -395,7 +395,7 @@ its album, genres and user (artist)</p>
 </li></ul>					
 											<div class="method-source-code" id="find-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/musics_controller.rb, line 112</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/musics_controller.rb, line 114</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">find</span>
   <span class="ruby-keyword">begin</span>
     <span class="ruby-identifier">music_object</span> = <span class="ruby-keyword">nil</span>
@@ -460,6 +460,8 @@ its album, genres and user (artist)</p>
       <span class="ruby-identifier">music_object</span> = <span class="ruby-identifier">music_object</span>.<span class="ruby-identifier">offset</span>(<span class="ruby-ivar">@offset</span>.<span class="ruby-identifier">to_i</span>)
     <span class="ruby-keyword">end</span>
 
+    <span class="ruby-constant">Music</span>.<span class="ruby-identifier">fillAverageNote</span> <span class="ruby-identifier">music_object</span>
+
     <span class="ruby-ivar">@returnValue</span> = { <span class="ruby-identifier">content</span><span class="ruby-operator">:</span> <span class="ruby-identifier">music_object</span>.<span class="ruby-identifier">as_json</span>(<span class="ruby-value">:only</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">Music</span>.<span class="ruby-identifier">miniKey</span>, <span class="ruby-value">:include</span> =<span class="ruby-operator">&gt;</span> {
                                                     <span class="ruby-value">:album</span> =<span class="ruby-operator">&gt;</span> { <span class="ruby-value">:only</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">Album</span>.<span class="ruby-identifier">miniKey</span> },
                                                     <span class="ruby-value">:genres</span> =<span class="ruby-operator">&gt;</span> { <span class="ruby-value">:only</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">Genre</span>.<span class="ruby-identifier">miniKey</span> },
@@ -517,7 +519,7 @@ as raw format</p>
 </li></ul>					
 											<div class="method-source-code" id="get-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/musics_controller.rb, line 260</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/musics_controller.rb, line 264</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">get</span>
   <span class="ruby-identifier">buffer</span> = <span class="ruby-string">&quot;&quot;</span>
   <span class="ruby-identifier">music</span> = <span class="ruby-keyword">nil</span>
@@ -592,7 +594,7 @@ as raw format</p>
 </li></ul>					
 											<div class="method-source-code" id="getNotes-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/musics_controller.rb, line 439</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/musics_controller.rb, line 443</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">getNotes</span>
   <span class="ruby-identifier">value</span> = []
   <span class="ruby-keyword">begin</span>
@@ -662,7 +664,7 @@ last (default : false)</p>
 </li></ul>					
 											<div class="method-source-code" id="getcomments-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/musics_controller.rb, line 397</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/musics_controller.rb, line 401</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">getcomments</span>
   <span class="ruby-identifier">order</span> = <span class="ruby-string">&quot;false&quot;</span>
   <span class="ruby-keyword">begin</span>
@@ -729,7 +731,9 @@ its user, album and genre</p>
     <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@count</span>.<span class="ruby-identifier">present?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-ivar">@count</span> <span class="ruby-operator">==</span> <span class="ruby-string">&quot;true&quot;</span>)
       <span class="ruby-ivar">@returnValue</span> = { <span class="ruby-identifier">content</span><span class="ruby-operator">:</span> <span class="ruby-constant">Music</span>.<span class="ruby-identifier">where</span>(<span class="ruby-string">&quot;album_id IS NOT NULL&quot;</span>).<span class="ruby-identifier">count</span> }
     <span class="ruby-keyword">else</span>
-      <span class="ruby-ivar">@returnValue</span> = { <span class="ruby-identifier">content</span><span class="ruby-operator">:</span> <span class="ruby-constant">Music</span>.<span class="ruby-identifier">eager_load</span>([<span class="ruby-value">:album</span>, <span class="ruby-value">:genres</span>, <span class="ruby-value">:user</span>]).<span class="ruby-identifier">where</span>(<span class="ruby-string">&quot;album_id IS NOT NULL&quot;</span>).<span class="ruby-identifier">all</span>.<span class="ruby-identifier">as_json</span>(<span class="ruby-value">:only</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">Music</span>.<span class="ruby-identifier">miniKey</span>, <span class="ruby-value">:include</span> =<span class="ruby-operator">&gt;</span> {
+      <span class="ruby-identifier">musics</span> = <span class="ruby-constant">Music</span>.<span class="ruby-identifier">eager_load</span>([<span class="ruby-value">:album</span>, <span class="ruby-value">:genres</span>, <span class="ruby-value">:user</span>]).<span class="ruby-identifier">where</span>(<span class="ruby-string">&quot;album_id IS NOT NULL&quot;</span>).<span class="ruby-identifier">all</span>
+      <span class="ruby-constant">Music</span>.<span class="ruby-identifier">fillAverageNote</span> <span class="ruby-identifier">musics</span>
+      <span class="ruby-ivar">@returnValue</span> = { <span class="ruby-identifier">content</span><span class="ruby-operator">:</span> <span class="ruby-identifier">musics</span>.<span class="ruby-identifier">as_json</span>(<span class="ruby-value">:only</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">Music</span>.<span class="ruby-identifier">miniKey</span>, <span class="ruby-value">:include</span> =<span class="ruby-operator">&gt;</span> {
                                                     <span class="ruby-value">:album</span> =<span class="ruby-operator">&gt;</span> { <span class="ruby-value">:only</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">Album</span>.<span class="ruby-identifier">miniKey</span> },
                                                     <span class="ruby-value">:genres</span> =<span class="ruby-operator">&gt;</span> { <span class="ruby-value">:only</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">Genre</span>.<span class="ruby-identifier">miniKey</span> },
                                                     <span class="ruby-value">:user</span> =<span class="ruby-operator">&gt;</span> {<span class="ruby-value">:only</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">User</span>.<span class="ruby-identifier">miniKey</span>}
@@ -785,7 +789,7 @@ its user, album and genre</p>
 </li></ul>					
 											<div class="method-source-code" id="setNotes-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/musics_controller.rb, line 484</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/musics_controller.rb, line 488</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">setNotes</span>
   <span class="ruby-keyword">begin</span>
     <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@security</span>)
@@ -852,7 +856,7 @@ genres and user (artist)</p>
 </li></ul>					
 											<div class="method-source-code" id="show-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/musics_controller.rb, line 67</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/musics_controller.rb, line 69</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">show</span>
   <span class="ruby-keyword">begin</span>
     <span class="ruby-identifier">music</span> = <span class="ruby-constant">Music</span>.<span class="ruby-identifier">eager_load</span>([<span class="ruby-value">:album</span>, <span class="ruby-value">:genres</span>, <span class="ruby-value">:user</span>]).<span class="ruby-identifier">where</span>(<span class="ruby-string">&quot;album_id IS NOT NULL&quot;</span>).<span class="ruby-identifier">find_by_id</span>(<span class="ruby-ivar">@id</span>)
@@ -906,6 +910,7 @@ genres and user (artist)</p>
 	<ul>
 			<li><a href="../API.html">API</a></li>
 			<li><a href="../API/AlbumsController.html">API::AlbumsController</a></li>
+			<li><a href="../API/AmbiancesController.html">API::AmbiancesController</a></li>
 			<li><a href="../API/ApiController.html">API::ApiController</a></li>
 			<li><a href="../API/ApisecurityController.html">API::ApisecurityController</a></li>
 			<li><a href="../API/BattlesController.html">API::BattlesController</a></li>
@@ -914,6 +919,7 @@ genres and user (artist)</p>
 			<li><a href="../API/GenresController.html">API::GenresController</a></li>
 			<li><a href="../API/InfluencesController.html">API::InfluencesController</a></li>
 			<li><a href="../API/LanguagesController.html">API::LanguagesController</a></li>
+			<li><a href="../API/LikesController.html">API::LikesController</a></li>
 			<li><a href="../API/ListeningsController.html">API::ListeningsController</a></li>
 			<li><a href="../API/MessagesController.html">API::MessagesController</a></li>
 			<li><a href="../API/MusicsController.html">API::MusicsController</a></li>
@@ -930,6 +936,7 @@ genres and user (artist)</p>
 			<li><a href="../AdminUser.html">AdminUser</a></li>
 			<li><a href="../Album.html">Album</a></li>
 			<li><a href="../Albumslike.html">Albumslike</a></li>
+			<li><a href="../Ambiance.html">Ambiance</a></li>
 			<li><a href="../Attachment.html">Attachment</a></li>
 			<li><a href="../Battle.html">Battle</a></li>
 			<li><a href="../Cart.html">Cart</a></li>
@@ -966,6 +973,7 @@ genres and user (artist)</p>
 			<li><a href="../PurchasedAlbum.html">PurchasedAlbum</a></li>
 			<li><a href="../PurchasedMusic.html">PurchasedMusic</a></li>
 			<li><a href="../PurchasedPack.html">PurchasedPack</a></li>
+			<li><a href="../Tool.html">Tool</a></li>
 			<li><a href="../Tweet.html">Tweet</a></li>
 			<li><a href="../User.html">User</a></li>
 			<li><a href="../Vote.html">Vote</a></li>

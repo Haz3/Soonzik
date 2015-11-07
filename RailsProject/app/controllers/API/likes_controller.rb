@@ -2,7 +2,6 @@ module API
   # Controller which manage the transaction for the Likes objects
   # Here is the list of action available :
   #
-  # * show        [get] - SECURE
   # * save       	[post] - SECURE
   # * destroy     [get] - SECURE
   #
@@ -16,6 +15,8 @@ module API
     # ==== Options
     # 
     # * +id+ - The id of the specific like
+    # * +like [typeObj]+ - Model name of the object to add to the like -> "News" | "Albums" | "Concerts"
+    # * +like [obj_id]+ - ID of the object linked to the like
     # 
     # ===== HTTP VALUE
     # 
@@ -25,20 +26,25 @@ module API
     # - +503+ - Error from server
     # 
     def destroy
+      obj = nil
       begin
-      	if (@security)
-      	  object = Like.find_by_id(@id)
-          if (!object)
-            codeAnswer 502
-            defineHttp :not_found
-            sendJson and return
+      	if (@security && ["News", "Albums", "Concerts"].include?(@like[:typeObj]))
+      	  
+          case @like[:typeObj]
+          when "Albums"
+            obj = Albumslike.where(user_id: @user_id).where(obj_id: @like[:typeObj])
+          when "Concerts"
+            obj = Concertslike.where(user_id: @user_id).where(obj_id: @like[:typeObj])
+          when "News"
+            obj = Newslike.where(user_id: @user_id).where(obj_id: @like[:typeObj])
           end
-          if (object.user_id != @user_id.to_i)
+
+          if (obj == nil)
             codeAnswer 500
             defineHttp :forbidden
             sendJson and return
           end
-      	  object.destroy
+      	  obj.destroy
       	  codeAnswer 202
       	else
       	  codeAnswer 500
@@ -65,15 +71,34 @@ module API
     # 
     # - +201+ - In case of success, return the new item
     # - +403+ - It is not a secured transaction
+    # - +404+ - The object to like doesn't exist
+    # - +409+ - You already like this
     # - +503+ - Error from server
     # 
     def save
       begin
-        if (@security && @like[:user_id] == @user_id && ["News", "Albums", "Concerts"].include?(@like[:typeObj]))
+        if (@security && @like[:user_id].to_i == @user_id.to_i && ["News", "Albums", "Concerts"].include?(@like[:typeObj]))
           obj = nil
           objLiked = nil
           classType = nil
 
+          # Check if there is already a like
+          case @like[:typeObj]
+          when "Albums"
+            obj = Albumslike.where(user_id: @user_id).where(album_id: @like[:obj_id]).first
+          when "Concerts"
+            obj = Concertslike.where(user_id: @user_id).where(concert_id: @like[:obj_id]).first
+          when "News"
+            obj = Newslike.where(user_id: @user_id).where(news_id: @like[:obj_id]).first
+          end
+
+          if (obj != nil)
+            codeAnswer 503
+            defineHttp :conflict
+            sendJson and return
+          end
+
+          # Create a like
           case @like[:typeObj]
           when "Albums"
             obj = Albumslike.new

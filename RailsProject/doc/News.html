@@ -164,7 +164,7 @@ multi language)</p>
 <p>Fields returned : [:id, :title, :date]</p>					
 											<div class="method-source-code" id="miniKey-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/models/news.rb, line 38</span>
+								class="language-ruby"><span class="ruby-comment"># File app/models/news.rb, line 39</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">miniKey</span>
   [<span class="ruby-value">:id</span>, <span class="ruby-value">:created_at</span>]
 <span class="ruby-keyword">end</span></code></pre>
@@ -186,7 +186,7 @@ multi language)</p>
 											<p>The strong parameters to save or update object</p>					
 											<div class="method-source-code" id="news_params-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/models/news.rb, line 43</span>
+								class="language-ruby"><span class="ruby-comment"># File app/models/news.rb, line 49</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">news_params</span>(<span class="ruby-identifier">parameters</span>)
   <span class="ruby-identifier">parameters</span>.<span class="ruby-identifier">require</span>(<span class="ruby-value">:news</span>).<span class="ruby-identifier">permit</span>(<span class="ruby-value">:title</span>, <span class="ruby-value">:author_id</span>)
 <span class="ruby-keyword">end</span></code></pre>
@@ -221,7 +221,7 @@ multi language)</p>
 											<p>To give the content of the good language</p>					
 											<div class="method-source-code" id="content-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/models/news.rb, line 68</span>
+								class="language-ruby"><span class="ruby-comment"># File app/models/news.rb, line 74</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">content</span>
   <span class="ruby-identifier">content</span> = <span class="ruby-string">&quot;No Content&quot;</span>
   <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@language</span>.<span class="ruby-identifier">present?</span>)
@@ -232,6 +232,28 @@ multi language)</p>
   <span class="ruby-keyword">end</span>
 
   <span class="ruby-identifier">content</span>
+<span class="ruby-keyword">end</span></code></pre>
+						</div>
+										</div>
+
+					
+									</div>
+								<a name="method-i-likes">anchor</a>
+				<div id="method-i-likes-doc" class="method">
+
+					<header>
+											<i class="icon-generic"></i>
+						<span class="method-name">likes</span><span 
+							class="method-args">()</span>
+										</header>
+
+					<div class="method-description">
+											<p>Return the number of likes</p>					
+											<div class="method-source-code" id="likes-source">
+							<pre class="prettyprint linenums"><code 
+								class="language-ruby"><span class="ruby-comment"># File app/models/news.rb, line 44</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">likes</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>.<span class="ruby-identifier">connection</span>.<span class="ruby-identifier">execute</span>(<span class="ruby-node">&quot;SELECT COUNT(news_id) AS count FROM newslikes WHERE news_id = #{self.id.to_s}&quot;</span>)[<span class="ruby-value">0</span>][<span class="ruby-string">&quot;count&quot;</span>]
 <span class="ruby-keyword">end</span></code></pre>
 						</div>
 										</div>
@@ -252,7 +274,7 @@ multi language)</p>
 default language</p>					
 											<div class="method-source-code" id="myConstructor-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/models/news.rb, line 31</span>
+								class="language-ruby"><span class="ruby-comment"># File app/models/news.rb, line 32</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">myConstructor</span>
   <span class="ruby-ivar">@language</span> = <span class="ruby-string">&quot;EN&quot;</span>
 <span class="ruby-keyword">end</span></code></pre>
@@ -274,7 +296,7 @@ default language</p>
 											<p>To give the title of the good language</p>					
 											<div class="method-source-code" id="setLanguage-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/models/news.rb, line 48</span>
+								class="language-ruby"><span class="ruby-comment"># File app/models/news.rb, line 54</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">setLanguage</span>(<span class="ruby-identifier">language</span>)
   <span class="ruby-keyword">if</span> (<span class="ruby-constant">Language</span>.<span class="ruby-identifier">where</span>(<span class="ruby-identifier">abbreviation</span><span class="ruby-operator">:</span> <span class="ruby-identifier">language</span>).<span class="ruby-identifier">size</span> <span class="ruby-operator">!=</span> <span class="ruby-value">0</span>)
     <span class="ruby-ivar">@language</span> = <span class="ruby-identifier">language</span>
@@ -298,7 +320,7 @@ default language</p>
 											<p>To give the title of the good language</p>					
 											<div class="method-source-code" id="title-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/models/news.rb, line 55</span>
+								class="language-ruby"><span class="ruby-comment"># File app/models/news.rb, line 61</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">title</span>
   <span class="ruby-identifier">title</span> = <span class="ruby-string">&quot;No Title&quot;</span>
   <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@language</span>.<span class="ruby-identifier">present?</span>)
@@ -342,6 +364,7 @@ default language</p>
 	<ul>
 			<li><a href="./API.html">API</a></li>
 			<li><a href="./API/AlbumsController.html">API::AlbumsController</a></li>
+			<li><a href="./API/AmbiancesController.html">API::AmbiancesController</a></li>
 			<li><a href="./API/ApiController.html">API::ApiController</a></li>
 			<li><a href="./API/ApisecurityController.html">API::ApisecurityController</a></li>
 			<li><a href="./API/BattlesController.html">API::BattlesController</a></li>
@@ -350,6 +373,7 @@ default language</p>
 			<li><a href="./API/GenresController.html">API::GenresController</a></li>
 			<li><a href="./API/InfluencesController.html">API::InfluencesController</a></li>
 			<li><a href="./API/LanguagesController.html">API::LanguagesController</a></li>
+			<li><a href="./API/LikesController.html">API::LikesController</a></li>
 			<li><a href="./API/ListeningsController.html">API::ListeningsController</a></li>
 			<li><a href="./API/MessagesController.html">API::MessagesController</a></li>
 			<li><a href="./API/MusicsController.html">API::MusicsController</a></li>
@@ -366,6 +390,7 @@ default language</p>
 			<li><a href="./AdminUser.html">AdminUser</a></li>
 			<li><a href="./Album.html">Album</a></li>
 			<li><a href="./Albumslike.html">Albumslike</a></li>
+			<li><a href="./Ambiance.html">Ambiance</a></li>
 			<li><a href="./Attachment.html">Attachment</a></li>
 			<li><a href="./Battle.html">Battle</a></li>
 			<li><a href="./Cart.html">Cart</a></li>
@@ -402,6 +427,7 @@ default language</p>
 			<li><a href="./PurchasedAlbum.html">PurchasedAlbum</a></li>
 			<li><a href="./PurchasedMusic.html">PurchasedMusic</a></li>
 			<li><a href="./PurchasedPack.html">PurchasedPack</a></li>
+			<li><a href="./Tool.html">Tool</a></li>
 			<li><a href="./Tweet.html">Tweet</a></li>
 			<li><a href="./User.html">User</a></li>
 			<li><a href="./Vote.html">Vote</a></li>

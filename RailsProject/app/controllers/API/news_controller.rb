@@ -31,15 +31,16 @@ module API
           @returnValue = { content: News.count }
         else
           n = News.eager_load([:user, :attachments]).all
-          if @language.present?
-            n.each do |news|
+          n.each do |news|
+            if @language.present?
               news.setLanguage @language
             end
           end
+          News.fillLikes n
           @returnValue = { content: n.as_json(:include => {
                                                       :user => { :only => User.miniKey },
                                                       :attachments => { :only => Attachment.miniKey }
-                                                    }, :only => News.miniKey, methods: [:title, :content]) }
+                                                    }, :only => News.miniKey, methods: [:title, :content, :likes]) }
         end
         if (@returnValue[:content].size == 0)
           codeAnswer 202
@@ -76,10 +77,11 @@ module API
           defineHttp :not_found
         else
           news.setLanguage @language if @language.present?
+          News.fillLikes [news]
           @returnValue = { content: news.as_json(:include => {
                                                   :user => { :only => User.miniKey },
                                                   :attachments => { :only => Attachment.miniKey }
-                                                }, :only => News.miniKey, methods: [:title, :content]) }
+                                                }, :only => News.miniKey, methods: [:title, :content, :likes]) }
           codeAnswer 200
         end
       rescue
@@ -183,10 +185,12 @@ module API
           end
         end
 
+        News.fillLikes new_object
+
         @returnValue = { content: new_object.as_json(:include => {
                                                       :user => { :only => User.miniKey },
                                                       :attachments => { :only => Attachment.miniKey }
-                                                    }, :only => News.miniKey, methods: [:title, :content]) }
+                                                    }, :only => News.miniKey, methods: [:title, :content, :likes]) }
 
         if (new_object.size == 0)
           codeAnswer 202

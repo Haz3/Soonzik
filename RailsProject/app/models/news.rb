@@ -22,6 +22,7 @@ class News < ActiveRecord::Base
   belongs_to :user, class_name: 'User', foreign_key: 'author_id'
   has_many :newstexts
   has_many :news_titles
+  has_many :newslikes
   has_and_belongs_to_many :attachments
   has_and_belongs_to_many :commentaries
 
@@ -37,6 +38,46 @@ class News < ActiveRecord::Base
   # Fields returned : [:id, :title, :date]
   def self.miniKey
     [:id, :created_at]
+  end
+
+  # Fill an association of records of the notes average
+  def self.fillLikes(ar_news)
+    sql = "SELECT news_id, COUNT(news_id) AS count FROM newslikes WHERE (news_id IN ("
+
+    ar_news.each_with_index do |news, index|
+      sql += ", " if index != 0
+      sql += news[:id].to_s
+    end
+
+    sql += ")) GROUP BY news_id"
+    records_array = ActiveRecord::Base.connection.execute(sql)
+
+    puts records_array
+
+    ar_news.each do |news|
+      passIn = false
+
+      records_array.each do |record|
+        if (news[:id].to_i == record['news_id'].to_i)
+          passIn = true
+          news.setLike record['count']
+          break
+        end
+      end
+
+      news.setLike 0 if !passIn
+    end
+  end
+
+  # Set the number of likes
+  def setLike(value)
+    puts "set #{value}"
+    @likes = value
+  end
+
+  # Return the number of likes
+  def likes
+    return (@likes.present?) ? @likes : ActiveRecord::Base.connection.execute("SELECT COUNT(news_id) AS count FROM newslikes WHERE news_id = #{self.id.to_s}")[0]["count"]
   end
 
   # The strong parameters to save or update object

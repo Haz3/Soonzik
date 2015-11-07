@@ -87,6 +87,43 @@ class Album < ActiveRecord::Base
     end
   end
 
+  # Fill an association of records of the notes average
+  def self.fillLikes(ar_albums)
+    sql = "SELECT album_id, COUNT(album_id) AS count FROM albumslikes WHERE (album_id IN ("
+
+    ar_albums.each_with_index do |album, index|
+      sql += ", " if index != 0
+      sql += album[:id].to_s
+    end
+
+    sql += ")) GROUP BY album_id"
+    records_array = ActiveRecord::Base.connection.execute(sql)
+
+    ar_albums.each do |album|
+      passIn = false
+
+      records_array.each do |record|
+        if (album[:id].to_i == record['album_id'].to_i)
+          passIn = true
+          album.setLike record['count']
+          break
+        end
+      end
+
+      album.setLike 0 if !passIn
+    end
+  end
+
+  # Set the number of likes
+  def setLike(value)
+    @likes = value
+  end
+
+  # Return the number of likes
+  def likes
+    return (@likes.present?) ? @likes : ActiveRecord::Base.connection.execute("SELECT COUNT(album_id) AS count FROM albumslikes WHERE album_id = #{self.id.to_s}")[0]["count"]
+  end
+
   # To know if the album is in the pack
   def setPack(value)
     @pack_id = value

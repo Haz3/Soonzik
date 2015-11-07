@@ -1,0 +1,19 @@
+.likeContainer {
+	padding-right: 20px;
+	height: 30px;
+	line-height: 30px;
+	
+	.fi-heart.like {
+		color: #2DAEBF;
+	    padding-right: 15px;
+	    -webkit-transition: all 0.8s ease-in-out;
+		-moz-transition: all 0.8s ease-in-out;
+		-o-transition: all 0.8s ease-in-out;
+		-ms-transition: all 0.8s ease-in-out;
+		transition: all 0.8s ease-in-out;
+
+	    &:hover { font-size: 20px; text-shadow: 0 0 5px #FFF,0 0 10px #FFFFFF,0 0 15px #FFFFFF,0 0 20px #2DAEBF,0 0 30px #2DAEBF,0 0 40px #2DAEBF,0 0 50px #2DAEBF,0 0 75px #2DAEBF; }
+	}
+
+	span { color: #333; }
+}

@@ -1,6 +1,7 @@
 SoonzikApp.controller('BattlesCtrl', ['$scope', "$routeParams", 'SecureAuth', 'HTTPService', 'NotificationService', "$rootScope", function ($scope, $routeParams, SecureAuth, HTTPService, NotificationService, $rootScope) {
 	$scope.loading = true;
-	$scope.index = { resources: [], votes: [], voteCurrentUser: [], currentPage: 1, totalPage: 1, resourceName: "battles" };
+	$scope.resourceName = "battles";
+	$scope.index = { resources: [], votes: [], voteCurrentUser: [], currentPage: 1, totalPage: 1 };
 	$scope.show = { battle: null, artistOne: {}, artistTwo: {}, voteCurrentUser: false, randomVote: [] };
 	$scope.currentUser = false;
 
