@@ -67,7 +67,7 @@ module API
     # 
     # ===== HTTP VALUE
     # 
-    # - +201+ - In case of success, return the new item
+    # - +201+ - In case of success, return nothing
     # - +403+ - It is not a secured transaction
     # - +404+ - The object to like doesn't exist
     # - +409+ - You already like this

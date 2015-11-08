@@ -13,7 +13,7 @@ module API
     def initialize
       @security = false
       @user_id = nil
-      @returnValue = { content: [] }
+      @returnValue = { content: {} }
       
       @code = []
       @code[200] = {code: 200, message: "Success"}

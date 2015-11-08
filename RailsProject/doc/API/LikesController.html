@@ -179,11 +179,11 @@ list of action available :</p>
       
       <span class="ruby-keyword">case</span> <span class="ruby-ivar">@like</span>[<span class="ruby-value">:typeObj</span>]
       <span class="ruby-keyword">when</span> <span class="ruby-string">&quot;Albums&quot;</span>
-        <span class="ruby-identifier">obj</span> = <span class="ruby-constant">Albumslike</span>.<span class="ruby-identifier">where</span>(<span class="ruby-identifier">user_id</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@user_id</span>).<span class="ruby-identifier">where</span>(<span class="ruby-identifier">obj_id</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@like</span>[<span class="ruby-value">:typeObj</span>])
+        <span class="ruby-identifier">obj</span> = <span class="ruby-constant">Albumslike</span>.<span class="ruby-identifier">where</span>(<span class="ruby-identifier">user_id</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@user_id</span>).<span class="ruby-identifier">where</span>(<span class="ruby-identifier">album_id</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@like</span>[<span class="ruby-value">:obj_id</span>]).<span class="ruby-identifier">first</span>
       <span class="ruby-keyword">when</span> <span class="ruby-string">&quot;Concerts&quot;</span>
-        <span class="ruby-identifier">obj</span> = <span class="ruby-constant">Concertslike</span>.<span class="ruby-identifier">where</span>(<span class="ruby-identifier">user_id</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@user_id</span>).<span class="ruby-identifier">where</span>(<span class="ruby-identifier">obj_id</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@like</span>[<span class="ruby-value">:typeObj</span>])
+        <span class="ruby-identifier">obj</span> = <span class="ruby-constant">Concertslike</span>.<span class="ruby-identifier">where</span>(<span class="ruby-identifier">user_id</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@user_id</span>).<span class="ruby-identifier">where</span>(<span class="ruby-identifier">concert_id</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@like</span>[<span class="ruby-value">:obj_id</span>]).<span class="ruby-identifier">first</span>
       <span class="ruby-keyword">when</span> <span class="ruby-string">&quot;News&quot;</span>
-        <span class="ruby-identifier">obj</span> = <span class="ruby-constant">Newslike</span>.<span class="ruby-identifier">where</span>(<span class="ruby-identifier">user_id</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@user_id</span>).<span class="ruby-identifier">where</span>(<span class="ruby-identifier">obj_id</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@like</span>[<span class="ruby-value">:typeObj</span>])
+        <span class="ruby-identifier">obj</span> = <span class="ruby-constant">Newslike</span>.<span class="ruby-identifier">where</span>(<span class="ruby-identifier">user_id</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@user_id</span>).<span class="ruby-identifier">where</span>(<span class="ruby-identifier">news_id</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@like</span>[<span class="ruby-value">:obj_id</span>]).<span class="ruby-identifier">first</span>
       <span class="ruby-keyword">end</span>
 
       <span class="ruby-keyword">if</span> (<span class="ruby-identifier">obj</span> <span class="ruby-operator">==</span> <span class="ruby-keyword">nil</span>)
@@ -198,6 +198,7 @@ list of action available :</p>
       <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:forbidden</span>
     <span class="ruby-keyword">end</span>
   <span class="ruby-keyword">rescue</span>
+    <span class="ruby-identifier">puts</span> <span class="ruby-identifier">$!</span>, <span class="ruby-identifier">$@</span>
     <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">504</span>
     <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:service_unavailable</span>
   <span class="ruby-keyword">end</span>
@@ -235,7 +236,7 @@ the model</p>
 
 <h5 id="method-i-save-label-HTTP+VALUE">HTTP VALUE<span><a href="#method-i-save-label-HTTP+VALUE">&para;</a> <a href="#top">&uarr;</a></span></h5>
 <ul><li>
-<p><code>201</code> - In case of success, return the new item</p>
+<p><code>201</code> - In case of success, return nothing</p>
 </li><li>
 <p><code>403</code> - It is not a secured transaction</p>
 </li><li>
@@ -247,7 +248,7 @@ the model</p>
 </li></ul>					
 											<div class="method-source-code" id="save-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/likes_controller.rb, line 75</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/likes_controller.rb, line 76</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">save</span>
   <span class="ruby-keyword">begin</span>
     <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@security</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-ivar">@like</span>[<span class="ruby-value">:user_id</span>].<span class="ruby-identifier">to_i</span> <span class="ruby-operator">==</span> <span class="ruby-ivar">@user_id</span>.<span class="ruby-identifier">to_i</span> <span class="ruby-operator">&amp;&amp;</span> [<span class="ruby-string">&quot;News&quot;</span>, <span class="ruby-string">&quot;Albums&quot;</span>, <span class="ruby-string">&quot;Concerts&quot;</span>].<span class="ruby-identifier">include?</span>(<span class="ruby-ivar">@like</span>[<span class="ruby-value">:typeObj</span>]))
