@@ -9,8 +9,6 @@ module API
   # * destroy     [get] - SECURITY
   #
   class PlaylistsController < ApisecurityController
-    before_action :checkKey, only: [:destroy, :save, :update]
-
   	# Give a specific object by its id
     #
     # Route : /playlists/:id

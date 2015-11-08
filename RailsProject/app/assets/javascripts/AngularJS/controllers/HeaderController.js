@@ -44,14 +44,14 @@ SoonzikApp.controller('HeaderCtrl', ['$scope', "$routeParams", "$location", "Sec
 
 	$scope.newNotif = function(firstLoop) {
 		SecureAuth.securedTransaction(function (key, user_id) {
-				var params = [
-					{ key: "user_id", value: user_id },
-					{ key: "secureKey", value: key },
-					{ key: "attribute[read]", value: false },
-					{ key: "limit", value: 10 }
-				];
-				HTTPService.findNotif(params).then(function(response) {
-					tmp_notif = response.data.content;
+			var params = [
+				{ key: "user_id", value: user_id },
+				{ key: "secureKey", value: key },
+				{ key: "attribute[read]", value: false },
+				{ key: "limit", value: 10 }
+			];
+			HTTPService.findNotif(params).then(function(response) {
+				tmp_notif = response.data.content;
 
 				if (firstLoop == true) {
 					$scope.notifs = tmp_notif;
@@ -89,10 +89,6 @@ SoonzikApp.controller('HeaderCtrl', ['$scope', "$routeParams", "$location", "Sec
 					$scope.newNotif(false);
 				}, 20000);
 			});
-		}, function(error) {
-				$timeout(function() {
-					$scope.newNotif(firstLoop);
-				}, 100000);
 		});
 	}
 
@@ -106,7 +102,6 @@ SoonzikApp.controller('HeaderCtrl', ['$scope', "$routeParams", "$location", "Sec
 
 	$scope.chooseLanguage = function(lang) {
 		if ($scope.user) {
-
 			SecureAuth.securedTransaction(function(key, id) {
 				var params = {
 					secureKey: key,
@@ -121,10 +116,7 @@ SoonzikApp.controller('HeaderCtrl', ['$scope', "$routeParams", "$location", "Sec
 				}, function(error) {
 					Notification.error(labels.FILE_MENU_LANGUAGE_ERROR_LABEL);
 				});
-			}, function(error) {
-				Notification.error(labels.FILE_MENU_LANGUAGE_ERROR_LABEL);
 			});
-
 		} else {
 			$cookies.put("language", lang);
 			$window.location.reload();

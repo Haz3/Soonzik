@@ -5,12 +5,14 @@ module API
   # The class parent of every controller of the API.
   # It provides security and some default stuff
   class ApisecurityController < ApiController
+    before_action :checkKey
 
     #
     # We create a list of code and initialize the returnValue and the security boolean.
     # Usually a controller has no constructor but in this case it's for the heritance.
     def initialize
       @security = false
+      @user_id = nil
       @returnValue = { content: [] }
       
       @code = []
@@ -43,7 +45,7 @@ module API
       if (defined?(@id))
         begin
           u = User.find_by_id(@id)
-          if (Time.at(u.token_update).to_i + 3600 < Time.now.to_i)
+          if (Time.at(u.token_update).to_i < Time.now.to_i)
             u.regenerateKey
             u.save
             u.reload
@@ -223,7 +225,7 @@ protected
           u = User.find_by_id(@user_id)
           if (@secureKey == u.secureKey)
             @security = true
-            if (Time.at(u.token_update).to_i + 3600 < Time.now.to_i)
+            if (Time.at(u.token_update).to_i < Time.now.to_i)
               u.regenerateKey
               u.save
             end

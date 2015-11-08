@@ -195,8 +195,6 @@ SoonzikApp.controller('BattlesCtrl', ['$scope', "$routeParams", 'SecureAuth', 'H
 				}, function(error) {
 					NotificationService.error($rootScope.labels.FILE_BATTLE_VOTE_ERROR_MESSAGE);
 				});
-			}, function(error) {
-				NotificationService.error($rootScope.labels.FILE_BATTLE_VOTE_ERROR_MESSAGE);
 			});
 		} else {
 			NotificationService.info($rootScope.labels.FILE_BATTLE_ALREADY_VOTED_ERROR_MESSAGE);
@@ -250,8 +248,6 @@ SoonzikApp.controller('BattlesCtrl', ['$scope', "$routeParams", 'SecureAuth', 'H
 				}, function(error) {
 					NotificationService.error($rootScope.labels.FILE_BATTLE_VOTE_ERROR_MESSAGE);
 				});
-			}, function(error) {
-				NotificationService.error($rootScope.labels.FILE_BATTLE_VOTE_ERROR_MESSAGE);
 			});
 		} else {
 			NotificationService.info($rootScope.labels.FILE_BATTLE_ALREADY_VOTED_ERROR_MESSAGE);

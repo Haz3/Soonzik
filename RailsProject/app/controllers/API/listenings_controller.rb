@@ -8,8 +8,6 @@ module API
   # * save        [post] - SECURITY
   #
   class ListeningsController < ApisecurityController
-    before_action :checkKey, only: [:save]
-
   	# Retrieve all the listenings
     #
     # Route : /listenings

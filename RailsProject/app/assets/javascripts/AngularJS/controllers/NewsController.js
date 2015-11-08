@@ -141,8 +141,6 @@ SoonzikApp.controller('NewsCtrl', ['$scope', '$routeParams', 'SecureAuth', 'HTTP
 			}, function(error) {
 				NotificationService.error($rootScope.labels.FILE_NEWS_SEND_COMMENT_ERROR_MESSAGE);
 			});
-		}, function(error) {
-			NotificationService.error($rootScope.labels.FILE_NEWS_SEND_COMMENT_ERROR_MESSAGE);
 		});
 	}
 

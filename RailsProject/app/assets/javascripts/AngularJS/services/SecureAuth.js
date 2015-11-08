@@ -1,6 +1,6 @@
-SoonzikApp.factory('SecureAuth', ['$http', '$routeParams', '$location', '$cookies', '$timeout', function ($http, $routeParams, $location, $cookies, $timeout) {
+SoonzikApp.factory('SecureAuth', ['$http', '$routeParams', '$location', '$cookies', '$timeout', '$rootScope', function ($http, $routeParams, $location, $cookies, $timeout, $rootScope) {
 
-	var url = "lvh.me:3000";
+	var api_url = "http://api.lvh.me:3000";
   var isUsed = false;
   var last_update = null;
   var last_key = null;
@@ -16,11 +16,11 @@ SoonzikApp.factory('SecureAuth', ['$http', '$routeParams', '$location', '$cookie
           user.username = $cookies.get("user_username");
       	return user;
       },
-      securedTransaction: function(securedFunctionSuccess, securedFunctionError) {
+      securedTransaction: function(securedFunctionSuccess) {
         if (isUsed) {
           var that = this;
           $timeout(function() {
-            that.securedTransaction(securedFunctionSuccess, securedFunctionError);
+            that.securedTransaction(securedFunctionSuccess);
           }, 500);
         } else {
           d = new Date();
@@ -31,12 +31,12 @@ SoonzikApp.factory('SecureAuth', ['$http', '$routeParams', '$location', '$cookie
             user.token = $cookies.get("user_token");
           }
 
-          if (last_update == null || (last_update + 3590000) < d.getTime() || last_key == null) {
+          if (last_update == null || last_update < d.getTime() || last_key == null) {
             isUsed = true;
             /*
              * If we need a valid token
              */
-    		    $http.get("http://api." + url + '/getKey/' + user.id).then(function (json) {
+    		    $http.get(api_url + '/getKey/' + user.id).then(function (json) {
               isUsed = false;
 
     		    	var key_obj = new jsSHA(user.token + json.data.key, "TEXT");
@@ -48,7 +48,7 @@ SoonzikApp.factory('SecureAuth', ['$http', '$routeParams', '$location', '$cookie
     		    	securedFunctionSuccess(key, user.id);
     		    }, function(error) {
               isUsed = false;
-              securedFunctionError(error);
+              securedFunctionError($rootScope.labels.FILE_SECURITY_FAILED);
             });
             /********************************/
           } else {

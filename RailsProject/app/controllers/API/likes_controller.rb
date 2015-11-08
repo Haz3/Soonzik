@@ -6,8 +6,6 @@ module API
   # * destroy     [get] - SECURE
   #
   class LikesController < ApisecurityController
-    before_action :checkKey, only: [:destroy, :save]
-
   	# Destroy a specific object by its id
     #
     # Route : /likes/destroy

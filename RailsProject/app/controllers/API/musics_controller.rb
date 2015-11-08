@@ -13,8 +13,6 @@ module API
   # * getNotes    [get]
   #
   class MusicsController < ApisecurityController
-  	before_action :checkKey, only: [:addcomment, :get, :addtoplaylist, :delfromplaylist, :setNotes]
-
     # Retrieve all the musics
     #
     # Route : /musics

@@ -9,8 +9,6 @@ module API
   # * getcomments [get]
   #
   class NewsController < ApisecurityController
-    before_action :checkKey, only: [:addcomment]
-
   	# Retrieve all the news
     #
     # Route : /news
@@ -36,11 +34,11 @@ module API
               news.setLanguage @language
             end
           end
-          News.fillLikes n
+          News.fillLikes n, @security, @user_id
           @returnValue = { content: n.as_json(:include => {
                                                       :user => { :only => User.miniKey },
                                                       :attachments => { :only => Attachment.miniKey }
-                                                    }, :only => News.miniKey, methods: [:title, :content, :likes]) }
+                                                    }, :only => News.miniKey, methods: [:title, :content, :likes, :hasLiked]) }
         end
         if (@returnValue[:content].size == 0)
           codeAnswer 202
@@ -77,11 +75,11 @@ module API
           defineHttp :not_found
         else
           news.setLanguage @language if @language.present?
-          News.fillLikes [news]
+          News.fillLikes [news], @security, @user_id
           @returnValue = { content: news.as_json(:include => {
                                                   :user => { :only => User.miniKey },
                                                   :attachments => { :only => Attachment.miniKey }
-                                                }, :only => News.miniKey, methods: [:title, :content, :likes]) }
+                                                }, :only => News.miniKey, methods: [:title, :content, :likes, :hasLiked]) }
           codeAnswer 200
         end
       rescue
@@ -185,12 +183,12 @@ module API
           end
         end
 
-        News.fillLikes new_object
+        News.fillLikes new_object, @security, @user_id
 
         @returnValue = { content: new_object.as_json(:include => {
                                                       :user => { :only => User.miniKey },
                                                       :attachments => { :only => Attachment.miniKey }
-                                                    }, :only => News.miniKey, methods: [:title, :content, :likes]) }
+                                                    }, :only => News.miniKey, methods: [:title, :content, :likes, :hasLiked]) }
 
         if (new_object.size == 0)
           codeAnswer 202

@@ -153,22 +153,17 @@ SoonzikApp.controller('PlaylistsCtrl', ['$scope', "$rootScope", "$routeParams", 
 			  		}, function(error) {
 			  			NotificationService.error("Error while saving a new music");
 			  		});
-			  	}, function(error) {
-			  		NotificationService.error("Error while saving a new music");
 			  	});
   			}
-				
-				NotificationService.success("The playlist '" + $scope.newItem.name + "' has been created");
-				var pl = response.data.content;
-				pl.musics = musics;
-				pl.duration = duration;
+			NotificationService.success("The playlist '" + $scope.newItem.name + "' has been created");
+			var pl = response.data.content;
+			pl.musics = musics;
+			pl.duration = duration;
   			$rootScope.$broadcast("player:newPlaylist", pl);
   			$scope.tooltip = false;
   		}, function(error) {
   			NotificationService.error($rootScope.labels.FILE_PLAYLIST_SAVE_PLAYLIST_ERROR_MESSAGE);
   		});
-  	}, function(error) {
-  		NotificationService.error($rootScope.labels.FILE_PLAYLIST_SAVE_PLAYLIST_ERROR_MESSAGE);
   	});
   }
 
@@ -190,24 +185,22 @@ SoonzikApp.controller('PlaylistsCtrl', ['$scope', "$rootScope", "$routeParams", 
 
   	if ($scope.user != false && $scope.selectedMusic != false && playlist != false) {
   		SecureAuth.securedTransaction(function(key, user_id) {
-		  		var parameters = {
-		  			secureKey: key,
-		  			user_id: user_id,
-	  				id: $scope.selectedMusic.id,
-	  				playlist_id: playlist.id
-		  		};
-		  		HTTPService.addToPlaylist(parameters).then(function(response) {
-		  			NotificationService.success("The music '" + $scope.selectedMusic.title + "' has been added to the playlist");
-		  			$rootScope.$broadcast("player:addToPlaylist", { playlist: playlist, music: $scope.selectedMusic });
-		  			$scope.selectedMusic = false;
-		  			$scope.tooltip = false;
-		  			playlist.check = false;
-		  		}, function(error) {
-		  			NotificationService.error($rootScope.labels.FILE_PLAYLIST_NEW_MUSIC_ERROR_MESSAGE);
-		  		});
-		  	}, function(error) {
-		  		NotificationService.error($rootScope.labels.FILE_PLAYLIST_NEW_MUSIC_ERROR_MESSAGE);
-		  	});
+	  		var parameters = {
+	  			secureKey: key,
+	  			user_id: user_id,
+  				id: $scope.selectedMusic.id,
+  				playlist_id: playlist.id
+	  		};
+	  		HTTPService.addToPlaylist(parameters).then(function(response) {
+	  			NotificationService.success("The music '" + $scope.selectedMusic.title + "' has been added to the playlist");
+	  			$rootScope.$broadcast("player:addToPlaylist", { playlist: playlist, music: $scope.selectedMusic });
+	  			$scope.selectedMusic = false;
+	  			$scope.tooltip = false;
+	  			playlist.check = false;
+	  		}, function(error) {
+	  			NotificationService.error($rootScope.labels.FILE_PLAYLIST_NEW_MUSIC_ERROR_MESSAGE);
+	  		});
+	  	});
   	}
   }
 

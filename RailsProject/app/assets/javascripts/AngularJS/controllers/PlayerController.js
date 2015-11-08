@@ -335,8 +335,6 @@ SoonzikApp.controller("PlayerCtrl", ["$scope", "$rootScope", "HTTPService", "Not
   		}, function(error) {
   			NotificationService.error($rootScope.labels.FILE_PLAYER_DELETE_PLAYLIST_ERROR_MESSAGE + playlist.name);
   		});
-  	}, function(error) {
-  		NotificationService.error($rootScope.labels.FILE_PLAYER_DELETE_PLAYLIST_ERROR_MESSAGE + playlist.name);
   	});
   }
 
@@ -396,9 +394,7 @@ SoonzikApp.controller("PlayerCtrl", ["$scope", "$rootScope", "HTTPService", "Not
   		}, function(error) {
   			NotificationService.error($rootScope.labels.FILE_PLAYER_REMOVE_FROM_PLAYLIST_ERROR_MESSAGE);
   		});
-  	}, function(error) {
-  		NotificationService.error($rootScope.labels.FILE_PLAYER_REMOVE_FROM_PLAYLIST_ERROR_MESSAGE);
-  	})
+  	});
   }
 
   $scope.unshare = function(myplaylist) {
@@ -433,8 +429,6 @@ SoonzikApp.controller("PlayerCtrl", ["$scope", "$rootScope", "HTTPService", "Not
         }, function(error) {
           NotificationService.error($rootScope.labels.FILE_PLAYER_SAVE_IN_PLAYLIST_ERROR_MESSAGE);
         });
-      }, function(error) {
-        NotificationService.error($rootScope.labels.FILE_PLAYER_SAVE_IN_PLAYLIST_ERROR_MESSAGE);
       });
     }
   }
@@ -449,8 +443,6 @@ SoonzikApp.controller("PlayerCtrl", ["$scope", "$rootScope", "HTTPService", "Not
     if ($scope.user != false) {
       SecureAuth.securedTransaction(function(key, user_id) {
         $scope.play(HTTPService.getMP3musicURL(music.id, [{ key: "user_id", value: user_id}, { key: "secureKey", value: key }]));
-      }, function(error) {
-        NotificationService.error($rootScope.labels.FILE_PLAYER_PLAY_MUSIC_ERROR_MESSAGE + $scope.playlist[$scope.indexPlaylist].title);
       });
       if ($scope.geoloc) {
         SecureAuth.securedTransaction(function(key, user_id) {
@@ -470,8 +462,6 @@ SoonzikApp.controller("PlayerCtrl", ["$scope", "$rootScope", "HTTPService", "Not
           }, function(error) {
             NotificationService.error($rootScope.labels.FILE_PLAYER_GEOLOC_MUSIC_ERROR_MESSAGE)
           });
-        }, function(error) {
-          NotificationService.error($rootScope.labels.FILE_PLAYER_PLAY_MUSIC_ERROR_MESSAGE + $scope.playlist[$scope.indexPlaylist].title);
         });
       }
     } else {
@@ -530,8 +520,6 @@ SoonzikApp.controller("PlayerCtrl", ["$scope", "$rootScope", "HTTPService", "Not
         }, function(error) {
           NotificationService.error($rootScope.labels.FILE_PLAYER_SAVE_IN_PLAYLIST_ERROR_MESSAGE);
         });
-      }, function(error) {
-        NotificationService.error($rootScope.labels.FILE_PLAYER_SAVE_IN_PLAYLIST_ERROR_MESSAGE);
       });
       $scope.more.pop = false;
     }
@@ -550,8 +538,6 @@ SoonzikApp.controller("PlayerCtrl", ["$scope", "$rootScope", "HTTPService", "Not
       }, function(error) {
         NotificationService.error($rootScope.labels.FILE_PLAYER_SAVE_IN_PLAYLIST_ERROR_MESSAGE);
       });
-    }, function(error) {
-      NotificationService.error($rootScope.labels.FILE_PLAYER_SAVE_IN_PLAYLIST_ERROR_MESSAGE);
     });
   }
 

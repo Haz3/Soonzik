@@ -151,8 +151,8 @@ SoonzikApp.controller('ChatCtrl', ['$scope', 'SecureAuth', 'HTTPService', '$time
 		}
 
 		var r_secureLoop = function(index) {
-			$scope.onWindows[index].loading = true;
 			SecureAuth.securedTransaction(function (key, user_id) {
+				$scope.onWindows[index].loading = true;
 				waiting = false;
 				var parameters = [{
 					key: "secureKey", value: key
@@ -180,9 +180,6 @@ SoonzikApp.controller('ChatCtrl', ['$scope', 'SecureAuth', 'HTTPService', '$time
 						return;
 					$scope.message[$scope.onWindows[index].friend.username] = $rootScope.labels.FILE_CHAT_GET_MESSAGE_ERROR_MESSAGE;
 				});
-			}, function(error) {
-				$scope.onWindows[index].loading = false;
-				$scope.message[$scope.onWindows[index].friend.username] = $rootScope.labels.FILE_CHAT_GET_MESSAGE_ERROR_MESSAGE;
 			});
 		}
 
@@ -361,9 +358,6 @@ SoonzikApp.controller('ChatCtrl', ['$scope', 'SecureAuth', 'HTTPService', '$time
 					$scope.message[friend.username].messagesText.push({extern: true, value: $rootScope.labels.FILE_CHAT_GET_MESSAGE_ERROR_MESSAGE});
 					friendWindow.loading = false;
 				});
-			}, function(error) {
-				$scope.message[friend.username].messagesText.push({extern: true, value: $rootScope.labels.FILE_CHAT_GET_MESSAGE_ERROR_MESSAGE});
-				friendWindow.loading = false;
 			});
 		}
 	}

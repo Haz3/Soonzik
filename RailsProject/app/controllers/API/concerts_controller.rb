@@ -26,13 +26,13 @@ module API
           @returnValue = { content: Concert.count }
         else
           concerts = Concert.eager_load([:address, :user]).all
-          Concert.fillLikes concerts
+          Concert.fillLikes concerts, @security, @user_id
 
           @returnValue = { content: concerts.as_json(:include => {
                                       :address => { :only => Address.miniKey  },
                                       :user => { :only => User.miniKey }
                                       }, :only => Concert.miniKey,
-                                      :methods => :likes) }
+                                      :methods => [:likes, :hasLiked]) }
         end
         if (@returnValue[:content].size == 0)
           codeAnswer 202
@@ -68,12 +68,12 @@ module API
           codeAnswer 502
           defineHttp :not_found
         else
-          Concert.fillLikes [concert]
+          Concert.fillLikes [concert], @security, @user_id
           @returnValue = { content: concert.as_json(:include => {
                                                             :address => { :only => Address.miniKey  },
                                                             :user => { :only => User.miniKey }
                                                             }, :only => Concert.miniKey,
-                                                            :methods => :likes) }
+                                                            :methods => [:likes, :hasLiked]) }
           codeAnswer 200
         end
       rescue
@@ -170,13 +170,13 @@ module API
           concert_object = concert_object.offset(@offset.to_i)
         end
 
-        Concert.fillLikes concert_object
+        Concert.fillLikes concert_object, @security, @user_id
 
         @returnValue = { content: concert_object.as_json(:include => {
                                                             :address => { :only => Address.miniKey  },
                                                             :user => { :only => User.miniKey }
                                                             }, :only => Concert.miniKey,
-                                                            :methods => :likes) }
+                                                            :methods => [:likes, :hasLiked]) }
 
         if (concert_object.size == 0)
           codeAnswer 202

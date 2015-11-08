@@ -21,8 +21,6 @@ module API
 	# * linkSocial	[post] - SECURE
 	#
 	class UsersController < ApisecurityController
-		before_action :checkKey, only: [:getmusics, :save, :update, :follow, :unfollow, :addfriend, :delfriend, :uploadImg, :linkSocial]
-
 		# Retrieve all the users
 		#
 		# Route : /users

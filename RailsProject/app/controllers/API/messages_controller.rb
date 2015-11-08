@@ -8,8 +8,6 @@ module API
   # * conversation [get] - SECURE
   #
   class MessagesController < ApisecurityController
-    before_action :checkKey, only: [:show, :save, :find, :conversation]
-
   	# Give a specific object by its id
     #
     # Route : /messages/:id

@@ -44,8 +44,8 @@ var labels = {
 	// Album Controller
 	FILE_ALBUM_ADD_ALBUM_MESSAGE: "L'album a bien été ajouté au panier",
 	FILE_ALBUM_ADD_ALBUM_ERROR_MESSAGE: "Une erreur s'est produite lors de l'ajout au panier",
-  FILE_ALBUM_ADD_SONG_MESSAGE: "La musique a bien été ajouté au panier", 
-  FILE_ALBUM_ADD_SONG_ERROR_MESSAGE: "Une erreur s'est produite lors de l'ajout au panier",
+  	FILE_ALBUM_ADD_SONG_MESSAGE: "La musique a bien été ajouté au panier", 
+  	FILE_ALBUM_ADD_SONG_ERROR_MESSAGE: "Une erreur s'est produite lors de l'ajout au panier",
 	FILE_ALBUM_GET_NOTES_ERROR_MESSAGE: "Une erreur s'est produite au chargement des notes",
 	FILE_ALBUM_FIND_PLAYLIST_ERROR_MESSAGE: "Une erreur s'est produite pendant la suppresion d'une liste de lecture : ",
 	FILE_ALBUM_GET_ALBUM_ERROR_MESSAGE: "Une erreur s'est produite au chargement d'un album",
@@ -131,6 +131,9 @@ var labels = {
 	FILE_USER_GOOGLE_LINKED_ERROR_MESSAGE: "Le compte google + est déjà lié à un autre compte SoonZik",
 	FILE_USER_GOOGLE_LINK_ERROR_MESSAGE: "Impossible de lier ce compte à votre profil",
 	FILE_USER_GOOGLE_CONNECTION_ERROR_MESSAGE: "Impossible de se connecter à Google Plus",
+
+	// Security Controller
+	FILE_SECURITY_FAILED: "Une erreur s'est produite durant la requête",
 
 	// Album Show View
 	DISPLAY_ALBUM_ADD_TO_CART: "Ajouter au panier",

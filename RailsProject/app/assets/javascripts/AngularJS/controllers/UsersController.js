@@ -344,8 +344,6 @@ SoonzikApp.controller('UsersCtrl', ['$scope', "$routeParams", 'SecureAuth', 'HTT
 					}
 					NotificationService.error($rootScope.labels.FILE_USER_ERROR_OCCURED_MESSAGE);
 				});
-			}, function (responseForbidden) {
-				NotificationService.error($rootScope.labels.FILE_USER_ERROR_OCCURED_MESSAGE);
 			});
 		}
 	}
@@ -364,8 +362,6 @@ SoonzikApp.controller('UsersCtrl', ['$scope', "$routeParams", 'SecureAuth', 'HTT
 					}, function (error) {
 						$scope.formError.user.image = error;
 					});
-				}, function (error) {
-					NotificationService.error($rootScope.labels.FILE_USER_ERROR_OCCURED_MESSAGE);
 				});
 			}
 		}
@@ -385,8 +381,6 @@ SoonzikApp.controller('UsersCtrl', ['$scope', "$routeParams", 'SecureAuth', 'HTT
 					}, function (error) {
 						$scope.formError.user.background = error;
 					});
-				}, function (error) {
-					NotificationService.error($rootScope.labels.FILE_USER_ERROR_OCCURED_MESSAGE);
 				});
 			}
 		}
@@ -405,8 +399,6 @@ SoonzikApp.controller('UsersCtrl', ['$scope', "$routeParams", 'SecureAuth', 'HTT
 				}, function(error) {
 					NotificationService.error($rootScope.labels.FILE_USER_FOLLOW_ERROR_MESSAGE);
 				});
-			}, function(error) {
-				NotificationService.error($rootScope.labels.FILE_USER_FOLLOW_ERROR_MESSAGE);
 			});
 		}
 	}
@@ -425,8 +417,6 @@ SoonzikApp.controller('UsersCtrl', ['$scope', "$routeParams", 'SecureAuth', 'HTT
 				}, function(error) {
 					NotificationService.error($rootScope.labels.FILE_USER_FRIEND_ERROR_MESSAGE);
 				});
-			}, function(error) {
-				NotificationService.error($rootScope.labels.FILE_USER_FRIEND_ERROR_MESSAGE);
 			});
 		}
 	}
@@ -449,8 +439,6 @@ SoonzikApp.controller('UsersCtrl', ['$scope', "$routeParams", 'SecureAuth', 'HTT
 				}, function(error) {
 					NotificationService.error($rootScope.labels.FILE_USER_UNFOLLOW_ERROR_MESSAGE);
 				});
-			}, function(error) {
-				NotificationService.error($rootScope.labels.FILE_USER_UNFOLLOW_ERROR_MESSAGE);
 			});
 		}
 	}
@@ -474,8 +462,6 @@ SoonzikApp.controller('UsersCtrl', ['$scope', "$routeParams", 'SecureAuth', 'HTT
 				}, function(error) {
 					NotificationService.error($rootScope.labels.FILE_USER_UNFRIEND_ERROR_MESSAGE);
 				});
-			}, function(error) {
-				NotificationService.error($rootScope.labels.FILE_USER_UNFRIEND_ERROR_MESSAGE);
 			});
 		}
 	}
@@ -502,8 +488,6 @@ SoonzikApp.controller('UsersCtrl', ['$scope', "$routeParams", 'SecureAuth', 'HTT
 				}, function(error) {
 					NotificationService.error($rootScope.labels.FILE_USER_SAVE_TWEET_ERROR_MESSAGE);
 				});
-			}, function(error) {
-				NotificationService.error($rootScope.labels.FILE_USER_SAVE_TWEET_ERROR_MESSAGE);
 			});
 
 		} else {
@@ -543,8 +527,6 @@ SoonzikApp.controller('UsersCtrl', ['$scope', "$routeParams", 'SecureAuth', 'HTT
 				}, function(error) {
 					NotificationService.error($rootScope.labels.FILE_USER_SET_NOTE_ERROR_MESSAGE);
 				});
-			}, function(error) {
-				NotificationService.error($rootScope.labels.FILE_USER_SET_NOTE_ERROR_MESSAGE);
 			});
 		} else {
 			NotificationService.info($rootScope.labels.FILE_USER_NEED_LOGIN_ERROR_MESSAGE);
@@ -561,24 +543,22 @@ SoonzikApp.controller('UsersCtrl', ['$scope', "$routeParams", 'SecureAuth', 'HTT
 
 		if ($scope.user != false && $scope.selectedMusic != false && playlist != false) {
 			SecureAuth.securedTransaction(function(key, user_id) {
-					var parameters = {
-						secureKey: key,
-						user_id: user_id,
-						id: $scope.selectedMusic.id,
-						playlist_id: playlist.id
-					};
-					HTTPService.addToPlaylist(parameters).then(function(response) {
-						NotificationService.success("The music '" + $scope.selectedMusic.title + "' has been added to the playlist");
-						$rootScope.$broadcast("player:addToPlaylist", { playlist: playlist, music: $scope.selectedMusic });
-						$scope.selectedMusic = false;
-						$scope.tooltip = false;
-						playlist.check = false;
-					}, function(error) {
-						NotificationService.error($rootScope.labels.FILE_USER_ADD_PLAYLIST_ERROR_MESSAGE);
-					});
+				var parameters = {
+					secureKey: key,
+					user_id: user_id,
+					id: $scope.selectedMusic.id,
+					playlist_id: playlist.id
+				};
+				HTTPService.addToPlaylist(parameters).then(function(response) {
+					NotificationService.success("The music '" + $scope.selectedMusic.title + "' has been added to the playlist");
+					$rootScope.$broadcast("player:addToPlaylist", { playlist: playlist, music: $scope.selectedMusic });
+					$scope.selectedMusic = false;
+					$scope.tooltip = false;
+					playlist.check = false;
 				}, function(error) {
 					NotificationService.error($rootScope.labels.FILE_USER_ADD_PLAYLIST_ERROR_MESSAGE);
 				});
+			});
 		}
 	}
 
@@ -659,8 +639,6 @@ SoonzikApp.controller('UsersCtrl', ['$scope', "$routeParams", 'SecureAuth', 'HTT
 							NotificationService.error($rootScope.labels.FILE_USER_FB_LINK_ERROR_MESSAGE);
 						}
 					});
-				}, function(error) {
-					NotificationService.error($rootScope.labels.FILE_USER_FB_LINK_ERROR_MESSAGE);
 				});
 			});
 			
@@ -695,8 +673,6 @@ SoonzikApp.controller('UsersCtrl', ['$scope', "$routeParams", 'SecureAuth', 'HTT
 								NotificationService.error($rootScope.labels.FILE_USER_GOOGLE_LINK_ERROR_MESSAGE);
 							}
 						});
-					}, function(error) {
-						NotificationService.error($rootScope.labels.FILE_USER_GOOGLE_LINK_ERROR_MESSAGE);
 					});
 				});
 		  }, function(err) {

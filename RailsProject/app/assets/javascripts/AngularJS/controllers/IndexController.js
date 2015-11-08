@@ -141,8 +141,6 @@ SoonzikApp.controller('IndexCtrl', ['$scope', 'SecureAuth', 'HTTPService', '$tim
 				}, function(error) {
 					NotificationService.error(labels.FILE_INDEX_FLUX_LOAD_ERROR_MESSAGE)
 				});
-			}, function(error) {
-				NotificationService.error(labels.FILE_INDEX_FLUX_LOAD_ERROR_MESSAGE)
 			});
 
 			// Find the tweet who speak to you
@@ -173,8 +171,6 @@ SoonzikApp.controller('IndexCtrl', ['$scope', 'SecureAuth', 'HTTPService', '$tim
 				}, function(error) {
 					NotificationService.error(labels.FILE_INDEX_SUGGESTION_LOAD_ERROR_MESSAGE)
 				});
-			}, function(error) {
-				NotificationService.error(labels.FILE_INDEX_SUGGESTION_LOAD_ERROR_MESSAGE)
 			});
 		}
 	}
@@ -220,8 +216,6 @@ SoonzikApp.controller('IndexCtrl', ['$scope', 'SecureAuth', 'HTTPService', '$tim
 				}, function(error) {
 					NotificationService.error($rootScope.labels.FILE_USER_SAVE_TWEET_ERROR_MESSAGE);
 				});
-			}, function(error) {
-				NotificationService.error($rootScope.labels.FILE_USER_SAVE_TWEET_ERROR_MESSAGE);
 			});
 
 		} else {

@@ -32,7 +32,7 @@ class Concert < ActiveRecord::Base
   end
 
   # Fill an association of records of the notes average
-  def self.fillLikes(ar_concerts)
+  def self.fillLikes(ar_concerts, security = false, user_id = nil)
     sql = "SELECT concert_id, COUNT(concert_id) AS count FROM concertslikes WHERE (concert_id IN ("
 
     ar_concerts.each_with_index do |concert, index|
@@ -50,6 +50,7 @@ class Concert < ActiveRecord::Base
         if (concert[:id].to_i == record['concert_id'].to_i)
           passIn = true
           concert.setLike record['count']
+          concerts.setLiked if security && Concertslike.where(user_id: user_id).where(concert_id: concert[:id]).first != nil
           break
         end
       end
@@ -71,5 +72,15 @@ class Concert < ActiveRecord::Base
   # The strong parameters to save or update object
   def self.concert_params(parameters)
     parameters.require(:concert).permit(:user_id, :planification, :address_id, :url)
+  end
+
+  # Set the number of likes
+  def setLiked
+    @hasLiked = true
+  end
+
+  # To know if you liked this
+  def hasLiked
+    return @hasLiked.present? ? @hasLiked : false
   end
 end

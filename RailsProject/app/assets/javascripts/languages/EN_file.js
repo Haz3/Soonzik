@@ -44,8 +44,8 @@ var labels = {
 	// Album Controller
 	FILE_ALBUM_ADD_ALBUM_MESSAGE: "Album successfuly adding into the cart",
 	FILE_ALBUM_ADD_ALBUM_ERROR_MESSAGE: "An error occured while adding album into the cart",
-  FILE_ALBUM_ADD_SONG_MESSAGE: "Song is successfuly add into the cart", 
-  FILE_ALBUM_ADD_SONG_ERROR_MESSAGE: "An error occured while adding song into the cart",
+	FILE_ALBUM_ADD_SONG_MESSAGE: "Song is successfuly add into the cart", 
+	FILE_ALBUM_ADD_SONG_ERROR_MESSAGE: "An error occured while adding song into the cart",
 	FILE_ALBUM_GET_NOTES_ERROR_MESSAGE: "Error while loading your notes",
 	FILE_ALBUM_FIND_PLAYLIST_ERROR_MESSAGE: "Error while deleting the playlist : ",
 	FILE_ALBUM_GET_ALBUM_ERROR_MESSAGE: "Error while loading the album",
@@ -131,6 +131,9 @@ var labels = {
 	FILE_USER_GOOGLE_LINKED_ERROR_MESSAGE: "The Google Plus account is already linked to another SoonZik account",
 	FILE_USER_GOOGLE_LINK_ERROR_MESSAGE: "Can't link the social network to your profile, try again later.",
 	FILE_USER_GOOGLE_CONNECTION_ERROR_MESSAGE: "Can't connect to Google, please try later",
+
+	// Security Controller
+	FILE_SECURITY_FAILED: "An error occured during the request",
 
 	// Album Show View
 	DISPLAY_ALBUM_ADD_TO_CART: "Add to cart",

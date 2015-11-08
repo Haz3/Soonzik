@@ -111,8 +111,6 @@ SoonzikApp.controller('AlbumsCtrl', ['$scope', "$routeParams", 'SecureAuth', 'HT
   		}, function(error) {
   			NotificationService.error($rootScope.labels.FILE_ALBUM_ADD_PLAYLIST_ERROR_MESSAGE);
   		});
-  	}, function(error) {
-  		NotificationService.error($rootScope.labels.FILE_ALBUM_ADD_PLAYLIST_ERROR_MESSAGE);
   	});
   }
 
@@ -131,8 +129,6 @@ SoonzikApp.controller('AlbumsCtrl', ['$scope', "$routeParams", 'SecureAuth', 'HT
 			}, function(error) {
 				NotificationService.error($rootScope.labels.FILE_ALBUM_SET_NOTE_ERROR_MESSAGE);
 			});
-		}, function(error) {
-			NotificationService.error($rootScope.labels.FILE_ALBUM_SET_NOTE_ERROR_MESSAGE);
 		});
 	}
 
@@ -194,15 +190,13 @@ SoonzikApp.controller('AlbumsCtrl', ['$scope', "$routeParams", 'SecureAuth', 'HT
 				user_id: user_id
 			}
 		};
-			HTTPService.addToCart(parameters).then(function(response) {
-				NotificationService.success($rootScope.labels.FILE_ALBUM_ADD_ALBUM_MESSAGE + " " + $scope.album.id );
-			
-			}, function(repsonseError) {
-				NotificationService.error($rootScope.labels.FILE_ALBUM_ADD_ALBUM_ERROR_MESSAGE);
-			});
-		}, function(error) {
+		HTTPService.addToCart(parameters).then(function(response) {
+			NotificationService.success($rootScope.labels.FILE_ALBUM_ADD_ALBUM_MESSAGE + " " + $scope.album.id );
+		
+		}, function(repsonseError) {
 			NotificationService.error($rootScope.labels.FILE_ALBUM_ADD_ALBUM_ERROR_MESSAGE);
 		});
+	});
   }
 
   $scope.addSongToCart = function(music) {
@@ -224,8 +218,6 @@ SoonzikApp.controller('AlbumsCtrl', ['$scope', "$routeParams", 'SecureAuth', 'HT
 			}, function(repsonseError) {
 				NotificationService.error($rootScope.labels.FILE_ALBUM_ADD_SONG_ERROR_MESSAGE);
 			});
-		}, function(error) {
-			NotificationService.error($rootScope.labels.FILE_ALBUM_ADD_SONG_ERROR_MESSAGE);
 		});
   	$scope.loading = false;
   }
@@ -246,19 +238,15 @@ SoonzikApp.controller('AlbumsCtrl', ['$scope', "$routeParams", 'SecureAuth', 'HT
 
   $scope.sendComment = function() {
   	SecureAuth.securedTransaction(function (key, user_id) {
-			var parameters = { secureKey: key, user_id: user_id, content: $scope.comment.value };
-			
-			HTTPService.addAlbumComment($scope.album.id, parameters).then(function(response) {
-				$scope.resourcesCommentaries.unshift(response.data.content);
-				$scope.commentariesOffset++;
-				$scope.comment.value = "";
-			}, function (responseError) {
-				NotificationService.error($rootScope.labels.FILE_ALBUM_SEND_COMMENT_ERROR_MESSAGE);
-			});
-		}, function(error) {
+		var parameters = { secureKey: key, user_id: user_id, content: $scope.comment.value };
+		
+		HTTPService.addAlbumComment($scope.album.id, parameters).then(function(response) {
+			$scope.resourcesCommentaries.unshift(response.data.content);
+			$scope.commentariesOffset++;
+			$scope.comment.value = "";
+		}, function (responseError) {
 			NotificationService.error($rootScope.labels.FILE_ALBUM_SEND_COMMENT_ERROR_MESSAGE);
 		});
-
-  	
+	});
   }
 }]);

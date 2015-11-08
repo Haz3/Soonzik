@@ -41,18 +41,29 @@ class News < ActiveRecord::Base
   end
 
   # Fill an association of records of the notes average
-  def self.fillLikes(ar_news)
+  def self.fillLikes(ar_news, security = false, user_id = nil)
     sql = "SELECT news_id, COUNT(news_id) AS count FROM newslikes WHERE (news_id IN ("
+    sql_hasLiked = "SELECT news_id FROM newslikes WHERE (news_id IN (" if @security
 
     ar_news.each_with_index do |news, index|
       sql += ", " if index != 0
       sql += news[:id].to_s
+
+      if @security
+        sql_hasLiked += ", " if index != 0
+        sql_hasLiked += news[:id].to_s
+      end
     end
 
     sql += ")) GROUP BY news_id"
     records_array = ActiveRecord::Base.connection.execute(sql)
 
-    puts records_array
+    if @security
+      sql_hasLiked += ")) AND WHERE user_id = #{user_id}"
+      records_liked = ActiveRecord::Base.connection.execute(sql_hasLiked)
+    end
+
+    puts records_liked
 
     ar_news.each do |news|
       passIn = false
@@ -65,13 +76,21 @@ class News < ActiveRecord::Base
         end
       end
 
+      if @security
+        records_liked.each do |record|
+          if (news[:id].to_i == record['news_id'].to_i)
+            puts news[:id]
+            news.setLiked
+          end
+        end
+      end
+
       news.setLike 0 if !passIn
     end
   end
 
   # Set the number of likes
   def setLike(value)
-    puts "set #{value}"
     @likes = value
   end
 
@@ -116,5 +135,15 @@ class News < ActiveRecord::Base
     end
 
     content
+  end
+
+  # Set the number of likes
+  def setLiked
+    @hasLiked = true
+  end
+
+  # To know if you liked this
+  def hasLiked
+    return @hasLiked.present? ? @hasLiked : false
   end
 end
