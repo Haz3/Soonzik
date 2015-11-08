@@ -3,7 +3,10 @@ SoonzikApp.controller('NewsCtrl', ['$scope', '$routeParams', 'SecureAuth', 'HTTP
 	$scope.loading = true;
 	$scope.resourceName = "news"
 
-	$rootScope.likes = 0;
+	$rootScope.likes = {
+		count: 0,
+		isLiked: false
+	};
 
 	// For the pagination
 	$scope.index = {
@@ -24,63 +27,78 @@ SoonzikApp.controller('NewsCtrl', ['$scope', '$routeParams', 'SecureAuth', 'HTTP
 	$scope.initIndexNews = function() {
 		$scope.index.currentPage = ($rootScope.toInt($routeParams.page) == 0 ? 1 : $rootScope.toInt($routeParams.page));
 
-		// For pagination
-		HTTPService.indexNews([{ key: "count", value: "true" }]).then(function(response) {
-			var numberResults = response.data.content;
+		SecureAuth.securedTransaction(function(key, id) {
+			var countParams = [
+				{ key: "secureKey", value: key },
+				{ key: "user_id", value: id },
+				{ key: "count", value: "true" }
+			];
+			// For pagination
+			HTTPService.indexNews(countParams).then(function(response) {
+				var numberResults = response.data.content;
 
-			if (typeof numberResults != "undefined") {
-				$scope.index.totalPage = ~~(numberResults / newsPerPage) + 1;
-			} else {
-				$scope.index.totalPage = 1;
-			}
-		}, function(error) {
-			NotificationService.error($rootScope.labels.FILE_NEWS_LOAD_ERROR_MESSAGE);
-		});
-
-		// Get news
-		var parameters = [
-			{ key: "order_by_desc[]", value: "created_at" },
-  		{ key: "offset", value: ($scope.index.currentPage - 1) * 20 },
-  		{ key: "limit", value: newsPerPage }
-		];
-
-		HTTPService.findNews(parameters).then(function(response) {
-			$scope.index.resources = response.data.content;
-
-			for (var indexNews in $scope.index.resources) {
-				if ($scope.index.resources[indexNews].content.length > 170) {
-					$scope.index.resources[indexNews].content = $scope.index.resources[indexNews].content.substr(0, 170) + "...";
+				if (typeof numberResults != "undefined") {
+					$scope.index.totalPage = ~~(numberResults / newsPerPage) + 1;
+				} else {
+					$scope.index.totalPage = 1;
 				}
-			}
+			}, function(error) {
+				NotificationService.error($rootScope.labels.FILE_NEWS_LOAD_ERROR_MESSAGE);
+			});
 
-			$scope.index.totalPage = Math.floor($scope.index.resources.length / 20 + 1);
+			// Get news
+			var parameters = [
+				{ key: "order_by_desc[]", value: "created_at" },
+		  		{ key: "offset", value: ($scope.index.currentPage - 1) * 20 },
+		  		{ key: "limit", value: newsPerPage },
+				{ key: "secureKey", value: key },
+				{ key: "user_id", value: id },
+			];
 
-			$scope.loading = false;
-		}, function (error) {
-			NotificationService.error($rootScope.labels.FILE_NEWS_LOAD_ERROR_MESSAGE);
+			HTTPService.findNews(parameters).then(function(response) {
+				$scope.index.resources = response.data.content;
+
+				for (var indexNews in $scope.index.resources) {
+					if ($scope.index.resources[indexNews].content.length > 170) {
+						$scope.index.resources[indexNews].content = $scope.index.resources[indexNews].content.substr(0, 170) + "...";
+					}
+				}
+
+				$scope.index.totalPage = Math.floor($scope.index.resources.length / 20 + 1);
+
+				$scope.loading = false;
+			}, function (error) {
+				NotificationService.error($rootScope.labels.FILE_NEWS_LOAD_ERROR_MESSAGE);
+			});
 		});
 	}
 
 	$scope.initShowNews = function() {
 		var newsId = $routeParams.id;
 
-		HTTPService.showNews(newsId).then(function(response) {
-			$scope.show.news = response.data.content;
-			$rootScope.likes = response.data.content.likes;
-			$scope.showComments();
+		SecureAuth.securedTransaction(function(key, id) {
+			var params = [
+				{ key: "secureKey", value: key },
+				{ key: "user_id", value: id }
+			];
+			HTTPService.showNews(newsId, params).then(function(response) {
+				$scope.show.news = response.data.content;
+				$rootScope.likes = { count: response.data.content.likes, isLiked: response.data.content.hasLiked };
+				$scope.showComments();
 
-			$(window).scroll(function() {
-				if($(window).scrollTop() + $(window).height() == $(document).height() && $scope.newsLoading == false) {
-					$scope.$apply(function() {
-						$scope.newsLoading = true;
-						$scope.showComments();
-					});
-				}
+				$(window).scroll(function() {
+					if($(window).scrollTop() + $(window).height() == $(document).height() && $scope.newsLoading == false) {
+						$scope.$apply(function() {
+							$scope.newsLoading = true;
+							$scope.showComments();
+						});
+					}
+				});
+
+				$scope.loading = false;
+			}, function (error) {
+				NotificationService.error($rootScope.labels.FILE_NEWS_ONE_NEWS_ERROR_MESSAGE);
 			});
-
-			$scope.loading = false;
-		}, function (error) {
-			NotificationService.error($rootScope.labels.FILE_NEWS_ONE_NEWS_ERROR_MESSAGE);
 		});
 	}
 
@@ -111,17 +129,21 @@ SoonzikApp.controller('NewsCtrl', ['$scope', '$routeParams', 'SecureAuth', 'HTTP
 	}
 
 	$scope.showComments = function() {
-		var parameters = [
-			{ key: "offset", value: $scope.resourcesCommentaries.length },
-			{ key: "limit", value: 20 },
-			{ key: "order_reverse", value: true }
-  	];
+		SecureAuth.securedTransaction(function(key, id) {
+			var parameters = [
+				{ key: "offset", value: $scope.resourcesCommentaries.length },
+				{ key: "limit", value: 20 },
+				{ key: "order_reverse", value: true },
+				{ key: "secureKey", value: key },
+				{ key: "user_id", value: id }
+	  		];
 
-		HTTPService.showComment($scope.show.news.id, parameters).then(function(response) {
-			$scope.resourcesCommentaries = $scope.resourcesCommentaries.concat(response.data.content);
-			$scope.commentLoading = false;
-		}, function(error) {
-			NotificationService.error($rootScope.labels.FILE_NEWS_LOAD_COMMENT_ERROR_MESSAGE);
+			HTTPService.showComment($scope.show.news.id, parameters).then(function(response) {
+				$scope.resourcesCommentaries = $scope.resourcesCommentaries.concat(response.data.content);
+				$scope.commentLoading = false;
+			}, function(error) {
+				NotificationService.error($rootScope.labels.FILE_NEWS_LOAD_COMMENT_ERROR_MESSAGE);
+			});
 		});
 	}
 

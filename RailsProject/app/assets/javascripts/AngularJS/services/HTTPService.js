@@ -23,23 +23,23 @@ SoonzikApp.factory('HTTPService', ['$http', '$location', 'Upload', function ($ht
     getLastMessages: function (user_id, parameters) {
       return $http.get(api_url + '/messages/conversation/' + user_id + urlParametersFormat(parameters));
     },
-    getProfile: function (user_id) {
-      return $http.get(api_url + '/users/' + user_id);
+    getProfile: function (user_id, parameters) {
+      return $http.get(api_url + '/users/' + user_id + urlParametersFormat(parameters));
     },
-    getFullProfile: function (user_id) {
+    getFullProfile: function (user_id) { 
       return $http.get(url + '/users/' + user_id + '/edit.json');
     },
-    getFriends: function (user_id) {
-    	return $http.get(api_url + '/users/' + user_id + '/friends')
+    getFriends: function (user_id, parameters) {
+    	return $http.get(api_url + '/users/' + user_id + '/friends' + urlParametersFormat(parameters))
     },
-    getFollowers: function (user_id) {
-      return $http.get(api_url + '/users/' + user_id + '/followers')
+    getFollowers: function (user_id, parameters) {
+      return $http.get(api_url + '/users/' + user_id + '/followers' + urlParametersFormat(parameters))
     },
-    getFollows: function (user_id) {
-      return $http.get(api_url + '/users/' + user_id + '/follows')
+    getFollows: function (user_id, parameters) {  
+      return $http.get(api_url + '/users/' + user_id + '/follows' + urlParametersFormat(parameters))
     },
-    isArtist: function (user_id) {
-    	return $http.get(api_url + '/users/' + user_id + '/isartist')
+    isArtist: function (user_id, parameters) {  
+    	return $http.get(api_url + '/users/' + user_id + '/isartist' + urlParametersFormat(parameters))
     },
     updateUser: function (parameters) {
       return $http.post(api_url + '/users/update', parameters)
@@ -70,8 +70,8 @@ SoonzikApp.factory('HTTPService', ['$http', '$location', 'Upload', function ($ht
     findPacks: function (parameters) {
       return $http.get(api_url + '/packs/find' + urlParametersFormat(parameters));
     },
-    showPack: function(id) {
-      return $http.get(api_url + '/packs/' + id)
+    showPack: function(id, parameters) {  
+      return $http.get(api_url + '/packs/' + id + urlParametersFormat(parameters))
     },
     indexNews: function(parameters) {
       return $http.get(api_url + '/news' + urlParametersFormat(parameters));
@@ -79,8 +79,8 @@ SoonzikApp.factory('HTTPService', ['$http', '$location', 'Upload', function ($ht
     findNews: function(parameters) {
       return $http.get(api_url + '/news/find' + urlParametersFormat(parameters));
     },
-    showNews: function(id) {
-      return $http.get(api_url + '/news/' + id)
+    showNews: function(id, parameters) {  
+      return $http.get(api_url + '/news/' + id + urlParametersFormat(parameters))
     },
     showComment: function(newsId, parameters) {
       return $http.get(api_url + '/news/' + newsId + '/comments' + urlParametersFormat(parameters));
@@ -94,8 +94,8 @@ SoonzikApp.factory('HTTPService', ['$http', '$location', 'Upload', function ($ht
     indexBattles: function (parameters) {
       return $http.get(api_url + '/battles' + urlParametersFormat(parameters));
     },
-    showBattles: function (id) {
-      return $http.get(api_url + '/battles/' + id);
+    showBattles: function (id, parameters) {  
+      return $http.get(api_url + '/battles/' + id + urlParametersFormat(parameters));
     },
     voteBattle: function (battleId, parameters) {
       return $http.post(api_url + '/battles/' + battleId + '/vote', parameters);
@@ -103,8 +103,8 @@ SoonzikApp.factory('HTTPService', ['$http', '$location', 'Upload', function ($ht
     getMP3musicURL: function(id, parameters) {
       return api_url + '/musics/get/' + id + urlParametersFormat(parameters);
     },
-    getPlaylist: function(id) {
-      return $http.get(api_url + '/playlists/' + id);
+    getPlaylist: function(id, parameters) { 
+      return $http.get(api_url + '/playlists/' + id + urlParametersFormat(parameters));
     },
     findPlaylist: function(parameters) {
       return $http.get(api_url + '/playlists/find' + urlParametersFormat(parameters));
@@ -121,8 +121,8 @@ SoonzikApp.factory('HTTPService', ['$http', '$location', 'Upload', function ($ht
     unfollow: function(parameters) {
       return $http.post(api_url + "/users/unfollow", parameters);
     },
-    getMusic: function(id) {
-      return $http.get(api_url + "/musics/" + id);
+    getMusic: function(id, parameters) {  
+      return $http.get(api_url + "/musics/" + id + urlParametersFormat(parameters));
     },
     savePlaylist: function(parameters) {
       return $http.post(api_url + "/playlists/save", parameters);
@@ -139,8 +139,8 @@ SoonzikApp.factory('HTTPService', ['$http', '$location', 'Upload', function ($ht
     search: function(parameters) {
       return $http.get(api_url + "/search" + urlParametersFormat(parameters));
     },
-    getInfluences: function() {
-      return $http.get(api_url + "/influences");
+    getInfluences: function(parameters) { 
+      return $http.get(api_url + "/influences" + urlParametersFormat(parameters));
     },
     getGenre: function(id, parameters) {
       return $http.get(api_url + "/genres/" + id + urlParametersFormat(parameters));
@@ -157,8 +157,8 @@ SoonzikApp.factory('HTTPService', ['$http', '$location', 'Upload', function ($ht
     setMusicNote: function(id, note, parameters) {
       return $http.post(api_url + "/musics/" + id + "/note/" + note, parameters);
     },
-    getAlbum: function(id) {
-      return $http.get(api_url + "/albums/" + id);
+    getAlbum: function(id, parameters) {  
+      return $http.get(api_url + "/albums/" + id + urlParametersFormat(parameters));
     },
     linkSocial: function(parameters) {
       return $http.post(api_url + "/users/linkSocial", parameters);
@@ -219,6 +219,9 @@ SoonzikApp.factory('HTTPService', ['$http', '$location', 'Upload', function ($ht
     },
     likeResource: function(parameters) {
       return $http.post(api_url + "/likes/save", parameters);
+    },
+    removeLike: function(parameters) {
+      return $http.get(api_url + "/likes/destroy" + urlParametersFormat(parameters));
     }
   }
 }]);

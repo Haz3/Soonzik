@@ -174,7 +174,7 @@ href="../News.html">News</a> objects Here is the list of action available :</p>
 </li></ul>					
 											<div class="method-source-code" id="addcomment-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/news_controller.rb, line 219</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/news_controller.rb, line 222</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">addcomment</span>
   <span class="ruby-keyword">begin</span>
     <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@security</span>)
@@ -260,7 +260,7 @@ user (the author), the newstacts, the attachments</p>
 </li></ul>					
 											<div class="method-source-code" id="find-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/news_controller.rb, line 116</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/news_controller.rb, line 117</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">find</span>
   <span class="ruby-keyword">begin</span>
     <span class="ruby-identifier">new_object</span> = <span class="ruby-keyword">nil</span>
@@ -331,10 +331,12 @@ user (the author), the newstacts, the attachments</p>
       <span class="ruby-keyword">end</span>
     <span class="ruby-keyword">end</span>
 
+    <span class="ruby-constant">News</span>.<span class="ruby-identifier">fillLikes</span> <span class="ruby-identifier">new_object</span>, <span class="ruby-ivar">@security</span>, <span class="ruby-ivar">@user_id</span>
+
     <span class="ruby-ivar">@returnValue</span> = { <span class="ruby-identifier">content</span><span class="ruby-operator">:</span> <span class="ruby-identifier">new_object</span>.<span class="ruby-identifier">as_json</span>(<span class="ruby-value">:include</span> =<span class="ruby-operator">&gt;</span> {
                                                   <span class="ruby-value">:user</span> =<span class="ruby-operator">&gt;</span> { <span class="ruby-value">:only</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">User</span>.<span class="ruby-identifier">miniKey</span> },
                                                   <span class="ruby-value">:attachments</span> =<span class="ruby-operator">&gt;</span> { <span class="ruby-value">:only</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">Attachment</span>.<span class="ruby-identifier">miniKey</span> }
-                                                }, <span class="ruby-value">:only</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">News</span>.<span class="ruby-identifier">miniKey</span>, <span class="ruby-identifier">methods</span><span class="ruby-operator">:</span> [<span class="ruby-value">:title</span>, <span class="ruby-value">:content</span>, <span class="ruby-value">:likes</span>]) }
+                                                }, <span class="ruby-value">:only</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">News</span>.<span class="ruby-identifier">miniKey</span>, <span class="ruby-identifier">methods</span><span class="ruby-operator">:</span> [<span class="ruby-value">:title</span>, <span class="ruby-value">:content</span>, <span class="ruby-value">:likes</span>, <span class="ruby-value">:hasLiked</span>]) }
 
     <span class="ruby-keyword">if</span> (<span class="ruby-identifier">new_object</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>)
       <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">202</span>
@@ -389,7 +391,7 @@ last (default : false)</p>
 </li></ul>					
 											<div class="method-source-code" id="getcomments-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/news_controller.rb, line 270</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/news_controller.rb, line 273</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">getcomments</span>
   <span class="ruby-identifier">order</span> = <span class="ruby-string">&quot;false&quot;</span>
   <span class="ruby-keyword">begin</span>
@@ -453,22 +455,23 @@ user (the author), the newstexts, the attachments and the tags</p>
 </li></ul>					
 											<div class="method-source-code" id="index-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/news_controller.rb, line 28</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/news_controller.rb, line 26</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">index</span>
   <span class="ruby-keyword">begin</span>
     <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@count</span>.<span class="ruby-identifier">present?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-ivar">@count</span> <span class="ruby-operator">==</span> <span class="ruby-string">&quot;true&quot;</span>)
       <span class="ruby-ivar">@returnValue</span> = { <span class="ruby-identifier">content</span><span class="ruby-operator">:</span> <span class="ruby-constant">News</span>.<span class="ruby-identifier">count</span> }
     <span class="ruby-keyword">else</span>
       <span class="ruby-identifier">n</span> = <span class="ruby-constant">News</span>.<span class="ruby-identifier">eager_load</span>([<span class="ruby-value">:user</span>, <span class="ruby-value">:attachments</span>]).<span class="ruby-identifier">all</span>
-      <span class="ruby-keyword">if</span> <span class="ruby-ivar">@language</span>.<span class="ruby-identifier">present?</span>
-        <span class="ruby-identifier">n</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">news</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">n</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">news</span><span class="ruby-operator">|</span>
+        <span class="ruby-keyword">if</span> <span class="ruby-ivar">@language</span>.<span class="ruby-identifier">present?</span>
           <span class="ruby-identifier">news</span>.<span class="ruby-identifier">setLanguage</span> <span class="ruby-ivar">@language</span>
         <span class="ruby-keyword">end</span>
       <span class="ruby-keyword">end</span>
+      <span class="ruby-constant">News</span>.<span class="ruby-identifier">fillLikes</span> <span class="ruby-identifier">n</span>, <span class="ruby-ivar">@security</span>, <span class="ruby-ivar">@user_id</span>
       <span class="ruby-ivar">@returnValue</span> = { <span class="ruby-identifier">content</span><span class="ruby-operator">:</span> <span class="ruby-identifier">n</span>.<span class="ruby-identifier">as_json</span>(<span class="ruby-value">:include</span> =<span class="ruby-operator">&gt;</span> {
                                                   <span class="ruby-value">:user</span> =<span class="ruby-operator">&gt;</span> { <span class="ruby-value">:only</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">User</span>.<span class="ruby-identifier">miniKey</span> },
                                                   <span class="ruby-value">:attachments</span> =<span class="ruby-operator">&gt;</span> { <span class="ruby-value">:only</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">Attachment</span>.<span class="ruby-identifier">miniKey</span> }
-                                                }, <span class="ruby-value">:only</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">News</span>.<span class="ruby-identifier">miniKey</span>, <span class="ruby-identifier">methods</span><span class="ruby-operator">:</span> [<span class="ruby-value">:title</span>, <span class="ruby-value">:content</span>, <span class="ruby-value">:likes</span>]) }
+                                                }, <span class="ruby-value">:only</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">News</span>.<span class="ruby-identifier">miniKey</span>, <span class="ruby-identifier">methods</span><span class="ruby-operator">:</span> [<span class="ruby-value">:title</span>, <span class="ruby-value">:content</span>, <span class="ruby-value">:likes</span>, <span class="ruby-value">:hasLiked</span>]) }
     <span class="ruby-keyword">end</span>
     <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@returnValue</span>[<span class="ruby-value">:content</span>].<span class="ruby-identifier">size</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>)
       <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">202</span>
@@ -519,7 +522,7 @@ Default : “EN”</p>
 </li></ul>					
 											<div class="method-source-code" id="show-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/news_controller.rb, line 71</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/news_controller.rb, line 70</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">show</span>
   <span class="ruby-keyword">begin</span>
     <span class="ruby-identifier">news</span> = <span class="ruby-constant">News</span>.<span class="ruby-identifier">eager_load</span>([<span class="ruby-value">:user</span>, <span class="ruby-value">:attachments</span>]).<span class="ruby-identifier">find_by_id</span>(<span class="ruby-ivar">@id</span>)
@@ -528,13 +531,15 @@ Default : “EN”</p>
       <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:not_found</span>
     <span class="ruby-keyword">else</span>
       <span class="ruby-identifier">news</span>.<span class="ruby-identifier">setLanguage</span> <span class="ruby-ivar">@language</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@language</span>.<span class="ruby-identifier">present?</span>
+      <span class="ruby-constant">News</span>.<span class="ruby-identifier">fillLikes</span> [<span class="ruby-identifier">news</span>], <span class="ruby-ivar">@security</span>, <span class="ruby-ivar">@user_id</span>
       <span class="ruby-ivar">@returnValue</span> = { <span class="ruby-identifier">content</span><span class="ruby-operator">:</span> <span class="ruby-identifier">news</span>.<span class="ruby-identifier">as_json</span>(<span class="ruby-value">:include</span> =<span class="ruby-operator">&gt;</span> {
                                               <span class="ruby-value">:user</span> =<span class="ruby-operator">&gt;</span> { <span class="ruby-value">:only</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">User</span>.<span class="ruby-identifier">miniKey</span> },
                                               <span class="ruby-value">:attachments</span> =<span class="ruby-operator">&gt;</span> { <span class="ruby-value">:only</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">Attachment</span>.<span class="ruby-identifier">miniKey</span> }
-                                            }, <span class="ruby-value">:only</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">News</span>.<span class="ruby-identifier">miniKey</span>, <span class="ruby-identifier">methods</span><span class="ruby-operator">:</span> [<span class="ruby-value">:title</span>, <span class="ruby-value">:content</span>, <span class="ruby-value">:likes</span>]) }
+                                            }, <span class="ruby-value">:only</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">News</span>.<span class="ruby-identifier">miniKey</span>, <span class="ruby-identifier">methods</span><span class="ruby-operator">:</span> [<span class="ruby-value">:title</span>, <span class="ruby-value">:content</span>, <span class="ruby-value">:likes</span>, <span class="ruby-value">:hasLiked</span>]) }
       <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">200</span>
     <span class="ruby-keyword">end</span>
   <span class="ruby-keyword">rescue</span>
+    <span class="ruby-identifier">puts</span> <span class="ruby-identifier">$!</span>, <span class="ruby-identifier">$@</span>
     <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">504</span>
     <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:service_unavailable</span>
   <span class="ruby-keyword">end</span>

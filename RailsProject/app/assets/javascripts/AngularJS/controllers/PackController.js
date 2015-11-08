@@ -8,18 +8,22 @@ SoonzikApp.controller('PacksCtrl', ['$scope', '$routeParams', 'SecureAuth', 'HTT
 	}
 
 	$scope.showPacks = function() {
-		var parameters = [
-			{ key: "limit", value: 4 },
-			{ key: "order_by_desc[]", value: "created_at" }
-		];
-		
-		HTTPService.findPacks(parameters).then(function(packs) {
+		SecureAuth.securedTransaction(function(key, id) {
+			var parameters = [
+				{ key: "limit", value: 4 },
+				{ key: "order_by_desc[]", value: "created_at" },
+				{ key: "secureKey", value: key },
+				{ key: "user_id", value: id }
+			];
 			
-			$scope.pack = packs.data.content;
-			$scope.loading = false;
+			HTTPService.findPacks(parameters).then(function(packs) {
+				
+				$scope.pack = packs.data.content;
+				$scope.loading = false;
 
-		}, function (error) {
-			console.log($rootScope.labels.FILE_PACK_LOAD_ERROR_MESSAGE);
+			}, function (error) {
+				console.log($rootScope.labels.FILE_PACK_LOAD_ERROR_MESSAGE);
+			});
 		});
 
 		$scope.Pack = true;
@@ -37,16 +41,20 @@ SoonzikApp.controller('PacksCtrl', ['$scope', '$routeParams', 'SecureAuth', 'HTT
 		$scope.amountDonation = 20;
 		
 
-		HTTPService.showPack(id).then(function(response) {
+		SecureAuth.securedTransaction(function(key, id) {
+			var parameters = [
+				{ key: "secureKey", value: key },
+				{ key: "user_id", value: id }
+			];
 
-			$scope.thisPack = response.data.content;
-			$scope.end_date = $scope.thisPack.end_date;
-			timeLeft();
-			$scope.loading = false;
-
-
-		}, function (error) {
-			console.log($rootScope.labels.FILE_PACK_LOAD_ONE_PACK_ERROR_MESSAGE);
+			HTTPService.showPack(id, parameters).then(function(response) {
+				$scope.thisPack = response.data.content;
+				$scope.end_date = $scope.thisPack.end_date;
+				timeLeft();
+				$scope.loading = false;
+			}, function (error) {
+				console.log($rootScope.labels.FILE_PACK_LOAD_ONE_PACK_ERROR_MESSAGE);
+			});
 		});
 
 		$scope.thisPackId = true;

@@ -12,7 +12,6 @@ module API
     #
     # ==== Options
     # 
-    # * +id+ - The id of the specific like
     # * +like [typeObj]+ - Model name of the object to add to the like -> "News" | "Albums" | "Concerts"
     # * +like [obj_id]+ - ID of the object linked to the like
     # 
@@ -30,11 +29,11 @@ module API
       	  
           case @like[:typeObj]
           when "Albums"
-            obj = Albumslike.where(user_id: @user_id).where(obj_id: @like[:typeObj])
+            obj = Albumslike.where(user_id: @user_id).where(album_id: @like[:obj_id]).first
           when "Concerts"
-            obj = Concertslike.where(user_id: @user_id).where(obj_id: @like[:typeObj])
+            obj = Concertslike.where(user_id: @user_id).where(concert_id: @like[:obj_id]).first
           when "News"
-            obj = Newslike.where(user_id: @user_id).where(obj_id: @like[:typeObj])
+            obj = Newslike.where(user_id: @user_id).where(news_id: @like[:obj_id]).first
           end
 
           if (obj == nil)
@@ -49,6 +48,7 @@ module API
           defineHttp :forbidden
       	end
       rescue
+        puts $!, $@
       	codeAnswer 504
         defineHttp :service_unavailable
       end

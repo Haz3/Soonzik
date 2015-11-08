@@ -196,7 +196,7 @@ relation and the validation Can provide some features linked to this model</p>
 							<pre class="prettyprint linenums"><code 
 								class="language-ruby"><span class="ruby-comment"># File app/models/message.rb, line 27</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">message_params</span>(<span class="ruby-identifier">parameters</span>)
-  <span class="ruby-identifier">parameters</span>.<span class="ruby-identifier">require</span>(<span class="ruby-value">:message</span>).<span class="ruby-identifier">permit</span>(<span class="ruby-value">:msg</span>, <span class="ruby-value">:user_id</span>, <span class="ruby-value">:dest_id</span>, <span class="ruby-value">:session</span>)
+  <span class="ruby-identifier">parameters</span>.<span class="ruby-identifier">require</span>(<span class="ruby-value">:message</span>).<span class="ruby-identifier">permit</span>(<span class="ruby-value">:msg</span>, <span class="ruby-value">:user_id</span>, <span class="ruby-value">:dest_id</span>)
 <span class="ruby-keyword">end</span></code></pre>
 						</div>
 										</div>

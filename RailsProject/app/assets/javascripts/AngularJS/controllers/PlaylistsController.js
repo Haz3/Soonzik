@@ -36,14 +36,21 @@ SoonzikApp.controller('PlaylistsCtrl', ['$scope', "$rootScope", "$routeParams", 
 		}
 
 		if ($scope.user) {
-			HTTPService.findPlaylist([{ key: "attribute[user_id]", value: $scope.user.id }]).then(function(response) {
-	    	$scope.myPlaylists = response.data.content;
-	    	for (var i = 0 ; i < $scope.myPlaylists.length ; i++) {
-	    		$scope.myPlaylists[i].check = false;
-	    	}
-  		}, function(error) {
-  			NotificationService.error($rootScope.labels.FILE_PLAYLIST_FIND_PLAYLIST_ERROR_MESSAGE + playlist.name);
-  		});
+	    	SecureAuth.securedTransaction(function(key, id) {
+		        var parameters = [
+		          { key: "secureKey", value: key },
+		          { key: "user_id", value: id },
+		          { key: "attribute[user_id]", value: $scope.user.id }
+		        ];
+				HTTPService.findPlaylist(parameters).then(function(response) {
+			    	$scope.myPlaylists = response.data.content;
+			    	for (var i = 0 ; i < $scope.myPlaylists.length ; i++) {
+			    		$scope.myPlaylists[i].check = false;
+			    	}
+		  		}, function(error) {
+		  			NotificationService.error($rootScope.labels.FILE_PLAYLIST_FIND_PLAYLIST_ERROR_MESSAGE + playlist.name);
+		  		});
+  			});
 		}
 
 		if ($scope.id != false)
@@ -58,23 +65,36 @@ SoonzikApp.controller('PlaylistsCtrl', ['$scope', "$rootScope", "$routeParams", 
 				getMusic($scope.id[i], i);
 			}
 		} else {
-			HTTPService.getPlaylist($scope.id).then(function(response) {
-				$scope.playlist = response.data.content;
-				$scope.loading = false;
-			}, function(error) {
-				NotificationService.error($rootScope.labels.FILE_PLAYLIST_GET_PLAYLIST_ERROR_MESSAGE);
+			SecureAuth.securedTransaction(function(key, id) {
+				var parameters = [
+				  { key: "secureKey", value: key },
+				  { key: "user_id", value: id }
+				];
+				HTTPService.getPlaylist($scope.id, parameters).then(function(response) {
+					$scope.playlist = response.data.content;
+					$scope.loading = false;
+				}, function(error) {
+					NotificationService.error($rootScope.labels.FILE_PLAYLIST_GET_PLAYLIST_ERROR_MESSAGE);
+				});
 			});
 		}
 	}
 
 	var getMusic = function(id, index) {
-		HTTPService.getMusic(id).then(function(response) {
-			$scope.playlist.musics[index] = response.data.content;
-			if (index + 1 == $scope.id.length) {
-				$scope.loading = false;
-			}
-		}, function(error) {
-			NotificationService.error($rootScope.labels.FILE_PLAYLIST_GET_MUSIC_ERROR_MESSAGE + i);
+		SecureAuth.securedTransaction(function(key, id) {
+			var parameters = [
+			  { key: "secureKey", value: key },
+			  { key: "user_id", value: id },
+			  { key: "attribute[user_id]", value: $scope.user.id }
+			];
+			HTTPService.getMusic(id).then(function(response) {
+				$scope.playlist.musics[index] = response.data.content;
+				if (index + 1 == $scope.id.length) {
+					$scope.loading = false;
+				}
+			}, function(error) {
+				NotificationService.error($rootScope.labels.FILE_PLAYLIST_GET_MUSIC_ERROR_MESSAGE + i);
+			});
 		});
 	}
 

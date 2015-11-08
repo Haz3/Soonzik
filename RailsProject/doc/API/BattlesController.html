@@ -185,7 +185,7 @@ its artists and the votes</p>
 </li></ul>					
 											<div class="method-source-code" id="find-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/battles_controller.rb, line 107</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/battles_controller.rb, line 105</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">find</span>
   <span class="ruby-keyword">begin</span>
     <span class="ruby-identifier">battle_object</span> = <span class="ruby-keyword">nil</span>
@@ -302,7 +302,7 @@ the artists and the vote</p>
 </li></ul>					
 											<div class="method-source-code" id="index-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/battles_controller.rb, line 26</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/battles_controller.rb, line 24</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">index</span>
   <span class="ruby-keyword">begin</span>
     <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@count</span>.<span class="ruby-identifier">present?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-ivar">@count</span> <span class="ruby-operator">==</span> <span class="ruby-string">&quot;true&quot;</span>)
@@ -359,7 +359,7 @@ the artists and the vote</p>
 </li></ul>					
 											<div class="method-source-code" id="show-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/battles_controller.rb, line 63</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/battles_controller.rb, line 61</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">show</span>
   <span class="ruby-keyword">begin</span>
     <span class="ruby-identifier">battle</span> = <span class="ruby-constant">Battle</span>.<span class="ruby-identifier">eager_load</span>([<span class="ruby-value">:artist_one</span>, <span class="ruby-value">:artist_two</span>, <span class="ruby-value">:votes</span>]).<span class="ruby-identifier">find_by_id</span>(<span class="ruby-ivar">@id</span>)
@@ -416,7 +416,7 @@ the artists and the vote</p>
 </li></ul>					
 											<div class="method-source-code" id="vote-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/battles_controller.rb, line 205</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/battles_controller.rb, line 203</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">vote</span>
   <span class="ruby-keyword">begin</span>
     <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@security</span>)

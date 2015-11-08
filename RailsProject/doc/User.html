@@ -730,7 +730,7 @@ unique so we check if someone already has this one</p>
 
   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">idAPI</span> = <span class="ruby-identifier">key</span>
   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">secureKey</span> = <span class="ruby-identifier">generateHash</span>(<span class="ruby-keyword">self</span>.<span class="ruby-identifier">salt</span>, <span class="ruby-identifier">key</span>)
-  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">token_update</span> = <span class="ruby-constant">Time</span>.<span class="ruby-identifier">now</span>
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">token_update</span> = <span class="ruby-constant">Time</span>.<span class="ruby-identifier">now</span> <span class="ruby-operator">+</span> <span class="ruby-value">3600</span>
 <span class="ruby-keyword">end</span></code></pre>
 						</div>
 										</div>

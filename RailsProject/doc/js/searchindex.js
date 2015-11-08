@@ -1045,9 +1045,33 @@ var SearchIndex =
 		"type": "anymethod"
 	},
 	{
+		"name": "fillLikes",
+		"link": "Album.html#method-c-fillLikes",
+		"snippet": "<p>Fill an association of records of the notes average\n",
+		"type": "anymethod"
+	},
+	{
 		"name": "setProposed",
 		"link": "Album.html#method-i-setProposed",
 		"snippet": "<p>Add an attribute to know if it&#39;s an album proposed\n",
+		"type": "anymethod"
+	},
+	{
+		"name": "setPack",
+		"link": "Album.html#method-i-setPack",
+		"snippet": "<p>To know if the album is in the pack\n",
+		"type": "anymethod"
+	},
+	{
+		"name": "setLike",
+		"link": "Album.html#method-i-setLike",
+		"snippet": "<p>Set the number of likes\n",
+		"type": "anymethod"
+	},
+	{
+		"name": "setLiked",
+		"link": "Album.html#method-i-setLiked",
+		"snippet": "<p>Set the number of likes\n",
 		"type": "anymethod"
 	},
 	{
@@ -1069,9 +1093,9 @@ var SearchIndex =
 		"type": "anymethod"
 	},
 	{
-		"name": "setPack",
-		"link": "Album.html#method-i-setPack",
-		"snippet": "<p>To know if the album is in the pack\n",
+		"name": "hasLiked",
+		"link": "Album.html#method-i-hasLiked",
+		"snippet": "<p>To know if you liked this\n",
 		"type": "anymethod"
 	},
 	{
@@ -1135,6 +1159,18 @@ var SearchIndex =
 		"type": "anymethod"
 	},
 	{
+		"name": "fillLikes",
+		"link": "Concert.html#method-c-fillLikes",
+		"snippet": "<p>Fill an association of records of the notes average\n",
+		"type": "anymethod"
+	},
+	{
+		"name": "setLike",
+		"link": "Concert.html#method-i-setLike",
+		"snippet": "<p>Set the number of likes\n",
+		"type": "anymethod"
+	},
+	{
 		"name": "likes",
 		"link": "Concert.html#method-i-likes",
 		"snippet": "<p>Return the number of likes\n",
@@ -1144,6 +1180,18 @@ var SearchIndex =
 		"name": "concert_params",
 		"link": "Concert.html#method-c-concert_params",
 		"snippet": "<p>The strong parameters to save or update object\n",
+		"type": "anymethod"
+	},
+	{
+		"name": "setLiked",
+		"link": "Concert.html#method-i-setLiked",
+		"snippet": "<p>Set the number of likes\n",
+		"type": "anymethod"
+	},
+	{
+		"name": "hasLiked",
+		"link": "Concert.html#method-i-hasLiked",
+		"snippet": "<p>To know if you liked this\n",
 		"type": "anymethod"
 	},
 	{
@@ -1327,6 +1375,18 @@ var SearchIndex =
 		"type": "anymethod"
 	},
 	{
+		"name": "fillLikes",
+		"link": "News.html#method-c-fillLikes",
+		"snippet": "<p>Fill an association of records of the notes average\n",
+		"type": "anymethod"
+	},
+	{
+		"name": "setLike",
+		"link": "News.html#method-i-setLike",
+		"snippet": "<p>Set the number of likes\n",
+		"type": "anymethod"
+	},
+	{
 		"name": "likes",
 		"link": "News.html#method-i-likes",
 		"snippet": "<p>Return the number of likes\n",
@@ -1354,6 +1414,18 @@ var SearchIndex =
 		"name": "content",
 		"link": "News.html#method-i-content",
 		"snippet": "<p>To give the content of the good language\n",
+		"type": "anymethod"
+	},
+	{
+		"name": "setLiked",
+		"link": "News.html#method-i-setLiked",
+		"snippet": "<p>Set the number of likes\n",
+		"type": "anymethod"
+	},
+	{
+		"name": "hasLiked",
+		"link": "News.html#method-i-hasLiked",
+		"snippet": "<p>To know if you liked this\n",
 		"type": "anymethod"
 	},
 	{

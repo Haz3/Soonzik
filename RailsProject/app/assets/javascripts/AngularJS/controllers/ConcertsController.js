@@ -12,37 +12,46 @@ SoonzikApp.controller('ConcertsCtrl', ['$scope', 'SecureAuth', 'HTTPService', '$
 	$scope.initIndex = function() {
 		$scope.indexView.currentPage = (toInt($routeParams.page) == 0 ? 1 : toInt($routeParams.page));
 
-		var parameters = [
-			{ key: "limit", value: ConcertPerPage },
-			{ key: "offset", value: (($scope.indexView.currentPage - 1) * ConcertPerPage) },
-			{ key: "order_by_desc[]", value: "created_at" }
-		];
+		SecureAuth.securedTransaction(function(key, id) {
+			var countParameters = [
+				{ key: "secureKey", value: key },
+				{ key: "user_id", value: id },
+				{ key: "count", value: "true" }
+			];
+			var parameters = [
+				{ key: "limit", value: ConcertPerPage },
+				{ key: "offset", value: (($scope.indexView.currentPage - 1) * ConcertPerPage) },
+				{ key: "order_by_desc[]", value: "created_at" },
+				{ key: "secureKey", value: key },
+				{ key: "user_id", value: id },
+			];
 
-		HTTPService.getConcerts([{ key: "count", value: "true" }]).then(function(response) {
-			var numberResults = response.data.content;
+			HTTPService.getConcerts(countParameters).then(function(response) {
+				var numberResults = response.data.content;
 
-			if (typeof numberResults != "undefined") {
-				$scope.indexView.numberPages = ~~(numberResults / ConcertPerPage) + 1;
-			} else {
-				$scope.indexView.numberPages = 1;
-			}
-
-			HTTPService.findConcerts(parameters).then(function(response) {
-				$scope.indexView.concerts = response.data.content;
-				var now = new Date();
-				for (var i = $scope.indexView.concerts.length - 1 ; i >= 0 ; i--) {
-					var d = new Date($scope.indexView.concerts[i].planification);
-					if (d < now) {
-						$scope.indexView.concerts.splice(i, 1);
-					}
+				if (typeof numberResults != "undefined") {
+					$scope.indexView.numberPages = ~~(numberResults / ConcertPerPage) + 1;
+				} else {
+					$scope.indexView.numberPages = 1;
 				}
-				$scope.loading = false;
+
+				HTTPService.findConcerts(parameters).then(function(response) {
+					$scope.indexView.concerts = response.data.content;
+					var now = new Date();
+					for (var i = $scope.indexView.concerts.length - 1 ; i >= 0 ; i--) {
+						var d = new Date($scope.indexView.concerts[i].planification);
+						if (d < now) {
+							$scope.indexView.concerts.splice(i, 1);
+						}
+					}
+					$scope.loading = false;
+				}, function(error) {
+					NotificationService.error($rootScope.labels.FILE_CONCERT_FIND_CONCERT_ERROR_MESSAGE);
+				});
+
 			}, function(error) {
 				NotificationService.error($rootScope.labels.FILE_CONCERT_FIND_CONCERT_ERROR_MESSAGE);
 			});
-
-		}, function(error) {
-			NotificationService.error($rootScope.labels.FILE_CONCERT_FIND_CONCERT_ERROR_MESSAGE);
 		});
 	}
 

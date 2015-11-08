@@ -187,6 +187,69 @@ was released</p>
 
 					
 									</div>
+								<a name="method-c-fillLikes">anchor</a>
+				<div id="method-c-fillLikes-doc" class="method">
+
+					<header>
+											<i class="icon-generic"></i>
+						<span class="method-name">fillLikes</span><span 
+							class="method-args">(ar_albums, security = false, user_id = nil)</span>
+										</header>
+
+					<div class="method-description">
+											<p>Fill an association of records of the notes average</p>					
+											<div class="method-source-code" id="fillLikes-source">
+							<pre class="prettyprint linenums"><code 
+								class="language-ruby"><span class="ruby-comment"># File app/models/album.rb, line 72</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">fillLikes</span>(<span class="ruby-identifier">ar_albums</span>, <span class="ruby-identifier">security</span> = <span class="ruby-keyword">false</span>, <span class="ruby-identifier">user_id</span> = <span class="ruby-keyword">nil</span>)
+  <span class="ruby-identifier">sql_count</span> = <span class="ruby-string">&quot;SELECT album_id, COUNT(album_id) AS count FROM albumslikes WHERE (album_id IN (&quot;</span>
+  <span class="ruby-identifier">sql_hasLiked</span> = <span class="ruby-string">&quot;SELECT album_id FROM albumslikes WHERE (album_id IN (&quot;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">security</span>
+
+  <span class="ruby-identifier">ar_albums</span>.<span class="ruby-identifier">each_with_index</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">album</span>, <span class="ruby-identifier">index</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">sql_count</span> <span class="ruby-operator">+=</span> <span class="ruby-string">&quot;, &quot;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">index</span> <span class="ruby-operator">!=</span> <span class="ruby-value">0</span>
+    <span class="ruby-identifier">sql_count</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">album</span>[<span class="ruby-value">:id</span>].<span class="ruby-identifier">to_s</span>
+
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">security</span>
+      <span class="ruby-identifier">sql_hasLiked</span> <span class="ruby-operator">+=</span> <span class="ruby-string">&quot;, &quot;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">index</span> <span class="ruby-operator">!=</span> <span class="ruby-value">0</span>
+      <span class="ruby-identifier">sql_hasLiked</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">album</span>[<span class="ruby-value">:id</span>].<span class="ruby-identifier">to_s</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">sql_count</span> <span class="ruby-operator">+=</span> <span class="ruby-string">&quot;)) GROUP BY album_id&quot;</span>
+  <span class="ruby-identifier">records_array</span> = <span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>.<span class="ruby-identifier">connection</span>.<span class="ruby-identifier">execute</span>(<span class="ruby-identifier">sql_count</span>)
+
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">security</span>
+    <span class="ruby-identifier">sql_hasLiked</span> <span class="ruby-operator">+=</span> <span class="ruby-node">&quot;)) AND user_id = #{user_id}&quot;</span>
+    <span class="ruby-identifier">records_liked</span> = <span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>.<span class="ruby-identifier">connection</span>.<span class="ruby-identifier">execute</span>(<span class="ruby-identifier">sql_hasLiked</span>)
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">ar_albums</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">album</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">passIn</span> = <span class="ruby-keyword">false</span>
+
+    <span class="ruby-identifier">records_array</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">record</span><span class="ruby-operator">|</span>
+      <span class="ruby-keyword">if</span> (<span class="ruby-identifier">album</span>[<span class="ruby-value">:id</span>].<span class="ruby-identifier">to_i</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">record</span>[<span class="ruby-string">&#39;album_id&#39;</span>].<span class="ruby-identifier">to_i</span>)
+        <span class="ruby-identifier">passIn</span> = <span class="ruby-keyword">true</span>
+        <span class="ruby-identifier">album</span>.<span class="ruby-identifier">setLike</span> <span class="ruby-identifier">record</span>[<span class="ruby-string">&#39;count&#39;</span>]
+        <span class="ruby-keyword">break</span>
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">security</span>
+      <span class="ruby-identifier">records_liked</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">record</span><span class="ruby-operator">|</span>
+        <span class="ruby-keyword">if</span> (<span class="ruby-identifier">album</span>[<span class="ruby-value">:id</span>].<span class="ruby-identifier">to_i</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">record</span>[<span class="ruby-string">&#39;album_id&#39;</span>].<span class="ruby-identifier">to_i</span>)
+          <span class="ruby-identifier">album</span>.<span class="ruby-identifier">setLiked</span>
+        <span class="ruby-keyword">end</span>
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-identifier">album</span>.<span class="ruby-identifier">setLike</span> <span class="ruby-value">0</span> <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">passIn</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></code></pre>
+						</div>
+										</div>
+
+					
+									</div>
 								<a name="method-c-miniKey">anchor</a>
 				<div id="method-c-miniKey-doc" class="method">
 
@@ -288,9 +351,31 @@ was released</p>
 											<p>Get an attribute to know if it&#39;s an album proposed</p>					
 											<div class="method-source-code" id="getProposed-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/models/album.rb, line 77</span>
+								class="language-ruby"><span class="ruby-comment"># File app/models/album.rb, line 138</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">getProposed</span>
   <span class="ruby-ivar">@proposed</span>
+<span class="ruby-keyword">end</span></code></pre>
+						</div>
+										</div>
+
+					
+									</div>
+								<a name="method-i-hasLiked">anchor</a>
+				<div id="method-i-hasLiked-doc" class="method">
+
+					<header>
+											<i class="icon-generic"></i>
+						<span class="method-name">hasLiked</span><span 
+							class="method-args">()</span>
+										</header>
+
+					<div class="method-description">
+											<p>To know if you liked this</p>					
+											<div class="method-source-code" id="hasLiked-source">
+							<pre class="prettyprint linenums"><code 
+								class="language-ruby"><span class="ruby-comment"># File app/models/album.rb, line 157</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">hasLiked</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-ivar">@hasLiked</span>.<span class="ruby-identifier">present?</span> <span class="ruby-operator">?</span> <span class="ruby-ivar">@hasLiked</span> <span class="ruby-operator">:</span> <span class="ruby-keyword">false</span>
 <span class="ruby-keyword">end</span></code></pre>
 						</div>
 										</div>
@@ -310,7 +395,7 @@ was released</p>
 											<p>To know if the album is in the pack</p>					
 											<div class="method-source-code" id="isPartial-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/models/album.rb, line 82</span>
+								class="language-ruby"><span class="ruby-comment"># File app/models/album.rb, line 143</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">isPartial</span>
   <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@pack_id</span>.<span class="ruby-identifier">present?</span>)
     <span class="ruby-constant">PartialAlbum</span>.<span class="ruby-identifier">where</span>(<span class="ruby-identifier">album_id</span><span class="ruby-operator">:</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">id</span>).<span class="ruby-identifier">where</span>(<span class="ruby-identifier">pack_id</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@pack_id</span>).<span class="ruby-identifier">size</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span>
@@ -336,9 +421,53 @@ was released</p>
 											<p>Return the number of likes</p>					
 											<div class="method-source-code" id="likes-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/models/album.rb, line 91</span>
+								class="language-ruby"><span class="ruby-comment"># File app/models/album.rb, line 152</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">likes</span>
-  <span class="ruby-keyword">return</span> <span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>.<span class="ruby-identifier">connection</span>.<span class="ruby-identifier">execute</span>(<span class="ruby-node">&quot;SELECT COUNT(album_id) AS count FROM albumslikes WHERE album_id = #{self.id.to_s}&quot;</span>)[<span class="ruby-value">0</span>][<span class="ruby-string">&quot;count&quot;</span>]
+  <span class="ruby-keyword">return</span> (<span class="ruby-ivar">@likes</span>.<span class="ruby-identifier">present?</span>) <span class="ruby-operator">?</span> <span class="ruby-ivar">@likes</span> <span class="ruby-operator">:</span> <span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>.<span class="ruby-identifier">connection</span>.<span class="ruby-identifier">execute</span>(<span class="ruby-node">&quot;SELECT COUNT(album_id) AS count FROM albumslikes WHERE album_id = #{self.id.to_s}&quot;</span>)[<span class="ruby-value">0</span>][<span class="ruby-string">&quot;count&quot;</span>]
+<span class="ruby-keyword">end</span></code></pre>
+						</div>
+										</div>
+
+					
+									</div>
+								<a name="method-i-setLike">anchor</a>
+				<div id="method-i-setLike-doc" class="method">
+
+					<header>
+											<i class="icon-generic"></i>
+						<span class="method-name">setLike</span><span 
+							class="method-args">(value)</span>
+										</header>
+
+					<div class="method-description">
+											<p>Set the number of likes</p>					
+											<div class="method-source-code" id="setLike-source">
+							<pre class="prettyprint linenums"><code 
+								class="language-ruby"><span class="ruby-comment"># File app/models/album.rb, line 128</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">setLike</span>(<span class="ruby-identifier">value</span>)
+  <span class="ruby-ivar">@likes</span> = <span class="ruby-identifier">value</span>
+<span class="ruby-keyword">end</span></code></pre>
+						</div>
+										</div>
+
+					
+									</div>
+								<a name="method-i-setLiked">anchor</a>
+				<div id="method-i-setLiked-doc" class="method">
+
+					<header>
+											<i class="icon-generic"></i>
+						<span class="method-name">setLiked</span><span 
+							class="method-args">()</span>
+										</header>
+
+					<div class="method-description">
+											<p>Set the number of likes</p>					
+											<div class="method-source-code" id="setLiked-source">
+							<pre class="prettyprint linenums"><code 
+								class="language-ruby"><span class="ruby-comment"># File app/models/album.rb, line 133</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">setLiked</span>
+  <span class="ruby-ivar">@hasLiked</span> = <span class="ruby-keyword">true</span>
 <span class="ruby-keyword">end</span></code></pre>
 						</div>
 										</div>
@@ -358,7 +487,7 @@ was released</p>
 											<p>To know if the album is in the pack</p>					
 											<div class="method-source-code" id="setPack-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/models/album.rb, line 96</span>
+								class="language-ruby"><span class="ruby-comment"># File app/models/album.rb, line 123</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">setPack</span>(<span class="ruby-identifier">value</span>)
   <span class="ruby-ivar">@pack_id</span> = <span class="ruby-identifier">value</span>
 <span class="ruby-keyword">end</span></code></pre>
@@ -380,7 +509,7 @@ was released</p>
 											<p>Add an attribute to know if it&#39;s an album proposed</p>					
 											<div class="method-source-code" id="setProposed-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/models/album.rb, line 72</span>
+								class="language-ruby"><span class="ruby-comment"># File app/models/album.rb, line 118</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">setProposed</span>(<span class="ruby-identifier">value</span>)
   <span class="ruby-ivar">@proposed</span> = <span class="ruby-identifier">value</span>
 <span class="ruby-keyword">end</span></code></pre>

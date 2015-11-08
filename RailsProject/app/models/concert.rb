@@ -33,15 +33,26 @@ class Concert < ActiveRecord::Base
 
   # Fill an association of records of the notes average
   def self.fillLikes(ar_concerts, security = false, user_id = nil)
-    sql = "SELECT concert_id, COUNT(concert_id) AS count FROM concertslikes WHERE (concert_id IN ("
+    sql_count = "SELECT concert_id, COUNT(concert_id) AS count FROM concertslikes WHERE (concert_id IN ("
+    sql_hasLiked = "SELECT concert_id FROM concertslikes WHERE (concert_id IN (" if security
 
     ar_concerts.each_with_index do |concert, index|
-      sql += ", " if index != 0
-      sql += concert[:id].to_s
+      sql_count += ", " if index != 0
+      sql_count += concert[:id].to_s
+
+      if security
+        sql_hasLiked += ", " if index != 0
+        sql_hasLiked += concert[:id].to_s
+      end
     end
 
-    sql += ")) GROUP BY concert_id"
-    records_array = ActiveRecord::Base.connection.execute(sql)
+    sql_count += ")) GROUP BY concert_id"
+    records_array = ActiveRecord::Base.connection.execute(sql_count)
+
+    if security
+      sql_hasLiked += ")) AND user_id = #{user_id}"
+      records_liked = ActiveRecord::Base.connection.execute(sql_hasLiked)
+    end
 
     ar_concerts.each do |concert|
       passIn = false
@@ -50,8 +61,15 @@ class Concert < ActiveRecord::Base
         if (concert[:id].to_i == record['concert_id'].to_i)
           passIn = true
           concert.setLike record['count']
-          concerts.setLiked if security && Concertslike.where(user_id: user_id).where(concert_id: concert[:id]).first != nil
           break
+        end
+      end
+
+      if security
+        records_liked.each do |record|
+          if (concert[:id].to_i == record['concert_id'].to_i)
+            concert.setLiked
+          end
         end
       end
 

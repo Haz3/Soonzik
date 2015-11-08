@@ -71,13 +71,13 @@ class Album < ActiveRecord::Base
   # Fill an association of records of the notes average
   def self.fillLikes(ar_albums, security = false, user_id = nil)
     sql_count = "SELECT album_id, COUNT(album_id) AS count FROM albumslikes WHERE (album_id IN ("
-    sql_hasLiked = "SELECT album_id FROM albumslikes WHERE (album_id IN (" if @security
+    sql_hasLiked = "SELECT album_id FROM albumslikes WHERE (album_id IN (" if security
 
     ar_albums.each_with_index do |album, index|
       sql_count += ", " if index != 0
       sql_count += album[:id].to_s
 
-      if @security
+      if security
         sql_hasLiked += ", " if index != 0
         sql_hasLiked += album[:id].to_s
       end
@@ -86,8 +86,8 @@ class Album < ActiveRecord::Base
     sql_count += ")) GROUP BY album_id"
     records_array = ActiveRecord::Base.connection.execute(sql_count)
 
-    if @security
-      sql_hasLiked += ")) AND WHERE user_id = #{user_id}"
+    if security
+      sql_hasLiked += ")) AND user_id = #{user_id}"
       records_liked = ActiveRecord::Base.connection.execute(sql_hasLiked)
     end
 
@@ -102,7 +102,7 @@ class Album < ActiveRecord::Base
         end
       end
 
-      if @security
+      if security
         records_liked.each do |record|
           if (album[:id].to_i == record['album_id'].to_i)
             album.setLiked

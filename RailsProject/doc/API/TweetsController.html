@@ -176,7 +176,7 @@ list of action available :</p>
 </li></ul>					
 											<div class="method-source-code" id="destroy-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/tweets_controller.rb, line 259</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/tweets_controller.rb, line 257</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">destroy</span>
   <span class="ruby-keyword">begin</span>
     <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@security</span>)
@@ -252,7 +252,7 @@ its user</p>
 </li></ul>					
 											<div class="method-source-code" id="find-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/tweets_controller.rb, line 163</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/tweets_controller.rb, line 161</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">find</span>
   <span class="ruby-keyword">begin</span>
     <span class="ruby-identifier">tweet_object</span> = <span class="ruby-keyword">nil</span>
@@ -369,7 +369,7 @@ its user</p>
 </li></ul>					
 											<div class="method-source-code" id="flux-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/tweets_controller.rb, line 301</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/tweets_controller.rb, line 299</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">flux</span>
   <span class="ruby-keyword">begin</span>
     <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@security</span>)
@@ -433,7 +433,7 @@ its user</p>
 </li></ul>					
 											<div class="method-source-code" id="index-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/tweets_controller.rb, line 28</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/tweets_controller.rb, line 26</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">index</span>
   <span class="ruby-keyword">begin</span>
     <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@count</span>.<span class="ruby-identifier">present?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-ivar">@count</span> <span class="ruby-operator">==</span> <span class="ruby-string">&quot;true&quot;</span>)
@@ -491,7 +491,7 @@ on the parameters, check at the model</p>
 </li></ul>					
 											<div class="method-source-code" id="save-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/tweets_controller.rb, line 97</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/tweets_controller.rb, line 95</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">save</span>
   <span class="ruby-keyword">begin</span>
     <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@security</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-ivar">@tweet</span>[<span class="ruby-value">:user_id</span>] <span class="ruby-operator">==</span> <span class="ruby-ivar">@user_id</span>)
@@ -568,7 +568,7 @@ on the parameters, check at the model</p>
 </li></ul>					
 											<div class="method-source-code" id="show-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/tweets_controller.rb, line 63</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/tweets_controller.rb, line 61</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">show</span>
   <span class="ruby-keyword">begin</span>
     <span class="ruby-identifier">tweets</span> = <span class="ruby-constant">Tweet</span>.<span class="ruby-identifier">eager_load</span>(<span class="ruby-value">:user</span>).<span class="ruby-identifier">find_by_id</span>(<span class="ruby-ivar">@id</span>)

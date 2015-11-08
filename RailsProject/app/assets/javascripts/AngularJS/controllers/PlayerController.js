@@ -85,25 +85,33 @@ SoonzikApp.controller("PlayerCtrl", ["$scope", "$rootScope", "HTTPService", "Not
     resizeHiddenPlaylist();
 
     if ($scope.user != false) {
-	    HTTPService.findPlaylist([{ key: "attribute[user_id]", value: $scope.user.id }]).then(function(response) {
-	    	$scope.myPlaylists = response.data.content;
-	    	for (var i in $scope.myPlaylists) {
-	    		$scope.myPlaylists[i].extend = false;
-	    		$scope.myPlaylists[i].share = false;
-	    		$scope.myPlaylists[i].url = 'http://lvh.me:3000/playlists/' + $scope.myPlaylists[i].id;
 
-	    		var duration = 0;
-	    		for (var j = 0 ; j < $scope.myPlaylists[i].musics.length ; j++) {
-	    			duration += $scope.myPlaylists[i].musics[j].duration;
-	    		}
+      SecureAuth.securedTransaction(function(key, id) {
+        var parameters = [
+          { key: "secureKey", value: key },
+          { key: "user_id", value: id },
+          { key: "attribute[user_id]", value: $scope.user.id }
+        ];
+  	    HTTPService.findPlaylist(parameters).then(function(response) {
+  	    	$scope.myPlaylists = response.data.content;
+  	    	for (var i in $scope.myPlaylists) {
+  	    		$scope.myPlaylists[i].extend = false;
+  	    		$scope.myPlaylists[i].share = false;
+  	    		$scope.myPlaylists[i].url = 'http://lvh.me:3000/playlists/' + $scope.myPlaylists[i].id;
 
-	    		$scope.myPlaylists[i].duration = duration;
+  	    		var duration = 0;
+  	    		for (var j = 0 ; j < $scope.myPlaylists[i].musics.length ; j++) {
+  	    			duration += $scope.myPlaylists[i].musics[j].duration;
+  	    		}
 
-	    	}
-  			$scope.loading = false;
-	    }, function(error) {
-	    	NotificationService.error($rootScope.labels.FILE_PLAYER_FIND_PLAYLIST_ERROR_MESSAGE);
-	    });
+  	    		$scope.myPlaylists[i].duration = duration;
+
+  	    	}
+    			$scope.loading = false;
+  	    }, function(error) {
+  	    	NotificationService.error($rootScope.labels.FILE_PLAYER_FIND_PLAYLIST_ERROR_MESSAGE);
+        });
+      });
   	}
   }
 

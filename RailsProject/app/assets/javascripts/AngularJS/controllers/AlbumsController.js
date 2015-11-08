@@ -22,61 +22,75 @@ SoonzikApp.controller('AlbumsCtrl', ['$scope', "$routeParams", 'SecureAuth', 'HT
 			$scope.user = current_user;
 		}
 
-		HTTPService.getAlbum(id).then(function(response) {
-			$scope.album = response.data.content;
-			$scope.loadComments();
+		SecureAuth.securedTransaction(function (key, id) {
 
-			if ($scope.user != false) {
-				var note_array_id = []
+			var parameters = [
+				{ key: "user_id", value: id },
+				{ key: "secureKey", value: key }
+			];
 
-				for (var j = 0 ; j < $scope.album.musics.length ; j++) {
-					note_array_id.push($scope.album.musics[j].id);
-					$scope.album.musics[j].goldenStars = null;
-				}
+			HTTPService.getAlbum(id, parameters).then(function(response) {
+				$scope.album = response.data.content;
+				$scope.loadComments();
 
-				var noteParameters = [
-					{ key: "user_id", value: $scope.user.id },
-					{ key: "arr_id", value: "[" + encodeURI(note_array_id) + "]" }
-				]
+				if ($scope.user != false) {
+					var note_array_id = []
 
-				HTTPService.getMusicNotes(noteParameters).then(function(response) {
 					for (var j = 0 ; j < $scope.album.musics.length ; j++) {
-						for (var k = 0 ; k < response.data.content.length ; k++) {
-							if (response.data.content[k].music_id == $scope.album.musics[j].id) {
-								$scope.album.musics[j].note = response.data.content[k].note;
-								$scope.album.musics[j].album = $scope.album;
+						note_array_id.push($scope.album.musics[j].id);
+						$scope.album.musics[j].goldenStars = null;
+					}
+
+					var noteParameters = [
+						{ key: "user_id", value: $scope.user.id },
+						{ key: "arr_id", value: "[" + encodeURI(note_array_id) + "]" },
+						{ key: "secureKey", value: key }
+					]
+
+					HTTPService.getMusicNotes(noteParameters).then(function(response) {
+						for (var j = 0 ; j < $scope.album.musics.length ; j++) {
+							for (var k = 0 ; k < response.data.content.length ; k++) {
+								if (response.data.content[k].music_id == $scope.album.musics[j].id) {
+									$scope.album.musics[j].note = response.data.content[k].note;
+									$scope.album.musics[j].album = $scope.album;
+								}
 							}
 						}
+					}, function(error) {
+						NotificationService.error($rootScope.labels.FILE_ALBUM_GET_NOTES_ERROR_MESSAGE);
+					});
+
+					if ($scope.user) {
+						var playlistParams = [
+							{ key: "attribute[user_id]", value: $scope.user.id },
+							{ key: "user_id", value: id },
+							{ key: "secureKey", value: key }
+						]
+						HTTPService.findPlaylist(playlistParams).then(function(response) {
+				    	$scope.myPlaylists = response.data.content;
+				    	for (var i = 0 ; i < $scope.myPlaylists.length ; i++) {
+				    		$scope.myPlaylists[i].check = false;
+				    		$scope.myPlaylists[i].original_check = false;
+				    	}
+						}, function(error) {
+							NotificationService.error($rootScope.labels.FILE_ALBUM_FIND_PLAYLIST_ERROR_MESSAGE + playlist.name);
+						});
 					}
-				}, function(error) {
-					NotificationService.error($rootScope.labels.FILE_ALBUM_GET_NOTES_ERROR_MESSAGE);
+				}
+
+				$(window).scroll(function() {
+					if($(window).scrollTop() + $(window).height() == $(document).height() && $scope.commentLoading == false) {
+						$scope.$apply(function() {
+							$scope.commentLoading = true;
+							$scope.loadComments();
+						});
+					}
 				});
 
-				if ($scope.user) {
-					HTTPService.findPlaylist([{ key: "attribute[user_id]", value: $scope.user.id }]).then(function(response) {
-			    	$scope.myPlaylists = response.data.content;
-			    	for (var i = 0 ; i < $scope.myPlaylists.length ; i++) {
-			    		$scope.myPlaylists[i].check = false;
-			    		$scope.myPlaylists[i].original_check = false;
-			    	}
-					}, function(error) {
-						NotificationService.error($rootScope.labels.FILE_ALBUM_FIND_PLAYLIST_ERROR_MESSAGE + playlist.name);
-					});
-				}
-			}
-
-			$(window).scroll(function() {
-				if($(window).scrollTop() + $(window).height() == $(document).height() && $scope.commentLoading == false) {
-					$scope.$apply(function() {
-						$scope.commentLoading = true;
-						$scope.loadComments();
-					});
-				}
+				$scope.loading = false;
+			}, function(error) {
+				NotificationService.error($rootScope.labels.FILE_ALBUM_GET_ALBUM_ERROR_MESSAGE);
 			});
-
-			$scope.loading = false;
-		}, function(error) {
-			NotificationService.error($rootScope.labels.FILE_ALBUM_GET_ALBUM_ERROR_MESSAGE);
 		});
 	}
 
@@ -223,17 +237,21 @@ SoonzikApp.controller('AlbumsCtrl', ['$scope', "$routeParams", 'SecureAuth', 'HT
   }
 
   $scope.loadComments = function() {
-  	var params = [
-  		{ key: "offset", value: $scope.commentariesOffset },
-  		{ key: "limit", value: 20 }
-  	];
-  	HTTPService.getAlbumComments($scope.album.id, params).then(function(response) {
-  		$scope.resourcesCommentaries = $scope.resourcesCommentaries.concat(response.data.content);
-  		$scope.commentariesOffset = $scope.resourcesCommentaries.length;
-			$scope.commentLoading = false;
-  	}, function(error) {
-  		NotificationService.error($rootScope.labels.FILE_ALBUM_LOAD_COMMENT_ERROR_MESSAGE);
-  	});
+  	SecureAuth.securedTransaction(function (key, id) {
+	  	var params = [
+	  		{ key: "offset", value: $scope.commentariesOffset },
+	  		{ key: "limit", value: 20 },
+	  		{ key: "user_id", value: id },
+	  		{ key: "secureKey", value: key }
+	  	];
+	  	HTTPService.getAlbumComments($scope.album.id, params).then(function(response) {
+	  		$scope.resourcesCommentaries = $scope.resourcesCommentaries.concat(response.data.content);
+	  		$scope.commentariesOffset = $scope.resourcesCommentaries.length;
+				$scope.commentLoading = false;
+	  	}, function(error) {
+	  		NotificationService.error($rootScope.labels.FILE_ALBUM_LOAD_COMMENT_ERROR_MESSAGE);
+	  	});
+	});
   }
 
   $scope.sendComment = function() {

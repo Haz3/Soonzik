@@ -149,6 +149,71 @@ multi language)</p>
 					<h3>Public Class Methods</h3>
 				</header>
 
+								<a name="method-c-fillLikes">anchor</a>
+				<div id="method-c-fillLikes-doc" class="method">
+
+					<header>
+											<i class="icon-generic"></i>
+						<span class="method-name">fillLikes</span><span 
+							class="method-args">(ar_news, security = false, user_id = nil)</span>
+										</header>
+
+					<div class="method-description">
+											<p>Fill an association of records of the notes average</p>					
+											<div class="method-source-code" id="fillLikes-source">
+							<pre class="prettyprint linenums"><code 
+								class="language-ruby"><span class="ruby-comment"># File app/models/news.rb, line 44</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">fillLikes</span>(<span class="ruby-identifier">ar_news</span>, <span class="ruby-identifier">security</span> = <span class="ruby-keyword">false</span>, <span class="ruby-identifier">user_id</span> = <span class="ruby-keyword">nil</span>)
+  <span class="ruby-identifier">sql</span> = <span class="ruby-string">&quot;SELECT news_id, COUNT(news_id) AS count FROM newslikes WHERE (news_id IN (&quot;</span>
+  <span class="ruby-identifier">sql_hasLiked</span> = <span class="ruby-string">&quot;SELECT news_id FROM newslikes WHERE (news_id IN (&quot;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">security</span>
+
+  <span class="ruby-identifier">ar_news</span>.<span class="ruby-identifier">each_with_index</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">news</span>, <span class="ruby-identifier">index</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">sql</span> <span class="ruby-operator">+=</span> <span class="ruby-string">&quot;, &quot;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">index</span> <span class="ruby-operator">!=</span> <span class="ruby-value">0</span>
+    <span class="ruby-identifier">sql</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">news</span>[<span class="ruby-value">:id</span>].<span class="ruby-identifier">to_s</span>
+
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">security</span>
+      <span class="ruby-identifier">sql_hasLiked</span> <span class="ruby-operator">+=</span> <span class="ruby-string">&quot;, &quot;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">index</span> <span class="ruby-operator">!=</span> <span class="ruby-value">0</span>
+      <span class="ruby-identifier">sql_hasLiked</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">news</span>[<span class="ruby-value">:id</span>].<span class="ruby-identifier">to_s</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">sql</span> <span class="ruby-operator">+=</span> <span class="ruby-string">&quot;)) GROUP BY news_id&quot;</span>
+  <span class="ruby-identifier">records_array</span> = <span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>.<span class="ruby-identifier">connection</span>.<span class="ruby-identifier">execute</span>(<span class="ruby-identifier">sql</span>)
+
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">security</span>
+    <span class="ruby-identifier">sql_hasLiked</span> <span class="ruby-operator">+=</span> <span class="ruby-node">&quot;)) AND user_id = #{user_id}&quot;</span>
+    <span class="ruby-identifier">records_liked</span> = <span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>.<span class="ruby-identifier">connection</span>.<span class="ruby-identifier">execute</span>(<span class="ruby-identifier">sql_hasLiked</span>)
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;security : #{security} -- #{records_liked}&quot;</span>
+
+  <span class="ruby-identifier">ar_news</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">news</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">passIn</span> = <span class="ruby-keyword">false</span>
+
+    <span class="ruby-identifier">records_array</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">record</span><span class="ruby-operator">|</span>
+      <span class="ruby-keyword">if</span> (<span class="ruby-identifier">news</span>[<span class="ruby-value">:id</span>].<span class="ruby-identifier">to_i</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">record</span>[<span class="ruby-string">&#39;news_id&#39;</span>].<span class="ruby-identifier">to_i</span>)
+        <span class="ruby-identifier">passIn</span> = <span class="ruby-keyword">true</span>
+        <span class="ruby-identifier">news</span>.<span class="ruby-identifier">setLike</span> <span class="ruby-identifier">record</span>[<span class="ruby-string">&#39;count&#39;</span>]
+        <span class="ruby-keyword">break</span>
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">security</span>
+      <span class="ruby-identifier">records_liked</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">record</span><span class="ruby-operator">|</span>
+        <span class="ruby-keyword">if</span> (<span class="ruby-identifier">news</span>[<span class="ruby-value">:id</span>].<span class="ruby-identifier">to_i</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">record</span>[<span class="ruby-string">&#39;news_id&#39;</span>].<span class="ruby-identifier">to_i</span>)
+          <span class="ruby-identifier">news</span>.<span class="ruby-identifier">setLiked</span>
+        <span class="ruby-keyword">end</span>
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-identifier">news</span>.<span class="ruby-identifier">setLike</span> <span class="ruby-value">0</span> <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">passIn</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></code></pre>
+						</div>
+										</div>
+
+					
+									</div>
 								<a name="method-c-miniKey">anchor</a>
 				<div id="method-c-miniKey-doc" class="method">
 
@@ -186,7 +251,7 @@ multi language)</p>
 											<p>The strong parameters to save or update object</p>					
 											<div class="method-source-code" id="news_params-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/models/news.rb, line 49</span>
+								class="language-ruby"><span class="ruby-comment"># File app/models/news.rb, line 102</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">news_params</span>(<span class="ruby-identifier">parameters</span>)
   <span class="ruby-identifier">parameters</span>.<span class="ruby-identifier">require</span>(<span class="ruby-value">:news</span>).<span class="ruby-identifier">permit</span>(<span class="ruby-value">:title</span>, <span class="ruby-value">:author_id</span>)
 <span class="ruby-keyword">end</span></code></pre>
@@ -221,7 +286,7 @@ multi language)</p>
 											<p>To give the content of the good language</p>					
 											<div class="method-source-code" id="content-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/models/news.rb, line 74</span>
+								class="language-ruby"><span class="ruby-comment"># File app/models/news.rb, line 127</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">content</span>
   <span class="ruby-identifier">content</span> = <span class="ruby-string">&quot;No Content&quot;</span>
   <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@language</span>.<span class="ruby-identifier">present?</span>)
@@ -232,6 +297,28 @@ multi language)</p>
   <span class="ruby-keyword">end</span>
 
   <span class="ruby-identifier">content</span>
+<span class="ruby-keyword">end</span></code></pre>
+						</div>
+										</div>
+
+					
+									</div>
+								<a name="method-i-hasLiked">anchor</a>
+				<div id="method-i-hasLiked-doc" class="method">
+
+					<header>
+											<i class="icon-generic"></i>
+						<span class="method-name">hasLiked</span><span 
+							class="method-args">()</span>
+										</header>
+
+					<div class="method-description">
+											<p>To know if you liked this</p>					
+											<div class="method-source-code" id="hasLiked-source">
+							<pre class="prettyprint linenums"><code 
+								class="language-ruby"><span class="ruby-comment"># File app/models/news.rb, line 145</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">hasLiked</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-ivar">@hasLiked</span>.<span class="ruby-identifier">present?</span> <span class="ruby-operator">?</span> <span class="ruby-ivar">@hasLiked</span> <span class="ruby-operator">:</span> <span class="ruby-keyword">false</span>
 <span class="ruby-keyword">end</span></code></pre>
 						</div>
 										</div>
@@ -251,9 +338,9 @@ multi language)</p>
 											<p>Return the number of likes</p>					
 											<div class="method-source-code" id="likes-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/models/news.rb, line 44</span>
+								class="language-ruby"><span class="ruby-comment"># File app/models/news.rb, line 97</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">likes</span>
-  <span class="ruby-keyword">return</span> <span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>.<span class="ruby-identifier">connection</span>.<span class="ruby-identifier">execute</span>(<span class="ruby-node">&quot;SELECT COUNT(news_id) AS count FROM newslikes WHERE news_id = #{self.id.to_s}&quot;</span>)[<span class="ruby-value">0</span>][<span class="ruby-string">&quot;count&quot;</span>]
+  <span class="ruby-keyword">return</span> (<span class="ruby-ivar">@likes</span>.<span class="ruby-identifier">present?</span>) <span class="ruby-operator">?</span> <span class="ruby-ivar">@likes</span> <span class="ruby-operator">:</span> <span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>.<span class="ruby-identifier">connection</span>.<span class="ruby-identifier">execute</span>(<span class="ruby-node">&quot;SELECT COUNT(news_id) AS count FROM newslikes WHERE news_id = #{self.id.to_s}&quot;</span>)[<span class="ruby-value">0</span>][<span class="ruby-string">&quot;count&quot;</span>]
 <span class="ruby-keyword">end</span></code></pre>
 						</div>
 										</div>
@@ -296,11 +383,55 @@ default language</p>
 											<p>To give the title of the good language</p>					
 											<div class="method-source-code" id="setLanguage-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/models/news.rb, line 54</span>
+								class="language-ruby"><span class="ruby-comment"># File app/models/news.rb, line 107</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">setLanguage</span>(<span class="ruby-identifier">language</span>)
   <span class="ruby-keyword">if</span> (<span class="ruby-constant">Language</span>.<span class="ruby-identifier">where</span>(<span class="ruby-identifier">abbreviation</span><span class="ruby-operator">:</span> <span class="ruby-identifier">language</span>).<span class="ruby-identifier">size</span> <span class="ruby-operator">!=</span> <span class="ruby-value">0</span>)
     <span class="ruby-ivar">@language</span> = <span class="ruby-identifier">language</span>
   <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></code></pre>
+						</div>
+										</div>
+
+					
+									</div>
+								<a name="method-i-setLike">anchor</a>
+				<div id="method-i-setLike-doc" class="method">
+
+					<header>
+											<i class="icon-generic"></i>
+						<span class="method-name">setLike</span><span 
+							class="method-args">(value)</span>
+										</header>
+
+					<div class="method-description">
+											<p>Set the number of likes</p>					
+											<div class="method-source-code" id="setLike-source">
+							<pre class="prettyprint linenums"><code 
+								class="language-ruby"><span class="ruby-comment"># File app/models/news.rb, line 92</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">setLike</span>(<span class="ruby-identifier">value</span>)
+  <span class="ruby-ivar">@likes</span> = <span class="ruby-identifier">value</span>
+<span class="ruby-keyword">end</span></code></pre>
+						</div>
+										</div>
+
+					
+									</div>
+								<a name="method-i-setLiked">anchor</a>
+				<div id="method-i-setLiked-doc" class="method">
+
+					<header>
+											<i class="icon-generic"></i>
+						<span class="method-name">setLiked</span><span 
+							class="method-args">()</span>
+										</header>
+
+					<div class="method-description">
+											<p>Set the number of likes</p>					
+											<div class="method-source-code" id="setLiked-source">
+							<pre class="prettyprint linenums"><code 
+								class="language-ruby"><span class="ruby-comment"># File app/models/news.rb, line 140</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">setLiked</span>
+  <span class="ruby-ivar">@hasLiked</span> = <span class="ruby-keyword">true</span>
 <span class="ruby-keyword">end</span></code></pre>
 						</div>
 										</div>
@@ -320,7 +451,7 @@ default language</p>
 											<p>To give the title of the good language</p>					
 											<div class="method-source-code" id="title-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/models/news.rb, line 61</span>
+								class="language-ruby"><span class="ruby-comment"># File app/models/news.rb, line 114</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">title</span>
   <span class="ruby-identifier">title</span> = <span class="ruby-string">&quot;No Title&quot;</span>
   <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@language</span>.<span class="ruby-identifier">present?</span>)

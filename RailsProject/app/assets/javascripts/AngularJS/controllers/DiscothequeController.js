@@ -41,12 +41,11 @@ SoonzikApp.controller('DiscothequeCtrl', ['$scope', 'SecureAuth', 'HTTPService',
 					]
 
 					if (arr_mus_id.length > 0) {
-						HTTPService.getMusicNotes(noteParametersMusics).then(function(response) {
+						HTTPService.getMusicNotes(noteParametersMusics, params).then(function(response) {
 				  			for (var ibis = 0 ; ibis < $scope.mymusic.musics.length ; ibis++) {
 				  				// iteration on notes
 				  				for (var jbis = 0 ; jbis < response.data.content.length ; jbis++) {
 				  					if (response.data.content[jbis].music_id == $scope.mymusic.musics[ibis].id) {
-				  						console.log(response.data.content[jbis]);
 				  						$scope.mymusic.musics[ibis].note = response.data.content[jbis].note;
 						  				$scope.mymusic.musics[ibis].goldenStars = $scope.mymusic.musics[ibis].note;
 						  				break;
@@ -69,8 +68,10 @@ SoonzikApp.controller('DiscothequeCtrl', ['$scope', 'SecureAuth', 'HTTPService',
 
 		  			var noteParametersAlbums = [
 						{ key: "user_id", value: $scope.user.id },
-						{ key: "arr_id", value: "[" + encodeURI(arr_alb_id) + "]" }
-					]
+						{ key: "arr_id", value: "[" + encodeURI(arr_alb_id) + "]" },
+						{ key: "user_id", value: user_id},
+		  				{ key: "secureKey", value: key }
+					];
 
 					if (arr_alb_id.length > 0) {
 						HTTPService.getMusicNotes(noteParametersAlbums).then(function(response) {
@@ -107,8 +108,10 @@ SoonzikApp.controller('DiscothequeCtrl', ['$scope', 'SecureAuth', 'HTTPService',
 
 		  			var noteParametersPacks = [
 						{ key: "user_id", value: $scope.user.id },
-						{ key: "arr_id", value: "[" + encodeURI(arr_pack_id) + "]" }
-					]
+						{ key: "arr_id", value: "[" + encodeURI(arr_pack_id) + "]" },
+						{ key: "user_id", value: user_id},
+		  				{ key: "secureKey", value: key }
+					];
 
 					if (arr_pack_id.length > 0) {
 			  			HTTPService.getMusicNotes(noteParametersPacks).then(function(response) {
@@ -140,20 +143,25 @@ SoonzikApp.controller('DiscothequeCtrl', ['$scope', 'SecureAuth', 'HTTPService',
 		  		}, function(error) {
 		  			NotificationService.error($rootScope.labels.FILE_DISCOTHEQUE_GET_MUSICS_ERROR_MESSAGE);
 		  		});
-			});
 
-			HTTPService.findPlaylist([{ key: "attribute[user_id]", value: $scope.user.id }]).then(function(response) {
-				$scope.myPlaylists = response.data.content;
-				for (var i = 0 ; i < $scope.myPlaylists.length ; i++) {
-					$scope.myPlaylists[i].check = false;
-				}
-				$scope.$on('newPlaylist', function(event, data) {
-					playlist = JSON.parse(JSON.stringify(data));
-					playlist.check = false;
-					$scope.myPlaylists.push(playlist);
+				var findPlaylistParams = [
+					{ key: "attribute[user_id]", value: $scope.user.id },
+					{ key: "user_id", value: user_id},
+	  				{ key: "secureKey", value: key }
+				];
+				HTTPService.findPlaylist(findPlaylistParams).then(function(response) {
+					$scope.myPlaylists = response.data.content;
+					for (var i = 0 ; i < $scope.myPlaylists.length ; i++) {
+						$scope.myPlaylists[i].check = false;
+					}
+					$scope.$on('newPlaylist', function(event, data) {
+						playlist = JSON.parse(JSON.stringify(data));
+						playlist.check = false;
+						$scope.myPlaylists.push(playlist);
+					});
+				}, function(error) {
+					NotificationService.error($rootScope.labels.FILE_USER_FIND_PLAYLIST_ERROR_MESSAGE + playlist.name);
 				});
-			}, function(error) {
-				NotificationService.error($rootScope.labels.FILE_USER_FIND_PLAYLIST_ERROR_MESSAGE + playlist.name);
 			});
 		}
 	}

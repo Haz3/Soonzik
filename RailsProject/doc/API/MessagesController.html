@@ -177,7 +177,7 @@ the oldest message)</p>
 </li></ul>					
 											<div class="method-source-code" id="conversation-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/messages_controller.rb, line 213</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/messages_controller.rb, line 211</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">conversation</span>
   <span class="ruby-keyword">begin</span>
     <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@security</span>)
@@ -255,7 +255,7 @@ its sender and receiver</p>
 </li></ul>					
 											<div class="method-source-code" id="find-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/messages_controller.rb, line 117</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/messages_controller.rb, line 115</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">find</span>
   <span class="ruby-keyword">begin</span>
     <span class="ruby-keyword">if</span> (<span class="ruby-operator">!</span><span class="ruby-ivar">@security</span>)
@@ -375,7 +375,7 @@ information on the parameters, check at the model</p>
 </li></ul>					
 											<div class="method-source-code" id="save-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/messages_controller.rb, line 69</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/messages_controller.rb, line 67</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">save</span>
   <span class="ruby-keyword">begin</span>
     <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@security</span> <span class="ruby-operator">&amp;&amp;</span> (<span class="ruby-ivar">@message</span>[<span class="ruby-value">:user_id</span>] <span class="ruby-operator">==</span> <span class="ruby-ivar">@user_id</span> <span class="ruby-operator">||</span> <span class="ruby-ivar">@message</span>[<span class="ruby-value">:dest_id</span>] <span class="ruby-operator">==</span> <span class="ruby-ivar">@user_id</span>))
@@ -439,7 +439,7 @@ sender and receiver</p>
 </li></ul>					
 											<div class="method-source-code" id="show-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/messages_controller.rb, line 28</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/messages_controller.rb, line 26</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">show</span>
   <span class="ruby-keyword">begin</span>
     <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@security</span>)

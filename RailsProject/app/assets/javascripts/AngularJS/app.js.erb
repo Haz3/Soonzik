@@ -147,21 +147,38 @@ SoonzikApp.run(['$route', '$rootScope', '$location', 'SecureAuth', 'HTTPService'
 		var resource = resourceName.charAt(0).toUpperCase() + resourceName.slice(1);
 
 		SecureAuth.securedTransaction(function(key, id) {
-			var parameters = {
-				secureKey: key,
-		  		user_id: id,
-		  		like: {
-		  			user_id: id,
-		  			typeObj: resource,
-		  			obj_id: $routeParams.id
-		  		}
-		  	};
+			if (!$rootScope.likes.isLiked) {
+				var parameters = {
+					secureKey: key,
+			  		user_id: id,
+			  		like: {
+			  			user_id: id,
+			  			typeObj: resource,
+			  			obj_id: $routeParams.id
+			  		}
+			  	};
 
-			HTTPService.likeResource(parameters).then(function(response) {
-				$rootScope.likes++;
-			}, function(error) {
-				//NotificationService.error(" fail like ");
-			});
+				HTTPService.likeResource(parameters).then(function(response) {
+					$rootScope.likes.count++;
+					$rootScope.likes.isLiked = true;
+				}, function(error) {
+					//NotificationService.error(" fail like ");
+				});
+			} else {
+				var parameters = [
+					{ key: "secureKey", value: key },
+			  		{ key: "user_id", value: id },
+			  		{ key: encodeURIComponent("like[typeObj]"), value: resource },
+			  		{ key: encodeURIComponent("like[obj_id]"), value: $routeParams.id }
+			  	];
+
+				HTTPService.removeLike(parameters).then(function(response) {
+					$rootScope.likes.count--;
+					$rootScope.likes.isLiked = false;
+				}, function(error) {
+					//NotificationService.error(" fail like ");
+				});
+			}
 		});
 	}
 }]);

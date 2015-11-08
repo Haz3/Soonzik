@@ -176,7 +176,7 @@ new listening object since this time</p>
 </li></ul>					
 											<div class="method-source-code" id="around-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/listenings_controller.rb, line 270</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/listenings_controller.rb, line 268</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">around</span>
   <span class="ruby-keyword">begin</span>
     <span class="ruby-ivar">@lat</span> = <span class="ruby-ivar">@lat</span>.<span class="ruby-identifier">to_f</span>
@@ -256,7 +256,7 @@ including its user and music</p>
 </li></ul>					
 											<div class="method-source-code" id="find-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/listenings_controller.rb, line 117</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/listenings_controller.rb, line 115</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">find</span>
   <span class="ruby-keyword">begin</span>
     <span class="ruby-identifier">listening_object</span> = <span class="ruby-keyword">nil</span>
@@ -378,7 +378,7 @@ including its user and music</p>
 </li></ul>					
 											<div class="method-source-code" id="index-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/listenings_controller.rb, line 26</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/listenings_controller.rb, line 24</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">index</span>
   <span class="ruby-keyword">begin</span>
     <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@count</span>.<span class="ruby-identifier">present?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-ivar">@count</span> <span class="ruby-operator">==</span> <span class="ruby-string">&quot;true&quot;</span>)
@@ -445,7 +445,7 @@ information on the parameters, check at the model</p>
 </li></ul>					
 											<div class="method-source-code" id="save-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/listenings_controller.rb, line 221</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/listenings_controller.rb, line 219</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">save</span>
   <span class="ruby-keyword">begin</span>
     <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@security</span>)
@@ -514,7 +514,7 @@ wrong</p>
 </li></ul>					
 											<div class="method-source-code" id="show-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/listenings_controller.rb, line 68</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/listenings_controller.rb, line 66</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">show</span>
   <span class="ruby-keyword">begin</span>
     <span class="ruby-identifier">listening</span> = <span class="ruby-constant">Listening</span>.<span class="ruby-identifier">eager_load</span>([<span class="ruby-value">:user</span> =<span class="ruby-operator">&gt;</span> {}, <span class="ruby-identifier">music</span><span class="ruby-operator">:</span> { <span class="ruby-identifier">album</span><span class="ruby-operator">:</span> {}, <span class="ruby-identifier">user</span><span class="ruby-operator">:</span> {} }]).<span class="ruby-identifier">find_by_id</span>(<span class="ruby-ivar">@id</span>)
