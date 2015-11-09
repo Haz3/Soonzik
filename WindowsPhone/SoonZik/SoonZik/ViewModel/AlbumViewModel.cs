@@ -359,7 +359,6 @@ namespace SoonZik.ViewModel
             });
         }
 
-
         private void AddToPlaylistExecute()
         {
             MyMusicViewModel.MusicForPlaylist = SelectedMusic;

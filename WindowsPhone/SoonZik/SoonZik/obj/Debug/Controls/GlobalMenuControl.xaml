@@ -202,11 +202,11 @@
             </Grid.RowDefinitions>
 
             <TextBox x:ConnectionId='9' x:Name="SearchTextBlock" Width="190" BorderThickness="0" AcceptsReturn="True"
-                         Height="13" TextAlignment="Center" VerticalContentAlignment="Center"
-                         HorizontalAlignment="Center"
-                         VerticalAlignment="Center" Foreground="White" Opacity="0.5" FontSize="18"
-                         x:Uid="Search" PlaceholderText=""
-                                                                     />
+                     Height="13" TextAlignment="Center" VerticalContentAlignment="Center"
+                     HorizontalAlignment="Center"
+                     VerticalAlignment="Center" Foreground="White" Opacity="0.5" FontSize="18"
+                     x:Uid="Search" PlaceholderText=""
+                                                                 />
             <Grid Grid.Row="1">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*" />

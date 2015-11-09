@@ -8,9 +8,12 @@ using Windows.ApplicationModel.Core;
 using Windows.System.UserProfile;
 using Windows.UI.Core;
 using Windows.UI.Popups;
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Media.Imaging;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using SoonZik.Controls;
 using SoonZik.Helpers;
 using SoonZik.HttpRequest;
 using SoonZik.HttpRequest.Poco;
@@ -26,6 +29,7 @@ namespace SoonZik.ViewModel
             SendComment = new RelayCommand(SendCommentExecute);
             LikeCommand = new RelayCommand(LikeCommandExecute);
             SelectionCommand = new RelayCommand(SelectionCommandExecute);
+            ShareTapped = new RelayCommand(ShareTappedExecute);
         }
 
         #endregion
@@ -50,6 +54,10 @@ namespace SoonZik.ViewModel
 
         #region Attribute
 
+        private bool share = false;
+        public static Popup SharePopup { get; set; }
+
+        public ICommand ShareTapped { get; set; }
         private string _crypto { get; set; }
         private BitmapImage _like;
 
@@ -188,6 +196,25 @@ namespace SoonZik.ViewModel
             {
                 new MessageDialog("Erreur lors du post").ShowAsync();
             }
+        }
+
+        private void ShareTappedExecute()
+        {
+            share = true;
+            SharePopup = new Popup();
+            var content = new NewsSharePopup(SelectNews);
+            double width = content.Width;
+            double height = content.Height;
+            SharePopup.Child = content;
+            SharePopup.VerticalOffset = (Window.Current.Bounds.Height - height) / 2;
+            SharePopup.HorizontalOffset = (Window.Current.Bounds.Width - width) / 2;
+            SharePopup.IsOpen = true;
+            SharePopup.Closed += SharePopupOnClosed;
+        }
+
+        private void SharePopupOnClosed(object sender, object e)
+        {
+            SharePopup.IsOpen = false;
         }
 
         #endregion

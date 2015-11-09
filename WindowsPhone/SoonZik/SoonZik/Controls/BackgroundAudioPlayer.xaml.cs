@@ -242,6 +242,7 @@ namespace SoonZik.Controls
                 }
                 else if (MediaPlayerState.Closed == BackgroundMediaPlayer.Current.CurrentState)
                 {
+                    PlayImage.Source = new BitmapImage(new Uri("ms-appx:///Resources/PlayerIcons/play.png", UriKind.RelativeOrAbsolute));
                     StartBackgroundAudioTask();
                 }
             }
@@ -258,7 +259,7 @@ namespace SoonZik.Controls
             BackgroundMediaPlayer.SendMessageToBackground(value);
             if (_isPlaylist)
             {
-                if (_actuelMusic > Singleton.Singleton.Instance().SelectedMusicSingleton.Count)
+                if (_actuelMusic >= Singleton.Singleton.Instance().SelectedMusicSingleton.Count)
                 {
                     _actuelMusic = 0;
                 }

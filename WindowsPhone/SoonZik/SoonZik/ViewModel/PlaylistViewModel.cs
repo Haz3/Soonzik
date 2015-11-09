@@ -205,11 +205,15 @@ namespace SoonZik.ViewModel
                                 SelectedMusic = musics;
                                 SelectedMusic.file = "http://soonzikapi.herokuapp.com/musics/get/" + SelectedMusic.id;
                                 Singleton.Singleton.Instance().SelectedMusicSingleton.Add(SelectedMusic);
+                                if (ThePlaylist.musics.Count ==
+                                    Singleton.Singleton.Instance().SelectedMusicSingleton.Count)
+                                {
+                                    GlobalMenuControl.SetChildren(new BackgroundAudioPlayer());
+                                }
                             });
                     }
                 });
             }
-            GlobalMenuControl.SetChildren(new BackgroundAudioPlayer());
         }
 
         private void UpdatePlaylistExecute()

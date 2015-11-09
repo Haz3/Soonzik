@@ -6,6 +6,7 @@ using System.Windows.Input;
 using Windows.ApplicationModel.Core;
 using Windows.UI.Core;
 using Windows.UI.Popups;
+using Windows.UI.Xaml.Media.Imaging;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using SoonZik.Controls;
@@ -165,6 +166,7 @@ namespace SoonZik.ViewModel
                                     () =>
                                     {
                                         var art = obj.Result as Artist;
+                                        item.profilImage = new BitmapImage(new Uri(Constant.UrlImageUser + item.image, UriKind.RelativeOrAbsolute));
                                         if (art != null && art.artist)
                                             ListArtiste.Add(item);
                                     });

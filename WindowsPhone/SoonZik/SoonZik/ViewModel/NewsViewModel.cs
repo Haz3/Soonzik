@@ -4,8 +4,6 @@ using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using Windows.ApplicationModel.Core;
 using Windows.UI.Core;
-using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls.Primitives;
 using Coding4Fun.Toolkit.Controls;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
@@ -24,7 +22,6 @@ namespace SoonZik.ViewModel
         {
             _listNews = new ObservableCollection<News>();
             Charge();
-            ShareTapped = new RelayCommand(ShareTappedExecute);
             ItemClickCommand = new RelayCommand(ItemClickExecute);
         }
 
@@ -32,8 +29,6 @@ namespace SoonZik.ViewModel
 
         #region Attribute
 
-        private bool share = false;
-        public static Popup SharePopup { get; set; }
         private const string UrlImage = "http://soonzikapi.herokuapp.com/assets/news/";
         public static MessagePrompt MessagePrompt { get; set; }
 
@@ -48,8 +43,6 @@ namespace SoonZik.ViewModel
         }
 
         private ObservableCollection<News> _listNews;
-
-        public RelayCommand ShareTapped { get; set; }
 
         private News _selectedNews;
 
@@ -83,40 +76,8 @@ namespace SoonZik.ViewModel
 
         private void ItemClickExecute()
         {
-            if (!share)
-            {
-                DetailSelectedNews = SelectedNews;
-                GlobalMenuControl.SetChildren(new NewsDetail());
-            }
-        }
-
-        private void ShareTappedExecute()
-        {
-            share = true;
-            SharePopup = new Popup();
-            var content = new NewsSharePopup(SelectedNews);
-            double width = content.Width;
-            double height = content.Height;
-            SharePopup.Child = content;
-            SharePopup.VerticalOffset = (Window.Current.Bounds.Height - height) / 2;
-            SharePopup.HorizontalOffset = (Window.Current.Bounds.Width - width) / 2;
-            SharePopup.IsOpen = true;
-            SharePopup.Closed += SharePopupOnClosed;
-            //var newsBody = new NewsSharePopup(SelectedNews);
-            //MessagePrompt = new MessagePrompt
-            //{
-            //    IsAppBarVisible = false,
-            //    VerticalAlignment = VerticalAlignment.Center,
-            //    Body = newsBody,
-            //    Opacity = 0.6
-            //};
-            //MessagePrompt.ActionPopUpButtons.Clear();
-            //MessagePrompt.Show();
-        }
-
-        private void SharePopupOnClosed(object sender, object o)
-        {
-            share = false;
+            DetailSelectedNews = SelectedNews;
+            GlobalMenuControl.SetChildren(new NewsDetail());
         }
 
         public void Charge()
@@ -134,8 +95,7 @@ namespace SoonZik.ViewModel
                         CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
                             () =>
                             {
-                                item.attachments[0].url =
-                                    new Uri(UrlImage + item.attachments[0].url, UriKind.RelativeOrAbsolute).ToString();
+                                item.attachments[0].url = new Uri(UrlImage + item.attachments[0].url, UriKind.RelativeOrAbsolute).ToString();
                                 ListNews.Add(item);
                             });
                     }

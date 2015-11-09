@@ -33,5 +33,11 @@ namespace SoonZik.Views
             var vm = DataContext as NewsDetailViewModel;
             if (vm != null) vm.LikeCommand.Execute(null);
         }
+
+        private void UIElement_OnTapped(object sender, TappedRoutedEventArgs e)
+        {
+            var vm = DataContext as NewsDetailViewModel;
+            if (vm != null) vm.ShareTapped.Execute(null);
+        }
     }
 }
