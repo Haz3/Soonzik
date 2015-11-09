@@ -55,10 +55,10 @@ SoonzikApp.controller('UsersCtrl', ['$scope', "$routeParams", 'SecureAuth', 'HTT
 		}
 		var id = null;
 
-    	SecureAuth.securedTransaction(function(key, id) {
+    	SecureAuth.securedTransaction(function(key, user_id) {
 	        var parameters = [
 	          { key: "secureKey", value: key },
-	          { key: "user_id", value: id }
+	          { key: "user_id", value: user_id }
 	        ];
 			HTTPService.getProfile($routeParams.id, parameters).then(function(profile) {
 				/*- Begin get Profile -*/
@@ -86,7 +86,7 @@ SoonzikApp.controller('UsersCtrl', ['$scope', "$routeParams", 'SecureAuth', 'HTT
 					{ key: encodeURIComponent("order_by_desc[]"), value: "created_at" },
 					{ key: "limit", value: 20 },
 		        	{ key: "secureKey", value: key },
-		        	{ key: "user_id", value: id }
+		        	{ key: "user_id", value: user_id }
 				];
 
 				HTTPService.findTweet(paramsTweet).then(function(response) {
@@ -121,9 +121,9 @@ SoonzikApp.controller('UsersCtrl', ['$scope', "$routeParams", 'SecureAuth', 'HTT
 
 						var noteParameters = [
 							{ key: "user_id", value: $scope.user.id },
-							{ key: "arr_id", value: "[" + encodeURI(note_array_id) + "]" }
+							{ key: "arr_id", value: "[" + encodeURI(note_array_id) + "]" },
 							{ key: "secureKey", value: key },
-							{ key: "user_id", value: id }
+							{ key: "user_id", value: user_id }
 						]
 
 						HTTPService.getMusicNotes(noteParameters).then(function(response) {
@@ -190,13 +190,13 @@ SoonzikApp.controller('UsersCtrl', ['$scope', "$routeParams", 'SecureAuth', 'HTT
 
 					var playlistParams = [
 						{ key: "secureKey", value: key },
-						{ key: "user_id", value: id },
+						{ key: "user_id", value: user_id },
 						{ key: "attribute[user_id]", value: $scope.user.id }
 					];
 
 					HTTPService.findPlaylist(playlistParams).then(function(playlistResponse) {
 						$scope.show.playlists = playlistResponse.data.content;
-						$scope.myPlaylists = response.data.content;
+						$scope.myPlaylists = playlistResponse.data.content;
 
 						for (var i = 0 ; i < $scope.myPlaylists.length ; i++) {
 							$scope.myPlaylists[i].check = false;

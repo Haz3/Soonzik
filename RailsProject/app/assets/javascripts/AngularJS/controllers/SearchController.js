@@ -1,4 +1,4 @@
-SoonzikApp.controller('SearchCtrl', ['$scope', "$routeParams", "HTTPService", "NotificationService", "$location", "$rootScope", function ($scope, $routeParams, HTTPService, NotificationService, $location, $rootScope) {
+SoonzikApp.controller('SearchCtrl', ['$scope', "$routeParams", "HTTPService", "NotificationService", "$location", "$rootScope", 'SecureAuth', function ($scope, $routeParams, HTTPService, NotificationService, $location, $rootScope, SecureAuth) {
 
 	$scope.searchParam = {
 		value: $routeParams.value

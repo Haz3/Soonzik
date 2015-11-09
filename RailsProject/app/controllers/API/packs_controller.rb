@@ -25,23 +25,28 @@ module API
         if (@count.present? && @count == "true")
           @returnValue = { content: Pack.count }
         else
-          @returnValue = { content: Pack.eager_load([albums: { user: {}, musics: {} }, user: {}, descriptions: {}, partial_albums: {}]).all.as_json(:include => { albums: {
-                                                                    :include => {
-                                                                      :user => { :only => User.miniKey },
-                                                                      :musics => { :only => Music.miniKey }
-                                                                    },
-                                                                    :only => Album.miniKey
-                                                                  },
-                                                                  user: {
-                                                                    :only => User.miniKey
-                                                                  },
-                                                                  descriptions: {
-                                                                    :only => Description.miniKey
-                                                                  },
-                                                                  partial_albums: {
-                                                                    :only => PartialAlbum.miniKey
-                                                                  }
-                                                                }, :only => Pack.miniKey, methods: :averagePrice) }
+          p = Pack.eager_load([albums: { user: {}, musics: {} }, user: {}, descriptions: {}, partial_albums: {}]).all
+          p.each do |pack|
+            Album.fillLikes p.albums, @security, @user_id
+          end
+          @returnValue = { content: p.as_json(:include => { albums: {
+              :include => {
+                :user => { :only => User.miniKey },
+                :musics => { :only => Music.miniKey }
+              },
+              :only => Album.miniKey,
+              methods: [:likes, :hasLiked]
+            },
+            user: {
+              :only => User.miniKey
+            },
+            descriptions: {
+              :only => Description.miniKey
+            },
+            partial_albums: {
+              :only => PartialAlbum.miniKey
+            }
+          }, :only => Pack.miniKey, methods: :averagePrice) }
         end
         if (@returnValue[:content].size == 0)
           codeAnswer 202
@@ -79,13 +84,14 @@ module API
           pack.albums.each do |album|
             album.setPack(pack.id)
           end
+          Album.fillLikes pack.albums, @security, @user_id
           @returnValue = { content: pack.as_json(:include => { albums: {
                                                                   :include => {
                                                                     :user => { :only => User.miniKey },
                                                                     :musics => { :only => Music.miniKey }
                                                                   },
                                                                   :only => Album.miniKey,
-                                                                  :methods => :isPartial
+                                                                  methods: [:likes, :hasLiked, :isPartial]
                                                                 },
                                                                 user: {
                                                                   :only => User.miniKey
@@ -194,12 +200,17 @@ module API
           pack_object = pack_object.offset(@offset.to_i)
         end
 
+        pack_object.each do |pack|
+          Album.fillLikes pack.albums, @security, @user_id
+        end
+
         @returnValue = { content: pack_object.as_json(:include => { albums: {
                                                                               :include => {
                                                                                             :user => { :only => User.miniKey },
                                                                                             :musics => { :only => Music.miniKey }
                                                                                           },
-                                                                              :only => Album.miniKey
+                                                                              :only => Album.miniKey,
+                                                                              methods: [:likes, :hasLiked]
                                                                             },
                                                                   user: {
                                                                     :only => User.miniKey

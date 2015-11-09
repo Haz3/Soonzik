@@ -220,7 +220,6 @@ protected
     # - +503+ - Error from server
     # 
     def checkKey
-      puts "COUCOU CHECKKEY - #{defined?(@user_id)} - #{defined?(@secureKey)} - #{@user_id.present?} - #{@secureKey.present?}"
       if (defined?(@user_id) && defined?(@secureKey))
         begin
           u = User.find_by_id(@user_id)
