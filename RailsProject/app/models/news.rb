@@ -42,6 +42,9 @@ class News < ActiveRecord::Base
 
   # Fill an association of records of the notes average
   def self.fillLikes(ar_news, security = false, user_id = nil)
+    if (ar_news.size == 0)
+      return
+    end
     sql = "SELECT news_id, COUNT(news_id) AS count FROM newslikes WHERE (news_id IN ("
     sql_hasLiked = "SELECT news_id FROM newslikes WHERE (news_id IN (" if security
 

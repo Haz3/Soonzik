@@ -6,6 +6,13 @@ SoonzikApp.controller('AlbumsCtrl', ['$scope', "$routeParams", 'SecureAuth', 'HT
 	$scope.selectedMusic = null;
 	$scope.myPlaylists = [];
 
+	$scope.resourceName = "albums"
+
+	$rootScope.likes = {
+		count: 0,
+		isLiked: false
+	};
+
 	$scope.commentariesOffset = 0;
 	$scope.resourcesCommentaries = [];
 	$scope.commentLoading = true;
@@ -23,7 +30,6 @@ SoonzikApp.controller('AlbumsCtrl', ['$scope', "$routeParams", 'SecureAuth', 'HT
 		}
 
 		SecureAuth.securedTransaction(function (key, id) {
-
 			var parameters = [
 				{ key: "user_id", value: id },
 				{ key: "secureKey", value: key }
@@ -31,6 +37,10 @@ SoonzikApp.controller('AlbumsCtrl', ['$scope', "$routeParams", 'SecureAuth', 'HT
 
 			HTTPService.getAlbum(id, parameters).then(function(response) {
 				$scope.album = response.data.content;
+				console.log($scope.album);
+				$rootScope.likes.count = $scope.album.likes;
+				$rootScope.likes.isLiked = $scope.album.hasLiked;
+				console.log($rootScope.likes);
 				$scope.loadComments();
 
 				if ($scope.user != false) {

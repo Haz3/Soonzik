@@ -65,6 +65,9 @@ class Music < ActiveRecord::Base
 
   # Fill an association of records of the notes average
   def self.fillAverageNote(ar_musics)
+    if (ar_musics.size == 0)
+      return
+    end
     sql = "SELECT music_id, AVG(value) as average FROM music_notes WHERE (music_id IN ("
 
     ar_musics.each_with_index do |music, index|

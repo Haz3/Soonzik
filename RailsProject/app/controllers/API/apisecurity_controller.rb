@@ -259,10 +259,6 @@ protected
     # * +index+ - The index of the answer information
     #
     def codeAnswer(index)
-      if (@returnValue[:code] != nil)
-        return
-      end
-
       if (@code[index] != nil)
         @returnValue[:code] = @code[index][:code]
         @returnValue[:message] = @code[index][:message]
@@ -281,9 +277,7 @@ protected
     # * +sym+ - The symbol of the http code
     #
     def defineHttp(sym)
-      if (@httpCode == nil)
-        @httpCode = sym
-      end
+      @httpCode = sym
     end
 
     private

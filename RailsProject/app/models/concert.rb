@@ -33,6 +33,9 @@ class Concert < ActiveRecord::Base
 
   # Fill an association of records of the notes average
   def self.fillLikes(ar_concerts, security = false, user_id = nil)
+    if (ar_concerts.size == 0)
+      return
+    end
     sql_count = "SELECT concert_id, COUNT(concert_id) AS count FROM concertslikes WHERE (concert_id IN ("
     sql_hasLiked = "SELECT concert_id FROM concertslikes WHERE (concert_id IN (" if security
 

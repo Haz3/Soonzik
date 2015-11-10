@@ -47,6 +47,7 @@
 
 			.button.expand.radius.success
 				%a{"ng-click" => "addAlbumToCart()"} {{ labels.DISPLAY_ALBUM_ADD_TO_CART }}
+			.likeContainer.text-right{ "ng-include" => "'/assets/AngularJS/views/include/like.html.haml'" }
 			.commentaries
 				%textarea{ "ng-model" => "comment.value" }
 				.text-right

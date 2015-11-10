@@ -70,6 +70,9 @@ class Album < ActiveRecord::Base
 
   # Fill an association of records of the notes average
   def self.fillLikes(ar_albums, security = false, user_id = nil)
+    if (ar_albums.size == 0)
+      return
+    end
     sql_count = "SELECT album_id, COUNT(album_id) AS count FROM albumslikes WHERE (album_id IN ("
     sql_hasLiked = "SELECT album_id FROM albumslikes WHERE (album_id IN (" if security
 
