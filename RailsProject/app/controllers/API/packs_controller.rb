@@ -27,7 +27,7 @@ module API
         else
           p = Pack.eager_load([albums: { user: {}, musics: {} }, user: {}, descriptions: {}, partial_albums: {}]).all
           p.each do |pack|
-            Album.fillLikes p.albums, @security, @user_id
+            Album.fillLikes pack.albums, @security, @user_id
           end
           @returnValue = { content: p.as_json(:include => { albums: {
               :include => {
