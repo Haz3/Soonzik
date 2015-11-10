@@ -12,29 +12,18 @@
 
     <Page.Resources>
         <DataTemplate x:Key="NewsTemplate">
-            <Grid x:ConnectionId='1' Margin="0,0,0,20" Height="200" Width="380" HorizontalAlignment="Center" Background="#d3d7da"
-                  Opacity="0.6"
-                                        >
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="40" />
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="20" />
-                </Grid.RowDefinitions>
-                <Image x:ConnectionId='2'                             Grid.Row="0" Source="../Resources/Icones/share.png" Height="30"
-                       VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,10,0" />
-                <Grid Background="White" Grid.Row="1">
-                    <Image Source="{Binding Path=attachments[0].url}" Height="70" HorizontalAlignment="Left"
-                           Margin="20,15,0,15" />
-                    <TextBlock Text="{Binding Path=title}" Style="{StaticResource TitleTextBlockStyle}" FontSize="15"
-                               Foreground="#424242"
-                               FontFamily="Calibri" HorizontalAlignment="Center" VerticalAlignment="Center"
-                               Margin="20,0,0,70" />
-                    <TextBlock />
-                </Grid>
-                <TextBlock Grid.Row="2" Text="{Binding Path=created_at}" VerticalAlignment="Center"
-                           Foreground="#424242"
-                           FontSize="10" FontFamily="Calibri" HorizontalAlignment="Right" FontStyle="Italic"
-                           Margin="0,0,10,0" />
+            <Grid x:ConnectionId='1' Margin="20,0,0,20" Height="160" Width="380"  HorizontalAlignment="Center"                       >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="150"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Image Grid.Column="0" Source="{Binding Path=attachments[0].url}" Height="140" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                <TextBlock Grid.Column="1" Text="{Binding Path=title}" Style="{StaticResource TitleTextBlockStyle}" FontSize="20"
+                               Foreground="DeepSkyBlue" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                <TextBlock Grid.Column="1" Text="{Binding Path=content}" Style="{StaticResource TitleTextBlockStyle}" FontSize="15"
+                              Margin="10,0,10,0" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" MaxLines="2" TextWrapping="Wrap"/>
+                <TextBlock Grid.Column="1" Text="{Binding Path=created_at}" VerticalAlignment="Bottom" Foreground="#424242"
+                       FontSize="10" FontFamily="Calibri" HorizontalAlignment="Right" FontStyle="Italic" Margin="0,0,10,10" />
             </Grid>
         </DataTemplate>
     </Page.Resources>
@@ -43,6 +32,8 @@
         <ListView Background="Transparent" x:Name="ListViewNews" ItemsSource="{Binding ListNews}"
                   ItemTemplate="{StaticResource NewsTemplate}"
                   SelectedItem="{Binding SelectedNews, Mode=TwoWay}" />
+
+
 
         <!--<control:NewsControl Width="380" Height="200" VerticalAlignment="Top" Margin="10,10,10,0"/>-->
 

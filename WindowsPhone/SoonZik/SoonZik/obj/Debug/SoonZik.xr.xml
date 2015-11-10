@@ -109,12 +109,12 @@
     <RootPropertyPathName Name="ConversationText" />
     <RootPropertyPathName Name="ListMessages" />
     <RootPropertyPathName Name="FriendUser" />
+    <RootPropertyPathName Name="profilImage" />
     <RootPropertyPathName Name="ListArtiste" />
     <RootPropertyPathName Name="SelectedArtiste" />
     <RootPropertyPathName Name="TappedCommand" />
     <RootPropertyPathName Name="ListInfluences" />
     <RootPropertyPathName Name="Key" />
-    <RootPropertyPathName Name="profilImage" />
     <RootPropertyPathName Name="Group" />
     <RootPropertyPathName Name="ItemSource" />
     <RootPropertyPathName Name="SendTweet" />
@@ -149,6 +149,7 @@
     <RootPropertyPathName Name="SelectedPlaylist" />
     <RootPropertyPathName Name="PlaylistTappedCommand" />
     <RootPropertyPathName Name="ListPack" />
+    <RootPropertyPathName Name="imageAlbum" />
     <RootPropertyPathName Name="FollowText" />
     <RootPropertyPathName Name="FollowCommand" />
     <RootPropertyPathName Name="NbrFollowers" />
@@ -221,10 +222,10 @@
       <RootProperty Name="Style" />
       <RootProperty Name="MinHeight" />
       <RootProperty Name="MinWidth" />
-      <RootProperty Name="Margin" />
       <RootProperty Name="Foreground" />
       <RootProperty Name="Width" />
       <RootProperty Name="Command" />
+      <RootProperty Name="Margin" />
       <RootProperty Name="Height" />
       <RootProperty Name="IsEnabled" />
       <RootProperty Name="Opacity" />
@@ -407,10 +408,11 @@
       <RootProperty Name="Height" />
       <RootProperty Name="Width" />
       <RootProperty Name="Margin" />
-      <RootProperty Name="TextAlignment" />
       <RootProperty Name="TextWrapping" />
       <RootProperty Name="Padding" />
       <RootProperty Name="FontWeight" />
+      <RootProperty Name="TextAlignment" />
+      <RootProperty Name="MaxLines" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Data.Binding">
       <RootProperty Name="Mode" />
@@ -473,6 +475,7 @@
     <RootType FullName="Windows.UI.Xaml.Controls.RadioButton">
       <RootProperty Name="Content" />
       <RootProperty Name="IsChecked" />
+      <RootProperty Name="Margin" />
       <RootProperty Name="Command" />
       <RootEvent Name="Click" />
     </RootType>
@@ -484,6 +487,8 @@
     <RootType FullName="Windows.UI.Xaml.Media.ImageBrush">
       <RootProperty Name="ImageSource" />
       <RootProperty Name="Opacity" />
+      <RootProperty Name="AlignmentX" />
+      <RootProperty Name="AlignmentY" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.TextBox">
       <RootProperty Name="Width" />
@@ -518,7 +523,6 @@
       <RootProperty Name="Storyboard" />
     </RootType>
     <RootType FullName="SoonZik.Controls.GlobalMenuControl" />
-    <RootType FullName="SoonZik.Controls.MoreOptionPopUp" />
     <RootType FullName="SoonZik.Controls.NewsSharePopup" />
     <RootType FullName="SoonZik.Controls.NotationMusic" />
     <RootType FullName="SoonZik.Controls.PlayerControl" />
@@ -616,6 +620,11 @@
       <RootProperty Name="Content" />
     </RootType>
     <RootType FullName="SoonZik.Views.Conversation" />
+    <RootType FullName="Windows.UI.Xaml.Shapes.Ellipse">
+      <RootProperty Name="Height" />
+      <RootProperty Name="Width" />
+      <RootProperty Name="Fill" />
+    </RootType>
     <RootType FullName="SoonZik.Views.Explorer" />
     <RootType FullName="Windows.UI.Xaml.Data.CollectionViewSource">
       <RootProperty Name="Source" />

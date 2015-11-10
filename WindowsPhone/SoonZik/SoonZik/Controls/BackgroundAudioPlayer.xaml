@@ -29,7 +29,7 @@
                 <Button Content="&gt;" x:Name="playButton" Height="100" Width="100" Click="playButton_Click" />
                 <Button Content="&gt;&gt;|" x:Name="nextButton" Height="100" Width="100" Click="nextButton_Click" />
             </StackPanel>-->
-            <Image x:Name="ImageMusique" Width="250" Height="250"></Image>
+            <Image x:Name="ImageMusique" Width="250" Height="250" />
         </Grid>
 
         <Grid Grid.Row="2">

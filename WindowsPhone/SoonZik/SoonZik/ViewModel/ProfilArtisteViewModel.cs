@@ -6,6 +6,7 @@ using System.Windows.Input;
 using Windows.ApplicationModel.Core;
 using Windows.ApplicationModel.Resources;
 using Windows.UI.Core;
+using Windows.UI.Xaml.Media.Imaging;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using SoonZik.Controls;
@@ -151,6 +152,7 @@ namespace SoonZik.ViewModel
                     {
                         foreach (var album in art.albums)
                         {
+                            album.imageAlbum = new BitmapImage(new Uri(Constant.UrlImageAlbum + album.image, UriKind.RelativeOrAbsolute));
                             ListAlbums.Add(album);
                         }
                     }

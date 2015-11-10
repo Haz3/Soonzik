@@ -53,19 +53,22 @@
         <DataTemplate x:Key="ArtisteTemplate">
             <Grid Width="350" x:Name="ArtisteGridTemplate">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="80" />
+                    <ColumnDefinition Width="100" />
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
-                <Image Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left"
-                       Source="../Resources/Icones/profil.jpg" Height="80" Width="80" />
+                <Ellipse Grid.Column="0" Height="80" Width="80">
+                    <Ellipse.Fill>
+                        <ImageBrush ImageSource="{Binding Path=profilImage}" AlignmentX="Center" AlignmentY="Center" />
+                    </Ellipse.Fill>
+                </Ellipse>
                 <TextBlock Grid.Column="1" Text="{Binding Path=username}" Foreground="White" Margin="15,0,0,0"
-                           FontSize="25" />
+                           FontSize="25" VerticalAlignment="Center" />
             </Grid>
         </DataTemplate>
     </Page.Resources>
 
     <Grid>
-        <Pivot x:Name="PivotGlobal" HeaderTemplate="{StaticResource SizeHeaderGlobalPivot}" Foreground="Transparent"
+        <Pivot Margin="0,20,0,0" x:Name="PivotGlobal" HeaderTemplate="{StaticResource SizeHeaderGlobalPivot}" Foreground="Transparent"
                RenderTransformOrigin="0.5,0.5" Style="{StaticResource PivotStyle1}">
             <PivotItem x:Uid="InfluencePivot" Header="">
                 <ListBox Background="Transparent" x:Name="ListBoxGenre" ItemsSource="{Binding ListInfluences}"

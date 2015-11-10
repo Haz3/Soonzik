@@ -28,12 +28,6 @@ namespace SoonZik.Views
         {
         }
 
-        private void UIElement_OnTapped(object sender, TappedRoutedEventArgs e)
-        {
-            var vm = DataContext as NewsViewModel;
-            if (vm != null) vm.ShareTapped.Execute(null);
-        }
-
         private void Grid_OnTapped(object sender, TappedRoutedEventArgs e)
         {
             var vm = DataContext as NewsViewModel;
