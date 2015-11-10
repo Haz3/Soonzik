@@ -14,6 +14,9 @@
 - (id)initWithJsonObject:(NSDictionary *)json
 {
     self = [super init];
+    
+    NSLog(@"%@", json);
+    
     self.identifier = [[json objectForKey:@"id"] intValue];
     self.title = [json objectForKey:@"title"];
     self.price = [[json objectForKey:@"price"] floatValue];
@@ -45,7 +48,14 @@
     }
     
     self.avgPrice = [[json objectForKey:@"averagePrice"] floatValue];
-
+    
+    /*self.partialAlbums = [[NSMutableArray alloc] init];
+    NSLog(@"%@", [json objectForKey:@"partial_albums"]);
+    NSArray *partial = [json objectForKey:@"partial_albums"];
+    for (NSDictionary *dic in partial) {
+        [self.partialAlbums addObject:[dic objectForKey:@"album_id"]];
+    }*/
+    
     return self;
 }
 

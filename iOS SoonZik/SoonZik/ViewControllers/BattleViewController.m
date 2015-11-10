@@ -166,18 +166,13 @@
     self.secondArtistScoreLabel.font = SOONZIK_FONT_BODY_BIG;
     NSDate *now = [NSDate date];
     // has the target time passed?
-    NSLog(@"calc date");
-    NSLog(@"self.battle.endDate : %@", self.battle.endDate);
     if ([self.battle.endDate earlierDate:now] == self.battle.endDate) {
         self.endBattleChronoLabel.text = [self.translate.dict objectForKey:@"battle_ended"];
     } else {
         NSUInteger flags = NSCalendarUnitDay | NSCalendarUnitHour | NSCalendarUnitMinute | NSCalendarUnitSecond;
         NSDateComponents *components = [[NSCalendar currentCalendar] components:flags fromDate:now toDate:self.battle.endDate options:0];
-        NSLog(@"self.translate.dict : %@", [self.translate.dict objectForKey:@"battle_deadline"]);
         self.endBattleChronoLabel.text = [NSString stringWithFormat:[self.translate.dict objectForKey:@"battle_deadline"], [components day], [components hour], [components minute], [components second]];
-        NSLog(@"after components");
     }
-    NSLog(@"after calc date");
    
     float totalVotes = self.battle.voteArtistOne+self.battle.voteArtistTwo;
     self.firstArtistScore = self.battle.voteArtistOne*100/totalVotes;
@@ -189,9 +184,6 @@
 }
 
 - (void)refreshProgress {
-    NSLog(@"number of votes for artist one : %i", self.battle.voteArtistOne);
-    NSLog(@"number of votes for artist two : %i", self.battle.voteArtistTwo);
-    
     float totalVotes = self.battle.voteArtistOne+self.battle.voteArtistTwo;
     float artist1ViewWidth = self.battle.voteArtistOne*self.chartView.frame.size.width/totalVotes;
     float artist2ViewWidth = self.battle.voteArtistTwo*self.chartView.frame.size.width/totalVotes;
@@ -207,8 +199,6 @@
     UIView *artist2Part = [[UIView alloc] initWithFrame:CGRectMake(artist1ViewWidth, 0, artist2ViewWidth, self.chartView.frame.size.height)];
     [artist2Part setBackgroundColor:BLUE_2];
     [self.chartView addSubview:artist2Part];
-    
-    NSLog(@"chart setted");
 }
 
 - (void)vote:(User *)artist

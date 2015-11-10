@@ -90,29 +90,9 @@ static AudioPlayer *sharedInstance = nil;
 - (void)playerItemDidReachEnd:(NSNotification *)notification {
     
     //  code here to play next sound file
-    NSLog(@"finished to play");
     [self deleteCurrentPlayer];
     [self next];
 }
-
-
-/*- (void)prepareSong:(int)identifier
-{
-    NSData *data = [[NSUserDefaults standardUserDefaults] objectForKey:@"User"];
-    User *user = (User *)[NSKeyedUnarchiver unarchiveObjectWithData:data];
-    NSString *key = [Crypto getKey:user.identifier];
-    NSString *conca = [NSString stringWithFormat:@"%@%@", user.salt, key];
-    NSString *secureKey = [Crypto sha256HashFor:conca];
-    NSString *url = [NSString stringWithFormat:@"%@musics/get/%i?user_id=%i&secureKey=%@", API_URL, identifier, user.identifier, secureKey];
-    
-    NSLog(@"url of the music : %@", url);
-    NSURL *nurl = [NSURL URLWithString:url];
-    NSData *ndata = [NSData dataWithContentsOfURL:nurl];
-
-    NSError *error = nil;
-    self.audioPlayer = [[AVAudioPlayer alloc] initWithData:ndata error:&error];
-    self.audioPlayer.delegate = self;
-}*/
 
 - (void)playSound
 {

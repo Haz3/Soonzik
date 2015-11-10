@@ -90,7 +90,6 @@
 - (void)configureMessageCell:(SOMessageCell *)cell forMessageAtIndex:(NSInteger)index
 {
     Message *message = self.messages[index];
-    NSLog(@"MESSAGE : %@", message.content);
     
     // Adjusting content for 4pt. (In this demo the width of bubble's tail is 8pt)
     if (!message.fromMe) {
@@ -230,7 +229,6 @@
     for (Message *msg in data) {
         msg.type = 0;//[self messageTypeFromString:msg[@"type"]];
         msg.date = [NSDate date];
-        NSLog(@"message.content: %@", msg.content);
         
         /*if (message.type == SOMessageTypePhoto) {
             message.media = UIImageJPEGRepresentation([UIImage imageNamed:msg[@"image"]], 1);

@@ -66,7 +66,6 @@
         dispatch_async(dispatch_get_main_queue(), ^{
             
             NSString *urlImage = [NSString stringWithFormat:@"%@assets/usersImage/avatars/%@", API_URL, self.user.image];
-            NSLog(@"urlImage : %@", urlImage);
             NSData * imageData = [[NSData alloc] initWithContentsOfURL: [NSURL URLWithString: urlImage]];
             [self.userImageButton setBackgroundImage:[UIImage imageWithData:imageData] forState:UIControlStateNormal];
             [spin stopAnimating];
@@ -133,7 +132,6 @@
 }
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
-    NSLog(@"%@", info);
     [picker dismissViewControllerAnimated:true completion:nil];
     
     __block __weak NSData *imageData = nil;
@@ -145,30 +143,22 @@
        ALAssetsLibraryAssetForURLResultBlock resultblock = ^(ALAsset *imageAsset)
        {
             ALAssetRepresentation *imageRep = [imageAsset defaultRepresentation];
-            NSLog(@"[imageRep filename] : %@", [imageRep filename]);
             NSArray *substrings = [[imageRep filename] componentsSeparatedByString:@"."];
             NSString *format = [substrings objectAtIndex:1];
-            NSLog(@"substring : %@", format);
             imageOriginalName = [substrings objectAtIndex:0];
-            NSLog(@"imageOriginalName: %@", imageOriginalName);
-            
             UIImage *image = [info valueForKey:UIImagePickerControllerOriginalImage];
-           NSLog(@"image data: %@", image);
             if ([format isEqualToString:@"JPG"]) {
                 imageFormat = @"image/jpeg";
                 imageData = UIImageJPEGRepresentation(image, 1);
-                NSLog(@"jpeg");
             } else if ([format isEqualToString:@"PNG"]) {
                 imageFormat = @"image/png";
                 imageData = UIImagePNGRepresentation(image);
-                NSLog(@"png");
             }
            [self uploadImage:imageFormat :imageOriginalName :imageData];
         };
         
         ALAssetsLibrary* assetslibrary = [[ALAssetsLibrary alloc] init];
         [assetslibrary assetForURL:refURL resultBlock:resultblock failureBlock:^(NSError *error){
-            NSLog(@"Error loading asset");
         }];
     });
 
@@ -186,7 +176,6 @@
     post = [NSString stringWithFormat:@"user_id=%i&secureKey=%@&type=image&file[content_type]=%@&file[original_filename]=%@&file[tempfile]=%@&device=smartphone", user.identifier, secureKey, imageFormat, imageName, imageData];
     
     json = [Request postRequest:post url:url];
-    NSLog(@"%@", [json objectForKey:@"content"]);
     
     if ([[json objectForKey:@"code"] intValue] == 201) {
         [[[SimplePopUp alloc] initWithMessage:@"pas d'erreur" onView:self.view withSuccess:true] show];

@@ -22,7 +22,6 @@
     url = [NSString stringWithFormat:@"%@carts/my_cart?user_id=%i&secureKey=%@", API_URL, user.identifier, secureKey];
 
     NSDictionary *json = [Request getRequest:url];
-    NSLog(@"json cart : %@", json);
     NSMutableArray *array = [[NSMutableArray alloc] init];
     for (NSDictionary *dic in [json objectForKey:@"content"]) {
         [array addObject:[[Cart alloc] initWithJsonObject:dic]];
@@ -43,7 +42,6 @@
     // gift_user_id if it is a gift from someone
     post = [NSString stringWithFormat:@"user_id=%i&secureKey=%@&cart[user_id]=%i&cart[typeObj]=%@&cart[obj_id]=%i", user.identifier, secureKey, user.identifier, type, objId];
     NSDictionary *json = [Request postRequest:post url:url];
-    NSLog(@"json : %@", json);
     
     if ([[json objectForKey:@"code"] intValue] == 201) {
         return [[Cart alloc] initWithJsonObject:[json objectForKey:@"content"]];
@@ -63,9 +61,6 @@
     url = [NSString stringWithFormat:@"%@carts/destroy?user_id=%i&secureKey=%@&id=%i", API_URL, user.identifier, secureKey, cartId];
     
     NSDictionary *json = [Request getRequest:url];
-    
-    NSLog(@"%@", json);
-    
     if ([[json objectForKey:@"code"] intValue] == 202)
         return true;
     
@@ -85,7 +80,6 @@
     
     NSDictionary *json = [Request postRequest:post url:url];
     NSMutableArray *array = [[NSMutableArray alloc] init];
-    NSLog(@"%@", json);
     for (NSDictionary *dic in [json objectForKey:@"content"]) {
         [array addObject:[[Cart alloc] initWithJsonObject:dic]];
     }
@@ -103,10 +97,8 @@
     secureKey = [Crypto sha256HashFor:conca];
     url = [NSString stringWithFormat:@"%@purchases/buycart", API_URL];
     post = [NSString stringWithFormat:@"user_id=%i&secureKey=%@&paypal[payment_id]=%@", user.identifier, secureKey, paypalId];
-    NSLog(@"url : %@      |      post : %@", url, post);
     
     NSDictionary *json = [Request postRequest:post url:url];
-    NSLog(@"%@", json);
     
     if ([[json objectForKey:@"code"] intValue] == 201)
         return true;

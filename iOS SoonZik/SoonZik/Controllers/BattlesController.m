@@ -14,7 +14,6 @@
     NSString *url = [NSString stringWithFormat:@"%@battles", API_URL];
     NSDictionary *json = [Request getRequest:url];
     NSArray *content = [json objectForKey:@"content"];
-    NSLog(@"content size : %i", content.count);
     NSMutableArray *listOfBattles = [[NSMutableArray alloc] init];
     for (NSDictionary *dict in content) {
         Battle *battle = [[Battle alloc] initWithJsonObject:dict];
@@ -41,10 +40,7 @@
     secureKey = [Crypto sha256HashFor:conca];
     post = [NSString stringWithFormat:@"user_id=%i&secureKey=%@&artist_id=%i", user.identifier, secureKey, artistID];
     
-    NSLog(@"url : %@", url);
-    NSLog(@"post : %@", post);
     NSDictionary *json = [Request postRequest:post url:url];
-    NSLog(@"vote json : %@", json);
     if ([[json objectForKey:@"code"] intValue] != 200) {
         return nil;
     }

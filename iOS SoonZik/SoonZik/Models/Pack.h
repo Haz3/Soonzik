@@ -20,6 +20,7 @@
 @property (nonatomic, strong) NSMutableArray *listOfAlbums;
 @property (nonatomic, strong) NSMutableArray *listOfComments;
 @property (nonatomic, strong) NSMutableArray *listOfDescriptions;
+@property (nonatomic, strong) NSMutableArray *partialAlbums;
 
 + (Pack *)getPack:(int)packID;
 

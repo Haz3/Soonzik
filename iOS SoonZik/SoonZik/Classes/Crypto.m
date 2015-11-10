@@ -7,14 +7,68 @@
 //
 
 #import "Crypto.h"
+#import "User.h"
 
 @implementation Crypto
 
 + (NSString *)getKey:(int)userID {
-    NSString *url = [NSString stringWithFormat:@"%@getKey/%i", API_URL, userID];
-    NSDictionary *results = [Request getRequest:url];
-    NSLog(@"GET KEY : %@", results);
-    return [results objectForKey:@"key"];
+    NSData *userData = [[NSUserDefaults standardUserDefaults] objectForKey:@"User"];
+    User *user = [NSKeyedUnarchiver unarchiveObjectWithData:userData];
+    
+    bool need = false;
+    
+    if (user.secureKey == nil) {    // if secureKey is null
+        need = true;
+        NSLog(@"secure KEy is null");
+    } else {    // if secureKey is not null
+        
+        NSUInteger unitFlags = NSCalendarUnitHour | NSCalendarUnitMinute | NSCalendarUnitSecond;
+        NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+        NSDateComponents *components = [calendar components:unitFlags fromDate:user.secureKeyDate toDate:[NSDate date] options:0];
+        
+        NSLog(@"user.getDate : %@", user.secureKeyDate);
+        
+        NSLog(@"secureKey difference date : %iH:%iM:%iS", [components hour], [components minute], [components second]);
+        
+        if ([components hour] < 1) {
+            NSLog(@"PAS besoin de getkey");
+        } else {
+            NSLog(@"BESOIN de getkey");
+            need = true;
+        }
+    }
+    
+    if (need) {
+        
+        NSLog(@"NEEDEDDDDDD");
+        
+        NSString *url = [NSString stringWithFormat:@"%@getKey/%i", API_URL, userID];
+        NSDictionary *json = [Request getRequest:url];
+        NSLog(@"GET KEY : %@", json);
+        
+        NSString *stringDate = [json objectForKey:@"last_update"];
+        stringDate = [stringDate stringByReplacingOccurrencesOfString:@"T" withString:@" "];
+    stringDate = [stringDate stringByReplacingOccurrencesOfString:@"+00:00" withString:@""];
+        NSLog(@"string date : %@", stringDate);
+    
+        NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+        [dateFormat setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    
+        NSDate *date = [dateFormat dateFromString:stringDate];
+        NSLog(@"translated date : %@", date);
+        NSString *secureKey = [json objectForKey:@"key"];
+        
+        user.secureKeyDate = date;
+        user.secureKey = secureKey;
+        
+        NSData *dataStore = [NSKeyedArchiver archivedDataWithRootObject:user];
+        [[NSUserDefaults standardUserDefaults] setObject:dataStore forKey:@"User"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        
+        return secureKey;
+    }
+ 
+    return user.secureKey;
 }
 
 + (NSString*)sha256HashFor:(NSString*)input

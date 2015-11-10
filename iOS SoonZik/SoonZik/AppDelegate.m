@@ -41,11 +41,8 @@
     NSData *translateData = [[NSUserDefaults standardUserDefaults] objectForKey:@"Translate"];
     self.translate = [NSKeyedUnarchiver unarchiveObjectWithData:translateData];
     if (translateData == nil) {
-        NSLog(@"translateData is nil");
         [self getTranslationFile];
     }
-    
-    NSLog(@"%@", [self.translate.dict objectForKey:@"menu_news"]);
     
     [self initializeMenuSystem];
     [self initBasicGraphics];
@@ -103,11 +100,7 @@
         path = [[NSBundle mainBundle] pathForResource:@"TR_French" ofType:@"plist"];
     }
     
-    NSLog(@"language : %@", data[0]);
-    
     self.translate = [[Translate alloc] initWithPath:path];
-    
-    NSLog(@"self.translate: %@", [self.translate.dict objectForKey:@"menu_news"]);
     
     NSData *dataStore = [NSKeyedArchiver archivedDataWithRootObject:self.translate];
     [[NSUserDefaults standardUserDefaults] setObject:dataStore forKey:@"Translate"];
@@ -225,7 +218,6 @@
         [self.revealController setFrontViewController:frontNavigationController];
     } else if ([elem isKindOfClass:[Pack class]]) {
         Pack *pack = (Pack *)elem;
-        NSLog(@"pack %i", pack.identifier);
         PackDetailViewController *vc = [[PackDetailViewController alloc] initWithNibName:@"PackDetailViewController" bundle:nil];
         vc.pack = pack;
         vc.fromSearch = true;
@@ -373,18 +365,13 @@
 - (void)sessionStateChanged:(FBSession *)session state:(FBSessionState)state error:(NSError *)error
 {
     if (!error && state == FBSessionStateOpen){
-        NSLog(@"Session opened");
         
         [[FBRequest requestForMe] startWithCompletionHandler:^(FBRequestConnection *connection, NSDictionary<FBGraphUser> *u, NSError *error) {
             if (!error) {
                 
                 NSString *token = [[[FBSession activeSession] accessTokenData] accessToken];
-                
-                NSLog(@"facebook profile : %@", u);
-                
                 User *user =  [IdenticationsController facebookConnect:token email:[u objectForKey:@"email"] uid:[u objectForKey:@"id"]];
-                NSLog(@"user.username : %@", user.username);
-                
+
                 NSData *dataStore = [NSKeyedArchiver archivedDataWithRootObject:user];
                 [[NSUserDefaults standardUserDefaults] setObject:dataStore forKey:@"User"];
                 [[NSUserDefaults standardUserDefaults] synchronize];
@@ -394,33 +381,29 @@
         }];
     }
     if (state == FBSessionStateClosed || state == FBSessionStateClosedLoginFailed){
-        NSLog(@"Session closed");
+        
     }
     
     if (error){
-        NSLog(@"Error");
+       
         NSString *alertText;
         NSString *alertTitle;
         if ([FBErrorUtility shouldNotifyUserForError:error] == YES){
             alertTitle = @"Something went wrong";
             alertText = [FBErrorUtility userMessageForError:error];
-            NSLog(@"%@ => %@", alertTitle, alertText);
         } else {
             if ([FBErrorUtility errorCategoryForError:error] == FBErrorCategoryUserCancelled) {
-                NSLog(@"User cancelled login");
+            
             } else if ([FBErrorUtility errorCategoryForError:error] == FBErrorCategoryAuthenticationReopenSession){
                 alertTitle = @"Session Error";
                 alertText = @"Your current session is no longer valid. Please log in again.";
-                NSLog(@"%@ => %@", alertTitle, alertText);
             } else {
                 NSDictionary *errorInformation = [[[error.userInfo objectForKey:@"com.facebook.sdk:ParsedJSONResponseKey"] objectForKey:@"body"] objectForKey:@"error"];
                 alertTitle = @"Something went wrong";
                 alertText = [NSString stringWithFormat:@"Please retry. \n\n If the problem persists contact us and mention this error code: %@", [errorInformation objectForKey:@"message"]];
-                NSLog(@"%@ => %@", alertTitle, alertText);
             }
         }
         [FBSession.activeSession closeAndClearTokenInformation];
-        NSLog(@"Not logged");
     }
 }
 
@@ -431,7 +414,6 @@
 
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
 {
-    NSLog(@"url = %@", url);
     //NSLog(@"source application = %@", sourceApplication);
     //NSLog(@"type : %i", self.type);
     
@@ -451,7 +433,6 @@
 
 - (void)setTypeConnexion:(int)type
 {
-    NSLog(@"change type");
     self.type = type;
 }
 

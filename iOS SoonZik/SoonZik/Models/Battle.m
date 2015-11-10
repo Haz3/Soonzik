@@ -27,15 +27,12 @@
     self.voteArtistTwo = 0;
     for (int i=0; i<votes.count; i++) {
         NSDictionary *vote = [votes objectAtIndex:i];
-        NSLog(@"votes : %@", vote);
         if ([[vote objectForKey:@"artist_id"] intValue] == self.artistOne.identifier) {
             self.voteArtistOne += 1;
         } else if ([[vote objectForKey:@"artist_id"] intValue] == self.artistTwo.identifier) {
             self.voteArtistTwo += 1;
         }
     }
-    NSLog(@"self.voteArtistOne = %i", self.voteArtistOne);
-    NSLog(@"self.voteArtistTwo = %i", self.voteArtistTwo);
     
     return self;
 }

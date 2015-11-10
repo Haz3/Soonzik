@@ -54,9 +54,6 @@
     self.musics = [self getMusics];
     self.albums = [self getAlbums];
     
-   /* NSLog(@"self.musics.count : %i", self.musics.count);
-    NSLog(@"self.albums.count : %i", self.albums.count);*/
-    
     if (self.musics.count == 0 && self.albums.count == 0) {
         UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, self.view.frame.size.width - 20, self.view.frame.size.height / 2)];
         label.textAlignment = NSTextAlignmentCenter;
@@ -135,7 +132,6 @@
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-   // NSLog(@"number of sections : %i", [self getNumberOfSections]);
     return [self getNumberOfSections]+2;
 }
 
@@ -398,7 +394,6 @@
 }
 
 - (void)deleteCart:(CartDeleteButton *)button {
-  //  NSLog(@"delete item : %@", button);
     if ([CartController removeCart:button.cart.identifier]) {
         [[[SimplePopUp alloc] initWithMessage:[self.translate.dict objectForKey:@"cart_success_delete"] onView:self.view withSuccess:true] show];
         self.carts = [CartController getCart];
@@ -424,11 +419,9 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 2) {
         if ([self getNumberOfSections] == 1) {
-          //  NSLog(@"BUY");
             [self launchPaypal];
         }
     } else if (indexPath.section == 3) {
-        //NSLog(@"BUY");
         [self launchPaypal];
     }
 }

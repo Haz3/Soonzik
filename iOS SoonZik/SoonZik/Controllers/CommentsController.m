@@ -14,9 +14,7 @@
 + (NSMutableArray *)getCommentsFromNews:(News *)news {
     NSDictionary *json = [Request getRequest:[NSString stringWithFormat:@"%@news/%i/comments", API_URL, news.identifier]];
     NSMutableArray *listOfComments = [[NSMutableArray alloc] init];
-    
-    NSLog(@"json comments : %@", json);
-    
+
     for (NSDictionary *dict in [json objectForKey:@"content"]) {
         [listOfComments addObject:[[Com alloc] initWithJsonObject:dict]];
     }

@@ -39,15 +39,20 @@
         self.toUser.identifier = [[json objectForKey:@"dest_id"] intValue];
     }
     
+    NSLog(@"json : %@", json);
+    
     return self;
 }
 
-- (id)initWithSocket:(NSDictionary *)sock {
+- (id)initWithSocket:(NSString *)sock {
     self = [super init];
     
     self.fromMe = false;
-    self.fromUsername = [sock objectForKey:@"from"];
-    self.content = [sock objectForKey:@"message"];
+    NSLog(@"sock : %@", sock);
+    NSData *data = [sock dataUsingEncoding:NSUTF8StringEncoding];
+    id json = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+    self.fromUsername = [json objectForKey:@"from"];
+    self.content = [json objectForKey:@"message"];
     
     return self;
 }

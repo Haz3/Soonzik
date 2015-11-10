@@ -117,7 +117,6 @@
    if (!self.dataLoaded) {
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT,0),  ^{
             NSString *urlImage = [NSString stringWithFormat:@"%@assets/albums/%@", API_URL, self.album.image];
-            NSLog(@"url image : %@", urlImage);
             NSData *imageData = [[NSData alloc] initWithContentsOfURL: [NSURL URLWithString: urlImage]];
             
             dispatch_async(dispatch_get_main_queue(), ^{
@@ -262,8 +261,7 @@
     }
     
     [AudioPlayer sharedCenter].listeningList = self.player.listeningList;
-    
-    NSLog(@"TAILLLE : %i", self.player.listeningList.count);
+
     Music *music = [self.player.listeningList objectAtIndex:0];
     [self.player prepareSong:music.identifier];
 //    [self.player playSound];

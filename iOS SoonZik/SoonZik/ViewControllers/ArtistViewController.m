@@ -68,8 +68,6 @@
 {
     [super viewDidLoad];
     
-    NSLog(@"artist view controller");
-    
     NSData *userData = [[NSUserDefaults standardUserDefaults] objectForKey:@"User"];
     self.user = [NSKeyedUnarchiver unarchiveObjectWithData:userData];
     NSData *translateData = [[NSUserDefaults standardUserDefaults] objectForKey:@"Translate"];
@@ -116,17 +114,11 @@
                 self.followed = true;
             }
         }
-        NSLog(@"countttt : %i", self.user.friends.count);
         for (User *friend in self.user.friends) {
-            NSLog(@"friend.identifier : %i", friend.identifier);
-            NSLog(@"self.artist.identifier : %i", self.artist.identifier);
             if (friend.identifier == self.artist.identifier) {
-                
                 self.isFriend = true;
-                NSLog(@"it's a friend");
             }
         }
-        
         
         dispatch_async(dispatch_get_main_queue(), ^{
             //This block runs on main thread, so update UI
@@ -336,14 +328,10 @@
     unsigned int unitFlags = NSCalendarUnitDay | NSCalendarUnitMinute | NSCalendarUnitSecond | NSCalendarUnitHour;
     NSDateComponents *conversionInfo = [[[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian] components:unitFlags fromDate:tweet.date   toDate:[NSDate date]  options:0];
     
-    NSLog(@"msg date : %@", tweet.date);
-    
     int seconds = [conversionInfo second];
     int days = [conversionInfo day];
     int hours = [conversionInfo hour];
     int minutes = [conversionInfo minute];
-    
-    NSLog(@"%i %i:%i%i", days, hours, minutes, seconds);
     
     if (days < 1) {
         if (hours < 1) {

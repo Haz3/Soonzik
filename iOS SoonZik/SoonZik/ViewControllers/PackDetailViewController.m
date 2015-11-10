@@ -69,6 +69,10 @@
         //this block runs on a background thread; Do heavy operation here
         self.pack = [PacksController getPack:self.pack.identifier];
         
+        for (NSString *str in self.pack.partialAlbums) {
+            NSLog(@"partial albums id : %@", str);
+        }
+        
         dispatch_async(dispatch_get_main_queue(), ^{
             //This block runs on main thread, so update UI
             [self.spin stopAnimating];
