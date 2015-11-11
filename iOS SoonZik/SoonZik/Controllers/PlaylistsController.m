@@ -30,7 +30,7 @@
     User *user = (User *)[NSKeyedUnarchiver unarchiveObjectWithData:data];
     
     url = [NSString stringWithFormat:@"%@musics/addtoplaylist", API_URL];
-    key = [Crypto getKey:user.identifier];
+    key = [Crypto getKey];
     conca = [NSString stringWithFormat:@"%@%@", user.salt, key];
     secureKey = [Crypto sha256HashFor:conca];
     post = [NSString stringWithFormat:@"user_id=%i&secureKey=%@&id=%i&playlist_id=%i", user.identifier, secureKey, music.identifier, playlist.identifier];
@@ -49,7 +49,7 @@
     NSData *data = [[NSUserDefaults standardUserDefaults] objectForKey:@"User"];
     User *user = (User *)[NSKeyedUnarchiver unarchiveObjectWithData:data];
     
-    key = [Crypto getKey:user.identifier];
+    key = [Crypto getKey];
     conca = [NSString stringWithFormat:@"%@%@", user.salt, key];
     secureKey = [Crypto sha256HashFor:conca];
     

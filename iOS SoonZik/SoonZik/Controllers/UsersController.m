@@ -17,7 +17,7 @@
     User *user = (User *)[NSKeyedUnarchiver unarchiveObjectWithData:data];
     
     url = [NSString stringWithFormat:@"%@users/follow", API_URL];
-    key = [Crypto getKey:user.identifier];
+    key = [Crypto getKey];
     conca = [NSString stringWithFormat:@"%@%@", user.salt, key];
     secureKey = [Crypto sha256HashFor:conca];
     // NSLog(@"artist id : %i", artistId);
@@ -38,7 +38,7 @@
     User *user = (User *)[NSKeyedUnarchiver unarchiveObjectWithData:data];
     
     url = [NSString stringWithFormat:@"%@users/unfollow", API_URL];
-    key = [Crypto getKey:user.identifier];
+    key = [Crypto getKey];
     conca = [NSString stringWithFormat:@"%@%@", user.salt, key];
     secureKey = [Crypto sha256HashFor:conca];
     //NSLog(@"artist id : %i", artistId);
@@ -58,7 +58,7 @@
     User *user = (User *)[NSKeyedUnarchiver unarchiveObjectWithData:data];
     
     url = [NSString stringWithFormat:@"%@users/addfriend", API_URL];
-    key = [Crypto getKey:user.identifier];
+    key = [Crypto getKey];
     conca = [NSString stringWithFormat:@"%@%@", user.salt, key];
     secureKey = [Crypto sha256HashFor:conca];
     post = [NSString stringWithFormat:@"user_id=%i&secureKey=%@&friend_id=%i", user.identifier, secureKey, userID];
@@ -79,7 +79,7 @@
     User *user = (User *)[NSKeyedUnarchiver unarchiveObjectWithData:data];
     
     url = [NSString stringWithFormat:@"%@users/delfriend", API_URL];
-    key = [Crypto getKey:user.identifier];
+    key = [Crypto getKey];
     conca = [NSString stringWithFormat:@"%@%@", user.salt, key];
     secureKey = [Crypto sha256HashFor:conca];
     post = [NSString stringWithFormat:@"user_id=%i&secureKey=%@&friend_id=%i", user.identifier, secureKey, userID];
@@ -161,13 +161,20 @@
     NSData *data = [[NSUserDefaults standardUserDefaults] objectForKey:@"User"];
     User *user = (User *)[NSKeyedUnarchiver unarchiveObjectWithData:data];
     
-    key = [Crypto getKey:user.identifier];
+    NSLog(@"key : %@", user.secureKey);
+    key = [Crypto getKey];
+    NSLog(@"key : %@", user.secureKey);
+    
+    
     conca = [NSString stringWithFormat:@"%@%@", user.salt, key];
     secureKey = [Crypto sha256HashFor:conca];
     
     url = [NSString stringWithFormat:@"%@users/getmusics?user_id=%i&secureKey=%@", API_URL, user.identifier, secureKey];
+    NSLog(@"url : %@", url);
     
     NSDictionary *json = [Request getRequest:url];
+    
+    //NSLog(@"json get content : %@", json);
     
     NSDictionary *content = [json objectForKey:@"content"];
     NSArray *listOfMusics = [content objectForKey:@"musics"];
@@ -225,7 +232,7 @@
     NSString *conca;
     NSString *secureKey;
     
-    key = [Crypto getKey:user.identifier];
+    key = [Crypto getKey];
     conca = [NSString stringWithFormat:@"%@%@", user.salt, key];
     secureKey = [Crypto sha256HashFor:conca];
     url = [NSString stringWithFormat:@"%@users/update", API_URL];

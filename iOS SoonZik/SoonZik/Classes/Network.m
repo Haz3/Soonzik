@@ -89,7 +89,7 @@
     if ([elem isKindOfClass:[Playlist class]]) {
         url = [NSString stringWithFormat:@"%@playlists/save", API_URL];
         Playlist *playlist = (Playlist *)elem;
-        key = [Crypto getKey:user.identifier];
+        key = [Crypto getKey];
         conca = [NSString stringWithFormat:@"%@%@", user.salt, key];
         secureKey = [Crypto sha256HashFor:conca];
         post = [NSString stringWithFormat:@"user_id=%i&secureKey=%@&playlist[user_id]=%i&playlist[name]=%@", user.identifier, secureKey, user.identifier, playlist.title];
@@ -110,7 +110,7 @@
     
     if ([elem isKindOfClass:[Playlist class]]) {
         Playlist *playlist = (Playlist *)elem;
-        key = [Crypto getKey:user.identifier];  
+        key = [Crypto getKey];  
         conca = [NSString stringWithFormat:@"%@%@", user.salt, key];
         secureKey = [Crypto sha256HashFor:conca];
         url = [NSString stringWithFormat:@"%@playlists/destroy?user_id=%i&secureKey=%@&id=%i", API_URL, user.identifier, secureKey, playlist.identifier];

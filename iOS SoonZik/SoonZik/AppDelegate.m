@@ -40,9 +40,9 @@
     
     NSData *translateData = [[NSUserDefaults standardUserDefaults] objectForKey:@"Translate"];
     self.translate = [NSKeyedUnarchiver unarchiveObjectWithData:translateData];
-    if (translateData == nil) {
+   // if (translateData == nil) {
         [self getTranslationFile];
-    }
+   // }
     
     [self initializeMenuSystem];
     [self initBasicGraphics];

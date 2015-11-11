@@ -49,12 +49,11 @@
     
     self.avgPrice = [[json objectForKey:@"averagePrice"] floatValue];
     
-    /*self.partialAlbums = [[NSMutableArray alloc] init];
-    NSLog(@"%@", [json objectForKey:@"partial_albums"]);
+    self.partialAlbums = [[NSMutableArray alloc] init];
     NSArray *partial = [json objectForKey:@"partial_albums"];
     for (NSDictionary *dic in partial) {
         [self.partialAlbums addObject:[dic objectForKey:@"album_id"]];
-    }*/
+    }
     
     return self;
 }

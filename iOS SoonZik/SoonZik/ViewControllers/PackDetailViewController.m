@@ -60,6 +60,11 @@
     }
 }
 
+- (void)closeKeyboard {
+    [self.textField resignFirstResponder];
+    [self.tableView reloadData];
+}
+
 - (void)getData {
     self.spin = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
     self.spin.center = self.view.center;
@@ -68,10 +73,6 @@
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT,0),  ^{
         //this block runs on a background thread; Do heavy operation here
         self.pack = [PacksController getPack:self.pack.identifier];
-        
-        for (NSString *str in self.pack.partialAlbums) {
-            NSLog(@"partial albums id : %@", str);
-        }
         
         dispatch_async(dispatch_get_main_queue(), ^{
             //This block runs on main thread, so update UI
@@ -107,8 +108,12 @@
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     if (section == 0) {
+        [self.textField removeFromSuperview];
+        
         HeaderPackDetailView *view = (HeaderPackDetailView *)[[[NSBundle mainBundle] loadNibNamed:@"HeaderPackDetailView" owner:self options:nil] firstObject];
         [view initHeader:self.pack];
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(closeKeyboard)];
+        [view addGestureRecognizer:tap];
         return view;
     }
     
@@ -152,6 +157,21 @@
         }
         cell.albumLabel.text = album.title;
         cell.artistLabel.text = album.artist.username;
+        cell.albumLabel.textColor = [UIColor whiteColor];
+        cell.artistLabel.textColor = [UIColor whiteColor];
+        
+        NSLog(@"self.price : %f", self.price);
+        NSLog(@"self.pack.avgPrice : %f", self.pack.avgPrice);
+        
+        if (self.price < self.pack.avgPrice) {
+            for (NSNumber *iden in self.pack.partialAlbums) {
+                if ([iden intValue] == album.identifier) {
+                    cell.albumLabel.textColor = [UIColor blackColor];
+                    cell.artistLabel.textColor = [UIColor blackColor];
+                }
+            }
+        }
+        
         cell.backgroundColor = [UIColor clearColor];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
@@ -232,6 +252,7 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSLog(@"Select %i", indexPath.section);
     if (indexPath.section == 3) {
         RepartitionAmountViewController *vc = [[RepartitionAmountViewController alloc] initWithNibName:@"RepartitionAmountViewController" bundle:nil];
         vc.price = self.price;
@@ -259,9 +280,17 @@
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
     NSLog(@"replacement string : %@", string);
-    NSString *before = textField.text;
-    NSString *after = [NSString stringWithFormat:@"%@%@", before, string];
-    self.price = after.floatValue;
+    if ([string isEqualToString:@""]) {
+        NSString *after = [textField.text substringToIndex:[textField.text length]-1];
+        //textField.text = after;
+        self.price = after.floatValue;
+    } else {
+        NSString *before = textField.text;
+        NSString *after = [NSString stringWithFormat:@"%@%@", before, string];
+        //textField.text = after;
+        self.price = after.floatValue;
+    }
+   
     [self checkPrice];
     return true;
 }
@@ -278,7 +307,7 @@
 }
 
 - (BOOL)textFieldShouldEndEditing:(UITextField *)textField {
-    [textField resignFirstResponder];
+    
     return true;
 }
 

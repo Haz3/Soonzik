@@ -185,7 +185,7 @@
 	<key>cart_success_delete</key>
 	<string>The item has been successfuly deleted</string>
 	<key>pack_average_message</key>
-	<string>If you spend more or the same amount as the other users, you will own all the content of this pack</string>
+	<string>If you spend more or the same amount as the other users, you will unlock all the albums</string>
 	<key>pack_average</key>
 	<string>The average is %.2f€</string>
 	<key>payment_title_success</key>

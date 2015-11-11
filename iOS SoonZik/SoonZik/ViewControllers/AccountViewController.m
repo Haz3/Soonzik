@@ -170,7 +170,7 @@
     NSData *data = [[NSUserDefaults standardUserDefaults] objectForKey:@"User"];
     User *user = (User *)[NSKeyedUnarchiver unarchiveObjectWithData:data];
     url = [NSString stringWithFormat:@"%@users/upload", API_URL];
-    key = [Crypto getKey:user.identifier];
+    key = [Crypto getKey];
     conca = [NSString stringWithFormat:@"%@%@", user.salt, key];
     secureKey = [Crypto sha256HashFor:conca];
     post = [NSString stringWithFormat:@"user_id=%i&secureKey=%@&type=image&file[content_type]=%@&file[original_filename]=%@&file[tempfile]=%@&device=smartphone", user.identifier, secureKey, imageFormat, imageName, imageData];

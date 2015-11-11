@@ -45,7 +45,7 @@ static AudioPlayer *sharedInstance = nil;
 {
     NSData *data = [[NSUserDefaults standardUserDefaults] objectForKey:@"User"];
     User *user = (User *)[NSKeyedUnarchiver unarchiveObjectWithData:data];
-    NSString *key = [Crypto getKey:user.identifier];
+    NSString *key = [Crypto getKey];
     NSString *conca = [NSString stringWithFormat:@"%@%@", user.salt, key];
     NSString *secureKey = [Crypto sha256HashFor:conca];
     NSString *url = [NSString stringWithFormat:@"%@musics/get/%i?user_id=%i&secureKey=%@", API_URL, identifier, user.identifier, secureKey];

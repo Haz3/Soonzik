@@ -26,7 +26,7 @@
 @property (nonatomic, strong) NSMutableArray *followers;
 @property (nonatomic, strong) NSMutableArray *friends;
 
-@property (nonatomic, strong) NSDate *secureKeyDate;
+@property (nonatomic, strong) NSString *secureKeyDate;
 @property (nonatomic, strong) NSString *secureKey;
 
 @property (nonatomic, strong) NSString *password;

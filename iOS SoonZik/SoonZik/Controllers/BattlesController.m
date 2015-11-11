@@ -35,7 +35,7 @@
     User *user = (User *)[NSKeyedUnarchiver unarchiveObjectWithData:data];
     
     url = [NSString stringWithFormat:@"%@battles/%i/vote", API_URL, battleID];
-    key = [Crypto getKey:user.identifier];
+    key = [Crypto getKey];
     conca = [NSString stringWithFormat:@"%@%@", user.salt, key];
     secureKey = [Crypto sha256HashFor:conca];
     post = [NSString stringWithFormat:@"user_id=%i&secureKey=%@&artist_id=%i", user.identifier, secureKey, artistID];

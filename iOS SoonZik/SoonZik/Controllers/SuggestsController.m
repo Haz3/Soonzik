@@ -18,7 +18,7 @@
     NSData *data = [[NSUserDefaults standardUserDefaults] objectForKey:@"User"];
     User *user = (User *)[NSKeyedUnarchiver unarchiveObjectWithData:data];
     
-    key = [Crypto getKey:user.identifier];
+    key = [Crypto getKey];
     conca = [NSString stringWithFormat:@"%@%@", user.salt, key];
     secureKey = [Crypto sha256HashFor:conca];
     url = [NSString stringWithFormat:@"%@suggestv2?type=%@&limit=%i", API_URL, type, 30];

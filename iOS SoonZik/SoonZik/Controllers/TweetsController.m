@@ -18,7 +18,7 @@
     User *user = (User *)[NSKeyedUnarchiver unarchiveObjectWithData:data];
     
     url = [NSString stringWithFormat:@"%@tweets/save", API_URL];
-    key = [Crypto getKey:user.identifier];
+    key = [Crypto getKey];
     conca = [NSString stringWithFormat:@"%@%@", user.salt, key];
     secureKey = [Crypto sha256HashFor:conca];
     post = [NSString stringWithFormat:@"user_id=%i&secureKey=%@&tweet[user_id]=%i&tweet[msg]=%@", user.identifier, secureKey, user.identifier, message];
@@ -39,7 +39,7 @@
     NSMutableArray *arr = [[NSMutableArray alloc] init];
     
     url = [NSString stringWithFormat:@"%@tweets/find?attribute[user_id]=%i", API_URL, userId];
-    key = [Crypto getKey:user.identifier];
+    key = [Crypto getKey];
     conca = [NSString stringWithFormat:@"%@%@", user.salt, key];
     secureKey = [Crypto sha256HashFor:conca];
     
