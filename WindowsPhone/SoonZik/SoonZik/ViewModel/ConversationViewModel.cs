@@ -16,6 +16,7 @@ using Newtonsoft.Json;
 using SoonZik.Helpers;
 using SoonZik.HttpRequest;
 using SoonZik.HttpRequest.Poco;
+using SoonZik.Utils;
 using WebSocketRails;
 
 namespace SoonZik.ViewModel
@@ -145,39 +146,31 @@ namespace SoonZik.ViewModel
         {
             ListMessages = new ObservableCollection<Message>();
             var request = new HttpRequestGet();
-            var userKey = request.GetUserKey(Singleton.Singleton.Instance().CurrentUser.id.ToString());
-            userKey.ContinueWith(delegate(Task<object> task)
+
+            ValidateKey.GetValideKey();
+            var resDel = request.GetConversation(FriendUser, Singleton.Singleton.Instance().SecureKey, Singleton.Singleton.Instance().CurrentUser, new List<Message>());
+            resDel.ContinueWith(delegate(Task<object> tmp)
             {
-                var _key = task.Result as string;
-                if (_key != null)
+                var test = tmp.Result as List<Message>;
+                if (test != null)
                 {
-                    var stringEncrypt = KeyHelpers.GetUserKeyFromResponse(_key);
-                    _cryptographic = EncriptSha256.EncriptStringToSha256(Singleton.Singleton.Instance().CurrentUser.salt + stringEncrypt);
-                    var resDel = request.GetConversation(FriendUser, _cryptographic, Singleton.Singleton.Instance().CurrentUser, new List<Message>());
-                    resDel.ContinueWith(delegate(Task<object> tmp)
-                    {
-                        var test = tmp.Result as List<Message>;
-                        if (test != null)
+                    CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
+                        () =>
                         {
-                            CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
-                                () =>
+                            foreach (var message in test)
+                            {
+                                if (message.dest_id == Singleton.Singleton.Instance().CurrentUser.id)
                                 {
-                                    foreach (var message in test)
-                                    {
-                                        if (message.dest_id == Singleton.Singleton.Instance().CurrentUser.id)
-                                        {
-                                            message.type = "recu";
-                                            ListMessages.Add(message);
-                                        }
-                                        else
-                                        {
-                                            message.type = "envoye";
-                                            ListMessages.Add(message);
-                                        }
-                                    }
-                                });
-                        }
-                    });
+                                    message.type = "recu";
+                                    ListMessages.Add(message);
+                                }
+                                else
+                                {
+                                    message.type = "envoye";
+                                    ListMessages.Add(message);
+                                }
+                            }
+                        });
                 }
             });
         }
@@ -186,35 +179,27 @@ namespace SoonZik.ViewModel
         {
 
             var request = new HttpRequestGet();
-            var userKey = request.GetUserKey(Singleton.Singleton.Instance().CurrentUser.id.ToString());
-            userKey.ContinueWith(delegate(Task<object> task)
+
+            ValidateKey.GetValideKey();
+
+            var init = new InitConnection
             {
-                _key = task.Result as string;
-                if (_key != null)
-                {
-                    var stringEncrypt = KeyHelpers.GetUserKeyFromResponse(_key);
-                    _cryptographic = EncriptSha256.EncriptStringToSha256(Singleton.Singleton.Instance().CurrentUser.salt + stringEncrypt);
+                sercureKey = Singleton.Singleton.Instance().SecureKey,
+                user_id = Singleton.Singleton.Instance().CurrentUser.id
+            };
 
-                    var init = new InitConnection
-                    {
-                        sercureKey = _cryptographic,
-                        user_id = Singleton.Singleton.Instance().CurrentUser.id
-                    };
+            var dispatcher = new WebSocketRailsDispatcher(new Uri("ws://soonzikapi.herokuapp.com/websocket", UriKind.RelativeOrAbsolute));
+            var json = JsonConvert.SerializeObject(init);
+            dispatcher.ConnectionEstablished(init);
+            //trigger
+            dispatcher.Trigger("init_connection", init);
+            dispatcher.Trigger("who_is_online", init);
 
-                    var dispatcher = new WebSocketRailsDispatcher(new Uri("ws://soonzikapi.herokuapp.com/websocket", UriKind.RelativeOrAbsolute));
-                    var json = JsonConvert.SerializeObject(init);
-                    dispatcher.ConnectionEstablished(init);
-                    //trigger
-                    dispatcher.Trigger("init_connection", init);
-                    dispatcher.Trigger("who_is_online", init);
+            //Bind
+            dispatcher.Bind("onlineFriends", OnlineFriend);
+            dispatcher.Bind("newMsg", MessageReceived);
 
-                    //Bind
-                    dispatcher.Bind("onlineFriends", OnlineFriend);
-                    dispatcher.Bind("newMsg", MessageReceived);
-                }
-            });
-
-                #region Test Avant
+            #region Test Avant
 
             /*try
             {

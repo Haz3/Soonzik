@@ -28,11 +28,11 @@
         <Grid Grid.Row="0">
             <Image x:Name="UserImage" Grid.Row="0" Height="150" Width="150" VerticalAlignment="Center"
                    HorizontalAlignment="Left" Margin="20,0,0,0" Source="{Binding CurrentUser.profilImage}">
-                <interactivity:Interaction.Behaviors>
+                <!--<interactivity:Interaction.Behaviors>
                     <core:EventTriggerBehavior EventName="Tapped">
                         <core:InvokeCommandAction Command="{Binding TappedCommand}" />
                     </core:EventTriggerBehavior>
-                </interactivity:Interaction.Behaviors>
+                </interactivity:Interaction.Behaviors>-->
             </Image>
             <TextBlock x:Name="FirstNameUser" Grid.Row="0" Height="50" Foreground="White" HorizontalAlignment="Right"
                        VerticalAlignment="Center" Margin="0, 0, 20, 0"

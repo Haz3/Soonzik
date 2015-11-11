@@ -6,6 +6,7 @@ using Windows.UI.Xaml.Controls;
 using SoonZik.Helpers;
 using SoonZik.HttpRequest;
 using SoonZik.HttpRequest.Poco;
+using SoonZik.Utils;
 using SoonZik.ViewModel;
 
 // Pour en savoir plus sur le modèle d'élément Contrôle utilisateur, consultez la page http://go.microsoft.com/fwlink/?LinkId=234236
@@ -15,8 +16,6 @@ namespace SoonZik.Controls
     public sealed partial class NotationMusic : UserControl
     {
         public static Music SelectMusic { get; set; }
-        private string _key;
-        private string _cryptographic;
         public NotationMusic()
         {
             this.InitializeComponent();
@@ -37,29 +36,17 @@ namespace SoonZik.Controls
                 note = 5;
 
             var request2 = new HttpRequestPost();
-            var request = new HttpRequestGet();
-            var userKey = request.GetUserKey(Singleton.Singleton.Instance().CurrentUser.id.ToString());
-            userKey.ContinueWith(delegate(Task<object> task)
+
+            ValidateKey.GetValideKey();
+            var res = request2.SetRate(SelectMusic, Singleton.Singleton.Instance().SecureKey, Singleton.Singleton.Instance().CurrentUser.id.ToString(), note);
+            res.ContinueWith(delegate(Task<string> tmp)
             {
-                _key = task.Result as string;
-                if (_key != null)
+                if (tmp.Result != null)
                 {
-                    var stringEncrypt = KeyHelpers.GetUserKeyFromResponse(_key);
-                    _cryptographic = EncriptSha256.EncriptStringToSha256(Singleton.Singleton.Instance().CurrentUser.salt +
-                                                            stringEncrypt);
 
-                    var res = request2.SetRate(SelectMusic, _cryptographic,
-                        Singleton.Singleton.Instance().CurrentUser.id.ToString(), note);
-                    res.ContinueWith(delegate(Task<string> tmp)
+                    CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
                     {
-                        if (tmp.Result != null)
-                        {
-
-                            CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
-                            {
-                                AlbumViewModel.RatePopup.IsOpen = false;
-                            });
-                        }
+                        AlbumViewModel.RatePopup.IsOpen = false;
                     });
                 }
             });

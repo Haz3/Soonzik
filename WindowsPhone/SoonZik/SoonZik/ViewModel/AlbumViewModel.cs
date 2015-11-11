@@ -26,15 +26,9 @@ namespace SoonZik.ViewModel
 
         public AlbumViewModel()
         {
-            if (MyAlbum != null)
-            {
-                _navigationService = new NavigationService();
-                ItemClickCommand = new RelayCommand(ItemClickCommandExecute);
-            }
             SelectionCommand = new RelayCommand(SelectionExecute);
             SendComment = new RelayCommand(SendCommentExecute);
             AddToCart = new RelayCommand(AddToCartExecute);
-            RatingValueChange = new RelayCommand(RatingValueChangeExecute);
             PlayCommand = new RelayCommand(PlayCommandExecute);
             AddToPlaylist = new RelayCommand(AddToPlaylistExecute);
             AddMusicToCart = new RelayCommand(AddMusicToCartExecute);
@@ -44,13 +38,13 @@ namespace SoonZik.ViewModel
         private void RateMusicExecute()
         {
             NotationMusic.SelectMusic = SelectedMusic;
-            RatePopup= new Popup();
+            RatePopup = new Popup();
             var content = new NotationMusic();
             width = content.Width;
             height = content.Height;
             RatePopup.Child = content;
-            RatePopup.VerticalOffset = (Window.Current.Bounds.Height - height) /2;
-            RatePopup.HorizontalOffset = (Window.Current.Bounds.Width - width)/2;
+            RatePopup.VerticalOffset = (Window.Current.Bounds.Height - height) / 2;
+            RatePopup.HorizontalOffset = (Window.Current.Bounds.Width - width) / 2;
             RatePopup.IsOpen = true;
             RatePopup.Closed += RatePopupOnClosed;
         }
@@ -132,7 +126,6 @@ namespace SoonZik.ViewModel
 
         private string _crypto;
         private string _cryptographic { get; set; }
-        private bool _moreOption;
         private string _textComment;
 
         public string TextComment
@@ -175,32 +168,19 @@ namespace SoonZik.ViewModel
 
         private void SendCommentExecute()
         {
-            var request = new HttpRequestGet();
             var post = new HttpRequestPost();
             try
             {
-                var userKey = request.GetUserKey(Singleton.Singleton.Instance().CurrentUser.id.ToString());
-                userKey.ContinueWith(delegate(Task<object> task)
+                ValidateKey.GetValideKey();
+                var test = post.SendComment(TextComment, TheAlbum, null, Singleton.Singleton.Instance().SecureKey, Singleton.Singleton.Instance().CurrentUser);
+                test.ContinueWith(delegate(Task<string> tmp)
                 {
-                    var key = task.Result as string;
-                    if (key != null)
+                    var res = tmp.Result;
+                    if (res != null)
                     {
-                        var stringEncrypt = KeyHelpers.GetUserKeyFromResponse(key);
-                        _crypto =
-                            EncriptSha256.EncriptStringToSha256(Singleton.Singleton.Instance().CurrentUser.salt +
-                                                                stringEncrypt);
+                        CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
+                            LoadComment);
                     }
-                    var test = post.SendComment(TextComment, TheAlbum, null, _crypto,
-                        Singleton.Singleton.Instance().CurrentUser);
-                    test.ContinueWith(delegate(Task<string> tmp)
-                    {
-                        var res = tmp.Result;
-                        if (res != null)
-                        {
-                            CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
-                                LoadComment);
-                        }
-                    });
                 });
             }
             catch (Exception)
@@ -216,67 +196,27 @@ namespace SoonZik.ViewModel
             Charge();
         }
 
-        private void ItemClickCommandExecute()
-        {
-            if (!_moreOption)
-            {
-                //LocalFolderHelper.Delete();
-                Singleton.Singleton.Instance().SelectedMusicSingleton.Add(SelectedMusic);
-                GlobalMenuControl.SetChildren(new BackgroundAudioPlayer());
-            }
-            //_navigationService.Navigate(new PlayerControl().GetType());
-            else
-                _moreOption = false;
-        }
-
         private void AddToCartExecute()
         {
-            var request = new HttpRequestGet();
             var post = new HttpRequestPost();
-            _cryptographic = "";
-            var userKey2 = request.GetUserKey(Singleton.Singleton.Instance().CurrentUser.id.ToString());
-            userKey2.ContinueWith(delegate(Task<object> task2)
+            ValidateKey.GetValideKey();
+            var res = post.SaveCart(null, TheAlbum, Singleton.Singleton.Instance().SecureKey, Singleton.Singleton.Instance().CurrentUser);
+            res.ContinueWith(delegate(Task<string> tmp2)
             {
-                var key2 = task2.Result as string;
-                if (key2 != null)
+                var res2 = tmp2.Result;
+                if (res2 != null)
                 {
-                    var stringEncrypt = KeyHelpers.GetUserKeyFromResponse(key2);
-                    _cryptographic =
-                        EncriptSha256.EncriptStringToSha256(Singleton.Singleton.Instance().CurrentUser.salt +
-                                                            stringEncrypt);
+                    CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
+                        () => { new MessageDialog("Article ajoute au panier").ShowAsync(); });
                 }
-                var res = post.SaveCart(null, TheAlbum, _cryptographic, Singleton.Singleton.Instance().CurrentUser);
-                res.ContinueWith(delegate(Task<string> tmp2)
-                {
-                    var res2 = tmp2.Result;
-                    if (res2 != null)
-                    {
-                        CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
-                            () => { new MessageDialog("Article ajoute au panier").ShowAsync(); });
-                    }
-                });
             });
         }
 
         public void Charge()
         {
             ListMusics = new ObservableCollection<Music>();
-            var request = new HttpRequestGet();
-            var album = request.GetObject(new Album(), "albums", MyAlbum.id.ToString());
-            album.ContinueWith(delegate(Task<object> tmp)
-            {
-                var test = tmp.Result as Album;
-                if (test != null)
-                {
-                    CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
-                    {
-                        foreach (var music in test.musics)
-                        {
-                            ListMusics.Add(music);
-                        }
-                    });
-                }
-            });
+            TheAlbum = MyAlbum;
+            ListMusics = TheAlbum.musics;
             LoadComment();
         }
 
@@ -303,11 +243,6 @@ namespace SoonZik.ViewModel
             });
         }
 
-        private void RatingValueChangeExecute()
-        {
-            var test = SelectedMusic.getAverageNote;
-        }
-
         private void PlayCommandExecute()
         {
             var request = new HttpRequestGet();
@@ -332,30 +267,17 @@ namespace SoonZik.ViewModel
         private void AddMusicToCartExecute()
         {
             _selectedMusic = SelectedMusic;
-            var request = new HttpRequestGet();
             var post = new HttpRequestPost();
-            _cryptographic = "";
-            var userKey2 = request.GetUserKey(Singleton.Singleton.Instance().CurrentUser.id.ToString());
-            userKey2.ContinueWith(delegate(Task<object> task2)
+            ValidateKey.GetValideKey();
+            var res = post.SaveCart(_selectedMusic, null, Singleton.Singleton.Instance().SecureKey, Singleton.Singleton.Instance().CurrentUser);
+            res.ContinueWith(delegate(Task<string> tmp2)
             {
-                var key2 = task2.Result as string;
-                if (key2 != null)
+                var res2 = tmp2.Result;
+                if (res2 != null)
                 {
-                    var stringEncrypt = KeyHelpers.GetUserKeyFromResponse(key2);
-                    _cryptographic =
-                        EncriptSha256.EncriptStringToSha256(Singleton.Singleton.Instance().CurrentUser.salt +
-                                                            stringEncrypt);
+                    CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
+                        () => { new MessageDialog("Article ajoute au panier").ShowAsync(); });
                 }
-                var res = post.SaveCart(_selectedMusic, null, _cryptographic, Singleton.Singleton.Instance().CurrentUser);
-                res.ContinueWith(delegate(Task<string> tmp2)
-                {
-                    var res2 = tmp2.Result;
-                    if (res2 != null)
-                    {
-                        CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
-                            () => { new MessageDialog("Article ajoute au panier").ShowAsync(); });
-                    }
-                });
             });
         }
 

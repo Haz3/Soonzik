@@ -66,6 +66,9 @@ namespace SoonZik.Singleton
 
         public FacebookClient MyFacebookClient { get; set; }
 
+        public Key Key { get; set; }
+
+        public string SecureKey { get; set; }
         #endregion
     }
 }

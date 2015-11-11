@@ -17,6 +17,7 @@ using SoonZik.Controls;
 using SoonZik.Helpers;
 using SoonZik.HttpRequest;
 using SoonZik.HttpRequest.Poco;
+using SoonZik.Utils;
 
 namespace SoonZik.ViewModel
 {
@@ -164,32 +165,20 @@ namespace SoonZik.ViewModel
 
         private void SendCommentExecute()
         {
-            var request = new HttpRequestGet();
             var post = new HttpRequestPost();
             try
             {
-                var userKey = request.GetUserKey(Singleton.Singleton.Instance().CurrentUser.id.ToString());
-                userKey.ContinueWith(delegate(Task<object> task)
+                ValidateKey.GetValideKey();
+                var test = post.SendComment(TextComment, null, SelectNews, Singleton.Singleton.Instance().SecureKey,
+                    Singleton.Singleton.Instance().CurrentUser);
+                test.ContinueWith(delegate(Task<string> tmp)
                 {
-                    var key = task.Result as string;
-                    if (key != null)
+                    var res = tmp.Result;
+                    if (res != null)
                     {
-                        var stringEncrypt = KeyHelpers.GetUserKeyFromResponse(key);
-                        _crypto =
-                            EncriptSha256.EncriptStringToSha256(Singleton.Singleton.Instance().CurrentUser.salt +
-                                                                stringEncrypt);
+                        CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
+                            LoadComment);
                     }
-                    var test = post.SendComment(TextComment, null, SelectNews, _crypto,
-                        Singleton.Singleton.Instance().CurrentUser);
-                    test.ContinueWith(delegate(Task<string> tmp)
-                    {
-                        var res = tmp.Result;
-                        if (res != null)
-                        {
-                            CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
-                                LoadComment);
-                        }
-                    });
                 });
             }
             catch (Exception)

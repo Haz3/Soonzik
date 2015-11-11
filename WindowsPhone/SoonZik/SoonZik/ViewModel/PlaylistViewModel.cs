@@ -14,6 +14,7 @@ using SoonZik.Controls;
 using SoonZik.Helpers;
 using SoonZik.HttpRequest;
 using SoonZik.HttpRequest.Poco;
+using SoonZik.Utils;
 using SoonZik.Views;
 
 namespace SoonZik.ViewModel
@@ -122,8 +123,8 @@ namespace SoonZik.ViewModel
         private string _cryptocraphic { get; set; }
         #endregion
 
-        #region Method       
-        
+        #region Method
+
         private void RenameCommandExecute()
         {
             if (!BoolRename)
@@ -135,32 +136,21 @@ namespace SoonZik.ViewModel
             if (BoolRename)
             {
                 RenameButton = "Rename";
-                // TODO save the playlist name
                 var request2 = new HttpRequestPost();
-                var request = new HttpRequestGet();
-                var userKey = request.GetUserKey(Singleton.Singleton.Instance().CurrentUser.id.ToString());
-                userKey.ContinueWith(delegate(Task<object> task)
-                {
-                    _key = task.Result as string;
-                    if (_key != null)
-                    {
-                        var stringEncrypt = KeyHelpers.GetUserKeyFromResponse(_key);
-                        _cryptographic = EncriptSha256.EncriptStringToSha256(Singleton.Singleton.Instance().CurrentUser.salt +
-                                                                stringEncrypt);
 
-                        var res = request2.UpdateNamePlaylist(ThePlaylist, _cryptographic, Singleton.Singleton.Instance().CurrentUser);
-                        res.ContinueWith(delegate(Task<string> tmp)
-                        {
-                            if (tmp.Result != null)
-                            {
-                                CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
-                                    () =>
-                                        ThePlaylist =
-                                            (Playlist)
-                                                JsonConvert.DeserializeObject(tmp.Result.ToString(), typeof (Playlist))
-                                                );
-                            }
-                        });
+                ValidateKey.GetValideKey();
+
+                var res = request2.UpdateNamePlaylist(ThePlaylist, Singleton.Singleton.Instance().SecureKey, Singleton.Singleton.Instance().CurrentUser);
+                res.ContinueWith(delegate(Task<string> tmp)
+                {
+                    if (tmp.Result != null)
+                    {
+                        CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
+                            () =>
+                                ThePlaylist =
+                                    (Playlist)
+                                        JsonConvert.DeserializeObject(tmp.Result.ToString(), typeof(Playlist))
+                                        );
                     }
                 });
                 BoolRename = false;
@@ -244,30 +234,18 @@ namespace SoonZik.ViewModel
         private void AddMusicToCartExecute()
         {
             _selectedMusic = SelectedMusic;
-            var request = new HttpRequestGet();
             var post = new HttpRequestPost();
-            _cryptographic = "";
-            var userKey2 = request.GetUserKey(Singleton.Singleton.Instance().CurrentUser.id.ToString());
-            userKey2.ContinueWith(delegate(Task<object> task2)
+
+            ValidateKey.GetValideKey();
+            var res = post.SaveCart(_selectedMusic, null, Singleton.Singleton.Instance().SecureKey, Singleton.Singleton.Instance().CurrentUser);
+            res.ContinueWith(delegate(Task<string> tmp2)
             {
-                var key2 = task2.Result as string;
-                if (key2 != null)
+                var res2 = tmp2.Result;
+                if (res2 != null)
                 {
-                    var stringEncrypt = KeyHelpers.GetUserKeyFromResponse(key2);
-                    _cryptographic =
-                        EncriptSha256.EncriptStringToSha256(Singleton.Singleton.Instance().CurrentUser.salt +
-                                                            stringEncrypt);
+                    CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
+                        () => { new MessageDialog("Article ajoute au panier").ShowAsync(); });
                 }
-                var res = post.SaveCart(_selectedMusic, null, _cryptographic, Singleton.Singleton.Instance().CurrentUser);
-                res.ContinueWith(delegate(Task<string> tmp2)
-                {
-                    var res2 = tmp2.Result;
-                    if (res2 != null)
-                    {
-                        CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
-                            () => { new MessageDialog("Article ajoute au panier").ShowAsync(); });
-                    }
-                });
             });
         }
 
@@ -277,41 +255,30 @@ namespace SoonZik.ViewModel
             {
                 _selectedMusic = SelectedMusic;
                 var request = new HttpRequestGet();
-                var userKey = request.GetUserKey(Singleton.Singleton.Instance().CurrentUser.id.ToString());
-                userKey.ContinueWith(delegate(Task<object> task)
+
+                ValidateKey.GetValideKey();
+                var resDel = request.DeleteMusicFromPlaylist(ThePlaylist, _selectedMusic, Singleton.Singleton.Instance().SecureKey,
+                    Singleton.Singleton.Instance().CurrentUser);
+
+                resDel.ContinueWith(delegate(Task<string> tmp)
                 {
-                    var _key = task.Result as string;
-                    if (_key != null)
+                    var test = tmp.Result;
+                    if (test != null)
                     {
-                        var stringEncrypt = KeyHelpers.GetUserKeyFromResponse(_key);
-                        _cryptographic =
-                            EncriptSha256.EncriptStringToSha256(Singleton.Singleton.Instance().CurrentUser.salt +
-                                                                stringEncrypt);
-
-                        var resDel = request.DeleteMusicFromPlaylist(ThePlaylist, _selectedMusic, _cryptographic,
-                            Singleton.Singleton.Instance().CurrentUser);
-
-                        resDel.ContinueWith(delegate(Task<string> tmp)
-                        {
-                            var test = tmp.Result;
-                            if (test != null)
+                        CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
+                            () =>
                             {
-                                CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
-                                    () =>
-                                    {
-                                        var stringJson = JObject.Parse(test).SelectToken("code").ToString();
-                                        if (stringJson == "200")
-                                        {
-                                            new MessageDialog("Music delete").ShowAsync();
-                                            UpdatePlaylist.Execute(null);
-                                        }
-                                        else
-                                        {
-                                            new MessageDialog("Delete Fail code: " + stringJson).ShowAsync();
-                                        }
-                                    });
-                            }
-                        });
+                                var stringJson = JObject.Parse(test).SelectToken("code").ToString();
+                                if (stringJson == "200")
+                                {
+                                    new MessageDialog("Music delete").ShowAsync();
+                                    UpdatePlaylist.Execute(null);
+                                }
+                                else
+                                {
+                                    new MessageDialog("Delete Fail code: " + stringJson).ShowAsync();
+                                }
+                            });
                     }
                 });
             }

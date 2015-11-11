@@ -9,6 +9,7 @@ using GalaSoft.MvvmLight.Command;
 using SoonZik.Helpers;
 using SoonZik.HttpRequest;
 using SoonZik.HttpRequest.Poco;
+using SoonZik.Utils;
 
 namespace SoonZik.ViewModel
 {
@@ -194,15 +195,15 @@ namespace SoonZik.ViewModel
                     CanVote = false;
                 }
             }
-            a = (a*100)/CurrentBattle.votes.Count;
-            b = (b*100)/CurrentBattle.votes.Count;
+            a = (a * 100) / CurrentBattle.votes.Count;
+            b = (b * 100) / CurrentBattle.votes.Count;
             PourcentageVote1 = a + " %";
             PourcentageVote2 = b + " %";
         }
 
         private void InitializeTimer()
         {
-            char[] delimiter = {' ', '-', ':'};
+            char[] delimiter = { ' ', '-', ':' };
             var word = CurrentBattle.date_end.Split(delimiter);
 
             _endDate = new DateTime(Int32.Parse(word[0]), Int32.Parse(word[1]), Int32.Parse(word[2]),
@@ -249,19 +250,8 @@ namespace SoonZik.ViewModel
             var post = new HttpRequestPost();
             var get = new HttpRequestGet();
 
-            var userKey = get.GetUserKey(Singleton.Singleton.Instance().CurrentUser.id.ToString());
-            userKey.ContinueWith(delegate(Task<object> task)
-            {
-                var key = task.Result as string;
-                if (key != null)
-                {
-                    var stringEncrypt = KeyHelpers.GetUserKeyFromResponse(key);
-                    var cryptographic =
-                        EncriptSha256.EncriptStringToSha256(Singleton.Singleton.Instance().CurrentUser.salt +
-                                                            stringEncrypt);
-                    Vote(post, cryptographic, get, artistId);
-                }
-            });
+            ValidateKey.GetValideKey();
+            Vote(post, Singleton.Singleton.Instance().SecureKey, get, artistId);
         }
 
         private void Vote(HttpRequestPost post, string cryptographic, HttpRequestGet get, string artistId)

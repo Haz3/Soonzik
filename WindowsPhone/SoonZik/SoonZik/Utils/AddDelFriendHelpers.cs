@@ -18,22 +18,12 @@ namespace SoonZik.Utils
             var post = new HttpRequestPost();
             var get = new HttpRequestGet();
 
-            var userKey = get.GetUserKey(Singleton.Singleton.Instance().CurrentUser.id.ToString());
-            userKey.ContinueWith(delegate(Task<object> task)
-            {
-                var key = task.Result as string;
-                if (key != null)
-                {
-                    var stringEncrypt = KeyHelpers.GetUserKeyFromResponse(key);
-                    var cryptographic =
-                        EncriptSha256.EncriptStringToSha256(Singleton.Singleton.Instance().CurrentUser.salt +
-                                                            stringEncrypt);
-                    if (!friend)
-                        AddFriend(post, cryptographic, get, id);
-                    else
-                        DelFriend(post, cryptographic, get, id);
-                }
-            });
+            ValidateKey.GetValideKey();
+            if (!friend)
+                AddFriend(post, Singleton.Singleton.Instance().SecureKey, get, id);
+            else
+                DelFriend(post, Singleton.Singleton.Instance().SecureKey, get, id);
+
         }
 
         private static void DelFriend(HttpRequestPost post, string cryptographic, HttpRequestGet get, string id)

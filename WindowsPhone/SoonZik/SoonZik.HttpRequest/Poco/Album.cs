@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using Windows.UI.Xaml.Media.Imaging;
 
 namespace SoonZik.HttpRequest.Poco
@@ -13,7 +14,7 @@ namespace SoonZik.HttpRequest.Poco
         public string price { get; set; }
         public int yearProd { get; set; }
         public string getAverageNote { get; set; }
-        public List<Music> musics { get; set; }
+        public ObservableCollection<Music> musics { get; set; }
         public User user { get; set; }
         public List<Description> descriptions { get; set; }
         public List<Genre> genres { get; set; }

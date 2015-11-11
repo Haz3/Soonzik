@@ -54,7 +54,6 @@ namespace SoonZik.ViewModel
             }
         }
 
-        private string _crypto;
         private readonly CoreApplicationView _coreApplicationView;
         public INavigationService Navigation;
         private string _newImagePath;
@@ -126,42 +125,8 @@ namespace SoonZik.ViewModel
                 CurrentUser.profilImage = bitmapImage;
                 var name = storageFile.Name;
                 var contentType = storageFile.ContentType;
-                //GetUserKey(name, contentType, bitmapImage);
                 SelectionExecute();
             }
-        }
-
-        private void GetUserKey(string name, string contentType, BitmapImage bitmapImage)
-        {
-            var get = new HttpRequestGet();
-
-            var userKey = get.GetUserKey(Singleton.Singleton.Instance().CurrentUser.id.ToString());
-            userKey.ContinueWith(delegate(Task<object> task)
-            {
-                var key = task.Result as string;
-                if (key != null)
-                {
-                    var stringEncrypt = KeyHelpers.GetUserKeyFromResponse(key);
-                    var cryptographic =
-                        EncriptSha256.EncriptStringToSha256(Singleton.Singleton.Instance().CurrentUser.salt +
-                                                            stringEncrypt);
-                    UploadImage(name, contentType, bitmapImage, cryptographic);
-                }
-            });
-        }
-
-        private void UploadImage(string name, string contentType, BitmapImage bitmapImage, string cryptographic)
-        {
-            var post = new HttpRequestPost();
-            var resPost = post.UploadImage(bitmapImage, cryptographic, CurrentUser.id.ToString(), contentType, name);
-            resPost.ContinueWith(delegate(Task<string> tmp)
-            {
-                var test = tmp.Result;
-                if (test != null)
-                {
-                    CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () => { });
-                }
-            });
         }
 
         private void SelectionExecute()
@@ -194,23 +159,14 @@ namespace SoonZik.ViewModel
 
         private async Task UpdateData()
         {
-            var request = new HttpRequestGet();
             var post = new HttpRequestPost();
             try
             {
-                var userKey = request.GetUserKey(Singleton.Singleton.Instance().CurrentUser.id.ToString());
-                await userKey.ContinueWith(delegate(Task<object> task)
+                ValidateKey.GetValideKey();
+                var test = post.Update(CurrentUser, Singleton.Singleton.Instance().SecureKey);
+                test.ContinueWith(delegate(Task<string> tmp)
                 {
-                    var key = task.Result as string;
-                    if (key != null)
-                    {
-                        var stringEncrypt = KeyHelpers.GetUserKeyFromResponse(key);
-                        _crypto =
-                            EncriptSha256.EncriptStringToSha256(Singleton.Singleton.Instance().CurrentUser.salt +
-                                                                stringEncrypt);
-                    }
-                    var test = post.Update(CurrentUser, _crypto);
-                    test.ContinueWith(delegate(Task<string> tmp) { var res = tmp.Result; });
+                    var res = tmp.Result;
                 });
             }
             catch (Exception)

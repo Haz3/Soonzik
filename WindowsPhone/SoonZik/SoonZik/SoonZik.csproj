@@ -134,6 +134,7 @@
     <Compile Include="Utils\MessageTemplateSelector.cs" />
     <Compile Include="Utils\NavigationService.cs" />
     <Compile Include="Utils\TextBlockExtension.cs" />
+    <Compile Include="Utils\ValidateKey.cs" />
     <Compile Include="ViewModel\AboutViewModel.cs" />
     <Compile Include="ViewModel\AlbumViewModel.cs" />
     <Compile Include="ViewModel\BattleDetailViewModel.cs" />

@@ -243,9 +243,21 @@ namespace SoonZik.ViewModel
 
         private void ItemClickCommandExecute()
         {
-            AlbumViewModel.MyAlbum = TheAlbum;
-            GlobalMenuControl.MyGrid.Children.Clear();
-            GlobalMenuControl.MyGrid.Children.Add(new AlbumView());
+            var request = new HttpRequestGet();
+            var album = request.GetSecureObject(new Album(), "albums", TheAlbum.id.ToString(), Singleton.Singleton.Instance().SecureKey, Singleton.Singleton.Instance().CurrentUser.id.ToString());
+            album.ContinueWith(delegate(Task<object> tmp)
+            {
+                var test = tmp.Result as Album;
+                if (test != null)
+                {
+                    CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+                    {
+                        TheAlbum = test;
+                        AlbumViewModel.MyAlbum = TheAlbum;
+                        GlobalMenuControl.SetChildren(new AlbumView());
+                    });
+                }
+            });
         }
 
         private void SelectionExecute()
@@ -262,22 +274,10 @@ namespace SoonZik.ViewModel
             var post = new HttpRequestPost();
             var get = new HttpRequestGet();
 
-            var userKey = get.GetUserKey(Singleton.Singleton.Instance().CurrentUser.id.ToString());
-            userKey.ContinueWith(delegate(Task<object> task)
-            {
-                var key = task.Result as string;
-                if (key != null)
-                {
-                    var stringEncrypt = KeyHelpers.GetUserKeyFromResponse(key);
-                    var cryptographic =
-                        EncriptSha256.EncriptStringToSha256(Singleton.Singleton.Instance().CurrentUser.salt +
-                                                            stringEncrypt);
-                    if (_follow)
-                        Unfollow(post, cryptographic, get);
-                    else if (!_follow)
-                        Follow(post, cryptographic, get);
-                }
-            });
+            if (_follow)
+                Unfollow(post, Singleton.Singleton.Instance().SecureKey, get);
+            else if (!_follow)
+                Follow(post, Singleton.Singleton.Instance().SecureKey, get);
         }
 
         private void CheckIfFriend()
