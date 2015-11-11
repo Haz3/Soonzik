@@ -82,9 +82,9 @@ class Music < ActiveRecord::Base
       passIn = false
 
       records_array.each do |record|
-        if (music[:id] == record['music_id'])
+        if (music[:id].to_i == record['music_id'].to_i)
           passIn = true
-          music.setAverageNote record['average']
+          music.setAverageNote record['average'].to_f
           break
         end
       end

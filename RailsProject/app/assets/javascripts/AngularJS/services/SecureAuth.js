@@ -1,4 +1,4 @@
-SoonzikApp.factory('SecureAuth', ['$http', '$routeParams', '$location', '$cookies', '$timeout', '$rootScope', function ($http, $routeParams, $location, $cookies, $timeout, $rootScope) {
+SoonzikApp.factory('SecureAuth', ['$http', '$routeParams', '$location', '$cookies', '$timeout', '$rootScope', 'NotificationService', function ($http, $routeParams, $location, $cookies, $timeout, $rootScope, NotificationService) {
 
 	var api_url = "http://api.lvh.me:3000";
   var isUsed = false;
@@ -48,7 +48,7 @@ SoonzikApp.factory('SecureAuth', ['$http', '$routeParams', '$location', '$cookie
     		    	securedFunctionSuccess(key, user.id);
     		    }, function(error) {
               isUsed = false;
-              securedFunctionError($rootScope.labels.FILE_SECURITY_FAILED);
+              NotificationService.error($rootScope.labels.FILE_SECURITY_FAILED);
             });
             /********************************/
           } else {

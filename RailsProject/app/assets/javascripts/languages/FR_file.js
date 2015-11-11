@@ -136,12 +136,13 @@ var labels = {
 	FILE_SECURITY_FAILED: "Une erreur s'est produite durant la requête",
 
 	// Album Show View
+	DISPLAY_ALBUM_BY_LABEL: "Par ",
 	DISPLAY_ALBUM_ADD_TO_CART: "Ajouter au panier",
 	DISPLAY_ALBUM_ADD_PLAYLIST_BUTTON: "Ajouter à la liste de lecture",
 	DISPLAY_ALBUM_ADD_PLAYLIST_LABEL: "Ajouter",
 	DISPLAY_ALBUM_LISTEN_LABEL: "Ecouter",
 	DISPLAY_ALBUM_CLOSE_LABEL: "Fermer",
-	DISPLAY_ALBUM_SEND_COMMENT_BUTTON: "Envoyer",
+	DISPLAY_ALBUM_SEND_COMMENT_BUTTON: "Commenter",
 
 	// Battle Index View
 	DISPLAY_BATTLE_LIST_LABEL: "Liste des duels",

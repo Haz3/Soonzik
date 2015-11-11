@@ -66,8 +66,6 @@ class News < ActiveRecord::Base
       records_liked = ActiveRecord::Base.connection.execute(sql_hasLiked)
     end
 
-    puts "security : #{security} -- #{records_liked}"
-
     ar_news.each do |news|
       passIn = false
 

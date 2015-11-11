@@ -29,9 +29,9 @@ SoonzikApp.controller('AlbumsCtrl', ['$scope', "$routeParams", 'SecureAuth', 'HT
 			$scope.user = current_user;
 		}
 
-		SecureAuth.securedTransaction(function (key, id) {
+		SecureAuth.securedTransaction(function (key, user_id) {
 			var parameters = [
-				{ key: "user_id", value: id },
+				{ key: "user_id", value: user_id },
 				{ key: "secureKey", value: key }
 			];
 
@@ -73,7 +73,7 @@ SoonzikApp.controller('AlbumsCtrl', ['$scope', "$routeParams", 'SecureAuth', 'HT
 					if ($scope.user) {
 						var playlistParams = [
 							{ key: "attribute[user_id]", value: $scope.user.id },
-							{ key: "user_id", value: id },
+							{ key: "user_id", value: user_id },
 							{ key: "secureKey", value: key }
 						]
 						HTTPService.findPlaylist(playlistParams).then(function(response) {

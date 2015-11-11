@@ -3,11 +3,6 @@ SoonzikApp.controller('NewsCtrl', ['$scope', '$routeParams', 'SecureAuth', 'HTTP
 	$scope.loading = true;
 	$scope.resourceName = "news"
 
-	$rootScope.likes = {
-		count: 0,
-		isLiked: false
-	};
-
 	// For the pagination
 	$scope.index = {
 		currentPage: 1,
@@ -75,6 +70,10 @@ SoonzikApp.controller('NewsCtrl', ['$scope', '$routeParams', 'SecureAuth', 'HTTP
 
 	$scope.initShowNews = function() {
 		var newsId = $routeParams.id;
+		$rootScope.likes = {
+			count: 0,
+			isLiked: false
+		};
 
 		SecureAuth.securedTransaction(function(key, id) {
 			var params = [

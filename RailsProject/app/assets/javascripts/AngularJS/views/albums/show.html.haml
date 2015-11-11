@@ -2,55 +2,59 @@
 	%loading{ "ng-if" => "loading == true" }
 	.albumShow{ "ng-if" => "loading == false" }
 		.row
-			.panel.clearfix
-				%img{ "ng-src" => "{{'/assets/albums/' + album.image}}" }
-				%table.right
-					%thead
-						%tr
-							%th{ colspan: '5' } {{album.title}}
-					%tbody
-						%tr{ 'ng-repeat' => 'song in album.musics track by $index' }
-							%td{:width => '50'}
-								{{$index + 1 }}
-							%td{:width => '300'}
-								%div {{song.title}}
-								%div{ "ng-mouseleave" => "setGolden(song, song.note)" }
-									%i.fi-star{ "ng-repeat" => "n in range(5)	track by $index", "ng-mouseover" => "setGolden(song, $index + 1)", "ng-class" => "{ goldenStar: (song.goldenStars > $index || (song.goldenStars == null && song.note > $index)) }", "ng-click" => "setNote(song)" }
-							%td{:width => '100'}
-								{{formatTime(song.duration)}}
-							%td{:width => '60'}
-								{{song.price}} $
-							%td{:width => '50'}
-								%a{"ng-click" => "addSongToCart(song)"}
-									%i.fi-shopping-cart
-							%td{:width => '50'}
-								%music{ "music-object" => "song" }
-									%i.fi-play
-							%td.relative{:width => '50' }
-								%i.fi-plus.pointer{ "ng-click" => "setTooltip(tooltip == false ? song : false)" }
-								.mytooltip.toolright{ "ng-show" => "tooltip == song" }
-									%ul.no-bullet
-										%li.choice{ "ng-if" => "user != false", "ng-click" => "selectMusic(song)" } {{ labels.DISPLAY_ALBUM_ADD_PLAYLIST_BUTTON }}
-										%li.playlistBlock{ "ng-if" => "selectedMusic == song" }
-											%hr
-											%ul.text-left.small-12.playlistList
-												%li.choice.small-12.playlistChoice{ "ng-repeat" => "myplaylist in myPlaylists" }
-													%input{ "ng-model" => "myplaylist.check", type: "radio", id: "playlist-{{myplaylist.id}}", "ng-value" => "true" }
-													%label{ "for" => "playlist-{{myplaylist.id}}" } {{ myplaylist.name }}
-												%li.small-12.text-center
-													.button.tiny{ "ng-click" => "addToPlaylist()" } {{ labels.DISPLAY_ALBUM_ADD_PLAYLIST_LABEL }}
-											%hr
-										%li.choice
-											%music.small-12{ "music-object" => "song", "ng-click" => "setTooltip(false)" } {{ labels.DISPLAY_ALBUM_LISTEN_LABEL }}
-										%li
-											.button.tiny{ "ng-click" => "setTooltip(false)" } {{ labels.DISPLAY_ALBUM_CLOSE_LABEL }}
-
-			.button.expand.radius.success
-				%a{"ng-click" => "addAlbumToCart()"} {{ labels.DISPLAY_ALBUM_ADD_TO_CART }}
-			.likeContainer.text-right{ "ng-include" => "'/assets/AngularJS/views/include/like.html.haml'" }
-			.commentaries
-				%textarea{ "ng-model" => "comment.value" }
-				.text-right
-					%span.button{ "ng-click" => "sendComment()" } {{ labels.DISPLAY_ALBUM_SEND_COMMENT_BUTTON }}
+			.clearfix.headerRow
+				.small-6.medium-4.large-2.columns
+					%img.albumIllustration{ "ng-src" => "{{'/assets/albums/' + album.image}}" }
+				.small-6.medium-8.large-10.columns
+					%h3 {{ album.title }}
+					%p
+						%span By 
+						%a{ href: "/users/{{album.user.id}}" } {{ album.user.username }}
+					.clearfix
+						%span.button.primary
+							%a{"ng-click" => "addAlbumToCart()"} {{ labels.DISPLAY_ALBUM_ADD_TO_CART }}
+						.likeContainer.button.alert{ "ng-include" => "'/assets/AngularJS/views/include/like.html.haml'" }
+			%table
+				%tbody
+					%tr{ 'ng-repeat' => 'song in album.musics track by $index' }
+						%td
+							{{$index + 1 }}
+						%td
+							%div {{song.title}}
+							%div{ "ng-mouseleave" => "setGolden(song, song.note)" }
+								%i.fi-star{ "ng-repeat" => "n in range(5)	track by $index", "ng-mouseover" => "setGolden(song, $index + 1)", "ng-class" => "{ goldenStar: (song.goldenStars > $index || (song.goldenStars == null && song.note > $index)) }", "ng-click" => "setNote(song)" }
+						%td
+							{{formatTime(song.duration)}}
+						%td
+							{{song.price}} $
+						%td.iBtn
+							%a{"ng-click" => "addSongToCart(song)"}
+								%i.fi-shopping-cart
+						%td.iBtn
+							%music{ "music-object" => "song" }
+								%i.fi-play
+						%td.relative.iBtn
+							%i.fi-plus.pointer{ "ng-click" => "setTooltip(tooltip == false ? song : false)" }
+							.mytooltip.toolright{ "ng-show" => "tooltip == song" }
+								%ul.no-bullet
+									%li.choice{ "ng-if" => "user != false", "ng-click" => "selectMusic(song)" } {{ labels.DISPLAY_ALBUM_ADD_PLAYLIST_BUTTON }}
+									%li.playlistBlock{ "ng-if" => "selectedMusic == song" }
+										%hr
+										%ul.text-left.small-12.playlistList
+											%li.choice.small-12.playlistChoice{ "ng-repeat" => "myplaylist in myPlaylists" }
+												%input{ "ng-model" => "myplaylist.check", type: "radio", id: "playlist-{{myplaylist.id}}", "ng-value" => "true" }
+												%label{ "for" => "playlist-{{myplaylist.id}}" } {{ myplaylist.name }}
+											%li.small-12.text-center
+												.button.tiny{ "ng-click" => "addToPlaylist()" } {{ labels.DISPLAY_ALBUM_ADD_PLAYLIST_LABEL }}
+										%hr
+									%li.choice
+										%music.small-12{ "music-object" => "song", "ng-click" => "setTooltip(false)" } {{ labels.DISPLAY_ALBUM_LISTEN_LABEL }}
+									%li
+										.button.tiny{ "ng-click" => "setTooltip(false)" } {{ labels.DISPLAY_ALBUM_CLOSE_LABEL }}
+			.commentariesInput
+				.inputArea
+					%textarea{ "ng-model" => "comment.value" }
+					.text-right
+						%span.button{ "ng-click" => "sendComment()" } {{ labels.DISPLAY_ALBUM_SEND_COMMENT_BUTTON }}
 		.commentariesContainer{ "ng-include" => "'/assets/AngularJS/views/include/commentaries.html.haml'" }
 		%loading{ "loading-type" => "'square'", "ng-show" => "commentLoading == true" }

@@ -136,12 +136,13 @@ var labels = {
 	FILE_SECURITY_FAILED: "An error occured during the request",
 
 	// Album Show View
+	DISPLAY_ALBUM_BY_LABEL: "By ",
 	DISPLAY_ALBUM_ADD_TO_CART: "Add to cart",
 	DISPLAY_ALBUM_ADD_PLAYLIST_BUTTON: "Add to Playlist",
 	DISPLAY_ALBUM_ADD_PLAYLIST_LABEL: "Add",
 	DISPLAY_ALBUM_LISTEN_LABEL: "Listen",
 	DISPLAY_ALBUM_CLOSE_LABEL: "Close",
-	DISPLAY_ALBUM_SEND_COMMENT_BUTTON: "Send",
+	DISPLAY_ALBUM_SEND_COMMENT_BUTTON: "Comment",
 
 	// Battle Index View
 	DISPLAY_BATTLE_LIST_LABEL: "List of battles",

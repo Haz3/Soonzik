@@ -4,56 +4,77 @@
 
 
 .albumContainer {
-	.albums .panel {
-		margin-left: 15px;
-	}
+	.albumShow {
+		.row {
+			max-width: 100%;
+			background: #252525;
+			margin-top: -20px;
+			margin-bottom: 40px;
 
-	.albums img {
-		width: 195px;
-		height: 195px;
-		margin-right: 40px;
-	}
+			.headerRow {
+				padding: 5px 30px;
 
-	.panel th {
-		text-align: left;
-	}
+				img.albumIllustration {
+					max-width: 195px;
+					width: 100%;
+				}
 
-	.panel .divider {
-		width: 190px;
-	}
+				h3, p {
+					font-family: "Lato";
+					color: #F9F9F9;
+				}
 
-	.goldenStar {
-		color: #E6C200;
-	}
+				.likeContainer {
+					background: transparent;
 
-	.playlistBlock {
-		background: black;
-
-		ul {
-			margin-left: 0;
-
-			li {
-		    padding-left: 2px;
+					i, span { color:#EEE; }
+					i.isLiked { color:#CC3333; }
+				}
 			}
 
-			label {
-		    color: #008CBA;
+			table {
+				width: 95%;
+				margin: 0 auto;
+				border-collapse: collapse;
+
+				.goldenStar {
+					color: #E6C200;
+				}
+
+				td.iBtn { width: 15px; }
 			}
 		}
-	}
 
-	textarea {
-		resize: none;
-		height: 75px;
-	}
 
-	.loadingOffset {
-		height: 20px;
-		width: 100%;
-	}
+		.playlistBlock {
+			background: black;
 
-	.dateTime {
-		font-size: 12px;
-		color: #00B3BA;
+			ul {
+				margin-left: 0;
+
+				li {
+			    padding-left: 2px;
+				}
+
+				label {
+			    color: #008CBA;
+				}
+			}
+		}
+
+		.commentariesInput {
+			padding: 20px 30px;
+
+			.inputArea {
+				width: 90%;
+				margin: 0 auto;
+				
+				textarea {
+					width: 100%;
+					resize: none;
+					height: 75px;
+				}
+			}
+		}
 	}
 }
