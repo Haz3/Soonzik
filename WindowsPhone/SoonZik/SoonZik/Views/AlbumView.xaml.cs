@@ -68,5 +68,11 @@ namespace SoonZik.Views
             var vm = DataContext as AlbumViewModel;
             if (vm != null) vm.RateMusic.Execute(null);
         }
+
+        private void LikeImage_OnTapped(object sender, TappedRoutedEventArgs e)
+        {
+            var vm = DataContext as AlbumViewModel;
+            if (vm != null) vm.LikeCommand.Execute(null);
+        }
     }
 }

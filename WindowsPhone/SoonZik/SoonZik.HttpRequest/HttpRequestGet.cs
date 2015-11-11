@@ -160,6 +160,12 @@ namespace SoonZik.HttpRequest
             return await DoRequestForObject(myObject, request);
         }
 
+        public async Task<string> DestroyLike(string element, string objId, string sha256, string userId)
+        {
+            var request = (HttpWebRequest)WebRequest.Create(ApiUrl + "likes/destroy?like[typeObj]=" + element + "&like[obj_id]=" + objId + "&secureKey=" + sha256 + "&user_id=" + userId);
+            return await DoRequest(request);
+        }
+
         #endregion
 
         #region Method Request

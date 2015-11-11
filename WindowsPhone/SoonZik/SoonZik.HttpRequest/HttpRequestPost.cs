@@ -274,6 +274,14 @@ namespace SoonZik.HttpRequest
             var postData = "secureKey=" + sha256 + "&user_id=" + id;
             return await GetHttpPostResponse(request, postData);
         }
+
+        public async Task<String> SetLike(string element, string sha256, string idUser, string idObj)
+        {
+            var request = (HttpWebRequest)WebRequest.Create(ApiUrl + "likes/save");
+
+            var postData = "like[user_id]=" + idUser + "&like[typeObj]=" + element + "&like[obj_id]=" + idObj + "&secureKey=" + sha256 + "&user_id=" + idUser;
+            return await GetHttpPostResponse(request, postData);
+        }
         #endregion
     }
 }

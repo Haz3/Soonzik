@@ -33,9 +33,11 @@
     <RootPropertyPathName Name="ListCommAlbum" />
     <RootPropertyPathName Name="ListMusics" />
     <RootPropertyPathName Name="AddToCart" />
+    <RootPropertyPathName Name="Like" />
+    <RootPropertyPathName Name="Likes" />
     <RootPropertyPathName Name="TheAlbum" />
     <RootPropertyPathName Name="user" />
-    <RootPropertyPathName Name="image" />
+    <RootPropertyPathName Name="profilImage" />
     <RootPropertyPathName Name="ArtistTwo" />
     <RootPropertyPathName Name="email" />
     <RootPropertyPathName Name="ArtistOne" />
@@ -52,6 +54,7 @@
     <RootPropertyPathName Name="VoteArtisteOneCommand" />
     <RootPropertyPathName Name="CurrentBattle" />
     <RootPropertyPathName Name="artist_two" />
+    <RootPropertyPathName Name="image" />
     <RootPropertyPathName Name="artist_one" />
     <RootPropertyPathName Name="LoadedCommand" />
     <RootPropertyPathName Name="TotalPrice" />
@@ -109,7 +112,6 @@
     <RootPropertyPathName Name="ConversationText" />
     <RootPropertyPathName Name="ListMessages" />
     <RootPropertyPathName Name="FriendUser" />
-    <RootPropertyPathName Name="profilImage" />
     <RootPropertyPathName Name="ListArtiste" />
     <RootPropertyPathName Name="SelectedArtiste" />
     <RootPropertyPathName Name="TappedCommand" />
@@ -132,7 +134,6 @@
     <RootPropertyPathName Name="SelectNews" />
     <RootPropertyPathName Name="ListCommNews" />
     <RootPropertyPathName Name="NewsContent" />
-    <RootPropertyPathName Name="Like" />
     <RootPropertyPathName Name="NewsTitle" />
     <RootPropertyPathName Name="ListArtistes" />
     <RootPropertyPathName Name="TheArtiste" />
@@ -571,9 +572,6 @@
     <RootType FullName="Windows.UI.Xaml.Controls.PivotItem">
       <RootProperty Name="Header" />
       <RootProperty Name="Content" />
-    </RootType>
-    <RootType FullName="Windows.UI.Xaml.Media.Imaging.BitmapImage">
-      <RootProperty Name="UriSource" />
     </RootType>
     <RootType FullName="SoonZik.Views.AlbumView" />
     <RootType FullName="SoonZik.Views.BattleDetailView" />

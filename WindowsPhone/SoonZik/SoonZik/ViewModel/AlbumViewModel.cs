@@ -8,6 +8,7 @@ using Windows.UI.Core;
 using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls.Primitives;
+using Windows.UI.Xaml.Media.Imaging;
 using Coding4Fun.Toolkit.Controls;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
@@ -33,6 +34,7 @@ namespace SoonZik.ViewModel
             AddToPlaylist = new RelayCommand(AddToPlaylistExecute);
             AddMusicToCart = new RelayCommand(AddMusicToCartExecute);
             RateMusic = new RelayCommand(RateMusicExecute);
+            LikeCommand = new RelayCommand(LikeCommandExecute);
         }
 
         private void RateMusicExecute()
@@ -51,13 +53,30 @@ namespace SoonZik.ViewModel
 
         private void RatePopupOnClosed(object sender, object o)
         {
-            Charge();
+            SelectionExecute();
         }
 
         #endregion
 
         #region Attribute
 
+        private BitmapImage _like;
+
+        private readonly BitmapImage bmLike =
+            new BitmapImage(new Uri("ms-appx:///Resources/Icones/like_icon.png", UriKind.RelativeOrAbsolute));
+
+        private readonly BitmapImage bmDislike =
+            new BitmapImage(new Uri("ms-appx:///Resources/Icones/notlike_icon.png", UriKind.RelativeOrAbsolute));
+
+        public BitmapImage Like
+        {
+            get { return _like; }
+            set
+            {
+                _like = value;
+                RaisePropertyChanged("Like");
+            }
+        }
         public static Popup RatePopup { get; set; }
 
         public double width;
@@ -65,15 +84,15 @@ namespace SoonZik.ViewModel
 
         private readonly INavigationService _navigationService;
 
-        private string _imageAlbum;
+        private string _likes;
 
-        public string ImageAlbum
+        public string Likes
         {
-            get { return _imageAlbum; }
+            get { return _likes; }
             set
             {
-                _imageAlbum = value;
-                RaisePropertyChanged("ImageAlbum");
+                _likes = value;
+                RaisePropertyChanged("Likes");
             }
         }
 
@@ -115,6 +134,7 @@ namespace SoonZik.ViewModel
             }
         }
 
+        public ICommand LikeCommand { get; private set; }
         public ICommand SelectionCommand { get; private set; }
         public ICommand SendComment { get; private set; }
         public ICommand AddToCart { get; set; }
@@ -165,6 +185,66 @@ namespace SoonZik.ViewModel
         #endregion
 
         #region Method
+        private void LikeCommandExecute()
+        {
+            if (!TheAlbum.hasLiked)
+            {
+                Like = bmLike;
+                ValidateKey.GetValideKey();
+                var post = new HttpRequestPost();
+                var res = post.SetLike("Albums", Singleton.Singleton.Instance().SecureKey,
+                    Singleton.Singleton.Instance().CurrentUser.id.ToString(), TheAlbum.id.ToString());
+                res.ContinueWith(delegate(Task<string> tmp2)
+                {
+                    var result = tmp2.Result;
+                    if (result != null)
+                    {
+                        CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
+                            UpdateAlbum);
+                    }
+                });
+            }
+            else
+            {
+                Like = bmDislike;
+                ValidateKey.GetValideKey();
+                var get = new HttpRequestGet();
+                var res = get.DestroyLike("Albums", TheAlbum.id.ToString(), Singleton.Singleton.Instance().SecureKey,
+                    Singleton.Singleton.Instance().CurrentUser.id.ToString());
+                res.ContinueWith(delegate(Task<string> tmp2)
+                {
+                    var result = tmp2;
+                    if (result != null)
+                    {
+                        CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
+                            UpdateAlbum);
+                    }
+                });
+            }
+        }
+
+        private void UpdateAlbum()
+        {
+            var request = new HttpRequestGet();
+            var album = request.GetSecureObject(new Album(), "albums", TheAlbum.id.ToString(),
+                Singleton.Singleton.Instance().SecureKey, Singleton.Singleton.Instance().CurrentUser.id.ToString());
+            album.ContinueWith(delegate(Task<object> tmp)
+            {
+                var test = tmp.Result as Album;
+                if (test != null)
+                {
+                    CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
+                        () =>
+                        {
+                            TheAlbum.hasLiked = test.hasLiked;
+                            TheAlbum.likes = test.likes;
+                            Likes = TheAlbum.likes;
+                        });
+                }
+            });
+
+            TheAlbum.image = Constant.UrlImageAlbum + TheAlbum.image;
+        }
 
         private void SendCommentExecute()
         {
@@ -191,9 +271,13 @@ namespace SoonZik.ViewModel
 
         private void SelectionExecute()
         {
+            ListMusics = new ObservableCollection<Music>();
             TheAlbum = MyAlbum;
-            TheAlbum.image = Constant.UrlImageAlbum + MyAlbum.image;
-            Charge();
+            ListMusics = TheAlbum.musics;
+            TheAlbum.imageAlbum = new BitmapImage(new System.Uri(Constant.UrlImageAlbum + TheAlbum.image, UriKind.RelativeOrAbsolute));
+            Likes = TheAlbum.likes;
+            Like = TheAlbum.hasLiked ? bmLike : bmDislike;
+            LoadComment();
         }
 
         private void AddToCartExecute()
@@ -211,15 +295,7 @@ namespace SoonZik.ViewModel
                 }
             });
         }
-
-        public void Charge()
-        {
-            ListMusics = new ObservableCollection<Music>();
-            TheAlbum = MyAlbum;
-            ListMusics = TheAlbum.musics;
-            LoadComment();
-        }
-
+        
         private void LoadComment()
         {
             TextComment = "";
