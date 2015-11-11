@@ -185,7 +185,11 @@ namespace SoonZik.ViewModel
                         {
                             CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(
                                 CoreDispatcherPriority.Normal,
-                                () => { ListMusique.Add(item); });
+                                () =>
+                                {
+                                    item.album.imageAlbum = new BitmapImage(new System.Uri(Constant.UrlImageAlbum + item.album.image, UriKind.RelativeOrAbsolute));
+                                    ListMusique.Add(item);
+                                });
                         }
                     }
                 });

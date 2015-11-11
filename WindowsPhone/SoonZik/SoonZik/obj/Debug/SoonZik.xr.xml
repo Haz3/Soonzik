@@ -37,7 +37,7 @@
     <RootPropertyPathName Name="Likes" />
     <RootPropertyPathName Name="TheAlbum" />
     <RootPropertyPathName Name="user" />
-    <RootPropertyPathName Name="profilImage" />
+    <RootPropertyPathName Name="imageAlbum" />
     <RootPropertyPathName Name="ArtistTwo" />
     <RootPropertyPathName Name="email" />
     <RootPropertyPathName Name="ArtistOne" />
@@ -112,6 +112,8 @@
     <RootPropertyPathName Name="ConversationText" />
     <RootPropertyPathName Name="ListMessages" />
     <RootPropertyPathName Name="FriendUser" />
+    <RootPropertyPathName Name="profilImage" />
+    <RootPropertyPathName Name="album" />
     <RootPropertyPathName Name="ListArtiste" />
     <RootPropertyPathName Name="SelectedArtiste" />
     <RootPropertyPathName Name="TappedCommand" />
@@ -150,7 +152,6 @@
     <RootPropertyPathName Name="SelectedPlaylist" />
     <RootPropertyPathName Name="PlaylistTappedCommand" />
     <RootPropertyPathName Name="ListPack" />
-    <RootPropertyPathName Name="imageAlbum" />
     <RootPropertyPathName Name="FollowText" />
     <RootPropertyPathName Name="FollowCommand" />
     <RootPropertyPathName Name="NbrFollowers" />
@@ -622,6 +623,8 @@
       <RootProperty Name="Height" />
       <RootProperty Name="Width" />
       <RootProperty Name="Fill" />
+      <RootProperty Name="VerticalAlignment" />
+      <RootProperty Name="HorizontalAlignment" />
     </RootType>
     <RootType FullName="SoonZik.Views.Explorer" />
     <RootType FullName="Windows.UI.Xaml.Data.CollectionViewSource">

@@ -252,7 +252,9 @@ namespace SoonZik.ViewModel
                 {
                     CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
                     {
+
                         TheAlbum = test;
+                        TheAlbum.imageAlbum = new BitmapImage(new Uri(Constant.UrlImageAlbum + TheAlbum.image, UriKind.RelativeOrAbsolute));
                         AlbumViewModel.MyAlbum = TheAlbum;
                         GlobalMenuControl.SetChildren(new AlbumView());
                     });

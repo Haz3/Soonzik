@@ -75,7 +75,8 @@
                        VerticalAlignment="Top"
                        HorizontalAlignment="Center" />
 
-                <Image Name="AlbumImage" Width="180" Height="180" HorizontalAlignment="Center" VerticalAlignment="Bottom" Source="{Binding Path=TheAlbum.profilImage}"/>
+                <Image Name="AlbumImage" Width="180" Height="180" Margin="0,18,0,0" HorizontalAlignment="Center" VerticalAlignment="Center" 
+                       Source="{Binding TheAlbum.imageAlbum}"/>
             </Grid>
             <Grid Column="1">
                 <TextBlock x:Name="ArtistName" Text="{Binding TheAlbum.user.username}" FontSize="20" Foreground="#40a8e2"
@@ -92,7 +93,7 @@
 
         <Pivot Grid.Row="1" x:Name="PivotGlobal" HeaderTemplate="{StaticResource SizeHeaderGlobalPivot}"
                Foreground="Transparent" RenderTransformOrigin="0.5,0.5" Style="{StaticResource PivotStyle1}"
-               Margin="0,20,0,0">
+               Margin="0,30,0,0">
             <PivotItem x:Uid="MusicPivot" Header="">
                 <ListBox Background="Transparent" x:Name="MusicListView" IsTapEnabled="True"
                          ItemsSource="{Binding ListMusics}"

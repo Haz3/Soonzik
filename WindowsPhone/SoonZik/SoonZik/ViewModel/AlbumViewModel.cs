@@ -274,7 +274,7 @@ namespace SoonZik.ViewModel
             ListMusics = new ObservableCollection<Music>();
             TheAlbum = MyAlbum;
             ListMusics = TheAlbum.musics;
-            TheAlbum.imageAlbum = new BitmapImage(new System.Uri(Constant.UrlImageAlbum + TheAlbum.image, UriKind.RelativeOrAbsolute));
+            //TheAlbum.imageAlbum = new BitmapImage(new System.Uri(Constant.UrlImageAlbum + TheAlbum.image, UriKind.RelativeOrAbsolute));
             Likes = TheAlbum.likes;
             Like = TheAlbum.hasLiked ? bmLike : bmDislike;
             LoadComment();
