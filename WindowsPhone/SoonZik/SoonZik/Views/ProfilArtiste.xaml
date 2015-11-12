@@ -30,7 +30,9 @@
                         <Image x:Name="AlbumImage" Source="{Binding Path=imageAlbum}" Height="50"
                            VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10,0,0,0" />
                         <TextBlock x:Name="AlbunTitle" Text="{Binding Path=title}" FontSize="25" Foreground="White"
-                               HorizontalAlignment="Center" VerticalAlignment="Center" />
+                               HorizontalAlignment="Center" VerticalAlignment="Top" />
+                        <TextBlock x:Name="NbrTitre" Text="{Binding NbrTitres}" FontSize="20" Foreground="White"
+                               HorizontalAlignment="Center" VerticalAlignment="Bottom" />
                     </Grid>
                 </Border>
             </DataTemplate>

@@ -840,6 +840,16 @@
             Gets or sets the value indicating whether to use Facebook beta.
             </summary>
         </member>
+        <member name="P:Facebook.FacebookClient.Version">
+            <summary>
+            Get or sets the graph api version to use.
+            </summary>
+        </member>
+        <member name="P:Facebook.FacebookClient.DefaultVersion">
+            <summary>
+            Gets or sets the default graph api version to use when initializing a new instance of <see cref="T:Facebook.FacebookClient"/>.
+            </summary>
+        </member>
         <member name="P:Facebook.FacebookClient.SerializeJson">
             <summary>
             Serialize object to json.

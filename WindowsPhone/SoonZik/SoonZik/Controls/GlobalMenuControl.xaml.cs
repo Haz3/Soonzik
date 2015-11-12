@@ -3,15 +3,20 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
+using System.Threading.Tasks;
+using Windows.ApplicationModel.Core;
 using Windows.Devices.Geolocation;
 using Windows.Phone.UI.Input;
+using Windows.UI.Core;
 using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media.Animation;
+using Windows.UI.Xaml.Media.Imaging;
 using GalaSoft.MvvmLight.Command;
+using SoonZik.Helpers;
 using SoonZik.HttpRequest;
 using SoonZik.HttpRequest.Poco;
 using SoonZik.Properties;
@@ -435,20 +440,65 @@ namespace SoonZik.Controls
 
         private void MusicStackPanel_OnTapped(object sender, TappedRoutedEventArgs e)
         {
-            AlbumViewModel.MyAlbum = SelectedMusic.album;
-            SetChildren(new AlbumView());
+            var get = new HttpRequestGet();
+            ValidateKey.GetValideKey();
+            var res = get.GetSecureObject(new Album(), "albums", SelectedMusic.album.id.ToString(), Singleton.Singleton.Instance().SecureKey, Singleton.Singleton.Instance().CurrentUser.id.ToString());
+            res.ContinueWith(delegate(Task<object> tmp)
+            {
+                var album = tmp.Result as Album;
+                if (album != null)
+                {
+                    CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
+                        () =>
+                        {
+                            album.imageAlbum = new BitmapImage(new System.Uri(Constant.UrlImageAlbum + album.image, UriKind.RelativeOrAbsolute));
+                            AlbumViewModel.MyAlbum = album;
+                            SetChildren(new AlbumView());
+                        });
+                }
+            });
         }
 
         private void AlbumStackPanel_OnTapped(object sender, TappedRoutedEventArgs e)
         {
-            AlbumViewModel.MyAlbum = SelectedAlbum;
-            SetChildren(new AlbumView());
+            AlbumViewModel.MyAlbum = SelectedAlbum; 
+            var get = new HttpRequestGet();
+            ValidateKey.GetValideKey();
+            var res = get.GetSecureObject(new Album(), "albums", SelectedAlbum.id.ToString(), Singleton.Singleton.Instance().SecureKey, Singleton.Singleton.Instance().CurrentUser.id.ToString());
+            res.ContinueWith(delegate(Task<object> tmp)
+            {
+                var album = tmp.Result as Album;
+                if (album != null)
+                {
+                    CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
+                        () =>
+                        {
+                            album.imageAlbum = new BitmapImage(new System.Uri(Constant.UrlImageAlbum + album.image, UriKind.RelativeOrAbsolute));
+                            AlbumViewModel.MyAlbum = album;
+                            SetChildren(new AlbumView());
+                        });
+                }
+            });
         }
 
         private void ArtistStackPanel_OnTapped(object sender, TappedRoutedEventArgs e)
         {
-            ProfilArtisteViewModel.TheUser = SelectedArtist;
-            SetChildren(new ProfilArtiste());
+            var get = new HttpRequestGet();
+            var res = get.GetObject(new User(), "users", SelectedArtist.id.ToString());
+            res.ContinueWith(delegate(Task<object>tmp)
+            {
+                var user = tmp.Result as User;
+                if (user != null)
+                {
+                    CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
+                        () =>
+                        {
+                            user.profilImage = new BitmapImage(new System.Uri(Constant.UrlImageUser + user.image, UriKind.RelativeOrAbsolute));
+                            ProfilArtisteViewModel.TheUser = user;
+                            SetChildren(new ProfilArtiste());
+                        });
+                }
+            });
         }
 
         private void PackStackPanel_OnTapped(object sender, TappedRoutedEventArgs e)

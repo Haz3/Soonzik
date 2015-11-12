@@ -1,19 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Windows.ApplicationModel.Core;
-using Windows.Data.Json;
 using Windows.Networking.Sockets;
 using Windows.Storage.Streams;
 using Windows.UI.Core;
-using Windows.UI.Popups;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using Newtonsoft.Json;
-using SoonZik.Helpers;
 using SoonZik.HttpRequest;
 using SoonZik.HttpRequest.Poco;
 using SoonZik.Utils;
@@ -188,12 +184,14 @@ namespace SoonZik.ViewModel
                 user_id = Singleton.Singleton.Instance().CurrentUser.id
             };
 
-            var dispatcher = new WebSocketRailsDispatcher(new Uri("ws://soonzikapi.herokuapp.com/websocket", UriKind.RelativeOrAbsolute));
+            var dispatcher = new WebSocketRailsDispatcher(new Uri("ws://soonzikapi.herokuapp.com/websocket"));
+
             var json = JsonConvert.SerializeObject(init);
-            dispatcher.ConnectionEstablished(init);
+
             //trigger
             dispatcher.Trigger("init_connection", init);
             dispatcher.Trigger("who_is_online", init);
+
 
             //Bind
             dispatcher.Bind("onlineFriends", OnlineFriend);

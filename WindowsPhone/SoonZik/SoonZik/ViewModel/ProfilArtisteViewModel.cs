@@ -38,6 +38,20 @@ namespace SoonZik.ViewModel
 
         #region Attribute
 
+        public ICommand AddCommand { get; private set; }
+        public ICommand FollowCommand { get; private set; }
+        public ICommand SelectionCommand { get; private set; }
+        private ICommand _itemClickCommand;
+        public ICommand ItemClickCommand
+        {
+            get { return _itemClickCommand; }
+            set
+            {
+                _itemClickCommand = value;
+                RaisePropertyChanged("ItemClickCommand");
+            }
+        }
+
         private const string UrlImage = "http://soonzikapi.herokuapp.com/assets/usersImage/avatars/";
 
         private string _buttonFriendText;
@@ -51,11 +65,8 @@ namespace SoonZik.ViewModel
                 RaisePropertyChanged("ButtonFriendText");
             }
         }
-
-        public ICommand AddCommand { get; private set; }
         private bool _friend;
         private bool _follow;
-        public ICommand FollowCommand { get; private set; }
         private User _theArtiste;
 
         public User TheArtiste
@@ -94,20 +105,6 @@ namespace SoonZik.ViewModel
 
         public static User TheUser { get; set; }
 
-        public ICommand SelectionCommand { get; private set; }
-
-        private RelayCommand _itemClickCommand;
-
-        public RelayCommand ItemClickCommand
-        {
-            get { return _itemClickCommand; }
-            set
-            {
-                _itemClickCommand = value;
-                RaisePropertyChanged("ItemClickCommand");
-            }
-        }
-
         private Album _theAlbum;
 
         public Album TheAlbum
@@ -132,6 +129,17 @@ namespace SoonZik.ViewModel
             }
         }
 
+        private string _nbrTitres;
+
+        public string NbrTitres
+        {
+            get { return _nbrTitres; }
+            set
+            {
+                _nbrTitres = value;
+                RaisePropertyChanged("NbrTitres");
+            }
+        }
         #endregion
 
         #region Method
@@ -153,6 +161,7 @@ namespace SoonZik.ViewModel
                         foreach (var album in art.albums)
                         {
                             album.imageAlbum = new BitmapImage(new Uri(Constant.UrlImageAlbum + album.image, UriKind.RelativeOrAbsolute));
+                            NbrTitres = album.musics.Count + " titres";
                             ListAlbums.Add(album);
                         }
                     }
