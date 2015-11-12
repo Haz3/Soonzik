@@ -36,10 +36,10 @@
                              Storyboard.TargetName="GlobalGrid" d:IsOptimized="True" />
         </Storyboard>
         <Storyboard x:Name="SearchStoryBoard">
-            <DoubleAnimation Duration="0:0:0.25" To="-200"
+            <DoubleAnimation Duration="0:0:0.25" To="-300"
                              Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)"
                              Storyboard.TargetName="SearchGrid" d:IsOptimized="True" />
-            <DoubleAnimation Duration="0:0:0.25" To="-200"
+            <DoubleAnimation Duration="0:0:0.25" To="-300"
                              Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)"
                              Storyboard.TargetName="GlobalGrid" d:IsOptimized="True" />
         </Storyboard>
@@ -61,19 +61,6 @@
                              Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)"
                              Storyboard.TargetName="SearchGrid" d:IsOptimized="True" />
         </Storyboard>
-
-        <!--<DataTemplate x:Key="MenuListItemTemplate">
-            <Grid x:Name="GridItemMenu" Height="50" Tapped="GridItemMenu_OnTapped">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="55" />
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
-                <Image Grid.Column="0" Source="{Binding ImageBoutton}" Height="40" HorizontalAlignment="Left"
-                       Margin="15,0,0,0" Width="40" />
-                <TextBlock Margin="15,0,0,0" Grid.Column="1" HorizontalAlignment="Center" Text="{Binding Title}"
-                           VerticalAlignment="Center" FontSize="20" />
-            </Grid>
-        </DataTemplate>-->
 
         <DataTemplate x:Key="UserItemTemplate" x:Name="UserDataTemplate">
             <StackPanel x:ConnectionId='7' Margin="0,0,0,30" x:Name="UsersStackPanel"                                  >
@@ -192,23 +179,21 @@
                     MinWidth="200" />
         </Grid>
 
-        <Grid x:Name="SearchGrid" Grid.Row="1" Width="200" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Right"
+        <Grid x:Name="SearchGrid" Grid.Row="1" Width="300" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Right"
               Background="Transparent"
-              Margin="0,0,-200,0" Opacity="0.8">
+              Margin="0,0,-300,0" Opacity="0.8">
             <Grid.RenderTransform>
                 <CompositeTransform />
             </Grid.RenderTransform>
             <Grid.RowDefinitions>
-                <RowDefinition Height="40" />
+                <RowDefinition Height="60" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
-
-            <TextBox x:ConnectionId='9' x:Name="SearchTextBlock" Width="190" BorderThickness="0" AcceptsReturn="True"
-                     Height="13" TextAlignment="Center" VerticalContentAlignment="Center"
-                     HorizontalAlignment="Center"
-                     VerticalAlignment="Center" Foreground="White" Opacity="0.5" FontSize="18"
-                     x:Uid="Search" PlaceholderText=""
+            <Grid Row="0">
+                <TextBox x:ConnectionId='9' x:Name="SearchTextBlock" Background="Transparent" BorderThickness="0,0,0,1" BorderBrush="White" VerticalAlignment="Center"
+                     x:Uid="Search" PlaceholderText="" FontSize="25" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"
                                                                  />
+            </Grid>
             <Grid Grid.Row="1">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*" />

@@ -283,25 +283,21 @@ namespace SoonZik.Controls
 
         private void GoToNews()
         {
-            MenuNameTextBlock.Text = NewsButton.Content.ToString();
             SetChildren(new News());
         }
 
         private void GoToExplorer()
         {
-            MenuNameTextBlock.Text = ExplorerButton.Content.ToString();
             SetChildren(new Explorer());
         }
 
         private void GoToPacks()
         {
-            MenuNameTextBlock.Text = PacksButton.Content.ToString();
             SetChildren(new Packs());
         }
 
         private void GoToMondeMusical()
         {
-            MenuNameTextBlock.Text = MondeMusicalButton.Content.ToString();
             var locator = new Geolocator();
             if (locator.LocationStatus == PositionStatus.Disabled)
             {
@@ -315,34 +311,27 @@ namespace SoonZik.Controls
 
         private void GoToBattle()
         {
-            MenuNameTextBlock.Text = BattleButton.Content.ToString();
             SetChildren(new BattleView());
         }
 
         private void GoToPlaylist()
         {
-
-            MenuNameTextBlock.Text = PlaylistButton.Content.ToString();
             //PlaylistAdd.Visibility = Visibility.Visible;
             SetChildren(new Playlist());
         }
 
         private void GoToAmis()
         {
-            MenuNameTextBlock.Text = AmisButton.Content.ToString();
             SetChildren(new MyNetwork());
         }
 
         private void GoToAbout()
         {
-
-            MenuNameTextBlock.Text = APropos.Content.ToString();
             SetChildren(new AboutView());
         }
 
         private void GoToAchat()
         {
-            MenuNameTextBlock.Text = AchatButton.Content.ToString();
             SetChildren(new CartsView());
         }
 

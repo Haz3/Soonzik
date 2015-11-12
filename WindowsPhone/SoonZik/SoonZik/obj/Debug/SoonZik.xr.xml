@@ -492,26 +492,6 @@
       <RootProperty Name="AlignmentX" />
       <RootProperty Name="AlignmentY" />
     </RootType>
-    <RootType FullName="Windows.UI.Xaml.Controls.TextBox">
-      <RootProperty Name="Width" />
-      <RootProperty Name="BorderThickness" />
-      <RootProperty Name="AcceptsReturn" />
-      <RootProperty Name="Height" />
-      <RootProperty Name="TextAlignment" />
-      <RootProperty Name="VerticalContentAlignment" />
-      <RootProperty Name="HorizontalAlignment" />
-      <RootProperty Name="VerticalAlignment" />
-      <RootProperty Name="Foreground" />
-      <RootProperty Name="Opacity" />
-      <RootProperty Name="FontSize" />
-      <RootProperty Name="PlaceholderText" />
-      <RootProperty Name="Background" />
-      <RootProperty Name="Margin" />
-      <RootProperty Name="Text" />
-      <RootProperty Name="InputScope" />
-      <RootProperty Name="IsEnabled" />
-      <RootEvent Name="TextChanged" />
-    </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.ListView">
       <RootProperty Name="Header" />
       <RootProperty Name="ItemTemplate" />
@@ -520,6 +500,26 @@
       <RootProperty Name="ItemsSource" />
       <RootProperty Name="IsHoldingEnabled" />
       <RootProperty Name="GroupStyle" />
+    </RootType>
+    <RootType FullName="Windows.UI.Xaml.Controls.TextBox">
+      <RootProperty Name="Background" />
+      <RootProperty Name="BorderThickness" />
+      <RootProperty Name="BorderBrush" />
+      <RootProperty Name="VerticalAlignment" />
+      <RootProperty Name="PlaceholderText" />
+      <RootProperty Name="FontSize" />
+      <RootProperty Name="VerticalContentAlignment" />
+      <RootProperty Name="HorizontalContentAlignment" />
+      <RootProperty Name="Width" />
+      <RootProperty Name="Height" />
+      <RootProperty Name="Opacity" />
+      <RootProperty Name="Foreground" />
+      <RootProperty Name="HorizontalAlignment" />
+      <RootProperty Name="Margin" />
+      <RootProperty Name="Text" />
+      <RootProperty Name="InputScope" />
+      <RootProperty Name="IsEnabled" />
+      <RootEvent Name="TextChanged" />
     </RootType>
     <RootType FullName="Microsoft.Xaml.Interactions.Media.ControlStoryboardAction">
       <RootProperty Name="Storyboard" />

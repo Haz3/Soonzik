@@ -35,26 +35,20 @@ namespace SoonZik.ViewModel
 
         #endregion
 
-        private void SelectionCommandExecute()
-        {
-            SelectNews = NewsViewModel.DetailSelectedNews;
-            Like = bm2;
-            var ci = new CultureInfo(GlobalizationPreferences.Languages[0]);
-            if (ci.Name.Equals("en-US"))
-            {
-                NewsContent = SelectNews.content;
-                NewsTitle = SelectNews.title;
-            }
-            else if (ci.Name.Equals("fr-FR"))
-            {
-                NewsContent = SelectNews.content;
-                NewsTitle = SelectNews.title;
-            }
-            LoadComment();
-        }
 
         #region Attribute
+        private string _likes;
 
+        public string Likes
+        {
+            get { return _likes; }
+            set
+            {
+                _likes = value;
+                RaisePropertyChanged("Likes");
+            }
+        }
+        public static News TheNews { get; set; }
         private bool share = false;
         public static Popup SharePopup { get; set; }
 
@@ -62,10 +56,10 @@ namespace SoonZik.ViewModel
         private string _crypto { get; set; }
         private BitmapImage _like;
 
-        private readonly BitmapImage bm =
+        private readonly BitmapImage bmLike =
             new BitmapImage(new Uri("ms-appx:///Resources/Icones/like_icon.png", UriKind.RelativeOrAbsolute));
 
-        private readonly BitmapImage bm2 =
+        private readonly BitmapImage bmDislike =
             new BitmapImage(new Uri("ms-appx:///Resources/Icones/notlike_icon.png", UriKind.RelativeOrAbsolute));
 
         public BitmapImage Like
@@ -133,11 +127,82 @@ namespace SoonZik.ViewModel
         #endregion
 
         #region Method
+        private void SelectionCommandExecute()
+        {
+            SelectNews = TheNews;
+            Like = SelectNews.hasLiked ? bmLike : bmDislike;
+            Likes = SelectNews.likes;
+            var ci = new CultureInfo(GlobalizationPreferences.Languages[0]);
+            if (ci.Name.Equals("en-US"))
+            {
+                NewsContent = SelectNews.content;
+                NewsTitle = SelectNews.title;
+            }
+            else if (ci.Name.Equals("fr-FR"))
+            {
+                NewsContent = SelectNews.content;
+                NewsTitle = SelectNews.title;
+            }
+            LoadComment();
+        }
 
         private void LikeCommandExecute()
         {
-            Like = bm;
-            //TODO do the like
+            if (!SelectNews.hasLiked)
+            {
+                Like = bmLike;
+                ValidateKey.GetValideKey();
+                var post = new HttpRequestPost();
+                var res = post.SetLike("Albums", Singleton.Singleton.Instance().SecureKey,
+                    Singleton.Singleton.Instance().CurrentUser.id.ToString(), SelectNews.id.ToString());
+                res.ContinueWith(delegate(Task<string> tmp2)
+                {
+                    var result = tmp2.Result;
+                    if (result != null)
+                    {
+                        CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
+                            UpadteNews);
+                    }
+                });
+            }
+            else
+            {
+                Like = bmDislike;
+                ValidateKey.GetValideKey();
+                var get = new HttpRequestGet();
+                var res = get.DestroyLike("Albums", SelectNews.id.ToString(), Singleton.Singleton.Instance().SecureKey,
+                    Singleton.Singleton.Instance().CurrentUser.id.ToString());
+                res.ContinueWith(delegate(Task<string> tmp2)
+                {
+                    var result = tmp2;
+                    if (result != null)
+                    {
+                        CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
+                            UpadteNews);
+                    }
+                });
+            }
+        }
+
+        private void UpadteNews()
+        {
+            var request = new HttpRequestGet();
+            var album = request.GetSecureObject(new Album(), "albums", SelectNews.id.ToString(),
+                Singleton.Singleton.Instance().SecureKey, Singleton.Singleton.Instance().CurrentUser.id.ToString());
+            album.ContinueWith(delegate(Task<object> tmp)
+            {
+                var test = tmp.Result as Album;
+                if (test != null)
+                {
+                    CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
+                        () =>
+                        {
+                            SelectNews.hasLiked = test.hasLiked;
+                            SelectNews.likes = test.likes;
+                            Likes = test.likes;
+                        });
+                }
+            });
         }
 
         private void LoadComment()
