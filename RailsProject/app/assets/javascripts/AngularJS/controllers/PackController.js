@@ -3,6 +3,25 @@ SoonzikApp.controller('PacksCtrl', ['$scope', '$routeParams', 'SecureAuth', 'HTT
 	$scope.loading = true;
 	$scope.saveCart = [];
 
+	$scope.newValuePercentage = {
+		"artist": 65,
+		"asso": 20,
+		"web": 15
+	};
+
+	$scope.oldValuePercentage = {
+		"artist": 65,
+		"asso": 20,
+		"web": 15
+	};
+
+	$scope.realValue = {
+		"artist": 13,
+		"asso": 4,
+		"web": 3
+	}
+
+
 	$scope.initFoundation = function () {
 		$(document).foundation();
 	}
@@ -36,10 +55,10 @@ SoonzikApp.controller('PacksCtrl', ['$scope', '$routeParams', 'SecureAuth', 'HTT
 		var id = $routeParams.id;
 		$scope.amountDonation = 20;
 
-		SecureAuth.securedTransaction(function(key, id) {
+		SecureAuth.securedTransaction(function(key, user_id) {
 			var parameters = [
 				{ key: "secureKey", value: key },
-				{ key: "user_id", value: id }
+				{ key: "user_id", value: user_id }
 			];
 
 			HTTPService.showPack(id, parameters).then(function(response) {
@@ -56,7 +75,48 @@ SoonzikApp.controller('PacksCtrl', ['$scope', '$routeParams', 'SecureAuth', 'HTT
 
 	}
 
+	$scope.varRange = function(key) {
+		var barToChange = [];
+		var diff = $scope.newValuePercentage[key] - $scope.oldValuePercentage[key];
+		var coef = (diff < 0) ? -1 : 1;
+
+		for (var index in $scope.newValuePercentage) {
+			if (index != key) {
+				barToChange.push(index);
+			}
+		}
+
+		console.log(key)
+		updateMySlider(barToChange, diff, coef);
+
+	}
+
+	var updateMySlider = function(sliders, diff, coef) {
+
+		while (diff != 0) {
+			console.log("Debut while");
+			console.log(diff, coef);
+
+			for (var i = 0; i < 2 && diff != 0 ; i++) {
+				console.log(sliders[i], $scope.newValuePercentage[sliders[i]]);
+				if ((diff > 0 && $scope.newValuePercentage[sliders[i]] > 0) || (diff < 0 && $scope.newValuePercentage[sliders[i]] < 100)) {
+					console.log('in if');
+                	diff -= coef;
+                	$scope.newValuePercentage[sliders[i]] -= coef;
+            	}
+        	}
+    	}
+
+    	for (var index in $scope.newValuePercentage) {
+    		$scope.oldValuePercentage[index] = $scope.newValuePercentage[index];
+    		$scope.realValue[index] = ((20 * $scope.newValuePercentage[index]) / 100);
+    	}
+
+
+	}
+
 	$scope.managePrice = function () {
+
 
 		$scope.priceMini = 20;
 

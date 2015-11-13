@@ -60,6 +60,15 @@
         //Albums + song
 
         .large-12.columns
+          %div
+            %input{:type => "range", "ng-model" => "newValuePercentage.artist", "ng-change" => "varRange('artist')", "min" => "0", "max" => "100"}
+            {{ realValue.artist }}
+          %div
+            %input{:type => "range", "ng-model" => "newValuePercentage.asso", "ng-change" => "varRange('asso')", "min" => "0", "max" => "100"}
+            {{ realValue.asso }}
+          %div
+            %input{:type => "range", "ng-model" => "newValuePercentage.web", "ng-change" => "varRange('web')", "min" => "0", "max" => "100"}
+            {{ realValue.web }}
           .button.expand.radius.success{ "ng-click" => "toPayment()" }
             {{ labels.DISPLAY_PACK_BUY_PACK }}
 
