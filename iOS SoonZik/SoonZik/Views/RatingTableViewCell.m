@@ -21,7 +21,12 @@
 }
 
 - (void)initCell {
+    self.btn.layer.borderColor = [UIColor lightGrayColor].CGColor;
+    self.btn.layer.borderWidth = 1;
+    self.btn.layer.cornerRadius = 10;
+    self.btn.layer.backgroundColor = BLUE_1.CGColor;
     
+    [self.btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
 }
 
 - (void)rateSliderChanged:(UISlider *)slider {

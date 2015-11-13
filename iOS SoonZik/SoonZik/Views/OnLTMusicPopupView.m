@@ -125,15 +125,56 @@
         [self.tableView registerNib:[UINib nibWithNibName:@"RatingTableViewCell" bundle:nil] forCellReuseIdentifier:@"cellRate"];
         self.ratingCell = [self.tableView dequeueReusableCellWithIdentifier:@"cellRate"];
         self.ratingCell.backgroundColor = [UIColor clearColor];
-        self.ratingCell.rateLabel.textColor = [UIColor whiteColor];
-        self.ratingCell.rateLabel.font = SOONZIK_FONT_BODY_BIG;
-        self.ratingCell.delegate = self;
+
+        [self.ratingCell initCell];
         self.ratingCell.slider.value = 2.0;
+        
+        self.ratingCell.rating = (int)self.ratingCell.slider.value;
+        
+        
+        if (self.ratingCell.rating < 1) {
+            [self.ratingCell.star1 setImage:[UIImage imageNamed:@"star_0"]];
+            [self.ratingCell.star2 setImage:[UIImage imageNamed:@"star_0"]];
+            [self.ratingCell.star3 setImage:[UIImage imageNamed:@"star_0"]];
+            [self.ratingCell.star4 setImage:[UIImage imageNamed:@"star_0"]];
+            [self.ratingCell.star5 setImage:[UIImage imageNamed:@"star_0"]];
+        } else if (self.ratingCell.rating < 2) {
+            [self.ratingCell.star1 setImage:[UIImage imageNamed:@"star_1"]];
+            [self.ratingCell.star2 setImage:[UIImage imageNamed:@"star_0"]];
+            [self.ratingCell.star3 setImage:[UIImage imageNamed:@"star_0"]];
+            [self.ratingCell.star4 setImage:[UIImage imageNamed:@"star_0"]];
+            [self.ratingCell.star5 setImage:[UIImage imageNamed:@"star_0"]];
+        } else if (self.ratingCell.rating < 3) {
+            [self.ratingCell.star1 setImage:[UIImage imageNamed:@"star_1"]];
+            [self.ratingCell.star2 setImage:[UIImage imageNamed:@"star_1"]];
+            [self.ratingCell.star3 setImage:[UIImage imageNamed:@"star_0"]];
+            [self.ratingCell.star4 setImage:[UIImage imageNamed:@"star_0"]];
+            [self.ratingCell.star5 setImage:[UIImage imageNamed:@"star_0"]];
+        } else if (self.ratingCell.rating < 4) {
+            [self.ratingCell.star1 setImage:[UIImage imageNamed:@"star_1"]];
+            [self.ratingCell.star2 setImage:[UIImage imageNamed:@"star_1"]];
+            [self.ratingCell.star3 setImage:[UIImage imageNamed:@"star_1"]];
+            [self.ratingCell.star4 setImage:[UIImage imageNamed:@"star_0"]];
+            [self.ratingCell.star5 setImage:[UIImage imageNamed:@"star_0"]];
+        } else if (self.ratingCell.rating < 5) {
+            [self.ratingCell.star1 setImage:[UIImage imageNamed:@"star_1"]];
+            [self.ratingCell.star2 setImage:[UIImage imageNamed:@"star_1"]];
+            [self.ratingCell.star3 setImage:[UIImage imageNamed:@"star_1"]];
+            [self.ratingCell.star4 setImage:[UIImage imageNamed:@"star_1"]];
+            [self.ratingCell.star5 setImage:[UIImage imageNamed:@"star_0"]];
+        } else {
+            [self.ratingCell.star1 setImage:[UIImage imageNamed:@"star_1"]];
+            [self.ratingCell.star2 setImage:[UIImage imageNamed:@"star_1"]];
+            [self.ratingCell.star3 setImage:[UIImage imageNamed:@"star_1"]];
+            [self.ratingCell.star4 setImage:[UIImage imageNamed:@"star_1"]];
+            [self.ratingCell.star5 setImage:[UIImage imageNamed:@"star_1"]];
+        }
+        
+        self.ratingCell.delegate = self;
         self.ratingCell.slider.tag = 3;
-        self.ratingCell.slider.minimumValue = 1.0;
+        self.ratingCell.slider.minimumValue = 0.0;
         self.ratingCell.slider.maximumValue = 5.0;
-        self.ratingCell.rateLabel.text = [NSString stringWithFormat:@"%i", (int)self.ratingCell.slider.value];
-        [self.ratingCell.btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        
         [self.ratingCell.btn setTitle:@"Noter" forState:UIControlStateNormal];
         [self.ratingCell.btn addTarget:self action:@selector(sendRate) forControlEvents:UIControlEventTouchUpInside];
         return self.ratingCell;
@@ -221,7 +262,46 @@
 }
 
 - (void)valueChanged:(float)value {
-    self.ratingCell.rateLabel.text = [NSString stringWithFormat:@"%i", (int)value];
+    self.ratingCell.rating = (int)value;
+    
+    if (self.ratingCell.rating < 1) {
+        [self.ratingCell.star1 setImage:[UIImage imageNamed:@"star_0"]];
+        [self.ratingCell.star2 setImage:[UIImage imageNamed:@"star_0"]];
+        [self.ratingCell.star3 setImage:[UIImage imageNamed:@"star_0"]];
+        [self.ratingCell.star4 setImage:[UIImage imageNamed:@"star_0"]];
+        [self.ratingCell.star5 setImage:[UIImage imageNamed:@"star_0"]];
+    } else if (self.ratingCell.rating < 2) {
+        [self.ratingCell.star1 setImage:[UIImage imageNamed:@"star_1"]];
+        [self.ratingCell.star2 setImage:[UIImage imageNamed:@"star_0"]];
+        [self.ratingCell.star3 setImage:[UIImage imageNamed:@"star_0"]];
+        [self.ratingCell.star4 setImage:[UIImage imageNamed:@"star_0"]];
+        [self.ratingCell.star5 setImage:[UIImage imageNamed:@"star_0"]];
+    } else if (self.ratingCell.rating < 3) {
+        [self.ratingCell.star1 setImage:[UIImage imageNamed:@"star_1"]];
+        [self.ratingCell.star2 setImage:[UIImage imageNamed:@"star_1"]];
+        [self.ratingCell.star3 setImage:[UIImage imageNamed:@"star_0"]];
+        [self.ratingCell.star4 setImage:[UIImage imageNamed:@"star_0"]];
+        [self.ratingCell.star5 setImage:[UIImage imageNamed:@"star_0"]];
+    } else if (self.ratingCell.rating < 4) {
+        [self.ratingCell.star1 setImage:[UIImage imageNamed:@"star_1"]];
+        [self.ratingCell.star2 setImage:[UIImage imageNamed:@"star_1"]];
+        [self.ratingCell.star3 setImage:[UIImage imageNamed:@"star_1"]];
+        [self.ratingCell.star4 setImage:[UIImage imageNamed:@"star_0"]];
+        [self.ratingCell.star5 setImage:[UIImage imageNamed:@"star_0"]];
+    } else if (self.ratingCell.rating < 5) {
+        [self.ratingCell.star1 setImage:[UIImage imageNamed:@"star_1"]];
+        [self.ratingCell.star2 setImage:[UIImage imageNamed:@"star_1"]];
+        [self.ratingCell.star3 setImage:[UIImage imageNamed:@"star_1"]];
+        [self.ratingCell.star4 setImage:[UIImage imageNamed:@"star_1"]];
+        [self.ratingCell.star5 setImage:[UIImage imageNamed:@"star_0"]];
+    } else {
+        [self.ratingCell.star1 setImage:[UIImage imageNamed:@"star_1"]];
+        [self.ratingCell.star2 setImage:[UIImage imageNamed:@"star_1"]];
+        [self.ratingCell.star3 setImage:[UIImage imageNamed:@"star_1"]];
+        [self.ratingCell.star4 setImage:[UIImage imageNamed:@"star_1"]];
+        [self.ratingCell.star5 setImage:[UIImage imageNamed:@"star_1"]];
+    }
+
 }
 
 - (void)sendRate {
