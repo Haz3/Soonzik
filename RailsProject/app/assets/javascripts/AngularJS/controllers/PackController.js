@@ -12,9 +12,9 @@ SoonzikApp.controller('PacksCtrl', ['$scope', '$routeParams', 'SecureAuth', 'HTT
 			{ key: "limit", value: 4 },
 			{ key: "order_by_desc[]", value: "created_at" }
 		];
-		
+
 		HTTPService.findPacks(parameters).then(function(packs) {
-			
+
 			$scope.pack = packs.data.content;
 			$scope.loading = false;
 
@@ -23,19 +23,12 @@ SoonzikApp.controller('PacksCtrl', ['$scope', '$routeParams', 'SecureAuth', 'HTT
 		});
 
 		$scope.Pack = true;
-	
+
 	}
 
 	$scope.showPacksById = function() {
 		var id = $routeParams.id;
-
-		$scope.percentages = [
-			{ value: 65, label: "Artist" },
-			{ value: 20, label: "Association" },
-			{ value: 15, label: "website" }
-		];
 		$scope.amountDonation = 20;
-		
 
 		HTTPService.showPack(id).then(function(response) {
 
@@ -50,24 +43,71 @@ SoonzikApp.controller('PacksCtrl', ['$scope', '$routeParams', 'SecureAuth', 'HTT
 		});
 
 		$scope.thisPackId = true;
-	
+
 	}
 
 	$scope.managePrice = function () {
 
 		$scope.priceMini = 20;
 
-		$scope.artistPercentage = (($scope.priceMini * 65) / 100);
-		$scope.associationPercentage = (($scope.priceMini * 20) / 100);
-		$scope.websitePercentage = (($scope.priceMini * 15) / 100);
+		// Set default value
+		angular.element('#range-slider-artist').foundation('slider', 'set_value', (($scope.priceMini * 65) / 100));
+		angular.element('#range-slider-asso').foundation('slider', 'set_value', (($scope.priceMini * 20) / 100));
+		angular.element('#range-slider-web').foundation('slider', 'set_value', (($scope.priceMini * 15) / 100));
+
+		// On change Function
+		angular.element(document).foundation({
+			slider: {
+				on_change: function() {
+					// get value of slider
+					var range_artist = angular.element('#range-slider-artist').attr('data-slider');
+					var range_asso = angular.element('#range-slider-asso').attr('data-slider');
+					var range_web = angular.element('#range-slider-web').attr('data-slider');
+
+					// add value to scope
+					$scope.rangeArtist = range_artist;
+					$scope.rangeAsso = range_asso;
+					$scope.rangeWeb = range_web;
+
+					// get percentage of value
+					$scope.artistPercentage = (($scope.rangeArtist / $scope.priceMini) * 100);
+					$scope.associationPercentage = (($scope.rangeAsso / $scope.priceMini) * 100);
+					$scope.websitePercentage = (($scope.rangeWeb / $scope.priceMini) * 100);
+
+					// add percentage to donut graph
+					$scope.percentages = [
+						{ value: $scope.artistPercentage, label: "Artist" },
+						{ value: $scope.associationPercentage, label: "Association" },
+						{ value: $scope.websitePercentage, label: "website" }
+					];
+
+					if ($scope.rangeArtist == $scope.priceMini) {
+
+						angular.element('#range-slider-asso').foundation('slider', 'set_value', 0);
+						angular.element('#range-slider-web').foundation('slider', 'set_value', 0);
+					} else if ($scope.rangeAsso == $scope.priceMini) {
+
+						angular.element('#range-slider-web').foundation('slider', 'set_value', 0);
+						angular.element('#range-slider-artist').foundation('slider', 'set_value', 0);
+					} else if ($scope.rangeWeb == $scope.priceMini) {
+
+						angular.element('#range-slider-artist').foundation('slider', 'set_value', 0);
+						angular.element('#range-slider-asso').foundation('slider', 'set_value', 0);
+					}
+
+				}
+			}
+		});
+
+	//	angular.element(document).foundation('slider', 'reflow');
 	}
 
 	var timeLeft = function() {
-		
+
 		var timer = setInterval(function() {
 			var now = new Date();
 			var end = new Date($scope.end_date);
-		
+
 			if (end > now) {
 				var countDown = end - now;
 			} else {
