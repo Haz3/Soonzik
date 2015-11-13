@@ -23,5 +23,7 @@
 @property (nonatomic, strong) NSMutableArray *listOfAttachments;
 @property (nonatomic, strong) NSMutableArray *listOfComments;
 @property (nonatomic, strong) NSMutableArray *listOfNewsTexts;
+@property (nonatomic, assign) BOOL isLiked;
+@property (nonatomic, assign) int numberOfLikes;
 
 @end

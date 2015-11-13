@@ -47,6 +47,9 @@
         }
     }
     
+    self.numberOfLikes = [[json objectForKey:@"likes"] integerValue];
+    self.isLiked = [[json objectForKey:@"hasLiked"] boolValue];
+    
     return self;
 }
 

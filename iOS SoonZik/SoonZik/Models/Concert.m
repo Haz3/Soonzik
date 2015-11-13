@@ -22,6 +22,8 @@
     self.url = [json objectForKey:@"url"];
     self.artist = [[User alloc] initWithJsonObject:[json objectForKey:@"user"]];
     self.address = [[Address alloc] initWithJsonObject:[json objectForKey:@"address"]];
+    self.numberOfLikes = [[json objectForKey:@"likes"] integerValue];
+    self.isLiked = [[json objectForKey:@"hasLiked"] boolValue];
     
     return self;
 }

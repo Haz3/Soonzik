@@ -17,5 +17,7 @@
 @property (nonatomic, strong) Address *address;
 @property (nonatomic, strong) NSString *url;
 @property (nonatomic, strong) User *artist;
+@property (nonatomic, assign) BOOL isLiked;
+@property (nonatomic, assign) int numberOfLikes;
 
 @end

@@ -9,6 +9,8 @@
 #import "ConcertViewController.h"
 #import "ConcertHeaderView.h"
 #import "ArtistViewController.h"
+#import "LikesController.h"
+#import "SimplePopUp.h"
 
 @interface ConcertViewController ()
 
@@ -48,10 +50,43 @@
         [header.shareButton addTarget:self action:@selector(launchShareView) forControlEvents:UIControlEventTouchUpInside];
         [header.artistButton addTarget:self action:@selector(goToArtistView) forControlEvents:UIControlEventTouchUpInside];
 
+        UIButton *likeButton = [[UIButton alloc] initWithFrame:CGRectMake(header.frame.size.width-30-30-30-10, header.frame.size.height - 40, 30, 30)];
+        if (self.concert.isLiked) {
+            [likeButton setImage:[Tools imageWithImage:[UIImage imageNamed:@"love_1"] scaledToSize:CGSizeMake(30, 30)] forState:UIControlStateNormal];
+        } else {
+            [likeButton setImage:[Tools imageWithImage:[UIImage imageNamed:@"love_0"] scaledToSize:CGSizeMake(30, 30)] forState:UIControlStateNormal];
+        }
+        [likeButton addTarget:self action:@selector(like:) forControlEvents:UIControlEventTouchUpInside];
+        [likeButton setTintColor:[UIColor whiteColor]];
+        [likeButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [header addSubview:likeButton];
+        
         return header;
     }
     
     return nil;
+}
+
+- (void)like:(UIButton *)btn {
+    if (self.concert.isLiked) {
+        // send dislike
+        if (![LikesController dislike:self.concert.identifier forObjectType:@"Concerts"]) {
+            [[[SimplePopUp alloc] initWithMessage:@"An error occured on this action" onView:self.view withSuccess:false] show];
+        } else {
+            [btn setImage:[Tools imageWithImage:[UIImage imageNamed:@"love_0"] scaledToSize:CGSizeMake(30, 30)] forState:UIControlStateNormal];
+            self.concert.isLiked = false;
+        }
+    } else {
+        // send like
+        if (![LikesController like:self.concert.identifier forObjectType:@"Concerts"]) {
+            [[[SimplePopUp alloc] initWithMessage:@"An error occured on this action" onView:self.view withSuccess:false] show];
+        } else {
+            [btn setImage:[Tools imageWithImage:[UIImage imageNamed:@"love_1"] scaledToSize:CGSizeMake(30, 30)] forState:UIControlStateNormal];
+            self.concert.isLiked = true;
+        }
+    }
+    // get album info
+    //reload tableView
 }
 
 - (void)launchShareView {

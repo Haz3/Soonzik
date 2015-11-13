@@ -194,7 +194,6 @@
     [likeButton addTarget:self action:@selector(like:) forControlEvents:UIControlEventTouchUpInside];
     [likeButton setTintColor:[UIColor whiteColor]];
     [likeButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    likeButton.tag = 50;
     [view addSubview:likeButton];
     
     return view;

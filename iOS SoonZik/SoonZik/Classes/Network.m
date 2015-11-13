@@ -55,7 +55,7 @@
     } else if ([className isEqualToString:@"Album"]) {
         url = [NSString stringWithFormat:@"%@albums/%i?user_id=%i&secureKey=%@", API_URL, identifier, user.identifier, key];
     } else if ([className isEqualToString:@"News"]) {
-        url = [NSString stringWithFormat:@"%@news/%i", API_URL, identifier];
+        url = [NSString stringWithFormat:@"%@news/%i?user_id=%i&secureKey=%@", API_URL, identifier, user.identifier, key];
     } else if ([className isEqualToString:@"Genre"]) {
         url = [NSString stringWithFormat:@"%@genres/%i", API_URL, identifier];
     }
