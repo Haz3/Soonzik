@@ -30,15 +30,13 @@
 }
 
 + (Battle *)vote:(int)battleID :(int)artistID {
-    NSString *url, *post, *key, *conca, *secureKey;
+    NSString *url, *post, *key;
     NSData *data = [[NSUserDefaults standardUserDefaults] objectForKey:@"User"];
     User *user = (User *)[NSKeyedUnarchiver unarchiveObjectWithData:data];
     
     url = [NSString stringWithFormat:@"%@battles/%i/vote", API_URL, battleID];
     key = [Crypto getKey];
-    conca = [NSString stringWithFormat:@"%@%@", user.salt, key];
-    secureKey = [Crypto sha256HashFor:conca];
-    post = [NSString stringWithFormat:@"user_id=%i&secureKey=%@&artist_id=%i", user.identifier, secureKey, artistID];
+    post = [NSString stringWithFormat:@"user_id=%i&secureKey=%@&artist_id=%i", user.identifier, key, artistID];
     
     NSDictionary *json = [Request postRequest:post url:url];
     if ([[json objectForKey:@"code"] intValue] != 200) {

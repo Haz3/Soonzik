@@ -12,20 +12,15 @@
 @implementation UsersController
 
 + (BOOL)follow:(int)artistId {
-    NSString *url, *post, *key, *conca, *secureKey;
+    NSString *url, *post, *key;
     NSData *data = [[NSUserDefaults standardUserDefaults] objectForKey:@"User"];
     User *user = (User *)[NSKeyedUnarchiver unarchiveObjectWithData:data];
     
     url = [NSString stringWithFormat:@"%@users/follow", API_URL];
     key = [Crypto getKey];
-    conca = [NSString stringWithFormat:@"%@%@", user.salt, key];
-    secureKey = [Crypto sha256HashFor:conca];
-    // NSLog(@"artist id : %i", artistId);
-    post = [NSString stringWithFormat:@"user_id=%i&secureKey=%@&follow_id=%i", user.identifier, secureKey, artistId];
+    post = [NSString stringWithFormat:@"user_id=%i&secureKey=%@&follow_id=%i", user.identifier, key, artistId];
     
     NSDictionary *json = [Request postRequest:post url:url];
-    // NSLog(@"%@", [json objectForKey:@"content"]);
-    NSLog(@"json follow : %@", json);
     if ([[json objectForKey:@"code"] intValue] == 201) {
         return true;
     }
@@ -33,19 +28,15 @@
 }
 
 + (BOOL)unfollow:(int)artistId {
-    NSString *url, *post, *key, *conca, *secureKey;
+    NSString *url, *post, *key;
     NSData *data = [[NSUserDefaults standardUserDefaults] objectForKey:@"User"];
     User *user = (User *)[NSKeyedUnarchiver unarchiveObjectWithData:data];
     
     url = [NSString stringWithFormat:@"%@users/unfollow", API_URL];
     key = [Crypto getKey];
-    conca = [NSString stringWithFormat:@"%@%@", user.salt, key];
-    secureKey = [Crypto sha256HashFor:conca];
-    //NSLog(@"artist id : %i", artistId);
-    post = [NSString stringWithFormat:@"user_id=%i&secureKey=%@&follow_id=%i", user.identifier, secureKey, artistId];
+    post = [NSString stringWithFormat:@"user_id=%i&secureKey=%@&follow_id=%i", user.identifier, key, artistId];
     
     NSDictionary *json = [Request postRequest:post url:url];
-    NSLog(@"json follow : %@", json);
     if ([[json objectForKey:@"code"] intValue] == 200) {
         return true;
     }
@@ -53,20 +44,14 @@
 }
 
 + (BOOL)addFriend:(int)userID {
-    NSString *url, *post, *key, *conca, *secureKey;
+    NSString *url, *post, *key;
     NSData *data = [[NSUserDefaults standardUserDefaults] objectForKey:@"User"];
     User *user = (User *)[NSKeyedUnarchiver unarchiveObjectWithData:data];
     
     url = [NSString stringWithFormat:@"%@users/addfriend", API_URL];
     key = [Crypto getKey];
-    conca = [NSString stringWithFormat:@"%@%@", user.salt, key];
-    secureKey = [Crypto sha256HashFor:conca];
-    post = [NSString stringWithFormat:@"user_id=%i&secureKey=%@&friend_id=%i", user.identifier, secureKey, userID];
-    
-    NSLog(@"url : %@", url);
-    NSLog(@"post : %@", post);
+    post = [NSString stringWithFormat:@"user_id=%i&secureKey=%@&friend_id=%i", user.identifier, key, userID];
     NSDictionary *json = [Request postRequest:post url:url];
-    NSLog(@"json friend : %@", json);
     if ([[json objectForKey:@"code"] intValue] == 201) {
         return true;
     }
@@ -74,18 +59,15 @@
 }
 
 + (BOOL)delFriend:(int)userID {
-    NSString *url, *post, *key, *conca, *secureKey;
+    NSString *url, *post, *key;
     NSData *data = [[NSUserDefaults standardUserDefaults] objectForKey:@"User"];
     User *user = (User *)[NSKeyedUnarchiver unarchiveObjectWithData:data];
     
     url = [NSString stringWithFormat:@"%@users/delfriend", API_URL];
     key = [Crypto getKey];
-    conca = [NSString stringWithFormat:@"%@%@", user.salt, key];
-    secureKey = [Crypto sha256HashFor:conca];
-    post = [NSString stringWithFormat:@"user_id=%i&secureKey=%@&friend_id=%i", user.identifier, secureKey, userID];
+    post = [NSString stringWithFormat:@"user_id=%i&secureKey=%@&friend_id=%i", user.identifier, key, userID];
     
     NSDictionary *json = [Request postRequest:post url:url];
-    NSLog(@"json friend : %@", json);
     if ([[json objectForKey:@"code"] intValue] == 200) {
         return true;
     }
@@ -112,13 +94,9 @@
 }
 
 + (NSMutableArray *)getFollows  :(int)userID {
-    //NSData *data = [[NSUserDefaults standardUserDefaults] objectForKey:@"User"];
-    //User *user = (User *)[NSKeyedUnarchiver unarchiveObjectWithData:data];
-    
     NSString *url = [NSString stringWithFormat:@"%@users/%i/follows", API_URL, userID];
     
     NSDictionary *json = [Request getRequest:url];
-    //NSLog(@"%@", [json objectForKey:@"content"]);
     NSArray *arr = [json objectForKey:@"content"];
     
     NSMutableArray *listOfFollows = [[NSMutableArray alloc] init];
@@ -132,13 +110,9 @@
 }
 
 + (NSMutableArray *)getFollowers  :(int)userID {
-    //NSData *data = [[NSUserDefaults standardUserDefaults] objectForKey:@"User"];
-    //User *user = (User *)[NSKeyedUnarchiver unarchiveObjectWithData:data];
-    
     NSString *url = [NSString stringWithFormat:@"%@users/%i/followers", API_URL, userID];
     
     NSDictionary *json = [Request getRequest:url];
-    //NSLog(@"%@", [json objectForKey:@"content"]);
     NSArray *arr = [json objectForKey:@"content"];
     
     NSMutableArray *listOfFollowers = [[NSMutableArray alloc] init];
@@ -157,24 +131,17 @@
     boughtContent.listOfAlbums = [[NSMutableArray alloc] init];
     boughtContent.listOfPacks = [[NSMutableArray alloc] init];
     
-    NSString *url, *key, *conca, *secureKey;
+    NSString *url, *key;
     NSData *data = [[NSUserDefaults standardUserDefaults] objectForKey:@"User"];
     User *user = (User *)[NSKeyedUnarchiver unarchiveObjectWithData:data];
     
-    NSLog(@"key : %@", user.secureKey);
     key = [Crypto getKey];
-    NSLog(@"key : %@", user.secureKey);
     
+    url = [NSString stringWithFormat:@"%@users/getmusics?user_id=%i&secureKey=%@", API_URL, user.identifier, key];
     
-    conca = [NSString stringWithFormat:@"%@%@", user.salt, key];
-    secureKey = [Crypto sha256HashFor:conca];
-    
-    url = [NSString stringWithFormat:@"%@users/getmusics?user_id=%i&secureKey=%@", API_URL, user.identifier, secureKey];
     NSLog(@"url : %@", url);
     
     NSDictionary *json = [Request getRequest:url];
-    
-    //NSLog(@"json get content : %@", json);
     
     NSDictionary *content = [json objectForKey:@"content"];
     NSArray *listOfMusics = [content objectForKey:@"musics"];
@@ -208,14 +175,12 @@
 + (User *)getUser:(int)userID {
     NSString *url = [NSString stringWithFormat:@"%@users/%i", API_URL, userID];
     NSDictionary *json = [Request getRequest:url];
-    NSLog(@"json user : %@", json);
     return [[User alloc] initWithJsonObject:[json objectForKey:@"content"]];
 }
 
 + (NSMutableArray *)getUsersInArea:(double)latitude :(double)longitude :(int)range {
     NSString *url = [NSString stringWithFormat:@"%@listenings/around/%f/%f/%i", API_URL, latitude, longitude, range];
     NSDictionary *json = [Request getRequest:url];
-    NSLog(@"%@", json);
     NSMutableArray *res = [[NSMutableArray alloc] init];
     NSArray *listOfListenings = [json objectForKey:@"content"];
     for (NSDictionary *dict in listOfListenings) {
@@ -229,17 +194,12 @@
     NSString *url;
     NSString *post;
     NSString *key;
-    NSString *conca;
-    NSString *secureKey;
     
     key = [Crypto getKey];
-    conca = [NSString stringWithFormat:@"%@%@", user.salt, key];
-    secureKey = [Crypto sha256HashFor:conca];
     url = [NSString stringWithFormat:@"%@users/update", API_URL];
-    post = [NSString stringWithFormat:@"user_id=%i&secureKey=%@&user[email]=%@&user[username]=%@&user[fname]=%@&user[lname]=%@&address[numberStreet]=%@&address[street]=%@&address[zipcode]=%@&address[city]=%@&address[country]=%@", user.identifier, secureKey, user.email, [user.username stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding], user.firstname, user.lastname, user.address.streetNbr, [user.address.street stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding], user.address.zipCode,  [user.address.city stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding], user.address.country];
+    post = [NSString stringWithFormat:@"user_id=%i&secureKey=%@&user[email]=%@&user[username]=%@&user[fname]=%@&user[lname]=%@&address[numberStreet]=%@&address[street]=%@&address[zipcode]=%@&address[city]=%@&address[country]=%@", user.identifier, key, user.email, [user.username stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding], user.firstname, user.lastname, user.address.streetNbr, [user.address.street stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding], user.address.zipCode,  [user.address.city stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding], user.address.country];
     
     NSDictionary *json = [Request postRequest:post url:url];
-    NSLog(@"user json : %@", json);
     
     if ([[json objectForKey:@"code"] intValue] == 201) {
         return [[User alloc] initWithJsonObject:[json objectForKey:@"content"]];

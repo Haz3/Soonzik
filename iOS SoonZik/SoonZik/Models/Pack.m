@@ -15,17 +15,20 @@
 {
     self = [super init];
     
-    NSLog(@"%@", json);
-    
     self.identifier = [[json objectForKey:@"id"] intValue];
     self.title = [json objectForKey:@"title"];
     self.price = [[json objectForKey:@"price"] floatValue];
     self.listOfAlbums = [[NSMutableArray alloc] init];
     
+    self.partialAlbums = [[NSMutableArray alloc] init];
+    
     NSDictionary *albums = [json objectForKey:@"albums"];
     for (NSDictionary *album in albums) {
         Album *al = [[Album alloc] initWithJsonObject:album];
         [self.listOfAlbums addObject:al];
+        if ([[album objectForKey:@"isPartial"] boolValue] == true) {
+            [self.partialAlbums addObject:[NSNumber numberWithInt:al.identifier]];
+        }
     }
     
     self.listOfDescriptions = [[NSMutableArray alloc] init];
@@ -48,12 +51,6 @@
     }
     
     self.avgPrice = [[json objectForKey:@"averagePrice"] floatValue];
-    
-    self.partialAlbums = [[NSMutableArray alloc] init];
-    NSArray *partial = [json objectForKey:@"partial_albums"];
-    for (NSDictionary *dic in partial) {
-        [self.partialAlbums addObject:[dic objectForKey:@"album_id"]];
-    }
     
     return self;
 }

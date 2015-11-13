@@ -9,6 +9,7 @@
 #import "Network.h"
 #import "Playlist.h"
 #import "User.h"
+#import "Crypto.h"
 
 @implementation Network
 
@@ -39,6 +40,12 @@
 {
     NSString *url = nil;
     
+    NSString *key;
+    NSData *data = [[NSUserDefaults standardUserDefaults] objectForKey:@"User"];
+    User *user = (User *)[NSKeyedUnarchiver unarchiveObjectWithData:data];
+    key = [Crypto getKey];
+
+    
     if ([className isEqualToString:@"User"]) {
         url = [NSString stringWithFormat:@"%@users/%i", API_URL, identifier];
     } else if ([className isEqualToString:@"Pack"]) {
@@ -46,12 +53,14 @@
     } else if ([className isEqualToString:@"Music"]) {
         url = [NSString stringWithFormat:@"%@musics/%i", API_URL, identifier];
     } else if ([className isEqualToString:@"Album"]) {
-        url = [NSString stringWithFormat:@"%@albums/%i", API_URL, identifier];
+        url = [NSString stringWithFormat:@"%@albums/%i?user_id=%i&secureKey=%@", API_URL, identifier, user.identifier, key];
     } else if ([className isEqualToString:@"News"]) {
         url = [NSString stringWithFormat:@"%@news/%i", API_URL, identifier];
     } else if ([className isEqualToString:@"Genre"]) {
         url = [NSString stringWithFormat:@"%@genres/%i", API_URL, identifier];
     }
+    
+    NSLog(@"url get json with name : %@", url);
     
     return [Request getRequest:url];
 }

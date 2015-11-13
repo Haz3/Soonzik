@@ -36,6 +36,13 @@
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                 </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Likes" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fwM-da-T33">
+                    <rect key="frame" x="144" y="107" width="89" height="21"/>
+                    <animations/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <animations/>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -46,6 +53,7 @@
                 <outlet property="albumTitle" destination="oWl-yq-mZx" id="JTe-oZ-qom"/>
                 <outlet property="artistLabel" destination="WYt-FC-IDA" id="4L7-DH-aC5"/>
                 <outlet property="buyButton" destination="Gt9-pe-gLa" id="LW7-iy-zOb"/>
+                <outlet property="numberLikesLabel" destination="fwM-da-T33" id="lWv-nc-YR5"/>
             </connections>
             <point key="canvasLocation" x="558" y="392"/>
         </view>

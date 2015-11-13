@@ -14,6 +14,7 @@
 @property (nonatomic, strong) IBOutlet UILabel *albumTitle;
 @property (nonatomic, strong) IBOutlet UILabel *releaseDateLabel;
 @property (nonatomic, strong) IBOutlet UILabel *artistLabel;
+@property (nonatomic, strong) IBOutlet UILabel *numberLikesLabel;
 
 @property (nonatomic, strong) IBOutlet UIButton *buyButton;
 

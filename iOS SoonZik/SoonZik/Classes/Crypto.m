@@ -17,6 +17,7 @@
 
     bool need = false;
     
+    NSLog(@"user.secureKey : %@", user.secureKey);
     if (user.secureKey == nil) {    // if secureKey is null
         need = true;
         NSLog(@"secure KEy is null");
@@ -25,7 +26,7 @@
         [dateFormat setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
         [dateFormat setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"GMT"]];
         NSDate *dat = [dateFormat dateFromString:user.secureKeyDate];
-        NSTimeInterval secondsInOneHours = 1 * 60 * 60;
+        NSTimeInterval secondsInOneHours = 60 * 60;
         NSDate *dateOneHoursAhead = [dat dateByAddingTimeInterval:secondsInOneHours];
         
         NSLog(@"user.secureDate : %@", dateOneHoursAhead);
@@ -59,13 +60,18 @@
         
         NSString *secureKey = [json objectForKey:@"key"];
         
+        NSString *conca = [NSString stringWithFormat:@"%@%@", user.salt, secureKey];
+        NSString *key = [Crypto sha256HashFor:conca];
+        
         user.secureKeyDate = stringDate;
-        user.secureKey = secureKey;
+        user.secureKey = key;
         
         NSData *dataStore = [NSKeyedArchiver archivedDataWithRootObject:user];
         [[NSUserDefaults standardUserDefaults] setObject:dataStore forKey:@"User"];
         [[NSUserDefaults standardUserDefaults] synchronize];
         
+    } else {
+        NSLog(@"NO NEED");
     }
     
     return user.secureKey;
