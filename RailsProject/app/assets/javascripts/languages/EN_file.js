@@ -47,11 +47,7 @@ var labels = {
 	FILE_ALBUM_ADD_SONG_MESSAGE: "Song is successfuly add into the cart", 
 	FILE_ALBUM_ADD_SONG_ERROR_MESSAGE: "An error occured while adding song into the cart",
 	FILE_ALBUM_GET_NOTES_ERROR_MESSAGE: "Error while loading your notes",
-	FILE_ALBUM_FIND_PLAYLIST_ERROR_MESSAGE: "Error while deleting the playlist : ",
 	FILE_ALBUM_GET_ALBUM_ERROR_MESSAGE: "Error while loading the album",
-	FILE_ALBUM_ADD_PLAYLIST_NOTIF_SUCCESS_PART_ONE: "The music '",
-	FILE_ALBUM_ADD_PLAYLIST_NOTIF_SUCCESS_PART_TWO: "' has been added to the playlist",
-	FILE_ALBUM_ADD_PLAYLIST_ERROR_MESSAGE: "Error while saving a new music in the playlist",
 	FILE_ALBUM_SET_NOTE_ERROR_MESSAGE: "Error while rating the music, please try later.",
 	FILE_ALBUM_LOAD_COMMENT_ERROR_MESSAGE: "Error while loading commentaries",
 	FILE_ALBUM_SEND_COMMENT_ERROR_MESSAGE: "Error while saving your comment, please try later",
@@ -195,17 +191,17 @@ var labels = {
 	DISPLAY_PLAYER_NEW_PLAYLIST_PLACEHOLDER: "New Playlist",
 
 	// Playlist view
-	DISPLAY_PLAYER_EMPTY_LABEL: "This playlist is empty",
-	DISPLAY_PLAYER_FROM_LABEL: "From",
-	DISPLAY_PLAYER_MUSICS_LABEL: "musics",
-	DISPLAY_PLAYER_LISTEN_LABEL: "Listen",
-	DISPLAY_PLAYER_SHARE_LABEL: "Share",
-	DISPLAY_PLAYER_CLOSE_LABEL: "Close",
-	DISPLAY_PLAYER_NEW_PLAYLIST_LABEL: "Save as new playlist",
-	DISPLAY_PLAYER_SAVE_AS_LABEL: "Save as : ",
-	DISPLAY_PLAYER_SAVE_BUTTON: "Save",
-	DISPLAY_PLAYER_ADD_PLAYLIST_LABEL: "Add to playlist",
-	DISPLAY_PLAYER_ADD_PLAYLIST_BUTTON: "Add",
+	DISPLAY_PLAYLIST_EMPTY_LABEL: "This playlist is empty",
+	DISPLAY_PLAYLIST_FROM_LABEL: "From",
+	DISPLAY_PLAYLIST_MUSICS_LABEL: "musics",
+	DISPLAY_PLAYLIST_LISTEN_LABEL: "Listen",
+	DISPLAY_PLAYLIST_SHARE_LABEL: "Share",
+	DISPLAY_PLAYLIST_CLOSE_LABEL: "Close",
+	DISPLAY_PLAYLIST_NEW_PLAYLIST_LABEL: "Save as new playlist",
+	DISPLAY_PLAYLIST_SAVE_AS_LABEL: "Save as : ",
+	DISPLAY_PLAYLIST_SAVE_BUTTON: "Save",
+	DISPLAY_PLAYLIST_ADD_PLAYLIST_LABEL: "Add to playlist",
+	DISPLAY_PLAYLIST_ADD_PLAYLIST_BUTTON: "Add",
 
 	// Search view
 	DISPLAY_SEARCH_FILTERS_LABEL: "Filters",
@@ -416,4 +412,12 @@ var labels = {
   // Commentaries view
   DISPLAY_COMMENTARY_TITLE_LABEL: "Commentaries",
   DISPLAY_NO_COMMENTARY_LABEL: "No commentaries",
+
+  // Application
+  FILE_APP_PLAYLIST_NOT_FOUND_ERROR_MESSAGE: "An error occured while adding the playlist : ",
+  FILE_APP_LIKE_ERROR_MESSAGE: "Une erreur s'est produite lors de la mention 'J'aime'",
+  FILE_APP_UNLIKE_ERROR_MESSAGE: "Une erreur s'est produite lors du retrait de la mention 'J'aime'",
+
+  // Tooltip
+	FILE_TOOLTIP_ADD_PLAYLIST_ERROR_MESSAGE: "Error while saving a new music in the playlist",
 }

@@ -44,14 +44,10 @@ var labels = {
 	// Album Controller
 	FILE_ALBUM_ADD_ALBUM_MESSAGE: "L'album a bien été ajouté au panier",
 	FILE_ALBUM_ADD_ALBUM_ERROR_MESSAGE: "Une erreur s'est produite lors de l'ajout au panier",
-  	FILE_ALBUM_ADD_SONG_MESSAGE: "La musique a bien été ajouté au panier", 
-  	FILE_ALBUM_ADD_SONG_ERROR_MESSAGE: "Une erreur s'est produite lors de l'ajout au panier",
+	FILE_ALBUM_ADD_SONG_MESSAGE: "La musique a bien été ajouté au panier", 
+	FILE_ALBUM_ADD_SONG_ERROR_MESSAGE: "Une erreur s'est produite lors de l'ajout au panier",
 	FILE_ALBUM_GET_NOTES_ERROR_MESSAGE: "Une erreur s'est produite au chargement des notes",
-	FILE_ALBUM_FIND_PLAYLIST_ERROR_MESSAGE: "Une erreur s'est produite pendant la suppresion d'une liste de lecture : ",
 	FILE_ALBUM_GET_ALBUM_ERROR_MESSAGE: "Une erreur s'est produite au chargement d'un album",
-	FILE_ALBUM_ADD_PLAYLIST_NOTIF_SUCCESS_PART_ONE: "La musique '",
-	FILE_ALBUM_ADD_PLAYLIST_NOTIF_SUCCESS_PART_TWO: "' a été ajouté à la liste de lecture",
-	FILE_ALBUM_ADD_PLAYLIST_ERROR_MESSAGE: "Une erreur s'est produite à l'ajout d'une musique dans une liste de lecture",
 	FILE_ALBUM_SET_NOTE_ERROR_MESSAGE: "Une erreur s'est produite à la notation d'une musique",
 	FILE_ALBUM_LOAD_COMMENT_ERROR_MESSAGE: "Une erreur s'est produite au chargement des commentaires",
 	FILE_ALBUM_SEND_COMMENT_ERROR_MESSAGE: "Une erreur s'est produite à la sauvegarde de votre commentaire",
@@ -195,17 +191,17 @@ var labels = {
 	DISPLAY_PLAYER_NEW_PLAYLIST_PLACEHOLDER: "Nouvelle playlist",
 
 	// Playlist view
-	DISPLAY_PLAYER_EMPTY_LABEL: "Cette liste de lecture est vide",
-	DISPLAY_PLAYER_FROM_LABEL: "De",
-	DISPLAY_PLAYER_MUSICS_LABEL: "musiques",
-	DISPLAY_PLAYER_LISTEN_LABEL: "Ecouter",
-	DISPLAY_PLAYER_SHARE_LABEL: "Partager",
-	DISPLAY_PLAYER_CLOSE_LABEL: "Fermer",
-	DISPLAY_PLAYER_NEW_PLAYLIST_LABEL: "Sauvegarder comme nouvelle liste de lecture",
-	DISPLAY_PLAYER_SAVE_AS_LABEL: "Sauvegarder la liste de lecture sous : ",
-	DISPLAY_PLAYER_SAVE_BUTTON: "Sauvegarder",
-	DISPLAY_PLAYER_ADD_PLAYLIST_LABEL: "Ajouter à la liste de lecture",
-	DISPLAY_PLAYER_ADD_PLAYLIST_BUTTON: "Ajouter",
+	DISPLAY_PLAYLIST_EMPTY_LABEL: "Cette liste de lecture est vide",
+	DISPLAY_PLAYLIST_FROM_LABEL: "De",
+	DISPLAY_PLAYLIST_MUSICS_LABEL: "musiques",
+	DISPLAY_PLAYLIST_LISTEN_LABEL: "Ecouter",
+	DISPLAY_PLAYLIST_SHARE_LABEL: "Partager",
+	DISPLAY_PLAYLIST_CLOSE_LABEL: "Fermer",
+	DISPLAY_PLAYLIST_NEW_PLAYLIST_LABEL: "Sauvegarder comme nouvelle liste de lecture",
+	DISPLAY_PLAYLIST_SAVE_AS_LABEL: "Sauvegarder la liste de lecture sous : ",
+	DISPLAY_PLAYLIST_SAVE_BUTTON: "Sauvegarder",
+	DISPLAY_PLAYLIST_ADD_PLAYLIST_LABEL: "Ajouter à la liste de lecture",
+	DISPLAY_PLAYLIST_ADD_PLAYLIST_BUTTON: "Ajouter",
 
 	// Search view
 	DISPLAY_SEARCH_FILTERS_LABEL: "Filtres",
@@ -292,6 +288,8 @@ var labels = {
 	DISPLAY_CONCERT_LINK_LABEL: "Lien : ",
 	DISPLAY_CONCERT_NO_LINK_LABEL: "Aucun lien",
 	DISPLAY_CONCERT_ADDRESS_LABEL: "Adresse : ",
+	DISPLAY_CONCERT_ARTIST_FILTER_LABEL: "Artiste : ",
+	DISPLAY_CONCERT_COUNTRY_FILTER_LABEL: "Pays : ",
 
 	// Concert Controller
 	FILE_CONCERT_FIND_CONCERT_ERROR_MESSAGE: "Une erreur s'est produite lors du chargement des concerts",
@@ -414,4 +412,14 @@ var labels = {
   // Commentaries view
   DISPLAY_COMMENTARY_TITLE_LABEL: "Commentaires",
   DISPLAY_NO_COMMENTARY_LABEL: "Aucun commentaires",
+
+  // Application
+  FILE_APP_PLAYLIST_NOT_FOUND_ERROR_MESSAGE: "Une erreur s'est produite pendant l'ajout à une liste de lecture : ",
+  FILE_APP_LIKE_ERROR_MESSAGE: "Une erreur s'est produite lors de la mention 'J'aime'",
+  FILE_APP_UNLIKE_ERROR_MESSAGE: "Une erreur s'est produite lors du retrait de la mention 'J'aime'",
+
+  // Tooltip
+  FILE_TOOLTIP_ADD_PLAYLIST_NOTIF_SUCCESS_PART_ONE: "La musique '",
+	FILE_TOOLTIP_ADD_PLAYLIST_NOTIF_SUCCESS_PART_TWO: "' a été ajouté à la liste de lecture",
+	FILE_TOOLTIP_ADD_PLAYLIST_ERROR_MESSAGE: "Une erreur s'est produite à l'ajout d'une musique dans une liste de lecture",
 }

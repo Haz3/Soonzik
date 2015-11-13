@@ -47,6 +47,7 @@
 //= require ./AngularJS/controllers/PlayerController.js
 //= require ./AngularJS/controllers/PlaylistsController.js
 //= require ./AngularJS/controllers/SearchController.js
+//= require ./AngularJS/controllers/TooltipController.js
 //= require ./AngularJS/controllers/UsersController.js
 //= require ./AngularJS/directives/autofocus.js
 //= require ./AngularJS/directives/autoscrollbottom.js

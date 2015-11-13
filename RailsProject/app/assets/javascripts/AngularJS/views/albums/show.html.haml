@@ -34,23 +34,8 @@
 							%music{ "music-object" => "song" }
 								%i.fi-play
 						%td.relative.iBtn
-							%i.fi-plus.pointer{ "ng-click" => "setTooltip(tooltip == false ? song : false)" }
-							.mytooltip.toolright{ "ng-show" => "tooltip == song" }
-								%ul.no-bullet
-									%li.choice{ "ng-if" => "user != false", "ng-click" => "selectMusic(song)" } {{ labels.DISPLAY_ALBUM_ADD_PLAYLIST_BUTTON }}
-									%li.playlistBlock{ "ng-if" => "selectedMusic == song" }
-										%hr
-										%ul.text-left.small-12.playlistList
-											%li.choice.small-12.playlistChoice{ "ng-repeat" => "myplaylist in myPlaylists" }
-												%input{ "ng-model" => "myplaylist.check", type: "radio", id: "playlist-{{myplaylist.id}}", "ng-value" => "true" }
-												%label{ "for" => "playlist-{{myplaylist.id}}" } {{ myplaylist.name }}
-											%li.small-12.text-center
-												.button.tiny{ "ng-click" => "addToPlaylist()" } {{ labels.DISPLAY_ALBUM_ADD_PLAYLIST_LABEL }}
-										%hr
-									%li.choice
-										%music.small-12{ "music-object" => "song", "ng-click" => "setTooltip(false)" } {{ labels.DISPLAY_ALBUM_LISTEN_LABEL }}
-									%li
-										.button.tiny{ "ng-click" => "setTooltip(false)" } {{ labels.DISPLAY_ALBUM_CLOSE_LABEL }}
+							%i.fi-plus.pointer{ "ng-click" => "setTooltip(tooltip == song ? false : song)" }
+							.mytooltip.toolright{ "ng-show" => "tooltip == song", "ng-include" => "'/assets/AngularJS/views/include/tooltip.html.haml'", "ng-controller" => "TooltipCtrl", "ng-init" => "tooltipInit(song, 1)" }
 			.commentariesInput
 				.inputArea
 					%textarea{ "ng-model" => "comment.value" }

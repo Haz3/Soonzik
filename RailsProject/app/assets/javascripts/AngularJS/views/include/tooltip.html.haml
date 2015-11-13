@@ -1,0 +1,26 @@
+.tooltipContainer
+	%div{ "ng-show" => "type == 1" }
+		%ul.no-bullet{ "ng-show" => "state == 1" }
+			%li{ "ng-click" => "listen()" } Ecouter
+			%li{ "ng-click" => "addToCurrentPlaylist()" } Ajouter à la liste de lecture courante
+			%li{ "ng-click" => "changeState(2)" } Ajouter à une playlist
+			%li{ "ng-click" => "setTooltip(false)" } Close
+		%ul.no-bullet{ "ng-show" => "state == 2 && type == 1" }
+			%li{ "ng-repeat" => "myplaylist in myPlaylists" }
+				%input{ "ng-click" => "managePlaylist(myplaylist)", type: "checkbox", id: "playlist-{{myplaylist.id}}", "ng-value" => "true", "ng-model" => "myplaylist.check" }
+				%label{ "for" => "playlist-{{myplaylist.id}}" } {{ myplaylist.name }}
+			%li{ "ng-click" => "changeState(1)" } Back
+	%div.saveAs{ "ng-show" => "type == 2" }
+		%ul.no-bullet
+			%li.clearfix
+				.small-5.columns {{ labels.DISPLAY_PLAYLIST_SAVE_AS_LABEL }}
+				.small-7.columns
+					%input{ type: "text", "ng-model" => "input.name" }
+			%li{ "ng-click" => "savePlaylist()" } {{ labels.DISPLAY_PLAYLIST_SAVE_BUTTON }}
+			%li{ "ng-click" => "setTooltip(false)" } {{ labels.DISPLAY_PLAYLIST_CLOSE_LABEL }}
+	%div.saveAs{ "ng-show" => "type == 3" }
+		%ul.no-bullet
+			%li {{ labels.DISPLAY_PLAYLIST_SHARE_LABEL }} !
+			%li.small-11.small-centered.columns
+				%input.radius{ type: "text", value: "{{ idShare }}", "select-on-click" => true, readonly: "readonly" }
+			%li{ "ng-click" => "setTooltip(false)" } {{ labels.DISPLAY_PLAYLIST_CLOSE_LABEL }}

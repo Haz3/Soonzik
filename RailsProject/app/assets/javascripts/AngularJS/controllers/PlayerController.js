@@ -21,10 +21,7 @@ SoonzikApp.controller("PlayerCtrl", ["$scope", "$rootScope", "HTTPService", "Not
   $scope.time = 0;
   $scope.timeFormated = "";
 
-  $scope.playlist = [];
   $scope.indexPlaylist = 0;
-
-  $scope.myPlaylists = [];
 
   $scope.infomusic = { current: false, playlist: false };
   $scope.toDelete = false;
@@ -83,36 +80,6 @@ SoonzikApp.controller("PlayerCtrl", ["$scope", "$rootScope", "HTTPService", "Not
 
     $(window).resize(resizeHiddenPlaylist);
     resizeHiddenPlaylist();
-
-    if ($scope.user != false) {
-
-      SecureAuth.securedTransaction(function(key, id) {
-        var parameters = [
-          { key: "secureKey", value: key },
-          { key: "user_id", value: id },
-          { key: "attribute[user_id]", value: $scope.user.id }
-        ];
-  	    HTTPService.findPlaylist(parameters).then(function(response) {
-  	    	$scope.myPlaylists = response.data.content;
-  	    	for (var i in $scope.myPlaylists) {
-  	    		$scope.myPlaylists[i].extend = false;
-  	    		$scope.myPlaylists[i].share = false;
-  	    		$scope.myPlaylists[i].url = 'http://lvh.me:3000/playlists/' + $scope.myPlaylists[i].id;
-
-  	    		var duration = 0;
-  	    		for (var j = 0 ; j < $scope.myPlaylists[i].musics.length ; j++) {
-  	    			duration += $scope.myPlaylists[i].musics[j].duration;
-  	    		}
-
-  	    		$scope.myPlaylists[i].duration = duration;
-
-  	    	}
-    			$scope.loading = false;
-  	    }, function(error) {
-  	    	NotificationService.error($rootScope.labels.FILE_PLAYER_FIND_PLAYLIST_ERROR_MESSAGE);
-        });
-      });
-  	}
   }
 
   $scope.$on('player:play', function(event, data) {
@@ -124,8 +91,8 @@ SoonzikApp.controller("PlayerCtrl", ["$scope", "$rootScope", "HTTPService", "Not
     if (inArray !== false) {
     	$scope.indexPlaylist = inArray;
     } else {
-    	$scope.playlist.push(dataObject);
-    	$scope.indexPlaylist = $scope.playlist.length - 1;
+    	$rootScope.playlist.push(dataObject);
+    	$scope.indexPlaylist = $rootScope.playlist.length - 1;
     }
     
     securePlay(dataObject);
@@ -144,8 +111,8 @@ SoonzikApp.controller("PlayerCtrl", ["$scope", "$rootScope", "HTTPService", "Not
 
 	  $scope.wavesurfer.on('finish', function () {
 	  	$scope.indexPlaylist++;
-	  	if (($scope.indexPlaylist == $scope.playlist.length && $scope.shuffle == false) ||
-	  		($scope.shuffle == true && $scope.playlist.length <= 1)) {
+	  	if (($scope.indexPlaylist == $rootScope.playlist.length && $scope.shuffle == false) ||
+	  		($scope.shuffle == true && $rootScope.playlist.length <= 1)) {
 	      $scope.paused = true;
 	      $scope.wavesurfer.stop(0);
 	      $scope.timeFormated = "";
@@ -155,12 +122,12 @@ SoonzikApp.controller("PlayerCtrl", ["$scope", "$rootScope", "HTTPService", "Not
 	  		if ($scope.shuffle == true) {
 		  		var nextTrack = 0;
 		  		do
-		  			nextTrack = Math.abs(Math.random() * ($scope.playlist.length - 1))
+		  			nextTrack = Math.abs(Math.random() * ($rootScope.playlist.length - 1))
 		  		while (nextTrack != $scope.indexPlaylist - 1);
 		  		$scope.indexPlaylist = nextTrack;
 	  		}
 
-        securePlay($scope.playlist[$scope.indexPlaylist]);
+        securePlay($rootScope.playlist[$scope.indexPlaylist]);
 	  	}
       $scope.$apply();
 	  });
@@ -179,11 +146,11 @@ SoonzikApp.controller("PlayerCtrl", ["$scope", "$rootScope", "HTTPService", "Not
 
     for (var i = 0 ; i < musicArray.length ; i++) {
       if (isInPlaylist(musicArray[i]) == false)
-        $scope.playlist.push({ title: musicArray[i].title, id: musicArray[i].id, obj: musicArray[i] });
+        $rootScope.playlist.push({ title: musicArray[i].title, id: musicArray[i].id, obj: musicArray[i] });
     }
 
-    if ($scope.paused == true && $scope.playlist.length > 0 && $scope.indexPlaylist == 0) {
-      securePlay($scope.playlist[$scope.indexPlaylist]);
+    if ($scope.paused == true && $rootScope.playlist.length > 0 && $scope.indexPlaylist == 0) {
+      securePlay($rootScope.playlist[$scope.indexPlaylist]);
     }
   });
 
@@ -191,14 +158,14 @@ SoonzikApp.controller("PlayerCtrl", ["$scope", "$rootScope", "HTTPService", "Not
     data.extend = false;
     data.share = false;
     data.url = 'http://lvh.me:3000/playlists/' + data.id;
-    $scope.myPlaylists.push(data);
+    $rootScope.myPlaylists.push(data);
   });
 
   $scope.$on("player:addToPlaylist", function(event, data) {
-    for (var i = 0 ; i < $scope.myPlaylists.length ; i++) {
-      if ($scope.myPlaylists[i].id == data.playlist.id) {
-        $scope.myPlaylists[i].musics.push(data.music);
-        $scope.myPlaylists[i].duration += data.music.duration;
+    for (var i = 0 ; i < $rootScope.myPlaylists.length ; i++) {
+      if ($rootScope.myPlaylists[i].id == data.playlist.id) {
+        $rootScope.myPlaylists[i].musics.push(data.music);
+        $rootScope.myPlaylists[i].duration += data.music.duration;
         return;
       }
     }
@@ -236,14 +203,14 @@ SoonzikApp.controller("PlayerCtrl", ["$scope", "$rootScope", "HTTPService", "Not
   }
 
   $scope.cleanPlaylist = function() {
-	  $scope.playlist = [];
+	  $rootScope.playlist = [];
   	$scope.indexPlaylist = 0;
   }
 
   $scope.removeMusicFromPlaylist = function(index) {
-	  $scope.playlist.splice(index, 1);
-	  if (($scope.indexPlaylist == $scope.playlist.length && $scope.shuffle == false) ||
-  		($scope.shuffle == true && $scope.playlist.length <= 1)) {
+	  $rootScope.playlist.splice(index, 1);
+	  if (($scope.indexPlaylist == $rootScope.playlist.length && $scope.shuffle == false) ||
+  		($scope.shuffle == true && $rootScope.playlist.length <= 1)) {
       $scope.paused = true;
       $scope.wavesurfer.seekTo(0);
       $scope.timeFormated = "";
@@ -252,18 +219,18 @@ SoonzikApp.controller("PlayerCtrl", ["$scope", "$rootScope", "HTTPService", "Not
   		if ($scope.shuffle == true) {
 	  		var nextTrack = 0;
 	  		do
-	  			nextTrack = Math.abs(Math.random() * ($scope.playlist.length - 1))
+	  			nextTrack = Math.abs(Math.random() * ($rootScope.playlist.length - 1))
 	  		while (nextTrack != $scope.indexPlaylist - 1);
 	  		$scope.indexPlaylist = nextTrack;
   		}
 	    
-      securePlay($scope.playlist[$scope.indexPlaylist]);
+      securePlay($rootScope.playlist[$scope.indexPlaylist]);
   	}
   }
 
   var isInPlaylist = function(compareObject) {
-  	for (var i = 0 ; i < $scope.playlist.length ; i++) {
-  		if (compareObject.id == $scope.playlist[i].id)
+  	for (var i = 0 ; i < $rootScope.playlist.length ; i++) {
+  		if (compareObject.id == $rootScope.playlist[i].id)
   			return i;
   	}
   	return false;
@@ -283,13 +250,13 @@ SoonzikApp.controller("PlayerCtrl", ["$scope", "$rootScope", "HTTPService", "Not
 
   $scope.previous = function() {
     if ($scope.indexPlaylist == 0) {
-      if ($scope.playlist.length > 1) {
-        $scope.indexPlaylist = $scope.playlist.length - 1;
-        securePlay($scope.playlist[$scope.indexPlaylist]);
+      if ($rootScope.playlist.length > 1) {
+        $scope.indexPlaylist = $rootScope.playlist.length - 1;
+        securePlay($rootScope.playlist[$scope.indexPlaylist]);
       }
     } else {
       $scope.indexPlaylist--;
-      securePlay($scope.playlist[$scope.indexPlaylist]);
+      securePlay($rootScope.playlist[$scope.indexPlaylist]);
     }
   }
 
@@ -304,9 +271,9 @@ SoonzikApp.controller("PlayerCtrl", ["$scope", "$rootScope", "HTTPService", "Not
   }
 
   $scope.next = function() {
-    if ($scope.indexPlaylist < $scope.playlist.length - 1) {
+    if ($scope.indexPlaylist < $rootScope.playlist.length - 1) {
       $scope.indexPlaylist++;
-      securePlay($scope.playlist[$scope.indexPlaylist]);
+      securePlay($rootScope.playlist[$scope.indexPlaylist]);
     } else {
       $scope.indexPlaylist = 0;
       $scope.wavesurfer.stop();
@@ -316,7 +283,7 @@ SoonzikApp.controller("PlayerCtrl", ["$scope", "$rootScope", "HTTPService", "Not
 
   $scope.playFromPlaylist = function(index) {
   	$scope.indexPlaylist = index;
-  	securePlay($scope.playlist[$scope.indexPlaylist]);
+  	securePlay($rootScope.playlist[$scope.indexPlaylist]);
   }
 
   $scope.formatedDuration = function(duration) {
@@ -334,9 +301,9 @@ SoonzikApp.controller("PlayerCtrl", ["$scope", "$rootScope", "HTTPService", "Not
   		];
   		HTTPService.destroyPlaylist(params).then(function() {
         $rootScope.$broadcast("deletePlaylist", playlist);
-  			for (var indexOfMyPlaylist in $scope.myPlaylists) {
-  				if ($scope.myPlaylists[indexOfMyPlaylist].id == playlist.id) {
-  					$scope.myPlaylists.splice(indexOfMyPlaylist, 1);
+  			for (var indexOfMyPlaylist in $rootScope.myPlaylists) {
+  				if ($rootScope.myPlaylists[indexOfMyPlaylist].id == playlist.id) {
+  					$rootScope.myPlaylists.splice(indexOfMyPlaylist, 1);
   					break;
   				}
   			}
@@ -357,11 +324,11 @@ SoonzikApp.controller("PlayerCtrl", ["$scope", "$rootScope", "HTTPService", "Not
   $scope.addToCurrentPlaylist = function(playlist) {
   	for (var i = 0 ; i < playlist.length ; i++) {
   		var isIn = false;
-  		for (var j = 0 ; j < $scope.playlist.length ; j++) {
-  			if ($scope.playlist[j].obj.id == playlist[i].id) { isIn = true; }
+  		for (var j = 0 ; j < $rootScope.playlist.length ; j++) {
+  			if ($rootScope.playlist[j].obj.id == playlist[i].id) { isIn = true; }
   		}
   		if (!isIn) {
-  			$scope.playlist.push({ title: playlist[i].title, id: playlist[i].id, obj: playlist[i] });
+  			$rootScope.playlist.push({ title: playlist[i].title, id: playlist[i].id, obj: playlist[i] });
   		}
   	}
     $scope.toRead = false;
@@ -373,9 +340,9 @@ SoonzikApp.controller("PlayerCtrl", ["$scope", "$rootScope", "HTTPService", "Not
 	  $scope.wavesurfer.seekTo(0);
   	$scope.wavesurfer.load("");
   	$scope.wavesurfer.empty();
-  	$scope.playlist = [];
+  	$rootScope.playlist = [];
   	for (var i = 0 ; i < playlist.length ; i++) {
-  		$scope.playlist.push({ title: playlist[i].title, id: playlist[i].id, obj: playlist[i] });
+  		$rootScope.playlist.push({ title: playlist[i].title, id: playlist[i].id, obj: playlist[i] });
   	}
   	$scope.indexPlaylist = 0;
   	if (paused == false) {
@@ -396,6 +363,7 @@ SoonzikApp.controller("PlayerCtrl", ["$scope", "$rootScope", "HTTPService", "Not
   			for (var i = 0 ; i < playlist.musics.length ; i++) {
   				if (playlist.musics[i].id == music.id) {
   					playlist.musics.splice(i, 1);
+            if (typeof $rootScope.tooltip !== "string" && music.id == $rootScope.tooltip.id) { playlist.check = false; }
   					break;
   				}
   			}
@@ -433,7 +401,7 @@ SoonzikApp.controller("PlayerCtrl", ["$scope", "$rootScope", "HTTPService", "Not
           playlist.share = false;
           playlist.url = 'http://lvh.me:3000/playlists/' + playlist.id;
           playlist.duration = 0;
-          $scope.myPlaylists.push(playlist);
+          $rootScope.myPlaylists.push(playlist);
         }, function(error) {
           NotificationService.error($rootScope.labels.FILE_PLAYER_SAVE_IN_PLAYLIST_ERROR_MESSAGE);
         });
@@ -442,8 +410,8 @@ SoonzikApp.controller("PlayerCtrl", ["$scope", "$rootScope", "HTTPService", "Not
   }
 
   var unshareEverything = function() {
-  	for (var i = 0 ; i < $scope.myPlaylists.length ; i++) {
-  		$scope.unshare($scope.myPlaylists[i]);
+  	for (var i = 0 ; i < $rootScope.myPlaylists.length ; i++) {
+  		$scope.unshare($rootScope.myPlaylists[i]);
   	}
   }
 
@@ -454,7 +422,6 @@ SoonzikApp.controller("PlayerCtrl", ["$scope", "$rootScope", "HTTPService", "Not
       });
       if ($scope.geoloc) {
         SecureAuth.securedTransaction(function(key, user_id) {
-          var d = new Date();
           var params = {
             user_id: user_id,
             secureKey: key,
@@ -462,8 +429,7 @@ SoonzikApp.controller("PlayerCtrl", ["$scope", "$rootScope", "HTTPService", "Not
               user_id: user_id,
               music_id: music.id,
               latitude: $scope.position.latitude,
-              longitude: $scope.position.longitude,
-              when: d.format("yyyy-mm-dd HH:MM:ss")
+              longitude: $scope.position.longitude
             }
           }
           HTTPService.addListening(params).then(function(response) {
@@ -490,13 +456,12 @@ SoonzikApp.controller("PlayerCtrl", ["$scope", "$rootScope", "HTTPService", "Not
 
   $scope.tmpPlaylistLink = function() {
     var url = "http://lvh.me:3000/playlists/tmp:";
-    var pls = "";
 
-    for (var i = 0 ; i < $scope.playlist.length ; i++) {
-      url += $scope.playlist[i].id + ";";
+    for (var i = 0 ; i < $rootScope.playlist.length ; i++) {
+      url += $rootScope.playlist[i].id + ";";
     }
 
-    return url + pls;
+    return url;
   }
 
   $scope.savePlaylistFromCurrent = function() {
@@ -519,11 +484,11 @@ SoonzikApp.controller("PlayerCtrl", ["$scope", "$rootScope", "HTTPService", "Not
           playlist.share = false;
           playlist.url = 'http://lvh.me:3000/playlists/' + playlist.id;
           playlist.duration = 0;
-          $scope.myPlaylists.push(playlist);
+          $rootScope.myPlaylists.push(playlist);
 
-          for (var i = 0 ; i < $scope.playlist.length ; i++) {
-            playlist.musics.push($scope.playlist[i]);
-            saveMusicInPlaylist(playlist, $scope.playlist[i]);
+          for (var i = 0 ; i < $rootScope.playlist.length ; i++) {
+            playlist.musics.push($rootScope.playlist[i]);
+            saveMusicInPlaylist(playlist, $rootScope.playlist[i]);
           }
         }, function(error) {
           NotificationService.error($rootScope.labels.FILE_PLAYER_SAVE_IN_PLAYLIST_ERROR_MESSAGE);
