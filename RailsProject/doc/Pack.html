@@ -158,10 +158,10 @@ with this pack</p>
 					<div class="method-description">
 											<p>Filter of information for the <a href="API.html">API</a></p>
 
-<p>Fields returned : [:id, :title]</p>					
+<p>Fields returned : [:id, :title, begin_date, end_date, minimal_price]</p>					
 											<div class="method-source-code" id="miniKey-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/models/pack.rb, line 35</span>
+								class="language-ruby"><span class="ruby-comment"># File app/models/pack.rb, line 36</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">miniKey</span>
       [<span class="ruby-value">:id</span>, <span class="ruby-value">:title</span>, <span class="ruby-value">:begin_date</span>, <span class="ruby-value">:end_date</span>, <span class="ruby-value">:minimal_price</span>]
 <span class="ruby-keyword">end</span></code></pre>
@@ -183,7 +183,7 @@ with this pack</p>
 											<p>The strong parameters to save or update object</p>					
 											<div class="method-source-code" id="pack_params-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/models/pack.rb, line 28</span>
+								class="language-ruby"><span class="ruby-comment"># File app/models/pack.rb, line 29</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">pack_params</span>(<span class="ruby-identifier">parameters</span>)
   <span class="ruby-identifier">parameters</span>.<span class="ruby-identifier">require</span>(<span class="ruby-value">:pack</span>).<span class="ruby-identifier">permit</span>(<span class="ruby-value">:title</span>)
 <span class="ruby-keyword">end</span></code></pre>
@@ -218,7 +218,7 @@ with this pack</p>
 											<p>Calculate the average of donation for this pack</p>					
 											<div class="method-source-code" id="averagePrice-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/models/pack.rb, line 40</span>
+								class="language-ruby"><span class="ruby-comment"># File app/models/pack.rb, line 41</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">averagePrice</span>
   <span class="ruby-identifier">id</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">id</span>
   <span class="ruby-identifier">average</span> = <span class="ruby-value">0.0</span>
@@ -264,6 +264,7 @@ with this pack</p>
 	<ul>
 			<li><a href="./API.html">API</a></li>
 			<li><a href="./API/AlbumsController.html">API::AlbumsController</a></li>
+			<li><a href="./API/AmbiancesController.html">API::AmbiancesController</a></li>
 			<li><a href="./API/ApiController.html">API::ApiController</a></li>
 			<li><a href="./API/ApisecurityController.html">API::ApisecurityController</a></li>
 			<li><a href="./API/BattlesController.html">API::BattlesController</a></li>
@@ -272,6 +273,7 @@ with this pack</p>
 			<li><a href="./API/GenresController.html">API::GenresController</a></li>
 			<li><a href="./API/InfluencesController.html">API::InfluencesController</a></li>
 			<li><a href="./API/LanguagesController.html">API::LanguagesController</a></li>
+			<li><a href="./API/LikesController.html">API::LikesController</a></li>
 			<li><a href="./API/ListeningsController.html">API::ListeningsController</a></li>
 			<li><a href="./API/MessagesController.html">API::MessagesController</a></li>
 			<li><a href="./API/MusicsController.html">API::MusicsController</a></li>
@@ -287,11 +289,14 @@ with this pack</p>
 			<li><a href="./Address.html">Address</a></li>
 			<li><a href="./AdminUser.html">AdminUser</a></li>
 			<li><a href="./Album.html">Album</a></li>
+			<li><a href="./Albumslike.html">Albumslike</a></li>
+			<li><a href="./Ambiance.html">Ambiance</a></li>
 			<li><a href="./Attachment.html">Attachment</a></li>
 			<li><a href="./Battle.html">Battle</a></li>
 			<li><a href="./Cart.html">Cart</a></li>
 			<li><a href="./Commentary.html">Commentary</a></li>
 			<li><a href="./Concert.html">Concert</a></li>
+			<li><a href="./Concertslike.html">Concertslike</a></li>
 			<li><a href="./Description.html">Description</a></li>
 			<li><a href="./Feedback.html">Feedback</a></li>
 			<li><a href="./Follow.html">Follow</a></li>
@@ -309,6 +314,7 @@ with this pack</p>
 			<li><a href="./MusicNote.html">MusicNote</a></li>
 			<li><a href="./News.html">News</a></li>
 			<li><a href="./NewsTitle.html">NewsTitle</a></li>
+			<li><a href="./Newslike.html">Newslike</a></li>
 			<li><a href="./Newstext.html">Newstext</a></li>
 			<li><a href="./Notification.html">Notification</a></li>
 			<li><a href="./Pack.html">Pack</a></li>
@@ -321,6 +327,7 @@ with this pack</p>
 			<li><a href="./PurchasedAlbum.html">PurchasedAlbum</a></li>
 			<li><a href="./PurchasedMusic.html">PurchasedMusic</a></li>
 			<li><a href="./PurchasedPack.html">PurchasedPack</a></li>
+			<li><a href="./Tool.html">Tool</a></li>
 			<li><a href="./Tweet.html">Tweet</a></li>
 			<li><a href="./User.html">User</a></li>
 			<li><a href="./Vote.html">Vote</a></li>

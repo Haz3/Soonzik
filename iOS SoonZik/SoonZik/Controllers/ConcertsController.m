@@ -19,7 +19,6 @@
     NSMutableArray *arr = [[NSMutableArray alloc] init];
     url = [NSString stringWithFormat:@"%@concerts", API_URL];
     NSDictionary *json = [Request getRequest:url];
-    NSLog(@"json concert : %@", json);
     if ([[json objectForKey:@"code"] intValue] == 200) {
         for (NSDictionary *dict in [json objectForKey:@"content"]) {
             [arr addObject:[[Concert alloc] initWithJsonObject:dict]];

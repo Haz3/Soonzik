@@ -183,7 +183,7 @@ albums which includes its musics and user (artist)</p>
 </li></ul>					
 											<div class="method-source-code" id="find-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/packs_controller.rb, line 127</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/packs_controller.rb, line 133</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">find</span>
   <span class="ruby-keyword">begin</span>
     <span class="ruby-identifier">pack_object</span> = <span class="ruby-keyword">nil</span>
@@ -198,14 +198,14 @@ albums which includes its musics and user (artist)</p>
         <span class="ruby-keyword">end</span>
 
         <span class="ruby-keyword">if</span> (<span class="ruby-identifier">pack_object</span> <span class="ruby-operator">==</span> <span class="ruby-keyword">nil</span>)          <span class="ruby-comment">#pack_object doesn&#39;t exist</span>
-          <span class="ruby-identifier">pack_object</span> = <span class="ruby-constant">Pack</span>.<span class="ruby-identifier">where</span>(<span class="ruby-identifier">condition</span>)
+          <span class="ruby-identifier">pack_object</span> = <span class="ruby-constant">Pack</span>.<span class="ruby-identifier">eager_load</span>([<span class="ruby-identifier">albums</span><span class="ruby-operator">:</span> { <span class="ruby-identifier">user</span><span class="ruby-operator">:</span> {}, <span class="ruby-identifier">musics</span><span class="ruby-operator">:</span> {} }, <span class="ruby-identifier">user</span><span class="ruby-operator">:</span> {}, <span class="ruby-identifier">descriptions</span><span class="ruby-operator">:</span> {}, <span class="ruby-identifier">partial_albums</span><span class="ruby-operator">:</span> {}]).<span class="ruby-identifier">where</span>(<span class="ruby-identifier">condition</span>)
         <span class="ruby-keyword">else</span>                              <span class="ruby-comment">#pack_object exists</span>
           <span class="ruby-identifier">pack_object</span> = <span class="ruby-identifier">pack_object</span>.<span class="ruby-identifier">where</span>(<span class="ruby-identifier">condition</span>)
         <span class="ruby-keyword">end</span>
       <span class="ruby-keyword">end</span>
       <span class="ruby-comment"># - - - - - - - -</span>
     <span class="ruby-keyword">else</span>
-      <span class="ruby-identifier">pack_object</span> = <span class="ruby-constant">Pack</span>.<span class="ruby-identifier">all</span>            <span class="ruby-comment">#no attribute specified</span>
+      <span class="ruby-identifier">pack_object</span> = <span class="ruby-constant">Pack</span>.<span class="ruby-identifier">eager_load</span>([<span class="ruby-identifier">albums</span><span class="ruby-operator">:</span> { <span class="ruby-identifier">user</span><span class="ruby-operator">:</span> {}, <span class="ruby-identifier">musics</span><span class="ruby-operator">:</span> {} }, <span class="ruby-identifier">user</span><span class="ruby-operator">:</span> {}, <span class="ruby-identifier">descriptions</span><span class="ruby-operator">:</span> {}, <span class="ruby-identifier">partial_albums</span><span class="ruby-operator">:</span> {}]).<span class="ruby-identifier">all</span>            <span class="ruby-comment">#no attribute specified</span>
     <span class="ruby-keyword">end</span>
 
     <span class="ruby-identifier">order_asc</span> = <span class="ruby-string">&quot;&quot;</span>
@@ -214,14 +214,14 @@ albums which includes its musics and user (artist)</p>
     <span class="ruby-keyword">if</span> (<span class="ruby-keyword">defined?</span><span class="ruby-ivar">@order_by_asc</span>)
       <span class="ruby-ivar">@order_by_asc</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span>
         <span class="ruby-identifier">order_asc</span> <span class="ruby-operator">+=</span> <span class="ruby-string">&quot;, &quot;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">order_asc</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">!=</span> <span class="ruby-value">0</span>
-        <span class="ruby-identifier">order_asc</span> <span class="ruby-operator">+=</span> (<span class="ruby-node">%Q[#{x}]</span> <span class="ruby-operator">+</span> <span class="ruby-string">&quot; ASC&quot;</span>)
+        <span class="ruby-identifier">order_asc</span> <span class="ruby-operator">+=</span> (<span class="ruby-string">&quot;&#39;packs&#39;.&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-node">%Q[#{x}]</span> <span class="ruby-operator">+</span> <span class="ruby-string">&quot; ASC&quot;</span>)
       <span class="ruby-keyword">end</span>
     <span class="ruby-keyword">end</span>
     <span class="ruby-comment"># filter the order by desc to create the string</span>
     <span class="ruby-keyword">if</span> (<span class="ruby-keyword">defined?</span><span class="ruby-ivar">@order_by_desc</span>)
       <span class="ruby-ivar">@order_by_desc</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span>
         <span class="ruby-identifier">order_desc</span> <span class="ruby-operator">+=</span> <span class="ruby-string">&quot;, &quot;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">order_desc</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">!=</span> <span class="ruby-value">0</span>
-        <span class="ruby-identifier">order_desc</span> <span class="ruby-operator">+=</span> (<span class="ruby-node">%Q[#{x}]</span> <span class="ruby-operator">+</span> <span class="ruby-string">&quot; DESC&quot;</span>)
+        <span class="ruby-identifier">order_desc</span> <span class="ruby-operator">+=</span> (<span class="ruby-string">&quot;&#39;packs&#39;.&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-node">%Q[#{x}]</span> <span class="ruby-operator">+</span> <span class="ruby-string">&quot; DESC&quot;</span>)
       <span class="ruby-keyword">end</span>
     <span class="ruby-keyword">end</span>
 
@@ -260,6 +260,9 @@ albums which includes its musics and user (artist)</p>
                                                               },
                                                               <span class="ruby-identifier">descriptions</span><span class="ruby-operator">:</span> {
                                                                 <span class="ruby-value">:only</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">Description</span>.<span class="ruby-identifier">miniKey</span>
+                                                              },
+                                                              <span class="ruby-identifier">partial_albums</span><span class="ruby-operator">:</span> {
+                                                                <span class="ruby-value">:only</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">PartialAlbum</span>.<span class="ruby-identifier">miniKey</span>
                                                               }
                                                               }, <span class="ruby-value">:only</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">Pack</span>.<span class="ruby-identifier">miniKey</span>, <span class="ruby-identifier">methods</span><span class="ruby-operator">:</span> <span class="ruby-value">:averagePrice</span>) }
 
@@ -315,7 +318,7 @@ albums which includes its musics and the user (artist)</p>
     <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@count</span>.<span class="ruby-identifier">present?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-ivar">@count</span> <span class="ruby-operator">==</span> <span class="ruby-string">&quot;true&quot;</span>)
       <span class="ruby-ivar">@returnValue</span> = { <span class="ruby-identifier">content</span><span class="ruby-operator">:</span> <span class="ruby-constant">Pack</span>.<span class="ruby-identifier">count</span> }
     <span class="ruby-keyword">else</span>
-      <span class="ruby-ivar">@returnValue</span> = { <span class="ruby-identifier">content</span><span class="ruby-operator">:</span> <span class="ruby-constant">Pack</span>.<span class="ruby-identifier">all</span>.<span class="ruby-identifier">as_json</span>(<span class="ruby-value">:include</span> =<span class="ruby-operator">&gt;</span> { <span class="ruby-identifier">albums</span><span class="ruby-operator">:</span> {
+      <span class="ruby-ivar">@returnValue</span> = { <span class="ruby-identifier">content</span><span class="ruby-operator">:</span> <span class="ruby-constant">Pack</span>.<span class="ruby-identifier">eager_load</span>([<span class="ruby-identifier">albums</span><span class="ruby-operator">:</span> { <span class="ruby-identifier">user</span><span class="ruby-operator">:</span> {}, <span class="ruby-identifier">musics</span><span class="ruby-operator">:</span> {} }, <span class="ruby-identifier">user</span><span class="ruby-operator">:</span> {}, <span class="ruby-identifier">descriptions</span><span class="ruby-operator">:</span> {}, <span class="ruby-identifier">partial_albums</span><span class="ruby-operator">:</span> {}]).<span class="ruby-identifier">all</span>.<span class="ruby-identifier">as_json</span>(<span class="ruby-value">:include</span> =<span class="ruby-operator">&gt;</span> { <span class="ruby-identifier">albums</span><span class="ruby-operator">:</span> {
                                                                 <span class="ruby-value">:include</span> =<span class="ruby-operator">&gt;</span> {
                                                                   <span class="ruby-value">:user</span> =<span class="ruby-operator">&gt;</span> { <span class="ruby-value">:only</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">User</span>.<span class="ruby-identifier">miniKey</span> },
                                                                   <span class="ruby-value">:musics</span> =<span class="ruby-operator">&gt;</span> { <span class="ruby-value">:only</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">Music</span>.<span class="ruby-identifier">miniKey</span> }
@@ -327,6 +330,9 @@ albums which includes its musics and the user (artist)</p>
                                                               },
                                                               <span class="ruby-identifier">descriptions</span><span class="ruby-operator">:</span> {
                                                                 <span class="ruby-value">:only</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">Description</span>.<span class="ruby-identifier">miniKey</span>
+                                                              },
+                                                              <span class="ruby-identifier">partial_albums</span><span class="ruby-operator">:</span> {
+                                                                <span class="ruby-value">:only</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">PartialAlbum</span>.<span class="ruby-identifier">miniKey</span>
                                                               }
                                                             }, <span class="ruby-value">:only</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">Pack</span>.<span class="ruby-identifier">miniKey</span>, <span class="ruby-identifier">methods</span><span class="ruby-operator">:</span> <span class="ruby-value">:averagePrice</span>) }
     <span class="ruby-keyword">end</span>
@@ -376,10 +382,10 @@ which includes its musics and the user (artist)</p>
 </li></ul>					
 											<div class="method-source-code" id="show-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/packs_controller.rb, line 69</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/packs_controller.rb, line 72</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">show</span>
   <span class="ruby-keyword">begin</span>
-    <span class="ruby-identifier">pack</span> = <span class="ruby-constant">Pack</span>.<span class="ruby-identifier">find_by_id</span>(<span class="ruby-ivar">@id</span>)
+    <span class="ruby-identifier">pack</span> = <span class="ruby-constant">Pack</span>.<span class="ruby-identifier">eager_load</span>([<span class="ruby-identifier">albums</span><span class="ruby-operator">:</span> { <span class="ruby-identifier">user</span><span class="ruby-operator">:</span> {}, <span class="ruby-identifier">musics</span><span class="ruby-operator">:</span> {} }, <span class="ruby-identifier">user</span><span class="ruby-operator">:</span> {}, <span class="ruby-identifier">descriptions</span><span class="ruby-operator">:</span> {}, <span class="ruby-identifier">partial_albums</span><span class="ruby-operator">:</span> {}]).<span class="ruby-identifier">find_by_id</span>(<span class="ruby-ivar">@id</span>)
     <span class="ruby-keyword">if</span> (<span class="ruby-operator">!</span><span class="ruby-identifier">pack</span>)
       <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">502</span>
       <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:not_found</span>
@@ -400,6 +406,9 @@ which includes its musics and the user (artist)</p>
                                                             },
                                                             <span class="ruby-identifier">descriptions</span><span class="ruby-operator">:</span> {
                                                               <span class="ruby-value">:only</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">Description</span>.<span class="ruby-identifier">miniKey</span>
+                                                            },
+                                                            <span class="ruby-identifier">partial_albums</span><span class="ruby-operator">:</span> {
+                                                              <span class="ruby-value">:only</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">PartialAlbum</span>.<span class="ruby-identifier">miniKey</span>
                                                             }
                                                           }, <span class="ruby-value">:only</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">Pack</span>.<span class="ruby-identifier">miniKey</span>, <span class="ruby-identifier">methods</span><span class="ruby-operator">:</span> <span class="ruby-value">:averagePrice</span>) }
       <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">200</span>
@@ -443,6 +452,7 @@ which includes its musics and the user (artist)</p>
 	<ul>
 			<li><a href="../API.html">API</a></li>
 			<li><a href="../API/AlbumsController.html">API::AlbumsController</a></li>
+			<li><a href="../API/AmbiancesController.html">API::AmbiancesController</a></li>
 			<li><a href="../API/ApiController.html">API::ApiController</a></li>
 			<li><a href="../API/ApisecurityController.html">API::ApisecurityController</a></li>
 			<li><a href="../API/BattlesController.html">API::BattlesController</a></li>
@@ -451,6 +461,7 @@ which includes its musics and the user (artist)</p>
 			<li><a href="../API/GenresController.html">API::GenresController</a></li>
 			<li><a href="../API/InfluencesController.html">API::InfluencesController</a></li>
 			<li><a href="../API/LanguagesController.html">API::LanguagesController</a></li>
+			<li><a href="../API/LikesController.html">API::LikesController</a></li>
 			<li><a href="../API/ListeningsController.html">API::ListeningsController</a></li>
 			<li><a href="../API/MessagesController.html">API::MessagesController</a></li>
 			<li><a href="../API/MusicsController.html">API::MusicsController</a></li>
@@ -466,11 +477,14 @@ which includes its musics and the user (artist)</p>
 			<li><a href="../Address.html">Address</a></li>
 			<li><a href="../AdminUser.html">AdminUser</a></li>
 			<li><a href="../Album.html">Album</a></li>
+			<li><a href="../Albumslike.html">Albumslike</a></li>
+			<li><a href="../Ambiance.html">Ambiance</a></li>
 			<li><a href="../Attachment.html">Attachment</a></li>
 			<li><a href="../Battle.html">Battle</a></li>
 			<li><a href="../Cart.html">Cart</a></li>
 			<li><a href="../Commentary.html">Commentary</a></li>
 			<li><a href="../Concert.html">Concert</a></li>
+			<li><a href="../Concertslike.html">Concertslike</a></li>
 			<li><a href="../Description.html">Description</a></li>
 			<li><a href="../Feedback.html">Feedback</a></li>
 			<li><a href="../Follow.html">Follow</a></li>
@@ -488,6 +502,7 @@ which includes its musics and the user (artist)</p>
 			<li><a href="../MusicNote.html">MusicNote</a></li>
 			<li><a href="../News.html">News</a></li>
 			<li><a href="../NewsTitle.html">NewsTitle</a></li>
+			<li><a href="../Newslike.html">Newslike</a></li>
 			<li><a href="../Newstext.html">Newstext</a></li>
 			<li><a href="../Notification.html">Notification</a></li>
 			<li><a href="../Pack.html">Pack</a></li>
@@ -500,6 +515,7 @@ which includes its musics and the user (artist)</p>
 			<li><a href="../PurchasedAlbum.html">PurchasedAlbum</a></li>
 			<li><a href="../PurchasedMusic.html">PurchasedMusic</a></li>
 			<li><a href="../PurchasedPack.html">PurchasedPack</a></li>
+			<li><a href="../Tool.html">Tool</a></li>
 			<li><a href="../Tweet.html">Tweet</a></li>
 			<li><a href="../User.html">User</a></li>
 			<li><a href="../Vote.html">Vote</a></li>

@@ -172,7 +172,7 @@ album : {}, purchased_pack: { partial: value, pack: {} } } } }</p>
 </li></ul>					
 											<div class="method-source-code" id="buycart-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/purchases_controller.rb, line 29</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/purchases_controller.rb, line 27</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">buycart</span>
   <span class="ruby-identifier">p</span> = <span class="ruby-keyword">nil</span>
   <span class="ruby-identifier">ret</span> = { <span class="ruby-identifier">musics</span><span class="ruby-operator">:</span> [], <span class="ruby-identifier">albums</span><span class="ruby-operator">:</span> [] }
@@ -334,7 +334,7 @@ album : {}, purchased_pack: { partial: value, pack: {} } } } }</p>
 </li></ul>					
 											<div class="method-source-code" id="buypack-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/purchases_controller.rb, line 138</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/purchases_controller.rb, line 136</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">buypack</span>
   <span class="ruby-identifier">objectToDelete</span> = []
   <span class="ruby-keyword">if</span> (<span class="ruby-operator">!</span>(<span class="ruby-ivar">@paypal</span>.<span class="ruby-identifier">present?</span>() <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-ivar">@paypal</span>.<span class="ruby-identifier">has_key?</span>(<span class="ruby-value">:payment_id</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-ivar">@paypal</span>.<span class="ruby-identifier">has_key?</span>(<span class="ruby-value">:payment_method</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-ivar">@paypal</span>.<span class="ruby-identifier">has_key?</span>(<span class="ruby-value">:status</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-ivar">@paypal</span>.<span class="ruby-identifier">has_key?</span>(<span class="ruby-value">:payer_email</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-ivar">@paypal</span>.<span class="ruby-identifier">has_key?</span>(<span class="ruby-value">:payer_first_name</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-ivar">@paypal</span>.<span class="ruby-identifier">has_key?</span>(<span class="ruby-value">:payer_last_name</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-ivar">@paypal</span>.<span class="ruby-identifier">has_key?</span>(<span class="ruby-value">:payer_id</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-ivar">@paypal</span>.<span class="ruby-identifier">has_key?</span>(<span class="ruby-value">:payer_phone</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-ivar">@paypal</span>.<span class="ruby-identifier">has_key?</span>(<span class="ruby-value">:payer_country_code</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-ivar">@paypal</span>.<span class="ruby-identifier">has_key?</span>(<span class="ruby-value">:payer_street</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-ivar">@paypal</span>.<span class="ruby-identifier">has_key?</span>(<span class="ruby-value">:payer_city</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-ivar">@paypal</span>.<span class="ruby-identifier">has_key?</span>(<span class="ruby-value">:payer_postal_code</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-ivar">@paypal</span>.<span class="ruby-identifier">has_key?</span>(<span class="ruby-value">:payer_country_code</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-ivar">@paypal</span>.<span class="ruby-identifier">has_key?</span>(<span class="ruby-value">:payer_recipient_name</span>)))
@@ -430,6 +430,7 @@ album : {}, purchased_pack: { partial: value, pack: {} } } } }</p>
 	<ul>
 			<li><a href="../API.html">API</a></li>
 			<li><a href="../API/AlbumsController.html">API::AlbumsController</a></li>
+			<li><a href="../API/AmbiancesController.html">API::AmbiancesController</a></li>
 			<li><a href="../API/ApiController.html">API::ApiController</a></li>
 			<li><a href="../API/ApisecurityController.html">API::ApisecurityController</a></li>
 			<li><a href="../API/BattlesController.html">API::BattlesController</a></li>
@@ -438,6 +439,7 @@ album : {}, purchased_pack: { partial: value, pack: {} } } } }</p>
 			<li><a href="../API/GenresController.html">API::GenresController</a></li>
 			<li><a href="../API/InfluencesController.html">API::InfluencesController</a></li>
 			<li><a href="../API/LanguagesController.html">API::LanguagesController</a></li>
+			<li><a href="../API/LikesController.html">API::LikesController</a></li>
 			<li><a href="../API/ListeningsController.html">API::ListeningsController</a></li>
 			<li><a href="../API/MessagesController.html">API::MessagesController</a></li>
 			<li><a href="../API/MusicsController.html">API::MusicsController</a></li>
@@ -453,11 +455,14 @@ album : {}, purchased_pack: { partial: value, pack: {} } } } }</p>
 			<li><a href="../Address.html">Address</a></li>
 			<li><a href="../AdminUser.html">AdminUser</a></li>
 			<li><a href="../Album.html">Album</a></li>
+			<li><a href="../Albumslike.html">Albumslike</a></li>
+			<li><a href="../Ambiance.html">Ambiance</a></li>
 			<li><a href="../Attachment.html">Attachment</a></li>
 			<li><a href="../Battle.html">Battle</a></li>
 			<li><a href="../Cart.html">Cart</a></li>
 			<li><a href="../Commentary.html">Commentary</a></li>
 			<li><a href="../Concert.html">Concert</a></li>
+			<li><a href="../Concertslike.html">Concertslike</a></li>
 			<li><a href="../Description.html">Description</a></li>
 			<li><a href="../Feedback.html">Feedback</a></li>
 			<li><a href="../Follow.html">Follow</a></li>
@@ -475,6 +480,7 @@ album : {}, purchased_pack: { partial: value, pack: {} } } } }</p>
 			<li><a href="../MusicNote.html">MusicNote</a></li>
 			<li><a href="../News.html">News</a></li>
 			<li><a href="../NewsTitle.html">NewsTitle</a></li>
+			<li><a href="../Newslike.html">Newslike</a></li>
 			<li><a href="../Newstext.html">Newstext</a></li>
 			<li><a href="../Notification.html">Notification</a></li>
 			<li><a href="../Pack.html">Pack</a></li>
@@ -487,6 +493,7 @@ album : {}, purchased_pack: { partial: value, pack: {} } } } }</p>
 			<li><a href="../PurchasedAlbum.html">PurchasedAlbum</a></li>
 			<li><a href="../PurchasedMusic.html">PurchasedMusic</a></li>
 			<li><a href="../PurchasedPack.html">PurchasedPack</a></li>
+			<li><a href="../Tool.html">Tool</a></li>
 			<li><a href="../Tweet.html">Tweet</a></li>
 			<li><a href="../User.html">User</a></li>
 			<li><a href="../Vote.html">Vote</a></li>

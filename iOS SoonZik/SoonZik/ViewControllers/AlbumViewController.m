@@ -18,6 +18,7 @@
 #import "PlaylistsController.h"
 #import "CartViewController.h"
 #import "CartController.h"
+#import "LikesController.h"
 
 @interface AlbumViewController ()
 
@@ -80,6 +81,7 @@
         //this block runs on a background thread; Do heavy operation here
         self.album = [Factory provideObjectWithClassName:@"Album" andIdentifier:self.album.identifier];
         self.listOfMusics = self.album.listOfMusics;
+        NSLog(@"self.album.hasliked : %i", self.album.isLiked);
         
         dispatch_async(dispatch_get_main_queue(), ^{
             //This block runs on main thread, so update UI
@@ -117,7 +119,6 @@
    if (!self.dataLoaded) {
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT,0),  ^{
             NSString *urlImage = [NSString stringWithFormat:@"%@assets/albums/%@", API_URL, self.album.image];
-            NSLog(@"url image : %@", urlImage);
             NSData *imageData = [[NSData alloc] initWithContentsOfURL: [NSURL URLWithString: urlImage]];
             
             dispatch_async(dispatch_get_main_queue(), ^{
@@ -134,6 +135,12 @@
     view.albumImage.image = self.albumImage;
     view.albumTitle.text = self.album.title;
     view.artistLabel.text = self.album.artist.username;
+    if (self.album.identifier <= 1) {
+        view.numberLikesLabel.text = [NSString stringWithFormat:@"%i like", self.album.identifier];
+    } else {
+        view.numberLikesLabel.text = [NSString stringWithFormat:@"%i likes", self.album.identifier];
+    }
+    
     view.backgroundColor = [UIColor clearColor];
     
     [view.buyButton addTarget:self action:@selector(popUpBuy) forControlEvents:UIControlEventTouchUpInside];
@@ -178,7 +185,40 @@
     [playAllButton addTarget:self action:@selector(playAlbum) forControlEvents:UIControlEventTouchUpInside];
     [view addSubview:playAllButton];
     
+    UIButton *likeButton = [[UIButton alloc] initWithFrame:CGRectMake(view.frame.size.width-30-30-30-10, v.frame.origin.y + 10, 26, 26)];
+    if (self.album.isLiked) {
+        [likeButton setImage:[Tools imageWithImage:[UIImage imageNamed:@"love_1"] scaledToSize:CGSizeMake(30, 30)] forState:UIControlStateNormal];
+    } else {
+        [likeButton setImage:[Tools imageWithImage:[UIImage imageNamed:@"love_0"] scaledToSize:CGSizeMake(30, 30)] forState:UIControlStateNormal];
+    }
+    [likeButton addTarget:self action:@selector(like:) forControlEvents:UIControlEventTouchUpInside];
+    [likeButton setTintColor:[UIColor whiteColor]];
+    [likeButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [view addSubview:likeButton];
+    
     return view;
+}
+
+- (void)like:(UIButton *)btn {
+    if (self.album.isLiked) {
+        // send dislike
+        if (![LikesController dislike:self.album.identifier forObjectType:@"Albums"]) {
+            [[[SimplePopUp alloc] initWithMessage:@"An error occured on this action" onView:self.view withSuccess:false] show];
+        } else {
+            [btn setImage:[Tools imageWithImage:[UIImage imageNamed:@"love_0"] scaledToSize:CGSizeMake(30, 30)] forState:UIControlStateNormal];
+            self.album.isLiked = false;
+        }
+    } else {
+        // send like
+        if (![LikesController like:self.album.identifier forObjectType:@"Albums"]) {
+            [[[SimplePopUp alloc] initWithMessage:@"An error occured on this action" onView:self.view withSuccess:false] show];
+        } else {
+            [btn setImage:[Tools imageWithImage:[UIImage imageNamed:@"love_1"] scaledToSize:CGSizeMake(30, 30)] forState:UIControlStateNormal];
+            self.album.isLiked = true;
+        }
+    }
+    // get album info
+    //reload tableView
 }
 
 - (void)launchShareView {
@@ -262,8 +302,7 @@
     }
     
     [AudioPlayer sharedCenter].listeningList = self.player.listeningList;
-    
-    NSLog(@"TAILLLE : %i", self.player.listeningList.count);
+
     Music *music = [self.player.listeningList objectAtIndex:0];
     [self.player prepareSong:music.identifier];
 //    [self.player playSound];

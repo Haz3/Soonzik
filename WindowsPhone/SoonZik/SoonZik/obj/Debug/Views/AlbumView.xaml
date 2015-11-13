@@ -51,6 +51,7 @@
                     <MenuFlyout>
                         <MenuFlyoutItem x:ConnectionId='3' x:Name="ItemPlaylist" Text="Add playlist"                               />
                         <MenuFlyoutItem x:ConnectionId='4' x:Name="ItemCart" Text="Go to cart"                           />
+                        <MenuFlyoutItem x:ConnectionId='5' x:Name="NotationMusic" Text="Rate"                               />
                     </MenuFlyout>
                 </FlyoutBase.AttachedFlyout>
             </Grid>
@@ -59,31 +60,40 @@
 
     <Grid x:Name="GlobalGrid">
         <Grid.RowDefinitions>
-            <RowDefinition Height="*" />
+            <RowDefinition Height="250" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
         <Grid Grid.Row="0">
-            <Image Name="AlbumImage" Width="100" Height="100" HorizontalAlignment="Center" VerticalAlignment="Top">
-                <Image.Source>
-                    <BitmapImage UriSource="{Binding TheAlbum.image}" />
-                </Image.Source>
-            </Image>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="180"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid Column="0">
 
-            <TextBlock x:Name="AlbumTitle" Text="{Binding TheAlbum.title}" FontSize="30" Foreground="#40a8e2"
-                       VerticalAlignment="Center"
+                <TextBlock x:Name="AlbumTitle" Text="{Binding TheAlbum.title}" FontSize="30" Foreground="#40a8e2"
+                       VerticalAlignment="Top"
                        HorizontalAlignment="Center" />
 
-            <TextBlock x:Name="ArtistName" Text="{Binding TheAlbum.user.username}" FontSize="20" Foreground="#40a8e2"
-                       VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,80,0,0" />
-
-            <Button VerticalAlignment="Bottom" HorizontalAlignment="Center" x:Uid="GoToCard" Content=""
+                <Image Name="AlbumImage" Width="180" Height="180" Margin="0,18,0,0" HorizontalAlignment="Center" VerticalAlignment="Center" 
+                       Source="{Binding TheAlbum.imageAlbum}"/>
+            </Grid>
+            <Grid Column="1">
+                <TextBlock x:Name="ArtistName" Text="{Binding TheAlbum.user.username}" FontSize="20" Foreground="#40a8e2"
+                       VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,20,0,0" />
+                <TextBlock x:Name="LikesBlock" Text="{Binding Likes, Mode=TwoWay}" FontSize="20" Foreground="#40a8e2"
+                       VerticalAlignment="Top" HorizontalAlignment="Left" Margin="50,50,0,0" />
+                <Image x:ConnectionId='6' x:Name="likeImage" Source="{Binding Like}" Width="30" HorizontalAlignment="Left" Height="30" VerticalAlignment="Top"
+                                               Margin="15,50,0,0" />
+                    <Button VerticalAlignment="Bottom" HorizontalAlignment="Center" x:Uid="GoToCard" Content=""
                     Command="{Binding AddToCart}" />
+
+            </Grid>
         </Grid>
 
         <Pivot Grid.Row="1" x:Name="PivotGlobal" HeaderTemplate="{StaticResource SizeHeaderGlobalPivot}"
                Foreground="Transparent" RenderTransformOrigin="0.5,0.5" Style="{StaticResource PivotStyle1}"
-               Margin="0,20,0,0">
+               Margin="0,30,0,0">
             <PivotItem x:Uid="MusicPivot" Header="">
                 <ListBox Background="Transparent" x:Name="MusicListView" IsTapEnabled="True"
                          ItemsSource="{Binding ListMusics}"

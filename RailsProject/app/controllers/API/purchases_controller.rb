@@ -8,8 +8,6 @@ module API
   # * buypack		    [post] - SECURE
   #
   class PurchasesController < ApisecurityController
-    before_action :checkKey, only: [:buypack, :buycart]
-    
     include PayPal::SDK::REST
     
     # Buy the current cart and empty it

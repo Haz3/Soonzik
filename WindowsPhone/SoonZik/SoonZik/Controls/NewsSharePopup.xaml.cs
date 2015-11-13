@@ -23,15 +23,22 @@ namespace SoonZik.Controls
         public void FacebookShare_OnTapped(object sender, TappedRoutedEventArgs e)
         {
             // TODO Share on Facebook
-
-            var postParams = new
+            try
             {
-                name = _selectedNews.newstexts[0].title,
-                caption = _selectedNews.newstexts[0].content,
-                description = TextBoxShare.Text,
-                picture = "http://facebooksdk.net/assets/img/logo75x75.png"
-            };
-            ShareOnFaceBook(postParams);
+                var postParams = new
+                {
+                    name = _selectedNews.newstexts[0].title,
+                    caption = _selectedNews.newstexts[0].content,
+                    description = TextBoxShare.Text,
+                    picture = "http://facebooksdk.net/assets/img/logo75x75.png"
+                };
+                ShareOnFaceBook(postParams);
+            }
+            catch (Exception ex)
+            {
+                var message = ex.Message;
+                new MessageDialog("Facebbok error").ShowAsync();
+            }
         }
 
         private async void ShareOnFaceBook(object postParams)
@@ -45,7 +52,7 @@ namespace SoonZik.Controls
                     var responseresult = (IDictionary<string, object>) fbPostTaskResult;
                     var SuccessMsg = new MessageDialog("Message posted sucessfully on facebook wall");
                     await SuccessMsg.ShowAsync();
-                    NewsViewModel.MessagePrompt.Hide();
+                    NewsDetailViewModel.SharePopup.IsOpen = false;
                 }
                 catch (Exception ex)
                 {
@@ -61,7 +68,7 @@ namespace SoonZik.Controls
         public void TwitterShare_OnTapped(object sender, TappedRoutedEventArgs e)
         {
             // TODO Share on Twittter
-            NewsViewModel.MessagePrompt.Hide();
+            NewsDetailViewModel.SharePopup.IsOpen = false;
         }
     }
 }

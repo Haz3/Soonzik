@@ -25,15 +25,13 @@
 }
 
 + (BOOL)rateMusic:(Music *)music :(int)rate {
-    NSString *url, *post, *key, *conca, *secureKey;
+    NSString *url, *post, *key;
     NSData *data = [[NSUserDefaults standardUserDefaults] objectForKey:@"User"];
     User *user = (User *)[NSKeyedUnarchiver unarchiveObjectWithData:data];
     
     url = [NSString stringWithFormat:@"%@musics/%i/note/%i", API_URL, music.identifier, rate];
-    key = [Crypto getKey:user.identifier];
-    conca = [NSString stringWithFormat:@"%@%@", user.salt, key];
-    secureKey = [Crypto sha256HashFor:conca];
-    post = [NSString stringWithFormat:@"user_id=%i&secureKey=%@", user.identifier, secureKey];
+    key = [Crypto getKey];
+    post = [NSString stringWithFormat:@"user_id=%i&secureKey=%@", user.identifier, key];
     
     NSDictionary *json = [Request postRequest:post url:url];
     NSLog(@"json rate : %@", json);

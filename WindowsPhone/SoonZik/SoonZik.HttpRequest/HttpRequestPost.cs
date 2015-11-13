@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
@@ -190,16 +191,36 @@ namespace SoonZik.HttpRequest
 
         public async Task<String> UpdatePlaylist(Playlist thePlaylist, Music theMusic, string sha256, User myUser)
         {
-            var request = (HttpWebRequest) WebRequest.Create(ApiUrl + "/musics/addtoplaylist/");
+            var request = (HttpWebRequest) WebRequest.Create(ApiUrl + "musics/addtoplaylist");
 
             var postData = "id=" + theMusic.id + "&playlist_id=" + thePlaylist.id + "&secureKey=" + sha256 + "&user_id=" +
                            myUser.id;
             return await GetHttpPostResponse(request, postData);
         }
 
+        public async Task<String> UpdateNamePlaylist(Playlist thePlaylist, string sha256, User myUser)
+        {
+            int [] test = new int[thePlaylist.musics.Count];
+            string en = "[";
+            for (int i = 0; i < thePlaylist.musics.Count; i++)
+            {
+                test[i] = thePlaylist.musics[i].id;
+                if (i == thePlaylist.musics.Count - 1)
+                    en += thePlaylist.musics[i].id;
+                else
+                    en += thePlaylist.musics[i].id + ",";
+            }
+            en += "]";
+            var request = (HttpWebRequest)WebRequest.Create(ApiUrl + "playlists/update");
+
+            var postData = "id=" + thePlaylist.id + "&playlist[name]=" + thePlaylist.name + "&playlist[music]=" + en + "&secureKey=" + sha256 + "&user_id=" +
+                           myUser.id;
+            return await GetHttpPostResponse(request, postData);
+        }
+
         public async Task<String> SaveCart(Music theMusic, Album theAlbum, string sha256, User myUser)
         {
-            var request = (HttpWebRequest) WebRequest.Create(ApiUrl + "/carts/save");
+            var request = (HttpWebRequest) WebRequest.Create(ApiUrl + "carts/save");
 
             var postData = "";
             if (theMusic != null)
@@ -213,7 +234,7 @@ namespace SoonZik.HttpRequest
 
         public async Task<String> SavePlaylist(Playlist thePlaylist, string sha256, User myUser)
         {
-            var request = (HttpWebRequest) WebRequest.Create(ApiUrl + "/playlists/save");
+            var request = (HttpWebRequest) WebRequest.Create(ApiUrl + "playlists/save");
 
             var postData = "playlist[user_id]=" + myUser.id + "&playlist[name]=" + thePlaylist.name + "&secureKey=" +
                            sha256 + "&user_id=" + myUser.id;
@@ -222,7 +243,7 @@ namespace SoonZik.HttpRequest
 
         public async Task<String> Purchase(string sha256, User myUser)
         {
-            var request = (HttpWebRequest) WebRequest.Create(ApiUrl + "/purchases/buycart");
+            var request = (HttpWebRequest) WebRequest.Create(ApiUrl + "purchases/buycart");
 
             var postData = "paypal[]=" + "&secureKey=" + sha256 + "&user_id=" + myUser.id;
             return await GetHttpPostResponse(request, postData);
@@ -231,7 +252,7 @@ namespace SoonZik.HttpRequest
         public async Task<String> PurchasePack(int id, double donate, double artiste, double assoc, double site,
             string sha256, User myUser)
         {
-            var request = (HttpWebRequest) WebRequest.Create(ApiUrl + "/purchases/buypack");
+            var request = (HttpWebRequest) WebRequest.Create(ApiUrl + "purchases/buypack");
 
             var postData = "secureKey=" + sha256 + "&user_id=" + myUser.id;
             return await GetHttpPostResponse(request, postData);
@@ -239,13 +260,28 @@ namespace SoonZik.HttpRequest
 
         public async Task<String> SaveMessage(Message mess, string sha256, User myUser)
         {
-            var request = (HttpWebRequest) WebRequest.Create(ApiUrl + "/messages/save");
+            var request = (HttpWebRequest) WebRequest.Create(ApiUrl + "messages/save");
 
             var postData = "message[user_id]=" + mess.user_id + "&message[dest_id]=" + mess.dest_id + "&message[msg]=" +
                            mess.msg + "&secureKey=" + sha256 + "&user_id=" + myUser.id;
             return await GetHttpPostResponse(request, postData);
         }
 
+        public async Task<String> SetRate(Music myObj, string sha256, string id, int note)
+        {
+            var request = (HttpWebRequest)WebRequest.Create(ApiUrl + "musics/" + myObj.id + "/note/" + note);
+
+            var postData = "secureKey=" + sha256 + "&user_id=" + id;
+            return await GetHttpPostResponse(request, postData);
+        }
+
+        public async Task<String> SetLike(string element, string sha256, string idUser, string idObj)
+        {
+            var request = (HttpWebRequest)WebRequest.Create(ApiUrl + "likes/save");
+
+            var postData = "like[user_id]=" + idUser + "&like[typeObj]=" + element + "&like[obj_id]=" + idObj + "&secureKey=" + sha256 + "&user_id=" + idUser;
+            return await GetHttpPostResponse(request, postData);
+        }
         #endregion
     }
 }

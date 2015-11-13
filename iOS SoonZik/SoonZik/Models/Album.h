@@ -19,5 +19,7 @@
 @property (strong, nonatomic) NSDate *date;
 @property (nonatomic, assign) float price;
 @property (nonatomic, strong) NSMutableArray *listOfMusics;
+@property (nonatomic, assign) BOOL isLiked;
+@property (nonatomic, assign) int numberOfLikes;
 
 @end

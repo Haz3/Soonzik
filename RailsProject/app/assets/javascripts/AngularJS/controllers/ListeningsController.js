@@ -78,27 +78,35 @@ SoonzikApp.controller('ListeningsCtrl', ['$scope', "$routeParams", 'SecureAuth',
 				uiGmapGoogleMapApi.then(function(maps) {
 					////// Google map is loaded
 					$scope.lastUpdate = new Date();
-					HTTPService.getListeningAround(position.coords.latitude, position.coords.longitude, $scope.model.range).then(function(response) {
-						var marks = [];
 
-						for (var i = 0 ; i < response.data.content.length && i < 10 ; i++) {
-							var obj = response.data.content[i];
-							marks.push(generateCursor(obj));
-						}
+					SecureAuth.securedTransaction(function(key, id) {
+						var params = [
+							{ key: "secureKey", value: key },
+							{ key: "user_id", value: id }
+						];
 
-						$scope.map = {
-							center: {
-								latitude: position.coords.latitude,
-								longitude: position.coords.longitude
-							},
-							zoom: 9,
-					    markers: marks
-						};
-						$scope.circle.center = { latitude: position.coords.latitude, longitude: position.coords.longitude };
-						$scope.circleZone.center = { latitude: position.coords.latitude, longitude: position.coords.longitude };
-						$scope.location = 2;
-					}, function(error) {
-						NotificationService.error($rootScope.labels.FILE_LISTENING_AROUND_ERROR_MESSAGE);
+						HTTPService.getListeningAround(position.coords.latitude, position.coords.longitude, $scope.model.range, params).then(function(response) {
+							var marks = [];
+
+							for (var i = 0 ; i < response.data.content.length && i < 10 ; i++) {
+								var obj = response.data.content[i];
+								marks.push(generateCursor(obj));
+							}
+
+							$scope.map = {
+								center: {
+									latitude: position.coords.latitude,
+									longitude: position.coords.longitude
+								},
+								zoom: 9,
+						    markers: marks
+							};
+							$scope.circle.center = { latitude: position.coords.latitude, longitude: position.coords.longitude };
+							$scope.circleZone.center = { latitude: position.coords.latitude, longitude: position.coords.longitude };
+							$scope.location = 2;
+						}, function(error) {
+							NotificationService.error($rootScope.labels.FILE_LISTENING_AROUND_ERROR_MESSAGE);
+						});
 					});
 
 					$timeout(zoneMove, 200);
@@ -191,29 +199,33 @@ SoonzikApp.controller('ListeningsCtrl', ['$scope', "$routeParams", 'SecureAuth',
 	// To update the data with a new range for example or because of time
 	var updateZone = function() {
 		$scope.isUpdating = true;
-		var parameter = [{
-			key: "from",
-			value: $scope.lastUpdate.getTime()
-		}];
 
-		HTTPService.getListeningAround($scope.position.coords.latitude, $scope.position.coords.longitude, $scope.model.range, parameter).then(function(response) {
+		SecureAuth.securedTransaction(function(key, id) {
+			var params = [
+				{ key: "secureKey", value: key },
+				{ key: "user_id", value: id },
+				{ key: "from", value: $scope.lastUpdate.getTime() }
+			];
 
-			$scope.lastUpdate = new Date();
-			// Update
-			if (response.data.content.length > 0) {
-				var marks = [];
-				for (var i = 0 ; (i < 10) && (i < 10 - response.data.content) && (i < $scope.map.markers.length) ; i++) {
-					marks.push($scope.map.markers[i]);
+			HTTPService.getListeningAround($scope.position.coords.latitude, $scope.position.coords.longitude, $scope.model.range, parameter).then(function(response) {
+
+				$scope.lastUpdate = new Date();
+				// Update
+				if (response.data.content.length > 0) {
+					var marks = [];
+					for (var i = 0 ; (i < 10) && (i < 10 - response.data.content) && (i < $scope.map.markers.length) ; i++) {
+						marks.push($scope.map.markers[i]);
+					}
+					for (var i = 0 ; i < (10 - marks.length) && i < response.data.content.length ; i++) {
+						var obj = response.data.content[i];
+						marks.push(generateCursor(obj));
+					}
+					$scope.map.markers = marks;
 				}
-				for (var i = 0 ; i < (10 - marks.length) && i < response.data.content.length ; i++) {
-					var obj = response.data.content[i];
-					marks.push(generateCursor(obj));
-				}
-				$scope.map.markers = marks;
-			}
-			$scope.isUpdating = false;
-		}, function(error) {
+				$scope.isUpdating = false;
+			}, function(error) {
 
+			});
 		});
 	}
 

@@ -6,8 +6,6 @@ module API
   # * showTwo     [get] - SECURE OR NOT !
   #
   class SuggestionsController < ApisecurityController
-    before_action :checkKey, only: [:show, :showTwo]
-
     # Give a list of music based on the purchases
     #
     # Route : /suggest

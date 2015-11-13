@@ -8,12 +8,16 @@ using Windows.ApplicationModel.Core;
 using Windows.System.UserProfile;
 using Windows.UI.Core;
 using Windows.UI.Popups;
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Media.Imaging;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using SoonZik.Controls;
 using SoonZik.Helpers;
 using SoonZik.HttpRequest;
 using SoonZik.HttpRequest.Poco;
+using SoonZik.Utils;
 
 namespace SoonZik.ViewModel
 {
@@ -26,37 +30,36 @@ namespace SoonZik.ViewModel
             SendComment = new RelayCommand(SendCommentExecute);
             LikeCommand = new RelayCommand(LikeCommandExecute);
             SelectionCommand = new RelayCommand(SelectionCommandExecute);
+            ShareTapped = new RelayCommand(ShareTappedExecute);
         }
 
         #endregion
 
-        private void SelectionCommandExecute()
-        {
-            SelectNews = NewsViewModel.DetailSelectedNews;
-            Like = bm2;
-            var ci = new CultureInfo(GlobalizationPreferences.Languages[0]);
-            if (ci.Name.Equals("en-US"))
-            {
-                NewsContent = SelectNews.content;
-                NewsTitle = SelectNews.title;
-            }
-            else if (ci.Name.Equals("fr-FR"))
-            {
-                NewsContent = SelectNews.content;
-                NewsTitle = SelectNews.title;
-            }
-            LoadComment();
-        }
 
         #region Attribute
+        private string _likes;
 
+        public string Likes
+        {
+            get { return _likes; }
+            set
+            {
+                _likes = value;
+                RaisePropertyChanged("Likes");
+            }
+        }
+        public static News TheNews { get; set; }
+        private bool share = false;
+        public static Popup SharePopup { get; set; }
+
+        public ICommand ShareTapped { get; set; }
         private string _crypto { get; set; }
         private BitmapImage _like;
 
-        private readonly BitmapImage bm =
+        private readonly BitmapImage bmLike =
             new BitmapImage(new Uri("ms-appx:///Resources/Icones/like_icon.png", UriKind.RelativeOrAbsolute));
 
-        private readonly BitmapImage bm2 =
+        private readonly BitmapImage bmDislike =
             new BitmapImage(new Uri("ms-appx:///Resources/Icones/notlike_icon.png", UriKind.RelativeOrAbsolute));
 
         public BitmapImage Like
@@ -124,11 +127,82 @@ namespace SoonZik.ViewModel
         #endregion
 
         #region Method
+        private void SelectionCommandExecute()
+        {
+            SelectNews = TheNews;
+            Like = SelectNews.hasLiked ? bmLike : bmDislike;
+            Likes = SelectNews.likes;
+            var ci = new CultureInfo(GlobalizationPreferences.Languages[0]);
+            if (ci.Name.Equals("en-US"))
+            {
+                NewsContent = SelectNews.content;
+                NewsTitle = SelectNews.title;
+            }
+            else if (ci.Name.Equals("fr-FR"))
+            {
+                NewsContent = SelectNews.content;
+                NewsTitle = SelectNews.title;
+            }
+            LoadComment();
+        }
 
         private void LikeCommandExecute()
         {
-            Like = bm;
-            //TODO do the like
+            if (!SelectNews.hasLiked)
+            {
+                Like = bmLike;
+                ValidateKey.GetValideKey();
+                var post = new HttpRequestPost();
+                var res = post.SetLike("Albums", Singleton.Singleton.Instance().SecureKey,
+                    Singleton.Singleton.Instance().CurrentUser.id.ToString(), SelectNews.id.ToString());
+                res.ContinueWith(delegate(Task<string> tmp2)
+                {
+                    var result = tmp2.Result;
+                    if (result != null)
+                    {
+                        CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
+                            UpadteNews);
+                    }
+                });
+            }
+            else
+            {
+                Like = bmDislike;
+                ValidateKey.GetValideKey();
+                var get = new HttpRequestGet();
+                var res = get.DestroyLike("Albums", SelectNews.id.ToString(), Singleton.Singleton.Instance().SecureKey,
+                    Singleton.Singleton.Instance().CurrentUser.id.ToString());
+                res.ContinueWith(delegate(Task<string> tmp2)
+                {
+                    var result = tmp2;
+                    if (result != null)
+                    {
+                        CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
+                            UpadteNews);
+                    }
+                });
+            }
+        }
+
+        private void UpadteNews()
+        {
+            var request = new HttpRequestGet();
+            var album = request.GetSecureObject(new Album(), "albums", SelectNews.id.ToString(),
+                Singleton.Singleton.Instance().SecureKey, Singleton.Singleton.Instance().CurrentUser.id.ToString());
+            album.ContinueWith(delegate(Task<object> tmp)
+            {
+                var test = tmp.Result as Album;
+                if (test != null)
+                {
+                    CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
+                        () =>
+                        {
+                            SelectNews.hasLiked = test.hasLiked;
+                            SelectNews.likes = test.likes;
+                            Likes = test.likes;
+                        });
+                }
+            });
         }
 
         private void LoadComment()
@@ -156,38 +230,45 @@ namespace SoonZik.ViewModel
 
         private void SendCommentExecute()
         {
-            var request = new HttpRequestGet();
             var post = new HttpRequestPost();
             try
             {
-                var userKey = request.GetUserKey(Singleton.Singleton.Instance().CurrentUser.id.ToString());
-                userKey.ContinueWith(delegate(Task<object> task)
+                ValidateKey.GetValideKey();
+                var test = post.SendComment(TextComment, null, SelectNews, Singleton.Singleton.Instance().SecureKey,
+                    Singleton.Singleton.Instance().CurrentUser);
+                test.ContinueWith(delegate(Task<string> tmp)
                 {
-                    var key = task.Result as string;
-                    if (key != null)
+                    var res = tmp.Result;
+                    if (res != null)
                     {
-                        var stringEncrypt = KeyHelpers.GetUserKeyFromResponse(key);
-                        _crypto =
-                            EncriptSha256.EncriptStringToSha256(Singleton.Singleton.Instance().CurrentUser.salt +
-                                                                stringEncrypt);
+                        CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
+                            LoadComment);
                     }
-                    var test = post.SendComment(TextComment, null, SelectNews, _crypto,
-                        Singleton.Singleton.Instance().CurrentUser);
-                    test.ContinueWith(delegate(Task<string> tmp)
-                    {
-                        var res = tmp.Result;
-                        if (res != null)
-                        {
-                            CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
-                                LoadComment);
-                        }
-                    });
                 });
             }
             catch (Exception)
             {
                 new MessageDialog("Erreur lors du post").ShowAsync();
             }
+        }
+
+        private void ShareTappedExecute()
+        {
+            share = true;
+            SharePopup = new Popup();
+            var content = new NewsSharePopup(SelectNews);
+            double width = content.Width;
+            double height = content.Height;
+            SharePopup.Child = content;
+            SharePopup.VerticalOffset = (Window.Current.Bounds.Height - height) / 2;
+            SharePopup.HorizontalOffset = (Window.Current.Bounds.Width - width) / 2;
+            SharePopup.IsOpen = true;
+            SharePopup.Closed += SharePopupOnClosed;
+        }
+
+        private void SharePopupOnClosed(object sender, object e)
+        {
+            SharePopup.IsOpen = false;
         }
 
         #endregion

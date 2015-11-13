@@ -12,6 +12,7 @@
 #import "News.h"
 #import "Music.h"
 #import "Album.h"
+#import "Concert.h"
 #import <Social/Social.h>
 
 @implementation SocialConnect
@@ -43,11 +44,21 @@
         } else if ([elem isKindOfClass:[User class]]) {
             User *artist = (User *)elem;
             [controller setInitialText:[NSString stringWithFormat:@"Découvrez %@ sur SoonZik", artist.username]];
-            [controller addImage:[UIImage imageNamed:artist.image]];
+            NSString *urlImage = [NSString stringWithFormat:@"%@assets/usersImage/avatars/%@", API_URL, artist.image];
+            NSData * imageData = [[NSData alloc] initWithContentsOfURL: [NSURL URLWithString: urlImage]];
+            [controller addImage:[UIImage imageWithData:imageData]];
         } else if ([elem isKindOfClass:[Album class]]) {
             Album *album = (Album *)elem;
             [controller setInitialText:[NSString stringWithFormat:@"Découvrez l'album %@ de %@ sur SoonZik", album.title, album.artist.username]];
-            [controller addImage:[UIImage imageNamed:album.image]];
+            NSString *urlImage = [NSString stringWithFormat:@"%@assets/albums/%@", API_URL, album.image];
+            NSData *imageData = [[NSData alloc] initWithContentsOfURL: [NSURL URLWithString: urlImage]];
+            [controller addImage:[UIImage imageWithData:imageData]];
+        } else if ([elem isKindOfClass:[Concert class]]) {
+            Concert *concert = (Concert *)elem;
+            [controller setInitialText:[NSString stringWithFormat:@"Concert de %@ à %@", concert.artist.username, concert.address.city]];
+            NSString *urlImage = [NSString stringWithFormat:@"%@assets/usersImage/avatars/%@", API_URL, concert.artist.image];
+            NSData * imageData = [[NSData alloc] initWithContentsOfURL: [NSURL URLWithString: urlImage]];
+            [controller addImage:[UIImage imageWithData:imageData]];
         }
         
         [controller addURL:[NSURL URLWithString:@"http://soonzik.com"]];
@@ -85,12 +96,22 @@
             [controller addImage:[UIImage imageNamed:@"news_icon"]];
         } else if ([elem isKindOfClass:[User class]]) {
             User *artist = (User *)elem;
-            [controller setInitialText:[NSString stringWithFormat:@"Découvrez %@ sur SoonZik", artist.username]];
-            [controller addImage:[UIImage imageNamed:artist.image]];
+            [controller setInitialText:[NSString stringWithFormat:@"Découvrez %@ sur @@SoonZik", artist.username]];
+            NSString *urlImage = [NSString stringWithFormat:@"%@assets/usersImage/avatars/%@", API_URL, artist.image];
+            NSData * imageData = [[NSData alloc] initWithContentsOfURL: [NSURL URLWithString: urlImage]];
+            [controller addImage:[UIImage imageWithData:imageData]];
         } else if ([elem isKindOfClass:[Album class]]) {
             Album *album = (Album *)elem;
-            [controller setInitialText:[NSString stringWithFormat:@"Découvrez l'album %@ de %@ sur SoonZik", album.title, album.artist.username]];
-            [controller addImage:[UIImage imageNamed:album.image]];
+            [controller setInitialText:[NSString stringWithFormat:@"Découvrez l'album %@ de %@ sur @@SoonZik", album.title, album.artist.username]];
+            NSString *urlImage = [NSString stringWithFormat:@"%@assets/albums/%@", API_URL, album.image];
+            NSData *imageData = [[NSData alloc] initWithContentsOfURL: [NSURL URLWithString: urlImage]];
+            [controller addImage:[UIImage imageWithData:imageData]];
+        } else if ([elem isKindOfClass:[Concert class]]) {
+            Concert *concert = (Concert *)elem;
+            [controller setInitialText:[NSString stringWithFormat:@"Concert de %@ à %@", concert.artist.username, concert.address.city]];
+            NSString *urlImage = [NSString stringWithFormat:@"%@assets/usersImage/avatars/%@", API_URL, concert.artist.image];
+            NSData * imageData = [[NSData alloc] initWithContentsOfURL: [NSURL URLWithString: urlImage]];
+            [controller addImage:[UIImage imageWithData:imageData]];
         }
         
         [controller addURL:[NSURL URLWithString:@"http://soonzik.com"]];

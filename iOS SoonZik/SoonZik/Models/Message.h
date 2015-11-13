@@ -26,6 +26,6 @@
 @property (strong, nonatomic) UIImage *thumbnail;
 @property (nonatomic) SOMessageType type;
 
-- (id)initWithSocket:(NSDictionary *)sock;
+- (id)initWithSocket:(NSString *)sock;
 
 @end

@@ -16,9 +16,18 @@
 
 @interface RatingTableViewCell : UITableViewCell
 
-@property (nonatomic, strong) IBOutlet UILabel *rateLabel;
+- (void)initCell;
+
 @property (nonatomic, strong) IBOutlet UISlider *slider;
 @property (nonatomic, strong) IBOutlet UIButton *btn;
+
+@property (nonatomic, strong) IBOutlet UIImageView *star1;
+@property (nonatomic, strong) IBOutlet UIImageView *star2;
+@property (nonatomic, strong) IBOutlet UIImageView *star3;
+@property (nonatomic, strong) IBOutlet UIImageView *star4;
+@property (nonatomic, strong) IBOutlet UIImageView *star5;
+
+@property (nonatomic, assign) int rating;
 
 @property (nonatomic, strong) id<ValueChangedProtocol> delegate;
 

@@ -32,6 +32,7 @@
     for (NSDictionary *dict in friends) {
         [self.friends addObject:[self getFriend:dict]];
     }
+    
     self.address = [[Address alloc] initWithJsonObject:[json objectForKey:@"address"]];
     
     return self;
@@ -56,7 +57,8 @@
     [aCoder encodeObject:self.follows forKey:@"follows"];
     [aCoder encodeObject:self.followers forKey:@"followers"];
     [aCoder encodeObject:self.friends forKey:@"friends"];
-    [aCoder encodeObject:self.key_date forKey:@"key_date"];
+    [aCoder encodeObject:self.secureKeyDate forKey:@"secureKeyDate"];
+    [aCoder encodeObject:self.secureKey forKey:@"secureKey"];
 }
 
 - (id)initWithCoder:(NSCoder *)aDecoder{
@@ -74,7 +76,8 @@
         self.follows = [aDecoder decodeObjectForKey:@"follows"];
         self.followers = [aDecoder decodeObjectForKey:@"followers"];
         self.friends = [aDecoder decodeObjectForKey:@"friends"];
-        self.key_date = [aDecoder decodeObjectForKey:@"key_date"];
+        self.secureKeyDate = [aDecoder decodeObjectForKey:@"secureKeyDate"];
+        self.secureKey = [aDecoder decodeObjectForKey:@"secureKey"];
     }
     return self;
 }

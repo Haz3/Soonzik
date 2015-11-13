@@ -127,6 +127,7 @@
     <Compile Include="Models\Genre.cs" />
     <Compile Include="Models\Influence.cs" />
     <Compile Include="Models\Listening.cs" />
+    <Compile Include="Models\Message.cs" />
     <Compile Include="Models\Music.cs" />
     <Compile Include="Models\MusicOwnByUser.cs" />
     <Compile Include="Models\News.cs" />
@@ -147,13 +148,13 @@
     <Compile Include="ViewModels\ArtistViewModel.cs" />
     <Compile Include="ViewModels\BattleViewModel.cs" />
     <Compile Include="ViewModels\CartViewModel.cs" />
+    <Compile Include="ViewModels\ChatViewModel.cs" />
     <Compile Include="ViewModels\Command\AddFriendCommand.cs" />
     <Compile Include="ViewModels\Command\BattleCommand.cs" />
     <Compile Include="ViewModels\Command\ConnectionCommand.cs" />
     <Compile Include="ViewModels\Command\EditUserCommand.cs" />
     <Compile Include="ViewModels\Command\FollowCommand.cs" />
     <Compile Include="ViewModels\Command\RemoveFriendCommand.cs" />
-    <Compile Include="ViewModels\Command\SearchCommand.cs" />
     <Compile Include="ViewModels\Command\SignupCommand.cs" />
     <Compile Include="ViewModels\Command\UnfollowCommand.cs" />
     <Compile Include="ViewModels\CommentViewModel.cs" />
@@ -163,6 +164,7 @@
     <Compile Include="ViewModels\ExplorerViewModel.cs" />
     <Compile Include="ViewModels\GenreViewModel.cs" />
     <Compile Include="ViewModels\HomeViewModel.cs" />
+    <Compile Include="ViewModels\LikeViewModel.cs" />
     <Compile Include="ViewModels\ListeningViewModel.cs" />
     <Compile Include="ViewModels\MusicViewModel.cs" />
     <Compile Include="ViewModels\NewsViewModel.cs" />
@@ -225,6 +227,9 @@
     </Compile>
     <Compile Include="Views\Pack.xaml.cs">
       <DependentUpon>Pack.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Search.xaml.cs">
+      <DependentUpon>Search.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Shop.xaml.cs">
       <DependentUpon>Shop.xaml</DependentUpon>
@@ -399,6 +404,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\Search.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Shop.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -428,6 +437,10 @@
   <ItemGroup>
     <Reference Include="Facebook, Version=6.0.10.0, Culture=neutral, PublicKeyToken=58cb4f2111d1e6de, processorArchitecture=MSIL">
       <HintPath>..\packages\Facebook.7.0.10-beta\lib\win8\Facebook.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="JRatingControl, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\JISoft.Rating.1.0.3\lib\portable-wpa81+win81\JRatingControl.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.Threading.Tasks">

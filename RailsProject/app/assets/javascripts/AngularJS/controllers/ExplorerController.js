@@ -15,35 +15,39 @@ SoonzikApp.controller('ExplorerCtrl', ['$scope', "$routeParams", "HTTPService", 
 	$scope.totalPage = 0;
 
 	$scope.explorerInit = function() {
-		HTTPService.getInfluences().then(function(response) {
-			$scope.influences = response.data.content;
+		SecureAuth.securedTransaction(function(key, id) {
+			var parameters = [
+				{ key: "secureKey", value: key },
+				{ key: "user_id", value: id }
+			];
+			HTTPService.getInfluences(parameters).then(function(response) {
+				$scope.influences = response.data.content;
 
-			if (typeof $routeParams.influence !== "undefined") {
-				for (var i = 0 ; i < $scope.influences.length ; i++) {
-					if ($scope.influences[i].id == $routeParams.influence) {
-						$scope.chooseInfluence($scope.influences[i]);
-						break;
+				if (typeof $routeParams.influence !== "undefined") {
+					for (var i = 0 ; i < $scope.influences.length ; i++) {
+						if ($scope.influences[i].id == $routeParams.influence) {
+							$scope.chooseInfluence($scope.influences[i]);
+							break;
+						}
+					}
+					if ($scope.selectedInfluence != null && typeof $routeParams.genre !== "undefined") {
+						$scope.chooseGenre({ id: $routeParams.genre });
 					}
 				}
-				if ($scope.selectedInfluence != null && typeof $routeParams.genre !== "undefined") {
-					$scope.chooseGenre({ id: $routeParams.genre });
-				}
-			}
 
-			$scope.loading = false;
-		}, function(error) {
-			NotificationService.error($rootScope.labels.FILE_EXPLORER_GET_INFLUENCES_ERROR_MESSAGE);
+				$scope.loading = false;
+			}, function(error) {
+				NotificationService.error($rootScope.labels.FILE_EXPLORER_GET_INFLUENCES_ERROR_MESSAGE);
+			});
 		});
 	}
 
 	$scope.influencesInit = function() {
 		$scope.state = 1;
-
 	}
 
 	$scope.genresInit = function() {
 		$scope.state = 2;
-
 	}
 
 	$scope.chooseInfluence = function(influence) {
@@ -58,23 +62,31 @@ SoonzikApp.controller('ExplorerCtrl', ['$scope', "$routeParams", "HTTPService", 
 		$scope.loadingGenre = true;
 		$scope.currentPage = 1;
 
-		var params = [
-			{ key: "count", value: "true" }
-		]
+		SecureAuth.securedTransaction(function(key, id) {
+			var parameters = [
+				{ key: "secureKey", value: key },
+				{ key: "user_id", value: id }
+			];
+			var countParams = [
+				{ key: "count", value: "true" },
+				{ key: "secureKey", value: key },
+				{ key: "user_id", value: id }
+			]
 
-		HTTPService.getGenre(genre.id).then(function(response) {
-			$scope.totalPage = toInt(response.data.content);
-		}, function(error) {
-			NotificationService.error($rootScope.labels.FILE_EXPLORER_GET_GENRE_ERROR_MESSAGE);
-		});
+			HTTPService.getGenre(genre.id, countParams).then(function(response) {
+				$scope.totalPage = toInt(response.data.content);
+			}, function(error) {
+				NotificationService.error($rootScope.labels.FILE_EXPLORER_GET_GENRE_ERROR_MESSAGE);
+			});
 
-		HTTPService.getGenre(genre.id).then(function(response) {
-			$scope.selectedGenre = response.data.content;
-			$location.path('/explorer/' + $scope.selectedInfluence.id + "/" + $scope.selectedGenre.id, false);
-			$scope.loadingGenre = false;
-			$scope.genreOpen();
-		}, function(error) {
-			NotificationService.error($rootScope.labels.FILE_EXPLORER_GET_GENRE_ERROR_MESSAGE);
+			HTTPService.getGenre(genre.id, params).then(function(response) {
+				$scope.selectedGenre = response.data.content;
+				$location.path('/explorer/' + $scope.selectedInfluence.id + "/" + $scope.selectedGenre.id, false);
+				$scope.loadingGenre = false;
+				$scope.genreOpen();
+			}, function(error) {
+				NotificationService.error($rootScope.labels.FILE_EXPLORER_GET_GENRE_ERROR_MESSAGE);
+			});
 		});
 	}
 

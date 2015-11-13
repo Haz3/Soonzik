@@ -36,20 +36,18 @@ var labels = {
 	DISPLAY_MENU_SIGNUP_LABEL: "Sign up",
 	DISPLAY_MENU_LOGIN_LABEL: "Login",
 	DISPLAY_MENU_LOGOUT_LABEL: "Log out",
-	DISPLAY_MENU_LANGUAGE_SELECTOR_LABEL: "Languages",	// To add
 	DISPLAY_MENU_SEARCH_PLACEHOLDER: "Search users, musics, albums...",
+
+	// Header Controller
+	FILE_MENU_LANGUAGE_ERROR_LABEL: "Error while changing the language",
 
 	// Album Controller
 	FILE_ALBUM_ADD_ALBUM_MESSAGE: "Album successfuly adding into the cart",
 	FILE_ALBUM_ADD_ALBUM_ERROR_MESSAGE: "An error occured while adding album into the cart",
-  FILE_ALBUM_ADD_SONG_MESSAGE: "Song is successfuly add into the cart", 
-  FILE_ALBUM_ADD_SONG_ERROR_MESSAGE: "An error occured while adding song into the cart",
+	FILE_ALBUM_ADD_SONG_MESSAGE: "Song is successfuly add into the cart", 
+	FILE_ALBUM_ADD_SONG_ERROR_MESSAGE: "An error occured while adding song into the cart",
 	FILE_ALBUM_GET_NOTES_ERROR_MESSAGE: "Error while loading your notes",
-	FILE_ALBUM_FIND_PLAYLIST_ERROR_MESSAGE: "Error while deleting the playlist : ",
 	FILE_ALBUM_GET_ALBUM_ERROR_MESSAGE: "Error while loading the album",
-	FILE_ALBUM_ADD_PLAYLIST_NOTIF_SUCCESS_PART_ONE: "The music '",
-	FILE_ALBUM_ADD_PLAYLIST_NOTIF_SUCCESS_PART_TWO: "' has been added to the playlist",
-	FILE_ALBUM_ADD_PLAYLIST_ERROR_MESSAGE: "Error while saving a new music in the playlist",
 	FILE_ALBUM_SET_NOTE_ERROR_MESSAGE: "Error while rating the music, please try later.",
 	FILE_ALBUM_LOAD_COMMENT_ERROR_MESSAGE: "Error while loading commentaries",
 	FILE_ALBUM_SEND_COMMENT_ERROR_MESSAGE: "Error while saving your comment, please try later",
@@ -85,7 +83,6 @@ var labels = {
 
 	// Player Controller
 	FILE_PLAYER_FIND_PLAYLIST_ERROR_MESSAGE: "Error : Can't get your playlist",
-	FILE_PLAYER_DELETE_PLAYLIST_ERROR_MESSAGE: "Error while deleting the playlist : ",
 	FILE_PLAYER_REMOVE_FROM_PLAYLIST_ERROR_MESSAGE: "Error while deleting the music from the playlist",
 	FILE_PLAYER_SAVE_IN_PLAYLIST_ERROR_MESSAGE: "Error while saving a new music in the playlist",
 	FILE_PLAYER_PLAY_MUSIC_ERROR_MESSAGE: "Error while loading the music : ",
@@ -97,7 +94,6 @@ var labels = {
 	FILE_PLAYLIST_GET_PLAYLIST_ERROR_MESSAGE: "Error while loading information of the playlist",
 	FILE_PLAYLIST_GET_MUSIC_ERROR_MESSAGE: "Error while loading information of the music number ",
 	FILE_PLAYLIST_TMP_NAME_LABEL: "Temporary Playlist",
-	FILE_PLAYLIST_SAVE_PLAYLIST_ERROR_MESSAGE: "Error while saving a new playlist",
 	FILE_PLAYLIST_NEW_MUSIC_ERROR_MESSAGE: "Error while saving a new music in the playlist",
 
 	// Search Controller
@@ -130,13 +126,13 @@ var labels = {
 	FILE_USER_GOOGLE_LINK_ERROR_MESSAGE: "Can't link the social network to your profile, try again later.",
 	FILE_USER_GOOGLE_CONNECTION_ERROR_MESSAGE: "Can't connect to Google, please try later",
 
+	// Security Controller
+	FILE_SECURITY_FAILED: "An error occured during the request",
+
 	// Album Show View
+	DISPLAY_ALBUM_BY_LABEL: "By ",
 	DISPLAY_ALBUM_ADD_TO_CART: "Add to cart",
-	DISPLAY_ALBUM_ADD_PLAYLIST_BUTTON: "Add to Playlist",
-	DISPLAY_ALBUM_ADD_PLAYLIST_LABEL: "Add",
-	DISPLAY_ALBUM_LISTEN_LABEL: "Listen",
-	DISPLAY_ALBUM_CLOSE_LABEL: "Close",
-	DISPLAY_ALBUM_SEND_COMMENT_BUTTON: "Send",
+	DISPLAY_ALBUM_SEND_COMMENT_BUTTON: "Comment",
 
 	// Battle Index View
 	DISPLAY_BATTLE_LIST_LABEL: "List of battles",
@@ -169,10 +165,6 @@ var labels = {
 	DISPLAY_PLAYER_MORE_LABEL: "More...",
 	DISPLAY_PLAYER_LESS_LABEL: "Less...",
 	DISPLAY_PLAYER_GEOLOCATION_LABEL: "Geolocation",
-	DISPLAY_PLAYER_SHARE_LABEL: "Share",
-	DISPLAY_PLAYER_SAVE_NEW_PLAYLIST_LABEL: "Save as new Playlist",
-	DISPLAY_PLAYER_SAVE_PLAYLIST_NAME_LABEL: "Save the playlist as :",
-	DISPLAY_PLAYER_CLOSE_BUTTON: "Close",
 	DISPLAY_PLAYER_TITLE_LABEL: "Title",
 	DISPLAY_PLAYER_PRICE_LABEL: "Price",
 	DISPLAY_PLAYER_DURATION_LABEL: "Duration",
@@ -180,26 +172,15 @@ var labels = {
 	DISPLAY_PLAYER_ALBUM_LINK_LABEL: "Link to the album page",
 	DISPLAY_PLAYER_YOUR_PLAYLIST_LABEL: "Your playlists",
 	DISPLAY_PLAYER_NAME_LABEL: "Name",
-	DISPLAY_PLAYER_REPLACE_PLAYLIST_BUTTON: "Replace the current playlist",
-	DISPLAY_PLAYER_ADD_CURRENT_PLAYLIST_BUTTON: "Add to the current playlist",
-	DISPLAY_PLAYER_SHARE_PLAYLIST_BUTTON: "Share this link !",
-	DISPLAY_PLAYER_SURE_DELETE_BUTTON: "Are you sure to delete this playlist ?",
-	DISPLAY_PLAYER_YES_BUTTON: "Yes",
-	DISPLAY_PLAYER_NO_BUTTON: "No",
 	DISPLAY_PLAYER_NEW_PLAYLIST_PLACEHOLDER: "New Playlist",
 
 	// Playlist view
-	DISPLAY_PLAYER_EMPTY_LABEL: "This playlist is empty",
-	DISPLAY_PLAYER_FROM_LABEL: "From",
-	DISPLAY_PLAYER_MUSICS_LABEL: "musics",
-	DISPLAY_PLAYER_LISTEN_LABEL: "Listen",
-	DISPLAY_PLAYER_SHARE_LABEL: "Share",
-	DISPLAY_PLAYER_CLOSE_LABEL: "Close",
-	DISPLAY_PLAYER_NEW_PLAYLIST_LABEL: "Save as new playlist",
-	DISPLAY_PLAYER_SAVE_AS_LABEL: "Save as : ",
-	DISPLAY_PLAYER_SAVE_BUTTON: "Save",
-	DISPLAY_PLAYER_ADD_PLAYLIST_LABEL: "Add to playlist",
-	DISPLAY_PLAYER_ADD_PLAYLIST_BUTTON: "Add",
+	DISPLAY_PLAYLIST_EMPTY_LABEL: "This playlist is empty",
+	DISPLAY_PLAYLIST_FROM_LABEL: "From",
+	DISPLAY_PLAYLIST_MUSICS_LABEL: "musics",
+	DISPLAY_PLAYLIST_LISTEN_LABEL: "Listen",
+	DISPLAY_PLAYLIST_NEW_PLAYLIST_LABEL: "Save as...",
+	DISPLAY_PLAYLIST_SHARE_LABEL: "Share",
 
 	// Search view
 	DISPLAY_SEARCH_FILTERS_LABEL: "Filters",
@@ -307,6 +288,9 @@ var labels = {
 	FILE_DISCOTHEQUE_GET_MUSICS_ERROR_MESSAGE: "An error occured while getting your musics",
 
 	// User signup view
+	DISPLAY_SIGNUP_SIGNUP_LABEL: "Sign up",
+	DISPLAY_SIGNUP_PUBLIC_INFO_LABEL: "Public informations",
+	DISPLAY_SIGNUP_PERSO_INFO_LABEL: "Personal informations",
 	DISPLAY_SIGNUP_USERNAME_LABEL: "Username *",
 	DISPLAY_SIGNUP_DESCRIPTION_LABEL: "Description",
 	DISPLAY_SIGNUP_BIRTHDAY_LABEL: "Birthday *",
@@ -376,6 +360,7 @@ var labels = {
   DISPLAY_INDEX_CHARACTER_LEFT_LABEL: "characters left",
   DISPLAY_INDEX_LAST_NEWS_LABEL: "The last news",
   DISPLAY_INDEX_LAST_PACKS_LABEL: "The last packs",
+  DISPLAY_INDEX_LAST_BATTLES_LABEL: "The last battles",
   DISPLAY_INDEX_PAY_MORE_LABEL_PART_ONE: "Pay",
   DISPLAY_INDEX_PAY_MORE_LABEL_PART_TWO: "$ or more to unlock",
   DISPLAY_INDEX_SUGGESTION_LABEL: "Suggestions",
@@ -389,4 +374,46 @@ var labels = {
   FILE_INDEX_PROFILE_LOAD_ERROR_MESSAGE: "An error occured while loading the profile of an artist",
   FILE_INDEX_FLUX_LOAD_ERROR_MESSAGE: "An error occured while loading your activities",
   FILE_INDEX_SUGGESTION_LOAD_ERROR_MESSAGE: "An error occured while loading your suggestions",
+
+  // Sign in View
+  DISPLAY_SIGNIN_MAIL_PLACEHOLDER: "Email address",
+  DISPLAY_SIGNIN_PASSWORD_PLACEHOLDER: "Password",
+  DISPLAY_SIGNIN_REMEMBER_LABEL: "Remember me",
+  DISPLAY_SIGNIN_PASSWORD_FORGOTTEN_LABEL: "Password forgotten ?",
+  DISPLAY_SIGNIN_SIGNIN_LABEL: "Sign in",
+  DISPLAY_SIGNIN_NOT_SIGNUP_LABEL: "Not registered ?",
+  DISPLAY_SIGNIN_SIGNUP_LABEL: "Sign up",
+  DISPLAY_SIGNIN_CONFIRM_NOT_RECEIVED_LABEL: "Account confirmation not received ?",
+  DISPLAY_SIGNIN_SEND_LABEL: "Send",
+  DISPLAY_SIGNIN_NEWPASSWORD_LABEL: "New password",
+  DISPLAY_SIGNIN_CONFIRM_NEWPASSWORD_LABEL: "Confirm new password",
+
+  // Commentaries view
+  DISPLAY_COMMENTARY_TITLE_LABEL: "Commentaries",
+  DISPLAY_NO_COMMENTARY_LABEL: "No commentaries",
+
+  // Application
+  FILE_APP_PLAYLIST_NOT_FOUND_ERROR_MESSAGE: "An error occured while adding the playlist : ",
+  FILE_APP_LIKE_ERROR_MESSAGE: "Une erreur s'est produite lors de la mention 'J'aime'",
+  FILE_APP_UNLIKE_ERROR_MESSAGE: "Une erreur s'est produite lors du retrait de la mention 'J'aime'",
+
+  // Tooltip Controller
+	FILE_TOOLTIP_ADD_PLAYLIST_ERROR_MESSAGE: "An error occured while adding a music to a playlist",
+	FILE_TOOLTIP_SAVE_PLAYLIST_ERROR_MESSAGE: "Error while saving a new playlist",
+	FILE_TOOLTIP_DELETE_PLAYLIST_ERROR_MESSAGE: "Error while deleting the playlist : ",
+
+  // Tooltip View
+	DISPLAY_TOOLTIP_LISTEN_LABEL: "Listen",
+	DISPLAY_TOOLTIP_ADD_CURRENT_PLAYLIST_LABEL: "Add to the current playlist",
+	DISPLAY_TOOLTIP_ADD_TO_PLAYLIST_LABEL: "Add to a playlist",
+	DISPLAY_TOOLTIP_REPLACE_PLAYLIST_LABEL: "Replace the current playlist",
+	DISPLAY_TOOLTIP_CLOSE_LABEL: "Close",
+	DISPLAY_TOOLTIP_BACK_LABEL: "Back",
+	DISPLAY_TOOLTIP_SHARE_LABEL: "Share",
+	DISPLAY_TOOLTIP_NEW_PLAYLIST_LABEL: "New playlist",
+	DISPLAY_TOOLTIP_NAME_LABEL: "Name : ",
+	DISPLAY_TOOLTIP_SAVE_BUTTON: "Save",
+	DISPLAY_TOOLTIP_SURE_DELETE_LABEL: "Are you sure ?",
+	DISPLAY_TOOLTIP_YES_LABEL: "Yes",
+	DISPLAY_TOOLTIP_NO_LABEL: "No",
 }

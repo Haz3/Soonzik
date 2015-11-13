@@ -53,9 +53,44 @@ class Music < ActiveRecord::Base
     [:id, :title, :duration, :price, :limited]
   end
 
+  # Set the average of notes
+  def setAverageNote(value)
+    @average = value
+  end
+
   # Get the average of notes
   def getAverageNote
-    return MusicNote.where(music_id: self.id).average(:value).to_f
+    return @average.present? ? @average : MusicNote.where(music_id: self.id).average(:value).to_f
+  end
+
+  # Fill an association of records of the notes average
+  def self.fillAverageNote(ar_musics)
+    if (ar_musics.size == 0)
+      return
+    end
+    sql = "SELECT music_id, AVG(value) as average FROM music_notes WHERE (music_id IN ("
+
+    ar_musics.each_with_index do |music, index|
+      sql += ", " if index != 0
+      sql += music[:id].to_s
+    end
+
+    sql += ")) GROUP BY music_id"
+    records_array = ActiveRecord::Base.connection.execute(sql)
+
+    ar_musics.each do |music|
+      passIn = false
+
+      records_array.each do |record|
+        if (music[:id].to_i == record['music_id'].to_i)
+          passIn = true
+          music.setAverageNote record['average'].to_f
+          break
+        end
+      end
+
+      music.setAverageNote  0 if !passIn
+    end
   end
 
   # Suggestion logic

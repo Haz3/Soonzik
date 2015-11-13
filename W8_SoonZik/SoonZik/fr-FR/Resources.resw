@@ -402,4 +402,10 @@
   <data name="artist_page_txt.Text" xml:space="preserve">
     <value>Artiste</value>
   </data>
+  <data name="association_txt.Text" xml:space="preserve">
+    <value>Association:</value>
+  </data>
+  <data name="artist_tweets_list_txt.Text" xml:space="preserve">
+    <value>Liste des Tweets de l'artiste</value>
+  </data>
 </root>

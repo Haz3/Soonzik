@@ -31,6 +31,8 @@
     
     [self.buyButton setTitleColor:ORANGE forState:UIControlStateNormal];
     self.buyButton.titleLabel.font = SOONZIK_FONT_BODY_MEDIUM;
+    
+    self.numberLikesLabel.font = SOONZIK_FONT_BODY_SMALL;
 }
 
 @end

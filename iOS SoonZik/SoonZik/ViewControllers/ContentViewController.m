@@ -249,8 +249,17 @@
     self.prefs = [NSUserDefaults standardUserDefaults];
     NSData *userData = [self.prefs objectForKey:@"User"];
     User *user = (User *)[NSKeyedUnarchiver unarchiveObjectWithData:userData];
-    self.listOfPlaylists = [Factory findElementWithClassName:@"Playlist" andValues:[NSString stringWithFormat:@"attribute[user_id]=%i", user.identifier]];
     
+    
+    
+    
+    //self.listOfPlaylists = [Factory findElementWithClassName:@"Playlist" andValues:[NSString stringWithFormat:@"attribute[user_id]=%i", user.identifier]];
+    
+    
+    
+    
+    
+    self.listOfPlaylists = [[NSMutableArray alloc] init];
     [self checkPlaylists];
 }
 
@@ -276,6 +285,8 @@
     __block __weak TitlePlaylistCollectionViewCell *cell = (TitlePlaylistCollectionViewCell *)[collectionView dequeueReusableCellWithReuseIdentifier:cellID forIndexPath:indexPath];
     
     [cell initCell];
+    
+    
     
     Playlist *playlist = [self.listOfPlaylists objectAtIndex:indexPath.row];
     cell.playlistTitle.text = playlist.title;

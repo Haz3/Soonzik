@@ -13,8 +13,6 @@ module API
   # * getNotes    [get]
   #
   class MusicsController < ApisecurityController
-  	before_action :checkKey, only: [:addcomment, :get, :addtoplaylist, :delfromplaylist, :setNotes]
-
     # Retrieve all the musics
     #
     # Route : /musics
@@ -33,7 +31,9 @@ module API
         if (@count.present? && @count == "true")
           @returnValue = { content: Music.where("album_id IS NOT NULL").count }
         else
-          @returnValue = { content: Music.eager_load([:album, :genres, :user]).where("album_id IS NOT NULL").all.as_json(:only => Music.miniKey, :include => {
+          musics = Music.eager_load([:album, :genres, :user]).where("album_id IS NOT NULL").all
+          Music.fillAverageNote musics
+          @returnValue = { content: musics.as_json(:only => Music.miniKey, :include => {
                                                         :album => { :only => Album.miniKey },
                                                         :genres => { :only => Genre.miniKey },
                                                         :user => {:only => User.miniKey}
@@ -172,6 +172,8 @@ module API
         if (defined?@offset)      #offset
           music_object = music_object.offset(@offset.to_i)
         end
+
+        Music.fillAverageNote music_object
 
         @returnValue = { content: music_object.as_json(:only => Music.miniKey, :include => {
                                                         :album => { :only => Album.miniKey },

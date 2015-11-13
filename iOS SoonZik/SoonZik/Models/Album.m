@@ -14,7 +14,7 @@
 {
     self = [super init];
     
-    NSLog(@"%@", json);
+   NSLog(@"json album : %@", json);
     
     self.identifier = [[json objectForKey:@"id"] intValue];
     self.image = [json objectForKey:@"image"];
@@ -35,6 +35,9 @@
             i++;
         }
     }
+    
+    self.numberOfLikes = [[json objectForKey:@"likes"] integerValue];
+    self.isLiked = [[json objectForKey:@"hasLiked"] boolValue];
     
     return self;
 }

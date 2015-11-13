@@ -7,8 +7,6 @@ module API
   # * destroy     [get] - SECURE
   #
   class CartsController < ApisecurityController
-    before_action :checkKey, only: [:destroy, :save, :show]
-
   	# Destroy a specific object by its id
     #
     # Route : /carts/destroy

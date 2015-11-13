@@ -38,6 +38,13 @@
 						<Value>Facebook.Client\FacebookDialogPage.xbf</Value>
 					</Candidate>
 				</NamedResource>
+				<ResourceMapSubtree name="Common">
+					<NamedResource name="StandardStyles.xbf" uri="ms-resource://Facebook.Client/Files/Facebook.Client/Common/StandardStyles.xbf">
+						<Candidate type="Path">
+							<Value>Facebook.Client\Common\StandardStyles.xbf</Value>
+						</Candidate>
+					</NamedResource>
+				</ResourceMapSubtree>
 				<ResourceMapSubtree name="Controls">
 					<ResourceMapSubtree name="FriendPicker">
 						<NamedResource name="FriendPicker.xbf" uri="ms-resource://Facebook.Client/Files/Facebook.Client/Controls/FriendPicker/FriendPicker.xbf">
@@ -64,6 +71,18 @@
 						<NamedResource name="ProfilePicture.xbf" uri="ms-resource://Facebook.Client/Files/Facebook.Client/Controls/ProfilePicture/ProfilePicture.xbf">
 							<Candidate type="Path">
 								<Value>Facebook.Client\Controls\ProfilePicture\ProfilePicture.xbf</Value>
+							</Candidate>
+						</NamedResource>
+					</ResourceMapSubtree>
+					<ResourceMapSubtree name="WebDialog">
+						<NamedResource name="Styles.xbf" uri="ms-resource://Facebook.Client/Files/Facebook.Client/Controls/WebDialog/Styles.xbf">
+							<Candidate type="Path">
+								<Value>Facebook.Client\Controls\WebDialog\Styles.xbf</Value>
+							</Candidate>
+						</NamedResource>
+						<NamedResource name="WebDialogUserControl.xbf" uri="ms-resource://Facebook.Client/Files/Facebook.Client/Controls/WebDialog/WebDialogUserControl.xbf">
+							<Candidate type="Path">
+								<Value>Facebook.Client\Controls\WebDialog\WebDialogUserControl.xbf</Value>
 							</Candidate>
 						</NamedResource>
 					</ResourceMapSubtree>

@@ -51,6 +51,7 @@ namespace SoonZik.ViewModels
 
         static public ObservableCollection<User> friends { get; set; }
         static public ObservableCollection<User> follows { get; set; }
+        static public ObservableCollection<User> followers { get; set; }
         static public ObservableCollection<Tweet> tweets { get; set; }
 
         public ICommand do_add_follow
@@ -116,6 +117,7 @@ namespace SoonZik.ViewModels
 
             get_friends(id);
             get_follows(id);
+            get_follower(id);
             get_tweets(id);
 
         }
@@ -226,7 +228,34 @@ namespace SoonZik.ViewModels
                 foreach (var item in list)
                     follows.Add(item);
 
-                if (follows.Any(x => x.username == Singleton.Instance.Current_user.username))
+                //if (follows.Any(x => x.username == Singleton.Instance.Current_user.username))
+                //    add_follow_btn = Visibility.Collapsed;
+                //else
+                //    remove_follow_btn = Visibility.Collapsed;
+            }
+
+            catch (Exception e)
+            {
+                exception = e;
+            }
+
+            if (exception != null)
+                await new MessageDialog(exception.Message, "get follows error").ShowAsync();
+        }
+
+        async public void get_follower(int id)
+        {
+            Exception exception = null;
+            followers = new ObservableCollection<User>();
+
+            try
+            {
+                var list = (List<User>)await Http_get.get_object(new List<User>(), "users/" + id.ToString() + "/followers");
+
+                foreach (var item in list)
+                    followers.Add(item);
+
+                if (followers.Any(x => x.username == Singleton.Instance.Current_user.username))
                     add_follow_btn = Visibility.Collapsed;
                 else
                     remove_follow_btn = Visibility.Collapsed;
@@ -265,7 +294,7 @@ namespace SoonZik.ViewModels
                     Singleton.Instance.Current_user.follows.Add(artist);
                     add_follow_btn = Visibility.Collapsed;
                     remove_follow_btn = Visibility.Visible;
-                    follows.Add(Singleton.Instance.Current_user);
+                    followers.Add(Singleton.Instance.Current_user);
                 }
                 else
                     await new MessageDialog("Add follow KO").ShowAsync();
@@ -302,7 +331,7 @@ namespace SoonZik.ViewModels
                     Singleton.Instance.Current_user.follows.Remove(artist);
                     add_follow_btn = Visibility.Visible;
                     remove_follow_btn = Visibility.Collapsed;
-                    follows.Remove(Singleton.Instance.Current_user);
+                    followers.Remove(Singleton.Instance.Current_user);
                 }
                 else
                     await new MessageDialog("Remove follow KO").ShowAsync();

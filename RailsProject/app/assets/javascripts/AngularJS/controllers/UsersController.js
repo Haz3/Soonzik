@@ -55,168 +55,178 @@ SoonzikApp.controller('UsersCtrl', ['$scope', "$routeParams", 'SecureAuth', 'HTT
 		}
 		var id = null;
 
-		HTTPService.getProfile($routeParams.id).then(function(profile) {
-			/*- Begin get Profile -*/
+    	SecureAuth.securedTransaction(function(key, user_id) {
+	        var parameters = [
+	          { key: "secureKey", value: key },
+	          { key: "user_id", value: user_id }
+	        ];
+			HTTPService.getProfile($routeParams.id, parameters).then(function(profile) {
+				/*- Begin get Profile -*/
 
-			var dataProfile = profile.data.content;
-			// Initialisation of the user profile
-			$scope.show.user = {
-				id: dataProfile.id,
-				username: dataProfile.username,
-				image: dataProfile.image,
-				facebook: linkToNothing(dataProfile.facebook),
-				twitter: linkToNothing(dataProfile.twitter),
-				googlePlus: linkToNothing(dataProfile.googlePlus)
-			}
-			id = dataProfile.id;
+				var dataProfile = profile.data.content;
+				// Initialisation of the user profile
+				$scope.show.user = {
+					id: dataProfile.id,
+					username: dataProfile.username,
+					image: dataProfile.image,
+					facebook: linkToNothing(dataProfile.facebook),
+					twitter: linkToNothing(dataProfile.twitter),
+					googlePlus: linkToNothing(dataProfile.googlePlus)
+				}
+				id = dataProfile.id;
 
-			if (dataProfile.background != null) {
-				$scope.show.style = "background: url('assets/usersImage/backgrounds/" + dataProfile.background + "')";
-			}
-
-			/* Now I have the username so I get the tweets during the rest of the informations */
-
-			var paramsTweet = [
-				{ key: encodeURIComponent("attribute[user_id]"), value: id },
-				{ key: encodeURIComponent("order_by_desc[]"), value: "created_at" },
-				{ key: "limit", value: 20 }
-			];
-
-			HTTPService.findTweet(paramsTweet).then(function(response) {
-				$scope.show.tweets.my = response.data.content;
-
-			}, function(error) {
-				NotificationService.error("");
-			});
-
-			if ($scope.user != false) {
-				HTTPService.findPlaylist([{ key: "attribute[user_id]", value: $scope.user.id }]).then(function(response) {
-					$scope.myPlaylists = response.data.content;
-					for (var i = 0 ; i < $scope.myPlaylists.length ; i++) {
-						$scope.myPlaylists[i].check = false;
-					}
-				}, function(error) {
-					NotificationService.error($rootScope.labels.FILE_USER_FIND_PLAYLIST_ERROR_MESSAGE + playlist.name);
-				});
-			}
-
-			/* Other informations */
-
-			HTTPService.isArtist(id).then(function(artistInformation) {
-				/*- Begin isArtist -*/
-
-				// Initialisation of the artist profile [if is one]
-				$scope.show.user.isArtist = artistInformation.data.content.artist;
-				if ($scope.show.user.isArtist == true) {
-					$scope.show.user.topFive = artistInformation.data.content.topFive;
-					$scope.show.user.albums = artistInformation.data.content.albums;
+				if (dataProfile.background != null) {
+					$scope.show.style = "background: url('assets/usersImage/backgrounds/" + dataProfile.background + "')";
 				}
 
+				/* Now I have the username so I get the tweets during the rest of the informations */
 
-				if ($scope.user != false && $scope.show.user.isArtist == true) {
-					var note_array_id = []
+				var paramsTweet = [
+					{ key: encodeURIComponent("attribute[user_id]"), value: id },
+					{ key: encodeURIComponent("order_by_desc[]"), value: "created_at" },
+					{ key: "limit", value: 20 },
+		        	{ key: "secureKey", value: key },
+		        	{ key: "user_id", value: user_id }
+				];
 
-					for (var i = 0 ; i < $scope.show.user.albums.length ; i++) {
-						for (var j = 0 ; j < $scope.show.user.albums[i].musics.length ; j++) {
-							note_array_id.push($scope.show.user.albums[i].musics[j].id);
-							$scope.show.user.albums[i].musics[j].goldenStars = null;
-						}
+				HTTPService.findTweet(paramsTweet).then(function(response) {
+					$scope.show.tweets.my = response.data.content;
+
+				}, function(error) {
+					NotificationService.error("");
+				});
+
+				/* Other informations */
+
+				HTTPService.isArtist(id, parameters).then(function(artistInformation) {
+					/*- Begin isArtist -*/
+
+					// Initialisation of the artist profile [if is one]
+					$scope.show.user.isArtist = artistInformation.data.content.artist;
+					if ($scope.show.user.isArtist == true) {
+						$scope.show.user.topFive = artistInformation.data.content.topFive;
+						$scope.show.user.albums = artistInformation.data.content.albums;
 					}
 
-					var noteParameters = [
-						{ key: "user_id", value: $scope.user.id },
-						{ key: "arr_id", value: "[" + encodeURI(note_array_id) + "]" }
-					]
 
-					HTTPService.getMusicNotes(noteParameters).then(function(response) {
+					if ($scope.user != false && $scope.show.user.isArtist == true) {
+						var note_array_id = []
+
 						for (var i = 0 ; i < $scope.show.user.albums.length ; i++) {
 							for (var j = 0 ; j < $scope.show.user.albums[i].musics.length ; j++) {
-								for (var k = 0 ; k < response.data.content.length ; k++) {
-									if (response.data.content[k].music_id == $scope.show.user.albums[i].musics[j].id) {
-										$scope.show.user.albums[i].musics[j].note = response.data.content[k].note;
+								note_array_id.push($scope.show.user.albums[i].musics[j].id);
+								$scope.show.user.albums[i].musics[j].goldenStars = null;
+							}
+						}
+
+						var noteParameters = [
+							{ key: "user_id", value: $scope.user.id },
+							{ key: "arr_id", value: "[" + encodeURI(note_array_id) + "]" },
+							{ key: "secureKey", value: key },
+							{ key: "user_id", value: user_id }
+						]
+
+						HTTPService.getMusicNotes(noteParameters).then(function(response) {
+							for (var i = 0 ; i < $scope.show.user.albums.length ; i++) {
+								for (var j = 0 ; j < $scope.show.user.albums[i].musics.length ; j++) {
+									for (var k = 0 ; k < response.data.content.length ; k++) {
+										if (response.data.content[k].music_id == $scope.show.user.albums[i].musics[j].id) {
+											$scope.show.user.albums[i].musics[j].note = response.data.content[k].note;
+										}
 									}
 								}
 							}
-						}
-					}, function(error) {
-						NotificationService.error($rootScope.labels.FILE_USER_GET_NOTES_ERROR_MESSAGE);
-					});
-				}
+						}, function(error) {
+							NotificationService.error($rootScope.labels.FILE_USER_GET_NOTES_ERROR_MESSAGE);
+						});
+					}
 
 
-				HTTPService.getFollowers(id).then(function(followersInformation) {
-					/*- Begin getFollowers -*/
+					HTTPService.getFollowers(id, parameters).then(function(followersInformation) {
+						/*- Begin getFollowers -*/
 
-					// Load the followers of the user
-					$scope.show.user.followers = followersInformation.data.content;
-
-					// remove loading animation
-					$scope.loading = false;
-
-					/*- End getFollowers -*/
-				}, function(error) {
-					// error management to do
-					NotificationService.error($rootScope.labels.FILE_USER_GET_FOLLOWERS_ERROR_MESSAGE);
-				});
-
-				HTTPService.getFriends(id).then(function(friendsInformation) {
-					/*- Begin getFollowers -*/
-
-					// Load the followers of the user
-					$scope.show.user.friends = friendsInformation.data.content;
-
-					// remove loading animation
-					$scope.loading = false;
-
-					/*- End getFollowers -*/
-				}, function(error) {
-					// error management to do
-					NotificationService.error($rootScope.labels.FILE_USER_GET_FRIENDS_ERROR_MESSAGE);
-				});
-
-				/* get our follows (for the follow button) */
-				if ($scope.user != false) {
-					HTTPService.getFollows($scope.user.id).then(function(followersInformation) {
 						// Load the followers of the user
-						$scope.user.followers = followersInformation.data.content;
+						$scope.show.user.followers = followersInformation.data.content;
+
+						// remove loading animation
+						$scope.loading = false;
+
+						/*- End getFollowers -*/
 					}, function(error) {
-						NotificationService.error($rootScope.labels.FILE_USER_GET_FOLLOWS_ERROR_MESSAGE);
+						// error management to do
+						NotificationService.error($rootScope.labels.FILE_USER_GET_FOLLOWERS_ERROR_MESSAGE);
 					});
-					HTTPService.getFriends($scope.user.id).then(function(friendsInformation) {
+
+					HTTPService.getFriends(id, parameters).then(function(friendsInformation) {
+						/*- Begin getFollowers -*/
+
 						// Load the followers of the user
-						$scope.user.friends = friendsInformation.data.content;
+						$scope.show.user.friends = friendsInformation.data.content;
+
+						// remove loading animation
+						$scope.loading = false;
+
+						/*- End getFollowers -*/
 					}, function(error) {
+						// error management to do
 						NotificationService.error($rootScope.labels.FILE_USER_GET_FRIENDS_ERROR_MESSAGE);
 					});
-				}
 
-				HTTPService.findPlaylist([{ key: "attribute[user_id]", value: $scope.show.user.id }]).then(function(playlistResponse) {
-					$scope.show.playlists = playlistResponse.data.content;
+					/* get our follows (for the follow button) */
+					if ($scope.user != false) {
+						HTTPService.getFollows($scope.user.id, parameters).then(function(followersInformation) {
+							// Load the followers of the user
+							$scope.user.followers = followersInformation.data.content;
+						}, function(error) {
+							NotificationService.error($rootScope.labels.FILE_USER_GET_FOLLOWS_ERROR_MESSAGE);
+						});
+						HTTPService.getFriends($scope.user.id, parameters).then(function(friendsInformation) {
+							// Load the followers of the user
+							$scope.user.friends = friendsInformation.data.content;
+						}, function(error) {
+							NotificationService.error($rootScope.labels.FILE_USER_GET_FRIENDS_ERROR_MESSAGE);
+						});
+					}
 
-					for (var i = 0 ; i < $scope.show.playlists.length ; i++) {
-						var duration = 0;
+					var playlistParams = [
+						{ key: "secureKey", value: key },
+						{ key: "user_id", value: user_id },
+						{ key: "attribute[user_id]", value: $scope.user.id }
+					];
 
-						for (var j = 0 ; j < $scope.show.playlists[i].musics.length ; j++) {
-							duration += $scope.show.playlists[i].musics[j].duration;
+					HTTPService.findPlaylist(playlistParams).then(function(playlistResponse) {
+						$scope.show.playlists = playlistResponse.data.content;
+						$scope.myPlaylists = playlistResponse.data.content;
+
+						for (var i = 0 ; i < $scope.myPlaylists.length ; i++) {
+							$scope.myPlaylists[i].check = false;
 						}
 
-						$scope.show.playlists[i].duration = duration;
-					}
+						for (var i = 0 ; i < $scope.show.playlists.length ; i++) {
+							var duration = 0;
+
+							for (var j = 0 ; j < $scope.show.playlists[i].musics.length ; j++) {
+								duration += $scope.show.playlists[i].musics[j].duration;
+							}
+
+							$scope.show.playlists[i].duration = duration;
+						}
+					}, function(error) {
+						// error management to do
+						NotificationService.error($rootScope.labels.FILE_USER_GET_PLAYLISTS_ERROR_MESSAGE);
+					});
+
+					/*- End isArtist -*/
 				}, function(error) {
 					// error management to do
-					NotificationService.error($rootScope.labels.FILE_USER_GET_PLAYLISTS_ERROR_MESSAGE);
-				});
+					NotificationService.error($rootScope.labels.FILE_USER_PROFILE_ERROR_MESSAGE);
+				})
 
-				/*- End isArtist -*/
+				/*- End get Profile -*/
 			}, function(error) {
 				// error management to do
 				NotificationService.error($rootScope.labels.FILE_USER_PROFILE_ERROR_MESSAGE);
-			})
-
-			/*- End get Profile -*/
-		}, function(error) {
-			// error management to do
-			NotificationService.error($rootScope.labels.FILE_USER_PROFILE_ERROR_MESSAGE);
+			});
 		});
 	}
 
@@ -344,8 +354,6 @@ SoonzikApp.controller('UsersCtrl', ['$scope', "$routeParams", 'SecureAuth', 'HTT
 					}
 					NotificationService.error($rootScope.labels.FILE_USER_ERROR_OCCURED_MESSAGE);
 				});
-			}, function (responseForbidden) {
-				NotificationService.error($rootScope.labels.FILE_USER_ERROR_OCCURED_MESSAGE);
 			});
 		}
 	}
@@ -364,8 +372,6 @@ SoonzikApp.controller('UsersCtrl', ['$scope', "$routeParams", 'SecureAuth', 'HTT
 					}, function (error) {
 						$scope.formError.user.image = error;
 					});
-				}, function (error) {
-					NotificationService.error($rootScope.labels.FILE_USER_ERROR_OCCURED_MESSAGE);
 				});
 			}
 		}
@@ -385,8 +391,6 @@ SoonzikApp.controller('UsersCtrl', ['$scope', "$routeParams", 'SecureAuth', 'HTT
 					}, function (error) {
 						$scope.formError.user.background = error;
 					});
-				}, function (error) {
-					NotificationService.error($rootScope.labels.FILE_USER_ERROR_OCCURED_MESSAGE);
 				});
 			}
 		}
@@ -405,8 +409,6 @@ SoonzikApp.controller('UsersCtrl', ['$scope', "$routeParams", 'SecureAuth', 'HTT
 				}, function(error) {
 					NotificationService.error($rootScope.labels.FILE_USER_FOLLOW_ERROR_MESSAGE);
 				});
-			}, function(error) {
-				NotificationService.error($rootScope.labels.FILE_USER_FOLLOW_ERROR_MESSAGE);
 			});
 		}
 	}
@@ -425,8 +427,6 @@ SoonzikApp.controller('UsersCtrl', ['$scope', "$routeParams", 'SecureAuth', 'HTT
 				}, function(error) {
 					NotificationService.error($rootScope.labels.FILE_USER_FRIEND_ERROR_MESSAGE);
 				});
-			}, function(error) {
-				NotificationService.error($rootScope.labels.FILE_USER_FRIEND_ERROR_MESSAGE);
 			});
 		}
 	}
@@ -449,8 +449,6 @@ SoonzikApp.controller('UsersCtrl', ['$scope', "$routeParams", 'SecureAuth', 'HTT
 				}, function(error) {
 					NotificationService.error($rootScope.labels.FILE_USER_UNFOLLOW_ERROR_MESSAGE);
 				});
-			}, function(error) {
-				NotificationService.error($rootScope.labels.FILE_USER_UNFOLLOW_ERROR_MESSAGE);
 			});
 		}
 	}
@@ -474,8 +472,6 @@ SoonzikApp.controller('UsersCtrl', ['$scope', "$routeParams", 'SecureAuth', 'HTT
 				}, function(error) {
 					NotificationService.error($rootScope.labels.FILE_USER_UNFRIEND_ERROR_MESSAGE);
 				});
-			}, function(error) {
-				NotificationService.error($rootScope.labels.FILE_USER_UNFRIEND_ERROR_MESSAGE);
 			});
 		}
 	}
@@ -502,8 +498,6 @@ SoonzikApp.controller('UsersCtrl', ['$scope', "$routeParams", 'SecureAuth', 'HTT
 				}, function(error) {
 					NotificationService.error($rootScope.labels.FILE_USER_SAVE_TWEET_ERROR_MESSAGE);
 				});
-			}, function(error) {
-				NotificationService.error($rootScope.labels.FILE_USER_SAVE_TWEET_ERROR_MESSAGE);
 			});
 
 		} else {
@@ -514,20 +508,24 @@ SoonzikApp.controller('UsersCtrl', ['$scope', "$routeParams", 'SecureAuth', 'HTT
 	$scope.reloadTweet = function() {
 		$scope.loading_tweet = true;
 
-		var paramsTweet = [
-			{ key: encodeURIComponent("attribute[user_id]"), value: $scope.show.user.id },
-			{ key: encodeURIComponent("order_by_desc[]"), value: "created_at" },
-			{ key: "limit", value: 20 },
-			{ key: "offset", value: $scope.show.tweets.my.length }
-		];
+    	SecureAuth.securedTransaction(function(key, id) {
+			var paramsTweet = [
+				{ key: encodeURIComponent("attribute[user_id]"), value: $scope.show.user.id },
+				{ key: encodeURIComponent("order_by_desc[]"), value: "created_at" },
+				{ key: "limit", value: 20 },
+				{ key: "offset", value: $scope.show.tweets.my.length },
+				{ key: "secureKey", value: key },
+				{ key: "user_id", value: id }
+			];
 
-		HTTPService.findTweet(paramsTweet).then(function(response) {
-			$scope.show.tweets.my = $scope.show.tweets.my.concat(response.data.content);
-			$timeout(function() {
-				$scope.loading_tweet = false;
-			}, 1000);
-		}, function(error) {
-			NotificationService.error("");
+			HTTPService.findTweet(paramsTweet).then(function(response) {
+				$scope.show.tweets.my = $scope.show.tweets.my.concat(response.data.content);
+				$timeout(function() {
+					$scope.loading_tweet = false;
+				}, 1000);
+			}, function(error) {
+				NotificationService.error("");
+			});
 		});
 	}
 
@@ -543,8 +541,6 @@ SoonzikApp.controller('UsersCtrl', ['$scope', "$routeParams", 'SecureAuth', 'HTT
 				}, function(error) {
 					NotificationService.error($rootScope.labels.FILE_USER_SET_NOTE_ERROR_MESSAGE);
 				});
-			}, function(error) {
-				NotificationService.error($rootScope.labels.FILE_USER_SET_NOTE_ERROR_MESSAGE);
 			});
 		} else {
 			NotificationService.info($rootScope.labels.FILE_USER_NEED_LOGIN_ERROR_MESSAGE);
@@ -561,24 +557,22 @@ SoonzikApp.controller('UsersCtrl', ['$scope', "$routeParams", 'SecureAuth', 'HTT
 
 		if ($scope.user != false && $scope.selectedMusic != false && playlist != false) {
 			SecureAuth.securedTransaction(function(key, user_id) {
-					var parameters = {
-						secureKey: key,
-						user_id: user_id,
-						id: $scope.selectedMusic.id,
-						playlist_id: playlist.id
-					};
-					HTTPService.addToPlaylist(parameters).then(function(response) {
-						NotificationService.success("The music '" + $scope.selectedMusic.title + "' has been added to the playlist");
-						$rootScope.$broadcast("player:addToPlaylist", { playlist: playlist, music: $scope.selectedMusic });
-						$scope.selectedMusic = false;
-						$scope.tooltip = false;
-						playlist.check = false;
-					}, function(error) {
-						NotificationService.error($rootScope.labels.FILE_USER_ADD_PLAYLIST_ERROR_MESSAGE);
-					});
+				var parameters = {
+					secureKey: key,
+					user_id: user_id,
+					id: $scope.selectedMusic.id,
+					playlist_id: playlist.id
+				};
+				HTTPService.addToPlaylist(parameters).then(function(response) {
+					NotificationService.success("The music '" + $scope.selectedMusic.title + "' has been added to the playlist");
+					$rootScope.$broadcast("player:addToPlaylist", { playlist: playlist, music: $scope.selectedMusic });
+					$scope.selectedMusic = false;
+					$scope.tooltip = false;
+					playlist.check = false;
 				}, function(error) {
 					NotificationService.error($rootScope.labels.FILE_USER_ADD_PLAYLIST_ERROR_MESSAGE);
 				});
+			});
 		}
 	}
 
@@ -659,8 +653,6 @@ SoonzikApp.controller('UsersCtrl', ['$scope', "$routeParams", 'SecureAuth', 'HTT
 							NotificationService.error($rootScope.labels.FILE_USER_FB_LINK_ERROR_MESSAGE);
 						}
 					});
-				}, function(error) {
-					NotificationService.error($rootScope.labels.FILE_USER_FB_LINK_ERROR_MESSAGE);
 				});
 			});
 			
@@ -695,8 +687,6 @@ SoonzikApp.controller('UsersCtrl', ['$scope', "$routeParams", 'SecureAuth', 'HTT
 								NotificationService.error($rootScope.labels.FILE_USER_GOOGLE_LINK_ERROR_MESSAGE);
 							}
 						});
-					}, function(error) {
-						NotificationService.error($rootScope.labels.FILE_USER_GOOGLE_LINK_ERROR_MESSAGE);
 					});
 				});
 		  }, function(err) {

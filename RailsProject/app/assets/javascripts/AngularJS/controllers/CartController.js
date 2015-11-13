@@ -39,8 +39,6 @@ SoonzikApp.controller('CartCtrl', ['$scope', 'SecureAuth', 'HTTPService', '$time
 				NotificationService.error($rootScope.labels.FILE_CART_LOAD_ERROR_MESSAGE);
 			});
 
-		}, function(error) {
-			NotificationService.error($rootScope.labels.FILE_CART_LOAD_ERROR_MESSAGE);
 		});
 		$scope.loading = false;
 	}
@@ -62,8 +60,6 @@ SoonzikApp.controller('CartCtrl', ['$scope', 'SecureAuth', 'HTTPService', '$time
 				NotificationService.error($rootScope.labels.FILE_CART_DELETE_ITEM_ERROR_MESSAGE);
 			});
 
-		}, function(error) {
-			NotificationService.error($rootScope.labels.FILE_CART_DELETE_ITEM_ERROR_MESSAGE);
 		});
 	}
 

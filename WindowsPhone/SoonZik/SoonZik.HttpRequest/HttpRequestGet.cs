@@ -98,6 +98,11 @@ namespace SoonZik.HttpRequest
         #endregion
 
         #region Method Get Secure
+        public async Task<object> GetSecureObject(object myObject, string element, string id, string sha256, string userId)
+        {
+            var request = (HttpWebRequest)WebRequest.Create(ApiUrl + element + "/" + id + "?secureKey=" + sha256 + "&user_id=" + userId);
+            return await DoRequestForObject(myObject, request);
+        }
 
         public async Task<object> GetAllMusicForUser(object myObj, string sha256, string id)
         {
@@ -139,7 +144,6 @@ namespace SoonZik.HttpRequest
             return await DoRequest(request);
         }
 
-
         public async Task<string> DeleteMusicFromPlaylist(Playlist myPlaylist, Music theMusic, string sha256,
             User myUser)
         {
@@ -154,6 +158,12 @@ namespace SoonZik.HttpRequest
         {
             var request = (HttpWebRequest) WebRequest.Create(ApiUrl + "messages/conversation/" + FriendUser.id + "?secureKey=" + sha256 + "&user_id=" + myUser.id);
             return await DoRequestForObject(myObject, request);
+        }
+
+        public async Task<string> DestroyLike(string element, string objId, string sha256, string userId)
+        {
+            var request = (HttpWebRequest)WebRequest.Create(ApiUrl + "likes/destroy?like[typeObj]=" + element + "&like[obj_id]=" + objId + "&secureKey=" + sha256 + "&user_id=" + userId);
+            return await DoRequest(request);
         }
 
         #endregion

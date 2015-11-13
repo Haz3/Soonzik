@@ -59,7 +59,7 @@ static Socket *sharedSocket = nil;    // static instance variable
 - (void)initToServer {
     
     NSLog(@"initError");
-    NSString *key = [Crypto getKey:self.user.identifier];
+    NSString *key = [Crypto getKey];
     NSString *conca = [NSString stringWithFormat:@"%@%@", self.user.salt, key];
     NSString *secureKey = [Crypto sha256HashFor:conca];
     
@@ -97,7 +97,7 @@ static Socket *sharedSocket = nil;    // static instance variable
 }
 
 - (void)whoIsOnline {
-    NSString *key = [Crypto getKey:self.user.identifier];
+    NSString *key = [Crypto getKey];
     NSString *conca = [NSString stringWithFormat:@"%@%@", self.user.salt, key];
     NSString *secureKey = [Crypto sha256HashFor:conca];
     
@@ -114,7 +114,7 @@ static Socket *sharedSocket = nil;    // static instance variable
 }
 
 - (void)sendMessage:(NSString *)msg toUserId:(int)userID {
-    NSString *key = [Crypto getKey:self.user.identifier];
+    NSString *key = [Crypto getKey];
     NSString *conca = [NSString stringWithFormat:@"%@%@", self.user.salt, key];
     NSString *secureKey = [Crypto sha256HashFor:conca];
 

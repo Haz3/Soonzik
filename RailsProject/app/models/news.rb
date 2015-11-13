@@ -22,6 +22,7 @@ class News < ActiveRecord::Base
   belongs_to :user, class_name: 'User', foreign_key: 'author_id'
   has_many :newstexts
   has_many :news_titles
+  has_many :newslikes
   has_and_belongs_to_many :attachments
   has_and_belongs_to_many :commentaries
 
@@ -37,6 +38,65 @@ class News < ActiveRecord::Base
   # Fields returned : [:id, :title, :date]
   def self.miniKey
     [:id, :created_at]
+  end
+
+  # Fill an association of records of the notes average
+  def self.fillLikes(ar_news, security = false, user_id = nil)
+    if (ar_news.size == 0)
+      return
+    end
+    sql = "SELECT news_id, COUNT(news_id) AS count FROM newslikes WHERE (news_id IN ("
+    sql_hasLiked = "SELECT news_id FROM newslikes WHERE (news_id IN (" if security
+
+    ar_news.each_with_index do |news, index|
+      sql += ", " if index != 0
+      sql += news[:id].to_s
+
+      if security
+        sql_hasLiked += ", " if index != 0
+        sql_hasLiked += news[:id].to_s
+      end
+    end
+
+    sql += ")) GROUP BY news_id"
+    records_array = ActiveRecord::Base.connection.execute(sql)
+
+    if security
+      sql_hasLiked += ")) AND user_id = #{user_id}"
+      records_liked = ActiveRecord::Base.connection.execute(sql_hasLiked)
+    end
+
+    ar_news.each do |news|
+      passIn = false
+
+      records_array.each do |record|
+        if (news[:id].to_i == record['news_id'].to_i)
+          passIn = true
+          news.setLike record['count']
+          break
+        end
+      end
+
+      if security
+        records_liked.each do |record|
+          if (news[:id].to_i == record['news_id'].to_i)
+            news.setLiked
+          end
+        end
+      end
+
+      news.setLike 0 if !passIn
+    end
+  end
+
+  # Set the number of likes
+  def setLike(value)
+    @likes = value
+  end
+
+  # Return the number of likes
+  def likes
+    return (@likes.present?) ? @likes : ActiveRecord::Base.connection.execute("SELECT COUNT(news_id) AS count FROM newslikes WHERE news_id = #{self.id.to_s}")[0]["count"]
   end
 
   # The strong parameters to save or update object
@@ -75,5 +135,15 @@ class News < ActiveRecord::Base
     end
 
     content
+  end
+
+  # Set the number of likes
+  def setLiked
+    @hasLiked = true
+  end
+
+  # To know if you liked this
+  def hasLiked
+    return @hasLiked.present? ? @hasLiked : false
   end
 end

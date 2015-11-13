@@ -21,6 +21,8 @@ Rails.application.routes.draw do
       end
     end
 
+    resources :ambiances, only: [:index, :show]
+
     resources :battles, only: [:index, :show] do #ok
       collection do
         get 'find' => 'battles#find'
@@ -46,6 +48,9 @@ Rails.application.routes.draw do
     resources :influences, only: [:index] do #ok
     end
 
+    resources :languages, only: [:index] do #ok
+    end
+
     resources :listenings, only: [:index, :show] do #ok
       collection do
         get 'find' => 'listenings#find'
@@ -54,7 +59,11 @@ Rails.application.routes.draw do
       end
     end
 
-    resources :languages, only: [:index] do #ok
+    resources :likes do #ok
+      collection do
+        match 'save' => 'likes#save', via: [:post, :options]
+        get 'destroy' => 'likes#destroy'
+      end
     end
 
     resources :messages, only: [:show] do #ok

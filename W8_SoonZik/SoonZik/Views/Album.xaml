@@ -28,7 +28,10 @@
             <TextBlock Name="album_title" Text="{Binding album.title, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="20,10,0,19" TextWrapping="Wrap" VerticalAlignment="Center" FontSize="36" Height="46" Grid.ColumnSpan="2"/>
             <TextBlock Name="album_artist" Text="{Binding album.user.username, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="90,27,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Foreground="Black" Height="40" Width="115" FontSize="20"/>
             <TextBlock x:Name="album_year" Text="{Binding album.yearProd, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="90,67,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Foreground="Black" Height="40" Width="115" FontSize="20"/>
-            <TextBlock x:Name="album_price" Text="{Binding album.price, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="90,107,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Foreground="Black" Height="40" Width="129" FontSize="20"/>
+            <TextBlock x:Name="album_price"  HorizontalAlignment="Left" Margin="90,107,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Foreground="Black" Height="40" Width="Auto" FontSize="20">
+                <Run Text="{Binding album.price, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></Run>
+                <Run Text="€"></Run>
+            </TextBlock>
 
             <ListView Name="album_music_listview" ItemsSource="{Binding album.musics, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ItemClick="album_music_listview_ItemClick" Grid.Column="1" HorizontalAlignment="Left" Height="400" Margin="110,85,-235,-194" Grid.Row="1" VerticalAlignment="Top" Width="575" Background="#FFE0E0E0" IsItemClickEnabled="True" IsSwipeEnabled="False" SelectionMode="None">
                 <ListView.ItemTemplate>
@@ -40,7 +43,10 @@
                             </StackPanel>
                             <StackPanel Orientation="Horizontal">
                                 <TextBlock FontSize="16" Foreground="Black">Price:</TextBlock>
-                                <TextBlock Name="music_duration" Text="{Binding price}" FontSize="16" Foreground="Black" Margin="20,0,0,0"></TextBlock>
+                                <TextBlock Name="music_duration" FontSize="16" Foreground="Black" Margin="20,0,0,0">
+                                    <Run Text="{Binding price}"></Run>
+                                    <Run Text="€"></Run>
+                                </TextBlock>
                             </StackPanel>
                         </StackPanel>
                     </DataTemplate>

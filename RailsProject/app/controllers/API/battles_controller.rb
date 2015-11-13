@@ -8,8 +8,6 @@ module API
   # * vote        [post] - SECURE
   #
   class BattlesController < ApisecurityController
-    before_action :checkKey, only: [:vote]
-
   	# Retrieve all the battles
     #
     # Route : /battles

@@ -13,7 +13,7 @@
         <Grid Height="80" VerticalAlignment="Top" Width="1920" Background="#B0B0B0">
             <TextBlock x:Name="explorer_txt" HorizontalAlignment="Left" Margin="100,10,0,0" TextWrapping="Wrap" Text="Explorer" VerticalAlignment="Top" Height="55" Width="235" FontSize="53.333" Foreground="Black"/>
             <Button x:Name="back_btn" Content="Button" HorizontalAlignment="Left" Margin="30,20,0,0" VerticalAlignment="Top" Style="{StaticResource NavigationBackButtonNormalStyle}" RequestedTheme="Light" Click="Button_Click"/>
-            <Button x:Name="cart_btn" Content="Cart" HorizontalAlignment="Left" Margin="1622,-3,0,0" VerticalAlignment="Top" Height="76" Width="201" Background="#FF27AAE1" FontSize="40" Click="cart_btn_Click"/>
+            <Button x:Name="cart_btn" Content="Cart" HorizontalAlignment="Left" Margin="1622,-3,0,0" VerticalAlignment="Center" Height="76" Width="201" Background="#FF27AAE1" FontSize="40" Click="cart_btn_Click"/>
             <Image Source="ms-appx:///Assets/cart.png" Margin="1460,0,295,0"></Image>
         </Grid>
 

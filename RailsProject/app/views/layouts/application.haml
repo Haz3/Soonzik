@@ -39,6 +39,11 @@
 									%i.fi-wrench
 									%span.small_menu
 										{{ labels.DISPLAY_MENU_PROFILE_EDITION_LABEL }}
+							%li
+								= link_to my_music_path do
+									%i.fi-music
+									%span.small_menu
+										{{ labels.DISPLAY_MENU_MUSIC_LABEL }}
 						- else
 							%li
 								%a{:href => new_user_registration_path, :target => "_self" }

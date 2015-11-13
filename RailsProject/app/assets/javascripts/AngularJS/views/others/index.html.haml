@@ -2,8 +2,8 @@
   %loading{ "ng-if" => "loading == true" }
   .index{ "ng-if" => "loading == false" }
     .lineBlock.clearfix
-      %h3 {{ labels.DISPLAY_INDEX_LAST_NEWS_LABEL }}
       .small-12.columns{ "ng-class" => "classLeftSide" }
+        %h3 {{ labels.DISPLAY_INDEX_LAST_NEWS_LABEL }}
         .clearfix
           .newsContainer.clearfix
             .newsItem{"ng-repeat" => "new in news"}
@@ -94,10 +94,14 @@
           .music.clearfix{ "ng-repeat" => "suggestion in suggestions" }
             %music.small-2.columns{ "music-object" => "suggestion" }
               %i.fi-play
-            .small-10.columns
+            .small-8.columns
               %a{ href: "/albums/{{ suggestion.album.id }}" }
-                {{ suggestion.title }}
+                %span {{ suggestion.title }}
+            .small-2.columns
+              %a{ href: "/albums/{{ suggestion.album.id }}" }
+                %i.fi-arrow-right
     .lineBlock.battles
+      %h3 {{ labels.DISPLAY_INDEX_LAST_BATTLES_LABEL }}
       .battle{ "ng-repeat" => "battle in battles" }
         .clearfix
           .small-12.medium-4.text-center.columns
@@ -124,3 +128,8 @@
             %figure
               %img.artist_two{ "ng-src" => "{{ '/assets/usersImage/avatars/' + battle.artist_two.image}}" }
               %figcaption {{ battle.artist_two.username }}
+        %hr
+      .subtitleLink.small-9
+        %a{ href: "/battles" }
+          {{ labels.DISPLAY_INDEX_BATTLES_SEE_MORE }}
+          %i.fi-arrow-right

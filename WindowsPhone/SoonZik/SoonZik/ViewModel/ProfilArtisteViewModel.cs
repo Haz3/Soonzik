@@ -6,6 +6,7 @@ using System.Windows.Input;
 using Windows.ApplicationModel.Core;
 using Windows.ApplicationModel.Resources;
 using Windows.UI.Core;
+using Windows.UI.Xaml.Media.Imaging;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using SoonZik.Controls;
@@ -37,6 +38,20 @@ namespace SoonZik.ViewModel
 
         #region Attribute
 
+        public ICommand AddCommand { get; private set; }
+        public ICommand FollowCommand { get; private set; }
+        public ICommand SelectionCommand { get; private set; }
+        private ICommand _itemClickCommand;
+        public ICommand ItemClickCommand
+        {
+            get { return _itemClickCommand; }
+            set
+            {
+                _itemClickCommand = value;
+                RaisePropertyChanged("ItemClickCommand");
+            }
+        }
+
         private const string UrlImage = "http://soonzikapi.herokuapp.com/assets/usersImage/avatars/";
 
         private string _buttonFriendText;
@@ -50,11 +65,8 @@ namespace SoonZik.ViewModel
                 RaisePropertyChanged("ButtonFriendText");
             }
         }
-
-        public ICommand AddCommand { get; private set; }
         private bool _friend;
         private bool _follow;
-        public ICommand FollowCommand { get; private set; }
         private User _theArtiste;
 
         public User TheArtiste
@@ -93,20 +105,6 @@ namespace SoonZik.ViewModel
 
         public static User TheUser { get; set; }
 
-        public ICommand SelectionCommand { get; private set; }
-
-        private RelayCommand _itemClickCommand;
-
-        public RelayCommand ItemClickCommand
-        {
-            get { return _itemClickCommand; }
-            set
-            {
-                _itemClickCommand = value;
-                RaisePropertyChanged("ItemClickCommand");
-            }
-        }
-
         private Album _theAlbum;
 
         public Album TheAlbum
@@ -131,6 +129,17 @@ namespace SoonZik.ViewModel
             }
         }
 
+        private string _nbrTitres;
+
+        public string NbrTitres
+        {
+            get { return _nbrTitres; }
+            set
+            {
+                _nbrTitres = value;
+                RaisePropertyChanged("NbrTitres");
+            }
+        }
         #endregion
 
         #region Method
@@ -151,6 +160,8 @@ namespace SoonZik.ViewModel
                     {
                         foreach (var album in art.albums)
                         {
+                            album.imageAlbum = new BitmapImage(new Uri(Constant.UrlImageAlbum + album.image, UriKind.RelativeOrAbsolute));
+                            NbrTitres = album.musics.Count + " titres";
                             ListAlbums.Add(album);
                         }
                     }
@@ -241,9 +252,23 @@ namespace SoonZik.ViewModel
 
         private void ItemClickCommandExecute()
         {
-            AlbumViewModel.MyAlbum = TheAlbum;
-            GlobalMenuControl.MyGrid.Children.Clear();
-            GlobalMenuControl.MyGrid.Children.Add(new AlbumView());
+            var request = new HttpRequestGet();
+            var album = request.GetSecureObject(new Album(), "albums", TheAlbum.id.ToString(), Singleton.Singleton.Instance().SecureKey, Singleton.Singleton.Instance().CurrentUser.id.ToString());
+            album.ContinueWith(delegate(Task<object> tmp)
+            {
+                var test = tmp.Result as Album;
+                if (test != null)
+                {
+                    CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+                    {
+
+                        TheAlbum = test;
+                        TheAlbum.imageAlbum = new BitmapImage(new Uri(Constant.UrlImageAlbum + TheAlbum.image, UriKind.RelativeOrAbsolute));
+                        AlbumViewModel.MyAlbum = TheAlbum;
+                        GlobalMenuControl.SetChildren(new AlbumView());
+                    });
+                }
+            });
         }
 
         private void SelectionExecute()
@@ -260,22 +285,10 @@ namespace SoonZik.ViewModel
             var post = new HttpRequestPost();
             var get = new HttpRequestGet();
 
-            var userKey = get.GetUserKey(Singleton.Singleton.Instance().CurrentUser.id.ToString());
-            userKey.ContinueWith(delegate(Task<object> task)
-            {
-                var key = task.Result as string;
-                if (key != null)
-                {
-                    var stringEncrypt = KeyHelpers.GetUserKeyFromResponse(key);
-                    var cryptographic =
-                        EncriptSha256.EncriptStringToSha256(Singleton.Singleton.Instance().CurrentUser.salt +
-                                                            stringEncrypt);
-                    if (_follow)
-                        Unfollow(post, cryptographic, get);
-                    else if (!_follow)
-                        Follow(post, cryptographic, get);
-                }
-            });
+            if (_follow)
+                Unfollow(post, Singleton.Singleton.Instance().SecureKey, get);
+            else if (!_follow)
+                Follow(post, Singleton.Singleton.Instance().SecureKey, get);
         }
 
         private void CheckIfFriend()

@@ -25,6 +25,7 @@
 #import "IdenticationsController.h"
 #import "Socket.h"
 #import "PayPalMobile.h"
+#import "MenuTableViewCell.h"
 
 @interface AppDelegate() <PKRevealing, UITableViewDataSource, UITableViewDelegate, SearchElementInterface>
 
@@ -39,12 +40,9 @@
     
     NSData *translateData = [[NSUserDefaults standardUserDefaults] objectForKey:@"Translate"];
     self.translate = [NSKeyedUnarchiver unarchiveObjectWithData:translateData];
-    if (translateData == nil) {
-        NSLog(@"translateData is nil");
+   // if (translateData == nil) {
         [self getTranslationFile];
-    }
-    
-    NSLog(@"%@", [self.translate.dict objectForKey:@"menu_news"]);
+   // }
     
     [self initializeMenuSystem];
     [self initBasicGraphics];
@@ -102,11 +100,7 @@
         path = [[NSBundle mainBundle] pathForResource:@"TR_French" ofType:@"plist"];
     }
     
-    NSLog(@"language : %@", data[0]);
-    
     self.translate = [[Translate alloc] initWithPath:path];
-    
-    NSLog(@"self.translate: %@", [self.translate.dict objectForKey:@"menu_news"]);
     
     NSData *dataStore = [NSKeyedArchiver archivedDataWithRootObject:self.translate];
     [[NSUserDefaults standardUserDefaults] setObject:dataStore forKey:@"Translate"];
@@ -176,6 +170,8 @@
         tableView.bounces = true;
         tableView;
     });
+    
+    [tableView registerNib:[UINib nibWithNibName:@"MenuTableViewCell" bundle:nil] forCellReuseIdentifier:@"cell"];
     [leftViewController.view addSubview:tableView];
     
     UIImageView *logoView = [[UIImageView alloc] initWithFrame:CGRectMake(10, 40, 150, 42)];
@@ -222,7 +218,6 @@
         [self.revealController setFrontViewController:frontNavigationController];
     } else if ([elem isKindOfClass:[Pack class]]) {
         Pack *pack = (Pack *)elem;
-        NSLog(@"pack %i", pack.identifier);
         PackDetailViewController *vc = [[PackDetailViewController alloc] initWithNibName:@"PackDetailViewController" bundle:nil];
         vc.pack = pack;
         vc.fromSearch = true;
@@ -342,19 +337,9 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *cellIdentifier = @"Cell";
+    static NSString *cellIdentifier = @"cell";
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-    
-    if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
-        cell.backgroundColor = [UIColor clearColor];
-        cell.textLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:21];
-        cell.textLabel.textColor = [UIColor whiteColor];
-        cell.textLabel.highlightedTextColor = [UIColor lightGrayColor];
-        cell.selectedBackgroundView = [[UIView alloc] init];
-        cell.textLabel.textAlignment = NSTextAlignmentLeft;
-    }
+    MenuTableViewCell *cell = (MenuTableViewCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     
     NSArray *listOftitles = @[[self.translate.dict objectForKey:@"menu_news"],
                               [self.translate.dict objectForKey:@"menu_explore"],
@@ -366,24 +351,9 @@
                               [self.translate.dict objectForKey:@"menu_cart"],
                               [self.translate.dict objectForKey:@"menu_account"], @"Contact us"];
     
-   NSLog(@"titles : %@", listOftitles[indexPath.row]);
-    cell.textLabel.text = listOftitles[indexPath.row];
-    
-    /*if (indexPath.row == 8) {
-        NSString *urlImage = [NSString stringWithFormat:@"%@assets/usersImage/avatars/%@", API_URL, self.user.image];
-        NSData * imageData = [[NSData alloc] initWithContentsOfURL: [NSURL URLWithString: urlImage]];
-       cell.imageView.image = [Tools imageWithImage:[UIImage imageWithData:imageData] scaledToSize:CGSizeMake(40, 40)];
-        cell.imageView.layer.cornerRadius = 19;
-        cell.imageView.layer.borderWidth = 1;
-        cell.imageView.layer.borderColor = [UIColor whiteColor].CGColor;
-        cell.imageView.layer.masksToBounds = true;
-    } else {
-        //cell.imageView.image = [SVGKImage imageNamed:[listOfImages objectAtIndex:indexPath.row]].UIImage;
-         NSLog(@"ok");
-    }*/
+    cell.lbl.text = listOftitles[indexPath.row];
     return cell;
 }
-
 
 
 /****
@@ -395,18 +365,13 @@
 - (void)sessionStateChanged:(FBSession *)session state:(FBSessionState)state error:(NSError *)error
 {
     if (!error && state == FBSessionStateOpen){
-        NSLog(@"Session opened");
         
         [[FBRequest requestForMe] startWithCompletionHandler:^(FBRequestConnection *connection, NSDictionary<FBGraphUser> *u, NSError *error) {
             if (!error) {
                 
                 NSString *token = [[[FBSession activeSession] accessTokenData] accessToken];
-                
-                NSLog(@"facebook profile : %@", u);
-                
                 User *user =  [IdenticationsController facebookConnect:token email:[u objectForKey:@"email"] uid:[u objectForKey:@"id"]];
-                NSLog(@"user.username : %@", user.username);
-                
+
                 NSData *dataStore = [NSKeyedArchiver archivedDataWithRootObject:user];
                 [[NSUserDefaults standardUserDefaults] setObject:dataStore forKey:@"User"];
                 [[NSUserDefaults standardUserDefaults] synchronize];
@@ -416,33 +381,29 @@
         }];
     }
     if (state == FBSessionStateClosed || state == FBSessionStateClosedLoginFailed){
-        NSLog(@"Session closed");
+        
     }
     
     if (error){
-        NSLog(@"Error");
+       
         NSString *alertText;
         NSString *alertTitle;
         if ([FBErrorUtility shouldNotifyUserForError:error] == YES){
             alertTitle = @"Something went wrong";
             alertText = [FBErrorUtility userMessageForError:error];
-            NSLog(@"%@ => %@", alertTitle, alertText);
         } else {
             if ([FBErrorUtility errorCategoryForError:error] == FBErrorCategoryUserCancelled) {
-                NSLog(@"User cancelled login");
+            
             } else if ([FBErrorUtility errorCategoryForError:error] == FBErrorCategoryAuthenticationReopenSession){
                 alertTitle = @"Session Error";
                 alertText = @"Your current session is no longer valid. Please log in again.";
-                NSLog(@"%@ => %@", alertTitle, alertText);
             } else {
                 NSDictionary *errorInformation = [[[error.userInfo objectForKey:@"com.facebook.sdk:ParsedJSONResponseKey"] objectForKey:@"body"] objectForKey:@"error"];
                 alertTitle = @"Something went wrong";
                 alertText = [NSString stringWithFormat:@"Please retry. \n\n If the problem persists contact us and mention this error code: %@", [errorInformation objectForKey:@"message"]];
-                NSLog(@"%@ => %@", alertTitle, alertText);
             }
         }
         [FBSession.activeSession closeAndClearTokenInformation];
-        NSLog(@"Not logged");
     }
 }
 
@@ -453,7 +414,6 @@
 
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
 {
-    NSLog(@"url = %@", url);
     //NSLog(@"source application = %@", sourceApplication);
     //NSLog(@"type : %i", self.type);
     
@@ -473,7 +433,6 @@
 
 - (void)setTypeConnexion:(int)type
 {
-    NSLog(@"change type");
     self.type = type;
 }
 

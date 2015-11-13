@@ -28,8 +28,7 @@ class Listening < ActiveRecord::Base
   belongs_to :music
   belongs_to :user
 
-  validates :user, :music, :when, :latitude, :longitude, presence: true
-  validates :when, format: /(\d{4})-(\d{2})-(\d{2}) (\d{2}):(\d{2}):(\d{2})/
+  validates :user, :music, :latitude, :longitude, presence: true
   validates :latitude, :longitude, numericality: true
 
   # Filter of information for the API - Restricted
@@ -51,6 +50,6 @@ class Listening < ActiveRecord::Base
 
   # The strong parameters to save or update object
   def self.listening_params(parameters)
-    parameters.require(:listening).permit(:user_id, :music_id, :latitude, :longitude, :when)
+    parameters.require(:listening).permit(:user_id, :music_id, :latitude, :longitude)
   end
 end

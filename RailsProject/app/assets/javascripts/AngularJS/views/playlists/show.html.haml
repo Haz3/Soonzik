@@ -1,48 +1,35 @@
 .playlist{ "ng-init" => "showInit()" }
 	%loading{ "ng-if" => "loading" }
 	.playlistContainer{ "ng-if" => "!loading" }
-		%h3{ "ng-if" => "playlist.musics.length == 0" } {{ labels.DISPLAY_PLAYER_EMPTY_LABEL }}
-		.playlistHeader.clearfix{ "ng-if" => "playlist.musics.length != 0" }
+		%h3{ "ng-if" => "playlist_obj.musics.length == 0" } {{ labels.DISPLAY_PLAYLIST_EMPTY_LABEL }}
+		.playlistHeader.clearfix{ "ng-if" => "playlist_obj.musics.length != 0" }
 			.previewPlaylist.small-12.medium-3.columns
-				%img{ "ng-src" => "{{ '/assets/albums/' + playlist.musics[0].album.image }}" }
+				%img{ "ng-src" => "{{ '/assets/albums/' + playlist_obj.musics[0].album.image }}" }
 			.small-12.medium-9.columns.columns
-				%h3{ "ng-if" => "playlist.name != null" } {{ playlist.name }}
+				%h3{ "ng-if" => "playlist_obj.name != null" } {{ playlist_obj.name }}
 				%p
-					%span{ "ng-if" => "playlist.user != null" } {{ labels.DISPLAY_PLAYER_FROM_LABEL }}
-					%a{ "ng-if" => "playlist.user != null", href: "/users/{{ playlist.user.id }}" } {{ playlist.user.username }}
-					%span{ "ng-if" => "playlist.user != null" } - 
-					%span {{ playlist.musics.length }} {{ labels.DISPLAY_PLAYER_MUSICS_LABEL }}
+					%span{ "ng-if" => "playlist_obj.user != null" } {{ labels.DISPLAY_PLAYLIST_FROM_LABEL }}
+					%a{ "ng-if" => "playlist_obj.user != null", href: "/users/{{ playlist_obj.user.id }}" } {{ playlist_obj.user.username }}
+					%span{ "ng-if" => "playlist_obj.user != null" } - 
+					%span {{ playlist_obj.musics.length }} {{ labels.DISPLAY_PLAYLIST_MUSICS_LABEL }}
 				%ul.button-group
 					%li.relative
 						%span.button{ "ng-click" => "listenPlaylist()" }
 							%i.fi-music
-							{{ labels.DISPLAY_PLAYER_LISTEN_LABEL }}
+							{{ labels.DISPLAY_PLAYLIST_LISTEN_LABEL }}
 					%li.relative
-						%span.button{ "ng-click" => "toolTipShare()" }
+						%span.button{ "ng-click" => "setTooltip('share')" }
 							%i.fi-share
-							{{ labels.DISPLAY_PLAYER_SHARE_LABEL }}
-						.mytooltip{ "ng-show" => "tooltip.type == 'share'" }
-							%ul.no-bullet.clearfix
-								%li.text-center.small-12 {{ labels.DISPLAY_PLAYER_SHARE_LABEL }} !
-								%li.small-11.small-centered.columns
-									%input.radius{ type: "text", value: "{{tooltip.value}}", "select-on-click" => true }
-								%li.small-12
-									.button.tiny{ "ng-click" => "toolTipShare()" } {{ labels.DISPLAY_PLAYER_CLOSE_LABEL }}
+							{{ labels.DISPLAY_PLAYLIST_SHARE_LABEL }}
+						.mytooltip.toolright{ "ng-show" => "tooltip == 'share'", "ng-include" => "'/assets/AngularJS/views/include/tooltip.html.haml'", "ng-controller" => "TooltipCtrl", "ng-init" => "tooltipInit(null, 3, 'http://lvh.me:3000/playlists/' + playlist_obj.id)" }
 					%li.relative{ "ng-if" => "user != false" }
-						%span.button{ "ng-click" => "saveTooltip()" }
-							%i.fi-save
-							{{ labels.DISPLAY_PLAYER_NEW_PLAYLIST_LABEL }}
-						.mytooltip{ "ng-show" => "tooltip.type == 'save'" }
-							%ul.no-bullet.clearfix
-								%li.small-5.columns {{ labels.DISPLAY_PLAYER_SAVE_AS_LABEL }}
-								%li.small-7.columns
-									%input.radius{ type: "text", "ng-model" => "newItem.name" }
-								%li.small-6.columns
-									.button.tiny{ "ng-click" => "savePlaylist()", "ng-class" => "newItem.name.length == 0 ? 'secondary' : 'primary'" } {{ labels.DISPLAY_PLAYER_SAVE_BUTTON }}
-								%li.small-6.columns
-									.button.tiny{ "ng-click" => "saveTooltip()" } {{ labels.DISPLAY_PLAYER_CLOSE_LABEL }}
-		.playlistContent{ "ng-if" => "playlist.musics.length != 0" }
-			.playlistMusic{ "ng-repeat" => "music in playlist.musics track by $index"}
+						%div
+							.button.relative{ "ng-click" => "setTooltip('saveAsNewPl')" }
+								%i.fi-save
+								{{ labels.DISPLAY_PLAYLIST_NEW_PLAYLIST_LABEL }}
+							.mytooltip.toolright{ "ng-show" => "tooltip == 'saveAsNewPl'", "ng-include" => "'/assets/AngularJS/views/include/tooltip.html.haml'", "ng-controller" => "TooltipCtrl", "ng-init" => "tooltipInit(null, 2, playlist_obj)" }
+		.playlistContent{ "ng-if" => "playlist_obj.musics.length != 0" }
+			.playlistMusic{ "ng-repeat" => "music in playlist_obj.musics track by $index"}
 				%hr
 				.clearfix.item
 					.small-1.medium-1.large-1.columns
@@ -55,22 +42,7 @@
 						%music{ "music-object" => "music" } {{ music.title }}
 					.small-3.medium-2.large-2.columns
 						.left {{ formatTime(music.duration) }}
-						%p.text-right.relative
-							%i.fi-plus{ "ng-click" => "setTooltip(tooltip == false ? music : false)" }
-							.mytooltip.toolright{ "ng-show" => "tooltip == music" }
-								%ul.no-bullet
-									%li.choice{ "ng-if" => "user != false", "ng-click" => "selectMusic(music)" } {{ labels.DISPLAY_PLAYER_ADD_PLAYLIST_LABEL }}
-									%li.playlistBlock{ "ng-if" => "selectedMusic == music" }
-										%hr
-										%ul.text-left.small-12.playlistList
-											%li.choice.small-12.playlistChoice{ "ng-repeat" => "myplaylist in myPlaylists" }
-												%input{ "ng-model" => "myplaylist.check", type: "radio", id: "playlist-{{myplaylist.id}}", "ng-value" => "true" }
-												%label{ "for" => "playlist-{{myplaylist.id}}" } {{ myplaylist.name }}
-											%li.small-12.text-center
-												.button.tiny{ "ng-click" => "addToPlaylist()" } {{ labels.DISPLAY_PLAYER_ADD_PLAYLIST_BUTTON }}
-										%hr
-									%li.choice
-										%music.small-12{ "music-object" => "music", "ng-click" => "setTooltip(false)" } {{ labels.DISPLAY_PLAYER_LISTEN_LABEL }}
-									%li
-										.button.tiny{ "ng-click" => "setTooltip(false)" } {{ labels.DISPLAY_PLAYER_CLOSE_LABEL }}
+						.text-right.relative
+							%i.fi-plus{ "ng-click" => "setTooltip(tooltip == music ? false : music)" }
+							.mytooltip.toolright{ "ng-show" => "tooltip == music", "ng-include" => "'/assets/AngularJS/views/include/tooltip.html.haml'", "ng-controller" => "TooltipCtrl", "ng-init" => "tooltipInit(music, 1)" }
 			%hr

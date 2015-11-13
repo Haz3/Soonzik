@@ -12,6 +12,7 @@
 #import "SVGKImage.h"
 #import "SimplePopUp.h"
 #import "CommentsController.h"
+#import "LikesController.h"
 
 @interface DetailNewsViewController ()
 
@@ -91,6 +92,17 @@
         [shareButton setTintColor:[UIColor whiteColor]];
         [view addSubview:shareButton];
         
+        UIButton *likeButton = [[UIButton alloc] initWithFrame:CGRectMake(view.frame.size.width-30-30-30-10, v.frame.origin.y + 10, 26, 26)];
+        if (self.news.isLiked) {
+            [likeButton setImage:[Tools imageWithImage:[UIImage imageNamed:@"love_1"] scaledToSize:CGSizeMake(30, 30)] forState:UIControlStateNormal];
+        } else {
+            [likeButton setImage:[Tools imageWithImage:[UIImage imageNamed:@"love_0"] scaledToSize:CGSizeMake(30, 30)] forState:UIControlStateNormal];
+        }
+        [likeButton addTarget:self action:@selector(like:) forControlEvents:UIControlEventTouchUpInside];
+        [likeButton setTintColor:[UIColor whiteColor]];
+        [likeButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [view addSubview:likeButton];
+        
         return view;
     }
     
@@ -114,6 +126,29 @@
     
     return view;
 }
+
+- (void)like:(UIButton *)btn {
+    if (self.news.isLiked) {
+        // send dislike
+        if (![LikesController dislike:self.news.identifier forObjectType:@"News"]) {
+            [[[SimplePopUp alloc] initWithMessage:@"An error occured on this action" onView:self.view withSuccess:false] show];
+        } else {
+            [btn setImage:[Tools imageWithImage:[UIImage imageNamed:@"love_0"] scaledToSize:CGSizeMake(30, 30)] forState:UIControlStateNormal];
+            self.news.isLiked = false;
+        }
+    } else {
+        // send like
+        if (![LikesController like:self.news.identifier forObjectType:@"News"]) {
+            [[[SimplePopUp alloc] initWithMessage:@"An error occured on this action" onView:self.view withSuccess:false] show];
+        } else {
+            [btn setImage:[Tools imageWithImage:[UIImage imageNamed:@"love_1"] scaledToSize:CGSizeMake(30, 30)] forState:UIControlStateNormal];
+            self.news.isLiked = true;
+        }
+    }
+    // get album info
+    //reload tableView
+}
+
 
 - (void)showComTextView {
     

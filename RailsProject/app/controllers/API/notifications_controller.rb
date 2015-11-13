@@ -9,8 +9,6 @@ module API
   # * readNotif   [post] - SECURE
   #
   class NotificationsController < ApisecurityController
-    before_action :checkKey, only: [:show, :find, :destroy, :readNotif]
-
   	# Give a specific object by its id
     #
     # Route : /notifications/:id

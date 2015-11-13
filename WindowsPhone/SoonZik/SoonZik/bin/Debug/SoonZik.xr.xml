@@ -33,9 +33,11 @@
     <RootPropertyPathName Name="ListCommAlbum" />
     <RootPropertyPathName Name="ListMusics" />
     <RootPropertyPathName Name="AddToCart" />
+    <RootPropertyPathName Name="Like" />
+    <RootPropertyPathName Name="Likes" />
     <RootPropertyPathName Name="TheAlbum" />
     <RootPropertyPathName Name="user" />
-    <RootPropertyPathName Name="image" />
+    <RootPropertyPathName Name="imageAlbum" />
     <RootPropertyPathName Name="ArtistTwo" />
     <RootPropertyPathName Name="email" />
     <RootPropertyPathName Name="ArtistOne" />
@@ -52,6 +54,7 @@
     <RootPropertyPathName Name="VoteArtisteOneCommand" />
     <RootPropertyPathName Name="CurrentBattle" />
     <RootPropertyPathName Name="artist_two" />
+    <RootPropertyPathName Name="image" />
     <RootPropertyPathName Name="artist_one" />
     <RootPropertyPathName Name="LoadedCommand" />
     <RootPropertyPathName Name="TotalPrice" />
@@ -109,12 +112,13 @@
     <RootPropertyPathName Name="ConversationText" />
     <RootPropertyPathName Name="ListMessages" />
     <RootPropertyPathName Name="FriendUser" />
+    <RootPropertyPathName Name="profilImage" />
+    <RootPropertyPathName Name="album" />
     <RootPropertyPathName Name="ListArtiste" />
     <RootPropertyPathName Name="SelectedArtiste" />
     <RootPropertyPathName Name="TappedCommand" />
     <RootPropertyPathName Name="ListInfluences" />
     <RootPropertyPathName Name="Key" />
-    <RootPropertyPathName Name="profilImage" />
     <RootPropertyPathName Name="Group" />
     <RootPropertyPathName Name="ItemSource" />
     <RootPropertyPathName Name="SendTweet" />
@@ -132,7 +136,6 @@
     <RootPropertyPathName Name="SelectNews" />
     <RootPropertyPathName Name="ListCommNews" />
     <RootPropertyPathName Name="NewsContent" />
-    <RootPropertyPathName Name="Like" />
     <RootPropertyPathName Name="NewsTitle" />
     <RootPropertyPathName Name="ListArtistes" />
     <RootPropertyPathName Name="TheArtiste" />
@@ -149,6 +152,7 @@
     <RootPropertyPathName Name="SelectedPlaylist" />
     <RootPropertyPathName Name="PlaylistTappedCommand" />
     <RootPropertyPathName Name="ListPack" />
+    <RootPropertyPathName Name="NbrTitres" />
     <RootPropertyPathName Name="FollowText" />
     <RootPropertyPathName Name="FollowCommand" />
     <RootPropertyPathName Name="NbrFollowers" />
@@ -221,10 +225,10 @@
       <RootProperty Name="Style" />
       <RootProperty Name="MinHeight" />
       <RootProperty Name="MinWidth" />
-      <RootProperty Name="Margin" />
       <RootProperty Name="Foreground" />
       <RootProperty Name="Width" />
       <RootProperty Name="Command" />
+      <RootProperty Name="Margin" />
       <RootProperty Name="Height" />
       <RootProperty Name="IsEnabled" />
       <RootProperty Name="Opacity" />
@@ -407,10 +411,11 @@
       <RootProperty Name="Height" />
       <RootProperty Name="Width" />
       <RootProperty Name="Margin" />
-      <RootProperty Name="TextAlignment" />
       <RootProperty Name="TextWrapping" />
       <RootProperty Name="Padding" />
       <RootProperty Name="FontWeight" />
+      <RootProperty Name="TextAlignment" />
+      <RootProperty Name="MaxLines" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Data.Binding">
       <RootProperty Name="Mode" />
@@ -436,6 +441,8 @@
     <RootType FullName="Windows.UI.Xaml.Controls.UserControl">
       <RootProperty Name="Content" />
       <RootProperty Name="Resources" />
+      <RootProperty Name="Width" />
+      <RootProperty Name="Height" />
     </RootType>
     <RootType FullName="SoonZik.Controls.ButtonFriendPopUp" />
     <RootType FullName="SoonZik.Controls.Genre" />
@@ -471,6 +478,7 @@
     <RootType FullName="Windows.UI.Xaml.Controls.RadioButton">
       <RootProperty Name="Content" />
       <RootProperty Name="IsChecked" />
+      <RootProperty Name="Margin" />
       <RootProperty Name="Command" />
       <RootEvent Name="Click" />
     </RootType>
@@ -482,10 +490,16 @@
     <RootType FullName="Windows.UI.Xaml.Media.ImageBrush">
       <RootProperty Name="ImageSource" />
       <RootProperty Name="Opacity" />
+      <RootProperty Name="AlignmentX" />
+      <RootProperty Name="AlignmentY" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.ListView">
       <RootProperty Name="Header" />
+      <RootProperty Name="FontSize" />
+      <RootProperty Name="Foreground" />
+      <RootProperty Name="FontStyle" />
       <RootProperty Name="ItemTemplate" />
+      <RootProperty Name="Margin" />
       <RootProperty Name="SelectedItem" />
       <RootProperty Name="Background" />
       <RootProperty Name="ItemsSource" />
@@ -493,19 +507,19 @@
       <RootProperty Name="GroupStyle" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.TextBox">
-      <RootProperty Name="Width" />
-      <RootProperty Name="BorderThickness" />
-      <RootProperty Name="AcceptsReturn" />
-      <RootProperty Name="Height" />
-      <RootProperty Name="TextAlignment" />
-      <RootProperty Name="VerticalContentAlignment" />
-      <RootProperty Name="HorizontalAlignment" />
-      <RootProperty Name="VerticalAlignment" />
       <RootProperty Name="Foreground" />
-      <RootProperty Name="Opacity" />
-      <RootProperty Name="FontSize" />
-      <RootProperty Name="PlaceholderText" />
       <RootProperty Name="Background" />
+      <RootProperty Name="BorderThickness" />
+      <RootProperty Name="BorderBrush" />
+      <RootProperty Name="VerticalAlignment" />
+      <RootProperty Name="PlaceholderText" />
+      <RootProperty Name="FontSize" />
+      <RootProperty Name="VerticalContentAlignment" />
+      <RootProperty Name="HorizontalContentAlignment" />
+      <RootProperty Name="Width" />
+      <RootProperty Name="Height" />
+      <RootProperty Name="Opacity" />
+      <RootProperty Name="HorizontalAlignment" />
       <RootProperty Name="Margin" />
       <RootProperty Name="Text" />
       <RootProperty Name="InputScope" />
@@ -516,14 +530,13 @@
       <RootProperty Name="Storyboard" />
     </RootType>
     <RootType FullName="SoonZik.Controls.GlobalMenuControl" />
-    <RootType FullName="SoonZik.Controls.MoreOptionPopUp" />
     <RootType FullName="SoonZik.Controls.NewsSharePopup" />
+    <RootType FullName="SoonZik.Controls.NotationMusic" />
     <RootType FullName="SoonZik.Controls.PlayerControl" />
     <RootType FullName="Windows.UI.Xaml.Controls.Slider">
       <RootProperty Name="VerticalAlignment" />
       <RootProperty Name="Margin" />
       <RootProperty Name="Width" />
-      <RootEvent Name="GotFocus" />
     </RootType>
     <RootType FullName="SoonZik.Controls.PriceControl" />
     <RootType FullName="Windows.UI.Xaml.Controls.ProgressRing">
@@ -566,22 +579,12 @@
       <RootProperty Name="Header" />
       <RootProperty Name="Content" />
     </RootType>
-    <RootType FullName="Windows.UI.Xaml.Media.Imaging.BitmapImage">
-      <RootProperty Name="UriSource" />
-    </RootType>
     <RootType FullName="SoonZik.Views.AlbumView" />
     <RootType FullName="SoonZik.Views.BattleDetailView" />
     <RootType FullName="SoonZik.Views.CartsView" />
     <RootType FullName="Windows.UI.Xaml.Controls.Maps.MapItemsControl">
       <RootProperty Name="ItemsSource" />
       <RootProperty Name="ItemTemplate" />
-    </RootType>
-    <RootType FullName="Windows.UI.Xaml.Shapes.Path">
-      <RootProperty Name="Width" />
-      <RootProperty Name="Height" />
-      <RootProperty Name="Stretch" />
-      <RootProperty Name="Fill" />
-      <RootProperty Name="Data" />
     </RootType>
     <RootType FullName="SoonZik.Views.GeolocalisationView" />
     <RootType FullName="Windows.UI.Xaml.Controls.PasswordBox">
@@ -621,6 +624,13 @@
       <RootProperty Name="Content" />
     </RootType>
     <RootType FullName="SoonZik.Views.Conversation" />
+    <RootType FullName="Windows.UI.Xaml.Shapes.Ellipse">
+      <RootProperty Name="Height" />
+      <RootProperty Name="Width" />
+      <RootProperty Name="Fill" />
+      <RootProperty Name="VerticalAlignment" />
+      <RootProperty Name="HorizontalAlignment" />
+    </RootType>
     <RootType FullName="SoonZik.Views.Explorer" />
     <RootType FullName="Windows.UI.Xaml.Data.CollectionViewSource">
       <RootProperty Name="Source" />

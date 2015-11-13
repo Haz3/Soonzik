@@ -9,13 +9,16 @@ $scope.loading = true;
 	$scope.showFriends = function() {
 		var current_user = SecureAuth.getCurrentUser();
 
-		HTTPService.getFriends(current_user.id).then(function(response) {
-			
-			$scope.friends = response.data.content;
-			console.log($scope.friends);
-
-		}, function (error) {
-			console.log($rootScope.labels.FILE_FRIEND_LOAD_FRIENDS_ERROR_MESSAGE);
+		SecureAuth.securedTransaction(function(key, id) {
+			var parameters = [
+				{ key: "secureKey", value: key },
+				{ key: "user_id", value: id }
+			];
+			HTTPService.getFriends(current_user.id, parameters).then(function(response) {
+				$scope.friends = response.data.content;
+			}, function (error) {
+				console.log($rootScope.labels.FILE_FRIEND_LOAD_FRIENDS_ERROR_MESSAGE);
+			});
 		});
 
 		$scope.Friend = true;

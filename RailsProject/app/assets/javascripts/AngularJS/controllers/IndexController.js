@@ -41,100 +41,106 @@ SoonzikApp.controller('IndexCtrl', ['$scope', 'SecureAuth', 'HTTPService', '$tim
 		}
 		$scope.classLeftSide['medium-8'] = ($scope.user != false);
 
-		/*
-		**	Recupere les 3 dernieres news pour le slider.
-		*/
-		var parametersNews = [
-			{ key: "limit", value: 6 },
-			{ key: "order_by_desc[]", value: "created_at" }
-		];
-		HTTPService.findNews(parametersNews).then(function(news) {
-			$scope.news = news.data.content;
-			newsLoading = true;
-			if (newsLoading && packsLoading && battlesLoading) { $scope.loading = false; }
-		}, function (error) {
-			NotificationService.error(labels.FILE_INDEX_NEWS_LOAD_ERROR_MESSAGE);
-		});
 
-		/*
-		**	 Recupere les 4 derniers packs mis en ligne.
-		*/
+		SecureAuth.securedTransaction(function(key, id) {
+			/*
+			**	Recupere les 3 dernieres news pour le slider.
+			*/
+			var parametersNews = [
+				{ key: "limit", value: 6 },
+				{ key: "order_by_desc[]", value: "created_at" },
+				{ key: "secureKey", value: key },
+				{ key: "user_id", value: id }
+			];
+			HTTPService.findNews(parametersNews).then(function(news) {
+				$scope.news = news.data.content;
+				newsLoading = true;
+				if (newsLoading && packsLoading && battlesLoading) { $scope.loading = false; }
+			}, function (error) {
+				NotificationService.error(labels.FILE_INDEX_NEWS_LOAD_ERROR_MESSAGE);
+			});
 
-		var parameters = [
-			{ key: "limit", value: 4 },
-			{ key: "order_by_desc[]", value: "created_at" }
-		];
+			/*
+			**	 Recupere les 4 derniers packs mis en ligne.
+			*/
 
-		HTTPService.findPacks(parameters).then(function (packs) {
-			var packs = packs.data.content;
-			if (packs.length > 0) {
-				checkPartial(packs);
-				$scope.selectedPack = { pack: $scope.packs[0], display: true };
-				console.log($scope.selectedPack);
-			}
-			timeLeftPack();
-			packsLoading = true;
-			if (newsLoading && packsLoading && battlesLoading) { $scope.loading = false; }
-		}, function (error) {
-			NotificationService.error(labels.FILE_INDEX_PACKS_LOAD_ERROR_MESSAGE);
-		});
+			var parameters = [
+				{ key: "limit", value: 4 },
+				{ key: "order_by_desc[]", value: "created_at" },
+				{ key: "secureKey", value: key },
+				{ key: "user_id", value: id }
+			];
 
-		/*
-		**	ShowBattleInfo --> Récupère la derniere battle mis en ligne.
-		*/
-
-		var parameters = [
-			{key: "order_by_desc[]", value: "created_at"},
-			{key: "limit", value: 2}
-		]
-		HTTPService.findBattles(parameters).then(function(response) {
-			if (response.data.content.length > 0) {
-				$scope.battles = response.data.content;
-
-				for (var i in $scope.battles) {
-					var b = $scope.battles[i];
-					var votes = [
-						{ value: 0, width: 0 },
-						{ value: 0, width: 0 },
-					];
-
-					if (b.votes.length > 0) {
-						var totalVote = b.votes.length;
-						for (var voteIndex in b.votes) {
-							if (b.votes[voteIndex].artist_id == b.artist_one.id) {
-								votes[0].value++;
-							} else {
-								votes[1].value++;
-							}
-						}
-						b.votes = votes;
-						b.votes[0].width = Math.max(Math.min(b.votes[0].value * 100 / totalVote, 95), 5);
-						b.votes[1].width = Math.max(Math.min(b.votes[1].value * 100 / totalVote, 95), 5);
-						b.votes[0].value = b.votes[0].value * 100 / totalVote;
-						b.votes[1].value = b.votes[1].value * 100 / totalVote;
-					} else {
-						b.votes = false;
-					}
+			HTTPService.findPacks(parameters).then(function (packs) {
+				var packs = packs.data.content;
+				if (packs.length > 0) {
+					checkPartial(packs);
+					$scope.selectedPack = { pack: $scope.packs[0], display: true };
 				}
-				battlesLoading = true;
+				timeLeftPack();
+				packsLoading = true;
 				if (newsLoading && packsLoading && battlesLoading) { $scope.loading = false; }
-			} else {
-				battlesLoading = true;
-				if (newsLoading && packsLoading && battlesLoading) { $scope.loading = false; }
-			}
-		}, function(error) {
-			NotificationService.error(labels.FILE_INDEX_BATTLES_LOAD_ERROR_MESSAGE);
-		});
+			}, function (error) {
+				NotificationService.error(labels.FILE_INDEX_PACKS_LOAD_ERROR_MESSAGE);
+			});
 
-		// Load the right column
+			/*
+			**	ShowBattleInfo --> Récupère la derniere battle mis en ligne.
+			*/
 
-		if ($scope.user != false) {
-			var isFluxFinished = false;
-			var isSuggestionFinished = false;
-			var isTweetFinished = false;
+			var parameters = [
+				{key: "order_by_desc[]", value: "created_at"},
+				{key: "limit", value: 2},
+				{ key: "secureKey", value: key },
+				{ key: "user_id", value: id }
+			]
+			HTTPService.findBattles(parameters).then(function(response) {
+				if (response.data.content.length > 0) {
+					$scope.battles = response.data.content;
 
-			// Get the tweets of your follows
-			SecureAuth.securedTransaction(function(key, id) {
+					for (var i in $scope.battles) {
+						var b = $scope.battles[i];
+						var votes = [
+							{ value: 0, width: 0 },
+							{ value: 0, width: 0 },
+						];
+
+						if (b.votes.length > 0) {
+							var totalVote = b.votes.length;
+							for (var voteIndex in b.votes) {
+								if (b.votes[voteIndex].artist_id == b.artist_one.id) {
+									votes[0].value++;
+								} else {
+									votes[1].value++;
+								}
+							}
+							b.votes = votes;
+							b.votes[0].width = Math.max(Math.min(b.votes[0].value * 100 / totalVote, 95), 5);
+							b.votes[1].width = Math.max(Math.min(b.votes[1].value * 100 / totalVote, 95), 5);
+							b.votes[0].value = b.votes[0].value * 100 / totalVote;
+							b.votes[1].value = b.votes[1].value * 100 / totalVote;
+						} else {
+							b.votes = false;
+						}
+					}
+					battlesLoading = true;
+					if (newsLoading && packsLoading && battlesLoading) { $scope.loading = false; }
+				} else {
+					battlesLoading = true;
+					if (newsLoading && packsLoading && battlesLoading) { $scope.loading = false; }
+				}
+			}, function(error) {
+				NotificationService.error(labels.FILE_INDEX_BATTLES_LOAD_ERROR_MESSAGE);
+			});
+
+			// Load the right column
+
+			if ($scope.user != false) {
+				var isFluxFinished = false;
+				var isSuggestionFinished = false;
+				var isTweetFinished = false;
+
+				// Get the tweets of your follows
 				HTTPService.getFlux([{ key: "secureKey", value: key }, { key: "user_id", value: id }]).then(function(response) {
 					$scope.tweets = response.data.content;
 					isFluxFinished = true;
@@ -142,31 +148,29 @@ SoonzikApp.controller('IndexCtrl', ['$scope', 'SecureAuth', 'HTTPService', '$tim
 				}, function(error) {
 					NotificationService.error(labels.FILE_INDEX_FLUX_LOAD_ERROR_MESSAGE)
 				});
-			}, function(error) {
-				NotificationService.error(labels.FILE_INDEX_FLUX_LOAD_ERROR_MESSAGE)
-			});
 
-			// Find the tweet who speak to you
-			var paramsTweet = [
-				{ key: encodeURIComponent("attribute[msg]"), value: encodeURIComponent("%" + $scope.user.username + "%") }
-			];
-			HTTPService.findTweet(paramsTweet).then(function(response) {
-				tmp_tweets = response.data.content;
-				// Loop backward to splice inside
-				for (var i = tmp_tweets.length - 1 ; i >= 0 ; i--) {
-					if (tmp_tweets[i].user.id == id) {
-						tmp_tweets.splice(i, 1);
+				// Find the tweet who speak to you
+				var paramsTweet = [
+					{ key: encodeURIComponent("attribute[msg]"), value: encodeURIComponent("%" + $scope.user.username + "%") },
+					{ key: "secureKey", value: key },
+					{ key: "user_id", value: id }
+				];
+				HTTPService.findTweet(paramsTweet).then(function(response) {
+					tmp_tweets = response.data.content;
+					// Loop backward to splice inside
+					for (var i = tmp_tweets.length - 1 ; i >= 0 ; i--) {
+						if (tmp_tweets[i].user.id == id) {
+							tmp_tweets.splice(i, 1);
+						}
 					}
-				}
-				$scope.otherTweets = tmp_tweets;
-				isTweetFinished = true;
-				if (isFluxFinished && isSuggestionFinished && isTweetFinished) { $scope.loadingRightSide = false; }
-			}, function(error) {
-					NotificationService.error(labels.FILE_INDEX_FLUX_LOAD_ERROR_MESSAGE)
-			});
+					$scope.otherTweets = tmp_tweets;
+					isTweetFinished = true;
+					if (isFluxFinished && isSuggestionFinished && isTweetFinished) { $scope.loadingRightSide = false; }
+				}, function(error) {
+						NotificationService.error(labels.FILE_INDEX_FLUX_LOAD_ERROR_MESSAGE)
+				});
 
-			// Get the suggestion
-			SecureAuth.securedTransaction(function(key, id) {
+				// Get the suggestion
 				HTTPService.getSuggestion([{ key: "secureKey", value: key }, { key: "user_id", value: id }]).then(function(response) {
 					$scope.suggestions = response.data.content;
 					isSuggestionFinished = true;
@@ -174,10 +178,8 @@ SoonzikApp.controller('IndexCtrl', ['$scope', 'SecureAuth', 'HTTPService', '$tim
 				}, function(error) {
 					NotificationService.error(labels.FILE_INDEX_SUGGESTION_LOAD_ERROR_MESSAGE)
 				});
-			}, function(error) {
-				NotificationService.error(labels.FILE_INDEX_SUGGESTION_LOAD_ERROR_MESSAGE)
-			});
-		}
+			}
+		});
 	}
 
 	var timeLeftPack = function() {
@@ -221,8 +223,6 @@ SoonzikApp.controller('IndexCtrl', ['$scope', 'SecureAuth', 'HTTPService', '$tim
 				}, function(error) {
 					NotificationService.error($rootScope.labels.FILE_USER_SAVE_TWEET_ERROR_MESSAGE);
 				});
-			}, function(error) {
-				NotificationService.error($rootScope.labels.FILE_USER_SAVE_TWEET_ERROR_MESSAGE);
 			});
 
 		} else {
@@ -234,20 +234,24 @@ SoonzikApp.controller('IndexCtrl', ['$scope', 'SecureAuth', 'HTTPService', '$tim
 		if ($scope.loading_tweet == false) {
 			$scope.loading_tweet = true;
 
-			var paramsTweet = [
-				{ key: encodeURIComponent("attribute[user_id]"), value: $scope.user.id },
-				{ key: encodeURIComponent("order_by_desc[]"), value: "created_at" },
-				{ key: "limit", value: 20 },
-				{ key: "offset", value: $scope.tweets.length }
-			];
+			SecureAuth.securedTransaction(function(key, id) {
+				var paramsTweet = [
+					{ key: encodeURIComponent("attribute[user_id]"), value: $scope.user.id },
+					{ key: encodeURIComponent("order_by_desc[]"), value: "created_at" },
+					{ key: "limit", value: 20 },
+					{ key: "offset", value: $scope.tweets.length },
+					{ key: "secureKey", value: key },
+					{ key: "user_id", value: id }
+				];
 
-			HTTPService.findTweet(paramsTweet).then(function(response) {
-				$scope.tweets = $scope.tweets.concat(response.data.content);
-				$timeout(function() {
-					$scope.loading_tweet = false;
-				}, 1000);
-			}, function(error) {
-				NotificationService.error("");
+				HTTPService.findTweet(paramsTweet).then(function(response) {
+					$scope.tweets = $scope.tweets.concat(response.data.content);
+					$timeout(function() {
+						$scope.loading_tweet = false;
+					}, 1000);
+				}, function(error) {
+					NotificationService.error("");
+				});
 			});
 		}
 	}
@@ -256,28 +260,32 @@ SoonzikApp.controller('IndexCtrl', ['$scope', 'SecureAuth', 'HTTPService', '$tim
 		if ($scope.loading_tweet == false) {
 			$scope.loading_tweet = true;
 
-			var paramsTweet = [
-				{ key: encodeURIComponent("attribute[user_id]"), value: $scope.user.id },
-				{ key: encodeURIComponent("order_by_desc[]"), value: "created_at" },
-				{ key: "limit", value: 20 },
-				{ key: "offset", value: $scope.otherTweets.length },
-				{ key: encodeURIComponent("attribute[msg]"), value: encodeURIComponent("%" + $scope.user.username + "%") }
-			];
+			SecureAuth.securedTransaction(function(key, id) {
+				var paramsTweet = [
+					{ key: encodeURIComponent("attribute[user_id]"), value: $scope.user.id },
+					{ key: encodeURIComponent("order_by_desc[]"), value: "created_at" },
+					{ key: "limit", value: 20 },
+					{ key: "offset", value: $scope.otherTweets.length },
+					{ key: encodeURIComponent("attribute[msg]"), value: encodeURIComponent("%" + $scope.user.username + "%") },
+					{ key: "secureKey", value: key },
+					{ key: "user_id", value: id },
+				];
 
-			HTTPService.findTweet(paramsTweet).then(function(response) {
-				tmp_tweets = response.data.content;
-				// Loop backward to splice inside
-				for (var i = tmp_tweets.length - 1 ; i >= 0 ; i--) {
-					if (tmp_tweets[i].user.id == id) {
-						tmp_tweets.splice(i, 1);
+				HTTPService.findTweet(paramsTweet).then(function(response) {
+					tmp_tweets = response.data.content;
+					// Loop backward to splice inside
+					for (var i = tmp_tweets.length - 1 ; i >= 0 ; i--) {
+						if (tmp_tweets[i].user.id == id) {
+							tmp_tweets.splice(i, 1);
+						}
 					}
-				}
-				$scope.otherTweets = $scope.otherTweets.concat(tmp_tweets);
-				$timeout(function() {
-					$scope.loading_tweet = false;
-				}, 1000);
-			}, function(error) {
-				NotificationService.error("");
+					$scope.otherTweets = $scope.otherTweets.concat(tmp_tweets);
+					$timeout(function() {
+						$scope.loading_tweet = false;
+					}, 1000);
+				}, function(error) {
+					NotificationService.error("");
+				});
 			});
 		}
 	}
@@ -308,12 +316,11 @@ SoonzikApp.controller('IndexCtrl', ['$scope', 'SecureAuth', 'HTTPService', '$tim
 				for (var indexPartial in partial) {
 					if (partial[indexPartial].album_id == packs[i].albums[indexAlbums].id) { packs[i].albums[indexAlbums].partial = true; }
 				}
-				if (packs[i].albums[indexAlbums].partial) { partial_array.push(packs[i].albums[indexAlbums]); }
+				if (!packs[i].albums[indexAlbums].partial) { partial_array.push(packs[i].albums[indexAlbums]); }
 				else { partial_pack.push(packs[i].albums[indexAlbums]); }
 			}
 
 			$scope.packs.push({ albumList: partial_pack, object: packs[i], partialList: partial_array });
 		}
-		console.log($scope.packs);
 	}
 }]);

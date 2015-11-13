@@ -36,7 +36,6 @@
     post = [NSString stringWithFormat:@"uid=%@&provider=%@&encrypted_key=%@&token=%@", uid, @"facebook", secureKey, token];
     
     NSDictionary *json = [Request postRequest:post url:url];
-    NSLog(@"facebook json: %@", json);
     User *user = [[User alloc] initWithJsonObject:[json objectForKey:@"content"]];
     
     return user;
@@ -44,7 +43,6 @@
 
 + (User *)twitterConnect:(NSString *)token email:(NSString *)email uid:(NSString *)uid
 {
-    NSLog(@"uid : %@", uid);
     NSString *tok = [self getSocialToken:uid andType:@"twitter"];
     NSString *url, *post, *conca, *secureKey;
     
@@ -53,7 +51,6 @@
     secureKey = [Crypto sha256HashFor:conca];
     post = [NSString stringWithFormat:@"uid=%@&provider=%@&encrypted_key=%@&token=%@", uid, @"twitter", secureKey, token];
     NSDictionary *json = [Request postRequest:post url:url];
-    NSLog(@"json twitter: %@", json);
     User *user = [[User alloc] initWithJsonObject:[json objectForKey:@"content"]];
     
     return user;
@@ -70,7 +67,6 @@
     post = [NSString stringWithFormat:@"uid=%@&provider=%@&encrypted_key=%@&token=%@", uid, @"google", secureKey, token];
     
     NSDictionary *json = [Request postRequest:post url:url];
-    NSLog(@"GOOGLE json : %@", json);
     User *user = [[User alloc] initWithJsonObject:[json objectForKey:@"content"]];
     
     return user;
@@ -99,7 +95,6 @@
 + (NSMutableArray *)getLanguages {
     NSString *url = [NSString stringWithFormat:@"%@languages", API_URL];
     NSDictionary *json = [Request getRequest:url];
-    NSLog(@"languages : %@", json);
     NSMutableArray *res = [[NSMutableArray alloc] init];
     NSArray *listOfListenings = [json objectForKey:@"content"];
     for (NSDictionary *dict in listOfListenings) {

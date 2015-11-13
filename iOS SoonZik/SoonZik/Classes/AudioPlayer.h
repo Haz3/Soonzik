@@ -38,6 +38,7 @@
 - (void)stopSound;
 - (void)previous;
 - (void)next;
+- (void)deleteCurrentPlayer;
 
 + (AudioPlayer *)sharedCenter;
 

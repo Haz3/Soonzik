@@ -1,4 +1,4 @@
-SoonzikApp.controller('SearchCtrl', ['$scope', "$routeParams", "HTTPService", "NotificationService", "$location", "$rootScope", function ($scope, $routeParams, HTTPService, NotificationService, $location, $rootScope) {
+SoonzikApp.controller('SearchCtrl', ['$scope', "$routeParams", "HTTPService", "NotificationService", "$location", "$rootScope", 'SecureAuth', function ($scope, $routeParams, HTTPService, NotificationService, $location, $rootScope, SecureAuth) {
 
 	$scope.searchParam = {
 		value: $routeParams.value
@@ -23,16 +23,19 @@ SoonzikApp.controller('SearchCtrl', ['$scope', "$routeParams", "HTTPService", "N
 
 	$scope.initSearch = function() {
 		$scope.loading = true;
-		var parameters = [{
-			key: "query",
-			value: $scope.searchParam.value,
-		}];
+		SecureAuth.securedTransaction(function(key, id) {
+			var parameters = [
+			  { key: "secureKey", value: key },
+			  { key: "user_id", value: id },
+			  { key: "query", value: $scope.searchParam.value }
+			];
 
-		HTTPService.search(parameters).then(function(response) {
-			$scope.result = response.data.content;
-			$scope.loading = false;
-		}, function(error) {
-			NotificationService.error($rootScope.labels.FILE_SEARCH_REQUEST_ERROR_MESSAGE);
+			HTTPService.search(parameters).then(function(response) {
+				$scope.result = response.data.content;
+				$scope.loading = false;
+			}, function(error) {
+				NotificationService.error($rootScope.labels.FILE_SEARCH_REQUEST_ERROR_MESSAGE);
+			});
 		});
 	}
 

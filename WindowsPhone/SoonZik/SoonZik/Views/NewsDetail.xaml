@@ -38,10 +38,13 @@
             <Image VerticalAlignment="Center" Source="{Binding SelectNews.attachments[0].url}" />
         </Grid>
         <Grid Grid.Row="1">
+            <Image Tapped="UIElement_OnTapped" Grid.Row="0" Source="../Resources/Icones/share.png" Height="30"
+                       VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10,0,0,0" />
             <TextBlock Foreground="White" Text="{Binding NewsTitle}" VerticalAlignment="Center"
                        HorizontalAlignment="Center" FontSize="30" />
-            <Image x:Name="likeImage" Source="{Binding Like}" Width="30" HorizontalAlignment="Right" Margin="0,0,30,0"
+            <Image x:Name="likeImage" Source="{Binding Like}" Width="30" Height="30" HorizontalAlignment="Right" Margin="0,0,40,0"
                    Tapped="LikeImage_OnTapped" />
+            <TextBlock Foreground="DodgerBlue" Text="{Binding Likes}" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="20" Margin="0,0,20,0"/>
         </Grid>
         <Grid Grid.Row="2">
             <Pivot x:Name="PivotGlobal" HeaderTemplate="{StaticResource SizeHeaderGlobalPivot}"

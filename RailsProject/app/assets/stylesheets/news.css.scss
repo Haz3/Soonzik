@@ -2,94 +2,71 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+.indexNews {
 
-.news {
-
-	padding-top: 20px;
-
-	ul {
-		margin-left: 30px;
+	h2 {
+		margin: 10px 5% 30px;
+		padding: 20px;
+		border-top: 2px solid #006A8D;
+		border-bottom: 2px solid #006A8D;
+		font-family: "Drakolomb";
 	}
 
-	.author {
-		font-style: italic;
-		font-size: 12px;
+	.newsItem {
+		.contentNewsContainer {
+			.title {
+				font-family: "Lato";
+				font-weight: bold;
+				font-size: 20px;
+				margin-bottom: 30px;
+			}
+
+			.contentNews {
+				color: #00536E;
+				margin-bottom: 40px;
+				text-indent:15px;
+			}
+		}
+
+		.illustration {
+			margin-bottom: 15px;
+
+			img {
+				-webkit-transition: all 0.8s ease-in-out;
+				-moz-transition: all 0.8s ease-in-out;
+				-o-transition: all 0.8s ease-in-out;
+				-ms-transition: all 0.8s ease-in-out;
+				transition: all 0.8s ease-in-out;
+				border: 2px solid #006A8D;
+
+				&:hover {
+					-webkit-transform: scale(1.03);
+					-moz-transform: scale(1.03);
+					-o-transform: scale(1.03);
+					-ms-transform: scale(1.03);
+					transform: scale(1.03);
+				}
+			}
+		}
 	}
 
-	.title {
-		color: black;
-		text-transform: uppercase;
-		font-weight: bold;
-	}
+}
 
-	.date {
-		margin-top: -25px;
-		font-style: italic;
-		font-size: 12px;
-	}
+.showNews {
+	.panel {
+		padding: 0 0 1.25rem 0;
 
-	.vignette {
-		display: block;
-		width: 50%;
-		height: 50%;
-		margin: 15px auto; 
-	}
+		h3 {
+			height: 40px;
+			background: #008CBA;
+			font-family: "Lato";
+			font-weight: bold;
+			ul li { color: white; line-height: 40px; }
+		}
 
-	.content {
-		display: inline-block;
-	}
-
-	i {
-		margin-left: 10px;
-		font-size: 50px;
-  		color: #008CBA;
-	}
-
-	.button {
-		width: auto;
-		float: right;
-		margin-top: 12px;
-	}
-
-	.content-comment {
-		color: black;
-		font-size: 12px;
-	}
-
-	.info-user {
-		margin-bottom: 10px;
-		color: #C0C0C0;
-		font-size: bold;
-		text-transformation: italic;
-	}
-
-	li {
-		list-style-type: none;
-	}
-
-	.photo img {
-		float: left;
-		width: 35px;
-		height: 35px;
-  		border-radius: 100%;
-  		margin-top: -5px;
-	}
-
-	.photo {
-		padding: 5px;
-	}
-
-	.info {
-	  margin-left: 50px;
-	}
-
-	.comment {
-		margin-top: 5px;
-		margin-left: 20px;
-	}
-
-
-	.panel p.black {
-		color: black;
+		.contentNews {
+			padding: 10px 15px;
+			color: #006A8D;
+		}
 	}
 }

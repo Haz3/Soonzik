@@ -177,7 +177,7 @@ the oldest message)</p>
 </li></ul>					
 											<div class="method-source-code" id="conversation-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/messages_controller.rb, line 217</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/messages_controller.rb, line 211</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">conversation</span>
   <span class="ruby-keyword">begin</span>
     <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@security</span>)
@@ -255,13 +255,13 @@ its sender and receiver</p>
 </li></ul>					
 											<div class="method-source-code" id="find-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/messages_controller.rb, line 117</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/messages_controller.rb, line 115</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">find</span>
   <span class="ruby-keyword">begin</span>
     <span class="ruby-keyword">if</span> (<span class="ruby-operator">!</span><span class="ruby-ivar">@security</span>)
       <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">500</span>
     <span class="ruby-keyword">else</span>
-      <span class="ruby-identifier">message_object</span> = <span class="ruby-constant">Message</span>.<span class="ruby-identifier">where</span>(<span class="ruby-string">&quot;user_id = ? OR dest_id = ?&quot;</span>, <span class="ruby-ivar">@user_id</span>, <span class="ruby-ivar">@user_id</span>)
+      <span class="ruby-identifier">message_object</span> = <span class="ruby-constant">Message</span>.<span class="ruby-identifier">eager_load</span>([<span class="ruby-value">:sender</span>, <span class="ruby-value">:receiver</span>]).<span class="ruby-identifier">where</span>(<span class="ruby-string">&quot;user_id = ? OR dest_id = ?&quot;</span>, <span class="ruby-ivar">@user_id</span>, <span class="ruby-ivar">@user_id</span>)
       <span class="ruby-keyword">if</span> (<span class="ruby-keyword">defined?</span><span class="ruby-ivar">@attribute</span>)
         <span class="ruby-comment"># - - - - - - - -</span>
         <span class="ruby-ivar">@attribute</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">x</span>, <span class="ruby-identifier">y</span><span class="ruby-operator">|</span>
@@ -272,15 +272,11 @@ its sender and receiver</p>
             <span class="ruby-identifier">condition</span> = {<span class="ruby-identifier">x</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">y</span>};
           <span class="ruby-keyword">end</span>
 
-          <span class="ruby-keyword">if</span> (<span class="ruby-identifier">message_object</span> <span class="ruby-operator">==</span> <span class="ruby-keyword">nil</span>)          <span class="ruby-comment">#message_object doesn&#39;t exist</span>
-            <span class="ruby-identifier">message_object</span> = <span class="ruby-constant">Message</span>.<span class="ruby-identifier">where</span>(<span class="ruby-identifier">condition</span>).<span class="ruby-identifier">where</span>(<span class="ruby-identifier">user_id</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@user_id</span>)
-          <span class="ruby-keyword">else</span>                              <span class="ruby-comment">#message_object exists</span>
+          <span class="ruby-keyword">if</span> (<span class="ruby-identifier">message_object</span> <span class="ruby-operator">!=</span> <span class="ruby-keyword">nil</span>)
             <span class="ruby-identifier">message_object</span> = <span class="ruby-identifier">message_object</span>.<span class="ruby-identifier">where</span>(<span class="ruby-identifier">condition</span>)
           <span class="ruby-keyword">end</span>
         <span class="ruby-keyword">end</span>
         <span class="ruby-comment"># - - - - - - - -</span>
-      <span class="ruby-keyword">else</span>
-        <span class="ruby-identifier">message_object</span> = <span class="ruby-constant">Message</span>.<span class="ruby-identifier">where</span>(<span class="ruby-string">&quot;user_id = ? OR dest_id = ?&quot;</span>, <span class="ruby-ivar">@user_id</span>, <span class="ruby-ivar">@user_id</span>)            <span class="ruby-comment">#no attribute specified</span>
       <span class="ruby-keyword">end</span>
 
       <span class="ruby-identifier">order_asc</span> = <span class="ruby-string">&quot;&quot;</span>
@@ -289,14 +285,14 @@ its sender and receiver</p>
       <span class="ruby-keyword">if</span> (<span class="ruby-keyword">defined?</span><span class="ruby-ivar">@order_by_asc</span>)
         <span class="ruby-ivar">@order_by_asc</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span>
           <span class="ruby-identifier">order_asc</span> <span class="ruby-operator">+=</span> <span class="ruby-string">&quot;, &quot;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">order_asc</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">!=</span> <span class="ruby-value">0</span>
-          <span class="ruby-identifier">order_asc</span> <span class="ruby-operator">+=</span> (<span class="ruby-node">%Q[#{x}]</span> <span class="ruby-operator">+</span> <span class="ruby-string">&quot; ASC&quot;</span>)
+          <span class="ruby-identifier">order_asc</span> <span class="ruby-operator">+=</span> (<span class="ruby-string">&quot;&#39;messages&#39;.&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-node">%Q[#{x}]</span> <span class="ruby-operator">+</span> <span class="ruby-string">&quot; ASC&quot;</span>)
         <span class="ruby-keyword">end</span>
       <span class="ruby-keyword">end</span>
       <span class="ruby-comment"># filter the order by desc to create the string</span>
       <span class="ruby-keyword">if</span> (<span class="ruby-keyword">defined?</span><span class="ruby-ivar">@order_by_desc</span>)
         <span class="ruby-ivar">@order_by_desc</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span>
           <span class="ruby-identifier">order_desc</span> <span class="ruby-operator">+=</span> <span class="ruby-string">&quot;, &quot;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">order_desc</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">!=</span> <span class="ruby-value">0</span>
-          <span class="ruby-identifier">order_desc</span> <span class="ruby-operator">+=</span> (<span class="ruby-node">%Q[#{x}]</span> <span class="ruby-operator">+</span> <span class="ruby-string">&quot; DESC&quot;</span>)
+          <span class="ruby-identifier">order_desc</span> <span class="ruby-operator">+=</span> (<span class="ruby-string">&quot;&#39;messages&#39;.&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-node">%Q[#{x}]</span> <span class="ruby-operator">+</span> <span class="ruby-string">&quot; DESC&quot;</span>)
         <span class="ruby-keyword">end</span>
       <span class="ruby-keyword">end</span>
 
@@ -379,7 +375,7 @@ information on the parameters, check at the model</p>
 </li></ul>					
 											<div class="method-source-code" id="save-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/messages_controller.rb, line 69</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/messages_controller.rb, line 67</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">save</span>
   <span class="ruby-keyword">begin</span>
     <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@security</span> <span class="ruby-operator">&amp;&amp;</span> (<span class="ruby-ivar">@message</span>[<span class="ruby-value">:user_id</span>] <span class="ruby-operator">==</span> <span class="ruby-ivar">@user_id</span> <span class="ruby-operator">||</span> <span class="ruby-ivar">@message</span>[<span class="ruby-value">:dest_id</span>] <span class="ruby-operator">==</span> <span class="ruby-ivar">@user_id</span>))
@@ -443,11 +439,11 @@ sender and receiver</p>
 </li></ul>					
 											<div class="method-source-code" id="show-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/messages_controller.rb, line 28</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/messages_controller.rb, line 26</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">show</span>
   <span class="ruby-keyword">begin</span>
     <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@security</span>)
-            <span class="ruby-identifier">msg</span> = <span class="ruby-constant">Message</span>.<span class="ruby-identifier">find_by_id</span>(<span class="ruby-ivar">@id</span>)
+            <span class="ruby-identifier">msg</span> = <span class="ruby-constant">Message</span>.<span class="ruby-identifier">eager_load</span>([<span class="ruby-value">:sender</span>, <span class="ruby-value">:receiver</span>]).<span class="ruby-identifier">find_by_id</span>(<span class="ruby-ivar">@id</span>)
             <span class="ruby-keyword">if</span> (<span class="ruby-operator">!</span><span class="ruby-identifier">msg</span> <span class="ruby-operator">||</span> (<span class="ruby-identifier">msg</span> <span class="ruby-operator">&amp;&amp;</span> (<span class="ruby-identifier">msg</span>.<span class="ruby-identifier">user_id</span> <span class="ruby-operator">==</span> <span class="ruby-ivar">@user_id</span> <span class="ruby-operator">||</span><span class="ruby-identifier"> msg</span>.<span class="ruby-identifier">dest_id</span> <span class="ruby-operator">==</span> <span class="ruby-ivar">@user_id</span>)))
               <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">502</span>
         <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:not_found</span>
@@ -500,6 +496,7 @@ sender and receiver</p>
 	<ul>
 			<li><a href="../API.html">API</a></li>
 			<li><a href="../API/AlbumsController.html">API::AlbumsController</a></li>
+			<li><a href="../API/AmbiancesController.html">API::AmbiancesController</a></li>
 			<li><a href="../API/ApiController.html">API::ApiController</a></li>
 			<li><a href="../API/ApisecurityController.html">API::ApisecurityController</a></li>
 			<li><a href="../API/BattlesController.html">API::BattlesController</a></li>
@@ -508,6 +505,7 @@ sender and receiver</p>
 			<li><a href="../API/GenresController.html">API::GenresController</a></li>
 			<li><a href="../API/InfluencesController.html">API::InfluencesController</a></li>
 			<li><a href="../API/LanguagesController.html">API::LanguagesController</a></li>
+			<li><a href="../API/LikesController.html">API::LikesController</a></li>
 			<li><a href="../API/ListeningsController.html">API::ListeningsController</a></li>
 			<li><a href="../API/MessagesController.html">API::MessagesController</a></li>
 			<li><a href="../API/MusicsController.html">API::MusicsController</a></li>
@@ -523,11 +521,14 @@ sender and receiver</p>
 			<li><a href="../Address.html">Address</a></li>
 			<li><a href="../AdminUser.html">AdminUser</a></li>
 			<li><a href="../Album.html">Album</a></li>
+			<li><a href="../Albumslike.html">Albumslike</a></li>
+			<li><a href="../Ambiance.html">Ambiance</a></li>
 			<li><a href="../Attachment.html">Attachment</a></li>
 			<li><a href="../Battle.html">Battle</a></li>
 			<li><a href="../Cart.html">Cart</a></li>
 			<li><a href="../Commentary.html">Commentary</a></li>
 			<li><a href="../Concert.html">Concert</a></li>
+			<li><a href="../Concertslike.html">Concertslike</a></li>
 			<li><a href="../Description.html">Description</a></li>
 			<li><a href="../Feedback.html">Feedback</a></li>
 			<li><a href="../Follow.html">Follow</a></li>
@@ -545,6 +546,7 @@ sender and receiver</p>
 			<li><a href="../MusicNote.html">MusicNote</a></li>
 			<li><a href="../News.html">News</a></li>
 			<li><a href="../NewsTitle.html">NewsTitle</a></li>
+			<li><a href="../Newslike.html">Newslike</a></li>
 			<li><a href="../Newstext.html">Newstext</a></li>
 			<li><a href="../Notification.html">Notification</a></li>
 			<li><a href="../Pack.html">Pack</a></li>
@@ -557,6 +559,7 @@ sender and receiver</p>
 			<li><a href="../PurchasedAlbum.html">PurchasedAlbum</a></li>
 			<li><a href="../PurchasedMusic.html">PurchasedMusic</a></li>
 			<li><a href="../PurchasedPack.html">PurchasedPack</a></li>
+			<li><a href="../Tool.html">Tool</a></li>
 			<li><a href="../Tweet.html">Tweet</a></li>
 			<li><a href="../User.html">User</a></li>
 			<li><a href="../Vote.html">Vote</a></li>

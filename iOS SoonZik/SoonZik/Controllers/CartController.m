@@ -12,17 +12,14 @@
 @implementation CartController
 
 + (NSMutableArray *)getCart {
-    NSString *url, *key, *conca, *secureKey;
+    NSString *url, *key;
     NSData *data = [[NSUserDefaults standardUserDefaults] objectForKey:@"User"];
     User *user = (User *)[NSKeyedUnarchiver unarchiveObjectWithData:data];
 
-    key = [Crypto getKey:user.identifier];
-    conca = [NSString stringWithFormat:@"%@%@", user.salt, key];
-    secureKey = [Crypto sha256HashFor:conca];
-    url = [NSString stringWithFormat:@"%@carts/my_cart?user_id=%i&secureKey=%@", API_URL, user.identifier, secureKey];
+    key = [Crypto getKey];
+    url = [NSString stringWithFormat:@"%@carts/my_cart?user_id=%i&secureKey=%@", API_URL, user.identifier, key];
 
     NSDictionary *json = [Request getRequest:url];
-    NSLog(@"json cart : %@", json);
     NSMutableArray *array = [[NSMutableArray alloc] init];
     for (NSDictionary *dic in [json objectForKey:@"content"]) {
         [array addObject:[[Cart alloc] initWithJsonObject:dic]];
@@ -32,18 +29,14 @@
 }
 
 + (Cart *)addToCart:(NSString *)type :(int)objId {
-    NSString *url, *post, *key, *conca, *secureKey;
+    NSString *url, *post, *key;
     NSData *data = [[NSUserDefaults standardUserDefaults] objectForKey:@"User"];
     User *user = (User *)[NSKeyedUnarchiver unarchiveObjectWithData:data];
     
     url = [NSString stringWithFormat:@"%@carts/save", API_URL];
-    key = [Crypto getKey:user.identifier];
-    conca = [NSString stringWithFormat:@"%@%@", user.salt, key];
-    secureKey = [Crypto sha256HashFor:conca];
-    // gift_user_id if it is a gift from someone
-    post = [NSString stringWithFormat:@"user_id=%i&secureKey=%@&cart[user_id]=%i&cart[typeObj]=%@&cart[obj_id]=%i", user.identifier, secureKey, user.identifier, type, objId];
+    key = [Crypto getKey];
+    post = [NSString stringWithFormat:@"user_id=%i&secureKey=%@&cart[user_id]=%i&cart[typeObj]=%@&cart[obj_id]=%i", user.identifier, key, user.identifier, type, objId];
     NSDictionary *json = [Request postRequest:post url:url];
-    NSLog(@"json : %@", json);
     
     if ([[json objectForKey:@"code"] intValue] == 201) {
         return [[Cart alloc] initWithJsonObject:[json objectForKey:@"content"]];
@@ -53,19 +46,14 @@
 }
 
 + (BOOL)removeCart:(int)cartId {
-    NSString *url, *key, *conca, *secureKey;
+    NSString *url, *key;
     NSData *data = [[NSUserDefaults standardUserDefaults] objectForKey:@"User"];
     User *user = (User *)[NSKeyedUnarchiver unarchiveObjectWithData:data];
     
-    key = [Crypto getKey:user.identifier];
-    conca = [NSString stringWithFormat:@"%@%@", user.salt, key];
-    secureKey = [Crypto sha256HashFor:conca];
-    url = [NSString stringWithFormat:@"%@carts/destroy?user_id=%i&secureKey=%@&id=%i", API_URL, user.identifier, secureKey, cartId];
+    key = [Crypto getKey];
+    url = [NSString stringWithFormat:@"%@carts/destroy?user_id=%i&secureKey=%@&id=%i", API_URL, user.identifier, key, cartId];
     
     NSDictionary *json = [Request getRequest:url];
-    
-    NSLog(@"%@", json);
-    
     if ([[json objectForKey:@"code"] intValue] == 202)
         return true;
     
@@ -73,19 +61,16 @@
 }
 
 + (NSMutableArray *)giftCart:(int)cartId forUser:(int)userId {
-    NSString *url, *key, *conca, *secureKey, *post;
+    NSString *url, *key, *post;
     NSData *data = [[NSUserDefaults standardUserDefaults] objectForKey:@"User"];
     User *user = (User *)[NSKeyedUnarchiver unarchiveObjectWithData:data];
     
     url = [NSString stringWithFormat:@"%@carts/%i/gift", API_URL, cartId];
-    key = [Crypto getKey:user.identifier];
-    conca = [NSString stringWithFormat:@"%@%@", user.salt, key];
-    secureKey = [Crypto sha256HashFor:conca];
-    post = [NSString stringWithFormat:@"user_id=%i&secureKey=%@&user_gift_id=%i", user.identifier, secureKey, userId];
+    key = [Crypto getKey];
+    post = [NSString stringWithFormat:@"user_id=%i&secureKey=%@&user_gift_id=%i", user.identifier, key, userId];
     
     NSDictionary *json = [Request postRequest:post url:url];
     NSMutableArray *array = [[NSMutableArray alloc] init];
-    NSLog(@"%@", json);
     for (NSDictionary *dic in [json objectForKey:@"content"]) {
         [array addObject:[[Cart alloc] initWithJsonObject:dic]];
     }
@@ -94,19 +79,15 @@
 }
 
 + (BOOL)buyCart:(NSString *)paypalId {
-    NSString *url, *key, *conca, *secureKey, *post;
+    NSString *url, *key, *post;
     NSData *data = [[NSUserDefaults standardUserDefaults] objectForKey:@"User"];
     User *user = (User *)[NSKeyedUnarchiver unarchiveObjectWithData:data];
     
-    key = [Crypto getKey:user.identifier];
-    conca = [NSString stringWithFormat:@"%@%@", user.salt, key];
-    secureKey = [Crypto sha256HashFor:conca];
+    key = [Crypto getKey];
     url = [NSString stringWithFormat:@"%@purchases/buycart", API_URL];
-    post = [NSString stringWithFormat:@"user_id=%i&secureKey=%@&paypal[payment_id]=%@", user.identifier, secureKey, paypalId];
-    NSLog(@"url : %@      |      post : %@", url, post);
+    post = [NSString stringWithFormat:@"user_id=%i&secureKey=%@&paypal[payment_id]=%@", user.identifier, key, paypalId];
     
     NSDictionary *json = [Request postRequest:post url:url];
-    NSLog(@"%@", json);
     
     if ([[json objectForKey:@"code"] intValue] == 201)
         return true;

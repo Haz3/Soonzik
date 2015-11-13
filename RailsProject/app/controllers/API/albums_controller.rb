@@ -9,8 +9,6 @@ module API
   # * getcomments [get]
   #
   class AlbumsController < ApisecurityController
-  	before_action :checkKey, only: [:addcomment]
-
     #
     # Retrieve all the albums
     #
@@ -30,7 +28,11 @@ module API
         if (@count.present? && @count == "true")
           @returnValue = { content: Album.count }
         else
-          @returnValue = { content: Album.eager_load([:user, :musics, :descriptions]).all.as_json(:only => Album.miniKey, :include => {
+=begin
+          @returnValue = {
+            content: Album.select(Tool::select_join(albums: Album.miniKey + [:user_id], musics: Music.miniKey + [:album_id], descriptions: Description.miniKey))
+                          .sql_join
+                          .all.as_json(:only => Album.miniKey, :include => {
                                                         :user => { :only => User.miniKey },
                                                         :musics => {
                                                           :only => Music.miniKey,
@@ -38,7 +40,23 @@ module API
                                                         },
                                                         descriptions: {  :only => Description.miniKey }
                                                       },
-                                                      methods: :getAverageNote ) }
+                                                      methods: :getAverageNote) }
+=end
+          albums = Album.eager_load([:user, :musics, :descriptions]).all
+          Album.fillLikes albums, @security, @user_id
+          albums.each do |album|
+            Music.fillAverageNote album.musics if album.musics.size > 0
+          end
+
+          @returnValue = { content: albums.as_json(:only => Album.miniKey, :include => {
+                                                        :user => { :only => User.miniKey },
+                                                        :musics => {
+                                                          :only => Music.miniKey,
+                                                          methods: :getAverageNote
+                                                        },
+                                                        descriptions: {  :only => Description.miniKey }
+                                                      },
+                                                      methods: [:getAverageNote, :likes, :hasLiked] ) }
         end
         if (@returnValue[:content].size == 0)
           codeAnswer 202
@@ -73,6 +91,8 @@ module API
           codeAnswer 502
           defineHttp :not_found
         else
+          Music.fillAverageNote album.musics
+          Album.fillLikes [album], @security, @user_id
           @returnValue = { content: album.as_json(:only => Album.miniKey, :include => {
                                                     :musics => {
                                                       :only => Music.miniKey,
@@ -82,7 +102,7 @@ module API
                                                     descriptions: {  :only => Description.miniKey },
                                                     genres: { :only => Genre.miniKey }
                                                   },
-                                                  methods: :getAverageNote) }
+                                                  methods: [:getAverageNote, :likes, :hasLiked]) }
           codeAnswer 200
         end
       rescue
@@ -179,6 +199,11 @@ module API
           album_object = album_object.offset(@offset.to_i)
         end
 
+        album_object.each do |album|
+          Music.fillAverageNote album.musics if album.musics.size > 0
+        end
+        Album.fillLikes album_object, @security, @user_id
+
         @returnValue = { content: album_object.as_json(:only => Album.miniKey, :include => {
                                                         :musics => {
                                                           :only => Music.miniKey,
@@ -188,7 +213,7 @@ module API
                                                         descriptions: {  :only => Description.miniKey },
                                                         genres: { :only => Genre.miniKey }
                                                       },
-                                                      methods: :getAverageNote) }
+                                                      methods: [:getAverageNote, :likes, :hasLiked]) }
 
         if (album_object.size == 0)
           codeAnswer 202

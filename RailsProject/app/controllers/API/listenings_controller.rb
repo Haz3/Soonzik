@@ -8,8 +8,6 @@ module API
   # * save        [post] - SECURITY
   #
   class ListeningsController < ApisecurityController
-    before_action :checkKey, only: [:save]
-
   	# Retrieve all the listenings
     #
     # Route : /listenings
@@ -212,7 +210,6 @@ module API
     # * +listening [music_id]+ - Id of the music listen
     # * +listening [latitude]+ - Position where the music has been listen
     # * +listening [longitude]+ - Position where the music has been listen
-    # * +listening [when]+ - When the music has been listen
     # 
     # ===== HTTP VALUE
     # 

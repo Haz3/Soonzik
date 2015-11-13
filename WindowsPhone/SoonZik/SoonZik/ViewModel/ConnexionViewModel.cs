@@ -160,8 +160,7 @@ namespace SoonZik.ViewModel
                     Singleton.Singleton.Instance().CurrentUser =
                         JsonConvert.DeserializeObject(stringJson, typeof (User)) as User;
                     Singleton.Singleton.Instance().CurrentUser.profilImage =
-                        new BitmapImage(new Uri(
-                            Constant.UrlImageUser + Singleton.Singleton.Instance().CurrentUser.image,
+                        new BitmapImage(new Uri(Constant.UrlImageUser + Singleton.Singleton.Instance().CurrentUser.image,
                             UriKind.RelativeOrAbsolute));
                     foreach (var friend in Singleton.Singleton.Instance().CurrentUser.friends)
                     {
@@ -175,6 +174,7 @@ namespace SoonZik.ViewModel
                     new MessageDialog("Erreur de connexion" + e).ShowAsync();
                     ProgressOn = false;
                 }
+                ValidateKey.GetValideKey();
                 WriteInformation();
                 Navigation.Navigate(typeof (MainView));
                 ProgressOn = false;

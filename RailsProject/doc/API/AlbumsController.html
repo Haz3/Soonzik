@@ -179,7 +179,7 @@ from ApiSecurity (the parent) is true</p>
 </li></ul>					
 											<div class="method-source-code" id="addcomment-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/albums_controller.rb, line 224</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/albums_controller.rb, line 248</span>
   <span class="ruby-keyword">def</span> <span class="ruby-identifier">addcomment</span>
 <span class="ruby-keyword">begin</span>
   <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@security</span>)
@@ -195,7 +195,7 @@ from ApiSecurity (the parent) is true</p>
       
       <span class="ruby-keyword">if</span> (<span class="ruby-identifier">com</span>.<span class="ruby-identifier">save</span>)
         <span class="ruby-identifier">com</span>.<span class="ruby-identifier">albums</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">album</span>
-        <span class="ruby-ivar">@returnValue</span> = { <span class="ruby-identifier">content</span><span class="ruby-operator">:</span> <span class="ruby-identifier">com</span>.<span class="ruby-identifier">as_json</span>(<span class="ruby-value">:only</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">Commentary</span>.<span class="ruby-identifier">miniKey</span>, <span class="ruby-value">:include</span> =<span class="ruby-operator">&gt;</span> { <span class="ruby-identifier">user</span><span class="ruby-operator">:</span> { <span class="ruby-identifier">only</span><span class="ruby-operator">:</span> <span class="ruby-constant">User</span>.<span class="ruby-identifier">miniKey</span> } }) }
+        <span class="ruby-ivar">@returnValue</span> = { <span class="ruby-identifier">content</span><span class="ruby-operator">:</span> <span class="ruby-identifier">com</span>.<span class="ruby-identifier">as_json</span>(<span class="ruby-value">:only</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">Commentary</span>.<span class="ruby-identifier">eager_load</span>(<span class="ruby-value">:user</span>).<span class="ruby-identifier">miniKey</span>, <span class="ruby-value">:include</span> =<span class="ruby-operator">&gt;</span> { <span class="ruby-identifier">user</span><span class="ruby-operator">:</span> { <span class="ruby-identifier">only</span><span class="ruby-operator">:</span> <span class="ruby-constant">User</span>.<span class="ruby-identifier">miniKey</span> } }) }
         <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">201</span>
         <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:created</span>
       <span class="ruby-keyword">else</span>
@@ -262,7 +262,7 @@ its music and the artist</p>
 </li></ul>					
 											<div class="method-source-code" id="find-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/albums_controller.rb, line 119</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/albums_controller.rb, line 138</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">find</span>
   <span class="ruby-keyword">begin</span>
     <span class="ruby-identifier">album_object</span> = <span class="ruby-keyword">nil</span>
@@ -277,14 +277,14 @@ its music and the artist</p>
         <span class="ruby-keyword">end</span>
 
         <span class="ruby-keyword">if</span> (<span class="ruby-identifier">album_object</span> <span class="ruby-operator">==</span> <span class="ruby-keyword">nil</span>)          <span class="ruby-comment">#album_object doesn&#39;t exist</span>
-          <span class="ruby-identifier">album_object</span> = <span class="ruby-constant">Album</span>.<span class="ruby-identifier">where</span>(<span class="ruby-identifier">condition</span>)
+          <span class="ruby-identifier">album_object</span> = <span class="ruby-constant">Album</span>.<span class="ruby-identifier">eager_load</span>([<span class="ruby-value">:user</span>, <span class="ruby-value">:musics</span>, <span class="ruby-value">:descriptions</span>, <span class="ruby-value">:genres</span>]).<span class="ruby-identifier">where</span>(<span class="ruby-identifier">condition</span>)
         <span class="ruby-keyword">else</span>                              <span class="ruby-comment">#album_object exists</span>
           <span class="ruby-identifier">album_object</span> = <span class="ruby-identifier">album_object</span>.<span class="ruby-identifier">where</span>(<span class="ruby-identifier">condition</span>)
         <span class="ruby-keyword">end</span>
       <span class="ruby-keyword">end</span>
       <span class="ruby-comment"># - - - - - - - -</span>
     <span class="ruby-keyword">else</span>
-      <span class="ruby-identifier">album_object</span> = <span class="ruby-constant">Album</span>.<span class="ruby-identifier">all</span>            <span class="ruby-comment">#no attribute specified</span>
+      <span class="ruby-identifier">album_object</span> = <span class="ruby-constant">Album</span>.<span class="ruby-identifier">eager_load</span>([<span class="ruby-value">:user</span>, <span class="ruby-value">:musics</span>, <span class="ruby-value">:descriptions</span>, <span class="ruby-value">:genres</span>]).<span class="ruby-identifier">all</span>            <span class="ruby-comment">#no attribute specified</span>
     <span class="ruby-keyword">end</span>
 
     <span class="ruby-identifier">order_asc</span> = <span class="ruby-string">&quot;&quot;</span>
@@ -293,14 +293,14 @@ its music and the artist</p>
     <span class="ruby-keyword">if</span> (<span class="ruby-keyword">defined?</span><span class="ruby-ivar">@order_by_asc</span>)
       <span class="ruby-ivar">@order_by_asc</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span>
         <span class="ruby-identifier">order_asc</span> <span class="ruby-operator">+=</span> <span class="ruby-string">&quot;, &quot;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">order_asc</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">!=</span> <span class="ruby-value">0</span>
-        <span class="ruby-identifier">order_asc</span> <span class="ruby-operator">+=</span> (<span class="ruby-node">%Q[#{x}]</span> <span class="ruby-operator">+</span> <span class="ruby-string">&quot; ASC&quot;</span>)
+        <span class="ruby-identifier">order_asc</span> <span class="ruby-operator">+=</span> (<span class="ruby-string">&quot;&#39;albums&#39;.&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-node">%Q[#{x}]</span> <span class="ruby-operator">+</span> <span class="ruby-string">&quot; ASC&quot;</span>)
       <span class="ruby-keyword">end</span>
     <span class="ruby-keyword">end</span>
     <span class="ruby-comment"># filter the order by desc to create the string</span>
     <span class="ruby-keyword">if</span> (<span class="ruby-keyword">defined?</span><span class="ruby-ivar">@order_by_desc</span>)
       <span class="ruby-ivar">@order_by_desc</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span>
         <span class="ruby-identifier">order_desc</span> <span class="ruby-operator">+=</span> <span class="ruby-string">&quot;, &quot;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">order_desc</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">!=</span> <span class="ruby-value">0</span>
-        <span class="ruby-identifier">order_desc</span> <span class="ruby-operator">+=</span> (<span class="ruby-node">%Q[#{x}]</span> <span class="ruby-operator">+</span> <span class="ruby-string">&quot; DESC&quot;</span>)
+        <span class="ruby-identifier">order_desc</span> <span class="ruby-operator">+=</span> (<span class="ruby-string">&quot;&#39;albums&#39;.&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-node">%Q[#{x}]</span> <span class="ruby-operator">+</span> <span class="ruby-string">&quot; DESC&quot;</span>)
       <span class="ruby-keyword">end</span>
     <span class="ruby-keyword">end</span>
 
@@ -327,6 +327,11 @@ its music and the artist</p>
       <span class="ruby-identifier">album_object</span> = <span class="ruby-identifier">album_object</span>.<span class="ruby-identifier">offset</span>(<span class="ruby-ivar">@offset</span>.<span class="ruby-identifier">to_i</span>)
     <span class="ruby-keyword">end</span>
 
+    <span class="ruby-identifier">album_object</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">album</span><span class="ruby-operator">|</span>
+      <span class="ruby-constant">Music</span>.<span class="ruby-identifier">fillAverageNote</span> <span class="ruby-identifier">album</span>.<span class="ruby-identifier">musics</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">album</span>.<span class="ruby-identifier">musics</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span>
+    <span class="ruby-keyword">end</span>
+    <span class="ruby-constant">Album</span>.<span class="ruby-identifier">fillLikes</span> <span class="ruby-identifier">album_object</span>, <span class="ruby-ivar">@security</span>, <span class="ruby-ivar">@user_id</span>
+
     <span class="ruby-ivar">@returnValue</span> = { <span class="ruby-identifier">content</span><span class="ruby-operator">:</span> <span class="ruby-identifier">album_object</span>.<span class="ruby-identifier">as_json</span>(<span class="ruby-value">:only</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">Album</span>.<span class="ruby-identifier">miniKey</span>, <span class="ruby-value">:include</span> =<span class="ruby-operator">&gt;</span> {
                                                     <span class="ruby-value">:musics</span> =<span class="ruby-operator">&gt;</span> {
                                                       <span class="ruby-value">:only</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">Music</span>.<span class="ruby-identifier">miniKey</span>,
@@ -336,7 +341,7 @@ its music and the artist</p>
                                                     <span class="ruby-identifier">descriptions</span><span class="ruby-operator">:</span> {  <span class="ruby-value">:only</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">Description</span>.<span class="ruby-identifier">miniKey</span> },
                                                     <span class="ruby-identifier">genres</span><span class="ruby-operator">:</span> { <span class="ruby-value">:only</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">Genre</span>.<span class="ruby-identifier">miniKey</span> }
                                                   },
-                                                  <span class="ruby-identifier">methods</span><span class="ruby-operator">:</span> <span class="ruby-value">:getAverageNote</span>) }
+                                                  <span class="ruby-identifier">methods</span><span class="ruby-operator">:</span> [<span class="ruby-value">:getAverageNote</span>, <span class="ruby-value">:likes</span>, <span class="ruby-value">:hasLiked</span>]) }
 
     <span class="ruby-keyword">if</span> (<span class="ruby-identifier">album_object</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>)
       <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">202</span>
@@ -391,12 +396,12 @@ last (default : false)</p>
 </li></ul>					
 											<div class="method-source-code" id="getcomments-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/albums_controller.rb, line 275</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/albums_controller.rb, line 299</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">getcomments</span>
   <span class="ruby-identifier">order</span> = <span class="ruby-string">&quot;false&quot;</span>
 
   <span class="ruby-keyword">begin</span>
-    <span class="ruby-identifier">albums</span> = <span class="ruby-constant">Album</span>.<span class="ruby-identifier">find_by_id</span>(<span class="ruby-ivar">@id</span>)
+    <span class="ruby-identifier">albums</span> = <span class="ruby-constant">Album</span>.<span class="ruby-identifier">eager_load</span>(<span class="ruby-identifier">commentaries</span><span class="ruby-operator">:</span> { <span class="ruby-identifier">user</span><span class="ruby-operator">:</span> {} }).<span class="ruby-identifier">find_by_id</span>(<span class="ruby-ivar">@id</span>)
     <span class="ruby-ivar">@offset</span> = <span class="ruby-value">0</span> <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-ivar">@offset</span>.<span class="ruby-identifier">present?</span>()
     <span class="ruby-ivar">@limit</span> = <span class="ruby-value">20</span> <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-ivar">@limit</span>.<span class="ruby-identifier">present?</span>()
     <span class="ruby-identifier">order</span> = <span class="ruby-ivar">@order_reverse</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@order_reverse</span>.<span class="ruby-identifier">present?</span>() <span class="ruby-operator">&amp;&amp;</span> (<span class="ruby-ivar">@order_reverse</span> <span class="ruby-operator">==</span> <span class="ruby-string">&quot;true&quot;</span> <span class="ruby-operator">||</span> <span class="ruby-ivar">@order_reverse</span> <span class="ruby-operator">==</span> <span class="ruby-string">&quot;false&quot;</span>)
@@ -414,6 +419,7 @@ last (default : false)</p>
         })
       }
       <span class="ruby-ivar">@returnValue</span> = { <span class="ruby-identifier">content</span><span class="ruby-operator">:</span> <span class="ruby-identifier">refine_comments</span> }
+      <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">200</span>
     <span class="ruby-keyword">end</span>
   <span class="ruby-keyword">rescue</span>
     <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">504</span>
@@ -455,34 +461,51 @@ its music and the artist</p>
 </li></ul>					
 											<div class="method-source-code" id="index-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/albums_controller.rb, line 28</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">index</span>
-  <span class="ruby-keyword">begin</span>
-    <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@count</span>.<span class="ruby-identifier">present?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-ivar">@count</span> <span class="ruby-operator">==</span> <span class="ruby-string">&quot;true&quot;</span>)
-      <span class="ruby-ivar">@returnValue</span> = { <span class="ruby-identifier">content</span><span class="ruby-operator">:</span> <span class="ruby-constant">Album</span>.<span class="ruby-identifier">count</span> }
-    <span class="ruby-keyword">else</span>
-      <span class="ruby-ivar">@returnValue</span> = { <span class="ruby-identifier">content</span><span class="ruby-operator">:</span> <span class="ruby-constant">Album</span>.<span class="ruby-identifier">all</span>.<span class="ruby-identifier">as_json</span>(<span class="ruby-value">:only</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">Album</span>.<span class="ruby-identifier">miniKey</span>, <span class="ruby-value">:include</span> =<span class="ruby-operator">&gt;</span> {
-                                                    <span class="ruby-value">:user</span> =<span class="ruby-operator">&gt;</span> { <span class="ruby-value">:only</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">User</span>.<span class="ruby-identifier">miniKey</span> },
-                                                    <span class="ruby-value">:musics</span> =<span class="ruby-operator">&gt;</span> {
-                                                      <span class="ruby-value">:only</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">Music</span>.<span class="ruby-identifier">miniKey</span>,
-                                                      <span class="ruby-identifier">methods</span><span class="ruby-operator">:</span> <span class="ruby-value">:getAverageNote</span>
-                                                    },
-                                                    <span class="ruby-identifier">descriptions</span><span class="ruby-operator">:</span> {  <span class="ruby-value">:only</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">Description</span>.<span class="ruby-identifier">miniKey</span> }
-                                                  },
-                                                  <span class="ruby-identifier">methods</span><span class="ruby-operator">:</span> <span class="ruby-value">:getAverageNote</span> ) }
-    <span class="ruby-keyword">end</span>
-    <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@returnValue</span>[<span class="ruby-value">:content</span>].<span class="ruby-identifier">size</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>)
-      <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">202</span>
-    <span class="ruby-keyword">else</span>
-      <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">200</span>
-    <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">rescue</span>
-    <span class="ruby-identifier">puts</span> <span class="ruby-identifier">$!</span>, <span class="ruby-identifier">$@</span>
-    <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">504</span>
-    <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:service_unavailable</span>
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-identifier">sendJson</span>
-<span class="ruby-keyword">end</span></code></pre>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/albums_controller.rb, line 26</span>
+    <span class="ruby-keyword">def</span> <span class="ruby-identifier">index</span>
+      <span class="ruby-keyword">begin</span>
+        <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@count</span>.<span class="ruby-identifier">present?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-ivar">@count</span> <span class="ruby-operator">==</span> <span class="ruby-string">&quot;true&quot;</span>)
+          <span class="ruby-ivar">@returnValue</span> = { <span class="ruby-identifier">content</span><span class="ruby-operator">:</span> <span class="ruby-constant">Album</span>.<span class="ruby-identifier">count</span> }
+        <span class="ruby-keyword">else</span>
+<span class="ruby-comment">          @returnValue = {
+            content: Album.select(Tool::select_join(albums: Album.miniKey + [:user_id], musics: Music.miniKey + [:album_id], descriptions: Description.miniKey))
+                          .sql_join
+                          .all.as_json(:only =&gt; Album.miniKey, :include =&gt; {
+                                                        :user =&gt; { :only =&gt; User.miniKey },
+                                                        :musics =&gt; {
+                                                          :only =&gt; Music.miniKey,
+                                                          methods: :getAverageNote
+                                                        },
+                                                        descriptions: {  :only =&gt; Description.miniKey }
+                                                      },
+                                                      methods: :getAverageNote) }
+</span>          <span class="ruby-identifier">albums</span> = <span class="ruby-constant">Album</span>.<span class="ruby-identifier">eager_load</span>([<span class="ruby-value">:user</span>, <span class="ruby-value">:musics</span>, <span class="ruby-value">:descriptions</span>]).<span class="ruby-identifier">all</span>
+          <span class="ruby-constant">Album</span>.<span class="ruby-identifier">fillLikes</span> <span class="ruby-identifier">albums</span>, <span class="ruby-ivar">@security</span>, <span class="ruby-ivar">@user_id</span>
+          <span class="ruby-identifier">albums</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">album</span><span class="ruby-operator">|</span>
+            <span class="ruby-constant">Music</span>.<span class="ruby-identifier">fillAverageNote</span> <span class="ruby-identifier">album</span>.<span class="ruby-identifier">musics</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">album</span>.<span class="ruby-identifier">musics</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span>
+          <span class="ruby-keyword">end</span>
+
+          <span class="ruby-ivar">@returnValue</span> = { <span class="ruby-identifier">content</span><span class="ruby-operator">:</span> <span class="ruby-identifier">albums</span>.<span class="ruby-identifier">as_json</span>(<span class="ruby-value">:only</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">Album</span>.<span class="ruby-identifier">miniKey</span>, <span class="ruby-value">:include</span> =<span class="ruby-operator">&gt;</span> {
+                                                        <span class="ruby-value">:user</span> =<span class="ruby-operator">&gt;</span> { <span class="ruby-value">:only</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">User</span>.<span class="ruby-identifier">miniKey</span> },
+                                                        <span class="ruby-value">:musics</span> =<span class="ruby-operator">&gt;</span> {
+                                                          <span class="ruby-value">:only</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">Music</span>.<span class="ruby-identifier">miniKey</span>,
+                                                          <span class="ruby-identifier">methods</span><span class="ruby-operator">:</span> <span class="ruby-value">:getAverageNote</span>
+                                                        },
+                                                        <span class="ruby-identifier">descriptions</span><span class="ruby-operator">:</span> {  <span class="ruby-value">:only</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">Description</span>.<span class="ruby-identifier">miniKey</span> }
+                                                      },
+                                                      <span class="ruby-identifier">methods</span><span class="ruby-operator">:</span> [<span class="ruby-value">:getAverageNote</span>, <span class="ruby-value">:likes</span>, <span class="ruby-value">:hasLiked</span>] ) }
+        <span class="ruby-keyword">end</span>
+        <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@returnValue</span>[<span class="ruby-value">:content</span>].<span class="ruby-identifier">size</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>)
+          <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">202</span>
+        <span class="ruby-keyword">else</span>
+          <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">200</span>
+        <span class="ruby-keyword">end</span>
+      <span class="ruby-keyword">rescue</span>
+        <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">504</span>
+        <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:service_unavailable</span>
+      <span class="ruby-keyword">end</span>
+      <span class="ruby-identifier">sendJson</span>
+    <span class="ruby-keyword">end</span></code></pre>
 						</div>
 										</div>
 
@@ -518,14 +541,16 @@ and the artist</p>
 </li></ul>					
 											<div class="method-source-code" id="show-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/albums_controller.rb, line 70</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/albums_controller.rb, line 87</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">show</span>
   <span class="ruby-keyword">begin</span>
-    <span class="ruby-identifier">album</span> = <span class="ruby-constant">Album</span>.<span class="ruby-identifier">find_by_id</span>(<span class="ruby-ivar">@id</span>)
+    <span class="ruby-identifier">album</span> = <span class="ruby-constant">Album</span>.<span class="ruby-identifier">eager_load</span>([<span class="ruby-value">:user</span>, <span class="ruby-value">:musics</span>, <span class="ruby-value">:descriptions</span>]).<span class="ruby-identifier">find_by_id</span>(<span class="ruby-ivar">@id</span>)
     <span class="ruby-keyword">if</span> (<span class="ruby-operator">!</span><span class="ruby-identifier">album</span>)
       <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">502</span>
       <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:not_found</span>
     <span class="ruby-keyword">else</span>
+      <span class="ruby-constant">Music</span>.<span class="ruby-identifier">fillAverageNote</span> <span class="ruby-identifier">album</span>.<span class="ruby-identifier">musics</span>
+      <span class="ruby-constant">Album</span>.<span class="ruby-identifier">fillLikes</span> [<span class="ruby-identifier">album</span>], <span class="ruby-ivar">@security</span>, <span class="ruby-ivar">@user_id</span>
       <span class="ruby-ivar">@returnValue</span> = { <span class="ruby-identifier">content</span><span class="ruby-operator">:</span> <span class="ruby-identifier">album</span>.<span class="ruby-identifier">as_json</span>(<span class="ruby-value">:only</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">Album</span>.<span class="ruby-identifier">miniKey</span>, <span class="ruby-value">:include</span> =<span class="ruby-operator">&gt;</span> {
                                                 <span class="ruby-value">:musics</span> =<span class="ruby-operator">&gt;</span> {
                                                   <span class="ruby-value">:only</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">Music</span>.<span class="ruby-identifier">miniKey</span>,
@@ -535,7 +560,7 @@ and the artist</p>
                                                 <span class="ruby-identifier">descriptions</span><span class="ruby-operator">:</span> {  <span class="ruby-value">:only</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">Description</span>.<span class="ruby-identifier">miniKey</span> },
                                                 <span class="ruby-identifier">genres</span><span class="ruby-operator">:</span> { <span class="ruby-value">:only</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">Genre</span>.<span class="ruby-identifier">miniKey</span> }
                                               },
-                                              <span class="ruby-identifier">methods</span><span class="ruby-operator">:</span> <span class="ruby-value">:getAverageNote</span>) }
+                                              <span class="ruby-identifier">methods</span><span class="ruby-operator">:</span> [<span class="ruby-value">:getAverageNote</span>, <span class="ruby-value">:likes</span>, <span class="ruby-value">:hasLiked</span>]) }
       <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">200</span>
     <span class="ruby-keyword">end</span>
   <span class="ruby-keyword">rescue</span>
@@ -576,6 +601,7 @@ and the artist</p>
 	<ul>
 			<li><a href="../API.html">API</a></li>
 			<li><a href="../API/AlbumsController.html">API::AlbumsController</a></li>
+			<li><a href="../API/AmbiancesController.html">API::AmbiancesController</a></li>
 			<li><a href="../API/ApiController.html">API::ApiController</a></li>
 			<li><a href="../API/ApisecurityController.html">API::ApisecurityController</a></li>
 			<li><a href="../API/BattlesController.html">API::BattlesController</a></li>
@@ -584,6 +610,7 @@ and the artist</p>
 			<li><a href="../API/GenresController.html">API::GenresController</a></li>
 			<li><a href="../API/InfluencesController.html">API::InfluencesController</a></li>
 			<li><a href="../API/LanguagesController.html">API::LanguagesController</a></li>
+			<li><a href="../API/LikesController.html">API::LikesController</a></li>
 			<li><a href="../API/ListeningsController.html">API::ListeningsController</a></li>
 			<li><a href="../API/MessagesController.html">API::MessagesController</a></li>
 			<li><a href="../API/MusicsController.html">API::MusicsController</a></li>
@@ -599,11 +626,14 @@ and the artist</p>
 			<li><a href="../Address.html">Address</a></li>
 			<li><a href="../AdminUser.html">AdminUser</a></li>
 			<li><a href="../Album.html">Album</a></li>
+			<li><a href="../Albumslike.html">Albumslike</a></li>
+			<li><a href="../Ambiance.html">Ambiance</a></li>
 			<li><a href="../Attachment.html">Attachment</a></li>
 			<li><a href="../Battle.html">Battle</a></li>
 			<li><a href="../Cart.html">Cart</a></li>
 			<li><a href="../Commentary.html">Commentary</a></li>
 			<li><a href="../Concert.html">Concert</a></li>
+			<li><a href="../Concertslike.html">Concertslike</a></li>
 			<li><a href="../Description.html">Description</a></li>
 			<li><a href="../Feedback.html">Feedback</a></li>
 			<li><a href="../Follow.html">Follow</a></li>
@@ -621,6 +651,7 @@ and the artist</p>
 			<li><a href="../MusicNote.html">MusicNote</a></li>
 			<li><a href="../News.html">News</a></li>
 			<li><a href="../NewsTitle.html">NewsTitle</a></li>
+			<li><a href="../Newslike.html">Newslike</a></li>
 			<li><a href="../Newstext.html">Newstext</a></li>
 			<li><a href="../Notification.html">Notification</a></li>
 			<li><a href="../Pack.html">Pack</a></li>
@@ -633,6 +664,7 @@ and the artist</p>
 			<li><a href="../PurchasedAlbum.html">PurchasedAlbum</a></li>
 			<li><a href="../PurchasedMusic.html">PurchasedMusic</a></li>
 			<li><a href="../PurchasedPack.html">PurchasedPack</a></li>
+			<li><a href="../Tool.html">Tool</a></li>
 			<li><a href="../Tweet.html">Tweet</a></li>
 			<li><a href="../User.html">User</a></li>
 			<li><a href="../Vote.html">Vote</a></li>

@@ -21,25 +21,16 @@
 
         <DataTemplate x:Key="MusicTemplate">
             <Grid Height="70" Margin="0,0,0,0" Tapped="UIElement_OnTapped">
-                <Border BorderThickness="0,0,0,1" Width="350" BorderBrush="#7bc2fa" />
+                <Border BorderThickness="0,0,0,1" Width="350" BorderBrush="White" />
                 <TextBlock x:Name="MusicTitle" Text="{Binding Path=title}" Foreground="#40a8e2" FontSize="25"
-                           Margin="50,0,0,0" />
-                <ratingControl:Rating Height="25" Width="125" Margin="50,10,0,0" VerticalAlignment="Bottom"
-                                      HorizontalAlignment="Left" ReadOnly="True" Background="Transparent"
-                                      RatingItemCount="5" Value="{Binding Path=getAverageNote, Mode=TwoWay}">
-                    <ratingControl:Rating.FilledItemStyle>
-                        <Style TargetType="ratingControl:RatingItem">
-                            <Setter Property="Background" Value="Goldenrod" />
-                        </Style>
-                    </ratingControl:Rating.FilledItemStyle>
-                    <ratingControl:Rating.UnfilledItemStyle>
-                        <Style TargetType="ratingControl:RatingItem">
-                            <Setter Property="Background" Value="Gray" />
-                        </Style>
-                    </ratingControl:Rating.UnfilledItemStyle>
-                </ratingControl:Rating>
+                           Margin="90,0,0,0" VerticalAlignment="Center" />
+                <Ellipse Grid.Column="0" Height="60" Width="60" VerticalAlignment="Center" HorizontalAlignment="Left">
+                    <Ellipse.Fill>
+                        <ImageBrush ImageSource="{Binding Path=album.imageAlbum}" AlignmentX="Center" AlignmentY="Center" />
+                    </Ellipse.Fill>
+                </Ellipse>
                 <Image x:Name="PlayImage" Source="../Resources/Icones/play.png" Height="30" Tapped="PlayImage_OnTapped"
-                       VerticalAlignment="Center" HorizontalAlignment="Left" />
+                       VerticalAlignment="Center" HorizontalAlignment="Right" />
                 <FlyoutBase.AttachedFlyout>
                     <MenuFlyout>
                         <MenuFlyoutItem Text="Add to playlist" x:Name="ItemPlaylist" Click="ItemPlaylist_OnClick" />
@@ -53,19 +44,22 @@
         <DataTemplate x:Key="ArtisteTemplate">
             <Grid Width="350" x:Name="ArtisteGridTemplate">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="80" />
+                    <ColumnDefinition Width="100" />
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
-                <Image Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left"
-                       Source="../Resources/Icones/profil.jpg" Height="80" Width="80" />
+                <Ellipse Grid.Column="0" Height="80" Width="80">
+                    <Ellipse.Fill>
+                        <ImageBrush ImageSource="{Binding Path=profilImage}" AlignmentX="Center" AlignmentY="Center" />
+                    </Ellipse.Fill>
+                </Ellipse>
                 <TextBlock Grid.Column="1" Text="{Binding Path=username}" Foreground="White" Margin="15,0,0,0"
-                           FontSize="25" />
+                           FontSize="25" VerticalAlignment="Center" />
             </Grid>
         </DataTemplate>
     </Page.Resources>
 
     <Grid>
-        <Pivot x:Name="PivotGlobal" HeaderTemplate="{StaticResource SizeHeaderGlobalPivot}" Foreground="Transparent"
+        <Pivot Margin="0,20,0,0" x:Name="PivotGlobal" HeaderTemplate="{StaticResource SizeHeaderGlobalPivot}" Foreground="Transparent"
                RenderTransformOrigin="0.5,0.5" Style="{StaticResource PivotStyle1}">
             <PivotItem x:Uid="InfluencePivot" Header="">
                 <ListBox Background="Transparent" x:Name="ListBoxGenre" ItemsSource="{Binding ListInfluences}"

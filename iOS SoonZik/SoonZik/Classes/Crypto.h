@@ -12,7 +12,7 @@
 
 @interface Crypto : NSObject
 
-+ (NSString *)getKey:(int)userID;
++ (NSString *)getKey;
 + (NSString*)sha256HashFor:(NSString*)input;
 
 @end

@@ -15,7 +15,6 @@
     NSDictionary *json = [Request getRequest:url];
     NSDictionary *content = [json objectForKey:@"content"];
     
-    NSLog(@"json genre : %@", content);
     if (content.count == 0) {
         return [[Genre alloc] init];
     }

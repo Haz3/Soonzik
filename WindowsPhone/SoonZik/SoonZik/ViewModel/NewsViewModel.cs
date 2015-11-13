@@ -4,12 +4,13 @@ using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using Windows.ApplicationModel.Core;
 using Windows.UI.Core;
-using Windows.UI.Xaml;
+using Windows.UI.Xaml.Media.Imaging;
 using Coding4Fun.Toolkit.Controls;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using SoonZik.Controls;
 using SoonZik.HttpRequest;
+using SoonZik.Utils;
 using SoonZik.Views;
 using News = SoonZik.HttpRequest.Poco.News;
 
@@ -23,7 +24,6 @@ namespace SoonZik.ViewModel
         {
             _listNews = new ObservableCollection<News>();
             Charge();
-            ShareTapped = new RelayCommand(ShareTappedExecute);
             ItemClickCommand = new RelayCommand(ItemClickExecute);
         }
 
@@ -45,8 +45,6 @@ namespace SoonZik.ViewModel
         }
 
         private ObservableCollection<News> _listNews;
-
-        public RelayCommand ShareTapped { get; set; }
 
         private News _selectedNews;
 
@@ -80,22 +78,24 @@ namespace SoonZik.ViewModel
 
         private void ItemClickExecute()
         {
-            DetailSelectedNews = SelectedNews;
-            GlobalMenuControl.SetChildren(new NewsDetail());
-        }
-
-        private void ShareTappedExecute()
-        {
-            var newsBody = new NewsSharePopup(SelectedNews);
-            MessagePrompt = new MessagePrompt
+            var get = new HttpRequestGet();
+            ValidateKey.GetValideKey();
+            var res = get.GetSecureObject(new News(), "news", SelectedNews.id.ToString(), Singleton.Singleton.Instance().SecureKey,
+                Singleton.Singleton.Instance().CurrentUser.id.ToString());
+            res.ContinueWith(delegate(Task<object> tmp)
             {
-                IsAppBarVisible = false,
-                VerticalAlignment = VerticalAlignment.Center,
-                Body = newsBody,
-                Opacity = 0.6
-            };
-            MessagePrompt.ActionPopUpButtons.Clear();
-            MessagePrompt.Show();
+                var news = tmp.Result as News;
+                if (news != null)
+                {
+                    CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
+                        () =>
+                        {
+                            NewsDetailViewModel.TheNews = news;
+                            NewsDetailViewModel.TheNews.attachments[0].url = new Uri(UrlImage + news.attachments[0].url, UriKind.RelativeOrAbsolute).ToString();
+                            GlobalMenuControl.SetChildren(new NewsDetail());
+                        });
+                }
+            });
         }
 
         public void Charge()
@@ -113,8 +113,7 @@ namespace SoonZik.ViewModel
                         CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
                             () =>
                             {
-                                item.attachments[0].url =
-                                    new Uri(UrlImage + item.attachments[0].url, UriKind.RelativeOrAbsolute).ToString();
+                                item.attachments[0].url = new Uri(UrlImage + item.attachments[0].url, UriKind.RelativeOrAbsolute).ToString();
                                 ListNews.Add(item);
                             });
                     }

@@ -55,18 +55,19 @@ namespace SoonZik.ViewModels
             load_users();
         }
 
-        async static public Task<ObservableCollection<Tweet>> load_flux_tweets()
+        async static public Task<List<Tweet>> load_flux_tweets()
         {
             Exception exception = null;
-            ObservableCollection<Tweet> tweetlist = new ObservableCollection<Tweet>();
+            //ObservableCollection<Tweet> tweetlist = new ObservableCollection<Tweet>();
 
             try
             {
                 var tweets = (List<Tweet>)await Http_get.get_object(new List<Tweet>(), "tweets/flux?user_id=" + Singleton.Instance.Current_user.id.ToString() + "&secureKey=" + await Security.getSecureKey(Singleton.Instance.Current_user.id.ToString()));
 
-                foreach (var item in tweets)
-                    tweetlist.Insert(0, item); // LAST ON TOP
-                return tweetlist;
+                //foreach (var item in tweets)
+                //    tweetlist.Insert(0, item); // LAST ON TOP
+                //return tweetlist;
+                return tweets;
             }
             catch (Exception e)
             {

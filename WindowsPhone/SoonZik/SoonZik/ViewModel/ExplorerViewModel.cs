@@ -6,6 +6,7 @@ using System.Windows.Input;
 using Windows.ApplicationModel.Core;
 using Windows.UI.Core;
 using Windows.UI.Popups;
+using Windows.UI.Xaml.Media.Imaging;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using SoonZik.Controls;
@@ -134,7 +135,6 @@ namespace SoonZik.ViewModel
         public void LoadContent()
         {
             var request = new HttpRequestGet();
-
             try
             {
                 var listGenre = request.GetListObject(new List<Influence>(), "influences");
@@ -165,6 +165,7 @@ namespace SoonZik.ViewModel
                                     () =>
                                     {
                                         var art = obj.Result as Artist;
+                                        item.profilImage = new BitmapImage(new Uri(Constant.UrlImageUser + item.image, UriKind.RelativeOrAbsolute));
                                         if (art != null && art.artist)
                                             ListArtiste.Add(item);
                                     });
@@ -172,31 +173,24 @@ namespace SoonZik.ViewModel
                         }
                     }
                 });
-                var userKey = request.GetUserKey(Singleton.Singleton.Instance().CurrentUser.id.ToString());
-                userKey.ContinueWith(delegate(Task<object> task)
+                ValidateKey.GetValideKey();
+                var listZik = request.GetSuggest(new List<Music>(), Singleton.Singleton.Instance().SecureKey,
+                    Singleton.Singleton.Instance().CurrentUser.id.ToString());
+                listZik.ContinueWith(delegate(Task<object> tmp)
                 {
-                    var key = task.Result as string;
-                    if (key != null)
+                    var test = tmp.Result as List<Music>;
+                    if (test != null)
                     {
-                        var stringEncrypt = KeyHelpers.GetUserKeyFromResponse(key);
-                        _crypto =
-                            EncriptSha256.EncriptStringToSha256(Singleton.Singleton.Instance().CurrentUser.salt +
-                                                                stringEncrypt);
-                        var listZik = request.GetSuggest(new List<Music>(), _crypto,
-                            Singleton.Singleton.Instance().CurrentUser.id.ToString());
-                        listZik.ContinueWith(delegate(Task<object> tmp)
+                        foreach (var item in test)
                         {
-                            var test = tmp.Result as List<Music>;
-                            if (test != null)
-                            {
-                                foreach (var item in test)
+                            CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(
+                                CoreDispatcherPriority.Normal,
+                                () =>
                                 {
-                                    CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(
-                                        CoreDispatcherPriority.Normal,
-                                        () => { ListMusique.Add(item); });
-                                }
-                            }
-                        });
+                                    item.album.imageAlbum = new BitmapImage(new System.Uri(Constant.UrlImageAlbum + item.album.image, UriKind.RelativeOrAbsolute));
+                                    ListMusique.Add(item);
+                                });
+                        }
                     }
                 });
             }
@@ -209,30 +203,17 @@ namespace SoonZik.ViewModel
         private void AddMusicToCartExecute()
         {
             SelectedMusic = SelectedMusic;
-            var request = new HttpRequestGet();
             var post = new HttpRequestPost();
-            _cryptographic = "";
-            var userKey2 = request.GetUserKey(Singleton.Singleton.Instance().CurrentUser.id.ToString());
-            userKey2.ContinueWith(delegate(Task<object> task2)
+            ValidateKey.GetValideKey();
+            var res = post.SaveCart(SelectedMusic, null, Singleton.Singleton.Instance().SecureKey, Singleton.Singleton.Instance().CurrentUser);
+            res.ContinueWith(delegate(Task<string> tmp2)
             {
-                var key2 = task2.Result as string;
-                if (key2 != null)
+                var res2 = tmp2.Result;
+                if (res2 != null)
                 {
-                    var stringEncrypt = KeyHelpers.GetUserKeyFromResponse(key2);
-                    _cryptographic =
-                        EncriptSha256.EncriptStringToSha256(Singleton.Singleton.Instance().CurrentUser.salt +
-                                                            stringEncrypt);
+                    CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
+                        () => { new MessageDialog("Article ajoute au panier").ShowAsync(); });
                 }
-                var res = post.SaveCart(SelectedMusic, null, _cryptographic, Singleton.Singleton.Instance().CurrentUser);
-                res.ContinueWith(delegate(Task<string> tmp2)
-                {
-                    var res2 = tmp2.Result;
-                    if (res2 != null)
-                    {
-                        CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
-                            () => { new MessageDialog("Article ajoute au panier").ShowAsync(); });
-                    }
-                });
             });
         }
 

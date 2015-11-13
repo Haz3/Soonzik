@@ -54,8 +54,6 @@ SoonzikApp.controller('NotifsCtrl', ['$scope', 'SecureAuth', 'HTTPService', 'Not
 			}, function(error) {
 				NotificationService.error($rootScope.labels.FILE_NOTIFICATION_ASREAD_NOTIF_ERROR_MESSAGE);
 			});
-		}, function(error) {
-			NotificationService.error($rootScope.labels.FILE_NOTIFICATION_ASREAD_NOTIF_ERROR_MESSAGE);
 		});
 	}
 

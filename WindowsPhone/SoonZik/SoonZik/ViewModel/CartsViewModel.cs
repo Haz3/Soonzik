@@ -12,6 +12,7 @@ using Newtonsoft.Json.Linq;
 using SoonZik.Helpers;
 using SoonZik.HttpRequest;
 using SoonZik.HttpRequest.Poco;
+using SoonZik.Utils;
 
 namespace SoonZik.ViewModel
 {
@@ -118,46 +119,35 @@ namespace SoonZik.ViewModel
             _listCarts = new ObservableCollection<Carts>();
 
             var request = new HttpRequestGet();
-            var userKey = request.GetUserKey(Singleton.Singleton.Instance().CurrentUser.id.ToString());
-            userKey.ContinueWith(delegate(Task<object> task)
+
+            ValidateKey.GetValideKey();
+            var listCarts = request.GetItemFromCarts(new List<Carts>(), Singleton.Singleton.Instance().SecureKey,
+                Singleton.Singleton.Instance().CurrentUser);
+
+            listCarts.ContinueWith(delegate(Task<object> tmp)
             {
-                _key = task.Result as string;
-                if (_key != null)
+                var res = tmp.Result as List<Carts>;
+                if (res != null)
                 {
-                    var stringEncrypt = KeyHelpers.GetUserKeyFromResponse(_key);
-                    _cryptographic =
-                        EncriptSha256.EncriptStringToSha256(Singleton.Singleton.Instance().CurrentUser.salt +
-                                                            stringEncrypt);
-
-                    var listCarts = request.GetItemFromCarts(new List<Carts>(), _cryptographic,
-                        Singleton.Singleton.Instance().CurrentUser);
-
-                    listCarts.ContinueWith(delegate(Task<object> tmp)
+                    CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
                     {
-                        var res = tmp.Result as List<Carts>;
-                        if (res != null)
+                        foreach (var cart in res)
                         {
-                            CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
-                            {
-                                foreach (var cart in res)
+                            _listCarts.Add(cart);
+                            if (cart.albums != null)
+                                foreach (var album in cart.albums)
                                 {
-                                    _listCarts.Add(cart);
-                                    if (cart.albums != null)
-                                        foreach (var album in cart.albums)
-                                        {
-                                            ListAlbum.Add(album);
-                                            price += Double.Parse(album.price);
-                                        }
-                                    if (cart.musics != null)
-                                        foreach (var music in cart.musics)
-                                        {
-                                            ListMusique.Add(music);
-                                            price += Double.Parse(music.price);
-                                        }
+                                    ListAlbum.Add(album);
+                                    price += Double.Parse(album.price);
                                 }
-                                TotalPrice = "Total : " + price + " Euros";
-                            });
+                            if (cart.musics != null)
+                                foreach (var music in cart.musics)
+                                {
+                                    ListMusique.Add(music);
+                                    price += Double.Parse(music.price);
+                                }
                         }
+                        TotalPrice = "Total : " + price + " Euros";
                     });
                 }
             });
@@ -258,50 +248,40 @@ namespace SoonZik.ViewModel
         private void DeleteCommandExecute()
         {
             var request = new HttpRequestGet();
-            var userKey = request.GetUserKey(Singleton.Singleton.Instance().CurrentUser.id.ToString());
-            userKey.ContinueWith(delegate(Task<object> task)
+
+            ValidateKey.GetValideKey();
+            Carts cart = null;
+
+            foreach (var item in _listCarts)
             {
-                _key = task.Result as string;
-                if (_key != null)
+                if (SelectedAlbum != null && (item.albums.Count > 0 && item.albums[0].id == SelectedAlbum.id))
+                    cart = item;
+                else if (SelectedMusic != null &&
+                         (item.musics.Count > 0 && item.musics[0].id == SelectedMusic.id))
+                    cart = item;
+            }
+
+            var resDel = request.DeleteFromCart(cart, Singleton.Singleton.Instance().SecureKey, Singleton.Singleton.Instance().CurrentUser);
+
+            resDel.ContinueWith(delegate(Task<string> tmp)
+            {
+                var test = tmp.Result;
+                if (test != null)
                 {
-                    var stringEncrypt = KeyHelpers.GetUserKeyFromResponse(_key);
-                    _cryptographic =
-                        EncriptSha256.EncriptStringToSha256(Singleton.Singleton.Instance().CurrentUser.salt +
-                                                            stringEncrypt);
-
-                    Carts cart = null;
-
-                    foreach (var item in _listCarts)
+                    CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
                     {
-                        if (SelectedAlbum != null && (item.albums.Count > 0 && item.albums[0].id == SelectedAlbum.id))
-                            cart = item;
-                        else if (SelectedMusic != null &&
-                                 (item.musics.Count > 0 && item.musics[0].id == SelectedMusic.id))
-                            cart = item;
-                    }
-
-                    var resDel = request.DeleteFromCart(cart, _cryptographic, Singleton.Singleton.Instance().CurrentUser);
-
-                    resDel.ContinueWith(delegate(Task<string> tmp)
-                    {
-                        var test = tmp.Result;
-                        if (test != null)
+                        var stringJson = JObject.Parse(test).SelectToken("code").ToString();
+                        if (stringJson == "202")
                         {
-                            CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
-                            {
-                                var stringJson = JObject.Parse(test).SelectToken("code").ToString();
-                                if (stringJson == "202")
-                                {
-                                    new MessageDialog("Obj delete").ShowAsync();
-                                    Charge();
-                                }
-                                else
-                                    new MessageDialog("Delete Fail code: " + stringJson).ShowAsync();
-                            });
+                            new MessageDialog("Obj delete").ShowAsync();
+                            Charge();
                         }
+                        else
+                            new MessageDialog("Delete Fail code: " + stringJson).ShowAsync();
                     });
                 }
             });
+
         }
 
         #endregion

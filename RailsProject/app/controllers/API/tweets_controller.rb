@@ -10,8 +10,6 @@ module API
   # * flux        [get] - SECURE
   #
   class TweetsController < ApisecurityController
-    before_action :checkKey, only: [:destroy, :save, :flux]
-
   	# Retrieve all the tweets
     #
     # Route : /tweets
