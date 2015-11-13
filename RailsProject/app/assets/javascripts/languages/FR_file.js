@@ -83,7 +83,6 @@ var labels = {
 
 	// Player Controller
 	FILE_PLAYER_FIND_PLAYLIST_ERROR_MESSAGE: "Erreur : Impossible de récupérer vos listes de lecture",
-	FILE_PLAYER_DELETE_PLAYLIST_ERROR_MESSAGE: "Une erreur s'est produite à la suppression de la liste de lecture : ",
 	FILE_PLAYER_REMOVE_FROM_PLAYLIST_ERROR_MESSAGE: "Une erreur s'est produite à la suppression d'une musique d'une liste de lecture",
 	FILE_PLAYER_SAVE_IN_PLAYLIST_ERROR_MESSAGE: "Une erreur s'est produite à la sauvegarde d'une nouvelle musique dans une liste de lecture",
 	FILE_PLAYER_PLAY_MUSIC_ERROR_MESSAGE: "Une erreur s'est produite au chargement de la musique : ",
@@ -95,7 +94,6 @@ var labels = {
 	FILE_PLAYLIST_GET_PLAYLIST_ERROR_MESSAGE: "Une erreur s'est produite au chargement des informations de la liste de lecture",
 	FILE_PLAYLIST_GET_MUSIC_ERROR_MESSAGE: "Une erreur s'est produite au chargement des informations de la musique numéro ",
 	FILE_PLAYLIST_TMP_NAME_LABEL: "Playlist temporaire",
-	FILE_PLAYLIST_SAVE_PLAYLIST_ERROR_MESSAGE: "Une erreur s'est produite à la sauvegarde d'une nouvelle liste de lecture",
 	FILE_PLAYLIST_NEW_MUSIC_ERROR_MESSAGE: "Une erreur s'est produite à la sauvegarde d'une musique dans la liste de lecture",
 
 	// Search Controller
@@ -134,10 +132,6 @@ var labels = {
 	// Album Show View
 	DISPLAY_ALBUM_BY_LABEL: "Par ",
 	DISPLAY_ALBUM_ADD_TO_CART: "Ajouter au panier",
-	DISPLAY_ALBUM_ADD_PLAYLIST_BUTTON: "Ajouter à la liste de lecture",
-	DISPLAY_ALBUM_ADD_PLAYLIST_LABEL: "Ajouter",
-	DISPLAY_ALBUM_LISTEN_LABEL: "Ecouter",
-	DISPLAY_ALBUM_CLOSE_LABEL: "Fermer",
 	DISPLAY_ALBUM_SEND_COMMENT_BUTTON: "Commenter",
 
 	// Battle Index View
@@ -171,10 +165,6 @@ var labels = {
 	DISPLAY_PLAYER_MORE_LABEL: "Plus...",
 	DISPLAY_PLAYER_LESS_LABEL: "Moins...",
 	DISPLAY_PLAYER_GEOLOCATION_LABEL: "Geolocalisation",
-	DISPLAY_PLAYER_SHARE_LABEL: "Partager",
-	DISPLAY_PLAYER_SAVE_NEW_PLAYLIST_LABEL: "Sauvegarder comme nouvelle liste de lecture",
-	DISPLAY_PLAYER_SAVE_PLAYLIST_NAME_LABEL: "Sauvegarder la liste de lecture sous :",
-	DISPLAY_PLAYER_CLOSE_BUTTON: "Fermer",
 	DISPLAY_PLAYER_TITLE_LABEL: "Titre",
 	DISPLAY_PLAYER_PRICE_LABEL: "Prix",
 	DISPLAY_PLAYER_DURATION_LABEL: "Durée",
@@ -182,12 +172,6 @@ var labels = {
 	DISPLAY_PLAYER_ALBUM_LINK_LABEL: "Lien vers la page album",
 	DISPLAY_PLAYER_YOUR_PLAYLIST_LABEL: "Vos listes de lecture",
 	DISPLAY_PLAYER_NAME_LABEL: "Nom",
-	DISPLAY_PLAYER_REPLACE_PLAYLIST_BUTTON: "Remplacer la liste de lecture courante",
-	DISPLAY_PLAYER_ADD_CURRENT_PLAYLIST_BUTTON: "Ajouter à la liste de lecture courante",
-	DISPLAY_PLAYER_SHARE_PLAYLIST_BUTTON: "Partagez ce lien !",
-	DISPLAY_PLAYER_SURE_DELETE_BUTTON: "Êtes vous sûre de vouloir supprimer cette liste ?",
-	DISPLAY_PLAYER_YES_BUTTON: "Oui",
-	DISPLAY_PLAYER_NO_BUTTON: "Non",
 	DISPLAY_PLAYER_NEW_PLAYLIST_PLACEHOLDER: "Nouvelle playlist",
 
 	// Playlist view
@@ -195,13 +179,8 @@ var labels = {
 	DISPLAY_PLAYLIST_FROM_LABEL: "De",
 	DISPLAY_PLAYLIST_MUSICS_LABEL: "musiques",
 	DISPLAY_PLAYLIST_LISTEN_LABEL: "Ecouter",
+	DISPLAY_PLAYLIST_NEW_PLAYLIST_LABEL: "Sauvegarder sous...",
 	DISPLAY_PLAYLIST_SHARE_LABEL: "Partager",
-	DISPLAY_PLAYLIST_CLOSE_LABEL: "Fermer",
-	DISPLAY_PLAYLIST_NEW_PLAYLIST_LABEL: "Sauvegarder comme nouvelle liste de lecture",
-	DISPLAY_PLAYLIST_SAVE_AS_LABEL: "Sauvegarder la liste de lecture sous : ",
-	DISPLAY_PLAYLIST_SAVE_BUTTON: "Sauvegarder",
-	DISPLAY_PLAYLIST_ADD_PLAYLIST_LABEL: "Ajouter à la liste de lecture",
-	DISPLAY_PLAYLIST_ADD_PLAYLIST_BUTTON: "Ajouter",
 
 	// Search view
 	DISPLAY_SEARCH_FILTERS_LABEL: "Filtres",
@@ -418,8 +397,23 @@ var labels = {
   FILE_APP_LIKE_ERROR_MESSAGE: "Une erreur s'est produite lors de la mention 'J'aime'",
   FILE_APP_UNLIKE_ERROR_MESSAGE: "Une erreur s'est produite lors du retrait de la mention 'J'aime'",
 
-  // Tooltip
-  FILE_TOOLTIP_ADD_PLAYLIST_NOTIF_SUCCESS_PART_ONE: "La musique '",
-	FILE_TOOLTIP_ADD_PLAYLIST_NOTIF_SUCCESS_PART_TWO: "' a été ajouté à la liste de lecture",
+  // Tooltip Controller
 	FILE_TOOLTIP_ADD_PLAYLIST_ERROR_MESSAGE: "Une erreur s'est produite à l'ajout d'une musique dans une liste de lecture",
+	FILE_TOOLTIP_SAVE_PLAYLIST_ERROR_MESSAGE: "Une erreur s'est produite à la sauvegarde d'une nouvelle liste de lecture",
+	FILE_TOOLTIP_DELETE_PLAYLIST_ERROR_MESSAGE: "Une erreur s'est produite à la suppression de la liste de lecture : ",
+
+  // Tooltip View
+	DISPLAY_TOOLTIP_LISTEN_LABEL: "Ecouter",
+	DISPLAY_TOOLTIP_ADD_CURRENT_PLAYLIST_LABEL: "Ajouter à la liste de lecture",
+	DISPLAY_TOOLTIP_ADD_TO_PLAYLIST_LABEL: "Ajouter à une playlist",
+	DISPLAY_TOOLTIP_REPLACE_PLAYLIST_LABEL: "Remplacer la liste de lecture courante",
+	DISPLAY_TOOLTIP_CLOSE_LABEL: "Fermer",
+	DISPLAY_TOOLTIP_BACK_LABEL: "Retour",
+	DISPLAY_TOOLTIP_SHARE_LABEL: "Partager",
+	DISPLAY_TOOLTIP_NEW_PLAYLIST_LABEL: "Nouvelle playlist",
+	DISPLAY_TOOLTIP_NAME_LABEL: "Nom : ",
+	DISPLAY_TOOLTIP_SAVE_BUTTON: "Sauvegarder",
+	DISPLAY_TOOLTIP_SURE_DELETE_LABEL: "Êtes vous sûr ?",
+	DISPLAY_TOOLTIP_YES_LABEL: "Oui",
+	DISPLAY_TOOLTIP_NO_LABEL: "Non",
 }

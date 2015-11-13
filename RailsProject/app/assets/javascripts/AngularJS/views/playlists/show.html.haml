@@ -23,8 +23,8 @@
 							{{ labels.DISPLAY_PLAYLIST_SHARE_LABEL }}
 						.mytooltip.toolright{ "ng-show" => "tooltip == 'share'", "ng-include" => "'/assets/AngularJS/views/include/tooltip.html.haml'", "ng-controller" => "TooltipCtrl", "ng-init" => "tooltipInit(null, 3, 'http://lvh.me:3000/playlists/' + playlist_obj.id)" }
 					%li.relative{ "ng-if" => "user != false" }
-						.button.relative
-							%span{ "ng-click" => "setTooltip('saveAsNewPl')" }
+						%div
+							.button.relative{ "ng-click" => "setTooltip('saveAsNewPl')" }
 								%i.fi-save
 								{{ labels.DISPLAY_PLAYLIST_NEW_PLAYLIST_LABEL }}
 							.mytooltip.toolright{ "ng-show" => "tooltip == 'saveAsNewPl'", "ng-include" => "'/assets/AngularJS/views/include/tooltip.html.haml'", "ng-controller" => "TooltipCtrl", "ng-init" => "tooltipInit(null, 2, playlist_obj)" }

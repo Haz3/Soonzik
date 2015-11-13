@@ -198,11 +198,9 @@ SoonzikApp.run(['$route', '$rootScope', '$location', 'SecureAuth', 'HTTPService'
 
   $rootScope.setTooltip = function(music) {
   	$rootScope.tooltip = music;
-  	console.log($rootScope.tooltip, music);
   	if ($rootScope.tooltip != false) {
   		for (var i = 0 ; i < $rootScope.myPlaylists.length ; i++) {
   			for (var j = 0 ; j < $rootScope.myPlaylists[i].musics.length ; j++) {
-  				console.log(music.id, $rootScope.myPlaylists[i].musics[j].id);
   				if (music.id == $rootScope.myPlaylists[i].musics[j].id) {
   					$rootScope.myPlaylists[i].check = true;
   				}
@@ -231,7 +229,7 @@ SoonzikApp.run(['$route', '$rootScope', '$location', 'SecureAuth', 'HTTPService'
 	    		$rootScope.myPlaylists[i].extend = false;
 	    		$rootScope.myPlaylists[i].share = false;
 	    		$rootScope.myPlaylists[i].url = 'http://lvh.me:3000/playlists/' + $rootScope.myPlaylists[i].id;
-	    		
+
 	    		var duration = 0;
 	    		for (var j = 0 ; j < $rootScope.myPlaylists[i].musics.length ; j++) {
 	    			duration += $rootScope.myPlaylists[i].musics[j].duration;

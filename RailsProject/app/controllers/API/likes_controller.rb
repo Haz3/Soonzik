@@ -48,7 +48,6 @@ module API
           defineHttp :forbidden
       	end
       rescue
-        puts $!, $@
       	codeAnswer 504
         defineHttp :service_unavailable
       end

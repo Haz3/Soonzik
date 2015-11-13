@@ -25,7 +25,6 @@ SoonzikApp.controller("PlayerCtrl", ["$scope", "$rootScope", "HTTPService", "Not
 
   $scope.infomusic = { current: false, playlist: false };
   $scope.toDelete = false;
-  $scope.toRead = false;
   $scope.newItem = { name: "" }
   $scope.newPlaylistFromCurrent = { name: "" }
   $scope.more = { btn: false, pop: false };
@@ -197,8 +196,6 @@ SoonzikApp.controller("PlayerCtrl", ["$scope", "$rootScope", "HTTPService", "Not
 	  	$("#currentPlaylist").css("right", 0);
   	} else {
 	  	$("#currentPlaylist").css("right", -$("#currentPlaylist").width() - 100);
-	  	$scope.toRead = false;
-	  	unshareEverything();
   	}
   }
 
@@ -292,27 +289,6 @@ SoonzikApp.controller("PlayerCtrl", ["$scope", "$rootScope", "HTTPService", "Not
     return n(minutes) + ":" + n(seconds);
   }
 
-  $scope.removePlaylist = function(playlist) {
-  	SecureAuth.securedTransaction(function(key, user_id) {
-  		var params = [
-  			{ key: "id", value: playlist.id},
-  			{ key: "user_id", value: user_id},
-  			{ key: "secureKey", value: key }
-  		];
-  		HTTPService.destroyPlaylist(params).then(function() {
-        $rootScope.$broadcast("deletePlaylist", playlist);
-  			for (var indexOfMyPlaylist in $rootScope.myPlaylists) {
-  				if ($rootScope.myPlaylists[indexOfMyPlaylist].id == playlist.id) {
-  					$rootScope.myPlaylists.splice(indexOfMyPlaylist, 1);
-  					break;
-  				}
-  			}
-  		}, function(error) {
-  			NotificationService.error($rootScope.labels.FILE_PLAYER_DELETE_PLAYLIST_ERROR_MESSAGE + playlist.name);
-  		});
-  	});
-  }
-
   $scope.infoForMusic = function(music, panel) {
   	if (panel == "current") {
   		$scope.infomusic.current = music;
@@ -321,34 +297,32 @@ SoonzikApp.controller("PlayerCtrl", ["$scope", "$rootScope", "HTTPService", "Not
   	}
   }
 
-  $scope.addToCurrentPlaylist = function(playlist) {
-  	for (var i = 0 ; i < playlist.length ; i++) {
+  $scope.addToCurrentPlaylist = function(playlist_musics) {
+  	for (var i = 0 ; i < playlist_musics.length ; i++) {
   		var isIn = false;
   		for (var j = 0 ; j < $rootScope.playlist.length ; j++) {
-  			if ($rootScope.playlist[j].obj.id == playlist[i].id) { isIn = true; }
+  			if ($rootScope.playlist[j].obj.id == playlist_musics[i].id) { isIn = true; }
   		}
   		if (!isIn) {
-  			$rootScope.playlist.push({ title: playlist[i].title, id: playlist[i].id, obj: playlist[i] });
+  			$rootScope.playlist.push({ title: playlist_musics[i].title, id: playlist_musics[i].id, obj: playlist_musics[i] });
   		}
   	}
-    $scope.toRead = false;
   }
 
-  $scope.replaceToCurrentPlaylist = function(playlist) {
+  $scope.replaceToCurrentPlaylist = function(playlist_musics) {
   	var paused = $scope.paused;
   	$scope.wavesurfer.stop();
 	  $scope.wavesurfer.seekTo(0);
   	$scope.wavesurfer.load("");
   	$scope.wavesurfer.empty();
   	$rootScope.playlist = [];
-  	for (var i = 0 ; i < playlist.length ; i++) {
-  		$rootScope.playlist.push({ title: playlist[i].title, id: playlist[i].id, obj: playlist[i] });
+  	for (var i = 0 ; i < playlist_musics.length ; i++) {
+  		$rootScope.playlist.push({ title: playlist_musics[i].title, id: playlist_musics[i].id, obj: playlist_musics[i] });
   	}
   	$scope.indexPlaylist = 0;
   	if (paused == false) {
   		$scope.playFromPlaylist(0);
   	}
-  	$scope.toRead = false;
   }
 
   $scope.removeFromPlaylist = function(music, playlist) {
@@ -371,14 +345,6 @@ SoonzikApp.controller("PlayerCtrl", ["$scope", "$rootScope", "HTTPService", "Not
   			NotificationService.error($rootScope.labels.FILE_PLAYER_REMOVE_FROM_PLAYLIST_ERROR_MESSAGE);
   		});
   	});
-  }
-
-  $scope.unshare = function(myplaylist) {
-  	myplaylist.share = false;
-  }
-
-  $scope.readInfo = function(value) {
-  	$scope.toRead = value;
   }
 
   $scope.createPlaylist = function() {
@@ -407,12 +373,6 @@ SoonzikApp.controller("PlayerCtrl", ["$scope", "$rootScope", "HTTPService", "Not
         });
       });
     }
-  }
-
-  var unshareEverything = function() {
-  	for (var i = 0 ; i < $rootScope.myPlaylists.length ; i++) {
-  		$scope.unshare($rootScope.myPlaylists[i]);
-  	}
   }
 
   var securePlay = function(music) {

@@ -2,6 +2,9 @@ SoonzikApp.controller('TooltipCtrl', ['$scope', 'SecureAuth', 'HTTPService', 'No
 	$scope.loading = false;
 
 	$scope.tooltipMusic = null;
+	$scope.tooltipPlaylist = null;
+	$scope.tooltipCallbackAdd = function() {};
+	$scope.tooltipCallbackReplace = function() {};
 	$scope.state = 1;
 	$scope.type = 1;
 	$scope.idShare = null;
@@ -23,9 +26,13 @@ SoonzikApp.controller('TooltipCtrl', ['$scope', 'SecureAuth', 'HTTPService', 'No
 		if (t == 2) {
 			$scope.playlist = additionalParams;
 		} else if (t == 3) {
-			console.log(additionalParams);
 			$scope.idShare = additionalParams;
-			console.log(additionalParams);
+		} else if (t == 4) {
+			$scope.tooltipPlaylist = additionalParams[0];
+			$scope.tooltipCallbackAdd = additionalParams[1];
+			$scope.tooltipCallbackReplace = additionalParams[2];
+		} else if (t == 5) {
+			$scope.tooltipPlaylist = additionalParams;
 		}
 	}
 
@@ -101,7 +108,7 @@ SoonzikApp.controller('TooltipCtrl', ['$scope', 'SecureAuth', 'HTTPService', 'No
   			$rootScope.$broadcast("player:newPlaylist", pl);
 				$rootScope.tooltip = false;
   		}, function(error) {
-  			NotificationService.error($rootScope.labels.FILE_PLAYLIST_SAVE_PLAYLIST_ERROR_MESSAGE);
+  			NotificationService.error($rootScope.labels.FILE_TOOLTIP_SAVE_PLAYLIST_ERROR_MESSAGE);
   		});
   	});
   }
@@ -115,9 +122,30 @@ SoonzikApp.controller('TooltipCtrl', ['$scope', 'SecureAuth', 'HTTPService', 'No
 		$rootScope.tooltip = false;
 	}
 
-	$scope.addToCurrentPlaylist = function() {
+	$scope.addMusicToCurrentPlaylist = function() {
 		$rootScope.playlist.push({ title: $scope.tooltipMusic.title, id: $scope.tooltipMusic.id, obj: $scope.tooltipMusic });
 		$rootScope.tooltip = false;
 	}
+
+  $scope.removePlaylist = function() {
+  	SecureAuth.securedTransaction(function(key, user_id) {
+  		var params = [
+  			{ key: "id", value: $scope.tooltipPlaylist.id},
+  			{ key: "user_id", value: user_id},
+  			{ key: "secureKey", value: key }
+  		];
+  		HTTPService.destroyPlaylist(params).then(function() {
+        $rootScope.$broadcast("deletePlaylist", $scope.tooltipPlaylist);
+  			for (var indexOfMyPlaylist in $rootScope.myPlaylists) {
+  				if ($rootScope.myPlaylists[indexOfMyPlaylist].id == $scope.tooltipPlaylist.id) {
+  					$rootScope.myPlaylists.splice(indexOfMyPlaylist, 1);
+  					break;
+  				}
+  			}
+  		}, function(error) {
+  			NotificationService.error($rootScope.labels.FILE_PLAYER_DELETE_PLAYLIST_ERROR_MESSAGE + $scope.tooltipPlaylist.name);
+  		});
+  	});
+  }
 
 }]);

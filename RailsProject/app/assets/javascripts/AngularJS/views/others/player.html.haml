@@ -118,27 +118,17 @@
 				%hr
 				%div{ "ng-repeat" => "myplaylist in myPlaylists" }
 					.clearfix.playlistElement
-						.left.playlistName{ "ng-click" => "readInfo(myplaylist)" }
-							%i.fi-play-video
-							{{ myplaylist.name }} - {{ labels.DISPLAY_PLAYER_DURATION_LABEL }} : {{ formatedDuration(myplaylist.duration) }}
-						.pophover.popleft.radius-10{ "ng-if" => "toRead == myplaylist" }
-							%ul.no-bullet.clearfix
-								%li.small-12.choice{ "ng-click" => "replaceToCurrentPlaylist(myplaylist.musics)" }
-									{{ labels.DISPLAY_PLAYER_REPLACE_PLAYLIST_BUTTON }}
-								%li.small-12.choice{ "ng-click" => "toRead = addToCurrentPlaylist(myplaylist.musics)" }
-									{{ labels.DISPLAY_PLAYER_ADD_CURRENT_PLAYLIST_BUTTON }}
-								%li.small-12.choice{ "ng-click" => "readInfo(false)" }
-									{{ labels.DISPLAY_PLAYER_CLOSE_BUTTON }}
+						.left.playlistName.relative
+							%div{ "ng-click" => "setTooltip('popPlaylist' + myplaylist.id)" }
+								%i.fi-play-video
+								{{ myplaylist.name }} - {{ labels.DISPLAY_PLAYER_DURATION_LABEL }} : {{ formatedDuration(myplaylist.duration) }}
+							.mytooltip.toolright{ "ng-show" => "tooltip == 'popPlaylist' + myplaylist.id", "ng-include" => "'/assets/AngularJS/views/include/tooltip.html.haml'", "ng-controller" => "TooltipCtrl", "ng-init" => "tooltipInit(null, 4, [myplaylist, addToCurrentPlaylist, replaceToCurrentPlaylist])" }
 						.right.relative
 							%i.fi-share.blue{ "ng-click" => "setTooltip(myplaylist.url)" }
 							.mytooltip.toolright{ "ng-show" => "tooltip == myplaylist.url", "ng-include" => "'/assets/AngularJS/views/include/tooltip.html.haml'", "ng-controller" => "TooltipCtrl", "ng-init" => "tooltipInit(null, 3, myplaylist.url)" }
 							%i{ "ng-class" => "myplaylist.extend == false ? 'fi-plus green' : 'fi-minus red'", "ng-click" => "myplaylist.extend = !myplaylist.extend" }
-							%i.fi-x.red{ "ng-click" => "toDelete = myplaylist" }
-							.pophover.popright.radius-10{ "ng-show" => "myplaylist == toDelete" }
-								%ul.no-bullet.clearfix
-									%li.small-12.columns {{ labels.DISPLAY_PLAYER_SURE_DELETE_BUTTON }}
-									%li.choice.small-6.columns{ "ng-click" => "removePlaylist(myplaylist)" } {{ labels.DISPLAY_PLAYER_YES_BUTTON }}
-									%li.choice.small-6.columns{ "ng-click" => "toDelete = false" } {{ labels.DISPLAY_PLAYER_NO_BUTTON }}
+							%i.fi-x.red{ "ng-click" => "setTooltip('delete' + myplaylist.id)" }
+							.mytooltip.toolright{ "ng-show" => "tooltip == 'delete' + myplaylist.id", "ng-include" => "'/assets/AngularJS/views/include/tooltip.html.haml'", "ng-controller" => "TooltipCtrl", "ng-init" => "tooltipInit(null, 5, myplaylist)" }
 					%ul.no-bullet.aPlaylist{ "ng-class" => "myplaylist.extend ? 'open' : ''" }
 						%li.row{ "ng-repeat" => "music in myplaylist.musics" }
 							%i.fi-x.red.left{ "ng-click" => "removeFromPlaylist(music, myplaylist)" }

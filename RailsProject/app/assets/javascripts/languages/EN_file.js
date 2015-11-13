@@ -83,7 +83,6 @@ var labels = {
 
 	// Player Controller
 	FILE_PLAYER_FIND_PLAYLIST_ERROR_MESSAGE: "Error : Can't get your playlist",
-	FILE_PLAYER_DELETE_PLAYLIST_ERROR_MESSAGE: "Error while deleting the playlist : ",
 	FILE_PLAYER_REMOVE_FROM_PLAYLIST_ERROR_MESSAGE: "Error while deleting the music from the playlist",
 	FILE_PLAYER_SAVE_IN_PLAYLIST_ERROR_MESSAGE: "Error while saving a new music in the playlist",
 	FILE_PLAYER_PLAY_MUSIC_ERROR_MESSAGE: "Error while loading the music : ",
@@ -95,7 +94,6 @@ var labels = {
 	FILE_PLAYLIST_GET_PLAYLIST_ERROR_MESSAGE: "Error while loading information of the playlist",
 	FILE_PLAYLIST_GET_MUSIC_ERROR_MESSAGE: "Error while loading information of the music number ",
 	FILE_PLAYLIST_TMP_NAME_LABEL: "Temporary Playlist",
-	FILE_PLAYLIST_SAVE_PLAYLIST_ERROR_MESSAGE: "Error while saving a new playlist",
 	FILE_PLAYLIST_NEW_MUSIC_ERROR_MESSAGE: "Error while saving a new music in the playlist",
 
 	// Search Controller
@@ -134,10 +132,6 @@ var labels = {
 	// Album Show View
 	DISPLAY_ALBUM_BY_LABEL: "By ",
 	DISPLAY_ALBUM_ADD_TO_CART: "Add to cart",
-	DISPLAY_ALBUM_ADD_PLAYLIST_BUTTON: "Add to Playlist",
-	DISPLAY_ALBUM_ADD_PLAYLIST_LABEL: "Add",
-	DISPLAY_ALBUM_LISTEN_LABEL: "Listen",
-	DISPLAY_ALBUM_CLOSE_LABEL: "Close",
 	DISPLAY_ALBUM_SEND_COMMENT_BUTTON: "Comment",
 
 	// Battle Index View
@@ -171,10 +165,6 @@ var labels = {
 	DISPLAY_PLAYER_MORE_LABEL: "More...",
 	DISPLAY_PLAYER_LESS_LABEL: "Less...",
 	DISPLAY_PLAYER_GEOLOCATION_LABEL: "Geolocation",
-	DISPLAY_PLAYER_SHARE_LABEL: "Share",
-	DISPLAY_PLAYER_SAVE_NEW_PLAYLIST_LABEL: "Save as new Playlist",
-	DISPLAY_PLAYER_SAVE_PLAYLIST_NAME_LABEL: "Save the playlist as :",
-	DISPLAY_PLAYER_CLOSE_BUTTON: "Close",
 	DISPLAY_PLAYER_TITLE_LABEL: "Title",
 	DISPLAY_PLAYER_PRICE_LABEL: "Price",
 	DISPLAY_PLAYER_DURATION_LABEL: "Duration",
@@ -182,12 +172,6 @@ var labels = {
 	DISPLAY_PLAYER_ALBUM_LINK_LABEL: "Link to the album page",
 	DISPLAY_PLAYER_YOUR_PLAYLIST_LABEL: "Your playlists",
 	DISPLAY_PLAYER_NAME_LABEL: "Name",
-	DISPLAY_PLAYER_REPLACE_PLAYLIST_BUTTON: "Replace the current playlist",
-	DISPLAY_PLAYER_ADD_CURRENT_PLAYLIST_BUTTON: "Add to the current playlist",
-	DISPLAY_PLAYER_SHARE_PLAYLIST_BUTTON: "Share this link !",
-	DISPLAY_PLAYER_SURE_DELETE_BUTTON: "Are you sure to delete this playlist ?",
-	DISPLAY_PLAYER_YES_BUTTON: "Yes",
-	DISPLAY_PLAYER_NO_BUTTON: "No",
 	DISPLAY_PLAYER_NEW_PLAYLIST_PLACEHOLDER: "New Playlist",
 
 	// Playlist view
@@ -195,13 +179,8 @@ var labels = {
 	DISPLAY_PLAYLIST_FROM_LABEL: "From",
 	DISPLAY_PLAYLIST_MUSICS_LABEL: "musics",
 	DISPLAY_PLAYLIST_LISTEN_LABEL: "Listen",
+	DISPLAY_PLAYLIST_NEW_PLAYLIST_LABEL: "Save as...",
 	DISPLAY_PLAYLIST_SHARE_LABEL: "Share",
-	DISPLAY_PLAYLIST_CLOSE_LABEL: "Close",
-	DISPLAY_PLAYLIST_NEW_PLAYLIST_LABEL: "Save as new playlist",
-	DISPLAY_PLAYLIST_SAVE_AS_LABEL: "Save as : ",
-	DISPLAY_PLAYLIST_SAVE_BUTTON: "Save",
-	DISPLAY_PLAYLIST_ADD_PLAYLIST_LABEL: "Add to playlist",
-	DISPLAY_PLAYLIST_ADD_PLAYLIST_BUTTON: "Add",
 
 	// Search view
 	DISPLAY_SEARCH_FILTERS_LABEL: "Filters",
@@ -418,6 +397,23 @@ var labels = {
   FILE_APP_LIKE_ERROR_MESSAGE: "Une erreur s'est produite lors de la mention 'J'aime'",
   FILE_APP_UNLIKE_ERROR_MESSAGE: "Une erreur s'est produite lors du retrait de la mention 'J'aime'",
 
-  // Tooltip
-	FILE_TOOLTIP_ADD_PLAYLIST_ERROR_MESSAGE: "Error while saving a new music in the playlist",
+  // Tooltip Controller
+	FILE_TOOLTIP_ADD_PLAYLIST_ERROR_MESSAGE: "An error occured while adding a music to a playlist",
+	FILE_TOOLTIP_SAVE_PLAYLIST_ERROR_MESSAGE: "Error while saving a new playlist",
+	FILE_TOOLTIP_DELETE_PLAYLIST_ERROR_MESSAGE: "Error while deleting the playlist : ",
+
+  // Tooltip View
+	DISPLAY_TOOLTIP_LISTEN_LABEL: "Listen",
+	DISPLAY_TOOLTIP_ADD_CURRENT_PLAYLIST_LABEL: "Add to the current playlist",
+	DISPLAY_TOOLTIP_ADD_TO_PLAYLIST_LABEL: "Add to a playlist",
+	DISPLAY_TOOLTIP_REPLACE_PLAYLIST_LABEL: "Replace the current playlist",
+	DISPLAY_TOOLTIP_CLOSE_LABEL: "Close",
+	DISPLAY_TOOLTIP_BACK_LABEL: "Back",
+	DISPLAY_TOOLTIP_SHARE_LABEL: "Share",
+	DISPLAY_TOOLTIP_NEW_PLAYLIST_LABEL: "New playlist",
+	DISPLAY_TOOLTIP_NAME_LABEL: "Name : ",
+	DISPLAY_TOOLTIP_SAVE_BUTTON: "Save",
+	DISPLAY_TOOLTIP_SURE_DELETE_LABEL: "Are you sure ?",
+	DISPLAY_TOOLTIP_YES_LABEL: "Yes",
+	DISPLAY_TOOLTIP_NO_LABEL: "No",
 }
