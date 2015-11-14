@@ -2,6 +2,7 @@ SoonzikApp.controller('ChatCtrl', ['$scope', 'SecureAuth', 'HTTPService', '$time
 	var sizeChatWindow = 260;
 
 	$scope.available = false;
+	$scope.reduced = false;
 
 	$scope.current_user = SecureAuth.getCurrentUser();
 	$scope.filter = { username: "" }
@@ -318,6 +319,10 @@ SoonzikApp.controller('ChatCtrl', ['$scope', 'SecureAuth', 'HTTPService', '$time
 			}
 
 			calcWidth($scope.onWindows);
+		}
+
+		$scope.expandReduceChat = function() {
+			$scope.reduced = !$scope.reduced;
 		}
 
 		// click-click call

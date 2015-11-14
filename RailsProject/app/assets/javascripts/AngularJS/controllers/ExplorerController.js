@@ -1,4 +1,4 @@
-SoonzikApp.controller('ExplorerCtrl', ['$scope', "$routeParams", "HTTPService", "NotificationService", "$timeout", "$location", "$rootScope", function ($scope, $routeParams, HTTPService, NotificationService, $timeout, $location, $rootScope) {
+SoonzikApp.controller('ExplorerCtrl', ['$scope', "$routeParams", "HTTPService", "NotificationService", "$timeout", "$location", "$rootScope", 'SecureAuth', function ($scope, $routeParams, HTTPService, NotificationService, $timeout, $location, $rootScope, SecureAuth) {
 
 	$scope.loading = true;
 	$scope.loadingGenre = false;
@@ -79,7 +79,7 @@ SoonzikApp.controller('ExplorerCtrl', ['$scope', "$routeParams", "HTTPService", 
 				NotificationService.error($rootScope.labels.FILE_EXPLORER_GET_GENRE_ERROR_MESSAGE);
 			});
 
-			HTTPService.getGenre(genre.id, params).then(function(response) {
+			HTTPService.getGenre(genre.id, parameters).then(function(response) {
 				$scope.selectedGenre = response.data.content;
 				$location.path('/explorer/' + $scope.selectedInfluence.id + "/" + $scope.selectedGenre.id, false);
 				$scope.loadingGenre = false;

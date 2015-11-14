@@ -69,6 +69,7 @@
           %div
             %input{:type => "range", "ng-model" => "newValuePercentage.web", "ng-change" => "varRange('web')", "min" => "0", "max" => "100"}
             {{ realValue.web }}
+          %input{ type: "text", "ng-model" => "input.price", "ng-change" => "updatePrice()" }
           .button.expand.radius.success{ "ng-click" => "toPayment()" }
             {{ labels.DISPLAY_PACK_BUY_PACK }}
 

@@ -223,7 +223,7 @@ protected
       if (defined?(@user_id) && defined?(@secureKey))
         begin
           u = User.find_by_id(@user_id)
-          if (@secureKey == u.secureKey)
+          if (u != nil && @secureKey == u.secureKey)
             @security = true
             if (Time.at(u.token_update).to_i < Time.now.to_i)
               u.regenerateKey
@@ -231,7 +231,6 @@ protected
             end
           else
             codeAnswer 501
-            @httpCode = :unauthorized
           end
         rescue
           codeAnswer 504

@@ -7,6 +7,7 @@ SoonzikApp.controller('ListeningsCtrl', ['$scope', "$routeParams", 'SecureAuth',
 	$scope.countBeforeUpdate = 5;
 	$scope.isUpdating = false;
 	$scope.lastUpdate = null;
+	$scope.lastClicked = null;
 
 	// Some Data
 	$scope.position = {
@@ -104,6 +105,9 @@ SoonzikApp.controller('ListeningsCtrl', ['$scope', "$routeParams", 'SecureAuth',
 							$scope.circle.center = { latitude: position.coords.latitude, longitude: position.coords.longitude };
 							$scope.circleZone.center = { latitude: position.coords.latitude, longitude: position.coords.longitude };
 							$scope.location = 2;
+							$('.marker_labels').each(function(element) {
+								element.hide();
+							});
 						}, function(error) {
 							NotificationService.error($rootScope.labels.FILE_LISTENING_AROUND_ERROR_MESSAGE);
 						});
@@ -121,21 +125,35 @@ SoonzikApp.controller('ListeningsCtrl', ['$scope', "$routeParams", 'SecureAuth',
 
 	// To generate an unique new object
 	var generateCursor = function(obj) {
-		return {
+		var tmp = {
       latitude: obj.latitude,
       longitude: obj.longitude,
-      options: {
-      	animation: 2,
-      	labelClass: 'marker_labels',
-      	labelAnchor: '60 0',
-      	labelContent: "<p><a href='/musics/" + obj.music.id + "'>" + obj.music.title + "</a>" + $rootScope.labels.FILE_LISTENING_INPOPUP_LISTENED_LABEL + "<a href='/users/" + obj.user.id + "'>" + obj.user.username + "</a></p>" +
-      	"<p>" + obj.created_at + "</p>"
-      },
       idKey: obj.id,
       show: false,
       range: obj.distance,
-      date: obj.created_at
+      date: obj.created_at,
+      object: obj
     };
+
+    return tmp;
+	}
+
+	$scope.clickOnMarker = function(evt, evtName, data) {
+		if ($scope.lastClicked == data) {
+			$scope.lastClicked.options = {};
+			$scope.lastClicked = null;
+			return;
+		}
+		if ($scope.lastClicked)
+			$scope.lastClicked.options = {};
+    data.options = {
+    	animation: 2,
+    	labelClass: 'marker_labels',
+    	labelAnchor: '60 0',
+    	labelContent: "<p id='marker" + data.object.music.id + "'><a href='/musics/" + data.object.music.id + "'>" + data.object.music.title + "</a>" + $rootScope.labels.FILE_LISTENING_INPOPUP_LISTENED_LABEL + "<a href='/users/" + data.object.user.id + "'>" + data.object.user.username + "</a></p>" +
+    	"<p>" + data.object.created_at + "</p>"
+    },
+  	$scope.lastClicked = data;
 	}
 
 	// Callback of the slider
@@ -207,7 +225,7 @@ SoonzikApp.controller('ListeningsCtrl', ['$scope', "$routeParams", 'SecureAuth',
 				{ key: "from", value: $scope.lastUpdate.getTime() }
 			];
 
-			HTTPService.getListeningAround($scope.position.coords.latitude, $scope.position.coords.longitude, $scope.model.range, parameter).then(function(response) {
+			HTTPService.getListeningAround($scope.position.coords.latitude, $scope.position.coords.longitude, $scope.model.range, params).then(function(response) {
 
 				$scope.lastUpdate = new Date();
 				// Update

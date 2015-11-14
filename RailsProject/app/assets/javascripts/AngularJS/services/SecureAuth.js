@@ -24,14 +24,9 @@ SoonzikApp.factory('SecureAuth', ['$http', '$routeParams', '$location', '$cookie
           }, 500);
         } else {
           d = new Date();
-          var user = { id: null, token: null }
-          if (typeof $cookies.get("user_id") !== "undefined" &&
-              typeof $cookies.get("user_token") !== "undefined") {
-            user.id = $cookies.get("user_id");
-            user.token = $cookies.get("user_token");
-          }
+          var user = $rootScope.user;
 
-          if (last_update == null || last_update < d.getTime() || last_key == null && user.id != null && user.token != null) {
+          if (user != false && (last_update == null || last_update < d.getTime() || last_key == null) && user.id != null && user.token != null) {
             isUsed = true;
             /*
              * If we need a valid token
@@ -55,7 +50,11 @@ SoonzikApp.factory('SecureAuth', ['$http', '$routeParams', '$location', '$cookie
             /*
              * If we have a valid token
              */
-            securedFunctionSuccess(last_key, user.id);
+            if (user == false) {
+              securedFunctionSuccess(last_key, null);
+            } else {
+              securedFunctionSuccess(last_key, user.id);
+            }
           }
         }
       },
