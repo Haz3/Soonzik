@@ -14,6 +14,9 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import org.json.JSONException;
+
+import java.lang.reflect.InvocationTargetException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.List;
@@ -43,6 +46,43 @@ public class ConcertsAdapter extends ArrayAdapter<Object> {
 
         ImageView imageViewPicture = (ImageView) rowView.findViewById(R.id.concertpicture);
         imageViewPicture.setImageResource(R.drawable.ic_profile);
+
+        final ImageView likedConcert = (ImageView) rowView.findViewById(R.id.concert_like);
+        final TextView nbLikes = (TextView) rowView.findViewById(R.id.nb_likes);
+        nbLikes.setText(Integer.toString(ct.getLikes()));
+
+        if (ct.isHasLiked()) {
+            likedConcert.setImageResource(R.drawable.like);
+        } else {
+            likedConcert.setImageResource(R.drawable.unlike);
+        }
+        
+        likedConcert.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (ct.isHasLiked()) {
+                    User.unlikeContent("Concerts", ct.getId(), new ActiveRecord.OnJSONResponseCallback() {
+                        @Override
+                        public void onJSONResponse(boolean success, Object response, Class<?> classT) throws InvocationTargetException, NoSuchMethodException, java.lang.InstantiationException, IllegalAccessException, JSONException {
+                            likedConcert.setImageResource(R.drawable.unlike);
+                            ct.setHasLiked(!ct.isHasLiked());
+                            ct.setLikes(ct.getLikes() - 1);
+                            nbLikes.setText(Integer.toString(ct.getLikes()));
+                        }
+                    });
+                } else {
+                    User.likeContent("Concerts", ct.getId(), new ActiveRecord.OnJSONResponseCallback() {
+                        @Override
+                        public void onJSONResponse(boolean success, Object response, Class<?> classT) throws InvocationTargetException, NoSuchMethodException, java.lang.InstantiationException, IllegalAccessException, JSONException {
+                            likedConcert.setImageResource(R.drawable.like);
+                            ct.setHasLiked(!ct.isHasLiked());
+                            ct.setLikes(ct.getLikes() + 1);
+                            nbLikes.setText(Integer.toString(ct.getLikes()));
+                        }
+                    });
+                }
+            }
+        });
 
         TextView textViewArtist = (TextView) rowView.findViewById(R.id.artistconcert);
         textViewArtist.setText(ct.getUser().getUsername());

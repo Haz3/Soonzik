@@ -9,12 +9,32 @@
     <ImageView
         android:layout_width="50sp"
         android:layout_height="50sp"
-        android:id="@+id/imageMenu"
+        android:id="@+id/imageNews"
         android:src="@drawable/ic_news"
         android:contentDescription="@string/imgmenudescription"
         android:layout_marginLeft="15dp"
         android:layout_marginStart="15dp"
         android:layout_marginTop="5dp"/>
+
+    <ImageView
+        android:layout_width="16sp"
+        android:layout_height="16sp"
+        android:id="@+id/news_like"
+        android:src="@drawable/unlike"
+        android:contentDescription="@string/imgmenudescription"
+        android:layout_marginTop="6dp"
+        android:layout_below="@+id/imageNews"
+        android:layout_alignLeft="@+id/imageNews"
+        android:layout_alignStart="@+id/imageNews" />
+
+    <TextView
+        android:id="@+id/nb_likes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0"
+        android:layout_alignBottom="@+id/news_like"
+        android:layout_alignRight="@+id/imageNews"
+        android:layout_alignEnd="@+id/imageNews" />
 
     <TextView
         android:id="@+id/title"
@@ -23,11 +43,11 @@
         android:text="Le titre de ma news"
         android:textSize="25sp"
         android:textStyle="bold"
-        android:layout_marginLeft="15dp"
-        android:layout_marginStart="15dp"
-        android:layout_alignParentTop="true"
-        android:layout_toRightOf="@+id/imageMenu"
-        android:layout_toEndOf="@+id/imageMenu">
+        android:layout_below="@+id/date"
+        android:layout_toRightOf="@+id/imageNews"
+        android:layout_toEndOf="@+id/imageNews"
+        android:layout_marginLeft="39dp"
+        android:layout_marginStart="39dp">
     </TextView>
 
     <TextView
@@ -39,15 +59,5 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
-
-    <TextView
-        android:id="@+id/content"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Le contenu de ma news en français"
-        android:textSize="20sp"
-        android:layout_below="@+id/title"
-        android:layout_alignLeft="@+id/title"
-        android:layout_alignStart="@+id/title" />
 
 </RelativeLayout>

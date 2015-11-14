@@ -15,7 +15,7 @@ public class ExplorerFragment extends Fragment {
     ExplorerPagerAdapter adapter;
     ViewPager pager;
     SlidingTabLayout tabs;
-    CharSequence Titles[] = {"Genre","Music", "Pack"};
+    CharSequence Titles[] = {"Influence","Music", "Pack"};
     int NumbOfTabs = 3;
 
     @Override

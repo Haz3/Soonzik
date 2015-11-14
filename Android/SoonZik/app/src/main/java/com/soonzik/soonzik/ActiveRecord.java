@@ -37,6 +37,7 @@ public class ActiveRecord {
     static User currentUser;
     static int userId = -1;
     static String secureKey = "";
+    static String last_update = "";
     private WebSocketRailsDispatcher dispatcher;
 
     public interface OnJSONResponseCallback {
@@ -67,111 +68,84 @@ public class ActiveRecord {
         return object[0];
     }
 
-    public static void index(String className, final OnJSONResponseCallback callback) throws ClassNotFoundException {
-
+    public static void index(final String className, final OnJSONResponseCallback callback) throws ClassNotFoundException {
         final Class<?> classT = Class.forName("com.soonzik.soonzik." + className);
 
-        AsyncHttpClient client = new AsyncHttpClient();
-        ;
-        char lastChar = className.charAt(className.length() - 1);
-        client.get(serverLink + className.toLowerCase() + (lastChar == 's' ? "" : "s"), new JsonHttpResponseHandler() {
+        RequestParams params = new RequestParams();
+        currentUser.getUserSecureKey(params, new User.OnJSONResponseCallback() {
             @Override
-            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                try {
-                    JSONArray data = response.getJSONArray("content");
-                    Log.v("INDEX JSON", data.toString());
+            public void onJSONResponse(boolean success, JSONObject response, RequestParams params) throws JSONException, UnsupportedEncodingException, NoSuchAlgorithmException {
+                ActiveRecord.secureCase(currentUser, params, response.getString("key"));
+                AsyncHttpClient client = new AsyncHttpClient();
 
-                    callback.onJSONResponse(true, data, classT);
-                } catch (JSONException | InstantiationException | IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
-                    e.printStackTrace();
-                }
-            }
-            @Override
-            public void onFailure(int statusCode, Header[]headers, Throwable e, JSONObject response) {
-                Log.v("FAIL", response.toString());
-            }
+                char lastChar = className.charAt(className.length() - 1);
+                client.get(serverLink + className.toLowerCase() + (lastChar == 's' ? "" : "s"), params, new JsonHttpResponseHandler() {
+                    @Override
+                    public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                        try {
+                            JSONArray data = response.getJSONArray("content");
+                            Log.v("INDEX JSON", data.toString());
 
+                            callback.onJSONResponse(true, data, classT);
+                        } catch (JSONException | InstantiationException | IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(int statusCode, Header[] headers, Throwable e, JSONObject response) {
+                        Log.v("FAIL", response.toString());
+                    }
+
+                });
+            }
         });
     }
 
-    public static void show(final String className, final int id, boolean secureMode, final OnJSONResponseCallback callback) throws ClassNotFoundException {
+    public static void show(final String className, final int id, final OnJSONResponseCallback callback) throws ClassNotFoundException {
 
         final Class<?> classT = Class.forName("com.soonzik.soonzik." + className);
 
-        if (secureMode) {
-            RequestParams params = new RequestParams();
-            currentUser.getUserSecureKey(params, new User.OnJSONResponseCallback() {
-                @Override
-                public void onJSONResponse(boolean success, JSONObject response, RequestParams params) throws JSONException, UnsupportedEncodingException, NoSuchAlgorithmException {
-                    ActiveRecord.secureCase(currentUser, params, response.getString("key"));
-                    AsyncHttpClient client = new AsyncHttpClient();
-                    char lastChar = className.charAt(className.length() - 1);
-                    client.get(serverLink + className.toLowerCase() + (lastChar == 's' ? "/" : "s/") + Integer.toString(id), params, new JsonHttpResponseHandler() {
+        RequestParams params = new RequestParams();
+        currentUser.getUserSecureKey(params, new User.OnJSONResponseCallback() {
+            @Override
+            public void onJSONResponse(boolean success, JSONObject response, RequestParams params) throws JSONException, UnsupportedEncodingException, NoSuchAlgorithmException {
+                ActiveRecord.secureCase(currentUser, params, response.getString("key"));
+                AsyncHttpClient client = new AsyncHttpClient();
+                char lastChar = className.charAt(className.length() - 1);
+                client.get(serverLink + className.toLowerCase() + (lastChar == 's' ? "/" : "s/") + Integer.toString(id), params, new JsonHttpResponseHandler() {
 
-                        @Override
-                        public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                            try {
-                                JSONObject obj = response.getJSONObject("content");
-                                Log.v("SHOW JSON", obj.toString());
+                    @Override
+                    public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                        try {
+                            JSONObject obj = response.getJSONObject("content");
+                            Log.v("SHOW JSON", obj.toString());
 
-                                callback.onJSONResponse(true, obj, classT);
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            } catch (NoSuchMethodException e) {
-                                e.printStackTrace();
-                            } catch (InstantiationException e) {
-                                e.printStackTrace();
-                            } catch (IllegalAccessException e) {
-                                e.printStackTrace();
-                            } catch (InvocationTargetException e) {
-                                e.printStackTrace();
-                            }
+                            callback.onJSONResponse(true, obj, classT);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        } catch (NoSuchMethodException e) {
+                            e.printStackTrace();
+                        } catch (InstantiationException e) {
+                            e.printStackTrace();
+                        } catch (IllegalAccessException e) {
+                            e.printStackTrace();
+                        } catch (InvocationTargetException e) {
+                            e.printStackTrace();
                         }
-
-                        @Override
-                        public void onFailure(int statusCode, Header[] headers, Throwable e, JSONObject response) {
-                            Log.v("FAIL", response.toString());
-                        }
-
-                    });
-                }
-            });
-        }
-        else {
-            AsyncHttpClient client = new AsyncHttpClient();
-            char lastChar = className.charAt(className.length() - 1);
-            client.get(serverLink + className.toLowerCase() + (lastChar == 's' ? "/" : "s/") + Integer.toString(id), new JsonHttpResponseHandler() {
-
-                @Override
-                public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                    try {
-                        JSONObject obj = response.getJSONObject("content");
-                        Log.v("SHOW JSON", obj.toString());
-
-                        callback.onJSONResponse(true, obj, classT);
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    } catch (NoSuchMethodException e) {
-                        e.printStackTrace();
-                    } catch (InstantiationException e) {
-                        e.printStackTrace();
-                    } catch (IllegalAccessException e) {
-                        e.printStackTrace();
-                    } catch (InvocationTargetException e) {
-                        e.printStackTrace();
                     }
-                }
 
-                @Override
-                public void onFailure(int statusCode, Header[] headers, Throwable e, JSONObject response) {
-                    Log.v("FAIL", response.toString());
-                }
+                    @Override
+                    public void onFailure(int statusCode, Header[] headers, Throwable e, JSONObject response) {
+                        Log.v("FAIL", response.toString());
+                    }
 
-            });
-        }
+                });
+            }
+        });
     }
 
-    public static void find(String className, Map<String, Object> paramsFind, boolean secureMode, final OnJSONResponseCallback callback) throws ClassNotFoundException {
+    public static void find(String className, Map<String, Object> paramsFind, final OnJSONResponseCallback callback) throws ClassNotFoundException {
 
         final ArrayList<Object> objectList = new ArrayList<Object>();
         final Class<?> classT = Class.forName("com.soonzik.soonzik." + className);
@@ -187,75 +161,44 @@ public class ActiveRecord {
         }
         Log.v("FIND PARAMS", linkParam);
 
-        if (secureMode) {
-            RequestParams params = new RequestParams();
-            final String finalLinkParam = linkParam;
-            currentUser.getUserSecureKey(params, new User.OnJSONResponseCallback() {
-                @Override
-                public void onJSONResponse(boolean success, JSONObject response, RequestParams params) throws JSONException, UnsupportedEncodingException, NoSuchAlgorithmException {
-                    ActiveRecord.secureCase(currentUser, params, response.getString("key"));
-                    AsyncHttpClient client = new AsyncHttpClient();
-                    client.get(serverLink + finalLinkParam, new JsonHttpResponseHandler() {
-                        @Override
-                        public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                            try {
-                                JSONArray data = response.getJSONArray("content");
-                                Log.v("FIND JSON", data.toString());
+        RequestParams params = new RequestParams();
+        final String finalLinkParam = linkParam;
+        currentUser.getUserSecureKey(params, new User.OnJSONResponseCallback() {
+            @Override
+            public void onJSONResponse(boolean success, JSONObject response, RequestParams params) throws JSONException, UnsupportedEncodingException, NoSuchAlgorithmException {
+                ActiveRecord.secureCase(currentUser, params, response.getString("key"));
+                AsyncHttpClient client = new AsyncHttpClient();
+                client.get(serverLink + finalLinkParam, new JsonHttpResponseHandler() {
+                    @Override
+                    public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                        try {
+                            JSONArray data = response.getJSONArray("content");
+                            Log.v("FIND JSON", data.toString());
 
-                                callback.onJSONResponse(true, data, classT);
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            } catch (NoSuchMethodException e) {
-                                e.printStackTrace();
-                            } catch (InstantiationException e) {
-                                e.printStackTrace();
-                            } catch (IllegalAccessException e) {
-                                e.printStackTrace();
-                            } catch (InvocationTargetException e) {
-                                e.printStackTrace();
-                            }
+                            callback.onJSONResponse(true, data, classT);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        } catch (NoSuchMethodException e) {
+                            e.printStackTrace();
+                        } catch (InstantiationException e) {
+                            e.printStackTrace();
+                        } catch (IllegalAccessException e) {
+                            e.printStackTrace();
+                        } catch (InvocationTargetException e) {
+                            e.printStackTrace();
                         }
-
-                        @Override
-                        public void onFailure(int statusCode, Header[] headers, Throwable e, JSONObject response) {
-                            Log.v("FAIL", response.toString());
-                        }
-                    });
-                }
-            });
-        }
-        else {
-            AsyncHttpClient client = new AsyncHttpClient();
-            client.get(serverLink + linkParam, new JsonHttpResponseHandler() {
-                @Override
-                public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                    try {
-                        JSONArray data = response.getJSONArray("content");
-                        Log.v("FIND JSON", data.toString());
-
-                        callback.onJSONResponse(true, data, classT);
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    } catch (NoSuchMethodException e) {
-                        e.printStackTrace();
-                    } catch (InstantiationException e) {
-                        e.printStackTrace();
-                    } catch (IllegalAccessException e) {
-                        e.printStackTrace();
-                    } catch (InvocationTargetException e) {
-                        e.printStackTrace();
                     }
-                }
 
-                @Override
-                public void onFailure(int statusCode, Header[] headers, Throwable e, JSONObject response) {
-                    Log.v("FAIL", response.toString());
-                }
-            });
-        }
+                    @Override
+                    public void onFailure(int statusCode, Header[] headers, Throwable e, JSONObject response) {
+                        Log.v("FAIL", response.toString());
+                    }
+                });
+            }
+        });
     }
 
-    public static void save(final String className, Map<String, String> data, boolean secureMode, final OnJSONResponseCallback callback) {
+    public static void save(final String className, Map<String, String> data, final OnJSONResponseCallback callback) {
 
         RequestParams params = new RequestParams();
         Map<String, String> paramList = new HashMap<String, String>();
@@ -265,84 +208,47 @@ public class ActiveRecord {
         }
         params.put(className.toLowerCase(), paramList);
 
-        if (secureMode) {
-            currentUser.getUserSecureKey(params, new User.OnJSONResponseCallback() {
-                @Override
-                public void onJSONResponse(boolean success, JSONObject response, RequestParams params) throws JSONException, UnsupportedEncodingException, NoSuchAlgorithmException {
-                    ActiveRecord.secureCase(currentUser, params, response.getString("key"));
-                    AsyncHttpClient client = new AsyncHttpClient();
+        currentUser.getUserSecureKey(params, new User.OnJSONResponseCallback() {
+            @Override
+            public void onJSONResponse(boolean success, JSONObject response, RequestParams params) throws JSONException, UnsupportedEncodingException, NoSuchAlgorithmException {
+                ActiveRecord.secureCase(currentUser, params, response.getString("key"));
+                AsyncHttpClient client = new AsyncHttpClient();
 
-                    char lastChar = className.charAt(className.length() - 1);
-                    client.post(serverLink + className.toLowerCase() + (lastChar == 's' ? "/save" : "s/save"), params, new JsonHttpResponseHandler() {
-                        @Override
-                        public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                            //Log.v("JSON", response.toString());
-                            try {
-                                final Class<?> classT = Class.forName("com.soonzik.soonzik." + className);
+                char lastChar = className.charAt(className.length() - 1);
+                client.post(serverLink + className.toLowerCase() + (lastChar == 's' ? "/save" : "s/save"), params, new JsonHttpResponseHandler() {
+                    @Override
+                    public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                        Log.v("JSON", response.toString());
+                        try {
+                            final Class<?> classT = Class.forName("com.soonzik.soonzik." + className);
 
-                                JSONObject obj = response.getJSONObject("content");
-                                Log.v("SAVE JSON", obj.toString());
+                            JSONObject obj = response.getJSONObject("content");
+                            Log.v("SAVE JSON", obj.toString());
 
-                                callback.onJSONResponse(true, obj, classT);
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            } catch (NoSuchMethodException e) {
-                                e.printStackTrace();
-                            } catch (InstantiationException e) {
-                                e.printStackTrace();
-                            } catch (IllegalAccessException e) {
-                                e.printStackTrace();
-                            } catch (InvocationTargetException e) {
-                                e.printStackTrace();
-                            } catch (ClassNotFoundException e) {
-                                e.printStackTrace();
-                            }
+                            callback.onJSONResponse(true, obj, classT);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        } catch (NoSuchMethodException e) {
+                            e.printStackTrace();
+                        } catch (InstantiationException e) {
+                            e.printStackTrace();
+                        } catch (IllegalAccessException e) {
+                            e.printStackTrace();
+                        } catch (InvocationTargetException e) {
+                            e.printStackTrace();
+                        } catch (ClassNotFoundException e) {
+                            e.printStackTrace();
                         }
-
-                        @Override
-                        public void onFailure(int statusCode, Header[] headers, Throwable e, JSONObject response) {
-                            Log.v("FAIL", response.toString());
-                            Log.v("FAIL", e.toString());
-                        }
-                    });
-                }
-            });
-        }
-        else {
-            AsyncHttpClient client = new AsyncHttpClient();
-            char lastChar = className.charAt(className.length() - 1);
-            client.post(serverLink + className.toLowerCase() + (lastChar == 's' ? "/save" : "s/save"), params, new JsonHttpResponseHandler() {
-                @Override
-                public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                    //Log.v("JSON", response.toString());
-                    try {
-                        final Class<?> classT = Class.forName("com.soonzik.soonzik." + className);
-
-                        JSONObject obj = response.getJSONObject("content");
-                        Log.v("SAVE JSON", obj.toString());
-
-                        callback.onJSONResponse(true, obj, classT);
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    } catch (NoSuchMethodException e) {
-                        e.printStackTrace();
-                    } catch (InstantiationException e) {
-                        e.printStackTrace();
-                    } catch (IllegalAccessException e) {
-                        e.printStackTrace();
-                    } catch (InvocationTargetException e) {
-                        e.printStackTrace();
-                    } catch (ClassNotFoundException e) {
-                        e.printStackTrace();
                     }
-                }
 
-                @Override
-                public void onFailure(int statusCode, Header[] headers, Throwable e, JSONObject response) {
-                    Log.v("FAIL", response.toString());
-                }
-            });
-        }
+                    @Override
+                    public void onFailure(int statusCode, Header[] headers, Throwable e, JSONObject response) {
+                        Log.v("FAIL", response.toString());
+                        Log.v("FAIL", e.toString());
+                    }
+                });
+            }
+        });
     }
 
     public static void update(final String className, Map<String, String> data, final OnJSONResponseCallback callback) throws UnsupportedEncodingException, NoSuchAlgorithmException, JSONException {
@@ -399,13 +305,13 @@ public class ActiveRecord {
     public static void destroy(final String className, final int id, final OnJSONResponseCallback callback) {
         RequestParams params = new RequestParams();
 
+        params.put("id", id);
         currentUser.getUserSecureKey(params, new User.OnJSONResponseCallback() {
-
             @Override
             public void onJSONResponse(boolean success, JSONObject response, RequestParams params) throws JSONException, UnsupportedEncodingException, NoSuchAlgorithmException {
                 ActiveRecord.secureCase(currentUser, params, response.getString("key"));
                 AsyncHttpClient client = new AsyncHttpClient();
-                params.put("id", id);
+
                 char lastChar = className.charAt(className.length() - 1);
                 client.get(serverLink + className.toLowerCase() + (lastChar == 's' ? "/destroy" : "s/destroy"), params, new JsonHttpResponseHandler() {
                     @Override
@@ -437,14 +343,64 @@ public class ActiveRecord {
         });
     }
 
+    public static void destroy(final String className, Map<String, String> data, final OnJSONResponseCallback callback) {
+
+        RequestParams params = new RequestParams();
+        Map<String, String> paramList = new HashMap<String, String>();
+
+        for (Map.Entry<String, String> entry : data.entrySet()) {
+            paramList.put(entry.getKey(), entry.getValue());
+        }
+        params.put(className.toLowerCase(), paramList);
+
+        currentUser.getUserSecureKey(params, new User.OnJSONResponseCallback() {
+            @Override
+            public void onJSONResponse(boolean success, JSONObject response, RequestParams params) throws JSONException, UnsupportedEncodingException, NoSuchAlgorithmException {
+                ActiveRecord.secureCase(currentUser, params, response.getString("key"));
+                AsyncHttpClient client = new AsyncHttpClient();
+
+                char lastChar = className.charAt(className.length() - 1);
+
+                client.get(serverLink + className.toLowerCase() + (lastChar == 's' ? "/destroy" : "s/destroy"), params, new JsonHttpResponseHandler() {
+                    @Override
+                    public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                        try {
+                            callback.onJSONResponse(true, null, null);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        } catch (NoSuchMethodException e) {
+                            e.printStackTrace();
+                        } catch (InstantiationException e) {
+                            e.printStackTrace();
+                        } catch (IllegalAccessException e) {
+                            e.printStackTrace();
+                        } catch (InvocationTargetException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(int statusCode, Header[] headers, Throwable e, JSONObject response) {
+                        Log.v("FAIL", response.toString());
+                        Log.v("FAIL", e.toString());
+                    }
+
+                    @Override
+                    public void onFailure(int statusCode, Header[] headers, String str, Throwable e) {
+                        Log.v("FAIL", e.toString());
+                        Log.v("FAIL", str);
+                    }
+                });
+            }
+        });
+    }
+
     public static void search(int offset, int limit, String query, String type, final OnJSONResponseCallback callback) {
         if (query.equals(""))
             return;
 
         RequestParams params = new RequestParams();
-        Map<String, String> paramList = new HashMap<String, String>();
 
-        AsyncHttpClient client = new AsyncHttpClient();
         if (!query.equals("")) {
             params.put("query", query);
         }
@@ -457,42 +413,52 @@ public class ActiveRecord {
         if (!type.equals("")) {
             params.put("type", type);
         }
-
-        client.get(serverLink + "search", params, new JsonHttpResponseHandler() {
+        currentUser.getUserSecureKey(params, new User.OnJSONResponseCallback() {
             @Override
-            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                Log.v("JSON search", response.toString());
-                try {
-                    final Class<?> classT = Class.forName("com.soonzik.soonzik." + "Search");
-                    JSONObject obj = response.getJSONObject("content");
+            public void onJSONResponse(boolean success, JSONObject response, RequestParams params) throws JSONException, UnsupportedEncodingException, NoSuchAlgorithmException {
+                ActiveRecord.secureCase(currentUser, params, response.getString("key"));
+                AsyncHttpClient client = new AsyncHttpClient();
 
-                    callback.onJSONResponse(true, obj, classT);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                } catch (NoSuchMethodException e) {
-                    e.printStackTrace();
-                } catch (InstantiationException e) {
-                    e.printStackTrace();
-                } catch (IllegalAccessException e) {
-                    e.printStackTrace();
-                } catch (InvocationTargetException e) {
-                    e.printStackTrace();
-                } catch (ClassNotFoundException e) {
-                    e.printStackTrace();
-                }
-            }
+                client.get(serverLink + "search", params, new JsonHttpResponseHandler() {
+                    @Override
+                    public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                        Log.v("JSON search", response.toString());
+                        try {
+                            final Class<?> classT = Class.forName("com.soonzik.soonzik." + "Search");
+                            JSONObject obj = response.getJSONObject("content");
 
-            @Override
-            public void onFailure(int statusCode, Header[] headers, Throwable e, JSONObject response) {
-                Log.v("FAIL", response.toString());
+                            callback.onJSONResponse(true, obj, classT);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        } catch (NoSuchMethodException e) {
+                            e.printStackTrace();
+                        } catch (InstantiationException e) {
+                            e.printStackTrace();
+                        } catch (IllegalAccessException e) {
+                            e.printStackTrace();
+                        } catch (InvocationTargetException e) {
+                            e.printStackTrace();
+                        } catch (ClassNotFoundException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(int statusCode, Header[] headers, Throwable e, JSONObject response) {
+                        Log.v("FAIL", response.toString());
+                    }
+                });
             }
         });
     }
 
-    public static void suggest(final int id, final OnJSONResponseCallback callback) {
+    public static void suggest(String type, int limit, final OnJSONResponseCallback callback) {
         RequestParams params = new RequestParams();
 
-        params.put("id", id);
+        params.put("type", type);
+        if (limit > 0) {
+            params.put("limit", limit);
+        }
 
         currentUser.getUserSecureKey(params, new User.OnJSONResponseCallback() {
 
@@ -501,7 +467,7 @@ public class ActiveRecord {
                 ActiveRecord.secureCase(currentUser, params, response.getString("key"));
                 AsyncHttpClient client = new AsyncHttpClient();
 
-                client.get(serverLink + "suggest", params, new JsonHttpResponseHandler() {
+                client.get(serverLink + "suggestv2", params, new JsonHttpResponseHandler() {
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                         Log.v("JSON SUGGEST", response.toString());
@@ -597,9 +563,13 @@ public class ActiveRecord {
         }
 
         char lastChar = className.charAt(className.length() - 1);
-        client.get(serverLink + className.toLowerCase() + (lastChar == 's' ? "" : "s/") + Integer.toString(id) + "/comments", params, new JsonHttpResponseHandler() {
+
+        client.get(serverLink + className.toLowerCase() + (lastChar == 's' ? "/" : "s/") + Integer.toString(id) + "/comments", params, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+
+                Log.v("GETCOMMENTS", response.toString());
+
                 try {
                     JSONArray data = response.getJSONArray("content");
                     Log.v("JSON GETCOMMENTS", data.toString());
@@ -609,9 +579,20 @@ public class ActiveRecord {
                     e.printStackTrace();
                 }
             }
+
             @Override
-            public void onFailure(int statusCode, Header[]headers, Throwable e, JSONObject response) {
+            public void onFailure(int statusCode, Header[] headers, Throwable e, JSONObject response) {
                 Log.v("FAIL", response.toString());
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, String str, Throwable e) {
+                String tmp = "";
+                for (Header h : headers) {
+                    tmp += h.toString();
+                }
+
+                Log.v("FAIL", tmp);
             }
 
         });
@@ -668,6 +649,7 @@ public class ActiveRecord {
     protected static void secureCase(User user, RequestParams params, String secureKey) throws NoSuchAlgorithmException, UnsupportedEncodingException {
 
         Log.v("SECUREHEY", secureKey);
+        ActiveRecord.secureKey = secureKey;
 
         String toHash = user.getSalt() + secureKey;
 
@@ -677,7 +659,7 @@ public class ActiveRecord {
 
         for (int i = 0; i < hash.length; i++) {
             String hex = Integer.toHexString(0xff & hash[i]);
-            if(hex.length() == 1) hexString.append('0');
+            if (hex.length() == 1) hexString.append('0');
             hexString.append(hex);
         }
 
@@ -685,7 +667,7 @@ public class ActiveRecord {
         params.put("secureKey", hexString);
     }
 
-    protected void createInstance( Object instance, JSONObject obj, Class<?> classT) {
+    protected void createInstance(Object instance, JSONObject obj, Class<?> classT) {
         Iterator itr = obj.keys();
         while (itr.hasNext()) {
             String attr = (String) itr.next();

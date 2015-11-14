@@ -13,7 +13,6 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import org.json.JSONArray;
-import org.json.JSONObject;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
@@ -40,7 +39,7 @@ public class PlaylistAddMusicDialogFragment extends DialogFragment {
         attribute.put("user_id", Integer.toString(ActiveRecord.currentUser.getId()));
         linkparams.put("attribute", attribute);
         try {
-            ActiveRecord.find("Playlist", linkparams, false, new ActiveRecord.OnJSONResponseCallback() {
+            ActiveRecord.find("Playlist", linkparams, new ActiveRecord.OnJSONResponseCallback() {
 
                 @Override
                 public void onJSONResponse(boolean success, Object response, Class<?> classT) throws InvocationTargetException, NoSuchMethodException, java.lang.InstantiationException, IllegalAccessException {

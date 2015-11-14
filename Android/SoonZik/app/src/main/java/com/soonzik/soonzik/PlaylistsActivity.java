@@ -34,7 +34,7 @@ public class PlaylistsActivity extends ActionBarActivity {
 
         tmp.put("user_id", Integer.toString(ActiveRecord.currentUser.getId()));
         tmp.put("name", "Test Playlist");
-        ActiveRecord.save("Playlist", tmp, true, new ActiveRecord.OnJSONResponseCallback() {
+        ActiveRecord.save("Playlist", tmp, new ActiveRecord.OnJSONResponseCallback() {
             @Override
             public void onJSONResponse(boolean success, Object response, Class<?> classT) throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
                 JSONObject obj = (JSONObject) response;

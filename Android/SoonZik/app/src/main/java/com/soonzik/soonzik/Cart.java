@@ -24,7 +24,7 @@ public class Cart extends ActiveRecord {
     private int id = -1;
     private ArrayList<Music> musics = null;
     private ArrayList<Album> albums = null;
-    private Date create_at = null;
+    private Date created_at = null;
     private Gift gift = null;
 
     public Cart() {}
@@ -126,7 +126,7 @@ public class Cart extends ActiveRecord {
                 "id = " + Integer.toString(id)
                 + " : musics = { " + (musics != null ? musics.toString() : "") + " }"
                 + " : albums = { " + (albums != null ? albums.toString() : "") + " }"
-                + " : date = " + (create_at != null ? create_at.toString() : "")
+                + " : date = " + (created_at != null ? created_at.toString() : "")
                 + " : gift = " + (gift != null ? gift.toString() : "")
                 );
     }
@@ -143,8 +143,8 @@ public class Cart extends ActiveRecord {
         return albums;
     }
 
-    public Date getCreate_at() {
-        return create_at;
+    public Date getCreated_at() {
+        return created_at;
     }
 
     public Gift getGift() {

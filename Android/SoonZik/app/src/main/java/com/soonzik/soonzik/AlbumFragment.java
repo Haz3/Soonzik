@@ -1,6 +1,5 @@
 package com.soonzik.soonzik;
 
-import android.app.Activity;
 import android.app.DialogFragment;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -9,19 +8,16 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by kevin_000 on 16/06/2015.
@@ -39,7 +35,7 @@ public class AlbumFragment extends Fragment {
         int id = this.getArguments().getInt("album_id");
 
         try {
-            ActiveRecord.show("Album", id, false, new ActiveRecord.OnJSONResponseCallback() {
+            ActiveRecord.show("Album", id, new ActiveRecord.OnJSONResponseCallback() {
                 @Override
                 public void onJSONResponse(boolean success, Object response, Class<?> classT) throws InvocationTargetException, NoSuchMethodException, java.lang.InstantiationException, IllegalAccessException {
                     JSONObject data = (JSONObject) response;
@@ -76,6 +72,43 @@ public class AlbumFragment extends Fragment {
 
                     TextView nbTitle = (TextView) view.findViewById(R.id.nbtitle);
                     nbTitle.setText(Integer.toString(ms.size()));
+
+                    final ImageView likedAlbum = (ImageView) view.findViewById(R.id.album_like);
+                    final TextView nbLikes = (TextView) view.findViewById(R.id.nb_likes);
+                    nbLikes.setText(Integer.toString(al.getLikes()));
+
+                    if (al.isHasLiked()) {
+                        likedAlbum.setImageResource(R.drawable.like);
+                    } else {
+                        likedAlbum.setImageResource(R.drawable.unlike);
+                    }
+
+                    likedAlbum.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            if (al.isHasLiked()) {
+                                User.unlikeContent("Albums", al.getId(), new ActiveRecord.OnJSONResponseCallback() {
+                                    @Override
+                                    public void onJSONResponse(boolean success, Object response, Class<?> classT) throws InvocationTargetException, NoSuchMethodException, java.lang.InstantiationException, IllegalAccessException, JSONException {
+                                        likedAlbum.setImageResource(R.drawable.unlike);
+                                        al.setHasLiked(!al.isHasLiked());
+                                        al.setLikes(al.getLikes() - 1);
+                                        nbLikes.setText(Integer.toString(al.getLikes()));
+                                    }
+                                });
+                            } else {
+                                User.likeContent("Albums", al.getId(), new ActiveRecord.OnJSONResponseCallback() {
+                                    @Override
+                                    public void onJSONResponse(boolean success, Object response, Class<?> classT) throws InvocationTargetException, NoSuchMethodException, java.lang.InstantiationException, IllegalAccessException, JSONException {
+                                        likedAlbum.setImageResource(R.drawable.like);
+                                        al.setHasLiked(!al.isHasLiked());
+                                        al.setLikes(al.getLikes() + 1);
+                                        nbLikes.setText(Integer.toString(al.getLikes()));
+                                    }
+                                });
+                            }
+                        }
+                    });
 
                     TextView price = (TextView) view.findViewById(R.id.price);
                     price.setText(Double.toString(al.getPrice()) + "$");

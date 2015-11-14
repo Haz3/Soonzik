@@ -13,6 +13,7 @@ public class Genre extends ActiveRecord {
     private String color_name = "";
     private String color_hexa = "";
     private ArrayList<Influence> influences = null;
+    private ArrayList<Music> musics = null;
 
     public Genre() {}
 
@@ -39,5 +40,29 @@ public class Genre extends ActiveRecord {
 
     public String getName() {
         return style_name;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public String getStyle_name() {
+        return style_name;
+    }
+
+    public String getColor_name() {
+        return color_name;
+    }
+
+    public String getColor_hexa() {
+        return color_hexa;
+    }
+
+    public ArrayList<Influence> getInfluences() {
+        return influences;
+    }
+
+    public ArrayList<Music> getMusics() {
+        return musics;
     }
 }

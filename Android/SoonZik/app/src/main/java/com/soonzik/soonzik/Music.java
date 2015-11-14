@@ -273,8 +273,13 @@ public class Music extends ActiveRecord {
                 + " : file = " + file
                 + " : limited = " + Boolean.toString(limited)
                 + " : User = { " + (user != null ? user.toString() : "") + " }"
-                + " : Genres = { " + (genres != null ? genres.toString() : "") + " }"
                 + " : Album = { " + (album != null ? album.toString() : "") + " }";
+        str += " : genres = [ ";
+        if (genres != null) {
+            for (Genre genre : genres) {
+                str += "{ " + genre.toString() + " } ";
+            }
+        }
         return (str);
     }
 

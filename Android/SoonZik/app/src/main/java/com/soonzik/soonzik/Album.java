@@ -18,7 +18,9 @@ public class Album extends ActiveRecord {
     private double note = 0.0;
     private ArrayList<Music> musics = null;
     private ArrayList<Description> descriptions = null;
-    private Boolean isPartial = true;
+    private boolean partial_albums = true;
+    private int likes = 0;
+    private boolean hasLiked = false;
 
     private String file = "";
 
@@ -38,7 +40,9 @@ public class Album extends ActiveRecord {
                 + " : image = " + image
                 + " : note = " + Double.toString(note)
                 + " : yearProd = " + Integer.toString(yearProd)
-                + " : is_partial = " + Boolean.toString(isPartial);
+                + " : is_partial = " + Boolean.toString(partial_albums)
+                + " : likes = " + Integer.toString(likes)
+                + " : hasLiked = " + Boolean.toString(hasLiked);
         str += " : Music = [ ";
         if (musics != null) {
             for (Music music : musics) {
@@ -95,5 +99,29 @@ public class Album extends ActiveRecord {
 
     public ArrayList<Music> getMusics() {
         return musics;
+    }
+
+    public ArrayList<Description> getDescriptions() {
+        return descriptions;
+    }
+
+    public boolean getPartial_albums() {
+        return partial_albums;
+    }
+
+    public int getLikes() {
+        return likes;
+    }
+
+    public boolean isHasLiked() {
+        return hasLiked;
+    }
+
+    public void setLikes(int likes) {
+        this.likes = likes;
+    }
+
+    public void setHasLiked(boolean hasLiked) {
+        this.hasLiked = hasLiked;
     }
 }

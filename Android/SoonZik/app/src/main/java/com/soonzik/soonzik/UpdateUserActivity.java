@@ -33,7 +33,7 @@ public class UpdateUserActivity extends Activity {
 
         final int id = intent.getIntExtra("userId", -1);
         try {
-            ActiveRecord.show("User", id, false, new ActiveRecord.OnJSONResponseCallback() {
+            ActiveRecord.show("User", id, new ActiveRecord.OnJSONResponseCallback() {
 
                 @Override
                 public void onJSONResponse(boolean success, Object response, Class<?> classT) throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {

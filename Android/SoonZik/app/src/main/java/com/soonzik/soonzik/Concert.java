@@ -13,6 +13,8 @@ public class Concert extends ActiveRecord {
     private Address address = null;
     private String url = "";
     private Date planification = null;
+    private int likes = 0;
+    private boolean hasLiked = false;
 
     public Concert() {}
 
@@ -25,10 +27,11 @@ public class Concert extends ActiveRecord {
         return (
                 "id = " + Integer.toString(id)
                         + " : User = { " + (user != null ? user.toString() : "") + " }"
-                + " : Address = { " + (address != null ? address.toString() : "") + " }"
+                        + " : Address = { " + (address != null ? address.toString() : "") + " }"
                         + " : url = " + url
-                + " : Date = " + (planification != null ? planification.toString() : "")
-                );
+                        + " : Date = " + (planification != null ? planification.toString() : "")
+                        + " : likes = " + Integer.toString(likes)
+                        + " : hasLiked = " + Boolean.toString(hasLiked));
     }
 
     public int getId() {
@@ -49,5 +52,21 @@ public class Concert extends ActiveRecord {
 
     public Date getPlanification() {
         return planification;
+    }
+
+    public int getLikes() {
+        return likes;
+    }
+
+    public boolean isHasLiked() {
+        return hasLiked;
+    }
+
+    public void setLikes(int likes) {
+        this.likes = likes;
+    }
+
+    public void setHasLiked(boolean hasLiked) {
+        this.hasLiked = hasLiked;
     }
 }

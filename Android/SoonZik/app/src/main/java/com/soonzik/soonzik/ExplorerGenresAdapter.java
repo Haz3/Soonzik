@@ -29,11 +29,11 @@ public class ExplorerGenresAdapter extends ArrayAdapter<Object> {
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         View rowView = inflater.inflate(R.layout.row_genres, parent, false);
-        Genre pl = (Genre) values.get(position);
+        Genre gr = (Genre) values.get(position);
 
         TextView textView = (TextView) rowView.findViewById(R.id.label);
 
-        textView.setText(pl.getName());
+        textView.setText(gr.getStyle_name());
         return rowView;
     }
 }

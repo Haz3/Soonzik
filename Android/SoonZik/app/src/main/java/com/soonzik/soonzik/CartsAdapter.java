@@ -137,6 +137,7 @@ public class CartsAdapter extends ArrayAdapter<Object> {
                         textViewNbObject.setText(Integer.toString(nbObj));
                         textViewPrice.setText(Float.toString(finalprice) + "$");
 
+
                         values.remove(position);
                         updateData();
                     }

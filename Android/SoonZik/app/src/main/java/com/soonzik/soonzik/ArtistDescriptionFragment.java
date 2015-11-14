@@ -1,24 +1,15 @@
 package com.soonzik.soonzik;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.lang.reflect.InvocationTargetException;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by kevin_000 on 12/06/2015.
@@ -32,7 +23,7 @@ public class ArtistDescriptionFragment extends Fragment {
         int id = this.getArguments().getInt("artist_id");
 
         try {
-            ActiveRecord.show("User", id, false, new ActiveRecord.OnJSONResponseCallback() {
+            ActiveRecord.show("User", id, new ActiveRecord.OnJSONResponseCallback() {
                 @Override
                 public void onJSONResponse(boolean success, Object response, Class<?> classT) throws InvocationTargetException, NoSuchMethodException, java.lang.InstantiationException, IllegalAccessException {
                     JSONObject data = (JSONObject) response;

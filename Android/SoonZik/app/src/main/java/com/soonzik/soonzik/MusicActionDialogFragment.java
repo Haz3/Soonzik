@@ -38,7 +38,7 @@ public class MusicActionDialogFragment extends DialogFragment {
         final int music_id = this.getArguments().getInt("music_id");
 
         try {
-            ActiveRecord.show("Music", music_id, false, new ActiveRecord.OnJSONResponseCallback() {
+            ActiveRecord.show("Music", music_id, new ActiveRecord.OnJSONResponseCallback() {
                 @Override
                 public void onJSONResponse(boolean success, Object response, Class<?> classT) throws InvocationTargetException, NoSuchMethodException, java.lang.InstantiationException, IllegalAccessException {
                     JSONObject obj = (JSONObject) response;
@@ -109,7 +109,7 @@ public class MusicActionDialogFragment extends DialogFragment {
                                     data.put("typeObj", "Music");
                                     data.put("obj_id", Integer.toString(music_id));
 
-                                    ActiveRecord.save("Cart", data, true, new ActiveRecord.OnJSONResponseCallback() {
+                                    ActiveRecord.save("Cart", data, new ActiveRecord.OnJSONResponseCallback() {
                                         @Override
                                         public void onJSONResponse(boolean success, Object response, Class<?> classT) throws InvocationTargetException, NoSuchMethodException, java.lang.InstantiationException, IllegalAccessException, JSONException {
                                             JSONObject obj = (JSONObject) response;

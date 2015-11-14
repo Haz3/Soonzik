@@ -5,7 +5,6 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -64,7 +63,7 @@ public class TweetsListFragment extends Fragment {
                 data.put("user_id", Integer.toString(ActiveRecord.currentUser.getId()));
                 data.put("msg", msg);
 
-                ActiveRecord.save("Tweet", data, true, new ActiveRecord.OnJSONResponseCallback() {
+                ActiveRecord.save("Tweet", data, new ActiveRecord.OnJSONResponseCallback() {
                     @Override
                     public void onJSONResponse(boolean success, Object response, Class<?> classT) throws InvocationTargetException, NoSuchMethodException, java.lang.InstantiationException, IllegalAccessException, JSONException {
                         JSONObject obj = (JSONObject) response;

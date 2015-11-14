@@ -27,7 +27,7 @@ public class PlaylistFragment extends Fragment {
         int id = this.getArguments().getInt("playlist_id");
 
         try {
-            ActiveRecord.show("Playlist", id, false, new ActiveRecord.OnJSONResponseCallback() {
+            ActiveRecord.show("Playlist", id, new ActiveRecord.OnJSONResponseCallback() {
                 @Override
                 public void onJSONResponse(boolean success, Object response, Class<?> classT) throws InvocationTargetException, NoSuchMethodException, java.lang.InstantiationException, IllegalAccessException {
                     JSONObject data = (JSONObject) response;

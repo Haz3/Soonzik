@@ -29,7 +29,7 @@ public class PackAlbumsFragment extends Fragment {
 
         v = inflater.inflate(R.layout.fragment_pack_album, container, false);
         try {
-            ActiveRecord.show("Pack", id, false, new ActiveRecord.OnJSONResponseCallback() {
+            ActiveRecord.show("Pack", id, new ActiveRecord.OnJSONResponseCallback() {
                 @Override
                 public void onJSONResponse(boolean success, Object response, Class<?> classT) throws InvocationTargetException, NoSuchMethodException, java.lang.InstantiationException, IllegalAccessException {
                     JSONObject data = (JSONObject) response;

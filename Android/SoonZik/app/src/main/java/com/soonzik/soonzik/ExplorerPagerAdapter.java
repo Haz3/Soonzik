@@ -24,8 +24,8 @@ public class ExplorerPagerAdapter extends FragmentStatePagerAdapter {
 
         switch (position) {
             case 0:
-                ExplorerGenresFragment genreFragment = new ExplorerGenresFragment();
-                return genreFragment;
+                ExplorerInfluencesFragment influenceFragment = new ExplorerInfluencesFragment();
+                return influenceFragment;
             case 1:
                 ExplorerMusicsFragment musicFragment = new ExplorerMusicsFragment();
                 return musicFragment;

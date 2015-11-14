@@ -5,14 +5,11 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import org.json.JSONObject;
 
 import java.lang.reflect.InvocationTargetException;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by kevin_000 on 12/06/2015.
@@ -27,7 +24,7 @@ public class PackAssociationFragment extends Fragment {
         v = inflater.inflate(R.layout.fragment_pack_association,container,false);
 
         try {
-            ActiveRecord.show("Pack", id, false, new ActiveRecord.OnJSONResponseCallback() {
+            ActiveRecord.show("Pack", id, new ActiveRecord.OnJSONResponseCallback() {
                 @Override
                 public void onJSONResponse(boolean success, Object response, Class<?> classT) throws InvocationTargetException, NoSuchMethodException, java.lang.InstantiationException, IllegalAccessException {
                     JSONObject data = (JSONObject) response;

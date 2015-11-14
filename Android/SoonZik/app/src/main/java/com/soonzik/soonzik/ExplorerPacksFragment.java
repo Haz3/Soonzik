@@ -23,7 +23,7 @@ public class ExplorerPacksFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View v =inflater.inflate(R.layout.fragment_explorer_pack,container,false);
+        final View v =inflater.inflate(R.layout.fragment_explorer_pack,container,false);
 
         try {
             ActiveRecord.index("Pack", new ActiveRecord.OnJSONResponseCallback() {
@@ -34,7 +34,7 @@ public class ExplorerPacksFragment extends Fragment {
                     final ArrayList<Object> packs = ActiveRecord.jsonArrayData(data, classT);
 
                     PacksAdapter packsAdapter = new PacksAdapter(getActivity(), packs);
-                    ListView lv = (ListView) getActivity().findViewById(R.id.packslistview);
+                    ListView lv = (ListView) v.findViewById(R.id.packslistview);
                     lv.setAdapter(packsAdapter);
 
                     lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {

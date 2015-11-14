@@ -41,7 +41,7 @@ public class AlbumActionDialogFragment extends DialogFragment {
         Log.v("ALBUM_ID 2", Integer.toString(album_id));
 
         try {
-            ActiveRecord.show("Album", album_id, false, new ActiveRecord.OnJSONResponseCallback() {
+            ActiveRecord.show("Album", album_id, new ActiveRecord.OnJSONResponseCallback() {
                 @Override
                 public void onJSONResponse(boolean success, Object response, Class<?> classT) throws InvocationTargetException, NoSuchMethodException, java.lang.InstantiationException, IllegalAccessException {
                     JSONObject obj = (JSONObject) response;
@@ -86,7 +86,7 @@ public class AlbumActionDialogFragment extends DialogFragment {
                                     data.put("typeObj", "Album");
                                     data.put("obj_id", Integer.toString(album_id));
 
-                                    ActiveRecord.save("Cart", data, true, new ActiveRecord.OnJSONResponseCallback() {
+                                    ActiveRecord.save("Cart", data, new ActiveRecord.OnJSONResponseCallback() {
                                         @Override
                                         public void onJSONResponse(boolean success, Object response, Class<?> classT) throws InvocationTargetException, NoSuchMethodException, java.lang.InstantiationException, IllegalAccessException, JSONException {
                                             JSONObject obj = (JSONObject) response;

@@ -28,7 +28,7 @@ public class FriendFragment extends Fragment{
         int id = this.getArguments().getInt("friend_id");
 
         try {
-            ActiveRecord.show("User", id, false, new ActiveRecord.OnJSONResponseCallback() {
+            ActiveRecord.show("User", id, new ActiveRecord.OnJSONResponseCallback() {
                 @Override
                 public void onJSONResponse(boolean success, Object response, Class<?> classT) throws InvocationTargetException, NoSuchMethodException, java.lang.InstantiationException, IllegalAccessException {
                     JSONObject data = (JSONObject) response;

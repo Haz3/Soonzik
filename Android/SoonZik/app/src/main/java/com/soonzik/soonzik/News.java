@@ -15,6 +15,8 @@ public class News extends ActiveRecord {
     private User user = null;
     private String content = "";
     private ArrayList<Attachment> attachments = null;
+    private int likes = 0;
+    private boolean hasLiked = false;
 
     public News() {}
 
@@ -28,7 +30,9 @@ public class News extends ActiveRecord {
                     + " : user = { " + (user != null ? user.toString() : "") + " }"
                     + " : created_at = " + (created_at != null ? created_at.toString() : "")
                     + " : title = " + title
-                    + " : content = " + content;
+                    + " : content = " + content
+                    + " : likes = " + Integer.toString(likes)
+                    + " : hasLiked = " + Boolean.toString(hasLiked);
         str += " : attachments = [ ";
         if (attachments != null) {
             for (Attachment attachment : attachments) {
@@ -61,5 +65,21 @@ public class News extends ActiveRecord {
 
     public String getContent() {
         return content;
+    }
+
+    public int getLikes() {
+        return likes;
+    }
+
+    public boolean isHasLiked() {
+        return hasLiked;
+    }
+
+    public void setLikes(int likes) {
+        this.likes = likes;
+    }
+
+    public void setHasLiked(boolean hasLiked) {
+        this.hasLiked = hasLiked;
     }
 }

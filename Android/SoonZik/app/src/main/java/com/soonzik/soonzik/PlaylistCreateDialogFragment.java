@@ -63,7 +63,7 @@ public class PlaylistCreateDialogFragment extends DialogFragment {
 
                         tmp.put("user_id", Integer.toString(ActiveRecord.currentUser.getId()));
                         tmp.put("name", playlistName.getText().toString());
-                        ActiveRecord.save("Playlist", tmp, true, new ActiveRecord.OnJSONResponseCallback() {
+                        ActiveRecord.save("Playlist", tmp, new ActiveRecord.OnJSONResponseCallback() {
                             @Override
                             public void onJSONResponse(boolean success, Object response, Class<?> classT) throws InvocationTargetException, NoSuchMethodException, java.lang.InstantiationException, IllegalAccessException {
                                 JSONObject obj = (JSONObject) response;

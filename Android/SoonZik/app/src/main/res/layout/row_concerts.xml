@@ -15,6 +15,27 @@
         android:layout_marginStart="15dp"
         android:layout_marginTop="5dp" />
 
+    <ImageView
+        android:layout_width="16sp"
+        android:layout_height="16sp"
+        android:id="@+id/concert_like"
+        android:src="@drawable/unlike"
+        android:contentDescription="@string/imgmenudescription"
+        android:layout_marginTop="6dp"
+        android:layout_below="@+id/concertpicture"
+        android:layout_alignLeft="@+id/concertpicture"
+        android:layout_alignStart="@+id/concertpicture" />
+
+    <TextView
+        android:id="@+id/nb_likes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0"
+        android:layout_alignBottom="@+id/concert_like"
+        android:layout_alignRight="@+id/concertpicture"
+        android:layout_alignEnd="@+id/concertpicture" />
+
+
     <TextView
         android:id="@+id/artistconcert"
         android:layout_width="wrap_content"

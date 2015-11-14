@@ -3,8 +3,6 @@ package com.soonzik.soonzik;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -37,7 +35,7 @@ public class SignInActivity extends Activity {
                 params.put("birthday", ((EditText) findViewById(R.id.birthdaySigninInput)).getText().toString() + " 00:00:01");
                 params.put("language", ((EditText) findViewById(R.id.languageSigninInput)).getText().toString());
 
-                ActiveRecord.save("User", params, false, new ActiveRecord.OnJSONResponseCallback() {
+                ActiveRecord.save("User", params, new ActiveRecord.OnJSONResponseCallback() {
 
                     @Override
                     public void onJSONResponse(boolean success, Object response, Class<?> classT) throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {

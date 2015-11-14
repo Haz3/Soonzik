@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -67,6 +68,16 @@ public class AlbumsAdapter extends ArrayAdapter<Object> {
 
         TextView nbTitle = (TextView) rowView.findViewById(R.id.nbtitle);
         nbTitle.setText(Integer.toString(ms.size()));
+
+        ImageView likedAlbum = (ImageView) rowView.findViewById(R.id.album_like);
+        TextView nbLikes = (TextView) rowView.findViewById(R.id.nb_likes);
+        nbLikes.setText(Integer.toString(al.getLikes()));
+
+        if (al.isHasLiked()) {
+            likedAlbum.setImageResource(R.drawable.like);
+        } else {
+            likedAlbum.setImageResource(R.drawable.unlike);
+        }
 
         return rowView;
     }

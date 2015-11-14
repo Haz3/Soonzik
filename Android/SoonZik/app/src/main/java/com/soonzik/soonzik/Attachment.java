@@ -26,4 +26,20 @@ public class Attachment extends ActiveRecord {
                 + " : content_type = " + content_type
                 );
     }
+
+    public int getId() {
+        return id;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public String getFile_size() {
+        return file_size;
+    }
+
+    public String getContent_type() {
+        return content_type;
+    }
 }

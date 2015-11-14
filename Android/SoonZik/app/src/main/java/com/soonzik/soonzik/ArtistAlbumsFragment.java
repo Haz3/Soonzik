@@ -8,7 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import org.json.JSONArray;
 
@@ -39,7 +38,7 @@ public class ArtistAlbumsFragment extends Fragment {
         params.put("attribute", atr);
 
         try {
-            ActiveRecord.find("Album", params, false, new ActiveRecord.OnJSONResponseCallback() {
+            ActiveRecord.find("Album", params, new ActiveRecord.OnJSONResponseCallback() {
                 @Override
                 public void onJSONResponse(boolean success, Object response, Class<?> classT) throws InvocationTargetException, NoSuchMethodException, java.lang.InstantiationException, IllegalAccessException {
                     JSONArray data = (JSONArray) response;

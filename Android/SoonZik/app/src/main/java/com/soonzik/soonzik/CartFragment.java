@@ -38,6 +38,7 @@ public class CartFragment extends Fragment {
     private ArrayList<Object> carts = null;
     private static PayPalConfiguration config;
     private float totalPrice;
+    private TextView totalValue;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -81,7 +82,7 @@ public class CartFragment extends Fragment {
                     TextView nbItems = (TextView) view.findViewById(R.id.nbobject);
                     nbItems.setText(Integer.toString(nbArticle));
 
-                    TextView totalValue = (TextView) view.findViewById(R.id.totalvalue);
+                    totalValue = (TextView) view.findViewById(R.id.totalvalue);
                     totalValue.setText(Float.toString(totalPrice) + "$");
 
                     CartsAdapter cartsAdapter = new CartsAdapter(getActivity(), items);
@@ -115,7 +116,10 @@ public class CartFragment extends Fragment {
         //   - PAYMENT_INTENT_ORDER to create a payment for authorization and capture
         //     later via calls from your server.
 
-        PayPalPayment payment = new PayPalPayment(new BigDecimal(totalPrice), "EUR", "Music on SoonZik",
+        String totalStringPrice = totalValue.getText().toString();
+        totalPrice = Float.parseFloat(totalStringPrice.substring(0, totalStringPrice.length() - 1));
+
+        PayPalPayment payment = new PayPalPayment(new BigDecimal(totalPrice), "USD", "Music on SoonZik",
                 PayPalPayment.PAYMENT_INTENT_SALE);
 
         Intent intent = new Intent(getActivity(), PaymentActivity.class);

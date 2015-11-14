@@ -42,7 +42,7 @@ public class BattleFragment extends Fragment {
         final int id = this.getArguments().getInt("battle_id");
 
         try {
-            ActiveRecord.show("Battle", id, false, new ActiveRecord.OnJSONResponseCallback() {
+            ActiveRecord.show("Battle", id, new ActiveRecord.OnJSONResponseCallback() {
                 @Override
                 public void onJSONResponse(boolean success, Object response, Class<?> classT) throws InvocationTargetException, NoSuchMethodException, java.lang.InstantiationException, IllegalAccessException {
                     JSONObject data = (JSONObject) response;

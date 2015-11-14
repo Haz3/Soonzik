@@ -9,6 +9,7 @@ import java.util.Date;
  */
 public class Commentary extends ActiveRecord {
     private int id = -1;
+    private int author_id = -1;
     private User user = null;
     private Date created_at = null;
     private String content = "";
@@ -24,6 +25,7 @@ public class Commentary extends ActiveRecord {
     public String toString() {
         return (
                 "id = " + Integer.toString(id)
+                        + " : author_id = " + Integer.toString(author_id)
                         + " : user = { " + (user != null ? user.toString() : "") + " }"
                 + " : created_at = " + (created_at != null ? created_at.toString() : "")
                         + " : content = " + content
@@ -32,6 +34,10 @@ public class Commentary extends ActiveRecord {
 
     public int getId() {
         return id;
+    }
+
+    public int getAuthor_id() {
+        return author_id;
     }
 
     public User getUser() {

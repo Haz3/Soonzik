@@ -13,7 +13,6 @@ import android.widget.Toast;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.w3c.dom.Text;
 
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.InvocationTargetException;
@@ -36,7 +35,7 @@ public class UserProfileUpdateFragment extends Fragment {
                 container, false);
 
         try {
-            ActiveRecord.show("User", ActiveRecord.currentUser.getId(), false, new ActiveRecord.OnJSONResponseCallback() {
+            ActiveRecord.show("User", ActiveRecord.currentUser.getId(), new ActiveRecord.OnJSONResponseCallback() {
 
                 @Override
                 public void onJSONResponse(boolean success, Object response, Class<?> classT) throws InvocationTargetException, NoSuchMethodException, java.lang.InstantiationException, IllegalAccessException {

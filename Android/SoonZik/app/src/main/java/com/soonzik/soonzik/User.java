@@ -16,12 +16,14 @@ import java.io.UnsupportedEncodingException;
 import java.lang.reflect.InvocationTargetException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
-import java.util.Scanner;
+import java.util.TimeZone;
 
 /**
  * Created by kevin_000 on 13/03/2015.
@@ -77,21 +79,48 @@ public class User extends ActiveRecord {
         super.createInstance(this, json, this.getClass());
     }
 
-    public String getUserSecureKey(final RequestParams params, final OnJSONResponseCallback callback) {
+    public void getUserSecureKey(final RequestParams params, final OnJSONResponseCallback callback) {
         AsyncHttpClient client = new AsyncHttpClient();
         ActiveRecord.userId = this.id;
+
+        if (!ActiveRecord.last_update.isEmpty()) {
+            SimpleDateFormat serverDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.ENGLISH);
+            serverDateFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
+            try {
+                Date serverDate = serverDateFormat.parse(ActiveRecord.last_update);
+                Date userDate = new Date();
+
+                if (serverDate.getTime() > userDate.getTime()) {
+
+                    Log.v("SECUREKEY", "OLD KEY");
+
+                    JSONObject obj = new JSONObject();
+                    obj.put("key", ActiveRecord.secureKey);
+                    callback.onJSONResponse(true, obj, params);
+                    return;
+                }
+            } catch (ParseException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (NoSuchAlgorithmException e) {
+                e.printStackTrace();
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
 
         client.get(ActiveRecord.serverLink + "getKey/" + Integer.toString(this.id), new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                Log.v("SECURERESP1", response.toString());
+                Log.v("SECURE RESPONSE", response.toString());
                 try {
                     //JSONObject obj = response.getJSONObject("content");
-                    Log.v("SECURERESP", response.toString());
+
+                    Log.v("SECUREKEY", "NEW KEY");
+                    ActiveRecord.last_update = response.getString("last_update");
 
                     callback.onJSONResponse(true, response, params);
-                    /*secureKey = response.getString("key");
-                    ActiveRecord.secureKey = response.getString("key");*/
                 } catch (JSONException e) {
                     e.printStackTrace();
                 } catch (NoSuchAlgorithmException e) {
@@ -109,7 +138,6 @@ public class User extends ActiveRecord {
             }
 
         });
-        return secureKey;
     }
 
     public static void getMusics(final ActiveRecord.OnJSONResponseCallback callback) {
@@ -364,7 +392,7 @@ public class User extends ActiveRecord {
     public static void getFollows(int id, final ActiveRecord.OnJSONResponseCallback callback) {
         AsyncHttpClient client = new AsyncHttpClient();
 
-        client.get(ActiveRecord.serverLink + "users/" + Integer.toString(id) + "/follows", new JsonHttpResponseHandler(){
+        client.get(ActiveRecord.serverLink + "users/" + Integer.toString(id) + "/follows", new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 Log.v("JSON", response.toString());
@@ -525,7 +553,7 @@ public class User extends ActiveRecord {
 
                 for (int i = 0; i < hash.length; i++) {
                     String hex = Integer.toHexString(0xff & hash[i]);
-                    if(hex.length() == 1) hexString.append('0');
+                    if (hex.length() == 1) hexString.append('0');
                     hexString.append(hex);
                 }
 
@@ -562,6 +590,23 @@ public class User extends ActiveRecord {
                 });
             }
         });
+    }
+
+    public static void likeContent(String typeObj, int obj_id, final ActiveRecord.OnJSONResponseCallback callback) {
+        Map<String, String> data = new HashMap<String, String>();
+
+        data.put("user_id", Integer.toString(ActiveRecord.currentUser.getId()));
+        data.put("typeObj", typeObj);
+        data.put("obj_id", Integer.toString(obj_id));
+        ActiveRecord.save("Like", data, callback);
+    }
+
+    public static void unlikeContent(String typeObj, int obj_id, final ActiveRecord.OnJSONResponseCallback callback) {
+        Map<String, String> data = new HashMap<String, String>();
+
+        data.put("typeObj", typeObj);
+        data.put("obj_id", Integer.toString(obj_id));
+        ActiveRecord.destroy("Like", data, callback);
     }
 
 
