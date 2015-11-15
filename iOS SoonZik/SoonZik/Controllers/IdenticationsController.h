@@ -16,7 +16,7 @@
 
 + (User *)facebookConnect:(NSString *)token email:(NSString *)email uid:(NSString *)uid;
 + (User *)twitterConnect:(NSString *)token uid:(NSString *)uid;
-+ (User *)googleConnect:(NSString *)token email:(NSString *)email uid:(NSString *)uid;
++ (User *)googleConnect:(NSString *)token uid:(NSString *)uid;
 
 + (User *)subscribe:(User *)user;
 

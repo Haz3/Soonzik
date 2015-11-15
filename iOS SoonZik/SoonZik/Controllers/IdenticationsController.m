@@ -57,7 +57,7 @@
     return user;
 }
 
-+ (User *)googleConnect:(NSString *)token email:(NSString *)email uid:(NSString *)uid
++ (User *)googleConnect:(NSString *)token uid:(NSString *)uid
 {
     NSString *tok = [self getSocialToken:uid andType:@"google"];
     NSString *url, *post, *conca, *secureKey;

@@ -218,11 +218,7 @@
     AppDelegate *delegate =(AppDelegate*)[UIApplication sharedApplication].delegate;
     [delegate setTypeConnexion:2];
     
-    NSLog(@"ID Token: %@", self.signIn.authentication.accessToken);
-    NSLog(@"%@", self.signIn.authentication.userEmail);
-    NSLog(@"UID : %@", self.signIn.userID);
-    
-    User *user =  [IdenticationsController googleConnect:self.signIn.authentication.accessToken email:self.signIn.authentication.userEmail uid:self.signIn.userID];
+    User *user =  [IdenticationsController googleConnect:self.signIn.authentication.accessToken uid:self.signIn.userID];
     
     if (user.identifier != 0) {
         NSData *dataStore = [NSKeyedArchiver archivedDataWithRootObject:user];
@@ -230,6 +226,8 @@
         [[NSUserDefaults standardUserDefaults] synchronize];
         
         [delegate launchHome];
+    } else {
+        [[[UIAlertView alloc] initWithTitle:@"Error" message:@"An error has occured. Please ensure that your Google+ account is liked with your SoonZik account" delegate:nil cancelButtonTitle:@"ok" otherButtonTitles:nil, nil] show];
     }
 }
 
