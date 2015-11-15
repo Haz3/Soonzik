@@ -19,13 +19,10 @@
     self.title = [json objectForKey:@"name"];
     NSDictionary *musics = [json objectForKey:@"musics"];
     self.listOfMusics = [[NSMutableArray alloc] init];
-    if (musics != nil) {
-        int i = 0;
-        for (NSDictionary *music in musics) {
-            Music *m = [[Music alloc] initWithJsonObject:music];
-            [self.listOfMusics addObject:m];
-            i++;
-        }
+    NSLog(@"musics in the playlist :%@", musics);
+    for (NSDictionary *music in musics) {
+        Music *m = [[Music alloc] initWithJsonObject:music];
+        [self.listOfMusics addObject:m];
     }
     
     return self;

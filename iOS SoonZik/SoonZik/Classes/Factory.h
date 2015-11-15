@@ -17,7 +17,4 @@
 + (NSArray *)provideListWithClassName:(NSString *)className andIdentifier:(int)identifier;
 + (NSMutableArray *)findElementWithClassName:(NSString *)className andValues:(NSString *)values;
 
-//+ (id)update:(id)elem;
-+ (BOOL)destroy:(id)elem;
-
 @end

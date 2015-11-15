@@ -246,20 +246,7 @@
 
 - (void)getAllPlaylists
 {
-    self.prefs = [NSUserDefaults standardUserDefaults];
-    NSData *userData = [self.prefs objectForKey:@"User"];
-    User *user = (User *)[NSKeyedUnarchiver unarchiveObjectWithData:userData];
-    
-    
-    
-    
-    //self.listOfPlaylists = [Factory findElementWithClassName:@"Playlist" andValues:[NSString stringWithFormat:@"attribute[user_id]=%i", user.identifier]];
-    
-    
-    
-    
-    
-    self.listOfPlaylists = [[NSMutableArray alloc] init];
+    self.listOfPlaylists = [PlaylistsController getPlaylists];
     [self checkPlaylists];
 }
 
@@ -282,16 +269,14 @@
     static NSString *cellID = @"cellID";
     
     [collectionView registerNib:[UINib nibWithNibName:@"TitlePlaylistCollectionViewCell" bundle:nil] forCellWithReuseIdentifier:cellID];
-    __block __weak TitlePlaylistCollectionViewCell *cell = (TitlePlaylistCollectionViewCell *)[collectionView dequeueReusableCellWithReuseIdentifier:cellID forIndexPath:indexPath];
-    
-    [cell initCell];
-    
-    
-    
-    Playlist *playlist = [self.listOfPlaylists objectAtIndex:indexPath.row];
-    cell.playlistTitle.text = playlist.title;
-    cell = [self loadImagePreviewPlaylist:playlist.listOfMusics forCell:cell];
-    
+    TitlePlaylistCollectionViewCell *cell = (TitlePlaylistCollectionViewCell *)[collectionView dequeueReusableCellWithReuseIdentifier:cellID forIndexPath:indexPath];
+    if (self.listOfPlaylists.count > 0) {
+        [cell initCell];
+        Playlist *playlist = [self.listOfPlaylists objectAtIndex:indexPath.row];
+        NSLog(@"playlist.listofmusics : %i", playlist.listOfMusics.count);
+        cell.playlistTitle.text = playlist.title;
+        cell = [self loadImagePreviewPlaylist:playlist.listOfMusics forCell:cell];
+    }
     return cell;
 }
 
@@ -386,10 +371,12 @@
 
 - (TitlePlaylistCollectionViewCell *)loadImagePreviewPlaylist:(NSArray *)playlist forCell:(TitlePlaylistCollectionViewCell *)cell
 {
-    Music *music1 = playlist[0];
-    NSString *urlImage = [NSString stringWithFormat:@"%@assets/albums/%@", API_URL, music1.albumImage];
-    NSData *imageData = [[NSData alloc] initWithContentsOfURL: [NSURL URLWithString: urlImage]];
-    cell.album1Image.image = [UIImage imageWithData:imageData];
+    if (playlist.count > 0) {
+        Music *music1 = playlist[0];
+        NSString *urlImage = [NSString stringWithFormat:@"%@assets/albums/%@", API_URL, music1.albumImage];
+        NSData *imageData = [[NSData alloc] initWithContentsOfURL: [NSURL URLWithString: urlImage]];
+        cell.album1Image.image = [UIImage imageWithData:imageData];
+    }
     if (playlist.count > 1) {
         Music *music2 = playlist[1];
         NSString *urlImage2 = [NSString stringWithFormat:@"%@assets/albums/%@", API_URL, music2.albumImage];

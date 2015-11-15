@@ -41,7 +41,7 @@
     return user;
 }
 
-+ (User *)twitterConnect:(NSString *)token email:(NSString *)email uid:(NSString *)uid
++ (User *)twitterConnect:(NSString *)token uid:(NSString *)uid
 {
     NSString *tok = [self getSocialToken:uid andType:@"twitter"];
     NSString *url, *post, *conca, *secureKey;
@@ -51,6 +51,7 @@
     secureKey = [Crypto sha256HashFor:conca];
     post = [NSString stringWithFormat:@"uid=%@&provider=%@&encrypted_key=%@&token=%@", uid, @"twitter", secureKey, token];
     NSDictionary *json = [Request postRequest:post url:url];
+    NSLog(@"json twitter : %@", json);
     User *user = [[User alloc] initWithJsonObject:[json objectForKey:@"content"]];
     
     return user;

@@ -12,6 +12,8 @@
 
 @interface PlaylistsController : NSObject
 
++ (BOOL)deletePlaylist:(int)identifier;
++ (NSMutableArray *)getPlaylists;
 + (Playlist *)createAPlaylist:(Playlist *)playlist;
 + (BOOL)addToPlaylist:(Playlist *)playlist :(Music *)music;
 + (BOOL)removeFromPlaylist:(Playlist *)playlist :(Music *)music;

@@ -10,6 +10,45 @@
 
 @implementation PlaylistsController
 
++ (BOOL)deletePlaylist:(int)identifier {
+    NSString *url, *key;
+    NSData *data = [[NSUserDefaults standardUserDefaults] objectForKey:@"User"];
+    User *user = (User *)[NSKeyedUnarchiver unarchiveObjectWithData:data];
+    
+    key = [Crypto getKey];
+    url = [NSString stringWithFormat:@"%@playlists/destroy?user_id=%i&secureKey=%@&id=%i", API_URL, user.identifier, key, identifier];
+    
+    NSDictionary *json = [Request getRequest:url];
+    
+    NSLog(@"json delete : %@", json);
+    
+    if ([[json objectForKey:@"code"] intValue] == 202) {
+        return YES;
+    }
+    
+    return NO;
+}
+
++  (NSMutableArray *)getPlaylists {
+    NSData *data = [[NSUserDefaults standardUserDefaults] objectForKey:@"User"];
+    User *user = (User *)[NSKeyedUnarchiver unarchiveObjectWithData:data];
+    
+    NSMutableArray *list = [[NSMutableArray alloc] init];
+    NSString *url = [NSString stringWithFormat:@"%@playlists/find?attribute[user_id]=%i", API_URL, user.identifier];
+    
+    NSDictionary *json = [Request getRequest:url];
+    json = [json objectForKey:@"content"];
+    
+    NSLog(@"playlists : %@", json);
+    
+    for (NSDictionary *dict in json) {
+        Playlist *p = [[Playlist alloc] initWithJsonObject:dict];
+        [list addObject:p];
+    }
+    
+    return list;
+}
+
 + (Playlist *)createAPlaylist:(Playlist *)playlist {
     Network *net = [[Network alloc] init];
     NSDictionary *json = [net create:playlist];
@@ -53,6 +92,7 @@
     
     NSDictionary *json = [Request getRequest:url];
     
+    NSLog(@"json delete : %@", json);
     if ([[json objectForKey:@"code"] intValue] == 200) {
         return true;
     }

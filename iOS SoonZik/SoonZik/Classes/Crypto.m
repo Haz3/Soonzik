@@ -24,27 +24,18 @@
     } else {
         NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
         [dateFormat setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
-        [dateFormat setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"GMT"]];
+        //[dateFormat setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"GMT"]];
         NSDate *dat = [dateFormat dateFromString:user.secureKeyDate];
-        NSTimeInterval secondsInOneHours = 60 * 60;
+        NSTimeInterval secondsInOneHours = 2 * 60 * 60;
         NSDate *dateOneHoursAhead = [dat dateByAddingTimeInterval:secondsInOneHours];
         
         NSLog(@"user.secureDate : %@", dateOneHoursAhead);
         
-        switch ([dateOneHoursAhead compare:[NSDate date]]) {
-            case NSOrderedAscending:
-                NSLog(@"NSOrderedAscending");
-                need = true;
-                break;
-            case NSOrderedSame:
-                NSLog(@"NSOrderedSame");
-                need = true;
-                break;
-            case NSOrderedDescending:
-                NSLog(@"NSOrderedDescending");
-                break;
+        NSDate *now = [NSDate date];
+        if ([now compare:dateOneHoursAhead] == NSOrderedDescending) {
+            need = true;
         }
-
+        
     }
     
     if (need) {

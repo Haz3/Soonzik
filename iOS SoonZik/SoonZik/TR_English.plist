@@ -166,6 +166,8 @@
 	<string>Buy this music</string>
 	<key>rating_success</key>
 	<string>Your rate has been registered</string>
+	<key>rate_title</key>
+	<string>Rate</string>
 	<key>rating_error</key>
 	<string>Error occured during the rating</string>
 	<key>ask_buy_album</key>

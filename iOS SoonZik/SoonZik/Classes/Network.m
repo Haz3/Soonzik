@@ -69,9 +69,7 @@
 {
     NSString *url = nil;
     
-    if ([className isEqualToString:@"Playlist"]) {
-        url = [NSString stringWithFormat:@"%@playlists/find?%@", API_URL, values];
-    } else if ([className isEqualToString:@"User"]) {
+    if ([className isEqualToString:@"User"]) {
         url = [NSString stringWithFormat:@"%@users/find?%@", API_URL, values];
     } else if ([className isEqualToString:@"Album"]) {
         url = [NSString stringWithFormat:@"%@albums/find?%@", API_URL, values];
@@ -105,27 +103,6 @@
     }
     
     return [Request postRequest:post url:url];
-}
-
-- (NSDictionary *)destroy:(id)elem
-{
-    NSString *url;
-    NSString *key;
-    NSString *conca;
-    NSString *secureKey;
-    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
-    NSData *data = [prefs objectForKey:@"User"];
-    User *user = (User *)[NSKeyedUnarchiver unarchiveObjectWithData:data];
-    
-    if ([elem isKindOfClass:[Playlist class]]) {
-        Playlist *playlist = (Playlist *)elem;
-        key = [Crypto getKey];  
-        conca = [NSString stringWithFormat:@"%@%@", user.salt, key];
-        secureKey = [Crypto sha256HashFor:conca];
-        url = [NSString stringWithFormat:@"%@playlists/destroy?user_id=%i&secureKey=%@&id=%i", API_URL, user.identifier, secureKey, playlist.identifier];
-    }
-    
-    return [Request getRequest:url];
 }
 
 @end

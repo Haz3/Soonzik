@@ -175,7 +175,7 @@
         self.ratingCell.slider.minimumValue = 0.0;
         self.ratingCell.slider.maximumValue = 5.0;
         
-        [self.ratingCell.btn setTitle:@"Noter" forState:UIControlStateNormal];
+        [self.ratingCell.btn setTitle:[self.translate.dict objectForKey:@"rate_title"] forState:UIControlStateNormal];
         [self.ratingCell.btn addTarget:self action:@selector(sendRate) forControlEvents:UIControlEventTouchUpInside];
         return self.ratingCell;
     }

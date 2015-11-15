@@ -76,16 +76,4 @@
     return list;
 }
 
-+ (BOOL)destroy:(id)elem
-{
-    Network *net = [[Network alloc] init];
-    NSDictionary *json = [net destroy:elem];
-    
-    if ([[json objectForKey:@"code"] intValue] == 202) {
-        return YES;
-    }
-    
-    return NO;
-}
-
 @end

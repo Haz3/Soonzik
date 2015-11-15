@@ -75,8 +75,7 @@
 }
 
 - (void)deletePlaylist {
-    bool success = [Factory destroy:self.playlist];
-    if (success) {
+    if ([PlaylistsController deletePlaylist:self.playlist.identifier]) {
         [[[SimplePopUp alloc] initWithMessage:[self.translate.dict objectForKey:@"playlist_deleted"] onView:self.view withSuccess:true] show];
         [self.navigationController popViewControllerAnimated:YES];
         [self.reloadDelegate reloadList];

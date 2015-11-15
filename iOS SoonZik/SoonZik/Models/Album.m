@@ -14,7 +14,7 @@
 {
     self = [super init];
     
-   NSLog(@"json album : %@", json);
+   //NSLog(@"json album : %@", json);
     
     self.identifier = [[json objectForKey:@"id"] intValue];
     self.image = [json objectForKey:@"image"];
