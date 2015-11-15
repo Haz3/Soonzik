@@ -6,12 +6,11 @@ module Artist
   	layout 'artist'
 
     before_action :cors_set_access_control_headers
-    before_filter :authenticate_user!
     before_action :cookieMe
 
     # For all responses in this controller, return the CORS access control headers.
     def cors_set_access_control_headers
-      if !user_signed_in? || user_signed_in? && !current_user.isArtist?
+      if (params[:format] != "json") && ((!user_signed_in?) || (user_signed_in? && !current_user.isArtist?))
         redirect_to root_url subdomain: false
       end
 
@@ -29,8 +28,11 @@ module Artist
         cookies[:user_id] = current_user.id
         cookies[:user_token] = current_user.salt
         cookies[:user_username] = current_user.username
-      elsif !user_signed_in?() && cookies.has_key?(:user)
-        cookies.delete :user
+        cookies[:language] = current_user.language
+      elsif !user_signed_in?()
+        cookies.delete :user_id
+        cookies.delete :user_token
+        cookies.delete :user_username
       end
     end
   end

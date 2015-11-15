@@ -163,35 +163,37 @@ Rails.application.routes.draw do
   end
 
   namespace :artist, path: '/', constraints: { subdomain: 'artist' } do
-    # Main
+    # Route of the views
     root 'mains#home'
-    get '/stats' => 'mains#stats'
-    get '/comments' => 'mains#getLastComments'
-    get '/tweets' => 'mains#getLastTweets'
-
-    # Tour
     get '/tour' => 'tours#index'
-    get '/tour/edit/:id' => 'tours#edit', as: "tour_edit"
-    patch '/tour/update/:id' => 'tours#update', as: "tour_update"
-    get '/tour/delete/:id' => 'tours#delete', as: "tour_delete"
-    match '/tour/addconcert' => 'tours#create_concert', via: [:post, :options]
-
-    # Music
     get '/musics' => 'musics#index'
     get '/musics/propose' => 'musics#propose'
-    #Ajax
-    match '/musics/upload' => 'musics#uploadMusic', via: [:post, :options]
-    match '/musics/createAlbum' => 'musics#uploadAlbum', via: [:post, :options]
-    match '/musics/updateMusic' => 'musics#updateMusic', via: [:post, :options]
-    match '/musics/updateAlbum' => 'musics#updateAlbum', via: [:post, :options]
-    get '/musics/getPropose' => 'musics#getPropose'
-    match '/musics/proposeAlbums' => 'musics#proposeAlbums', via: [:post, :options]
-
-    # Meet
+    get '/tour/edit/:id' => 'tours#edit', as: "tour_edit"
     get '/meet' => 'meets#index'
     get '/meet/all' => 'meets#show'
-    match '/meet/save' => 'meets#save', via: [:post, :put]
-    get '/meet/delete/:id' => 'meets#destroy', as: "meet_destroy"
+
+    # AJAX
+      # Main
+      get '/stats' => 'mains#stats'
+      get '/comments' => 'mains#getLastComments'
+      get '/tweets' => 'mains#getLastTweets'
+
+      # Tour
+      patch '/tour/update/:id' => 'tours#update', as: "tour_update"
+      get '/tour/delete/:id' => 'tours#delete', as: "tour_delete"
+      match '/tour/addconcert' => 'tours#create_concert', via: [:post, :options]
+
+      # Music
+      match '/musics/upload' => 'musics#uploadMusic', via: [:post, :options]
+      match '/musics/createAlbum' => 'musics#uploadAlbum', via: [:post, :options]
+      match '/musics/updateMusic' => 'musics#updateMusic', via: [:post, :options]
+      match '/musics/updateAlbum' => 'musics#updateAlbum', via: [:post, :options]
+      get '/musics/getPropose' => 'musics#getPropose'
+      match '/musics/proposeAlbums' => 'musics#proposeAlbums', via: [:post, :options]
+
+      # Meet
+      match '/meet/save' => 'meets#save', via: [:post, :put]
+      get '/meet/delete/:id' => 'meets#destroy', as: "meet_destroy"
   end
 
   devise_for :admin_users, ActiveAdmin::Devise.config

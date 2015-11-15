@@ -1,7 +1,7 @@
 module Artist
   # Controller which manage main page of the artist panel
   #
-  class MusicsController < ArtistsController
+  class MusicsController < ArtistsecurityController
   	before_action :setMenu
   	include ::Multimedia
 
@@ -24,6 +24,12 @@ module Artist
 
   	# Route to upload a music (with genres)
   	def uploadMusic
+    	if (@u == nil || (@u != nil && !@u.isArtist?))
+    		codeAnswer 500
+    		defineHttp :forbidden
+    		sendJson and return
+    	end
+
   		error = false
   		m = nil
   		http = :ok
@@ -55,22 +61,22 @@ module Artist
 	        newFilename = Digest::SHA256.hexdigest("#{timestamp}--#{params[:file].original_filename}#{randomNumber}") + "-" + params[:file].original_filename.gsub(/[^0-9A-Za-z\.-]/, '')
 
 	        #check si le dossier existe
-	        if (!Dir.exists? Rails.root.join('app', 'assets', 'musics', current_user.id.to_s))
-	        	Dir.mkdir Rails.root.join('app', 'assets', 'musics', current_user.id.to_s).to_s
+	        if (!Dir.exists? Rails.root.join('app', 'assets', 'musics', @u.id.to_s))
+	        	Dir.mkdir Rails.root.join('app', 'assets', 'musics', @u.id.to_s).to_s
 	        end
 
-	        File.open(Rails.root.join('app', 'assets', 'musics', current_user.id.to_s, newFilename), 'wb') do |f|
+	        File.open(Rails.root.join('app', 'assets', 'musics', @u.id.to_s, newFilename), 'wb') do |f|
 	          f.write(params[:file].tempfile.read)
 	        end
 	        hasWritten = true
 
-	        cutObject = Multimedia::CutAudio.new(Rails.root.join('app', 'assets', 'musics', current_user.id.to_s).to_s, newFilename)
+	        cutObject = Multimedia::CutAudio.new(Rails.root.join('app', 'assets', 'musics', @u.id.to_s).to_s, newFilename)
 	        
   				# new music object
 	        parameters = ActionController::Parameters.new({ music: p })
 	        m = Music.new(Music.music_params parameters)
 	        m.file = newFilename
-	        m.user_id = current_user.id
+	        m.user_id = @u.id
 	        m.duration = cutObject.determine_duration
 	        if (m.save)
 		        http = :created
@@ -88,7 +94,7 @@ module Artist
 						}
 		      else
 		      	error = m.errors.full_messages
-		      	File.delete Rails.root.join('app', 'assets', 'musics', current_user.id.to_s, newFilename).to_s
+		      	File.delete Rails.root.join('app', 'assets', 'musics', @u.id.to_s, newFilename).to_s
 		        http = :bad_request
 		      end
 
@@ -99,7 +105,7 @@ module Artist
 		  rescue
 		  	error = true
 		  	if hasWritten == true
-					File.delete Rails.root.join('app', 'assets', 'musics', current_user.id.to_s, newFilename).to_s
+					File.delete Rails.root.join('app', 'assets', 'musics', @u.id.to_s, newFilename).to_s
 		  	end
 		  	m.delete if m.id != nil
 		  	http = :bad_request
@@ -113,14 +119,20 @@ module Artist
   		m = nil
   		http = :ok
 
+    	if (@u == nil || (@u != nil && !@u.isArtist?))
+    		codeAnswer 500
+    		defineHttp :forbidden
+    		sendJson and return
+    	end
+
   		begin
 	  		if (params.has_key?(:id) && params.has_key?(:music))
 	  			m = Music.find_by_id(params[:id])
-	  			if (m.user_id != current_user.id)
+	  			if (m.user_id != @u.id)
 	  				http = :bad_request
 	  			else
 		  			u = false
-		  			u = m.update(Music.music_params params) if m.user_id == current_user.id
+		  			u = m.update(Music.music_params params) if m.user_id == @u.id
 		  			if (u == false)
 		  				http = :bad_request
 		  			elsif (params.has_key?(:genres))
@@ -154,6 +166,12 @@ module Artist
   		http = :ok
   		genres = []
   		descriptions = []
+
+    	if (@u == nil || (@u != nil && !@u.isArtist?))
+    		codeAnswer 500
+    		defineHttp :forbidden
+    		sendJson and return
+    	end
 
   		begin
   			if (params.has_key?(:album))
@@ -196,7 +214,7 @@ module Artist
 	        a = Album.new(Album.album_params parameters)
 	        a.image = newFilename
 	        a.file = newFilename
-	        a.user_id = current_user.id
+	        a.user_id = @u.id
 	        if (a.save)
 						http = :created
 						genres.each { |genre|
@@ -215,7 +233,6 @@ module Artist
 								d.language = description["language"]
 								puts d
 								if (d.save)
-									puts "add the D !"
 									a.descriptions << d
 								end
 							rescue
@@ -247,6 +264,12 @@ module Artist
   		http = :ok
   		genres = []
 
+    	if (@u == nil || (@u != nil && !@u.isArtist?))
+    		codeAnswer 500
+    		defineHttp :forbidden
+    		sendJson and return
+    	end
+
   		begin
   			if (params.has_key?(:album) && params.has_key?(:id))
 					p = JSON.parse(params[:album])
@@ -270,7 +293,7 @@ module Artist
 
         a = Album.find_by_id(params[:id])
 
-        if a != nil && a.user_id == current_user.id && error == false && (!params.has_key?(:file) || (params.has_key?(:file) && acceptedContentType.include?(params[:file].content_type)))
+        if a != nil && a.user_id == @u.id && error == false && (!params.has_key?(:file) || (params.has_key?(:file) && acceptedContentType.include?(params[:file].content_type)))
         	oldFile = nil
         	newFilename = nil
 
@@ -358,14 +381,20 @@ module Artist
 
 		# To get the info about the proposed albums
 		def getPropose
-  		albums = current_user.albums
+    	if (@u == nil || (@u != nil && !@u.isArtist?))
+    		codeAnswer 500
+    		defineHttp :forbidden
+    		sendJson and return
+    	end
+
+  		albums = @u.albums
   		albumInPacks = []
   		albums.each do |album|
   			if album.packs.size > 0
   				albumInPacks << { album: album, pack: album.packs }
   			end
 
-  			proposed = Proposition.where(artist_id: current_user.id).where(album_id: album.id).all
+  			proposed = Proposition.where(artist_id: @u.id).where(album_id: album.id).all
   			album.setProposed proposed.size == 1
   		end
   		render :json => { albumInPacks: albumInPacks, albums: albums.as_json(:methods => :getProposed, :include => { musics: {}, genres: {}, descriptions: {} } ) }
@@ -373,14 +402,20 @@ module Artist
 
 		# Delete or create a proposition
 		def proposeAlbums
+    	if (@u == nil || (@u != nil && !@u.isArtist?))
+    		codeAnswer 500
+    		defineHttp :forbidden
+    		sendJson and return
+    	end
+
 			if (params.has_key?(:arr_id) && params[:arr_id].is_a?(Array))
 				params[:arr_id].each do |id|
-					proposed = Proposition.where(artist_id: current_user.id).where(album_id: id).all
+					proposed = Proposition.where(artist_id: @u.id).where(album_id: id).all
 					if (proposed.size == 1)
 						proposed.first.destroy
 					else
 						p = Proposition.new
-						p.artist_id = current_user.id
+						p.artist_id = @u.id
 						p.album_id = id
 						p.state = 0
 						p.date_posted = Date.new

@@ -1,7 +1,7 @@
 module Artist
   # Controller which manage main page of the artist panel
   #
-  class MainsController < ArtistsController
+  class MainsController < ArtistsecurityController
   	# Root of the panel
   	def home
   		@menu = 'home'
@@ -16,6 +16,12 @@ module Artist
   		respond_to do |format|
   			format.html { redirect_to artist_root_path }
         format.json {
+        	if (@u == nil || (@u != nil && !@u.isArtist?))
+        		codeAnswer 500
+        		defineHttp :forbidden
+        		sendJson and return
+        	end
+
         	response = {
         		music: [],
         		album: [],
@@ -25,7 +31,7 @@ module Artist
 
         	begin
 	        	# Calculate the musics sell
-	        	current_user.musics.each { |music|
+	        	@u.musics.each { |music|
 	        		purchasedItems = {
 	        			music_title: music.title,
 	        			total_sell: 0,
@@ -51,7 +57,7 @@ module Artist
 
         	begin
 	        	# Calculate the albums sell
-	        	current_user.albums.each { |album|
+	        	@u.albums.each { |album|
 	        		purchasedItems = {
 	        			album_title: album.title,
 	        			total_sell: 0,
@@ -79,7 +85,7 @@ module Artist
         	memory_pack = {}
 
         	begin
-	        	current_user.albums.each { |album|
+	        	@u.albums.each { |album|
 	        		album.packs.each { |pack|
 	        			pack.purchased_packs.each { |purchased_pack|
 
@@ -96,7 +102,7 @@ module Artist
 			        		end
 
 			        		# if the pack exist already and the user never buy it before
-			        		if (!memory_pack[pack.id][:users].include?(current_user.id)) && purchased_pack.purchased_musics.size > 0
+			        		if (!memory_pack[pack.id][:users].include?(@u.id)) && purchased_pack.purchased_musics.size > 0
 			        			memory_pack[pack.id][:total_sell] += 1
 		        				memory_pack[pack.id][:total_sell_partial] += 1 if purchased_pack.partial
 			        			if ((Time.now.to_date - purchased_pack.purchased_musics[0].purchase.created_at.to_date).to_i > 7)
@@ -131,7 +137,7 @@ module Artist
         	}
 	        begin
 	        	# Calculate the note statistics
-	        	current_user.albums.each { |album|
+	        	@u.albums.each { |album|
 
 	        		# init
 	        		album_to_insert = {
@@ -187,15 +193,21 @@ module Artist
   		respond_to do |format|
   			format.html { redirect_to artist_root_path }
         format.json {
+        	if (@u == nil || (@u != nil && !@u.isArtist?))
+        		codeAnswer 500
+        		defineHttp :forbidden
+        		sendJson and return
+        	end
+
         	offset = 0
         	limit = 5
 		  		commentsTmp = []
 		  		comments = []
 
-		  		current_user.albums.each { |album|
+		  		@u.albums.each { |album|
 		  			commentsTmp += album.commentaries
 		  		}
-		  		current_user.musics.each { |music|
+		  		@u.musics.each { |music|
 		  			commentsTmp += music.commentaries
 		  		}
 
@@ -229,13 +241,19 @@ module Artist
   		respond_to do |format|
   			format.html { redirect_to artist_root_path }
         format.json {
+        	if (@u == nil || (@u != nil && !@u.isArtist?))
+        		codeAnswer 500
+        		defineHttp :forbidden
+        		sendJson and return
+        	end
+
         	offset = 0
         	limit = 5
 		  		
 		  		offset = params[:offset].to_i if params.has_key?(:offset)
 		  		limit = params[:limit].to_i if params.has_key?(:limit)
 
-		  		tweets = Tweet.where("msg LIKE ?", "%@#{current_user.username} %").offset(offset).limit(limit).as_json(:include => { :user => { only: User.miniKey } }, only: Tweet.miniKey + [:created_at])
+		  		tweets = Tweet.where("msg LIKE ?", "%@#{@u.username} %").offset(offset).limit(limit).as_json(:include => { :user => { only: User.miniKey } }, only: Tweet.miniKey + [:created_at])
 
         	render :json => tweets
   			}

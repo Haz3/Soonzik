@@ -1,7 +1,7 @@
 module Artist
   # Controller which manage meet page of the artist panel
   #
-  class MeetsController < ArtistsController
+  class MeetsController < ArtistsecurityController
   	before_action :setMenu
 
   	# For the menu bar

@@ -297,6 +297,7 @@ class User < ActiveRecord::Base
   # Check is the user is an artist
   def isArtist?
     self.groups.each { |group|
+      puts group
       if (group.name == "Artist")
         return true
       end

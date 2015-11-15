@@ -1,7 +1,7 @@
 module Artist
   # Controller which manage main page of the artist panel
   #
-  class ToursController < ArtistsController
+  class ToursController < ArtistsecurityController
   	before_action :setMenu
 
   	# For the menu bar
@@ -67,12 +67,19 @@ module Artist
   		respond_to do |format|
   			format.html { redirect_to artist_root_path }
         format.json {
+
+          if (@u == nil || (@u != nil && !@u.isArtist?))
+            codeAnswer 500
+            defineHttp :forbidden
+            sendJson and return
+          end
+
 		  		c = Concert.new(Concert.concert_params params)
 		  		a = Address.new(Address.address_params params)
 
 		  		if (a.save)
 		  			c.address_id = a.id
-		  			c.user_id = current_user.id
+		  			c.user_id = @u.id
 		  			if (c.save)
 		  				render :json => c.as_json(:include => {
 	  						address: {}
