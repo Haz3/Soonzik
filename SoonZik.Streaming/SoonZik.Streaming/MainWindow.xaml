@@ -1,37 +1,39 @@
 ﻿<Window x:Class="SoonZik.Streaming.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="MainWindow" Height="720" Width="1080"
-        Background="#181818">
-    
+        Title="MainWindow" Height="720" Width="615"
+        Background="#181818" ResizeMode="NoResize">
+
     <Window.Resources>
 
     </Window.Resources>
-    
+
     <Grid>
-        <TabControl HorizontalAlignment="Left" Height="689" VerticalAlignment="Top" Width="1072">
+        <TabControl HorizontalAlignment="Left" Height="689" VerticalAlignment="Top" Width="600">
             <TabItem Header="Record" FontSize="20">
                 <Grid Background="#FF181818">
                     <TextBlock x:Name="WelcomeTextBlock" Foreground="DeepSkyBlue" FontSize="30" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="10,0,0,0"/>
                     <TextBlock x:Name="DeviceBlock" Foreground="DeepSkyBlue" FontSize="20" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="30,45,0,0" Text="Devices"/>
-                    <ListBox x:Name="DevicesListBox" Background="#424242" Height="200" Width="350" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,80,0,0" SelectionMode="Single" SelectedItem="{Binding SelectedCapabilities}">
+                    <ListBox x:Name="DevicesListBox" Background="#424242" Height="200" Width="550" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,80,0,0" SelectionMode="Single" SelectedItem="{Binding SelectedCapabilities}">
                         <ListBox.ItemTemplate>
                             <DataTemplate>
                                 <TextBlock Text="{Binding FriendlyName}"/>
                             </DataTemplate>
                         </ListBox.ItemTemplate>
                     </ListBox>
-                    
-                    <Button x:Name="ChooseDevice" FontSize="20" Background="Transparent" BorderBrush="DeepSkyBlue" HorizontalAlignment="Left" Margin="70,0,0,0"
-                    Foreground="DeepSkyBlue" Content="Refresh device" Width="250" Height="40" Click="ChooseDevice_OnClick" />
-                    
-                    <Button x:Name="StartRecord" FontSize="20" Background="Transparent" BorderBrush="DeepSkyBlue" HorizontalAlignment="Left" Margin="70,120,0,0"
-                    Foreground="DeepSkyBlue" Content="Enregistrer" Width="250" Height="40" Click="StartRecord_OnClick" />
-                    
-                    <Button x:Name="StopRecord" FontSize="20" Background="Transparent" BorderBrush="DeepSkyBlue" HorizontalAlignment="Left" Margin="70,240,0,0"
-                    Foreground="DeepSkyBlue" Content="Stop" Width="250" Height="40" Click="StopRecord_OnClick" />
 
-                    <ProgressBar x:Name="ProgressBarVolume" Height="20" Width="300" Maximum="1" Minimum="0">
+                    <Button x:Name="StartRecord" FontSize="20" Background="Transparent" 
+                            BorderBrush="DeepSkyBlue" HorizontalAlignment="Left" Margin="10,0,0,0"
+                            Foreground="DeepSkyBlue" Content="Enregistrer" Width="250" 
+                            Height="40" Click="StartRecord_OnClick" />
+
+                    <Button x:Name="StopRecord" FontSize="20" Background="Transparent"
+                            BorderBrush="DeepSkyBlue" HorizontalAlignment="Right" Margin="260,0,10,0"
+                            Foreground="DeepSkyBlue" Content="Stop" Width="250" 
+                            Height="40" Click="StopRecord_OnClick" />
+
+                    <ProgressBar x:Name="ProgressBarVolume" Height="20" Maximum="1" Minimum="0" Width="550" HorizontalAlignment="Center"
+                                 Margin="0,110,0,0">
                         <ProgressBar.Style>
                             <Style TargetType="{x:Type ProgressBar}">
                                 <Setter Property="Template">
@@ -59,6 +61,12 @@
                             </Style>
                         </ProgressBar.Style>
                     </ProgressBar>
+
+                    <TextBlock Text="Volume" Height="30" Foreground="DeepSkyBlue" FontSize="20"
+                               HorizontalAlignment="Left" Margin="20,200,0,0"/>
+                    
+                    <Slider x:Name="SliderVolume" Height="20" Width="550"
+                            HorizontalAlignment="Left" Margin="20,250,0,0" Maximum="1" Minimum="0" ValueChanged="SliderVolume_OnValueChanged"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Upload" FontSize="20">

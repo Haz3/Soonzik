@@ -79,6 +79,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Singleton\Singleton.cs" />
+    <Compile Include="Utils\MediaTypeUtils.cs" />
     <Compile Include="View\Connexion.xaml.cs">
       <DependentUpon>Connexion.xaml</DependentUpon>
     </Compile>
