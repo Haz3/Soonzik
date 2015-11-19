@@ -6,6 +6,7 @@ using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Forms;
+using System.Windows.Threading;
 using NAudio.CoreAudioApi;
 using NAudio.MediaFoundation;
 using NAudio.Wave;
@@ -43,7 +44,7 @@ namespace SoonZik.Streaming
                     OnPropertyChanged("Peak");
                 }
             }
-        }        
+        }
         private float recordLevel;
         public float RecordLevel
         {
@@ -124,7 +125,7 @@ namespace SoonZik.Streaming
         {
             if (DevicesListBox.SelectedItems.Count == 0)
             {
-                var result = (MessageBoxResult) MessageBox.Show("Veuillez selectioner un device", "Erreur");
+                var result = (MessageBoxResult)MessageBox.Show("Veuillez selectioner un device", "Erreur");
                 return;
             }
 
@@ -133,9 +134,9 @@ namespace SoonZik.Streaming
             if (save.ShowDialog() != System.Windows.Forms.DialogResult.OK) return;
             _fileLocation = save.InitialDirectory + save.FileName;
             int deviceNumber = DevicesListBox.SelectedIndex;
-            SelectedDevice = (MMDevice) DevicesListBox.SelectedItem;
+            SelectedDevice = (MMDevice)DevicesListBox.SelectedItem;
             sourceStream = new WaveIn();
-            
+
             sourceStream.DeviceNumber = deviceNumber;
             sourceStream.WaveFormat = new WaveFormat(44100, WaveIn.GetCapabilities(deviceNumber).Channels);
             RecordLevel = SelectedDevice.AudioEndpointVolume.MasterVolumeLevelScalar;
@@ -145,7 +146,7 @@ namespace SoonZik.Streaming
 
             sourceStream.StartRecording();
         }
-        
+
         /*
          * Cloture le record
          */
@@ -170,7 +171,7 @@ namespace SoonZik.Streaming
             }
             ProgressBarVolume.Value = 0;
             Encode();
-            var result = (MessageBoxResult) MessageBox.Show("Enregistrement termine", "Enregistrement");
+            var result = (MessageBoxResult)MessageBox.Show("Enregistrement termine", "Enregistrement");
         }
 
         /*
@@ -190,7 +191,7 @@ namespace SoonZik.Streaming
          */
         void UpdatePeakMeter()
         {
-            synchronizationContext.Post(s => Peak = SelectedDevice.AudioMeterInformation .MasterPeakValue, null);
+            synchronizationContext.Post(s => Peak = SelectedDevice.AudioMeterInformation.MasterPeakValue, null);
             ProgressBarVolume.Value = Peak;
         }
 
@@ -199,8 +200,8 @@ namespace SoonZik.Streaming
          */
         private void SliderVolume_OnValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            var value = (Slider) e.OriginalSource;
-            SelectedDevice.AudioEndpointVolume.MasterVolumeLevelScalar = (float) value.Value;
+            var value = (Slider)e.OriginalSource;
+            SelectedDevice.AudioEndpointVolume.MasterVolumeLevelScalar = (float)value.Value;
         }
 
         private void Encode()
@@ -227,7 +228,7 @@ namespace SoonZik.Streaming
 
         private string SelectSaveFile()
         {
-            var sfd = new SaveFileDialog {FileName = _fileLocation + " converted" + ".mp3", Filter = "MP3|*.mp3"};
+            var sfd = new SaveFileDialog { FileName = _fileLocation + " converted" + ".mp3", Filter = "MP3|*.mp3" };
             //return (sfd.ShowDialog() == true) ? new Uri(sfd.FileName).AbsoluteUri : null;
             return sfd.FileName;
         }
