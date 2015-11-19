@@ -3,17 +3,69 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="MainWindow" Height="720" Width="1080"
         Background="#181818">
+    
+    <Window.Resources>
+
+    </Window.Resources>
+    
     <Grid>
-    	<TabControl HorizontalAlignment="Left" Height="689" VerticalAlignment="Top" Width="1072">
-    		<TabItem Header="Record" FontSize="20">
+        <TabControl HorizontalAlignment="Left" Height="689" VerticalAlignment="Top" Width="1072">
+            <TabItem Header="Record" FontSize="20">
                 <Grid Background="#FF181818">
-                    <TextBlock x:Name="WelcomeTextBlock" Foreground="DeepSkyBlue" FontSize="30" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10,0,0,0"/>
+                    <TextBlock x:Name="WelcomeTextBlock" Foreground="DeepSkyBlue" FontSize="30" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="10,0,0,0"/>
+                    <TextBlock x:Name="DeviceBlock" Foreground="DeepSkyBlue" FontSize="20" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="30,45,0,0" Text="Devices"/>
+                    <ListBox x:Name="DevicesListBox" Background="#424242" Height="200" Width="350" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,80,0,0" SelectionMode="Single" SelectedItem="{Binding SelectedCapabilities}">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding FriendlyName}"/>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                    
+                    <Button x:Name="ChooseDevice" FontSize="20" Background="Transparent" BorderBrush="DeepSkyBlue" HorizontalAlignment="Left" Margin="70,0,0,0"
+                    Foreground="DeepSkyBlue" Content="Refresh device" Width="250" Height="40" Click="ChooseDevice_OnClick" />
+                    
+                    <Button x:Name="StartRecord" FontSize="20" Background="Transparent" BorderBrush="DeepSkyBlue" HorizontalAlignment="Left" Margin="70,120,0,0"
+                    Foreground="DeepSkyBlue" Content="Enregistrer" Width="250" Height="40" Click="StartRecord_OnClick" />
+                    
+                    <Button x:Name="StopRecord" FontSize="20" Background="Transparent" BorderBrush="DeepSkyBlue" HorizontalAlignment="Left" Margin="70,240,0,0"
+                    Foreground="DeepSkyBlue" Content="Stop" Width="250" Height="40" Click="StopRecord_OnClick" />
+
+                    <ProgressBar x:Name="ProgressBarVolume" Height="20" Width="300" Maximum="1" Minimum="0">
+                        <ProgressBar.Style>
+                            <Style TargetType="{x:Type ProgressBar}">
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type ProgressBar}">
+                                            <Grid MinHeight="14" MinWidth="200">
+                                                <Rectangle x:Name="PART_Track" Stroke="#888888" StrokeThickness="1">
+                                                    <Rectangle.Fill>
+                                                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                                                            <GradientStop Offset="0" Color="#FF00FF00"/>
+                                                            <GradientStop Offset="0.9" Color="#FFFFFF00"/>
+                                                            <GradientStop Offset="1" Color="#FFFF0000"/>
+                                                        </LinearGradientBrush>
+                                                    </Rectangle.Fill>
+                                                </Rectangle>
+                                                <DockPanel Margin="1">
+                                                    <Rectangle x:Name="PART_Indicator">
+                                                    </Rectangle>
+                                                    <Rectangle x:Name="Mask" MinWidth="{TemplateBinding Width}" Fill="#C0C0C0"/>
+                                                </DockPanel>
+                                            </Grid>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </ProgressBar.Style>
+                    </ProgressBar>
                 </Grid>
             </TabItem>
-    		<TabItem Header="Upload" FontSize="20">
-    			<Grid Background="#FF181818"/>
-    		</TabItem>
-    	</TabControl>
+            <TabItem Header="Upload" FontSize="20">
+                <Grid Background="#FF181818">
+                </Grid>
+            </TabItem>
+        </TabControl>
 
     </Grid>
 </Window>

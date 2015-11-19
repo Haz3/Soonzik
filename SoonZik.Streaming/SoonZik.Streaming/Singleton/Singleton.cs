@@ -1,5 +1,4 @@
-﻿using System.Security.RightsManagement;
-using SonnZik.Streaming.HttpWebRequest.Poco;
+﻿using SonnZik.Streaming.HttpWebRequest.Poco;
 
 namespace SoonZik.Streaming.Singleton
 {

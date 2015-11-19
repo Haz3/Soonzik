@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Windows.ApplicationModel.Background;
 using Windows.ApplicationModel.Core;
 using Windows.Networking.Sockets;
 using Windows.Storage.Streams;
@@ -185,7 +186,6 @@ namespace SoonZik.ViewModel
             };
 
             var dispatcher = new WebSocketRailsDispatcher(new Uri("ws://soonzikapi.herokuapp.com/websocket"));
-
             var json = JsonConvert.SerializeObject(init);
 
             //trigger
@@ -196,7 +196,6 @@ namespace SoonZik.ViewModel
             //Bind
             dispatcher.Bind("onlineFriends", OnlineFriend);
             dispatcher.Bind("newMsg", MessageReceived);
-
             #region Test Avant
 
             /*try

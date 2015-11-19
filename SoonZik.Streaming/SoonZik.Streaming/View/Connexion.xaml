@@ -13,8 +13,9 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        
-        <Image Grid.Row="0" Source="../Ressources/Logo_SoonZik.png" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+        <Grid Row="0" Background="Gray">
+            <Image Grid.Row="0" Source="../Ressources/Logo_SoonZik.png" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+        </Grid>
         
         <Grid Grid.Row="1">
             <TextBlock Text="Username :" Foreground="White" FontSize="30"
