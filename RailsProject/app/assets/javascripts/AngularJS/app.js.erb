@@ -8,8 +8,7 @@ SoonzikApp.config(['$routeProvider', '$locationProvider', '$httpProvider', funct
 		/\/users\/sign_in/,
 		/\/users\/sign_up/,
 		/\/users\/sign_out/,
-		/\/users\/password\/new/,
-		/\/feedbacks\/new/
+		/\/users\/password\/new/
 	];
 
 	var dynamicPage = true;
@@ -88,6 +87,9 @@ SoonzikApp.config(['$routeProvider', '$locationProvider', '$httpProvider', funct
 		}).when('/my_music', {
 			templateUrl: '<%= asset_path("AngularJS/views/discotheque/index.html.haml") %>',
 			controller: 'DiscothequeCtrl'
+		}).when('/feedbacks/new', {
+			templateUrl: '<%= asset_path("AngularJS/views/feedbacks/new.html.haml") %>',
+			controller: 'FeedbackCtrl'
 		});
 	}
 

@@ -130,7 +130,6 @@ module Artist
 	        	}]
 	        end
 
-
 					memory_notes = {
         		album: [],
         		average: 0
@@ -147,17 +146,16 @@ module Artist
 	        		}
 	        		notes = 0
 	        		notesTotal = 0
+	        		musicList = album.musics
+	        		Music.fillAverageNote musicList
 
-		        	album.musics.each { |music|
-		        		# to ignore music without notes
-		        		if music.music_notes.size != 0
-		        			album_to_insert[:musics] << { id: music.id,
-		        				name: music.title,
-		        				note: music.getAverageNote
-		        			}
-		        			notes += 1
-		        			notesTotal += music.getAverageNote
-		        		end
+		        	musicList.each { |music|
+	        			album_to_insert[:musics] << { id: music.id,
+	        				name: music.title,
+	        				note: music.getAverageNote
+	        			}
+	        			notes += 1
+	        			notesTotal += music.getAverageNote
 		        	}
 
 		        	album_to_insert[:average] = notesTotal / notes if notes > 0

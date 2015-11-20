@@ -40,9 +40,10 @@ Rails.application.routes.draw do
       end
     end
 
+    match 'feedbacks/save' => 'feedbacks#save', via: [:post, :options] #ok
+
     resources :genres, only: [:index, :show] do #ok
     end
-
     match 'gifts/save' => 'gifts#save', via: [:post, :options] #ok
 
     resources :influences, only: [:index] do #ok

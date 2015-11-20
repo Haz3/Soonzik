@@ -46,6 +46,10 @@ header {
 		background: #252525;
 		overflow-y: auto;
 		border-right: 1px solid #191919;
+
+		&::-webkit-scrollbar { 
+			display: none; 
+		}
 	}
 
 	.flags ul li {

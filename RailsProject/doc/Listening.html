@@ -161,7 +161,7 @@ remove)</p>
 											<p>The strong parameters to save or update object</p>					
 											<div class="method-source-code" id="listening_params-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/models/listening.rb, line 53</span>
+								class="language-ruby"><span class="ruby-comment"># File app/models/listening.rb, line 52</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">listening_params</span>(<span class="ruby-identifier">parameters</span>)
   <span class="ruby-identifier">parameters</span>.<span class="ruby-identifier">require</span>(<span class="ruby-value">:listening</span>).<span class="ruby-identifier">permit</span>(<span class="ruby-value">:user_id</span>, <span class="ruby-value">:music_id</span>, <span class="ruby-value">:latitude</span>, <span class="ruby-value">:longitude</span>)
 <span class="ruby-keyword">end</span></code></pre>
@@ -185,7 +185,7 @@ remove)</p>
 <p>Fields returned : [:id, :created_at, :latitude, :longitude]</p>					
 											<div class="method-source-code" id="miniKey-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/models/listening.rb, line 38</span>
+								class="language-ruby"><span class="ruby-comment"># File app/models/listening.rb, line 37</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">miniKey</span>
   [<span class="ruby-value">:id</span>, <span class="ruby-value">:created_at</span>, <span class="ruby-value">:latitude</span>, <span class="ruby-value">:longitude</span>]
 <span class="ruby-keyword">end</span></code></pre>
@@ -220,7 +220,7 @@ remove)</p>
 											<p>To render the distance to in json</p>					
 											<div class="method-source-code" id="distance-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/models/listening.rb, line 48</span>
+								class="language-ruby"><span class="ruby-comment"># File app/models/listening.rb, line 47</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">distance</span>
   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">distance_from</span>(<span class="ruby-ivar">@origin</span>) <span class="ruby-operator">*</span> <span class="ruby-value">1.609344</span>
 <span class="ruby-keyword">end</span></code></pre>
@@ -242,7 +242,7 @@ remove)</p>
 											<p>To render with the distance to</p>					
 											<div class="method-source-code" id="setOrigin-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/models/listening.rb, line 43</span>
+								class="language-ruby"><span class="ruby-comment"># File app/models/listening.rb, line 42</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">setOrigin</span>(<span class="ruby-identifier">origin</span>)
   <span class="ruby-ivar">@origin</span> = <span class="ruby-identifier">origin</span>
 <span class="ruby-keyword">end</span></code></pre>
@@ -284,6 +284,7 @@ remove)</p>
 			<li><a href="./API/BattlesController.html">API::BattlesController</a></li>
 			<li><a href="./API/CartsController.html">API::CartsController</a></li>
 			<li><a href="./API/ConcertsController.html">API::ConcertsController</a></li>
+			<li><a href="./API/FeedbacksController.html">API::FeedbacksController</a></li>
 			<li><a href="./API/GenresController.html">API::GenresController</a></li>
 			<li><a href="./API/InfluencesController.html">API::InfluencesController</a></li>
 			<li><a href="./API/LanguagesController.html">API::LanguagesController</a></li>

@@ -92,8 +92,8 @@
 				  												<h1 class="class"
 					rel="popover"
 					data-original-title="In files"
-					data-content="app/controllers/API/ambiances_controller.rb"
-					>AmbiancesController</h1>
+					data-content="app/controllers/API/feedbacks_controller.rb"
+					>FeedbacksController</h1>
 				</p>
 							</hgroup>
 			<span class="label">class</span>
@@ -102,7 +102,7 @@
 		<section class="module-relations">
 			<dl>
 								<dt>Superclass</dt>
-								<dd class="superclass">ApisecurityController</dd>
+								<dd class="superclass"><a href="../API/ApisecurityController.html">API::ApisecurityController</a></dd>
 								
 				
 							</dl>
@@ -110,12 +110,10 @@
 
 		<section class="description">
 			
-<p>Controller which manage the transaction for the ambiances objects Here is
+<p>Controller which manage the transaction for the Feedbacks objects Here is
 the list of action available :</p>
 <ul><li>
 <p>index       [get]</p>
-</li><li>
-<p>show        [get]</p>
 </li></ul>
 		</section>
 
@@ -137,105 +135,55 @@ the list of action available :</p>
 					<h3>Public Instance Methods</h3>
 				</header>
 
-								<a name="method-i-index">anchor</a>
-				<div id="method-i-index-doc" class="method">
+								<a name="method-i-save">anchor</a>
+				<div id="method-i-save-doc" class="method">
 
 					<header>
 											<i class="icon-generic"></i>
-						<span class="method-name">index</span><span 
+						<span class="method-name">save</span><span 
 							class="method-args">()</span>
 										</header>
 
 					<div class="method-description">
-											<p>Retrieve all the ambiances</p>
+											<p>Save a new object <a href="../Feedback.html">Feedback</a>. For more
+information on the parameters, check at the model</p>
 
-<p>Route : /ambiances</p>
+<p>Route : /feedbacks/save</p>
 
-<h4 id="method-i-index-label-Options">Options<span><a href="#method-i-index-label-Options">&para;</a> <a href="#top">&uarr;</a></span></h4>
+<h4 id="method-i-save-label-Options">Options<span><a href="#method-i-save-label-Options">&para;</a> <a href="#top">&uarr;</a></span></h4>
 <ul><li>
-<p><code>count</code> - (optionnal) Get the number of object and not the
-object themselve. Useful for pagination</p>
+<p>+:feedback [email]+ - Mail to contact</p>
+</li><li>
+<p>+:feedback [type_obj]+ - Type of the issue</p>
+</li><li>
+<p>+:feedback [object]+ - Object of the feedback</p>
+</li><li>
+<p>+:feedback [text]+ - Text of the feedback</p>
 </li></ul>
 
-<h5 id="method-i-index-label-HTTP+VALUE">HTTP VALUE<span><a href="#method-i-index-label-HTTP+VALUE">&para;</a> <a href="#top">&uarr;</a></span></h5>
+<h5 id="method-i-save-label-HTTP+VALUE">HTTP VALUE<span><a href="#method-i-save-label-HTTP+VALUE">&para;</a> <a href="#top">&uarr;</a></span></h5>
 <ul><li>
-<p><code>200</code> - In case of success, return a list of ambiance including
-its music and the artist</p>
+<p><code>201</code> - In case of success, return the saved object including
+its musics (which includes its albums and artist) and user</p>
 </li><li>
 <p><code>503</code> - Error from server</p>
 </li></ul>					
-											<div class="method-source-code" id="index-source">
+											<div class="method-source-code" id="save-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/ambiances_controller.rb, line 23</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">index</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/feedbacks_controller.rb, line 25</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">save</span>
   <span class="ruby-keyword">begin</span>
-    <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@count</span>.<span class="ruby-identifier">present?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-ivar">@count</span> <span class="ruby-operator">==</span> <span class="ruby-string">&quot;true&quot;</span>)
-      <span class="ruby-ivar">@returnValue</span> = { <span class="ruby-identifier">content</span><span class="ruby-operator">:</span> <span class="ruby-constant">Ambiance</span>.<span class="ruby-identifier">count</span> }
+    <span class="ruby-identifier">feedback</span> = <span class="ruby-constant">Feedback</span>.<span class="ruby-identifier">new</span>(<span class="ruby-constant">Feedback</span>.<span class="ruby-identifier">feedback_params</span> <span class="ruby-identifier">params</span>)
+    <span class="ruby-keyword">if</span> (<span class="ruby-identifier">feedback</span>.<span class="ruby-identifier">save</span>)
+      <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">201</span>
+      <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:created</span>
     <span class="ruby-keyword">else</span>
-      <span class="ruby-ivar">@returnValue</span> = { <span class="ruby-identifier">content</span><span class="ruby-operator">:</span> <span class="ruby-constant">Ambiance</span>.<span class="ruby-identifier">eager_load</span>([<span class="ruby-value">:musics</span>]).<span class="ruby-identifier">all</span>.<span class="ruby-identifier">as_json</span>(<span class="ruby-value">:only</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">Ambiance</span>.<span class="ruby-identifier">miniKey</span>, <span class="ruby-value">:include</span> =<span class="ruby-operator">&gt;</span> {
-        <span class="ruby-identifier">musics</span><span class="ruby-operator">:</span> { 
-          <span class="ruby-identifier">only</span><span class="ruby-operator">:</span> <span class="ruby-constant">Music</span>.<span class="ruby-identifier">miniKey</span>
-        }
-      }) }
-    <span class="ruby-keyword">end</span>
-    <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@returnValue</span>[<span class="ruby-value">:content</span>].<span class="ruby-identifier">size</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>)
-      <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">202</span>
-    <span class="ruby-keyword">else</span>
-      <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">200</span>
+      <span class="ruby-ivar">@returnValue</span> = { <span class="ruby-identifier">content</span><span class="ruby-operator">:</span> <span class="ruby-identifier">feedback</span>.<span class="ruby-identifier">errors</span>.<span class="ruby-identifier">to_hash</span>.<span class="ruby-identifier">to_json</span> }
+      <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">503</span>
+      <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:service_unavailable</span>
     <span class="ruby-keyword">end</span>
   <span class="ruby-keyword">rescue</span>
-    <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">504</span>
-    <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:service_unavailable</span>
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-identifier">sendJson</span>
-<span class="ruby-keyword">end</span></code></pre>
-						</div>
-										</div>
-
-					
-									</div>
-								<a name="method-i-show">anchor</a>
-				<div id="method-i-show-doc" class="method">
-
-					<header>
-											<i class="icon-generic"></i>
-						<span class="method-name">show</span><span 
-							class="method-args">()</span>
-										</header>
-
-					<div class="method-description">
-											<p>Give a specific object by its id</p>
-
-<p>Route : /ambiances/:id</p>
-
-<h4 id="method-i-show-label-Options">Options<span><a href="#method-i-show-label-Options">&para;</a> <a href="#top">&uarr;</a></span></h4>
-<ul><li>
-<p><code>:id</code> - The id of the specific ambiance</p>
-</li></ul>
-
-<h5 id="method-i-show-label-HTTP+VALUE">HTTP VALUE<span><a href="#method-i-show-label-HTTP+VALUE">&para;</a> <a href="#top">&uarr;</a></span></h5>
-<ul><li>
-<p><code>200</code> - In case of success, return the ambiance including its
-music and the artist</p>
-</li><li>
-<p><code>404</code> - Can&#39;t get the ambiance, the id is probably wrong</p>
-</li><li>
-<p><code>503</code> - Error from server</p>
-</li></ul>					
-											<div class="method-source-code" id="show-source">
-							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/ambiances_controller.rb, line 60</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">show</span>
-  <span class="ruby-keyword">begin</span>
-    <span class="ruby-identifier">ambiance</span> = <span class="ruby-constant">Ambiance</span>.<span class="ruby-identifier">find_by_id</span>(<span class="ruby-ivar">@id</span>)
-    <span class="ruby-keyword">if</span> (<span class="ruby-operator">!</span><span class="ruby-identifier">ambiance</span>)
-      <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">502</span>
-      <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:not_found</span>
-    <span class="ruby-keyword">else</span>
-      <span class="ruby-ivar">@returnValue</span> = { <span class="ruby-identifier">content</span><span class="ruby-operator">:</span> <span class="ruby-identifier">ambiance</span>.<span class="ruby-identifier">as_json</span>(<span class="ruby-value">:only</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">Ambiance</span>.<span class="ruby-identifier">miniKey</span>) }
-      <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">200</span>
-    <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">rescue</span>
+    <span class="ruby-identifier">puts</span> <span class="ruby-identifier">$!</span>, <span class="ruby-identifier">$@</span>
     <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">504</span>
     <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:service_unavailable</span>
   <span class="ruby-keyword">end</span>

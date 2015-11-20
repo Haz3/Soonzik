@@ -145,7 +145,7 @@ for the heritance.</p>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>
   <span class="ruby-ivar">@security</span> = <span class="ruby-keyword">false</span>
   <span class="ruby-ivar">@user_id</span> = <span class="ruby-keyword">nil</span>
-  <span class="ruby-ivar">@returnValue</span> = { <span class="ruby-identifier">content</span><span class="ruby-operator">:</span> [] }
+  <span class="ruby-ivar">@returnValue</span> = { <span class="ruby-identifier">content</span><span class="ruby-operator">:</span> {} }
   
   <span class="ruby-ivar">@code</span> = []
   <span class="ruby-ivar">@code</span>[<span class="ruby-value">200</span>] = {<span class="ruby-identifier">code</span><span class="ruby-operator">:</span> <span class="ruby-value">200</span>, <span class="ruby-identifier">message</span><span class="ruby-operator">:</span> <span class="ruby-string">&quot;Success&quot;</span>}
@@ -479,11 +479,10 @@ the access is not granted</p>
 							<pre class="prettyprint linenums"><code 
 								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/apisecurity_controller.rb, line 222</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">checkKey</span>
-  <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;COUCOU CHECKKEY - #{defined?(@user_id)} - #{defined?(@secureKey)} - #{@user_id.present?} - #{@secureKey.present?}&quot;</span>
   <span class="ruby-keyword">if</span> (<span class="ruby-keyword">defined?</span>(<span class="ruby-ivar">@user_id</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-keyword">defined?</span>(<span class="ruby-ivar">@secureKey</span>))
     <span class="ruby-keyword">begin</span>
       <span class="ruby-identifier">u</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">find_by_id</span>(<span class="ruby-ivar">@user_id</span>)
-      <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@secureKey</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">u</span>.<span class="ruby-identifier">secureKey</span>)
+      <span class="ruby-keyword">if</span> (<span class="ruby-identifier">u</span> <span class="ruby-operator">!=</span> <span class="ruby-keyword">nil</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-ivar">@secureKey</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">u</span>.<span class="ruby-identifier">secureKey</span>)
         <span class="ruby-ivar">@security</span> = <span class="ruby-keyword">true</span>
         <span class="ruby-keyword">if</span> (<span class="ruby-constant">Time</span>.<span class="ruby-identifier">at</span>(<span class="ruby-identifier">u</span>.<span class="ruby-identifier">token_update</span>).<span class="ruby-identifier">to_i</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">Time</span>.<span class="ruby-identifier">now</span>.<span class="ruby-identifier">to_i</span>)
           <span class="ruby-identifier">u</span>.<span class="ruby-identifier">regenerateKey</span>
@@ -491,7 +490,6 @@ the access is not granted</p>
         <span class="ruby-keyword">end</span>
       <span class="ruby-keyword">else</span>
         <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">501</span>
-        <span class="ruby-ivar">@httpCode</span> = <span class="ruby-value">:unauthorized</span>
       <span class="ruby-keyword">end</span>
     <span class="ruby-keyword">rescue</span>
       <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">504</span>
@@ -524,12 +522,8 @@ modify it.</p>
 </li></ul>					
 											<div class="method-source-code" id="codeAnswer-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/apisecurity_controller.rb, line 262</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/apisecurity_controller.rb, line 260</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">codeAnswer</span>(<span class="ruby-identifier">index</span>)
-  <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@returnValue</span>[<span class="ruby-value">:code</span>] <span class="ruby-operator">!=</span> <span class="ruby-keyword">nil</span>)
-    <span class="ruby-keyword">return</span>
-  <span class="ruby-keyword">end</span>
-
   <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@code</span>[<span class="ruby-identifier">index</span>] <span class="ruby-operator">!=</span> <span class="ruby-keyword">nil</span>)
     <span class="ruby-ivar">@returnValue</span>[<span class="ruby-value">:code</span>] = <span class="ruby-ivar">@code</span>[<span class="ruby-identifier">index</span>][<span class="ruby-value">:code</span>]
     <span class="ruby-ivar">@returnValue</span>[<span class="ruby-value">:message</span>] = <span class="ruby-ivar">@code</span>[<span class="ruby-identifier">index</span>][<span class="ruby-value">:message</span>]
@@ -562,11 +556,9 @@ modify it.</p>
 </li></ul>					
 											<div class="method-source-code" id="defineHttp-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/apisecurity_controller.rb, line 284</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/apisecurity_controller.rb, line 278</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">defineHttp</span>(<span class="ruby-identifier">sym</span>)
-  <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@httpCode</span> <span class="ruby-operator">==</span> <span class="ruby-keyword">nil</span>)
-    <span class="ruby-ivar">@httpCode</span> = <span class="ruby-identifier">sym</span>
-  <span class="ruby-keyword">end</span>
+  <span class="ruby-ivar">@httpCode</span> = <span class="ruby-identifier">sym</span>
 <span class="ruby-keyword">end</span></code></pre>
 						</div>
 										</div>
@@ -586,7 +578,7 @@ modify it.</p>
 											<p>Render the value to return in json</p>					
 											<div class="method-source-code" id="sendJson-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/apisecurity_controller.rb, line 246</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/apisecurity_controller.rb, line 244</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">sendJson</span>
   <span class="ruby-identifier">codeAnswer</span>(<span class="ruby-value">202</span>) <span class="ruby-keyword">if</span> <span class="ruby-keyword">defined?</span>(<span class="ruby-ivar">@returnValue</span>[<span class="ruby-value">:content</span>]) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-keyword">defined?</span>(<span class="ruby-ivar">@returnValue</span>[<span class="ruby-value">:content</span>].<span class="ruby-identifier">size</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-ivar">@returnValue</span>[<span class="ruby-value">:content</span>].<span class="ruby-identifier">size</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-keyword">defined?</span><span class="ruby-ivar">@returnValue</span>[<span class="ruby-value">:code</span>]
   <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:ok</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@httpCode</span> <span class="ruby-operator">==</span> <span class="ruby-keyword">nil</span>
@@ -630,6 +622,7 @@ modify it.</p>
 			<li><a href="../API/BattlesController.html">API::BattlesController</a></li>
 			<li><a href="../API/CartsController.html">API::CartsController</a></li>
 			<li><a href="../API/ConcertsController.html">API::ConcertsController</a></li>
+			<li><a href="../API/FeedbacksController.html">API::FeedbacksController</a></li>
 			<li><a href="../API/GenresController.html">API::GenresController</a></li>
 			<li><a href="../API/InfluencesController.html">API::InfluencesController</a></li>
 			<li><a href="../API/LanguagesController.html">API::LanguagesController</a></li>

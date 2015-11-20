@@ -222,6 +222,9 @@ SoonzikApp.factory('HTTPService', ['$http', '$location', 'Upload', function ($ht
     },
     removeLike: function(parameters) {
       return $http.get(api_url + "/likes/destroy" + urlParametersFormat(parameters));
-    }
+    },
+    addFeedback: function(parameters) {
+      return $http.post(api_url + "/feedbacks/save", parameters);
+    },
   }
 }]);

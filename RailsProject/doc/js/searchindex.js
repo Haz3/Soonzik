@@ -49,6 +49,12 @@ var SearchIndex =
 		"type": "normalclass"
 	},
 	{
+		"name": "API::FeedbacksController",
+		"link": "API/FeedbacksController.html",
+		"snippet": "<p>Controller which manage the transaction for the Feedbacks objects Here is\nthe list of action available …\n",
+		"type": "normalclass"
+	},
+	{
 		"name": "API::GenresController",
 		"link": "API/GenresController.html",
 		"snippet": "<p>Controller which manage the transaction for the Genres objects Here is the\nlist of action available : …\n",
@@ -586,6 +592,12 @@ var SearchIndex =
 		"name": "find",
 		"link": "API/ConcertsController.html#method-i-find",
 		"snippet": "<p>Give a part of the concerts depending of the filter passed into parameter\n<p>Route : /concerts/find\n<p>Options …\n",
+		"type": "anymethod"
+	},
+	{
+		"name": "save",
+		"link": "API/FeedbacksController.html#method-i-save",
+		"snippet": "<p>Save a new object Feedback. For more information on the parameters, check\nat the model\n<p>Route : /feedbacks/save …\n",
 		"type": "anymethod"
 	},
 	{

@@ -37,6 +37,7 @@
 //= require ./AngularJS/controllers/ChatController.js
 //= require ./AngularJS/controllers/DiscothequeController.js
 //= require ./AngularJS/controllers/ExplorerController.js
+//= require ./AngularJS/controllers/FeedbacksController.js
 //= require ./AngularJS/controllers/FriendController.js
 //= require ./AngularJS/controllers/HeaderController.js
 //= require ./AngularJS/controllers/IndexController.js
