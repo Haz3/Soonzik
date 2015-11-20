@@ -6,6 +6,7 @@ using Windows.UI.Xaml;
 using Facebook;
 using SoonZik.HttpRequest;
 using SoonZik.HttpRequest.Poco;
+using Tweetinvi.Core.Credentials;
 
 namespace SoonZik.Singleton
 {
@@ -66,8 +67,10 @@ namespace SoonZik.Singleton
 
         public FacebookClient MyFacebookClient { get; set; }
 
-        public Key Key { get; set; }
+        public ITwitterCredentials UserTwitterCredentials { get; set; }
 
+        public Key Key { get; set; }
+        
         public string SecureKey { get; set; }
         #endregion
     }

@@ -547,6 +547,8 @@
       <RootProperty Name="Margin" />
     </RootType>
     <RootType FullName="SoonZik.Controls.ProgressRingControl" />
+    <RootType FullName="Windows.UI.Xaml.Controls.WebView" />
+    <RootType FullName="SoonZik.Controls.TwitterConnect" />
     <RootType FullName="SoonZik.Views.Connexion" />
     <RootType FullName="SoonZik.MainPage" />
     <RootType FullName="SoonZik.Views.AboutView" />

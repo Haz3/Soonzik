@@ -6,18 +6,25 @@ using Windows.ApplicationModel.Core;
 using Windows.Storage;
 using Windows.UI.Core;
 using Windows.UI.Popups;
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Media.Imaging;
+using Coding4Fun.Toolkit.Controls;
 using Facebook;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using Microsoft.Practices.ServiceLocation;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using SoonZik.Controls;
 using SoonZik.Helpers;
 using SoonZik.HttpRequest;
 using SoonZik.HttpRequest.Poco;
 using SoonZik.Utils;
 using SoonZik.Views;
+using Tweetinvi;
+using Tweetinvi.Core.Credentials;
+using User = SoonZik.HttpRequest.Poco.User;
 
 namespace SoonZik.ViewModel
 {
@@ -25,13 +32,11 @@ namespace SoonZik.ViewModel
     {
         #region Attribute
 
+        public static Popup TwitterPopup; 
+        private readonly ApplicationDataContainer _localSettings = ApplicationData.Current.LocalSettings;
         private readonly FaceBookHelper ObjFBHelper = new FaceBookHelper();
         private FacebookClient fbclient = new FacebookClient();
-
-        public ICommand SelectionCommand { get; private set; }
-
         private bool _progressOn;
-
         public bool ProgressOn
         {
             get { return _progressOn; }
@@ -41,11 +46,7 @@ namespace SoonZik.ViewModel
                 RaisePropertyChanged("ProgressOn");
             }
         }
-
-        private readonly ApplicationDataContainer _localSettings = ApplicationData.Current.LocalSettings;
-
         private string _username;
-
         public string Username
         {
             get { return _username; }
@@ -55,9 +56,7 @@ namespace SoonZik.ViewModel
                 RaisePropertyChanged("Username");
             }
         }
-
         private string _password;
-
         public string Password
         {
             get { return _password; }
@@ -67,16 +66,12 @@ namespace SoonZik.ViewModel
                 RaisePropertyChanged("Password");
             }
         }
-
-        public RelayCommand ConnexionCommand { get; private set; }
-
-        public RelayCommand InscritpiomCommand { get; private set; }
-
-        public RelayCommand FacebookTapped { get; private set; }
-
+        public ICommand SelectionCommand { get; private set; }
+        public ICommand ConnexionCommand { get; private set; }
+        public ICommand InscritpiomCommand { get; private set; }
+        public ICommand FacebookTapped { get; private set; }
         public ICommand TwitterTapped { get; private set; }
         public ICommand GoogleTapped { get; private set; }
-
         public INavigationService Navigation;
 
         #endregion
@@ -200,6 +195,35 @@ namespace SoonZik.ViewModel
 
         private void TwitterCommandExecute()
         {
+            TwitterPopup = new Popup(); 
+            var content = new TwitterConnect();
+            double width = content.Width;
+            double height = content.Height;
+            TwitterPopup.Child = content;
+            TwitterPopup.VerticalOffset = (Window.Current.Bounds.Height - height) / 2;
+            TwitterPopup.HorizontalOffset = (Window.Current.Bounds.Width - width) / 2;
+            TwitterPopup.IsOpen = true;
+            TwitterPopup.Closed += TwitterPopupOnClosed;
+        }
+
+        private async void TwitterPopupOnClosed(object sender, object e)
+        {
+            var keyTwitter = TwitterConnect.TwitterKey;
+
+            Auth.SetCredentials(Singleton.Singleton.Instance().UserTwitterCredentials);
+            var user = Tweetinvi.User.GetLoggedUser(Singleton.Singleton.Instance().UserTwitterCredentials);
+            var connecionSocial = new HttpRequestPost();
+            var getKey = new HttpRequestGet();
+
+            var key = await getKey.GetSocialToken(user.Id.ToString(), "twitter") as string;
+            char[] delimiter = { ' ', '"', '{', '}' };
+            var word = key.Split(delimiter);
+            var stringEncrypt = (user.Id.ToString() + word[4] + "3uNi@rCK$L$om40dNnhX)#jV2$40wwbr_bAK99%E");
+            var sha256 = EncriptSha256.EncriptStringToSha256(stringEncrypt);
+
+            await connecionSocial.ConnexionSocial("twitter", sha256, ObjFBHelper.AccessToken, user.Id.ToString());
+            var res = connecionSocial.Received;
+            GetUser(res);
         }
 
         private void GoogleTappedExecute()

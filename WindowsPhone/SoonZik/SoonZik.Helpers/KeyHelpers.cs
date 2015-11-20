@@ -1,4 +1,6 @@
-﻿namespace SoonZik.Helpers
+﻿using System;
+
+namespace SoonZik.Helpers
 {
     public class KeyHelpers
     {
@@ -8,6 +10,15 @@
             var word = key.Split(delimiter);
             var stringEncrypt = (word[4]);
             return stringEncrypt;
+        }
+
+        public static string GetTwitterKey(string key)
+        {
+            string[] separator = new string[] { "<code>", "</code>" };
+            var theKey = key.Split(separator, StringSplitOptions.None);
+            if (theKey.Length > 1)
+                return theKey[1];
+            return null;;
         }
     }
 }
