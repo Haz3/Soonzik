@@ -5,6 +5,7 @@ using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
 using SoonZik.HttpRequest.Poco;
 using SoonZik.ViewModel;
+using Tweetinvi;
 
 // Pour en savoir plus sur le modèle d'élément Contrôle utilisateur, consultez la page http://go.microsoft.com/fwlink/?LinkId=234236
 
@@ -22,7 +23,6 @@ namespace SoonZik.Controls
 
         public void FacebookShare_OnTapped(object sender, TappedRoutedEventArgs e)
         {
-            // TODO Share on Facebook
             try
             {
                 var postParams = new
@@ -67,7 +67,8 @@ namespace SoonZik.Controls
 
         public void TwitterShare_OnTapped(object sender, TappedRoutedEventArgs e)
         {
-            // TODO Share on Twittter
+            Tweet.PublishTweet(TextBoxShare.Text + " " + _selectedNews.title + "from @SoonZik");
+            var SuccessMsg = new MessageDialog("Message posted sucessfully on Twitter");
             NewsDetailViewModel.SharePopup.IsOpen = false;
         }
     }
