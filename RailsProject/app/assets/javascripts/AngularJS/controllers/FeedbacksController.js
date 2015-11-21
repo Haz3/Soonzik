@@ -8,10 +8,10 @@ SoonzikApp.controller('FeedbackCtrl', ['$scope', 'SecureAuth', 'HTTPService', 'N
 
 	$scope.options = [
 		{ label: "", value: "" },
-		{ label: "label. Bug on the website", value: "bug" },
-		{ label: "label. Payment issue", value: "payment" },
-		{ label: "label. Account issue", value: "account" },
-		{ label: "label. Other", value: "other" }
+		{ label: $rootScope.labels.DISPLAY_FEEDBACK_TYPE_OBJ_BUG_LABEL, value: "bug" },
+		{ label: $rootScope.labels.DISPLAY_FEEDBACK_TYPE_OBJ_PAYMENT_LABEL, value: "payment" },
+		{ label: $rootScope.labels.DISPLAY_FEEDBACK_TYPE_OBJ_ACCOUNT_LABEL, value: "account" },
+		{ label: $rootScope.labels.DISPLAY_FEEDBACK_TYPE_OBJ_OTHER_LABEL, value: "other" }
 	];
 
 	$scope.isSending = false;

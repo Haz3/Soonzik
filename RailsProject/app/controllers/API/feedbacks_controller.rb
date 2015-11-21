@@ -13,7 +13,7 @@ module API
     # ==== Options
     # 
     # * +:feedback [email]+ - Mail to contact
-    # * +:feedback [type_obj]+ - Type of the issue
+    # * +:feedback [type_obj]+ - Type of the issuet
     # * +:feedback [object]+ - Object of the feedback
     # * +:feedback [text]+ - Text of the feedback
     # 
@@ -34,7 +34,6 @@ module API
           defineHttp :service_unavailable
         end
       rescue
-        puts $!, $@
         codeAnswer 504
         defineHttp :service_unavailable
       end
