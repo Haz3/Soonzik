@@ -20,7 +20,7 @@ class Feedback < ActiveRecord::Base
 
   validates :email, :type_object, :object, :text, presence: true
   validates :email, format: /\A[a-zA-Z0-9_.+\-]+@[a-zA-Z0-9\-]+\.[a-zA-Z0-9\-.]+\z/
-  validates :mytype, :inclusion=> { :in => ["bug", "payment", "account", "other"] }
+  validates :type_object, :inclusion => { :in => ["bug", "payment", "account", "other"] }
 
   # The strong parameters to save or update object
   def self.feedback_params(parameters)

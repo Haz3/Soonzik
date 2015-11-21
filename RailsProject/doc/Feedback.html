@@ -158,7 +158,7 @@ relation and the validation Can provide some features linked to this model</p>
 											<p>The strong parameters to save or update object</p>					
 											<div class="method-source-code" id="feedback_params-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/models/feedback.rb, line 25</span>
+								class="language-ruby"><span class="ruby-comment"># File app/models/feedback.rb, line 26</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">feedback_params</span>(<span class="ruby-identifier">parameters</span>)
   <span class="ruby-identifier">parameters</span>.<span class="ruby-identifier">require</span>(<span class="ruby-value">:feedback</span>).<span class="ruby-identifier">permit</span>(<span class="ruby-value">:email</span>, <span class="ruby-value">:type_object</span>, <span class="ruby-value">:object</span>, <span class="ruby-value">:text</span>)
 <span class="ruby-keyword">end</span></code></pre>

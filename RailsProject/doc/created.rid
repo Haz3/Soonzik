@@ -1,4 +1,4 @@
-Fri, 20 Nov 2015 20:50:34 +0100
+Sat, 21 Nov 2015 14:59:01 +0100
 app/controllers/API/albums_controller.rb	Wed, 11 Nov 2015 18:06:41 +0100
 app/controllers/API/ambiances_controller.rb	Sat, 07 Nov 2015 16:14:19 +0100
 app/controllers/API/api_controller.rb	Sat, 07 Nov 2015 20:29:12 +0100
@@ -6,7 +6,7 @@ app/controllers/API/apisecurity_controller.rb	Sun, 15 Nov 2015 15:01:48 +0100
 app/controllers/API/battles_controller.rb	Sat, 07 Nov 2015 20:29:56 +0100
 app/controllers/API/carts_controller.rb	Sat, 07 Nov 2015 20:29:59 +0100
 app/controllers/API/concerts_controller.rb	Sun, 08 Nov 2015 00:22:35 +0100
-app/controllers/API/feedbacks_controller.rb	Fri, 20 Nov 2015 18:16:07 +0100
+app/controllers/API/feedbacks_controller.rb	Sat, 21 Nov 2015 14:58:52 +0100
 app/controllers/API/genres_controller.rb	Sun, 15 Nov 2015 18:18:57 +0100
 app/controllers/API/influences_controller.rb	Mon, 19 Oct 2015 22:40:35 +0200
 app/controllers/API/languages_controller.rb	Thu, 27 Aug 2015 23:13:38 +0200
@@ -35,7 +35,7 @@ app/models/commentary.rb	Thu, 27 Aug 2015 23:13:38 +0200
 app/models/concert.rb	Tue, 10 Nov 2015 13:48:08 +0100
 app/models/concertslike.rb	Fri, 30 Oct 2015 19:11:24 +0100
 app/models/description.rb	Sun, 06 Sep 2015 11:48:45 +0200
-app/models/feedback.rb	Fri, 20 Nov 2015 16:18:08 +0100
+app/models/feedback.rb	Sat, 21 Nov 2015 14:07:51 +0100
 app/models/follow.rb	Thu, 27 Aug 2015 23:13:38 +0200
 app/models/friend.rb	Thu, 27 Aug 2015 23:13:38 +0200
 app/models/genre.rb	Sun, 06 Sep 2015 21:01:29 +0200
