@@ -22,7 +22,7 @@
         </Grid>
 
 
-        <FlipView Name="flip_view" ItemsSource="{Binding concertlist}" HorizontalAlignment="Left" Margin="97,107,0,0" VerticalAlignment="Top" Height="936" Width="1721" FontSize="30">
+        <FlipView Name="flip_view" ItemsSource="{Binding concertlist}" SelectedItem="{Binding selected_concert, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="97,107,0,0" VerticalAlignment="Top" Height="936" Width="1721" FontSize="30">
             <FlipView.ItemTemplate>
                 <DataTemplate>
 
@@ -37,6 +37,7 @@
                                 <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="0.5*"/>
                             </Grid.ColumnDefinitions>
 
                             <!--ROW 0-->
@@ -56,6 +57,15 @@
                                 <Run Text="{Binding address.city}"/>
                                 <Run Text="{Binding address.zipcode}"/>
                             </TextBlock>
+
+                            <!--ROW 3-->
+                            <Button x:Name="like_btn" Grid.Column="3" Grid.Row="0" Content="Like" Command="{Binding do_like}" Visibility="{Binding like_btn, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center" Height="37" VerticalAlignment="Center" Width="96" Foreground="Black" Background="#FF00AFDC" BorderBrush="#FF00AFDC"/>
+                            <Button x:Name="unlike_btn" Grid.Column="3" Grid.Row="0" Content="Unlike" Command="{Binding do_unlike}" Visibility="{Binding unlike_btn, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center" Height="37" VerticalAlignment="Center" Width="96" Foreground="Black" Background="#FFFF6565" BorderBrush="#FFFF6565"/>
+                            <TextBlock Grid.Column="3" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Bottom">
+                                <Run Foreground="Black" Text="Likes: "/>
+                                <Run Foreground="Black" Text="{Binding likes}"/>
+                            </TextBlock>
+
                         </Grid>
 
 

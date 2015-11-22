@@ -34,6 +34,11 @@ namespace SoonZik.Views
             this.Frame.GoBack();
         }
 
+        private void ambiamce_btn_Click(object sender, RoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(Ambiance));
+        }
+
         private void genre_list_ItemClick(object sender, ItemClickEventArgs e)
         {
             var item = ((SoonZik.Models.Genre)e.ClickedItem);

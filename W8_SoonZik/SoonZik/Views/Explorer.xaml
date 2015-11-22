@@ -80,6 +80,7 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
+        <Button x:Name="ambiamce_btn" Content="Ambiances" HorizontalAlignment="Left" Margin="212,132,0,0" VerticalAlignment="Top" Width="121" Background="#FF27AAE1" FontSize="15" Click="ambiamce_btn_Click"/>
 
     </Grid>
 </Page>
