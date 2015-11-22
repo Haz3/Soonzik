@@ -8,10 +8,13 @@
 
 #import "TypeViewController.h"
 
-@interface ContactViewController : TypeViewController <UITextViewDelegate>
+@interface ContactViewController : TypeViewController <UITextViewDelegate, UIPickerViewDataSource, UIPickerViewDelegate, UITextFieldDelegate>
 
 @property (nonatomic, strong) IBOutlet UILabel *descLabel;
 @property (nonatomic, strong) IBOutlet UITextView *textView;
 @property (nonatomic, strong) IBOutlet UIButton *sendButton;
+@property (nonatomic, strong) IBOutlet UIPickerView *pickerView;
+@property (nonatomic, strong) IBOutlet UIButton *button;
+@property (nonatomic, strong) IBOutlet UITextField *objectTextField;
 
 @end

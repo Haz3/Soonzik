@@ -359,14 +359,16 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    Album *album = [self.listOfAlbums objectAtIndex:indexPath.row];
-    
-    [self closePopUp];
-    
-    AlbumViewController *vc = [[AlbumViewController alloc] initWithNibName:@"AlbumViewController" bundle:nil];
-    vc.album = album;
-    
-    [self presentViewController:vc animated:YES completion:nil];
+    if (indexPath.section == 0) {
+        Album *album = [self.listOfAlbums objectAtIndex:indexPath.row];
+        
+        [self closePopUp];
+        
+        AlbumViewController *vc = [[AlbumViewController alloc] initWithNibName:@"AlbumViewController" bundle:nil];
+        vc.album = album;
+        
+        [self presentViewController:vc animated:YES completion:nil];
+    }
 }
 
 @end

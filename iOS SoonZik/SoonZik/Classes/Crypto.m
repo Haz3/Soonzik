@@ -8,6 +8,7 @@
 
 #import "Crypto.h"
 #import "User.h"
+#import "Secu.h"
 
 @implementation Crypto
 
@@ -17,26 +18,22 @@
 
     bool need = false;
     
-    NSLog(@"user.secureKey : %@", user.secureKey);
-    if (user.secureKey == nil) {    // if secureKey is null
+    NSLog(@"user.secureKey : %@", [[Secu sharedInstance] secureKey]);
+    if ([[Secu sharedInstance] secureKey] == nil) {    // if secureKey is null
         need = true;
         NSLog(@"secure KEy is null");
     } else {
-        NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
-        [dateFormat setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
-        //[dateFormat setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"GMT"]];
-        NSDate *dat = [dateFormat dateFromString:user.secureKeyDate];
-        NSTimeInterval secondsInOneHours = 2 * 60 * 60;
-        NSDate *dateOneHoursAhead = [dat dateByAddingTimeInterval:secondsInOneHours];
+        NSDate *now = [[NSDate date] dateByAddingTimeInterval:1 * 60 * 60];
+        NSLog(@"now : %@", now);
+        NSLog(@"user.secureDate : %@", [[Secu sharedInstance] secureKeyDate]);
         
-        NSLog(@"user.secureDate : %@", dateOneHoursAhead);
-        
-        NSDate *now = [NSDate date];
-        if ([now compare:dateOneHoursAhead] == NSOrderedDescending) {
+        if ([now compare:[[Secu sharedInstance] secureKeyDate]] == NSOrderedDescending) {
             need = true;
         }
-        
     }
+    /************/
+    need = true;
+    /************/
     
     if (need) {
         
@@ -48,24 +45,28 @@
         NSString *stringDate = [json objectForKey:@"last_update"];
         stringDate = [stringDate stringByReplacingOccurrencesOfString:@"T" withString:@" "];
         stringDate = [stringDate stringByReplacingOccurrencesOfString:@"+00:00" withString:@""];
+        NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+        [dateFormat setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+        [dateFormat setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"GMT"]];
+        NSDate *date = [dateFormat dateFromString:stringDate];
+        date = [date dateByAddingTimeInterval:1 * 60 * 60];
         
         NSString *secureKey = [json objectForKey:@"key"];
+        
         
         NSString *conca = [NSString stringWithFormat:@"%@%@", user.salt, secureKey];
         NSString *key = [Crypto sha256HashFor:conca];
         
-        user.secureKeyDate = stringDate;
-        user.secureKey = key;
+        [Secu sharedInstance].secureKeyDate = date;
+        [Secu sharedInstance].secureKey = key;
         
-        NSData *dataStore = [NSKeyedArchiver archivedDataWithRootObject:user];
-        [[NSUserDefaults standardUserDefaults] setObject:dataStore forKey:@"User"];
-        [[NSUserDefaults standardUserDefaults] synchronize];
+         NSLog(@"user.secureKey   AFTER : %@", [[Secu sharedInstance] secureKey]);
         
     } else {
         NSLog(@"NO NEED");
     }
     
-    return user.secureKey;
+    return [[Secu sharedInstance] secureKey];
 }
 
 + (NSString*)sha256HashFor:(NSString*)input

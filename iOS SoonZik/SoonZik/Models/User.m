@@ -57,8 +57,6 @@
     [aCoder encodeObject:self.follows forKey:@"follows"];
     [aCoder encodeObject:self.followers forKey:@"followers"];
     [aCoder encodeObject:self.friends forKey:@"friends"];
-    [aCoder encodeObject:self.secureKeyDate forKey:@"secureKeyDate"];
-    [aCoder encodeObject:self.secureKey forKey:@"secureKey"];
 }
 
 - (id)initWithCoder:(NSCoder *)aDecoder{
@@ -76,8 +74,6 @@
         self.follows = [aDecoder decodeObjectForKey:@"follows"];
         self.followers = [aDecoder decodeObjectForKey:@"followers"];
         self.friends = [aDecoder decodeObjectForKey:@"friends"];
-        self.secureKeyDate = [aDecoder decodeObjectForKey:@"secureKeyDate"];
-        self.secureKey = [aDecoder decodeObjectForKey:@"secureKey"];
     }
     return self;
 }
