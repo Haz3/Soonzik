@@ -29,24 +29,97 @@
     [self.sendButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [self.sendButton addTarget:self action:@selector(sendMessage) forControlEvents:UIControlEventTouchUpInside];
     
-    self.descLabel.text = @"Un commentaire, un retour ou quelque chose d'autre à partager avec nous? Nous sommes à ton écoute.";
+    self.descLabel.text = @"Something you want to notice us?";
     self.descLabel.textColor = [UIColor whiteColor];
     self.descLabel.font = SOONZIK_FONT_BODY_MEDIUM;
+    
+    [self.pickerView setHidden:true];
+    self.pickerView.delegate = self;
+    self.pickerView.dataSource = self;
+    self.pickerView.tintColor = [UIColor whiteColor];
+    
+    self.objectTextField.layer.masksToBounds = YES;
+    self.objectTextField.layer.cornerRadius = 5.0f;
+    self.objectTextField.layer.borderWidth = 1;
+    self.objectTextField.layer.borderColor = [UIColor grayColor].CGColor;
+    self.objectTextField.backgroundColor = [UIColor clearColor];
+    self.objectTextField.textColor = [UIColor whiteColor];
+    self.objectTextField.delegate = self;
+    self.objectTextField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"Object of the feedback" attributes:@{NSForegroundColorAttributeName: [UIColor whiteColor]}];
+    
+    [self.button setTintColor:[UIColor whiteColor]];
+    self.button.titleLabel.font = SOONZIK_FONT_BODY_MEDIUM;
+    
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(closePickerView)];
+    [self.view addGestureRecognizer:tap];
+    
+    [self.button addTarget:self action:@selector(openPickerView) forControlEvents:UIControlEventTouchUpInside];
+    [self.button setTitle:@"Reason you want to contact us ?" forState:UIControlStateNormal];
 }
 
 - (void)sendMessage {
-    
     self.textView.text = @"";
 }
 
+- (void)closePickerView {
+    [self.pickerView setHidden:true];
+}
+
+- (void)openPickerView {
+    [self.pickerView setHidden:false];
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [textField resignFirstResponder];
+    return true;
+}
+
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
-    
     if ([text isEqualToString:@"\n"]) {
         [textView resignFirstResponder];
         return false;
     }
-    
     return true;
+}
+
+- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
+    return 1;
+}
+
+- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
+    return 4;
+}
+
+- (NSAttributedString *)pickerView:(UIPickerView *)pickerView
+             attributedTitleForRow:(NSInteger)row
+                      forComponent:(NSInteger)component
+{
+    NSString *title;
+    if (row == 0) {
+        title = @"Bug";
+    } else if (row == 1) {
+        title = @"Account";
+    } else if (row == 2) {
+        title = @"Payment";
+    } else {
+        title = @"Other";
+    }
+    
+    return [[NSAttributedString alloc] initWithString:title attributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
+}
+
+- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
+    NSString *title;
+    if (row == 0) {
+        title = @"Bug";
+    } else if (row == 1) {
+        title = @"Account";
+    } else if (row == 2) {
+        title = @"Payment";
+    } else {
+        title = @"Other";
+    }
+    [self.button setTitle:title forState:UIControlStateNormal];
 }
 
 @end
