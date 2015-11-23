@@ -30,5 +30,7 @@
 + (BoughtContent *)getContent;
 + (NSMutableArray *)getUsersInArea:(double)latitude :(double)longitude :(int)range;
 + (User *)update:(User *)user;
++ (BOOL)sendFeedback:(NSString *)mail type:(NSString *)type object:(NSString *)object text:(NSString *)text;
+
 
 @end

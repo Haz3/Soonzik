@@ -60,12 +60,10 @@ static Socket *sharedSocket = nil;    // static instance variable
     
     NSLog(@"initError");
     NSString *key = [Crypto getKey];
-    NSString *conca = [NSString stringWithFormat:@"%@%@", self.user.salt, key];
-    NSString *secureKey = [Crypto sha256HashFor:conca];
     
     NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:
                          [NSString stringWithFormat:@"%i", self.user.identifier], @"user_id",
-                         secureKey, @"secureKey",
+                         key, @"secureKey",
                          nil];
     
     [dispatcher trigger:@"init_connection" data:@{@"data": dic} success:^(id data) {
@@ -98,12 +96,10 @@ static Socket *sharedSocket = nil;    // static instance variable
 
 - (void)whoIsOnline {
     NSString *key = [Crypto getKey];
-    NSString *conca = [NSString stringWithFormat:@"%@%@", self.user.salt, key];
-    NSString *secureKey = [Crypto sha256HashFor:conca];
-    
+
     NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:
                          [NSString stringWithFormat:@"%i", self.user.identifier], @"user_id",
-                         secureKey, @"secureKey",
+                         key, @"secureKey",
                          nil];
     
     [dispatcher trigger:@"who_is_online" data:@{@"data": dic} success:^(id data) {
@@ -115,12 +111,10 @@ static Socket *sharedSocket = nil;    // static instance variable
 
 - (void)sendMessage:(NSString *)msg toUserId:(int)userID {
     NSString *key = [Crypto getKey];
-    NSString *conca = [NSString stringWithFormat:@"%@%@", self.user.salt, key];
-    NSString *secureKey = [Crypto sha256HashFor:conca];
 
     NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:
                          [NSString stringWithFormat:@"%i", self.user.identifier], @"user_id",
-                         secureKey, @"secureKey",
+                         key, @"secureKey",
                          msg, @"messageValue",
                          [NSString stringWithFormat:@"%i", userID], @"toWho",
                          nil];

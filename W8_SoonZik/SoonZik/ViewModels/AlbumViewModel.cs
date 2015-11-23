@@ -12,6 +12,7 @@ using System.Windows.Input;
 using Windows.Data.Xml.Dom;
 using Windows.UI.Notifications;
 using Windows.UI.Popups;
+using Windows.UI.Xaml;
 
 namespace SoonZik.ViewModels
 {
@@ -64,6 +65,51 @@ namespace SoonZik.ViewModels
             private set;
         }
 
+        public ICommand do_like
+        {
+            get;
+            private set;
+        }
+        public ICommand do_unlike
+        {
+            get;
+            private set;
+        }
+
+        private Visibility _like_btn;
+        public Visibility like_btn
+        {
+            get { return _like_btn; }
+            set
+            {
+                _like_btn = value;
+                OnPropertyChanged("like_btn");
+            }
+        }
+
+        private Visibility _unlike_btn;
+        public Visibility unlike_btn
+        {
+            get { return _unlike_btn; }
+            set
+            {
+                _unlike_btn = value;
+                OnPropertyChanged("unlike_btn");
+            }
+        }
+
+        private int _likes;
+        public int likes
+        {
+            get { return _likes; }
+            set
+            {
+                _likes = value;
+                OnPropertyChanged("likes");
+            }
+        }
+
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected void OnPropertyChanged(string name)
@@ -85,6 +131,10 @@ namespace SoonZik.ViewModels
             //commentlist = new ObservableCollection<Comment>();
             do_send_comment = new RelayCommand(send_comment);
             do_add_to_cart = new RelayCommand(add_to_cart);
+            do_like = new RelayCommand(like);
+            do_unlike = new RelayCommand(unlike);
+            like_btn = Visibility.Collapsed;
+            unlike_btn = Visibility.Collapsed;
             load_album(id);
         }
 
@@ -96,6 +146,14 @@ namespace SoonZik.ViewModels
             {
                 // Load the news
                 album = await Http_get.get_album_by_id(id);
+
+                if (album.hasLiked)
+                    unlike_btn = Visibility.Visible;
+                else
+                    like_btn = Visibility.Visible;
+
+
+                likes = album.likes;
 
                 var comment_vm = await CommentViewModel.load_comments("/albums/" + album.id.ToString());
                 commentlist = comment_vm;
@@ -142,6 +200,26 @@ namespace SoonZik.ViewModels
                 commentlist.Insert(0, new_comment);
                 // To delete text in comment bar
                 comment_content = "";
+            }
+        }
+
+        async public void like()
+        {
+            if (await LikeViewModel.like("Albums", album.id.ToString()))
+            {
+                like_btn = Visibility.Collapsed;
+                unlike_btn = Visibility.Visible;
+                likes += 1;
+            }
+        }
+
+        async public void unlike()
+        {
+            if (await LikeViewModel.unlike("Albums", album.id.ToString()))
+            {
+                like_btn = Visibility.Visible;
+                unlike_btn = Visibility.Collapsed;
+                likes -= 1;
             }
         }
 

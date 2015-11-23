@@ -25,11 +25,11 @@
     [super setSelected:selected animated:animated];
 
     if (selected) {
-        NSLog(@"selected");
+        //NSLog(@"selected");
         self.lbl.textColor = ORANGE;
         
     } else {
-        NSLog(@"not selected");
+        //NSLog(@"not selected");
         self.lbl.textColor = [UIColor whiteColor];
     }
 }

@@ -116,6 +116,7 @@
     <Compile Include="Common\SuspensionManager.cs" />
     <Compile Include="Models\Address.cs" />
     <Compile Include="Models\Album.cs" />
+    <Compile Include="Models\Ambiance.cs" />
     <Compile Include="Models\Artist_info.cs" />
     <Compile Include="Models\Attachments.cs" />
     <Compile Include="Models\Battle.cs" />
@@ -145,6 +146,7 @@
     <Compile Include="Tools\Security.cs" />
     <Compile Include="Tools\Singleton.cs" />
     <Compile Include="ViewModels\AlbumViewModel.cs" />
+    <Compile Include="ViewModels\AmbianceViewModel.cs" />
     <Compile Include="ViewModels\ArtistViewModel.cs" />
     <Compile Include="ViewModels\BattleViewModel.cs" />
     <Compile Include="ViewModels\CartViewModel.cs" />
@@ -176,6 +178,9 @@
     <Compile Include="ViewModels\UserViewModel.cs" />
     <Compile Include="Views\Album.xaml.cs">
       <DependentUpon>Album.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Ambiance.xaml.cs">
+      <DependentUpon>Ambiance.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Artist.xaml.cs">
       <DependentUpon>Artist.xaml</DependentUpon>
@@ -333,6 +338,10 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Page Include="Views\Album.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Ambiance.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

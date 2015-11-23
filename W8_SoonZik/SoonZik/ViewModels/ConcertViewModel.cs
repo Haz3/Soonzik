@@ -10,12 +10,71 @@ using Windows.UI.Popups;
 using System.Net.Http;
 using Newtonsoft.Json.Linq;
 using System.Net;
+using Windows.UI.Xaml;
+using System.ComponentModel;
+using System.Windows.Input;
+using SoonZik.Common;
 
 namespace SoonZik.ViewModels
 {
-    class ConcertViewModel
+    class ConcertViewModel : INotifyPropertyChanged
     {
         public ObservableCollection<Concert> concertlist { get; set; }
+        public Concert selected_concert { get; set; }
+        //public ICommand do_like
+        //{
+        //    get;
+        //    private set;
+        //}
+        //public ICommand do_unlike
+        //{
+        //    get;
+        //    private set;
+        //}
+
+        //private Visibility _like_btn;
+        //public Visibility like_btn
+        //{
+        //    get { return _like_btn; }
+        //    set
+        //    {
+        //        _like_btn = value;
+        //        OnPropertyChanged("like_btn");
+        //    }
+        //}
+
+        //private Visibility _unlike_btn;
+        //public Visibility unlike_btn
+        //{
+        //    get { return _unlike_btn; }
+        //    set
+        //    {
+        //        _unlike_btn = value;
+        //        OnPropertyChanged("unlike_btn");
+        //    }
+        //}
+
+        private int _likes;
+        public int likes
+        {
+            get { return _likes; }
+            set
+            {
+                _likes = value;
+                OnPropertyChanged("likes");
+            }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected void OnPropertyChanged(string name)
+        {
+            PropertyChangedEventHandler handler = PropertyChanged;
+            if (handler != null)
+            {
+                handler(this, new PropertyChangedEventArgs(name));
+            }
+        }
 
         public ConcertViewModel()
         {
@@ -29,10 +88,22 @@ namespace SoonZik.ViewModels
 
             try
             {
-                var concert = (List<Concert>)await Http_get.get_object(new List<Concert>(), "concerts");
+                var concert = (List<Concert>)await Http_get.get_object(new List<Concert>(), "concerts?user_id=" + Singleton.Instance.Current_user.id.ToString() + "&secureKey=" + await Security.getSecureKey(Singleton.Instance.Current_user.id.ToString()));
 
                 foreach (var item in concert)
                 {
+                    item.do_like = new RelayCommand(like);
+                    item.do_unlike = new RelayCommand(unlike);
+                    if (item.hasLiked)
+                    {
+                        item.like_btn = Visibility.Collapsed;
+                        item.unlike_btn = Visibility.Visible;
+                    }
+                    else
+                    {
+                        item.like_btn = Visibility.Visible;
+                        item.unlike_btn = Visibility.Collapsed;
+                    }
                     item.address = await geocode(item.address);
                     concertlist.Add(item);
                 }
@@ -44,6 +115,26 @@ namespace SoonZik.ViewModels
 
             if (exception != null)
                 await new MessageDialog(exception.Message, "Concert error").ShowAsync();
+        }
+
+        async public void like()
+        {
+            if (await LikeViewModel.like("Concerts", selected_concert.id.ToString()))
+            {
+                //selected_concert.li = Visibility.Collapsed;
+                //selected_concert.unlike_btn = Visibility.Visible;
+                //likes += 1;
+            }
+        }
+
+        async public void unlike()
+        {
+            if (await LikeViewModel.unlike("Concerts", selected_concert.id.ToString()))
+            {
+                //like_btn = Visibility.Visible;
+                //unlike_btn = Visibility.Collapsed;
+                //likes -= 1;
+            }
         }
 
         async Task<Address> geocode(Address addr)

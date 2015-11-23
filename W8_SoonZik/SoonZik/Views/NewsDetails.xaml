@@ -30,18 +30,27 @@
                 <RowDefinition Height="291"/>
             </Grid.RowDefinitions>
             <Rectangle Fill="#FF00AFDC" HorizontalAlignment="Left" Height="75" StrokeEndLineCap="Square" Stroke="#FF00AFDC" VerticalAlignment="Top" Width="1120" Grid.ColumnSpan="2" Margin="0,0,-405,0"/>
-         
+
             <TextBlock x:Name="news_title" Margin="20,10,0,19" TextWrapping="Wrap" Text="{Binding news.title, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" FontSize="36" Height="46" Grid.ColumnSpan="2"/>
-           
+
             <Image  Grid.Row="2" Source="http://assos-escrennes.fr/descibel-radio/wp-content/uploads/2015/01/Generic-News-Logo.png" Stretch="Fill" Width="174" Height="174" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,116,71,0"/>
-         
+
             <TextBlock x:Name="news_author" HorizontalAlignment="Left" Margin="20,5,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Text="{Binding news.user.username, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Foreground="Black" Height="25" Width="Auto" FontSize="20" Grid.ColumnSpan="2"/>
-            
+
             <TextBlock x:Name="news_content" Grid.Column="1" HorizontalAlignment="Left" Margin="60,55,-80,0" Grid.Row="2" TextWrapping="Wrap" Text="{Binding news.content, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Height="165" Width="470" Foreground="Black" FontSize="18"/>
-                    
+
             <TextBlock x:Name="news_id_txt" Grid.Column="1" HorizontalAlignment="Left" Visibility="Collapsed" Margin="760,10,-395,0" TextWrapping="Wrap" Text="{Binding news.id, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="85" Height="46" FontSize="30"/>
-         
+
             <TextBlock x:Name="news_date" HorizontalAlignment="Left" Margin="20,10,0,0" Grid.Row="2" TextWrapping="Wrap" VerticalAlignment="Top" Text="{Binding news.created_at, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Foreground="Black" Height="25" Width="Auto" FontSize="20"/>
+
+            <TextBlock x:Name="like_txt" Margin="0,397,200,-124" Grid.Row="2" TextWrapping="Wrap" Text="Likes: " VerticalAlignment="Top" Foreground="Black" FontSize="15" Width="45" HorizontalAlignment="Right"/>
+            <TextBlock x:Name="nb_like_txt" Margin="0,397,150,-124" Grid.Row="2" TextWrapping="Wrap" Text="{Binding likes, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Foreground="Black" FontSize="15" Width="45" HorizontalAlignment="Right"/>
+
+            <Button x:Name="like_btn" Content="Like" Command="{Binding do_like}" Visibility="{Binding like_btn, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Height="37" Margin="17,346,0,-92" Grid.Row="2" VerticalAlignment="Top" Width="96" Foreground="Black" Background="#FF00AFDC" BorderBrush="#FF00AFDC"/>
+
+            <Button x:Name="unlike_btn" Content="Unlike" Command="{Binding do_unlike}" Visibility="{Binding unlike_btn, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Height="37" Margin="17,346,0,-92" Grid.Row="2" VerticalAlignment="Top" Width="96" Foreground="Black" Background="#FFFF6565" BorderBrush="#FFFF6565"/>
+
+
         </Grid>
 
 

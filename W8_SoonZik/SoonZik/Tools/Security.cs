@@ -41,9 +41,19 @@ namespace SoonZik.Tools
 
         public static async Task<string> getSecureKey(string id)
         {
-            string key = await getKey(id);
-            string key_to_encode = Singleton.Instance.Current_user.salt + key;
-            return CryptographicBuffer.EncodeToHexString(HashAlgorithmProvider.OpenAlgorithm(HashAlgorithmNames.Sha256).HashData(CryptographicBuffer.ConvertStringToBinary(key_to_encode, BinaryStringEncoding.Utf8)));
+            if (Singleton.Instance.compare_date.AddMinutes(5) < DateTime.Now || Singleton.Instance.compare_date.GetHashCode() == 0)
+            {
+                //await new MessageDialog("GETKEY").ShowAsync();
+                string key = await getKey(id);
+                string key_to_encode = Singleton.Instance.Current_user.salt + key;
+
+                Singleton.Instance.compare_date = DateTime.Now;
+                Singleton.Instance.secureKey = CryptographicBuffer.EncodeToHexString(HashAlgorithmProvider.OpenAlgorithm(HashAlgorithmNames.Sha256).HashData(CryptographicBuffer.ConvertStringToBinary(key_to_encode, BinaryStringEncoding.Utf8)));
+
+                return Singleton.Instance.secureKey;
+            }
+            //await new MessageDialog("PAS DE GETKEY").ShowAsync();
+            return Singleton.Instance.secureKey;
         }
     }
 }

@@ -12,7 +12,8 @@ namespace SoonZik.Tools
         private static Singleton instance = null;
 
         public User Current_user;
-        
+        public string secureKey { get; set; }
+        public DateTime compare_date { get; set; }
 
         // Private ctor
         private Singleton(){}

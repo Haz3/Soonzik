@@ -189,6 +189,7 @@
 		EDCFE4C619E678C000BEE918 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EDCFE4C519E678C000BEE918 /* Main.storyboard */; };
 		EDD1CEDE1B1E948D006F4ACE /* facebook_disable.svg in Resources */ = {isa = PBXBuildFile; fileRef = EDD1CEDD1B1E948D006F4ACE /* facebook_disable.svg */; };
 		EDD1CEE01B1E94FE006F4ACE /* twitter_disable.svg in Resources */ = {isa = PBXBuildFile; fileRef = EDD1CEDF1B1E94FE006F4ACE /* twitter_disable.svg */; };
+		EDD1D68E1C00DCAA0098070E /* Secu.m in Sources */ = {isa = PBXBuildFile; fileRef = EDD1D68D1C00DCAA0098070E /* Secu.m */; };
 		EDD53E391B4AF16F00E98D99 /* BattlesController.m in Sources */ = {isa = PBXBuildFile; fileRef = EDD53E381B4AF16F00E98D99 /* BattlesController.m */; };
 		EDD53E3C1B4AF1C400E98D99 /* CommentsController.m in Sources */ = {isa = PBXBuildFile; fileRef = EDD53E3B1B4AF1C400E98D99 /* CommentsController.m */; };
 		EDD53E3F1B4AF22900E98D99 /* GenresController.m in Sources */ = {isa = PBXBuildFile; fileRef = EDD53E3E1B4AF22900E98D99 /* GenresController.m */; };
@@ -660,6 +661,8 @@
 		EDCFE4C519E678C000BEE918 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		EDD1CEDD1B1E948D006F4ACE /* facebook_disable.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = facebook_disable.svg; sourceTree = "<group>"; };
 		EDD1CEDF1B1E94FE006F4ACE /* twitter_disable.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = twitter_disable.svg; sourceTree = "<group>"; };
+		EDD1D68C1C00DCAA0098070E /* Secu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Secu.h; sourceTree = "<group>"; };
+		EDD1D68D1C00DCAA0098070E /* Secu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Secu.m; sourceTree = "<group>"; };
 		EDD53E371B4AF16F00E98D99 /* BattlesController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BattlesController.h; sourceTree = "<group>"; };
 		EDD53E381B4AF16F00E98D99 /* BattlesController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BattlesController.m; sourceTree = "<group>"; };
 		EDD53E3A1B4AF1C400E98D99 /* CommentsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentsController.h; sourceTree = "<group>"; };
@@ -1365,6 +1368,8 @@
 				EDA977CA1B3B97190056EC75 /* AudioPlayer.m */,
 				EDA977CB1B3B97190056EC75 /* Crypto.h */,
 				EDA977CC1B3B97190056EC75 /* Crypto.m */,
+				EDD1D68C1C00DCAA0098070E /* Secu.h */,
+				EDD1D68D1C00DCAA0098070E /* Secu.m */,
 				EDA977CD1B3B97190056EC75 /* Factory.h */,
 				EDA977CE1B3B97190056EC75 /* Factory.m */,
 				EDA977CF1B3B97190056EC75 /* MusicOptionsButton.h */,
@@ -2514,6 +2519,7 @@
 				EDEDED531AA15C5D0024CF38 /* OAAttachment.m in Sources */,
 				EDEDED451AA15C5D0024CF38 /* AMSlideMenuRightTableViewController.m in Sources */,
 				ED6F97971AE990E00013564E /* AccountViewController.m in Sources */,
+				EDD1D68E1C00DCAA0098070E /* Secu.m in Sources */,
 				EDEDED421AA15C5D0024CF38 /* AMSlideMenuLeftTableViewController.m in Sources */,
 				EDA9781D1B3B97190056EC75 /* Genre.m in Sources */,
 				EDEDED761AA15C5D0024CF38 /* SOMessageInputView.m in Sources */,

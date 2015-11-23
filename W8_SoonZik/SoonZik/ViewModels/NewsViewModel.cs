@@ -52,6 +52,17 @@ namespace SoonZik.ViewModels
             }
         }
 
+        private int _likes;
+        public int likes
+        {
+            get { return _likes; }
+            set
+            {
+                _likes = value;
+                OnPropertyChanged("likes");
+            }
+        }
+
         //private string _content;
         //public string content
         //{
@@ -67,6 +78,38 @@ namespace SoonZik.ViewModels
         {
             get;
             private set;
+        }
+        public ICommand do_like
+        {
+            get;
+            private set;
+        }
+        public ICommand do_unlike
+        {
+            get;
+            private set;
+        }
+
+        private Visibility _like_btn;
+        public Visibility like_btn
+        {
+            get { return _like_btn; }
+            set
+            {
+                _like_btn = value;
+                OnPropertyChanged("like_btn");
+            }
+        }
+
+        private Visibility _unlike_btn;
+        public Visibility unlike_btn
+        {
+            get { return _unlike_btn; }
+            set
+            {
+                _unlike_btn = value;
+                OnPropertyChanged("unlike_btn");
+            }
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -85,6 +128,10 @@ namespace SoonZik.ViewModels
         {
             commentlist = new ObservableCollection<Comment>();
             do_send_comment = new RelayCommand(send_comment);
+            do_like = new RelayCommand(like);
+            do_unlike = new RelayCommand(unlike);
+            like_btn = Visibility.Collapsed;
+            unlike_btn = Visibility.Collapsed;
             load_news(id);
         }
 
@@ -108,6 +155,26 @@ namespace SoonZik.ViewModels
             }
         }
 
+        async public void like()
+        {
+            if (await LikeViewModel.like("News", news.id.ToString()))
+            {
+                like_btn = Visibility.Collapsed;
+                unlike_btn = Visibility.Visible;
+                likes += 1;
+            }
+        }
+
+        async public void unlike()
+        {
+            if (await LikeViewModel.unlike("News", news.id.ToString()))
+            {
+                like_btn = Visibility.Visible;
+                unlike_btn = Visibility.Collapsed;
+                likes -= 1;
+            }
+        }
+
         async public void load_news(int id)
         {
             Exception exception = null;
@@ -118,6 +185,13 @@ namespace SoonZik.ViewModels
                     news = await Http_get.get_news_by_id_and_language(id, "FR");
                 else
                     news = await Http_get.get_news_by_id_and_language(id, "EN");
+
+                if (news.hasLiked)
+                    unlike_btn = Visibility.Visible;
+                else
+                    like_btn = Visibility.Visible;
+
+                likes = news.likes;
 
                 var comment_vm = await CommentViewModel.load_comments("/news/" + news.id.ToString());
                 commentlist = comment_vm;

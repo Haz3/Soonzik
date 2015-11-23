@@ -184,7 +184,7 @@ namespace SoonZik.ViewModels
                 await new MessageDialog(exception.Message, "pack error").ShowAsync();
         }
 
-        //async public void buy_pack()
+        //async public void buy_pack() OLD
         //{
         //    Exception exception = null;
         //    var request = new Http_post();
@@ -224,56 +224,58 @@ namespace SoonZik.ViewModels
         //        await new MessageDialog(exception.Message, "Purchase PACK error").ShowAsync();
         //}
 
-        //async public void buy_pack()
-        //{
-
-        //    PayPal.Checkout.BuyNow purchase = new PayPal.Checkout.BuyNow("test_sz_merchant@gmail.com");
-        //    purchase.UseSandbox = true;
-
-        //    purchase.Currency = "EUR";
-
-        //    // Use the ItemBuilder to create a new example item
-        //    PayPal.Checkout.ItemBuilder itemBuilder = new PayPal.Checkout.ItemBuilder("W8_PP")
-        //        .ID("W8_PP")
-        //        .Price(amount.ToString())
-        //        .Description(pack.title)
-        //        .Quantity(1);
-
-        //    // Add the item to the purchase,
-        //    purchase.AddItem(itemBuilder.Build());
-
-        //    // Attach event handlers so you will be notified of important events
-        //    // The BuyNow interface provides 5 events - Start, Auth, Cancel, Complete and Error
-        //    // See http://paypal.github.io/Windows8SDK/csharp.html#Events for more
-        //    purchase.Error += new EventHandler<PayPal.Checkout.Event.ErrorEventArgs>((source, eventArg) =>
-        //    {
-        //        this.txt_pp = "There was an error processing your payment: " + eventArg.Message;
-        //    });
-        //    purchase.Auth += new EventHandler<PayPal.Checkout.Event.AuthEventArgs>((source, eventArg) =>
-        //    {
-        //        this.txt_pp = "Auth: " + eventArg.Token;
-        //    });
-        //    purchase.Start += new EventHandler<PayPal.Checkout.Event.StartEventArgs>((source, eventArg) =>
-        //    {
-        //        this.txt_pp = "Start";
-        //    });
-        //    purchase.Complete += new EventHandler<PayPal.Checkout.Event.CompleteEventArgs>((source, eventArg) =>
-        //    {
-        //        //buy_cart_after_pp_validation();
-        //        this.txt_pp = "Payment is complete. Transaction id: " + eventArg.TransactionID;
-        //        this.pp_transac_id = eventArg.TransactionID;
-        //        this.buy_cart_after_pp_validation();
-        //    });
-        //    purchase.Cancel += new EventHandler<PayPal.Checkout.Event.CancelEventArgs>((source, eventArg) =>
-        //    {
-        //        this.txt_pp = "Payment was canceled by the user.";
-        //    });
-
-        //    // Launch the secure PayPal interface. This is an asynchronous method
-        //    await purchase.Execute();
-        //} buy_cart_after_pp_validation
-
         async public void buy_pack()
+        {
+
+            PayPal.Checkout.BuyNow purchase = new PayPal.Checkout.BuyNow("test_sz_merchant@gmail.com");
+            purchase.UseSandbox = true;
+
+            purchase.Currency = "EUR";
+
+            // Use the ItemBuilder to create a new example item
+            PayPal.Checkout.ItemBuilder itemBuilder = new PayPal.Checkout.ItemBuilder("W8_PP")
+                .ID("W8_PP")
+                .Price(amount.ToString())
+                .Description(pack.title)
+                .Quantity(1);
+
+            // Add the item to the purchase,
+            purchase.AddItem(itemBuilder.Build());
+
+            // Attach event handlers so you will be notified of important events
+            // The BuyNow interface provides 5 events - Start, Auth, Cancel, Complete and Error
+            // See http://paypal.github.io/Windows8SDK/csharp.html#Events for more
+            purchase.Error += new EventHandler<PayPal.Checkout.Event.ErrorEventArgs>((source, eventArg) =>
+            {
+                this.txt_pp = "There was an error processing your payment: " + eventArg.Message;
+            });
+            purchase.Auth += new EventHandler<PayPal.Checkout.Event.AuthEventArgs>((source, eventArg) =>
+            {
+                this.txt_pp = "Auth: " + eventArg.Token;
+            });
+            purchase.Start += new EventHandler<PayPal.Checkout.Event.StartEventArgs>((source, eventArg) =>
+            {
+                this.txt_pp = "Start";
+            });
+            purchase.Complete += new EventHandler<PayPal.Checkout.Event.CompleteEventArgs>((source, eventArg) =>
+            {
+                //buy_cart_after_pp_validation();
+                this.txt_pp = "Payment is complete. Transaction id: " + eventArg.TransactionID;
+                this.pp_transac_id = eventArg.TransactionID;
+                this.buy_cart_after_pp_validation();
+            });
+            purchase.Cancel += new EventHandler<PayPal.Checkout.Event.CancelEventArgs>((source, eventArg) =>
+            {
+                this.txt_pp = "Payment was canceled by the user.";
+            });
+
+            // Launch the secure PayPal interface. This is an asynchronous method
+            await purchase.Execute();
+        } //buy_cart_after_pp_validation
+
+
+        // buy pack debug
+        async public void buy_cart_after_pp_validation()
         {
             Exception exception = null;
             var request = new Http_post();

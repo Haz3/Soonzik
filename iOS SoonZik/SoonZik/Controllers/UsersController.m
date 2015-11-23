@@ -143,6 +143,8 @@
     
     NSDictionary *json = [Request getRequest:url];
     
+    //NSLog(@"json : %@", json);
+    
     NSDictionary *content = [json objectForKey:@"content"];
     NSArray *listOfMusics = [content objectForKey:@"musics"];
     NSArray *listOfAlbums = [content objectForKey:@"albums"];
@@ -207,5 +209,17 @@
     
     return nil;
 }
+
++ (BOOL)sendFeedback:(NSString *)email type:(NSString *)type object:(NSString *)object text:(NSString *)text {
+    NSString *url = [NSString stringWithFormat:@"%@feedbacks/save/feedback[email]=%@&feedback[type_obj]=%@&feedback[object]=%@&feedback[text]=%@", API_URL, email, type, object, text];
+    NSDictionary *json = [Request getRequest:url];
+    if ([[json objectForKey:@"status"] integerValue] == 201) {
+        return true;
+    }
+    
+    return false;
+}
+
+
 
 @end
