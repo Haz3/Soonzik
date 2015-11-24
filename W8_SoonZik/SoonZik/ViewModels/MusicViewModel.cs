@@ -1,4 +1,5 @@
-﻿using SoonZik.Common;
+﻿using Newtonsoft.Json.Linq;
+using SoonZik.Common;
 using SoonZik.Models;
 using SoonZik.Tools;
 using System;
@@ -147,6 +148,38 @@ namespace SoonZik.ViewModels
         {
             //                        USER ID,                            ALBUM ID,   TYPE,  GIFT USER ID (IF < 0 : NOT A GIFT)
             CartViewModel.add_to_cart(Singleton.Instance.Current_user.id, music.id, "Music", 0);
+        }
+
+        async public void set_note(int note)
+        {
+            Exception exception = null;
+            var request = new Http_post();
+
+            try
+            {
+                string url = "/musics/" + music.id.ToString() + "/note/" + note.ToString();
+                string data =
+                    "user_id=" + Singleton.Instance.Current_user.id +
+                    "&secureKey=" + await Security.getSecureKey(Singleton.Instance.Current_user.id.ToString());
+
+
+                // HTTP_POST -> URL + DATA
+                var response = await request.post_request(url, data);
+                var json = JObject.Parse(response).SelectToken("message");
+
+                if (json.ToString() == "Created")
+                    await new MessageDialog("note OK").ShowAsync();
+                else
+                    await new MessageDialog("note KO").ShowAsync();
+
+            }
+            catch (Exception e)
+            {
+                exception = e;
+            }
+
+            if (exception != null)
+                await new MessageDialog(exception.Message, "Note POST error").ShowAsync();
         }
     }
 }
