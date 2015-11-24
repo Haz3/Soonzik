@@ -380,9 +380,9 @@ Tweet.create!([
 	{ msg: "Pure musique de @CalvinHarris :)", user_id: u4.id },
 	{ msg: "Joli travail @Lund pour le site", user_id: u5.id },
 	{ msg: "Hello @Haz <3", user_id: u6.id },
-	{ msg: "There is a battle between @#{a1.id} and @#{a2.id} omg =O", user_id: u1.id },
-	{ msg: "There is a battle between @#{a3.id} and @#{a4.id} omg =O", user_id: u2.id },
-	{ msg: "There is a battle between @#{a5.id} and @#{a6.id} omg =O", user_id: u3.id },
+	{ msg: "There is a battle between @#{a1.username} and @#{a2.username} omg =O", user_id: u1.id },
+	{ msg: "There is a battle between @#{a3.username} and @#{a4.username} omg =O", user_id: u2.id },
+	{ msg: "There is a battle between @#{a5.username} and @#{a6.username} omg =O", user_id: u3.id },
 ])
 
 Vote.create!([
