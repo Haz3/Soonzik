@@ -34,27 +34,30 @@ addr2 = Address.create!(numberStreet: 2, street: 'Rue Solférino', city: 'Lille'
 addr3 = Address.create!(numberStreet: 3, street: 'Rue Nationale', city: 'Lyon', country: 'France', zipcode: '69000')
 addr4 = Address.create!(numberStreet: 4, street: 'Rue de la paix', city: 'Paris', country: 'France', zipcode: '59000')
 	# for concerts
-addr5 = Address.create!(numberStreet: 5, street: 'Boulevard de la République', city: 'Rennes', country: 'France', zipcode: '35000')
-addr6 = Address.create!(numberStreet: 6, street: 'Avenue Coubertin', city: 'Bordeaux', country: 'France', zipcode: '33000')
-addr7 = Address.create!(numberStreet: 7, street: 'Impasse de la gare', city: 'Marseille', country: 'France', zipcode: '13000', complement: "Immeuble B Appartement 4")
+addr5 = Address.create!(numberStreet: 5, street: 'Place Notre Dame', city: 'Tourcoing', country: 'France', zipcode: '59200')
+addr6 = Address.create!(numberStreet: 28, street: 'Boulevard des Capucines', city: 'Paris', country: 'France', zipcode: '75009')
+addr7 = Address.create!(numberStreet: 8, street: 'Boulevard de Bercy', city: 'Paris', country: 'France', zipcode: '75012')
 
 # Users
-u1 = User.create!(email: "user_one@gmail.com", password: "azertyuiop", fname: "Pierre", lname: "Fournier", username: "user1", birthday: "1980-01-01 00:00:00", address_id: addr1.id, language: "FR", background: "04191c1a850e9b2a4907c00f5a576f431c68759d5ee38c3f91209721ed0a0ba9-vault-boy-fallout-cover.jpg", image: "390edf60727581a22c9c2eda21a92d74a19f36ad81336cad73a4f2226f3a443c-avatarCF.png")
-u2 = User.create!(email: "user_two@gmail.com", password: "azertyuiop", fname: "Paul", lname: "Dupont", username: "user2", birthday: "1981-02-02 00:00:00", language: "EN", background: "88f0459a4158f6631c057f52fdf60c7dcac2125983e0ad8d39d3f6ab11b2f6fd-vault-boy-fallout-cover.jpg", image: "5564724a35f753977549815abdbf955315b19d63d0de7ab65db4dc6aca38a1b3-tarask.jpg")
-u3 = User.create!(email: "user_three@gmail.com", password: "azertyuiop", fname: "Jacques", lname: "Dupond", username: "user3", birthday: "1982-03-03 00:00:00", language: "FR", image: "9100df8f5383a10d8accb26aae55ffe9b292be3c53f90741f8f9f0e15ad9b247-tarask.jpg")
-u4 = User.create!(email: "user_four@gmail.com", password: "azertyuiop", fname: "Maurice", lname: "Denys", username: "user4", birthday: "1983-04-04 00:00:00", address_id: addr2.id, language: "EN", image: "b29a4646a1eaa1708d4e4b18cbe0cab2a31780c1b0f5cf909200c811413b3507-BxulrrIAAAGpUq.jpg")
-u5 = User.create!(email: "user_five@gmail.com", password: "azertyuiop", fname: "Bernard", lname: "Maheux", username: "user5", birthday: "1984-05-05 00:00:00", address_id: addr3.id, language: "FR", image: "cfd4b1776948cfd089aa67ece9216f6e04c91ad22939e343d005969fb9aaad46-avatarCF.png")
-u6 = User.create!(email: "user_six@gmail.com", password: "azertyuiop", fname: "Jean", lname: "Moliner", username: "user6", birthday: "1985-06-06 00:00:00", address_id: addr4.id, language: "FR", image: "e2ab9423d9fac2f10bd1a9c8b68077470388cfe5e57804dc2e06e146d245f410-avatarCF.png")
+u1 = User.create!(email: "user_one@gmail.com", password: "azertyuiop", fname: "Kevin", lname: "Lansel", username: "Sethyz", birthday: "1980-01-01 00:00:00", address_id: addr1.id, language: "FR", background: "04191c1a850e9b2a4907c00f5a576f431c68759d5ee38c3f91209721ed0a0ba9-vault-boy-fallout-cover.jpg", image: "390edf60727581a22c9c2eda21a92d74a19f36ad81336cad73a4f2226f3a443c-avatarCF.png")
+u2 = User.create!(email: "user_two@gmail.com", password: "azertyuiop", fname: "Florian", lname: "Dewulf", username: "Lund", birthday: "1981-02-02 00:00:00", language: "EN", background: "88f0459a4158f6631c057f52fdf60c7dcac2125983e0ad8d39d3f6ab11b2f6fd-vault-boy-fallout-cover.jpg", image: "5564724a35f753977549815abdbf955315b19d63d0de7ab65db4dc6aca38a1b3-tarask.jpg")
+u3 = User.create!(email: "user_three@gmail.com", password: "azertyuiop", fname: "Maxime", lname: "Wojciak", username: "Haz", birthday: "1982-03-03 00:00:00", language: "FR", image: "9100df8f5383a10d8accb26aae55ffe9b292be3c53f90741f8f9f0e15ad9b247-tarask.jpg")
+u4 = User.create!(email: "user_four@gmail.com", password: "azertyuiop", fname: "Julien", lname: "Rodrigues", username: "Davold", birthday: "1983-04-04 00:00:00", address_id: addr2.id, language: "EN", image: "b29a4646a1eaa1708d4e4b18cbe0cab2a31780c1b0f5cf909200c811413b3507-BxulrrIAAAGpUq.jpg")
+u5 = User.create!(email: "user_five@gmail.com", password: "azertyuiop", fname: "Gery", lname: "Baudry", username: "Hostilien", birthday: "1984-05-05 00:00:00", address_id: addr3.id, language: "FR", image: "cfd4b1776948cfd089aa67ece9216f6e04c91ad22939e343d005969fb9aaad46-avatarCF.png")
+u6 = User.create!(email: "user_six@gmail.com", password: "azertyuiop", fname: "Maxime", lname: "Sauvage", username: "MaxSvg", birthday: "1985-06-06 00:00:00", address_id: addr4.id, language: "FR", image: "e2ab9423d9fac2f10bd1a9c8b68077470388cfe5e57804dc2e06e146d245f410-avatarCF.png")
 
 # Artist
-a1 = User.create!(email: "artist_one@gmail.com", password: "azertyuiop", fname: "First", lname: "Artist", username: "Kygo", birthday: "1990-01-01 00:00:00", language: "EN", image: "picture.jpg")
-a2 = User.create!(email: "artist_two@gmail.com", password: "azertyuiop", fname: "Second", lname: "Artist", username: "CalvinHarris", birthday: "1990-01-01 00:00:00", language: "EN")
-a3 = User.create!(email: "artist_three@gmail.com", password: "azertyuiop", fname: "Third", lname: "Artist", username: "MajorLazer", birthday: "1990-01-01 00:00:00", language: "EN")
-a4 = User.create!(email: "artist_four@gmail.com", password: "azertyuiop", fname: "Fourth", lname: "Artist", username: "Soprano", birthday: "1990-01-01 00:00:00", language: "EN")
-a5 = User.create!(email: "artist_five@gmail.com", password: "azertyuiop", fname: "Fifth", lname: "Artist", username: "Skrillex", birthday: "1990-01-01 00:00:00", language: "EN")
-a6 = User.create!(email: "artist_six@gmail.com", password: "azertyuiop", fname: "Sixth", lname: "Artist", username: "Avicii", birthday: "1990-01-01 00:00:00", language: "FR")
-a7 = User.create!(email: "artist_seven@gmail.com", password: "azertyuiop", fname: "Seventh", lname: "Artist", username: "DavidGuetta", birthday: "1990-01-01 00:00:00", language: "FR")
-a8 = User.create!(email: "artist_eigh@gmail.com", password: "azertyuiop", fname: "Eighth", lname: "Artist", username: "IndieArtist", birthday: "1990-01-01 00:00:00", language: "FR")
+a1 = User.create!(email: "artist_one@gmail.com", password: "azertyuiop", fname: "Linkin", lname: "Park", username: "LinkinPark", birthday: "1990-01-01 00:00:00", language: "EN", image: "picture.jpg")
+a2 = User.create!(email: "artist_two@gmail.com", password: "azertyuiop", fname: "Pretty", lname: "Lights", username: "PrettyLights", birthday: "1990-01-01 00:00:00", language: "EN")
+a3 = User.create!(email: "artist_three@gmail.com", password: "azertyuiop", fname: "Three", lname: "Days Grace", username: "ThreeDaysGrace", birthday: "1990-01-01 00:00:00", language: "EN")
+a4 = User.create!(email: "artist_four@gmail.com", password: "azertyuiop", fname: "Calvin", lname: "Harris", username: "CalvinHarris", birthday: "1990-01-01 00:00:00", language: "EN")
+a5 = User.create!(email: "artist_five@gmail.com", password: "azertyuiop", fname: "Caravan", lname: "Palace", username: "CaravanPalace", birthday: "1990-01-01 00:00:00", language: "EN")
+a6 = User.create!(email: "artist_six@gmail.com", password: "azertyuiop", fname: "OM", lname: "FG", username: "OMFG", birthday: "1990-01-01 00:00:00", language: "FR")
+a7 = User.create!(email: "artist_seven@gmail.com", password: "azertyuiop", fname: "Nicky", lname: "Romero", username: "NickyRomero", birthday: "1990-01-01 00:00:00", language: "FR")
+a8 = User.create!(email: "artist_eigh@gmail.com", password: "azertyuiop", fname: "Ephi", lname: "xa", username: "Ephixa", birthday: "1990-01-01 00:00:00", language: "FR")
+
+# Asso
+asso = User.create!(email: "association@gmail.com", password: "azertyuiop", fname: "Asso", lname: "Music", username: "MusicFun", birthday: "1990-01-01 00:00:00", language: "FR")
 
 a1.groups << artistGroup
 a2.groups << artistGroup
@@ -119,10 +122,16 @@ Friend.create!([
 ])
 
 Identity.create!([
-	{ user_id: a5.id, provider: "facebook", uid: 793698620716097 },
-	{ user_id: a5.id, provider: "twitter", uid: 611647919 },
-	{ user_id: u5.id, provider: "facebook", uid: 10206800091031572 },
-	{ user_id: u6.id, provider: "facebook", uid: 10206035273190419 }
+	{ user_id: a1.id, provider: "facebook", uid: 1318758927 },
+	{ user_id: a1.id, provider: "twitter", uid: 1356344377 },
+	{ user_id: a3.id, provider: "facebook", uid: 100000464246333 },
+	{ user_id: a3.id, provider: "twitter", uid: 293075406 },
+	{ user_id: a4.id, provider: "facebook", uid: 678388262 },
+	{ user_id: a4.id, provider: "twitter", uid: 468791444 },
+	{ user_id: a5.id, provider: "facebook", uid: 1554621818 },
+	{ user_id: a5.id, provider: "twitter", uid: 1321128888 },
+	{ user_id: u6.id, provider: "facebook", uid: 377507551 },
+	{ user_id: u6.id, provider: "twitter", uid: 1519058626 }
 ])
 
 
@@ -145,118 +154,138 @@ genres = Genre.create!([
 	{ style_name: "Metal", color_name: "blue2", color_hexa: "#0000FE" },
 	{ style_name: "Classique", color_name: "blue3", color_hexa: "#0000FD" },
 	{ style_name: "Reggae", color_name: "blue4", color_hexa: "#0000FC" },
-	{ style_name: "Zen", color_name: "blue5", color_hexa: "#0000FB" }
+	{ style_name: "Pop", color_name: "blue5", color_hexa: "#0000FB" },
+	{ style_name: "Chiptune", color_name: "blue6", color_hexa: "#0000FA" }
 ])
 
-influ[0].genres << genres[2]
-influ[1].genres << genres[1]
-influ[1].genres << genres[4]
-influ[1].genres << genres[5]
-influ[1].genres << genres[6]
-influ[2].genres << genres[0]
-influ[2].genres << genres[3]
+Influence.first.genres << genres[2]
+Influence.first.genres << genres[7]
+Influence.second.genres << genres[1]
+Influence.second.genres << genres[4]
+Influence.second.genres << genres[5]
+Influence.second.genres << genres[6]
+Influence.third.genres << genres[0]
+Influence.third.genres << genres[3]
 
 # Albums
 albums = Album.create!([
-	{ user_id: a1.id, title: "Album 1", image: "album1.jpg", price: 10.0, file: "album1.jpg", yearProd: 2000 },
-	{ user_id: a2.id, title: "Album 2", image: "album2.jpg", price: 11.0, file: "album2.jpg", yearProd: 2003 },
-	{ user_id: a3.id, title: "Album 3", image: "album3.jpg", price: 12.0, file: "album3.jpg", yearProd: 2006 },
-	{ user_id: a4.id, title: "Album 4", image: "1546b7a0f80ac170cd902363eaaf04b302077ea1f8b13836bbe01e6ad3bb3132-kirbyseeker.png", price: 13.0, file: "1546b7a0f80ac170cd902363eaaf04b302077ea1f8b13836bbe01e6ad3bb3132-kirbyseeker.png", yearProd: 2006 },
-	{ user_id: a5.id, title: "Album 5", image: "ebda6daa0ed21cd0a11ee3447008be9d5fee83f2b00240930fb024e2edb5f2a0-SoonZiklogo.png", price: 14.0, file: "ebda6daa0ed21cd0a11ee3447008be9d5fee83f2b00240930fb024e2edb5f2a0-SoonZiklogo.png", yearProd: 2006 },
-	{ user_id: a6.id, title: "Album 6", image: "album4.jpg", price: 15.0, file: "album4.jpg", yearProd: 2006 },
-	{ user_id: a7.id, title: "Album 7", image: "album5.jpg", price: 16.0, file: "album5.jpg", yearProd: 2006 },
-	{ user_id: a8.id, title: "Album 8", image: "album6.jpg", price: 17.0, file: "album6.jpg", yearProd: 2006 }
+	{ user_id: a1.id, title: "Meteora", image: "linkin.jpg", price: 17.0, file: "linkin.jpg", yearProd: 2006 },
+	{ user_id: a2.id, title: "100% No Modern Talking", image: "knife.jpg", price: 12.0, file: "knife.jpg", yearProd: 2006 },
+	{ user_id: a2.id, title: "Filling Up the City Skies", image: "pretty.jpg", price: 17.0, file: "pretty.jpg", yearProd: 2006 },
+	{ user_id: a3.id, title: "Pain", image: "threedays.jpg", price: 13.0, file: "threedays.jpg", yearProd: 2006 },
+	{ user_id: a4.id, title: "How deep is your love", image: "calvin.png", price: 14.0, file: "calvin.png", yearProd: 2006 },
+	{ user_id: a5.id, title: "Caravan Palace", image: "caravan.jpg", price: 15.0, file: "caravan.jpg", yearProd: 2006 },
+	{ user_id: a5.id, title: "LnP Root Family", image: "lnp.jpg", price: 16.0, file: "lnp.jpg", yearProd: 2006 },
+	{ user_id: a6.id, title: "Yeah", image: "yeah.jpg", price: 16.0, file: "yeah.jpg", yearProd: 2006 },
+	{ user_id: a7.id, title: "Appeal to reason", image: "rise.jpg", price: 11.0, file: "rise.jpg", yearProd: 2003 },
+	{ user_id: a8.id, title: "Awesome to the max", image: "ephixa.jpg", price: 10.0, file: "ephixa.jpg", yearProd: 2000 }
 ])
 
-i = 0
-albums.each do |album|
-	album.genres << genres[i]
-	i++
-	i = 0 if (i == 7)
-end
+albums[0].genres << genres[2]
+albums[1].genres << genres[3]
+albums[2].genres << genres[2]
+albums[3].genres << genres[0]
+albums[4].genres << genres[2]
+albums[5].genres << genres[6]
+albums[6].genres << genres[5]
+albums[7].genres << genres[7]
+albums[8].genres << genres[0]
 
-pack = Pack.create!(title: "Le premier pack", association_id: nil, begin_date: Time.now, end_date: Time.now + 10000000 + 20000, minimal_price: 1.0)
-pack.albums << albums.first
-pack.albums << albums.second
-pack.albums << albums.third
-pack.albums << albums.fourth
+pack = Pack.create!([
+	{title: "First pack #1", association_id: asso.id, begin_date: Time.now, end_date: Time.now + 10000000 + 20000, minimal_price: 1.0},
+	{title: "Second pack #2", association_id: asso.id, begin_date: Time.now, end_date: Time.now + 20000000 + 20000, minimal_price: 4.0},
+	{title: "Special Rock !", association_id: asso.id, begin_date: Time.now, end_date: Time.now + 283700000 + 20000, minimal_price: 3.0}
+])
+pack[0].albums << albums[0]
+pack[0].albums << albums[1]
+pack[0].albums << albums[2]
+pack[0].albums << albums[3]
+pack[0].albums << albums[4]
+
+pack[1].albums << albums[4]
+pack[1].albums << albums[5]
+pack[1].albums << albums[6]
+pack[1].albums << albums[7]
+pack[1].albums << albums[8]
+
+pack[2].albums << albums[3]
+pack[2].albums << albums[1]
+pack[2].albums << albums[8]
 
 PartialAlbum.create!([
-	{ pack_id: pack.id, album_id: albums.third.id },
-	{ pack_id: pack.id, album_id: albums.fourth.id }
+	{ pack_id: pack[0].id, album_id: albums[3].id },
+	{ pack_id: pack[0].id, album_id: albums[4].id },
+	{ pack_id: pack[1].id, album_id: albums[6].id },
+	{ pack_id: pack[1].id, album_id: albums[7].id },
+	{ pack_id: pack[1].id, album_id: albums[8].id },
+	{ pack_id: pack[2].id, album_id: albums[8].id },
 ])
+
+a1.reload
+a2.reload
+a3.reload
+a4.reload
+a5.reload
+a6.reload
+a7.reload
+a8.reload
 
 # Musics
 musics = Music.create!([
 	# artist 1
-	{ user_id: a1.id, album_id: a1.albums.first.id, title: "Track 01", duration: 213, price: 1, file: "music1", limited: true },
-	{ user_id: a1.id, album_id: a1.albums.first.id, title: "Track 02", duration: 193, price: 1, file: "music1", limited: true },
-	{ user_id: a1.id, album_id: a1.albums.first.id, title: "Track 03", duration: 193, price: 1, file: "music1", limited: true },
-	{ user_id: a1.id, album_id: a1.albums.first.id, title: "Track 04", duration: 193, price: 1, file: "music1", limited: true },
-	{ user_id: a1.id, album_id: a1.albums.first.id, title: "Track 05", duration: 193, price: 1, file: "music1", limited: true },
-	{ user_id: a1.id, album_id: a1.albums.first.id, title: "Track 06", duration: 193, price: 1, file: "music1", limited: true },
-	{ user_id: a1.id, album_id: a1.albums.first.id, title: "Track 07", duration: 193, price: 1, file: "music1", limited: true },
-	{ user_id: a1.id, album_id: a1.albums.first.id, title: "Track 08", duration: 193, price: 1, file: "music1", limited: true },
-	{ user_id: a1.id, album_id: a1.albums.first.id, title: "Track 09", duration: 193, price: 1, file: "music1", limited: true },
-	{ user_id: a1.id, album_id: a1.albums.first.id, title: "Track 10", duration: 193, price: 1, file: "music1", limited: true },
-	{ user_id: a1.id, album_id: a1.albums.first.id, title: "Track 11", duration: 193, price: 1, file: "music1", limited: true },
+	{ user_id: a1.id, album_id: a1.albums.first.id, title: "True Survivor", duration: 213, price: 1, file: "TrueSurvivor", limited: true },
+	{ user_id: a1.id, album_id: a1.albums.first.id, title: "You and Me", duration: 193, price: 1, file: "YouMeFlumeRemix", limited: true },
+	{ user_id: a1.id, album_id: a1.albums.first.id, title: "Remember the name", duration: 193, price: 1, file: "RememberTheName", limited: true },
+	{ user_id: a1.id, album_id: a1.albums.first.id, title: "Breaking The Habit", duration: 193, price: 1, file: "BreakingTheHabit", limited: true },
+	{ user_id: a1.id, album_id: a1.albums.first.id, title: "Lying from You", duration: 193, price: 1, file: "LyingFromYou", limited: true },
+	{ user_id: a1.id, album_id: a1.albums.first.id, title: "Wastelands", duration: 193, price: 1, file: "Wastelands", limited: true },
+	{ user_id: a1.id, album_id: a1.albums.first.id, title: "Rebellion", duration: 193, price: 1, file: "Rebellion", limited: true },
 	# artist 2
-	{ user_id: a2.id, album_id: a2.albums.first.id, title: "Music 1", duration: 193, price: 1, file: "music1", limited: true },
-	{ user_id: a2.id, album_id: a2.albums.first.id, title: "Music 2", duration: 193, price: 1, file: "music1", limited: true },
-	{ user_id: a2.id, album_id: a2.albums.first.id, title: "Music 3", duration: 193, price: 1, file: "music1", limited: true },
-	{ user_id: a2.id, album_id: a2.albums.first.id, title: "Music 4", duration: 193, price: 1, file: "music1", limited: true },
-	{ user_id: a2.id, album_id: a2.albums.first.id, title: "Music 5", duration: 193, price: 1, file: "music1", limited: true },
-	{ user_id: a2.id, album_id: a2.albums.first.id, title: "Music 6", duration: 193, price: 1, file: "music1", limited: true },
-	{ user_id: a2.id, album_id: a2.albums.first.id, title: "Music 7", duration: 193, price: 1, file: "music1", limited: true },
-	{ user_id: a2.id, album_id: a2.albums.first.id, title: "Music 8", duration: 193, price: 1, file: "music1", limited: true },
-	{ user_id: a2.id, album_id: a2.albums.first.id, title: "Music 9", duration: 193, price: 1, file: "music1", limited: true },
-	{ user_id: a2.id, album_id: a2.albums.first.id, title: "Music 10", duration: 193, price: 1, file: "music1", limited: true },
-	{ user_id: a2.id, album_id: a2.albums.first.id, title: "Music 11", duration: 193, price: 1, file: "music1", limited: true },
+	{ user_id: a2.id, album_id: a2.albums.second.id, title: "Bullseye", duration: 193, price: 1, file: "Bullseye", limited: true },
+	{ user_id: a2.id, album_id: a2.albums.first.id, title: "Finally Moving", duration: 193, price: 1, file: "FinallyMoving", limited: true },
+	{ user_id: a2.id, album_id: a2.albums.first.id, title: "Hot Like Sauce", duration: 193, price: 1, file: "HotLikeSauce", limited: true },
+	{ user_id: a2.id, album_id: a2.albums.second.id, title: "Internet Friends", duration: 193, price: 1, file: "InternetFriends", limited: true },
+	{ user_id: a2.id, album_id: a2.albums.second.id, title: "Nightcall", duration: 193, price: 1, file: "Nightcall", limited: true },
+	{ user_id: a2.id, album_id: a2.albums.first.id, title: "Who Loves Me", duration: 193, price: 1, file: "WhoLovesMe", limited: true },
 	# artist 3
-	{ user_id: a3.id, album_id: a3.albums.first.id, title: "Song 1", duration: 193, price: 1, file: "music1", limited: true },
-	{ user_id: a3.id, album_id: a3.albums.first.id, title: "Song 2", duration: 193, price: 1, file: "music1", limited: true },
-	{ user_id: a3.id, album_id: a3.albums.first.id, title: "Song 3", duration: 193, price: 1, file: "music1", limited: true },
-	{ user_id: a3.id, album_id: a3.albums.first.id, title: "Song 4", duration: 193, price: 1, file: "music1", limited: true },
-	{ user_id: a3.id, album_id: a3.albums.first.id, title: "Song 5", duration: 193, price: 1, file: "music1", limited: true },
-	{ user_id: a3.id, album_id: a3.albums.first.id, title: "Song 6", duration: 193, price: 1, file: "music1", limited: true },
-	{ user_id: a3.id, album_id: a3.albums.first.id, title: "Song 7", duration: 193, price: 1, file: "music1", limited: true },
-	{ user_id: a3.id, album_id: a3.albums.first.id, title: "Song 8", duration: 193, price: 1, file: "music1", limited: true },
-	{ user_id: a3.id, album_id: a3.albums.first.id, title: "Song 9", duration: 193, price: 1, file: "music1", limited: true },
+	{ user_id: a3.id, album_id: a3.albums.first.id, title: "Animal I Have Become", duration: 193, price: 1, file: "AnimalIHaveBecome", limited: true },
+	{ user_id: a3.id, album_id: a3.albums.first.id, title: "I hate everything about you", duration: 193, price: 1, file: "IHateEverythingAboutYou", limited: true },
+	{ user_id: a3.id, album_id: a3.albums.first.id, title: "Iron", duration: 193, price: 1, file: "Iron", limited: true },
+	{ user_id: a3.id, album_id: a3.albums.first.id, title: "Riot", duration: 193, price: 1, file: "Riot", limited: true },
 	# artist 4
-	{ user_id: a4.id, album_id: a4.albums.first.id, title: "Musique 1", duration: 193, price: 1, file: "music1", limited: true },
-	{ user_id: a4.id, album_id: a4.albums.first.id, title: "Musique 2", duration: 193, price: 1, file: "music1", limited: true },
-	{ user_id: a4.id, album_id: a4.albums.first.id, title: "Musique 3", duration: 193, price: 1, file: "music1", limited: true },
-	{ user_id: a4.id, album_id: a4.albums.first.id, title: "Musique 4", duration: 193, price: 1, file: "music1", limited: true },
-	{ user_id: a4.id, album_id: a4.albums.first.id, title: "Musique 5", duration: 193, price: 1, file: "music1", limited: true },
-	{ user_id: a4.id, album_id: a4.albums.first.id, title: "Musique 6", duration: 193, price: 1, file: "music1", limited: true },
-	{ user_id: a4.id, album_id: a4.albums.first.id, title: "Musique 7", duration: 193, price: 1, file: "music1", limited: true },
-	{ user_id: a4.id, album_id: a4.albums.first.id, title: "Musique 8", duration: 193, price: 1, file: "music1", limited: true },
+	{ user_id: a4.id, album_id: a4.albums.first.id, title: "Balls to the wall", duration: 193, price: 1, file: "BallstotheWall", limited: true },
+	{ user_id: a4.id, album_id: a4.albums.first.id, title: "Do I wanna know ?", duration: 193, price: 1, file: "DoIWannaKnow_", limited: true },
+	{ user_id: a4.id, album_id: a4.albums.first.id, title: "How deep is your love", duration: 193, price: 1, file: "HowDeepIsYourLove", limited: true },
+	{ user_id: a4.id, album_id: a4.albums.first.id, title: "In One Ear", duration: 193, price: 1, file: "InOneEar", limited: true },
 	# artist 5
-	{ user_id: a5.id, album_id: a5.albums.first.id, title: "Melodie 1", duration: 193, price: 1, file: "music1", limited: true },
-	{ user_id: a5.id, album_id: a5.albums.first.id, title: "Melodie 2", duration: 193, price: 1, file: "music1", limited: true },
-	{ user_id: a5.id, album_id: a5.albums.first.id, title: "Melodie 3", duration: 193, price: 1, file: "music1", limited: true },
-	{ user_id: a5.id, album_id: a5.albums.first.id, title: "Melodie 4", duration: 193, price: 1, file: "music1", limited: true },
-	{ user_id: a5.id, album_id: a5.albums.first.id, title: "Melodie 5", duration: 193, price: 1, file: "music1", limited: true },
-	{ user_id: a5.id, album_id: a5.albums.first.id, title: "Melodie 6", duration: 193, price: 1, file: "music1", limited: true },
-	{ user_id: a5.id, album_id: a5.albums.first.id, title: "Melodie 7", duration: 193, price: 1, file: "music1", limited: true },
-	{ user_id: a5.id, album_id: a5.albums.first.id, title: "Melodie 8", duration: 193, price: 1, file: "music1", limited: true },
+	{ user_id: a5.id, album_id: a5.albums.first.id, title: "Lazy Place", duration: 193, price: 1, file: "LazyPlace", limited: true },
+	{ user_id: a5.id, album_id: a5.albums.first.id, title: "Suzy", duration: 193, price: 1, file: "Suzy", limited: true },
+	{ user_id: a5.id, album_id: a5.albums.first.id, title: "StarScat", duration: 193, price: 1, file: "StarScat", limited: true },
+	{ user_id: a5.id, album_id: a5.albums.second.id, title: "Good vibes", duration: 193, price: 1, file: "Goodvibes", limited: true },
+	{ user_id: a5.id, album_id: a5.albums.second.id, title: "La voix du peuple", duration: 193, price: 1, file: "Lavoixdupeuple", limited: true },
+	{ user_id: a5.id, album_id: a5.albums.second.id, title: "Les voisins", duration: 193, price: 1, file: "Lesvoisins", limited: true },
 	# artist 6
-	{ user_id: a6.id, album_id: a6.albums.first.id, title: "Melody 1", duration: 193, price: 1, file: "music1", limited: true },
-	{ user_id: a6.id, album_id: a6.albums.first.id, title: "Melody 2", duration: 193, price: 1, file: "music1", limited: true },
-	{ user_id: a6.id, album_id: a6.albums.first.id, title: "Melody 3", duration: 193, price: 1, file: "music1", limited: true },
-	{ user_id: a6.id, album_id: a6.albums.first.id, title: "Melody 4", duration: 193, price: 1, file: "music1", limited: true },
-	{ user_id: a6.id, album_id: a6.albums.first.id, title: "Melody 5", duration: 193, price: 1, file: "music1", limited: true },
-	{ user_id: a6.id, album_id: a6.albums.first.id, title: "Melody 6", duration: 193, price: 1, file: "music1", limited: true },
-	{ user_id: a6.id, album_id: a6.albums.first.id, title: "Melody 7", duration: 193, price: 1, file: "music1", limited: true },
-	{ user_id: a6.id, album_id: a6.albums.first.id, title: "Melody 8", duration: 193, price: 1, file: "music1", limited: true },
-	{ user_id: a6.id, album_id: a6.albums.first.id, title: "Melody 9", duration: 193, price: 1, file: "music1", limited: true },
+	{ user_id: a6.id, album_id: a6.albums.first.id, title: "Hello", duration: 193, price: 1, file: "Hello", limited: true },
+	{ user_id: a6.id, album_id: a6.albums.first.id, title: "Ice Cream", duration: 193, price: 1, file: "IceCream", limited: true },
+	{ user_id: a6.id, album_id: a6.albums.first.id, title: "Once Again", duration: 193, price: 1, file: "OnceAgain", limited: true },
+	# artist 7
+	{ user_id: a7.id, album_id: a7.albums.first.id, title: "Burn It To The Ground", duration: 193, price: 1, file: "BurnItToTheGround", limited: true },
+	{ user_id: a7.id, album_id: a7.albums.first.id, title: "Lean On", duration: 193, price: 1, file: "LeanOn", limited: true },
+	{ user_id: a7.id, album_id: a7.albums.first.id, title: "Prayer Of The Refugee", duration: 193, price: 1, file: "PrayerOfTheRefugee", limited: true },
+	{ user_id: a7.id, album_id: a7.albums.first.id, title: "Savior", duration: 193, price: 1, file: "Savior", limited: true },
+	{ user_id: a7.id, album_id: a7.albums.first.id, title: "Toulouse (Original Mix)", duration: 193, price: 1, file: "ToulouseOriginalMix", limited: true },
+	# artist 8
+	{ user_id: a8.id, album_id: a8.albums.first.id, title: "Awesome to the max", duration: 193, price: 1, file: "AwesometotheMax", limited: true },
+	{ user_id: a8.id, album_id: a8.albums.first.id, title: "Habits", duration: 193, price: 1, file: "Habits", limited: true },
+	{ user_id: a8.id, album_id: a8.albums.first.id, title: "Ideekay", duration: 193, price: 1, file: "Ideekay", limited: true },
+	{ user_id: a8.id, album_id: a8.albums.first.id, title: "The Devil in I", duration: 193, price: 1, file: "TheDevilInI", limited: true },
+	{ user_id: a8.id, album_id: a8.albums.first.id, title: "Warrior Concerto", duration: 193, price: 1, file: "WarriorConcerto", limited: true }
 ])
 
-i = 0
 musics.each do |music|
-	music.genres << genres[i]
-	i++
-	i = 0 if (i == 7)
+	if (music.album.genres[0])
+		music.genres << music.album.genres[0]
+	end
 end
 
 ####################
@@ -272,22 +301,55 @@ news = News.create!([
 	{ author_id: u1.id }
 ])
 
-news.each do |n|
-	Newstext.create!([
-		{ content: "Voici le contenu de ma news en français. Voici le contenu de ma news en français. Voici le contenu de ma news en français. Voici le contenu de ma news en français. Voici le contenu de ma news en français", language: "FR", news_id: n.id },
-		{ content: "Here is the content of my news in english. Here is the content of my news in english. Here is the content of my news in english. Here is the content of my news in english. Here is the content of my news in english", language: "EN", news_id: n.id }
-	])
+Newstext.create!([
+	# news 1
+	{ content: "Voici le contenu de ma news en français. Voici le contenu de ma news en français. Voici le contenu de ma news en français. Voici le contenu de ma news en français. Voici le contenu de ma news en français", language: "FR", news_id: news[0].id },
+	{ content: "Here is the content of my news in english. Here is the content of my news in english. Here is the content of my news in english. Here is the content of my news in english. Here is the content of my news in english", language: "EN", news_id: news[0].id },
+	# news 2
+	{ content: "[Français] Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ac tempus tellus. Aliquam elementum ultrices orci, in viverra magna rutrum a. Donec ac nibh enim. Aliquam viverra nunc nisi. Donec ac arcu congue metus egestas posuere. Suspendisse nec varius nulla. Sed sollicitudin viverra risus at sollicitudin.
 
+In facilisis finibus mauris, quis convallis ante cursus vitae. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Aliquam iaculis sagittis suscipit. Nam nec felis pulvinar, tincidunt risus fermentum, malesuada massa. Nulla facilisi. Curabitur vel enim id sem varius mollis. Ut dapibus, eros ut placerat tristique, lacus mi porttitor dui, id maximus enim ante eget lectus. Integer sagittis dui quam, quis volutpat lorem tristique vel. Vivamus in faucibus augue, nec consequat purus. Duis dignissim suscipit nibh sit amet molestie. Suspendisse luctus arcu ac aliquet tincidunt. Nunc eget leo eget erat tincidunt vestibulum sit amet sit amet quam. Ut a laoreet lacus. Maecenas ultricies viverra metus eu tempor. Integer nec nisi iaculis, malesuada nulla in, finibus quam. In rhoncus id dui auctor blandit.
+
+Etiam eros justo, imperdiet et mattis quis, iaculis sed tellus. Phasellus lacinia sem eget pretium imperdiet. Morbi volutpat eros justo. Donec mauris augue, mollis sit amet venenatis vitae, sollicitudin non augue. Cras nisi tortor, cursus eu imperdiet sed, semper vel nisl. In et rutrum magna. Sed maximus ex ut venenatis pharetra. Duis hendrerit, mauris a euismod pellentesque, augue nisi volutpat odio, non ullamcorper sem turpis at magna.
+
+Morbi facilisis eros vel arcu cursus, id mattis felis accumsan. Suspendisse sollicitudin dapibus vehicula. Proin ac porttitor neque, ut pellentesque felis. Donec maximus nibh eget sagittis pulvinar. Suspendisse consectetur aliquam leo, sit amet sodales justo porta et. Nam congue ligula eget nulla varius vestibulum non sit amet nisi. Nullam congue libero vitae condimentum dictum. Duis bibendum hendrerit ullamcorper. Curabitur a ullamcorper justo. Fusce eget porttitor odio. Ut vestibulum interdum lectus eu venenatis. Nulla at mollis ex, maximus dapibus dolor.
+
+Quisque dapibus, nunc sed lobortis dictum, elit quam semper est, a finibus justo lectus eu nisl. Cras arcu nisi, faucibus eget lectus quis, iaculis pretium erat. Ut convallis magna at ornare mollis. Sed finibus, metus sed tincidunt scelerisque, leo erat blandit nibh, ac cursus ipsum ex nec mauris. Ut pellentesque orci ut tortor tincidunt efficitur. Vestibulum sapien velit, dictum ornare magna ac, sollicitudin egestas libero. In id ex elementum, molestie nisl et, vestibulum velit. Interdum et malesuada fames ac ante ipsum primis in faucibus. Aenean non sem viverra, ultrices elit et, porttitor arcu. Ut vel vehicula velit, sit amet tempor tortor.", language: "FR", news_id: news[1].id },
+	{ content: "[English] Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ac tempus tellus. Aliquam elementum ultrices orci, in viverra magna rutrum a. Donec ac nibh enim. Aliquam viverra nunc nisi. Donec ac arcu congue metus egestas posuere. Suspendisse nec varius nulla. Sed sollicitudin viverra risus at sollicitudin.
+
+In facilisis finibus mauris, quis convallis ante cursus vitae. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Aliquam iaculis sagittis suscipit. Nam nec felis pulvinar, tincidunt risus fermentum, malesuada massa. Nulla facilisi. Curabitur vel enim id sem varius mollis. Ut dapibus, eros ut placerat tristique, lacus mi porttitor dui, id maximus enim ante eget lectus. Integer sagittis dui quam, quis volutpat lorem tristique vel. Vivamus in faucibus augue, nec consequat purus. Duis dignissim suscipit nibh sit amet molestie. Suspendisse luctus arcu ac aliquet tincidunt. Nunc eget leo eget erat tincidunt vestibulum sit amet sit amet quam. Ut a laoreet lacus. Maecenas ultricies viverra metus eu tempor. Integer nec nisi iaculis, malesuada nulla in, finibus quam. In rhoncus id dui auctor blandit.
+
+Etiam eros justo, imperdiet et mattis quis, iaculis sed tellus. Phasellus lacinia sem eget pretium imperdiet. Morbi volutpat eros justo. Donec mauris augue, mollis sit amet venenatis vitae, sollicitudin non augue. Cras nisi tortor, cursus eu imperdiet sed, semper vel nisl. In et rutrum magna. Sed maximus ex ut venenatis pharetra. Duis hendrerit, mauris a euismod pellentesque, augue nisi volutpat odio, non ullamcorper sem turpis at magna.
+
+Morbi facilisis eros vel arcu cursus, id mattis felis accumsan. Suspendisse sollicitudin dapibus vehicula. Proin ac porttitor neque, ut pellentesque felis. Donec maximus nibh eget sagittis pulvinar. Suspendisse consectetur aliquam leo, sit amet sodales justo porta et. Nam congue ligula eget nulla varius vestibulum non sit amet nisi. Nullam congue libero vitae condimentum dictum. Duis bibendum hendrerit ullamcorper. Curabitur a ullamcorper justo. Fusce eget porttitor odio. Ut vestibulum interdum lectus eu venenatis. Nulla at mollis ex, maximus dapibus dolor.
+
+Quisque dapibus, nunc sed lobortis dictum, elit quam semper est, a finibus justo lectus eu nisl. Cras arcu nisi, faucibus eget lectus quis, iaculis pretium erat. Ut convallis magna at ornare mollis. Sed finibus, metus sed tincidunt scelerisque, leo erat blandit nibh, ac cursus ipsum ex nec mauris. Ut pellentesque orci ut tortor tincidunt efficitur. Vestibulum sapien velit, dictum ornare magna ac, sollicitudin egestas libero. In id ex elementum, molestie nisl et, vestibulum velit. Interdum et malesuada fames ac ante ipsum primis in faucibus. Aenean non sem viverra, ultrices elit et, porttitor arcu. Ut vel vehicula velit, sit amet tempor tortor.", language: "EN", news_id: news[1].id },
+	# news 3
+	{ content: "L'ouverture du site nous a permis de promouvoir de nombreux artistes indépendants, félicitation à tous et merci.", language: "FR", news_id: news[2].id },
+	{ content: "The opening of the website allowed us to promote a lot of indie artists, congratulation to everybody and thanks.", language: "EN", news_id: news[2].id },
+	# news 4
+	{ content: "Affluence record sur le site hier soir, nous vous remercions !", language: "FR", news_id: news[3].id },
+	{ content: "Best attendance last night on the site, we would thank you !", language: "EN", news_id: news[3].id },
+	# news 5
+	{ content: "Voici le contenu de ma news en français. Voici le contenu de ma news en français. Voici le contenu de ma news en français. Voici le contenu de ma news en français. Voici le contenu de ma news en français", language: "FR", news_id: news[4].id },
+	{ content: "Here is the content of my news in english. Here is the content of my news in english. Here is the content of my news in english. Here is the content of my news in english. Here is the content of my news in english", language: "EN", news_id: news[4].id },
+	# news 6
+	{ content: "Voici le contenu de ma news en français. Voici le contenu de ma news en français. Voici le contenu de ma news en français. Voici le contenu de ma news en français. Voici le contenu de ma news en français", language: "FR", news_id: news[5].id },
+	{ content: "Here is the content of my news in english. Here is the content of my news in english. Here is the content of my news in english. Here is the content of my news in english. Here is the content of my news in english", language: "EN", news_id: news[5].id },
+])
+
+news.each_with_index do |n, index|
 	NewsTitle.create!([
-		{ news_id: n.id, title: "Titre de ma news", language: "FR" },
-		{ news_id: n.id, title: "Title of my news", language: "EN" }
+		{ news_id: n.id, title: "Titre de ma news num #{index}", language: "FR" },
+		{ news_id: n.id, title: "Title of my news num #{index}", language: "EN" }
 	])
 
-	n.attachments << Attachment.create!({ url: "placeholder.jpg", file_size: 1024, content_type: "image/jpegNews" })
+	n.attachments << Attachment.create!({ url: "news#{index + 1}.jpeg", file_size: 1024, content_type: "image/jpeg" })
 end
 
-
-battle = Battle.create!({ date_begin: "2015-09-01 00:00:00", date_end: "2015-10-10 00:00:00", artist_one_id: a5.id, artist_two_id: a6.id })
+battle1 = Battle.create!({ date_begin: "2015-10-01 00:00:00", date_end: "2015-12-10 00:00:00", artist_one_id: a1.id, artist_two_id: a2.id })
+battle2 = Battle.create!({ date_begin: "2015-11-01 00:00:00", date_end: "2016-01-10 00:00:00", artist_one_id: a3.id, artist_two_id: a4.id })
+battle3 = Battle.create!({ date_begin: "2015-12-01 00:00:00", date_end: "2016-02-10 00:00:00", artist_one_id: a5.id, artist_two_id: a6.id })
 
 Concert.create!([
 	{ user_id: a5.id, planification: "2016-01-01 00:00:00", address_id: addr5.id, url: nil },
@@ -299,119 +361,6 @@ Concert.create!([
 ###   Social   ###
 ##################
 
-Message.create!([
-	# Discussion entre users
-	{ msg: "Coucou, comment vas tu ?", user_id: u1.id, dest_id: u2.id },
-	{ msg: "Ca va et toi ?", user_id: u2.id, dest_id: u1.id },
-	{ msg: "Ca va, on fait aller, et toi ?", user_id: u1.id, dest_id: u2.id },
-	{ msg: "Ca va et toi ?", user_id: u2.id, dest_id: u1.id },
-	{ msg: "Ca va, on fait aller, et toi ?", user_id: u1.id, dest_id: u2.id },
-	{ msg: "Ca va et toi ?", user_id: u2.id, dest_id: u1.id },
-	{ msg: "Ca va, on fait aller, et toi ?", user_id: u1.id, dest_id: u2.id },
-	{ msg: "Ca va et toi ?", user_id: u2.id, dest_id: u1.id },
-	{ msg: "Ca va, on fait aller, et toi ?", user_id: u1.id, dest_id: u2.id },
-	{ msg: "Ca va et toi ?", user_id: u2.id, dest_id: u1.id },
-	{ msg: "Ca va, on fait aller, et toi ?", user_id: u1.id, dest_id: u2.id },
-	{ msg: "Ca va et toi ?", user_id: u2.id, dest_id: u1.id },
-	{ msg: "Ca va, on fait aller, et toi ?", user_id: u1.id, dest_id: u2.id },
-	{ msg: "Ca va et toi ?", user_id: u2.id, dest_id: u1.id },
-	{ msg: "Ca va, on fait aller, et toi ?", user_id: u1.id, dest_id: u2.id },
-	{ msg: "Ca va et toi ?", user_id: u2.id, dest_id: u1.id },
-	{ msg: "Bon, on arrête ?", user_id: u1.id, dest_id: u2.id },
-	# ----
-	{ msg: "Coucou, comment vas tu ?", user_id: u3.id, dest_id: u4.id },
-	{ msg: "Ca va et toi ?", user_id: u4.id, dest_id: u3.id },
-	{ msg: "Ca va, on fait aller, et toi ?", user_id: u3.id, dest_id: u4.id },
-	{ msg: "Ca va et toi ?", user_id: u4.id, dest_id: u3.id },
-	{ msg: "Ca va, on fait aller, et toi ?", user_id: u3.id, dest_id: u4.id },
-	{ msg: "Ca va et toi ?", user_id: u4.id, dest_id: u3.id },
-	{ msg: "Ca va, on fait aller, et toi ?", user_id: u3.id, dest_id: u4.id },
-	{ msg: "Ca va et toi ?", user_id: u4.id, dest_id: u3.id },
-	{ msg: "Ca va, on fait aller, et toi ?", user_id: u3.id, dest_id: u4.id },
-	{ msg: "Ca va et toi ?", user_id: u4.id, dest_id: u3.id },
-	{ msg: "Ca va, on fait aller, et toi ?", user_id: u3.id, dest_id: u4.id },
-	{ msg: "Ca va et toi ?", user_id: u4.id, dest_id: u3.id },
-	{ msg: "Ca va, on fait aller, et toi ?", user_id: u3.id, dest_id: u4.id },
-	{ msg: "Ca va et toi ?", user_id: u4.id, dest_id: u3.id },
-	{ msg: "Ca va, on fait aller, et toi ?", user_id: u3.id, dest_id: u4.id },
-	{ msg: "Ca va et toi ?", user_id: u4.id, dest_id: u3.id },
-	{ msg: "Bon, on arrête ?", user_id: u3.id, dest_id: u4.id },
-	# ----
-	{ msg: "Coucou, comment vas tu ?", user_id: u5.id, dest_id: u6.id },
-	{ msg: "Ca va et toi ?", user_id: u6.id, dest_id: u5.id },
-	{ msg: "Ca va, on fait aller, et toi ?", user_id: u5.id, dest_id: u6.id },
-	{ msg: "Ca va et toi ?", user_id: u6.id, dest_id: u5.id },
-	{ msg: "Ca va, on fait aller, et toi ?", user_id: u5.id, dest_id: u6.id },
-	{ msg: "Ca va et toi ?", user_id: u6.id, dest_id: u5.id },
-	{ msg: "Ca va, on fait aller, et toi ?", user_id: u5.id, dest_id: u6.id },
-	{ msg: "Ca va et toi ?", user_id: u6.id, dest_id: u5.id },
-	{ msg: "Ca va, on fait aller, et toi ?", user_id: u5.id, dest_id: u6.id },
-	{ msg: "Ca va et toi ?", user_id: u6.id, dest_id: u5.id },
-	{ msg: "Ca va, on fait aller, et toi ?", user_id: u5.id, dest_id: u6.id },
-	{ msg: "Ca va et toi ?", user_id: u6.id, dest_id: u5.id },
-	{ msg: "Ca va, on fait aller, et toi ?", user_id: u5.id, dest_id: u6.id },
-	{ msg: "Ca va et toi ?", user_id: u6.id, dest_id: u5.id },
-	{ msg: "Ca va, on fait aller, et toi ?", user_id: u5.id, dest_id: u6.id },
-	{ msg: "Ca va et toi ?", user_id: u6.id, dest_id: u5.id },
-	{ msg: "Bon, on arrête ?", user_id: u5.id, dest_id: u6.id },
-	# ----
-	# Discussion avec des artistes
-	{ msg: "Coucou, comment vas tu ?", user_id: a1.id, dest_id: a2.id },
-	{ msg: "Ca va et toi ?", user_id: a2.id, dest_id: a1.id },
-	{ msg: "Ca va, on fait aller, et toi ?", user_id: a1.id, dest_id: a2.id },
-	{ msg: "Ca va et toi ?", user_id: a2.id, dest_id: a1.id },
-	{ msg: "Ca va, on fait aller, et toi ?", user_id: a1.id, dest_id: a2.id },
-	{ msg: "Ca va et toi ?", user_id: a2.id, dest_id: a1.id },
-	{ msg: "Ca va, on fait aller, et toi ?", user_id: a1.id, dest_id: a2.id },
-	{ msg: "Ca va et toi ?", user_id: a2.id, dest_id: a1.id },
-	{ msg: "Ca va, on fait aller, et toi ?", user_id: a1.id, dest_id: a2.id },
-	{ msg: "Ca va et toi ?", user_id: a2.id, dest_id: a1.id },
-	{ msg: "Ca va, on fait aller, et toi ?", user_id: a1.id, dest_id: a2.id },
-	{ msg: "Ca va et toi ?", user_id: a2.id, dest_id: a1.id },
-	{ msg: "Ca va, on fait aller, et toi ?", user_id: a1.id, dest_id: a2.id },
-	{ msg: "Ca va et toi ?", user_id: a2.id, dest_id: a1.id },
-	{ msg: "Ca va, on fait aller, et toi ?", user_id: a1.id, dest_id: a2.id },
-	{ msg: "Ca va et toi ?", user_id: a2.id, dest_id: a1.id },
-	{ msg: "Bon, on arrête ?", user_id: a1.id, dest_id: a2.id },
-	# ----
-	{ msg: "Coucou, comment vas tu ?", user_id: a3.id, dest_id: a4.id },
-	{ msg: "Ca va et toi ?", user_id: a4.id, dest_id: a3.id },
-	{ msg: "Ca va, on fait aller, et toi ?", user_id: a3.id, dest_id: a4.id },
-	{ msg: "Ca va et toi ?", user_id: a4.id, dest_id: a3.id },
-	{ msg: "Ca va, on fait aller, et toi ?", user_id: a3.id, dest_id: a4.id },
-	{ msg: "Ca va et toi ?", user_id: a4.id, dest_id: a3.id },
-	{ msg: "Ca va, on fait aller, et toi ?", user_id: a3.id, dest_id: a4.id },
-	{ msg: "Ca va et toi ?", user_id: a4.id, dest_id: a3.id },
-	{ msg: "Ca va, on fait aller, et toi ?", user_id: a3.id, dest_id: a4.id },
-	{ msg: "Ca va et toi ?", user_id: a4.id, dest_id: a3.id },
-	{ msg: "Ca va, on fait aller, et toi ?", user_id: a3.id, dest_id: a4.id },
-	{ msg: "Ca va et toi ?", user_id: a4.id, dest_id: a3.id },
-	{ msg: "Ca va, on fait aller, et toi ?", user_id: a3.id, dest_id: a4.id },
-	{ msg: "Ca va et toi ?", user_id: a4.id, dest_id: a3.id },
-	{ msg: "Ca va, on fait aller, et toi ?", user_id: a3.id, dest_id: a4.id },
-	{ msg: "Ca va et toi ?", user_id: a4.id, dest_id: a3.id },
-	{ msg: "Bon, on arrête ?", user_id: a3.id, dest_id: a4.id },
-	# ----
-	{ msg: "Coucou, comment vas tu ?", user_id: a5.id, dest_id: u4.id },
-	{ msg: "Ca va et toi ?", user_id: u4.id, dest_id: a5.id },
-	{ msg: "Ca va, on fait aller, et toi ?", user_id: a5.id, dest_id: u4.id },
-	{ msg: "Ca va et toi ?", user_id: u4.id, dest_id: a5.id },
-	{ msg: "Ca va, on fait aller, et toi ?", user_id: a5.id, dest_id: u4.id },
-	{ msg: "Ca va et toi ?", user_id: u4.id, dest_id: a5.id },
-	{ msg: "Ca va, on fait aller, et toi ?", user_id: a5.id, dest_id: u4.id },
-	{ msg: "Ca va et toi ?", user_id: u4.id, dest_id: a5.id },
-	{ msg: "Ca va, on fait aller, et toi ?", user_id: a5.id, dest_id: u4.id },
-	{ msg: "Ca va et toi ?", user_id: u4.id, dest_id: a5.id },
-	{ msg: "Ca va, on fait aller, et toi ?", user_id: a5.id, dest_id: u4.id },
-	{ msg: "Ca va et toi ?", user_id: u4.id, dest_id: a5.id },
-	{ msg: "Ca va, on fait aller, et toi ?", user_id: a5.id, dest_id: u4.id },
-	{ msg: "Ca va et toi ?", user_id: u4.id, dest_id: a5.id },
-	{ msg: "Ca va, on fait aller, et toi ?", user_id: a5.id, dest_id: u4.id },
-	{ msg: "Ca va et toi ?", user_id: u4.id, dest_id: a5.id },
-	{ msg: "Bon, on arrête ?", user_id: a5.id, dest_id: u4.id },
-])
-
-
 Tweet.create!([
 	{ msg: "Wow, nice tweet module :)", user_id: u1.id },
 	{ msg: "Wow, nice tweet module :)", user_id: u2.id },
@@ -419,78 +368,31 @@ Tweet.create!([
 	{ msg: "Wow, nice tweet module :)", user_id: u4.id },
 	{ msg: "Wow, nice tweet module :)", user_id: u5.id },
 	{ msg: "Wow, nice tweet module :)", user_id: u6.id },
-	{ msg: "I swear, it's cool", user_id: u1.id },
-	{ msg: "I swear, it's cool", user_id: u2.id },
-	{ msg: "I swear, it's cool", user_id: u3.id },
-	{ msg: "I swear, it's cool", user_id: u4.id },
-	{ msg: "I swear, it's cool", user_id: u5.id },
-	{ msg: "I swear, it's cool", user_id: u6.id },
-	{ msg: "Nice work @Kygo I love your musics", user_id: u1.id },
-	{ msg: "Nice work @Kygo I love your musics", user_id: u2.id },
-	{ msg: "Nice work @Kygo I love your musics", user_id: u3.id },
-	{ msg: "Nice work @Kygo I love your musics", user_id: u4.id },
-	{ msg: "Nice work @Kygo I love your musics", user_id: u5.id },
-	{ msg: "Nice work @Kygo I love your musics", user_id: u6.id },
-	{ msg: "There is a battle between @Skrillex and @Avicii omg =O", user_id: a1.id },
-	{ msg: "There is a battle between @Skrillex and @Avicii omg =O", user_id: a2.id },
-	{ msg: "There is a battle between @Skrillex and @Avicii omg =O", user_id: a3.id },
-	{ msg: "There is a battle between @Skrillex and @Avicii omg =O", user_id: a4.id },
+	{ msg: "Ceci est un test de Sweet", user_id: a1.id },
+	{ msg: "Ceci est un test de Sweet", user_id: a2.id },
+	{ msg: "Ceci est un test de Sweet", user_id: a3.id },
+	{ msg: "Ceci est un test de Sweet", user_id: a4.id },
+	{ msg: "Ceci est un test de Sweet", user_id: a5.id },
+	{ msg: "Ceci est un test de Sweet", user_id: a6.id },
+	{ msg: "Nice work @OMFG I love your musics", user_id: u1.id },
+	{ msg: "I love you @Ephixa !", user_id: u2.id },
+	{ msg: "Le travail de @LinkinPark a toujours été génial !", user_id: u3.id },
+	{ msg: "Pure musique de @CalvinHarris :)", user_id: u4.id },
+	{ msg: "Joli travail @Lund pour le site", user_id: u5.id },
+	{ msg: "Hello @Haz <3", user_id: u6.id },
+	{ msg: "There is a battle between @#{a1.id} and @#{a2.id} omg =O", user_id: u1.id },
+	{ msg: "There is a battle between @#{a3.id} and @#{a4.id} omg =O", user_id: u2.id },
+	{ msg: "There is a battle between @#{a5.id} and @#{a6.id} omg =O", user_id: u3.id },
 ])
 
 Vote.create!([
-	{ user_id: a1.id, battle_id: battle.id, artist_id: a5.id },
-	{ user_id: a2.id, battle_id: battle.id, artist_id: a6.id }
+	{ user_id: a1.id, battle_id: battle1.id, artist_id: a1.id },
+	{ user_id: a2.id, battle_id: battle1.id, artist_id: a1.id },
+	{ user_id: u1.id, battle_id: battle2.id, artist_id: a3.id },
+	{ user_id: u2.id, battle_id: battle2.id, artist_id: a4.id },
+	{ user_id: u5.id, battle_id: battle3.id, artist_id: a6.id },
+	{ user_id: u6.id, battle_id: battle3.id, artist_id: a6.id },
 ])
-
-a3.albums.each do |album|
-	album.commentaries << Commentary.create!({author_id: u4.id, content: "Je suis fan de ce que tu fais !" })
-end
-a4.albums.each do |album|
-	album.commentaries << Commentary.create!({author_id: u4.id, content: "Je suis fan de ce que tu fais !" })
-end
-
-News.first.commentaries << Commentary.create!({author_id: u6.id, content: "J'adore les news de votre site" })
-
-Music.all.each do |music|
-	MusicNote.create!([
-		{ user_id: u1.id, music_id: music.id, value: rand(5) },
-		{ user_id: u2.id, music_id: music.id, value: rand(5) },
-		{ user_id: u3.id, music_id: music.id, value: rand(5) },
-		{ user_id: u4.id, music_id: music.id, value: rand(5) },
-		{ user_id: u5.id, music_id: music.id, value: rand(5) }
-	])
-end
-
-#################
-###   Achat   ###
-#################
-
-p1 = Purchase.create!({ user_id: u5.id })
-p2 = Purchase.create!({ user_id: u5.id })
-p3 = Purchase.create!({ user_id: u5.id })
-p4 = Purchase.create!({ user_id: u5.id })
-p5 = Purchase.create!({ user_id: u6.id })
-p6 = Purchase.create!({ user_id: u6.id })
-p7 = Purchase.create!({ user_id: u6.id })
-p8 = Purchase.create!({ user_id: u6.id })
-
-
-# Pour le user 5
-pa1 = PurchasedAlbum.create!({ album_id: a5.albums.first.id, purchased_pack_id: nil })
-a5.albums.first.musics.each do |music|
-	PurchasedMusic.create!({ music_id: music.id, purchase_id: p1.id, purchased_album_id: pa1.id })
-end
-PurchasedMusic.create!({ music_id: Music.first.id, purchase_id: p2.id, purchased_album_id: nil })
-PurchasedMusic.create!({ music_id: Music.second.id, purchase_id: p3.id, purchased_album_id: nil })
-PurchasedMusic.create!({ music_id: Music.third.id, purchase_id: p4.id, purchased_album_id: nil })
-
-# Pour le user 6
-
-PurchasedMusic.create!({ music_id: Music.fourth.id, purchase_id: p5.id, purchased_album_id: nil })
-PurchasedMusic.create!({ music_id: Music.fifth.id, purchase_id: p6.id, purchased_album_id: nil })
-PurchasedMusic.create!({ music_id: Music.offset(5).first.id, purchase_id: p7.id, purchased_album_id: nil })
-PurchasedMusic.create!({ music_id: Music.offset(6).first.id, purchase_id: p8.id, purchased_album_id: nil })
-
 
 # Listening
 

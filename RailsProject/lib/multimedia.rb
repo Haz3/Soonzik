@@ -79,7 +79,6 @@ module	Multimedia
 
 		# Function to cut the file with the limit set before
 		def cut
-			puts "start : #{isStart?} - end : #{isEnd?} - file : #{@file}"
 			if (!isStart? || !isEnd? || @file == nil)
 				return nil
 			end
