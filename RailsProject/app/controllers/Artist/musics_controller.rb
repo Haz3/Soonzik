@@ -58,7 +58,7 @@ module Artist
 	      if error == false && params[:file].content_type == "audio/mp3"
 	        randomNumber = rand(1000..10000)
 	        timestamp = Time.now.to_i
-	        newFilename = Digest::SHA256.hexdigest("#{timestamp}--#{params[:file].original_filename}#{randomNumber}") + "-" + params[:file].original_filename.gsub(/[^0-9A-Za-z\.-]/, '')
+	        newFilename = Digest::SHA256.hexdigest("#{timestamp}--#{params[:file].original_filename}#{randomNumber}") + "-" + params[:file].original_filename.downcase.gsub(/[^0-9A-Za-z]/, '')
 
 	        #check si le dossier existe
 	        if (!Dir.exists? Rails.root.join('app', 'assets', 'musics', @u.id.to_s))
