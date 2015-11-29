@@ -27,7 +27,8 @@ module API
 
           suggestion.each { |music|
             suggestArray << JSON.parse(music.to_json(:only => Music.miniKey, :include => {
-              album: { only: Album.miniKey }
+              album: { only: Album.miniKey },
+              user: { only: User.miniKey }
             }))
           }
 
@@ -85,6 +86,7 @@ module API
         end
 
       rescue
+        puts $!, $@
         codeAnswer 504
         defineHttp :service_unavailable
       end
