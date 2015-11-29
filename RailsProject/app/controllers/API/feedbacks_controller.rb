@@ -2,7 +2,7 @@ module API
   # Controller which manage the transaction for the Feedbacks objects
   # Here is the list of action available :
   #
-  # * save       [get]
+  # * save       [post]
   class FeedbacksController < ApisecurityController
 
 
