@@ -231,7 +231,6 @@ module Artist
 								d = Description.new
 								d.description = description["description"]
 								d.language = description["language"]
-								puts d
 								if (d.save)
 									a.descriptions << d
 								end
@@ -248,7 +247,6 @@ module Artist
 	      	http = :bad_request
 	      end
 			rescue
-				puts $!, $@
 		  	error = true
       	http = :bad_request
 			end
@@ -424,6 +422,89 @@ module Artist
 				end
 			end
 			render :json => {}
+		end
+
+		# Upload a rediffusion for the software
+		#
+		# Parameters : filename & data base 64
+		def uploadRediff
+			begin
+				if (@u == nil || (@u != nil && !@u.isArtist?))
+	    		codeAnswer 500
+	    		defineHttp :forbidden
+	    		sendJson and return
+	    	end
+
+	    	if (params.has_key?(:finish) && params.has_key?(:album_id) && params.has_key?(:music_name) && params.has_key?(:duration) &&
+	    			params.has_key?(:price) && params.has_key?(:filename) && params.has_key?(:limited))
+	    		a = Album.find_by_id(params[:album_id])
+
+	    		m = Music.new
+	    		m.user_id = @u.id
+	    		m.album_id = a.id
+	    		m.title = params[:music_name]
+	    		m.duration = params[:duration]
+	    		m.price = params[:price]
+	    		m.file = params[:filename].gsub(/[^0-9A-Za-z\.-]/, '')
+	    		m.limited = params[:limited]
+	    		m.save
+	    		
+	    		d = Description.new
+					d.description = "This is a rediffusion"
+					d.language = "EN"
+					if (d.save)
+						a.descriptions << d
+					end
+	    	elsif (params.has_key?(:filename) && params.has_key?(:data))
+	    		n = 0
+	    		data = Base64.decode64 params[:data]
+
+	    		File.open(Rails.root.join('app', 'assets', 'musics', @u.id, params[:filename].gsub(/[^0-9A-Za-z\.-]/, '')), 'ab') do |f|
+	          n = f.write(data)
+	        end
+
+	        @returnValue[:content] = { char_written: n }
+	      else
+	    		codeAnswer 500
+	    		defineHttp :bad_request
+	    	end
+    	rescue
+	    	codeAnswer 504
+    		defineHttp :service_unavailable
+	    end
+   		sendJson
+		end
+
+		# Create an album for the software
+		#
+		# Parameters : filename & data base 64
+		def createAlbum
+			begin
+				if (@u == nil || (@u != nil && !@u.isArtist?))
+	    		codeAnswer 500
+	    		defineHttp :forbidden
+	    		sendJson and return
+	    	end
+
+	    	if (params.has_key?(:album_name) && params.has_key?(:price) && params.has_key?(:yearProd))
+	    		a = Album.new
+	    		a.user_id = @u.id
+	    		a.title = params[:album_name]
+	    		a.image = "default.png"
+	    		a.price = params[:price]
+	    		a.file = "default.png"
+	    		a.yearProd = params[:yearProd]
+	    		a.save!
+	        @returnValue[:content] = a.as_json(:only => Album.miniKey)
+	      else
+	    		codeAnswer 500
+	    		defineHttp :bad_request
+	    	end
+	    rescue
+	    	codeAnswer 504
+    		defineHttp :service_unavailable
+	    end
+   		sendJson
 		end
 	end
 end
