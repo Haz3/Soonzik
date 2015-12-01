@@ -448,7 +448,7 @@ module Artist
 	    		m.file = params[:filename].gsub(/[^0-9A-Za-z\.-]/, '')
 	    		m.limited = params[:limited]
 	    		m.save
-	    		
+
 	    		d = Description.new
 					d.description = "This is a rediffusion"
 					d.language = "EN"
@@ -490,9 +490,9 @@ module Artist
 	    		a = Album.new
 	    		a.user_id = @u.id
 	    		a.title = params[:album_name]
-	    		a.image = "default.png"
+	    		a.image = "default.jpg"
 	    		a.price = params[:price]
-	    		a.file = "default.png"
+	    		a.file = "default.jpg"
 	    		a.yearProd = params[:yearProd]
 	    		a.save!
 	        @returnValue[:content] = a.as_json(:only => Album.miniKey)
