@@ -103,6 +103,7 @@ class User < ActiveRecord::Base
   has_many :albums
   has_many :identities
   has_many :listenings
+  has_many :feedbacks
   has_many :notifications
   has_many :musics
   has_many :news

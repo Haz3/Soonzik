@@ -280,7 +280,7 @@ module API
             cut = false if (music.limited == false || (u != nil && u.purchased_musics.include?(music)))
           end
 
-          file = music.file.downcase.gsub(/[^0-9A-Za-z]/, '')
+          file = music.file
           file = "cut_" + file if cut
           buffer = File.open(File.join(Rails.root, "app", "assets", "musics", music.album.user.id.to_s, "#{file}.mp3"), "rb").read
         end

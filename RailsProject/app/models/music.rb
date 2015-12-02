@@ -158,7 +158,6 @@ class Music < ActiveRecord::Base
     else
       toRemove = Music.musicToJson Music.joins(purchased_musics: [:purchase]).where(["purchases.user_id = ?", u.id])
       interesting = Music.musicToJson Music.joins(:listenings).where(["listenings.user_id = ?", u.id])
-      puts interesting.inspect
       u.friends.each do |friend|
         interesting = interesting | (Music.musicToJson Music.joins(purchased_musics: [:purchase]).where(["purchases.user_id = ?", friend.id]))
         friend.listenings.limit(30).each do |listening|

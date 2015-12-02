@@ -191,6 +191,8 @@ Rails.application.routes.draw do
       match '/musics/updateAlbum' => 'musics#updateAlbum', via: [:post, :options]
       get '/musics/getPropose' => 'musics#getPropose'
       match '/musics/proposeAlbums' => 'musics#proposeAlbums', via: [:post, :options]
+      match '/musics/createAlbumSoftware' => 'musics#uploadRediff', via: [:post, :options]
+      match '/musics/uploadRediff' => 'musics#uploadRediff', via: [:post, :options]
 
       # Meet
       match '/meet/save' => 'meets#save', via: [:post, :put]
