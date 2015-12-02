@@ -40,8 +40,34 @@
 
 
             <Button x:Name="add_to_cart_btn" Command="{Binding do_add_to_cart}" x:Uid="add_to_cart_btn" Content="Ajouter au panier" Margin="632,11,-383,12" Grid.Column="1" Height="52" Width="201" Background="#FFEC3F3F" FontSize="20"/>
+         
+            <Button Command="{Binding do_note_one, Mode=TwoWay}" Grid.Column="1" HorizontalAlignment="Left" Margin="87,229,0,0" Grid.Row="1" VerticalAlignment="Top" Height="50" Width="50">
+                <Button.Background>
+                    <ImageBrush Stretch="Fill" ImageSource="{Binding star_one, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                </Button.Background>
+            </Button>
+            <Button Command="{Binding do_note_two, Mode=TwoWay}" Grid.Column="1" HorizontalAlignment="Left" Margin="136,229,0,0" Grid.Row="1" VerticalAlignment="Top" Height="50" Width="50">
+                <Button.Background>
+                    <ImageBrush Stretch="Fill" ImageSource="{Binding star_two, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                </Button.Background>
+            </Button>
+            <Button Command="{Binding do_note_three, Mode=TwoWay}" Grid.Column="1" HorizontalAlignment="Left" Margin="185,229,0,0" Grid.Row="1" VerticalAlignment="Top" Height="50" Width="50">
+                <Button.Background>
+                    <ImageBrush Stretch="Fill" ImageSource="{Binding star_three, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                </Button.Background>
+            </Button>
+            <Button Command="{Binding do_note_four, Mode=TwoWay}" Grid.Column="1" HorizontalAlignment="Left" Margin="234,229,0,0" Grid.Row="1" VerticalAlignment="Top" Height="50" Width="50">
+                <Button.Background>
+                    <ImageBrush Stretch="Fill" ImageSource="{Binding star_four, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                </Button.Background>
+            </Button>
+            <Button Command="{Binding do_note_five, Mode=TwoWay}" Grid.Column="1" HorizontalAlignment="Left" Margin="278,229,0,0" Grid.Row="1" VerticalAlignment="Top" Height="50" Width="50">
+                <Button.Background>
+                    <ImageBrush Stretch="Fill" ImageSource="{Binding star_five, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                </Button.Background>
+            </Button>
 
-            <Grid Background="White" Grid.Column="1" Margin="60,255,125,-39" Grid.Row="1">
+            <!--<Grid Background="White" Grid.Column="1" Margin="60,255,125,-39" Grid.Row="1">
                 <RatingControl:Rating HorizontalAlignment="Center" VerticalAlignment="Center"   
                 AllowSelectingZero="True" ReadOnly="False"
                 RatingItemCount="5" Value="{Binding music.getAverageNote, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" >
@@ -56,7 +82,7 @@
                         </Style>
                     </RatingControl:Rating.UnfilledItemStyle>
                 </RatingControl:Rating>
-            </Grid>
+            </Grid>-->
 
         </Grid>
 

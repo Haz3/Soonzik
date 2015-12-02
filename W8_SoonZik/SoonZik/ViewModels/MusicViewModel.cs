@@ -52,6 +52,72 @@ namespace SoonZik.ViewModels
             }
         }
 
+        private int _user_note;
+        public int user_note
+        {
+            get { return _user_note; }
+            set
+            {
+                _user_note = value;
+                OnPropertyChanged("user_note");
+            }
+        }
+
+        private string _star_one;
+        public string star_one
+        {
+            get { return _star_one; }
+            set
+            {
+                _star_one = value;
+                OnPropertyChanged("star_one");
+            }
+        }
+
+        private string _star_two;
+        public string star_two
+        {
+            get { return _star_two; }
+            set
+            {
+                _star_two = value;
+                OnPropertyChanged("star_two");
+            }
+        }
+
+        private string _star_three;
+        public string star_three
+        {
+            get { return _star_three; }
+            set
+            {
+                _star_three = value;
+                OnPropertyChanged("star_three");
+            }
+        }
+
+        private string _star_four;
+        public string star_four
+        {
+            get { return _star_four; }
+            set
+            {
+                _star_four = value;
+                OnPropertyChanged("star_four");
+            }
+        }
+
+        private string _star_five;
+        public string star_five
+        {
+            get { return _star_five; }
+            set
+            {
+                _star_five = value;
+                OnPropertyChanged("star_five");
+            }
+        }
+
         public ICommand do_send_comment
         {
             get;
@@ -59,6 +125,32 @@ namespace SoonZik.ViewModels
         }
 
         public ICommand do_add_to_cart
+        {
+            get;
+            private set;
+        }
+
+        public ICommand do_note_one
+        {
+            get;
+            private set;
+        }
+        public ICommand do_note_two
+        {
+            get;
+            private set;
+        }
+        public ICommand do_note_three
+        {
+            get;
+            private set;
+        }
+        public ICommand do_note_four
+        {
+            get;
+            private set;
+        }
+        public ICommand do_note_five
         {
             get;
             private set;
@@ -79,6 +171,12 @@ namespace SoonZik.ViewModels
         {
             do_send_comment = new RelayCommand(send_comment);
             do_add_to_cart = new RelayCommand(add_to_cart);
+            do_note_one = new RelayCommand(note_one);
+            do_note_two = new RelayCommand(note_two);
+            do_note_three = new RelayCommand(note_three);
+            do_note_four = new RelayCommand(note_four);
+            do_note_five = new RelayCommand(note_five);
+
             load_music(id);
         }
 
@@ -98,6 +196,15 @@ namespace SoonZik.ViewModels
 
                 var comment_vm = await CommentViewModel.load_comments("/musics/" + music.id.ToString());
                 commentlist = comment_vm;
+
+                var note = (List<Note>) await Http_get.get_object(new List<Note>(), "/musics/getNotes?user_id=" + Singleton.Instance.Current_user.id.ToString() + "&arr_id=[" + music.id.ToString() + "]");
+
+                if (note.Any())
+                    user_note = note[0].note;
+                else
+                    user_note = 0;
+
+                set_stars(user_note);
             }
 
             catch (Exception e)
@@ -167,10 +274,10 @@ namespace SoonZik.ViewModels
                 var response = await request.post_request(url, data);
                 var json = JObject.Parse(response).SelectToken("message");
 
-                if (json.ToString() == "Created")
-                    await new MessageDialog("note OK").ShowAsync();
-                else
-                    await new MessageDialog("note KO").ShowAsync();
+                //if (json.ToString() == "Created")
+                //    await new MessageDialog("note OK").ShowAsync();
+                //else
+                //    await new MessageDialog("note KO").ShowAsync();
 
             }
             catch (Exception e)
@@ -180,6 +287,85 @@ namespace SoonZik.ViewModels
 
             if (exception != null)
                 await new MessageDialog(exception.Message, "Note POST error").ShowAsync();
+        }
+
+        public void note_one()
+        {
+            set_note(1);
+            set_stars(1);
+        }
+        public void note_two()
+        {
+            set_note(2);
+            set_stars(2);
+        }
+        public void note_three()
+        {
+            set_note(3);
+            set_stars(3);
+        }
+        public void note_four()
+        {
+            set_note(4);
+            set_stars(4);
+        }
+        public void note_five()
+        {
+            set_note(5);
+            set_stars(5);
+        }
+
+        public void set_stars(int user_note)
+        {
+            if (user_note == 0)
+            {
+                star_one = "ms-appx:///Assets/g_star.png";
+                star_two = "ms-appx:///Assets/g_star.png";
+                star_three = "ms-appx:///Assets/g_star.png";
+                star_four = "ms-appx:///Assets/g_star.png";
+                star_five = "ms-appx:///Assets/g_star.png";
+            }
+            if (user_note == 1)
+            {
+                star_one = "ms-appx:///Assets/y_star.png";
+                star_two = "ms-appx:///Assets/g_star.png";
+                star_three = "ms-appx:///Assets/g_star.png";
+                star_four = "ms-appx:///Assets/g_star.png";
+                star_five = "ms-appx:///Assets/g_star.png";
+            }
+
+            if (user_note == 2)
+            {
+                star_one = "ms-appx:///Assets/o_star.png";
+                star_two = "ms-appx:///Assets/y_star.png";
+                star_three = "ms-appx:///Assets/g_star.png";
+                star_four = "ms-appx:///Assets/g_star.png";
+                star_five = "ms-appx:///Assets/g_star.png";
+            }
+            if (user_note == 3)
+            {
+                star_one = "ms-appx:///Assets/o_star.png";
+                star_two = "ms-appx:///Assets/o_star.png";
+                star_three = "ms-appx:///Assets/y_star.png";
+                star_four = "ms-appx:///Assets/g_star.png";
+                star_five = "ms-appx:///Assets/g_star.png";
+            }
+            if (user_note == 4)
+            {
+                star_one = "ms-appx:///Assets/o_star.png";
+                star_two = "ms-appx:///Assets/o_star.png";
+                star_three = "ms-appx:///Assets/o_star.png";
+                star_four = "ms-appx:///Assets/y_star.png";
+                star_five = "ms-appx:///Assets/g_star.png";
+            }
+            if (user_note == 5)
+            {
+                star_one = "ms-appx:///Assets/o_star.png";
+                star_two = "ms-appx:///Assets/o_star.png";
+                star_three = "ms-appx:///Assets/o_star.png";
+                star_four = "ms-appx:///Assets/o_star.png";
+                star_five = "ms-appx:///Assets/y_star.png";
+            }
         }
     }
 }
