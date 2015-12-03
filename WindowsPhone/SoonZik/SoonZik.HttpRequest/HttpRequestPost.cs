@@ -258,12 +258,12 @@ namespace SoonZik.HttpRequest
             return await GetHttpPostResponse(request, postData);
         }
 
-        public async Task<String> SaveMessage(Message mess, string sha256, User myUser)
+        public async Task<String> SaveMessage(string msg, string dest_id, string sha256, User myUser)
         {
             var request = (HttpWebRequest) WebRequest.Create(ApiUrl + "messages/save");
 
-            var postData = "message[user_id]=" + mess.user_id + "&message[dest_id]=" + mess.dest_id + "&message[msg]=" +
-                           mess.msg + "&secureKey=" + sha256 + "&user_id=" + myUser.id;
+            var postData = "message[user_id]=" + myUser.id + "&message[dest_id]=" + dest_id + "&message[msg]=" +
+                           msg + "&secureKey=" + sha256 + "&user_id=" + myUser.id;
             return await GetHttpPostResponse(request, postData);
         }
 

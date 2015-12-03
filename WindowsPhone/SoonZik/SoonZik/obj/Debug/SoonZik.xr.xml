@@ -63,6 +63,12 @@
     <RootPropertyPathName Name="AlbumTappedCommand" />
     <RootPropertyPathName Name="ListMusique" />
     <RootPropertyPathName Name="MusicTappedCommand" />
+    <RootPropertyPathName Name="address" />
+    <RootPropertyPathName Name="city" />
+    <RootPropertyPathName Name="url" />
+    <RootPropertyPathName Name="ListConcerts" />
+    <RootPropertyPathName Name="ConcertSelected" />
+    <RootPropertyPathName Name="ConcertTappedCommand" />
     <RootPropertyPathName Name="TwentyChecked" />
     <RootPropertyPathName Name="TenChecked" />
     <RootPropertyPathName Name="FiveChecked" />
@@ -96,7 +102,6 @@
     <RootPropertyPathName Name="CurrentUser" />
     <RootPropertyPathName Name="follows" />
     <RootPropertyPathName Name="SelectUser" />
-    <RootPropertyPathName Name="address" />
     <RootPropertyPathName Name="description" />
     <RootPropertyPathName Name="ButtonFriendText" />
     <RootPropertyPathName Name="AddCommand" />
@@ -130,7 +135,6 @@
     <RootPropertyPathName Name="CollectionGroups" />
     <RootPropertyPathName Name="created_at" />
     <RootPropertyPathName Name="attachments" />
-    <RootPropertyPathName Name="url" />
     <RootPropertyPathName Name="ListNews" />
     <RootPropertyPathName Name="SelectedNews" />
     <RootPropertyPathName Name="SelectNews" />

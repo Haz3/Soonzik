@@ -11,7 +11,6 @@ using GalaSoft.MvvmLight.Command;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using SoonZik.Controls;
-using SoonZik.Helpers;
 using SoonZik.HttpRequest;
 using SoonZik.HttpRequest.Poco;
 using SoonZik.Utils;
@@ -60,7 +59,8 @@ namespace SoonZik.ViewModel
             var request = new HttpRequestGet();
             var post = new HttpRequestPost();
             ValidateKey.GetValideKey();
-            var res = post.SaveCart(_selectedMusic, null, Singleton.Singleton.Instance().SecureKey, Singleton.Singleton.Instance().CurrentUser);
+            var res = post.SaveCart(_selectedMusic, null, Singleton.Singleton.Instance().SecureKey,
+                Singleton.Singleton.Instance().CurrentUser);
             res.ContinueWith(delegate(Task<string> tmp2)
             {
                 var res2 = tmp2.Result;
@@ -160,7 +160,8 @@ namespace SoonZik.ViewModel
                 try
                 {
                     ValidateKey.GetValideKey();
-                    var test = post.UpdatePlaylist(SelectedPlaylist, MusicForPlaylist, Singleton.Singleton.Instance().SecureKey,
+                    var test = post.UpdatePlaylist(SelectedPlaylist, MusicForPlaylist,
+                        Singleton.Singleton.Instance().SecureKey,
                         Singleton.Singleton.Instance().CurrentUser);
                     test.ContinueWith(delegate(Task<string> tmp)
                     {
@@ -211,7 +212,7 @@ namespace SoonZik.ViewModel
             {
                 name = "MyPlaylist",
                 user = Singleton.Singleton.Instance().CurrentUser,
-                musics = new List<Music> { MusicForPlaylist }
+                musics = new List<Music> {MusicForPlaylist}
             };
             if (MusicForPlaylist != null)
             {
@@ -219,7 +220,8 @@ namespace SoonZik.ViewModel
                 try
                 {
                     ValidateKey.GetValideKey();
-                    var test = post.SavePlaylist(playlist, Singleton.Singleton.Instance().SecureKey, Singleton.Singleton.Instance().CurrentUser);
+                    var test = post.SavePlaylist(playlist, Singleton.Singleton.Instance().SecureKey,
+                        Singleton.Singleton.Instance().CurrentUser);
                     test.ContinueWith(delegate(Task<string> tmp)
                     {
                         var res = tmp.Result;
@@ -235,7 +237,8 @@ namespace SoonZik.ViewModel
                                     try
                                     {
                                         ValidateKey.GetValideKey();
-                                        var up = post.UpdatePlaylist(playList, MusicForPlaylist, Singleton.Singleton.Instance().SecureKey,
+                                        var up = post.UpdatePlaylist(playList, MusicForPlaylist,
+                                            Singleton.Singleton.Instance().SecureKey,
                                             Singleton.Singleton.Instance().CurrentUser);
                                         up.ContinueWith(delegate(Task<string> tmp2)
                                         {

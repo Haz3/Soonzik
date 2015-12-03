@@ -4,7 +4,6 @@ using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using Windows.ApplicationModel.Core;
 using Windows.UI.Core;
-using Windows.UI.Xaml.Media.Imaging;
 using Coding4Fun.Toolkit.Controls;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
@@ -80,7 +79,8 @@ namespace SoonZik.ViewModel
         {
             var get = new HttpRequestGet();
             ValidateKey.GetValideKey();
-            var res = get.GetSecureObject(new News(), "news", SelectedNews.id.ToString(), Singleton.Singleton.Instance().SecureKey,
+            var res = get.GetSecureObject(new News(), "news", SelectedNews.id.ToString(),
+                Singleton.Singleton.Instance().SecureKey,
                 Singleton.Singleton.Instance().CurrentUser.id.ToString());
             res.ContinueWith(delegate(Task<object> tmp)
             {
@@ -91,7 +91,8 @@ namespace SoonZik.ViewModel
                         () =>
                         {
                             NewsDetailViewModel.TheNews = news;
-                            NewsDetailViewModel.TheNews.attachments[0].url = new Uri(UrlImage + news.attachments[0].url, UriKind.RelativeOrAbsolute).ToString();
+                            NewsDetailViewModel.TheNews.attachments[0].url =
+                                new Uri(UrlImage + news.attachments[0].url, UriKind.RelativeOrAbsolute).ToString();
                             GlobalMenuControl.SetChildren(new NewsDetail());
                         });
                 }
@@ -113,7 +114,8 @@ namespace SoonZik.ViewModel
                         CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
                             () =>
                             {
-                                item.attachments[0].url = new Uri(UrlImage + item.attachments[0].url, UriKind.RelativeOrAbsolute).ToString();
+                                item.attachments[0].url =
+                                    new Uri(UrlImage + item.attachments[0].url, UriKind.RelativeOrAbsolute).ToString();
                                 ListNews.Add(item);
                             });
                     }

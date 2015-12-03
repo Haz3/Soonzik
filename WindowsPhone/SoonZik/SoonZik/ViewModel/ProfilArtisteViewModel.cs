@@ -42,6 +42,7 @@ namespace SoonZik.ViewModel
         public ICommand FollowCommand { get; private set; }
         public ICommand SelectionCommand { get; private set; }
         private ICommand _itemClickCommand;
+
         public ICommand ItemClickCommand
         {
             get { return _itemClickCommand; }
@@ -65,6 +66,7 @@ namespace SoonZik.ViewModel
                 RaisePropertyChanged("ButtonFriendText");
             }
         }
+
         private bool _friend;
         private bool _follow;
         private User _theArtiste;
@@ -140,6 +142,7 @@ namespace SoonZik.ViewModel
                 RaisePropertyChanged("NbrTitres");
             }
         }
+
         #endregion
 
         #region Method
@@ -160,7 +163,8 @@ namespace SoonZik.ViewModel
                     {
                         foreach (var album in art.albums)
                         {
-                            album.imageAlbum = new BitmapImage(new Uri(Constant.UrlImageAlbum + album.image, UriKind.RelativeOrAbsolute));
+                            album.imageAlbum =
+                                new BitmapImage(new Uri(Constant.UrlImageAlbum + album.image, UriKind.RelativeOrAbsolute));
                             NbrTitres = album.musics.Count + " titres";
                             ListAlbums.Add(album);
                         }
@@ -253,7 +257,8 @@ namespace SoonZik.ViewModel
         private void ItemClickCommandExecute()
         {
             var request = new HttpRequestGet();
-            var album = request.GetSecureObject(new Album(), "albums", TheAlbum.id.ToString(), Singleton.Singleton.Instance().SecureKey, Singleton.Singleton.Instance().CurrentUser.id.ToString());
+            var album = request.GetSecureObject(new Album(), "albums", TheAlbum.id.ToString(),
+                Singleton.Singleton.Instance().SecureKey, Singleton.Singleton.Instance().CurrentUser.id.ToString());
             album.ContinueWith(delegate(Task<object> tmp)
             {
                 var test = tmp.Result as Album;
@@ -261,9 +266,9 @@ namespace SoonZik.ViewModel
                 {
                     CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
                     {
-
                         TheAlbum = test;
-                        TheAlbum.imageAlbum = new BitmapImage(new Uri(Constant.UrlImageAlbum + TheAlbum.image, UriKind.RelativeOrAbsolute));
+                        TheAlbum.imageAlbum =
+                            new BitmapImage(new Uri(Constant.UrlImageAlbum + TheAlbum.image, UriKind.RelativeOrAbsolute));
                         AlbumViewModel.MyAlbum = TheAlbum;
                         GlobalMenuControl.SetChildren(new AlbumView());
                     });

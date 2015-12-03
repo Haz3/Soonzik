@@ -16,6 +16,7 @@ C:\Users\Juan-Pablo Bastardos\Documents\GitHub\SoonZik\Soonzik\WindowsPhone\Soon
 C:\Users\Juan-Pablo Bastardos\Documents\GitHub\SoonZik\Soonzik\WindowsPhone\SoonZik\SoonZik.Helpers\obj\Debug\qualifiers.txt
 C:\Users\Juan-Pablo Bastardos\Documents\GitHub\SoonZik\Soonzik\WindowsPhone\SoonZik\SoonZik.Helpers\obj\Debug\qualifiers.txt.intermediate
 C:\Users\Juan-Pablo Bastardos\Documents\GitHub\SoonZik\Soonzik\WindowsPhone\SoonZik\SoonZik.Helpers\obj\Debug\MultipleQualifiersPerDimensionFound.txt
+C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik.Helpers\bin\Debug\SoonZik.Helpers.dll.config
 C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik.Helpers\bin\Debug\SoonZik.Helpers.dll
 C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik.Helpers\bin\Debug\SoonZik.Helpers.pdb
 C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik.Helpers\bin\Debug\SoonZik.Helpers.pri
@@ -23,12 +24,15 @@ C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik.Helpers\bin\
 C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik.Helpers\bin\Debug\Newtonsoft.Json.dll
 C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik.Helpers\bin\Debug\SoonZik.HttpRequest.dll
 C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik.Helpers\bin\Debug\SoonZik.Singleton.dll
+C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik.Helpers\bin\Debug\Tweetinvi.Core.dll
+C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik.Helpers\bin\Debug\Microsoft.Threading.Tasks.dll
 C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik.Helpers\bin\Debug\SoonZik.HttpRequest.pdb
 C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik.Helpers\bin\Debug\SoonZik.HttpRequest.pri
 C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik.Helpers\bin\Debug\SoonZik.Singleton.pdb
 C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik.Helpers\bin\Debug\SoonZik.Singleton.pri
 C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik.Helpers\bin\Debug\Facebook.xml
 C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik.Helpers\bin\Debug\Newtonsoft.Json.xml
+C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik.Helpers\bin\Debug\Microsoft.Threading.Tasks.xml
 C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik.Helpers\obj\Debug\SoonZik.Helpers.csprojResolveAssemblyReference.cache
 C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik.Helpers\obj\Debug\SoonZik.Helpers.dll
 C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik.Helpers\obj\Debug\SoonZik.Helpers.pdb
@@ -43,7 +47,3 @@ C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik.Helpers\obj\
 C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik.Helpers\obj\Debug\qualifiers.txt
 C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik.Helpers\obj\Debug\qualifiers.txt.intermediate
 C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik.Helpers\obj\Debug\MultipleQualifiersPerDimensionFound.txt
-C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik.Helpers\bin\Debug\SoonZik.Helpers.dll.config
-C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik.Helpers\bin\Debug\Tweetinvi.Core.dll
-C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik.Helpers\bin\Debug\Microsoft.Threading.Tasks.dll
-C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik.Helpers\bin\Debug\Microsoft.Threading.Tasks.xml

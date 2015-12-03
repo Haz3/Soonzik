@@ -3,7 +3,6 @@ using Windows.ApplicationModel.Core;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using SoonZik.Helpers;
 using SoonZik.HttpRequest;
 using SoonZik.HttpRequest.Poco;
 using SoonZik.Utils;
@@ -15,11 +14,12 @@ namespace SoonZik.Controls
 {
     public sealed partial class NotationMusic : UserControl
     {
-        public static Music SelectMusic { get; set; }
         public NotationMusic()
         {
-            this.InitializeComponent();
+            InitializeComponent();
         }
+
+        public static Music SelectMusic { get; set; }
 
         private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
         {
@@ -38,16 +38,14 @@ namespace SoonZik.Controls
             var request2 = new HttpRequestPost();
 
             ValidateKey.GetValideKey();
-            var res = request2.SetRate(SelectMusic, Singleton.Singleton.Instance().SecureKey, Singleton.Singleton.Instance().CurrentUser.id.ToString(), note);
+            var res = request2.SetRate(SelectMusic, Singleton.Singleton.Instance().SecureKey,
+                Singleton.Singleton.Instance().CurrentUser.id.ToString(), note);
             res.ContinueWith(delegate(Task<string> tmp)
             {
                 if (tmp.Result != null)
                 {
-
-                    CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
-                    {
-                        AlbumViewModel.RatePopup.IsOpen = false;
-                    });
+                    CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
+                        () => { AlbumViewModel.RatePopup.IsOpen = false; });
                 }
             });
         }

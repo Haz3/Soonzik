@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using System;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using SoonZik.Helpers;
@@ -14,7 +13,7 @@ namespace SoonZik.Utils
         {
             if (Singleton.Singleton.Instance().Key == null)
                 return false;
-            DateTime myDate = DateTime.Parse(Singleton.Singleton.Instance().Key.last_update);
+            var myDate = DateTime.Parse(Singleton.Singleton.Instance().Key.last_update);
 
             if (myDate < DateTime.Now)
                 return false;
@@ -34,8 +33,9 @@ namespace SoonZik.Utils
                     var obj = JsonConvert.DeserializeObject(key, typeof (Key)) as Key;
                     var stringEncrypt = obj.key;
                     Singleton.Singleton.Instance().Key = obj;
-                    Singleton.Singleton.Instance().SecureKey = EncriptSha256.EncriptStringToSha256(Singleton.Singleton.Instance().CurrentUser.salt +
-                                                                                                   stringEncrypt);
+                    Singleton.Singleton.Instance().SecureKey =
+                        EncriptSha256.EncriptStringToSha256(Singleton.Singleton.Instance().CurrentUser.salt +
+                                                            stringEncrypt);
                 }
             });
         }

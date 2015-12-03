@@ -9,7 +9,6 @@ using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Media.Imaging;
-using Coding4Fun.Toolkit.Controls;
 using Facebook;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
@@ -23,7 +22,6 @@ using SoonZik.HttpRequest.Poco;
 using SoonZik.Utils;
 using SoonZik.Views;
 using Tweetinvi;
-using Tweetinvi.Core.Credentials;
 using User = SoonZik.HttpRequest.Poco.User;
 
 namespace SoonZik.ViewModel
@@ -32,11 +30,12 @@ namespace SoonZik.ViewModel
     {
         #region Attribute
 
-        public static Popup TwitterPopup; 
+        public static Popup TwitterPopup;
         private readonly ApplicationDataContainer _localSettings = ApplicationData.Current.LocalSettings;
         private readonly FaceBookHelper ObjFBHelper = new FaceBookHelper();
         private FacebookClient fbclient = new FacebookClient();
         private bool _progressOn;
+
         public bool ProgressOn
         {
             get { return _progressOn; }
@@ -46,7 +45,9 @@ namespace SoonZik.ViewModel
                 RaisePropertyChanged("ProgressOn");
             }
         }
+
         private string _username;
+
         public string Username
         {
             get { return _username; }
@@ -56,7 +57,9 @@ namespace SoonZik.ViewModel
                 RaisePropertyChanged("Username");
             }
         }
+
         private string _password;
+
         public string Password
         {
             get { return _password; }
@@ -66,6 +69,7 @@ namespace SoonZik.ViewModel
                 RaisePropertyChanged("Password");
             }
         }
+
         public ICommand SelectionCommand { get; private set; }
         public ICommand ConnexionCommand { get; private set; }
         public ICommand InscritpiomCommand { get; private set; }
@@ -155,13 +159,15 @@ namespace SoonZik.ViewModel
                     Singleton.Singleton.Instance().CurrentUser =
                         JsonConvert.DeserializeObject(stringJson, typeof (User)) as User;
                     Singleton.Singleton.Instance().CurrentUser.profilImage =
-                        new BitmapImage(new Uri(Constant.UrlImageUser + Singleton.Singleton.Instance().CurrentUser.image,
+                        new BitmapImage(new Uri(
+                            Constant.UrlImageUser + Singleton.Singleton.Instance().CurrentUser.image,
                             UriKind.RelativeOrAbsolute));
                     foreach (var friend in Singleton.Singleton.Instance().CurrentUser.friends)
                     {
                         friend.profilImage =
                             new BitmapImage(new Uri(Constant.UrlImageUser + friend.image, UriKind.RelativeOrAbsolute));
                     }
+                    ValidateKey.GetValideKey();
                     ServiceLocator.Current.GetInstance<MyNetworkViewModel>().UpdateFriend();
                 }
                 catch (Exception e)
@@ -195,13 +201,13 @@ namespace SoonZik.ViewModel
 
         private void TwitterCommandExecute()
         {
-            TwitterPopup = new Popup(); 
+            TwitterPopup = new Popup();
             var content = new TwitterConnect();
-            double width = content.Width;
-            double height = content.Height;
+            var width = content.Width;
+            var height = content.Height;
             TwitterPopup.Child = content;
-            TwitterPopup.VerticalOffset = (Window.Current.Bounds.Height - height) / 2;
-            TwitterPopup.HorizontalOffset = (Window.Current.Bounds.Width - width) / 2;
+            TwitterPopup.VerticalOffset = (Window.Current.Bounds.Height - height)/2;
+            TwitterPopup.HorizontalOffset = (Window.Current.Bounds.Width - width)/2;
             TwitterPopup.IsOpen = true;
             TwitterPopup.Closed += TwitterPopupOnClosed;
         }
@@ -216,9 +222,9 @@ namespace SoonZik.ViewModel
             var getKey = new HttpRequestGet();
 
             var key = await getKey.GetSocialToken(user.Id.ToString(), "twitter") as string;
-            char[] delimiter = { ' ', '"', '{', '}' };
+            char[] delimiter = {' ', '"', '{', '}'};
             var word = key.Split(delimiter);
-            var stringEncrypt = (user.Id.ToString() + word[4] + "3uNi@rCK$L$om40dNnhX)#jV2$40wwbr_bAK99%E");
+            var stringEncrypt = (user.Id + word[4] + "3uNi@rCK$L$om40dNnhX)#jV2$40wwbr_bAK99%E");
             var sha256 = EncriptSha256.EncriptStringToSha256(stringEncrypt);
 
             await connecionSocial.ConnexionSocial("twitter", sha256, ObjFBHelper.AccessToken, user.Id.ToString());

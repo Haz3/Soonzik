@@ -26,7 +26,8 @@
                            Margin="90,0,0,0" VerticalAlignment="Center" />
                 <Ellipse Grid.Column="0" Height="60" Width="60" VerticalAlignment="Center" HorizontalAlignment="Left">
                     <Ellipse.Fill>
-                        <ImageBrush ImageSource="{Binding Path=album.imageAlbum}" AlignmentX="Center" AlignmentY="Center" />
+                        <ImageBrush ImageSource="{Binding Path=album.imageAlbum}" AlignmentX="Center"
+                                    AlignmentY="Center" />
                     </Ellipse.Fill>
                 </Ellipse>
                 <Image x:Name="PlayImage" Source="../Resources/Icones/play.png" Height="30" Tapped="PlayImage_OnTapped"
@@ -59,7 +60,8 @@
     </Page.Resources>
 
     <Grid>
-        <Pivot Margin="0,20,0,0" x:Name="PivotGlobal" HeaderTemplate="{StaticResource SizeHeaderGlobalPivot}" Foreground="Transparent"
+        <Pivot Margin="0,20,0,0" x:Name="PivotGlobal" HeaderTemplate="{StaticResource SizeHeaderGlobalPivot}"
+               Foreground="Transparent"
                RenderTransformOrigin="0.5,0.5" Style="{StaticResource PivotStyle1}">
             <PivotItem x:Uid="InfluencePivot" Header="">
                 <ListBox Background="Transparent" x:Name="ListBoxGenre" ItemsSource="{Binding ListInfluences}"

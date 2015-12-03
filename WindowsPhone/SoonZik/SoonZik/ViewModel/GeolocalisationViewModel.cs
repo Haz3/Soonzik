@@ -26,6 +26,26 @@ namespace SoonZik.ViewModel
 
         #endregion
 
+        private void LoadedCommandExecute()
+        {
+            TwoChecked = new RelayCommand(TwoCheckedExecute);
+            FiveChecked = new RelayCommand(FiveCheckedExecute);
+            TenChecked = new RelayCommand(TenCheckedExecute);
+            TwentyChecked = new RelayCommand(TwentyCheckedExecute);
+            UserTappedCommand = new RelayCommand(UserTappedExecute);
+            ConcertTappedCommand = new RelayCommand(ConcertTappedExecute);
+            GetConcert();
+            InitVariable().ContinueWith(delegate
+            {
+                CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
+                    () =>
+                    {
+                        ListMapIcons = new List<MapIcon>();
+                        CreateListElement();
+                    });
+            });
+        }
+
         #region Method
 
         private void CreateListElement()
@@ -100,6 +120,10 @@ namespace SoonZik.ViewModel
             _myGeolocator = new Geolocator();
             var myGeoposition = await _myGeolocator.GetGeopositionAsync();
             UserLocation = myGeoposition.Coordinate;
+        }
+
+        private void ConcertTappedExecute()
+        {
         }
 
         #region Command
@@ -220,12 +244,14 @@ namespace SoonZik.ViewModel
         }
 
         public User UserSelected { get; set; }
+        public Concerts ConcertSelected { get; set; }
 
         public ICommand TwoChecked { get; private set; }
         public ICommand FiveChecked { get; private set; }
         public ICommand TenChecked { get; private set; }
         public ICommand TwentyChecked { get; private set; }
         public ICommand UserTappedCommand { get; private set; }
+        public ICommand ConcertTappedCommand { get; private set; }
         public ICommand GetMap { get; private set; }
         public ICommand LoadedCommand { get; private set; }
 
@@ -291,23 +317,5 @@ namespace SoonZik.ViewModel
         }
 
         #endregion
-
-        private void LoadedCommandExecute()
-        {
-            TwoChecked = new RelayCommand(TwoCheckedExecute);
-            FiveChecked = new RelayCommand(FiveCheckedExecute);
-            TenChecked = new RelayCommand(TenCheckedExecute);
-            TwentyChecked = new RelayCommand(TwentyCheckedExecute);
-            UserTappedCommand = new RelayCommand(UserTappedExecute);
-            InitVariable().ContinueWith(delegate
-            {
-                CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
-                    () =>
-                    {
-                        ListMapIcons = new List<MapIcon>();
-                        CreateListElement();
-                    });
-            });
-        }
     }
 }
