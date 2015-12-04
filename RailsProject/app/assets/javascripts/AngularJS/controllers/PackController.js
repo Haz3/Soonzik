@@ -70,6 +70,7 @@ SoonzikApp.controller('PacksCtrl', ['$scope', '$routeParams', 'SecureAuth', 'HTT
 
 			HTTPService.showPack(id, parameters).then(function(response) {
 				$scope.thisPack = response.data.content;
+				console.log($scope.thisPack);
 				$scope.end_date = $scope.thisPack.end_date;
 				timeLeft();
 				$scope.loading = false;
