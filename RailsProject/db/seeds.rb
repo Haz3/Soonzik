@@ -122,14 +122,14 @@ Friend.create!([
 ])
 
 Identity.create!([
-	{ user_id: a1.id, provider: "facebook", uid: 1318758927 },
-	{ user_id: a1.id, provider: "twitter", uid: 1356344377 },
-	{ user_id: a3.id, provider: "facebook", uid: 100000464246333 },
-	{ user_id: a3.id, provider: "twitter", uid: 293075406 },
-	{ user_id: a4.id, provider: "facebook", uid: 678388262 },
-	{ user_id: a4.id, provider: "twitter", uid: 468791444 },
-	{ user_id: a5.id, provider: "facebook", uid: 1554621818 },
-	{ user_id: a5.id, provider: "twitter", uid: 1321128888 },
+	{ user_id: u1.id, provider: "facebook", uid: 10205952532875286 },
+	{ user_id: u1.id, provider: "twitter", uid: 2965987677 },
+	{ user_id: u3.id, provider: "facebook", uid: 100000464246333 },
+	{ user_id: u3.id, provider: "twitter", uid: 293075406 },
+	{ user_id: u4.id, provider: "facebook", uid: 678388262 },
+	{ user_id: u4.id, provider: "twitter", uid: 468791444 },
+	{ user_id: u5.id, provider: "facebook", uid: 1554621818 },
+	{ user_id: u5.id, provider: "twitter", uid: 1321128888 },
 	{ user_id: u6.id, provider: "facebook", uid: 377507551 },
 	{ user_id: u6.id, provider: "twitter", uid: 1519058626 }
 ])

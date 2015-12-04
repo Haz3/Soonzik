@@ -7,13 +7,11 @@ using Windows.ApplicationModel.Resources;
 using Windows.Graphics.Imaging;
 using Windows.Storage;
 using Windows.Storage.Pickers;
-using Windows.UI.Core;
 using Windows.UI.Popups;
 using Windows.UI.Xaml.Media.Imaging;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Ioc;
-using SoonZik.Helpers;
 using SoonZik.HttpRequest;
 using SoonZik.HttpRequest.Poco;
 using SoonZik.Utils;
@@ -164,10 +162,7 @@ namespace SoonZik.ViewModel
             {
                 ValidateKey.GetValideKey();
                 var test = post.Update(CurrentUser, Singleton.Singleton.Instance().SecureKey);
-                test.ContinueWith(delegate(Task<string> tmp)
-                {
-                    var res = tmp.Result;
-                });
+                test.ContinueWith(delegate(Task<string> tmp) { var res = tmp.Result; });
             }
             catch (Exception)
             {

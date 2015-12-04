@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 using Windows.ApplicationModel.Core;
 using Windows.Devices.Geolocation;
 using Windows.Phone.UI.Input;
+using Windows.Storage;
+using Windows.Storage.Streams;
 using Windows.UI.Core;
 using Windows.UI.Popups;
 using Windows.UI.Xaml;
@@ -16,6 +18,7 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Media.Imaging;
 using GalaSoft.MvvmLight.Command;
+using Newtonsoft.Json;
 using SoonZik.Helpers;
 using SoonZik.HttpRequest;
 using SoonZik.HttpRequest.Poco;
@@ -217,6 +220,9 @@ namespace SoonZik.Controls
 
         #region Ctor
 
+        private readonly DispatcherTimer dispatcherTimer;
+        public int i;
+
         public GlobalMenuControl()
         {
             InitializeComponent();
@@ -243,6 +249,46 @@ namespace SoonZik.Controls
             AchatButton.Command = new RelayCommand(GoToAchat);
             ConnexionButton.Command = new RelayCommand(GoToConnexionPage);
             APropos.Command = new RelayCommand(GoToAbout);
+
+            CreateFile();
+
+            dispatcherTimer = new DispatcherTimer();
+            dispatcherTimer.Tick += DispatcherTimerOnTick;
+            dispatcherTimer.Interval = new TimeSpan(0, 0, 10);
+            dispatcherTimer.Start();
+            i = 0;
+        }
+
+        private async void CreateFile()
+        {
+            // Serialize our Product class into a string             
+            var jsonContents = JsonConvert.SerializeObject(new ObservableCollection<Message>());
+            // Get the app data folder and create or replace the file we are storing the JSON in.            
+            try
+            {
+                var localFolder = ApplicationData.Current.LocalFolder;
+                var textFile = await localFolder.CreateFileAsync("conversations",
+                    CreationCollisionOption.FailIfExists);
+                // Open the file...      
+                using (var textStream = await textFile.OpenAsync(FileAccessMode.ReadWrite))
+                {
+                    // write the JSON string!
+                    using (var textWriter = new DataWriter(textStream))
+                    {
+                        textWriter.WriteString(jsonContents);
+                        await textWriter.StoreAsync();
+                    }
+                }
+            }
+            catch (Exception q)
+            {
+                var test = q.Message;
+            }
+        }
+
+        private void DispatcherTimerOnTick(object sender, object o)
+        {
+            MyNetworkViewModel.LoadConversation();
         }
 
         private void HardwareButtonsOnBackPressed(object sender, BackPressedEventArgs e)
@@ -442,7 +488,8 @@ namespace SoonZik.Controls
         {
             var get = new HttpRequestGet();
             ValidateKey.GetValideKey();
-            var res = get.GetSecureObject(new Album(), "albums", SelectedMusic.album.id.ToString(), Singleton.Singleton.Instance().SecureKey, Singleton.Singleton.Instance().CurrentUser.id.ToString());
+            var res = get.GetSecureObject(new Album(), "albums", SelectedMusic.album.id.ToString(),
+                Singleton.Singleton.Instance().SecureKey, Singleton.Singleton.Instance().CurrentUser.id.ToString());
             res.ContinueWith(delegate(Task<object> tmp)
             {
                 var album = tmp.Result as Album;
@@ -451,7 +498,8 @@ namespace SoonZik.Controls
                     CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
                         () =>
                         {
-                            album.imageAlbum = new BitmapImage(new System.Uri(Constant.UrlImageAlbum + album.image, UriKind.RelativeOrAbsolute));
+                            album.imageAlbum =
+                                new BitmapImage(new Uri(Constant.UrlImageAlbum + album.image, UriKind.RelativeOrAbsolute));
                             AlbumViewModel.MyAlbum = album;
                             SetChildren(new AlbumView());
                         });
@@ -461,10 +509,11 @@ namespace SoonZik.Controls
 
         private void AlbumStackPanel_OnTapped(object sender, TappedRoutedEventArgs e)
         {
-            AlbumViewModel.MyAlbum = SelectedAlbum; 
+            AlbumViewModel.MyAlbum = SelectedAlbum;
             var get = new HttpRequestGet();
             ValidateKey.GetValideKey();
-            var res = get.GetSecureObject(new Album(), "albums", SelectedAlbum.id.ToString(), Singleton.Singleton.Instance().SecureKey, Singleton.Singleton.Instance().CurrentUser.id.ToString());
+            var res = get.GetSecureObject(new Album(), "albums", SelectedAlbum.id.ToString(),
+                Singleton.Singleton.Instance().SecureKey, Singleton.Singleton.Instance().CurrentUser.id.ToString());
             res.ContinueWith(delegate(Task<object> tmp)
             {
                 var album = tmp.Result as Album;
@@ -473,7 +522,8 @@ namespace SoonZik.Controls
                     CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
                         () =>
                         {
-                            album.imageAlbum = new BitmapImage(new System.Uri(Constant.UrlImageAlbum + album.image, UriKind.RelativeOrAbsolute));
+                            album.imageAlbum =
+                                new BitmapImage(new Uri(Constant.UrlImageAlbum + album.image, UriKind.RelativeOrAbsolute));
                             AlbumViewModel.MyAlbum = album;
                             SetChildren(new AlbumView());
                         });
@@ -493,7 +543,8 @@ namespace SoonZik.Controls
                     CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
                         () =>
                         {
-                            user.profilImage = new BitmapImage(new System.Uri(Constant.UrlImageUser + user.image, UriKind.RelativeOrAbsolute));
+                            user.profilImage =
+                                new BitmapImage(new Uri(Constant.UrlImageUser + user.image, UriKind.RelativeOrAbsolute));
                             ProfilArtisteViewModel.TheUser = user;
                             SetChildren(new ProfilArtiste());
                         });

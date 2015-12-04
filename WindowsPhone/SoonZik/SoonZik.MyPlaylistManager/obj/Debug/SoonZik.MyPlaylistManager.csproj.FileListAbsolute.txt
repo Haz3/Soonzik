@@ -1,3 +1,4 @@
+C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik.MyPlaylistManager\bin\Debug\SoonZik.MyPlaylistManager.winmd.config
 C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik.MyPlaylistManager\bin\Debug\SoonZik.MyPlaylistManager.winmd
 C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik.MyPlaylistManager\bin\Debug\SoonZik.MyPlaylistManager.pdb
 C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik.MyPlaylistManager\bin\Debug\SoonZik.MyPlaylistManager.pri
@@ -5,7 +6,8 @@ C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik.MyPlaylistMa
 C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik.MyPlaylistManager\bin\Debug\SoonZik.HttpRequest.dll
 C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik.MyPlaylistManager\bin\Debug\Facebook.dll
 C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik.MyPlaylistManager\bin\Debug\SoonZik.Singleton.dll
-C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik.MyPlaylistManager\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik.MyPlaylistManager\bin\Debug\Tweetinvi.Core.dll
+C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik.MyPlaylistManager\bin\Debug\Microsoft.Threading.Tasks.dll
 C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik.MyPlaylistManager\bin\Debug\SoonZik.Helpers.pdb
 C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik.MyPlaylistManager\bin\Debug\SoonZik.Helpers.pri
 C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik.MyPlaylistManager\bin\Debug\SoonZik.HttpRequest.pdb
@@ -13,7 +15,7 @@ C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik.MyPlaylistMa
 C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik.MyPlaylistManager\bin\Debug\Facebook.xml
 C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik.MyPlaylistManager\bin\Debug\SoonZik.Singleton.pdb
 C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik.MyPlaylistManager\bin\Debug\SoonZik.Singleton.pri
-C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik.MyPlaylistManager\bin\Debug\Newtonsoft.Json.xml
+C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik.MyPlaylistManager\bin\Debug\Microsoft.Threading.Tasks.xml
 C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik.MyPlaylistManager\obj\Debug\SoonZik.MyPlaylistManager.csprojResolveAssemblyReference.cache
 C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik.MyPlaylistManager\obj\Debug\SoonZik.MyPlaylistManager.winmd
 C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik.MyPlaylistManager\obj\Debug\SoonZik.MyPlaylistManager.pdb

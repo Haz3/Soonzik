@@ -66,27 +66,30 @@
 
         <Grid Grid.Row="0">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="180"/>
-                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="180" />
+                <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <Grid Column="0">
 
                 <TextBlock x:Name="AlbumTitle" Text="{Binding TheAlbum.title}" FontSize="30" Foreground="#40a8e2"
-                       VerticalAlignment="Top"
-                       HorizontalAlignment="Center" />
+                           VerticalAlignment="Top"
+                           HorizontalAlignment="Center" />
 
-                <Image Name="AlbumImage" Width="180" Height="180" Margin="0,18,0,0" HorizontalAlignment="Center" VerticalAlignment="Center" 
-                       Source="{Binding TheAlbum.imageAlbum}"/>
+                <Image Name="AlbumImage" Width="180" Height="180" Margin="0,18,0,0" HorizontalAlignment="Center"
+                       VerticalAlignment="Center"
+                       Source="{Binding TheAlbum.imageAlbum}" />
             </Grid>
             <Grid Column="1">
-                <TextBlock x:Name="ArtistName" Text="{Binding TheAlbum.user.username}" FontSize="20" Foreground="#40a8e2"
-                       VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,20,0,0" />
+                <TextBlock x:Name="ArtistName" Text="{Binding TheAlbum.user.username}" FontSize="20"
+                           Foreground="#40a8e2"
+                           VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,20,0,0" />
                 <TextBlock x:Name="LikesBlock" Text="{Binding Likes, Mode=TwoWay}" FontSize="20" Foreground="#40a8e2"
-                       VerticalAlignment="Top" HorizontalAlignment="Left" Margin="50,50,0,0" />
-                <Image x:Name="likeImage" Source="{Binding Like}" Width="30" HorizontalAlignment="Left" Height="30" VerticalAlignment="Top"
-                   Tapped="LikeImage_OnTapped" Margin="15,50,0,0" />
-                    <Button VerticalAlignment="Bottom" HorizontalAlignment="Center" x:Uid="GoToCard" Content=""
-                    Command="{Binding AddToCart}" />
+                           VerticalAlignment="Top" HorizontalAlignment="Left" Margin="50,50,0,0" />
+                <Image x:Name="likeImage" Source="{Binding Like}" Width="30" HorizontalAlignment="Left" Height="30"
+                       VerticalAlignment="Top"
+                       Tapped="LikeImage_OnTapped" Margin="15,50,0,0" />
+                <Button VerticalAlignment="Bottom" HorizontalAlignment="Center" x:Uid="GoToCard" Content=""
+                        Command="{Binding AddToCart}" />
 
             </Grid>
         </Grid>

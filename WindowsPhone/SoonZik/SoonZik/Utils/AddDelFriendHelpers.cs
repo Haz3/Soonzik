@@ -4,7 +4,6 @@ using Windows.ApplicationModel.Core;
 using Windows.UI.Core;
 using Windows.UI.Popups;
 using Microsoft.Practices.ServiceLocation;
-using SoonZik.Helpers;
 using SoonZik.HttpRequest;
 using SoonZik.HttpRequest.Poco;
 using SoonZik.ViewModel;
@@ -23,7 +22,6 @@ namespace SoonZik.Utils
                 AddFriend(post, Singleton.Singleton.Instance().SecureKey, get, id);
             else
                 DelFriend(post, Singleton.Singleton.Instance().SecureKey, get, id);
-
         }
 
         private static void DelFriend(HttpRequestPost post, string cryptographic, HttpRequestGet get, string id)

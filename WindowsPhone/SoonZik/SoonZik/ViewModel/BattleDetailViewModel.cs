@@ -6,7 +6,6 @@ using Windows.UI.Core;
 using Windows.UI.Xaml;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
-using SoonZik.Helpers;
 using SoonZik.HttpRequest;
 using SoonZik.HttpRequest.Poco;
 using SoonZik.Utils;
@@ -195,15 +194,15 @@ namespace SoonZik.ViewModel
                     CanVote = false;
                 }
             }
-            a = (a * 100) / CurrentBattle.votes.Count;
-            b = (b * 100) / CurrentBattle.votes.Count;
+            a = (a*100)/CurrentBattle.votes.Count;
+            b = (b*100)/CurrentBattle.votes.Count;
             PourcentageVote1 = a + " %";
             PourcentageVote2 = b + " %";
         }
 
         private void InitializeTimer()
         {
-            char[] delimiter = { ' ', '-', ':' };
+            char[] delimiter = {' ', '-', ':'};
             var word = CurrentBattle.date_end.Split(delimiter);
 
             _endDate = new DateTime(Int32.Parse(word[0]), Int32.Parse(word[1]), Int32.Parse(word[2]),

@@ -9,7 +9,6 @@ using Windows.UI.Popups;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using Newtonsoft.Json.Linq;
-using SoonZik.Helpers;
 using SoonZik.HttpRequest;
 using SoonZik.HttpRequest.Poco;
 using SoonZik.Utils;
@@ -261,7 +260,8 @@ namespace SoonZik.ViewModel
                     cart = item;
             }
 
-            var resDel = request.DeleteFromCart(cart, Singleton.Singleton.Instance().SecureKey, Singleton.Singleton.Instance().CurrentUser);
+            var resDel = request.DeleteFromCart(cart, Singleton.Singleton.Instance().SecureKey,
+                Singleton.Singleton.Instance().CurrentUser);
 
             resDel.ContinueWith(delegate(Task<string> tmp)
             {
@@ -281,7 +281,6 @@ namespace SoonZik.ViewModel
                     });
                 }
             });
-
         }
 
         #endregion

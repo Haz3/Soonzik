@@ -129,7 +129,23 @@ namespace SoonZik.ViewModel
 
         private void PlayCommandExecute()
         {
-            var test = 0;
+            var request = new HttpRequestGet();
+            var res = request.GetObject(new Music(), "musics", SelectedMusic.id.ToString());
+            res.ContinueWith(delegate(Task<object> task)
+            {
+                var music = task.Result as Music;
+                if (music != null)
+                {
+                    CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
+                        () =>
+                        {
+                            SelectedMusic = music;
+                            SelectedMusic.file = "http://soonzikapi.herokuapp.com/musics/get/" + SelectedMusic.id;
+                            Singleton.Singleton.Instance().SelectedMusicSingleton.Add(SelectedMusic);
+                        });
+                }
+            });
+            GlobalMenuControl.SetChildren(new BackgroundAudioPlayer());
         }
 
         public void LoadContent()
@@ -165,7 +181,9 @@ namespace SoonZik.ViewModel
                                     () =>
                                     {
                                         var art = obj.Result as Artist;
-                                        item.profilImage = new BitmapImage(new Uri(Constant.UrlImageUser + item.image, UriKind.RelativeOrAbsolute));
+                                        item.profilImage =
+                                            new BitmapImage(new Uri(Constant.UrlImageUser + item.image,
+                                                UriKind.RelativeOrAbsolute));
                                         if (art != null && art.artist)
                                             ListArtiste.Add(item);
                                     });
@@ -187,7 +205,9 @@ namespace SoonZik.ViewModel
                                 CoreDispatcherPriority.Normal,
                                 () =>
                                 {
-                                    item.album.imageAlbum = new BitmapImage(new System.Uri(Constant.UrlImageAlbum + item.album.image, UriKind.RelativeOrAbsolute));
+                                    item.album.imageAlbum =
+                                        new BitmapImage(new Uri(Constant.UrlImageAlbum + item.album.image,
+                                            UriKind.RelativeOrAbsolute));
                                     ListMusique.Add(item);
                                 });
                         }
@@ -205,7 +225,8 @@ namespace SoonZik.ViewModel
             SelectedMusic = SelectedMusic;
             var post = new HttpRequestPost();
             ValidateKey.GetValideKey();
-            var res = post.SaveCart(SelectedMusic, null, Singleton.Singleton.Instance().SecureKey, Singleton.Singleton.Instance().CurrentUser);
+            var res = post.SaveCart(SelectedMusic, null, Singleton.Singleton.Instance().SecureKey,
+                Singleton.Singleton.Instance().CurrentUser);
             res.ContinueWith(delegate(Task<string> tmp2)
             {
                 var res2 = tmp2.Result;

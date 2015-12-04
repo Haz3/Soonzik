@@ -535,9 +535,6 @@
       <HintPath>..\packages\TweetinviAPI.0.9.10.0\lib\portable-net40+sl5+wp80+win8+wpa81\Tweetinvi.WebLogic.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="WebSocketRails">
-      <HintPath>..\WebSocketRails-WP-master\WebSocketRails-WP\Bin\Debug\WebSocketRails.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\Fonts\RobotoCondensed-Regular.ttf" />

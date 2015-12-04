@@ -113,7 +113,7 @@
 <p>Controller which manage the transaction for the Feedbacks objects Here is
 the list of action available :</p>
 <ul><li>
-<p>index       [get]</p>
+<p>save       [post]</p>
 </li></ul>
 		</section>
 
@@ -154,8 +154,8 @@ information on the parameters, check at the model</p>
 <ul><li>
 <p>+:feedback [email]+ - Mail to contact</p>
 </li><li>
-<p>+:feedback [type_obj]+ - Type of the issue - Need to be one of this value :
-“bug”, “payment”, “account”, “other”</p>
+<p>+:feedback [type_object]+ - Type of the issue - Need to be one of this
+value : “bug”, “payment”, “account”, “other”</p>
 </li><li>
 <p>+:feedback [object]+ - Object of the feedback</p>
 </li><li>
@@ -164,10 +164,10 @@ information on the parameters, check at the model</p>
 
 <h5 id="method-i-save-label-HTTP+VALUE">HTTP VALUE<span><a href="#method-i-save-label-HTTP+VALUE">&para;</a> <a href="#top">&uarr;</a></span></h5>
 <ul><li>
-<p><code>201</code> - In case of success, return the saved object including
-its musics (which includes its albums and artist) and user</p>
+<p><code>201</code> - In case of success, return nothing</p>
 </li><li>
-<p><code>503</code> - Error from server</p>
+<p><code>503</code> - Error from server, return nothing if there is an error
+from us, or the error why it didn&#39;t save</p>
 </li></ul>					
 											<div class="method-source-code" id="save-source">
 							<pre class="prettyprint linenums"><code 

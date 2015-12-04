@@ -113,7 +113,7 @@
         </ListView>
         
         <TextBox x:Name="message_tb" Text="{Binding msg, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Visibility="{Binding remove_friend_btn, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="1020,545,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="520" Background="#FFC3C3C3"/>
-        <Button x:Name="send_msg_btn" Visibility="{Binding remove_friend_btn, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Content="Envoyer" HorizontalAlignment="Left" Height="38" Margin="1565,542,0,0" VerticalAlignment="Top" Width="133" Background="#FFC7C2C2"/>
+        <Button x:Name="send_msg_btn" Command="{Binding do_send_msg, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Visibility="{Binding remove_friend_btn, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Content="Envoyer" HorizontalAlignment="Left" Height="38" Margin="1565,542,0,0" VerticalAlignment="Top" Width="133" Background="#FFC7C2C2"/>
 
 
     </Grid>

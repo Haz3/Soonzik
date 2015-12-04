@@ -45,8 +45,8 @@ namespace SoonZik.ViewModel
             width = content.Width;
             height = content.Height;
             RatePopup.Child = content;
-            RatePopup.VerticalOffset = (Window.Current.Bounds.Height - height) / 2;
-            RatePopup.HorizontalOffset = (Window.Current.Bounds.Width - width) / 2;
+            RatePopup.VerticalOffset = (Window.Current.Bounds.Height - height)/2;
+            RatePopup.HorizontalOffset = (Window.Current.Bounds.Width - width)/2;
             RatePopup.IsOpen = true;
             RatePopup.Closed += RatePopupOnClosed;
         }
@@ -77,6 +77,7 @@ namespace SoonZik.ViewModel
                 RaisePropertyChanged("Like");
             }
         }
+
         public static Popup RatePopup { get; set; }
 
         public double width;
@@ -145,7 +146,6 @@ namespace SoonZik.ViewModel
         public ICommand RateMusic { get; private set; }
 
         private string _crypto;
-        private string _cryptographic { get; set; }
         private string _textComment;
 
         public string TextComment
@@ -185,6 +185,7 @@ namespace SoonZik.ViewModel
         #endregion
 
         #region Method
+
         private void LikeCommandExecute()
         {
             if (!TheAlbum.hasLiked)
@@ -252,7 +253,8 @@ namespace SoonZik.ViewModel
             try
             {
                 ValidateKey.GetValideKey();
-                var test = post.SendComment(TextComment, TheAlbum, null, Singleton.Singleton.Instance().SecureKey, Singleton.Singleton.Instance().CurrentUser);
+                var test = post.SendComment(TextComment, TheAlbum, null, Singleton.Singleton.Instance().SecureKey,
+                    Singleton.Singleton.Instance().CurrentUser);
                 test.ContinueWith(delegate(Task<string> tmp)
                 {
                     var res = tmp.Result;
@@ -284,7 +286,8 @@ namespace SoonZik.ViewModel
         {
             var post = new HttpRequestPost();
             ValidateKey.GetValideKey();
-            var res = post.SaveCart(null, TheAlbum, Singleton.Singleton.Instance().SecureKey, Singleton.Singleton.Instance().CurrentUser);
+            var res = post.SaveCart(null, TheAlbum, Singleton.Singleton.Instance().SecureKey,
+                Singleton.Singleton.Instance().CurrentUser);
             res.ContinueWith(delegate(Task<string> tmp2)
             {
                 var res2 = tmp2.Result;
@@ -295,7 +298,7 @@ namespace SoonZik.ViewModel
                 }
             });
         }
-        
+
         private void LoadComment()
         {
             TextComment = "";
@@ -345,7 +348,8 @@ namespace SoonZik.ViewModel
             _selectedMusic = SelectedMusic;
             var post = new HttpRequestPost();
             ValidateKey.GetValideKey();
-            var res = post.SaveCart(_selectedMusic, null, Singleton.Singleton.Instance().SecureKey, Singleton.Singleton.Instance().CurrentUser);
+            var res = post.SaveCart(_selectedMusic, null, Singleton.Singleton.Instance().SecureKey,
+                Singleton.Singleton.Instance().CurrentUser);
             res.ContinueWith(delegate(Task<string> tmp2)
             {
                 var res2 = tmp2.Result;

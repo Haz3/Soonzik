@@ -166,6 +166,11 @@ namespace SoonZik.HttpRequest
             return await DoRequest(request);
         }
 
+        public async Task<object> FindConversation(object myObj,string sha256, string userId)
+        {
+            var request = (HttpWebRequest)WebRequest.Create(ApiUrl + "messages/find?secureKey=" + sha256 + "&user_id=" + userId);
+            return await DoRequestForObject(myObj, request);
+        }
         #endregion
 
         #region Method Request

@@ -4,14 +4,12 @@ using System.Windows.Input;
 using Windows.ApplicationModel.Core;
 using Windows.UI.Core;
 using Windows.UI.Popups;
-using Windows.UI.Xaml;
 using Coding4Fun.Toolkit.Controls;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using SoonZik.Controls;
-using SoonZik.Helpers;
 using SoonZik.HttpRequest;
 using SoonZik.HttpRequest.Poco;
 using SoonZik.Utils;
@@ -94,10 +92,7 @@ namespace SoonZik.ViewModel
 
         public bool BoolRename
         {
-            get
-            {
-                return _boolRename;
-            }
+            get { return _boolRename; }
             set
             {
                 _boolRename = value;
@@ -109,18 +104,17 @@ namespace SoonZik.ViewModel
 
         public string RenameButton
         {
-            get
-            {
-                return _renameButton;
-            }
+            get { return _renameButton; }
             set
             {
                 _renameButton = value;
                 RaisePropertyChanged("RenameButton");
             }
         }
+
         private string _key { get; set; }
         private string _cryptocraphic { get; set; }
+
         #endregion
 
         #region Method
@@ -140,7 +134,8 @@ namespace SoonZik.ViewModel
 
                 ValidateKey.GetValideKey();
 
-                var res = request2.UpdateNamePlaylist(ThePlaylist, Singleton.Singleton.Instance().SecureKey, Singleton.Singleton.Instance().CurrentUser);
+                var res = request2.UpdateNamePlaylist(ThePlaylist, Singleton.Singleton.Instance().SecureKey,
+                    Singleton.Singleton.Instance().CurrentUser);
                 res.ContinueWith(delegate(Task<string> tmp)
                 {
                     if (tmp.Result != null)
@@ -149,8 +144,8 @@ namespace SoonZik.ViewModel
                             () =>
                                 ThePlaylist =
                                     (Playlist)
-                                        JsonConvert.DeserializeObject(tmp.Result.ToString(), typeof(Playlist))
-                                        );
+                                        JsonConvert.DeserializeObject(tmp.Result, typeof (Playlist))
+                            );
                     }
                 });
                 BoolRename = false;
@@ -237,7 +232,8 @@ namespace SoonZik.ViewModel
             var post = new HttpRequestPost();
 
             ValidateKey.GetValideKey();
-            var res = post.SaveCart(_selectedMusic, null, Singleton.Singleton.Instance().SecureKey, Singleton.Singleton.Instance().CurrentUser);
+            var res = post.SaveCart(_selectedMusic, null, Singleton.Singleton.Instance().SecureKey,
+                Singleton.Singleton.Instance().CurrentUser);
             res.ContinueWith(delegate(Task<string> tmp2)
             {
                 var res2 = tmp2.Result;
@@ -257,7 +253,8 @@ namespace SoonZik.ViewModel
                 var request = new HttpRequestGet();
 
                 ValidateKey.GetValideKey();
-                var resDel = request.DeleteMusicFromPlaylist(ThePlaylist, _selectedMusic, Singleton.Singleton.Instance().SecureKey,
+                var resDel = request.DeleteMusicFromPlaylist(ThePlaylist, _selectedMusic,
+                    Singleton.Singleton.Instance().SecureKey,
                     Singleton.Singleton.Instance().CurrentUser);
 
                 resDel.ContinueWith(delegate(Task<string> tmp)

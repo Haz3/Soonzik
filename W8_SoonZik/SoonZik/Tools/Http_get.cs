@@ -91,6 +91,31 @@ namespace SoonZik.Tools
             return null;
         }
 
+        public static async Task<string> get_note(string elem)
+        {
+            Exception exception = null;
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url + elem);
+            request.Method = "GET";
+            request.ContentType = "application/json; charset=utf-8";
+
+            try
+            {
+                HttpWebResponse response = (HttpWebResponse)await request.GetResponseAsync();
+                var reader = new StreamReader(response.GetResponseStream());
+                var json = JObject.Parse(reader.ReadToEnd()).SelectToken("content").ToString();
+                return json;
+            }
+            catch (WebException ex)
+            {
+                exception = ex;
+            }
+
+            if (exception != null)
+                await new MessageDialog(exception.Message, "Get note error").ShowAsync();
+            return null;
+        }
+
+
         // DESERIALIZE AND EVERYTHING
         public static async Task<object> get_object(object Object, string elem)
         {

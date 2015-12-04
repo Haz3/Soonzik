@@ -70,8 +70,8 @@ namespace SoonZik.ViewModels
         public ConnectionViewModel()
         {
             // Dev only
-            mail = "davold@gmail.com";
-            passwd = "lolxdlol";
+            mail = "user_four@gmail.com";
+            passwd = "azertyuiop";
             do_classic_connection = new ConnectionCommand(this);
         }
 
@@ -115,6 +115,8 @@ namespace SoonZik.ViewModels
 
             // Singleton CALL
             Singleton.Instance.Current_user = Current_User;
+
+            Singleton.Instance.compare_date = new DateTime();
         }
     }
 }
