@@ -9,12 +9,14 @@
 # ==== Attributes
 #
 # - +id+ - (integer) - The ID of the object
-# - +name+ - (string) - The name of the group
+# - +provider+ - (string) - The name of the website
+# - +user_id+ - (integer) - Our user_id
+# - +uid+ - (integer) - The user_id on the website
+# - +token+ - (string) - The token for auth
 #
 # ==== Associations
 #
-# - +has_many+ - :accesses (Not sure if we will keep it)
-# - +has_and_belongs_to_many+ - :users
+# - +belongs_to+ - :user
 #
 class Identity < ActiveRecord::Base
 	before_validation :newToken, on: :create
@@ -51,4 +53,24 @@ class Identity < ActiveRecord::Base
 
     return sha256.hexdigest key
  	end
+
+  # Create an identity if doesn't exist, or update the old one
+  def self.updateOrCreate(user_id, provider, uid)
+    obj = Identity.where(provider: provider).where(user_id: user_id).first
+
+    if (obj == nil)
+      o = Identity.new
+      o.uid = uid
+      o.provider = provider
+      o.user_id = user_id
+      o.save
+
+      return o
+    elsif (obj.uid != uid.to_i)
+      obj.uid = uid
+      obj.save
+    end
+
+    return obj
+  end
 end

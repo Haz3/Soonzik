@@ -129,6 +129,7 @@ Rails.application.routes.draw do
     get 'search' => 'searchs#search' #ok
     get 'suggest' => 'suggestions#show' #ok
     get 'suggestv2' => 'suggestions#showTwo' #ok
+    match 'musicalPast' => 'suggestions#getMusicalPast', via: [:post, :options] #ok
 
     resources :tweets, only: [:index, :show] do #ok
       collection do
@@ -141,6 +142,8 @@ Rails.application.routes.draw do
 
     resources :users, only: [:index, :show] do #ok
       collection do
+        get "getIdentities" => 'users#getIdentities'
+
         get 'artists' => 'users#artists'
         get 'find' => 'users#find'
         match 'save' => 'users#save', via: [:post, :options]
@@ -220,7 +223,6 @@ Rails.application.routes.draw do
   resources :users do
     collection do
       get ":id/friendlist" => 'users#friendlist'
-      get "getIdentities" => 'users#getIdentities'
     end
   end
   
@@ -238,6 +240,8 @@ Rails.application.routes.draw do
   get '/purchase/pack/:id' => 'purchases#buyPack'
   get '/successCallback/pack/:id/' => 'purchases#paymentCallbackPack'
   get '/cancelCallback/pack/:id/' => 'purchases#cancelCallbackPack'
+
+  get '/soundcloudCallback' => 'others#soundcloud'
 
   root 'others#index'
 

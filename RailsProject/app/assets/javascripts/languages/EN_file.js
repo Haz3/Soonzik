@@ -125,6 +125,9 @@ var labels = {
 	FILE_USER_GOOGLE_LINKED_ERROR_MESSAGE: "The Google Plus account is already linked to another SoonZik account",
 	FILE_USER_GOOGLE_LINK_ERROR_MESSAGE: "Can't link the social network to your profile, try again later.",
 	FILE_USER_GOOGLE_CONNECTION_ERROR_MESSAGE: "Can't connect to Google, please try later",
+	FILE_USER_SOUNDCLOUD_CONNECTION_ERROR_MESSAGE: "Can't connect to Soundcloud, please try later",
+	FILE_USER_MUSICAL_PAST_SUCCESS_MESSAGE: "We have your musical past, it will be use for better suggestions",
+	FILE_USER_MUSICAL_PAST_ERROR_MESSAGE: "We couldn't get your musical past, please try later",
 
 	// Security Controller
 	FILE_SECURITY_FAILED: "An error occured during the request",
@@ -223,6 +226,8 @@ var labels = {
 	DISPLAY_USER_FORM_TWITTER_LOG_LABEL: "Login with Twitter",
 	DISPLAY_USER_FORM_GPLUS_LINK_LABEL: "Link your account with Google Plus :",
 	DISPLAY_USER_FORM_GPLUS_LOG_LABEL: "Login with Google Plus",
+	DISPLAY_USER_FORM_SOUNDCLOUD_LINK_LABEL: "Import your musical past from Soundcloud :",
+	DISPLAY_USER_FORM_SOUNDCLOUD_LOG_LABEL: "Get your favorites on Soundcloud",
 	DISPLAY_USER_FORM_LINKED_LABEL: "Your account is linked",
 	DISPLAY_USER_FORM_NUMBER_LABEL: "Number in the street",
 	DISPLAY_USER_FORM_COMPLEMENT_LABEL: "Complement",

@@ -125,6 +125,9 @@ var labels = {
 	FILE_USER_GOOGLE_LINKED_ERROR_MESSAGE: "Le compte google + est déjà lié à un autre compte SoonZik",
 	FILE_USER_GOOGLE_LINK_ERROR_MESSAGE: "Impossible de lier ce compte à votre profil",
 	FILE_USER_GOOGLE_CONNECTION_ERROR_MESSAGE: "Impossible de se connecter à Google Plus",
+	FILE_USER_SOUNDCLOUD_CONNECTION_ERROR_MESSAGE: "Impossible de se connecter à Soundcloud",
+	FILE_USER_MUSICAL_PAST_SUCCESS_MESSAGE: "Nous avons récupéré votre passé musical, il sera utilisé pour de meilleures suggestions",
+	FILE_USER_MUSICAL_PAST_ERROR_MESSAGE: "Nous n'avons pas pu récupéré votre passé musical, ré-essayez ultérieurement",
 
 	// Security Controller
 	FILE_SECURITY_FAILED: "Une erreur s'est produite durant la requête",
@@ -223,6 +226,8 @@ var labels = {
 	DISPLAY_USER_FORM_TWITTER_LOG_LABEL: "Connexion avec Twitter",
 	DISPLAY_USER_FORM_GPLUS_LINK_LABEL: "Lier son compte avec Google Plus :",
 	DISPLAY_USER_FORM_GPLUS_LOG_LABEL: "Connexion avec Google Plus",
+	DISPLAY_USER_FORM_SOUNDCLOUD_LINK_LABEL: "Importer votre passé musical de Soundcloud :",
+	DISPLAY_USER_FORM_SOUNDCLOUD_LOG_LABEL: "Récupérer ses favoris sur Soundcloud",
 	DISPLAY_USER_FORM_LINKED_LABEL: "Votre compte est lié",
 	DISPLAY_USER_FORM_NUMBER_LABEL: "Numéro de rue",
 	DISPLAY_USER_FORM_COMPLEMENT_LABEL: "Complement",

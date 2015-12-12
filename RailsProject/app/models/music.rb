@@ -111,11 +111,17 @@ class Music < ActiveRecord::Base
       }
     }
 
+    result = ActiveRecord::Base.connection.execute("SELECT COUNT(*), genre_id FROM musicalpasts WHERE user_id = #{user.id}")
+    result.each { |r|
+      genre = Genre.find_by_id(r["genre_id"].to_i)
+      gPond[genre] = (gPond.has_key?(genre)) ? gPond[genre] + 1 : 1
+    }
+
     # if our list is too small, we add a random genre to fill the suggestion list
     if (gPond.size < Genre.count)
       randomGenre = Genre.all
       gPond.each { |key, value|
-        randomGenre = randomGenre.where.not(id: key)
+        randomGenre = randomGenre.where.not(id: key.id)
       }
       randomGenre = randomGenre.offset(rand(randomGenre.size)).first
       gPond[randomGenre] = 0 if randomGenre != nil

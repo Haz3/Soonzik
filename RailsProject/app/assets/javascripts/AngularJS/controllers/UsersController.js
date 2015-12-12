@@ -1,4 +1,4 @@
-SoonzikApp.controller('UsersCtrl', ['$scope', "$routeParams", 'SecureAuth', 'HTTPService', 'NotificationService', '$timeout', 'Upload', 'Facebook', '$rootScope', function ($scope, $routeParams, SecureAuth, HTTPService, NotificationService, $timeout, Upload, Facebook, $rootScope) {
+SoonzikApp.controller('UsersCtrl', ['$scope', "$routeParams", 'SecureAuth', 'HTTPService', 'NotificationService', '$timeout', 'Upload', 'Facebook', '$rootScope', '$location', function ($scope, $routeParams, SecureAuth, HTTPService, NotificationService, $timeout, Upload, Facebook, $rootScope, $location) {
 	$scope.loading = true;
 
 	$scope.user = false;
@@ -6,7 +6,7 @@ SoonzikApp.controller('UsersCtrl', ['$scope', "$routeParams", 'SecureAuth', 'HTT
 	$scope.tweet = {
 		input: ""
 	}
-	$scope.form = { user: {}, identities: { facebook: null, twitter: null, google: null }, address: {} };
+	$scope.form = { user: {}, identities: { facebook: null, twitter: null, google: null, soundcloud: null }, address: {} };
 	$scope.formError = {
 		user: {
 			email: false,
@@ -286,16 +286,22 @@ SoonzikApp.controller('UsersCtrl', ['$scope', "$routeParams", 'SecureAuth', 'HTT
 					delete $scope.form.user.address;
 				}
 
-				HTTPService.getIdentities().then(function(response) {
-					var identity = response.data;
+				SecureAuth.securedTransaction(function (key, user_id) {
+					HTTPService.getIdentities([{ key: 'secureKey', value: key }, { key: 'user_id', value: user_id }]).then(function(response) {
+						var identity = response.data.content;
 
-					for (var i = 0 ; i < identity.length ; i++) {
-						$scope.form.identities[identity[i].provider] = identity[i].uid;
-					}
+						for (var i = 0 ; i < identity.length ; i++) {
+							$scope.form.identities[identity[i].provider] = identity[i].uid;
+						}
 
-					$scope.loading = false;
+						console.log($scope.form.identities);
+
+						$scope.loading = false;
+					}, function(error) {
+						// Do nothing
+					});
 				}, function(error) {
-					// Do nothing
+					// do nothing
 				});
 			}, function (error) {
 				// error management to do
@@ -736,6 +742,38 @@ SoonzikApp.controller('UsersCtrl', ['$scope', "$routeParams", 'SecureAuth', 'HTT
 			}
 		}
 		return false;
+	}
+
+	$scope.connectSoundcloud = function() {
+		if ($scope.form.identities.soundcloud != null) {
+			musicalPast($scope.form.identities.soundcloud);
+		} else {
+			SC.initialize({
+			  client_id: 'db36f7eba19a44ee1ee56b04d7327753',
+			  redirect_uri: 'http://lvh.me:3000/callback.html' 
+			});
+
+			SC.connect().then(function() {
+			  return SC.get('/me');
+			}).then(function(me) {
+				musicalPast(me.id);
+			}).catch(function(error) {
+			  NotificationService.error('Error: ' + error.message);
+			});
+		}
+	}
+
+	var musicalPast = function(soundcloud_id) {
+		SecureAuth.securedTransaction(function (key, user_id) {
+			var parameters = { secureKey: key, user_id: user_id, soundcloud_id: soundcloud_id };
+			HTTPService.postMusicalPast(parameters).then(function(response) {
+				NotificationService.success($rootScope.labels.FILE_USER_MUSICAL_PAST_SUCCESS_MESSAGE);
+			}, function(error) {
+	  		NotificationService.error($rootScope.labels.FILE_USER_MUSICAL_PAST_ERROR_MESSAGE);
+			});
+	  }, function(err) {
+	  	NotificationService.error($rootScope.labels.FILE_USER_SOUNDCLOUD_CONNECTION_ERROR_MESSAGE);
+	  });
 	}
 
 }]);

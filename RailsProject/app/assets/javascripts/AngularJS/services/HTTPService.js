@@ -163,8 +163,8 @@ SoonzikApp.factory('HTTPService', ['$http', '$location', 'Upload', function ($ht
     linkSocial: function(parameters) {
       return $http.post(api_url + "/users/linkSocial", parameters);
     },
-    getIdentities: function() {
-      return $http.get(url + "/users/getIdentities.json")
+    getIdentities: function(parameters) {
+      return $http.get(api_url + "/users/getIdentities" + urlParametersFormat(parameters))
     },
     getAlbumComments: function(id, parameters) {
       return $http.get(api_url + "/albums/" + id + "/comments" + urlParametersFormat(parameters))
@@ -226,5 +226,8 @@ SoonzikApp.factory('HTTPService', ['$http', '$location', 'Upload', function ($ht
     addFeedback: function(parameters) {
       return $http.post(api_url + "/feedbacks/save", parameters);
     },
+    postMusicalPast: function(parameters) {
+      return $http.post(api_url + '/musicalPast', parameters)
+    }
   }
 }]);
