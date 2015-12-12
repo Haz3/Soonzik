@@ -91,8 +91,8 @@
 								  												<h1 class="class"
 					rel="popover"
 					data-original-title="In files"
-					data-content="app/models/admin_user.rb"
-					>AdminUser</h1>
+					data-content="app/models/musicalpast.rb"
+					>Musicalpast</h1>
 				</p>
 							</hgroup>
 			<span class="label">class</span>
@@ -109,7 +109,30 @@
 
 		<section class="description">
 			
-<p>The class generated thanks to the gem &#39;activeadmin&#39;</p>
+<p>The model of the object <a href="Musicalpast.html">Musicalpast</a> Contain
+the relation and the validation Can provide some features linked to this
+model</p>
+
+<h4 id="class-Musicalpast-label-Attributes">Attributes<span><a href="#class-Musicalpast-label-Attributes">&para;</a> <a href="#top">&uarr;</a></span></h4>
+<ul><li>
+<p><code>id</code> - (integer) - The ID of the object</p>
+</li><li>
+<p><code>title</code> - (string) - The name of the music</p>
+</li><li>
+<p><code>soundcloud_music_id</code> - (integer) - The ID of the music on
+soundcloud</p>
+</li><li>
+<p><code>genre_id</code> - (integer) - The ID of the genre</p>
+</li><li>
+<p><code>user_id</code> - (integer) - The ID of the user</p>
+</li></ul>
+
+<h4 id="class-Musicalpast-label-Associations">Associations<span><a href="#class-Musicalpast-label-Associations">&para;</a> <a href="#top">&uarr;</a></span></h4>
+<ul><li>
+<p><code>belongs_to</code> - :user</p>
+</li><li>
+<p><code>belongs_to</code> - :genres</p>
+</li></ul>
 		</section>
 
 				<section id="5Buntitled-5D" class="documentation-section">
@@ -119,6 +142,35 @@
 			
 			<!-- Methods -->
 						
+						<section class="public-methods class-methods methods">
+				<header>
+					<h3>Public Class Methods</h3>
+				</header>
+
+								<a name="method-c-music_params">anchor</a>
+				<div id="method-c-music_params-doc" class="method">
+
+					<header>
+											<i class="icon-generic"></i>
+						<span class="method-name">music_params</span><span 
+							class="method-args">(parameters)</span>
+										</header>
+
+					<div class="method-description">
+											<p>The strong parameters to save or update object</p>					
+											<div class="method-source-code" id="music_params-source">
+							<pre class="prettyprint linenums"><code 
+								class="language-ruby"><span class="ruby-comment"># File app/models/musicalpast.rb, line 25</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">music_params</span>(<span class="ruby-identifier">parameters</span>)
+  <span class="ruby-identifier">parameters</span>.<span class="ruby-identifier">require</span>(<span class="ruby-value">:music</span>).<span class="ruby-identifier">permit</span>(<span class="ruby-value">:user_id</span>, <span class="ruby-value">:title</span>, <span class="ruby-value">:soundcloud_music_id</span>, <span class="ruby-value">:genre_id</span>)
+<span class="ruby-keyword">end</span></code></pre>
+						</div>
+										</div>
+
+					
+									</div>
+				
+			</section>
 			
 			
 			

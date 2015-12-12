@@ -19,6 +19,7 @@ module API
 	# * getFollowers [get]
 	# * uploadImg	 [post] - SECURE
 	# * linkSocial	[post] - SECURE
+	# * getIdentities	[get] - SECURE
 	#
 	class UsersController < ApisecurityController
 		# Retrieve all the users

@@ -6,6 +6,7 @@ module API
   #
   # * show        [get] - SECURE
   # * showTwo     [get] - SECURE OR NOT !
+  # * getMusicalPast [post] - SECURE
   #
   class SuggestionsController < ApisecurityController
     # Give a list of music based on the purchases
@@ -97,7 +98,7 @@ module API
 
     # Give a list of music based on the purchases
     #
-    # Route : /suggestv2
+    # Route : /musicalPast
     #
     # - +soundcloud_id+ - ID of the soundcloud user
     #
