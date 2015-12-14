@@ -39,6 +39,35 @@ namespace SoonZik.Tools
             return null;
         }
 
+        public static async Task<string> getSocialToken(string id, string sn)
+        {
+            Exception exception = null;
+            HttpClient client = new HttpClient();
+
+            try
+            {
+                var data = await client.GetStringAsync(url + "getSocialToken/" + id + "/" + sn);
+                var result = JObject.Parse(data);
+
+                string key = result["key"].ToString();
+                return key;
+            }
+            catch (Exception e)
+            {
+                exception = e;
+            }
+
+            if (exception != null)
+                await new MessageDialog(exception.Message, "GetSocialToken error").ShowAsync();
+            return null;
+        }
+
+        public static string getSocialSecureKey(string id, string token)
+        {
+            string key_to_encode = id + token + "3uNi@rCK$L$om40dNnhX)#jV2$40wwbr_bAK99%E"; // SALT
+            return CryptographicBuffer.EncodeToHexString(HashAlgorithmProvider.OpenAlgorithm(HashAlgorithmNames.Sha256).HashData(CryptographicBuffer.ConvertStringToBinary(key_to_encode, BinaryStringEncoding.Utf8)));
+        }
+
         public static async Task<string> getSecureKey(string id)
         {
             if (Singleton.Instance.compare_date.AddMinutes(5) < DateTime.Now || Singleton.Instance.compare_date.GetHashCode() == 0)

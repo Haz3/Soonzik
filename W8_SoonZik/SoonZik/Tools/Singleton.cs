@@ -12,8 +12,14 @@ namespace SoonZik.Tools
         private static Singleton instance = null;
 
         public User Current_user;
+
+        // For secureKey
         public string secureKey { get; set; }
         public DateTime compare_date { get; set; }
+
+        // For Facebook Connection
+        public string fb_id { get; set; }
+        public string fb_token { get; set; }
 
         // Private ctor
         private Singleton(){}

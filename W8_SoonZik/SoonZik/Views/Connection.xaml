@@ -32,6 +32,13 @@
 
 
         <!--<facebookControls:LoginButton x:Name="loginButton" HorizontalAlignment="Left" Margin="92,530,0,0" VerticalAlignment="Top" d:IsHidden="True"/>-->
+       
+        
+        <Button x:Name="fb_connect_btn" Command="{Binding do_facebook_connection, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="92,558,0,0" VerticalAlignment="Top" Height="48" Width="306">
+            <Button.Background>
+                <ImageBrush Stretch="Fill" ImageSource="ms-appx:///Assets/connexion_fb.png"/>
+            </Button.Background>
+        </Button>
         <Image Margin="95,561,1601,488" Source="ms-appx:///Assets/connexion_fb.png" Stretch="Fill"/>
 
         <Image Margin="95,662,1601,387" Source="ms-appx:///Assets/connexion_twitter.png" Stretch="Fill"/>
@@ -43,5 +50,6 @@
         <TextBlock x:Name="feedback" HorizontalAlignment="Left" Margin="25,1045,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="25" Width="275" Foreground="#FF111111" FontSize="25">
             <Hyperlink NavigateUri="http://api.lvh.me:3000/feedbacks/new" Foreground="#FF611EFF" >Feedback</Hyperlink>
         </TextBlock>
+        
     </Grid>
 </Page>
