@@ -17,9 +17,9 @@ namespace SoonZik.Tools
         public string secureKey { get; set; }
         public DateTime compare_date { get; set; }
 
-        // For Facebook Connection
-        public string fb_id { get; set; }
-        public string fb_token { get; set; }
+        //// For Facebook Connection ::: NOPE, USELESS
+        //public string fb_id { get; set; }
+        //public string fb_token { get; set; }
 
         // Private ctor
         private Singleton(){}

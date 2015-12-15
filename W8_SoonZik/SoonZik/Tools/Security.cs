@@ -58,7 +58,7 @@ namespace SoonZik.Tools
             }
 
             if (exception != null)
-                await new MessageDialog(exception.Message, "GetSocialToken error").ShowAsync();
+                await new MessageDialog(exception.Message, "Erreur lors de la recuperation du SocialToken").ShowAsync();
             return null;
         }
 
