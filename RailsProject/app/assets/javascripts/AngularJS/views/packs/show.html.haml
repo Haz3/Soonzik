@@ -8,8 +8,8 @@
         %h5.subheader.text-center
           {{ labels.DISPLAY_PACK_TIMELEFT }} : {{ thisPack.timeLeftPack }}
       .ul.large-block-grid-4.centered.columns
-        %li{"ng-repeat" => "album in thisPack.albums"}
-          .panel
+        %li{"ng-repeat" => "album in thisPack.albums", "ng-model" => "is_partial"}
+          .panel{"ng-if" => "is_partial"}
             %h3.subheader
               %p.text-center
                 {{ album.title }}
@@ -23,22 +23,33 @@
         .large-6.columns
           .panel.left{"ng-init" => "managePrice()"}
             .large-9.columns
+              Define your price
+            .small-3.columns
+              %input{ type: "text", "ng-model" => "input.price", "ng-change" => "updatePrice()" }
+            .large-9.columns
+              .divider
+              Artist
               %input{:type => "range", "ng-model" => "newValuePercentage.artist", "ng-change" => "varRange('artist')", "min" => "0", "max" => "100"}
-            .small-2.medium-1.columns
-              {{ realValue.artist }}
+            .small-3.columns
+              .divider
+              %br
+              {{ realValue.artist }} €
             .large-9.columns
+              Associations
               %input{:type => "range", "ng-model" => "newValuePercentage.asso", "ng-change" => "varRange('asso')", "min" => "0", "max" => "100"}
-            .small-2.medium-1.columns
-              {{ realValue.asso }}
+            .small-3.columns
+              %br
+              {{ realValue.asso }} €
             .large-9.columns
+              Soonzik
               %input{:type => "range", "ng-model" => "newValuePercentage.web", "ng-change" => "varRange('web')", "min" => "0", "max" => "100"}
-            .small-2.medium-1.columns
-              {{ realValue.web }}
-            %input{ type: "text", "ng-model" => "input.price", "ng-change" => "updatePrice()" }
+            .small-3.columns
+              %br
+              {{ realValue.web }} €
 
             .large-4.columns
               .divider
-              {{ labels.DISPLAY_PACK_TOTAL_PACK }} : {{ priceMini }}
+              {{ labels.DISPLAY_PACK_TOTAL_PACK }} : {{ input.price }} €
         .large-6.columns
           .panel
             %battle{ "battle-values" => "percentages" }
