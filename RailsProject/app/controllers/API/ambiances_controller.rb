@@ -17,7 +17,7 @@ module API
     #
     # ===== HTTP VALUE
     # 
-    # - +200+ - In case of success, return a list of ambiance including its music and the artist
+    # - +200+ - In case of success, return a list of ambiances
     # - +503+ - Error from server
     # 
     def index
