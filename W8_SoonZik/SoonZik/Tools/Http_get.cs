@@ -14,8 +14,8 @@ namespace SoonZik.Tools
 {
     public class Http_get
     {
-        //static string url = Singleton.Instance.url;
-        public static string url = "http://api.lvh.me:3000/";
+        static string url = Singleton.Instance.url;
+        //public static string url = "http://api.lvh.me:3000/";
 
         public static async Task<User> get_user_by_username(string username)
         {
