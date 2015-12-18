@@ -93,6 +93,12 @@ namespace SoonZik.ViewModels
             private set;
         }
 
+        public ICommand do_google_connection
+        {
+            get;
+            private set;
+        }
+
         public ConnectionViewModel()
         {
             // Dev only
@@ -101,12 +107,12 @@ namespace SoonZik.ViewModels
             do_classic_connection = new ConnectionCommand(this);
             do_facebook_connection = new RelayCommand(facebook_connection);
             do_twitter_connection = new RelayCommand(twitter_connection);
+            do_google_connection = new RelayCommand(google_connection);
         }
 
         // Method called in the ConnectionCommand file
         public async void classic_connection()
         {
-
             Exception exception = null;
             var request = new Http_post();
 
@@ -131,20 +137,30 @@ namespace SoonZik.ViewModels
             }
 
             if (exception != null)
-               await new MessageDialog(exception.Message, "Connection POST Error").ShowAsync();
+                await new MessageDialog(exception.Message, "Connection POST Error").ShowAsync();
         }
 
-        void Get_User(string response)
+        async void Get_User(string response)
         {
-            User Current_User = new User();
+            Exception exception = null;
 
-            var json = JObject.Parse(response).SelectToken("content").ToString();
-            Current_User = JsonConvert.DeserializeObject(json, typeof(User)) as User;
+            try
+            {
+                User Current_User = new User();
 
-            // Singleton CALL
-            Singleton.Instance.Current_user = Current_User;
+                var json = JObject.Parse(response).SelectToken("content").ToString();
+                Current_User = JsonConvert.DeserializeObject(json, typeof(User)) as User;
 
-            Singleton.Instance.compare_date = new DateTime();
+                // Singleton CALL
+                Singleton.Instance.Current_user = Current_User;
+                Singleton.Instance.compare_date = new DateTime();
+            }
+            catch (Exception e)
+            {
+                exception = e;
+            }
+            if (exception != null)
+                await new MessageDialog(exception.Message, "Erreur lors de la recuperation de l'utilisateur").ShowAsync();
         }
 
         // FACEBOOK CNX
@@ -202,33 +218,45 @@ namespace SoonZik.ViewModels
                 //
                 // Bad Parameter, SSL/TLS Errors and Network Unavailable errors are to be handled here.
                 //
-               // throw ex;
+                // throw ex;
 
-                 new MessageDialog("Erreur lors de la connexion via Facebook").ShowAsync();
+                new MessageDialog("Erreur lors de la connexion via Facebook").ShowAsync();
 
             }
         }
         private async void facebook_LoginSucceded(string accessToken)
         {
-            dynamic parameters = new ExpandoObject();
-            parameters.access_token = accessToken;
-            parameters.fields = "id";
+            Exception exception = null;
 
-            dynamic result = await _fb.GetTaskAsync("me", parameters);
-            parameters = new ExpandoObject();
-            parameters.id = result.id;
-            parameters.access_token = accessToken;
+            try
+            {
 
-            // Store info... useless ??? yeah ...
-            //Singleton.Instance.fb_id = result.id;
-            //Singleton.Instance.fb_token = accessToken;
 
-            // CALL social login
-            social_connection(result.id, accessToken, "facebook");
+                dynamic parameters = new ExpandoObject();
+                parameters.access_token = accessToken;
+                parameters.fields = "id";
+
+                dynamic result = await _fb.GetTaskAsync("me", parameters);
+                parameters = new ExpandoObject();
+                parameters.id = result.id;
+                parameters.access_token = accessToken;
+
+                // Store info... useless ??? yeah ...
+                //Singleton.Instance.fb_id = result.id;
+                //Singleton.Instance.fb_token = accessToken;
+
+                // CALL social login
+                social_connection(result.id, accessToken, "facebook");
+            }
+            catch (Exception e)
+            {
+                exception = e;
+            }
+            if (exception != null)
+                await new MessageDialog(exception.Message, "Erreur lors de la recuperation du profil facebook").ShowAsync();
         }
 
         // TWITTER CNX
-
         public async void twitter_connection()
         {
             try
@@ -418,6 +446,13 @@ namespace SoonZik.ViewModels
             return Signature;
         }
 
+
+        // GOOGLE CNX
+        public async void google_connection()
+        {
+            await new MessageDialog("Pas disponible. Soon :)").ShowAsync();
+
+        }
         // SOCIAL LOGIN
         public async void social_connection(string id, string token, string sn)
         {

@@ -13,8 +13,8 @@ namespace SoonZik.Tools
 {
     class Security
     {
-        static string url = "http://api.lvh.me:3000/";
-        //static string url = "http://soonzikapi.herokuapp.com/";
+        static string url = Singleton.Instance.url;
+        //public static string url = "http://api.lvh.me:3000/";
 
         static async Task<string> getKey(string id)
         {

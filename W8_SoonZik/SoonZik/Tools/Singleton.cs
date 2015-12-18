@@ -11,6 +11,9 @@ namespace SoonZik.Tools
     {
         private static Singleton instance = null;
 
+        public string url = "http://api.lvh.me:3000/";
+        //public string url = "http://soonzikapi.herokuapp.com/";
+
         public User Current_user;
 
         // For secureKey

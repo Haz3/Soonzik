@@ -15,6 +15,10 @@
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{BC8A1FFA-BEE3-4634-8014-F334798102B3};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <ExpressionBlendVersion>12.0.50716.0</ExpressionBlendVersion>
+    <AppxAutoIncrementPackageRevision>True</AppxAutoIncrementPackageRevision>
+    <AppxBundlePlatforms>x86</AppxBundlePlatforms>
+    <PackageCertificateThumbprint>D68DC7B0DAF4070A517AD4C265412DB26C48B403</PackageCertificateThumbprint>
+    <PackageCertificateKeyFile>SoonZik_TemporaryKey.pfx</PackageCertificateKeyFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -446,6 +450,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Common\ReadMe.txt" />
+    <None Include="SoonZik_TemporaryKey.pfx" />
     <PRIResource Include="fr-FR\Resources.resw" />
     <None Include="packages.config" />
   </ItemGroup>
