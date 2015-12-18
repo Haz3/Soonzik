@@ -7,7 +7,7 @@ SoonzikApp.controller("PlayerCtrl", ["$scope", "$rootScope", "HTTPService", "Not
     longitude: 0
   }
 
-  var activeUrl = null;
+  $scope.activeUrl = null;
   $scope.user = false;
 
   $scope.loaded = false;
@@ -174,13 +174,13 @@ SoonzikApp.controller("PlayerCtrl", ["$scope", "$rootScope", "HTTPService", "Not
     if (!$scope.wavesurfer) {
       return;
     }
-    activeUrl = url;
+    $scope.activeUrl = url;
 
-    $scope.wavesurfer.load(activeUrl);
+    $scope.wavesurfer.load($scope.activeUrl);
   };
 
   $scope.isPlaying = function (url) {
-    return url == activeUrl;
+    return url == $scope.activeUrl;
   };
 
   $scope.isVolumeOn = function() {

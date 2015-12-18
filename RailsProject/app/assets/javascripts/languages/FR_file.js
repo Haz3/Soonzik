@@ -68,6 +68,8 @@ var labels = {
 
 	// Explorer Controller
 	FILE_EXPLORER_GET_INFLUENCES_ERROR_MESSAGE: "Une erreur s'est produite au chargement des influences",
+	FILE_EXPLORER_GET_AMBIANCES_ERROR_MESSAGE: "Une erreur s'est produite au chargement des ambiances",
+	FILE_EXPLORER_GET_AMBIANCE_ERROR_MESSAGE: "Une erreur s'est produite au chargement de l'ambiance",
 	FILE_EXPLORER_GET_GENRE_ERROR_MESSAGE: "Une erreur s'est produite des genres",
 
 	// Listening Controller
@@ -149,6 +151,7 @@ var labels = {
 	// Explorer Index View
 	DISPLAY_EXPLORER_INDEX_LABEL: "Index",
 	DISPLAY_EXPLORER_INFLUENCE_CHOOSE_LABEL: "Choisissez une influence",
+	DISPLAY_EXPLORER_AMBIANCE_CHOOSE_LABEL: "Choisissez une ambiance",
 	DISPLAY_EXPLORER_GENRE_LABEL: "genres",
 
 	// Listening Index View

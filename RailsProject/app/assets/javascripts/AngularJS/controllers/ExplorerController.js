@@ -4,10 +4,13 @@ SoonzikApp.controller('ExplorerCtrl', ['$scope', "$routeParams", "HTTPService", 
 	$scope.loadingGenre = false;
 	$scope.selectedInfluence = null;
 	$scope.selectedGenre = null;
+	$scope.selectedAmbiance = null;
 
 	$scope.influences = [];
+	$scope.ambiances = [];
 	$scope.genreWindow = { onTheLeft: false, displayable: false };
 	$scope.influenceWindow = { onTheLeft: false, displayable: false };
+	$scope.ambianceWindow = { onTheLeft: false, displayable: false };
 
 	$scope.state = 0;
 
@@ -39,6 +42,23 @@ SoonzikApp.controller('ExplorerCtrl', ['$scope', "$routeParams", "HTTPService", 
 			}, function(error) {
 				NotificationService.error($rootScope.labels.FILE_EXPLORER_GET_INFLUENCES_ERROR_MESSAGE);
 			});
+
+			HTTPService.getAmbiances(parameters).then(function(response) {
+				$scope.ambiances = response.data.content;
+
+				if (typeof $routeParams.ambiance !== "undefined") {
+					for (var i = 0 ; i < $scope.ambiances.length ; i++) {
+						if ($scope.ambiances[i].id == $routeParams.ambiance) {
+							$scope.chooseAmbiance($scope.ambiances[i]);
+							break;
+						}
+					}
+				}
+
+				$scope.loading = false;
+			}, function(error) {
+				NotificationService.error($rootScope.labels.FILE_EXPLORER_GET_AMBIANCES_ERROR_MESSAGE);
+			});
 		});
 	}
 
@@ -52,9 +72,22 @@ SoonzikApp.controller('ExplorerCtrl', ['$scope', "$routeParams", "HTTPService", 
 
 	$scope.chooseInfluence = function(influence) {
 		$scope.selectedInfluence = influence;
-		$location.path('/explorer/' + $scope.selectedInfluence.id, false);
+		$location.path('/explorer/influence/' + $scope.selectedInfluence.id, false);
 		$scope.state = 1;
 		$scope.influenceOpen();
+	}
+
+	$scope.chooseAmbiance = function(ambiance) {
+		$scope.selectedAmbiance = ambiance;
+		$location.path('/explorer/ambiance/' + $scope.selectedAmbiance.id, false);
+		$scope.state = 1;
+		$scope.ambianceOpen();
+		HTTPService.getAmbiance(ambiance.id).then(function(response) {
+			$scope.selectedAmbiance = response.data.content;
+			$scope.loading = false;
+		}, function(error) {
+			NotificationService.error($rootScope.labels.FILE_EXPLORER_GET_AMBIANCE_ERROR_MESSAGE);
+		});
 	}
 
 	$scope.chooseGenre = function(genre) {
@@ -74,14 +107,14 @@ SoonzikApp.controller('ExplorerCtrl', ['$scope', "$routeParams", "HTTPService", 
 			]
 
 			HTTPService.getGenre(genre.id, countParams).then(function(response) {
-				$scope.totalPage = toInt(response.data.content);
+				$scope.totalPage = $rootScope.toInt(response.data.content);
 			}, function(error) {
 				NotificationService.error($rootScope.labels.FILE_EXPLORER_GET_GENRE_ERROR_MESSAGE);
 			});
 
 			HTTPService.getGenre(genre.id, parameters).then(function(response) {
 				$scope.selectedGenre = response.data.content;
-				$location.path('/explorer/' + $scope.selectedInfluence.id + "/" + $scope.selectedGenre.id, false);
+				$location.path('/explorer/influence/' + $scope.selectedInfluence.id + "/" + $scope.selectedGenre.id, false);
 				$scope.loadingGenre = false;
 				$scope.genreOpen();
 			}, function(error) {
@@ -95,6 +128,14 @@ SoonzikApp.controller('ExplorerCtrl', ['$scope', "$routeParams", "HTTPService", 
 		$scope.influenceWindow = { onTheLeft: false, displayable: true };
 		$timeout(function() {
 			$scope.influenceWindow.onTheLeft = true;
+		}, 200);
+	}
+
+	$scope.ambianceOpen = function() {
+		$scope.genreWindow = { onTheLeft: false, displayable: false };
+		$scope.influenceWindow = { onTheLeft: false, displayable: false };
+		$timeout(function() {
+			$scope.ambianceWindow.onTheLeft = true;
 		}, 200);
 	}
 
@@ -113,6 +154,7 @@ SoonzikApp.controller('ExplorerCtrl', ['$scope', "$routeParams", "HTTPService", 
 		$scope.loadingGenre = false;
 		$scope.genreWindow = { onTheLeft: false, displayable: false };
 		$scope.influenceWindow = { onTheLeft: false, displayable: false };
+		$scope.ambianceWindow = { onTheLeft: false, displayable: false };
 		$location.path('/explorer/', false);
 	}
 
@@ -123,7 +165,7 @@ SoonzikApp.controller('ExplorerCtrl', ['$scope', "$routeParams", "HTTPService", 
 			$scope.loadingGenre = false;
 			$scope.genreWindow = { onTheLeft: false, displayable: false };
 			$scope.influenceOpen();
-			$location.path('/explorer/' + $scope.selectedInfluence.id, false);
+			$location.path('/explorer/influence/' + $scope.selectedInfluence.id, false);
 		}
 	}
 
@@ -140,25 +182,9 @@ SoonzikApp.controller('ExplorerCtrl', ['$scope', "$routeParams", "HTTPService", 
 
 	/* Utils function */
 
-	$scope.range = function(n) {
-		console.log(n);
-  	return new Array(n);
-  }
-
-  $scope.min = function(a, b) {
-  	return (a < b ? a : b);
-  }
-
-  $scope.max = function(a, b) {
-  	return (a > b ? a : b);
-  }
-
-	var toInt = function(value) {
-		var number = parseInt(value);
-		if (isNaN(number)) {
-			return 0;
-		} else {
-			return number;
-		}
+  $scope.shadeColor = function(color, percent) {   
+    var f = parseInt(color.slice(1),16),t=percent<0?0:255,p=percent<0?percent*-1:percent,R=f>>16,G=f>>8&0x00FF,B=f&0x0000FF;
+    return "#"+(0x1000000+(Math.round((t-R)*p)+R)*0x10000+(Math.round((t-G)*p)+G)*0x100+(Math.round((t-B)*p)+B)).toString(16).slice(1);
 	}
+
 }]);

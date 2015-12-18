@@ -1,8 +1,10 @@
 .explorerContainer {
+
+	padding-left: 25px;
+
 	h1, h2, h3, h4, h5, h6 {
 		color: #00AABB;
-		font-family: "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
-		letter-spacing: 4px;
+		letter-spacing: 2px;
 	}
 
 	.navigation {
@@ -41,6 +43,25 @@
 
 	.influenceDetail.onTheLeft, .genreDetail.onTheLeft {
 		margin-left: 0;
+	}
+
+	.influence {
+
+	}
+
+	.genre {
+		width: 150px;
+		height: 150px;
+		border-top: 5px solid black;
+		border-bottom: 5px solid black;
+		border-left: 1px solid;
+		border-right: 1px solid;
+		line-height: 150px;
+		text-align: center;
+		border-radius: 5px;
+		font-family: 'Lato';
+	  font-size: 18px;
+    font-weight: bold;
 	}
 
 	.clickable {

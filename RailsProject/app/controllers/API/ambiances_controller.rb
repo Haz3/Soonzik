@@ -25,11 +25,7 @@ module API
         if (@count.present? && @count == "true")
           @returnValue = { content: Ambiance.count }
         else
-          @returnValue = { content: Ambiance.eager_load([:musics]).all.as_json(:only => Ambiance.miniKey, :include => {
-            musics: { 
-              only: Music.miniKey
-            }
-          }) }
+          @returnValue = { content: Ambiance.all.as_json(:only => Ambiance.miniKey) }
         end
         if (@returnValue[:content].size == 0)
           codeAnswer 202
@@ -50,6 +46,8 @@ module API
     # ==== Options
     # 
     # * +:id+ - The id of the specific ambiance
+    # * +:offset+ - The offset of the musics of the ambiance (optionnal)
+    # * +:limit+ - The limit of the musics of the ambiance (optionnal)
     # 
     # ===== HTTP VALUE
     # 
@@ -59,12 +57,24 @@ module API
     # 
     def show
       begin
-        ambiance = Ambiance.find_by_id(@id)
+        ambiance = Ambiance.eager_load(:musics).find_by_id(@id)
         if (!ambiance)
           codeAnswer 502
           defineHttp :not_found
         else
-          @returnValue = { content: ambiance.as_json(:only => Ambiance.miniKey) }
+          offset = (@offset.present?) ? @offset.to_i : 0
+          limit = (@limit.present?) ? @limit.to_i : 30
+
+          music_ids = ambiance.musics.select('id')[offset...(offset + limit)]
+          music_ids.map! { |music| music.id }
+
+          ambiance = ambiance.as_json(:only => Ambiance.miniKey)
+          ambiance[:musics] = Music.eager_load(:user, :album).where(id: music_ids).all.as_json(only: Music.miniKey, :include => {
+            album: { only: Album.miniKey },
+            user: { only: User.miniKey }
+          })
+          
+          @returnValue = { content: ambiance }
           codeAnswer 200
         end
       rescue

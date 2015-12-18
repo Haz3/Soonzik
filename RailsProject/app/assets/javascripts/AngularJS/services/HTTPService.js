@@ -139,6 +139,12 @@ SoonzikApp.factory('HTTPService', ['$http', '$location', 'Upload', function ($ht
     search: function(parameters) {
       return $http.get(api_url + "/search" + urlParametersFormat(parameters));
     },
+    getAmbiances: function(parameters) { 
+      return $http.get(api_url + "/ambiances" + urlParametersFormat(parameters));
+    },
+    getAmbiance: function(id, parameters) { 
+      return $http.get(api_url + "/ambiances/" + id + urlParametersFormat(parameters));
+    },
     getInfluences: function(parameters) { 
       return $http.get(api_url + "/influences" + urlParametersFormat(parameters));
     },

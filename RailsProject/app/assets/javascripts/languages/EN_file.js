@@ -68,6 +68,8 @@ var labels = {
 
 	// Explorer Controller
 	FILE_EXPLORER_GET_INFLUENCES_ERROR_MESSAGE: "Error while loading the influences",
+	FILE_EXPLORER_GET_AMBIANCES_ERROR_MESSAGE: "Error while loading the ambiances",
+	FILE_EXPLORER_GET_AMBIANCE_ERROR_MESSAGE: "Error while loading the ambiance",
 	FILE_EXPLORER_GET_GENRE_ERROR_MESSAGE: "Error while loading the genre",
 
 	// Listening Controller
@@ -149,6 +151,7 @@ var labels = {
 	// Explorer Index View
 	DISPLAY_EXPLORER_INDEX_LABEL: "Index",
 	DISPLAY_EXPLORER_INFLUENCE_CHOOSE_LABEL: "Choose an influence",
+	DISPLAY_EXPLORER_AMBIANCE_CHOOSE_LABEL: "Choose an ambiance",
 	DISPLAY_EXPLORER_GENRE_LABEL: "genres",
 
 	// Listening Index View
