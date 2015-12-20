@@ -139,21 +139,26 @@ SoonzikApp.controller('ListeningsCtrl', ['$scope', "$routeParams", 'SecureAuth',
 	}
 
 	$scope.clickOnMarker = function(evt, evtName, data) {
-		if ($scope.lastClicked == data) {
+		var lastID = -1;
+		if ($scope.lastClicked)
+		{
+			lastID = $scope.lastClicked.idKey;
+	  	$('#marker' + $scope.lastClicked.object.music.id).parent().hide();
 			$scope.lastClicked.options = {};
 			$scope.lastClicked = null;
+	  }
+		if (lastID == data.idKey) {
 			return;
 		}
-		if ($scope.lastClicked)
-			$scope.lastClicked.options = {};
     data.options = {
     	animation: 2,
     	labelClass: 'marker_labels',
     	labelAnchor: '60 0',
     	labelContent: "<p id='marker" + data.object.music.id + "'><a href='/musics/" + data.object.music.id + "'>" + data.object.music.title + "</a>" + $rootScope.labels.FILE_LISTENING_INPOPUP_LISTENED_LABEL + "<a href='/users/" + data.object.user.id + "'>" + data.object.user.username + "</a></p>" +
     	"<p>" + data.object.created_at + "</p>"
-    },
+    };
   	$scope.lastClicked = data;
+  	$('marker' + data.object.music.id).show();
 	}
 
 	// Callback of the slider
