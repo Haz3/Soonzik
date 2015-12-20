@@ -234,6 +234,9 @@ SoonzikApp.factory('HTTPService', ['$http', '$location', 'Upload', function ($ht
     },
     postMusicalPast: function(parameters) {
       return $http.post(api_url + '/musicalPast', parameters)
+    },
+    getCoordination: function(address) {
+      return $http.get('http://maps.google.com/maps/api/geocode/json?address=' + encodeURIComponent(address) + '&sensor=false')
     }
   }
 }]);

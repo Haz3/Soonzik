@@ -11,22 +11,19 @@
 					%strong {{ labels.DISPLAY_CONCERT_COUNTRY_FILTER_LABEL }}
 				%input#artistInput{ "type" => "text", name: "addressInput", "ng-model" => "modelObj.address.country" }
 		%hr
-		%p{ "ng-if" => "indexView.currentPage > indexView.numberPages" } {{ labels.DISPLAY_CONCERT_TOO_MANY_PAGE_LABEL }} 
-		.concert{ "ng-if" => "indexView.currentPage <= indexView.numberPages", "ng-repeat" => "concert in indexView.concerts | filter:modelObj" }
-			%h3 {{ labels.DISPLAY_CONCERT_CONCERT_OF_LABEL }} {{ concert.user.username }}
+		.concert{ "ng-repeat" => "concert in indexView.concerts | filter:modelObj" }
+			%h3.lato {{ labels.DISPLAY_CONCERT_CONCERT_OF_LABEL }} {{ concert.user.username }}
 			%p
 				%span {{ labels.DISPLAY_CONCERT_LINK_LABEL }}
 				%a{ href: "{{ (concert.url.length == 0 || concert.url == null) ? '#' : concert.url }}" } {{ (concert.url.length == 0 || concert.url == null) ? labels.DISPLAY_CONCERT_NO_LINK_LABEL : concert.url }}
 			%p {{ labels.DISPLAY_CONCERT_ADDRESS_LABEL }} {{ formatAddress(concert.address) }}
 			%p{ "ng-show" => "concert.address.complement != null" } {{ concert.address.complement }}
+			.pointer{ 'ng-click' => 'concert.displayed = !concert.displayed', 'ng-class' => '{ displayed: concert.displayed }' }
+				%i.fi-map
+				%span {{ concert.displayed ? 'Cacher' : 'Afficher' }}
+			.map{ 'ng-if' => 'concert.map', 'ng-show' => 'concert.displayed == true' }
+				%ui-gmap-google-map.angular-google-map-container{ :center => "concert.map.center", :zoom => "concert.map.zoom" }
+					%ui-gmap-marker{ coords: "concert.map.marker.coords", idkey: "concert.map.marker.idKey" }
 			%p.text-right
 				%em {{ concert.planification }}
 			%hr
-		.pagination-centered{ "ng-if" => "indexView.currentPage > indexView.numberPages" }
-			%ul.pagination
-				%li{ "class" => "arrow {{ (indexView.currentPage == 1) ? 'unavailable' : '' }}" }
-					%a{ href: "/concerts?page={{ max(1, indexView.currentPage - 1) }}"} &laquo;
-				%li{ "ng-repeat" => "num in range(min(indexView.currentPage, 5) + min(indexView.numberPages - 1, 5)) track by $index", "class" => "{{ $index + 1 == min(indexView.currentPage, 5) ? 'current' : '' }}" }
-					%a{ href: "/concerts?page={{ indexView.currentPage - min(indexView.currentPage, 5) + $index + 1 }}"} {{ indexView.currentPage - min(indexView.currentPage, 5) + $index + 1 }}
-				%li{ "class" => "arrow {{ (indexView.numberPages == indexView.currentPage) ? 'unavailable' : '' }}" }
-					%a{ href: "/concerts?page={{ min(indexView.numberPages, indexView.currentPage + 1) }}"} &raquo;
