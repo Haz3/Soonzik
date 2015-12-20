@@ -56,7 +56,7 @@ public class PackPurchaseFragment extends Fragment {
 
                 // Start with mock environment.  When ready, switch to sandbox (ENVIRONMENT_SANDBOX)
                 // or live (ENVIRONMENT_PRODUCTION)
-                .environment(PayPalConfiguration.ENVIRONMENT_NO_NETWORK)
+                .environment(PayPalConfiguration.ENVIRONMENT_SANDBOX)
                 .clientId("AfCwBQSyxx6Ys2fnbB_1AmmuINiAPaGlGtk38vTZTCbcevPBIU0Ptt4TgvjNznxkLbSi9fdiaJxG8-u-");
 
         try {

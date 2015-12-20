@@ -44,8 +44,10 @@ public class ConcertsAdapter extends ArrayAdapter<Object> {
         View rowView = inflater.inflate(R.layout.row_concerts, parent, false);
         final Concert ct = (Concert) values.get(position);
 
-        ImageView imageViewPicture = (ImageView) rowView.findViewById(R.id.concertpicture);
-        imageViewPicture.setImageResource(R.drawable.ic_profile);
+        /*ImageView imageViewPicture = (ImageView) rowView.findViewById(R.id.userpicture);
+        imageViewPicture.setImageResource(R.drawable.ic_profile);*/
+
+        new Utils.ImageLoadTask("http://soonzikapi.herokuapp.com/assets/usersImage/avatars/" + ct.getUser().getImage(), (ImageView) rowView.findViewById(R.id.userpicture)).execute();
 
         final ImageView likedConcert = (ImageView) rowView.findViewById(R.id.concert_like);
         final TextView nbLikes = (TextView) rowView.findViewById(R.id.nb_likes);

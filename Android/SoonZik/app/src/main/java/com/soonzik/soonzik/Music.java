@@ -60,7 +60,7 @@ public class Music extends ActiveRecord {
                         Log.v("JSON", response.toString());
                         try {
                             final Class<?> classT = Class.forName("com.soonzik.soonzik." + "Music");
-                            JSONArray data = response.getJSONArray("content");
+                            JSONObject data = response.getJSONObject("content");
 
                             callback.onJSONResponse(true, data, classT);
                         } catch (JSONException e) {
@@ -204,7 +204,7 @@ public class Music extends ActiveRecord {
         ActiveRecord.currentUser.getUserSecureKey(params, new User.OnJSONResponseCallback() {
             @Override
             public void onJSONResponse(boolean success, JSONObject response, RequestParams params) throws JSONException, IOException, NoSuchAlgorithmException {
-                String secureUrl = ActiveRecord.serverLink + "musics/get/" + Integer.toString(id) + "?user_id=" + Integer.toString(ActiveRecord.currentUser.getId()) + "&secureKey=" + ActiveRecord.currentUser.getSecureKey();
+                String secureUrl = ActiveRecord.serverLink + "musics/get/" + Integer.toString(id) + "?user_id=" + Integer.toString(ActiveRecord.currentUser.getId()) + "&secureKey=" + ActiveRecord.secureKey;
 
                 try {
                     callback.onJSONResponse(true, secureUrl, null);
@@ -326,5 +326,9 @@ public class Music extends ActiveRecord {
 
     public int getGetAverageNote() {
         return getAverageNote;
+    }
+
+    public void setAlbum(Album album) {
+        this.album = album;
     }
 }

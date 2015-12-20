@@ -27,7 +27,7 @@ public class MyContentPacksFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v =inflater.inflate(R.layout.fragment_mycontent_pack,container,false);
 
-        MyContent ct = ActiveRecord.currentUser.getContent();
+        /*MyContent ct = ActiveRecord.currentUser.getContent();
 
         final List<Object> packs = new ArrayList<Object>(ct.getPacks());
 
@@ -49,9 +49,9 @@ public class MyContentPacksFragment extends Fragment {
                 tx.addToBackStack(null);
                 tx.commit();
             }
-        });
+        });*/
 
-        /*User.getMusics(new ActiveRecord.OnJSONResponseCallback() {
+        User.getMusics(new ActiveRecord.OnJSONResponseCallback() {
             @Override
             public void onJSONResponse(boolean success, Object response, Class<?> classT) throws InvocationTargetException, NoSuchMethodException, java.lang.InstantiationException, IllegalAccessException {
                 JSONObject data = (JSONObject) response;
@@ -79,7 +79,7 @@ public class MyContentPacksFragment extends Fragment {
                     }
                 });
             }
-        });*/
+        });
 
         return v;
     }

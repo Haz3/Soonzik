@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.List;
@@ -29,10 +30,10 @@ public class FriendsAdapter extends ArrayAdapter<Object> {
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         View rowView = inflater.inflate(R.layout.row_friends, parent, false);
-        User nw = (User) values.get(position);
+        User us = (User) values.get(position);
         TextView textView = (TextView) rowView.findViewById(R.id.label);
-
-        textView.setText(nw.getUsername());
+        textView.setText(us.getUsername());
+        new Utils.ImageLoadTask("http://soonzikapi.herokuapp.com/assets/usersImage/avatars/" + us.getImage(), (ImageView) rowView.findViewById(R.id.userImage)).execute();
 
         return rowView;
     }

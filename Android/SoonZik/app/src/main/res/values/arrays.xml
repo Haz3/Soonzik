@@ -43,14 +43,14 @@
         <item>ic_playlist</item>
         <item>ic_friend</item>
         <item>ic_cart</item>
-        <item>ic_playlist</item>
-        <item>ic_playlist</item>
-        <item>ic_playlist</item>
-        <item>ic_playlist</item>
+        <item>ic_concert</item>
+        <item>ic_content</item>
+        <item>ic_sweet</item>
+        <item>ic_feedback</item>
     </string-array>
 
     <string-array name="feedback_array">
-        <item>Bug on the website</item>
+        <item>Bug on Android app</item>
         <item>Payment issue</item>
         <item>Account issue</item>
         <item>Other</item>

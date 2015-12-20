@@ -28,11 +28,9 @@ public class MyContentMusicsFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View v;
+        View v = inflater.inflate(R.layout.fragment_mycontent_music,container,false);
 
-        v = inflater.inflate(R.layout.fragment_mycontent_music,container,false);
-
-        MyContent ct = ActiveRecord.currentUser.getContent();
+        /*MyContent ct = ActiveRecord.currentUser.getContent();
 
         final List<Object> sg = new ArrayList<Object>(ct.getMusics());
 
@@ -57,13 +55,16 @@ public class MyContentMusicsFragment extends Fragment {
                 tx.replace(R.id.main, frg);
                 tx.commit();
             }
-        });
+        });*/
 
-        /*User.getMusics(new ActiveRecord.OnJSONResponseCallback() {
+        User.getMusics(new ActiveRecord.OnJSONResponseCallback() {
             @Override
             public void onJSONResponse(boolean success, Object response, Class<?> classT) throws InvocationTargetException, NoSuchMethodException, java.lang.InstantiationException, IllegalAccessException {
                 JSONObject data = (JSONObject) response;
                 final MyContent ct = (MyContent) ActiveRecord.jsonObjectData(data, classT);
+                ActiveRecord.currentUser.setContent(ct);
+
+                Log.v("MyContent", ct.toString());
 
                 final List<Object> sg = new ArrayList<Object>(ct.getMusics());
 
@@ -90,42 +91,7 @@ public class MyContentMusicsFragment extends Fragment {
                     }
                 });
             }
-        });*/
-
-        /*if (ActiveRecord.currentUser != null) {
-            v = inflater.inflate(R.layout.fragment_explorer_music,container,false);
-            ActiveRecord.suggest(ActiveRecord.currentUser.getId(), new ActiveRecord.OnJSONResponseCallback() {
-                @Override
-                public void onJSONResponse(boolean success, Object response, Class<?> classT) throws InvocationTargetException, NoSuchMethodException, java.lang.InstantiationException, IllegalAccessException {
-                    JSONArray data = (JSONArray) response;
-                    final ArrayList<Object> sg = ActiveRecord.jsonArrayData(data, classT);
-
-                    MusicsAdapter musicsAdapter = new MusicsAdapter(getActivity(), sg);
-                    ListView lv = (ListView) getActivity().findViewById(R.id.musicslistview);
-                    lv.setAdapter(musicsAdapter);
-
-                    lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                        @Override
-                        public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
-                            Toast.makeText(getActivity(), (sg.get(position)).toString(), Toast.LENGTH_SHORT).show();
-
-                            Bundle bundle = new Bundle();
-                            bundle.putInt("music_id", 1);
-
-                            Fragment frg = Fragment.instantiate(getActivity(), redirectClass);
-                            frg.setArguments(bundle);
-
-                            FragmentTransaction tx = getActivity().getSupportFragmentManager().beginTransaction();
-                            tx.replace(R.id.main, frg);
-                            tx.commit();
-                        }
-                    });
-                }
-            });
-        }
-        else {
-            v = inflater.inflate(R.layout.fragment_userunlogged,container,false);
-        }*/
+        });
 
         return v;
     }

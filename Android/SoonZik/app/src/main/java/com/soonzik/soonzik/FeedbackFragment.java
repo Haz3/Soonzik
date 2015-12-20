@@ -2,6 +2,7 @@ package com.soonzik.soonzik;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +12,14 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.lang.reflect.InvocationTargetException;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by Kevin on 2015-10-31.
@@ -18,6 +27,7 @@ import android.widget.Spinner;
 
 public class FeedbackFragment extends Fragment {
 
+    private String redirectClass = "com.soonzik.soonzik.NewsListFragment";
     private String issueCode;
 
     @Override
@@ -65,9 +75,33 @@ public class FeedbackFragment extends Fragment {
                 String content = feedbackContent.getText().toString();
 
                 Log.v("FEEDBACK", "email = " + email);
-                Log.v("FEEDBACK", "typeObj = " + issueCode);
-                Log.v("FEEDBACK", "subject = " + sub);
-                Log.v("FEEDBACK", "content = " + content);
+                Log.v("FEEDBACK", "type_object = " + issueCode);
+                Log.v("FEEDBACK", "object = " + sub);
+                Log.v("FEEDBACK", "text = " + content);
+
+                Map<String, String> data = new HashMap<String, String>();
+                data.put("email", email);
+                data.put("type_object", issueCode);
+                data.put("object", sub);
+                data.put("text", content);
+
+                ActiveRecord.save("Feedback", data, new ActiveRecord.OnJSONResponseCallback() {
+                    @Override
+                    public void onJSONResponse(boolean success, Object response, Class<?> classT) throws InvocationTargetException, NoSuchMethodException, java.lang.InstantiationException, IllegalAccessException, JSONException {
+                        JSONObject obj = (JSONObject) response;
+
+                        Toast.makeText(getActivity(), "Feedback send", Toast.LENGTH_SHORT).show();
+
+                        Bundle bundle = new Bundle();
+                        Fragment frg = Fragment.instantiate(getActivity(), redirectClass);
+                        frg.setArguments(bundle);
+
+                        FragmentTransaction tx = getActivity().getSupportFragmentManager().beginTransaction();
+                        tx.replace(R.id.main, frg);
+                        tx.addToBackStack(null);
+                        tx.commit();
+                    }
+                });
             }
         });
 

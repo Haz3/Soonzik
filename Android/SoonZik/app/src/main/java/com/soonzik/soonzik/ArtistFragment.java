@@ -45,6 +45,8 @@ public class ArtistFragment extends Fragment {
                     ImageView imageViewPicture = (ImageView) view.findViewById(R.id.artistpicture);
                     imageViewPicture.setImageResource(R.drawable.ic_profile);
 
+                    new Utils.ImageLoadTask("http://soonzikapi.herokuapp.com/assets/usersImage/avatars/" + user.getImage(), (ImageView) view.findViewById(R.id.artistpicture)).execute();
+
                     TextView textViewName = (TextView) view.findViewById(R.id.artistname);
                     textViewName.setText(user.getUsername());
 

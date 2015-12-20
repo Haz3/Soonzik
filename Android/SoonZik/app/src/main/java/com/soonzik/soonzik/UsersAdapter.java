@@ -52,6 +52,8 @@ public class UsersAdapter extends ArrayAdapter<Object> {
             }
         });
 
+        new Utils.ImageLoadTask("http://soonzikapi.herokuapp.com/assets/usersImage/avatars/" + us.getImage(), (ImageView) rowView.findViewById(R.id.userpicture)).execute();
+
         return rowView;
     }
 }

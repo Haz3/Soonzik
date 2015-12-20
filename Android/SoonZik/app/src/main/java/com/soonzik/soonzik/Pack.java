@@ -18,6 +18,7 @@ public class Pack extends ActiveRecord {
     private double averagePrice = 0d;
     private Date begin_date = null;
     private Date end_date = null;
+    private Boolean partial_albums = true;
 
     public Pack() {}
 

@@ -79,6 +79,9 @@ public class AlbumsAdapter extends ArrayAdapter<Object> {
             likedAlbum.setImageResource(R.drawable.unlike);
         }
 
+        new Utils.ImageLoadTask("http://soonzikapi.herokuapp.com/assets/albums/" + al.getImage(), (ImageView) rowView.findViewById(R.id.albumpicture)).execute();
+
+
         return rowView;
     }
 }

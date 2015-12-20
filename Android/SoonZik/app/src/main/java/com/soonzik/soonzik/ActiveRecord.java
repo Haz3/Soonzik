@@ -1,5 +1,6 @@
 package com.soonzik.soonzik;
 
+import android.media.MediaPlayer;
 import android.util.Log;
 import android.util.Pair;
 
@@ -40,6 +41,8 @@ public class ActiveRecord {
     static String last_update = "";
     private WebSocketRailsDispatcher dispatcher;
 
+    static MediaPlayer mediaPlayer;
+    
     public interface OnJSONResponseCallback {
         public void onJSONResponse(boolean success, Object response, Class<?> classT) throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException, JSONException;
     }
@@ -461,13 +464,14 @@ public class ActiveRecord {
         }
 
         currentUser.getUserSecureKey(params, new User.OnJSONResponseCallback() {
-
             @Override
             public void onJSONResponse(boolean success, JSONObject response, RequestParams params) throws JSONException, UnsupportedEncodingException, NoSuchAlgorithmException {
                 ActiveRecord.secureCase(currentUser, params, response.getString("key"));
                 AsyncHttpClient client = new AsyncHttpClient();
 
-                client.get(serverLink + "suggestv2", params, new JsonHttpResponseHandler() {
+                Log.v("SUGGEST", params.toString());
+
+                client.get(serverLink + "suggest" /*+ "v2"*/, params, new JsonHttpResponseHandler() {
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                         Log.v("JSON SUGGEST", response.toString());
@@ -648,7 +652,7 @@ public class ActiveRecord {
 
     protected static void secureCase(User user, RequestParams params, String secureKey) throws NoSuchAlgorithmException, UnsupportedEncodingException {
 
-        Log.v("SECUREHEY", secureKey);
+
         ActiveRecord.secureKey = secureKey;
 
         String toHash = user.getSalt() + secureKey;
@@ -665,6 +669,7 @@ public class ActiveRecord {
 
         params.put("user_id", user.getId());
         params.put("secureKey", hexString);
+        Log.v("hexString", hexString.toString());
     }
 
     protected void createInstance(Object instance, JSONObject obj, Class<?> classT) {

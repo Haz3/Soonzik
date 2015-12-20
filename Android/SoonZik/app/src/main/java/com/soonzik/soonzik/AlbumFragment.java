@@ -46,6 +46,7 @@ public class AlbumFragment extends Fragment {
                     if (art != null) {
                         for (Object m : ms) {
                             ((Music) m).setUser(art);
+                            ((Music) m).setAlbum(al);
                         }
                     }
 
@@ -113,8 +114,8 @@ public class AlbumFragment extends Fragment {
                     TextView price = (TextView) view.findViewById(R.id.price);
                     price.setText(Double.toString(al.getPrice()) + "$");
 
-                    TextView albumation = (TextView) view.findViewById(R.id.albumaction);
-                    albumation.setOnClickListener(new View.OnClickListener() {
+                    TextView albumaction = (TextView) view.findViewById(R.id.albumaction);
+                    albumaction.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
                             DialogFragment newFragment = new AlbumActionDialogFragment();
@@ -127,6 +128,8 @@ public class AlbumFragment extends Fragment {
                             newFragment.show(getActivity().getFragmentManager(), "com.soonzik.soonzik.AlbumActionDialogFragment");
                         }
                     });
+
+                    new Utils.ImageLoadTask("http://soonzikapi.herokuapp.com/assets/albums/" + al.getImage(), (ImageView) view.findViewById(R.id.albumpicture)).execute();
 
                     MusicsAdapter musicsAdapter = new MusicsAdapter(getActivity(), ms);
                     ListView lv = (ListView) getActivity().findViewById(R.id.musicslistview);

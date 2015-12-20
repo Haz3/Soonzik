@@ -8,7 +8,7 @@
     <ImageView
         android:layout_width="50sp"
         android:layout_height="50sp"
-        android:id="@+id/concertpicture"
+        android:id="@+id/userpicture"
         android:src="@drawable/ic_profile"
         android:contentDescription="@string/imgmenudescription"
         android:layout_marginLeft="15dp"
@@ -22,9 +22,9 @@
         android:src="@drawable/unlike"
         android:contentDescription="@string/imgmenudescription"
         android:layout_marginTop="6dp"
-        android:layout_below="@+id/concertpicture"
-        android:layout_alignLeft="@+id/concertpicture"
-        android:layout_alignStart="@+id/concertpicture" />
+        android:layout_below="@+id/userpicture"
+        android:layout_alignLeft="@+id/userpicture"
+        android:layout_alignStart="@+id/userpicture" />
 
     <TextView
         android:id="@+id/nb_likes"
@@ -32,8 +32,8 @@
         android:layout_height="wrap_content"
         android:text="0"
         android:layout_alignBottom="@+id/concert_like"
-        android:layout_alignRight="@+id/concertpicture"
-        android:layout_alignEnd="@+id/concertpicture" />
+        android:layout_alignRight="@+id/userpicture"
+        android:layout_alignEnd="@+id/userpicture" />
 
 
     <TextView
@@ -44,9 +44,9 @@
         android:textStyle="bold"
         android:layout_marginLeft="23dp"
         android:layout_marginStart="23dp"
-        android:layout_alignTop="@+id/concertpicture"
-        android:layout_toRightOf="@+id/concertpicture"
-        android:layout_toEndOf="@+id/concertpicture"/>
+        android:layout_alignTop="@+id/userpicture"
+        android:layout_toRightOf="@+id/userpicture"
+        android:layout_toEndOf="@+id/userpicture"/>
 
     <TextView
         android:id="@+id/dateconcert"

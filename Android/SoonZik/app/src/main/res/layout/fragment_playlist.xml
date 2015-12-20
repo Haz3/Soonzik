@@ -48,6 +48,17 @@
             android:layout_alignLeft="@+id/playlistname"
             android:layout_alignStart="@+id/playlistname" />
 
+        <ImageView
+            android:layout_width="50sp"
+            android:layout_height="50sp"
+            android:src="@drawable/play"
+            android:id="@+id/play_playlist"
+            android:layout_marginRight="32dp"
+            android:layout_marginEnd="32dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
+
     </RelativeLayout>
 
     <ListView

@@ -46,7 +46,9 @@ public class UserProfileFragment extends Fragment {
                         ((TextView) getActivity().findViewById(R.id.usernameUser)).setText(res.getUsername());
                         ((TextView) getActivity().findViewById(R.id.birthdayUser)).setText(res.getBirthday());
                         ((TextView) getActivity().findViewById(R.id.descriptionUser)).setText(res.getDescription());
-                        ((ImageView) getActivity().findViewById(R.id.imageUser)).setImageResource(R.drawable.ic_profile);
+                        //((ImageView) getActivity().findViewById(R.id.imageUser)).setImageResource(R.drawable.ic_profile);
+
+                        new Utils.ImageLoadTask("http://soonzikapi.herokuapp.com/assets/usersImage/avatars/" + res.getImage(), (ImageView) view.findViewById(R.id.imageUser)).execute();
                     }
                 });
             } catch (ClassNotFoundException e) {

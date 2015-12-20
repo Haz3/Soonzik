@@ -6,6 +6,8 @@
         <item name="android:windowBackground">@color/background</item>
         <item name="android:textColorPrimary">@color/primary_text</item>
         <item name="android:textColor">@color/text_color</item>
+        <item name="android:textViewStyle">@style/RobotoTextViewStyle</item>
+        <item name="android:buttonStyle">@style/RobotoButtonStyle</item>
 
     </style>
 
@@ -18,6 +20,15 @@
 
     <style name="ButtonSubmit" parent="Base.TextAppearance.AppCompat.Button">
         <item name="android:background">@color/button_submit</item>
+    </style>
+
+    <style name="RobotoTextViewStyle" parent="android:Widget.TextView">
+        <item name="android:fontFamily">sans-serif-light</item>
+    </style>
+
+    <style name="RobotoButtonStyle" parent="android:Widget.Holo.Light.Button">
+        <item name="android:fontFamily">sans-serif-light</item>
+        <item name="android:textStyle">bold</item>
     </style>
 
 </resources>

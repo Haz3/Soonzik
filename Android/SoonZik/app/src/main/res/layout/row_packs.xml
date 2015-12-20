@@ -51,13 +51,12 @@
         android:layout_height="wrap_content"
         android:text="Title of the Pack"
         android:textSize="30sp"
-        android:layout_above="@+id/albumtitle"
         android:layout_gravity="center_horizontal"
-        android:layout_alignBottom="@+id/packpicture"
+        android:layout_marginLeft="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_below="@+id/albumtitle"
         android:layout_toRightOf="@+id/packpicture"
-        android:layout_toEndOf="@+id/packpicture"
-        android:layout_marginLeft="9dp"
-        android:layout_marginStart="9dp">
+        android:layout_toEndOf="@+id/packpicture">
     </TextView>
 
 

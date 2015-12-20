@@ -30,9 +30,10 @@ public class PlaylistsAdapter extends ArrayAdapter<Object> {
         View rowView = inflater.inflate(R.layout.row_playlists, parent, false);
         Playlist pl = (Playlist) values.get(position);
 
-        TextView textView = (TextView) rowView.findViewById(R.id.label);
-
-        textView.setText(pl.getName());
+        TextView titlePlaylist = (TextView) rowView.findViewById(R.id.label);
+        titlePlaylist.setText(pl.getName());
+        TextView nbTitle = (TextView) rowView.findViewById(R.id.nbTitle);
+        nbTitle.setText(Integer.toString(pl.getMusics().size()));
         return rowView;
     }
 

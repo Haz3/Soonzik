@@ -51,7 +51,7 @@ public class CartFragment extends Fragment {
 
                 // Start with mock environment.  When ready, switch to sandbox (ENVIRONMENT_SANDBOX)
                 // or live (ENVIRONMENT_PRODUCTION)
-                .environment(PayPalConfiguration.ENVIRONMENT_NO_NETWORK)
+                .environment(PayPalConfiguration.ENVIRONMENT_SANDBOX)
                 .clientId("AfCwBQSyxx6Ys2fnbB_1AmmuINiAPaGlGtk38vTZTCbcevPBIU0Ptt4TgvjNznxkLbSi9fdiaJxG8-u-");
 
         try {
@@ -147,19 +147,6 @@ public class CartFragment extends Fragment {
                     Log.v("PAYPALID", paypalJSON.getJSONObject("response").get("id").toString());
 
                     paypal.put("payment_id", paypalJSON.getJSONObject("response").get("id").toString());
-                    paypal.put("payment_method", "");
-                    paypal.put("status", paypalJSON.getJSONObject("response").get("state").toString());
-                    paypal.put("payer_email", "");
-                    paypal.put("payer_first_name", "");
-                    paypal.put("payer_last_name", "");
-                    paypal.put("payer_id", "");
-                    paypal.put("payer_phone", "");
-                    paypal.put("payer_country_code", "");
-                    paypal.put("payer_street", "");
-                    paypal.put("payer_city", "");
-                    paypal.put("payer_postal_code", "");
-                    paypal.put("payer_country_code", "");
-                    paypal.put("payer_recipient_name", "");
 
                     Purchase.buyCart(paypal, new ActiveRecord.OnJSONResponseCallback() {
                         @Override

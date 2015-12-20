@@ -43,6 +43,8 @@ public class Purchase extends ActiveRecord {
                 AsyncHttpClient client = new AsyncHttpClient();
 
                 char lastChar = className.charAt(className.length() - 1);
+                Log.v("BUYCART", ActiveRecord.serverLink + className.toLowerCase() + (lastChar == 's' ? "/buycart" : "s/buycart"));
+                Log.v("BUYCART", params.toString());
                 client.post(ActiveRecord.serverLink + className.toLowerCase() + (lastChar == 's' ? "/buycart" : "s/buycart"), params, new JsonHttpResponseHandler() {
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
@@ -81,6 +83,8 @@ public class Purchase extends ActiveRecord {
                     @Override
                     public void onFailure(int statusCode, Header[] headers, Throwable e, JSONObject response) {
                         Log.v("FAIL", response.toString());
+                        Log.v("FAIL", e.toString());
+                        Log.v("FAIL", Integer.toString(statusCode));
                     }
                 });
             }

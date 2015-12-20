@@ -93,7 +93,6 @@ public class User extends ActiveRecord {
                 if (serverDate.getTime() > userDate.getTime()) {
 
                     Log.v("SECUREKEY", "OLD KEY");
-
                     JSONObject obj = new JSONObject();
                     obj.put("key", ActiveRecord.secureKey);
                     callback.onJSONResponse(true, obj, params);
