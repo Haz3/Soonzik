@@ -10,6 +10,7 @@
 #import "Tools.h"
 #import "SVGKImage.h"
 #import "MusicsController.h"
+#import "PlaylistsController.h"
 #import "SimplePopUp.h"
 
 @implementation OnLTMusicPopupView
@@ -251,9 +252,10 @@
 }
 
 - (NSArray *)getPlaylists {
-    NSData *userData = [[NSUserDefaults standardUserDefaults] objectForKey:@"User"];
+    /*NSData *userData = [[NSUserDefaults standardUserDefaults] objectForKey:@"User"];
     User *user = (User *)[NSKeyedUnarchiver unarchiveObjectWithData:userData];
-    return [Factory findElementWithClassName:@"Playlist" andValues:[NSString stringWithFormat:@"attribute[user_id]=%i", user.identifier]];
+    return [Factory findElementWithClassName:@"Playlist" andValues:[NSString stringWithFormat:@"attribute[user_id]=%i", user.identifier]];*/
+    return [PlaylistsController getPlaylists];
 }
 
 - (void)rateMusic {

@@ -116,7 +116,7 @@
 {
     HeaderAlbumTableView *view = (HeaderAlbumTableView *)[[[NSBundle mainBundle] loadNibNamed:@"HeaderAlbumTableView" owner:self options:nil] firstObject];
     
-   if (!self.dataLoaded) {
+   if (self.dataLoaded) {
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT,0),  ^{
             NSString *urlImage = [NSString stringWithFormat:@"%@assets/albums/%@", API_URL, self.album.image];
             NSData *imageData = [[NSData alloc] initWithContentsOfURL: [NSURL URLWithString: urlImage]];
@@ -179,11 +179,11 @@
     [artistButton addTarget:self action:@selector(goToArtistView:) forControlEvents:UIControlEventTouchUpInside];
     [view addSubview:artistButton];
     
-    UIButton *playAllButton = [[UIButton alloc] initWithFrame:CGRectMake(5, v.frame.origin.y + 10, 100, 26)];
+   /* UIButton *playAllButton = [[UIButton alloc] initWithFrame:CGRectMake(5, v.frame.origin.y + 10, 100, 26)];
     [playAllButton setTitle:[self.translate.dict objectForKey:@"play_all"] forState:UIControlStateNormal];
     [playAllButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [playAllButton addTarget:self action:@selector(playAlbum) forControlEvents:UIControlEventTouchUpInside];
-    [view addSubview:playAllButton];
+    [view addSubview:playAllButton];*/
     
     UIButton *likeButton = [[UIButton alloc] initWithFrame:CGRectMake(view.frame.size.width-30-30-30-10, v.frame.origin.y + 10, 26, 26)];
     if (self.album.isLiked) {
@@ -262,21 +262,36 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     Music *s = [self.listOfMusics objectAtIndex:indexPath.row];
-    s.artist = self.album.artist;
     self.player = [AudioPlayer sharedCenter];
-    if ([self.player currentlyPlaying])
-//        [self.player pauseSound];
-    self.player.listeningList = nil;
+    [self.player stopSound];
+    [self.player deleteCurrentPlayer];
     self.player.listeningList = [[NSMutableArray alloc] init];
     [self.player.listeningList addObject:s];
     self.player.index = 0;
     [self.player prepareSong:s.identifier];
- //   [self.player playSound];
-    self.player.songName = s.title;
+    //self.player.songName = s.title;
     
     [self deselectAllTheRows];
     MusicTableViewCell *cell = (MusicTableViewCell *)[tableView cellForRowAtIndexPath:indexPath];
     [cell setSelected:YES animated:YES];
+    
+    
+    
+    
+  /*  Music *s = [self.listOfMusics objectAtIndex:indexPath.row];
+        [tableView deselectRowAtIndexPath:indexPath animated:YES];
+        [self.player stopSound];
+        [self.player deleteCurrentPlayer];
+        [self.player prepareSong:music.identifier];
+        // self.player.oldIndex = self.player.index;
+        self.player.index = indexPath.row;
+        [self.player playSound];
+        [self deselectAllTheRows];
+        PlayListsCells *cell = (PlayListsCells *)[tableView cellForRowAtIndexPath:indexPath];
+        [cell setSelected:YES animated:YES];
+    }
+   */
+    
 }
 
 - (void)deselectAllTheRows {
@@ -295,7 +310,7 @@
 //    [self.player stopSound];
     self.player.currentlyPlaying = NO;
     self.player.index = 0;
-    self.player.oldIndex = 0;
+   // self.player.oldIndex = 0;
     
     for (Music *music in self.listOfMusics) {
         [self.player.listeningList addObject:music];

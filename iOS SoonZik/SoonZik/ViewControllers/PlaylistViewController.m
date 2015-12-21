@@ -161,7 +161,7 @@
  //   [self.player stopSound];
     self.player.currentlyPlaying = NO;
     self.player.index = 0;
-    self.player.oldIndex = 0;
+    //self.player.oldIndex = 0;
     
     for (Music *music in self.playlist.listOfMusics) {
         [self.player.listeningList addObject:music];

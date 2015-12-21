@@ -368,6 +368,7 @@
 		EDF79DDD1B0E8CDB001E558C /* delete_white.svg in Resources */ = {isa = PBXBuildFile; fileRef = EDF79DDC1B0E8CDB001E558C /* delete_white.svg */; };
 		EDF7EBC71B2A08600091994C /* InfluenceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EDF7EBC51B2A08600091994C /* InfluenceViewController.m */; };
 		EDF7EBC81B2A08600091994C /* InfluenceViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EDF7EBC61B2A08600091994C /* InfluenceViewController.xib */; };
+		EDFD1E2D1C27E76C0073EA83 /* concert_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = EDFD1E2C1C27E76C0073EA83 /* concert_icon.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1069,6 +1070,7 @@
 		EDF7EBC41B2A08600091994C /* InfluenceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InfluenceViewController.h; sourceTree = "<group>"; };
 		EDF7EBC51B2A08600091994C /* InfluenceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InfluenceViewController.m; sourceTree = "<group>"; };
 		EDF7EBC61B2A08600091994C /* InfluenceViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InfluenceViewController.xib; sourceTree = "<group>"; };
+		EDFD1E2C1C27E76C0073EA83 /* concert_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = concert_icon.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -2051,6 +2053,7 @@
 		EDEDEDAA1AA1633B0024CF38 /* Pictures */ = {
 			isa = PBXGroup;
 			children = (
+				EDFD1E2C1C27E76C0073EA83 /* concert_icon.png */,
 				ED9A40791BF61EF0000C1AF2 /* star_0.png */,
 				ED9A407A1BF61EF0000C1AF2 /* star_1.png */,
 				EDE1E0F11B361DCD001F7B5B /* people_white.svg */,
@@ -2167,7 +2170,7 @@
 				ORGANIZATIONNAME = "SoonZik - Maxime SAUVAGE";
 				TargetAttributes = {
 					D55AB40A192CE1950065CB9C = {
-						DevelopmentTeam = F39DD78CTF;
+						DevelopmentTeam = T4GFA7EMFJ;
 					};
 					D55AB42E192CE1950065CB9C = {
 						TestTargetID = D55AB40A192CE1950065CB9C;
@@ -2241,6 +2244,7 @@
 				ED5977811AF5AFEA00A8E337 /* icon_play-circle.svg in Resources */,
 				EDEDEE451AA240240024CF38 /* battle.svg in Resources */,
 				EDEAFABD1AD5E5790018A35B /* Default-568h@2x.png in Resources */,
+				EDFD1E2D1C27E76C0073EA83 /* concert_icon.png in Resources */,
 				EDEDEB8F1AA15B5C0024CF38 /* AlbumViewController.xib in Resources */,
 				EDEDEE481AA240240024CF38 /* news.svg in Resources */,
 				ED5977871AF5B47600A8E337 /* current_listen.svg in Resources */,

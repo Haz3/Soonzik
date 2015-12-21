@@ -12,6 +12,7 @@
 #import "UserListen.h"
 #import "UsersController.h"
 #import "AlbumViewController.h"
+#import "ConcertsController.h"
 
 #define METERS_PER_MILE 1609.344
 

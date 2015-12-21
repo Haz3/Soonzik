@@ -19,7 +19,7 @@
     bool need = false;
     
     NSLog(@"user.secureKey : %@", [[Secu sharedInstance] secureKey]);
-    if ([[Secu sharedInstance] secureKey] == nil) {    // if secureKey is null
+    if ([[Secu sharedInstance] secureKey] == nil) {
         need = true;
         NSLog(@"secure KEy is null");
     } else {
@@ -36,9 +36,7 @@
     /************/
     
     if (need) {
-        
         NSLog(@"NEED");
-        
         NSString *url = [NSString stringWithFormat:@"%@getKey/%i", API_URL, user.identifier];
         NSDictionary *json = [Request getRequest:url];
         
@@ -53,7 +51,6 @@
         
         NSString *secureKey = [json objectForKey:@"key"];
         
-        
         NSString *conca = [NSString stringWithFormat:@"%@%@", user.salt, secureKey];
         NSString *key = [Crypto sha256HashFor:conca];
         
@@ -61,7 +58,6 @@
         [Secu sharedInstance].secureKey = key;
         
          NSLog(@"user.secureKey   AFTER : %@", [[Secu sharedInstance] secureKey]);
-        
     } else {
         NSLog(@"NO NEED");
     }
@@ -69,15 +65,13 @@
     return [[Secu sharedInstance] secureKey];
 }
 
-+ (NSString*)sha256HashFor:(NSString*)input
-{
++ (NSString*)sha256HashFor:(NSString*)input {
     const char* str = [input UTF8String];
     unsigned char result[CC_SHA256_DIGEST_LENGTH];
     CC_SHA256(str, strlen(str), result);
     
     NSMutableString *ret = [NSMutableString stringWithCapacity:CC_SHA256_DIGEST_LENGTH*2];
-    for(int i = 0; i<CC_SHA256_DIGEST_LENGTH; i++)
-    {
+    for (int i = 0; i<CC_SHA256_DIGEST_LENGTH; i++) {
         [ret appendFormat:@"%02x",result[i]];
     }
     return ret;

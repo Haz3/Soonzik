@@ -29,7 +29,7 @@ static AudioPlayer *sharedInstance = nil;
     self = [super init];
     if (self) {
         self.index = 0;
-        self.oldIndex = 0;
+        //self.oldIndex = 0;
         self.listeningList = [[NSMutableArray alloc] init];
         self.currentlyPlaying = true;
         
@@ -46,9 +46,11 @@ static AudioPlayer *sharedInstance = nil;
     NSData *data = [[NSUserDefaults standardUserDefaults] objectForKey:@"User"];
     User *user = (User *)[NSKeyedUnarchiver unarchiveObjectWithData:data];
     NSString *key = [Crypto getKey];
-    NSString *conca = [NSString stringWithFormat:@"%@%@", user.salt, key];
-    NSString *secureKey = [Crypto sha256HashFor:conca];
-    NSString *url = [NSString stringWithFormat:@"%@musics/get/%i?user_id=%i&secureKey=%@", API_URL, identifier, user.identifier, secureKey];
+    //NSString *conca = [NSString stringWithFormat:@"%@%@", user.salt, key];
+    //NSString *secureKey = [Crypto sha256HashFor:conca];
+    NSString *url = [NSString stringWithFormat:@"%@musics/get/%i?user_id=%i&secureKey=%@", API_URL, identifier, user.identifier, key];
+    
+    //NSLog(@"URL : %@", url);
     
     self.audioPlayer = [[AVPlayer alloc] initWithURL:[NSURL URLWithString:url]];
     [[NSNotificationCenter defaultCenter] addObserver:self
@@ -73,31 +75,24 @@ static AudioPlayer *sharedInstance = nil;
         if (self.audioPlayer.status == AVPlayerStatusFailed) {
             NSLog(@"AVPlayer Failed");
             self.currentlyPlaying = NO;
-            
         } else if (self.audioPlayer.status == AVPlayerStatusReadyToPlay) {
             NSLog(@"AVPlayerStatusReadyToPlay");
-            [self.audioPlayer play];
-            self.currentlyPlaying = true;
-            
+            [self playSound];
         } else if (self.audioPlayer.status == AVPlayerItemStatusUnknown) {
             NSLog(@"AVPlayer Unknown");
             self.currentlyPlaying = NO;
-            
         }
     }
 }
 
 - (void)playerItemDidReachEnd:(NSNotification *)notification {
-    
-    //  code here to play next sound file
-    [self deleteCurrentPlayer];
     [self next];
 }
 
 - (void)playSound
 {
     [self.audioPlayer play];
-    self.currentlyPlaying = true;
+    self.currentlyPlaying = YES;
 }
 
 - (void)playSoundAtPeriod:(float)period
@@ -121,7 +116,7 @@ static AudioPlayer *sharedInstance = nil;
 
 - (void)previous
 {
-    NSLog(@"prev");
+   // NSLog(@"prev");
     [self deleteCurrentPlayer];
     if (self.listeningList.count > 0) {
         if (self.index > 0) {
@@ -129,7 +124,6 @@ static AudioPlayer *sharedInstance = nil;
             Music *s = [self.listeningList objectAtIndex:self.index];
             [self prepareSong:s.identifier];
             if (self.currentlyPlaying) {
-                //[self.audioPlayer play];
                 self.songName = s.title;
             }
             NSMutableDictionary *info = [NSMutableDictionary dictionaryWithObjects:[NSArray arrayWithObjects:s.title, s.artist.username, nil]
@@ -147,6 +141,7 @@ static AudioPlayer *sharedInstance = nil;
     if (self.listeningList.count > 0) {
         if (self.index < self.listeningList.count - 1) {
             self.index++;
+            [self.finishDelegate refreshDisp];
             Music *s = [self.listeningList objectAtIndex:self.index];
             [self prepareSong:s.identifier];
             if (self.currentlyPlaying) {

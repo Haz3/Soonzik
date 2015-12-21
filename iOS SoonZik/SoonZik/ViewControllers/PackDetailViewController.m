@@ -200,6 +200,7 @@
         self.textField.delegate = self;
         self.textField.tintColor = [UIColor whiteColor];
         self.textField.text = [NSString stringWithFormat:@"%.2f", self.pack.avgPrice];
+        self.textField.keyboardType = UIKeyboardTypeNumbersAndPunctuation;
         [cell.contentView addSubview:self.textField];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.backgroundColor = [UIColor clearColor];
@@ -278,9 +279,13 @@
     return nil;
 }
 
-- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+/*- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
     NSLog(@"replacement string : %@", string);
-    if ([string isEqualToString:@""]) {
+    NSLog(@"textfield.text : %@", textField.text);
+    if (textField.text.length == 1 && [string isEqualToString:@""]) {
+        self.price = 0;
+    }
+    else if ([string isEqualToString:@""]) {
         NSString *after = [textField.text substringToIndex:[textField.text length]-1];
         //textField.text = after;
         self.price = after.floatValue;
@@ -293,7 +298,7 @@
    
     [self checkPrice];
     return true;
-}
+}*/
 
 - (void)checkPrice {
     UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:3]];
@@ -304,10 +309,18 @@
         cell.userInteractionEnabled = true;
         cell.alpha = 1;
     }
+    
+    [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationNone];
+    
+     //   [self.tableView reloadData];
+    
+    //
 }
 
 - (BOOL)textFieldShouldEndEditing:(UITextField *)textField {
-    
+    self.price = textField.text.floatValue;
+    [self checkPrice];
+    [textField resignFirstResponder];
     return true;
 }
 

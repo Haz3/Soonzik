@@ -85,8 +85,6 @@
 
 - (void) initPlayer
 {
-    self.indexOfPage = self.player.index;
-
     self.scrollView.delegate = self;
     self.scrollView.pagingEnabled = YES;
     
@@ -98,9 +96,9 @@
         contentOffset += self.scrollView.frame.size.width;
     }
     self.scrollView.contentSize = CGSizeMake(contentOffset, self.scrollView.frame.size.height);
-    self.scrollView.contentOffset = CGPointMake((contentOffset / self.player.listeningList.count) * self.indexOfPage, 0);
+    self.scrollView.contentOffset = CGPointMake((contentOffset / self.player.listeningList.count) * self.player.index, 0);
     
-    [self loadPictureAtIndexOfPage:self.indexOfPage];
+    [self loadPictureAtIndexOfPage:self.player.index];
 }
 
 - (void)loadPictureAtIndexOfPage:(int)page {
@@ -224,26 +222,33 @@
 - (IBAction)previous:(id)sender
 {
     [self.player previous];
-    self.indexOfPage = self.player.index;
-    [self.scrollView setContentOffset:CGPointMake(self.indexOfPage*self.scrollView.frame.size.width, 0) animated:YES];
+    [self.scrollView setContentOffset:CGPointMake(self.player.index*self.scrollView.frame.size.width, 0) animated:YES];
     
-    [self loadPictureAtIndexOfPage:self.indexOfPage];
+    [self loadPictureAtIndexOfPage:self.player.index];
 }
 
 - (IBAction)next:(id)sender
 {
     [self.player next];
-    self.indexOfPage = self.player.index;
-    [self.scrollView setContentOffset:CGPointMake(self.indexOfPage*self.scrollView.frame.size.width, 0) animated:YES];
+    [self.scrollView setContentOffset:CGPointMake(self.player.index*self.scrollView.frame.size.width, 0) animated:YES];
     
-    [self loadPictureAtIndexOfPage:self.indexOfPage];
+    [self loadPictureAtIndexOfPage:self.player.index];
 }
 
 - (void)playerHasFinishedToPlay
 {
-    [self.player next];
-    self.indexOfPage = self.player.index;
-    [self.scrollView setContentOffset:CGPointMake(self.indexOfPage*self.scrollView.frame.size.width, 0) animated:YES];
+    NSLog(@"player has finished to play");
+    //[self.player next];
+    [self.scrollView setContentOffset:CGPointMake(self.player.index*self.scrollView.frame.size.width, 0) animated:YES];
+    
+    [self loadPictureAtIndexOfPage:self.player.index];
+}
+
+- (void)refreshDisp {
+    NSLog(@"player display");
+    [self.scrollView setContentOffset:CGPointMake(self.player.index*self.scrollView.frame.size.width, 0) animated:YES];
+    
+    [self loadPictureAtIndexOfPage:self.player.index];
 }
 
 @end

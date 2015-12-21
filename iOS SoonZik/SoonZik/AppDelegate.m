@@ -302,6 +302,7 @@
         case 8:
             // compte user
         {
+            self.accountVC = [[UINavigationController alloc] initWithRootViewController:[[AccountViewController alloc] initWithNibName:@"AccountViewController" bundle:nil]];
             frontNavigationController = self.accountVC;
             [self.revealController setFrontViewController:frontNavigationController];
         }

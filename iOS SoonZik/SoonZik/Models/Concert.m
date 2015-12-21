@@ -14,6 +14,8 @@
 {
     self = [super init];
     
+    NSLog(@"json : %@", json);
+    
     self.identifier = [[json objectForKey:@"id"] intValue];
     NSDateFormatter *dateformat = [[NSDateFormatter alloc] init];
     [dateformat setDateFormat:@"yyyy-MM-dd HH:mm:ss"];

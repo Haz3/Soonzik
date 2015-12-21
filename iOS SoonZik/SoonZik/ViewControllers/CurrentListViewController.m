@@ -53,10 +53,10 @@
 
 - (void)updateDisplay {
     [self deselectAllTheRows];
-    if (self.player.oldIndex != self.player.index) {
+    //if (self.player.oldIndex != self.player.index) {
         PlayListsCells *cell = (PlayListsCells *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:self.player.index inSection:0]];
         [cell setSelected:YES animated:YES];
-    }
+    //}
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -107,7 +107,7 @@
         [self.player stopSound];
         [self.player deleteCurrentPlayer];
         [self.player prepareSong:music.identifier];
-        self.player.oldIndex = self.player.index;
+       // self.player.oldIndex = self.player.index;
         self.player.index = indexPath.row;
         [self.player playSound];
         [self deselectAllTheRows];
@@ -209,8 +209,8 @@
     if (m.identifier == music.identifier) {
        [self.player stopSound];
         [self.player deleteCurrentPlayer];
-        self.player.oldIndex = 0;
-        self.player.index = -20;
+       // self.player.oldIndex = 0;
+        self.player.index = 0;
     }
     
     for (int i = 0; i < self.player.listeningList.count; i++) {

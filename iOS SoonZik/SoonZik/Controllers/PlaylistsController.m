@@ -36,6 +36,8 @@
     NSMutableArray *list = [[NSMutableArray alloc] init];
     NSString *url = [NSString stringWithFormat:@"%@playlists/find?attribute[user_id]=%i", API_URL, user.identifier];
     
+    NSLog(@"url : %@", url);
+    
     NSDictionary *json = [Request getRequest:url];
     json = [json objectForKey:@"content"];
     
@@ -50,9 +52,18 @@
 }
 
 + (Playlist *)createAPlaylist:(Playlist *)playlist {
-    Network *net = [[Network alloc] init];
-    NSDictionary *json = [net create:playlist];
+    NSString *url, *post, *key;
+    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+    NSData *data = [prefs objectForKey:@"User"];
+    User *user = (User *)[NSKeyedUnarchiver unarchiveObjectWithData:data];
     
+    url = [NSString stringWithFormat:@"%@playlists/save", API_URL];
+    key = [Crypto getKey];
+    post = [NSString stringWithFormat:@"user_id=%i&secureKey=%@&playlist[user_id]=%i&playlist[name]=%@", user.identifier, key, user.identifier, playlist.title];
+    
+    NSDictionary *json = [Request postRequest:post url:url];
+    
+    NSLog(@"create playlist : %@", json);
     Playlist *p;
     if ([[json objectForKey:@"code"] intValue] != 503) {
         p = [[Playlist alloc] initWithJsonObject:[json objectForKey:@"content"]];

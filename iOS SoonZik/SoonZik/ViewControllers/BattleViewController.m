@@ -171,7 +171,7 @@
     } else {
         NSUInteger flags = NSCalendarUnitDay | NSCalendarUnitHour | NSCalendarUnitMinute | NSCalendarUnitSecond;
         NSDateComponents *components = [[NSCalendar currentCalendar] components:flags fromDate:now toDate:self.battle.endDate options:0];
-        self.endBattleChronoLabel.text = [NSString stringWithFormat:[self.translate.dict objectForKey:@"battle_deadline"], [components day], [components hour], [components minute], [components second]];
+        /*self.endBattleChronoLabel.text = [NSString stringWithFormat:[self.translate.dict objectForKey:@"battle_deadline"], [components day], [components hour], [components minute], [components second]];*/
     }
    
     float totalVotes = self.battle.voteArtistOne+self.battle.voteArtistTwo;

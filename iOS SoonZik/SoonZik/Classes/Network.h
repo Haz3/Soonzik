@@ -19,6 +19,4 @@
 
 - (NSDictionary *) findJsonElementWithClassName:className andValues:(NSString *)values;
 
-- (NSDictionary *)create:(id)elem;
-
 @end

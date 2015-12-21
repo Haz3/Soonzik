@@ -252,8 +252,8 @@
     Music *m = [self.player.listeningList objectAtIndex:self.player.index];
     if (m.identifier == music.identifier) {
  //       [self.player pauseSound];
-        self.player.oldIndex = 0;
-        self.player.index = -20;
+        //self.player.oldIndex = 0;
+        self.player.index = 0;
     }
     
     for (int i = 0; i < self.player.listeningList.count; i++) {
@@ -302,6 +302,10 @@
         default:
             break;
     }
+}
+
+- (void)refreshDisp {
+    
 }
 
 @end

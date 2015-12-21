@@ -16,6 +16,7 @@
 @property (nonatomic, strong) IBOutlet UIView *detailView;
 
 @property (nonatomic, strong) NSMutableArray *listOfListenings;
+@property (nonatomic, strong) NSMutableArray *listOfConcerts;
 
 @property (nonatomic, strong) IBOutlet UIButton *myPositionButton;
 

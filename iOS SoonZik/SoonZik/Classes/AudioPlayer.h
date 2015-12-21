@@ -12,6 +12,7 @@
 @protocol FinishPlayPlayer <NSObject>
 
 - (void)playerHasFinishedToPlay;
+- (void)refreshDisp;
 
 @end
 
@@ -22,7 +23,7 @@
 @property (strong, nonatomic) AVPlayer *audioPlayer;
 
 @property (assign, nonatomic) int index;
-@property (assign, nonatomic) int oldIndex;
+//@property (assign, nonatomic) int oldIndex;
 
 @property (assign, nonatomic) bool currentlyPlaying;
 
@@ -41,5 +42,6 @@
 - (void)deleteCurrentPlayer;
 
 + (AudioPlayer *)sharedCenter;
+
 
 @end

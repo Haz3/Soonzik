@@ -82,27 +82,4 @@
     return [Request getRequest:url];
 }
 
-- (NSDictionary *)create:(id)elem
-{
-    NSString *url;
-    NSString *post;
-    NSString *key;
-    NSString *conca;
-    NSString *secureKey;
-    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
-    NSData *data = [prefs objectForKey:@"User"];
-    User *user = (User *)[NSKeyedUnarchiver unarchiveObjectWithData:data];
-    
-    if ([elem isKindOfClass:[Playlist class]]) {
-        url = [NSString stringWithFormat:@"%@playlists/save", API_URL];
-        Playlist *playlist = (Playlist *)elem;
-        key = [Crypto getKey];
-        conca = [NSString stringWithFormat:@"%@%@", user.salt, key];
-        secureKey = [Crypto sha256HashFor:conca];
-        post = [NSString stringWithFormat:@"user_id=%i&secureKey=%@&playlist[user_id]=%i&playlist[name]=%@", user.identifier, secureKey, user.identifier, playlist.title];
-    }
-    
-    return [Request postRequest:post url:url];
-}
-
 @end

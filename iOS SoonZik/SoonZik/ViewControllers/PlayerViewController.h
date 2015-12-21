@@ -23,7 +23,6 @@
 @property (assign, nonatomic) CGFloat screenHeight;
 @property (strong, nonatomic) IBOutlet UILabel *songTitle;
 @property (strong, nonatomic) IBOutlet UILabel *songArtist;
-@property (nonatomic, assign) int indexOfPage;
 @property (nonatomic, strong) IBOutlet UIScrollView *scrollView;
 @property (nonatomic, strong) CurrentListViewController *currentListViewController;
 @property (strong, nonatomic) IBOutlet UIButton *previousButton;
