@@ -70,6 +70,8 @@ SoonzikApp.controller('PacksCtrl', ['$scope', '$routeParams', 'SecureAuth', 'HTT
 
 			HTTPService.showPack(id, parameters).then(function(response) {
 				$scope.thisPack = response.data.content;
+
+				$scope.is_partial = $scope.thisPack.partial_albums;
 				$scope.end_date = $scope.thisPack.end_date;
 				timeLeft();
 				$scope.loading = false;
@@ -141,10 +143,11 @@ SoonzikApp.controller('PacksCtrl', ['$scope', '$routeParams', 'SecureAuth', 'HTT
 			}
 
        		var date = new Date(countDown);
+       		var day = date.getDay();
        		var hours = date.getHours();
        		var minutes = "0" + date.getMinutes();
        		var seconds = "0" + date.getSeconds();
-			var formattedTime = hours + 'h ' + minutes.substr(-2) + 'mn ' + seconds.substr(-2) + 's';
+			var formattedTime = day + 'day ' + hours + 'h ' + minutes.substr(-2) + 'mn ' + seconds.substr(-2) + 's';
 
 			$scope.thisPack.timeLeftPack = formattedTime;
 			$scope.$apply();

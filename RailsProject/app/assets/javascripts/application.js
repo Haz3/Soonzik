@@ -22,6 +22,7 @@
 //= require ./tools/raphael-min.js
 //= require ./tools/morris.min.js
 //= require ./tools/lodash.min.js
+//= require ./tools/sdk-3.0.0.js
 //= require angular
 //= require angular-animate
 //= require angular-cookies

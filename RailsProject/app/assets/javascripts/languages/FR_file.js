@@ -68,6 +68,8 @@ var labels = {
 
 	// Explorer Controller
 	FILE_EXPLORER_GET_INFLUENCES_ERROR_MESSAGE: "Une erreur s'est produite au chargement des influences",
+	FILE_EXPLORER_GET_AMBIANCES_ERROR_MESSAGE: "Une erreur s'est produite au chargement des ambiances",
+	FILE_EXPLORER_GET_AMBIANCE_ERROR_MESSAGE: "Une erreur s'est produite au chargement de l'ambiance",
 	FILE_EXPLORER_GET_GENRE_ERROR_MESSAGE: "Une erreur s'est produite des genres",
 
 	// Listening Controller
@@ -125,6 +127,9 @@ var labels = {
 	FILE_USER_GOOGLE_LINKED_ERROR_MESSAGE: "Le compte google + est déjà lié à un autre compte SoonZik",
 	FILE_USER_GOOGLE_LINK_ERROR_MESSAGE: "Impossible de lier ce compte à votre profil",
 	FILE_USER_GOOGLE_CONNECTION_ERROR_MESSAGE: "Impossible de se connecter à Google Plus",
+	FILE_USER_SOUNDCLOUD_CONNECTION_ERROR_MESSAGE: "Impossible de se connecter à Soundcloud",
+	FILE_USER_MUSICAL_PAST_SUCCESS_MESSAGE: "Nous avons récupéré votre passé musical, il sera utilisé pour de meilleures suggestions",
+	FILE_USER_MUSICAL_PAST_ERROR_MESSAGE: "Nous n'avons pas pu récupéré votre passé musical, ré-essayez ultérieurement",
 
 	// Security Controller
 	FILE_SECURITY_FAILED: "Une erreur s'est produite durant la requête",
@@ -146,6 +151,7 @@ var labels = {
 	// Explorer Index View
 	DISPLAY_EXPLORER_INDEX_LABEL: "Index",
 	DISPLAY_EXPLORER_INFLUENCE_CHOOSE_LABEL: "Choisissez une influence",
+	DISPLAY_EXPLORER_AMBIANCE_CHOOSE_LABEL: "Choisissez une ambiance",
 	DISPLAY_EXPLORER_GENRE_LABEL: "genres",
 
 	// Listening Index View
@@ -223,6 +229,8 @@ var labels = {
 	DISPLAY_USER_FORM_TWITTER_LOG_LABEL: "Connexion avec Twitter",
 	DISPLAY_USER_FORM_GPLUS_LINK_LABEL: "Lier son compte avec Google Plus :",
 	DISPLAY_USER_FORM_GPLUS_LOG_LABEL: "Connexion avec Google Plus",
+	DISPLAY_USER_FORM_SOUNDCLOUD_LINK_LABEL: "Importer votre passé musical de Soundcloud :",
+	DISPLAY_USER_FORM_SOUNDCLOUD_LOG_LABEL: "Récupérer ses favoris sur Soundcloud",
 	DISPLAY_USER_FORM_LINKED_LABEL: "Votre compte est lié",
 	DISPLAY_USER_FORM_NUMBER_LABEL: "Numéro de rue",
 	DISPLAY_USER_FORM_COMPLEMENT_LABEL: "Complement",
@@ -274,10 +282,6 @@ var labels = {
 	FILE_CONCERT_FIND_CONCERT_ERROR_MESSAGE: "Une erreur s'est produite lors du chargement des concerts",
 
 	// Discotheque Index view
-	DISPLAY_DISCOTHEQUE_ADD_PLAYLIST_LABEL: "Ajouter à la liste de lecture",
-	DISPLAY_DISCOTHEQUE_ADD_PLAYLIST_BUTTON: "Ajouter",
-	DISPLAY_DISCOTHEQUE_LISTEN_LABEL: "Ecouter",
-	DISPLAY_DISCOTHEQUE_CLOSE_LABEL: "Fermer",
 	DISPLAY_DISCOTHEQUE_NOTHING_LABEL: "Rien n'est disponible",
 	DISPLAY_DISCOTHEQUE_MUSIC_LABEL: "Vos musiques",
 	DISPLAY_DISCOTHEQUE_ALBUM_LABEL: "Vos albums",

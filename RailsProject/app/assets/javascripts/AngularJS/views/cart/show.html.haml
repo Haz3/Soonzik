@@ -1,19 +1,59 @@
 %cart{"ng-init" => "initFoundation()" }
+	%h1 {{ labels.DISPLAY_CART_LABEL }} Panier
 	.row{"ng-init" => "showCart()"}
-		%h1 {{ labels.DISPLAY_CART_LABEL }}
-		%table
-			%thead
-				%tr
-					%th{ colspan: '5' } Panier
-			%tbody{"ng-repeat" => "musics in carts"}
-				%tr{"ng-repeat" => "music in musics.musics"}
-					%td {{ music.title }}
-					%td
-						%a.fi-x{"ng-click" => "deleteItem(musics.id)"}
-				%tr{"ng-repeat" => "album in musics.albums"}
-					%td{:width => 300}
-						{{ album.title}}
-					%td
-						%a.fi-x{"ng-click" => "deleteItem(musics.id)"}
+		%h3 Albums
+		.ul.large-block-grid-2.centered.columns
+			%li{"ng-repeat" => "musics in carts"}
+				.panel{"ng-repeat" => "album in musics.albums"}
+					%h3.subheader
+						%p.text-center
+							{{ album.title }}
+					.divider
+					%p.right
+						{{ labels.DISPLAY_PACK_ARTIST_NAME }} : {{ album.user.username }}
+						%br
+						{{ labels.DISPLAY_PACK_YEAR_ALBUM }} : {{ album.yearProd }}
+						%br
+						Prix : {{ album.price }} €
+						%br
+						%a.fi-x.right{"ng-click" => "deleteItem(musics.id)"}
+							Delete
+					%a{:href => "http://lvh.me:3000/albums/ {{ album.id }}"}
+						%img.centered{ "ng-src" => "/assets/albums/pretty.jpg" }
+		%h3 Musics
+		.ul.large-block-grid-2.centered.columns
+			%li{"ng-repeat" => "musics in carts"}
+				.panel{"ng-repeat" => "music in musics.musics"}
+					%h3.subheader
+						%p.text-center
+							{{ labels.DISPLAY_PACK_ARTIST_NAME }} : {{ music.user.username }} / {{ music.title }}
+					.divider
+					%a.fi-x.left{"ng-click" => "deleteItem(musics.id)"}
+						Delete
+					%p.right
+						Prix : {{ music.price }} €
+					%br
+		.large-block-grid-1.right
+			.divider
+			Total : {{ totalPrice }} €
 		.button.expand.radius.success{ "ng-click" => "toPayment()" }
 			{{ labels.DISPLAY_CART_BUY }}
+
+/ %cart{"ng-init" => "initFoundation()" }
+/ 	.row{"ng-init" => "showCart()"}
+/ 		%h1 {{ labels.DISPLAY_CART_LABEL }}
+/ 		%table
+/ 			%thead
+/ 				%tr
+/ 					%th{ colspan: '5' } Panier
+/ 			%tbody{"ng-repeat" => "musics in carts"}
+/ 				%tr{"ng-repeat" => "music in musics.musics"}
+/ 					%td {{ music.title }}
+/ 					%td
+/ 						%a.fi-x{"ng-click" => "deleteItem(musics.id)"}
+/ 				%tr{"ng-repeat" => "album in musics.albums"}
+/ 					%td{:width => 300}
+/ 						{{ album.title}}
+/ 					%td
+/ 						%a.fi-x{"ng-click" => "deleteItem(musics.id)"}
+

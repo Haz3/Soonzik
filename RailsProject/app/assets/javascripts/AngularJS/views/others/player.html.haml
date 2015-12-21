@@ -4,11 +4,11 @@
 			.controls
 				%a.hide-for-medium-up.toHide
 					%i.fi-eject
-				%a{ "ng-click" => "previous()" }
+				%a{ "ng-click" => "previous()", "ng-style" => "(activeUrl != null) ? {} : { color: 'gray' }" }
 					%i.fi-previous
-				%a{ "ng-click" => "pausePlayer()" }
+				%a{ "ng-click" => "pausePlayer()", "ng-style" => "(activeUrl != null) ? {} : { color: 'gray' }" }
 					%i{ "ng-class" => "(paused) ? 'fi-play' : 'fi-pause'" }
-				%a{ "ng-click" => "next()" }
+				%a{ "ng-click" => "next()", "ng-style" => "(activeUrl != null) ? {} : { color: 'gray' }" }
 					%i.fi-next
 				.volumeBlock
 					%a

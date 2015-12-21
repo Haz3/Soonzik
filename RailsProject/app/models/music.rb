@@ -111,11 +111,19 @@ class Music < ActiveRecord::Base
       }
     }
 
+    result = ActiveRecord::Base.connection.execute("SELECT COUNT(*), genre_id FROM musicalpasts WHERE user_id = #{user.id}")
+    result.each { |r|
+      if (r["COUNT(*)"] != 0)
+        genre = Genre.find_by_id(r["genre_id"].to_i)
+        gPond[genre] = (gPond.has_key?(genre)) ? gPond[genre] + 1 : 1
+      end
+    }
+
     # if our list is too small, we add a random genre to fill the suggestion list
     if (gPond.size < Genre.count)
       randomGenre = Genre.all
       gPond.each { |key, value|
-        randomGenre = randomGenre.where.not(id: key)
+        randomGenre = randomGenre.where.not(id: key.id)
       }
       randomGenre = randomGenre.offset(rand(randomGenre.size)).first
       gPond[randomGenre] = 0 if randomGenre != nil
@@ -158,7 +166,6 @@ class Music < ActiveRecord::Base
     else
       toRemove = Music.musicToJson Music.joins(purchased_musics: [:purchase]).where(["purchases.user_id = ?", u.id])
       interesting = Music.musicToJson Music.joins(:listenings).where(["listenings.user_id = ?", u.id])
-      puts interesting.inspect
       u.friends.each do |friend|
         interesting = interesting | (Music.musicToJson Music.joins(purchased_musics: [:purchase]).where(["purchases.user_id = ?", friend.id]))
         friend.listenings.limit(30).each do |listening|

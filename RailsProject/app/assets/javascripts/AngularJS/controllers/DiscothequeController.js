@@ -1,8 +1,15 @@
-SoonzikApp.controller('DiscothequeCtrl', ['$scope', 'SecureAuth', 'HTTPService', '$rootScope', 'NotificationService', function ($scope, SecureAuth, HTTPService, $rootScope, NotificationService) {
+SoonzikApp.controller('DiscothequeCtrl', ['$scope', 'SecureAuth', 'HTTPService', '$rootScope', 'NotificationService', '$modal', function ($scope, SecureAuth, HTTPService, $rootScope, NotificationService, $modal) {
 
 	$scope.loading = true;
 	$scope.user = false;
 	$scope.mymusic = { musics: [], albums: [], packs: [] };
+	$scope.display = {
+		selection: 'grid'
+	}
+	$scope.gridSelectedItem = {
+		object: null,
+		type: null
+	};
 
 	$scope.tooltip = false;
 	$scope.selectedMusic = null;
@@ -193,69 +200,88 @@ SoonzikApp.controller('DiscothequeCtrl', ['$scope', 'SecureAuth', 'HTTPService',
 		}
 	}
 
-	$scope.addToPlaylist = function() {
-		var playlist = false;
-
-		for (var i = 0 ; i < $scope.myPlaylists.length ; i++) {
-			if ($scope.myPlaylists[i].check == true)
-				playlist = $scope.myPlaylists[i];
-		}
-
-		if ($scope.user != false && $scope.selectedMusic != false && playlist != false) {
-			SecureAuth.securedTransaction(function(key, user_id) {
-				var parameters = {
-					secureKey: key,
-					user_id: user_id,
-					id: $scope.selectedMusic.id,
-					playlist_id: playlist.id
-				};
-				HTTPService.addToPlaylist(parameters).then(function(response) {
-					NotificationService.success("The music '" + $scope.selectedMusic.title + "' has been added to the playlist");
-					$rootScope.$broadcast("player:addToPlaylist", { playlist: playlist, music: $scope.selectedMusic });
-					$scope.selectedMusic = false;
-					$scope.tooltip = false;
-					playlist.check = false;
-				}, function(error) {
-					NotificationService.error($rootScope.labels.FILE_USER_ADD_PLAYLIST_ERROR_MESSAGE);
-				});
-			});
-		}
+	$scope.selectObject = function(obj, type) {
+		$scope.gridSelectedItem.object = obj;
+		$scope.gridSelectedItem.type = type;
 	}
 
-	$scope.selectMusic = function(music) {
-		if ($scope.selectedMusic == music) {
-			$scope.selectedMusic = false;
-		} else {
-			$scope.selectedMusic = music;
-		}
+
+	// For the edition of a music
+	$scope.openAlbum = function(album) {
+    var modalInstance = $modal.open({
+      templateUrl: '/assets/AngularJS/views/discotheque/modal_album.html.haml',
+      controller: 'ModalInstanceAlbumCtrl',
+      resolve: {
+      	album: function() {
+      		return album;
+      	},
+      	download: function() {
+      		return $scope.download;
+      	}
+      }
+    });
+    modalInstance.result.then(function () {
+    }, function () {
+    });
 	}
 
-	$scope.setTooltip = function(value) {
-		$scope.tooltip = value;
-		if ($scope.tooltip != false) {
-			for (var i = 0 ; i < $scope.myPlaylists.length ; i++) {
-				for (var j = 0 ; j < $scope.myPlaylists[i].musics.length ; j++) {
-					if (value.id == $scope.myPlaylists[i].musics[j].id) {
-						$scope.myPlaylists[i].check = true;
-					}
-				}
-			}
-		} else {
-			for (var i = 0 ; i < $scope.myPlaylists.length ; i++) {
- 				$scope.myPlaylists[i].check = false;
-			}
-			$scope.selectMusic(false);
-		}
+	// For the edition of a music
+	$scope.openPack = function(pack) {
+    var modalInstance = $modal.open({
+      templateUrl: '/assets/AngularJS/views/discotheque/modal_pack.html.haml',
+      controller: 'ModalInstancePackCtrl',
+      resolve: {
+      	pack: function() {
+      		return pack;
+      	}
+      }
+    });
+    modalInstance.result.then(function (album) {
+    	$scope.openAlbum(album);
+    }, function () {
+    });
 	}
+}]);
 
-	$scope.formatTime = function(duration) {
-		var min = ~~(duration / 60);
-		var sec = duration % 60;
 
-		if (min.toString().length == 1)
-			min = "0" + min;
-		if (sec.toString().length == 1)
-			sec = "0" + sec;
-		return min + ":" + sec;
-	}
+/*
+	*****************************
+	The modal for album
+	*****************************
+*/
+
+SoonzikApp.controller('ModalInstanceAlbumCtrl', ["$scope", "$modalInstance", "album", 'download', function ($scope, $modalInstance, album, download) {
+	$scope.album = album;
+	$scope.download = download;
+
+	// On the save button
+  $scope.ok = function () {
+		$modalInstance.close();
+  };
+
+  // On the background click
+  $scope.cancel = function () {
+    $modalInstance.dismiss('cancel');
+  };
+}]);
+
+
+/*
+	*****************************
+	The modal for pack
+	*****************************
+*/
+
+SoonzikApp.controller('ModalInstancePackCtrl', ["$scope", "$modalInstance", "pack", function ($scope, $modalInstance, pack) {
+	$scope.pack = pack;
+
+	// On the save button
+  $scope.ok = function (album) {
+		$modalInstance.close(album);
+  };
+
+  // On the background click
+  $scope.cancel = function () {
+    $modalInstance.dismiss('cancel');
+  };
 }]);

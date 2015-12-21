@@ -68,6 +68,8 @@ var labels = {
 
 	// Explorer Controller
 	FILE_EXPLORER_GET_INFLUENCES_ERROR_MESSAGE: "Error while loading the influences",
+	FILE_EXPLORER_GET_AMBIANCES_ERROR_MESSAGE: "Error while loading the ambiances",
+	FILE_EXPLORER_GET_AMBIANCE_ERROR_MESSAGE: "Error while loading the ambiance",
 	FILE_EXPLORER_GET_GENRE_ERROR_MESSAGE: "Error while loading the genre",
 
 	// Listening Controller
@@ -125,6 +127,9 @@ var labels = {
 	FILE_USER_GOOGLE_LINKED_ERROR_MESSAGE: "The Google Plus account is already linked to another SoonZik account",
 	FILE_USER_GOOGLE_LINK_ERROR_MESSAGE: "Can't link the social network to your profile, try again later.",
 	FILE_USER_GOOGLE_CONNECTION_ERROR_MESSAGE: "Can't connect to Google, please try later",
+	FILE_USER_SOUNDCLOUD_CONNECTION_ERROR_MESSAGE: "Can't connect to Soundcloud, please try later",
+	FILE_USER_MUSICAL_PAST_SUCCESS_MESSAGE: "We have your musical past, it will be use for better suggestions",
+	FILE_USER_MUSICAL_PAST_ERROR_MESSAGE: "We couldn't get your musical past, please try later",
 
 	// Security Controller
 	FILE_SECURITY_FAILED: "An error occured during the request",
@@ -146,6 +151,7 @@ var labels = {
 	// Explorer Index View
 	DISPLAY_EXPLORER_INDEX_LABEL: "Index",
 	DISPLAY_EXPLORER_INFLUENCE_CHOOSE_LABEL: "Choose an influence",
+	DISPLAY_EXPLORER_AMBIANCE_CHOOSE_LABEL: "Choose an ambiance",
 	DISPLAY_EXPLORER_GENRE_LABEL: "genres",
 
 	// Listening Index View
@@ -223,6 +229,8 @@ var labels = {
 	DISPLAY_USER_FORM_TWITTER_LOG_LABEL: "Login with Twitter",
 	DISPLAY_USER_FORM_GPLUS_LINK_LABEL: "Link your account with Google Plus :",
 	DISPLAY_USER_FORM_GPLUS_LOG_LABEL: "Login with Google Plus",
+	DISPLAY_USER_FORM_SOUNDCLOUD_LINK_LABEL: "Import your musical past from Soundcloud :",
+	DISPLAY_USER_FORM_SOUNDCLOUD_LOG_LABEL: "Get your favorites on Soundcloud",
 	DISPLAY_USER_FORM_LINKED_LABEL: "Your account is linked",
 	DISPLAY_USER_FORM_NUMBER_LABEL: "Number in the street",
 	DISPLAY_USER_FORM_COMPLEMENT_LABEL: "Complement",
@@ -274,10 +282,6 @@ var labels = {
 	FILE_CONCERT_FIND_CONCERT_ERROR_MESSAGE: "An error occured while loading the concerts",
 
 	// Discotheque Index view
-	DISPLAY_DISCOTHEQUE_ADD_PLAYLIST_LABEL: "Add to playlist",
-	DISPLAY_DISCOTHEQUE_ADD_PLAYLIST_BUTTON: "Add",
-	DISPLAY_DISCOTHEQUE_LISTEN_LABEL: "Listen",
-	DISPLAY_DISCOTHEQUE_CLOSE_LABEL: "Close",
 	DISPLAY_DISCOTHEQUE_NOTHING_LABEL: "Nothing found",
 	DISPLAY_DISCOTHEQUE_MUSIC_LABEL: "Your musics",
 	DISPLAY_DISCOTHEQUE_ALBUM_LABEL: "Your albums",

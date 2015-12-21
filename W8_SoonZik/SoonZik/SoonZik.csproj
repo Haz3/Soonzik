@@ -15,6 +15,10 @@
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{BC8A1FFA-BEE3-4634-8014-F334798102B3};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <ExpressionBlendVersion>12.0.50716.0</ExpressionBlendVersion>
+    <AppxAutoIncrementPackageRevision>True</AppxAutoIncrementPackageRevision>
+    <AppxBundlePlatforms>x86</AppxBundlePlatforms>
+    <PackageCertificateThumbprint>D68DC7B0DAF4070A517AD4C265412DB26C48B403</PackageCertificateThumbprint>
+    <PackageCertificateKeyFile>SoonZik_TemporaryKey.pfx</PackageCertificateKeyFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -133,6 +137,7 @@
     <Compile Include="Models\MusicOwnByUser.cs" />
     <Compile Include="Models\News.cs" />
     <Compile Include="Models\Newstexts.cs" />
+    <Compile Include="Models\Note.cs" />
     <Compile Include="Models\Notification.cs" />
     <Compile Include="Models\Pack.cs" />
     <Compile Include="Models\Playlist.cs" />
@@ -274,6 +279,8 @@
     <Content Include="Assets\googleplus_signin.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Assets\g_star.png" />
+    <Content Include="Assets\like.png" />
     <Content Include="Assets\Logo.scale-100.png" />
     <Content Include="Assets\music_player_icons\Mute.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -296,6 +303,7 @@
     <Content Include="Assets\music_player_icons\Volume.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Assets\o_star.png" />
     <Content Include="Assets\Paypal-Logo.png" />
     <Content Include="Assets\Record-Album-02.jpg" />
     <Content Include="Assets\SmallLogo.scale-100.png" />
@@ -329,8 +337,10 @@
     <Content Include="Assets\twitter_signin.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Assets\unlike.png" />
     <Content Include="Assets\user_profile.PNG" />
     <Content Include="Assets\Versus_sign.png" />
+    <Content Include="Assets\y_star.png" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
@@ -440,6 +450,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Common\ReadMe.txt" />
+    <None Include="SoonZik_TemporaryKey.pfx" />
     <PRIResource Include="fr-FR\Resources.resw" />
     <None Include="packages.config" />
   </ItemGroup>

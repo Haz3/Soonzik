@@ -28,11 +28,11 @@
                 <Border BorderThickness="0,0,0,1" BorderBrush="White" Width="380">
                     <Grid Height="70" Margin="20,0,0,0" Tapped="UIElement_OnTapped">
                         <Image x:Name="AlbumImage" Source="{Binding Path=imageAlbum}" Height="50"
-                           VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10,0,0,0" />
+                               VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10,0,0,0" />
                         <TextBlock x:Name="AlbunTitle" Text="{Binding Path=title}" FontSize="25" Foreground="White"
-                               HorizontalAlignment="Center" VerticalAlignment="Top" />
+                                   HorizontalAlignment="Center" VerticalAlignment="Top" />
                         <TextBlock x:Name="NbrTitre" Text="{Binding NbrTitres}" FontSize="20" Foreground="White"
-                               HorizontalAlignment="Center" VerticalAlignment="Bottom" />
+                                   HorizontalAlignment="Center" VerticalAlignment="Bottom" />
                     </Grid>
                 </Border>
             </DataTemplate>
@@ -40,31 +40,32 @@
 
         <Grid Grid.Row="0">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="200"/>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="200" />
             </Grid.ColumnDefinitions>
             <Grid Column="0">
                 <TextBlock x:Name="ArtisteName" Text="{Binding TheArtiste.username}" FontSize="30"
-                       VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,10,0,0"/>
+                           VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,10,0,0" />
                 <TextBlock x:Name="ArtistName" Text="{Binding NbrFollowers}" FontSize="20"
-                       VerticalAlignment="Top" HorizontalAlignment="Center"/>
+                           VerticalAlignment="Top" HorizontalAlignment="Center" />
                 <Button VerticalAlignment="Bottom" HorizontalAlignment="Center" Content="{Binding FollowText}"
-                    Command="{Binding FollowCommand}" />
+                        Command="{Binding FollowCommand}" />
                 <Button Grid.Row="0" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="0,0,0,50"
-                    Content="{Binding ButtonFriendText}"
-                    Command="{Binding AddCommand}" />
+                        Content="{Binding ButtonFriendText}"
+                        Command="{Binding AddCommand}" />
             </Grid>
 
             <Grid Column="1">
                 <Ellipse Height="180" Width="180" HorizontalAlignment="Center">
                     <Ellipse.Fill>
-                        <ImageBrush ImageSource="{Binding TheArtiste.profilImage}" AlignmentX="Center" AlignmentY="Center" />
+                        <ImageBrush ImageSource="{Binding TheArtiste.profilImage}" AlignmentX="Center"
+                                    AlignmentY="Center" />
                     </Ellipse.Fill>
                 </Ellipse>
             </Grid>
 
         </Grid>
         <ListBox Grid.Row="1" x:Name="MusicListView" ItemsSource="{Binding ListAlbums}" Background="Transparent"
-                  ItemTemplate="{StaticResource AlbumTemplate}" SelectedItem="{Binding TheAlbum, Mode=TwoWay}" />
+                 ItemTemplate="{StaticResource AlbumTemplate}" SelectedItem="{Binding TheAlbum, Mode=TwoWay}" />
     </Grid>
 </Page>

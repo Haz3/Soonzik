@@ -120,14 +120,18 @@ is : “3uNi@rCK$L$om40dNnhX)#jV2$40wwbr_bAK99%E”</p>
 <ul><li>
 <p><code>id</code> - (integer) - The ID of the object</p>
 </li><li>
-<p><code>name</code> - (string) - The name of the group</p>
+<p><code>provider</code> - (string) - The name of the website</p>
+</li><li>
+<p><code>user_id</code> - (integer) - Our user_id</p>
+</li><li>
+<p><code>uid</code> - (integer) - The user_id on the website</p>
+</li><li>
+<p><code>token</code> - (string) - The token for auth</p>
 </li></ul>
 
 <h4 id="class-Identity-label-Associations">Associations<span><a href="#class-Identity-label-Associations">&para;</a> <a href="#top">&uarr;</a></span></h4>
 <ul><li>
-<p><code>has_many</code> - :accesses (Not sure if we will keep it)</p>
-</li><li>
-<p><code>has_and_belongs_to_many</code> - :users</p>
+<p><code>belongs_to</code> - :user</p>
 </li></ul>
 		</section>
 
@@ -166,7 +170,7 @@ is : “3uNi@rCK$L$om40dNnhX)#jV2$40wwbr_bAK99%E”</p>
 											<p>Find or create an user by the oauth value</p>					
 											<div class="method-source-code" id="find_for_oauth-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/models/identity.rb, line 29</span>
+								class="language-ruby"><span class="ruby-comment"># File app/models/identity.rb, line 31</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">find_for_oauth</span>(<span class="ruby-identifier">auth</span>)
   <span class="ruby-identifier">find_or_create_by</span>(<span class="ruby-identifier">uid</span><span class="ruby-operator">:</span> <span class="ruby-identifier">auth</span>.<span class="ruby-identifier">uid</span>, <span class="ruby-identifier">provider</span><span class="ruby-operator">:</span> <span class="ruby-identifier">auth</span>.<span class="ruby-identifier">provider</span>)
 <span class="ruby-keyword">end</span></code></pre>
@@ -188,7 +192,7 @@ is : “3uNi@rCK$L$om40dNnhX)#jV2$40wwbr_bAK99%E”</p>
 											<p>Return a new random token</p>					
 											<div class="method-source-code" id="tokenGenerator-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/models/identity.rb, line 43</span>
+								class="language-ruby"><span class="ruby-comment"># File app/models/identity.rb, line 45</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">tokenGenerator</span>
               <span class="ruby-identifier">sha256</span> = <span class="ruby-constant">Digest</span><span class="ruby-operator">::</span><span class="ruby-constant">SHA1</span>.<span class="ruby-identifier">new</span>
 
@@ -200,6 +204,43 @@ is : “3uNi@rCK$L$om40dNnhX)#jV2$40wwbr_bAK99%E”</p>
 
   <span class="ruby-keyword">return</span> <span class="ruby-identifier">sha256</span>.<span class="ruby-identifier">hexdigest</span> <span class="ruby-identifier">key</span>
       <span class="ruby-keyword">end</span></code></pre>
+						</div>
+										</div>
+
+					
+									</div>
+								<a name="method-c-updateOrCreate">anchor</a>
+				<div id="method-c-updateOrCreate-doc" class="method">
+
+					<header>
+											<i class="icon-generic"></i>
+						<span class="method-name">updateOrCreate</span><span 
+							class="method-args">(user_id, provider, uid)</span>
+										</header>
+
+					<div class="method-description">
+											<p>Create an identity if doesn&#39;t exist, or update the old one</p>					
+											<div class="method-source-code" id="updateOrCreate-source">
+							<pre class="prettyprint linenums"><code 
+								class="language-ruby"><span class="ruby-comment"># File app/models/identity.rb, line 58</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">updateOrCreate</span>(<span class="ruby-identifier">user_id</span>, <span class="ruby-identifier">provider</span>, <span class="ruby-identifier">uid</span>)
+  <span class="ruby-identifier">obj</span> = <span class="ruby-constant">Identity</span>.<span class="ruby-identifier">where</span>(<span class="ruby-identifier">provider</span><span class="ruby-operator">:</span> <span class="ruby-identifier">provider</span>).<span class="ruby-identifier">where</span>(<span class="ruby-identifier">user_id</span><span class="ruby-operator">:</span> <span class="ruby-identifier">user_id</span>).<span class="ruby-identifier">first</span>
+
+  <span class="ruby-keyword">if</span> (<span class="ruby-identifier">obj</span> <span class="ruby-operator">==</span> <span class="ruby-keyword">nil</span>)
+    <span class="ruby-identifier">o</span> = <span class="ruby-constant">Identity</span>.<span class="ruby-identifier">new</span>
+    <span class="ruby-identifier">o</span>.<span class="ruby-identifier">uid</span> = <span class="ruby-identifier">uid</span>
+    <span class="ruby-identifier">o</span>.<span class="ruby-identifier">provider</span> = <span class="ruby-identifier">provider</span>
+    <span class="ruby-identifier">o</span>.<span class="ruby-identifier">user_id</span> = <span class="ruby-identifier">user_id</span>
+    <span class="ruby-identifier">o</span>.<span class="ruby-identifier">save</span>
+
+    <span class="ruby-keyword">return</span> <span class="ruby-identifier">o</span>
+  <span class="ruby-keyword">elsif</span> (<span class="ruby-identifier">obj</span>.<span class="ruby-identifier">uid</span> <span class="ruby-operator">!=</span> <span class="ruby-identifier">uid</span>.<span class="ruby-identifier">to_i</span>)
+    <span class="ruby-identifier">obj</span>.<span class="ruby-identifier">uid</span> = <span class="ruby-identifier">uid</span>
+    <span class="ruby-identifier">obj</span>.<span class="ruby-identifier">save</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">obj</span>
+<span class="ruby-keyword">end</span></code></pre>
 						</div>
 										</div>
 
@@ -231,7 +272,7 @@ is : “3uNi@rCK$L$om40dNnhX)#jV2$40wwbr_bAK99%E”</p>
 											<p>Create a new token</p>					
 											<div class="method-source-code" id="newToken-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/models/identity.rb, line 34</span>
+								class="language-ruby"><span class="ruby-comment"># File app/models/identity.rb, line 36</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">newToken</span>
       <span class="ruby-identifier">key</span> = <span class="ruby-keyword">nil</span>
       <span class="ruby-keyword">begin</span>
@@ -320,6 +361,7 @@ is : “3uNi@rCK$L$om40dNnhX)#jV2$40wwbr_bAK99%E”</p>
 			<li><a href="./Message.html">Message</a></li>
 			<li><a href="./Music.html">Music</a></li>
 			<li><a href="./MusicNote.html">MusicNote</a></li>
+			<li><a href="./Musicalpast.html">Musicalpast</a></li>
 			<li><a href="./News.html">News</a></li>
 			<li><a href="./NewsTitle.html">NewsTitle</a></li>
 			<li><a href="./Newslike.html">Newslike</a></li>

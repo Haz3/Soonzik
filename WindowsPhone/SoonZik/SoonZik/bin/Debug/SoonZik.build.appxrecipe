@@ -106,12 +106,6 @@
     <AppxPackagedFile Include="C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\packages\TweetinviAPI.0.9.10.0\lib\portable-net40+sl5+wp80+win8+wpa81\Tweetinvi.WebLogic.dll">
       <PackagePath>Tweetinvi.WebLogic.dll</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\WebSocketRails-WP-master\WebSocketRails-WP\Bin\Debug\WebSocketRails.dll">
-      <PackagePath>WebSocketRails.dll</PackagePath>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\WebSocketRails-WP-master\WebSocketRails-WP\Bin\Debug\WebSocket4Net.dll">
-      <PackagePath>WebSocket4Net.dll</PackagePath>
-    </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\packages\Microsoft.Net.Http.2.2.29\lib\wpa81\System.Net.Http.Extensions.dll">
       <PackagePath>System.Net.Http.Extensions.dll</PackagePath>
     </AppxPackagedFile>

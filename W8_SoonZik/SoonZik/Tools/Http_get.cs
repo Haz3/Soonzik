@@ -14,8 +14,8 @@ namespace SoonZik.Tools
 {
     public class Http_get
     {
-        static string url = "http://api.lvh.me:3000/";
-        //static string url = "http://soonzikapi.herokuapp.com/";
+        static string url = Singleton.Instance.url;
+        //public static string url = "http://api.lvh.me:3000/";
 
         public static async Task<User> get_user_by_username(string username)
         {
@@ -90,6 +90,31 @@ namespace SoonZik.Tools
                 await new MessageDialog(exception.Message, "Get data error").ShowAsync();
             return null;
         }
+
+        public static async Task<string> get_note(string elem)
+        {
+            Exception exception = null;
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url + elem);
+            request.Method = "GET";
+            request.ContentType = "application/json; charset=utf-8";
+
+            try
+            {
+                HttpWebResponse response = (HttpWebResponse)await request.GetResponseAsync();
+                var reader = new StreamReader(response.GetResponseStream());
+                var json = JObject.Parse(reader.ReadToEnd()).SelectToken("content").ToString();
+                return json;
+            }
+            catch (WebException ex)
+            {
+                exception = ex;
+            }
+
+            if (exception != null)
+                await new MessageDialog(exception.Message, "Get note error").ShowAsync();
+            return null;
+        }
+
 
         // DESERIALIZE AND EVERYTHING
         public static async Task<object> get_object(object Object, string elem)

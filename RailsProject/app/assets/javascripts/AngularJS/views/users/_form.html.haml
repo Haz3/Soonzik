@@ -100,7 +100,7 @@
 				%hr
 				.actions.text-center
 					.large-4.large-centered
-						%input.button.radius.expand.success{ id: "", type: "button", value: "Save", "ng-click" => "submitForm('user')" }
+						%input.button.radius.expand.success{ id: "", type: "button", value: "{{ labels.DISPLAY_USER_SAVE_BUTTON }}", "ng-click" => "submitForm('user')" }
 				.small-12.clearfix
 					%p {{ labels.DISPLAY_USER_FORM_LINKS_LABEL }}
 					.small-12.medium-5.columns
@@ -122,6 +122,10 @@
 						%span#signinButton{ "ng-if" => "form.identities.google == null" }
 							%plus{:action => "connect", :callback => "onSignInCallback", :clientid => "793685873206-mtbd8bm2gvskccm5rnnnkod5n6q7dqpv.apps.googleusercontent.com", :scope => "https://www.googleapis.com/auth/plus.me"}
 							%google-plus-signin{ "ng-init" => "googleCallback()", :clientid => "793685873206-mtbd8bm2gvskccm5rnnnkod5n6q7dqpv.apps.googleusercontent.com" }
+					.small-12.medium-5.columns
+						%label {{ labels.DISPLAY_USER_FORM_SOUNDCLOUD_LINK_LABEL }}
+					.small-12.medium-7.columns
+						.button.tiny.primary{ "ng-click" => "connectSoundcloud()" } {{ labels.DISPLAY_USER_FORM_SOUNDCLOUD_LOG_LABEL }}
 				%hr
 				.row
 					.small-12.medium-5.columns

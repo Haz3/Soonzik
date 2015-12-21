@@ -307,6 +307,12 @@ var SearchIndex =
 		"type": "normalclass"
 	},
 	{
+		"name": "Musicalpast",
+		"link": "Musicalpast.html",
+		"snippet": "<p>The model of the object Musicalpast Contain the relation and the validation\nCan provide some features …\n",
+		"type": "normalclass"
+	},
+	{
 		"name": "News",
 		"link": "News.html",
 		"snippet": "<p>The model of the object News Contain the relation and the validation Can\nprovide some features linked …\n",
@@ -883,6 +889,12 @@ var SearchIndex =
 		"type": "anymethod"
 	},
 	{
+		"name": "getMusicalPast",
+		"link": "API/SuggestionsController.html#method-i-getMusicalPast",
+		"snippet": "<p>Give a list of music based on the purchases\n<p>Route : /musicalPast\n<p><code>soundcloud_id</code> - ID of the soundcloud user …\n",
+		"type": "anymethod"
+	},
+	{
 		"name": "index",
 		"link": "API/TweetsController.html#method-i-index",
 		"snippet": "<p>Retrieve all the tweets\n<p>Route : /tweets\n<p>Options\n",
@@ -1018,6 +1030,12 @@ var SearchIndex =
 		"name": "linkSocial",
 		"link": "API/UsersController.html#method-i-linkSocial",
 		"snippet": "<p>To link an account with a social network\n<p>Route : /users/linkSocial\n<p>Options\n",
+		"type": "anymethod"
+	},
+	{
+		"name": "getIdentities",
+		"link": "API/UsersController.html#method-i-getIdentities",
+		"snippet": "<p>To get the differents identities of an user\n<p>Route : /users/linkSocial\n<p>Options\n",
 		"type": "anymethod"
 	},
 	{
@@ -1261,6 +1279,12 @@ var SearchIndex =
 		"type": "anymethod"
 	},
 	{
+		"name": "updateOrCreate",
+		"link": "Identity.html#method-c-updateOrCreate",
+		"snippet": "<p>Create an identity if doesn&#39;t exist, or update the old one\n",
+		"type": "anymethod"
+	},
+	{
 		"name": "miniKey",
 		"link": "Influence.html#method-c-miniKey",
 		"snippet": "<p>Filter of information for the API\n<p>Fields returned : [:id, :name]\n",
@@ -1371,6 +1395,12 @@ var SearchIndex =
 	{
 		"name": "music_note_params",
 		"link": "MusicNote.html#method-c-music_note_params",
+		"snippet": "<p>The strong parameters to save or update object\n",
+		"type": "anymethod"
+	},
+	{
+		"name": "music_params",
+		"link": "Musicalpast.html#method-c-music_params",
 		"snippet": "<p>The strong parameters to save or update object\n",
 		"type": "anymethod"
 	},

@@ -1,8 +1,6 @@
 SoonzikApp.controller('CartCtrl', ['$scope', 'SecureAuth', 'HTTPService', '$timeout', 'NotificationService', '$rootScope', function ($scope, SecureAuth, HTTPService, $timeout, NotificationService, $rootScope) {
 
 	$scope.loading = true;
-	$scope.haveAlbum = false;
-	$scope.haveMusic = false;
 
 	/*
 	**	Fonction d'init de foundation.
@@ -25,13 +23,17 @@ SoonzikApp.controller('CartCtrl', ['$scope', 'SecureAuth', 'HTTPService', '$time
 			];
 
 			HTTPService.showCart(parameters).then(function(response) {
-				
+
 				$scope.carts = response.data.content;
-				console.log($scope.carts);
 				if ($scope.carts) {
 					$scope.showItem = true;
 				} else {
 					$scope.showItem = false;
+				}
+
+				for (var i = 0; i < $scope.carts.length ; i++) {
+					$scope.totalPrice += $scope.carts[i].price;
+					console.log($scope.carts.price);
 				}
 
 			}, function(repsonseError) {
@@ -45,7 +47,7 @@ SoonzikApp.controller('CartCtrl', ['$scope', 'SecureAuth', 'HTTPService', '$time
 
 	$scope.deleteItem = function (cart_id) {
 		SecureAuth.securedTransaction(function(key, id) {
-			
+
 			var parameters = [
 				{ key: "secureKey" ,value: key },
 				{ key: "user_id", value: id },

@@ -5,15 +5,18 @@ using System.Globalization;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Windows.ApplicationModel.Core;
+using Windows.Data.Xml.Dom;
 using Windows.Storage;
+using Windows.Storage.Streams;
 using Windows.UI.Core;
+using Windows.UI.Notifications;
 using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Coding4Fun.Toolkit.Controls;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using Newtonsoft.Json;
 using SoonZik.Controls;
-using SoonZik.Helpers;
 using SoonZik.HttpRequest;
 using SoonZik.HttpRequest.Poco;
 using SoonZik.Utils;
@@ -33,11 +36,12 @@ namespace SoonZik.ViewModel
             LoadedCommand = new RelayCommand(UpdateFriend);
             SendTweet = new RelayCommand(SendTweetExecute);
 
+            _conversation = new ObservableCollection<Message>();
             Sources = new ObservableCollection<User>();
             ItemSource = new ObservableCollection<AlphaKeyGroups<User>>();
             CurrentUser = Singleton.Singleton.Instance().CurrentUser;
 
-            if (_localSettings != null && (string)_localSettings.Values["SoonZikAlreadyConnect"] == "yes")
+            if (_localSettings != null && (string) _localSettings.Values["SoonZikAlreadyConnect"] == "yes")
             {
                 Sources = Singleton.Singleton.Instance().CurrentUser.friends;
                 ItemSource = AlphaKeyGroups<User>.CreateGroups(Sources, CultureInfo.CurrentUICulture, s => s.username,
@@ -49,6 +53,111 @@ namespace SoonZik.ViewModel
         #endregion
 
         #region Method
+
+        public static void LoadConversation()
+        {
+            ValidateKey.GetValideKey();
+            var get = new HttpRequestGet();
+            var res = get.FindConversation(new List<Message>(), Singleton.Singleton.Instance().SecureKey,
+                Singleton.Singleton.Instance().CurrentUser.id.ToString());
+            res.ContinueWith(delegate(Task<object> tmp2)
+            {
+                var result = tmp2.Result as List<Message>;
+                if (result != null)
+                {
+                    _conversation = new ObservableCollection<Message>(result);
+                    CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
+                        CheckConversation);
+                }
+            });
+        }
+
+        private static async void AgileCallback()
+        {
+            // Serialize our Product class into a string             
+            var jsonContents = JsonConvert.SerializeObject(_conversation);
+            // Get the app data folder and create or replace the file we are storing the JSON in.            
+            var localFolder = ApplicationData.Current.LocalFolder;
+            var textFile = await localFolder.CreateFileAsync("conversations",
+                CreationCollisionOption.ReplaceExisting);
+            // Open the file...      
+            using (var textStream = await textFile.OpenAsync(FileAccessMode.ReadWrite))
+            {
+                // write the JSON string!
+                using (var textWriter = new DataWriter(textStream))
+                {
+                    textWriter.WriteString(jsonContents);
+                    await textWriter.StoreAsync();
+                }
+            }
+        }
+
+
+        private static async void CheckConversation()
+        {
+            var localFolder = ApplicationData.Current.LocalFolder;
+            try
+            {
+                // Getting JSON from file if it exists, or file not found exception if it does not  
+                var textFile = await localFolder.GetFileAsync("conversations");
+                if (textFile == null)
+                {
+                    var localFolder2 = ApplicationData.Current.LocalFolder;
+                    textFile = await localFolder2.CreateFileAsync("conversations",
+                        CreationCollisionOption.ReplaceExisting);
+                }
+                using (IRandomAccessStream textStream = await textFile.OpenReadAsync())
+                {
+                    // Read text stream     
+                    using (var textReader = new DataReader(textStream))
+                    {
+                        //get size                       
+                        var textLength = (uint) textStream.Size;
+                        await textReader.LoadAsync(textLength);
+                        // read it                    
+                        var jsonContents = textReader.ReadString(textLength);
+                        // deserialize back to our product!  
+                        var getConv = JsonConvert.DeserializeObject<ObservableCollection<Message>>(jsonContents);
+                        if (getConv.Count == _conversation.Count)
+                        {
+                            return;
+                        }
+                        AgileCallback();
+                        var newList = new ObservableCollection<Message>();
+                        for (var i = getConv.Count; i < _conversation.Count; i++)
+                        {
+                            if (_conversation[i].user_id != Singleton.Singleton.Instance().CurrentUser.id)
+                                newList.Add(_conversation[i]);
+                        }
+                        var req = new HttpRequestGet();
+                        foreach (var message in newList)
+                        {
+                            var user = req.GetObject(new User(), "users", message.user_id.ToString());
+                            user.ContinueWith(delegate(Task<object> task)
+                            {
+                                var res = task.Result as User;
+                                if (res != null)
+                                {
+                                    var toastType = ToastTemplateType.ToastText02;
+                                    var toastXml = ToastNotificationManager.GetTemplateContent(toastType);
+                                    var toastTextElement = toastXml.GetElementsByTagName("text");
+                                    toastTextElement[0].AppendChild(
+                                        toastXml.CreateTextNode("New Message from " + res.username));
+                                    var toastNode = toastXml.SelectSingleNode("/toast");
+                                    ((XmlElement) toastNode).SetAttribute("duration", "long");
+                                    var toast = new ToastNotification(toastXml);
+                                    ToastNotificationManager.CreateToastNotifier().Show(toast);
+                                }
+                            });
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                var Text = "Exception: " + ex.Message;
+            }
+        }
 
         private void Execute()
         {
@@ -72,6 +181,7 @@ namespace SoonZik.ViewModel
         {
             Sources = Singleton.Singleton.Instance().CurrentUser.friends;
             ItemSource = AlphaKeyGroups<User>.CreateGroups(Sources, CultureInfo.CurrentUICulture, s => s.username, true);
+            //LoadConversation();
         }
 
         private void TweetCommandExecute()
@@ -158,6 +268,7 @@ namespace SoonZik.ViewModel
             }
         }
 
+        private static ObservableCollection<Message> _conversation;
         private ObservableCollection<Tweets> _listTweets;
 
         public ObservableCollection<Tweets> ListTweets

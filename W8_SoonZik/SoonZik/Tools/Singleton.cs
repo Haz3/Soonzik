@@ -11,9 +11,18 @@ namespace SoonZik.Tools
     {
         private static Singleton instance = null;
 
+        public string url = "http://api.lvh.me:3000/";
+        //public string url = "http://soonzikapi.herokuapp.com/";
+
         public User Current_user;
+
+        // For secureKey
         public string secureKey { get; set; }
         public DateTime compare_date { get; set; }
+
+        //// For Facebook Connection ::: NOPE, USELESS
+        //public string fb_id { get; set; }
+        //public string fb_token { get; set; }
 
         // Private ctor
         private Singleton(){}

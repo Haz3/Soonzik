@@ -19,6 +19,7 @@ module API
 	# * getFollowers [get]
 	# * uploadImg	 [post] - SECURE
 	# * linkSocial	[post] - SECURE
+	# * getIdentities	[get] - SECURE
 	#
 	class UsersController < ApisecurityController
 		# Retrieve all the users
@@ -850,6 +851,37 @@ module API
 			end
       sendJson
 		end
+
+		# To get the differents identities of an user
+		# 
+		# Route : /users/linkSocial
+		#
+		# ==== Options
+		#
+		# * +provider+ - Name of the social network : "facebook" | "twitter" | "google"
+    # * +uid+ - Id from the social network
+		#
+		# ==== HTTP VALUE
+		#
+		# - +200+ - In case of success, return the different identities of an user
+    # - +401+ - It is not a secured transaction
+		# - +503+ - Error from server
+		#
+	  def getIdentities
+	  	begin
+				if (@security)
+					u = User.find_by_id(@user_id)
+					@returnValue = { content: u.identities.as_json(except: [:created_at, :updated_at]) }
+				else
+					codeAnswer 500
+					defineHttp :forbidden
+				end
+	  	rescue
+				codeAnswer 504
+				defineHttp :service_unavailable
+	  	end
+      sendJson
+	  end
 
 		private
 		# Common code for save/update (private method)

@@ -69,10 +69,13 @@ SoonzikApp.config(['$routeProvider', '$locationProvider', '$httpProvider', funct
 		}).when('/explorer', {
 			templateUrl: '<%= asset_path("AngularJS/views/explorer/index.html.haml") %>',
 			controller: 'ExplorerCtrl'
-		}).when('/explorer/:influence', {
+		}).when('/explorer/influence/:influence', {
 			templateUrl: '<%= asset_path("AngularJS/views/explorer/index.html.haml") %>',
 			controller: 'ExplorerCtrl'
-		}).when('/explorer/:influence/:genre', {
+		}).when('/explorer/influence/:influence/:genre', {
+			templateUrl: '<%= asset_path("AngularJS/views/explorer/index.html.haml") %>',
+			controller: 'ExplorerCtrl'
+		}).when('/explorer/ambiance/:ambiance', {
 			templateUrl: '<%= asset_path("AngularJS/views/explorer/index.html.haml") %>',
 			controller: 'ExplorerCtrl'
 		}).when('/albums/:id', {

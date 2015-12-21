@@ -2,7 +2,7 @@ module API
   # Controller which manage the transaction for the Feedbacks objects
   # Here is the list of action available :
   #
-  # * index       [get]
+  # * save       [post]
   class FeedbacksController < ApisecurityController
 
 
@@ -13,14 +13,14 @@ module API
     # ==== Options
     # 
     # * +:feedback [email]+ - Mail to contact
-    # * +:feedback [type_obj]+ - Type of the issue - Need to be one of this value : "bug", "payment", "account", "other"
+    # * +:feedback [type_object]+ - Type of the issue - Need to be one of this value : "bug", "payment", "account", "other"
     # * +:feedback [object]+ - Object of the feedback
     # * +:feedback [text]+ - Text of the feedback
     # 
     # ===== HTTP VALUE
     # 
-    # - +201+ - In case of success, return the saved object including its musics (which includes its albums and artist) and user
-    # - +503+ - Error from server
+    # - +201+ - In case of success, return nothing
+    # - +503+ - Error from server, return nothing if there is an error from us, or the error why it didn't save
     # 
     def save
       begin

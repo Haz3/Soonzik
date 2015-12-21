@@ -44,16 +44,6 @@ class UsersController < ApplicationController
     end
   end
 
-  def getIdentities
-    respond_to do |format|
-      if user_signed_in?
-        format.json { render :json => current_user.identities.as_json() }
-      else
-        format.json { render :json => {}, status: :forbidden }
-      end
-    end
-  end
-
   def friendlist
   end
   

@@ -14,7 +14,6 @@ using Windows.UI.Xaml.Media.Imaging;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using SoonZik.Controls;
-using SoonZik.Helpers;
 using SoonZik.HttpRequest;
 using SoonZik.HttpRequest.Poco;
 using SoonZik.Utils;
@@ -35,8 +34,8 @@ namespace SoonZik.ViewModel
 
         #endregion
 
-
         #region Attribute
+
         private string _likes;
 
         public string Likes
@@ -48,8 +47,9 @@ namespace SoonZik.ViewModel
                 RaisePropertyChanged("Likes");
             }
         }
+
         public static News TheNews { get; set; }
-        private bool share = false;
+        private bool share;
         public static Popup SharePopup { get; set; }
 
         public ICommand ShareTapped { get; set; }
@@ -127,6 +127,7 @@ namespace SoonZik.ViewModel
         #endregion
 
         #region Method
+
         private void SelectionCommandExecute()
         {
             SelectNews = TheNews;
@@ -257,11 +258,11 @@ namespace SoonZik.ViewModel
             share = true;
             SharePopup = new Popup();
             var content = new NewsSharePopup(SelectNews);
-            double width = content.Width;
-            double height = content.Height;
+            var width = content.Width;
+            var height = content.Height;
             SharePopup.Child = content;
-            SharePopup.VerticalOffset = (Window.Current.Bounds.Height - height) / 2;
-            SharePopup.HorizontalOffset = (Window.Current.Bounds.Width - width) / 2;
+            SharePopup.VerticalOffset = (Window.Current.Bounds.Height - height)/2;
+            SharePopup.HorizontalOffset = (Window.Current.Bounds.Width - width)/2;
             SharePopup.IsOpen = true;
             SharePopup.Closed += SharePopupOnClosed;
         }

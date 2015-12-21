@@ -116,6 +116,8 @@ the list of action available :</p>
 <p>show        [get] - SECURE</p>
 </li><li>
 <p>showTwo     [get] - SECURE OR NOT !</p>
+</li><li>
+<p>getMusicalPast [post] - SECURE</p>
 </li></ul>
 		</section>
 
@@ -137,6 +139,105 @@ the list of action available :</p>
 					<h3>Public Instance Methods</h3>
 				</header>
 
+								<a name="method-i-getMusicalPast">anchor</a>
+				<div id="method-i-getMusicalPast-doc" class="method">
+
+					<header>
+											<i class="icon-generic"></i>
+						<span class="method-name">getMusicalPast</span><span 
+							class="method-args">()</span>
+										</header>
+
+					<div class="method-description">
+											<p>Give a list of music based on the purchases</p>
+
+<p>Route : /musicalPast</p>
+<ul><li>
+<p><code>soundcloud_id</code> - ID of the soundcloud user</p>
+</li></ul>
+
+<h5 id="method-i-getMusicalPast-label-HTTP+VALUE">HTTP VALUE<span><a href="#method-i-getMusicalPast-label-HTTP+VALUE">&para;</a> <a href="#top">&uarr;</a></span></h5>
+<ul><li>
+<p><code>200</code> - In case of success, return nothing</p>
+</li><li>
+<p><code>401</code> - It is not a secured transaction</p>
+</li><li>
+<p><code>403</code> - The id has not been provided</p>
+</li><li>
+<p><code>404</code> - Can&#39;t find anything with this id</p>
+</li><li>
+<p><code>503</code> - Error from server</p>
+</li></ul>					
+											<div class="method-source-code" id="getMusicalPast-source">
+							<pre class="prettyprint linenums"><code 
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/suggestions_controller.rb, line 113</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">getMusicalPast</span>
+  <span class="ruby-keyword">begin</span>
+    <span class="ruby-keyword">if</span> (<span class="ruby-operator">!</span><span class="ruby-ivar">@soundcloud_id</span>.<span class="ruby-identifier">present?</span>)
+        <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">504</span>
+        <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:bad_request</span>
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@security</span>)
+        <span class="ruby-identifier">u</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">find_by_id</span>(<span class="ruby-ivar">@user_id</span>)
+        <span class="ruby-identifier">g</span> = <span class="ruby-constant">Genre</span>.<span class="ruby-identifier">all</span>
+
+        <span class="ruby-constant">Identity</span>.<span class="ruby-identifier">updateOrCreate</span>(<span class="ruby-ivar">@user_id</span>, <span class="ruby-string">&#39;soundcloud&#39;</span>, <span class="ruby-ivar">@soundcloud_id</span>)
+
+        <span class="ruby-identifier">uri</span> = <span class="ruby-constant">URI</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-node">&quot;https://api-v2.soundcloud.com/users/#{@soundcloud_id}/likes&quot;</span>)
+        <span class="ruby-identifier">http</span> = <span class="ruby-constant">Net</span><span class="ruby-operator">::</span><span class="ruby-constant">HTTP</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">uri</span>.<span class="ruby-identifier">host</span>, <span class="ruby-identifier">uri</span>.<span class="ruby-identifier">port</span>)
+        <span class="ruby-identifier">http</span>.<span class="ruby-identifier">use_ssl</span> = <span class="ruby-keyword">true</span>
+        <span class="ruby-identifier">http</span>.<span class="ruby-identifier">verify_mode</span> = <span class="ruby-constant">OpenSSL</span><span class="ruby-operator">::</span><span class="ruby-constant">SSL</span><span class="ruby-operator">::</span><span class="ruby-constant">VERIFY_NONE</span>
+        <span class="ruby-identifier">request</span> = <span class="ruby-constant">Net</span><span class="ruby-operator">::</span><span class="ruby-constant">HTTP</span><span class="ruby-operator">::</span><span class="ruby-constant">Get</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">uri</span>.<span class="ruby-identifier">request_uri</span>)
+        <span class="ruby-identifier">response</span> = <span class="ruby-identifier">http</span>.<span class="ruby-identifier">request</span>(<span class="ruby-identifier">request</span>)
+        <span class="ruby-identifier">hash</span> = <span class="ruby-constant">JSON</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">response</span>.<span class="ruby-identifier">body</span>)[<span class="ruby-string">&#39;collection&#39;</span>]
+
+        <span class="ruby-identifier">soundcloud_ids</span> = []
+        <span class="ruby-identifier">soundcloud_objects</span> = []
+
+        <span class="ruby-identifier">hash</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span>
+          <span class="ruby-identifier">soundcloud_ids</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">x</span>[<span class="ruby-string">&#39;track&#39;</span>][<span class="ruby-string">&#39;id&#39;</span>]
+          <span class="ruby-identifier">soundcloud_objects</span> <span class="ruby-operator">&lt;&lt;</span> { <span class="ruby-identifier">soundcloud_id</span><span class="ruby-operator">:</span> <span class="ruby-identifier">x</span>[<span class="ruby-string">&#39;track&#39;</span>][<span class="ruby-string">&#39;id&#39;</span>], <span class="ruby-identifier">genre</span><span class="ruby-operator">:</span> <span class="ruby-identifier">x</span>[<span class="ruby-string">&#39;track&#39;</span>][<span class="ruby-string">&#39;genre&#39;</span>], <span class="ruby-identifier">title</span><span class="ruby-operator">:</span> <span class="ruby-identifier">x</span>[<span class="ruby-string">&#39;track&#39;</span>][<span class="ruby-string">&#39;title&#39;</span>] }
+        <span class="ruby-keyword">end</span>
+
+        <span class="ruby-identifier">past</span> = <span class="ruby-constant">Musicalpast</span>.<span class="ruby-identifier">where</span>(<span class="ruby-identifier">user_id</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@user_id</span>).<span class="ruby-identifier">where</span>(<span class="ruby-identifier">soundcloud_music_id</span><span class="ruby-operator">:</span> <span class="ruby-identifier">soundcloud_ids</span>).<span class="ruby-identifier">all</span>
+        <span class="ruby-identifier">past</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span>
+          <span class="ruby-identifier">soundcloud_objects</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">y</span><span class="ruby-operator">|</span>
+            <span class="ruby-keyword">if</span> (<span class="ruby-identifier">x</span>.<span class="ruby-identifier">soundcloud_music_id</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">y</span>[<span class="ruby-value">:soundcloud_id</span>])
+              <span class="ruby-identifier">soundcloud_objects</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-identifier">y</span>)
+              <span class="ruby-keyword">break</span>
+            <span class="ruby-keyword">end</span>
+          <span class="ruby-keyword">end</span>
+        <span class="ruby-keyword">end</span>
+
+        <span class="ruby-identifier">soundcloud_objects</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">o</span><span class="ruby-operator">|</span>
+          <span class="ruby-identifier">g</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">genre</span><span class="ruby-operator">|</span>
+            <span class="ruby-keyword">if</span> (<span class="ruby-identifier">o</span>[<span class="ruby-value">:genre</span>].<span class="ruby-identifier">downcase</span>.<span class="ruby-identifier">include?</span> <span class="ruby-identifier">genre</span>.<span class="ruby-identifier">style_name</span>.<span class="ruby-identifier">downcase</span>)
+              <span class="ruby-identifier">mp</span> = <span class="ruby-constant">Musicalpast</span>.<span class="ruby-identifier">new</span>
+              <span class="ruby-identifier">mp</span>.<span class="ruby-identifier">user_id</span> = <span class="ruby-ivar">@user_id</span>
+              <span class="ruby-identifier">mp</span>.<span class="ruby-identifier">genre_id</span> = <span class="ruby-identifier">genre</span>.<span class="ruby-identifier">id</span>
+              <span class="ruby-identifier">mp</span>.<span class="ruby-identifier">soundcloud_music_id</span> = <span class="ruby-identifier">o</span>[<span class="ruby-value">:soundcloud_id</span>]
+              <span class="ruby-identifier">mp</span>.<span class="ruby-identifier">title</span> = <span class="ruby-identifier">o</span>[<span class="ruby-value">:title</span>]
+              <span class="ruby-identifier">mp</span>.<span class="ruby-identifier">save</span>
+            <span class="ruby-keyword">end</span>
+          <span class="ruby-keyword">end</span>
+        <span class="ruby-keyword">end</span>
+
+      <span class="ruby-keyword">else</span>
+        <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">500</span>
+        <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:forbidden</span>
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">rescue</span>
+    <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">504</span>
+    <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:service_unavailable</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">sendJson</span>
+<span class="ruby-keyword">end</span></code></pre>
+						</div>
+										</div>
+
+					
+									</div>
 								<a name="method-i-show">anchor</a>
 				<div id="method-i-show-doc" class="method">
 
@@ -163,7 +264,7 @@ the list of action available :</p>
 </li></ul>					
 											<div class="method-source-code" id="show-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/suggestions_controller.rb, line 20</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/suggestions_controller.rb, line 23</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">show</span>
   <span class="ruby-keyword">begin</span>
     <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@security</span>)
@@ -174,7 +275,8 @@ the list of action available :</p>
 
       <span class="ruby-identifier">suggestion</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">music</span><span class="ruby-operator">|</span>
         <span class="ruby-identifier">suggestArray</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-constant">JSON</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">music</span>.<span class="ruby-identifier">to_json</span>(<span class="ruby-value">:only</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">Music</span>.<span class="ruby-identifier">miniKey</span>, <span class="ruby-value">:include</span> =<span class="ruby-operator">&gt;</span> {
-          <span class="ruby-identifier">album</span><span class="ruby-operator">:</span> { <span class="ruby-identifier">only</span><span class="ruby-operator">:</span> <span class="ruby-constant">Album</span>.<span class="ruby-identifier">miniKey</span> }
+          <span class="ruby-identifier">album</span><span class="ruby-operator">:</span> { <span class="ruby-identifier">only</span><span class="ruby-operator">:</span> <span class="ruby-constant">Album</span>.<span class="ruby-identifier">miniKey</span> },
+          <span class="ruby-identifier">user</span><span class="ruby-operator">:</span> { <span class="ruby-identifier">only</span><span class="ruby-operator">:</span> <span class="ruby-constant">User</span>.<span class="ruby-identifier">miniKey</span> }
         }))
       }
 
@@ -190,6 +292,7 @@ the list of action available :</p>
      <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:forbidden</span>
     <span class="ruby-keyword">end</span>
   <span class="ruby-keyword">rescue</span>
+    <span class="ruby-identifier">puts</span> <span class="ruby-identifier">$!</span>, <span class="ruby-identifier">$@</span>
     <span class="ruby-identifier">codeAnswer</span> <span class="ruby-value">504</span>
     <span class="ruby-identifier">defineHttp</span> <span class="ruby-value">:service_unavailable</span>
   <span class="ruby-keyword">end</span>
@@ -232,7 +335,7 @@ the list of action available :</p>
 </li></ul>					
 											<div class="method-source-code" id="showTwo-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/suggestions_controller.rb, line 66</span>
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/API/suggestions_controller.rb, line 71</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">showTwo</span>
   <span class="ruby-identifier">u</span> = <span class="ruby-keyword">nil</span>
   <span class="ruby-identifier">result</span> = []
@@ -341,6 +444,7 @@ the list of action available :</p>
 			<li><a href="../Message.html">Message</a></li>
 			<li><a href="../Music.html">Music</a></li>
 			<li><a href="../MusicNote.html">MusicNote</a></li>
+			<li><a href="../Musicalpast.html">Musicalpast</a></li>
 			<li><a href="../News.html">News</a></li>
 			<li><a href="../NewsTitle.html">NewsTitle</a></li>
 			<li><a href="../Newslike.html">Newslike</a></li>

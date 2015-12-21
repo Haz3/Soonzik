@@ -49,6 +49,7 @@ namespace SoonZik.ViewModels
         static public ObservableCollection<Tweet> tweets { get; set; }
 
         public ObservableCollection<Message> msg_list { get; set; }
+
         private string _msg;
         public string msg
         {
@@ -60,7 +61,11 @@ namespace SoonZik.ViewModels
             }
         }
 
-
+        public ICommand do_send_msg
+        {
+            get;
+            private set;
+        }
         public ICommand do_add_friend
         {
             get;
@@ -113,13 +118,13 @@ namespace SoonZik.ViewModels
             remove_friend_btn = Visibility.Visible;
             do_add_friend = new RelayCommand(add_friend);
             do_remove_friend = new RelayCommand(remove_friend);
+            do_send_msg = new RelayCommand(send_msg);
 
             load_user(id);
 
             get_friends(id);
             get_follows(id);
             get_tweets(id);
-
         }
 
         public async void load_user(int id)
@@ -140,7 +145,6 @@ namespace SoonZik.ViewModels
             if (exception != null)
                 await new MessageDialog(exception.Message, "user error").ShowAsync();
         }
-
 
         public async void get_tweets(int id)
         {
@@ -191,8 +195,8 @@ namespace SoonZik.ViewModels
                         else
                             item.name = user.username;
 
-                        //msg_list.Add(item);
-                        msg_list.Insert(0, item);
+                        msg_list.Add(item);
+                        //msg_list.Insert(0, item);
                     }
 
                 }
@@ -304,6 +308,20 @@ namespace SoonZik.ViewModels
 
             if (exception != null)
                 await new MessageDialog(exception.Message, "Remove friend Error").ShowAsync();
+        }
+
+        public async void send_msg()
+        {
+            if (await ChatViewModel.send_msg(user.id, msg))
+            {
+                // ADD msg to list + reset msg
+                var new_msg = new Message();
+                new_msg.msg = msg;
+                new_msg.name = "Vous";
+                msg_list.Add(new_msg);
+                msg = null;
+            }
+
         }
     }
 }

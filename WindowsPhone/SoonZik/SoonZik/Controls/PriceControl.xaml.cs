@@ -6,7 +6,6 @@ using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Newtonsoft.Json;
-using SoonZik.Helpers;
 using SoonZik.HttpRequest;
 using SoonZik.HttpRequest.Poco;
 using SoonZik.Utils;
@@ -46,7 +45,7 @@ namespace SoonZik.Controls
                 var res2 = tmp2.Result;
                 if (res2 != null)
                 {
-                    var message = (ErrorMessage)JsonConvert.DeserializeObject(res2, typeof(ErrorMessage));
+                    var message = (ErrorMessage) JsonConvert.DeserializeObject(res2, typeof (ErrorMessage));
                     if (message.code != 201)
                         CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
                             () => { new MessageDialog("Erreur lors du paiement").ShowAsync(); });
@@ -58,7 +57,6 @@ namespace SoonZik.Controls
         }
 
         #region Slider
-
 
         #endregion
 
@@ -89,21 +87,19 @@ namespace SoonZik.Controls
 
         private void ArtistePriceCalc(double price)
         {
-            ArtistSlider.Value = (price * 65) / 100;
+            ArtistSlider.Value = (price*65)/100;
         }
 
         private void AssociationPriceCalc(double price)
         {
-            AssociationSlider.Value = (price * 20) / 100;
+            AssociationSlider.Value = (price*20)/100;
         }
 
         private void SoonZikPriceCalc(double price)
         {
-            SoonZikSlider.Value = (price * 15) / 100;
+            SoonZikSlider.Value = (price*15)/100;
         }
 
         #endregion
-
-
     }
 }

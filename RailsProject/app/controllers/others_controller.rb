@@ -1,6 +1,6 @@
 class OthersController < ApplicationController
   include FormatsHelper
-	before_action :no_content, except: [:discotheque]
+	before_action :no_content, except: [:discotheque, :soundcloud]
 
 	def no_content
 		render :text => "", :layout => true
@@ -22,5 +22,9 @@ class OthersController < ApplicationController
 		else
 			render :text => "", :layout => true
 		end
+	end
+
+	def soundcloud
+		render 'public/callback.html'
 	end
 end

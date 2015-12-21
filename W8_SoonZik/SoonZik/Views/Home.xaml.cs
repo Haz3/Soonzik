@@ -71,6 +71,8 @@ namespace SoonZik.Views
 
         private void sign_out_Click(object sender, RoutedEventArgs e)
         {
+            //Singleton.Instance.secureKey = null;
+            //Singleton.Instance.compare_date.AddMinutes(10);
             this.Frame.GoBack();
         }
 

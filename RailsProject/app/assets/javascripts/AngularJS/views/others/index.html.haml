@@ -106,12 +106,14 @@
         .clearfix
           .small-12.medium-4.text-center.columns
             %figure
-              %img.artist_one{ "ng-src" => "{{ '/assets/usersImage/avatars/' + battle.artist_one.image}}" }
-              %figcaption {{ battle.artist_one.username }}
+              %a{ href: "/users/{{ battle.artist_one.id }}" }
+                %img.artist_one{ "ng-src" => "{{ '/assets/usersImage/avatars/' + battle.artist_one.image}}" }
+                %figcaption {{ battle.artist_one.username }}
           .small-12.medium-4.text-center.columns.hide-for-small-only
             %figure
-              %img.artist_two{ "ng-src" => "{{ '/assets/usersImage/avatars/' + battle.artist_one.image}}" }
-              %figcaption {{ battle.artist_two.username }}
+              %a{ href: "/users/{{ battle.artist_one.id }}" }
+                %img.artist_two{ "ng-src" => "{{ '/assets/usersImage/avatars/' + battle.artist_one.image}}" }
+                %figcaption {{ battle.artist_two.username }}
         .clearfix
           .medium-offset-4.medium-4.text-center.columns.hide-for-small-only
             %span.button
@@ -126,8 +128,9 @@
         .clearfix
           .small-12.medium-4.text-center.columns.hide-for-medium-up
             %figure
-              %img.artist_two{ "ng-src" => "{{ '/assets/usersImage/avatars/' + battle.artist_two.image}}" }
-              %figcaption {{ battle.artist_two.username }}
+              %a{ href: "/users/{{ battle.artist_two.id }}" }
+                %img.artist_two{ "ng-src" => "{{ '/assets/usersImage/avatars/' + battle.artist_two.image}}" }
+                %figcaption {{ battle.artist_two.username }}
         %hr
       .subtitleLink.small-9
         %a{ href: "/battles" }
