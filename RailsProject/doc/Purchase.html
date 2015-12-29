@@ -263,7 +263,7 @@ relation and the validation Can provide some features linked to this model</p>
 					<header>
 											<i class="icon-generic"></i>
 						<span class="method-name">addPurchasedPackFromObject</span><span 
-							class="method-args">(packObject, partial, artist, association, website, value)</span>
+							class="method-args">(packObject, partial, artist, association, website, value, gift_user_id)</span>
 										</header>
 
 					<div class="method-description">
@@ -271,7 +271,7 @@ relation and the validation Can provide some features linked to this model</p>
 											<div class="method-source-code" id="addPurchasedPackFromObject-source">
 							<pre class="prettyprint linenums"><code 
 								class="language-ruby"><span class="ruby-comment"># File app/models/purchase.rb, line 93</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">addPurchasedPackFromObject</span>(<span class="ruby-identifier">packObject</span>, <span class="ruby-identifier">partial</span>, <span class="ruby-identifier">artist</span>, <span class="ruby-identifier">association</span>, <span class="ruby-identifier">website</span>, <span class="ruby-identifier">value</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">addPurchasedPackFromObject</span>(<span class="ruby-identifier">packObject</span>, <span class="ruby-identifier">partial</span>, <span class="ruby-identifier">artist</span>, <span class="ruby-identifier">association</span>, <span class="ruby-identifier">website</span>, <span class="ruby-identifier">value</span>, <span class="ruby-identifier">gift_user_id</span>)
       <span class="ruby-identifier">listSavedAlbums</span> = []
 
       <span class="ruby-identifier">pPack</span> = <span class="ruby-constant">PurchasedPack</span>.<span class="ruby-identifier">new</span>
@@ -285,6 +285,7 @@ relation and the validation Can provide some features linked to this model</p>
       <span class="ruby-identifier">pPack</span>.<span class="ruby-identifier">association_percentage</span> = <span class="ruby-identifier">association</span>
       <span class="ruby-identifier">pPack</span>.<span class="ruby-identifier">website_percentage</span> = <span class="ruby-identifier">website</span>
       <span class="ruby-identifier">pPack</span>.<span class="ruby-identifier">value</span> = <span class="ruby-identifier">value</span>
+      <span class="ruby-identifier">pPack</span>.<span class="ruby-identifier">gift_user_id</span> = <span class="ruby-identifier">gift_user_id</span>
       <span class="ruby-identifier">pPack</span>.<span class="ruby-identifier">save!</span>
 
       <span class="ruby-keyword">begin</span>
@@ -320,7 +321,7 @@ relation and the validation Can provide some features linked to this model</p>
 																
 											<div class="method-source-code" id="buyCart-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/models/purchase.rb, line 125</span>
+								class="language-ruby"><span class="ruby-comment"># File app/models/purchase.rb, line 126</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">buyCart</span>(<span class="ruby-identifier">cart</span>, <span class="ruby-identifier">getPurchasedObject</span> = <span class="ruby-keyword">false</span>, <span class="ruby-identifier">getObjects</span> = <span class="ruby-keyword">false</span>)
       <span class="ruby-identifier">purchasedItems</span> = []
       <span class="ruby-identifier">items</span> = []

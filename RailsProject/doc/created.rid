@@ -1,11 +1,11 @@
-Fri, 18 Dec 2015 18:35:15 +0100
+Tue, 29 Dec 2015 18:20:53 +0100
 app/controllers/API/albums_controller.rb	Wed, 11 Nov 2015 18:06:41 +0100
 app/controllers/API/ambiances_controller.rb	Fri, 18 Dec 2015 18:35:09 +0100
 app/controllers/API/api_controller.rb	Sat, 07 Nov 2015 20:29:12 +0100
 app/controllers/API/apisecurity_controller.rb	Sun, 15 Nov 2015 15:01:48 +0100
 app/controllers/API/battles_controller.rb	Sat, 07 Nov 2015 20:29:56 +0100
 app/controllers/API/carts_controller.rb	Sat, 07 Nov 2015 20:29:59 +0100
-app/controllers/API/concerts_controller.rb	Sun, 08 Nov 2015 00:22:35 +0100
+app/controllers/API/concerts_controller.rb	Sun, 20 Dec 2015 13:58:35 +0100
 app/controllers/API/feedbacks_controller.rb	Sun, 29 Nov 2015 16:08:23 +0100
 app/controllers/API/genres_controller.rb	Sun, 15 Nov 2015 18:18:57 +0100
 app/controllers/API/influences_controller.rb	Mon, 19 Oct 2015 22:40:35 +0200
@@ -18,11 +18,11 @@ app/controllers/API/news_controller.rb	Sun, 08 Nov 2015 14:49:34 +0100
 app/controllers/API/notifications_controller.rb	Sat, 07 Nov 2015 20:30:31 +0100
 app/controllers/API/packs_controller.rb	Fri, 13 Nov 2015 17:25:22 +0100
 app/controllers/API/playlists_controller.rb	Sat, 07 Nov 2015 20:30:37 +0100
-app/controllers/API/purchases_controller.rb	Sat, 07 Nov 2015 20:30:41 +0100
+app/controllers/API/purchases_controller.rb	Tue, 29 Dec 2015 18:17:04 +0100
 app/controllers/API/searchs_controller.rb	Mon, 09 Nov 2015 20:35:28 +0100
 app/controllers/API/suggestions_controller.rb	Sat, 12 Dec 2015 19:18:08 +0100
 app/controllers/API/tweets_controller.rb	Sat, 07 Nov 2015 20:30:49 +0100
-app/controllers/API/users_controller.rb	Sat, 12 Dec 2015 19:13:13 +0100
+app/controllers/API/users_controller.rb	Tue, 29 Dec 2015 17:18:32 +0100
 app/models/address.rb	Thu, 27 Aug 2015 23:13:38 +0200
 app/models/admin_user.rb	Sun, 06 Sep 2015 18:50:12 +0200
 app/models/album.rb	Tue, 10 Nov 2015 13:40:48 +0100
@@ -61,7 +61,7 @@ app/models/paypal_payment.rb	Sat, 26 Sep 2015 21:12:21 +0200
 app/models/playlist.rb	Thu, 27 Aug 2015 23:13:38 +0200
 app/models/playlist_object.rb	Thu, 27 Aug 2015 23:13:38 +0200
 app/models/proposition.rb	Thu, 27 Aug 2015 23:13:38 +0200
-app/models/purchase.rb	Sat, 10 Oct 2015 16:16:02 +0200
+app/models/purchase.rb	Tue, 29 Dec 2015 16:17:11 +0100
 app/models/purchased_album.rb	Thu, 27 Aug 2015 23:13:38 +0200
 app/models/purchased_music.rb	Thu, 27 Aug 2015 23:13:38 +0200
 app/models/purchased_pack.rb	Thu, 27 Aug 2015 23:13:38 +0200
