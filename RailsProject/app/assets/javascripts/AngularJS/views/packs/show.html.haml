@@ -53,7 +53,13 @@
         .large-6.columns
           .panel
             %battle{ "battle-values" => "percentages" }
-
+          .row
+            .small-3.columns.text-center
+              %label.inline {{ labels.DISPLAY_PACK_GIFT_LABEL }}
+            .small-9.columns
+              %select{ 'ng-model' => 'gift.user' }
+                %option
+                %option{ 'ng-repeat' => 'friend in friends', 'ng-value' => 'friend.id' } {{ friend.username }}
         //Albums + song
 
         .large-12.columns

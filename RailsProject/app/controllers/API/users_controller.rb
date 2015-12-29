@@ -249,7 +249,7 @@ module API
 
 					contentReturn[:musics] = Music.eager_load([:album, :user]).joins(:purchased_musics => { :purchase => {} }).where(purchased_musics: { purchased_album: nil }).where(purchases: { user_id: user.id }).as_json(only: Music.miniKey, :include => { album: { only: Album.miniKey }, user: { only: User.miniKey } })
 					contentReturn[:albums] = Album.eager_load([:musics, :user]).joins(:purchased_albums => { :purchased_musics => { :purchase => {} } }).where(purchased_albums: { purchased_pack: nil }).where(purchases: { user_id: user.id }).as_json(only: Album.miniKey, :include => { musics: { only: Music.miniKey }, user: { only: User.miniKey } })
-					contentReturn[:packs] = Pack.eager_load(albums: { user: {}, musics: {} }).joins(:purchased_packs => { :purchased_albums => { :purchased_musics => { :purchase => {} } } }).where(purchases: { user_id: user.id }).as_json(only: Pack.miniKey, :include => { albums: { only: Album.miniKey, :include => { musics: { only: Music.miniKey }, user: { only: User.miniKey } } } })
+					contentReturn[:packs] = Pack.eager_load(albums: { user: {}, musics: {} }).joins(:purchased_packs => { :purchased_albums => { :purchased_musics => { :purchase => {} } } }).where(purchases: { user_id: user.id }, purchased_packs: { gift_user_id: @user_id }).as_json(only: Pack.miniKey, :include => { albums: { only: Album.miniKey, :include => { musics: { only: Music.miniKey }, user: { only: User.miniKey } } } })
 
 					@returnValue = { content: contentReturn }
 					codeAnswer 200

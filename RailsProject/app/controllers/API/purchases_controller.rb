@@ -110,20 +110,8 @@ module API
     # - +artist+ - The percentage for the artist
     # - +association+ - The percentage for the association
     # - +website+ - The percentage for the website
-    # - +paypal [:payment_id] + - The informations that paypal returns after a payment
-    # - +paypal [:payment_method] + - The informations that paypal returns after a payment
-    # - +paypal [:status] + - The informations that paypal returns after a payment
-    # - +paypal [:payer_email] + - The informations that paypal returns after a payment
-    # - +paypal [:payer_first_name] + - The informations that paypal returns after a payment
-    # - +paypal [:payer_last_name] + - The informations that paypal returns after a payment
-    # - +paypal [:payer_id] + - The informations that paypal returns after a payment
-    # - +paypal [:payer_phone] + - The informations that paypal returns after a payment
-    # - +paypal [:payer_country_code] + - The informations that paypal returns after a payment
-    # - +paypal [:payer_street] + - The informations that paypal returns after a payment
-    # - +paypal [:payer_city] + - The informations that paypal returns after a payment
-    # - +paypal [:payer_postal_code] + - The informations that paypal returns after a payment
-    # - +paypal [:payer_country_code] + - The informations that paypal returns after a payment
-    # - +paypal [:payer_recipient_name] + - The informations that paypal returns after a payment
+    # - +paypal [:payment_id] + - The informations that paypal returns after a payment (PAY-xxxxxx)
+    # - +gift_user_id+ - (optionnal) If this is a gift
     # 
     # 
     # ===== HTTP VALUE
@@ -135,7 +123,8 @@ module API
     # 
     def buypack
       objectToDelete = []
-      if (!(@paypal.present?() && @paypal.has_key?(:payment_id) && @paypal.has_key?(:payment_method) && @paypal.has_key?(:status) && @paypal.has_key?(:payer_email) && @paypal.has_key?(:payer_first_name) && @paypal.has_key?(:payer_last_name) && @paypal.has_key?(:payer_id) && @paypal.has_key?(:payer_phone) && @paypal.has_key?(:payer_country_code) && @paypal.has_key?(:payer_street) && @paypal.has_key?(:payer_city) && @paypal.has_key?(:payer_postal_code) && @paypal.has_key?(:payer_country_code) && @paypal.has_key?(:payer_recipient_name)))
+      gift_to = User.find_by_id(@gift_user_id.present? ? @gift_user_id : @user_id)
+      if (!(@paypal.present?() && @paypal.has_key?(:payment_id)) || !gift_to)
         codeAnswer 503
         defineHttp :bad_request
       else
@@ -150,26 +139,29 @@ module API
               defineHttp :bad_request
             else
               p = Purchase.new
-              p.user_id = @user_id
+              p.user_id = gift_to.id
               p.save!
 
-              p.addPurchasedPackFromObject(pack, (pack.averagePrice > @amount.to_f), @artist, @association, @website, @amount)
+              p.addPurchasedPackFromObject(pack, (pack.averagePrice > @amount.to_f), @artist, @association, @website, @amount, gift_to.id)
 
+              payment = Payment.find(@paypal[:payment_id])
+              address = payment.payer.payer_info.shipping_address
+              payer_info = payment.payer.payer_info
               PaypalPayment.create({
-                payment_id: @paypal[:payment_id],
-                payment_method: @paypal[:payment_method],
-                status: @paypal[:status],
-                payer_email: @paypal[:payer_email],
-                payer_first_name: @paypal[:payer_first_name],
-                payer_last_name: @paypal[:payer_last_name],
-                payer_id: @paypal[:payer_id],
-                payer_phone: @paypal[:payer_phone],
-                payer_country_code: @paypal[:payer_country_code],
-                payer_street: @paypal[:payer_street],
-                payer_city: @paypal[:payer_city],
-                payer_postal_code: @paypal[:payer_postal_code],
-                payer_country_code: @paypal[:payer_country_code],
-                payer_recipient_name: @paypal[:payer_recipient_name],
+                payment_id: payment.id,
+                payment_method: payment.payer.payment_method,
+                status: payment.payer.status,
+                payer_email: payment.payer.payer_info.email,
+                payer_first_name: payment.payer.payer_info.first_name,
+                payer_last_name: payment.payer.payer_info.last_name,
+                payer_id: payment.payer.payer_info.payer_id,
+                payer_phone: payment.payer.payer_info.phone,
+                payer_country_code: payment.payer.payer_info.country_code,
+                payer_street: payment.payer.payer_info.shipping_address.line1,
+                payer_city: payment.payer.payer_info.shipping_address.city,
+                payer_postal_code: payment.payer.payer_info.shipping_address.postal_code,
+                payer_country_code: payment.payer.payer_info.shipping_address.country_code,
+                payer_recipient_name: payment.payer.payer_info.shipping_address.recipient_name,
                 purchase_id: p.id
               })
 

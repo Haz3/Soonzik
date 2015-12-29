@@ -346,6 +346,7 @@ var labels = {
  	DISPLAY_PACK_ASSOCIATION_NAME: "Association",
  	DISPLAY_PACK_BUY_PACK: "Acheter ce pack",
  	DISPLAY_PACK_TOTAL_PACK: "Total",
+  DISPLAY_PACK_GIFT_LABEL: "Cadeau pour : ",
 
   // Packs Controller
   FILE_PACK_LOAD_ERROR_MESSAGE: "Une erreur s'est produite lors de la recupération des packs",

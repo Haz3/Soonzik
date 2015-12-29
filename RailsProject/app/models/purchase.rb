@@ -90,7 +90,7 @@ class Purchase < ActiveRecord::Base
   	return pAlbum
   end
 
-  def addPurchasedPackFromObject(packObject, partial, artist, association, website, value)
+  def addPurchasedPackFromObject(packObject, partial, artist, association, website, value, gift_user_id)
   	listSavedAlbums = []
 
   	pPack = PurchasedPack.new
@@ -104,6 +104,7 @@ class Purchase < ActiveRecord::Base
   	pPack.association_percentage = association
   	pPack.website_percentage = website
   	pPack.value = value
+  	pPack.gift_user_id = gift_user_id
   	pPack.save!
 
   	begin

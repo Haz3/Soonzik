@@ -2,6 +2,7 @@ SoonzikApp.controller('PacksCtrl', ['$scope', '$routeParams', 'SecureAuth', 'HTT
 
 	$scope.loading = true;
 	$scope.saveCart = [];
+	$scope.gift = { user: null }
 
 	$scope.newValuePercentage = {
 		"artist": 65,
@@ -156,7 +157,7 @@ SoonzikApp.controller('PacksCtrl', ['$scope', '$routeParams', 'SecureAuth', 'HTT
 	}
 
 	$scope.toPayment = function() {
-		document.location.href = "/purchase/pack/" + $routeParams.id + "?amount=" + $scope.amountDonation + "&artist=" + $scope.percentages[0].value + "&association=" + $scope.percentages[1].value + "&website=" + $scope.percentages[2].value;
+		document.location.href = "/purchase/pack/" + $routeParams.id + "?amount=" + $scope.amountDonation + "&artist=" + $scope.percentages[0].value + "&association=" + $scope.percentages[1].value + "&website=" + $scope.percentages[2].value + (($scope.gift.user != null) ? '&gift=' + $scope.gift.user : '');
 	}
 
 }]);

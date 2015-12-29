@@ -346,6 +346,7 @@ var labels = {
   DISPLAY_PACK_ASSOCIATION_NAME: "Association",
   DISPLAY_PACK_BUY_PACK: "Buy this pack",
   DISPLAY_PACK_TOTAL_PACK: "Total",
+  DISPLAY_PACK_GIFT_LABEL: "Gift for : ",
 
   // Packs Controller
   FILE_PACK_LOAD_ERROR_MESSAGE: "Error while loading packs",

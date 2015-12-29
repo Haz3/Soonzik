@@ -6,7 +6,6 @@ SoonzikApp.controller('ChatCtrl', ['$scope', 'SecureAuth', 'HTTPService', '$time
 
 	$scope.current_user = SecureAuth.getCurrentUser();
 	$scope.filter = { username: "" }
-	$scope.friends = [];
 	$scope.onWindows = [];
 	$scope.message = {};
 	$scope.onlineFriends = []
@@ -60,9 +59,9 @@ SoonzikApp.controller('ChatCtrl', ['$scope', 'SecureAuth', 'HTTPService', '$time
 		var newFriendOn = function(data) {
 			var response = JSON.parse(data);
 
-			for (var index in $scope.friends) {
-				if ($scope.friends[index].id == response.idFriend && $scope.friends[index].online == false) {
-					$scope.friends[index].online = true;
+			for (var index in $rootScope.friends) {
+				if ($rootScope.friends[index].id == response.idFriend && $rootScope.friends[index].online == false) {
+					$rootScope.friends[index].online = true;
 		    	$scope.$digest();
 					return;
 				}
@@ -72,9 +71,9 @@ SoonzikApp.controller('ChatCtrl', ['$scope', 'SecureAuth', 'HTTPService', '$time
 		var newFriendOff = function(data) {
 			var response = JSON.parse(data);
 
-			for (var index in $scope.friends) {
-				if ($scope.friends[index].id == response.idFriend && $scope.friends[index].online == true) {
-					$scope.friends[index].online = false;
+			for (var index in $rootScope.friends) {
+				if ($rootScope.friends[index].id == response.idFriend && $rootScope.friends[index].online == true) {
+					$rootScope.friends[index].online = false;
 		    	$scope.$digest();
 					return;
 				}
@@ -120,9 +119,9 @@ SoonzikApp.controller('ChatCtrl', ['$scope', 'SecureAuth', 'HTTPService', '$time
 		}
 
 		var isInFriendList = function (from_username) {
-			for (var index in $scope.friends) {
-				if ($scope.friends[index].username == from_username) {
-					return $scope.friends[index];
+			for (var index in $rootScope.friends) {
+				if ($rootScope.friends[index].username == from_username) {
+					return $rootScope.friends[index];
 				}
 			}
 			return false;
@@ -130,14 +129,14 @@ SoonzikApp.controller('ChatCtrl', ['$scope', 'SecureAuth', 'HTTPService', '$time
 
 		var timeoutSynchronization = function () {
 			if (onlineFriendsCall == true && listFriendsCall == true) {
-				for (var index in $scope.friends) {
+				for (var index in $rootScope.friends) {
 					for (var indexOnline in $scope.onlineFriends) {
-						if ($scope.friends[index].id == $scope.onlineFriends[indexOnline]) {
-							$scope.friends[index].online = true;
+						if ($rootScope.friends[index].id == $scope.onlineFriends[indexOnline]) {
+							$rootScope.friends[index].online = true;
 						}
 					}
 					$scope.onWindows.push({
-						friend: $scope.friends[index],
+						friend: $rootScope.friends[index],
 						maximized: false,
 						opened: false,
 						loading: false
@@ -185,8 +184,8 @@ SoonzikApp.controller('ChatCtrl', ['$scope', 'SecureAuth', 'HTTPService', '$time
 		}
 
 		var isOpen = function(username) {
-			for (var index in $scope.friends) {
-				if ($scope.friends[index].friend == username && $scope.friends[index].opened == false) {
+			for (var index in $rootScope.friends) {
+				if ($rootScope.friends[index].friend == username && $rootScope.friends[index].opened == false) {
 					return false;
 				}
 			}
@@ -207,20 +206,20 @@ SoonzikApp.controller('ChatCtrl', ['$scope', 'SecureAuth', 'HTTPService', '$time
 				];
 
 				HTTPService.getFriends($scope.current_user.id).then(function(friendsResponse) {
-					$scope.friends = friendsResponse.data.content;
-					for (var index in $scope.friends) {
-						$scope.friends[index].online = false;
+					$rootScope.friends = friendsResponse.data.content;
+					for (var index in $rootScope.friends) {
+						$rootScope.friends[index].online = false;
 					}
 					$scope.$on('chat:friend', function(event, data) {
 						var friend = JSON.parse(JSON.stringify(data));
 						friend.online = false;
-						$scope.friends.push(friend);
+						$rootScope.friends.push(friend);
 						dispatcher.trigger('who_is_online', {});
 					});
 					$scope.$on('chat:unfriend', function(event, data) {
-						for (var i = 0 ; i < $scope.friends.length ; i--) {
-							if ($scope.friends[i].id == data.id) {
-								$scope.friends.splice(i, 1);
+						for (var i = 0 ; i < $rootScope.friends.length ; i--) {
+							if ($rootScope.friends[i].id == data.id) {
+								$rootScope.friends.splice(i, 1);
 								break;
 							}
 						}

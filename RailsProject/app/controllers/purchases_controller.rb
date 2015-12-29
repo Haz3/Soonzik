@@ -38,13 +38,15 @@ class PurchasesController < ApplicationController
 	end
 
 	def buyPack
-		if (params.has_key?(:id) && params.has_key?(:amount) &&
+		gift_to = User.find_by_id(params.has_key?(:gift) && params[:gift].to_i != 0 ? params[:gift] : current_user.id)
+		if (user_signed_in? && gift_to && params.has_key?(:id) && params.has_key?(:amount) &&
 				params.has_key?(:artist) && params.has_key?(:association) &&
 				params.has_key?(:website) && (p = Pack.find_by_id(params[:id])) != nil &&
 				params[:amount].to_f > p.minimal_price && params[:artist].to_f + params[:association].to_f + params[:website].to_f == 100)
 
+
 			makePayment({
-		    :return_url => "http://lvh.me:3000/successCallback/pack/#{p.id}?amount=#{params[:amount].to_f}&artist=#{params[:artist].to_f}&association=#{params[:association].to_f}&website=#{params[:website].to_f}",
+		    :return_url => "http://lvh.me:3000/successCallback/pack/#{p.id}?amount=#{params[:amount].to_f}&artist=#{params[:artist].to_f}&association=#{params[:association].to_f}&website=#{params[:website].to_f}&gift=#{gift_to.id}",
 		    :cancel_url => "http://lvh.me:3000//cancelCallback/pack/#{p.id}"
 		  }, [{
         :name => p.title,
@@ -104,7 +106,8 @@ class PurchasesController < ApplicationController
 	# Pack payment
 
 	def paymentCallbackPack
-		if (params.has_key?(:id) && params.has_key?(:amount) &&
+		gift_to = User.find_by_id(params.has_key?(:gift) && params[:gift].to_i != 0 ? params[:gift] : current_user.id)
+		if (user_signed_in? && gift_to && params.has_key?(:id) && params.has_key?(:amount) &&
 				params.has_key?(:artist) && params.has_key?(:association) &&
 				params.has_key?(:website) && (p = Pack.find_by_id(params[:id])) != nil &&
 				params[:amount].to_f > p.minimal_price && params[:artist].to_f + params[:association].to_f + params[:website].to_f == 100)
@@ -112,9 +115,9 @@ class PurchasesController < ApplicationController
 			payment = Payment.find(params[:paymentId])
 
 			purch = Purchase.new
-	    purch.user_id = current_user.id
+	    purch.user_id = gift_to.id
 	    purch.save!
-			purch.addPurchasedPackFromObject(p, (p.averagePrice > params[:amount].to_f), params[:artist], params[:association], params[:website], params[:amount])
+			purch.addPurchasedPackFromObject(p, (p.averagePrice > params[:amount].to_f), params[:artist], params[:association], params[:website], params[:amount], gift_to.id)
 
 			address = payment.payer.payer_info.shipping_address
 			payer_info = payment.payer.payer_info

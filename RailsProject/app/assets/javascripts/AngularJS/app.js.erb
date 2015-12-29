@@ -113,6 +113,7 @@ SoonzikApp.run(['$route', '$rootScope', '$location', 'SecureAuth', 'HTTPService'
 	$rootScope.tooltip = false;
 	$rootScope.myPlaylists = [];	// list of playlists of the user
   $rootScope.playlist = [];			// the current playlist
+	$rootScope.friends = [];
 	var original = $location.path;
 	var current_user = SecureAuth.getCurrentUser();
 	if (current_user.id != null && current_user.token != null && current_user.username != null) {
