@@ -91,7 +91,7 @@ public class Purchase extends ActiveRecord {
         });
     }
 
-    public static void buyPack(int pack_id, float amount, int artist, int association, int website, HashMap<String, String> paypal, final OnJSONResponseCallback callback) {
+    public static void buyPack(int pack_id, float amount, int artist, int association, int website, HashMap<String, String> paypal, int gift_id, final OnJSONResponseCallback callback) {
         final String className = "Purchase";
         RequestParams params = new RequestParams();
 
@@ -101,6 +101,9 @@ public class Purchase extends ActiveRecord {
         params.put("association", Integer.toString(association));
         params.put("website", Integer.toString(website));
         params.put("paypal", paypal);
+        if (gift_id != -1) {
+            params.put("gift_user_id", gift_id);
+        }
 
         currentUser.getUserSecureKey(params, new User.OnJSONResponseCallback() {
             @Override

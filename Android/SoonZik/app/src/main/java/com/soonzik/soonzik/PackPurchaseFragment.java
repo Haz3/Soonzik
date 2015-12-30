@@ -11,9 +11,13 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.SeekBar;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,6 +34,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * Created by Kevin on 2015-09-09.
@@ -43,6 +48,7 @@ public class PackPurchaseFragment extends Fragment {
     private SeekBar seekBarArtist;
     private SeekBar seekBarCharity;
     private SeekBar seekBarDeveloper;
+    private int gift_id = -1;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -52,12 +58,41 @@ public class PackPurchaseFragment extends Fragment {
 
         int id = this.getArguments().getInt("pack_id");
 
+
         config = new PayPalConfiguration()
 
                 // Start with mock environment.  When ready, switch to sandbox (ENVIRONMENT_SANDBOX)
                 // or live (ENVIRONMENT_PRODUCTION)
                 .environment(PayPalConfiguration.ENVIRONMENT_SANDBOX)
                 .clientId("AfCwBQSyxx6Ys2fnbB_1AmmuINiAPaGlGtk38vTZTCbcevPBIU0Ptt4TgvjNznxkLbSi9fdiaJxG8-u-");
+
+        ArrayList<User> friends = ActiveRecord.currentUser.getFriends();
+        List<String> friends_name = new ArrayList<>();
+        List<Integer> friends_id = new ArrayList<>();
+        friends_name.add("");
+        friends_id.add(-1);
+        for (User f : friends) {
+            friends_name.add(f.getUsername());
+            friends_id.add(f.getId());
+        }
+
+        final Spinner spinner = (Spinner) view.findViewById(R.id.friends_spinner);
+        final ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(),
+                android.R.layout.simple_spinner_item, friends_name);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
+
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int pos, long l) {
+                gift_id = ActiveRecord.currentUser.getFriends().get(pos).getId();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
 
         try {
             ActiveRecord.show("Pack", id, new ActiveRecord.OnJSONResponseCallback() {
@@ -537,7 +572,7 @@ public class PackPurchaseFragment extends Fragment {
                     paypal.put("payer_country_code", "");
                     paypal.put("payer_recipient_name", "");
 
-                    Purchase.buyPack(pack.getId(), finalamount, seekBarArtist.getProgress(), seekBarCharity.getProgress(), seekBarDeveloper.getProgress(), paypal, new ActiveRecord.OnJSONResponseCallback() {
+                    Purchase.buyPack(pack.getId(), finalamount, seekBarArtist.getProgress(), seekBarCharity.getProgress(), seekBarDeveloper.getProgress(), paypal, gift_id, new ActiveRecord.OnJSONResponseCallback() {
                         @Override
                         public void onJSONResponse(boolean success, Object response, Class<?> classT) throws InvocationTargetException, NoSuchMethodException, java.lang.InstantiationException, IllegalAccessException, JSONException {
                             JSONObject obj = (JSONObject) response;

@@ -608,6 +608,68 @@ public class User extends ActiveRecord {
         ActiveRecord.destroy("Like", data, callback);
     }
 
+    public static void getIdentities(final ActiveRecord.OnJSONResponseCallback callback) {
+        RequestParams params = new RequestParams();
+        currentUser.getUserSecureKey(params, new User.OnJSONResponseCallback() {
+            @Override
+            public void onJSONResponse(boolean success, JSONObject response, RequestParams params) throws JSONException, UnsupportedEncodingException, NoSuchAlgorithmException {
+                ActiveRecord.secureCase(currentUser, params, response.getString("key"));
+                AsyncHttpClient client = new AsyncHttpClient();
+
+                client.get(ActiveRecord.serverLink + "users/getIdentities", params, new JsonHttpResponseHandler() {
+                 @Override
+                    public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                    try {
+                            JSONArray obj = response.getJSONArray("content");
+
+                            callback.onJSONResponse(true, obj, null);
+                        } catch (NoSuchMethodException e) {
+                            e.printStackTrace();
+                        } catch (InstantiationException e) {
+                            e.printStackTrace();
+                        } catch (IllegalAccessException e) {
+                            e.printStackTrace();
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        } catch (InvocationTargetException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(int statusCode, Header[] headers, Throwable e, JSONObject response) {
+                        Log.v("FAIL", response.toString());
+                    }
+                });
+            }
+        });
+    }
+
+    public static void getMusicalPast(String soundcloud_id, final ActiveRecord.OnJSONResponseCallback callback) {
+        RequestParams params = new RequestParams();
+
+        params.put("soundcloud_id", soundcloud_id);
+
+        currentUser.getUserSecureKey(params, new User.OnJSONResponseCallback() {
+            @Override
+            public void onJSONResponse(boolean success, JSONObject response, RequestParams params) throws JSONException, UnsupportedEncodingException, NoSuchAlgorithmException {
+                ActiveRecord.secureCase(currentUser, params, response.getString("key"));
+                AsyncHttpClient client = new AsyncHttpClient();
+
+                client.post(ActiveRecord.serverLink + "musicalPast", params, new JsonHttpResponseHandler() {
+                    @Override
+                    public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                        Log.v("SUCESS", response.toString());
+                    }
+
+                    @Override
+                    public void onFailure(int statusCode, Header[] headers, Throwable e, JSONObject response) {
+                        Log.v("FAIL", response.toString());
+                    }
+                });
+            }
+        });
+    }
 
     @Override
     public String toString() {

@@ -3,6 +3,7 @@ package com.soonzik.soonzik;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.lang.reflect.InvocationTargetException;
@@ -29,6 +31,7 @@ public class NewsListFragment extends Fragment {
                 container, false);
 
         if (ActiveRecord.currentUser != null) {
+
             User.getMusics(new ActiveRecord.OnJSONResponseCallback() {
                 @Override
                 public void onJSONResponse(boolean success, Object response, Class<?> classT) throws InvocationTargetException, NoSuchMethodException, java.lang.InstantiationException, IllegalAccessException {
@@ -38,6 +41,30 @@ public class NewsListFragment extends Fragment {
                     ActiveRecord.currentUser.setContent(ct);
                 }
             });
+
+            User.getIdentities(new ActiveRecord.OnJSONResponseCallback() {
+                @Override
+                public void onJSONResponse(boolean success, Object response, Class<?> classT) throws InvocationTargetException, NoSuchMethodException, java.lang.InstantiationException, IllegalAccessException, JSONException {
+                    JSONArray data = (JSONArray) response;
+
+                    Log.v("SOCIAL", response.toString());
+                    for (int i = 0; i < data.length(); i++) {
+                        JSONObject tmp = data.getJSONObject(0);
+
+                        if (tmp.getString("provider").equals("soudcloud")) {
+                            User.getMusicalPast(tmp.getString("uid"), new ActiveRecord.OnJSONResponseCallback() {
+                                @Override
+                                public void onJSONResponse(boolean success, Object response, Class<?> classT) throws InvocationTargetException, NoSuchMethodException, java.lang.InstantiationException, IllegalAccessException, JSONException {
+
+                                }
+                            });
+
+                        }
+                    }
+                }
+            });
+
+
         }
 
         try {
