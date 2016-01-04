@@ -20,8 +20,9 @@ namespace SoonZik.ViewModels
     {
         public ObservableCollection<User> artistlist { get; set; }
 
-        static string url = "http://api.lvh.me:3000/";
+        //static string url = "http://api.lvh.me:3000/";
         //static string url = "http://soonzikapi.herokuapp.com/";
+        static string url = Singleton.Instance.url;
 
 
         private User _artist;
@@ -140,7 +141,7 @@ namespace SoonZik.ViewModels
             }
 
             if (exception != null)
-                await new MessageDialog(exception.Message, "Artist Error").ShowAsync();
+                await new MessageDialog("Erreur lors de la récupération des artistes").ShowAsync();
         }
 
         public async void load_artist(int id)
@@ -168,7 +169,7 @@ namespace SoonZik.ViewModels
             }
 
             if (exception != null)
-                await new MessageDialog(exception.Message, "artist error").ShowAsync();
+                await new MessageDialog("Erreur lors de la récupération de l'artiste").ShowAsync();
         }
 
         public async void get_tweets(int id)
@@ -190,7 +191,7 @@ namespace SoonZik.ViewModels
             }
 
             if (exception != null)
-                await new MessageDialog(exception.Message, "get user's tweets error").ShowAsync();
+                await new MessageDialog("Erreur lors de la récupération des sweets de l'utilisateur").ShowAsync();
         }
 
         public async void get_friends(int id)
@@ -213,7 +214,7 @@ namespace SoonZik.ViewModels
             }
 
             if (exception != null)
-                await new MessageDialog(exception.Message, "get friends error").ShowAsync();
+                await new MessageDialog("Erreur lors de la récupération des amis de l'utilisateur").ShowAsync();
         }
 
         async public void get_follows(int id)
@@ -240,7 +241,7 @@ namespace SoonZik.ViewModels
             }
 
             if (exception != null)
-                await new MessageDialog(exception.Message, "get follows error").ShowAsync();
+                await new MessageDialog("Erreur lors de la récupération des follows de l'utilisateur").ShowAsync();
         }
 
         async public void get_follower(int id)
@@ -267,7 +268,7 @@ namespace SoonZik.ViewModels
             }
 
             if (exception != null)
-                await new MessageDialog(exception.Message, "get follows error").ShowAsync();
+                await new MessageDialog("Erreur lors de la récupération des followers de l'utilisateur").ShowAsync();
         }
 
         public async void add_follow()
@@ -290,14 +291,14 @@ namespace SoonZik.ViewModels
                 // Debug
                 if (json.ToString() == "Created")
                 {
-                    await new MessageDialog("Add follow OK").ShowAsync();
+                    //await new MessageDialog("Add follow OK").ShowAsync();
                     Singleton.Instance.Current_user.follows.Add(artist);
                     add_follow_btn = Visibility.Collapsed;
                     remove_follow_btn = Visibility.Visible;
                     followers.Add(Singleton.Instance.Current_user);
                 }
                 else
-                    await new MessageDialog("Add follow KO").ShowAsync();
+                    await new MessageDialog("Erreur lors du follow de l'utilisateur").ShowAsync();
             }
             catch (Exception e)
             {
@@ -305,7 +306,7 @@ namespace SoonZik.ViewModels
             }
 
             if (exception != null)
-                await new MessageDialog(exception.Message, "Add follow Error").ShowAsync();
+                await new MessageDialog(exception.Message, "Erreur lors du follow de l'utilisateur").ShowAsync();
         }
 
         public async void remove_follow()
@@ -327,14 +328,14 @@ namespace SoonZik.ViewModels
                 // Debug
                 if (json.ToString() == "Success")
                 {
-                    await new MessageDialog("Remove follow OK").ShowAsync();
+                    //await new MessageDialog("Remove follow OK").ShowAsync();
                     Singleton.Instance.Current_user.follows.Remove(artist);
                     add_follow_btn = Visibility.Visible;
                     remove_follow_btn = Visibility.Collapsed;
                     followers.Remove(Singleton.Instance.Current_user);
                 }
                 else
-                    await new MessageDialog("Remove follow KO").ShowAsync();
+                    await new MessageDialog("Erreur lors du unfollow de l'utilisateur").ShowAsync();
             }
             catch (Exception e)
             {
@@ -342,7 +343,7 @@ namespace SoonZik.ViewModels
             }
 
             if (exception != null)
-                await new MessageDialog(exception.Message, "Remove follow Error").ShowAsync();
+                await new MessageDialog(exception.Message, "Erreur lors du unfollow de l'utilisateur").ShowAsync();
         }
     }
 }

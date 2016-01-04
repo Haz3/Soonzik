@@ -86,8 +86,10 @@ namespace SoonZik.Tools
                 exception = ex;
             }
 
+            // A VIRER
             if (exception != null)
                 await new MessageDialog(exception.Message, "Get data error").ShowAsync();
+            // A VIRER
             return null;
         }
 
@@ -111,7 +113,7 @@ namespace SoonZik.Tools
             }
 
             if (exception != null)
-                await new MessageDialog(exception.Message, "Get note error").ShowAsync();
+                await new MessageDialog("Erreur lors de la récupération de la note").ShowAsync();
             return null;
         }
 
@@ -129,15 +131,19 @@ namespace SoonZik.Tools
                 HttpWebResponse response = (HttpWebResponse)await request.GetResponseAsync();
                 var reader = new StreamReader(response.GetResponseStream());
                 var json = JObject.Parse(reader.ReadToEnd()).SelectToken("content").ToString();
-                return JsonConvert.DeserializeObject(json, Object.GetType());
+                if (json != "{}") // for the cart
+                    return JsonConvert.DeserializeObject(json, Object.GetType());
+                return null;
             }
             catch (WebException ex)
             {
                 exception = ex;
             }
 
+            // A VIRER
             if (exception != null)
                 await new MessageDialog(exception.Message, "Get Object Error").ShowAsync();
+            // ---
             return null;
         }
 
@@ -156,7 +162,7 @@ namespace SoonZik.Tools
 
                 if (json == "[]")
                 {
-                    await new MessageDialog("Nothing to be found...").ShowAsync();
+                    await new MessageDialog("Rien ne correspond à votre recherche").ShowAsync();
                     return null;
                 }
                 return JsonConvert.DeserializeObject(json, Object.GetType());
@@ -169,7 +175,7 @@ namespace SoonZik.Tools
             }
 
             if (exception != null)
-                await new MessageDialog(exception.Message, "Get Object Error").ShowAsync();
+                await new MessageDialog("Erreur lors de la recherche").ShowAsync();
             return null;
         }
 
@@ -195,8 +201,8 @@ namespace SoonZik.Tools
                 exception = ex;
             }
 
-            if (exception != null)
-                await new MessageDialog(exception.Message, "Get Object Error").ShowAsync();
+            //if (exception != null)
+            //    await new MessageDialog(exception.Message, "Get Object Error").ShowAsync();
             return null;
         }
     }

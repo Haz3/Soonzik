@@ -35,7 +35,7 @@ namespace SoonZik.Tools
             }
 
             if (exception != null)
-                await new MessageDialog(exception.Message, "GetKey error").ShowAsync();
+                await new MessageDialog("Erreur lors de la récupération de la clé de sécurité").ShowAsync();
             return null;
         }
 
@@ -58,7 +58,7 @@ namespace SoonZik.Tools
             }
 
             if (exception != null)
-                await new MessageDialog(exception.Message, "Erreur lors de la recuperation du SocialToken").ShowAsync();
+                await new MessageDialog("Erreur lors de la récupération du SocialToken").ShowAsync();
             return null;
         }
 

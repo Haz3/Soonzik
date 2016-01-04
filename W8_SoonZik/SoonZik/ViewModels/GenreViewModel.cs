@@ -57,7 +57,7 @@ namespace SoonZik.ViewModels
             }
 
             if (exception != null)
-                await new MessageDialog(exception.Message, "Genre error").ShowAsync();
+                await new MessageDialog("Erreur lors de la récupération des genres").ShowAsync();
         }
     }
 }

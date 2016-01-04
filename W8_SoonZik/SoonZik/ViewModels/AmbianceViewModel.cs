@@ -59,7 +59,7 @@ namespace SoonZik.ViewModels
             }
 
             if (exception != null)
-                await new MessageDialog(exception.Message, "Ambiances error").ShowAsync();
+                await new MessageDialog("Erreur lors de la récupération des ambiances").ShowAsync();
         }
     }
 }

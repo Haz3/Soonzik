@@ -19,6 +19,7 @@ namespace SoonZik.Models
         public Address address { get; set; }
         public string phoneNumber { get; set; }
         public string birthday { get; set; }
+        public DateTimeOffset birthday_dt { get; set; }
         public string description { get; set; }
         public string background { get; set; }
         public string language { get; set; }

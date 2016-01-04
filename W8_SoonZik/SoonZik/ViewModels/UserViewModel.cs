@@ -18,7 +18,8 @@ namespace SoonZik.ViewModels
 {
     class UserViewModel : INotifyPropertyChanged
     {
-        static string url = "http://api.lvh.me:3000/";
+        static string url = Singleton.Instance.url;
+        //static string url = "http://api.lvh.me:3000/";
         //static string url = "http://soonzikapi.herokuapp.com/";
 
 
@@ -143,7 +144,7 @@ namespace SoonZik.ViewModels
             }
 
             if (exception != null)
-                await new MessageDialog(exception.Message, "user error").ShowAsync();
+                await new MessageDialog(exception.Message, "Erreur lors de la récupération de l'utilisateur").ShowAsync();
         }
 
         public async void get_tweets(int id)
@@ -165,7 +166,7 @@ namespace SoonZik.ViewModels
             }
 
             if (exception != null)
-                await new MessageDialog(exception.Message, "get user's tweets error").ShowAsync();
+                await new MessageDialog("Erreur lors de la récupération des sweets de l'utilisateur").ShowAsync();
         }
 
         public async void get_friends(int id)
@@ -210,7 +211,7 @@ namespace SoonZik.ViewModels
             }
 
             if (exception != null)
-                await new MessageDialog(exception.Message, "get friends error").ShowAsync();
+                await new MessageDialog("Erreur lors de la récupération des amis de l'utilisateur").ShowAsync();
         }
 
         async public void get_follows(int id)
@@ -232,7 +233,7 @@ namespace SoonZik.ViewModels
             }
 
             if (exception != null)
-                await new MessageDialog(exception.Message, "get follows error").ShowAsync();
+                await new MessageDialog("Erreur lors de la récupération des follows de l'utilisateur").ShowAsync();
         }
 
         public async void add_friend()
@@ -255,14 +256,14 @@ namespace SoonZik.ViewModels
                 // Debug
                 if (json.ToString() == "Created")
                 {
-                    await new MessageDialog("Add friend OK").ShowAsync();
+                    //await new MessageDialog("Add friend OK").ShowAsync();
                     Singleton.Instance.Current_user.friends.Add(user);
                     add_friend_btn = Visibility.Collapsed;
                     remove_friend_btn = Visibility.Visible;
                     friends.Add(Singleton.Instance.Current_user);
                 }
                 else
-                    await new MessageDialog("Add friend KO").ShowAsync();
+                    await new MessageDialog("Erreur lors de l'ajout en ami de cet utilisateur").ShowAsync();
             }
             catch (Exception e)
             {
@@ -270,7 +271,7 @@ namespace SoonZik.ViewModels
             }
 
             if (exception != null)
-                await new MessageDialog(exception.Message, "Add friend Error").ShowAsync();
+                await new MessageDialog("Erreur lors de l'ajout en ami de cet utilisateur").ShowAsync();
         }
 
         public async void remove_friend()
@@ -292,14 +293,14 @@ namespace SoonZik.ViewModels
                 // Debug
                 if (json.ToString() == "Success")
                 {
-                    await new MessageDialog("Remove friend OK").ShowAsync();
+                    //await new MessageDialog("Remove friend OK").ShowAsync();
                     Singleton.Instance.Current_user.friends.Remove(user);
                     add_friend_btn = Visibility.Visible;
                     remove_friend_btn = Visibility.Collapsed;
                     friends.Remove(Singleton.Instance.Current_user);
                 }
                 else
-                    await new MessageDialog("Remove friend KO").ShowAsync();
+                    await new MessageDialog("Erreur lors de la suppression de cet ami de votre liste").ShowAsync();
             }
             catch (Exception e)
             {
@@ -307,7 +308,7 @@ namespace SoonZik.ViewModels
             }
 
             if (exception != null)
-                await new MessageDialog(exception.Message, "Remove friend Error").ShowAsync();
+                await new MessageDialog("Erreur lors de la suppression de cet ami de votre liste").ShowAsync();
         }
 
         public async void send_msg()

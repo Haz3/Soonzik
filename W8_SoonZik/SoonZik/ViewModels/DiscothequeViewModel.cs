@@ -56,7 +56,7 @@ namespace SoonZik.ViewModels
             }
 
             if (exception != null)
-                await new MessageDialog(exception.Message, "Discotheque error").ShowAsync();
+                await new MessageDialog(exception.Message, "Erreur lors de la récupération de la discothèque").ShowAsync();
         }
     }
 }

@@ -165,7 +165,7 @@ namespace SoonZik.ViewModels
             }
 
             if (exception != null)
-                await new MessageDialog(exception.Message, "Album error").ShowAsync();
+                await new MessageDialog("Erreur lors de la récupération de l'album").ShowAsync();
         }
 
         async void load_albums()
@@ -185,7 +185,7 @@ namespace SoonZik.ViewModels
             }
 
             if (exception != null)
-                await new MessageDialog(exception.Message, "Album Error").ShowAsync();
+                await new MessageDialog("Erreur lors de la récupération des albums").ShowAsync();
         }
 
         async public void send_comment()

@@ -213,7 +213,7 @@ namespace SoonZik.ViewModels
             }
 
             if (exception != null)
-                await new MessageDialog(exception.Message, "Music error").ShowAsync();
+                await new MessageDialog("Erreur lors de la récupération de la musique").ShowAsync();
         }
 
         async public void send_comment()
@@ -248,7 +248,7 @@ namespace SoonZik.ViewModels
             }
 
             if (exception != null)
-                await new MessageDialog(exception.Message, "Music error").ShowAsync();
+                await new MessageDialog("Erreur lors de la récupération des musiques").ShowAsync();
         }
 
         public void add_to_cart()
@@ -286,7 +286,7 @@ namespace SoonZik.ViewModels
             }
 
             if (exception != null)
-                await new MessageDialog(exception.Message, "Note POST error").ShowAsync();
+                await new MessageDialog(exception.Message, "Erreur lors de la notation de la musique").ShowAsync();
         }
 
         public void note_one()

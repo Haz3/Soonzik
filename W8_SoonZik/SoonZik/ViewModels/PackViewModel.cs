@@ -181,7 +181,7 @@ namespace SoonZik.ViewModels
             }
 
             if (exception != null)
-                await new MessageDialog(exception.Message, "pack error").ShowAsync();
+                await new MessageDialog("Erreur lors de la récupération du pack").ShowAsync();
         }
 
         //async public void buy_pack() OLD
@@ -314,10 +314,10 @@ namespace SoonZik.ViewModels
 
                 if (json.ToString() == "Created")
                 {
-                    await new MessageDialog("Achat du pack OK").ShowAsync();
+                    await new MessageDialog("Achat du pack validé").ShowAsync();
                 }
                 else
-                    await new MessageDialog("Achat du pack KO").ShowAsync();
+                    await new MessageDialog("Erreur lors de l'achat du pack").ShowAsync();
             }
             catch (Exception e)
             {
@@ -325,13 +325,8 @@ namespace SoonZik.ViewModels
             }
 
             if (exception != null)
-                await new MessageDialog(exception.Message, "Achat du pack error").ShowAsync();
+                await new MessageDialog("Erreur lors de l'achat du pack").ShowAsync();
         }
-
-        //public bool verif_price()
-        //{
-        //    if ()
-        //}
     }
 
 

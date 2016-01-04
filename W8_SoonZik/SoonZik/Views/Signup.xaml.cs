@@ -27,6 +27,7 @@ namespace SoonZik.Views
         {
             this.InitializeComponent();
             DataContext = new SignupViewModel();
+            date_picker.MaxYear = DateTime.Now.AddYears(-13);
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

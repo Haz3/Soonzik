@@ -57,7 +57,7 @@ namespace SoonZik.ViewModels
             }
 
             if (exception != null)
-                await new MessageDialog(exception.Message, "Home error").ShowAsync();
+                await new MessageDialog("Erreur lors du chargement de la page d'accueil").ShowAsync();
         }
     }
 }

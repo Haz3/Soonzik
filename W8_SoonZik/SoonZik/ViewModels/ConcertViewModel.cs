@@ -114,7 +114,7 @@ namespace SoonZik.ViewModels
             }
 
             if (exception != null)
-                await new MessageDialog(exception.Message, "Concert error").ShowAsync();
+                await new MessageDialog("Erreur lors de la récupération des concerts").ShowAsync();
         }
 
         async public void like()
@@ -165,7 +165,7 @@ namespace SoonZik.ViewModels
                 exception = e;
             }
             if (exception != null)
-                await new MessageDialog(exception.Message, "Concert geocode error").ShowAsync();
+                await new MessageDialog("Erreur lors de la récupération des coordonnées des concerts").ShowAsync();
             return addr;
         }
     }

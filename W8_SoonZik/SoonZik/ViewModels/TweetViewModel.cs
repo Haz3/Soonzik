@@ -75,7 +75,7 @@ namespace SoonZik.ViewModels
             }
 
             if (exception != null)
-                await new MessageDialog(exception.Message, "Load tweet flux error").ShowAsync();
+                await new MessageDialog("Erreur lors de la récupération du flux de sweets").ShowAsync();
             return null;
         }
 
@@ -99,7 +99,7 @@ namespace SoonZik.ViewModels
             }
 
             if (exception != null)
-                await new MessageDialog(exception.Message, "Load all tweets Error").ShowAsync();
+                await new MessageDialog("Erreur lors de la récupération des sweets").ShowAsync();
             //return null;
         }
 
@@ -133,7 +133,7 @@ namespace SoonZik.ViewModels
                     //return true;
                 }
                 else
-                    await new MessageDialog("Tweet KO").ShowAsync();
+                    await new MessageDialog("Erreur lors de l'envoi du sweet").ShowAsync();
             }
             catch (Exception e)
             {
@@ -141,7 +141,7 @@ namespace SoonZik.ViewModels
             }
 
             if (exception != null)
-                await new MessageDialog(exception.Message, "Send tweet error").ShowAsync();
+                await new MessageDialog("Erreur lors de l'envoi du sweet").ShowAsync();
             //return false;
         }
 
@@ -163,7 +163,7 @@ namespace SoonZik.ViewModels
             }
 
             if (exception != null)
-                await new MessageDialog(exception.Message, "Load user error").ShowAsync();
+                await new MessageDialog(exception.Message, "Erreur lors de la récupération des utilisateurs").ShowAsync();
         }
     }
 }
