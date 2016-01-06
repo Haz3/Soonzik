@@ -173,7 +173,7 @@ module API
                   purchase_id: p.id
                 })
               else
-                request = %x(curl -s --insecure https://api-3t.sandbox.paypal.com/nvp -d "USER=florian.dewulf-facilitator@gmail.com&PWD=QRN447MQJTK4HRLH&SIGNATURE=AFcWxV21C7fd0v3bYYYRCpSSRl31A1yXlnpAqjVHPd5zaswpjnCJg-6f&METHOD=GetTransactionDetails&VERSION=78&TransactionID=#{@paypal[:payment_id]})
+                request = %x(curl -s --insecure https://api-3t.sandbox.paypal.com/nvp -d "USER=florian.dewulf-facilitator_api1.gmail.com&PWD=QRN447MQJTK4HRLH&SIGNATURE=AFcWxV21C7fd0v3bYYYRCpSSRl31A1yXlnpAqjVHPd5zaswpjnCJg-6f&METHOD=GetTransactionDetails&VERSION=78&TransactionID=#{@paypal[:payment_id]})
                 if ((request =~ /PAYMENTSTATUS=Completed/) == nil)
                   raise
                 end
