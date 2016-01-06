@@ -47,13 +47,16 @@
             <TextBlock Name="pack_title" Text="{Binding title, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="20,10,70,19" TextWrapping="Wrap" VerticalAlignment="Center" FontSize="36" Height="46" Grid.ColumnSpan="2"/>
 
             <TextBlock x:Name="pack_date_begin_tb" x:Uid="pack_date_begin_txt" Text="Debut:" HorizontalAlignment="Left" Margin="10,62,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Foreground="Black" Height="40" Width="70" FontSize="20"/>
-            <TextBlock x:Name="pack_date_begin" x:Uid="pack_date_begin" Text="{Binding Path=pack.begin_date, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="85,62,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Foreground="Black" Height="40" Width="245" FontSize="20" Grid.ColumnSpan="2"/>
+            <TextBlock x:Name="pack_date_begin" x:Uid="pack_date_begin" Text="{Binding Path=pack.begin_date, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="85,62,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Foreground="Black" Height="40" Width="215" FontSize="20" Grid.ColumnSpan="2"/>
 
             <TextBlock x:Name="pack_date_end_tb" x:Uid="pack_date_end_txt" Text="Fin:" HorizontalAlignment="Left" Margin="10,102,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Foreground="Black" Height="40" Width="70" FontSize="20"/>
-            <TextBlock x:Name="pack_date_end" x:Uid="pack_date_end" Text="{Binding Path=pack.end_date, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="85,102,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Foreground="Black" Height="40" Width="245" FontSize="20" Grid.ColumnSpan="2"/>
+            <TextBlock x:Name="pack_date_end" x:Uid="pack_date_end" Text="{Binding Path=pack.end_date, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="85,102,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Foreground="Black" Height="40" Width="215" FontSize="20" Grid.ColumnSpan="2"/>
 
             <TextBlock x:Name="pack_price_tb" x:Uid="price_txt" Text="Prix:" HorizontalAlignment="Left" Margin="10,142,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Foreground="Black" Height="40" Width="70" FontSize="20"/>
-            <TextBlock x:Name="pack_price" x:Uid="pack_price" Text="{Binding Path=pack.minimal_price, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="85,142,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Foreground="Black" Height="40" Width="135" FontSize="20"/>
+
+            <TextBlock x:Name="pack_price" x:Uid="pack_price" Text="{Binding Path=pack.minimal_price, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="85,142,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Foreground="Black" Height="40" Width="35" FontSize="20" HorizontalAlignment="Left"/>
+
+            <TextBlock x:Name="euro_symb"  Text="€" HorizontalAlignment="Left" Margin="110,142,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Foreground="Black" Height="40" Width="35" FontSize="20"/>
 
             <TextBlock x:Name="pack_album_list_txt" x:Uid="pack_album_list_txt" Text="Liste des albums:" HorizontalAlignment="Left" Margin="110,45,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Foreground="Black" Height="40" Width="250" FontSize="20" Grid.Column="1"/>
 
@@ -67,12 +70,12 @@
 
         <Grid Margin="400,730,400,10" Background="White">
 
-            <Slider x:Name="artist_bar" HorizontalAlignment="Left" Value="{Binding artist, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Height="25" Margin="225,107,0,0" VerticalAlignment="Top" Width="720" Background="#590377D6" BorderBrush="#FFF0FF94" Foreground="#FF1D0063" SmallChange="1"/>
+            <Slider x:Name="artist_bar" ValueChanged="artist_bar_ValueChanged" HorizontalAlignment="Left" Value="{Binding artist, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Height="25" Margin="225,107,0,0" VerticalAlignment="Top" Width="720" Background="#590377D6" BorderBrush="#FFF0FF94" Foreground="#FF1D0063" SmallChange="1"/>
             <TextBlock x:Uid="artist_txt" x:Name="artist_txt" HorizontalAlignment="Left" Margin="105,107,0,0" TextWrapping="Wrap" Text="Artiste:" VerticalAlignment="Top" Height="25" Width="115" Foreground="Black" FontSize="20"/>
             <TextBlock x:Name="artist_value" HorizontalAlignment="Left" Margin="965,106,0,0" TextWrapping="Wrap" Text="{Binding artist, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Height="25" Width="Auto" Foreground="Black" FontSize="20"/>
 
 
-            <Slider x:Name="association_bar" HorizontalAlignment="Left" Value="{Binding association, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Height="25" Margin="225,167,0,0" VerticalAlignment="Top" Width="720" Background="#590377D6" BorderBrush="#FFF0FF94" Foreground="#FF1D0063" SmallChange="1"/>
+            <Slider x:Name="association_bar" ValueChanged="association_bar_ValueChanged" HorizontalAlignment="Left" Value="{Binding association, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Height="25" Margin="225,167,0,0" VerticalAlignment="Top" Width="720" Background="#590377D6" BorderBrush="#FFF0FF94" Foreground="#FF1D0063" SmallChange="1"/>
             <TextBlock x:Uid="association_txt" x:Name="association_txt" HorizontalAlignment="Left" Margin="105,167,0,0" TextWrapping="Wrap" Text="Association:" VerticalAlignment="Top" Height="25" Width="115" Foreground="Black" FontSize="20"/>
             <TextBlock x:Name="association_value" HorizontalAlignment="Left" Margin="965,166,0,0" TextWrapping="Wrap" Text="{Binding association, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Height="Auto" Width="45" Foreground="Black" FontSize="20"/>
 

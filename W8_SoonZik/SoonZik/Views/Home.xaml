@@ -9,36 +9,7 @@
     x:Class="SoonZik.Views.Home"
     mc:Ignorable="d">
 
-
-    <Page.Resources>
-        <DataTemplate x:Key="GroupTemplate">
-            <Grid Height="110" Width="480" Margin="10" >
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-            </Grid>
-        </DataTemplate>
-        <DataTemplate x:Key="GroupTemplate1">
-            <Grid Height="110" Width="480" Margin="10" >
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-            </Grid>
-        </DataTemplate>
-        <DataTemplate x:Key="GroupTemplate2">
-            <Grid Height="110" Width="480" Margin="10" >
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-            </Grid>
-        </DataTemplate>
-    </Page.Resources>
-
-
-    <Grid Background="#CCCCCC" HorizontalAlignment="Left" Height="1080" VerticalAlignment="Top" Width="1920">
+    <Grid Background="#CCCCCC" Height="Auto" Width="Auto">
 
         <StackPanel Orientation="Horizontal" Background="#FFB0B0B0" Width="1920" Height="80" HorizontalAlignment="Left" VerticalAlignment="Top" >
             <Button x:Name="news_btn" x:Uid="news_btn" Content="News" HorizontalAlignment="Left" VerticalAlignment="Top" Height="72" Width="Auto" FontFamily="Berlin Sans FB Demi" FontSize="35" BorderBrush="White" Click="news_btn_Click" Foreground="White" Margin="5,5,5,0" Background="#FF27AAE1"/>
@@ -55,6 +26,7 @@
 
         </StackPanel>
 
+        <TextBlock x:Name="hello_tb" HorizontalAlignment="Left" Margin="10,85,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="55" Width="410" FontSize="25"/>
         <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Height="50" Margin="1465,102,45,940">
             <StackPanel.DataContext>
                 <ViewModels:SearchViewModel/>
@@ -64,7 +36,7 @@
         </StackPanel>
 
 
-        <ListView ItemClick="News_ItemClick" ItemsSource="{Binding news_list}" x:Name="News" Background="#B0B0B0" HorizontalAlignment="Left" Height="800" Margin="154,220,0,0" VerticalAlignment="Top" Width="500"  IsItemClickEnabled="True" IsSwipeEnabled="False" SelectionMode="None">
+        <!--<ListView ItemClick="News_ItemClick" ItemsSource="{Binding news_list}" x:Name="News" Background="#B0B0B0" HorizontalAlignment="Left" Height="775" Margin="49,245,0,0" VerticalAlignment="Top" Width="436"  IsItemClickEnabled="True" IsSwipeEnabled="False" SelectionMode="None">
 
             <ListView.ItemTemplate>
                 <DataTemplate>
@@ -82,9 +54,9 @@
                     </StackPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>
-        </ListView>
+        </ListView>-->
 
-        <ListView ItemClick="Music_ItemClick" ItemsSource="{Binding album_list}" x:Name="Music" Background="#B0B0B0" HorizontalAlignment="Left" Height="800" Margin="710,220,0,0" VerticalAlignment="Top" Width="500" IsItemClickEnabled="True" IsSwipeEnabled="False" SelectionMode="None">
+        <!--<ListView ItemClick="Music_ItemClick" ItemsSource="{Binding album_list}" x:Name="Music" Background="#B0B0B0" HorizontalAlignment="Left" Height="800" Margin="710,220,0,0" VerticalAlignment="Top" Width="500" IsItemClickEnabled="True" IsSwipeEnabled="False" SelectionMode="None">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Margin="20,0,0,0">
@@ -103,9 +75,13 @@
                     </StackPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>
-        </ListView>
+        </ListView>-->
 
-        <ListView x:Name="Community" ItemsSource="{Binding tweet_list, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Background="#B0B0B0" HorizontalAlignment="Left" Height="800" Margin="1266,220,0,0" VerticalAlignment="Top" Width="500" IsItemClickEnabled="True" IsSwipeEnabled="False" SelectionMode="None">
+
+
+
+
+        <ListView x:Name="Community" ItemsSource="{Binding tweet_list, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Background="#B0B0B0" Height="465" Margin="1356,320,0,0" VerticalAlignment="Top" IsItemClickEnabled="True" IsSwipeEnabled="False" SelectionMode="None" HorizontalAlignment="Left" Width="454">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <StackPanel>
@@ -126,13 +102,39 @@
             </ListView.ItemTemplate>
         </ListView>
 
-        <TextBlock x:Name="news_txt" x:Uid="news_txt" HorizontalAlignment="Left" Margin="154,159,0,0" TextWrapping="Wrap" Text="Dernières news" VerticalAlignment="Top" Height="50" Width="500" FontSize="40" Foreground="#FF27AAE1"/>
-        <TextBlock x:Name="music_txt" x:Uid="music_txt" Margin="710,159,0,0" TextWrapping="Wrap" Text="Musique" VerticalAlignment="Top" Height="50" Width="500" FontSize="40" Foreground="#FF27AAE1" HorizontalAlignment="Left"/>
-        <TextBlock x:Name="community_txt" x:Uid="community_txt" HorizontalAlignment="Left" Margin="1266,159,0,0" TextWrapping="Wrap" Text="Communauté" VerticalAlignment="Top" Height="50" Width="500" FontSize="40" Foreground="#FF27AAE1"/>
-        <TextBlock x:Name="hello_tb" HorizontalAlignment="Left" Margin="10,85,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="55" Width="410" FontSize="25"/>
+        <TextBlock x:Name="news_txt" x:Uid="news_txt" HorizontalAlignment="Left" Margin="30,145,0,0" TextWrapping="Wrap" Text="Dernières news" VerticalAlignment="Top" Height="50" Width="310" FontSize="40" Foreground="#FF27AAE1"/>
+        <!--<TextBlock x:Name="music_txt" x:Uid="music_txt" Margin="710,159,0,0" TextWrapping="Wrap" Text="Musique" VerticalAlignment="Top" Height="50" Width="500" FontSize="40" Foreground="#FF27AAE1" HorizontalAlignment="Left"/>-->
+        <TextBlock x:Name="community_txt" x:Uid="community_txt" HorizontalAlignment="Left" Margin="1465,250,0,0" TextWrapping="Wrap" Text="Communauté" VerticalAlignment="Top" Height="50" Width="389" FontSize="40" Foreground="#FF27AAE1"/>
         <TextBlock x:Name="feedback" HorizontalAlignment="Left" Margin="10,1045,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="25" Width="275" Foreground="#FF111111" FontSize="25">
             <Hyperlink NavigateUri="http://api.lvh.me:3000/feedbacks/new" Foreground="#FF611EFF" >Feedback</Hyperlink>
         </TextBlock>
+        <TextBlock x:Name="pack_txt" x:Uid="pack_txt" Margin="520,145,0,0" TextWrapping="Wrap" Text="Packs" VerticalAlignment="Top" Height="50" Width="500" FontSize="40" Foreground="#FF27AAE1" HorizontalAlignment="Left"/>
+
+        <GridView x:Name="news_grid" ItemClick="news_grid_ItemClick" IsItemClickEnabled="True" ItemsSource="{Binding news_list, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="30,200,0,0" VerticalAlignment="Top" Width="425" Height="740">
+            <GridView.ItemTemplate>
+                <DataTemplate>
+                    <Grid Width="200" Height="200">
+                        <Image Stretch="Fill" Source="http://assos-escrennes.fr/descibel-radio/wp-content/uploads/2015/01/Generic-News-Logo.png" VerticalAlignment="Top" HorizontalAlignment="Center"/>
+                        <StackPanel Orientation="Vertical" VerticalAlignment="Bottom" Margin="0,0,0,10">
+                            <TextBlock Text="{Binding title}" FontSize="20" Margin="10,0,0,0" TextTrimming="WordEllipsis" TextWrapping="Wrap" HorizontalAlignment="Left" Foreground="Black"/>
+                        </StackPanel>
+                    </Grid>
+                </DataTemplate>
+            </GridView.ItemTemplate>
+        </GridView>
+
+        <GridView x:Name="pack_grid" ItemClick="pack_list_ItemClick" IsItemClickEnabled="True" ItemsSource="{Binding pack_list, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="520,200,0,0" VerticalAlignment="Top" Width="425" Height="740">
+            <GridView.ItemTemplate>
+                <DataTemplate>
+                    <Grid Width="200" Height="200">
+                        <Image Stretch="Fill" Source="ms-appx:///Assets/Record-Album-02.jpg" VerticalAlignment="Top" HorizontalAlignment="Center"/>
+                        <StackPanel Orientation="Vertical" VerticalAlignment="Bottom" Margin="0,0,0,10">
+                            <TextBlock Text="{Binding title}" FontSize="20" Margin="10,0,0,0" TextTrimming="WordEllipsis" TextWrapping="Wrap" HorizontalAlignment="Left" Foreground="White"/>
+                        </StackPanel>
+                    </Grid>
+                </DataTemplate>
+            </GridView.ItemTemplate>
+        </GridView>
 
     </Grid>
 </Page>

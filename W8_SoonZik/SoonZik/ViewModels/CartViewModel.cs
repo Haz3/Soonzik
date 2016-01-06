@@ -214,7 +214,9 @@ namespace SoonZik.ViewModels
                 }
                 //buy_cart_after_pp_validation();
                 //florian.dewulf-facilitator@gmail.com
-                PayPal.Checkout.BuyNow purchase = new PayPal.Checkout.BuyNow("test_sz_merchant@gmail.com");
+                //PayPal.Checkout.BuyNow purchase = new PayPal.Checkout.BuyNow("test_sz_merchant@gmail.com");
+                PayPal.Checkout.BuyNow purchase = new PayPal.Checkout.BuyNow("florian.dewulf-facilitator@gmail.com");
+
                 purchase.UseSandbox = true;
 
                 purchase.Currency = "EUR";
@@ -234,26 +236,26 @@ namespace SoonZik.ViewModels
                 // See http://paypal.github.io/Windows8SDK/csharp.html#Events for more
                 purchase.Error += new EventHandler<PayPal.Checkout.Event.ErrorEventArgs>((source, eventArg) =>
                 {
-                    this.txt_pp = "There was an error processing your payment: " + eventArg.Message;
+                    this.txt_pp = "Une erreur est survenue lors du paiement: " + eventArg.Message;
                 });
                 purchase.Auth += new EventHandler<PayPal.Checkout.Event.AuthEventArgs>((source, eventArg) =>
                 {
-                    this.txt_pp = "Auth: " + eventArg.Token;
+                    this.txt_pp = "Authentification: " + eventArg.Token;
                 });
                 purchase.Start += new EventHandler<PayPal.Checkout.Event.StartEventArgs>((source, eventArg) =>
                 {
-                    this.txt_pp = "Start";
+                    this.txt_pp = "Chargement de PayPal...";
                 });
                 purchase.Complete += new EventHandler<PayPal.Checkout.Event.CompleteEventArgs>((source, eventArg) =>
                 {
                     //buy_cart_after_pp_validation();
-                    this.txt_pp = "Payment is complete. Transaction id: " + eventArg.TransactionID;
+                    this.txt_pp = "Le paiement à été validé: " + eventArg.TransactionID;
                     this.pp_transac_id = eventArg.TransactionID;
                     this.buy_cart_after_pp_validation();
                 });
                 purchase.Cancel += new EventHandler<PayPal.Checkout.Event.CancelEventArgs>((source, eventArg) =>
                 {
-                    this.txt_pp = "Payment was canceled by the user.";
+                    this.txt_pp = "Le paiement à été annulé par l'utilisateur.";
                 });
 
                 // Launch the secure PayPal interface. This is an asynchronous method
@@ -277,20 +279,7 @@ namespace SoonZik.ViewModels
                 string pack_data =
                     "user_id=" + Singleton.Instance.Current_user.id +
                     "&secureKey=" + secureKey +
-                    "&paypal[payment_id]=" + "PAY-qweqweqweqwe" +
-                    "&paypal[payment_method]=" + "PayPal" +
-                    "&paypal[status]=" + "complete" +
-                    "&paypal[payer_email]=" + "test@test.test" +
-                    "&paypal[payer_first_name]=" + Singleton.Instance.Current_user.fname +
-                    "&paypal[payer_last_name]=" + Singleton.Instance.Current_user.language +
-                    "&paypal[payer_id]=" + "1337" +
-                    "&paypal[payer_phone]=" + "0606060606" +
-                    "&paypal[payer_country_code]=" + "FR" +
-                    "&paypal[payer_street]=" + "69" +
-                    "&paypal[payer_city]=" + "Parise" +
-                    "&paypal[payer_postal_code]=" + "75000" +
-                    "&paypal[payer_recipient_name]=" + Singleton.Instance.Current_user.fname;
-
+                    "&paypal[payment_id]=" + pp_transac_id;
 
                 // HTTP_POST -> URL + DATA
                 var response = await request.post_request("purchases/buycart", pack_data);

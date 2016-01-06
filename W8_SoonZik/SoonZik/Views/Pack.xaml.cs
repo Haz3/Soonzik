@@ -23,6 +23,10 @@ namespace SoonZik.Views
     /// </summary>
     public sealed partial class Pack : Page
     {
+        int old_asso_value = 20;
+        int old_artist_value = 60;
+        int old_website_value = 15;
+
         public Pack()
         {
             this.InitializeComponent();
@@ -32,18 +36,6 @@ namespace SoonZik.Views
         {
             SoonZik.Models.Pack elem = e.Parameter as SoonZik.Models.Pack;
             DataContext = new PackViewModel(elem.id);
-            //pack_title.Text = elem.title;
-            //pack_date_begin.Text = elem.begin_date;
-            //pack_date_end.Text = elem.end_date;
-            //pack_price.Text = elem.minimal_price.ToString();
-
-            //if (elem.descriptions.Any())
-            //{
-            //    description_fr.Text = elem.descriptions[0].description;
-            //    if (elem.descriptions.Count == 2)
-            //      description_en.Text = elem.descriptions[1].description;
-            //}
-            //pack_album_listview.ItemsSource = elem.albums;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -56,5 +48,27 @@ namespace SoonZik.Views
             var item = ((SoonZik.Models.Album)e.ClickedItem);
             this.Frame.Navigate(typeof(Album), item);
         }
+
+        private void artist_bar_ValueChanged(object sender, RangeBaseValueChangedEventArgs e)
+        {
+            association_bar.Value = (100 - artist_bar.Value) / ((old_website_value / old_asso_value) + 1);
+            website_bar.Value = (100 - artist_bar.Value) / ((old_asso_value / old_website_value) + 1);
+
+        }
+
+        private void association_bar_ValueChanged(object sender, RangeBaseValueChangedEventArgs e)
+        {
+            artist_bar.Value = (100 - association_bar.Value) / ((old_website_value / old_artist_value) + 1);
+            website_bar.Value = (100 - association_bar.Value) / ((old_artist_value / old_website_value) + 1);
+        }
+
+        private void website_bar_ValueChanged(object sender, RangeBaseValueChangedEventArgs e)
+        {
+            //artist_bar.Value = (100 - website_bar.Value) / ((old_asso_value / old_artist_value) + 1);
+            //association_bar.Value = (100 - website_bar.Value) / ((old_artist_value / old_asso_value) + 1);
+
+        }
+
+
     }
 }
