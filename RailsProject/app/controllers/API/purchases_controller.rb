@@ -46,27 +46,35 @@ module API
               @returnValue = { content: nil }
               codeAnswer 202
             else
-              payment = Payment.find(@paypal[:payment_id])
+              if ((@paypal[:payment_id] =~ /PAY-[A-Za-z-0-9]/) != nil)
+                payment = Payment.find(@paypal[:payment_id])
 
-              address = payment.payer.payer_info.shipping_address
-              payer_info = payment.payer.payer_info
-              PaypalPayment.create({
-                payment_id: payment.id,
-                payment_method: payment.payer.payment_method,
-                status: payment.payer.status,
-                payer_email: payment.payer.payer_info.email,
-                payer_first_name: payment.payer.payer_info.first_name,
-                payer_last_name: payment.payer.payer_info.last_name,
-                payer_id: payment.payer.payer_info.payer_id,
-                payer_phone: payment.payer.payer_info.phone,
-                payer_country_code: payment.payer.payer_info.country_code,
-                payer_street: payment.payer.payer_info.shipping_address.line1,
-                payer_city: payment.payer.payer_info.shipping_address.city,
-                payer_postal_code: payment.payer.payer_info.shipping_address.postal_code,
-                payer_country_code: payment.payer.payer_info.shipping_address.country_code,
-                payer_recipient_name: payment.payer.payer_info.shipping_address.recipient_name,
-                purchase_id: p.id
-              })
+                address = payment.payer.payer_info.shipping_address
+                payer_info = payment.payer.payer_info
+                PaypalPayment.create({
+                  payment_id: payment.id,
+                  payment_method: payment.payer.payment_method,
+                  status: payment.payer.status,
+                  payer_email: payment.payer.payer_info.email,
+                  payer_first_name: payment.payer.payer_info.first_name,
+                  payer_last_name: payment.payer.payer_info.last_name,
+                  payer_id: payment.payer.payer_info.payer_id,
+                  payer_phone: payment.payer.payer_info.phone,
+                  payer_country_code: payment.payer.payer_info.country_code,
+                  payer_street: payment.payer.payer_info.shipping_address.line1,
+                  payer_city: payment.payer.payer_info.shipping_address.city,
+                  payer_postal_code: payment.payer.payer_info.shipping_address.postal_code,
+                  payer_country_code: payment.payer.payer_info.shipping_address.country_code,
+                  payer_recipient_name: payment.payer.payer_info.shipping_address.recipient_name,
+                  purchase_id: p.id
+                })
+
+              else
+                request = `curl -s --insecure https://api-3t.sandbox.paypal.com/nvp -d "USER=florian.dewulf-facilitator@gmail.com&PWD=QRN447MQJTK4HRLH&SIGNATURE=AFcWxV21C7fd0v3bYYYRCpSSRl31A1yXlnpAqjVHPd5zaswpjnCJg-6f&METHOD=GetTransactionDetails&VERSION=78&TransactionID=#{@paypal[:payment_id]}`
+                if ((request =~ /PAYMENTSTATUS=Completed/) == nil)
+                  raise
+                end
+              end
 
               list.each { |item|
                 if (item.is_a?(Music))
@@ -142,28 +150,36 @@ module API
               p.user_id = gift_to.id
               p.save!
 
-              p.addPurchasedPackFromObject(pack, (pack.averagePrice > @amount.to_f), @artist, @association, @website, @amount, gift_to.id)
+              if ((@paypal[:payment_id] =~ /PAY-[A-Za-z-0-9]/) != nil)
 
-              payment = Payment.find(@paypal[:payment_id])
-              address = payment.payer.payer_info.shipping_address
-              payer_info = payment.payer.payer_info
-              PaypalPayment.create({
-                payment_id: payment.id,
-                payment_method: payment.payer.payment_method,
-                status: payment.payer.status,
-                payer_email: payment.payer.payer_info.email,
-                payer_first_name: payment.payer.payer_info.first_name,
-                payer_last_name: payment.payer.payer_info.last_name,
-                payer_id: payment.payer.payer_info.payer_id,
-                payer_phone: payment.payer.payer_info.phone,
-                payer_country_code: payment.payer.payer_info.country_code,
-                payer_street: payment.payer.payer_info.shipping_address.line1,
-                payer_city: payment.payer.payer_info.shipping_address.city,
-                payer_postal_code: payment.payer.payer_info.shipping_address.postal_code,
-                payer_country_code: payment.payer.payer_info.shipping_address.country_code,
-                payer_recipient_name: payment.payer.payer_info.shipping_address.recipient_name,
-                purchase_id: p.id
-              })
+                payment = Payment.find(@paypal[:payment_id])
+                address = payment.payer.payer_info.shipping_address
+                payer_info = payment.payer.payer_info
+                PaypalPayment.create({
+                  payment_id: payment.id,
+                  payment_method: payment.payer.payment_method,
+                  status: payment.payer.status,
+                  payer_email: payment.payer.payer_info.email,
+                  payer_first_name: payment.payer.payer_info.first_name,
+                  payer_last_name: payment.payer.payer_info.last_name,
+                  payer_id: payment.payer.payer_info.payer_id,
+                  payer_phone: payment.payer.payer_info.phone,
+                  payer_country_code: payment.payer.payer_info.country_code,
+                  payer_street: payment.payer.payer_info.shipping_address.line1,
+                  payer_city: payment.payer.payer_info.shipping_address.city,
+                  payer_postal_code: payment.payer.payer_info.shipping_address.postal_code,
+                  payer_country_code: payment.payer.payer_info.shipping_address.country_code,
+                  payer_recipient_name: payment.payer.payer_info.shipping_address.recipient_name,
+                  purchase_id: p.id
+                })
+              else
+                request = %x(curl -s --insecure https://api-3t.sandbox.paypal.com/nvp -d "USER=florian.dewulf-facilitator@gmail.com&PWD=QRN447MQJTK4HRLH&SIGNATURE=AFcWxV21C7fd0v3bYYYRCpSSRl31A1yXlnpAqjVHPd5zaswpjnCJg-6f&METHOD=GetTransactionDetails&VERSION=78&TransactionID=#{@paypal[:payment_id]})
+                if ((request =~ /PAYMENTSTATUS=Completed/) == nil)
+                  raise
+                end
+              end
+
+              p.addPurchasedPackFromObject(pack, (pack.averagePrice > @amount.to_f), @artist, @association, @website, @amount, gift_to.id)
 
               @returnValue = {
                 content: pack.as_json(only: Pack.miniKey, :include => {
