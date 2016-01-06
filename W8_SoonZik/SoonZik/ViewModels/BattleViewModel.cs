@@ -101,7 +101,7 @@ namespace SoonZik.ViewModels
             }
 
             if (exception != null)
-                await new MessageDialog(exception.Message, "Battle error").ShowAsync();
+                await new MessageDialog("Erreur lors de la récupération des battles").ShowAsync();
         }
 
         public void vote_a1()
@@ -132,7 +132,7 @@ namespace SoonZik.ViewModels
                 // Debug. 200 = success
                 if (json.ToString() == "200" || json.ToString() == "201")
                 {
-                    await new MessageDialog("Vote for " + id + " OK").ShowAsync();
+                    await new MessageDialog("Le vote a été comptabilisé").ShowAsync();
 
                     // SET NEW VOTE
                     Vote new_vote = new Vote();
@@ -150,7 +150,7 @@ namespace SoonZik.ViewModels
                     //selected_battle = add_result_to_battle(selected_battle);
                 }
                 else
-                    await new MessageDialog("Vote KO").ShowAsync();
+                    await new MessageDialog("Erreur lors du vote").ShowAsync();
             }
             catch (Exception e)
             {
@@ -158,7 +158,7 @@ namespace SoonZik.ViewModels
             }
 
             if (exception != null)
-                await new MessageDialog(exception.Message, "Vote Error").ShowAsync();
+                await new MessageDialog("Erreur lors du vote").ShowAsync();
         }
 
         public Battle add_result_to_battle(Battle item)

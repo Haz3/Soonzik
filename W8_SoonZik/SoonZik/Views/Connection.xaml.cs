@@ -33,5 +33,12 @@ namespace SoonZik.Views
         {
             this.Frame.Navigate(typeof(Signup));
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            var item = new SoonZik.Models.Pack();
+            item.id = 1;
+            this.Frame.Navigate(typeof(Pack), item);
+        }
     }
 }

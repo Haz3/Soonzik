@@ -20,9 +20,7 @@ namespace SoonZik.ViewModels.Command
 
         public bool CanExecute(object parameter)
         {
-            if (_ViewModel.passwd == _ViewModel.passwd_verif)
-              return true;
-            return false;
+            return true;
         }
 
         public void Execute(object parameter)

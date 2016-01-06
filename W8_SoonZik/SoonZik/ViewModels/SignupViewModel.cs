@@ -29,6 +29,17 @@ namespace SoonZik.ViewModels
             }
         }
 
+        private Address _new_user_addr;
+        public Address new_user_addr
+        {
+            get { return _new_user_addr; }
+            set
+            {
+                _new_user_addr = value;
+                OnPropertyChanged("new_user_addr");
+            }
+        }
+
         private string _passwd;
         public string passwd
         {
@@ -51,6 +62,10 @@ namespace SoonZik.ViewModels
             }
         }
 
+        public int check_addr_nb;
+        public DateTimeOffset max_year { get; set; }
+
+
         public event PropertyChangedEventHandler PropertyChanged;
         protected void OnPropertyChanged(string name)
         {
@@ -70,7 +85,9 @@ namespace SoonZik.ViewModels
         public SignupViewModel()
         {
             new_user = new User();
-            new_user.address = new Address();
+            new_user_addr = new Address();
+
+
 
             //DEBUG
             //new_user.username = "totolol3";
@@ -91,13 +108,23 @@ namespace SoonZik.ViewModels
 
             try
             {
+                if (passwd != passwd_verif)
+                {
+                    await new MessageDialog("Les mots de passe insérés sont différents").ShowAsync();
+                    return;
+                }
+
+                string date = new_user.birthday_dt.ToString("yyyy-MM-dd");
+
                 string user_data =
-                        // REQUIRED
+                    // REQUIRED
                         "&user[username]=" + new_user.username +
                         "&user[email]=" + new_user.email +
                         "&user[password]=" + passwd +
-                        "&user[language]=" + new_user.language +
-                        "&user[birthday]=" + new_user.birthday +
+                        "&user[language]=" + "FR" +
+                    //"&user[language]=" + new_user.language +
+                    //"&user[birthday]=" + new_user.birthday + // OLD DATE
+                        "&user[birthday]=" + date +
 
                         // NOT REQUIRED but are :p
                         "&user[fname]=" + new_user.fname +
@@ -108,14 +135,19 @@ namespace SoonZik.ViewModels
                         "&user[description]=" + new_user.description;
 
                 // Check if address null
-                if (check_addr(new_user.address))
+                if (await check_addr(new_user_addr))
                     user_data +=
-                        "&address[numberStreet]=" + new_user.address.numberStreet +
-                        "&address[street]=" + new_user.address.street +
-                        "&address[zipcode]=" + new_user.address.zipcode +
-                        "&address[city]=" + new_user.address.city +
-                        "&address[country]=" + new_user.address.country +
-                        "&address[complement]=" + new_user.address.complement;
+                        "&address[numberStreet]=" + new_user_addr.numberStreet +
+                        "&address[street]=" + new_user_addr.street +
+                        "&address[zipcode]=" + new_user_addr.zipcode +
+                        "&address[city]=" + new_user_addr.city +
+                        "&address[country]=" + new_user_addr.country +
+                        "&address[complement]=" + new_user_addr.complement;
+                else
+                    // if the addr is not complete
+                    if (check_addr_nb == -1)
+                        return;
+
 
                 var response = await request.post_request("users/save", user_data);
 
@@ -123,11 +155,11 @@ namespace SoonZik.ViewModels
 
                 if (json.ToString() == "Created")
                 {
-                    await new MessageDialog("Email = " + new_user.email, "Signup OK").ShowAsync();
+                    await new MessageDialog("Inscription réussie").ShowAsync();
                     ((Frame)Window.Current.Content).Navigate(typeof(SoonZik.Views.Connection));
                 }
                 else
-                    await new MessageDialog(json.ToString(), "Signup KO").ShowAsync();
+                    await new MessageDialog("Erreur lors de l'inscription").ShowAsync();
             }
             catch (Exception e)
             {
@@ -135,20 +167,36 @@ namespace SoonZik.ViewModels
             }
 
             if (exception != null)
-                await new MessageDialog(exception.Message, "Signup POST Error").ShowAsync();
+                await new MessageDialog("Erreur lors de l'inscription").ShowAsync();
         }
 
-        bool check_addr(Address addr)
+        async Task<bool> check_addr(Address addr)
         {
-            if (addr.city == null || addr.complement == null || addr.country == null ||
-                addr.numberStreet == null || addr.street == null || addr.zipcode == null)
+            // no addr, let's continue
+            if ((addr.city == null || addr.city == "") &&
+             (addr.complement == null || addr.complement == "") &&
+             (addr.country == null || addr.country == "") &&
+             (addr.numberStreet == null || addr.numberStreet == "") &&
+             (addr.street == null || addr.street == "") &&
+             (addr.zipcode == null || addr.zipcode == ""))
             {
-                // To reset addr (delete / new)
-                new_user.address = null;
-                new_user.address = new Address();
+                check_addr_nb = 1;
                 return false;
             }
-            return true;
+
+            // full addr
+            if ((addr.city != null && addr.city != "") &&
+                       (addr.complement != null && addr.complement != "") &&
+                       (addr.country != null && addr.country != "") &&
+                       (addr.numberStreet != null && addr.numberStreet != "") &&
+                       (addr.street != null && addr.street != "") &&
+                       (addr.zipcode != null && addr.zipcode != ""))
+                return true;
+
+            // INCOMPLETE ADDR
+            await new MessageDialog("Merci de remplir tous les champs d'addresse").ShowAsync();
+            check_addr_nb = -1;
+            return false;
         }
     }
 }

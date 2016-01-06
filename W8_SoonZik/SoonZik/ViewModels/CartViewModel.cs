@@ -119,6 +119,13 @@ namespace SoonZik.ViewModels
             try
             {
                 var list = (List<Cart>)await Http_get.get_object(new List<Cart>(), "carts/my_cart?user_id=" + Singleton.Instance.Current_user.id.ToString() + "&secureKey=" + await Security.getSecureKey(Singleton.Instance.Current_user.id.ToString()));
+               
+                if (list == null)
+                {
+                    await new MessageDialog("Panier vide").ShowAsync();
+                    return;
+                }
+
                 foreach (var item in list)
                     list_cart.Add(item);
 
@@ -132,7 +139,7 @@ namespace SoonZik.ViewModels
             }
 
             if (exception != null)
-                await new MessageDialog(exception.Message, "Cart load error").ShowAsync();
+                await new MessageDialog("Erreur lors de la récupération du panier").ShowAsync();
         }
 
         async public static void add_to_cart(int user_id, int obj_id, string obj_type, int gift_user_id)
@@ -160,10 +167,10 @@ namespace SoonZik.ViewModels
 
                 if (json.ToString() == "Created")
                 {
-                    await new MessageDialog("Cart add OK").ShowAsync();
+                    await new MessageDialog("Ajout au panier confirmé").ShowAsync();
                 }
                 else
-                    await new MessageDialog(json.ToString(), "Cart add KO").ShowAsync();
+                    await new MessageDialog("Erreur lors de l'ajout dans le panier").ShowAsync();
             }
             catch (Exception e)
             {
@@ -171,7 +178,7 @@ namespace SoonZik.ViewModels
             }
 
             if (exception != null)
-                await new MessageDialog(exception.Message, "cart add error").ShowAsync();
+                await new MessageDialog("Erreur lors de l'ajout dans le panier").ShowAsync();
         }
 
         async public void remove_cart()
@@ -184,7 +191,7 @@ namespace SoonZik.ViewModels
                 list_cart.Remove(cart);
 
                 calc_cart_price();
-                await new MessageDialog("code = " + ret, "remove cart OK").ShowAsync();
+                //await new MessageDialog("code = " + ret, "remove cart OK").ShowAsync();
             }
 
             catch (Exception e)
@@ -193,62 +200,71 @@ namespace SoonZik.ViewModels
             }
 
             if (exception != null)
-                await new MessageDialog(exception.Message, "remove cart error").ShowAsync();
+                await new MessageDialog("Erreur lors de la suppression de l'élément dans le panier").ShowAsync();
         }
 
         async public void buy_cart()
         {
-            if (list_cart.Count() == 0)
+            try
             {
-                await new MessageDialog("Cart is empty").ShowAsync();
-                return;
-            }
-            //buy_cart_after_pp_validation();
-            //florian.dewulf-facilitator@gmail.com
-            PayPal.Checkout.BuyNow purchase = new PayPal.Checkout.BuyNow("test_sz_merchant@gmail.com");
-            purchase.UseSandbox = true;
-
-            purchase.Currency = "EUR";
-
-            // Use the ItemBuilder to create a new example item
-            PayPal.Checkout.ItemBuilder itemBuilder = new PayPal.Checkout.ItemBuilder("W8_PP")
-                .ID("W8_pp")
-                .Price(cart_price.ToString())
-                .Description("")
-                .Quantity(1);
-
-            // Add the item to the purchase,
-            purchase.AddItem(itemBuilder.Build());
-
-            // Attach event handlers so you will be notified of important events
-            // The BuyNow interface provides 5 events - Start, Auth, Cancel, Complete and Error
-            // See http://paypal.github.io/Windows8SDK/csharp.html#Events for more
-            purchase.Error += new EventHandler<PayPal.Checkout.Event.ErrorEventArgs>((source, eventArg) =>
-            {
-                this.txt_pp = "There was an error processing your payment: " + eventArg.Message;
-            });
-            purchase.Auth += new EventHandler<PayPal.Checkout.Event.AuthEventArgs>((source, eventArg) =>
-            {
-                this.txt_pp = "Auth: " + eventArg.Token;
-            });
-            purchase.Start += new EventHandler<PayPal.Checkout.Event.StartEventArgs>((source, eventArg) =>
-            {
-                this.txt_pp = "Start";
-            });
-            purchase.Complete += new EventHandler<PayPal.Checkout.Event.CompleteEventArgs>((source, eventArg) =>
-            {
+                if (list_cart.Count() == 0)
+                {
+                    await new MessageDialog("Le panier est vide !").ShowAsync();
+                    return;
+                }
                 //buy_cart_after_pp_validation();
-                this.txt_pp = "Payment is complete. Transaction id: " + eventArg.TransactionID;
-                this.pp_transac_id = eventArg.TransactionID;
-                this.buy_cart_after_pp_validation();
-            });
-            purchase.Cancel += new EventHandler<PayPal.Checkout.Event.CancelEventArgs>((source, eventArg) =>
-            {
-                this.txt_pp = "Payment was canceled by the user.";
-            });
+                //florian.dewulf-facilitator@gmail.com
+                //PayPal.Checkout.BuyNow purchase = new PayPal.Checkout.BuyNow("test_sz_merchant@gmail.com");
+                PayPal.Checkout.BuyNow purchase = new PayPal.Checkout.BuyNow("florian.dewulf-facilitator@gmail.com");
 
-            // Launch the secure PayPal interface. This is an asynchronous method
-            await purchase.Execute();
+                purchase.UseSandbox = true;
+
+                purchase.Currency = "EUR";
+
+                // Use the ItemBuilder to create a new example item
+                PayPal.Checkout.ItemBuilder itemBuilder = new PayPal.Checkout.ItemBuilder("W8_PP")
+                    .ID("W8_pp")
+                    .Price(cart_price.ToString())
+                    .Description("")
+                    .Quantity(1);
+
+                // Add the item to the purchase,
+                purchase.AddItem(itemBuilder.Build());
+
+                // Attach event handlers so you will be notified of important events
+                // The BuyNow interface provides 5 events - Start, Auth, Cancel, Complete and Error
+                // See http://paypal.github.io/Windows8SDK/csharp.html#Events for more
+                purchase.Error += new EventHandler<PayPal.Checkout.Event.ErrorEventArgs>((source, eventArg) =>
+                {
+                    this.txt_pp = "Une erreur est survenue lors du paiement: " + eventArg.Message;
+                });
+                purchase.Auth += new EventHandler<PayPal.Checkout.Event.AuthEventArgs>((source, eventArg) =>
+                {
+                    this.txt_pp = "Authentification: " + eventArg.Token;
+                });
+                purchase.Start += new EventHandler<PayPal.Checkout.Event.StartEventArgs>((source, eventArg) =>
+                {
+                    this.txt_pp = "Chargement de PayPal...";
+                });
+                purchase.Complete += new EventHandler<PayPal.Checkout.Event.CompleteEventArgs>((source, eventArg) =>
+                {
+                    //buy_cart_after_pp_validation();
+                    this.txt_pp = "Le paiement à été validé: " + eventArg.TransactionID;
+                    this.pp_transac_id = eventArg.TransactionID;
+                    this.buy_cart_after_pp_validation();
+                });
+                purchase.Cancel += new EventHandler<PayPal.Checkout.Event.CancelEventArgs>((source, eventArg) =>
+                {
+                    this.txt_pp = "Le paiement à été annulé par l'utilisateur.";
+                });
+
+                // Launch the secure PayPal interface. This is an asynchronous method
+                await purchase.Execute();
+            }
+            catch (Exception Error)
+            {
+                new MessageDialog("Erreur lors de la connexion avec PayPal").ShowAsync();
+            }
         }// buy_cart_after_pp_validation
 
         async public void buy_cart_after_pp_validation()
@@ -263,20 +279,7 @@ namespace SoonZik.ViewModels
                 string pack_data =
                     "user_id=" + Singleton.Instance.Current_user.id +
                     "&secureKey=" + secureKey +
-                    "&paypal[payment_id]=" + "PAY-qweqweqweqwe" +
-                    "&paypal[payment_method]=" + "PayPal" +
-                    "&paypal[status]=" + "complete" +
-                    "&paypal[payer_email]=" + "test@test.test" +
-                    "&paypal[payer_first_name]=" + Singleton.Instance.Current_user.fname +
-                    "&paypal[payer_last_name]=" + Singleton.Instance.Current_user.language +
-                    "&paypal[payer_id]=" + "1337" +
-                    "&paypal[payer_phone]=" + "0606060606" +
-                    "&paypal[payer_country_code]=" + "FR" +
-                    "&paypal[payer_street]=" + "69" +
-                    "&paypal[payer_city]=" + "Parise" +
-                    "&paypal[payer_postal_code]=" + "75000" +
-                    "&paypal[payer_recipient_name]=" + Singleton.Instance.Current_user.fname;
-
+                    "&paypal[payment_id]=" + pp_transac_id;
 
                 // HTTP_POST -> URL + DATA
                 var response = await request.post_request("purchases/buycart", pack_data);
@@ -287,10 +290,8 @@ namespace SoonZik.ViewModels
                     // empty cart
                     list_cart.Clear();
                     cart_price = 0.0;
-                    await new MessageDialog("Achat du panier OK").ShowAsync();
+                    await new MessageDialog("Achat du panier effectué").ShowAsync();
                 }
-                else
-                    await new MessageDialog("Achat du panier KO").ShowAsync();
             }
             catch (Exception e)
             {
@@ -298,7 +299,7 @@ namespace SoonZik.ViewModels
             }
 
             if (exception != null)
-                await new MessageDialog(exception.Message, "Achat du panier error").ShowAsync();
+                await new MessageDialog("Erreur lors de l'achat du panier").ShowAsync();
         }
 
         public void calc_cart_price()

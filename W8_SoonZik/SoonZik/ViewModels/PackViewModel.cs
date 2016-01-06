@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -58,6 +59,7 @@ namespace SoonZik.ViewModels
             {
                 _association = value;
                 OnPropertyChanged("association");
+
             }
         }
 
@@ -124,6 +126,7 @@ namespace SoonZik.ViewModels
             private set;
         }
 
+
         //public Visibility visible;
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -148,6 +151,8 @@ namespace SoonZik.ViewModels
             artist = 65;
             association = 20;
             website = 15;
+
+
         }
 
         async public void load_pack(int id)
@@ -173,6 +178,10 @@ namespace SoonZik.ViewModels
                         if (pack.descriptions[1].description == null)
                             pack.descriptions[1].description = "NO DESCRIPTION AVAILABLE";
                 }
+
+                //pack.begin_date = DateTime.ParseExact(pack.begin_date, "yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture).Date.ToString();
+                //pack.end_date = DateTime.ParseExact(pack.end_date, "yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture).Date.ToString();
+                //pack.end_date = "lol";
             }
 
             catch (Exception e)
@@ -181,7 +190,7 @@ namespace SoonZik.ViewModels
             }
 
             if (exception != null)
-                await new MessageDialog(exception.Message, "pack error").ShowAsync();
+                await new MessageDialog("Erreur lors de la récupération du pack").ShowAsync();
         }
 
         //async public void buy_pack() OLD
@@ -227,7 +236,10 @@ namespace SoonZik.ViewModels
         async public void buy_pack()
         {
 
-            PayPal.Checkout.BuyNow purchase = new PayPal.Checkout.BuyNow("test_sz_merchant@gmail.com");
+            //PayPal.Checkout.BuyNow purchase = new PayPal.Checkout.BuyNow("test_sz_merchant@gmail.com");
+            //PayPal.Checkout.BuyNow purchase = new PayPal.Checkout.BuyNow("test_sz_merchand_bis@gmail.com");
+            PayPal.Checkout.BuyNow purchase = new PayPal.Checkout.BuyNow("florian.dewulf-facilitator@gmail.com");
+
             purchase.UseSandbox = true;
 
             purchase.Currency = "EUR";
@@ -247,26 +259,26 @@ namespace SoonZik.ViewModels
             // See http://paypal.github.io/Windows8SDK/csharp.html#Events for more
             purchase.Error += new EventHandler<PayPal.Checkout.Event.ErrorEventArgs>((source, eventArg) =>
             {
-                this.txt_pp = "There was an error processing your payment: " + eventArg.Message;
+                this.txt_pp = "Une erreur est survenue lors du paiement." + eventArg.Message;
             });
             purchase.Auth += new EventHandler<PayPal.Checkout.Event.AuthEventArgs>((source, eventArg) =>
             {
-                this.txt_pp = "Auth: " + eventArg.Token;
+                this.txt_pp = "Authentification: " + eventArg.Token;
             });
             purchase.Start += new EventHandler<PayPal.Checkout.Event.StartEventArgs>((source, eventArg) =>
             {
-                this.txt_pp = "Start";
+                this.txt_pp = "Chargement de PayPal...";
             });
             purchase.Complete += new EventHandler<PayPal.Checkout.Event.CompleteEventArgs>((source, eventArg) =>
             {
                 //buy_cart_after_pp_validation();
-                this.txt_pp = "Payment is complete. Transaction id: " + eventArg.TransactionID;
+                this.txt_pp = "Le paiement à été validé." + eventArg.TransactionID;
                 this.pp_transac_id = eventArg.TransactionID;
                 this.buy_cart_after_pp_validation();
             });
             purchase.Cancel += new EventHandler<PayPal.Checkout.Event.CancelEventArgs>((source, eventArg) =>
             {
-                this.txt_pp = "Payment was canceled by the user.";
+                this.txt_pp = "Le paiement à été annulé par l'utilisateur.";
             });
 
             // Launch the secure PayPal interface. This is an asynchronous method
@@ -289,35 +301,23 @@ namespace SoonZik.ViewModels
                     "&secureKey=" + secureKey +
                     "&pack_id=" + pack.id.ToString() +
                     "&amount=" + amount.ToString() +
-                    "&artist=" + artist.ToString() +
-                    "&association=" + association.ToString() +
-                    "&website=" + website.ToString() +
-                    "&paypal[payment_id]=" + pp_transac_id +
-                    "&paypal[payment_method]=" + "PayPal" +
-                    "&paypal[status]=" + "complete" +
-                    "&paypal[payer_email]=" + "test@test.test" +
-                    "&paypal[payer_first_name]=" + Singleton.Instance.Current_user.fname +
-                    "&paypal[payer_last_name]=" + Singleton.Instance.Current_user.language +
-                    "&paypal[payer_id]=" + "1337" +
-                    "&paypal[payer_phone]=" + "0606060606" +
-                    "&paypal[payer_country_code]=" + "FR" +
-                    "&paypal[payer_street]=" + "69" +
-                    "&paypal[payer_city]=" + "Parise" +
-                    "&paypal[payer_postal_code]=" + "75000" +
-                    "&paypal[payer_recipient_name]=" + Singleton.Instance.Current_user.fname +
-                    "&paypal[payer_country_code]=" + "FR";
+                    "&artist=" + "65" + //artist.ToString() +
+                    "&association=" + "20" + // association.ToString() +
+                    "&website=" + "15" + //website.ToString() +
+                    "&paypal[payment_id]=" + pp_transac_id;
+   
 
 
                 // HTTP_POST -> URL + DATA
-                var response = await request.post_request("purchases/buycart", pack_data);
-                var json = JObject.Parse(response).SelectToken("message");
+                var response = await request.post_request("purchases/buypack", pack_data);
+                //var json = JObject.Parse(response).SelectToken("message");
 
-                if (json.ToString() == "Created")
-                {
-                    await new MessageDialog("Achat du pack OK").ShowAsync();
-                }
-                else
-                    await new MessageDialog("Achat du pack KO").ShowAsync();
+                //if (json.ToString() == "Created")
+                //{
+                await new MessageDialog("Achat du pack validé").ShowAsync();
+                //}
+                //else
+                //    await new MessageDialog("Erreur lors de l'achat du pack").ShowAsync();
             }
             catch (Exception e)
             {
@@ -325,13 +325,8 @@ namespace SoonZik.ViewModels
             }
 
             if (exception != null)
-                await new MessageDialog(exception.Message, "Achat du pack error").ShowAsync();
+                await new MessageDialog("Erreur lors de l'achat du pack").ShowAsync();
         }
-
-        //public bool verif_price()
-        //{
-        //    if ()
-        //}
     }
 
 

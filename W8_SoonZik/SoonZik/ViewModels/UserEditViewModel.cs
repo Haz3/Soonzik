@@ -159,7 +159,7 @@ namespace SoonZik.ViewModels
                         "&user[phoneNumber]=" + edit_user.phoneNumber +
                         "&user[description]=" + edit_user.description;
 
-                
+
                 if (check_addr(edit_user.address))
                     user_data +=
                         "&address[numberStreet]=" + edit_user.address.numberStreet +
@@ -177,11 +177,11 @@ namespace SoonZik.ViewModels
                 // Debug
                 if (json.ToString() == "Created")
                 {
-                    await new MessageDialog("Update OK").ShowAsync();
+                    await new MessageDialog("Mise à jour du profil réussie").ShowAsync();
                     Singleton.Instance.Current_user = edit_user;
                 }
                 else
-                    await new MessageDialog(json1.ToString(), "Update KO").ShowAsync();
+                    await new MessageDialog("Erreur lors de la mise à jour du profil").ShowAsync();
             }
             catch (Exception e)
             {
@@ -189,7 +189,7 @@ namespace SoonZik.ViewModels
             }
 
             if (exception != null)
-                await new MessageDialog(exception.Message, "Add friend Error").ShowAsync();
+                await new MessageDialog("Erreur lors de la mise à jour du profil").ShowAsync();
         }
 
         public async void add_friend()
@@ -212,22 +212,22 @@ namespace SoonZik.ViewModels
                 // Debug
                 if (json.ToString() == "Created")
                 {
-                    await new MessageDialog("Add friend OK").ShowAsync();
+                    //await new MessageDialog("Add friend OK").ShowAsync();
                     // To save current user state
                     Singleton.Instance.Current_user.friends.Add(friend);
                     // To update UI (observableCollection)
                     friends.Add(friend);
                 }
                 else
-                    await new MessageDialog("Add friend KO").ShowAsync();
+                    await new MessageDialog("Erreur lors de l'ajout en ami de cet utilisateur").ShowAsync();
             }
             catch (Exception e)
             {
                 exception = e;
             }
 
-            //if (exception != null)
-                //await new MessageDialog(exception.Message, "Add friend Error").ShowAsync();
+            if (exception != null)
+                await new MessageDialog("Erreur lors de l'ajout en ami de cet utilisateur").ShowAsync();
         }
 
         public async void follow()
@@ -250,13 +250,13 @@ namespace SoonZik.ViewModels
                 // Debug
                 if (json.ToString() == "Created")
                 {
-                    await new MessageDialog("Follow OK").ShowAsync();
+                    //await new MessageDialog("Follow OK").ShowAsync();
                     Singleton.Instance.Current_user.follows.Add(follow);
                     follows.Add(follow);
 
                 }
                 else
-                    await new MessageDialog("Follow KO").ShowAsync();
+                    await new MessageDialog("Erreur lors du follow de cet utilisateur").ShowAsync();
             }
             catch (Exception e)
             {
@@ -264,7 +264,7 @@ namespace SoonZik.ViewModels
             }
 
             if (exception != null)
-                await new MessageDialog(exception.Message, "Follow Error").ShowAsync();
+                await new MessageDialog("Erreur lors du follow de cet utilisateur").ShowAsync();
         }
 
         public async void remove_friend()
@@ -286,12 +286,12 @@ namespace SoonZik.ViewModels
                 // Debug
                 if (json.ToString() == "Success")
                 {
-                    await new MessageDialog("Remove friend OK").ShowAsync();
+                    //await new MessageDialog("Remove friend OK").ShowAsync();
                     Singleton.Instance.Current_user.friends.Remove(selected_user);
                     friends.Remove(selected_user);
                 }
                 else
-                    await new MessageDialog("Remove friend KO").ShowAsync();
+                    await new MessageDialog("Erreur lors de la suppression de cet ami de votre liste").ShowAsync();
             }
             catch (Exception e)
             {
@@ -299,7 +299,7 @@ namespace SoonZik.ViewModels
             }
 
             if (exception != null)
-                await new MessageDialog(exception.Message, "Remove friend Error").ShowAsync();
+                await new MessageDialog("Erreur lors de la suppression de cet ami de votre liste").ShowAsync();
         }
 
         public async void unfollow()
@@ -319,12 +319,12 @@ namespace SoonZik.ViewModels
                 // Debug
                 if (json.ToString() == "Success")
                 {
-                    await new MessageDialog("Unfollow OK").ShowAsync();
+                    //await new MessageDialog("Unfollow OK").ShowAsync();
                     Singleton.Instance.Current_user.follows.Remove(selected_user);
                     follows.Remove(selected_user);
                 }
                 else
-                    await new MessageDialog("Unfollow KO").ShowAsync();
+                    await new MessageDialog("Erreur lors du unfollow de l'utilisateur").ShowAsync();
             }
             catch (Exception e)
             {
@@ -332,7 +332,7 @@ namespace SoonZik.ViewModels
             }
 
             if (exception != null)
-                await new MessageDialog(exception.Message, "Unfollow Error").ShowAsync();
+                await new MessageDialog("Erreur lors du unfollow de l'utilisateur").ShowAsync();
         }
 
         bool check_addr(Address addr)

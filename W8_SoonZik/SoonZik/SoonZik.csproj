@@ -281,6 +281,7 @@
     </Content>
     <Content Include="Assets\g_star.png" />
     <Content Include="Assets\like.png" />
+    <Content Include="Assets\logo_sz.png" />
     <Content Include="Assets\Logo.scale-100.png" />
     <Content Include="Assets\music_player_icons\Mute.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

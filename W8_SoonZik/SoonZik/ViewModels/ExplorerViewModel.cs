@@ -55,7 +55,7 @@ namespace SoonZik.ViewModels
             }
 
             if (exception != null)
-                await new MessageDialog(exception.Message, "Explorer error").ShowAsync();
+                await new MessageDialog("Erreur lors de la récupération de l'explorer").ShowAsync();
         }
     }
 }

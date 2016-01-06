@@ -45,7 +45,7 @@ namespace SoonZik.ViewModels
             }
 
             if (exception != null)
-                await new MessageDialog(exception.Message, "Load comment Error").ShowAsync();
+                await new MessageDialog("Erreur lors de la récupération des commentaires").ShowAsync();
             return null;
            
         }
@@ -76,7 +76,7 @@ namespace SoonZik.ViewModels
                     return true;
                 }
                 else
-                    await new MessageDialog("Comment KO").ShowAsync();
+                    await new MessageDialog("Erreur lors de l'envoi du commentaire").ShowAsync();
             }
             catch (Exception e)
             {
@@ -84,7 +84,7 @@ namespace SoonZik.ViewModels
             }
 
             if (exception != null)
-                await new MessageDialog(exception.Message, "Comment POST Error").ShowAsync();
+                await new MessageDialog("Erreur lors de l'envoi du commentaire").ShowAsync();
             return false;
         }
     }

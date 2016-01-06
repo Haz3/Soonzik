@@ -41,7 +41,7 @@ namespace SoonZik.ViewModels
 
 
             if (exception != null)
-                await new MessageDialog(exception.Message, "Listening Error").ShowAsync();
+                await new MessageDialog("Erreur de chargement de la fonctionnalité listening").ShowAsync();
         }
     }
 }

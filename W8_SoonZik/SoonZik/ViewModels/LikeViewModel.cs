@@ -38,11 +38,11 @@ namespace SoonZik.ViewModels
 
                 if (json.ToString() == "Created")
                 {
-                    await new MessageDialog("Like OK").ShowAsync();
+                    //await new MessageDialog("Like OK").ShowAsync();
                     return true;
                 }
                 else
-                    await new MessageDialog("Like KO").ShowAsync();
+                    await new MessageDialog("Erreur lors du like").ShowAsync();
             }
             catch (Exception e)
             {
@@ -50,7 +50,7 @@ namespace SoonZik.ViewModels
             }
 
             if (exception != null)
-                await new MessageDialog(exception.Message, "Like POST Error").ShowAsync();
+                await new MessageDialog("Erreur lors du like").ShowAsync();
             return false;
         }
 
@@ -71,7 +71,7 @@ namespace SoonZik.ViewModels
 
                 var response = Http_get.get_data(url + data);
 
-                await new MessageDialog("unlike OK").ShowAsync();
+                //await new MessageDialog("unlike OK").ShowAsync();
                 return true;
             }
             catch (Exception e)
@@ -80,7 +80,7 @@ namespace SoonZik.ViewModels
             }
 
             if (exception != null)
-                await new MessageDialog(exception.Message, "unlike KO").ShowAsync();
+                await new MessageDialog("Erreur lors du unlike").ShowAsync();
             return false;
         }
     }

@@ -65,7 +65,7 @@ namespace SoonZik.ViewModels
             }
 
             if (exception != null)
-                await new MessageDialog(exception.Message, "Conversation Error").ShowAsync();
+                await new MessageDialog("Erreur lors de la récupération de la conversation").ShowAsync();
         }
 
         static public async Task<bool> send_msg(int dest, string msg)
@@ -97,7 +97,7 @@ namespace SoonZik.ViewModels
                     return true;
                 }
                 else
-                    await new MessageDialog("msg KO").ShowAsync();
+                    await new MessageDialog("Erreur lors de l'envoi du message").ShowAsync();
             }
             catch (Exception e)
             {

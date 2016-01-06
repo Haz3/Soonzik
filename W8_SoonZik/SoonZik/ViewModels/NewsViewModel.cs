@@ -203,7 +203,7 @@ namespace SoonZik.ViewModels
             }
 
             if (exception != null)
-                await new MessageDialog(exception.Message, "News error").ShowAsync();
+                await new MessageDialog("Erreur lors de la récupération de la news").ShowAsync();
         }
 
         async void load_news_list()
@@ -229,7 +229,7 @@ namespace SoonZik.ViewModels
             }
 
             if (exception != null)
-                await new MessageDialog(exception.Message, "News list error").ShowAsync();
+                await new MessageDialog("Erreur lors de la récupération des news").ShowAsync();
         }
     }
 }
