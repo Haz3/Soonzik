@@ -14,7 +14,7 @@
               %p.text-center
                 {{ album.title }}
             %a{:href => "http://lvh.me:3000/albums/ {{ album.id }}"}
-              %img{ "ng-src" => "{{ '/assets/albums/' + thisPack.albums[0].image }} " }
+              %img{ "ng-src" => "{{ '/assets/albums/' + album.image }}"}
             .divider
             {{ labels.DISPLAY_PACK_ARTIST_NAME }} : {{ album.user.username }}
             %br

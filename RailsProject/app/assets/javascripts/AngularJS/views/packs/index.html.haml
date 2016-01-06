@@ -9,8 +9,9 @@
           %h5.subheader.text-center
             {{ packs.title }}
           %a{:href=>"http://lvh.me:3000/packs/" + "{{packs.id}}" }
-            %img{"src" => "/assets/pack1.jpg"}
+            %img{"src" => "/assets/pack1.jpg" }
           .divider
-          {{ labels.DISPLAY_PACK_TIMELEFT }} :
+          %div{"ng-init" => "timeLeft()"}
+          {{ labels.DISPLAY_PACK_TIMELEFT }} : {{ packs.timeLeftPacks }}
           %br
-          {{ labels.DISPLAY_PACK_AVERAGE }} : 
+          {{ labels.DISPLAY_PACK_AVERAGE }} : {{ packs.averagePrice }} €

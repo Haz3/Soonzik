@@ -2,12 +2,20 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-cart {
+.cart {
+    padding-left: 5%;
+    padding-right: 5%;
     img {
         width: 50%;
     }
 
     a.fi-x.right {
         margin-top: 40%;
+    }
+
+    .panel p {
+        color: #424242;
+        font-family: "Lato";
+
     }
 }

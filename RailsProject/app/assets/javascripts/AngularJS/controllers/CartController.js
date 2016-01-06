@@ -1,6 +1,7 @@
 SoonzikApp.controller('CartCtrl', ['$scope', 'SecureAuth', 'HTTPService', '$timeout', 'NotificationService', '$rootScope', function ($scope, SecureAuth, HTTPService, $timeout, NotificationService, $rootScope) {
 
 	$scope.loading = true;
+	$scope.totalPrice = 0;
 
 	/*
 	**	Fonction d'init de foundation.
@@ -23,21 +24,31 @@ SoonzikApp.controller('CartCtrl', ['$scope', 'SecureAuth', 'HTTPService', '$time
 			];
 
 			HTTPService.showCart(parameters).then(function(response) {
-
 				$scope.carts = response.data.content;
-				if ($scope.carts) {
+
+				if ($scope.carts.length != 0) {
 					$scope.showItem = true;
 				} else {
 					$scope.showItem = false;
 				}
 
-				for (var i = 0; i < $scope.carts.length ; i++) {
-					$scope.totalPrice += $scope.carts[i].price;
-					console.log($scope.carts.price);
+				var priceAlbum = 0;
+				for (var i = 0; i < $scope.carts.length; i++) {
+					for (var j = 0; j < $scope.carts[i].albums.length; j++) {
+						priceAlbum += $scope.carts[i].albums[j].price;
+					}
 				}
 
-			}, function(repsonseError) {
+				var priceMusics = 0;
+				for (var i = 0; i < $scope.carts.length; i++) {
+					for (var j = 0; j < $scope.carts[i].musics.length; j++) {
+						priceMusics += $scope.carts[i].musics[j].price;
+					}
+				}
 
+				$scope.totalPrice = priceAlbum + priceMusics;
+
+			}, function(repsonseError) {
 				NotificationService.error($rootScope.labels.FILE_CART_LOAD_ERROR_MESSAGE);
 			});
 
@@ -57,7 +68,7 @@ SoonzikApp.controller('CartCtrl', ['$scope', 'SecureAuth', 'HTTPService', '$time
 			HTTPService.destroyItem(parameters).then(function(response) {
 
 				NotificationService.success($rootScope.labels.FILE_CART_DELETE_SUCCESS_MESSAGE);
-
+				$scope.showCart();
 			}, function(error) {
 				NotificationService.error($rootScope.labels.FILE_CART_DELETE_ITEM_ERROR_MESSAGE);
 			});
