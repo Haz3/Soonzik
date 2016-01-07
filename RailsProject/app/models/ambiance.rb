@@ -5,12 +5,11 @@
 # ==== Attributes
 #
 # - +id+ - (integer) - The ID of the object
-# - +album_id+ - (integer) - The ID of the album liked
-# - +user_id+ - (integer) - The ID of the user who liked
+# - +name+ - (string) - The name of the ambiance
 #
 # ==== Associations
 #
-# - +belongs_to+ - :album
+# - +has_and_belongs_to_many+ - :musics
 #
 class Ambiance < ActiveRecord::Base
   has_and_belongs_to_many :musics, -> { where("album_id IS NOT NULL") }, class_name: 'Music', foreign_key: 'ambiance_id', join_table: 'ambiances_musics', association_foreign_key: 'music_id'

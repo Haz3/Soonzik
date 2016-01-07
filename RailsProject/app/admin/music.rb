@@ -17,5 +17,7 @@ ActiveAdmin.register Music do
 	remove_filter :musics_playlist_objects
 	remove_filter :musics_genres
 
+	permit_params :id, :album_id
+
 
 end

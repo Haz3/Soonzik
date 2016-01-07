@@ -116,14 +116,12 @@ relation and the validation Can provide some features linked to this model</p>
 <ul><li>
 <p><code>id</code> - (integer) - The ID of the object</p>
 </li><li>
-<p><code>album_id</code> - (integer) - The ID of the album liked</p>
-</li><li>
-<p><code>user_id</code> - (integer) - The ID of the user who liked</p>
+<p><code>name</code> - (string) - The name of the ambiance</p>
 </li></ul>
 
 <h4 id="class-Ambiance-label-Associations">Associations<span><a href="#class-Ambiance-label-Associations">&para;</a> <a href="#top">&uarr;</a></span></h4>
 <ul><li>
-<p><code>belongs_to</code> - :album</p>
+<p><code>has_and_belongs_to_many</code> - :musics</p>
 </li></ul>
 		</section>
 
@@ -152,7 +150,7 @@ relation and the validation Can provide some features linked to this model</p>
 																
 											<div class="method-source-code" id="miniKey-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/models/ambiance.rb, line 18</span>
+								class="language-ruby"><span class="ruby-comment"># File app/models/ambiance.rb, line 17</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">miniKey</span>
       [<span class="ruby-value">:id</span>, <span class="ruby-value">:name</span>]
 <span class="ruby-keyword">end</span></code></pre>
