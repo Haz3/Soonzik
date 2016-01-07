@@ -14,11 +14,12 @@ namespace SoonZik.Helpers
 
         public static string GetTwitterKey(string key)
         {
-            string[] separator = new string[] { "<code>", "</code>" };
+            string[] separator = {"<code>", "</code>"};
             var theKey = key.Split(separator, StringSplitOptions.None);
             if (theKey.Length > 1)
                 return theKey[1];
-            return null;;
+            return null;
+            ;
         }
     }
 }

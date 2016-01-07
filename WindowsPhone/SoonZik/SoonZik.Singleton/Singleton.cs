@@ -70,8 +70,9 @@ namespace SoonZik.Singleton
         public ITwitterCredentials UserTwitterCredentials { get; set; }
 
         public Key Key { get; set; }
-        
+
         public string SecureKey { get; set; }
+
         #endregion
     }
 }

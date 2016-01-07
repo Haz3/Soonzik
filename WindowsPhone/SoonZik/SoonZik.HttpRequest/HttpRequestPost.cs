@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
 using System.IO;
-using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
@@ -200,9 +199,9 @@ namespace SoonZik.HttpRequest
 
         public async Task<String> UpdateNamePlaylist(Playlist thePlaylist, string sha256, User myUser)
         {
-            int [] test = new int[thePlaylist.musics.Count];
-            string en = "[";
-            for (int i = 0; i < thePlaylist.musics.Count; i++)
+            var test = new int[thePlaylist.musics.Count];
+            var en = "[";
+            for (var i = 0; i < thePlaylist.musics.Count; i++)
             {
                 test[i] = thePlaylist.musics[i].id;
                 if (i == thePlaylist.musics.Count - 1)
@@ -211,9 +210,10 @@ namespace SoonZik.HttpRequest
                     en += thePlaylist.musics[i].id + ",";
             }
             en += "]";
-            var request = (HttpWebRequest)WebRequest.Create(ApiUrl + "playlists/update");
+            var request = (HttpWebRequest) WebRequest.Create(ApiUrl + "playlists/update");
 
-            var postData = "id=" + thePlaylist.id + "&playlist[name]=" + thePlaylist.name + "&playlist[music]=" + en + "&secureKey=" + sha256 + "&user_id=" +
+            var postData = "id=" + thePlaylist.id + "&playlist[name]=" + thePlaylist.name + "&playlist[music]=" + en +
+                           "&secureKey=" + sha256 + "&user_id=" +
                            myUser.id;
             return await GetHttpPostResponse(request, postData);
         }
@@ -269,7 +269,7 @@ namespace SoonZik.HttpRequest
 
         public async Task<String> SetRate(Music myObj, string sha256, string id, int note)
         {
-            var request = (HttpWebRequest)WebRequest.Create(ApiUrl + "musics/" + myObj.id + "/note/" + note);
+            var request = (HttpWebRequest) WebRequest.Create(ApiUrl + "musics/" + myObj.id + "/note/" + note);
 
             var postData = "secureKey=" + sha256 + "&user_id=" + id;
             return await GetHttpPostResponse(request, postData);
@@ -277,11 +277,13 @@ namespace SoonZik.HttpRequest
 
         public async Task<String> SetLike(string element, string sha256, string idUser, string idObj)
         {
-            var request = (HttpWebRequest)WebRequest.Create(ApiUrl + "likes/save");
+            var request = (HttpWebRequest) WebRequest.Create(ApiUrl + "likes/save");
 
-            var postData = "like[user_id]=" + idUser + "&like[typeObj]=" + element + "&like[obj_id]=" + idObj + "&secureKey=" + sha256 + "&user_id=" + idUser;
+            var postData = "like[user_id]=" + idUser + "&like[typeObj]=" + element + "&like[obj_id]=" + idObj +
+                           "&secureKey=" + sha256 + "&user_id=" + idUser;
             return await GetHttpPostResponse(request, postData);
         }
+
         #endregion
     }
 }

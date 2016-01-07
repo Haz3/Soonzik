@@ -25,10 +25,12 @@
         </Grid.RowDefinitions>
         <Grid Grid.Row="0" Margin="0,20,0,0">
             <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">
-                <TextBlock x:Name="txtCurrentArtist" Text="{Binding ArtisteName}" Style="{StaticResource TitleTextBlockStyle}" />
-                <TextBlock x:Name="txtCurrentTrack" Text="{Binding TitleTrack}" Style="{StaticResource SubheaderTextBlockStyle}" />
+                <TextBlock x:Name="txtCurrentArtist" Text="{Binding ArtisteName}"
+                           Style="{StaticResource TitleTextBlockStyle}" />
+                <TextBlock x:Name="txtCurrentTrack" Text="{Binding TitleTrack}"
+                           Style="{StaticResource SubheaderTextBlockStyle}" />
             </StackPanel>
-            <ContentControl Content="{Binding MediaElementObject}"/>
+            <ContentControl Content="{Binding MediaElementObject}" />
             <!--ContentPanel - place additional content here-->
         </Grid>
 
@@ -45,9 +47,8 @@
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
-            <Image Grid.Column="0" x:Name="ShullfeImage" Source="../Resources/PlayerIcons/shuffle.png" Height="40"
-                    />
-            <Image Grid.Column="1" x:Name="RewindImage" Source="../Resources/PlayerIcons/rewind.png" Height="55" >
+            <Image Grid.Column="0" x:Name="ShullfeImage" Source="../Resources/PlayerIcons/shuffle.png" Height="40" />
+            <Image Grid.Column="1" x:Name="RewindImage" Source="../Resources/PlayerIcons/rewind.png" Height="55">
 
                 <interactivity:Interaction.Behaviors>
                     <core:EventTriggerBehavior EventName="Tapped">
@@ -63,15 +64,14 @@
                     </core:EventTriggerBehavior>
                 </interactivity:Interaction.Behaviors>
             </Image>
-            <Image Grid.Column="3" x:Name="ForwardImage" Source="../Resources/PlayerIcons/forward.png" Height="55" >
+            <Image Grid.Column="3" x:Name="ForwardImage" Source="../Resources/PlayerIcons/forward.png" Height="55">
                 <interactivity:Interaction.Behaviors>
                     <core:EventTriggerBehavior EventName="Tapped">
                         <core:InvokeCommandAction Command="{Binding ForwardCommand}" />
                     </core:EventTriggerBehavior>
                 </interactivity:Interaction.Behaviors>
             </Image>
-            <Image Grid.Column="4" x:Name="RepeatImage" Source="../Resources/PlayerIcons/repeat.png" Height="40"
-                    />
+            <Image Grid.Column="4" x:Name="RepeatImage" Source="../Resources/PlayerIcons/repeat.png" Height="40" />
         </Grid>
     </Grid>
 </Page>

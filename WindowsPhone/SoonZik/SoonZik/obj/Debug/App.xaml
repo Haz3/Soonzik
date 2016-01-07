@@ -26,7 +26,7 @@
         <vm:BattleDetailViewModel x:Key="BattleDetailViewModel" />
         <vm:PlaylistViewModel x:Key="PlaylistViewModel" />
         <vm:AboutViewModel x:Key="AboutViewModel" />
-        <vm:PlayerControlViewModel x:Key="PlayerControlViewModel"/>
+        <vm:PlayerControlViewModel x:Key="PlayerControlViewModel" />
         <DataTemplate x:Key="SizePivotHeader">
             <ContentPresenter>
                 <TextBlock Text="{Binding}" FontFamily="Roboto" FontSize="100" />

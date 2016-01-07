@@ -419,13 +419,13 @@
       <RootProperty Name="FontFamily" />
       <RootProperty Name="FontStyle" />
       <RootProperty Name="FontSize" />
-      <RootProperty Name="Style" />
       <RootProperty Name="VerticalAlignment" />
       <RootProperty Name="Foreground" />
       <RootProperty Name="HorizontalAlignment" />
       <RootProperty Name="Height" />
       <RootProperty Name="Width" />
       <RootProperty Name="Margin" />
+      <RootProperty Name="Style" />
       <RootProperty Name="TextWrapping" />
       <RootProperty Name="Padding" />
       <RootProperty Name="FontWeight" />
@@ -438,21 +438,6 @@
       <RootProperty Name="Converter" />
       <RootProperty Name="Source" />
     </RootType>
-    <RootType FullName="Windows.UI.Xaml.Controls.Page">
-      <RootProperty Name="Background" />
-      <RootProperty Name="Content" />
-      <RootProperty Name="DataContext" />
-      <RootProperty Name="Resources" />
-    </RootType>
-    <RootType FullName="Windows.UI.Xaml.Controls.ColumnDefinition">
-      <RootProperty Name="Width" />
-    </RootType>
-    <RootType FullName="Windows.UI.Xaml.Controls.StackPanel">
-      <RootProperty Name="Margin" />
-      <RootProperty Name="Children" />
-      <RootEvent Name="Tapped" />
-    </RootType>
-    <RootType FullName="SoonZik.Controls.BackgroundAudioPlayer" />
     <RootType FullName="Windows.UI.Xaml.Controls.UserControl">
       <RootProperty Name="Content" />
       <RootProperty Name="Resources" />
@@ -490,6 +475,9 @@
     <RootType FullName="Microsoft.Xaml.Interactions.Core.InvokeCommandAction">
       <RootProperty Name="Command" />
     </RootType>
+    <RootType FullName="Windows.UI.Xaml.Controls.ColumnDefinition">
+      <RootProperty Name="Width" />
+    </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.RadioButton">
       <RootProperty Name="Content" />
       <RootProperty Name="IsChecked" />
@@ -501,6 +489,11 @@
     <RootType FullName="Windows.UI.Xaml.Media.Animation.DoubleAnimation">
       <RootProperty Name="Duration" />
       <RootProperty Name="To" />
+    </RootType>
+    <RootType FullName="Windows.UI.Xaml.Controls.StackPanel">
+      <RootProperty Name="Margin" />
+      <RootProperty Name="Children" />
+      <RootEvent Name="Tapped" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Media.ImageBrush">
       <RootProperty Name="ImageSource" />
@@ -547,6 +540,12 @@
     <RootType FullName="SoonZik.Controls.GlobalMenuControl" />
     <RootType FullName="SoonZik.Controls.NewsSharePopup" />
     <RootType FullName="SoonZik.Controls.NotationMusic" />
+    <RootType FullName="Windows.UI.Xaml.Controls.Page">
+      <RootProperty Name="DataContext" />
+      <RootProperty Name="Background" />
+      <RootProperty Name="Content" />
+      <RootProperty Name="Resources" />
+    </RootType>
     <RootType FullName="SoonZik.Controls.PlayerControl" />
     <RootType FullName="Windows.UI.Xaml.Controls.Slider">
       <RootProperty Name="VerticalAlignment" />

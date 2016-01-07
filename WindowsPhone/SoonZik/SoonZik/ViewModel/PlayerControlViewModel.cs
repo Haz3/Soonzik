@@ -13,6 +13,18 @@ namespace SoonZik.ViewModel
 {
     public class PlayerControlViewModel : ViewModelBase
     {
+        #region Ctor
+
+        public PlayerControlViewModel()
+        {
+            PlayerLoaded = new RelayCommand(PlayerLoadedExecute);
+            RewindCommand = new RelayCommand(RewindExecute);
+            ForwardCommand = new RelayCommand(ForwardExecute);
+            PlayCommand = new RelayCommand(PlayExecute);
+        }
+
+        #endregion
+
         #region Attribute
 
         private static PlayerControlViewModel _instance;
@@ -53,14 +65,18 @@ namespace SoonZik.ViewModel
         public MediaElement MediaElementObject
         {
             get { return _mediaElementObject; }
-            set { _mediaElementObject = value; RaisePropertyChanged(); }
+            set
+            {
+                _mediaElementObject = value;
+                RaisePropertyChanged();
+            }
         }
 
         private string _titleTrack;
 
         public string TitleTrack
         {
-            get { return _titleTrack;}
+            get { return _titleTrack; }
             set
             {
                 _titleTrack = value;
@@ -96,30 +112,18 @@ namespace SoonZik.ViewModel
 
         public BitmapImage PlayImage
         {
-            get { return _playImage;}
+            get { return _playImage; }
             set
             {
                 _playImage = value;
                 RaisePropertyChanged("PlayImage");
             }
         }
-        #endregion
-
-        #region Ctor
-
-        public PlayerControlViewModel()
-        {
-            PlayerLoaded = new RelayCommand(PlayerLoadedExecute);
-            RewindCommand = new RelayCommand(RewindExecute);
-            ForwardCommand = new RelayCommand(ForwardExecute);
-            PlayCommand = new RelayCommand(PlayExecute);
-        }
-
-        
 
         #endregion
 
         #region Method
+
         private void ForwardExecute()
         {
             if (IsPlaylist)
@@ -135,7 +139,8 @@ namespace SoonZik.ViewModel
             }
             else
             {
-                PlayImage = new BitmapImage(new Uri("ms-appx:///Resources/PlayerIcons/play.png", UriKind.RelativeOrAbsolute));
+                PlayImage =
+                    new BitmapImage(new Uri("ms-appx:///Resources/PlayerIcons/play.png", UriKind.RelativeOrAbsolute));
                 MediaElementObject.Stop();
             }
         }
@@ -158,7 +163,6 @@ namespace SoonZik.ViewModel
                 MediaElementObject.Source = new Uri(CurrentMusic.file, UriKind.RelativeOrAbsolute);
                 MediaElementObject.Play();
             }
-
         }
 
         private void PlayExecute()
@@ -166,11 +170,13 @@ namespace SoonZik.ViewModel
             if (MediaElementObject.CurrentState == MediaElementState.Playing)
             {
                 MediaElementObject.Pause();
-                PlayImage = new BitmapImage(new Uri("ms-appx:///Resources/PlayerIcons/play.png", UriKind.RelativeOrAbsolute));
+                PlayImage =
+                    new BitmapImage(new Uri("ms-appx:///Resources/PlayerIcons/play.png", UriKind.RelativeOrAbsolute));
             }
             else
             {
-                PlayImage = new BitmapImage(new Uri("ms-appx:///Resources/PlayerIcons/pause.png", UriKind.RelativeOrAbsolute));
+                PlayImage =
+                    new BitmapImage(new Uri("ms-appx:///Resources/PlayerIcons/pause.png", UriKind.RelativeOrAbsolute));
                 MediaElementObject.Play();
             }
         }
@@ -187,7 +193,8 @@ namespace SoonZik.ViewModel
             IsPlaylist = Singleton.Singleton.Instance().SelectedMusicSingleton.Count > 0;
             MediaElementObject.Source = new Uri(CurrentMusic.file, UriKind.RelativeOrAbsolute);
             MediaElementObject.Play();
-            PlayImage = new BitmapImage(new Uri("ms-appx:///Resources/PlayerIcons/pause.png", UriKind.RelativeOrAbsolute));
+            PlayImage =
+                new BitmapImage(new Uri("ms-appx:///Resources/PlayerIcons/pause.png", UriKind.RelativeOrAbsolute));
         }
 
         private void MediaElementObjectOnMediaEnded(object sender, RoutedEventArgs routedEventArgs)
@@ -205,14 +212,14 @@ namespace SoonZik.ViewModel
             }
             else
             {
-                PlayImage = new BitmapImage(new Uri("ms-appx:///Resources/PlayerIcons/play.png", UriKind.RelativeOrAbsolute));
+                PlayImage =
+                    new BitmapImage(new Uri("ms-appx:///Resources/PlayerIcons/play.png", UriKind.RelativeOrAbsolute));
                 MediaElementObject.Stop();
             }
         }
 
         private void MediaElementObjectOnMediaOpened(object sender, RoutedEventArgs routedEventArgs)
         {
-
         }
 
         private void SetMediaInfo()
@@ -222,6 +229,7 @@ namespace SoonZik.ViewModel
             MusiqueImage =
                 new BitmapImage(new Uri(Constant.UrlImageAlbum + CurrentMusic.album.image, UriKind.RelativeOrAbsolute));
         }
+
         #endregion
     }
 }

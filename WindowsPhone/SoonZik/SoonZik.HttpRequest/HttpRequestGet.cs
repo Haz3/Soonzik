@@ -98,9 +98,13 @@ namespace SoonZik.HttpRequest
         #endregion
 
         #region Method Get Secure
-        public async Task<object> GetSecureObject(object myObject, string element, string id, string sha256, string userId)
+
+        public async Task<object> GetSecureObject(object myObject, string element, string id, string sha256,
+            string userId)
         {
-            var request = (HttpWebRequest)WebRequest.Create(ApiUrl + element + "/" + id + "?secureKey=" + sha256 + "&user_id=" + userId);
+            var request =
+                (HttpWebRequest)
+                    WebRequest.Create(ApiUrl + element + "/" + id + "?secureKey=" + sha256 + "&user_id=" + userId);
             return await DoRequestForObject(myObject, request);
         }
 
@@ -156,21 +160,29 @@ namespace SoonZik.HttpRequest
 
         public async Task<object> GetConversation(User FriendUser, string sha256, User myUser, object myObject)
         {
-            var request = (HttpWebRequest) WebRequest.Create(ApiUrl + "messages/conversation/" + FriendUser.id + "?secureKey=" + sha256 + "&user_id=" + myUser.id);
+            var request =
+                (HttpWebRequest)
+                    WebRequest.Create(ApiUrl + "messages/conversation/" + FriendUser.id + "?secureKey=" + sha256 +
+                                      "&user_id=" + myUser.id);
             return await DoRequestForObject(myObject, request);
         }
 
         public async Task<string> DestroyLike(string element, string objId, string sha256, string userId)
         {
-            var request = (HttpWebRequest)WebRequest.Create(ApiUrl + "likes/destroy?like[typeObj]=" + element + "&like[obj_id]=" + objId + "&secureKey=" + sha256 + "&user_id=" + userId);
+            var request =
+                (HttpWebRequest)
+                    WebRequest.Create(ApiUrl + "likes/destroy?like[typeObj]=" + element + "&like[obj_id]=" + objId +
+                                      "&secureKey=" + sha256 + "&user_id=" + userId);
             return await DoRequest(request);
         }
 
-        public async Task<object> FindConversation(object myObj,string sha256, string userId)
+        public async Task<object> FindConversation(object myObj, string sha256, string userId)
         {
-            var request = (HttpWebRequest)WebRequest.Create(ApiUrl + "messages/find?secureKey=" + sha256 + "&user_id=" + userId);
+            var request =
+                (HttpWebRequest) WebRequest.Create(ApiUrl + "messages/find?secureKey=" + sha256 + "&user_id=" + userId);
             return await DoRequestForObject(myObj, request);
         }
+
         #endregion
 
         #region Method Request

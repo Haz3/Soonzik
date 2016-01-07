@@ -93,10 +93,14 @@
             </StackPanel>
         </DataTemplate>
         <Storyboard x:Name="PlayerStoryBoard">
-        	<DoubleAnimation Duration="0:0:0.5" To="-619" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)" Storyboard.TargetName="PlayerGrid" d:IsOptimized="True"/>
+            <DoubleAnimation Duration="0:0:0.5" To="-619"
+                             Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)"
+                             Storyboard.TargetName="PlayerGrid" d:IsOptimized="True" />
         </Storyboard>
         <Storyboard x:Name="PlayerStoryBoardBack">
-            <DoubleAnimation Duration="0:0:0.5" To="0" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)" Storyboard.TargetName="PlayerGrid" d:IsOptimized="True"/>
+            <DoubleAnimation Duration="0:0:0.5" To="0"
+                             Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)"
+                             Storyboard.TargetName="PlayerGrid" d:IsOptimized="True" />
         </Storyboard>
 
     </UserControl.Resources>
@@ -121,7 +125,8 @@
                     </core:EventTriggerBehavior>
                 </interactivity:Interaction.Behaviors>
             </ToggleButton>
-            <ToggleButton x:Name="PlayerToggleButton" HorizontalAlignment="Center" Width="200" BorderThickness="0,0,0,0">
+            <ToggleButton x:Name="PlayerToggleButton" HorizontalAlignment="Center" Width="200"
+                          BorderThickness="0,0,0,0">
                 <interactivity:Interaction.Behaviors>
                     <core:EventTriggerBehavior EventName="Checked">
                         <media:ControlStoryboardAction Storyboard="{StaticResource PlayerStoryBoard}" />
@@ -246,8 +251,9 @@
             <Grid.RenderTransform>
                 <CompositeTransform />
             </Grid.RenderTransform>
-        </Grid>        
-        <Grid x:Name="PlayerGrid" Grid.Row="1" Margin="0,617,0,-617.333" Background="#424242" RenderTransformOrigin="0.5,0.5">
+        </Grid>
+        <Grid x:Name="PlayerGrid" Grid.Row="1" Margin="0,617,0,-617.333" Background="#424242"
+              RenderTransformOrigin="0.5,0.5">
             <Grid.RenderTransform>
                 <CompositeTransform />
             </Grid.RenderTransform>

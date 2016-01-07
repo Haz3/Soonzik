@@ -86,9 +86,6 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\BackgroundAudioPlayer.xaml.cs">
-      <DependentUpon>BackgroundAudioPlayer.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Controls\ButtonFriendPopUp.xaml.cs">
       <DependentUpon>ButtonFriendPopUp.xaml</DependentUpon>
     </Compile>
@@ -315,10 +312,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="Controls\BackgroundAudioPlayer.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Controls\ButtonFriendPopUp.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

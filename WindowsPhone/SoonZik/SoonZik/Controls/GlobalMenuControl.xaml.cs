@@ -6,12 +6,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using Windows.ApplicationModel.Core;
 using Windows.Devices.Geolocation;
-using Windows.Media.Playback;
 using Windows.Phone.UI.Input;
 using Windows.Storage;
 using Windows.Storage.Streams;
 using Windows.UI.Core;
-using Windows.UI.Notifications;
 using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -50,6 +48,7 @@ namespace SoonZik.Controls
         #endregion
 
         #region Attribute
+
         public static ToggleButton PlayerButton { get; set; }
         public static Grid MyPlayerGrid { get; set; }
         public static Grid MyGrid { get; set; }
@@ -237,7 +236,7 @@ namespace SoonZik.Controls
             MyPlayerGrid = PlayerGrid;
             PlayerButton = MyPlayerToggleButton;
             GlobalGrid.Children.Add(new News());
-            
+
             _navigationService = new NavigationService();
             HardwareButtons.BackPressed += HardwareButtonsOnBackPressed;
             MyPlayerToggleButton = PlayerToggleButton;
@@ -436,6 +435,7 @@ namespace SoonZik.Controls
             MyPlayerGrid.Children.Clear();
             MyPlayerGrid.Children.Add(new PlayerControl());
         }
+
         #endregion
 
         #region Methods Search
@@ -607,6 +607,5 @@ namespace SoonZik.Controls
         }
 
         #endregion
-
     }
 }
