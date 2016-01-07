@@ -35,7 +35,7 @@
         </Grid.RowDefinitions>
 
         <Grid Grid.Row="0">
-            <Image VerticalAlignment="Center" Source="{Binding SelectNews.attachments[0].url}" />
+            <Image VerticalAlignment="Center" Source="{Binding Path=SelectNews.attachments[0].url}" />
         </Grid>
         <Grid Grid.Row="1">
             <Image Tapped="UIElement_OnTapped" Grid.Row="0" Source="../Resources/Icones/share.png" Height="30"

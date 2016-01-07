@@ -168,10 +168,11 @@ namespace SoonZik.ViewModel
                             SelectedMusic.file = "http://soonzikapi.herokuapp.com/musics/get/" + SelectedMusic.id;
                             Singleton.Singleton.Instance().SelectedMusicSingleton.Clear();
                             Singleton.Singleton.Instance().SelectedMusicSingleton.Add(SelectedMusic);
+                            GlobalMenuControl.MyPlayerToggleButton.IsChecked = true;
+                            GlobalMenuControl.SetPlayerAudio();
                         });
                 }
             });
-            GlobalMenuControl.SetPlayerAudio();
         }
 
         private void PlayAllCommandExecute()

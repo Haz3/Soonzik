@@ -6,6 +6,7 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Imaging;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using SoonZik.Controls;
 using SoonZik.Helpers;
 using SoonZik.HttpRequest.Poco;
 
@@ -21,6 +22,7 @@ namespace SoonZik.ViewModel
             RewindCommand = new RelayCommand(RewindExecute);
             ForwardCommand = new RelayCommand(ForwardExecute);
             PlayCommand = new RelayCommand(PlayExecute);
+            MediaElementObject = new MediaElement();
         }
 
         #endregion
@@ -150,7 +152,7 @@ namespace SoonZik.ViewModel
             if (IsPlaylist)
             {
                 if (_indexCurentMusic == 0)
-                    _indexCurentMusic = Singleton.Singleton.Instance().SelectedMusicSingleton.Count;
+                    _indexCurentMusic = Singleton.Singleton.Instance().SelectedMusicSingleton.Count - 1;
                 else
                     _indexCurentMusic -= 1;
                 CurrentMusic = Singleton.Singleton.Instance().SelectedMusicSingleton[_indexCurentMusic];
@@ -183,6 +185,7 @@ namespace SoonZik.ViewModel
 
         private void PlayerLoadedExecute()
         {
+            MediaElementObject = null;
             MediaElementObject = new MediaElement();
             MediaElementObject.MediaOpened += MediaElementObjectOnMediaOpened;
             MediaElementObject.MediaEnded += MediaElementObjectOnMediaEnded;
@@ -190,7 +193,7 @@ namespace SoonZik.ViewModel
             CurrentMusic = Singleton.Singleton.Instance().SelectedMusicSingleton[_indexCurentMusic];
             StaticCurrentMusic = CurrentMusic;
             SetMediaInfo();
-            IsPlaylist = Singleton.Singleton.Instance().SelectedMusicSingleton.Count > 0;
+            IsPlaylist = Singleton.Singleton.Instance().SelectedMusicSingleton.Count > 1;
             MediaElementObject.Source = new Uri(CurrentMusic.file, UriKind.RelativeOrAbsolute);
             MediaElementObject.Play();
             PlayImage =
@@ -201,7 +204,7 @@ namespace SoonZik.ViewModel
         {
             if (IsPlaylist)
             {
-                if (_indexCurentMusic == Singleton.Singleton.Instance().SelectedMusicSingleton.Count)
+                if (_indexCurentMusic == Singleton.Singleton.Instance().SelectedMusicSingleton.Count - 1)
                     _indexCurentMusic = 0;
                 else
                     _indexCurentMusic += 1;
@@ -209,12 +212,14 @@ namespace SoonZik.ViewModel
                 StaticCurrentMusic = CurrentMusic;
                 SetMediaInfo();
                 MediaElementObject.Source = new Uri(CurrentMusic.file, UriKind.RelativeOrAbsolute);
+                GlobalMenuControl.MyPlayerToggleButton.Content = CurrentMusic.title;
             }
             else
             {
                 PlayImage =
                     new BitmapImage(new Uri("ms-appx:///Resources/PlayerIcons/play.png", UriKind.RelativeOrAbsolute));
                 MediaElementObject.Stop();
+
             }
         }
 

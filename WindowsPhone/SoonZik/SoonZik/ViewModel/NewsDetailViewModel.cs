@@ -154,7 +154,7 @@ namespace SoonZik.ViewModel
                 Like = bmLike;
                 ValidateKey.GetValideKey();
                 var post = new HttpRequestPost();
-                var res = post.SetLike("Albums", Singleton.Singleton.Instance().SecureKey,
+                var res = post.SetLike("News", Singleton.Singleton.Instance().SecureKey,
                     Singleton.Singleton.Instance().CurrentUser.id.ToString(), SelectNews.id.ToString());
                 res.ContinueWith(delegate(Task<string> tmp2)
                 {
@@ -171,7 +171,7 @@ namespace SoonZik.ViewModel
                 Like = bmDislike;
                 ValidateKey.GetValideKey();
                 var get = new HttpRequestGet();
-                var res = get.DestroyLike("Albums", SelectNews.id.ToString(), Singleton.Singleton.Instance().SecureKey,
+                var res = get.DestroyLike("News", SelectNews.id.ToString(), Singleton.Singleton.Instance().SecureKey,
                     Singleton.Singleton.Instance().CurrentUser.id.ToString());
                 res.ContinueWith(delegate(Task<string> tmp2)
                 {

@@ -432,6 +432,7 @@ namespace SoonZik.Controls
 
         public static void SetPlayerAudio()
         {
+            PlayerButton = MyPlayerToggleButton;
             MyPlayerGrid.Children.Clear();
             MyPlayerGrid.Children.Add(new PlayerControl());
         }

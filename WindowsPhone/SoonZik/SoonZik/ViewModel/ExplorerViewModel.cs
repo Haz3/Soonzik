@@ -143,10 +143,11 @@ namespace SoonZik.ViewModel
                             SelectedMusic.file = "http://soonzikapi.herokuapp.com/musics/get/" + SelectedMusic.id;
                             Singleton.Singleton.Instance().SelectedMusicSingleton.Clear();
                             Singleton.Singleton.Instance().SelectedMusicSingleton.Add(SelectedMusic);
+                            GlobalMenuControl.MyPlayerToggleButton.IsChecked = true;
+                            GlobalMenuControl.SetPlayerAudio();
                         });
                 }
             });
-            GlobalMenuControl.SetPlayerAudio();
         }
 
         public void LoadContent()
@@ -193,8 +194,7 @@ namespace SoonZik.ViewModel
                     }
                 });
                 ValidateKey.GetValideKey();
-                var listZik = request.GetSuggest(new List<Music>(), Singleton.Singleton.Instance().SecureKey,
-                    Singleton.Singleton.Instance().CurrentUser.id.ToString());
+                var listZik = request.GetSuggest(new List<Music>(), "music");
                 listZik.ContinueWith(delegate(Task<object> tmp)
                 {
                     var test = tmp.Result as List<Music>;
@@ -251,6 +251,7 @@ namespace SoonZik.ViewModel
         {
             Singleton.Singleton.Instance().SelectedMusicSingleton.Clear();
             Singleton.Singleton.Instance().SelectedMusicSingleton.Add(SelectedMusic);
+            GlobalMenuControl.MyPlayerToggleButton.IsChecked = true;
             GlobalMenuControl.SetPlayerAudio();
             //Navigation.Navigate(new PlayerControl().GetType());
         }
