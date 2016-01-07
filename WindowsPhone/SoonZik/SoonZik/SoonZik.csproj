@@ -155,6 +155,7 @@
     <Compile Include="ViewModel\NewsViewModel.cs" />
     <Compile Include="ViewModel\PackViewModel.cs" />
     <Compile Include="ViewModel\MyMusicViewModel.cs" />
+    <Compile Include="ViewModel\PlayerControlViewModel.cs" />
     <Compile Include="ViewModel\PlaylistViewModel.cs" />
     <Compile Include="ViewModel\ProfilArtisteViewModel.cs" />
     <Compile Include="ViewModel\ProfilFriendViewModel.cs" />

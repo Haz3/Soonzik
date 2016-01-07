@@ -176,6 +176,7 @@ namespace SoonZik.ViewModel
         private void PlayAllCommandExecute()
         {
             var request = new HttpRequestGet();
+            Singleton.Singleton.Instance().SelectedMusicSingleton.Clear();
             foreach (var music in ThePlaylist.musics)
             {
                 var res = request.GetObject(new Music(), "musics", music.id.ToString());
@@ -193,7 +194,9 @@ namespace SoonZik.ViewModel
                                 if (ThePlaylist.musics.Count ==
                                     Singleton.Singleton.Instance().SelectedMusicSingleton.Count)
                                 {
-                                    GlobalMenuControl.SetChildren(new BackgroundAudioPlayer());
+                                    //GlobalMenuControl.SetChildren(new BackgroundAudioPlayer());
+                                    GlobalMenuControl.MyPlayerToggleButton.IsChecked = true;
+                                    GlobalMenuControl.SetPlayerAudio();
                                 }
                             });
                     }

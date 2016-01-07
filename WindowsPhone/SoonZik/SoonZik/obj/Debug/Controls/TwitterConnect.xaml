@@ -8,15 +8,15 @@
     mc:Ignorable="d"
     Height="300"
     Width="400">
-    
+
     <Grid Background="#181818">
         <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="60"/>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="60" />
         </Grid.RowDefinitions>
-        <WebView x:Name="TwitterWebView" Grid.Row="0"/>
+        <WebView x:Name="TwitterWebView" Grid.Row="0" />
         <Button x:ConnectionId='1' Content="Close" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Bottom"
-                                          />
+                                           />
     </Grid>
 </UserControl>
 

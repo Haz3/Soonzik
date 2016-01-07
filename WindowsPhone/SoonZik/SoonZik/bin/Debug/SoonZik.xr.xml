@@ -18,6 +18,15 @@
     <RootPropertyPathName Name="SelectedMusic" />
     <RootPropertyPathName Name="SelectedUser" />
     <RootPropertyPathName Name="SelectedArtist" />
+    <RootPropertyPathName Name="PlayerLoaded" />
+    <RootPropertyPathName Name="ForwardCommand" />
+    <RootPropertyPathName Name="PlayImage" />
+    <RootPropertyPathName Name="PlayCommand" />
+    <RootPropertyPathName Name="RewindCommand" />
+    <RootPropertyPathName Name="MusiqueImage" />
+    <RootPropertyPathName Name="MediaElementObject" />
+    <RootPropertyPathName Name="TitleTrack" />
+    <RootPropertyPathName Name="ArtisteName" />
     <RootPropertyPathName Name="GridVisibility" />
     <RootPropertyPathName Name="isActive" />
     <RootPropertyPathName Name="SendCommand" />
@@ -190,6 +199,7 @@
     <RootType FullName="SoonZik.ViewModel.BattleDetailViewModel" />
     <RootType FullName="SoonZik.ViewModel.PlaylistViewModel" />
     <RootType FullName="SoonZik.ViewModel.AboutViewModel" />
+    <RootType FullName="SoonZik.ViewModel.PlayerControlViewModel" />
     <RootType FullName="Windows.UI.Xaml.DataTemplate">
       <RootProperty Name="Template" />
     </RootType>
@@ -261,6 +271,7 @@
       <RootProperty Name="IsChecked" />
       <RootProperty Name="MaxHeight" />
       <RootProperty Name="MaxWidth" />
+      <RootProperty Name="BorderThickness" />
       <RootProperty Name="Style" />
       <RootEvent Name="Checked" />
       <RootEvent Name="Unchecked" />

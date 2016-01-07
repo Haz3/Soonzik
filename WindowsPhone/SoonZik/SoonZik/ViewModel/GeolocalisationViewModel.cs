@@ -34,7 +34,6 @@ namespace SoonZik.ViewModel
             TwentyChecked = new RelayCommand(TwentyCheckedExecute);
             UserTappedCommand = new RelayCommand(UserTappedExecute);
             ConcertTappedCommand = new RelayCommand(ConcertTappedExecute);
-            GetConcert();
             InitVariable().ContinueWith(delegate
             {
                 CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
@@ -117,6 +116,7 @@ namespace SoonZik.ViewModel
 
         private async Task InitVariable()
         {
+            GetConcert();
             _myGeolocator = new Geolocator();
             var myGeoposition = await _myGeolocator.GetGeopositionAsync();
             UserLocation = myGeoposition.Coordinate;

@@ -1,27 +1,31 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using Windows.ApplicationModel.Activation;
 using Windows.ApplicationModel.Core;
+using Windows.Security.Authentication.Web;
+using Windows.Security.Cryptography;
+using Windows.Security.Cryptography.Core;
 using Windows.Storage;
+using Windows.Storage.Streams;
 using Windows.UI.Core;
 using Windows.UI.Popups;
-using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Media.Imaging;
+using Windows.Web.Http.Headers;
 using Facebook;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using Microsoft.Practices.ServiceLocation;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using SoonZik.Controls;
 using SoonZik.Helpers;
 using SoonZik.HttpRequest;
 using SoonZik.HttpRequest.Poco;
 using SoonZik.Utils;
 using SoonZik.Views;
-using Tweetinvi;
+using Tweetinvi.Core.Credentials;
 using User = SoonZik.HttpRequest.Poco.User;
 
 namespace SoonZik.ViewModel
@@ -30,6 +34,10 @@ namespace SoonZik.ViewModel
     {
         #region Attribute
 
+        private string _consumerKey = "ooWEcrlhooUKVOxSgsVNDJ1RK";
+        private const string ConsumerSecret = "BtLpq9ZlFzXrFklC2f1CXqy8EsSzgRRVPZrKVh0imI2TOrZAan";
+        private string _accessToken = "1951971955-TJuWAfR6awbG9ds1lEh9quuHzqtnx1xlRtORZD2";
+        private string _accessTokenSecret = "mrRO5x2p4z0tOGeIwvnw5D6iDplGIFhONL0bGbZpmhYLF";
         public static Popup TwitterPopup;
         private readonly ApplicationDataContainer _localSettings = ApplicationData.Current.LocalSettings;
         private readonly FaceBookHelper ObjFBHelper = new FaceBookHelper();
@@ -112,12 +120,6 @@ namespace SoonZik.ViewModel
 
         private void SelectionExecute()
         {
-            //if (_localSettings != null && (string)_localSettings.Values["SoonZikAlreadyConnect"] == "yes")
-            //{
-            //    _password = _localSettings.Values["SoonZikPassWord"].ToString();
-            //    _username = _localSettings.Values["SoonZikUserName"].ToString();
-            //    MakeConnexion();
-            //}
         }
 
         private void NetworkOnInternetConnectionChanged(object sender,
@@ -201,35 +203,7 @@ namespace SoonZik.ViewModel
 
         private void TwitterCommandExecute()
         {
-            TwitterPopup = new Popup();
-            var content = new TwitterConnect();
-            var width = content.Width;
-            var height = content.Height;
-            TwitterPopup.Child = content;
-            TwitterPopup.VerticalOffset = (Window.Current.Bounds.Height - height)/2;
-            TwitterPopup.HorizontalOffset = (Window.Current.Bounds.Width - width)/2;
-            TwitterPopup.IsOpen = true;
-            TwitterPopup.Closed += TwitterPopupOnClosed;
-        }
-
-        private async void TwitterPopupOnClosed(object sender, object e)
-        {
-            var keyTwitter = TwitterConnect.TwitterKey;
-
-            Auth.SetCredentials(Singleton.Singleton.Instance().UserTwitterCredentials);
-            var user = Tweetinvi.User.GetLoggedUser(Singleton.Singleton.Instance().UserTwitterCredentials);
-            var connecionSocial = new HttpRequestPost();
-            var getKey = new HttpRequestGet();
-
-            var key = await getKey.GetSocialToken(user.Id.ToString(), "twitter") as string;
-            char[] delimiter = {' ', '"', '{', '}'};
-            var word = key.Split(delimiter);
-            var stringEncrypt = (user.Id + word[4] + "3uNi@rCK$L$om40dNnhX)#jV2$40wwbr_bAK99%E");
-            var sha256 = EncriptSha256.EncriptStringToSha256(stringEncrypt);
-
-            await connecionSocial.ConnexionSocial("twitter", sha256, ObjFBHelper.AccessToken, user.Id.ToString());
-            var res = connecionSocial.Received;
-            GetUser(res);
+            twitter_connection();
         }
 
         private void GoogleTappedExecute()
@@ -261,6 +235,211 @@ namespace SoonZik.ViewModel
                 var res = connecionSocial.Received;
                 GetUser(res);
             }
+        }
+
+        #endregion
+
+        #region Twitter Connect
+        public async void twitter_connection()
+        {
+            try
+            {
+                string oauth_token = await GetTwitterRequestTokenAsync();
+                string TwitterUrl = "https://api.twitter.com/oauth/authorize?oauth_token=" + oauth_token;
+
+                System.Uri StartUri = new Uri(TwitterUrl);
+                System.Uri EndUri = new Uri("http://MyW8appTwitterCallback.net");
+
+                WebAuthenticationResult WebAuthenticationResult = await WebAuthenticationBroker.AuthenticateAsync(
+                                                        WebAuthenticationOptions.None,
+                                                        StartUri,
+                                                        EndUri);
+                if (WebAuthenticationResult.ResponseStatus == WebAuthenticationStatus.Success)
+                {
+                    // await new MessageDialog(WebAuthenticationResult.ResponseData.ToString()).ShowAsync();
+                    await GetTwitterUserNameAsync(WebAuthenticationResult.ResponseData.ToString());
+
+                    //isTwitterUserLoggedIn = true;
+                }
+                //else if (WebAuthenticationResult.ResponseStatus == WebAuthenticationStatus.ErrorHttp)
+                //{
+                //    await new MessageDialog("HTTP Error returned by AuthenticateAsync() : " + WebAuthenticationResult.ResponseErrorDetail.ToString()).ShowAsync();
+                //}
+                //else
+                //{
+                //    await new MessageDialog("CANCEL ??Error returned by AuthenticateAsync() : " + WebAuthenticationResult.ResponseStatus.ToString()).ShowAsync();
+                //}
+            }
+            catch (Exception Error)
+            {
+                new MessageDialog("Erreur lors de la connexion via Twitter").ShowAsync();
+            }
+        }
+
+        private async Task<string> GetTwitterRequestTokenAsync()
+        {
+            //
+            // Acquiring a request token
+            //
+            string TwitterUrl = "https://api.twitter.com/oauth/request_token";
+
+            string nonce = GetNonce();
+            string timeStamp = GetTimeStamp();
+            string SigBaseStringParams = "oauth_callback=" + Uri.EscapeDataString("http://MyW8appTwitterCallback.net");
+            SigBaseStringParams += "&" + "oauth_consumer_key=" + "ooWEcrlhooUKVOxSgsVNDJ1RK"; // CONSUMER KEY
+            SigBaseStringParams += "&" + "oauth_nonce=" + nonce;
+            SigBaseStringParams += "&" + "oauth_signature_method=HMAC-SHA1";
+            SigBaseStringParams += "&" + "oauth_timestamp=" + timeStamp;
+            SigBaseStringParams += "&" + "oauth_version=1.0";
+            string SigBaseString = "GET&";
+            SigBaseString += Uri.EscapeDataString(TwitterUrl) + "&" + Uri.EscapeDataString(SigBaseStringParams);
+            string Signature = GetSignature(SigBaseString, "BtLpq9ZlFzXrFklC2f1CXqy8EsSzgRRVPZrKVh0imI2TOrZAan"); // TWITTER SECRET CONSUMER KEY
+
+            TwitterUrl += "?" + SigBaseStringParams + "&oauth_signature=" + Uri.EscapeDataString(Signature);
+
+            Windows.Web.Http.HttpClient httpClient = new Windows.Web.Http.HttpClient();
+            string GetResponse = await httpClient.GetStringAsync(new Uri(TwitterUrl));
+
+
+            string request_token = null;
+            string oauth_token_secret = null;
+            string[] keyValPairs = GetResponse.Split('&');
+
+            for (int i = 0; i < keyValPairs.Length; i++)
+            {
+                string[] splits = keyValPairs[i].Split('=');
+                switch (splits[0])
+                {
+                    case "oauth_token":
+                        request_token = splits[1];
+                        break;
+                    case "oauth_token_secret":
+                        oauth_token_secret = splits[1];
+                        break;
+                }
+            }
+
+            return request_token;
+        }
+
+        private async Task GetTwitterUserNameAsync(string webAuthResultResponseData)
+        {
+            TwitterCredentials _appCredentials;
+            //
+            // Acquiring a access_token first
+            //
+            _appCredentials = new TwitterCredentials(_consumerKey, ConsumerSecret);
+            _appCredentials.AccessToken = _accessToken;
+            _appCredentials.AccessTokenSecret = _accessTokenSecret;
+            string responseData = webAuthResultResponseData.Substring(webAuthResultResponseData.IndexOf("oauth_token"));
+            string request_token = null;
+            string oauth_verifier = null;
+            String[] keyValPairs = responseData.Split('&');
+
+            for (int i = 0; i < keyValPairs.Length; i++)
+            {
+                String[] splits = keyValPairs[i].Split('=');
+                switch (splits[0])
+                {
+                    case "oauth_token":
+                        request_token = splits[1];
+                        break;
+                    case "oauth_verifier":
+                        oauth_verifier = splits[1];
+                        break;
+                }
+            }
+
+            String TwitterUrl = "https://api.twitter.com/oauth/access_token";
+
+            string timeStamp = GetTimeStamp();
+            string nonce = GetNonce();
+
+            String SigBaseStringParams = "oauth_consumer_key=" + "ooWEcrlhooUKVOxSgsVNDJ1RK";
+            SigBaseStringParams += "&" + "oauth_nonce=" + nonce;
+            SigBaseStringParams += "&" + "oauth_signature_method=HMAC-SHA1";
+            SigBaseStringParams += "&" + "oauth_timestamp=" + timeStamp;
+            SigBaseStringParams += "&" + "oauth_token=" + request_token;
+            SigBaseStringParams += "&" + "oauth_version=1.0";
+            String SigBaseString = "POST&";
+            SigBaseString += Uri.EscapeDataString(TwitterUrl) + "&" + Uri.EscapeDataString(SigBaseStringParams);
+
+            String Signature = GetSignature(SigBaseString, "BtLpq9ZlFzXrFklC2f1CXqy8EsSzgRRVPZrKVh0imI2TOrZAan");
+
+            Windows.Web.Http.HttpStringContent httpContent = new Windows.Web.Http.HttpStringContent("oauth_verifier=" + oauth_verifier, Windows.Storage.Streams.UnicodeEncoding.Utf8);
+            httpContent.Headers.ContentType = HttpMediaTypeHeaderValue.Parse("application/x-www-form-urlencoded");
+            string authorizationHeaderParams = "oauth_consumer_key=\"" + "ooWEcrlhooUKVOxSgsVNDJ1RK" + "\", oauth_nonce=\"" + nonce + "\", oauth_signature_method=\"HMAC-SHA1\", oauth_signature=\"" + Uri.EscapeDataString(Signature) + "\", oauth_timestamp=\"" + timeStamp + "\", oauth_token=\"" + Uri.EscapeDataString(request_token) + "\", oauth_version=\"1.0\"";
+
+            Windows.Web.Http.HttpClient httpClient = new Windows.Web.Http.HttpClient();
+
+            httpClient.DefaultRequestHeaders.Authorization = new HttpCredentialsHeaderValue("OAuth", authorizationHeaderParams);
+            var httpResponseMessage = await httpClient.PostAsync(new Uri(TwitterUrl), httpContent);
+            string response = await httpResponseMessage.Content.ReadAsStringAsync();
+
+            String[] Tokens = response.Split('&');
+            string oauth_token_secret = null;
+            string access_token = null;
+            string screen_name = null;
+            string user_id = null;
+
+            for (int i = 0; i < Tokens.Length; i++)
+            {
+                String[] splits = Tokens[i].Split('=');
+                switch (splits[0])
+                {
+                    case "screen_name":
+                        screen_name = splits[1];
+                        break;
+                    case "oauth_token":
+                        access_token = splits[1];
+                        break;
+                    case "oauth_token_secret":
+                        oauth_token_secret = splits[1];
+                        break;
+                    case "user_id":
+                        user_id = splits[1];
+                        break;
+                }
+            }
+
+            // Check if everything is fine AND do_SOCIAL__CNX
+            if (user_id != null && access_token != null && oauth_token_secret != null)
+            {
+                var connec = new HttpRequestPost();
+                var getKey = new HttpRequestGet();
+
+                var key = await getKey.GetSocialToken(user_id, "twitter") as string;
+                char[] delimiter = { ' ', '"', '{', '}' };
+                var word = key.Split(delimiter);
+                var stringEncrypt = (user_id + word[4] + "3uNi@rCK$L$om40dNnhX)#jV2$40wwbr_bAK99%E");
+                var sha256 = EncriptSha256.EncriptStringToSha256(stringEncrypt);
+                await connec.ConnexionSocial("twitter", sha256, oauth_token_secret, user_id);
+                var res = connec.Received;
+                GetUser(res);
+            }
+        }
+
+        string GetNonce()
+        {
+            Random rand = new Random();
+            int nonce = rand.Next(1000000000);
+            return nonce.ToString();
+        }
+        string GetTimeStamp()
+        {
+            TimeSpan SinceEpoch = DateTime.UtcNow - new DateTime(1970, 1, 1);
+            return Math.Round(SinceEpoch.TotalSeconds).ToString();
+        }
+        string GetSignature(string sigBaseString, string consumerSecretKey)
+        {
+            IBuffer KeyMaterial = CryptographicBuffer.ConvertStringToBinary(consumerSecretKey + "&", BinaryStringEncoding.Utf8);
+            MacAlgorithmProvider HmacSha1Provider = MacAlgorithmProvider.OpenAlgorithm("HMAC_SHA1");
+            CryptographicKey MacKey = HmacSha1Provider.CreateKey(KeyMaterial);
+            IBuffer DataToBeSigned = CryptographicBuffer.ConvertStringToBinary(sigBaseString, BinaryStringEncoding.Utf8);
+            IBuffer SignatureBuffer = CryptographicEngine.Sign(MacKey, DataToBeSigned);
+            string Signature = CryptographicBuffer.EncodeToBase64String(SignatureBuffer);
+
+            return Signature;
         }
 
         #endregion

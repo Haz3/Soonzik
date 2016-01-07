@@ -19,6 +19,7 @@
             </Setter>
         </Style>
 
+
         <Storyboard x:Name="MenuStoryBoard">
             <DoubleAnimation Duration="0:0:0.25" To="200"
                              Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)"
@@ -64,19 +65,19 @@
 
         <DataTemplate x:Key="UserItemTemplate" x:Name="UserDataTemplate">
             <StackPanel x:ConnectionId='7' Margin="10,0,0,30" x:Name="UsersStackPanel"                                  >
-                <TextBlock Text="{Binding Path=username}" FontSize="20" Foreground="White" FontStyle="Normal"/>
+                <TextBlock Text="{Binding Path=username}" FontSize="20" Foreground="White" FontStyle="Normal" />
             </StackPanel>
         </DataTemplate>
 
         <DataTemplate x:Key="ArtistItemTemplate" x:Name="ArtisteDataTemplate">
             <StackPanel x:ConnectionId='6' Margin="10,0,0,30" x:Name="ArtistStackPanel"                                   >
-                <TextBlock Text="{Binding Path=username}" FontSize="20" Foreground="White" FontStyle="Normal"/>
+                <TextBlock Text="{Binding Path=username}" FontSize="20" Foreground="White" FontStyle="Normal" />
             </StackPanel>
         </DataTemplate>
 
         <DataTemplate x:Key="MusicItemTemplate" x:Name="MusicDataTemplate">
             <StackPanel x:ConnectionId='5' Margin="10,0,0,30" x:Name="MusicStackPanel"                                  >
-                <TextBlock Text="{Binding Path=title}" FontSize="20" Foreground="White" FontStyle="Normal"/>
+                <TextBlock Text="{Binding Path=title}" FontSize="20" Foreground="White" FontStyle="Normal" />
             </StackPanel>
         </DataTemplate>
 
@@ -88,9 +89,15 @@
 
         <DataTemplate x:Key="PackItemTemplate" x:Name="PackDataTemplate">
             <StackPanel x:ConnectionId='3' Margin="10,0,0,30" x:Name="PackStackPanel"                                 >
-                <TextBlock Text="{Binding Path=title}" FontSize="20" FontStyle="Normal" Foreground="White"/>
+                <TextBlock Text="{Binding Path=title}" FontSize="20" FontStyle="Normal" Foreground="White" />
             </StackPanel>
         </DataTemplate>
+        <Storyboard x:Name="PlayerStoryBoard">
+        	<DoubleAnimation Duration="0:0:0.5" To="-619" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)" Storyboard.TargetName="PlayerGrid" d:IsOptimized="True"/>
+        </Storyboard>
+        <Storyboard x:Name="PlayerStoryBoardBack">
+            <DoubleAnimation Duration="0:0:0.5" To="0" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)" Storyboard.TargetName="PlayerGrid" d:IsOptimized="True"/>
+        </Storyboard>
 
     </UserControl.Resources>
 
@@ -114,6 +121,16 @@
                     </core:EventTriggerBehavior>
                 </interactivity:Interaction.Behaviors>
             </ToggleButton>
+            <ToggleButton x:Name="PlayerToggleButton" HorizontalAlignment="Center" Width="200" BorderThickness="0,0,0,0">
+                <interactivity:Interaction.Behaviors>
+                    <core:EventTriggerBehavior EventName="Checked">
+                        <media:ControlStoryboardAction Storyboard="{StaticResource PlayerStoryBoard}" />
+                    </core:EventTriggerBehavior>
+                    <core:EventTriggerBehavior EventName="Unchecked">
+                        <media:ControlStoryboardAction Storyboard="{StaticResource PlayerStoryBoardBack}" />
+                    </core:EventTriggerBehavior>
+                </interactivity:Interaction.Behaviors>
+            </ToggleButton>
             <ToggleButton x:Name="ToggleButtonSearch" Content="ToggleButton" HorizontalAlignment="Right" Height="30"
                           Margin="0,8,10,0" Style="{StaticResource SearchButtonStyle}" VerticalAlignment="Top"
                           Width="30" MinWidth="30" MinHeight="30" MaxWidth="30" MaxHeight="30" IsChecked="False">
@@ -127,8 +144,9 @@
                     </core:EventTriggerBehavior>
                 </interactivity:Interaction.Behaviors>
             </ToggleButton>
-            <TextBlock x:Name="MenuNameTextBlock" VerticalAlignment="Center" Foreground="DeepSkyBlue" FontSize="20" HorizontalAlignment="Left"
-                       Margin="50,0,0,0"/>
+            <TextBlock x:Name="MenuNameTextBlock" VerticalAlignment="Center" Foreground="DeepSkyBlue" FontSize="20"
+                       HorizontalAlignment="Left"
+                       Margin="50,0,0,0" />
         </Grid>
         <Grid Row="1" x:Name="MenuGrid" HorizontalAlignment="Left" Margin="-200,0,0,0" Width="200"
               Background="Transparent" Opacity="0.8"
@@ -184,9 +202,11 @@
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
             <Grid Row="0">
-                <TextBox x:ConnectionId='9' x:Name="SearchTextBlock" Foreground="#424242" Background="Transparent" BorderThickness="0,0,0,1" BorderBrush="White" VerticalAlignment="Center"
-                     x:Uid="Search" PlaceholderText="" FontSize="25" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"
-                                                                 />
+                <TextBox x:ConnectionId='9' x:Name="SearchTextBlock" Foreground="#424242" Background="Transparent"
+                         BorderThickness="0,0,0,1" BorderBrush="White" VerticalAlignment="Center"
+                         x:Uid="Search" PlaceholderText="" FontSize="25" VerticalContentAlignment="Center"
+                         HorizontalContentAlignment="Center"
+                                                                     />
             </Grid>
             <ScrollViewer Grid.Row="1">
                 <Grid>
@@ -197,27 +217,37 @@
                         <RowDefinition Height="*" />
                         <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
-                    <ListView Grid.Row="0" x:Name="ResultArtisteListView" Header="Artiste" FontSize="20" Foreground="#40a8e2" FontStyle="Italic"
-                          ItemTemplate="{StaticResource ArtistItemTemplate}" Margin="10,0,0,10"
-                          SelectedItem="{Binding SelectedArtist, Mode=TwoWay}" />
-                    <ListView Grid.Row="1" x:Name="ResultUserListView" Header="Utilisateur" FontSize="20" Foreground="#40a8e2" FontStyle="Italic"
-                          ItemTemplate="{StaticResource UserItemTemplate}" Margin="10,0,0,10"
-                          SelectedItem="{Binding SelectedUser, Mode=TwoWay}" />
-                    <ListView Grid.Row="2" x:Name="ResultMusicListView" Header="Musiques" FontSize="20" Foreground="#40a8e2" FontStyle="Italic"
-                          ItemTemplate="{StaticResource MusicItemTemplate}" Margin="10,0,0,10"
-                          SelectedItem="{Binding SelectedMusic, Mode=TwoWay}" />
-                    <ListView Grid.Row="3" x:Name="ResultAlbumListView" Header="Albums" FontSize="20" Foreground="#40a8e2" FontStyle="Italic"
-                          ItemTemplate="{StaticResource AlbumItemTemplate}" Margin="10,0,0,10"
-                          SelectedItem="{Binding SelectedAlbum, Mode=TwoWay}" />
-                    <ListView Grid.Row="4" x:Name="ResultPackListView" Margin="10,0,0,0" Header="Packs" FontSize="20" Foreground="#40a8e2" FontStyle="Italic"
-                          ItemTemplate="{StaticResource PackItemTemplate}"
-                          SelectedItem="{Binding SelectedPack, Mode=TwoWay}" />
+                    <ListView Grid.Row="0" x:Name="ResultArtisteListView" Header="Artiste" FontSize="20"
+                              Foreground="#40a8e2" FontStyle="Italic"
+                              ItemTemplate="{StaticResource ArtistItemTemplate}" Margin="10,0,0,10"
+                              SelectedItem="{Binding SelectedArtist, Mode=TwoWay}" />
+                    <ListView Grid.Row="1" x:Name="ResultUserListView" Header="Utilisateur" FontSize="20"
+                              Foreground="#40a8e2" FontStyle="Italic"
+                              ItemTemplate="{StaticResource UserItemTemplate}" Margin="10,0,0,10"
+                              SelectedItem="{Binding SelectedUser, Mode=TwoWay}" />
+                    <ListView Grid.Row="2" x:Name="ResultMusicListView" Header="Musiques" FontSize="20"
+                              Foreground="#40a8e2" FontStyle="Italic"
+                              ItemTemplate="{StaticResource MusicItemTemplate}" Margin="10,0,0,10"
+                              SelectedItem="{Binding SelectedMusic, Mode=TwoWay}" />
+                    <ListView Grid.Row="3" x:Name="ResultAlbumListView" Header="Albums" FontSize="20"
+                              Foreground="#40a8e2" FontStyle="Italic"
+                              ItemTemplate="{StaticResource AlbumItemTemplate}" Margin="10,0,0,10"
+                              SelectedItem="{Binding SelectedAlbum, Mode=TwoWay}" />
+                    <ListView Grid.Row="4" x:Name="ResultPackListView" Margin="10,0,0,0" Header="Packs" FontSize="20"
+                              Foreground="#40a8e2" FontStyle="Italic"
+                              ItemTemplate="{StaticResource PackItemTemplate}"
+                              SelectedItem="{Binding SelectedPack, Mode=TwoWay}" />
                 </Grid>
             </ScrollViewer>
         </Grid>
 
         <Grid x:ConnectionId='8' Grid.Row="1" x:Name="GlobalGrid" RenderTransformOrigin="0.5,0.5" Margin="0, 10, 0, 0"
                                           >
+            <Grid.RenderTransform>
+                <CompositeTransform />
+            </Grid.RenderTransform>
+        </Grid>        
+        <Grid x:Name="PlayerGrid" Grid.Row="1" Margin="0,617,0,-617.333" Background="#424242" RenderTransformOrigin="0.5,0.5">
             <Grid.RenderTransform>
                 <CompositeTransform />
             </Grid.RenderTransform>

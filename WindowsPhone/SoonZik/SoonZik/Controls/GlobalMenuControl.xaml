@@ -19,6 +19,7 @@
             </Setter>
         </Style>
 
+
         <Storyboard x:Name="MenuStoryBoard">
             <DoubleAnimation Duration="0:0:0.25" To="200"
                              Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)"
@@ -91,6 +92,12 @@
                 <TextBlock Text="{Binding Path=title}" FontSize="20" FontStyle="Normal" Foreground="White" />
             </StackPanel>
         </DataTemplate>
+        <Storyboard x:Name="PlayerStoryBoard">
+        	<DoubleAnimation Duration="0:0:0.5" To="-619" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)" Storyboard.TargetName="PlayerGrid" d:IsOptimized="True"/>
+        </Storyboard>
+        <Storyboard x:Name="PlayerStoryBoardBack">
+            <DoubleAnimation Duration="0:0:0.5" To="0" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)" Storyboard.TargetName="PlayerGrid" d:IsOptimized="True"/>
+        </Storyboard>
 
     </UserControl.Resources>
 
@@ -111,6 +118,16 @@
                     </core:EventTriggerBehavior>
                     <core:EventTriggerBehavior EventName="Unchecked">
                         <media:ControlStoryboardAction Storyboard="{StaticResource MenuStoryBoardBack}" />
+                    </core:EventTriggerBehavior>
+                </interactivity:Interaction.Behaviors>
+            </ToggleButton>
+            <ToggleButton x:Name="PlayerToggleButton" HorizontalAlignment="Center" Width="200" BorderThickness="0,0,0,0">
+                <interactivity:Interaction.Behaviors>
+                    <core:EventTriggerBehavior EventName="Checked">
+                        <media:ControlStoryboardAction Storyboard="{StaticResource PlayerStoryBoard}" />
+                    </core:EventTriggerBehavior>
+                    <core:EventTriggerBehavior EventName="Unchecked">
+                        <media:ControlStoryboardAction Storyboard="{StaticResource PlayerStoryBoardBack}" />
                     </core:EventTriggerBehavior>
                 </interactivity:Interaction.Behaviors>
             </ToggleButton>
@@ -226,6 +243,11 @@
 
         <Grid Grid.Row="1" x:Name="GlobalGrid" RenderTransformOrigin="0.5,0.5" Margin="0, 10, 0, 0"
               Tapped="GlobalGrid_OnTapped">
+            <Grid.RenderTransform>
+                <CompositeTransform />
+            </Grid.RenderTransform>
+        </Grid>        
+        <Grid x:Name="PlayerGrid" Grid.Row="1" Margin="0,617,0,-617.333" Background="#424242" RenderTransformOrigin="0.5,0.5">
             <Grid.RenderTransform>
                 <CompositeTransform />
             </Grid.RenderTransform>

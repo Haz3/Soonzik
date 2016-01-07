@@ -6,10 +6,12 @@ using System.Linq;
 using System.Threading.Tasks;
 using Windows.ApplicationModel.Core;
 using Windows.Devices.Geolocation;
+using Windows.Media.Playback;
 using Windows.Phone.UI.Input;
 using Windows.Storage;
 using Windows.Storage.Streams;
 using Windows.UI.Core;
+using Windows.UI.Notifications;
 using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -48,7 +50,8 @@ namespace SoonZik.Controls
         #endregion
 
         #region Attribute
-
+        public static ToggleButton PlayerButton { get; set; }
+        public static Grid MyPlayerGrid { get; set; }
         public static Grid MyGrid { get; set; }
         public ObservableCollection<SearchResult> ListObject;
         public event PropertyChangedEventHandler PropertyChanged;
@@ -60,7 +63,10 @@ namespace SoonZik.Controls
 
         #region Attributes StoryBoard Menu
 
+        public static ToggleButton MyPlayerToggleButton;
         private static Storyboard story { get; set; }
+        private static Storyboard playerStoryboard { get; set; }
+        private static Storyboard playerStoryboardBack { get; set; }
         private static ToggleButton toggle { get; set; }
         public static ToggleButton MenuToggleButton { get; set; }
 
@@ -228,12 +234,18 @@ namespace SoonZik.Controls
             InitializeComponent();
             DataContext = this;
             MyGrid = GlobalGrid;
+            MyPlayerGrid = PlayerGrid;
+            PlayerButton = MyPlayerToggleButton;
             GlobalGrid.Children.Add(new News());
-
+            
             _navigationService = new NavigationService();
             HardwareButtons.BackPressed += HardwareButtonsOnBackPressed;
-
+            MyPlayerToggleButton = PlayerToggleButton;
             story = MenuStoryBoardBack;
+            playerStoryboard = PlayerStoryBoard;
+            playerStoryboard.Completed += PlayerStoryboardOnCompleted;
+            playerStoryboardBack = PlayerStoryBoardBack;
+            playerStoryboardBack.Completed += PlayerStoryboardBackOnCompleted;
             toggle = ToggleButtonSearch;
             MenuToggleButton = ToggleButtonMenu;
             MenuToggleButton.Style = Application.Current.Resources["MenuToggleStyle"] as Style;
@@ -257,6 +269,16 @@ namespace SoonZik.Controls
             dispatcherTimer.Interval = new TimeSpan(0, 0, 10);
             dispatcherTimer.Start();
             i = 0;
+        }
+
+        private void PlayerStoryboardOnCompleted(object sender, object o)
+        {
+            MyPlayerToggleButton.Content = "Close";
+        }
+
+        private void PlayerStoryboardBackOnCompleted(object sender, object o)
+        {
+            MyPlayerToggleButton.Content = PlayerControlViewModel.StaticCurrentMusic.title;
         }
 
         private async void CreateFile()
@@ -395,13 +417,25 @@ namespace SoonZik.Controls
         {
             //if (myObj.GetType() != typeof(Playlist))
             // PlaylistAdd.Visibility = Visibility.Collapsed;
-            Singleton.Singleton.Instance().LastElement = MyGrid.Children.First();
-            _lastElement = MyGrid.Children.LastOrDefault();
-            MyGrid.Children.Clear();
-            MyGrid.Children.Add(myObj);
-            CloseMenu();
+            try
+            {
+                Singleton.Singleton.Instance().LastElement = MyGrid.Children.First();
+                _lastElement = MyGrid.Children.LastOrDefault();
+                MyGrid.Children.Clear();
+                MyGrid.Children.Add(myObj);
+                CloseMenu();
+            }
+            catch (Exception e)
+            {
+                new MessageDialog("Fail back").ShowAsync();
+            }
         }
 
+        public static void SetPlayerAudio()
+        {
+            MyPlayerGrid.Children.Clear();
+            MyPlayerGrid.Children.Add(new PlayerControl());
+        }
         #endregion
 
         #region Methods Search
@@ -573,5 +607,6 @@ namespace SoonZik.Controls
         }
 
         #endregion
+
     }
 }
