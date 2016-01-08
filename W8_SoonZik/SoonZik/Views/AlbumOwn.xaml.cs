@@ -21,12 +21,11 @@ namespace SoonZik.Views
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class Discotheque : Page
+    public sealed partial class AlbumOwn : Page
     {
-        public Discotheque()
+        public AlbumOwn()
         {
             this.InitializeComponent();
-            DataContext = new DiscothequeViewModel();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -34,19 +33,13 @@ namespace SoonZik.Views
             this.Frame.GoBack();
         }
 
-        private void album_list_ItemClick(object sender, ItemClickEventArgs e)
+        protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            var item = ((SoonZik.Models.Album)e.ClickedItem);
-            this.Frame.Navigate(typeof(AlbumOwn), item);
+            SoonZik.Models.Album elem = e.Parameter as SoonZik.Models.Album;
+            DataContext = new AlbumViewModel(elem.id);
         }
 
-        private void pack_list_ItemClick(object sender, ItemClickEventArgs e)
-        {
-            var item = ((SoonZik.Models.Pack)e.ClickedItem);
-            this.Frame.Navigate(typeof(Pack), item);
-        }
-
-        private void music_list_ItemClick(object sender, ItemClickEventArgs e)
+        private void album_music_listview_ItemClick(object sender, ItemClickEventArgs e)
         {
             var item = ((SoonZik.Models.Music)e.ClickedItem);
             this.Frame.Navigate(typeof(MusicOwn), item);
