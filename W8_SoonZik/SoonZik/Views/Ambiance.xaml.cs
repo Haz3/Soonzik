@@ -33,11 +33,24 @@ namespace SoonZik.Views
             this.Frame.GoBack();
         }
 
-        private void music_listview_ItemClick(object sender, ItemClickEventArgs e)
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            SoonZik.Models.Ambiance elem = e.Parameter as SoonZik.Models.Ambiance;
+            DataContext = new AmbianceViewModel(elem.id);
+        }
+
+        //private void music_listview_ItemClick(object sender, ItemClickEventArgs e)
+        //{
+        //    var item = ((SoonZik.Models.Music)e.ClickedItem);
+        //    this.Frame.Navigate(typeof(Music), item);
+        //}
+
+        private void ambiance_musics_ItemClick(object sender, ItemClickEventArgs e)
         {
             var item = ((SoonZik.Models.Music)e.ClickedItem);
             this.Frame.Navigate(typeof(Music), item);
         }
+
     }
 
 

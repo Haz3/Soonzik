@@ -235,7 +235,7 @@
     <value>Artistes</value>
   </data>
   <data name="birthday_txt.Text" xml:space="preserve">
-    <value>Date de naissance (AAAA-MM-JJ)*</value>
+    <value>Date de naissance*</value>
   </data>
   <data name="buy_pack_btn.Content" xml:space="preserve">
     <value>Acheter ce pack</value>
@@ -407,5 +407,53 @@
   </data>
   <data name="artist_tweets_list_txt.Text" xml:space="preserve">
     <value>Liste des Tweets de l'artiste</value>
+  </data>
+  <data name="ambiance_txt.Text" xml:space="preserve">
+    <value>Ambiance</value>
+  </data>
+  <data name="dl_btn.Content" xml:space="preserve">
+    <value>Télécharger</value>
+  </data>
+  <data name="offer_pack_btn.Content" xml:space="preserve">
+    <value>Offrir</value>
+  </data>
+  <data name="offer_txt.Text" xml:space="preserve">
+    <value>Pour offrir, entrez un pseudo et cliquez sur offrir</value>
+  </data>
+  <data name="and_txt.Text" xml:space="preserve">
+    <value>et</value>
+  </data>
+  <data name="battle_vs_txt.Text" xml:space="preserve">
+    <value>Cette battle oppose</value>
+  </data>
+  <data name="birthday.Text" xml:space="preserve">
+    <value>Date de naissance:</value>
+  </data>
+  <data name="buy_cart.Content" xml:space="preserve">
+    <value>Acheter le panier</value>
+  </data>
+  <data name="buy_cart_btn.Content" xml:space="preserve">
+    <value>Acheter</value>
+  </data>
+  <data name="email.Text" xml:space="preserve">
+    <value>Email:</value>
+  </data>
+  <data name="fname.Text" xml:space="preserve">
+    <value>Nom:</value>
+  </data>
+  <data name="lname.Text" xml:space="preserve">
+    <value>Prénom:</value>
+  </data>
+  <data name="qwe" xml:space="preserve">
+    <value />
+  </data>
+  <data name="remove_cart.Content" xml:space="preserve">
+    <value>Supprimer</value>
+  </data>
+  <data name="remove_follow_btn.Content" xml:space="preserve">
+    <value>Unfollow cet artist</value>
+  </data>
+  <data name="String1" xml:space="preserve">
+    <value />
   </data>
 </root>

@@ -6,67 +6,21 @@
     </header>
     <body>
       <group id="Resources">
-        <trans-unit id="Resources\String1" translate="yes" xml:space="preserve">
-          <source />
-          <target state="new" />
-        </trans-unit><trans-unit id="Resources\remove_follow_btn\Content" translate="yes" xml:space="preserve">
-          <source>Unfollow cet artist</source>
-          <target state="translated">Unfollow</target>
-        </trans-unit>
-        <trans-unit id="Resources\buy_cart\Content" translate="yes" xml:space="preserve">
-          <source>Acheter le panier</source>
-          <target state="translated">Buy cart</target>
-        </trans-unit>
-        <trans-unit id="Resources\birthday\Text" translate="yes" xml:space="preserve">
-          <source>Date de naissance:</source>
-          <target state="translated">Birthday:</target>
-        </trans-unit>
-        <trans-unit id="Resources\and_txt\Text" translate="yes" xml:space="preserve">
-          <source>et</source>
-          <target state="translated">and</target>
-        </trans-unit>
-        <trans-unit id="Resources\battle_vs_txt\Text" translate="yes" xml:space="preserve">
-          <source>Cette battle oppose</source>
-          <target state="translated">This battle opposes</target>
-        </trans-unit>
-        <trans-unit id="Resources\remove_cart\Content" translate="yes" xml:space="preserve">
-          <source>Supprimer</source>
-          <target state="translated">Delete</target>
-        </trans-unit>
-        <trans-unit id="Resources\qwe" translate="yes" xml:space="preserve">
-          <source />
-          <target state="new" />
-        </trans-unit><trans-unit id="Resources\buy_cart_btn\Content" translate="yes" xml:space="preserve">
-          <source>Acheter</source>
-          <target state="translated">Buy</target>
-        </trans-unit>
-        <trans-unit id="Resources\email\Text" translate="yes" xml:space="preserve">
-          <source>Email:</source>
-          <target state="translated">Email:</target>
-        </trans-unit>
-        <trans-unit id="Resources\fname\Text" translate="yes" xml:space="preserve">
-          <source>Nom:</source>
-          <target state="translated">Last name:</target>
-        </trans-unit>
-        <trans-unit id="Resources\lname\Text" translate="yes" xml:space="preserve">
-          <source>Prénom:</source>
-          <target state="translated">First name</target>
-        </trans-unit>
         <trans-unit id="Resources\offer_txt\Text" translate="yes" xml:space="preserve">
           <source>Pour offrir, entrez un pseudo et cliquez sur offrir</source>
           <target state="translated">Write down a name to offer this pack</target>
         </trans-unit>
-        <trans-unit id="Resources\dl_btn\Content" translate="yes" xml:space="preserve">
-          <source>Télécharger</source>
-          <target state="translated">Download</target>
-        </trans-unit>
-        <trans-unit id="Resources\offer_pack_btn\Content" translate="yes" xml:space="preserve">
-          <source>Offrir</source>
-          <target state="translated">Offer</target>
-        </trans-unit>
         <trans-unit id="Resources\ambiance_txt\Text" translate="yes" xml:space="preserve">
           <source>Ambiance</source>
           <target state="new">Ambiance</target>
+        </trans-unit>
+        <trans-unit id="Resources\dl_btn\Text" translate="yes" xml:space="preserve">
+          <source>Télécharger</source>
+          <target state="translated">Download</target>
+        </trans-unit>
+        <trans-unit id="Resources\offer_pack_btn\Text" translate="yes" xml:space="preserve">
+          <source>Offrir</source>
+          <target state="translated">Offer</target>
         </trans-unit>
         <trans-unit id="Resources\artist_tweets_list_txt\Text" translate="yes" xml:space="preserve">
           <source>Liste des Tweets de l'artiste</source>
@@ -78,7 +32,7 @@
         </trans-unit>
         <trans-unit id="Resources\address_complement_txt\Text" translate="yes" xml:space="preserve">
           <source>Complement</source>
-          <target state="translated">Additional information</target>
+          <target state="new">Complement</target>
         </trans-unit>
         <trans-unit id="Resources\address_country_txt\Text" translate="yes" xml:space="preserve">
           <source>Pays</source>
@@ -114,7 +68,7 @@
         </trans-unit>
         <trans-unit id="Resources\albums_txt\Text" translate="yes" xml:space="preserve">
           <source>Albums</source>
-          <target state="translated">Albums</target>
+          <target state="new">Albums</target>
         </trans-unit>
         <trans-unit id="Resources\album_artist_txt\Text" translate="yes" xml:space="preserve">
           <source>Artiste:</source>
@@ -137,8 +91,9 @@
           <target state="translated">Artists</target>
         </trans-unit>
         <trans-unit id="Resources\birthday_txt\Text" translate="yes" xml:space="preserve">
-          <source>Date de naissance*</source>
-          <target state="translated">Birthday*</target></trans-unit>
+          <source>Date de naissance (AAAA-MM-JJ)*</source>
+          <target state="translated">Birthday*</target>
+        </trans-unit>
         <trans-unit id="Resources\buy_pack_btn\Content" translate="yes" xml:space="preserve">
           <source>Acheter ce pack</source>
           <target state="translated">Buy this pack</target>
@@ -153,11 +108,11 @@
         </trans-unit>
         <trans-unit id="Resources\description_txt\Text" translate="yes" xml:space="preserve">
           <source>Description:</source>
-          <target state="translated">Description:</target>
+          <target state="new">Description:</target>
         </trans-unit>
         <trans-unit id="Resources\desc_txt\Text" translate="yes" xml:space="preserve">
           <source>Description</source>
-          <target state="translated">Description</target>
+          <target state="new">Description</target>
         </trans-unit>
         <trans-unit id="Resources\detail_news_txt\Text" translate="yes" xml:space="preserve">
           <source>Détail de la news</source>
@@ -165,11 +120,11 @@
         </trans-unit>
         <trans-unit id="Resources\duration_txt\Text" translate="yes" xml:space="preserve">
           <source>Duration:</source>
-          <target state="translated">Duration:</target>
+          <target state="new">Duration:</target>
         </trans-unit>
         <trans-unit id="Resources\email_txt\Text" translate="yes" xml:space="preserve">
           <source>Email*</source>
-          <target state="translated">Email*</target>
+          <target state="new">Email*</target>
         </trans-unit>
         <trans-unit id="Resources\end_of_battle_txt\Text" translate="yes" xml:space="preserve">
           <source>La Battle finie le:</source>
@@ -201,7 +156,7 @@
         </trans-unit>
         <trans-unit id="Resources\influence_list_txt\Text" translate="yes" xml:space="preserve">
           <source>Influences</source>
-          <target state="translated">Influences</target>
+          <target state="new">Influences</target>
         </trans-unit>
         <trans-unit id="Resources\language_txt\Text" translate="yes" xml:space="preserve">
           <source>Langue</source>
@@ -209,7 +164,7 @@
         </trans-unit>
         <trans-unit id="Resources\listening_txt\Text" translate="yes" xml:space="preserve">
           <source>Listenings</source>
-          <target state="translated">Listenings</target>
+          <target state="new">Listenings</target>
         </trans-unit>
         <trans-unit id="Resources\lname_txt\Text" translate="yes" xml:space="preserve">
           <source>Nom*</source>
@@ -221,11 +176,11 @@
         </trans-unit>
         <trans-unit id="Resources\note_txt\Text" translate="yes" xml:space="preserve">
           <source>Note:</source>
-          <target state="translated">Note:</target>
+          <target state="new">Note:</target>
         </trans-unit>
         <trans-unit id="Resources\packs_txt\Text" translate="yes" xml:space="preserve">
           <source>Packs</source>
-          <target state="translated">Packs</target>
+          <target state="new">Packs</target>
         </trans-unit>
         <trans-unit id="Resources\pack_album_list_txt\Text" translate="yes" xml:space="preserve">
           <source>Liste des albums:</source>
@@ -257,7 +212,7 @@
         </trans-unit>
         <trans-unit id="Resources\profil_btn\Content" translate="yes" xml:space="preserve">
           <source>Profil</source>
-          <target state="translated">Profile</target>
+          <target state="new">Profil</target>
         </trans-unit>
         <trans-unit id="Resources\search_btn\Content" translate="yes" xml:space="preserve">
           <source>Chercher</source>
@@ -289,11 +244,11 @@
         </trans-unit>
         <trans-unit id="Resources\vote_artist_one_btn\Content" translate="yes" xml:space="preserve">
           <source>Vote Artist 1</source>
-          <target state="translated">Vote Artist 1</target>
+          <target state="new">Vote Artist 1</target>
         </trans-unit>
         <trans-unit id="Resources\vote_artist_two_btn\Content" translate="yes" xml:space="preserve">
           <source>Vote Artist 2</source>
-          <target state="translated">Vote Artist 2</target>
+          <target state="new">Vote Artist 2</target>
         </trans-unit>
         <trans-unit id="Resources\update_btn\Content" translate="yes" xml:space="preserve">
           <source>Enregistrer</source>
@@ -317,11 +272,11 @@
         </trans-unit>
         <trans-unit id="Resources\discotheque_btn\Content" translate="yes" xml:space="preserve">
           <source>Discothèque</source>
-          <target state="translated">Library</target>
+          <target state="new">Discothèque</target>
         </trans-unit>
         <trans-unit id="Resources\discotheque_txt\Text" translate="yes" xml:space="preserve">
           <source>Discothèque</source>
-          <target state="translated">Library</target>
+          <target state="new">Discothèque</target>
         </trans-unit>
         <trans-unit id="Resources\friends_list_txt\Text" translate="yes" xml:space="preserve">
           <source>Amis</source>
@@ -361,7 +316,7 @@
         </trans-unit>
         <trans-unit id="Resources\association_txt\Text" translate="yes" xml:space="preserve">
           <source>Association:</source>
-          <target state="translated">Association:</target>
+          <target state="new">Association:</target>
         </trans-unit>
         <trans-unit id="Resources\year_txt\Text" translate="yes" xml:space="preserve">
           <source>Année:</source>

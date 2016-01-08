@@ -6,6 +6,68 @@
     </header>
     <body>
       <group id="Resources">
+        <trans-unit id="Resources\String1" translate="yes" xml:space="preserve">
+          <source />
+          <target state="new" />
+        </trans-unit><trans-unit id="Resources\remove_follow_btn\Content" translate="yes" xml:space="preserve">
+          <source>Unfollow cet artist</source>
+          <target state="new">Unfollow cet artist</target>
+        </trans-unit>
+        <trans-unit id="Resources\buy_cart\Content" translate="yes" xml:space="preserve">
+          <source>Acheter le panier</source>
+          <target state="new">Acheter le panier</target>
+        </trans-unit>
+        <trans-unit id="Resources\birthday\Text" translate="yes" xml:space="preserve">
+          <source>Date de naissance:</source>
+          <target state="new">Date de naissance:</target>
+        </trans-unit>
+        <trans-unit id="Resources\and_txt\Text" translate="yes" xml:space="preserve">
+          <source>et</source>
+          <target state="new">et</target>
+        </trans-unit>
+        <trans-unit id="Resources\battle_vs_txt\Text" translate="yes" xml:space="preserve">
+          <source>Cette battle oppose</source>
+          <target state="new">Cette battle oppose</target>
+        </trans-unit>
+        <trans-unit id="Resources\remove_cart\Content" translate="yes" xml:space="preserve">
+          <source>Supprimer</source>
+          <target state="new">Supprimer</target>
+        </trans-unit>
+        <trans-unit id="Resources\qwe" translate="yes" xml:space="preserve">
+          <source />
+          <target state="new" />
+        </trans-unit><trans-unit id="Resources\buy_cart_btn\Content" translate="yes" xml:space="preserve">
+          <source>Acheter</source>
+          <target state="new">Acheter</target>
+        </trans-unit>
+        <trans-unit id="Resources\email\Text" translate="yes" xml:space="preserve">
+          <source>Email:</source>
+          <target state="new">Email:</target>
+        </trans-unit>
+        <trans-unit id="Resources\fname\Text" translate="yes" xml:space="preserve">
+          <source>Nom:</source>
+          <target state="new">Nom:</target>
+        </trans-unit>
+        <trans-unit id="Resources\lname\Text" translate="yes" xml:space="preserve">
+          <source>Prénom:</source>
+          <target state="new">Prénom:</target>
+        </trans-unit>
+        <trans-unit id="Resources\offer_txt\Text" translate="yes" xml:space="preserve">
+          <source>Pour offrir, entrez un pseudo et cliquez sur offrir</source>
+          <target state="new">Pour offrir, entrez un pseudo et cliquez sur offrir</target>
+        </trans-unit>
+        <trans-unit id="Resources\dl_btn\Content" translate="yes" xml:space="preserve">
+          <source>Télécharger</source>
+          <target state="new">Télécharger</target>
+        </trans-unit>
+        <trans-unit id="Resources\offer_pack_btn\Content" translate="yes" xml:space="preserve">
+          <source>Offrir</source>
+          <target state="new">Offrir</target>
+        </trans-unit>
+        <trans-unit id="Resources\ambiance_txt\Text" translate="yes" xml:space="preserve">
+          <source>Ambiance</source>
+          <target state="new">Ambiance</target>
+        </trans-unit>
         <trans-unit id="Resources\artist_tweets_list_txt\Text" translate="yes" xml:space="preserve">
           <source>Liste des Tweets de l'artiste</source>
           <target state="new">Liste des Tweets de l'artiste</target>
@@ -75,8 +137,8 @@
           <target state="new">Artistes</target>
         </trans-unit>
         <trans-unit id="Resources\birthday_txt\Text" translate="yes" xml:space="preserve">
-          <source>Date de naissance (AAAA-MM-JJ)*</source>
-          <target state="new">Date de naissance (AAAA-MM-JJ)*</target>
+          <source>Date de naissance*</source>
+          <target state="new">Date de naissance*</target>
         </trans-unit>
         <trans-unit id="Resources\buy_pack_btn\Content" translate="yes" xml:space="preserve">
           <source>Acheter ce pack</source>

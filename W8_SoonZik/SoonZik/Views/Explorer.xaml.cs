@@ -68,5 +68,10 @@ namespace SoonZik.Views
             this.Frame.Navigate(typeof(Cart));
         }
 
+        private void ambiance_list_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            var item = ((SoonZik.Models.Ambiance)e.ClickedItem);
+            this.Frame.Navigate(typeof(Ambiance), item);
+        }
     }
 }

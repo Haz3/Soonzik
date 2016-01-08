@@ -232,9 +232,6 @@
     <Compile Include="Views\Connection.xaml.cs">
       <DependentUpon>Connection.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Follow.xaml.cs">
-      <DependentUpon>Follow.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\Home.xaml.cs">
       <DependentUpon>Home.xaml</DependentUpon>
     </Compile>
@@ -419,10 +416,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\Connection.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\Follow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
