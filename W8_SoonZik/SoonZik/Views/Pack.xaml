@@ -84,14 +84,17 @@
             <TextBlock x:Name="website_txt" HorizontalAlignment="Left" Margin="105,222,0,0" TextWrapping="Wrap" Text="SoonZik:" VerticalAlignment="Top" Height="25" Width="115" Foreground="Black" FontSize="20"/>
             <TextBlock x:Name="website_value" HorizontalAlignment="Left" Margin="965,222,0,0" TextWrapping="Wrap" Text="{Binding website, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Height="25" Width="Auto" Foreground="Black" FontSize="20"/>
 
-            <Button x:Uid="buy_pack_btn" Command="{Binding do_buy_pack}" x:Name="buy_pack_btn" Content="Acheter ce pack" Margin="460,263,0,7" Height="52" Background="#FFEC3F3F" FontSize="20" HorizontalAlignment="Left" Width="201"/>
+            <Button x:Uid="buy_pack_btn" Command="{Binding do_buy_pack}" x:Name="buy_pack_btn" Content="Acheter ce pack" Margin="412,281,0,7" Height="52" Background="#FF00AFDC" FontSize="20" HorizontalAlignment="Left" Width="201" Foreground="Black"/>
+            <Button x:Uid="offer_pack_btn" Command="{Binding do_offer_pack}" x:Name="offer_pack_btn" Content="Offrir" Margin="817,295,0,7" Height="38" Background="#FF00AFDC" FontSize="15" HorizontalAlignment="Left" Width="141" Foreground="Black"/>
             <TextBlock Margin="463,82,0,0" TextWrapping="Wrap" Text="Repartissez vos dons !" VerticalAlignment="Top" Height="37" Foreground="Black" FontSize="20" HorizontalAlignment="Left" Width="195"/>
 
             <TextBlock x:Uid="pay_what_you_want_txt" Margin="97,21,0,0" TextWrapping="Wrap" Text="Payez ce que vous voulez (Minimum 1€)" VerticalAlignment="Top" Height="37" Foreground="Black" FontSize="20" HorizontalAlignment="Left" Width="Auto"/>
 
             <TextBox x:Name="price_tb" HorizontalAlignment="Left" Margin="473,15,0,0" TextWrapping="Wrap" Text="{Binding amount, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Height="37" Width="185" BorderBrush="#FF767676"/>
-            <TextBlock x:Name="paypal_status" Margin="25,275,671,19" Text="{Binding txt_pp, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Foreground="Black" FontSize="15"/>
-            <Image HorizontalAlignment="Left" Height="56" Margin="700,274,0,0" VerticalAlignment="Top" Width="230" Source="ms-appx:///Assets/Paypal-Logo.png"/>
+            <TextBlock x:Name="paypal_status" Margin="0,275,770,0" Text="{Binding txt_pp, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Foreground="Black" FontSize="15"/>
+            <Image HorizontalAlignment="Left" Height="56" Margin="890,10,0,0" VerticalAlignment="Top" Width="230" Source="ms-appx:///Assets/Paypal-Logo.png"/>
+            <TextBlock x:Name="offer_txt"  x:Uid="offer_txt" HorizontalAlignment="Left" Margin="645,275,0,0" TextWrapping="Wrap" Text="Pour offrir, entrez un pseudo et cliquez sur offrir" VerticalAlignment="Top" Height="25" Width="335" FontSize="15" Foreground="Black"/>
+            <TextBox x:Name="offer_tb" HorizontalAlignment="Left" Margin="645,298,0,0" TextWrapping="Wrap" Text="{Binding offer_username, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="170" Background="#FFC1C1C1"/>
             <!--<TextBlock HorizontalAlignment="Left" Margin="755,300,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Foreground="Black" Height="21" Width="320"/>-->
         </Grid>
 
