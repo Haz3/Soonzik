@@ -642,7 +642,6 @@ C:\Users\Gery\Desktop\SoonZik\SoonZik\obj\Debug\Facebook.Client.pri.xml
 C:\Users\Gery\Desktop\SoonZik\SoonZik\obj\Debug\GalaSoft.MvvmLight.Platform.pri.xml
 C:\Users\Gery\Desktop\SoonZik\SoonZik\obj\Debug\JRatingControl.pri.xml
 C:\Users\Gery\Desktop\SoonZik\SoonZik\obj\Debug\ProjectArchitectures.txt
-C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\obj\Debug\Microsoft.Practices.ServiceLocation\qualifiers.txt
 C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\bin\Debug\SoonZik.exe.config
 C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\bin\Debug\App.xbf
 C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\bin\Debug\Controls\ButtonFriendPopUp.xbf
@@ -803,7 +802,6 @@ C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\obj\Debug\Vi
 C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\obj\Debug\Views\ProfilUser.g.i.cs
 C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\obj\Debug\Views\ProfilUser.g.cs
 C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\obj\Debug\XamlTypeInfo.g.cs
-C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\obj\Debug\App.xaml
 C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\obj\Debug\Controls\ButtonFriendPopUp.xaml
 C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\obj\Debug\Controls\Genre.xaml
 C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\obj\Debug\Controls\GeolocalisationControl.xaml
@@ -811,7 +809,6 @@ C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\obj\Debug\Co
 C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\obj\Debug\Controls\NewsSharePopup.xaml
 C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\obj\Debug\Controls\NotationMusic.xaml
 C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\obj\Debug\Controls\PlayerControl.xaml
-C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\obj\Debug\Controls\PriceControl.xaml
 C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\obj\Debug\Controls\ProgressRingControl.xaml
 C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\obj\Debug\Controls\TwitterConnect.xaml
 C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\obj\Debug\MainPage.xaml
@@ -835,7 +832,6 @@ C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\obj\Debug\Vi
 C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\obj\Debug\Views\MyMusic.xaml
 C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\obj\Debug\Views\ProfilArtiste.xaml
 C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\obj\Debug\Views\ProfilUser.xaml
-C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\obj\Debug\App.xbf
 C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\obj\Debug\Controls\ButtonFriendPopUp.xbf
 C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\obj\Debug\Controls\Genre.xbf
 C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\obj\Debug\Controls\GeolocalisationControl.xbf
@@ -843,7 +839,6 @@ C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\obj\Debug\Co
 C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\obj\Debug\Controls\NewsSharePopup.xbf
 C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\obj\Debug\Controls\NotationMusic.xbf
 C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\obj\Debug\Controls\PlayerControl.xbf
-C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\obj\Debug\Controls\PriceControl.xbf
 C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\obj\Debug\Controls\ProgressRingControl.xbf
 C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\obj\Debug\Controls\TwitterConnect.xbf
 C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\obj\Debug\MainPage.xbf
@@ -868,6 +863,10 @@ C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\obj\Debug\Vi
 C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\obj\Debug\Views\ProfilArtiste.xbf
 C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\obj\Debug\Views\ProfilUser.xbf
 C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\obj\Debug\XamlSaveStateFile.xml
+C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\obj\Debug\App.xaml
+C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\obj\Debug\Controls\PriceControl.xaml
+C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\obj\Debug\App.xbf
+C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\obj\Debug\Controls\PriceControl.xbf
 C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\obj\Debug\SoonZik.exe
 C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\obj\Debug\SoonZik.pdb
 C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\obj\Debug\Autofac\en\Autofac.Core.Activators.Reflection.MostParametersConstructorSelectorResources.resw
@@ -913,6 +912,7 @@ C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\obj\Debug\So
 C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\obj\Debug\Autofac.pri
 C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\obj\Debug\Autofac\qualifiers.txt
 C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\obj\Debug\Microsoft.Practices.ServiceLocation.pri
+C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\obj\Debug\Microsoft.Practices.ServiceLocation\qualifiers.txt
 C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\obj\Debug\priconfig.xml
 C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\obj\Debug\priconfig.xml.intermediate
 C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\obj\Debug\layout.resfiles
@@ -930,3 +930,19 @@ C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\obj\Debug\Fa
 C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\obj\Debug\GalaSoft.MvvmLight.Platform.pri.xml
 C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\obj\Debug\JRatingControl.pri.xml
 C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\obj\Debug\ProjectArchitectures.txt
+C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\obj\Debug\Autofac\layout.resfiles
+C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\obj\Debug\Autofac\layout.resfiles.intermediate
+C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\obj\Debug\Autofac\Resources.resfiles
+C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\obj\Debug\Autofac\Resources.resfiles.intermediate
+C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\obj\Debug\Autofac\pri.resfiles
+C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\obj\Debug\Autofac\pri.resfiles.intermediate
+C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\obj\Debug\Autofac\priconfig.xml
+C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\obj\Debug\Autofac\priconfig.xml.intermediate
+C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\obj\Debug\Microsoft.Practices.ServiceLocation\layout.resfiles
+C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\obj\Debug\Microsoft.Practices.ServiceLocation\layout.resfiles.intermediate
+C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\obj\Debug\Microsoft.Practices.ServiceLocation\Resources.resfiles
+C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\obj\Debug\Microsoft.Practices.ServiceLocation\Resources.resfiles.intermediate
+C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\obj\Debug\Microsoft.Practices.ServiceLocation\pri.resfiles
+C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\obj\Debug\Microsoft.Practices.ServiceLocation\pri.resfiles.intermediate
+C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\obj\Debug\Microsoft.Practices.ServiceLocation\priconfig.xml
+C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\obj\Debug\Microsoft.Practices.ServiceLocation\priconfig.xml.intermediate

@@ -57,7 +57,7 @@ namespace SoonZik.ViewModel
                     Longitude = UserLocation.Longitude
                 }),
                 NormalizedAnchorPoint = new Point(0.5, 1.0),
-                Title = "Moi"
+                Title = Singleton.Singleton.Instance().CurrentUser.username
             };
 
             ListMapIcons.Add(mapIcon);

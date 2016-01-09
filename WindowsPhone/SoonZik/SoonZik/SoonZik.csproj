@@ -154,6 +154,7 @@
     <Compile Include="ViewModel\MyMusicViewModel.cs" />
     <Compile Include="ViewModel\PlayerControlViewModel.cs" />
     <Compile Include="ViewModel\PlaylistViewModel.cs" />
+    <Compile Include="ViewModel\PriceControlViewModel.cs" />
     <Compile Include="ViewModel\ProfilArtisteViewModel.cs" />
     <Compile Include="ViewModel\ProfilFriendViewModel.cs" />
     <Compile Include="Views\AboutView.xaml.cs">

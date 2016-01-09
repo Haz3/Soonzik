@@ -27,6 +27,18 @@
     <RootPropertyPathName Name="MediaElementObject" />
     <RootPropertyPathName Name="TitleTrack" />
     <RootPropertyPathName Name="ArtisteName" />
+    <RootPropertyPathName Name="BuyCommand" />
+    <RootPropertyPathName Name="SoonzikPrice" />
+    <RootPropertyPathName Name="SoonzikSliderValue" />
+    <RootPropertyPathName Name="SoonZikSliderCommand" />
+    <RootPropertyPathName Name="AssocPrice" />
+    <RootPropertyPathName Name="AssocSliderValue" />
+    <RootPropertyPathName Name="AssocSliderCommand" />
+    <RootPropertyPathName Name="ArtistePrice" />
+    <RootPropertyPathName Name="ArtisteSliderValue" />
+    <RootPropertyPathName Name="ArtisteSliderCommand" />
+    <RootPropertyPathName Name="ThePack" />
+    <RootPropertyPathName Name="averagePrice" />
     <RootPropertyPathName Name="GridVisibility" />
     <RootPropertyPathName Name="isActive" />
     <RootPropertyPathName Name="SendCommand" />
@@ -67,7 +79,6 @@
     <RootPropertyPathName Name="artist_one" />
     <RootPropertyPathName Name="LoadedCommand" />
     <RootPropertyPathName Name="TotalPrice" />
-    <RootPropertyPathName Name="BuyCommand" />
     <RootPropertyPathName Name="ListAlbum" />
     <RootPropertyPathName Name="AlbumTappedCommand" />
     <RootPropertyPathName Name="ListMusique" />
@@ -157,7 +168,6 @@
     <RootPropertyPathName Name="MyPack" />
     <RootPropertyPathName Name="descriptions" />
     <RootPropertyPathName Name="CompleteListPack" />
-    <RootPropertyPathName Name="ThePack" />
     <RootPropertyPathName Name="PackTappedCommand" />
     <RootPropertyPathName Name="SelectedIndex" />
     <RootPropertyPathName Name="CreatePlaylist" />
@@ -200,6 +210,7 @@
     <RootType FullName="SoonZik.ViewModel.PlaylistViewModel" />
     <RootType FullName="SoonZik.ViewModel.AboutViewModel" />
     <RootType FullName="SoonZik.ViewModel.PlayerControlViewModel" />
+    <RootType FullName="SoonZik.ViewModel.PriceControlViewModel" />
     <RootType FullName="Windows.UI.Xaml.DataTemplate">
       <RootProperty Name="Template" />
     </RootType>
@@ -239,9 +250,9 @@
       <RootProperty Name="Style" />
       <RootProperty Name="MinHeight" />
       <RootProperty Name="MinWidth" />
+      <RootProperty Name="Command" />
       <RootProperty Name="Foreground" />
       <RootProperty Name="Width" />
-      <RootProperty Name="Command" />
       <RootProperty Name="Margin" />
       <RootProperty Name="Height" />
       <RootProperty Name="IsEnabled" />
@@ -426,10 +437,10 @@
       <RootProperty Name="Width" />
       <RootProperty Name="Margin" />
       <RootProperty Name="Style" />
+      <RootProperty Name="TextAlignment" />
       <RootProperty Name="TextWrapping" />
       <RootProperty Name="Padding" />
       <RootProperty Name="FontWeight" />
-      <RootProperty Name="TextAlignment" />
       <RootProperty Name="MaxLines" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Data.Binding">
@@ -443,6 +454,7 @@
       <RootProperty Name="Resources" />
       <RootProperty Name="Width" />
       <RootProperty Name="Height" />
+      <RootProperty Name="DataContext" />
     </RootType>
     <RootType FullName="SoonZik.Controls.ButtonFriendPopUp" />
     <RootType FullName="SoonZik.Controls.Genre" />
@@ -528,8 +540,8 @@
       <RootProperty Name="Height" />
       <RootProperty Name="Opacity" />
       <RootProperty Name="HorizontalAlignment" />
-      <RootProperty Name="Margin" />
       <RootProperty Name="Text" />
+      <RootProperty Name="Margin" />
       <RootProperty Name="InputScope" />
       <RootProperty Name="IsEnabled" />
       <RootEvent Name="TextChanged" />
@@ -550,7 +562,12 @@
     <RootType FullName="Windows.UI.Xaml.Controls.Slider">
       <RootProperty Name="VerticalAlignment" />
       <RootProperty Name="Margin" />
+      <RootProperty Name="Value" />
       <RootProperty Name="Width" />
+      <RootProperty Name="Minimum" />
+      <RootProperty Name="Maximum" />
+      <RootProperty Name="HorizontalAlignment" />
+      <RootProperty Name="StepFrequency" />
     </RootType>
     <RootType FullName="SoonZik.Controls.PriceControl" />
     <RootType FullName="Windows.UI.Xaml.Controls.ProgressRing">

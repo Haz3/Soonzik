@@ -55,6 +55,12 @@ namespace SoonZik.ViewModel
             SimpleIoc.Default.Register<PlaylistViewModel>();
             SimpleIoc.Default.Register<AboutViewModel>();
             SimpleIoc.Default.Register<PlayerControlViewModel>();
+            SimpleIoc.Default.Register<PriceControlViewModel>();
+        }
+
+        public PriceControlViewModel PriceControl
+        {
+            get { return ServiceLocator.Current.GetInstance<PriceControlViewModel>(); }
         }
 
         public PlayerControlViewModel PlayerControl
