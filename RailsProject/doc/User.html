@@ -500,7 +500,7 @@ subscribed to the newsletter</p>
 											<p>Algorithm to get artist for suggestv2</p>					
 											<div class="method-source-code" id="suggestArtist-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/models/user.rb, line 339</span>
+								class="language-ruby"><span class="ruby-comment"># File app/models/user.rb, line 338</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">suggestArtist</span>(<span class="ruby-identifier">u</span>, <span class="ruby-identifier">limit</span>)
   <span class="ruby-identifier">content</span> = []
   <span class="ruby-keyword">if</span> (<span class="ruby-identifier">u</span> <span class="ruby-operator">==</span> <span class="ruby-keyword">nil</span>)
@@ -612,7 +612,7 @@ subscribed to the newsletter</p>
 											<p>Give the pack where the user has its albums</p>					
 											<div class="method-source-code" id="givePack-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/models/user.rb, line 334</span>
+								class="language-ruby"><span class="ruby-comment"># File app/models/user.rb, line 333</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">givePack</span>
   <span class="ruby-keyword">return</span> <span class="ruby-constant">Pack</span>.<span class="ruby-identifier">joins</span>(<span class="ruby-identifier">albums</span><span class="ruby-operator">:</span> [<span class="ruby-value">:user</span>]).<span class="ruby-identifier">where</span>(<span class="ruby-identifier">users</span><span class="ruby-operator">:</span> {<span class="ruby-identifier">id</span><span class="ruby-operator">:</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">id</span>})
 <span class="ruby-keyword">end</span></code></pre>
@@ -634,7 +634,7 @@ subscribed to the newsletter</p>
 											<p>Give the 5 most popular track of an artist</p>					
 											<div class="method-source-code" id="giveTopFive-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/models/user.rb, line 320</span>
+								class="language-ruby"><span class="ruby-comment"># File app/models/user.rb, line 319</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">giveTopFive</span>
   <span class="ruby-identifier">allMusics</span> = []
 
@@ -665,7 +665,7 @@ subscribed to the newsletter</p>
 											<p>Check if the user is a friend or not</p>					
 											<div class="method-source-code" id="hasFriend-3F-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/models/user.rb, line 310</span>
+								class="language-ruby"><span class="ruby-comment"># File app/models/user.rb, line 309</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">hasFriend?</span>(<span class="ruby-identifier">user</span>)
   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">friends</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">friend</span><span class="ruby-operator">|</span>
     <span class="ruby-keyword">if</span> (<span class="ruby-identifier">friend</span>.<span class="ruby-identifier">id</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">user</span>.<span class="ruby-identifier">id</span>)
@@ -695,7 +695,6 @@ subscribed to the newsletter</p>
 								class="language-ruby"><span class="ruby-comment"># File app/models/user.rb, line 299</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">isArtist?</span>
   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">groups</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">group</span><span class="ruby-operator">|</span>
-    <span class="ruby-identifier">puts</span> <span class="ruby-identifier">group</span>
     <span class="ruby-keyword">if</span> (<span class="ruby-identifier">group</span>.<span class="ruby-identifier">name</span> <span class="ruby-operator">==</span> <span class="ruby-string">&quot;Artist&quot;</span>)
       <span class="ruby-keyword">return</span> <span class="ruby-keyword">true</span>
     <span class="ruby-keyword">end</span>

@@ -13,5 +13,6 @@ ActiveAdmin.register Language do
 #   permitted
 # end
 
+	permit_params :language, :abbreviation
 
 end

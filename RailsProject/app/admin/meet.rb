@@ -13,5 +13,24 @@ ActiveAdmin.register Meet do
 #   permitted
 # end
 
+	permit_params :user_id, :location, :query, :profession, :what, :fromDate, :toDate, :email
+
+	form do |f|
+	  f.semantic_errors # shows errors on :base
+	  #f.inputs
+
+	  f.inputs do
+		  f.input :location
+		  f.input :query
+		  f.input :profession
+		  f.input :what
+		  f.input :fromDate, :as => :datetime_select
+		  f.input :toDate, :as => :datetime_select
+		  f.input :email
+		  f.input :user
+		end
+
+	  f.actions         # adds the 'Submit' and 'Cancel' buttons
+	end
 
 end

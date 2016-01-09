@@ -27,6 +27,11 @@ class Identity < ActiveRecord::Base
 
   SALT = "3uNi@rCK$L$om40dNnhX)#jV2$40wwbr_bAK99%E"
 
+  # The strong parameters to save or update object
+  def self.identity_params(parameters)
+    parameters.require(:identity).permit(:provider, :uid)
+  end
+
   # Find or create an user by the oauth value
   def self.find_for_oauth(auth)
     find_or_create_by(uid: auth.uid, provider: auth.provider)

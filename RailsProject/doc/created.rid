@@ -1,29 +1,29 @@
-Thu, 07 Jan 2016 21:20:20 +0100
-app/models/address.rb	Thu, 27 Aug 2015 23:13:38 +0200
+Sat, 09 Jan 2016 18:58:22 +0100
+app/models/address.rb	Sat, 09 Jan 2016 16:24:44 +0100
 app/models/admin_user.rb	Sun, 06 Sep 2015 18:50:12 +0200
 app/models/album.rb	Thu, 07 Jan 2016 21:19:34 +0100
 app/models/albumslike.rb	Thu, 05 Nov 2015 19:21:00 +0100
 app/models/ambiance.rb	Thu, 07 Jan 2016 20:57:31 +0100
 app/models/attachment.rb	Thu, 07 Jan 2016 21:19:43 +0100
 app/models/battle.rb	Thu, 27 Aug 2015 23:13:38 +0200
-app/models/cart.rb	Sun, 06 Sep 2015 12:56:14 +0200
-app/models/commentary.rb	Thu, 27 Aug 2015 23:13:38 +0200
+app/models/cart.rb	Fri, 08 Jan 2016 01:35:26 +0100
+app/models/commentary.rb	Sat, 09 Jan 2016 16:17:43 +0100
 app/models/concert.rb	Tue, 10 Nov 2015 13:48:08 +0100
 app/models/concertslike.rb	Fri, 30 Oct 2015 19:11:24 +0100
-app/models/description.rb	Sun, 06 Sep 2015 11:48:45 +0200
+app/models/description.rb	Sat, 09 Jan 2016 16:29:12 +0100
 app/models/feedback.rb	Sat, 21 Nov 2015 14:07:51 +0100
 app/models/follow.rb	Thu, 27 Aug 2015 23:13:38 +0200
 app/models/friend.rb	Thu, 27 Aug 2015 23:13:38 +0200
-app/models/genre.rb	Sun, 06 Sep 2015 21:01:29 +0200
+app/models/genre.rb	Sat, 09 Jan 2016 18:33:38 +0100
 app/models/group.rb	Sun, 06 Sep 2015 11:55:51 +0200
-app/models/identity.rb	Sat, 12 Dec 2015 16:45:00 +0100
-app/models/influence.rb	Sun, 06 Sep 2015 11:55:58 +0200
+app/models/identity.rb	Sat, 09 Jan 2016 08:38:56 +0100
+app/models/influence.rb	Sat, 09 Jan 2016 08:42:30 +0100
 app/models/language.rb	Thu, 27 Aug 2015 23:13:38 +0200
 app/models/listening.rb	Thu, 12 Nov 2015 19:00:59 +0100
 app/models/meet.rb	Thu, 27 Aug 2015 23:13:38 +0200
 app/models/meetstring.rb	Thu, 27 Aug 2015 23:13:38 +0200
 app/models/message.rb	Fri, 06 Nov 2015 13:10:49 +0100
-app/models/music.rb	Thu, 07 Jan 2016 21:18:28 +0100
+app/models/music.rb	Thu, 07 Jan 2016 21:23:21 +0100
 app/models/music_note.rb	Thu, 27 Aug 2015 23:13:38 +0200
 app/models/musicalpast.rb	Sat, 12 Dec 2015 16:47:55 +0100
 app/models/news.rb	Wed, 11 Nov 2015 16:18:36 +0100
@@ -43,7 +43,7 @@ app/models/purchased_music.rb	Thu, 27 Aug 2015 23:13:38 +0200
 app/models/purchased_pack.rb	Thu, 27 Aug 2015 23:13:38 +0200
 app/models/tool.rb	Sat, 31 Oct 2015 18:57:01 +0100
 app/models/tweet.rb	Thu, 27 Aug 2015 23:13:38 +0200
-app/models/user.rb	Sun, 29 Nov 2015 15:43:04 +0100
+app/models/user.rb	Sat, 09 Jan 2016 18:04:04 +0100
 app/models/vote.rb	Thu, 27 Aug 2015 23:13:38 +0200
 app/controllers/API/albums_controller.rb	Wed, 11 Nov 2015 18:06:41 +0100
 app/controllers/API/ambiances_controller.rb	Fri, 18 Dec 2015 18:35:09 +0100

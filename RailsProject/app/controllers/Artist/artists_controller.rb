@@ -10,7 +10,7 @@ module Artist
 
     # For all responses in this controller, return the CORS access control headers.
     def cors_set_access_control_headers
-      if (params[:format] != "json") && ((!user_signed_in?) || (user_signed_in? && !current_user.isArtist?))
+      if ((!user_signed_in?) || (user_signed_in? && !current_user.isArtist?))
         redirect_to root_url subdomain: false
       end
 

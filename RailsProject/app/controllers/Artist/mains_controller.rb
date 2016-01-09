@@ -205,9 +205,6 @@ module Artist
 		  		@u.albums.each { |album|
 		  			commentsTmp += album.commentaries
 		  		}
-		  		@u.musics.each { |music|
-		  			commentsTmp += music.commentaries
-		  		}
 
 		  		commentsTmp.sort! { |x, y| y.created_at.to_date <=> x.created_at.to_date }
 
@@ -218,7 +215,6 @@ module Artist
 		  		commentsTmp.each { |comment|
 		  			comments << comment.as_json(:include => {
 		  				:albums => { only: Album.miniKey },
-		  				:musics => { only: Music.miniKey },
 		  				:user => { only: User.miniKey }
 		  			}, only: Commentary.miniKey)
 		  		}

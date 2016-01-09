@@ -126,16 +126,12 @@ blue ? A particular name like magenta ?)</p>
 
 <h4 id="class-Genre-label-Associations">Associations<span><a href="#class-Genre-label-Associations">&para;</a> <a href="#top">&uarr;</a></span></h4>
 <ul><li>
-<p><code>has_and_belongs_to_many</code> - :musics — NOT ANYMORE</p>
-</li><li>
 <p><code>has_and_belongs_to_many</code> - :influences</p>
 </li><li>
-<p><code>has_and_belongs_to_many</code> - :descriptions</p>
+<p><code>has_and_belongs_to_many</code> - :albums</p>
 </li><li>
-<p><code>has_and_belongs_to_many</code> - :packs</p>
-</li><li>
-<p><code>has_and_belongs_to_many</code> - :finished_musics, -&gt; {
-where(“album_id IS NOT NULL”) }</p>
+<p><code>has_and_belongs_to_many</code> - :musics, -&gt; { where(“album_id IS
+NOT NULL”) }</p>
 </li></ul>
 		</section>
 
@@ -143,6 +139,23 @@ where(“album_id IS NOT NULL”) }</p>
 			
 		    
 			
+						<!-- Attributes -->
+			<section class="attributes-list">
+				<header>
+					<h3>Attributes</h3>
+				</header>
+				<dl>
+									<dt id="attribute-i-album_ids"><i class="icon-generic"></i>album_ids<span
+						class="attribute-access-type">[RW]</span></dt>
+										<dd class="description"></dd>
+														<dt id="attribute-i-influence_ids"><i class="icon-generic"></i>influence_ids<span
+						class="attribute-access-type">[RW]</span></dt>
+										<dd class="description"></dd>
+														<dt id="attribute-i-music_ids"><i class="icon-generic"></i>music_ids<span
+						class="attribute-access-type">[RW]</span></dt>
+										<dd class="description"></dd>
+													</dl>
+			</section>
 			
 			<!-- Methods -->
 						
@@ -164,7 +177,7 @@ where(“album_id IS NOT NULL”) }</p>
 											<p>The strong parameters to save or update object</p>					
 											<div class="method-source-code" id="genre_params-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/models/genre.rb, line 37</span>
+								class="language-ruby"><span class="ruby-comment"># File app/models/genre.rb, line 43</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">genre_params</span>(<span class="ruby-identifier">parameters</span>)
   <span class="ruby-identifier">parameters</span>.<span class="ruby-identifier">require</span>(<span class="ruby-value">:genre</span>).<span class="ruby-identifier">permit</span>(<span class="ruby-value">:style_name</span>, <span class="ruby-value">:color_name</span>, <span class="ruby-value">:color_hexa</span>)
 <span class="ruby-keyword">end</span></code></pre>
@@ -188,7 +201,7 @@ where(“album_id IS NOT NULL”) }</p>
 <p>Fields returned : [:id, :style_name, :color_name, :color_hexa]</p>					
 											<div class="method-source-code" id="miniKey-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/models/genre.rb, line 32</span>
+								class="language-ruby"><span class="ruby-comment"># File app/models/genre.rb, line 38</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">miniKey</span>
   [<span class="ruby-value">:id</span>, <span class="ruby-value">:style_name</span>, <span class="ruby-value">:color_name</span>, <span class="ruby-value">:color_hexa</span>]
 <span class="ruby-keyword">end</span></code></pre>
@@ -205,6 +218,103 @@ where(“album_id IS NOT NULL”) }</p>
 			
 			
 									
+						<section class="public-methods instance-methods methods">
+				<header>
+					<h3>Public Instance Methods</h3>
+				</header>
+
+								<a name="method-i-generateSelectedAlbumCollection">anchor</a>
+				<div id="method-i-generateSelectedAlbumCollection-doc" class="method">
+
+					<header>
+											<i class="icon-generic"></i>
+						<span class="method-name">generateSelectedAlbumCollection</span><span 
+							class="method-args">()</span>
+										</header>
+
+					<div class="method-description">
+											<p>for admin panel, to have selected checkbox</p>					
+											<div class="method-source-code" id="generateSelectedAlbumCollection-source">
+							<pre class="prettyprint linenums"><code 
+								class="language-ruby"><span class="ruby-comment"># File app/models/genre.rb, line 61</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">generateSelectedAlbumCollection</span>
+  <span class="ruby-identifier">collection</span> = <span class="ruby-constant">Album</span>.<span class="ruby-identifier">pluck</span>(<span class="ruby-string">&#39;title, id&#39;</span>)
+  <span class="ruby-identifier">collection</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">collect</span><span class="ruby-operator">|</span>
+    <span class="ruby-keyword">if</span> ((<span class="ruby-keyword">self</span>.<span class="ruby-identifier">album_ids</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">album_ids</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">collect</span>[<span class="ruby-value">1</span>]))
+      <span class="ruby-identifier">collect</span>[<span class="ruby-value">2</span>] = { <span class="ruby-identifier">checked</span><span class="ruby-operator">:</span> <span class="ruby-keyword">true</span> }
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-identifier">collect</span>[<span class="ruby-value">2</span>] = { <span class="ruby-identifier">checked</span><span class="ruby-operator">:</span> <span class="ruby-keyword">false</span> }
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">collection</span>
+<span class="ruby-keyword">end</span></code></pre>
+						</div>
+										</div>
+
+					
+									</div>
+								<a name="method-i-generateSelectedInfluenceCollection">anchor</a>
+				<div id="method-i-generateSelectedInfluenceCollection-doc" class="method">
+
+					<header>
+											<i class="icon-generic"></i>
+						<span class="method-name">generateSelectedInfluenceCollection</span><span 
+							class="method-args">()</span>
+										</header>
+
+					<div class="method-description">
+											<p>for admin panel, to have selected checkbox</p>					
+											<div class="method-source-code" id="generateSelectedInfluenceCollection-source">
+							<pre class="prettyprint linenums"><code 
+								class="language-ruby"><span class="ruby-comment"># File app/models/genre.rb, line 48</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">generateSelectedInfluenceCollection</span>
+  <span class="ruby-identifier">collection</span> = <span class="ruby-constant">Influence</span>.<span class="ruby-identifier">pluck</span>(<span class="ruby-string">&#39;name, id&#39;</span>)
+  <span class="ruby-identifier">collection</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">collect</span><span class="ruby-operator">|</span>
+    <span class="ruby-keyword">if</span> ((<span class="ruby-keyword">self</span>.<span class="ruby-identifier">influence_ids</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">influence_ids</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">collect</span>[<span class="ruby-value">1</span>]))
+      <span class="ruby-identifier">collect</span>[<span class="ruby-value">2</span>] = { <span class="ruby-identifier">checked</span><span class="ruby-operator">:</span> <span class="ruby-keyword">true</span> }
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-identifier">collect</span>[<span class="ruby-value">2</span>] = { <span class="ruby-identifier">checked</span><span class="ruby-operator">:</span> <span class="ruby-keyword">false</span> }
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">collection</span>
+<span class="ruby-keyword">end</span></code></pre>
+						</div>
+										</div>
+
+					
+									</div>
+								<a name="method-i-generateSelectedMusicCollection">anchor</a>
+				<div id="method-i-generateSelectedMusicCollection-doc" class="method">
+
+					<header>
+											<i class="icon-generic"></i>
+						<span class="method-name">generateSelectedMusicCollection</span><span 
+							class="method-args">()</span>
+										</header>
+
+					<div class="method-description">
+											<p>for admin panel, to have selected checkbox</p>					
+											<div class="method-source-code" id="generateSelectedMusicCollection-source">
+							<pre class="prettyprint linenums"><code 
+								class="language-ruby"><span class="ruby-comment"># File app/models/genre.rb, line 74</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">generateSelectedMusicCollection</span>
+  <span class="ruby-identifier">collection</span> = <span class="ruby-constant">Music</span>.<span class="ruby-identifier">pluck</span>(<span class="ruby-string">&#39;title, id&#39;</span>)
+  <span class="ruby-identifier">collection</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">collect</span><span class="ruby-operator">|</span>
+    <span class="ruby-keyword">if</span> ((<span class="ruby-keyword">self</span>.<span class="ruby-identifier">music_ids</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">music_ids</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">collect</span>[<span class="ruby-value">1</span>]))
+      <span class="ruby-identifier">collect</span>[<span class="ruby-value">2</span>] = { <span class="ruby-identifier">checked</span><span class="ruby-operator">:</span> <span class="ruby-keyword">true</span> }
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-identifier">collect</span>[<span class="ruby-value">2</span>] = { <span class="ruby-identifier">checked</span><span class="ruby-operator">:</span> <span class="ruby-keyword">false</span> }
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">collection</span>
+<span class="ruby-keyword">end</span></code></pre>
+						</div>
+										</div>
+
+					
+									</div>
+				
+			</section>
 			
 			
 			

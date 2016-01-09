@@ -326,7 +326,7 @@ listening even if we don&#39;t buy it</p>
     <span class="ruby-identifier">gPond</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">key</span>, <span class="ruby-identifier">value</span><span class="ruby-operator">|</span>
       <span class="ruby-identifier">randomGenre</span> = <span class="ruby-identifier">randomGenre</span>.<span class="ruby-identifier">where</span>.<span class="ruby-identifier">not</span>(<span class="ruby-identifier">id</span><span class="ruby-operator">:</span> <span class="ruby-identifier">key</span>.<span class="ruby-identifier">id</span>)
     }
-    <span class="ruby-identifier">randomGenre</span> = <span class="ruby-identifier">randomGenre</span>.<span class="ruby-identifier">offset</span>(<span class="ruby-identifier">rand</span>(<span class="ruby-identifier">randomGenre</span>.<span class="ruby-identifier">size</span>)).<span class="ruby-identifier">first</span>
+    <span class="ruby-identifier">randomGenre</span> = <span class="ruby-identifier">randomGenre</span>.<span class="ruby-identifier">offset</span>(<span class="ruby-identifier">rand</span>(<span class="ruby-identifier">randomGenre</span>.<span class="ruby-identifier">count</span>)).<span class="ruby-identifier">first</span>
     <span class="ruby-identifier">gPond</span>[<span class="ruby-identifier">randomGenre</span>] = <span class="ruby-value">0</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">randomGenre</span> <span class="ruby-operator">!=</span> <span class="ruby-keyword">nil</span>
   <span class="ruby-keyword">end</span>
 
