@@ -21,9 +21,9 @@ namespace SoonZik.Views
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class Ambiance : Page
+    public sealed partial class AlbumOwn : Page
     {
-        public Ambiance()
+        public AlbumOwn()
         {
             this.InitializeComponent();
         }
@@ -35,23 +35,14 @@ namespace SoonZik.Views
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            SoonZik.Models.Ambiance elem = e.Parameter as SoonZik.Models.Ambiance;
-            DataContext = new AmbianceViewModel(elem.id);
+            SoonZik.Models.Album elem = e.Parameter as SoonZik.Models.Album;
+            DataContext = new AlbumViewModel(elem.id);
         }
 
-        //private void music_listview_ItemClick(object sender, ItemClickEventArgs e)
-        //{
-        //    var item = ((SoonZik.Models.Music)e.ClickedItem);
-        //    this.Frame.Navigate(typeof(Music), item);
-        //}
-
-        private void ambiance_musics_ItemClick(object sender, ItemClickEventArgs e)
+        private void album_music_listview_ItemClick(object sender, ItemClickEventArgs e)
         {
             var item = ((SoonZik.Models.Music)e.ClickedItem);
-            this.Frame.Navigate(typeof(Music), item);
+            this.Frame.Navigate(typeof(MusicOwn), item);
         }
-
     }
-
-
 }

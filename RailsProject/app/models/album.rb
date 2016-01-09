@@ -35,13 +35,58 @@ class Album < ActiveRecord::Base
 
   has_many :purchased_albums
 
+  accepts_nested_attributes_for :musics, allow_destroy: true
+  accepts_nested_attributes_for :genres
+  accepts_nested_attributes_for :packs
+  attr_accessor :music_ids
+  attr_accessor :genre_ids
+  attr_accessor :pack_ids
+
   validates :user, :title, :price, :file, :yearProd, :image, presence: true
-  validates :file, uniqueness: true
   validates :yearProd, numericality: { only_integer: true }
 
   # The strong parameters to save or update object
   def self.album_params(parameters)
-    parameters.require(:album).permit(:user_id, :title, :price, :file, :yearProd, :image)
+    parameters.require(:album).permit(:user_id, :title, :price, :file, :yearProd, :image )
+  end
+
+  # for admin panel, to have selected checkbox
+  def generateSelectedMusicCollection
+    collection = Music.pluck('title, id')
+    collection.each do |collect|
+      if ((self.music_ids) && self.music_ids.include?(collect[1]))
+        collect[2] = { checked: true }
+      else
+        collect[2] = { checked: false }
+      end
+    end
+    return collection
+  end
+
+  # for admin panel, to have selected checkbox
+  def generateSelectedGenreCollection
+    collection = Genre.pluck('style_name, id')
+    collection.each do |collect|
+      if ((self.genre_ids) && self.genre_ids.include?(collect[1]))
+        collect[2] = { checked: true }
+      else
+        collect[2] = { checked: false }
+      end
+    end
+    return collection
+  end
+
+  # for admin panel, to have selected checkbox
+  def generateSelectedPackCollection
+    collection = Pack.pluck('title, id')
+    collection.each do |collect|
+      if ((self.pack_ids) && self.pack_ids.include?(collect[1]))
+        collect[2] = { checked: true }
+      else
+        collect[2] = { checked: false }
+      end
+    end
+    return collection
   end
 
   # Filter of information for the API

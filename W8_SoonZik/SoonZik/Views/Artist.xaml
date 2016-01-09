@@ -37,17 +37,17 @@
 
             <TextBlock Name="user_username_txt" Text="{Binding artist.username, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="20,10,0,19" TextWrapping="Wrap" VerticalAlignment="Center" FontSize="36" Height="46" Grid.ColumnSpan="2"/>
 
-            <TextBlock x:Name="user_fname_txt" x:Uid="user_user_fname_txt" Text="Prenom:" HorizontalAlignment="Left" Margin="90,57,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Foreground="Black" Height="Auto" Width="Auto" FontSize="20" Grid.Column="1"/>
+            <TextBlock x:Name="user_fname_txt" x:Uid="fname" Text="Prenom:" HorizontalAlignment="Left" Margin="90,57,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Foreground="Black" Height="Auto" Width="Auto" FontSize="20" Grid.Column="1"/>
             <TextBlock Name="user_fname" Text="{Binding artist.fname, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="275,57,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Foreground="Black" Height="25" Width="Auto" FontSize="20" Grid.Column="1"/>
 
-            <TextBlock x:Name="user_lname_txt" x:Uid="user_lname_txt" Text="Nom:" HorizontalAlignment="Left" Margin="90,96,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Foreground="Black" Height="Auto" Width="Auto" FontSize="20" Grid.Column="1"/>
+            <TextBlock x:Name="user_lname_txt" x:Uid="lname" Text="Nom:" HorizontalAlignment="Left" Margin="90,96,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Foreground="Black" Height="Auto" Width="Auto" FontSize="20" Grid.Column="1"/>
             <TextBlock Name="user_lname" Text="{Binding artist.lname, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="275,96,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Foreground="Black" Height="25" Width="Auto" FontSize="20" Grid.Column="1"/>
 
 
-            <TextBlock x:Name="user_email_txt" x:Uid="user_email_txt" Text="Email:" Margin="90,136,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Foreground="Black" Height="Auto" Width="52" FontSize="20" Grid.Column="1" HorizontalAlignment="Left"/>
+            <TextBlock x:Name="user_email_txt" x:Uid="email" Text="Email:" Margin="90,136,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Foreground="Black" Height="Auto" Width="52" FontSize="20" Grid.Column="1" HorizontalAlignment="Left"/>
             <TextBlock x:Name="user_email" Text="{Binding artist.email, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="275,135,-145,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Foreground="Black" Height="25" FontSize="20" Grid.Column="1" Width="320" HorizontalAlignment="Left"/>
 
-            <TextBlock x:Name="user_birthday_txt" x:Uid="user_birthday_txt" Text="Date de naissance:" HorizontalAlignment="Left" Margin="90,175,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Foreground="Black" Height="Auto" Width="Auto" FontSize="20" Grid.Column="1"/>
+            <TextBlock x:Name="user_birthday_txt" x:Uid="birthday" Text="Date de naissance:" HorizontalAlignment="Left" Margin="90,175,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Foreground="Black" Height="Auto" Width="Auto" FontSize="20" Grid.Column="1"/>
             <TextBlock x:Name="user_birthday" Text="{Binding artist.birthday, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="275,174,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Foreground="Black" Height="25" Width="Auto" FontSize="20" Grid.Column="1"/>
 
             <TextBlock x:Name="user_description_txt" x:Uid="user_description_txt" Text="Description:" HorizontalAlignment="Left" Margin="90,211,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Foreground="Black" Height="Auto" Width="Auto" FontSize="20" Grid.Column="1"/>
@@ -78,7 +78,7 @@
                 </ListView.ItemTemplate>
             </ListView>
 
-            <TextBlock Grid.Column="1" Margin="938,57,-708,0" Grid.Row="1" TextWrapping="Wrap" Text="Liste des albums" VerticalAlignment="Top" Foreground="Black" Height="Auto" Width="Auto" FontSize="20"/>
+            <TextBlock x:Name="album_list" x:Uid="album_list" Grid.Column="1" Margin="938,57,-708,0" Grid.Row="1" TextWrapping="Wrap" Text="Liste des albums" VerticalAlignment="Top" Foreground="Black" Height="Auto" Width="Auto" FontSize="20"/>
 
             <ListView x:Name="album_list_ListView" ItemClick="album_list_ListView_ItemClick" ItemsSource="{Binding list_album, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" Margin="938,88,-753,-92" Grid.Row="1" Background="#FFCCCCCC" IsItemClickEnabled="True">
                 <ListView.ItemTemplate>

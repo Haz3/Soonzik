@@ -30,7 +30,7 @@
         </ListView>
 
         <Button x:Uid="remove_cart" x:Name="remove_cart" Command="{Binding do_remove_cart, Mode=OneWay}" Content="Supprimer" HorizontalAlignment="Left" Margin="1270,137,0,0" VerticalAlignment="Top" Height="76" Width="298" FontSize="30" Background="#FFE84D46"/>
-        <Button x:Uid="buy_btn" x:Name="buy_btn" Command="{Binding do_buy_cart, Mode=OneWay}" Content="Acheter" HorizontalAlignment="Left" Margin="380,900,0,0" VerticalAlignment="Top" Height="93" Width="818" Background="#FF0C91FF" FontSize="30"/>
+        <Button x:Uid="buy_cart_btn" x:Name="buy_cart_btn" Command="{Binding do_buy_cart, Mode=OneWay}" Content="Acheter" HorizontalAlignment="Left" Margin="380,900,0,0" VerticalAlignment="Top" Height="93" Width="818" Background="#FF0C91FF" FontSize="30"/>
         <TextBlock x:Name="txt_pp" HorizontalAlignment="Left" Margin="383,995,0,0" TextWrapping="Wrap" Text="{Binding txt_pp, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Height="55" Width="1182" FontSize="25" Foreground="Black"/>
         <TextBlock x:Name="cart_price" HorizontalAlignment="Left" Margin="555,820,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="60" Width="205" Foreground="Black" FontSize="25">
             <Run Text="{Binding cart_price, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></Run>

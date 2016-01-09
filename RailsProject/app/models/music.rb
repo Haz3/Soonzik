@@ -36,6 +36,8 @@ class Music < ActiveRecord::Base
 
   has_many :purchased_musics
 
+  accepts_nested_attributes_for :album
+
   validates :user, :title, :duration, :price, :file, presence: true
   validates :title, length: { minimum: 4, maximum: 30 }
   validates :price, :duration, numericality: true
@@ -43,7 +45,7 @@ class Music < ActiveRecord::Base
 
   # The strong parameters to save or update object
   def self.music_params(parameters)
-    parameters.require(:music).permit(:user_id, :album_id, :title, :duration, :price, :file, :limited)
+    parameters.require(:music).permit(:user_id, :album_id, :title, :duration, :price, :file, :limited, album_attributes: [:id])
   end
 
   # Filter of information for the API
@@ -111,7 +113,7 @@ class Music < ActiveRecord::Base
       }
     }
 
-    result = ActiveRecord::Base.connection.execute("SELECT COUNT(*), genre_id FROM musicalpasts WHERE user_id = #{user.id}")
+    result = ActiveRecord::Base.connection.execute("SELECT COUNT(*), genre_id FROM musicalpasts WHERE user_id = #{user.id} GROUP BY genre_id")
     result.each { |r|
       if (r["COUNT(*)"] != 0)
         genre = Genre.find_by_id(r["genre_id"].to_i)
@@ -125,7 +127,7 @@ class Music < ActiveRecord::Base
       gPond.each { |key, value|
         randomGenre = randomGenre.where.not(id: key.id)
       }
-      randomGenre = randomGenre.offset(rand(randomGenre.size)).first
+      randomGenre = randomGenre.offset(rand(randomGenre.count)).first
       gPond[randomGenre] = 0 if randomGenre != nil
     end
 

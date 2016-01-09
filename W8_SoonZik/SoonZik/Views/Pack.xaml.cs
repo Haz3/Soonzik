@@ -69,6 +69,12 @@ namespace SoonZik.Views
 
         }
 
+        //private void offer_pack_btn_Click(object sender, RoutedEventArgs e)
+        //{
+        //    offer_tb.Visibility = Visibility.Visible;
+        //    offer_txt.Visibility = Visibility.Visible;
+        //}
+
 
     }
 }

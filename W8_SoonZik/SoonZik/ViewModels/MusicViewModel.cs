@@ -6,16 +6,21 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Windows.Networking.BackgroundTransfer;
+using Windows.Storage;
 using Windows.UI.Popups;
 
 namespace SoonZik.ViewModels
 {
     class MusicViewModel : INotifyPropertyChanged
     {
+        string url = Singleton.Instance.url + "/musics/get/";
+
         public ObservableCollection<Music> musiclist { get; set; }
 
         // LIKE THAT CAUSE I DID NOT INSTANTIATE THEM IN LOAD_MUSIC i think ...
@@ -130,6 +135,12 @@ namespace SoonZik.ViewModels
             private set;
         }
 
+        public ICommand do_dl_music
+        {
+            get;
+            private set;
+        }
+
         public ICommand do_note_one
         {
             get;
@@ -171,6 +182,7 @@ namespace SoonZik.ViewModels
         {
             do_send_comment = new RelayCommand(send_comment);
             do_add_to_cart = new RelayCommand(add_to_cart);
+            do_dl_music = new RelayCommand(dl_music);
             do_note_one = new RelayCommand(note_one);
             do_note_two = new RelayCommand(note_two);
             do_note_three = new RelayCommand(note_three);
@@ -365,6 +377,38 @@ namespace SoonZik.ViewModels
                 star_three = "ms-appx:///Assets/o_star.png";
                 star_four = "ms-appx:///Assets/o_star.png";
                 star_five = "ms-appx:///Assets/y_star.png";
+            }
+        }
+
+        public async void dl_music()
+        {
+            try
+            {
+                string secureKey = await Security.getSecureKey(Singleton.Instance.Current_user.id.ToString());
+                string uri = url + music.id.ToString() + "?download=true&user_id=" + Singleton.Instance.Current_user.id.ToString() + "&secureKey=" + secureKey;
+                Uri source;
+
+                if (!Uri.TryCreate(uri.Trim(), UriKind.Absolute, out source))
+                {
+                    return;
+                }
+
+                // FILE NAME
+                string destination = music.user.username + " - " + music.title + ".mp3";
+
+                StorageFile destinationFile;
+                destinationFile = await KnownFolders.MusicLibrary.CreateFileAsync(destination, CreationCollisionOption.GenerateUniqueName);
+                BackgroundDownloader downloader = new BackgroundDownloader();
+                DownloadOperation download = downloader.CreateDownload(source, destinationFile);
+
+                await download.StartAsync();
+                await new MessageDialog("Le téléchargement de la musique est complet").ShowAsync();
+
+            }
+            catch (FileNotFoundException ex)
+            {
+                new MessageDialog("Erreur lors du telechargement de la musique").ShowAsync();
+                return;
             }
         }
     }

@@ -184,6 +184,9 @@
     <Compile Include="Views\Album.xaml.cs">
       <DependentUpon>Album.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\AlbumOwn.xaml.cs">
+      <DependentUpon>AlbumOwn.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Ambiance.xaml.cs">
       <DependentUpon>Ambiance.xaml</DependentUpon>
     </Compile>
@@ -208,6 +211,9 @@
     <Compile Include="Views\Music.xaml.cs">
       <DependentUpon>Music.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\MusicOwn.xaml.cs">
+      <DependentUpon>MusicOwn.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\NewsDetails.xaml.cs">
       <DependentUpon>NewsDetails.xaml</DependentUpon>
     </Compile>
@@ -225,9 +231,6 @@
     </Compile>
     <Compile Include="Views\Connection.xaml.cs">
       <DependentUpon>Connection.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Follow.xaml.cs">
-      <DependentUpon>Follow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Home.xaml.cs">
       <DependentUpon>Home.xaml</DependentUpon>
@@ -352,6 +355,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\AlbumOwn.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Ambiance.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -384,6 +391,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\MusicOwn.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\NewsDetails.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -405,10 +416,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\Connection.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\Follow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

@@ -36,22 +36,24 @@ namespace SoonZik.ViewModels
             }
         }
 
-        public AmbianceViewModel()
+        public AmbianceViewModel(int id)
         {
-            load_ambiances();
+            load_ambiances(id);
         }
 
-        async void load_ambiances()
+        async void load_ambiances(int id)
         {
             Exception exception = null;
             ambiances_list = new ObservableCollection<Ambiance>();
 
             try
             {
-                var ambiances = (List<Ambiance>)await Http_get.get_object(new List<Ambiance>(), "ambiances");
 
-                foreach (var item in ambiances)
-                    ambiances_list.Add(item);
+                selected_ambiance = await Http_get.get_ambiance_by_id(id);
+                //var ambiances = (List<Ambiance>)await Http_get.get_object(new List<Ambiance>(), "ambiances");
+
+                //foreach (var item in ambiances)
+                //    ambiances_list.Add(item);
             }
             catch (Exception e)
             {
@@ -59,7 +61,7 @@ namespace SoonZik.ViewModels
             }
 
             if (exception != null)
-                await new MessageDialog("Erreur lors de la récupération des ambiances").ShowAsync();
+                await new MessageDialog("Erreur lors de la récupération de l'ambiance").ShowAsync();
         }
     }
 }

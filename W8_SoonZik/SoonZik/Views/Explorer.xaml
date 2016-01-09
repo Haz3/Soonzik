@@ -19,7 +19,7 @@
 
 
         <TextBlock x:Uid="genres_txt" Name="genres_txt" HorizontalAlignment="Left" Margin="92,130,0,0" TextWrapping="Wrap" Text="Genres" VerticalAlignment="Top" Height="45" Width="170" Foreground="Black" FontSize="30"/>
-        <TextBlock x:Uid="packs_txt" x:Name="packs_txt" HorizontalAlignment="Left" Margin="590,135,0,0" TextWrapping="Wrap" Text="Packs" VerticalAlignment="Top" Height="45" Width="170" Foreground="Black" FontSize="30"/>
+        <TextBlock x:Uid="ambiances_txt" x:Name="ambiances_txt" HorizontalAlignment="Left" Margin="590,135,0,0" TextWrapping="Wrap" Text="Ambiances" VerticalAlignment="Top" Height="45" Width="170" Foreground="Black" FontSize="30"/>
         <TextBlock x:Uid="artists_txt" x:Name="artists_txt" HorizontalAlignment="Left" Margin="1590,130,0,0" TextWrapping="Wrap" Text="Artists" VerticalAlignment="Top" Height="45" Width="170" Foreground="Black" FontSize="30"/>
         <TextBlock x:Uid="albums_txt" x:Name="albums_txt" HorizontalAlignment="Left" Margin="1090,130,0,0" TextWrapping="Wrap" Text="Albums" VerticalAlignment="Top" Height="45" Width="170" Foreground="Black" FontSize="30"/>
 
@@ -37,13 +37,13 @@
         </GridView>
 
 
-        <GridView x:Name="pack_list" ItemClick="pack_list_ItemClick" IsItemClickEnabled="True" HorizontalAlignment="Left" Height="850" Margin="590,180,0,0" VerticalAlignment="Top" Width="435" IsSynchronizedWithCurrentItem="False" Background="#FFB0B0B0" ItemsSource="{Binding pack_list}">
+        <GridView x:Name="ambiance_list" ItemClick="ambiance_list_ItemClick" IsItemClickEnabled="True" HorizontalAlignment="Left" Height="850" Margin="590,180,0,0" VerticalAlignment="Top" Width="435" IsSynchronizedWithCurrentItem="False" Background="#FFB0B0B0" ItemsSource="{Binding ambiances_list}">
             <GridView.ItemTemplate>
                 <DataTemplate>
                     <Grid Width="200" Height="200">
                         <Image Stretch="Fill" Source="ms-appx:///Assets/Record-Album-02.jpg" VerticalAlignment="Top" HorizontalAlignment="Center"/>
                         <StackPanel Orientation="Vertical" VerticalAlignment="Bottom" Margin="0,0,0,10">
-                            <TextBlock Text="{Binding title}" FontSize="25" Margin="10,0,0,0" TextTrimming="WordEllipsis" TextWrapping="Wrap" HorizontalAlignment="Left" Foreground="White"/>
+                            <TextBlock Text="{Binding name}" FontSize="25" Margin="10,0,0,0" TextTrimming="WordEllipsis" TextWrapping="Wrap" HorizontalAlignment="Left" Foreground="White"/>
                         </StackPanel>
                     </Grid>
                 </DataTemplate>

@@ -1057,6 +1057,24 @@ var SearchIndex =
 		"type": "anymethod"
 	},
 	{
+		"name": "generateSelectedMusicCollection",
+		"link": "Album.html#method-i-generateSelectedMusicCollection",
+		"snippet": "<p>for admin panel, to have selected checkbox\n",
+		"type": "anymethod"
+	},
+	{
+		"name": "generateSelectedGenreCollection",
+		"link": "Album.html#method-i-generateSelectedGenreCollection",
+		"snippet": "<p>for admin panel, to have selected checkbox\n",
+		"type": "anymethod"
+	},
+	{
+		"name": "generateSelectedPackCollection",
+		"link": "Album.html#method-i-generateSelectedPackCollection",
+		"snippet": "<p>for admin panel, to have selected checkbox\n",
+		"type": "anymethod"
+	},
+	{
 		"name": "miniKey",
 		"link": "Album.html#method-c-miniKey",
 		"snippet": "<p>Filter of information for the API\n<p>Fields returned : [:id, :title, :price, :image, :yearProd]\n",
@@ -1144,6 +1162,12 @@ var SearchIndex =
 		"name": "attachment_params",
 		"link": "Attachment.html#method-c-attachment_params",
 		"snippet": "<p>The strong parameters to save or update object\n",
+		"type": "anymethod"
+	},
+	{
+		"name": "generateSelectedNewsCollection",
+		"link": "Attachment.html#method-i-generateSelectedNewsCollection",
+		"snippet": "<p>for admin panel, to have selected checkbox\n",
 		"type": "anymethod"
 	},
 	{

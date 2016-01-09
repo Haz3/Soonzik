@@ -37,7 +37,7 @@ namespace SoonZik.Views
         private void album_list_ItemClick(object sender, ItemClickEventArgs e)
         {
             var item = ((SoonZik.Models.Album)e.ClickedItem);
-            this.Frame.Navigate(typeof(Album), item);
+            this.Frame.Navigate(typeof(AlbumOwn), item);
         }
 
         private void pack_list_ItemClick(object sender, ItemClickEventArgs e)
@@ -49,7 +49,7 @@ namespace SoonZik.Views
         private void music_list_ItemClick(object sender, ItemClickEventArgs e)
         {
             var item = ((SoonZik.Models.Music)e.ClickedItem);
-            this.Frame.Navigate(typeof(Music), item);
+            this.Frame.Navigate(typeof(MusicOwn), item);
         }
     }
 }

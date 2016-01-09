@@ -39,6 +39,16 @@ namespace SoonZik.ViewModels
                 OnPropertyChanged("amount");
             }
         }
+        private string _offer_username;
+        public string offer_username
+        {
+            get { return _offer_username; }
+            set
+            {
+                _offer_username = value;
+                OnPropertyChanged("offer_username");
+            }
+        }
 
         private int _artist;
         public int artist
@@ -126,6 +136,12 @@ namespace SoonZik.ViewModels
             private set;
         }
 
+        public ICommand do_offer_pack
+        {
+            get;
+            private set;
+        }
+
 
         //public Visibility visible;
 
@@ -146,6 +162,7 @@ namespace SoonZik.ViewModels
             desc_fr_visibility = Visibility.Visible;
             desc_en_visibility = Visibility.Visible;
             do_buy_pack = new RelayCommand(buy_pack);
+            do_offer_pack = new RelayCommand(offer_pack);
 
             // SET DEFAULT VALUE FOR BUYING A PACK
             artist = 65;
@@ -235,57 +252,61 @@ namespace SoonZik.ViewModels
 
         async public void buy_pack()
         {
-
-            //PayPal.Checkout.BuyNow purchase = new PayPal.Checkout.BuyNow("test_sz_merchant@gmail.com");
-            //PayPal.Checkout.BuyNow purchase = new PayPal.Checkout.BuyNow("test_sz_merchand_bis@gmail.com");
-            PayPal.Checkout.BuyNow purchase = new PayPal.Checkout.BuyNow("florian.dewulf-facilitator@gmail.com");
-
-            purchase.UseSandbox = true;
-
-            purchase.Currency = "EUR";
-
-            // Use the ItemBuilder to create a new example item
-            PayPal.Checkout.ItemBuilder itemBuilder = new PayPal.Checkout.ItemBuilder("W8_PP")
-                .ID("W8_PP")
-                .Price(amount.ToString())
-                .Description(pack.title)
-                .Quantity(1);
-
-            // Add the item to the purchase,
-            purchase.AddItem(itemBuilder.Build());
-
-            // Attach event handlers so you will be notified of important events
-            // The BuyNow interface provides 5 events - Start, Auth, Cancel, Complete and Error
-            // See http://paypal.github.io/Windows8SDK/csharp.html#Events for more
-            purchase.Error += new EventHandler<PayPal.Checkout.Event.ErrorEventArgs>((source, eventArg) =>
+            try
             {
-                this.txt_pp = "Une erreur est survenue lors du paiement." + eventArg.Message;
-            });
-            purchase.Auth += new EventHandler<PayPal.Checkout.Event.AuthEventArgs>((source, eventArg) =>
-            {
-                this.txt_pp = "Authentification: " + eventArg.Token;
-            });
-            purchase.Start += new EventHandler<PayPal.Checkout.Event.StartEventArgs>((source, eventArg) =>
-            {
-                this.txt_pp = "Chargement de PayPal...";
-            });
-            purchase.Complete += new EventHandler<PayPal.Checkout.Event.CompleteEventArgs>((source, eventArg) =>
-            {
-                //buy_cart_after_pp_validation();
-                this.txt_pp = "Le paiement à été validé." + eventArg.TransactionID;
-                this.pp_transac_id = eventArg.TransactionID;
-                this.buy_cart_after_pp_validation();
-            });
-            purchase.Cancel += new EventHandler<PayPal.Checkout.Event.CancelEventArgs>((source, eventArg) =>
-            {
-                this.txt_pp = "Le paiement à été annulé par l'utilisateur.";
-            });
+                //PayPal.Checkout.BuyNow purchase = new PayPal.Checkout.BuyNow("test_sz_merchant@gmail.com");
+                //PayPal.Checkout.BuyNow purchase = new PayPal.Checkout.BuyNow("test_sz_merchand_bis@gmail.com");
+                PayPal.Checkout.BuyNow purchase = new PayPal.Checkout.BuyNow("florian.dewulf-facilitator@gmail.com");
 
-            // Launch the secure PayPal interface. This is an asynchronous method
-            await purchase.Execute();
+                purchase.UseSandbox = true;
+
+                purchase.Currency = "EUR";
+
+                // Use the ItemBuilder to create a new example item
+                PayPal.Checkout.ItemBuilder itemBuilder = new PayPal.Checkout.ItemBuilder("W8_PP")
+                    .ID("W8_PP")
+                    .Price(amount.ToString())
+                    .Description(pack.title)
+                    .Quantity(1);
+
+                // Add the item to the purchase,
+                purchase.AddItem(itemBuilder.Build());
+
+                // Attach event handlers so you will be notified of important events
+                // The BuyNow interface provides 5 events - Start, Auth, Cancel, Complete and Error
+                // See http://paypal.github.io/Windows8SDK/csharp.html#Events for more
+                purchase.Error += new EventHandler<PayPal.Checkout.Event.ErrorEventArgs>((source, eventArg) =>
+                {
+                    this.txt_pp = "Une erreur est survenue lors du paiement." + eventArg.Message;
+                });
+                purchase.Auth += new EventHandler<PayPal.Checkout.Event.AuthEventArgs>((source, eventArg) =>
+                {
+                    this.txt_pp = "Authentification: " + eventArg.Token;
+                });
+                purchase.Start += new EventHandler<PayPal.Checkout.Event.StartEventArgs>((source, eventArg) =>
+                {
+                    this.txt_pp = "Chargement de PayPal...";
+                });
+                purchase.Complete += new EventHandler<PayPal.Checkout.Event.CompleteEventArgs>((source, eventArg) =>
+                {
+                    //buy_cart_after_pp_validation();
+                    this.txt_pp = "Le paiement à été validé." + eventArg.TransactionID;
+                    this.pp_transac_id = eventArg.TransactionID;
+                    this.buy_cart_after_pp_validation();
+                });
+                purchase.Cancel += new EventHandler<PayPal.Checkout.Event.CancelEventArgs>((source, eventArg) =>
+                {
+                    this.txt_pp = "Le paiement à été annulé par l'utilisateur.";
+                });
+
+                // Launch the secure PayPal interface. This is an asynchronous method
+                await purchase.Execute();
+            }
+            catch (Exception Error)
+            {
+                new MessageDialog("Erreur lors de la connexion avec PayPal").ShowAsync();
+            }
         } //buy_cart_after_pp_validation
-
-
         // buy pack debug
         async public void buy_cart_after_pp_validation()
         {
@@ -305,7 +326,7 @@ namespace SoonZik.ViewModels
                     "&association=" + "20" + // association.ToString() +
                     "&website=" + "15" + //website.ToString() +
                     "&paypal[payment_id]=" + pp_transac_id;
-   
+
 
 
                 // HTTP_POST -> URL + DATA
@@ -327,8 +348,113 @@ namespace SoonZik.ViewModels
             if (exception != null)
                 await new MessageDialog("Erreur lors de l'achat du pack").ShowAsync();
         }
-    }
 
+
+        async public void offer_pack()
+        {
+            try
+            {
+                if (offer_username == "" || offer_username == null)
+                {
+                    await new MessageDialog("Entrez un pseudo").ShowAsync();
+                    return;
+                }
+
+                var user_id = await Http_get.get_user_by_username(offer_username);
+
+                if (user_id == null)
+                {
+                    await new MessageDialog("Entrez un pseudo existant.").ShowAsync();
+                    return;
+                }
+
+
+
+                PayPal.Checkout.BuyNow purchase = new PayPal.Checkout.BuyNow("florian.dewulf-facilitator@gmail.com");
+                purchase.UseSandbox = true;
+                purchase.Currency = "EUR";
+
+                PayPal.Checkout.ItemBuilder itemBuilder = new PayPal.Checkout.ItemBuilder("W8_PP")
+                    .ID("W8_PP")
+                    .Price(amount.ToString())
+                    .Description(pack.title)
+                    .Quantity(1);
+
+                purchase.AddItem(itemBuilder.Build());
+
+                purchase.Error += new EventHandler<PayPal.Checkout.Event.ErrorEventArgs>((source, eventArg) =>
+                {
+                    this.txt_pp = "Une erreur est survenue lors du paiement." + eventArg.Message;
+                });
+                purchase.Auth += new EventHandler<PayPal.Checkout.Event.AuthEventArgs>((source, eventArg) =>
+                {
+                    this.txt_pp = "Authentification: " + eventArg.Token;
+                });
+                purchase.Start += new EventHandler<PayPal.Checkout.Event.StartEventArgs>((source, eventArg) =>
+                {
+                    this.txt_pp = "Chargement de PayPal...";
+                });
+                purchase.Complete += new EventHandler<PayPal.Checkout.Event.CompleteEventArgs>((source, eventArg) =>
+                {
+                    this.txt_pp = "Le paiement à été validé." + eventArg.TransactionID;
+                    this.pp_transac_id = eventArg.TransactionID;
+                    this.offer_cart_after_pp_validation(user_id.id);
+                });
+                purchase.Cancel += new EventHandler<PayPal.Checkout.Event.CancelEventArgs>((source, eventArg) =>
+                {
+                    this.txt_pp = "Le paiement à été annulé par l'utilisateur.";
+                });
+
+                // Launch the secure PayPal interface. This is an asynchronous method
+                await purchase.Execute();
+            }
+            catch (Exception Error)
+            {
+                new MessageDialog("Erreur lors de la connexion avec PayPal").ShowAsync();
+            }
+        }
+
+        async public void offer_cart_after_pp_validation(int id)
+        {
+            Exception exception = null;
+            var request = new Http_post();
+
+            try
+            {
+                string secureKey = await Security.getSecureKey(Singleton.Instance.Current_user.id.ToString());
+
+                string pack_data =
+                    "user_id=" + Singleton.Instance.Current_user.id +
+                    "&secureKey=" + secureKey +
+                    "&pack_id=" + pack.id.ToString() +
+                    "&amount=" + amount.ToString() +
+                    "&artist=" + "65" + //artist.ToString() +
+                    "&association=" + "20" + // association.ToString() +
+                    "&website=" + "15" + //website.ToString() +
+                    "&paypal[payment_id]=" + pp_transac_id +
+                    "&gift_user_id=" + id;
+
+                // HTTP_POST -> URL + DATA
+                var response = await request.post_request("purchases/buypack", pack_data);
+                //var json = JObject.Parse(response).SelectToken("message");
+
+                //if (json.ToString() == "Created")
+                //{
+                await new MessageDialog("Offre du pack validé").ShowAsync();
+                //}
+                //else
+                //    await new MessageDialog("Erreur lors de l'achat du pack").ShowAsync();
+            }
+            catch (Exception e)
+            {
+                exception = e;
+            }
+
+            if (exception != null)
+                await new MessageDialog("Erreur lors de l'offre du pack").ShowAsync();
+        }
+
+    }
 
 }
 

@@ -59,6 +59,12 @@ namespace SoonZik.Tools
             return album;
         }
 
+        public static async Task<Ambiance> get_ambiance_by_id(int id)
+        {
+            var ambiance = (Ambiance)await get_object(new Ambiance(), "ambiances/" + id.ToString());
+            return ambiance;
+        }
+
         public static async Task<Music> get_music_by_id(int id)
         {
             var music = (Music)await get_object(new Music(), "musics/" + id.ToString());

@@ -5,11 +5,14 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Windows.Data.Xml.Dom;
+using Windows.Networking.BackgroundTransfer;
+using Windows.Storage;
 using Windows.UI.Notifications;
 using Windows.UI.Popups;
 using Windows.UI.Xaml;
@@ -18,6 +21,8 @@ namespace SoonZik.ViewModels
 {
     class AlbumViewModel : INotifyPropertyChanged
     {
+        string url = Singleton.Instance.url + "/musics/get/";
+
         public ObservableCollection<Album> albumlist { get; set; }
 
         private ObservableCollection<Comment> _commentlist;
@@ -64,6 +69,13 @@ namespace SoonZik.ViewModels
             get;
             private set;
         }
+
+        public ICommand do_dl_album
+        {
+            get;
+            private set;
+        }
+
 
         public ICommand do_like
         {
@@ -133,6 +145,7 @@ namespace SoonZik.ViewModels
             do_add_to_cart = new RelayCommand(add_to_cart);
             do_like = new RelayCommand(like);
             do_unlike = new RelayCommand(unlike);
+            do_dl_album = new RelayCommand(dl_album);
             like_btn = Visibility.Collapsed;
             unlike_btn = Visibility.Collapsed;
             load_album(id);
@@ -227,6 +240,103 @@ namespace SoonZik.ViewModels
         {
             //                        USER ID,                            ALBUM ID,   TYPE,  GIFT USER ID (IF < 0 : NOT A GIFT)
             CartViewModel.add_to_cart(Singleton.Instance.Current_user.id, album.id, "Album", 0);
+        }
+
+        public async void dl_musics_album(StorageFolder destinationFolder, int music_id, string title)
+        {
+ 
+            // PATH NAME
+
+            try
+            {
+
+                string secureKey = await Security.getSecureKey(Singleton.Instance.Current_user.id.ToString());
+                string uri = url + music_id.ToString() + "?download=true&user_id=" + Singleton.Instance.Current_user.id.ToString() + "&secureKey=" + secureKey;
+
+                Uri source;
+                if (!Uri.TryCreate(uri.Trim(), UriKind.Absolute, out source))
+                {
+                    return;
+                }
+
+                // FILE NAME
+                string file_name = album.user.username + " - " + title + ".mp3"; // file_name
+
+
+                StorageFile destinationFile = await destinationFolder.CreateFileAsync(file_name, CreationCollisionOption.GenerateUniqueName);
+
+                BackgroundDownloader downloader = new BackgroundDownloader();
+                DownloadOperation download = downloader.CreateDownload(source, destinationFile);
+
+                await download.StartAsync();
+                //download.GetResponseInformation
+                //await new MessageDialog("Le téléchargement est complet").ShowAsync();
+
+            }
+            catch (FileNotFoundException ex)
+            {
+                return;
+            }
+        }
+
+
+        //public async void dl_musics_album(StorageFolder destinationFolder, Music music)
+        //{
+        //    string url = "http://api.lvh.me:3000/musics/get/" + music.id.ToString() + "?download=true";
+        //    Uri source;
+
+        //    if (!Uri.TryCreate(url.Trim(), UriKind.Absolute, out source))
+        //    {
+        //        return;
+        //    }
+
+        //    // FILE NAME
+        //    string file_name = music.user.username + " - " + music.title + ".mp3"; // file_name
+
+        //    // PATH NAME
+        //    StorageFile destinationFile;
+
+        //    try
+        //    {
+        //        destinationFile = await destinationFolder.CreateFileAsync(file_name, CreationCollisionOption.GenerateUniqueName);
+
+        //        BackgroundDownloader downloader = new BackgroundDownloader();
+        //        DownloadOperation download = downloader.CreateDownload(source, destinationFile);
+
+        //        await download.StartAsync();
+        //        await new MessageDialog("Le téléchargement est complet").ShowAsync();
+
+        //    }
+        //    catch (FileNotFoundException ex)
+        //    {
+        //        new MessageDialog("Erreur lors du telechargement de la musique").ShowAsync();
+        //        return;
+        //    }
+        //}
+
+        public async void dl_album()
+        {
+            try
+            {
+                string dir_name = album.user.username + " - " + album.title;
+
+                StorageFolder destinationFolder;
+                destinationFolder = await KnownFolders.MusicLibrary.CreateFolderAsync(dir_name, CreationCollisionOption.GenerateUniqueName);
+
+                foreach (var music in album.musics)
+                {
+                    dl_musics_album(destinationFolder, music.id, music.title);
+                    //dl_musics_album(destinationFolder, music);
+                }
+
+                await new MessageDialog("Le téléchargement de l'album est complet").ShowAsync();
+
+            }
+            catch (Exception e)
+            {
+                new MessageDialog("Erreur lors de la récupération de l'album").ShowAsync();
+            }
+
         }
     }
 }

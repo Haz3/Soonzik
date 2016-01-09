@@ -11,49 +11,50 @@
     <Grid Background="#CCCCCC" Height="1080">
 
         <Grid Height="80" VerticalAlignment="Top" Width="1920" Background="#B0B0B0">
-            <TextBlock x:Uid="ambiance_txt" x:Name="ambiance_txt" HorizontalAlignment="Left" Margin="100,10,0,0" TextWrapping="Wrap" Text="Ambiances" VerticalAlignment="Top" Height="55" Width="Auto" FontSize="53.333" Foreground="Black"/>
+            <TextBlock x:Uid="ambiance_txt" x:Name="ambiance_txt" HorizontalAlignment="Left" Margin="100,10,0,0" TextWrapping="Wrap" Text="Ambiance" VerticalAlignment="Top" Height="55" Width="Auto" FontSize="53.333" Foreground="Black"/>
             <Button x:Name="back_btn" Content="Button" HorizontalAlignment="Left" Margin="30,20,0,0" VerticalAlignment="Top" Style="{StaticResource NavigationBackButtonNormalStyle}" RequestedTheme="Light" Click="Button_Click"/>
         </Grid>
 
-        <Grid Height="642" Width="1340" Background="#FFA2A2A2" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <Grid.DataContext>
-                <ViewModels:AmbianceViewModel/>
-            </Grid.DataContext>
-
+        <Grid Height="593" Margin="400,140,400,0" VerticalAlignment="Top" Background="White">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="0.2*"/>
-                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="265"/>
+                <ColumnDefinition Width="450"/>
             </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="75"/>
+                <RowDefinition Height="291"/>
+            </Grid.RowDefinitions>
+            <Image  Grid.Row="1" Source="http://www.scottbuckley.com.au/musoscientific/wp-content/uploads/2012/10/treeofmusic.jpg" Stretch="Fill" Width="174" Height="174" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,175,46,-58"/>
+            <Rectangle Fill="#FF00AFDC" HorizontalAlignment="Left" Height="75" StrokeEndLineCap="Square" Stroke="#FF00AFDC" VerticalAlignment="Top" Width="1120" Grid.ColumnSpan="2" Margin="0,0,-405,0"/>
+            <TextBlock Name="ambiance_name" Margin="20,10,0,19" TextWrapping="Wrap" Text="{Binding selected_ambiance.name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" FontSize="36" Height="46" Grid.ColumnSpan="2"/>
 
-
-
-            <ListView Grid.Column="0" Foreground="Black" FontSize="15" ItemsSource="{Binding ambiances_list}" SelectedItem="{Binding selected_ambiance, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+            <ListView Name="ambiance_musics" ItemClick="ambiance_musics_ItemClick" ItemsSource="{Binding selected_ambiance.musics, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" HorizontalAlignment="Left" Height="290" Margin="60,85,-25,-84" Grid.Row="1" VerticalAlignment="Top" Width="415" Background="#FFE0E0E0" IsItemClickEnabled="True">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <StackPanel>
-                            <TextBlock Text="{Binding name}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10,0,0,0"></TextBlock>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Name="music_title" FontSize="16" Foreground="Black" Margin="0,0,0,0">
+                                    <Run Text="{Binding user.username}"></Run>
+                                    <Run Text=" - "></Run>
+                                    <Run Text="{Binding title}"></Run>
+                                </TextBlock>
+                            </StackPanel>
+
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Name="price_txt" x:Uid="price_txt" Text="Prix" FontSize="16" Foreground="Black"/>
+                                <TextBlock Name="music_duration" FontSize="16" Foreground="Black" Margin="20,0,0,0">
+                                    <Run Text="{Binding price}"></Run>
+                                    <Run Text="€"></Run>
+                                </TextBlock>
+                            </StackPanel>
                         </StackPanel>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
+            <TextBlock x:Name="music_list_txt" x:Uid="music_list_txt" Grid.Column="1" HorizontalAlignment="Left" Margin="60,55,0,0" Grid.Row="1" TextWrapping="Wrap" Text="Musiques" VerticalAlignment="Top" Height="30" Width="260" Foreground="Black" FontSize="18"/>
 
-            <StackPanel Grid.Column="1">
-                <TextBlock x:Name="music_list_txt" Foreground="Black" FontSize="20" Text="Liste des musiques" HorizontalAlignment="Left" VerticalAlignment="Top"/>
 
-                <ListView x:Name="music_listview" Foreground="Black" FontSize="15" ItemClick="music_listview_ItemClick" ItemsSource="{Binding selected_ambiance.musics, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center"  IsItemClickEnabled="True" IsSwipeEnabled="False" SelectionMode="None">
-                    <ListView.ItemTemplate>
-                        <DataTemplate>
-                            <StackPanel>
-                                <TextBlock Text="{Binding title}"></TextBlock>
-                                <TextBlock Text="{Binding price}"></TextBlock>
-                            </StackPanel>
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView>
-                
-            </StackPanel>
         </Grid>
-
 
     </Grid>
 </Page>
