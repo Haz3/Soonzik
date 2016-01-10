@@ -14,6 +14,9 @@
 #import "ConcertViewController.h"
 #import "SuggestsController.h"
 #import "ArtistViewController.h"
+#import "AmbiancesController.h"
+#import "Ambiance.h"
+#import "AmbianceViewController.h"
 
 #define NAVIGATIONBAR_HEIGHT 50
 
@@ -48,7 +51,7 @@
     self.scrollView.scrollEnabled = false;
     self.scrollView.directionalLockEnabled = true;
     
-    UIView *contentView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width*3, self.view.frame.size.height)];
+    UIView *contentView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width*4, self.view.frame.size.height)];
     [contentView layoutIfNeeded];
     CGSize size = CGSizeMake(contentView.bounds.size.width, contentView.bounds.size.height);
     self.scrollView.contentSize = size;
@@ -83,6 +86,17 @@
     [concertView addSubview:self.concertsTableView];
     [contentView addSubview:concertView];
     
+    UIView *ambiancesView = [[UIView alloc] initWithFrame:CGRectMake(self.view.frame.size.width*3, 0, self.view.frame.size.width, self.view.frame.size.height)];
+    self.ambiancesTableView = [[UITableView alloc] initWithFrame:influencesView.frame style:UITableViewStyleGrouped];
+    self.ambiancesTableView.delegate = self;
+    self.ambiancesTableView.dataSource = self;
+    self.ambiancesTableView.tag = 4;
+    [self.ambiancesTableView setBackgroundColor:[UIColor clearColor]];
+    self.ambiancesTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    [ambiancesView addSubview:self.ambiancesTableView];
+    [contentView addSubview:ambiancesView];
+
+    
     [self.scrollView addSubview:contentView];
     
     self.view.backgroundColor = DARK_GREY;
@@ -100,7 +114,7 @@
         self.listOfInfluences = [Factory provideListWithClassName:@"Influence"];
         self.listOfConcerts = [ConcertsController getConcerts];
         self.listOfArtists = [SuggestsController getSuggests:@"artist"];
-        NSLog(@"concerts.count : %i", self.listOfConcerts.count);
+        self.listOfAmbiances = [AmbiancesController getAmbiances];
         
         dispatch_async(dispatch_get_main_queue(), ^{
             //This block runs on main thread, so update UI
@@ -109,6 +123,7 @@
             [self.influencesTableView reloadData];
             [self.concertsTableView reloadData];
             [self.artistsTableView reloadData];
+            [self.ambiancesTableView reloadData];
         });
     });
 }
@@ -118,7 +133,7 @@
     navigationArea.backgroundColor = DARK_GREY;
     navigationArea.tag = 2000;
     
-    UIButton *influencesButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width/3, navigationArea.frame.size.height)];
+    UIButton *influencesButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width/4, navigationArea.frame.size.height)];
     [influencesButton setTitle:[self.translate.dict objectForKey:@"title_influences"] forState:UIControlStateNormal];
     [influencesButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [influencesButton addTarget:self action:@selector(moveToTheGoodView:) forControlEvents:UIControlEventTouchUpInside];
@@ -139,6 +154,13 @@
     concertsButton.tag = 3;
     [navigationArea addSubview:concertsButton];
     
+    UIButton *ambiancesButton = [[UIButton alloc] initWithFrame:CGRectMake(influencesButton.frame.size.width*3, 0, influencesButton.frame.size.width, navigationArea.frame.size.height)];
+    [ambiancesButton setTitle:@"Ambiances" forState:UIControlStateNormal];
+    [ambiancesButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [ambiancesButton addTarget:self action:@selector(moveToTheGoodView:) forControlEvents:UIControlEventTouchUpInside];
+    ambiancesButton.tag = 4;
+    [navigationArea addSubview:ambiancesButton];
+    
     [self.view addSubview:navigationArea];
     [self.view bringSubviewToFront:navigationArea];
     
@@ -158,6 +180,9 @@
         case 3:
             [self.scrollView setContentOffset:CGPointMake(self.view.frame.size.width*2, 0) animated:true];
             break;
+        case 4:
+            [self.scrollView setContentOffset:CGPointMake(self.view.frame.size.width*3, 0) animated:true];
+            break;
         default:
             break;
     }
@@ -168,18 +193,27 @@
     UIButton *influencesButton = (UIButton *)[navBar viewWithTag:1];
     UIButton *artistsButton = (UIButton *)[navBar viewWithTag:2];
     UIButton *concertsButton = (UIButton *)[navBar viewWithTag:3];
+    UIButton *ambiancesButton = (UIButton *)[navBar viewWithTag:4];
     if (tag == 1) {
         [influencesButton setTitleColor:BLUE_1 forState:UIControlStateNormal];
         [artistsButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [concertsButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [ambiancesButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     } else if (tag == 2) {
         [influencesButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [artistsButton setTitleColor:BLUE_1 forState:UIControlStateNormal];
         [concertsButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [ambiancesButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     } else if (tag == 3) {
         [influencesButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [artistsButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [concertsButton setTitleColor:BLUE_1 forState:UIControlStateNormal];
+        [ambiancesButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    } else if (tag == 4) {
+        [influencesButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [artistsButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [concertsButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [ambiancesButton setTitleColor:BLUE_1 forState:UIControlStateNormal];
     }
 }
 
@@ -195,6 +229,8 @@
             return self.listOfArtists.count;
         else if (tableView.tag == 3)
             return self.listOfConcerts.count;
+        else if (tableView.tag == 4)
+            return self.listOfInfluences.count;
     }
     return 0;
 }
@@ -218,6 +254,19 @@
         UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cellConcerts"];
         Concert *concert = [self.listOfConcerts objectAtIndex:indexPath.row];
         cell.textLabel.text = [NSString stringWithFormat:@"%@ - %@", concert.address.city, concert.address.street];
+        cell.textLabel.textColor = [UIColor whiteColor];
+        cell.backgroundColor = [UIColor clearColor];
+        cell.textLabel.font = SOONZIK_FONT_BODY_MEDIUM;
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        
+        return cell;
+    } else if (tableView.tag == 4) {
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cellID1"];
+        if (cell == nil) {
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cellID1"];
+        }
+        Ambiance *ambiance = [self.listOfAmbiances objectAtIndex:indexPath.row];
+        cell.textLabel.text = ambiance.name;
         cell.textLabel.textColor = [UIColor whiteColor];
         cell.backgroundColor = [UIColor clearColor];
         cell.textLabel.font = SOONZIK_FONT_BODY_MEDIUM;
@@ -259,6 +308,12 @@
         Concert *concert = [self.listOfConcerts objectAtIndex:indexPath.row];
         ConcertViewController *vc = [[ConcertViewController alloc] initWithNibName:@"ConcertViewController" bundle:nil];
         vc.concert = concert;
+        [self.navigationController pushViewController:vc animated:true];
+    }
+    else if (tableView.tag == 4) {
+        Ambiance *ambiance = [self.listOfAmbiances objectAtIndex:indexPath.row];
+        AmbianceViewController *vc = [[AmbianceViewController alloc] initWithNibName:@"AmbianceViewController" bundle:nil];
+        vc.ambiance = ambiance;
         [self.navigationController pushViewController:vc animated:true];
     }
 }

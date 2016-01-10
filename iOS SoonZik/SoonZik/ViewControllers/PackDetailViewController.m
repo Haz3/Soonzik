@@ -14,6 +14,7 @@
 #import "PacksController.h"
 #import "RepartitionAmountViewController.h"
 #import "AlbumViewController.h"
+#import "BuyPackValueTableViewCell.h"
 
 @interface PackDetailViewController ()
 
@@ -29,6 +30,7 @@
     self.view.backgroundColor = DARK_GREY;
     self.tableView.backgroundColor = [UIColor clearColor];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    [self.tableView registerNib:[UINib nibWithNibName:@"BuyPackValueTableViewCell" bundle:nil] forCellReuseIdentifier:@"valueCell"];
     
     NSData *translateData = [[NSUserDefaults standardUserDefaults] objectForKey:@"Translate"];
     self.translate = [NSKeyedUnarchiver unarchiveObjectWithData:translateData];
@@ -58,11 +60,6 @@
         self.navigationItem.backBarButtonItem = nil;
         self.navigationItem.leftBarButtonItem = nil;
     }
-}
-
-- (void)closeKeyboard {
-    [self.textField resignFirstResponder];
-    [self.tableView reloadData];
 }
 
 - (void)getData {
@@ -108,12 +105,8 @@
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     if (section == 0) {
-        [self.textField removeFromSuperview];
-        
         HeaderPackDetailView *view = (HeaderPackDetailView *)[[[NSBundle mainBundle] loadNibNamed:@"HeaderPackDetailView" owner:self options:nil] firstObject];
         [view initHeader:self.pack];
-        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(closeKeyboard)];
-        [view addGestureRecognizer:tap];
         return view;
     }
     
@@ -186,22 +179,12 @@
         cell.backgroundColor = [UIColor clearColor];
         cell.textLabel.font = SOONZIK_FONT_BODY_SMALL;
         cell.textLabel.textColor = [UIColor whiteColor];
-        [cell sizeToFit];
         return cell;
     } else if (indexPath.section == 2) {
-        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cellAmount"];
-        if (!cell) {
-            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cellAmount"];
-        }
-        self.textField = [[UITextField alloc] initWithFrame:CGRectMake(10, 0, cell.frame.size.width - 20, cell.frame.size.height)];
-        self.textField.placeholder = [self.translate.dict objectForKey:@"choose_amount"];
-        self.textField.textColor = [UIColor whiteColor];
-        self.textField.keyboardType = UIKeyboardTypeNumberPad;
-        self.textField.delegate = self;
-        self.textField.tintColor = [UIColor whiteColor];
-        self.textField.text = [NSString stringWithFormat:@"%.2f", self.pack.avgPrice];
-        self.textField.keyboardType = UIKeyboardTypeNumbersAndPunctuation;
-        [cell.contentView addSubview:self.textField];
+        BuyPackValueTableViewCell *cell = (BuyPackValueTableViewCell *)[tableView dequeueReusableCellWithIdentifier:@"valueCell"];
+        cell.textField.placeholder = [self.translate.dict objectForKey:@"choose_amount"];
+        cell.textField.delegate = self;
+        cell.textField.text = [NSString stringWithFormat:@"%.2f", self.price];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.backgroundColor = [UIColor clearColor];
         return cell;
@@ -230,7 +213,6 @@
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.backgroundColor = [UIColor clearColor];
         
-        [cell sizeToFit];
         return cell;
     }
     
@@ -248,7 +230,6 @@
     cell.backgroundColor = [UIColor clearColor];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.backgroundColor = [UIColor clearColor];
-    [cell sizeToFit];
     return cell;
 }
 
@@ -317,10 +298,12 @@
     //
 }
 
-- (BOOL)textFieldShouldEndEditing:(UITextField *)textField {
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
     self.price = textField.text.floatValue;
     [self checkPrice];
-    [textField resignFirstResponder];
+    
+    BuyPackValueTableViewCell *cell = (BuyPackValueTableViewCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:2]];
+    [cell.textField resignFirstResponder];
     return true;
 }
 

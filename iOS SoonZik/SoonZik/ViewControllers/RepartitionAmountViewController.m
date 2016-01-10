@@ -68,7 +68,7 @@
         }
         
         cell.slider.tag = i;
-        cell.value.text = [NSString stringWithFormat:@"%.2f%%", cell.slider.value];
+        cell.value.text = [NSString stringWithFormat:@"%.2f", cell.slider.value];
         [cell.slider addTarget:self action:@selector(sliderChanged:) forControlEvents:UIControlEventValueChanged];
         
         [self.cells addObject:cell];
@@ -181,19 +181,17 @@
     RepartionTableViewCell *cell3 = [self.cells objectAtIndex:2];
     
     if (slider.tag == 1) {
-        cell2.slider.value = 1 * (self.price - cell1.slider.value);
-        cell3.slider.value = 0.75 * (self.price - cell1.slider.value);
+        cell2.slider.value = (self.price - cell1.slider.value) * 0.60;
+        cell3.slider.value = (self.price - cell1.slider.value) * 0.40;
     } else if (slider.tag == 2) {
-        cell1.slider.value = 1 * (self.price - cell2.slider.value);
-        cell3.slider.value = (0.15 / 0.65) * (self.price - cell2.slider.value);
+        cell3.slider.value = (self.price - cell1.slider.value - cell2.slider.value);
     } else if (slider.tag == 3) {
-        cell1.slider.value = 1 * (self.price - cell3.slider.value);
-        cell2.slider.value = (0.20 / 0.60) * (self.price - cell3.slider.value);
+        cell2.slider.value = (self.price - cell3.slider.value - cell1.slider.value);
     }
     
-    cell1.value.text = [NSString stringWithFormat:@"%.1f", cell1.slider.value];
-    cell2.value.text = [NSString stringWithFormat:@"%.1f", cell2.slider.value];
-    cell3.value.text = [NSString stringWithFormat:@"%.1f", cell3.slider.value];
+    cell1.value.text = [NSString stringWithFormat:@"%.2f", cell1.slider.value];
+    cell2.value.text = [NSString stringWithFormat:@"%.2f", cell2.slider.value];
+    cell3.value.text = [NSString stringWithFormat:@"%.2f", cell3.slider.value];
     
     self.artist = cell1.slider.value;
     self.association = cell2.slider.value;

@@ -36,6 +36,9 @@
     post = [NSString stringWithFormat:@"uid=%@&provider=%@&encrypted_key=%@&token=%@", uid, @"facebook", secureKey, token];
     
     NSDictionary *json = [Request postRequest:post url:url];
+    
+    NSLog(@"json facebook connect : %@", json);
+    
     User *user = [[User alloc] initWithJsonObject:[json objectForKey:@"content"]];
     
     return user;

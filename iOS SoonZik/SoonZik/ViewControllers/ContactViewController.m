@@ -7,6 +7,8 @@
 //
 
 #import "ContactViewController.h"
+#import "FeedbackController.h"
+#import "SimplePopUp.h"
 
 @interface ContactViewController ()
 
@@ -55,10 +57,18 @@
     
     [self.button addTarget:self action:@selector(openPickerView) forControlEvents:UIControlEventTouchUpInside];
     [self.button setTitle:@"Reason you want to contact us ?" forState:UIControlStateNormal];
+    
+    [self.sendButton addTarget:self action:@selector(sendMessage) forControlEvents:UIControlEventTouchUpInside];
 }
 
 - (void)sendMessage {
-    self.textView.text = @"";
+    [self closePickerView];
+    if ([FeedbackController sendFeedback:self.button.titleLabel.text object:self.objectTextField.text text:self.textView.text]) {
+        [[[SimplePopUp alloc] initWithMessage:@"Your feedback has been sent" onView:self.view withSuccess:true] show];
+        self.textView.text = @"";
+    } else {
+        [[[SimplePopUp alloc] initWithMessage:@"Your feedback has not been sent" onView:self.view withSuccess:false] show];
+    }
 }
 
 - (void)closePickerView {
@@ -67,6 +77,10 @@
 
 - (void)openPickerView {
     [self.pickerView setHidden:false];
+}
+
+- (void)textViewDidBeginEditing:(UITextView *)textView {
+    [self closePickerView];
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
@@ -96,13 +110,13 @@
 {
     NSString *title;
     if (row == 0) {
-        title = @"Bug";
+        title = @"bug";
     } else if (row == 1) {
-        title = @"Account";
+        title = @"account";
     } else if (row == 2) {
-        title = @"Payment";
+        title = @"payment";
     } else {
-        title = @"Other";
+        title = @"other";
     }
     
     return [[NSAttributedString alloc] initWithString:title attributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
@@ -111,13 +125,13 @@
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
     NSString *title;
     if (row == 0) {
-        title = @"Bug";
+        title = @"bug";
     } else if (row == 1) {
-        title = @"Account";
+        title = @"account";
     } else if (row == 2) {
-        title = @"Payment";
+        title = @"payment";
     } else {
-        title = @"Other";
+        title = @"other";
     }
     [self.button setTitle:title forState:UIControlStateNormal];
 }

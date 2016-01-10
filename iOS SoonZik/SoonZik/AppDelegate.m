@@ -52,7 +52,9 @@
     
     [PayPalMobile initializeWithClientIdsForEnvironments:@{PayPalEnvironmentProduction : @"AfCwBQSyxx6Ys2fnbB_1AmmuINiAPaGlGtk38vTZTCbcevPBIU0Ptt4TgvjNznxkLbSi9fdiaJxG8-u-",
                                                            PayPalEnvironmentSandbox : @"AfCwBQSyxx6Ys2fnbB_1AmmuINiAPaGlGtk38vTZTCbcevPBIU0Ptt4TgvjNznxkLbSi9fdiaJxG8-u-"}];
-        
+    
+    NSLog(@"self.user.identifier : %i", self.user.identifier);
+    
     if (self.user.identifier != 0) {
         [self launchHome];
     } else {
@@ -372,7 +374,7 @@
                 
                 NSString *token = [[[FBSession activeSession] accessTokenData] accessToken];
                 User *user =  [IdenticationsController facebookConnect:token email:[u objectForKey:@"email"] uid:[u objectForKey:@"id"]];
-
+                
                 NSData *dataStore = [NSKeyedArchiver archivedDataWithRootObject:user];
                 [[NSUserDefaults standardUserDefaults] setObject:dataStore forKey:@"User"];
                 [[NSUserDefaults standardUserDefaults] synchronize];

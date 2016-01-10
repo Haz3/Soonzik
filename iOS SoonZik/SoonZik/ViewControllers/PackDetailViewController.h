@@ -17,7 +17,6 @@
 @property (nonatomic, assign) bool fromPack;
 @property (nonatomic, assign) float avg;
 @property (nonatomic, assign) float price;
-@property (nonatomic, strong) UITextField *textField;
 
 @property (nonatomic, assign) bool dataLoaded;
 @property (nonatomic, strong) UIActivityIndicatorView *spin;
