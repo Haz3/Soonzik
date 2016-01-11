@@ -44,7 +44,8 @@
     <RootPropertyPathName Name="SendCommand" />
     <RootPropertyPathName Name="Comment" />
     <RootPropertyPathName Name="Object" />
-    <RootPropertyPathName Name="Username" />
+    <RootPropertyPathName Name="ItemChoose" />
+    <RootPropertyPathName Name="ItemList" />
     <RootPropertyPathName Name="Email" />
     <RootPropertyPathName Name="SelectionCommand" />
     <RootPropertyPathName Name="getAverageNote" />
@@ -130,6 +131,7 @@
     <RootPropertyPathName Name="ProgressOn" />
     <RootPropertyPathName Name="InscritpiomCommand" />
     <RootPropertyPathName Name="ConnexionCommand" />
+    <RootPropertyPathName Name="Username" />
     <RootPropertyPathName Name="GoogleTapped" />
     <RootPropertyPathName Name="TwitterTapped" />
     <RootPropertyPathName Name="FacebookTapped" />
@@ -161,6 +163,7 @@
     <RootPropertyPathName Name="ListCommNews" />
     <RootPropertyPathName Name="NewsContent" />
     <RootPropertyPathName Name="NewsTitle" />
+    <RootPropertyPathName Name="imageNews" />
     <RootPropertyPathName Name="ListArtistes" />
     <RootPropertyPathName Name="TheArtiste" />
     <RootPropertyPathName Name="ArtistTappedCommand" />
@@ -253,6 +256,7 @@
       <RootProperty Name="Command" />
       <RootProperty Name="Foreground" />
       <RootProperty Name="Width" />
+      <RootProperty Name="Flyout" />
       <RootProperty Name="Margin" />
       <RootProperty Name="Height" />
       <RootProperty Name="IsEnabled" />
@@ -582,6 +586,10 @@
     <RootType FullName="SoonZik.Controls.TwitterConnect" />
     <RootType FullName="SoonZik.Views.Connexion" />
     <RootType FullName="SoonZik.MainPage" />
+    <RootType FullName="Windows.UI.Xaml.Controls.ListPickerFlyout">
+      <RootProperty Name="ItemsSource" />
+      <RootProperty Name="SelectedValue" />
+    </RootType>
     <RootType FullName="SoonZik.Views.AboutView" />
     <RootType FullName="Windows.UI.Xaml.Controls.Primitives.FlyoutBase">
       <RootMethod Name="GetAttachedFlyout" />

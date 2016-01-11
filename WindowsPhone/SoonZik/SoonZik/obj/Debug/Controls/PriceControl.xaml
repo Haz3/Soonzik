@@ -58,8 +58,7 @@
                 </core:EventTriggerBehavior>
             </interactivity:Interaction.Behaviors>
         </Slider>
-
-
+        
         <TextBlock x:Name="SoonZikPriceBlock" Text="{Binding SoonzikPrice}" FontSize="20" TextAlignment="Center" Grid.Row="1" HorizontalAlignment="Right" Margin="0,365,0,111.667" Foreground="DeepSkyBlue" Width="30" />
         <Button x:Uid="Buy" Content="" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center"
                 Command="{Binding BuyCommand}" />
