@@ -181,6 +181,18 @@ var SearchIndex =
 		"type": "normalclass"
 	},
 	{
+		"name": "Artist",
+		"link": "Artist.html",
+		"snippet": "",
+		"type": "normalmodule"
+	},
+	{
+		"name": "Artist::MusicsController",
+		"link": "Artist/MusicsController.html",
+		"snippet": "<p>Controller which manage main page of the artist panel\n",
+		"type": "normalclass"
+	},
+	{
 		"name": "Attachment",
 		"link": "Attachment.html",
 		"snippet": "<p>The model of the object Attachment Contain the relation and the validation\nCan provide some features …\n",
@@ -1159,6 +1171,78 @@ var SearchIndex =
 		"type": "anymethod"
 	},
 	{
+		"name": "setMenu",
+		"link": "Artist/MusicsController.html#method-i-setMenu",
+		"snippet": "<p>For the menu bar\n",
+		"type": "anymethod"
+	},
+	{
+		"name": "index",
+		"link": "Artist/MusicsController.html#method-i-index",
+		"snippet": "<p>The index page for the music management\n",
+		"type": "anymethod"
+	},
+	{
+		"name": "propose",
+		"link": "Artist/MusicsController.html#method-i-propose",
+		"snippet": "<p>The page to propose a music\n",
+		"type": "anymethod"
+	},
+	{
+		"name": "uploadMusic",
+		"link": "Artist/MusicsController.html#method-i-uploadMusic",
+		"snippet": "<p>Route to upload a music (with genres)\n",
+		"type": "anymethod"
+	},
+	{
+		"name": "updateMusic",
+		"link": "Artist/MusicsController.html#method-i-updateMusic",
+		"snippet": "<p>Route to update a music. Usefull to change album too\n",
+		"type": "anymethod"
+	},
+	{
+		"name": "uploadAlbum",
+		"link": "Artist/MusicsController.html#method-i-uploadAlbum",
+		"snippet": "<p>Route to create an album\n",
+		"type": "anymethod"
+	},
+	{
+		"name": "updateAlbum",
+		"link": "Artist/MusicsController.html#method-i-updateAlbum",
+		"snippet": "<p>To update the album We can&#39;t change the file\n",
+		"type": "anymethod"
+	},
+	{
+		"name": "parseDescriptions",
+		"link": "Artist/MusicsController.html#method-i-parseDescriptions",
+		"snippet": "<p>To parse the descriptions and know if one at least is english\n",
+		"type": "anymethod"
+	},
+	{
+		"name": "getPropose",
+		"link": "Artist/MusicsController.html#method-i-getPropose",
+		"snippet": "<p>To get the info about the proposed albums\n",
+		"type": "anymethod"
+	},
+	{
+		"name": "proposeAlbums",
+		"link": "Artist/MusicsController.html#method-i-proposeAlbums",
+		"snippet": "<p>Delete or create a proposition\n",
+		"type": "anymethod"
+	},
+	{
+		"name": "uploadRediff",
+		"link": "Artist/MusicsController.html#method-i-uploadRediff",
+		"snippet": "<p>Upload a rediffusion for the software and put it in an album\n<p>Route : /musics/uploadRediff\n<p>Options for the …\n",
+		"type": "anymethod"
+	},
+	{
+		"name": "createAlbum",
+		"link": "Artist/MusicsController.html#method-i-createAlbum",
+		"snippet": "<p>Create an album for the software. There is a default image, it can be\nmodified by the website\n<p>Route : …\n",
+		"type": "anymethod"
+	},
+	{
 		"name": "miniKey",
 		"link": "Attachment.html#method-c-miniKey",
 		"snippet": "<p>Filter of information for the API\n<p>Fields returned : [:id, :url, :file_size, :content_type]\n",
@@ -1513,6 +1597,12 @@ var SearchIndex =
 		"type": "anymethod"
 	},
 	{
+		"name": "to_s",
+		"link": "News.html#method-i-to_s",
+		"snippet": "<p>override\n",
+		"type": "anymethod"
+	},
+	{
 		"name": "fillLikes",
 		"link": "News.html#method-c-fillLikes",
 		"snippet": "<p>Fill an association of records of the notes average\n",
@@ -1636,6 +1726,12 @@ var SearchIndex =
 		"name": "playlist_params",
 		"link": "PlaylistObject.html#method-c-playlist_params",
 		"snippet": "<p>The strong parameters to save or update object\n",
+		"type": "anymethod"
+	},
+	{
+		"name": "generateSelectedMusicCollection",
+		"link": "PlaylistObject.html#method-i-generateSelectedMusicCollection",
+		"snippet": "<p>for admin panel, to have selected checkbox\n",
 		"type": "anymethod"
 	},
 	{
