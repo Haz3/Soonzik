@@ -16,6 +16,7 @@ namespace SoonZik.Models
         public User user { get; set; }
         //public List<Newstexts> newstexts { get; set; }
         public List<Attachments> attachments { get; set; }
+        public string image { get; set; }
         public DateTime created_at { get; set; }
         //public DateTime date { get; set; }
     }
