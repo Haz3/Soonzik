@@ -140,14 +140,11 @@ namespace SoonZik.ViewModels
                     new_vote.artist_id = id;
                     selected_battle.votes.Add(new_vote);
 
-                    //selected_battle.result_visibility = Visibility.Visible;
-                    //selected_battle.btn_visibility = Visibility.Collapsed;
 
                     battlelist[battlelist.IndexOf(selected_battle)].result_visibility = Visibility.Visible;
                     battlelist[battlelist.IndexOf(selected_battle)].btn_visibility = Visibility.Collapsed;
                     battlelist[battlelist.IndexOf(selected_battle)].votes.Add(new_vote);
 
-                    //selected_battle = add_result_to_battle(selected_battle);
                 }
                 else
                     await new MessageDialog("Erreur lors du vote").ShowAsync();
@@ -167,16 +164,17 @@ namespace SoonZik.ViewModels
             int first_artist_in_vote; // To get the first artist that appears in votes...
 
             // SET VISIBILITY
-            if (item.votes.Any(x => x.user_id == Singleton.Instance.Current_user.id))
-            {
-                item.btn_visibility = Visibility.Collapsed;
-                item.result_visibility = Visibility.Visible;
-            }
-            else
-            {
-                item.btn_visibility = Visibility.Visible;
-                item.result_visibility = Visibility.Collapsed;
-            }
+
+            //if (item.votes.Any(x => x.user_id == Singleton.Instance.Current_user.id))
+            //{
+            //    item.btn_visibility = Visibility.Collapsed;
+            //    item.result_visibility = Visibility.Visible;
+            //}
+            //else
+            //{
+            //    item.btn_visibility = Visibility.Visible;
+            //    item.result_visibility = Visibility.Collapsed;
+            //}
 
             // GET RESULT
             if (item.votes.Any())

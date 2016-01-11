@@ -84,18 +84,17 @@
         <ListView x:Name="Community" ItemsSource="{Binding tweet_list, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Background="#B0B0B0" Height="760" Margin="1426,280,0,0" VerticalAlignment="Top" IsItemClickEnabled="True" IsSwipeEnabled="False" SelectionMode="None" HorizontalAlignment="Left" Width="454">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <StackPanel>
+                    <StackPanel Orientation="Horizontal">
                         <!--<StackPanel Orientation="Horizontal">
                             <TextBlock Text="{Binding user.username}" Margin="20,0,0,0"/>
                             <TextBlock Text="{Binding msg}"/>
                         </StackPanel>-->
-                        
+                        <Image Source="{Binding user.image, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Stretch="Fill" Width="50" Height="50"/>
+
                         <TextBlock Margin="20,0,0,0">
                             <!--<Run x:Uid="author_txt" Text="Auteur:"></Run>-->
                             <Run Text="{Binding user.username}"></Run>
-                        </TextBlock>
-                        <TextBlock Margin="20,0,0,0">
-                            <!--<Run Text="Message: "></Run>-->
+                             <LineBreak/>
                             <Run Text="{Binding msg}"></Run>
                         </TextBlock>
                     </StackPanel>

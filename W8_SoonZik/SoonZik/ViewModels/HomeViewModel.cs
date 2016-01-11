@@ -57,7 +57,10 @@ namespace SoonZik.ViewModels
                 //foreach (var item in albums)
                 //    album_list.Add(item);
                 foreach (var item in tweet)
+                {
+                    item.user.image = Singleton.Instance.url + "/assets/usersImage/avatars/" + item.user.image;
                     tweet_list.Add(item);
+                }
                 foreach (var item in pack)
                     pack_list.Add(item);
             }
