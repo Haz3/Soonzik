@@ -16,3 +16,4 @@ C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik.HttpRequest\
 C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik.HttpRequest\obj\Debug\qualifiers.txt
 C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik.HttpRequest\obj\Debug\qualifiers.txt.intermediate
 C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik.HttpRequest\obj\Debug\MultipleQualifiersPerDimensionFound.txt
+C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik.HttpRequest\obj\Debug\SoonZik.HttpRequest.csprojResolveAssemblyReference.cache

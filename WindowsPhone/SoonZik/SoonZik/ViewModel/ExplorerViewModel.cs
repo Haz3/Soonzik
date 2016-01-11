@@ -1,9 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
+using System.Net.Http;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Windows.ApplicationModel.Core;
+using Windows.Networking.BackgroundTransfer;
+using Windows.Storage;
 using Windows.UI.Core;
 using Windows.UI.Popups;
 using Windows.UI.Xaml.Media.Imaging;
@@ -37,7 +42,49 @@ namespace SoonZik.ViewModel
             AddToPlaylist = new RelayCommand(AddToPlaylistExecute);
             AddMusicToCart = new RelayCommand(AddMusicToCartExecute);
             PlayCommand = new RelayCommand(PlayCommandExecute);
+            DowloadMusic = new RelayCommand(DownloadMusicExecute);
             LoadContent();
+        }
+
+        private void DownloadMusicExecute()
+        {
+            var request = new HttpRequestGet();
+            var res = request.GetObject(new Music(), "musics", SelectedMusic.id.ToString());
+            res.ContinueWith(delegate(Task<object> task)
+            {
+                var music = task.Result as Music;
+                if (music != null)
+                {
+                    CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
+                        () =>
+                        {
+                            SelectedMusic = music;
+                            SelectedMusic.file = "http://soonzikapi.herokuapp.com/musics/get/" + SelectedMusic.id;
+
+                            DownloadFile();
+                        });
+                }
+            });
+        }
+
+        private async void DownloadFile()
+        {
+            try
+            {
+                var source = new Uri(SelectedMusic.file, UriKind.Absolute);
+                var destinationFile =
+                    await
+                        KnownFolders.MusicLibrary.CreateFileAsync(SelectedMusic.title + ".mp3",
+                            CreationCollisionOption.ReplaceExisting);
+                var downloader = new BackgroundDownloader();
+                var download = downloader.CreateDownload(source, destinationFile);
+                await download.StartAsync().AsTask(new CancellationToken(), new Progress<DownloadOperation>());
+            }
+            catch (Exception e)
+            {
+                new MessageDialog("Fail download").ShowAsync();
+            }
+            new MessageDialog("Download OK").ShowAsync();
         }
 
         #endregion
@@ -46,6 +93,7 @@ namespace SoonZik.ViewModel
 
         public ICommand AddToPlaylist { get; private set; }
         public ICommand AddMusicToCart { get; private set; }
+        public ICommand DowloadMusic { get; private set; }
         private string _crypto;
         public INavigationService Navigation;
 

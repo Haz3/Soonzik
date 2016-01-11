@@ -31,6 +31,8 @@
                 <DataTemplate>
                     <StackPanel>
                         <StackPanel Orientation="Horizontal">
+                            <Image Source="{Binding image, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Stretch="Fill" Width="50" Height="50"/>
+
                             <TextBlock Name="user_username" Text="{Binding username}" FontSize="16" Foreground="White" Margin="20,0,0,0"></TextBlock>
                         </StackPanel>
                     </StackPanel>
@@ -48,7 +50,7 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-        <TextBox x:Name="tweet_message_txt" HorizontalAlignment="Left" Margin="495,960,0,0" TextWrapping="Wrap" Text="{Binding message, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Height="70" Width="1120"/>
+        <TextBox x:Name="tweet_message_txt" HorizontalAlignment="Left" Margin="495,960,0,0" TextWrapping="Wrap" Text="{Binding message, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Height="70" Width="1120" FontSize="20"/>
         <Button x:Name="send_tweet_btn" Command="{Binding do_send_tweet, Mode=OneWay}" Content="Tweet" HorizontalAlignment="Left" Margin="1652,960,0,0" VerticalAlignment="Top" Height="73" Width="181" Background="#FF0088BB" FontSize="20"/>
 
     </Grid>

@@ -51,6 +51,8 @@
   <Capabilities>
     <Capability Name="internetClientServer" />
     <Capability Name="picturesLibrary" />
+    <Capability Name="musicLibrary" />
+    <Capability Name="videosLibrary" />
     <DeviceCapability Name="location" />
   </Capabilities>
   <build:Metadata>

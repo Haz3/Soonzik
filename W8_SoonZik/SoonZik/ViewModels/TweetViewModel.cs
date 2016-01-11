@@ -90,7 +90,8 @@ namespace SoonZik.ViewModels
                 var tweets = (List<Tweet>)await Http_get.get_object(new List<Tweet>(), "tweets");
 
                 foreach (var item in tweets)
-                    tweetlist.Add(item);
+                    tweetlist.Insert(0, item); // To have the last tweet on top
+                    //tweetlist.Add(item);
                 //return tweetlist;
             }
             catch (Exception e)
@@ -127,7 +128,10 @@ namespace SoonZik.ViewModels
                     Tweet new_tweet = new Tweet();
                     new_tweet.user = Singleton.Instance.Current_user;
                     new_tweet.msg = message;
-                    tweetlist.Add(new_tweet);
+
+                    tweetlist.Insert(0, new_tweet); // new tewwt on top
+
+                    //tweetlist.Add(new_tweet);
                     message = "";
                     //await new MessageDialog("Tweet SEND").ShowAsync();
                     //return true;
@@ -155,7 +159,10 @@ namespace SoonZik.ViewModels
                 var users = (List<User>)await Http_get.get_object(new List<User>(), "users");
 
                 foreach (var item in users)
+                {
+                    item.image = Singleton.Instance.url + "/assets/usersImage/avatars/" + item.image;
                     userlist.Add(item);
+                }
             }
             catch (Exception e)
             {

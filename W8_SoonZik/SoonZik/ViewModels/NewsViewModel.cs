@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using Windows.UI.Popups;
 using Windows.UI.Xaml;
+using Windows.UI.Xaml.Media.Imaging;
 
 namespace SoonZik.ViewModels
 {
@@ -38,6 +39,17 @@ namespace SoonZik.ViewModels
             {
                 _news = value;
                 OnPropertyChanged("news");
+            }
+        }
+
+        private BitmapImage _news_img;
+        public BitmapImage news_img
+        {
+            get { return _news_img; }
+            set
+            {
+                _news_img = value;
+                OnPropertyChanged("news_img");
             }
         }
 
@@ -193,6 +205,11 @@ namespace SoonZik.ViewModels
 
                 likes = news.likes;
 
+                if (news.attachments.Any())
+                {
+                    news_img = new BitmapImage(new Uri(Singleton.Instance.url + "/assets/news/" + news.attachments[0].url, UriKind.RelativeOrAbsolute));
+                }
+
                 var comment_vm = await CommentViewModel.load_comments("/news/" + news.id.ToString());
                 commentlist = comment_vm;
             }
@@ -221,7 +238,12 @@ namespace SoonZik.ViewModels
                     news = (List<News>)await Http_get.get_object(new List<News>(), "news?language=EN");
 
                 foreach (var item in news)
+                {
+                    if (item.attachments.Any())
+                        item.image = Singleton.Instance.url + "/assets/news/" + item.attachments[0].url;
                     newslist.Add(item);
+
+                }
             }
             catch (Exception e)
             {

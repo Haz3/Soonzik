@@ -54,10 +54,10 @@ namespace SoonZik.Views
             this.Frame.Navigate(typeof(Battle));
         }
 
-        private void shop_btn_Click(object sender, RoutedEventArgs e)
-        {
-            this.Frame.Navigate(typeof(Shop));
-        }
+        //private void shop_btn_Click(object sender, RoutedEventArgs e)
+        //{
+        //    this.Frame.Navigate(typeof(Shop));
+        //}
 
         private void listenings_btn_Click(object sender, RoutedEventArgs e)
         {

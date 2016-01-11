@@ -6,6 +6,10 @@
     </header>
     <body>
       <group id="Resources">
+        <trans-unit id="Resources\suggest_music_txt\Text" translate="yes" xml:space="preserve">
+          <source>Musiques suggérées</source>
+          <target state="new">Musiques suggérées</target>
+        </trans-unit>
         <trans-unit id="Resources\String1" translate="yes" xml:space="preserve">
           <source />
           <target state="new" />
