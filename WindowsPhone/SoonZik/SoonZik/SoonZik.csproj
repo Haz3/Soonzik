@@ -143,6 +143,7 @@
     <Compile Include="ViewModel\ConnexionViewModel.cs" />
     <Compile Include="ViewModel\ConversationViewModel.cs" />
     <Compile Include="ViewModel\ExplorerViewModel.cs" />
+    <Compile Include="ViewModel\GenreViewModel.cs" />
     <Compile Include="ViewModel\MyNetworkViewModel.cs" />
     <Compile Include="ViewModel\GeolocalisationViewModel.cs" />
     <Compile Include="ViewModel\InscriptionViewModel.cs" />
@@ -168,6 +169,9 @@
     </Compile>
     <Compile Include="Views\CartsView.xaml.cs">
       <DependentUpon>CartsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\GenreView.xaml.cs">
+      <DependentUpon>GenreView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\GeolocalisationView.xaml.cs">
       <DependentUpon>GeolocalisationView.xaml</DependentUpon>
@@ -370,6 +374,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\CartsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\GenreView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

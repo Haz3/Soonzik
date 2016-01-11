@@ -11,6 +11,7 @@ using Windows.Networking.BackgroundTransfer;
 using Windows.Storage;
 using Windows.UI.Core;
 using Windows.UI.Popups;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Media.Imaging;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
@@ -32,11 +33,11 @@ namespace SoonZik.ViewModel
         {
             Navigation = new NavigationService();
             MusiCommand = new RelayCommand(MusiCommandExecute);
-            ListGenres = new ObservableCollection<Genre>();
             ListArtiste = new ObservableCollection<User>();
             ListMusique = new ObservableCollection<Music>();
             ListInfluences = new ObservableCollection<Influence>();
 
+            InfluenceTapped = new RelayCommand(InfluenceTappedExecute);
             AlbumCommand = new RelayCommand(AlbumCommandExecute);
             TappedCommand = new RelayCommand(ArtisteTappedCommand);
             AddToPlaylist = new RelayCommand(AddToPlaylistExecute);
@@ -44,6 +45,32 @@ namespace SoonZik.ViewModel
             PlayCommand = new RelayCommand(PlayCommandExecute);
             DowloadMusic = new RelayCommand(DownloadMusicExecute);
             LoadContent();
+        }
+
+        private void InfluenceTappedExecute()
+        {
+            int id = SelectedInfluence.id; 
+            GenreViewModel.TheListGenres = new ObservableCollection<Genre>();
+            GenreViewModel.TheListGenres = SelectedInfluence.genres;
+            GlobalMenuControl.SetChildren(new GenreView());
+            /*var get = new HttpRequestGet();
+            var res = get.GetListObject(new List<Influence>(), "influences");
+            res.ContinueWith(delegate(Task<object> task)
+            {
+                var inf = task.Result as List<Influence>;
+                if (inf != null)
+                {
+                    CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
+                        () =>
+                        {
+                            foreach (var i in inf)
+                                if (i.id == SelectedInfluence.id)
+                                {
+
+                                }
+                        });
+                }
+            });*/
         }
 
         private void DownloadMusicExecute()
@@ -91,10 +118,26 @@ namespace SoonZik.ViewModel
 
         #region Attribute
 
+        private string _crypto;
+        private Influence _selectedInfluence;
+        public Influence SelectedInfluence
+        {
+            get { return _selectedInfluence; }
+            set
+            {
+                _selectedInfluence = value;
+                RaisePropertyChanged("SelectedInfluence");
+            }
+        }
+        
         public ICommand AddToPlaylist { get; private set; }
         public ICommand AddMusicToCart { get; private set; }
         public ICommand DowloadMusic { get; private set; }
-        private string _crypto;
+        public ICommand InfluenceTapped { get; private set; }
+
+        public ICommand TappedCommand { get; private set; }
+        public ICommand AlbumCommand { get; private set; }
+        public ICommand PlayCommand { get; set; }
         public INavigationService Navigation;
 
         private ObservableCollection<Influence> _listInfluences;
@@ -106,18 +149,6 @@ namespace SoonZik.ViewModel
             {
                 _listInfluences = value;
                 RaisePropertyChanged("ListInfluences");
-            }
-        }
-
-        private ObservableCollection<Genre> _listGenres;
-
-        public ObservableCollection<Genre> ListGenres
-        {
-            get { return _listGenres; }
-            set
-            {
-                _listGenres = value;
-                RaisePropertyChanged("ListGenres");
             }
         }
 
@@ -160,10 +191,6 @@ namespace SoonZik.ViewModel
                 RaisePropertyChanged("SelectedArtiste");
             }
         }
-
-        public ICommand TappedCommand { get; private set; }
-        public ICommand AlbumCommand { get; private set; }
-        public ICommand PlayCommand { get; set; }
 
         #endregion
 
@@ -212,7 +239,10 @@ namespace SoonZik.ViewModel
                         foreach (var item in test)
                         {
                             CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
-                                () => { ListInfluences.Add(item); });
+                                () =>
+                                {
+                                    ListInfluences.Add(item);
+                                });
                         }
                     }
                 });
