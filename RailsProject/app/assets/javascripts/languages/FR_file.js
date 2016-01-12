@@ -89,6 +89,7 @@ var labels = {
 	FILE_PLAYER_SAVE_IN_PLAYLIST_ERROR_MESSAGE: "Une erreur s'est produite à la sauvegarde d'une nouvelle musique dans une liste de lecture",
 	FILE_PLAYER_PLAY_MUSIC_ERROR_MESSAGE: "Une erreur s'est produite au chargement de la musique : ",
 	FILE_PLAYER_GEOLOC_MUSIC_ERROR_MESSAGE: "Impossible d'ajouter cette musique au module de géolocalisation",
+	FILE_PLAYER_DELETE_PLAYLIST_ERROR_MESSAGE: "Une erreur est survenue lors de la suppression de la playlist ",
 
 	// Playlist Controller
 	FILE_PLAYLIST_BAD_ARGUMENT_ERROR_MESSAGE: "Impossible de charger cette liste de lecture",

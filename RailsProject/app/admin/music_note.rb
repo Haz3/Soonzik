@@ -13,5 +13,6 @@ ActiveAdmin.register MusicNote do
 #   permitted
 # end
 
+	permit_params :user_id, :music_id, :value
 
 end

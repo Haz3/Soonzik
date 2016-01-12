@@ -19,15 +19,14 @@
 					%input#inputSearch{:placeholder => "{{ labels.DISPLAY_MENU_SEARCH_PLACEHOLDER }}", :type => "text", "ng-model" => "search.value" }
 					%a.alert.button.expand.searchBtn{:href => "#", "ng-click" => "sendSearch()"}
 						=image_tag "loupe.png", :class => "loupe"
-					- if user_signed_in?
-						.notif{ "ng-show" => "countNotRead() > 0" }
-							{{ countNotRead() }}
 					%ul.no-bullet{ "ng-class" => "{ open: menuOpen }" }
 						- if user_signed_in?
-							%li.text-center
+							%li.text-center.relative
 								%a{ href: notifications_url }
-									%span
-										({{ notifs.length }})
+									%span.notif{ "ng-show" => "countNotRead() > 0" }
+										{{ countNotRead() }}
+									%span{ "ng-show" => "countNotRead() == 0" }
+										0
 									%span.small_menu
 										{{ (notifs.length > 1) ? labels.DISPLAY_MENU_NOTIFICATION_LABEL_PLURAL : labels.DISPLAY_MENU_NOTIFICATION_LABEL_SINGULAR }}
 							%li.clearfix

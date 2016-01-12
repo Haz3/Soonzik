@@ -33,7 +33,7 @@ SoonzikApp.controller('PlaylistsCtrl', ['$scope', "$rootScope", "$routeParams", 
 
 	var loadMusics = function() {
 		if ($scope.tmp) {
-			$scope.playlist_obj.id = null;
+			$scope.playlist_obj.id = $routeParams.id;
 			$scope.playlist_obj.name = $rootScope.labels.FILE_PLAYLIST_TMP_NAME_LABEL;
 			for (var i = 0 ; i < $scope.id.length ; i++) {
 				getMusic($scope.id[i], i);
@@ -55,10 +55,10 @@ SoonzikApp.controller('PlaylistsCtrl', ['$scope', "$rootScope", "$routeParams", 
 	}
 
 	var getMusic = function(id, index) {
-		SecureAuth.securedTransaction(function(key, id) {
+		SecureAuth.securedTransaction(function(key, user_id) {
 			var parameters = [
 			  { key: "secureKey", value: key },
-			  { key: "user_id", value: id },
+			  { key: "user_id", value: user_id },
 			  { key: "attribute[user_id]", value: $rootScope.user.id }
 			];
 			HTTPService.getMusic(id).then(function(response) {

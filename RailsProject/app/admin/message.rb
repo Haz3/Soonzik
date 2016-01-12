@@ -13,5 +13,6 @@ ActiveAdmin.register Message do
 #   permitted
 # end
 
+	permit_params :msg, :user_id, :dest_id
 
 end

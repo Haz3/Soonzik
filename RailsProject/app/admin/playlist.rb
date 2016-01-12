@@ -13,5 +13,6 @@ ActiveAdmin.register Playlist do
 #   permitted
 # end
 
+	permit_params :user_id, :name
 
 end

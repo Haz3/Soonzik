@@ -13,6 +13,8 @@ ActiveAdmin.register Pack do
 #   permitted
 # end
 
+	permit_params :user_id, :title, :begin_date, :end_date, :minimal_price
+
 	remove_filter :packs_albums
 
 end

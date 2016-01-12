@@ -140,9 +140,7 @@ main {
 	}
 
 	.notif {
-		position: absolute;
-		bottom: 0;
-		right: 0;
+		display: inline-block;
 		background: #CC3333;
 		border-radius: 25px;
 		border: 1px solid white;

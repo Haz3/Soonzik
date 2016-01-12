@@ -13,5 +13,6 @@ ActiveAdmin.register Meetstring do
 #   permitted
 # end
 
+	permit_params :language, :str, :stringType
 
 end

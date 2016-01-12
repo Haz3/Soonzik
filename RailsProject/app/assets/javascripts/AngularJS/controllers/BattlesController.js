@@ -95,11 +95,11 @@ SoonzikApp.controller('BattlesCtrl', ['$scope', "$routeParams", 'SecureAuth', 'H
 		}
 		$scope.show.voteCurrentUser = false;
 
-		SecureAuth.securedTransaction(function (key, id) {
+		SecureAuth.securedTransaction(function (key, user_id) {
 
 			var parameters = [
 				{ key: "secureKey", value: key },
-				{ key: "user_id", value: id },
+				{ key: "user_id", value: user_id },
 			];
 
 			HTTPService.showBattles(id, parameters).then(function(response) {
@@ -186,11 +186,12 @@ SoonzikApp.controller('BattlesCtrl', ['$scope', "$routeParams", 'SecureAuth', 'H
 					}
 					$scope.index.voteCurrentUser[battle.id] = artist.id;
 
-					// iterate on votes
+					// iterate on battles
 					for (var battleIndex in $scope.index.resources) {
 						// If this is the good battle
 						if ($scope.index.resources[battleIndex].id == battle.id) {
 							// Iterate on the votes
+							var voteHasBeenModified = false;
 							for (var voteIndex in $scope.index.resources[battleIndex].votes) {
 								// We modify the vote value
 								if ($scope.index.resources[battleIndex].votes[voteIndex].user_id == $scope.currentUser.id) {
@@ -207,6 +208,18 @@ SoonzikApp.controller('BattlesCtrl', ['$scope', "$routeParams", 'SecureAuth', 'H
 										// if there is a previous vote, reduce the value for the other artist
 										if (oldVote) {	$scope.index.votes[$scope.index.resources[battleIndex].id][0].value--;	}
 									}
+									voteHasBeenModified = true;
+									break;
+								}
+							}
+
+							if (!voteHasBeenModified) {
+								$scope.index.resources[battleIndex].votes.push({ artist_id: artist.id, id: response.data.content.id, user_id: $scope.currentUser.id});
+
+								if (artist.id == $scope.index.resources[battleIndex].artist_one.id) {
+									$scope.index.votes[$scope.index.resources[battleIndex].id][0].value++;
+								} else {
+									$scope.index.votes[$scope.index.resources[battleIndex].id][1].value++;
 								}
 							}
 						}
@@ -319,6 +332,9 @@ SoonzikApp.controller('BattlesCtrl', ['$scope', "$routeParams", 'SecureAuth', 'H
 	}
 
 	var fillArray_rec = function(array, index, id_array, limit, params) {
+		if (id_array.length <= index)
+			return;
+
 		HTTPService.getProfile(id_array[index], params).then(function(profile) {
 			array[index] = profile.data.content;
 			if (index + 1 < limit) {

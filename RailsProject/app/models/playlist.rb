@@ -21,7 +21,7 @@ class Playlist < ActiveRecord::Base
   has_many :musics, through: :playlist_objects
 
   validates :user, :name, presence: true
-  validates :name, length: { minimum: 4, maximum: 20 }
+  validates :name, length: { minimum: 1, maximum: 30 }
 
   # The strong parameters to save or update object
   def self.playlist_params(parameters)

@@ -13,6 +13,8 @@ ActiveAdmin.register News do
 #   permitted
 # end
 
+	permit_params :author_id
+
 	remove_filter :news_attachments
 	remove_filter :news_commentaries
 

@@ -13,5 +13,6 @@ ActiveAdmin.register PartialAlbum do
 #   permitted
 # end
 
+	permit_params :pack_id, :album_id
 
 end
