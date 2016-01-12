@@ -143,6 +143,7 @@
     <RootPropertyPathName Name="ListMessages" />
     <RootPropertyPathName Name="FriendUser" />
     <RootPropertyPathName Name="profilImage" />
+    <RootPropertyPathName Name="ListAmbiance" />
     <RootPropertyPathName Name="ListArtiste" />
     <RootPropertyPathName Name="SelectedArtiste" />
     <RootPropertyPathName Name="TappedCommand" />

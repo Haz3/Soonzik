@@ -360,4 +360,7 @@
   <data name="InfluencePivot.Header" xml:space="preserve">
     <value>Influences</value>
   </data>
+  <data name="AmbiancePivot.Header" xml:space="preserve">
+    <value>Ambiances</value>
+  </data>
 </root>

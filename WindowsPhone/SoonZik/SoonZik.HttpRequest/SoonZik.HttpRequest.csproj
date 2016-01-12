@@ -87,6 +87,7 @@
     <Compile Include="HttpRequestPost.cs" />
     <Compile Include="Poco\Address.cs" />
     <Compile Include="Poco\Album.cs" />
+    <Compile Include="Poco\Ambiance.cs" />
     <Compile Include="Poco\Artist.cs" />
     <Compile Include="Poco\ArtistOne.cs" />
     <Compile Include="Poco\ArtistTwo.cs" />
