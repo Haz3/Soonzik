@@ -2,6 +2,7 @@ class MessagesController < WebsocketRails::BaseController
   def initialize_session
     # perform application setup here
     controller_store[:user_id] = []
+    controller_store[:lock_sql] = false
   end
 
   def client_connected
@@ -26,12 +27,15 @@ class MessagesController < WebsocketRails::BaseController
     rescue
     end
     if @user != nil
+      isConnected = false
       controller_store[:user_id].each_with_index { |user, index|
         if (user[:socket] == self.connection)
           user[:id] = @user.id
+          isConnected = true
           break
         end
       }
+      controller_store[:user_id] << { id: @user.id, socket: self.connection } if !isConnected
       @user.friends.each { |friend|
         controller_store[:user_id].each { |connected_guy|
           if friend.id == connected_guy[:id]
@@ -45,7 +49,7 @@ class MessagesController < WebsocketRails::BaseController
   def delete_user
     user_id = nil
     controller_store[:user_id].each_with_index { |user, index|
-      if (user[:socket] == self.connection)
+      if (user[:socket] == self.connection || (message.has_key?(:user_id) && user[:user_id] == message[:user_id]))
         user_id = user[:id]
         controller_store[:user_id].delete_at(index)
         break
@@ -106,6 +110,24 @@ class MessagesController < WebsocketRails::BaseController
           break
         end
       }
+    end
+  end
+
+  def pong
+    if (controller_store[:lock_sql] == false)
+      controller_store[:lock_sql] = true
+      Chatjob.where("created_at < ?", Time.now - 120).delete_all
+      Chatjob.all.each do |job|
+        msg = Message.eager_load(:sender).find_by_id(job.message_id)
+        controller_store[:user_id].each { |user|
+          if (user[:id] == msg.dest_id)
+            user[:socket].send_message('newMsg', { message: msg.msg, from: msg.sender.username }.to_json)
+            break
+          end
+        }
+      end
+      Chatjob.all.delete_all
+      controller_store[:lock_sql] = false
     end
   end
 end
