@@ -14,8 +14,8 @@
 
     <Page.Resources>
         <DataTemplate x:Key="InfluencesTemplate">
-            <StackPanel Margin="0,0,0,30">
-                <TextBlock Text="{Binding Path=name}" Style="{StaticResource TitleTextBlockStyle}" />
+            <StackPanel x:ConnectionId='7' Margin="0,0,0,30"                                     >
+                <TextBlock x:Name="InfluenceNameBlock" Text="{Binding Path=name}" Style="{StaticResource TitleTextBlockStyle}" />
             </StackPanel>
         </DataTemplate>
 
@@ -65,8 +65,12 @@
                Foreground="Transparent"
                RenderTransformOrigin="0.5,0.5" Style="{StaticResource PivotStyle1}">
             <PivotItem x:Uid="InfluencePivot" Header="">
-                <ListBox Background="Transparent" x:Name="ListBoxGenre" ItemsSource="{Binding ListInfluences}"
-                         ItemTemplate="{StaticResource InfluencesTemplate}" />
+                <Grid>
+                    <ListBox Background="Transparent" x:Name="ListBoxInfluence" ItemsSource="{Binding ListInfluences}"
+                         ItemTemplate="{StaticResource InfluencesTemplate}" SelectedItem="{Binding SelectedInfluence, Mode=TwoWay}" 
+                             Visibility="{Binding ListInfluenceVisibility}"/>
+
+                </Grid>
             </PivotItem>
 
             <PivotItem x:Uid="MusicPivot" Header="">

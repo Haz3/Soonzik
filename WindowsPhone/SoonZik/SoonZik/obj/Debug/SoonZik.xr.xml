@@ -84,6 +84,10 @@
     <RootPropertyPathName Name="AlbumTappedCommand" />
     <RootPropertyPathName Name="ListMusique" />
     <RootPropertyPathName Name="MusicTappedCommand" />
+    <RootPropertyPathName Name="album" />
+    <RootPropertyPathName Name="style_name" />
+    <RootPropertyPathName Name="ListGenreSelected" />
+    <RootPropertyPathName Name="musics" />
     <RootPropertyPathName Name="address" />
     <RootPropertyPathName Name="city" />
     <RootPropertyPathName Name="url" />
@@ -115,7 +119,6 @@
     <RootPropertyPathName Name="Password" />
     <RootPropertyPathName Name="PasswordBoxCommand" />
     <RootPropertyPathName Name="ThePlaylist" />
-    <RootPropertyPathName Name="musics" />
     <RootPropertyPathName Name="RenameButton" />
     <RootPropertyPathName Name="RenameCommand" />
     <RootPropertyPathName Name="name" />
@@ -140,11 +143,12 @@
     <RootPropertyPathName Name="ListMessages" />
     <RootPropertyPathName Name="FriendUser" />
     <RootPropertyPathName Name="profilImage" />
-    <RootPropertyPathName Name="album" />
     <RootPropertyPathName Name="ListArtiste" />
     <RootPropertyPathName Name="SelectedArtiste" />
     <RootPropertyPathName Name="TappedCommand" />
     <RootPropertyPathName Name="ListInfluences" />
+    <RootPropertyPathName Name="SelectedInfluence" />
+    <RootPropertyPathName Name="ListInfluenceVisibility" />
     <RootPropertyPathName Name="Key" />
     <RootPropertyPathName Name="Group" />
     <RootPropertyPathName Name="ItemSource" />
@@ -214,6 +218,7 @@
     <RootType FullName="SoonZik.ViewModel.AboutViewModel" />
     <RootType FullName="SoonZik.ViewModel.PlayerControlViewModel" />
     <RootType FullName="SoonZik.ViewModel.PriceControlViewModel" />
+    <RootType FullName="SoonZik.ViewModel.GenreViewModel" />
     <RootType FullName="Windows.UI.Xaml.DataTemplate">
       <RootProperty Name="Template" />
     </RootType>
@@ -303,6 +308,8 @@
       <RootProperty Name="Style" />
       <RootProperty Name="Margin" />
       <RootProperty Name="Items" />
+      <RootProperty Name="ItemsSource" />
+      <RootProperty Name="ItemTemplate" />
       <RootProperty Name="SelectedIndex" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.FrameworkElement">
@@ -479,6 +486,8 @@
       <RootProperty Name="IsTapEnabled" />
       <RootProperty Name="ItemContainerStyle" />
       <RootProperty Name="HorizontalAlignment" />
+      <RootProperty Name="Visibility" />
+      <RootEvent Name="SelectionChanged" />
     </RootType>
     <RootType FullName="Microsoft.Xaml.Interactivity.Interaction">
       <RootMethod Name="GetBehaviors" />
@@ -623,6 +632,14 @@
     <RootType FullName="SoonZik.Views.AlbumView" />
     <RootType FullName="SoonZik.Views.BattleDetailView" />
     <RootType FullName="SoonZik.Views.CartsView" />
+    <RootType FullName="Windows.UI.Xaml.Shapes.Ellipse">
+      <RootProperty Name="Height" />
+      <RootProperty Name="Width" />
+      <RootProperty Name="VerticalAlignment" />
+      <RootProperty Name="HorizontalAlignment" />
+      <RootProperty Name="Fill" />
+    </RootType>
+    <RootType FullName="SoonZik.Views.GenreView" />
     <RootType FullName="Windows.UI.Xaml.Controls.Maps.MapItemsControl">
       <RootProperty Name="ItemsSource" />
       <RootProperty Name="ItemTemplate" />
@@ -665,13 +682,6 @@
       <RootProperty Name="Content" />
     </RootType>
     <RootType FullName="SoonZik.Views.Conversation" />
-    <RootType FullName="Windows.UI.Xaml.Shapes.Ellipse">
-      <RootProperty Name="Height" />
-      <RootProperty Name="Width" />
-      <RootProperty Name="Fill" />
-      <RootProperty Name="VerticalAlignment" />
-      <RootProperty Name="HorizontalAlignment" />
-    </RootType>
     <RootType FullName="SoonZik.Views.Explorer" />
     <RootType FullName="Windows.UI.Xaml.Data.CollectionViewSource">
       <RootProperty Name="Source" />
