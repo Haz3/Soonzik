@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Input;
+using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media;
@@ -22,7 +23,6 @@ namespace SoonZik.ViewModel
             RewindCommand = new RelayCommand(RewindExecute);
             ForwardCommand = new RelayCommand(ForwardExecute);
             PlayCommand = new RelayCommand(PlayExecute);
-            MediaElementObject = new MediaElement();
         }
 
         #endregion
@@ -185,10 +185,21 @@ namespace SoonZik.ViewModel
 
         private void PlayerLoadedExecute()
         {
-            MediaElementObject = null;
-            MediaElementObject = new MediaElement();
-            MediaElementObject.MediaOpened += MediaElementObjectOnMediaOpened;
-            MediaElementObject.MediaEnded += MediaElementObjectOnMediaEnded;
+            try
+            {
+                MediaElementObject = new MediaElement();
+                MediaElementObject.MediaOpened += MediaElementObjectOnMediaOpened;
+                MediaElementObject.MediaEnded += MediaElementObjectOnMediaEnded;
+                MediaInfo();
+            }
+            catch (Exception e)
+            {
+
+            }
+        }
+
+        private void MediaInfo()
+        {
             _indexCurentMusic = 0;
             CurrentMusic = Singleton.Singleton.Instance().SelectedMusicSingleton[_indexCurentMusic];
             StaticCurrentMusic = CurrentMusic;
@@ -196,8 +207,7 @@ namespace SoonZik.ViewModel
             IsPlaylist = Singleton.Singleton.Instance().SelectedMusicSingleton.Count > 1;
             MediaElementObject.Source = new Uri(CurrentMusic.file, UriKind.RelativeOrAbsolute);
             MediaElementObject.Play();
-            PlayImage =
-                new BitmapImage(new Uri("ms-appx:///Resources/PlayerIcons/pause.png", UriKind.RelativeOrAbsolute));
+            PlayImage = new BitmapImage(new Uri("ms-appx:///Resources/PlayerIcons/pause.png", UriKind.RelativeOrAbsolute));
         }
 
         private void MediaElementObjectOnMediaEnded(object sender, RoutedEventArgs routedEventArgs)

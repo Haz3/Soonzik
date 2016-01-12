@@ -18,6 +18,11 @@
                 <TextBlock x:Name="InfluenceNameBlock" Text="{Binding Path=name}" Style="{StaticResource TitleTextBlockStyle}" />
             </StackPanel>
         </DataTemplate>
+        <DataTemplate x:Key="HeaderTemplate">
+            <ContentPresenter>
+                <TextBlock Text="{Binding Path=name}" FontFamily="{StaticResource Roboto}" FontStyle="Normal" FontSize="30" />
+            </ContentPresenter>
+        </DataTemplate>
 
         <DataTemplate x:Key="MusicTemplate">
             <Grid x:ConnectionId='1' Height="70" Margin="0,0,0,0"                            >
@@ -90,6 +95,18 @@
                         </core:EventTriggerBehavior>
                     </interactivity:Interaction.Behaviors>
                 </ListBox>
+            </PivotItem>
+            <PivotItem x:Uid="AmbiancePivot" Header="">
+                <Pivot Margin="0,20,0,0" x:Name="PivotAmbiance" HeaderTemplate="{StaticResource HeaderTemplate}"
+                        Foreground="Transparent" RenderTransformOrigin="0.5,0.5" Style="{StaticResource PivotStyle1}" ItemsSource="{Binding ListAmbiance}">
+                    <Pivot.ItemTemplate>
+                        <DataTemplate>
+                            <ListBox x:ConnectionId='8' Background="Transparent" x:Name="ListBoxGenre" ItemsSource="{Binding Path=musics}"
+                                                                                       
+                         ItemTemplate="{StaticResource MusicTemplate}"/>
+                        </DataTemplate>
+                    </Pivot.ItemTemplate>
+                </Pivot>
             </PivotItem>
         </Pivot>
 

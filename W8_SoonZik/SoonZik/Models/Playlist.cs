@@ -11,9 +11,10 @@ namespace SoonZik.Models
     public class Playlist
     {
         public int id { get; set; }
-        public string title { get; set; }
-        public List<Music> list { get; set; }
+        public string name { get; set; }
+        public List<Music> musics { get; set; }
+        public User user { get; set; }
 
-        public static Playlist playlist = null;
+
     }
 }

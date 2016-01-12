@@ -34,8 +34,10 @@ namespace SoonZik.Streaming.View
         #region Method
         private void ConnexionButton_OnClick(object sender, RoutedEventArgs e)
         {
-            _username = UserNameTecBox.Text;
-            _password = PassWordTextBox.Password;
+            //_username = UserNameTecBox.Text;
+            //_password = PassWordTextBox.Password;
+            _username = "artist_one@gmail.com";
+            _password = "azertyuiop";
 
             if (_username != String.Empty && _password != String.Empty)
             {

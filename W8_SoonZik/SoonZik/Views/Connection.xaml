@@ -57,7 +57,7 @@
         <TextBlock x:Name="feedback" HorizontalAlignment="Left" Margin="25,1045,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="25" Width="275" Foreground="#FF111111" FontSize="25">
             <Hyperlink NavigateUri="http://api.lvh.me:3000/feedbacks/new" Foreground="#FF611EFF" >Feedback</Hyperlink>
         </TextBlock>
-        <Button Content="Button" Click="Button_Click" HorizontalAlignment="Left" Margin="162,47,0,0" VerticalAlignment="Top" Height="88" Width="218" Background="#FF7E6969"/>
+        <!--<Button Content="Button" Click="Button_Click" HorizontalAlignment="Left" Margin="162,47,0,0" VerticalAlignment="Top" Height="88" Width="218" Background="#FF7E6969"/>-->
 
     </Grid>
 </Page>

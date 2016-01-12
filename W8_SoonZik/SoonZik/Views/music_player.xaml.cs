@@ -16,6 +16,7 @@ using Windows.Media.Playlists;
 using Windows.Storage;
 using Windows.Storage.Pickers;
 using SoonZik;
+using SoonZik.ViewModels;
 
 
 // Pour en savoir plus sur le modèle d'élément Page vierge, consultez la page http://go.microsoft.com/fwlink/?LinkId=234238
@@ -30,6 +31,22 @@ namespace SoonZik
         public music_player()
         {
             this.InitializeComponent();
+            DataContext = new PlayerViewmodel();
+
+            // element for create
+            album_list_lv.Visibility = Visibility.Collapsed;
+            track_list_lv.Visibility = Visibility.Collapsed;
+            add_to_playlist_btn.Visibility = Visibility.Collapsed;
+            create_playlist_btn.Visibility = Visibility.Collapsed;
+            playlist_name_tb.Visibility = Visibility.Collapsed;
+
+            // element for updating
+            playlist_update_lv.Visibility = Visibility.Collapsed;
+            playlist_name_update_tb.Visibility = Visibility.Collapsed;
+            add_to_playlist_update_btn.Visibility = Visibility.Collapsed;
+            delete_from_playlist_update_btn.Visibility = Visibility.Collapsed;
+            update_playlist_btn.Visibility = Visibility.Collapsed;
+
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -37,27 +54,61 @@ namespace SoonZik
             this.Frame.GoBack();
         }
 
-        async void new_playlist_btn_Click(object sender, RoutedEventArgs e)
+        void new_playlist_btn_Click(object sender, RoutedEventArgs e)
         {
-            FileOpenPicker openPicker = new FileOpenPicker();
-            
-            openPicker.SuggestedStartLocation = PickerLocationId.Desktop;
-            openPicker.FileTypeFilter.Add(".mp3");
-            openPicker.FileTypeFilter.Add(".flac");
-            openPicker.FileTypeFilter.Add(".wma");
-            openPicker.FileTypeFilter.Add(".aac");
-            IReadOnlyList<StorageFile> files = await openPicker.PickMultipleFilesAsync();
-            
-           if (files != null && files.Count > 0)
-           {
-               Playlist playlist = new Playlist();
+            // element for create
+            album_list_lv.Visibility = Visibility.Visible;
+            track_list_lv.Visibility = Visibility.Visible;
+            add_to_playlist_btn.Visibility = Visibility.Visible;
+            create_playlist_btn.Visibility = Visibility.Visible;
+            playlist_name_tb.Visibility = Visibility.Visible;
 
-               foreach (StorageFile file in files)
-               {
-                   playlist.Files.Add(file);
-               }
-               StorageFile savedFile = await playlist.SaveAsAsync(KnownFolders.MusicLibrary, "Sample", NameCollisionOption.ReplaceExisting, PlaylistFormat.WindowsMedia);
-           }
+            // element for updating
+            playlist_update_lv.Visibility = Visibility.Collapsed;
+            playlist_name_update_tb.Visibility = Visibility.Collapsed;
+            add_to_playlist_update_btn.Visibility = Visibility.Collapsed;
+            delete_from_playlist_update_btn.Visibility = Visibility.Collapsed;
+            update_playlist_btn.Visibility = Visibility.Collapsed;
+
+        }
+
+        private void create_playlist_btn_Click(object sender, RoutedEventArgs e)
+        {
+            // element for create
+            album_list_lv.Visibility = Visibility.Collapsed;
+            track_list_lv.Visibility = Visibility.Collapsed;
+            add_to_playlist_btn.Visibility = Visibility.Collapsed;
+            create_playlist_btn.Visibility = Visibility.Collapsed;
+            playlist_name_tb.Visibility = Visibility.Collapsed;
+        }
+
+        private void edit_playlist_btn_Click(object sender, RoutedEventArgs e)
+        {
+            playlist_update_lv.Visibility = Visibility.Visible;
+            playlist_name_update_tb.Visibility = Visibility.Visible;
+            add_to_playlist_update_btn.Visibility = Visibility.Visible;
+            delete_from_playlist_update_btn.Visibility = Visibility.Visible;
+            update_playlist_btn.Visibility = Visibility.Visible;
+
+            // element for create
+            album_list_lv.Visibility = Visibility.Visible;
+            track_list_lv.Visibility = Visibility.Visible;
+
+            add_to_playlist_btn.Visibility = Visibility.Collapsed;
+            create_playlist_btn.Visibility = Visibility.Collapsed;
+            playlist_name_tb.Visibility = Visibility.Collapsed;
+        }
+
+        private void update_playlist_btn_Click(object sender, RoutedEventArgs e)
+        {
+            playlist_update_lv.Visibility = Visibility.Collapsed;
+            playlist_name_update_tb.Visibility = Visibility.Collapsed;
+            add_to_playlist_update_btn.Visibility = Visibility.Collapsed;
+            delete_from_playlist_update_btn.Visibility = Visibility.Collapsed;
+            update_playlist_btn.Visibility = Visibility.Collapsed;
+
+            album_list_lv.Visibility = Visibility.Collapsed;
+            track_list_lv.Visibility = Visibility.Collapsed;
         }
     }
 }

@@ -13,6 +13,8 @@ using NAudio.Wave;
 using SoonZik.Streaming.Utils;
 using SoonZik.Streaming.View;
 using MessageBox = System.Windows.Forms.MessageBox;
+using System.Net;
+using System.IO;
 
 namespace SoonZik.Streaming
 {
@@ -243,6 +245,50 @@ namespace SoonZik.Streaming
             if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
         }
         #endregion
+
+        private void choose_file_btn_Click(object sender, RoutedEventArgs e)
+        {
+            Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
+
+            dlg.DefaultExt = ".wav";
+            dlg.Filter = "WAV Files (*.WAV)|*.wav"; 
+
+
+            // Display OpenFileDialog by calling ShowDialog method 
+            Nullable<bool> result = dlg.ShowDialog();
+
+
+            // Get the selected file name and display in a TextBox 
+            if (result == true)
+            {
+                // Open document 
+                string filename = dlg.FileName;
+                upload_file_name_txt.Text = filename;
+            }
+        }
+
+        private void upload_btn_Click(object sender, RoutedEventArgs e)
+        {
+            //MessageBox.Show("UPLOAD LOL");
+
+            // Create a new WebClient instance.
+            //if (upload_file_name_txt.Text != null || upload_file_name_txt.Text != "")
+            //{
+            //    MessageBox.Show("Choisissez un fichier");
+            //    return;
+            //}
+            WebClient myWebClient = new WebClient();
+            string filename = System.IO.Path.GetFileName(upload_file_name_txt.Text);
+
+            Byte[] bytes = File.ReadAllBytes(upload_file_name_txt.Text);
+            String file = Convert.ToBase64String(bytes);
+
+            string response = myWebClient.UploadString("http://api.lvh.me:3000/musics/uploadRediff", file);
+
+            //byte[] responseArray = myWebClient.UploadFile("http://api.lvh.me:3000/musics/uploadRediff", filename);
+            response_txt.Text = response;
+
+        }
     }
 
     internal class Encoder
