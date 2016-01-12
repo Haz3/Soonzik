@@ -272,7 +272,26 @@ namespace SoonZik.ViewModels
 
         async void delete_playlist()
         {
+            Exception exception = null;
+            var request = new Http_get();
 
+            try
+            {
+                //var response = await request.g("/playlists/destroy", data);
+                var ret = await Http_get.get_data("/playlists/destroy?user_id=" + Singleton.Instance.Current_user.id.ToString() + "&secureKey=" + await Security.getSecureKey(Singleton.Instance.Current_user.id.ToString()) + "&id=" + selected_playlist.id.ToString());
+
+                // reload playlist list
+                playlist_list.Clear();
+                load_playlist();
+
+            }
+             catch (Exception e)
+            {
+                exception = e;
+            }
+
+            if (exception != null)
+                await new MessageDialog("Erreur lors de la création de la playlist").ShowAsync();
         }
 
     }

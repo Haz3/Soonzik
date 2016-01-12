@@ -80,7 +80,7 @@
             </Grid>
 
 
-            <ListView x:Name="playlist_list" ItemsSource="{Binding playlist_list, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  HorizontalAlignment="Left" Height="482" Margin="640,149,0,0" VerticalAlignment="Top" Width="321">
+            <ListView x:Name="playlist_list" SelectedItem="{Binding selected_playlist, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding playlist_list, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  HorizontalAlignment="Left" Height="482" Margin="640,149,0,0" VerticalAlignment="Top" Width="321">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <StackPanel>
@@ -95,7 +95,7 @@
 
             <Button x:Name="new_playlist_btn" x:Uid="new_playlist_btn" Content="Créer" HorizontalAlignment="Left" Margin="978,212,0,0" VerticalAlignment="Top" Width="138" Click="new_playlist_btn_Click"/>
             <Button x:Name="add_playlist_btn" x:Uid="add_playlist_btn" Content="Modifier" HorizontalAlignment="Left" Margin="978,262,0,0" VerticalAlignment="Top" Width="138"/>
-            <Button x:Name="remove_playlist_btn" x:Uid="remove_playlist_btn" Content="Supprimer" HorizontalAlignment="Left" Margin="978,311,0,0" VerticalAlignment="Top" Width="138"/>
+            <Button x:Name="remove_playlist_btn" x:Uid="remove_playlist_btn" Command="{Binding do_delete_playlist, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Content="Supprimer" HorizontalAlignment="Left" Margin="978,311,0,0" VerticalAlignment="Top" Width="138"/>
 
             <TextBlock  x:Name="playlist_txt" x:Uid="playlist_txt" HorizontalAlignment="Left" Margin="981,149,0,0" TextWrapping="Wrap" Text="Playlist" VerticalAlignment="Top" Height="43" Width="154" FontSize="37.333"/>
 

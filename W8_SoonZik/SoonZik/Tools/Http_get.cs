@@ -94,7 +94,7 @@ namespace SoonZik.Tools
 
             // A VIRER
             if (exception != null)
-                await new MessageDialog(exception.Message, "Get data error").ShowAsync();
+                await new MessageDialog(exception.Message, "Erreur de suppression").ShowAsync();
             // A VIRER
             return null;
         }
