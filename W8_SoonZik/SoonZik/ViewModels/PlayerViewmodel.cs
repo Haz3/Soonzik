@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -16,14 +17,10 @@ namespace SoonZik.ViewModels
 {
     class PlayerViewmodel : INotifyPropertyChanged
     {
-        //
-        // http://api.lvh.me:3000/playlists/save?playlist[user_id]=4&playlist[name]=playlist_one&playlist[music]=[1,2,3,4,5,6]&user_id=4&secureKey=01b5c4e0ff4bae98d3f31d5285ad9799b4d7068f40e800cc010dbea456f8a227
-
-        //
-        // http://api.lvh.me:3000/playlists/update?playlist[user_id]=4&playlist[name]=playlist_one&playlist[music]=[1,2,3,4,5,6]&user_id=4&secureKey=01b5c4e0ff4bae98d3f31d5285ad9799b4d7068f40e800cc010dbea456f8a227
-
 
         public ObservableCollection<Playlist> playlist_list { get; set; }
+        public ObservableCollection<Music> playlist_update_music { get; set; }
+
 
         private Playlist _selected_playlit;
         public Playlist selected_playlist
@@ -59,6 +56,17 @@ namespace SoonZik.ViewModels
             }
         }
 
+        private Music _selected_music_in_playlist;
+        public Music selected_music_playlist
+        {
+            get { return _selected_music_in_playlist; }
+            set
+            {
+                _selected_music_in_playlist = value;
+                OnPropertyChanged("selected_music_playlist");
+            }
+        }
+
         private MusicOwnByUser _music_own;
         public MusicOwnByUser music_own
         {
@@ -78,6 +86,17 @@ namespace SoonZik.ViewModels
             {
                 _music_list_to_add = value;
                 OnPropertyChanged("music_list_to_add");
+            }
+        }
+
+        private List<Music> _music_list_to_update;
+        public List<Music> music_list_to_update
+        {
+            get { return _music_list_to_update; }
+            set
+            {
+                _music_list_to_update = value;
+                OnPropertyChanged("music_list_to_update");
             }
         }
 
@@ -109,6 +128,11 @@ namespace SoonZik.ViewModels
             get;
             private set;
         }
+        public ICommand do_add_to_update_playlist
+        {
+            get;
+            private set;
+        }
 
         public ICommand do_remove_to_playlist
         {
@@ -116,6 +140,16 @@ namespace SoonZik.ViewModels
             private set;
         }
 
+        public ICommand do_update_playlist
+        {
+            get;
+            private set;
+        }
+        public ICommand do_init_update
+        {
+            get;
+            private set;
+        }
 
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -132,8 +166,10 @@ namespace SoonZik.ViewModels
         public PlayerViewmodel()
         {
             music_list_to_add = new List<Music>();
-            playlist_list = new ObservableCollection<Playlist>();
+            music_list_to_update = new List<Music>();
 
+            playlist_list = new ObservableCollection<Playlist>();
+            playlist_update_music = new ObservableCollection<Music>();
 
             load_music_own();
             load_playlist();
@@ -143,7 +179,10 @@ namespace SoonZik.ViewModels
             do_create_playlist = new RelayCommand(create_playlist);
             do_delete_playlist = new RelayCommand(delete_playlist);
             do_add_to_playlist = new RelayCommand(add_to_playlist);
-
+            do_init_update = new RelayCommand(init_update);
+            do_update_playlist = new RelayCommand(update_playlist);
+            do_add_to_update_playlist = new RelayCommand(add_to_update_playlist);
+            do_remove_to_playlist = new RelayCommand(remove_to_playlist);
 
 
             // voila
@@ -294,5 +333,78 @@ namespace SoonZik.ViewModels
                 await new MessageDialog("Erreur lors de la création de la playlist").ShowAsync();
         }
 
+        void init_update()
+        {
+            //playlist_update_music = new ObservableCollection<Music>(selected_playlist.musics);
+            foreach (var music in selected_playlist.musics)
+                playlist_update_music.Add(music);
+
+        }
+        async void update_playlist()
+        {
+            Exception exception = null;
+            var request = new Http_post();
+
+            try
+            {
+                string secureKey = await Security.getSecureKey(Singleton.Instance.Current_user.id.ToString());
+
+                string musics_id = "";
+                foreach (var music in playlist_update_music)
+                    musics_id += music.id.ToString() + ",";
+
+
+                var data_update =
+                    "user_id=" + Singleton.Instance.Current_user.id +
+                    "&secureKey=" + secureKey +
+                    "&id=" + selected_playlist.id +
+                    "&playlist[user_id]=" + Singleton.Instance.Current_user.id.ToString() +
+                    "&playlist[name]=" + WebUtility.UrlEncode(selected_playlist.name) +
+                    "&playlist[music]=[" + musics_id.Remove(musics_id.Length - 1) + "]";
+
+                var response_update = await request.post_request("/playlists/update", data_update);
+
+                var jsonbis = JObject.Parse(response_update).SelectToken("message");
+
+                if (jsonbis.ToString() == "Created")
+                    await new MessageDialog("Playlist mise à jour").ShowAsync();
+                else
+                    await new MessageDialog("Erreur lors de la mise à jour de la playlist").ShowAsync();
+
+
+                // clear value & list
+                music_list_to_add.Clear();
+                playlist_name = "";
+                playlist_list.Clear();
+                playlist_update_music.Clear();
+                load_playlist();
+            }
+            catch (Exception e)
+            {
+                exception = e;
+            }
+
+            if (exception != null)
+                await new MessageDialog("Erreur lors de la mise à jour de la playlist").ShowAsync();
+
+        }
+        void add_to_update_playlist()
+        {
+            //if (selected_music != null)
+            //    selected_playlist.musics.Add(selected_music);
+
+            if (selected_music != null)
+                playlist_update_music.Add(selected_music);
+        }
+
+        void remove_to_playlist()
+        {
+
+            if (selected_music_playlist != null)
+                playlist_update_music.Remove(selected_music_playlist);
+
+            //if (selected_music != null)
+            //    selected_playlist.musics.Remove(selected_music_playlist);
+        }
     }
 }
