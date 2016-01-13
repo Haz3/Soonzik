@@ -45,8 +45,8 @@
 					%span{ "ng-click" => "setTooltip('save-current')" }
 						%i.fi-save.blue
 						{{ labels.DISPLAY_PLAYER_SAVE_NEW_PLAYLIST_LABEL }}
-					.mytooltip.toolright{ "ng-show" => "tooltip == 'share-current'", "ng-include" => "'/assets/AngularJS/views/include/tooltip.html.haml'", "ng-controller" => "TooltipCtrl", "ng-init" => "tooltipInit(null, 3, tmpUrlCurrentPlaylist)" }
-					.mytooltip.toolright{ "ng-show" => "tooltip == 'save-current'", "ng-include" => "'/assets/AngularJS/views/include/tooltip.html.haml'", "ng-controller" => "TooltipCtrl", "ng-init" => "tooltipInit(null, 6, savePlaylistFromCurrent)" }
+					.mytooltip.toolright{ "ng-if" => "tooltip == 'share-current'", "ng-include" => "'/assets/AngularJS/views/include/tooltip.html.haml'", "ng-controller" => "TooltipCtrl", "ng-init" => "tooltipInit(null, 3, tmpUrlCurrentPlaylist)" }
+					.mytooltip.toolright{ "ng-if" => "tooltip == 'save-current'", "ng-include" => "'/assets/AngularJS/views/include/tooltip.html.haml'", "ng-controller" => "TooltipCtrl", "ng-init" => "tooltipInit(null, 6, savePlaylistFromCurrent)" }
 			.clearfix.small-12.musicInformations{ "ng-show" => "infomusic.current != false" }
 				%i.fi-x.right.red{ "ng-click" => "infoForMusic(false, 'current')" }
 				%ul.square.left.text-left
@@ -109,13 +109,13 @@
 							%div{ "ng-click" => "setTooltip('popPlaylist' + myplaylist.id)" }
 								%i.fi-play-video
 								{{ myplaylist.name }} - {{ labels.DISPLAY_PLAYER_DURATION_LABEL }} : {{ formatedDuration(myplaylist.duration) }}
-							.mytooltip.toolright{ "ng-show" => "tooltip == 'popPlaylist' + myplaylist.id", "ng-include" => "'/assets/AngularJS/views/include/tooltip.html.haml'", "ng-controller" => "TooltipCtrl", "ng-init" => "tooltipInit(null, 4, [myplaylist, addToCurrentPlaylist, replaceToCurrentPlaylist])" }
+							.mytooltip.toolright{ "ng-if" => "tooltip == 'popPlaylist' + myplaylist.id", "ng-include" => "'/assets/AngularJS/views/include/tooltip.html.haml'", "ng-controller" => "TooltipCtrl", "ng-init" => "tooltipInit(null, 4, [myplaylist, addToCurrentPlaylist, replaceToCurrentPlaylist])" }
 						.right.relative
 							%i.fi-share.blue{ "ng-click" => "setTooltip(myplaylist.url)" }
-							.mytooltip.toolright{ "ng-show" => "tooltip == myplaylist.url", "ng-include" => "'/assets/AngularJS/views/include/tooltip.html.haml'", "ng-controller" => "TooltipCtrl", "ng-init" => "tooltipInit(null, 3, myplaylist.url)" }
+							.mytooltip.toolright{ "ng-if" => "tooltip == myplaylist.url", "ng-include" => "'/assets/AngularJS/views/include/tooltip.html.haml'", "ng-controller" => "TooltipCtrl", "ng-init" => "tooltipInit(null, 3, myplaylist.url)" }
 							%i{ "ng-class" => "myplaylist.extend == false ? 'fi-plus green' : 'fi-minus red'", "ng-click" => "myplaylist.extend = !myplaylist.extend" }
 							%i.fi-x.red{ "ng-click" => "setTooltip('delete' + myplaylist.id)" }
-							.mytooltip.toolright{ "ng-show" => "tooltip == 'delete' + myplaylist.id", "ng-include" => "'/assets/AngularJS/views/include/tooltip.html.haml'", "ng-controller" => "TooltipCtrl", "ng-init" => "tooltipInit(null, 5, myplaylist)" }
+							.mytooltip.toolright{ "ng-if" => "tooltip == 'delete' + myplaylist.id", "ng-include" => "'/assets/AngularJS/views/include/tooltip.html.haml'", "ng-controller" => "TooltipCtrl", "ng-init" => "tooltipInit(null, 5, myplaylist.id)" }
 					%ul.no-bullet.aPlaylist{ "ng-class" => "myplaylist.extend ? 'open' : ''" }
 						%li.row{ "ng-repeat" => "music in myplaylist.musics" }
 							%i.fi-x.red.left{ "ng-click" => "removeFromPlaylist(music, myplaylist)" }

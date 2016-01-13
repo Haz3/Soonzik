@@ -369,7 +369,6 @@ SoonzikApp.controller("PlayerCtrl", ["$scope", "$rootScope", "HTTPService", "Not
           playlist.share = false;
           playlist.url = 'http://lvh.me:3000/playlists/' + playlist.id;
           playlist.duration = 0;
-          $rootScope.myPlaylists.push(playlist);
         }, function(error) {
           NotificationService.error($rootScope.labels.FILE_PLAYER_SAVE_IN_PLAYLIST_ERROR_MESSAGE);
         });
@@ -442,7 +441,6 @@ SoonzikApp.controller("PlayerCtrl", ["$scope", "$rootScope", "HTTPService", "Not
 
           for (var i = 0 ; i < $rootScope.playlist.length ; i++) {
             playlist.musics.push($rootScope.playlist[i].obj);
-            console.log($rootScope.playlist[i].obj);
             saveMusicInPlaylist(playlist, $rootScope.playlist[i]);
           }
         }, function(error) {

@@ -143,24 +143,32 @@ SoonzikApp.controller('TooltipCtrl', ['$scope', 'SecureAuth', 'HTTPService', 'No
 	}
 
   $scope.removePlaylist = function() {
-  	SecureAuth.securedTransaction(function(key, user_id) {
-  		var params = [
-  			{ key: "id", value: $scope.tooltipPlaylist.id},
-  			{ key: "user_id", value: user_id},
-  			{ key: "secureKey", value: key }
-  		];
-  		HTTPService.destroyPlaylist(params).then(function() {
-        $rootScope.$broadcast("deletePlaylist", $scope.tooltipPlaylist);
-  			for (var indexOfMyPlaylist in $rootScope.myPlaylists) {
-  				if ($rootScope.myPlaylists[indexOfMyPlaylist].id == $scope.tooltipPlaylist.id) {
-  					$rootScope.myPlaylists.splice(indexOfMyPlaylist, 1);
-  					break;
-  				}
-  			}
-  		}, function(error) {
-  			NotificationService.error($rootScope.labels.FILE_PLAYER_DELETE_PLAYLIST_ERROR_MESSAGE + $scope.tooltipPlaylist.name);
-  		});
-  	});
+  	var playlistToRemove = null;
+
+  	for (var indexOfMyPlaylist in $rootScope.myPlaylists) {
+			if ($rootScope.myPlaylists[indexOfMyPlaylist].id == $scope.tooltipPlaylist) { playlistToRemove = $rootScope.myPlaylists[indexOfMyPlaylist]; }
+  	}
+
+  	if (playlistToRemove) {
+	  	SecureAuth.securedTransaction(function(key, user_id) {
+	  		var params = [
+	  			{ key: "id", value: playlistToRemove.id},
+	  			{ key: "user_id", value: user_id},
+	  			{ key: "secureKey", value: key }
+	  		];
+	  		HTTPService.destroyPlaylist(params).then(function() {
+	        $rootScope.$broadcast("deletePlaylist", playlistToRemove);
+	  			for (var indexOfMyPlaylist in $rootScope.myPlaylists) {
+	  				if ($rootScope.myPlaylists[indexOfMyPlaylist].id == playlistToRemove.id) {
+	  					$rootScope.myPlaylists.splice(indexOfMyPlaylist, 1);
+	  					break;
+	  				}
+	  			}
+	  		}, function(error) {
+	  			NotificationService.error($rootScope.labels.FILE_PLAYER_DELETE_PLAYLIST_ERROR_MESSAGE + playlistToRemove.name);
+	  		});
+	  	});
+	  }
   }
 
   $scope.saveNewPlaylistFromCurrent = function() {

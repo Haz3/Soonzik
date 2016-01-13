@@ -6,7 +6,6 @@ SoonzikArtistApp.controller('PropositionCtrl', ['$scope', 'SecureAuth', 'HTTPSer
 
 	$scope.propositionInit = function() {
 		HTTPService.getPropose().then(function(response) {
-			console.log(response);
 			$scope.albums = response.data.albums;
 			for (var i = 0 ; i < $scope.albums.length ; i++) {
 				$scope.albums[i].baseValue = $scope.albums[i].getProposed;
@@ -32,7 +31,6 @@ SoonzikArtistApp.controller('PropositionCtrl', ['$scope', 'SecureAuth', 'HTTPSer
 
 		if (arr_id.length > 0) {
 			HTTPService.setPropose({ arr_id: arr_id }).then(function(response) {
-				console.log(response);
 				for (var i = 0 ; i < arr_obj.length ; i++) {
 					arr_obj[i].baseValue = !arr_obj[i].baseValue;
 					arr_obj[i].getProposed = arr_obj[i].baseValue;

@@ -243,7 +243,6 @@ SoonzikApp.run(['$route', '$rootScope', '$location', 'SecureAuth', 'HTTPService'
 
 	    		$rootScope.myPlaylists[i].duration = duration;
 	    	}
-    		console.log($rootScope.myPlaylists);
 			}, function(error) {
 				NotificationService.error($rootScope.labels.FILE_APP_PLAYLIST_NOT_FOUND_ERROR_MESSAGE + playlist.name);
 			});

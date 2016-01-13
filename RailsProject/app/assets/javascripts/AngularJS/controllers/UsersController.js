@@ -294,8 +294,6 @@ SoonzikApp.controller('UsersCtrl', ['$scope', "$routeParams", 'SecureAuth', 'HTT
 							$scope.form.identities[identity[i].provider] = identity[i].uid;
 						}
 
-						console.log($scope.form.identities);
-
 						$scope.loading = false;
 					}, function(error) {
 						// Do nothing

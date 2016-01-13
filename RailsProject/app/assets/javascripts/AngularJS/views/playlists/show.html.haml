@@ -21,13 +21,13 @@
 						%span.button{ "ng-click" => "setTooltip('share')" }
 							%i.fi-share
 							{{ labels.DISPLAY_PLAYLIST_SHARE_LABEL }}
-						.mytooltip.toolright{ "ng-show" => "tooltip == 'share'", "ng-include" => "'/assets/AngularJS/views/include/tooltip.html.haml'", "ng-controller" => "TooltipCtrl", "ng-init" => "tooltipInit(null, 3, 'http://lvh.me:3000/playlists/' + playlist_obj.id)" }
+						.mytooltip.toolright{ "ng-if" => "tooltip == 'share'", "ng-include" => "'/assets/AngularJS/views/include/tooltip.html.haml'", "ng-controller" => "TooltipCtrl", "ng-init" => "tooltipInit(null, 3, 'http://lvh.me:3000/playlists/' + playlist_obj.id)" }
 					%li.relative{ "ng-if" => "user != false" }
 						%div
 							.button.relative{ "ng-click" => "setTooltip('saveAsNewPl')" }
 								%i.fi-save
 								{{ labels.DISPLAY_PLAYLIST_NEW_PLAYLIST_LABEL }}
-							.mytooltip.toolright{ "ng-show" => "tooltip == 'saveAsNewPl'", "ng-include" => "'/assets/AngularJS/views/include/tooltip.html.haml'", "ng-controller" => "TooltipCtrl", "ng-init" => "tooltipInit(null, 2, playlist_obj)" }
+							.mytooltip.toolright{ "ng-if" => "tooltip == 'saveAsNewPl'", "ng-include" => "'/assets/AngularJS/views/include/tooltip.html.haml'", "ng-controller" => "TooltipCtrl", "ng-init" => "tooltipInit(null, 2, playlist_obj)" }
 		.playlistContent{ "ng-if" => "playlist_obj.musics.length != 0" }
 			.playlistMusic{ "ng-repeat" => "music in playlist_obj.musics track by $index"}
 				%hr
@@ -44,5 +44,5 @@
 						.left {{ formatTime(music.duration) }}
 						.text-right.relative
 							%i.fi-plus{ "ng-click" => "setTooltip(tooltip == music ? false : music)" }
-							.mytooltip.toolright{ "ng-show" => "tooltip == music", "ng-include" => "'/assets/AngularJS/views/include/tooltip.html.haml'", "ng-controller" => "TooltipCtrl", "ng-init" => "tooltipInit(music, 1)" }
+							.mytooltip.toolright{ "ng-if" => "tooltip == music", "ng-include" => "'/assets/AngularJS/views/include/tooltip.html.haml'", "ng-controller" => "TooltipCtrl", "ng-init" => "tooltipInit(music, 1)" }
 			%hr

@@ -17,7 +17,7 @@ $scope.loading = true;
 			HTTPService.getFriends(current_user.id, parameters).then(function(response) {
 				$scope.friends = response.data.content;
 			}, function (error) {
-				console.log($rootScope.labels.FILE_FRIEND_LOAD_FRIENDS_ERROR_MESSAGE);
+				NotificationService.error($rootScope.labels.FILE_FRIEND_LOAD_FRIENDS_ERROR_MESSAGE);
 			});
 		});
 
