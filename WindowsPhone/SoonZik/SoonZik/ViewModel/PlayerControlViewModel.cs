@@ -22,6 +22,9 @@ namespace SoonZik.ViewModel
             RewindCommand = new RelayCommand(RewindExecute);
             ForwardCommand = new RelayCommand(ForwardExecute);
             PlayCommand = new RelayCommand(PlayExecute);
+            MediaElementObject = new MediaElement();
+            MediaElementObject.MediaOpened += MediaElementObjectOnMediaOpened;
+            MediaElementObject.MediaEnded += MediaElementObjectOnMediaEnded;
         }
 
         #endregion
@@ -69,7 +72,7 @@ namespace SoonZik.ViewModel
             set
             {
                 _mediaElementObject = value;
-                RaisePropertyChanged();
+                RaisePropertyChanged("MediaElementObject");
             }
         }
 
@@ -186,9 +189,7 @@ namespace SoonZik.ViewModel
         {
             try
             {
-                MediaElementObject = new MediaElement();
-                MediaElementObject.MediaOpened += MediaElementObjectOnMediaOpened;
-                MediaElementObject.MediaEnded += MediaElementObjectOnMediaEnded;
+                //MediaElementObject = new MediaElement();
                 MediaInfo();
             }
             catch (Exception e)
@@ -203,8 +204,15 @@ namespace SoonZik.ViewModel
             StaticCurrentMusic = CurrentMusic;
             SetMediaInfo();
             IsPlaylist = Singleton.Singleton.Instance().SelectedMusicSingleton.Count > 1;
-            MediaElementObject.Source = new Uri(CurrentMusic.file, UriKind.RelativeOrAbsolute);
-            MediaElementObject.Play();
+            MediaElementObject.Stop();
+            if (MediaElementObject.Source != null)
+            {
+                MediaElementObject.Source = new Uri(CurrentMusic.file, UriKind.Absolute);
+            }
+            else
+            {
+                MediaElementObject.Source = new Uri(CurrentMusic.file, UriKind.Absolute);
+            }
             PlayImage =
                 new BitmapImage(new Uri("ms-appx:///Resources/PlayerIcons/pause.png", UriKind.RelativeOrAbsolute));
         }
@@ -220,7 +228,7 @@ namespace SoonZik.ViewModel
                 CurrentMusic = Singleton.Singleton.Instance().SelectedMusicSingleton[_indexCurentMusic];
                 StaticCurrentMusic = CurrentMusic;
                 SetMediaInfo();
-                MediaElementObject.Source = new Uri(CurrentMusic.file, UriKind.RelativeOrAbsolute);
+                MediaElementObject.Source = new Uri(CurrentMusic.file, UriKind.Absolute);
                 GlobalMenuControl.MyPlayerToggleButton.Content = CurrentMusic.title;
             }
             else
@@ -233,6 +241,7 @@ namespace SoonZik.ViewModel
 
         private void MediaElementObjectOnMediaOpened(object sender, RoutedEventArgs routedEventArgs)
         {
+            MediaElementObject.Play();
         }
 
         private void SetMediaInfo()
