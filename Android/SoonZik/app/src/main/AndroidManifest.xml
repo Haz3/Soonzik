@@ -34,7 +34,8 @@
 
         <activity
             android:name="com.soonzik.soonzik.LoginActivity"
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -44,8 +45,8 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".MainActivity" android:label="@string/app_name" />
-        <activity android:name=".SignInActivity" android:label="@string/app_name" />
+        <activity android:name=".MainActivity" android:label="@string/app_name" android:screenOrientation="portrait"/>
+        <activity android:name=".SignInActivity" android:label="@string/app_name" android:screenOrientation="portrait"/>
 
         <service android:name="com.paypal.android.sdk.payments.PayPalService"
             android:exported="false" />

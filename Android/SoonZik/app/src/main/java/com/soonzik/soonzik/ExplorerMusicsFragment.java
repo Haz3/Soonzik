@@ -28,10 +28,13 @@ public class ExplorerMusicsFragment extends Fragment {
         View v;
 
         v = inflater.inflate(R.layout.fragment_explorer_music,container,false);
-
+        Log.v("EXPLORER", "HEY");
         ActiveRecord.suggest("music", 10, new ActiveRecord.OnJSONResponseCallback() {
             @Override
             public void onJSONResponse(boolean success, Object response, Class<?> classT) throws InvocationTargetException, NoSuchMethodException, java.lang.InstantiationException, IllegalAccessException {
+
+                Log.v("EXPLORER", response.toString());
+
                 JSONArray data = (JSONArray) response;
                 final ArrayList<Object> sg = ActiveRecord.jsonArrayData(data, classT);
 
@@ -47,7 +50,7 @@ public class ExplorerMusicsFragment extends Fragment {
                         Log.v("PLAY", "JOUE!");
 
                         Bundle bundle = new Bundle();
-                        bundle.putInt("music_id", 1);
+                        bundle.putInt("music_id", ((Music) sg.get(position)).getId());
 
                         Fragment frg = Fragment.instantiate(getActivity(), redirectClass);
                         frg.setArguments(bundle);

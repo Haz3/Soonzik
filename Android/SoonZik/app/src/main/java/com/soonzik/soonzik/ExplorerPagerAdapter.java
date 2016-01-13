@@ -30,8 +30,10 @@ public class ExplorerPagerAdapter extends FragmentStatePagerAdapter {
                 ExplorerMusicsFragment musicFragment = new ExplorerMusicsFragment();
                 return musicFragment;
             case 2:
-                ExplorerPacksFragment packFragment = new ExplorerPacksFragment();
-                return packFragment;
+                ExplorerAmbiancesFragment ambiancesFragment = new ExplorerAmbiancesFragment();
+                return ambiancesFragment;
+                /*ExplorerPacksFragment packFragment = new ExplorerPacksFragment();
+                return packFragment;*/
             default:
                 return null;
         }

@@ -458,10 +458,10 @@ public class ActiveRecord {
     public static void suggest(String type, int limit, final OnJSONResponseCallback callback) {
         RequestParams params = new RequestParams();
 
-        params.put("type", type);
+        /*params.put("type", type);
         if (limit > 0) {
             params.put("limit", limit);
-        }
+        }*/
 
         currentUser.getUserSecureKey(params, new User.OnJSONResponseCallback() {
             @Override

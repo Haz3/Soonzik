@@ -30,33 +30,6 @@ public class MyContentMusicsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_mycontent_music,container,false);
 
-        /*MyContent ct = ActiveRecord.currentUser.getContent();
-
-        final List<Object> sg = new ArrayList<Object>(ct.getMusics());
-
-        MusicsAdapter musicsAdapter = new MusicsAdapter(getActivity(), sg);
-        ListView lv = (ListView) v.findViewById(R.id.musicslistview);
-        lv.setAdapter(musicsAdapter);
-
-        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
-                Toast.makeText(getActivity(), (sg.get(position)).toString(), Toast.LENGTH_SHORT).show();
-
-                Log.v("PLAY", "JOUE!");
-
-                Bundle bundle = new Bundle();
-                bundle.putInt("music_id", 1);
-
-                Fragment frg = Fragment.instantiate(getActivity(), redirectClass);
-                frg.setArguments(bundle);
-
-                FragmentTransaction tx = getActivity().getSupportFragmentManager().beginTransaction();
-                tx.replace(R.id.main, frg);
-                tx.commit();
-            }
-        });*/
-
         User.getMusics(new ActiveRecord.OnJSONResponseCallback() {
             @Override
             public void onJSONResponse(boolean success, Object response, Class<?> classT) throws InvocationTargetException, NoSuchMethodException, java.lang.InstantiationException, IllegalAccessException {
@@ -68,28 +41,9 @@ public class MyContentMusicsFragment extends Fragment {
 
                 final List<Object> sg = new ArrayList<Object>(ct.getMusics());
 
-                MusicsAdapter musicsAdapter = new MusicsAdapter(getActivity(), sg);
+                MusicContentAdapter musicContentAdapter = new MusicContentAdapter(getActivity(), sg);
                 ListView lv = (ListView) getActivity().findViewById(R.id.musicslistview);
-                lv.setAdapter(musicsAdapter);
-
-                lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
-                        Toast.makeText(getActivity(), (sg.get(position)).toString(), Toast.LENGTH_SHORT).show();
-
-                        Log.v("PLAY", "JOUE!");
-
-                        Bundle bundle = new Bundle();
-                        bundle.putInt("music_id", 1);
-
-                        Fragment frg = Fragment.instantiate(getActivity(), redirectClass);
-                        frg.setArguments(bundle);
-
-                        FragmentTransaction tx = getActivity().getSupportFragmentManager().beginTransaction();
-                        tx.replace(R.id.main, frg);
-                        tx.commit();
-                    }
-                });
+                lv.setAdapter(musicContentAdapter);
             }
         });
 

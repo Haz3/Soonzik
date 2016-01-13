@@ -170,6 +170,8 @@ public class ListeningFragment extends Fragment {
                                     .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE))
                                     .snippet(lst.getMusic().getTitle() + '\n' + lst.getMusic().getUser().getUsername())
                     );
+
+                    map.setInfoWindowAdapter(new ListeningInfoWindowAdapter(getActivity(), lst));
                 }
 
                 Log.v("AROUND", data.toString());

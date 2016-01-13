@@ -105,6 +105,8 @@ public class Purchase extends ActiveRecord {
             params.put("gift_user_id", gift_id);
         }
 
+        Log.v("PURCHASE", params.toString());
+
         currentUser.getUserSecureKey(params, new User.OnJSONResponseCallback() {
             @Override
             public void onJSONResponse(boolean success, JSONObject response, RequestParams params) throws JSONException, UnsupportedEncodingException, NoSuchAlgorithmException {
@@ -115,7 +117,7 @@ public class Purchase extends ActiveRecord {
                 client.post(ActiveRecord.serverLink + className.toLowerCase() + (lastChar == 's' ? "/buypack" : "s/buypack"), params, new JsonHttpResponseHandler() {
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                        //Log.v("JSON", response.toString());
+                        Log.v("JSON", response.toString());
                         try {
                             final Class<?> classT = Class.forName("com.soonzik.soonzik." + className);
 

@@ -31,4 +31,5 @@
     <string name="picture_label">Picture</string>
     <string name="profile_picture">Profile Picture</string>
     <string name="lorem_ipsum">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec gravida dolor id auctor maximus. Sed eu urna ut mauris feugiat hendrerit. Fusce aliquet condimentum felis sed dapibus. Proin sit amet nulla ac odio mattis placerat vitae eget elit. Nunc dui neque, cursus a tristique nec, fringilla rhoncus mi. Suspendisse at condimentum felis. Donec eu rhoncus dolor. Nunc vulputate ante vel ullamcorper tempus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed in tempus erat. Maecenas in tortor lobortis, vulputate urna vel, dapibus nisi. Curabitur aliquet leo in turpis venenatis, nec pretium velit fermentum.</string>
+    <string name="pleasewait">Downloading file. Please wait …</string>
 </resources>

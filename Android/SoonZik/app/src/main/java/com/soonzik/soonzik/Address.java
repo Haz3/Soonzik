@@ -9,15 +9,15 @@ import java.util.Date;
  */
 public class Address extends ActiveRecord {
 
-    int id;
-    String numberStreet = "";
-    String complement = "";
-    String street = "";
-    String city = "";
-    String country = "";
-    String zipcode = "";
-    Date updated_at = null;
-    Date created_at = null;
+    private int id;
+    private String numberStreet = "";
+    private String complement = "";
+    private String street = "";
+    private String city = "";
+    private String country = "";
+    private String zipcode = "";
+    private Date updated_at = null;
+    private Date created_at = null;
 
     public Address() {}
 
