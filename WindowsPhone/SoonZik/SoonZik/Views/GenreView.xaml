@@ -18,7 +18,8 @@
     <Page.Resources>
         <DataTemplate x:Key="HeaderPerso">
             <ContentPresenter>
-                <TextBlock Text="{Binding Path=style_name}" FontFamily="{StaticResource Roboto}" FontStyle="Normal" FontSize="30" />
+                <TextBlock Text="{Binding Path=style_name}" FontFamily="{StaticResource Roboto}" FontStyle="Normal"
+                           FontSize="30" />
             </ContentPresenter>
         </DataTemplate>
         <DataTemplate x:Key="MusicTemplate">
@@ -44,15 +45,17 @@
             </Grid>
         </DataTemplate>
     </Page.Resources>
-    
+
     <Grid>
         <Pivot Margin="0,20,0,0" x:Name="PivotGlobal" HeaderTemplate="{StaticResource HeaderPerso}"
                Foreground="Transparent"
-               RenderTransformOrigin="0.5,0.5" Style="{StaticResource PivotStyle1}" ItemsSource="{Binding ListGenreSelected}">
+               RenderTransformOrigin="0.5,0.5" Style="{StaticResource PivotStyle1}"
+               ItemsSource="{Binding ListGenreSelected}">
             <Pivot.ItemTemplate>
                 <DataTemplate>
                     <ListBox Background="Transparent" x:Name="ListBoxGenre" ItemsSource="{Binding Path=musics}"
-                         ItemTemplate="{StaticResource MusicTemplate}" SelectionChanged="ListBoxGenre_OnSelectionChanged"/>
+                             ItemTemplate="{StaticResource MusicTemplate}"
+                             SelectionChanged="ListBoxGenre_OnSelectionChanged" />
                 </DataTemplate>
             </Pivot.ItemTemplate>
         </Pivot>

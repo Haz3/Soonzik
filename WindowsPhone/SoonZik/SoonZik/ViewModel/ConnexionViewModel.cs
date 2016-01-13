@@ -295,7 +295,7 @@ namespace SoonZik.ViewModel
             var SigBaseString = "GET&";
             SigBaseString += Uri.EscapeDataString(TwitterUrl) + "&" + Uri.EscapeDataString(SigBaseStringParams);
             var Signature = GetSignature(SigBaseString, "BtLpq9ZlFzXrFklC2f1CXqy8EsSzgRRVPZrKVh0imI2TOrZAan");
-                // TWITTER SECRET CONSUMER KEY
+            // TWITTER SECRET CONSUMER KEY
 
             TwitterUrl += "?" + SigBaseStringParams + "&oauth_signature=" + Uri.EscapeDataString(Signature);
 

@@ -60,6 +60,7 @@
     <RootPropertyPathName Name="TheAlbum" />
     <RootPropertyPathName Name="user" />
     <RootPropertyPathName Name="imageAlbum" />
+    <RootPropertyPathName Name="LoadedCommand" />
     <RootPropertyPathName Name="ArtistTwo" />
     <RootPropertyPathName Name="email" />
     <RootPropertyPathName Name="ArtistOne" />
@@ -78,7 +79,6 @@
     <RootPropertyPathName Name="artist_two" />
     <RootPropertyPathName Name="image" />
     <RootPropertyPathName Name="artist_one" />
-    <RootPropertyPathName Name="LoadedCommand" />
     <RootPropertyPathName Name="TotalPrice" />
     <RootPropertyPathName Name="ListAlbum" />
     <RootPropertyPathName Name="AlbumTappedCommand" />

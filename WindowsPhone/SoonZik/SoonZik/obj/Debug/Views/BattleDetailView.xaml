@@ -7,9 +7,17 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     xmlns:toolkit="using:Coding4Fun.Toolkit.Controls"
+    xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
+    xmlns:core="using:Microsoft.Xaml.Interactions.Core"
     DataContext="{StaticResource BattleDetailViewModel}"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
+
+    <interactivity:Interaction.Behaviors>
+        <core:EventTriggerBehavior EventName="Loaded">
+            <core:InvokeCommandAction Command="{Binding LoadedCommand}" />
+        </core:EventTriggerBehavior>
+    </interactivity:Interaction.Behaviors>
     <Grid x:Name="GlobalGrid">
         <Grid.RowDefinitions>
             <RowDefinition Height="250" />
@@ -18,8 +26,8 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <Grid Grid.Row="0" Background="Transparent">
-            <Image Height="250" Source="{Binding CurrentBattle.artist_one.image}" HorizontalAlignment="Left" />
-            <Image Height="250" Source="{Binding CurrentBattle.artist_two.image}" HorizontalAlignment="Right" />
+            <Image Height="250" Width="190" Source="{Binding CurrentBattle.artist_one.image}" HorizontalAlignment="Left" />
+            <Image Height="250" Width="190" Source="{Binding CurrentBattle.artist_two.image}" HorizontalAlignment="Right" />
 
             <Button HorizontalAlignment="Left" Height="80" Content="Vote" IsEnabled="{Binding CanVote}"
                     Foreground="Black"

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Windows.Input;
-using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media;
@@ -194,7 +193,6 @@ namespace SoonZik.ViewModel
             }
             catch (Exception e)
             {
-
             }
         }
 
@@ -207,7 +205,8 @@ namespace SoonZik.ViewModel
             IsPlaylist = Singleton.Singleton.Instance().SelectedMusicSingleton.Count > 1;
             MediaElementObject.Source = new Uri(CurrentMusic.file, UriKind.RelativeOrAbsolute);
             MediaElementObject.Play();
-            PlayImage = new BitmapImage(new Uri("ms-appx:///Resources/PlayerIcons/pause.png", UriKind.RelativeOrAbsolute));
+            PlayImage =
+                new BitmapImage(new Uri("ms-appx:///Resources/PlayerIcons/pause.png", UriKind.RelativeOrAbsolute));
         }
 
         private void MediaElementObjectOnMediaEnded(object sender, RoutedEventArgs routedEventArgs)
@@ -229,7 +228,6 @@ namespace SoonZik.ViewModel
                 PlayImage =
                     new BitmapImage(new Uri("ms-appx:///Resources/PlayerIcons/play.png", UriKind.RelativeOrAbsolute));
                 MediaElementObject.Stop();
-
             }
         }
 

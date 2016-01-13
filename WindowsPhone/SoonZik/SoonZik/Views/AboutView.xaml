@@ -48,10 +48,10 @@
                            VerticalAlignment="Center" x:Uid="Feedback" Text="" />
                 <TextBox Grid.Row="1" Background="Transparent" Foreground="#40a8e2" BorderThickness="0,0,0,0"
                          x:Uid="Email" PlaceholderText="" Text="{Binding Email, Mode=TwoWay}" />
-                <Button Grid.Row="2" HorizontalAlignment="Center" Content="{Binding ItemChoose}" >
+                <Button Grid.Row="2" HorizontalAlignment="Center" Content="{Binding ItemChoose}">
                     <Button.Flyout>
-                        <ListPickerFlyout ItemsSource="{Binding ItemList}" SelectedValue="{Binding ItemChoose, Mode=TwoWay}"
-                                          />
+                        <ListPickerFlyout ItemsSource="{Binding ItemList}"
+                                          SelectedValue="{Binding ItemChoose, Mode=TwoWay}" />
                     </Button.Flyout>
                 </Button>
                 <TextBox Grid.Row="3" Background="Transparent" Foreground="#40a8e2" BorderThickness="0,0,0,0"

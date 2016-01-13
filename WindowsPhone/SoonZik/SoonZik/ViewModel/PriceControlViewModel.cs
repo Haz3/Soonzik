@@ -15,6 +15,20 @@ namespace SoonZik.ViewModel
 {
     public class PriceControlViewModel : ViewModelBase
     {
+        #region Ctor
+
+        public PriceControlViewModel()
+        {
+            ArtisteSliderCommand = new RelayCommand(ArtisteSliderExecute);
+            AssocSliderCommand = new RelayCommand(AssocSliderExecute);
+            SoonZikSliderCommand = new RelayCommand(SoonzikSliderExecute);
+            BuyCommand = new RelayCommand(BuyExecute);
+            ThePack = SelecetdPack;
+            InitializePrice();
+        }
+
+        #endregion
+
         #region Attribute
 
         public static Pack SelecetdPack { get; set; }
@@ -40,7 +54,7 @@ namespace SoonZik.ViewModel
 
         public double ArtisteSliderValue
         {
-            get { return _artsiteSliderValue;}
+            get { return _artsiteSliderValue; }
             set
             {
                 _artsiteSliderValue = value;
@@ -107,22 +121,11 @@ namespace SoonZik.ViewModel
                 RaisePropertyChanged("SoonzikPrice");
             }
         }
-        #endregion
 
-        #region Ctor
-
-        public PriceControlViewModel()
-        {
-            ArtisteSliderCommand = new RelayCommand(ArtisteSliderExecute);
-            AssocSliderCommand = new RelayCommand(AssocSliderExecute);
-            SoonZikSliderCommand = new RelayCommand(SoonzikSliderExecute);
-            BuyCommand = new RelayCommand(BuyExecute);
-            ThePack = SelecetdPack;
-            InitializePrice();
-        }
         #endregion
 
         #region Method
+
         private void InitializePrice()
         {
             ArtisteSliderValue = 65;
@@ -140,14 +143,14 @@ namespace SoonZik.ViewModel
 
             ValidateKey.GetValideKey();
             var res = post.PurchasePack(SelecetdPack.id, Double.Parse(ThePack.averagePrice), ArtisteSliderValue,
-               AssocSliderValue, SoonzikSliderValue, Singleton.Singleton.Instance().SecureKey,
+                AssocSliderValue, SoonzikSliderValue, Singleton.Singleton.Instance().SecureKey,
                 Singleton.Singleton.Instance().CurrentUser);
             res.ContinueWith(delegate(Task<string> tmp2)
             {
                 var res2 = tmp2.Result;
                 if (res2 != null)
                 {
-                    var message = (ErrorMessage)JsonConvert.DeserializeObject(res2, typeof(ErrorMessage));
+                    var message = (ErrorMessage) JsonConvert.DeserializeObject(res2, typeof (ErrorMessage));
                     if (message.code != 201)
                         CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
                             () => { new MessageDialog("Erreur lors du paiement").ShowAsync(); });
@@ -160,23 +163,23 @@ namespace SoonZik.ViewModel
 
         private void ArtistePriceCalc()
         {
-            ArtistePrice = ((Convert.ToDouble(ThePack.averagePrice) * ArtisteSliderValue / 100)).ToString();
+            ArtistePrice = ((Convert.ToDouble(ThePack.averagePrice)*ArtisteSliderValue/100)).ToString();
         }
 
         private void AssociationPriceCalc()
         {
-            AssocPrice = ((Convert.ToDouble(ThePack.averagePrice) * AssocSliderValue / 100)).ToString();
+            AssocPrice = ((Convert.ToDouble(ThePack.averagePrice)*AssocSliderValue/100)).ToString();
         }
 
         private void SoonZikPriceCalc()
         {
-            SoonzikPrice = ((Convert.ToDouble(ThePack.averagePrice) * SoonzikSliderValue / 100)).ToString();
+            SoonzikPrice = ((Convert.ToDouble(ThePack.averagePrice)*SoonzikSliderValue/100)).ToString();
         }
 
         private void AssocSliderExecute()
         {
             ArtisteSliderValue = (100 - AssocSliderValue);
-            SoonzikSliderValue = (ArtisteSliderValue * 15) / 100;
+            SoonzikSliderValue = (ArtisteSliderValue*15)/100;
 
             ArtistePriceCalc();
             AssociationPriceCalc();
@@ -186,7 +189,7 @@ namespace SoonZik.ViewModel
         private void SoonzikSliderExecute()
         {
             ArtisteSliderValue = (100 - SoonzikSliderValue);
-            AssocSliderValue = (ArtisteSliderValue * 20) / 100;
+            AssocSliderValue = (ArtisteSliderValue*20)/100;
 
             ArtistePriceCalc();
             AssociationPriceCalc();
@@ -196,12 +199,13 @@ namespace SoonZik.ViewModel
         private void ArtisteSliderExecute()
         {
             AssocSliderValue = (100 - ArtisteSliderValue);
-            SoonzikSliderValue = (AssocSliderValue * 15) / 100;
+            SoonzikSliderValue = (AssocSliderValue*15)/100;
 
             ArtistePriceCalc();
             AssociationPriceCalc();
             SoonZikPriceCalc();
         }
+
         #endregion
     }
 }

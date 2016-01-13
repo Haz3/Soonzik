@@ -286,9 +286,10 @@ namespace SoonZik.HttpRequest
 
         public async Task<String> Feedback(string email, string type_obj, string obj, string text)
         {
-            var request = (HttpWebRequest)WebRequest.Create(ApiUrl + "feedbacks/save");
+            var request = (HttpWebRequest) WebRequest.Create(ApiUrl + "feedbacks/save");
 
-            var postData = "feedback[email]=" + email + "&feedback[type_object]=" + type_obj + "&feedback[object]=" + obj +
+            var postData = "feedback[email]=" + email + "&feedback[type_object]=" + type_obj + "&feedback[object]=" +
+                           obj +
                            "&feedback[text]=" + text;
             return await GetHttpPostResponse(request, postData);
         }

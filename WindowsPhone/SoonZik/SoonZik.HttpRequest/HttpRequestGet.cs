@@ -118,7 +118,7 @@ namespace SoonZik.HttpRequest
         public async Task<object> GetSuggest(object myObject, string type)
         {
             var request =
-                (HttpWebRequest) WebRequest.Create(ApiUrl + "suggestv2?type=" + type );
+                (HttpWebRequest) WebRequest.Create(ApiUrl + "suggestv2?type=" + type);
             return await DoRequestForObject(myObject, request);
         }
 

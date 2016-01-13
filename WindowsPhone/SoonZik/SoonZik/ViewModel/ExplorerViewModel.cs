@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.IO;
-using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -11,7 +9,6 @@ using Windows.Networking.BackgroundTransfer;
 using Windows.Storage;
 using Windows.UI.Core;
 using Windows.UI.Popups;
-using Windows.UI.Xaml;
 using Windows.UI.Xaml.Media.Imaging;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
@@ -39,7 +36,7 @@ namespace SoonZik.ViewModel
             ListAmbiance = new ObservableCollection<Ambiance>();
 
             InfluenceTapped = new RelayCommand(InfluenceTappedExecute);
-           // AmbianceTapped = new RelayCommand(AmbianceTappedExecute);
+            // AmbianceTapped = new RelayCommand(AmbianceTappedExecute);
             AlbumCommand = new RelayCommand(AlbumCommandExecute);
             TappedCommand = new RelayCommand(ArtisteTappedCommand);
             AddToPlaylist = new RelayCommand(AddToPlaylistExecute);
@@ -52,6 +49,7 @@ namespace SoonZik.ViewModel
         #endregion
 
         #region Attribute
+
         public ICommand AddToPlaylist { get; private set; }
         public ICommand AddMusicToCart { get; private set; }
         public ICommand DowloadMusic { get; private set; }
@@ -66,6 +64,7 @@ namespace SoonZik.ViewModel
         private string _crypto;
         public static Music SelecMusic { get; set; }
         private Influence _selectedInfluence;
+
         public Influence SelectedInfluence
         {
             get { return _selectedInfluence; }
@@ -77,6 +76,7 @@ namespace SoonZik.ViewModel
         }
 
         private Ambiance _selectedAmbiance;
+
         public Ambiance SelectedAmbiance
         {
             get { return _selectedAmbiance; }
@@ -157,7 +157,7 @@ namespace SoonZik.ViewModel
 
         private void InfluenceTappedExecute()
         {
-            int id = SelectedInfluence.id;
+            var id = SelectedInfluence.id;
             GenreViewModel.TheListGenres = new ObservableCollection<Genre>();
             GenreViewModel.TheListGenres = SelectedInfluence.genres;
             GlobalMenuControl.SetChildren(new GenreView());
@@ -274,10 +274,7 @@ namespace SoonZik.ViewModel
                         foreach (var item in test)
                         {
                             CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
-                                () =>
-                                {
-                                    ListInfluences.Add(item);
-                                });
+                                () => { ListInfluences.Add(item); });
                         }
                     }
                 });
@@ -349,7 +346,10 @@ namespace SoonZik.ViewModel
                                             {
                                                 foreach (var music in am.musics)
                                                 {
-                                                    music.album.imageAlbum = new BitmapImage(new System.Uri(Constant.UrlImageAlbum + music.album.image, UriKind.RelativeOrAbsolute));
+                                                    music.album.imageAlbum =
+                                                        new BitmapImage(
+                                                            new Uri(Constant.UrlImageAlbum + music.album.image,
+                                                                UriKind.RelativeOrAbsolute));
                                                 }
                                                 ListAmbiance.Add(am);
                                             });
