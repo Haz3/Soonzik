@@ -14,8 +14,8 @@ module	Multimedia
 		def initialize(dir = nil, file = nil)
 			@os = nil
 			@bits = 32
-			@directory = dir.gsub(' ', '\\ ')
-			@file = file.gsub(' ', '\\ ')
+			@directory = dir
+			@file = file
 			@file_type = nil
 			@begin = nil
 			@end = nil
@@ -73,7 +73,7 @@ module	Multimedia
 
 		# To set or change the file to use
 		def setFile(file = nil)
-			@file = file.gsub(' ', '\\ ')
+			@file = file
 	    @file_type = File.extname("#{@directory}/#{@file}") if @file != nil
 		end
 
@@ -92,7 +92,7 @@ module	Multimedia
 	      output_file = '"'+output_file+'"'
 	    end
 
-	  	to_exec = "#{getFFMPEGexec()} -i #{@directory}/#{file} -ss #{@begin} -t #{@end - @begin} #{@directory}/#{output_file}" + ERROR
+	  	to_exec = "'#{getFFMPEGexec()}' -i '#{@directory}/#{file}' -ss #{@begin} -t #{@end - @begin} '#{@directory}/#{output_file}'" + ERROR
 	  	output = `#{to_exec}`
 	  	puts output
 	  	return output
@@ -123,7 +123,7 @@ module	Multimedia
 		      file = '"'+file+'"'
 		    end
 
-		  	to_exec = "#{getFFMPEGexec()} -i #{@directory}/#{file}" + ERROR
+		  	to_exec = "'#{getFFMPEGexec()}' -i '#{@directory}/#{file}'" + ERROR
 		  	output = `#{to_exec}`
 
 		  	if output.include? 'command not found' # Check here whether we have installed ffmpeg or not.
@@ -147,7 +147,7 @@ module	Multimedia
 
 		  #
 		  def getFFMPEGexec
-		  	return Rails.root.join('app', 'assets', 'execs', "ffmpeg-#{@os}-#{@bits}bits#{@extension}").to_s.gsub(' ', '\\ ')
+		  	return "'" + Rails.root.join('app', 'assets', 'execs', "ffmpeg-#{@os}-#{@bits}bits#{@extension}").to_s + "'"
 		  end
 	end
 end
