@@ -73,7 +73,6 @@ SoonzikApp.controller('PacksCtrl', ['$scope', '$routeParams', 'SecureAuth', 'HTT
 				$scope.is_partial = $scope.thisPack.partial_albums;
 
 				checkPartial();
-
 				timeLeft();
 
 				$scope.loading = false;
@@ -133,8 +132,10 @@ SoonzikApp.controller('PacksCtrl', ['$scope', '$routeParams', 'SecureAuth', 'HTT
 	}
 
 	var checkPartial = function() {
-		for (var i = 0; i < $scope.is_partial; i++) {
-			console.log($scope.is_partial[i]);
+		$scope.partial_albums_id = [];
+
+		for (var i = 0; i < $scope.thisPack.partial_albums.length; i++) {
+			$scope.partial_albums_id += ($scope.thisPack.partial_albums[i].album_id);
 		}
 	}
 

@@ -7,7 +7,7 @@
       %div{"ng-init" => "timeLeft()"}
         %h5.subheader.text-center
           {{ labels.DISPLAY_PACK_TIMELEFT }} : {{ thisPack.timeLeftPack }}
-      .ul.large-block-grid-3.centered.columns
+      .ul.large-block-grid-3.centered.columns{'ng-init' => 'check_partial()'}
         %li{"ng-repeat" => "album in thisPack.albums"}
           .panel
             %h3.subheader
@@ -19,6 +19,10 @@
             {{ labels.DISPLAY_PACK_ARTIST_NAME }} : {{ album.user.username }}
             %br
             {{ labels.DISPLAY_PACK_YEAR_ALBUM }} : {{ album.yearProd }}
+            %div{'ng-repeat' => 'partial in partial_albums_id'}
+              %p.red{'ng-if' => 'partial == album.id'}
+                {{ thisPack.averagePrice }} € or more to get this album
+
       .row{ 'ng-if' => 'user != false' }
         .large-6.columns
           .panel.left{"ng-init" => "managePrice()"}
@@ -26,6 +30,10 @@
               Define your price
             .small-3.columns
               %input{ type: "text", "ng-model" => "input.price", "ng-change" => "updatePrice()" }
+            .large-9.columns
+              Average
+            .small-3.columns
+              {{ thisPack.averagePrice }} €
             .large-9.columns
               .divider
               Artist
