@@ -10,15 +10,10 @@ module	Multimedia
 		ERROR = ' 2>&1'
   	MAIN_REGEX = /Duration: (\d\d:\d\d:\d\d)/
 
-  	def lol
-  		`./a.out lol`
-  	end
-
 		# The constructor. Take one parameter, the file to cut. It's optionnal and can be set later
 		def initialize(dir = nil, file = nil)
 			@os = nil
 			@bits = 32
-			puts "DIR => #{dir}" 
 			@directory = dir
 			@file = file
 			@file_type = nil
@@ -87,7 +82,6 @@ module	Multimedia
 			if (!isStart? || !isEnd? || @file == nil)
 				return nil
 			end
-			puts "DIR => #{@directory}" 
 
 			file = @file
 			directory = @directory
@@ -102,10 +96,7 @@ module	Multimedia
 	    end
 
 	  	to_exec = "#{getFFMPEGexec()} -i #{directory}/#{file} -ss #{@begin} -t #{@end - @begin} #{directory}/#{output_file}" + ERROR
-	  	#output = `#{to_exec}`
-	  	puts "---------------------------------------------"
-	  	puts to_exec
-	  	puts "--------------------------------------------"
+	  	output = `#{to_exec}`
 	  	return output
 		end
 
