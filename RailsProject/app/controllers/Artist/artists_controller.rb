@@ -11,10 +11,6 @@ module Artist
 
     # For all responses in this controller, return the CORS access control headers.
     def cors_set_access_control_headers
-      if ((!user_signed_in?) || (user_signed_in? && !current_user.isArtist?))
-        redirect_to root_url subdomain: false
-      end
-
       headers['Access-Control-Allow-Origin'] = '*'
       headers['Access-Control-Expose-Headers'] = 'ETag'
       headers['Access-Control-Allow-Methods'] = 'POST, GET, OPTIONS'

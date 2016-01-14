@@ -100,6 +100,10 @@ protected
   		elsif @security
   			@u = User.find_by_id(params[:user_id])
   		end
+
+      if (@u == nil || (@u && !@u.isArtist?))
+        redirect_to root_url subdomain: false
+      end
     end
 
 
