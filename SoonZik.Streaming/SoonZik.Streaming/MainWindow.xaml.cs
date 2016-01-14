@@ -451,7 +451,7 @@ namespace SoonZik.Streaming
                         + "&duration=" + duration
                         + "&price=" + price_tb.Text
                         + "&filename=" + filename.Remove(filename.Length - 4)
-                        + "&limited=" + "true"
+                        + "&limited=" + "false"
                         + "&user_id=" + Singleton.Singleton.Instance().TheArtiste.id
                         + "&secureKey=" + Security.getSecureKey(Singleton.Singleton.Instance().TheArtiste.id.ToString());
 
@@ -481,7 +481,7 @@ namespace SoonZik.Streaming
                 {
                     end += char_nb;
                     fileData = file.Substring(begin, char_nb);
-                    postData = "filename=" + filename + "&data=" + WebUtility.UrlEncode(fileData) + "&user_id=" + Singleton.Singleton.Instance().TheArtiste.id.ToString() + "&secureKey=" + Security.getSecureKey(Singleton.Singleton.Instance().TheArtiste.id.ToString());
+                    postData = "filename=" + filename.Remove(filename.Length - 4) + "&data=" + WebUtility.UrlEncode(fileData) + "&user_id=" + Singleton.Singleton.Instance().TheArtiste.id.ToString() + "&secureKey=" + Security.getSecureKey(Singleton.Singleton.Instance().TheArtiste.id.ToString());
                     begin += char_nb;
                 }
                 else
@@ -490,7 +490,7 @@ namespace SoonZik.Streaming
                     fileData = file.Substring(begin, end);
                     if (fileData == "")
                         return;
-                    postData = "filename=" + filename + "&data=" + WebUtility.UrlEncode(fileData) + "&user_id=" + Singleton.Singleton.Instance().TheArtiste.id.ToString() + "&secureKey=" + Security.getSecureKey(Singleton.Singleton.Instance().TheArtiste.id.ToString());
+                    postData = "filename=" + filename.Remove(filename.Length - 4) + "&data=" + WebUtility.UrlEncode(fileData) + "&user_id=" + Singleton.Singleton.Instance().TheArtiste.id.ToString() + "&secureKey=" + Security.getSecureKey(Singleton.Singleton.Instance().TheArtiste.id.ToString());
                     await post.GetHttpPostResponse(request, postData);
 
                     do_finish(); // --> END

@@ -65,11 +65,20 @@ namespace SoonZik.Streaming.View
 
         private async void MakeConnexion()
         {
-            var connec = new HttpWebRequestPost();
-            await connec.ConnexionSimple(_username, _password);
-            var res = connec.Received;
-            GetUser(res);
-            MainWindow.ConnectionWindow.Close();
+            try
+            {
+                var connec = new HttpWebRequestPost();
+                await connec.ConnexionSimple(_username, _password);
+                var res = connec.Received;
+                GetUser(res);
+                MainWindow.ConnectionWindow.Close();
+
+            }
+            catch
+            {
+                MessageBox.Show("Erreur de connexion", "Erreur");
+                return;
+            }
         }
 
         private void GetUser(string res)
