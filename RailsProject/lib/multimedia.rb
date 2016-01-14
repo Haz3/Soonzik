@@ -96,7 +96,7 @@ module	Multimedia
 	      output_file = '"'+output_file+'"'
 	    end
 
-	  	to_exec = "'#{getFFMPEGexec()}' -i '#{@directory}/#{file}' -ss #{@begin} -t #{@end - @begin} '#{@directory}/#{output_file}'" + ERROR
+	  	to_exec = "#{getFFMPEGexec()} -i #{@directory}/#{file} -ss #{@begin} -t #{@end - @begin} #{@directory}/#{output_file}" + ERROR
 	  	output = `#{to_exec}`
 	  	puts output
 	  	return output
@@ -127,7 +127,7 @@ module	Multimedia
 		      file = '"'+file+'"'
 		    end
 
-		  	to_exec = "'#{getFFMPEGexec()}' -i '#{@directory}/#{file}'" + ERROR
+		  	to_exec = "#{getFFMPEGexec()} -i #{@directory}/#{file}" + ERROR
 		  	output = `#{to_exec}`
 
 		  	if output.include? 'command not found' # Check here whether we have installed ffmpeg or not.
