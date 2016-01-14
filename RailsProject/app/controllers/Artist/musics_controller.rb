@@ -72,7 +72,7 @@ module Artist
 	        end
 	        hasWritten = true
 
-	        cutObject = Multimedia::CutAudio.new(File.join('app', 'assets', 'musics', @u.id.to_s).to_s, newFilename)
+	        cutObject = Multimedia::CutAudio.new(Rails.root.join('app', 'assets', 'musics', @u.id.to_s).to_s, newFilename)
 	        
   				# new music object
 	        parameters = ActionController::Parameters.new({ music: p })
@@ -496,10 +496,11 @@ module Artist
 						a.descriptions << d
 					end
 
-	        cutObject = Multimedia::CutAudio.new(File.join('app', 'assets', 'musics', @u.id.to_s).to_s, params[:filename].gsub(/[^0-9A-Za-z\.-]/, ''))
-	        cutObject.determineStart(0)
-					cutObject.determineEnd(30)
-					cutObject.cut
+					File.open(Rails.root.join('app', 'assets', 'musics', @u.id.to_s, params[:filename].gsub(/[^0-9A-Za-z\.-]/, '')), 'ab') do |f|
+	          File.open(Rails.root.join('app', 'assets', 'musics', @u.id.to_s, 'cut_' + params[:filename].gsub(/[^0-9A-Za-z\.-]/, '')), 'wb') do |f2|
+		          f2.write(f.read)
+		        end
+	        end
 
 	    	elsif (params.has_key?(:filename) && params.has_key?(:data))
 	    		n = 0
