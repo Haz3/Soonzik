@@ -18,6 +18,7 @@ module	Multimedia
 		def initialize(dir = nil, file = nil)
 			@os = nil
 			@bits = 32
+			puts "DIR => #{dir}" 
 			@directory = dir
 			@file = file
 			@file_type = nil
@@ -86,17 +87,21 @@ module	Multimedia
 			if (!isStart? || !isEnd? || @file == nil)
 				return nil
 			end
+			puts "DIR => #{@directory}" 
 
 			file = @file
+			directory = @directory
 			output_file = "cut_" + @file
-	  	if file.include?(' ') || file.include?("'")
+	  	if file.include?(' ') || file.include?("'") || directory.include?(' ') || directory.include?("'")
 	      file = file.to_s.dup
 	      output_file = output_file.to_s.dup
-	      file = '"'+file+'"'
-	      output_file = '"'+output_file+'"'
+	      directory = directory.to_s.dup
+	      file = file+'"'
+	      output_file = +output_file+'"'
+	      directory = '"' + directory
 	    end
 
-	  	to_exec = "#{getFFMPEGexec()} -i #{@directory}/#{file} -ss #{@begin} -t #{@end - @begin} #{@directory}/#{output_file}" + ERROR
+	  	to_exec = "#{getFFMPEGexec()} -i #{directory}/#{file} -ss #{@begin} -t #{@end - @begin} #{directory}/#{output_file}" + ERROR
 	  	#output = `#{to_exec}`
 	  	puts "---------------------------------------------"
 	  	puts to_exec
@@ -120,16 +125,17 @@ module	Multimedia
 
 		  # To parse the ffmpeg output
 		  def ffmpeg_to_parse
-		  	file = @file
-		  	if file.include? ' '
+				file = @file
+				directory = @directory
+				output_file = "cut_" + @file
+		  	if file.include?(' ') || file.include?("'") || directory.include?(' ') || directory.include?("'")
 		      file = file.to_s.dup
-		      file = '"'+file+'"'
-		    end
-		    if @file.include? "'" # For something like: "Kaneda's_Theme"
-		      file = '"'+file+'"'
+		      directory = directory.to_s.dup
+		      file = file+'"'
+		      directory = '"' + directory
 		    end
 
-		  	to_exec = "#{getFFMPEGexec()} -i #{@directory}/#{file}" + ERROR
+		  	to_exec = "#{getFFMPEGexec()} -i #{directory}/#{file}" + ERROR
 		  	output = `#{to_exec}`
 
 		  	if output.include? 'command not found' # Check here whether we have installed ffmpeg or not.
