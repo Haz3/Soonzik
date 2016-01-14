@@ -112,6 +112,8 @@ module API
     def find
       begin
         music_object = nil
+        puts "byPass present ? #{@bypass.present?}"
+        byPass = (@bypass.present?) ? true : false
         if (defined?@attribute)
           # - - - - - - - -
           @attribute.each do |x, y|
@@ -123,14 +125,17 @@ module API
             end
 
             if (music_object == nil)          #music_object doesn't exist
-              music_object = Music.eager_load([:album, :genres, :user]).where("album_id IS NOT NULL").where(condition)
+              music_object = Music.eager_load([:album, :genres, :user, :ambiances]).where(condition)
+              music_object = music_object.where("album_id IS NOT NULL") if !byPass
             else                              #music_object exists
               music_object = music_object.where(condition)
             end
           end
           # - - - - - - - -
         else
-          music_object = Music.eager_load([:album, :genres, :user]).where("album_id IS NOT NULL").all            #no attribute specified
+          music_object = Music.eager_load([:album, :genres, :user, :ambiances])
+          music_object = music_object.where("album_id IS NOT NULL") if !byPass
+          music_object = music_object.all            #no attribute specified
         end
 
         order_asc = ""
@@ -178,6 +183,7 @@ module API
         @returnValue = { content: music_object.as_json(:only => Music.miniKey, :include => {
                                                         :album => { :only => Album.miniKey },
                                                         :genres => { :only => Genre.miniKey },
+                                                        :ambiances => { :only => Ambiance.miniKey },
                                                         :user => {:only => User.miniKey}
                                                       },
                                                       methods: :getAverageNote) }

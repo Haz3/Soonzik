@@ -30,6 +30,7 @@ class Music < ActiveRecord::Base
   belongs_to :user
   has_many :listenings
   has_many :music_notes
+  has_and_belongs_to_many :ambiances
   has_and_belongs_to_many :commentaries
   has_and_belongs_to_many :playlist_objects
   has_and_belongs_to_many :genres

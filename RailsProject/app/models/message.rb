@@ -40,7 +40,7 @@ class Message < ActiveRecord::Base
     user = nil
     if (message.has_key?("user_id") && message.has_key?("secureKey"))
       begin
-        u = User.where(id: message["user_id"]).where(secureKey: message["secureKey"]).first
+        user = User.where(id: message["user_id"]).where(secureKey: message["secureKey"]).first
       rescue
       end
     elsif (current_user != nil)

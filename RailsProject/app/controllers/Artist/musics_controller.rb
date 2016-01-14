@@ -33,6 +33,7 @@ module Artist
   		error = false
   		m = nil
   		http = :ok
+  		ambiances = []
   		genres = []
   		newFilename = nil
   		hasWritten = false
@@ -54,6 +55,7 @@ module Artist
 	  		end
 
 				genres = JSON.parse(params[:genres]) if params.has_key?(:genres)
+				ambiances = JSON.parse(params[:ambiances]) if params.has_key?(:ambiances)
 
 	      if error == false && params[:file].content_type == "audio/mp3"
 	        randomNumber = rand(1000..10000)
@@ -92,6 +94,15 @@ module Artist
 							rescue
 							end
 						}
+						ambiances.each { |ambiance|
+							begin
+								a = Ambiance.find_by_id(ambiance)
+								if g != nil
+									a.musics << m
+								end
+							rescue
+							end
+						}
 		      else
 		      	error = m.errors.full_messages
 		      	File.delete Rails.root.join('app', 'assets', 'musics', @u.id.to_s, newFilename).to_s
@@ -111,7 +122,7 @@ module Artist
 		  	http = :bad_request
 		  end
 
-  		render :json => { error: error, music: m.as_json(:include => { genres: {} }) }, :status => http
+  		render :json => { error: error, music: m.as_json(:include => { genres: {}, ambiances: {} }) }, :status => http
   	end
 
   	# Route to update a music. Usefull to change album too
@@ -135,17 +146,31 @@ module Artist
 		  			u = m.update(Music.music_params params) if m.user_id == @u.id
 		  			if (u == false)
 		  				http = :bad_request
-		  			elsif (params.has_key?(:genres))
-		  				m.genres = []
-		  				params[:genres].each { |genre|
-								begin
-									g = Genre.find_by_id(genre)
-									if g != nil
-										g.musics << m
+		  			else
+		  				if (params.has_key?(:genres))
+			  				m.genres = []
+			  				params[:genres].each { |genre|
+									begin
+										g = Genre.find_by_id(genre)
+										if g != nil
+											g.musics << m
+										end
+									rescue
 									end
-								rescue
-								end
-							}
+								}
+							end
+		  				if (params.has_key?(:ambiances))
+			  				m.ambiances = []
+			  				params[:ambiances].each { |ambiance|
+									begin
+										g = Ambiance.find_by_id(ambiance)
+										if g != nil
+											g.musics << m
+										end
+									rescue
+									end
+								}
+							end
 							m.reload
 		  			end
 		  		end
@@ -156,7 +181,7 @@ module Artist
 	  		http = :bad_request
 	  	end
 
-  		render :json => { music: m.as_json(:include => { genres: {} }) }, :status => http
+  		render :json => { music: m.as_json(:include => { genres: {}, ambiances: {} }) }, :status => http
   	end
 
   	# Route to create an album
