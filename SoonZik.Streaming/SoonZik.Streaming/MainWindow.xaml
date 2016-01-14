@@ -11,10 +11,10 @@
     <Grid>
         <TabControl HorizontalAlignment="Left" Height="689" VerticalAlignment="Top" Width="600">
             <TabItem Header="Record" FontSize="20">
-                <Grid Background="#FF181818">
+                <Grid Background="#FF181818" Margin="0,1,0,-1">
                     <TextBlock x:Name="WelcomeTextBlock" Foreground="DeepSkyBlue" FontSize="30" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="10,0,0,0"/>
                     <TextBlock x:Name="DeviceBlock" Foreground="DeepSkyBlue" FontSize="20" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="30,45,0,0" Text="Devices"/>
-                    <ListBox x:Name="DevicesListBox" Background="#424242" Height="200" Width="550" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,80,0,0" SelectionMode="Single" SelectedItem="{Binding SelectedCapabilities}">
+                    <ListBox x:Name="DevicesListBox"  Background="#424242" Height="200" Width="550" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,80,0,0" SelectionMode="Single" SelectedItem="{Binding SelectedCapabilities}">
                         <ListBox.ItemTemplate>
                             <DataTemplate>
                                 <TextBlock Text="{Binding FriendlyName}"/>
@@ -64,9 +64,22 @@
 
                     <TextBlock Text="Volume" Height="30" Foreground="DeepSkyBlue" FontSize="20"
                                HorizontalAlignment="Left" Margin="20,200,0,0"/>
-                    
+
                     <Slider x:Name="SliderVolume" Height="20" Width="550"
                             HorizontalAlignment="Left" Margin="20,250,0,0" Maximum="1" Minimum="0" ValueChanged="SliderVolume_OnValueChanged"/>
+
+                    <TextBlock HorizontalAlignment="Left" Margin="10,485,0,0" TextWrapping="Wrap" Foreground="DeepSkyBlue" Text="Sample Rate" VerticalAlignment="Top" Height="30" Width="66"/>
+                    <TextBlock HorizontalAlignment="Left" Margin="10,524,0,0" TextWrapping="Wrap" Foreground="DeepSkyBlue" Text="Bit Depth" VerticalAlignment="Top"  Height="30" Width="50"/>
+                    <TextBlock HorizontalAlignment="Left" Margin="10,563,0,0" TextWrapping="Wrap" Foreground="DeepSkyBlue" Text="Channel Count" VerticalAlignment="Top" Height="30" Width="78"/>
+                    <TextBlock HorizontalAlignment="Left" Margin="10,603,0,0" TextWrapping="Wrap" Foreground="DeepSkyBlue" Text="Sample Type" VerticalAlignment="Top" Height="30" Width="114"/>
+                    <TextBox HorizontalAlignment="Left" Height="30" Margin="197,492,0,0" TextWrapping="Wrap" Text="{Binding SampleRate, Mode=TwoWay}" VerticalAlignment="Top" Width="120"/>
+                    <TextBox HorizontalAlignment="Left" Height="30" Margin="197,531,0,0" TextWrapping="Wrap" Text="{Binding BitDepth, Mode=TwoWay}" IsEnabled="{Binding IsBitDepthConfigurable}" VerticalAlignment="Top" Width="120"/>
+                    <TextBox HorizontalAlignment="Left" Height="30" Margin="197,570,0,0" TextWrapping="Wrap" Text="{Binding ChannelCount, Mode=TwoWay}" VerticalAlignment="Top" Width="120"/>
+                    <ComboBox HorizontalAlignment="Left" Margin="197,611,0,0" SelectedIndex="{Binding SampleTypeIndex, Mode=TwoWay}" VerticalAlignment="Top" Width="120" Height="30">
+                        <TextBlock><Run Text="IEEE Float"/></TextBlock>
+                        <TextBlock><Run Text="PCM"/></TextBlock>
+                    </ComboBox>
+
                 </Grid>
             </TabItem>
             <TabItem Header="Upload" FontSize="20">
