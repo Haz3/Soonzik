@@ -14,8 +14,8 @@ module	Multimedia
 		def initialize(dir = nil, file = nil)
 			@os = nil
 			@bits = 32
-			@directory = dir
-			@file = file
+			@directory = dir.gsub(' ', '\ ')
+			@file = file.gsub(' ', '\ ')
 			@file_type = nil
 			@begin = nil
 			@end = nil
@@ -73,7 +73,7 @@ module	Multimedia
 
 		# To set or change the file to use
 		def setFile(file = nil)
-			@file = file
+			@file = file.gsub(' ', '\ ')
 	    @file_type = File.extname("#{@directory}/#{@file}") if @file != nil
 		end
 
