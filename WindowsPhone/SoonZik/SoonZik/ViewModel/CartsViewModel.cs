@@ -275,7 +275,7 @@ namespace SoonZik.ViewModel
                         var stringJson = JObject.Parse(test).SelectToken("code").ToString();
                         if (stringJson == "202")
                         {
-                            new MessageDialog("Obj delete").ShowAsync();
+                            new MessageDialog("Article supprime").ShowAsync();
                             Charge();
                         }
                         else

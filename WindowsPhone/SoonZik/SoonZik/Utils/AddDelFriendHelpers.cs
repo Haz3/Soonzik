@@ -48,7 +48,7 @@ namespace SoonZik.Utils
                                         Singleton.Singleton.Instance().CurrentUser.friends.Add(user);
                                     }
                                     ServiceLocator.Current.GetInstance<MyNetworkViewModel>().UpdateFriend();
-                                    new MessageDialog("Supr effectue").ShowAsync();
+                                    new MessageDialog("Supression effectuee").ShowAsync();
                                 });
                         }
                     });
@@ -82,7 +82,7 @@ namespace SoonZik.Utils
                                             Singleton.Singleton.Instance().CurrentUser.friends.Add(user);
                                         }
                                         ServiceLocator.Current.GetInstance<MyNetworkViewModel>().UpdateFriend();
-                                        new MessageDialog("Demande effectue").ShowAsync();
+                                        new MessageDialog("Demande effectuee").ShowAsync();
                                     });
                             }
                         });

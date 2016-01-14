@@ -278,11 +278,14 @@ namespace SoonZik.ViewModel
 
         private void SelectionExecute()
         {
-            TheArtiste = TheUser;
-            TheArtiste.image = new Uri(UrlImage + TheUser.image, UriKind.RelativeOrAbsolute).ToString();
-            SetFollowText();
-            Charge();
-            CheckIfFriend();
+            if (TheUser != null)
+            {
+                TheArtiste = TheUser;
+                TheArtiste.image = new Uri(UrlImage + TheUser.image, UriKind.RelativeOrAbsolute).ToString();
+                SetFollowText();
+                Charge();
+                CheckIfFriend();
+            }
         }
 
         private void FollowCommandExecute()

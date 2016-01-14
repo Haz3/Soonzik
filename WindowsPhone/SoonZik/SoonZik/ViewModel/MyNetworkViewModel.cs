@@ -177,6 +177,12 @@ namespace SoonZik.ViewModel
                 Opacity = 0.6
             };
             MeaagePrompt.Show();
+            MeaagePrompt.Unloaded += MeaagePromptOnUnloaded;
+        }
+
+        private void MeaagePromptOnUnloaded(object sender, RoutedEventArgs routedEventArgs)
+        {
+            UpdateFriend();
         }
 
         private void FollowerCommandExecute()
