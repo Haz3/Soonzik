@@ -151,7 +151,7 @@ module	Multimedia
 
 		  #
 		  def getFFMPEGexec
-		  	return File.join('.', 'app', 'assets', 'execs', "ffmpeg-#{@os}-#{@bits}bits#{@extension}").to_s
+		  	return File.join('app', 'assets', 'execs', "ffmpeg-#{@os}-#{@bits}bits#{@extension}").to_s
 		  end
 	end
 end
