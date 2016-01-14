@@ -20,7 +20,7 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Tweet something!"
+            android:hint="@string/tweet_something"
             android:background="#FFF"
             android:layout_alignParentBottom="true"
             android:layout_alignParentLeft="true"
@@ -32,7 +32,7 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Send"
+            android:text="@string/send"
             android:layout_alignBaseline="@+id/edittexttweet"
             android:layout_alignBottom="@+id/edittexttweet"
             android:layout_alignParentRight="true"

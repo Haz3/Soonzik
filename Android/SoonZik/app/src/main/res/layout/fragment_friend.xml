@@ -7,7 +7,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/friendLabelName"
-        android:text="Name of the friend :"/>
+        android:text="@string/friend_name"/>
 
     <TextView android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -17,7 +17,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/friendLabelId"
-        android:text="Id of the friend :"/>
+        android:text="@string/friend_id"/>
 
     <TextView android:layout_width="wrap_content"
         android:layout_height="wrap_content"

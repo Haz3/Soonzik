@@ -9,7 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -46,9 +45,6 @@ public class ExplorerResultFragment extends Fragment {
                     lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                         @Override
                         public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
-                            Toast.makeText(getActivity(), (musics.get(position)).toString(), Toast.LENGTH_SHORT).show();
-
-                            Log.v("PLAY", "JOUE!");
 
                             Bundle bundle = new Bundle();
                             bundle.putInt("music_id", 1);

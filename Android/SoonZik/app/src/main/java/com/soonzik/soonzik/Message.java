@@ -56,6 +56,8 @@ public class Message extends ActiveRecord {
                 ActiveRecord.secureCase(currentUser, params, response.getString("key"));
                 AsyncHttpClient client = new AsyncHttpClient();
 
+                Log.v("CONVERSATION", ActiveRecord.serverLink + "messages/conversation/" + Integer.toString(userId) + "?" + params.toString());
+
                 client.get(ActiveRecord.serverLink + "messages/conversation/" + Integer.toString(userId), params, new JsonHttpResponseHandler() {
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, JSONObject response) {

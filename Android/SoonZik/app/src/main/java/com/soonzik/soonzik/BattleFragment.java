@@ -13,7 +13,6 @@ import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -160,9 +159,6 @@ public class BattleFragment extends Fragment {
                             lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                                 @Override
                                 public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
-                                    Toast.makeText(getActivity(), (sg.get(position)).toString(), Toast.LENGTH_SHORT).show();
-
-                                    Log.v("PLAY", "JOUE!");
 
                                     MediaPlayer mediaPlayer;
 
@@ -202,9 +198,6 @@ public class BattleFragment extends Fragment {
                             lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                                 @Override
                                 public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
-                                    Toast.makeText(getActivity(), (sg.get(position)).toString(), Toast.LENGTH_SHORT).show();
-
-                                    Log.v("PLAY", "JOUE!");
 
                                     MediaPlayer mediaPlayer;
 
@@ -232,8 +225,6 @@ public class BattleFragment extends Fragment {
                                     @Override
                                     public void onJSONResponse(boolean success, Object response, Class<?> classT) throws InvocationTargetException, NoSuchMethodException, java.lang.InstantiationException, IllegalAccessException {
 
-                                        Toast.makeText(getActivity(), "Vote for " + battle.getArtistOne().getUsername(), Toast.LENGTH_SHORT).show();
-
                                         Bundle bundle = new Bundle();
                                         bundle.putInt("battle_id", id);
                                         Fragment frg = Fragment.instantiate(getActivity(), redirectClass);
@@ -249,7 +240,6 @@ public class BattleFragment extends Fragment {
                                 Battle.vote(id, battle.getArtistTwo().getId(), new ActiveRecord.OnJSONResponseCallback() {
                                     @Override
                                     public void onJSONResponse(boolean success, Object response, Class<?> classT) throws InvocationTargetException, NoSuchMethodException, java.lang.InstantiationException, IllegalAccessException {
-                                        Toast.makeText(getActivity(), "Vote for " + battle.getArtistTwo().getUsername(), Toast.LENGTH_SHORT).show();
 
                                         Bundle bundle = new Bundle();
                                         bundle.putInt("battle_id", id);

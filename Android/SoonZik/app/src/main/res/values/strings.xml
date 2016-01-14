@@ -15,6 +15,7 @@
     <string name="action_create_playlist">Create a new playlist</string>
     <string name="dialog_create_playlist">Create Playlist</string>
     <string name="create_playlist_validate">Validate</string>
+    <string name="send">Send</string>
     <string name="cancel">Cancel</string>
     <string name="playlistTitle">Title</string>
     <string name="search_hint">Search</string>
@@ -26,10 +27,95 @@
     <string name="lastname_label">Last Name</string>
     <string name="username_label">Username</string>
     <string name="birthday_label">Birthday</string>
+    <string name="password_label">Password</string>
+    <string name="language_label">Language</string>
+    <string name="signin_label">Sign in</string>
+    <string name="update_information_label">Update your informations</string>
     <string name="description_label">Description</string>
     <string name="update_button">Update</string>
     <string name="picture_label">Picture</string>
     <string name="profile_picture">Profile Picture</string>
     <string name="lorem_ipsum">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec gravida dolor id auctor maximus. Sed eu urna ut mauris feugiat hendrerit. Fusce aliquet condimentum felis sed dapibus. Proin sit amet nulla ac odio mattis placerat vitae eget elit. Nunc dui neque, cursus a tristique nec, fringilla rhoncus mi. Suspendisse at condimentum felis. Donec eu rhoncus dolor. Nunc vulputate ante vel ullamcorper tempus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed in tempus erat. Maecenas in tortor lobortis, vulputate urna vel, dapibus nisi. Curabitur aliquet leo in turpis venenatis, nec pretium velit fermentum.</string>
     <string name="pleasewait">Downloading file. Please wait …</string>
+    <string name="delete">Delete</string>
+    <string name="title_label">The great title</string>
+    <string name="album_label">The great album</string>
+    <string name="artist_label">Name of the artist</string>
+    <string name="the_user_is">The user is :</string>
+
+    <string name="purchase_label">PURCHASE</string>
+    <string name="total_label">Total</string>
+    <string name="nb_likes">0</string>
+    <string name="nb_title">5</string>
+    <string name="nb_followers">4</string>
+    <string name="nb_vote">1</string>
+    <string name="nb_article">0</string>
+    <string name="nb_article_label">Number of article</string>
+    <string name="timesup">8H</string>
+    <string name="plus">+</string>
+    <string name="price">10,00$</string>
+    <string name="cart_price">0$</string>
+    <string name="country">France</string>
+    <string name="follow_label">Follow</string>
+    <string name="battle_vote_label">You haven\'t already vote!</string>
+    <string name="result_vote">Nb vote / Nb vote</string>
+    <string name="summary">Summary</string>
+
+    <string name="feedback_subject">Subject of the feedback.</string>
+    <string name="feedback_content">Tell us what you want.</string>
+
+    <string name="friend_name">Name of the friend :</string>
+    <string name="friend_id">Id of the friend :</string>
+
+    <string name="km_one">1km</string>
+    <string name="km_five">5km</string>
+    <string name="km_ten">10km</string>
+    <string name="km_fifty">50km</string>
+
+    <string name="login_label">Login :</string>
+    <string name="password_login_label">Password :</string>
+    <string name="login">Log In</string>
+    <string name="signin">Sign In</string>
+
+    <string name="news_title">The title of the news</string>
+    <string name="comment_label">Comment</string>
+    <string name="comment_something">Comment something!</string>
+    <string name="say_something">Say something!</string>
+    <string name="tweet_something">Tweet something!</string>
+
+    <string name="pack_title">The name of the pack</string>
+    <string name="pack_description_label">Description of the pack</string>
+    <string name="min">Min :</string>
+    <string name="avg">Avg :</string>
+    <string name="min_price">1.00$</string>
+    <string name="average_price">10,50$</string>
+    <string name="buy_pack_label">Buy this pack</string>
+
+    <string name="currency">$</string>
+    <string name="git_it_to">Give if to : </string>
+    <string name="your_choice">Your choice :</string>
+    <string name="for_soonzik">For SoonZik</string>
+    <string name="for_artist">For the artists</string>
+    <string name="for_charity">For the charity</string>
+
+    <string name="ten">10</string>
+    <string name="artist_gift">6,5$</string>
+    <string name="charity_gift">2$</string>
+    <string name="soonzik_gift">1,5$</string>
+
+    <string name="timer">0:00</string>
+    <string name="medium_text">Medium Text</string>
+
+    <string name="all">All</string>
+    <string name="music">Music</string>
+    <string name="pack">Pack</string>
+    <string name="user">User</string>
+
+    <string name="no_connected">You have to be connected</string>
+    <string name="cross_for_delete">X</string>
+    <string name="date_hour">12/04/2015 12:24</string>
+    <string name="date_format">12/04/2015</string>
+    <string name="facebook_soonzik_link">https://www.facebook.com/soonzik</string>
+    <string name="adress">12 rue de la vie, 75013 Paris</string>
+    <string name="language_short">FR</string>
 </resources>

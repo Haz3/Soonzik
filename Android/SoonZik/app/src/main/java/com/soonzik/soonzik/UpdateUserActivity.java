@@ -8,7 +8,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -79,8 +78,6 @@ public class UpdateUserActivity extends Activity {
 
                             userPage.putExtra("userId", res.getId());
                             //startActivity(userPage);
-                            Toast t = Toast.makeText(getApplicationContext(), "Your informations are update with success", Toast.LENGTH_LONG);
-                            t.show();
                             those.finish();
                         }
                     });

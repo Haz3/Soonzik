@@ -12,7 +12,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.paypal.android.sdk.payments.PayPalConfiguration;
 import com.paypal.android.sdk.payments.PayPalPayment;
@@ -152,7 +151,6 @@ public class CartFragment extends Fragment {
                         @Override
                         public void onJSONResponse(boolean success, Object response, Class<?> classT) throws InvocationTargetException, NoSuchMethodException, java.lang.InstantiationException, IllegalAccessException, JSONException {
                             JSONObject obj = (JSONObject) response;
-                            Toast.makeText(getActivity(), "Purchase OK", Toast.LENGTH_SHORT).show();
 
                             Bundle bundle = new Bundle();
                             Fragment frg = Fragment.instantiate(getActivity(), redirectClass);

@@ -48,7 +48,7 @@ public class Utils {
                 JSONArray arrayObj = json.getJSONArray(key);
                 String newKey = Utils.getObjectName(key);
 
-                Log.v("KEY", "key = " + key + " : newKey = " + newKey);
+                //Log.v("KEY", "key = " + key + " : newKey = " + newKey);
 
                 Class<?> newType = Class.forName("com.soonzik.soonzik." + newKey);
                 ArrayList<Object> list = new ArrayList<Object>();

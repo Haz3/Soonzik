@@ -9,7 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -39,8 +38,6 @@ public class ExplorerGenresFragment extends Fragment {
             lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
-                    Toast.makeText(getActivity(), ((Genre) genres.get(position)).getName(), Toast.LENGTH_SHORT).show();
-
                     Bundle bundle = new Bundle();
                     bundle.putInt("genre_id", ((Genre) genres.get(position)).getId());
                     Fragment frg = Fragment.instantiate(getActivity(), "com.soonzik.soonzik.ExplorerResultFragment");
@@ -66,32 +63,6 @@ public class ExplorerGenresFragment extends Fragment {
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
-
-        /*try {
-            ActiveRecord.show("Influence", id, new ActiveRecord.OnJSONResponseCallback() {
-                @Override
-                public void onJSONResponse(boolean success, Object response, Class<?> classT) throws InvocationTargetException, NoSuchMethodException, java.lang.InstantiationException, IllegalAccessException {
-
-                    JSONObject obj = (JSONObject) response;
-                    Influence inf = (Influence) ActiveRecord.jsonObjectData(obj, classT);
-
-                    final ArrayList<Object> genres = new ArrayList<Object>(inf.getGenres());
-
-                    ExplorerGenresAdapter genresAdapter = new ExplorerGenresAdapter(getActivity(), genres);
-                    ListView lv = (ListView) getActivity().findViewById(R.id.genreslistview);
-                    lv.setAdapter(genresAdapter);
-
-                    lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                        @Override
-                        public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
-                            Toast.makeText(getActivity(), ((Genre) genres.get(position)).getName(), Toast.LENGTH_SHORT).show();
-                        }
-                    });
-                }
-            });
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }*/
 
         return v;
     }

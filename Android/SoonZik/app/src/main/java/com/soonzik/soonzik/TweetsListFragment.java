@@ -8,7 +8,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -73,8 +72,6 @@ public class TweetsListFragment extends Fragment {
 
                         tweetsAdapter.updateData(tweet);
                         tweetsAdapter.notifyDataSetChanged();
-
-                        Toast.makeText(getActivity(), "Tweet Send", Toast.LENGTH_SHORT).show();
                     }
                 });
             }

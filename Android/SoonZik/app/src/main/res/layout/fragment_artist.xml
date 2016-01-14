@@ -23,7 +23,7 @@
             android:id="@+id/countryartist"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="France"
+            android:text="@string/country"
             android:layout_below="@+id/artistname"
             android:layout_alignLeft="@+id/artistname"
             android:layout_alignStart="@+id/artistname" />
@@ -32,7 +32,7 @@
             android:id="@+id/nbfollowers"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="4"
+            android:text="@string/nb_followers"
             android:layout_below="@+id/countryartist"
             android:layout_alignRight="@+id/countryartist"
             android:layout_alignEnd="@+id/countryartist" />
@@ -50,7 +50,7 @@
             android:id="@+id/artistname"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Name Artist"
+            android:text="@string/artist_label"
             android:textSize="20sp"
             android:layout_gravity="center_horizontal"
             android:layout_alignTop="@+id/artistpicture"
@@ -63,7 +63,7 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Follow"
+            android:text="@string/follow_label"
             android:id="@+id/followbutton"
             android:layout_marginRight="13dp"
             android:layout_marginEnd="13dp"

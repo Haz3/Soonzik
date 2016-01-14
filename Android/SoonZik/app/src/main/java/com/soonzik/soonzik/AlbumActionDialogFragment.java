@@ -14,7 +14,6 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -64,8 +63,6 @@ public class AlbumActionDialogFragment extends DialogFragment {
                         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                             switch (position) {
                                 case 0 : //comment
-                                    Toast.makeText(getActivity(), "addcomment", Toast.LENGTH_SHORT).show();
-
                                     Bundle commentBundle = new Bundle();
                                     commentBundle.putString("class", "Album");
                                     commentBundle.putInt("to_comment_id", album_id);
@@ -80,7 +77,6 @@ public class AlbumActionDialogFragment extends DialogFragment {
                                     getDialog().dismiss();
                                     break;
                                 case 1: //addtocart
-                                    Toast.makeText(getActivity(), "addtocart", Toast.LENGTH_SHORT).show();
                                     final Map<String, String> data = new HashMap<String, String>();
                                     data.put("user_id", Integer.toString(ActiveRecord.currentUser.getId()));
                                     data.put("typeObj", "Album");
@@ -92,13 +88,11 @@ public class AlbumActionDialogFragment extends DialogFragment {
                                             JSONObject obj = (JSONObject) response;
 
                                             Cart cart = (Cart) ActiveRecord.jsonObjectData(obj, classT);
-                                            Toast.makeText(getActivity(), "Album add to cart", Toast.LENGTH_SHORT).show();
                                             getDialog().dismiss();
                                         }
                                     });
                                     break;
                                 case 2: //share
-                                    Toast.makeText(getActivity(), "share", Toast.LENGTH_SHORT).show();
                                     break;
                                 default:
                                     break;

@@ -12,7 +12,6 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -89,8 +88,6 @@ public class FeedbackFragment extends Fragment {
                     @Override
                     public void onJSONResponse(boolean success, Object response, Class<?> classT) throws InvocationTargetException, NoSuchMethodException, java.lang.InstantiationException, IllegalAccessException, JSONException {
                         JSONObject obj = (JSONObject) response;
-
-                        Toast.makeText(getActivity(), "Feedback send", Toast.LENGTH_SHORT).show();
 
                         Bundle bundle = new Bundle();
                         Fragment frg = Fragment.instantiate(getActivity(), redirectClass);

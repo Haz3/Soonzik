@@ -12,7 +12,7 @@
             android:id="@+id/summarypurchase"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Summary"
+            android:text="@string/summary"
             android:layout_marginTop="10dp"
             android:layout_marginStart="10dp"
             android:layout_marginLeft="10dp" />
@@ -20,7 +20,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Number of article"
+            android:text="@string/nb_article_label"
             android:id="@+id/labelnbobject"
             android:layout_below="@+id/summarypurchase"
             android:layout_alignParentLeft="true"
@@ -33,7 +33,7 @@
             android:id="@+id/nbobject"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="0"
+            android:text="@string/nb_article"
             android:layout_marginLeft="22dp"
             android:layout_marginStart="22dp"
             android:layout_alignBaseline="@+id/labelnbobject"
@@ -45,7 +45,7 @@
             android:id="@+id/purchasebutton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="PURCHASE"
+            android:text="@string/purchase_label"
             android:layout_below="@+id/labelnbobject"
             android:layout_marginTop="10dp"
             android:layout_marginStart="10dp"
@@ -54,7 +54,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Total"
+            android:text="@string/total_label"
             android:id="@+id/labeltotal"
             android:layout_above="@+id/labelnbobject"
             android:layout_alignParentRight="true"
@@ -65,7 +65,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="0$"
+            android:text="@string/cart_price"
             android:id="@+id/totalvalue"
             android:layout_alignTop="@+id/nbobject"
             android:layout_alignLeft="@+id/labeltotal"

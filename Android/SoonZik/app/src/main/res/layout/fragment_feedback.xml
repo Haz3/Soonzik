@@ -12,7 +12,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textEmailAddress"
-            android:hint="E-mail"/>
+            android:hint="@string/email_label"/>
 
         <Spinner
             android:id="@+id/feedback_spinner"
@@ -27,7 +27,7 @@
             android:id="@+id/feedbacksubject"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Subject of the feedback."
+            android:hint="@string/feedback_subject"
             android:layout_below="@+id/feedback_spinner"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
@@ -37,7 +37,7 @@
             android:id="@+id/feedback"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Tell us what you want."
+            android:hint="@string/feedback_content"
             android:lines="15"
             android:gravity="start"
             android:inputType="textMultiLine"
@@ -51,7 +51,7 @@
             android:id="@+id/feedbacksend"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Send"
+            android:text="@string/send"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
             android:layout_below="@+id/feedback"/>

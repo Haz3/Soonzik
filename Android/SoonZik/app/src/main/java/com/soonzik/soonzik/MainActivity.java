@@ -22,7 +22,6 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.ActionBarActivity;
 
 import android.widget.ListView;
-import android.widget.Toast;
 
 public class MainActivity extends ActionBarActivity
         implements PlaylistCreateDialogFragment.NoticeDialogListener{
@@ -111,7 +110,6 @@ public class MainActivity extends ActionBarActivity
         {
             case R.id.action_search:
                 showSearchFragment();
-                Toast.makeText(this, "Search", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.action_create_playlist:
                 showNoticeDialog();

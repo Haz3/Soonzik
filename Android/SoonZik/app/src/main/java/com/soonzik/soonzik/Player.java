@@ -1,8 +1,6 @@
 package com.soonzik.soonzik;
 
-import android.media.AudioManager;
 import android.media.MediaPlayer;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
@@ -10,11 +8,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
@@ -54,8 +50,6 @@ public class Player extends Fragment {
         play.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getActivity(), "Playing sound", Toast.LENGTH_SHORT).show();
-
                 mediaPlayer.start();
                 startTime = mediaPlayer.getCurrentPosition();
 
@@ -76,7 +70,6 @@ public class Player extends Fragment {
         pause.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getActivity(), "Pausing sound", Toast.LENGTH_SHORT).show();
                 mediaPlayer.pause();
                 pause.setEnabled(false);
                 play.setEnabled(true);
@@ -93,15 +86,7 @@ public class Player extends Fragment {
                     index_music++;
                 init_contentElementView();
                 prepareMediaplayer();
-                /*int temp = (int) startTime;
 
-                if ((temp + forwardTime) <= finalTime) {
-                    startTime = startTime + forwardTime;
-                    mediaPlayer.seekTo((int) startTime);
-                    Toast.makeText(getActivity(), "You have Jumped forward 5 seconds", Toast.LENGTH_SHORT).show();
-                } else {
-                    Toast.makeText(getActivity(), "Cannot jump forward 5 seconds", Toast.LENGTH_SHORT).show();
-                }*/
             }
         });
 
@@ -115,15 +100,6 @@ public class Player extends Fragment {
                 init_contentElementView();
                 prepareMediaplayer();
 
-                /*int temp = (int) startTime;
-
-                if ((temp - backwardTime) > 0) {
-                    startTime = startTime - backwardTime;
-                    mediaPlayer.seekTo((int) startTime);
-                    Toast.makeText(getActivity(), "You have Jumped backward 5 seconds", Toast.LENGTH_SHORT).show();
-                } else {
-                    Toast.makeText(getActivity(), "Cannot jump backward 5 seconds", Toast.LENGTH_SHORT).show();
-                }*/
             }
         });
         return v;

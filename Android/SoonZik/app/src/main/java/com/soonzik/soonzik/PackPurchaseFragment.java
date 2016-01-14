@@ -15,11 +15,9 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ListView;
 import android.widget.SeekBar;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.paypal.android.sdk.payments.PayPalConfiguration;
 import com.paypal.android.sdk.payments.PayPalPayment;
@@ -68,7 +66,7 @@ public class PackPurchaseFragment extends Fragment {
 
         ArrayList<User> friends = ActiveRecord.currentUser.getFriends();
         List<String> friends_name = new ArrayList<>();
-        List<Integer> friends_id = new ArrayList<>();
+        final List<Integer> friends_id = new ArrayList<>();
         friends_name.add("");
         friends_id.add(-1);
         for (User f : friends) {
@@ -85,7 +83,7 @@ public class PackPurchaseFragment extends Fragment {
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int pos, long l) {
-                gift_id = ActiveRecord.currentUser.getFriends().get(pos).getId();
+                gift_id = friends_id.get(pos);
             }
 
             @Override
@@ -529,7 +527,7 @@ public class PackPurchaseFragment extends Fragment {
         //   - PAYMENT_INTENT_ORDER to create a payment for authorization and capture
         //     later via calls from your server.
 
-        PayPalPayment payment = new PayPalPayment(new BigDecimal(finalamount), "EUR", pack.getTitle(),
+        PayPalPayment payment = new PayPalPayment(new BigDecimal(finalamount), "USD", pack.getTitle(),
                 PayPalPayment.PAYMENT_INTENT_SALE);
 
         Intent intent = new Intent(getActivity(), PaymentActivity.class);
@@ -576,7 +574,6 @@ public class PackPurchaseFragment extends Fragment {
                         @Override
                         public void onJSONResponse(boolean success, Object response, Class<?> classT) throws InvocationTargetException, NoSuchMethodException, java.lang.InstantiationException, IllegalAccessException, JSONException {
                             JSONObject obj = (JSONObject) response;
-                            Toast.makeText(getActivity(), "Purchase OK", Toast.LENGTH_SHORT).show();
 
                             Bundle bundle = new Bundle();
                             bundle.putInt("pack_id", pack.getId());

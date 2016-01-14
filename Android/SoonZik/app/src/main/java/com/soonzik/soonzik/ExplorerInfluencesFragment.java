@@ -8,7 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import org.json.JSONArray;
 
@@ -64,8 +63,6 @@ public class ExplorerInfluencesFragment extends Fragment {
                             tx.replace(R.id.main, frg);
                             tx.addToBackStack(null);
                             tx.commit();
-
-                            //Toast.makeText(getActivity(), ((Influence) influences.get(position)).getName(), Toast.LENGTH_SHORT).show();
                         }
                     });
                 }

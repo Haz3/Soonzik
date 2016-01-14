@@ -6,57 +6,57 @@
     android:paddingBottom="@dimen/activity_vertical_margin"
     tools:context="com.soonzik.soonzik.UserPageActivity">
 
-    <TextView android:text="The user is :" android:layout_width="wrap_content"
+    <TextView android:text="@string/the_user_is" android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
-    <TextView android:text="Email" android:layout_width="wrap_content"
+    <TextView android:text="@string/email_label" android:layout_width="wrap_content"
     android:layout_height="wrap_content" />
     <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
         android:paddingLeft="15px"
         android:textStyle="bold"
         android:id="@+id/emailUser"/>
 
-    <TextView android:text="First Name" android:layout_width="wrap_content"
+    <TextView android:text="@string/firstname_label" android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
     <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
         android:paddingLeft="15px"
         android:textStyle="bold"
         android:id="@+id/fnameUser"/>
 
-    <TextView android:text="Last Name" android:layout_width="wrap_content"
+    <TextView android:text="@string/lastname_label" android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
     <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
         android:paddingLeft="15px"
         android:textStyle="bold"
         android:id="@+id/lnameUser"/>
 
-    <TextView android:text="Username" android:layout_width="wrap_content"
+    <TextView android:text="@string/username_label" android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
     <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
         android:paddingLeft="15px"
         android:textStyle="bold"
         android:id="@+id/usernameUser"/>
 
-    <TextView android:text="Birthday" android:layout_width="wrap_content"
+    <TextView android:text="@string/birthday_label" android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
     <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
         android:paddingLeft="15px"
         android:textStyle="bold"
         android:id="@+id/birthdayUser"/>
 
-    <TextView android:text="Image" android:layout_width="wrap_content"
+    <TextView android:text="@string/picture_label" android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
     <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
         android:paddingLeft="15px"
         android:id="@+id/imageUser"/>
 
-    <TextView android:text="Description" android:layout_width="wrap_content"
+    <TextView android:text="@string/description_label" android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
     <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
         android:paddingLeft="15px"
         android:id="@+id/descriptionUser"/>
 
-    <Button android:text="Update" android:id="@+id/updateUserButton"/>
+    <Button android:text="@string/update_button" android:id="@+id/updateUserButton"/>
 
     <Button android:text="Playlists" android:id="@+id/playlistsUserButton"/>
 

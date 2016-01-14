@@ -20,7 +20,7 @@
         android:id="@+id/datetweet"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="12/04/2015 12:24"
+        android:text="@string/date_hour"
         android:layout_above="@+id/contenttweet"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
@@ -29,7 +29,7 @@
         android:id="@+id/contenttweet"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Le super tweet inutile!"
+        android:text="@string/tweet_something"
         android:layout_marginTop="6dp"
         android:layout_below="@+id/username"
         android:layout_alignLeft="@+id/username"

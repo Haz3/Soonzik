@@ -9,7 +9,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.loopj.android.http.RequestParams;
 
@@ -101,6 +100,18 @@ public class MessageListFragment extends Fragment {
 
         public void setToWho(String toWho) {
             this.toWho = toWho;
+        }
+
+        @Override
+        public String toString() {
+            String str = "";
+
+            str += "user_id = " + user_id;
+            str += " : secureKey = " + secureKey;
+            str += " : messageValue = " + messageValue;
+            str += " : towho = " + toWho;
+
+            return str;
         }
     }
 
@@ -284,8 +295,10 @@ public class MessageListFragment extends Fragment {
                 messageSend.setMessageValue(message);
                 messageSend.setToWho(Integer.toString(toWho));
 
+                Log.v("WEBSOCKET", messageSend.toString());
+
                 dispatcher.trigger("messages.send", messageSend);
-                Log.v("WEBSOCKET", "who_is_online NORMALEMENT TU VAS RECEVOIR QUELQUE CHOSE");
+                Log.v("WEBSOCKET", "messages.send NORMALEMENT TU VAS RECEVOIR QUELQUE CHOSE");
 
                 /*messagesAdapter.updateData(new Message(message, toWho, ActiveRecord.currentUser.getId()));
                 messagesAdapter.notifyDataSetChanged();*/

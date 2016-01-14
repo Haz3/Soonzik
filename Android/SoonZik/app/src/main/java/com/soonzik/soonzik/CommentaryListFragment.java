@@ -10,7 +10,6 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -84,7 +83,6 @@ public class CommentaryListFragment extends Fragment {
                         commentaryAdapter.updateData(comment);
                         commentaryAdapter.notifyDataSetChanged();
 
-                        Toast.makeText(getActivity(), "Comment Send", Toast.LENGTH_SHORT).show();
                     }
                 });
             }

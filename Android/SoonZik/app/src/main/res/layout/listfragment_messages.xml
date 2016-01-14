@@ -23,7 +23,7 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Say something!"
+            android:hint="@string/say_something"
             android:background="#FFF"
             android:layout_alignParentBottom="true"
             android:layout_alignParentLeft="true"
@@ -35,7 +35,7 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Send"
+            android:text="@string/send"
             android:layout_alignBaseline="@+id/edittextmessage"
             android:layout_alignBottom="@+id/edittextmessage"
             android:layout_alignParentRight="true"

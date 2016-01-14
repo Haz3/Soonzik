@@ -38,7 +38,7 @@ public class PackFragment extends Fragment {
         final View view = inflater.inflate(R.layout.fragment_pack,
                 container, false);
 
-        int id = this.getArguments().getInt("pack_id");
+        final int id = this.getArguments().getInt("pack_id");
 
         try {
             ActiveRecord.show("Pack", id, new ActiveRecord.OnJSONResponseCallback() {
@@ -84,13 +84,24 @@ public class PackFragment extends Fragment {
                     }
 
                     TextView minimalPrice = (TextView) view.findViewById(R.id.minimalprice);
-                    minimalPrice.setText(Double.toString(pack.getMinimal_price()) + "$");
+                    minimalPrice.setText(Double.toString(Math.round( pack.getMinimal_price() * 100.0 ) / 100.0) + "$");
 
                     TextView averagePrice = (TextView) view.findViewById(R.id.averageprice);
-                    averagePrice.setText(Double.toString(pack.getAveragePrice()) + "$");
-
+                    averagePrice.setText(Double.toString(Math.round( pack.getAveragePrice() * 100.0 ) / 100.0) + "$");
 
                     Button purchasePack = (Button) view.findViewById(R.id.buypackbutton);
+
+                    ArrayList<Pack> packs = ActiveRecord.currentUser.getContent().getPacks();
+                    for (Pack p : packs) {
+                        if (p.getId() == id) {
+                            purchasePack.setVisibility(View.GONE);
+                            view.findViewById(R.id.textView).setVisibility(View.GONE);
+                            view.findViewById(R.id.minimalprice).setVisibility(View.GONE);
+                            view.findViewById(R.id.textView5).setVisibility(View.GONE);
+                            view.findViewById(R.id.averageprice).setVisibility(View.GONE);
+                        }
+                    }
+
                     purchasePack.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {

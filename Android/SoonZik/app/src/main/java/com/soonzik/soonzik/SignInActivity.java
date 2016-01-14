@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
@@ -41,8 +40,6 @@ public class SignInActivity extends Activity {
                     public void onJSONResponse(boolean success, Object response, Class<?> classT) throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
                         Intent loginPageActivity = new Intent(getApplicationContext(), MainActivity.class);
                         startActivity(loginPageActivity);
-                        Toast t = Toast.makeText(getApplicationContext(), "You are successfull registed", Toast.LENGTH_LONG);
-                        t.show();
                     }
                 });
                 finish();

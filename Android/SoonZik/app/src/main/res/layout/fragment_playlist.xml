@@ -21,7 +21,7 @@
             android:id="@+id/playlistname"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Title"
+            android:text="@string/playlistTitle"
             android:textSize="20sp"
             android:layout_marginLeft="10dp"
             android:layout_marginStart="10dp"
@@ -33,7 +33,7 @@
             android:id="@+id/nbtitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="5"
+            android:text="@string/nb_title"
             android:layout_alignBottom="@+id/imageView3"
             android:layout_alignRight="@+id/playlistname"
             android:layout_alignEnd="@+id/playlistname" />

@@ -101,6 +101,9 @@ public class Purchase extends ActiveRecord {
         params.put("association", Integer.toString(association));
         params.put("website", Integer.toString(website));
         params.put("paypal", paypal);
+
+        Log.v("gift_user_id_1", Integer.toString(gift_id));
+
         if (gift_id != -1) {
             params.put("gift_user_id", gift_id);
         }

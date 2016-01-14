@@ -82,6 +82,9 @@ public class ActiveRecord {
                 AsyncHttpClient client = new AsyncHttpClient();
 
                 char lastChar = className.charAt(className.length() - 1);
+
+                Log.v("INDEX", serverLink + className.toLowerCase() + (lastChar == 's' ? "" : "s") + "?" + params.toString());
+
                 client.get(serverLink + className.toLowerCase() + (lastChar == 's' ? "" : "s"), params, new JsonHttpResponseHandler() {
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
@@ -677,8 +680,8 @@ public class ActiveRecord {
         while (itr.hasNext()) {
             String attr = (String) itr.next();
             try {
-                Log.v("CREATE INSTANCE", classT.toString());
-                Log.v("CREATE ATTR", attr);
+                /*Log.v("CREATE INSTANCE", classT.toString());
+                Log.v("CREATE ATTR", attr);*/
 
                 Field field = classT.getDeclaredField(attr);
                 field.setAccessible(true);

@@ -23,7 +23,7 @@
             android:id="@+id/packname"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Le nom du pack"
+            android:text="@string/pack_title"
             android:layout_marginLeft="38dp"
             android:layout_marginStart="38dp"
             android:layout_marginTop="6dp"
@@ -35,7 +35,7 @@
             android:id="@+id/artistnames"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Le nom des artistes"
+            android:text="@string/artist_label"
             android:layout_below="@+id/packname"
             android:layout_alignLeft="@+id/packname"
             android:layout_alignStart="@+id/packname"
@@ -45,7 +45,7 @@
             android:id="@+id/nbalbums"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="5"
+            android:text="@string/nb_title"
             android:layout_marginRight="28dp"
             android:layout_marginEnd="28dp"
             android:layout_alignTop="@+id/packname"
@@ -76,7 +76,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Give if to : "
+            android:text="@string/git_it_to"
             android:layout_above="@+id/friends_spinner"
             android:layout_alignLeft="@+id/friends_spinner"
             android:layout_alignStart="@+id/friends_spinner" />
@@ -95,7 +95,7 @@
             android:id="@+id/textviewdeveloper"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="For the SoonZik"
+            android:text="@string/for_soonzik"
             android:layout_marginTop="72dp"
             android:layout_below="@+id/textviewcharity"
             android:layout_alignLeft="@+id/textviewcharity"
@@ -105,7 +105,7 @@
             android:id="@+id/textviewcharity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="For the charity"
+            android:text="@string/for_charity"
             android:layout_marginTop="78dp"
             android:layout_below="@+id/textviewartist"
             android:layout_alignLeft="@+id/textviewartist"
@@ -115,7 +115,7 @@
             android:id="@+id/textviewartist"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="For the artists"
+            android:text="@string/for_artist"
             android:layout_marginTop="77dp"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
@@ -125,7 +125,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Your choice :"
+            android:text="@string/your_choice"
             android:id="@+id/textviewvalue"
             android:layout_alignLeft="@+id/textviewartist"
             android:layout_alignStart="@+id/textviewartist"
@@ -140,12 +140,12 @@
             android:layout_toRightOf="@+id/textviewvalue"
             android:layout_marginLeft="24dp"
             android:layout_marginStart="24dp"
-            android:text="10" />
+            android:text="@string/ten" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="$"
+            android:text="@string/currency"
             android:id="@+id/textviewcurrency"
             android:layout_alignTop="@+id/textviewvalue"
             android:layout_toRightOf="@+id/edittextamount"
@@ -154,7 +154,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="6,5$"
+            android:text="@string/artist_gift"
             android:id="@+id/valueforartist"
             android:layout_marginLeft="14dp"
             android:layout_marginStart="14dp"
@@ -165,7 +165,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="2$"
+            android:text="@string/charity_gift"
             android:id="@+id/valueforcharity"
             android:layout_above="@+id/textviewdeveloper"
             android:layout_alignLeft="@+id/valueforartist"
@@ -174,7 +174,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="1,5$"
+            android:text="@string/soonzik_gift"
             android:id="@+id/valuefordeveloper"
             android:layout_alignTop="@+id/textviewdeveloper"
             android:layout_alignLeft="@+id/valueforcharity"
@@ -218,7 +218,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Purchase"
+        android:text="@string/purchase_label"
         android:id="@+id/purchasebutton"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"

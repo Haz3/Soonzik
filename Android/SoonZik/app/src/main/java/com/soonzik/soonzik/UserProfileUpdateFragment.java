@@ -9,7 +9,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -85,8 +84,6 @@ public class UserProfileUpdateFragment extends Fragment {
                             tx.replace(R.id.main, Fragment.instantiate(getActivity(), redirectClass));
                             tx.commit();
 
-                            Toast t = Toast.makeText(getActivity(), "Your informations are update with success", Toast.LENGTH_LONG);
-                            t.show();
                         }
                     });
                 } catch (UnsupportedEncodingException e) {

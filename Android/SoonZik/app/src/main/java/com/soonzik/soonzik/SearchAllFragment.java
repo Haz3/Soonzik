@@ -5,9 +5,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import org.json.JSONObject;
 
@@ -57,13 +55,6 @@ public class SearchAllFragment extends Fragment {
                     SearchAllAdapter allAdapter = new SearchAllAdapter(getActivity(), all);
                     ListView lv = (ListView) getActivity().findViewById(R.id.alllistview);
                     lv.setAdapter(allAdapter);
-
-                    lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                        @Override
-                        public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
-                            Toast.makeText(getActivity(), (all.get(position)).toString(), Toast.LENGTH_SHORT).show();
-                        }
-                    });
                 }
             }
         });

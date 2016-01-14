@@ -13,7 +13,6 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -64,7 +63,6 @@ public class MusicActionDialogFragment extends DialogFragment {
                         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                             switch (position) {
                                 case 0: //addtoplaylist
-                                    Toast.makeText(getActivity(), "addtoplaylist", Toast.LENGTH_SHORT).show();
                                     DialogFragment frgDialogPlaylist = new PlaylistAddMusicDialogFragment();
                                     Bundle bundlePlaylist = new Bundle();
                                     bundlePlaylist.putInt("music_id", music_id);
@@ -74,7 +72,6 @@ public class MusicActionDialogFragment extends DialogFragment {
                                     getDialog().dismiss();
                                     break;
                                 case 1 : //comment
-                                    Toast.makeText(getActivity(), "addcomment", Toast.LENGTH_SHORT).show();
 
                                     Bundle commentBundle = new Bundle();
                                     commentBundle.putString("class", "Music");
@@ -90,7 +87,6 @@ public class MusicActionDialogFragment extends DialogFragment {
                                     getDialog().dismiss();
                                     break;
                                 case 2 : //rate
-                                    Toast.makeText(getActivity(), "setnote", Toast.LENGTH_SHORT).show();
 
                                     DialogFragment frgDialogNote = new MusicNoteDialogFragment();
                                     Bundle bundleNote = new Bundle();
@@ -103,7 +99,6 @@ public class MusicActionDialogFragment extends DialogFragment {
 
                                     break;
                                 case 3: //addtocart
-                                    Toast.makeText(getActivity(), "addtocart", Toast.LENGTH_SHORT).show();
                                     final Map<String, String> data = new HashMap<String, String>();
                                     data.put("user_id", Integer.toString(ActiveRecord.currentUser.getId()));
                                     data.put("typeObj", "Music");
@@ -115,13 +110,11 @@ public class MusicActionDialogFragment extends DialogFragment {
                                             JSONObject obj = (JSONObject) response;
 
                                             Cart cart = (Cart) ActiveRecord.jsonObjectData(obj, classT);
-                                            Toast.makeText(getActivity(), "Music add to cart", Toast.LENGTH_SHORT).show();
                                             getDialog().dismiss();
                                         }
                                     });
                                     break;
                                 case 4: //share
-                                    Toast.makeText(getActivity(), "share", Toast.LENGTH_SHORT).show();
                                     break;
                                 default:
                                     break;
