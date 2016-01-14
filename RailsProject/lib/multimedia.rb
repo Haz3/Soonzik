@@ -14,8 +14,8 @@ module	Multimedia
 		def initialize(dir = nil, file = nil)
 			@os = nil
 			@bits = 32
-			@directory = dir.gsub(' ', '\ ')
-			@file = file.gsub(' ', '\ ')
+			@directory = dir.gsub(' ', '\\ ')
+			@file = file.gsub(' ', '\\ ')
 			@file_type = nil
 			@begin = nil
 			@end = nil
@@ -73,7 +73,7 @@ module	Multimedia
 
 		# To set or change the file to use
 		def setFile(file = nil)
-			@file = file.gsub(' ', '\ ')
+			@file = file.gsub(' ', '\\ ')
 	    @file_type = File.extname("#{@directory}/#{@file}") if @file != nil
 		end
 
@@ -147,7 +147,7 @@ module	Multimedia
 
 		  #
 		  def getFFMPEGexec
-		  	return Rails.root.join('app', 'assets', 'execs', "ffmpeg-#{@os}-#{@bits}bits#{@extension}").to_s.gsub(' ', '\ ')
+		  	return Rails.root.join('app', 'assets', 'execs', "ffmpeg-#{@os}-#{@bits}bits#{@extension}").to_s.gsub(' ', '\\ ')
 		  end
 	end
 end
