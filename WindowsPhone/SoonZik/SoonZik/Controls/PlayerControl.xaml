@@ -30,8 +30,9 @@
                 <TextBlock x:Name="txtCurrentTrack" Text="{Binding TitleTrack}"
                            Style="{StaticResource SubheaderTextBlockStyle}" />
             </StackPanel>
-            <ContentControl x:Name="ContentControlMedia" Content="{Binding MediaElementObject}" />
-            <!--ContentPanel - place additional content here-->
+            <ContentPresenter x:Name="ContentControlMedia" Content="{Binding MediaElementObject, Mode=TwoWay}" />
+
+             <!--ContentPanel - place additional content here-->
         </Grid>
 
         <Grid Grid.Row="1">

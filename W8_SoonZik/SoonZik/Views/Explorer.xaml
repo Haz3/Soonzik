@@ -68,7 +68,7 @@
             </GridView.ItemTemplate>
         </GridView>
 
-        <ListView x:Name="artist_list" ItemClick="artist_list_ItemClick" IsItemClickEnabled="True" HorizontalAlignment="Left" Height="903" Margin="1590,154,0,0" VerticalAlignment="Top" Width="285" IsSynchronizedWithCurrentItem="False" Background="#FFB0B0B0" ItemsSource="{Binding artist_list}">
+        <ListView x:Name="artist_list" ItemClick="artist_list_ItemClick" IsItemClickEnabled="True" HorizontalAlignment="Left" Height="903" Margin="1590,154,0,0" VerticalAlignment="Top" Width="285" IsSynchronizedWithCurrentItem="False" ItemsSource="{Binding artist_list}">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <StackPanel>

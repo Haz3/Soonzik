@@ -27,8 +27,8 @@
         <vm:PlaylistViewModel x:Key="PlaylistViewModel" />
         <vm:AboutViewModel x:Key="AboutViewModel" />
         <vm:PlayerControlViewModel x:Key="PlayerControlViewModel" />
-        <vm:PriceControlViewModel x:Key="PriceControlViewModel"/>
-        <vm:GenreViewModel x:Key="GenreViewModel"/>
+        <vm:PriceControlViewModel x:Key="PriceControlViewModel" />
+        <vm:GenreViewModel x:Key="GenreViewModel" />
         <DataTemplate x:Key="SizePivotHeader">
             <ContentPresenter>
                 <TextBlock Text="{Binding}" FontFamily="Roboto" FontSize="100" />

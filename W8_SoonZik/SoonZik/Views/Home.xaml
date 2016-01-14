@@ -105,9 +105,6 @@
         <TextBlock x:Name="news_txt" x:Uid="news_txt" HorizontalAlignment="Left" Margin="30,116,0,0" TextWrapping="Wrap" Text="Dernières news" VerticalAlignment="Top" Height="50" Width="310" FontSize="40" Foreground="#FF27AAE1"/>
         <!--<TextBlock x:Name="music_txt" x:Uid="music_txt" Margin="710,159,0,0" TextWrapping="Wrap" Text="Musique" VerticalAlignment="Top" Height="50" Width="500" FontSize="40" Foreground="#FF27AAE1" HorizontalAlignment="Left"/>-->
         <TextBlock x:Name="community_txt" x:Uid="community_txt" HorizontalAlignment="Left" Margin="1426,225,0,0" TextWrapping="Wrap" Text="Communauté" VerticalAlignment="Top" Height="50" Width="389" FontSize="40" Foreground="#FF27AAE1"/>
-        <TextBlock x:Name="feedback" HorizontalAlignment="Left" Margin="10,1057,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="25" Width="275" Foreground="#FF111111" FontSize="25">
-            <Hyperlink NavigateUri="http://api.lvh.me:3000/feedbacks/new" Foreground="#FF611EFF" >Feedback</Hyperlink>
-        </TextBlock>
         <TextBlock x:Name="pack_txt" x:Uid="pack_txt" Margin="520,116,0,0" TextWrapping="Wrap" Text="Packs" VerticalAlignment="Top" Height="50" Width="500" FontSize="40" Foreground="#FF27AAE1" HorizontalAlignment="Left"/>
 
         <GridView x:Name="news_grid" ItemClick="news_grid_ItemClick" IsItemClickEnabled="True" ItemsSource="{Binding news_list, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="30,171,0,0" VerticalAlignment="Top" Width="425" Height="869">
@@ -137,6 +134,7 @@
                 </DataTemplate>
             </GridView.ItemTemplate>
         </GridView>
+        <TextBlock x:Name="feedback_txt" x:Uid="feedback_txt" HorizontalAlignment="Left" Margin="30,1045,0,0" TextWrapping="Wrap" Text="Feedback" VerticalAlignment="Top" Width="116" Foreground="#FF27AAE1" FontSize="25" Tapped="feedback_txt_Tapped" />
 
     </Grid>
 </Page>

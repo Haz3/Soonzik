@@ -121,6 +121,11 @@ namespace SoonZik.Views
             this.Frame.Navigate(typeof(NewsDetails), item);
         }
 
+        private void feedback_txt_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(Feedback));
+        }
+
         // END
     }
 }

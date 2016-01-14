@@ -15,12 +15,14 @@
     <Page.Resources>
         <DataTemplate x:Key="InfluencesTemplate">
             <StackPanel x:ConnectionId='7' Margin="0,0,0,30"                                     >
-                <TextBlock x:Name="InfluenceNameBlock" Text="{Binding Path=name}" Style="{StaticResource TitleTextBlockStyle}" />
+                <TextBlock x:Name="InfluenceNameBlock" Text="{Binding Path=name}"
+                           Style="{StaticResource TitleTextBlockStyle}" />
             </StackPanel>
         </DataTemplate>
         <DataTemplate x:Key="HeaderTemplate">
             <ContentPresenter>
-                <TextBlock Text="{Binding Path=name}" FontFamily="{StaticResource Roboto}" FontStyle="Normal" FontSize="30" />
+                <TextBlock Text="{Binding Path=name}" FontFamily="{StaticResource Roboto}" FontStyle="Normal"
+                           FontSize="30" />
             </ContentPresenter>
         </DataTemplate>
 
@@ -72,8 +74,9 @@
             <PivotItem x:Uid="InfluencePivot" Header="">
                 <Grid>
                     <ListBox Background="Transparent" x:Name="ListBoxInfluence" ItemsSource="{Binding ListInfluences}"
-                         ItemTemplate="{StaticResource InfluencesTemplate}" SelectedItem="{Binding SelectedInfluence, Mode=TwoWay}" 
-                             Visibility="{Binding ListInfluenceVisibility}"/>
+                             ItemTemplate="{StaticResource InfluencesTemplate}"
+                             SelectedItem="{Binding SelectedInfluence, Mode=TwoWay}"
+                             Visibility="{Binding ListInfluenceVisibility}" />
 
                 </Grid>
             </PivotItem>
@@ -98,12 +101,13 @@
             </PivotItem>
             <PivotItem x:Uid="AmbiancePivot" Header="">
                 <Pivot Margin="0,20,0,0" x:Name="PivotAmbiance" HeaderTemplate="{StaticResource HeaderTemplate}"
-                        Foreground="Transparent" RenderTransformOrigin="0.5,0.5" Style="{StaticResource PivotStyle1}" ItemsSource="{Binding ListAmbiance}">
+                       Foreground="Transparent" RenderTransformOrigin="0.5,0.5" Style="{StaticResource PivotStyle1}"
+                       ItemsSource="{Binding ListAmbiance}">
                     <Pivot.ItemTemplate>
                         <DataTemplate>
                             <ListBox x:ConnectionId='8' Background="Transparent" x:Name="ListBoxGenre" ItemsSource="{Binding Path=musics}"
                                                                                        
-                         ItemTemplate="{StaticResource MusicTemplate}"/>
+                                     ItemTemplate="{StaticResource MusicTemplate}" />
                         </DataTemplate>
                     </Pivot.ItemTemplate>
                 </Pivot>

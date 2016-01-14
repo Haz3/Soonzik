@@ -22,12 +22,11 @@ namespace SoonZik.ViewModel
     {
         #region Attribute
 
-        public static Music SelecMusic { get;set; }
+        public static Music SelecMusic { get; set; }
 
         public Music SelectedMusic
         {
-            get
-            {return _selectedMusic;}
+            get { return _selectedMusic; }
             set
             {
                 _selectedMusic = value;
@@ -54,9 +53,11 @@ namespace SoonZik.ViewModel
                 RaisePropertyChanged("ListGenreSelected");
             }
         }
+
         #endregion
 
         #region Ctor
+
         public GenreViewModel()
         {
             AlbumCommand = new RelayCommand(AlbumCommandExecute);
@@ -64,7 +65,6 @@ namespace SoonZik.ViewModel
             AddMusicToCart = new RelayCommand(AddMusicToCartExecute);
             PlayCommand = new RelayCommand(PlayCommandExecute);
             SelectionCommand = new RelayCommand(SelectionCommandExecute);
-            
         }
 
         private void SelectionCommandExecute()
@@ -83,7 +83,9 @@ namespace SoonZik.ViewModel
                         {
                             foreach (var mus in r.musics)
                             {
-                                mus.album.imageAlbum = new BitmapImage(new Uri(Constant.UrlImageAlbum + mus.album.image, UriKind.RelativeOrAbsolute));
+                                mus.album.imageAlbum =
+                                    new BitmapImage(new Uri(Constant.UrlImageAlbum + mus.album.image,
+                                        UriKind.RelativeOrAbsolute));
                             }
                             ListGenreSelected.Add(r);
                         });
@@ -149,6 +151,7 @@ namespace SoonZik.ViewModel
             MyMusicViewModel.IndexForPlaylist = 3;
             GlobalMenuControl.SetChildren(new MyMusic());
         }
+
         #endregion
     }
 }

@@ -19,6 +19,7 @@ namespace SoonZik.Tools
         // For secureKey
         public string secureKey { get; set; }
         public DateTime compare_date { get; set; }
+        public Music selected_music { get; set; }
 
         //// For Facebook Connection ::: NOPE, USELESS
         //public string fb_id { get; set; }

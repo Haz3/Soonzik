@@ -7,6 +7,7 @@ using Windows.ApplicationModel.Core;
 using Windows.Devices.Geolocation;
 using Windows.Foundation;
 using Windows.UI.Core;
+using Windows.UI.Popups;
 using Windows.UI.Xaml.Controls.Maps;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
@@ -49,23 +50,31 @@ namespace SoonZik.ViewModel
 
         private void CreateListElement()
         {
-            var mapIcon = new MapIcon
+            try
             {
-                Location = new Geopoint(new BasicGeoposition
+                var mapIcon = new MapIcon
                 {
-                    Latitude = UserLocation.Latitude,
-                    Longitude = UserLocation.Longitude
-                }),
-                NormalizedAnchorPoint = new Point(0.5, 1.0),
-                Title = Singleton.Singleton.Instance().CurrentUser.username
-            };
+                    Location = new Geopoint(new BasicGeoposition
+                    {
+                        Latitude = UserLocation.Latitude,
+                        Longitude = UserLocation.Longitude
+                    }),
+                    NormalizedAnchorPoint = new Point(0.5, 1.0),
+                    Title = Singleton.Singleton.Instance().CurrentUser.username
+                };
 
-            ListMapIcons.Add(mapIcon);
-            MapElements = new ObservableCollection<MapElement>();
-            foreach (var icon in ListMapIcons)
-            {
-                MapElements.Add(icon);
+                ListMapIcons.Add(mapIcon);
+                MapElements = new ObservableCollection<MapElement>();
+                foreach (var icon in ListMapIcons)
+                {
+                    MapElements.Add(icon);
+                }
             }
+            catch (Exception)
+            {
+                new MessageDialog("Fail geoloc").ShowAsync();
+            }
+
         }
 
         private void GetListeners(string range)

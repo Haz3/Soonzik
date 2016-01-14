@@ -91,7 +91,8 @@ namespace SoonZik.ViewModel
                     CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
                         () =>
                         {
-                            news.imageNews = new BitmapImage(new Uri(UrlImage + news.attachments[0].url, UriKind.RelativeOrAbsolute));
+                            news.imageNews =
+                                new BitmapImage(new Uri(UrlImage + news.attachments[0].url, UriKind.RelativeOrAbsolute));
                             NewsDetailViewModel.TheNews = news;
                             GlobalMenuControl.SetChildren(new NewsDetail());
                         });

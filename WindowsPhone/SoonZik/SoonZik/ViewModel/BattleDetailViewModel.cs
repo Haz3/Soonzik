@@ -21,14 +21,14 @@ namespace SoonZik.ViewModel
             CanVote = true;
             VoteArtisteOneCommand = new RelayCommand(VoteArtisteOneCommandExcecute);
             VoteArtisteTwoCommand = new RelayCommand(VoteArtisteTwoCommandExcecute);
-            InitializeData();
-            InitializeTimer();
+            LoadedCommand = new RelayCommand(LoadedExecute);
         }
 
         #endregion
 
         #region Attribute
 
+        public ICommand LoadedCommand { get; private set; }
         public ICommand VoteArtisteOneCommand { get; set; }
         public ICommand VoteArtisteTwoCommand { get; set; }
 
@@ -173,6 +173,12 @@ namespace SoonZik.ViewModel
 
         #region Method
 
+        private void LoadedExecute()
+        {
+            InitializeData();
+            InitializeTimer();
+        }
+
         private void InitializeData()
         {
             ArtistOne = CurrentBattle.artist_one;
@@ -196,8 +202,8 @@ namespace SoonZik.ViewModel
             }
             a = (a*100)/CurrentBattle.votes.Count;
             b = (b*100)/CurrentBattle.votes.Count;
-            PourcentageVote1 = a + " %";
-            PourcentageVote2 = b + " %";
+            PourcentageVote1 = Math.Round(a, 0) + " %";
+            PourcentageVote2 = Math.Round(b, 0) + " %";
         }
 
         private void InitializeTimer()

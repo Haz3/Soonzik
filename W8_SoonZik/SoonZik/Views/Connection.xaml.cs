@@ -40,5 +40,16 @@ namespace SoonZik.Views
             item.id = 1;
             this.Frame.Navigate(typeof(Pack), item);
         }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(Feedback));
+
+        }
+
+        private void feedback_txt_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(Feedback));
+        }
     }
 }

@@ -36,7 +36,8 @@ namespace SoonZik.ViewModel
                     var result = tmp2.Result;
                     if (result != null)
                     {
-                        CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, AgileCallback);
+                        CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
+                            AgileCallback);
                     }
                 });
             }
@@ -119,7 +120,7 @@ namespace SoonZik.ViewModel
 
         public string ItemChoose
         {
-            get { return _itemChoose;}
+            get { return _itemChoose; }
             set
             {
                 _itemChoose = value;
