@@ -23,11 +23,13 @@
             <TextBox Grid.Row="1" Width="200" x:Name="TextBoxShare" Height="160"
                      Background="White" Opacity="0.2" BorderThickness="0,0,0,0" Foreground="White"
                      HorizontalAlignment="Center" VerticalAlignment="Center" />
+            <Image x:ConnectionId='1' Grid.Row="0" Source="../Resources/Icones/cross_icon.png" HorizontalAlignment="Right" Width="30" 
+                                              />
 
-            <Image x:ConnectionId='1' x:Name="FacebookShare" Grid.Row="2" VerticalAlignment="Center"
+            <Image x:ConnectionId='2' x:Name="FacebookShare" Grid.Row="2" VerticalAlignment="Center"
                    Source="../Resources/Icones/facebook.png"
                    Width="50" HorizontalAlignment="Right" Margin="0,0,10,0"                                 />
-            <Image x:ConnectionId='2' x:Name="TwitterShare" Grid.Row="2" VerticalAlignment="Center"
+            <Image x:ConnectionId='3' x:Name="TwitterShare" Grid.Row="2" VerticalAlignment="Center"
                    Source="../Resources/Icones/twitter.png"
                    Width="50" HorizontalAlignment="Right" Margin="0,0,70,0"                                />
         </Grid>

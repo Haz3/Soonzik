@@ -21,6 +21,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="150" />
             <RowDefinition Height="*" />
+            <RowDefinition Height="50"/>
             <RowDefinition Height="100" />
         </Grid.RowDefinitions>
         <Grid Grid.Row="0" Margin="0,20,0,0">
@@ -39,7 +40,15 @@
             <Image x:Name="ImageMusique" Source="{Binding MusiqueImage}" Width="250" Height="250" />
         </Grid>
 
-        <Grid Grid.Row="2">
+        <Slider Grid.Row="2" Value="{Binding Time, Mode=TwoWay}" Minimum="0" Maximum="{Binding MediaElementObject.NaturalDuration.TimeSpan.Seconds, Mode=TwoWay}" StepFrequency="1">
+            <interactivity:Interaction.Behaviors>
+                <core:EventTriggerBehavior EventName="PointerExited">
+                    <core:InvokeCommandAction Command="{Binding TimerCommand}" />
+                </core:EventTriggerBehavior>
+            </interactivity:Interaction.Behaviors>
+        </Slider>
+
+        <Grid Grid.Row="3">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
@@ -48,7 +57,7 @@
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
-            <Image Grid.Column="0" x:Name="ShullfeImage" Source="../Resources/PlayerIcons/shuffle.png" Height="40" />
+            <Image Visibility="Collapsed" Grid.Column="0" x:Name="ShullfeImage" Source="../Resources/PlayerIcons/shuffle.png" Height="40" />
             <Image Grid.Column="1" x:Name="RewindImage" Source="../Resources/PlayerIcons/rewind.png" Height="55">
 
                 <interactivity:Interaction.Behaviors>
@@ -72,7 +81,7 @@
                     </core:EventTriggerBehavior>
                 </interactivity:Interaction.Behaviors>
             </Image>
-            <Image Grid.Column="4" x:Name="RepeatImage" Source="../Resources/PlayerIcons/repeat.png" Height="40" />
+            <Image Visibility="Collapsed" Grid.Column="4" x:Name="RepeatImage" Source="../Resources/PlayerIcons/repeat.png" Height="40" />
         </Grid>
     </Grid>
 </Page>

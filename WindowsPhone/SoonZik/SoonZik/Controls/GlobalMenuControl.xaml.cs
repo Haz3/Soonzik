@@ -277,7 +277,8 @@ namespace SoonZik.Controls
 
         private void PlayerStoryboardBackOnCompleted(object sender, object o)
         {
-            MyPlayerToggleButton.Content = PlayerControlViewModel.StaticCurrentMusic.title;
+            if (PlayerControlViewModel.StaticCurrentMusic != null)
+                MyPlayerToggleButton.Content = PlayerControlViewModel.StaticCurrentMusic.title;
         }
 
         private async void CreateFile()

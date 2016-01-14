@@ -21,7 +21,8 @@ namespace SoonZik.ViewModel
             PlayerLoaded = new RelayCommand(PlayerLoadedExecute);
             RewindCommand = new RelayCommand(RewindExecute);
             ForwardCommand = new RelayCommand(ForwardExecute);
-            PlayCommand = new RelayCommand(PlayExecute);
+            PlayCommand = new RelayCommand(PlayExecute); 
+            TimerCommand = new RelayCommand(TimerCommandExecute);
             MediaElementObject = new MediaElement();
             MediaElementObject.MediaOpened += MediaElementObjectOnMediaOpened;
             MediaElementObject.MediaEnded += MediaElementObjectOnMediaEnded;
@@ -31,6 +32,19 @@ namespace SoonZik.ViewModel
 
         #region Attribute
 
+        private double _time;
+
+        public double Time
+        {
+            get { return _time;}
+            set
+            {
+                _time = value;
+                RaisePropertyChanged("Time");
+            }
+            
+        }
+        private DispatcherTimer dispatcherTimer;
         private static PlayerControlViewModel _instance;
 
         public static PlayerControlViewModel Instance()
@@ -44,6 +58,7 @@ namespace SoonZik.ViewModel
 
         private bool IsPlaylist;
 
+        public ICommand TimerCommand { get; private set; }
         public ICommand PlayCommand { get; private set; }
         public ICommand ForwardCommand { get; private set; }
         public ICommand RewindCommand { get; private set; }
@@ -179,22 +194,36 @@ namespace SoonZik.ViewModel
             }
             else
             {
+                dispatcherTimer.Start();
                 PlayImage =
                     new BitmapImage(new Uri("ms-appx:///Resources/PlayerIcons/pause.png", UriKind.RelativeOrAbsolute));
                 MediaElementObject.Play();
             }
+        }
+        
+        private void TimerCommandExecute()
+        {
+            var test = Time;
+            TimeSpan now = new TimeSpan(0,0,0,(int)Time);
+            MediaElementObject.Position = now;
         }
 
         private void PlayerLoadedExecute()
         {
             try
             {
+
                 //MediaElementObject = new MediaElement();
                 MediaInfo();
             }
             catch (Exception e)
             {
             }
+        }
+
+        private void DispatcherTimerOnTick(object sender, object e)
+        {
+            Time = MediaElementObject.Position.Seconds;
         }
 
         private void MediaInfo()
@@ -241,7 +270,11 @@ namespace SoonZik.ViewModel
 
         private void MediaElementObjectOnMediaOpened(object sender, RoutedEventArgs routedEventArgs)
         {
-            MediaElementObject.Play();
+            MediaElementObject.Play(); 
+            dispatcherTimer = new DispatcherTimer();
+            dispatcherTimer.Tick += DispatcherTimerOnTick;
+            dispatcherTimer.Interval = new TimeSpan(0, 0, 1);
+            dispatcherTimer.Start();
         }
 
         private void SetMediaInfo()

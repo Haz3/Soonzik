@@ -1,5 +1,6 @@
 ﻿using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Navigation;
 using SoonZik.ViewModel;
 
@@ -50,6 +51,12 @@ namespace SoonZik.Views
         {
             var vm = DataContext as GeolocalisationViewModel;
             if (vm != null) vm.TwentyChecked.Execute(null);
+        }
+
+        private void UIElement_OnTapped(object sender, TappedRoutedEventArgs e)
+        {
+            var vm = DataContext as GeolocalisationViewModel;
+            if (vm != null) vm.UserTappedCommand.Execute(null);
         }
     }
 }

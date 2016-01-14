@@ -56,20 +56,27 @@ namespace SoonZik.ViewModel
 
         public static void LoadConversation()
         {
-            ValidateKey.GetValideKey();
-            var get = new HttpRequestGet();
-            var res = get.FindConversation(new List<Message>(), Singleton.Singleton.Instance().SecureKey,
-                Singleton.Singleton.Instance().CurrentUser.id.ToString());
-            res.ContinueWith(delegate(Task<object> tmp2)
+            try
             {
-                var result = tmp2.Result as List<Message>;
-                if (result != null)
+                ValidateKey.GetValideKey();
+                var get = new HttpRequestGet();
+                var res = get.FindConversation(new List<Message>(), Singleton.Singleton.Instance().SecureKey,
+                    Singleton.Singleton.Instance().CurrentUser.id.ToString());
+                res.ContinueWith(delegate(Task<object> tmp2)
                 {
-                    _conversation = new ObservableCollection<Message>(result);
-                    CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
-                        CheckConversation);
-                }
-            });
+                    var result = tmp2.Result as List<Message>;
+                    if (result != null)
+                    {
+                        _conversation = new ObservableCollection<Message>(result);
+                        CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
+                            CheckConversation);
+                    }
+                });
+            }
+            catch (Exception)
+            {
+            }
+
         }
 
         private static async void AgileCallback()

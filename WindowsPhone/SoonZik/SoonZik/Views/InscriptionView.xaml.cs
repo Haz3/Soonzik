@@ -1,5 +1,8 @@
-﻿using Windows.UI.Xaml.Controls;
+﻿using Windows.Phone.UI.Input;
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
+using GalaSoft.MvvmLight.Views;
 
 // Pour en savoir plus sur le modèle d’élément Page vierge, consultez la page http://go.microsoft.com/fwlink/?LinkID=390556
 
@@ -10,9 +13,32 @@ namespace SoonZik.Views
     /// </summary>
     public sealed partial class InscriptionView : Page
     {
+        public INavigationService Navigation;
         public InscriptionView()
         {
             InitializeComponent();
+            Navigation = new NavigationService();
+            HardwareButtons.BackPressed += HardwareButtons_BackPressed;
+        }
+
+
+        void HardwareButtons_BackPressed(object sender, BackPressedEventArgs e)
+        {
+            //This is where all your 'override backkey' code goes
+            //You can put message dialog and/or cancel the back key using e.Handled = true
+            Frame rootFrame = Window.Current.Content as Frame;
+
+            if (rootFrame != null && rootFrame.CanGoBack)
+            {
+                e.Handled = true;
+                rootFrame.GoBack();
+            }
+        }
+
+        protected override void OnNavigatingFrom(NavigatingCancelEventArgs e)
+        {
+            //remove the handler before you leave!
+            HardwareButtons.BackPressed -= HardwareButtons_BackPressed;
         }
 
         /// <summary>

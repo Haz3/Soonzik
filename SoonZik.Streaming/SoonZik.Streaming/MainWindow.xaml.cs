@@ -15,6 +15,7 @@ using SoonZik.Streaming.View;
 using MessageBox = System.Windows.Forms.MessageBox;
 using System.Net;
 using System.IO;
+using SonnZik.Streaming.HttpWebRequest;
 
 namespace SoonZik.Streaming
 {
@@ -354,26 +355,25 @@ namespace SoonZik.Streaming
             }
         }
 
-        private void upload_btn_Click(object sender, RoutedEventArgs e)
+        private async void upload_btn_Click(object sender, RoutedEventArgs e)
         {
-            //MessageBox.Show("UPLOAD LOL");
+            string ArtistUrl = "http://artist.lvh.me:3000/";
 
-            // Create a new WebClient instance.
-            //if (upload_file_name_txt.Text != null || upload_file_name_txt.Text != "")
-            //{
-            //    MessageBox.Show("Choisissez un fichier");
-            //    return;
-            //}
-            WebClient myWebClient = new WebClient();
+            // creating request
+            HttpWebRequestPost post = new HttpWebRequestPost();
+            var request = (HttpWebRequest)WebRequest.Create(ArtistUrl + "/musics/uploadRediff");
+
             string filename = System.IO.Path.GetFileName(upload_file_name_txt.Text);
 
             Byte[] bytes = File.ReadAllBytes(upload_file_name_txt.Text);
             String file = Convert.ToBase64String(bytes);
 
-            string response = myWebClient.UploadString("http://api.lvh.me:3000/musics/uploadRediff", file);
 
-            //byte[] responseArray = myWebClient.UploadFile("http://api.lvh.me:3000/musics/uploadRediff", filename);
-            response_txt.Text = response;
+            string postData = "filename=" + filename
+                                + "&data=" + file // file.Substring(0, 4000)
+                                + "&user_id=" + Singleton.Singleton.Instance().TheArtiste.id.ToString()
+                                + "&secureKey=" + Security.getSecureKey(Singleton.Singleton.Instance().TheArtiste.id.ToString());
+           await post.GetHttpPostResponse(request, postData);
 
         }
     }

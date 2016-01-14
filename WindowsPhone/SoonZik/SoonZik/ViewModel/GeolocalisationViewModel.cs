@@ -11,6 +11,7 @@ using Windows.UI.Popups;
 using Windows.UI.Xaml.Controls.Maps;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using SoonZik.Controls;
 using SoonZik.HttpRequest;
 using SoonZik.HttpRequest.Poco;
 
@@ -79,29 +80,37 @@ namespace SoonZik.ViewModel
 
         private void GetListeners(string range)
         {
-            var reqGet = new HttpRequestGet();
-            ListListeners = new ObservableCollection<Listenings>();
-            ListUser = new ObservableCollection<User>();
-            var listListeners = reqGet.GetListenerAroundMe(new List<Listenings>(), UserLocation.Latitude.ToString(),
-                UserLocation.Longitude.ToString(), range);
-            listListeners.ContinueWith(delegate(Task<object> tmp)
+            try
             {
-                var res = tmp.Result as List<Listenings>;
-                if (res != null)
+                var reqGet = new HttpRequestGet();
+                ListListeners = new ObservableCollection<Listenings>();
+                ListUser = new ObservableCollection<User>();
+                var listListeners = reqGet.GetListenerAroundMe(new List<Listenings>(), UserLocation.Latitude.ToString(),
+                    UserLocation.Longitude.ToString(), range);
+                listListeners.ContinueWith(delegate(Task<object> tmp)
                 {
-                    foreach (var item in res)
+                    var res = tmp.Result as List<Listenings>;
+                    if (res != null)
                     {
+                        foreach (var item in res)
+                        {
+                            CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
+                                () =>
+                                {
+                                    ListListeners.Add(item);
+                                    ListUser.Add(item.user);
+                                });
+                        }
                         CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
-                            () =>
-                            {
-                                ListListeners.Add(item);
-                                ListUser.Add(item.user);
-                            });
+                            AddMappElements);
                     }
-                    CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
-                        AddMappElements);
-                }
-            });
+                });
+            }
+            catch (Exception)
+            {
+                new MessageDialog("Map en cours de chargement").ShowAsync();
+            }
+
         }
 
         private void GetConcert()
@@ -139,11 +148,29 @@ namespace SoonZik.ViewModel
 
         private void UserTappedExecute()
         {
+            var request = new HttpRequestGet();
+            var res = request.GetObject(new Music(), "musics", ListenningSelected.music.id.ToString());
+            res.ContinueWith(delegate(Task<object> task)
+            {
+                var music = task.Result as Music;
+                if (music != null)
+                {
+                    CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
+                        () =>
+                        {
+                            music.file = "http://soonzikapi.herokuapp.com/musics/get/" + music.id;
+                            Singleton.Singleton.Instance().SelectedMusicSingleton.Clear();
+                            Singleton.Singleton.Instance().SelectedMusicSingleton.Add(music);
+                            GlobalMenuControl.MyPlayerToggleButton.IsChecked = true;
+                            GlobalMenuControl.SetPlayerAudio();
+                        });
+                }
+            });
         }
 
         private void TwentyCheckedExecute()
         {
-            GetListeners("20");
+            GetListeners("500");
             TwoKmActivated = false;
             FiveKmActivated = false;
             TenKmActivated = false;
@@ -252,6 +279,7 @@ namespace SoonZik.ViewModel
             }
         }
 
+        public Listenings ListenningSelected { get; set; }
         public User UserSelected { get; set; }
         public Concerts ConcertSelected { get; set; }
 

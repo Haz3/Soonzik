@@ -1,4 +1,5 @@
 ﻿using SonnZik.Streaming.HttpWebRequest.Poco;
+using System;
 
 namespace SoonZik.Streaming.Singleton
 {
@@ -25,6 +26,8 @@ namespace SoonZik.Streaming.Singleton
         }
 
         public User TheArtiste { get; set; }
+        public DateTime compare_date { get; set; }
+        public string secureKey { get; set; }
 
         #endregion
     }
