@@ -26,6 +26,15 @@ namespace SoonZik.Streaming
     {
         #region Attributes
 
+        public string file;
+        public string filename;
+        public string response;
+        public int response_length;
+        public int char_nb = 8000;
+        string ArtistUrl = "http://artist.lvh.me:3000/";
+
+
+
         private int sampleRate;
         public int SampleRate
         {
@@ -198,7 +207,7 @@ namespace SoonZik.Streaming
         {
             DevicesListBox.ItemsSource = CaptureDevices;
 
-            using (var c = new WasapiCapture((MMDevice) CaptureDevices.First()))
+            using (var c = new WasapiCapture((MMDevice)CaptureDevices.First()))
             {
                 SampleTypeIndex = c.WaveFormat.Encoding == WaveFormatEncoding.IeeeFloat ? 0 : 1;
                 SampleRate = c.WaveFormat.SampleRate;
@@ -338,8 +347,10 @@ namespace SoonZik.Streaming
         {
             Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
 
-            dlg.DefaultExt = ".wav";
-            dlg.Filter = "WAV Files (*.WAV)|*.wav"; 
+            dlg.DefaultExt = ".mp3";
+           // dlg.Filter = "WAV Files (*.WAV)|*.wav | MP3 Files (*.MP3)|*.mp3";
+            dlg.Filter = "Music (.mp3)|*.mp3";
+            
 
 
             // Display OpenFileDialog by calling ShowDialog method 
@@ -357,24 +368,81 @@ namespace SoonZik.Streaming
 
         private async void upload_btn_Click(object sender, RoutedEventArgs e)
         {
-            string ArtistUrl = "http://artist.lvh.me:3000/";
 
+
+
+            // string filename before
+            filename = System.IO.Path.GetFileName(upload_file_name_txt.Text);
+            Byte[] bytes = File.ReadAllBytes(upload_file_name_txt.Text);
+
+            // string file before
+            file = Convert.ToBase64String(bytes);
+
+            int begin = 0;
+            int end;
+
+            if (file.Length <= char_nb)
+                end = file.Length;
+            else
+                end = char_nb;
+
+            do_upload(begin, end);
+
+
+            // string postData = "filename=" + filename
+            //                 + "&data=" + file.Substring(begin, end)
+            //                 + "&user_id=" + Singleton.Singleton.Instance().TheArtiste.id.ToString()
+            //                 + "&secureKey=" + Security.getSecureKey(Singleton.Singleton.Instance().TheArtiste.id.ToString());
+
+            // do_upload(post, request, begin, end);
+            //await post.GetHttpPostResponse(request, postData);
+
+        }
+
+        public async void do_upload(int begin, int end)
+        {
+            string postData;
+            string fileData;
             // creating request
             HttpWebRequestPost post = new HttpWebRequestPost();
             var request = (HttpWebRequest)WebRequest.Create(ArtistUrl + "/musics/uploadRediff");
+         
+            // check la reponse...
 
-            string filename = System.IO.Path.GetFileName(upload_file_name_txt.Text);
+            if (file.Length - begin >= char_nb)
+            {
+                end += char_nb;
+                fileData = file.Substring(begin, char_nb);
+                postData = "filename=" + filename + "&data=" + WebUtility.UrlEncode(fileData) + "&user_id=" + Singleton.Singleton.Instance().TheArtiste.id.ToString() + "&secureKey=" + Security.getSecureKey(Singleton.Singleton.Instance().TheArtiste.id.ToString());
+                begin += char_nb;
+            }
+            else
+            {
+                end = file.Length - begin;
+                fileData = file.Substring(begin, end);
+                if (fileData == "")
+                    return;
+                postData = "filename=" + filename + "&data=" + WebUtility.UrlEncode(fileData) + "&user_id=" + Singleton.Singleton.Instance().TheArtiste.id.ToString() + "&secureKey=" + Security.getSecureKey(Singleton.Singleton.Instance().TheArtiste.id.ToString());
+                await post.GetHttpPostResponse(request, postData);
+                return; // --> END
+            }
 
-            Byte[] bytes = File.ReadAllBytes(upload_file_name_txt.Text);
-            String file = Convert.ToBase64String(bytes);
+            //if (file.Length - begin >= char_nb)
+            //{
+            //    end += char_nb;
+            //    postData = "filename=" + filename + "&data=" + file.Substring(begin, end) + "&user_id=" + Singleton.Singleton.Instance().TheArtiste.id.ToString() + "&secureKey=" + Security.getSecureKey(Singleton.Singleton.Instance().TheArtiste.id.ToString());
+            //}
+            //else
+            //{
+            //    end = file.Length - begin;
+            //    postData = "filename=" + filename + "&data=" + file.Substring(begin, end) + "&user_id=" + Singleton.Singleton.Instance().TheArtiste.id.ToString() + "&secureKey=" + Security.getSecureKey(Singleton.Singleton.Instance().TheArtiste.id.ToString());
+            //    await post.GetHttpPostResponse(request, postData);
+            //    return; // --> END
+            //}
 
+            var response = await post.GetHttpPostResponse(request, postData);
 
-            string postData = "filename=" + filename
-                                + "&data=" + file // file.Substring(0, 4000)
-                                + "&user_id=" + Singleton.Singleton.Instance().TheArtiste.id.ToString()
-                                + "&secureKey=" + Security.getSecureKey(Singleton.Singleton.Instance().TheArtiste.id.ToString());
-           await post.GetHttpPostResponse(request, postData);
-
+            do_upload(begin, end);
         }
     }
 
