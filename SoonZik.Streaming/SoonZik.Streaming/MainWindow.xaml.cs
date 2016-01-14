@@ -371,9 +371,9 @@ namespace SoonZik.Streaming
 
             string postData = "filename=" + filename
                                 + "&data=" + file // file.Substring(0, 4000)
-                                + "&user_id=7"
-                                + "&secureKey=2f421828da117084d9a2dc6b585fff05eefe5ad91ea8529b59d1efd42c01517e";
-            await post.GetHttpPostResponse(request, postData);
+                                + "&user_id=" + Singleton.Singleton.Instance().TheArtiste.id.ToString()
+                                + "&secureKey=" + Security.getSecureKey(Singleton.Singleton.Instance().TheArtiste.id.ToString());
+           await post.GetHttpPostResponse(request, postData);
 
         }
     }

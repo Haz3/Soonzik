@@ -78,6 +78,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Security.cs" />
     <Compile Include="Singleton\Singleton.cs" />
     <Compile Include="Utils\MediaTypeUtils.cs" />
     <Compile Include="View\Connexion.xaml.cs">
