@@ -31,11 +31,6 @@ namespace SoonZik.ViewModel
         {
             loader = new ResourceLoader();
             Navigation = new NavigationService();
-            MusiCommand = new RelayCommand(MusiCommandExecute);
-            ListArtiste = new ObservableCollection<User>();
-            ListMusique = new ObservableCollection<Music>();
-            ListInfluences = new ObservableCollection<Influence>();
-            ListAmbiance = new ObservableCollection<Ambiance>();
 
             InfluenceTapped = new RelayCommand(InfluenceTappedExecute);
             // AmbianceTapped = new RelayCommand(AmbianceTappedExecute);
@@ -46,6 +41,7 @@ namespace SoonZik.ViewModel
             PlayCommand = new RelayCommand(PlayCommandExecute);
             DowloadMusic = new RelayCommand(DownloadMusicExecute);
             LoadCommand = new RelayCommand(LoadContent);
+            MusiCommand = new RelayCommand(MusiCommandExecute);
         }
 
         #endregion
@@ -248,6 +244,10 @@ namespace SoonZik.ViewModel
 
         public void LoadContent()
         {
+            ListArtiste = new ObservableCollection<User>();
+            ListMusique = new ObservableCollection<Music>();
+            ListInfluences = new ObservableCollection<Influence>();
+            ListAmbiance = new ObservableCollection<Ambiance>();
             var request = new HttpRequestGet();
             try
             {
