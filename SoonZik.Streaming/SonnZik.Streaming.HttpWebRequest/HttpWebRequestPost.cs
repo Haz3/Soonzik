@@ -10,8 +10,8 @@ namespace SonnZik.Streaming.HttpWebRequest
     public class HttpWebRequestPost
     {
         #region Attribute
-        private const string ApiUrl = "http://soonzikapi.herokuapp.com/";
-        //private const string ApiUrl = "http://api.lvh.me:3000/";
+        //private const string ApiUrl = "http://soonzikapi.herokuapp.com/";
+        private const string ApiUrl = "http://api.lvh.me:3000/";
         public String Received { get; set; }
         #endregion
 
