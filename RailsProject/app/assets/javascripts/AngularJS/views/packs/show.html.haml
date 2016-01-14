@@ -1,4 +1,4 @@
-%pack{ "ng-init" => "showPacksById()" }
+.pack{ "ng-init" => "showPacksById()" }
   %loading{ "ng-if" => "loading == true" }
   .row{ "ng-if" => "loading == false", "ng-init" => "initFoundation()"}
     %div{"ng-show" => "thisPackId"}
@@ -7,9 +7,9 @@
       %div{"ng-init" => "timeLeft()"}
         %h5.subheader.text-center
           {{ labels.DISPLAY_PACK_TIMELEFT }} : {{ thisPack.timeLeftPack }}
-      .ul.large-block-grid-4.centered.columns
-        %li{"ng-repeat" => "album in thisPack.albums", "ng-model" => "is_partial"}
-          .panel{"ng-if" => "is_partial"}
+      .ul.large-block-grid-3.centered.columns
+        %li{"ng-repeat" => "album in thisPack.albums"}
+          .panel
             %h3.subheader
               %p.text-center
                 {{ album.title }}
@@ -46,7 +46,6 @@
             .small-3.columns
               %br
               {{ realValue.web }} €
-
             .large-4.columns
               .divider
               {{ labels.DISPLAY_PACK_TOTAL_PACK }} : {{ input.price }} €
@@ -63,5 +62,3 @@
         .large-12.columns{ 'ng-if' => 'user != false' }
           .button.expand.radius.success{ "ng-click" => "toPayment()" }
             {{ labels.DISPLAY_PACK_BUY_PACK }}
-
-

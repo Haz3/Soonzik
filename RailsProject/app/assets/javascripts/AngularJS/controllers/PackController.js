@@ -45,8 +45,8 @@ SoonzikApp.controller('PacksCtrl', ['$scope', '$routeParams', 'SecureAuth', 'HTT
 			];
 
 			HTTPService.findPacks(parameters).then(function(packs) {
-
 				$scope.pack = packs.data.content;
+				timeLeftIndex($scope.pack);
 				$scope.loading = false;
 
 			}, function (error) {
@@ -54,9 +54,7 @@ SoonzikApp.controller('PacksCtrl', ['$scope', '$routeParams', 'SecureAuth', 'HTT
 			});
 
 		});
-
 		$scope.Pack = true;
-
 	}
 
 	$scope.showPacksById = function() {
@@ -73,8 +71,11 @@ SoonzikApp.controller('PacksCtrl', ['$scope', '$routeParams', 'SecureAuth', 'HTT
 				$scope.thisPack = response.data.content;
 
 				$scope.is_partial = $scope.thisPack.partial_albums;
-				$scope.end_date = $scope.thisPack.end_date;
+
+				checkPartial();
+
 				timeLeft();
+
 				$scope.loading = false;
 			}, function (error) {
 				NotificationService.error($rootScope.labels.FILE_PACK_LOAD_ONE_PACK_ERROR_MESSAGE);
@@ -131,11 +132,45 @@ SoonzikApp.controller('PacksCtrl', ['$scope', '$routeParams', 'SecureAuth', 'HTT
 		}
 	}
 
+	var checkPartial = function() {
+		for (var i = 0; i < $scope.is_partial; i++) {
+			console.log($scope.is_partial[i]);
+		}
+	}
+
+
+	var timeLeftIndex = function() {
+
+		var timer = setInterval(function() {
+			for (var i = 0; i < $scope.pack.length; i++) {
+				var now = new Date();
+				var end_date = new Date($scope.pack[i].end_date);
+
+				if (end_date > now) {
+					var left = end_date - now
+				} else {
+					var left = "Finish !";
+				}
+
+				var date = new Date(left);
+				var day = date.getDay();
+				var hours = date.getHours();
+				var minutes = "0" + date.getMinutes();
+				var seconds = "0" + date.getSeconds();
+				var formattedTime = day + 'day ' + hours + 'h ' + minutes.substr(-2) + 'mn ' + seconds.substr(-2) + 's';
+
+				$scope.pack[i].timeLeftAllPacks = formattedTime;
+				$scope.$apply();
+			}
+		}, 1000);
+
+	}
+
 	var timeLeft = function() {
 
 		var timer = setInterval(function() {
 			var now = new Date();
-			var end = new Date($scope.end_date);
+			var end = new Date($scope.thisPack.end_date);
 
 			if (end > now) {
 				var countDown = end - now;
