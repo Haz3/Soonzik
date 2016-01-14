@@ -61,3 +61,6 @@ C:\Users\Gery\Documents\GitHub\Soonzik\SoonZik.Streaming\SoonZik.Streaming\obj\D
 C:\Users\Gery\Documents\GitHub\Soonzik\SoonZik.Streaming\SoonZik.Streaming\obj\Debug\SoonZik.Streaming.g.resources
 C:\Users\Gery\Documents\GitHub\Soonzik\SoonZik.Streaming\SoonZik.Streaming\obj\Debug\SoonZik.Streaming.Properties.Resources.resources
 C:\Users\Gery\Documents\GitHub\Soonzik\SoonZik.Streaming\SoonZik.Streaming\obj\Debug\SoonZik.Streaming.csproj.GenerateResource.Cache
+C:\Users\Julien\Desktop\GIT EIP\Soonzik\SoonZik.Streaming\SoonZik.Streaming\bin\Debug\policy.2.0.taglib-sharp.dll
+C:\Users\Julien\Desktop\GIT EIP\Soonzik\SoonZik.Streaming\SoonZik.Streaming\bin\Debug\taglib-sharp.dll
+C:\Users\Julien\Desktop\GIT EIP\Soonzik\SoonZik.Streaming\SoonZik.Streaming\bin\Debug\policy.2.0.taglib-sharp.config
