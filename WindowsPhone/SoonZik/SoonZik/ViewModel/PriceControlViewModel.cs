@@ -1,16 +1,10 @@
 ﻿using System;
-using System.Threading.Tasks;
 using System.Windows.Input;
-using Windows.ApplicationModel.Core;
 using Windows.ApplicationModel.Resources;
-using Windows.UI.Core;
 using Windows.UI.Popups;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
-using Newtonsoft.Json;
-using SoonZik.HttpRequest;
 using SoonZik.HttpRequest.Poco;
-using SoonZik.Utils;
 
 namespace SoonZik.ViewModel
 {
@@ -35,6 +29,7 @@ namespace SoonZik.ViewModel
 
         public ResourceLoader loader;
         public static Pack SelecetdPack { get; set; }
+        public static User Friend { get;set; }
 
         private Pack _thePack;
 
@@ -142,12 +137,15 @@ namespace SoonZik.ViewModel
         private void BuyExecute()
         {
             new MessageDialog("En cours de dev").ShowAsync();
-            var post = new HttpRequestPost();
+            /*var post = new HttpRequestPost();
 
             ValidateKey.GetValideKey();
+            int friendid = -1;
+            if (Friend != null)
+                friendid = Friend.id;
             var res = post.PurchasePack(SelecetdPack.id, Double.Parse(ThePack.averagePrice), ArtisteSliderValue,
                 AssocSliderValue, SoonzikSliderValue, Singleton.Singleton.Instance().SecureKey,
-                Singleton.Singleton.Instance().CurrentUser);
+                Singleton.Singleton.Instance().CurrentUser, friendid);
             res.ContinueWith(delegate(Task<string> tmp2)
             {
                 var res2 = tmp2.Result;
@@ -161,7 +159,7 @@ namespace SoonZik.ViewModel
                         CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
                             () => { new MessageDialog(loader.GetString("PaymentOk")).ShowAsync(); });
                 }
-            });
+            });*/
         }
 
         private void ArtistePriceCalc()

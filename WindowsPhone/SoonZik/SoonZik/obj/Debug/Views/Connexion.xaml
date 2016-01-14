@@ -49,7 +49,7 @@
                     </core:EventTriggerBehavior>
                 </interactivity:Interaction.Behaviors>
             </Image>
-            <Image Source="../Resources/Icones/googleplus.png" Width="50" Height="50"
+            <Image  Source="../Resources/Icones/googleplus.png" Width="50" Height="50"
                    VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,225,60,225">
 
                 <interactivity:Interaction.Behaviors>

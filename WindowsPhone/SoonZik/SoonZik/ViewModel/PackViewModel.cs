@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -7,7 +6,6 @@ using Windows.ApplicationModel.Core;
 using Windows.ApplicationModel.Resources;
 using Windows.UI.Core;
 using Windows.UI.Popups;
-using Windows.UI.Xaml.Media.Imaging;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using SoonZik.Controls;
@@ -40,6 +38,30 @@ namespace SoonZik.ViewModel
         #endregion
 
         #region attributes
+
+        private User _friend;
+
+        public User Friend
+        {
+            get { return _friend;}
+            set
+            {
+                _friend = value;
+                RaisePropertyChanged("Friend");
+            }
+        }
+
+        private ObservableCollection<User> _listFriend;
+
+        public ObservableCollection<User> ListFriend
+        {
+            get { return _listFriend;}
+            set
+            {
+                _listFriend = value;
+                RaisePropertyChanged("ListFriend");
+            }
+        }
 
         private List<Album> _listAlbums;
         private Album _selectedAlbum;
@@ -119,6 +141,7 @@ namespace SoonZik.ViewModel
             if (ThePack != null)
             {
                 PriceControlViewModel.SelecetdPack = ThePack;
+                PriceControlViewModel.Friend = Friend;
                 GlobalMenuControl.MyGrid.Children.Clear();
                 GlobalMenuControl.MyGrid.Children.Add(new PriceControl());
             }
@@ -160,6 +183,8 @@ namespace SoonZik.ViewModel
 
         public void Charge()
         {
+            ListFriend = new ObservableCollection<User>();
+            ListFriend = Singleton.Singleton.Instance().CurrentUser.friends;
             var request = new HttpRequestGet();
             var ListPack = request.GetListObject(new List<Pack>(), "packs");
             CompleteListPack = new ObservableCollection<Pack>();

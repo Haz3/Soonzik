@@ -181,6 +181,8 @@
     <RootPropertyPathName Name="TheArtiste" />
     <RootPropertyPathName Name="ArtistTappedCommand" />
     <RootPropertyPathName Name="ListAlbums" />
+    <RootPropertyPathName Name="ListFriend" />
+    <RootPropertyPathName Name="Friend" />
     <RootPropertyPathName Name="MyPack" />
     <RootPropertyPathName Name="descriptions" />
     <RootPropertyPathName Name="CompleteListPack" />
@@ -726,6 +728,12 @@
     <RootType FullName="SoonZik.Views.MainView" />
     <RootType FullName="SoonZik.Views.News" />
     <RootType FullName="SoonZik.Views.NewsDetail" />
+    <RootType FullName="Windows.UI.Xaml.Controls.ComboBox">
+      <RootProperty Name="PlaceholderText" />
+      <RootProperty Name="ItemsSource" />
+      <RootProperty Name="SelectedItem" />
+      <RootProperty Name="ItemTemplate" />
+    </RootType>
     <RootType FullName="SoonZik.Views.Packs" />
     <RootType FullName="SoonZik.Views.MyMusic" />
     <RootType FullName="SoonZik.Views.ProfilArtiste" />

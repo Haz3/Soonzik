@@ -35,8 +35,8 @@
         <DataTemplate x:Key="MusicTemplate">
             <Grid x:ConnectionId='1' Height="70" Margin="0,0,0,0"                            >
                 <Border BorderThickness="0,0,0,1" Width="350" BorderBrush="White" />
-                <TextBlock x:Name="MusicTitle" Text="{Binding Path=title}" Foreground="#40a8e2" FontSize="25"
-                           Margin="90,0,0,0" VerticalAlignment="Center" />
+                <TextBlock x:Name="MusicTitle" Text="{Binding Path=title}" Foreground="#40a8e2" FontSize="20"
+                           Margin="70,0,0,0" VerticalAlignment="Center" />
                 <Ellipse Grid.Column="0" Height="60" Width="60" VerticalAlignment="Center" HorizontalAlignment="Left">
                     <Ellipse.Fill>
                         <ImageBrush ImageSource="{Binding Path=album.imageAlbum}" AlignmentX="Center"

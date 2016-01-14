@@ -257,11 +257,19 @@ namespace SoonZik.HttpRequest
         }
 
         public async Task<String> PurchasePack(int id, double donate, double artiste, double assoc, double site,
-            string sha256, User myUser)
+            string sha256, User myUser, int idFriend)
         {
             var request = (HttpWebRequest) WebRequest.Create(ApiUrl + "purchases/buypack");
-
-            var postData = "secureKey=" + sha256 + "&user_id=" + myUser.id;
+            string postData = "";
+            if (idFriend == -1)
+            {
+                postData = "pack_id=" + id + "&amount=" + donate + "&artist=" + artiste + "&association=" + assoc + "&website=" + site + "&paypal=" + "&secureKey=" + sha256 + "&user_id=" + myUser.id;
+            }
+            else
+            {
+                postData = "pack_id=" + id + "&amount=" + donate + "&artist=" + artiste + "&association=" + assoc + "&website=" + site + "&paypal=" +"gift_user_id=" + idFriend + "&secureKey=" + sha256 + "&user_id=" + myUser.id;
+                
+            }
             return await GetHttpPostResponse(request, postData);
         }
 
