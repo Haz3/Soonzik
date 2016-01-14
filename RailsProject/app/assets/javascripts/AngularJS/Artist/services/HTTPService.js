@@ -149,6 +149,9 @@ SoonzikArtistApp.factory('HTTPService', ['$http', '$location', 'Upload', functio
     },
     setPropose: function(parameters) {
       return $http.post("http://artist." + url + "/musics/proposeAlbums", parameters);
+    },
+    indexAmbiances: function() {
+      return $http.get("http://api." + url + "/ambiances");
     }
   }
 }]);

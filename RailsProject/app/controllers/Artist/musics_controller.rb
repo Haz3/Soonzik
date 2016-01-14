@@ -484,7 +484,6 @@ module Artist
 	    		defineHttp :bad_request
 	    	end
     	rescue
-    		puts $!, $@
 	    	codeAnswer 504
     		defineHttp :service_unavailable
 	    end

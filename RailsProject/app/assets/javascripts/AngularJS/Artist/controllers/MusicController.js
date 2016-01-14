@@ -4,6 +4,7 @@ SoonzikArtistApp.controller('MusicCtrl', ['$scope', 'SecureAuth', 'HTTPService',
 	$scope.albums = [];
 	$scope.noLinkMusics = [];
 	$scope.user = false;
+	$scope.ambiances = [];
 	$scope.influences = [];
 	$scope.languages = [];
 
@@ -40,7 +41,12 @@ SoonzikArtistApp.controller('MusicCtrl', ['$scope', 'SecureAuth', 'HTTPService',
 					$scope.influences = response.data.content;
 					HTTPService.getLanguages().then(function(response) {
 						$scope.languages = response.data.content;
-						$scope.loading = false;
+						HTTPService.indexAmbiances().then(function(response) {
+							$scope.ambiances = response.data.content;
+							$scope.loading = false;
+						}, function(error) {
+							NotificationService.error("An error occured while loading");
+						});
 					}, function(error) {
 						NotificationService.error("An error occured while loading");
 					});
@@ -105,6 +111,9 @@ SoonzikArtistApp.controller('MusicCtrl', ['$scope', 'SecureAuth', 'HTTPService',
       	},
       	music: function() {
       		return music;
+      	},
+      	ambiances: function() {
+      		return $scope.ambiances;
       	}
       }
     });
@@ -114,6 +123,7 @@ SoonzikArtistApp.controller('MusicCtrl', ['$scope', 'SecureAuth', 'HTTPService',
     	music.price = newMusic.price;
     	music.limited = newMusic.limited;
     	music.genres = newMusic.genres;
+    	music.ambiances = newMusic.ambiances;
     }, function () {
     });
 	}
@@ -156,6 +166,9 @@ SoonzikArtistApp.controller('MusicCtrl', ['$scope', 'SecureAuth', 'HTTPService',
       resolve: {
       	influences: function() {
       		return $scope.influences;
+      	},
+      	ambiances: function() {
+      		return $scope.ambiances;
       	}
       }
     });
@@ -196,7 +209,7 @@ SoonzikArtistApp.controller('MusicCtrl', ['$scope', 'SecureAuth', 'HTTPService',
 	*****************************
 */
 
-SoonzikArtistApp.controller('ModalInstanceMusicCtrl', ["$scope", "$modalInstance", "Upload", "HTTPService", "NotificationService", "influences", function ($scope, $modalInstance, Upload, HTTPService, NotificationService, influences) {
+SoonzikArtistApp.controller('ModalInstanceMusicCtrl', ["$scope", "$modalInstance", "Upload", "HTTPService", "NotificationService", "influences", "ambiances", function ($scope, $modalInstance, Upload, HTTPService, NotificationService, influences, ambiances) {
 	$scope.loading = false;
 	$scope.file = null;
 	$scope.form = {
@@ -205,6 +218,7 @@ SoonzikArtistApp.controller('ModalInstanceMusicCtrl', ["$scope", "$modalInstance
 		limited: "true"
 	};
 	$scope.influences = influences;
+	$scope.ambiances = ambiances;
 	$scope.selected = {
 		selectedGenres: []
 	}
@@ -262,7 +276,8 @@ SoonzikArtistApp.controller('ModalInstanceAlbumCtrl',
 	};
 	$scope.influences = influences;
 	$scope.selected = {
-		selectedGenres: []
+		selectedGenres: [],
+		selectedAmbiances: []
 	}
 	$scope.descriptions = [{
 		language: "EN",
@@ -412,11 +427,11 @@ SoonzikArtistApp.controller('ModalInstanceEditAlbumCtrl',
 	*****************************
 */
 
-SoonzikArtistApp.controller('ModalInstanceEditMusicCtrl', ["$scope", "$modalInstance", "HTTPService", "NotificationService", "influences", "music",
-														function ($scope, $modalInstance, HTTPService, NotificationService, influences, music) {
+SoonzikArtistApp.controller('ModalInstanceEditMusicCtrl', ["$scope", "$modalInstance", "HTTPService", "NotificationService", "influences", "music", 'ambiances',
+														function ($scope, $modalInstance, HTTPService, NotificationService, influences, music, ambiances) {
 	$scope.loading = false;
 
-	var formatGenre = function(genres) {
+	var formatArray = function(genres) {
 		var array = [];
 		for (var i = 0 ; i < genres.length ; i++) {
 			array.push(genres[i].id);
@@ -430,8 +445,10 @@ SoonzikArtistApp.controller('ModalInstanceEditMusicCtrl', ["$scope", "$modalInst
 		limited: music.limited.toString()
 	};
 	$scope.influences = influences;
+	$scope.ambiances = ambiances;
 	$scope.selected = {
-		selectedGenres: formatGenre(music.genres)
+		selectedGenres: formatArray(music.genres),
+		selectedAmbiances: formatArray(music.ambiances)
 	}
 
 	// On the save button
@@ -439,6 +456,7 @@ SoonzikArtistApp.controller('ModalInstanceEditMusicCtrl', ["$scope", "$modalInst
   	var parameters = {
   		id: music.id,
   		music: $scope.form,
+  		genres: $scope.selected.selectedGenres,
   		genres: $scope.selected.selectedGenres
   	};
   	$scope.loading = true;
