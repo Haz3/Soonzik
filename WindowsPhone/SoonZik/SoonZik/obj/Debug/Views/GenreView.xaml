@@ -37,9 +37,9 @@
                        VerticalAlignment="Center" HorizontalAlignment="Right" />
                 <FlyoutBase.AttachedFlyout>
                     <MenuFlyout>
-                        <MenuFlyoutItem x:ConnectionId='3' Text="Add to playlist" x:Name="ItemPlaylist"                              />
-                        <MenuFlyoutItem x:ConnectionId='4' Text="Add to cart" x:Name="ItemCart"                           />
-                        <MenuFlyoutItem x:ConnectionId='5' Text="Go to album" x:Name="ItemAlbum"                           />
+                        <MenuFlyoutItem x:ConnectionId='3' Text="" x:Uid="AddToPlaylist" x:Name="ItemPlaylist"                              />
+                        <MenuFlyoutItem x:ConnectionId='4' Text="" x:Uid="GoToCart" x:Name="ItemCart"                           />
+                        <MenuFlyoutItem x:ConnectionId='5' Text="" x:Uid="GoToAlbum" x:Name="ItemAlbum"                           />
                     </MenuFlyout>
                 </FlyoutBase.AttachedFlyout>
             </Grid>

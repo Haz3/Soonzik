@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Windows.ApplicationModel.Core;
+using Windows.ApplicationModel.Resources;
 using Windows.UI.Core;
 using Windows.UI.Popups;
 using Windows.UI.Xaml.Media.Imaging;
@@ -22,6 +23,7 @@ namespace SoonZik.ViewModel
     {
         #region Attribute
 
+        public ResourceLoader loader;
         public static Music SelecMusic { get; set; }
 
         public Music SelectedMusic
@@ -60,6 +62,7 @@ namespace SoonZik.ViewModel
 
         public GenreViewModel()
         {
+            loader = new ResourceLoader();
             AlbumCommand = new RelayCommand(AlbumCommandExecute);
             AddToPlaylist = new RelayCommand(AddToPlaylistExecute);
             AddMusicToCart = new RelayCommand(AddMusicToCartExecute);
@@ -67,6 +70,9 @@ namespace SoonZik.ViewModel
             SelectionCommand = new RelayCommand(SelectionCommandExecute);
         }
 
+        #endregion
+
+        #region Method
         private void SelectionCommandExecute()
         {
             ListGenreSelected = new ObservableCollection<Genre>();
@@ -138,7 +144,7 @@ namespace SoonZik.ViewModel
                 if (res2 != null)
                 {
                     CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
-                        () => { new MessageDialog("Article ajoute au panier").ShowAsync(); });
+                        () => { new MessageDialog(loader.GetString("PrdouctAddToCart")).ShowAsync(); });
                 }
             });
         }

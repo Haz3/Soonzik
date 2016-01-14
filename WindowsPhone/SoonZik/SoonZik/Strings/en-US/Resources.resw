@@ -363,4 +363,106 @@
   <data name="AmbiancePivot.Header" xml:space="preserve">
     <value>Ambiances</value>
   </data>
+  <data name="ErrorUpdate" xml:space="preserve">
+    <value>Fail during update</value>
+  </data>
+  <data name="FeedbackSend" xml:space="preserve">
+    <value>The feedback was send</value>
+  </data>
+  <data name="ProductAddToCart" xml:space="preserve">
+    <value>Product add to cart</value>
+  </data>
+  <data name="AddPlaylist" xml:space="preserve">
+    <value>Music add to playlist</value>
+  </data>
+  <data name="DeleteFromPlaylist.Text" xml:space="preserve">
+    <value>Delete from playlist</value>
+  </data>
+  <data name="Download.Text" xml:space="preserve">
+    <value>Download</value>
+  </data>
+  <data name="DownloadOk" xml:space="preserve">
+    <value>Download successful</value>
+  </data>
+  <data name="ErrorAddPlaylist" xml:space="preserve">
+    <value>You need to select a playlist</value>
+  </data>
+  <data name="ErrorChamp" xml:space="preserve">
+    <value>Please complete all fields marked *</value>
+  </data>
+  <data name="ErrorConnec" xml:space="preserve">
+    <value>Connection error</value>
+  </data>
+  <data name="ErrorDeleteMusic" xml:space="preserve">
+    <value>Error deleting music</value>
+  </data>
+  <data name="ErrorDeletePlaylist" xml:space="preserve">
+    <value>Error deleting the playlist</value>
+  </data>
+  <data name="ErrorDownload" xml:space="preserve">
+    <value>Fail download</value>
+  </data>
+  <data name="ErrorEmail" xml:space="preserve">
+    <value>The email address is not valid</value>
+  </data>
+  <data name="ErrorGeo" xml:space="preserve">
+    <value>Loading map error</value>
+  </data>
+  <data name="ErrorIdUser" xml:space="preserve">
+    <value>Error retrieving user id</value>
+  </data>
+  <data name="ErrorLogIn" xml:space="preserve">
+    <value>Please enter your login details</value>
+  </data>
+  <data name="ErrorNoMusic" xml:space="preserve">
+    <value>No music selected</value>
+  </data>
+  <data name="ErrorPayment" xml:space="preserve">
+    <value>Payment error</value>
+  </data>
+  <data name="ErrorSignal" xml:space="preserve">
+    <value>Network trouble</value>
+  </data>
+  <data name="ErrorTweet" xml:space="preserve">
+    <value>Error while sending your message</value>
+  </data>
+  <data name="ErrorTwitter" xml:space="preserve">
+    <value>Connection twitter error</value>
+  </data>
+  <data name="ErrorUpdatePlaylist" xml:space="preserve">
+    <value>Error updating Playlist</value>
+  </data>
+  <data name="Euros1" xml:space="preserve">
+    <value> €</value>
+  </data>
+  <data name="GoToAlbum.Text" xml:space="preserve">
+    <value>Go to album</value>
+  </data>
+  <data name="GoToCart.Text" xml:space="preserve">
+    <value>Add to cart</value>
+  </data>
+  <data name="InfosConec" xml:space="preserve">
+    <value>Veuillez entrer vos informations de connexion</value>
+  </data>
+  <data name="MusicDelete" xml:space="preserve">
+    <value>The music was deleted</value>
+  </data>
+  <data name="PasswordEight" xml:space="preserve">
+    <value>The password need 8 characters</value>
+  </data>
+  <data name="PaymentOk" xml:space="preserve">
+    <value>Payment successful</value>
+  </data>
+  <data name="RateMusic.Text" xml:space="preserve">
+    <value>Rate the music</value>
+  </data>
+  <data name="SignInOk" xml:space="preserve">
+    <value>Sigin successful</value>
+  </data>
+  <data name="Total1" xml:space="preserve">
+    <value>Total :</value>
+  </data>
+  <data name="WaitGeo" xml:space="preserve">
+    <value>Loading map</value>
+  </data>
 </root>

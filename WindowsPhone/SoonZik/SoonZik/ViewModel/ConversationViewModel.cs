@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Windows.ApplicationModel.Core;
+using Windows.ApplicationModel.Resources;
 using Windows.UI.Core;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
@@ -20,12 +21,14 @@ namespace SoonZik.ViewModel
         {
             SendCommand = new RelayCommand(SendCommandExecute);
             SelectionCommand = new RelayCommand(SelectionCommandExecute);
+            loader = new ResourceLoader();
         }
 
         #endregion
 
         #region Attribute
 
+        public ResourceLoader loader;
         public ICommand SendCommand { get; private set; }
         public ICommand SelectionCommand { get; private set; }
 

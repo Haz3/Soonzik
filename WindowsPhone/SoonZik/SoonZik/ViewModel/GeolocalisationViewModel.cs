@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Windows.ApplicationModel.Core;
+using Windows.ApplicationModel.Resources;
 using Windows.Devices.Geolocation;
 using Windows.Foundation;
 using Windows.UI.Core;
@@ -23,10 +24,13 @@ namespace SoonZik.ViewModel
 
         public GeolocalisationViewModel()
         {
+            loader = new ResourceLoader();
             LoadedCommand = new RelayCommand(LoadedCommandExecute);
         }
 
         #endregion
+
+        #region Method
 
         private void LoadedCommandExecute()
         {
@@ -47,7 +51,6 @@ namespace SoonZik.ViewModel
             });
         }
 
-        #region Method
 
         private void CreateListElement()
         {
@@ -73,7 +76,7 @@ namespace SoonZik.ViewModel
             }
             catch (Exception)
             {
-                new MessageDialog("Fail geoloc").ShowAsync();
+                new MessageDialog(loader.GetString("ErrorGeo")).ShowAsync();
             }
 
         }
@@ -108,7 +111,7 @@ namespace SoonZik.ViewModel
             }
             catch (Exception)
             {
-                new MessageDialog("Map en cours de chargement").ShowAsync();
+                new MessageDialog(loader.GetString("WaitGeo")).ShowAsync();
             }
 
         }
@@ -227,8 +230,9 @@ namespace SoonZik.ViewModel
 
         #endregion
 
-        #region Attrivute
+        #region Attribute
 
+        public ResourceLoader loader;
         public List<MapIcon> ListMapIcons { get; set; }
 
         private ObservableCollection<MapElement> _mapElements;

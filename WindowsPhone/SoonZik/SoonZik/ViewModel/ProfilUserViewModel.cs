@@ -33,6 +33,7 @@ namespace SoonZik.ViewModel
             EditClickCommand = new RelayCommand(EditInformationExecute);
             TappedCommand = new RelayCommand(TappedCommandExecute);
             _coreApplicationView = CoreApplication.GetCurrentView();
+            loader = new ResourceLoader();
             //Navigation.GoBack();
         }
 
@@ -40,6 +41,7 @@ namespace SoonZik.ViewModel
 
         #region Attribute
 
+        public ResourceLoader loader { get; set; }
         private User _currentUser;
 
         public User CurrentUser
@@ -137,7 +139,6 @@ namespace SoonZik.ViewModel
 
         private void EditInformationExecute()
         {
-            var loader = new ResourceLoader();
             if (!NeedUpdate)
             {
                 CanUpdate = true;
@@ -157,6 +158,7 @@ namespace SoonZik.ViewModel
 
         private async Task UpdateData()
         {
+            var loader = new ResourceLoader();
             var post = new HttpRequestPost();
             try
             {
@@ -166,7 +168,8 @@ namespace SoonZik.ViewModel
             }
             catch (Exception)
             {
-                new MessageDialog("Erreur lors de l'update").ShowAsync();
+
+                new MessageDialog(loader.GetString("ErrorUpdate")).ShowAsync();
             }
         }
 

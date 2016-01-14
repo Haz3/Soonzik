@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Windows.ApplicationModel.Core;
+using Windows.ApplicationModel.Resources;
 using Windows.UI.Core;
 using Windows.UI.Popups;
 using Windows.UI.Xaml;
@@ -284,6 +285,7 @@ namespace SoonZik.ViewModel
 
         private void AddToCartExecute()
         {
+            var loader = new ResourceLoader();
             var post = new HttpRequestPost();
             ValidateKey.GetValideKey();
             var res = post.SaveCart(null, TheAlbum, Singleton.Singleton.Instance().SecureKey,
@@ -294,7 +296,7 @@ namespace SoonZik.ViewModel
                 if (res2 != null)
                 {
                     CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
-                        () => { new MessageDialog("Article ajoute au panier").ShowAsync(); });
+                        () => { new MessageDialog(loader.GetString("ProductAddToCart")).ShowAsync(); });
                 }
             });
         }
@@ -350,6 +352,7 @@ namespace SoonZik.ViewModel
 
         private void AddMusicToCartExecute()
         {
+            var loader = new ResourceLoader();
             _selectedMusic = SelectedMusic;
             var post = new HttpRequestPost();
             ValidateKey.GetValideKey();
@@ -361,7 +364,7 @@ namespace SoonZik.ViewModel
                 if (res2 != null)
                 {
                     CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
-                        () => { new MessageDialog("Article ajoute au panier").ShowAsync(); });
+                        () => { new MessageDialog(loader.GetString("ProductAddToCart")).ShowAsync(); });
                 }
             });
         }

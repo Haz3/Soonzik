@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Windows.ApplicationModel.Core;
+using Windows.ApplicationModel.Resources;
 using Windows.UI.Core;
 using Windows.UI.Popups;
 using Coding4Fun.Toolkit.Controls;
@@ -23,6 +24,7 @@ namespace SoonZik.ViewModel
 
         public PlaylistViewModel()
         {
+            loader = new ResourceLoader();
             LoadedCommand = new RelayCommand(OnLoadedPageExecute);
             RenameCommand = new RelayCommand(RenameCommandExecute);
             UpdatePlaylist = new RelayCommand(UpdatePlaylistExecute);
@@ -37,6 +39,7 @@ namespace SoonZik.ViewModel
 
         #region Attribute
 
+        public ResourceLoader loader;
         private string _cryptographic;
         public ICommand RenameCommand { get; private set; }
         public ICommand PlayCommand { get; private set; }
@@ -246,7 +249,7 @@ namespace SoonZik.ViewModel
                 if (res2 != null)
                 {
                     CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
-                        () => { new MessageDialog("Article ajoute au panier").ShowAsync(); });
+                        () => { new MessageDialog(loader.GetString("ProductAddToCart")).ShowAsync(); });
                 }
             });
         }
@@ -274,12 +277,12 @@ namespace SoonZik.ViewModel
                                 var stringJson = JObject.Parse(test).SelectToken("code").ToString();
                                 if (stringJson == "200")
                                 {
-                                    new MessageDialog("Music delete").ShowAsync();
+                                    new MessageDialog(loader.GetString("MusicDelete")).ShowAsync();
                                     UpdatePlaylist.Execute(null);
                                 }
                                 else
                                 {
-                                    new MessageDialog("Delete Fail code: " + stringJson).ShowAsync();
+                                    new MessageDialog(loader.GetString("ErrorDeleteMusic") + stringJson).ShowAsync();
                                 }
                             });
                     }
@@ -287,7 +290,7 @@ namespace SoonZik.ViewModel
             }
             else
             {
-                new MessageDialog("You need to be on the playlist").ShowAsync();
+                new MessageDialog(loader.GetString("ErrorAddPlaylist")).ShowAsync();
             }
         }
 

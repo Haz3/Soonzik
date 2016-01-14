@@ -18,16 +18,6 @@
     </interactivity:Interaction.Behaviors>
 
     <Page.Resources>
-        <!--<DataTemplate x:Key="PackItemTemplate">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="110" />
-                    <ColumnDefinition Width="20*" />
-                    <ColumnDefinition Width="100" />
-                </Grid.ColumnDefinitions>
-                <Image Grid.Column="1" Source="{Binding Path=BitmapImage}" Height="200" Width="200" />
-            </Grid>
-        </DataTemplate>-->
 
         <DataTemplate x:Key="AlbumTemplate">
             <Grid Height="70" Margin="0,0,0,0">
@@ -56,19 +46,6 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <!--<ListView Grid.Row="0" ItemsSource="{Binding Datas}" ItemTemplate="{StaticResource PackItemTemplate}"
-                  SelectedItem="{Binding SelectedData, Mode=TwoWay}"
-                  ScrollViewer.HorizontalScrollBarVisibility="Auto"
-                  ScrollViewer.VerticalScrollBarVisibility="Disabled"
-                  ScrollViewer.HorizontalScrollMode="Enabled"
-                  ScrollViewer.VerticalScrollMode="Disabled"
-                  ScrollViewer.ZoomMode="Disabled" VerticalContentAlignment="Center">
-            <ListView.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <VirtualizingStackPanel Orientation="Horizontal" />
-                </ItemsPanelTemplate>
-            </ListView.ItemsPanel>
-        </ListView>-->
         <ListBox Grid.Row="0" Background="Transparent" ItemsSource="{Binding CompleteListPack}"
                  ItemTemplate="{StaticResource ListPackItemTemplate}"
                  SelectedItem="{Binding ThePack, Mode=TwoWay}">

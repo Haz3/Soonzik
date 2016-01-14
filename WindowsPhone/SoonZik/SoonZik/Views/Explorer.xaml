@@ -41,10 +41,10 @@
                        VerticalAlignment="Center" HorizontalAlignment="Right" />
                 <FlyoutBase.AttachedFlyout>
                     <MenuFlyout>
-                        <MenuFlyoutItem Text="Add to playlist" x:Name="ItemPlaylist" Click="ItemPlaylist_OnClick" />
-                        <MenuFlyoutItem Text="Add to cart" x:Name="ItemCart" Click="ItemCart_OnTapped" />
-                        <MenuFlyoutItem Text="Go to album" x:Name="ItemAlbum" Click="ItemAlbum_OnClick" />
-                        <MenuFlyoutItem Text="Download" x:Name="Download" Click="Download_OnClick" />
+                        <MenuFlyoutItem Text="" x:Uid="AddToPlaylist" x:Name="ItemPlaylist" Click="ItemPlaylist_OnClick" />
+                        <MenuFlyoutItem Text="" x:Uid="GoToCart" x:Name="ItemCart" Click="ItemCart_OnTapped" />
+                        <MenuFlyoutItem Text="" x:Uid="GoToAlbum" x:Name="ItemAlbum" Click="ItemAlbum_OnClick" />
+                        <MenuFlyoutItem Text="" x:Uid="Download" x:Name="Download" Click="Download_OnClick" />
                     </MenuFlyout>
                 </FlyoutBase.AttachedFlyout>
             </Grid>

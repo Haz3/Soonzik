@@ -1,9 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Windows.ApplicationModel.Core;
+using Windows.ApplicationModel.Resources;
+using Windows.Networking.BackgroundTransfer;
+using Windows.Storage;
 using Windows.UI.Core;
 using Windows.UI.Popups;
 using GalaSoft.MvvmLight;
@@ -24,6 +28,8 @@ namespace SoonZik.ViewModel
 
         public MyMusicViewModel()
         {
+            DowloadMusic = new RelayCommand(DownloadMusicExecute);
+            loader = new ResourceLoader();
             ListAlbum = new ObservableCollection<Album>();
             ListMusique = new ObservableCollection<Music>();
             ListPack = new ObservableCollection<Pack>();
@@ -46,7 +52,47 @@ namespace SoonZik.ViewModel
 
         #endregion
 
-        #region Method
+        #region Method        
+        private void DownloadMusicExecute()
+        {
+            var request = new HttpRequestGet();
+            var res = request.GetObject(new Music(), "musics", SelectedMusic.id.ToString());
+            res.ContinueWith(delegate(Task<object> task)
+            {
+                var music = task.Result as Music;
+                if (music != null)
+                {
+                    CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
+                        () =>
+                        {
+                            SelectedMusic = music;
+                            SelectedMusic.file = "http://soonzikapi.herokuapp.com/musics/get/" + SelectedMusic.id;
+
+                            DownloadFile();
+                        });
+                }
+            });
+        }
+
+        private async void DownloadFile()
+        {
+            try
+            {
+                var source = new Uri(SelectedMusic.file, UriKind.Absolute);
+                var destinationFile =
+                    await
+                        KnownFolders.MusicLibrary.CreateFileAsync(SelectedMusic.title + ".mp3",
+                            CreationCollisionOption.ReplaceExisting);
+                var downloader = new BackgroundDownloader();
+                var download = downloader.CreateDownload(source, destinationFile);
+                await download.StartAsync().AsTask(new CancellationToken(), new Progress<DownloadOperation>());
+            }
+            catch (Exception e)
+            {
+                new MessageDialog(loader.GetString("ErrorDowload")).ShowAsync();
+            }
+            new MessageDialog(loader.GetString("DownloadOk")).ShowAsync();
+        }
 
         private void PlayCommandExecute()
         {
@@ -67,7 +113,7 @@ namespace SoonZik.ViewModel
                 if (res2 != null)
                 {
                     CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
-                        () => { new MessageDialog("Article ajoute au panier").ShowAsync(); });
+                        () => { new MessageDialog(loader.GetString("ProductAddToCart")).ShowAsync(); });
                 }
             });
         }
@@ -151,7 +197,7 @@ namespace SoonZik.ViewModel
             }
             else if (!_delete)
             {
-                new MessageDialog("Ajout a playlist").ShowAsync();
+                new MessageDialog(loader.GetString("AddPlaylist")).ShowAsync();
 
                 SelectedPlaylist.musics.Add(MusicForPlaylist);
 
@@ -175,7 +221,7 @@ namespace SoonZik.ViewModel
                 }
                 catch (Exception)
                 {
-                    new MessageDialog("Erreur update pl").ShowAsync();
+                    new MessageDialog(loader.GetString("ErrorUpdatePlaylist")).ShowAsync();
                 }
             }
             else
@@ -252,7 +298,7 @@ namespace SoonZik.ViewModel
                                     }
                                     catch (Exception)
                                     {
-                                        new MessageDialog("Erreur update pl").ShowAsync();
+                                        new MessageDialog(loader.GetString("ErrorUpdatePlaylist")).ShowAsync();
                                     }
                                 });
                         }
@@ -260,12 +306,12 @@ namespace SoonZik.ViewModel
                 }
                 catch (Exception)
                 {
-                    new MessageDialog("Erreur update pl").ShowAsync();
+                    new MessageDialog(loader.GetString("ErrorUpdatePlaylist")).ShowAsync();
                 }
             }
             else
             {
-                new MessageDialog("No music selected").ShowAsync();
+                new MessageDialog(loader.GetString("ErrorNoMusic")).ShowAsync();
             }
         }
 
@@ -288,7 +334,7 @@ namespace SoonZik.ViewModel
                         var stringJson = JObject.Parse(test).SelectToken("code").ToString();
                         if (stringJson == "202")
                         {
-                            new MessageDialog("Playlist delete").ShowAsync();
+                            new MessageDialog(loader.GetString("ErrorDeletePlaylist")).ShowAsync();
                             RefreshPlaylist();
                         }
                         else
@@ -302,6 +348,8 @@ namespace SoonZik.ViewModel
 
         #region Attribute
 
+        public ResourceLoader loader;
+        public ICommand DowloadMusic { get; private set; }
         public ICommand PlayCommand { get; private set; }
         public ICommand AddToPlaylist { get; private set; }
         public ICommand AddMusicToCart { get; private set; }

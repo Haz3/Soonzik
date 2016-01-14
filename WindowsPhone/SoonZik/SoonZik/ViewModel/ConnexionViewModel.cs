@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using Windows.ApplicationModel.Activation;
 using Windows.ApplicationModel.Core;
+using Windows.ApplicationModel.Resources;
 using Windows.Security.Authentication.Web;
 using Windows.Security.Cryptography;
 using Windows.Security.Cryptography.Core;
@@ -34,6 +35,7 @@ namespace SoonZik.ViewModel
     {
         #region Attribute
 
+        public ResourceLoader loader; 
         private readonly string _consumerKey = "ooWEcrlhooUKVOxSgsVNDJ1RK";
         private const string ConsumerSecret = "BtLpq9ZlFzXrFklC2f1CXqy8EsSzgRRVPZrKVh0imI2TOrZAan";
         private readonly string _accessToken = "1951971955-TJuWAfR6awbG9ds1lEh9quuHzqtnx1xlRtORZD2";
@@ -92,6 +94,7 @@ namespace SoonZik.ViewModel
 
         public ConnexionViewModel()
         {
+            loader = new ResourceLoader();
             ProgressOn = false;
             Singleton.Singleton.Instance().SelectedMusicSingleton = new ObservableCollection<Music>();
             Navigation = new NavigationService();
@@ -146,7 +149,7 @@ namespace SoonZik.ViewModel
                 }
                 else
                 {
-                    new MessageDialog("Veuillez entrer vos informations de connexion").ShowAsync();
+                    new MessageDialog(loader.GetString("InfosConec")).ShowAsync();
                 }
             });
         }
@@ -174,7 +177,7 @@ namespace SoonZik.ViewModel
                 }
                 catch (Exception e)
                 {
-                    new MessageDialog("Erreur de connexion" + e).ShowAsync();
+                    new MessageDialog(loader.GetString("ErrorConnec") + e).ShowAsync();
                     ProgressOn = false;
                 }
                 ValidateKey.GetValideKey();
@@ -184,7 +187,7 @@ namespace SoonZik.ViewModel
             }
             else
             {
-                new MessageDialog("Reseau insufisant").ShowAsync();
+                new MessageDialog(loader.GetString("ErrorSignal")).ShowAsync();
                 ProgressOn = false;
             }
         }
@@ -273,7 +276,7 @@ namespace SoonZik.ViewModel
             }
             catch (Exception Error)
             {
-                new MessageDialog("Erreur lors de la connexion via Twitter").ShowAsync();
+                new MessageDialog(loader.GetString("ErrorTwitter")).ShowAsync();
             }
         }
 

@@ -50,7 +50,8 @@ namespace SoonZik.ViewModel
 
         private void AgileCallback()
         {
-            new MessageDialog("Feedback send").ShowAsync();
+            var loader = new ResourceLoader();
+            new MessageDialog(loader.GetString("FeedbackSend")).ShowAsync();
         }
 
         #region Attribute

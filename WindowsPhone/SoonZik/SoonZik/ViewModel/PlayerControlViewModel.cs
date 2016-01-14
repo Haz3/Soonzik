@@ -194,7 +194,17 @@ namespace SoonZik.ViewModel
             }
             else
             {
-                dispatcherTimer.Start();
+                if (dispatcherTimer == null)
+                {
+                    dispatcherTimer = new DispatcherTimer();
+                    dispatcherTimer.Tick += DispatcherTimerOnTick;
+                    dispatcherTimer.Interval = new TimeSpan(0, 0, 1);
+                    dispatcherTimer.Start();
+                }
+                else 
+                {
+                    dispatcherTimer.Start();
+                }
                 PlayImage =
                     new BitmapImage(new Uri("ms-appx:///Resources/PlayerIcons/pause.png", UriKind.RelativeOrAbsolute));
                 MediaElementObject.Play();

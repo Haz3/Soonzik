@@ -157,10 +157,10 @@
     <value>Explorer</value>
   </data>
   <data name="FirstName.PlaceholderText" xml:space="preserve">
-    <value>Prenom*</value>
+    <value>Prénom*</value>
   </data>
   <data name="ForgotPassword.Content" xml:space="preserve">
-    <value>Mot de passe oublier</value>
+    <value>Mot de passe oublié</value>
   </data>
   <data name="Friends.Content" xml:space="preserve">
     <value>Mon reseau</value>
@@ -193,7 +193,7 @@
     <value>A la une</value>
   </data>
   <data name="NumberStreet.PlaceholderText" xml:space="preserve">
-    <value>Numero de rue</value>
+    <value>Numéro de rue</value>
   </data>
   <data name="Packs.Text" xml:space="preserve">
     <value>Packs</value>
@@ -205,7 +205,7 @@
     <value>Mot de passe*</value>
   </data>
   <data name="Phone.PlaceholderText" xml:space="preserve">
-    <value>Telephone</value>
+    <value>Téléphone</value>
   </data>
   <data name="Picture.PlaceholderText" xml:space="preserve">
     <value>Photo</value>
@@ -253,16 +253,16 @@
     <value>Bienvenue</value>
   </data>
   <data name="ZipCode.PlaceholderText" xml:space="preserve">
-    <value>Code postale</value>
+    <value>Code postal</value>
   </data>
   <data name="PlaylistPivot.Header" xml:space="preserve">
     <value>Playlist(s)</value>
   </data>
   <data name="PostEdit" xml:space="preserve">
-    <value>Mettre a jour mes informations</value>
+    <value>Mettre à jour mes informations</value>
   </data>
   <data name="UpdateInformation" xml:space="preserve">
-    <value>Vos informations sont mise a jour</value>
+    <value>Vos informations sont mises à jour</value>
   </data>
   <data name="Association.Text" xml:space="preserve">
     <value>Association</value>
@@ -304,10 +304,10 @@
     <value>Pack(s)</value>
   </data>
   <data name="EndBattle.Text" xml:space="preserve">
-    <value>La battle est terminee</value>
+    <value>La battle est terminée</value>
   </data>
   <data name="AddToPlaylist.Text" xml:space="preserve">
-    <value>Ajouter a la playlist</value>
+    <value>Ajouter à la playlist</value>
   </data>
   <data name="Carts.Text" xml:space="preserve">
     <value>Mon panier</value>
@@ -316,7 +316,7 @@
     <value>Acheter</value>
   </data>
   <data name="CreatePlaylist.Content" xml:space="preserve">
-    <value>Creer une playlist</value>
+    <value>Créer une playlist</value>
   </data>
   <data name="DelFromPlaylist.Text" xml:space="preserve">
     <value>Supprimer de la playlist</value>
@@ -343,7 +343,7 @@
     <value>Adresse</value>
   </data>
   <data name="InfoGeneral.Text" xml:space="preserve">
-    <value>Informations Generales</value>
+    <value>Informations Génerales</value>
   </data>
   <data name="Object.PlaceholderText" xml:space="preserve">
     <value>Objet*</value>
@@ -362,5 +362,107 @@
   </data>
   <data name="AmbiancePivot.Header" xml:space="preserve">
     <value>Ambiances</value>
+  </data>
+  <data name="ErrorUpdate" xml:space="preserve">
+    <value>Erreur lors de l'update</value>
+  </data>
+  <data name="FeedbackSend" xml:space="preserve">
+    <value>Le message à bien etait transmis</value>
+  </data>
+  <data name="ProductAddToCart" xml:space="preserve">
+    <value>Article ajouté au panier</value>
+  </data>
+  <data name="AddPlaylist" xml:space="preserve">
+    <value>Musique ajoutée à la playlist</value>
+  </data>
+  <data name="DeleteFromPlaylist.Text" xml:space="preserve">
+    <value>Supprimer de la playlist</value>
+  </data>
+  <data name="Download.Text" xml:space="preserve">
+    <value>Télécharger</value>
+  </data>
+  <data name="DownloadOk" xml:space="preserve">
+    <value>Le téléchargement est réussi</value>
+  </data>
+  <data name="ErrorAddPlaylist" xml:space="preserve">
+    <value>Vous devez sélectionner une playlist</value>
+  </data>
+  <data name="ErrorChamp" xml:space="preserve">
+    <value>Veuillez remplir tous les champs avec une *</value>
+  </data>
+  <data name="ErrorConnec" xml:space="preserve">
+    <value>Erreur de connexion</value>
+  </data>
+  <data name="ErrorDeleteMusic" xml:space="preserve">
+    <value>Erreur lors de la suppression de la musique</value>
+  </data>
+  <data name="ErrorDeletePlaylist" xml:space="preserve">
+    <value>Erreur lors de la suppression de la playlist</value>
+  </data>
+  <data name="ErrorDownload" xml:space="preserve">
+    <value>Le téléchargement a echoué</value>
+  </data>
+  <data name="ErrorEmail" xml:space="preserve">
+    <value>L'adresse e-mail n'est pas valide</value>
+  </data>
+  <data name="ErrorGeo" xml:space="preserve">
+    <value>Erreur du chargement de la carte</value>
+  </data>
+  <data name="ErrorIdUser" xml:space="preserve">
+    <value>Erreur lors de la récupération de l'id utilisateur</value>
+  </data>
+  <data name="ErrorLogIn" xml:space="preserve">
+    <value>Veuillez entrer vos informations de connexion</value>
+  </data>
+  <data name="ErrorNoMusic" xml:space="preserve">
+    <value>Pas de musique sélectionnée</value>
+  </data>
+  <data name="ErrorPayment" xml:space="preserve">
+    <value>Erreur lors du paiement</value>
+  </data>
+  <data name="ErrorSignal" xml:space="preserve">
+    <value>Réseau insuffisant</value>
+  </data>
+  <data name="ErrorTweet" xml:space="preserve">
+    <value>Erreur lors de l'envoi de votre message</value>
+  </data>
+  <data name="ErrorTwitter" xml:space="preserve">
+    <value>Erreur lors de la connexion via Twitter</value>
+  </data>
+  <data name="ErrorUpdatePlaylist" xml:space="preserve">
+    <value>Erreur lors de la mise à jour de la playlist</value>
+  </data>
+  <data name="Euros" xml:space="preserve">
+    <value> €</value>
+  </data>
+  <data name="GoToAlbum.Text" xml:space="preserve">
+    <value>Voir l'album</value>
+  </data>
+  <data name="GoToCart.Text" xml:space="preserve">
+    <value>Ajouter au panier</value>
+  </data>
+  <data name="InfosConec" xml:space="preserve">
+    <value>Veuillez entrer vos informations de connexion</value>
+  </data>
+  <data name="MusicDelete" xml:space="preserve">
+    <value>La musique a été surpprimée</value>
+  </data>
+  <data name="PasswordEight" xml:space="preserve">
+    <value>Le mot de passe doit contenir au mois 8 caractères</value>
+  </data>
+  <data name="PaymentOk" xml:space="preserve">
+    <value>Paiement effectué</value>
+  </data>
+  <data name="RateMusic.Text" xml:space="preserve">
+    <value>Noter la musique</value>
+  </data>
+  <data name="SignInOk" xml:space="preserve">
+    <value>L'inscription est réussi</value>
+  </data>
+  <data name="Total" xml:space="preserve">
+    <value>Total :</value>
+  </data>
+  <data name="WaitGeo" xml:space="preserve">
+    <value>La carte est en cours de chargement</value>
   </data>
 </root>

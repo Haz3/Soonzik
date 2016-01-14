@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows.Input;
 using Windows.ApplicationModel.Core;
+using Windows.ApplicationModel.Resources;
 using Windows.UI.Core;
 using Windows.UI.Popups;
 using Windows.UI.Xaml.Media.Imaging;
@@ -23,6 +24,7 @@ namespace SoonZik.ViewModel
 
         public InscriptionViewModel()
         {
+            loader = new ResourceLoader();
             ValidateCommand = new RelayCommand(ValidateExecute);
             PasswordBoxCommand = new RelayCommand(PasswordBoxCommandExecute);
             NewUser = new User();
@@ -34,6 +36,7 @@ namespace SoonZik.ViewModel
 
         #region Attribute
 
+        public ResourceLoader loader;
         private string _password;
 
         public string Password
@@ -97,7 +100,7 @@ namespace SoonZik.ViewModel
             if (Password != null)
             {   
                 if (Password.Length < 8)
-                    new MessageDialog("Password need 8").ShowAsync();
+                    new MessageDialog(loader.GetString("PasswordEight")).ShowAsync();
             }
         }
 
@@ -130,12 +133,12 @@ namespace SoonZik.ViewModel
                 }
                 else
                 {
-                    new MessageDialog("Email not Valid").ShowAsync();
+                    new MessageDialog(loader.GetString("ErrorEmail")).ShowAsync();
                 }
             }
             else
             {
-                new MessageDialog("Veuillez remplir les champs avec une *").ShowAsync();
+                new MessageDialog(loader.GetString("ErrorChamp")).ShowAsync();
             }
             
         }
@@ -144,7 +147,7 @@ namespace SoonZik.ViewModel
         {
             var postRequest = new HttpRequestPost();
             var res = await postRequest.Save(NewUser, "", Password);
-            new MessageDialog("Inscription OK").ShowAsync();
+            new MessageDialog(loader.GetString("SigInOk")).ShowAsync();
             MakeConnexion();
         }
 
@@ -163,7 +166,7 @@ namespace SoonZik.ViewModel
                 }
                 else
                 {
-                    new MessageDialog("Veuillez entrer vos informations de connexion").ShowAsync();
+                    new MessageDialog(loader.GetString("ErrorLogIn")).ShowAsync();
                 }
             });
         }
@@ -187,13 +190,13 @@ namespace SoonZik.ViewModel
                 }
                 catch (Exception e)
                 {
-                    new MessageDialog("Erreur de connexion" + e).ShowAsync();
+                    new MessageDialog(loader.GetString("ErrorConnec") + e).ShowAsync();
                 }
                 Navigation.Navigate(typeof (MainView));
             }
             else
             {
-                new MessageDialog("Erreur de connexion Code 502").ShowAsync();
+                new MessageDialog(loader.GetString("ErrorConnec")).ShowAsync();
             }
         }
 

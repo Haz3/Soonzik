@@ -107,7 +107,7 @@ namespace SoonZik.ViewModel
                 ButtonFriendText = loader.GetString(_friend ? "DelFriend" : "AddFriend");
             }
             else
-                new MessageDialog("Erreur lors de la recuperation de l'id user").ShowAsync();
+                new MessageDialog(loader.GetString("ErrorIdUser")).ShowAsync();
         }
 
         private void SelectionExecute()

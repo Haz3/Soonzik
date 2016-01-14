@@ -5,6 +5,7 @@ using System.Globalization;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Windows.ApplicationModel.Core;
+using Windows.ApplicationModel.Resources;
 using Windows.System.UserProfile;
 using Windows.UI.Core;
 using Windows.UI.Popups;
@@ -188,6 +189,7 @@ namespace SoonZik.ViewModel
         private void UpadteNews()
         {
             var request = new HttpRequestGet();
+            ValidateKey.CheckValidateKey();
             var news = request.GetSecureObject(new News(), "news", SelectNews.id.ToString(),
                 Singleton.Singleton.Instance().SecureKey, Singleton.Singleton.Instance().CurrentUser.id.ToString());
             news.ContinueWith(delegate(Task<object> tmp)
@@ -249,7 +251,8 @@ namespace SoonZik.ViewModel
             }
             catch (Exception)
             {
-                new MessageDialog("Erreur lors du post").ShowAsync();
+                var loader = new ResourceLoader();
+                new MessageDialog(loader.GetString("ErrorTweet")).ShowAsync();
             }
         }
 

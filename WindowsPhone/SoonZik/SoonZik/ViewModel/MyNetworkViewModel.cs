@@ -5,6 +5,7 @@ using System.Globalization;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Windows.ApplicationModel.Core;
+using Windows.ApplicationModel.Resources;
 using Windows.Data.Xml.Dom;
 using Windows.Storage;
 using Windows.Storage.Streams;
@@ -214,7 +215,8 @@ namespace SoonZik.ViewModel
             }
             catch (Exception)
             {
-                new MessageDialog("Erreur lors du post").ShowAsync();
+                var loader = new ResourceLoader();
+                new MessageDialog(loader.GetString("ErrorTweet")).ShowAsync();
             }
         }
 

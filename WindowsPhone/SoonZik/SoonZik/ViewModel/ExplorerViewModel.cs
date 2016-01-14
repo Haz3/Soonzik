@@ -5,6 +5,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Windows.ApplicationModel.Core;
+using Windows.ApplicationModel.Resources;
 using Windows.Networking.BackgroundTransfer;
 using Windows.Storage;
 using Windows.UI.Core;
@@ -28,6 +29,7 @@ namespace SoonZik.ViewModel
 
         public ExplorerViewModel()
         {
+            loader = new ResourceLoader();
             Navigation = new NavigationService();
             MusiCommand = new RelayCommand(MusiCommandExecute);
             ListArtiste = new ObservableCollection<User>();
@@ -50,6 +52,7 @@ namespace SoonZik.ViewModel
 
         #region Attribute
 
+        public ResourceLoader loader;
         public ICommand AddToPlaylist { get; private set; }
         public ICommand AddMusicToCart { get; private set; }
         public ICommand DowloadMusic { get; private set; }
@@ -161,24 +164,6 @@ namespace SoonZik.ViewModel
             GenreViewModel.TheListGenres = new ObservableCollection<Genre>();
             GenreViewModel.TheListGenres = SelectedInfluence.genres;
             GlobalMenuControl.SetChildren(new GenreView());
-            /*var get = new HttpRequestGet();
-            var res = get.GetListObject(new List<Influence>(), "influences");
-            res.ContinueWith(delegate(Task<object> task)
-            {
-                var inf = task.Result as List<Influence>;
-                if (inf != null)
-                {
-                    CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
-                        () =>
-                        {
-                            foreach (var i in inf)
-                                if (i.id == SelectedInfluence.id)
-                                {
-
-                                }
-                        });
-                }
-            });*/
         }
 
         private void DownloadMusicExecute()
@@ -221,9 +206,9 @@ namespace SoonZik.ViewModel
             }
             catch (Exception e)
             {
-                new MessageDialog("Fail download").ShowAsync();
+                new MessageDialog(loader.GetString("ErrorDowload")).ShowAsync();
             }
-            new MessageDialog("Download OK").ShowAsync();
+            new MessageDialog(loader.GetString("DownloadOk")).ShowAsync();
         }
 
 
@@ -379,7 +364,7 @@ namespace SoonZik.ViewModel
                 if (res2 != null)
                 {
                     CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
-                        () => { new MessageDialog("Article ajoute au panier").ShowAsync(); });
+                        () => { new MessageDialog(loader.GetString("ProductAddToCart")).ShowAsync(); });
                 }
             });
         }

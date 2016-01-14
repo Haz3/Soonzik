@@ -80,9 +80,9 @@ namespace SoonZik.ViewModel
         {
             var get = new HttpRequestGet();
             ValidateKey.GetValideKey();
-            var res = get.GetSecureObject(new News(), "news", SelectedNews.id.ToString(),
+            var res = get.GetSecureNews(new News(), "news", SelectedNews.id.ToString(),
                 Singleton.Singleton.Instance().SecureKey,
-                Singleton.Singleton.Instance().CurrentUser.id.ToString());
+                Singleton.Singleton.Instance().CurrentUser);
             res.ContinueWith(delegate(Task<object> tmp)
             {
                 var news = tmp.Result as News;
@@ -104,7 +104,7 @@ namespace SoonZik.ViewModel
         {
             var request = new HttpRequestGet();
 
-            var listNews = request.GetListObject(new List<News>(), "news");
+            var listNews = request.GetListNews(new List<News>(), "news", Singleton.Singleton.Instance().CurrentUser.language);
             listNews.ContinueWith(delegate(Task<object> tmp)
             {
                 var test = tmp.Result as List<News>;

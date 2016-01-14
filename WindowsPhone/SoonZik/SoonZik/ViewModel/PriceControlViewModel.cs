@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Windows.ApplicationModel.Core;
+using Windows.ApplicationModel.Resources;
 using Windows.UI.Core;
 using Windows.UI.Popups;
 using GalaSoft.MvvmLight;
@@ -19,6 +20,7 @@ namespace SoonZik.ViewModel
 
         public PriceControlViewModel()
         {
+            loader = new ResourceLoader();
             ArtisteSliderCommand = new RelayCommand(ArtisteSliderExecute);
             AssocSliderCommand = new RelayCommand(AssocSliderExecute);
             SoonZikSliderCommand = new RelayCommand(SoonzikSliderExecute);
@@ -31,6 +33,7 @@ namespace SoonZik.ViewModel
 
         #region Attribute
 
+        public ResourceLoader loader;
         public static Pack SelecetdPack { get; set; }
 
         private Pack _thePack;
@@ -153,10 +156,10 @@ namespace SoonZik.ViewModel
                     var message = (ErrorMessage) JsonConvert.DeserializeObject(res2, typeof (ErrorMessage));
                     if (message.code != 201)
                         CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
-                            () => { new MessageDialog("Erreur lors du paiement").ShowAsync(); });
+                            () => { new MessageDialog(loader.GetString("ErrorPayment")).ShowAsync(); });
                     else
                         CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
-                            () => { new MessageDialog("paiement effectue").ShowAsync(); });
+                            () => { new MessageDialog(loader.GetString("PaymentOk")).ShowAsync(); });
                 }
             });
         }

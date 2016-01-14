@@ -23,51 +23,12 @@ namespace SoonZik.ViewModel
 
         public PackViewModel()
         {
-            #region DataTest
-
-            var datas = new ObservableCollection<Data>
-            {
-                new Data
-                {
-                    BitmapImage = new BitmapImage(new Uri("ms-appx:///Resources/pic01.jpg", UriKind.Absolute)),
-                    Title = "01"
-                },
-                new Data
-                {
-                    BitmapImage = new BitmapImage(new Uri("ms-appx:///Resources/pic03.jpg", UriKind.Absolute)),
-                    Title = "02"
-                },
-                new Data
-                {
-                    BitmapImage = new BitmapImage(new Uri("ms-appx:///Resources/pic05.jpg", UriKind.Absolute)),
-                    Title = "03"
-                },
-                new Data
-                {
-                    BitmapImage = new BitmapImage(new Uri("ms-appx:///Resources/pic04.jpg", UriKind.Absolute)),
-                    Title = "04"
-                },
-                new Data
-                {
-                    BitmapImage = new BitmapImage(new Uri("ms-appx:///Resources/pic02.jpg", UriKind.Absolute)),
-                    Title = "05"
-                },
-                new Data
-                {
-                    BitmapImage = new BitmapImage(new Uri("ms-appx:///Resources/pic06.jpg", UriKind.Absolute)),
-                    Title = "06"
-                }
-            };
-
-            #endregion
-
             ListArtistes = new ObservableCollection<User>();
 
             PackTappedCommand = new RelayCommand(ExecutePackTapped);
             AlbumTappedCommand = new RelayCommand(ExecuteAlbumTapped);
             ArtistTappedCommand = new RelayCommand(ExecuteArtistTapped);
             BuyCommand = new RelayCommand(ExecuteBuyCommand);
-            Datas = datas;
             Charge();
 
             if (ThePack != null)
@@ -82,8 +43,6 @@ namespace SoonZik.ViewModel
 
         private List<Album> _listAlbums;
         private Album _selectedAlbum;
-        private Data _selectedData;
-        public ObservableCollection<Data> Datas { get; set; }
 
         public ObservableCollection<Pack> CompleteListPack { get; set; }
         public static Pack ThePack { get; set; }
@@ -97,16 +56,6 @@ namespace SoonZik.ViewModel
             {
                 _theArtiste = value;
                 RaisePropertyChanged("TheArtiste");
-            }
-        }
-
-        public Data SelectedData
-        {
-            get { return _selectedData; }
-            set
-            {
-                _selectedData = value;
-                RaisePropertyChanged("SelectedData");
             }
         }
 
@@ -229,11 +178,5 @@ namespace SoonZik.ViewModel
         }
 
         #endregion
-    }
-
-    public class Data
-    {
-        public BitmapImage BitmapImage { get; set; }
-        public String Title { get; set; }
     }
 }

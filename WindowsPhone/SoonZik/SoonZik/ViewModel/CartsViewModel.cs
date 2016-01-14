@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Windows.ApplicationModel.Core;
+using Windows.ApplicationModel.Resources;
 using Windows.UI.Core;
 using Windows.UI.Popups;
 using GalaSoft.MvvmLight;
@@ -112,6 +113,7 @@ namespace SoonZik.ViewModel
 
         private void Charge()
         {
+            var loader = new ResourceLoader();
             price = 0.0;
             ListAlbum = new ObservableCollection<Album>();
             ListMusique = new ObservableCollection<Music>();
@@ -146,7 +148,7 @@ namespace SoonZik.ViewModel
                                     price += Double.Parse(music.price);
                                 }
                         }
-                        TotalPrice = "Total : " + price + " Euros";
+                        TotalPrice = loader.GetString("Total") + price + loader.GetString("Euros");
                     });
                 }
             });
