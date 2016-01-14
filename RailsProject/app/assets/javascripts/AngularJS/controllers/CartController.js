@@ -2,6 +2,9 @@ SoonzikApp.controller('CartCtrl', ['$scope', 'SecureAuth', 'HTTPService', '$time
 
 	$scope.loading = true;
 	$scope.totalPrice = 0;
+	$scope.albums = [];
+	$scope.listAlbums = [];
+	$scope.listMusics = [];
 
 	/*
 	**	Fonction d'init de foundation.
@@ -10,7 +13,6 @@ SoonzikApp.controller('CartCtrl', ['$scope', 'SecureAuth', 'HTTPService', '$time
 	$scope.initFoundation = function () {
 		$(document).foundation();
 	}
-
 
 	$scope.showCart = function() {
 
@@ -26,11 +28,13 @@ SoonzikApp.controller('CartCtrl', ['$scope', 'SecureAuth', 'HTTPService', '$time
 			HTTPService.showCart(parameters).then(function(response) {
 				$scope.carts = response.data.content;
 
-				if ($scope.carts.length != 0) {
-					$scope.showItem = true;
+				console.log($scope.carts);
+				if ($scope.carts.length == 0) {
+					$scope.isEmpty = true;
 				} else {
-					$scope.showItem = false;
+					$scope.isEmpty = false;
 				}
+				console.log("isEmpty ---- " + $scope.isEmpty);
 
 				var priceAlbum = 0;
 				for (var i = 0; i < $scope.carts.length; i++) {
@@ -39,9 +43,11 @@ SoonzikApp.controller('CartCtrl', ['$scope', 'SecureAuth', 'HTTPService', '$time
 					}
 				}
 
+
 				var priceMusics = 0;
 				for (var i = 0; i < $scope.carts.length; i++) {
 					for (var j = 0; j < $scope.carts[i].musics.length; j++) {
+						$scope.listMusics = $scope.carts[i].musics;
 						priceMusics += $scope.carts[i].musics[j].price;
 					}
 				}

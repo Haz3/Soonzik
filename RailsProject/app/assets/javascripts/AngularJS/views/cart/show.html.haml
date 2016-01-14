@@ -1,8 +1,11 @@
 .cart{"ng-init" => "initFoundation()" }
 	%h1 {{ labels.DISPLAY_CART_LABEL }} Panier
 	.row{"ng-init" => "showCart()"}
-		%h3 Albums
-		.ul.large-block-grid-2.centered.columns
+		%p{'ng-if' => 'isEmpty == true'}
+			%h3.subheader
+				Pas d'éléments dans le cart
+		.ul.large-block-grid-2.centered.columns{'ng-if' => 'isEmpty == false'}
+			%h3 Albums
 			%li{"ng-repeat" => "musics in carts"}
 				.panel{"ng-repeat" => "album in musics.albums"}
 					%h3.subheader
@@ -20,8 +23,9 @@
 							Delete
 					%a{:href => "http://lvh.me:3000/albums/ {{ album.id }}"}
 						%img.centered{ "ng-src" => "{{ '/assets/albums/' + album.image }}"}
-		%h3 Musics
-		.ul.large-block-grid-2.centered.columns
+
+		.ul.large-block-grid-2.centered.columns{'ng-if' => 'isEmpty == false'}
+			%h3 Musics
 			%li{"ng-repeat" => "musics in carts"}
 				.panel{"ng-repeat" => "music in musics.musics"}
 					%h3.subheader
@@ -33,28 +37,9 @@
 					%p.right
 						Prix : {{ music.price }} €
 					%br
-		.large-block-grid-1.right
+		.large-block-grid-1.right{'ng-if' => 'isEmpty == false'}
 			.divider
 			Total : {{ totalPrice }} €
-		%span
+		%span{"ng-if" => "isEmpty == false"}
 			.button.expand.radius.success{ "ng-click" => "toPayment()" }
 				{{ labels.DISPLAY_CART_BUY }}
-
-/ %cart{"ng-init" => "initFoundation()" }
-/ 	.row{"ng-init" => "showCart()"}
-/ 		%h1 {{ labels.DISPLAY_CART_LABEL }}
-/ 		%table
-/ 			%thead
-/ 				%tr
-/ 					%th{ colspan: '5' } Panier
-/ 			%tbody{"ng-repeat" => "musics in carts"}
-/ 				%tr{"ng-repeat" => "music in musics.musics"}
-/ 					%td {{ music.title }}
-/ 					%td
-/ 						%a.fi-x{"ng-click" => "deleteItem(musics.id)"}
-/ 				%tr{"ng-repeat" => "album in musics.albums"}
-/ 					%td{:width => 300}
-/ 						{{ album.title}}
-/ 					%td
-/ 						%a.fi-x{"ng-click" => "deleteItem(musics.id)"}
-
