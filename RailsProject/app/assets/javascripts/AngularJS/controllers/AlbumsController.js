@@ -134,7 +134,7 @@ SoonzikApp.controller('AlbumsCtrl', ['$scope', "$routeParams", 'SecureAuth', 'HT
   }
 
   $scope.addAlbumToCart = function () {
-
+		if (!$rootScope.user) { return; }
   	SecureAuth.securedTransaction(function (key, user_id) {
 		var parameters = {
 			secureKey: key,
@@ -155,6 +155,7 @@ SoonzikApp.controller('AlbumsCtrl', ['$scope', "$routeParams", 'SecureAuth', 'HT
   }
 
   $scope.addSongToCart = function(music) {
+		if (!$rootScope.user) { return; }
   	SecureAuth.securedTransaction(function (key, user_id) {
 			
 			var parameters = {
@@ -196,6 +197,7 @@ SoonzikApp.controller('AlbumsCtrl', ['$scope', "$routeParams", 'SecureAuth', 'HT
   }
 
   $scope.sendComment = function() {
+		if (!$rootScope.user) { return; }
   	SecureAuth.securedTransaction(function (key, user_id) {
 		var parameters = { secureKey: key, user_id: user_id, content: $scope.comment.value };
 		

@@ -112,11 +112,6 @@
 													.button.tiny{ "ng-click" => "setTooltip(false)" } {{ labels.DISPLAY_USER_CLOSE_BUTTON }}
 						%hr
 						%p {{ album.yearProd }} - {{ show.user.username }}
-			.packsImplicated
-				%h1.subheader
-					{{ labels.DISPLAY_USER_PACKS_LABEL }}
-				.panel
-					Packs dans lequel est présent l'artiste
 		%h1.subheader
 			Tweets
 		%div{ "ng-if" => "user != false && show.user.id == user.id" }

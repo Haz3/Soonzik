@@ -12,7 +12,7 @@
 						%a{ href: "/users/{{album.user.id}}" } {{ album.user.username }}
 					.clearfix
 						%span.button.primary
-							%a{"ng-click" => "addAlbumToCart()"} {{ labels.DISPLAY_ALBUM_ADD_TO_CART }}
+							%a.custom-disable{"ng-click" => "addAlbumToCart()"} {{ labels.DISPLAY_ALBUM_ADD_TO_CART }}
 						.likeContainer.button.alert{ "ng-include" => "'/assets/AngularJS/views/include/like.html.haml'" }
 			%table
 				%tbody
@@ -28,18 +28,18 @@
 						%td
 							{{song.price}} $
 						%td.iBtn
-							%a{"ng-click" => "addSongToCart(song)"}
+							%a{"ng-click" => "addSongToCart(song)", "ng-class" => "{ 'custom-disable': !user }"}
 								%i.fi-shopping-cart
 						%td.iBtn
 							%music{ "music-object" => "song" }
 								%i.fi-play
 						%td.relative.iBtn
 							%i.fi-plus.pointer{ "ng-click" => "setTooltip(tooltip == song ? false : song)" }
-							.mytooltip.toolright{ "ng-show" => "tooltip == song", "ng-include" => "'/assets/AngularJS/views/include/tooltip.html.haml'", "ng-controller" => "TooltipCtrl", "ng-init" => "tooltipInit(song, 1)" }
+							.mytooltip.toolright{ "ng-show" => "tooltip == song && user != false", "ng-include" => "'/assets/AngularJS/views/include/tooltip.html.haml'", "ng-controller" => "TooltipCtrl", "ng-init" => "tooltipInit(song, 1)" }
 			.commentariesInput
 				.inputArea
 					%textarea{ "ng-model" => "comment.value" }
 					.text-right
-						%span.button{ "ng-click" => "sendComment()" } {{ labels.DISPLAY_ALBUM_SEND_COMMENT_BUTTON }}
+						%span.button.secondary{ "ng-click" => "sendComment()" } {{ labels.DISPLAY_ALBUM_SEND_COMMENT_BUTTON }}
 		.commentariesContainer{ "ng-include" => "'/assets/AngularJS/views/include/commentaries.html.haml'" }
 		%loading{ "loading-type" => "'square'", "ng-show" => "commentLoading == true" }

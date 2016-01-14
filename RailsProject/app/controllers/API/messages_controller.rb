@@ -1,5 +1,3 @@
-require 'websocket-rails'
-
 module API
   # Controller which manage the transaction for the Messages objects
   # Here is the list of action available :

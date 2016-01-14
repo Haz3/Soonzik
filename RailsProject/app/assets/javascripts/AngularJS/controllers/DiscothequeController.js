@@ -1,4 +1,4 @@
-SoonzikApp.controller('DiscothequeCtrl', ['$scope', 'SecureAuth', 'HTTPService', '$rootScope', 'NotificationService', '$modal', function ($scope, SecureAuth, HTTPService, $rootScope, NotificationService, $modal) {
+SoonzikApp.controller('DiscothequeCtrl', ['$scope', 'SecureAuth', 'HTTPService', '$rootScope', 'NotificationService', '$modal', '$location', function ($scope, SecureAuth, HTTPService, $rootScope, NotificationService, $modal, $location) {
 
 	$scope.loading = true;
 	$scope.user = false;
@@ -21,8 +21,9 @@ SoonzikApp.controller('DiscothequeCtrl', ['$scope', 'SecureAuth', 'HTTPService',
 			$scope.user = current_user;
 		}
 		if ($scope.user == false) {
-			NotificationService.error
+			$location.path('/', true);
 			$scope.loading = false;
+			return;
 		} else {
 			SecureAuth.securedTransaction(function(key, user_id) {
 		  		var params = [

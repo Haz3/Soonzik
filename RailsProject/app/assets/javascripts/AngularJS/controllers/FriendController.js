@@ -1,4 +1,4 @@
-SoonzikApp.controller('FriendCtrl', ['$scope', 'SecureAuth', 'HTTPService', 'NotificationService', "$rootScope", function ($scope, SecureAuth, HTTPService, NotificationService, $rootScope) {
+SoonzikApp.controller('FriendCtrl', ['$scope', 'SecureAuth', 'HTTPService', 'NotificationService', "$rootScope", '$location', function ($scope, SecureAuth, HTTPService, NotificationService, $rootScope, $location) {
 
 $scope.loading = true;
 
@@ -7,6 +7,7 @@ $scope.loading = true;
 	}
 
 	$scope.showFriends = function() {
+		if (!$rootScope.user) { $location.path('/', true);return; }
 		var current_user = SecureAuth.getCurrentUser();
 
 		SecureAuth.securedTransaction(function(key, id) {

@@ -1,4 +1,4 @@
-SoonzikApp.controller('CartCtrl', ['$scope', 'SecureAuth', 'HTTPService', '$timeout', 'NotificationService', '$rootScope', function ($scope, SecureAuth, HTTPService, $timeout, NotificationService, $rootScope) {
+SoonzikApp.controller('CartCtrl', ['$scope', 'SecureAuth', 'HTTPService', '$timeout', 'NotificationService', '$rootScope', '$location', function ($scope, SecureAuth, HTTPService, $timeout, NotificationService, $rootScope, $location) {
 
 	$scope.loading = true;
 	$scope.totalPrice = 0;
@@ -7,6 +7,8 @@ SoonzikApp.controller('CartCtrl', ['$scope', 'SecureAuth', 'HTTPService', '$time
 	$scope.listMusics = [];
 
 	$scope.showCart = function() {
+		if (!$rootScope.user) { $location.path('/', true);return; }
+
 		SecureAuth.securedTransaction(function (key, id) {
 
 			var parameters = [

@@ -222,7 +222,7 @@ Rails.application.routes.draw do
   
   resources :users do
     collection do
-      get ":id/friendlist" => 'users#friendlist'
+      get "friendlist" => 'users#friendlist'
     end
   end
   

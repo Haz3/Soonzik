@@ -1,10 +1,12 @@
-SoonzikApp.controller('NotifsCtrl', ['$scope', 'SecureAuth', 'HTTPService', 'NotificationService', '$timeout', '$rootScope', function ($scope, SecureAuth, HTTPService, NotificationService, $timeout, $rootScope) {
+SoonzikApp.controller('NotifsCtrl', ['$scope', 'SecureAuth', 'HTTPService', 'NotificationService', '$timeout', '$rootScope', '$location', function ($scope, SecureAuth, HTTPService, NotificationService, $timeout, $rootScope, $location) {
 	$scope.loading = true;
 	$scope.receive = false;
 	$scope.notifications = [];
 	$scope.loadingNewNotifs = false;
 
 	$scope.notifInit = function() {
+		if (!$rootScope.user) { $location.path('/', true);return; }
+
 		// ask the header controller how many notification are new
 		$scope.$on('notif:getNews', function(event, data) {
 			$scope.notifications = JSON.parse(JSON.stringify(data));

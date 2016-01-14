@@ -240,6 +240,8 @@ SoonzikApp.controller('UsersCtrl', ['$scope', "$routeParams", 'SecureAuth', 'HTT
 	// ----
 
 	$scope.editInit = function() {
+		if (!$rootScope.user) { $location.path('/', true);return; }
+
 		var id = $routeParams.id;
 		var current_user = SecureAuth.getCurrentUser();
 

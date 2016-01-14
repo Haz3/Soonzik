@@ -496,12 +496,8 @@ module Artist
 						a.descriptions << d
 					end
 
-					puts "Je vais lire : #{m.file}"
 					contentFile = File.open(Rails.root.join('app', 'assets', 'musics', @u.id.to_s, m.file + '.mp3'), 'rb').read
-					puts "J'ai lu #{contentFile.size} caractères"
           File.open(Rails.root.join('app', 'assets', 'musics', @u.id.to_s, "cut_#{m.file}.mp3"), 'wb').write(contentFile)
-          puts "J'ai écrit dans cut_#{m.file}"
-
 	    	elsif (params.has_key?(:filename) && params.has_key?(:data))
 	    		n = 0
 	    		data = Base64.decode64 params[:data]

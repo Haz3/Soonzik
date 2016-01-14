@@ -67,7 +67,6 @@ SoonzikApp.controller('ListeningsCtrl', ['$scope', "$routeParams", 'SecureAuth',
     wait: false
   }
 
-
   // Init function
 	$scope.init = function() {
 		if (navigator.geolocation) {
@@ -139,31 +138,28 @@ SoonzikApp.controller('ListeningsCtrl', ['$scope', "$routeParams", 'SecureAuth',
 	}
 
 	$scope.clickOnMarker = function(evt, evtName, data) {
-		console.log(evt, evtName, data);
-		var lastID = -1;
+		var lastID = ($scope.lastClicked) ? $scope.lastClicked.idKey : -1;
 		if ($scope.lastClicked)
 		{
-			lastID = $scope.lastClicked.idKey;
-	  	$('#marker' + $scope.lastClicked.object.music.id).parent().hide();
+	  	$('.marker' + $scope.lastClicked.object.music.id).parent().hide();
 			$scope.lastClicked.options = {};
 			$scope.lastClicked = null;
 	  }
-		if (lastID == data.idKey) {
-			return;
+		if (data && lastID != data.idKey) {
+	    data.options = {
+	    	animation: 2,
+	    	labelClass: 'marker_labels',
+	    	labelAnchor: '60 0',
+	    	labelContent: "<p class='marker_block', id='marker" + data.object.music.id + "'><a class='link_marker' href='/albums/" + data.object.music.album.id + "'>" + data.object.music.title + "</a>" + $rootScope.labels.FILE_LISTENING_INPOPUP_LISTENED_LABEL + "<a href='/users/" + data.object.user.id + "'>" + data.object.user.username + "</a></p>" +
+	    	"<p>" + data.object.created_at + "</p>"
+	    };
+	  	$scope.lastClicked = data;
 		}
-    data.options = {
-    	animation: 2,
-    	labelClass: 'marker_labels',
-    	labelAnchor: '60 0',
-    	labelContent: "<p id='marker" + data.object.music.id + "'><a href='/albums/" + data.object.music.album.id + "'>" + data.object.music.title + "</a>" + $rootScope.labels.FILE_LISTENING_INPOPUP_LISTENED_LABEL + "<a href='/users/" + data.object.user.id + "'>" + data.object.user.username + "</a></p>" +
-    	"<p>" + data.object.created_at + "</p>"
-    };
-  	$scope.lastClicked = data;
-  	$('marker' + data.object.music.id).show();
-  	$('#marker' + data.object.music.id + " a").on('click', function(event) {
-  		event.preventDefault();
-  		$location.path($(event.target).attr('href'), true);
-  	});
+  	$('.marker' + data.object.music.id).show();
+		$('.link_marker').on('click', function(event) {
+			event.preventDefault();
+			$location.path($(event.target).attr('href'), true);
+		});
 	}
 
 	// Callback of the slider

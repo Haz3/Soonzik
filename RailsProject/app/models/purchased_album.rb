@@ -7,4 +7,8 @@ class PurchasedAlbum < ActiveRecord::Base
 	has_many :purchased_musics
 	belongs_to :album
 	belongs_to :purchased_pack
+
+	def to_s
+		return id
+	end
 end
