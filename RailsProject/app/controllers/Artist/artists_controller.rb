@@ -6,6 +6,7 @@ module Artist
   	layout 'artist'
 
     before_action :cors_set_access_control_headers
+    skip_before_filter  :verify_authenticity_token
     before_action :cookieMe
 
     # For all responses in this controller, return the CORS access control headers.
