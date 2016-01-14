@@ -424,9 +424,24 @@ module Artist
 			render :json => {}
 		end
 
-		# Upload a rediffusion for the software
-		#
-		# Parameters : filename & data base 64
+		# Upload a rediffusion for the software and put it in an album
+    # 
+    # Route : /musics/uploadRediff
+    #
+    # ==== Options for the upload
+    # 
+    # * +filename+ - The filename of the music
+    # * +data+ - A piece of string
+    #
+    # ==== Options for the finish (last call after the upload)
+    # 
+    # * +finish+ - The value doesn't matter, put 1
+    # * +album_id+ - The id of the album where we put the music
+    # * +music_name+ - The name of the music
+    # * +duration+ - The duration of the music
+    # * +price+ - The price of the music
+    # * +filename+ - The name of the music file (same as before) uploaded
+    # * +limited+ - 0 or 1 to know if the music can be fully listen or not
 		def uploadRediff
 			begin
 				if (@u == nil || (@u != nil && !@u.isArtist?))
@@ -459,7 +474,7 @@ module Artist
 	    		n = 0
 	    		data = Base64.decode64 params[:data]
 
-	    		File.open(Rails.root.join('app', 'assets', 'musics', @u.id, params[:filename].gsub(/[^0-9A-Za-z\.-]/, '')), 'ab') do |f|
+	    		File.open(Rails.root.join('app', 'assets', 'musics', @u.id.to_s, params[:filename].gsub(/[^0-9A-Za-z\.-]/, '')), 'ab') do |f|
 	          n = f.write(data)
 	        end
 
@@ -469,15 +484,22 @@ module Artist
 	    		defineHttp :bad_request
 	    	end
     	rescue
+    		puts $!, $@
 	    	codeAnswer 504
     		defineHttp :service_unavailable
 	    end
    		sendJson
 		end
 
-		# Create an album for the software
-		#
-		# Parameters : filename & data base 64
+		# Create an album for the software. There is a default image, it can be modified by the website
+    # 
+    # Route : /musics/createAlbumSoftware
+    #
+    # ==== Options
+    # 
+    # * +album_name+ - The name of the album
+    # * +price+ - The price of the album
+    # * +yearProd+ - The year of the production
 		def createAlbum
 			begin
 				if (@u == nil || (@u != nil && !@u.isArtist?))

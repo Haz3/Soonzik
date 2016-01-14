@@ -1,3 +1,5 @@
+require 'websocket-rails'
+
 module API
   # Controller which manage the transaction for the Messages objects
   # Here is the list of action available :
@@ -66,9 +68,10 @@ module API
     # 
     def save
       begin
-        if (@security && (@message[:user_id] == @user_id || @message[:dest_id] == @user_id))
+        if (@security && @message[:user_id].to_i == @user_id.to_i)
           msg = Message.new(Message.message_params params)
           if (msg.save)
+            Chatjob.create(message_id: msg.id)
             @returnValue = { content: msg.as_json(:include => {
                                     :sender => { :only => User.miniKey },
                                     :receiver => { :only => User.miniKey }

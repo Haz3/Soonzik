@@ -40,6 +40,11 @@ class News < ActiveRecord::Base
     [:id, :created_at]
   end
 
+  # override
+  def to_s
+    return "News #{self.id}"
+  end
+
   # Fill an association of records of the notes average
   def self.fillLikes(ar_news, security = false, user_id = nil)
     if (ar_news.size == 0)

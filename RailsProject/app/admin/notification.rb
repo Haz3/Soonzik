@@ -13,5 +13,6 @@ ActiveAdmin.register Notification do
 #   permitted
 # end
 
+	permit_params :notif_type, :read, :link, :user_id, :from_user_id
 
 end

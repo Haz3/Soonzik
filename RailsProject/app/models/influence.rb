@@ -28,4 +28,17 @@ class Influence < ActiveRecord::Base
   def self.influence_params(parameters)
     parameters.require(:influence).permit(:name)
   end
+
+  # for admin panel, to have selected checkbox
+  def generateSelectedGenreCollection
+    collection = Genre.pluck('style_name, id')
+    collection.each do |collect|
+      if ((self.genre_ids) && self.genre_ids.include?(collect[1]))
+        collect[2] = { checked: true }
+      else
+        collect[2] = { checked: false }
+      end
+    end
+    return collection
+  end
 end

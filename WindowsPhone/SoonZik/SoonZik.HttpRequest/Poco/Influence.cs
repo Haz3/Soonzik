@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections.ObjectModel;
 
 namespace SoonZik.HttpRequest.Poco
 {
@@ -6,6 +6,6 @@ namespace SoonZik.HttpRequest.Poco
     {
         public int id { get; set; }
         public string name { get; set; }
-        public List<Genre> genres { get; set; }
+        public ObservableCollection<Genre> genres { get; set; }
     }
 }

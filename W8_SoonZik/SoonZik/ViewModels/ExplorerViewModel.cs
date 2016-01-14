@@ -20,6 +20,7 @@ namespace SoonZik.ViewModels
         public ObservableCollection<User> artist_list { get; set; }
         public ObservableCollection<Genre> genre_list { get; set; }
         public ObservableCollection<Ambiance> ambiances_list { get; set; }
+        public ObservableCollection<Music> music_list { get; set; }
 
         public ExplorerViewModel()
         {
@@ -34,7 +35,7 @@ namespace SoonZik.ViewModels
             artist_list = new ObservableCollection<User>();
             genre_list = new ObservableCollection<Genre>();
             ambiances_list = new ObservableCollection<Ambiance>();
-
+            music_list = new ObservableCollection<Music>();
             
             try
             {
@@ -43,19 +44,32 @@ namespace SoonZik.ViewModels
                 var artist = (List<User>)await Http_get.get_object(new List<User>(), "users/artists");
                 var genre = (List<Genre>)await Http_get.get_object(new List<Genre>(), "genres");
                 var ambiances = (List<Ambiance>)await Http_get.get_object(new List<Ambiance>(), "ambiances");
+                var music = (List<Music>)await Http_get.get_object(new List<Music>(), "suggest?user_id=" + Singleton.Instance.Current_user.id.ToString() + "&secureKey=" + await Security.getSecureKey(Singleton.Instance.Current_user.id.ToString()));
 
 
                 //foreach (var item in pack)
                 //    pack_list.Add(item);
 
                 foreach (var item in album)
+                {
+                    item.image = Singleton.Instance.url + "/assets/albums/" + item.image;
                     album_list.Add(item);
+                }
+                foreach (var item in music)
+                    music_list.Add(item);
+
                 foreach (var item in artist)
+                {
+                    item.image = Singleton.Instance.url + "/assets/usersImage/avatars/" + item.image;
                     artist_list.Add(item);
+                }
+
                 foreach (var item in genre)
                     genre_list.Add(item);
+
                 foreach (var item in ambiances)
                     ambiances_list.Add(item);
+
 
             }
             catch (Exception e)

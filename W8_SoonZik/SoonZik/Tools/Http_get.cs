@@ -55,7 +55,7 @@ namespace SoonZik.Tools
 
         public static async Task<Album> get_album_by_id(int id)
         {
-            var album = (Album)await get_object(new Album(), "albums/" + id.ToString() +  "&user_id=" + Singleton.Instance.Current_user.id.ToString() + "&secureKey=" + await Security.getSecureKey(Singleton.Instance.Current_user.id.ToString()));
+            var album = (Album)await get_object(new Album(), "albums/" + id.ToString() +  "?user_id=" + Singleton.Instance.Current_user.id.ToString() + "&secureKey=" + await Security.getSecureKey(Singleton.Instance.Current_user.id.ToString()));
             return album;
         }
 
@@ -94,7 +94,7 @@ namespace SoonZik.Tools
 
             // A VIRER
             if (exception != null)
-                await new MessageDialog(exception.Message, "Get data error").ShowAsync();
+                await new MessageDialog(exception.Message, "Erreur de suppression").ShowAsync();
             // A VIRER
             return null;
         }

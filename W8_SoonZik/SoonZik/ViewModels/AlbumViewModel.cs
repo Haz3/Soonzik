@@ -16,6 +16,7 @@ using Windows.Storage;
 using Windows.UI.Notifications;
 using Windows.UI.Popups;
 using Windows.UI.Xaml;
+using Windows.UI.Xaml.Media.Imaging;
 
 namespace SoonZik.ViewModels
 {
@@ -44,6 +45,17 @@ namespace SoonZik.ViewModels
             {
                 _album = value;
                 OnPropertyChanged("album");
+            }
+        }
+
+        private BitmapImage _alb_img;
+        public BitmapImage alb_img
+        {
+            get { return _alb_img; }
+            set
+            {
+                _alb_img = value;
+                OnPropertyChanged("alb_img");
             }
         }
 
@@ -164,6 +176,9 @@ namespace SoonZik.ViewModels
                     unlike_btn = Visibility.Visible;
                 else
                     like_btn = Visibility.Visible;
+
+
+                alb_img = new BitmapImage(new Uri(Singleton.Instance.url + "/assets/albums/" + album.image, UriKind.RelativeOrAbsolute));
 
 
                 likes = album.likes;

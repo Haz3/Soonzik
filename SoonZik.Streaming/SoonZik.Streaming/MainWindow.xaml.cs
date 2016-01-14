@@ -13,6 +13,8 @@ using NAudio.Wave;
 using SoonZik.Streaming.Utils;
 using SoonZik.Streaming.View;
 using MessageBox = System.Windows.Forms.MessageBox;
+using System.Net;
+using System.IO;
 
 namespace SoonZik.Streaming
 {
@@ -23,6 +25,84 @@ namespace SoonZik.Streaming
     {
         #region Attributes
 
+        private int sampleRate;
+        public int SampleRate
+        {
+            get
+            {
+                return sampleRate;
+            }
+            set
+            {
+                if (sampleRate != value)
+                {
+                    sampleRate = value;
+                    OnPropertyChanged("SampleRate");
+                }
+            }
+        }
+
+        private int bitDepth;
+
+        public int BitDepth
+        {
+            get
+            {
+                return bitDepth;
+            }
+            set
+            {
+                if (bitDepth != value)
+                {
+                    bitDepth = value;
+                    OnPropertyChanged("BitDepth");
+                }
+            }
+        }
+
+        public int sampleTypeIndex;
+        public int SampleTypeIndex
+        {
+            get
+            {
+                return sampleTypeIndex;
+            }
+            set
+            {
+                if (sampleTypeIndex != value)
+                {
+                    sampleTypeIndex = value;
+                    OnPropertyChanged("SampleTypeIndex");
+                    BitDepth = sampleTypeIndex == 1 ? 16 : 32;
+                    OnPropertyChanged("IsBitDepthConfigurable");
+                }
+            }
+        }
+
+        private int channelCount;
+        public int ChannelCount
+        {
+            get
+            {
+                return channelCount;
+            }
+            set
+            {
+                if (channelCount != value)
+                {
+                    channelCount = value;
+                    OnPropertyChanged("ChannelCount");
+                }
+            }
+        }
+
+        public bool IsBitDepthConfigurable
+        {
+            get
+            {
+                return SampleTypeIndex == 1;
+            }
+        }
         private string _fileLocation;
         public MMDevice SelectedDevice;
         public IEnumerable<MMDevice> CaptureDevices { get; private set; }
@@ -116,6 +196,14 @@ namespace SoonZik.Streaming
         private void CheckDevice()
         {
             DevicesListBox.ItemsSource = CaptureDevices;
+
+            using (var c = new WasapiCapture((MMDevice) CaptureDevices.First()))
+            {
+                SampleTypeIndex = c.WaveFormat.Encoding == WaveFormatEncoding.IeeeFloat ? 0 : 1;
+                SampleRate = c.WaveFormat.SampleRate;
+                BitDepth = c.WaveFormat.BitsPerSample;
+                ChannelCount = c.WaveFormat.Channels;
+            }
         }
 
         /*
@@ -138,7 +226,8 @@ namespace SoonZik.Streaming
             sourceStream = new WaveIn();
 
             sourceStream.DeviceNumber = deviceNumber;
-            sourceStream.WaveFormat = new WaveFormat(44100, WaveIn.GetCapabilities(deviceNumber).Channels);
+            sourceStream.WaveFormat = SampleTypeIndex == 0 ? WaveFormat.CreateIeeeFloatWaveFormat(sampleRate, channelCount) :
+                    new WaveFormat(sampleRate, bitDepth, channelCount);
             RecordLevel = SelectedDevice.AudioEndpointVolume.MasterVolumeLevelScalar;
             SliderVolume.Value = RecordLevel;
             sourceStream.DataAvailable += sourceStream_DataAvailable;
@@ -243,6 +332,50 @@ namespace SoonZik.Streaming
             if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
         }
         #endregion
+
+        private void choose_file_btn_Click(object sender, RoutedEventArgs e)
+        {
+            Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
+
+            dlg.DefaultExt = ".wav";
+            dlg.Filter = "WAV Files (*.WAV)|*.wav"; 
+
+
+            // Display OpenFileDialog by calling ShowDialog method 
+            Nullable<bool> result = dlg.ShowDialog();
+
+
+            // Get the selected file name and display in a TextBox 
+            if (result == true)
+            {
+                // Open document 
+                string filename = dlg.FileName;
+                upload_file_name_txt.Text = filename;
+            }
+        }
+
+        private void upload_btn_Click(object sender, RoutedEventArgs e)
+        {
+            //MessageBox.Show("UPLOAD LOL");
+
+            // Create a new WebClient instance.
+            //if (upload_file_name_txt.Text != null || upload_file_name_txt.Text != "")
+            //{
+            //    MessageBox.Show("Choisissez un fichier");
+            //    return;
+            //}
+            WebClient myWebClient = new WebClient();
+            string filename = System.IO.Path.GetFileName(upload_file_name_txt.Text);
+
+            Byte[] bytes = File.ReadAllBytes(upload_file_name_txt.Text);
+            String file = Convert.ToBase64String(bytes);
+
+            string response = myWebClient.UploadString("http://api.lvh.me:3000/musics/uploadRediff", file);
+
+            //byte[] responseArray = myWebClient.UploadFile("http://api.lvh.me:3000/musics/uploadRediff", filename);
+            response_txt.Text = response;
+
+        }
     }
 
     internal class Encoder

@@ -32,6 +32,7 @@ Views\CartsView.xbf
 Views\Connexion.xbf
 Views\Conversation.xbf
 Views\Explorer.xbf
+Views\GenreView.xbf
 Views\GeolocalisationView.xbf
 Views\InscriptionView.xbf
 Views\MainView.xbf

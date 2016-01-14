@@ -1,8 +1,14 @@
-﻿using System.Windows.Input;
+﻿using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using System.Windows.Input;
+using Windows.ApplicationModel.Core;
 using Windows.ApplicationModel.Resources;
+using Windows.UI.Core;
 using Windows.UI.Popups;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using SoonZik.HttpRequest;
 
 namespace SoonZik.ViewModel
 {
@@ -13,21 +19,38 @@ namespace SoonZik.ViewModel
         public AboutViewModel()
         {
             SendCommand = new RelayCommand(SendFeedBack);
+            ItemList = new List<string> {"bug", "payment", "account", "other"};
+            ItemChoose = "Selectionner une categorie";
         }
 
         #endregion
 
         private void SendFeedBack()
         {
-            if (Email != null && Username != null && Object != null && Comment != null)
+            if (Email != null && ItemChoose != "Selectionner une categorie" && Object != null && Comment != null)
             {
-                //TODO send to the serveur
+                var post = new HttpRequestPost();
+                var res = post.Feedback(Email, ItemChoose, Object, Comment);
+                res.ContinueWith(delegate(Task<string> tmp2)
+                {
+                    var result = tmp2.Result;
+                    if (result != null)
+                    {
+                        CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
+                            AgileCallback);
+                    }
+                });
             }
             else
             {
                 var loader = new ResourceLoader();
                 new MessageDialog(loader.GetString("ErrorAbout")).ShowAsync();
             }
+        }
+
+        private void AgileCallback()
+        {
+            new MessageDialog("Feedback send").ShowAsync();
         }
 
         #region Attribute
@@ -78,6 +101,30 @@ namespace SoonZik.ViewModel
             {
                 _comment = value;
                 RaisePropertyChanged("Comment");
+            }
+        }
+
+        private List<String> _itemList;
+
+        public List<String> ItemList
+        {
+            get { return _itemList; }
+            set
+            {
+                _itemList = value;
+                RaisePropertyChanged("ItemList");
+            }
+        }
+
+        private string _itemChoose;
+
+        public string ItemChoose
+        {
+            get { return _itemChoose; }
+            set
+            {
+                _itemChoose = value;
+                RaisePropertyChanged("ItemChoose");
             }
         }
 

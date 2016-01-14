@@ -3,6 +3,7 @@ using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Navigation;
+using SoonZik.HttpRequest.Poco;
 using SoonZik.ViewModel;
 
 // Pour en savoir plus sur le modèle d’élément Page vierge, consultez la page http://go.microsoft.com/fwlink/?LinkID=390556
@@ -67,6 +68,25 @@ namespace SoonZik.Views
         {
             var vm = DataContext as ExplorerViewModel;
             if (vm != null) vm.AlbumCommand.Execute(null);
+        }
+
+        private void Download_OnClick(object sender, RoutedEventArgs e)
+        {
+            var vm = DataContext as ExplorerViewModel;
+            if (vm != null) vm.DowloadMusic.Execute(null);
+        }
+
+        private void InfluenceNameBlock_OnTapped(object sender, TappedRoutedEventArgs e)
+        {
+            var vm = DataContext as ExplorerViewModel;
+            if (vm != null) vm.InfluenceTapped.Execute(null);
+        }
+
+        private void ListBoxGenre_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var mus = sender as ListBox;
+            var test = mus.SelectedItem as Music;
+            ExplorerViewModel.SelecMusic = test;
         }
     }
 }

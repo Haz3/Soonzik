@@ -1,4 +1,4 @@
-SoonzikApp.controller('ListeningsCtrl', ['$scope', "$routeParams", 'SecureAuth', 'HTTPService', 'NotificationService', 'uiGmapGoogleMapApi', '$timeout', '$rootScope', function ($scope, $routeParams, SecureAuth, HTTPService, NotificationService, uiGmapGoogleMapApi, $timeout, $rootScope) {
+SoonzikApp.controller('ListeningsCtrl', ['$scope', "$routeParams", 'SecureAuth', 'HTTPService', 'NotificationService', 'uiGmapGoogleMapApi', '$timeout', '$rootScope', '$location', function ($scope, $routeParams, SecureAuth, HTTPService, NotificationService, uiGmapGoogleMapApi, $timeout, $rootScope, $location) {
 
 	// To avoid too much update when the range is modify
 	var callbackID = 0;
@@ -139,6 +139,7 @@ SoonzikApp.controller('ListeningsCtrl', ['$scope', "$routeParams", 'SecureAuth',
 	}
 
 	$scope.clickOnMarker = function(evt, evtName, data) {
+		console.log(evt, evtName, data);
 		var lastID = -1;
 		if ($scope.lastClicked)
 		{
@@ -154,11 +155,15 @@ SoonzikApp.controller('ListeningsCtrl', ['$scope', "$routeParams", 'SecureAuth',
     	animation: 2,
     	labelClass: 'marker_labels',
     	labelAnchor: '60 0',
-    	labelContent: "<p id='marker" + data.object.music.id + "'><a href='/musics/" + data.object.music.id + "'>" + data.object.music.title + "</a>" + $rootScope.labels.FILE_LISTENING_INPOPUP_LISTENED_LABEL + "<a href='/users/" + data.object.user.id + "'>" + data.object.user.username + "</a></p>" +
+    	labelContent: "<p id='marker" + data.object.music.id + "'><a href='/albums/" + data.object.music.album.id + "'>" + data.object.music.title + "</a>" + $rootScope.labels.FILE_LISTENING_INPOPUP_LISTENED_LABEL + "<a href='/users/" + data.object.user.id + "'>" + data.object.user.username + "</a></p>" +
     	"<p>" + data.object.created_at + "</p>"
     };
   	$scope.lastClicked = data;
   	$('marker' + data.object.music.id).show();
+  	$('#marker' + data.object.music.id + " a").on('click', function(event) {
+  		event.preventDefault();
+  		$location.path($(event.target).attr('href'), true);
+  	});
 	}
 
 	// Callback of the slider

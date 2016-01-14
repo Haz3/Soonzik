@@ -29,7 +29,7 @@
             <TextBlock Name="music_title" Text="{Binding music.title, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="20,10,0,19" TextWrapping="Wrap" VerticalAlignment="Center" FontSize="36" Height="46" Grid.ColumnSpan="2"/>
             <TextBlock Name="music_artist" Text="{Binding music.user.username, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="185,57,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Foreground="Black" Height="40" Width="160" FontSize="20" Grid.Column="1"/>
             <TextBlock x:Name="music_id" Visibility="Collapsed" Text="ID" Grid.Column="1" HorizontalAlignment="Left" Margin="765,10,-405,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="90" Height="46" FontSize="25"/>
-            <TextBlock x:Name="music_price" Text="{Binding music.price, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="185,96,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Foreground="Black" Height="40" Width="160" FontSize="20" Grid.Column="1"/>
+            <TextBlock x:Name="music_price" Text="{Binding music.price, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="185,96,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Foreground="Black" Height="40" Width="35" FontSize="20" Grid.Column="1"/>
             <TextBlock x:Name="music_duration" Text="{Binding music.duration, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="185,135,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Foreground="Black" Height="40" Width="160" FontSize="20" Grid.Column="1"/>
             <TextBlock x:Name="music_note" Text="{Binding music.getAverageNote, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="185,172,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Foreground="Black" Height="40" Width="160" FontSize="20" Grid.Column="1"/>
 
@@ -68,22 +68,8 @@
             </Button>
             <TextBlock x:Name="your_note_txt" x:Uid="your_note_txt" Text="Votre note" HorizontalAlignment="Left" Margin="90,235,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Foreground="Black" Height="40" Width="102" FontSize="20" Grid.Column="1"/>
 
-            <!--<Grid Background="White" Grid.Column="1" Margin="60,255,125,-39" Grid.Row="1">
-                <RatingControl:Rating HorizontalAlignment="Center" VerticalAlignment="Center"   
-                AllowSelectingZero="True" ReadOnly="False"
-                RatingItemCount="5" Value="{Binding music.getAverageNote, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" >
-                    <RatingControl:Rating.FilledItemStyle>
-                        <Style TargetType="RatingControl:RatingItem">
-                            <Setter Property="Background" Value="Goldenrod"/>
-                        </Style>
-                    </RatingControl:Rating.FilledItemStyle>
-                    <RatingControl:Rating.UnfilledItemStyle>
-                        <Style TargetType="RatingControl:RatingItem">
-                            <Setter Property="Background" Value="Black"/>
-                        </Style>
-                    </RatingControl:Rating.UnfilledItemStyle>
-                </RatingControl:Rating>
-            </Grid>-->
+            <MediaElement x:Name="media" Height="60" Width="851" AreTransportControlsEnabled="True" Grid.Column="1" AutoPlay="False" Margin="0,458,-401,-227" Grid.Row="1" RequestedTheme="Light" HorizontalAlignment="Left"/>
+            <TextBlock x:Name="music_price_Copy" Text="€" HorizontalAlignment="Left" Margin="210,97,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Foreground="Black" Height="40" Width="35" FontSize="20" Grid.Column="1"/>
 
         </Grid>
 

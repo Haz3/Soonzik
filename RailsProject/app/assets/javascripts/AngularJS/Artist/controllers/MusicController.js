@@ -110,7 +110,6 @@ SoonzikArtistApp.controller('MusicCtrl', ['$scope', 'SecureAuth', 'HTTPService',
     });
 
     modalInstance.result.then(function (newMusic) {
-    	console.log(newMusic);
     	music.title = newMusic.title;
     	music.price = newMusic.price;
     	music.limited = newMusic.limited;
@@ -138,7 +137,6 @@ SoonzikArtistApp.controller('MusicCtrl', ['$scope', 'SecureAuth', 'HTTPService',
     });
 
     modalInstance.result.then(function (newAlbum) {
-    	console.log(newAlbum);
     	for (var i = 0 ; i < $scope.albums.length ; i++) {
     		if ($scope.albums[i].id == album.id) {
     			$scope.albums[i] = newAlbum;

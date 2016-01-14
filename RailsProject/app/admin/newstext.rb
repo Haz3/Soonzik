@@ -13,5 +13,6 @@ ActiveAdmin.register Newstext do
 #   permitted
 # end
 
+	permit_params :content, :language, :news_id
 
 end

@@ -89,6 +89,7 @@ var labels = {
 	FILE_PLAYER_SAVE_IN_PLAYLIST_ERROR_MESSAGE: "Error while saving a new music in the playlist",
 	FILE_PLAYER_PLAY_MUSIC_ERROR_MESSAGE: "Error while loading the music : ",
 	FILE_PLAYER_GEOLOC_MUSIC_ERROR_MESSAGE: "Can't add a music for geolocation",
+	FILE_PLAYER_DELETE_PLAYLIST_ERROR_MESSAGE: "An error occured while deleting the playlist ",
 
 	// Playlist Controller
 	FILE_PLAYLIST_BAD_ARGUMENT_ERROR_MESSAGE: "Can't load this playlist",
@@ -179,6 +180,8 @@ var labels = {
 	DISPLAY_PLAYER_YOUR_PLAYLIST_LABEL: "Your playlists",
 	DISPLAY_PLAYER_NAME_LABEL: "Name",
 	DISPLAY_PLAYER_NEW_PLAYLIST_PLACEHOLDER: "New Playlist",
+	DISPLAY_PLAYER_SAVE_NEW_PLAYLIST_LABEL: "Save",
+	DISPLAY_PLAYER_SHARE_LABEL: "Share",
 
 	// Playlist view
 	DISPLAY_PLAYLIST_EMPTY_LABEL: "This playlist is empty",

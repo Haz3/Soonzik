@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using Windows.ApplicationModel.Core;
 using Windows.UI.Core;
+using Windows.UI.Xaml.Media.Imaging;
 using Coding4Fun.Toolkit.Controls;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
@@ -90,9 +91,9 @@ namespace SoonZik.ViewModel
                     CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
                         () =>
                         {
+                            news.imageNews =
+                                new BitmapImage(new Uri(UrlImage + news.attachments[0].url, UriKind.RelativeOrAbsolute));
                             NewsDetailViewModel.TheNews = news;
-                            NewsDetailViewModel.TheNews.attachments[0].url =
-                                new Uri(UrlImage + news.attachments[0].url, UriKind.RelativeOrAbsolute).ToString();
                             GlobalMenuControl.SetChildren(new NewsDetail());
                         });
                 }

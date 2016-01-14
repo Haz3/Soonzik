@@ -13,5 +13,20 @@ ActiveAdmin.register Listening do
 #   permitted
 # end
 
+	permit_params :latitude, :longitude, :music_id, :user_id
+
+	form do |f|
+	  f.semantic_errors # shows errors on :base
+	  #f.inputs
+
+	  f.inputs do
+		  f.input :latitude, as: :number
+		  f.input :longitude, as: :number
+		  f.input :music
+		  f.input :user
+		end
+
+	  f.actions         # adds the 'Submit' and 'Cancel' buttons
+	end
 
 end

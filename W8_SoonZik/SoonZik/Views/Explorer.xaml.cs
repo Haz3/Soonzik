@@ -73,5 +73,10 @@ namespace SoonZik.Views
             var item = ((SoonZik.Models.Ambiance)e.ClickedItem);
             this.Frame.Navigate(typeof(Ambiance), item);
         }
+
+        private void music_list_ItemClick(object sender, ItemClickEventArgs e)
+        {
+
+        }
     }
 }

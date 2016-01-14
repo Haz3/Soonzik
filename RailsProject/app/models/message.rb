@@ -41,11 +41,6 @@ class Message < ActiveRecord::Base
     if (message.has_key?("user_id") && message.has_key?("secureKey"))
       begin
         u = User.find_by_id(message["user_id"])
-        if (message["secureKey"] == u.secureKey)
-          user = u
-          u.regenerateKey
-          u.save
-        end
       rescue
       end
     elsif (current_user != nil)

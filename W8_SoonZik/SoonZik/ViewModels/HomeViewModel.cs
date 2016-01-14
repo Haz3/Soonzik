@@ -49,11 +49,18 @@ namespace SoonZik.ViewModels
                 var pack = (List<Pack>)await Http_get.get_object(new List<Pack>(), "packs");
 
                 foreach (var item in news)
+                {
+                    if (item.attachments.Any())
+                        item.image = Singleton.Instance.url + "/assets/news/" + item.attachments[0].url;
                     news_list.Add(item);
-                foreach (var item in albums)
-                    album_list.Add(item);
+                }
+                //foreach (var item in albums)
+                //    album_list.Add(item);
                 foreach (var item in tweet)
+                {
+                    item.user.image = Singleton.Instance.url + "/assets/usersImage/avatars/" + item.user.image;
                     tweet_list.Add(item);
+                }
                 foreach (var item in pack)
                     pack_list.Add(item);
             }

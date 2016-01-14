@@ -27,7 +27,8 @@ SoonzikApp.controller("PlayerCtrl", ["$scope", "$rootScope", "HTTPService", "Not
   $scope.toDelete = false;
   $scope.newItem = { name: "" }
   $scope.newPlaylistFromCurrent = { name: "" }
-  $scope.more = { btn: false, pop: false };
+  $scope.more = { btn: false };
+  $scope.tmpUrlCurrentPlaylist = { str: "" };
 
   function n(n){
     return n > 9 ? "" + n: "0" + n;
@@ -93,6 +94,7 @@ SoonzikApp.controller("PlayerCtrl", ["$scope", "$rootScope", "HTTPService", "Not
     	$rootScope.playlist.push(dataObject);
     	$scope.indexPlaylist = $rootScope.playlist.length - 1;
     }
+    $scope.tmpUrlCurrentPlaylist.str = $scope.tmpPlaylistLink();
     
     securePlay(dataObject);
   });
@@ -367,7 +369,6 @@ SoonzikApp.controller("PlayerCtrl", ["$scope", "$rootScope", "HTTPService", "Not
           playlist.share = false;
           playlist.url = 'http://lvh.me:3000/playlists/' + playlist.id;
           playlist.duration = 0;
-          $rootScope.myPlaylists.push(playlist);
         }, function(error) {
           NotificationService.error($rootScope.labels.FILE_PLAYER_SAVE_IN_PLAYLIST_ERROR_MESSAGE);
         });
@@ -405,14 +406,8 @@ SoonzikApp.controller("PlayerCtrl", ["$scope", "$rootScope", "HTTPService", "Not
 
   $scope.moreClick = function() {
     $scope.more.btn = !$scope.more.btn;
-    if ($scope.more.btn == false) {
-      $scope.more.pop = false;
-    }
   }
 
-  $scope.setMorePop = function(value) {
-    $scope.more.pop = value;
-  }
 
   $scope.tmpPlaylistLink = function() {
     var url = "http://lvh.me:3000/playlists/tmp:";
@@ -424,22 +419,20 @@ SoonzikApp.controller("PlayerCtrl", ["$scope", "$rootScope", "HTTPService", "Not
     return url;
   }
 
-  $scope.savePlaylistFromCurrent = function() {
-    if ($scope.user != false && $scope.newPlaylistFromCurrent.name.length > 0) {
+  $scope.savePlaylistFromCurrent = function(playlistName) {
+    if ($scope.user != false && playlistName.length > 0) {
       SecureAuth.securedTransaction(function(key, user_id) {
         var parameters = {
           secureKey: key,
           user_id: user_id,
           playlist: {
-            name: $scope.newPlaylistFromCurrent.name,
+            name: playlistName,
             user_id: user_id
           }
         };
-        $scope.newPlaylistFromCurrent.name = "";
         HTTPService.savePlaylist(parameters).then(function(response) {
           var playlist = response.data.content;
 
-          $rootScope.$broadcast("newPlaylist", playlist);
           playlist.extend = false;
           playlist.share = false;
           playlist.url = 'http://lvh.me:3000/playlists/' + playlist.id;
@@ -447,14 +440,13 @@ SoonzikApp.controller("PlayerCtrl", ["$scope", "$rootScope", "HTTPService", "Not
           $rootScope.myPlaylists.push(playlist);
 
           for (var i = 0 ; i < $rootScope.playlist.length ; i++) {
-            playlist.musics.push($rootScope.playlist[i]);
+            playlist.musics.push($rootScope.playlist[i].obj);
             saveMusicInPlaylist(playlist, $rootScope.playlist[i]);
           }
         }, function(error) {
           NotificationService.error($rootScope.labels.FILE_PLAYER_SAVE_IN_PLAYLIST_ERROR_MESSAGE);
         });
       });
-      $scope.more.pop = false;
     }
   }
 

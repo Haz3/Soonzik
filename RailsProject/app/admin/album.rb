@@ -61,11 +61,6 @@ ActiveAdmin.register Album do
     end
   end
 
-	remove_filter :albums_descriptions
-	remove_filter :albums_genres
-	remove_filter :albums_packs
-	remove_filter :albums_commentaries
-
 	form do |f|
 	  f.semantic_errors # shows errors on :base
 	  #f.inputs
@@ -85,5 +80,10 @@ ActiveAdmin.register Album do
 
 	  f.actions         # adds the 'Submit' and 'Cancel' buttons
 	end
+
+	remove_filter :albums_descriptions
+	remove_filter :albums_genres
+	remove_filter :albums_packs
+	remove_filter :albums_commentaries
 
 end

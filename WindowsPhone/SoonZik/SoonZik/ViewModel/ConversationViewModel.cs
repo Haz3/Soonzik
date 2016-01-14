@@ -92,7 +92,6 @@ namespace SoonZik.ViewModel
                     var res2 = tmp.Result;
                     if (res2 != null)
                     {
-                        ConversationText = "";
                         CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
                             Charge);
                     }
@@ -102,6 +101,7 @@ namespace SoonZik.ViewModel
 
         private void Charge()
         {
+            ConversationText = "";
             ListMessages = new ObservableCollection<Message>();
             var request = new HttpRequestGet();
 

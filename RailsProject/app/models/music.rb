@@ -164,7 +164,7 @@ class Music < ActiveRecord::Base
   def self.suggestMusic(u, limit)
     content = []
     if (u == nil)
-      content = Music.musicToJson Music.joins(:music_notes).select('*, AVG(music_notes.value) AS note').order("note DESC").group("musics.id").limit(limit * 2).shuffle[0..(limit)]
+      content = Music.musicToJson Music.joins(:music_notes).select('musics.*, AVG(music_notes.value) AS note').order("note DESC").group("musics.id").limit(limit * 2).shuffle[0..(limit)]
     else
       toRemove = Music.musicToJson Music.joins(purchased_musics: [:purchase]).where(["purchases.user_id = ?", u.id])
       interesting = Music.musicToJson Music.joins(:listenings).where(["listenings.user_id = ?", u.id])

@@ -33,6 +33,7 @@ namespace SoonZik.Views
         {
             SoonZik.Models.Music elem = e.Parameter as SoonZik.Models.Music;
             DataContext = new MusicViewModel(elem.id);
+            media.Source = new Uri("http://api.lvh.me:3000/musics/get/" + elem.id.ToString(), UriKind.RelativeOrAbsolute);
 
             //music_id.Text = elem.id.ToString();
             ////music_artist.Text = elem.user.username;
@@ -53,6 +54,7 @@ namespace SoonZik.Views
         {
             this.Frame.GoBack();
         }
+
 
         //private void send_com_btn_Click(object sender, RoutedEventArgs e)
         //{

@@ -100,6 +100,10 @@ protected
   		elsif @security
   			@u = User.find_by_id(params[:user_id])
   		end
+
+      if (@u == nil || (@u && !@u.isArtist?))
+        redirect_to root_url subdomain: false
+      end
     end
 
 
@@ -108,9 +112,7 @@ protected
     def sendJson
       codeAnswer(202) if defined?(@returnValue[:content]) && defined?(@returnValue[:content].size) && @returnValue[:content].size == 0 && !defined?@returnValue[:code]
       defineHttp :ok if @httpCode == nil
-      respond_to do |format|
-        format.json { render :json => JSON.generate(@returnValue), :status => @httpCode }
-      end
+      render :json => JSON.generate(@returnValue), :status => @httpCode
     end
 
     #

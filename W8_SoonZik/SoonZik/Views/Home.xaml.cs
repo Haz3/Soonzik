@@ -54,10 +54,10 @@ namespace SoonZik.Views
             this.Frame.Navigate(typeof(Battle));
         }
 
-        private void shop_btn_Click(object sender, RoutedEventArgs e)
-        {
-            this.Frame.Navigate(typeof(Shop));
-        }
+        //private void shop_btn_Click(object sender, RoutedEventArgs e)
+        //{
+        //    this.Frame.Navigate(typeof(Shop));
+        //}
 
         private void listenings_btn_Click(object sender, RoutedEventArgs e)
         {
@@ -119,6 +119,11 @@ namespace SoonZik.Views
         {
             var item = ((SoonZik.Models.News)e.ClickedItem);
             this.Frame.Navigate(typeof(NewsDetails), item);
+        }
+
+        private void feedback_txt_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(Feedback));
         }
 
         // END

@@ -162,7 +162,7 @@ multi language)</p>
 											<p>Fill an association of records of the notes average</p>					
 											<div class="method-source-code" id="fillLikes-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/models/news.rb, line 44</span>
+								class="language-ruby"><span class="ruby-comment"># File app/models/news.rb, line 49</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">fillLikes</span>(<span class="ruby-identifier">ar_news</span>, <span class="ruby-identifier">security</span> = <span class="ruby-keyword">false</span>, <span class="ruby-identifier">user_id</span> = <span class="ruby-keyword">nil</span>)
   <span class="ruby-keyword">if</span> (<span class="ruby-identifier">ar_news</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>)
     <span class="ruby-keyword">return</span>
@@ -252,7 +252,7 @@ multi language)</p>
 											<p>The strong parameters to save or update object</p>					
 											<div class="method-source-code" id="news_params-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/models/news.rb, line 103</span>
+								class="language-ruby"><span class="ruby-comment"># File app/models/news.rb, line 108</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">news_params</span>(<span class="ruby-identifier">parameters</span>)
   <span class="ruby-identifier">parameters</span>.<span class="ruby-identifier">require</span>(<span class="ruby-value">:news</span>).<span class="ruby-identifier">permit</span>(<span class="ruby-value">:title</span>, <span class="ruby-value">:author_id</span>)
 <span class="ruby-keyword">end</span></code></pre>
@@ -287,7 +287,7 @@ multi language)</p>
 											<p>To give the content of the good language</p>					
 											<div class="method-source-code" id="content-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/models/news.rb, line 128</span>
+								class="language-ruby"><span class="ruby-comment"># File app/models/news.rb, line 133</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">content</span>
   <span class="ruby-identifier">content</span> = <span class="ruby-string">&quot;No Content&quot;</span>
   <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@language</span>.<span class="ruby-identifier">present?</span>)
@@ -317,7 +317,7 @@ multi language)</p>
 											<p>To know if you liked this</p>					
 											<div class="method-source-code" id="hasLiked-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/models/news.rb, line 146</span>
+								class="language-ruby"><span class="ruby-comment"># File app/models/news.rb, line 151</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">hasLiked</span>
   <span class="ruby-keyword">return</span> <span class="ruby-ivar">@hasLiked</span>.<span class="ruby-identifier">present?</span> <span class="ruby-operator">?</span> <span class="ruby-ivar">@hasLiked</span> <span class="ruby-operator">:</span> <span class="ruby-keyword">false</span>
 <span class="ruby-keyword">end</span></code></pre>
@@ -339,7 +339,7 @@ multi language)</p>
 											<p>Return the number of likes</p>					
 											<div class="method-source-code" id="likes-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/models/news.rb, line 98</span>
+								class="language-ruby"><span class="ruby-comment"># File app/models/news.rb, line 103</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">likes</span>
   <span class="ruby-keyword">return</span> (<span class="ruby-ivar">@likes</span>.<span class="ruby-identifier">present?</span>) <span class="ruby-operator">?</span> <span class="ruby-ivar">@likes</span> <span class="ruby-operator">:</span> <span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>.<span class="ruby-identifier">connection</span>.<span class="ruby-identifier">execute</span>(<span class="ruby-node">&quot;SELECT COUNT(news_id) AS count FROM newslikes WHERE news_id = #{self.id.to_s}&quot;</span>)[<span class="ruby-value">0</span>][<span class="ruby-string">&quot;count&quot;</span>]
 <span class="ruby-keyword">end</span></code></pre>
@@ -384,7 +384,7 @@ default language</p>
 											<p>To give the title of the good language</p>					
 											<div class="method-source-code" id="setLanguage-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/models/news.rb, line 108</span>
+								class="language-ruby"><span class="ruby-comment"># File app/models/news.rb, line 113</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">setLanguage</span>(<span class="ruby-identifier">language</span>)
   <span class="ruby-keyword">if</span> (<span class="ruby-constant">Language</span>.<span class="ruby-identifier">where</span>(<span class="ruby-identifier">abbreviation</span><span class="ruby-operator">:</span> <span class="ruby-identifier">language</span>).<span class="ruby-identifier">size</span> <span class="ruby-operator">!=</span> <span class="ruby-value">0</span>)
     <span class="ruby-ivar">@language</span> = <span class="ruby-identifier">language</span>
@@ -408,7 +408,7 @@ default language</p>
 											<p>Set the number of likes</p>					
 											<div class="method-source-code" id="setLike-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/models/news.rb, line 93</span>
+								class="language-ruby"><span class="ruby-comment"># File app/models/news.rb, line 98</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">setLike</span>(<span class="ruby-identifier">value</span>)
   <span class="ruby-ivar">@likes</span> = <span class="ruby-identifier">value</span>
 <span class="ruby-keyword">end</span></code></pre>
@@ -430,7 +430,7 @@ default language</p>
 											<p>Set the number of likes</p>					
 											<div class="method-source-code" id="setLiked-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/models/news.rb, line 141</span>
+								class="language-ruby"><span class="ruby-comment"># File app/models/news.rb, line 146</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">setLiked</span>
   <span class="ruby-ivar">@hasLiked</span> = <span class="ruby-keyword">true</span>
 <span class="ruby-keyword">end</span></code></pre>
@@ -452,7 +452,7 @@ default language</p>
 											<p>To give the title of the good language</p>					
 											<div class="method-source-code" id="title-source">
 							<pre class="prettyprint linenums"><code 
-								class="language-ruby"><span class="ruby-comment"># File app/models/news.rb, line 115</span>
+								class="language-ruby"><span class="ruby-comment"># File app/models/news.rb, line 120</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">title</span>
   <span class="ruby-identifier">title</span> = <span class="ruby-string">&quot;No Title&quot;</span>
   <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@language</span>.<span class="ruby-identifier">present?</span>)
@@ -463,6 +463,28 @@ default language</p>
   <span class="ruby-keyword">end</span>
 
   <span class="ruby-identifier">title</span>
+<span class="ruby-keyword">end</span></code></pre>
+						</div>
+										</div>
+
+					
+									</div>
+								<a name="method-i-to_s">anchor</a>
+				<div id="method-i-to_s-doc" class="method">
+
+					<header>
+											<i class="icon-generic"></i>
+						<span class="method-name">to_s</span><span 
+							class="method-args">()</span>
+										</header>
+
+					<div class="method-description">
+											<p>override</p>					
+											<div class="method-source-code" id="to_s-source">
+							<pre class="prettyprint linenums"><code 
+								class="language-ruby"><span class="ruby-comment"># File app/models/news.rb, line 44</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">to_s</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-node">&quot;News #{self.id}&quot;</span>
 <span class="ruby-keyword">end</span></code></pre>
 						</div>
 										</div>
@@ -519,6 +541,7 @@ default language</p>
 			<li><a href="./API/SuggestionsController.html">API::SuggestionsController</a></li>
 			<li><a href="./API/TweetsController.html">API::TweetsController</a></li>
 			<li><a href="./API/UsersController.html">API::UsersController</a></li>
+			<li><a href="./Artist/MusicsController.html">Artist::MusicsController</a></li>
 			<li><a href="./Address.html">Address</a></li>
 			<li><a href="./AdminUser.html">AdminUser</a></li>
 			<li><a href="./Album.html">Album</a></li>

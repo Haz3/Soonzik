@@ -19,9 +19,13 @@
             {{ labels.DISPLAY_PACK_ARTIST_NAME }} : {{ album.user.username }}
             %br
             {{ labels.DISPLAY_PACK_YEAR_ALBUM }} : {{ album.yearProd }}
+<<<<<<< HEAD
             %span
               {{ is_partial.album_id }}
       .row
+=======
+      .row{ 'ng-if' => 'user != false' }
+>>>>>>> e68b8b5f211e1691012ecf32854d57af13e235d9
         .large-6.columns
           .panel.left{"ng-init" => "managePrice()"}
             .large-9.columns
@@ -61,8 +65,6 @@
               %select{ 'ng-model' => 'gift.user' }
                 %option
                 %option{ 'ng-repeat' => 'friend in friends', 'ng-value' => 'friend.id' } {{ friend.username }}
-        //Albums + song
-
-        .large-12.columns
+        .large-12.columns{ 'ng-if' => 'user != false' }
           .button.expand.radius.success{ "ng-click" => "toPayment()" }
             {{ labels.DISPLAY_PACK_BUY_PACK }}

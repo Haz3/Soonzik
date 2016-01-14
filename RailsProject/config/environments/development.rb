@@ -13,9 +13,6 @@ Rails.application.configure do
   config.consider_all_requests_local       = true
   config.action_controller.perform_caching = false
 
-  # Don't care if the mailer can't send.
-  config.action_mailer.raise_delivery_errors = false
-
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log
 
@@ -38,21 +35,21 @@ Rails.application.configure do
   # old before ovh
   #config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
 
-  config.action_mailer.default_url_options = { :host => 'soonzik.com' }
+  config.action_mailer.default_url_options = { :host => 'lvh.me', port: 3000 }
   config.action_mailer.delivery_method = :smtp
   # change to true to allow email to be sent during development
-  config.action_mailer.perform_deliveries = false
+  config.action_mailer.perform_deliveries = true
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.default :charset => "utf-8"
 
   config.action_mailer.smtp_settings = {
-    address: "SSL0.ovh.net",
+    address: "smtp.gmail.com",
     port: 587,
-    domain: "soonzik.com",
+    domain: "gmail.com",
     authentication: "plain",
-    enable_starttls_auto: true,
-    user_name: "no-reply",
-    password: "qwerty123"
+    user_name: "soonzik.co@gmail.com",
+    password: "i+q5GhkK",
+    enable_starttls_auto: true
   }
 
   config.middleware.delete Rack::Lock

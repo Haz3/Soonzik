@@ -22,16 +22,23 @@
 		%ul.no-bullet
 			%li {{ labels.DISPLAY_TOOLTIP_SHARE_LABEL }} !
 			%li.small-11.small-centered.columns
-				%input.radius{ type: "text", value: "{{ idShare }}", "select-on-click" => true, readonly: "readonly" }
+				%input.radius{ type: "text", value: "{{ idShare.str }}", "select-on-click" => true, readonly: "readonly" }
 			%li{ "ng-click" => "setTooltip(false)" } {{ labels.DISPLAY_TOOLTIP_CLOSE_LABEL }}
 	%div.saveAs{ "ng-show" => "type == 4" }
 		%ul.no-bullet
 			%li{ "ng-click" => "tooltipCallbackAdd(tooltipPlaylist.musics)" } {{ labels.DISPLAY_TOOLTIP_ADD_CURRENT_PLAYLIST_LABEL }}
 			%li{ "ng-click" => "tooltipCallbackReplace(tooltipPlaylist.musics)" } {{ labels.DISPLAY_TOOLTIP_REPLACE_PLAYLIST_LABEL }}
 			%li{ "ng-click" => "setTooltip(false)" } {{ labels.DISPLAY_TOOLTIP_CLOSE_LABEL }}
-
 	%div.saveAs{ "ng-show" => "type == 5" }
 		%ul.no-bullet.clearfix
 			%li.small-12.columns {{ labels.DISPLAY_TOOLTIP_SURE_DELETE_LABEL }}
 			%li.choice.small-6.columns{ "ng-click" => "removePlaylist()" } {{ labels.DISPLAY_TOOLTIP_YES_LABEL }}
 			%li.choice.small-6.columns{ "ng-click" => "setTooltip(false)" } {{ labels.DISPLAY_TOOLTIP_NO_LABEL }}
+	%div.saveAs{ "ng-show" => "type == 6" }
+		%ul.no-bullet
+			%li.clearfix
+				.small-5.columns {{ labels.DISPLAY_TOOLTIP_NAME_LABEL }}
+				.small-7.columns
+					%input{ type: "text", "ng-model" => "input.name", placeholder: "{{ labels.DISPLAY_TOOLTIP_NEW_PLAYLIST_LABEL }}" }
+			%li{ "ng-click" => "saveNewPlaylistFromCurrent()" } {{ labels.DISPLAY_TOOLTIP_SAVE_BUTTON }}
+			%li{ "ng-click" => "setTooltip(false)" } {{ labels.DISPLAY_TOOLTIP_CLOSE_LABEL }}

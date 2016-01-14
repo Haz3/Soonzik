@@ -13,5 +13,6 @@ ActiveAdmin.register NewsTitle do
 #   permitted
 # end
 
+	permit_params :title, :language, :news_id
 
 end

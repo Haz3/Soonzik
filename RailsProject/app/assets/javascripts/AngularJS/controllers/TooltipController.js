@@ -5,9 +5,11 @@ SoonzikApp.controller('TooltipCtrl', ['$scope', 'SecureAuth', 'HTTPService', 'No
 	$scope.tooltipPlaylist = null;
 	$scope.tooltipCallbackAdd = function() {};
 	$scope.tooltipCallbackReplace = function() {};
+	$scope.tooltipCallbackSaveCurrent = function() {};
 	$scope.state = 1;
 	$scope.type = 1;
-	$scope.idShare = null;
+	$scope.idShare = { str: null };
+	$scope.objShare = { str: null };
 	$scope.playlist = null;
 
 	$scope.input = {
@@ -18,6 +20,9 @@ SoonzikApp.controller('TooltipCtrl', ['$scope', 'SecureAuth', 'HTTPService', 'No
 	 * TYPE: 1 -> Pop for music
 	 * TYPE: 2 -> Pop for Save a playlist as a new one
 	 * TYPE: 3 -> Pop for sharing
+	 * TYPE: 4 -> Pop for the saved playlists in the player
+	 * TYPE: 5 -> Pop for delete yes/no
+	 * TYPE: 6 -> Pop for the current playlist save
 	 */
 
 	$scope.tooltipInit = function(music, t, additionalParams) {
@@ -26,13 +31,22 @@ SoonzikApp.controller('TooltipCtrl', ['$scope', 'SecureAuth', 'HTTPService', 'No
 		if (t == 2) {
 			$scope.playlist = additionalParams;
 		} else if (t == 3) {
-			$scope.idShare = additionalParams;
+			if (typeof additionalParams !== 'string') {
+				$scope.objShare = additionalParams;
+				$scope.$watchCollection('objShare', function(newVersion, oldVersion) {
+					$scope.idShare.str = newVersion.str;
+				});
+			} else {
+				$scope.idShare.str = additionalParams;
+			}
 		} else if (t == 4) {
 			$scope.tooltipPlaylist = additionalParams[0];
 			$scope.tooltipCallbackAdd = additionalParams[1];
 			$scope.tooltipCallbackReplace = additionalParams[2];
 		} else if (t == 5) {
 			$scope.tooltipPlaylist = additionalParams;
+		} else if (t == 6) {
+			$scope.tooltipCallbackSaveCurrent = additionalParams;
 		}
 	}
 
@@ -100,6 +114,7 @@ SoonzikApp.controller('TooltipCtrl', ['$scope', 'SecureAuth', 'HTTPService', 'No
 			  		});
 			  	});
   			}
+  			
 				NotificationService.success("The playlist '" + $scope.input.name + "' has been created");
   			$scope.input.name = "";
 				var pl = response.data.content;
@@ -128,24 +143,38 @@ SoonzikApp.controller('TooltipCtrl', ['$scope', 'SecureAuth', 'HTTPService', 'No
 	}
 
   $scope.removePlaylist = function() {
-  	SecureAuth.securedTransaction(function(key, user_id) {
-  		var params = [
-  			{ key: "id", value: $scope.tooltipPlaylist.id},
-  			{ key: "user_id", value: user_id},
-  			{ key: "secureKey", value: key }
-  		];
-  		HTTPService.destroyPlaylist(params).then(function() {
-        $rootScope.$broadcast("deletePlaylist", $scope.tooltipPlaylist);
-  			for (var indexOfMyPlaylist in $rootScope.myPlaylists) {
-  				if ($rootScope.myPlaylists[indexOfMyPlaylist].id == $scope.tooltipPlaylist.id) {
-  					$rootScope.myPlaylists.splice(indexOfMyPlaylist, 1);
-  					break;
-  				}
-  			}
-  		}, function(error) {
-  			NotificationService.error($rootScope.labels.FILE_PLAYER_DELETE_PLAYLIST_ERROR_MESSAGE + $scope.tooltipPlaylist.name);
-  		});
-  	});
+  	var playlistToRemove = null;
+
+  	for (var indexOfMyPlaylist in $rootScope.myPlaylists) {
+			if ($rootScope.myPlaylists[indexOfMyPlaylist].id == $scope.tooltipPlaylist) { playlistToRemove = $rootScope.myPlaylists[indexOfMyPlaylist]; }
+  	}
+
+  	if (playlistToRemove) {
+	  	SecureAuth.securedTransaction(function(key, user_id) {
+	  		var params = [
+	  			{ key: "id", value: playlistToRemove.id},
+	  			{ key: "user_id", value: user_id},
+	  			{ key: "secureKey", value: key }
+	  		];
+	  		HTTPService.destroyPlaylist(params).then(function() {
+	        $rootScope.$broadcast("deletePlaylist", playlistToRemove);
+	  			for (var indexOfMyPlaylist in $rootScope.myPlaylists) {
+	  				if ($rootScope.myPlaylists[indexOfMyPlaylist].id == playlistToRemove.id) {
+	  					$rootScope.myPlaylists.splice(indexOfMyPlaylist, 1);
+	  					break;
+	  				}
+	  			}
+	  		}, function(error) {
+	  			NotificationService.error($rootScope.labels.FILE_PLAYER_DELETE_PLAYLIST_ERROR_MESSAGE + playlistToRemove.name);
+	  		});
+	  	});
+	  }
+  }
+
+  $scope.saveNewPlaylistFromCurrent = function() {
+		if ($scope.input.name == "") return
+		$scope.tooltipCallbackSaveCurrent($scope.input.name);
+		$rootScope.tooltip = false;
   }
 
 }]);

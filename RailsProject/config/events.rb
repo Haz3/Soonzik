@@ -19,6 +19,10 @@ WebsocketRails::EventMap.describe do
   namespace :messages do
     subscribe :send, :to => MessagesController, :with_method => :sendMsg
   end
+  
+  namespace :websocket_rails do
+    subscribe :pong, :to => MessagesController, :with_method => :pong
+  end
 
   # The :client_connected method is fired automatically when a new client connects
   subscribe :client_connected, :to => MessagesController, :with_method => :client_connected

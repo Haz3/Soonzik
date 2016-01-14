@@ -117,10 +117,13 @@ SoonzikApp.controller('IndexCtrl', ['$scope', 'SecureAuth', 'HTTPService', '$tim
 							b.votes = votes;
 							b.votes[0].width = Math.max(Math.min(b.votes[0].value * 100 / totalVote, 95), 5);
 							b.votes[1].width = Math.max(Math.min(b.votes[1].value * 100 / totalVote, 95), 5);
-							b.votes[0].value = b.votes[0].value * 100 / totalVote;
-							b.votes[1].value = b.votes[1].value * 100 / totalVote;
+							b.votes[0].value = Math.round((b.votes[0].value * 100 / totalVote) * 100) / 100;
+							b.votes[1].value = Math.round((b.votes[1].value * 100 / totalVote) * 100) / 100;
 						} else {
-							b.votes = false;
+							b.votes = [
+								{ value: 0, width: 50 },
+								{ value: 0, width: 50 },
+							];
 						}
 					}
 					battlesLoading = true;

@@ -169,7 +169,7 @@ namespace SoonZik.ViewModel
         {
             if (ThePack != null)
             {
-                PriceControl.SelecetdPack = ThePack;
+                PriceControlViewModel.SelecetdPack = ThePack;
                 GlobalMenuControl.MyGrid.Children.Clear();
                 GlobalMenuControl.MyGrid.Children.Add(new PriceControl());
             }

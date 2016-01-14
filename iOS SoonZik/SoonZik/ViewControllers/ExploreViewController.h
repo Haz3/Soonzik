@@ -13,9 +13,11 @@
 @property (nonatomic, strong) UITableView *influencesTableView;
 @property (nonatomic, strong) UITableView *artistsTableView;
 @property (nonatomic, strong) UITableView *concertsTableView;
+@property (nonatomic, strong) UITableView *ambiancesTableView;
 @property (nonatomic, strong) NSArray *listOfInfluences;
 @property (nonatomic, strong) NSArray *listOfConcerts;
 @property (nonatomic, strong) NSArray *listOfArtists;
+@property (nonatomic, strong) NSArray *listOfAmbiances;
 @property (nonatomic, strong) UIScrollView *scrollView;
 
 @property (nonatomic, assign) bool dataLoaded;

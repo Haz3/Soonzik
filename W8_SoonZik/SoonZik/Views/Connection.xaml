@@ -54,10 +54,11 @@
         <TextBlock x:Name="signup_txt" x:Uid="signup_txt" HorizontalAlignment="Left" Margin="95,495,0,0" TextWrapping="Wrap" Text="Inscription" VerticalAlignment="Top" Width="Auto" Foreground="#FF27AAE1" FontSize="25" Tapped="signup_txt_SelectionChanged" />
         <!--<TextBlock x:Name="langue" HorizontalAlignment="Left" Margin="80,40,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="80" Width="239" Foreground="#FF006A00" FontSize="40"/>-->
         <!--<TextBlock x:Name="forgot_password_txt" x:Uid="forgot_password_txt" HorizontalAlignment="Left" Margin="92,522,0,0" TextWrapping="Wrap" Text="Récuperation du mot de passe" VerticalAlignment="Top" Width="283" Foreground="#FF27AAE1" FontSize="20"/>-->
-        <TextBlock x:Name="feedback" HorizontalAlignment="Left" Margin="25,1045,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="25" Width="275" Foreground="#FF111111" FontSize="25">
+        <!--<TextBlock x:Name="feedback" HorizontalAlignment="Left" Margin="25,1045,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="25" Width="275" Foreground="#FF111111" FontSize="25">
             <Hyperlink NavigateUri="http://api.lvh.me:3000/feedbacks/new" Foreground="#FF611EFF" >Feedback</Hyperlink>
-        </TextBlock>
-        <Button Content="Button" Click="Button_Click" HorizontalAlignment="Left" Margin="162,47,0,0" VerticalAlignment="Top" Height="88" Width="218" Background="#FF7E6969"/>
+        </TextBlock>-->
+        <TextBlock x:Name="feedback_txt" x:Uid="feedback_txt" HorizontalAlignment="Left" Margin="30,1025,0,0" TextWrapping="Wrap" Text="Feedback" VerticalAlignment="Top" Width="116" Foreground="#FF27AAE1" FontSize="25" Tapped="feedback_txt_Tapped" />
+        <!--<Button Content="Button" Click="Button_Click" HorizontalAlignment="Left" Margin="162,47,0,0" VerticalAlignment="Top" Height="88" Width="218" Background="#FF7E6969"/>-->
 
     </Grid>
 </Page>

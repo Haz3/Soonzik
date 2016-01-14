@@ -34,4 +34,9 @@ class Address < ActiveRecord::Base
   def self.address_params(parameters)
     parameters.require(:address).permit(:numberStreet, :street, :city, :country, :zipcode, :complement)
   end
+
+  # override
+  def to_s
+    return "#{self.numberStreet} #{self.street} #{self.complement} #{self.city} #{self.zipcode} #{self.country}"
+  end
 end

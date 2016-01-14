@@ -80,7 +80,6 @@ SoonzikArtistApp.controller('TourCtrl', ['$scope', 'SecureAuth', 'HTTPService', 
 			var today = new Date();
 			$scope.form.value.concert.planification = new Date(today.getFullYear(), today.getMonth(), today.getDate(), 0, 0);
 
-			console.log(response);
 			$scope.concerts.push(response.data);
 		}, function(error) {
 			if (typeof error.data.address !== "undefined") {
