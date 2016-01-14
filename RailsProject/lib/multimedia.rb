@@ -10,6 +10,10 @@ module	Multimedia
 		ERROR = ' 2>&1'
   	MAIN_REGEX = /Duration: (\d\d:\d\d:\d\d)/
 
+  	def lol
+  		`./a.out lol`
+  	end
+
 		# The constructor. Take one parameter, the file to cut. It's optionnal and can be set later
 		def initialize(dir = nil, file = nil)
 			@os = nil
@@ -147,7 +151,7 @@ module	Multimedia
 
 		  #
 		  def getFFMPEGexec
-		  	return Rails.root.join('app', 'assets', 'execs', "ffmpeg-#{@os}-#{@bits}bits#{@extension}").to_s
+		  	return File.join('.', 'app', 'assets', 'execs', "ffmpeg-#{@os}-#{@bits}bits#{@extension}").to_s
 		  end
 	end
 end
