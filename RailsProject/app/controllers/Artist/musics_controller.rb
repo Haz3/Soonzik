@@ -485,7 +485,7 @@ module Artist
 	    		m.title = params[:music_name]
 	    		m.duration = params[:duration]
 	    		m.price = params[:price]
-	    		m.file = params[:filename].gsub(/[^0-9A-Za-z\.-]/, '')
+	    		m.file = params[:filename].gsub(/[^0-9A-Za-z\.-]/, '') + '.mp3'
 	    		m.limited = params[:limited]
 	    		m.save
 
@@ -496,8 +496,8 @@ module Artist
 						a.descriptions << d
 					end
 
-					File.open(Rails.root.join('app', 'assets', 'musics', @u.id.to_s, params[:filename].gsub(/[^0-9A-Za-z\.-]/, '')), 'ab') do |f|
-	          File.open(Rails.root.join('app', 'assets', 'musics', @u.id.to_s, 'cut_' + params[:filename].gsub(/[^0-9A-Za-z\.-]/, '')), 'wb') do |f2|
+					File.open(Rails.root.join('app', 'assets', 'musics', @u.id.to_s, params[:filename].gsub(/[^0-9A-Za-z\.-]/, '') + '.mp3'), 'rb') do |f|
+	          File.open(Rails.root.join('app', 'assets', 'musics', @u.id.to_s, 'cut_' + params[:filename].gsub(/[^0-9A-Za-z\.-]/, '') + '.mp3'), 'wb') do |f2|
 		          f2.write(f.read)
 		        end
 	        end
@@ -506,7 +506,7 @@ module Artist
 	    		n = 0
 	    		data = Base64.decode64 params[:data]
 
-	    		File.open(Rails.root.join('app', 'assets', 'musics', @u.id.to_s, params[:filename].gsub(/[^0-9A-Za-z\.-]/, '')), 'ab') do |f|
+	    		File.open(Rails.root.join('app', 'assets', 'musics', @u.id.to_s, params[:filename].gsub(/[^0-9A-Za-z\.-]/, '') + '.mp3'), 'ab') do |f|
 	          n = f.write(data)
 	        end
 
