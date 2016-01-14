@@ -94,40 +94,50 @@ namespace SoonZik.ViewModel
 
         private void PasswordBoxCommandExecute()
         {
-            if (Password.Length < 8 && Password != null)
-            {
-                new MessageDialog("Password need 8").ShowAsync();
+            if (Password != null)
+            {   
+                if (Password.Length < 8)
+                    new MessageDialog("Password need 8").ShowAsync();
             }
         }
 
         private void ValidateExecute()
         {
-            if (EmailHelper.IsValidEmail(NewUser.email))
+            if (NewUser.email != null && Password != null && NewUser.fname != null && NewUser.lname != null &&
+                NewUser.username != null)
             {
-                var month = Birthday.Month.ToString();
-                var day = Birthday.Day.ToString();
-                if (Birthday.Month < 10)
+                if (EmailHelper.IsValidEmail(NewUser.email))
                 {
-                    month = "0" + Birthday.Month;
-                }
-                if (Birthday.Day < 10)
-                {
-                    day = "0" + Birthday.Day;
-                }
-                NewUser.birthday = Birthday.Year + "-" + month + "-" + day + " 00:00:00";
+                    var month = Birthday.Month.ToString();
+                    var day = Birthday.Day.ToString();
+                    if (Birthday.Month < 10)
+                    {
+                        month = "0" + Birthday.Month;
+                    }
+                    if (Birthday.Day < 10)
+                    {
+                        day = "0" + Birthday.Day;
+                    }
+                    NewUser.birthday = Birthday.Year + "-" + month + "-" + day + " 00:00:00";
 
-                if (NewAddress.City != null)
-                {
-                    NewUser.address = new Address();
-                    NewUser.address = NewAddress;
-                }
+                    if (NewAddress.City != null)
+                    {
+                        NewUser.address = new Address();
+                        NewUser.address = NewAddress;
+                    }
 
-                PostUser();
+                    PostUser();
+                }
+                else
+                {
+                    new MessageDialog("Email not Valid").ShowAsync();
+                }
             }
             else
             {
-                new MessageDialog("Email not Valid").ShowAsync();
+                new MessageDialog("Veuillez remplir les champs avec une *").ShowAsync();
             }
+            
         }
 
         private async void PostUser()

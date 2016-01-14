@@ -188,11 +188,11 @@ namespace SoonZik.ViewModel
         private void UpadteNews()
         {
             var request = new HttpRequestGet();
-            var album = request.GetSecureObject(new Album(), "albums", SelectNews.id.ToString(),
+            var news = request.GetSecureObject(new News(), "news", SelectNews.id.ToString(),
                 Singleton.Singleton.Instance().SecureKey, Singleton.Singleton.Instance().CurrentUser.id.ToString());
-            album.ContinueWith(delegate(Task<object> tmp)
+            news.ContinueWith(delegate(Task<object> tmp)
             {
-                var test = tmp.Result as Album;
+                var test = tmp.Result as News;
                 if (test != null)
                 {
                     CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,

@@ -142,10 +142,11 @@ namespace SoonZik.ViewModel
                     {
                         CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
                             () =>
-                                ThePlaylist =
-                                    (Playlist)
-                                        JsonConvert.DeserializeObject(tmp.Result, typeof (Playlist))
-                            );
+                            {
+                                var stringJson = JObject.Parse(tmp.Result).SelectToken("content").ToString();
+                                ThePlaylist = (Playlist)JsonConvert.DeserializeObject(stringJson, typeof(Playlist));
+                                var i = ThePlaylist.musics.Count;
+                            });
                     }
                 });
                 BoolRename = false;

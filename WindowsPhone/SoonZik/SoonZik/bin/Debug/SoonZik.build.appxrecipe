@@ -374,9 +374,6 @@
     <AppxPackagedFile Include="C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\bin\Debug\Controls\Genre.xbf">
       <PackagePath>Controls\Genre.xbf</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\bin\Debug\Controls\GeolocalisationControl.xbf">
-      <PackagePath>Controls\GeolocalisationControl.xbf</PackagePath>
-    </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\bin\Debug\Controls\GlobalMenuControl.xbf">
       <PackagePath>Controls\GlobalMenuControl.xbf</PackagePath>
     </AppxPackagedFile>
@@ -386,8 +383,8 @@
     <AppxPackagedFile Include="C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\bin\Debug\Controls\NotationMusic.xbf">
       <PackagePath>Controls\NotationMusic.xbf</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\bin\Debug\Controls\PlayerControl.xbf">
-      <PackagePath>Controls\PlayerControl.xbf</PackagePath>
+    <AppxPackagedFile Include="C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\bin\Debug\Views\PlayerView.xbf">
+      <PackagePath>Views\PlayerView.xbf</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\bin\Debug\Controls\PriceControl.xbf">
       <PackagePath>Controls\PriceControl.xbf</PackagePath>

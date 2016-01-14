@@ -92,9 +92,6 @@
     <Compile Include="Controls\Genre.xaml.cs">
       <DependentUpon>Genre.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\GeolocalisationControl.xaml.cs">
-      <DependentUpon>GeolocalisationControl.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Controls\GlobalMenuControl.xaml.cs">
       <DependentUpon>GlobalMenuControl.xaml</DependentUpon>
     </Compile>
@@ -104,8 +101,8 @@
     <Compile Include="Controls\NotationMusic.xaml.cs">
       <DependentUpon>NotationMusic.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\PlayerControl.xaml.cs">
-      <DependentUpon>PlayerControl.xaml</DependentUpon>
+    <Compile Include="Views\PlayerView.xaml.cs">
+      <DependentUpon>PlayerView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\PriceControl.xaml.cs">
       <DependentUpon>PriceControl.xaml</DependentUpon>
@@ -325,10 +322,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Controls\GeolocalisationControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Controls\GlobalMenuControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -341,7 +334,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\PlayerControl.xaml">
+    <Page Include="Views\PlayerView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

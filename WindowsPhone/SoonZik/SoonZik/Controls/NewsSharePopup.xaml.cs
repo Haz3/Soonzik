@@ -37,7 +37,8 @@ namespace SoonZik.Controls
             catch (Exception ex)
             {
                 var message = ex.Message;
-                new MessageDialog("Facebbok error").ShowAsync();
+                new MessageDialog("Facebook error").ShowAsync();
+                NewsDetailViewModel.SharePopup.IsOpen = false;
             }
         }
 
@@ -57,18 +58,33 @@ namespace SoonZik.Controls
                 catch (Exception ex)
                 {
                     var ErrMsg = new MessageDialog("Error Ocuured!" + ex).ShowAsync();
+                    NewsDetailViewModel.SharePopup.IsOpen = false;
                 }
             }
             else
             {
                 var ErrMsg = new MessageDialog("Vous n'etes pas connecter a facebook").ShowAsync();
+                NewsDetailViewModel.SharePopup.IsOpen = false;
             }
         }
 
         public void TwitterShare_OnTapped(object sender, TappedRoutedEventArgs e)
         {
-            Tweet.PublishTweet(TextBoxShare.Text + " " + _selectedNews.title + "from @SoonZik");
-            var SuccessMsg = new MessageDialog("Message posted sucessfully on Twitter");
+            try
+            {
+                Tweet.PublishTweet(TextBoxShare.Text + " " + _selectedNews.title + "from @SoonZik");
+                var SuccessMsg = new MessageDialog("Message posted sucessfully on Twitter");
+                NewsDetailViewModel.SharePopup.IsOpen = false;
+            }
+            catch (Exception)
+            {
+                new MessageDialog("not connected on twitter").ShowAsync();
+                NewsDetailViewModel.SharePopup.IsOpen = false;
+            }
+        }
+
+        private void UIElement_OnTapped(object sender, TappedRoutedEventArgs e)
+        {
             NewsDetailViewModel.SharePopup.IsOpen = false;
         }
     }

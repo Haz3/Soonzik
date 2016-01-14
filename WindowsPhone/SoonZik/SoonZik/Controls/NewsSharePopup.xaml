@@ -23,6 +23,8 @@
             <TextBox Grid.Row="1" Width="200" x:Name="TextBoxShare" Height="160"
                      Background="White" Opacity="0.2" BorderThickness="0,0,0,0" Foreground="White"
                      HorizontalAlignment="Center" VerticalAlignment="Center" />
+            <Image Grid.Row="0" Source="../Resources/Icones/cross_icon.png" HorizontalAlignment="Right" Width="30" 
+                   Tapped="UIElement_OnTapped"/>
 
             <Image x:Name="FacebookShare" Grid.Row="2" VerticalAlignment="Center"
                    Source="../Resources/Icones/facebook.png"

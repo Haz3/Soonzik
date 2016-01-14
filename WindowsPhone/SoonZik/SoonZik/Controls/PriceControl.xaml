@@ -20,7 +20,7 @@
         <TextBlock Grid.Row="0" x:Uid="Price" Text="" FontSize="25" Height="30" Width="60" VerticalAlignment="Top"
                    HorizontalAlignment="Left" Margin="40,40,0,0" />
         <TextBox Grid.Row="0" x:Name="PriceTextBox" Height="30" Width="40" VerticalAlignment="Top"
-                 Text="{Binding ThePack.averagePrice, Mode=TwoWay}"
+                 Text="{Binding ThePack.averagePrice, Mode=TwoWay}" InputScope="39"
                  HorizontalAlignment="Left" Margin="140,40,0,0" />
 
         <TextBlock Grid.Row="1" VerticalAlignment="Top" x:Uid="Artist" Text="" FontSize="25" Margin="0,80,0,0" />

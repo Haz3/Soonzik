@@ -4,15 +4,8 @@
     <RootInterface FullName="Windows.UI.Xaml.Data.IValueConverter" />
   </Roots.Interfaces>
   <Roots.PropertyPathNames>
-    <RootPropertyPathName Name="username" />
-    <RootPropertyPathName Name="ListUser" />
-    <RootPropertyPathName Name="UserSelected" />
-    <RootPropertyPathName Name="UserTappedCommand" />
-    <RootPropertyPathName Name="TwentyKmActivated" />
-    <RootPropertyPathName Name="TenKmActivated" />
-    <RootPropertyPathName Name="FiveKmActivated" />
-    <RootPropertyPathName Name="TwoKmActivated" />
     <RootPropertyPathName Name="title" />
+    <RootPropertyPathName Name="username" />
     <RootPropertyPathName Name="SelectedPack" />
     <RootPropertyPathName Name="SelectedAlbum" />
     <RootPropertyPathName Name="SelectedMusic" />
@@ -23,8 +16,13 @@
     <RootPropertyPathName Name="PlayImage" />
     <RootPropertyPathName Name="PlayCommand" />
     <RootPropertyPathName Name="RewindCommand" />
-    <RootPropertyPathName Name="MusiqueImage" />
+    <RootPropertyPathName Name="Time" />
     <RootPropertyPathName Name="MediaElementObject" />
+    <RootPropertyPathName Name="NaturalDuration" />
+    <RootPropertyPathName Name="TimeSpan" />
+    <RootPropertyPathName Name="Seconds" />
+    <RootPropertyPathName Name="TimerCommand" />
+    <RootPropertyPathName Name="MusiqueImage" />
     <RootPropertyPathName Name="TitleTrack" />
     <RootPropertyPathName Name="ArtisteName" />
     <RootPropertyPathName Name="BuyCommand" />
@@ -89,27 +87,34 @@
     <RootPropertyPathName Name="ListGenreSelected" />
     <RootPropertyPathName Name="musics" />
     <RootPropertyPathName Name="address" />
-    <RootPropertyPathName Name="city" />
+    <RootPropertyPathName Name="City" />
     <RootPropertyPathName Name="url" />
+    <RootPropertyPathName Name="music" />
     <RootPropertyPathName Name="ListConcerts" />
     <RootPropertyPathName Name="ConcertSelected" />
     <RootPropertyPathName Name="ConcertTappedCommand" />
+    <RootPropertyPathName Name="ListListeners" />
+    <RootPropertyPathName Name="ListenningSelected" />
+    <RootPropertyPathName Name="TwentyKmActivated" />
     <RootPropertyPathName Name="TwentyChecked" />
+    <RootPropertyPathName Name="TenKmActivated" />
     <RootPropertyPathName Name="TenChecked" />
+    <RootPropertyPathName Name="FiveKmActivated" />
     <RootPropertyPathName Name="FiveChecked" />
+    <RootPropertyPathName Name="TwoKmActivated" />
     <RootPropertyPathName Name="TwoChecked" />
     <RootPropertyPathName Name="UserLocation" />
     <RootPropertyPathName Name="Point" />
     <RootPropertyPathName Name="MapElements" />
     <RootPropertyPathName Name="Title" />
     <RootPropertyPathName Name="Location" />
+    <RootPropertyPathName Name="UserTappedCommand" />
     <RootPropertyPathName Name="ValidateCommand" />
     <RootPropertyPathName Name="NewUser" />
     <RootPropertyPathName Name="phoneNumber" />
     <RootPropertyPathName Name="NewAddress" />
     <RootPropertyPathName Name="Zipcode" />
     <RootPropertyPathName Name="Country" />
-    <RootPropertyPathName Name="City" />
     <RootPropertyPathName Name="Complement" />
     <RootPropertyPathName Name="Street" />
     <RootPropertyPathName Name="NumberStreet" />
@@ -236,10 +241,10 @@
       <RootProperty Name="MinWidth" />
       <RootProperty Name="Margin" />
       <RootProperty Name="Width" />
-      <RootProperty Name="ColumnDefinitions" />
       <RootProperty Name="Opacity" />
       <RootProperty Name="RenderTransformOrigin" />
       <RootProperty Name="RenderTransform" />
+      <RootProperty Name="ColumnDefinitions" />
       <RootProperty Name="Visibility" />
       <RootProperty Name="Resources" />
       <RootEvent Name="Tapped" />
@@ -429,6 +434,7 @@
       <RootProperty Name="Width" />
       <RootProperty Name="VerticalAlignment" />
       <RootProperty Name="Margin" />
+      <RootProperty Name="Visibility" />
       <RootProperty Name="Name" />
       <RootProperty Name="Stretch" />
       <RootEvent Name="Tapped" />
@@ -456,8 +462,8 @@
       <RootProperty Name="MaxLines" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Data.Binding">
-      <RootProperty Name="Mode" />
       <RootProperty Name="Path" />
+      <RootProperty Name="Mode" />
       <RootProperty Name="Converter" />
       <RootProperty Name="Source" />
     </RootType>
@@ -470,48 +476,6 @@
     </RootType>
     <RootType FullName="SoonZik.Controls.ButtonFriendPopUp" />
     <RootType FullName="SoonZik.Controls.Genre" />
-    <RootType FullName="Windows.UI.Xaml.Controls.Maps.MapControl">
-      <RootProperty Name="Center" />
-      <RootProperty Name="ZoomLevel" />
-      <RootProperty Name="Children" />
-      <RootMethod Name="GetLocation" />
-      <RootMethod Name="SetLocation" />
-      <RootMethod Name="GetNormalizedAnchorPoint" />
-      <RootMethod Name="SetNormalizedAnchorPoint" />
-    </RootType>
-    <RootType FullName="Windows.UI.Xaml.Controls.ListBox">
-      <RootProperty Name="Background" />
-      <RootProperty Name="ItemsSource" />
-      <RootProperty Name="ItemTemplate" />
-      <RootProperty Name="SelectedItem" />
-      <RootProperty Name="IsTapEnabled" />
-      <RootProperty Name="ItemContainerStyle" />
-      <RootProperty Name="HorizontalAlignment" />
-      <RootProperty Name="Visibility" />
-      <RootEvent Name="SelectionChanged" />
-    </RootType>
-    <RootType FullName="Microsoft.Xaml.Interactivity.Interaction">
-      <RootMethod Name="GetBehaviors" />
-      <RootMethod Name="SetBehaviors" />
-    </RootType>
-    <RootType FullName="Microsoft.Xaml.Interactions.Core.EventTriggerBehavior">
-      <RootProperty Name="EventName" />
-      <RootProperty Name="Actions" />
-    </RootType>
-    <RootType FullName="Microsoft.Xaml.Interactions.Core.InvokeCommandAction">
-      <RootProperty Name="Command" />
-    </RootType>
-    <RootType FullName="Windows.UI.Xaml.Controls.ColumnDefinition">
-      <RootProperty Name="Width" />
-    </RootType>
-    <RootType FullName="Windows.UI.Xaml.Controls.RadioButton">
-      <RootProperty Name="Content" />
-      <RootProperty Name="IsChecked" />
-      <RootProperty Name="Margin" />
-      <RootProperty Name="Command" />
-      <RootEvent Name="Click" />
-    </RootType>
-    <RootType FullName="SoonZik.Controls.GeolocalisationControl" />
     <RootType FullName="Windows.UI.Xaml.Media.Animation.DoubleAnimation">
       <RootProperty Name="Duration" />
       <RootProperty Name="To" />
@@ -555,16 +519,32 @@
       <RootProperty Name="Opacity" />
       <RootProperty Name="HorizontalAlignment" />
       <RootProperty Name="Text" />
-      <RootProperty Name="Margin" />
       <RootProperty Name="InputScope" />
+      <RootProperty Name="Margin" />
       <RootProperty Name="IsEnabled" />
       <RootEvent Name="TextChanged" />
+    </RootType>
+    <RootType FullName="Microsoft.Xaml.Interactivity.Interaction">
+      <RootMethod Name="GetBehaviors" />
+      <RootMethod Name="SetBehaviors" />
+    </RootType>
+    <RootType FullName="Microsoft.Xaml.Interactions.Core.EventTriggerBehavior">
+      <RootProperty Name="EventName" />
+      <RootProperty Name="Actions" />
     </RootType>
     <RootType FullName="Microsoft.Xaml.Interactions.Media.ControlStoryboardAction">
       <RootProperty Name="Storyboard" />
     </RootType>
     <RootType FullName="SoonZik.Controls.GlobalMenuControl" />
     <RootType FullName="SoonZik.Controls.NewsSharePopup" />
+    <RootType FullName="Windows.UI.Xaml.Controls.RadioButton">
+      <RootProperty Name="Margin" />
+      <RootProperty Name="Content" />
+      <RootProperty Name="Foreground" />
+      <RootProperty Name="IsChecked" />
+      <RootProperty Name="Command" />
+      <RootEvent Name="Click" />
+    </RootType>
     <RootType FullName="SoonZik.Controls.NotationMusic" />
     <RootType FullName="Windows.UI.Xaml.Controls.Page">
       <RootProperty Name="DataContext" />
@@ -572,17 +552,23 @@
       <RootProperty Name="Content" />
       <RootProperty Name="Resources" />
     </RootType>
-    <RootType FullName="SoonZik.Controls.PlayerControl" />
+    <RootType FullName="Microsoft.Xaml.Interactions.Core.InvokeCommandAction">
+      <RootProperty Name="Command" />
+    </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.Slider">
-      <RootProperty Name="VerticalAlignment" />
-      <RootProperty Name="Margin" />
       <RootProperty Name="Value" />
-      <RootProperty Name="Width" />
       <RootProperty Name="Minimum" />
       <RootProperty Name="Maximum" />
-      <RootProperty Name="HorizontalAlignment" />
       <RootProperty Name="StepFrequency" />
+      <RootProperty Name="VerticalAlignment" />
+      <RootProperty Name="Margin" />
+      <RootProperty Name="Width" />
+      <RootProperty Name="HorizontalAlignment" />
     </RootType>
+    <RootType FullName="Windows.UI.Xaml.Controls.ColumnDefinition">
+      <RootProperty Name="Width" />
+    </RootType>
+    <RootType FullName="SoonZik.Controls.PlayerControl" />
     <RootType FullName="SoonZik.Controls.PriceControl" />
     <RootType FullName="Windows.UI.Xaml.Controls.ProgressRing">
       <RootProperty Name="IsActive" />
@@ -630,6 +616,17 @@
       <RootProperty Name="Header" />
       <RootProperty Name="Content" />
     </RootType>
+    <RootType FullName="Windows.UI.Xaml.Controls.ListBox">
+      <RootProperty Name="Background" />
+      <RootProperty Name="ItemsSource" />
+      <RootProperty Name="ItemTemplate" />
+      <RootProperty Name="IsTapEnabled" />
+      <RootProperty Name="SelectedItem" />
+      <RootProperty Name="ItemContainerStyle" />
+      <RootProperty Name="HorizontalAlignment" />
+      <RootProperty Name="Visibility" />
+      <RootEvent Name="SelectionChanged" />
+    </RootType>
     <RootType FullName="SoonZik.Views.AlbumView" />
     <RootType FullName="SoonZik.Views.BattleDetailView" />
     <RootType FullName="SoonZik.Views.CartsView" />
@@ -641,6 +638,15 @@
       <RootProperty Name="Fill" />
     </RootType>
     <RootType FullName="SoonZik.Views.GenreView" />
+    <RootType FullName="Windows.UI.Xaml.Controls.Maps.MapControl">
+      <RootProperty Name="Center" />
+      <RootProperty Name="ZoomLevel" />
+      <RootProperty Name="Children" />
+      <RootMethod Name="GetLocation" />
+      <RootMethod Name="SetLocation" />
+      <RootMethod Name="GetNormalizedAnchorPoint" />
+      <RootMethod Name="SetNormalizedAnchorPoint" />
+    </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.Maps.MapItemsControl">
       <RootProperty Name="ItemsSource" />
       <RootProperty Name="ItemTemplate" />

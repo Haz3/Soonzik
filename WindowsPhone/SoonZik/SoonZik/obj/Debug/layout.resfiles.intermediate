@@ -14,11 +14,9 @@ Assets\WideLogo.scale-240.png
 App.xbf
 Controls\ButtonFriendPopUp.xbf
 Controls\Genre.xbf
-Controls\GeolocalisationControl.xbf
 Controls\GlobalMenuControl.xbf
 Controls\NewsSharePopup.xbf
 Controls\NotationMusic.xbf
-Controls\PlayerControl.xbf
 Controls\PriceControl.xbf
 Controls\ProgressRingControl.xbf
 Controls\TwitterConnect.xbf
@@ -41,6 +39,7 @@ Views\MyNetwork.xbf
 Views\News.xbf
 Views\NewsDetail.xbf
 Views\Packs.xbf
+Views\PlayerView.xbf
 Views\PlaylistView.xbf
 Views\ProfilArtiste.xbf
 Views\ProfilFriendView.xbf
