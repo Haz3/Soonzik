@@ -474,7 +474,7 @@ module Artist
 	    		n = 0
 	    		data = Base64.decode64 params[:data]
 
-	    		File.open(Rails.root.join('app', 'assets', 'musics', @u.id, params[:filename].gsub(/[^0-9A-Za-z\.-]/, '')), 'ab') do |f|
+	    		File.open(Rails.root.join('app', 'assets', 'musics', @u.id.to_s, params[:filename].gsub(/[^0-9A-Za-z\.-]/, '')), 'ab') do |f|
 	          n = f.write(data)
 	        end
 
@@ -484,6 +484,7 @@ module Artist
 	    		defineHttp :bad_request
 	    	end
     	rescue
+    		puts $!, $@
 	    	codeAnswer 504
     		defineHttp :service_unavailable
 	    end
