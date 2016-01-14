@@ -63,6 +63,13 @@ namespace SoonZik.HttpRequest
 
         #region Method
 
+        public async Task<String> GetMusicalPast(string idSoundcloud, string sha256, string id)
+        {
+            var request = (HttpWebRequest)WebRequest.Create(ApiUrl + "musicalPast");
+            var postData = "soundcloud_id =" + idSoundcloud + "&secureKey=" + sha256 + "&user_id=" + id;
+            return await GetHttpPostResponse(request, postData);
+        }
+
         public async Task<String> ConnexionSimple(string username, string password)
         {
             var request = (HttpWebRequest) WebRequest.Create(ApiUrl + "login");

@@ -100,6 +100,7 @@
     <Compile Include="Poco\ErrorMessage.cs" />
     <Compile Include="Poco\Genre.cs" />
     <Compile Include="Poco\Group.cs" />
+    <Compile Include="Poco\Identities.cs" />
     <Compile Include="Poco\Influence.cs" />
     <Compile Include="Poco\InitConnection.cs" />
     <Compile Include="Poco\Key.cs" />

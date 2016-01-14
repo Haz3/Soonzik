@@ -4,7 +4,9 @@
     {
         public int id { get; set; }
         public string planification { get; set; }
-        public string url { get; set; }
+        public object url { get; set; }
+        public string likes { get; set; }
+        public bool hasLiked { get; set; }
         public Address address { get; set; }
         public User user { get; set; }
     }

@@ -12,6 +12,12 @@
     DataContext="{StaticResource ExplorerViewModel}"
     Background="#424242">
 
+    <interactivity:Interaction.Behaviors>
+        <core:EventTriggerBehavior EventName="Loaded">
+            <core:InvokeCommandAction Command="{Binding LoadCommand}" />
+        </core:EventTriggerBehavior>
+    </interactivity:Interaction.Behaviors>
+
     <Page.Resources>
         <DataTemplate x:Key="InfluencesTemplate">
             <StackPanel x:ConnectionId='7' Margin="0,0,0,30"                                     >

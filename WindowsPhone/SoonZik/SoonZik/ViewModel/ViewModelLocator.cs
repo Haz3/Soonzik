@@ -57,6 +57,12 @@ namespace SoonZik.ViewModel
             SimpleIoc.Default.Register<PlayerControlViewModel>();
             SimpleIoc.Default.Register<PriceControlViewModel>();
             SimpleIoc.Default.Register<GenreViewModel>();
+            SimpleIoc.Default.Register<ConcertDetailViewModel>();
+        }
+
+        public ConcertDetailViewModel ConcertDetail
+        {
+            get { return ServiceLocator.Current.GetInstance<ConcertDetailViewModel>(); }
         }
 
         public GenreViewModel GenreView

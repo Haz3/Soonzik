@@ -31,7 +31,7 @@
             </Grid>
         </DataTemplate>
         <DataTemplate x:Key="ListConcertDataTemplate">
-            <Grid Row="1" Height="80">
+            <Grid Row="1" Height="80" x:Name="ConcertGrid" Tapped="ConcertGrid_OnTapped">
                 <Grid.RowDefinitions>
                     <RowDefinition />
                     <RowDefinition />
@@ -121,12 +121,6 @@
                 <ListBox Background="Transparent" Grid.Row="1" x:Name="ConcertBox" ItemsSource="{Binding ListConcerts}"
                          ItemTemplate="{StaticResource ListConcertDataTemplate}"
                          SelectedItem="{Binding ConcertSelected, Mode=TwoWay}">
-
-                    <interactivity:Interaction.Behaviors>
-                        <core:EventTriggerBehavior EventName="Tapped">
-                            <core:InvokeCommandAction Command="{Binding ConcertTappedCommand}" />
-                        </core:EventTriggerBehavior>
-                    </interactivity:Interaction.Behaviors>
                 </ListBox>
 
             </PivotItem>

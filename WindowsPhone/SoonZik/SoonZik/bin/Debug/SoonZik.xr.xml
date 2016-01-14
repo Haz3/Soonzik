@@ -11,6 +11,15 @@
     <RootPropertyPathName Name="SelectedMusic" />
     <RootPropertyPathName Name="SelectedUser" />
     <RootPropertyPathName Name="SelectedArtist" />
+    <RootPropertyPathName Name="LoadedCommand" />
+    <RootPropertyPathName Name="TheAddress" />
+    <RootPropertyPathName Name="TheConcert" />
+    <RootPropertyPathName Name="url" />
+    <RootPropertyPathName Name="planification" />
+    <RootPropertyPathName Name="Likes" />
+    <RootPropertyPathName Name="Like" />
+    <RootPropertyPathName Name="user" />
+    <RootPropertyPathName Name="profilImage" />
     <RootPropertyPathName Name="PlayerLoaded" />
     <RootPropertyPathName Name="ForwardCommand" />
     <RootPropertyPathName Name="PlayImage" />
@@ -53,12 +62,8 @@
     <RootPropertyPathName Name="ListCommAlbum" />
     <RootPropertyPathName Name="ListMusics" />
     <RootPropertyPathName Name="AddToCart" />
-    <RootPropertyPathName Name="Like" />
-    <RootPropertyPathName Name="Likes" />
     <RootPropertyPathName Name="TheAlbum" />
-    <RootPropertyPathName Name="user" />
     <RootPropertyPathName Name="imageAlbum" />
-    <RootPropertyPathName Name="LoadedCommand" />
     <RootPropertyPathName Name="ArtistTwo" />
     <RootPropertyPathName Name="email" />
     <RootPropertyPathName Name="ArtistOne" />
@@ -88,11 +93,9 @@
     <RootPropertyPathName Name="musics" />
     <RootPropertyPathName Name="address" />
     <RootPropertyPathName Name="City" />
-    <RootPropertyPathName Name="url" />
     <RootPropertyPathName Name="music" />
     <RootPropertyPathName Name="ListConcerts" />
     <RootPropertyPathName Name="ConcertSelected" />
-    <RootPropertyPathName Name="ConcertTappedCommand" />
     <RootPropertyPathName Name="ListListeners" />
     <RootPropertyPathName Name="ListenningSelected" />
     <RootPropertyPathName Name="TwentyKmActivated" />
@@ -147,7 +150,7 @@
     <RootPropertyPathName Name="ConversationText" />
     <RootPropertyPathName Name="ListMessages" />
     <RootPropertyPathName Name="FriendUser" />
-    <RootPropertyPathName Name="profilImage" />
+    <RootPropertyPathName Name="LoadCommand" />
     <RootPropertyPathName Name="ListAmbiance" />
     <RootPropertyPathName Name="ListArtiste" />
     <RootPropertyPathName Name="SelectedArtiste" />
@@ -225,6 +228,7 @@
     <RootType FullName="SoonZik.ViewModel.PlayerControlViewModel" />
     <RootType FullName="SoonZik.ViewModel.PriceControlViewModel" />
     <RootType FullName="SoonZik.ViewModel.GenreViewModel" />
+    <RootType FullName="SoonZik.ViewModel.ConcertDetailViewModel" />
     <RootType FullName="Windows.UI.Xaml.DataTemplate">
       <RootProperty Name="Template" />
     </RootType>
@@ -454,8 +458,8 @@
       <RootProperty Name="Height" />
       <RootProperty Name="Width" />
       <RootProperty Name="Margin" />
-      <RootProperty Name="Style" />
       <RootProperty Name="TextAlignment" />
+      <RootProperty Name="Style" />
       <RootProperty Name="TextWrapping" />
       <RootProperty Name="Padding" />
       <RootProperty Name="FontWeight" />
@@ -555,6 +559,7 @@
     <RootType FullName="Microsoft.Xaml.Interactions.Core.InvokeCommandAction">
       <RootProperty Name="Command" />
     </RootType>
+    <RootType FullName="SoonZik.Views.ConcertDetail" />
     <RootType FullName="Windows.UI.Xaml.Controls.Slider">
       <RootProperty Name="Value" />
       <RootProperty Name="Minimum" />

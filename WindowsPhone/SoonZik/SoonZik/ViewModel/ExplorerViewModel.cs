@@ -45,7 +45,7 @@ namespace SoonZik.ViewModel
             AddMusicToCart = new RelayCommand(AddMusicToCartExecute);
             PlayCommand = new RelayCommand(PlayCommandExecute);
             DowloadMusic = new RelayCommand(DownloadMusicExecute);
-            LoadContent();
+            LoadCommand = new RelayCommand(LoadContent);
         }
 
         #endregion
@@ -53,6 +53,7 @@ namespace SoonZik.ViewModel
         #region Attribute
 
         public ResourceLoader loader;
+        public ICommand LoadCommand { get; private set; }
         public ICommand AddToPlaylist { get; private set; }
         public ICommand AddMusicToCart { get; private set; }
         public ICommand DowloadMusic { get; private set; }
@@ -250,6 +251,24 @@ namespace SoonZik.ViewModel
             var request = new HttpRequestGet();
             try
             {
+                var listIdentities = request.GetIdentities(new List<Identities>(), Singleton.Singleton.Instance().CurrentUser.id.ToString(), Singleton.Singleton.Instance().SecureKey);
+                listIdentities.ContinueWith(delegate(Task<object> tmp)
+                {
+                    var test = tmp.Result as List<Identities>;
+                    if (test != null)
+                    {
+                        foreach (var item in test)
+                        {
+                            if (item.provider == "soundcloud")
+                            {
+                                var post = new HttpRequestPost();
+                                var result = post.GetMusicalPast(item.uid, Singleton.Singleton.Instance().SecureKey,
+                                    Singleton.Singleton.Instance().CurrentUser.id.ToString());
+                                result.ContinueWith(delegate(Task<string> t) { var res = t.Result; });
+                            }
+                        }
+                    }
+                });
                 var listGenre = request.GetListObject(new List<Influence>(), "influences");
                 listGenre.ContinueWith(delegate(Task<object> tmp)
                 {

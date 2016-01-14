@@ -104,12 +104,29 @@ namespace SoonZik.HttpRequest
         #endregion
 
         #region Method Get Secure        
+        
+
+        public async Task<object> GetIdentities(object myObject, string id, string sha256)
+        {
+            var request =
+                (HttpWebRequest)
+                    WebRequest.Create(ApiUrl + "users/getIdentities" + "?secureKey=" + sha256 + "&user_id=" + id);
+            return await DoRequestForObject(myObject, request);
+        }
+
+
         public async Task<object> GetSecureNews(object myObject, string element, string id, string sha256,
             User user)
         {
             var request =
                 (HttpWebRequest)
                     WebRequest.Create(ApiUrl + element + "/" + id + "?secureKey=" + sha256 + "&user_id=" + user.id + "&language=" + user.language);
+            return await DoRequestForObject(myObject, request);
+        }
+
+        public async Task<object> GetListObjectSecure(object myObject, string element, string sha256, string id)
+        {
+            var request = (HttpWebRequest)WebRequest.Create(ApiUrl + element + "?secureKey=" + sha256 + "&user_id=" + id);
             return await DoRequestForObject(myObject, request);
         }
 

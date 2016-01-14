@@ -15,6 +15,8 @@ using GalaSoft.MvvmLight.Command;
 using SoonZik.Controls;
 using SoonZik.HttpRequest;
 using SoonZik.HttpRequest.Poco;
+using SoonZik.Utils;
+using SoonZik.Views;
 
 namespace SoonZik.ViewModel
 {
@@ -119,8 +121,9 @@ namespace SoonZik.ViewModel
         private void GetConcert()
         {
             var reqGet = new HttpRequestGet();
+            ValidateKey.CheckValidateKey();
             ListConcerts = new ObservableCollection<Concerts>();
-            var listConcerts = reqGet.GetListObject(new List<Concerts>(), "concerts");
+            var listConcerts = reqGet.GetListObjectSecure(new List<Concerts>(), "concerts", Singleton.Singleton.Instance().SecureKey, Singleton.Singleton.Instance().CurrentUser.id.ToString());
             listConcerts.ContinueWith(delegate(Task<object> tmp)
             {
                 var test = tmp.Result as List<Concerts>;
@@ -145,6 +148,8 @@ namespace SoonZik.ViewModel
 
         private void ConcertTappedExecute()
         {
+            ConcertDetailViewModel.Concert = ConcertSelected;
+            GlobalMenuControl.SetChildren(new ConcertDetail());
         }
 
         #region Command

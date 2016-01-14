@@ -101,6 +101,10 @@
     <Compile Include="Controls\NotationMusic.xaml.cs">
       <DependentUpon>NotationMusic.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ViewModel\ConcertDetailViewModel.cs" />
+    <Compile Include="Views\ConcertDetailView.xaml.cs">
+      <DependentUpon>ConcertDetailView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\PlayerView.xaml.cs">
       <DependentUpon>PlayerView.xaml</DependentUpon>
     </Compile>
@@ -331,6 +335,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\NotationMusic.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ConcertDetailView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

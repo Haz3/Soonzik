@@ -27,6 +27,7 @@ Views\AlbumView.xbf
 Views\BattleDetailView.xbf
 Views\BattleView.xbf
 Views\CartsView.xbf
+Views\ConcertDetailView.xbf
 Views\Connexion.xbf
 Views\Conversation.xbf
 Views\Explorer.xbf

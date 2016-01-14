@@ -383,6 +383,9 @@
     <AppxPackagedFile Include="C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\bin\Debug\Controls\NotationMusic.xbf">
       <PackagePath>Controls\NotationMusic.xbf</PackagePath>
     </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\bin\Debug\Views\ConcertDetailView.xbf">
+      <PackagePath>Views\ConcertDetailView.xbf</PackagePath>
+    </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Gery\Documents\GitHub\Soonzik\WindowsPhone\SoonZik\SoonZik\bin\Debug\Views\PlayerView.xbf">
       <PackagePath>Views\PlayerView.xbf</PackagePath>
     </AppxPackagedFile>
