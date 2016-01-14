@@ -84,11 +84,17 @@
             </TabItem>
             <TabItem Header="Upload" FontSize="20">
                 <Grid Background="#FF181818">
-                    <Button x:Name="choose_file_btn" Content="Choisir un fichier" HorizontalAlignment="Left" Margin="30,149,0,0" VerticalAlignment="Top" Width="185" Height="47" Click="choose_file_btn_Click"/>
-                    <TextBlock x:Name="choose_file_txt" HorizontalAlignment="Left" Margin="30,111,0,0" TextWrapping="Wrap" Text="Choisissez un fichier à upload" VerticalAlignment="Top" Height="33" Width="304" Foreground="White"/>
-                    <Button x:Name="upload_btn" Content="Upload" HorizontalAlignment="Left" Margin="30,310,0,0" VerticalAlignment="Top" Width="185" Height="47" Click="upload_btn_Click"/>
-                    <TextBlock x:Name="upload_file_name_txt" HorizontalAlignment="Left" Margin="30,272,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="33" Width="532" Foreground="White" FontSize="15"/>
-                    <TextBlock x:Name="response_txt" HorizontalAlignment="Left" Margin="30,432,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="176" Width="532" Foreground="White"/>
+                    <Button x:Name="choose_file_btn" Content="Choisir un fichier" HorizontalAlignment="Left" Margin="30,96,0,0" VerticalAlignment="Top" Width="185" Height="47" Click="choose_file_btn_Click"/>
+                    <TextBlock x:Name="choose_file_txt" HorizontalAlignment="Left" Margin="30,58,0,0" TextWrapping="Wrap" Text="Choisissez un fichier à upload" VerticalAlignment="Top" Height="33" Width="304" Foreground="White"/>
+                    <Button x:Name="upload_btn" Content="Upload" HorizontalAlignment="Left" Margin="30,442,0,0" VerticalAlignment="Top" Width="185" Height="46" Click="upload_btn_Click"/>
+                    <TextBlock x:Name="upload_file_name_txt" HorizontalAlignment="Left" Margin="30,148,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="33" Width="532" Foreground="White" FontSize="15"/>
+                    <TextBlock x:Name="response_txt" HorizontalAlignment="Left" Margin="30,540,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="89" Width="532" Foreground="White"/>
+                    <TextBlock x:Name="album_name_txt" HorizontalAlignment="Left" Margin="30,186,0,0" TextWrapping="Wrap" Text="Nom de l'album" VerticalAlignment="Top" Height="33" Width="162" Foreground="White"/>
+                    <TextBlock x:Name="track_name_txt" HorizontalAlignment="Left" Margin="30,226,0,0" TextWrapping="Wrap" Text="Nom de la piste" VerticalAlignment="Top" Height="33" Width="162" Foreground="White"/>
+                    <TextBlock x:Name="price_txt" HorizontalAlignment="Left" Margin="30,267,0,0" TextWrapping="Wrap" Text="Prix" VerticalAlignment="Top" Height="33" Width="162" Foreground="White"/>
+                    <TextBox x:Name="album_tb" HorizontalAlignment="Left" Height="35" Margin="197,186,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="145"/>
+                    <TextBox x:Name="track_tb" HorizontalAlignment="Left" Height="35" Margin="197,226,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="145"/>
+                    <TextBox x:Name="price_tb" HorizontalAlignment="Left" Height="35" Margin="197,266,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="145"/>
                 </Grid>
             </TabItem>
         </TabControl>
