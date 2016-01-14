@@ -3,6 +3,9 @@
 	%span.byline You can find artists to contact for partnership
 .meetContainer
 	%hr
+	%a.button{ href: "#{artist_meet_all_path}" }
+		Take a look to the different propositions available
+	%hr
 	%myMeets
 		%h4 Your requests
 		- if current_user.meets.size > 0
@@ -39,9 +42,6 @@
 									%i.fi-x
 		- else
 			%p Currently, you don't have meets proposed
-	%hr
-	.link
-		=link_to "Take a look of the different propositions", artist_meet_all_path
 	%hr
 	%h4 Search or propose a partnership
 	= form_for @meet, url: artist_meet_save_path do |f|

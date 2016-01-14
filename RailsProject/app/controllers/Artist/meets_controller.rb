@@ -30,8 +30,8 @@ module Artist
   	end
 
   	def show
-  		@meetSearch = Meet.where(query: 'search')
-  		@meetPropose = Meet.where(query: 'propose')
+  		@meetSearch = Meet.eager_load(:user).where(query: 'search')
+  		@meetPropose = Meet.eager_load(:user).where(query: 'propose')
   	end
 
   	def destroy

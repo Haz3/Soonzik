@@ -7,7 +7,6 @@
 		= stylesheet_link_tag		'application', media: 'all'
 		= javascript_include_tag 'application'
 		= javascript_include_tag 'AngularJS/artist_app'
-		= javascript_include_tag 'websocket_rails/main'
 		= javascript_include_tag "vendor/modernizr"
 		= csrf_meta_tags
 	%body.artist{ "ng-app" => "SoonzikArtistApp" }
@@ -27,8 +26,6 @@
 						=link_to "My Music", artist_musics_path
 					%li{ class: "#{'current_page_item' if (defined?(@menu) && @menu == 'tour')}" }
 						=link_to "Tour", artist_tour_path
-					%li{ class: "#{'current_page_item' if (defined?(@menu) && @menu == 'streaming')}" }
-						%a{:href => "#"} Streaming
 					%li{ class: "#{'current_page_item' if (defined?(@menu) && @menu == 'meet')}" }
 						=link_to "Meet artists", artist_meet_path
 		- if notice
@@ -50,7 +47,7 @@
 						=image_tag("Artist/meet.png")
 					%p.text-justify
 						Do you search someone who play guitar for your next track ? Do you need someone because you search a women voice ? Here is our service to help you to find the perfect person for your needs.
-					.a{:href => "/meet"}
+					%a{:href => "/meet"}
 						%span.button
 							%i.fi-plus
 							Meet
@@ -61,21 +58,21 @@
 						=image_tag("Artist/suggest.png")
 					%p.text-justify
 						You want to be a real part of SoonZik and see one of your music into a pack ? We are waiting you ! Suggest which music you allow us to pick, and maybe you will be in our next bundle.
-					.a{:href => "#{artist_musics_propose_path}"}
+					%a{:href => "#{artist_musics_propose_path}"}
 						%span.button
 							%i.fi-plus
 							Suggest
 				.small-12.medium-6.large-3.columns
 					.title
-						%h2.text-center Streaming tools
+						%h2.text-center Rebroadcast tools
 					%a.image.image-full{:href => "#"}
 						=image_tag("Artist/stream.png")
 					%p.text-justify
-						You will play music in a pub, a mini-concert or something like that ? You want to share this experience with all your fans (and more people !) ? You can find here everything you need to stream.
-					.a{:href => "#"}
+						You will play music in a pub, a mini-concert or something like that ? You want to share this experience with all your fans (and more people !) ? You can find here everything you need to send your music.
+					%a{:href => "#"}
 						%span.button
 							%i.fi-plus
-							Stream
+							Download
 				.small-12.medium-6.large-3.columns
 					.title
 						%h2.text-center Tour management
@@ -83,7 +80,7 @@
 						=image_tag("Artist/concert.png")
 					%p.text-justify
 						You will be in many places soon and you want to inform your fans ? In a pub, in a concert hall or in the street, you can manage your tour and say where / when we can find you and share it.
-					.a{:href => "/tour"}
+					%a{:href => "/tour"}
 						%span.button
 							%i.fi-plus
 							Manage

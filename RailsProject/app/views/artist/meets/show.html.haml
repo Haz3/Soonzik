@@ -19,6 +19,8 @@
 						Location
 					%th
 						Email
+					%th
+						By
 			%tbody
 				- @meetSearch.each do |m|
 					%tr
@@ -28,6 +30,8 @@
 						%td= m.toDate
 						%td= m.location
 						%td= m.email
+						%td
+							=link_to m.user.username, user_path(m.user)
 	- else
 		%p Nothing for the moment
 	%h3 What artists propose
@@ -47,6 +51,8 @@
 						Location
 					%th
 						Email
+					%th
+						By
 			%tbody
 				- @meetPropose.each do |m|
 					%tr
@@ -56,5 +62,7 @@
 						%td= m.toDate
 						%td= m.location
 						%td= m.email
+						%td
+							=link_to m.user.username, user_path(m.user)
 	- else
 		%p Nothing for the moment
