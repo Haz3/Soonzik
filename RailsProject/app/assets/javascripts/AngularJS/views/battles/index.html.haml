@@ -13,6 +13,7 @@
 			.medium-4.columns
 				%battle{ "battle-values" => "index.votes[battle.id]" }
 				%a.button.radius{ href: "/battles/{{ battle.id }}" } {{ labels.DISPLAY_BATTLE_LINK_TO_SHOW_LABEL }}
+				%p {{ battle.timeLeft }}
 			.medium-4.columns.end
 				%p
 					%a{ href: "/users/{{ battle.artist_one.id }}" } {{ battle.artist_two.username }}

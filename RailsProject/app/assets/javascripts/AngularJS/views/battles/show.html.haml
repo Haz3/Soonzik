@@ -27,6 +27,7 @@
 					{{ labels.DISPLAY_BATTLE_NO_MUSIC_LABEL }}
 			.medium-4.columns
 				%battle{ "battle-values" => "show.votes" }
+				%p {{ show.battle.timeLeft }}
 				.peopleVote{ "ng-if" => "show.votes.length > 0" }
 					%h5
 						{{ labels.DISPLAY_BATTLE_THEY_VOTED_LABEL }}

@@ -39,7 +39,14 @@ SoonzikApp.controller('BattlesCtrl', ['$scope', "$routeParams", 'SecureAuth', 'H
 				}
 
 				HTTPService.findBattles(parameters).then(function(response) {
-					$scope.index.resources = response.data.content;
+					var now = new Date();
+					for (var i = 0 ; i < response.data.content.length ; i++) {
+						var tmpDateBegin = new Date(response.data.content[i].date_begin);
+						var tmpDateEnd = new Date(response.data.content[i].date_end);
+						if (now < tmpDateEnd && tmpDateBegin < now) {
+							$scope.index.resources.push(response.data.content[i]);
+						}
+					}
 
 					// For each battles
 					for (var battleIndex in $scope.index.resources) {
@@ -77,6 +84,7 @@ SoonzikApp.controller('BattlesCtrl', ['$scope', "$routeParams", 'SecureAuth', 'H
 
 					}
 
+					timeLeftIndex();
 					$scope.loading = false;
 				}, function(error) {
 					NotificationService.error($rootScope.labels.FILE_BATTLE_LOAD_BATTLE_ERROR_MESSAGE);
@@ -143,6 +151,7 @@ SoonzikApp.controller('BattlesCtrl', ['$scope', "$routeParams", 'SecureAuth', 'H
 							$scope.show.artistTwo.topFive = artistInformation.data.content.topFive;
 							$scope.show.artistTwo.albums = artistInformation.data.content.albums;
 						}
+						timeLeftShow($scope.show.battle);
 						$scope.loading = false;
 					}, function(error) {	// error management of the second isArtist
 						NotificationService.error($rootScope.labels.FILE_BATTLE_LOAD_ARTIST_TWO_ERROR_MESSAGE)
@@ -354,6 +363,53 @@ SoonzikApp.controller('BattlesCtrl', ['$scope', "$routeParams", 'SecureAuth', 'H
 		if (sec.toString().length == 1)
 			sec = "0" + sec;
 		return min + ":" + sec;
+	}
+
+	var timeLeftIndex = function() {
+		var timer = setInterval(function() {
+			for (var i = 0; i < $scope.index.resources.length; i++) {
+				var now = new Date();
+				var end_date = new Date($scope.index.resources[i].date_end);
+
+				if (end_date > now) {
+					var left = end_date - now
+				} else {
+					var left = "Finish !";
+				}
+
+				var date = new Date(left);
+				var day = date.getDay();
+				var hours = date.getHours();
+				var minutes = "0" + date.getMinutes();
+				var seconds = "0" + date.getSeconds();
+				var formattedTime = day + 'days ' + hours + 'h ' + minutes.substr(-2) + 'mn ' + seconds.substr(-2) + 's';
+
+				$scope.index.resources[i].timeLeft = formattedTime;
+				$scope.$apply();
+			}
+		}, 1000);
+	}
+	var timeLeftShow = function(battle) {
+		var timer = setInterval(function() {
+			var now = new Date();
+			var end_date = new Date(battle.date_end);
+
+			if (end_date > now) {
+				var left = end_date - now
+			} else {
+				var left = "Finish !";
+			}
+
+			var date = new Date(left);
+			var day = date.getDay();
+			var hours = date.getHours();
+			var minutes = "0" + date.getMinutes();
+			var seconds = "0" + date.getSeconds();
+			var formattedTime = day + 'days ' + hours + 'h ' + minutes.substr(-2) + 'mn ' + seconds.substr(-2) + 's';
+
+			battle.timeLeft = formattedTime;
+			$scope.$apply();
+		}, 1000);
 	}
 
 }]);

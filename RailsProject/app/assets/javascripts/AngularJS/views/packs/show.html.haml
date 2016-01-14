@@ -13,7 +13,7 @@
             %h3.subheader
               %p.text-center
                 {{ album.title }}
-            %a{:href => "http://lvh.me:3000/albums/ {{ album.id }}"}
+            %a{:href => "http://lvh.me:3000/albums/{{ album.id }}"}
               %img{ "ng-src" => "{{ '/assets/albums/' + album.image }}"}
             .divider
             {{ labels.DISPLAY_PACK_ARTIST_NAME }} : {{ album.user.username }}
