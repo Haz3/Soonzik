@@ -292,6 +292,7 @@ module API
         send_file(File.join(Rails.root, "app", "assets", "musics", music.album.user.id.to_s, "#{file}.mp3"), :type => 'audio/mpeg')
       else
         respond_to do |format|
+          headers['Content-Length'] = buffer.size.to_s
           format.mp3 { render :text => buffer, :content_type => 'audio/mpeg' }
         end
       end
