@@ -147,7 +147,7 @@ module	Multimedia
 
 		  #
 		  def getFFMPEGexec
-		  	return Rails.root.join('app', 'assets', 'execs', "ffmpeg-#{@os}-#{@bits}bits#{@extension}").to_s
+		  	return Rails.root.join('app', 'assets', 'execs', "ffmpeg-#{@os}-#{@bits}bits#{@extension}").to_s.gsub(' ', '\ ')
 		  end
 	end
 end
