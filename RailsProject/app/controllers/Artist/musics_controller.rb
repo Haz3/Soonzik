@@ -495,6 +495,12 @@ module Artist
 					if (d.save)
 						a.descriptions << d
 					end
+
+	        cutObject = Multimedia::CutAudio.new(Rails.root.join('app', 'assets', 'musics', @u.id.to_s).to_s, params[:filename].gsub(/[^0-9A-Za-z\.-]/, ''))
+	        cutObject.determineStart(0)
+					cutObject.determineEnd(30)
+					cutObject.cut
+
 	    	elsif (params.has_key?(:filename) && params.has_key?(:data))
 	    		n = 0
 	    		data = Base64.decode64 params[:data]
