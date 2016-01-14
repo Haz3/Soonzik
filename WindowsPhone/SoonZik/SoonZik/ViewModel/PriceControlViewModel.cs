@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using System.Windows.Input;
 using Windows.ApplicationModel.Resources;
 using Windows.UI.Popups;
@@ -15,13 +16,13 @@ namespace SoonZik.ViewModel
         public PriceControlViewModel()
         {
             loader = new ResourceLoader();
+            LoadCommand = new RelayCommand(LoadCommandExecute);
             ArtisteSliderCommand = new RelayCommand(ArtisteSliderExecute);
             AssocSliderCommand = new RelayCommand(AssocSliderExecute);
             SoonZikSliderCommand = new RelayCommand(SoonzikSliderExecute);
             BuyCommand = new RelayCommand(BuyExecute);
-            ThePack = SelecetdPack;
-            InitializePrice();
         }
+
 
         #endregion
 
@@ -42,6 +43,7 @@ namespace SoonZik.ViewModel
                 RaisePropertyChanged("ThePack");
             }
         }
+        public ICommand LoadCommand { get; private set; }
 
         public ICommand BuyCommand { get; private set; }
         public ICommand ArtisteSliderCommand { get; private set; }
@@ -123,6 +125,14 @@ namespace SoonZik.ViewModel
         #endregion
 
         #region Method
+        private void LoadCommandExecute()
+        {
+            ThePack = SelecetdPack;
+            double price = double.Parse(ThePack.averagePrice, CultureInfo.InvariantCulture);
+            price = Math.Round(price, 2);
+            ThePack.averagePrice = Convert.ToString(price);
+            InitializePrice();
+        }
 
         private void InitializePrice()
         {
@@ -164,17 +174,26 @@ namespace SoonZik.ViewModel
 
         private void ArtistePriceCalc()
         {
-            ArtistePrice = ((Convert.ToDouble(ThePack.averagePrice)*ArtisteSliderValue/100)).ToString();
+            double price = double.Parse(ThePack.averagePrice, CultureInfo.InvariantCulture);
+            Math.Round(price, 2);
+            price = (price*ArtisteSliderValue/100);
+            ArtistePrice = Convert.ToString(price);
         }
 
         private void AssociationPriceCalc()
         {
-            AssocPrice = ((Convert.ToDouble(ThePack.averagePrice)*AssocSliderValue/100)).ToString();
+            double price = double.Parse(ThePack.averagePrice, CultureInfo.InvariantCulture);
+            Math.Round(price, 2);
+            price = (price * AssocSliderValue / 100);
+            ArtistePrice = Convert.ToString(price);
         }
 
         private void SoonZikPriceCalc()
         {
-            SoonzikPrice = ((Convert.ToDouble(ThePack.averagePrice)*SoonzikSliderValue/100)).ToString();
+            double price = double.Parse(ThePack.averagePrice, CultureInfo.InvariantCulture);
+            Math.Round(price, 2);
+            price = (price * SoonzikSliderValue / 100);
+            ArtistePrice = Convert.ToString(price);
         }
 
         private void AssocSliderExecute()

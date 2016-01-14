@@ -149,9 +149,6 @@
                     </core:EventTriggerBehavior>
                 </interactivity:Interaction.Behaviors>
             </ToggleButton>
-            <TextBlock x:Name="MenuNameTextBlock" VerticalAlignment="Center" Foreground="DeepSkyBlue" FontSize="20"
-                       HorizontalAlignment="Left"
-                       Margin="50,0,0,0" />
         </Grid>
         <Grid Row="1" x:Name="MenuGrid" HorizontalAlignment="Left" Margin="-200,0,0,0" Width="200"
               Background="Transparent" Opacity="0.8"
@@ -222,11 +219,11 @@
                         <RowDefinition Height="*" />
                         <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
-                    <ListView Grid.Row="0" x:Name="ResultArtisteListView" Header="Artiste" FontSize="20"
+                    <ListView Grid.Row="0" x:Name="ResultArtisteListView" Header="Artistes" FontSize="20"
                               Foreground="#40a8e2" FontStyle="Italic"
                               ItemTemplate="{StaticResource ArtistItemTemplate}" Margin="10,0,0,10"
                               SelectedItem="{Binding SelectedArtist, Mode=TwoWay}" />
-                    <ListView Grid.Row="1" x:Name="ResultUserListView" Header="Utilisateur" FontSize="20"
+                    <ListView Grid.Row="1" x:Name="ResultUserListView" Header="Utilisateurs" FontSize="20"
                               Foreground="#40a8e2" FontStyle="Italic"
                               ItemTemplate="{StaticResource UserItemTemplate}" Margin="10,0,0,10"
                               SelectedItem="{Binding SelectedUser, Mode=TwoWay}" />

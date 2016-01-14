@@ -349,7 +349,6 @@ namespace SoonZik.Controls
 
         private void GoToProfil()
         {
-            MenuNameTextBlock.Text = "Profil";
             Singleton.Singleton.Instance().ItsMe = true;
             SetChildren(new ProfilUser());
         }

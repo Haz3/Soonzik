@@ -34,6 +34,7 @@
     <RootPropertyPathName Name="MusiqueImage" />
     <RootPropertyPathName Name="TitleTrack" />
     <RootPropertyPathName Name="ArtisteName" />
+    <RootPropertyPathName Name="LoadCommand" />
     <RootPropertyPathName Name="BuyCommand" />
     <RootPropertyPathName Name="SoonzikPrice" />
     <RootPropertyPathName Name="SoonzikSliderValue" />
@@ -150,7 +151,6 @@
     <RootPropertyPathName Name="ConversationText" />
     <RootPropertyPathName Name="ListMessages" />
     <RootPropertyPathName Name="FriendUser" />
-    <RootPropertyPathName Name="LoadCommand" />
     <RootPropertyPathName Name="ListAmbiance" />
     <RootPropertyPathName Name="ListArtiste" />
     <RootPropertyPathName Name="SelectedArtiste" />

@@ -6,7 +6,6 @@ using Windows.UI.Core;
 using Windows.UI.Xaml.Media.Imaging;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
-using SoonZik.Annotations;
 using SoonZik.Helpers;
 using SoonZik.HttpRequest;
 using SoonZik.HttpRequest.Poco;
@@ -91,7 +90,7 @@ namespace SoonZik.ViewModel
             TheConcert = Concert;
             Like = TheConcert.hasLiked ? bmLike : bmDislike;
             Likes = TheConcert.likes;
-            TheConcert.user.profilImage = new BitmapImage(new System.Uri(Constant.UrlImageUser + TheConcert.user.image, UriKind.RelativeOrAbsolute));
+            TheConcert.user.profilImage = new BitmapImage(new Uri(Constant.UrlImageUser + TheConcert.user.image, UriKind.RelativeOrAbsolute));
             TheAddress = TheConcert.address.NumberStreet + " " + TheConcert.address.Street + " " +
                          TheConcert.address.Complement + "\n" +
                          TheConcert.address.Zipcode + " " + TheConcert.address.City + " " + TheConcert.address.Country;
