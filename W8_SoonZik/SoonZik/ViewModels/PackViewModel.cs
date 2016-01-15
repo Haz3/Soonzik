@@ -29,6 +29,8 @@ namespace SoonZik.ViewModels
             }
         }
 
+        public ObservableCollection<Album> album_list { get; set; }
+
         private int _amount;
         public int amount
         {
@@ -39,6 +41,7 @@ namespace SoonZik.ViewModels
                 OnPropertyChanged("amount");
             }
         }
+
         private string _offer_username;
         public string offer_username
         {
@@ -135,7 +138,6 @@ namespace SoonZik.ViewModels
             get;
             private set;
         }
-
         public ICommand do_offer_pack
         {
             get;
@@ -168,8 +170,6 @@ namespace SoonZik.ViewModels
             artist = 65;
             association = 20;
             website = 15;
-
-
         }
 
         async public void load_pack(int id)
@@ -178,7 +178,15 @@ namespace SoonZik.ViewModels
 
             try
             {
+                album_list = new ObservableCollection<Album>();
+
                 pack = await Http_get.get_pack_by_id(id);
+
+                foreach (var item in pack.albums)
+                {
+                    item.image = Singleton.Instance.url + "/assets/albums/" + item.image;
+                    album_list.Add(item);
+                }
 
                 // Detect current language and set visibility
                 if (Windows.System.UserProfile.GlobalizationPreferences.Languages[0] == "fr-FR")

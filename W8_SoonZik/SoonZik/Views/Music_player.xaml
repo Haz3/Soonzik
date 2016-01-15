@@ -197,6 +197,7 @@
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
+            <Button x:Name="cancel_btn" Command="{Binding do_cancel, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Content="Annuler" HorizontalAlignment="Left" Margin="1622,411,0,0" VerticalAlignment="Top" Width="145" Click="cancel_btn_Click"/>
             <!--<Button x:Name="delete_from_playlist_update_btn_Copy" Command="{Binding do_remove_to_playlist, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Content="Supprimer" HorizontalAlignment="Left" Margin="1391,125,0,0" VerticalAlignment="Top" Width="145"/>-->
 
 

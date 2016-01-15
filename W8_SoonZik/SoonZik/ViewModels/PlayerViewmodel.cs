@@ -170,6 +170,11 @@ namespace SoonZik.ViewModels
             get;
             private set;
         }
+        public ICommand do_cancel
+        {
+            get;
+            private set;
+        }
         public ICommand do_init_update
         {
             get;
@@ -211,6 +216,7 @@ namespace SoonZik.ViewModels
             do_delete_playlist = new RelayCommand(delete_playlist);
             do_add_to_playlist = new RelayCommand(add_to_playlist);
             do_init_update = new RelayCommand(init_update);
+            do_cancel = new RelayCommand(cancel);
             do_update_playlist = new RelayCommand(update_playlist);
             do_add_to_update_playlist = new RelayCommand(add_to_update_playlist);
             do_remove_to_playlist = new RelayCommand(remove_to_playlist);
@@ -222,28 +228,6 @@ namespace SoonZik.ViewModels
                 if (playlist_list[0].musics.Any())
                     uri = new Uri("http://api.lvh.me:3000/musics/get/" + playlist_list[0].musics[0].id.ToString(), UriKind.RelativeOrAbsolute);
         }
-
-        //void next_track()
-        //{
-        //    //selected_playlist.musics
-        //    //
-        //    // if selected_playlist has musics
-        //    //  check taille de la liste
-        //    // chercher ou se situe la piste la
-        //    //  checksi une apres
-        //    //  go
-
-        //    if (selected_playlist.musics.Any())
-        //    {
-        //        int nb_elem = selected_playlist.musics.Capacity;
-        //    }
-        //    uri = new Uri("http://api.lvh.me:3000/musics/get/" + selected_playlist.musics[1].id.ToString(), UriKind.RelativeOrAbsolute);
-
-        //}
-        //void previous_track()
-        //{
-        //    uri = new Uri("http://api.lvh.me:3000/musics/get/" + selected_playlist.musics[1].id.ToString(), UriKind.RelativeOrAbsolute);
-        //}
 
         async void load_music_own()
         {
@@ -286,11 +270,6 @@ namespace SoonZik.ViewModels
             if (exception != null)
                 await new MessageDialog(exception.Message, "Erreur lors de la récupération des playlists de l'utilisateur").ShowAsync();
         }
-
-        //void init_create()
-        //{
-        //    playlist_update_music = new ObservableCollection<Music>();
-        //}
 
         async void create_playlist()
         {
@@ -412,6 +391,7 @@ namespace SoonZik.ViewModels
 
 
         }
+
         async void update_playlist()
         {
             Exception exception = null;
@@ -460,6 +440,7 @@ namespace SoonZik.ViewModels
                 await new MessageDialog("Erreur lors de la mise à jour de la playlist").ShowAsync();
 
         }
+
         void add_to_update_playlist()
         {
             //if (selected_music != null)
@@ -477,6 +458,12 @@ namespace SoonZik.ViewModels
 
             //if (selected_music != null)
             //    selected_playlist.musics.Remove(selected_music_playlist);
+        }
+
+        void cancel()
+        {
+            playlist_update_music.Clear();
+            playlist_name = null;
         }
     }
 }

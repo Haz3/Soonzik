@@ -26,18 +26,16 @@
             <Image  Grid.Row="1" Source="https://pixabay.com/static/uploads/photo/2014/04/03/11/58/record-312730_640.png" Stretch="Fill" Width="174" Height="174" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,235,45,-118"/>
             <Rectangle Fill="#FF00AFDC" HorizontalAlignment="Left" Height="75" StrokeEndLineCap="Square" Stroke="#FF00AFDC" VerticalAlignment="Top" Width="1120" Grid.ColumnSpan="2" Margin="0,0,-405,0"/>
 
-            <ListView Name="pack_album_listview" ItemsSource="{Binding Path=pack.albums, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ItemClick="pack_album_listview_ItemClick" IsItemClickEnabled="True" Grid.Column="1" HorizontalAlignment="Left" Height="365" Margin="110,85,-80,-159" Grid.Row="1" VerticalAlignment="Top" Width="420" Background="#FFE0E0E0" IsSwipeEnabled="False" SelectionMode="None">
+            <ListView Name="pack_album_listview" ItemsSource="{Binding album_list, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ItemClick="pack_album_listview_ItemClick" IsItemClickEnabled="True" Grid.Column="1" HorizontalAlignment="Left" Height="365" Margin="110,85,-80,-159" Grid.Row="1" VerticalAlignment="Top" Width="420" Background="#FFE0E0E0" IsSwipeEnabled="False" SelectionMode="None">
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <StackPanel>
-                            <StackPanel Orientation="Horizontal">
-                                <TextBlock x:Uid="album_title_txt" FontSize="16" Foreground="Black">Titre:</TextBlock>
-                                <TextBlock Name="music_title" Text="{Binding title}" FontSize="16" Foreground="Black" Margin="20,0,0,0"></TextBlock>
-                            </StackPanel>
-                            <StackPanel Orientation="Horizontal">
-                                <TextBlock x:Uid="album_artist_txt" FontSize="16" Foreground="Black">Artiste:</TextBlock>
-                                <TextBlock Name="music_duration" Text="{Binding user.username}" FontSize="16" Foreground="Black" Margin="20,0,0,0"></TextBlock>
-                            </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="{Binding image, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Stretch="Fill" Width="50" Height="50"/>
+                            <TextBlock  FontSize="16" Foreground="Black" Margin="20,0,0,0">
+                                <Run Text="{Binding title}"></Run>
+                                <LineBreak></LineBreak>
+                                <Run Text="{Binding user.username}"></Run>
+                            </TextBlock>
                         </StackPanel>
                     </DataTemplate>
                 </ListView.ItemTemplate>

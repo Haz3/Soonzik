@@ -28,7 +28,7 @@
             <Rectangle Fill="#FF00AFDC" HorizontalAlignment="Left" Height="75" StrokeEndLineCap="Square" Stroke="#FF00AFDC" VerticalAlignment="Top" Width="1120" Grid.ColumnSpan="2" Margin="0,0,-405,0"/>
             <TextBlock Name="ambiance_name" Margin="20,10,0,19" TextWrapping="Wrap" Text="{Binding selected_ambiance.name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" FontSize="36" Height="46" Grid.ColumnSpan="2"/>
 
-            <ListView Name="ambiance_musics" ItemClick="ambiance_musics_ItemClick" ItemsSource="{Binding selected_ambiance.musics, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" HorizontalAlignment="Left" Height="290" Margin="60,85,-25,-84" Grid.Row="1" VerticalAlignment="Top" Width="415" Background="#FFE0E0E0" IsItemClickEnabled="True">
+            <ListView Name="ambiance_musics" ItemClick="ambiance_musics_ItemClick" ItemsSource="{Binding selected_ambiance.musics, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" HorizontalAlignment="Left" Height="290" Margin="60,85,-25,-84" Grid.Row="1" VerticalAlignment="Top" Width="415" IsItemClickEnabled="True">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <StackPanel>

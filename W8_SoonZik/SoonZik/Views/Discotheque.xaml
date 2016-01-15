@@ -17,11 +17,25 @@
 
 
         <TextBlock x:Uid="music_list_txt" x:Name="musics_txt" HorizontalAlignment="Left" Margin="92,130,0,0" TextWrapping="Wrap" Text="Musiques" VerticalAlignment="Top" Height="45" Width="170" Foreground="Black" FontSize="30"/>
-        <TextBlock x:Uid="albums_txt" x:Name="albums_txt" HorizontalAlignment="Left" Margin="636,130,0,0" TextWrapping="Wrap" Text="Albums" VerticalAlignment="Top" Height="45" Width="170" Foreground="Black" FontSize="30"/>
-        <TextBlock x:Uid="packs_txt" x:Name="packs_txt" HorizontalAlignment="Left" Margin="1170,130,0,0" TextWrapping="Wrap" Text="Packs" VerticalAlignment="Top" Height="45" Width="170" Foreground="Black" FontSize="30"/>
+        <TextBlock x:Uid="albums_txt" x:Name="albums_txt" HorizontalAlignment="Left" Margin="650,130,0,0" TextWrapping="Wrap" Text="Albums" VerticalAlignment="Top" Height="45" Width="170" Foreground="Black" FontSize="30"/>
+        <TextBlock x:Uid="packs_txt" x:Name="packs_txt" HorizontalAlignment="Left" Margin="1390,130,0,0" TextWrapping="Wrap" Text="Packs" VerticalAlignment="Top" Height="45" Width="170" Foreground="Black" FontSize="30"/>
 
-        <ListView x:Name="music_list" ItemClick="music_list_ItemClick" ItemsSource="{Binding music_own.musics}" Background="#b0b0b0" HorizontalAlignment="Left" Margin="90,180,0,0" VerticalAlignment="Top" Width="435" Height="850" IsItemClickEnabled="True" IsSwipeEnabled="False" SelectionMode="None" SelectedItem="{Binding genre_selected, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
-            <ListView.ItemTemplate>
+        <GridView x:Name="music_list" ItemClick="music_list_ItemClick" ItemsSource="{Binding music_own.musics}" HorizontalAlignment="Left" Margin="90,180,0,0" VerticalAlignment="Top" Width="435" Height="850" IsItemClickEnabled="True" IsSwipeEnabled="False" SelectionMode="None" SelectedItem="{Binding genre_selected, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+            <GridView.ItemTemplate>
+                <DataTemplate>
+                    <Grid Width="150" Height="150" Background="White">
+                        <Image Stretch="Fill" Source="ms-appx:///Assets/Record-Album-02.jpg" VerticalAlignment="Top" HorizontalAlignment="Center"/>
+                        <StackPanel Orientation="Vertical" VerticalAlignment="Bottom" Margin="0,0,0,10">
+
+                            <TextBlock Text="{Binding user.username}" FontSize="20" Margin="10,0,0,0" TextTrimming="WordEllipsis" TextWrapping="Wrap" HorizontalAlignment="Left" Foreground="White"/>
+                            <TextBlock Text="{Binding title}" FontSize="20" Margin="10,0,0,0" TextTrimming="WordEllipsis" TextWrapping="Wrap" HorizontalAlignment="Left" Foreground="White"/>
+
+                        </StackPanel>
+                    </Grid>
+                </DataTemplate>
+            </GridView.ItemTemplate>
+            
+            <!--<ListView.ItemTemplate>
                 <DataTemplate>
                     <StackPanel>
                         <StackPanel Orientation="Horizontal">
@@ -34,28 +48,28 @@
                         </StackPanel>
                     </StackPanel>
                 </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
+            </ListView.ItemTemplate>-->
+        </GridView>
 
 
-        <GridView x:Name="pack_list" ItemsSource="{Binding music_own.packs}" ItemClick="pack_list_ItemClick" IsItemClickEnabled="True" HorizontalAlignment="Left" Height="850" Margin="1170,180,0,0" VerticalAlignment="Top" Width="435" IsSynchronizedWithCurrentItem="False" Background="#FFB0B0B0">
+        <GridView x:Name="pack_list" ItemsSource="{Binding music_own.packs}" ItemClick="pack_list_ItemClick" IsItemClickEnabled="True" HorizontalAlignment="Left" Height="850" Margin="1390,180,0,0" VerticalAlignment="Top" Width="435" IsSynchronizedWithCurrentItem="False">
             <GridView.ItemTemplate>
                 <DataTemplate>
-                    <Grid Width="250" Height="250">
-                        <Image Stretch="Fill" Source="http://static.wixstatic.com/media/44433f_4f689883955641309c5c675ff5bffc92.jpg" VerticalAlignment="Top" HorizontalAlignment="Center"/>
+                    <Grid Width="200" Height="200">
+                        <Image Stretch="Fill" Source="ms-appx:///Assets/Record-Album-02.jpg" VerticalAlignment="Top" HorizontalAlignment="Center"/>
                         <StackPanel Orientation="Vertical" VerticalAlignment="Bottom" Margin="0,0,0,10">
-                            <TextBlock Text="{Binding title}" FontSize="25" Margin="10,0,0,0" TextTrimming="WordEllipsis" TextWrapping="Wrap" HorizontalAlignment="Left" Foreground="#FF0A37FF"/>
+                            <TextBlock Text="{Binding title}" FontSize="25" Margin="10,0,0,0" TextTrimming="WordEllipsis" TextWrapping="Wrap" HorizontalAlignment="Left" Foreground="White"/>
                         </StackPanel>
                     </Grid>
                 </DataTemplate>
             </GridView.ItemTemplate>
         </GridView>
 
-        <GridView x:Name="album_list" ItemClick="album_list_ItemClick" ItemsSource="{Binding music_own.albums}" Background="#b0b0b0" HorizontalAlignment="Left" Margin="634,180,0,0" VerticalAlignment="Top" Width="435" Height="850" IsItemClickEnabled="True" IsSwipeEnabled="False" SelectionMode="None">
+        <GridView x:Name="album_list" ItemClick="album_list_ItemClick" ItemsSource="{Binding album_list}" HorizontalAlignment="Left" Margin="650,180,0,0" VerticalAlignment="Top" Width="610" Height="850" IsItemClickEnabled="True" IsSwipeEnabled="False" SelectionMode="None">
             <GridView.ItemTemplate>
                 <DataTemplate>
                     <Grid Width="200" Height="200" Background="White">
-                        <Image Stretch="Fill" Source="https://upload.wikimedia.org/wikipedia/commons/e/ec/Record-Album-02.jpg" VerticalAlignment="Top" HorizontalAlignment="Center"/>
+                        <Image Stretch="Fill" Source="{Binding image}" VerticalAlignment="Top" HorizontalAlignment="Center"/>
                         <StackPanel Orientation="Vertical" VerticalAlignment="Bottom" Margin="0,0,0,10">
                             <TextBlock Text="{Binding user.username}" FontSize="20" Margin="10,0,0,0" TextTrimming="WordEllipsis" TextWrapping="Wrap" HorizontalAlignment="Left" Foreground="White"/>
                             <TextBlock Text="{Binding title}" FontSize="20" Margin="10,0,0,0" TextTrimming="WordEllipsis" TextWrapping="Wrap" HorizontalAlignment="Left" Foreground="White"/>

@@ -28,40 +28,48 @@
             <TextBlock Name="genre_name" Margin="20,10,0,19" TextWrapping="Wrap" Text="{Binding genre.style_name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" FontSize="36" Height="46" Grid.ColumnSpan="2"/>
             <!--<TextBlock Name="genre_color" HorizontalAlignment="Left" Margin="45,85,0,0" Grid.Row="1" TextWrapping="Wrap" Text="{Binding genre.color_name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Foreground="Black" FontSize="25"/>-->
 
-            <ListView Name="genre_musics" ItemClick="genre_musics_ItemClick" ItemsSource="{Binding genre.musics, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" HorizontalAlignment="Left" Height="370" Margin="60,85,0,-164" Grid.Row="1" VerticalAlignment="Top" Width="260" Background="#FFE0E0E0">
+            <ListView Name="genre_musics" IsItemClickEnabled="True" ItemClick="genre_musics_ItemClick" ItemsSource="{Binding genre.musics, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" HorizontalAlignment="Left" Height="370" Margin="60,85,0,-164" Grid.Row="1" VerticalAlignment="Top" Width="355">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <StackPanel>
                             <StackPanel Orientation="Horizontal">
-                                <TextBlock Name="music_title_txt" x:Uid="music_title_txt" Text="Titre:" FontSize="16" Foreground="Black"/>
-                                <TextBlock Name="music_title" Text="{Binding title}" FontSize="16" Foreground="Black" Margin="20,0,0,0"></TextBlock>
+                                <TextBlock Name="music_title" FontSize="16" Foreground="Black" Margin="0,0,0,0">
+                                    <Run Text="{Binding user.username}"></Run>
+                                    <Run Text=" - "></Run>
+                                    <Run Text="{Binding title}"></Run>
+                                </TextBlock>
                             </StackPanel>
 
                             <StackPanel Orientation="Horizontal">
                                 <TextBlock Name="price_txt" x:Uid="price_txt" Text="Prix" FontSize="16" Foreground="Black"/>
-                                <TextBlock Name="music_duration" Text="{Binding price}" FontSize="16" Foreground="Black" Margin="20,0,0,0"></TextBlock>
+                                <TextBlock Name="music_duration" FontSize="16" Foreground="Black" Margin="20,0,0,0">
+                                    <Run Text="{Binding price}"></Run>
+                                    <Run Text="€"></Run>
+                                </TextBlock>
                             </StackPanel>
                         </StackPanel>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
 
-            <ListView Name="genre_influences" ItemsSource="{Binding genre.influences, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" HorizontalAlignment="Left" Height="370" Margin="405,85,-215,-164" Grid.Row="1" VerticalAlignment="Top" Width="260" Background="#FFE0E0E0" IsItemClickEnabled="True" IsSwipeEnabled="False" SelectionMode="None">
-                <ListView.ItemTemplate>
+            <!--<ListBox x:Name="album_list_lv" ItemsSource="{Binding music_own.albums, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding selected_album, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Height="319" Margin="974,216,0,0" VerticalAlignment="Top" Width="205" FontSize="15">
+                <ListBox.ItemTemplate>
                     <DataTemplate>
-                        <StackPanel>
-                            <StackPanel Orientation="Horizontal">
-                                <TextBlock Name="music_title" Text="{Binding name}" FontSize="16" Foreground="Black" Margin="20,0,0,0"></TextBlock>
-                            </StackPanel>
-                            <StackPanel Orientation="Horizontal">
-
-                            </StackPanel>
-                        </StackPanel>
+                        <TextBlock Text="{Binding title}"/>
                     </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
+                </ListBox.ItemTemplate>
+            </ListBox>-->
+
+            <ListBox Name="genre_influences" ItemsSource="{Binding genre.influences, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" HorizontalAlignment="Left" Height="370" Margin="458,83,-268,-162" Grid.Row="1" VerticalAlignment="Top" Width="260" Background="{x:Null}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Name="music_title" Text="{Binding name}"></TextBlock>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+
             <TextBlock x:Name="music_list_txt" x:Uid="music_list_txt" Grid.Column="1" HorizontalAlignment="Left" Margin="60,55,0,0" Grid.Row="1" TextWrapping="Wrap" Text="Musiques" VerticalAlignment="Top" Height="30" Width="260" Foreground="Black" FontSize="18"/>
-            <TextBlock x:Name="influence_list_txt" x:Uid="influence_list_txt" Grid.Column="1" HorizontalAlignment="Left" Margin="405,55,-215,0" Grid.Row="1" TextWrapping="Wrap" Text="Influences" VerticalAlignment="Top" Height="30" Width="260" Foreground="Black" FontSize="18"/>
+            <TextBlock x:Name="influence_list_txt" x:Uid="influence_list_txt" Grid.Column="1" HorizontalAlignment="Left" Margin="458,53,-268,0" Grid.Row="1" TextWrapping="Wrap" Text="Influences" VerticalAlignment="Top" Height="30" Width="260" Foreground="Black" FontSize="18"/>
 
 
         </Grid>

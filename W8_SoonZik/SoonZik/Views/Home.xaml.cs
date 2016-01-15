@@ -30,7 +30,8 @@ namespace SoonZik.Views
         {
             this.InitializeComponent();
             DataContext = new HomeViewModel();
-            hello_tb.Text = Singleton.Instance.Current_user.username;
+            if (Singleton.Instance.Current_user.username != null)
+                hello_tb.Text = "Bonjour " + Singleton.Instance.Current_user.username;
         }
 
         // NAV

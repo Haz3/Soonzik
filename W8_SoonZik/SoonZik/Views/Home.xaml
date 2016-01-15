@@ -27,13 +27,14 @@
         </StackPanel>
 
         <TextBlock x:Name="hello_tb" HorizontalAlignment="Left" Margin="10,85,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="55" Width="410" FontSize="25"/>
-        <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Height="50" Margin="1465,102,45,940">
+
+        <!--<StackPanel Orientation="Horizontal" VerticalAlignment="Center" Height="50" Margin="1465,102,45,940">
             <StackPanel.DataContext>
                 <ViewModels:SearchViewModel/>
             </StackPanel.DataContext>
             <TextBox x:Name="search_tb" Text="{Binding search_value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" TextWrapping="Wrap" Width="300" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center"/>
             <Button x:Name="search_btn" x:Uid="search_btn" Command="{Binding do_search, Mode=OneWay}" Content="Chercher" Background="#FF27AAE1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="Auto" Height="50" FontSize="20"/>
-        </StackPanel>
+        </StackPanel>-->
 
 
         <!--<ListView ItemClick="News_ItemClick" ItemsSource="{Binding news_list}" x:Name="News" Background="#B0B0B0" HorizontalAlignment="Left" Height="775" Margin="49,245,0,0" VerticalAlignment="Top" Width="436"  IsItemClickEnabled="True" IsSwipeEnabled="False" SelectionMode="None">
@@ -81,7 +82,7 @@
 
 
 
-        <ListView x:Name="Community" ItemsSource="{Binding tweet_list, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Background="#B0B0B0" Height="760" Margin="1426,280,0,0" VerticalAlignment="Top" IsItemClickEnabled="True" IsSwipeEnabled="False" SelectionMode="None" HorizontalAlignment="Left" Width="454">
+        <ListView x:Name="Community" ItemsSource="{Binding tweet_list, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Height="869" Margin="1370,171,0,0" VerticalAlignment="Top" IsItemClickEnabled="True" IsSwipeEnabled="False" SelectionMode="None" HorizontalAlignment="Left" Width="509" Foreground="{x:Null}">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
@@ -89,9 +90,9 @@
                             <TextBlock Text="{Binding user.username}" Margin="20,0,0,0"/>
                             <TextBlock Text="{Binding msg}"/>
                         </StackPanel>-->
-                        <Image Source="{Binding user.image, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Stretch="Fill" Width="50" Height="50"/>
+                        <Image Source="{Binding user.image, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Stretch="Fill" Width="75" Height="75"/>
 
-                        <TextBlock Margin="20,0,0,0">
+                        <TextBlock Margin="10,0,0,0" Foreground="Black" FontSize="15">
                             <!--<Run x:Uid="author_txt" Text="Auteur:"></Run>-->
                             <Run Text="{Binding user.username}"></Run>
                              <LineBreak/>
@@ -104,28 +105,29 @@
 
         <TextBlock x:Name="news_txt" x:Uid="news_txt" HorizontalAlignment="Left" Margin="30,116,0,0" TextWrapping="Wrap" Text="Dernières news" VerticalAlignment="Top" Height="50" Width="310" FontSize="40" Foreground="#FF27AAE1"/>
         <!--<TextBlock x:Name="music_txt" x:Uid="music_txt" Margin="710,159,0,0" TextWrapping="Wrap" Text="Musique" VerticalAlignment="Top" Height="50" Width="500" FontSize="40" Foreground="#FF27AAE1" HorizontalAlignment="Left"/>-->
-        <TextBlock x:Name="community_txt" x:Uid="community_txt" HorizontalAlignment="Left" Margin="1426,225,0,0" TextWrapping="Wrap" Text="Communauté" VerticalAlignment="Top" Height="50" Width="389" FontSize="40" Foreground="#FF27AAE1"/>
-        <TextBlock x:Name="pack_txt" x:Uid="pack_txt" Margin="520,116,0,0" TextWrapping="Wrap" Text="Packs" VerticalAlignment="Top" Height="50" Width="500" FontSize="40" Foreground="#FF27AAE1" HorizontalAlignment="Left"/>
+        <TextBlock x:Name="community_txt" x:Uid="community_txt" HorizontalAlignment="Left" Margin="1370,116,0,0" TextWrapping="Wrap" Text="Communauté" VerticalAlignment="Top" Height="50" Width="389" FontSize="40" Foreground="#FF27AAE1"/>
+        <TextBlock x:Name="pack_txt" x:Uid="pack_txt" Margin="710,116,0,0" TextWrapping="Wrap" Text="Packs" VerticalAlignment="Top" Height="50" Width="520" FontSize="40" Foreground="#FF27AAE1" HorizontalAlignment="Left"/>
 
-        <GridView x:Name="news_grid" ItemClick="news_grid_ItemClick" IsItemClickEnabled="True" ItemsSource="{Binding news_list, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="30,171,0,0" VerticalAlignment="Top" Width="425" Height="869">
+        <GridView x:Name="news_grid" ItemClick="news_grid_ItemClick" IsItemClickEnabled="True" ItemsSource="{Binding news_list, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="30,171,0,0" VerticalAlignment="Top" Width="540" Height="869" Foreground="{x:Null}">
             <GridView.ItemTemplate>
                 <DataTemplate>
-                    <Grid Width="200" Height="200">
+                    <Grid Width="225" Height="225">
                         <!--<Image Stretch="Fill" Source="http://assos-escrennes.fr/descibel-radio/wp-content/uploads/2015/01/Generic-News-Logo.png" VerticalAlignment="Top" HorizontalAlignment="Center"/>-->
                         <Image Stretch="Fill" Source="{Binding image, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" HorizontalAlignment="Center"/>
 
                         <StackPanel Orientation="Vertical" VerticalAlignment="Bottom" Margin="0,0,0,10">
                             <TextBlock Text="{Binding title}" FontSize="20" Margin="10,0,0,0" TextTrimming="WordEllipsis" TextWrapping="Wrap" HorizontalAlignment="Left" Foreground="White"/>
+                            <TextBlock Text="{Binding user.username}" FontSize="20" Margin="10,0,0,0" TextTrimming="WordEllipsis" TextWrapping="Wrap" HorizontalAlignment="Left" Foreground="White"/>
                         </StackPanel>
                     </Grid>
                 </DataTemplate>
             </GridView.ItemTemplate>
         </GridView>
 
-        <GridView x:Name="pack_grid" ItemClick="pack_list_ItemClick" IsItemClickEnabled="True" ItemsSource="{Binding pack_list, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="520,171,0,0" VerticalAlignment="Top" Width="425" Height="869">
+        <GridView x:Name="pack_grid" ItemClick="pack_list_ItemClick" IsItemClickEnabled="True" ItemsSource="{Binding pack_list, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="710,171,0,0" VerticalAlignment="Top" Width="520" Height="869" Foreground="{x:Null}">
             <GridView.ItemTemplate>
                 <DataTemplate>
-                    <Grid Width="200" Height="200">
+                    <Grid Width="225" Height="225">
                         <Image Stretch="Fill" Source="ms-appx:///Assets/Record-Album-02.jpg" VerticalAlignment="Top" HorizontalAlignment="Center"/>
                         <StackPanel Orientation="Vertical" VerticalAlignment="Bottom" Margin="0,0,0,10">
                             <TextBlock Text="{Binding title}" FontSize="20" Margin="10,0,0,0" TextTrimming="WordEllipsis" TextWrapping="Wrap" HorizontalAlignment="Left" Foreground="White"/>

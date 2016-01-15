@@ -148,7 +148,7 @@ namespace SoonZik.Tools
 
             // A VIRER
             if (exception != null)
-                await new MessageDialog(exception.Message, "Get Object Error").ShowAsync();
+                await new MessageDialog("Erreur lors de la récupération de données").ShowAsync();
             // ---
             return null;
         }

@@ -50,6 +50,8 @@ namespace SoonZik
             // Add and remove from list btn
             add_to_playlist_update_btn.Visibility = Visibility.Collapsed;
             delete_from_playlist_update_btn.Visibility = Visibility.Collapsed;
+            cancel_btn.Visibility = Visibility.Collapsed;
+
 
             // Create and update btn
             update_playlist_btn.Visibility = Visibility.Collapsed;
@@ -78,11 +80,14 @@ namespace SoonZik
             tracklist_txt.Visibility = Visibility.Visible;
             playlist_list_txt.Visibility = Visibility.Visible;
             playlist_name_txt.Visibility = Visibility.Visible;
+            playlist_name_update_tb.Visibility = Visibility.Collapsed;
 
 
             // Add and remove from list btn
             add_to_playlist_update_btn.Visibility = Visibility.Visible;
             delete_from_playlist_update_btn.Visibility = Visibility.Visible;
+            cancel_btn.Visibility = Visibility.Visible;
+
 
             create_playlist_btn.Visibility = Visibility.Visible;
             update_playlist_btn.Visibility = Visibility.Collapsed;
@@ -107,9 +112,12 @@ namespace SoonZik
 
 
 
+
             // Add and remove from list btn
             add_to_playlist_update_btn.Visibility = Visibility.Collapsed;
             delete_from_playlist_update_btn.Visibility = Visibility.Collapsed;
+            cancel_btn.Visibility = Visibility.Collapsed;
+
 
             create_playlist_btn.Visibility = Visibility.Collapsed;
             update_playlist_btn.Visibility = Visibility.Collapsed;
@@ -138,9 +146,12 @@ namespace SoonZik
             playlist_list_txt.Visibility = Visibility.Visible;
 
 
+
             // Add and remove from list btn
             add_to_playlist_update_btn.Visibility = Visibility.Visible;
             delete_from_playlist_update_btn.Visibility = Visibility.Visible;
+            cancel_btn.Visibility = Visibility.Visible;
+
 
             update_playlist_btn.Visibility = Visibility.Visible;
             create_playlist_btn.Visibility = Visibility.Collapsed;
@@ -166,6 +177,7 @@ namespace SoonZik
             // Add and remove from list btn
             add_to_playlist_update_btn.Visibility = Visibility.Collapsed;
             delete_from_playlist_update_btn.Visibility = Visibility.Collapsed;
+            cancel_btn.Visibility = Visibility.Collapsed;
 
             update_playlist_btn.Visibility = Visibility.Collapsed;
             create_playlist_btn.Visibility = Visibility.Collapsed;
@@ -181,6 +193,30 @@ namespace SoonZik
                     + "&secureKey=" + await SoonZik.Tools.Security.getSecureKey(Singleton.Instance.Current_user.id.ToString()), UriKind.RelativeOrAbsolute);
      //           media.Source = new Uri(Singleton.Instance.url + "/musics/get/"
      //+ Singleton.Instance.selected_music.id.ToString(), UriKind.RelativeOrAbsolute);
+        }
+
+        private void cancel_btn_Click(object sender, RoutedEventArgs e)
+        {
+            album_list_lv.Visibility = Visibility.Collapsed;
+            track_list_lv.Visibility = Visibility.Collapsed;
+            playlist_update_lv.Visibility = Visibility.Collapsed;
+
+            // Text & TB
+            playlist_name_tb.Visibility = Visibility.Collapsed;
+            playlist_name_update_tb.Visibility = Visibility.Collapsed;
+            album_list_txt.Visibility = Visibility.Collapsed;
+            tracklist_txt.Visibility = Visibility.Collapsed;
+            playlist_list_txt.Visibility = Visibility.Collapsed;
+            playlist_name_txt.Visibility = Visibility.Collapsed;
+
+            // Add and remove from list btn
+            add_to_playlist_update_btn.Visibility = Visibility.Collapsed;
+            delete_from_playlist_update_btn.Visibility = Visibility.Collapsed;
+
+            // Create and update and cancel btn
+            update_playlist_btn.Visibility = Visibility.Collapsed;
+            create_playlist_btn.Visibility = Visibility.Collapsed;
+            cancel_btn.Visibility = Visibility.Collapsed;
         }
     }
 }

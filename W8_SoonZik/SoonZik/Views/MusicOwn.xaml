@@ -82,6 +82,7 @@
                     </RatingControl:Rating.UnfilledItemStyle>
                 </RatingControl:Rating>
             </Grid>-->
+            <MediaElement x:Name="media" Height="60" Width="851" AreTransportControlsEnabled="True" Grid.Column="1" AutoPlay="False" Margin="0,458,-401,-227" Grid.Row="1" RequestedTheme="Light" HorizontalAlignment="Left"/>
 
         </Grid>
 

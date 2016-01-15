@@ -26,6 +26,11 @@ namespace SoonZik.ViewModels
             }
         }
 
+        public ObservableCollection<Album> album_list { get; set; }
+        //public ObservableCollection<Music> music_list { get; set; }
+        //public ObservableCollection<Pack> pack_list { get; set; }
+
+
         public event PropertyChangedEventHandler PropertyChanged;
         protected void OnPropertyChanged(string name)
         {
@@ -44,11 +49,23 @@ namespace SoonZik.ViewModels
         async void load_disco()
         {
             Exception exception = null;
+
+            //music_list = new ObservableCollection<Music>();
+            //pack_list = new ObservableCollection<Pack>();
+            album_list = new ObservableCollection<Album>();
+
             music_own = new MusicOwnByUser();
 
             try
             {
                 music_own = (MusicOwnByUser)await Http_get.get_object(new MusicOwnByUser(), "/users/getmusics?user_id=" + Singleton.Instance.Current_user.id.ToString() + "&secureKey=" + await Security.getSecureKey(Singleton.Instance.Current_user.id.ToString()));
+
+                foreach (var item in music_own.albums)
+                {
+                    item.image = Singleton.Instance.url + "/assets/albums/" + item.image;
+                    album_list.Add(item);
+                }
+
             }
             catch (Exception e)
             {

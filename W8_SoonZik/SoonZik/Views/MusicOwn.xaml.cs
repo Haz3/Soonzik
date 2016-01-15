@@ -1,4 +1,5 @@
-﻿using SoonZik.ViewModels;
+﻿using SoonZik.Tools;
+using SoonZik.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -32,6 +33,7 @@ namespace SoonZik.Views
         {
             SoonZik.Models.Music elem = e.Parameter as SoonZik.Models.Music;
             DataContext = new MusicViewModel(elem.id);
+            media.Source = new Uri("http://api.lvh.me:3000/musics/get/" + elem.id.ToString() + "?user_id=" + Singleton.Instance.Current_user.id.ToString() + "&secureKey=" + Singleton.Instance.secureKey , UriKind.RelativeOrAbsolute);
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

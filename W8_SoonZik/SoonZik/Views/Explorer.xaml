@@ -21,7 +21,7 @@
         <TextBlock x:Uid="genres_txt" Name="genres_txt" HorizontalAlignment="Left" Margin="46,104,0,0" TextWrapping="Wrap" Text="Genres" VerticalAlignment="Top" Height="45" Width="170" Foreground="Black" FontSize="30"/>
         <TextBlock x:Uid="ambiances_txt" x:Name="ambiances_txt" HorizontalAlignment="Left" Margin="46,593,0,0" TextWrapping="Wrap" Text="Ambiances" VerticalAlignment="Top" Height="45" Width="170" Foreground="Black" FontSize="30"/>
         <TextBlock x:Uid="artists_txt" x:Name="artists_txt" HorizontalAlignment="Left" Margin="1590,104,0,0" TextWrapping="Wrap" Text="Artistes" VerticalAlignment="Top" Height="45" Width="170" Foreground="Black" FontSize="30"/>
-        <TextBlock x:Uid="albums_txt" x:Name="albums_txt" HorizontalAlignment="Left" Margin="970,104,0,0" TextWrapping="Wrap" Text="Albums" VerticalAlignment="Top" Height="45" Width="170" Foreground="Black" FontSize="30"/>
+        <TextBlock x:Uid="albums_txt" x:Name="albums_txt" HorizontalAlignment="Left" Margin="889,104,0,0" TextWrapping="Wrap" Text="Albums" VerticalAlignment="Top" Height="45" Width="170" Foreground="Black" FontSize="30"/>
 
         <GridView x:Name="genre_list" ItemClick="genre_list_ItemClick" ItemsSource="{Binding genre_list}" HorizontalAlignment="Left" Margin="44,147,0,0" VerticalAlignment="Top" Width="395" Height="420" IsItemClickEnabled="True" IsSwipeEnabled="False" SelectionMode="None" SelectedItem="{Binding genre_selected, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
             <GridView.ItemTemplate>
@@ -50,7 +50,7 @@
             </GridView.ItemTemplate>
         </GridView>
 
-        <GridView x:Name="album_list" ItemClick="album_list_ItemClick" ItemsSource="{Binding album_list}" HorizontalAlignment="Left" Margin="970,147,0,0" VerticalAlignment="Top" Width="527" Height="910" IsItemClickEnabled="True" IsSwipeEnabled="False" SelectionMode="None">
+        <GridView x:Name="album_list" ItemClick="album_list_ItemClick" ItemsSource="{Binding album_list}" HorizontalAlignment="Left" Margin="889,147,0,0" VerticalAlignment="Top" Width="620" Height="910" IsItemClickEnabled="True" IsSwipeEnabled="False" SelectionMode="None">
             <GridView.ItemTemplate>
                 <DataTemplate>
                     <Grid Width="200" Height="200" Background="White">
@@ -83,7 +83,7 @@
             </ListView.ItemTemplate>
         </ListView>
 
-        <GridView x:Name="music_list" ItemClick="music_list_ItemClick" ItemsSource="{Binding music_list}" HorizontalAlignment="Left" Margin="526,147,0,0" VerticalAlignment="Top" Width="389" Height="910" IsItemClickEnabled="True" IsSwipeEnabled="False" SelectionMode="None">
+        <GridView x:Name="music_list" ItemClick="music_list_ItemClick" ItemsSource="{Binding music_list}" HorizontalAlignment="Left" Margin="479,147,0,0" VerticalAlignment="Top" Width="365" Height="910" IsItemClickEnabled="True" IsSwipeEnabled="False" SelectionMode="None">
             <GridView.ItemTemplate>
                 <DataTemplate>
                     <Grid Width="150" Height="150" Background="White">
@@ -98,7 +98,7 @@
                 </DataTemplate>
             </GridView.ItemTemplate>
         </GridView>
-        <TextBlock x:Uid="suggest_music_txt" x:Name="suggest_music_txt" HorizontalAlignment="Left" Margin="526,104,0,0" TextWrapping="Wrap" Text="Musiques suggérées" VerticalAlignment="Top" Height="45" Width="351" Foreground="Black" FontSize="30"/>
+        <TextBlock x:Uid="suggest_music_txt" x:Name="suggest_music_txt" HorizontalAlignment="Left" Margin="479,104,0,0" TextWrapping="Wrap" Text="Musiques suggérées" VerticalAlignment="Top" Height="45" Width="351" Foreground="Black" FontSize="30"/>
         <!--<Button x:Name="ambiamce_btn" Content="Ambiances" HorizontalAlignment="Left" Margin="212,132,0,0" VerticalAlignment="Top" Width="121" Background="#FF27AAE1" FontSize="15" Click="ambiamce_btn_Click"/>-->
 
     </Grid>

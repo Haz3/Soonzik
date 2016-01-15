@@ -76,7 +76,8 @@ namespace SoonZik.Views
 
         private void music_list_ItemClick(object sender, ItemClickEventArgs e)
         {
-
+            var item = ((SoonZik.Models.Music)e.ClickedItem);
+            this.Frame.Navigate(typeof(Music), item);
         }
     }
 }

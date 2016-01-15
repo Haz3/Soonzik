@@ -246,6 +246,9 @@
     <Compile Include="Views\Pack.xaml.cs">
       <DependentUpon>Pack.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\PackOwn.xaml.cs">
+      <DependentUpon>PackOwn.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Search.xaml.cs">
       <DependentUpon>Search.xaml</DependentUpon>
     </Compile>
@@ -434,6 +437,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\Pack.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\PackOwn.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
