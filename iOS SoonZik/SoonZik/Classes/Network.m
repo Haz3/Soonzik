@@ -33,6 +33,8 @@
         url = [NSString stringWithFormat:@"%@influences", API_URL];
     }
     
+    NSLog(@"url get json with name : %@", url);
+    
     return [Request getRequest:url];
 }
 

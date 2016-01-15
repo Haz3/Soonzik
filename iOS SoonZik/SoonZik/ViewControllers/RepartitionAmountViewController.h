@@ -9,8 +9,10 @@
 #import <UIKit/UIKit.h>
 #import "Translate.h"
 #import "PayPalMobile.h"
+#import "User.h"
+#import "GiftViewController.h"
 
-@interface RepartitionAmountViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate, PayPalPaymentDelegate>
+@interface RepartitionAmountViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate, PayPalPaymentDelegate, GiftDelegate>
 
 @property (nonatomic, assign) float price;
 @property (nonatomic, assign) int packID;
@@ -25,5 +27,7 @@
 
 @property (nonatomic, strong) UITextField *textField;
 @property (nonatomic, strong) NSMutableArray *cells;
+
+@property (nonatomic, strong) User *friendSelected;
 
 @end

@@ -32,7 +32,6 @@
     self.dataLoaded = NO;
     [self getData];
     
-    [self.tableView sizeToFit];
     NSData *translateData = [[NSUserDefaults standardUserDefaults] objectForKey:@"Translate"];
     self.translate = [NSKeyedUnarchiver unarchiveObjectWithData:translateData];
     self.tableView.backgroundColor = [UIColor clearColor];
@@ -41,6 +40,7 @@
 }
 
 - (void)getData {
+    self.dataLoaded = false;
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT,0),  ^{
         //this block runs on a background thread; Do heavy operation here
         self.listOfComments = [CommentsController getCommentsFromNews:self.news];
@@ -67,7 +67,7 @@
         while ((i < self.news.listOfAttachments.count) && (!found)) {
             Attachment *att = [self.news.listOfAttachments objectAtIndex:i];
             NSLog(@"%@", att.contentType);
-            if ([att.contentType isEqualToString:@"image/jpegNews"]) {
+            if ([att.contentType isEqualToString:@"image/jpeg"]) {
                 NSLog(@"att.url : %@", att.url);
                 NSString *urlImage = [NSString stringWithFormat:@"%@assets/news/%@", API_URL, att.url];
                 NSData *imageData = [[NSData alloc] initWithContentsOfURL: [NSURL URLWithString: urlImage]];
@@ -203,10 +203,23 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (self.dataLoaded) {
         if (section == 0)
-            return self.news.listOfNewsTexts.count + self.news.listOfAttachments.count + 1;
+            return /*self.news.listOfNewsTexts.count*/ 1 + /*self.news.listOfAttachments.count +*/ 1;
         return self.listOfComments.count+1;
     }
     return 0;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.section == 0 && indexPath.row > 0) {
+        UIFont * font = [UIFont systemFontOfSize:15.0f];
+        NSString *text = self.news.content;
+        CGFloat height = [text boundingRectWithSize:CGSizeMake(self.tableView.frame.size.width, 2000) options:(NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading) attributes:@{NSFontAttributeName: font} context:nil].size.height;
+        
+        return height + 0;
+    }
+    
+    return 44;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -220,16 +233,17 @@
             cell.textLabel.text = self.news.title;
             cell.textLabel.font = SOONZIK_FONT_BODY_BIG;
         }
-        else if (indexPath.row > 0 && indexPath.row < self.news.listOfNewsTexts.count+1) {
-            NewsText *newsText = [self.news.listOfNewsTexts objectAtIndex:indexPath.row-1];
-            cell.textLabel.font = SOONZIK_FONT_BODY_MEDIUM;
-            cell.textLabel.text = newsText.content;
+        else if (indexPath.row > 0 /*&& indexPath.row < self.news.listOfNewsTexts.count+1*/) {
+            //NewsText *newsText = [self.news.listOfNewsTexts objectAtIndex:indexPath.row-1];
+            cell.textLabel.font = SOONZIK_FONT_BODY_SMALL;
+            //cell.textLabel.text = newsText.content;
+            cell.textLabel.text = self.news.content;
+            cell.textLabel.numberOfLines = 100;
         }
         
         cell.textLabel.textColor = [UIColor whiteColor];
         cell.backgroundColor = [UIColor clearColor];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        [cell sizeToFit];
         
         return cell;
 
@@ -278,7 +292,6 @@
     cell.detailTextLabel.textColor = [UIColor whiteColor];
     cell.detailTextLabel.textAlignment = NSTextAlignmentRight;
     cell.detailTextLabel.font = SOONZIK_FONT_BODY_VERY_SMALL;
-    [cell sizeToFit];
     return cell;
 }
 
@@ -297,7 +310,8 @@
     if ([CommentsController addComment:self.news andComment:self.textView.text]) {
         [[[SimplePopUp alloc] initWithMessage:[self.translate.dict objectForKey:@"news_com_added"] onView:self.view withSuccess:true] show];
         self.textView.text = @"";
-        [self getData];
+        self.listOfComments = [CommentsController getCommentsFromNews:self.news];
+        [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationAutomatic];
     } else {
         [[[SimplePopUp alloc] initWithMessage:[self.translate.dict objectForKey:@"news_com_added_error"] onView:self.view withSuccess:false] show];
     }

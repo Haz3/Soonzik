@@ -36,7 +36,24 @@
         return true;
     }
     return false;
+}
 
++ (BOOL)buyPack:(int)packID amount:(float)amount artist:(float)artist association:(float)association website:(float)website friendID:(int)friendID withPayPalInfos:(PayPalPayment *) paymentInfos {
+    NSDictionary *payment = paymentInfos.confirmation;
+    NSDictionary *paymentResponse = [payment objectForKey:@"response"];
+    NSString *url, *post, *key;
+    NSData *data = [[NSUserDefaults standardUserDefaults] objectForKey:@"User"];
+    User *user = (User *)[NSKeyedUnarchiver unarchiveObjectWithData:data];
+    
+    url = [NSString stringWithFormat:@"%@purchase/buypack", API_URL];
+    key = [Crypto getKey];
+    post = [NSString stringWithFormat:@"user_id=%i&secureKey=%@&pack_id=%i&amount=%f&artist=%f&association=%f&website=%f&paypal[payment_id]=%@&gift_user_id=%i", user.identifier, key, packID, amount, artist, association, website, [paymentResponse objectForKey:@"id"], friendID];
+    
+    NSDictionary *json = [Request postRequest:post url:url];
+    if ([[json objectForKey:@"code"] intValue] == 201) {
+        return true;
+    }
+    return false;
 }
 
 @end

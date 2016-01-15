@@ -28,7 +28,7 @@
 + (NSMutableArray *)getAmbiance:(int)identifier {
     NSString *url = [NSString stringWithFormat:@"%@ambiances/%i", API_URL, identifier];
     NSDictionary *json = [Request getRequest:url];
-    NSLog(@"json ambiances %i: %@", identifier, json);
+   // NSLog(@"json ambiances %i: %@", identifier, json);
     NSMutableArray *array = [[NSMutableArray alloc] init];
     if ([[json objectForKey:@"code"] integerValue] == 200) {
         NSDictionary *content = [json objectForKey:@"content"];

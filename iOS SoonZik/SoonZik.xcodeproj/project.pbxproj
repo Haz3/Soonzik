@@ -180,6 +180,8 @@
 		EDB041371BC7DA9A00730C49 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EDB041361BC7DA9A00730C49 /* MobileCoreServices.framework */; };
 		EDB041391BC7DAB500730C49 /* SafariServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EDB041381BC7DAB500730C49 /* SafariServices.framework */; };
 		EDB0413B1BC7DBA000730C49 /* libxml2.2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = EDB0413A1BC7DB9F00730C49 /* libxml2.2.tbd */; };
+		EDB21E0F1C49487300110DBA /* GiftViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EDB21E0D1C49487300110DBA /* GiftViewController.m */; };
+		EDB21E101C49487300110DBA /* GiftViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EDB21E0E1C49487300110DBA /* GiftViewController.xib */; };
 		EDB31C451BB6D65F00FE30B0 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EDB31C441BB6D65F00FE30B0 /* CFNetwork.framework */; };
 		EDBF40971AF9AC50008C5078 /* onandon.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EDBF40961AF9AC50008C5078 /* onandon.jpg */; };
 		EDBFCB901C41069900974405 /* FeedbackController.m in Sources */ = {isa = PBXBuildFile; fileRef = EDBFCB8F1C41069900974405 /* FeedbackController.m */; };
@@ -659,6 +661,9 @@
 		EDB041361BC7DA9A00730C49 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		EDB041381BC7DAB500730C49 /* SafariServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SafariServices.framework; path = System/Library/Frameworks/SafariServices.framework; sourceTree = SDKROOT; };
 		EDB0413A1BC7DB9F00730C49 /* libxml2.2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libxml2.2.tbd; path = usr/lib/libxml2.2.tbd; sourceTree = SDKROOT; };
+		EDB21E0C1C49487300110DBA /* GiftViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GiftViewController.h; sourceTree = "<group>"; };
+		EDB21E0D1C49487300110DBA /* GiftViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GiftViewController.m; sourceTree = "<group>"; };
+		EDB21E0E1C49487300110DBA /* GiftViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GiftViewController.xib; sourceTree = "<group>"; };
 		EDB31C441BB6D65F00FE30B0 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		EDBF40961AF9AC50008C5078 /* onandon.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = onandon.jpg; sourceTree = "<group>"; };
 		EDBFCB8E1C41069900974405 /* FeedbackController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedbackController.h; sourceTree = "<group>"; };
@@ -1653,6 +1658,9 @@
 				EDBFCB9A1C4255F600974405 /* AmbianceViewController.h */,
 				EDBFCB9B1C4255F600974405 /* AmbianceViewController.m */,
 				EDBFCB9C1C4255F600974405 /* AmbianceViewController.xib */,
+				EDB21E0C1C49487300110DBA /* GiftViewController.h */,
+				EDB21E0D1C49487300110DBA /* GiftViewController.m */,
+				EDB21E0E1C49487300110DBA /* GiftViewController.xib */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -2236,6 +2244,7 @@
 				EDEDEE471AA240240024CF38 /* location.svg in Resources */,
 				EDEDEE0F1AA1633B0024CF38 /* logo.png in Resources */,
 				ED5C00101B2A520000E7B636 /* TwitterKitResources.bundle in Resources */,
+				EDB21E101C49487300110DBA /* GiftViewController.xib in Resources */,
 				ED9A40771BF5E49D000C1AF2 /* love_0.png in Resources */,
 				EDBFCB9E1C4255F600974405 /* AmbianceViewController.xib in Resources */,
 				EDEDEE311AA1633B0024CF38 /* shuffle-0_icon.png in Resources */,
@@ -2498,6 +2507,7 @@
 				EDA9780A1B3B97190056EC75 /* AudioPlayer.m in Sources */,
 				EDA978191B3B97190056EC75 /* Cart.m in Sources */,
 				EDBFCB901C41069900974405 /* FeedbackController.m in Sources */,
+				EDB21E0F1C49487300110DBA /* GiftViewController.m in Sources */,
 				EDEDED581AA15C5D0024CF38 /* OAMutableURLRequest.m in Sources */,
 				ED5D48401B76000C00743F4D /* CartController.m in Sources */,
 				EDEDED691AA15C5D0024CF38 /* NSString+Calculation.m in Sources */,

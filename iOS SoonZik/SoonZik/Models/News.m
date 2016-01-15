@@ -18,6 +18,7 @@
     self.identifier = [[json objectForKey:@"id"] intValue];
     self.title = [json objectForKey:@"title"];
     self.type = [json objectForKey:@"news_type"];
+    self.content = [json objectForKey:@"content"];
     
     NSDateFormatter *dateformat = [[NSDateFormatter alloc] init];
     [dateformat setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
@@ -63,6 +64,7 @@
     [aCoder encodeObject:self.listOfAttachments forKey:@"listOfAttachments"];
     [aCoder encodeObject:self.listOfNewsTexts forKey:@"listOfNewsTexts"];
     [aCoder encodeObject:self.listOfComments forKey:@"listOfComments"];
+    [aCoder encodeObject:self.content forKey:@"content"];
 }
 
 - (id)initWithCoder:(NSCoder *)aDecoder{
@@ -76,6 +78,7 @@
         self.listOfAttachments = [aDecoder decodeObjectForKey:@"listOfAttachments"];
         self.listOfNewsTexts = [aDecoder decodeObjectForKey:@"listOfNewsTexts"];
         self.listOfComments = [aDecoder decodeObjectForKey:@"listOfComments"];
+        self.content = [aDecoder decodeObjectForKey:@"content"];
     }
     return self;
 }

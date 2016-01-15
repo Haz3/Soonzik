@@ -9,6 +9,7 @@
 #import "RepartitionAmountViewController.h"
 #import "RepartionTableViewCell.h"
 #import "PacksController.h"
+#import "GiftViewController.h"
 
 @interface RepartitionAmountViewController ()
 @property (nonatomic, strong, readwrite) PayPalConfiguration *payPalConfiguration;
@@ -31,6 +32,8 @@
     [self initializeCells];
     
     [self initPayPal];
+    
+    self.friendSelected = nil;
 }
 
 - (void)initPayPal {
@@ -139,14 +142,19 @@
         NSLog(@"self.artist : %.2f", self.artist);
         NSLog(@"self.association : %.2f", self.association);
         NSLog(@"self.website : %.2f", self.website);
-        [PacksController buyPack:self.packID amount:self.price artist:self.artist association:self.association website:self.website withPayPalInfos:completedPayment];
+        if (self.friendSelected == nil) {
+            [PacksController buyPack:self.packID amount:self.price artist:self.artist association:self.association website:self.website withPayPalInfos:completedPayment];
+        } else {
+            [PacksController buyPack:self.packID amount:self.price artist:self.artist association:self.association website:self.website friendID:self.friendSelected.identifier withPayPalInfos:completedPayment];
+        }
+        
     }
 }
 
 #pragma mark - TableView delegate methods
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 4;
+    return 5;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -160,12 +168,28 @@
         return[self.translate.dict objectForKey:@"repartition_association"];
     } else if (section == 2) {
         return [self.translate.dict objectForKey:@"repartition_site"];
+    } else if (section == 4) {
+        return @"Send as a gift to a friend";
     }
     return nil;
     
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    if ([indexPath section] == 4) {
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cellCCC"];
+        if (cell == nil) {
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cellCCC"];
+            cell.textLabel.textColor = [UIColor whiteColor];
+            cell.backgroundColor = [UIColor clearColor];
+        }
+        
+        if (self.friendSelected != nil) {
+            cell.textLabel.text = self.friendSelected.username;
+        }
+        
+        return cell;
+    }
     return [self.cells objectAtIndex:indexPath.section];
 }
 
@@ -173,6 +197,20 @@
     if (indexPath.section == 3) {
         [self buyPack];
     }
+    if (indexPath.section == 4) {
+        [self gift];
+    }
+}
+
+- (void)gift {
+    GiftViewController *vc = [[GiftViewController alloc] initWithNibName:@"GiftViewController" bundle:nil];
+    vc.delegate = self;
+    [self.navigationController pushViewController:vc animated:true];
+}
+
+- (void)friendSelected:(User *)f {
+    self.friendSelected = f;
+    [self.tableView reloadData];
 }
 
 - (void)sliderChanged:(UISlider *)slider {

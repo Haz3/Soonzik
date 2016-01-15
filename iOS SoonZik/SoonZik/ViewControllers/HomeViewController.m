@@ -110,8 +110,9 @@
         
         while ((i < news.listOfAttachments.count) && (!found)) {
             Attachment *att = [news.listOfAttachments objectAtIndex:i];
-            if ([att.contentType isEqualToString:@"image/jpegNews"]) {
+            if ([att.contentType isEqualToString:@"image/jpeg"]) {
                 NSString *urlImage = [NSString stringWithFormat:@"%@assets/news/%@", API_URL, att.url];
+                NSLog(@"%@", urlImage);
                 NSData *imageData = [[NSData alloc] initWithContentsOfURL: [NSURL URLWithString: urlImage]];
                 cell.newsImage.image = [UIImage imageWithData:imageData];
                 found = true;

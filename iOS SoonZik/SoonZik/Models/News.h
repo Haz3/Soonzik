@@ -19,6 +19,7 @@
 @property (nonatomic, strong) NSMutableArray *listOfContents;
 @property (nonatomic, strong) User *author;
 @property (nonatomic, strong) NSString *type;
+@property (nonatomic, strong) NSString *content;
 @property (nonatomic, strong) NSDate *date;
 @property (nonatomic, strong) NSMutableArray *listOfAttachments;
 @property (nonatomic, strong) NSMutableArray *listOfComments;

@@ -227,8 +227,9 @@
     NSMutableArray *result = [NSMutableArray new];
     NSArray *data = [MessagesController getMessagesWithFriendId:self.friend.identifier withOffset:0];
     for (Message *msg in data) {
+        
         msg.type = 0;//[self messageTypeFromString:msg[@"type"]];
-        msg.date = [NSDate date];
+        //msg.date = msg.date;
         
         /*if (message.type == SOMessageTypePhoto) {
             message.media = UIImageJPEGRepresentation([UIImage imageNamed:msg[@"image"]], 1);
