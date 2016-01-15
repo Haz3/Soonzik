@@ -276,10 +276,25 @@ namespace SoonZik.ViewModel
         {
             ListMusics = new ObservableCollection<Music>();
             TheAlbum = MyAlbum;
-            ListMusics = TheAlbum.musics;
+            var req = new HttpRequestGet();
+            ValidateKey.CheckValidateKey();
+            var al = req.GetSecureObject(new Album(), "albums", TheAlbum.id.ToString(),
+                Singleton.Singleton.Instance().SecureKey, Singleton.Singleton.Instance().CurrentUser.id.ToString());
+            al.ContinueWith(delegate(Task<object> task)
+            {
+                var res = al.Result as Album;
+                if (res != null)
+   {
+                    CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
+                        () =>
+                        {
+                            ListMusics = res.musics;
+                            Likes = res.likes;
+                            Like = res.hasLiked ? bmLike : bmDislike;
+                        });
+                }
+            });
             //TheAlbum.imageAlbum = new BitmapImage(new System.Uri(Constant.UrlImageAlbum + TheAlbum.image, UriKind.RelativeOrAbsolute));
-            Likes = TheAlbum.likes;
-            Like = TheAlbum.hasLiked ? bmLike : bmDislike;
             LoadComment();
         }
 
