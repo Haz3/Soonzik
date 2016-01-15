@@ -20,7 +20,7 @@ SoonzikApp.controller('ConcertsCtrl', ['$scope', 'SecureAuth', 'HTTPService', '$
 				var concerts = response.data.content;
 				var now = new Date();
 				for (var i = 0 ; i < concerts.length ; i++) {
-					var d = new Date(concerts[i].planification);
+					var d = new Date(concerts[i].planification.replace(/\-/g, "/"));
 					if (d < now) {
 						break;
 					} else {

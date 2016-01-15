@@ -44,7 +44,7 @@ var labels = {
 	// Album Controller
 	FILE_ALBUM_ADD_ALBUM_MESSAGE: "L'album a bien été ajouté au panier",
 	FILE_ALBUM_ADD_ALBUM_ERROR_MESSAGE: "Une erreur s'est produite lors de l'ajout au panier",
-	FILE_ALBUM_ADD_SONG_MESSAGE: "La musique a bien été ajouté au panier", 
+	FILE_ALBUM_ADD_SONG_MESSAGE: "La musique a bien été ajouté au panier",
 	FILE_ALBUM_ADD_SONG_ERROR_MESSAGE: "Une erreur s'est produite lors de l'ajout au panier",
 	FILE_ALBUM_GET_NOTES_ERROR_MESSAGE: "Une erreur s'est produite au chargement des notes",
 	FILE_ALBUM_GET_ALBUM_ERROR_MESSAGE: "Une erreur s'est produite au chargement d'un album",
@@ -311,7 +311,15 @@ var labels = {
 
   // Cart view
   DISPLAY_CART_INDEX: "Panier",
-  DISPLAY_CART_BUY: "Ajouter au panier",
+  DISPLAY_CART_BUY: "Acheter le panier",
+
+  DISPLAY_CART_ALBUM: "Albums",
+  DISPLAY_CART_MUSIC: "Musiques",
+  DISPLAY_CART_EMPTY: "Votre panier est vide",
+  DISPLAY_CART_DELETE: "Supprimer",
+  DISPLAY_CART_PRICE: "Prix",
+  DISPLAY_CART_TOTAL: "Total",
+
 
   // Cart Controller
   FILE_CART_LOAD_ERROR_MESSAGE: "Une erreur s'est produite lors de la recupération du panier",
@@ -325,7 +333,7 @@ var labels = {
 
   // Friends Controller
   FILE_FRIEND_LOAD_FRIENDS_ERROR_MESSAGE: "Une erreur s'est produite lors de la recupération des amis",
-   
+
   // News view
   DISPLAY_NEWS_LABEL: "News",
   DISPLAY_NEWS_SHOW_MORE: "Show More",
@@ -336,18 +344,19 @@ var labels = {
   FILE_NEWS_SEND_COMMENT_ERROR_MESSAGE: "Une erreur s'est produite lors de la sauvegarde du commentaire",
   FILE_NEWS_LOAD_ERROR_MESSAGE: "Une erreur s'est produite lors de la recupération des actualités",
   FILE_NEWS_LOAD_ONE_NEWS_ERROR_MESSAGE: "La page que vous avez demandé n'existe pas",
-     
+
   // Packs view
 	DISPLAY_PACK_LABEL: "Packs du moment",
 	DISPLAY_PACK_TIMELEFT: "Temps Restant",
 	DISPLAY_PACK_AVERAGE: "Moyenne",
  	DISPLAY_PACK_YEAR_ALBUM: "Date de sortie",
 	DISPLAY_PACK_ARTIST_NAME: "Artiste",
- 	DISPLAY_PACK_DEV_NAME: "Developpeur",
+ 	DISPLAY_PACK_DEV_NAME: "Soonzik",
  	DISPLAY_PACK_ASSOCIATION_NAME: "Association",
  	DISPLAY_PACK_BUY_PACK: "Acheter ce pack",
  	DISPLAY_PACK_TOTAL_PACK: "Total",
-  DISPLAY_PACK_GIFT_LABEL: "Cadeau pour : ",
+	DISPLAY_PACK_GIFT_LABEL: "Cadeau pour : ",
+	DISPLAY_PACK_DEFINE_PRICE: "Definisez votre prix",
 
   // Packs Controller
   FILE_PACK_LOAD_ERROR_MESSAGE: "Une erreur s'est produite lors de la recupération des packs",

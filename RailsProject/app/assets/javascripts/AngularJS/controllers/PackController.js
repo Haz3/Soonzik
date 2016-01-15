@@ -145,7 +145,7 @@ SoonzikApp.controller('PacksCtrl', ['$scope', '$routeParams', 'SecureAuth', 'HTT
 		var timer = setInterval(function() {
 			for (var i = 0; i < $scope.pack.length; i++) {
 				var now = new Date();
-				var end_date = new Date($scope.pack[i].end_date);
+				var end_date = new Date($scope.pack[i].end_date.replace(/\-/g, "/"));
 
 				if (end_date > now) {
 					var left = end_date - now
@@ -171,7 +171,7 @@ SoonzikApp.controller('PacksCtrl', ['$scope', '$routeParams', 'SecureAuth', 'HTT
 
 		var timer = setInterval(function() {
 			var now = new Date();
-			var end = new Date($scope.thisPack.end_date);
+			var end = new Date($scope.thisPack.end_date.replace(/\-/g, "/"));
 
 			if (end > now) {
 				var countDown = end - now;

@@ -28,7 +28,7 @@ SoonzikApp.controller('BattlesCtrl', ['$scope', "$routeParams", 'SecureAuth', 'H
 				{ key: "secureKey", value: key },
 				{ key: "user_id", value: id }
 			];
-			
+
 			HTTPService.indexBattles(countParameters).then(function(response) {
 				var numberResults = response.data.content;
 
@@ -41,8 +41,8 @@ SoonzikApp.controller('BattlesCtrl', ['$scope', "$routeParams", 'SecureAuth', 'H
 				HTTPService.findBattles(parameters).then(function(response) {
 					var now = new Date();
 					for (var i = 0 ; i < response.data.content.length ; i++) {
-						var tmpDateBegin = new Date(response.data.content[i].date_begin);
-						var tmpDateEnd = new Date(response.data.content[i].date_end);
+						var tmpDateBegin = new Date(response.data.content[i].date_begin.replace(/\-/g, "/"));
+						var tmpDateEnd = new Date(response.data.content[i].date_end.replace(/\-/g, "/"));
 						if (now < tmpDateEnd && tmpDateBegin < now) {
 							$scope.index.resources.push(response.data.content[i]);
 						}
@@ -205,7 +205,7 @@ SoonzikApp.controller('BattlesCtrl', ['$scope', "$routeParams", 'SecureAuth', 'H
 								// We modify the vote value
 								if ($scope.index.resources[battleIndex].votes[voteIndex].user_id == $scope.currentUser.id) {
 									$scope.index.resources[battleIndex].votes[voteIndex].artist_id = artist.id;
-									
+
 									// if you vote for the first
 									if (artist.id == $scope.index.resources[battleIndex].artist_one.id) {
 										$scope.index.votes[$scope.index.resources[battleIndex].id][0].value++;
@@ -272,7 +272,7 @@ SoonzikApp.controller('BattlesCtrl', ['$scope', "$routeParams", 'SecureAuth', 'H
 						// We modify the vote value
 						if ($scope.show.battle.votes[voteIndex].user_id == $scope.currentUser.id) {
 							$scope.show.battle.votes[voteIndex].artist_id = artist.id;
-							
+
 							// if you vote for the first
 							if (artist.id == $scope.show.battle.artist_one.id) {
 								$scope.show.votes[0].value++;
@@ -369,7 +369,7 @@ SoonzikApp.controller('BattlesCtrl', ['$scope', "$routeParams", 'SecureAuth', 'H
 		var timer = setInterval(function() {
 			for (var i = 0; i < $scope.index.resources.length; i++) {
 				var now = new Date();
-				var end_date = new Date($scope.index.resources[i].date_end);
+				var end_date = new Date($scope.index.resources[i].date_end.replace(/\-/g, "/"));
 
 				if (end_date > now) {
 					var left = end_date - now
@@ -392,7 +392,7 @@ SoonzikApp.controller('BattlesCtrl', ['$scope', "$routeParams", 'SecureAuth', 'H
 	var timeLeftShow = function(battle) {
 		var timer = setInterval(function() {
 			var now = new Date();
-			var end_date = new Date(battle.date_end);
+			var end_date = new Date(battle.date_end.replace(/\-/g, "/"));
 
 			if (end_date > now) {
 				var left = end_date - now

@@ -116,7 +116,7 @@ SoonzikArtistApp.controller('HomeCtrl', ['$scope', 'SecureAuth', 'HTTPService', 
 		HTTPService.findBattles(parameter).then(function(response) {
 
 			for (var i = 0 ; i < response.data.content.length ; i++) {
-				var tmpDate = new Date(response.data.content[i].date_end);
+				var tmpDate = new Date(response.data.content[i].date_end.replace(/\-/g, "/"));
 
 				response.data.content[i].votesValue = false;
 				tmpArray.push(response.data.content[i]);
@@ -132,7 +132,7 @@ SoonzikArtistApp.controller('HomeCtrl', ['$scope', 'SecureAuth', 'HTTPService', 
 			HTTPService.findBattles(parameter).then(function(response) {
 
 				for (var i = 0 ; i < response.data.content.length ; i++) {
-					var tmpDate = new Date(response.data.content[i].date_end);
+					var tmpDate = new Date(response.data.content[i].date_end.replace(/\-/g, "/"));
 
 					response.data.content[i].votesValue = false;
 					tmpArray.push(response.data.content[i]);
@@ -181,7 +181,7 @@ SoonzikArtistApp.controller('HomeCtrl', ['$scope', 'SecureAuth', 'HTTPService', 
 		HTTPService.getLastComments().then(function(response) {
 			$scope.commentaries = response.data;
 			for (var i = 0 ; i < $scope.commentaries.length ; i++) {
-				$scope.commentaries[i].created_at = new Date($scope.commentaries[i].created_at);
+				$scope.commentaries[i].created_at = new Date($scope.commentaries[i].created_at.replace(/\-/g, "/"));
 			}
 			$scope.loading.commentaries = false;
 		}, function(error) {
@@ -191,7 +191,7 @@ SoonzikArtistApp.controller('HomeCtrl', ['$scope', 'SecureAuth', 'HTTPService', 
 		HTTPService.getLastTweets().then(function(response) {
 			$scope.tweets = response.data;
 			for (var i = 0 ; i < $scope.tweets.length ; i++) {
-				$scope.tweets[i].created_at = new Date($scope.tweets[i].created_at);
+				$scope.tweets[i].created_at = new Date($scope.tweets[i].created_at.replace(/\-/g, "/"));
 			}
 			$scope.loading.tweets = false;
 		}, function(error) {

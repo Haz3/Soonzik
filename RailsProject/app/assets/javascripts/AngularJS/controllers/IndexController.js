@@ -1,5 +1,5 @@
 SoonzikApp.controller('IndexCtrl', ['$scope', 'SecureAuth', 'HTTPService', '$timeout', 'NotificationService', function ($scope, SecureAuth, HTTPService, $timeout, NotificationService) {
-	
+
 	$scope.loading = true;
 	$scope.loadingRightSide = true;
 	$scope.loading_tweet = false;
@@ -189,7 +189,7 @@ SoonzikApp.controller('IndexCtrl', ['$scope', 'SecureAuth', 'HTTPService', '$tim
 		var now = new Date();
 
 		for (var i = 0 ; i < $scope.packs.length ; i++) {
-			var end = new Date($scope.packs[i].object.end_date);
+			var end = new Date($scope.packs[i].object.end_date.replace(/\-/g, "/"));
 			var left = (end > now) ? end - now : "Finish !"
 
 			if (left != "Finish !") {
@@ -296,7 +296,7 @@ SoonzikApp.controller('IndexCtrl', ['$scope', 'SecureAuth', 'HTTPService', '$tim
 	$scope.selectFlux = function() { $scope.tab = 0; }
 	$scope.selectInteraction = function() { $scope.tab = 1; }
 	$scope.selectPack = function(pack) { $scope.selectedPack.display = ($scope.selectedPack.display && $scope.selectedPack.pack == pack) ? false : true; $scope.selectedPack.pack = pack; }
-	
+
 	$scope.formatTime = function(duration) {
 		var min = ~~(duration / 60);
 		var sec = duration % 60;

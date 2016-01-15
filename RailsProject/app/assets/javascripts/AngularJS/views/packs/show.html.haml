@@ -27,29 +27,29 @@
         .large-6.columns
           .panel.left{"ng-init" => "managePrice()"}
             .large-9.columns
-              Define your price
+              {{labels.DISPLAY_PACK_DEFINE_PRICE }}
             .small-3.columns
               %input{ type: "text", "ng-model" => "input.price", "ng-change" => "updatePrice()" }
             .large-9.columns
-              Average
+              {{ labels.DISPLAY_PACK_AVERAGE }}
             .small-3.columns
               {{ thisPack.averagePrice }} €
             .large-9.columns
               .divider
-              Artist
+              {{ labels.DISPLAY_PACK_ARTIST_NAME }}
               %input{:type => "range", "ng-model" => "newValuePercentage.artist", "ng-change" => "varRange('artist')", "min" => "0", "max" => "100"}
             .small-3.columns
               .divider
               %br
               {{ realValue.artist }} €
             .large-9.columns
-              Associations
+              {{ labels.DISPLAY_PACK_ASSOCIATION_NAME }}
               %input{:type => "range", "ng-model" => "newValuePercentage.asso", "ng-change" => "varRange('asso')", "min" => "0", "max" => "100"}
             .small-3.columns
               %br
               {{ realValue.asso }} €
             .large-9.columns
-              Soonzik
+              {{ labels.DISPLAY_PACK_DEV_NAME}}
               %input{:type => "range", "ng-model" => "newValuePercentage.web", "ng-change" => "varRange('web')", "min" => "0", "max" => "100"}
             .small-3.columns
               %br

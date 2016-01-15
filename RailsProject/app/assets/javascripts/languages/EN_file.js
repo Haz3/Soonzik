@@ -44,14 +44,14 @@ var labels = {
 	// Album Controller
 	FILE_ALBUM_ADD_ALBUM_MESSAGE: "Album successfuly adding into the cart",
 	FILE_ALBUM_ADD_ALBUM_ERROR_MESSAGE: "An error occured while adding album into the cart",
-	FILE_ALBUM_ADD_SONG_MESSAGE: "Song is successfuly add into the cart", 
+	FILE_ALBUM_ADD_SONG_MESSAGE: "Song is successfuly add into the cart",
 	FILE_ALBUM_ADD_SONG_ERROR_MESSAGE: "An error occured while adding song into the cart",
 	FILE_ALBUM_GET_NOTES_ERROR_MESSAGE: "Error while loading your notes",
 	FILE_ALBUM_GET_ALBUM_ERROR_MESSAGE: "Error while loading the album",
 	FILE_ALBUM_SET_NOTE_ERROR_MESSAGE: "Error while rating the music, please try later.",
 	FILE_ALBUM_LOAD_COMMENT_ERROR_MESSAGE: "Error while loading commentaries",
 	FILE_ALBUM_SEND_COMMENT_ERROR_MESSAGE: "Error while saving your comment, please try later",
-		
+
 	// Battle Controller
 	FILE_BATTLE_LOAD_BATTLE_ERROR_MESSAGE: "Error while loading the page",
 	FILE_BATTLE_LOAD_ARTIST_ONE_ERROR_MESSAGE: "Error while loading the profile of the first artist.",
@@ -315,13 +315,21 @@ var labels = {
   DISPLAY_CART_INDEX: "Cart",
   DISPLAY_CART_BUY: "Buy your cart",
 
+  DISPLAY_CART_ALBUM: "Albums",
+  DISPLAY_CART_MUSIC: "Musics",
+  DISPLAY_CART_EMPTY: "Your cart is empty",
+  DISPLAY_CART_DELETE: "Delete",
+  DISPLAY_CART_PRICE: "Price",
+  DISPLAY_CART_TOTAL: "Total",
+
+
   // Cart Controller
   FILE_CART_LOAD_ERROR_MESSAGE: "An error occured while getting the cart",
   FILE_CART_DELETE_ITEM_ERROR_MESSAGE: "An error occured while destroying an item in cart",
   FILE_CART_DELETE_SUCCESS_MESSAGE: "Item is successfuly delete",
   FILE_CART_SUCCESS_BUY_CART_MESSAGE: "Cart is successfuly buy",
-  FILE_CART_BUY_ERROR_MESSAGE: "An error occured while buying the cart", 
-  
+  FILE_CART_BUY_ERROR_MESSAGE: "An error occured while buying the cart",
+
   // Friends view
   DISPLAY_FRIENDS_LABEL: "Friends",
 
@@ -345,16 +353,18 @@ var labels = {
   DISPLAY_PACK_AVERAGE: "Average",
   DISPLAY_PACK_YEAR_ALBUM: "Release",
   DISPLAY_PACK_ARTIST_NAME: "Artist",
-  DISPLAY_PACK_DEV_NAME: "Developper",
+  DISPLAY_PACK_DEV_NAME: "Soonzik",
   DISPLAY_PACK_ASSOCIATION_NAME: "Association",
   DISPLAY_PACK_BUY_PACK: "Buy this pack",
   DISPLAY_PACK_TOTAL_PACK: "Total",
   DISPLAY_PACK_GIFT_LABEL: "Gift for : ",
 
+  DISPLAY_PACK_DEFINE_PRICE: "Define your price",
+
   // Packs Controller
   FILE_PACK_LOAD_ERROR_MESSAGE: "Error while loading packs",
   FILE_PACK_LOAD_ONE_PACK_ERROR_MESSAGE: "The page you asked is not available",
-  FILE_PACK_BUY_PACK_ERROR_MESSAGE: "Error while buying your cart", 
+  FILE_PACK_BUY_PACK_ERROR_MESSAGE: "Error while buying your cart",
 
   // Index view
   DISPLAY_INDEX_NEWS_SEE_MORE: "See more news",
